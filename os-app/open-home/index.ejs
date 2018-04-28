@@ -6,6 +6,6 @@ locals.OLSKPageTitle = OLSKTranslate('WKCHomeTitle');
 
 <h1><%= locals.OLSKPageTitle %></h1>
 
-<p><%= OLSKTranslate('WKCHomeContent') %></p>
+<p><a href="<%= OLSKCanonicalFor('WKCRouteLogin') %>"><%= OLSKTranslate('WKCLoginTitle') %></a></p>
 
 <%- include('../_shared/WKCLayout/footer.ejs') %>
