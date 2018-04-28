@@ -26,19 +26,19 @@ exports.OLSKControllerRoutes = function () {
 };
 
 exports.index = function (req, res, next) {
-	res.render(res.locals.OLSKSharedPageControllerSlug + '/form', {
+	res.render(res.locals.OLSKSharedPageControllerSlug + '/index', {
 	});
 };
 
 exports.submit = function (req, res, next) {
 	return persistenceLibrary.WKCPersistenceMembers(function(items) {
 		var memberObject = items.filter(function(e) {
-			return req.body.username === e.WKCMemberHandle && req.body.password === e.WKCMemberPlaintextPassword; 
+			return req.body.WKCLoginUsername === e.WKCMemberHandle && req.body.WKCLoginPassword === e.WKCMemberPlaintextPassword; 
 		}).pop();
 
 		if (!memberObject) {
-			return res.render(res.locals.OLSKSharedPageControllerSlug + '/form', {
-				WKCLoginUsername: req.body.username,
+			return res.render(res.locals.OLSKSharedPageControllerSlug + '/index', {
+				WKCLoginUsername: req.body.WKCLoginUsername,
 				WKCLoginError: true,
 			});
 		}

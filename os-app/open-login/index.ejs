@@ -12,11 +12,11 @@ locals.OLSKPageTitle = OLSKTranslate('WKCLoginTitle');
 
 <form method="POST" action="<%= OLSKCanonicalFor('WKCRouteLoginSubmit') %>">
 	<p>
-		<input type="text" name="username" placeholder="<%= OLSKTranslate('WKCLoginFormFieldUsernameTitle') %>" value="<%= locals.WKCLoginUsername %>" autofocus />
+		<input type="text" name="WKCLoginUsername" placeholder="<%= OLSKTranslate('WKCLoginFormFieldUsernameTitle') %>" value="<%= locals.WKCLoginUsername %>" autofocus />
 	</p>
 
 	<p>
-		<input type="password" name="password" placeholder="<%= OLSKTranslate('WKCLoginFormFieldPasswordTitle') %>">
+		<input type="password" name="WKCLoginPassword" placeholder="<%= OLSKTranslate('WKCLoginFormFieldPasswordTitle') %>" />
 	</p>
 
 	<input type="submit" name="submit">
