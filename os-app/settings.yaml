@@ -2,3 +2,13 @@ OLSKErrorControllerSlug: 'open-error'
 
 OLSKSharedPrivateConstants:
   WKCFoo: 'Bar' # Can be accessed via req.OLSKSharedPrivateConstants.WKCFoo
+
+OLSKCookieSessionTrustProxy: 1
+OLSKCookieSessionName: 'WKCCookieSession'
+OLSKCookieSessionKeys: [
+  'WKCCookieSessionKey1',
+  'WKCCookieSessionKey2'
+]
+# OLSKCookieSessionDomain: 'xxyy.com'
+
+# OLSKSessionSecret: 'WKCSessionSecret'

@@ -10,15 +10,29 @@
     "dtestdebug": "mocha $(find $PWD -path '*os-*' -name '*-tests.js') -w --reporter min -b"
   },
   "dependencies": {
-    "basic-auth": "latest",
-    "body-parser": "latest",
-    "cookie-parser": "latest",
-    "ejs": "latest",
+    "// EXPRESS": null,
     "express": "latest",
+
+    "// SESSIONS": null,
+    "cookie-session": "latest",
     "express-session": "latest",
-    "js-yaml": "latest",
+    
+    "// POST DATA": null,
+    "body-parser": "latest",
+
+    "// TEMPLATES": null,
+    "ejs": "latest",
+
+    "// FILESYSTEM": null,
     "mkdirp": "latest",
-    "mongodb": "^3.0.7",
-    "underscore": "latest"
+
+    "// YAML": null,
+    "js-yaml": "latest",
+
+    "// UTILITIES": null,
+    "underscore": "latest",
+
+    "// PERSISTANCE": null,
+    "mongodb": "^3.0.7"
   }
 }
