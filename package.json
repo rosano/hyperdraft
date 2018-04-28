@@ -16,8 +16,9 @@
     "ejs": "latest",
     "express": "latest",
     "express-session": "latest",
-    "mkdirp": "latest",
     "js-yaml": "latest",
+    "mkdirp": "latest",
+    "mongodb": "^3.0.7",
     "underscore": "latest"
   }
 }
