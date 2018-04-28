@@ -1,0 +1,6 @@
+OLSKDefaultPageTitle: 'XXYY'
+
+OLSKErrorControllerSlug: 'open-error'
+
+OLSKSharedPrivateConstants:
+  XXYYFoo: 'Bar' # Can be accessed via req.OLSKSharedPrivateConstants.XXYYFoo
