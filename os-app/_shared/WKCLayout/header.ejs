@@ -2,10 +2,14 @@
 <html>
 
 <head>
-	<title><%= locals.OLSKPageTitle || locals.OLSKSharedDefaultPageTitle %></title>
+	<% var pageTitle = locals.OLSKPageTitle || (locals.OLSKTranslate ? OLSKTranslate('WKCSharedDefaultPageTitle') : null) || locals.OLSKSharedDefaultPageTitle  %>
+	<% if (pageTitle) { %>
+		<title><%= pageTitle %></title>
+	<% } %>
 
-	<% if (locals.OLSKPageDescription) { %>
-		<meta name="description" content="<%= OLSKPageDescription %>" />
+	<% var pageDescription = locals.OLSKPageDescription || (locals.OLSKTranslate ? OLSKTranslate('WKCSharedDefaultPageDescription') : null) || locals.OLSKSharedDefaultPageDescription  %>
+	<% if (pageDescription) { %>
+		<meta name="description" content="<%= pageDescription %>" />
 	<% } %>
 
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
