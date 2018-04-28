@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node ./os-launch",
     "test": "mocha $(find $PWD -path '*os-*' -name '*-tests.js')",
-    "dstart": "supervisor ./os-launch",
+    "dstart": "supervisor --extensions node,js,yaml ./os-launch",
     "dtest": "mocha $(find $PWD -path '*os-*' -name '*-tests.js') -w --reporter min",
     "dtestdebug": "mocha $(find $PWD -path '*os-*' -name '*-tests.js') -w --reporter min -b"
   },
