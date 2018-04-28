@@ -1,0 +1,21 @@
+<%
+locals.OLSKPageTitle = OLSKTranslate('WKCLoginTitle');
+%>
+
+<%- include('../_shared/WKCLayout/header.ejs') %>
+
+<h1><%= locals.OLSKPageTitle %></h1>
+
+<form>
+	<p>
+		<input type="text" name="username" placeholder="<%= OLSKTranslate('WKCLoginFormFieldUsernameTitle') %>" autofocus>
+	</p>
+
+	<p>
+		<input type="password" name="password" placeholder="<%= OLSKTranslate('WKCLoginFormFieldPasswordTitle') %>">
+	</p>
+
+	<input type="submit" name="submit">
+</form>
+
+<%- include('../_shared/WKCLayout/footer.ejs') %>
