@@ -18,6 +18,12 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes () {
 				OLSKRouteFunction: loginController.index,
 				OLSKRouteLanguages: ['en'],
 			},
+			WKCRouteLoginSubmit: {
+				OLSKRoutePath: '/login',
+				OLSKRouteMethod: 'post',
+				OLSKRouteFunction: loginController.submit,
+				OLSKRouteLanguages: ['en'],
+			},
 		});
 	});
 

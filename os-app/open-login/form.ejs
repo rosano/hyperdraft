@@ -6,7 +6,7 @@ locals.OLSKPageTitle = OLSKTranslate('WKCLoginTitle');
 
 <h1><%= locals.OLSKPageTitle %></h1>
 
-<form>
+<form method="POST" action="<%= OLSKCanonicalFor('WKCRouteLoginSubmit') %>">
 	<p>
 		<input type="text" name="username" placeholder="<%= OLSKTranslate('WKCLoginFormFieldUsernameTitle') %>" autofocus>
 	</p>
