@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title><%= locals.OLSKPageTitle || locals.OLSKSharedDefaultPageTitle %></title>
+
+	<% if (locals.OLSKPageDescription) { %>
+		<meta name="description" content="<%= OLSKPageDescription %>" />
+	<% } %>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width">
+
+	<% if (typeof locals.OLSKPageMetaTags === 'object') { %>
+		<% Object.keys(locals.OLSKPageMetaTags).forEach(function(e) { %>
+			<meta name="<%= e %>" content="<%= locals.OLSKPageMetaTags[e] %>">
+		<% }) %>
+	<% } %>
+
+	<% if (locals.OLSKSharedActiveRouteConstant) { %>
+		<link rel="canonical" href="<%= OLSKCanonicalFor(locals.OLSKSharedActiveRouteConstant) %>" />
+
+		<% if (locals.OLSKSharedPageLanguagesAvailable) { %>
+			<% locals.OLSKSharedPageLanguagesAvailable.forEach(function (e) { %>
+				<link rel="alternate" hreflang="<%= e %>" href="<%= OLSKCanonicalLocalizedFor(OLSKSharedActiveRouteConstant, { OLSKRoutingLanguage: e }) %>" />
+			<% }) %>
+		<% } %>
+	<% } %>
+
+	<link rel="stylesheet" type="text/css" href="/shared-assets/vendor/normalize/normalize-8.0.0.css">
+
+	<link rel="stylesheet" type="text/css" href="/shared-assets/style.css">
+
+	<% if (locals.OLSKSharedPageControllerSlug && Array.isArray(locals.OLSKPageAssets)) { %>
+		<% locals.OLSKPageAssets.forEach(function(e) { %>
+			<% var defaultDirectory = e[0] === '/' ? '' : '/' + locals.OLSKSharedPageControllerSlug + '/'; %>
+			
+			<% if (e.split('.').pop() === 'js') { %>
+				<script src="<%= defaultDirectory %><%= e %>"></script>
+			<% } %>
+
+			<% if (e.split('.').pop() === 'css') { %>
+				<link rel="stylesheet" type="text/css" href="<%= defaultDirectory %><%= e %>">
+			<% } %>
+		<% }) %>
+	<% } %>
+
+	<% if (locals.OLSKHeadCallback) { %>
+		<% OLSKHeadCallback() %>
+	<% } %>
+</head>
+
+<body id="OLSKSharedBody">
+
+<div id="OLSKSharedContainer">
+<!-- start #OLSKSharedContainer -->

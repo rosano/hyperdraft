@@ -1,6 +1,6 @@
-OLSKDefaultPageTitle: 'XXYY'
+OLSKDefaultPageTitle: 'wikiavec'
 
 OLSKErrorControllerSlug: 'open-error'
 
 OLSKSharedPrivateConstants:
-  XXYYFoo: 'Bar' # Can be accessed via req.OLSKSharedPrivateConstants.XXYYFoo
+  WKCFoo: 'Bar' # Can be accessed via req.OLSKSharedPrivateConstants.WKCFoo

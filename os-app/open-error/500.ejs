@@ -1,0 +1,14 @@
+<%
+locals.OLSKPageTitle = 'System error'; // #localize
+%>
+
+<%- include('../_shared/WKCLayout/header.ejs') %>
+
+<h1><%= locals.OLSKPageTitle %></h1>
+<p>
+	<span onclick="window.history.back()">Go back</span><!-- #localize -->
+	or 
+	<a href="/">Start over</a><!-- #localize -->
+</p>
+
+<%- include('../_shared/WKCLayout/footer.ejs') %>
