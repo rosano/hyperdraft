@@ -4,6 +4,8 @@
  * MIT Licensed
  */
 
+const persistenceLibrary = require('../_shared/persistence')
+
 //_ OLSKControllerRoutes
 
 exports.OLSKControllerRoutes = function () {
@@ -28,7 +30,19 @@ exports.index = function (req, res, next) {
 	});
 };
 
-exports.submit = function (req, res, next) {	
-	res.render(res.locals.OLSKSharedPageControllerSlug + '/form', {
-	});
+exports.submit = function (req, res, next) {
+	return persistenceLibrary.WKCPersistenceMembers(function(items) {
+		var memberObject = items.filter(function(e) {
+			return req.body.username === e.WKCMemberHandle && req.body.password === e.WKCMemberPlaintextPassword; 
+		}).pop();
+
+		if (!memberObject) {
+			return res.render(res.locals.OLSKSharedPageControllerSlug + '/form', {
+				WKCLoginUsername: req.body.username,
+				WKCLoginError: true,
+			});
+		}
+
+		res.send('test');
+	})
 };

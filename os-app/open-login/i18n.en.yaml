@@ -1,3 +1,4 @@
 WKCLoginTitle: 'Login'
 WKCLoginFormFieldUsernameTitle: 'username'
 WKCLoginFormFieldPasswordTitle: 'password'
+WKCLoginFormFieldErrorText: 'Credentials do not match any records'

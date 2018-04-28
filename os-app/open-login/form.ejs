@@ -6,9 +6,13 @@ locals.OLSKPageTitle = OLSKTranslate('WKCLoginTitle');
 
 <h1><%= locals.OLSKPageTitle %></h1>
 
+<% if (locals.WKCLoginError) { %>
+	<p><%= OLSKTranslate('WKCLoginFormFieldErrorText') %></p>
+<% } %>
+
 <form method="POST" action="<%= OLSKCanonicalFor('WKCRouteLoginSubmit') %>">
 	<p>
-		<input type="text" name="username" placeholder="<%= OLSKTranslate('WKCLoginFormFieldUsernameTitle') %>" autofocus>
+		<input type="text" name="username" placeholder="<%= OLSKTranslate('WKCLoginFormFieldUsernameTitle') %>" value="<%= locals.WKCLoginUsername %>" autofocus />
 	</p>
 
 	<p>
