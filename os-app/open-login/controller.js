@@ -43,6 +43,8 @@ exports.submit = function (req, res, next) {
 			});
 		}
 
-		res.send('test');
+		req.session.WKCInsecureSessionToken = memberObject.WKCMemberHandle;
+
+		return res.redirect(res.locals.OLSKCanonicalFor('WKCRouteNotes'));
 	})
 };
