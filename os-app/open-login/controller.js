@@ -22,6 +22,12 @@ exports.OLSKControllerRoutes = function () {
 			OLSKRouteFunction: exports.submit,
 			OLSKRouteLanguages: ['en'],
 		},
+		WKCRouteLoginDestroy: {
+			OLSKRoutePath: '/logout',
+			OLSKRouteMethod: 'get',
+			OLSKRouteFunction: exports.destroy,
+			OLSKRouteLanguages: ['en'],
+		},
 	};
 };
 
@@ -47,4 +53,10 @@ exports.submit = function (req, res, next) {
 
 		return res.redirect(res.locals.OLSKCanonicalFor('WKCRouteNotes'));
 	})
+};
+
+exports.destroy = function (req, res, next) {
+	req.session = null;
+
+	return res.redirect(res.locals.OLSKCanonicalFor('WKCRouteHome'));
 };

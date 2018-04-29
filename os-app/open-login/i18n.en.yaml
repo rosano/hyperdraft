@@ -1,4 +1,5 @@
-WKCLoginTitle: 'Login'
+WKCLoginTitle: 'Sign in'
 WKCLoginFormFieldUsernameTitle: 'username'
 WKCLoginFormFieldPasswordTitle: 'password'
 WKCLoginFormFieldErrorText: 'Credentials do not match any records'
+WKCLoginDestroyTitle: 'Sign out'

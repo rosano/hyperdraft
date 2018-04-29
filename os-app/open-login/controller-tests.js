@@ -24,6 +24,12 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes () {
 				OLSKRouteFunction: loginController.submit,
 				OLSKRouteLanguages: ['en'],
 			},
+			WKCRouteLoginDestroy: {
+				OLSKRoutePath: '/logout',
+				OLSKRouteMethod: 'get',
+				OLSKRouteFunction: loginController.destroy,
+				OLSKRouteLanguages: ['en'],
+			},
 		});
 	});
 
