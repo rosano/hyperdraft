@@ -4,7 +4,7 @@
  * MIT Licensed
  */
 
-const persistenceLibrary = require('../_shared/persistence')
+const persistenceLibrary = require('../_shared/persistence');
 
 //_ OLSKControllerRoutes
 
@@ -52,7 +52,7 @@ exports.submit = function (req, res, next) {
 		req.session.WKCInsecureSessionToken = memberObject.WKCMemberHandle;
 
 		return res.redirect(res.locals.OLSKCanonicalFor('WKCRouteNotes'));
-	})
+	});
 };
 
 exports.destroy = function (req, res, next) {
