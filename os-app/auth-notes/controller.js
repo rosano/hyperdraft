@@ -23,5 +23,6 @@ exports.index = function (req, res, next) {
 	}
 
 	res.render(res.locals.OLSKSharedPageControllerSlug + '/index', {
+		WKCNotesInsecureAPIToken: req.session.WKCInsecureSessionToken,
 	});
 };

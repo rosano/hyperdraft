@@ -1,9 +1,31 @@
 <%
 locals.OLSKPageTitle = OLSKTranslate('WKCNotesTitle');
+locals.OLSKPageAssets = [
+	'script.js',
+];
 %>
 
 <%- include('../_shared/WKCLayout/header.ejs') %>
 
 <h1><%= locals.OLSKPageTitle %></h1>
+
+<button id="WKCNotesAddButton"><%= OLSKTranslate('WKCNotesAddButtonText') %></button>
+<script type="text/javascript">
+	d3.select('#WKCNotesAddButton').on('click', function() {
+		d3.json('<%= OLSKCanonicalFor('WKCRouteAPINotesAdd') %>', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				WKCInsecureAPIToken: '<%= WKCNotesInsecureAPIToken %>',
+			}),
+		}).then(function(data) {
+			console.log(data.WKCNewItem);
+		});
+	});
+</script>
+
+<p><a href="<%= OLSKCanonicalFor('WKCRouteLoginDestroy') %>"><%= OLSKTranslate('WKCLoginDestroyTitle') %></a></p>
 
 <%- include('../_shared/WKCLayout/footer.ejs') %>
