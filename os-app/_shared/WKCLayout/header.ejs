@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html<%- locals.OLSKSharedPageCurrentLanguage ? [' lang="', OLSKSharedPageCurrentLanguage, '"'].join('') : ''; %>>
 
 <head>
 	<% var pageTitle = locals.OLSKPageTitle || (locals.OLSKTranslate ? OLSKTranslate('WKCSharedDefaultPageTitle') : null) || locals.OLSKSharedDefaultPageTitle  %>
