@@ -31,9 +31,11 @@ exports.OLSKControllerRoutes = function () {
 	};
 };
 
-exports.index = function (req, res, next) {
-	res.render(res.locals.OLSKSharedPageControllerSlug + '/index', {
-	});
+exports.index = function(req, res, next) {
+	res.render([
+		res.locals.OLSKSharedPageControllerSlug,
+		'index',
+	].join('/'), {});
 };
 
 exports.submit = function (req, res, next) {
@@ -43,7 +45,10 @@ exports.submit = function (req, res, next) {
 		}).pop();
 
 		if (!memberObject) {
-			return res.render(res.locals.OLSKSharedPageControllerSlug + '/index', {
+			return res.render([
+				res.locals.OLSKSharedPageControllerSlug,
+				'index',
+			].join('/'), {
 				WKCLoginUsername: req.body.WKCLoginUsername,
 				WKCLoginError: true,
 			});

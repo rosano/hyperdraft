@@ -22,7 +22,10 @@ exports.index = function (req, res, next) {
 		return res.redirect(res.locals.OLSKCanonicalFor('WKCRouteLogin'));
 	}
 
-	res.render(res.locals.OLSKSharedPageControllerSlug + '/index', {
+	res.render([
+		res.locals.OLSKSharedPageControllerSlug,
+		'index',
+	].join('/'), {
 		WKCNotesInsecureAPIToken: req.session.WKCInsecureSessionToken,
 	});
 };

@@ -17,7 +17,9 @@ exports.OLSKControllerRoutes = function () {
 	};
 };
 
-exports.index = function (req, res, next) {
-	res.render(res.locals.OLSKSharedPageControllerSlug + '/index', {
-	});
+exports.index = function(req, res, next) {
+	res.render([
+		res.locals.OLSKSharedPageControllerSlug,
+		'index',
+	].join('/'), {});
 };
