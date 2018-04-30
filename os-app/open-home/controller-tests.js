@@ -8,9 +8,9 @@ var assert = require('assert');
 
 var homeController = require('./controller');
 
-describe('OLSKControllerRoutes', function testOLSKControllerRoutes () {
-	
-	it('returns route objects', function () {
+describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
+
+	it('returns route objects', function() {
 		assert.deepEqual(homeController.OLSKControllerRoutes(), {
 			WKCRouteHome: {
 				OLSKRoutePath: '/',

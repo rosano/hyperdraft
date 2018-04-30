@@ -10,7 +10,7 @@ const kWKCDatabaseName = 'wkc_database';
 
 //_ WKCPersistenceMembers
 
-exports.WKCPersistenceMembers = function (callback) {
+exports.WKCPersistenceMembers = function(callback) {
 	MongoClient.connect(kWKCDatabaseURL, function(err, client) {
 		if (err) {
 			console.log(err);
@@ -21,7 +21,7 @@ exports.WKCPersistenceMembers = function (callback) {
 			if (err) {
 				console.log(err);
 				throw new Error('WKCErrorDatabaseFindFailed');
-			};
+			}
 
 			client.close();
 
@@ -32,7 +32,7 @@ exports.WKCPersistenceMembers = function (callback) {
 
 //_ WKCPersistenceNotesAdd
 
-exports.WKCPersistenceNotesAdd = function (callback) {
+exports.WKCPersistenceNotesAdd = function(callback) {
 	MongoClient.connect(kWKCDatabaseURL, function(err, client) {
 		if (err) {
 			console.log(err);
@@ -49,7 +49,7 @@ exports.WKCPersistenceNotesAdd = function (callback) {
 			if (err) {
 				console.log(err);
 				throw new Error('WKCErrorDatabaseFindFailed');
-			};
+			}
 
 			client.close();
 

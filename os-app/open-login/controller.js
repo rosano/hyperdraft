@@ -8,7 +8,7 @@ const persistenceLibrary = require('../_shared/persistence');
 
 //_ OLSKControllerRoutes
 
-exports.OLSKControllerRoutes = function () {
+exports.OLSKControllerRoutes = function() {
 	return {
 		WKCRouteLogin: {
 			OLSKRoutePath: '/login',
@@ -38,10 +38,10 @@ exports.index = function(req, res, next) {
 	].join('/'), {});
 };
 
-exports.submit = function (req, res, next) {
+exports.submit = function(req, res, next) {
 	return persistenceLibrary.WKCPersistenceMembers(function(items) {
 		var memberObject = items.filter(function(e) {
-			return req.body.WKCLoginUsername === e.WKCMemberHandle && req.body.WKCLoginPassword === e.WKCMemberPlaintextPassword; 
+			return req.body.WKCLoginUsername === e.WKCMemberHandle && req.body.WKCLoginPassword === e.WKCMemberPlaintextPassword;
 		}).pop();
 
 		if (!memberObject) {
@@ -60,7 +60,7 @@ exports.submit = function (req, res, next) {
 	});
 };
 
-exports.destroy = function (req, res, next) {
+exports.destroy = function(req, res, next) {
 	req.session = null;
 
 	return res.redirect(res.locals.OLSKCanonicalFor('WKCRouteHome'));

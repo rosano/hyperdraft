@@ -6,7 +6,7 @@
 
 //_ OLSKControllerRoutes
 
-exports.OLSKControllerRoutes = function () {
+exports.OLSKControllerRoutes = function() {
 	return {
 		WKCRouteHome: {
 			OLSKRoutePath: '/',

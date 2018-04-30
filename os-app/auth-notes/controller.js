@@ -6,7 +6,7 @@
 
 //_ OLSKControllerRoutes
 
-exports.OLSKControllerRoutes = function () {
+exports.OLSKControllerRoutes = function() {
 	return {
 		WKCRouteNotes: {
 			OLSKRoutePath: '/notes',
@@ -17,7 +17,7 @@ exports.OLSKControllerRoutes = function () {
 	};
 };
 
-exports.index = function (req, res, next) {
+exports.index = function(req, res, next) {
 	if (!req.session.WKCInsecureSessionToken) {
 		return res.redirect(res.locals.OLSKCanonicalFor('WKCRouteLogin'));
 	}

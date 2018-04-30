@@ -8,7 +8,7 @@ const persistenceLibrary = require('../_shared/persistence');
 
 //_ OLSKControllerRoutes
 
-exports.OLSKControllerRoutes = function () {
+exports.OLSKControllerRoutes = function() {
 	return {
 		WKCRouteAPINotesAdd: {
 			OLSKRoutePath: '/api/notes',
@@ -18,7 +18,7 @@ exports.OLSKControllerRoutes = function () {
 	};
 };
 
-exports.index = function (req, res, next) {
+exports.index = function(req, res, next) {
 	if (!req.body.WKCInsecureAPIToken) {
 		return res.json({
 			WKCError: 'Invalid API Token',
