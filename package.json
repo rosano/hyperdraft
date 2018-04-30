@@ -5,9 +5,7 @@
   "scripts": {
     "start": "node ./os-launch",
     "test": "mocha $(find $PWD -path '*os-*' -name '*-tests.js')",
-    "dstart": "HOST=loc.wiki supervisor --extensions node,js,yaml ./os-launch",
-    "dtest": "mocha $(find $PWD -path '*os-*' -name '*-tests.js') -w --reporter min",
-    "dtestdebug": "mocha $(find $PWD -path '*os-*' -name '*-tests.js') -w --reporter min -b"
+    "dstart": "HOST=loc.wiki supervisor --extensions node,js,yaml ./os-launch"
   },
   "dependencies": {
     "// EXPRESS": null,
