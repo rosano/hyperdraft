@@ -1,5 +1,5 @@
 <%
-locals.OLSKPageTitle = OLSKTranslate('WKCNotesTitle');
+locals.OLSKPageTitle = OLSKLocalized('WKCNotesTitle');
 locals.OLSKPageAssets = [
 	'script.js',
 ];
@@ -9,7 +9,7 @@ locals.OLSKPageAssets = [
 
 <h1><%= locals.OLSKPageTitle %></h1>
 
-<button id="WKCNotesAddButton"><%= OLSKTranslate('WKCNotesAddButtonText') %></button>
+<button id="WKCNotesAddButton"><%= OLSKLocalized('WKCNotesAddButtonText') %></button>
 <script type="text/javascript">
 	d3.select('#WKCNotesAddButton').on('click', function() {
 		d3.json('<%= OLSKCanonicalFor('WKCRouteAPINotesAdd') %>', {
@@ -26,6 +26,6 @@ locals.OLSKPageAssets = [
 	});
 </script>
 
-<p><a href="<%= OLSKCanonicalFor('WKCRouteLoginDestroy') %>"><%= OLSKTranslate('WKCLoginDestroyTitle') %></a></p>
+<p><a href="<%= OLSKCanonicalFor('WKCRouteLoginDestroy') %>"><%= OLSKLocalized('WKCLoginDestroyTitle') %></a></p>
 
 <%- include('../_shared/WKCLayout/footer.ejs') %>

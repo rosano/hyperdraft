@@ -1,11 +1,11 @@
 <%
-locals.OLSKPageTitle = OLSKTranslate('WKCHomeTitle');
+locals.OLSKPageTitle = OLSKLocalized('WKCHomeTitle');
 %>
 
 <%- include('../_shared/WKCLayout/header.ejs') %>
 
 <h1><%= locals.OLSKPageTitle %></h1>
 
-<p><a href="<%= OLSKCanonicalFor('WKCRouteNotes') %>"><%= OLSKTranslate('WKCNotesTitle') %></a></p>
+<p><a href="<%= OLSKCanonicalFor('WKCRouteNotes') %>"><%= OLSKLocalized('WKCNotesTitle') %></a></p>
 
 <%- include('../_shared/WKCLayout/footer.ejs') %>

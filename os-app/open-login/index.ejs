@@ -1,5 +1,5 @@
 <%
-locals.OLSKPageTitle = OLSKTranslate('WKCLoginTitle');
+locals.OLSKPageTitle = OLSKLocalized('WKCLoginTitle');
 %>
 
 <%- include('../_shared/WKCLayout/header.ejs') %>
@@ -7,16 +7,16 @@ locals.OLSKPageTitle = OLSKTranslate('WKCLoginTitle');
 <h1><%= locals.OLSKPageTitle %></h1>
 
 <% if (locals.WKCLoginError) { %>
-	<p><%= OLSKTranslate('WKCLoginFormFieldErrorText') %></p>
+	<p><%= OLSKLocalized('WKCLoginFormFieldErrorText') %></p>
 <% } %>
 
 <form method="POST" action="<%= OLSKCanonicalFor('WKCRouteLoginSubmit') %>">
 	<p>
-		<input type="text" name="WKCLoginUsername" placeholder="<%= OLSKTranslate('WKCLoginFormFieldUsernameTitle') %>" value="<%= locals.WKCLoginUsername %>" autofocus />
+		<input type="text" name="WKCLoginUsername" placeholder="<%= OLSKLocalized('WKCLoginFormFieldUsernameTitle') %>" value="<%= locals.WKCLoginUsername %>" autofocus />
 	</p>
 
 	<p>
-		<input type="password" name="WKCLoginPassword" placeholder="<%= OLSKTranslate('WKCLoginFormFieldPasswordTitle') %>" />
+		<input type="password" name="WKCLoginPassword" placeholder="<%= OLSKLocalized('WKCLoginFormFieldPasswordTitle') %>" />
 	</p>
 
 	<input type="submit" name="submit">

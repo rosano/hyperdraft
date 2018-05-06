@@ -2,12 +2,12 @@
 <html<%- locals.OLSKSharedPageCurrentLanguage ? [' lang="', OLSKSharedPageCurrentLanguage, '"'].join('') : ''; %>>
 
 <head>
-	<% var pageTitle = locals.OLSKPageTitle || (locals.OLSKTranslate ? OLSKTranslate('WKCSharedDefaultPageTitle') : null) || locals.OLSKSharedDefaultPageTitle  %>
+	<% var pageTitle = locals.OLSKPageTitle || (locals.OLSKLocalized ? OLSKLocalized('WKCSharedDefaultPageTitle') : null) || locals.OLSKSharedDefaultPageTitle  %>
 	<% if (pageTitle) { %>
 		<title><%= pageTitle %></title>
 	<% } %>
 
-	<% var pageDescription = locals.OLSKPageDescription || (locals.OLSKTranslate ? OLSKTranslate('WKCSharedDefaultPageDescription') : null) || locals.OLSKSharedDefaultPageDescription  %>
+	<% var pageDescription = locals.OLSKPageDescription || (locals.OLSKLocalized ? OLSKLocalized('WKCSharedDefaultPageDescription') : null) || locals.OLSKSharedDefaultPageDescription  %>
 	<% if (pageDescription) { %>
 		<meta name="description" content="<%= pageDescription %>" />
 	<% } %>
