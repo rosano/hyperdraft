@@ -2,8 +2,9 @@
 node_modules
 package-lock.json
 
-# CACHING
-os-cache
+# LOCAL
+.env
 
-# TESTING
+# OLDSKOOL
+os-cache
 os-workspace-testing

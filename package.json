@@ -1,11 +1,10 @@
 {
   "name": "wikiavec",
-  "version": "0.0.0",
   "private": true,
   "scripts": {
     "start": "node ./os-launch",
     "test": "mocha $(find $PWD -path '*os-*' -name '*-tests.js')",
-    "dstart": "HOST=loc.wiki supervisor --extensions node,js,yaml ./os-launch"
+    "dstart": "supervisor --extensions node,js,yaml ./os-launch"
   },
   "dependencies": {
     "// EXPRESS": null,
@@ -26,6 +25,8 @@
 
     "// YAML": null,
     "js-yaml": "latest",
+
+    "// ---------": null,
 
     "// UTILITIES": null,
     "underscore": "latest",
