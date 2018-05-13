@@ -41,7 +41,7 @@ exports.index = function(req, res, next) {
 exports.submit = function(req, res, next) {
 	return persistenceLibrary.WKCPersistenceMembers(function(items) {
 		var memberObject = items.filter(function(e) {
-			return req.body.WKCLoginUsername === e.WKCMemberHandle && req.body.WKCLoginPassword === e.WKCMemberPlaintextPassword;
+			return req.body.WKCLoginUsername === e.WKCMemberHandle && req.body.WKCLoginPassword === e.WKCMemberInsecurePassword;
 		}).pop();
 
 		if (!memberObject) {
