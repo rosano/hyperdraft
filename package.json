@@ -7,8 +7,8 @@
     "dstart": "supervisor --extensions node,js,yaml ./os-launch"
   },
   "devDependencies": {
-    "// REQUEST": null,
-    "request": "latest"
+    "// DOTENV": null,
+    "dotenv": "latest"
   },
   "dependencies": {
     "// EXPRESS": null,

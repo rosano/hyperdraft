@@ -5,8 +5,20 @@
  */
 
 var assert = require('assert');
+require('dotenv').load();
 
 var apiController = require('./controller');
+
+var WKCFakeResponse = function() {
+	return {
+		json: function(e) {
+			return e;
+		},
+		text: function(e) {
+			return e;
+		}
+	};
+};
 
 describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 
@@ -14,7 +26,7 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 		assert.deepEqual(apiController.OLSKControllerRoutes(), {
 			WKCRouteAPIRoot: {
 				OLSKRoutePath: '/api/',
-				OLSKRouteMethod: 'get',
+				OLSKRouteMethod: 'post',
 				OLSKRouteFunction: apiController.WKCAPIRoot,
 			},
 			WKCRouteAPINotesAdd: {
@@ -23,6 +35,29 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 				OLSKRouteFunction: apiController.index,
 			},
 		});
+	});
+
+});
+
+describe('WKCAPIRoot', function testWKCAPIRoot() {
+
+	it('returns error if not authenticated', function() {
+		assert.deepEqual(apiController.WKCAPIRoot({
+			headers: {
+				authorization: null,
+			},
+		}, WKCFakeResponse()), {
+			WKCError: 'Invalid access token',
+		});
+	});
+
+	it('returns confirmation authenticated', function() {
+
+		assert.deepEqual(apiController.WKCAPIRoot({
+			headers: {
+				authorization: ['Bearer', process.env.WKC_INSECURE_API_ACCESS_TOKEN].join(' '),
+			},
+		}, WKCFakeResponse()), 'Successfully authenticated');
 	});
 
 });

@@ -12,7 +12,7 @@ exports.OLSKControllerRoutes = function() {
 	return {
 		WKCRouteAPIRoot: {
 			OLSKRoutePath: '/api/',
-			OLSKRouteMethod: 'get',
+			OLSKRouteMethod: 'post',
 			OLSKRouteFunction: exports.WKCAPIRoot,
 		},
 		WKCRouteAPINotesAdd: {
@@ -24,6 +24,20 @@ exports.OLSKControllerRoutes = function() {
 };
 
 exports.WKCAPIRoot = function(req, res, next) {
+	if (!process.env.WKC_INSECURE_API_ACCESS_TOKEN || process.env.WKC_INSECURE_API_ACCESS_TOKEN.trim() === '') {
+		return res.json({
+			WKCError: 'API Token Not Set',
+		});
+	}
+	
+	if (req.headers.authorization !== ['Bearer', process.env.WKC_INSECURE_API_ACCESS_TOKEN].join(' ')) {
+		return res.json({
+			WKCError: 'Invalid access token',
+		});
+	}
+
+	return res.text('Successfully authenticated');
+};
 
 exports.index = function(req, res, next) {
 	if (!req.body.WKCInsecureAPIToken) {
