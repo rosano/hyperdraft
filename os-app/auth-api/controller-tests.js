@@ -12,6 +12,11 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 
 	it('returns route objects', function() {
 		assert.deepEqual(apiController.OLSKControllerRoutes(), {
+			WKCRouteAPIRoot: {
+				OLSKRoutePath: '/api/',
+				OLSKRouteMethod: 'get',
+				OLSKRouteFunction: apiController.WKCAPIRoot,
+			},
 			WKCRouteAPINotesAdd: {
 				OLSKRoutePath: '/api/notes',
 				OLSKRouteMethod: 'post',

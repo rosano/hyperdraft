@@ -10,6 +10,11 @@ const persistenceLibrary = require('../_shared/persistence');
 
 exports.OLSKControllerRoutes = function() {
 	return {
+		WKCRouteAPIRoot: {
+			OLSKRoutePath: '/api/',
+			OLSKRouteMethod: 'get',
+			OLSKRouteFunction: exports.WKCAPIRoot,
+		},
 		WKCRouteAPINotesAdd: {
 			OLSKRoutePath: '/api/notes',
 			OLSKRouteMethod: 'post',
@@ -17,6 +22,8 @@ exports.OLSKControllerRoutes = function() {
 		},
 	};
 };
+
+exports.WKCAPIRoot = function(req, res, next) {
 
 exports.index = function(req, res, next) {
 	if (!req.body.WKCInsecureAPIToken) {
