@@ -6,6 +6,10 @@
     "test": "mocha $(find $PWD -path '*os-*' -name '*-tests.js')",
     "dstart": "supervisor --extensions node,js,yaml ./os-launch"
   },
+  "devDependencies": {
+    "// REQUEST": null,
+    "request": "latest"
+  },
   "dependencies": {
     "// EXPRESS": null,
     "express": "latest",
@@ -13,7 +17,7 @@
     "// SESSIONS": null,
     "cookie-session": "latest",
     "express-session": "latest",
-    
+
     "// POST DATA": null,
     "body-parser": "latest",
 
