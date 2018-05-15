@@ -5,7 +5,7 @@
  */
 
 var assert = require('assert');
-require('dotenv').load();
+require('dotenv').config();
 
 var apiController = require('./controller');
 
