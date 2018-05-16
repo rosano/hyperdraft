@@ -9,9 +9,11 @@ require('dotenv').config();
 
 var apiController = require('./controller');
 
-var WKCFakeAuthRequest = function(inputData = {}) {
+var WKCAPIFakeRequest = function() {
 	return {
-		headers: Object.assign({}, inputData),
+		headers: {
+			'x-client-key': process.env.WKC_INSECURE_API_ACCESS_TOKEN,
+		},
 	};
 };
 
@@ -59,14 +61,20 @@ describe('OLSKControllerSharedMiddlewares', function testOLSKControllerSharedMid
 
 describe('WKCAPIMiddlewareAuthenticate', function testWKCAPIMiddlewareAuthenticate() {
 
+	var WKCAPIFakeAuthRequest = function(inputData = {}) {
+		return {
+			headers: Object.assign({}, inputData),
+		};
+	};
+
 	it('returns error without header', function() {
-		assert.deepEqual(apiController.WKCAPIMiddlewareAuthenticate(WKCFakeAuthRequest(), WKCAPIFakeResponse()), {
+		assert.deepEqual(apiController.WKCAPIMiddlewareAuthenticate(WKCAPIFakeAuthRequest(), WKCAPIFakeResponse()), {
 			WKCError: 'API Token Not Set',
 		});
 	});
 
 	it('returns error without token', function() {
-		assert.deepEqual(apiController.WKCAPIMiddlewareAuthenticate(WKCFakeAuthRequest({
+		assert.deepEqual(apiController.WKCAPIMiddlewareAuthenticate(WKCAPIFakeAuthRequest({
 			'x-client-key': null,
 		}), WKCAPIFakeResponse()), {
 			WKCError: 'API Token Not Set',
@@ -74,7 +82,7 @@ describe('WKCAPIMiddlewareAuthenticate', function testWKCAPIMiddlewareAuthentica
 	});
 
 	it('returns error with blank token', function() {
-		assert.deepEqual(apiController.WKCAPIMiddlewareAuthenticate(WKCFakeAuthRequest({
+		assert.deepEqual(apiController.WKCAPIMiddlewareAuthenticate(WKCAPIFakeAuthRequest({
 			'x-client-key': '',
 		}), WKCAPIFakeResponse()), {
 			WKCError: 'API Token Not Set',
@@ -82,7 +90,7 @@ describe('WKCAPIMiddlewareAuthenticate', function testWKCAPIMiddlewareAuthentica
 	});
 
 	it('returns error with whitespace token', function() {
-		assert.deepEqual(apiController.WKCAPIMiddlewareAuthenticate(WKCFakeAuthRequest({
+		assert.deepEqual(apiController.WKCAPIMiddlewareAuthenticate(WKCAPIFakeAuthRequest({
 			'x-client-key': ' ',
 		}), WKCAPIFakeResponse()), {
 			WKCError: 'API Token Not Set',
@@ -90,7 +98,7 @@ describe('WKCAPIMiddlewareAuthenticate', function testWKCAPIMiddlewareAuthentica
 	});
 
 	it('returns error with wrong token', function() {
-		assert.deepEqual(apiController.WKCAPIMiddlewareAuthenticate(WKCFakeAuthRequest({
+		assert.deepEqual(apiController.WKCAPIMiddlewareAuthenticate(WKCAPIFakeAuthRequest({
 			'x-client-key': 'password',
 		}), WKCAPIFakeResponse()), {
 			WKCError: 'Invalid access token',
@@ -98,7 +106,7 @@ describe('WKCAPIMiddlewareAuthenticate', function testWKCAPIMiddlewareAuthentica
 	});
 
 	it('calls next with correct token', function() {
-		apiController.WKCAPIMiddlewareAuthenticate(WKCFakeAuthRequest({
+		apiController.WKCAPIMiddlewareAuthenticate(WKCAPIFakeAuthRequest({
 			'x-client-key': process.env.WKC_INSECURE_API_ACCESS_TOKEN,
 		}), WKCAPIFakeResponse(), function() {
 			assert.ok(true);
@@ -110,9 +118,7 @@ describe('WKCAPIMiddlewareAuthenticate', function testWKCAPIMiddlewareAuthentica
 describe('WKCActionAPIRoot', function testWKCActionAPIRoot() {
 
 	it('returns confirmation authenticated', function() {
-		assert.deepEqual(apiController.WKCActionAPIRoot(WKCFakeAuthRequest({
-			'x-client-key': process.env.WKC_INSECURE_API_ACCESS_TOKEN,
-		}), WKCAPIFakeResponse()), 'Successfully authenticated');
+		assert.deepEqual(apiController.WKCActionAPIRoot(WKCAPIFakeRequest(), WKCAPIFakeResponse()), 'Successfully authenticated');
 	});
 
 });
