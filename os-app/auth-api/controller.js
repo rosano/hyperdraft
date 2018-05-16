@@ -13,39 +13,49 @@ exports.OLSKControllerRoutes = function() {
 		WKCRouteAPIRoot: {
 			OLSKRoutePath: '/api/',
 			OLSKRouteMethod: 'post',
-			OLSKRouteFunction: exports.WKCAPIRoot,
+			OLSKRouteFunction: exports.WKCActionAPIRoot,
+			OLSKRouteMiddlewares: ['WKCSharedMiddlewareAPIAuthenticate'],
 		},
 		WKCRouteAPINotesAdd: {
 			OLSKRoutePath: '/api/notes',
 			OLSKRouteMethod: 'post',
 			OLSKRouteFunction: exports.index,
+			OLSKRouteMiddlewares: ['WKCSharedMiddlewareAPIAuthenticate'],
 		},
 	};
 };
 
-exports.WKCAPIRoot = function(req, res, next) {
-	if (!process.env.WKC_INSECURE_API_ACCESS_TOKEN || process.env.WKC_INSECURE_API_ACCESS_TOKEN.trim() === '') {
+//_ OLSKControllerSharedMiddlewares
+
+exports.OLSKControllerSharedMiddlewares = function() {
+	return {
+		WKCSharedMiddlewareAPIAuthenticate: exports.WKCAPIMiddlewareAuthenticate,
+	};
+};
+
+//_ WKCAPIMiddlewareAuthenticate
+
+exports.WKCAPIMiddlewareAuthenticate = function(req, res, next) {
+	if (!req.headers['x-client-key'] || req.headers['x-client-key'].trim() === '') {
 		return res.json({
 			WKCError: 'API Token Not Set',
 		});
 	}
 	
-	if (req.headers.authorization !== ['Bearer', process.env.WKC_INSECURE_API_ACCESS_TOKEN].join(' ')) {
+	if (req.headers['x-client-key'] !== ['Bearer', process.env.WKC_INSECURE_API_ACCESS_TOKEN].join(' ')) {
 		return res.json({
 			WKCError: 'Invalid access token',
 		});
 	}
 
+	return next();
+};
+
+exports.WKCActionAPIRoot = function(req, res, next) {
 	return res.text('Successfully authenticated');
 };
 
 exports.index = function(req, res, next) {
-	if (!req.body.WKCInsecureAPIToken) {
-		return res.json({
-			WKCError: 'Invalid API Token',
-		});
-	}
-
 	return persistenceLibrary.WKCPersistenceNotesAdd(function(item) {
 		return res.json({
 			WKCNewItem: item,

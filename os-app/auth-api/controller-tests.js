@@ -9,7 +9,13 @@ require('dotenv').config();
 
 var apiController = require('./controller');
 
-var WKCFakeResponse = function() {
+var WKCFakeAuthRequest = function(inputData = {}) {
+	return {
+		headers: Object.assign({}, inputData),
+	};
+};
+
+var WKCAPIFakeResponse = function() {
 	return {
 		json: function(e) {
 			return e;
@@ -27,36 +33,86 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 			WKCRouteAPIRoot: {
 				OLSKRoutePath: '/api/',
 				OLSKRouteMethod: 'post',
-				OLSKRouteFunction: apiController.WKCAPIRoot,
+				OLSKRouteFunction: apiController.WKCActionAPIRoot,
+				OLSKRouteMiddlewares: ['WKCSharedMiddlewareAPIAuthenticate'],
 			},
 			WKCRouteAPINotesAdd: {
 				OLSKRoutePath: '/api/notes',
 				OLSKRouteMethod: 'post',
 				OLSKRouteFunction: apiController.index,
+				OLSKRouteMiddlewares: ['WKCSharedMiddlewareAPIAuthenticate'],
 			},
 		});
 	});
 
 });
 
-describe('WKCAPIRoot', function testWKCAPIRoot() {
+describe('OLSKControllerSharedMiddlewares', function testOLSKControllerSharedMiddlewares() {
 
-	it('returns error if not authenticated', function() {
-		assert.deepEqual(apiController.WKCAPIRoot({
-			headers: {
-				authorization: null,
-			},
-		}, WKCFakeResponse()), {
+	it('returns middleware functions', function() {
+		assert.deepEqual(apiController.OLSKControllerSharedMiddlewares(), {
+			WKCSharedMiddlewareAPIAuthenticate: apiController.WKCAPIMiddlewareAuthenticate,
+		});
+	});
+
+});
+
+describe('WKCAPIMiddlewareAuthenticate', function testWKCAPIMiddlewareAuthenticate() {
+
+	it('returns error without header', function() {
+		assert.deepEqual(apiController.WKCAPIMiddlewareAuthenticate(WKCFakeAuthRequest(), WKCAPIFakeResponse()), {
+			WKCError: 'API Token Not Set',
+		});
+	});
+
+	it('returns error without token', function() {
+		assert.deepEqual(apiController.WKCAPIMiddlewareAuthenticate(WKCFakeAuthRequest({
+			'x-client-key': null,
+		}), WKCAPIFakeResponse()), {
+			WKCError: 'API Token Not Set',
+		});
+	});
+
+	it('returns error with blank token', function() {
+		assert.deepEqual(apiController.WKCAPIMiddlewareAuthenticate(WKCFakeAuthRequest({
+			'x-client-key': '',
+		}), WKCAPIFakeResponse()), {
+			WKCError: 'API Token Not Set',
+		});
+	});
+
+	it('returns error with whitespace token', function() {
+		assert.deepEqual(apiController.WKCAPIMiddlewareAuthenticate(WKCFakeAuthRequest({
+			'x-client-key': ' ',
+		}), WKCAPIFakeResponse()), {
+			WKCError: 'API Token Not Set',
+		});
+	});
+
+	it('returns error with wrong token', function() {
+		assert.deepEqual(apiController.WKCAPIMiddlewareAuthenticate(WKCFakeAuthRequest({
+			'x-client-key': 'password',
+		}), WKCAPIFakeResponse()), {
 			WKCError: 'Invalid access token',
 		});
 	});
 
+	it('calls next with correct token', function() {
+		apiController.WKCAPIMiddlewareAuthenticate(WKCFakeAuthRequest({
+			'x-client-key': process.env.WKC_INSECURE_API_ACCESS_TOKEN,
+		}), WKCAPIFakeResponse(), function() {
+			assert.ok(true);
+		});
+	});
+
+});
+
+describe('WKCActionAPIRoot', function testWKCActionAPIRoot() {
+
 	it('returns confirmation authenticated', function() {
-		assert.deepEqual(apiController.WKCAPIRoot({
-			headers: {
-				authorization: ['Bearer', process.env.WKC_INSECURE_API_ACCESS_TOKEN].join(' '),
-			},
-		}, WKCFakeResponse()), 'Successfully authenticated');
+		assert.deepEqual(apiController.WKCActionAPIRoot(WKCFakeAuthRequest({
+			'x-client-key': process.env.WKC_INSECURE_API_ACCESS_TOKEN,
+		}), WKCAPIFakeResponse()), 'Successfully authenticated');
 	});
 
 });
