@@ -15,7 +15,7 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 			WKCRouteHome: {
 				OLSKRoutePath: '/',
 				OLSKRouteMethod: 'get',
-				OLSKRouteFunction: homeController.index,
+				OLSKRouteFunction: homeController.WKCActionHomeIndex,
 				OLSKRouteLanguages: ['en'],
 			},
 		});

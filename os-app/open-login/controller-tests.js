@@ -15,19 +15,19 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 			WKCRouteLogin: {
 				OLSKRoutePath: '/login',
 				OLSKRouteMethod: 'get',
-				OLSKRouteFunction: loginController.index,
+				OLSKRouteFunction: loginController.WKCActionLoginIndex,
 				OLSKRouteLanguages: ['en'],
 			},
 			WKCRouteLoginSubmit: {
 				OLSKRoutePath: '/login',
 				OLSKRouteMethod: 'post',
-				OLSKRouteFunction: loginController.submit,
+				OLSKRouteFunction: loginController.WKCActionLoginSubmit,
 				OLSKRouteLanguages: ['en'],
 			},
 			WKCRouteLoginDestroy: {
 				OLSKRoutePath: '/logout',
 				OLSKRouteMethod: 'get',
-				OLSKRouteFunction: loginController.destroy,
+				OLSKRouteFunction: loginController.WKCActionLoginDestroy,
 				OLSKRouteLanguages: ['en'],
 			},
 		});

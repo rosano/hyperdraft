@@ -11,13 +11,15 @@ exports.OLSKControllerRoutes = function() {
 		WKCRouteHome: {
 			OLSKRoutePath: '/',
 			OLSKRouteMethod: 'get',
-			OLSKRouteFunction: exports.index,
+			OLSKRouteFunction: exports.WKCActionHomeIndex,
 			OLSKRouteLanguages: ['en'],
 		},
 	};
 };
 
-exports.index = function(req, res, next) {
+//_ WKCActionHomeIndex
+
+exports.WKCActionHomeIndex = function(req, res, next) {
 	res.render([
 		res.locals.OLSKSharedPageControllerSlug,
 		'index',

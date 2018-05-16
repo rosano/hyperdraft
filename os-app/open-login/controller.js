@@ -13,32 +13,36 @@ exports.OLSKControllerRoutes = function() {
 		WKCRouteLogin: {
 			OLSKRoutePath: '/login',
 			OLSKRouteMethod: 'get',
-			OLSKRouteFunction: exports.index,
+			OLSKRouteFunction: exports.WKCActionLoginIndex,
 			OLSKRouteLanguages: ['en'],
 		},
 		WKCRouteLoginSubmit: {
 			OLSKRoutePath: '/login',
 			OLSKRouteMethod: 'post',
-			OLSKRouteFunction: exports.submit,
+			OLSKRouteFunction: exports.WKCActionLoginSubmit,
 			OLSKRouteLanguages: ['en'],
 		},
 		WKCRouteLoginDestroy: {
 			OLSKRoutePath: '/logout',
 			OLSKRouteMethod: 'get',
-			OLSKRouteFunction: exports.destroy,
+			OLSKRouteFunction: exports.WKCActionLoginDestroy,
 			OLSKRouteLanguages: ['en'],
 		},
 	};
 };
 
-exports.index = function(req, res, next) {
+//_ WKCActionLoginIndex
+
+exports.WKCActionLoginIndex = function(req, res, next) {
 	res.render([
 		res.locals.OLSKSharedPageControllerSlug,
 		'index',
 	].join('/'), {});
 };
 
-exports.submit = function(req, res, next) {
+//_ WKCActionLoginSubmit
+
+exports.WKCActionLoginSubmit = function(req, res, next) {
 	return persistenceLibrary.WKCPersistenceMembers(function(items) {
 		var memberObject = items.filter(function(e) {
 			return req.body.WKCLoginUsername === e.WKCMemberHandle && req.body.WKCLoginPassword === e.WKCMemberInsecurePassword;
@@ -60,7 +64,9 @@ exports.submit = function(req, res, next) {
 	});
 };
 
-exports.destroy = function(req, res, next) {
+//_ WKCActionLoginDestroy
+
+exports.WKCActionLoginDestroy = function(req, res, next) {
 	req.session = null;
 
 	return res.redirect(res.locals.OLSKCanonicalFor('WKCRouteHome'));

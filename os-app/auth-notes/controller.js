@@ -11,13 +11,15 @@ exports.OLSKControllerRoutes = function() {
 		WKCRouteNotes: {
 			OLSKRoutePath: '/notes',
 			OLSKRouteMethod: 'get',
-			OLSKRouteFunction: exports.index,
+			OLSKRouteFunction: exports.WKCActionNotesIndex,
 			OLSKRouteLanguages: ['en'],
 		},
 	};
 };
 
-exports.index = function(req, res, next) {
+//_ WKCActionNotesIndex
+
+exports.WKCActionNotesIndex = function(req, res, next) {
 	if (!req.session.WKCInsecureSessionToken) {
 		return res.redirect(res.locals.OLSKCanonicalFor('WKCRouteLogin'));
 	}

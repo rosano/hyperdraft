@@ -15,7 +15,7 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 			WKCRouteNotes: {
 				OLSKRoutePath: '/notes',
 				OLSKRouteMethod: 'get',
-				OLSKRouteFunction: notesController.index,
+				OLSKRouteFunction: notesController.WKCActionNotesIndex,
 				OLSKRouteLanguages: ['en'],
 			},
 		});
