@@ -17,3 +17,13 @@ describe('OLSKControllerSharedConnections', function testOLSKControllerSharedCon
 	});
 
 });
+
+describe('OLSKControllerSharedMiddlewares', function testOLSKControllerSharedMiddlewares() {
+
+	it('returns middleware functions', function() {
+		assert.deepEqual(sharedController.OLSKControllerSharedMiddlewares(), {
+			WKCSharedMiddlewareEnsureDatabase: sharedController.WKCSharedMiddlewareEnsureDatabase,
+		});
+	});
+
+});

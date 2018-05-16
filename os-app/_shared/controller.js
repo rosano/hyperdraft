@@ -11,3 +11,11 @@ exports.OLSKControllerSharedConnections = function() {
 		WKCSharedConnectionMongo: exports.WKCSharedConnectionInitializerMongo,
 	};
 };
+
+//_ OLSKControllerSharedMiddlewares
+
+exports.OLSKControllerSharedMiddlewares = function() {
+	return {
+		WKCSharedMiddlewareEnsureDatabase: exports.WKCSharedMiddlewareEnsureDatabase,
+	};
+};
