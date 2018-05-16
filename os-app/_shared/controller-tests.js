@@ -10,7 +10,7 @@ var sharedController = require('./controller');
 
 describe('OLSKControllerSharedConnections', function testOLSKControllerSharedConnections() {
 
-	it('returns middleware functions', function() {
+	it('returns connection functions', function() {
 		assert.deepEqual(sharedController.OLSKControllerSharedConnections(), {
 			WKCSharedConnectionMongo: sharedController.WKCSharedConnectionInitializerMongo,
 		});
