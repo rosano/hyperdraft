@@ -39,6 +39,16 @@ exports.OLSKControllerSharedMiddlewares = function() {
 	};
 };
 
+//_ WKCLoginMiddlewareAuthenticate
+
+exports.WKCLoginMiddlewareAuthenticate = function(req, res, next) {
+	if (!req.session.WKCInsecureSessionToken || !req.session.WKCInsecureSessionToken.trim()) {
+		return res.redirect(exports.OLSKControllerRoutes().WKCRouteLogin.OLSKRoutePath);
+	}
+
+	return next();
+};
+
 //_ WKCActionLoginIndex
 
 exports.WKCActionLoginIndex = function(req, res, next) {

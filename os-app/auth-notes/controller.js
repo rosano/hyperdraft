@@ -13,6 +13,7 @@ exports.OLSKControllerRoutes = function() {
 			OLSKRouteMethod: 'get',
 			OLSKRouteFunction: exports.WKCActionNotesIndex,
 			OLSKRouteLanguages: ['en'],
+			OLSKRouteMiddlewares: ['WKCSharedMiddlewareAuthenticate'],
 		},
 	};
 };
@@ -20,10 +21,6 @@ exports.OLSKControllerRoutes = function() {
 //_ WKCActionNotesIndex
 
 exports.WKCActionNotesIndex = function(req, res, next) {
-	if (!req.session.WKCInsecureSessionToken) {
-		return res.redirect(res.locals.OLSKCanonicalFor('WKCRouteLogin'));
-	}
-
 	res.render([
 		res.locals.OLSKSharedPageControllerSlug,
 		'index',

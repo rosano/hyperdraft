@@ -17,6 +17,7 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 				OLSKRouteMethod: 'get',
 				OLSKRouteFunction: notesController.WKCActionNotesIndex,
 				OLSKRouteLanguages: ['en'],
+				OLSKRouteMiddlewares: ['WKCSharedMiddlewareAuthenticate'],
 			},
 		});
 	});
