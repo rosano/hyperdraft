@@ -12,7 +12,7 @@ exports.OLSKControllerRoutes = function() {
 	return {
 		WKCRouteAPIRoot: {
 			OLSKRoutePath: '/api/',
-			OLSKRouteMethod: 'post',
+			OLSKRouteMethod: 'get',
 			OLSKRouteFunction: exports.WKCActionAPIRoot,
 			OLSKRouteMiddlewares: ['WKCSharedMiddlewareAPIAuthenticate'],
 		},

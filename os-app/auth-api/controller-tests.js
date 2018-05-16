@@ -34,7 +34,7 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 		assert.deepEqual(apiController.OLSKControllerRoutes(), {
 			WKCRouteAPIRoot: {
 				OLSKRoutePath: '/api/',
-				OLSKRouteMethod: 'post',
+				OLSKRouteMethod: 'get',
 				OLSKRouteFunction: apiController.WKCActionAPIRoot,
 				OLSKRouteMiddlewares: ['WKCSharedMiddlewareAPIAuthenticate'],
 			},
