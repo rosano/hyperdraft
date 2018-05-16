@@ -41,7 +41,7 @@ exports.WKCAPIMiddlewareAuthenticate = function(req, res, next) {
 			WKCError: 'API Token Not Set',
 		});
 	}
-	
+
 	if (req.headers['x-client-key'] !== ['Bearer', process.env.WKC_INSECURE_API_ACCESS_TOKEN].join(' ')) {
 		return res.json({
 			WKCError: 'Invalid access token',
