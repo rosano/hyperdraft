@@ -4,4 +4,4 @@
  * MIT Licensed
  */
 
-require('./os-system/start');
+require('OldSkool')(__dirname);

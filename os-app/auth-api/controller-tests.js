@@ -52,7 +52,6 @@ describe('WKCAPIRoot', function testWKCAPIRoot() {
 	});
 
 	it('returns confirmation authenticated', function() {
-
 		assert.deepEqual(apiController.WKCAPIRoot({
 			headers: {
 				authorization: ['Bearer', process.env.WKC_INSECURE_API_ACCESS_TOKEN].join(' '),

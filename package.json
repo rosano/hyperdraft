@@ -1,41 +1,17 @@
 {
-  "name": "wikiavec",
   "private": true,
   "scripts": {
-    "start": "node ./os-launch",
-    "test": "mocha $(find $PWD -path '*os-*' -name '*-tests.js')",
-    "dstart": "supervisor --extensions node,js,yaml ./os-launch"
+    "start": "node ./os-launch"
+  },
+  "dependencies": {
+    "// OLDSKOOL": null,
+    "OldSkool": "git@github.com:olsk/OldSkool.git",
+
+    "// PERSISTANCE": null,
+    "mongodb": "^3.0.7"
   },
   "devDependencies": {
     "// DOTENV": null,
     "dotenv": "latest"
-  },
-  "dependencies": {
-    "// EXPRESS": null,
-    "express": "latest",
-
-    "// SESSIONS": null,
-    "cookie-session": "latest",
-    "express-session": "latest",
-
-    "// POST DATA": null,
-    "body-parser": "latest",
-
-    "// TEMPLATES": null,
-    "ejs": "latest",
-
-    "// FILESYSTEM": null,
-    "mkdirp": "latest",
-
-    "// YAML": null,
-    "js-yaml": "latest",
-
-    "// ---------": null,
-
-    "// UTILITIES": null,
-    "underscore": "latest",
-
-    "// PERSISTANCE": null,
-    "mongodb": "^3.0.7"
   }
 }
