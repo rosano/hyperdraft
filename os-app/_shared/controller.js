@@ -8,8 +8,21 @@
 
 exports.OLSKControllerSharedConnections = function() {
 	return {
-		WKCSharedConnectionMongo: exports.WKCSharedConnectionInitializerMongo,
+		WKCSharedConnectionMongo: {
+			OLSKConnectionInitializer: exports.WKCSharedConnectionInitializerMongo,
+			OLSKConnectionCleanup: exports.WKCSharedConnectionCleanupMongo,
+		},
 	};
+};
+
+//_ WKCSharedConnectionInitializerMongo
+
+exports.WKCSharedConnectionInitializerMongo = function(olskCallback) {
+};
+
+//_ WKCSharedConnectionCleanupMongo
+
+exports.WKCSharedConnectionCleanupMongo = function(client) {
 };
 
 //_ OLSKControllerSharedMiddlewares

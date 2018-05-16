@@ -12,7 +12,10 @@ describe('OLSKControllerSharedConnections', function testOLSKControllerSharedCon
 
 	it('returns connection functions', function() {
 		assert.deepEqual(sharedController.OLSKControllerSharedConnections(), {
-			WKCSharedConnectionMongo: sharedController.WKCSharedConnectionInitializerMongo,
+			WKCSharedConnectionMongo: {
+				OLSKConnectionInitializer: sharedController.WKCSharedConnectionInitializerMongo,
+				OLSKConnectionCleanup: sharedController.WKCSharedConnectionCleanupMongo,
+			},
 		});
 	});
 
