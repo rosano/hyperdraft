@@ -13,7 +13,10 @@ exports.OLSKControllerRoutes = function() {
 			OLSKRouteMethod: 'get',
 			OLSKRouteFunction: exports.WKCActionNotesIndex,
 			OLSKRouteLanguages: ['en'],
-			OLSKRouteMiddlewares: ['WKCSharedMiddlewareAuthenticate'],
+			OLSKRouteMiddlewares: [
+				'WKCSharedMiddlewareEnsureDatabase',
+				'WKCSharedMiddlewareAuthenticate',
+			],
 		},
 	};
 };
