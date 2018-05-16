@@ -34,3 +34,13 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 	});
 
 });
+
+describe('OLSKControllerSharedMiddlewares', function testOLSKControllerSharedMiddlewares() {
+
+	it('returns middleware functions', function() {
+		assert.deepEqual(loginController.OLSKControllerSharedMiddlewares(), {
+			WKCSharedMiddlewareAuthenticate: loginController.WKCLoginMiddlewareAuthenticate,
+		});
+	});
+
+});

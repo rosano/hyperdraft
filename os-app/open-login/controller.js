@@ -31,6 +31,14 @@ exports.OLSKControllerRoutes = function() {
 	};
 };
 
+//_ OLSKControllerSharedMiddlewares
+
+exports.OLSKControllerSharedMiddlewares = function() {
+	return {
+		WKCSharedMiddlewareAuthenticate: exports.WKCLoginMiddlewareAuthenticate,
+	};
+};
+
 //_ WKCActionLoginIndex
 
 exports.WKCActionLoginIndex = function(req, res, next) {
