@@ -19,3 +19,17 @@ exports.OLSKControllerSharedMiddlewares = function() {
 		WKCSharedMiddlewareEnsureDatabase: exports.WKCSharedMiddlewareEnsureDatabase,
 	};
 };
+
+//_ WKCSharedMiddlewareEnsureDatabase
+
+exports.WKCSharedMiddlewareEnsureDatabase = function(req, res, next) {
+	if (!req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionAttempted) {
+		return next(new Error('WKCErrorConnectionNotAttempted'));
+	}
+
+	if (req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionError) {
+		return next(req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionError);
+	}
+
+	return next();
+};
