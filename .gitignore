@@ -4,7 +4,6 @@ package-lock.json
 
 # LOCAL
 .env
-.env.test
 
 # OLDSKOOL
 os-cache
