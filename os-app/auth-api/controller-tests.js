@@ -42,6 +42,7 @@ describe('OLSKControllerSharedMiddlewares', function testOLSKControllerSharedMid
 	it('returns middleware functions', function() {
 		assert.deepEqual(apiController.OLSKControllerSharedMiddlewares(), {
 			WKCSharedMiddlewareAPIAuthenticate: apiController.WKCAPIMiddlewareAuthenticate,
+			WKCSharedMiddlewareAPIErrorHandler: apiController.WKCAPIMiddlewareErrorHandler,
 		});
 	});
 
@@ -99,6 +100,16 @@ describe('WKCAPIMiddlewareAuthenticate', function testWKCAPIMiddlewareAuthentica
 		}), WKCAPIFakeResponse(), function() {
 			return 'success';
 		}), 'success');
+	});
+
+});
+
+describe('WKCAPIMiddlewareErrorHandler', function testWKCAPIMiddlewareErrorHandler() {
+
+	it('returns error without header', function() {
+		assert.deepEqual(apiController.WKCAPIMiddlewareErrorHandler(new Error('alpha'), {}, WKCAPIFakeResponse()), {
+			WKCAPIError: 'alpha',
+		});
 	});
 
 });

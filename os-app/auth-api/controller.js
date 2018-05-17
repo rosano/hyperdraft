@@ -24,6 +24,7 @@ exports.OLSKControllerRoutes = function() {
 exports.OLSKControllerSharedMiddlewares = function() {
 	return {
 		WKCSharedMiddlewareAPIAuthenticate: exports.WKCAPIMiddlewareAuthenticate,
+		WKCSharedMiddlewareAPIErrorHandler: exports.WKCAPIMiddlewareErrorHandler,
 	};
 };
 
@@ -43,6 +44,14 @@ exports.WKCAPIMiddlewareAuthenticate = function(req, res, next) {
 	}
 
 	return next();
+};
+
+//_ WKCAPIMiddlewareErrorHandler
+
+exports.WKCAPIMiddlewareErrorHandler = function(err, req, res, next) {
+	return res.json({
+		WKCAPIError: err.message,
+	});
 };
 
 exports.WKCActionAPIRoot = function(req, res, next) {
