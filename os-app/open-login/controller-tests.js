@@ -69,7 +69,7 @@ describe('WKCLoginMiddlewareAuthenticate', function testWKCLoginMiddlewareAuthen
 	};
 
 	var fakeNext = function(inputData) {
-		return typeof inputData === 'undefined' ? 'IS_UNDEFINED' : inputData;
+		return typeof inputData === 'undefined' ? 'RETURNED_UNDEFINED' : inputData;
 	};
 
 	it('redirects to login without session data', function() {
@@ -97,7 +97,7 @@ describe('WKCLoginMiddlewareAuthenticate', function testWKCLoginMiddlewareAuthen
 	it('calls next(undefined) with any token', function() {
 		assert.deepEqual(loginController.WKCLoginMiddlewareAuthenticate(fakeRequest({
 			WKCInsecureSessionToken: 'alpha',
-		}), fakeResponse(), fakeNext), 'IS_UNDEFINED');
+		}), fakeResponse(), fakeNext), 'RETURNED_UNDEFINED');
 	});
 
 });

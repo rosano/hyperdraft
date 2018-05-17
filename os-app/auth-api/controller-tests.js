@@ -56,6 +56,10 @@ describe('WKCAPIMiddlewareAuthenticate', function testWKCAPIMiddlewareAuthentica
 		};
 	};
 
+	var fakeNext = function(inputData) {
+		return typeof inputData === 'undefined' ? 'RETURNED_UNDEFINED' : inputData;
+	};
+
 	it('returns error without header', function() {
 		assert.deepEqual(apiController.WKCAPIMiddlewareAuthenticate(fakeAuthRequest(), WKCAPIFakeResponse()), {
 			WKCError: 'API Token Not Set',
@@ -94,12 +98,10 @@ describe('WKCAPIMiddlewareAuthenticate', function testWKCAPIMiddlewareAuthentica
 		});
 	});
 
-	it('calls next with correct token', function() {
+	it('calls next(undefined) with correct token', function() {
 		assert.strictEqual(apiController.WKCAPIMiddlewareAuthenticate(fakeAuthRequest({
 			'x-client-key': process.env.WKC_INSECURE_API_ACCESS_TOKEN,
-		}), WKCAPIFakeResponse(), function() {
-			return 'success';
-		}), 'success');
+		}), WKCAPIFakeResponse(), fakeNext), 'RETURNED_UNDEFINED');
 	});
 
 });

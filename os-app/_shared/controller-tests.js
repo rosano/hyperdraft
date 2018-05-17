@@ -44,7 +44,7 @@ describe('WKCSharedMiddlewareEnsureDatabase', function testWKCSharedMiddlewareEn
 	var fakeResponse = function() {};
 
 	var fakeNext = function(inputData) {
-		return typeof inputData === 'undefined' ? 'IS_UNDEFINED' : inputData;
+		return typeof inputData === 'undefined' ? 'RETURNED_UNDEFINED' : inputData;
 	};
 
 	it('calls next with WKCErrorConnectionNotAttempted if not attempted', function() {
@@ -65,7 +65,7 @@ describe('WKCSharedMiddlewareEnsureDatabase', function testWKCSharedMiddlewareEn
 		assert.deepEqual(sharedController.WKCSharedMiddlewareEnsureDatabase(fakeRequest({
 			OLSKConnectionAttempted: true,
 			OLSKConnectionError: null,
-		}), fakeResponse, fakeNext), 'IS_UNDEFINED');
+		}), fakeResponse, fakeNext), 'RETURNED_UNDEFINED');
 	});
 
 });
