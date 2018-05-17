@@ -73,7 +73,6 @@ exports.WKCActionLoginSubmit = function(req, res, next) {
 
 	return req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_members').find({}).toArray(function(err, items) {
 		if (err) {
-			console.log(err);
 			throw new Error('WKCErrorDatabaseFindFailed');
 		}
 

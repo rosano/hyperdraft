@@ -9,7 +9,7 @@
 exports.WKCModelInputDataIsNotesObject = function(inputData) {
 	if (typeof inputData !== 'object' || inputData === null) {
 		return false;
-	};
+	}
 
 	var errors = {};
 
@@ -17,7 +17,7 @@ exports.WKCModelInputDataIsNotesObject = function(inputData) {
 		errors.WKCNoteBody = [
 			'WKCErrorNotString',
 		];
-	};
+	}
 
 	if (Object.keys(errors).length) {
 		inputData.WKCErrors = errors;
