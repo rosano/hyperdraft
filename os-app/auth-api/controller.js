@@ -46,9 +46,19 @@ exports.WKCAPIMiddlewareAuthenticate = function(req, res, next) {
 	return next();
 };
 
+//_ WKCAPISystemError
+
+exports.WKCAPISystemError = class WKCAPISystemError extends Error {};
+
 //_ WKCAPIMiddlewareErrorHandler
 
 exports.WKCAPIMiddlewareErrorHandler = function(err, req, res, next) {
+	if (err instanceof exports.WKCAPISystemError) {
+		return res.json({
+			WKCAPISystemError: err.message,
+		});
+	}
+
 	return res.json({
 		WKCAPIError: err.message,
 	});

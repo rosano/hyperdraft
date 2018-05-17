@@ -108,7 +108,13 @@ describe('WKCAPIMiddlewareAuthenticate', function testWKCAPIMiddlewareAuthentica
 
 describe('WKCAPIMiddlewareErrorHandler', function testWKCAPIMiddlewareErrorHandler() {
 
-	it('returns error without header', function() {
+	it('returns WKCAPIError for WKCAPISystemError', function() {
+		assert.deepEqual(apiController.WKCAPIMiddlewareErrorHandler(new apiController.WKCAPISystemError('alpha'), {}, WKCAPIFakeResponse()), {
+			WKCAPISystemError: 'alpha',
+		});
+	});
+
+	it('returns WKCAPIError for Error', function() {
 		assert.deepEqual(apiController.WKCAPIMiddlewareErrorHandler(new Error('alpha'), {}, WKCAPIFakeResponse()), {
 			WKCAPIError: 'alpha',
 		});
