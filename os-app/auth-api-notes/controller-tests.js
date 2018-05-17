@@ -100,9 +100,9 @@ describe('Connection', function testConnection() {
 			apiNotesController.WKCActionAPINotesCreate(fakeRequest({
 				WKCNoteBody: 'alpha',
 			}), fakeResponseAsync(function(responseJSON) {
-				assert.deepEqual(responseJSON.WKCNoteBody, 'alpha');
-				assert.deepEqual(responseJSON.WKCNoteDateCreated instanceof Date, true);
-				assert.deepEqual(responseJSON.WKCNoteDateUpdated instanceof Date, true);
+				assert.strictEqual(responseJSON.WKCNoteBody, 'alpha');
+				assert.strictEqual(responseJSON.WKCNoteDateCreated instanceof Date, true);
+				assert.strictEqual(responseJSON.WKCNoteDateUpdated instanceof Date, true);
 				done();
 			}));
 		});
