@@ -60,45 +60,35 @@ describe('WKCAPIMiddlewareAuthenticate', function testWKCAPIMiddlewareAuthentica
 		return typeof inputData === 'undefined' ? 'RETURNED_UNDEFINED' : inputData;
 	};
 
-	it('returns error without header', function() {
-		assert.deepEqual(apiController.WKCAPIMiddlewareAuthenticate(fakeAuthRequest(), WKCAPIFakeResponse()), {
-			WKCError: 'API Token Not Set',
-		});
+	it('returns next(WKCAPIClientError) without header', function() {
+		assert.deepEqual(apiController.WKCAPIMiddlewareAuthenticate(fakeAuthRequest(), WKCAPIFakeResponse(), fakeNext), new apiController.WKCAPIClientError('WKCAPIClientErrorTokenNotSet'));
 	});
 
-	it('returns error without token', function() {
+	it('returns next(WKCAPIClientError) without token', function() {
 		assert.deepEqual(apiController.WKCAPIMiddlewareAuthenticate(fakeAuthRequest({
 			'x-client-key': null,
-		}), WKCAPIFakeResponse()), {
-			WKCError: 'API Token Not Set',
-		});
+		}), WKCAPIFakeResponse(), fakeNext), new apiController.WKCAPIClientError('WKCAPIClientErrorTokenNotSet'));
 	});
 
-	it('returns error with blank token', function() {
+	it('returns next(WKCAPIClientError) with blank token', function() {
 		assert.deepEqual(apiController.WKCAPIMiddlewareAuthenticate(fakeAuthRequest({
 			'x-client-key': '',
-		}), WKCAPIFakeResponse()), {
-			WKCError: 'API Token Not Set',
-		});
+		}), WKCAPIFakeResponse(), fakeNext), new apiController.WKCAPIClientError('WKCAPIClientErrorTokenNotSet'));
 	});
 
-	it('returns error with whitespace token', function() {
+	it('returns next(WKCAPIClientError) with whitespace token', function() {
 		assert.deepEqual(apiController.WKCAPIMiddlewareAuthenticate(fakeAuthRequest({
 			'x-client-key': ' ',
-		}), WKCAPIFakeResponse()), {
-			WKCError: 'API Token Not Set',
-		});
+		}), WKCAPIFakeResponse(), fakeNext), new apiController.WKCAPIClientError('WKCAPIClientErrorTokenNotSet'));
 	});
 
-	it('returns error with wrong token', function() {
+	it('returns next(WKCAPIClientError) with wrong token', function() {
 		assert.deepEqual(apiController.WKCAPIMiddlewareAuthenticate(fakeAuthRequest({
 			'x-client-key': 'password',
-		}), WKCAPIFakeResponse()), {
-			WKCError: 'Invalid access token',
-		});
+		}), WKCAPIFakeResponse(), fakeNext), new apiController.WKCAPIClientError('WKCAPIClientErrorTokenNotValid'));
 	});
 
-	it('calls next(undefined) with correct token', function() {
+	it('returns next(undefined) with correct token', function() {
 		assert.strictEqual(apiController.WKCAPIMiddlewareAuthenticate(fakeAuthRequest({
 			'x-client-key': process.env.WKC_INSECURE_API_ACCESS_TOKEN,
 		}), WKCAPIFakeResponse(), fakeNext), 'RETURNED_UNDEFINED');

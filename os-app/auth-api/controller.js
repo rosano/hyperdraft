@@ -32,15 +32,11 @@ exports.OLSKControllerSharedMiddlewares = function() {
 
 exports.WKCAPIMiddlewareAuthenticate = function(req, res, next) {
 	if (!req.headers['x-client-key'] || req.headers['x-client-key'].trim() === '') {
-		return res.json({
-			WKCError: 'API Token Not Set',
-		});
+		return next(new exports.WKCAPIClientError('WKCAPIClientErrorTokenNotSet'));
 	}
 
 	if (req.headers['x-client-key'] !== process.env.WKC_INSECURE_API_ACCESS_TOKEN) {
-		return res.json({
-			WKCError: 'Invalid access token',
-		});
+		return next(new exports.WKCAPIClientError('WKCAPIClientErrorTokenNotValid'));
 	}
 
 	return next();
