@@ -24,7 +24,7 @@ var WKCAPIFakeResponse = function() {
 		},
 		text: function(e) {
 			return e;
-		}
+		},
 	};
 };
 

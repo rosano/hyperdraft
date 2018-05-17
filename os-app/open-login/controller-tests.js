@@ -60,42 +60,34 @@ describe('WKCLoginMiddlewareAuthenticate', function testWKCLoginMiddlewareAuthen
 		};
 	};
 
-	var fakeResponse = function(callback) {
+	var fakeResponse = function() {
 		return {
 			redirect: function(inputData) {
-				return callback(inputData);
+				return inputData;
 			}
 		};
 	};
 
 	it('redirects to login without session data', function() {
-		loginController.WKCLoginMiddlewareAuthenticate(fakeRequest(), fakeResponse(function(inputData) {
-			assert.deepEqual(inputData, loginController.OLSKControllerRoutes().WKCRouteLogin.OLSKRoutePath);
-		}));
+		assert.deepEqual(loginController.WKCLoginMiddlewareAuthenticate(fakeRequest(), fakeResponse()), loginController.OLSKControllerRoutes().WKCRouteLogin.OLSKRoutePath);
 	});
 
 	it('redirects to login without token', function() {
-		loginController.WKCLoginMiddlewareAuthenticate(fakeRequest({
+		assert.deepEqual(loginController.WKCLoginMiddlewareAuthenticate(fakeRequest({
 			WKCInsecureSessionToken: null,
-		}), fakeResponse(function(inputData) {
-			assert.deepEqual(inputData, loginController.OLSKControllerRoutes().WKCRouteLogin.OLSKRoutePath);
-		}));
+		}), fakeResponse()), loginController.OLSKControllerRoutes().WKCRouteLogin.OLSKRoutePath);
 	});
 
 	it('redirects to login with blank token', function() {
-		loginController.WKCLoginMiddlewareAuthenticate(fakeRequest({
+		assert.deepEqual(loginController.WKCLoginMiddlewareAuthenticate(fakeRequest({
 			WKCInsecureSessionToken: '',
-		}), fakeResponse(function(inputData) {
-			assert.deepEqual(inputData, loginController.OLSKControllerRoutes().WKCRouteLogin.OLSKRoutePath);
-		}));
+		}), fakeResponse()), loginController.OLSKControllerRoutes().WKCRouteLogin.OLSKRoutePath);
 	});
 
 	it('redirects to login with whitespace token', function() {
-		loginController.WKCLoginMiddlewareAuthenticate(fakeRequest({
+		assert.deepEqual(loginController.WKCLoginMiddlewareAuthenticate(fakeRequest({
 			WKCInsecureSessionToken: ' ',
-		}), fakeResponse(function(inputData) {
-			assert.deepEqual(inputData, loginController.OLSKControllerRoutes().WKCRouteLogin.OLSKRoutePath);
-		}));
+		}), fakeResponse()), loginController.OLSKControllerRoutes().WKCRouteLogin.OLSKRoutePath);
 	});
 
 	it('calls next with any token', function() {
