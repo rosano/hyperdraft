@@ -108,16 +108,25 @@ describe('WKCAPIMiddlewareAuthenticate', function testWKCAPIMiddlewareAuthentica
 
 describe('WKCAPIMiddlewareErrorHandler', function testWKCAPIMiddlewareErrorHandler() {
 
-	it('returns WKCAPIError for WKCAPISystemError', function() {
+	var fakeNext = function(inputData) {
+		return inputData;
+	};
+
+	it('returns WKCAPISystemError for WKCAPISystemError', function() {
 		assert.deepEqual(apiController.WKCAPIMiddlewareErrorHandler(new apiController.WKCAPISystemError('alpha'), {}, WKCAPIFakeResponse()), {
 			WKCAPISystemError: 'alpha',
 		});
 	});
 
-	it('returns WKCAPIError for Error', function() {
-		assert.deepEqual(apiController.WKCAPIMiddlewareErrorHandler(new Error('alpha'), {}, WKCAPIFakeResponse()), {
-			WKCAPIError: 'alpha',
+	it('returns WKCAPIClientError for WKCAPIClientError', function() {
+		assert.deepEqual(apiController.WKCAPIMiddlewareErrorHandler(new apiController.WKCAPIClientError('alpha'), {}, WKCAPIFakeResponse()), {
+			WKCAPIClientError: 'alpha',
 		});
+	});
+
+	it('returns next(error) for Error', function() {
+		var item = new Error('alpha');
+		assert.deepEqual(apiController.WKCAPIMiddlewareErrorHandler(item, {}, WKCAPIFakeResponse(), fakeNext), item);
 	});
 
 });

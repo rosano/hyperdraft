@@ -50,6 +50,10 @@ exports.WKCAPIMiddlewareAuthenticate = function(req, res, next) {
 
 exports.WKCAPISystemError = class WKCAPISystemError extends Error {};
 
+//_ WKCAPIClientError
+
+exports.WKCAPIClientError = class WKCAPIClientError extends Error {};
+
 //_ WKCAPIMiddlewareErrorHandler
 
 exports.WKCAPIMiddlewareErrorHandler = function(err, req, res, next) {
@@ -58,10 +62,13 @@ exports.WKCAPIMiddlewareErrorHandler = function(err, req, res, next) {
 			WKCAPISystemError: err.message,
 		});
 	}
+	if (err instanceof exports.WKCAPIClientError) {
+		return res.json({
+			WKCAPIClientError: err.message,
+		});
+	}
 
-	return res.json({
-		WKCAPIError: err.message,
-	});
+	return next(err);
 };
 
 exports.WKCActionAPIRoot = function(req, res, next) {
