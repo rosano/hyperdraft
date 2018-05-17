@@ -7,7 +7,7 @@
     "// OLDSKOOL": null,
     "OldSkool": "git@github.com:olsk/OldSkool.git",
 
-    "// PERSISTANCE": null,
+    "// PERSISTENCE": null,
     "mongodb": "^3.0.7"
   },
   "devDependencies": {
