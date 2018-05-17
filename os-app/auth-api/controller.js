@@ -4,8 +4,6 @@
  * MIT Licensed
  */
 
-const persistenceLibrary = require('../_shared/persistence');
-
 //_ OLSKControllerRoutes
 
 exports.OLSKControllerRoutes = function() {
@@ -14,12 +12,6 @@ exports.OLSKControllerRoutes = function() {
 			OLSKRoutePath: '/api/',
 			OLSKRouteMethod: 'get',
 			OLSKRouteFunction: exports.WKCActionAPIRoot,
-			OLSKRouteMiddlewares: ['WKCSharedMiddlewareAPIAuthenticate'],
-		},
-		WKCRouteAPINotesAdd: {
-			OLSKRoutePath: '/api/notes',
-			OLSKRouteMethod: 'post',
-			OLSKRouteFunction: exports.index,
 			OLSKRouteMiddlewares: ['WKCSharedMiddlewareAPIAuthenticate'],
 		},
 	};
@@ -53,12 +45,4 @@ exports.WKCAPIMiddlewareAuthenticate = function(req, res, next) {
 
 exports.WKCActionAPIRoot = function(req, res, next) {
 	return res.text('Successfully authenticated');
-};
-
-exports.index = function(req, res, next) {
-	return persistenceLibrary.WKCPersistenceNotesAdd(function(item) {
-		return res.json({
-			WKCNewItem: item,
-		});
-	});
 };
