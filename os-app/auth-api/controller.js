@@ -42,7 +42,7 @@ exports.WKCAPIMiddlewareAuthenticate = function(req, res, next) {
 		});
 	}
 
-	if (req.headers['x-client-key'] !== ['Bearer', process.env.WKC_INSECURE_API_ACCESS_TOKEN].join(' ')) {
+	if (req.headers['x-client-key'] !== process.env.WKC_INSECURE_API_ACCESS_TOKEN) {
 		return res.json({
 			WKCError: 'Invalid access token',
 		});

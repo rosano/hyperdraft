@@ -106,11 +106,11 @@ describe('WKCAPIMiddlewareAuthenticate', function testWKCAPIMiddlewareAuthentica
 	});
 
 	it('calls next with correct token', function() {
-		apiController.WKCAPIMiddlewareAuthenticate(WKCAPIFakeAuthRequest({
+		assert.strictEqual(apiController.WKCAPIMiddlewareAuthenticate(WKCAPIFakeAuthRequest({
 			'x-client-key': process.env.WKC_INSECURE_API_ACCESS_TOKEN,
 		}), WKCAPIFakeResponse(), function() {
-			assert.ok(true);
-		});
+			return 'success';
+		}), 'success');
 	});
 
 });
