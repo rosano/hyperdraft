@@ -5,7 +5,6 @@
  */
 
 var assert = require('assert');
-require('dotenv').config();
 
 var apiNotesController = require('./controller');
 

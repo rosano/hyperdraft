@@ -9,9 +9,5 @@
 
     "// PERSISTENCE": null,
     "mongodb": "^3.0.7"
-  },
-  "devDependencies": {
-    "// DOTENV": null,
-    "dotenv": "latest"
   }
 }
