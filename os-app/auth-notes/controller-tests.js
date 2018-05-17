@@ -18,7 +18,6 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 				OLSKRouteFunction: notesController.WKCActionNotesIndex,
 				OLSKRouteLanguages: ['en'],
 				OLSKRouteMiddlewares: [
-					'WKCSharedMiddlewareEnsureDatabase',
 					'WKCSharedMiddlewareAuthenticate',
 				],
 			},

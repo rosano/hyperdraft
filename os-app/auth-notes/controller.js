@@ -14,7 +14,6 @@ exports.OLSKControllerRoutes = function() {
 			OLSKRouteFunction: exports.WKCActionNotesIndex,
 			OLSKRouteLanguages: ['en'],
 			OLSKRouteMiddlewares: [
-				'WKCSharedMiddlewareEnsureDatabase',
 				'WKCSharedMiddlewareAuthenticate',
 			],
 		},

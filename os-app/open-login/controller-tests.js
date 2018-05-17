@@ -7,6 +7,7 @@
 var assert = require('assert');
 
 var loginController = require('./controller');
+var sharedController = require('../_shared/controller');
 
 describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 
@@ -42,7 +43,10 @@ describe('OLSKControllerSharedMiddlewares', function testOLSKControllerSharedMid
 
 	it('returns middleware functions', function() {
 		assert.deepEqual(loginController.OLSKControllerSharedMiddlewares(), {
-			WKCSharedMiddlewareAuthenticate: loginController.WKCLoginMiddlewareAuthenticate,
+			WKCSharedMiddlewareAuthenticate: [
+				sharedController.WKCSharedMiddlewareEnsureDatabase,
+				loginController.WKCLoginMiddlewareAuthenticate,
+			],
 		});
 	});
 

@@ -4,6 +4,8 @@
  * MIT Licensed
  */
 
+var sharedController = require('../_shared/controller');
+
 //_ OLSKControllerRoutes
 
 exports.OLSKControllerRoutes = function() {
@@ -36,7 +38,10 @@ exports.OLSKControllerRoutes = function() {
 
 exports.OLSKControllerSharedMiddlewares = function() {
 	return {
-		WKCSharedMiddlewareAuthenticate: exports.WKCLoginMiddlewareAuthenticate,
+		WKCSharedMiddlewareAuthenticate: [
+			sharedController.WKCSharedMiddlewareEnsureDatabase,
+			exports.WKCLoginMiddlewareAuthenticate,
+		],
 	};
 };
 
