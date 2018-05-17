@@ -68,6 +68,10 @@ describe('WKCLoginMiddlewareAuthenticate', function testWKCLoginMiddlewareAuthen
 		};
 	};
 
+	var fakeNext = function(inputData) {
+		return typeof inputData === 'undefined' ? 'IS_UNDEFINED' : inputData;
+	};
+
 	it('redirects to login without session data', function() {
 		assert.deepEqual(loginController.WKCLoginMiddlewareAuthenticate(fakeRequest(), fakeResponse()), loginController.OLSKControllerRoutes().WKCRouteLogin.OLSKRoutePath);
 	});
@@ -90,12 +94,10 @@ describe('WKCLoginMiddlewareAuthenticate', function testWKCLoginMiddlewareAuthen
 		}), fakeResponse()), loginController.OLSKControllerRoutes().WKCRouteLogin.OLSKRoutePath);
 	});
 
-	it('calls next with any token', function() {
-		loginController.WKCLoginMiddlewareAuthenticate(fakeRequest({
+	it('calls next(undefined) with any token', function() {
+		assert.deepEqual(loginController.WKCLoginMiddlewareAuthenticate(fakeRequest({
 			WKCInsecureSessionToken: 'alpha',
-		}), fakeResponse(), function() {
-			assert.ok(true);
-		});
+		}), fakeResponse(), fakeNext), 'IS_UNDEFINED');
 	});
 
 });

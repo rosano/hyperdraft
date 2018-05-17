@@ -41,16 +41,16 @@ describe('WKCSharedMiddlewareEnsureDatabase', function testWKCSharedMiddlewareEn
 		};
 	};
 
-	var fakeNext = function() {
-		return function(inputData) {
-			return inputData;
-		};
+	var fakeResponse = function() {};
+
+	var fakeNext = function(inputData) {
+		return typeof inputData === 'undefined' ? 'IS_UNDEFINED' : inputData;
 	};
 
 	it('calls next with WKCErrorConnectionNotAttempted if not attempted', function() {
 		assert.deepEqual(sharedController.WKCSharedMiddlewareEnsureDatabase(fakeRequest({
 			OLSKConnectionAttempted: false,
-		}), undefined, fakeNext()), new Error('WKCErrorConnectionNotAttempted'));
+		}), fakeResponse, fakeNext), new Error('WKCErrorConnectionNotAttempted'));
 	});
 
 	it('calls next with WKCErrorConnectionFailed if error', function() {
@@ -58,14 +58,14 @@ describe('WKCSharedMiddlewareEnsureDatabase', function testWKCSharedMiddlewareEn
 		assert.deepEqual(sharedController.WKCSharedMiddlewareEnsureDatabase(fakeRequest({
 			OLSKConnectionAttempted: true,
 			OLSKConnectionError: error,
-		}), undefined, fakeNext()), error);
+		}), fakeResponse, fakeNext), error);
 	});
 
-	it('calls next with undefined if no error', function() {
+	it('calls next(undefined) if no error', function() {
 		assert.deepEqual(sharedController.WKCSharedMiddlewareEnsureDatabase(fakeRequest({
 			OLSKConnectionAttempted: true,
 			OLSKConnectionError: null,
-		}), undefined, fakeNext()), undefined);
+		}), fakeResponse, fakeNext), 'IS_UNDEFINED');
 	});
 
 });
