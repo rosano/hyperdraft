@@ -94,7 +94,7 @@ describe('WKCLoginMiddlewareAuthenticate', function testWKCLoginMiddlewareAuthen
 		}), fakeResponse()), loginController.OLSKControllerRoutes().WKCRouteLogin.OLSKRoutePath);
 	});
 
-	it('calls next(undefined) with any token', function() {
+	it('returns next(undefined) with any token', function() {
 		assert.deepEqual(loginController.WKCLoginMiddlewareAuthenticate(fakeRequest({
 			WKCInsecureSessionToken: 'alpha',
 		}), fakeResponse(), fakeNext), 'RETURNED_UNDEFINED');

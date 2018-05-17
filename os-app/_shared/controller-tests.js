@@ -47,13 +47,13 @@ describe('WKCSharedMiddlewareEnsureDatabase', function testWKCSharedMiddlewareEn
 		return typeof inputData === 'undefined' ? 'RETURNED_UNDEFINED' : inputData;
 	};
 
-	it('calls next with WKCErrorConnectionNotAttempted if not attempted', function() {
+	it('returns next with WKCErrorConnectionNotAttempted if not attempted', function() {
 		assert.deepEqual(sharedController.WKCSharedMiddlewareEnsureDatabase(fakeRequest({
 			OLSKConnectionAttempted: false,
 		}), fakeResponse, fakeNext), new Error('WKCErrorConnectionNotAttempted'));
 	});
 
-	it('calls next with WKCErrorConnectionFailed if error', function() {
+	it('returns next with WKCErrorConnectionFailed if error', function() {
 		var error = new Error('MongoErrorConnectionFailed');
 		assert.deepEqual(sharedController.WKCSharedMiddlewareEnsureDatabase(fakeRequest({
 			OLSKConnectionAttempted: true,
@@ -61,7 +61,7 @@ describe('WKCSharedMiddlewareEnsureDatabase', function testWKCSharedMiddlewareEn
 		}), fakeResponse, fakeNext), error);
 	});
 
-	it('calls next(undefined) if no error', function() {
+	it('returns next(undefined) if no error', function() {
 		assert.deepEqual(sharedController.WKCSharedMiddlewareEnsureDatabase(fakeRequest({
 			OLSKConnectionAttempted: true,
 			OLSKConnectionError: null,
