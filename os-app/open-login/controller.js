@@ -4,8 +4,6 @@
  * MIT Licensed
  */
 
-const persistenceLibrary = require('../_shared/persistence');
-
 //_ OLSKControllerRoutes
 
 exports.OLSKControllerRoutes = function() {
@@ -64,7 +62,16 @@ exports.WKCActionLoginIndex = function(req, res, next) {
 //_ WKCActionLoginSubmit
 
 exports.WKCActionLoginSubmit = function(req, res, next) {
-	return persistenceLibrary.WKCPersistenceMembers(function(items) {
+	if (!process.env.WKC_SHARED_DATABASE_NAME) {
+		throw new Error('WKCErrorMissingDatabaseName');
+	}
+
+	return req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_members').find({}).toArray(function(err, items) {
+		if (err) {
+			console.log(err);
+			throw new Error('WKCErrorDatabaseFindFailed');
+		}
+
 		var memberObject = items.filter(function(e) {
 			return req.body.WKCLoginUsername === e.WKCMemberHandle && req.body.WKCLoginPassword === e.WKCMemberInsecurePassword;
 		}).pop();
