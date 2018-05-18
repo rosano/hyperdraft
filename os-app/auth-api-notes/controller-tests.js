@@ -47,13 +47,80 @@ describe('Connection', function testConnection() {
 			return;
 		}
 
-		mongoClient.close()
+		mongoClient.close();
 	});
 
 	beforeEach(function() {
 		mongoClient.db(process.env.WKC_SHARED_DATABASE_NAME).dropDatabase();
 	});
-	
+
+	describe('WKCAPISettingsLastRepoIDWithClientAndCallback', function testWKCAPISettingsLastRepoIDWithClientAndCallback() {
+
+		var fakeRequest = function() {
+			return {
+				OLSKSharedConnectionFor: function() {
+					return {
+						OLSKConnectionClient: mongoClient,
+					};
+				},
+				body: {
+					WKCNoteBody: 'alpha',
+				},
+				headers: {
+					'x-client-key': process.env.WKC_INSECURE_API_ACCESS_TOKEN,
+				},
+			};
+		};
+
+		var fakeResponseAsync = function(callback) {
+			return {
+				json: function(inputData) {
+					return callback(inputData);
+				},
+			};
+		};
+
+		it('throws error if param1 empty', function() {
+			assert.throws(function() {
+				apiNotesController.WKCAPISettingsLastRepoIDWithClientAndCallback(null, function() {});
+			}, /WKCErrorInvalidInput/);
+		});
+
+		it('throws error if param2 not function', function() {
+			assert.throws(function() {
+				apiNotesController.WKCAPISettingsLastRepoIDWithClientAndCallback({}, null);
+			}, /WKCErrorInvalidInput/);
+		});
+
+		it('returns 0 if no existing items', function(done) {
+			apiNotesController.WKCAPISettingsLastRepoIDWithClientAndCallback(mongoClient, function(lastRepoID) {
+				assert.strictEqual(lastRepoID, 0);
+				done();
+			});
+		});
+
+		it('returns 1 if created one item', function(done) {
+			apiNotesController.WKCActionAPINotesCreate(fakeRequest(), fakeResponseAsync(function() {
+				apiNotesController.WKCAPISettingsLastRepoIDWithClientAndCallback(mongoClient, function(lastRepoID) {
+					assert.strictEqual(lastRepoID, 1);
+				});
+				done();
+			}));
+		});
+
+		it('returns 2 if created two items', function(done) {
+			apiNotesController.WKCActionAPINotesCreate(fakeRequest(), fakeResponseAsync(function() {
+				apiNotesController.WKCActionAPINotesCreate(fakeRequest(), fakeResponseAsync(function() {
+					apiNotesController.WKCAPISettingsLastRepoIDWithClientAndCallback(mongoClient, function(lastRepoID) {
+						assert.strictEqual(lastRepoID, 2);
+					});
+					done();
+				}));
+			}));
+		});
+
+	});
+
 	describe('WKCActionAPINotesCreate', function testWKCActionAPINotesCreate() {
 
 		var fakeRequest = function(inputData = {}) {
@@ -61,7 +128,7 @@ describe('Connection', function testConnection() {
 				OLSKSharedConnectionFor: function() {
 					return {
 						OLSKConnectionClient: mongoClient,
-					}
+					};
 				},
 				body: Object.assign({}, inputData),
 				headers: {
@@ -100,6 +167,7 @@ describe('Connection', function testConnection() {
 			apiNotesController.WKCActionAPINotesCreate(fakeRequest({
 				WKCNoteBody: 'alpha',
 			}), fakeResponseAsync(function(responseJSON) {
+				assert.strictEqual(responseJSON.WKCNoteID, 1);
 				assert.strictEqual(responseJSON.WKCNoteBody, 'alpha');
 				assert.strictEqual(responseJSON.WKCNoteDateCreated instanceof Date, true);
 				assert.strictEqual(responseJSON.WKCNoteDateUpdated instanceof Date, true);

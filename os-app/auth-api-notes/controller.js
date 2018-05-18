@@ -21,6 +21,32 @@ exports.OLSKControllerRoutes = function() {
 	};
 };
 
+//_ WKCAPISettingsLastRepoIDWithClientAndCallback
+
+exports.WKCAPISettingsLastRepoIDWithClientAndCallback = function(client, callback) {
+	if (!client) {
+		throw new Error('WKCErrorInvalidInput');
+	}
+
+	if (typeof callback !== 'function') {
+		throw new Error('WKCErrorInvalidInput');
+	}
+
+	return client.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_settings').findOne({
+		WKCSettingsKey: 'WKCSettingsLastRepoID',
+	}, function(err, result) {
+		if (err) {
+			throw new Error('WKCErrorDatabaseFind');
+		}
+
+		if (!result) {
+			return callback(0);
+		}
+
+		return callback(result.WKCSettingsValue);
+	});
+};
+
 //_ WKCActionAPINotesCreate
 
 exports.WKCActionAPINotesCreate = function(req, res, next) {
@@ -31,14 +57,34 @@ exports.WKCActionAPINotesCreate = function(req, res, next) {
 	}
 
 	var noteDate = new Date();
-	return req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_notes').insertOne(Object.assign(inputData, {
-		WKCNoteDateCreated: noteDate,
-		WKCNoteDateUpdated: noteDate,
-	}), function(err, result) {
-		if (err) {
-			throw new Error('WKCErrorDatabaseCreate');
-		}
+	var client = req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient;
 
-		return res.json(result.ops.pop());
+	return exports.WKCAPISettingsLastRepoIDWithClientAndCallback(client, function(lastRepoID) {
+		var newRepoID = lastRepoID + 1;
+
+		return client.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_notes').insertOne(Object.assign(inputData, {
+			WKCNoteID: newRepoID,
+			WKCNoteDateCreated: noteDate,
+			WKCNoteDateUpdated: noteDate,
+		}), function(err, result) {
+			if (err) {
+				throw new Error('WKCErrorDatabaseCreate');
+			}
+
+			return client.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_settings').findOneAndUpdate({
+				WKCSettingsKey: 'WKCSettingsLastRepoID',
+			}, {
+				WKCSettingsKey: 'WKCSettingsLastRepoID',
+				WKCSettingsValue: newRepoID,
+			}, {
+				upsert: true,
+			}, function(err) {
+				if (err) {
+					throw err;
+				}
+
+				return res.json(result.ops.pop());
+			});
+		});
 	});
 };
