@@ -132,8 +132,8 @@ describe('Connection', function testConnection() {
 			apiNotesController.WKCActionAPINotesCreate(fakeRequest(), WKCFakeResponseAsync(function() {
 				apiNotesController.WKCAPISettingsLastRepoIDWithClientAndCallback(mongoClient, function(lastRepoID) {
 					assert.strictEqual(lastRepoID, 1);
+					done();
 				});
-				done();
 			}));
 		});
 
