@@ -68,5 +68,7 @@ exports.WKCAPIMiddlewareErrorHandler = function(err, req, res, next) {
 };
 
 exports.WKCActionAPIRoot = function(req, res, next) {
-	return res.text('Successfully authenticated');
+	return res.json({
+		WKCAPIResponse: 'Successfully authenticated',
+	});
 };

@@ -13,9 +13,6 @@ var WKCAPIFakeResponse = function() {
 		json: function(e) {
 			return e;
 		},
-		text: function(e) {
-			return e;
-		},
 	};
 };
 
@@ -131,7 +128,9 @@ describe('WKCActionAPIRoot', function testWKCActionAPIRoot() {
 	};
 
 	it('returns confirmation authenticated', function() {
-		assert.deepEqual(apiController.WKCActionAPIRoot(fakeRequest(), WKCAPIFakeResponse()), 'Successfully authenticated');
+		assert.deepEqual(apiController.WKCActionAPIRoot(fakeRequest(), WKCAPIFakeResponse()), {
+			WKCAPIResponse: 'Successfully authenticated',
+		});
 	});
 
 });
