@@ -12,7 +12,7 @@ locals.OLSKPageAssets = [
 <button id="WKCNotesAddButton"><%= OLSKLocalized('WKCNotesAddButtonText') %></button>
 <script type="text/javascript">
 	d3.select('#WKCNotesAddButton').on('click', function() {
-		d3.json('<%= OLSKCanonicalFor('WKCRouteAPINotesAdd') %>', {
+		d3.json('<%= OLSKCanonicalFor('WKCRouteAPINotesCreate') %>', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'

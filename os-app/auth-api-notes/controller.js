@@ -10,7 +10,7 @@ var modelLibrary = require('./model');
 
 exports.OLSKControllerRoutes = function() {
 	return {
-		WKCRouteAPINotesAdd: {
+		WKCRouteAPINotesCreate: {
 			OLSKRoutePath: '/api/notes',
 			OLSKRouteMethod: 'post',
 			OLSKRouteFunction: exports.WKCActionAPINotesCreate,
