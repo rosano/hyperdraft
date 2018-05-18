@@ -111,8 +111,6 @@ exports.WKCActionAPINotesRead = function(req, res, next) {
 			return next(new (class WKCAPIClientError extends Error {})('WKCAPIClientErrorNotFound'));
 		}
 
-		console.log(result);
-
 		return res.json(result);
 	});
 };

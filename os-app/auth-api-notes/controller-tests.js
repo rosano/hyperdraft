@@ -75,23 +75,15 @@ describe('Connection', function testConnection() {
 		}, inputData);
 	};
 
+	var WKCFakeResponseAsync = function(callback) {
+		return {
+			json: function(inputData) {
+				return callback(inputData);
+			},
+		};
+	};
+
 	describe('WKCAPISettingsLastRepoIDWithClientAndCallback', function testWKCAPISettingsLastRepoIDWithClientAndCallback() {
-
-		var fakeRequest = function() {
-			return WKCFakeRequest({
-				body: {
-					WKCNoteBody: 'alpha',
-				},
-			});
-		};
-
-		var fakeResponseAsync = function(callback) {
-			return {
-				json: function(inputData) {
-					return callback(inputData);
-				},
-			};
-		};
 
 		it('throws error if param1 empty', function() {
 			assert.throws(function() {
@@ -112,8 +104,16 @@ describe('Connection', function testConnection() {
 			});
 		});
 
+		var fakeRequest = function() {
+			return WKCFakeRequest({
+				body: {
+					WKCNoteBody: 'alpha',
+				},
+			});
+		};
+
 		it('returns 1 if created one item', function(done) {
-			apiNotesController.WKCActionAPINotesCreate(fakeRequest(), fakeResponseAsync(function() {
+			apiNotesController.WKCActionAPINotesCreate(fakeRequest(), WKCFakeResponseAsync(function() {
 				apiNotesController.WKCAPISettingsLastRepoIDWithClientAndCallback(mongoClient, function(lastRepoID) {
 					assert.strictEqual(lastRepoID, 1);
 				});
@@ -122,8 +122,8 @@ describe('Connection', function testConnection() {
 		});
 
 		it('returns 2 if created two items', function(done) {
-			apiNotesController.WKCActionAPINotesCreate(fakeRequest(), fakeResponseAsync(function() {
-				apiNotesController.WKCActionAPINotesCreate(fakeRequest(), fakeResponseAsync(function() {
+			apiNotesController.WKCActionAPINotesCreate(fakeRequest(), WKCFakeResponseAsync(function() {
+				apiNotesController.WKCActionAPINotesCreate(fakeRequest(), WKCFakeResponseAsync(function() {
 					apiNotesController.WKCAPISettingsLastRepoIDWithClientAndCallback(mongoClient, function(lastRepoID) {
 						assert.strictEqual(lastRepoID, 2);
 					});
@@ -150,14 +150,6 @@ describe('Connection', function testConnection() {
 			};
 		};
 
-		var fakeResponseAsync = function(callback) {
-			return {
-				json: function(inputData) {
-					return callback(inputData);
-				},
-			};
-		};
-
 		it('returns WKCErrors if no input', function() {
 			assert.deepEqual(apiNotesController.WKCActionAPINotesCreate(fakeRequest(), fakeResponse()), {
 				WKCErrors: {
@@ -171,7 +163,7 @@ describe('Connection', function testConnection() {
 		it('returns created object if valid noteObject', function(done) {
 			apiNotesController.WKCActionAPINotesCreate(fakeRequest({
 				WKCNoteBody: 'alpha',
-			}), fakeResponseAsync(function(responseJSON) {
+			}), WKCFakeResponseAsync(function(responseJSON) {
 				assert.strictEqual(responseJSON.WKCNoteID, 1);
 				assert.strictEqual(responseJSON.WKCNoteBody, 'alpha');
 				assert.strictEqual(responseJSON.WKCNoteDateCreated instanceof Date, true);
@@ -184,14 +176,6 @@ describe('Connection', function testConnection() {
 
 	describe('WKCActionAPINotesRead', function testWKCActionAPINotesRead() {
 
-		var fakeResponseAsync = function(callback) {
-			return {
-				json: function(inputData) {
-					return callback(inputData);
-				},
-			};
-		};
-
 		var fakeNext = function(inputData) {
 			return inputData;
 		};
@@ -201,7 +185,7 @@ describe('Connection', function testConnection() {
 				params: {
 					wkc_note_id: 'alpha',
 				}
-			}), fakeResponseAsync(), fakeNext(function(inputData) {
+			}), WKCFakeResponseAsync(), fakeNext(function(inputData) {
 				assert.deepEqual(inputData, new (class WKCAPIClientError extends Error {})('WKCAPIClientErrorNotFound'));
 				done();
 			}));
@@ -212,12 +196,12 @@ describe('Connection', function testConnection() {
 				body: {
 					WKCNoteBody: 'alpha',
 				}
-			}), fakeResponseAsync(function(responseJSON) {
+			}), WKCFakeResponseAsync(function(responseJSON) {
 				apiNotesController.WKCActionAPINotesRead(WKCFakeRequest({
 					params: {
 						wkc_note_id: responseJSON.WKCNoteID,
 					}
-				}), fakeResponseAsync(function(responseJSON) {
+				}), WKCFakeResponseAsync(function(responseJSON) {
 					assert.strictEqual(responseJSON.WKCNoteID, 1);
 					assert.strictEqual(responseJSON.WKCNoteBody, 'alpha');
 					assert.strictEqual(responseJSON.WKCNoteDateCreated instanceof Date, true);
