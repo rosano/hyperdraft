@@ -108,7 +108,7 @@ describe('WKCAPIMiddlewareErrorHandler', function testWKCAPIMiddlewareErrorHandl
 
 	it('returns next(error) for Error', function() {
 		var item = new Error('alpha');
-		assert.deepEqual(apiController.WKCAPIMiddlewareErrorHandler(item, {}, WKCAPIFakeResponse(), function (inputData) {
+		assert.deepEqual(apiController.WKCAPIMiddlewareErrorHandler(item, {}, WKCAPIFakeResponse(), function(inputData) {
 			return inputData;
 		}), item);
 	});
