@@ -96,3 +96,23 @@ exports.WKCActionAPINotesCreate = function(req, res, next) {
 		});
 	});
 };
+
+//_ WKCActionAPINotesRead
+
+exports.WKCActionAPINotesRead = function(req, res, next) {
+	return req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_notes').findOne({
+		WKCNoteID: req.params.wkc_note_id,
+	}, function(err, result) {
+		if (err) {
+			throw new Error('WKCErrorDatabaseFindOne');
+		}
+
+		if (!result) {
+			return next(new (class WKCAPIClientError extends Error {})('WKCAPIClientErrorNotFound'));
+		}
+
+		console.log(result);
+
+		return res.json(result);
+	});
+};

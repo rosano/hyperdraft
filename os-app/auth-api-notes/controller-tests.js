@@ -62,22 +62,27 @@ describe('Connection', function testConnection() {
 		mongoClient.db(process.env.WKC_SHARED_DATABASE_NAME).dropDatabase();
 	});
 
+	var WKCFakeRequest = function(inputData = {}) {
+		return Object.assign({
+			OLSKSharedConnectionFor: function() {
+				return {
+					OLSKConnectionClient: mongoClient,
+				};
+			},
+			headers: {
+				'x-client-key': process.env.WKC_INSECURE_API_ACCESS_TOKEN,
+			},
+		}, inputData);
+	};
+
 	describe('WKCAPISettingsLastRepoIDWithClientAndCallback', function testWKCAPISettingsLastRepoIDWithClientAndCallback() {
 
 		var fakeRequest = function() {
-			return {
-				OLSKSharedConnectionFor: function() {
-					return {
-						OLSKConnectionClient: mongoClient,
-					};
-				},
+			return WKCFakeRequest({
 				body: {
 					WKCNoteBody: 'alpha',
 				},
-				headers: {
-					'x-client-key': process.env.WKC_INSECURE_API_ACCESS_TOKEN,
-				},
-			};
+			});
 		};
 
 		var fakeResponseAsync = function(callback) {
@@ -132,17 +137,9 @@ describe('Connection', function testConnection() {
 	describe('WKCActionAPINotesCreate', function testWKCActionAPINotesCreate() {
 
 		var fakeRequest = function(inputData = {}) {
-			return {
-				OLSKSharedConnectionFor: function() {
-					return {
-						OLSKConnectionClient: mongoClient,
-					};
-				},
+			return WKCFakeRequest({
 				body: Object.assign({}, inputData),
-				headers: {
-					'x-client-key': process.env.WKC_INSECURE_API_ACCESS_TOKEN,
-				},
-			};
+			});
 		};
 
 		var fakeResponse = function() {
@@ -180,6 +177,53 @@ describe('Connection', function testConnection() {
 				assert.strictEqual(responseJSON.WKCNoteDateCreated instanceof Date, true);
 				assert.strictEqual(responseJSON.WKCNoteDateUpdated instanceof Date, true);
 				done();
+			}));
+		});
+
+	});
+
+	describe('WKCActionAPINotesRead', function testWKCActionAPINotesRead() {
+
+		var fakeResponseAsync = function(callback) {
+			return {
+				json: function(inputData) {
+					return callback(inputData);
+				},
+			};
+		};
+
+		var fakeNext = function(inputData) {
+			return inputData;
+		};
+
+		it('returns next(WKCAPIClientError) if wkc_note_id does not exist', function(done) {
+			apiNotesController.WKCActionAPINotesRead(WKCFakeRequest({
+				params: {
+					wkc_note_id: 'alpha',
+				}
+			}), fakeResponseAsync(), fakeNext(function(inputData) {
+				assert.deepEqual(inputData, new (class WKCAPIClientError extends Error {})('WKCAPIClientErrorNotFound'));
+				done();
+			}));
+		});
+
+		it('returns noteObject', function(done) {
+			apiNotesController.WKCActionAPINotesCreate(WKCFakeRequest({
+				body: {
+					WKCNoteBody: 'alpha',
+				}
+			}), fakeResponseAsync(function(responseJSON) {
+				apiNotesController.WKCActionAPINotesRead(WKCFakeRequest({
+					params: {
+						wkc_note_id: responseJSON.WKCNoteID,
+					}
+				}), fakeResponseAsync(function(responseJSON) {
+					assert.strictEqual(responseJSON.WKCNoteID, 1);
+					assert.strictEqual(responseJSON.WKCNoteBody, 'alpha');
+					assert.strictEqual(responseJSON.WKCNoteDateCreated instanceof Date, true);
+					assert.strictEqual(responseJSON.WKCNoteDateUpdated instanceof Date, true);
+					done();
+				}));
 			}));
 		});
 
