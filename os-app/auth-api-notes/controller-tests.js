@@ -91,6 +91,14 @@ describe('Connection', function testConnection() {
 		}, inputData);
 	};
 
+	var WKCFakeResponseSync = function() {
+		return {
+			json: function(inputData) {
+				return inputData;
+			},
+		};
+	};
+
 	var WKCFakeResponseAsync = function(callback) {
 		return {
 			json: function(inputData) {
@@ -164,16 +172,8 @@ describe('Connection', function testConnection() {
 			});
 		};
 
-		var fakeResponse = function() {
-			return {
-				json: function(inputData) {
-					return inputData;
-				},
-			};
-		};
-
 		it('returns WKCErrors if not valid noteObject', function() {
-			assert.deepEqual(apiNotesController.WKCActionAPINotesCreate(fakeRequest(), fakeResponse()).WKCErrors, {
+			assert.deepEqual(apiNotesController.WKCActionAPINotesCreate(fakeRequest(), WKCFakeResponseSync()).WKCErrors, {
 				WKCNoteBody: [
 					'WKCErrorNotString',
 				],
@@ -240,18 +240,10 @@ describe('Connection', function testConnection() {
 			});
 		};
 
-		var fakeResponse = function() {
-			return {
-				json: function(inputData) {
-					return inputData;
-				},
-			};
-		};
-
 		it('returns next(WKCAPIClientError) if wkc_note_id does not exist', function(done) {
 			apiNotesController.WKCActionAPINotesUpdate(fakeRequest('alpha', {
 				WKCNoteBody: 'bravo',
-			}), fakeResponse(), function(inputData) {
+			}), WKCFakeResponseSync(), function(inputData) {
 				assert.deepEqual(inputData, new (class WKCAPIClientError extends Error {})('WKCAPIClientErrorNotFound'));
 				done();
 			});
@@ -263,7 +255,7 @@ describe('Connection', function testConnection() {
 			}), WKCFakeResponseAsync(function(responseJSON) {
 				assert.deepEqual(apiNotesController.WKCActionAPINotesUpdate(fakeRequest(responseJSON.WKCNoteID, Object.assign(responseJSON, {
 					WKCNoteBody: null,
-				})), fakeResponse()).WKCErrors, {
+				})), WKCFakeResponseSync()).WKCErrors, {
 					WKCNoteBody: [
 						'WKCErrorNotString',
 					],
