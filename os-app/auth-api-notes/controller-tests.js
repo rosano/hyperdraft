@@ -291,4 +291,40 @@ describe('Connection', function testConnection() {
 
 	});
 
+	describe('WKCActionAPINotesDelete', function testWKCActionAPINotesDelete() {
+
+		var fakeNext = function(inputData) {
+			return inputData;
+		};
+
+		it('returns next(WKCAPIClientError) if wkc_note_id does not exist', function(done) {
+			apiNotesController.WKCActionAPINotesDelete(WKCFakeRequest({
+				params: {
+					wkc_note_id: 'alpha',
+				}
+			}), WKCFakeResponseAsync(), fakeNext(function(inputData) {
+				assert.deepEqual(inputData, new (class WKCAPIClientError extends Error {})('WKCAPIClientErrorNotFound'));
+				done();
+			}));
+		});
+
+		it('returns true', function(done) {
+			apiNotesController.WKCActionAPINotesCreate(WKCFakeRequest({
+				body: {
+					WKCNoteBody: 'alpha',
+				}
+			}), WKCFakeResponseAsync(function(responseJSON) {
+				apiNotesController.WKCActionAPINotesDelete(WKCFakeRequest({
+					params: {
+						wkc_note_id: responseJSON.WKCNoteID,
+					}
+				}), WKCFakeResponseAsync(function(responseJSON) {
+					assert.strictEqual(responseJSON.WKCAPIResponse, true);
+					done();
+				}));
+			}));
+		});
+
+	});
+
 });
