@@ -7,7 +7,7 @@
 var assert = require('assert');
 
 var loginController = require('./controller');
-var sharedController = require('../_shared/controller');
+var sharedController = require('../../_shared/controller');
 
 describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 
