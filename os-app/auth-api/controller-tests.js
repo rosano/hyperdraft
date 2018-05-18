@@ -8,6 +8,12 @@ var assert = require('assert');
 
 var apiController = require('./controller');
 
+var WKCAPIFakeRequest = function(inputData = {}) {
+	return {
+		headers: Object.assign({}, inputData),
+	};
+};
+
 var WKCAPIFakeResponse = function() {
 	return {
 		json: function(e) {
@@ -46,46 +52,40 @@ describe('OLSKControllerSharedMiddlewares', function testOLSKControllerSharedMid
 
 describe('WKCAPIMiddlewareAuthenticate', function testWKCAPIMiddlewareAuthenticate() {
 
-	var fakeAuthRequest = function(inputData = {}) {
-		return {
-			headers: Object.assign({}, inputData),
-		};
-	};
-
 	var fakeNext = function(inputData) {
 		return typeof inputData === 'undefined' ? 'RETURNED_UNDEFINED' : inputData;
 	};
 
 	it('returns next(WKCAPIClientError) without header', function() {
-		assert.deepEqual(apiController.WKCAPIMiddlewareAuthenticate(fakeAuthRequest(), WKCAPIFakeResponse(), fakeNext), new apiController.WKCAPIClientError('WKCAPIClientErrorTokenNotSet'));
+		assert.deepEqual(apiController.WKCAPIMiddlewareAuthenticate(WKCAPIFakeRequest(), WKCAPIFakeResponse(), fakeNext), new apiController.WKCAPIClientError('WKCAPIClientErrorTokenNotSet'));
 	});
 
 	it('returns next(WKCAPIClientError) without token', function() {
-		assert.deepEqual(apiController.WKCAPIMiddlewareAuthenticate(fakeAuthRequest({
+		assert.deepEqual(apiController.WKCAPIMiddlewareAuthenticate(WKCAPIFakeRequest({
 			'x-client-key': null,
 		}), WKCAPIFakeResponse(), fakeNext), new apiController.WKCAPIClientError('WKCAPIClientErrorTokenNotSet'));
 	});
 
 	it('returns next(WKCAPIClientError) with blank token', function() {
-		assert.deepEqual(apiController.WKCAPIMiddlewareAuthenticate(fakeAuthRequest({
+		assert.deepEqual(apiController.WKCAPIMiddlewareAuthenticate(WKCAPIFakeRequest({
 			'x-client-key': '',
 		}), WKCAPIFakeResponse(), fakeNext), new apiController.WKCAPIClientError('WKCAPIClientErrorTokenNotSet'));
 	});
 
 	it('returns next(WKCAPIClientError) with whitespace token', function() {
-		assert.deepEqual(apiController.WKCAPIMiddlewareAuthenticate(fakeAuthRequest({
+		assert.deepEqual(apiController.WKCAPIMiddlewareAuthenticate(WKCAPIFakeRequest({
 			'x-client-key': ' ',
 		}), WKCAPIFakeResponse(), fakeNext), new apiController.WKCAPIClientError('WKCAPIClientErrorTokenNotSet'));
 	});
 
 	it('returns next(WKCAPIClientError) with wrong token', function() {
-		assert.deepEqual(apiController.WKCAPIMiddlewareAuthenticate(fakeAuthRequest({
+		assert.deepEqual(apiController.WKCAPIMiddlewareAuthenticate(WKCAPIFakeRequest({
 			'x-client-key': 'password',
 		}), WKCAPIFakeResponse(), fakeNext), new apiController.WKCAPIClientError('WKCAPIClientErrorTokenNotValid'));
 	});
 
 	it('returns next(undefined) with correct token', function() {
-		assert.strictEqual(apiController.WKCAPIMiddlewareAuthenticate(fakeAuthRequest({
+		assert.strictEqual(apiController.WKCAPIMiddlewareAuthenticate(WKCAPIFakeRequest({
 			'x-client-key': process.env.WKC_INSECURE_API_ACCESS_TOKEN,
 		}), WKCAPIFakeResponse(), fakeNext), 'RETURNED_UNDEFINED');
 	});
@@ -93,10 +93,6 @@ describe('WKCAPIMiddlewareAuthenticate', function testWKCAPIMiddlewareAuthentica
 });
 
 describe('WKCAPIMiddlewareErrorHandler', function testWKCAPIMiddlewareErrorHandler() {
-
-	var fakeNext = function(inputData) {
-		return inputData;
-	};
 
 	it('returns WKCAPISystemError for WKCAPISystemError', function() {
 		assert.deepEqual(apiController.WKCAPIMiddlewareErrorHandler(new apiController.WKCAPISystemError('alpha'), {}, WKCAPIFakeResponse()), {
@@ -112,23 +108,19 @@ describe('WKCAPIMiddlewareErrorHandler', function testWKCAPIMiddlewareErrorHandl
 
 	it('returns next(error) for Error', function() {
 		var item = new Error('alpha');
-		assert.deepEqual(apiController.WKCAPIMiddlewareErrorHandler(item, {}, WKCAPIFakeResponse(), fakeNext), item);
+		assert.deepEqual(apiController.WKCAPIMiddlewareErrorHandler(item, {}, WKCAPIFakeResponse(), function (inputData) {
+			return inputData;
+		}), item);
 	});
 
 });
 
 describe('WKCActionAPIRoot', function testWKCActionAPIRoot() {
 
-	var fakeRequest = function() {
-		return {
-			headers: {
-				'x-client-key': process.env.WKC_INSECURE_API_ACCESS_TOKEN,
-			},
-		};
-	};
-
 	it('returns confirmation authenticated', function() {
-		assert.deepEqual(apiController.WKCActionAPIRoot(fakeRequest(), WKCAPIFakeResponse()), {
+		assert.deepEqual(apiController.WKCActionAPIRoot(WKCAPIFakeRequest({
+			'x-client-key': process.env.WKC_INSECURE_API_ACCESS_TOKEN,
+		}), WKCAPIFakeResponse()), {
 			WKCAPIResponse: 'Successfully authenticated',
 		});
 	});
