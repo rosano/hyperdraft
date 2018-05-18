@@ -34,6 +34,14 @@ exports.OLSKControllerRoutes = function() {
 				'WKCSharedMiddlewareAPIAuthenticate',
 			],
 		},
+		WKCRouteAPINotesDelete: {
+			OLSKRoutePath: '/api/notes/:wkc_note_id',
+			OLSKRouteMethod: 'delete',
+			OLSKRouteFunction: exports.WKCActionAPINotesDelete,
+			OLSKRouteMiddlewares: [
+				'WKCSharedMiddlewareAPIAuthenticate',
+			],
+		},
 	};
 };
 
