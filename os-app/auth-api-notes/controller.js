@@ -122,3 +122,27 @@ exports.WKCActionAPINotesRead = function(req, res, next) {
 		return res.json(result);
 	});
 };
+
+//_ WKCActionAPINotesUpdate
+
+exports.WKCActionAPINotesUpdate = function(req, res, next) {
+	var inputData = req.body;
+
+	if (!modelLibrary.WKCModelInputDataIsNotesObject(inputData)) {
+		return res.json(inputData);
+	}
+
+	return req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_notes').findOneAndUpdate({
+		WKCNoteID: req.params.wkc_note_id,
+	}, inputData, function(err, result) {
+		if (err) {
+			throw new Error('WKCErrorDatabaseFindOne');
+		}
+
+		if (!result.value) {
+			return next(new (class WKCAPIClientError extends Error {})('WKCAPIClientErrorNotFound'));
+		}
+
+		return res.json(inputData);
+	});
+};

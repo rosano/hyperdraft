@@ -158,13 +158,11 @@ describe('Connection', function testConnection() {
 			};
 		};
 
-		it('returns WKCErrors if no input', function() {
-			assert.deepEqual(apiNotesController.WKCActionAPINotesCreate(fakeRequest(), fakeResponse()), {
-				WKCErrors: {
-					WKCNoteBody: [
-						'WKCErrorNotString',
-					],
-				},
+		it('returns WKCErrors if not valid noteObject', function() {
+			assert.deepEqual(apiNotesController.WKCActionAPINotesCreate(fakeRequest(), fakeResponse()).WKCErrors, {
+				WKCNoteBody: [
+					'WKCErrorNotString',
+				],
 			});
 		});
 
@@ -214,6 +212,70 @@ describe('Connection', function testConnection() {
 					assert.strictEqual(responseJSON.WKCNoteBody, 'alpha');
 					assert.strictEqual(responseJSON.WKCNoteDateCreated instanceof Date, true);
 					assert.strictEqual(responseJSON.WKCNoteDateUpdated instanceof Date, true);
+					done();
+				}));
+			}));
+		});
+
+	});
+
+	describe('WKCActionAPINotesUpdate', function testWKCActionAPINotesUpdate() {
+
+		var fakeRequest = function(id, body) {
+			return WKCFakeRequest({
+				params: {
+					wkc_note_id: id,
+				},
+				body: Object.assign({}, body),
+			});
+		};
+
+		var fakeResponse = function() {
+			return {
+				json: function(inputData) {
+					return inputData;
+				},
+			};
+		};
+
+		var fakeNext = function(inputData) {
+			return inputData;
+		};
+
+		it('returns next(WKCAPIClientError) if wkc_note_id does not exist', function(done) {
+			apiNotesController.WKCActionAPINotesUpdate(fakeRequest('alpha', {
+				WKCNoteBody: 'bravo',
+			}), fakeResponse(), fakeNext(function(inputData) {
+				assert.deepEqual(inputData, new (class WKCAPIClientError extends Error {})('WKCAPIClientErrorNotFound'));
+				done();
+			}));
+		});
+
+		it('returns WKCErrors if not valid noteObject', function(done) {
+			apiNotesController.WKCActionAPINotesCreate(fakeRequest({
+				WKCNoteBody: 'alpha',
+			}), WKCFakeResponseAsync(function(responseJSON) {
+				assert.deepEqual(apiNotesController.WKCActionAPINotesUpdate(fakeRequest(responseJSON.WKCNoteID, Object.assign(responseJSON, {
+					WKCNoteBody: null,
+				})), fakeResponse()).WKCErrors, {
+					WKCNoteBody: [
+						'WKCErrorNotString',
+					],
+				});
+				done();
+			}));
+		});
+
+		it('returns updated object if valid noteObject', function(done) {
+			apiNotesController.WKCActionAPINotesCreate(WKCFakeRequest({
+				body: {
+					WKCNoteBody: 'alpha',
+				},
+			}), WKCFakeResponseAsync(function(responseJSON) {
+				apiNotesController.WKCActionAPINotesUpdate(fakeRequest(responseJSON.WKCNoteID, Object.assign(responseJSON, {
+					WKCNoteBody: 'bravo',
+				})), WKCFakeResponseAsync(function(responseJSON) {
+					assert.strictEqual(responseJSON.WKCNoteBody, 'bravo');
 					done();
 				}));
 			}));
