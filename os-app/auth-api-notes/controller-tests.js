@@ -6,6 +6,25 @@
 
 var assert = require('assert');
 
+var apiNotesController = require('./controller');
+
+describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
+
+	it('returns route objects', function() {
+		assert.deepEqual(apiNotesController.OLSKControllerRoutes(), {
+			WKCRouteAPINotesAdd: {
+				OLSKRoutePath: '/api/notes',
+				OLSKRouteMethod: 'post',
+				OLSKRouteFunction: apiNotesController.WKCActionAPINotesCreate,
+				OLSKRouteMiddlewares: [
+					'WKCSharedMiddlewareAPIAuthenticate',
+				],
+			},
+		});
+	});
+
+});
+
 describe('Connection', function testConnection() {
 
 	var mongodbPackage = require('mongodb');
@@ -34,26 +53,7 @@ describe('Connection', function testConnection() {
 	beforeEach(function() {
 		mongoClient.db(process.env.WKC_SHARED_DATABASE_NAME).dropDatabase();
 	});
-
-	var apiNotesController = require('./controller');
-
-	describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
-
-		it('returns route objects', function() {
-			assert.deepEqual(apiNotesController.OLSKControllerRoutes(), {
-				WKCRouteAPINotesAdd: {
-					OLSKRoutePath: '/api/notes',
-					OLSKRouteMethod: 'post',
-					OLSKRouteFunction: apiNotesController.WKCActionAPINotesCreate,
-					OLSKRouteMiddlewares: [
-						'WKCSharedMiddlewareAPIAuthenticate',
-					],
-				},
-			});
-		});
-
-	});
-
+	
 	describe('WKCActionAPINotesCreate', function testWKCActionAPINotesCreate() {
 
 		var fakeRequest = function(inputData = {}) {
