@@ -20,6 +20,14 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 					'WKCSharedMiddlewareAPIAuthenticate',
 				],
 			},
+			WKCRouteAPINotesRead: {
+				OLSKRoutePath: '/api/notes/:wkc_note_id',
+				OLSKRouteMethod: 'get',
+				OLSKRouteFunction: apiNotesController.WKCActionAPINotesRead,
+				OLSKRouteMiddlewares: [
+					'WKCSharedMiddlewareAPIAuthenticate',
+				],
+			},
 		});
 	});
 
