@@ -137,13 +137,19 @@ describe('Connection', function testConnection() {
 			}));
 		});
 
-		it('returns 2 if created two items', function(done) {
+		it('returns 2 if created two items and deleted one', function(done) {
 			apiNotesController.WKCActionAPINotesCreate(fakeRequest(), WKCFakeResponseAsync(function() {
-				apiNotesController.WKCActionAPINotesCreate(fakeRequest(), WKCFakeResponseAsync(function() {
-					apiNotesController.WKCAPISettingsLastRepoIDWithClientAndCallback(mongoClient, function(lastRepoID) {
-						assert.strictEqual(lastRepoID, 2);
-					});
-					done();
+				apiNotesController.WKCActionAPINotesCreate(fakeRequest(), WKCFakeResponseAsync(function(responseJSON) {
+					apiNotesController.WKCActionAPINotesDelete(WKCFakeRequest({
+						params: {
+							wkc_note_id: responseJSON.WKCNoteID,
+						},
+					}), WKCFakeResponseAsync(function() {
+						apiNotesController.WKCAPISettingsLastRepoIDWithClientAndCallback(mongoClient, function(lastRepoID) {
+							assert.strictEqual(lastRepoID, 2);
+							done();
+						});
+					}))
 				}));
 			}));
 		});
