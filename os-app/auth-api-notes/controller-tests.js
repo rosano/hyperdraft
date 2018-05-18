@@ -190,19 +190,15 @@ describe('Connection', function testConnection() {
 
 	describe('WKCActionAPINotesRead', function testWKCActionAPINotesRead() {
 
-		var fakeNext = function(inputData) {
-			return inputData;
-		};
-
 		it('returns next(WKCAPIClientError) if wkc_note_id does not exist', function(done) {
 			apiNotesController.WKCActionAPINotesRead(WKCFakeRequest({
 				params: {
 					wkc_note_id: 'alpha',
 				}
-			}), WKCFakeResponseAsync(), fakeNext(function(inputData) {
+			}), WKCFakeResponseAsync(), function(inputData) {
 				assert.deepEqual(inputData, new (class WKCAPIClientError extends Error {})('WKCAPIClientErrorNotFound'));
 				done();
-			}));
+			});
 		});
 
 		it('returns noteObject', function(done) {
@@ -246,17 +242,13 @@ describe('Connection', function testConnection() {
 			};
 		};
 
-		var fakeNext = function(inputData) {
-			return inputData;
-		};
-
 		it('returns next(WKCAPIClientError) if wkc_note_id does not exist', function(done) {
 			apiNotesController.WKCActionAPINotesUpdate(fakeRequest('alpha', {
 				WKCNoteBody: 'bravo',
-			}), fakeResponse(), fakeNext(function(inputData) {
+			}), fakeResponse(), function(inputData) {
 				assert.deepEqual(inputData, new (class WKCAPIClientError extends Error {})('WKCAPIClientErrorNotFound'));
 				done();
-			}));
+			});
 		});
 
 		it('returns WKCErrors if not valid noteObject', function(done) {
@@ -293,19 +285,15 @@ describe('Connection', function testConnection() {
 
 	describe('WKCActionAPINotesDelete', function testWKCActionAPINotesDelete() {
 
-		var fakeNext = function(inputData) {
-			return inputData;
-		};
-
 		it('returns next(WKCAPIClientError) if wkc_note_id does not exist', function(done) {
 			apiNotesController.WKCActionAPINotesDelete(WKCFakeRequest({
 				params: {
 					wkc_note_id: 'alpha',
 				}
-			}), WKCFakeResponseAsync(), fakeNext(function(inputData) {
+			}), WKCFakeResponseAsync(), function(inputData) {
 				assert.deepEqual(inputData, new (class WKCAPIClientError extends Error {})('WKCAPIClientErrorNotFound'));
 				done();
-			}));
+			});
 		});
 
 		it('returns true', function(done) {
