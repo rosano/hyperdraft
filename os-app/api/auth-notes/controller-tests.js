@@ -202,7 +202,7 @@ describe('Connection', function testConnection() {
 					wkc_note_id: 'alpha',
 				}
 			}), WKCFakeResponseAsync(), function(inputData) {
-				assert.deepEqual(inputData, new(class WKCAPIClientError extends Error {})('WKCAPIClientErrorNotFound'));
+				assert.deepEqual(inputData, new Error('WKCAPIClientErrorNotFound'));
 				done();
 			});
 		});
@@ -244,7 +244,7 @@ describe('Connection', function testConnection() {
 			apiNotesController.WKCActionAPINotesUpdate(fakeRequest('alpha', {
 				WKCNoteBody: 'bravo',
 			}), WKCFakeResponseSync(), function(inputData) {
-				assert.deepEqual(inputData, new(class WKCAPIClientError extends Error {})('WKCAPIClientErrorNotFound'));
+				assert.deepEqual(inputData, new Error('WKCAPIClientErrorNotFound'));
 				done();
 			});
 		});
@@ -289,7 +289,7 @@ describe('Connection', function testConnection() {
 					wkc_note_id: 'alpha',
 				}
 			}), WKCFakeResponseAsync(), function(inputData) {
-				assert.deepEqual(inputData, new(class WKCAPIClientError extends Error {})('WKCAPIClientErrorNotFound'));
+				assert.deepEqual(inputData, new Error('WKCAPIClientErrorNotFound'));
 				done();
 			});
 		});

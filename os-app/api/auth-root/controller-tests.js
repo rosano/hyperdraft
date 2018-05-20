@@ -57,31 +57,31 @@ describe('WKCAPIMiddlewareAuthenticate', function testWKCAPIMiddlewareAuthentica
 	};
 
 	it('returns next(WKCAPIClientError) without header', function() {
-		assert.deepEqual(apiController.WKCAPIMiddlewareAuthenticate(WKCAPIFakeRequest(), WKCAPIFakeResponse(), fakeNext), new apiController.WKCAPIClientError('WKCAPIClientErrorTokenNotSet'));
+		assert.deepEqual(apiController.WKCAPIMiddlewareAuthenticate(WKCAPIFakeRequest(), WKCAPIFakeResponse(), fakeNext), new Error('WKCAPIClientErrorTokenNotSet'));
 	});
 
 	it('returns next(WKCAPIClientError) without token', function() {
 		assert.deepEqual(apiController.WKCAPIMiddlewareAuthenticate(WKCAPIFakeRequest({
 			'x-client-key': null,
-		}), WKCAPIFakeResponse(), fakeNext), new apiController.WKCAPIClientError('WKCAPIClientErrorTokenNotSet'));
+		}), WKCAPIFakeResponse(), fakeNext), new Error('WKCAPIClientErrorTokenNotSet'));
 	});
 
 	it('returns next(WKCAPIClientError) with blank token', function() {
 		assert.deepEqual(apiController.WKCAPIMiddlewareAuthenticate(WKCAPIFakeRequest({
 			'x-client-key': '',
-		}), WKCAPIFakeResponse(), fakeNext), new apiController.WKCAPIClientError('WKCAPIClientErrorTokenNotSet'));
+		}), WKCAPIFakeResponse(), fakeNext), new Error('WKCAPIClientErrorTokenNotSet'));
 	});
 
 	it('returns next(WKCAPIClientError) with whitespace token', function() {
 		assert.deepEqual(apiController.WKCAPIMiddlewareAuthenticate(WKCAPIFakeRequest({
 			'x-client-key': ' ',
-		}), WKCAPIFakeResponse(), fakeNext), new apiController.WKCAPIClientError('WKCAPIClientErrorTokenNotSet'));
+		}), WKCAPIFakeResponse(), fakeNext), new Error('WKCAPIClientErrorTokenNotSet'));
 	});
 
 	it('returns next(WKCAPIClientError) with wrong token', function() {
 		assert.deepEqual(apiController.WKCAPIMiddlewareAuthenticate(WKCAPIFakeRequest({
 			'x-client-key': 'password',
-		}), WKCAPIFakeResponse(), fakeNext), new apiController.WKCAPIClientError('WKCAPIClientErrorTokenNotValid'));
+		}), WKCAPIFakeResponse(), fakeNext), new Error('WKCAPIClientErrorTokenNotValid'));
 	});
 
 	it('returns next(undefined) with correct token', function() {
@@ -95,14 +95,14 @@ describe('WKCAPIMiddlewareAuthenticate', function testWKCAPIMiddlewareAuthentica
 describe('WKCAPIMiddlewareErrorHandler', function testWKCAPIMiddlewareErrorHandler() {
 
 	it('returns WKCAPISystemError for WKCAPISystemError', function() {
-		assert.deepEqual(apiController.WKCAPIMiddlewareErrorHandler(new apiController.WKCAPISystemError('alpha'), {}, WKCAPIFakeResponse()), {
-			WKCAPISystemError: 'alpha',
+		assert.deepEqual(apiController.WKCAPIMiddlewareErrorHandler(new Error('WKCAPISystemErrorAlpha'), {}, WKCAPIFakeResponse()), {
+			WKCAPISystemError: 'WKCAPISystemErrorAlpha',
 		});
 	});
 
 	it('returns WKCAPIClientError for WKCAPIClientError', function() {
-		assert.deepEqual(apiController.WKCAPIMiddlewareErrorHandler(new apiController.WKCAPIClientError('alpha'), {}, WKCAPIFakeResponse()), {
-			WKCAPIClientError: 'alpha',
+		assert.deepEqual(apiController.WKCAPIMiddlewareErrorHandler(new Error('WKCAPIClientErrorAlpha'), {}, WKCAPIFakeResponse()), {
+			WKCAPIClientError: 'WKCAPIClientErrorAlpha',
 		});
 	});
 

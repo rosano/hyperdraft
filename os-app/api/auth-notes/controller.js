@@ -124,7 +124,7 @@ exports.WKCActionAPINotesRead = function(req, res, next) {
 		}
 
 		if (!result) {
-			return next(new(class WKCAPIClientError extends Error {})('WKCAPIClientErrorNotFound'));
+			return next(new Error('WKCAPIClientErrorNotFound'));
 		}
 
 		return res.json(result);
@@ -148,7 +148,7 @@ exports.WKCActionAPINotesUpdate = function(req, res, next) {
 		}
 
 		if (!result.value) {
-			return next(new(class WKCAPIClientError extends Error {})('WKCAPIClientErrorNotFound'));
+			return next(new Error('WKCAPIClientErrorNotFound'));
 		}
 
 		return res.json(inputData);
@@ -166,7 +166,7 @@ exports.WKCActionAPINotesDelete = function(req, res, next) {
 		}
 
 		if (!result.result.n) {
-			return next(new(class WKCAPIClientError extends Error {})('WKCAPIClientErrorNotFound'));
+			return next(new Error('WKCAPIClientErrorNotFound'));
 		}
 
 		return res.json({
