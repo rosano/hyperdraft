@@ -24,16 +24,7 @@ exports.OLSKControllerRoutes = function() {
 exports.OLSKControllerSharedMiddlewares = function() {
 	return {
 		WKCSharedMiddlewareAPIAuthenticate: exports.WKCAPIMiddlewareAuthenticate,
-		WKCSharedMiddlewareAPIErrorHandler: exports.WKCAPIMiddlewareErrorHandler,
 	};
-};
-
-//_ OLSKControllerSharedErrorHandlers
-
-exports.OLSKControllerSharedErrorHandlers = function() {
-	return [
-		exports.WKCAPIMiddlewareErrorHandler,
-	];
 };
 
 //_ WKCAPIMiddlewareAuthenticate
@@ -50,9 +41,17 @@ exports.WKCAPIMiddlewareAuthenticate = function(req, res, next) {
 	return next();
 };
 
-//_ WKCAPIMiddlewareErrorHandler
+//_ OLSKControllerSharedErrorHandlers
 
-exports.WKCAPIMiddlewareErrorHandler = function(err, req, res, next) {
+exports.OLSKControllerSharedErrorHandlers = function() {
+	return [
+		exports.WKCAPIErrorHandler,
+	];
+};
+
+//_ WKCAPIErrorHandler
+
+exports.WKCAPIErrorHandler = function(err, req, res, next) {
 	if (err.message.indexOf('WKCAPISystemError') === 0) {
 		return res.json({
 			WKCAPISystemError: err.message,

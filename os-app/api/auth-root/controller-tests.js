@@ -44,7 +44,6 @@ describe('OLSKControllerSharedMiddlewares', function testOLSKControllerSharedMid
 	it('returns middleware functions', function() {
 		assert.deepEqual(apiController.OLSKControllerSharedMiddlewares(), {
 			WKCSharedMiddlewareAPIAuthenticate: apiController.WKCAPIMiddlewareAuthenticate,
-			WKCSharedMiddlewareAPIErrorHandler: apiController.WKCAPIMiddlewareErrorHandler,
 		});
 	});
 
@@ -92,23 +91,33 @@ describe('WKCAPIMiddlewareAuthenticate', function testWKCAPIMiddlewareAuthentica
 
 });
 
-describe('WKCAPIMiddlewareErrorHandler', function testWKCAPIMiddlewareErrorHandler() {
+describe('OLSKControllerSharedErrorHandlers', function testOLSKControllerSharedErrorHandlers() {
+
+	it('returns middleware functions', function() {
+		assert.deepEqual(apiController.OLSKControllerSharedErrorHandlers(), [
+			apiController.WKCAPIErrorHandler,
+			]);
+	});
+
+});
+
+describe('WKCAPIErrorHandler', function testWKCAPIErrorHandler() {
 
 	it('returns WKCAPISystemError for WKCAPISystemError', function() {
-		assert.deepEqual(apiController.WKCAPIMiddlewareErrorHandler(new Error('WKCAPISystemErrorAlpha'), {}, WKCAPIFakeResponse()), {
+		assert.deepEqual(apiController.WKCAPIErrorHandler(new Error('WKCAPISystemErrorAlpha'), {}, WKCAPIFakeResponse()), {
 			WKCAPISystemError: 'WKCAPISystemErrorAlpha',
 		});
 	});
 
 	it('returns WKCAPIClientError for WKCAPIClientError', function() {
-		assert.deepEqual(apiController.WKCAPIMiddlewareErrorHandler(new Error('WKCAPIClientErrorAlpha'), {}, WKCAPIFakeResponse()), {
+		assert.deepEqual(apiController.WKCAPIErrorHandler(new Error('WKCAPIClientErrorAlpha'), {}, WKCAPIFakeResponse()), {
 			WKCAPIClientError: 'WKCAPIClientErrorAlpha',
 		});
 	});
 
 	it('returns next(error) for Error', function() {
 		var item = new Error('alpha');
-		assert.deepEqual(apiController.WKCAPIMiddlewareErrorHandler(item, {}, WKCAPIFakeResponse(), function(inputData) {
+		assert.deepEqual(apiController.WKCAPIErrorHandler(item, {}, WKCAPIFakeResponse(), function(inputData) {
 			return inputData;
 		}), item);
 	});
