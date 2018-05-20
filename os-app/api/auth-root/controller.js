@@ -58,6 +58,7 @@ exports.WKCAPIMiddlewareErrorHandler = function(err, req, res, next) {
 			WKCAPISystemError: err.message,
 		});
 	}
+	
 	if (err instanceof exports.WKCAPIClientError) {
 		return res.json({
 			WKCAPIClientError: err.message,
