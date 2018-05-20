@@ -1,5 +1,3 @@
-OLSKErrorControllerSlug: 'open-error'
-
 OLSKSharedPrivateConstants:
   WKCFoo: 'Bar' # Can be accessed via req.OLSKSharedPrivateConstants.WKCFoo
 
