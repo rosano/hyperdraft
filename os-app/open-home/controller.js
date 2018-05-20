@@ -20,7 +20,7 @@ exports.OLSKControllerRoutes = function() {
 //_ WKCActionHomeIndex
 
 exports.WKCActionHomeIndex = function(req, res, next) {
-	res.render([
+	return res.render([
 		res.locals.OLSKSharedPageControllerSlug,
 		'index',
 	].join('/'), {});

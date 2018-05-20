@@ -23,7 +23,7 @@ exports.OLSKControllerRoutes = function() {
 //_ WKCActionNotesIndex
 
 exports.WKCActionNotesIndex = function(req, res, next) {
-	res.render([
+	return res.render([
 		res.locals.OLSKSharedPageControllerSlug,
 		'index',
 	].join('/'), {

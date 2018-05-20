@@ -58,7 +58,7 @@ exports.WKCLoginMiddlewareAuthenticate = function(req, res, next) {
 //_ WKCActionLoginIndex
 
 exports.WKCActionLoginIndex = function(req, res, next) {
-	res.render([
+	return res.render([
 		res.locals.OLSKSharedPageControllerSlug,
 		'index',
 	].join('/'), {});
