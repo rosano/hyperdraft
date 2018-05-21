@@ -1,20 +1,92 @@
+html, body {
+  height:100%;
+}
+
 body {
-	font-family: 'Helvetica Neue';
+  font-family: 'Helvetica Neue';
 	font-size: 90%;
 }
 
-#WKCCMSHeader {
-	padding: 10px;
-	overflow: hidden;
-
-	background: #efefef;
-	font-size: 80%;
+#OLSKSharedContainer {
+	/* flexbox-container */
+	display: flex;
+	flex-flow: column;
+	height: 100%;
 }
 
-#WKCCMSHeader div:first-child {
+#WKCCMSHeader {
+	font-size: 80%;
+
+	/* flexbox-container */
+	flex: 0 1 auto;
+}
+
+#WKCCMSHeader nav {
+	padding: 10px;
+}
+
+#WKCCMSHeaderSiteNav {
+	background: #efefef;
+
+	/* expand to fit floating children */
+	overflow: hidden;
+}
+
+#WKCCMSHeaderSiteNav div:first-child {
 	float: left;
 }
 
-#WKCCMSHeader div:last-child {
+#WKCCMSHeaderSiteNav div:last-child {
 	float: right;
+}
+
+#WKCAppNotesToolbar {
+	text-align: right;
+}
+
+#WKCAppNotesMain {
+	background: red;
+
+	/* flexbox-container */
+	flex: 1 1 auto;
+
+	/* allow child to inherit height */
+	position: relative;
+
+}
+
+#WKCAppNotesList {
+	border-right: 10px solid black;
+
+	/* inherit height from parent */
+	position: absolute;
+	left: 0;
+	height: 100%;
+}
+
+#WKCAppNotesEditor {
+	width: 70%;
+
+	float: right;
+	
+	background: blue;
+
+	/* inherit height from parent */
+	position: absolute;
+	right: 0;
+	height: 100%;
+}
+
+#WKCAppNotesEditor textarea {
+	width: 100%;
+	padding: 0;
+
+	border: none;
+
+	resize: none;
+}
+
+#WKCCMSFooter {
+	/* flexbox-container */
+	flex: 0 1 50px;
 }
