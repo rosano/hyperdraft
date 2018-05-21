@@ -44,6 +44,11 @@ exports.WKCErrorsFinalHandler = function(err, req, res, next) {
 		res.status(500);
 	}
 
+	if (process.env.NODE_ENV === 'development') {
+		return next(err);
+	}
+
+	console.log(err);
 	return res.render([
 		__dirname,
 		'500',
