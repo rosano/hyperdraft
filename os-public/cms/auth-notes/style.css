@@ -50,6 +50,14 @@ body {
 	flex-basis: 300px;
 }
 
+.WKCAppNotesListItem {
+	display: block;
+	padding: 10px;
+	height: 50px;
+	user-select: none;
+	cursor: pointer;
+}
+
 #WKCAppNotesEditor {
 	flex-grow: 1;
 

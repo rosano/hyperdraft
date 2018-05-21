@@ -27,6 +27,15 @@ locals.OLSKPageAssets = [
 				window.alert('<%= OLSKLocalized('WKCNotesErrors').WKCAppErrorEntriesUnavailable %>');
 				throw new Error('WKCAppErrorEntriesUnavailable');
 			}
+
+			d3.select('#WKCAppNotes').classed('WKCAppNotesLoading', false);
+			d3.select('#WKCAppNotesList')
+				.selectAll('.WKCAppNotesListItem').data(responseJSON).enter()
+				.append('div')
+					.attr('class', 'WKCAppNotesListItem')
+					.text(function(d) {
+						return d.WKCNoteBody;
+					});
 		});
 	});
 </script>
@@ -54,9 +63,6 @@ locals.OLSKPageAssets = [
 
 	<div id="WKCAppNotesMain">
 		<div id="WKCAppNotesList">
-			<div>alpha</div>
-			<div>bravo</div>
-			<div>bravo</div>
 		</div>
 
 		<div id="WKCAppNotesEditor">
