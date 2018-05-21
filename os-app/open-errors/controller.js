@@ -32,7 +32,7 @@ exports.WKCErrors404Handler = function(err, req, res, next) {
 	}
 
 	return res.render([
-		res.locals.OLSKSharedPageControllerSlug,
+		__dirname,
 		'404',
 	].join('/'), {});
 };
@@ -45,7 +45,7 @@ exports.WKCErrorsFinalHandler = function(err, req, res, next) {
 	}
 
 	return res.render([
-		res.locals.OLSKSharedPageControllerSlug,
+		__dirname,
 		'500',
 	].join('/'), {});
 };

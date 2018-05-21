@@ -24,7 +24,7 @@ exports.OLSKControllerRoutes = function() {
 
 exports.WKCActionNotesIndex = function(req, res, next) {
 	return res.render([
-		res.locals.OLSKSharedPageControllerSlug,
+		__dirname,
 		'index',
 	].join('/'), {
 		WKCNotesInsecureAPIToken: req.session.WKCInsecureSessionToken,

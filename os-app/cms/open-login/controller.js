@@ -59,7 +59,7 @@ exports.WKCLoginMiddlewareAuthenticate = function(req, res, next) {
 
 exports.WKCActionLoginIndex = function(req, res, next) {
 	return res.render([
-		res.locals.OLSKSharedPageControllerSlug,
+		__dirname,
 		'index',
 	].join('/'), {});
 };
@@ -90,7 +90,7 @@ exports.WKCActionLoginSubmit = function(req, res, next) {
 
 		if (!memberObject) {
 			return res.render([
-				res.locals.OLSKSharedPageControllerSlug,
+				__dirname,
 				'index',
 			].join('/'), {
 				WKCLoginUsername: req.body.WKCLoginUsername,
