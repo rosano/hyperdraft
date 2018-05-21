@@ -28,31 +28,43 @@ body {
 #WKCCMSHeaderSiteNav {
 	background: #efefef;
 
+	/* flexbox-nav */
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
 }
 
 #WKCAppNotesToolbar {
+	/* flexbox-toolbar */
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-end;
 }
 
 #WKCAppNotesMain {
-	background: red;
+	/*background: red;*/
 
 	/* flexbox-container */
 	flex: 1 1 auto;
 
+	/* flexbox-main */
+	display: flex;
+	flex-direction: row;
+}
+
+#WKCAppNotesMainX {
 	/* allow child to inherit height */
 	position: relative;
-
 }
 
 #WKCAppNotesList {
-	border-right: 10px solid black;
+	border-right: 1px solid black;
+	/*background: yellow;*/
+	/*opacity: 0.5;*/
+	flex-basis: 300px;
+}
 
+#WKCAppNotesListX {
 	/* inherit height from parent */
 	position: absolute;
 	left: 0;
@@ -60,12 +72,12 @@ body {
 }
 
 #WKCAppNotesEditor {
-	width: 70%;
+	/*background: blue;*/
+	/*opacity: 0.5;*/
+	flex-grow: 1;
+}
 
-	float: right;
-	
-	background: blue;
-
+#WKCAppNotesEditorX {
 	/* inherit height from parent */
 	position: absolute;
 	right: 0;
