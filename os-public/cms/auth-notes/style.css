@@ -28,16 +28,9 @@ body {
 #WKCCMSHeaderSiteNav {
 	background: #efefef;
 
-	/* expand to fit floating children */
-	overflow: hidden;
-}
-
-#WKCCMSHeaderSiteNav div:first-child {
-	float: left;
-}
-
-#WKCCMSHeaderSiteNav div:last-child {
-	float: right;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
 }
 
 #WKCAppNotesToolbar {

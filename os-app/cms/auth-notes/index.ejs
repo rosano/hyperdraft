@@ -10,12 +10,8 @@ locals.OLSKPageAssets = [
 
 <header id="WKCCMSHeader">
 	<nav id="WKCCMSHeaderSiteNav">
-		<div>
-			<span><strong><%= locals.OLSKPageTitle %></strong></span>
-		</div>
-		<div>
-			<a href="<%= OLSKCanonicalFor('WKCRouteLoginDestroy') %>"><%= OLSKLocalized('WKCLoginDestroyTitle') %></a>
-		</div>
+		<span><strong><%= locals.OLSKPageTitle %></strong></span>
+		<a href="<%= OLSKCanonicalFor('WKCRouteLoginDestroy') %>"><%= OLSKLocalized('WKCLoginDestroyTitle') %></a>
 	</nav>
 	<nav id="WKCAppNotesToolbar">
 		<button id="WKCNotesAddButton"><%= OLSKLocalized('WKCNotesAddButtonText') %></button>
