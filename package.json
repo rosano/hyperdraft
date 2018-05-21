@@ -1,13 +1,21 @@
 {
   "private": true,
   "scripts": {
-    "start": "node ./os-launch"
+    "start": "node ./os-launch",
+    "postinstall": "gulp default"
   },
   "dependencies": {
     "// OLDSKOOL": null,
     "OldSkool": "olsk/OldSkool",
 
     "// PERSISTENCE": null,
-    "mongodb": "^3.0.7"
+    "mongodb": "^3.0.7",
+
+    "// FRONTEND": null,
+    "normalize.css": "latest",
+    "d3": "latest"
+  },
+  "devDependencies": {
+    "gulp": "4.0"
   }
 }

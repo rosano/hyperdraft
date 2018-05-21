@@ -2,9 +2,12 @@
 node_modules
 package-lock.json
 
-# LOCAL
-.env
-
 # OLDSKOOL
 os-cache
 os-workspace-testing
+
+# BUILD
+os-public/shared-assets/vendor
+
+# LOCAL
+.env
