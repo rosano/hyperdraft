@@ -29,8 +29,6 @@ body {
 }
 
 #WKCAppNotesMain {
-	/*background: red;*/
-
 	/* flexbox-container */
 	flex: 1 1 auto;
 
@@ -39,45 +37,32 @@ body {
 	flex-direction: row;
 }
 
-#WKCAppNotesMainX {
-	/* allow child to inherit height */
-	position: relative;
-}
-
 #WKCAppNotesList {
 	border-right: 1px solid #d9d9d9;
-	/*background: yellow;*/
-	/*opacity: 0.5;*/
+	
 	flex-basis: 300px;
 }
 
-#WKCAppNotesListX {
-	/* inherit height from parent */
-	position: absolute;
-	left: 0;
-	height: 100%;
-}
-
 #WKCAppNotesEditor {
-	/*background: blue;*/
-	/*opacity: 0.5;*/
 	flex-grow: 1;
-}
 
-#WKCAppNotesEditorX {
-	/* inherit height from parent */
-	position: absolute;
-	right: 0;
-	height: 100%;
+	padding: 10px;
+
+	/* flexbox-editor */
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
 }
 
 #WKCAppNotesEditor textarea {
-	width: 100%;
-	padding: 0;
-
 	border: none;
 
 	resize: none;
+
+	flex-grow: 1;
+
+	/* browser outline */
+	outline: none;
 }
 
 #WKCAppNotesFooter {
@@ -93,4 +78,18 @@ body {
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-end;
+}
+
+.OLSKDebug #WKCAppNotesMain {
+	background: red;
+}
+
+.OLSKDebug #WKCAppNotesList {
+	background: yellow;
+	opacity: 0.5;
+}
+
+.OLSKDebug #WKCAppNotesEditor {
+	background: blue;
+	opacity: 0.5;
 }
