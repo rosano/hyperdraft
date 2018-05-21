@@ -29,6 +29,8 @@ body {
 }
 
 #WKCAppNotesMain {
+	font-family: monospace;
+
 	/* flexbox-container */
 	flex: 1 1 auto;
 
@@ -55,14 +57,15 @@ body {
 }
 
 #WKCAppNotesEditor textarea {
-	border: none;
-
-	resize: none;
-
+	font-family: 'monaco', monospace;
+	
+	/* flexbox-editor */
 	flex-grow: 1;
 
-	/* browser outline */
+	/* browser defaults */
+	border: none;
 	outline: none;
+	resize: none;
 }
 
 #WKCAppNotesFooter {
