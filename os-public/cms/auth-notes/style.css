@@ -34,7 +34,9 @@ body {
 }
 
 #WKCAppNotesToolbar {
-	text-align: right;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
 }
 
 #WKCAppNotesMain {
