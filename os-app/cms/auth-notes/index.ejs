@@ -9,6 +9,8 @@ locals.OLSKPageAssets = [
 <%- include('../../_shared/WKCLayout/header.ejs') %>
 
 <script type="text/javascript">
+	var WKPAppSharedAPIToken;
+
 	d3.json('<%= OLSKCanonicalFor('WKCRouteAPIToken') %>', {
 		method: 'GET',
 	}).then(function(responseJSON) {
@@ -17,10 +19,12 @@ locals.OLSKPageAssets = [
 			throw new Error('WKCAppErrorTokenUnavailable');
 		}
 
+		WKPAppSharedAPIToken = responseJSON.WKCAPIToken;
+
 		d3.json('<%= OLSKCanonicalFor('WKCRouteAPINotesSearch') %>', {
 			method: 'GET',
 			headers: {
-				'x-client-key': responseJSON.WKCAPIToken,
+				'x-client-key': WKPAppSharedAPIToken,
 			},
 		}).then(function(responseJSON) {
 			if (!Array.isArray(responseJSON)) {
@@ -40,7 +44,7 @@ locals.OLSKPageAssets = [
 	});
 </script>
 
-<div id="WKCAppNotes" class="">
+<div id="WKCAppNotes" class="WKCAppNotesLoading">
 	<header id="WKCAppNotesToolbar">
 		<button id="WKCNotesAddButton"><%= OLSKLocalized('WKCNotesAddButtonText') %></button>
 		<script type="text/javascript">
@@ -49,7 +53,7 @@ locals.OLSKPageAssets = [
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json',
-						'x-client-key': '<%= 'WKCNotesInsecureAPIToken' %>',
+						'x-client-key': WKPAppSharedAPIToken,
 					},
 					body: JSON.stringify({
 						WKCNoteBody: 'alpha',
