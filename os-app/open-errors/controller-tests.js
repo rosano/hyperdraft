@@ -48,11 +48,11 @@ describe('WKCErrors404Handler', function testWKCErrors404Handler() {
 	it('renders page if res.statusCode 404', function() {
 		errorController.WKCErrors404Handler(null, {}, {
 			statusCode: 404,
-			locals: {
-				OLSKSharedPageControllerSlug: 'alpha',
-			},
 			render: function(viewsPath) {
-				assert.strictEqual(viewsPath, 'alpha/404');
+				assert.strictEqual(viewsPath, [
+					__dirname,
+					'404',
+					].join('/'));
 			},
 		}, null);
 	});
@@ -70,11 +70,11 @@ describe('WKCErrorsFinalHandler', function testWKCErrorsFinalHandler() {
 
 	it('renders page', function() {
 		errorController.WKCErrorsFinalHandler(null, {}, {
-			locals: {
-				OLSKSharedPageControllerSlug: 'alpha',
-			},
 			render: function(viewsPath) {
-				assert.strictEqual(viewsPath, 'alpha/500');
+				assert.strictEqual(viewsPath, [
+					__dirname,
+					'500',
+					].join('/'));
 			},
 		}, null);
 	});
