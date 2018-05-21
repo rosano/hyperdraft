@@ -21,7 +21,7 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 				],
 			},
 			WKCRouteAPINotesRead: {
-				OLSKRoutePath: '/api/notes/:wkc_note_id',
+				OLSKRoutePath: '/api/notes/:wkc_note_id(\d+)',
 				OLSKRouteMethod: 'get',
 				OLSKRouteFunction: apiNotesController.WKCActionAPINotesRead,
 				OLSKRouteMiddlewares: [
@@ -29,7 +29,7 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 				],
 			},
 			WKCRouteAPINotesUpdate: {
-				OLSKRoutePath: '/api/notes/:wkc_note_id',
+				OLSKRoutePath: '/api/notes/:wkc_note_id(\d+)',
 				OLSKRouteMethod: 'put',
 				OLSKRouteFunction: apiNotesController.WKCActionAPINotesUpdate,
 				OLSKRouteMiddlewares: [
@@ -37,7 +37,7 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 				],
 			},
 			WKCRouteAPINotesDelete: {
-				OLSKRoutePath: '/api/notes/:wkc_note_id',
+				OLSKRoutePath: '/api/notes/:wkc_note_id(\d+)',
 				OLSKRouteMethod: 'delete',
 				OLSKRouteFunction: apiNotesController.WKCActionAPINotesDelete,
 				OLSKRouteMiddlewares: [
@@ -329,9 +329,7 @@ describe('Connection', function testConnection() {
 					WKCNoteBody: 'alpha',
 				},
 			}), WKCFakeResponseAsync(function(responseJSON) {
-				apiNotesController.WKCActionAPINotesSearch(WKCFakeRequest({
-					params: {},
-				}), WKCFakeResponseAsync(function(responseJSON) {
+				apiNotesController.WKCActionAPINotesSearch(WKCFakeRequest(), WKCFakeResponseAsync(function(responseJSON) {
 					assert.strictEqual(Array.isArray(responseJSON), true);
 					assert.strictEqual(responseJSON[0].WKCNoteID, 1);
 					assert.strictEqual(responseJSON[0].WKCNoteBody, 'alpha');
