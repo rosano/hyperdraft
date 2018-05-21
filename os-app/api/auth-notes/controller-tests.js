@@ -44,6 +44,14 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 					'WKCSharedMiddlewareAPIAuthenticate',
 				],
 			},
+			WKCRouteAPINotesSearch: {
+				OLSKRoutePath: '/api/notes/search',
+				OLSKRouteMethod: 'get',
+				OLSKRouteFunction: apiNotesController.WKCActionAPINotesSearch,
+				OLSKRouteMiddlewares: [
+					'WKCSharedMiddlewareAPIAuthenticate',
+				],
+			},
 		});
 	});
 
@@ -200,7 +208,7 @@ describe('Connection', function testConnection() {
 			apiNotesController.WKCActionAPINotesRead(WKCFakeRequest({
 				params: {
 					wkc_note_id: 'alpha',
-				}
+				},
 			}), WKCFakeResponseAsync(), function(inputData) {
 				assert.deepEqual(inputData, new Error('WKCAPIClientErrorNotFound'));
 				done();
@@ -211,12 +219,12 @@ describe('Connection', function testConnection() {
 			apiNotesController.WKCActionAPINotesCreate(WKCFakeRequest({
 				body: {
 					WKCNoteBody: 'alpha',
-				}
+				},
 			}), WKCFakeResponseAsync(function(responseJSON) {
 				apiNotesController.WKCActionAPINotesRead(WKCFakeRequest({
 					params: {
 						wkc_note_id: responseJSON.WKCNoteID,
-					}
+					},
 				}), WKCFakeResponseAsync(function(responseJSON) {
 					assert.strictEqual(responseJSON.WKCNoteID, 1);
 					assert.strictEqual(responseJSON.WKCNoteBody, 'alpha');
@@ -287,7 +295,7 @@ describe('Connection', function testConnection() {
 			apiNotesController.WKCActionAPINotesDelete(WKCFakeRequest({
 				params: {
 					wkc_note_id: 'alpha',
-				}
+				},
 			}), WKCFakeResponseAsync(), function(inputData) {
 				assert.deepEqual(inputData, new Error('WKCAPIClientErrorNotFound'));
 				done();
@@ -303,9 +311,32 @@ describe('Connection', function testConnection() {
 				apiNotesController.WKCActionAPINotesDelete(WKCFakeRequest({
 					params: {
 						wkc_note_id: responseJSON.WKCNoteID,
-					}
+					},
 				}), WKCFakeResponseAsync(function(responseJSON) {
 					assert.strictEqual(responseJSON.WKCAPIResponse, true);
+					done();
+				}));
+			}));
+		});
+
+	});
+
+	describe('WKCActionAPINotesSearch', function testWKCActionAPINotesSearch() {
+
+		it('returns noteObject', function(done) {
+			apiNotesController.WKCActionAPINotesCreate(WKCFakeRequest({
+				body: {
+					WKCNoteBody: 'alpha',
+				},
+			}), WKCFakeResponseAsync(function(responseJSON) {
+				apiNotesController.WKCActionAPINotesSearch(WKCFakeRequest({
+					params: {},
+				}), WKCFakeResponseAsync(function(responseJSON) {
+					assert.strictEqual(Array.isArray(responseJSON), true);
+					assert.strictEqual(responseJSON[0].WKCNoteID, 1);
+					assert.strictEqual(responseJSON[0].WKCNoteBody, 'alpha');
+					assert.strictEqual(responseJSON[0].WKCNoteDateCreated instanceof Date, true);
+					assert.strictEqual(responseJSON[0].WKCNoteDateUpdated instanceof Date, true);
 					done();
 				}));
 			}));

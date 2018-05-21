@@ -42,6 +42,14 @@ exports.OLSKControllerRoutes = function() {
 				'WKCSharedMiddlewareAPIAuthenticate',
 			],
 		},
+		WKCRouteAPINotesSearch: {
+			OLSKRoutePath: '/api/notes/search',
+			OLSKRouteMethod: 'get',
+			OLSKRouteFunction: exports.WKCActionAPINotesSearch,
+			OLSKRouteMiddlewares: [
+				'WKCSharedMiddlewareAPIAuthenticate',
+			],
+		},
 	};
 };
 
@@ -172,5 +180,17 @@ exports.WKCActionAPINotesDelete = function(req, res, next) {
 		return res.json({
 			WKCAPIResponse: true,
 		});
+	});
+};
+
+//_ WKCActionAPINotesSearch
+
+exports.WKCActionAPINotesSearch = function(req, res, next) {
+	return req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_notes').find({}).toArray(function(err, items) {
+		if (err) {
+			throw new Error('WKCErrorDatabaseFind');
+		}
+
+		return res.json(items);
 	});
 };
