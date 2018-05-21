@@ -27,6 +27,6 @@ exports.WKCActionNotesIndex = function(req, res, next) {
 		__dirname,
 		'index',
 	].join('/'), {
-		WKCNotesInsecureAPIToken: req.session.WKCInsecureSessionToken,
+		WKCNotesInsecureAPIToken: process.env.WKC_INSECURE_API_ACCESS_TOKEN,
 	});
 };

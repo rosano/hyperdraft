@@ -15,13 +15,14 @@ locals.OLSKPageAssets = [
 		d3.json('<%= OLSKCanonicalFor('WKCRouteAPINotesCreate') %>', {
 			method: 'POST',
 			headers: {
-				'Content-Type': 'application/json'
+				'Content-Type': 'application/json',
+				'x-client-key': '<%= WKCNotesInsecureAPIToken %>',
 			},
 			body: JSON.stringify({
-				WKCInsecureAPIToken: '<%= WKCNotesInsecureAPIToken %>',
+				WKCNoteBody: 'alpha',
 			}),
 		}).then(function(data) {
-			console.log(data.WKCNewItem);
+			console.log(data);
 		});
 	});
 </script>
