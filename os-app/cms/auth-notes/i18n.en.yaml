@@ -2,3 +2,4 @@ WKCNotesTitle: Notes
 WKCNotesAddButtonText: Add note
 WKCNotesErrors:
   WKCAppErrorTokenUnavailable: Authentication error
+  WKCAppErrorEntriesUnavailable: Unable to fetch notes

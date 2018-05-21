@@ -11,11 +11,23 @@ locals.OLSKPageAssets = [
 <script type="text/javascript">
 	d3.json('<%= OLSKCanonicalFor('WKCRouteAPIToken') %>', {
 		method: 'GET',
-	}).then(function(data) {
-		if (!data.WKCAPIToken) {
+	}).then(function(responseJSON) {
+		if (!responseJSON.WKCAPIToken) {
 			window.alert('<%= OLSKLocalized('WKCNotesErrors').WKCAppErrorTokenUnavailable %>');
 			throw new Error('WKCAppErrorTokenUnavailable');
 		}
+
+		d3.json('<%= OLSKCanonicalFor('WKCRouteAPINotesSearch') %>', {
+			method: 'GET',
+			headers: {
+				'x-client-key': responseJSON.WKCAPIToken,
+			},
+		}).then(function(responseJSON) {
+			if (!Array.isArray(responseJSON)) {
+				window.alert('<%= OLSKLocalized('WKCNotesErrors').WKCAppErrorEntriesUnavailable %>');
+				throw new Error('WKCAppErrorEntriesUnavailable');
+			}
+		});
 	});
 </script>
 
