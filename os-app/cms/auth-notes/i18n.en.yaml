@@ -1,2 +1,4 @@
-WKCNotesTitle: 'Notes'
-WKCNotesAddButtonText: 'Add note'
+WKCNotesTitle: Notes
+WKCNotesAddButtonText: Add note
+WKCNotesErrors:
+  WKCAppErrorTokenUnavailable: Authentication error

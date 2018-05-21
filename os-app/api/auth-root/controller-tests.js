@@ -145,7 +145,7 @@ describe('WKCActionAPIToken', function testWKCActionAPIToken() {
 
 	it('returns access token', function() {
 		assert.deepEqual(apiController.WKCActionAPIToken(WKCAPIFakeRequest(), WKCAPIFakeResponse()), {
-			WKCAPIResponse: process.env.WKC_INSECURE_API_ACCESS_TOKEN,
+			WKCAPIToken: process.env.WKC_INSECURE_API_ACCESS_TOKEN,
 		});
 	});
 

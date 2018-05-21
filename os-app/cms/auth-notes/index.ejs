@@ -8,6 +8,17 @@ locals.OLSKPageAssets = [
 
 <%- include('../../_shared/WKCLayout/header.ejs') %>
 
+<script type="text/javascript">
+	d3.json('<%= OLSKCanonicalFor('WKCRouteAPIToken') %>', {
+		method: 'GET',
+	}).then(function(data) {
+		if (!data.WKCAPIToken) {
+			window.alert('<%= OLSKLocalized('WKCNotesErrors').WKCAppErrorTokenUnavailable %>');
+			throw new Error('WKCAppErrorTokenUnavailable');
+		}
+	});
+</script>
+
 <div id="WKCAppNotes" class="">
 	<header id="WKCAppNotesToolbar">
 		<button id="WKCNotesAddButton"><%= OLSKLocalized('WKCNotesAddButtonText') %></button>
@@ -17,7 +28,7 @@ locals.OLSKPageAssets = [
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json',
-						'x-client-key': '<%= WKCNotesInsecureAPIToken %>',
+						'x-client-key': '<%= 'WKCNotesInsecureAPIToken' %>',
 					},
 					body: JSON.stringify({
 						WKCNoteBody: 'alpha',

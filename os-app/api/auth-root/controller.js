@@ -84,6 +84,6 @@ exports.WKCActionAPIRoot = function(req, res, next) {
 
 exports.WKCActionAPIToken = function(req, res, next) {
 	return res.json({
-		WKCAPIResponse: process.env.WKC_INSECURE_API_ACCESS_TOKEN,
+		WKCAPIToken: process.env.WKC_INSECURE_API_ACCESS_TOKEN,
 	});
 };
