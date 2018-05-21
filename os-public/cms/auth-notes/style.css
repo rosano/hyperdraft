@@ -14,27 +14,14 @@ body {
 	height: 100%;
 }
 
-#WKCCMSHeader {
+#WKCAppNotesToolbar {
 	font-size: 80%;
+	padding: 10px;
+	border-bottom: 1px solid #d9d9d9;
 
 	/* flexbox-container */
 	flex: 0 1 auto;
-}
 
-#WKCCMSHeader nav {
-	padding: 10px;
-}
-
-#WKCCMSHeaderSiteNav {
-	background: #efefef;
-
-	/* flexbox-nav */
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-}
-
-#WKCAppNotesToolbar {
 	/* flexbox-toolbar */
 	display: flex;
 	flex-direction: row;
@@ -58,7 +45,7 @@ body {
 }
 
 #WKCAppNotesList {
-	border-right: 1px solid black;
+	border-right: 1px solid #d9d9d9;
 	/*background: yellow;*/
 	/*opacity: 0.5;*/
 	flex-basis: 300px;
@@ -93,7 +80,17 @@ body {
 	resize: none;
 }
 
-#WKCCMSFooter {
+#WKCAppNotesFooter {
+	font-size: 80%;
+	background: #F3F3F3;
+	padding: 10px;
+	border-top: 1px solid #d9d9d9;
+
 	/* flexbox-container */
-	flex: 0 1 50px;
+	flex: 0 1 auto;
+
+	/* flexbox-footer */
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
 }

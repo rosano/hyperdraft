@@ -8,30 +8,24 @@ locals.OLSKPageAssets = [
 
 <%- include('../../_shared/WKCLayout/header.ejs') %>
 
-<header id="WKCCMSHeader">
-	<nav id="WKCCMSHeaderSiteNav">
-		<span><strong><%= locals.OLSKPageTitle %></strong></span>
-		<a href="<%= OLSKCanonicalFor('WKCRouteLoginDestroy') %>"><%= OLSKLocalized('WKCLoginDestroyTitle') %></a>
-	</nav>
-	<nav id="WKCAppNotesToolbar">
-		<button id="WKCNotesAddButton"><%= OLSKLocalized('WKCNotesAddButtonText') %></button>
-		<script type="text/javascript">
-			d3.select('#WKCNotesAddButton').on('click', function() {
-				d3.json('<%= OLSKCanonicalFor('WKCRouteAPINotesCreate') %>', {
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
-						'x-client-key': '<%= WKCNotesInsecureAPIToken %>',
-					},
-					body: JSON.stringify({
-						WKCNoteBody: 'alpha',
-					}),
-				}).then(function(data) {
-					console.log(data);
-				});
+<header id="WKCAppNotesToolbar">
+	<button id="WKCNotesAddButton"><%= OLSKLocalized('WKCNotesAddButtonText') %></button>
+	<script type="text/javascript">
+		d3.select('#WKCNotesAddButton').on('click', function() {
+			d3.json('<%= OLSKCanonicalFor('WKCRouteAPINotesCreate') %>', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					'x-client-key': '<%= WKCNotesInsecureAPIToken %>',
+				},
+				body: JSON.stringify({
+					WKCNoteBody: 'alpha',
+				}),
+			}).then(function(data) {
+				console.log(data);
 			});
-		</script>
-	</nav>
+		});
+	</script>
 </header>
 
 <div id="WKCAppNotesMain">
@@ -46,8 +40,8 @@ locals.OLSKPageAssets = [
 	</div>
 </div>
 
-<footer id="WKCCMSFooter">
-	alpha
+<footer id="WKCAppNotesFooter">
+	<a href="<%= OLSKCanonicalFor('WKCRouteLoginDestroy') %>"><%= OLSKLocalized('WKCLoginDestroyTitle') %></a>
 </footer>
 
 <%- include('../../_shared/WKCLayout/footer.ejs') %>
