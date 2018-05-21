@@ -2,12 +2,20 @@
 locals.OLSKPageTitle = OLSKLocalized('WKCNotesTitle');
 locals.OLSKPageAssets = [
 	'script.js',
+	'style.css',
 ];
 %>
 
 <%- include('../../_shared/WKCLayout/header.ejs') %>
 
-<h1><%= locals.OLSKPageTitle %></h1>
+<header id="WKCCMSHeader">
+	<div>
+		<span><strong><%= locals.OLSKPageTitle %></strong></span>
+	</div>
+	<div>
+		<a href="<%= OLSKCanonicalFor('WKCRouteLoginDestroy') %>"><%= OLSKLocalized('WKCLoginDestroyTitle') %></a>
+	</div>
+</header>
 
 <button id="WKCNotesAddButton"><%= OLSKLocalized('WKCNotesAddButtonText') %></button>
 <script type="text/javascript">
@@ -27,6 +35,5 @@ locals.OLSKPageAssets = [
 	});
 </script>
 
-<p><a href="<%= OLSKCanonicalFor('WKCRouteLoginDestroy') %>"><%= OLSKLocalized('WKCLoginDestroyTitle') %></a></p>
 
 <%- include('../../_shared/WKCLayout/footer.ejs') %>
