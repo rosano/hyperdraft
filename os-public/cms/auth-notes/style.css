@@ -8,10 +8,15 @@ body {
 }
 
 #OLSKSharedContainer {
+	height: 100%;
+}
+
+#WKCAppNotes {
+	height: 100%;
+
 	/* flexbox-container */
 	display: flex;
 	flex-flow: column;
-	height: 100%;
 }
 
 #WKCAppNotesToolbar {
@@ -58,7 +63,7 @@ body {
 
 #WKCAppNotesEditor textarea {
 	font-family: 'monaco', monospace;
-	
+
 	/* flexbox-editor */
 	flex-grow: 1;
 
@@ -83,16 +88,16 @@ body {
 	justify-content: flex-end;
 }
 
-.OLSKDebug #WKCAppNotesMain {
+.WKCAppNotesDebug #WKCAppNotesMain {
 	background: red;
 }
 
-.OLSKDebug #WKCAppNotesList {
+.WKCAppNotesDebug #WKCAppNotesList {
 	background: yellow;
 	opacity: 0.5;
 }
 
-.OLSKDebug #WKCAppNotesEditor {
+.WKCAppNotesDebug #WKCAppNotesEditor {
 	background: blue;
 	opacity: 0.5;
 }
