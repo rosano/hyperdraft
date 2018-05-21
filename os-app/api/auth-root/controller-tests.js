@@ -34,6 +34,11 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 					'WKCSharedMiddlewareAPIAuthenticate',
 				],
 			},
+			WKCRouteAPIToken: {
+				OLSKRoutePath: '/api/token',
+				OLSKRouteMethod: 'get',
+				OLSKRouteFunction: apiController.WKCActionAPIToken,
+			},
 		});
 	});
 
@@ -131,6 +136,16 @@ describe('WKCActionAPIRoot', function testWKCActionAPIRoot() {
 			'x-client-key': process.env.WKC_INSECURE_API_ACCESS_TOKEN,
 		}), WKCAPIFakeResponse()), {
 			WKCAPIResponse: 'Successfully authenticated',
+		});
+	});
+
+});
+
+describe('WKCActionAPIToken', function testWKCActionAPIToken() {
+
+	it('returns access token', function() {
+		assert.deepEqual(apiController.WKCActionAPIToken(WKCAPIFakeRequest(), WKCAPIFakeResponse()), {
+			WKCAPIResponse: process.env.WKC_INSECURE_API_ACCESS_TOKEN,
 		});
 	});
 

@@ -16,6 +16,11 @@ exports.OLSKControllerRoutes = function() {
 				'WKCSharedMiddlewareAPIAuthenticate',
 			],
 		},
+		WKCRouteAPIToken: {
+			OLSKRoutePath: '/api/token',
+			OLSKRouteMethod: 'get',
+			OLSKRouteFunction: exports.WKCActionAPIToken,
+		},
 	};
 };
 
@@ -67,8 +72,18 @@ exports.WKCAPIErrorHandler = function(err, req, res, next) {
 	return next(err);
 };
 
+//_ WKCActionAPIRoot
+
 exports.WKCActionAPIRoot = function(req, res, next) {
 	return res.json({
 		WKCAPIResponse: 'Successfully authenticated',
+	});
+};
+
+//_ WKCActionAPIToken
+
+exports.WKCActionAPIToken = function(req, res, next) {
+	return res.json({
+		WKCAPIResponse: process.env.WKC_INSECURE_API_ACCESS_TOKEN,
 	});
 };
