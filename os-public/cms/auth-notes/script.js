@@ -7,13 +7,13 @@
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
 	typeof define === 'function' && define.amd ? define(['exports'], factory) :
-	(factory((global.WKCNotes = global.WKCNotes || {})));
+	(factory((global.WKCNotesApp = global.WKCNotesApp || {})));
 }(this, (function (exports) { 'use strict';
 
-	//_ WKCNotesAdd
+	//_ WKCNotesAppTest
 
-	exports.WKCNotesAdd = function () {
-		console.log('hello', new Date());
+	exports.WKCNotesAppTest = function () {
+		return 'hello';
 	};
 
 	Object.defineProperty(exports, '__esModule', { value: true });
