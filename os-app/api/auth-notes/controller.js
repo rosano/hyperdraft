@@ -150,7 +150,9 @@ exports.WKCActionAPINotesUpdate = function(req, res, next) {
 
 	return req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_notes').findOneAndUpdate({
 		WKCNoteID: req.params.wkc_note_id,
-	}, inputData, function(err, result) {
+	}, Object.assign(inputData, {
+		WKCNoteDateUpdated: new Date(),
+	}), function(err, result) {
 		if (err) {
 			throw new Error('WKCErrorDatabaseFindOne');
 		}

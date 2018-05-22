@@ -278,10 +278,13 @@ describe('Connection', function testConnection() {
 					WKCNoteBody: 'alpha',
 				},
 			}), WKCFakeResponseAsync(function(responseJSON) {
+				var originalDateUpdated = responseJSON.WKCNoteDateUpdated;
+
 				apiNotesController.WKCActionAPINotesUpdate(fakeRequest(responseJSON.WKCNoteID, Object.assign(responseJSON, {
 					WKCNoteBody: 'bravo',
 				})), WKCFakeResponseAsync(function(responseJSON) {
 					assert.strictEqual(responseJSON.WKCNoteBody, 'bravo');
+					assert.strictEqual(responseJSON.WKCNoteDateUpdated > originalDateUpdated, true);
 					done();
 				}));
 			}));
