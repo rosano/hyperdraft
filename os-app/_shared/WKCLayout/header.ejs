@@ -35,8 +35,6 @@
 
 	<script src="/shared-assets/vendor/d3/dist/d3.min.js"></script>
 
-	<link rel="stylesheet" type="text/css" href="/shared-assets/style.css">
-
 	<% if (locals.OLSKSharedPageControllerSlug && Array.isArray(locals.OLSKPageAssets)) { %>
 		<% locals.OLSKPageAssets.forEach(function(e) { %>
 			<% var defaultDirectory = e[0] === '/' ? '' : '/' + locals.OLSKSharedPageControllerSlug + '/'; %>
