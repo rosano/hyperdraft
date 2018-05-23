@@ -48,8 +48,8 @@ describe('WKCErrors404Handler', function testWKCErrors404Handler() {
 	it('renders page if res.statusCode 404', function() {
 		errorController.WKCErrors404Handler(null, {}, {
 			statusCode: 404,
-			render: function(viewsPath) {
-				assert.strictEqual(viewsPath, [
+			render: function(viewPath) {
+				assert.strictEqual(viewPath, [
 					__dirname,
 					'404',
 					].join('/'));
@@ -70,8 +70,8 @@ describe('WKCErrorsFinalHandler', function testWKCErrorsFinalHandler() {
 
 	it('renders page', function() {
 		errorController.WKCErrorsFinalHandler(null, {}, {
-			render: function(viewsPath) {
-				assert.strictEqual(viewsPath, [
+			render: function(viewPath) {
+				assert.strictEqual(viewPath, [
 					__dirname,
 					'500',
 					].join('/'));
