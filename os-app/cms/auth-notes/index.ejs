@@ -1,8 +1,9 @@
 <%
 locals.OLSKPageTitle = OLSKLocalized('WKCNotesTitle');
 locals.OLSKPageAssets = [
-	'ui-logic.js',
 	'ui-style.css',
+	'ui-logic.js',
+	'ui-interaction.js',
 ];
 %>
 
@@ -35,13 +36,7 @@ locals.OLSKPageAssets = [
 			}
 
 			d3.select('#WKCAppNotes').classed('WKCAppNotesLoading', false);
-			d3.select('#WKCAppNotesList')
-				.selectAll('.WKCAppNotesListItem').data(responseJSON).enter()
-				.append('div')
-					.attr('class', 'WKCAppNotesListItem')
-					.text(function(d) {
-						return d.WKCNoteBody;
-					});
+			WKCNotesAppInteraction.WKCNotesAppPerformDataJoinFor(responseJSON);
 		});
 	});
 </script>
