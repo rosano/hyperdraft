@@ -1,8 +1,9 @@
 WKCNotesTitle: Notes
 WKCAppNotesAddButtonText: Add note
 WKCAppNotesPersistenceStatusSaving: Saving…
-WKCAppNotesPersistenceStatusSaved: Saved.
+WKCAppNotesPersistenceStatusSaved: Saved
+WKCAppNotesPersistenceStatusUnableToSave: Unable to save
 WKCNotesErrors:
   WKCAppErrorTokenUnavailable: Authentication error
   WKCAppErrorEntriesUnavailable: Unable to fetch notes
-  WKCAppErrorPersistenceDidFailOnCreate: Unable to create note
+  WKCAppErrorPersistenceDidFailOnCreate: Unable to create note. Would you like to try again?

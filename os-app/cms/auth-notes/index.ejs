@@ -106,7 +106,12 @@ locals.OLSKPageAssets = [
 									d3.select('#WKCAppNotesPersistenceStatus').text('');
 								}, 1000);
 							}, function(error) {
-								window.alert('<%= OLSKLocalized('WKCNotesErrors').WKCAppErrorPersistenceDidFailOnCreate %>');
+								if (window.confirm('<%= OLSKLocalized('WKCNotesErrors').WKCAppErrorPersistenceDidFailOnCreate %>')) {
+									sharedData.WKCAppNotesSharedPersistenceTask.OLSKTaskCallback();
+								};
+
+								d3.select('#WKCAppNotesPersistenceStatus').text('<%= OLSKLocalized('WKCAppNotesPersistenceStatusUnableToSave') %>');
+
 								throw error;
 							});
 						}
