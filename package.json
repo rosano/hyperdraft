@@ -13,7 +13,8 @@
 
     "// FRONTEND": null,
     "normalize.css": "latest",
-    "d3": "latest"
+    "d3": "latest",
+    "OLSKTasks": "latest"
   },
   "devDependencies": {
     "gulp": "4.0"

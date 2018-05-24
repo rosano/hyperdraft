@@ -11,6 +11,7 @@ function install() {
 	return gulpPackage.src([
 		'normalize.css',
 		'd3',
+		'OLSKTasks',
 	].map(function(e) {
 		return [
 			[
