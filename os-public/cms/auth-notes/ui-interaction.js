@@ -39,7 +39,7 @@
 
 	exports.WKCNotesAppSetSelectedItemWithSharedData = function (item, sharedData) {
 		sharedData.WKCAppNotesSharedSelectedItem = item;
-		d3.select('#WKCNotesAppEditorTextarea').text(item.WKCNoteBody);
+		d3.select('#WKCNotesAppEditorTextarea').node().value = item.WKCNoteBody;
 		d3.select('#WKCNotesAppEditorTextarea').node().focus();
 	};
 
