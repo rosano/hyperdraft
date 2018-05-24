@@ -101,7 +101,7 @@ describe('OLSKControllerSharedErrorHandlers', function testOLSKControllerSharedE
 	it('returns middleware functions', function() {
 		assert.deepEqual(apiController.OLSKControllerSharedErrorHandlers(), [
 			apiController.WKCAPIErrorHandler,
-			]);
+		]);
 	});
 
 });

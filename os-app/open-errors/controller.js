@@ -51,7 +51,7 @@ exports.WKCErrorsFinalHandler = function(err, req, res, next) {
 	if (err) {
 		console.log(err);
 	}
-	
+
 	return res.render([
 		__dirname,
 		'500',

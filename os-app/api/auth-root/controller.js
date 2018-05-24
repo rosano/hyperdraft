@@ -62,7 +62,7 @@ exports.WKCAPIErrorHandler = function(err, req, res, next) {
 			WKCAPISystemError: err.message,
 		});
 	}
-	
+
 	if (err.message.indexOf('WKCAPIClientError') === 0) {
 		return res.json({
 			WKCAPIClientError: err.message,

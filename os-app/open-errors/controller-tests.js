@@ -52,7 +52,7 @@ describe('WKCErrors404Handler', function testWKCErrors404Handler() {
 				assert.strictEqual(viewPath, [
 					__dirname,
 					'404',
-					].join('/'));
+				].join('/'));
 			},
 		}, null);
 	});
@@ -74,7 +74,7 @@ describe('WKCErrorsFinalHandler', function testWKCErrorsFinalHandler() {
 				assert.strictEqual(viewPath, [
 					__dirname,
 					'500',
-					].join('/'));
+				].join('/'));
 			},
 		}, null);
 	});
