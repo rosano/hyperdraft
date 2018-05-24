@@ -51,13 +51,38 @@ body {
 }
 
 .WKCAppNotesListItem {
-	display: block;
-	padding: 10px;
 	height: 50px;
+
+	padding: 10px;
 	border-bottom: 1px solid #d9d9d9;
 
-	user-select: none;
 	cursor: pointer;
+
+	/* vendor-based */
+	-webkit-touch-callout: none; /* iOS Safari */
+	-webkit-user-select: none; /* Safari */
+	-khtml-user-select: none; /* Konqueror HTML */
+	-moz-user-select: none; /* Firefox */
+	-ms-user-select: none; /* Internet Explorer/Edge */
+	user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+}
+
+.WKCAppNotesListItem pre {
+	width: inherit;
+	height: inherit;
+
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+
+	margin: 0;
+
+	/* vendor-based */
+	white-space: pre-wrap;       /* Since CSS 2.1 */
+	white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+	white-space: -pre-wrap;      /* Opera 4-6 */
+	white-space: -o-pre-wrap;    /* Opera 7 */
+	word-wrap: break-word;       /* Internet Explorer 5.5+ */
 }
 
 #WKCAppNotesEditor {
