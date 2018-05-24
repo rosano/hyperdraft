@@ -67,18 +67,6 @@ locals.OLSKPageAssets = [
 				d3.select('#WKCNotesAppEditorTextarea').node().value = sharedData.WKCAppNotesSharedSelectedItem.WKCNoteBody;
 
 				d3.select('#WKCNotesAppEditorTextarea').node().focus();
-				// d3.json('<%= OLSKCanonicalFor('WKCRouteAPINotesCreate') %>', {
-				// 	method: 'POST',
-				// 	headers: {
-				// 		'Content-Type': 'application/json',
-				// 		'x-client-key': sharedData.WKCAppNotesSharedAPIToken,
-				// 	},
-				// 	body: JSON.stringify({
-				// 		WKCNoteBody: 'alpha',
-				// 	}),
-				// }).then(function(data) {
-				// 	console.log(data);
-				// });
 			});
 		</script>
 	</header>
@@ -90,7 +78,33 @@ locals.OLSKPageAssets = [
 		<div id="WKCAppNotesEditor">
 			<textarea id="WKCNotesAppEditorTextarea"></textarea>
 			<script type="text/javascript">
+				sharedData.WKCAppNotesSharedPersistenceTask = {
+					OLSKTaskName: 'WKCTasksEditorPersistence',
+					OLSKTaskFireTimeInterval: 3,
+					OLSKTaskShouldBePerformed: function() {
+						return true;
+					},
+					OLSKTaskCallback: function() {
+						if (!sharedData.WKCAppNotesSharedSelectedItem.WKCNoteID) {
+							return d3.json('<%= OLSKCanonicalFor('WKCRouteAPINotesCreate') %>', {
+								method: 'POST',
+								headers: {
+									'Content-Type': 'application/json',
+									'x-client-key': sharedData.WKCAppNotesSharedAPIToken,
+								},
+								body: JSON.stringify(sharedData.WKCAppNotesSharedSelectedItem),
+							}).then(function(responseJSON) {
+								Object.assign(sharedData.WKCAppNotesSharedSelectedItem, responseJSON);
+							});
+						}
+					},
+					OLSKTaskFireLimit: 1,
+				};
+
 				d3.select('#WKCNotesAppEditorTextarea').on('input', function() {
+					clearInterval(sharedData.WKCAppNotesSharedPersistenceTask._OLSKTaskTimerID);
+					OLSKTasks.OLSKTasksTimeoutForTaskObject(sharedData.WKCAppNotesSharedPersistenceTask);
+
 					Object.assign(sharedData.WKCAppNotesSharedSelectedItem, {
 						WKCNoteBody: this.value,
 						WKCNoteDateUpdated: new Date(),
