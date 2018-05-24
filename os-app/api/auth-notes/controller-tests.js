@@ -334,6 +334,7 @@ describe('Connection', function testConnection() {
 			}), WKCFakeResponseAsync(function(responseJSON) {
 				apiNotesController.WKCActionAPINotesSearch(WKCFakeRequest(), WKCFakeResponseAsync(function(responseJSON) {
 					assert.strictEqual(Array.isArray(responseJSON), true);
+					assert.strictEqual(responseJSON[0]._id, undefined);
 					assert.strictEqual(responseJSON[0].WKCNoteID, 1);
 					assert.strictEqual(responseJSON[0].WKCNoteBody, 'alpha');
 					assert.strictEqual(responseJSON[0].WKCNoteDateCreated instanceof Date, true);

@@ -26,3 +26,11 @@ exports.WKCModelInputDataIsNotesObject = function(inputData) {
 
 	return true;
 };
+
+//_ WKCModelNotesUnusedPropertyNames
+
+exports.WKCModelNotesUnusedPropertyNames = function(inputData) {
+	return [
+		'_id',
+	];
+};

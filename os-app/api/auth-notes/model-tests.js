@@ -33,3 +33,13 @@ describe('WKCModelInputDataIsNotesObject', function testWKCModelInputDataIsNotes
 	});
 
 });
+
+describe('WKCModelNotesUnusedPropertyNames', function testWKCModelNotesUnusedPropertyNames() {
+
+	it('returns unused property names', function() {
+		assert.deepEqual(notesLibrary.WKCModelNotesUnusedPropertyNames(), [
+			'_id',
+		]);
+	});
+
+});
