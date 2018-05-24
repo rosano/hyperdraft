@@ -36,9 +36,12 @@ locals.OLSKPageAssets = [
 			}
 
 			d3.select('#WKCAppNotes').classed('WKCAppNotesLoading', false);
-			WKCNotesAppInteraction.WKCNotesAppPerformDataJoinFor(responseJSON.sort(function(a, b) {
-				return a.WKCNoteDateUpdated < b.WKCNoteDateUpdated;
-			}));
+			WKCNotesAppInteraction.WKCNotesAppPerformDataJoinFor(responseJSON.map(function(e) {
+				return Object.assign(e, {
+					WKCNoteDateCreated: new Date(e.WKCNoteDateCreated),
+					WKCNoteDateUpdated: new Date(e.WKCNoteDateUpdated),
+				});
+			}).sort(WKCNotesApp.WKCNotesAppListSort));
 
 			sharedData.WKCAppNotesSharedEditObject = d3.select('#WKCAppNotesList')
 				.selectAll('.WKCAppNotesListItem').data().slice().shift();
@@ -55,14 +58,13 @@ locals.OLSKPageAssets = [
 			d3.select('#WKCNotesAddButton').on('click', function() {
 				sharedData.WKCAppNotesSharedEditObject = {
 					WKCNoteDateCreated: new Date(),
+					WKCNoteBody: '',
 				};
 
 				WKCNotesAppInteraction.WKCNotesAppPerformDataJoinFor(d3.select('#WKCAppNotesList')
-				.selectAll('.WKCAppNotesListItem').data().concat(sharedData.WKCAppNotesSharedEditObject).sort(function(a, b) {
-					return a.WKCNoteDateUpdated < b.WKCNoteDateUpdated;
-				}));
+				.selectAll('.WKCAppNotesListItem').data().concat(sharedData.WKCAppNotesSharedEditObject).sort(WKCNotesApp.WKCNotesAppListSort));
 
-				d3.select('#WKCNotesAppEditorTextarea').text(sharedData.WKCAppNotesSharedEditObject.WKCNoteBody);
+				d3.select('#WKCNotesAppEditorTextarea').node().value = sharedData.WKCAppNotesSharedEditObject.WKCNoteBody;
 
 				d3.select('#WKCNotesAppEditorTextarea').node().focus();
 				// d3.json('<%= OLSKCanonicalFor('WKCRouteAPINotesCreate') %>', {
