@@ -13,13 +13,20 @@
 	//_ WKCNotesAppPerformDataJoinFor
 
 	exports.WKCNotesAppPerformDataJoinFor = function (items) {
-		d3.select('#WKCAppNotesList')
-			.selectAll('.WKCAppNotesListItem').data(items).enter()
+		var selection = d3.select('#WKCAppNotesList')
+			.selectAll('.WKCAppNotesListItem').data(items);
+		
+		selection.enter()
 			.append('div')
 				.attr('class', 'WKCAppNotesListItem')
-				.text(function(d) {
-					return d.WKCNoteBody;
-				});
+				.merge(selection)
+					.html(function(d) {
+						return [
+							'<pre>',
+							(d.WKCNoteBody || '').split('\n').slice(0, 3).join('\n'),
+							'</pre>',
+						].join('');
+					});
 	};
 
 	Object.defineProperty(exports, '__esModule', { value: true });
