@@ -19,12 +19,12 @@ locals.OLSKPageAssets = [
 			throw new Error('WKCAppErrorTokenUnavailable');
 		}
 
-		sharedData.WKPAppNotesSharedAPIToken = responseJSON.WKCAPIToken;
+		sharedData.WKCAppNotesSharedAPIToken = responseJSON.WKCAPIToken;
 
 		d3.json('<%= OLSKCanonicalFor('WKCRouteAPINotesSearch') %>', {
 			method: 'GET',
 			headers: {
-				'x-client-key': sharedData.WKPAppNotesSharedAPIToken,
+				'x-client-key': sharedData.WKCAppNotesSharedAPIToken,
 			},
 		}).then(function(responseJSON) {
 			if (!Array.isArray(responseJSON)) {
@@ -53,7 +53,7 @@ locals.OLSKPageAssets = [
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json',
-						'x-client-key': sharedData.WKPAppNotesSharedAPIToken,
+						'x-client-key': sharedData.WKCAppNotesSharedAPIToken,
 					},
 					body: JSON.stringify({
 						WKCNoteBody: 'alpha',
