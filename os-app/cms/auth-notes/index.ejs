@@ -36,17 +36,14 @@ locals.OLSKPageAssets = [
 			}
 
 			d3.select('#WKCAppNotes').classed('WKCAppNotesLoading', false);
-			WKCNotesAppInteraction.WKCNotesAppPerformDataJoinFor(responseJSON.map(function(e) {
+			WKCNotesAppInteraction.WKCNotesAppPerformDataJoinWithItemsArrayAndSharedData(responseJSON.map(function(e) {
 				return Object.assign(e, {
 					WKCNoteDateCreated: new Date(e.WKCNoteDateCreated),
 					WKCNoteDateUpdated: new Date(e.WKCNoteDateUpdated),
 				});
-			}).sort(WKCNotesApp.WKCNotesAppListSort));
+			}).sort(WKCNotesApp.WKCNotesAppListSort), sharedData);
 
-			sharedData.WKCAppNotesSharedSelectedItem = d3.select('#WKCAppNotesList')
-				.selectAll('.WKCAppNotesListItem').data().slice().shift();
-			d3.select('#WKCNotesAppEditorTextarea').text(sharedData.WKCAppNotesSharedSelectedItem.WKCNoteBody);
-			d3.select('#WKCNotesAppEditorTextarea').node().focus();
+			WKCNotesAppInteraction.WKCNotesAppSetSelectedItemWithSharedData(d3.selectAll('.WKCAppNotesListItem').data()[0], sharedData);
 		});
 	});
 </script>
@@ -57,17 +54,12 @@ locals.OLSKPageAssets = [
 		<button id="WKCAppNotesAddButton" accesskey="n"><%= OLSKLocalized('WKCAppNotesAddButtonText') %></button>
 		<script type="text/javascript">
 			d3.select('#WKCAppNotesAddButton').on('click', function() {
-				sharedData.WKCAppNotesSharedSelectedItem = {
+				WKCNotesAppInteraction.WKCNotesAppPerformDataJoinWithItemsArrayAndSharedData(d3.selectAll('.WKCAppNotesListItem').data().concat(sharedData.WKCAppNotesSharedSelectedItem).sort(WKCNotesApp.WKCNotesAppListSort), sharedData);
+
+				WKCNotesAppInteraction.WKCNotesAppSetSelectedItemWithSharedData({
 					WKCNoteDateCreated: new Date(),
 					WKCNoteBody: '',
-				};
-
-				WKCNotesAppInteraction.WKCNotesAppPerformDataJoinFor(d3.select('#WKCAppNotesList')
-				.selectAll('.WKCAppNotesListItem').data().concat(sharedData.WKCAppNotesSharedSelectedItem).sort(WKCNotesApp.WKCNotesAppListSort));
-
-				d3.select('#WKCNotesAppEditorTextarea').node().value = sharedData.WKCAppNotesSharedSelectedItem.WKCNoteBody;
-
-				d3.select('#WKCNotesAppEditorTextarea').node().focus();
+				}, sharedData);
 			});
 		</script>
 	</header>
@@ -127,8 +119,7 @@ locals.OLSKPageAssets = [
 						WKCNoteDateUpdated: new Date(),
 					});
 
-					WKCNotesAppInteraction.WKCNotesAppPerformDataJoinFor(d3.select('#WKCAppNotesList')
-					.selectAll('.WKCAppNotesListItem').data());
+					WKCNotesAppInteraction.WKCNotesAppPerformDataJoinWithItemsArrayAndSharedData(d3.selectAll('.WKCAppNotesListItem').data(), sharedData);
 				});
 			</script>
 		</div>

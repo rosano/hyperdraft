@@ -10,15 +10,21 @@
 	(factory((global.WKCNotesAppInteraction = global.WKCNotesAppInteraction || {})));
 }(this, (function (exports) { 'use strict';
 
-	//_ WKCNotesAppPerformDataJoinFor
+	//_ WKCNotesAppPerformDataJoinWithItemsArrayAndSharedData
 
-	exports.WKCNotesAppPerformDataJoinFor = function (items) {
+	exports.WKCNotesAppPerformDataJoinWithItemsArrayAndSharedData = function (itemsArray, sharedData) {
 		var selection = d3.select('#WKCAppNotesList')
-			.selectAll('.WKCAppNotesListItem').data(items);
+			.selectAll('.WKCAppNotesListItem').data(itemsArray);
 		
 		selection.enter()
 			.append('div')
 				.attr('class', 'WKCAppNotesListItem')
+				.on('click', function(d) {
+					d3.selectAll('.WKCAppNotesListItem').classed('WKCAppNotesListItemSelected', false);
+					d3.select(this).classed('WKCAppNotesListItemSelected', true);
+
+					return exports.WKCNotesAppSetSelectedItemWithSharedData(d, sharedData);
+				})
 				.merge(selection)
 					.html(function(d) {
 						return [
@@ -27,6 +33,14 @@
 							'</pre>',
 						].join('');
 					});
+	};
+
+	//_ WKCNotesAppSetSelectedItemWithSharedData
+
+	exports.WKCNotesAppSetSelectedItemWithSharedData = function (item, sharedData) {
+		sharedData.WKCAppNotesSharedSelectedItem = item;
+		d3.select('#WKCNotesAppEditorTextarea').text(item.WKCNoteBody);
+		d3.select('#WKCNotesAppEditorTextarea').node().focus();
 	};
 
 	Object.defineProperty(exports, '__esModule', { value: true });

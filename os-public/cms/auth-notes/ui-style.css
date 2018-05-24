@@ -73,6 +73,10 @@ body {
 	user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
 }
 
+.WKCAppNotesListItemSelected {
+	background: #e6e6e6;
+}
+
 .WKCAppNotesListItem pre {
 	width: inherit;
 	height: inherit;
