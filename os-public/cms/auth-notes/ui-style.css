@@ -33,6 +33,12 @@ body {
 	justify-content: flex-end;
 }
 
+#WKCAppNotesPersistenceStatus {
+	margin: auto 5px;
+
+	color: #bfbfbf
+}
+
 #WKCAppNotesMain {
 	font-family: monospace;
 

@@ -53,9 +53,10 @@ locals.OLSKPageAssets = [
 
 <div id="WKCAppNotes" class="WKCAppNotesLoading">
 	<header id="WKCAppNotesToolbar">
-		<button id="WKCNotesAddButton" accesskey="n"><%= OLSKLocalized('WKCNotesAddButtonText') %></button>
+		<span id="WKCAppNotesPersistenceStatus"></span>
+		<button id="WKCAppNotesAddButton" accesskey="n"><%= OLSKLocalized('WKCAppNotesAddButtonText') %></button>
 		<script type="text/javascript">
-			d3.select('#WKCNotesAddButton').on('click', function() {
+			d3.select('#WKCAppNotesAddButton').on('click', function() {
 				sharedData.WKCAppNotesSharedSelectedItem = {
 					WKCNoteDateCreated: new Date(),
 					WKCNoteBody: '',
@@ -85,6 +86,8 @@ locals.OLSKPageAssets = [
 						return true;
 					},
 					OLSKTaskCallback: function() {
+						d3.select('#WKCAppNotesPersistenceStatus').text('<%= OLSKLocalized('WKCAppNotesPersistenceStatusSaving') %>');
+
 						if (!sharedData.WKCAppNotesSharedSelectedItem.WKCNoteID) {
 							return d3.json('<%= OLSKCanonicalFor('WKCRouteAPINotesCreate') %>', {
 								method: 'POST',
@@ -94,7 +97,13 @@ locals.OLSKPageAssets = [
 								},
 								body: JSON.stringify(sharedData.WKCAppNotesSharedSelectedItem),
 							}).then(function(responseJSON) {
+								d3.select('#WKCAppNotesPersistenceStatus').text('<%= OLSKLocalized('WKCAppNotesPersistenceStatusSaved') %>');
+
 								Object.assign(sharedData.WKCAppNotesSharedSelectedItem, responseJSON);
+
+								setTimeout(function() {
+									d3.select('#WKCAppNotesPersistenceStatus').text('');
+								}, 1000);
 							});
 						}
 					},

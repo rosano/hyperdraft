@@ -1,5 +1,7 @@
 WKCNotesTitle: Notes
-WKCNotesAddButtonText: Add note
+WKCAppNotesAddButtonText: Add note
+WKCAppNotesPersistenceStatusSaving: Saving…
+WKCAppNotesPersistenceStatusSaved: Saved.
 WKCNotesErrors:
   WKCAppErrorTokenUnavailable: Authentication error
   WKCAppErrorEntriesUnavailable: Unable to fetch notes
