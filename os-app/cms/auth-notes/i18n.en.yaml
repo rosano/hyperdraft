@@ -6,4 +6,4 @@ WKCAppNotesPersistenceStatusUnableToSave: Unable to save
 WKCNotesErrors:
   WKCAppErrorTokenUnavailable: Authentication error
   WKCAppErrorEntriesUnavailable: Unable to fetch notes
-  WKCAppErrorPersistenceDidFailOnCreate: Unable to create note. Would you like to try again?
+  WKCAppErrorPersistenceDidFail: Unable to save note. Would you like to try again?

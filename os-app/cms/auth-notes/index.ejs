@@ -81,6 +81,16 @@ locals.OLSKPageAssets = [
 					OLSKTaskCallback: function() {
 						d3.select('#WKCAppNotesPersistenceStatus').text('<%= OLSKLocalized('WKCAppNotesPersistenceStatusSaving') %>');
 
+						var rejectCallback = function(error) {
+							if (window.confirm('<%= OLSKLocalized('WKCNotesErrors').WKCAppErrorPersistenceDidFail %>')) {
+								sharedData.WKCAppNotesSharedPersistenceTask.OLSKTaskCallback();
+							};
+
+							d3.select('#WKCAppNotesPersistenceStatus').text('<%= OLSKLocalized('WKCAppNotesPersistenceStatusUnableToSave') %>');
+
+							throw error;
+						};
+
 						if (!sharedData.WKCAppNotesSharedSelectedItem.WKCNoteID) {
 							return d3.json('<%= OLSKCanonicalFor('WKCRouteAPINotesCreate') %>', {
 								method: 'POST',
@@ -97,16 +107,26 @@ locals.OLSKPageAssets = [
 								setTimeout(function() {
 									d3.select('#WKCAppNotesPersistenceStatus').text('');
 								}, 1000);
-							}, function(error) {
-								if (window.confirm('<%= OLSKLocalized('WKCNotesErrors').WKCAppErrorPersistenceDidFailOnCreate %>')) {
-									sharedData.WKCAppNotesSharedPersistenceTask.OLSKTaskCallback();
-								};
-
-								d3.select('#WKCAppNotesPersistenceStatus').text('<%= OLSKLocalized('WKCAppNotesPersistenceStatusUnableToSave') %>');
-
-								throw error;
-							});
+							}, rejectCallback);
 						}
+
+						return d3.json((<%- OLSKCanonicalSubstitutionFunctionFor('WKCRouteAPINotesUpdate') %>)({
+							wkc_note_id: sharedData.WKCAppNotesSharedSelectedItem.WKCNoteID,
+						}), {
+							method: 'PUT',
+							headers: {
+								'Content-Type': 'application/json',
+								'x-client-key': sharedData.WKCAppNotesSharedAPIToken,
+							},
+							body: JSON.stringify(sharedData.WKCAppNotesSharedSelectedItem),
+						}).then(function(responseJSON) {
+							console.log(responseJSON);
+							d3.select('#WKCAppNotesPersistenceStatus').text('<%= OLSKLocalized('WKCAppNotesPersistenceStatusSaved') %>');
+
+							setTimeout(function() {
+								d3.select('#WKCAppNotesPersistenceStatus').text('');
+							}, 1000);
+						}, rejectCallback);
 					},
 				};
 
