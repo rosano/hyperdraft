@@ -11,7 +11,7 @@ locals.OLSKPageAssets = [
 
 <script type="text/javascript">
 	var sharedData = {
-		WKCAppNotesSharedEditObject: {},
+		WKCAppNotesSharedSelectedItem: {},
 	};
 
 	d3.json('<%= OLSKCanonicalFor('WKCRouteAPIToken') %>', {
@@ -43,9 +43,9 @@ locals.OLSKPageAssets = [
 				});
 			}).sort(WKCNotesApp.WKCNotesAppListSort));
 
-			sharedData.WKCAppNotesSharedEditObject = d3.select('#WKCAppNotesList')
+			sharedData.WKCAppNotesSharedSelectedItem = d3.select('#WKCAppNotesList')
 				.selectAll('.WKCAppNotesListItem').data().slice().shift();
-			d3.select('#WKCNotesAppEditorTextarea').text(sharedData.WKCAppNotesSharedEditObject.WKCNoteBody);
+			d3.select('#WKCNotesAppEditorTextarea').text(sharedData.WKCAppNotesSharedSelectedItem.WKCNoteBody);
 			d3.select('#WKCNotesAppEditorTextarea').node().focus();
 		});
 	});
@@ -56,15 +56,15 @@ locals.OLSKPageAssets = [
 		<button id="WKCNotesAddButton" accesskey="n"><%= OLSKLocalized('WKCNotesAddButtonText') %></button>
 		<script type="text/javascript">
 			d3.select('#WKCNotesAddButton').on('click', function() {
-				sharedData.WKCAppNotesSharedEditObject = {
+				sharedData.WKCAppNotesSharedSelectedItem = {
 					WKCNoteDateCreated: new Date(),
 					WKCNoteBody: '',
 				};
 
 				WKCNotesAppInteraction.WKCNotesAppPerformDataJoinFor(d3.select('#WKCAppNotesList')
-				.selectAll('.WKCAppNotesListItem').data().concat(sharedData.WKCAppNotesSharedEditObject).sort(WKCNotesApp.WKCNotesAppListSort));
+				.selectAll('.WKCAppNotesListItem').data().concat(sharedData.WKCAppNotesSharedSelectedItem).sort(WKCNotesApp.WKCNotesAppListSort));
 
-				d3.select('#WKCNotesAppEditorTextarea').node().value = sharedData.WKCAppNotesSharedEditObject.WKCNoteBody;
+				d3.select('#WKCNotesAppEditorTextarea').node().value = sharedData.WKCAppNotesSharedSelectedItem.WKCNoteBody;
 
 				d3.select('#WKCNotesAppEditorTextarea').node().focus();
 				// d3.json('<%= OLSKCanonicalFor('WKCRouteAPINotesCreate') %>', {
@@ -91,7 +91,7 @@ locals.OLSKPageAssets = [
 			<textarea id="WKCNotesAppEditorTextarea"></textarea>
 			<script type="text/javascript">
 				d3.select('#WKCNotesAppEditorTextarea').on('input', function() {
-					Object.assign(sharedData.WKCAppNotesSharedEditObject, {
+					Object.assign(sharedData.WKCAppNotesSharedSelectedItem, {
 						WKCNoteBody: this.value,
 						WKCNoteDateUpdated: new Date(),
 					});
