@@ -125,7 +125,7 @@ exports.WKCActionAPINotesCreate = function(req, res, next) {
 
 exports.WKCActionAPINotesRead = function(req, res, next) {
 	return req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_notes').findOne({
-		WKCNoteID: req.params.wkc_note_id,
+		WKCNoteID: parseInt(req.params.wkc_note_id),
 	}, function(err, result) {
 		if (err) {
 			throw new Error('WKCErrorDatabaseFindOne');
@@ -149,7 +149,7 @@ exports.WKCActionAPINotesUpdate = function(req, res, next) {
 	}
 
 	return req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_notes').findOneAndUpdate({
-		WKCNoteID: req.params.wkc_note_id,
+		WKCNoteID: parseInt(req.params.wkc_note_id),
 	}, Object.assign(inputData, {
 		WKCNoteDateUpdated: new Date(),
 	}), function(err, result) {
@@ -169,7 +169,7 @@ exports.WKCActionAPINotesUpdate = function(req, res, next) {
 
 exports.WKCActionAPINotesDelete = function(req, res, next) {
 	return req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_notes').deleteOne({
-		WKCNoteID: req.params.wkc_note_id,
+		WKCNoteID: parseInt(req.params.wkc_note_id),
 	}, function(err, result) {
 		if (err) {
 			throw new Error('WKCErrorDatabaseFindOne');

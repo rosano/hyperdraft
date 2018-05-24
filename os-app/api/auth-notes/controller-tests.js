@@ -158,7 +158,7 @@ describe('Connection', function testConnection() {
 				apiNotesController.WKCActionAPINotesCreate(fakeRequest(), WKCFakeResponseAsync(function(responseJSON) {
 					apiNotesController.WKCActionAPINotesDelete(WKCFakeRequest({
 						params: {
-							wkc_note_id: responseJSON.WKCNoteID,
+							wkc_note_id: responseJSON.WKCNoteID.toString(),
 						},
 					}), WKCFakeResponseAsync(function() {
 						apiNotesController.WKCAPISettingsLastRepoIDWithClientAndCallback(mongoClient, function(lastRepoID) {
@@ -223,7 +223,7 @@ describe('Connection', function testConnection() {
 			}), WKCFakeResponseAsync(function(responseJSON) {
 				apiNotesController.WKCActionAPINotesRead(WKCFakeRequest({
 					params: {
-						wkc_note_id: responseJSON.WKCNoteID,
+						wkc_note_id: responseJSON.WKCNoteID.toString(),
 					},
 				}), WKCFakeResponseAsync(function(responseJSON) {
 					assert.strictEqual(responseJSON.WKCNoteID, 1);
@@ -242,7 +242,7 @@ describe('Connection', function testConnection() {
 		var fakeRequest = function(id, body) {
 			return WKCFakeRequest({
 				params: {
-					wkc_note_id: id,
+					wkc_note_id: id.toString(),
 				},
 				body: Object.assign({}, body),
 			});
@@ -258,7 +258,7 @@ describe('Connection', function testConnection() {
 		});
 
 		it('returns WKCErrors if not valid noteObject', function(done) {
-			apiNotesController.WKCActionAPINotesCreate(fakeRequest({
+			apiNotesController.WKCActionAPINotesCreate(fakeRequest('', {
 				WKCNoteBody: 'alpha',
 			}), WKCFakeResponseAsync(function(responseJSON) {
 				assert.deepEqual(apiNotesController.WKCActionAPINotesUpdate(fakeRequest(responseJSON.WKCNoteID, Object.assign(responseJSON, {
@@ -313,7 +313,7 @@ describe('Connection', function testConnection() {
 			}), WKCFakeResponseAsync(function(responseJSON) {
 				apiNotesController.WKCActionAPINotesDelete(WKCFakeRequest({
 					params: {
-						wkc_note_id: responseJSON.WKCNoteID,
+						wkc_note_id: responseJSON.WKCNoteID.toString().toString(),
 					},
 				}), WKCFakeResponseAsync(function(responseJSON) {
 					assert.strictEqual(responseJSON.WKCAPIResponse, true);
