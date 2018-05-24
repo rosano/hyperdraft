@@ -132,6 +132,7 @@ describe('Connection', function testConnection() {
 		it('returns 0 if no existing items', function(done) {
 			apiNotesController.WKCAPISettingsLastRepoIDWithClientAndCallback(mongoClient, function(lastRepoID) {
 				assert.strictEqual(lastRepoID, 0);
+				
 				done();
 			});
 		});
@@ -148,6 +149,7 @@ describe('Connection', function testConnection() {
 			apiNotesController.WKCActionAPINotesCreate(fakeRequest(), WKCFakeResponseAsync(function() {
 				apiNotesController.WKCAPISettingsLastRepoIDWithClientAndCallback(mongoClient, function(lastRepoID) {
 					assert.strictEqual(lastRepoID, 1);
+					
 					done();
 				});
 			}));
@@ -163,6 +165,7 @@ describe('Connection', function testConnection() {
 					}), WKCFakeResponseAsync(function() {
 						apiNotesController.WKCAPISettingsLastRepoIDWithClientAndCallback(mongoClient, function(lastRepoID) {
 							assert.strictEqual(lastRepoID, 2);
+							
 							done();
 						});
 					}));
@@ -196,6 +199,7 @@ describe('Connection', function testConnection() {
 				assert.strictEqual(responseJSON.WKCNoteBody, 'alpha');
 				assert.strictEqual(responseJSON.WKCNoteDateCreated instanceof Date, true);
 				assert.strictEqual(responseJSON.WKCNoteDateUpdated instanceof Date, true);
+				
 				done();
 			}));
 		});
@@ -211,6 +215,7 @@ describe('Connection', function testConnection() {
 				},
 			}), WKCFakeResponseAsync(), function(inputData) {
 				assert.deepEqual(inputData, new Error('WKCAPIClientErrorNotFound'));
+				
 				done();
 			});
 		});
@@ -230,6 +235,7 @@ describe('Connection', function testConnection() {
 					assert.strictEqual(responseJSON.WKCNoteBody, 'alpha');
 					assert.strictEqual(responseJSON.WKCNoteDateCreated instanceof Date, true);
 					assert.strictEqual(responseJSON.WKCNoteDateUpdated instanceof Date, true);
+
 					done();
 				}));
 			}));
@@ -253,6 +259,7 @@ describe('Connection', function testConnection() {
 				WKCNoteBody: 'bravo',
 			}), WKCFakeResponseSync(), function(inputData) {
 				assert.deepEqual(inputData, new Error('WKCAPIClientErrorNotFound'));
+
 				done();
 			});
 		});
@@ -268,6 +275,7 @@ describe('Connection', function testConnection() {
 						'WKCErrorNotString',
 					],
 				});
+
 				done();
 			}));
 		});
@@ -285,6 +293,7 @@ describe('Connection', function testConnection() {
 				})), WKCFakeResponseAsync(function(responseJSON) {
 					assert.strictEqual(responseJSON.WKCNoteBody, 'bravo');
 					assert.strictEqual(responseJSON.WKCNoteDateUpdated > originalDateUpdated, true);
+					
 					done();
 				}));
 			}));
@@ -301,6 +310,7 @@ describe('Connection', function testConnection() {
 				},
 			}), WKCFakeResponseAsync(), function(inputData) {
 				assert.deepEqual(inputData, new Error('WKCAPIClientErrorNotFound'));
+				
 				done();
 			});
 		});
@@ -339,6 +349,7 @@ describe('Connection', function testConnection() {
 					assert.strictEqual(responseJSON[0].WKCNoteBody, 'alpha');
 					assert.strictEqual(responseJSON[0].WKCNoteDateCreated instanceof Date, true);
 					assert.strictEqual(responseJSON[0].WKCNoteDateUpdated instanceof Date, true);
+					
 					done();
 				}));
 			}));
