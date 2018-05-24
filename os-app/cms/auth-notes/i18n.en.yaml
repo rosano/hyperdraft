@@ -1,9 +1,15 @@
 WKCNotesTitle: Notes
 WKCAppNotesAddButtonText: Add note
+WKCAppNotesDeleteButtonText: Delete note
+WKCAppNotesDeleteConfirmation: Permanantly delete note?
 WKCAppNotesPersistenceStatusSaving: Saving…
 WKCAppNotesPersistenceStatusSaved: Saved
+WKCAppNotesPersistenceStatusDeleting: Deleting…
+WKCAppNotesPersistenceStatusDeleted: Deleted
 WKCAppNotesPersistenceStatusUnableToSave: Unable to save
+WKCAppNotesPersistenceStatusUnableToDelete: Unable to delete
 WKCNotesErrors:
   WKCAppErrorTokenUnavailable: Authentication error
   WKCAppErrorEntriesUnavailable: Unable to fetch notes
-  WKCAppErrorPersistenceDidFail: Unable to save note. Would you like to try again?
+  WKCAppErrorPersistenceSaveDidFail: Unable to save note. Would you like to try again?
+  WKCAppErrorPersistenceDeleteDidFail: Unable to delete note. Would you like to try again?

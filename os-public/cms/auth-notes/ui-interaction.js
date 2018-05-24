@@ -33,6 +33,8 @@
 							'</pre>',
 						].join('');
 					});
+
+		selection.exit().remove();
 	};
 
 	//_ WKCNotesAppSetSelectedItemWithSharedData

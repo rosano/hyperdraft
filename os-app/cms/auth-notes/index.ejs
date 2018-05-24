@@ -55,12 +55,61 @@ locals.OLSKPageAssets = [
 		<button id="WKCAppNotesAddButton" accesskey="n"><%= OLSKLocalized('WKCAppNotesAddButtonText') %></button>
 		<script type="text/javascript">
 			d3.select('#WKCAppNotesAddButton').on('click', function() {
-				WKCNotesAppInteraction.WKCNotesAppPerformDataJoinWithItemsArrayAndSharedData(d3.selectAll('.WKCAppNotesListItem').data().concat(sharedData.WKCAppNotesSharedSelectedItem).sort(WKCNotesApp.WKCNotesAppListSort), sharedData);
-
 				WKCNotesAppInteraction.WKCNotesAppSetSelectedItemWithSharedData({
 					WKCNoteDateCreated: new Date(),
 					WKCNoteBody: '',
 				}, sharedData);
+
+				WKCNotesAppInteraction.WKCNotesAppPerformDataJoinWithItemsArrayAndSharedData(d3.selectAll('.WKCAppNotesListItem').data().concat(sharedData.WKCAppNotesSharedSelectedItem).sort(WKCNotesApp.WKCNotesAppListSort), sharedData);
+			});
+		</script>
+
+		<button id="WKCAppNotesDeleteButton"><%= OLSKLocalized('WKCAppNotesDeleteButtonText') %></button>
+		<script type="text/javascript">
+			d3.select('#WKCAppNotesDeleteButton').on('click', function() {
+				var persistenceIsCued = !!sharedData.WKCAppNotesSharedPersistenceTask._OLSKTaskTimerID;
+				clearInterval(sharedData.WKCAppNotesSharedPersistenceTask._OLSKTaskTimerID);
+
+				if (!window.confirm('<%= OLSKLocalized('WKCAppNotesDeleteConfirmation') %>')) {
+					console.log(persistenceIsCued);
+					if (persistenceIsCued) {
+						OLSKTasks.OLSKTasksTimeoutForTaskObject(sharedData.WKCAppNotesSharedPersistenceTask);
+					}
+
+					return;
+				};
+
+				d3.select('#WKCAppNotesPersistenceStatus').text('<%= OLSKLocalized('WKCAppNotesPersistenceStatusDeleting') %>');
+
+				return d3.json((<%- OLSKCanonicalSubstitutionFunctionFor('WKCRouteAPINotesDelete') %>)({
+					wkc_note_id: sharedData.WKCAppNotesSharedSelectedItem.WKCNoteID,
+				}), {
+					method: 'DELETE',
+					headers: {
+						'Content-Type': 'application/json',
+						'x-client-key': sharedData.WKCAppNotesSharedAPIToken,
+					},
+				}).then(function(responseJSON) {
+					d3.select('#WKCAppNotesPersistenceStatus').text('<%= OLSKLocalized('WKCAppNotesPersistenceStatusDeleted') %>');
+
+					WKCNotesAppInteraction.WKCNotesAppPerformDataJoinWithItemsArrayAndSharedData(d3.selectAll('.WKCAppNotesListItem').data().filter(function(e) {
+						return e !== sharedData.WKCAppNotesSharedSelectedItem;
+					}), sharedData);
+
+					WKCNotesAppInteraction.WKCNotesAppSetSelectedItemWithSharedData(d3.selectAll('.WKCAppNotesListItem').data()[0], sharedData);
+
+					setTimeout(function() {
+						d3.select('#WKCAppNotesPersistenceStatus').text('');
+					}, 1000);
+				}, function(error) {
+					if (window.confirm('<%= OLSKLocalized('WKCNotesErrors').WKCAppErrorPersistenceDeleteDidFail %>')) {
+						sharedData.WKCAppNotesSharedPersistenceTask.OLSKTaskCallback();
+					};
+
+					d3.select('#WKCAppNotesPersistenceStatus').text('<%= OLSKLocalized('WKCAppNotesPersistenceStatusUnableToDelete') %>');
+
+					throw error;
+				});
 			});
 		</script>
 	</header>
@@ -82,52 +131,50 @@ locals.OLSKPageAssets = [
 					OLSKTaskCallback: function() {
 						d3.select('#WKCAppNotesPersistenceStatus').text('<%= OLSKLocalized('WKCAppNotesPersistenceStatusSaving') %>');
 
-						var rejectCallback = function(error) {
-							if (window.confirm('<%= OLSKLocalized('WKCNotesErrors').WKCAppErrorPersistenceDidFail %>')) {
+						return (new Promise(function(resolve, reject) {
+							if (!sharedData.WKCAppNotesSharedSelectedItem.WKCNoteID) {
+								return resolve(d3.json('<%= OLSKCanonicalFor('WKCRouteAPINotesCreate') %>', {
+									method: 'POST',
+									headers: {
+										'Content-Type': 'application/json',
+										'x-client-key': sharedData.WKCAppNotesSharedAPIToken,
+									},
+									body: JSON.stringify(sharedData.WKCAppNotesSharedSelectedItem),
+								}).then(function(responseJSON) {
+									Object.assign(sharedData.WKCAppNotesSharedSelectedItem, responseJSON);
+								}, reject));
+							}
+
+							return resolve(d3.json((<%- OLSKCanonicalSubstitutionFunctionFor('WKCRouteAPINotesUpdate') %>)({
+								wkc_note_id: sharedData.WKCAppNotesSharedSelectedItem.WKCNoteID,
+							}), {
+								method: 'PUT',
+								headers: {
+									'Content-Type': 'application/json',
+									'x-client-key': sharedData.WKCAppNotesSharedAPIToken,
+								},
+								body: JSON.stringify(sharedData.WKCAppNotesSharedSelectedItem),
+							}));
+							
+						})).then(function() {
+							d3.select('#WKCAppNotesPersistenceStatus').text('<%= OLSKLocalized('WKCAppNotesPersistenceStatusSaved') %>');
+
+							setTimeout(function() {
+								d3.select('#WKCAppNotesPersistenceStatus').text('');
+							}, 1000);
+						}, function(error) {
+							throw error;
+						}).catch(function(error) {
+							if (window.confirm('<%= OLSKLocalized('WKCNotesErrors').WKCAppErrorPersistenceSaveDidFail %>')) {
 								sharedData.WKCAppNotesSharedPersistenceTask.OLSKTaskCallback();
 							};
 
 							d3.select('#WKCAppNotesPersistenceStatus').text('<%= OLSKLocalized('WKCAppNotesPersistenceStatusUnableToSave') %>');
 
 							throw error;
-						};
-
-						if (!sharedData.WKCAppNotesSharedSelectedItem.WKCNoteID) {
-							return d3.json('<%= OLSKCanonicalFor('WKCRouteAPINotesCreate') %>', {
-								method: 'POST',
-								headers: {
-									'Content-Type': 'application/json',
-									'x-client-key': sharedData.WKCAppNotesSharedAPIToken,
-								},
-								body: JSON.stringify(sharedData.WKCAppNotesSharedSelectedItem),
-							}).then(function(responseJSON) {
-								d3.select('#WKCAppNotesPersistenceStatus').text('<%= OLSKLocalized('WKCAppNotesPersistenceStatusSaved') %>');
-
-								Object.assign(sharedData.WKCAppNotesSharedSelectedItem, responseJSON);
-
-								setTimeout(function() {
-									d3.select('#WKCAppNotesPersistenceStatus').text('');
-								}, 1000);
-							}, rejectCallback);
-						}
-
-						return d3.json((<%- OLSKCanonicalSubstitutionFunctionFor('WKCRouteAPINotesUpdate') %>)({
-							wkc_note_id: sharedData.WKCAppNotesSharedSelectedItem.WKCNoteID,
-						}), {
-							method: 'PUT',
-							headers: {
-								'Content-Type': 'application/json',
-								'x-client-key': sharedData.WKCAppNotesSharedAPIToken,
-							},
-							body: JSON.stringify(sharedData.WKCAppNotesSharedSelectedItem),
-						}).then(function(responseJSON) {
-							console.log(responseJSON);
-							d3.select('#WKCAppNotesPersistenceStatus').text('<%= OLSKLocalized('WKCAppNotesPersistenceStatusSaved') %>');
-
-							setTimeout(function() {
-								d3.select('#WKCAppNotesPersistenceStatus').text('');
-							}, 1000);
-						}, rejectCallback);
+						}).finally(function() {
+							delete sharedData.WKCAppNotesSharedPersistenceTask._OLSKTaskTimerID;
+						});
 					},
 				};
 
