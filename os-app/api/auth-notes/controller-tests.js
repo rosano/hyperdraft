@@ -321,13 +321,23 @@ describe('Connection', function testConnection() {
 					WKCNoteBody: 'alpha',
 				}
 			}), WKCFakeResponseAsync(function(responseJSON) {
+				var noteID = responseJSON.WKCNoteID.toString();
 				apiNotesController.WKCActionAPINotesDelete(WKCFakeRequest({
 					params: {
-						wkc_note_id: responseJSON.WKCNoteID.toString().toString(),
+						wkc_note_id: noteID,
 					},
 				}), WKCFakeResponseAsync(function(responseJSON) {
 					assert.strictEqual(responseJSON.WKCAPIResponse, true);
-					done();
+
+					apiNotesController.WKCActionAPINotesRead(WKCFakeRequest({
+						params: {
+							wkc_note_id: noteID,
+						},
+					}), WKCFakeResponseAsync(), function(inputData) {
+						assert.deepEqual(inputData, new Error('WKCAPIClientErrorNotFound'));
+
+						done();
+					});
 				}));
 			}));
 		});
