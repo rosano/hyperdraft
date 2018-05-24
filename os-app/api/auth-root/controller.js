@@ -36,11 +36,11 @@ exports.OLSKControllerSharedMiddlewares = function() {
 
 exports.WKCAPIMiddlewareAuthenticate = function(req, res, next) {
 	if (!req.headers['x-client-key'] || req.headers['x-client-key'].trim() === '') {
-		return next(new Error('WKCAPIClientErrorTokenNotSet'));
+		return next(new Error('WKCAPIClientErrorAuthenticationTokenNotSet'));
 	}
 
 	if (req.headers['x-client-key'] !== process.env.WKC_INSECURE_API_ACCESS_TOKEN) {
-		return next(new Error('WKCAPIClientErrorTokenNotValid'));
+		return next(new Error('WKCAPIClientErrorAuthenticationTokenNotValid'));
 	}
 
 	return next();
@@ -57,15 +57,17 @@ exports.OLSKControllerSharedErrorHandlers = function() {
 //_ WKCAPIErrorHandler
 
 exports.WKCAPIErrorHandler = function(err, req, res, next) {
-	if (err.message.indexOf('WKCAPISystemError') === 0) {
-		return res.json({
-			WKCAPISystemError: err.message,
-		});
-	}
+	res.status(err.message.indexOf('WKCAPIClientErrorAuthentication') === 0 ? 401 : 500);
 
 	if (err.message.indexOf('WKCAPIClientError') === 0) {
 		return res.json({
 			WKCAPIClientError: err.message,
+		});
+	}
+
+	if (err.message.indexOf('WKCAPISystemError') === 0) {
+		return res.json({
+			WKCAPISystemError: err.message,
 		});
 	}
 
