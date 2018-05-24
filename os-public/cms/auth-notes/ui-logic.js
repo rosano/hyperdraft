@@ -10,10 +10,14 @@
 	(factory((global.WKCNotesApp = global.WKCNotesApp || {})));
 }(this, (function (exports) { 'use strict';
 
-	//_ WKCNotesAppTest
+	//_ WKCNotesAppListSort
 
-	exports.WKCNotesAppTest = function () {
-		return 'hello';
+	exports.WKCNotesAppListSort = function (a, b) {
+		if (b.WKCNoteDateUpdated && a.WKCNoteDateUpdated) {
+			return b.WKCNoteDateUpdated > a.WKCNoteDateUpdated;
+		}
+
+		return b.WKCNoteDateCreated > a.WKCNoteDateCreated;
 	};
 
 	Object.defineProperty(exports, '__esModule', { value: true });
