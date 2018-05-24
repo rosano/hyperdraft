@@ -48,6 +48,14 @@ locals.OLSKPageAssets = [
 		<button id="WKCNotesAddButton" accesskey="n"><%= OLSKLocalized('WKCNotesAddButtonText') %></button>
 		<script type="text/javascript">
 			d3.select('#WKCNotesAddButton').on('click', function() {
+				sharedData.WKCAppNotesSharedEditObject = {
+					WKCNoteDateCreated: new Date(),
+				};
+
+				WKCNotesAppInteraction.WKCNotesAppPerformDataJoinFor(d3.select('#WKCAppNotesList')
+				.selectAll('.WKCAppNotesListItem').data().concat(sharedData.WKCAppNotesSharedEditObject).sort(function(a, b) {
+					return a.WKCNoteDateUpdated < b.WKCNoteDateUpdated;
+				}));
 				// d3.json('<%= OLSKCanonicalFor('WKCRouteAPINotesCreate') %>', {
 				// 	method: 'POST',
 				// 	headers: {
