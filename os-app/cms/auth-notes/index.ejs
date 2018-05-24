@@ -36,7 +36,9 @@ locals.OLSKPageAssets = [
 			}
 
 			d3.select('#WKCAppNotes').classed('WKCAppNotesLoading', false);
-			WKCNotesAppInteraction.WKCNotesAppPerformDataJoinFor(responseJSON);
+			WKCNotesAppInteraction.WKCNotesAppPerformDataJoinFor(responseJSON.sort(function(a, b) {
+				return a.WKCNoteDateUpdated < b.WKCNoteDateUpdated;
+			}));
 		});
 	});
 </script>
