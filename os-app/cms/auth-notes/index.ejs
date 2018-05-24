@@ -85,6 +85,7 @@ locals.OLSKPageAssets = [
 					OLSKTaskShouldBePerformed: function() {
 						return true;
 					},
+					OLSKTaskFireLimit: 1,
 					OLSKTaskCallback: function() {
 						d3.select('#WKCAppNotesPersistenceStatus').text('<%= OLSKLocalized('WKCAppNotesPersistenceStatusSaving') %>');
 
@@ -104,10 +105,12 @@ locals.OLSKPageAssets = [
 								setTimeout(function() {
 									d3.select('#WKCAppNotesPersistenceStatus').text('');
 								}, 1000);
+							}, function(error) {
+								window.alert('<%= OLSKLocalized('WKCNotesErrors').WKCAppErrorPersistenceDidFailOnCreate %>');
+								throw error;
 							});
 						}
 					},
-					OLSKTaskFireLimit: 1,
 				};
 
 				d3.select('#WKCNotesAppEditorTextarea').on('input', function() {
