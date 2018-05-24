@@ -76,6 +76,9 @@ locals.OLSKPageAssets = [
 						WKCNoteBody: this.value,
 						WKCNoteDateUpdated: new Date(),
 					});
+
+					WKCNotesAppInteraction.WKCNotesAppPerformDataJoinFor(d3.select('#WKCAppNotesList')
+					.selectAll('.WKCAppNotesListItem').data());
 				});
 			</script>
 		</div>
