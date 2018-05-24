@@ -39,6 +39,11 @@ locals.OLSKPageAssets = [
 			WKCNotesAppInteraction.WKCNotesAppPerformDataJoinFor(responseJSON.sort(function(a, b) {
 				return a.WKCNoteDateUpdated < b.WKCNoteDateUpdated;
 			}));
+
+			sharedData.WKCAppNotesSharedEditObject = d3.select('#WKCAppNotesList')
+				.selectAll('.WKCAppNotesListItem').data().slice().shift();
+			d3.select('#WKCNotesAppEditorTextarea').text(sharedData.WKCAppNotesSharedEditObject.WKCNoteBody);
+			d3.select('#WKCNotesAppEditorTextarea').node().focus();
 		});
 	});
 </script>
