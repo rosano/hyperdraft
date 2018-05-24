@@ -9,7 +9,9 @@ locals.OLSKPageAssets = [
 <%- include('../../_shared/WKCLayout/header.ejs') %>
 
 <script type="text/javascript">
-	var sharedData = {};
+	var sharedData = {
+		WKCAppNotesSharedEditObject: {},
+	};
 
 	d3.json('<%= OLSKCanonicalFor('WKCRouteAPIToken') %>', {
 		method: 'GET',
@@ -70,7 +72,12 @@ locals.OLSKPageAssets = [
 		</div>
 
 		<div id="WKCAppNotesEditor">
-			<textarea></textarea>
+			<textarea id="WKCNotesAppEditorTextarea"></textarea>
+			<script type="text/javascript">
+				d3.select('#WKCNotesAppEditorTextarea').on('input', function() {
+					sharedData.WKCAppNotesSharedEditObject.WKCNoteBody = this.value;
+				});
+			</script>
 		</div>
 	</div>
 
