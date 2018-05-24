@@ -56,6 +56,8 @@ locals.OLSKPageAssets = [
 				.selectAll('.WKCAppNotesListItem').data().concat(sharedData.WKCAppNotesSharedEditObject).sort(function(a, b) {
 					return a.WKCNoteDateUpdated < b.WKCNoteDateUpdated;
 				}));
+
+				d3.select('#WKCNotesAppEditorTextarea').node().focus();
 				// d3.json('<%= OLSKCanonicalFor('WKCRouteAPINotesCreate') %>', {
 				// 	method: 'POST',
 				// 	headers: {
