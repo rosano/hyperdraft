@@ -17,6 +17,7 @@
     "OLSKTasks": "latest"
   },
   "devDependencies": {
-    "gulp": "4.0"
+    "gulp": "4.0",
+    "OLSKTesting": "olsk/OLSKTesting"
   }
 }

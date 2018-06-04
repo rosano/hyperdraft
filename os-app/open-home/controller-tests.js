@@ -6,6 +6,8 @@
 
 var assert = require('assert');
 
+var testingLibrary = require('OLSKTesting');
+
 var homeController = require('./controller');
 
 describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
@@ -19,6 +21,25 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 				OLSKRouteLanguages: ['en'],
 			},
 		});
+	});
+
+});
+
+describe('WKCActionHomeIndex', function testWKCActionHomeIndex() {
+
+	it('renders page', function() {
+		homeController.WKCActionHomeIndex(null, testingLibrary.OLSKTestingFakeResponseForRender(function(viewPath, pageData) {
+			assert.strictEqual(viewPath, [
+				__dirname,
+				'index',
+				].join('/'));
+		}));
+	});
+
+	it('returns pageData', function() {
+		homeController.WKCActionHomeIndex(null, testingLibrary.OLSKTestingFakeResponseForRender(function(viewPath, pageData) {
+			assert.deepEqual(pageData, {});
+		}));
 	});
 
 });
