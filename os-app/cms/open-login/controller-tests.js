@@ -6,6 +6,8 @@
 
 var assert = require('assert');
 
+var testingLibrary = require('OLSKTesting');
+
 var loginController = require('./controller');
 var sharedController = require('../../_shared/controller');
 
@@ -54,50 +56,32 @@ describe('OLSKControllerSharedMiddlewares', function testOLSKControllerSharedMid
 
 describe('WKCLoginMiddlewareAuthenticate', function testWKCLoginMiddlewareAuthenticate() {
 
-	var fakeRequest = function(inputData = {}) {
-		return {
-			session: Object.assign({}, inputData),
-		};
-	};
-
-	var fakeResponse = function() {
-		return {
-			redirect: function(inputData) {
-				return inputData;
-			}
-		};
-	};
-
-	var fakeNext = function(inputData) {
-		return typeof inputData === 'undefined' ? 'RETURNED_UNDEFINED' : inputData;
-	};
-
 	it('redirects to login without session data', function() {
-		assert.deepEqual(loginController.WKCLoginMiddlewareAuthenticate(fakeRequest(), fakeResponse()), loginController.OLSKControllerRoutes().WKCRouteLogin.OLSKRoutePath);
+		assert.deepEqual(loginController.WKCLoginMiddlewareAuthenticate(testingLibrary.OLSKTestingFakeRequestForSession(), testingLibrary.OLSKTestingFakeResponseForRedirect()), loginController.OLSKControllerRoutes().WKCRouteLogin.OLSKRoutePath);
 	});
 
 	it('redirects to login without token', function() {
-		assert.deepEqual(loginController.WKCLoginMiddlewareAuthenticate(fakeRequest({
+		assert.deepEqual(loginController.WKCLoginMiddlewareAuthenticate(testingLibrary.OLSKTestingFakeRequestForSession({
 			WKCInsecureSessionToken: null,
-		}), fakeResponse()), loginController.OLSKControllerRoutes().WKCRouteLogin.OLSKRoutePath);
+		}), testingLibrary.OLSKTestingFakeResponseForRedirect()), loginController.OLSKControllerRoutes().WKCRouteLogin.OLSKRoutePath);
 	});
 
 	it('redirects to login with blank token', function() {
-		assert.deepEqual(loginController.WKCLoginMiddlewareAuthenticate(fakeRequest({
+		assert.deepEqual(loginController.WKCLoginMiddlewareAuthenticate(testingLibrary.OLSKTestingFakeRequestForSession({
 			WKCInsecureSessionToken: '',
-		}), fakeResponse()), loginController.OLSKControllerRoutes().WKCRouteLogin.OLSKRoutePath);
+		}), testingLibrary.OLSKTestingFakeResponseForRedirect()), loginController.OLSKControllerRoutes().WKCRouteLogin.OLSKRoutePath);
 	});
 
 	it('redirects to login with whitespace token', function() {
-		assert.deepEqual(loginController.WKCLoginMiddlewareAuthenticate(fakeRequest({
+		assert.deepEqual(loginController.WKCLoginMiddlewareAuthenticate(testingLibrary.OLSKTestingFakeRequestForSession({
 			WKCInsecureSessionToken: ' ',
-		}), fakeResponse()), loginController.OLSKControllerRoutes().WKCRouteLogin.OLSKRoutePath);
+		}), testingLibrary.OLSKTestingFakeResponseForRedirect()), loginController.OLSKControllerRoutes().WKCRouteLogin.OLSKRoutePath);
 	});
 
 	it('returns next(undefined) with any token', function() {
-		assert.deepEqual(loginController.WKCLoginMiddlewareAuthenticate(fakeRequest({
+		assert.deepEqual(loginController.WKCLoginMiddlewareAuthenticate(testingLibrary.OLSKTestingFakeRequestForSession({
 			WKCInsecureSessionToken: 'alpha',
-		}), fakeResponse(), fakeNext), 'RETURNED_UNDEFINED');
+		}), testingLibrary.OLSKTestingFakeResponseForRedirect(), testingLibrary.OLSKTestingFakeNext()), 'RETURNED_UNDEFINED');
 	});
 
 });
