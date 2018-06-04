@@ -6,6 +6,8 @@
 
 var assert = require('assert');
 
+var testingLibrary = require('OLSKTesting');
+
 var notesController = require('./controller');
 
 describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
@@ -22,6 +24,25 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 				],
 			},
 		});
+	});
+
+});
+
+describe('WKCActionNotesIndex', function testWKCActionNotesIndex() {
+
+	it('renders page', function() {
+		assert.strictEqual(notesController.WKCActionNotesIndex(null, testingLibrary.OLSKTestingFakeResponseForRender(function(viewPath) {
+			return viewPath;
+		})), [
+			__dirname,
+			'index',
+		].join('/'));
+	});
+
+	it('returns pageData', function() {
+		assert.deepEqual(notesController.WKCActionNotesIndex(null, testingLibrary.OLSKTestingFakeResponseForRender(function(viewPath, pageData) {
+			return pageData;
+		})), {});
 	});
 
 });
