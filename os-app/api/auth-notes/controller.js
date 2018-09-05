@@ -61,6 +61,30 @@ exports.OLSKControllerSharedMiddlewares = function() {
 	};
 };
 
+//_ WKCAPINotesMiddlewareFindByID
+
+exports.WKCAPINotesMiddlewareFindByID = function(req, res, next) {
+	if (!req.params.wkc_note_id || !req.params.wkc_note_id.trim()) {
+		return next(new Error('WKCAPIClientErrorNotFound'));
+	}
+
+	return req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_notes').findOne({
+		WKCNoteID: parseInt(req.params.wkc_note_id),
+	}, function(err, result) {
+		if (err) {
+			throw new Error('WKCErrorDatabaseFindOne');
+		}
+
+		if (!result) {
+			return next(new Error('WKCAPIClientErrorNotFound'));
+		}
+
+		req._WKCAPINotesMiddlewareFindByIDResult = result;
+
+		return next();
+	});
+};
+
 //_ WKCAPISettingsLastGeneratedPublicIDWithClientAndCallback
 
 exports.WKCAPISettingsLastGeneratedPublicIDWithClientAndCallback = function(client, callback) {

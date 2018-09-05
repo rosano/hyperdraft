@@ -127,6 +127,66 @@ describe('Connection', function testConnection() {
 		};
 	};
 
+	describe('WKCAPINotesMiddlewareFindByID', function WKCAPINotesMiddlewareFindByID() {
+
+		it('returns next(WKCAPIClientError) without wkc_note_id', function() {
+			assert.deepEqual(apiNotesController.WKCAPINotesMiddlewareFindByID(WKCFakeRequest({
+				params: {},
+			}), testingLibrary.OLSKTestingFakeResponseForJSON(), testingLibrary.OLSKTestingFakeNext()), new Error('WKCAPIClientErrorNotFound'));
+		});
+
+		it('returns next(WKCAPIClientError) with null wkc_note_id', function() {
+			assert.deepEqual(apiNotesController.WKCAPINotesMiddlewareFindByID(WKCFakeRequest({
+				params: {
+					wkc_note_id: null,
+				},
+			}), testingLibrary.OLSKTestingFakeResponseForJSON(), testingLibrary.OLSKTestingFakeNext()), new Error('WKCAPIClientErrorNotFound'));
+		});
+
+		it('returns next(WKCAPIClientError) with whitespace wkc_note_id', function() {
+			assert.deepEqual(apiNotesController.WKCAPINotesMiddlewareFindByID(WKCFakeRequest({
+				params: {
+					wkc_note_id: ' ',
+				},
+			}), testingLibrary.OLSKTestingFakeResponseForJSON(), testingLibrary.OLSKTestingFakeNext()), new Error('WKCAPIClientErrorNotFound'));
+		});
+
+		it('returns next(WKCAPIClientError) with non-existant wkc_note_id', function(done) {
+			apiNotesController.WKCAPINotesMiddlewareFindByID(WKCFakeRequest({
+				params: {
+					wkc_note_id: 'alfa',
+				},
+			}), testingLibrary.OLSKTestingFakeResponseForJSON(), function(inputData) {
+				assert.deepEqual(inputData, new Error('WKCAPIClientErrorNotFound'));
+
+				done();
+			});
+		});
+
+		it('returns next(undefined)', function(done) {
+			apiNotesController.WKCActionAPINotesCreate(WKCFakeRequest({
+				body: {
+					WKCNoteBody: 'alpha',
+				},
+			}), WKCFakeResponseAsync(function(responseJSON) {
+				var requestObject = WKCFakeRequest({
+					params: {
+						wkc_note_id: responseJSON.WKCNoteID.toString(),
+					},
+				});
+				
+				apiNotesController.WKCAPINotesMiddlewareFindByID(requestObject, testingLibrary.OLSKTestingFakeResponseForJSON(), function(inputData) {
+					assert.deepEqual(inputData, undefined);
+
+					assert.deepEqual(requestObject._WKCAPINotesMiddlewareFindByIDResult, responseJSON)
+
+					done();
+				});
+			}));
+		});
+
+	});
+
 	describe('WKCAPISettingsLastGeneratedPublicIDWithClientAndCallback', function testWKCAPISettingsLastGeneratedPublicIDWithClientAndCallback() {
 
 		it('throws error if param1 empty', function() {

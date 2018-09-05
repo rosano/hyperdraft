@@ -72,7 +72,7 @@ describe('WKCAPIMiddlewareAuthenticate', function testWKCAPIMiddlewareAuthentica
 		}), testingLibrary.OLSKTestingFakeResponseForJSON(), testingLibrary.OLSKTestingFakeNext()), new Error('WKCAPIClientErrorAuthenticationTokenNotValid'));
 	});
 
-	it('returns next(undefined) with correct token', function() {
+	it('returns next(undefined)', function() {
 		assert.strictEqual(apiController.WKCAPIMiddlewareAuthenticate(testingLibrary.OLSKTestingFakeRequestForHeaders({
 			'x-client-key': process.env.WKC_INSECURE_API_ACCESS_TOKEN,
 		}), testingLibrary.OLSKTestingFakeResponseForJSON(), testingLibrary.OLSKTestingFakeNext()), 'RETURNED_UNDEFINED');
