@@ -59,6 +59,16 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 
 });
 
+describe('OLSKControllerSharedMiddlewares', function testOLSKControllerSharedMiddlewares() {
+
+	it('returns middleware functions', function() {
+		assert.deepEqual(apiNotesController.OLSKControllerSharedMiddlewares(), {
+			WKCSharedMiddlewareAPINotesFindByID: apiNotesController.WKCAPINotesMiddlewareFindByID,
+		});
+	});
+
+});
+
 describe('Connection', function testConnection() {
 
 	var mongodbPackage = require('mongodb');
@@ -290,7 +300,7 @@ describe('Connection', function testConnection() {
 			}));
 		});
 
-		it('returns object with updated properties', function(done) {
+		it('returns noteObject with updated properties', function(done) {
 			apiNotesController.WKCActionAPINotesCreate(WKCFakeRequest({
 				body: {
 					WKCNoteBody: 'alpha',

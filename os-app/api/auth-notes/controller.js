@@ -53,6 +53,14 @@ exports.OLSKControllerRoutes = function() {
 	};
 };
 
+//_ OLSKControllerSharedMiddlewares
+
+exports.OLSKControllerSharedMiddlewares = function() {
+	return {
+		WKCSharedMiddlewareAPINotesFindByID: exports.WKCAPINotesMiddlewareFindByID,
+	};
+};
+
 //_ WKCAPISettingsLastGeneratedPublicIDWithClientAndCallback
 
 exports.WKCAPISettingsLastGeneratedPublicIDWithClientAndCallback = function(client, callback) {
