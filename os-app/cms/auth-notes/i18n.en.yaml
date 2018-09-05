@@ -1,5 +1,6 @@
 WKCNotesTitle: Notes
 WKCAppNotesAddButtonText: Add note
+WKCAppNotesPublishButtonText: Publish note
 WKCAppNotesDeleteButtonText: Delete note
 WKCAppNotesDeleteConfirmation: Permanantly delete note?
 WKCAppNotesPersistenceStatusSaving: Saving…
