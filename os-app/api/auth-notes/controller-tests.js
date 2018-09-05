@@ -44,6 +44,7 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 				OLSKRouteFunction: apiNotesController.WKCActionAPINotesPublish,
 				OLSKRouteMiddlewares: [
 					'WKCSharedMiddlewareAPIAuthenticate',
+					'WKCSharedMiddlewareAPINotesFindByID',
 				],
 			},
 			WKCRouteAPINotesDelete: {
@@ -388,6 +389,74 @@ describe('Connection', function testConnection() {
 					assert.strictEqual(responseJSON.WKCNoteDateUpdated > originalDateUpdated, true);
 					
 					done();
+				}));
+			}));
+		});
+
+	});
+
+	describe('WKCActionAPINotesPublish', function testWKCActionAPINotesPublish() {
+
+		it('returns WKCErrors if not valid WKCNotePublishStatus', function(done) {
+			apiNotesController.WKCActionAPINotesCreate(WKCFakeRequest({
+				params: {
+					wkc_note_id: '',
+				},
+				body: {
+					WKCNotePublishStatusIsPublished: null,
+				},
+			}), WKCFakeResponseAsync(function(noteObject) {
+				assert.deepEqual(apiNotesController.WKCActionAPINotesPublish(WKCFakeRequest({
+					params: {
+						wkc_note_id: noteObject.WKCNoteID,
+					},
+					_WKCAPINotesMiddlewareFindByIDResult: noteObject,
+					body: {
+						WKCNotePublishStatusIsPublished: null,
+					},
+				}), WKCFakeResponseSync()).WKCErrors, {
+					WKCNotePublishStatusIsPublished: [
+						'WKCErrorNotBoolean',
+					],
+				});
+
+				done();
+			}));
+		});
+
+		it('returns noteObject with updated properties', function(done) {
+			apiNotesController.WKCActionAPINotesCreate(WKCFakeRequest({
+				body: {
+					WKCNoteBody: 'alpha',
+				},
+			}), WKCFakeResponseAsync(function(noteObject) {
+				var originalDateUpdated = noteObject.WKCNoteDateUpdated;
+
+				assert.strictEqual(noteObject.WKCNoteIsPublished, undefined);
+
+				apiNotesController.WKCActionAPINotesPublish(WKCFakeRequest({
+					params: {
+						wkc_note_id: noteObject.WKCNoteID,
+					},
+					_WKCAPINotesMiddlewareFindByIDResult: noteObject,
+					body: {
+						WKCNotePublishStatusIsPublished: true,
+					},
+				}), WKCFakeResponseAsync(function(responseJSON) {
+					assert.deepEqual(responseJSON, {
+						WKCNotePublishStatusIsPublished: true,
+					});
+
+					apiNotesController.WKCActionAPINotesRead(WKCFakeRequest({
+						params: {
+							wkc_note_id: noteObject.WKCNoteID.toString(),
+						},
+					}), WKCFakeResponseAsync(function(responseJSON) {
+						assert.strictEqual(responseJSON.WKCNoteIsPublished, true);
+						assert.strictEqual(responseJSON.WKCNoteDateUpdated > originalDateUpdated, true);
+
+						done();
+					}));
 				}));
 			}));
 		});

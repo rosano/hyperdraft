@@ -40,6 +40,7 @@ exports.OLSKControllerRoutes = function() {
 			OLSKRouteFunction: exports.WKCActionAPINotesPublish,
 			OLSKRouteMiddlewares: [
 				'WKCSharedMiddlewareAPIAuthenticate',
+				'WKCSharedMiddlewareAPINotesFindByID',
 			],
 		},
 		WKCRouteAPINotesDelete: {
@@ -202,6 +203,33 @@ exports.WKCActionAPINotesUpdate = function(req, res, next) {
 		}
 
 		return res.json(inputData);
+	});
+};
+
+//_ WKCActionAPINotesPublish
+
+exports.WKCActionAPINotesPublish = function(req, res, next) {
+	var inputData = Object.assign({}, req.body);
+
+	if (!modelLibrary.WKCModelInputDataIsNotePublishStatusObject(inputData)) {
+		return res.json(inputData);
+	}
+
+	return req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_notes').findOneAndUpdate({
+		WKCNoteID: parseInt(req.params.wkc_note_id),
+	}, Object.assign(req._WKCAPINotesMiddlewareFindByIDResult, {
+		WKCNoteIsPublished: inputData.WKCNotePublishStatusIsPublished,
+		WKCNoteDateUpdated: new Date(),
+	}), function(err, result) {
+		if (err) {
+			throw new Error('WKCErrorDatabaseFindOne');
+		}
+
+		if (!result.value) {
+			return next(new Error('WKCAPIClientErrorNotFound'));
+		}
+
+		return res.json(req.body);
 	});
 };
 
