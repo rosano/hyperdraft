@@ -34,6 +34,35 @@ describe('WKCModelInputDataIsNotesObject', function testWKCModelInputDataIsNotes
 
 });
 
+describe('WKCModelInputDataIsNotePublishStatusObject', function testWKCModelInputDataIsNotePublishStatusObject() {
+
+	it('returns false if not object', function() {
+		assert.strictEqual(notesLibrary.WKCModelInputDataIsNotePublishStatusObject(null), false);
+	});
+
+	it('returns false with WKCErrors if WKCNotePublishStatusIsPublished not boolean', function() {
+		var item = {
+			WKCNotePublishStatusIsPublished: null,
+		};
+		assert.strictEqual(notesLibrary.WKCModelInputDataIsNotePublishStatusObject(item), false);
+		assert.deepEqual(item.WKCErrors, {
+			WKCNotePublishStatusIsPublished: [
+				'WKCErrorNotBoolean',
+			],
+		});
+	});
+
+	it('returns true', function() {
+		assert.deepEqual(notesLibrary.WKCModelInputDataIsNotePublishStatusObject({
+			WKCNotePublishStatusIsPublished: false,
+		}), true);
+		assert.deepEqual(notesLibrary.WKCModelInputDataIsNotePublishStatusObject({
+			WKCNotePublishStatusIsPublished: true,
+		}), true);
+	});
+
+});
+
 describe('WKCModelNotesUnusedPropertyNames', function testWKCModelNotesUnusedPropertyNames() {
 
 	it('returns unused property names', function() {

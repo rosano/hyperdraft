@@ -28,6 +28,30 @@ exports.WKCModelInputDataIsNotesObject = function(inputData) {
 	return true;
 };
 
+//_ WKCModelInputDataIsNotePublishStatusObject
+
+exports.WKCModelInputDataIsNotePublishStatusObject = function(inputData) {
+	if (typeof inputData !== 'object' || inputData === null) {
+		return false;
+	}
+
+	var errors = {};
+
+	if (typeof inputData.WKCNotePublishStatusIsPublished !== 'boolean') {
+		errors.WKCNotePublishStatusIsPublished = [
+			'WKCErrorNotBoolean',
+		];
+	}
+
+	if (Object.keys(errors).length) {
+		inputData.WKCErrors = errors;
+		
+		return false;
+	}
+
+	return true;
+};
+
 //_ WKCModelNotesUnusedPropertyNames
 
 exports.WKCModelNotesUnusedPropertyNames = function(inputData) {
