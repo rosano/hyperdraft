@@ -218,41 +218,71 @@ describe('Connection', function testConnection() {
 			});
 		});
 
-		it('returns 1 if created one item', function(done) {
+		it('returns 1 if published one item', function(done) {
 			apiNotesController.WKCActionAPINotesCreate(WKCFakeRequest({
 				body: {
 					WKCNoteBody: 'alpha',
 				},
-			}), WKCFakeResponseAsync(function() {
-				apiNotesController.WKCAPISettingsLastGeneratedPublicIDWithClientAndCallback(mongoClient, function(lastRepoID) {
-					assert.strictEqual(lastRepoID, 1);
-					
-					done();
-				});
+			}), WKCFakeResponseAsync(function(noteObject) {
+				apiNotesController.WKCActionAPINotesPublish(WKCFakeRequest({
+					params: {
+						wkc_note_id: noteObject.WKCNoteID,
+					},
+					_WKCAPINotesMiddlewareFindByIDResult: noteObject,
+					body: {
+						WKCNotePublishStatusIsPublished: true,
+					},
+				}), WKCFakeResponseAsync(function(responseJSON) {
+					apiNotesController.WKCAPISettingsLastGeneratedPublicIDWithClientAndCallback(mongoClient, function(lastRepoID) {
+						assert.strictEqual(lastRepoID, 1);
+						
+						done();
+					});
+				}));
 			}));
 		});
 
-		it('returns 2 if created two items and deleted first one', function(done) {
+		it('returns 2 if published two items and deleted first one', function(done) {
 			apiNotesController.WKCActionAPINotesCreate(WKCFakeRequest({
 				body: {
 					WKCNoteBody: 'alpha',
 				},
-			}), WKCFakeResponseAsync(function() {
-				apiNotesController.WKCActionAPINotesCreate(WKCFakeRequest({
-				body: {
-					WKCNoteBody: 'alpha',
-				},
-			}), WKCFakeResponseAsync(function(responseJSON) {
+			}), WKCFakeResponseAsync(function(noteObject) {
+				apiNotesController.WKCActionAPINotesPublish(WKCFakeRequest({
+					params: {
+						wkc_note_id: noteObject.WKCNoteID,
+					},
+					_WKCAPINotesMiddlewareFindByIDResult: noteObject,
+					body: {
+						WKCNotePublishStatusIsPublished: true,
+					},
+				}), WKCFakeResponseAsync(function(responseJSON) {
 					apiNotesController.WKCActionAPINotesDelete(WKCFakeRequest({
 						params: {
-							wkc_note_id: responseJSON.WKCNoteID.toString(),
+							wkc_note_id: noteObject.WKCNoteID.toString(),
 						},
 					}), WKCFakeResponseAsync(function() {
-						apiNotesController.WKCAPISettingsLastGeneratedPublicIDWithClientAndCallback(mongoClient, function(lastRepoID) {
-							assert.strictEqual(lastRepoID, 2);
-							
-							done();
-						});
+						apiNotesController.WKCActionAPINotesCreate(WKCFakeRequest({
+							body: {
+								WKCNoteBody: 'alpha',
+							},
+						}), WKCFakeResponseAsync(function(noteObject) {
+							apiNotesController.WKCActionAPINotesPublish(WKCFakeRequest({
+								params: {
+									wkc_note_id: noteObject.WKCNoteID,
+								},
+								_WKCAPINotesMiddlewareFindByIDResult: noteObject,
+								body: {
+									WKCNotePublishStatusIsPublished: true,
+								},
+							}), WKCFakeResponseAsync(function(responseJSON) {
+								apiNotesController.WKCAPISettingsLastGeneratedPublicIDWithClientAndCallback(mongoClient, function(lastRepoID) {
+									assert.strictEqual(lastRepoID, 2);
+									
+									done();
+								});
+							}));
+						}));
 					}));
 				}));
 			}));
@@ -278,7 +308,7 @@ describe('Connection', function testConnection() {
 					WKCNoteBody: 'alpha',
 				},
 			}), WKCFakeResponseAsync(function(responseJSON) {
-				assert.strictEqual(responseJSON.WKCNoteID, 1);
+				assert.strictEqual(responseJSON.WKCNoteID - (new Date()) > -100, true);
 				assert.strictEqual(responseJSON.WKCNoteBody, 'alpha');
 				assert.strictEqual(responseJSON.WKCNoteDateCreated instanceof Date, true);
 				assert.strictEqual(responseJSON.WKCNoteDateUpdated instanceof Date, true);
@@ -308,16 +338,13 @@ describe('Connection', function testConnection() {
 				body: {
 					WKCNoteBody: 'alpha',
 				},
-			}), WKCFakeResponseAsync(function(responseJSON) {
+			}), WKCFakeResponseAsync(function(noteObject) {
 				apiNotesController.WKCActionAPINotesRead(WKCFakeRequest({
 					params: {
-						wkc_note_id: responseJSON.WKCNoteID.toString(),
+						wkc_note_id: noteObject.WKCNoteID.toString(),
 					},
 				}), WKCFakeResponseAsync(function(responseJSON) {
-					assert.strictEqual(responseJSON.WKCNoteID, 1);
-					assert.strictEqual(responseJSON.WKCNoteBody, 'alpha');
-					assert.strictEqual(responseJSON.WKCNoteDateCreated instanceof Date, true);
-					assert.strictEqual(responseJSON.WKCNoteDateUpdated instanceof Date, true);
+					assert.deepEqual(responseJSON, noteObject);
 
 					done();
 				}));
@@ -433,6 +460,7 @@ describe('Connection', function testConnection() {
 				var originalDateUpdated = noteObject.WKCNoteDateUpdated;
 
 				assert.strictEqual(noteObject.WKCNoteIsPublished, undefined);
+				assert.strictEqual(noteObject.WKCNotePublicID, undefined);
 
 				apiNotesController.WKCActionAPINotesPublish(WKCFakeRequest({
 					params: {
@@ -451,9 +479,10 @@ describe('Connection', function testConnection() {
 						params: {
 							wkc_note_id: noteObject.WKCNoteID.toString(),
 						},
-					}), WKCFakeResponseAsync(function(responseJSON) {
-						assert.strictEqual(responseJSON.WKCNoteIsPublished, true);
-						assert.strictEqual(responseJSON.WKCNoteDateUpdated > originalDateUpdated, true);
+					}), WKCFakeResponseAsync(function(noteObject) {
+						assert.strictEqual(noteObject.WKCNoteIsPublished, true);
+						assert.strictEqual(noteObject.WKCNotePublicID, 1);
+						assert.strictEqual(noteObject.WKCNoteDateUpdated > originalDateUpdated, true);
 
 						done();
 					}));
@@ -513,14 +542,9 @@ describe('Connection', function testConnection() {
 				body: {
 					WKCNoteBody: 'alpha',
 				},
-			}), WKCFakeResponseAsync(function(responseJSON) {
+			}), WKCFakeResponseAsync(function(noteObject) {
 				apiNotesController.WKCActionAPINotesSearch(WKCFakeRequest(), WKCFakeResponseAsync(function(responseJSON) {
-					assert.strictEqual(Array.isArray(responseJSON), true);
-					assert.strictEqual(responseJSON[0]._id, undefined);
-					assert.strictEqual(responseJSON[0].WKCNoteID, 1);
-					assert.strictEqual(responseJSON[0].WKCNoteBody, 'alpha');
-					assert.strictEqual(responseJSON[0].WKCNoteDateCreated instanceof Date, true);
-					assert.strictEqual(responseJSON[0].WKCNoteDateUpdated instanceof Date, true);
+					assert.deepEqual(responseJSON, [noteObject]);
 					
 					done();
 				}));

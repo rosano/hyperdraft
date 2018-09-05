@@ -132,33 +132,16 @@ exports.WKCActionAPINotesCreate = function(req, res, next) {
 	var noteDate = new Date();
 	var client = req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient;
 
-	return exports.WKCAPISettingsLastGeneratedPublicIDWithClientAndCallback(client, function(lastRepoID) {
-		var newRepoID = lastRepoID + 1;
+	return client.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_notes').insertOne(Object.assign(inputData, {
+		WKCNoteID: (new Date()) * 1,
+		WKCNoteDateCreated: noteDate,
+		WKCNoteDateUpdated: noteDate,
+	}), function(err, result) {
+		if (err) {
+			throw new Error('WKCErrorDatabaseCreate');
+		}
 
-		return client.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_notes').insertOne(Object.assign(inputData, {
-			WKCNoteID: newRepoID,
-			WKCNoteDateCreated: noteDate,
-			WKCNoteDateUpdated: noteDate,
-		}), function(err, result) {
-			if (err) {
-				throw new Error('WKCErrorDatabaseCreate');
-			}
-
-			return client.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_settings').findOneAndUpdate({
-				WKCSettingsKey: 'WKCSettingsLastRepoID',
-			}, {
-				WKCSettingsKey: 'WKCSettingsLastRepoID',
-				WKCSettingsValue: newRepoID,
-			}, {
-				upsert: true,
-			}, function(err) {
-				if (err) {
-					throw err;
-				}
-
-				return res.json(result.ops.pop());
-			});
-		});
+		return res.json(result.ops.pop());
 	});
 };
 
@@ -215,22 +198,51 @@ exports.WKCActionAPINotesPublish = function(req, res, next) {
 		return res.json(inputData);
 	}
 
-	return req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_notes').findOneAndUpdate({
-		WKCNoteID: parseInt(req.params.wkc_note_id),
-	}, Object.assign(req._WKCAPINotesMiddlewareFindByIDResult, {
-		WKCNoteIsPublished: inputData.WKCNotePublishStatusIsPublished,
-		WKCNoteDateUpdated: new Date(),
-	}), function(err, result) {
-		if (err) {
-			throw new Error('WKCErrorDatabaseFindOne');
-		}
+	var completionHandler = function() {
+		return req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_notes').findOneAndUpdate({
+			WKCNoteID: parseInt(req.params.wkc_note_id),
+		}, Object.assign(req._WKCAPINotesMiddlewareFindByIDResult, {
+			WKCNoteIsPublished: inputData.WKCNotePublishStatusIsPublished,
+			WKCNoteDateUpdated: new Date(),
+		}), function(err, result) {
+			if (err) {
+				throw new Error('WKCErrorDatabaseFindOne');
+			}
 
-		if (!result.value) {
-			return next(new Error('WKCAPIClientErrorNotFound'));
-		}
+			if (!result.value) {
+				return next(new Error('WKCAPIClientErrorNotFound'));
+			}
 
-		return res.json(req.body);
-	});
+			return res.json(req.body);
+		});
+	};
+
+	if (inputData.WKCNotePublishStatusIsPublished && !req._WKCAPINotesMiddlewareFindByIDResult.WKCNotePublicID) {
+		return exports.WKCAPISettingsLastGeneratedPublicIDWithClientAndCallback(req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, function(lastRepoID) {
+			var newRepoID = lastRepoID + 1;
+
+			Object.assign(req._WKCAPINotesMiddlewareFindByIDResult, {
+				WKCNotePublicID: newRepoID,
+			});
+
+			return req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_settings').findOneAndUpdate({
+				WKCSettingsKey: 'WKCSettingsLastRepoID',
+			}, {
+				WKCSettingsKey: 'WKCSettingsLastRepoID',
+				WKCSettingsValue: newRepoID,
+			}, {
+				upsert: true,
+			}, function(err) {
+				if (err) {
+					throw err;
+				}
+
+				return completionHandler();
+			});
+		});
+	}
+
+	return completionHandler();
 };
 
 //_ WKCActionAPINotesDelete
@@ -257,7 +269,8 @@ exports.WKCActionAPINotesDelete = function(req, res, next) {
 
 exports.WKCActionAPINotesSearch = function(req, res, next) {
 	return req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_notes').find({}).project(modelLibrary.WKCModelNotesUnusedPropertyNames().reduce(function(hash, e) {
-		hash[e] = 0;
+		// hash[e] = 0;
+		
 		return hash;
 	}, {})).toArray(function(err, items) {
 		if (err) {
