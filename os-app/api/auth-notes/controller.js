@@ -53,9 +53,9 @@ exports.OLSKControllerRoutes = function() {
 	};
 };
 
-//_ WKCAPISettingsLastRepoIDWithClientAndCallback
+//_ WKCAPISettingsLastGeneratedPublicIDWithClientAndCallback
 
-exports.WKCAPISettingsLastRepoIDWithClientAndCallback = function(client, callback) {
+exports.WKCAPISettingsLastGeneratedPublicIDWithClientAndCallback = function(client, callback) {
 	if (!client) {
 		throw new Error('WKCErrorInvalidInput');
 	}
@@ -91,7 +91,7 @@ exports.WKCActionAPINotesCreate = function(req, res, next) {
 	var noteDate = new Date();
 	var client = req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient;
 
-	return exports.WKCAPISettingsLastRepoIDWithClientAndCallback(client, function(lastRepoID) {
+	return exports.WKCAPISettingsLastGeneratedPublicIDWithClientAndCallback(client, function(lastRepoID) {
 		var newRepoID = lastRepoID + 1;
 
 		return client.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_notes').insertOne(Object.assign(inputData, {

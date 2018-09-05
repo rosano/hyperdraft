@@ -117,22 +117,22 @@ describe('Connection', function testConnection() {
 		};
 	};
 
-	describe('WKCAPISettingsLastRepoIDWithClientAndCallback', function testWKCAPISettingsLastRepoIDWithClientAndCallback() {
+	describe('WKCAPISettingsLastGeneratedPublicIDWithClientAndCallback', function testWKCAPISettingsLastGeneratedPublicIDWithClientAndCallback() {
 
 		it('throws error if param1 empty', function() {
 			assert.throws(function() {
-				apiNotesController.WKCAPISettingsLastRepoIDWithClientAndCallback(null, function() {});
+				apiNotesController.WKCAPISettingsLastGeneratedPublicIDWithClientAndCallback(null, function() {});
 			}, /WKCErrorInvalidInput/);
 		});
 
 		it('throws error if param2 not function', function() {
 			assert.throws(function() {
-				apiNotesController.WKCAPISettingsLastRepoIDWithClientAndCallback({}, null);
+				apiNotesController.WKCAPISettingsLastGeneratedPublicIDWithClientAndCallback({}, null);
 			}, /WKCErrorInvalidInput/);
 		});
 
 		it('returns 0 if no existing items', function(done) {
-			apiNotesController.WKCAPISettingsLastRepoIDWithClientAndCallback(mongoClient, function(lastRepoID) {
+			apiNotesController.WKCAPISettingsLastGeneratedPublicIDWithClientAndCallback(mongoClient, function(lastRepoID) {
 				assert.strictEqual(lastRepoID, 0);
 				
 				done();
@@ -149,7 +149,7 @@ describe('Connection', function testConnection() {
 
 		it('returns 1 if created one item', function(done) {
 			apiNotesController.WKCActionAPINotesCreate(fakeRequest(), WKCFakeResponseAsync(function() {
-				apiNotesController.WKCAPISettingsLastRepoIDWithClientAndCallback(mongoClient, function(lastRepoID) {
+				apiNotesController.WKCAPISettingsLastGeneratedPublicIDWithClientAndCallback(mongoClient, function(lastRepoID) {
 					assert.strictEqual(lastRepoID, 1);
 					
 					done();
@@ -157,7 +157,7 @@ describe('Connection', function testConnection() {
 			}));
 		});
 
-		it('returns 2 if created two items and deleted one', function(done) {
+		it('returns 2 if created two items and deleted first one', function(done) {
 			apiNotesController.WKCActionAPINotesCreate(fakeRequest(), WKCFakeResponseAsync(function() {
 				apiNotesController.WKCActionAPINotesCreate(fakeRequest(), WKCFakeResponseAsync(function(responseJSON) {
 					apiNotesController.WKCActionAPINotesDelete(WKCFakeRequest({
@@ -165,7 +165,7 @@ describe('Connection', function testConnection() {
 							wkc_note_id: responseJSON.WKCNoteID.toString(),
 						},
 					}), WKCFakeResponseAsync(function() {
-						apiNotesController.WKCAPISettingsLastRepoIDWithClientAndCallback(mongoClient, function(lastRepoID) {
+						apiNotesController.WKCAPISettingsLastGeneratedPublicIDWithClientAndCallback(mongoClient, function(lastRepoID) {
 							assert.strictEqual(lastRepoID, 2);
 							
 							done();
@@ -193,7 +193,7 @@ describe('Connection', function testConnection() {
 			});
 		});
 
-		it('returns created object if valid noteObject', function(done) {
+		it('returns noteObject with WKCNoteID', function(done) {
 			apiNotesController.WKCActionAPINotesCreate(fakeRequest({
 				WKCNoteBody: 'alpha',
 			}), WKCFakeResponseAsync(function(responseJSON) {
