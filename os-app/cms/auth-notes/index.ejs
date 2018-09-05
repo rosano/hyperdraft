@@ -51,6 +51,7 @@ locals.OLSKPageAssets = [
 <div id="WKCAppNotes" class="WKCAppNotesLoading">
 	<header id="WKCAppNotesToolbar">
 		<span id="WKCAppNotesPersistenceStatus"></span>
+		<span id="WKCAppNotesPublishStatus"></span>
 
 		<button id="WKCAppNotesAddButton" accesskey="n"><%= OLSKLocalized('WKCAppNotesAddButtonText') %></button>
 		<script type="text/javascript">
@@ -114,6 +115,11 @@ locals.OLSKPageAssets = [
 		</script>
 
 		<button id="WKCAppNotesPublishButton"><%= OLSKLocalized('WKCAppNotesPublishButtonText') %></button>
+		<script type="text/javascript">
+			d3.select('#WKCAppNotesPublishButton').on('click', function() {
+				d3.select('#WKCAppNotesPublishStatus').text('<%= OLSKLocalized('WKCAppNotesPublishStatusPublishing') %>');
+			});
+		</script>
 	</header>
 
 	<div id="WKCAppNotesMain">

@@ -39,6 +39,12 @@ body {
 	color: #bfbfbf
 }
 
+#WKCAppNotesPublishStatus {
+	margin: auto 5px;
+
+	color: #bfbfbf
+}
+
 #WKCAppNotesMain {
 	font-family: monospace;
 
