@@ -6,6 +6,8 @@
 
 var assert = require('assert');
 
+var testingLibrary = require('OLSKTesting');
+
 var apiNotesController = require('./controller');
 
 describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
@@ -87,15 +89,15 @@ describe('Connection', function testConnection() {
 	});
 
 	var WKCFakeRequest = function(inputData = {}) {
-		return Object.assign({
+		return Object.assign(testingLibrary.OLSKTestingFakeRequestForHeaders({
+			'x-client-key': process.env.WKC_INSECURE_API_ACCESS_TOKEN,
+		}), {
 			OLSKSharedConnectionFor: function() {
 				return {
 					OLSKConnectionClient: mongoClient,
 				};
 			},
-			headers: {
-				'x-client-key': process.env.WKC_INSECURE_API_ACCESS_TOKEN,
-			},
+			
 		}, inputData);
 	};
 
