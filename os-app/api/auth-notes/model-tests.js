@@ -26,7 +26,7 @@ describe('WKCModelInputDataIsNotesObject', function testWKCModelInputDataIsNotes
 		});
 	});
 
-	it('returns true if valid noteObject', function() {
+	it('returns true', function() {
 		assert.deepEqual(notesLibrary.WKCModelInputDataIsNotesObject({
 			WKCNoteBody: 'alpha',
 		}), true);

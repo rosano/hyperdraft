@@ -21,6 +21,7 @@ exports.WKCModelInputDataIsNotesObject = function(inputData) {
 
 	if (Object.keys(errors).length) {
 		inputData.WKCErrors = errors;
+		
 		return false;
 	}
 
