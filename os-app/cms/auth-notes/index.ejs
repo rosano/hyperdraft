@@ -26,7 +26,7 @@ locals.OLSKPageAssets = [
 
 		sharedData.WKCAppNotesSharedAPIToken = responseJSON.WKCAPIToken;
 
-		return d3.json('<%= OLSKCanonicalFor('WKCRouteAPINotesSearch') %>', {
+		d3.json('<%= OLSKCanonicalFor('WKCRouteAPINotesSearch') %>', {
 			method: 'GET',
 			headers: {
 				'x-client-key': sharedData.WKCAppNotesSharedAPIToken,
@@ -49,7 +49,7 @@ locals.OLSKPageAssets = [
 				return;
 			}
 
-			return WKControl.WKCommandsSelectNote(d3.selectAll('.WKCAppNotesListItem').data()[0], sharedData);
+			WKControl.WKCommandsSelectNote(d3.selectAll('.WKCAppNotesListItem').data()[0], sharedData);
 		});
 	});
 </script>
@@ -85,7 +85,7 @@ locals.OLSKPageAssets = [
 
 				d3.select('#WKCAppNotesPersistenceStatus').text('<%= OLSKLocalized('WKCAppNotesPersistenceStatusDeleting') %>');
 
-				return d3.json((<%- OLSKCanonicalSubstitutionFunctionFor('WKCRouteAPINotesDelete') %>)({
+				d3.json((<%- OLSKCanonicalSubstitutionFunctionFor('WKCRouteAPINotesDelete') %>)({
 					wkc_note_id: sharedData.WKCAppNotesSharedSelectedItem.WKCNoteID,
 				}), {
 					method: 'DELETE',
