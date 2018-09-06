@@ -62,9 +62,7 @@ locals.OLSKPageAssets = [
 		<button id="WKCAppNotesAddButton" accesskey="n"><%= OLSKLocalized('WKCAppNotesAddButtonText') %></button>
 		<script type="text/javascript">
 			d3.select('#WKCAppNotesAddButton').on('click', function() {
-				WKControl.WKCommandsSelectNote(WKControl.WKDataNewNoteObject(), sharedData);
-
-				WKControl.WKReactNoteObjects(d3.selectAll('.WKCAppNotesListItem').data().concat(sharedData.WKCAppNotesSharedSelectedItem).sort(WKCNotesApp.WKLogicListSort), sharedData);
+				WKControl.WKCommandsAddNote(sharedData);
 			});
 		</script>
 

@@ -37,6 +37,14 @@
 		throw new Error('WKCAppErrorNotesUnavailable');
 	};
 
+	//_ WKCommandsAddNote
+
+	exports.WKCommandsAddNote = function (sharedData) {
+		WKControl.WKCommandsSelectNote(WKControl.WKDataNewNoteObject(), sharedData);
+
+		WKControl.WKReactNoteObjects(d3.selectAll('.WKCAppNotesListItem').data().concat(sharedData.WKCAppNotesSharedSelectedItem).sort(WKLogic.WKLogicListSort), sharedData);
+	};
+
 	//_ WKCommandsSelectNote
 
 	exports.WKCommandsSelectNote = function (item, sharedData) {
