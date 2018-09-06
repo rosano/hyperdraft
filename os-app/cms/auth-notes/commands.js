@@ -10,7 +10,7 @@
 	(factory((global.WKControl = global.WKControl || {})));
 }(this, (function (exports) { 'use strict';
 
-	//_ WKCNotesAppFoo
+	//_ WKCommandsAlertTokenUnavailable
 
 	exports.WKCommandsAlertTokenUnavailable = function () {
 		window.alert('<%= OLSKLocalized('WKCNotesErrors').WKCAppErrorTokenUnavailable %>');

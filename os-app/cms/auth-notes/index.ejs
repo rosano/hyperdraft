@@ -27,7 +27,7 @@ locals.OLSKPageAssets = [
 
 		sharedData.WKCAppNotesSharedAPIToken = responseJSON.WKCAPIToken;
 
-		d3.json('<%= OLSKCanonicalFor('WKCRouteAPINotesSearch') %>', {
+		return d3.json('<%= OLSKCanonicalFor('WKCRouteAPINotesSearch') %>', {
 			method: 'GET',
 			headers: {
 				'x-client-key': sharedData.WKCAppNotesSharedAPIToken,
