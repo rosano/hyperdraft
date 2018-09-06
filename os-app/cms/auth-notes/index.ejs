@@ -43,6 +43,10 @@ locals.OLSKPageAssets = [
 				});
 			}).sort(WKCNotesApp.WKCNotesAppListSort), sharedData);
 
+			if (!d3.selectAll('.WKCAppNotesListItem').data().length) {
+				return d3.select('#WKCNotesAppEditorTextarea').attr('disabled', true);
+			}
+
 			WKCNotesAppInteraction.WKCNotesAppSetSelectedItemWithSharedData(d3.selectAll('.WKCAppNotesListItem').data()[0], sharedData);
 		});
 	});
@@ -62,6 +66,8 @@ locals.OLSKPageAssets = [
 				}, sharedData);
 
 				WKCNotesAppInteraction.WKCNotesAppPerformDataJoinWithItemsArrayAndSharedData(d3.selectAll('.WKCAppNotesListItem').data().concat(sharedData.WKCAppNotesSharedSelectedItem).sort(WKCNotesApp.WKCNotesAppListSort), sharedData);
+
+				d3.select('#WKCNotesAppEditorTextarea').attr('disabled', null);
 			});
 		</script>
 
