@@ -38,7 +38,8 @@ locals.OLSKPageAssets = [
 			}
 
 			d3.select('#WKCAppNotes').classed('WKCAppNotesLoading', false);
-			WKCNotesAppInteraction.WKCNotesAppPerformDataJoinWithItemsArrayAndSharedData(responseJSON.map(function(e) {
+
+			WKControl.WKReactNoteObjects(responseJSON.map(function(e) {
 				return Object.assign(e, {
 					WKCNoteDateCreated: new Date(e.WKCNoteDateCreated),
 					WKCNoteDateUpdated: new Date(e.WKCNoteDateUpdated),
