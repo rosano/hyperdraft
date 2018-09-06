@@ -57,6 +57,8 @@
 		d3.selectAll('.WKCAppNotesListItem').classed('WKCAppNotesListItemSelected', function(d) {
 			return d === item;
 		});
+
+		d3.select('#WKCAppNotesDeleteButton').attr('disabled', null);
 	};
 
 	//# REACT
