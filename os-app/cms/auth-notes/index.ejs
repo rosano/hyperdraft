@@ -76,10 +76,10 @@ locals.OLSKPageAssets = [
 		<script type="text/javascript">
 			d3.select('#WKCAppNotesDeleteButton').on('click', function() {
 				var persistenceIsCued = !!sharedData.WKCAppNotesSharedPersistenceTask._OLSKTaskTimerID;
+
 				clearInterval(sharedData.WKCAppNotesSharedPersistenceTask._OLSKTaskTimerID);
 
 				if (!window.confirm('<%= OLSKLocalized('WKCAppNotesDeleteConfirmation') %>')) {
-					console.log(persistenceIsCued);
 					if (persistenceIsCued) {
 						OLSKTasks.OLSKTasksTimeoutForTaskObject(sharedData.WKCAppNotesSharedPersistenceTask);
 					}
@@ -110,10 +110,6 @@ locals.OLSKPageAssets = [
 						d3.select('#WKCAppNotesPersistenceStatus').text('');
 					}, 1000);
 				}, function(error) {
-					if (window.confirm('<%= OLSKLocalized('WKCNotesErrors').WKCAppErrorPersistenceDeleteDidFail %>')) {
-						sharedData.WKCAppNotesSharedPersistenceTask.OLSKTaskCallback();
-					};
-
 					d3.select('#WKCAppNotesPersistenceStatus').text('<%= OLSKLocalized('WKCAppNotesPersistenceStatusUnableToDelete') %>');
 
 					throw error;
