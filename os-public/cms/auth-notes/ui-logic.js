@@ -7,12 +7,12 @@
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
 	typeof define === 'function' && define.amd ? define(['exports'], factory) :
-	(factory((global.WKCNotesApp = global.WKCNotesApp || {})));
+	(factory((global.WKLogic = global.WKLogic || {})));
 }(this, (function (exports) { 'use strict';
 
-	//_ WKCNotesAppListSort
+	//_ WKLogicListSort
 
-	exports.WKCNotesAppListSort = function (a, b) {
+	exports.WKLogicListSort = function (a, b) {
 		if (b.WKCNoteDateUpdated && a.WKCNoteDateUpdated) {
 			return b.WKCNoteDateUpdated > a.WKCNoteDateUpdated;
 		}

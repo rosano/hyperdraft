@@ -43,7 +43,7 @@ locals.OLSKPageAssets = [
 					WKCNoteDateCreated: new Date(e.WKCNoteDateCreated),
 					WKCNoteDateUpdated: new Date(e.WKCNoteDateUpdated),
 				});
-			}).sort(WKCNotesApp.WKCNotesAppListSort), sharedData);
+			}).sort(WKLogic.WKLogicListSort), sharedData);
 
 			if (!d3.selectAll('.WKCAppNotesListItem').data().length) {
 				return;
@@ -64,7 +64,7 @@ locals.OLSKPageAssets = [
 			d3.select('#WKCAppNotesAddButton').on('click', function() {
 				WKControl.WKCommandsSelectNote(WKControl.WKDataNewNoteObject(), sharedData);
 
-				WKControl.WKReactNoteObjects(d3.selectAll('.WKCAppNotesListItem').data().concat(sharedData.WKCAppNotesSharedSelectedItem).sort(WKCNotesApp.WKCNotesAppListSort), sharedData);
+				WKControl.WKReactNoteObjects(d3.selectAll('.WKCAppNotesListItem').data().concat(sharedData.WKCAppNotesSharedSelectedItem).sort(WKCNotesApp.WKLogicListSort), sharedData);
 			});
 		</script>
 
