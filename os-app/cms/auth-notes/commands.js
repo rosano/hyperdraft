@@ -17,6 +17,13 @@
 		throw new Error('WKCAppErrorTokenUnavailable');
 	};
 
+	//_ WKCommandsAlertNotesUnavailable
+
+	exports.WKCommandsAlertNotesUnavailable = function () {
+		window.alert('<%= OLSKLocalized('WKCNotesErrors').WKCAppErrorNotesUnavailable %>');
+		throw new Error('WKCAppErrorNotesUnavailable');
+	};
+
 	Object.defineProperty(exports, '__esModule', { value: true });
 
 })));

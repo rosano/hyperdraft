@@ -34,8 +34,7 @@ locals.OLSKPageAssets = [
 			},
 		}).then(function(responseJSON) {
 			if (!Array.isArray(responseJSON)) {
-				window.alert('<%= OLSKLocalized('WKCNotesErrors').WKCAppErrorEntriesUnavailable %>');
-				throw new Error('WKCAppErrorEntriesUnavailable');
+				return WKControl.WKCommandsAlertNotesUnavailable();
 			}
 
 			d3.select('#WKCAppNotes').classed('WKCAppNotesLoading', false);
