@@ -10,6 +10,10 @@ locals.OLSKPageAssets = [
 <%- include('../../_shared/WKCLayout/header.ejs') %>
 
 <script type="text/javascript">
+	<%- include('commands.js') %>
+</script>
+
+<script type="text/javascript">
 	var sharedData = {
 		WKCAppNotesSharedSelectedItem: {},
 	};
@@ -18,8 +22,7 @@ locals.OLSKPageAssets = [
 		method: 'GET',
 	}).then(function(responseJSON) {
 		if (!responseJSON.WKCAPIToken) {
-			window.alert('<%= OLSKLocalized('WKCNotesErrors').WKCAppErrorTokenUnavailable %>');
-			throw new Error('WKCAppErrorTokenUnavailable');
+			return WKControl.WKCommandsAlertTokenUnavailable();
 		}
 
 		sharedData.WKCAppNotesSharedAPIToken = responseJSON.WKCAPIToken;
