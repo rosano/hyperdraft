@@ -44,7 +44,7 @@ locals.OLSKPageAssets = [
 			}).sort(WKCNotesApp.WKCNotesAppListSort), sharedData);
 
 			if (!d3.selectAll('.WKCAppNotesListItem').data().length) {
-				return d3.select('#WKCNotesAppEditorTextarea').attr('disabled', true);
+				return;
 			}
 
 			WKCNotesAppInteraction.WKCNotesAppSetSelectedItemWithSharedData(d3.selectAll('.WKCAppNotesListItem').data()[0], sharedData);
@@ -68,10 +68,11 @@ locals.OLSKPageAssets = [
 				WKCNotesAppInteraction.WKCNotesAppPerformDataJoinWithItemsArrayAndSharedData(d3.selectAll('.WKCAppNotesListItem').data().concat(sharedData.WKCAppNotesSharedSelectedItem).sort(WKCNotesApp.WKCNotesAppListSort), sharedData);
 
 				d3.select('#WKCNotesAppEditorTextarea').attr('disabled', null);
+				d3.select('#WKCNotesAppEditorTextarea').node().focus();
 			});
 		</script>
 
-		<button id="WKCAppNotesDeleteButton"><%= OLSKLocalized('WKCAppNotesDeleteButtonText') %></button>
+		<button id="WKCAppNotesDeleteButton" disabled><%= OLSKLocalized('WKCAppNotesDeleteButtonText') %></button>
 		<script type="text/javascript">
 			d3.select('#WKCAppNotesDeleteButton').on('click', function() {
 				var persistenceIsCued = !!sharedData.WKCAppNotesSharedPersistenceTask._OLSKTaskTimerID;
@@ -120,7 +121,7 @@ locals.OLSKPageAssets = [
 			});
 		</script>
 
-		<button id="WKCAppNotesPublishButton"><%= OLSKLocalized('WKCAppNotesPublishButtonText') %></button>
+		<button id="WKCAppNotesPublishButton" disabled><%= OLSKLocalized('WKCAppNotesPublishButtonText') %></button>
 		<script type="text/javascript">
 			d3.select('#WKCAppNotesPublishButton').on('click', function() {
 				d3.select('#WKCAppNotesPublishStatus').text('<%= OLSKLocalized('WKCAppNotesPublishStatusPublishing') %>');
@@ -133,7 +134,7 @@ locals.OLSKPageAssets = [
 		</div>
 
 		<div id="WKCAppNotesEditor">
-			<textarea id="WKCNotesAppEditorTextarea"></textarea>
+			<textarea id="WKCNotesAppEditorTextarea" disabled></textarea>
 			<script type="text/javascript">
 				sharedData.WKCAppNotesSharedPersistenceTask = {
 					OLSKTaskName: 'WKCTasksEditorPersistence',
