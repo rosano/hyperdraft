@@ -3,7 +3,6 @@ locals.OLSKPageTitle = OLSKLocalized('WKCNotesTitle');
 locals.OLSKPageAssets = [
 	'ui-style.css',
 	'ui-logic.js',
-	'ui-interaction.js',
 ];
 %>
 
@@ -50,7 +49,7 @@ locals.OLSKPageAssets = [
 				return;
 			}
 
-			WKControl.WKCommandsSelectNote(d3.selectAll('.WKCAppNotesListItem').data()[0], sharedData);
+			return WKControl.WKCommandsSelectNote(d3.selectAll('.WKCAppNotesListItem').data()[0], sharedData);
 		});
 	});
 </script>
@@ -63,15 +62,9 @@ locals.OLSKPageAssets = [
 		<button id="WKCAppNotesAddButton" accesskey="n"><%= OLSKLocalized('WKCAppNotesAddButtonText') %></button>
 		<script type="text/javascript">
 			d3.select('#WKCAppNotesAddButton').on('click', function() {
-				WKControl.WKCommandsSelectNote({
-					WKCNoteDateCreated: new Date(),
-					WKCNoteBody: '',
-				}, sharedData);
+				WKControl.WKCommandsSelectNote(WKControl.WKDataNewNoteObject(), sharedData);
 
-				WKCNotesAppInteraction.WKCNotesAppPerformDataJoinWithItemsArrayAndSharedData(d3.selectAll('.WKCAppNotesListItem').data().concat(sharedData.WKCAppNotesSharedSelectedItem).sort(WKCNotesApp.WKCNotesAppListSort), sharedData);
-
-				d3.select('#WKCNotesAppEditorTextarea').attr('disabled', null);
-				d3.select('#WKCNotesAppEditorTextarea').node().focus();
+				WKControl.WKReactNoteObjects(d3.selectAll('.WKCAppNotesListItem').data().concat(sharedData.WKCAppNotesSharedSelectedItem).sort(WKCNotesApp.WKCNotesAppListSort), sharedData);
 			});
 		</script>
 
@@ -103,7 +96,7 @@ locals.OLSKPageAssets = [
 				}).then(function(responseJSON) {
 					d3.select('#WKCAppNotesPersistenceStatus').text('<%= OLSKLocalized('WKCAppNotesPersistenceStatusDeleted') %>');
 
-					WKCNotesAppInteraction.WKCNotesAppPerformDataJoinWithItemsArrayAndSharedData(d3.selectAll('.WKCAppNotesListItem').data().filter(function(e) {
+					WKControl.WKReactNoteObjects(d3.selectAll('.WKCAppNotesListItem').data().filter(function(e) {
 						return e !== sharedData.WKCAppNotesSharedSelectedItem;
 					}), sharedData);
 
@@ -201,7 +194,7 @@ locals.OLSKPageAssets = [
 						WKCNoteDateUpdated: new Date(),
 					});
 
-					WKCNotesAppInteraction.WKCNotesAppPerformDataJoinWithItemsArrayAndSharedData(d3.selectAll('.WKCAppNotesListItem').data(), sharedData);
+					WKControl.WKReactNoteObjects(d3.selectAll('.WKCAppNotesListItem').data(), sharedData);
 				});
 			</script>
 		</div>
