@@ -69,45 +69,7 @@ locals.OLSKPageAssets = [
 		<button id="WKCAppNotesDeleteButton" disabled><%= OLSKLocalized('WKCAppNotesDeleteButtonText') %></button>
 		<script type="text/javascript">
 			d3.select('#WKCAppNotesDeleteButton').on('click', function() {
-				var persistenceIsCued = !!sharedData.WKCAppNotesSharedPersistenceTask._OLSKTaskTimerID;
-
-				clearInterval(sharedData.WKCAppNotesSharedPersistenceTask._OLSKTaskTimerID);
-
-				if (!window.confirm('<%= OLSKLocalized('WKCAppNotesDeleteConfirmation') %>')) {
-					if (persistenceIsCued) {
-						OLSKTasks.OLSKTasksTimeoutForTaskObject(sharedData.WKCAppNotesSharedPersistenceTask);
-					}
-
-					return;
-				};
-
-				d3.select('#WKCAppNotesPersistenceStatus').text('<%= OLSKLocalized('WKCAppNotesPersistenceStatusDeleting') %>');
-
-				d3.json((<%- OLSKCanonicalSubstitutionFunctionFor('WKCRouteAPINotesDelete') %>)({
-					wkc_note_id: sharedData.WKCAppNotesSharedSelectedItem.WKCNoteID,
-				}), {
-					method: 'DELETE',
-					headers: {
-						'Content-Type': 'application/json',
-						'x-client-key': sharedData.WKCAppNotesSharedAPIToken,
-					},
-				}).then(function(responseJSON) {
-					d3.select('#WKCAppNotesPersistenceStatus').text('<%= OLSKLocalized('WKCAppNotesPersistenceStatusDeleted') %>');
-
-					WKControl.WKReactNoteObjects(d3.selectAll('.WKCAppNotesListItem').data().filter(function(e) {
-						return e !== sharedData.WKCAppNotesSharedSelectedItem;
-					}), sharedData);
-
-					WKControl.WKCommandsSelectNote(d3.selectAll('.WKCAppNotesListItem').data()[0], sharedData);
-
-					setTimeout(function() {
-						d3.select('#WKCAppNotesPersistenceStatus').text('');
-					}, 1000);
-				}, function(error) {
-					d3.select('#WKCAppNotesPersistenceStatus').text('<%= OLSKLocalized('WKCAppNotesPersistenceStatusUnableToDelete') %>');
-
-					throw error;
-				});
+				WKControl.WKCommandsDeleteWithConfirmation(sharedData);
 			});
 		</script>
 
