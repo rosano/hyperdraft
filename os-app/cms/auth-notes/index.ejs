@@ -50,7 +50,7 @@ locals.OLSKPageAssets = [
 				return;
 			}
 
-			WKCNotesAppInteraction.WKCNotesAppCommandsSelectItem(d3.selectAll('.WKCAppNotesListItem').data()[0], sharedData);
+			WKControl.WKCommandsSelectNote(d3.selectAll('.WKCAppNotesListItem').data()[0], sharedData);
 		});
 	});
 </script>
@@ -63,7 +63,7 @@ locals.OLSKPageAssets = [
 		<button id="WKCAppNotesAddButton" accesskey="n"><%= OLSKLocalized('WKCAppNotesAddButtonText') %></button>
 		<script type="text/javascript">
 			d3.select('#WKCAppNotesAddButton').on('click', function() {
-				WKCNotesAppInteraction.WKCNotesAppCommandsSelectItem({
+				WKControl.WKCommandsSelectNote({
 					WKCNoteDateCreated: new Date(),
 					WKCNoteBody: '',
 				}, sharedData);
@@ -107,7 +107,7 @@ locals.OLSKPageAssets = [
 						return e !== sharedData.WKCAppNotesSharedSelectedItem;
 					}), sharedData);
 
-					WKCNotesAppInteraction.WKCNotesAppCommandsSelectItem(d3.selectAll('.WKCAppNotesListItem').data()[0], sharedData);
+					WKControl.WKCommandsSelectNote(d3.selectAll('.WKCAppNotesListItem').data()[0], sharedData);
 
 					setTimeout(function() {
 						d3.select('#WKCAppNotesPersistenceStatus').text('');
