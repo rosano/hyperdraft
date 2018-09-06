@@ -23,7 +23,7 @@
 					d3.selectAll('.WKCAppNotesListItem').classed('WKCAppNotesListItemSelected', false);
 					d3.select(this).classed('WKCAppNotesListItemSelected', true);
 
-					return exports.WKCNotesAppSetSelectedItemWithSharedData(d, sharedData);
+					return exports.WKCNotesAppCommandsSelectItem(d, sharedData);
 				})
 				.merge(selection)
 					.html(function(d) {
@@ -37,9 +37,9 @@
 		selection.exit().remove();
 	};
 
-	//_ WKCNotesAppSetSelectedItemWithSharedData
+	//_ WKCNotesAppCommandsSelectItem
 
-	exports.WKCNotesAppSetSelectedItemWithSharedData = function (item, sharedData) {
+	exports.WKCNotesAppCommandsSelectItem = function (item, sharedData) {
 		sharedData.WKCAppNotesSharedSelectedItem = item;
 		d3.select('#WKCNotesAppEditorTextarea').node().value = item.WKCNoteBody;
 		d3.select('#WKCNotesAppEditorTextarea').node().focus();
