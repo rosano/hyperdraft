@@ -102,7 +102,7 @@
 			WKCNoteDateUpdated: new Date(),
 		});
 
-		WKBehaviour.reactNoteObjects(d3.selectAll('.WKCAppNotesListItem').data());
+		moi.reactNoteObjects(d3.selectAll('.WKCAppNotesListItem').data());
 	};
 
 	//# COMMANDS
@@ -134,7 +134,7 @@
 	//_ commandsAddNote
 
 	moi.commandsAddNote = function () {
-		moi.propertiesNoteObjects(moi.propertiesNoteObjects().concat(WKBehaviour.dataNewNoteObject()));
+		moi.propertiesNoteObjects(moi.propertiesNoteObjects().concat(moi.dataNewNoteObject()));
 
 		moi.propertiesSelectedNote(moi.propertiesNoteObjects().shift());
 	};
@@ -215,7 +215,7 @@
 			.append('div')
 				.attr('class', 'WKCAppNotesListItem')
 				.on('click', function(obj) {
-					WKBehaviour.commandsSelectNote(obj);
+					moi.commandsSelectNote(obj);
 				})
 				.merge(selection)
 					.html(function(obj) {
@@ -261,7 +261,7 @@
 			method: 'GET',
 		}).then(function(responseJSON) {
 			if (!responseJSON.WKCAPIToken) {
-				return WKBehaviour.commandsAlertTokenUnavailable();
+				return moi.commandsAlertTokenUnavailable();
 			}
 
 			moi.propertiesAPIToken(responseJSON.WKCAPIToken);
@@ -280,19 +280,19 @@
 			},
 		}).then(function(responseJSON) {
 			if (!Array.isArray(responseJSON)) {
-				return WKBehaviour.commandsAlertNotesUnavailable();
+				return moi.commandsAlertNotesUnavailable();
 			}
 
 			d3.select('#WKCAppNotes').classed('WKCAppNotesLoading', false);
 
-			WKBehaviour.propertiesNoteObjects(responseJSON.map(function(e) {
+			moi.propertiesNoteObjects(responseJSON.map(function(e) {
 				return Object.assign(e, {
 					WKCNoteDateCreated: new Date(e.WKCNoteDateCreated),
 					WKCNoteDateUpdated: new Date(e.WKCNoteDateUpdated),
 				});
 			}));
 
-			if (WKBehaviour.propertiesNoteObjects().length) {
+			if (moi.propertiesNoteObjects().length) {
 				moi.propertiesSelectedNote(moi.propertiesNoteObjects().shift());
 			}
 
