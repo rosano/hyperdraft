@@ -63,10 +63,10 @@ describe('WKCModelInputDataIsNotePublishStatusObject', function testWKCModelInpu
 
 });
 
-describe('WKCModelNotesUnusedPropertyNames', function testWKCModelNotesUnusedPropertyNames() {
+describe('WKCModelNotesHiddenPropertyNames', function testWKCModelNotesHiddenPropertyNames() {
 
 	it('returns unused property names', function() {
-		assert.deepEqual(notesLibrary.WKCModelNotesUnusedPropertyNames(), [
+		assert.deepEqual(notesLibrary.WKCModelNotesHiddenPropertyNames(), [
 			'_id',
 		]);
 	});

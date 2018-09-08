@@ -95,7 +95,7 @@ exports.WKCAPINotesMiddlewareFindByID = function(req, res, next) {
 
 		var noteObject = result;
 
-		modelLibrary.WKCModelNotesUnusedPropertyNames().forEach(function(obj) {
+		modelLibrary.WKCModelNotesHiddenPropertyNames().forEach(function(obj) {
 			delete noteObject[obj];
 		});
 
@@ -154,7 +154,7 @@ exports.WKCActionAPINotesCreate = function(req, res, next) {
 
 		var noteObject = result.ops.pop();
 
-		modelLibrary.WKCModelNotesUnusedPropertyNames().forEach(function(obj) {
+		modelLibrary.WKCModelNotesHiddenPropertyNames().forEach(function(obj) {
 			delete noteObject[obj];
 		});
 
@@ -178,7 +178,7 @@ exports.WKCActionAPINotesRead = function(req, res, next) {
 
 		var noteObject = result;
 
-		modelLibrary.WKCModelNotesUnusedPropertyNames().forEach(function(obj) {
+		modelLibrary.WKCModelNotesHiddenPropertyNames().forEach(function(obj) {
 			delete noteObject[obj];
 		});
 
@@ -284,7 +284,7 @@ exports.WKCActionAPINotesPublicRead = function(req, res, next) {
 
 		var noteObject = result;
 
-		modelLibrary.WKCModelNotesUnusedPropertyNames().forEach(function(obj) {
+		modelLibrary.WKCModelNotesHiddenPropertyNames().forEach(function(obj) {
 			delete noteObject[obj];
 		});
 
@@ -315,7 +315,7 @@ exports.WKCActionAPINotesDelete = function(req, res, next) {
 //_ WKCActionAPINotesSearch
 
 exports.WKCActionAPINotesSearch = function(req, res, next) {
-	return req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_notes').find({}).project(modelLibrary.WKCModelNotesUnusedPropertyNames().reduce(function(hash, e) {
+	return req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_notes').find({}).project(modelLibrary.WKCModelNotesHiddenPropertyNames().reduce(function(hash, e) {
 		hash[e] = 0;
 		
 		return hash;
