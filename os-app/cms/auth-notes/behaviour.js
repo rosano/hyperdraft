@@ -50,6 +50,16 @@
 		moi.reactSelectedNote();
 	};
 
+	//_ propertiesPersistenceTask
+
+	moi.propertiesPersistenceTask = function (inputData) {
+		if (typeof inputData === 'undefined') {
+			return sharedData.WKCAppNotesSharedPersistenceTask;
+		}
+
+		sharedData.WKCAppNotesSharedPersistenceTask = inputData;
+	};
+
 	//# DATA
 
 	//_ dataNewNoteObject
@@ -84,8 +94,8 @@
 	//_ interfaceEditorTextareaDidReceiveInput
 
 	moi.interfaceEditorTextareaDidReceiveInput = function () {
-		clearInterval(sharedData.WKCAppNotesSharedPersistenceTask._OLSKTaskTimerID);
-		OLSKTasks.OLSKTasksTimeoutForTaskObject(sharedData.WKCAppNotesSharedPersistenceTask);
+		clearInterval(moi.propertiesPersistenceTask()._OLSKTaskTimerID);
+		OLSKTasks.OLSKTasksTimeoutForTaskObject(moi.propertiesPersistenceTask());
 
 		Object.assign(moi.propertiesSelectedNote(), {
 			WKCNoteBody: this.value,
@@ -138,13 +148,13 @@
 	//_ WKCommandsDeleteWithConfirmation
 
 	moi.WKCommandsDeleteWithConfirmation = function () {
-		var persistenceIsCued = !!sharedData.WKCAppNotesSharedPersistenceTask._OLSKTaskTimerID;
+		var persistenceIsCued = !!moi.propertiesPersistenceTask()._OLSKTaskTimerID;
 
-		clearInterval(sharedData.WKCAppNotesSharedPersistenceTask._OLSKTaskTimerID);
+		clearInterval(moi.propertiesPersistenceTask()._OLSKTaskTimerID);
 
 		if (!window.confirm('<%= OLSKLocalized('WKCAppNotesDeleteConfirmation') %>')) {
 			if (persistenceIsCued) {
-				OLSKTasks.OLSKTasksTimeoutForTaskObject(sharedData.WKCAppNotesSharedPersistenceTask);
+				OLSKTasks.OLSKTasksTimeoutForTaskObject(moi.propertiesPersistenceTask());
 			}
 
 			return;
@@ -293,7 +303,7 @@
 	//_ setupPersistenceTask
 
 	moi.setupPersistenceTask = function () {
-		sharedData.WKCAppNotesSharedPersistenceTask = {
+		moi.propertiesPersistenceTask({
 			OLSKTaskName: 'WKCTasksEditorPersistence',
 			OLSKTaskFireTimeInterval: 3,
 			OLSKTaskShouldBePerformed: function() {
@@ -338,17 +348,17 @@
 					throw error;
 				}).catch(function(error) {
 					if (window.confirm('<%= OLSKLocalized('WKCNotesErrors').WKCAppErrorPersistenceSaveDidFail %>')) {
-						sharedData.WKCAppNotesSharedPersistenceTask.OLSKTaskCallback();
+						moi.propertiesPersistenceTask().OLSKTaskCallback();
 					};
 
 					d3.select('#WKCAppNotesPersistenceStatus').text('<%= OLSKLocalized('WKCAppNotesPersistenceStatusUnableToSave') %>');
 
 					throw error;
 				}).finally(function() {
-					delete sharedData.WKCAppNotesSharedPersistenceTask._OLSKTaskTimerID;
+					delete moi.propertiesPersistenceTask()._OLSKTaskTimerID;
 				});
 			},
-		};
+		});
 	};
 
 	//# LIFECYCLE
