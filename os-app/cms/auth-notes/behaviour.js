@@ -12,9 +12,9 @@
 
 	var moi = exports;
 
-	var sharedData = {
-		WKCAppNotesSharedSelectedItem: {},
-	};
+	var WKBehaviourPropertyAPIToken;
+	var WKBehaviourPropertySelectedNote;
+	var WKBehaviourPropertyPersistenceTask;
 
 	//# PROPERTIES
 
@@ -22,10 +22,10 @@
 
 	moi.propertiesAPIToken = function (inputData) {
 		if (typeof inputData === 'undefined') {
-			return sharedData.WKCAppNotesSharedAPIToken;
+			return WKBehaviourPropertyAPIToken;
 		}
 
-		sharedData.WKCAppNotesSharedAPIToken = inputData;
+		WKBehaviourPropertyAPIToken = inputData;
 	};
 
 	//_ propertiesNoteObjects
@@ -42,10 +42,10 @@
 
 	moi.propertiesSelectedNote = function (inputData) {
 		if (typeof inputData === 'undefined') {
-			return sharedData.WKCAppNotesSharedSelectedItem;
+			return WKBehaviourPropertySelectedNote;
 		}
 
-		sharedData.WKCAppNotesSharedSelectedItem = inputData;
+		WKBehaviourPropertySelectedNote = inputData;
 
 		moi.reactSelectedNote();
 	};
@@ -54,10 +54,10 @@
 
 	moi.propertiesPersistenceTask = function (inputData) {
 		if (typeof inputData === 'undefined') {
-			return sharedData.WKCAppNotesSharedPersistenceTask;
+			return WKBehaviourPropertyPersistenceTask;
 		}
 
-		sharedData.WKCAppNotesSharedPersistenceTask = inputData;
+		WKBehaviourPropertyPersistenceTask = inputData;
 	};
 
 	//# DATA
