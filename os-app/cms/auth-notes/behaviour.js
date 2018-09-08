@@ -30,7 +30,7 @@
 
 	//_ WKPropertiesAPIToken
 
-	moi.WKPropertiesAPIToken = function (inputData, sharedData) {
+	moi.WKPropertiesAPIToken = function (inputData) {
 		if (typeof inputData === 'undefined') {
 			return sharedData.WKCAppNotesSharedAPIToken;
 		}
@@ -40,7 +40,7 @@
 
 	//_ WKPropertiesNoteObjects
 
-	moi.WKPropertiesNoteObjects = function (inputData, sharedData) {
+	moi.WKPropertiesNoteObjects = function (inputData) {
 		if (typeof inputData === 'undefined') {
 			return d3.selectAll('.WKCAppNotesListItem').data();
 		}
@@ -50,7 +50,7 @@
 
 	//_ WKPropertiesSelectedNote
 
-	moi.WKPropertiesSelectedNote = function (inputData, sharedData) {
+	moi.WKPropertiesSelectedNote = function (inputData) {
 		if (typeof inputData === 'undefined') {
 			return sharedData.WKCAppNotesSharedSelectedItem;
 		}
@@ -75,7 +75,7 @@
 
 	//_ interfaceEditorTextareaDidReceiveInput
 
-	moi.interfaceEditorTextareaDidReceiveInput = function (textarea, sharedData) {
+	moi.interfaceEditorTextareaDidReceiveInput = function (textarea) {
 		clearInterval(sharedData.WKCAppNotesSharedPersistenceTask._OLSKTaskTimerID);
 		OLSKTasks.OLSKTasksTimeoutForTaskObject(sharedData.WKCAppNotesSharedPersistenceTask);
 
@@ -115,7 +115,7 @@
 
 	//_ WKCommandsAddNote
 
-	moi.WKCommandsAddNote = function (sharedData) {
+	moi.WKCommandsAddNote = function () {
 		moi.WKPropertiesNoteObjects(moi.WKPropertiesNoteObjects(undefined, sharedData).concat(WKBehaviour.WKDataNewNoteObject()), sharedData);
 
 		moi.WKPropertiesSelectedNote(moi.WKPropertiesNoteObjects(undefined, sharedData).shift(), sharedData);
@@ -123,13 +123,13 @@
 
 	//_ WKCommandsSelectNote
 
-	moi.WKCommandsSelectNote = function (item, sharedData) {
+	moi.WKCommandsSelectNote = function (item) {
 		moi.WKPropertiesSelectedNote(item, sharedData);
 	};
 
 	//_ WKCommandsDeleteWithConfirmation
 
-	moi.WKCommandsDeleteWithConfirmation = function (sharedData) {
+	moi.WKCommandsDeleteWithConfirmation = function () {
 		var persistenceIsCued = !!sharedData.WKCAppNotesSharedPersistenceTask._OLSKTaskTimerID;
 
 		clearInterval(sharedData.WKCAppNotesSharedPersistenceTask._OLSKTaskTimerID);
@@ -147,7 +147,7 @@
 
 	//_ _WKCommandsDeleteWithoutConfirmation
 
-	moi._WKCommandsDeleteWithoutConfirmation = function (sharedData) {
+	moi._WKCommandsDeleteWithoutConfirmation = function () {
 		d3.select('#WKCAppNotesPersistenceStatus').text('<%= OLSKLocalized('WKCAppNotesPersistenceStatusDeleting') %>');
 
 		d3.json((<%- OLSKCanonicalSubstitutionFunctionFor('WKCRouteAPINotesDelete') %>)({
@@ -189,7 +189,7 @@
 
 	//_ WKReactNoteObjects
 
-	moi.WKReactNoteObjects = function (noteObjects, sharedData) {
+	moi.WKReactNoteObjects = function (noteObjects) {
 		var selection = d3.select('#WKCAppNotesList')
 			.selectAll('.WKCAppNotesListItem').data(noteObjects);
 		
@@ -213,7 +213,7 @@
 
 	//_ WKReactSelectedNote
 
-	moi.WKReactSelectedNote = function (sharedData) {
+	moi.WKReactSelectedNote = function () {
 		d3.select('#WKCNotesAppEditorTextarea').node().value = moi.WKPropertiesSelectedNote(undefined, sharedData) ? moi.WKPropertiesSelectedNote(undefined, sharedData).WKCNoteBody : null;
 		d3.select('#WKCNotesAppEditorTextarea').attr('disabled', moi.WKPropertiesSelectedNote(undefined, sharedData) ? null : undefined);
 
@@ -232,13 +232,13 @@
 
 	//_ setupEverything
 
-	moi.setupEverything = function (sharedData) {
-		moi.setupAPIToken(sharedData);
+	moi.setupEverything = function () {
+		moi.setupAPIToken();
 	};
 
 	//_ setupAPIToken
 
-	moi.setupAPIToken = function (sharedData) {
+	moi.setupAPIToken = function () {
 		d3.json('<%= OLSKCanonicalFor('WKCRouteAPIToken') %>', {
 			method: 'GET',
 		}).then(function(responseJSON) {
@@ -248,13 +248,13 @@
 
 			moi.WKPropertiesAPIToken(responseJSON.WKCAPIToken, sharedData);
 
-			moi.setupNoteObjects(sharedData);
+			moi.setupNoteObjects();
 		}, moi.WKCommandsAlertConnectionError);
 	};
 
 	//_ setupNoteObjects
 
-	moi.setupNoteObjects = function (sharedData) {
+	moi.setupNoteObjects = function () {
 		d3.json('<%= OLSKCanonicalFor('WKCRouteAPINotesSearch') %>', {
 			method: 'GET',
 			headers: {
@@ -278,13 +278,13 @@
 				moi.WKPropertiesSelectedNote(moi.WKPropertiesNoteObjects(undefined, sharedData).shift(), sharedData);
 			}
 
-			moi.setupPersistenceTask(sharedData);
+			moi.setupPersistenceTask();
 		}, moi.WKCommandsAlertConnectionError);
 	};
 
 	//_ setupPersistenceTask
 
-	moi.setupPersistenceTask = function (sharedData) {
+	moi.setupPersistenceTask = function () {
 		sharedData.WKCAppNotesSharedPersistenceTask = {
 			OLSKTaskName: 'WKCTasksEditorPersistence',
 			OLSKTaskFireTimeInterval: 3,
@@ -347,8 +347,8 @@
 
 	//_ WKLifecyclePageWillLoad
 
-	moi.WKLifecyclePageWillLoad = function (sharedData) {
-		moi.setupEverything(sharedData);
+	moi.WKLifecyclePageWillLoad = function () {
+		moi.setupEverything();
 	};
 
 	Object.defineProperty(exports, '__esModule', { value: true });
