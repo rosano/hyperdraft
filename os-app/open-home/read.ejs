@@ -1,11 +1,20 @@
 <%
-locals.OLSKPageTitle = OLSKLocalized('WKCHomeTitle');
+locals.OLSKPageTitle = locals.WKCNoteObject.WKCNoteDetectedTitle;
+locals.OLSKPageAssets = [
+	'ui-style.css',
+];
 %>
 
 <%- include('../_shared/WKCLayout/header.ejs') %>
 
-<h1><%= locals.WKCNoteObject.WKCNoteDetectedTitle %></h1>
+<header>
+	<a href="/">Home</a>
+</header>
 
-<%- markedPackage(locals.WKCNoteObject.WKCNoteDetectedBody) %>
+<article>
+	<h1><%= locals.WKCNoteObject.WKCNoteDetectedTitle %></h1>
+
+	<%- markedPackage(locals.WKCNoteObject.WKCNoteDetectedBody) %>
+</article>
 
 <%- include('../_shared/WKCLayout/footer.ejs') %>
