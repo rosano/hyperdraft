@@ -82,6 +82,26 @@ describe('WKCModelNoteDetectedTitleFor', function testWKCModelNoteDetectedTitleF
 
 });
 
+describe('WKCModelNoteDetectedBodyFor', function testWKCModelNoteDetectedBodyFor() {
+
+	it('returns empty string if empty', function() {
+		assert.deepEqual(notesLibrary.WKCModelNoteDetectedBodyFor(), '');
+		assert.deepEqual(notesLibrary.WKCModelNoteDetectedBodyFor(null), '');
+		assert.deepEqual(notesLibrary.WKCModelNoteDetectedBodyFor(''), '');
+	});
+
+	it('returns empty string if single', function() {
+		assert.deepEqual(notesLibrary.WKCModelNoteDetectedBodyFor('alpha'), '');
+	});
+
+	it('returns first line if multiple', function() {
+		assert.deepEqual(notesLibrary.WKCModelNoteDetectedBodyFor("alpha\n"), '');
+		assert.deepEqual(notesLibrary.WKCModelNoteDetectedBodyFor("alpha\nbravo"), 'bravo');
+		assert.deepEqual(notesLibrary.WKCModelNoteDetectedBodyFor("alpha\n\nbravo"), 'bravo');
+	});
+
+});
+
 describe('WKCModelNotesHiddenPropertyNames', function testWKCModelNotesHiddenPropertyNames() {
 
 	it('returns array', function() {

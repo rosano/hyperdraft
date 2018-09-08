@@ -62,6 +62,16 @@ exports.WKCModelNoteDetectedTitleFor = function(inputData) {
 	return inputData.split("\n").shift();
 };
 
+//_ WKCModelNoteDetectedBodyFor
+
+exports.WKCModelNoteDetectedBodyFor = function(inputData) {
+	if (typeof inputData !== 'string') {
+		return '';
+	}
+
+	return inputData.split("\n").slice(1).join("\n").trim();
+};
+
 //_ WKCModelNotesHiddenPropertyNames
 
 exports.WKCModelNotesHiddenPropertyNames = function() {
