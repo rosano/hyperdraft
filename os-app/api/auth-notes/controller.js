@@ -288,6 +288,9 @@ exports.WKCActionAPINotesPublicRead = function(req, res, next) {
 			noteObject[obj] = result[obj];
 		});
 
+		noteObject.WKCNoteDetectedTitle = modelLibrary.WKCModelNoteDetectedTitleFor(noteObject.WKCNoteBody);
+		noteObject.WKCNoteDetectedBody = modelLibrary.WKCModelNoteDetectedBodyFor(noteObject.WKCNoteBody);
+
 		return res.json(noteObject);
 	});
 };

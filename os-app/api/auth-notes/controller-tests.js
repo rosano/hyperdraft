@@ -515,7 +515,7 @@ describe('Connection', function testConnection() {
 		it('returns noteObject', function(done) {
 			apiNotesController.WKCActionAPINotesCreate(WKCFakeRequest({
 				body: {
-					WKCNoteBody: 'alpha',
+					WKCNoteBody: "alpha\nbravo",
 				},
 			}), WKCFakeResponseAsync(function(noteObject) {
 				apiNotesController.WKCActionAPINotesPublish(WKCFakeRequest({
@@ -531,9 +531,15 @@ describe('Connection', function testConnection() {
 						params: {
 							wkc_note_public_id: noteObject.WKCNotePublicID,
 						},
-					}), WKCFakeResponseAsync(function(noteObject) {
-						assert.strictEqual(noteObject._id, undefined);
-						assert.strictEqual(noteObject.WKCNotePublicID, 1);
+					}), WKCFakeResponseAsync(function(noteObjectPublic) {
+						assert.deepEqual(noteObjectPublic, {
+							WKCNotePublicID: 1,
+							WKCNoteBody: noteObject.WKCNoteBody,
+							WKCNoteDateCreated: noteObject.WKCNoteDateCreated,
+							WKCNoteDateUpdated: noteObject.WKCNoteDateUpdated,
+							WKCNoteDetectedTitle: 'alpha',
+							WKCNoteDetectedBody: 'bravo',
+						});
 
 						done();
 					}));
