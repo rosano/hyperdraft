@@ -18,16 +18,6 @@
 
 	//# PROPERTIES
 
-	//_ _propertiesSharedData
-
-	moi._propertiesSharedData = function (inputData) {
-		if (typeof inputData === 'undefined') {
-			return sharedData;
-		}
-
-		sharedData = inputData;
-	};
-
 	//_ WKPropertiesAPIToken
 
 	moi.WKPropertiesAPIToken = function (inputData) {
