@@ -10,35 +10,37 @@
 	(factory((global.WKControl = global.WKControl || {})));
 }(this, (function (exports) { 'use strict';
 
+	var moi = exports;
+
 	//# PROPERTIES
 
 	//_ WKPropertiesNoteObjects
 
-	exports.WKPropertiesNoteObjects = function (inputData, sharedData) {
+	moi.WKPropertiesNoteObjects = function (inputData, sharedData) {
 		if (typeof inputData === 'undefined') {
 			return d3.selectAll('.WKCAppNotesListItem').data();
 		}
 
-		exports.WKReactNoteObjects(inputData.sort(WKLogic.WKLogicListSort), sharedData);
+		moi.WKReactNoteObjects(inputData.sort(WKLogic.WKLogicListSort), sharedData);
 	};
 
 	//_ WKPropertiesSelectedNote
 
-	exports.WKPropertiesSelectedNote = function (inputData, sharedData) {
+	moi.WKPropertiesSelectedNote = function (inputData, sharedData) {
 		if (typeof inputData === 'undefined') {
 			return sharedData.WKCAppNotesSharedSelectedItem;
 		}
 
 		sharedData.WKCAppNotesSharedSelectedItem = inputData;
 
-		exports.WKReactSelectedNote(sharedData);
+		moi.WKReactSelectedNote(sharedData);
 	};
 
 	//# DATA
 
 	//_ WKDataNewNoteObject
 
-	exports.WKDataNewNoteObject = function () {
+	moi.WKDataNewNoteObject = function () {
 		return {
 			WKCNoteDateCreated: new Date(),
 			WKCNoteBody: '',
@@ -49,35 +51,35 @@
 
 	//_ WKCommandsAlertTokenUnavailable
 
-	exports.WKCommandsAlertTokenUnavailable = function () {
+	moi.WKCommandsAlertTokenUnavailable = function () {
 		window.alert('<%= OLSKLocalized('WKCNotesErrors').WKCAppErrorTokenUnavailable %>');
 		throw new Error('WKCAppErrorTokenUnavailable');
 	};
 
 	//_ WKCommandsAlertNotesUnavailable
 
-	exports.WKCommandsAlertNotesUnavailable = function () {
+	moi.WKCommandsAlertNotesUnavailable = function () {
 		window.alert('<%= OLSKLocalized('WKCNotesErrors').WKCAppErrorNotesUnavailable %>');
 		throw new Error('WKCAppErrorNotesUnavailable');
 	};
 
 	//_ WKCommandsAddNote
 
-	exports.WKCommandsAddNote = function (sharedData) {
-		exports.WKPropertiesNoteObjects(exports.WKPropertiesNoteObjects(undefined, sharedData).concat(WKControl.WKDataNewNoteObject()), sharedData);
+	moi.WKCommandsAddNote = function (sharedData) {
+		moi.WKPropertiesNoteObjects(moi.WKPropertiesNoteObjects(undefined, sharedData).concat(WKControl.WKDataNewNoteObject()), sharedData);
 
-		exports.WKPropertiesSelectedNote(exports.WKPropertiesNoteObjects(undefined, sharedData).shift(), sharedData);
+		moi.WKPropertiesSelectedNote(moi.WKPropertiesNoteObjects(undefined, sharedData).shift(), sharedData);
 	};
 
 	//_ WKCommandsSelectNote
 
-	exports.WKCommandsSelectNote = function (item, sharedData) {
-		exports.WKPropertiesSelectedNote(item, sharedData);
+	moi.WKCommandsSelectNote = function (item, sharedData) {
+		moi.WKPropertiesSelectedNote(item, sharedData);
 	};
 
 	//_ WKCommandsDeleteWithConfirmation
 
-	exports.WKCommandsDeleteWithConfirmation = function (sharedData) {
+	moi.WKCommandsDeleteWithConfirmation = function (sharedData) {
 		var persistenceIsCued = !!sharedData.WKCAppNotesSharedPersistenceTask._OLSKTaskTimerID;
 
 		clearInterval(sharedData.WKCAppNotesSharedPersistenceTask._OLSKTaskTimerID);
@@ -90,12 +92,12 @@
 			return;
 		};
 
-		exports._WKCommandsDeleteWithoutConfirmation(sharedData);
+		moi._WKCommandsDeleteWithoutConfirmation(sharedData);
 	};
 
 	//_ _WKCommandsDeleteWithoutConfirmation
 
-	exports._WKCommandsDeleteWithoutConfirmation = function (sharedData) {
+	moi._WKCommandsDeleteWithoutConfirmation = function (sharedData) {
 		d3.select('#WKCAppNotesPersistenceStatus').text('<%= OLSKLocalized('WKCAppNotesPersistenceStatusDeleting') %>');
 
 		d3.json((<%- OLSKCanonicalSubstitutionFunctionFor('WKCRouteAPINotesDelete') %>)({
@@ -121,13 +123,13 @@
 		}, function(error) {
 			d3.select('#WKCAppNotesPersistenceStatus').text('');
 			
-			exports.WKCommandsAlertUnableToDelete(error);
+			moi.WKCommandsAlertUnableToDelete(error);
 		});
 	};
 
 	//_ WKCommandsAlertUnableToDelete
 
-	exports.WKCommandsAlertUnableToDelete = function (error) {
+	moi.WKCommandsAlertUnableToDelete = function (error) {
 		window.alert('<%= OLSKLocalized('WKCAppNotesPersistenceStatusUnableToDelete') %>');
 
 		throw error;
@@ -137,7 +139,7 @@
 
 	//_ WKReactNoteObjects
 
-	exports.WKReactNoteObjects = function (noteObjects, sharedData) {
+	moi.WKReactNoteObjects = function (noteObjects, sharedData) {
 		var selection = d3.select('#WKCAppNotesList')
 			.selectAll('.WKCAppNotesListItem').data(noteObjects);
 		
@@ -148,7 +150,7 @@
 					d3.selectAll('.WKCAppNotesListItem').classed('WKCAppNotesListItemSelected', false);
 					d3.select(this).classed('WKCAppNotesListItemSelected', true);
 
-					return exports.WKCommandsSelectNote(obj, sharedData);
+					return moi.WKCommandsSelectNote(obj, sharedData);
 				})
 				.merge(selection)
 					.html(function(obj) {
@@ -164,19 +166,19 @@
 
 	//_ WKReactSelectedNote
 
-	exports.WKReactSelectedNote = function (sharedData) {
-		d3.select('#WKCNotesAppEditorTextarea').node().value = exports.WKPropertiesSelectedNote(undefined, sharedData) ? exports.WKPropertiesSelectedNote(undefined, sharedData).WKCNoteBody : null;
-		d3.select('#WKCNotesAppEditorTextarea').attr('disabled', exports.WKPropertiesSelectedNote(undefined, sharedData) ? null : undefined);
+	moi.WKReactSelectedNote = function (sharedData) {
+		d3.select('#WKCNotesAppEditorTextarea').node().value = moi.WKPropertiesSelectedNote(undefined, sharedData) ? moi.WKPropertiesSelectedNote(undefined, sharedData).WKCNoteBody : null;
+		d3.select('#WKCNotesAppEditorTextarea').attr('disabled', moi.WKPropertiesSelectedNote(undefined, sharedData) ? null : undefined);
 
-		if (exports.WKPropertiesSelectedNote(undefined, sharedData)) {
+		if (moi.WKPropertiesSelectedNote(undefined, sharedData)) {
 			d3.select('#WKCNotesAppEditorTextarea').node().focus();
 		}
 
 		d3.selectAll('.WKCAppNotesListItem').classed('WKCAppNotesListItemSelected', function(d) {
-			return d === exports.WKPropertiesSelectedNote(undefined, sharedData);
+			return d === moi.WKPropertiesSelectedNote(undefined, sharedData);
 		});
 
-		d3.select('#WKCAppNotesDeleteButton').attr('disabled', exports.WKPropertiesSelectedNote(undefined, sharedData) ? null : undefined);
+		d3.select('#WKCAppNotesDeleteButton').attr('disabled', moi.WKPropertiesSelectedNote(undefined, sharedData) ? null : undefined);
 	};
 
 	Object.defineProperty(exports, '__esModule', { value: true });
