@@ -29,22 +29,3 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 	});
 
 });
-
-describe('WKCActionHomeIndex', function testWKCActionHomeIndex() {
-
-	it('renders page', function() {
-		homeController.WKCActionHomeIndex(null, testingLibrary.OLSKTestingFakeResponseForRender(function(viewPath, pageData) {
-			assert.strictEqual(viewPath, [
-				__dirname,
-				'index',
-				].join('/'));
-		}));
-	});
-
-	it('returns pageData', function() {
-		homeController.WKCActionHomeIndex(null, testingLibrary.OLSKTestingFakeResponseForRender(function(viewPath, pageData) {
-			assert.deepEqual(pageData, {});
-		}));
-	});
-
-});
