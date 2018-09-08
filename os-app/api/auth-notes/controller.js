@@ -197,9 +197,11 @@ exports.WKCActionAPINotesUpdate = function(req, res, next) {
 
 	return req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_notes').findOneAndUpdate({
 		WKCNoteID: parseInt(req.params.wkc_note_id),
-	}, Object.assign(inputData, {
-		WKCNoteDateUpdated: new Date(),
-	}), function(err, result) {
+	}, {
+		'$set': Object.assign(inputData, {
+			WKCNoteDateUpdated: new Date(),
+		}),
+	}, function(err, result) {
 		if (err) {
 			throw new Error('WKCErrorDatabaseFindOne');
 		}
@@ -224,10 +226,12 @@ exports.WKCActionAPINotesPublish = function(req, res, next) {
 	var completionHandler = function() {
 		return req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_notes').findOneAndUpdate({
 			WKCNoteID: parseInt(req.params.wkc_note_id),
-		}, Object.assign(req._WKCAPINotesMiddlewareFindByIDResult, {
-			WKCNoteIsPublished: inputData.WKCNotePublishStatusIsPublished,
-			WKCNoteDateUpdated: new Date(),
-		}), function(err, result) {
+		}, {
+			'$set': Object.assign(req._WKCAPINotesMiddlewareFindByIDResult, {
+				WKCNoteIsPublished: inputData.WKCNotePublishStatusIsPublished,
+				WKCNoteDateUpdated: new Date(),
+			}),
+		}, function(err, result) {
 			if (err) {
 				throw new Error('WKCErrorDatabaseFindOne');
 			}
@@ -251,8 +255,10 @@ exports.WKCActionAPINotesPublish = function(req, res, next) {
 			return req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_settings').findOneAndUpdate({
 				WKCSettingsKey: 'WKCSettingsLastRepoID',
 			}, {
-				WKCSettingsKey: 'WKCSettingsLastRepoID',
-				WKCSettingsValue: newRepoID,
+				'$set': {
+					WKCSettingsKey: 'WKCSettingsLastRepoID',
+					WKCSettingsValue: newRepoID,
+				},
 			}, {
 				upsert: true,
 			}, function(err) {
