@@ -43,6 +43,11 @@ exports.OLSKControllerRoutes = function() {
 				'WKCSharedMiddlewareAPINotesFindByID',
 			],
 		},
+		WKCRouteAPINotesPublicRead: {
+			OLSKRoutePath: '/api/notes/:wkc_public_id(\\d+)',
+			OLSKRouteMethod: 'get',
+			OLSKRouteFunction: exports.WKCActionAPINotesPublicRead,
+		},
 		WKCRouteAPINotesDelete: {
 			OLSKRoutePath: '/api/notes/:wkc_note_id(\\d+)',
 			OLSKRouteMethod: 'delete',
