@@ -8,6 +8,9 @@
     "// OLDSKOOL": null,
     "OldSkool": "olsk/OldSkool",
 
+    "// MARKDOWN": null,
+    "marked": "latest",
+
     "// PERSISTENCE": null,
     "mongodb": "^3.0.7",
 
