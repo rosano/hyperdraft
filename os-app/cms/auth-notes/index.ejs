@@ -51,7 +51,7 @@ locals.OLSKPageAssets = [
 			<textarea id="WKCNotesAppEditorTextarea" disabled></textarea>
 			<script type="text/javascript">
 				d3.select('#WKCNotesAppEditorTextarea').on('input', function() {
-					WKBehaviour.interfaceEditorTextareaDidReceiveInput(WKBehaviour._propertiesSharedData(undefined));
+					WKBehaviour.interfaceEditorTextareaDidReceiveInput(this, WKBehaviour._propertiesSharedData(undefined));
 				});
 			</script>
 		</div>

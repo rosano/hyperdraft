@@ -75,12 +75,12 @@
 
 	//_ interfaceEditorTextareaDidReceiveInput
 
-	moi.interfaceEditorTextareaDidReceiveInput = function (sharedData) {
+	moi.interfaceEditorTextareaDidReceiveInput = function (textarea, sharedData) {
 		clearInterval(sharedData.WKCAppNotesSharedPersistenceTask._OLSKTaskTimerID);
 		OLSKTasks.OLSKTasksTimeoutForTaskObject(sharedData.WKCAppNotesSharedPersistenceTask);
 
 		Object.assign(sharedData.WKCAppNotesSharedSelectedItem, {
-			WKCNoteBody: this.value,
+			WKCNoteBody: textarea.value,
 			WKCNoteDateUpdated: new Date(),
 		});
 
