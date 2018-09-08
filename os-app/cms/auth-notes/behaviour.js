@@ -82,7 +82,7 @@
 	//_ interfaceDeleteButtonDidClick
 
 	moi.interfaceDeleteButtonDidClick = function () {
-		moi.commandsDeleteWithConfirmation();
+		moi.commandsDeleteNoteWithConfirmation(moi.propertiesSelectedNote());
 	};
 
 	//_ interfacePublishButtonDidClick
@@ -163,9 +163,9 @@
 		OLSKTasks.OLSKTasksTimeoutForTaskObject(moi.propertiesPersistenceTask());
 	};
 
-	//_ commandsDeleteWithConfirmation
+	//_ commandsDeleteNoteWithConfirmation
 
-	moi.commandsDeleteWithConfirmation = function () {
+	moi.commandsDeleteNoteWithConfirmation = function (inputData) {
 		var persistenceIsCued = !!moi.propertiesPersistenceTask()._OLSKTaskTimerID;
 
 		moi.commandsPersistenceStop();
@@ -178,16 +178,16 @@
 			return;
 		};
 
-		moi._commandsDeleteWithoutConfirmation();
+		moi._commandsDeleteNoteWithoutConfirmation(inputData);
 	};
 
-	//_ _commandsDeleteWithoutConfirmation
+	//_ _commandsDeleteNoteWithoutConfirmation
 
-	moi._commandsDeleteWithoutConfirmation = function () {
+	moi._commandsDeleteNoteWithoutConfirmation = function (inputData) {
 		d3.select('#WKCAppNotesPersistenceStatus').text('<%= OLSKLocalized('WKCAppNotesPersistenceStatusDeleting') %>');
 
 		d3.json((<%- OLSKCanonicalSubstitutionFunctionFor('WKCRouteAPINotesDelete') %>)({
-			wkc_note_id: moi.propertiesSelectedNote().WKCNoteID,
+			wkc_note_id: inputData.WKCNoteID,
 		}), {
 			method: 'DELETE',
 			headers: {
@@ -196,7 +196,7 @@
 			},
 		}).then(function(responseJSON) {
 			moi.propertiesNoteObjects(d3.selectAll('.WKCAppNotesListItem').data().filter(function(e) {
-				return e !== moi.propertiesSelectedNote();
+				return e !== inputData;
 			}));
 
 			moi.commandsSelectNote(moi.propertiesNoteObjects().shift());
