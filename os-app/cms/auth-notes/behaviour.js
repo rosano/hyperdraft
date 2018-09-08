@@ -18,9 +18,9 @@
 
 	//# PROPERTIES
 
-	//_ WKPropertiesAPIToken
+	//_ propertiesAPIToken
 
-	moi.WKPropertiesAPIToken = function (inputData) {
+	moi.propertiesAPIToken = function (inputData) {
 		if (typeof inputData === 'undefined') {
 			return sharedData.WKCAppNotesSharedAPIToken;
 		}
@@ -28,33 +28,33 @@
 		sharedData.WKCAppNotesSharedAPIToken = inputData;
 	};
 
-	//_ WKPropertiesNoteObjects
+	//_ propertiesNoteObjects
 
-	moi.WKPropertiesNoteObjects = function (inputData) {
+	moi.propertiesNoteObjects = function (inputData) {
 		if (typeof inputData === 'undefined') {
 			return d3.selectAll('.WKCAppNotesListItem').data();
 		}
 
-		moi.WKReactNoteObjects(inputData.sort(WKLogic.WKLogicListSort));
+		moi.reactNoteObjects(inputData.sort(WKLogic.WKLogicListSort));
 	};
 
-	//_ WKPropertiesSelectedNote
+	//_ propertiesSelectedNote
 
-	moi.WKPropertiesSelectedNote = function (inputData) {
+	moi.propertiesSelectedNote = function (inputData) {
 		if (typeof inputData === 'undefined') {
 			return sharedData.WKCAppNotesSharedSelectedItem;
 		}
 
 		sharedData.WKCAppNotesSharedSelectedItem = inputData;
 
-		moi.WKReactSelectedNote();
+		moi.reactSelectedNote();
 	};
 
 	//# DATA
 
-	//_ WKDataNewNoteObject
+	//_ dataNewNoteObject
 
-	moi.WKDataNewNoteObject = function () {
+	moi.dataNewNoteObject = function () {
 		return {
 			WKCNoteDateCreated: new Date(),
 			WKCNoteBody: '',
@@ -69,12 +69,12 @@
 		clearInterval(sharedData.WKCAppNotesSharedPersistenceTask._OLSKTaskTimerID);
 		OLSKTasks.OLSKTasksTimeoutForTaskObject(sharedData.WKCAppNotesSharedPersistenceTask);
 
-		Object.assign(moi.WKPropertiesSelectedNote(), {
+		Object.assign(moi.propertiesSelectedNote(), {
 			WKCNoteBody: textarea.value,
 			WKCNoteDateUpdated: new Date(),
 		});
 
-		WKBehaviour.WKReactNoteObjects(d3.selectAll('.WKCAppNotesListItem').data());
+		WKBehaviour.reactNoteObjects(d3.selectAll('.WKCAppNotesListItem').data());
 	};
 
 	//# COMMANDS
@@ -106,15 +106,15 @@
 	//_ WKCommandsAddNote
 
 	moi.WKCommandsAddNote = function () {
-		moi.WKPropertiesNoteObjects(moi.WKPropertiesNoteObjects().concat(WKBehaviour.WKDataNewNoteObject()));
+		moi.propertiesNoteObjects(moi.propertiesNoteObjects().concat(WKBehaviour.dataNewNoteObject()));
 
-		moi.WKPropertiesSelectedNote(moi.WKPropertiesNoteObjects().shift());
+		moi.propertiesSelectedNote(moi.propertiesNoteObjects().shift());
 	};
 
 	//_ WKCommandsSelectNote
 
 	moi.WKCommandsSelectNote = function (item) {
-		moi.WKPropertiesSelectedNote(item);
+		moi.propertiesSelectedNote(item);
 	};
 
 	//_ WKCommandsDeleteWithConfirmation
@@ -141,19 +141,19 @@
 		d3.select('#WKCAppNotesPersistenceStatus').text('<%= OLSKLocalized('WKCAppNotesPersistenceStatusDeleting') %>');
 
 		d3.json((<%- OLSKCanonicalSubstitutionFunctionFor('WKCRouteAPINotesDelete') %>)({
-			wkc_note_id: moi.WKPropertiesSelectedNote().WKCNoteID,
+			wkc_note_id: moi.propertiesSelectedNote().WKCNoteID,
 		}), {
 			method: 'DELETE',
 			headers: {
 				'Content-Type': 'application/json',
-				'x-client-key': moi.WKPropertiesAPIToken(),
+				'x-client-key': moi.propertiesAPIToken(),
 			},
 		}).then(function(responseJSON) {
-			moi.WKPropertiesNoteObjects(d3.selectAll('.WKCAppNotesListItem').data().filter(function(e) {
-				return e !== moi.WKPropertiesSelectedNote();
+			moi.propertiesNoteObjects(d3.selectAll('.WKCAppNotesListItem').data().filter(function(e) {
+				return e !== moi.propertiesSelectedNote();
 			}));
 
-			moi.WKCommandsSelectNote(moi.WKPropertiesNoteObjects().shift());
+			moi.WKCommandsSelectNote(moi.propertiesNoteObjects().shift());
 
 			d3.select('#WKCAppNotesPersistenceStatus').text('<%= OLSKLocalized('WKCAppNotesPersistenceStatusDeleted') %>');
 
@@ -177,9 +177,9 @@
 
 	//# REACT
 
-	//_ WKReactNoteObjects
+	//_ reactNoteObjects
 
-	moi.WKReactNoteObjects = function (noteObjects) {
+	moi.reactNoteObjects = function (noteObjects) {
 		var selection = d3.select('#WKCAppNotesList')
 			.selectAll('.WKCAppNotesListItem').data(noteObjects);
 		
@@ -201,21 +201,21 @@
 		selection.exit().remove();
 	};
 
-	//_ WKReactSelectedNote
+	//_ reactSelectedNote
 
-	moi.WKReactSelectedNote = function () {
-		d3.select('#WKCNotesAppEditorTextarea').node().value = moi.WKPropertiesSelectedNote() ? moi.WKPropertiesSelectedNote().WKCNoteBody : null;
-		d3.select('#WKCNotesAppEditorTextarea').attr('disabled', moi.WKPropertiesSelectedNote() ? null : undefined);
+	moi.reactSelectedNote = function () {
+		d3.select('#WKCNotesAppEditorTextarea').node().value = moi.propertiesSelectedNote() ? moi.propertiesSelectedNote().WKCNoteBody : null;
+		d3.select('#WKCNotesAppEditorTextarea').attr('disabled', moi.propertiesSelectedNote() ? null : undefined);
 
-		if (moi.WKPropertiesSelectedNote()) {
+		if (moi.propertiesSelectedNote()) {
 			d3.select('#WKCNotesAppEditorTextarea').node().focus();
 		}
 
 		d3.selectAll('.WKCAppNotesListItem').classed('WKCAppNotesListItemSelected', function(d) {
-			return d === moi.WKPropertiesSelectedNote();
+			return d === moi.propertiesSelectedNote();
 		});
 
-		d3.select('#WKCAppNotesDeleteButton').attr('disabled', moi.WKPropertiesSelectedNote() ? null : undefined);
+		d3.select('#WKCAppNotesDeleteButton').attr('disabled', moi.propertiesSelectedNote() ? null : undefined);
 	};
 
 	//# SETUP
@@ -236,7 +236,7 @@
 				return WKBehaviour.WKCommandsAlertTokenUnavailable();
 			}
 
-			moi.WKPropertiesAPIToken(responseJSON.WKCAPIToken);
+			moi.propertiesAPIToken(responseJSON.WKCAPIToken);
 
 			moi.setupNoteObjects();
 		}, moi.WKCommandsAlertConnectionError);
@@ -248,7 +248,7 @@
 		d3.json('<%= OLSKCanonicalFor('WKCRouteAPINotesSearch') %>', {
 			method: 'GET',
 			headers: {
-				'x-client-key': moi.WKPropertiesAPIToken(),
+				'x-client-key': moi.propertiesAPIToken(),
 			},
 		}).then(function(responseJSON) {
 			if (!Array.isArray(responseJSON)) {
@@ -257,15 +257,15 @@
 
 			d3.select('#WKCAppNotes').classed('WKCAppNotesLoading', false);
 
-			WKBehaviour.WKPropertiesNoteObjects(responseJSON.map(function(e) {
+			WKBehaviour.propertiesNoteObjects(responseJSON.map(function(e) {
 				return Object.assign(e, {
 					WKCNoteDateCreated: new Date(e.WKCNoteDateCreated),
 					WKCNoteDateUpdated: new Date(e.WKCNoteDateUpdated),
 				});
 			}));
 
-			if (WKBehaviour.WKPropertiesNoteObjects().length) {
-				moi.WKPropertiesSelectedNote(moi.WKPropertiesNoteObjects().shift());
+			if (WKBehaviour.propertiesNoteObjects().length) {
+				moi.propertiesSelectedNote(moi.propertiesNoteObjects().shift());
 			}
 
 			moi.setupPersistenceTask();
@@ -286,28 +286,28 @@
 				d3.select('#WKCAppNotesPersistenceStatus').text('<%= OLSKLocalized('WKCAppNotesPersistenceStatusSaving') %>');
 
 				return (new Promise(function(resolve, reject) {
-					if (!moi.WKPropertiesSelectedNote().WKCNoteID) {
+					if (!moi.propertiesSelectedNote().WKCNoteID) {
 						return resolve(d3.json('<%= OLSKCanonicalFor('WKCRouteAPINotesCreate') %>', {
 							method: 'POST',
 							headers: {
 								'Content-Type': 'application/json',
-								'x-client-key': moi.WKPropertiesAPIToken(),
+								'x-client-key': moi.propertiesAPIToken(),
 							},
-							body: JSON.stringify(moi.WKPropertiesSelectedNote()),
+							body: JSON.stringify(moi.propertiesSelectedNote()),
 						}).then(function(responseJSON) {
-							Object.assign(moi.WKPropertiesSelectedNote(), responseJSON);
+							Object.assign(moi.propertiesSelectedNote(), responseJSON);
 						}, reject));
 					}
 
 					return resolve(d3.json((<%- OLSKCanonicalSubstitutionFunctionFor('WKCRouteAPINotesUpdate') %>)({
-						wkc_note_id: moi.WKPropertiesSelectedNote().WKCNoteID,
+						wkc_note_id: moi.propertiesSelectedNote().WKCNoteID,
 					}), {
 						method: 'PUT',
 						headers: {
 							'Content-Type': 'application/json',
-							'x-client-key': moi.WKPropertiesAPIToken(),
+							'x-client-key': moi.propertiesAPIToken(),
 						},
-						body: JSON.stringify(moi.WKPropertiesSelectedNote()),
+						body: JSON.stringify(moi.propertiesSelectedNote()),
 					}));
 					
 				})).then(function() {
@@ -335,9 +335,9 @@
 
 	//# LIFECYCLE
 
-	//_ WKLifecyclePageWillLoad
+	//_ lifecyclePageWillLoad
 
-	moi.WKLifecyclePageWillLoad = function () {
+	moi.lifecyclePageWillLoad = function () {
 		moi.setupEverything();
 	};
 
