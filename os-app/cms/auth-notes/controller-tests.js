@@ -15,7 +15,7 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 	it('returns route objects', function() {
 		assert.deepEqual(notesController.OLSKControllerRoutes(), {
 			WKCRouteNotes: {
-				OLSKRoutePath: '/notes',
+				OLSKRoutePath: '/cms',
 				OLSKRouteMethod: 'get',
 				OLSKRouteFunction: notesController.WKCActionNotesIndex,
 				OLSKRouteLanguages: ['en'],

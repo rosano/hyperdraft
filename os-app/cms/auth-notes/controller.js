@@ -9,7 +9,7 @@
 exports.OLSKControllerRoutes = function() {
 	return {
 		WKCRouteNotes: {
-			OLSKRoutePath: '/notes',
+			OLSKRoutePath: '/cms',
 			OLSKRouteMethod: 'get',
 			OLSKRouteFunction: exports.WKCActionNotesIndex,
 			OLSKRouteLanguages: ['en'],
