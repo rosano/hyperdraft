@@ -7,7 +7,7 @@
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
 	typeof define === 'function' && define.amd ? define(['exports'], factory) :
-	(factory((global.WKControl = global.WKControl || {})));
+	(factory((global.WKBehaviour = global.WKBehaviour || {})));
 }(this, (function (exports) { 'use strict';
 
 	var moi = exports;
@@ -70,7 +70,7 @@
 			WKCNoteDateUpdated: new Date(),
 		});
 
-		WKControl.WKReactNoteObjects(d3.selectAll('.WKCAppNotesListItem').data(), sharedData);
+		WKBehaviour.WKReactNoteObjects(d3.selectAll('.WKCAppNotesListItem').data(), sharedData);
 	};
 
 	//# COMMANDS
@@ -102,7 +102,7 @@
 	//_ WKCommandsAddNote
 
 	moi.WKCommandsAddNote = function (sharedData) {
-		moi.WKPropertiesNoteObjects(moi.WKPropertiesNoteObjects(undefined, sharedData).concat(WKControl.WKDataNewNoteObject()), sharedData);
+		moi.WKPropertiesNoteObjects(moi.WKPropertiesNoteObjects(undefined, sharedData).concat(WKBehaviour.WKDataNewNoteObject()), sharedData);
 
 		moi.WKPropertiesSelectedNote(moi.WKPropertiesNoteObjects(undefined, sharedData).shift(), sharedData);
 	};
@@ -183,7 +183,7 @@
 			.append('div')
 				.attr('class', 'WKCAppNotesListItem')
 				.on('click', function(obj) {
-					WKControl.WKCommandsSelectNote(obj, sharedData);
+					WKBehaviour.WKCommandsSelectNote(obj, sharedData);
 				})
 				.merge(selection)
 					.html(function(obj) {
@@ -229,7 +229,7 @@
 			method: 'GET',
 		}).then(function(responseJSON) {
 			if (!responseJSON.WKCAPIToken) {
-				return WKControl.WKCommandsAlertTokenUnavailable();
+				return WKBehaviour.WKCommandsAlertTokenUnavailable();
 			}
 
 			moi.WKPropertiesAPIToken(responseJSON.WKCAPIToken, sharedData);
@@ -248,19 +248,19 @@
 			},
 		}).then(function(responseJSON) {
 			if (!Array.isArray(responseJSON)) {
-				return WKControl.WKCommandsAlertNotesUnavailable();
+				return WKBehaviour.WKCommandsAlertNotesUnavailable();
 			}
 
 			d3.select('#WKCAppNotes').classed('WKCAppNotesLoading', false);
 
-			WKControl.WKPropertiesNoteObjects(responseJSON.map(function(e) {
+			WKBehaviour.WKPropertiesNoteObjects(responseJSON.map(function(e) {
 				return Object.assign(e, {
 					WKCNoteDateCreated: new Date(e.WKCNoteDateCreated),
 					WKCNoteDateUpdated: new Date(e.WKCNoteDateUpdated),
 				});
 			}), sharedData);
 
-			if (WKControl.WKPropertiesNoteObjects(undefined, sharedData).length) {
+			if (WKBehaviour.WKPropertiesNoteObjects(undefined, sharedData).length) {
 				moi.WKPropertiesSelectedNote(moi.WKPropertiesNoteObjects(undefined, sharedData).shift(), sharedData);
 			}
 
