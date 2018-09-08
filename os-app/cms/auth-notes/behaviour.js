@@ -266,7 +266,7 @@
 				WKCNotePublishStatusIsPublished: true,
 			}),
 		}).then(function(responseJSON) {
-			d3.select('#WKCAppNotesPublishStatus').text('<%= OLSKLocalized('WKCAppNotesPublishStatusPublished') %>');
+			moi.reactPublishStatus();
 		}, function(error) {
 			if (window.confirm('<%= OLSKLocalized('WKCNotesErrors').WKCAppErrorPublishDidFail %>')) {
 				return moi.commandsPublishNote(inputData);
@@ -385,7 +385,13 @@
 			return;
 		}
 
-		d3.select('#WKCAppNotesPublishStatus').text(moi.propertiesSelectedNote().WKCNoteIsPublished ? '<%= OLSKLocalized('WKCAppNotesPublishStatusPublished') %>' : null);
+		moi.reactPublishStatus();
+	};
+
+	//_ reactPublishStatus
+
+	moi.reactPublishStatus = function () {
+		d3.select('#WKCAppNotesPublishStatus').html(moi.propertiesSelectedNote().WKCNoteIsPublished ? '<a href="/' + moi.propertiesSelectedNote().WKCNotePublicID + '" target="_blank"><%= OLSKLocalized('WKCAppNotesPublishStatusPublished') %></a>' : null);
 	};
 
 	//_ reactPersistenceStatus
