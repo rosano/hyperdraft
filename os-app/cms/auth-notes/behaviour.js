@@ -15,6 +15,7 @@
 	var WKBehaviourPropertyAPIToken;
 	var WKBehaviourPropertySelectedNote;
 	var WKBehaviourPropertyPersistenceTask;
+	var WKBehaviourPropertyUnsavedNotes;
 
 	//# PROPERTIES
 
@@ -48,6 +49,16 @@
 		WKBehaviourPropertySelectedNote = inputData === null ? undefined : inputData;
 
 		moi.reactSelectedNote();
+	};
+
+	//_ propertiesUnsavedNotes
+
+	moi.propertiesUnsavedNotes = function (inputData) {
+		if (typeof inputData === 'undefined') {
+			return WKBehaviourPropertyUnsavedNotes;
+		}
+
+		WKBehaviourPropertyUnsavedNotes = inputData === null ? undefined : inputData;
 	};
 
 	//_ propertiesPersistenceTask
@@ -148,6 +159,10 @@
 			WKCNoteDateUpdated: new Date(),
 		});
 
+		if (moi.propertiesUnsavedNotes().indexOf(moi.propertiesSelectedNote()) == -1) {
+			moi.propertiesUnsavedNotes().push(moi.propertiesSelectedNote());
+		}
+
 		moi.reactNoteObjects(moi.propertiesNoteObjects());
 	};
 
@@ -161,6 +176,14 @@
 
 	moi.commandsPersistenceTaskStart = function () {
 		OLSKTasks.OLSKTasksTimeoutForTaskObject(moi.propertiesPersistenceTask());
+	};
+
+	//_ commandsPersistUnsavedNotes
+
+	moi.commandsPersistUnsavedNotes = function () {
+		moi.propertiesUnsavedNotes().forEach(function(obj) {
+			moi.commandsPersistNote(obj);
+		});
 	};
 
 	//_ commandsPersistNote
@@ -181,6 +204,8 @@
 			if (inputData === moi.propertiesSelectedNote()) {
 				moi.reactPersistenceStatus('<%= OLSKLocalized('WKCAppNotesPersistenceStatusSaved') %>', true);
 			}
+			
+			moi.propertiesUnsavedNotes().splice(moi.propertiesUnsavedNotes().indexOf(inputData), 1);
 		}, function(error) {
 			if (window.confirm('<%= OLSKLocalized('WKCNotesErrors').WKCAppErrorPersistenceSaveDidFail %>')) {
 				return moi.commandsPersistNote(inputData);
@@ -390,6 +415,8 @@
 	//_ setupPersistenceTask
 
 	moi.setupPersistenceTask = function () {
+		moi.propertiesUnsavedNotes([]);
+
 		moi.propertiesPersistenceTask({
 			OLSKTaskName: 'WKCTasksEditorPersistence',
 			OLSKTaskFireTimeInterval: 3,
@@ -398,7 +425,7 @@
 			},
 			OLSKTaskFireLimit: 1,
 			OLSKTaskCallback: function () {
-				moi.commandsPersistNote(moi.propertiesSelectedNote());
+				moi.commandsPersistUnsavedNotes();
 
 				delete moi.propertiesPersistenceTask()._OLSKTaskTimerID;
 			},
