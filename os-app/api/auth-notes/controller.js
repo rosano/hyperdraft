@@ -282,10 +282,10 @@ exports.WKCActionAPINotesPublicRead = function(req, res, next) {
 			return next(new Error('WKCAPIClientErrorNotFound'));
 		}
 
-		var noteObject = result;
+		var noteObject = {};
 
-		modelLibrary.WKCModelNotesHiddenPropertyNames().forEach(function(obj) {
-			delete noteObject[obj];
+		modelLibrary.WKCModelNotesPublicPropertyNames().forEach(function(obj) {
+			noteObject[obj] = result[obj];
 		});
 
 		return res.json(noteObject);
