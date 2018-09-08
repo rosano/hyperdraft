@@ -244,12 +244,73 @@
 				});
 			}), sharedData);
 
-			if (!WKControl.WKPropertiesNoteObjects(undefined, sharedData).length) {
-				return;
+			if (WKControl.WKPropertiesNoteObjects(undefined, sharedData).length) {
+				moi.WKPropertiesSelectedNote(moi.WKPropertiesNoteObjects(undefined, sharedData).shift(), sharedData);
 			}
 
-			moi.WKPropertiesSelectedNote(moi.WKPropertiesNoteObjects(undefined, sharedData).shift(), sharedData);
+			moi.setupPersistenceTask(sharedData);
 		}, moi.WKCommandsAlertConnectionError);
+	};
+
+	//_ setupPersistenceTask
+
+	moi.setupPersistenceTask = function (sharedData) {
+		sharedData.WKCAppNotesSharedPersistenceTask = {
+			OLSKTaskName: 'WKCTasksEditorPersistence',
+			OLSKTaskFireTimeInterval: 3,
+			OLSKTaskShouldBePerformed: function() {
+				return true;
+			},
+			OLSKTaskFireLimit: 1,
+			OLSKTaskCallback: function() {
+				d3.select('#WKCAppNotesPersistenceStatus').text('<%= OLSKLocalized('WKCAppNotesPersistenceStatusSaving') %>');
+
+				return (new Promise(function(resolve, reject) {
+					if (!sharedData.WKCAppNotesSharedSelectedItem.WKCNoteID) {
+						return resolve(d3.json('<%= OLSKCanonicalFor('WKCRouteAPINotesCreate') %>', {
+							method: 'POST',
+							headers: {
+								'Content-Type': 'application/json',
+								'x-client-key': sharedData.WKCAppNotesSharedAPIToken,
+							},
+							body: JSON.stringify(sharedData.WKCAppNotesSharedSelectedItem),
+						}).then(function(responseJSON) {
+							Object.assign(sharedData.WKCAppNotesSharedSelectedItem, responseJSON);
+						}, reject));
+					}
+
+					return resolve(d3.json((<%- OLSKCanonicalSubstitutionFunctionFor('WKCRouteAPINotesUpdate') %>)({
+						wkc_note_id: sharedData.WKCAppNotesSharedSelectedItem.WKCNoteID,
+					}), {
+						method: 'PUT',
+						headers: {
+							'Content-Type': 'application/json',
+							'x-client-key': sharedData.WKCAppNotesSharedAPIToken,
+						},
+						body: JSON.stringify(sharedData.WKCAppNotesSharedSelectedItem),
+					}));
+					
+				})).then(function() {
+					d3.select('#WKCAppNotesPersistenceStatus').text('<%= OLSKLocalized('WKCAppNotesPersistenceStatusSaved') %>');
+
+					setTimeout(function() {
+						d3.select('#WKCAppNotesPersistenceStatus').text('');
+					}, 1000);
+				}, function(error) {
+					throw error;
+				}).catch(function(error) {
+					if (window.confirm('<%= OLSKLocalized('WKCNotesErrors').WKCAppErrorPersistenceSaveDidFail %>')) {
+						sharedData.WKCAppNotesSharedPersistenceTask.OLSKTaskCallback();
+					};
+
+					d3.select('#WKCAppNotesPersistenceStatus').text('<%= OLSKLocalized('WKCAppNotesPersistenceStatusUnableToSave') %>');
+
+					throw error;
+				}).finally(function() {
+					delete sharedData.WKCAppNotesSharedPersistenceTask._OLSKTaskTimerID;
+				});
+			},
+		};
 	};
 
 	//# LIFECYCLE
