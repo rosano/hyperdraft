@@ -4,6 +4,8 @@
  * MIT Licensed
  */
 
+var markedPackage = require('marked');
+
 var apiNotesController = require('../api/auth-notes/controller');
 
 //_ OLSKControllerRoutes
@@ -43,6 +45,7 @@ exports.WKCActionRefsRead = function(req, res, next) {
 				'read',
 			].join('/'), {
 				WKCNoteObject: inputData,
+				markedPackage: markedPackage,
 			});
 		},
 	}, next);
