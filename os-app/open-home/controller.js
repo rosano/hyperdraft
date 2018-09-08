@@ -31,8 +31,14 @@ exports.OLSKControllerRoutes = function() {
 exports.WKCActionHomeIndex = function(req, res, next) {
 	return res.render([
 		__dirname,
-		'index',
-	].join('/'), {});
+		'read',
+	].join('/'), {
+		WKCNoteObject: {
+			WKCNoteDetectedTitle: 'Welcome',
+			WKCNoteDetectedBody: '',
+		},
+		markedPackage: markedPackage,
+	});
 };
 
 //_ WKCActionRefsRead
