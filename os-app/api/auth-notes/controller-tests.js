@@ -309,7 +309,7 @@ describe('Connection', function testConnection() {
 				},
 			}), WKCFakeResponseAsync(function(responseJSON) {
 				assert.strictEqual(responseJSON._id, undefined);
-				assert.strictEqual(responseJSON.WKCNoteID - (new Date()) > -100, true);
+				assert.strictEqual(responseJSON.WKCNoteID - (new Date()) > -200, true);
 				assert.strictEqual(responseJSON.WKCNoteBody, 'alpha');
 				assert.strictEqual(responseJSON.WKCNoteDateCreated instanceof Date, true);
 				assert.strictEqual(responseJSON.WKCNoteDateUpdated instanceof Date, true);

@@ -88,7 +88,13 @@ exports.WKCAPINotesMiddlewareFindByID = function(req, res, next) {
 			return next(new Error('WKCAPIClientErrorNotFound'));
 		}
 
-		req._WKCAPINotesMiddlewareFindByIDResult = result;
+		var noteObject = result;
+
+		modelLibrary.WKCModelNotesUnusedPropertyNames().forEach(function(obj) {
+			delete noteObject[obj];
+		});
+
+		req._WKCAPINotesMiddlewareFindByIDResult = noteObject;
 
 		return next();
 	});
@@ -165,7 +171,13 @@ exports.WKCActionAPINotesRead = function(req, res, next) {
 			return next(new Error('WKCAPIClientErrorNotFound'));
 		}
 
-		return res.json(result);
+		var noteObject = result;
+
+		modelLibrary.WKCModelNotesUnusedPropertyNames().forEach(function(obj) {
+			delete noteObject[obj];
+		});
+
+		return res.json(noteObject);
 	});
 };
 
@@ -275,7 +287,7 @@ exports.WKCActionAPINotesDelete = function(req, res, next) {
 
 exports.WKCActionAPINotesSearch = function(req, res, next) {
 	return req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_notes').find({}).project(modelLibrary.WKCModelNotesUnusedPropertyNames().reduce(function(hash, e) {
-		// hash[e] = 0;
+		hash[e] = 0;
 		
 		return hash;
 	}, {})).toArray(function(err, items) {
