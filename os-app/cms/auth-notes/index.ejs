@@ -55,15 +55,7 @@ locals.OLSKPageAssets = [
 			<textarea id="WKCNotesAppEditorTextarea" disabled></textarea>
 			<script type="text/javascript">
 				d3.select('#WKCNotesAppEditorTextarea').on('input', function() {
-					clearInterval(sharedData.WKCAppNotesSharedPersistenceTask._OLSKTaskTimerID);
-					OLSKTasks.OLSKTasksTimeoutForTaskObject(sharedData.WKCAppNotesSharedPersistenceTask);
-
-					Object.assign(sharedData.WKCAppNotesSharedSelectedItem, {
-						WKCNoteBody: this.value,
-						WKCNoteDateUpdated: new Date(),
-					});
-
-					WKControl.WKReactNoteObjects(d3.selectAll('.WKCAppNotesListItem').data(), sharedData);
+					WKControl.interfaceEditorTextareaDidReceiveInput(sharedData);
 				});
 			</script>
 		</div>

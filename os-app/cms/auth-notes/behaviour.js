@@ -57,6 +57,22 @@
 		};
 	};
 
+	//# INTERFACE
+
+	//_ interfaceEditorTextareaDidReceiveInput
+
+	moi.interfaceEditorTextareaDidReceiveInput = function (sharedData) {
+		clearInterval(sharedData.WKCAppNotesSharedPersistenceTask._OLSKTaskTimerID);
+		OLSKTasks.OLSKTasksTimeoutForTaskObject(sharedData.WKCAppNotesSharedPersistenceTask);
+
+		Object.assign(sharedData.WKCAppNotesSharedSelectedItem, {
+			WKCNoteBody: this.value,
+			WKCNoteDateUpdated: new Date(),
+		});
+
+		WKControl.WKReactNoteObjects(d3.selectAll('.WKCAppNotesListItem').data(), sharedData);
+	};
+
 	//# COMMANDS
 
 	//_ WKCommandsAlertConnectionError
