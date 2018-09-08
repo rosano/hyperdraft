@@ -65,9 +65,22 @@ describe('WKCModelInputDataIsNotePublishStatusObject', function testWKCModelInpu
 
 describe('WKCModelNotesHiddenPropertyNames', function testWKCModelNotesHiddenPropertyNames() {
 
-	it('returns unused property names', function() {
+	it('returns array', function() {
 		assert.deepEqual(notesLibrary.WKCModelNotesHiddenPropertyNames(), [
 			'_id',
+		]);
+	});
+
+});
+
+describe('WKCModelNotesPublicPropertyNames', function testWKCModelNotesHiddenPropertyNames() {
+
+	it('returns array', function() {
+		assert.deepEqual(notesLibrary.WKCModelNotesPublicPropertyNames(), [
+			'WKCNotePublicID',
+			'WKCNoteBody',
+			'WKCNoteDateCreated',
+			'WKCNoteDateUpdated',
 		]);
 	});
 

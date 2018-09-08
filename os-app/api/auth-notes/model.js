@@ -59,3 +59,14 @@ exports.WKCModelNotesHiddenPropertyNames = function(inputData) {
 		'_id',
 	];
 };
+
+//_ WKCModelNotesPublicPropertyNames
+
+exports.WKCModelNotesPublicPropertyNames = function(inputData) {
+	return [
+		'WKCNotePublicID',
+		'WKCNoteBody',
+		'WKCNoteDateCreated',
+		'WKCNoteDateUpdated',
+	];
+};
