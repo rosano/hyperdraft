@@ -21,7 +21,7 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 				OLSKRouteLanguages: ['en'],
 			},
 			WKCRouteRefsRead: {
-				OLSKRoutePath: '/:wkc_note_id(\\d+)',
+				OLSKRoutePath: '/:wkc_note_public_id(\\d+)',
 				OLSKRouteMethod: 'get',
 				OLSKRouteFunction: homeController.WKCActionRefsRead,
 			},

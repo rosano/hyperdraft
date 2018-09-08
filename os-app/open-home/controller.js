@@ -4,6 +4,8 @@
  * MIT Licensed
  */
 
+var apiNotesController = require('../api/auth-notes/controller');
+
 //_ OLSKControllerRoutes
 
 exports.OLSKControllerRoutes = function() {
@@ -15,7 +17,7 @@ exports.OLSKControllerRoutes = function() {
 			OLSKRouteLanguages: ['en'],
 		},
 		WKCRouteRefsRead: {
-			OLSKRoutePath: '/:wkc_note_id(\\d+)',
+			OLSKRoutePath: '/:wkc_note_public_id(\\d+)',
 			OLSKRouteMethod: 'get',
 			OLSKRouteFunction: exports.WKCActionRefsRead,
 		},
@@ -29,4 +31,19 @@ exports.WKCActionHomeIndex = function(req, res, next) {
 		__dirname,
 		'index',
 	].join('/'), {});
+};
+
+//_ WKCActionRefsRead
+
+exports.WKCActionRefsRead = function(req, res, next) {
+	apiNotesController.WKCActionAPINotesPublicRead(req, {
+		json: function(inputData) {
+			return res.render([
+				__dirname,
+				'read',
+			].join('/'), {
+				WKCNoteObject: inputData,
+			});
+		},
+	}, next);
 };
