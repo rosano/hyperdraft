@@ -94,15 +94,7 @@
 	//_ interfaceEditorTextareaDidReceiveInput
 
 	moi.interfaceEditorTextareaDidReceiveInput = function () {
-		clearInterval(moi.propertiesPersistenceTask()._OLSKTaskTimerID);
-		OLSKTasks.OLSKTasksTimeoutForTaskObject(moi.propertiesPersistenceTask());
-
-		Object.assign(moi.propertiesSelectedNote(), {
-			WKCNoteBody: this.value,
-			WKCNoteDateUpdated: new Date(),
-		});
-
-		moi.reactNoteObjects(d3.selectAll('.WKCAppNotesListItem').data());
+		moi.commandsUpdateText(this.value);
 	};
 
 	//# COMMANDS
@@ -143,6 +135,20 @@
 
 	moi.commandsSelectNote = function (item) {
 		moi.propertiesSelectedNote(item);
+	};
+
+	//_ commandsUpdateText
+
+	moi.commandsUpdateText = function (inputData) {
+		clearInterval(moi.propertiesPersistenceTask()._OLSKTaskTimerID);
+		OLSKTasks.OLSKTasksTimeoutForTaskObject(moi.propertiesPersistenceTask());
+
+		Object.assign(moi.propertiesSelectedNote(), {
+			WKCNoteBody: inputData,
+			WKCNoteDateUpdated: new Date(),
+		});
+
+		moi.reactNoteObjects(moi.propertiesNoteObjects());
 	};
 
 	//_ commandsDeleteWithConfirmation
