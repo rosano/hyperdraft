@@ -23,23 +23,17 @@ locals.OLSKPageAssets = [
 
 		<button id="WKCAppNotesAddButton" accesskey="n"><%= OLSKLocalized('WKCAppNotesAddButtonText') %></button>
 		<script type="text/javascript">
-			d3.select('#WKCAppNotesAddButton').on('click', function() {
-				WKBehaviour.WKCommandsAddNote();
-			});
+			d3.select('#WKCAppNotesAddButton').on('click', WKBehaviour.interfaceAddButtonDidClick);
 		</script>
 
 		<button id="WKCAppNotesDeleteButton" disabled><%= OLSKLocalized('WKCAppNotesDeleteButtonText') %></button>
 		<script type="text/javascript">
-			d3.select('#WKCAppNotesDeleteButton').on('click', function() {
-				WKBehaviour.WKCommandsDeleteWithConfirmation();
-			});
+			d3.select('#WKCAppNotesDeleteButton').on('click', WKBehaviour.interfaceDeleteButtonDidClick);
 		</script>
 
 		<button id="WKCAppNotesPublishButton" disabled><%= OLSKLocalized('WKCAppNotesPublishButtonText') %></button>
 		<script type="text/javascript">
-			d3.select('#WKCAppNotesPublishButton').on('click', function() {
-				d3.select('#WKCAppNotesPublishStatus').text('<%= OLSKLocalized('WKCAppNotesPublishStatusPublishing') %>');
-			});
+			d3.select('#WKCAppNotesPublishButton').on('click', WKBehaviour.interfacePublishButtonDidClick);
 		</script>
 	</header>
 
@@ -50,9 +44,7 @@ locals.OLSKPageAssets = [
 		<div id="WKCAppNotesEditor">
 			<textarea id="WKCNotesAppEditorTextarea" disabled></textarea>
 			<script type="text/javascript">
-				d3.select('#WKCNotesAppEditorTextarea').on('input', function() {
-					WKBehaviour.interfaceEditorTextareaDidReceiveInput(this);
-				});
+				d3.select('#WKCNotesAppEditorTextarea').on('input', WKBehaviour.interfaceEditorTextareaDidReceiveInput);
 			</script>
 		</div>
 	</div>

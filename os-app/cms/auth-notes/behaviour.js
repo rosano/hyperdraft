@@ -63,14 +63,32 @@
 
 	//# INTERFACE
 
+	//_ interfaceAddButtonDidClick
+
+	moi.interfaceAddButtonDidClick = function () {
+		moi.WKCommandsAddNote();
+	};
+
+	//_ interfaceDeleteButtonDidClick
+
+	moi.interfaceDeleteButtonDidClick = function () {
+		moi.WKCommandsDeleteWithConfirmation();
+	};
+
+	//_ interfacePublishButtonDidClick
+
+	moi.interfacePublishButtonDidClick = function () {
+		d3.select('#WKCAppNotesPublishStatus').text('<%= OLSKLocalized('WKCAppNotesPublishStatusPublishing') %>');;
+	};
+
 	//_ interfaceEditorTextareaDidReceiveInput
 
-	moi.interfaceEditorTextareaDidReceiveInput = function (textarea) {
+	moi.interfaceEditorTextareaDidReceiveInput = function () {
 		clearInterval(sharedData.WKCAppNotesSharedPersistenceTask._OLSKTaskTimerID);
 		OLSKTasks.OLSKTasksTimeoutForTaskObject(sharedData.WKCAppNotesSharedPersistenceTask);
 
 		Object.assign(moi.propertiesSelectedNote(), {
-			WKCNoteBody: textarea.value,
+			WKCNoteBody: this.value,
 			WKCNoteDateUpdated: new Date(),
 		});
 
