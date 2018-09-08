@@ -4,6 +4,8 @@ locals.OLSKPageTitle = OLSKLocalized('WKCHomeTitle');
 
 <%- include('../_shared/WKCLayout/header.ejs') %>
 
-<pre><%= locals.WKCNoteObject.WKCNoteBody %></pre>
+<h1><%= locals.WKCNoteObject.WKCNoteDetectedTitle %></h1>
+
+<%- markedPackage(locals.WKCNoteObject.WKCNoteDetectedBody) %>
 
 <%- include('../_shared/WKCLayout/footer.ejs') %>
