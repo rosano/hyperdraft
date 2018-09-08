@@ -141,7 +141,13 @@ exports.WKCActionAPINotesCreate = function(req, res, next) {
 			throw new Error('WKCErrorDatabaseCreate');
 		}
 
-		return res.json(result.ops.pop());
+		var noteObject = result.ops.pop();
+
+		modelLibrary.WKCModelNotesUnusedPropertyNames().forEach(function(obj) {
+			delete noteObject[obj];
+		});
+
+		return res.json(noteObject);
 	});
 };
 
