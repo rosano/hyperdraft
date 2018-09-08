@@ -16,10 +16,10 @@
 
 	exports.WKPropertiesSelectedNote = function (inputData, sharedData) {
 		if (typeof inputData === 'undefined') {
-			return sharedData.WKPropertiesSelectedNote;
+			return sharedData.WKCAppNotesSharedSelectedItem;
 		}
 
-		sharedData.WKPropertiesSelectedNote = inputData;
+		sharedData.WKCAppNotesSharedSelectedItem = inputData;
 
 		exports.WKReactSelectedNote(sharedData);
 	};
