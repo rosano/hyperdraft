@@ -13,11 +13,7 @@ locals.OLSKPageAssets = [
 </script>
 
 <script type="text/javascript">
-	var sharedData = {
-		WKCAppNotesSharedSelectedItem: {},
-	};
-
-	WKBehaviour.WKLifecyclePageWillLoad(sharedData);
+	WKBehaviour.WKLifecyclePageWillLoad(WKBehaviour._propertiesSharedData(undefined));
 </script>
 
 <div id="WKCAppNotes" class="WKCAppNotesLoading">
@@ -28,14 +24,14 @@ locals.OLSKPageAssets = [
 		<button id="WKCAppNotesAddButton" accesskey="n"><%= OLSKLocalized('WKCAppNotesAddButtonText') %></button>
 		<script type="text/javascript">
 			d3.select('#WKCAppNotesAddButton').on('click', function() {
-				WKBehaviour.WKCommandsAddNote(sharedData);
+				WKBehaviour.WKCommandsAddNote(WKBehaviour._propertiesSharedData(undefined));
 			});
 		</script>
 
 		<button id="WKCAppNotesDeleteButton" disabled><%= OLSKLocalized('WKCAppNotesDeleteButtonText') %></button>
 		<script type="text/javascript">
 			d3.select('#WKCAppNotesDeleteButton').on('click', function() {
-				WKBehaviour.WKCommandsDeleteWithConfirmation(sharedData);
+				WKBehaviour.WKCommandsDeleteWithConfirmation(WKBehaviour._propertiesSharedData(undefined));
 			});
 		</script>
 
@@ -55,7 +51,7 @@ locals.OLSKPageAssets = [
 			<textarea id="WKCNotesAppEditorTextarea" disabled></textarea>
 			<script type="text/javascript">
 				d3.select('#WKCNotesAppEditorTextarea').on('input', function() {
-					WKBehaviour.interfaceEditorTextareaDidReceiveInput(sharedData);
+					WKBehaviour.interfaceEditorTextareaDidReceiveInput(WKBehaviour._propertiesSharedData(undefined));
 				});
 			</script>
 		</div>

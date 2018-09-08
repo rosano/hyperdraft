@@ -12,7 +12,21 @@
 
 	var moi = exports;
 
+	var sharedData = {
+		WKCAppNotesSharedSelectedItem: {},
+	};
+
 	//# PROPERTIES
+
+	//_ _propertiesSharedData
+
+	moi._propertiesSharedData = function (inputData) {
+		if (typeof inputData === 'undefined') {
+			return sharedData;
+		}
+
+		sharedData = inputData;
+	};
 
 	//_ WKPropertiesAPIToken
 
