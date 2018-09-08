@@ -63,6 +63,25 @@ describe('WKCModelInputDataIsNotePublishStatusObject', function testWKCModelInpu
 
 });
 
+describe('WKCModelNoteDetectedTitleFor', function testWKCModelNoteDetectedTitleFor() {
+
+	it('returns empty string if empty', function() {
+		assert.deepEqual(notesLibrary.WKCModelNoteDetectedTitleFor(), '');
+		assert.deepEqual(notesLibrary.WKCModelNoteDetectedTitleFor(null), '');
+		assert.deepEqual(notesLibrary.WKCModelNoteDetectedTitleFor(''), '');
+	});
+
+	it('returns first line if single', function() {
+		assert.deepEqual(notesLibrary.WKCModelNoteDetectedTitleFor('alpha'), 'alpha');
+	});
+
+	it('returns first line if multiple', function() {
+		assert.deepEqual(notesLibrary.WKCModelNoteDetectedTitleFor("alpha\n"), 'alpha');
+		assert.deepEqual(notesLibrary.WKCModelNoteDetectedTitleFor("alpha\nbravo"), 'alpha');
+	});
+
+});
+
 describe('WKCModelNotesHiddenPropertyNames', function testWKCModelNotesHiddenPropertyNames() {
 
 	it('returns array', function() {

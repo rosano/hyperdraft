@@ -52,9 +52,19 @@ exports.WKCModelInputDataIsNotePublishStatusObject = function(inputData) {
 	return true;
 };
 
+//_ WKCModelNoteDetectedTitleFor
+
+exports.WKCModelNoteDetectedTitleFor = function(inputData) {
+	if (typeof inputData !== 'string') {
+		return '';
+	}
+
+	return inputData.split("\n").shift();
+};
+
 //_ WKCModelNotesHiddenPropertyNames
 
-exports.WKCModelNotesHiddenPropertyNames = function(inputData) {
+exports.WKCModelNotesHiddenPropertyNames = function() {
 	return [
 		'_id',
 	];
@@ -62,7 +72,7 @@ exports.WKCModelNotesHiddenPropertyNames = function(inputData) {
 
 //_ WKCModelNotesPublicPropertyNames
 
-exports.WKCModelNotesPublicPropertyNames = function(inputData) {
+exports.WKCModelNotesPublicPropertyNames = function() {
 	return [
 		'WKCNotePublicID',
 		'WKCNoteDateCreated',
