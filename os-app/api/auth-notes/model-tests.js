@@ -78,9 +78,9 @@ describe('WKCModelNotesPublicPropertyNames', function testWKCModelNotesHiddenPro
 	it('returns array', function() {
 		assert.deepEqual(notesLibrary.WKCModelNotesPublicPropertyNames(), [
 			'WKCNotePublicID',
-			'WKCNoteBody',
 			'WKCNoteDateCreated',
 			'WKCNoteDateUpdated',
+			'WKCNoteBody',
 		]);
 	});
 
