@@ -204,7 +204,7 @@
 			if (inputData === moi.propertiesSelectedNote()) {
 				moi.reactPersistenceStatus('<%= OLSKLocalized('WKCAppNotesPersistenceStatusSaved') %>', true);
 			}
-			
+
 			moi.propertiesUnsavedNotes().splice(moi.propertiesUnsavedNotes().indexOf(inputData), 1);
 		}, function(error) {
 			if (window.confirm('<%= OLSKLocalized('WKCNotesErrors').WKCAppErrorPersistenceSaveDidFail %>')) {
@@ -270,9 +270,9 @@
 	//_ _commandsDeleteNoteWithoutConfirmation
 
 	moi._commandsDeleteNoteWithoutConfirmation = function (inputData) {
-		if (inputData === moi.propertiesSelectedNote()) {
-			moi.reactPersistenceStatus('<%= OLSKLocalized('WKCAppNotesPersistenceStatusDeleting') %>');
-		}
+		var persistenceIsCued = !!moi.propertiesPersistenceTask()._OLSKTaskTimerID;
+
+		moi.reactPersistenceStatus('<%= OLSKLocalized('WKCAppNotesPersistenceStatusDeleting') %>');
 
 		d3.json((<%- OLSKCanonicalSubstitutionFunctionFor('WKCRouteAPINotesDelete') %>)({
 			wkc_note_id: inputData.WKCNoteID,
@@ -283,25 +283,29 @@
 				'x-client-key': moi.propertiesAPIToken(),
 			},
 		}).then(function(responseJSON) {
-			moi.propertiesNoteObjects(d3.selectAll('.WKCAppNotesListItem').data().filter(function(e) {
+			moi.propertiesNoteObjects(moi.propertiesNoteObjects().filter(function(e) {
+				return e !== inputData;
+			}));
+
+			moi.propertiesUnsavedNotes(moi.propertiesUnsavedNotes().filter(function(e) {
 				return e !== inputData;
 			}));
 
 			moi.commandsSelectNote(null);
 
-			if (inputData === moi.propertiesSelectedNote()) {
-				moi.reactPersistenceStatus('<%= OLSKLocalized('WKCAppNotesPersistenceStatusDeleted') %>', true);
-			}
+			moi.reactPersistenceStatus('<%= OLSKLocalized('WKCAppNotesPersistenceStatusDeleted') %>', true);
 		}, function(error) {
 			if (window.confirm('<%= OLSKLocalized('WKCNotesErrors').WKCAppErrorPersistenceDeleteDidFail %>')) {
 				return moi._commandsDeleteNoteWithoutConfirmation(inputData);
 			};
 
-			if (inputData === moi.propertiesSelectedNote()) {
-				moi.reactPersistenceStatus('<%= OLSKLocalized('WKCAppNotesPersistenceStatusUnableToDelete') %>');
-			}
+			moi.reactPersistenceStatus('<%= OLSKLocalized('WKCAppNotesPersistenceStatusUnableToDelete') %>');
 
 			throw error;
+		}).finally(function() {
+			if (persistenceIsCued) {
+				moi.commandsPersistenceTaskStart();
+			}
 		});
 	};
 
