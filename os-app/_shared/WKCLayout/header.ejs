@@ -21,16 +21,6 @@
 		<% }) %>
 	<% } %>
 
-	<% if (locals.OLSKSharedActiveRouteConstant) { %>
-		<link rel="canonical" href="<%= OLSKCanonicalFor(locals.OLSKSharedActiveRouteConstant) %>" />
-
-		<% if (locals.OLSKSharedPageLanguagesAvailable) { %>
-			<% locals.OLSKSharedPageLanguagesAvailable.forEach(function (e) { %>
-				<link rel="alternate" hreflang="<%= e %>" href="<%= OLSKCanonicalLocalizedFor(OLSKSharedActiveRouteConstant, { OLSKRoutingLanguage: e }) %>" />
-			<% }) %>
-		<% } %>
-	<% } %>
-
 	<link rel="stylesheet" type="text/css" href="/shared-assets/vendor/normalize.css/normalize.css">
 
 	<script src="/shared-assets/vendor/d3/dist/d3.min.js"></script>
