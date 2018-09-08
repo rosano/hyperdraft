@@ -53,6 +53,7 @@
 
 	moi.WKCommandsAlertTokenUnavailable = function () {
 		window.alert('<%= OLSKLocalized('WKCNotesErrors').WKCAppErrorTokenUnavailable %>');
+
 		throw new Error('WKCAppErrorTokenUnavailable');
 	};
 
@@ -60,6 +61,7 @@
 
 	moi.WKCommandsAlertNotesUnavailable = function () {
 		window.alert('<%= OLSKLocalized('WKCNotesErrors').WKCAppErrorNotesUnavailable %>');
+
 		throw new Error('WKCAppErrorNotesUnavailable');
 	};
 
@@ -101,7 +103,7 @@
 		d3.select('#WKCAppNotesPersistenceStatus').text('<%= OLSKLocalized('WKCAppNotesPersistenceStatusDeleting') %>');
 
 		d3.json((<%- OLSKCanonicalSubstitutionFunctionFor('WKCRouteAPINotesDelete') %>)({
-			wkc_note_id: sharedData.WKCAppNotesSharedSelectedItem.WKCNoteID,
+			wkc_note_id: moi.WKPropertiesSelectedNote(undefined, sharedData).WKCNoteID,
 		}), {
 			method: 'DELETE',
 			headers: {
@@ -109,11 +111,11 @@
 				'x-client-key': sharedData.WKCAppNotesSharedAPIToken,
 			},
 		}).then(function(responseJSON) {
-			WKControl.WKReactNoteObjects(d3.selectAll('.WKCAppNotesListItem').data().filter(function(e) {
-				return e !== sharedData.WKCAppNotesSharedSelectedItem;
+			moi.WKPropertiesNoteObjects(d3.selectAll('.WKCAppNotesListItem').data().filter(function(e) {
+				return e !== moi.WKPropertiesSelectedNote(undefined, sharedData);
 			}), sharedData);
 
-			WKControl.WKCommandsSelectNote(d3.selectAll('.WKCAppNotesListItem').data()[0], sharedData);
+			moi.WKCommandsSelectNote(moi.WKPropertiesNoteObjects(undefined, sharedData).shift(), sharedData);
 
 			d3.select('#WKCAppNotesPersistenceStatus').text('<%= OLSKLocalized('WKCAppNotesPersistenceStatusDeleted') %>');
 
@@ -147,10 +149,7 @@
 			.append('div')
 				.attr('class', 'WKCAppNotesListItem')
 				.on('click', function(obj) {
-					d3.selectAll('.WKCAppNotesListItem').classed('WKCAppNotesListItemSelected', false);
-					d3.select(this).classed('WKCAppNotesListItemSelected', true);
-
-					return moi.WKCommandsSelectNote(obj, sharedData);
+					WKControl.WKCommandsSelectNote(obj, sharedData);
 				})
 				.merge(selection)
 					.html(function(obj) {
