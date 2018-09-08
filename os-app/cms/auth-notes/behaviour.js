@@ -391,7 +391,7 @@
 	//_ reactPublishStatus
 
 	moi.reactPublishStatus = function () {
-		d3.select('#WKCAppNotesPublishStatus').html(moi.propertiesSelectedNote().WKCNoteIsPublished ? '<a href="/' + moi.propertiesSelectedNote().WKCNotePublicID + '" target="_blank"><%= OLSKLocalized('WKCAppNotesPublishStatusPublished') %></a>' : null);
+		d3.select('#WKCAppNotesPublishStatus').html(moi.propertiesSelectedNote().WKCNoteIsPublished ? '<%= OLSKLocalized('WKCAppNotesPublishStatusPublished') %> <a href="/' + moi.propertiesSelectedNote().WKCNotePublicID + '" target="_blank">/' + moi.propertiesSelectedNote().WKCNotePublicID + '</a>': null);
 	};
 
 	//_ reactPersistenceStatus
