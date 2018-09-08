@@ -10,6 +10,20 @@
 	(factory((global.WKControl = global.WKControl || {})));
 }(this, (function (exports) { 'use strict';
 
+	//# PROPERTIES
+
+	//_ WKPropertiesSelectedNote
+
+	exports.WKPropertiesSelectedNote = function (inputData, sharedData) {
+		if (typeof inputData === 'undefined') {
+			return sharedData.WKPropertiesSelectedNote;
+		}
+
+		sharedData.WKPropertiesSelectedNote = inputData;
+
+		exports.WKReactSelectedNote(sharedData);
+	};
+
 	//# DATA
 
 	//_ WKDataNewNoteObject
@@ -48,17 +62,7 @@
 	//_ WKCommandsSelectNote
 
 	exports.WKCommandsSelectNote = function (item, sharedData) {
-		sharedData.WKCAppNotesSharedSelectedItem = item;
-		
-		d3.select('#WKCNotesAppEditorTextarea').node().value = item.WKCNoteBody;
-		d3.select('#WKCNotesAppEditorTextarea').attr('disabled', null);
-		d3.select('#WKCNotesAppEditorTextarea').node().focus();
-
-		d3.selectAll('.WKCAppNotesListItem').classed('WKCAppNotesListItemSelected', function(d) {
-			return d === item;
-		});
-
-		d3.select('#WKCAppNotesDeleteButton').attr('disabled', null);
+		exports.WKPropertiesSelectedNote(item, sharedData);
 	};
 
 	//_ WKCommandsDeleteWithConfirmation
@@ -146,6 +150,23 @@
 					});
 
 		selection.exit().remove();
+	};
+
+	//_ WKReactSelectedNote
+
+	exports.WKReactSelectedNote = function (sharedData) {
+		d3.select('#WKCNotesAppEditorTextarea').node().value = exports.WKPropertiesSelectedNote(undefined, sharedData) ? exports.WKPropertiesSelectedNote(undefined, sharedData).WKCNoteBody : null;
+		d3.select('#WKCNotesAppEditorTextarea').attr('disabled', exports.WKPropertiesSelectedNote(undefined, sharedData) ? null : undefined);
+
+		if (exports.WKPropertiesSelectedNote(undefined, sharedData)) {
+			d3.select('#WKCNotesAppEditorTextarea').node().focus();
+		}
+
+		d3.selectAll('.WKCAppNotesListItem').classed('WKCAppNotesListItemSelected', function(d) {
+			return d === exports.WKPropertiesSelectedNote(undefined, sharedData);
+		});
+
+		d3.select('#WKCAppNotesDeleteButton').attr('disabled', exports.WKPropertiesSelectedNote(undefined, sharedData) ? null : undefined);
 	};
 
 	Object.defineProperty(exports, '__esModule', { value: true });
