@@ -14,6 +14,16 @@
 
 	//# PROPERTIES
 
+	//_ WKPropertiesAPIToken
+
+	moi.WKPropertiesAPIToken = function (inputData, sharedData) {
+		if (typeof inputData === 'undefined') {
+			return sharedData.WKCAppNotesSharedAPIToken;
+		}
+
+		sharedData.WKCAppNotesSharedAPIToken = inputData;
+	};
+
 	//_ WKPropertiesNoteObjects
 
 	moi.WKPropertiesNoteObjects = function (inputData, sharedData) {
@@ -48,6 +58,14 @@
 	};
 
 	//# COMMANDS
+
+	//_ WKCommandsAlertConnectionError
+
+	moi.WKCommandsAlertConnectionError = function (error) {
+		window.alert('<%= OLSKLocalized('WKCNotesErrors').WKCAppErrorServiceUnavailable %>');
+
+		throw error;
+	};
 
 	//_ WKCommandsAlertTokenUnavailable
 
@@ -178,6 +196,68 @@
 		});
 
 		d3.select('#WKCAppNotesDeleteButton').attr('disabled', moi.WKPropertiesSelectedNote(undefined, sharedData) ? null : undefined);
+	};
+
+	//# SETUP
+
+	//_ setupEverything
+
+	moi.setupEverything = function (sharedData) {
+		moi.setupAPIToken(sharedData);
+	};
+
+	//_ setupAPIToken
+
+	moi.setupAPIToken = function (sharedData) {
+		d3.json('<%= OLSKCanonicalFor('WKCRouteAPIToken') %>', {
+			method: 'GET',
+		}).then(function(responseJSON) {
+			if (!responseJSON.WKCAPIToken) {
+				return WKControl.WKCommandsAlertTokenUnavailable();
+			}
+
+			moi.WKPropertiesAPIToken(responseJSON.WKCAPIToken, sharedData);
+
+			moi.setupNoteObjects(sharedData);
+		}, moi.WKCommandsAlertConnectionError);
+	};
+
+	//_ setupNoteObjects
+
+	moi.setupNoteObjects = function (sharedData) {
+		d3.json('<%= OLSKCanonicalFor('WKCRouteAPINotesSearch') %>', {
+			method: 'GET',
+			headers: {
+				'x-client-key': moi.WKPropertiesAPIToken(undefined, sharedData),
+			},
+		}).then(function(responseJSON) {
+			if (!Array.isArray(responseJSON)) {
+				return WKControl.WKCommandsAlertNotesUnavailable();
+			}
+
+			d3.select('#WKCAppNotes').classed('WKCAppNotesLoading', false);
+
+			WKControl.WKPropertiesNoteObjects(responseJSON.map(function(e) {
+				return Object.assign(e, {
+					WKCNoteDateCreated: new Date(e.WKCNoteDateCreated),
+					WKCNoteDateUpdated: new Date(e.WKCNoteDateUpdated),
+				});
+			}), sharedData);
+
+			if (!WKControl.WKPropertiesNoteObjects(undefined, sharedData).length) {
+				return;
+			}
+
+			moi.WKPropertiesSelectedNote(moi.WKPropertiesNoteObjects(undefined, sharedData).shift(), sharedData);
+		}, moi.WKCommandsAlertConnectionError);
+	};
+
+	//# LIFECYCLE
+
+	//_ WKLifecyclePageWillLoad
+
+	moi.WKLifecyclePageWillLoad = function (sharedData) {
+		moi.setupEverything(sharedData);
 	};
 
 	Object.defineProperty(exports, '__esModule', { value: true });

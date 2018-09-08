@@ -17,41 +17,7 @@ locals.OLSKPageAssets = [
 		WKCAppNotesSharedSelectedItem: {},
 	};
 
-	d3.json('<%= OLSKCanonicalFor('WKCRouteAPIToken') %>', {
-		method: 'GET',
-	}).then(function(responseJSON) {
-		if (!responseJSON.WKCAPIToken) {
-			return WKControl.WKCommandsAlertTokenUnavailable();
-		}
-
-		sharedData.WKCAppNotesSharedAPIToken = responseJSON.WKCAPIToken;
-
-		d3.json('<%= OLSKCanonicalFor('WKCRouteAPINotesSearch') %>', {
-			method: 'GET',
-			headers: {
-				'x-client-key': sharedData.WKCAppNotesSharedAPIToken,
-			},
-		}).then(function(responseJSON) {
-			if (!Array.isArray(responseJSON)) {
-				return WKControl.WKCommandsAlertNotesUnavailable();
-			}
-
-			d3.select('#WKCAppNotes').classed('WKCAppNotesLoading', false);
-
-			WKControl.WKReactNoteObjects(responseJSON.map(function(e) {
-				return Object.assign(e, {
-					WKCNoteDateCreated: new Date(e.WKCNoteDateCreated),
-					WKCNoteDateUpdated: new Date(e.WKCNoteDateUpdated),
-				});
-			}).sort(WKLogic.WKLogicListSort), sharedData);
-
-			if (!d3.selectAll('.WKCAppNotesListItem').data().length) {
-				return;
-			}
-
-			WKControl.WKCommandsSelectNote(d3.selectAll('.WKCAppNotesListItem').data()[0], sharedData);
-		});
-	});
+	WKControl.WKLifecyclePageWillLoad(sharedData);
 </script>
 
 <div id="WKCAppNotes" class="WKCAppNotesLoading">
