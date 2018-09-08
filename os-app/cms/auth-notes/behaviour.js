@@ -12,6 +12,16 @@
 
 	//# PROPERTIES
 
+	//_ WKPropertiesNoteObjects
+
+	exports.WKPropertiesNoteObjects = function (inputData, sharedData) {
+		if (typeof inputData === 'undefined') {
+			return d3.selectAll('.WKCAppNotesListItem').data();
+		}
+
+		exports.WKReactNoteObjects(inputData.sort(WKLogic.WKLogicListSort), sharedData);
+	};
+
 	//_ WKPropertiesSelectedNote
 
 	exports.WKPropertiesSelectedNote = function (inputData, sharedData) {
@@ -54,9 +64,9 @@
 	//_ WKCommandsAddNote
 
 	exports.WKCommandsAddNote = function (sharedData) {
-		WKControl.WKCommandsSelectNote(WKControl.WKDataNewNoteObject(), sharedData);
+		exports.WKPropertiesNoteObjects(exports.WKPropertiesNoteObjects(undefined, sharedData).concat(WKControl.WKDataNewNoteObject()), sharedData);
 
-		WKControl.WKReactNoteObjects(d3.selectAll('.WKCAppNotesListItem').data().concat(sharedData.WKCAppNotesSharedSelectedItem).sort(WKLogic.WKLogicListSort), sharedData);
+		exports.WKPropertiesSelectedNote(exports.WKPropertiesNoteObjects(undefined, sharedData).shift(), sharedData);
 	};
 
 	//_ WKCommandsSelectNote
