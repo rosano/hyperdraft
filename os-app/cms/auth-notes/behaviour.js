@@ -99,7 +99,7 @@
 	//_ interfacePublishButtonDidClick
 
 	moi.interfacePublishButtonDidClick = function () {
-		d3.select('#WKCAppNotesPublishStatus').text('<%= OLSKLocalized('WKCAppNotesPublishStatusPublishing') %>');;
+		moi.commandsPublishNote(moi.propertiesSelectedNote());
 	};
 
 	//_ interfaceEditorTextareaDidReceiveInput
@@ -246,7 +246,36 @@
 				'x-client-key': moi.propertiesAPIToken(),
 			},
 			body: JSON.stringify(inputData),
-		}))
+		}));
+	};
+
+	//_ commandsPublishNote
+
+	moi.commandsPublishNote = function (inputData) {
+		d3.select('#WKCAppNotesPublishStatus').text('<%= OLSKLocalized('WKCAppNotesPublishStatusPublishing') %>');
+
+		d3.json((<%- OLSKCanonicalSubstitutionFunctionFor('WKCRouteAPINotesPublish') %>)({
+			wkc_note_id: inputData.WKCNoteID,
+		}), {
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json',
+				'x-client-key': moi.propertiesAPIToken(),
+			},
+			body: JSON.stringify({
+				WKCNotePublishStatusIsPublished: true,
+			}),
+		}).then(function(responseJSON) {
+			d3.select('#WKCAppNotesPublishStatus').text('<%= OLSKLocalized('WKCAppNotesPublishStatusPublished') %>');
+		}, function(error) {
+			if (window.confirm('<%= OLSKLocalized('WKCNotesErrors').WKCAppErrorPublishDidFail %>')) {
+				return moi.commandsPublishNote(inputData);
+			};
+
+			d3.select('#WKCAppNotesPublishStatus').text('<%= OLSKLocalized('WKCAppNotesPublishStatusUnableToPublish') %>');
+
+			throw error;
+		});
 	};
 
 	//_ commandsDeleteNoteWithConfirmation
@@ -350,6 +379,13 @@
 		});
 
 		d3.select('#WKCAppNotesDeleteButton').attr('disabled', moi.propertiesSelectedNote() ? null : undefined);
+		d3.select('#WKCAppNotesPublishButton').attr('disabled', moi.propertiesSelectedNote() ? null : undefined);
+
+		if (!moi.propertiesSelectedNote()) {
+			return;
+		}
+
+		d3.select('#WKCAppNotesPublishStatus').text(moi.propertiesSelectedNote().WKCNoteIsPublished ? '<%= OLSKLocalized('WKCAppNotesPublishStatusPublished') %>' : null);
 	};
 
 	//_ reactPersistenceStatus

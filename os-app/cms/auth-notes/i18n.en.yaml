@@ -4,6 +4,8 @@ WKCAppNotesPublishButtonText: Publish note
 WKCAppNotesDeleteButtonText: Delete note
 WKCAppNotesDeleteConfirmation: Permanantly delete note?
 WKCAppNotesPublishStatusPublishing: Publishing…
+WKCAppNotesPublishStatusPublished: Public
+WKCAppNotesPublishStatusUnableToPublish: Unable to publish
 WKCAppNotesPersistenceStatusSaving: Saving…
 WKCAppNotesPersistenceStatusSaved: Saved
 WKCAppNotesPersistenceStatusDeleting: Deleting…
@@ -16,3 +18,4 @@ WKCNotesErrors:
   WKCAppErrorNotesUnavailable: Unable to fetch notes
   WKCAppErrorPersistenceSaveDidFail: Unable to save note. Would you like to try again?
   WKCAppErrorPersistenceDeleteDidFail: Unable to delete note. Would you like to try again?
+  WKCAppErrorPublishDidFail: Unable to publish note. Would you like to try again?
