@@ -31,7 +31,7 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 				],
 			},
 			WKCRouteAPINotesPublicRead: {
-				OLSKRoutePath: '/api/notes/:wkc_public_id(\\d+)',
+				OLSKRoutePath: '/api/notes/:wkc_note_public_id(\\d+)',
 				OLSKRouteMethod: 'get',
 				OLSKRouteFunction: apiNotesController.WKCActionAPINotesPublicRead,
 			},
@@ -489,6 +489,51 @@ describe('Connection', function testConnection() {
 						assert.strictEqual(noteObject.WKCNoteIsPublished, true);
 						assert.strictEqual(noteObject.WKCNotePublicID, 1);
 						assert.strictEqual(noteObject.WKCNoteDateUpdated > originalDateUpdated, true);
+
+						done();
+					}));
+				}));
+			}));
+		});
+
+	});
+
+	describe('WKCActionAPINotesPublicRead', function testWKCActionAPINotesPublicRead() {
+
+		it('returns next(WKCAPIClientError) if wkc_note_id does not exist', function(done) {
+			apiNotesController.WKCActionAPINotesPublicRead(WKCFakeRequest({
+				params: {
+					wkc_note_public_id: 'alpha',
+				},
+			}), WKCFakeResponseAsync(), function(inputData) {
+				assert.deepEqual(inputData, new Error('WKCAPIClientErrorNotFound'));
+				
+				done();
+			});
+		});
+
+		it('returns noteObject', function(done) {
+			apiNotesController.WKCActionAPINotesCreate(WKCFakeRequest({
+				body: {
+					WKCNoteBody: 'alpha',
+				},
+			}), WKCFakeResponseAsync(function(noteObject) {
+				apiNotesController.WKCActionAPINotesPublish(WKCFakeRequest({
+					params: {
+						wkc_note_id: noteObject.WKCNoteID,
+					},
+					_WKCAPINotesMiddlewareFindByIDResult: noteObject,
+					body: {
+						WKCNotePublishStatusIsPublished: true,
+					},
+				}), WKCFakeResponseAsync(function(responseJSON) {
+					apiNotesController.WKCActionAPINotesPublicRead(WKCFakeRequest({
+						params: {
+							wkc_note_public_id: noteObject.WKCNotePublicID,
+						},
+					}), WKCFakeResponseAsync(function(noteObject) {
+						assert.strictEqual(noteObject._id, undefined);
+						assert.strictEqual(noteObject.WKCNotePublicID, 1);
 
 						done();
 					}));

@@ -44,7 +44,7 @@ exports.OLSKControllerRoutes = function() {
 			],
 		},
 		WKCRouteAPINotesPublicRead: {
-			OLSKRoutePath: '/api/notes/:wkc_public_id(\\d+)',
+			OLSKRoutePath: '/api/notes/:wkc_note_public_id(\\d+)',
 			OLSKRouteMethod: 'get',
 			OLSKRouteFunction: exports.WKCActionAPINotesPublicRead,
 		},
@@ -266,6 +266,30 @@ exports.WKCActionAPINotesPublish = function(req, res, next) {
 	}
 
 	return completionHandler();
+};
+
+//_ WKCActionAPINotesPublicRead
+
+exports.WKCActionAPINotesPublicRead = function(req, res, next) {
+	return req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_notes').findOne({
+		WKCNotePublicID: parseInt(req.params.wkc_note_public_id),
+	}, function(err, result) {
+		if (err) {
+			throw new Error('WKCErrorDatabaseFindOne');
+		}
+
+		if (!result) {
+			return next(new Error('WKCAPIClientErrorNotFound'));
+		}
+
+		var noteObject = result;
+
+		modelLibrary.WKCModelNotesUnusedPropertyNames().forEach(function(obj) {
+			delete noteObject[obj];
+		});
+
+		return res.json(noteObject);
+	});
 };
 
 //_ WKCActionAPINotesDelete
