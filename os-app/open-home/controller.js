@@ -14,6 +14,11 @@ exports.OLSKControllerRoutes = function() {
 			OLSKRouteFunction: exports.WKCActionHomeIndex,
 			OLSKRouteLanguages: ['en'],
 		},
+		WKCRouteRefsRead: {
+			OLSKRoutePath: '/:wkc_note_id(\\d+)',
+			OLSKRouteMethod: 'get',
+			OLSKRouteFunction: exports.WKCActionRefsRead,
+		},
 	};
 };
 

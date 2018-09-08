@@ -20,6 +20,11 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 				OLSKRouteFunction: homeController.WKCActionHomeIndex,
 				OLSKRouteLanguages: ['en'],
 			},
+			WKCRouteRefsRead: {
+				OLSKRoutePath: '/:wkc_note_id(\\d+)',
+				OLSKRouteMethod: 'get',
+				OLSKRouteFunction: homeController.WKCActionRefsRead,
+			},
 		});
 	});
 
