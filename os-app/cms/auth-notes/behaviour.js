@@ -140,8 +140,8 @@
 	//_ commandsUpdateText
 
 	moi.commandsUpdateText = function (inputData) {
-		clearInterval(moi.propertiesPersistenceTask()._OLSKTaskTimerID);
-		OLSKTasks.OLSKTasksTimeoutForTaskObject(moi.propertiesPersistenceTask());
+		moi.commandsPersistenceStop();
+		moi.commandsPersistenceStart();
 
 		Object.assign(moi.propertiesSelectedNote(), {
 			WKCNoteBody: inputData,
@@ -151,16 +151,28 @@
 		moi.reactNoteObjects(moi.propertiesNoteObjects());
 	};
 
+	//_ commandsPersistenceStop
+
+	moi.commandsPersistenceStop = function () {
+		clearInterval(moi.propertiesPersistenceTask()._OLSKTaskTimerID);
+	};
+
+	//_ commandsPersistenceStart
+
+	moi.commandsPersistenceStart = function () {
+		OLSKTasks.OLSKTasksTimeoutForTaskObject(moi.propertiesPersistenceTask());
+	};
+
 	//_ commandsDeleteWithConfirmation
 
 	moi.commandsDeleteWithConfirmation = function () {
 		var persistenceIsCued = !!moi.propertiesPersistenceTask()._OLSKTaskTimerID;
 
-		clearInterval(moi.propertiesPersistenceTask()._OLSKTaskTimerID);
+		moi.commandsPersistenceStop();
 
 		if (!window.confirm('<%= OLSKLocalized('WKCAppNotesDeleteConfirmation') %>')) {
 			if (persistenceIsCued) {
-				OLSKTasks.OLSKTasksTimeoutForTaskObject(moi.propertiesPersistenceTask());
+				moi.commandsPersistenceStart();
 			}
 
 			return;
