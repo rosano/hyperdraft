@@ -120,6 +120,8 @@ body {
 #WKCAppNotesEditor textarea {
 	font-family: 'monaco', monospace;
 
+	line-height: 1.4;
+
 	/* flexbox-editor */
 	flex-grow: 1;
 
