@@ -61,6 +61,8 @@ body {
 	
 	flex-basis: 300px;
 	max-width: 300px;
+
+	font-size: 80%;
 }
 
 .WKCAppNotesListItem {
@@ -106,6 +108,8 @@ body {
 	flex-grow: 1;
 
 	padding: 10px;
+
+	font-size: 80%;
 
 	/* flexbox-editor */
 	display: flex;
