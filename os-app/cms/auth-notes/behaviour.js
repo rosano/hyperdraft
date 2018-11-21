@@ -413,12 +413,16 @@
 	//_ setupEverything
 
 	moi.setupEverything = function () {
-		moi.setupAPIToken();
+		moi.setupAPIToken(function () {
+			moi.setupNoteObjects(function() {
+				moi.setupPersistenceTask();
+			});
+		});
 	};
 
 	//_ setupAPIToken
 
-	moi.setupAPIToken = function () {
+	moi.setupAPIToken = function (completionHandler) {
 		d3.json('<%= OLSKCanonicalFor('WKCRouteAPIToken') %>', {
 			method: 'GET',
 		}).then(function(responseJSON) {
@@ -428,13 +432,13 @@
 
 			moi.propertiesAPIToken(responseJSON.WKCAPIToken);
 
-			moi.setupNoteObjects();
+			completionHandler();
 		}, moi.commandsAlertConnectionError);
 	};
 
 	//_ setupNoteObjects
 
-	moi.setupNoteObjects = function () {
+	moi.setupNoteObjects = function (completionHandler) {
 		d3.json('<%= OLSKCanonicalFor('WKCRouteAPINotesSearch') %>', {
 			method: 'GET',
 			headers: {
@@ -454,7 +458,7 @@
 				});
 			}));
 
-			moi.setupPersistenceTask();
+			completionHandler();
 		}, moi.commandsAlertConnectionError);
 	};
 
