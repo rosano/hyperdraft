@@ -60,6 +60,7 @@ body {
 	border-right: 1px solid #d9d9d9;
 	
 	flex-basis: 300px;
+	max-width: 300px;
 }
 
 .WKCAppNotesListItem {
