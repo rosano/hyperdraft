@@ -1,0 +1,21 @@
+body {
+	font-family: Helvetica, sans-serif;
+
+	background: #f3f3f3;
+}
+
+#OLSKSharedContainer {
+	margin: 60px auto;
+
+	width: 200px;
+}
+
+input {
+	padding: 5px;
+	border-radius: 5px;
+	border: none;
+}
+
+input[type=submit] {
+	background: #CCC;
+}

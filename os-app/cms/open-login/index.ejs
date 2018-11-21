@@ -1,5 +1,8 @@
 <%
 locals.OLSKPageTitle = OLSKLocalized('WKCLoginTitle');
+locals.OLSKPageAssets = [
+	'ui-style.css',
+];
 %>
 
 <%- include('../../_shared/WKCLayout/header.ejs') %>
@@ -19,7 +22,7 @@ locals.OLSKPageTitle = OLSKLocalized('WKCLoginTitle');
 		<input type="password" name="WKCLoginPassword" placeholder="<%= OLSKLocalized('WKCLoginFormFieldPasswordTitle') %>" />
 	</p>
 
-	<input type="submit" name="submit">
+	<input type="submit" name="submit" />
 </form>
 
 <%- include('../../_shared/WKCLayout/footer.ejs') %>
