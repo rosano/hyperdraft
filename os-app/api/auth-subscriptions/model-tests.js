@@ -77,4 +77,22 @@ describe('WKCModelInputDataIsSubscriptionObject', function testWKCModelInputData
 
 	});
 
+	context('WKCSubscriptionBlurb', function() {
+
+		it('returns false with WKCErrors if not string', function() {
+			var item = {
+				WKCSubscriptionURL: 'https://google.com',
+				WKCSubscriptionBlurb: 123
+			};
+
+			assert.strictEqual(notesLibrary.WKCModelInputDataIsSubscriptionObject(item), false);
+			assert.deepEqual(item.WKCErrors, {
+				WKCSubscriptionBlurb: [
+					'WKCErrorNotString',
+				],
+			});
+		});
+
+	});
+
 });
