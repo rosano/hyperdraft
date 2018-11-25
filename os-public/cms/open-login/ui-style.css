@@ -17,5 +17,6 @@ input {
 }
 
 input[type=submit] {
-	background: #CCC;
+	background: #333;
+	color: #EEE;
 }
