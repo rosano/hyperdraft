@@ -76,8 +76,8 @@ describe('WKCModelNoteDetectedTitleFor', function testWKCModelNoteDetectedTitleF
 	});
 
 	it('returns first line if multiple', function() {
-		assert.deepEqual(notesLibrary.WKCModelNoteDetectedTitleFor("alpha\n"), 'alpha');
-		assert.deepEqual(notesLibrary.WKCModelNoteDetectedTitleFor("alpha\nbravo"), 'alpha');
+		assert.deepEqual(notesLibrary.WKCModelNoteDetectedTitleFor('alpha\n'), 'alpha');
+		assert.deepEqual(notesLibrary.WKCModelNoteDetectedTitleFor('alpha\nbravo'), 'alpha');
 	});
 
 });
@@ -95,9 +95,9 @@ describe('WKCModelNoteDetectedBodyFor', function testWKCModelNoteDetectedBodyFor
 	});
 
 	it('returns first line if multiple', function() {
-		assert.deepEqual(notesLibrary.WKCModelNoteDetectedBodyFor("alpha\n"), '');
-		assert.deepEqual(notesLibrary.WKCModelNoteDetectedBodyFor("alpha\nbravo"), 'bravo');
-		assert.deepEqual(notesLibrary.WKCModelNoteDetectedBodyFor("alpha\n\nbravo"), 'bravo');
+		assert.deepEqual(notesLibrary.WKCModelNoteDetectedBodyFor('alpha\n'), '');
+		assert.deepEqual(notesLibrary.WKCModelNoteDetectedBodyFor('alpha\nbravo'), 'bravo');
+		assert.deepEqual(notesLibrary.WKCModelNoteDetectedBodyFor('alpha\n\nbravo'), 'bravo');
 	});
 
 });

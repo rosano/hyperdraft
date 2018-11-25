@@ -59,7 +59,7 @@ exports.WKCModelNoteDetectedTitleFor = function(inputData) {
 		return '';
 	}
 
-	return inputData.split("\n").shift();
+	return inputData.split('\n').shift();
 };
 
 //_ WKCModelNoteDetectedBodyFor
@@ -69,7 +69,7 @@ exports.WKCModelNoteDetectedBodyFor = function(inputData) {
 		return '';
 	}
 
-	return inputData.split("\n").slice(1).join("\n").trim();
+	return inputData.split('\n').slice(1).join('\n').trim();
 };
 
 //_ WKCModelNotesHiddenPropertyNames

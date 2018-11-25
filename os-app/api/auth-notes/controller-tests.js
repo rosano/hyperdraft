@@ -192,7 +192,7 @@ describe('Connection', function testConnection() {
 				apiNotesController.WKCAPINotesMiddlewareFindByID(requestObject, testingLibrary.OLSKTestingFakeResponseForJSON(), function(inputData) {
 					assert.deepEqual(inputData, undefined);
 
-					assert.deepEqual(requestObject._WKCAPINotesMiddlewareFindByIDResult, responseJSON)
+					assert.deepEqual(requestObject._WKCAPINotesMiddlewareFindByIDResult, responseJSON);
 
 					done();
 				});
@@ -515,7 +515,7 @@ describe('Connection', function testConnection() {
 		it('returns noteObject', function(done) {
 			apiNotesController.WKCActionAPINotesCreate(WKCFakeRequest({
 				body: {
-					WKCNoteBody: "alpha\nbravo",
+					WKCNoteBody: 'alpha\nbravo',
 				},
 			}), WKCFakeResponseAsync(function(noteObject) {
 				apiNotesController.WKCActionAPINotesPublish(WKCFakeRequest({
