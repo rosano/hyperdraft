@@ -6,12 +6,12 @@
 
 var assert = require('assert');
 
-var notesLibrary = require('./model');
+var modelLibrary = require('./model');
 
 describe('WKCModelInputDataIsSubscriptionObject', function testWKCModelInputDataIsSubscriptionObject() {
 
 	it('returns false if not object', function() {
-		assert.strictEqual(notesLibrary.WKCModelInputDataIsSubscriptionObject(null), false);
+		assert.strictEqual(modelLibrary.WKCModelInputDataIsSubscriptionObject(null), false);
 	});
 
 	it('returns false with WKCErrors if WKCSubscriptionURL not string', function() {
@@ -19,7 +19,7 @@ describe('WKCModelInputDataIsSubscriptionObject', function testWKCModelInputData
 			WKCSubscriptionURL: null,
 		};
 
-		assert.strictEqual(notesLibrary.WKCModelInputDataIsSubscriptionObject(item), false);
+		assert.strictEqual(modelLibrary.WKCModelInputDataIsSubscriptionObject(item), false);
 		assert.deepEqual(item.WKCErrors, {
 			WKCSubscriptionURL: [
 				'WKCErrorNotFormatted',
@@ -32,7 +32,7 @@ describe('WKCModelInputDataIsSubscriptionObject', function testWKCModelInputData
 			WKCSubscriptionURL: '',
 		};
 
-		assert.strictEqual(notesLibrary.WKCModelInputDataIsSubscriptionObject(item), false);
+		assert.strictEqual(modelLibrary.WKCModelInputDataIsSubscriptionObject(item), false);
 		assert.deepEqual(item.WKCErrors, {
 			WKCSubscriptionURL: [
 				'WKCErrorNotFormatted',
@@ -45,7 +45,7 @@ describe('WKCModelInputDataIsSubscriptionObject', function testWKCModelInputData
 			WKCSubscriptionURL: 'google.com',
 		};
 
-		assert.strictEqual(notesLibrary.WKCModelInputDataIsSubscriptionObject(item), false);
+		assert.strictEqual(modelLibrary.WKCModelInputDataIsSubscriptionObject(item), false);
 		assert.deepEqual(item.WKCErrors, {
 			WKCSubscriptionURL: [
 				'WKCErrorNotFormatted',
@@ -54,7 +54,7 @@ describe('WKCModelInputDataIsSubscriptionObject', function testWKCModelInputData
 	});
 
 	it('returns true', function() {
-		assert.deepEqual(notesLibrary.WKCModelInputDataIsSubscriptionObject({
+		assert.deepEqual(modelLibrary.WKCModelInputDataIsSubscriptionObject({
 			WKCSubscriptionURL: 'https://google.com',
 		}), true);
 	});
@@ -67,7 +67,7 @@ describe('WKCModelInputDataIsSubscriptionObject', function testWKCModelInputData
 				WKCSubscriptionName: 123
 			};
 
-			assert.strictEqual(notesLibrary.WKCModelInputDataIsSubscriptionObject(item), false);
+			assert.strictEqual(modelLibrary.WKCModelInputDataIsSubscriptionObject(item), false);
 			assert.deepEqual(item.WKCErrors, {
 				WKCSubscriptionName: [
 					'WKCErrorNotString',
@@ -85,7 +85,7 @@ describe('WKCModelInputDataIsSubscriptionObject', function testWKCModelInputData
 				WKCSubscriptionBlurb: 123
 			};
 
-			assert.strictEqual(notesLibrary.WKCModelInputDataIsSubscriptionObject(item), false);
+			assert.strictEqual(modelLibrary.WKCModelInputDataIsSubscriptionObject(item), false);
 			assert.deepEqual(item.WKCErrors, {
 				WKCSubscriptionBlurb: [
 					'WKCErrorNotString',
