@@ -21,6 +21,14 @@ exports.WKCModelInputDataIsSubscriptionObject = function(inputData) {
 		];
 	}
 
+	if (inputData.WKCSubscriptionName) {
+		if (typeof inputData.WKCSubscriptionName !== 'string') {
+			errors.WKCSubscriptionName = [
+				'WKCErrorNotString',
+			];
+		}
+	}
+
 	if (Object.keys(errors).length) {
 		inputData.WKCErrors = errors;
 		
