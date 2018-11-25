@@ -141,9 +141,7 @@ exports.WKCActionAPINotesCreate = function(req, res, next) {
 	}
 
 	var noteDate = new Date();
-	var client = req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient;
-
-	return client.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_notes').insertOne(Object.assign(inputData, {
+	return req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_notes').insertOne(Object.assign(inputData, {
 		WKCNoteID: (new Date()) * 1,
 		WKCNoteDateCreated: noteDate,
 		WKCNoteDateUpdated: noteDate,
