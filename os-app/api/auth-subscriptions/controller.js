@@ -82,3 +82,15 @@ exports.WKCActionAPISubscriptionsUpdate = function(req, res, next) {
 	});
 };
 
+//_ WKCActionAPISubscriptionsDelete
+
+exports.WKCActionAPISubscriptionsDelete = function(req, res, next) {
+	return metalLibrary.WKCMetalSubscriptionsDelete(req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, req.params.wkc_subscription_id, function(err, responseJSON) {
+		if (err) {
+			throw err;
+		}
+
+		return res.json(responseJSON);
+	});
+};
+
