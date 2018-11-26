@@ -54,14 +54,20 @@ describe('WKCMetalSubscriptionsCreate', function testWKCMetalSubscriptionsCreate
 
 describe('WKCMetalSubscriptionsRead', function testWKCMetalSubscriptionsRead() {
 
+	it('throws error if param2 not number', function() {
+		assert.throws(function() {
+			metalLibrary.WKCMetalSubscriptionsRead(WKCTestingMongoClient, '1', function() {});
+		}, /WKCErrorInvalidInput/);
+	});
+
 	it('throws error if param3 not function', function() {
 		assert.throws(function() {
-			metalLibrary.WKCMetalSubscriptionsRead(WKCTestingMongoClient, '', null);
+			metalLibrary.WKCMetalSubscriptionsRead(WKCTestingMongoClient, 1, null);
 		}, /WKCErrorInvalidInput/);
 	});
 
 	it('returns error if WKCSubscriptionID not found', function(done) {
-		metalLibrary.WKCMetalSubscriptionsRead(WKCTestingMongoClient, 'alfa', function(err) {
+		metalLibrary.WKCMetalSubscriptionsRead(WKCTestingMongoClient, 0, function(err) {
 			assert.deepEqual(err, new Error('WKCErrorNotFound'));
 
 			done();
@@ -84,20 +90,26 @@ describe('WKCMetalSubscriptionsRead', function testWKCMetalSubscriptionsRead() {
 
 describe('WKCMetalSubscriptionsUpdate', function testWKCMetalSubscriptionsUpdate() {
 
+	it('throws error if param2 not number', function() {
+		assert.throws(function() {
+			metalLibrary.WKCMetalSubscriptionsUpdate(WKCTestingMongoClient, '1', {}, function() {});
+		}, /WKCErrorInvalidInput/);
+	});
+
 	it('throws error if param3 not object', function() {
 		assert.throws(function() {
-			metalLibrary.WKCMetalSubscriptionsUpdate(WKCTestingMongoClient, '', null, function() {});
+			metalLibrary.WKCMetalSubscriptionsUpdate(WKCTestingMongoClient, 1, null, function() {});
 		}, /WKCErrorInvalidInput/);
 	});
 
 	it('throws error if param4 not function', function() {
 		assert.throws(function() {
-			metalLibrary.WKCMetalSubscriptionsUpdate(WKCTestingMongoClient, '', {}, null);
+			metalLibrary.WKCMetalSubscriptionsUpdate(WKCTestingMongoClient, 1, {}, null);
 		}, /WKCErrorInvalidInput/);
 	});
 
 	it('returns error if WKCSubscriptionID not found', function(done) {
-		metalLibrary.WKCMetalSubscriptionsUpdate(WKCTestingMongoClient, 'alfa', {
+		metalLibrary.WKCMetalSubscriptionsUpdate(WKCTestingMongoClient, 0, {
 			WKCSubscriptionURL: 'https://google.com',
 		}, function(err) {
 			assert.deepEqual(err, new Error('WKCErrorNotFound'));
@@ -141,14 +153,20 @@ describe('WKCMetalSubscriptionsUpdate', function testWKCMetalSubscriptionsUpdate
 
 describe('WKCMetalSubscriptionsDelete', function testWKCMetalSubscriptionsDelete() {
 
+	it('throws error if param2 not number', function() {
+		assert.throws(function() {
+			metalLibrary.WKCMetalSubscriptionsDelete(WKCTestingMongoClient, '1', function() {});
+		}, /WKCErrorInvalidInput/);
+	});
+
 	it('throws error if param3 not function', function() {
 		assert.throws(function() {
-			metalLibrary.WKCMetalSubscriptionsDelete(WKCTestingMongoClient, '', null);
+			metalLibrary.WKCMetalSubscriptionsDelete(WKCTestingMongoClient, 1, null);
 		}, /WKCErrorInvalidInput/);
 	});
 
 	it('returns error if WKCSubscriptionID not found', function(done) {
-		metalLibrary.WKCMetalSubscriptionsDelete(WKCTestingMongoClient, 'alfa', function(err) {
+		metalLibrary.WKCMetalSubscriptionsDelete(WKCTestingMongoClient, 0, function(err) {
 			assert.deepEqual(err, new Error('WKCErrorNotFound'));
 
 			done();

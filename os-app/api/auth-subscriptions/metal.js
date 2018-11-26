@@ -45,6 +45,10 @@ exports.WKCMetalSubscriptionsCreate = function(databaseClient, inputData, comple
 //_ WKCMetalSubscriptionsRead
 
 exports.WKCMetalSubscriptionsRead = function(databaseClient, inputData, completionHandler) {
+	if (typeof inputData !== 'number') {
+		throw new Error('WKCErrorInvalidInput');
+	}
+
 	if (typeof completionHandler !== 'function') {
 		throw new Error('WKCErrorInvalidInput');
 	}
@@ -73,6 +77,10 @@ exports.WKCMetalSubscriptionsRead = function(databaseClient, inputData, completi
 //_ WKCMetalSubscriptionsUpdate
 
 exports.WKCMetalSubscriptionsUpdate = function(databaseClient, inputData1, inputData2, completionHandler) {
+	if (typeof inputData1 !== 'number') {
+		throw new Error('WKCErrorInvalidInput');
+	}
+
 	if (typeof inputData2 !== 'object' || inputData2 === null) {
 		throw new Error('WKCErrorInvalidInput');
 	}
@@ -114,6 +122,10 @@ exports.WKCMetalSubscriptionsUpdate = function(databaseClient, inputData1, input
 //_ WKCMetalSubscriptionsDelete
 
 exports.WKCMetalSubscriptionsDelete = function(databaseClient, inputData, completionHandler) {
+	if (typeof inputData !== 'number') {
+		throw new Error('WKCErrorInvalidInput');
+	}
+
 	if (typeof completionHandler !== 'function') {
 		throw new Error('WKCErrorInvalidInput');
 	}
