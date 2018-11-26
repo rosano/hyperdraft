@@ -23,3 +23,10 @@ after(function() {
 beforeEach(function() {
 	global.WKCTestingMongoClient.db(process.env.WKC_SHARED_DATABASE_NAME).dropDatabase();
 });
+
+
+process.on('unhandledRejection', (reason, promise) => {
+  // console.log('Unhandledd Rejection at:', reason, promise)
+  // Recommended: send the information to sentry.io
+  // or whatever crash reporting service you use
+});
