@@ -30,11 +30,9 @@ exports.WKCMetalSubscriptionsCreate = function(databaseClient, inputData, comple
 
 		var subscriptionObject = result.ops.pop();
 
-		// modelLibrary.WKCModelsubscriptionsHiddenPropertyNames().forEach(function(obj) {
-		// 	delete subscriptionObject[obj];
-		// });
-
-		// return res.json(subscriptionObject);
+		modelLibrary.WKCSubscriptionHiddenPropertyNames().forEach(function(obj) {
+			delete subscriptionObject[obj];
+		});
 
 		return completionHandler(subscriptionObject);
 	});

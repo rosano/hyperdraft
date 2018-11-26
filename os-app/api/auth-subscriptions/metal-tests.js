@@ -30,10 +30,11 @@ describe('WKCMetalSubscriptionsCreate', function testWKCMetalSubscriptionsCreate
 		});
 	});
 
-	it('returns WKCSubscription with WKCSubscriptionID', function(done) {
+	it('returns WKCSubscription', function(done) {
 		metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, {
 			WKCSubscriptionURL: 'https://google.com',
 		}, function(responseJSON) {
+			assert.strictEqual(responseJSON._id, undefined);
 			assert.strictEqual(responseJSON.WKCSubscriptionID - (new Date()) > -200, true);
 			assert.strictEqual(responseJSON.WKCSubscriptionURL, 'https://google.com');
 			assert.strictEqual(responseJSON.WKCSubscriptionDateCreated instanceof Date, true);
