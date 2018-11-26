@@ -16,7 +16,15 @@ exports.OLSKControllerRoutes = function() {
 			OLSKRouteMethod: 'post',
 			OLSKRouteFunction: exports.WKCActionAPISubscriptionsCreate,
 			OLSKRouteMiddlewares: [
-				// 'WKCSharedMiddlewareAPIAuthenticate',
+				'WKCSharedMiddlewareAPIAuthenticate',
+			],
+		},
+		WKCRouteAPISubscriptionsRead: {
+			OLSKRoutePath: '/api/subscriptions/:wkc_subscription_id(\\d+)',
+			OLSKRouteMethod: 'get',
+			OLSKRouteFunction: exports.WKCActionAPISubscriptionsRead,
+			OLSKRouteMiddlewares: [
+				'WKCSharedMiddlewareAPIAuthenticate',
 			],
 		},
 	};
