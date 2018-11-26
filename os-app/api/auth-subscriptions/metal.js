@@ -25,7 +25,7 @@ exports.WKCMetalSubscriptionsCreate = function(databaseClient, inputData, comple
 		WKCSubscriptionDateUpdated: subscriptionDate,
 	}), function(err, result) {
 		if (err) {
-			throw new Error('WKCErrorDatabaseCreate');
+			return completionHandler(err);
 		}
 
 		var subscriptionObject = result.ops.pop();
@@ -34,6 +34,6 @@ exports.WKCMetalSubscriptionsCreate = function(databaseClient, inputData, comple
 			delete subscriptionObject[obj];
 		});
 
-		return completionHandler(subscriptionObject);
+		return completionHandler(null, subscriptionObject);
 	});
 };

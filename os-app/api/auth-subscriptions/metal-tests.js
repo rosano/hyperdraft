@@ -33,7 +33,7 @@ describe('WKCMetalSubscriptionsCreate', function testWKCMetalSubscriptionsCreate
 	it('returns WKCSubscription', function(done) {
 		metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, {
 			WKCSubscriptionURL: 'https://google.com',
-		}, function(responseJSON) {
+		}, function(err, responseJSON) {
 			assert.strictEqual(responseJSON._id, undefined);
 			assert.strictEqual(responseJSON.WKCSubscriptionID - (new Date()) > -200, true);
 			assert.strictEqual(responseJSON.WKCSubscriptionURL, 'https://google.com');
