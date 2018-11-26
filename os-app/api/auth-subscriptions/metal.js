@@ -14,7 +14,7 @@ exports.WKCMetalSubscriptionsCreate = function(databaseClient, inputData, comple
 	}
 
 	if (!modelLibrary.WKCModelInputDataIsSubscriptionObject(inputData)) {
-		return completionHandler(inputData);
+		return completionHandler(null, inputData);
 	}
 
 	var subscriptionDate = new Date();

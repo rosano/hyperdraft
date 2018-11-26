@@ -19,7 +19,7 @@ describe('WKCMetalSubscriptionsCreate', function testWKCMetalSubscriptionsCreate
 	it('returns WKCErrors if not valid WKCSubscription', function(done) {
 		metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, {
 			WKCSubscriptionURL: 'google.com',
-		}, function(responseJSON) {
+		}, function(err, responseJSON) {
 			assert.deepEqual(responseJSON.WKCErrors, {
 				WKCSubscriptionURL: [
 					'WKCErrorNotFormatted',
