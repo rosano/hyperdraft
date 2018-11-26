@@ -27,6 +27,13 @@ exports.OLSKControllerRoutes = function() {
 				'WKCSharedMiddlewareAPIAuthenticate',
 			],
 		},
+		WKCRouteAPISubscriptionsUpdate: {
+			OLSKRoutePath: '/api/subscriptions/:wkc_subscription_id(\\d+)',
+			OLSKRouteMethod: 'put',
+			OLSKRouteFunction: exports.WKCActionAPISubscriptionsUpdate,
+			OLSKRouteMiddlewares: [
+				'WKCSharedMiddlewareAPIAuthenticate',
+			],
 	};
 };
 
