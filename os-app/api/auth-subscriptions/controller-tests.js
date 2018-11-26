@@ -38,6 +38,14 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 					'WKCSharedMiddlewareAPIAuthenticate',
 				],
 			},
+			WKCRouteAPISubscriptionsDelete: {
+				OLSKRoutePath: '/api/subscriptions/:wkc_subscription_id(\\d+)',
+				OLSKRouteMethod: 'delete',
+				OLSKRouteFunction: controllerModule.WKCActionAPISubscriptionsDelete,
+				OLSKRouteMiddlewares: [
+					'WKCSharedMiddlewareAPIAuthenticate',
+				],
+			},
 		});
 	});
 
