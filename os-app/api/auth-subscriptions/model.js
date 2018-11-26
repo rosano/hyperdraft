@@ -45,3 +45,11 @@ exports.WKCModelInputDataIsSubscriptionObject = function(inputData) {
 
 	return true;
 };
+
+//_ WKCSubscriptionHiddenPropertyNames
+
+exports.WKCSubscriptionHiddenPropertyNames = function() {
+	return [
+		'_id',
+	];
+};

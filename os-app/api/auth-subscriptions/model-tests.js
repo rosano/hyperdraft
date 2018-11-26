@@ -96,3 +96,13 @@ describe('WKCModelInputDataIsSubscriptionObject', function testWKCModelInputData
 	});
 
 });
+
+describe('WKCSubscriptionHiddenPropertyNames', function testWKCSubscriptionHiddenPropertyNames() {
+
+	it('returns array', function() {
+		assert.deepEqual(modelLibrary.WKCSubscriptionHiddenPropertyNames(), [
+			'_id',
+		]);
+	});
+
+});
