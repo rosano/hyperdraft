@@ -43,6 +43,14 @@ exports.OLSKControllerRoutes = function() {
 				'WKCSharedMiddlewareAPIAuthenticate',
 			],
 		},
+		WKCRouteAPISubscriptionsSearch: {
+			OLSKRoutePath: '/api/subscriptions/search',
+			OLSKRouteMethod: 'get',
+			OLSKRouteFunction: exports.WKCActionAPISubscriptionsSearch,
+			OLSKRouteMiddlewares: [
+				'WKCSharedMiddlewareAPIAuthenticate',
+			],
+		},
 	};
 };
 
@@ -94,3 +102,14 @@ exports.WKCActionAPISubscriptionsDelete = function(req, res, next) {
 	});
 };
 
+//_ WKCActionAPISubscriptionsSearch
+
+exports.WKCActionAPISubscriptionsSearch = function(req, res, next) {
+	return metalLibrary.WKCMetalSubscriptionsSearch(req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, '', function(err, responseJSON) {
+		if (err) {
+			throw err;
+		}
+
+		return res.json(responseJSON);
+	});
+};

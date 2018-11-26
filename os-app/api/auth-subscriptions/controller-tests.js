@@ -46,8 +46,15 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 					'WKCSharedMiddlewareAPIAuthenticate',
 				],
 			},
+			WKCRouteAPISubscriptionsSearch: {
+				OLSKRoutePath: '/api/subscriptions/search',
+				OLSKRouteMethod: 'get',
+				OLSKRouteFunction: controllerModule.WKCActionAPISubscriptionsSearch,
+				OLSKRouteMiddlewares: [
+					'WKCSharedMiddlewareAPIAuthenticate',
+				],
+			},
 		});
 	});
 
 });
-
