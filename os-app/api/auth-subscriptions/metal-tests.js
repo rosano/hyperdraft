@@ -10,7 +10,13 @@ var metalLibrary = require('./metal');
 
 describe('WKCMetalSubscriptionsCreate', function testWKCMetalSubscriptionsCreate() {
 
-	it('throws error if param2 not function', function() {
+	it('throws error if param2 not object', function() {
+		assert.throws(function() {
+			metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, '', function() {});
+		}, /WKCErrorInvalidInput/);
+	});
+
+	it('throws error if param3 not function', function() {
 		assert.throws(function() {
 			metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, {}, null);
 		}, /WKCErrorInvalidInput/);

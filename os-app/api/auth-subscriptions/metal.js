@@ -9,6 +9,10 @@ var modelLibrary = require('./model');
 //_ WKCMetalSubscriptionsCreate
 
 exports.WKCMetalSubscriptionsCreate = function(databaseClient, inputData, completionHandler) {
+	if (typeof inputData !== 'object' || inputData === null) {
+		throw new Error('WKCErrorInvalidInput');
+	}
+
 	if (typeof completionHandler !== 'function') {
 		throw new Error('WKCErrorInvalidInput');
 	}
