@@ -132,3 +132,33 @@ describe('WKCMetalSubscriptionsUpdate', function testWKCMetalSubscriptionsUpdate
 	});
 
 });
+
+describe('WKCMetalSubscriptionsDelete', function testWKCMetalSubscriptionsDelete() {
+
+	it('throws error if param3 not function', function() {
+		assert.throws(function() {
+			metalLibrary.WKCMetalSubscriptionsDelete(WKCTestingMongoClient, '', null);
+		}, /WKCErrorInvalidInput/);
+	});
+
+	it('returns error if WKCSubscriptionID not found', function(done) {
+		metalLibrary.WKCMetalSubscriptionsDelete(WKCTestingMongoClient, 'alfa', function(err) {
+			assert.deepEqual(err, new Error('WKCErrorNotFound'));
+
+			done();
+		});
+	});
+
+	it('returns WKCSubscription', function(done) {
+		metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, {
+			WKCSubscriptionURL: 'https://google.com',
+		}, function(err, responseJSON) {
+			metalLibrary.WKCMetalSubscriptionsDelete(WKCTestingMongoClient, responseJSON.WKCSubscriptionID, function(err, responseJSON) {
+				assert.deepEqual(responseJSON, true);
+
+				done();
+			});
+		});
+	});
+
+});

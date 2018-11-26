@@ -106,3 +106,25 @@ exports.WKCMetalSubscriptionsUpdate = function(databaseClient, inputData1, input
 		return completionHandler(null, subscriptionObject);
 	});
 };
+
+//_ WKCMetalSubscriptionsDelete
+
+exports.WKCMetalSubscriptionsDelete = function(databaseClient, inputData, completionHandler) {
+	if (typeof completionHandler !== 'function') {
+		throw new Error('WKCErrorInvalidInput');
+	}
+
+	return databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_subscriptions').deleteOne({
+		WKCSubscriptionID: inputData,
+	}, function(err, result) {
+		if (err) {
+			return completionHandler(err);
+		}
+
+		if (!result.result.n) {
+			return completionHandler(new Error('WKCErrorNotFound'));
+		}
+
+		return completionHandler(null, true);
+	});
+};
