@@ -162,3 +162,25 @@ describe('WKCMetalSubscriptionsDelete', function testWKCMetalSubscriptionsDelete
 	});
 
 });
+
+describe('WKCMetalSubscriptionsSearch', function testWKCMetalSubscriptionsSearch() {
+
+	it('throws error if param3 not function', function() {
+		assert.throws(function() {
+			metalLibrary.WKCMetalSubscriptionsSearch(WKCTestingMongoClient, '', null);
+		}, /WKCErrorInvalidInput/);
+	});
+
+	it('returns all if param2 empty', function(done) {
+		metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, {
+			WKCSubscriptionURL: 'https://alfa.com',
+		}, function(err, subscriptionObject) {
+			metalLibrary.WKCMetalSubscriptionsSearch(WKCTestingMongoClient, '', function(err, responseJSON) {
+				assert.deepEqual(responseJSON, [subscriptionObject]);
+
+				done();
+			});
+		});
+	});
+
+});
