@@ -41,7 +41,7 @@ describe('WKCMetalSubscriptionsCreate', function testWKCMetalSubscriptionsCreate
 			WKCSubscriptionURL: 'https://google.com',
 		}, function(err, responseJSON) {
 			assert.strictEqual(responseJSON._id, undefined);
-			assert.strictEqual(responseJSON.WKCSubscriptionID - (new Date()) > -200, true);
+			assert.strictEqual(parseInt(responseJSON.WKCSubscriptionID) - (new Date()) > -200, true);
 			assert.strictEqual(responseJSON.WKCSubscriptionURL, 'https://google.com');
 			assert.strictEqual(responseJSON.WKCSubscriptionDateCreated instanceof Date, true);
 			assert.strictEqual(responseJSON.WKCSubscriptionDateUpdated instanceof Date, true);
@@ -54,20 +54,20 @@ describe('WKCMetalSubscriptionsCreate', function testWKCMetalSubscriptionsCreate
 
 describe('WKCMetalSubscriptionsRead', function testWKCMetalSubscriptionsRead() {
 
-	it('throws error if param2 not number', function() {
+	it('throws error if param2 not string', function() {
 		assert.throws(function() {
-			metalLibrary.WKCMetalSubscriptionsRead(WKCTestingMongoClient, '1', function() {});
+			metalLibrary.WKCMetalSubscriptionsRead(WKCTestingMongoClient, 1, function() {});
 		}, /WKCErrorInvalidInput/);
 	});
 
 	it('throws error if param3 not function', function() {
 		assert.throws(function() {
-			metalLibrary.WKCMetalSubscriptionsRead(WKCTestingMongoClient, 1, null);
+			metalLibrary.WKCMetalSubscriptionsRead(WKCTestingMongoClient, '1', null);
 		}, /WKCErrorInvalidInput/);
 	});
 
 	it('returns error if WKCSubscriptionID not found', function(done) {
-		metalLibrary.WKCMetalSubscriptionsRead(WKCTestingMongoClient, 0, function(err) {
+		metalLibrary.WKCMetalSubscriptionsRead(WKCTestingMongoClient, '0', function(err) {
 			assert.deepEqual(err, new Error('WKCErrorNotFound'));
 
 			done();
@@ -90,26 +90,26 @@ describe('WKCMetalSubscriptionsRead', function testWKCMetalSubscriptionsRead() {
 
 describe('WKCMetalSubscriptionsUpdate', function testWKCMetalSubscriptionsUpdate() {
 
-	it('throws error if param2 not number', function() {
+	it('throws error if param2 not string', function() {
 		assert.throws(function() {
-			metalLibrary.WKCMetalSubscriptionsUpdate(WKCTestingMongoClient, '1', {}, function() {});
+			metalLibrary.WKCMetalSubscriptionsUpdate(WKCTestingMongoClient, 1, {}, function() {});
 		}, /WKCErrorInvalidInput/);
 	});
 
 	it('throws error if param3 not object', function() {
 		assert.throws(function() {
-			metalLibrary.WKCMetalSubscriptionsUpdate(WKCTestingMongoClient, 1, null, function() {});
+			metalLibrary.WKCMetalSubscriptionsUpdate(WKCTestingMongoClient, '1', null, function() {});
 		}, /WKCErrorInvalidInput/);
 	});
 
 	it('throws error if param4 not function', function() {
 		assert.throws(function() {
-			metalLibrary.WKCMetalSubscriptionsUpdate(WKCTestingMongoClient, 1, {}, null);
+			metalLibrary.WKCMetalSubscriptionsUpdate(WKCTestingMongoClient, '1', {}, null);
 		}, /WKCErrorInvalidInput/);
 	});
 
 	it('returns error if WKCSubscriptionID not found', function(done) {
-		metalLibrary.WKCMetalSubscriptionsUpdate(WKCTestingMongoClient, 0, {
+		metalLibrary.WKCMetalSubscriptionsUpdate(WKCTestingMongoClient, '0', {
 			WKCSubscriptionURL: 'https://google.com',
 		}, function(err) {
 			assert.deepEqual(err, new Error('WKCErrorNotFound'));
@@ -153,20 +153,20 @@ describe('WKCMetalSubscriptionsUpdate', function testWKCMetalSubscriptionsUpdate
 
 describe('WKCMetalSubscriptionsDelete', function testWKCMetalSubscriptionsDelete() {
 
-	it('throws error if param2 not number', function() {
+	it('throws error if param2 not string', function() {
 		assert.throws(function() {
-			metalLibrary.WKCMetalSubscriptionsDelete(WKCTestingMongoClient, '1', function() {});
+			metalLibrary.WKCMetalSubscriptionsDelete(WKCTestingMongoClient, 1, function() {});
 		}, /WKCErrorInvalidInput/);
 	});
 
 	it('throws error if param3 not function', function() {
 		assert.throws(function() {
-			metalLibrary.WKCMetalSubscriptionsDelete(WKCTestingMongoClient, 1, null);
+			metalLibrary.WKCMetalSubscriptionsDelete(WKCTestingMongoClient, '1', null);
 		}, /WKCErrorInvalidInput/);
 	});
 
 	it('returns error if WKCSubscriptionID not found', function(done) {
-		metalLibrary.WKCMetalSubscriptionsDelete(WKCTestingMongoClient, 0, function(err) {
+		metalLibrary.WKCMetalSubscriptionsDelete(WKCTestingMongoClient, '0', function(err) {
 			assert.deepEqual(err, new Error('WKCErrorNotFound'));
 
 			done();

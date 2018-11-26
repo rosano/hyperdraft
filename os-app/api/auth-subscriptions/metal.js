@@ -21,12 +21,12 @@ exports.WKCMetalSubscriptionsCreate = function(databaseClient, inputData, comple
 		return completionHandler(null, inputData);
 	}
 
-	var subscriptionDate = new Date();
+	var currentDate = new Date();
 
 	return databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_subscriptions').insertOne(Object.assign(inputData, {
-		WKCSubscriptionID: (new Date()) * 1,
-		WKCSubscriptionDateCreated: subscriptionDate,
-		WKCSubscriptionDateUpdated: subscriptionDate,
+		WKCSubscriptionID: parseInt(new Date() * 1).toString(),
+		WKCSubscriptionDateCreated: currentDate,
+		WKCSubscriptionDateUpdated: currentDate,
 	}), function(err, result) {
 		if (err) {
 			return completionHandler(err);
@@ -45,7 +45,7 @@ exports.WKCMetalSubscriptionsCreate = function(databaseClient, inputData, comple
 //_ WKCMetalSubscriptionsRead
 
 exports.WKCMetalSubscriptionsRead = function(databaseClient, inputData, completionHandler) {
-	if (typeof inputData !== 'number') {
+	if (typeof inputData !== 'string') {
 		throw new Error('WKCErrorInvalidInput');
 	}
 
@@ -77,7 +77,7 @@ exports.WKCMetalSubscriptionsRead = function(databaseClient, inputData, completi
 //_ WKCMetalSubscriptionsUpdate
 
 exports.WKCMetalSubscriptionsUpdate = function(databaseClient, inputData1, inputData2, completionHandler) {
-	if (typeof inputData1 !== 'number') {
+	if (typeof inputData1 !== 'string') {
 		throw new Error('WKCErrorInvalidInput');
 	}
 
@@ -122,7 +122,7 @@ exports.WKCMetalSubscriptionsUpdate = function(databaseClient, inputData1, input
 //_ WKCMetalSubscriptionsDelete
 
 exports.WKCMetalSubscriptionsDelete = function(databaseClient, inputData, completionHandler) {
-	if (typeof inputData !== 'number') {
+	if (typeof inputData !== 'string') {
 		throw new Error('WKCErrorInvalidInput');
 	}
 
