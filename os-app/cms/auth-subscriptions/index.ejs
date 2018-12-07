@@ -6,5 +6,27 @@ locals.OLSKPageAssets = [
 
 <%- include('../../_shared/WKCLayout/header.ejs') %>
 
+<script type="text/javascript">
+	<%- include('behaviour.js') %>
+</script>
+
+<script type="text/javascript">
+	WKSubscriptions.lifecyclePageWillLoad();
+</script>
+
 <h1><%= locals.OLSKPageTitle %></h1>
+
+<form id="WKCAppSubscriptionsForm">
+	<input type="text" placeholder="http://…" autofocus>
+	<input type="submit" value="<%= OLSKLocalized('WKCSubscriptionsFetch') %>">
+</form>
+
+<script type="text/javascript">
+	d3.select('#WKCAppSubscriptionsForm').on('submit', function() {
+		d3.event.preventDefault();
+		
+		WKSubscriptions.interfaceFetchButtonDidClick();
+	});
+</script>
+
 <%- include('../../_shared/WKCLayout/footer.ejs') %>
