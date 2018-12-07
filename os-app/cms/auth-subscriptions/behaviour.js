@@ -28,10 +28,10 @@
 
 	//# INTERFACE
 
-	//_ interfaceFetchButtonDidClick
+	//_ interfaceFetchFormDidSubmit
 
-	moi.interfaceFetchButtonDidClick = function () {
-		moi.commandsFetchURL();
+	moi.interfaceFetchFormDidSubmit = function () {
+		moi.commandsFetchURL(d3.select('#WKCAppSubscriptionsFormInput').property('value'));
 	};
 
 	//# COMMANDS
@@ -54,8 +54,8 @@
 
 	//_ commandsFetchURL
 
-	moi.commandsFetchURL = function () {
-		d3.text(d3.select('#WKCAppSubscriptionsFormInput').property('value')).then(function(data) {
+	moi.commandsFetchURL = function (inputData) {
+		d3.text(inputData).then(function(data) {
 		}).catch(moi.commandsAlertFetchError);
 	};
 

@@ -1,6 +1,7 @@
 <%
 locals.OLSKPageTitle = OLSKLocalized('WKCSubscriptionsTitle');
 locals.OLSKPageAssets = [
+	'ui-logic.js',
 ];
 %>
 
@@ -25,7 +26,7 @@ locals.OLSKPageAssets = [
 	d3.select('#WKCAppSubscriptionsForm').on('submit', function() {
 		d3.event.preventDefault();
 		
-		WKSubscriptions.interfaceFetchButtonDidClick();
+		WKSubscriptions.interfaceFetchFormDidSubmit();
 	});
 </script>
 
