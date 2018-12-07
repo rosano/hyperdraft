@@ -13,8 +13,6 @@ WKCAppNotesPersistenceStatusDeleted: Deleted
 WKCAppNotesPersistenceStatusUnableToSave: Unable to save
 WKCAppNotesPersistenceStatusUnableToDelete: Unable to delete
 WKCNotesErrors:
-  WKCAppErrorServiceUnavailable: Connection error
-  WKCAppErrorTokenUnavailable: Authentication error
   WKCAppErrorNotesUnavailable: Unable to fetch notes
   WKCAppErrorPersistenceSaveDidFail: Unable to save note. Would you like to try again?
   WKCAppErrorPersistenceDeleteDidFail: Unable to delete note. Would you like to try again?

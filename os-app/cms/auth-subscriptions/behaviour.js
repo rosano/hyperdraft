@@ -39,7 +39,7 @@
 	//_ commandsAlertConnectionError
 
 	moi.commandsAlertConnectionError = function (error) {
-		window.alert('<%= OLSKLocalized('WKCNotesErrors').WKCAppErrorServiceUnavailable %>');
+		window.alert('<%= OLSKLocalized('WKSharedErrorServiceUnavailable') %>');
 
 		throw error;
 	};
@@ -47,7 +47,7 @@
 	//_ commandsAlertTokenUnavailable
 
 	moi.commandsAlertTokenUnavailable = function () {
-		window.alert('<%= OLSKLocalized('WKCNotesErrors').WKCAppErrorTokenUnavailable %>');
+		window.alert('<%= OLSKLocalized('WKSharedErrorTokenUnavailable') %>');
 
 		throw new Error('WKCAppErrorTokenUnavailable');
 	};
