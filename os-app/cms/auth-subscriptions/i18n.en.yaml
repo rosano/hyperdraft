@@ -1,2 +1,3 @@
 WKCSubscriptionsTitle: Subscriptions
 WKCSubscriptionsFetch: Fetch
+WKCSubscriptionsErrorFetch: Error fetching URL. Please check the input and try again.

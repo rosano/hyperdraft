@@ -55,7 +55,16 @@
 	//_ commandsFetchURL
 
 	moi.commandsFetchURL = function () {
-		alert('commandsFetchURL');
+		d3.text(d3.select('#WKCAppSubscriptionsFormInput').property('value')).then(function(data) {
+		}).catch(moi.commandsAlertFetchError);
+	};
+
+	//_ commandsAlertFetchError
+
+	moi.commandsAlertFetchError = function (error) {
+		window.alert('<%= OLSKLocalized('WKCSubscriptionsErrorFetch') %>');
+
+		throw error;
 	};
 
 	//# SETUP
