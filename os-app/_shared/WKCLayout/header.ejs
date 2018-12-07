@@ -24,18 +24,17 @@
 	<link rel="stylesheet" type="text/css" href="/shared-assets/vendor/normalize.css/normalize.css">
 
 	<script src="/shared-assets/vendor/d3/dist/d3.min.js"></script>
-	<script src="/shared-assets/vendor/OLSKTasks/main.js"></script>
 
 	<% if (locals.OLSKSharedPageControllerSlug && Array.isArray(locals.OLSKPageAssets)) { %>
 		<% locals.OLSKPageAssets.forEach(function(e) { %>
-			<% var defaultDirectory = e[0] === '/' ? '' : '/' + locals.OLSKSharedPageControllerSlug + '/'; %>
+			<% var defaultDirectory = e[0] === '/' ? '' : '/' + (locals.OLSKSharedPageControllerSlug + '/'); %>
 			
 			<% if (e.split('.').pop() === 'js') { %>
-				<script src="<%= defaultDirectory %><%= e %>"></script>
+	<script src="<%= defaultDirectory %><%= e %>"></script>
 			<% } %>
 
 			<% if (e.split('.').pop() === 'css') { %>
-				<link rel="stylesheet" type="text/css" href="<%= defaultDirectory %><%= e %>">
+	<link rel="stylesheet" type="text/css" href="<%= defaultDirectory %><%= e %>">
 			<% } %>
 		<% }) %>
 	<% } %>
