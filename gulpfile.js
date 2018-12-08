@@ -13,6 +13,7 @@ function install() {
 		'd3',
 		'OLSKTasks',
 		'ispinner.css',
+		'turndown',
 	].map(function(e) {
 		return [
 			[

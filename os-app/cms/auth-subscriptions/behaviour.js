@@ -116,6 +116,11 @@
 			return WKLogic.WKSubscriptionsCompleteURL(d3.select(e).attr('href'), inputData);
 		}));
 
+		var turndownInstance = new TurndownService();
+		turndownInstance.remove('script');
+
+		moi.reactConfirmationPreviewPage(turndownInstance.turndown(parsedHTML.body));
+
 		moi.reactConfirmationPreviewShared(null, null);
 	};
 
@@ -176,6 +181,12 @@
 
 	moi.reactConfirmationPreviewFile = function (inputData) {
 		d3.select('#WKCAppSubscriptionsConfirmationPreviewFile pre').html(inputData);
+	};
+
+	//_ reactConfirmationPreviewPage
+
+	moi.reactConfirmationPreviewPage = function (inputData) {
+		d3.select('#WKCAppSubscriptionsConfirmationPreviewPageContent').html(inputData);
 	};
 
 	//_ reactConfirmationPreviewPageAlternatives

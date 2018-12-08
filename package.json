@@ -18,7 +18,8 @@
     "normalize.css": "latest",
     "d3": "latest",
     "OLSKTasks": "olsk/OLSKTasks",
-    "ispinner.css": "latest"
+    "ispinner.css": "latest",
+    "turndown": "latest"
   },
   "devDependencies": {
     "gulp": "4.0",
