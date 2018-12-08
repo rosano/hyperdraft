@@ -55,6 +55,8 @@
 	//_ commandsFetchURL
 
 	moi.commandsFetchURL = function (inputData) {
+		d3.select('#WKCSubscriptionsLoader').classed('WKCAppSubscriptionsHidden', false);
+
 		d3.text(inputData).then(function(data) {
 			var parsedXML = (new DOMParser()).parseFromString(data, 'application/xml');
 
@@ -83,6 +85,8 @@
 	//_ commandsConfirmURLFeed
 
 	moi.commandsConfirmURLFeed = function (inputData, parsedXML) {
+		d3.select('#WKCSubscriptionsLoader').classed('WKCAppSubscriptionsHidden', true);
+
 		moi.reactConfirmationPreviewShared(parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('title')[0].textContent.trim(), parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('description')[0].textContent.trim());
 
 		moi.reactConfirmationPreviewFeedItems([].slice.call(parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('item')));

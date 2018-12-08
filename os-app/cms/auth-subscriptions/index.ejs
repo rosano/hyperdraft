@@ -1,6 +1,7 @@
 <%
 locals.OLSKPageTitle = OLSKLocalized('WKCSubscriptionsTitle');
 locals.OLSKPageAssets = [
+	'/shared-assets/vendor/ispinner.css/ispinner.prefixed.css',
 	'ui-logic.js',
 	'ui-style.css',
 ];
@@ -22,6 +23,23 @@ locals.OLSKPageAssets = [
 	<input type="text" placeholder="http://…" autofocus id="WKCAppSubscriptionsFormInput">
 	<input type="submit" value="<%= OLSKLocalized('WKCSubscriptionsFetch') %>">
 </form>
+
+<div id="WKCSubscriptionsLoader" class="WKCAppSubscriptionsHidden">
+	<div class="ispinner ispinner--gray ispinner--animating">
+	  <div class="ispinner__blade"></div>
+	  <div class="ispinner__blade"></div>
+	  <div class="ispinner__blade"></div>
+	  <div class="ispinner__blade"></div>
+	  <div class="ispinner__blade"></div>
+	  <div class="ispinner__blade"></div>
+	  <div class="ispinner__blade"></div>
+	  <div class="ispinner__blade"></div>
+	  <div class="ispinner__blade"></div>
+	  <div class="ispinner__blade"></div>
+	  <div class="ispinner__blade"></div>
+	  <div class="ispinner__blade"></div>
+	</div>
+</div>
 
 <div id="WKCAppSubscriptionsConfirmation" class="WKCAppSubscriptionsHidden">
 	<h2><%= OLSKLocalized('WKCSubscriptionsConfirmationTitle') %></h2>
