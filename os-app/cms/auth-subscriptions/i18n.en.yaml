@@ -1,6 +1,7 @@
 WKCSubscriptionsTitle: Subscriptions
 WKCSubscriptionsFetch: Fetch
 WKCSubscriptionsErrorFetch: Error fetching URL. Please check the input and try again.
+WKCSubscriptionsConfirmationAlternatives: 'Feeds found on this page:'
 WKCSubscriptionsConfirmationTitle: Confirm subscription
 WKCSubscriptionsConfirmationNamePlaceholder: Name
 WKCSubscriptionsConfirmationBlurbPlaceholder: Description

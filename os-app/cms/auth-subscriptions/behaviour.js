@@ -55,7 +55,12 @@
 	//_ commandsFetchURL
 
 	moi.commandsFetchURL = function (inputData) {
-		d3.select('#WKCSubscriptionsLoader').classed('WKCAppSubscriptionsHidden', false);
+		moi.reactConfirmationPreviewFeedItems([]);
+		moi.reactConfirmationPreviewPageAlternatives([]);
+
+		moi.reactFetchFormVisibility(true);
+		moi.reactFetchLoaderVisibility(true);
+		moi.reactConfirmationVisibility(false);
 
 		d3.text(inputData).then(function(data) {
 			var parsedXML = (new DOMParser()).parseFromString(data, 'application/xml');
@@ -70,11 +75,7 @@
 				return moi.commandsConfirmURLFile(inputData, data);
 			}
 
-			[].slice.call(parsedHTML.getElementsByTagName('link')).filter(function(e) {
-				return e.type.trim().toLowerCase() === 'application/rss+xml';
-			}).map(function(e) {
-				return WKLogic.WKSubscriptionsCompleteURL(d3.select(e).attr('href'), inputData);
-			});
+			return moi.commandsConfirmURLPage(inputData, parsedHTML);
 		}).catch(moi.commandsAlertFetchError);
 	};
 
@@ -82,6 +83,10 @@
 
 	moi.commandsAlertFetchError = function (error) {
 		window.alert('<%= OLSKLocalized('WKCSubscriptionsErrorFetch') %>');
+
+		moi.reactFetchLoaderVisibility(false);
+
+		d3.select('#WKCAppSubscriptionsFormInput').node().focus();
 
 		throw error;
 	};
@@ -102,27 +107,52 @@
 		moi.reactConfirmationPreviewShared(inputData.match(/https?:\/\/(.*)/)[1], null);
 	};
 
+	//_ commandsConfirmURLPage
+
+	moi.commandsConfirmURLPage = function (inputData, parsedHTML) {
+		moi.reactConfirmationPreviewPageAlternatives([].slice.call(parsedHTML.getElementsByTagName('link')).filter(function(e) {
+			return e.type.trim().toLowerCase() === 'application/rss+xml';
+		}).map(function(e) {
+			return WKLogic.WKSubscriptionsCompleteURL(d3.select(e).attr('href'), inputData);
+		}));
+
+		moi.reactConfirmationPreviewShared(null, null);
+	};
+
 	//# REACT
+
+	//_ reactFetchFormVisibility
+
+	moi.reactFetchFormVisibility = function (isVisible) {
+		d3.select('#WKCAppSubscriptionsForm').classed('WKCAppSubscriptionsHidden', !isVisible);
+	};
+
+	//_ reactFetchLoaderVisibility
+
+	moi.reactFetchLoaderVisibility = function (isVisible) {
+		d3.select('#WKCSubscriptionsLoader').classed('WKCAppSubscriptionsHidden', !isVisible);
+	};
+
+	//_ reactConfirmationVisibility
+
+	moi.reactConfirmationVisibility = function (isVisible) {
+		d3.select('#WKCAppSubscriptionsConfirmation').classed('WKCAppSubscriptionsHidden', !isVisible);
+	};
 
 	//_ reactConfirmationPreviewShared
 
 	moi.reactConfirmationPreviewShared = function (titleContent, blurbContent) {
-		d3.select('#WKCSubscriptionsLoader').classed('WKCAppSubscriptionsHidden', true);
+		moi.reactFetchLoaderVisibility(false);
 
 		d3.select('#WKCAppSubscriptionsConfirmationFormName').node().value = titleContent;
 
 		d3.select('#WKCAppSubscriptionsConfirmationFormBlurb').node().value = blurbContent;
 
-		d3.select('#WKCAppSubscriptionsConfirmation').classed('WKCAppSubscriptionsHidden', false);
-		d3.select('#WKCAppSubscriptionsForm').classed('WKCAppSubscriptionsHidden', true);
+		moi.reactConfirmationVisibility(true);
+		
+		moi.reactFetchFormVisibility(false);
 
 		d3.select('#WKCAppSubscriptionsConfirmationFormName').attr('autofocus', true);
-	};
-
-	//_ reactConfirmationPreviewFile
-
-	moi.reactConfirmationPreviewFile = function (inputData) {
-		d3.select('#WKCAppSubscriptionsConfirmationPreviewFile pre').html(inputData);
 	};
 
 	//_ reactConfirmationPreviewFeedItems
@@ -140,6 +170,36 @@
 					});
 
 		selection.exit().remove();
+	};
+
+	//_ reactConfirmationPreviewFile
+
+	moi.reactConfirmationPreviewFile = function (inputData) {
+		d3.select('#WKCAppSubscriptionsConfirmationPreviewFile pre').html(inputData);
+	};
+
+	//_ reactConfirmationPreviewPageAlternatives
+
+	moi.reactConfirmationPreviewPageAlternatives = function (alternativeURLs) {
+		var selection = d3.select('#WKCAppSubscriptionsConfirmationPreviewPageAlternatives ul')
+			.selectAll('.WKCAppSubscriptionsConfirmationPreviewPageAlternativesItem').data(alternativeURLs);
+		
+		selection.enter()
+			.append('li')
+				.attr('class', 'WKCAppSubscriptionsConfirmationPreviewPageAlternativesItem')
+				.append('button')
+				.on('click', function(e) {
+					d3.select('#WKCAppSubscriptionsFormInput').property('value', e)
+					moi.commandsFetchURL(e);
+				})
+				.merge(selection)
+					.html(function(e) {
+						return e;
+					});
+
+		selection.exit().remove();
+
+		d3.select('#WKCAppSubscriptionsConfirmationPreviewPageAlternatives').classed('WKCAppSubscriptionsHidden', !alternativeURLs.length);
 	};
 
 	//# SETUP
