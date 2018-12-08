@@ -85,16 +85,9 @@
 	//_ commandsConfirmURLFeed
 
 	moi.commandsConfirmURLFeed = function (inputData, parsedXML) {
-		d3.select('#WKCSubscriptionsLoader').classed('WKCAppSubscriptionsHidden', true);
-
-		moi.reactConfirmationPreviewShared(parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('title')[0].textContent.trim(), parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('description')[0].textContent.trim());
-
 		moi.reactConfirmationPreviewFeedItems([].slice.call(parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('item')));
-
-		d3.select('#WKCAppSubscriptionsConfirmation').classed('WKCAppSubscriptionsHidden', false);
-		d3.select('#WKCAppSubscriptionsForm').classed('WKCAppSubscriptionsHidden', true);
-
-		d3.select('#WKCAppSubscriptionsConfirmationFormName').attr('autofocus', true);
+		
+		moi.reactConfirmationPreviewShared(parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('title')[0].textContent.trim(), parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('description')[0].textContent.trim());
 	};
 
 	//# REACT
@@ -102,9 +95,16 @@
 	//_ reactConfirmationPreviewShared
 
 	moi.reactConfirmationPreviewShared = function (titleContent, blurbContent) {
+		d3.select('#WKCSubscriptionsLoader').classed('WKCAppSubscriptionsHidden', true);
+
 		d3.select('#WKCAppSubscriptionsConfirmationFormName').node().value = titleContent;
 
 		d3.select('#WKCAppSubscriptionsConfirmationFormBlurb').node().value = blurbContent;
+
+		d3.select('#WKCAppSubscriptionsConfirmation').classed('WKCAppSubscriptionsHidden', false);
+		d3.select('#WKCAppSubscriptionsForm').classed('WKCAppSubscriptionsHidden', true);
+
+		d3.select('#WKCAppSubscriptionsConfirmationFormName').attr('autofocus', true);
 	};
 
 	//_ reactConfirmationPreviewFeedItems
