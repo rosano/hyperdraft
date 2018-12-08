@@ -56,6 +56,19 @@
 
 	moi.commandsFetchURL = function (inputData) {
 		d3.text(inputData).then(function(data) {
+			var parsedXML = (new DOMParser()).parseFromString(data, 'application/xml');
+
+			if (!parsedXML.getElementsByTagName('parsererror').length && parsedXML.documentElement.getElementsByTagName('channel').length) {
+				return moi.commandsConfirmURLFeed(inputData, parsedXML);
+			}
+
+			var parsedHTML = (new DOMParser()).parseFromString(data, 'text/html');
+
+			[].slice.call(parsedHTML.getElementsByTagName('link')).filter(function(e) {
+				return e.type.trim().toLowerCase() === 'application/rss+xml';
+			}).map(function(e) {
+				return WKLogic.WKSubscriptionsCompleteURL(d3.select(e).attr('href'), inputData);
+			});
 		}).catch(moi.commandsAlertFetchError);
 	};
 
@@ -65,6 +78,46 @@
 		window.alert('<%= OLSKLocalized('WKCSubscriptionsErrorFetch') %>');
 
 		throw error;
+	};
+
+	//_ commandsConfirmURLFeed
+
+	moi.commandsConfirmURLFeed = function (inputData, parsedXML) {
+		moi.reactConfirmationPreviewShared(parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('title')[0].textContent.trim(), parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('description')[0].textContent.trim());
+
+		moi.reactConfirmationPreviewFeedItems([].slice.call(parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('item')));
+
+		d3.select('#WKCAppSubscriptionsConfirmation').classed('WKCAppSubscriptionsHidden', false);
+		d3.select('#WKCAppSubscriptionsForm').classed('WKCAppSubscriptionsHidden', true);
+
+		d3.select('#WKCAppSubscriptionsConfirmationFormName').attr('autofocus', true);
+	};
+
+	//# REACT
+
+	//_ reactConfirmationPreviewShared
+
+	moi.reactConfirmationPreviewShared = function (titleContent, blurbContent) {
+		d3.select('#WKCAppSubscriptionsConfirmationFormName').node().value = titleContent;
+
+		d3.select('#WKCAppSubscriptionsConfirmationFormBlurb').node().value = blurbContent;
+	};
+
+	//_ reactConfirmationPreviewFeedItems
+
+	moi.reactConfirmationPreviewFeedItems = function (itemElements) {
+		var selection = d3.select('#WKCAppSubscriptionsConfirmationPreviewFeed ul')
+			.selectAll('.WKCAppSubscriptionsConfirmationPreviewFeedItem').data(itemElements);
+		
+		selection.enter()
+			.append('li')
+				.attr('class', 'WKCAppSubscriptionsConfirmationPreviewFeedItem')
+				.merge(selection)
+					.html(function(e) {
+						return e.getElementsByTagName('title')[0].textContent.trim();
+					});
+
+		selection.exit().remove();
 	};
 
 	//# SETUP

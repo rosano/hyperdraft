@@ -2,6 +2,7 @@
 locals.OLSKPageTitle = OLSKLocalized('WKCSubscriptionsTitle');
 locals.OLSKPageAssets = [
 	'ui-logic.js',
+	'ui-style.css',
 ];
 %>
 
@@ -21,6 +22,28 @@ locals.OLSKPageAssets = [
 	<input type="text" placeholder="http://…" autofocus id="WKCAppSubscriptionsFormInput">
 	<input type="submit" value="<%= OLSKLocalized('WKCSubscriptionsFetch') %>">
 </form>
+
+<div id="WKCAppSubscriptionsConfirmation" class="WKCAppSubscriptionsHidden">
+	<h2><%= OLSKLocalized('WKCSubscriptionsConfirmationTitle') %></h2>
+
+	<form id="WKCAppSubscriptionsConfirmationForm">
+		<p>
+			<input type="text" placeholder="<%= OLSKLocalized('WKCSubscriptionsConfirmationNamePlaceholder') %>" id="WKCAppSubscriptionsConfirmationFormName">
+		</p>
+		
+		<p>
+			<textarea placeholder="<%= OLSKLocalized('WKCSubscriptionsConfirmationBlurbPlaceholder') %>" id="WKCAppSubscriptionsConfirmationFormBlurb"></textarea>
+		</p>
+
+		<input type="submit" value="<%= OLSKLocalized('WKCSubscriptionsConfirmationSubmit') %>">
+	</form>
+
+	<h3><%= OLSKLocalized('WKCSubscriptionsConfirmationPreview') %></h3>
+
+	<section id="WKCAppSubscriptionsConfirmationPreviewFeed">
+		<ul></ul>
+	</section>
+</div>
 
 <script type="text/javascript">
 	d3.select('#WKCAppSubscriptionsForm').on('submit', function() {

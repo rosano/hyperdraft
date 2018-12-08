@@ -1,3 +1,8 @@
 WKCSubscriptionsTitle: Subscriptions
 WKCSubscriptionsFetch: Fetch
 WKCSubscriptionsErrorFetch: Error fetching URL. Please check the input and try again.
+WKCSubscriptionsConfirmationTitle: Confirm subscription
+WKCSubscriptionsConfirmationNamePlaceholder: Name
+WKCSubscriptionsConfirmationBlurbPlaceholder: Description
+WKCSubscriptionsConfirmationSubmit: Add
+WKCSubscriptionsConfirmationPreview: Preview
