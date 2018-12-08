@@ -66,6 +66,10 @@
 
 			var parsedHTML = (new DOMParser()).parseFromString(data, 'text/html');
 
+			if (!parsedHTML.getElementsByTagName('head')[0].innerHTML) {
+				return moi.commandsConfirmURLFile(inputData, data);
+			}
+
 			[].slice.call(parsedHTML.getElementsByTagName('link')).filter(function(e) {
 				return e.type.trim().toLowerCase() === 'application/rss+xml';
 			}).map(function(e) {
@@ -90,6 +94,14 @@
 		moi.reactConfirmationPreviewShared(parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('title')[0].textContent.trim(), parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('description')[0].textContent.trim());
 	};
 
+	//_ commandsConfirmURLFile
+
+	moi.commandsConfirmURLFile = function (inputData, rawData) {
+		moi.reactConfirmationPreviewFile(rawData);
+
+		moi.reactConfirmationPreviewShared(inputData.match(/https?:\/\/(.*)/)[1], null);
+	};
+
 	//# REACT
 
 	//_ reactConfirmationPreviewShared
@@ -105,6 +117,12 @@
 		d3.select('#WKCAppSubscriptionsForm').classed('WKCAppSubscriptionsHidden', true);
 
 		d3.select('#WKCAppSubscriptionsConfirmationFormName').attr('autofocus', true);
+	};
+
+	//_ reactConfirmationPreviewFile
+
+	moi.reactConfirmationPreviewFile = function (inputData) {
+		d3.select('#WKCAppSubscriptionsConfirmationPreviewFile pre').html(inputData);
 	};
 
 	//_ reactConfirmationPreviewFeedItems
