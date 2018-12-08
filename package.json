@@ -17,7 +17,8 @@
     "// FRONTEND": null,
     "normalize.css": "latest",
     "d3": "latest",
-    "OLSKTasks": "olsk/OLSKTasks"
+    "OLSKTasks": "olsk/OLSKTasks",
+    "ispinner.css": "latest"
   },
   "devDependencies": {
     "gulp": "4.0",
