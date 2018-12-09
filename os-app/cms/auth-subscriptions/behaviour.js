@@ -121,7 +121,19 @@
 
 		moi.reactConfirmationPreviewPage(turndownInstance.turndown(parsedHTML.body));
 
-		moi.reactConfirmationPreviewShared(null, null);
+		moi.reactConfirmationPreviewShared(null, [].slice.call(parsedHTML.getElementsByTagName('meta')).filter(function(e) {
+			if (e.name === 'description') {
+				return true;
+			}
+			
+			if (d3.select(e).attr('property') === 'og:description') {
+				return true;
+			}
+			
+			return false;
+		}).map(function(e) {
+			return e.content;
+		}).shift());
 	};
 
 	//# REACT
