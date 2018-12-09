@@ -121,7 +121,7 @@
 
 		moi.reactConfirmationPreviewPage(turndownInstance.turndown(parsedHTML.body));
 
-		moi.reactConfirmationPreviewShared(null, [].slice.call(parsedHTML.getElementsByTagName('meta')).filter(function(e) {
+		moi.reactConfirmationPreviewShared(parsedHTML.getElementsByTagName('title')[0].textContent, [].slice.call(parsedHTML.getElementsByTagName('meta')).filter(function(e) {
 			if (e.name === 'description') {
 				return true;
 			}
