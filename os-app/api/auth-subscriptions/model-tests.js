@@ -113,6 +113,24 @@ describe('WKCModelInputDataIsSubscriptionObject', function testWKCModelInputData
 
 	});
 
+	context('WKCSubscriptionFetchDate', function() {
+
+		it('returns false with WKCErrors if not date', function() {
+			var item = {
+				WKCSubscriptionURL: 'https://google.com',
+				WKCSubscriptionFetchDate: new Date('alfa'),
+			};
+
+			assert.strictEqual(modelLibrary.WKCModelInputDataIsSubscriptionObject(item), false);
+			assert.deepEqual(item.WKCErrors, {
+				WKCSubscriptionFetchDate: [
+					'WKCErrorNotDate',
+				],
+			});
+		});
+
+	});
+
 });
 
 describe('WKCSubscriptionHiddenPropertyNames', function testWKCSubscriptionHiddenPropertyNames() {

@@ -45,6 +45,14 @@ exports.WKCModelInputDataIsSubscriptionObject = function(inputData) {
 		}
 	}
 
+	if (inputData.WKCSubscriptionFetchDate) {
+		if (!(inputData.WKCSubscriptionFetchDate instanceof Date) || Number.isNaN(inputData.WKCSubscriptionFetchDate.getTime())) {
+			errors.WKCSubscriptionFetchDate = [
+				'WKCErrorNotDate',
+			];
+		}
+	}
+
 	if (Object.keys(errors).length) {
 		inputData.WKCErrors = errors;
 		
