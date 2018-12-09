@@ -43,10 +43,6 @@
 			WKCSubscriptionBlurb: d3.select('#WKCAppSubscriptionsConfirmationFormBlurb').node().value,
 			WKCSubscriptionFetchContent: d3.select('#WKCAppSubscriptionsConfirmationFormFetchData').node().value,
 			WKCSubscriptionFetchDate: new Date(),
-		}).then(function(responseJSON) {
-			console.log(responseJSON);
-		}, function(err) {
-			console.log(err);
 		});
 	};
 
@@ -165,8 +161,22 @@
 			},
 			body: JSON.stringify(subscriptionObject),
 		}).then(function(responseJSON) {
-			return Object.assign(subscriptionObject, responseJSON);
-		});
+			console.log(Object.assign(subscriptionObject, responseJSON));
+
+			moi.reactConfirmationVisibility(false);
+			moi.reactFetchFormVisibility(true);
+			moi.reactConfirmationPreviewPageAlternatives([]);
+			d3.select('#WKCAppSubscriptionsFormInput').property('value', '');
+			d3.select('#WKCAppSubscriptionsFormInput').node().focus();
+		}, moi.commandsAlertAddSubscriptionError);
+	};
+
+	//_ commandsAlertAddSubscriptionError
+
+	moi.commandsAlertAddSubscriptionError = function (error) {
+		window.alert('<%= OLSKLocalized('WKCSubscriptionsErrorAdd') %>');
+
+		throw error;
 	};
 
 	//# REACT
