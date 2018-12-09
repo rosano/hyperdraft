@@ -41,6 +41,8 @@
 			WKCSubscriptionURL: d3.select('#WKCAppSubscriptionsFormInput').node().value,
 			WKCSubscriptionName: d3.select('#WKCAppSubscriptionsConfirmationFormName').node().value,
 			WKCSubscriptionBlurb: d3.select('#WKCAppSubscriptionsConfirmationFormBlurb').node().value,
+			WKCSubscriptionFetchContent: d3.select('#WKCAppSubscriptionsConfirmationFormFetchData').node().value,
+			WKCSubscriptionFetchDate: new Date(),
 		}).then(function(responseJSON) {
 			console.log(responseJSON);
 		}, function(err) {
@@ -77,6 +79,8 @@
 		moi.reactConfirmationVisibility(false);
 
 		d3.text(inputData).then(function(data) {
+			moi.reactConfirmationFetchData(data);
+
 			var parsedXML = (new DOMParser()).parseFromString(data, 'application/xml');
 
 			if (!parsedXML.getElementsByTagName('parsererror').length && parsedXML.documentElement.getElementsByTagName('channel').length) {
@@ -183,6 +187,12 @@
 
 	moi.reactConfirmationVisibility = function (isVisible) {
 		d3.select('#WKCAppSubscriptionsConfirmation').classed('WKCAppSubscriptionsHidden', !isVisible);
+	};
+
+	//_ reactConfirmationFetchData
+
+	moi.reactConfirmationFetchData = function (inputData) {
+		d3.select('#WKCAppSubscriptionsConfirmationFormFetchData').node().value = inputData;
 	};
 
 	//_ reactConfirmationPreviewShared
