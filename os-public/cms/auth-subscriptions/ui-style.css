@@ -10,3 +10,10 @@ body {
 #WKCSubscriptionsLoader {
 	padding: 20px 0;
 }
+
+#WKCAppSubscriptionsConfirmationPreviewPageAlternatives {
+	padding: 10px;
+
+	border: 1px solid #408002;
+	background: #ccff66;
+}
