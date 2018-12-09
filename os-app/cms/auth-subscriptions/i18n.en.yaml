@@ -3,6 +3,9 @@ WKCSubscriptionsFetch: Fetch
 WKCSubscriptionsErrorFetch: Error fetching URL. Please check the input and try again.
 WKCSubscriptionsConfirmationAlternatives: 'Feeds found on this page:'
 WKCSubscriptionsConfirmationTitle: Confirm subscription
+WKCSubscriptionsConfirmationFeed: Feed
+WKCSubscriptionsConfirmationFile: File
+WKCSubscriptionsConfirmationPage: Page
 WKCSubscriptionsConfirmationNamePlaceholder: Name
 WKCSubscriptionsConfirmationBlurbPlaceholder: Description
 WKCSubscriptionsConfirmationSubmit: Add
