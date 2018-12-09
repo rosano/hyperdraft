@@ -34,6 +34,20 @@
 		moi.commandsFetchURL(d3.select('#WKCAppSubscriptionsFormInput').property('value'));
 	};
 
+	//_ interfaceConfirmationFormDidSubmit
+
+	moi.interfaceConfirmationFormDidSubmit = function () {
+		moi._commandsAddSubscription({
+			WKCSubscriptionURL: d3.select('#WKCAppSubscriptionsFormInput').node().value,
+			WKCSubscriptionName: d3.select('#WKCAppSubscriptionsConfirmationFormName').node().value,
+			WKCSubscriptionBlurb: d3.select('#WKCAppSubscriptionsConfirmationFormBlurb').node().value,
+		}).then(function(responseJSON) {
+			console.log(responseJSON);
+		}, function(err) {
+			console.log(err);
+		});
+	};
+
 	//# COMMANDS
 
 	//_ commandsAlertConnectionError
@@ -138,8 +152,8 @@
 
 	//_ _commandsAddSubscription
 
-	moi._commandsAddSubscription = function (subscriptionObject, resolve, reject) {
-		return resolve(d3.json('<%= OLSKCanonicalFor('WKCRouteAPISubscriptionsCreate') %>', {
+	moi._commandsAddSubscription = function (subscriptionObject) {
+		return d3.json('<%= OLSKCanonicalFor('WKCRouteAPISubscriptionsCreate') %>', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -147,8 +161,8 @@
 			},
 			body: JSON.stringify(subscriptionObject),
 		}).then(function(responseJSON) {
-			Object.assign(subscriptionObject, responseJSON);
-		}, reject));
+			return Object.assign(subscriptionObject, responseJSON);
+		});
 	};
 
 	//# REACT
