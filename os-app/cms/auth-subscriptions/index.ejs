@@ -25,6 +25,14 @@ locals.OLSKPageAssets = [
 	<input type="submit" value="<%= OLSKLocalized('WKCSubscriptionsFetch') %>">
 </form>
 
+<script type="text/javascript">
+	d3.select('#WKCAppSubscriptionsForm').on('submit', function() {
+		d3.event.preventDefault();
+		
+		WKSubscriptions.interfaceFetchFormDidSubmit();
+	});
+</script>
+
 <div id="WKCSubscriptionsLoader" class="WKCAppSubscriptionsHidden">
 	<div class="ispinner ispinner--gray ispinner--animating">
 	  <div class="ispinner__blade"></div>
@@ -76,13 +84,5 @@ locals.OLSKPageAssets = [
 		<pre id="WKCAppSubscriptionsConfirmationPreviewPageContent"></pre>
 	</section>
 </div>
-
-<script type="text/javascript">
-	d3.select('#WKCAppSubscriptionsForm').on('submit', function() {
-		d3.event.preventDefault();
-		
-		WKSubscriptions.interfaceFetchFormDidSubmit();
-	});
-</script>
 
 <%- include('../../_shared/WKCLayout/footer.ejs') %>

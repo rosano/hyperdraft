@@ -136,6 +136,21 @@
 		}).shift(), '<%= OLSKLocalized('WKCSubscriptionsConfirmationPage') %>');
 	};
 
+	//_ _commandsAddSubscription
+
+	moi._commandsAddSubscription = function (subscriptionObject, resolve, reject) {
+		return resolve(d3.json('<%= OLSKCanonicalFor('WKCRouteAPISubscriptionsCreate') %>', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'x-client-key': moi.propertiesAPIToken(),
+			},
+			body: JSON.stringify(subscriptionObject),
+		}).then(function(responseJSON) {
+			Object.assign(subscriptionObject, responseJSON);
+		}, reject));
+	};
+
 	//# REACT
 
 	//_ reactFetchFormVisibility
