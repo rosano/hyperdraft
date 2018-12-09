@@ -37,6 +37,14 @@ exports.WKCModelInputDataIsSubscriptionObject = function(inputData) {
 		}
 	}
 
+	if (inputData.WKCSubscriptionFetchContent) {
+		if (typeof inputData.WKCSubscriptionFetchContent !== 'string') {
+			errors.WKCSubscriptionFetchContent = [
+				'WKCErrorNotString',
+			];
+		}
+	}
+
 	if (Object.keys(errors).length) {
 		inputData.WKCErrors = errors;
 		

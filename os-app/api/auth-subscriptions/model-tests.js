@@ -95,6 +95,24 @@ describe('WKCModelInputDataIsSubscriptionObject', function testWKCModelInputData
 
 	});
 
+	context('WKCSubscriptionFetchContent', function() {
+
+		it('returns false with WKCErrors if not string', function() {
+			var item = {
+				WKCSubscriptionURL: 'https://google.com',
+				WKCSubscriptionFetchContent: 123
+			};
+
+			assert.strictEqual(modelLibrary.WKCModelInputDataIsSubscriptionObject(item), false);
+			assert.deepEqual(item.WKCErrors, {
+				WKCSubscriptionFetchContent: [
+					'WKCErrorNotString',
+				],
+			});
+		});
+
+	});
+
 });
 
 describe('WKCSubscriptionHiddenPropertyNames', function testWKCSubscriptionHiddenPropertyNames() {
