@@ -14,6 +14,9 @@
     "// PERSISTENCE": null,
     "mongodb": "^3.0.7",
 
+    "// PARSING": null,
+    "fast-xml-parser": "latest",
+
     "// FRONTEND": null,
     "normalize.css": "latest",
     "d3": "latest",
