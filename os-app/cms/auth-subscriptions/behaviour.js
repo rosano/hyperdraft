@@ -39,6 +39,7 @@
 	moi.interfaceConfirmationFormDidSubmit = function () {
 		moi._commandsAddSubscription({
 			WKCSubscriptionURL: d3.select('#WKCAppSubscriptionsFormInput').node().value,
+			WKCSubscriptionType: d3.select('#WKCAppSubscriptionsConfirmationFormType').node().value,
 			WKCSubscriptionName: d3.select('#WKCAppSubscriptionsConfirmationFormName').node().value,
 			WKCSubscriptionBlurb: d3.select('#WKCAppSubscriptionsConfirmationFormBlurb').node().value,
 			WKCSubscriptionFetchContent: d3.select('#WKCAppSubscriptionsConfirmationFormFetchData').node().value,
@@ -108,6 +109,8 @@
 	//_ commandsConfirmURLFeed
 
 	moi.commandsConfirmURLFeed = function (inputData, parsedXML) {
+		moi.reactConfirmationType('Feed');
+
 		moi.reactConfirmationPreviewFeedItems([].slice.call(parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('item')));
 		
 		moi.reactConfirmationPreviewShared(parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('title')[0].textContent.trim(), parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('description')[0].textContent.trim(), '<%= OLSKLocalized('WKCSubscriptionsConfirmationFeed') %>');
@@ -116,6 +119,8 @@
 	//_ commandsConfirmURLFile
 
 	moi.commandsConfirmURLFile = function (inputData, rawData) {
+		moi.reactConfirmationType('File');
+		
 		moi.reactConfirmationPreviewFile(rawData);
 
 		moi.reactConfirmationPreviewShared(inputData.match(/https?:\/\/(.*)/)[1], null, '<%= OLSKLocalized('WKCSubscriptionsConfirmationFile') %>');
@@ -124,6 +129,8 @@
 	//_ commandsConfirmURLPage
 
 	moi.commandsConfirmURLPage = function (inputData, parsedHTML) {
+		moi.reactConfirmationType('Page');
+		
 		moi.reactConfirmationPreviewPageAlternatives([].slice.call(parsedHTML.getElementsByTagName('link')).filter(function(e) {
 			return e.type.trim().toLowerCase() === 'application/rss+xml';
 		}).map(function(e) {
@@ -203,6 +210,12 @@
 
 	moi.reactConfirmationFetchData = function (inputData) {
 		d3.select('#WKCAppSubscriptionsConfirmationFormFetchData').node().value = inputData;
+	};
+
+	//_ reactConfirmationType
+
+	moi.reactConfirmationType = function (inputData) {
+		d3.select('#WKCAppSubscriptionsConfirmationFormType').node().value = inputData;
 	};
 
 	//_ reactConfirmationPreviewShared
