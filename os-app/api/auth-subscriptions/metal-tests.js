@@ -7,6 +7,12 @@
 var assert = require('assert');
 
 var metalLibrary = require('./metal');
+var modelLibrary = require('./model');
+
+const kTestingValidSubscription = {
+	WKCSubscriptionURL: 'https://google.com',
+	WKCSubscriptionType: modelLibrary.WKCSubscriptionTypePage(),
+};
 
 describe('WKCMetalSubscriptionsCreate', function testWKCMetalSubscriptionsCreate() {
 
@@ -25,6 +31,7 @@ describe('WKCMetalSubscriptionsCreate', function testWKCMetalSubscriptionsCreate
 	it('returns WKCErrors if not valid WKCSubscription', function(done) {
 		metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, {
 			WKCSubscriptionURL: 'google.com',
+			WKCSubscriptionType: modelLibrary.WKCSubscriptionTypePage(),
 		}, function(err, responseJSON) {
 			assert.deepEqual(responseJSON.WKCErrors, {
 				WKCSubscriptionURL: [
@@ -37,9 +44,7 @@ describe('WKCMetalSubscriptionsCreate', function testWKCMetalSubscriptionsCreate
 	});
 
 	it('returns WKCSubscription', function(done) {
-		metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, {
-			WKCSubscriptionURL: 'https://google.com',
-		}, function(err, responseJSON) {
+		metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, kTestingValidSubscription, function(err, responseJSON) {
 			assert.strictEqual(responseJSON._id, undefined);
 			assert.strictEqual(parseInt(responseJSON.WKCSubscriptionID) - (new Date()) > -200, true);
 			assert.strictEqual(responseJSON.WKCSubscriptionURL, 'https://google.com');
@@ -75,9 +80,7 @@ describe('WKCMetalSubscriptionsRead', function testWKCMetalSubscriptionsRead() {
 	});
 
 	it('returns WKCSubscription', function(done) {
-		metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, {
-			WKCSubscriptionURL: 'https://google.com',
-		}, function(err, subscriptionObject) {
+		metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, kTestingValidSubscription, function(err, subscriptionObject) {
 			metalLibrary.WKCMetalSubscriptionsRead(WKCTestingMongoClient, subscriptionObject.WKCSubscriptionID, function(err, responseJSON) {
 				assert.deepEqual(responseJSON, subscriptionObject);
 
@@ -109,9 +112,7 @@ describe('WKCMetalSubscriptionsUpdate', function testWKCMetalSubscriptionsUpdate
 	});
 
 	it('returns error if WKCSubscriptionID not found', function(done) {
-		metalLibrary.WKCMetalSubscriptionsUpdate(WKCTestingMongoClient, '0', {
-			WKCSubscriptionURL: 'https://google.com',
-		}, function(err) {
+		metalLibrary.WKCMetalSubscriptionsUpdate(WKCTestingMongoClient, '0', kTestingValidSubscription, function(err) {
 			assert.deepEqual(err, new Error('WKCErrorNotFound'));
 
 			done();
@@ -119,10 +120,9 @@ describe('WKCMetalSubscriptionsUpdate', function testWKCMetalSubscriptionsUpdate
 	});
 
 	it('returns WKCErrors if not valid WKCSubscription', function(done) {
-		metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, {
-			WKCSubscriptionURL: 'https://google.com',
-		}, function(err, subscriptionObject) {
+		metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, kTestingValidSubscription, function(err, subscriptionObject) {
 			metalLibrary.WKCMetalSubscriptionsUpdate(WKCTestingMongoClient, subscriptionObject.WKCSubscriptionID, {
+				WKCSubscriptionType: modelLibrary.WKCSubscriptionTypePage(),
 				WKCSubscriptionURL: 'google.com',
 			}, function(err, responseJSON) {
 				assert.deepEqual(responseJSON.WKCErrors, {
@@ -137,9 +137,7 @@ describe('WKCMetalSubscriptionsUpdate', function testWKCMetalSubscriptionsUpdate
 	});
 
 	it('returns WKCSubscription', function(done) {
-		metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, {
-			WKCSubscriptionURL: 'https://google.com',
-		}, function(err, subscriptionObject) {
+		metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, kTestingValidSubscription, function(err, subscriptionObject) {
 			metalLibrary.WKCMetalSubscriptionsUpdate(WKCTestingMongoClient, subscriptionObject.WKCSubscriptionID, {
 				WKCSubscriptionURL: 'https://yahoo.com',
 			}, function(err, responseJSON) {
@@ -174,9 +172,7 @@ describe('WKCMetalSubscriptionsDelete', function testWKCMetalSubscriptionsDelete
 	});
 
 	it('returns WKCSubscription', function(done) {
-		metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, {
-			WKCSubscriptionURL: 'https://google.com',
-		}, function(err, responseJSON) {
+		metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, kTestingValidSubscription, function(err, responseJSON) {
 			metalLibrary.WKCMetalSubscriptionsDelete(WKCTestingMongoClient, responseJSON.WKCSubscriptionID, function(err, responseJSON) {
 				assert.deepEqual(responseJSON, true);
 
@@ -198,6 +194,7 @@ describe('WKCMetalSubscriptionsSearch', function testWKCMetalSubscriptionsSearch
 	it('returns all if param2 empty', function(done) {
 		metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, {
 			WKCSubscriptionURL: 'https://alfa.com',
+			WKCSubscriptionType: modelLibrary.WKCSubscriptionTypePage(),
 		}, function(err, subscriptionObject) {
 			metalLibrary.WKCMetalSubscriptionsSearch(WKCTestingMongoClient, '', function(err, responseJSON) {
 				assert.deepEqual(responseJSON, [subscriptionObject]);

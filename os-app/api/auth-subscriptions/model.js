@@ -49,6 +49,12 @@ exports.WKCModelInputDataIsSubscriptionObject = function(inputData) {
 		];
 	}
 
+	if (exports.WKCSubscriptionTypes().indexOf(inputData.WKCSubscriptionType) === -1) {
+		errors.WKCSubscriptionType = [
+			'WKCErrorNotValid',
+		];
+	}
+
 	if (inputData.WKCSubscriptionName) {
 		if (typeof inputData.WKCSubscriptionName !== 'string') {
 			errors.WKCSubscriptionName = [

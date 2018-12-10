@@ -53,6 +53,7 @@ describe('WKCModelInputDataIsSubscriptionObject', function testWKCModelInputData
 	it('returns false with WKCErrors if WKCSubscriptionURL not string', function() {
 		var item = {
 			WKCSubscriptionURL: null,
+			WKCSubscriptionType: modelLibrary.WKCSubscriptionTypePage(),
 		};
 
 		assert.strictEqual(modelLibrary.WKCModelInputDataIsSubscriptionObject(item), false);
@@ -66,6 +67,7 @@ describe('WKCModelInputDataIsSubscriptionObject', function testWKCModelInputData
 	it('returns false with WKCErrors if WKCSubscriptionURL not filled', function() {
 		var item = {
 			WKCSubscriptionURL: '',
+			WKCSubscriptionType: modelLibrary.WKCSubscriptionTypePage(),
 		};
 
 		assert.strictEqual(modelLibrary.WKCModelInputDataIsSubscriptionObject(item), false);
@@ -79,6 +81,7 @@ describe('WKCModelInputDataIsSubscriptionObject', function testWKCModelInputData
 	it('returns false with WKCErrors if WKCSubscriptionURL not formatted', function() {
 		var item = {
 			WKCSubscriptionURL: 'google.com',
+			WKCSubscriptionType: modelLibrary.WKCSubscriptionTypePage(),
 		};
 
 		assert.strictEqual(modelLibrary.WKCModelInputDataIsSubscriptionObject(item), false);
@@ -89,9 +92,24 @@ describe('WKCModelInputDataIsSubscriptionObject', function testWKCModelInputData
 		});
 	});
 
+	it('returns false with WKCErrors if WKCSubscriptionType not valid', function() {
+		var item = {
+			WKCSubscriptionURL: 'https://google.com',
+			WKCSubscriptionType: 'alfa',
+		};
+
+		assert.strictEqual(modelLibrary.WKCModelInputDataIsSubscriptionObject(item), false);
+		assert.deepEqual(item.WKCErrors, {
+			WKCSubscriptionType: [
+				'WKCErrorNotValid',
+			],
+		});
+	});
+
 	it('returns true', function() {
 		assert.deepEqual(modelLibrary.WKCModelInputDataIsSubscriptionObject({
 			WKCSubscriptionURL: 'https://google.com',
+			WKCSubscriptionType: modelLibrary.WKCSubscriptionTypePage(),
 		}), true);
 	});
 
@@ -100,6 +118,7 @@ describe('WKCModelInputDataIsSubscriptionObject', function testWKCModelInputData
 		it('returns false with WKCErrors if not string', function() {
 			var item = {
 				WKCSubscriptionURL: 'https://google.com',
+				WKCSubscriptionType: modelLibrary.WKCSubscriptionTypePage(),
 				WKCSubscriptionName: 123
 			};
 
@@ -118,6 +137,7 @@ describe('WKCModelInputDataIsSubscriptionObject', function testWKCModelInputData
 		it('returns false with WKCErrors if not string', function() {
 			var item = {
 				WKCSubscriptionURL: 'https://google.com',
+				WKCSubscriptionType: modelLibrary.WKCSubscriptionTypePage(),
 				WKCSubscriptionBlurb: 123
 			};
 
@@ -136,6 +156,7 @@ describe('WKCModelInputDataIsSubscriptionObject', function testWKCModelInputData
 		it('returns false with WKCErrors if not string', function() {
 			var item = {
 				WKCSubscriptionURL: 'https://google.com',
+				WKCSubscriptionType: modelLibrary.WKCSubscriptionTypePage(),
 				WKCSubscriptionFetchContent: 123
 			};
 
@@ -154,6 +175,7 @@ describe('WKCModelInputDataIsSubscriptionObject', function testWKCModelInputData
 		it('returns false with WKCErrors if not date', function() {
 			var item = {
 				WKCSubscriptionURL: 'https://google.com',
+				WKCSubscriptionType: modelLibrary.WKCSubscriptionTypePage(),
 				WKCSubscriptionFetchDate: new Date('alfa'),
 			};
 
