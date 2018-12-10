@@ -9,9 +9,11 @@ var assert = require('assert');
 var metalLibrary = require('./metal');
 var modelLibrary = require('./model');
 
-const kTestingValidSubscription = {
-	WKCSubscriptionURL: 'https://google.com',
-	WKCSubscriptionType: modelLibrary.WKCSubscriptionTypePage(),
+const kTestingValidSubscription = function() {
+	return {
+		WKCSubscriptionURL: 'https://google.com',
+		WKCSubscriptionType: modelLibrary.WKCSubscriptionTypePage(),
+	};
 };
 
 describe('WKCMetalSubscriptionsCreate', function testWKCMetalSubscriptionsCreate() {
@@ -44,7 +46,7 @@ describe('WKCMetalSubscriptionsCreate', function testWKCMetalSubscriptionsCreate
 	});
 
 	it('returns WKCSubscription', function(done) {
-		metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, kTestingValidSubscription, function(err, responseJSON) {
+		metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, kTestingValidSubscription(), function(err, responseJSON) {
 			assert.strictEqual(responseJSON._id, undefined);
 			assert.strictEqual(parseInt(responseJSON.WKCSubscriptionID) - (new Date()) > -200, true);
 			assert.strictEqual(responseJSON.WKCSubscriptionURL, 'https://google.com');
@@ -80,7 +82,7 @@ describe('WKCMetalSubscriptionsRead', function testWKCMetalSubscriptionsRead() {
 	});
 
 	it('returns WKCSubscription', function(done) {
-		metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, kTestingValidSubscription, function(err, subscriptionObject) {
+		metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, kTestingValidSubscription(), function(err, subscriptionObject) {
 			metalLibrary.WKCMetalSubscriptionsRead(WKCTestingMongoClient, subscriptionObject.WKCSubscriptionID, function(err, responseJSON) {
 				assert.deepEqual(responseJSON, subscriptionObject);
 
@@ -112,7 +114,7 @@ describe('WKCMetalSubscriptionsUpdate', function testWKCMetalSubscriptionsUpdate
 	});
 
 	it('returns error if WKCSubscriptionID not found', function(done) {
-		metalLibrary.WKCMetalSubscriptionsUpdate(WKCTestingMongoClient, '0', kTestingValidSubscription, function(err) {
+		metalLibrary.WKCMetalSubscriptionsUpdate(WKCTestingMongoClient, '0', kTestingValidSubscription(), function(err) {
 			assert.deepEqual(err, new Error('WKCErrorNotFound'));
 
 			done();
@@ -120,7 +122,7 @@ describe('WKCMetalSubscriptionsUpdate', function testWKCMetalSubscriptionsUpdate
 	});
 
 	it('returns WKCErrors if not valid WKCSubscription', function(done) {
-		metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, kTestingValidSubscription, function(err, subscriptionObject) {
+		metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, kTestingValidSubscription(), function(err, subscriptionObject) {
 			metalLibrary.WKCMetalSubscriptionsUpdate(WKCTestingMongoClient, subscriptionObject.WKCSubscriptionID, {
 				WKCSubscriptionType: modelLibrary.WKCSubscriptionTypePage(),
 				WKCSubscriptionURL: 'google.com',
@@ -137,7 +139,7 @@ describe('WKCMetalSubscriptionsUpdate', function testWKCMetalSubscriptionsUpdate
 	});
 
 	it('returns WKCSubscription', function(done) {
-		metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, kTestingValidSubscription, function(err, subscriptionObject) {
+		metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, kTestingValidSubscription(), function(err, subscriptionObject) {
 			metalLibrary.WKCMetalSubscriptionsUpdate(WKCTestingMongoClient, subscriptionObject.WKCSubscriptionID, {
 				WKCSubscriptionURL: 'https://yahoo.com',
 			}, function(err, responseJSON) {
@@ -172,7 +174,7 @@ describe('WKCMetalSubscriptionsDelete', function testWKCMetalSubscriptionsDelete
 	});
 
 	it('returns WKCSubscription', function(done) {
-		metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, kTestingValidSubscription, function(err, responseJSON) {
+		metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, kTestingValidSubscription(), function(err, responseJSON) {
 			metalLibrary.WKCMetalSubscriptionsDelete(WKCTestingMongoClient, responseJSON.WKCSubscriptionID, function(err, responseJSON) {
 				assert.deepEqual(responseJSON, true);
 
