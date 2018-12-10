@@ -207,3 +207,32 @@ describe('WKCMetalSubscriptionsSearch', function testWKCMetalSubscriptionsSearch
 	});
 
 });
+
+describe('WKCMetalSubscriptionsNeedingFetch', function testWKCMetalSubscriptionsNeedingFetch() {
+
+	it('throws error if param2 not function', function() {
+		assert.throws(function() {
+			metalLibrary.WKCMetalSubscriptionsNeedingFetch(WKCTestingMongoClient, null);
+		}, /WKCErrorInvalidInput/);
+	});
+
+	it('returns subscriptionObjects with fetch date older than one hour', function(done) {
+		metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTestingValidSubscription(), {
+			WKCSubscriptionName: 'alfa',
+			WKCSubscriptionFetchDate: new Date(new Date() - 1000 * 60 * 60),
+		}), function(err, subscriptionObject) {
+			metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTestingValidSubscription(), {
+				WKCSubscriptionName: 'bravo',
+				WKCSubscriptionFetchDate: new Date(),
+			}), function(err, subscriptionObject) {
+				metalLibrary.WKCMetalSubscriptionsNeedingFetch(WKCTestingMongoClient, function(err, responseJSON) {
+					assert.strictEqual(responseJSON.length, 1);
+					assert.deepEqual(responseJSON.pop().WKCSubscriptionName, 'alfa');
+
+					done();
+				});
+			});
+		});
+	});
+
+});

@@ -164,3 +164,27 @@ exports.WKCMetalSubscriptionsSearch = function(databaseClient, inputData, comple
 		return completionHandler(null, items);
 	});
 };
+
+//_ WKCMetalSubscriptionsNeedingFetch
+
+exports.WKCMetalSubscriptionsNeedingFetch = function(databaseClient, completionHandler) {
+	if (typeof completionHandler !== 'function') {
+		throw new Error('WKCErrorInvalidInput');
+	}
+
+	return databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_subscriptions').find({
+		WKCSubscriptionFetchDate: {
+			'$lte': new Date(new Date() - 1000 * 60 * 60),
+		},
+	}).project(modelLibrary.WKCSubscriptionHiddenPropertyNames().reduce(function(hash, e) {
+		hash[e] = 0;
+		
+		return hash;
+	}, {})).toArray(function(err, items) {
+		if (err) {
+			return completionHandler(err);
+		}
+
+		return completionHandler(null, items);
+	});
+};
