@@ -24,6 +24,16 @@ exports.WKCSubscriptionTypePage = function() {
 	return 'Page';
 };
 
+//_ WKCSubscriptionTypes
+
+exports.WKCSubscriptionTypes = function() {
+	return [
+		exports.WKCSubscriptionTypeFeed(),
+		exports.WKCSubscriptionTypeFile(),
+		exports.WKCSubscriptionTypePage(),
+	];
+};
+
 //_ WKCModelInputDataIsSubscriptionObject
 
 exports.WKCModelInputDataIsSubscriptionObject = function(inputData) {

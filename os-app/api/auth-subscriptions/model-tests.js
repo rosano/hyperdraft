@@ -32,6 +32,18 @@ describe('WKCSubscriptionTypePage', function testWKCSubscriptionTypePage() {
 
 });
 
+describe('WKCSubscriptionTypes', function testWKCSubscriptionTypes() {
+
+	it('returns constant', function() {
+		assert.deepEqual(modelLibrary.WKCSubscriptionTypes(), [
+			modelLibrary.WKCSubscriptionTypeFeed(),
+			modelLibrary.WKCSubscriptionTypeFile(),
+			modelLibrary.WKCSubscriptionTypePage(),
+			]);
+	});
+
+});
+
 describe('WKCModelInputDataIsSubscriptionObject', function testWKCModelInputDataIsSubscriptionObject() {
 
 	it('returns false if not object', function() {
