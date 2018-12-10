@@ -34,6 +34,16 @@ exports.WKCSubscriptionTypes = function() {
 	];
 };
 
+//_ WKCModelSubscriptionPrepare
+
+exports.WKCModelSubscriptionPrepare = function(inputData) {
+	if (inputData.WKCSubscriptionFetchDate !== undefined) {
+		inputData.WKCSubscriptionFetchDate = new Date(inputData.WKCSubscriptionFetchDate);
+	}
+
+	return inputData;
+};
+
 //_ WKCModelInputDataIsSubscriptionObject
 
 exports.WKCModelInputDataIsSubscriptionObject = function(inputData) {

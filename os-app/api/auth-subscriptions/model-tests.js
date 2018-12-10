@@ -44,6 +44,22 @@ describe('WKCSubscriptionTypes', function testWKCSubscriptionTypes() {
 
 });
 
+describe('WKCModelSubscriptionPrepare', function testWKCModelSubscriptionPrepare() {
+
+	it('returns input', function() {
+		assert.deepEqual(modelLibrary.WKCModelSubscriptionPrepare({}), {});
+	});
+
+	it('returns input with WKCSubscriptionFetchDate as date', function() {
+		assert.deepEqual(modelLibrary.WKCModelSubscriptionPrepare({
+			WKCSubscriptionFetchDate: '2018-12-09T19:07:01.902Z',
+		}), {
+			WKCSubscriptionFetchDate: new Date('2018-12-09T19:07:01.902Z'),
+		});
+	});
+
+});
+
 describe('WKCModelInputDataIsSubscriptionObject', function testWKCModelInputDataIsSubscriptionObject() {
 
 	it('returns false if not object', function() {

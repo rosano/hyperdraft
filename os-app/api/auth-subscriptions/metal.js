@@ -17,7 +17,7 @@ exports.WKCMetalSubscriptionsCreate = function(databaseClient, inputData, comple
 		throw new Error('WKCErrorInvalidInput');
 	}
 
-	if (!modelLibrary.WKCModelInputDataIsSubscriptionObject(inputData)) {
+	if (!modelLibrary.WKCModelInputDataIsSubscriptionObject(modelLibrary.WKCModelSubscriptionPrepare(inputData))) {
 		return completionHandler(null, inputData);
 	}
 
