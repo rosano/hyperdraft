@@ -61,6 +61,10 @@ exports.WKCActionAPISubscriptionsCreate = function(req, res, next) {
 		if (err) {
 			throw err;
 		}
+
+		if (responseJSON.WKCErrors) {
+			res.status(400);
+		}
 		
 		return res.json(responseJSON);
 	});
@@ -84,6 +88,10 @@ exports.WKCActionAPISubscriptionsUpdate = function(req, res, next) {
 	return metalLibrary.WKCMetalSubscriptionsUpdate(req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, req.params.wkc_subscription_id, req.body, function(err, responseJSON) {
 		if (err) {
 			throw err;
+		}
+
+		if (responseJSON.WKCErrors) {
+			res.status(400);
 		}
 
 		return res.json(responseJSON);
