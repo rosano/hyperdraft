@@ -6,6 +6,24 @@
 
 var urlPackage = require('url');
 
+//_ WKCSubscriptionTypeFeed
+
+exports.WKCSubscriptionTypeFeed = function() {
+	return 'Feed';
+};
+
+//_ WKCSubscriptionTypeFile
+
+exports.WKCSubscriptionTypeFile = function() {
+	return 'File';
+};
+
+//_ WKCSubscriptionTypePage
+
+exports.WKCSubscriptionTypePage = function() {
+	return 'Page';
+};
+
 //_ WKCModelInputDataIsSubscriptionObject
 
 exports.WKCModelInputDataIsSubscriptionObject = function(inputData) {

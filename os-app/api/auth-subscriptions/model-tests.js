@@ -8,6 +8,30 @@ var assert = require('assert');
 
 var modelLibrary = require('./model');
 
+describe('WKCSubscriptionTypeFeed', function testWKCSubscriptionTypeFeed() {
+
+	it('returns constant', function() {
+		assert.strictEqual(modelLibrary.WKCSubscriptionTypeFeed(), 'Feed');
+	});
+
+});
+
+describe('WKCSubscriptionTypeFile', function testWKCSubscriptionTypeFile() {
+
+	it('returns constant', function() {
+		assert.strictEqual(modelLibrary.WKCSubscriptionTypeFile(), 'File');
+	});
+
+});
+
+describe('WKCSubscriptionTypePage', function testWKCSubscriptionTypePage() {
+
+	it('returns constant', function() {
+		assert.strictEqual(modelLibrary.WKCSubscriptionTypePage(), 'Page');
+	});
+
+});
+
 describe('WKCModelInputDataIsSubscriptionObject', function testWKCModelInputDataIsSubscriptionObject() {
 
 	it('returns false if not object', function() {
