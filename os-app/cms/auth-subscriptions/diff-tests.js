@@ -86,19 +86,19 @@ describe('_WKCDiffArticleBodyForFile', function test_WKCDiffArticleBodyForFile()
 		}, /WKCErrorInvalidInput/);
 	});
 
-	it('returns string if identical', function() {
+	it('returns identical if no change', function() {
 		assert.deepEqual(diffLibrary._WKCDiffArticleBodyForFile('alfa', 'alfa'), 'alfa');
 	});
 
-	it('returns string if character added', function() {
+	it('adds markup if character added', function() {
 		assert.deepEqual(diffLibrary._WKCDiffArticleBodyForFile('alfa', 'alfab'), 'alfa<ins>b</ins>');
 	});
 
-	it('returns string if character removed', function() {
+	it('adds markup if character removed', function() {
 		assert.deepEqual(diffLibrary._WKCDiffArticleBodyForFile('alfa', 'alf'), 'alf<del>a</del>');
 	});
 
-	it('returns string if character changed', function() {
+	it('adds markup if character changed', function() {
 		assert.deepEqual(diffLibrary._WKCDiffArticleBodyForFile('alfa', 'alfo'), 'alf<del>a</del><ins>o</ins>');
 	});
 
