@@ -23,6 +23,12 @@ exports.WKCModelInputDataIsArticleObject = function(inputData) {
 
 	var errors = {};
 
+	if (typeof inputData.WKCArticleSubscriptionID !== 'string' || !inputData.WKCArticleSubscriptionID) {
+		errors.WKCArticleSubscriptionID = [
+			'WKCErrorNotValid',
+		];
+	}
+
 	if (!(inputData.WKCArticlePublishDate instanceof Date) || Number.isNaN(inputData.WKCArticlePublishDate.getTime())) {
 		errors.WKCArticlePublishDate = [
 			'WKCErrorNotDate',

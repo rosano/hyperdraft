@@ -10,6 +10,7 @@ var metalLibrary = require('./metal');
 
 const kTestingValidArticle = function() {
 	return {
+		WKCArticleSubscriptionID: 'alfa',
 		WKCArticlePublishDate: new Date(),
 	};
 };
@@ -123,6 +124,7 @@ describe('WKCMetalArticlesUpdate', function testWKCMetalArticlesUpdate() {
 	it('returns WKCErrors if not valid WKCArticle', function(done) {
 		metalLibrary.WKCMetalArticlesCreate(WKCTestingMongoClient, kTestingValidArticle(), function(err, articleObject) {
 			metalLibrary.WKCMetalArticlesUpdate(WKCTestingMongoClient, articleObject.WKCArticleID, {
+				WKCArticleSubscriptionID: 'alfa',
 				WKCArticlePublishDate: new Date('alfa'),
 			}, function(err, responseJSON) {
 				assert.deepEqual(responseJSON.WKCErrors, {

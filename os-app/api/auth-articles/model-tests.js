@@ -8,6 +8,13 @@ var assert = require('assert');
 
 var modelLibrary = require('./model');
 
+const kTestingValidArticle = function() {
+	return {
+		WKCArticleSubscriptionID: 'alfa',
+		WKCArticlePublishDate: new Date(),
+	};
+};
+
 describe('WKCModelArticlePrepare', function testWKCModelArticlePrepare() {
 
 	it('returns input', function() {
@@ -30,10 +37,36 @@ describe('WKCModelInputDataIsArticleObject', function testWKCModelInputDataIsArt
 		assert.strictEqual(modelLibrary.WKCModelInputDataIsArticleObject(null), false);
 	});
 
+	it('returns false with WKCErrors if WKCArticleSubscriptionID not string', function() {
+		var item = Object.assign(kTestingValidArticle(), {
+			WKCArticleSubscriptionID: null,
+		});
+
+		assert.strictEqual(modelLibrary.WKCModelInputDataIsArticleObject(item), false);
+		assert.deepEqual(item.WKCErrors, {
+			WKCArticleSubscriptionID: [
+				'WKCErrorNotValid',
+			],
+		});
+	});
+
+	it('returns false with WKCErrors if WKCArticleSubscriptionID not blank', function() {
+		var item = Object.assign(kTestingValidArticle(), {
+			WKCArticleSubscriptionID: '',
+		});
+
+		assert.strictEqual(modelLibrary.WKCModelInputDataIsArticleObject(item), false);
+		assert.deepEqual(item.WKCErrors, {
+			WKCArticleSubscriptionID: [
+				'WKCErrorNotValid',
+			],
+		});
+	});
+
 	it('returns false with WKCErrors if WKCArticlePublishDate not date', function() {
-		var item = {
+		var item = Object.assign(kTestingValidArticle(), {
 			WKCArticlePublishDate: new Date('alfa'),
-		};
+		});
 
 		assert.strictEqual(modelLibrary.WKCModelInputDataIsArticleObject(item), false);
 		assert.deepEqual(item.WKCErrors, {
@@ -46,10 +79,9 @@ describe('WKCModelInputDataIsArticleObject', function testWKCModelInputDataIsArt
 	context('WKCArticleTitle', function() {
 
 		it('returns false with WKCErrors if not string', function() {
-			var item = {
-				WKCArticlePublishDate: new Date(),
+			var item = Object.assign(kTestingValidArticle(), {
 				WKCArticleTitle: 123
-			};
+			});
 
 			assert.strictEqual(modelLibrary.WKCModelInputDataIsArticleObject(item), false);
 			assert.deepEqual(item.WKCErrors, {
@@ -64,10 +96,9 @@ describe('WKCModelInputDataIsArticleObject', function testWKCModelInputDataIsArt
 	context('WKCArticleBody', function() {
 
 		it('returns false with WKCErrors if not string', function() {
-			var item = {
-				WKCArticlePublishDate: new Date(),
+			var item = Object.assign(kTestingValidArticle(), {
 				WKCArticleBody: 123
-			};
+			});
 
 			assert.strictEqual(modelLibrary.WKCModelInputDataIsArticleObject(item), false);
 			assert.deepEqual(item.WKCErrors, {
