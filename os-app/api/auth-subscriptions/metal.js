@@ -173,9 +173,16 @@ exports.WKCMetalSubscriptionsNeedingFetch = function(databaseClient, completionH
 	}
 
 	return databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_subscriptions').find({
-		WKCSubscriptionFetchDate: {
-			'$lte': new Date(new Date() - 1000 * 60 * 60),
-		},
+		'$or': [
+			{
+				WKCSubscriptionFetchDate: {
+					'$lte': new Date(new Date() - 1000 * 60 * 60),
+				},
+			},
+			{
+				WKCSubscriptionFetchDate: null,
+			},
+			],
 	}).project(modelLibrary.WKCSubscriptionHiddenPropertyNames().reduce(function(hash, e) {
 		hash[e] = 0;
 		
