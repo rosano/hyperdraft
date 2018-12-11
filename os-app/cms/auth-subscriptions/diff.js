@@ -16,7 +16,7 @@ showdownPackage.setOption('noHeaderId', true);
 
 exports.WKCDiffArticlesForFeed = function(oldString, newString) {
 	var oldIDs = (!oldString ? [] : parserPackage.parse(oldString).rss.channel.item).map(function(e) {
-		return e.guid;
+		return e.guid.toString();
 	});
 	var newItems = parserPackage.parse(newString);
 
@@ -41,6 +41,8 @@ exports.WKCDiffArticlesForFeed = function(oldString, newString) {
 	}
 
 	return newItems.filter(function(e) {
+		e.guid = e.guid.toString();
+
 		return oldIDs.indexOf(e.guid) === -1;
 	}).map(function(e) {
 		return {

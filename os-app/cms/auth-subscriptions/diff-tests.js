@@ -47,15 +47,19 @@ describe('WKCDiffArticlesForFeed', function testWKCDiffArticlesForFeed() {
 	});
 
 	it('populates article title', function() {
-		assert.deepEqual(diffLibrary.WKCDiffArticlesForFeed(null, kTests.kTestsRSSComplete()).pop().WKCArticleTitle, 'alfa');
+		assert.strictEqual(diffLibrary.WKCDiffArticlesForFeed(null, kTests.kTestsRSSComplete()).pop().WKCArticleTitle, 'alfa');
 	});
 
 	it('populates article link', function() {
-		assert.deepEqual(diffLibrary.WKCDiffArticlesForFeed(null, kTests.kTestsRSSComplete()).pop().WKCArticleOriginalURL, 'https://www.cbc.ca/bravo');
+		assert.strictEqual(diffLibrary.WKCDiffArticlesForFeed(null, kTests.kTestsRSSComplete()).pop().WKCArticleOriginalURL, 'https://www.cbc.ca/bravo');
 	});
 
 	it('populates article guid', function() {
-		assert.deepEqual(diffLibrary.WKCDiffArticlesForFeed(null, kTests.kTestsRSSComplete()).pop().WKCArticleOriginalGUID, 'charlie');
+		assert.strictEqual(diffLibrary.WKCDiffArticlesForFeed(null, kTests.kTestsRSSComplete()).pop().WKCArticleOriginalGUID, 'charlie');
+	});
+
+	it('populates article guid as string', function() {
+		assert.strictEqual(diffLibrary.WKCDiffArticlesForFeed(null, kTests.kTestsRSSComplete().replace('charlie', '12345')).pop().WKCArticleOriginalGUID, '12345');
 	});
 
 	it('populates article date', function() {
@@ -63,11 +67,11 @@ describe('WKCDiffArticlesForFeed', function testWKCDiffArticlesForFeed() {
 	});
 
 	it('populates article author', function() {
-		assert.deepEqual(diffLibrary.WKCDiffArticlesForFeed(null, kTests.kTestsRSSComplete()).pop().WKCArticleAuthor, 'delta');
+		assert.strictEqual(diffLibrary.WKCDiffArticlesForFeed(null, kTests.kTestsRSSComplete()).pop().WKCArticleAuthor, 'delta');
 	});
 
 	it('populates article body', function() {
-		assert.deepEqual(diffLibrary.WKCDiffArticlesForFeed(null, kTests.kTestsRSSComplete()).pop().WKCArticleBody, '<p>echo</p>');
+		assert.strictEqual(diffLibrary.WKCDiffArticlesForFeed(null, kTests.kTestsRSSComplete()).pop().WKCArticleBody, '<p>echo</p>');
 	});
 
 });
