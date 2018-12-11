@@ -6,7 +6,11 @@
 
 const parserPackage = require('fast-xml-parser');
 const diffPackage = require('diff');
-const htmlEntitiesPackage = new (require('html-entities').AllHtmlEntities)();
+var htmlEntitiesPackage = require('html-entities');
+htmlEntitiesPackage = new (htmlEntitiesPackage.AllHtmlEntities)();
+var showdownPackage = require('showdown');
+showdownPackage = new showdownPackage.Converter();
+showdownPackage.setOption('noHeaderId', true);
 
 //_ WKCDiffArticlesForFeed
 
@@ -94,3 +98,46 @@ exports.WKCDiffArticlesForFile = function(oldString, newString) {
 	}];
 };
 
+//_ _WKCDiffArticleBodyForPage
+
+exports._WKCDiffArticleBodyForPage = function(oldString, newString) {
+	if (typeof oldString !== 'string') {
+		throw new Error('WKCErrorInvalidInput');
+	}
+	
+	if (typeof newString !== 'string') {
+		throw new Error('WKCErrorInvalidInput');
+	}
+	
+	return diffPackage.diffChars(showdownPackage.makeHtml(oldString), showdownPackage.makeHtml(newString)).map(function(e) {
+		if (e.added === true) {
+			return [
+				'<ins>',
+				e.value,
+				'</ins>',
+			].join('');
+		}
+
+		if (e.removed === true) {
+			return [
+				'<del>',
+				e.value,
+				'</del>',
+			].join('');
+		}
+
+		return e.value;
+	}).join('');
+};
+
+//_ WKCDiffArticlesForPage
+
+exports.WKCDiffArticlesForPage = function(oldString, newString) {
+	if (oldString === newString) {
+		return [];
+	}
+
+	return [{
+		WKCArticleBody: exports._WKCDiffArticleBodyForPage(oldString, newString),
+	}];
+};

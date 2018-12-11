@@ -14,6 +14,7 @@ function install() {
 		'OLSKTasks',
 		'ispinner.css',
 		'turndown',
+		'showdown',
 	].map(function(e) {
 		return [
 			[

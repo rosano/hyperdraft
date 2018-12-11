@@ -20,13 +20,15 @@
     "// DIFFS": null,
     "diff": "latest",
     "html-entities": "latest",
+    "showdown": "latest",
 
     "// FRONTEND": null,
     "normalize.css": "latest",
     "d3": "latest",
     "OLSKTasks": "olsk/OLSKTasks",
     "ispinner.css": "latest",
-    "turndown": "latest"
+    "turndown": "latest",
+    "showdown": "latest"
   },
   "devDependencies": {
     "gulp": "4.0",

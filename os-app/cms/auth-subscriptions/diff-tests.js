@@ -123,3 +123,51 @@ describe('WKCDiffArticlesForFile', function testWKCDiffArticlesForFile() {
 	});
 
 });
+
+describe('_WKCDiffArticleBodyForPage', function test_WKCDiffArticleBodyForPage() {
+
+	it('throws error if param1 not string', function() {
+		assert.throws(function() {
+			diffLibrary._WKCDiffArticleBodyForPage(null, 'alfa');
+		}, /WKCErrorInvalidInput/);
+	});
+
+	it('throws error if param2 not string', function() {
+		assert.throws(function() {
+			diffLibrary._WKCDiffArticleBodyForPage('alfa', null);
+		}, /WKCErrorInvalidInput/);
+	});
+
+	it('returns identical if no change', function() {
+		assert.deepEqual(diffLibrary._WKCDiffArticleBodyForPage('# alfa', '# alfa'), '<h1>alfa</h1>');
+	});
+
+	it('adds markup if character added', function() {
+		assert.deepEqual(diffLibrary._WKCDiffArticleBodyForPage('# alfa', '# alfab'), '<h1>alfa<ins>b</ins></h1>');
+	});
+
+	it('adds markup if character removed', function() {
+		assert.deepEqual(diffLibrary._WKCDiffArticleBodyForPage('# alfa', '# alf'), '<h1>alf<del>a</del></h1>');
+	});
+
+	it('adds markup if character changed', function() {
+		assert.deepEqual(diffLibrary._WKCDiffArticleBodyForPage('# alfa', '# alfo'), '<h1>alf<del>a</del><ins>o</ins></h1>');
+	});
+
+});
+
+describe('WKCDiffArticlesForPage', function testWKCDiffArticlesForPage() {
+
+	it('returns none if identical', function() {
+		assert.deepEqual(diffLibrary.WKCDiffArticlesForPage('alfa', 'alfa'), []);
+	});
+
+	it('returns one if not identical', function() {
+		assert.deepEqual(diffLibrary.WKCDiffArticlesForPage('# alfa', '# alfo').map(function(e) {
+			return e.WKCArticleBody;
+		}), [
+			'<h1>alf<del>a</del><ins>o</ins></h1>'
+		]);
+	});
+
+});
