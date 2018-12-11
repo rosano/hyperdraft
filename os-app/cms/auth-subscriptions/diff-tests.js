@@ -78,16 +78,14 @@ describe('WKCDiffArticlesForFeed', function testWKCDiffArticlesForFeed() {
 
 describe('_WKCDiffArticleBodyForFile', function test_WKCDiffArticleBodyForFile() {
 
-	it('throws error if param1 not string', function() {
-		assert.throws(function() {
-			diffLibrary._WKCDiffArticleBodyForFile(null, 'alfa');
-		}, /WKCErrorInvalidInput/);
-	});
-
 	it('throws error if param2 not string', function() {
 		assert.throws(function() {
 			diffLibrary._WKCDiffArticleBodyForFile('alfa', null);
 		}, /WKCErrorInvalidInput/);
+	});
+
+	it('returns all if param1 null', function() {
+		assert.deepEqual(diffLibrary._WKCDiffArticleBodyForFile(null, 'alfa'), '<ins>alfa</ins>');
 	});
 
 	it('returns identical if no change', function() {
@@ -130,16 +128,14 @@ describe('WKCDiffArticlesForFile', function testWKCDiffArticlesForFile() {
 
 describe('_WKCDiffArticleBodyForPage', function test_WKCDiffArticleBodyForPage() {
 
-	it('throws error if param1 not string', function() {
-		assert.throws(function() {
-			diffLibrary._WKCDiffArticleBodyForPage(null, 'alfa');
-		}, /WKCErrorInvalidInput/);
-	});
-
 	it('throws error if param2 not string', function() {
 		assert.throws(function() {
 			diffLibrary._WKCDiffArticleBodyForPage('alfa', null);
 		}, /WKCErrorInvalidInput/);
+	});
+
+	it('returns all if param1 null', function() {
+		assert.deepEqual(diffLibrary._WKCDiffArticleBodyForPage(null, '# alfa'), '<ins><h1>alfa</h1></ins>');
 	});
 
 	it('returns identical if no change', function() {

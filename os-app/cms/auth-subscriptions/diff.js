@@ -59,15 +59,11 @@ exports.WKCDiffArticlesForFeed = function(oldString, newString) {
 //_ _WKCDiffArticleBodyForFile
 
 exports._WKCDiffArticleBodyForFile = function(oldString, newString) {
-	if (typeof oldString !== 'string') {
-		throw new Error('WKCErrorInvalidInput');
-	}
-	
 	if (typeof newString !== 'string') {
 		throw new Error('WKCErrorInvalidInput');
 	}
 	
-	return diffPackage.diffChars(htmlEntitiesPackage.encode(oldString), htmlEntitiesPackage.encode(newString)).map(function(e) {
+	return diffPackage.diffChars(htmlEntitiesPackage.encode(oldString || ''), htmlEntitiesPackage.encode(newString)).map(function(e) {
 		if (e.added === true) {
 			return [
 				'<ins>',
@@ -103,15 +99,11 @@ exports.WKCDiffArticlesForFile = function(oldString, newString) {
 //_ _WKCDiffArticleBodyForPage
 
 exports._WKCDiffArticleBodyForPage = function(oldString, newString) {
-	if (typeof oldString !== 'string') {
-		throw new Error('WKCErrorInvalidInput');
-	}
-	
 	if (typeof newString !== 'string') {
 		throw new Error('WKCErrorInvalidInput');
 	}
 	
-	return diffPackage.diffChars(showdownPackage.makeHtml(oldString), showdownPackage.makeHtml(newString)).map(function(e) {
+	return diffPackage.diffChars(showdownPackage.makeHtml(oldString || ''), showdownPackage.makeHtml(newString)).map(function(e) {
 		if (e.added === true) {
 			return [
 				'<ins>',
