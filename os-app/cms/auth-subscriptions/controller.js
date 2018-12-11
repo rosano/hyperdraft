@@ -38,9 +38,27 @@ exports.WKCTaskSubscriptionsFetch = function() {
 					return;
 				}
 
-				return responseJSON.forEach(function(subscriptionObject) {
+				responseJSON.forEach(function(subscriptionObject) {
 					requestPackage.get(subscriptionObject.WKCSubscriptionURL, function(err, res, body) {
-						var completionHandler = function() {
+						var articleObjects = [];
+
+						if (subscriptionObject.WKCSubscriptionType === 'Feed') {
+							articleObjects = articleObjects.concat(diffLibrary.WKCDiffArticlesForFeed(subscriptionObject.WKCSubscriptionFetchContent, body));
+						}
+
+						if (subscriptionObject.WKCSubscriptionType === 'File') {
+							articleObjects = articleObjects.concat(diffLibrary.WKCDiffArticlesForFile(subscriptionObject.WKCSubscriptionFetchContent, body));
+						}
+
+						return Promise.all(articleObjects.map(function(e) {
+							return new Promise(function(resolve, reject) {
+								apiArticlesMetal.WKCMetalArticlesCreate(callbackInput.OLSKLive.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, Object.assign(e, {
+									WKCArticleSubscriptionID: subscriptionObject.WKCSubscriptionID,
+								}), function(err, responseJSON) {
+									return err ? reject(err) : resolve();
+								});
+							});
+						})).then(function() {
 							apiSubscriptionsMetal.WKCMetalSubscriptionsUpdate(callbackInput.OLSKLive.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, subscriptionObject.WKCSubscriptionID, Object.assign(subscriptionObject, {
 									WKCSubscriptionFetchContent: body,
 									WKCSubscriptionFetchDate: new Date(),
@@ -49,21 +67,9 @@ exports.WKCTaskSubscriptionsFetch = function() {
 									return console.log(err);
 								}
 							});
-						};
-
-						if (subscriptionObject.WKCSubscriptionType === 'Feed') {
-							return Promise.all(diffLibrary.WKCDiffArticlesForFeed(subscriptionObject.WKCSubscriptionFetchContent, body).map(function(e) {
-								return new Promise(function(resolve, reject) {
-									apiArticlesMetal.WKCMetalArticlesCreate(callbackInput.OLSKLive.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, Object.assign(e, {
-										WKCArticleSubscriptionID: subscriptionObject.WKCSubscriptionID,
-									}), function(err, responseJSON) {
-										return err ? reject(err) : resolve();
-									});
-								});
-							})).then(completionHandler, function(err) {
-								console.log(err);
-							});
-						}
+						}, function(err) {
+							console.log(err);
+						});
 					});
 				});
 			});
