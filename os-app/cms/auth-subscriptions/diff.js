@@ -93,6 +93,7 @@ exports.WKCDiffArticlesForFile = function(oldString, newString) {
 
 	return [{
 		WKCArticleBody: exports._WKCDiffArticleBodyForFile(oldString, newString),
+		WKCArticlePublishDate: new Date(),
 	}];
 };
 
@@ -133,5 +134,6 @@ exports.WKCDiffArticlesForPage = function(oldString, newString) {
 
 	return [{
 		WKCArticleBody: exports._WKCDiffArticleBodyForPage(oldString, newString),
+		WKCArticlePublishDate: new Date(),
 	}];
 };

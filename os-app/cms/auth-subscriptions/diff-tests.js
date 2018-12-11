@@ -124,6 +124,14 @@ describe('WKCDiffArticlesForFile', function testWKCDiffArticlesForFile() {
 		]);
 	});
 
+	it('populates article date', function() {
+		assert.strictEqual(diffLibrary.WKCDiffArticlesForFile('alfa', 'alfo').pop().WKCArticlePublishDate - (new Date()) < 100, true);
+	});
+
+	it('populates article body', function() {
+		assert.strictEqual(diffLibrary.WKCDiffArticlesForFile('alfa', 'alfo').pop().WKCArticleBody, 'alf<del>a</del><ins>o</ins>');
+	});
+
 });
 
 describe('_WKCDiffArticleBodyForPage', function test_WKCDiffArticleBodyForPage() {
@@ -159,7 +167,7 @@ describe('_WKCDiffArticleBodyForPage', function test_WKCDiffArticleBodyForPage()
 describe('WKCDiffArticlesForPage', function testWKCDiffArticlesForPage() {
 
 	it('returns none if identical', function() {
-		assert.deepEqual(diffLibrary.WKCDiffArticlesForPage('alfa', 'alfa'), []);
+		assert.deepEqual(diffLibrary.WKCDiffArticlesForPage('# alfa', '# alfa'), []);
 	});
 
 	it('returns one if not identical', function() {
@@ -168,6 +176,14 @@ describe('WKCDiffArticlesForPage', function testWKCDiffArticlesForPage() {
 		}), [
 			'<h1>alf<del>a</del><ins>o</ins></h1>'
 		]);
+	});
+
+	it('populates article date', function() {
+		assert.strictEqual(diffLibrary.WKCDiffArticlesForPage('# alfa', '# alfo').pop().WKCArticlePublishDate - (new Date()) < 100, true);
+	});
+
+	it('populates article body', function() {
+		assert.strictEqual(diffLibrary.WKCDiffArticlesForPage('# alfa', '# alfo').pop().WKCArticleBody, '<h1>alf<del>a</del><ins>o</ins></h1>');
 	});
 
 });
