@@ -28,6 +28,10 @@ exports.WKCDiffArticlesForFeed = function(oldString, newString) {
 		return [];
 	}
 
+	if (typeof newItems === 'object' && !!newItems.guid) {
+		newItems = [newItems]
+	}
+
 	if (!Array.isArray(newItems)) {
 		return [];
 	}
@@ -37,6 +41,11 @@ exports.WKCDiffArticlesForFeed = function(oldString, newString) {
 	}).map(function(e) {
 		return {
 			WKCArticleTitle: e.title,
+			WKCArticleOriginalURL: e.link,
+			WKCArticleOriginalGUID: e.guid,
+			WKCArticlePublishDate: new Date(e.pubDate),
+			WKCArticleAuthor: e.author,
+			WKCArticleBody: e.description.trim(),
 		};
 	});
 };
@@ -81,7 +90,6 @@ exports.WKCDiffArticlesForFile = function(oldString, newString) {
 	}
 
 	return [{
-		WKCArticleTitle: null,
 		WKCArticleBody: exports._WKCDiffArticleBodyForFile(oldString, newString),
 	}];
 };

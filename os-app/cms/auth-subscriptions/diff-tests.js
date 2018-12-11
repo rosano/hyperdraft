@@ -15,6 +15,12 @@ const kTests = {
 	kTestsRSSValid: function() {
 		return '<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><item><title>bravo</title><guid>bravo</guid><description></description></item><item><title>alfa</title><guid>alfa</guid><description></description></item></channel></rss>';
 	},
+	kTestsRSSComplete: function() {
+		return '<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><item><title>alfa</title><link>https://www.cbc.ca/bravo</link><guid isPermaLink="false">charlie</guid><pubDate>Fri, 7 Dec 2018 10:03:15 EST</pubDate><author>delta</author><description><![CDATA[\
+                        <p>echo</p>\
+        ]]>\
+        </description></item></channel></rss>';
+	},
 };
 
 describe('WKCDiffArticlesForFeed', function testWKCDiffArticlesForFeed() {
@@ -38,6 +44,30 @@ describe('WKCDiffArticlesForFeed', function testWKCDiffArticlesForFeed() {
 		}), [
 			'charlie',
 		]);
+	});
+
+	it('populates article title', function() {
+		assert.deepEqual(diffLibrary.WKCDiffArticlesForFeed(null, kTests.kTestsRSSComplete()).pop().WKCArticleTitle, 'alfa');
+	});
+
+	it('populates article link', function() {
+		assert.deepEqual(diffLibrary.WKCDiffArticlesForFeed(null, kTests.kTestsRSSComplete()).pop().WKCArticleOriginalURL, 'https://www.cbc.ca/bravo');
+	});
+
+	it('populates article guid', function() {
+		assert.deepEqual(diffLibrary.WKCDiffArticlesForFeed(null, kTests.kTestsRSSComplete()).pop().WKCArticleOriginalGUID, 'charlie');
+	});
+
+	it('populates article date', function() {
+		assert.deepEqual(diffLibrary.WKCDiffArticlesForFeed(null, kTests.kTestsRSSComplete()).pop().WKCArticlePublishDate, new Date('2018-12-07T15:03:15.000Z'));
+	});
+
+	it('populates article author', function() {
+		assert.deepEqual(diffLibrary.WKCDiffArticlesForFeed(null, kTests.kTestsRSSComplete()).pop().WKCArticleAuthor, 'delta');
+	});
+
+	it('populates article body', function() {
+		assert.deepEqual(diffLibrary.WKCDiffArticlesForFeed(null, kTests.kTestsRSSComplete()).pop().WKCArticleBody, '<p>echo</p>');
 	});
 
 });
