@@ -41,3 +41,55 @@ describe('WKCDiffArticlesForFeed', function testWKCDiffArticlesForFeed() {
 	});
 
 });
+
+describe('_WKCDiffArticleBodyForFile', function test_WKCDiffArticleBodyForFile() {
+
+	it('throws error if param1 not string', function() {
+		assert.throws(function() {
+			diffLibrary._WKCDiffArticleBodyForFile(null, 'alfa');
+		}, /WKCErrorInvalidInput/);
+	});
+
+	it('throws error if param2 not string', function() {
+		assert.throws(function() {
+			diffLibrary._WKCDiffArticleBodyForFile('alfa', null);
+		}, /WKCErrorInvalidInput/);
+	});
+
+	it('returns string if identical', function() {
+		assert.deepEqual(diffLibrary._WKCDiffArticleBodyForFile('alfa', 'alfa'), 'alfa');
+	});
+
+	it('returns string if character added', function() {
+		assert.deepEqual(diffLibrary._WKCDiffArticleBodyForFile('alfa', 'alfab'), 'alfa<ins>b</ins>');
+	});
+
+	it('returns string if character removed', function() {
+		assert.deepEqual(diffLibrary._WKCDiffArticleBodyForFile('alfa', 'alf'), 'alf<del>a</del>');
+	});
+
+	it('returns string if character changed', function() {
+		assert.deepEqual(diffLibrary._WKCDiffArticleBodyForFile('alfa', 'alfo'), 'alf<del>a</del><ins>o</ins>');
+	});
+
+	it('escapes html tags', function() {
+		assert.deepEqual(diffLibrary._WKCDiffArticleBodyForFile('<b>alfa</b>', '<b>alfax</b>'), '&lt;b&gt;alfa<ins>x</ins>&lt;/b&gt;');
+	});
+
+});
+
+describe('WKCDiffArticlesForFile', function testWKCDiffArticlesForFile() {
+
+	it('returns none if identical', function() {
+		assert.deepEqual(diffLibrary.WKCDiffArticlesForFile('alfa', 'alfa'), []);
+	});
+
+	it('returns one if not identical', function() {
+		assert.deepEqual(diffLibrary.WKCDiffArticlesForFile('alfa', 'alfo').map(function(e) {
+			return e.WKCArticleBody;
+		}), [
+			'alf<del>a</del><ins>o</ins>'
+		]);
+	});
+
+});

@@ -17,6 +17,10 @@
     "// PARSING": null,
     "fast-xml-parser": "latest",
 
+    "// DIFFS": null,
+    "diff": "latest",
+    "html-entities": "latest",
+
     "// FRONTEND": null,
     "normalize.css": "latest",
     "d3": "latest",

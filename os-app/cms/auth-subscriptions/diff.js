@@ -4,15 +4,17 @@
  * MIT Licensed
  */
 
-var parserPackage = require('fast-xml-parser');
+const parserPackage = require('fast-xml-parser');
+const diffPackage = require('diff');
+const htmlEntitiesPackage = new (require('html-entities').AllHtmlEntities)();
 
 //_ WKCDiffArticlesForFeed
 
-exports.WKCDiffArticlesForFeed = function(oldContent, newContent) {
-	var oldIDs = (!oldContent ? [] : parserPackage.parse(oldContent).rss.channel.item).map(function(e) {
+exports.WKCDiffArticlesForFeed = function(oldString, newString) {
+	var oldIDs = (!oldString ? [] : parserPackage.parse(oldString).rss.channel.item).map(function(e) {
 		return e.guid;
 	});
-	var newItems = parserPackage.parse(newContent);
+	var newItems = parserPackage.parse(newString);
 
 	if (!(newItems = newItems.rss)) {
 		return [];
@@ -38,3 +40,49 @@ exports.WKCDiffArticlesForFeed = function(oldContent, newContent) {
 		};
 	});
 };
+
+//_ _WKCDiffArticleBodyForFile
+
+exports._WKCDiffArticleBodyForFile = function(oldString, newString) {
+	if (typeof oldString !== 'string') {
+		throw new Error('WKCErrorInvalidInput');
+	}
+	
+	if (typeof newString !== 'string') {
+		throw new Error('WKCErrorInvalidInput');
+	}
+	
+	return diffPackage.diffChars(htmlEntitiesPackage.encode(oldString), htmlEntitiesPackage.encode(newString)).map(function(e) {
+		if (e.added === true) {
+			return [
+				'<ins>',
+				e.value,
+				'</ins>',
+			].join('');
+		}
+
+		if (e.removed === true) {
+			return [
+				'<del>',
+				e.value,
+				'</del>',
+			].join('');
+		}
+
+		return e.value;
+	}).join('');
+};
+
+//_ WKCDiffArticlesForFile
+
+exports.WKCDiffArticlesForFile = function(oldString, newString) {
+	if (oldString === newString) {
+		return [];
+	}
+
+	return [{
+		WKCArticleTitle: null,
+		WKCArticleBody: exports._WKCDiffArticleBodyForFile(oldString, newString),
+	}];
+};
+
