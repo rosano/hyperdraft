@@ -11,13 +11,16 @@
     "// MARKDOWN": null,
     "marked": "latest",
 
-    "// PERSISTENCE": null,
+    "// PERSIST": null,
     "mongodb": "^3.0.7",
 
-    "// PARSING": null,
+    "// FETCH": null,
+    "request": "latest",
+
+    "// PARSE": null,
     "fast-xml-parser": "latest",
 
-    "// DIFFS": null,
+    "// DIFF": null,
     "diff": "latest",
     "html-entities": "latest",
     "showdown": "latest",
