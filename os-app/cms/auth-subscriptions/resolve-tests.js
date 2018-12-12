@@ -10,12 +10,6 @@ var resolveLibrary = require('./resolve');
 var jsDOMPackage = require('jsdom');
 const { JSDOM } = jsDOMPackage;
 
-const kTests = {
-	kTestsURLValid: function() {
-		return 'https://google.com';
-	},
-};
-
 describe('WKCResolveRelativeURLs', function testWKCResolveRelativeURLs() {
 
 	it('throws error if param1 not formatted', function() {
@@ -26,16 +20,32 @@ describe('WKCResolveRelativeURLs', function testWKCResolveRelativeURLs() {
 
 	it('throws error if param2 not string', function() {
 		assert.throws(function() {
-			resolveLibrary.WKCResolveRelativeURLs(kTests.kTestsURLValid(), null);
+			resolveLibrary.WKCResolveRelativeURLs('https://google.com', null);
 		}, /WKCErrorInvalidInput/);
 	});
 
-	it('resolves anchors', function() {
-		assert.strictEqual(resolveLibrary.WKCResolveRelativeURLs(kTests.kTestsURLValid(), '<a href="/alfa">bravo</a>'), '<a href="https://google.com/alfa">bravo</a>');
+	it('includes a href', function() {
+		assert.strictEqual(resolveLibrary.WKCResolveRelativeURLs('https://google.com', '<a href="/alfa">bravo</a>'), '<a href="https://google.com/alfa">bravo</a>');
 	});
 
-	it('resolves images', function() {
-		assert.strictEqual(resolveLibrary.WKCResolveRelativeURLs(kTests.kTestsURLValid(), '<img src="/alfa">'), '<img src="https://google.com/alfa">');
+	it('includes img src', function() {
+		assert.strictEqual(resolveLibrary.WKCResolveRelativeURLs('https://google.com', '<img src="/alfa">'), '<img src="https://google.com/alfa">');
+	});
+
+	it('ignores anchors', function() {
+		assert.strictEqual(resolveLibrary.WKCResolveRelativeURLs('https://google.com', '<a href="#alfa">bravo</a>'), '<a href="about:blank#alfa">bravo</a>');
+	});
+
+	it('resolves queries', function() {
+		assert.strictEqual(resolveLibrary.WKCResolveRelativeURLs('https://google.com', '<a href="?alfa">bravo</a>'), '<a href="https://google.com/?alfa">bravo</a>');
+	});
+
+	it('resolves non-trailing slash', function() {
+		assert.strictEqual(resolveLibrary.WKCResolveRelativeURLs('https://google.com/charlie', '<a href="alfa">bravo</a>'), '<a href="https://google.com/alfa">bravo</a>');
+	});
+
+	it('resolves file page', function() {
+		assert.strictEqual(resolveLibrary.WKCResolveRelativeURLs('https://google.com/charlie/delta.html', '<a href="alfa">bravo</a>'), '<a href="https://google.com/charlie/alfa">bravo</a>');
 	});
 
 });
