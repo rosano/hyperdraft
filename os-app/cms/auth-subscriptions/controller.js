@@ -9,6 +9,7 @@ const requestPackage = require('request');
 var apiSubscriptionsMetal = require('../../api/auth-subscriptions/metal');
 var apiArticlesMetal = require('../../api/auth-articles/metal');
 var diffLibrary = require('./diff');
+var resolveLibrary = require('./resolve');
 
 //_ OLSKControllerTasks
 
@@ -51,7 +52,11 @@ exports.WKCTaskSubscriptionsFetch = function() {
 						}
 
 						if (subscriptionObject.WKCSubscriptionType === 'Page') {
-							articleObjects = articleObjects.concat(diffLibrary.WKCDiffArticlesForPage(subscriptionObject.WKCSubscriptionFetchContent, body));
+							articleObjects = articleObjects.concat(diffLibrary.WKCDiffArticlesForPage(subscriptionObject.WKCSubscriptionFetchContent, body)).map(function(e) {
+								return Object.assign(e, {
+									WKCArticleBody: resolveLibrary.WKCResolveRelativeURLs(subscriptionObject.WKCSubscriptionURL, e.WKCArticleBody),
+								});
+							});
 						}
 
 						return Promise.all(articleObjects.map(function(e) {
