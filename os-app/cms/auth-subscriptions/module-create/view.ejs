@@ -1,0 +1,90 @@
+<script type="text/javascript">
+	<%- include('behaviour.js') %>
+</script>
+
+<script type="text/javascript">
+	WKSubscriptions.lifecyclePageWillLoad();
+</script>
+
+<div id="WKCSubscriptionsModuleCreate">
+	<form id="WKCAppSubscriptionsForm">
+		<input type="text" placeholder="http://…" autofocus id="WKCAppSubscriptionsFormInput">
+		<input type="submit" value="<%= OLSKLocalized('WKCSubscriptionsFetch') %>">
+	</form>
+
+	<script type="text/javascript">
+		d3.select('#WKCAppSubscriptionsForm').on('submit', function() {
+			d3.event.preventDefault();
+			
+			WKSubscriptions.interfaceFetchFormDidSubmit();
+		});
+	</script>
+
+	<div id="WKCSubscriptionsLoader" class="WKCAppSubscriptionsHidden">
+		<div class="ispinner ispinner--gray ispinner--animating">
+		  <div class="ispinner__blade"></div>
+		  <div class="ispinner__blade"></div>
+		  <div class="ispinner__blade"></div>
+		  <div class="ispinner__blade"></div>
+		  <div class="ispinner__blade"></div>
+		  <div class="ispinner__blade"></div>
+		  <div class="ispinner__blade"></div>
+		  <div class="ispinner__blade"></div>
+		  <div class="ispinner__blade"></div>
+		  <div class="ispinner__blade"></div>
+		  <div class="ispinner__blade"></div>
+		  <div class="ispinner__blade"></div>
+		</div>
+	</div>
+
+	<div id="WKCAppSubscriptionsConfirmation" class="WKCAppSubscriptionsHidden">
+		<div id="WKCAppSubscriptionsConfirmationPreviewPageAlternatives" class="WKCAppSubscriptionsHidden">
+			<p><%= OLSKLocalized('WKCSubscriptionsConfirmationAlternatives') %></p>
+			<ul></ul>
+		</div>
+
+		<h2><%= OLSKLocalized('WKCSubscriptionsConfirmationTitle') %></h2>
+
+		<form id="WKCAppSubscriptionsConfirmationForm">
+			<p>
+				<input type="text" placeholder="<%= OLSKLocalized('WKCSubscriptionsConfirmationNamePlaceholder') %>" id="WKCAppSubscriptionsConfirmationFormName">
+			</p>
+			
+			<p>
+				<textarea placeholder="<%= OLSKLocalized('WKCSubscriptionsConfirmationBlurbPlaceholder') %>" id="WKCAppSubscriptionsConfirmationFormBlurb"></textarea>
+			</p>
+			
+			<p>
+				<input type="text" hidden id="WKCAppSubscriptionsConfirmationFormType">
+			</p>
+			
+			<p>
+				<textarea hidden id="WKCAppSubscriptionsConfirmationFormFetchData"></textarea>
+			</p>
+
+			<input type="submit" value="<%= OLSKLocalized('WKCSubscriptionsConfirmationSubmit') %>">
+		</form>
+
+		<script type="text/javascript">
+			d3.select('#WKCAppSubscriptionsConfirmationForm').on('submit', function() {
+				d3.event.preventDefault();
+				
+				WKSubscriptions.interfaceConfirmationFormDidSubmit();
+			});
+		</script>
+
+		<h3><%= OLSKLocalized('WKCSubscriptionsConfirmationPreview') %> (<span id="WKCSubscriptionsConfirmationPreviewType"></span>)</h3>
+
+		<section id="WKCAppSubscriptionsConfirmationPreviewFeed">
+			<ul></ul>
+		</section>
+
+		<section id="WKCAppSubscriptionsConfirmationPreviewFile">
+			<pre></pre>
+		</section>
+
+		<section id="WKCAppSubscriptionsConfirmationPreviewPage">
+			<pre id="WKCAppSubscriptionsConfirmationPreviewPageContent"></pre>
+		</section>
+	</div>
+</div>
