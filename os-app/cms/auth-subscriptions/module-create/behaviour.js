@@ -31,14 +31,14 @@
 	//_ interfaceFetchFormDidSubmit
 
 	moi.interfaceFetchFormDidSubmit = function () {
-		moi.commandsFetchURL(d3.select('#WKCSubscriptionsModuleCreateFormInput').property('value'));
+		moi.commandsFetchURL(d3.select('#WKCSubscriptionsModuleCreateFetchFormInput').property('value'));
 	};
 
 	//_ interfaceConfirmationFormDidSubmit
 
 	moi.interfaceConfirmationFormDidSubmit = function () {
 		moi._commandsAddSubscription({
-			WKCSubscriptionURL: d3.select('#WKCSubscriptionsModuleCreateFormInput').node().value,
+			WKCSubscriptionURL: d3.select('#WKCSubscriptionsModuleCreateFetchFormInput').node().value,
 			WKCSubscriptionType: d3.select('#WKCSubscriptionsModuleCreateConfirmationFormType').node().value,
 			WKCSubscriptionName: d3.select('#WKCSubscriptionsModuleCreateConfirmationFormName').node().value,
 			WKCSubscriptionBlurb: d3.select('#WKCSubscriptionsModuleCreateConfirmationFormBlurb').node().value,
@@ -72,8 +72,8 @@
 			return;
 		}
 		
-		moi.reactConfirmationPreviewFeedItems([]);
-		moi.reactConfirmationPreviewPageAlternatives([]);
+		moi.reactPreviewFeedItems([]);
+		moi.reactAlternatives([]);
 
 		moi.reactFetchFormVisibility(true);
 		moi.reactFetchLoaderVisibility(true);
@@ -104,17 +104,17 @@
 			}
 
 			return moi.commandsConfirmURLPage(inputData, parsedHTML);
-		}).catch(moi.commandsAlertFetchError);
+		}).catch(moi.commandsFetchAlertError);
 	};
 
-	//_ commandsAlertFetchError
+	//_ commandsFetchAlertError
 
-	moi.commandsAlertFetchError = function (error) {
+	moi.commandsFetchAlertError = function (error) {
 		window.alert('<%= OLSKLocalized('WKCSubscriptionsModuleCreateErrorFetchText') %>');
 
 		moi.reactFetchLoaderVisibility(false);
 
-		d3.select('#WKCSubscriptionsModuleCreateFormInput').node().focus();
+		d3.select('#WKCSubscriptionsModuleCreateFetchFormInput').node().focus();
 
 		throw error;
 	};
@@ -124,9 +124,9 @@
 	moi.commandsConfirmURLFeed = function (inputData, parsedXML) {
 		moi.reactConfirmationType('Feed');
 
-		moi.reactConfirmationPreviewFeedItems([].slice.call(parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('item')));
+		moi.reactPreviewFeedItems([].slice.call(parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('item')));
 		
-		moi.reactConfirmationPreviewShared(parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('title')[0].textContent.trim(), parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('description')[0].textContent.trim(), '<%= OLSKLocalized('WKCSubscriptionsModuleCreatePreviewTypeFeedText') %>');
+		moi.reactPreviewShared(parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('title')[0].textContent.trim(), parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('description')[0].textContent.trim(), '<%= OLSKLocalized('WKCSubscriptionsModuleCreatePreviewTypeFeedText') %>');
 	};
 
 	//_ commandsConfirmURLFile
@@ -134,9 +134,9 @@
 	moi.commandsConfirmURLFile = function (inputData, rawData) {
 		moi.reactConfirmationType('File');
 		
-		moi.reactConfirmationPreviewFile(rawData);
+		moi.reactPreviewFile(rawData);
 
-		moi.reactConfirmationPreviewShared(inputData.match(/https?:\/\/(.*)/)[1], null, '<%= OLSKLocalized('WKCSubscriptionsModuleCreatePreviewTypeFileText') %>');
+		moi.reactPreviewShared(inputData.match(/https?:\/\/(.*)/)[1], null, '<%= OLSKLocalized('WKCSubscriptionsModuleCreatePreviewTypeFileText') %>');
 	};
 
 	//_ commandsConfirmURLPage
@@ -144,7 +144,7 @@
 	moi.commandsConfirmURLPage = function (inputData, parsedHTML) {
 		moi.reactConfirmationType('Page');
 		
-		moi.reactConfirmationPreviewPageAlternatives([].slice.call(parsedHTML.getElementsByTagName('link')).filter(function(e) {
+		moi.reactAlternatives([].slice.call(parsedHTML.getElementsByTagName('link')).filter(function(e) {
 			return e.type.trim().toLowerCase() === 'application/rss+xml';
 		}).map(function(e) {
 			return WKLogic.WKSubscriptionsCompleteURL(d3.select(e).attr('href'), inputData);
@@ -153,9 +153,9 @@
 		var turndownInstance = new TurndownService();
 		turndownInstance.remove('script');
 
-		moi.reactConfirmationPreviewPage(turndownInstance.turndown(parsedHTML.body));
+		moi.reactPreviewPage(turndownInstance.turndown(parsedHTML.body));
 
-		moi.reactConfirmationPreviewShared(parsedHTML.getElementsByTagName('title')[0].textContent, [].slice.call(parsedHTML.getElementsByTagName('meta')).filter(function(e) {
+		moi.reactPreviewShared(parsedHTML.getElementsByTagName('title')[0].textContent, [].slice.call(parsedHTML.getElementsByTagName('meta')).filter(function(e) {
 			if (e.name === 'description') {
 				return true;
 			}
@@ -185,15 +185,15 @@
 
 			moi.reactConfirmationVisibility(false);
 			moi.reactFetchFormVisibility(true);
-			moi.reactConfirmationPreviewPageAlternatives([]);
-			d3.select('#WKCSubscriptionsModuleCreateFormInput').property('value', '');
-			d3.select('#WKCSubscriptionsModuleCreateFormInput').node().focus();
-		}, moi.commandsAlertAddSubscriptionError);
+			moi.reactAlternatives([]);
+			d3.select('#WKCSubscriptionsModuleCreateFetchFormInput').property('value', '');
+			d3.select('#WKCSubscriptionsModuleCreateFetchFormInput').node().focus();
+		}, moi._commandsAlertAddSubscriptionError);
 	};
 
-	//_ commandsAlertAddSubscriptionError
+	//_ _commandsAlertAddSubscriptionError
 
-	moi.commandsAlertAddSubscriptionError = function (error) {
+	moi._commandsAlertAddSubscriptionError = function (error) {
 		window.alert('<%= OLSKLocalized('WKCSubscriptionsModuleCreateErrorAddText') %>');
 
 		throw error;
@@ -204,13 +204,37 @@
 	//_ reactFetchFormVisibility
 
 	moi.reactFetchFormVisibility = function (isVisible) {
-		d3.select('#WKCSubscriptionsModuleCreateForm').classed('WKCSubscriptionsHidden', !isVisible);
+		d3.select('#WKCSubscriptionsModuleCreateFetchForm').classed('WKCSubscriptionsHidden', !isVisible);
 	};
 
 	//_ reactFetchLoaderVisibility
 
 	moi.reactFetchLoaderVisibility = function (isVisible) {
 		d3.select('#WKCSubscriptionsModuleCreateLoader').classed('WKCSubscriptionsHidden', !isVisible);
+	};
+
+	//_ reactAlternatives
+
+	moi.reactAlternatives = function (alternativeURLs) {
+		var selection = d3.select('#WKCSubscriptionsModuleCreateAlternatives ul')
+			.selectAll('.WKCSubscriptionsModuleCreateAlternativesItem').data(alternativeURLs);
+		
+		selection.enter()
+			.append('li')
+				.attr('class', 'WKCSubscriptionsModuleCreateAlternativesItem')
+				.append('button')
+				.on('click', function(e) {
+					d3.select('#WKCSubscriptionsModuleCreateFetchFormInput').property('value', e)
+					moi.commandsFetchURL(e);
+				})
+				.merge(selection)
+					.html(function(e) {
+						return e;
+					});
+
+		selection.exit().remove();
+
+		d3.select('#WKCSubscriptionsModuleCreateAlternatives').classed('WKCSubscriptionsHidden', !alternativeURLs.length);
 	};
 
 	//_ reactConfirmationVisibility
@@ -231,9 +255,9 @@
 		d3.select('#WKCSubscriptionsModuleCreateConfirmationFormType').node().value = inputData;
 	};
 
-	//_ reactConfirmationPreviewShared
+	//_ reactPreviewShared
 
-	moi.reactConfirmationPreviewShared = function (titleContent, blurbContent, typeContent) {
+	moi.reactPreviewShared = function (titleContent, blurbContent, typeContent) {
 		moi.reactFetchLoaderVisibility(false);
 
 		d3.select('#WKCSubscriptionsModuleCreateConfirmationFormName').node().value = titleContent;
@@ -249,9 +273,9 @@
 		d3.select('#WKCSubscriptionsModuleCreateConfirmationFormName').attr('autofocus', true);
 	};
 
-	//_ reactConfirmationPreviewFeedItems
+	//_ reactPreviewFeedItems
 
-	moi.reactConfirmationPreviewFeedItems = function (itemElements) {
+	moi.reactPreviewFeedItems = function (itemElements) {
 		var selection = d3.select('#WKCSubscriptionsModuleCreatePreviewFeed ul')
 			.selectAll('.WKCSubscriptionsModuleCreatePreviewFeedItem').data(itemElements);
 		
@@ -266,40 +290,16 @@
 		selection.exit().remove();
 	};
 
-	//_ reactConfirmationPreviewFile
+	//_ reactPreviewFile
 
-	moi.reactConfirmationPreviewFile = function (inputData) {
+	moi.reactPreviewFile = function (inputData) {
 		d3.select('#WKCSubscriptionsModuleCreatePreviewFile pre').html(inputData);
 	};
 
-	//_ reactConfirmationPreviewPage
+	//_ reactPreviewPage
 
-	moi.reactConfirmationPreviewPage = function (inputData) {
+	moi.reactPreviewPage = function (inputData) {
 		d3.select('#WKCSubscriptionsModuleCreatePreviewPageContent').html(inputData);
-	};
-
-	//_ reactConfirmationPreviewPageAlternatives
-
-	moi.reactConfirmationPreviewPageAlternatives = function (alternativeURLs) {
-		var selection = d3.select('#WKCSubscriptionsModuleCreateAlternatives ul')
-			.selectAll('.WKCSubscriptionsModuleCreateAlternativesItem').data(alternativeURLs);
-		
-		selection.enter()
-			.append('li')
-				.attr('class', 'WKCSubscriptionsModuleCreateAlternativesItem')
-				.append('button')
-				.on('click', function(e) {
-					d3.select('#WKCSubscriptionsModuleCreateFormInput').property('value', e)
-					moi.commandsFetchURL(e);
-				})
-				.merge(selection)
-					.html(function(e) {
-						return e;
-					});
-
-		selection.exit().remove();
-
-		d3.select('#WKCSubscriptionsModuleCreateAlternatives').classed('WKCSubscriptionsHidden', !alternativeURLs.length);
 	};
 
 	//# SETUP

@@ -7,13 +7,13 @@
 </script>
 
 <div id="WKCSubscriptionsModuleCreate">
-	<form id="WKCSubscriptionsModuleCreateForm">
-		<input type="text" placeholder="http(s)://…" autofocus id="WKCSubscriptionsModuleCreateFormInput">
-		<input type="submit" value="<%= OLSKLocalized('WKCSubscriptionsModuleCreateFormSubmitText') %>">
+	<form id="WKCSubscriptionsModuleCreateFetchForm">
+		<input type="text" placeholder="http(s)://…" autofocus id="WKCSubscriptionsModuleCreateFetchFormInput">
+		<input type="submit" value="<%= OLSKLocalized('WKCSubscriptionsModuleCreateFetchFormSubmitText') %>">
 	</form>
 
 	<script type="text/javascript">
-		d3.select('#WKCSubscriptionsModuleCreateForm').on('submit', function() {
+		d3.select('#WKCSubscriptionsModuleCreateFetchForm').on('submit', function() {
 			d3.event.preventDefault();
 			
 			WKSubscriptions.interfaceFetchFormDidSubmit();
