@@ -7,20 +7,20 @@
 </script>
 
 <div id="WKCSubscriptionsModuleCreate">
-	<form id="WKCAppSubscriptionsForm">
-		<input type="text" placeholder="http://…" autofocus id="WKCAppSubscriptionsFormInput">
+	<form id="WKCSubscriptionsModuleCreateForm">
+		<input type="text" placeholder="http(s)://…" autofocus id="WKCSubscriptionsModuleCreateFormInput">
 		<input type="submit" value="<%= OLSKLocalized('WKCSubscriptionsModuleCreateFormSubmitText') %>">
 	</form>
 
 	<script type="text/javascript">
-		d3.select('#WKCAppSubscriptionsForm').on('submit', function() {
+		d3.select('#WKCSubscriptionsModuleCreateForm').on('submit', function() {
 			d3.event.preventDefault();
 			
 			WKSubscriptions.interfaceFetchFormDidSubmit();
 		});
 	</script>
 
-	<div id="WKCSubscriptionsLoader" class="WKCAppSubscriptionsHidden">
+	<div id="WKCSubscriptionsModuleCreateLoader" class="WKCSubscriptionsHidden">
 		<div class="ispinner ispinner--gray ispinner--animating">
 		  <div class="ispinner__blade"></div>
 		  <div class="ispinner__blade"></div>
@@ -37,54 +37,55 @@
 		</div>
 	</div>
 
-	<div id="WKCAppSubscriptionsConfirmation" class="WKCAppSubscriptionsHidden">
-		<div id="WKCAppSubscriptionsConfirmationPreviewPageAlternatives" class="WKCAppSubscriptionsHidden">
-			<p><%= OLSKLocalized('WKCSubscriptionsModuleCreateConfirmationAlternativesText') %></p>
-			<ul></ul>
-		</div>
+	<div id="WKCSubscriptionsModuleCreateAlternatives" class="WKCSubscriptionsHidden">
+		<p><%= OLSKLocalized('WKCSubscriptionsModuleCreateAlternativesBodyText') %></p>
+		<ul></ul>
+	</div>
+
+	<div id="WKCSubscriptionsModuleCreateConfirmation" class="WKCSubscriptionsHidden">
 
 		<h2><%= OLSKLocalized('WKCSubscriptionsModuleCreateConfirmationHeadingText') %></h2>
 
-		<form id="WKCAppSubscriptionsConfirmationForm">
+		<form id="WKCSubscriptionsModuleCreateConfirmationForm">
 			<p>
-				<input type="text" placeholder="<%= OLSKLocalized('WKCSubscriptionsModuleCreateConfirmationFormNameText') %>" id="WKCAppSubscriptionsConfirmationFormName">
+				<input type="text" placeholder="<%= OLSKLocalized('WKCSubscriptionsModuleCreateConfirmationFormNameText') %>" id="WKCSubscriptionsModuleCreateConfirmationFormName">
 			</p>
 			
 			<p>
-				<textarea placeholder="<%= OLSKLocalized('WKCSubscriptionsModuleCreateConfirmationFormBlurbText') %>" id="WKCAppSubscriptionsConfirmationFormBlurb"></textarea>
+				<textarea placeholder="<%= OLSKLocalized('WKCSubscriptionsModuleCreateConfirmationFormBlurbText') %>" id="WKCSubscriptionsModuleCreateConfirmationFormBlurb"></textarea>
 			</p>
 			
 			<p>
-				<input type="text" hidden id="WKCAppSubscriptionsConfirmationFormType">
+				<input type="text" hidden id="WKCSubscriptionsModuleCreateConfirmationFormType">
 			</p>
 			
 			<p>
-				<textarea hidden id="WKCAppSubscriptionsConfirmationFormFetchData"></textarea>
+				<textarea hidden id="WKCSubscriptionsModuleCreateConfirmationFormFetchData"></textarea>
 			</p>
 
 			<input type="submit" value="<%= OLSKLocalized('WKCSubscriptionsModuleCreateConfirmationFormSubmitText') %>">
 		</form>
 
 		<script type="text/javascript">
-			d3.select('#WKCAppSubscriptionsConfirmationForm').on('submit', function() {
+			d3.select('#WKCSubscriptionsModuleCreateConfirmationForm').on('submit', function() {
 				d3.event.preventDefault();
 				
 				WKSubscriptions.interfaceConfirmationFormDidSubmit();
 			});
 		</script>
 
-		<h3><%= OLSKLocalized('WKCSubscriptionsModuleCreatePreviewHeadingText') %> (<span id="WKCSubscriptionsModuleCreatePreviewHeadingTextType"></span>)</h3>
+		<h3><%= OLSKLocalized('WKCSubscriptionsModuleCreatePreviewHeadingText') %> (<span id="WKCSubscriptionsModuleCreatePreviewHeadingType"></span>)</h3>
 
-		<section id="WKCAppSubscriptionsConfirmationPreviewFeed">
+		<section id="WKCSubscriptionsModuleCreatePreviewFeed">
 			<ul></ul>
 		</section>
 
-		<section id="WKCAppSubscriptionsConfirmationPreviewFile">
+		<section id="WKCSubscriptionsModuleCreatePreviewFile">
 			<pre></pre>
 		</section>
 
-		<section id="WKCAppSubscriptionsConfirmationPreviewPage">
-			<pre id="WKCAppSubscriptionsConfirmationPreviewPageContent"></pre>
+		<section id="WKCSubscriptionsModuleCreatePreviewPage">
+			<pre id="WKCSubscriptionsModuleCreatePreviewPageContent"></pre>
 		</section>
 	</div>
 </div>

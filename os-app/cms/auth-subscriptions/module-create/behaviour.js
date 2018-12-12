@@ -31,18 +31,18 @@
 	//_ interfaceFetchFormDidSubmit
 
 	moi.interfaceFetchFormDidSubmit = function () {
-		moi.commandsFetchURL(d3.select('#WKCAppSubscriptionsFormInput').property('value'));
+		moi.commandsFetchURL(d3.select('#WKCSubscriptionsModuleCreateFormInput').property('value'));
 	};
 
 	//_ interfaceConfirmationFormDidSubmit
 
 	moi.interfaceConfirmationFormDidSubmit = function () {
 		moi._commandsAddSubscription({
-			WKCSubscriptionURL: d3.select('#WKCAppSubscriptionsFormInput').node().value,
-			WKCSubscriptionType: d3.select('#WKCAppSubscriptionsConfirmationFormType').node().value,
-			WKCSubscriptionName: d3.select('#WKCAppSubscriptionsConfirmationFormName').node().value,
-			WKCSubscriptionBlurb: d3.select('#WKCAppSubscriptionsConfirmationFormBlurb').node().value,
-			WKCSubscriptionFetchContent: d3.select('#WKCAppSubscriptionsConfirmationFormFetchData').node().value,
+			WKCSubscriptionURL: d3.select('#WKCSubscriptionsModuleCreateFormInput').node().value,
+			WKCSubscriptionType: d3.select('#WKCSubscriptionsModuleCreateConfirmationFormType').node().value,
+			WKCSubscriptionName: d3.select('#WKCSubscriptionsModuleCreateConfirmationFormName').node().value,
+			WKCSubscriptionBlurb: d3.select('#WKCSubscriptionsModuleCreateConfirmationFormBlurb').node().value,
+			WKCSubscriptionFetchContent: d3.select('#WKCSubscriptionsModuleCreateConfirmationFormFetchData').node().value,
 			WKCSubscriptionFetchDate: new Date(),
 		});
 	};
@@ -105,7 +105,7 @@
 
 		moi.reactFetchLoaderVisibility(false);
 
-		d3.select('#WKCAppSubscriptionsFormInput').node().focus();
+		d3.select('#WKCSubscriptionsModuleCreateFormInput').node().focus();
 
 		throw error;
 	};
@@ -177,8 +177,8 @@
 			moi.reactConfirmationVisibility(false);
 			moi.reactFetchFormVisibility(true);
 			moi.reactConfirmationPreviewPageAlternatives([]);
-			d3.select('#WKCAppSubscriptionsFormInput').property('value', '');
-			d3.select('#WKCAppSubscriptionsFormInput').node().focus();
+			d3.select('#WKCSubscriptionsModuleCreateFormInput').property('value', '');
+			d3.select('#WKCSubscriptionsModuleCreateFormInput').node().focus();
 		}, moi.commandsAlertAddSubscriptionError);
 	};
 
@@ -195,31 +195,31 @@
 	//_ reactFetchFormVisibility
 
 	moi.reactFetchFormVisibility = function (isVisible) {
-		d3.select('#WKCAppSubscriptionsForm').classed('WKCAppSubscriptionsHidden', !isVisible);
+		d3.select('#WKCSubscriptionsModuleCreateForm').classed('WKCSubscriptionsHidden', !isVisible);
 	};
 
 	//_ reactFetchLoaderVisibility
 
 	moi.reactFetchLoaderVisibility = function (isVisible) {
-		d3.select('#WKCSubscriptionsLoader').classed('WKCAppSubscriptionsHidden', !isVisible);
+		d3.select('#WKCSubscriptionsModuleCreateLoader').classed('WKCSubscriptionsHidden', !isVisible);
 	};
 
 	//_ reactConfirmationVisibility
 
 	moi.reactConfirmationVisibility = function (isVisible) {
-		d3.select('#WKCAppSubscriptionsConfirmation').classed('WKCAppSubscriptionsHidden', !isVisible);
+		d3.select('#WKCSubscriptionsModuleCreateConfirmation').classed('WKCSubscriptionsHidden', !isVisible);
 	};
 
 	//_ reactConfirmationFetchData
 
 	moi.reactConfirmationFetchData = function (inputData) {
-		d3.select('#WKCAppSubscriptionsConfirmationFormFetchData').node().value = inputData;
+		d3.select('#WKCSubscriptionsModuleCreateConfirmationFormFetchData').node().value = inputData;
 	};
 
 	//_ reactConfirmationType
 
 	moi.reactConfirmationType = function (inputData) {
-		d3.select('#WKCAppSubscriptionsConfirmationFormType').node().value = inputData;
+		d3.select('#WKCSubscriptionsModuleCreateConfirmationFormType').node().value = inputData;
 	};
 
 	//_ reactConfirmationPreviewShared
@@ -227,28 +227,28 @@
 	moi.reactConfirmationPreviewShared = function (titleContent, blurbContent, typeContent) {
 		moi.reactFetchLoaderVisibility(false);
 
-		d3.select('#WKCAppSubscriptionsConfirmationFormName').node().value = titleContent;
+		d3.select('#WKCSubscriptionsModuleCreateConfirmationFormName').node().value = titleContent;
 
-		d3.select('#WKCAppSubscriptionsConfirmationFormBlurb').node().value = blurbContent;
+		d3.select('#WKCSubscriptionsModuleCreateConfirmationFormBlurb').node().value = blurbContent;
 
-		d3.select('#WKCSubscriptionsModuleCreatePreviewHeadingTextType').html(typeContent);
+		d3.select('#WKCSubscriptionsModuleCreatePreviewHeadingType').html(typeContent);
 
 		moi.reactConfirmationVisibility(true);
 		
 		moi.reactFetchFormVisibility(false);
 
-		d3.select('#WKCAppSubscriptionsConfirmationFormName').attr('autofocus', true);
+		d3.select('#WKCSubscriptionsModuleCreateConfirmationFormName').attr('autofocus', true);
 	};
 
 	//_ reactConfirmationPreviewFeedItems
 
 	moi.reactConfirmationPreviewFeedItems = function (itemElements) {
-		var selection = d3.select('#WKCAppSubscriptionsConfirmationPreviewFeed ul')
-			.selectAll('.WKCAppSubscriptionsConfirmationPreviewFeedItem').data(itemElements);
+		var selection = d3.select('#WKCSubscriptionsModuleCreatePreviewFeed ul')
+			.selectAll('.WKCSubscriptionsModuleCreatePreviewFeedItem').data(itemElements);
 		
 		selection.enter()
 			.append('li')
-				.attr('class', 'WKCAppSubscriptionsConfirmationPreviewFeedItem')
+				.attr('class', 'WKCSubscriptionsModuleCreatePreviewFeedItem')
 				.merge(selection)
 					.html(function(e) {
 						return e.getElementsByTagName('title')[0].textContent.trim();
@@ -260,27 +260,27 @@
 	//_ reactConfirmationPreviewFile
 
 	moi.reactConfirmationPreviewFile = function (inputData) {
-		d3.select('#WKCAppSubscriptionsConfirmationPreviewFile pre').html(inputData);
+		d3.select('#WKCSubscriptionsModuleCreatePreviewFile pre').html(inputData);
 	};
 
 	//_ reactConfirmationPreviewPage
 
 	moi.reactConfirmationPreviewPage = function (inputData) {
-		d3.select('#WKCAppSubscriptionsConfirmationPreviewPageContent').html(inputData);
+		d3.select('#WKCSubscriptionsModuleCreatePreviewPageContent').html(inputData);
 	};
 
 	//_ reactConfirmationPreviewPageAlternatives
 
 	moi.reactConfirmationPreviewPageAlternatives = function (alternativeURLs) {
-		var selection = d3.select('#WKCAppSubscriptionsConfirmationPreviewPageAlternatives ul')
-			.selectAll('.WKCAppSubscriptionsConfirmationPreviewPageAlternativesItem').data(alternativeURLs);
+		var selection = d3.select('#WKCSubscriptionsModuleCreateAlternatives ul')
+			.selectAll('.WKCSubscriptionsModuleCreateAlternativesItem').data(alternativeURLs);
 		
 		selection.enter()
 			.append('li')
-				.attr('class', 'WKCAppSubscriptionsConfirmationPreviewPageAlternativesItem')
+				.attr('class', 'WKCSubscriptionsModuleCreateAlternativesItem')
 				.append('button')
 				.on('click', function(e) {
-					d3.select('#WKCAppSubscriptionsFormInput').property('value', e)
+					d3.select('#WKCSubscriptionsModuleCreateFormInput').property('value', e)
 					moi.commandsFetchURL(e);
 				})
 				.merge(selection)
@@ -290,7 +290,7 @@
 
 		selection.exit().remove();
 
-		d3.select('#WKCAppSubscriptionsConfirmationPreviewPageAlternatives').classed('WKCAppSubscriptionsHidden', !alternativeURLs.length);
+		d3.select('#WKCSubscriptionsModuleCreateAlternatives').classed('WKCSubscriptionsHidden', !alternativeURLs.length);
 	};
 
 	//# SETUP

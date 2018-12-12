@@ -3,15 +3,15 @@ body {
   padding: 20px;
 }
 
-.WKCAppSubscriptionsHidden {
+.WKCSubscriptionsHidden {
 	display: none;
 }
 
-#WKCSubscriptionsLoader {
+#WKCSubscriptionsModuleCreateLoader {
 	padding: 20px 0;
 }
 
-#WKCAppSubscriptionsConfirmationPreviewPageAlternatives {
+#WKCSubscriptionsModuleCreateAlternatives {
 	padding: 10px;
 
 	border: 1px solid #408002;
