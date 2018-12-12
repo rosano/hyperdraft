@@ -68,6 +68,10 @@
 	//_ commandsFetchURL
 
 	moi.commandsFetchURL = function (inputData) {
+		if (!inputData) {
+			return;
+		}
+		
 		moi.reactConfirmationPreviewFeedItems([]);
 		moi.reactConfirmationPreviewPageAlternatives([]);
 
