@@ -2,7 +2,7 @@ WKCSubscriptionsHeadingText: Subscriptions
 WKCSubscriptionsModuleCreateFormSubmitText: Fetch
 WKCSubscriptionsModuleCreateErrorFetchText: Error fetching URL. Please check the input and try again.
 WKCSubscriptionsModuleCreateErrorAddText: Error adding subscription. Please check the input and try again.
-WKCSubscriptionsModuleCreateAlternativesBodyText: 'Feeds found on this page:'
+WKCSubscriptionsModuleCreateAlternativesAlertText: 'If you would like to add one of the alternative feeds found on this page, click the corresponding button below:'
 WKCSubscriptionsModuleCreateConfirmationHeadingText: Confirm subscription
 WKCSubscriptionsModuleCreateConfirmationFormNameText: Name
 WKCSubscriptionsModuleCreateConfirmationFormBlurbText: Description
