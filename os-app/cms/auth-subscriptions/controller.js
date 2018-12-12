@@ -50,6 +50,10 @@ exports.WKCTaskSubscriptionsFetch = function() {
 							articleObjects = articleObjects.concat(diffLibrary.WKCDiffArticlesForFile(subscriptionObject.WKCSubscriptionFetchContent, body));
 						}
 
+						if (subscriptionObject.WKCSubscriptionType === 'Page') {
+							articleObjects = articleObjects.concat(diffLibrary.WKCDiffArticlesForPage(subscriptionObject.WKCSubscriptionFetchContent, body));
+						}
+
 						return Promise.all(articleObjects.map(function(e) {
 							return new Promise(function(resolve, reject) {
 								apiArticlesMetal.WKCMetalArticlesCreate(callbackInput.OLSKLive.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, Object.assign(e, {
