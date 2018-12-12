@@ -1,13 +1,13 @@
-WKCSubscriptionsTitle: Subscriptions
-WKCSubscriptionsFetch: Fetch
-WKCSubscriptionsErrorFetch: Error fetching URL. Please check the input and try again.
-WKCSubscriptionsErrorAdd: Error adding subscription. Please check the input and try again.
-WKCSubscriptionsConfirmationAlternatives: 'Feeds found on this page:'
-WKCSubscriptionsConfirmationTitle: Confirm subscription
-WKCSubscriptionsConfirmationFeed: Feed
-WKCSubscriptionsConfirmationFile: File
-WKCSubscriptionsConfirmationPage: Page
-WKCSubscriptionsConfirmationNamePlaceholder: Name
-WKCSubscriptionsConfirmationBlurbPlaceholder: Description
-WKCSubscriptionsConfirmationSubmit: Add
-WKCSubscriptionsConfirmationPreview: Preview
+WKCSubscriptionsHeadingText: Subscriptions
+WKCSubscriptionsModuleCreateFormSubmitText: Fetch
+WKCSubscriptionsModuleCreateErrorFetchText: Error fetching URL. Please check the input and try again.
+WKCSubscriptionsModuleCreateErrorAddText: Error adding subscription. Please check the input and try again.
+WKCSubscriptionsModuleCreateConfirmationAlternativesText: 'Feeds found on this page:'
+WKCSubscriptionsModuleCreateConfirmationHeadingText: Confirm subscription
+WKCSubscriptionsModuleCreateConfirmationFormNameText: Name
+WKCSubscriptionsModuleCreateConfirmationFormBlurbText: Description
+WKCSubscriptionsModuleCreateConfirmationFormSubmitText: Add
+WKCSubscriptionsModuleCreatePreviewHeadingText: Preview
+WKCSubscriptionsModuleCreatePreviewTypeFeedText: Feed
+WKCSubscriptionsModuleCreatePreviewTypeFileText: File
+WKCSubscriptionsModuleCreatePreviewTypePageText: Page

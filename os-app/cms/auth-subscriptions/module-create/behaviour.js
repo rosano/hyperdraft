@@ -97,7 +97,7 @@
 	//_ commandsAlertFetchError
 
 	moi.commandsAlertFetchError = function (error) {
-		window.alert('<%= OLSKLocalized('WKCSubscriptionsErrorFetch') %>');
+		window.alert('<%= OLSKLocalized('WKCSubscriptionsModuleCreateErrorFetchText') %>');
 
 		moi.reactFetchLoaderVisibility(false);
 
@@ -113,7 +113,7 @@
 
 		moi.reactConfirmationPreviewFeedItems([].slice.call(parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('item')));
 		
-		moi.reactConfirmationPreviewShared(parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('title')[0].textContent.trim(), parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('description')[0].textContent.trim(), '<%= OLSKLocalized('WKCSubscriptionsConfirmationFeed') %>');
+		moi.reactConfirmationPreviewShared(parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('title')[0].textContent.trim(), parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('description')[0].textContent.trim(), '<%= OLSKLocalized('WKCSubscriptionsModuleCreatePreviewTypeFeedText') %>');
 	};
 
 	//_ commandsConfirmURLFile
@@ -123,7 +123,7 @@
 		
 		moi.reactConfirmationPreviewFile(rawData);
 
-		moi.reactConfirmationPreviewShared(inputData.match(/https?:\/\/(.*)/)[1], null, '<%= OLSKLocalized('WKCSubscriptionsConfirmationFile') %>');
+		moi.reactConfirmationPreviewShared(inputData.match(/https?:\/\/(.*)/)[1], null, '<%= OLSKLocalized('WKCSubscriptionsModuleCreatePreviewTypeFileText') %>');
 	};
 
 	//_ commandsConfirmURLPage
@@ -154,7 +154,7 @@
 			return false;
 		}).map(function(e) {
 			return e.content;
-		}).shift(), '<%= OLSKLocalized('WKCSubscriptionsConfirmationPage') %>');
+		}).shift(), '<%= OLSKLocalized('WKCSubscriptionsModuleCreatePreviewTypePageText') %>');
 	};
 
 	//_ _commandsAddSubscription
@@ -181,7 +181,7 @@
 	//_ commandsAlertAddSubscriptionError
 
 	moi.commandsAlertAddSubscriptionError = function (error) {
-		window.alert('<%= OLSKLocalized('WKCSubscriptionsErrorAdd') %>');
+		window.alert('<%= OLSKLocalized('WKCSubscriptionsModuleCreateErrorAddText') %>');
 
 		throw error;
 	};
@@ -227,7 +227,7 @@
 
 		d3.select('#WKCAppSubscriptionsConfirmationFormBlurb').node().value = blurbContent;
 
-		d3.select('#WKCSubscriptionsConfirmationPreviewType').html(typeContent);
+		d3.select('#WKCSubscriptionsModuleCreatePreviewHeadingTextType').html(typeContent);
 
 		moi.reactConfirmationVisibility(true);
 		

@@ -9,7 +9,7 @@
 <div id="WKCSubscriptionsModuleCreate">
 	<form id="WKCAppSubscriptionsForm">
 		<input type="text" placeholder="http://…" autofocus id="WKCAppSubscriptionsFormInput">
-		<input type="submit" value="<%= OLSKLocalized('WKCSubscriptionsFetch') %>">
+		<input type="submit" value="<%= OLSKLocalized('WKCSubscriptionsModuleCreateFormSubmitText') %>">
 	</form>
 
 	<script type="text/javascript">
@@ -39,19 +39,19 @@
 
 	<div id="WKCAppSubscriptionsConfirmation" class="WKCAppSubscriptionsHidden">
 		<div id="WKCAppSubscriptionsConfirmationPreviewPageAlternatives" class="WKCAppSubscriptionsHidden">
-			<p><%= OLSKLocalized('WKCSubscriptionsConfirmationAlternatives') %></p>
+			<p><%= OLSKLocalized('WKCSubscriptionsModuleCreateConfirmationAlternativesText') %></p>
 			<ul></ul>
 		</div>
 
-		<h2><%= OLSKLocalized('WKCSubscriptionsConfirmationTitle') %></h2>
+		<h2><%= OLSKLocalized('WKCSubscriptionsModuleCreateConfirmationHeadingText') %></h2>
 
 		<form id="WKCAppSubscriptionsConfirmationForm">
 			<p>
-				<input type="text" placeholder="<%= OLSKLocalized('WKCSubscriptionsConfirmationNamePlaceholder') %>" id="WKCAppSubscriptionsConfirmationFormName">
+				<input type="text" placeholder="<%= OLSKLocalized('WKCSubscriptionsModuleCreateConfirmationFormNameText') %>" id="WKCAppSubscriptionsConfirmationFormName">
 			</p>
 			
 			<p>
-				<textarea placeholder="<%= OLSKLocalized('WKCSubscriptionsConfirmationBlurbPlaceholder') %>" id="WKCAppSubscriptionsConfirmationFormBlurb"></textarea>
+				<textarea placeholder="<%= OLSKLocalized('WKCSubscriptionsModuleCreateConfirmationFormBlurbText') %>" id="WKCAppSubscriptionsConfirmationFormBlurb"></textarea>
 			</p>
 			
 			<p>
@@ -62,7 +62,7 @@
 				<textarea hidden id="WKCAppSubscriptionsConfirmationFormFetchData"></textarea>
 			</p>
 
-			<input type="submit" value="<%= OLSKLocalized('WKCSubscriptionsConfirmationSubmit') %>">
+			<input type="submit" value="<%= OLSKLocalized('WKCSubscriptionsModuleCreateConfirmationFormSubmitText') %>">
 		</form>
 
 		<script type="text/javascript">
@@ -73,7 +73,7 @@
 			});
 		</script>
 
-		<h3><%= OLSKLocalized('WKCSubscriptionsConfirmationPreview') %> (<span id="WKCSubscriptionsConfirmationPreviewType"></span>)</h3>
+		<h3><%= OLSKLocalized('WKCSubscriptionsModuleCreatePreviewHeadingText') %> (<span id="WKCSubscriptionsModuleCreatePreviewHeadingTextType"></span>)</h3>
 
 		<section id="WKCAppSubscriptionsConfirmationPreviewFeed">
 			<ul></ul>
