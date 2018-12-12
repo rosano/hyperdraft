@@ -79,7 +79,16 @@
 		moi.reactFetchLoaderVisibility(true);
 		moi.reactConfirmationVisibility(false);
 
-		d3.text(inputData).then(function(data) {
+		d3.text('<%= OLSKCanonicalFor('WKCRouteAPISubscriptionsFetch') %>', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'x-client-key': moi.propertiesAPIToken(),
+			},
+			body: JSON.stringify({
+				WKCInputURL: inputData,
+			})
+		}).then(function(data) {
 			moi.reactConfirmationFetchData(data);
 
 			var parsedXML = (new DOMParser()).parseFromString(data, 'application/xml');

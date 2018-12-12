@@ -4,6 +4,9 @@
  * MIT Licensed
  */
 
+const requestPackage = require('request');
+const urlPackage = require('url');
+
 var modelLibrary = require('./model');
 var metalLibrary = require('./metal');
 
@@ -47,6 +50,14 @@ exports.OLSKControllerRoutes = function() {
 			OLSKRoutePath: '/api/subscriptions/search',
 			OLSKRouteMethod: 'get',
 			OLSKRouteFunction: exports.WKCActionAPISubscriptionsSearch,
+			OLSKRouteMiddlewares: [
+				'WKCSharedMiddlewareAPIAuthenticate',
+			],
+		},
+		WKCRouteAPISubscriptionsFetch: {
+			OLSKRoutePath: '/api/subscriptions/fetch',
+			OLSKRouteMethod: 'post',
+			OLSKRouteFunction: exports.WKCActionAPISubscriptionsFetch,
 			OLSKRouteMiddlewares: [
 				'WKCSharedMiddlewareAPIAuthenticate',
 			],
@@ -119,5 +130,17 @@ exports.WKCActionAPISubscriptionsSearch = function(req, res, next) {
 		}
 
 		return res.json(responseJSON);
+	});
+};
+
+//_ WKCActionAPISubscriptionsFetch
+
+exports.WKCActionAPISubscriptionsFetch = function(req, res, next) {
+	if (!urlPackage.parse(req.body.WKCInputURL).hostname) {
+		return res.status(400).send('WKCErrorInvalidInput');
+	}
+
+	return requestPackage.get(req.body.WKCInputURL, function(err, response, body) {
+		res.status(200).send(body);
 	});
 };
