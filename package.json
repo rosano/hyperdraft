@@ -18,11 +18,13 @@
     "request": "latest",
 
     "// PARSE": null,
+    "jsdom": "latest",
     "fast-xml-parser": "latest",
 
     "// DIFF": null,
     "diff": "latest",
     "html-entities": "latest",
+    "turndown": "latest",
     "showdown": "latest",
 
     "// FRONTEND": null,

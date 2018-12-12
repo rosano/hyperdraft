@@ -21,6 +21,9 @@ const kTests = {
         ]]>\
         </description></item></channel></rss>';
 	},
+	kTestsHTML: function() {
+		return '<!DOCTYPE html><html><head><title>Rosano</title></head><body><h1>alfa</h1></body></html>';
+	},
 };
 
 describe('WKCDiffArticlesForFeed', function testWKCDiffArticlesForFeed() {
@@ -143,23 +146,23 @@ describe('_WKCDiffArticleBodyForPage', function test_WKCDiffArticleBodyForPage()
 	});
 
 	it('returns all if param1 null', function() {
-		assert.deepEqual(diffLibrary._WKCDiffArticleBodyForPage(null, '# alfa'), '<ins><h1>alfa</h1></ins>');
+		assert.deepEqual(diffLibrary._WKCDiffArticleBodyForPage(null, kTests.kTestsHTML()), '<ins><h1>alfa</h1></ins>');
 	});
 
 	it('returns identical if no change', function() {
-		assert.deepEqual(diffLibrary._WKCDiffArticleBodyForPage('# alfa', '# alfa'), '<h1>alfa</h1>');
+		assert.deepEqual(diffLibrary._WKCDiffArticleBodyForPage(kTests.kTestsHTML(), kTests.kTestsHTML()), '<h1>alfa</h1>');
 	});
 
 	it('adds markup if character added', function() {
-		assert.deepEqual(diffLibrary._WKCDiffArticleBodyForPage('# alfa', '# alfab'), '<h1>alfa<ins>b</ins></h1>');
+		assert.deepEqual(diffLibrary._WKCDiffArticleBodyForPage(kTests.kTestsHTML(), kTests.kTestsHTML().replace('alfa', 'alfab')), '<h1>alfa<ins>b</ins></h1>');
 	});
 
 	it('adds markup if character removed', function() {
-		assert.deepEqual(diffLibrary._WKCDiffArticleBodyForPage('# alfa', '# alf'), '<h1>alf<del>a</del></h1>');
+		assert.deepEqual(diffLibrary._WKCDiffArticleBodyForPage(kTests.kTestsHTML(), kTests.kTestsHTML().replace('alfa', 'alf')), '<h1>alf<del>a</del></h1>');
 	});
 
 	it('adds markup if character changed', function() {
-		assert.deepEqual(diffLibrary._WKCDiffArticleBodyForPage('# alfa', '# alfo'), '<h1>alf<del>a</del><ins>o</ins></h1>');
+		assert.deepEqual(diffLibrary._WKCDiffArticleBodyForPage(kTests.kTestsHTML(), kTests.kTestsHTML().replace('alfa', 'alfo')), '<h1>alf<del>a</del><ins>o</ins></h1>');
 	});
 
 });
@@ -167,11 +170,11 @@ describe('_WKCDiffArticleBodyForPage', function test_WKCDiffArticleBodyForPage()
 describe('WKCDiffArticlesForPage', function testWKCDiffArticlesForPage() {
 
 	it('returns none if identical', function() {
-		assert.deepEqual(diffLibrary.WKCDiffArticlesForPage('# alfa', '# alfa'), []);
+		assert.deepEqual(diffLibrary.WKCDiffArticlesForPage(kTests.kTestsHTML(), kTests.kTestsHTML()), []);
 	});
 
 	it('returns one if not identical', function() {
-		assert.deepEqual(diffLibrary.WKCDiffArticlesForPage('# alfa', '# alfo').map(function(e) {
+		assert.deepEqual(diffLibrary.WKCDiffArticlesForPage(kTests.kTestsHTML(), kTests.kTestsHTML().replace('alfa', 'alfo')).map(function(e) {
 			return e.WKCArticleBody;
 		}), [
 			'<h1>alf<del>a</del><ins>o</ins></h1>'
@@ -179,11 +182,11 @@ describe('WKCDiffArticlesForPage', function testWKCDiffArticlesForPage() {
 	});
 
 	it('populates article date', function() {
-		assert.strictEqual(diffLibrary.WKCDiffArticlesForPage('# alfa', '# alfo').pop().WKCArticlePublishDate - (new Date()) < 100, true);
+		assert.strictEqual(diffLibrary.WKCDiffArticlesForPage(kTests.kTestsHTML(), kTests.kTestsHTML().replace('alfa', 'alfo')).pop().WKCArticlePublishDate - (new Date()) < 100, true);
 	});
 
 	it('populates article body', function() {
-		assert.strictEqual(diffLibrary.WKCDiffArticlesForPage('# alfa', '# alfo').pop().WKCArticleBody, '<h1>alf<del>a</del><ins>o</ins></h1>');
+		assert.strictEqual(diffLibrary.WKCDiffArticlesForPage(kTests.kTestsHTML(), kTests.kTestsHTML().replace('alfa', 'alfo')).pop().WKCArticleBody, '<h1>alf<del>a</del><ins>o</ins></h1>');
 	});
 
 });

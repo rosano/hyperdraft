@@ -4,10 +4,15 @@
  * MIT Licensed
  */
 
-const parserPackage = require('fast-xml-parser');
+var jsDOMPackage = require('jsdom');
+const { JSDOM } = jsDOMPackage;
+const fastXMLParserPackage = require('fast-xml-parser');
 const diffPackage = require('diff');
 var htmlEntitiesPackage = require('html-entities');
 htmlEntitiesPackage = new (htmlEntitiesPackage.AllHtmlEntities)();
+var turndownPackage = require('turndown');
+turndownPackage = new turndownPackage();
+turndownPackage.remove('script');
 var showdownPackage = require('showdown');
 showdownPackage = new showdownPackage.Converter();
 showdownPackage.setOption('noHeaderId', true);
@@ -15,10 +20,10 @@ showdownPackage.setOption('noHeaderId', true);
 //_ WKCDiffArticlesForFeed
 
 exports.WKCDiffArticlesForFeed = function(oldString, newString) {
-	var oldIDs = (!oldString ? [] : parserPackage.parse(oldString).rss.channel.item).map(function(e) {
+	var oldIDs = (!oldString ? [] : fastXMLParserPackage.parse(oldString).rss.channel.item).map(function(e) {
 		return e.guid.toString();
 	});
-	var newItems = parserPackage.parse(newString);
+	var newItems = fastXMLParserPackage.parse(newString);
 
 	if (!(newItems = newItems.rss)) {
 		return [];
@@ -104,7 +109,7 @@ exports._WKCDiffArticleBodyForPage = function(oldString, newString) {
 		throw new Error('WKCErrorInvalidInput');
 	}
 	
-	return diffPackage.diffChars(showdownPackage.makeHtml(oldString || ''), showdownPackage.makeHtml(newString)).map(function(e) {
+	return diffPackage.diffChars(showdownPackage.makeHtml(turndownPackage.turndown((new JSDOM(oldString || '')).window.document.body.innerHTML)), showdownPackage.makeHtml(turndownPackage.turndown((new JSDOM(newString)).window.document.body.innerHTML))).map(function(e) {
 		if (e.added === true) {
 			return [
 				'<ins>',
