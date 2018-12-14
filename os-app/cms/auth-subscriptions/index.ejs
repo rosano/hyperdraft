@@ -11,9 +11,7 @@ locals.OLSKPageAssets = [
 
 <%- include('../../_shared/WKCLayout/header.ejs') %>
 
-<h1><%= locals.OLSKPageTitle %></h1>
-
-<%- include('./module-create/view.ejs') %>
+<% include('./module-create/view.ejs') %>
 
 <script type="text/javascript">
 	<%- include('behaviour.js') %>
@@ -25,6 +23,10 @@ locals.OLSKPageAssets = [
 
 <div id="WKCSubscriptions" class="WKCSubscriptionsLoading">
 	<div id="WKCSubscriptionsList"></div>
+
+	<div id="WKCSubscriptionsDetail" class="WKCSubscriptionsDetailInactive">
+		<span id="WKCSubscriptionsDetailPlaceholder"><%= OLSKLocalized('WKCSubscriptionsDetailPlaceholderText') %></span>
+	</div>
 </div>
 
 <%- include('../../_shared/WKCLayout/footer.ejs') %>

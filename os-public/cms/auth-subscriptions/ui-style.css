@@ -1,6 +1,28 @@
+html {
+	/* @FitHeightToScreen */
+  height: 100%;
+}
+
 body {
   font-family: 'Helvetica Neue';
-  padding: 20px;
+  font-size: 90%;
+
+	/* @FitHeightToScreen */
+  height: 100%;
+}
+
+#OLSKSharedContainer {
+	/* @FitHeightToScreen */
+  height: 100%;
+}
+
+#WKCSubscriptions {
+	/* @FitHeightToScreen */
+  height: 100%;
+
+	/* @Flexbox1 parent */
+	display: flex;
+	flex-direction: row;
 }
 
 .WKCSubscriptionsHidden {
@@ -16,4 +38,50 @@ body {
 
 	border: 1px solid #408002;
 	background: #ccff66;
+}
+
+#WKCSubscriptionsList {
+	overflow-y: scroll;
+
+	/* @Flexbox1 child */
+	flex-basis: 350px;
+}
+
+.WKCSubscriptionsListItem {
+	padding: 10px;
+
+	cursor: pointer;
+
+	/* @DisableTextSelection */
+	-webkit-touch-callout: none; /* iOS Safari */
+	-webkit-user-select: none; /* Safari */
+	-khtml-user-select: none; /* Konqueror HTML */
+	-moz-user-select: none; /* Firefox */
+	-ms-user-select: none; /* Internet Explorer/Edge */
+	user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+}
+
+.WKCSubscriptionsListItemHeading {
+	margin-top: 0;
+	margin-bottom: 10px;
+}
+
+.WKCSubscriptionsListItemSnippet {
+	margin-top: 0;
+	margin-bottom: 10px;
+}
+
+#WKCSubscriptionsDetail {
+	/* @Flexbox1 child */
+	flex-grow: 1;
+}
+
+.WKCSubscriptionsDetailInactive {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#WKCSubscriptionsDetailPlaceholder {
+	opacity: 0.5;
 }
