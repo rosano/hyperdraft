@@ -3,7 +3,7 @@
 </script>
 
 <script type="text/javascript">
-	WKSubscriptions.lifecyclePageWillLoad();
+	WKSubscriptionsModuleCreate.lifecyclePageWillLoad();
 </script>
 
 <div id="WKCSubscriptionsModuleCreate">
@@ -16,7 +16,7 @@
 		d3.select('#WKCSubscriptionsModuleCreateFetchForm').on('submit', function() {
 			d3.event.preventDefault();
 			
-			WKSubscriptions.interfaceFetchFormDidSubmit();
+			WKSubscriptionsModuleCreate.interfaceFetchFormDidSubmit();
 		});
 	</script>
 
@@ -66,7 +66,7 @@
 			d3.select('#WKCSubscriptionsModuleCreateConfirmationForm').on('submit', function() {
 				d3.event.preventDefault();
 				
-				WKSubscriptions.interfaceConfirmationFormDidSubmit();
+				WKSubscriptionsModuleCreate.interfaceConfirmationFormDidSubmit();
 			});
 		</script>
 

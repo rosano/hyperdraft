@@ -7,12 +7,12 @@
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
 	typeof define === 'function' && define.amd ? define(['exports'], factory) :
-	(factory((global.WKLogic = global.WKLogic || {})));
+	(factory((global.WKSubscriptionsModuleCreateLogic = global.WKSubscriptionsModuleCreateLogic || {})));
 }(this, (function (exports) { 'use strict';
 
-	//_ WKSubscriptionsCompleteURL
+	//_ WKSubscriptionsModuleCreateCompleteURL
 
-	exports.WKSubscriptionsCompleteURL = function (param1, param2) {
+	exports.WKSubscriptionsModuleCreateCompleteURL = function (param1, param2) {
 		if (typeof param1 !== 'string') {
 			throw new Error('WKCErrorInvalidInput');
 		}

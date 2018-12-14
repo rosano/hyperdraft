@@ -7,12 +7,12 @@
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
 	typeof define === 'function' && define.amd ? define(['exports'], factory) :
-	(factory((global.WKSubscriptions = global.WKSubscriptions || {})));
+	(factory((global.WKSubscriptionsModuleCreate = global.WKSubscriptionsModuleCreate || {})));
 }(this, (function (exports) { 'use strict';
 
 	var moi = exports;
 
-	var WKSubscriptionsPropertyAPIToken;
+	var WKSubscriptionsModuleCreatePropertyAPIToken;
 
 	//# PROPERTIES
 
@@ -20,10 +20,10 @@
 
 	moi.propertiesAPIToken = function (inputData) {
 		if (typeof inputData === 'undefined') {
-			return WKSubscriptionsPropertyAPIToken;
+			return WKSubscriptionsModuleCreatePropertyAPIToken;
 		}
 
-		WKSubscriptionsPropertyAPIToken = inputData;
+		WKSubscriptionsModuleCreatePropertyAPIToken = inputData;
 	};
 
 	//# INTERFACE
@@ -143,7 +143,7 @@
 		moi.reactAlternatives([].slice.call(parsedHTML.getElementsByTagName('link')).filter(function(e) {
 			return e.type.trim().toLowerCase() === 'application/rss+xml';
 		}).map(function(e) {
-			return WKLogic.WKSubscriptionsCompleteURL(d3.select(e).attr('href'), inputData);
+			return WKSubscriptionsModuleCreateLogic.WKSubscriptionsModuleCreateCompleteURL(d3.select(e).attr('href'), inputData);
 		}));
 
 		var turndownInstance = new TurndownService();
