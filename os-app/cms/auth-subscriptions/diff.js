@@ -102,38 +102,18 @@ exports.WKCDiffArticlesForFile = function(oldString, newString) {
 	}];
 };
 
-//_ _WKCDiffArticleBodyForPage
-
-exports._WKCDiffArticleBodyForPage = function(oldString, newString) {
-	if (typeof newString !== 'string') {
-		throw new Error('WKCErrorInvalidInput');
-	}
-	
-	return diffPackage.diffChars(showdownPackage.makeHtml(turndownPackage.turndown((new JSDOM(oldString || '')).window.document.body.innerHTML)), showdownPackage.makeHtml(turndownPackage.turndown((new JSDOM(newString)).window.document.body.innerHTML))).map(function(e) {
-		if (e.added === true) {
-			return [
-				'<ins>',
-				e.value,
-				'</ins>',
-			].join('');
-		}
-
-		if (e.removed === true) {
-			return [
-				'<del>',
-				e.value,
-				'</del>',
-			].join('');
-		}
-
-		return e.value;
-	}).join('');
-};
-
 //_ WKCDiffArticlesForPage
 
 exports.WKCDiffArticlesForPage = function(oldString, newString) {
-	if (oldString === newString) {
+	if (typeof newString !== 'string') {
+		throw new Error('WKCErrorInvalidInput');
+	}
+
+	var changesArray = diffPackage.diffChars(showdownPackage.makeHtml(turndownPackage.turndown((new JSDOM(oldString || '')).window.document.body.innerHTML)), showdownPackage.makeHtml(turndownPackage.turndown((new JSDOM(newString)).window.document.body.innerHTML)));
+	
+	if (!changesArray.filter(function(e) {
+		return e.added || e.removed;
+	}).length) {
 		return [];
 	}
 

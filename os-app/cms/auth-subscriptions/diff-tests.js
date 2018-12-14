@@ -137,40 +137,20 @@ describe('WKCDiffArticlesForFile', function testWKCDiffArticlesForFile() {
 
 });
 
-describe('_WKCDiffArticleBodyForPage', function test_WKCDiffArticleBodyForPage() {
+describe('WKCDiffArticlesForPage', function testWKCDiffArticlesForPage() {
 
 	it('throws error if param2 not string', function() {
 		assert.throws(function() {
-			diffLibrary._WKCDiffArticleBodyForPage('alfa', null);
+			diffLibrary.WKCDiffArticlesForPage('alfa', null);
 		}, /WKCErrorInvalidInput/);
 	});
 
-	it('returns all if param1 null', function() {
-		assert.deepEqual(diffLibrary._WKCDiffArticleBodyForPage(null, kTests.kTestsHTML()), '<ins><h1>alfa</h1></ins>');
-	});
-
-	it('returns identical if no change', function() {
-		assert.deepEqual(diffLibrary._WKCDiffArticleBodyForPage(kTests.kTestsHTML(), kTests.kTestsHTML()), '<h1>alfa</h1>');
-	});
-
-	it('adds markup if character added', function() {
-		assert.deepEqual(diffLibrary._WKCDiffArticleBodyForPage(kTests.kTestsHTML(), kTests.kTestsHTML().replace('alfa', 'alfab')), '<h1>alfa<ins>b</ins></h1>');
-	});
-
-	it('adds markup if character removed', function() {
-		assert.deepEqual(diffLibrary._WKCDiffArticleBodyForPage(kTests.kTestsHTML(), kTests.kTestsHTML().replace('alfa', 'alf')), '<h1>alf<del>a</del></h1>');
-	});
-
-	it('adds markup if character changed', function() {
-		assert.deepEqual(diffLibrary._WKCDiffArticleBodyForPage(kTests.kTestsHTML(), kTests.kTestsHTML().replace('alfa', 'alfo')), '<h1>alf<del>a</del><ins>o</ins></h1>');
-	});
-
-});
-
-describe('WKCDiffArticlesForPage', function testWKCDiffArticlesForPage() {
-
 	it('returns none if identical', function() {
 		assert.deepEqual(diffLibrary.WKCDiffArticlesForPage(kTests.kTestsHTML(), kTests.kTestsHTML()), []);
+	});
+
+	it('ignores head changes', function() {
+		assert.deepEqual(diffLibrary.WKCDiffArticlesForPage(kTests.kTestsHTML(), kTests.kTestsHTML().replace('bravo', 'charlie')), []);
 	});
 
 	it('returns one if not identical', function() {
@@ -187,6 +167,26 @@ describe('WKCDiffArticlesForPage', function testWKCDiffArticlesForPage() {
 
 	it('populates article body', function() {
 		assert.strictEqual(diffLibrary.WKCDiffArticlesForPage(kTests.kTestsHTML(), kTests.kTestsHTML().replace('alfa', 'alfo')).pop().WKCArticleBody, '<h1>alf<del>a</del><ins>o</ins></h1>');
+	});
+
+	context('WKCArticleBody', function() {
+
+		it('adds markup if param1 null', function() {
+			assert.strictEqual(diffLibrary.WKCDiffArticlesForPage(null, kTests.kTestsHTML()).pop().WKCArticleBody, '<ins><h1>alfa</h1></ins>');
+		});
+
+		it('adds markup if character added', function() {
+			assert.strictEqual(diffLibrary.WKCDiffArticlesForPage(kTests.kTestsHTML(), kTests.kTestsHTML().replace('alfa', 'alfab')).pop().WKCArticleBody, '<h1>alfa<ins>b</ins></h1>');
+		});
+
+		it('adds markup if character removed', function() {
+			assert.strictEqual(diffLibrary.WKCDiffArticlesForPage(kTests.kTestsHTML(), kTests.kTestsHTML().replace('alfa', 'alf')).pop().WKCArticleBody, '<h1>alf<del>a</del></h1>');
+		});
+
+		it('adds markup if character changed', function() {
+			assert.strictEqual(diffLibrary.WKCDiffArticlesForPage(kTests.kTestsHTML(), kTests.kTestsHTML().replace('alfa', 'alfo')).pop().WKCArticleBody, '<h1>alf<del>a</del><ins>o</ins></h1>');
+		});
+
 	});
 
 });
