@@ -93,7 +93,7 @@ describe('WKCModelInputDataIsArticleObject', function testWKCModelInputDataIsArt
 
 	});
 
-	context('WKCArticleBody', function() {
+	context('WKCArticleSnippet', function() {
 
 		it('returns false with WKCErrors if not string', function() {
 			var item = Object.assign(kTestingValidArticle(), {
@@ -103,6 +103,23 @@ describe('WKCModelInputDataIsArticleObject', function testWKCModelInputDataIsArt
 			assert.strictEqual(modelLibrary.WKCModelInputDataIsArticleObject(item), false);
 			assert.deepEqual(item.WKCErrors, {
 				WKCArticleBody: [
+					'WKCErrorNotString',
+				],
+			});
+		});
+
+	});
+
+	context('WKCArticleSnippet', function() {
+
+		it('returns false with WKCErrors if not string', function() {
+			var item = Object.assign(kTestingValidArticle(), {
+				WKCArticleSnippet: 123
+			});
+
+			assert.strictEqual(modelLibrary.WKCModelInputDataIsArticleObject(item), false);
+			assert.deepEqual(item.WKCErrors, {
+				WKCArticleSnippet: [
 					'WKCErrorNotString',
 				],
 			});

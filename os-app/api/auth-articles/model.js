@@ -51,6 +51,14 @@ exports.WKCModelInputDataIsArticleObject = function(inputData) {
 		}
 	}
 
+	if (inputData.WKCArticleSnippet) {
+		if (typeof inputData.WKCArticleSnippet !== 'string') {
+			errors.WKCArticleSnippet = [
+				'WKCErrorNotString',
+			];
+		}
+	}
+
 	if (Object.keys(errors).length) {
 		inputData.WKCErrors = errors;
 		
