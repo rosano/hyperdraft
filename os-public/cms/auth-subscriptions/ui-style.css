@@ -114,6 +114,10 @@ body {
 
 #WKCSubscriptionsDetailBody {
 	margin-top: 10px;
+
+	width: 100%;
+
+	overflow-x: scroll;
 }
 
 #WKCSubscriptionsDetailBody img {

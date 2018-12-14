@@ -128,6 +128,8 @@
 
 		d3.selectAll('#WKCSubscriptionsDetailBody a').attr('target', '_blank');
 
+		d3.selectAll('#WKCSubscriptionsDetailBody *').attr('width', null);
+
 		d3.select('#WKCSubscriptionsDetail').classed('WKCSubscriptionsDetailInactive', false);
 	};
 
