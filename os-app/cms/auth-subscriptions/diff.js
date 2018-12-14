@@ -118,7 +118,36 @@ exports.WKCDiffArticlesForPage = function(oldString, newString) {
 	}
 
 	return [{
-		WKCArticleBody: exports._WKCDiffArticleBodyForPage(oldString, newString),
+		WKCArticleBody: changesArray.map(function(e) {
+			if (e.added === true) {
+				return [
+					'<ins>',
+					e.value,
+					'</ins>',
+				].join('');
+			}
+
+			if (e.removed === true) {
+				return [
+					'<del>',
+					e.value,
+					'</del>',
+				].join('');
+			}
+
+			return e.value;
+		}).join(''),
 		WKCArticlePublishDate: new Date(),
 	}];
 };
+
+//_ WKCSnippetFromText
+
+exports.WKCSnippetFromText = function(inputData) {
+	if (typeof inputData !== 'string') {
+		throw new Error('WKCErrorInvalidInput');
+	}
+
+	return inputData.length <= 100 ? inputData : inputData.slice(0, 100).split(' ').slice(0, -1).join(' ');
+};
+

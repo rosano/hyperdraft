@@ -22,7 +22,10 @@ const kTests = {
         </description></item></channel></rss>';
 	},
 	kTestsHTML: function() {
-		return '<!DOCTYPE html><html><head><title>Rosano</title></head><body><h1>alfa</h1></body></html>';
+		return '<!DOCTYPE html><html><head><title>bravo</title></head><body><h1>alfa</h1></body></html>';
+	},
+	kTestsBody: function() {
+		return "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
 	},
 };
 
@@ -187,6 +190,24 @@ describe('WKCDiffArticlesForPage', function testWKCDiffArticlesForPage() {
 			assert.strictEqual(diffLibrary.WKCDiffArticlesForPage(kTests.kTestsHTML(), kTests.kTestsHTML().replace('alfa', 'alfo')).pop().WKCArticleBody, '<h1>alf<del>a</del><ins>o</ins></h1>');
 		});
 
+	});
+
+});
+
+describe('WKCSnippetFromText', function testWKCSnippetFromText() {
+
+	it('throws error if not string', function() {
+		assert.throws(function() {
+			diffLibrary.WKCSnippetFromText(null);
+		}, /WKCErrorInvalidInput/);
+	});
+
+	it('returns subset if large', function() {
+		assert.strictEqual(diffLibrary.WKCSnippetFromText(kTests.kTestsBody()), kTests.kTestsBody().slice(0, 100).split(' ').slice(0, -1).join(' '));
+	});
+
+	it('returns all if small', function() {
+		assert.strictEqual(diffLibrary.WKCSnippetFromText('alfa bravo'), 'alfa bravo');
 	});
 
 });
