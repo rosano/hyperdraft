@@ -44,7 +44,7 @@ body {
 	overflow-y: scroll;
 
 	/* @Flexbox1 child */
-	flex-basis: 350px;
+	flex: 0 0 350px;
 }
 
 .WKCSubscriptionsListItem {
@@ -72,6 +72,8 @@ body {
 }
 
 #WKCSubscriptionsDetail {
+	padding: 10px;
+
 	/* @Flexbox1 child */
 	flex-grow: 1;
 }
@@ -82,6 +84,39 @@ body {
 	align-items: center;
 }
 
+.WKCSubscriptionsDetailInactive #WKCSubscriptionsDetailArticle {
+	display: none;
+}
+
+.WKCSubscriptionsDetailInactive #WKCSubscriptionsDetailPlaceholder {
+	display: inline;
+}
+
 #WKCSubscriptionsDetailPlaceholder {
 	opacity: 0.5;
+	display: none;
+}
+
+#WKCSubscriptionsDetailHeading {
+	margin-top: 0;
+	margin-bottom: 10px;
+}
+
+#WKCSubscriptionsDetailInfo {
+	opacity: 0.5;
+}
+
+#WKCSubscriptionsDetailLink {
+	display: block;
+
+	opacity: 1;
+}
+
+#WKCSubscriptionsDetailBody {
+	margin-top: 10px;
+}
+
+#WKCSubscriptionsDetailBody img {
+	max-width: 100%;
+	height: auto;
 }
