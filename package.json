@@ -14,6 +14,9 @@
     "// PERSIST": null,
     "mongodb": "^3.0.7",
 
+    "// TASKS": null,
+    "OLSKTasks": "olsk/OLSKTasks",
+
     "// FETCH": null,
     "request": "latest",
 
@@ -33,7 +36,8 @@
     "OLSKTasks": "olsk/OLSKTasks",
     "ispinner.css": "latest",
     "turndown": "latest",
-    "showdown": "latest"
+    "showdown": "latest",
+    "moment": "latest"
   },
   "devDependencies": {
     "gulp": "4.0",

@@ -15,6 +15,7 @@ function install() {
 		'ispinner.css',
 		'turndown',
 		'showdown',
+		'moment',
 	].map(function(e) {
 		return [
 			[
