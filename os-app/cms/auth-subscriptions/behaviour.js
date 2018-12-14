@@ -70,28 +70,28 @@
 		var selection = d3.select('#WKCSubscriptionsList')
 			.selectAll('.WKCSubscriptionsListItem').data(noteObjects);
 		
-		var parentElement = selection.enter()
+		var parentElements = selection.enter()
 			.append('div')
 				.attr('class', 'WKCSubscriptionsListItem')
 				.on('click', function(obj) {
 					moi.commandsSelectNote(obj);
 				});
-		parentElement.append('span').attr('id', 'WKCSubscriptionsListItemHeading');
-		parentElement.append('span').attr('id', 'WKCSubscriptionsListItemDate');
-		parentElement.append('span').attr('id', 'WKCSubscriptionsListItemSnippet');
-		parentElement.append('span').attr('id', 'WKCSubscriptionsListItemSource');
-		parentElement = parentElement.merge(selection);
+		parentElements.append('span').attr('id', 'WKCSubscriptionsListItemHeading');
+		parentElements.append('span').attr('id', 'WKCSubscriptionsListItemDate');
+		parentElements.append('span').attr('id', 'WKCSubscriptionsListItemSnippet');
+		parentElements.append('span').attr('id', 'WKCSubscriptionsListItemSource');
+		parentElements = parentElements.merge(selection);
 
-		parentElement.select('#WKCSubscriptionsListItemHeading').text(function(obj) {
+		parentElements.select('#WKCSubscriptionsListItemHeading').text(function(obj) {
 			return obj.WKCArticleTitle || 'untitled_article';
 		});
-		parentElement.select('#WKCSubscriptionsListItemDate').text(function(obj) {
-			return obj.WKCArticlePublishDate.toString();
+		parentElements.select('#WKCSubscriptionsListItemDate').text(function(obj) {
+			return moment(obj.WKCArticlePublishDate).fromNow();
 		});
-		parentElement.select('#WKCSubscriptionsListItemSnippet').text(function(obj) {
+		parentElements.select('#WKCSubscriptionsListItemSnippet').text(function(obj) {
 			return obj.WKCArticleSnippet || 'no snippet';
 		});
-		parentElement.select('#WKCSubscriptionsListItemSource').text(function(obj) {
+		parentElements.select('#WKCSubscriptionsListItemSource').text(function(obj) {
 			return obj.WKCArticleSubscriptionID;
 		});
 
