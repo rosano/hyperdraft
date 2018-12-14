@@ -7,7 +7,7 @@
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
 	typeof define === 'function' && define.amd ? define(['exports'], factory) :
-	(factory((global.WKSubscriptionsModuleCreateLogic = global.WKSubscriptionsModuleCreateLogic || {})));
+	(factory((global.WKSubscriptionsLogic = global.WKSubscriptionsLogic || {})));
 }(this, (function (exports) { 'use strict';
 
 	//_ WKSubscriptionsModuleCreateCompleteURL

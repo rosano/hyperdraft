@@ -143,7 +143,7 @@
 		moi.reactAlternatives([].slice.call(parsedHTML.getElementsByTagName('link')).filter(function(e) {
 			return e.type.trim().toLowerCase() === 'application/rss+xml';
 		}).map(function(e) {
-			return WKSubscriptionsModuleCreateLogic.WKSubscriptionsModuleCreateCompleteURL(d3.select(e).attr('href'), inputData);
+			return WKSubscriptionsLogic.WKSubscriptionsModuleCreateCompleteURL(d3.select(e).attr('href'), inputData);
 		}));
 
 		var turndownInstance = new TurndownService();
