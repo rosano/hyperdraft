@@ -167,6 +167,25 @@ describe('WKCModelInputDataIsSubscriptionObject', function testWKCModelInputData
 
 	});
 
+	context('WKCSubscriptionFetchDate', function() {
+
+		it('returns false with WKCErrors if not date', function() {
+			var item = {
+				WKCSubscriptionURL: 'https://google.com',
+				WKCSubscriptionType: modelLibrary.WKCSubscriptionTypePage(),
+				WKCSubscriptionFetchDate: new Date('alfa'),
+			};
+
+			assert.strictEqual(modelLibrary.WKCModelInputDataIsSubscriptionObject(item), false);
+			assert.deepEqual(item.WKCErrors, {
+				WKCSubscriptionFetchDate: [
+					'WKCErrorNotDate',
+				],
+			});
+		});
+
+	});
+
 	context('WKCSubscriptionFetchContent', function() {
 
 		it('returns false with WKCErrors if not string', function() {
@@ -186,19 +205,38 @@ describe('WKCModelInputDataIsSubscriptionObject', function testWKCModelInputData
 
 	});
 
-	context('WKCSubscriptionFetchDate', function() {
+	context('WKCSubscriptionErrorDate', function() {
 
 		it('returns false with WKCErrors if not date', function() {
 			var item = {
 				WKCSubscriptionURL: 'https://google.com',
 				WKCSubscriptionType: modelLibrary.WKCSubscriptionTypePage(),
-				WKCSubscriptionFetchDate: new Date('alfa'),
+				WKCSubscriptionErrorDate: new Date('alfa'),
 			};
 
 			assert.strictEqual(modelLibrary.WKCModelInputDataIsSubscriptionObject(item), false);
 			assert.deepEqual(item.WKCErrors, {
-				WKCSubscriptionFetchDate: [
+				WKCSubscriptionErrorDate: [
 					'WKCErrorNotDate',
+				],
+			});
+		});
+
+	});
+
+	context('WKCSubscriptionErrorMessage', function() {
+
+		it('returns false with WKCErrors if not string', function() {
+			var item = {
+				WKCSubscriptionURL: 'https://google.com',
+				WKCSubscriptionType: modelLibrary.WKCSubscriptionTypePage(),
+				WKCSubscriptionErrorMessage: 123
+			};
+
+			assert.strictEqual(modelLibrary.WKCModelInputDataIsSubscriptionObject(item), false);
+			assert.deepEqual(item.WKCErrors, {
+				WKCSubscriptionErrorMessage: [
+					'WKCErrorNotString',
 				],
 			});
 		});

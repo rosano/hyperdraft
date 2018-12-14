@@ -81,6 +81,14 @@ exports.WKCModelInputDataIsSubscriptionObject = function(inputData) {
 		}
 	}
 
+	if (inputData.WKCSubscriptionFetchDate) {
+		if (!(inputData.WKCSubscriptionFetchDate instanceof Date) || Number.isNaN(inputData.WKCSubscriptionFetchDate.getTime())) {
+			errors.WKCSubscriptionFetchDate = [
+				'WKCErrorNotDate',
+			];
+		}
+	}
+
 	if (inputData.WKCSubscriptionFetchContent) {
 		if (typeof inputData.WKCSubscriptionFetchContent !== 'string') {
 			errors.WKCSubscriptionFetchContent = [
@@ -89,10 +97,18 @@ exports.WKCModelInputDataIsSubscriptionObject = function(inputData) {
 		}
 	}
 
-	if (inputData.WKCSubscriptionFetchDate) {
-		if (!(inputData.WKCSubscriptionFetchDate instanceof Date) || Number.isNaN(inputData.WKCSubscriptionFetchDate.getTime())) {
-			errors.WKCSubscriptionFetchDate = [
+	if (inputData.WKCSubscriptionErrorDate) {
+		if (!(inputData.WKCSubscriptionErrorDate instanceof Date) || Number.isNaN(inputData.WKCSubscriptionErrorDate.getTime())) {
+			errors.WKCSubscriptionErrorDate = [
 				'WKCErrorNotDate',
+			];
+		}
+	}
+
+	if (inputData.WKCSubscriptionErrorMessage) {
+		if (typeof inputData.WKCSubscriptionErrorMessage !== 'string') {
+			errors.WKCSubscriptionErrorMessage = [
+				'WKCErrorNotString',
 			];
 		}
 	}
