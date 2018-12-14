@@ -19,7 +19,10 @@ const kTests = {
 		return '<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><item><title>alfa</title><link>https://www.cbc.ca/bravo</link><guid isPermaLink="false">charlie</guid><pubDate>Fri, 7 Dec 2018 10:03:15 EST</pubDate><author>delta</author><description><![CDATA[\
                         <p>echo</p>\
         ]]>\
-        </description></item></channel></rss>';
+        </description><content:encoded><![CDATA[\
+                        <p>foxtrot</p>\
+        ]]>\
+        </content:encoded></item></channel></rss>';
 	},
 	kTestsHTML: function() {
 		return '<!DOCTYPE html><html><head><title>bravo</title></head><body><h1>alfa</h1></body></html>';
@@ -52,32 +55,40 @@ describe('WKCDiffArticlesForFeed', function testWKCDiffArticlesForFeed() {
 		]);
 	});
 
-	it('populates article title', function() {
+	it('populates WKCArticleTitle', function() {
 		assert.strictEqual(diffLibrary.WKCDiffArticlesForFeed(null, kTests.kTestsRSSComplete()).pop().WKCArticleTitle, 'alfa');
 	});
 
-	it('populates article link', function() {
+	it('populates WKCArticleOriginalURL', function() {
 		assert.strictEqual(diffLibrary.WKCDiffArticlesForFeed(null, kTests.kTestsRSSComplete()).pop().WKCArticleOriginalURL, 'https://www.cbc.ca/bravo');
 	});
 
-	it('populates article guid', function() {
+	it('populates WKCArticleOriginalGUID', function() {
 		assert.strictEqual(diffLibrary.WKCDiffArticlesForFeed(null, kTests.kTestsRSSComplete()).pop().WKCArticleOriginalGUID, 'charlie');
 	});
 
-	it('populates article guid as string', function() {
+	it('populates WKCArticleOriginalGUID as string', function() {
 		assert.strictEqual(diffLibrary.WKCDiffArticlesForFeed(null, kTests.kTestsRSSComplete().replace('charlie', '12345')).pop().WKCArticleOriginalGUID, '12345');
 	});
 
-	it('populates article date', function() {
+	it('populates WKCArticlePublishDate', function() {
 		assert.deepEqual(diffLibrary.WKCDiffArticlesForFeed(null, kTests.kTestsRSSComplete()).pop().WKCArticlePublishDate, new Date('2018-12-07T15:03:15.000Z'));
 	});
 
-	it('populates article author', function() {
+	it('populates WKCArticleAuthor', function() {
 		assert.strictEqual(diffLibrary.WKCDiffArticlesForFeed(null, kTests.kTestsRSSComplete()).pop().WKCArticleAuthor, 'delta');
 	});
 
-	it('populates article body', function() {
-		assert.strictEqual(diffLibrary.WKCDiffArticlesForFeed(null, kTests.kTestsRSSComplete()).pop().WKCArticleBody, '<p>echo</p>');
+	it('populates WKCArticleBody', function() {
+		assert.strictEqual(diffLibrary.WKCDiffArticlesForFeed(null, kTests.kTestsRSSComplete()).pop().WKCArticleBody, '<p>foxtrot</p>');
+	});
+
+	it('populates WKCArticleBody with description if no content:encoded', function() {
+		assert.strictEqual(diffLibrary.WKCDiffArticlesForFeed(null, kTests.kTestsRSSComplete().replace(/<content:encoded>.*<\/content:encoded>/, '')).pop().WKCArticleBody, '<p>echo</p>');
+	});
+
+	it('populates WKCArticleSnippet', function() {
+		assert.strictEqual(diffLibrary.WKCDiffArticlesForFeed(null, kTests.kTestsRSSComplete()).pop().WKCArticleSnippet, 'foxtrot');
 	});
 
 });

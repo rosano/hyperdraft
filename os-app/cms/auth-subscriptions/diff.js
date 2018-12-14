@@ -50,13 +50,16 @@ exports.WKCDiffArticlesForFeed = function(oldString, newString) {
 
 		return oldIDs.indexOf(e.guid) === -1;
 	}).map(function(e) {
+		var itemContent = (e['content:encoded'] || e.description).trim();
+
 		return {
 			WKCArticleTitle: e.title,
 			WKCArticleOriginalURL: e.link,
 			WKCArticleOriginalGUID: e.guid,
 			WKCArticlePublishDate: new Date(e.pubDate),
 			WKCArticleAuthor: e.author,
-			WKCArticleBody: e.description.trim(),
+			WKCArticleBody: itemContent,
+			WKCArticleSnippet: exports.WKCSnippetFromText(JSDOM.fragment(itemContent).textContent),
 		};
 	});
 };
