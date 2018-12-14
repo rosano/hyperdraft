@@ -214,7 +214,7 @@ describe('WKCSnippetFromText', function testWKCSnippetFromText() {
 	});
 
 	it('returns subset if large', function() {
-		assert.strictEqual(diffLibrary.WKCSnippetFromText(kTests.kTestsBody()), kTests.kTestsBody().slice(0, 100).split(' ').slice(0, -1).join(' '));
+		assert.strictEqual(diffLibrary.WKCSnippetFromText(kTests.kTestsBody()), kTests.kTestsBody().slice(0, 100).split(' ').slice(0, -1).join(' ') + '…');
 	});
 
 	it('returns all if small', function() {

@@ -151,6 +151,6 @@ exports.WKCSnippetFromText = function(inputData) {
 		throw new Error('WKCErrorInvalidInput');
 	}
 
-	return inputData.length <= 100 ? inputData : inputData.slice(0, 100).split(' ').slice(0, -1).join(' ');
+	return inputData.length <= 100 ? inputData : inputData.slice(0, 100).split(' ').slice(0, -1).join(' ').concat('…');
 };
 
