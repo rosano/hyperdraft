@@ -61,6 +61,12 @@
 		return pathComponents.join('/');
 	};
 
+	//_ WKSubscriptionsListSort
+
+	exports.WKSubscriptionsListSort = function (a, b) {
+		return b.WKCArticlePublishDate > a.WKCArticlePublishDate;
+	};
+
 	Object.defineProperty(exports, '__esModule', { value: true });
 
 })));

@@ -61,3 +61,18 @@ describe('WKSubscriptionsModuleCreateCompleteURL', function testWKSubscriptionsM
 	});
 
 });
+
+describe('WKSubscriptionsListSort', function testWKSubscriptionsListSort() {
+
+	it('sorts by WKCArticlePublishDate descending', function() {
+		var item1 = {
+			WKCArticlePublishDate: new Date(0),
+		};
+		var item2 = {
+			WKCArticlePublishDate: new Date(1),
+		};
+
+		assert.deepEqual([item1, item2].sort(logicLibrary.WKSubscriptionsListSort), [item2, item1]);
+	});
+
+});

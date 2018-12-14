@@ -14,4 +14,16 @@ locals.OLSKPageAssets = [
 
 <%- include('./module-create/view.ejs') %>
 
+<script type="text/javascript">
+	<%- include('behaviour.js') %>
+</script>
+
+<script type="text/javascript">
+	WKSubscriptions.lifecyclePageWillLoad();
+</script>
+
+<div id="WKCSubscriptions" class="WKCSubscriptionsLoading">
+	<div id="WKCSubscriptionsList"></div>
+</div>
+
 <%- include('../../_shared/WKCLayout/footer.ejs') %>
