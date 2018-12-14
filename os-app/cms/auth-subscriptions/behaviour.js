@@ -126,6 +126,8 @@
 		d3.select('#WKCSubscriptionsDetailLink').attr('href', moi.propertiesSelectedArticle().WKCArticleOriginalURL);
 		d3.select('#WKCSubscriptionsDetailBody').html(moi.propertiesSelectedArticle().WKCArticleBody);
 
+		d3.selectAll('#WKCSubscriptionsDetailBody a').attr('target', '_blank');
+
 		d3.select('#WKCSubscriptionsDetail').classed('WKCSubscriptionsDetailInactive', false);
 	};
 
