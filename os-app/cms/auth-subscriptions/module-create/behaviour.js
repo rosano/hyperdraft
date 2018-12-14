@@ -42,8 +42,6 @@
 			WKCSubscriptionType: d3.select('#WKCSubscriptionsModuleCreateConfirmationFormType').node().value,
 			WKCSubscriptionName: d3.select('#WKCSubscriptionsModuleCreateConfirmationFormName').node().value,
 			WKCSubscriptionBlurb: d3.select('#WKCSubscriptionsModuleCreateConfirmationFormBlurb').node().value,
-			WKCSubscriptionFetchContent: d3.select('#WKCSubscriptionsModuleCreateConfirmationFormFetchData').node().value,
-			WKCSubscriptionFetchDate: new Date(),
 		});
 	};
 
@@ -89,8 +87,6 @@
 				WKCInputURL: inputData,
 			})
 		}).then(function(data) {
-			moi.reactConfirmationFetchData(data);
-
 			var parsedXML = (new DOMParser()).parseFromString(data, 'application/xml');
 
 			if (!parsedXML.getElementsByTagName('parsererror').length && parsedXML.documentElement.getElementsByTagName('channel').length) {
@@ -241,12 +237,6 @@
 
 	moi.reactConfirmationVisibility = function (isVisible) {
 		d3.select('#WKCSubscriptionsModuleCreateConfirmation').classed('WKCSubscriptionsHidden', !isVisible);
-	};
-
-	//_ reactConfirmationFetchData
-
-	moi.reactConfirmationFetchData = function (inputData) {
-		d3.select('#WKCSubscriptionsModuleCreateConfirmationFormFetchData').node().value = inputData;
 	};
 
 	//_ reactConfirmationType
