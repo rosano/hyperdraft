@@ -173,14 +173,30 @@ exports.WKCMetalSubscriptionsNeedingFetch = function(databaseClient, completionH
 	}
 
 	return databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_subscriptions').find({
-		'$or': [
+		'$and': [
 			{
-				WKCSubscriptionFetchDate: {
-					'$lte': new Date(new Date() - 1000 * 60 * 60),
-				},
+				'$or': [
+					{
+						WKCSubscriptionFetchDate: {
+							'$lte': new Date(new Date() - 1000 * 60 * 60),
+						},
+					},
+					{
+						WKCSubscriptionFetchDate: null,
+					},
+					],
 			},
 			{
-				WKCSubscriptionFetchDate: null,
+				'$or': [
+					{
+						WKCSubscriptionErrorDate: {
+							'$lte': new Date(new Date() - 1000 * 60 * 60),
+						},
+					},
+					{
+						WKCSubscriptionErrorDate: null,
+					},
+					],
 			},
 			],
 	}).project(modelLibrary.WKCSubscriptionHiddenPropertyNames().reduce(function(hash, e) {

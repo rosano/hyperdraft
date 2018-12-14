@@ -253,4 +253,47 @@ describe('WKCMetalSubscriptionsNeedingFetch', function testWKCMetalSubscriptions
 		});
 	});
 
+	context('error', function() {
+
+		it('excludes subscriptionObjects with error date less than one hour', function(done) {
+			metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTestingValidSubscription(), {
+				WKCSubscriptionName: 'alfa',
+				WKCSubscriptionFetchDate: new Date(new Date() - 1000 * 60 * 60),
+				WKCSubscriptionErrorDate: new Date(),
+			}), function(err, subscriptionObject) {
+				metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTestingValidSubscription(), {
+					WKCSubscriptionName: 'bravo',
+					WKCSubscriptionFetchDate: new Date(),
+				}), function(err, subscriptionObject) {
+					metalLibrary.WKCMetalSubscriptionsNeedingFetch(WKCTestingMongoClient, function(err, responseJSON) {
+						assert.strictEqual(responseJSON.length, 0);
+
+						done();
+					});
+				});
+			});
+		});
+
+		it('includes subscriptionObjects with error date older than one hour', function(done) {
+			metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTestingValidSubscription(), {
+				WKCSubscriptionName: 'alfa',
+				WKCSubscriptionFetchDate: new Date(new Date() - 1000 * 60 * 60),
+				WKCSubscriptionErrorDate: new Date(new Date() - 1000 * 60 * 60),
+			}), function(err, subscriptionObject) {
+				metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTestingValidSubscription(), {
+					WKCSubscriptionName: 'bravo',
+					WKCSubscriptionFetchDate: new Date(),
+				}), function(err, subscriptionObject) {
+					metalLibrary.WKCMetalSubscriptionsNeedingFetch(WKCTestingMongoClient, function(err, responseJSON) {
+						assert.strictEqual(responseJSON.length, 1);
+						assert.deepEqual(responseJSON.pop().WKCSubscriptionName, 'alfa');
+
+						done();
+					});
+				});
+			});
+		});
+
+	});
+
 });
