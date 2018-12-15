@@ -64,9 +64,15 @@ exports.WKCDiffArticlesForFeed = function(oldString, newString) {
 	});
 };
 
-//_ _WKCDiffArticleBodyForChangesArray
+//_ _WKCDiffArticleBodyForStrings
 
-exports._WKCDiffArticleBodyForChangesArray = function(changesArray) {
+exports._WKCDiffArticleBodyForStrings = function(oldString, newString) {
+	if (typeof newString !== 'string') {
+		throw new Error('WKCErrorInvalidInput');
+	}
+
+	var changesArray = diffPackage.diffChars(oldString || '', newString);
+
 	return changesArray.map(function(e) {
 		if (e.added === true) {
 			return [
@@ -88,25 +94,19 @@ exports._WKCDiffArticleBodyForChangesArray = function(changesArray) {
 	}).join('');
 };
 
-//_ _WKCDiffArticleBodyForFile
+//_ WKCDiffArticlesForFile
 
-exports._WKCDiffArticleBodyForFile = function(oldString, newString) {
+exports.WKCDiffArticlesForFile = function(oldString, newString) {
 	if (typeof newString !== 'string') {
 		throw new Error('WKCErrorInvalidInput');
 	}
 	
-	return exports._WKCDiffArticleBodyForChangesArray(diffPackage.diffChars(htmlEntitiesPackage.encode(oldString || ''), htmlEntitiesPackage.encode(newString)));
-};
-
-//_ WKCDiffArticlesForFile
-
-exports.WKCDiffArticlesForFile = function(oldString, newString) {
 	if (oldString === newString) {
 		return [];
 	}
 
 	return [{
-		WKCArticleBody: exports._WKCDiffArticleBodyForFile(oldString, newString),
+		WKCArticleBody: exports._WKCDiffArticleBodyForStrings(htmlEntitiesPackage.encode(oldString), htmlEntitiesPackage.encode(newString)),
 		WKCArticlePublishDate: new Date(),
 	}];
 };
@@ -118,16 +118,15 @@ exports.WKCDiffArticlesForPage = function(oldString, newString) {
 		throw new Error('WKCErrorInvalidInput');
 	}
 
-	var changesArray = diffPackage.diffChars(showdownPackage.makeHtml(turndownPackage.turndown((new JSDOM(oldString || '')).window.document.body.innerHTML)), showdownPackage.makeHtml(turndownPackage.turndown((new JSDOM(newString)).window.document.body.innerHTML)));
+	oldString = showdownPackage.makeHtml(turndownPackage.turndown((new JSDOM(oldString || '')).window.document.body.innerHTML));
+	newString = showdownPackage.makeHtml(turndownPackage.turndown((new JSDOM(newString)).window.document.body.innerHTML));
 	
-	if (!changesArray.filter(function(e) {
-		return e.added || e.removed;
-	}).length) {
+	if (oldString === newString) {
 		return [];
 	}
 
 	return [{
-		WKCArticleBody: exports._WKCDiffArticleBodyForChangesArray(changesArray),
+		WKCArticleBody: exports._WKCDiffArticleBodyForStrings(oldString, newString),
 		WKCArticlePublishDate: new Date(),
 	}];
 };

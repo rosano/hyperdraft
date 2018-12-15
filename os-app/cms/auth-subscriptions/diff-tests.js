@@ -93,60 +93,62 @@ describe('WKCDiffArticlesForFeed', function testWKCDiffArticlesForFeed() {
 
 });
 
-describe('_WKCDiffArticleBodyForFile', function test_WKCDiffArticleBodyForFile() {
+describe('_WKCDiffArticleBodyForStrings', function test_WKCDiffArticleBodyForStrings() {
 
 	it('throws error if param2 not string', function() {
 		assert.throws(function() {
-			diffLibrary._WKCDiffArticleBodyForFile('alfa', null);
+			diffLibrary._WKCDiffArticleBodyForStrings('alfa', null);
 		}, /WKCErrorInvalidInput/);
 	});
 
 	it('returns all if param1 null', function() {
-		assert.strictEqual(diffLibrary._WKCDiffArticleBodyForFile(null, 'alfa'), '<ins>alfa</ins>');
+		assert.strictEqual(diffLibrary._WKCDiffArticleBodyForStrings(null, 'alfa'), '<ins>alfa</ins>');
 	});
 
 	it('returns identical if no change', function() {
-		assert.strictEqual(diffLibrary._WKCDiffArticleBodyForFile('alfa', 'alfa'), 'alfa');
+		assert.strictEqual(diffLibrary._WKCDiffArticleBodyForStrings('alfa', 'alfa'), 'alfa');
 	});
 
 	it('adds markup if character added', function() {
-		assert.strictEqual(diffLibrary._WKCDiffArticleBodyForFile('alfa', 'alfab'), 'alfa<ins>b</ins>');
+		assert.strictEqual(diffLibrary._WKCDiffArticleBodyForStrings('alfa', 'alfax'), 'alfa<ins>x</ins>');
 	});
 
 	it('adds markup if character removed', function() {
-		assert.strictEqual(diffLibrary._WKCDiffArticleBodyForFile('alfa', 'alf'), 'alf<del>a</del>');
+		assert.strictEqual(diffLibrary._WKCDiffArticleBodyForStrings('alfa', 'alf'), 'alf<del>a</del>');
 	});
 
 	it('adds markup if character changed', function() {
-		assert.strictEqual(diffLibrary._WKCDiffArticleBodyForFile('alfa', 'alfo'), 'alf<del>a</del><ins>o</ins>');
-	});
-
-	it('escapes html tags', function() {
-		assert.strictEqual(diffLibrary._WKCDiffArticleBodyForFile('<b>alfa</b>', '<b>alfax</b>'), '&lt;b&gt;alfa<ins>x</ins>&lt;/b&gt;');
+		assert.strictEqual(diffLibrary._WKCDiffArticleBodyForStrings('alfa', 'alfo'), 'alf<del>a</del><ins>o</ins>');
 	});
 
 });
 
 describe('WKCDiffArticlesForFile', function testWKCDiffArticlesForFile() {
 
+	it('throws error if param2 not string', function() {
+		assert.throws(function() {
+			diffLibrary.WKCDiffArticlesForFile('alfa', null);
+		}, /WKCErrorInvalidInput/);
+	});
+
 	it('returns none if identical', function() {
 		assert.deepEqual(diffLibrary.WKCDiffArticlesForFile('alfa', 'alfa'), []);
 	});
 
 	it('returns one if not identical', function() {
-		assert.deepEqual(diffLibrary.WKCDiffArticlesForFile('alfa', 'alfo').map(function(e) {
-			return e.WKCArticleBody;
-		}), [
-			'alf<del>a</del><ins>o</ins>'
-		]);
+		assert.deepEqual(diffLibrary.WKCDiffArticlesForFile('alfa', 'alfax').length, 1);
 	});
 
 	it('populates article date', function() {
-		assert.strictEqual(diffLibrary.WKCDiffArticlesForFile('alfa', 'alfo').pop().WKCArticlePublishDate - (new Date()) < 100, true);
+		assert.strictEqual(diffLibrary.WKCDiffArticlesForFile('alfa', 'alfax').pop().WKCArticlePublishDate - (new Date()) < 100, true);
 	});
 
 	it('populates article body', function() {
-		assert.strictEqual(diffLibrary.WKCDiffArticlesForFile('alfa', 'alfo').pop().WKCArticleBody, 'alf<del>a</del><ins>o</ins>');
+		assert.strictEqual(diffLibrary.WKCDiffArticlesForFile('alfa', 'alfax').pop().WKCArticleBody, 'alfa<ins>x</ins>');
+	});
+
+	it('escapes html tags', function() {
+		assert.strictEqual(diffLibrary.WKCDiffArticlesForFile('<b>alfa</b>', '<b>alfax</b>').pop().WKCArticleBody, '&lt;b&gt;alfa<ins>x</ins>&lt;/b&gt;');
 	});
 
 });
@@ -163,44 +165,20 @@ describe('WKCDiffArticlesForPage', function testWKCDiffArticlesForPage() {
 		assert.deepEqual(diffLibrary.WKCDiffArticlesForPage(kTests.kTestsHTML(), kTests.kTestsHTML()), []);
 	});
 
-	it('ignores head changes', function() {
-		assert.deepEqual(diffLibrary.WKCDiffArticlesForPage(kTests.kTestsHTML(), kTests.kTestsHTML().replace('bravo', 'charlie')), []);
+	it('returns none if head changes', function() {
+		assert.deepEqual(diffLibrary.WKCDiffArticlesForPage(kTests.kTestsHTML(), kTests.kTestsHTML().replace('bravo', 'bravox')), []);
 	});
 
 	it('returns one if not identical', function() {
-		assert.deepEqual(diffLibrary.WKCDiffArticlesForPage(kTests.kTestsHTML(), kTests.kTestsHTML().replace('alfa', 'alfo')).map(function(e) {
-			return e.WKCArticleBody;
-		}), [
-			'<h1>alf<del>a</del><ins>o</ins></h1>'
-		]);
+		assert.deepEqual(diffLibrary.WKCDiffArticlesForPage(kTests.kTestsHTML(), kTests.kTestsHTML().replace('alfa', 'alfax')).length, 1);
 	});
 
 	it('populates article date', function() {
-		assert.strictEqual(diffLibrary.WKCDiffArticlesForPage(kTests.kTestsHTML(), kTests.kTestsHTML().replace('alfa', 'alfo')).pop().WKCArticlePublishDate - (new Date()) < 100, true);
+		assert.strictEqual(diffLibrary.WKCDiffArticlesForPage(kTests.kTestsHTML(), kTests.kTestsHTML().replace('alfa', 'alfax')).pop().WKCArticlePublishDate - (new Date()) < 100, true);
 	});
 
 	it('populates article body', function() {
-		assert.strictEqual(diffLibrary.WKCDiffArticlesForPage(kTests.kTestsHTML(), kTests.kTestsHTML().replace('alfa', 'alfo')).pop().WKCArticleBody, '<h1>alf<del>a</del><ins>o</ins></h1>');
-	});
-
-	context('WKCArticleBody', function() {
-
-		it('adds markup if param1 null', function() {
-			assert.strictEqual(diffLibrary.WKCDiffArticlesForPage(null, kTests.kTestsHTML()).pop().WKCArticleBody, '<ins><h1>alfa</h1></ins>');
-		});
-
-		it('adds markup if character added', function() {
-			assert.strictEqual(diffLibrary.WKCDiffArticlesForPage(kTests.kTestsHTML(), kTests.kTestsHTML().replace('alfa', 'alfab')).pop().WKCArticleBody, '<h1>alfa<ins>b</ins></h1>');
-		});
-
-		it('adds markup if character removed', function() {
-			assert.strictEqual(diffLibrary.WKCDiffArticlesForPage(kTests.kTestsHTML(), kTests.kTestsHTML().replace('alfa', 'alf')).pop().WKCArticleBody, '<h1>alf<del>a</del></h1>');
-		});
-
-		it('adds markup if character changed', function() {
-			assert.strictEqual(diffLibrary.WKCDiffArticlesForPage(kTests.kTestsHTML(), kTests.kTestsHTML().replace('alfa', 'alfo')).pop().WKCArticleBody, '<h1>alf<del>a</del><ins>o</ins></h1>');
-		});
-
+		assert.strictEqual(diffLibrary.WKCDiffArticlesForPage(kTests.kTestsHTML(), kTests.kTestsHTML().replace('alfa', 'alfax')).pop().WKCArticleBody, '<h1>alfa<ins>x</ins></h1>');
 	});
 
 });
