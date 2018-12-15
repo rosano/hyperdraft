@@ -102,27 +102,27 @@ describe('_WKCDiffArticleBodyForFile', function test_WKCDiffArticleBodyForFile()
 	});
 
 	it('returns all if param1 null', function() {
-		assert.deepEqual(diffLibrary._WKCDiffArticleBodyForFile(null, 'alfa'), '<ins>alfa</ins>');
+		assert.strictEqual(diffLibrary._WKCDiffArticleBodyForFile(null, 'alfa'), '<ins>alfa</ins>');
 	});
 
 	it('returns identical if no change', function() {
-		assert.deepEqual(diffLibrary._WKCDiffArticleBodyForFile('alfa', 'alfa'), 'alfa');
+		assert.strictEqual(diffLibrary._WKCDiffArticleBodyForFile('alfa', 'alfa'), 'alfa');
 	});
 
 	it('adds markup if character added', function() {
-		assert.deepEqual(diffLibrary._WKCDiffArticleBodyForFile('alfa', 'alfab'), 'alfa<ins>b</ins>');
+		assert.strictEqual(diffLibrary._WKCDiffArticleBodyForFile('alfa', 'alfab'), 'alfa<ins>b</ins>');
 	});
 
 	it('adds markup if character removed', function() {
-		assert.deepEqual(diffLibrary._WKCDiffArticleBodyForFile('alfa', 'alf'), 'alf<del>a</del>');
+		assert.strictEqual(diffLibrary._WKCDiffArticleBodyForFile('alfa', 'alf'), 'alf<del>a</del>');
 	});
 
 	it('adds markup if character changed', function() {
-		assert.deepEqual(diffLibrary._WKCDiffArticleBodyForFile('alfa', 'alfo'), 'alf<del>a</del><ins>o</ins>');
+		assert.strictEqual(diffLibrary._WKCDiffArticleBodyForFile('alfa', 'alfo'), 'alf<del>a</del><ins>o</ins>');
 	});
 
 	it('escapes html tags', function() {
-		assert.deepEqual(diffLibrary._WKCDiffArticleBodyForFile('<b>alfa</b>', '<b>alfax</b>'), '&lt;b&gt;alfa<ins>x</ins>&lt;/b&gt;');
+		assert.strictEqual(diffLibrary._WKCDiffArticleBodyForFile('<b>alfa</b>', '<b>alfax</b>'), '&lt;b&gt;alfa<ins>x</ins>&lt;/b&gt;');
 	});
 
 });
