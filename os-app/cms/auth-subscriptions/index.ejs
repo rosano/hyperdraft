@@ -4,6 +4,7 @@ locals.OLSKPageAssets = [
 	'/shared-assets/vendor/turndown/dist/turndown.js',
 	'/shared-assets/vendor/ispinner.css/ispinner.prefixed.css',
 	'/shared-assets/vendor/moment/moment.js',
+	'/cms/_shared/ui-style.css',
 	'ui-logic.js',
 	'ui-style.css',
 ];
@@ -11,7 +12,9 @@ locals.OLSKPageAssets = [
 
 <%- include('../../_shared/WKCLayout/header.ejs') %>
 
-<%- include('./module-create/view.ejs') %>
+<%- include('../_shared/layout-header.ejs') %>
+
+<% include('./module-create/view.ejs') %>
 
 <script type="text/javascript">
 	<%- include('behaviour.js') %>
