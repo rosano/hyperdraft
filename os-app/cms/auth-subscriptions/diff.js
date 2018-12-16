@@ -75,22 +75,20 @@ exports._WKCDiffArticleBodyForStrings = function(oldString, newString) {
 
 	var lineDiffs = diffPackage.diffLines(oldString || '', newString);
 
+	var truncateCallback = function(e, index, collection, ignoreFlag) {
+		var nextObject = collection[index + 1];
+
+		if (nextObject && (nextObject.added || nextObject.removed) && !e.added && !e.removed && e.value.split('\n').length > 4) {
+			return ['…'].concat(e.value.split('\n').slice(-4)).join('\n');
+		}
+
+		return ignoreFlag ? '' : e.value;
+	};
+
 	return diffPackage.diffChars(lineDiffs.map(function(e, index, collection) {
-		var nextObject = collection[index + 1];
-
-		if (nextObject && (nextObject.added || nextObject.removed) && !e.added && !e.removed && e.value.split('\n').length > 4) {
-			return ['…'].concat(e.value.split('\n').slice(-4)).join('\n');
-		}
-
-		return e.added ? '' : e.value;
+		return truncateCallback(e, index, collection, e.added);
 	}).join(''), lineDiffs.map(function(e, index, collection) {
-		var nextObject = collection[index + 1];
-
-		if (nextObject && (nextObject.added || nextObject.removed) && !e.added && !e.removed && e.value.split('\n').length > 4) {
-			return ['…'].concat(e.value.split('\n').slice(-4)).join('\n');
-		}
-
-		return e.removed ? '' : e.value;
+		return truncateCallback(e, index, collection, e.removed);
 	}).join('')).map(function(e) {
 		if (e.added === true) {
 			return [
