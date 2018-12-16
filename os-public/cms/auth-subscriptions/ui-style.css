@@ -1,25 +1,9 @@
-html {
-	/* @FitHeightToScreen */
-  height: 100%;
-}
-
 body {
   font-family: 'Helvetica Neue';
   font-size: 90%;
-
-	/* @FitHeightToScreen */
-  height: 100%;
-}
-
-#OLSKSharedContainer {
-	/* @FitHeightToScreen */
-  height: 100%;
 }
 
 #WKCSubscriptions {
-	/* @FitHeightToScreen */
-  height: 100%;
-
 	/* @Flexbox1 parent */
 	display: flex;
 	flex-direction: row;
