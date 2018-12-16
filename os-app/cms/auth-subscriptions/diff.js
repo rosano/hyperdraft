@@ -138,7 +138,7 @@ exports.WKCDiffArticlesForFile = function(oldString, newString) {
 	}
 
 	return [{
-		WKCArticleBody: exports._WKCDiffArticleBodyForStrings(htmlEntitiesPackage.encode(oldString), htmlEntitiesPackage.encode(newString)),
+		WKCArticleBody: exports._WKCDiffArticleBodyForStrings(htmlEntitiesPackage.encode(oldString), htmlEntitiesPackage.encode(newString)).replace(/\n/g, '<br>'),
 		WKCArticlePublishDate: new Date(),
 	}];
 };

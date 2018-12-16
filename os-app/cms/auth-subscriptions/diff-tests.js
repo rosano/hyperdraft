@@ -182,6 +182,10 @@ describe('WKCDiffArticlesForFile', function testWKCDiffArticlesForFile() {
 		assert.strictEqual(diffLibrary.WKCDiffArticlesForFile('<b>alfa</b>', '<b>alfax</b>').pop().WKCArticleBody, '&lt;b&gt;alfa<ins>x</ins>&lt;/b&gt;');
 	});
 
+	it('adds markup for line breaks', function() {
+		assert.strictEqual(diffLibrary.WKCDiffArticlesForFile(kTests.kTestsTextMultiline(3), kTests.kTestsTextMultiline(3).replace('alfa', 'alfax')).pop().WKCArticleBody, kTests.kTestsTextMultiline(3).replace('alfa', 'alfa<ins>x</ins>').replace(/\n/g, '<br>'));
+	});
+
 });
 
 describe('WKCDiffArticlesForPage', function testWKCDiffArticlesForPage() {
