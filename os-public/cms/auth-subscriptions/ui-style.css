@@ -34,7 +34,7 @@ body {
 	border-bottom: 1px solid #ddd;
 }
 
-#WKCSubscriptionsList {
+#WKCSubscriptionsMaster {
 	/* @Flexbox1 child */
 	flex-basis: 300px;
 	flex-shrink: 0;
@@ -44,11 +44,15 @@ body {
 	flex-direction: column;
 }
 
-#WKCSubscriptionsListContent {
+#WKCSubscriptionsMasterHeader {
+	border-top: 1px solid #ddd;
+}
+
+#WKCSubscriptionsMasterContent {
 	overflow: auto;
 }
 
-.WKCSubscriptionsListItem {
+.WKCSubscriptionsMasterListItem {
 	padding: 10px;
 	border-bottom: 1px solid #ddd;
 
@@ -63,18 +67,20 @@ body {
 	user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
 }
 
-.WKCSubscriptionsListItemHeading {
+.WKCSubscriptionsMasterListItemHeading {
 	margin-top: 0;
 	margin-bottom: 10px;
 }
 
-.WKCSubscriptionsListItemSnippet {
+.WKCSubscriptionsMasterListItemSnippet {
 	margin-top: 0;
 	margin-bottom: 10px;
 }
 
 #WKCSubscriptionsDetail {
 	border-left: 1px solid #ddd;
+	border-top: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
 
 	/* @Flexbox1 child */
 	flex-grow: 1;

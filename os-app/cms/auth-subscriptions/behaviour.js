@@ -31,7 +31,7 @@
 
 	moi.propertiesArticleObjects = function (inputData) {
 		if (typeof inputData === 'undefined') {
-			return d3.selectAll('.WKCSubscriptionsListItem').data();
+			return d3.selectAll('.WKCSubscriptionsMasterListItem').data();
 		}
 
 		moi.reactArticleObjects(inputData.sort(WKSubscriptionsLogic.WKSubscriptionsListSort));
@@ -86,31 +86,31 @@
 	//_ reactArticleObjects
 
 	moi.reactArticleObjects = function (noteObjects) {
-		var selection = d3.select('#WKCSubscriptionsListContent')
-			.selectAll('.WKCSubscriptionsListItem').data(noteObjects);
+		var selection = d3.select('#WKCSubscriptionsMasterContent')
+			.selectAll('.WKCSubscriptionsMasterListItem').data(noteObjects);
 		
 		var parentElements = selection.enter()
 			.append('div')
-				.attr('class', 'WKCSubscriptionsListItem')
+				.attr('class', 'WKCSubscriptionsMasterListItem')
 				.on('click', function(obj) {
 					moi.commandsSelectArticle(obj);
 				});
-		parentElements.append('h4').attr('class', 'WKCSubscriptionsListItemHeading');
-		parentElements.append('p').attr('class', 'WKCSubscriptionsListItemSnippet');
-		parentElements.append('span').attr('class', 'WKCSubscriptionsListItemSource');
-		parentElements.append('span').attr('class', 'WKCSubscriptionsListItemDate');
+		parentElements.append('h4').attr('class', 'WKCSubscriptionsMasterListItemHeading');
+		parentElements.append('p').attr('class', 'WKCSubscriptionsMasterListItemSnippet');
+		parentElements.append('span').attr('class', 'WKCSubscriptionsMasterListItemSource');
+		parentElements.append('span').attr('class', 'WKCSubscriptionsMasterListItemDate');
 		parentElements = parentElements.merge(selection);
 
-		parentElements.select('.WKCSubscriptionsListItemHeading').text(function(obj) {
+		parentElements.select('.WKCSubscriptionsMasterListItemHeading').text(function(obj) {
 			return obj.WKCArticleTitle || 'untitled_article';
 		});
-		parentElements.select('.WKCSubscriptionsListItemSnippet').text(function(obj) {
+		parentElements.select('.WKCSubscriptionsMasterListItemSnippet').text(function(obj) {
 			return obj.WKCArticleSnippet || 'no_snippet';
 		});
-		parentElements.select('.WKCSubscriptionsListItemSource').text(function(obj) {
+		parentElements.select('.WKCSubscriptionsMasterListItemSource').text(function(obj) {
 			return obj.WKCArticleSubscriptionID;
 		});
-		parentElements.select('.WKCSubscriptionsListItemDate').text(function(obj) {
+		parentElements.select('.WKCSubscriptionsMasterListItemDate').text(function(obj) {
 			return moment(obj.WKCArticlePublishDate).fromNow();
 		});
 
