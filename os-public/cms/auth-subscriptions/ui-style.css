@@ -4,6 +4,12 @@ body {
 }
 
 #WKCSubscriptions {
+	position: absolute;
+	top: 24px;
+	right: 0;
+	bottom: 0;
+	left: 0;
+
 	/* @Flexbox1 parent */
 	display: flex;
 	flex-direction: row;
