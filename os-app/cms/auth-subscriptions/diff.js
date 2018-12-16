@@ -76,13 +76,31 @@ exports._WKCDiffArticleBodyForStrings = function(oldString, newString) {
 	var lineDiffs = diffPackage.diffLines(oldString || '', newString);
 
 	var truncateCallback = function(e, index, collection, ignoreFlag) {
-		var nextObject = collection[index + 1];
+		const defaultValue = ignoreFlag ? '' : e.value;
 
-		if (nextObject && (nextObject.added || nextObject.removed) && !e.added && !e.removed && e.value.split('\n').length > 4) {
+		if (e.added || e.removed) {
+			return defaultValue;
+		}
+
+		if (e.value.split('\n').length <= 4) {
+			return defaultValue;
+		}
+
+		if (!index) {
 			return ['…'].concat(e.value.split('\n').slice(-4)).join('\n');
 		}
 
-		return ignoreFlag ? '' : e.value;
+		if (index === (collection.length - 1)) {
+			return e.value.split('\n').slice(0, 3).concat(['…']).join('\n').concat('\n');
+		}
+
+		// var nextObject = collection[index + 1];
+
+		// if (!nextObject) {}
+
+		// nextObject && (nextObject.added || nextObject.removed) && 
+
+		// return linesArray.join('\n');
 	};
 
 	return diffPackage.diffChars(lineDiffs.map(function(e, index, collection) {

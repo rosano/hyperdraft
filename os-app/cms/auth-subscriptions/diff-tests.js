@@ -126,12 +126,20 @@ describe('_WKCDiffArticleBodyForStrings', function test_WKCDiffArticleBodyForStr
 
 	context('truncation', function() {
 
-		it('shows all preceding if three lines or less', function() {
+		it('shows head if in range', function() {
 			assert.strictEqual(diffLibrary._WKCDiffArticleBodyForStrings(kTests.kTestsTextMultiline(4), kTests.kTestsTextMultiline(4).replace('delta', 'deltax')), kTests.kTestsTextMultiline(4).replace('delta', 'delta<ins>x</ins>'))
 		});
 
-		it('shows truncated preceding if four lines', function() {
+		it('shows truncated head if not in range', function() {
 			assert.strictEqual(diffLibrary._WKCDiffArticleBodyForStrings(kTests.kTestsTextMultiline(5), kTests.kTestsTextMultiline(5).replace('echo', 'echox')), kTests.kTestsTextMultiline(5).replace('alfa', '…').replace('echo', 'echo<ins>x</ins>'))
+		});
+
+		it('shows tail if in range', function() {
+			assert.strictEqual(diffLibrary._WKCDiffArticleBodyForStrings(kTests.kTestsTextMultiline(4), kTests.kTestsTextMultiline(4).replace('alfa', 'alfax')), kTests.kTestsTextMultiline(4).replace('alfa', 'alfa<ins>x</ins>'))
+		});
+
+		it('shows truncated tail if not in range', function() {
+			assert.strictEqual(diffLibrary._WKCDiffArticleBodyForStrings(kTests.kTestsTextMultiline(5), kTests.kTestsTextMultiline(5).replace('alfa', 'alfax')), kTests.kTestsTextMultiline(5).replace('echo', '…').replace('alfa', 'alfa<ins>x</ins>'))
 		});
 
 	});
