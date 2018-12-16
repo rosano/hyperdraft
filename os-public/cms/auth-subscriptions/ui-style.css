@@ -44,11 +44,12 @@ body {
 	overflow-y: scroll;
 
 	/* @Flexbox1 child */
-	flex: 0 0 350px;
+	flex: 0 0 300px;
 }
 
 .WKCSubscriptionsListItem {
 	padding: 10px;
+	border-bottom: 1px solid #ddd;
 
 	cursor: pointer;
 
@@ -73,6 +74,7 @@ body {
 
 #WKCSubscriptionsDetail {
 	padding: 10px;
+	border-left: 1px solid #ddd;
 
 	/* @Flexbox1 child */
 	flex-grow: 1;
@@ -123,4 +125,12 @@ body {
 #WKCSubscriptionsDetailBody img {
 	max-width: 100%;
 	height: auto;
+}
+
+#WKCSubscriptionsDetailBody ins {
+	background: #eaffbf;
+}
+
+#WKCSubscriptionsDetailBody del {
+	background: #fdbfc0;
 }
