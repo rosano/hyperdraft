@@ -11,7 +11,9 @@ const diffPackage = require('diff');
 var htmlEntitiesPackage = require('html-entities');
 htmlEntitiesPackage = new (htmlEntitiesPackage.AllHtmlEntities)();
 var turndownPackage = require('turndown');
-turndownPackage = new turndownPackage();
+turndownPackage = new turndownPackage({
+	headingStyle: 'atx',
+});
 turndownPackage.remove('script');
 var showdownPackage = require('showdown');
 showdownPackage = new showdownPackage.Converter();
@@ -71,9 +73,25 @@ exports._WKCDiffArticleBodyForStrings = function(oldString, newString) {
 		throw new Error('WKCErrorInvalidInput');
 	}
 
-	var changesArray = diffPackage.diffChars(oldString || '', newString);
+	var lineDiffs = diffPackage.diffLines(oldString || '', newString);
 
-	return changesArray.map(function(e) {
+	return diffPackage.diffChars(lineDiffs.map(function(e, index, collection) {
+		var nextObject = collection[index + 1];
+
+		if (nextObject && (nextObject.added || nextObject.removed) && !e.added && !e.removed && e.value.split('\n').length > 4) {
+			return ['…'].concat(e.value.split('\n').slice(-4)).join('\n');
+		}
+
+		return e.added ? '' : e.value;
+	}).join(''), lineDiffs.map(function(e, index, collection) {
+		var nextObject = collection[index + 1];
+
+		if (nextObject && (nextObject.added || nextObject.removed) && !e.added && !e.removed && e.value.split('\n').length > 4) {
+			return ['…'].concat(e.value.split('\n').slice(-4)).join('\n');
+		}
+
+		return e.removed ? '' : e.value;
+	}).join('')).map(function(e) {
 		if (e.added === true) {
 			return [
 				'<ins>',
@@ -118,15 +136,15 @@ exports.WKCDiffArticlesForPage = function(oldString, newString) {
 		throw new Error('WKCErrorInvalidInput');
 	}
 
-	oldString = showdownPackage.makeHtml(turndownPackage.turndown((new JSDOM(oldString || '')).window.document.body.innerHTML));
-	newString = showdownPackage.makeHtml(turndownPackage.turndown((new JSDOM(newString)).window.document.body.innerHTML));
+	oldString = turndownPackage.turndown((new JSDOM(oldString || '')).window.document.body.innerHTML);
+	newString = turndownPackage.turndown((new JSDOM(newString)).window.document.body.innerHTML);
 	
 	if (oldString === newString) {
 		return [];
 	}
 
 	return [{
-		WKCArticleBody: exports._WKCDiffArticleBodyForStrings(oldString, newString),
+		WKCArticleBody: showdownPackage.makeHtml(exports._WKCDiffArticleBodyForStrings(oldString, newString)),
 		WKCArticlePublishDate: new Date(),
 	}];
 };

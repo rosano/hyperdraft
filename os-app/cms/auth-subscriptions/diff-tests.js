@@ -25,10 +25,13 @@ const kTests = {
         </content:encoded></item></channel></rss>';
 	},
 	kTestsHTML: function() {
-		return '<!DOCTYPE html><html><head><title>bravo</title></head><body><h1>alfa</h1></body></html>';
+		return '<!DOCTYPE html><html><head><title>bravo</title></head><body><h1>alfa</h1><script>var charlie = "delta";</script></body></html>';
 	},
 	kTestsBody: function() {
 		return "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
+	},
+	kTestsTextMultiline: function(count) {
+		return "alfa bravo charlie delta echo foxtrot golf hotel indigo juliet kilo".split(' ').slice(0, typeof count === 'undefined' ? Infinity : count).join('\n').concat('\n');
 	},
 };
 
@@ -101,7 +104,7 @@ describe('_WKCDiffArticleBodyForStrings', function test_WKCDiffArticleBodyForStr
 		}, /WKCErrorInvalidInput/);
 	});
 
-	it('returns all if param1 null', function() {
+	it('adds markup if param1 null', function() {
 		assert.strictEqual(diffLibrary._WKCDiffArticleBodyForStrings(null, 'alfa'), '<ins>alfa</ins>');
 	});
 
@@ -119,6 +122,18 @@ describe('_WKCDiffArticleBodyForStrings', function test_WKCDiffArticleBodyForStr
 
 	it('adds markup if character changed', function() {
 		assert.strictEqual(diffLibrary._WKCDiffArticleBodyForStrings('alfa', 'alfo'), 'alf<del>a</del><ins>o</ins>');
+	});
+
+	context('truncation', function() {
+
+		it('shows all preceding if three lines or less', function() {
+			assert.strictEqual(diffLibrary._WKCDiffArticleBodyForStrings(kTests.kTestsTextMultiline(4), kTests.kTestsTextMultiline(4).replace('delta', 'deltax')), kTests.kTestsTextMultiline(4).replace('delta', 'delta<ins>x</ins>'))
+		});
+
+		it('shows truncated preceding if four lines', function() {
+			assert.strictEqual(diffLibrary._WKCDiffArticleBodyForStrings(kTests.kTestsTextMultiline(5), kTests.kTestsTextMultiline(5).replace('echo', 'echox')), kTests.kTestsTextMultiline(5).replace('alfa', '…').replace('echo', 'echo<ins>x</ins>'))
+		});
+
 	});
 
 });
@@ -167,6 +182,10 @@ describe('WKCDiffArticlesForPage', function testWKCDiffArticlesForPage() {
 
 	it('returns none if head changes', function() {
 		assert.deepEqual(diffLibrary.WKCDiffArticlesForPage(kTests.kTestsHTML(), kTests.kTestsHTML().replace('bravo', 'bravox')), []);
+	});
+
+	it('ignores script', function() {
+		assert.deepEqual(diffLibrary.WKCDiffArticlesForPage(kTests.kTestsHTML(), kTests.kTestsHTML().replace('delta', 'deltax')), []);
 	});
 
 	it('returns one if not identical', function() {
