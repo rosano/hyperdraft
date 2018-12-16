@@ -12,7 +12,6 @@ body {
 
 	/* @Flexbox1 parent */
 	display: flex;
-	flex-direction: row;
 }
 
 .WKCSubscriptionsHidden {
@@ -39,7 +38,7 @@ body {
 	overflow-y: scroll;
 
 	/* @Flexbox1 child */
-	flex: 0 0 300px;
+	flex-basis: 300px;
 }
 
 .WKCSubscriptionsListItem {
