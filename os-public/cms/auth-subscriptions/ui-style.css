@@ -35,10 +35,16 @@ body {
 }
 
 #WKCSubscriptionsList {
-	overflow-y: scroll;
-
 	/* @Flexbox1 child */
 	flex-basis: 300px;
+
+	/* @Flexbox2 parent */
+	display: flex;
+	flex-direction: column;
+}
+
+#WKCSubscriptionsListContent {
+	overflow: auto;
 }
 
 .WKCSubscriptionsListItem {
