@@ -94,13 +94,11 @@ exports._WKCDiffArticleBodyForStrings = function(oldString, newString) {
 			return e.value.split('\n').slice(0, 3).concat(['…']).join('\n').concat('\n');
 		}
 
-		// var nextObject = collection[index + 1];
+		if (e.value.split('\n').length <= 7) {
+			return defaultValue;
+		}
 
-		// if (!nextObject) {}
-
-		// nextObject && (nextObject.added || nextObject.removed) && 
-
-		// return linesArray.join('\n');
+		return e.value.split('\n').slice(0, 3).concat(['…']).concat(e.value.split('\n').slice(-4)).join('\n');
 	};
 
 	return diffPackage.diffChars(lineDiffs.map(function(e, index, collection) {

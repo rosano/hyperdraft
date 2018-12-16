@@ -142,6 +142,14 @@ describe('_WKCDiffArticleBodyForStrings', function test_WKCDiffArticleBodyForStr
 			assert.strictEqual(diffLibrary._WKCDiffArticleBodyForStrings(kTests.kTestsTextMultiline(5), kTests.kTestsTextMultiline(5).replace('alfa', 'alfax')), kTests.kTestsTextMultiline(5).replace('echo', '…').replace('alfa', 'alfa<ins>x</ins>'))
 		});
 
+		it('shows body if in range', function() {
+			assert.strictEqual(diffLibrary._WKCDiffArticleBodyForStrings(kTests.kTestsTextMultiline(8), kTests.kTestsTextMultiline(8).replace('alfa', 'alfax').replace('hotel', 'hotelx')), kTests.kTestsTextMultiline(8).replace('alfa', 'alfa<ins>x</ins>').replace('hotel', 'hotel<ins>x</ins>'))
+		});
+
+		it('shows truncated body if not in range', function() {
+			assert.strictEqual(diffLibrary._WKCDiffArticleBodyForStrings(kTests.kTestsTextMultiline(9), kTests.kTestsTextMultiline(9).replace('alfa', 'alfax').replace('indigo', 'indigox')), kTests.kTestsTextMultiline(9).replace('echo', '…').replace('alfa', 'alfa<ins>x</ins>').replace('indigo', 'indigo<ins>x</ins>'))
+		});
+
 	});
 
 });
