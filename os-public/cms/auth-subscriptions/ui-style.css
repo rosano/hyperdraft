@@ -143,6 +143,12 @@ body {
 	overflow-x: scroll;
 }
 
+.WKCSubscriptionsDetailContentBodyFile {
+	font-family: 'monaco', monospace;
+
+	line-height: 1.4;
+}
+
 #WKCSubscriptionsDetailContentBody img {
 	max-width: 100%;
 	height: auto;
