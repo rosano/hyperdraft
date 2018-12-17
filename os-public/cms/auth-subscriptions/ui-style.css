@@ -56,7 +56,7 @@ body {
 	overflow: auto;
 }
 
-.WKCSubscriptionsMasterListItem {
+.WKCSubscriptionsMasterContentListItem {
 	padding: 10px;
 	border-bottom: 1px solid #ddd;
 
@@ -71,12 +71,12 @@ body {
 	user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
 }
 
-.WKCSubscriptionsMasterListItemHeading {
+.WKCSubscriptionsMasterContentListItemHeading {
 	margin-top: 0;
 	margin-bottom: 10px;
 }
 
-.WKCSubscriptionsMasterListItemSnippet {
+.WKCSubscriptionsMasterContentListItemSnippet {
 	margin-top: 0;
 	margin-bottom: 10px;
 }

@@ -13,6 +13,8 @@
 	var moi = exports;
 
 	var WKSubscriptionsPropertyAPIToken;
+	var WKSubscriptionsPropertySubscriptionObjects;
+	var WKSubscriptionsPropertySubscriptionObjectsByID;
 	var WKSubscriptionsPropertySelectedArticle;
 
 	//# PROPERTIES
@@ -27,11 +29,34 @@
 		WKSubscriptionsPropertyAPIToken = inputData;
 	};
 
+	//_ propertiesSubscriptionObjects
+
+	moi.propertiesSubscriptionObjects = function (inputData) {
+		if (typeof inputData === 'undefined') {
+			return WKSubscriptionsPropertySubscriptionObjects;
+		}
+
+		moi._propertiesSubscriptionObjectsByID((WKSubscriptionsPropertySubscriptionObjects = inputData).reduce(function(map, e) {
+			map[e.WKCSubscriptionID] = e;
+			return map;
+		}, {}));
+	};
+
+	//_ _propertiesSubscriptionObjectsByID
+
+	moi._propertiesSubscriptionObjectsByID = function (inputData) {
+		if (typeof inputData === 'undefined') {
+			return WKSubscriptionsPropertySubscriptionObjectsByID;
+		}
+
+		WKSubscriptionsPropertySubscriptionObjectsByID = inputData;
+	};
+
 	//_ propertiesArticleObjects
 
 	moi.propertiesArticleObjects = function (inputData) {
 		if (typeof inputData === 'undefined') {
-			return d3.selectAll('.WKCSubscriptionsMasterListItem').data();
+			return d3.selectAll('.WKCSubscriptionsMasterContentListItem').data();
 		}
 
 		moi.reactArticleObjects(inputData.sort(WKSubscriptionsLogic.WKSubscriptionsListSort));
@@ -67,6 +92,14 @@
 		throw new Error('WKCAppErrorTokenUnavailable');
 	};
 
+	//_ commandsAlertSubscriptionsUnavailable
+
+	moi.commandsAlertSubscriptionsUnavailable = function () {
+		window.alert('<%= OLSKLocalized('WKCSubscriptionsErrorSubscriptionsUnavailableText') %>');
+
+		throw new Error('WKCSubscriptionsErrorSubscriptionsUnavailable');
+	};
+
 	//_ commandsAlertArticlesUnavailable
 
 	moi.commandsAlertArticlesUnavailable = function () {
@@ -87,30 +120,30 @@
 
 	moi.reactArticleObjects = function (noteObjects) {
 		var selection = d3.select('#WKCSubscriptionsMasterContent')
-			.selectAll('.WKCSubscriptionsMasterListItem').data(noteObjects);
+			.selectAll('.WKCSubscriptionsMasterContentListItem').data(noteObjects);
 		
 		var parentElements = selection.enter()
 			.append('div')
-				.attr('class', 'WKCSubscriptionsMasterListItem')
+				.attr('class', 'WKCSubscriptionsMasterContentListItem')
 				.on('click', function(obj) {
 					moi.commandsSelectArticle(obj);
 				});
-		parentElements.append('h4').attr('class', 'WKCSubscriptionsMasterListItemHeading');
-		parentElements.append('p').attr('class', 'WKCSubscriptionsMasterListItemSnippet');
-		parentElements.append('span').attr('class', 'WKCSubscriptionsMasterListItemSource');
-		parentElements.append('span').attr('class', 'WKCSubscriptionsMasterListItemDate');
+		parentElements.append('h4').attr('class', 'WKCSubscriptionsMasterContentListItemHeading');
+		parentElements.append('p').attr('class', 'WKCSubscriptionsMasterContentListItemSnippet');
+		parentElements.append('span').attr('class', 'WKCSubscriptionsMasterContentListItemSource');
+		parentElements.append('span').attr('class', 'WKCSubscriptionsMasterContentListItemDate');
 		parentElements = parentElements.merge(selection);
 
-		parentElements.select('.WKCSubscriptionsMasterListItemHeading').text(function(obj) {
+		parentElements.select('.WKCSubscriptionsMasterContentListItemHeading').text(function(obj) {
 			return obj.WKCArticleTitle || 'untitled_article';
 		});
-		parentElements.select('.WKCSubscriptionsMasterListItemSnippet').text(function(obj) {
+		parentElements.select('.WKCSubscriptionsMasterContentListItemSnippet').text(function(obj) {
 			return obj.WKCArticleSnippet || 'no_snippet';
 		});
-		parentElements.select('.WKCSubscriptionsMasterListItemSource').text(function(obj) {
-			return obj.WKCArticleSubscriptionID;
+		parentElements.select('.WKCSubscriptionsMasterContentListItemSource').text(function(obj) {
+			return moi._propertiesSubscriptionObjectsByID()[obj.WKCArticleSubscriptionID].WKCSubscriptionName;
 		});
-		parentElements.select('.WKCSubscriptionsMasterListItemDate').text(function(obj) {
+		parentElements.select('.WKCSubscriptionsMasterContentListItemDate').text(function(obj) {
 			return moment(obj.WKCArticlePublishDate).fromNow();
 		});
 
@@ -139,8 +172,10 @@
 
 	moi.setupEverything = function () {
 		moi.setupAPIToken(function () {
-			moi.setupArticleObjects(function() {
-				d3.select('#WKCSubscriptions').classed('WKCSubscriptionsLoading', false);
+			moi.setupSubscriptionObjects(function() {
+				moi.setupArticleObjects(function() {
+					d3.select('#WKCSubscriptions').classed('WKCSubscriptionsLoading', false);
+				});
 			});
 		});
 	};
@@ -156,6 +191,31 @@
 			}
 
 			moi.propertiesAPIToken(responseJSON.WKCAPIToken);
+
+			completionHandler();
+		}, moi.commandsAlertConnectionError);
+	};
+
+	//_ setupSubscriptionObjects
+
+	moi.setupSubscriptionObjects = function (completionHandler) {
+		d3.json('<%= OLSKCanonicalFor('WKCRouteAPISubscriptionsSearch') %>', {
+			method: 'GET',
+			headers: {
+				'x-client-key': moi.propertiesAPIToken(),
+			},
+		}).then(function(responseJSON) {
+			if (!Array.isArray(responseJSON)) {
+				return moi.commandsAlertSubscriptionsUnavailable();
+			}
+
+			moi.propertiesSubscriptionObjects(responseJSON.map(function(e) {
+				return Object.assign(e, {
+					WKCSubscriptionDateCreated: new Date(e.WKCSubscriptionDateCreated),
+					WKCSubscriptionDateUpdated: new Date(e.WKCSubscriptionDateUpdated),
+					WKCSubscriptionFetchDate: new Date(e.WKCSubscriptionFetchDate),
+				});
+			}));
 
 			completionHandler();
 		}, moi.commandsAlertConnectionError);
