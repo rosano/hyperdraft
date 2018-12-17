@@ -59,6 +59,14 @@ exports.WKCModelInputDataIsArticleObject = function(inputData) {
 		}
 	}
 
+	if (inputData.WKCArticleIsRead) {
+		if (typeof inputData.WKCArticleIsRead !== 'boolean') {
+			errors.WKCArticleIsRead = [
+				'WKCErrorNotBoolean',
+			];
+		}
+	}
+
 	if (Object.keys(errors).length) {
 		inputData.WKCErrors = errors;
 		

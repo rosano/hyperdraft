@@ -110,17 +110,17 @@ describe('WKCModelInputDataIsArticleObject', function testWKCModelInputDataIsArt
 
 	});
 
-	context('WKCArticleSnippet', function() {
+	context('WKCArticleIsRead', function() {
 
-		it('returns false with WKCErrors if not string', function() {
+		it('returns false with WKCErrors if not boolean', function() {
 			var item = Object.assign(kTestingValidArticle(), {
-				WKCArticleSnippet: 123
+				WKCArticleIsRead: 'true'
 			});
 
 			assert.strictEqual(modelLibrary.WKCModelInputDataIsArticleObject(item), false);
 			assert.deepEqual(item.WKCErrors, {
-				WKCArticleSnippet: [
-					'WKCErrorNotString',
+				WKCArticleIsRead: [
+					'WKCErrorNotBoolean',
 				],
 			});
 		});
