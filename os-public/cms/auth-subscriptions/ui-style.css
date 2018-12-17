@@ -14,6 +14,10 @@ body {
 	display: flex;
 }
 
+.WKCSubscriptionsLoading .WKCSubscriptionsToolbar *, .WKCSubscriptionsLoading #WKCSubscriptionsMasterContent *, .WKCSubscriptionsLoading #WKCSubscriptionsDetailContent *, .WKCSubscriptionsLoading #WKCSubscriptionsDetailPlaceholder * {
+	visibility: hidden;
+}
+
 .WKCSubscriptionsHidden {
 	display: none;
 }
@@ -96,7 +100,7 @@ body {
 	/*align-items: center;*/
 }
 
-.WKCSubscriptionsDetailInactive #WKCSubscriptionsDetailHeader, .WKCSubscriptionsDetailInactive #WKCSubscriptionsDetailArticle {
+.WKCSubscriptionsDetailInactive #WKCSubscriptionsDetailHeader, .WKCSubscriptionsDetailInactive #WKCSubscriptionsDetailContent {
 	display: none;
 }
 
@@ -111,7 +115,7 @@ body {
 	display: none;
 }
 
-#WKCSubscriptionsDetailArticle {
+#WKCSubscriptionsDetailContent {
 	padding: 10px;
 	overflow: auto;
 }

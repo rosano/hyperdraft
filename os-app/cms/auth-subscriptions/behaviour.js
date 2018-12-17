@@ -139,7 +139,9 @@
 
 	moi.setupEverything = function () {
 		moi.setupAPIToken(function () {
-			moi.setupArticleObjects(function() {});
+			moi.setupArticleObjects(function() {
+				d3.select('#WKCSubscriptions').classed('WKCSubscriptionsLoading', false);
+			});
 		});
 	};
 
@@ -171,8 +173,6 @@
 			if (!Array.isArray(responseJSON)) {
 				return moi.commandsAlertArticlesUnavailable();
 			}
-
-			d3.select('#WKCSubscriptions').classed('WKCSubscriptionsLoading', false);
 
 			moi.propertiesArticleObjects(responseJSON.map(function(e) {
 				return Object.assign(e, {
