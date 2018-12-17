@@ -83,15 +83,15 @@ exports.WKCTaskSubscriptionsFetch = function() {
 								});
 							});
 						})).then(function() {
-							apiSubscriptionsMetal.WKCMetalSubscriptionsUpdate(callbackInput.OLSKLive.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, subscriptionObject.WKCSubscriptionID, Object.assign(subscriptionObject, err ? {
+							apiSubscriptionsMetal.WKCMetalSubscriptionsUpdate(callbackInput.OLSKLive.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, subscriptionObject.WKCSubscriptionID, err ? {
 								WKCSubscriptionErrorDate: new Date(),
 								WKCSubscriptionErrorMessage: err.toString(),
 							} : {
-									WKCSubscriptionFetchDate: new Date(),
-									WKCSubscriptionFetchContent: body,
-									WKCSubscriptionErrorDate: null,
-									WKCSubscriptionErrorMessage: null,
-								}), function(err, responseJSON) {
+								WKCSubscriptionFetchDate: new Date(),
+								WKCSubscriptionFetchContent: body,
+								WKCSubscriptionErrorDate: null,
+								WKCSubscriptionErrorMessage: null,
+							}, function(err, responseJSON) {
 								if (err) {
 									return console.log(err);
 								}

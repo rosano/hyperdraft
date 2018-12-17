@@ -89,7 +89,9 @@ exports.WKCMetalSubscriptionsUpdate = function(databaseClient, objectID, inputDa
 		throw new Error('WKCErrorInvalidInput');
 	}
 
-	if (!modelLibrary.WKCModelInputDataIsSubscriptionObject(inputData)) {
+	if (!modelLibrary.WKCModelInputDataIsSubscriptionObject(inputData, {
+		WKCModelValidatePresentOnly: true,
+	})) {
 		return completionHandler(null, inputData);
 	}
 

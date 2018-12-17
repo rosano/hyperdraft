@@ -130,7 +130,6 @@ describe('WKCMetalSubscriptionsUpdate', function testWKCMetalSubscriptionsUpdate
 	it('returns WKCErrors if not valid WKCSubscription', function(done) {
 		metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, kTesting.kTestingValidSubscription(), function(err, subscriptionObject) {
 			metalLibrary.WKCMetalSubscriptionsUpdate(WKCTestingMongoClient, subscriptionObject.WKCSubscriptionID, {
-				WKCSubscriptionType: modelLibrary.WKCSubscriptionTypePage(),
 				WKCSubscriptionURL: 'google.com',
 			}, function(err, responseJSON) {
 				assert.deepEqual(responseJSON.WKCErrors, {
