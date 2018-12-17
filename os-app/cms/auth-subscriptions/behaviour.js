@@ -130,7 +130,7 @@
 				});
 		parentElement.append('h4').attr('class', 'WKCSubscriptionsMasterContentListItemHeading');
 		parentElement.append('p').attr('class', 'WKCSubscriptionsMasterContentListItemSnippet');
-		parentElement.append('span').attr('class', 'WKCSubscriptionsMasterContentListItemSource');
+		parentElement.append('p').attr('class', 'WKCSubscriptionsMasterContentListItemSource');
 		parentElement.append('span').attr('class', 'WKCSubscriptionsMasterContentListItemDate');
 		parentElement = parentElement.merge(selection);
 
@@ -144,7 +144,12 @@
 			return moi._propertiesSubscriptionObjectsByID()[obj.WKCArticleSubscriptionID].WKCSubscriptionName;
 		});
 		parentElement.select('.WKCSubscriptionsMasterContentListItemDate').text(function(obj) {
-			return moment(obj.WKCArticlePublishDate).fromNow();
+			return moment(obj.WKCArticlePublishDate).calendar(null, {
+				sameDay: 'hh:mm',
+				lastDay: '[Yesterday]',
+				lastWeek: 'dddd',
+				sameElse: 'YYYY-MM-DD'
+			});
 		});
 
 		selection.exit().remove();
