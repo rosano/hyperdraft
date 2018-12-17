@@ -120,22 +120,22 @@ body {
 	overflow: auto;
 }
 
-#WKCSubscriptionsDetailHeading {
+#WKCSubscriptionsDetailContentHeading {
 	margin-top: 0;
 	margin-bottom: 10px;
 }
 
-#WKCSubscriptionsDetailInfo {
+#WKCSubscriptionsDetailContentInfo {
 	opacity: 0.5;
 }
 
-#WKCSubscriptionsDetailLink {
+#WKCSubscriptionsDetailContentLink {
 	display: block;
 
 	opacity: 1;
 }
 
-#WKCSubscriptionsDetailBody {
+#WKCSubscriptionsDetailContentBody {
 	margin-top: 10px;
 
 	width: 100%;
@@ -143,15 +143,15 @@ body {
 	overflow-x: scroll;
 }
 
-#WKCSubscriptionsDetailBody img {
+#WKCSubscriptionsDetailContentBody img {
 	max-width: 100%;
 	height: auto;
 }
 
-#WKCSubscriptionsDetailBody ins {
+#WKCSubscriptionsDetailContentBody ins {
 	background: #eaffbf;
 }
 
-#WKCSubscriptionsDetailBody del {
+#WKCSubscriptionsDetailContentBody del {
 	background: #fdbfc0;
 }

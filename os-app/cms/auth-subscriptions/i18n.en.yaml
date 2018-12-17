@@ -2,4 +2,4 @@ WKCSubscriptionsHeadingText: Subscriptions
 WKCSubscriptionsErrorSubscriptionsUnavailableText: Unable to fetch subscriptions
 WKCSubscriptionsErrorArticlesUnavailableText: Unable to fetch articles
 WKCSubscriptionsDetailPlaceholderText: No Article Selected
-WKCSubscriptionsDetailOriginalText: Original source
+WKCSubscriptionsDetailContentLinkText: Original source
