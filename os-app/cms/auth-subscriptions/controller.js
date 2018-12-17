@@ -43,6 +43,13 @@ exports.WKCTaskSubscriptionsFetch = function() {
 					requestPackage.get(subscriptionObject.WKCSubscriptionURL, function(err, res, body) {
 						var articleObjects = [];
 
+						if (!err && res.statusCode === 404) {
+							err = new Error([
+								res.statusCode,
+								res.statusMessage,
+								].join(' '));
+						}
+
 						if (!err && subscriptionObject.WKCSubscriptionType === 'Feed') {
 							articleObjects = articleObjects.concat(diffLibrary.WKCDiffArticlesForFeed(subscriptionObject.WKCSubscriptionFetchContent, body));
 						}
