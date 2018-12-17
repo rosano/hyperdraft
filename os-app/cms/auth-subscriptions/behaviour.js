@@ -172,6 +172,10 @@
 		d3.selectAll('#WKCSubscriptionsDetailContentBody *').attr('width', null);
 
 		d3.select('#WKCSubscriptionsDetail').classed('WKCSubscriptionsDetailInactive', false);
+
+		d3.selectAll('.WKCSubscriptionsMasterContentListItem').classed('WKCSubscriptionsMasterContentListItemSelected', function(e) {
+			return e === moi.propertiesSelectedArticle();
+		});
 	};
 
 	//# SETUP
