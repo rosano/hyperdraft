@@ -44,11 +44,11 @@ exports.WKCModelSubscriptionPrepare = function(inputData) {
 	return inputData;
 };
 
-//_ WKCModelInputDataIsSubscriptionObject
+//_ WKCSubscriptionsModelErrorsFor
 
-exports.WKCModelInputDataIsSubscriptionObject = function(inputData, options) {
+exports.WKCSubscriptionsModelErrorsFor = function(inputData, options) {
 	if (typeof inputData !== 'object' || inputData === null) {
-		return false;
+		throw new Error('WKCErrorInvalidInput');
 	}
 
 	var errors = {};
@@ -121,13 +121,7 @@ exports.WKCModelInputDataIsSubscriptionObject = function(inputData, options) {
 		});
 	}
 
-	if (Object.keys(errors).length) {
-		inputData.WKCErrors = errors;
-		
-		return false;
-	}
-
-	return true;
+	return Object.keys(errors).length ? errors : null;
 };
 
 //_ WKCSubscriptionHiddenPropertyNames

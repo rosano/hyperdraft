@@ -69,77 +69,64 @@ describe('WKCModelSubscriptionPrepare', function testWKCModelSubscriptionPrepare
 
 });
 
-describe('WKCModelInputDataIsSubscriptionObject', function testWKCModelInputDataIsSubscriptionObject() {
+describe('WKCSubscriptionsModelErrorsFor', function testWKCSubscriptionsModelErrorsFor() {
 
-	it('returns false if not object', function() {
-		assert.strictEqual(modelLibrary.WKCModelInputDataIsSubscriptionObject(null), false);
+	it('throws error if param2 not object', function() {
+		assert.throws(function() {
+			modelLibrary.WKCSubscriptionsModelErrorsFor(null);
+		}, /WKCErrorInvalidInput/);
 	});
 
-	it('returns false with WKCErrors if WKCSubscriptionURL not string', function() {
-		var item = Object.assign(kTesting.kTestingValidSubscription(), {
+	it('returns errors if WKCSubscriptionURL not string', function() {
+		assert.deepEqual(modelLibrary.WKCSubscriptionsModelErrorsFor(Object.assign(kTesting.kTestingValidSubscription(), {
 			WKCSubscriptionURL: null,
-		});
-
-		assert.strictEqual(modelLibrary.WKCModelInputDataIsSubscriptionObject(item), false);
-		assert.deepEqual(item.WKCErrors, {
+		})), {
 			WKCSubscriptionURL: [
 				'WKCErrorNotFormatted',
 			],
 		});
 	});
 
-	it('returns false with WKCErrors if WKCSubscriptionURL not filled', function() {
-		var item = Object.assign(kTesting.kTestingValidSubscription(), {
+	it('returns errors if WKCSubscriptionURL not filled', function() {
+		assert.deepEqual(modelLibrary.WKCSubscriptionsModelErrorsFor(Object.assign(kTesting.kTestingValidSubscription(), {
 			WKCSubscriptionURL: '',
-		});
-
-		assert.strictEqual(modelLibrary.WKCModelInputDataIsSubscriptionObject(item), false);
-		assert.deepEqual(item.WKCErrors, {
+		})), {
 			WKCSubscriptionURL: [
 				'WKCErrorNotFormatted',
 			],
 		});
 	});
 
-	it('returns false with WKCErrors if WKCSubscriptionURL not formatted', function() {
-		var item = Object.assign(kTesting.kTestingValidSubscription(), {
+	it('returns errors if WKCSubscriptionURL not formatted', function() {
+		assert.deepEqual(modelLibrary.WKCSubscriptionsModelErrorsFor(Object.assign(kTesting.kTestingValidSubscription(), {
 			WKCSubscriptionURL: 'google.com',
-		});
-
-		assert.strictEqual(modelLibrary.WKCModelInputDataIsSubscriptionObject(item), false);
-		assert.deepEqual(item.WKCErrors, {
+		})), {
 			WKCSubscriptionURL: [
 				'WKCErrorNotFormatted',
 			],
 		});
 	});
 
-	it('returns false with WKCErrors if WKCSubscriptionType not valid', function() {
-		var item = Object.assign(kTesting.kTestingValidSubscription(), {
+	it('returns errors if WKCSubscriptionType not valid', function() {
+		assert.deepEqual(modelLibrary.WKCSubscriptionsModelErrorsFor(Object.assign(kTesting.kTestingValidSubscription(), {
 			WKCSubscriptionType: 'alfa',
-		});
-
-		assert.strictEqual(modelLibrary.WKCModelInputDataIsSubscriptionObject(item), false);
-		assert.deepEqual(item.WKCErrors, {
+		})), {
 			WKCSubscriptionType: [
 				'WKCErrorNotValid',
 			],
 		});
 	});
 
-	it('returns true', function() {
-		assert.deepEqual(modelLibrary.WKCModelInputDataIsSubscriptionObject(kTesting.kTestingValidSubscription()), true);
+	it('returns null', function() {
+		assert.deepEqual(modelLibrary.WKCSubscriptionsModelErrorsFor(kTesting.kTestingValidSubscription()), null);
 	});
 
 	it('ignores unpresent fields if WKCModelValidatePresentOnly true', function() {
-		var item = {
+		assert.deepEqual(modelLibrary.WKCSubscriptionsModelErrorsFor({
 			WKCSubscriptionType: 'alfa',
-		};
-
-		assert.strictEqual(modelLibrary.WKCModelInputDataIsSubscriptionObject(item, {
+		}, {
 			WKCModelValidatePresentOnly: true,
-		}), false);
-		assert.deepEqual(item.WKCErrors, {
+		}), {
 			WKCSubscriptionType: [
 				'WKCErrorNotValid',
 			],
@@ -148,13 +135,10 @@ describe('WKCModelInputDataIsSubscriptionObject', function testWKCModelInputData
 
 	context('WKCSubscriptionName', function() {
 
-		it('returns false with WKCErrors if not string', function() {
-			var item = Object.assign(kTesting.kTestingValidSubscription(), {
+		it('returns errors if not string', function() {
+			assert.deepEqual(modelLibrary.WKCSubscriptionsModelErrorsFor(Object.assign(kTesting.kTestingValidSubscription(), {
 				WKCSubscriptionName: 123
-			});
-
-			assert.strictEqual(modelLibrary.WKCModelInputDataIsSubscriptionObject(item), false);
-			assert.deepEqual(item.WKCErrors, {
+			})), {
 				WKCSubscriptionName: [
 					'WKCErrorNotString',
 				],
@@ -165,13 +149,10 @@ describe('WKCModelInputDataIsSubscriptionObject', function testWKCModelInputData
 
 	context('WKCSubscriptionBlurb', function() {
 
-		it('returns false with WKCErrors if not string', function() {
-			var item = Object.assign(kTesting.kTestingValidSubscription(), {
+		it('returns errors if not string', function() {
+			assert.deepEqual(modelLibrary.WKCSubscriptionsModelErrorsFor(Object.assign(kTesting.kTestingValidSubscription(), {
 				WKCSubscriptionBlurb: 123
-			});
-
-			assert.strictEqual(modelLibrary.WKCModelInputDataIsSubscriptionObject(item), false);
-			assert.deepEqual(item.WKCErrors, {
+			})), {
 				WKCSubscriptionBlurb: [
 					'WKCErrorNotString',
 				],
@@ -182,13 +163,10 @@ describe('WKCModelInputDataIsSubscriptionObject', function testWKCModelInputData
 
 	context('WKCSubscriptionFetchDate', function() {
 
-		it('returns false with WKCErrors if not date', function() {
-			var item = Object.assign(kTesting.kTestingValidSubscription(), {
+		it('returns errors if not date', function() {
+			assert.deepEqual(modelLibrary.WKCSubscriptionsModelErrorsFor(Object.assign(kTesting.kTestingValidSubscription(), {
 				WKCSubscriptionFetchDate: new Date('alfa'),
-			});
-
-			assert.strictEqual(modelLibrary.WKCModelInputDataIsSubscriptionObject(item), false);
-			assert.deepEqual(item.WKCErrors, {
+			})), {
 				WKCSubscriptionFetchDate: [
 					'WKCErrorNotDate',
 				],
@@ -199,13 +177,10 @@ describe('WKCModelInputDataIsSubscriptionObject', function testWKCModelInputData
 
 	context('WKCSubscriptionFetchContent', function() {
 
-		it('returns false with WKCErrors if not string', function() {
-			var item = Object.assign(kTesting.kTestingValidSubscription(), {
+		it('returns errors if not string', function() {
+			assert.deepEqual(modelLibrary.WKCSubscriptionsModelErrorsFor(Object.assign(kTesting.kTestingValidSubscription(), {
 				WKCSubscriptionFetchContent: 123
-			});
-
-			assert.strictEqual(modelLibrary.WKCModelInputDataIsSubscriptionObject(item), false);
-			assert.deepEqual(item.WKCErrors, {
+			})), {
 				WKCSubscriptionFetchContent: [
 					'WKCErrorNotString',
 				],
@@ -216,13 +191,10 @@ describe('WKCModelInputDataIsSubscriptionObject', function testWKCModelInputData
 
 	context('WKCSubscriptionErrorDate', function() {
 
-		it('returns false with WKCErrors if not date', function() {
-			var item = Object.assign(kTesting.kTestingValidSubscription(), {
+		it('returns errors if not date', function() {
+			assert.deepEqual(modelLibrary.WKCSubscriptionsModelErrorsFor(Object.assign(kTesting.kTestingValidSubscription(), {
 				WKCSubscriptionErrorDate: new Date('alfa'),
-			});
-
-			assert.strictEqual(modelLibrary.WKCModelInputDataIsSubscriptionObject(item), false);
-			assert.deepEqual(item.WKCErrors, {
+			})), {
 				WKCSubscriptionErrorDate: [
 					'WKCErrorNotDate',
 				],
@@ -233,13 +205,10 @@ describe('WKCModelInputDataIsSubscriptionObject', function testWKCModelInputData
 
 	context('WKCSubscriptionErrorMessage', function() {
 
-		it('returns false with WKCErrors if not string', function() {
-			var item = Object.assign(kTesting.kTestingValidSubscription(), {
+		it('returns errors if not string', function() {
+			assert.deepEqual(modelLibrary.WKCSubscriptionsModelErrorsFor(Object.assign(kTesting.kTestingValidSubscription(), {
 				WKCSubscriptionErrorMessage: 123
-			});
-
-			assert.strictEqual(modelLibrary.WKCModelInputDataIsSubscriptionObject(item), false);
-			assert.deepEqual(item.WKCErrors, {
+			})), {
 				WKCSubscriptionErrorMessage: [
 					'WKCErrorNotString',
 				],

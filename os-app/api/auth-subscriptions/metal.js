@@ -17,8 +17,11 @@ exports.WKCMetalSubscriptionsCreate = function(databaseClient, inputData, comple
 		throw new Error('WKCErrorInvalidInput');
 	}
 
-	if (!modelLibrary.WKCModelInputDataIsSubscriptionObject(modelLibrary.WKCModelSubscriptionPrepare(inputData))) {
-		return completionHandler(null, inputData);
+	const errors = modelLibrary.WKCSubscriptionsModelErrorsFor(modelLibrary.WKCModelSubscriptionPrepare(inputData));
+	if (errors) {
+		return completionHandler(null, Object.assign(inputData, {
+			WKCErrors: errors,
+		}));
 	}
 
 	var currentDate = new Date();
@@ -89,10 +92,13 @@ exports.WKCMetalSubscriptionsUpdate = function(databaseClient, objectID, inputDa
 		throw new Error('WKCErrorInvalidInput');
 	}
 
-	if (!modelLibrary.WKCModelInputDataIsSubscriptionObject(inputData, {
+	const errors = modelLibrary.WKCSubscriptionsModelErrorsFor(modelLibrary.WKCModelSubscriptionPrepare(inputData), {
 		WKCModelValidatePresentOnly: true,
-	})) {
-		return completionHandler(null, inputData);
+	});
+	if (errors) {
+		return completionHandler(null, Object.assign(inputData, {
+			WKCErrors: errors,
+		}));
 	}
 
 	return databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_subscriptions').findOneAndUpdate({
