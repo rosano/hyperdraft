@@ -76,6 +76,25 @@ describe('WKCModelInputDataIsArticleObject', function testWKCModelInputDataIsArt
 		});
 	});
 
+	it('returns true', function() {
+		assert.deepEqual(modelLibrary.WKCModelInputDataIsArticleObject(kTestingValidArticle()), true);
+	});
+
+	it('ignores unpresent fields if WKCModelValidatePresentOnly true', function() {
+		var item = {
+			WKCArticlePublishDate: new Date('alfa'),
+		};
+
+		assert.strictEqual(modelLibrary.WKCModelInputDataIsArticleObject(item, {
+			WKCModelValidatePresentOnly: true,
+		}), false);
+		assert.deepEqual(item.WKCErrors, {
+			WKCArticlePublishDate: [
+				'WKCErrorNotDate',
+			],
+		});
+	});
+
 	context('WKCArticleTitle', function() {
 
 		it('returns false with WKCErrors if not string', function() {

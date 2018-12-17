@@ -16,7 +16,7 @@ exports.WKCModelArticlePrepare = function(inputData) {
 
 //_ WKCModelInputDataIsArticleObject
 
-exports.WKCModelInputDataIsArticleObject = function(inputData) {
+exports.WKCModelInputDataIsArticleObject = function(inputData, options) {
 	if (typeof inputData !== 'object' || inputData === null) {
 		return false;
 	}
@@ -65,6 +65,14 @@ exports.WKCModelInputDataIsArticleObject = function(inputData) {
 				'WKCErrorNotBoolean',
 			];
 		}
+	}
+
+	if (options && options.WKCModelValidatePresentOnly) {
+		Object.keys(errors).forEach(function(e) {
+			if (typeof inputData[e] === 'undefined') {
+				delete errors[e];
+			}
+		});
 	}
 
 	if (Object.keys(errors).length) {
