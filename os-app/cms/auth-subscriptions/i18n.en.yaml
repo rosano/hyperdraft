@@ -3,3 +3,4 @@ WKCSubscriptionsErrorSubscriptionsUnavailableText: Unable to fetch subscriptions
 WKCSubscriptionsErrorArticlesUnavailableText: Unable to fetch articles
 WKCSubscriptionsDetailPlaceholderText: No Article Selected
 WKCSubscriptionsDetailContentLinkText: Original source
+WKCSubscriptionsErrorArticlesMarkAsReadText: Unable to mark article as read

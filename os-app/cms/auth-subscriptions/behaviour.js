@@ -112,6 +112,41 @@
 
 	moi.commandsSelectArticle = function (item) {
 		moi.propertiesSelectedArticle(item);
+
+		if (item.WKCArticleIsRead) {
+			return;
+		}
+
+		moi.commandsArticlesMarkAsRead(item);
+	};
+
+	//_ commandsArticlesMarkAsRead
+
+	moi.commandsArticlesMarkAsRead = function (item) {
+		d3.json((<%- OLSKCanonicalSubstitutionFunctionFor('WKCRouteAPIArticlesUpdate') %>)({
+			wkc_article_id: item.WKCArticleID
+		}), {
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json',
+				'x-client-key': moi.propertiesAPIToken(),
+			},
+			body: JSON.stringify({
+				WKCArticleIsRead: true,
+			}),
+		}).then(function(responseJSON) {
+			d3.selectAll('.WKCSubscriptionsMasterContentListItem').filter(function(obj) {
+				return obj === item;
+			}).classed('WKCSubscriptionsMasterContentListItemUnread', false);
+		}, moi.commandsArticlesAlertErrorMarkAsRead);
+	};
+
+	//_ commandsArticlesAlertErrorMarkAsRead
+
+	moi.commandsArticlesAlertErrorMarkAsRead = function () {
+		window.alert('<%= OLSKLocalized('WKCSubscriptionsErrorArticlesMarkAsReadText') %>');
+
+		throw new Error('WKCSubscriptionsErrorArticlesMarkAsRead');
 	};
 
 	//# REACT
@@ -125,10 +160,13 @@
 		var parentElement = selection.enter()
 			.append('div')
 				.attr('class', 'WKCSubscriptionsMasterContentListItem')
+				.classed('WKCSubscriptionsMasterContentListItemUnread', function(obj) {
+					return !obj.WKCArticleIsRead;
+				})
 				.on('click', function(obj) {
 					moi.commandsSelectArticle(obj);
 				});
-		parentElement.append('h4').attr('class', 'WKCSubscriptionsMasterContentListItemHeading');
+		parentElement.append('p').attr('class', 'WKCSubscriptionsMasterContentListItemHeading');
 		parentElement.append('p').attr('class', 'WKCSubscriptionsMasterContentListItemSnippet');
 		parentElement.append('p').attr('class', 'WKCSubscriptionsMasterContentListItemSource');
 		parentElement.append('span').attr('class', 'WKCSubscriptionsMasterContentListItemDate');

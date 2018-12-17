@@ -71,6 +71,10 @@ body {
 	user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
 }
 
+.WKCSubscriptionsMasterContentListItemUnread .WKCSubscriptionsMasterContentListItemHeading {
+	font-weight: bold;
+}
+
 .WKCSubscriptionsMasterContentListItemSelected {
 	background: #ddd;
 }
