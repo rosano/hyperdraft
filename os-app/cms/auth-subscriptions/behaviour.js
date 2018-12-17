@@ -161,8 +161,11 @@
 		d3.select('#WKCSubscriptionsDetailContentHeading').text(moi.propertiesSelectedArticle().WKCArticleTitle || 'untitled_article');
 		d3.select('#WKCSubscriptionsDetailContentAuthor').text(moi.propertiesSelectedArticle().WKCArticleAuthor || 'no_author');
 		d3.select('#WKCSubscriptionsDetailContentDate').text(moment(moi.propertiesSelectedArticle().WKCArticlePublishDate).format('MMMM Do YYYY, h:mm:ss a'));
-		d3.select('#WKCSubscriptionsDetailContentLink').attr('href', moi.propertiesSelectedArticle().WKCArticleOriginalURL);
-		d3.select('#WKCSubscriptionsDetailContentBody').html(moi.propertiesSelectedArticle().WKCArticleBody);
+		d3.select('#WKCSubscriptionsDetailContentSource').text(moi._propertiesSubscriptionObjectsByID()[moi.propertiesSelectedArticle().WKCArticleSubscriptionID].WKCSubscriptionName);
+		d3.select('#WKCSubscriptionsDetailContentLink').attr('href', moi.propertiesSelectedArticle().WKCArticleOriginalURL || moi._propertiesSubscriptionObjectsByID()[moi.propertiesSelectedArticle().WKCArticleSubscriptionID].WKCSubscriptionURL);
+		d3.select('#WKCSubscriptionsDetailContentBody')
+			.html(moi.propertiesSelectedArticle().WKCArticleBody)
+			.classed('WKCSubscriptionsDetailContentBodyFile', moi._propertiesSubscriptionObjectsByID()[moi.propertiesSelectedArticle().WKCArticleSubscriptionID].WKCSubscriptionType === 'File');
 
 		d3.selectAll('#WKCSubscriptionsDetailContentBody a').attr('target', '_blank');
 
