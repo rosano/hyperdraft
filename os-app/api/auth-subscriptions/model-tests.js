@@ -131,6 +131,21 @@ describe('WKCModelInputDataIsSubscriptionObject', function testWKCModelInputData
 		assert.deepEqual(modelLibrary.WKCModelInputDataIsSubscriptionObject(kTesting.kTestingValidSubscription()), true);
 	});
 
+	it('ignores unpresent fields if WKCModelValidatePresentOnly true', function() {
+		var item = {
+			WKCSubscriptionType: 'alfa',
+		};
+
+		assert.strictEqual(modelLibrary.WKCModelInputDataIsSubscriptionObject(item, {
+			WKCModelValidatePresentOnly: true,
+		}), false);
+		assert.deepEqual(item.WKCErrors, {
+			WKCSubscriptionType: [
+				'WKCErrorNotValid',
+			],
+		});
+	});
+
 	context('WKCSubscriptionName', function() {
 
 		it('returns false with WKCErrors if not string', function() {

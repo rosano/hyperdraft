@@ -46,7 +46,7 @@ exports.WKCModelSubscriptionPrepare = function(inputData) {
 
 //_ WKCModelInputDataIsSubscriptionObject
 
-exports.WKCModelInputDataIsSubscriptionObject = function(inputData) {
+exports.WKCModelInputDataIsSubscriptionObject = function(inputData, options) {
 	if (typeof inputData !== 'object' || inputData === null) {
 		return false;
 	}
@@ -111,6 +111,14 @@ exports.WKCModelInputDataIsSubscriptionObject = function(inputData) {
 				'WKCErrorNotString',
 			];
 		}
+	}
+
+	if (options && options.WKCModelValidatePresentOnly) {
+		Object.keys(errors).forEach(function(e) {
+			if (typeof inputData[e] === 'undefined') {
+				delete errors[e];
+			}
+		});
 	}
 
 	if (Object.keys(errors).length) {
