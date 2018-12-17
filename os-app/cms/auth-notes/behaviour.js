@@ -416,6 +416,8 @@
 		moi.setupAPIToken(function () {
 			moi.setupNoteObjects(function() {
 				moi.setupPersistenceTask();
+
+				d3.select('#WKCAppNotes').classed('WKCAppNotesLoading', false);
 			});
 		});
 	};
@@ -448,8 +450,6 @@
 			if (!Array.isArray(responseJSON)) {
 				return moi.commandsAlertNotesUnavailable();
 			}
-
-			d3.select('#WKCAppNotes').classed('WKCAppNotesLoading', false);
 
 			moi.propertiesNoteObjects(responseJSON.map(function(e) {
 				return Object.assign(e, {
