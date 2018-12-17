@@ -9,11 +9,13 @@ var assert = require('assert');
 var metalLibrary = require('./metal');
 var modelLibrary = require('./model');
 
-const kTestingValidSubscription = function() {
-	return {
-		WKCSubscriptionURL: 'https://google.com',
-		WKCSubscriptionType: modelLibrary.WKCSubscriptionTypePage(),
-	};
+const kTesting = {
+	kTestingValidSubscription: function() {
+		return {
+			WKCSubscriptionURL: 'https://google.com',
+			WKCSubscriptionType: modelLibrary.WKCSubscriptionTypePage(),
+		}
+	},
 };
 
 describe('WKCMetalSubscriptionsCreate', function testWKCMetalSubscriptionsCreate() {
@@ -46,12 +48,16 @@ describe('WKCMetalSubscriptionsCreate', function testWKCMetalSubscriptionsCreate
 	});
 
 	it('returns WKCSubscription', function(done) {
-		metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, kTestingValidSubscription(), function(err, responseJSON) {
-			assert.strictEqual(responseJSON._id, undefined);
+		metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, kTesting.kTestingValidSubscription(), function(err, responseJSON) {
+			assert.deepEqual(responseJSON, Object.assign(kTesting.kTestingValidSubscription(), {
+				WKCSubscriptionID: responseJSON.WKCSubscriptionID,
+				WKCSubscriptionDateCreated: responseJSON.WKCSubscriptionDateCreated,
+				WKCSubscriptionDateUpdated: responseJSON.WKCSubscriptionDateUpdated,
+			}));
+
 			assert.strictEqual(parseInt(responseJSON.WKCSubscriptionID) - (new Date()) > -200, true);
-			assert.strictEqual(responseJSON.WKCSubscriptionURL, 'https://google.com');
-			assert.strictEqual(responseJSON.WKCSubscriptionDateCreated instanceof Date, true);
-			assert.strictEqual(responseJSON.WKCSubscriptionDateUpdated instanceof Date, true);
+			assert.strictEqual(responseJSON.WKCSubscriptionDateCreated - (new Date()) > -200, true);
+			assert.strictEqual(responseJSON.WKCSubscriptionDateUpdated - (new Date()) > -200, true);
 			
 			done();
 		});
@@ -82,7 +88,7 @@ describe('WKCMetalSubscriptionsRead', function testWKCMetalSubscriptionsRead() {
 	});
 
 	it('returns WKCSubscription', function(done) {
-		metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, kTestingValidSubscription(), function(err, subscriptionObject) {
+		metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, kTesting.kTestingValidSubscription(), function(err, subscriptionObject) {
 			metalLibrary.WKCMetalSubscriptionsRead(WKCTestingMongoClient, subscriptionObject.WKCSubscriptionID, function(err, responseJSON) {
 				assert.deepEqual(responseJSON, subscriptionObject);
 
@@ -114,7 +120,7 @@ describe('WKCMetalSubscriptionsUpdate', function testWKCMetalSubscriptionsUpdate
 	});
 
 	it('returns error if WKCSubscriptionID not found', function(done) {
-		metalLibrary.WKCMetalSubscriptionsUpdate(WKCTestingMongoClient, '0', kTestingValidSubscription(), function(err) {
+		metalLibrary.WKCMetalSubscriptionsUpdate(WKCTestingMongoClient, '0', kTesting.kTestingValidSubscription(), function(err) {
 			assert.deepEqual(err, new Error('WKCErrorNotFound'));
 
 			done();
@@ -122,7 +128,7 @@ describe('WKCMetalSubscriptionsUpdate', function testWKCMetalSubscriptionsUpdate
 	});
 
 	it('returns WKCErrors if not valid WKCSubscription', function(done) {
-		metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, kTestingValidSubscription(), function(err, subscriptionObject) {
+		metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, kTesting.kTestingValidSubscription(), function(err, subscriptionObject) {
 			metalLibrary.WKCMetalSubscriptionsUpdate(WKCTestingMongoClient, subscriptionObject.WKCSubscriptionID, {
 				WKCSubscriptionType: modelLibrary.WKCSubscriptionTypePage(),
 				WKCSubscriptionURL: 'google.com',
@@ -139,11 +145,18 @@ describe('WKCMetalSubscriptionsUpdate', function testWKCMetalSubscriptionsUpdate
 	});
 
 	it('returns WKCSubscription', function(done) {
-		metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, kTestingValidSubscription(), function(err, subscriptionObject) {
+		metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, kTesting.kTestingValidSubscription(), function(err, subscriptionObject) {
+			var newURL = 'https://yahoo.com';
+
 			metalLibrary.WKCMetalSubscriptionsUpdate(WKCTestingMongoClient, subscriptionObject.WKCSubscriptionID, {
-				WKCSubscriptionURL: 'https://yahoo.com',
+				WKCSubscriptionURL: newURL,
 			}, function(err, responseJSON) {
-				assert.deepEqual(responseJSON.WKCSubscriptionURL, 'https://yahoo.com');
+				assert.deepEqual(responseJSON, Object.assign(subscriptionObject, {
+					WKCSubscriptionURL: newURL,
+					WKCSubscriptionDateUpdated: responseJSON.WKCSubscriptionDateUpdated,
+				}));
+				assert.strictEqual(responseJSON.WKCSubscriptionDateUpdated - (new Date()) > -200, true);
+
 				done();
 			});
 		});
@@ -174,7 +187,7 @@ describe('WKCMetalSubscriptionsDelete', function testWKCMetalSubscriptionsDelete
 	});
 
 	it('returns WKCSubscription', function(done) {
-		metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, kTestingValidSubscription(), function(err, responseJSON) {
+		metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, kTesting.kTestingValidSubscription(), function(err, responseJSON) {
 			metalLibrary.WKCMetalSubscriptionsDelete(WKCTestingMongoClient, responseJSON.WKCSubscriptionID, function(err, responseJSON) {
 				assert.deepEqual(responseJSON, true);
 
@@ -194,10 +207,7 @@ describe('WKCMetalSubscriptionsSearch', function testWKCMetalSubscriptionsSearch
 	});
 
 	it('returns all if param2 empty', function(done) {
-		metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, {
-			WKCSubscriptionURL: 'https://alfa.com',
-			WKCSubscriptionType: modelLibrary.WKCSubscriptionTypePage(),
-		}, function(err, subscriptionObject) {
+		metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, kTesting.kTestingValidSubscription(), function(err, subscriptionObject) {
 			metalLibrary.WKCMetalSubscriptionsSearch(WKCTestingMongoClient, '', function(err, responseJSON) {
 				assert.deepEqual(responseJSON, [subscriptionObject]);
 
@@ -217,17 +227,16 @@ describe('WKCMetalSubscriptionsNeedingFetch', function testWKCMetalSubscriptions
 	});
 
 	it('returns subscriptionObjects with fetch date older than one hour', function(done) {
-		metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTestingValidSubscription(), {
+		metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTesting.kTestingValidSubscription(), {
 			WKCSubscriptionName: 'alfa',
 			WKCSubscriptionFetchDate: new Date(new Date() - 1000 * 60 * 60),
-		}), function(err, subscriptionObject) {
-			metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTestingValidSubscription(), {
+		}), function(err, subscriptionObject1) {
+			metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTesting.kTestingValidSubscription(), {
 				WKCSubscriptionName: 'bravo',
 				WKCSubscriptionFetchDate: new Date(),
-			}), function(err, subscriptionObject) {
+			}), function(err, subscriptionObject2) {
 				metalLibrary.WKCMetalSubscriptionsNeedingFetch(WKCTestingMongoClient, function(err, responseJSON) {
-					assert.strictEqual(responseJSON.length, 1);
-					assert.deepEqual(responseJSON.pop().WKCSubscriptionName, 'alfa');
+					assert.deepEqual(responseJSON, [subscriptionObject1]);
 
 					done();
 				});
@@ -236,16 +245,15 @@ describe('WKCMetalSubscriptionsNeedingFetch', function testWKCMetalSubscriptions
 	});
 
 	it('returns subscriptionObjects with no fetch date', function(done) {
-		metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTestingValidSubscription(), {
+		metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTesting.kTestingValidSubscription(), {
 			WKCSubscriptionName: 'alfa',
 			WKCSubscriptionFetchDate: new Date(),
-		}), function(err, subscriptionObject) {
-			metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTestingValidSubscription(), {
+		}), function(err, subscriptionObject1) {
+			metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTesting.kTestingValidSubscription(), {
 				WKCSubscriptionName: 'bravo',
-			}), function(err, subscriptionObject) {
+			}), function(err, subscriptionObject2) {
 				metalLibrary.WKCMetalSubscriptionsNeedingFetch(WKCTestingMongoClient, function(err, responseJSON) {
-					assert.strictEqual(responseJSON.length, 1);
-					assert.deepEqual(responseJSON.pop().WKCSubscriptionName, 'bravo');
+					assert.deepEqual(responseJSON, [subscriptionObject2]);
 
 					done();
 				});
@@ -256,17 +264,17 @@ describe('WKCMetalSubscriptionsNeedingFetch', function testWKCMetalSubscriptions
 	context('error', function() {
 
 		it('excludes subscriptionObjects with error date less than one hour', function(done) {
-			metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTestingValidSubscription(), {
+			metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTesting.kTestingValidSubscription(), {
 				WKCSubscriptionName: 'alfa',
 				WKCSubscriptionFetchDate: new Date(new Date() - 1000 * 60 * 60),
 				WKCSubscriptionErrorDate: new Date(),
 			}), function(err, subscriptionObject) {
-				metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTestingValidSubscription(), {
+				metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTesting.kTestingValidSubscription(), {
 					WKCSubscriptionName: 'bravo',
 					WKCSubscriptionFetchDate: new Date(),
 				}), function(err, subscriptionObject) {
 					metalLibrary.WKCMetalSubscriptionsNeedingFetch(WKCTestingMongoClient, function(err, responseJSON) {
-						assert.strictEqual(responseJSON.length, 0);
+						assert.deepEqual(responseJSON, []);
 
 						done();
 					});
@@ -275,18 +283,17 @@ describe('WKCMetalSubscriptionsNeedingFetch', function testWKCMetalSubscriptions
 		});
 
 		it('includes subscriptionObjects with error date older than one hour', function(done) {
-			metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTestingValidSubscription(), {
+			metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTesting.kTestingValidSubscription(), {
 				WKCSubscriptionName: 'alfa',
 				WKCSubscriptionFetchDate: new Date(new Date() - 1000 * 60 * 60),
 				WKCSubscriptionErrorDate: new Date(new Date() - 1000 * 60 * 60),
-			}), function(err, subscriptionObject) {
-				metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTestingValidSubscription(), {
+			}), function(err, subscriptionObject1) {
+				metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTesting.kTestingValidSubscription(), {
 					WKCSubscriptionName: 'bravo',
 					WKCSubscriptionFetchDate: new Date(),
-				}), function(err, subscriptionObject) {
+				}), function(err, subscriptionObject2) {
 					metalLibrary.WKCMetalSubscriptionsNeedingFetch(WKCTestingMongoClient, function(err, responseJSON) {
-						assert.strictEqual(responseJSON.length, 1);
-						assert.deepEqual(responseJSON.pop().WKCSubscriptionName, 'alfa');
+						assert.deepEqual(responseJSON, [subscriptionObject1]);
 
 						done();
 					});

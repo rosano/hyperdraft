@@ -76,12 +76,12 @@ exports.WKCMetalSubscriptionsRead = function(databaseClient, inputData, completi
 
 //_ WKCMetalSubscriptionsUpdate
 
-exports.WKCMetalSubscriptionsUpdate = function(databaseClient, inputData1, inputData2, completionHandler) {
-	if (typeof inputData1 !== 'string') {
+exports.WKCMetalSubscriptionsUpdate = function(databaseClient, objectID, inputData, completionHandler) {
+	if (typeof objectID !== 'string') {
 		throw new Error('WKCErrorInvalidInput');
 	}
 
-	if (typeof inputData2 !== 'object' || inputData2 === null) {
+	if (typeof inputData !== 'object' || inputData === null) {
 		throw new Error('WKCErrorInvalidInput');
 	}
 
@@ -89,17 +89,18 @@ exports.WKCMetalSubscriptionsUpdate = function(databaseClient, inputData1, input
 		throw new Error('WKCErrorInvalidInput');
 	}
 
-	if (!modelLibrary.WKCModelInputDataIsSubscriptionObject(inputData2)) {
-		return completionHandler(null, inputData2);
+	if (!modelLibrary.WKCModelInputDataIsSubscriptionObject(inputData)) {
+		return completionHandler(null, inputData);
 	}
 
 	return databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_subscriptions').findOneAndUpdate({
-		WKCSubscriptionID: inputData1,
-	},
-	{
-		'$set': Object.assign(inputData2, {
+		WKCSubscriptionID: objectID,
+	}, {
+		'$set': Object.assign(inputData, {
 			WKCSubscriptionDateUpdated: new Date(),
 		}),
+	}, {
+		returnOriginal: false,
 	}, function(err, result) {
 		if (err) {
 			return completionHandler(err);
@@ -109,13 +110,11 @@ exports.WKCMetalSubscriptionsUpdate = function(databaseClient, inputData1, input
 			return completionHandler(new Error('WKCErrorNotFound'));
 		}
 
-		var subscriptionObject = Object.assign(result.value, inputData2);
-
 		modelLibrary.WKCSubscriptionHiddenPropertyNames().forEach(function(obj) {
-			delete subscriptionObject[obj];
+			delete result.value[obj];
 		});
 
-		return completionHandler(null, subscriptionObject);
+		return completionHandler(null, result.value);
 	});
 };
 
