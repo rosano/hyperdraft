@@ -37,6 +37,7 @@ body {
 .WKCSubscriptionsButtonNoStyle {
 	background: none;
 	border: none;
+	padding: 0;
 }
 
 #WKCSubscriptionsModuleCreateLoader {
