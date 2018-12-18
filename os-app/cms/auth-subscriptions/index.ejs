@@ -31,7 +31,13 @@ locals.OLSKPageAssets = [
 	</div>
 
 	<div id="WKCSubscriptionsDetail" class="WKCSubscriptionsDetailInactive">
-		<header id="WKCSubscriptionsDetailHeader" class="WKCSubscriptionsToolbar"><span>Test</span></header>
+		<header id="WKCSubscriptionsDetailHeader" class="WKCSubscriptionsToolbar">
+			<a id="WKCSubscriptionsDetailHeaderDiscard" class="WKCSubscriptionsTappable">🗑</a>
+			<script type="text/javascript">
+				d3.select('#WKCSubscriptionsDetailHeaderDiscard').on('click', WKSubscriptions.interfaceDiscardButtonDidClick);
+			</script>
+
+		</header>
 
 		<article id="WKCSubscriptionsDetailContent">
 			<h1 id="WKCSubscriptionsDetailContentHeading"></h1>

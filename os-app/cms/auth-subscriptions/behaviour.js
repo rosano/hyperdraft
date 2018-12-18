@@ -74,6 +74,18 @@
 		moi.reactSelectedArticle();
 	};
 
+	//# INTERFACE
+
+	//_ interfaceDiscardButtonDidClick
+
+	moi.interfaceDiscardButtonDidClick = function () {
+		if (!moi.propertiesSelectedArticle()) {
+			return;
+		}
+
+		moi.commandsArticlesDiscard(moi.propertiesSelectedArticle());
+	};
+
 	//# COMMANDS
 
 	//_ commandsAlertConnectionError
@@ -149,6 +161,36 @@
 		throw new Error('WKCSubscriptionsErrorArticlesMarkAsRead');
 	};
 
+	//_ commandsArticlesDiscard
+
+	moi.commandsArticlesDiscard = function (item) {
+		d3.json((<%- OLSKCanonicalSubstitutionFunctionFor('WKCRouteAPIArticlesUpdate') %>)({
+			wkc_article_id: item.WKCArticleID
+		}), {
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json',
+				'x-client-key': moi.propertiesAPIToken(),
+			},
+			body: JSON.stringify({
+				WKCArticleIsDiscarded: true,
+			}),
+		}).then(function(responseJSON) {
+			moi.propertiesSelectedArticle(null);
+			moi.propertiesArticleObjects(moi.propertiesArticleObjects().filter(function (e) {
+				return e !== item;
+			}));
+		}, moi.commandsArticlesAlertErrorMarkAsDiscarded);
+	};
+
+	//_ commandsArticlesAlertErrorMarkAsDiscarded
+
+	moi.commandsArticlesAlertErrorMarkAsDiscarded = function (error) {
+		window.alert('<%= OLSKLocalized('WKCSubscriptionsErrorArticlesMarkAsDiscardedText') %>');
+
+		throw error;
+	};
+
 	//# REACT
 
 	//_ reactArticleObjects
@@ -161,9 +203,6 @@
 			.append('div')
 				.attr('class', 'WKCSubscriptionsMasterContentListItem')
 				.classed('WKCSubscriptionsTappable', true)
-				.classed('WKCSubscriptionsMasterContentListItemUnread', function(obj) {
-					return !obj.WKCArticleIsRead;
-				})
 				.on('click', function(obj) {
 					moi.commandsSelectArticle(obj);
 				});
@@ -172,6 +211,10 @@
 		parentElement.append('p').attr('class', 'WKCSubscriptionsMasterContentListItemSource');
 		parentElement.append('span').attr('class', 'WKCSubscriptionsMasterContentListItemDate');
 		parentElement = parentElement.merge(selection);
+
+		parentElement.classed('WKCSubscriptionsMasterContentListItemUnread', function(obj) {
+			return !obj.WKCArticleIsRead;
+		});
 
 		parentElement.select('.WKCSubscriptionsMasterContentListItemHeading').text(function(obj) {
 			return obj.WKCArticleTitle || 'untitled_article';
@@ -197,6 +240,14 @@
 	//_ reactSelectedArticle
 
 	moi.reactSelectedArticle = function () {
+		d3.selectAll('.WKCSubscriptionsMasterContentListItem').classed('WKCSubscriptionsMasterContentListItemSelected', function(obj) {
+			return obj === moi.propertiesSelectedArticle();
+		});
+
+		if (!moi.propertiesSelectedArticle()) {
+			return d3.select('#WKCSubscriptionsDetail').classed('WKCSubscriptionsDetailInactive', true);
+		}
+
 		d3.select('#WKCSubscriptionsDetailContentHeading').text(moi.propertiesSelectedArticle().WKCArticleTitle || 'untitled_article');
 		d3.select('#WKCSubscriptionsDetailContentAuthor').text(moi.propertiesSelectedArticle().WKCArticleAuthor || 'no_author');
 		d3.select('#WKCSubscriptionsDetailContentDate').text(moment(moi.propertiesSelectedArticle().WKCArticlePublishDate).format('MMMM Do YYYY, h:mm:ss a'));
@@ -211,10 +262,6 @@
 		d3.selectAll('#WKCSubscriptionsDetailContentBody *').attr('width', null);
 
 		d3.select('#WKCSubscriptionsDetail').classed('WKCSubscriptionsDetailInactive', false);
-
-		d3.selectAll('.WKCSubscriptionsMasterContentListItem').classed('WKCSubscriptionsMasterContentListItemSelected', function(e) {
-			return e === moi.propertiesSelectedArticle();
-		});
 	};
 
 	//# SETUP
