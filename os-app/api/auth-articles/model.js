@@ -75,6 +75,14 @@ exports.WKCModelInputDataIsArticleObject = function(inputData, options) {
 		}
 	}
 
+	if (inputData.WKCArticleIsDiscarded) {
+		if (typeof inputData.WKCArticleIsDiscarded !== 'boolean') {
+			errors.WKCArticleIsDiscarded = [
+				'WKCErrorNotBoolean',
+			];
+		}
+	}
+
 	if (options && options.WKCModelValidatePresentOnly) {
 		Object.keys(errors).forEach(function(e) {
 			if (typeof inputData[e] === 'undefined') {
