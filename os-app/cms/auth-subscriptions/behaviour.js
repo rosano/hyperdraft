@@ -88,9 +88,9 @@
 		moi.commandsSubscriptionsCreateClose();
 	};
 
-	//_ interfaceDiscardButtonDidClick
+	//_ interfaceArticlesDiscardButtonDidClick
 
-	moi.interfaceDiscardButtonDidClick = function () {
+	moi.interfaceArticlesDiscardButtonDidClick = function () {
 		if (!moi.propertiesSelectedArticle()) {
 			return;
 		}
