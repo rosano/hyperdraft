@@ -34,6 +34,11 @@ body {
 	user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
 }
 
+.WKCSubscriptionsButtonNoStyle {
+	background: none;
+	border: none;
+}
+
 #WKCSubscriptionsModuleCreateLoader {
 	padding: 20px 0;
 }
