@@ -35,6 +35,11 @@ locals.OLSKPageAssets = [
 			<button id="WKCSubscriptionsDetailHeaderDiscardButton" class="WKCSubscriptionsTappable WKCSubscriptionsButtonNoStyle">🗑</button>
 			<script type="text/javascript">
 				d3.select('#WKCSubscriptionsDetailHeaderDiscardButton').on('click', WKSubscriptions.interfaceDiscardButtonDidClick);
+				d3.select(document.body).on('keydown', function (a, b, c) {
+					if (d3.event.code === 'Backspace') {
+						return WKSubscriptions.interfaceDiscardButtonDidClick();
+					}
+				});
 			</script>
 
 		</header>
