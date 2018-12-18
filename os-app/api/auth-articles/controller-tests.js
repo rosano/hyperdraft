@@ -31,7 +31,7 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 				],
 			},
 			WKCRouteAPIArticlesRead: {
-				OLSKRoutePath: '/api/articles/:wkc_article_id(\\d+)',
+				OLSKRoutePath: '/api/articles/:wkc_article_id',
 				OLSKRouteMethod: 'get',
 				OLSKRouteFunction: controllerModule.WKCActionAPIArticlesRead,
 				OLSKRouteMiddlewares: [
@@ -39,7 +39,7 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 				],
 			},
 			WKCRouteAPIArticlesUpdate: {
-				OLSKRoutePath: '/api/articles/:wkc_article_id(\\d+)',
+				OLSKRoutePath: '/api/articles/:wkc_article_id',
 				OLSKRouteMethod: 'put',
 				OLSKRouteFunction: controllerModule.WKCActionAPIArticlesUpdate,
 				OLSKRouteMiddlewares: [
@@ -47,7 +47,7 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 				],
 			},
 			WKCRouteAPIArticlesDelete: {
-				OLSKRoutePath: '/api/articles/:wkc_article_id(\\d+)',
+				OLSKRoutePath: '/api/articles/:wkc_article_id',
 				OLSKRouteMethod: 'delete',
 				OLSKRouteFunction: controllerModule.WKCActionAPIArticlesDelete,
 				OLSKRouteMiddlewares: [
