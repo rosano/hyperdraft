@@ -215,6 +215,18 @@ describe('WKCMetalSubscriptionsSearch', function testWKCMetalSubscriptionsSearch
 		});
 	});
 
+	it('excludes if WKCArticleIsDiscarded true', function(done) {
+		metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTesting.kTestingValidSubscription(), {
+			WKCArticleIsDiscarded: true,	
+		}), function(err, subscriptionObject) {
+			metalLibrary.WKCMetalSubscriptionsSearch(WKCTestingMongoClient, '', function(err, responseJSON) {
+				assert.deepEqual(responseJSON, []);
+
+				done();
+			});
+		});
+	});
+
 });
 
 describe('WKCMetalSubscriptionsNeedingFetch', function testWKCMetalSubscriptionsNeedingFetch() {

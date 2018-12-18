@@ -159,7 +159,11 @@ exports.WKCMetalSubscriptionsSearch = function(databaseClient, inputData, comple
 		throw new Error('WKCErrorInvalidInput');
 	}
 
-	return databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_subscriptions').find({}).project(modelLibrary.WKCSubscriptionHiddenPropertyNames().reduce(function(hash, e) {
+	return databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_subscriptions').find({
+		WKCArticleIsDiscarded: {
+			'$ne': true,
+		},
+	}).project(modelLibrary.WKCSubscriptionHiddenPropertyNames().reduce(function(hash, e) {
 		hash[e] = 0;
 		
 		return hash;
