@@ -154,7 +154,11 @@ exports.WKCMetalArticlesSearch = function(databaseClient, inputData, completionH
 		throw new Error('WKCErrorInvalidInput');
 	}
 
-	return databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_articles').find({}).project(modelLibrary.WKCArticleHiddenPropertyNames().reduce(function(hash, e) {
+	return databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_articles').find({
+		WKCArticleIsDiscarded: {
+			'$ne': true,
+		},
+	}).project(modelLibrary.WKCArticleHiddenPropertyNames().reduce(function(hash, e) {
 		hash[e] = 0;
 		
 		return hash;

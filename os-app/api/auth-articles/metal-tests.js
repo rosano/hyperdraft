@@ -205,4 +205,16 @@ describe('WKCMetalArticlesSearch', function testWKCMetalArticlesSearch() {
 		});
 	});
 
+	it('excludes if WKCArticleIsDiscarded true', function(done) {
+		metalLibrary.WKCMetalArticlesCreate(WKCTestingMongoClient, Object.assign(kTestingValidArticle(), {
+			WKCArticleIsDiscarded: true,	
+		}), function(err, articleObject) {
+			metalLibrary.WKCMetalArticlesSearch(WKCTestingMongoClient, '', function(err, responseJSON) {
+				assert.deepEqual(responseJSON, []);
+
+				done();
+			});
+		});
+	});
+
 });
