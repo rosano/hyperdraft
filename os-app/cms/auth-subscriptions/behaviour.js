@@ -59,7 +59,7 @@
 			return d3.selectAll('.WKCSubscriptionsMasterContentListItem').data();
 		}
 
-		moi.reactArticleObjects(inputData.sort(WKSubscriptionsLogic.WKSubscriptionsListSort));
+		moi.reactArticleObjects(inputData);
 	};
 
 	//_ propertiesSelectedArticle
@@ -372,7 +372,7 @@
 				return Object.assign(e, {
 					WKCArticlePublishDate: new Date(e.WKCArticlePublishDate),
 				});
-			}));
+			}).sort(WKSubscriptionsLogic.WKSubscriptionsListSort));
 
 			completionHandler();
 		}, moi.commandsAlertConnectionError);
