@@ -22,6 +22,14 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 					'WKCSharedMiddlewareAPIAuthenticate',
 				],
 			},
+			WKCRouteAPIArticlesSearch: {
+				OLSKRoutePath: '/api/articles/search',
+				OLSKRouteMethod: 'get',
+				OLSKRouteFunction: controllerModule.WKCActionAPIArticlesSearch,
+				OLSKRouteMiddlewares: [
+					'WKCSharedMiddlewareAPIAuthenticate',
+				],
+			},
 			WKCRouteAPIArticlesRead: {
 				OLSKRoutePath: '/api/articles/:wkc_article_id(\\d+)',
 				OLSKRouteMethod: 'get',
@@ -42,14 +50,6 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 				OLSKRoutePath: '/api/articles/:wkc_article_id(\\d+)',
 				OLSKRouteMethod: 'delete',
 				OLSKRouteFunction: controllerModule.WKCActionAPIArticlesDelete,
-				OLSKRouteMiddlewares: [
-					'WKCSharedMiddlewareAPIAuthenticate',
-				],
-			},
-			WKCRouteAPIArticlesSearch: {
-				OLSKRoutePath: '/api/articles/search',
-				OLSKRouteMethod: 'get',
-				OLSKRouteFunction: controllerModule.WKCActionAPIArticlesSearch,
 				OLSKRouteMiddlewares: [
 					'WKCSharedMiddlewareAPIAuthenticate',
 				],
