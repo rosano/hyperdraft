@@ -160,6 +160,7 @@
 		var parentElement = selection.enter()
 			.append('div')
 				.attr('class', 'WKCSubscriptionsMasterContentListItem')
+				.classed('WKCSubscriptionsTappable', true)
 				.classed('WKCSubscriptionsMasterContentListItemUnread', function(obj) {
 					return !obj.WKCArticleIsRead;
 				})
