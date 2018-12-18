@@ -4,6 +4,7 @@
  * MIT Licensed
  */
 
+var mongodbPackage = require('mongodb');
 var modelLibrary = require('./model');
 
 //_ WKCMetalArticlesCreate
@@ -24,7 +25,6 @@ exports.WKCMetalArticlesCreate = function(databaseClient, inputData, completionH
 	var currentDate = new Date();
 
 	return databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_articles').insertOne(Object.assign(inputData, {
-		WKCArticleID: parseInt(new Date() * 1).toString(),
 		WKCArticleDateCreated: currentDate,
 		WKCArticleDateUpdated: currentDate,
 	}), function(err, result) {
@@ -32,7 +32,9 @@ exports.WKCMetalArticlesCreate = function(databaseClient, inputData, completionH
 			return completionHandler(err);
 		}
 
-		var articleObject = result.ops.pop();
+		var articleObject = Object.assign(result.ops.slice(-1).pop(), {
+			WKCArticleID: result.ops.slice(-1).pop()._id.toString(),
+		});
 
 		modelLibrary.WKCArticleHiddenPropertyNames().forEach(function(obj) {
 			delete articleObject[obj];
@@ -54,7 +56,7 @@ exports.WKCMetalArticlesRead = function(databaseClient, inputData, completionHan
 	}
 
 	return databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_articles').findOne({
-		WKCArticleID: inputData,
+		_id: mongodbPackage.ObjectID(inputData),
 	}, function(err, result) {
 		if (err) {
 			return completionHandler(err);
@@ -64,7 +66,9 @@ exports.WKCMetalArticlesRead = function(databaseClient, inputData, completionHan
 			return completionHandler(new Error('WKCErrorNotFound'));
 		}
 
-		var articleObject = result;
+		var articleObject = Object.assign(result, {
+			WKCArticleID: result._id.toString(),
+		});
 
 		modelLibrary.WKCArticleHiddenPropertyNames().forEach(function(obj) {
 			delete articleObject[obj];
@@ -96,7 +100,7 @@ exports.WKCMetalArticlesUpdate = function(databaseClient, inputData1, inputData2
 	}
 
 	return databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_articles').findOneAndUpdate({
-		WKCArticleID: inputData1,
+		_id: mongodbPackage.ObjectID(inputData1),
 	},
 	{
 		'$set': Object.assign(inputData2, {
@@ -133,7 +137,7 @@ exports.WKCMetalArticlesDelete = function(databaseClient, inputData, completionH
 	}
 
 	return databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_articles').deleteOne({
-		WKCArticleID: inputData,
+		_id: mongodbPackage.ObjectID(inputData),
 	}, function(err, result) {
 		if (err) {
 			return completionHandler(err);
@@ -158,15 +162,25 @@ exports.WKCMetalArticlesSearch = function(databaseClient, inputData, completionH
 		WKCArticleIsDiscarded: {
 			'$ne': true,
 		},
-	}).project(modelLibrary.WKCArticleHiddenPropertyNames().reduce(function(hash, e) {
-		hash[e] = 0;
+	}
+	// ).project(modelLibrary.WKCArticleHiddenPropertyNames().reduce(function(hash, e) {
+	// 	hash[e] = 0;
 		
-		return hash;
-	}, {})).toArray(function(err, items) {
+	// 	return hash;
+	// }, {})
+	).toArray(function(err, result) {
 		if (err) {
 			return completionHandler(err);
 		}
 
-		return completionHandler(null, items);
+		return completionHandler(null, result.map(function (e) {
+			e.WKCArticleID = e._id.toString();
+
+			modelLibrary.WKCArticleHiddenPropertyNames().forEach(function(obj) {
+				delete e[obj];
+			});
+
+			return e;
+		}));
 	});
 };
