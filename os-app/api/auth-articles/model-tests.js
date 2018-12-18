@@ -146,6 +146,23 @@ describe('WKCModelInputDataIsArticleObject', function testWKCModelInputDataIsArt
 
 	});
 
+	context('WKCArticleIsArchived', function() {
+
+		it('returns false with WKCErrors if not boolean', function() {
+			var item = Object.assign(kTestingValidArticle(), {
+				WKCArticleIsArchived: 'true'
+			});
+
+			assert.strictEqual(modelLibrary.WKCModelInputDataIsArticleObject(item), false);
+			assert.deepEqual(item.WKCErrors, {
+				WKCArticleIsArchived: [
+					'WKCErrorNotBoolean',
+				],
+			});
+		});
+
+	});
+
 });
 
 describe('WKCArticleHiddenPropertyNames', function testWKCArticleHiddenPropertyNames() {

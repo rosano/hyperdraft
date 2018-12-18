@@ -67,6 +67,14 @@ exports.WKCModelInputDataIsArticleObject = function(inputData, options) {
 		}
 	}
 
+	if (inputData.WKCArticleIsArchived) {
+		if (typeof inputData.WKCArticleIsArchived !== 'boolean') {
+			errors.WKCArticleIsArchived = [
+				'WKCErrorNotBoolean',
+			];
+		}
+	}
+
 	if (options && options.WKCModelValidatePresentOnly) {
 		Object.keys(errors).forEach(function(e) {
 			if (typeof inputData[e] === 'undefined') {
