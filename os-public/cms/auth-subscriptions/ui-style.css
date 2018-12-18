@@ -40,6 +40,47 @@ body {
 	padding: 0;
 }
 
+#WKCSubscriptionsCreate {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+
+	z-index: 1000;
+
+	background: white;
+
+	display: none;
+}
+
+@keyframes WKCSubscriptionsCreateActive {
+  from {
+  	opacity: 0;
+  }
+  to {
+  	opacity: 1;
+  }
+}
+
+.WKCSubscriptionsCreateActive {
+	display: block !important;
+  animation-name: WKCSubscriptionsCreateActive;
+  animation-duration: 0.235s;
+}
+
+.WKCSubscriptionsCreateInactive {
+	display: none;
+}
+
+#WKCSubscriptionsModuleCreate {
+	padding: 20px;
+}
+
+#WKCSubscriptionsModuleCreateHeading {
+	margin-top: 0;
+}
+
 #WKCSubscriptionsModuleCreateLoader {
 	padding: 20px 0;
 }
@@ -54,6 +95,7 @@ body {
 .WKCSubscriptionsToolbar {
 	padding: 10px;
 	border-bottom: 1px solid #ddd;
+	text-align: right;
 }
 
 #WKCSubscriptionsMaster {

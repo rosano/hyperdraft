@@ -14,19 +14,42 @@ locals.OLSKPageAssets = [
 
 <%- include('../_shared/layout-header.ejs') %>
 
-<% include('./module-create/view.ejs') %>
-
 <script type="text/javascript">
 	<%- include('behaviour.js') %>
 </script>
 
 <script type="text/javascript">
 	WKSubscriptions.lifecyclePageWillLoad();
+
+	d3.select(document.body).on('keydown', function () {
+		if (d3.event.code === 'Backspace') {
+			return WKSubscriptions.interfaceDiscardButtonDidClick();
+		}
+
+		if (d3.event.code === 'Escape') {
+			return WKSubscriptions.interfaceSubscriptionsCreateCloseButtonDidClick();
+		}
+	});
 </script>
+
+<div id="WKCSubscriptionsCreate">
+	<header id="WKCSubscriptionsCreateHeader" class="WKCSubscriptionsToolbar">
+		<button id="WKCSubscriptionsCreateHeaderCloseButton" class="WKCSubscriptionsTappable WKCSubscriptionsButtonNoStyle">✖️</button>
+		<script type="text/javascript">
+			d3.select('#WKCSubscriptionsCreateHeaderCloseButton').on('click', WKSubscriptions.interfaceSubscriptionsCreateCloseButtonDidClick);
+		</script>
+	</header>
+	<%- include('./module-create/view.ejs') %>
+</div>
 
 <div id="WKCSubscriptions" class="WKCSubscriptionsLoading">
 	<div id="WKCSubscriptionsMaster">
-		<header id="WKCSubscriptionsMasterHeader" class="WKCSubscriptionsToolbar"><span>Test</span></header>
+		<header id="WKCSubscriptionsMasterHeader" class="WKCSubscriptionsToolbar">
+			<button id="WKCSubscriptionsMasterHeaderCreateButton" class="WKCSubscriptionsTappable WKCSubscriptionsButtonNoStyle" accesskey="n">➕</button>
+			<script type="text/javascript">
+				d3.select('#WKCSubscriptionsMasterHeaderCreateButton').on('click', WKSubscriptions.interfaceSubscriptionsCreateButtonDidClick);
+			</script>
+		</header>
 		<div id="WKCSubscriptionsMasterContent"></div>
 	</div>
 
@@ -35,11 +58,6 @@ locals.OLSKPageAssets = [
 			<button id="WKCSubscriptionsDetailHeaderDiscardButton" class="WKCSubscriptionsTappable WKCSubscriptionsButtonNoStyle">🗑</button>
 			<script type="text/javascript">
 				d3.select('#WKCSubscriptionsDetailHeaderDiscardButton').on('click', WKSubscriptions.interfaceDiscardButtonDidClick);
-				d3.select(document.body).on('keydown', function (a, b, c) {
-					if (d3.event.code === 'Backspace') {
-						return WKSubscriptions.interfaceDiscardButtonDidClick();
-					}
-				});
 			</script>
 
 		</header>
