@@ -260,9 +260,9 @@ describe('WKCMetalSubscriptionsNeedingFetch', function testWKCMetalSubscriptions
 		});
 	});
 
-	context('error', function() {
+	context('WKCSubscriptionErrorDate', function() {
 
-		it('excludes subscriptionObjects with error date less than one hour', function(done) {
+		it('excludes if less than one hour', function(done) {
 			metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTesting.kTestingValidSubscription(), {
 				WKCSubscriptionName: 'alfa',
 				WKCSubscriptionFetchDate: new Date(new Date() - 1000 * 60 * 60),
@@ -281,7 +281,7 @@ describe('WKCMetalSubscriptionsNeedingFetch', function testWKCMetalSubscriptions
 			});
 		});
 
-		it('includes subscriptionObjects with error date older than one hour', function(done) {
+		it('includes if older than one hour', function(done) {
 			metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTesting.kTestingValidSubscription(), {
 				WKCSubscriptionName: 'alfa',
 				WKCSubscriptionFetchDate: new Date(new Date() - 1000 * 60 * 60),
