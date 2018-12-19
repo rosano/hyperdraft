@@ -1,17 +1,17 @@
 WKCNotesTitle: Notes
-WKCAppNotesAddButtonText: Add note
-WKCAppNotesPublishButtonText: Publish note
-WKCAppNotesDeleteButtonText: Delete note
+WKCAppNotesMasterToolbarCreateButtonText: Add note
+WKCAppNotesDetailToolbarPublishButtonText: Publish note
+WKCAppNotesDetailToolbarDiscardButtonText: Delete note
 WKCAppNotesDeleteConfirmation: Permanantly delete note?
-WKCAppNotesPublishStatusPublishing: Publishing…
-WKCAppNotesPublishStatusPublished: Public
-WKCAppNotesPublishStatusUnableToPublish: Unable to publish
-WKCAppNotesPersistenceStatusSaving: Saving…
-WKCAppNotesPersistenceStatusSaved: Saved
-WKCAppNotesPersistenceStatusDeleting: Deleting…
-WKCAppNotesPersistenceStatusDeleted: Deleted
-WKCAppNotesPersistenceStatusUnableToSave: Unable to save
-WKCAppNotesPersistenceStatusUnableToDelete: Unable to delete
+WKCAppNotesDetailToolbarPublishStatusPublishing: Publishing…
+WKCAppNotesDetailToolbarPublishStatusPublished: Public
+WKCAppNotesDetailToolbarPublishStatusUnableToPublish: Unable to publish
+WKCAppNotesDetailToolbarPersistenceStatusSaving: Saving…
+WKCAppNotesDetailToolbarPersistenceStatusSaved: Saved
+WKCAppNotesDetailToolbarPersistenceStatusDeleting: Deleting…
+WKCAppNotesDetailToolbarPersistenceStatusDeleted: Deleted
+WKCAppNotesDetailToolbarPersistenceStatusUnableToSave: Unable to save
+WKCAppNotesDetailToolbarPersistenceStatusUnableToDelete: Unable to delete
 WKCAppNotesErrorNotesUnavailable: Unable to fetch notes
 WKCAppNotesErrorPersistenceSaveDidFail: Unable to save note. Would you like to try again?
 WKCAppNotesErrorPersistenceDeleteDidFail: Unable to delete note. Would you like to try again?

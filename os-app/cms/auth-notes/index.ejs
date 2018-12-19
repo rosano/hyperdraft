@@ -2,6 +2,7 @@
 locals.OLSKPageTitle = OLSKLocalized('WKCNotesTitle');
 locals.OLSKPageAssets = [
 	'/shared-assets/vendor/OLSKTasks/main.js',
+	'/cms/_shared/ui-style.css',
 	'ui-style.css',
 	'ui-logic.js',
 	'ui-behaviour.js',
@@ -10,19 +11,19 @@ locals.OLSKPagePublicLocalizedStringKeys = [
 	'WKSharedErrorServiceUnavailable',
 	'WKSharedErrorTokenUnavailable',
 	'WKCAppNotesErrorNotesUnavailable',
-	'WKCAppNotesPersistenceStatusSaving',
-	'WKCAppNotesPersistenceStatusSaved',
+	'WKCAppNotesDetailToolbarPersistenceStatusSaving',
+	'WKCAppNotesDetailToolbarPersistenceStatusSaved',
 	'WKCAppNotesErrorPersistenceSaveDidFail',
-	'WKCAppNotesPersistenceStatusUnableToSave',
-	'WKCAppNotesPublishStatusPublishing',
+	'WKCAppNotesDetailToolbarPersistenceStatusUnableToSave',
+	'WKCAppNotesDetailToolbarPublishStatusPublishing',
 	'WKCAppNotesErrorPublishDidFail',
-	'WKCAppNotesPublishStatusUnableToPublish',
+	'WKCAppNotesDetailToolbarPublishStatusUnableToPublish',
 	'WKCAppNotesDeleteConfirmation',
-	'WKCAppNotesPersistenceStatusDeleting',
-	'WKCAppNotesPersistenceStatusDeleted',
+	'WKCAppNotesDetailToolbarPersistenceStatusDeleting',
+	'WKCAppNotesDetailToolbarPersistenceStatusDeleted',
 	'WKCAppNotesErrorPersistenceDeleteDidFail',
-	'WKCAppNotesPersistenceStatusUnableToDelete',
-	'WKCAppNotesPublishStatusPublished',
+	'WKCAppNotesDetailToolbarPersistenceStatusUnableToDelete',
+	'WKCAppNotesDetailToolbarPublishStatusPublished',
 ];
 locals.OLSKPagePublicRouteKeys = [
 	'WKCRouteAPINotesCreate',
@@ -36,35 +37,42 @@ locals.OLSKPagePublicRouteKeys = [
 
 <%- include('../../_shared/WKCLayout/header.ejs') %>
 
+<%- include('../_shared/layout-header.ejs') %>
+
 <script type="text/javascript">
 	WKBehaviour.lifecyclePageWillLoad();
 </script>
 
 <div id="WKCAppNotes" class="WKCAppNotesLoading">
-	<header id="WKCAppNotesToolbar">
-		<span id="WKCAppNotesPersistenceStatus"></span>
-		<span id="WKCAppNotesPublishStatus"></span>
+	<div id="WKCAppNotesMaster">
+		<header id="WKCAppNotesMasterToolbar" class="WKCSharedToolbar">
+			<button id="WKCAppNotesMasterToolbarCreateButton" class="WKCSharedElementTappable WKCSharedButtonNoStyle" accesskey="n" title="<%= OLSKLocalized('WKCAppNotesMasterToolbarCreateButtonText') %>">➕</button>
+			<script type="text/javascript">
+				d3.select('#WKCAppNotesMasterToolbarCreateButton').on('click', WKBehaviour.interfaceAddButtonDidClick);
+			</script>
+		</header>
 
-		<button id="WKCAppNotesAddButton" accesskey="n"><%= OLSKLocalized('WKCAppNotesAddButtonText') %></button>
-		<script type="text/javascript">
-			d3.select('#WKCAppNotesAddButton').on('click', WKBehaviour.interfaceAddButtonDidClick);
-		</script>
+		<div id="WKCAppNotesMasterContent"></div>
+	</div>
 
-		<button id="WKCAppNotesDeleteButton" disabled><%= OLSKLocalized('WKCAppNotesDeleteButtonText') %></button>
-		<script type="text/javascript">
-			d3.select('#WKCAppNotesDeleteButton').on('click', WKBehaviour.interfaceDeleteButtonDidClick);
-		</script>
+	<div id="WKCAppNotesDetail" class="WKCAppNotesDetailInactive">
+		<header id="WKCAppNotesDetailToolbar" class="WKCSharedToolbar">
+			<span id="WKCAppNotesDetailToolbarPersistenceStatus"></span>
+			
+			<span id="WKCAppNotesDetailToolbarPublishStatus"></span>
 
-		<button id="WKCAppNotesPublishButton" disabled><%= OLSKLocalized('WKCAppNotesPublishButtonText') %></button>
-		<script type="text/javascript">
-			d3.select('#WKCAppNotesPublishButton').on('click', WKBehaviour.interfacePublishButtonDidClick);
-		</script>
-	</header>
+			<button id="WKCAppNotesDetailToolbarPublishButton" class="WKCSharedElementTappable WKCSharedButtonNoStyle" title="<%= OLSKLocalized('WKCAppNotesDetailToolbarPublishButtonText') %>" disabled>⬆️</button>
+			<script type="text/javascript">
+				d3.select('#WKCAppNotesDetailToolbarPublishButton').on('click', WKBehaviour.interfacePublishButtonDidClick);
+			</script>
 
-	<div id="WKCAppNotesMain">
-		<div id="WKCAppNotesList"></div>
+			<button id="WKCAppNotesDetailToolbarDiscardButton" class="WKCSharedElementTappable WKCSharedButtonNoStyle" title="<%= OLSKLocalized('WKCAppNotesDetailToolbarDiscardButtonText') %>" disabled>🗑</button>
+			<script type="text/javascript">
+				d3.select('#WKCAppNotesDetailToolbarDiscardButton').on('click', WKBehaviour.interfaceDeleteButtonDidClick);
+			</script>
+		</header>
 
-		<div id="WKCAppNotesEditor">
+		<div id="WKCAppNotesDetailContent">
 			<textarea id="WKCNotesAppEditorTextarea" disabled></textarea>
 			<script type="text/javascript">
 				d3.select('#WKCNotesAppEditorTextarea').on('input', WKBehaviour.interfaceEditorTextareaDidReceiveInput);

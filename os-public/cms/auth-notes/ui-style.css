@@ -1,102 +1,58 @@
-html, body {
-  height:100%;
-}
-
 body {
   font-family: 'Helvetica Neue';
 	font-size: 90%;
 }
 
-#OLSKSharedContainer {
-	height: 100%;
-}
-
 #WKCAppNotes {
-	height: 100%;
+	position: absolute;
+	top: 24px;
+	right: 0;
+	bottom: 0;
+	left: 0;
 
-	/* flexbox-container */
+	/* @Flexbox1 parent */
 	display: flex;
-	flex-flow: column;
 }
 
-#WKCAppNotesToolbar {
-	font-size: 80%;
-	padding: 10px;
-	border-bottom: 1px solid #d9d9d9;
-
-	/* flexbox-container */
-	flex: 0 1 auto;
-
-	/* flexbox-toolbar */
-	display: flex;
-	flex-direction: row;
-	justify-content: flex-end;
+.WKCAppNotesLoading .WKCSharedToolbar *, .WKCAppNotesLoading #WKCAppNotesList *, .WKCAppNotesLoading #WKCAppNotesEditor * {
+	visibility: hidden;
 }
 
-#WKCAppNotesPersistenceStatus {
-	margin: auto 5px;
-
-	color: #bfbfbf
-}
-
-#WKCAppNotesPublishStatus {
-	margin: auto 5px;
-
-	color: #bfbfbf
-}
-
-#WKCAppNotesMain {
-	font-family: monospace;
-
-	/* flexbox-container */
-	flex: 1 1 auto;
-
-	/* flexbox-main */
-	display: flex;
-	flex-direction: row;
-}
-
-#WKCAppNotesList {
-	border-right: 1px solid #d9d9d9;
-	
+#WKCAppNotesMaster {
+	/* @Flexbox1 child */
 	flex-basis: 300px;
-	max-width: 300px;
+	flex-shrink: 0;
 
-	font-size: 80%;
+	/* @Flexbox2 parent */
+	display: flex;
+	flex-direction: column;
 }
 
-.WKCAppNotesListItem {
+#WKCAppNotesMasterContent {
+	overflow: auto;
+}
+
+.WKCAppNotesMasterContentListItem {
 	height: 50px;
-
 	padding: 10px;
-	border-bottom: 1px solid #d9d9d9;
-
-	cursor: pointer;
-
-	/* vendor-based */
-	-webkit-touch-callout: none; /* iOS Safari */
-	-webkit-user-select: none; /* Safari */
-	-khtml-user-select: none; /* Konqueror HTML */
-	-moz-user-select: none; /* Firefox */
-	-ms-user-select: none; /* Internet Explorer/Edge */
-	user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+	border-bottom: 1px solid #ddd;
 }
 
-.WKCAppNotesListItemSelected {
+.WKCAppNotesMasterContentListItemSelected {
 	background: #e6e6e6;
 }
 
-.WKCAppNotesListItem pre {
-	width: inherit;
+.WKCAppNotesMasterContentListItemSnippet {
+	width: 200px;
 	height: inherit;
 
-	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
 
+	/* browser defaults */
 	margin: 0;
 
-	/* vendor-based */
+	/* wrap pre tag */
 	white-space: pre-wrap;       /* Since CSS 2.1 */
 	white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
 	white-space: -pre-wrap;      /* Opera 4-6 */
@@ -104,62 +60,52 @@ body {
 	word-wrap: break-word;       /* Internet Explorer 5.5+ */
 }
 
-#WKCAppNotesEditor {
+#WKCAppNotesDetail {
+	border-left: 1px solid #ddd;
+
+	/* @Flexbox1 child */
 	flex-grow: 1;
 
-	padding: 10px;
-
-	font-size: 80%;
-
-	/* flexbox-editor */
+	/* @Flexbox2 parent */
 	display: flex;
-	flex-direction: row;
-	justify-content: flex-start;
+	flex-direction: column;
 }
 
-#WKCAppNotesEditor textarea {
-	font-family: 'monaco', monospace;
+#WKCAppNotesDetailToolbarPersistenceStatus {
+	margin: auto 5px;
 
+	color: #bfbfbf
+}
+
+#WKCAppNotesDetailToolbarPublishStatus {
+	margin: auto 5px;
+
+	color: #bfbfbf
+}
+
+#WKCAppNotesDetailContent {
+	font-size: 80%;
+
+	/* @Flexbox2 child */
+	flex-grow: 1;
+	background: green;
+
+	/* @Flexbox3 parent */
+	display: flex;
+	flex-direction: column;
+}
+
+#WKCNotesAppEditorTextarea {
+	padding: 10px;
+
+	font-family: 'monaco', monospace;
 	line-height: 1.4;
 
-	/* flexbox-editor */
+	/* @Flexbox3 child */
 	flex-grow: 1;
 
 	/* browser defaults */
 	border: none;
 	outline: none;
 	resize: none;
-}
-
-#WKCAppNotesFooter {
-	font-size: 80%;
-	background: #F3F3F3;
-	padding: 10px;
-	border-top: 1px solid #d9d9d9;
-
-	/* flexbox-container */
-	flex: 0 1 auto;
-
-	/* flexbox-footer */
-	display: flex;
-	flex-direction: row;
-	justify-content: flex-end;
-}
-
-.WKCAppNotesLoading #WKCAppNotesToolbar *, .WKCAppNotesLoading #WKCAppNotesList *, .WKCAppNotesLoading #WKCAppNotesEditor * {
-	visibility: hidden;
-}
-
-.WKCAppNotesDebug #WKCAppNotesMain {
-	background: red;
-}
-
-.WKCAppNotesDebug #WKCAppNotesList {
-	background: yellow;
-	opacity: 0.5;
-}
-
-.WKCAppNotesDebug #WKCAppNotesEditor {
-	background: blue;
-	opacity: 0.5;
 }
