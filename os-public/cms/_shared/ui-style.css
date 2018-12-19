@@ -14,6 +14,12 @@
 	color: #000;
 }
 
+.WKCSharedToolbar {
+	padding: 10px;
+	border-bottom: 1px solid #ddd;
+	text-align: right;
+}
+
 .WKCSharedElementTappable {
 	cursor: pointer;
 

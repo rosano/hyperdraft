@@ -14,7 +14,7 @@ body {
 	display: flex;
 }
 
-.WKCSubscriptionsLoading .WKCSubscriptionsToolbar *, .WKCSubscriptionsLoading #WKCSubscriptionsMasterContent *, .WKCSubscriptionsLoading #WKCSubscriptionsDetailContent *, .WKCSubscriptionsLoading #WKCSubscriptionsDetailPlaceholder * {
+.WKCSubscriptionsLoading .WKCSharedToolbar *, .WKCSubscriptionsLoading #WKCSubscriptionsMasterContent *, .WKCSubscriptionsLoading #WKCSubscriptionsDetailContent *, .WKCSubscriptionsLoading #WKCSubscriptionsDetailPlaceholder * {
 	visibility: hidden;
 }
 
@@ -72,12 +72,6 @@ body {
 
 	border: 1px solid #408002;
 	background: #ccff66;
-}
-
-.WKCSubscriptionsToolbar {
-	padding: 10px;
-	border-bottom: 1px solid #ddd;
-	text-align: right;
 }
 
 #WKCSubscriptionsMaster {
