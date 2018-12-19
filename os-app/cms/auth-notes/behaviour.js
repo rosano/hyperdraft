@@ -222,7 +222,7 @@
 	//_ _commandsPersistNoteCreate
 
 	moi._commandsPersistNoteCreate = function (inputData, resolve, reject) {
-		return resolve(d3.json('<%= OLSKCanonicalFor('WKCRouteAPINotesCreate') %>', {
+		return resolve(d3.json(OLSKCanonicalFor('WKCRouteAPINotesCreate'), {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -237,7 +237,7 @@
 	//_ _commandsPersistNoteUpdate
 
 	moi._commandsPersistNoteUpdate = function (inputData, resolve, reject) {
-		return resolve(d3.json((<%- OLSKCanonicalSubstitutionFunctionFor('WKCRouteAPINotesUpdate') %>)({
+		return resolve(d3.json(OLSKCanonicalFor('WKCRouteAPINotesUpdate', {
 			wkc_note_id: inputData.WKCNoteID,
 		}), {
 			method: 'PUT',
@@ -254,7 +254,7 @@
 	moi.commandsPublishNote = function (inputData) {
 		d3.select('#WKCAppNotesPublishStatus').text(OLSKLocalized('WKCAppNotesPublishStatusPublishing'));
 
-		d3.json((<%- OLSKCanonicalSubstitutionFunctionFor('WKCRouteAPINotesPublish') %>)({
+		d3.json(OLSKCanonicalFor('WKCRouteAPINotesPublish', {
 			wkc_note_id: inputData.WKCNoteID,
 		}), {
 			method: 'PUT',
@@ -303,7 +303,7 @@
 
 		moi.reactPersistenceStatus(OLSKLocalized('WKCAppNotesPersistenceStatusDeleting'));
 
-		d3.json((<%- OLSKCanonicalSubstitutionFunctionFor('WKCRouteAPINotesDelete') %>)({
+		d3.json(OLSKCanonicalFor('WKCRouteAPINotesDelete', {
 			wkc_note_id: inputData.WKCNoteID,
 		}), {
 			method: 'DELETE',
@@ -391,7 +391,7 @@
 	//_ reactPublishStatus
 
 	moi.reactPublishStatus = function () {
-		d3.select('#WKCAppNotesPublishStatus').html(moi.propertiesSelectedNote().WKCNoteIsPublished ? OLSKLocalized('WKCAppNotesPublishStatusPublished') + '<a href="/' + moi.propertiesSelectedNote().WKCNotePublicID + '" target="_blank">/' + moi.propertiesSelectedNote().WKCNotePublicID + '</a>': nullg);
+		d3.select('#WKCAppNotesPublishStatus').html(moi.propertiesSelectedNote().WKCNoteIsPublished ? OLSKLocalized('WKCAppNotesPublishStatusPublished') + '<a href="/' + moi.propertiesSelectedNote().WKCNotePublicID + '" target="_blank">/' + moi.propertiesSelectedNote().WKCNotePublicID + '</a>': null);
 	};
 
 	//_ reactPersistenceStatus
@@ -425,7 +425,7 @@
 	//_ setupAPIToken
 
 	moi.setupAPIToken = function (completionHandler) {
-		d3.json('<%= OLSKCanonicalFor('WKCRouteAPIToken') %>', {
+		d3.json(OLSKCanonicalFor('WKCRouteAPIToken'), {
 			method: 'GET',
 		}).then(function(responseJSON) {
 			if (!responseJSON.WKCAPIToken) {
@@ -441,7 +441,7 @@
 	//_ setupNoteObjects
 
 	moi.setupNoteObjects = function (completionHandler) {
-		d3.json('<%= OLSKCanonicalFor('WKCRouteAPINotesSearch') %>', {
+		d3.json(OLSKCanonicalFor('WKCRouteAPINotesSearch'), {
 			method: 'GET',
 			headers: {
 				'x-client-key': moi.propertiesAPIToken(),
