@@ -22,12 +22,6 @@ body {
 	display: none;
 }
 
-.WKCSubscriptionsButtonNoStyle {
-	background: none;
-	border: none;
-	padding: 0;
-}
-
 #WKCSubscriptionsCreate {
 	position: fixed;
 	top: 0;
