@@ -50,7 +50,7 @@
 	//_ commandsAlertConnectionError
 
 	moi.commandsAlertConnectionError = function (error) {
-		window.alert('<%= OLSKLocalized('WKSharedErrorServiceUnavailable') %>');
+		window.alert(OLSKLocalized('WKSharedErrorServiceUnavailable'));
 
 		throw error;
 	};
@@ -58,7 +58,7 @@
 	//_ commandsAlertTokenUnavailable
 
 	moi.commandsAlertTokenUnavailable = function () {
-		window.alert('<%= OLSKLocalized('WKSharedErrorTokenUnavailable') %>');
+		window.alert(OLSKLocalized('WKSharedErrorTokenUnavailable'));
 
 		throw new Error('WKCAppErrorTokenUnavailable');
 	};
@@ -106,7 +106,7 @@
 	//_ commandsFetchAlertError
 
 	moi.commandsFetchAlertError = function (error) {
-		window.alert('<%= OLSKLocalized('WKCSubscriptionsModuleCreateErrorFetchText') %>');
+		window.alert(OLSKLocalized('WKCSubscriptionsModuleCreateErrorFetchText'));
 
 		moi.reactFetchLoaderVisibility(false);
 
@@ -122,7 +122,7 @@
 
 		moi.reactPreviewFeedItems([].slice.call(parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('item')));
 		
-		moi.reactPreviewShared(parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('title')[0].textContent.trim(), parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('description')[0].textContent.trim(), '<%= OLSKLocalized('WKCSubscriptionsModuleCreatePreviewTypeFeedText') %>');
+		moi.reactPreviewShared(parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('title')[0].textContent.trim(), parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('description')[0].textContent.trim(), OLSKLocalized('WKCSubscriptionsModuleCreatePreviewTypeFeedText'));
 	};
 
 	//_ commandsConfirmURLFile
@@ -132,7 +132,7 @@
 		
 		moi.reactPreviewFile(rawData);
 
-		moi.reactPreviewShared(inputData.match(/https?:\/\/(.*)/)[1], null, '<%= OLSKLocalized('WKCSubscriptionsModuleCreatePreviewTypeFileText') %>');
+		moi.reactPreviewShared(inputData.match(/https?:\/\/(.*)/)[1], null, OLSKLocalized('WKCSubscriptionsModuleCreatePreviewTypeFileText'));
 	};
 
 	//_ commandsConfirmURLPage
@@ -163,7 +163,7 @@
 			return false;
 		}).map(function(e) {
 			return e.content;
-		}).shift(), '<%= OLSKLocalized('WKCSubscriptionsModuleCreatePreviewTypePageText') %>');
+		}).shift(), OLSKLocalized('WKCSubscriptionsModuleCreatePreviewTypePageText'));
 	};
 
 	//_ _commandsAddSubscription
@@ -190,7 +190,7 @@
 	//_ _commandsAlertAddSubscriptionError
 
 	moi._commandsAlertAddSubscriptionError = function (error) {
-		window.alert('<%= OLSKLocalized('WKCSubscriptionsModuleCreateErrorAddText') %>');
+		window.alert(OLSKLocalized('WKCSubscriptionsModuleCreateErrorAddText'));
 
 		throw error;
 	};

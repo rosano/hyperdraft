@@ -103,7 +103,7 @@
 	//_ commandsAlertConnectionError
 
 	moi.commandsAlertConnectionError = function (error) {
-		window.alert('<%= OLSKLocalized('WKSharedErrorServiceUnavailable') %>');
+		window.alert(OLSKLocalized('WKSharedErrorServiceUnavailable'));
 
 		throw error;
 	};
@@ -111,7 +111,7 @@
 	//_ commandsAlertTokenUnavailable
 
 	moi.commandsAlertTokenUnavailable = function () {
-		window.alert('<%= OLSKLocalized('WKSharedErrorTokenUnavailable') %>');
+		window.alert(OLSKLocalized('WKSharedErrorTokenUnavailable'));
 
 		throw new Error('WKCAppErrorTokenUnavailable');
 	};
@@ -119,7 +119,7 @@
 	//_ commandsAlertSubscriptionsUnavailable
 
 	moi.commandsAlertSubscriptionsUnavailable = function () {
-		window.alert('<%= OLSKLocalized('WKCSubscriptionsErrorSubscriptionsUnavailableText') %>');
+		window.alert(OLSKLocalized('WKCSubscriptionsErrorSubscriptionsUnavailableText'));
 
 		throw new Error('WKCSubscriptionsErrorSubscriptionsUnavailable');
 	};
@@ -127,7 +127,7 @@
 	//_ commandsAlertArticlesUnavailable
 
 	moi.commandsAlertArticlesUnavailable = function () {
-		window.alert('<%= OLSKLocalized('WKCSubscriptionsErrorArticlesUnavailableText') %>');
+		window.alert(OLSKLocalized('WKCSubscriptionsErrorArticlesUnavailableText'));
 
 		throw new Error('WKCSubscriptionsErrorArticlesUnavailable');
 	};
@@ -182,7 +182,7 @@
 	//_ commandsArticlesAlertErrorMarkAsRead
 
 	moi.commandsArticlesAlertErrorMarkAsRead = function () {
-		window.alert('<%= OLSKLocalized('WKCSubscriptionsErrorArticlesMarkAsReadText') %>');
+		window.alert(OLSKLocalized('WKCSubscriptionsErrorArticlesMarkAsReadText'));
 
 		throw new Error('WKCSubscriptionsErrorArticlesMarkAsRead');
 	};
@@ -214,7 +214,7 @@
 	//_ commandsArticlesAlertErrorMarkAsDiscarded
 
 	moi.commandsArticlesAlertErrorMarkAsDiscarded = function (error) {
-		window.alert('<%= OLSKLocalized('WKCSubscriptionsErrorArticlesMarkAsDiscardedText') %>');
+		window.alert(OLSKLocalized('WKCSubscriptionsErrorArticlesMarkAsDiscardedText'));
 
 		throw error;
 	};
