@@ -1,18 +1,18 @@
-WKCNotesTitle: Notes
-WKCAppNotesMasterToolbarCreateButtonText: Add note
-WKCAppNotesDetailToolbarPublishButtonText: Publish note
-WKCAppNotesDetailToolbarDiscardButtonText: Delete note
-WKCAppNotesDeleteConfirmation: Permanantly delete note?
-WKCAppNotesDetailToolbarPublishStatusPublishing: Publishing…
-WKCAppNotesDetailToolbarPublishStatusPublished: Public
-WKCAppNotesDetailToolbarPublishStatusUnableToPublish: Unable to publish
-WKCAppNotesDetailToolbarPersistenceStatusSaving: Saving…
-WKCAppNotesDetailToolbarPersistenceStatusSaved: Saved
-WKCAppNotesDetailToolbarPersistenceStatusDeleting: Deleting…
-WKCAppNotesDetailToolbarPersistenceStatusDeleted: Deleted
-WKCAppNotesDetailToolbarPersistenceStatusUnableToSave: Unable to save
-WKCAppNotesDetailToolbarPersistenceStatusUnableToDelete: Unable to delete
-WKCAppNotesErrorNotesUnavailable: Unable to fetch notes
-WKCAppNotesErrorPersistenceSaveDidFail: Unable to save note. Would you like to try again?
-WKCAppNotesErrorPersistenceDeleteDidFail: Unable to delete note. Would you like to try again?
-WKCAppNotesErrorPublishDidFail: Unable to publish note. Would you like to try again?
+WKCNotesHeadingText: Notes
+WKCNotesMasterToolbarCreateButtonText: Add note
+WKCNotesDetailToolbarPublishButtonText: Publish note
+WKCNotesDetailToolbarDiscardButtonText: Delete note
+WKCNotesDeleteConfirmation: Permanantly delete note?
+WKCNotesDetailToolbarPublishStatusPublishing: Publishing…
+WKCNotesDetailToolbarPublishStatusPublished: Public
+WKCNotesDetailToolbarPublishStatusUnableToPublish: Unable to publish
+WKCNotesDetailToolbarPersistenceStatusSaving: Saving…
+WKCNotesDetailToolbarPersistenceStatusSaved: Saved
+WKCNotesDetailToolbarPersistenceStatusDeleting: Deleting…
+WKCNotesDetailToolbarPersistenceStatusDeleted: Deleted
+WKCNotesDetailToolbarPersistenceStatusUnableToSave: Unable to save
+WKCNotesDetailToolbarPersistenceStatusUnableToDelete: Unable to delete
+WKCNotesErrorNotesUnavailable: Unable to fetch notes
+WKCNotesErrorPersistenceSaveDidFail: Unable to save note. Would you like to try again?
+WKCNotesErrorPersistenceDeleteDidFail: Unable to delete note. Would you like to try again?
+WKCNotesErrorPublishDidFail: Unable to publish note. Would you like to try again?

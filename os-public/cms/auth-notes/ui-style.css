@@ -3,7 +3,7 @@ body {
 	font-size: 90%;
 }
 
-#WKCAppNotes {
+#WKCNotes {
 	position: absolute;
 	top: 24px;
 	right: 0;
@@ -14,11 +14,11 @@ body {
 	display: flex;
 }
 
-.WKCAppNotesLoading .WKCSharedToolbar *, .WKCAppNotesLoading #WKCAppNotesList *, .WKCAppNotesLoading #WKCAppNotesEditor * {
+.WKCNotesLoading .WKCSharedToolbar *, .WKCNotesLoading #WKCNotesMasterContent *, .WKCNotesLoading #WKCNotesDetailContent * {
 	visibility: hidden;
 }
 
-#WKCAppNotesMaster {
+#WKCNotesMaster {
 	/* @Flexbox1 child */
 	flex-basis: 300px;
 	flex-shrink: 0;
@@ -28,21 +28,21 @@ body {
 	flex-direction: column;
 }
 
-#WKCAppNotesMasterContent {
+#WKCNotesMasterContent {
 	overflow: auto;
 }
 
-.WKCAppNotesMasterContentListItem {
+.WKCNotesMasterContentListItem {
 	height: 50px;
 	padding: 10px;
 	border-bottom: 1px solid #ddd;
 }
 
-.WKCAppNotesMasterContentListItemSelected {
+.WKCNotesMasterContentListItemSelected {
 	background: #e6e6e6;
 }
 
-.WKCAppNotesMasterContentListItemSnippet {
+.WKCNotesMasterContentListItemSnippet {
 	width: 200px;
 	height: inherit;
 
@@ -60,7 +60,7 @@ body {
 	word-wrap: break-word;       /* Internet Explorer 5.5+ */
 }
 
-#WKCAppNotesDetail {
+#WKCNotesDetail {
 	border-left: 1px solid #ddd;
 
 	/* @Flexbox1 child */
@@ -71,31 +71,30 @@ body {
 	flex-direction: column;
 }
 
-#WKCAppNotesDetailToolbarPersistenceStatus {
+#WKCNotesDetailToolbarPersistenceStatus {
 	margin: auto 5px;
 
 	color: #bfbfbf
 }
 
-#WKCAppNotesDetailToolbarPublishStatus {
+#WKCNotesDetailToolbarPublishStatus {
 	margin: auto 5px;
 
 	color: #bfbfbf
 }
 
-#WKCAppNotesDetailContent {
+#WKCNotesDetailContent {
 	font-size: 80%;
 
 	/* @Flexbox2 child */
 	flex-grow: 1;
-	background: green;
 
 	/* @Flexbox3 parent */
 	display: flex;
 	flex-direction: column;
 }
 
-#WKCNotesAppEditorTextarea {
+#WKCNotesDetailContentTextarea {
 	padding: 10px;
 
 	font-family: 'monaco', monospace;

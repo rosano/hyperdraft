@@ -33,7 +33,7 @@
 
 	moi.propertiesNoteObjects = function (inputData) {
 		if (typeof inputData === 'undefined') {
-			return d3.selectAll('.WKCAppNotesMasterContentListItem').data();
+			return d3.selectAll('.WKCNotesMasterContentListItem').data();
 		}
 
 		moi.reactNoteObjects(inputData.sort(WKLogic.WKLogicListSort));
@@ -129,9 +129,9 @@
 	//_ commandsAlertNotesUnavailable
 
 	moi.commandsAlertNotesUnavailable = function () {
-		window.alert(OLSKLocalized('WKCAppNotesErrorNotesUnavailable'));
+		window.alert(OLSKLocalized('WKCNotesErrorNotesUnavailable'));
 
-		throw new Error('WKCAppNotesErrorNotesUnavailable');
+		throw new Error('WKCNotesErrorNotesUnavailable');
 	};
 
 	//_ commandsAddNote
@@ -191,7 +191,7 @@
 	moi.commandsPersistNote = function (inputData) {
 		(new Promise(function(resolve, reject) {
 			if (inputData === moi.propertiesSelectedNote()) {
-				moi.reactPersistenceStatus(OLSKLocalized('WKCAppNotesDetailToolbarPersistenceStatusSaving'));
+				moi.reactPersistenceStatus(OLSKLocalized('WKCNotesDetailToolbarPersistenceStatusSaving'));
 			}
 
 			if (!inputData.WKCNoteID) {
@@ -202,17 +202,17 @@
 			
 		})).then(function() {
 			if (inputData === moi.propertiesSelectedNote()) {
-				moi.reactPersistenceStatus(OLSKLocalized('WKCAppNotesDetailToolbarPersistenceStatusSaved'), true);
+				moi.reactPersistenceStatus(OLSKLocalized('WKCNotesDetailToolbarPersistenceStatusSaved'), true);
 			}
 
 			moi.propertiesUnsavedNotes().splice(moi.propertiesUnsavedNotes().indexOf(inputData), 1);
 		}, function(error) {
-			if (window.confirm(OLSKLocalized('WKCAppNotesErrorPersistenceSaveDidFail'))) {
+			if (window.confirm(OLSKLocalized('WKCNotesErrorPersistenceSaveDidFail'))) {
 				return moi.commandsPersistNote(inputData);
 			};
 
 			if (inputData === moi.propertiesSelectedNote()) {
-				moi.reactPersistenceStatus(OLSKLocalized('WKCAppNotesDetailToolbarPersistenceStatusUnableToSave'));
+				moi.reactPersistenceStatus(OLSKLocalized('WKCNotesDetailToolbarPersistenceStatusUnableToSave'));
 			}
 
 			throw error;
@@ -252,7 +252,7 @@
 	//_ commandsPublishNote
 
 	moi.commandsPublishNote = function (inputData) {
-		d3.select('#WKCAppNotesDetailToolbarPublishStatus').text(OLSKLocalized('WKCAppNotesDetailToolbarPublishStatusPublishing'));
+		d3.select('#WKCNotesDetailToolbarPublishStatus').text(OLSKLocalized('WKCNotesDetailToolbarPublishStatusPublishing'));
 
 		d3.json(OLSKCanonicalFor('WKCRouteAPINotesPublish', {
 			wkc_note_id: inputData.WKCNoteID,
@@ -268,11 +268,11 @@
 		}).then(function(responseJSON) {
 			moi.reactPublishStatus();
 		}, function(error) {
-			if (window.confirm(OLSKLocalized('WKCAppNotesErrorPublishDidFail'))) {
+			if (window.confirm(OLSKLocalized('WKCNotesErrorPublishDidFail'))) {
 				return moi.commandsPublishNote(inputData);
 			};
 
-			d3.select('#WKCAppNotesDetailToolbarPublishStatus').text(OLSKLocalized('WKCAppNotesDetailToolbarPublishStatusUnableToPublish'));
+			d3.select('#WKCNotesDetailToolbarPublishStatus').text(OLSKLocalized('WKCNotesDetailToolbarPublishStatusUnableToPublish'));
 
 			throw error;
 		});
@@ -285,7 +285,7 @@
 
 		moi.commandsPersistenceTaskStop();
 
-		if (!window.confirm(OLSKLocalized('WKCAppNotesDeleteConfirmation'))) {
+		if (!window.confirm(OLSKLocalized('WKCNotesDeleteConfirmation'))) {
 			if (persistenceIsCued) {
 				moi.commandsPersistenceTaskStart();
 			}
@@ -301,7 +301,7 @@
 	moi._commandsDeleteNoteWithoutConfirmation = function (inputData) {
 		var persistenceIsCued = !!moi.propertiesPersistenceTask()._OLSKTaskTimerID;
 
-		moi.reactPersistenceStatus(OLSKLocalized('WKCAppNotesDetailToolbarPersistenceStatusDeleting'));
+		moi.reactPersistenceStatus(OLSKLocalized('WKCNotesDetailToolbarPersistenceStatusDeleting'));
 
 		d3.json(OLSKCanonicalFor('WKCRouteAPINotesDelete', {
 			wkc_note_id: inputData.WKCNoteID,
@@ -322,13 +322,13 @@
 
 			moi.commandsSelectNote(null);
 
-			moi.reactPersistenceStatus(OLSKLocalized('WKCAppNotesDetailToolbarPersistenceStatusDeleted'), true);
+			moi.reactPersistenceStatus(OLSKLocalized('WKCNotesDetailToolbarPersistenceStatusDeleted'), true);
 		}, function(error) {
-			if (window.confirm(OLSKLocalized('WKCAppNotesErrorPersistenceDeleteDidFail'))) {
+			if (window.confirm(OLSKLocalized('WKCNotesErrorPersistenceDeleteDidFail'))) {
 				return moi._commandsDeleteNoteWithoutConfirmation(inputData);
 			};
 
-			moi.reactPersistenceStatus(OLSKLocalized('WKCAppNotesDetailToolbarPersistenceStatusUnableToDelete'));
+			moi.reactPersistenceStatus(OLSKLocalized('WKCNotesDetailToolbarPersistenceStatusUnableToDelete'));
 
 			throw error;
 		}).finally(function() {
@@ -343,21 +343,21 @@
 	//_ reactNoteObjects
 
 	moi.reactNoteObjects = function (noteObjects) {
-		var selection = d3.select('#WKCAppNotesMasterContent')
-			.selectAll('.WKCAppNotesMasterContentListItem').data(noteObjects);
+		var selection = d3.select('#WKCNotesMasterContent')
+			.selectAll('.WKCNotesMasterContentListItem').data(noteObjects);
 		
 		var parentElement = selection.enter()
 			.append('div')
-				.attr('class', 'WKCAppNotesMasterContentListItem')
+				.attr('class', 'WKCNotesMasterContentListItem')
 				.classed('WKCSharedElementTappable', true);
-		parentElement.append('pre').attr('class', 'WKCAppNotesMasterContentListItemSnippet');
+		parentElement.append('pre').attr('class', 'WKCNotesMasterContentListItemSnippet');
 		parentElement = parentElement.merge(selection);
 
 		parentElement
 			.on('click', function(obj) {
 				moi.commandsSelectNote(obj);
 			});
-		parentElement.select('.WKCAppNotesMasterContentListItemSnippet').text(function(obj) {
+		parentElement.select('.WKCNotesMasterContentListItemSnippet').text(function(obj) {
 			return (obj.WKCNoteBody || '').split('\n').slice(0, 3).join('\n');
 		});
 
@@ -367,19 +367,19 @@
 	//_ reactSelectedNote
 
 	moi.reactSelectedNote = function () {
-		d3.select('#WKCNotesAppEditorTextarea').node().value = moi.propertiesSelectedNote() ? moi.propertiesSelectedNote().WKCNoteBody : null;
-		d3.select('#WKCNotesAppEditorTextarea').attr('disabled', moi.propertiesSelectedNote() ? null : true);
+		d3.select('#WKCNotesDetailContentTextarea').node().value = moi.propertiesSelectedNote() ? moi.propertiesSelectedNote().WKCNoteBody : null;
+		d3.select('#WKCNotesDetailContentTextarea').attr('disabled', moi.propertiesSelectedNote() ? null : true);
 
 		if (moi.propertiesSelectedNote()) {
-			d3.select('#WKCNotesAppEditorTextarea').node().focus();
+			d3.select('#WKCNotesDetailContentTextarea').node().focus();
 		}
 
-		d3.selectAll('.WKCAppNotesMasterContentListItem').classed('WKCAppNotesMasterContentListItemSelected', function(d) {
+		d3.selectAll('.WKCNotesMasterContentListItem').classed('WKCNotesMasterContentListItemSelected', function(d) {
 			return d === moi.propertiesSelectedNote();
 		});
 
-		d3.select('#WKCAppNotesDetailToolbarDiscardButton').attr('disabled', moi.propertiesSelectedNote() ? null : undefined);
-		d3.select('#WKCAppNotesDetailToolbarPublishButton').attr('disabled', moi.propertiesSelectedNote() ? null : undefined);
+		d3.select('#WKCNotesDetailToolbarDiscardButton').attr('disabled', moi.propertiesSelectedNote() ? null : undefined);
+		d3.select('#WKCNotesDetailToolbarPublishButton').attr('disabled', moi.propertiesSelectedNote() ? null : undefined);
 
 		if (!moi.propertiesSelectedNote()) {
 			return;
@@ -391,20 +391,20 @@
 	//_ reactPublishStatus
 
 	moi.reactPublishStatus = function () {
-		d3.select('#WKCAppNotesDetailToolbarPublishStatus').html(moi.propertiesSelectedNote().WKCNoteIsPublished ? OLSKLocalized('WKCAppNotesDetailToolbarPublishStatusPublished') + '<a href="/' + moi.propertiesSelectedNote().WKCNotePublicID + '" target="_blank">/' + moi.propertiesSelectedNote().WKCNotePublicID + '</a>': null);
+		d3.select('#WKCNotesDetailToolbarPublishStatus').html(moi.propertiesSelectedNote().WKCNoteIsPublished ? OLSKLocalized('WKCNotesDetailToolbarPublishStatusPublished') + '<a href="/' + moi.propertiesSelectedNote().WKCNotePublicID + '" target="_blank">/' + moi.propertiesSelectedNote().WKCNotePublicID + '</a>': null);
 	};
 
 	//_ reactPersistenceStatus
 
 	moi.reactPersistenceStatus = function (inputData, shouldClear) {
-		d3.select('#WKCAppNotesDetailToolbarPersistenceStatus').text(inputData);
+		d3.select('#WKCNotesDetailToolbarPersistenceStatus').text(inputData);
 
 		if (!shouldClear) {
 			return;
 		}
 
 		setTimeout(function() {
-			d3.select('#WKCAppNotesDetailToolbarPersistenceStatus').text(null);
+			d3.select('#WKCNotesDetailToolbarPersistenceStatus').text(null);
 		}, 1000);
 	};
 
@@ -417,7 +417,7 @@
 			moi.setupNoteObjects(function() {
 				moi.setupPersistenceTask();
 
-				d3.select('#WKCAppNotes').classed('WKCAppNotesLoading', false);
+				d3.select('#WKCNotes').classed('WKCNotesLoading', false);
 			});
 		});
 	};
