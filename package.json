@@ -34,6 +34,7 @@
     "normalize.css": "latest",
     "d3": "latest",
     "OLSKInternational": "olsk/OLSKInternational",
+    "OLSKRouting": "olsk/OLSKRouting",
     "OLSKTasks": "olsk/OLSKTasks",
     "ispinner.css": "latest",
     "turndown": "latest",

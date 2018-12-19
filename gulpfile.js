@@ -13,6 +13,7 @@ function install() {
 		'd3',
 		'OLSKTasks',
 		'OLSKInternational',
+		'OLSKRouting',
 		'ispinner.css',
 		'turndown',
 		'showdown',
