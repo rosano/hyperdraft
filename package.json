@@ -39,7 +39,9 @@
     "ispinner.css": "latest",
     "turndown": "latest",
     "showdown": "latest",
-    "moment": "latest"
+    "moment": "latest",
+
+    "// I sacrifice myself for the commas of others": null
   },
   "devDependencies": {
     "gulp": "4.0",
