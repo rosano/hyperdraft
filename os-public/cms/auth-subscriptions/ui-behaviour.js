@@ -242,7 +242,7 @@
 				return !obj.WKCArticleIsRead;
 			})
 			.on('click', moi.commandsSelectArticle);
-		parentElement.select('.WKCSubscriptionsMasterContentListItemHeading').text(function(obj) {
+		parentElement.select('.WKCSubscriptionsMasterContentListItemHeadline').text(function(obj) {
 			return obj.WKCArticleTitle || 'untitled_article';
 		});
 		parentElement.select('.WKCSubscriptionsMasterContentListItemSnippet').text(function(obj) {

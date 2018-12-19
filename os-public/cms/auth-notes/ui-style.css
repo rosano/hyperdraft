@@ -10,7 +10,7 @@ body {
 	bottom: 0;
 	left: 0;
 
-	/* @Flexbox1 parent */
+	/* @FlexboxL1 parent */
 	display: flex;
 }
 
@@ -19,11 +19,11 @@ body {
 }
 
 #WKCNotesMaster {
-	/* @Flexbox1 child */
+	/* @FlexboxL1 child */
 	flex-basis: 300px;
 	flex-shrink: 0;
 
-	/* @Flexbox2 parent */
+	/* @FlexboxL2 parent */
 	display: flex;
 	flex-direction: column;
 }
@@ -63,10 +63,10 @@ body {
 #WKCNotesDetail {
 	border-left: 1px solid #ddd;
 
-	/* @Flexbox1 child */
+	/* @FlexboxL1 child */
 	flex-grow: 1;
 
-	/* @Flexbox2 parent */
+	/* @FlexboxL2 parent */
 	display: flex;
 	flex-direction: column;
 }
@@ -106,10 +106,10 @@ body {
 #WKCNotesDetailContent {
 	font-size: 80%;
 
-	/* @Flexbox2 child */
+	/* @FlexboxL2 child */
 	flex-grow: 1;
 
-	/* @Flexbox3 parent */
+	/* @FlexboxL3 parent */
 	display: flex;
 	flex-direction: column;
 }
@@ -120,7 +120,7 @@ body {
 	font-family: 'monaco', monospace;
 	line-height: 1.4;
 
-	/* @Flexbox3 child */
+	/* @FlexboxL3 child */
 	flex-grow: 1;
 
 	/* browser defaults */
