@@ -113,7 +113,7 @@
 	//_ commandsAlertConnectionError
 
 	moi.commandsAlertConnectionError = function (error) {
-		window.alert('<%= OLSKLocalized('WKSharedErrorServiceUnavailable') %>');
+		window.alert(OLSKLocalized('WKSharedErrorServiceUnavailable'));
 
 		throw error;
 	};
@@ -121,7 +121,7 @@
 	//_ commandsAlertTokenUnavailable
 
 	moi.commandsAlertTokenUnavailable = function () {
-		window.alert('<%= OLSKLocalized('WKSharedErrorTokenUnavailable') %>');
+		window.alert(OLSKLocalized('WKSharedErrorTokenUnavailable'));
 
 		throw new Error('WKCAppErrorTokenUnavailable');
 	};
@@ -129,7 +129,7 @@
 	//_ commandsAlertNotesUnavailable
 
 	moi.commandsAlertNotesUnavailable = function () {
-		window.alert('<%= OLSKLocalized('WKCAppNotesErrorNotesUnavailable') %>');
+		window.alert(OLSKLocalized('WKCAppNotesErrorNotesUnavailable'));
 
 		throw new Error('WKCAppNotesErrorNotesUnavailable');
 	};
@@ -191,7 +191,7 @@
 	moi.commandsPersistNote = function (inputData) {
 		(new Promise(function(resolve, reject) {
 			if (inputData === moi.propertiesSelectedNote()) {
-				moi.reactPersistenceStatus('<%= OLSKLocalized('WKCAppNotesPersistenceStatusSaving') %>');
+				moi.reactPersistenceStatus(OLSKLocalized('WKCAppNotesPersistenceStatusSaving'));
 			}
 
 			if (!inputData.WKCNoteID) {
@@ -202,17 +202,17 @@
 			
 		})).then(function() {
 			if (inputData === moi.propertiesSelectedNote()) {
-				moi.reactPersistenceStatus('<%= OLSKLocalized('WKCAppNotesPersistenceStatusSaved') %>', true);
+				moi.reactPersistenceStatus(OLSKLocalized('WKCAppNotesPersistenceStatusSaved'), true);
 			}
 
 			moi.propertiesUnsavedNotes().splice(moi.propertiesUnsavedNotes().indexOf(inputData), 1);
 		}, function(error) {
-			if (window.confirm('<%= OLSKLocalized('WKCAppNotesErrorPersistenceSaveDidFail') %>')) {
+			if (window.confirm(OLSKLocalized('WKCAppNotesErrorPersistenceSaveDidFail'))) {
 				return moi.commandsPersistNote(inputData);
 			};
 
 			if (inputData === moi.propertiesSelectedNote()) {
-				moi.reactPersistenceStatus('<%= OLSKLocalized('WKCAppNotesPersistenceStatusUnableToSave') %>');
+				moi.reactPersistenceStatus(OLSKLocalized('WKCAppNotesPersistenceStatusUnableToSave'));
 			}
 
 			throw error;
@@ -252,7 +252,7 @@
 	//_ commandsPublishNote
 
 	moi.commandsPublishNote = function (inputData) {
-		d3.select('#WKCAppNotesPublishStatus').text('<%= OLSKLocalized('WKCAppNotesPublishStatusPublishing') %>');
+		d3.select('#WKCAppNotesPublishStatus').text(OLSKLocalized('WKCAppNotesPublishStatusPublishing'));
 
 		d3.json((<%- OLSKCanonicalSubstitutionFunctionFor('WKCRouteAPINotesPublish') %>)({
 			wkc_note_id: inputData.WKCNoteID,
@@ -268,11 +268,11 @@
 		}).then(function(responseJSON) {
 			moi.reactPublishStatus();
 		}, function(error) {
-			if (window.confirm('<%= OLSKLocalized('WKCAppNotesErrorPublishDidFail') %>')) {
+			if (window.confirm(OLSKLocalized('WKCAppNotesErrorPublishDidFail'))) {
 				return moi.commandsPublishNote(inputData);
 			};
 
-			d3.select('#WKCAppNotesPublishStatus').text('<%= OLSKLocalized('WKCAppNotesPublishStatusUnableToPublish') %>');
+			d3.select('#WKCAppNotesPublishStatus').text(OLSKLocalized('WKCAppNotesPublishStatusUnableToPublish'));
 
 			throw error;
 		});
@@ -285,7 +285,7 @@
 
 		moi.commandsPersistenceTaskStop();
 
-		if (!window.confirm('<%= OLSKLocalized('WKCAppNotesDeleteConfirmation') %>')) {
+		if (!window.confirm(OLSKLocalized('WKCAppNotesDeleteConfirmation'))) {
 			if (persistenceIsCued) {
 				moi.commandsPersistenceTaskStart();
 			}
@@ -301,7 +301,7 @@
 	moi._commandsDeleteNoteWithoutConfirmation = function (inputData) {
 		var persistenceIsCued = !!moi.propertiesPersistenceTask()._OLSKTaskTimerID;
 
-		moi.reactPersistenceStatus('<%= OLSKLocalized('WKCAppNotesPersistenceStatusDeleting') %>');
+		moi.reactPersistenceStatus(OLSKLocalized('WKCAppNotesPersistenceStatusDeleting'));
 
 		d3.json((<%- OLSKCanonicalSubstitutionFunctionFor('WKCRouteAPINotesDelete') %>)({
 			wkc_note_id: inputData.WKCNoteID,
@@ -322,13 +322,13 @@
 
 			moi.commandsSelectNote(null);
 
-			moi.reactPersistenceStatus('<%= OLSKLocalized('WKCAppNotesPersistenceStatusDeleted') %>', true);
+			moi.reactPersistenceStatus(OLSKLocalized('WKCAppNotesPersistenceStatusDeleted'), true);
 		}, function(error) {
-			if (window.confirm('<%= OLSKLocalized('WKCAppNotesErrorPersistenceDeleteDidFail') %>')) {
+			if (window.confirm(OLSKLocalized('WKCAppNotesErrorPersistenceDeleteDidFail'))) {
 				return moi._commandsDeleteNoteWithoutConfirmation(inputData);
 			};
 
-			moi.reactPersistenceStatus('<%= OLSKLocalized('WKCAppNotesPersistenceStatusUnableToDelete') %>');
+			moi.reactPersistenceStatus(OLSKLocalized('WKCAppNotesPersistenceStatusUnableToDelete'));
 
 			throw error;
 		}).finally(function() {
@@ -391,7 +391,7 @@
 	//_ reactPublishStatus
 
 	moi.reactPublishStatus = function () {
-		d3.select('#WKCAppNotesPublishStatus').html(moi.propertiesSelectedNote().WKCNoteIsPublished ? '<%= OLSKLocalized('WKCAppNotesPublishStatusPublished') %> <a href="/' + moi.propertiesSelectedNote().WKCNotePublicID + '" target="_blank">/' + moi.propertiesSelectedNote().WKCNotePublicID + '</a>': null);
+		d3.select('#WKCAppNotesPublishStatus').html(moi.propertiesSelectedNote().WKCNoteIsPublished ? OLSKLocalized('WKCAppNotesPublishStatusPublished') + '<a href="/' + moi.propertiesSelectedNote().WKCNotePublicID + '" target="_blank">/' + moi.propertiesSelectedNote().WKCNotePublicID + '</a>': nullg);
 	};
 
 	//_ reactPersistenceStatus
