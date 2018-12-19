@@ -66,7 +66,9 @@ exports.WKCActionLoginIndex = function(req, res, next) {
 	return res.render([
 		__dirname,
 		'index',
-	].join('/'), {});
+	].join('/'), {
+		WKCLoginReturnPath: req.query.returnPath || undefined,
+	});
 };
 
 //_ WKCActionLoginSubmit
@@ -100,6 +102,7 @@ exports.WKCActionLoginSubmit = function(req, res, next) {
 			].join('/'), {
 				WKCLoginUsername: req.body.WKCLoginUsername,
 				WKCLoginError: true,
+				WKCLoginReturnPath: req.body.WKCLoginReturnPath,
 			});
 		}
 
