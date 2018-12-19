@@ -50,6 +50,18 @@
 		};
 	</script>
 	<% } %>
+
+	<% if (locals.OLSKPagePublicRouteKeys) { %>
+	<script src="/shared-assets/vendor/OLSKRouting/main.js"></script>
+	<script type="text/javascript">
+		window.OLSKCanonicalFor = function(routeConstant, optionalParams) {
+			return OLSKRouting.OLSKRoutingCanonicalPathWithRoutePathAndOptionalParams((<%- JSON.stringify(OLSKPagePublicRouteKeys.reduce(function (map, e) {
+				map[e] = OLSKRouteObjectFor(e).OLSKRoutePath;
+				return map;
+			}, {})) %>)[routeConstant], optionalParams);
+		};
+	</script>
+	<% } %>
 </head>
 
 <body id="OLSKSharedBody">
