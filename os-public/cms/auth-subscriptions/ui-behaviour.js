@@ -241,10 +241,7 @@
 			.classed('WKCSubscriptionsMasterContentListItemUnread', function(obj) {
 				return !obj.WKCArticleIsRead;
 			})
-			.on('click', function(obj) {
-				moi.commandsSelectArticle(obj);
-			});
-
+			.on('click', moi.commandsSelectArticle);
 		parentElement.select('.WKCSubscriptionsMasterContentListItemHeading').text(function(obj) {
 			return obj.WKCArticleTitle || 'untitled_article';
 		});
