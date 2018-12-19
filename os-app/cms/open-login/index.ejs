@@ -22,7 +22,7 @@ locals.OLSKPageAssets = [
 		<input type="password" name="WKCLoginPassword" placeholder="<%= OLSKLocalized('WKCLoginFormFieldPasswordTitle') %>" />
 	</p>
 
-	<input type="text" name="WKCLoginReturnPath" value="<%= locals.WKCLoginReturnPath %>" />
+	<input type="text" hidden name="WKCLoginReturnPath" value="<%= locals.WKCLoginReturnPath %>" />
 
 	<input type="submit" value="<%= OLSKLocalized('WKCLoginFormFieldSubmitTitle') %>" />
 </form>
