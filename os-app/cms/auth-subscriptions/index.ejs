@@ -1,12 +1,14 @@
 <%
 locals.OLSKPageTitle = OLSKLocalized('WKCSubscriptionsHeadingText');
 locals.OLSKPageAssets = [
-	'/shared-assets/vendor/turndown/dist/turndown.js',
 	'/shared-assets/vendor/ispinner.css/ispinner.prefixed.css',
+	'/shared-assets/vendor/turndown/dist/turndown.js',
 	'/shared-assets/vendor/moment/moment.js',
 	'/cms/_shared/ui-style.css',
-	'ui-logic.js',
 	'ui-style.css',
+	'ui-logic.js',
+	'ui-behaviour.js',
+	'module-create/ui-behaviour.js',
 ];
 locals.OLSKPagePublicLocalizedStringKeys = [
 	'WKSharedErrorServiceUnavailable',
@@ -34,10 +36,6 @@ locals.OLSKPagePublicRouteKeys = [
 <%- include('../../_shared/WKCLayout/header.ejs') %>
 
 <%- include('../_shared/layout-header.ejs') %>
-
-<script type="text/javascript">
-	<%- include('behaviour.js') %>
-</script>
 
 <script type="text/javascript">
 	WKSubscriptions.lifecyclePageWillLoad();
