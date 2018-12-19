@@ -302,4 +302,27 @@ describe('WKCMetalSubscriptionsNeedingFetch', function testWKCMetalSubscriptions
 
 	});
 
+	context('WKCSubscriptionIsPaused', function() {
+
+		it('excludes if true', function(done) {
+			metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTesting.kTestingValidSubscription(), {
+				WKCSubscriptionName: 'alfa',
+				WKCSubscriptionFetchDate: new Date(new Date() - 1000 * 60 * 60),
+				WKCSubscriptionIsPaused: true,
+			}), function(err, subscriptionObject) {
+				metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTesting.kTestingValidSubscription(), {
+					WKCSubscriptionName: 'bravo',
+					WKCSubscriptionFetchDate: new Date(),
+				}), function(err, subscriptionObject) {
+					metalLibrary.WKCMetalSubscriptionsNeedingFetch(WKCTestingMongoClient, function(err, responseJSON) {
+						assert.deepEqual(responseJSON, []);
+
+						done();
+					});
+				});
+			});
+		});
+
+	});
+
 });

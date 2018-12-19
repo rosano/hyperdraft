@@ -202,6 +202,11 @@ exports.WKCMetalSubscriptionsNeedingFetch = function(databaseClient, completionH
 					},
 				],
 			},
+			{
+				WKCSubscriptionIsPaused: {
+					'$ne': true,
+				},
+			},
 		],
 	}).project(modelLibrary.WKCSubscriptionHiddenPropertyNames().reduce(function(hash, e) {
 		hash[e] = 0;
