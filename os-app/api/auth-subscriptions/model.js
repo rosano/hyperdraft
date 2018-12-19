@@ -113,6 +113,14 @@ exports.WKCSubscriptionsModelErrorsFor = function(inputData, options) {
 		}
 	}
 
+	if (inputData.WKCSubscriptionIsPaused) {
+		if (typeof inputData.WKCSubscriptionIsPaused !== 'boolean') {
+			errors.WKCSubscriptionIsPaused = [
+				'WKCErrorNotBoolean',
+			];
+		}
+	}
+
 	if (options && options.WKCModelValidatePresentOnly) {
 		Object.keys(errors).forEach(function(e) {
 			if (typeof inputData[e] === 'undefined') {

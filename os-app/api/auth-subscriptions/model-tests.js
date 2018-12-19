@@ -217,6 +217,20 @@ describe('WKCSubscriptionsModelErrorsFor', function testWKCSubscriptionsModelErr
 
 	});
 
+	context('WKCSubscriptionIsPaused', function() {
+
+		it('returns errors if not boolean', function() {
+			assert.deepEqual(modelLibrary.WKCSubscriptionsModelErrorsFor(Object.assign(kTesting.kTestingValidSubscription(), {
+				WKCSubscriptionIsPaused: 'true'
+			})), {
+				WKCSubscriptionIsPaused: [
+					'WKCErrorNotBoolean',
+				],
+			});
+		});
+
+	});
+
 });
 
 describe('WKCSubscriptionHiddenPropertyNames', function testWKCSubscriptionHiddenPropertyNames() {
