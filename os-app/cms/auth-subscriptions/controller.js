@@ -24,8 +24,8 @@ exports.OLSKControllerTasks = function() {
 exports.WKCTaskSubscriptionsFetch = function() {
 	var taskObject = {
 		OLSKTaskName: 'WKCTaskSubscriptionsFetch',
-		OLSKTaskFireTimeInterval: 1,
-		OLSKTaskFireLimit: 1,
+		OLSKTaskFireTimeInterval: process.env.NODE_ENV === 'production' ? 60 : 1,
+		OLSKTaskFireLimit: process.env.NODE_ENV === 'production' ? Infinity : 1,
 		OLSKTaskShouldBePerformed: function() {
 			return true;
 		},
