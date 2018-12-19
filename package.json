@@ -33,6 +33,7 @@
     "// FRONTEND": null,
     "normalize.css": "latest",
     "d3": "latest",
+    "OLSKInternational": "olsk/OLSKInternational",
     "OLSKTasks": "olsk/OLSKTasks",
     "ispinner.css": "latest",
     "turndown": "latest",

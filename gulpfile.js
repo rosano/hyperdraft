@@ -12,6 +12,7 @@ function install() {
 		'normalize.css',
 		'd3',
 		'OLSKTasks',
+		'OLSKInternational',
 		'ispinner.css',
 		'turndown',
 		'showdown',
