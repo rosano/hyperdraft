@@ -61,7 +61,7 @@ locals.OLSKPagePublicRouteKeys = [
 		</header>
 		<%- include('./module-create/view.ejs') %>
 	</div>
-	
+
 	<div id="WKCSubscriptionsMaster">
 		<header id="WKCSubscriptionsMasterHeader" class="WKCSubscriptionsToolbar">
 			<button id="WKCSubscriptionsMasterHeaderCreateButton" class="WKCSubscriptionsTappable WKCSubscriptionsButtonNoStyle" accesskey="n">➕</button>
@@ -69,6 +69,7 @@ locals.OLSKPagePublicRouteKeys = [
 				d3.select('#WKCSubscriptionsMasterHeaderCreateButton').on('click', WKSubscriptions.interfaceSubscriptionsCreateButtonDidClick);
 			</script>
 		</header>
+
 		<div id="WKCSubscriptionsMasterContent"></div>
 	</div>
 
@@ -78,7 +79,6 @@ locals.OLSKPagePublicRouteKeys = [
 			<script type="text/javascript">
 				d3.select('#WKCSubscriptionsDetailHeaderDiscardButton').on('click', WKSubscriptions.interfaceArticlesDiscardButtonDidClick);
 			</script>
-
 		</header>
 
 		<article id="WKCSubscriptionsDetailContent">
