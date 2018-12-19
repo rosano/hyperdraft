@@ -63,10 +63,10 @@ locals.OLSKPagePublicRouteKeys = [
 	</div>
 
 	<div id="WKCSubscriptionsMaster">
-		<header id="WKCSubscriptionsMasterHeader" class="WKCSharedToolbar">
-			<button id="WKCSubscriptionsMasterHeaderCreateButton" class="WKCSharedElementTappable WKCSharedButtonNoStyle" accesskey="n">➕</button>
+		<header id="WKCSubscriptionsMasterToolbar" class="WKCSharedToolbar">
+			<button id="WKCSubscriptionsMasterToolbarCreateButton" class="WKCSharedElementTappable WKCSharedButtonNoStyle" accesskey="n">➕</button>
 			<script type="text/javascript">
-				d3.select('#WKCSubscriptionsMasterHeaderCreateButton').on('click', WKSubscriptions.interfaceSubscriptionsCreateButtonDidClick);
+				d3.select('#WKCSubscriptionsMasterToolbarCreateButton').on('click', WKSubscriptions.interfaceSubscriptionsCreateButtonDidClick);
 			</script>
 		</header>
 
@@ -74,10 +74,10 @@ locals.OLSKPagePublicRouteKeys = [
 	</div>
 
 	<div id="WKCSubscriptionsDetail" class="WKCSubscriptionsDetailInactive">
-		<header id="WKCSubscriptionsDetailHeader" class="WKCSharedToolbar">
-			<button id="WKCSubscriptionsDetailHeaderDiscardButton" class="WKCSharedElementTappable WKCSharedButtonNoStyle">🗑</button>
+		<header id="WKCSubscriptionsDetailToolbar" class="WKCSharedToolbar">
+			<button id="WKCSubscriptionsDetailToolbarDiscardButton" class="WKCSharedElementTappable WKCSharedButtonNoStyle">🗑</button>
 			<script type="text/javascript">
-				d3.select('#WKCSubscriptionsDetailHeaderDiscardButton').on('click', WKSubscriptions.interfaceArticlesDiscardButtonDidClick);
+				d3.select('#WKCSubscriptionsDetailToolbarDiscardButton').on('click', WKSubscriptions.interfaceArticlesDiscardButtonDidClick);
 			</script>
 		</header>
 

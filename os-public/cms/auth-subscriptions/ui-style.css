@@ -84,7 +84,7 @@ body {
 	flex-direction: column;
 }
 
-#WKCSubscriptionsMasterHeader {
+#WKCSubscriptionsMasterToolbar {
 	border-top: 1px solid #ddd;
 }
 
@@ -134,7 +134,7 @@ body {
 	/*align-items: center;*/
 }
 
-.WKCSubscriptionsDetailInactive #WKCSubscriptionsDetailHeader, .WKCSubscriptionsDetailInactive #WKCSubscriptionsDetailContent {
+.WKCSubscriptionsDetailInactive #WKCSubscriptionsDetailToolbar, .WKCSubscriptionsDetailInactive #WKCSubscriptionsDetailContent {
 	display: none;
 }
 
