@@ -77,7 +77,7 @@
 		moi.reactFetchLoaderVisibility(true);
 		moi.reactConfirmationVisibility(false);
 
-		d3.text('<%= OLSKCanonicalFor('WKCRouteAPISubscriptionsFetch') %>', {
+		d3.text(OLSKCanonicalFor('WKCRouteAPISubscriptionsFetch'), {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -169,7 +169,7 @@
 	//_ _commandsAddSubscription
 
 	moi._commandsAddSubscription = function (subscriptionObject) {
-		return d3.json('<%= OLSKCanonicalFor('WKCRouteAPISubscriptionsCreate') %>', {
+		return d3.json(OLSKCanonicalFor('WKCRouteAPISubscriptionsCreate'), {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -303,7 +303,7 @@
 	//_ setupAPIToken
 
 	moi.setupAPIToken = function (completionHandler) {
-		d3.json('<%= OLSKCanonicalFor('WKCRouteAPIToken') %>', {
+		d3.json(OLSKCanonicalFor('WKCRouteAPIToken'), {
 			method: 'GET',
 		}).then(function(responseJSON) {
 			if (!responseJSON.WKCAPIToken) {
