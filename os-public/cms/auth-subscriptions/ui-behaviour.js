@@ -230,7 +230,7 @@
 		var parentElement = selection.enter()
 			.append('div')
 				.attr('class', 'WKCSubscriptionsMasterContentListItem')
-				.classed('WKCSubscriptionsTappable', true);
+				.classed('WKCSharedElementTappable', true);
 		parentElement.append('p').attr('class', 'WKCSubscriptionsMasterContentListItemHeading');
 		parentElement.append('p').attr('class', 'WKCSubscriptionsMasterContentListItemSnippet');
 		parentElement.append('p').attr('class', 'WKCSubscriptionsMasterContentListItemSource');
