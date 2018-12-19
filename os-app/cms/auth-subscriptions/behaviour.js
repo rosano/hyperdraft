@@ -159,7 +159,7 @@
 	//_ commandsArticlesMarkAsRead
 
 	moi.commandsArticlesMarkAsRead = function (item) {
-		d3.json((<%- OLSKCanonicalSubstitutionFunctionFor('WKCRouteAPIArticlesUpdate') %>)({
+		d3.json(OLSKCanonicalFor('WKCRouteAPIArticlesUpdate', {
 			wkc_article_id: item.WKCArticleID
 		}), {
 			method: 'PUT',
@@ -190,7 +190,7 @@
 	//_ commandsArticlesDiscard
 
 	moi.commandsArticlesDiscard = function (item) {
-		d3.json((<%- OLSKCanonicalSubstitutionFunctionFor('WKCRouteAPIArticlesUpdate') %>)({
+		d3.json(OLSKCanonicalFor('WKCRouteAPIArticlesUpdate', {
 			wkc_article_id: item.WKCArticleID
 		}), {
 			method: 'PUT',
@@ -317,7 +317,7 @@
 	//_ setupAPIToken
 
 	moi.setupAPIToken = function (completionHandler) {
-		d3.json('<%= OLSKCanonicalFor('WKCRouteAPIToken') %>', {
+		d3.json(OLSKCanonicalFor('WKCRouteAPIToken'), {
 			method: 'GET',
 		}).then(function(responseJSON) {
 			if (!responseJSON.WKCAPIToken) {
@@ -333,7 +333,7 @@
 	//_ setupSubscriptionObjects
 
 	moi.setupSubscriptionObjects = function (completionHandler) {
-		d3.json('<%= OLSKCanonicalFor('WKCRouteAPISubscriptionsSearch') %>', {
+		d3.json(OLSKCanonicalFor('WKCRouteAPISubscriptionsSearch'), {
 			method: 'GET',
 			headers: {
 				'x-client-key': moi.propertiesAPIToken(),
@@ -358,7 +358,7 @@
 	//_ setupArticleObjects
 
 	moi.setupArticleObjects = function (completionHandler) {
-		d3.json('<%= OLSKCanonicalFor('WKCRouteAPIArticlesSearch') %>', {
+		d3.json(OLSKCanonicalFor('WKCRouteAPIArticlesSearch'), {
 			method: 'GET',
 			headers: {
 				'x-client-key': moi.propertiesAPIToken(),
