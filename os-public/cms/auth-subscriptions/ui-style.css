@@ -78,6 +78,7 @@ body {
 	/* @FlexboxL1 child */
 	flex-basis: 300px;
 	flex-shrink: 0;
+	max-width: 300px;
 
 	/* @FlexboxL2 parent */
 	display: flex;
@@ -93,35 +94,66 @@ body {
 }
 
 .WKCSubscriptionsMasterContentListItem {
-	padding: 10px;
+	padding: 7px;
 	border-bottom: 1px solid #ddd;
-}
 
-.WKCSubscriptionsMasterContentListItemUnread .WKCSubscriptionsMasterContentListItemHeadline {
-	font-weight: bold;
+	font-size: 80%;
 }
 
 .WKCSubscriptionsMasterContentListItemUnread .WKCSubscriptionsMasterContentListItemReadStatus {
-	display: inline;
-	margin-right: 5px;
+	display: inline-block;
+	visibility: visible;
+}
+
+.WKCSubscriptionsMasterContentListItemUnread .WKCSubscriptionsMasterContentListItemContextSource {
+	font-weight: bold;
 }
 
 .WKCSubscriptionsMasterContentListItemReadStatus {
 	display: none;
+	margin-right: 5px;
+	visibility: hidden;
 }
 
 .WKCSubscriptionsMasterContentListItemSelected {
 	background: #ddd;
 }
 
+.WKCSubscriptionsMasterContentListItemContext {
+	/* @FlexboxL3 parent */
+	display: flex;
+}
+
+.WKCSubscriptionsMasterContentListItemContextSource {
+	white-space: nowrap;
+	overflow: hidden;
+
+	/* @FlexboxL3 child */
+	flex-grow: 1;
+}
+
+.WKCSubscriptionsMasterContentListItemContextTiming {
+	padding-left: 5px;
+	
+	white-space: nowrap;
+
+	opacity: 0.5;
+}
+
 .WKCSubscriptionsMasterContentListItemHeadline {
-	margin-top: 0;
-	margin-bottom: 10px;
+	display: block;
+	margin-top: 7px;
+	
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .WKCSubscriptionsMasterContentListItemSnippet {
-	margin-top: 0;
-	margin-bottom: 10px;
+	display: block;
+	margin-top: 7px;
+
+	opacity: 0.5;
 }
 
 #WKCSubscriptionsDetail {
