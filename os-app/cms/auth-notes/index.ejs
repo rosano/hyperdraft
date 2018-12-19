@@ -73,11 +73,13 @@ locals.OLSKPagePublicRouteKeys = [
 		</header>
 
 		<div id="WKCNotesDetailContent">
-			<textarea id="WKCNotesDetailContentTextarea" disabled></textarea>
+			<textarea id="WKCNotesDetailContentTextarea"></textarea>
 			<script type="text/javascript">
 				d3.select('#WKCNotesDetailContentTextarea').on('input', WKBehaviour.interfaceEditorTextareaDidReceiveInput);
 			</script>
 		</div>
+
+		<div id="WKCNotesDetailPlaceholder"><span><%= OLSKLocalized('WKCNotesDetailPlaceholderText') %></span></div>
 	</div>
 </div>
 

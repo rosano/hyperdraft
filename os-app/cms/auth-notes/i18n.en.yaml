@@ -3,6 +3,7 @@ WKCNotesMasterToolbarCreateButtonText: Add note
 WKCNotesDetailToolbarPublishButtonText: Publish note
 WKCNotesDetailToolbarDiscardButtonText: Delete note
 WKCNotesDeleteConfirmation: Permanantly delete note?
+WKCNotesDetailPlaceholderText: No Note Selected
 WKCNotesDetailToolbarPublishStatusPublishing: Publishing…
 WKCNotesDetailToolbarPublishStatusPublished: Public
 WKCNotesDetailToolbarPublishStatusUnableToPublish: Unable to publish

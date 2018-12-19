@@ -71,6 +71,26 @@ body {
 	flex-direction: column;
 }
 
+.WKCNotesDetailInactive {
+	border-top: 1px solid #ddd;
+	justify-content: center;
+}
+
+.WKCNotesDetailInactive #WKCNotesDetailToolbar, .WKCNotesDetailInactive #WKCNotesDetailContent {
+	display: none;
+}
+
+.WKCNotesDetailInactive #WKCNotesDetailPlaceholder {
+	display: block;
+	width: 100%;
+	text-align: center;
+}
+
+#WKCNotesDetailPlaceholder {
+	opacity: 0.5;
+	display: none;
+}
+
 #WKCNotesDetailToolbarPersistenceStatus {
 	margin: auto 5px;
 

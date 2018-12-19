@@ -370,16 +370,18 @@
 		d3.select('#WKCNotesDetailContentTextarea').node().value = moi.propertiesSelectedNote() ? moi.propertiesSelectedNote().WKCNoteBody : null;
 		d3.select('#WKCNotesDetailContentTextarea').attr('disabled', moi.propertiesSelectedNote() ? null : true);
 
-		if (moi.propertiesSelectedNote()) {
-			d3.select('#WKCNotesDetailContentTextarea').node().focus();
-		}
-
 		d3.selectAll('.WKCNotesMasterContentListItem').classed('WKCNotesMasterContentListItemSelected', function(d) {
 			return d === moi.propertiesSelectedNote();
 		});
 
 		d3.select('#WKCNotesDetailToolbarDiscardButton').attr('disabled', moi.propertiesSelectedNote() ? null : undefined);
 		d3.select('#WKCNotesDetailToolbarPublishButton').attr('disabled', moi.propertiesSelectedNote() ? null : undefined);
+
+		d3.select('#WKCNotesDetail').classed('WKCNotesDetailInactive', !moi.propertiesSelectedNote());
+		
+		if (moi.propertiesSelectedNote()) {
+			d3.select('#WKCNotesDetailContentTextarea').node().focus();
+		}
 
 		if (!moi.propertiesSelectedNote()) {
 			return;
