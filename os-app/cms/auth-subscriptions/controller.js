@@ -47,7 +47,7 @@ exports.WKCTaskSubscriptionsFetch = function() {
 							err = new Error([
 								res.statusCode,
 								res.statusMessage,
-								].join(' '));
+							].join(' '));
 						}
 
 						if (!err && subscriptionObject.WKCSubscriptionType === 'Feed') {

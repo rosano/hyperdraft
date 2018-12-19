@@ -191,7 +191,7 @@ exports.WKCMetalSubscriptionsNeedingFetch = function(databaseClient, completionH
 					{
 						WKCSubscriptionFetchDate: null,
 					},
-					],
+				],
 			},
 			{
 				'$or': [
@@ -203,9 +203,9 @@ exports.WKCMetalSubscriptionsNeedingFetch = function(databaseClient, completionH
 					{
 						WKCSubscriptionErrorDate: null,
 					},
-					],
+				],
 			},
-			],
+		],
 	}).project(modelLibrary.WKCSubscriptionHiddenPropertyNames().reduce(function(hash, e) {
 		hash[e] = 0;
 		

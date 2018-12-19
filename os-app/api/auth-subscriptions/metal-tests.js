@@ -14,7 +14,7 @@ const kTesting = {
 		return {
 			WKCSubscriptionURL: 'https://google.com',
 			WKCSubscriptionType: modelLibrary.WKCSubscriptionTypePage(),
-		}
+		};
 	},
 };
 

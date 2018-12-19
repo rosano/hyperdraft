@@ -26,7 +26,7 @@ beforeEach(function() {
 
 
 process.on('unhandledRejection', (reason, promise) => {
-  // console.log('Unhandledd Rejection at:', reason, promise)
-  // Recommended: send the information to sentry.io
-  // or whatever crash reporting service you use
+	// console.log('Unhandledd Rejection at:', reason, promise)
+	// Recommended: send the information to sentry.io
+	// or whatever crash reporting service you use
 });

@@ -40,7 +40,7 @@ exports.WKCDiffArticlesForFeed = function(oldString, newString) {
 	}
 
 	if (typeof newItems === 'object' && !!newItems.guid) {
-		newItems = [newItems]
+		newItems = [newItems];
 	}
 
 	if (!Array.isArray(newItems)) {

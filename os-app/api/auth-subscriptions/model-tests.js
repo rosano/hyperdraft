@@ -13,7 +13,7 @@ const kTesting = {
 		return {
 			WKCSubscriptionURL: 'https://google.com',
 			WKCSubscriptionType: modelLibrary.WKCSubscriptionTypePage(),
-		}
+		};
 	},
 };
 
@@ -48,7 +48,7 @@ describe('WKCSubscriptionTypes', function testWKCSubscriptionTypes() {
 			modelLibrary.WKCSubscriptionTypeFeed(),
 			modelLibrary.WKCSubscriptionTypeFile(),
 			modelLibrary.WKCSubscriptionTypePage(),
-			]);
+		]);
 	});
 
 });
