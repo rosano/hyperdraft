@@ -39,8 +39,16 @@
 		<% }) %>
 	<% } %>
 
-	<% if (locals.OLSKHeadCallback) { %>
-		<% OLSKHeadCallback() %>
+	<% if (locals.OLSKPagePublicLocalizedStringKeys) { %>
+	<script src="/shared-assets/vendor/OLSKInternational/main.js"></script>
+	<script type="text/javascript">
+		window.OLSKLocalized = function(translationConstant) {
+			return OLSKInternational.OLSKInternationalLocalizedStringWithTranslationKeyAndTranslationDictionary(translationConstant, <%- JSON.stringify(OLSKPagePublicLocalizedStringKeys.reduce(function(map, e) {
+					map[e] = OLSKLocalized(e);
+					return map;
+				}, {})) %>);
+		};
+	</script>
 	<% } %>
 </head>
 
