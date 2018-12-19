@@ -12,8 +12,7 @@ WKCAppNotesPersistenceStatusDeleting: Deleting…
 WKCAppNotesPersistenceStatusDeleted: Deleted
 WKCAppNotesPersistenceStatusUnableToSave: Unable to save
 WKCAppNotesPersistenceStatusUnableToDelete: Unable to delete
-WKCNotesErrors:
-  WKCAppErrorNotesUnavailable: Unable to fetch notes
-  WKCAppErrorPersistenceSaveDidFail: Unable to save note. Would you like to try again?
-  WKCAppErrorPersistenceDeleteDidFail: Unable to delete note. Would you like to try again?
-  WKCAppErrorPublishDidFail: Unable to publish note. Would you like to try again?
+WKCAppNotesErrorNotesUnavailable: Unable to fetch notes
+WKCAppNotesErrorPersistenceSaveDidFail: Unable to save note. Would you like to try again?
+WKCAppNotesErrorPersistenceDeleteDidFail: Unable to delete note. Would you like to try again?
+WKCAppNotesErrorPublishDidFail: Unable to publish note. Would you like to try again?

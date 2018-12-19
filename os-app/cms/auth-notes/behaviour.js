@@ -129,9 +129,9 @@
 	//_ commandsAlertNotesUnavailable
 
 	moi.commandsAlertNotesUnavailable = function () {
-		window.alert('<%= OLSKLocalized('WKCNotesErrors').WKCAppErrorNotesUnavailable %>');
+		window.alert('<%= OLSKLocalized('WKCAppNotesErrorNotesUnavailable') %>');
 
-		throw new Error('WKCAppErrorNotesUnavailable');
+		throw new Error('WKCAppNotesErrorNotesUnavailable');
 	};
 
 	//_ commandsAddNote
@@ -207,7 +207,7 @@
 
 			moi.propertiesUnsavedNotes().splice(moi.propertiesUnsavedNotes().indexOf(inputData), 1);
 		}, function(error) {
-			if (window.confirm('<%= OLSKLocalized('WKCNotesErrors').WKCAppErrorPersistenceSaveDidFail %>')) {
+			if (window.confirm('<%= OLSKLocalized('WKCAppNotesErrorPersistenceSaveDidFail') %>')) {
 				return moi.commandsPersistNote(inputData);
 			};
 
@@ -268,7 +268,7 @@
 		}).then(function(responseJSON) {
 			moi.reactPublishStatus();
 		}, function(error) {
-			if (window.confirm('<%= OLSKLocalized('WKCNotesErrors').WKCAppErrorPublishDidFail %>')) {
+			if (window.confirm('<%= OLSKLocalized('WKCAppNotesErrorPublishDidFail') %>')) {
 				return moi.commandsPublishNote(inputData);
 			};
 
@@ -324,7 +324,7 @@
 
 			moi.reactPersistenceStatus('<%= OLSKLocalized('WKCAppNotesPersistenceStatusDeleted') %>', true);
 		}, function(error) {
-			if (window.confirm('<%= OLSKLocalized('WKCNotesErrors').WKCAppErrorPersistenceDeleteDidFail %>')) {
+			if (window.confirm('<%= OLSKLocalized('WKCAppNotesErrorPersistenceDeleteDidFail') %>')) {
 				return moi._commandsDeleteNoteWithoutConfirmation(inputData);
 			};
 
