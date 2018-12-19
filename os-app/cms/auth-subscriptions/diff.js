@@ -132,7 +132,7 @@ exports.WKCDiffArticlesForFile = function(oldString, newString) {
 	if (typeof newString !== 'string') {
 		throw new Error('WKCErrorInvalidInput');
 	}
-	
+
 	if (oldString === newString) {
 		return [];
 	}
@@ -152,7 +152,7 @@ exports.WKCDiffArticlesForPage = function(oldString, newString) {
 
 	oldString = turndownPackage.turndown((new JSDOM(oldString || '')).window.document.body.innerHTML);
 	newString = turndownPackage.turndown((new JSDOM(newString)).window.document.body.innerHTML);
-	
+
 	if (oldString === newString) {
 		return [];
 	}
@@ -172,4 +172,3 @@ exports.WKCSnippetFromText = function(inputData) {
 
 	return inputData.length <= 100 ? inputData : inputData.slice(0, 100).split(' ').slice(0, -1).join(' ').concat('…');
 };
-

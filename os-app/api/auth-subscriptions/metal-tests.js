@@ -42,7 +42,7 @@ describe('WKCMetalSubscriptionsCreate', function testWKCMetalSubscriptionsCreate
 					'WKCErrorNotFormatted',
 				],
 			});
-			
+
 			done();
 		});
 	});
@@ -58,7 +58,7 @@ describe('WKCMetalSubscriptionsCreate', function testWKCMetalSubscriptionsCreate
 			assert.strictEqual(parseInt(responseJSON.WKCSubscriptionID) - (new Date()) > -200, true);
 			assert.strictEqual(responseJSON.WKCSubscriptionDateCreated - (new Date()) > -200, true);
 			assert.strictEqual(responseJSON.WKCSubscriptionDateUpdated - (new Date()) > -200, true);
-			
+
 			done();
 		});
 	});

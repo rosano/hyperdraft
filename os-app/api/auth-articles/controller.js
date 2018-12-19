@@ -65,7 +65,7 @@ exports.WKCActionAPIArticlesCreate = function(req, res, next) {
 		if (responseJSON.WKCErrors) {
 			res.status(400);
 		}
-		
+
 		return res.json(responseJSON);
 	});
 };
@@ -77,7 +77,7 @@ exports.WKCActionAPIArticlesRead = function(req, res, next) {
 		if (err) {
 			throw err;
 		}
-		
+
 		return res.json(responseJSON);
 	});
 };

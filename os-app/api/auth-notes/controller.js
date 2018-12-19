@@ -324,7 +324,7 @@ exports.WKCActionAPINotesDelete = function(req, res, next) {
 exports.WKCActionAPINotesSearch = function(req, res, next) {
 	return req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_notes').find({}).project(modelLibrary.WKCModelNotesHiddenPropertyNames().reduce(function(hash, e) {
 		hash[e] = 0;
-		
+
 		return hash;
 	}, {})).toArray(function(err, items) {
 		if (err) {

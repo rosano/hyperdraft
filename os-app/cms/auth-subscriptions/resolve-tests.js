@@ -8,7 +8,9 @@ var assert = require('assert');
 
 var resolveLibrary = require('./resolve');
 var jsDOMPackage = require('jsdom');
-const { JSDOM } = jsDOMPackage;
+const {
+	JSDOM
+} = jsDOMPackage;
 
 describe('WKCResolveRelativeURLs', function testWKCResolveRelativeURLs() {
 

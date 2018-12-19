@@ -38,20 +38,20 @@ describe('WKCMetalArticlesCreate', function testWKCMetalArticlesCreate() {
 					'WKCErrorNotDate',
 				],
 			});
-			
+
 			done();
 		});
 	});
 
 	it('returns WKCArticle', function(done) {
 		const item = kTestingValidArticle();
-		
+
 		metalLibrary.WKCMetalArticlesCreate(WKCTestingMongoClient, item, function(err, responseJSON) {
 			assert.deepEqual(responseJSON, Object.assign(item, {
 				WKCArticleDateCreated: responseJSON.WKCArticleDateCreated,
 				WKCArticleDateUpdated: responseJSON.WKCArticleDateUpdated,
 			}));
-			
+
 			done();
 		});
 	});
@@ -207,7 +207,7 @@ describe('WKCMetalArticlesSearch', function testWKCMetalArticlesSearch() {
 
 	it('excludes if WKCArticleIsDiscarded true', function(done) {
 		metalLibrary.WKCMetalArticlesCreate(WKCTestingMongoClient, Object.assign(kTestingValidArticle(), {
-			WKCArticleIsDiscarded: true,	
+			WKCArticleIsDiscarded: true,
 		}), function(err, articleObject) {
 			metalLibrary.WKCMetalArticlesSearch(WKCTestingMongoClient, '', function(err, responseJSON) {
 				assert.deepEqual(responseJSON, []);

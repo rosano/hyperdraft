@@ -94,15 +94,14 @@ exports.WKCMetalArticlesUpdate = function(databaseClient, inputData1, inputData2
 	}
 
 	if (!modelLibrary.WKCModelInputDataIsArticleObject(inputData2, {
-		WKCModelValidatePresentOnly: true,
-	})) {
+			WKCModelValidatePresentOnly: true,
+		})) {
 		return completionHandler(null, inputData2);
 	}
 
 	return databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_articles').findOneAndUpdate({
 		_id: mongodbPackage.ObjectID(inputData1),
-	},
-	{
+	}, {
 		'$set': Object.assign(inputData2, {
 			WKCArticleDateUpdated: new Date(),
 		}),
@@ -173,7 +172,7 @@ exports.WKCMetalArticlesSearch = function(databaseClient, inputData, completionH
 			return completionHandler(err);
 		}
 
-		return completionHandler(null, result.map(function (e) {
+		return completionHandler(null, result.map(function(e) {
 			e.WKCArticleID = e._id.toString();
 
 			modelLibrary.WKCArticleHiddenPropertyNames().forEach(function(obj) {

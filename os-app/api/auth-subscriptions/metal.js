@@ -161,7 +161,7 @@ exports.WKCMetalSubscriptionsSearch = function(databaseClient, inputData, comple
 
 	return databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_subscriptions').find({}).project(modelLibrary.WKCSubscriptionHiddenPropertyNames().reduce(function(hash, e) {
 		hash[e] = 0;
-		
+
 		return hash;
 	}, {})).toArray(function(err, items) {
 		if (err) {
@@ -180,10 +180,8 @@ exports.WKCMetalSubscriptionsNeedingFetch = function(databaseClient, completionH
 	}
 
 	return databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_subscriptions').find({
-		'$and': [
-			{
-				'$or': [
-					{
+		'$and': [{
+				'$or': [{
 						WKCSubscriptionFetchDate: {
 							'$lte': new Date(new Date() - 1000 * 60 * 60),
 						},
@@ -194,8 +192,7 @@ exports.WKCMetalSubscriptionsNeedingFetch = function(databaseClient, completionH
 				],
 			},
 			{
-				'$or': [
-					{
+				'$or': [{
 						WKCSubscriptionErrorDate: {
 							'$lte': new Date(new Date() - 1000 * 60 * 60),
 						},
@@ -208,7 +205,7 @@ exports.WKCMetalSubscriptionsNeedingFetch = function(databaseClient, completionH
 		],
 	}).project(modelLibrary.WKCSubscriptionHiddenPropertyNames().reduce(function(hash, e) {
 		hash[e] = 0;
-		
+
 		return hash;
 	}, {})).toArray(function(err, items) {
 		if (err) {

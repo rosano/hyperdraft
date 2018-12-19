@@ -92,7 +92,7 @@ var WKCFakeRequest = function(inputData = {}) {
 				OLSKConnectionClient: global.WKCTestingMongoClient,
 			};
 		},
-		
+
 	}, inputData);
 };
 
@@ -159,7 +159,7 @@ describe('WKCAPINotesMiddlewareFindByID', function WKCAPINotesMiddlewareFindByID
 					wkc_note_id: responseJSON.WKCNoteID.toString(),
 				},
 			});
-			
+
 			apiNotesController.WKCAPINotesMiddlewareFindByID(requestObject, testingLibrary.OLSKTestingFakeResponseForJSON(), function(inputData) {
 				assert.deepEqual(inputData, undefined);
 
@@ -189,7 +189,7 @@ describe('WKCAPISettingsLastGeneratedPublicIDWithClientAndCallback', function te
 	it('returns 0 if no existing items', function(done) {
 		apiNotesController.WKCAPISettingsLastGeneratedPublicIDWithClientAndCallback(global.WKCTestingMongoClient, function(lastRepoID) {
 			assert.strictEqual(lastRepoID, 0);
-			
+
 			done();
 		});
 	});
@@ -211,7 +211,7 @@ describe('WKCAPISettingsLastGeneratedPublicIDWithClientAndCallback', function te
 			}), WKCFakeResponseAsync(function(responseJSON) {
 				apiNotesController.WKCAPISettingsLastGeneratedPublicIDWithClientAndCallback(global.WKCTestingMongoClient, function(lastRepoID) {
 					assert.strictEqual(lastRepoID, 1);
-					
+
 					done();
 				});
 			}));
@@ -254,7 +254,7 @@ describe('WKCAPISettingsLastGeneratedPublicIDWithClientAndCallback', function te
 						}), WKCFakeResponseAsync(function(responseJSON) {
 							apiNotesController.WKCAPISettingsLastGeneratedPublicIDWithClientAndCallback(global.WKCTestingMongoClient, function(lastRepoID) {
 								assert.strictEqual(lastRepoID, 2);
-								
+
 								done();
 							});
 						}));
@@ -289,7 +289,7 @@ describe('WKCActionAPINotesCreate', function testWKCActionAPINotesCreate() {
 			assert.strictEqual(responseJSON.WKCNoteBody, 'alpha');
 			assert.strictEqual(responseJSON.WKCNoteDateCreated instanceof Date, true);
 			assert.strictEqual(responseJSON.WKCNoteDateUpdated instanceof Date, true);
-			
+
 			done();
 		}));
 	});
@@ -305,7 +305,7 @@ describe('WKCActionAPINotesRead', function testWKCActionAPINotesRead() {
 			},
 		}), WKCFakeResponseAsync(), function(inputData) {
 			assert.deepEqual(inputData, new Error('WKCAPIClientErrorNotFound'));
-			
+
 			done();
 		});
 	});
@@ -391,7 +391,7 @@ describe('WKCActionAPINotesUpdate', function testWKCActionAPINotesUpdate() {
 			}), WKCFakeResponseAsync(function(responseJSON) {
 				assert.strictEqual(responseJSON.WKCNoteBody, 'bravo');
 				assert.strictEqual(responseJSON.WKCNoteDateUpdated > originalDateUpdated, true);
-				
+
 				done();
 			}));
 		}));
@@ -478,7 +478,7 @@ describe('WKCActionAPINotesPublicRead', function testWKCActionAPINotesPublicRead
 			},
 		}), WKCFakeResponseAsync(), function(inputData) {
 			assert.deepEqual(inputData, new Error('WKCAPIClientErrorNotFound'));
-			
+
 			done();
 		});
 	});
@@ -529,7 +529,7 @@ describe('WKCActionAPINotesDelete', function testWKCActionAPINotesDelete() {
 			},
 		}), WKCFakeResponseAsync(), function(inputData) {
 			assert.deepEqual(inputData, new Error('WKCAPIClientErrorNotFound'));
-			
+
 			done();
 		});
 	});
@@ -573,7 +573,7 @@ describe('WKCActionAPINotesSearch', function testWKCActionAPINotesSearch() {
 		}), WKCFakeResponseAsync(function(noteObject) {
 			apiNotesController.WKCActionAPINotesSearch(WKCFakeRequest(), WKCFakeResponseAsync(function(responseJSON) {
 				assert.deepEqual(responseJSON, [noteObject]);
-				
+
 				done();
 			}));
 		}));

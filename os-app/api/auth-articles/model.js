@@ -93,7 +93,7 @@ exports.WKCModelInputDataIsArticleObject = function(inputData, options) {
 
 	if (Object.keys(errors).length) {
 		inputData.WKCErrors = errors;
-		
+
 		return false;
 	}
 

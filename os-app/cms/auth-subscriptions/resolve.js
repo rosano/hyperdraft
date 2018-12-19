@@ -6,7 +6,9 @@
 
 var urlPackage = require('url');
 var jsDOMPackage = require('jsdom');
-const { JSDOM } = jsDOMPackage;
+const {
+	JSDOM
+} = jsDOMPackage;
 
 //_ WKCResolveRelativeURLs
 
