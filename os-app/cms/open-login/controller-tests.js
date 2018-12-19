@@ -84,4 +84,12 @@ describe('WKCLoginMiddlewareAuthenticate', function testWKCLoginMiddlewareAuthen
 		}), testingLibrary.OLSKTestingFakeResponseForRedirect(), testingLibrary.OLSKTestingFakeNext()), 'RETURNED_UNDEFINED');
 	});
 
+	it('passes original url to login page', function() {
+		assert.deepEqual(loginController.WKCLoginMiddlewareAuthenticate(Object.assign(testingLibrary.OLSKTestingFakeRequestForSession({
+			WKCInsecureSessionToken: ' ',
+		}), {
+			originalUrl: '/alfa'
+		}), testingLibrary.OLSKTestingFakeResponseForRedirect()), loginController.OLSKControllerRoutes().WKCRouteLogin.OLSKRoutePath + '?returnPath=%2Falfa');
+	});
+
 });

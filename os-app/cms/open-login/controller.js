@@ -49,7 +49,12 @@ exports.OLSKControllerSharedMiddlewares = function() {
 
 exports.WKCLoginMiddlewareAuthenticate = function(req, res, next) {
 	if (!req.session.WKCInsecureSessionToken || !req.session.WKCInsecureSessionToken.trim()) {
-		return res.redirect(exports.OLSKControllerRoutes().WKCRouteLogin.OLSKRoutePath);
+		return res.redirect([
+			exports.OLSKControllerRoutes().WKCRouteLogin.OLSKRoutePath,
+			req.originalUrl ? encodeURIComponent(req.originalUrl) : undefined,
+		].filter(function (e) {
+			return !!e;
+		}).join('?returnPath='));
 	}
 
 	return next();
