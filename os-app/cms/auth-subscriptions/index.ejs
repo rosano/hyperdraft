@@ -51,17 +51,17 @@ locals.OLSKPagePublicRouteKeys = [
 	});
 </script>
 
-<div id="WKCSubscriptionsCreate">
-	<header id="WKCSubscriptionsCreateHeader" class="WKCSubscriptionsToolbar">
-		<button id="WKCSubscriptionsCreateHeaderCloseButton" class="WKCSubscriptionsTappable WKCSubscriptionsButtonNoStyle">✖️</button>
-		<script type="text/javascript">
-			d3.select('#WKCSubscriptionsCreateHeaderCloseButton').on('click', WKSubscriptions.interfaceSubscriptionsCreateCloseButtonDidClick);
-		</script>
-	</header>
-	<%- include('./module-create/view.ejs') %>
-</div>
-
 <div id="WKCSubscriptions" class="WKCSubscriptionsLoading">
+	<div id="WKCSubscriptionsCreate">
+		<header id="WKCSubscriptionsCreateHeader" class="WKCSubscriptionsToolbar">
+			<button id="WKCSubscriptionsCreateHeaderCloseButton" class="WKCSubscriptionsTappable WKCSubscriptionsButtonNoStyle">✖️</button>
+			<script type="text/javascript">
+				d3.select('#WKCSubscriptionsCreateHeaderCloseButton').on('click', WKSubscriptions.interfaceSubscriptionsCreateCloseButtonDidClick);
+			</script>
+		</header>
+		<%- include('./module-create/view.ejs') %>
+	</div>
+	
 	<div id="WKCSubscriptionsMaster">
 		<header id="WKCSubscriptionsMasterHeader" class="WKCSubscriptionsToolbar">
 			<button id="WKCSubscriptionsMasterHeaderCreateButton" class="WKCSubscriptionsTappable WKCSubscriptionsButtonNoStyle" accesskey="n">➕</button>
