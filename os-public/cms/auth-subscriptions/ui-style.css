@@ -90,6 +90,7 @@ body {
 }
 
 #WKCSubscriptionsMasterContent {
+	/* @FlexboxL2 child */
 	overflow: auto;
 }
 
@@ -190,6 +191,7 @@ body {
 }
 
 #WKCSubscriptionsDetailContent {
+	/* @FlexboxL2 child */
 	padding: 10px;
 	overflow: auto;
 }

@@ -29,6 +29,7 @@ body {
 }
 
 #WKCNotesMasterContent {
+	/* @FlexboxL2 child */
 	overflow: auto;
 }
 
