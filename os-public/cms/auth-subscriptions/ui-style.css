@@ -80,6 +80,14 @@ body {
 	background: #ccff66;
 }
 
+.WKCSubscriptionsModuleCreatePreview {
+	padding-left: 20px;
+	overflow-x: hidden;
+
+	background: #eee;
+	border-left: 10px solid #ddd;
+}
+
 #WKCSubscriptionsMaster {
 	/* @FlexboxL1 child */
 	flex-basis: 300px;
