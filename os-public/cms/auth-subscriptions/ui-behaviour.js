@@ -159,6 +159,10 @@
 	moi.commandsSelectArticle = function (item) {
 		moi.propertiesSelectedArticle(item);
 
+		if (!item) {
+			return;
+		}
+
 		if (item.WKCArticleIsRead) {
 			return;
 		}
@@ -214,7 +218,7 @@
 		}).then(function(responseJSON) {
 			Object.assign(item, responseJSON);
 
-			var nextArticle = moi.utilitiesNextArticle()
+			var nextArticle = moi.utilitiesNextArticle();
 
 			moi.propertiesArticleObjects(moi.propertiesArticleObjects().filter(function (e) {
 				return e !== item;
@@ -465,8 +469,12 @@
 	moi.utilitiesNextArticle = function () {
 		var currentIndex = moi.propertiesArticleObjects().indexOf(moi.propertiesSelectedArticle());
 
-		if (currentIndex < moi.propertiesArticleObjects().length) {
+		if (currentIndex < (moi.propertiesArticleObjects().length - 1)) {
 			return moi.propertiesArticleObjects()[currentIndex + 1];
+		}
+
+		if (moi.propertiesArticleObjects().length > 1) {
+			return moi.propertiesArticleObjects()[currentIndex - 1]
 		}
 		
 		return null;
