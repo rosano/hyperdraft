@@ -204,10 +204,13 @@
 		}).then(function(responseJSON) {
 			Object.assign(item, responseJSON);
 
-			moi.propertiesSelectedArticle(null);
+			var nextArticle = moi.utilitiesNextArticle()
+
 			moi.propertiesArticleObjects(moi.propertiesArticleObjects().filter(function (e) {
 				return e !== item;
 			}));
+
+			moi.commandsSelectArticle(nextArticle);
 		}, moi.commandsArticlesAlertErrorMarkAsDiscarded);
 	};
 
@@ -399,6 +402,20 @@
 
 	moi.lifecyclePageWillLoad = function () {
 		moi.setupEverything();
+	};
+
+	//# UTILITIES
+
+	//_ utilitiesNextArticle
+
+	moi.utilitiesNextArticle = function () {
+		var currentIndex = moi.propertiesArticleObjects().indexOf(moi.propertiesSelectedArticle());
+
+		if (currentIndex < moi.propertiesArticleObjects().length) {
+			return moi.propertiesArticleObjects()[currentIndex + 1];
+		}
+		
+		return null;
 	};
 
 	Object.assign(exports, moi);
