@@ -88,6 +88,16 @@
 		moi.commandsSubscriptionsCreateClose();
 	};
 
+	//_ interfaceArticlesArchiveButtonDidClick
+
+	moi.interfaceArticlesArchiveButtonDidClick = function () {
+		if (!moi.propertiesSelectedArticle()) {
+			return;
+		}
+
+		moi.commandsArticlesArchive(moi.propertiesSelectedArticle());
+	};
+
 	//_ interfaceArticlesDiscardButtonDidClick
 
 	moi.interfaceArticlesDiscardButtonDidClick = function () {
@@ -218,6 +228,41 @@
 
 	moi.commandsArticlesAlertErrorMarkAsDiscarded = function (error) {
 		window.alert(OLSKLocalized('WKCSubscriptionsErrorArticlesMarkAsDiscardedText'));
+
+		throw error;
+	};
+
+	//_ commandsArticlesArchive
+
+	moi.commandsArticlesArchive = function (item) {
+		d3.json(OLSKCanonicalFor('WKCRouteAPIArticlesUpdate', {
+			wkc_article_id: item.WKCArticleID
+		}), {
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json',
+				'x-client-key': moi.propertiesAPIToken(),
+			},
+			body: JSON.stringify({
+				WKCArticleIsArchived: true,
+			}),
+		}).then(function(responseJSON) {
+			Object.assign(item, responseJSON);
+
+			var nextArticle = moi.utilitiesNextArticle()
+
+			moi.propertiesArticleObjects(moi.propertiesArticleObjects().filter(function (e) {
+				return e !== item;
+			}));
+
+			moi.commandsSelectArticle(nextArticle);
+		}, moi.commandsArticlesAlertErrorMarkAsArchived);
+	};
+
+	//_ commandsArticlesAlertErrorMarkAsArchived
+
+	moi.commandsArticlesAlertErrorMarkAsArchived = function (error) {
+		window.alert(OLSKLocalized('WKCSubscriptionsErrorArticlesMarkAsArchivedText'));
 
 		throw error;
 	};

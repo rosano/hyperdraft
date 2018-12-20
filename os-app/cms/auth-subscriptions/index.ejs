@@ -75,6 +75,11 @@ locals.OLSKPagePublicRouteKeys = [
 
 	<div id="WKCSubscriptionsDetail" class="WKCSubscriptionsDetailInactive">
 		<header id="WKCSubscriptionsDetailToolbar" class="WKCSharedToolbar">
+			<button id="WKCSubscriptionsDetailToolbarArchiveButton" class="WKCSharedElementTappable WKCSharedButtonNoStyle" accesskey="a">📂</button>
+			<script type="text/javascript">
+				d3.select('#WKCSubscriptionsDetailToolbarArchiveButton').on('click', WKSubscriptions.interfaceArticlesArchiveButtonDidClick);
+			</script>
+
 			<button id="WKCSubscriptionsDetailToolbarDiscardButton" class="WKCSharedElementTappable WKCSharedButtonNoStyle">🗑</button>
 			<script type="text/javascript">
 				d3.select('#WKCSubscriptionsDetailToolbarDiscardButton').on('click', WKSubscriptions.interfaceArticlesDiscardButtonDidClick);

@@ -5,4 +5,5 @@ WKCSubscriptionsErrorArticlesUnavailableText: Unable to fetch articles
 WKCSubscriptionsDetailPlaceholderText: No Article Selected
 WKCSubscriptionsDetailContentLinkText: Original source
 WKCSubscriptionsErrorArticlesMarkAsReadText: Unable to mark article as read
+WKCSubscriptionsErrorArticlesMarkAsArchivedText: Unable to archive article
 WKCSubscriptionsErrorArticlesMarkAsDiscardedText: Unable to discard article
