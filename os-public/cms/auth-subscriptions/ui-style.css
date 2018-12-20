@@ -46,9 +46,12 @@ body {
 }
 
 .WKCSubscriptionsCreateActive {
-	display: block !important;
   animation-name: WKCSubscriptionsCreateActive;
   animation-duration: 0.235s;
+
+  /* @FlexboxL1 parent */
+  display: flex !important;
+  flex-direction: column;
 }
 
 .WKCSubscriptionsCreateInactive {
@@ -57,6 +60,9 @@ body {
 
 #WKCSubscriptionsModuleCreate {
 	padding: 20px;
+
+	/* @FlexboxL1 child */
+	overflow: auto;
 }
 
 #WKCSubscriptionsModuleCreateHeading {
