@@ -10,7 +10,7 @@
 	(factory((global.WKSubscriptionsModuleCreate = global.WKSubscriptionsModuleCreate || {})));
 }(this, (function (exports) { 'use strict';
 
-	var moi = exports;
+	var moi = {};
 
 	var WKSubscriptionsModuleCreatePropertyAPIToken;
 
@@ -328,6 +328,8 @@
 	moi.lifecyclePageWillLoad = function () {
 		moi.setupEverything();
 	};
+
+	Object.assign(exports, moi);
 
 	Object.defineProperty(exports, '__esModule', { value: true });
 

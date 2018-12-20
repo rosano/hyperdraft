@@ -10,7 +10,7 @@
 	(factory((global.WKBehaviour = global.WKBehaviour || {})));
 }(this, (function (exports) { 'use strict';
 
-	var moi = exports;
+	var moi = {};
 
 	var WKBehaviourPropertyAPIToken;
 	var WKBehaviourPropertySelectedNote;
@@ -491,6 +491,8 @@
 	moi.lifecyclePageWillLoad = function () {
 		moi.setupEverything();
 	};
+
+	Object.assign(exports, moi);
 
 	Object.defineProperty(exports, '__esModule', { value: true });
 
