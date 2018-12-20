@@ -57,7 +57,16 @@
 				<input type="text" hidden id="WKCSubscriptionsModuleCreateConfirmationFormType">
 			</p>
 
-			<input type="submit" value="<%= OLSKLocalized('WKCSubscriptionsModuleCreateConfirmationFormSubmitText') %>">
+			<p>
+				<input type="submit" value="<%= OLSKLocalized('WKCSubscriptionsModuleCreateConfirmationFormSubmitText') %>">
+			</p>
+
+			<p>
+				<button type="button" id="WKCSubscriptionsModuleCreateConfirmationClearButton"><%= OLSKLocalized('WKCSubscriptionsModuleCreateConfirmationClearButtonText') %></button>
+			</p>
+			<script type="text/javascript">
+				d3.select('#WKCSubscriptionsModuleCreateConfirmationClearButton').on('click', WKSubscriptionsModuleCreate.interfaceConfirmationClearButtonDidClick);
+			</script>
 		</form>
 
 		<script type="text/javascript">

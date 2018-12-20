@@ -45,6 +45,12 @@
 		});
 	};
 
+	//_ interfaceConfirmationClearButtonDidClick
+
+	moi.interfaceConfirmationClearButtonDidClick = function () {
+		moi.commandsConfirmationClear();
+	};
+
 	//# COMMANDS
 
 	//_ commandsAlertConnectionError
