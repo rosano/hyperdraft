@@ -148,8 +148,10 @@
 
 		var turndownInstance = new TurndownService();
 		turndownInstance.remove('script');
-
-		moi.reactPreviewPage(turndownInstance.turndown(parsedHTML.body));
+		turndownInstance.remove('img');
+		var showdownInstance = new showdown.Converter();
+		showdownInstance.setOption('noHeaderId', true);
+		moi.reactPreviewPage(showdownInstance.makeHtml(turndownInstance.turndown(parsedHTML.body)));
 
 		moi.reactPreviewShared(parsedHTML.getElementsByTagName('title')[0].textContent, [].slice.call(parsedHTML.getElementsByTagName('meta')).filter(function(e) {
 			if (e.name === 'description') {
