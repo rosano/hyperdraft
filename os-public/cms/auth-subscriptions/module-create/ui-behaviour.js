@@ -252,10 +252,13 @@
 	moi.reactPreviewShared = function (titleContent, blurbContent, typeContent) {
 		moi.reactFetchLoaderVisibility(false);
 
-		d3.select('#WKCSubscriptionsModuleCreateConfirmationFormName').node().value = titleContent;
+		if (titleContent) {
+			d3.select('#WKCSubscriptionsModuleCreateConfirmationFormName').node().value = titleContent;
+		}
 
-		d3.select('#WKCSubscriptionsModuleCreateConfirmationFormBlurb').node().value = blurbContent;
-
+		if (blurbContent) {
+			d3.select('#WKCSubscriptionsModuleCreateConfirmationFormBlurb').node().value = blurbContent;
+		}
 		d3.select('#WKCSubscriptionsModuleCreatePreviewHeadingType').html(typeContent);
 
 		moi.reactConfirmationVisibility(true);
