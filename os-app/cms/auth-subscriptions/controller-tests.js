@@ -8,16 +8,16 @@ var assert = require('assert');
 
 var testingLibrary = require('OLSKTesting');
 
-var notesController = require('./controller');
+var controllerModule = require('./controller');
 
 describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 
 	it('returns route objects', function() {
-		assert.deepEqual(notesController.OLSKControllerRoutes(), {
+		assert.deepEqual(controllerModule.OLSKControllerRoutes(), {
 			WKCRouteSubscriptions: {
 				OLSKRoutePath: '/cms/subscriptions',
 				OLSKRouteMethod: 'get',
-				OLSKRouteFunction: notesController.WKCActionSubscriptionsIndex,
+				OLSKRouteFunction: controllerModule.WKCActionSubscriptionsIndex,
 				OLSKRouteLanguages: ['en'],
 				OLSKRouteMiddlewares: [
 					'WKCSharedMiddlewareAuthenticate',
@@ -28,10 +28,39 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 
 });
 
+describe('OLSKControllerSharedMiddlewares', function testOLSKControllerSharedMiddlewares() {
+
+	it('returns middleware functions', function() {
+		assert.deepEqual(controllerModule.OLSKControllerSharedMiddlewares(), {
+			WKCSubscribeMiddlewareIgnoreJSMap: controllerModule.WKCSubscribeMiddlewareIgnoreJSMap,
+		});
+	});
+
+});
+
+describe('WKCSubscribeMiddlewareIgnoreJSMap', function testWKCSubscribeMiddlewareIgnoreJSMap() {
+
+	it('returns status 200', function() {
+		var res = testingLibrary.OLSKTestingFakeResponseForStatus();
+		controllerModule.WKCSubscribeMiddlewareIgnoreJSMap(Object.assign(testingLibrary.OLSKTestingFakeRequest(), {
+					originalUrl: '/alfa.js.map',
+				}), res, testingLibrary.OLSKTestingFakeNext())
+		// assert.deepEqual(, 'hello');
+		assert.strictEqual(res.statusCode, 200);
+	});
+
+	it('returns next(undefined)', function() {
+		assert.deepEqual(controllerModule.WKCSubscribeMiddlewareIgnoreJSMap(Object.assign(testingLibrary.OLSKTestingFakeRequest(), {
+			originalUrl: '/alfa.js',
+		}), testingLibrary.OLSKTestingFakeResponseForStatus(), testingLibrary.OLSKTestingFakeNext()), 'RETURNED_UNDEFINED');
+	});
+
+});
+
 describe('WKCActionSubscriptionsIndex', function testWKCActionSubscriptionsIndex() {
 
 	it('renders page', function() {
-		assert.strictEqual(notesController.WKCActionSubscriptionsIndex(null, testingLibrary.OLSKTestingFakeResponseForRender(function(viewPath) {
+		assert.strictEqual(controllerModule.WKCActionSubscriptionsIndex(null, testingLibrary.OLSKTestingFakeResponseForRender(function(viewPath) {
 			return viewPath;
 		})), [
 			__dirname,
@@ -40,7 +69,7 @@ describe('WKCActionSubscriptionsIndex', function testWKCActionSubscriptionsIndex
 	});
 
 	it('returns pageData', function() {
-		assert.deepEqual(notesController.WKCActionSubscriptionsIndex(null, testingLibrary.OLSKTestingFakeResponseForRender(function(viewPath, pageData) {
+		assert.deepEqual(controllerModule.WKCActionSubscriptionsIndex(null, testingLibrary.OLSKTestingFakeResponseForRender(function(viewPath, pageData) {
 			return pageData;
 		})), {});
 	});

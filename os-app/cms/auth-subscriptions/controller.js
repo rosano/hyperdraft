@@ -124,6 +124,25 @@ exports.OLSKControllerRoutes = function() {
 	};
 };
 
+//_ OLSKControllerSharedMiddlewares
+
+exports.OLSKControllerSharedMiddlewares = function() {
+	return {
+		WKCSubscribeMiddlewareIgnoreJSMap: exports.WKCSubscribeMiddlewareIgnoreJSMap,
+	};
+};
+
+//_ WKCSubscribeMiddlewareIgnoreJSMap
+
+exports.WKCSubscribeMiddlewareIgnoreJSMap = function(req, res, next) {
+	if (!/\.js\.map$/.test(req.originalUrl)) {
+		return next();
+	}
+
+	res.status(200);
+	// res.send('');
+};
+
 //_ WKCActionSubscriptionsIndex
 
 exports.WKCActionSubscriptionsIndex = function(req, res, next) {

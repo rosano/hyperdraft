@@ -6,8 +6,6 @@
 
 var assert = require('assert');
 
-var testingLibrary = require('OLSKTesting');
-
 var controllerModule = require('./controller');
 
 describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
