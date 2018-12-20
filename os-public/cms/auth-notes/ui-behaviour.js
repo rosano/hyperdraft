@@ -84,10 +84,10 @@
 
 	//# INTERFACE
 
-	//_ interfaceAddButtonDidClick
+	//_ interfaceNotesMasterToolbarCreateButtonDidClick
 
-	moi.interfaceAddButtonDidClick = function () {
-		moi.commandsAddNote();
+	moi.interfaceNotesMasterToolbarCreateButtonDidClick = function () {
+		moi.commandsNotesCreate();
 	};
 
 	//_ interfaceDeleteButtonDidClick
@@ -134,9 +134,9 @@
 		throw new Error('WKCNotesErrorNotesUnavailable');
 	};
 
-	//_ commandsAddNote
+	//_ commandsNotesCreate
 
-	moi.commandsAddNote = function () {
+	moi.commandsNotesCreate = function () {
 		moi.propertiesNoteObjects(moi.propertiesNoteObjects().concat(moi.dataNewNoteObject()));
 
 		moi.propertiesSelectedNote(moi.propertiesNoteObjects().shift());

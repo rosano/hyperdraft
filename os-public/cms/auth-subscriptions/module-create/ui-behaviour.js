@@ -37,7 +37,7 @@
 	//_ interfaceConfirmationFormDidSubmit
 
 	moi.interfaceConfirmationFormDidSubmit = function () {
-		moi._commandsAddSubscription({
+		moi._commandsSubscriptionsCreate({
 			WKCSubscriptionURL: d3.select('#WKCSubscriptionsModuleCreateFetchFormInput').node().value,
 			WKCSubscriptionType: d3.select('#WKCSubscriptionsModuleCreateConfirmationFormType').node().value,
 			WKCSubscriptionName: d3.select('#WKCSubscriptionsModuleCreateConfirmationFormName').node().value,
@@ -168,9 +168,9 @@
 		}).shift(), OLSKLocalized('WKCSubscriptionsModuleCreatePreviewTypePageText'));
 	};
 
-	//_ _commandsAddSubscription
+	//_ _commandsSubscriptionsCreate
 
-	moi._commandsAddSubscription = function (subscriptionObject) {
+	moi._commandsSubscriptionsCreate = function (subscriptionObject) {
 		return d3.json(OLSKCanonicalFor('WKCRouteAPISubscriptionsCreate'), {
 			method: 'POST',
 			headers: {
@@ -186,13 +186,13 @@
 			moi.reactAlternatives([]);
 			d3.select('#WKCSubscriptionsModuleCreateFetchFormInput').property('value', '');
 			d3.select('#WKCSubscriptionsModuleCreateFetchFormInput').node().focus();
-		}, moi._commandsAlertAddSubscriptionError);
+		}, moi._commandsSubscriptionsAlertErrorCreate);
 	};
 
-	//_ _commandsAlertAddSubscriptionError
+	//_ _commandsSubscriptionsAlertErrorCreate
 
-	moi._commandsAlertAddSubscriptionError = function (error) {
-		window.alert(OLSKLocalized('WKCSubscriptionsModuleCreateErrorAddText'));
+	moi._commandsSubscriptionsAlertErrorCreate = function (error) {
+		window.alert(OLSKLocalized('WKCSubscriptionsModuleCreateErrorCreateText'));
 
 		throw error;
 	};
