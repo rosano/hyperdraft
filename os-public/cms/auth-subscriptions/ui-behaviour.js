@@ -358,7 +358,16 @@
 
 		d3.selectAll('#WKCSubscriptionsDetailContentBody a').attr('target', '_blank');
 
-		d3.selectAll('#WKCSubscriptionsDetailContentBody *').attr('width', null);
+		d3.selectAll('#WKCSubscriptionsDetailContentBody *').each(function (a, b, c) {
+			if (!d3.select(this).attr('width')) {
+				return null;
+			}
+
+			d3.select(this)
+				.attr('width', null)
+				.style('max-width', '100%')
+				.style('height', 'auto');
+		});
 
 		d3.select('#WKCSubscriptionsDetail').classed('WKCSubscriptionsDetailInactive', false);
 	};
