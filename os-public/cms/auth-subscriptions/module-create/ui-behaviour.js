@@ -168,6 +168,17 @@
 		}).shift(), OLSKLocalized('WKCSubscriptionsModuleCreatePreviewTypePageText'));
 	};
 
+	//_ commandsConfirmationClear
+
+	moi.commandsConfirmationClear = function () {
+		moi.reactConfirmationVisibility(false);
+		moi.reactFetchFormVisibility(true);
+		moi.reactAlternatives([]);
+
+		d3.select('#WKCSubscriptionsModuleCreateFetchFormInput').property('value', '');
+		d3.select('#WKCSubscriptionsModuleCreateFetchFormInput').node().focus();
+	};
+
 	//_ _commandsSubscriptionsCreate
 
 	moi._commandsSubscriptionsCreate = function (subscriptionObject) {
@@ -179,13 +190,9 @@
 			},
 			body: JSON.stringify(subscriptionObject),
 		}).then(function(responseJSON) {
-			console.log(Object.assign(subscriptionObject, responseJSON));
+			Object.assign(subscriptionObject, responseJSON);
 
-			moi.reactConfirmationVisibility(false);
-			moi.reactFetchFormVisibility(true);
-			moi.reactAlternatives([]);
-			d3.select('#WKCSubscriptionsModuleCreateFetchFormInput').property('value', '');
-			d3.select('#WKCSubscriptionsModuleCreateFetchFormInput').node().focus();
+			moi.commandsConfirmationClear();
 		}, moi._commandsSubscriptionsAlertErrorCreate);
 	};
 
