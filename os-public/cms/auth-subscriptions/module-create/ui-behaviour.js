@@ -156,12 +156,18 @@
 		turndownInstance.remove('script');
 		turndownInstance.remove('style');
 		turndownInstance.remove('img');
-		turndownInstance.addRule('trim whitespace', {
-			filter: [
-				'div',
-			],
-			replacement: function (content) {
-				return content.trim();
+		turndownInstance.addRule('trim whitespace in link text', {
+			filter: function (node, options) {
+				return node.nodeName === 'A' && node.innerHTML !== node.textContent;
+			},
+			replacement: function (content, node) {
+				return [
+					'[',
+					content.trim(),
+					'](',
+					node.getAttribute('href'),
+					')',
+					].join('');
 			},
 		});
 		turndownInstance.addRule('populate blank links', {
@@ -171,7 +177,7 @@
 			replacement: function (content, node) {
 				return [
 					'[',
-					node.getAttribute('title') || '\[\\_\_\_\_\\_\]',
+					node.getAttribute('title') || '\\[\\_\\_\\_\\_\\_\\]',
 					'](',
 					node.getAttribute('href'),
 					')',

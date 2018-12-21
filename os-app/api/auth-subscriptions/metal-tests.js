@@ -55,9 +55,9 @@ describe('WKCMetalSubscriptionsCreate', function testWKCMetalSubscriptionsCreate
 				WKCSubscriptionDateUpdated: responseJSON.WKCSubscriptionDateUpdated,
 			}));
 
-			assert.strictEqual(parseInt(responseJSON.WKCSubscriptionID) - (new Date()) > -200, true);
-			assert.strictEqual(responseJSON.WKCSubscriptionDateCreated - (new Date()) > -200, true);
-			assert.strictEqual(responseJSON.WKCSubscriptionDateUpdated - (new Date()) > -200, true);
+			assert.strictEqual(parseInt(responseJSON.WKCSubscriptionID) - (new Date()) > -500, true);
+			assert.strictEqual(responseJSON.WKCSubscriptionDateCreated - (new Date()) > -500, true);
+			assert.strictEqual(responseJSON.WKCSubscriptionDateUpdated - (new Date()) > -500, true);
 
 			done();
 		});

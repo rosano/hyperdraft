@@ -11,17 +11,23 @@ const diffPackage = require('diff');
 var htmlEntitiesPackage = require('html-entities');
 htmlEntitiesPackage = new (htmlEntitiesPackage.AllHtmlEntities)();
 var turndownPackage = require('turndown');
-turndownInstance = new turndownPackage({
+var turndownInstance = new turndownPackage({
 	headingStyle: 'atx',
 });
 turndownInstance.remove('script');
 turndownInstance.remove('style');
-turndownInstance.addRule('trim whitespace', {
-	filter: [
-		'div',
-	],
-	replacement: function (content) {
-		return content.trim();
+turndownInstance.addRule('trim whitespace in link text', {
+	filter: function (node, options) {
+		return node.nodeName === 'A' && node.innerHTML !== node.textContent;
+	},
+	replacement: function (content, node) {
+		return [
+			'[',
+			content.trim(),
+			'](',
+			node.getAttribute('href'),
+			')',
+			].join('');
 	},
 });
 turndownInstance.addRule('populate blank links', {
@@ -31,7 +37,7 @@ turndownInstance.addRule('populate blank links', {
 	replacement: function (content, node) {
 		return [
 			'[',
-			node.getAttribute('title') || '\[\\_\_\_\_\\_\]',
+			node.getAttribute('title') || '\\[\\_\\_\\_\\_\\_\\]',
 			'](',
 			node.getAttribute('href'),
 			')',
