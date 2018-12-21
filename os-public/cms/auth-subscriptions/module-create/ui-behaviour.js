@@ -154,6 +154,7 @@
 
 		var turndownInstance = new TurndownService();
 		turndownInstance.remove('script');
+		turndownInstance.remove('style');
 		turndownInstance.remove('img');
 		var showdownInstance = new showdown.Converter();
 		showdownInstance.setOption('noHeaderId', true);

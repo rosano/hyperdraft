@@ -15,6 +15,7 @@ turndownPackage = new turndownPackage({
 	headingStyle: 'atx',
 });
 turndownPackage.remove('script');
+turndownPackage.remove('style');
 var showdownPackage = require('showdown');
 showdownPackage = new showdownPackage.Converter();
 showdownPackage.setOption('noHeaderId', true);
