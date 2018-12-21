@@ -232,6 +232,10 @@ describe('WKCDiffArticlesForPage', function testWKCDiffArticlesForPage() {
 		assert.strictEqual(diffLibrary.WKCDiffArticlesForPage(null, kTests.kTestsHTML('<a href="hotel"><div>indigo</div></a>')).pop().WKCArticleBody, '<p><ins><a href="hotel">indigo</a></ins></p>');
 	});
 
+	it('populates blank links', function() {
+		assert.strictEqual(diffLibrary.WKCDiffArticlesForPage(null, kTests.kTestsHTML('<a href="hotel"></a>')).pop().WKCArticleBody, '<p><ins><a href="hotel">[_____]</a></ins></p>');
+	});
+
 	// <a href="hotel">indigo</a>
 
 });

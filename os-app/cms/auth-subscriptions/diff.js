@@ -16,12 +16,24 @@ turndownInstance = new turndownPackage({
 });
 turndownInstance.remove('script');
 turndownInstance.remove('style');
-turndownInstance.addRule('ignoreBlocks', {
+turndownInstance.addRule('trim whitespace', {
 	filter: [
 		'div',
 	],
 	replacement: function (content) {
 		return content.trim();
+	},
+});
+turndownInstance.addRule('populate blank links', {
+	filter: function (node, options) {
+		return node.nodeName === 'A' && !node.textContent.trim();
+	},
+	replacement: function (content, node) {
+		return [
+			'[\[\\_\_\_\_\\_\]](',
+			node.getAttribute('href'),
+			')',
+			].join('');
 	},
 });
 var showdownPackage = require('showdown');
