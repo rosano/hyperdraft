@@ -156,6 +156,14 @@
 		turndownInstance.remove('script');
 		turndownInstance.remove('style');
 		turndownInstance.remove('img');
+		turndownInstance.addRule('ignoreBlocks', {
+			filter: [
+				'div',
+			],
+			replacement: function (content) {
+				return content.trim();
+			},
+		});
 		var showdownInstance = new showdown.Converter();
 		showdownInstance.setOption('noHeaderId', true);
 		moi.reactPreviewPage(showdownInstance.makeHtml(turndownInstance.turndown(parsedHTML.body)));

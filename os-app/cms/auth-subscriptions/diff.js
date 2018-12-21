@@ -11,11 +11,19 @@ const diffPackage = require('diff');
 var htmlEntitiesPackage = require('html-entities');
 htmlEntitiesPackage = new (htmlEntitiesPackage.AllHtmlEntities)();
 var turndownPackage = require('turndown');
-turndownPackage = new turndownPackage({
+turndownInstance = new turndownPackage({
 	headingStyle: 'atx',
 });
-turndownPackage.remove('script');
-turndownPackage.remove('style');
+turndownInstance.remove('script');
+turndownInstance.remove('style');
+turndownInstance.addRule('ignoreBlocks', {
+	filter: [
+		'div',
+	],
+	replacement: function (content) {
+		return content.trim();
+	},
+});
 var showdownPackage = require('showdown');
 showdownPackage = new showdownPackage.Converter();
 showdownPackage.setOption('noHeaderId', true);
@@ -151,8 +159,8 @@ exports.WKCDiffArticlesForPage = function(oldString, newString) {
 		throw new Error('WKCErrorInvalidInput');
 	}
 
-	oldString = turndownPackage.turndown((new JSDOM(oldString || '')).window.document.body.innerHTML);
-	newString = turndownPackage.turndown((new JSDOM(newString)).window.document.body.innerHTML);
+	oldString = turndownInstance.turndown((new JSDOM(oldString || '')).window.document.body.innerHTML);
+	newString = turndownInstance.turndown((new JSDOM(newString)).window.document.body.innerHTML);
 
 	if (oldString === newString) {
 		return [];

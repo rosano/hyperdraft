@@ -24,8 +24,12 @@ const kTests = {
         ]]>\
         </content:encoded></item></channel></rss>';
 	},
-	kTestsHTML: function() {
-		return '<!DOCTYPE html><html><head><title>bravo</title></head><body><h1>alfa</h1><script>var charlie = "delta";</script><style type="text/css">.echo {foxtrot: "golf";}</style></body></html>';
+	kTestsHTML: function(inputData) {
+		return [
+			'<!DOCTYPE html><html><head><title>bravo</title></head><body>',
+			inputData || '<h1>alfa</h1><script>var charlie = "delta";</script><style type="text/css">.echo {foxtrot: "golf";}</style>',
+			'</body></html>',
+		].join('');
 	},
 	kTestsBody: function() {
 		return 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.';
@@ -223,6 +227,12 @@ describe('WKCDiffArticlesForPage', function testWKCDiffArticlesForPage() {
 	it('populates article body', function() {
 		assert.strictEqual(diffLibrary.WKCDiffArticlesForPage(kTests.kTestsHTML(), kTests.kTestsHTML().replace('alfa', 'alfax')).pop().WKCArticleBody, '<h1>alfa<ins>x</ins></h1>');
 	});
+
+	it('strips whitespace article body', function() {
+		assert.strictEqual(diffLibrary.WKCDiffArticlesForPage(null, kTests.kTestsHTML('<a href="hotel"><div>indigo</div></a>')).pop().WKCArticleBody, '<p><ins><a href="hotel">indigo</a></ins></p>');
+	});
+
+	// <a href="hotel">indigo</a>
 
 });
 
