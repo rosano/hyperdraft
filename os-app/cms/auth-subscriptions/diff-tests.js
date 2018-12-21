@@ -232,7 +232,11 @@ describe('WKCDiffArticlesForPage', function testWKCDiffArticlesForPage() {
 		assert.strictEqual(diffLibrary.WKCDiffArticlesForPage(null, kTests.kTestsHTML('<a href="hotel"><div>indigo</div></a>')).pop().WKCArticleBody, '<p><ins><a href="hotel">indigo</a></ins></p>');
 	});
 
-	it('populates blank links', function() {
+	it('populates blank links with title value', function() {
+		assert.strictEqual(diffLibrary.WKCDiffArticlesForPage(null, kTests.kTestsHTML('<a href="hotel" title="alfa"></a>')).pop().WKCArticleBody, '<p><ins><a href="hotel">alfa</a></ins></p>');
+	});
+
+	it('populates blank links with placeholder', function() {
 		assert.strictEqual(diffLibrary.WKCDiffArticlesForPage(null, kTests.kTestsHTML('<a href="hotel"></a>')).pop().WKCArticleBody, '<p><ins><a href="hotel">[_____]</a></ins></p>');
 	});
 

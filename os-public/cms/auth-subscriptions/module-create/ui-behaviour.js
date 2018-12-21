@@ -156,12 +156,26 @@
 		turndownInstance.remove('script');
 		turndownInstance.remove('style');
 		turndownInstance.remove('img');
-		turndownInstance.addRule('ignoreBlocks', {
+		turndownInstance.addRule('trim whitespace', {
 			filter: [
 				'div',
 			],
 			replacement: function (content) {
 				return content.trim();
+			},
+		});
+		turndownInstance.addRule('populate blank links', {
+			filter: function (node, options) {
+				return node.nodeName === 'A' && !node.textContent.trim();
+			},
+			replacement: function (content, node) {
+				return [
+					'[',
+					node.getAttribute('title') || '\[\\_\_\_\_\\_\]',
+					'](',
+					node.getAttribute('href'),
+					')',
+					].join('');
 			},
 		});
 		var showdownInstance = new showdown.Converter();

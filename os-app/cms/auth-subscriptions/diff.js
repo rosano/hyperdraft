@@ -30,7 +30,9 @@ turndownInstance.addRule('populate blank links', {
 	},
 	replacement: function (content, node) {
 		return [
-			'[\[\\_\_\_\_\\_\]](',
+			'[',
+			node.getAttribute('title') || '\[\\_\_\_\_\\_\]',
+			'](',
 			node.getAttribute('href'),
 			')',
 			].join('');
