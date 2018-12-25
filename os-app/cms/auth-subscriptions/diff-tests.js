@@ -44,7 +44,7 @@ const kTests = {
 
 describe('WKCDiffArticlesForFeedRSS', function testWKCDiffArticlesForFeedRSS() {
 
-	it('returns none if new invalid', function() {
+	it('returns none if no rss', function() {
 		assert.deepEqual(diffLibrary.WKCDiffArticlesForFeedRSS(kTests.kTestsRSSValid(), kTests.kTestsRSSValid().replace('rss', 'rssx')), []);
 	});
 
@@ -113,7 +113,7 @@ describe('WKCDiffArticlesForFeedRSS', function testWKCDiffArticlesForFeedRSS() {
 
 describe('WKCDiffArticlesForFeedAtom', function testWKCDiffArticlesForFeedAtom() {
 
-	it('returns none if new invalid', function() {
+	it('returns none if no feed', function() {
 		assert.deepEqual(diffLibrary.WKCDiffArticlesForFeedAtom(kTests.kTestsAtomValid(), kTests.kTestsAtomValid().replace('feed', 'feedx')), []);
 	});
 
