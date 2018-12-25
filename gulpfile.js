@@ -14,6 +14,7 @@ function install() {
 		'OLSKTasks',
 		'OLSKInternational',
 		'OLSKRouting',
+		'OLSKType',
 		'ispinner.css',
 		'turndown',
 		'showdown',

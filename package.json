@@ -22,6 +22,7 @@
 
     "// PARSE": null,
     "jsdom": "latest",
+    "OLSKType": "olsk/OLSKType",
 
     "// DIFF": null,
     "diff": "latest",
@@ -35,6 +36,7 @@
     "OLSKInternational": "olsk/OLSKInternational",
     "OLSKRouting": "olsk/OLSKRouting",
     "OLSKTasks": "olsk/OLSKTasks",
+    "OLSKType": "olsk/OLSKType",
     "ispinner.css": "latest",
     "turndown": "latest",
     "showdown": "latest",
