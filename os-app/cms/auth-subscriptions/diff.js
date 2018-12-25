@@ -48,9 +48,9 @@ var showdownPackage = require('showdown');
 showdownPackage = new showdownPackage.Converter();
 showdownPackage.setOption('noHeaderId', true);
 
-//_ WKCDiffArticlesForFeed
+//_ WKCDiffArticlesForFeedRSS
 
-exports.WKCDiffArticlesForFeed = function(oldString, newString) {
+exports.WKCDiffArticlesForFeedRSS = function(oldString, newString) {
 	var oldIDs = (!oldString ? [] : fastXMLParserPackage.parse(oldString).rss.channel.item).map(function(e) {
 		return e.guid.toString();
 	});

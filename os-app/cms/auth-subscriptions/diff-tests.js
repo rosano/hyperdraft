@@ -36,14 +36,14 @@ const kTests = {
 	},
 };
 
-describe('WKCDiffArticlesForFeed', function testWKCDiffArticlesForFeed() {
+describe('WKCDiffArticlesForFeedRSS', function testWKCDiffArticlesForFeedRSS() {
 
 	it('returns none if new invalid', function() {
-		assert.deepEqual(diffLibrary.WKCDiffArticlesForFeed(kTests.kTestsRSSValid(), kTests.kTestsRSSValid().replace('rss', 'rssx')), []);
+		assert.deepEqual(diffLibrary.WKCDiffArticlesForFeedRSS(kTests.kTestsRSSValid(), kTests.kTestsRSSValid().replace('rss', 'rssx')), []);
 	});
 
 	it('returns all if old empty', function() {
-		assert.deepEqual(diffLibrary.WKCDiffArticlesForFeed(null, kTests.kTestsRSSValid()).map(function(e) {
+		assert.deepEqual(diffLibrary.WKCDiffArticlesForFeedRSS(null, kTests.kTestsRSSValid()).map(function(e) {
 			return e.WKCArticleTitle;
 		}), [
 			'bravo',
@@ -52,7 +52,7 @@ describe('WKCDiffArticlesForFeed', function testWKCDiffArticlesForFeed() {
 	});
 
 	it('returns articles with new guid', function() {
-		assert.deepEqual(diffLibrary.WKCDiffArticlesForFeed(kTests.kTestsRSSValid(), kTests.kTestsRSSValid().replace(/alfa/g, 'charlie')).map(function(e) {
+		assert.deepEqual(diffLibrary.WKCDiffArticlesForFeedRSS(kTests.kTestsRSSValid(), kTests.kTestsRSSValid().replace(/alfa/g, 'charlie')).map(function(e) {
 			return e.WKCArticleTitle;
 		}), [
 			'charlie',
@@ -60,39 +60,39 @@ describe('WKCDiffArticlesForFeed', function testWKCDiffArticlesForFeed() {
 	});
 
 	it('populates WKCArticleTitle', function() {
-		assert.strictEqual(diffLibrary.WKCDiffArticlesForFeed(null, kTests.kTestsRSSComplete()).pop().WKCArticleTitle, 'alfa');
+		assert.strictEqual(diffLibrary.WKCDiffArticlesForFeedRSS(null, kTests.kTestsRSSComplete()).pop().WKCArticleTitle, 'alfa');
 	});
 
 	it('populates WKCArticleOriginalURL', function() {
-		assert.strictEqual(diffLibrary.WKCDiffArticlesForFeed(null, kTests.kTestsRSSComplete()).pop().WKCArticleOriginalURL, 'https://www.cbc.ca/bravo');
+		assert.strictEqual(diffLibrary.WKCDiffArticlesForFeedRSS(null, kTests.kTestsRSSComplete()).pop().WKCArticleOriginalURL, 'https://www.cbc.ca/bravo');
 	});
 
 	it('populates WKCArticleOriginalGUID', function() {
-		assert.strictEqual(diffLibrary.WKCDiffArticlesForFeed(null, kTests.kTestsRSSComplete()).pop().WKCArticleOriginalGUID, 'charlie');
+		assert.strictEqual(diffLibrary.WKCDiffArticlesForFeedRSS(null, kTests.kTestsRSSComplete()).pop().WKCArticleOriginalGUID, 'charlie');
 	});
 
 	it('populates WKCArticleOriginalGUID as string', function() {
-		assert.strictEqual(diffLibrary.WKCDiffArticlesForFeed(null, kTests.kTestsRSSComplete().replace('charlie', '12345')).pop().WKCArticleOriginalGUID, '12345');
+		assert.strictEqual(diffLibrary.WKCDiffArticlesForFeedRSS(null, kTests.kTestsRSSComplete().replace('charlie', '12345')).pop().WKCArticleOriginalGUID, '12345');
 	});
 
 	it('populates WKCArticlePublishDate', function() {
-		assert.deepEqual(diffLibrary.WKCDiffArticlesForFeed(null, kTests.kTestsRSSComplete()).pop().WKCArticlePublishDate, new Date('2018-12-07T15:03:15.000Z'));
+		assert.deepEqual(diffLibrary.WKCDiffArticlesForFeedRSS(null, kTests.kTestsRSSComplete()).pop().WKCArticlePublishDate, new Date('2018-12-07T15:03:15.000Z'));
 	});
 
 	it('populates WKCArticleAuthor', function() {
-		assert.strictEqual(diffLibrary.WKCDiffArticlesForFeed(null, kTests.kTestsRSSComplete()).pop().WKCArticleAuthor, 'delta');
+		assert.strictEqual(diffLibrary.WKCDiffArticlesForFeedRSS(null, kTests.kTestsRSSComplete()).pop().WKCArticleAuthor, 'delta');
 	});
 
 	it('populates WKCArticleBody', function() {
-		assert.strictEqual(diffLibrary.WKCDiffArticlesForFeed(null, kTests.kTestsRSSComplete()).pop().WKCArticleBody, '<p>foxtrot</p>');
+		assert.strictEqual(diffLibrary.WKCDiffArticlesForFeedRSS(null, kTests.kTestsRSSComplete()).pop().WKCArticleBody, '<p>foxtrot</p>');
 	});
 
 	it('populates WKCArticleBody with description if no content:encoded', function() {
-		assert.strictEqual(diffLibrary.WKCDiffArticlesForFeed(null, kTests.kTestsRSSComplete().replace(/<content:encoded>.*<\/content:encoded>/, '')).pop().WKCArticleBody, '<p>echo</p>');
+		assert.strictEqual(diffLibrary.WKCDiffArticlesForFeedRSS(null, kTests.kTestsRSSComplete().replace(/<content:encoded>.*<\/content:encoded>/, '')).pop().WKCArticleBody, '<p>echo</p>');
 	});
 
 	it('populates WKCArticleSnippet', function() {
-		assert.strictEqual(diffLibrary.WKCDiffArticlesForFeed(null, kTests.kTestsRSSComplete()).pop().WKCArticleSnippet, 'foxtrot');
+		assert.strictEqual(diffLibrary.WKCDiffArticlesForFeedRSS(null, kTests.kTestsRSSComplete()).pop().WKCArticleSnippet, 'foxtrot');
 	});
 
 });

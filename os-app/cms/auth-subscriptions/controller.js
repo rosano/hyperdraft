@@ -51,7 +51,7 @@ exports.WKCTaskSubscriptionsFetch = function() {
 						}
 
 						if (!err && subscriptionObject.WKCSubscriptionType === 'Feed') {
-							articleObjects = articleObjects.concat(diffLibrary.WKCDiffArticlesForFeed(subscriptionObject.WKCSubscriptionFetchContent, body));
+							articleObjects = articleObjects.concat(diffLibrary.WKCDiffArticlesForFeedRSS(subscriptionObject.WKCSubscriptionFetchContent, body));
 						}
 
 						if (!err && subscriptionObject.WKCSubscriptionType === 'File') {
