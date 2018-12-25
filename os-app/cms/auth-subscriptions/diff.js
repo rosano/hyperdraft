@@ -4,8 +4,8 @@
  * MIT Licensed
  */
 
-var jsDOMPackage = require('jsdom');
-const { JSDOM } = jsDOMPackage;
+var jsdomPackage = require('jsdom');
+const { JSDOM } = jsdomPackage;
 const diffPackage = require('diff');
 var htmlEntitiesPackage = require('html-entities');
 htmlEntitiesInstance = new (htmlEntitiesPackage.AllHtmlEntities)();
