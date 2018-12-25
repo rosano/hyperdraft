@@ -13,13 +13,19 @@ const kTests = {
 		return '<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><item><title>bravo</title><guid>bravo</guid><description></description></item><item><title>alfa</title><guid>alfa</guid><description></description></item></channel></rss>';
 	},
 	kTestsRSSComplete: function() {
-		return '<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><item><title>alfa</title><link>https://www.cbc.ca/bravo</link><guid isPermaLink="false">charlie</guid><pubDate>Fri, 7 Dec 2018 10:03:15 EST</pubDate><author>delta</author><description><![CDATA[\
+		return '<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><item><title>alfa</title><link>https://www.cbc.ca/bravo</link><guid isPermaLink="false">charlie</guid><pubDate>Fri, 7 Dec 2018 10:03:15 EST</pubDate><author>delta</author><description><![CDATA[\
                         <p>echo</p>\
         ]]>\
         </description><content:encoded><![CDATA[\
                         <p>foxtrot</p>\
         ]]>\
         </content:encoded></item></channel></rss>';
+	},
+	kTestsAtomValid: function() {
+		return '<?xml version="1.0" encoding="UTF-8"?><feed xmlns="http://www.w3.org/2005/Atom"><entry><title>bravo</title><id>bravo</id><summary></summary></entry><entry><title>alfa</title><id>alfa</id><summary></summary></entry></feed>';
+	},
+	kTestsAtomComplete: function() {
+		return '<?xml version="1.0" encoding="UTF-8"?><feed xmlns="http://www.w3.org/2005/Atom"><entry><title>alfa</title><link href="https://www.cbc.ca/bravo" /><link rel="edit" href="http://example.org/charlie" /><id>charlie</id><updated>2018-12-07T14:03:15Z</updated><summary>echo</summary><content type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml"><p>foxtrot</p></div></content:encoded><author><name>delta</name></author></entry></feed>';
 	},
 	kTestsHTML: function(inputData) {
 		return [
@@ -40,6 +46,14 @@ describe('WKCDiffArticlesForFeedRSS', function testWKCDiffArticlesForFeedRSS() {
 
 	it('returns none if new invalid', function() {
 		assert.deepEqual(diffLibrary.WKCDiffArticlesForFeedRSS(kTests.kTestsRSSValid(), kTests.kTestsRSSValid().replace('rss', 'rssx')), []);
+	});
+
+	it('returns none if no channel', function() {
+		assert.deepEqual(diffLibrary.WKCDiffArticlesForFeedRSS(kTests.kTestsRSSValid(), kTests.kTestsRSSValid().replace('channel', 'channelx')), []);
+	});
+
+	it('returns none if no items', function() {
+		assert.deepEqual(diffLibrary.WKCDiffArticlesForFeedRSS(kTests.kTestsRSSValid(), kTests.kTestsRSSValid().replace('item', 'itemx')), []);
 	});
 
 	it('returns all if old empty', function() {

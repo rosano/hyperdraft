@@ -6,10 +6,9 @@
 
 var jsDOMPackage = require('jsdom');
 const { JSDOM } = jsDOMPackage;
-const fastXMLParserPackage = require('fast-xml-parser');
 const diffPackage = require('diff');
 var htmlEntitiesPackage = require('html-entities');
-htmlEntitiesPackage = new (htmlEntitiesPackage.AllHtmlEntities)();
+htmlEntitiesInstance = new (htmlEntitiesPackage.AllHtmlEntities)();
 var turndownPackage = require('turndown');
 var turndownInstance = new turndownPackage({
 	headingStyle: 'atx',
@@ -48,47 +47,38 @@ var showdownPackage = require('showdown');
 showdownPackage = new showdownPackage.Converter();
 showdownPackage.setOption('noHeaderId', true);
 
+const stringContentForFirstElement = function (inputData) {
+	return inputData[0] ? inputData[0].textContent : '';
+}
+
 //_ WKCDiffArticlesForFeedRSS
 
 exports.WKCDiffArticlesForFeedRSS = function(oldString, newString) {
-	var oldIDs = (!oldString ? [] : fastXMLParserPackage.parse(oldString).rss.channel.item).map(function(e) {
-		return e.guid.toString();
+	var parsedXML = (new (new JSDOM('')).window.DOMParser()).parseFromString(oldString, 'application/xml');
+
+	var oldIDs = (!oldString ? [] : [].slice.call(parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('item'))).map(function (e) {
+		return stringContentForFirstElement(e.getElementsByTagName('guid'));
 	});
-	var newItems = fastXMLParserPackage.parse(newString);
 
-	if (!(newItems = newItems.rss)) {
+	const channelElement = (new (new JSDOM('')).window.DOMParser()).parseFromString(newString, 'application/xml').getElementsByTagName('channel')[0];
+
+	if (!channelElement) {
 		return [];
 	}
 
-	if (!(newItems = newItems.channel)) {
-		return [];
-	}
-
-	if (!(newItems = newItems.item)) {
-		return [];
-	}
-
-	if (typeof newItems === 'object' && !!newItems.guid) {
-		newItems = [newItems];
-	}
-
-	if (!Array.isArray(newItems)) {
-		return [];
-	}
+	var newItems = [].slice.call(channelElement.getElementsByTagName('item'));
 
 	return newItems.filter(function(e) {
-		e.guid = e.guid.toString();
-
-		return oldIDs.indexOf(e.guid) === -1;
+		return oldIDs.indexOf(stringContentForFirstElement(e.getElementsByTagName('guid'))) === -1;
 	}).map(function(e) {
-		var itemContent = (e['content:encoded'] || e.description).trim();
+		var itemContent = (stringContentForFirstElement(e.getElementsByTagName('content:encoded')) || stringContentForFirstElement(e.getElementsByTagName('description')) || '').trim();
 
 		return {
-			WKCArticleTitle: e.title,
-			WKCArticleOriginalURL: e.link,
-			WKCArticleOriginalGUID: e.guid,
-			WKCArticlePublishDate: new Date(e.pubDate),
-			WKCArticleAuthor: e.author,
+			WKCArticleTitle: stringContentForFirstElement(e.getElementsByTagName('title')),
+			WKCArticleOriginalURL: stringContentForFirstElement(e.getElementsByTagName('link')),
+			WKCArticleOriginalGUID: stringContentForFirstElement(e.getElementsByTagName('guid')),
+			WKCArticlePublishDate: new Date(stringContentForFirstElement(e.getElementsByTagName('pubDate'))),
+			WKCArticleAuthor: stringContentForFirstElement(e.getElementsByTagName('author')),
 			WKCArticleBody: itemContent,
 			WKCArticleSnippet: exports.WKCSnippetFromText(JSDOM.fragment(itemContent).textContent),
 		};
@@ -167,7 +157,7 @@ exports.WKCDiffArticlesForFile = function(oldString, newString) {
 	}
 
 	return [{
-		WKCArticleBody: exports._WKCDiffArticleBodyForStrings(htmlEntitiesPackage.encode(oldString), htmlEntitiesPackage.encode(newString)).replace(/\n/g, '<br>'),
+		WKCArticleBody: exports._WKCDiffArticleBodyForStrings(htmlEntitiesInstance.encode(oldString), htmlEntitiesInstance.encode(newString)).replace(/\n/g, '<br>'),
 		WKCArticlePublishDate: new Date(),
 	}];
 };

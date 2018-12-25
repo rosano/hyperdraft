@@ -22,7 +22,6 @@
 
     "// PARSE": null,
     "jsdom": "latest",
-    "fast-xml-parser": "latest",
 
     "// DIFF": null,
     "diff": "latest",
