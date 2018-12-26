@@ -59,11 +59,11 @@ exports.WKCTaskSubscriptionsFetch = function() {
 						}
 
 						if (!err && subscriptionObject.WKCSubscriptionType === 'Page') {
-							articleObjects = articleObjects.concat(diffLibrary.WKCDiffArticlesForPage(subscriptionObject.WKCSubscriptionFetchContent, body)).map(function(e) {
+							articleObjects = articleObjects.concat(diffLibrary.WKCDiffArticlesForPage(subscriptionObject.WKCSubscriptionFetchContent, body).map(function(e) {
 								return Object.assign(e, {
 									WKCArticleBody: resolveLibrary.WKCResolveRelativeURLs(subscriptionObject.WKCSubscriptionURL, e.WKCArticleBody),
 								});
-							});
+							}));
 						}
 
 						if (err && subscriptionObject.WKCSubscriptionErrorMessage !== err.toString()) {
