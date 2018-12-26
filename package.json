@@ -26,6 +26,7 @@
 
     "// DIFF": null,
     "diff": "latest",
+    "diff-match-patch": "latest",
     "html-entities": "latest",
     "turndown": "latest",
     "showdown": "latest",

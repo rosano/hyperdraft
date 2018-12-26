@@ -7,6 +7,7 @@
 var jsdomPackage = require('jsdom');
 const { JSDOM } = jsdomPackage;
 const diffPackage = require('diff');
+const diffPatchMatchPackage = require('diff-match-patch');
 var htmlEntitiesPackage = require('html-entities');
 htmlEntitiesInstance = new (htmlEntitiesPackage.AllHtmlEntities)();
 var turndownPackage = require('turndown');
@@ -123,6 +124,54 @@ exports._WKCDiffArticleBodyForStrings = function(oldString, newString) {
 	if (typeof newString !== 'string') {
 		throw new Error('WKCErrorInvalidInput');
 	}
+
+	return (new diffPatchMatchPackage()).diff_main(oldString || '', newString).map(function(e) {
+		return {
+			added: e[0] === 1 ? true : undefined,
+			removed: e[0] === -1 ? true : undefined,
+			value: e[1],
+		};
+	}).map(function(e, index, collection) {
+		if (e.added) {
+			return [
+				'<ins>',
+				e.value,
+				'</ins>',
+			].join('');
+		}
+
+		if (e.removed) {
+			return [
+				'<del>',
+				e.value,
+				'</del>',
+			].join('');
+		}
+
+		if (e.value.split('\n').length <= 4) {
+			return e.value;
+		}
+
+		if (!index) {
+			return ['…'].concat(e.value.split('\n').slice(-4)).join('\n');
+		}
+
+		if (index === (collection.length - 1) && e.value.split('\n').length <= 5) {
+			return e.value;
+		}
+
+		if (index === (collection.length - 1)) {
+			return e.value.split('\n').slice(0, 4).concat(['…']).join('\n').concat('\n');
+		}
+
+		if (e.value.split('\n').length <= 8) {
+			return e.value;
+		}
+
+		return e.value.split('\n').slice(0, 4).concat(['…']).concat(e.value.split('\n').slice(-4)).join('\n');
+
+		return e.value;
+	}).join('');
 
 	var lineDiffs = diffPackage.diffLines(oldString || '', newString);
 
