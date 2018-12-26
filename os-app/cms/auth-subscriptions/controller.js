@@ -39,8 +39,8 @@ exports.WKCTaskSubscriptionsFetch = function() {
 					return;
 				}
 
-				responseJSON.forEach(function(subscriptionObject) {
-					requestPackage.get(subscriptionObject.WKCSubscriptionURL, function(err, res, body) {
+				return responseJSON.forEach(function(subscriptionObject) {
+					return requestPackage.get(subscriptionObject.WKCSubscriptionURL, function(err, res, body) {
 						var articleObjects = [];
 
 						if (!err && res.statusCode === 404) {
