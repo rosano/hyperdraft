@@ -5,6 +5,10 @@
  */
 
 const requestPackage = require('request');
+const jsdomPackage = require('jsdom');
+const { JSDOM } = jsdomPackage;
+
+const typeLibrary = require('OLSKType');
 
 var apiSubscriptionsModel = require('../../api/auth-subscriptions/model');
 var apiSubscriptionsMetal = require('../../api/auth-subscriptions/metal');
@@ -12,6 +16,13 @@ var apiArticlesMetal = require('../../api/auth-articles/metal');
 var apiSnapshotsMetal = require('../../api/auth-snapshots/metal');
 var diffLibrary = require('./diff');
 var resolveLibrary = require('./resolve');
+
+const kWKCTaskSubscriptionsUtilitiesXMLDocumentFrom = function(e) {
+	return (new (new JSDOM('')).window.DOMParser()).parseFromString(e, 'application/xml');
+};
+const kWKCTaskSubscriptionsUtilitiesHTMLDocumentFrom = function(e) {
+	return new JSDOM(e).window.document;
+};
 
 //_ OLSKControllerTasks
 
@@ -51,6 +62,20 @@ exports.WKCTaskSubscriptionsFetch = function() {
 									res.statusCode,
 									res.statusMessage,
 								].join(' ')));
+							}
+
+							const typeChangeError = new Error('WKCErrorParsingSubscriptionTypeChanged');
+
+							if (subscriptionObject.WKCSubscriptionType === apiSubscriptionsModel.WKCSubscriptionTypeFeedRSS() && !typeLibrary.OLSKTypeInputDataIsDOMDocumentRSS(kWKCTaskSubscriptionsUtilitiesXMLDocumentFrom(body))) {
+								return (err = typeChangeError);
+							}
+
+							if (subscriptionObject.WKCSubscriptionType === apiSubscriptionsModel.WKCSubscriptionTypeFeedAtom() && !typeLibrary.OLSKTypeInputDataIsDOMDocumentAtom(kWKCTaskSubscriptionsUtilitiesXMLDocumentFrom(body))) {
+								return (err = typeChangeError);
+							}
+
+							if (subscriptionObject.WKCSubscriptionType === apiSubscriptionsModel.WKCSubscriptionTypePage() && !typeLibrary.OLSKTypeInputDataIsDOMDocumentHTML(kWKCTaskSubscriptionsUtilitiesHTMLDocumentFrom(body))) {
+								return (err = typeChangeError);
 							}
 
 							if (subscriptionObject.WKCSubscriptionType === apiSubscriptionsModel.WKCSubscriptionTypeFeedRSS()) {
