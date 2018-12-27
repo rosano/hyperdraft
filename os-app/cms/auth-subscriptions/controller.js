@@ -45,6 +45,7 @@ exports.WKCTaskSubscriptionsFetch = function() {
 					return requestPackage.get(subscriptionObject.WKCSubscriptionURL, function(err, res, body) {
 						var articleObjects = [];
 
+						(function WKCTaskSubscriptionsFetchProcess() {
 						if (!err && res.statusCode === 404) {
 							err = new Error([
 								res.statusCode,
@@ -67,6 +68,7 @@ exports.WKCTaskSubscriptionsFetch = function() {
 								});
 							}));
 						}
+						})();
 
 						if (err && subscriptionObject.WKCSubscriptionErrorMessage !== err.toString()) {
 							articleObjects.push({
