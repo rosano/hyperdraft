@@ -8,6 +8,7 @@ const requestPackage = require('request');
 
 var apiSubscriptionsMetal = require('../../api/auth-subscriptions/metal');
 var apiArticlesMetal = require('../../api/auth-articles/metal');
+var apiSnapshotsMetal = require('../../api/auth-snapshots/metal');
 var diffLibrary = require('./diff');
 var resolveLibrary = require('./resolve');
 
@@ -95,6 +96,17 @@ exports.WKCTaskSubscriptionsFetch = function() {
 								if (err) {
 									return console.log(err);
 								}
+
+								if (articleObjects.length) {
+									return;
+								}
+
+								apiSnapshotsMetal.WKCSnapshotsMetalCreate(callbackInput.OLSKLive.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, {
+										WKCSnapshotSubscriptionID: subscriptionObject.WKCSubscriptionID,
+										WKCSnapshotBody: body,
+									}, function(err, responseJSON) {
+									return err ? reject(err) : resolve();
+								});
 							});
 						}, function(err) {
 							console.log(err);
