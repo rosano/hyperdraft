@@ -334,7 +334,7 @@
 	//_ reactPreviewFeedItems
 
 	moi.reactPreviewFeedItems = function (itemElements) {
-		var selection = d3.select('#WKCSubscriptionsModuleCreatePreviewFeed ul')
+		var selection = d3.select('#WKCSubscriptionsModuleCreatePreviewFeedList')
 			.selectAll('.WKCSubscriptionsModuleCreatePreviewFeedItem').data(itemElements);
 		
 		selection.enter()
