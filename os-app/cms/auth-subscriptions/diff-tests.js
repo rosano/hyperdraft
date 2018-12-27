@@ -146,6 +146,10 @@ describe('WKCDiffArticlesForFeedAtom', function testWKCDiffArticlesForFeedAtom()
 		assert.strictEqual(diffLibrary.WKCDiffArticlesForFeedAtom(null, kTests.kTestsAtomComplete()).pop().WKCArticleOriginalURL, 'https://www.cbc.ca/bravo');
 	});
 
+	it('populates WKCArticleOriginalURL if no neutral', function() {
+		assert.strictEqual(diffLibrary.WKCDiffArticlesForFeedAtom(null, kTests.kTestsAtomComplete().replace('<link href="https://www.cbc.ca/bravo" />', '')).pop().WKCArticleOriginalURL, 'http://example.org/golf');
+	});
+
 	it('populates WKCArticleOriginalGUID', function() {
 		assert.strictEqual(diffLibrary.WKCDiffArticlesForFeedAtom(null, kTests.kTestsAtomComplete()).pop().WKCArticleOriginalGUID, 'charlie');
 	});

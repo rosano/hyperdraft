@@ -104,11 +104,11 @@ exports.WKCDiffArticlesForFeedAtom = function(oldString, newString) {
 
 		return {
 			WKCArticleTitle: stringContentForFirstElement(e.getElementsByTagName('title')),
-			WKCArticleOriginalURL: [].slice.call(e.getElementsByTagName('link')).filter(function (e) {
-				return !e.getAttribute('rel');
+			WKCArticleOriginalURL: [].slice.call(e.getElementsByTagName('link')).sort(function (a, b) {
+				return !!a.getAttribute('rel') - !!b.getAttribute('rel');
 			}).map(function (e) {
 				return e.getAttribute('href');
-			}).pop(),
+			}).shift(),
 			WKCArticleOriginalGUID: stringContentForFirstElement(e.getElementsByTagName('id')),
 			WKCArticlePublishDate: new Date(stringContentForFirstElement(e.getElementsByTagName('updated'))),
 			WKCArticleAuthor: stringContentForFirstElement(e.getElementsByTagName('author')),
