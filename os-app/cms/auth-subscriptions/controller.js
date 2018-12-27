@@ -46,28 +46,28 @@ exports.WKCTaskSubscriptionsFetch = function() {
 						var articleObjects = [];
 
 						(function WKCTaskSubscriptionsFetchProcess() {
-						if (!err && res.statusCode === 404) {
-							err = new Error([
-								res.statusCode,
-								res.statusMessage,
-							].join(' '));
-						}
+							if (!err && res.statusCode === 404) {
+								err = new Error([
+									res.statusCode,
+									res.statusMessage,
+								].join(' '));
+							}
 
-						if (!err && subscriptionObject.WKCSubscriptionType === apiSubscriptionsModel.WKCSubscriptionTypeFeedRSS()) {
-							articleObjects = articleObjects.concat(diffLibrary.WKCDiffArticlesForFeedRSS(subscriptionObject.WKCSubscriptionFetchContent, body));
-						}
+							if (!err && subscriptionObject.WKCSubscriptionType === apiSubscriptionsModel.WKCSubscriptionTypeFeedRSS()) {
+								articleObjects = articleObjects.concat(diffLibrary.WKCDiffArticlesForFeedRSS(subscriptionObject.WKCSubscriptionFetchContent, body));
+							}
 
-						if (!err && subscriptionObject.WKCSubscriptionType === apiSubscriptionsModel.WKCSubscriptionTypeFile()) {
-							articleObjects = articleObjects.concat(diffLibrary.WKCDiffArticlesForFile(subscriptionObject.WKCSubscriptionFetchContent, body));
-						}
+							if (!err && subscriptionObject.WKCSubscriptionType === apiSubscriptionsModel.WKCSubscriptionTypeFile()) {
+								articleObjects = articleObjects.concat(diffLibrary.WKCDiffArticlesForFile(subscriptionObject.WKCSubscriptionFetchContent, body));
+							}
 
-						if (!err && subscriptionObject.WKCSubscriptionType === apiSubscriptionsModel.WKCSubscriptionTypePage()) {
-							articleObjects = articleObjects.concat(diffLibrary.WKCDiffArticlesForPage(subscriptionObject.WKCSubscriptionFetchContent, body).map(function(e) {
-								return Object.assign(e, {
-									WKCArticleBody: resolveLibrary.WKCResolveRelativeURLs(subscriptionObject.WKCSubscriptionURL, e.WKCArticleBody),
-								});
-							}));
-						}
+							if (!err && subscriptionObject.WKCSubscriptionType === apiSubscriptionsModel.WKCSubscriptionTypePage()) {
+								articleObjects = articleObjects.concat(diffLibrary.WKCDiffArticlesForPage(subscriptionObject.WKCSubscriptionFetchContent, body).map(function(e) {
+									return Object.assign(e, {
+										WKCArticleBody: resolveLibrary.WKCResolveRelativeURLs(subscriptionObject.WKCSubscriptionURL, e.WKCArticleBody),
+									});
+								}));
+							}
 						})();
 
 						if (err && subscriptionObject.WKCSubscriptionErrorMessage !== err.toString()) {
