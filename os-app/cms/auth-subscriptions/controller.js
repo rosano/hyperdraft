@@ -85,7 +85,7 @@ exports.WKCTaskSubscriptionsFetch = function() {
 								});
 							});
 						})).then(function() {
-							apiSubscriptionsMetal.WKCMetalSubscriptionsUpdate(callbackInput.OLSKLive.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, subscriptionObject.WKCSubscriptionID, err ? {
+							return apiSubscriptionsMetal.WKCMetalSubscriptionsUpdate(callbackInput.OLSKLive.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, subscriptionObject.WKCSubscriptionID, err ? {
 								WKCSubscriptionErrorDate: new Date(),
 								WKCSubscriptionErrorMessage: err.toString(),
 							} : {
@@ -98,15 +98,17 @@ exports.WKCTaskSubscriptionsFetch = function() {
 									return console.log(err);
 								}
 
-								if (articleObjects.length) {
+								if (!articleObjects.length) {
 									return;
 								}
 
-								apiSnapshotsMetal.WKCSnapshotsMetalCreate(callbackInput.OLSKLive.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, {
+								return apiSnapshotsMetal.WKCSnapshotsMetalCreate(callbackInput.OLSKLive.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, {
 										WKCSnapshotSubscriptionID: subscriptionObject.WKCSubscriptionID,
 										WKCSnapshotBody: body,
 									}, function(err, responseJSON) {
-									return err ? reject(err) : resolve();
+									if (err) {
+										return console.log(err);
+									}
 								});
 							});
 						}, function(err) {
