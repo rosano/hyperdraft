@@ -109,11 +109,11 @@
 
 			var parsedHTML = (new DOMParser()).parseFromString(data, 'text/html');
 
-			if (!parsedHTML.getElementsByTagName('head')[0].innerHTML) {
-				return moi.commandsConfirmURLFile(inputData, data);
+			if (OLSKType.OLSKTypeInputDataIsDOMDocumentHTML(parsedHTML)) {
+				return moi.commandsConfirmURLPage(inputData, parsedHTML);
 			}
 
-			return moi.commandsConfirmURLPage(inputData, parsedHTML);
+			return moi.commandsConfirmURLFile(inputData, data);
 		}).catch(moi.commandsFetchAlertError);
 	};
 
