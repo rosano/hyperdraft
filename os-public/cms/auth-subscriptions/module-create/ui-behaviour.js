@@ -14,6 +14,10 @@
 
 	var WKSubscriptionsModuleCreatePropertyAPIToken;
 
+	var stringContentForFirstElement = function (inputData) {
+		return inputData[0] ? inputData[0].textContent.trim() : '';
+	}
+
 	//# PROPERTIES
 
 	//_ propertiesAPIToken
@@ -95,8 +99,12 @@
 		}).then(function(data) {
 			var parsedXML = (new DOMParser()).parseFromString(data, 'application/xml');
 
-			if (!parsedXML.getElementsByTagName('parsererror').length && parsedXML.documentElement.getElementsByTagName('channel').length) {
+			if (OLSKType.OLSKTypeInputDataIsDOMDocumentRSS(parsedXML)) {
 				return moi.commandsConfirmURLFeedRSS(inputData, parsedXML);
+			}
+
+			if (OLSKType.OLSKTypeInputDataIsDOMDocumentAtom(parsedXML)) {
+				return moi.commandsConfirmURLFeedAtom(inputData, parsedXML);
 			}
 
 			var parsedHTML = (new DOMParser()).parseFromString(data, 'text/html');
@@ -128,7 +136,17 @@
 
 		moi.reactPreviewFeedItems([].slice.call(parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('item')));
 		
-		moi.reactPreviewShared(parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('title')[0].textContent.trim(), parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('description')[0].textContent.trim(), OLSKLocalized('WKCSubscriptionsModuleCreatePreviewTypeFeedRSSText'));
+		moi.reactPreviewShared(stringContentForFirstElement(parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('title')), stringContentForFirstElement(parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('description')), OLSKLocalized('WKCSubscriptionsModuleCreatePreviewTypeFeedRSSText'));
+	};
+
+	//_ commandsConfirmURLFeedAtom
+
+	moi.commandsConfirmURLFeedAtom = function (inputData, parsedXML) {
+		moi.reactConfirmationType(OLSKPublicConstants.WKCSubscriptionTypeFeedAtom);
+
+		moi.reactPreviewFeedItems([].slice.call(parsedXML.getElementsByTagName('entry')));
+		
+		moi.reactPreviewShared(stringContentForFirstElement(parsedXML.getElementsByTagName('title')), stringContentForFirstElement(parsedXML.getElementsByTagName('subtitle')), OLSKLocalized('WKCSubscriptionsModuleCreatePreviewTypeFeedAtomText'));
 	};
 
 	//_ commandsConfirmURLFile
@@ -321,7 +339,7 @@
 				.attr('class', 'WKCSubscriptionsModuleCreatePreviewFeedItem')
 				.merge(selection)
 					.html(function(e) {
-						return e.getElementsByTagName('title')[0].textContent.trim();
+						return stringContentForFirstElement(e.getElementsByTagName('title'));
 					});
 
 		selection.exit().remove();
