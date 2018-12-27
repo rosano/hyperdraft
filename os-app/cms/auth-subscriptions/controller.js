@@ -47,22 +47,22 @@ exports.WKCTaskSubscriptionsFetch = function() {
 
 						(function WKCTaskSubscriptionsFetchProcess() {
 							if (!err && res.statusCode === 404) {
-								err = new Error([
+								return (err = new Error([
 									res.statusCode,
 									res.statusMessage,
-								].join(' '));
+								].join(' ')));
 							}
 
-							if (!err && subscriptionObject.WKCSubscriptionType === apiSubscriptionsModel.WKCSubscriptionTypeFeedRSS()) {
-								articleObjects.push(...diffLibrary.WKCDiffArticlesForFeedRSS(subscriptionObject.WKCSubscriptionFetchContent, body));
+							if (subscriptionObject.WKCSubscriptionType === apiSubscriptionsModel.WKCSubscriptionTypeFeedRSS()) {
+								return articleObjects.push(...diffLibrary.WKCDiffArticlesForFeedRSS(subscriptionObject.WKCSubscriptionFetchContent, body));
 							}
 
-							if (!err && subscriptionObject.WKCSubscriptionType === apiSubscriptionsModel.WKCSubscriptionTypeFile()) {
-								articleObjects.push(...diffLibrary.WKCDiffArticlesForFile(subscriptionObject.WKCSubscriptionFetchContent, body));
+							if (subscriptionObject.WKCSubscriptionType === apiSubscriptionsModel.WKCSubscriptionTypeFile()) {
+								return articleObjects.push(...diffLibrary.WKCDiffArticlesForFile(subscriptionObject.WKCSubscriptionFetchContent, body));
 							}
 
-							if (!err && subscriptionObject.WKCSubscriptionType === apiSubscriptionsModel.WKCSubscriptionTypePage()) {
-								articleObjects.push(...diffLibrary.WKCDiffArticlesForPage(subscriptionObject.WKCSubscriptionFetchContent, body).map(function(e) {
+							if (subscriptionObject.WKCSubscriptionType === apiSubscriptionsModel.WKCSubscriptionTypePage()) {
+								return articleObjects.push(...diffLibrary.WKCDiffArticlesForPage(subscriptionObject.WKCSubscriptionFetchContent, body).map(function(e) {
 									return Object.assign(e, {
 										WKCArticleBody: resolveLibrary.WKCResolveRelativeURLs(subscriptionObject.WKCSubscriptionURL, e.WKCArticleBody),
 									});
