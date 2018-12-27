@@ -12,6 +12,12 @@ exports.WKCSubscriptionTypeFeedRSS = function() {
 	return 'FeedRSS';
 };
 
+//_ WKCSubscriptionTypeFeedAtom
+
+exports.WKCSubscriptionTypeFeedAtom = function() {
+	return 'FeedAtom';
+};
+
 //_ WKCSubscriptionTypeFile
 
 exports.WKCSubscriptionTypeFile = function() {
@@ -29,6 +35,7 @@ exports.WKCSubscriptionTypePage = function() {
 exports.WKCSubscriptionTypes = function() {
 	return [
 		exports.WKCSubscriptionTypeFeedRSS(),
+		exports.WKCSubscriptionTypeFeedAtom(),
 		exports.WKCSubscriptionTypeFile(),
 		exports.WKCSubscriptionTypePage(),
 	];

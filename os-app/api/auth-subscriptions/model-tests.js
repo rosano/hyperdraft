@@ -25,6 +25,14 @@ describe('WKCSubscriptionTypeFeedRSS', function testWKCSubscriptionTypeFeedRSS()
 
 });
 
+describe('WKCSubscriptionTypeFeedAtom', function testWKCSubscriptionTypeFeedAtom() {
+
+	it('returns constant', function() {
+		assert.strictEqual(modelLibrary.WKCSubscriptionTypeFeedAtom(), 'FeedAtom');
+	});
+
+});
+
 describe('WKCSubscriptionTypeFile', function testWKCSubscriptionTypeFile() {
 
 	it('returns constant', function() {
@@ -46,6 +54,7 @@ describe('WKCSubscriptionTypes', function testWKCSubscriptionTypes() {
 	it('returns constant', function() {
 		assert.deepEqual(modelLibrary.WKCSubscriptionTypes(), [
 			modelLibrary.WKCSubscriptionTypeFeedRSS(),
+			modelLibrary.WKCSubscriptionTypeFeedAtom(),
 			modelLibrary.WKCSubscriptionTypeFile(),
 			modelLibrary.WKCSubscriptionTypePage(),
 		]);
