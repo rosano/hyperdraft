@@ -163,8 +163,11 @@ exports.WKCActionSubscriptionsIndex = function(req, res, next) {
 		__dirname,
 		'index',
 	].join('/'), {
-		WKCSubscriptionTypeFeedRSS: apiSubscriptionsModel.WKCSubscriptionTypeFeedRSS(),
-		WKCSubscriptionTypeFile: apiSubscriptionsModel.WKCSubscriptionTypeFile(),
-		WKCSubscriptionTypePage: apiSubscriptionsModel.WKCSubscriptionTypePage(),
+		OLSKPagePublicConstants: {
+			WKCSubscriptionTypeFeedRSS: apiSubscriptionsModel.WKCSubscriptionTypeFeedRSS(),
+			WKCSubscriptionTypeFeedAtom: apiSubscriptionsModel.WKCSubscriptionTypeFeedAtom(),
+			WKCSubscriptionTypeFile: apiSubscriptionsModel.WKCSubscriptionTypeFile(),
+			WKCSubscriptionTypePage: apiSubscriptionsModel.WKCSubscriptionTypePage(),
+		},
 	});
 };

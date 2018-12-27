@@ -73,9 +73,12 @@ describe('WKCActionSubscriptionsIndex', function testWKCActionSubscriptionsIndex
 		assert.deepEqual(controllerModule.WKCActionSubscriptionsIndex(null, testingLibrary.OLSKTestingFakeResponseForRender(function(viewPath, pageData) {
 			return pageData;
 		})), {
-			WKCSubscriptionTypeFeedRSS: apiSubscriptionsModel.WKCSubscriptionTypeFeedRSS(),
-			WKCSubscriptionTypeFile: apiSubscriptionsModel.WKCSubscriptionTypeFile(),
-			WKCSubscriptionTypePage: apiSubscriptionsModel.WKCSubscriptionTypePage(),
+			OLSKPagePublicConstants: {
+				WKCSubscriptionTypeFeedRSS: apiSubscriptionsModel.WKCSubscriptionTypeFeedRSS(),
+				WKCSubscriptionTypeFeedAtom: apiSubscriptionsModel.WKCSubscriptionTypeFeedAtom(),
+				WKCSubscriptionTypeFile: apiSubscriptionsModel.WKCSubscriptionTypeFile(),
+				WKCSubscriptionTypePage: apiSubscriptionsModel.WKCSubscriptionTypePage(),
+			},
 		});
 	});
 
