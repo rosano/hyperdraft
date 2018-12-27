@@ -62,6 +62,12 @@
 		};
 	</script>
 	<% } %>
+
+	<% if (locals.OLSKPagePublicConstants) { %>
+	<script type="text/javascript">
+		window.OLSKPublicConstants = <%- JSON.stringify(OLSKPagePublicConstants) %>;
+	</script>
+	<% } %>
 </head>
 
 <body id="OLSKSharedBody">

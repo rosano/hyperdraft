@@ -124,7 +124,7 @@
 	//_ commandsConfirmURLFeed
 
 	moi.commandsConfirmURLFeed = function (inputData, parsedXML) {
-		moi.reactConfirmationType('Feed');
+		moi.reactConfirmationType(OLSKPublicConstants.WKCSubscriptionTypeFeed);
 
 		moi.reactPreviewFeedItems([].slice.call(parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('item')));
 		
@@ -134,7 +134,7 @@
 	//_ commandsConfirmURLFile
 
 	moi.commandsConfirmURLFile = function (inputData, rawData) {
-		moi.reactConfirmationType('File');
+		moi.reactConfirmationType(OLSKPublicConstants.WKCSubscriptionTypeFile);
 		
 		moi.reactPreviewFile(rawData);
 
@@ -144,7 +144,7 @@
 	//_ commandsConfirmURLPage
 
 	moi.commandsConfirmURLPage = function (inputData, parsedHTML) {
-		moi.reactConfirmationType('Page');
+		moi.reactConfirmationType(OLSKPublicConstants.WKCSubscriptionTypePage);
 		
 		moi.reactAlternatives([].slice.call(parsedHTML.getElementsByTagName('link')).filter(function(e) {
 			return e.type.trim().toLowerCase() === 'application/rss+xml';

@@ -6,6 +6,7 @@
 
 const requestPackage = require('request');
 
+var apiSubscriptionsModel = require('../../api/auth-subscriptions/model');
 var apiSubscriptionsMetal = require('../../api/auth-subscriptions/metal');
 var apiArticlesMetal = require('../../api/auth-articles/metal');
 var apiSnapshotsMetal = require('../../api/auth-snapshots/metal');
@@ -51,15 +52,15 @@ exports.WKCTaskSubscriptionsFetch = function() {
 							].join(' '));
 						}
 
-						if (!err && subscriptionObject.WKCSubscriptionType === 'Feed') {
+						if (!err && subscriptionObject.WKCSubscriptionType === apiSubscriptionsModel.WKCSubscriptionTypeFeed()) {
 							articleObjects = articleObjects.concat(diffLibrary.WKCDiffArticlesForFeedRSS(subscriptionObject.WKCSubscriptionFetchContent, body));
 						}
 
-						if (!err && subscriptionObject.WKCSubscriptionType === 'File') {
+						if (!err && subscriptionObject.WKCSubscriptionType === apiSubscriptionsModel.WKCSubscriptionTypeFile()) {
 							articleObjects = articleObjects.concat(diffLibrary.WKCDiffArticlesForFile(subscriptionObject.WKCSubscriptionFetchContent, body));
 						}
 
-						if (!err && subscriptionObject.WKCSubscriptionType === 'Page') {
+						if (!err && subscriptionObject.WKCSubscriptionType === apiSubscriptionsModel.WKCSubscriptionTypePage()) {
 							articleObjects = articleObjects.concat(diffLibrary.WKCDiffArticlesForPage(subscriptionObject.WKCSubscriptionFetchContent, body).map(function(e) {
 								return Object.assign(e, {
 									WKCArticleBody: resolveLibrary.WKCResolveRelativeURLs(subscriptionObject.WKCSubscriptionURL, e.WKCArticleBody),
@@ -161,5 +162,9 @@ exports.WKCActionSubscriptionsIndex = function(req, res, next) {
 	return res.render([
 		__dirname,
 		'index',
-	].join('/'), {});
+	].join('/'), {
+		WKCSubscriptionTypeFeed: apiSubscriptionsModel.WKCSubscriptionTypeFeed(),
+		WKCSubscriptionTypeFile: apiSubscriptionsModel.WKCSubscriptionTypeFile(),
+		WKCSubscriptionTypePage: apiSubscriptionsModel.WKCSubscriptionTypePage(),
+	});
 };
