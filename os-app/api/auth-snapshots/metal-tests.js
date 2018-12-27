@@ -11,7 +11,8 @@ var metalLibrary = require('./metal');
 const kTesting = {
 	kTestingValidSnapshot: function() {
 		return {
-			WKCSnapshotBody: 'alfa',
+			WKCSnapshotSubscriptionID: 'alfa',
+			WKCSnapshotBody: 'bravo',
 		};
 	},
 };
@@ -31,9 +32,9 @@ describe('WKCSnapshotsMetalCreate', function tesSnapshotsMetalCreate() {
 	});
 
 	it('returns WKCErrors if not valid WKCSnapshot', function(done) {
-		metalLibrary.WKCSnapshotsMetalCreate(WKCTestingMongoClient, {
+		metalLibrary.WKCSnapshotsMetalCreate(WKCTestingMongoClient, Object.assign(kTesting.kTestingValidSnapshot(), {
 			WKCSnapshotBody: null,
-		}, function(err, responseJSON) {
+		}), function(err, responseJSON) {
 			assert.deepEqual(responseJSON.WKCErrors, {
 				WKCSnapshotBody: [
 					'WKCErrorNotString',

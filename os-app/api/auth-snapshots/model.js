@@ -13,6 +13,18 @@ exports.WKCSnapshotsModelErrorsFor = function(inputData) {
 
 	var errors = {};
 
+	if (!inputData.WKCSnapshotSubscriptionID) {
+		errors.WKCSnapshotSubscriptionID = [
+			'WKCErrorNotUnempty',
+		];
+	}
+
+	if (typeof inputData.WKCSnapshotSubscriptionID !== 'string') {
+		errors.WKCSnapshotSubscriptionID = [
+			'WKCErrorNotString',
+		];
+	}
+
 	if (typeof inputData.WKCSnapshotBody !== 'string') {
 		errors.WKCSnapshotBody = [
 			'WKCErrorNotString',

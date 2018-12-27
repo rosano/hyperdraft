@@ -11,7 +11,8 @@ var modelLibrary = require('./model');
 const kTesting = {
 	kTestingValidSnapshot: function() {
 		return {
-			WKCSnapshotBody: 'alfa',
+			WKCSnapshotSubscriptionID: 'alfa',
+			WKCSnapshotBody: 'bravo',
 		};
 	},
 };
@@ -22,6 +23,30 @@ describe('WKCSnapshotsModelErrorsFor', function testnapshotsModelErrorsFor() {
 		assert.throws(function() {
 			modelLibrary.WKCSnapshotsModelErrorsFor(null);
 		}, /WKCErrorInvalidInput/);
+	});
+
+	it('returns false with WKCErrors if WKCSnapshotSubscriptionID not string', function() {
+		var item = Object.assign(kTesting.kTestingValidSnapshot(), {
+			WKCSnapshotSubscriptionID: null,
+		});
+
+		assert.deepEqual(modelLibrary.WKCSnapshotsModelErrorsFor(item), {
+			WKCSnapshotSubscriptionID: [
+				'WKCErrorNotString',
+			],
+		});
+	});
+
+	it('returns false with WKCErrors if WKCSnapshotSubscriptionID not unempty', function() {
+		var item = Object.assign(kTesting.kTestingValidSnapshot(), {
+			WKCSnapshotSubscriptionID: '',
+		});
+
+		assert.deepEqual(modelLibrary.WKCSnapshotsModelErrorsFor(item), {
+			WKCSnapshotSubscriptionID: [
+				'WKCErrorNotUnempty',
+			],
+		});
 	});
 
 	it('returns errors if WKCSnapshotBody not string', function() {
