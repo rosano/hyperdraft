@@ -134,17 +134,17 @@ exports._WKCDiffArticleBodyForStrings = function(oldString, newString) {
 	}).map(function(e, index, collection) {
 		if (e.added) {
 			return [
-				'<ins>',
+				'<WKCDiffInsert>',
 				e.value,
-				'</ins>',
+				'</WKCDiffInsert>',
 			].join('');
 		}
 
 		if (e.removed) {
 			return [
-				'<del>',
+				'<WKCDiffDelete>',
 				e.value,
-				'</del>',
+				'</WKCDiffDelete>',
 			].join('');
 		}
 
@@ -208,17 +208,17 @@ exports._WKCDiffArticleBodyForStrings = function(oldString, newString) {
 	}).join('')).map(function(e) {
 		if (e.added === true) {
 			return [
-				'<ins>',
+				'<WKCDiffInsert>',
 				e.value,
-				'</ins>',
+				'</WKCDiffInsert>',
 			].join('');
 		}
 
 		if (e.removed === true) {
 			return [
-				'<del>',
+				'<WKCDiffDelete>',
 				e.value,
-				'</del>',
+				'</WKCDiffDelete>',
 			].join('');
 		}
 
@@ -238,7 +238,7 @@ exports.WKCDiffArticlesForFile = function(oldString, newString) {
 	}
 
 	return [{
-		WKCArticleBody: exports._WKCDiffArticleBodyForStrings(htmlEntitiesInstance.encode(oldString), htmlEntitiesInstance.encode(newString)).replace(/\n/g, '<br>'),
+		WKCArticleBody: exports._WKCDiffArticleBodyForStrings(htmlEntitiesInstance.encode(oldString), htmlEntitiesInstance.encode(newString)).replace(/\n/g, '<br>').replace(/WKCDiffInsert/g, 'ins').replace(/WKCDiffDelete/g, 'del'),
 		WKCArticlePublishDate: new Date(),
 	}];
 };
@@ -258,7 +258,7 @@ exports.WKCDiffArticlesForPage = function(oldString, newString) {
 	}
 
 	return [{
-		WKCArticleBody: showdownPackage.makeHtml(exports._WKCDiffArticleBodyForStrings(oldString, newString)),
+		WKCArticleBody: showdownPackage.makeHtml(exports._WKCDiffArticleBodyForStrings(oldString, newString)).replace(/WKCDiffInsert/g, 'ins').replace(/WKCDiffDelete/g, 'del'),
 		WKCArticlePublishDate: new Date(),
 	}];
 };
