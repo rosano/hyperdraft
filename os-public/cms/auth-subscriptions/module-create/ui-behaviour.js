@@ -96,7 +96,7 @@
 			var parsedXML = (new DOMParser()).parseFromString(data, 'application/xml');
 
 			if (!parsedXML.getElementsByTagName('parsererror').length && parsedXML.documentElement.getElementsByTagName('channel').length) {
-				return moi.commandsConfirmURLFeed(inputData, parsedXML);
+				return moi.commandsConfirmURLFeedRSS(inputData, parsedXML);
 			}
 
 			var parsedHTML = (new DOMParser()).parseFromString(data, 'text/html');
@@ -121,9 +121,9 @@
 		throw error;
 	};
 
-	//_ commandsConfirmURLFeed
+	//_ commandsConfirmURLFeedRSS
 
-	moi.commandsConfirmURLFeed = function (inputData, parsedXML) {
+	moi.commandsConfirmURLFeedRSS = function (inputData, parsedXML) {
 		moi.reactConfirmationType(OLSKPublicConstants.WKCSubscriptionTypeFeedRSS);
 
 		moi.reactPreviewFeedItems([].slice.call(parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('item')));
