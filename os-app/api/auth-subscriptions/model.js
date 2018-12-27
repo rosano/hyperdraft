@@ -6,10 +6,10 @@
 
 var urlPackage = require('url');
 
-//_ WKCSubscriptionTypeFeed
+//_ WKCSubscriptionTypeFeedRSS
 
-exports.WKCSubscriptionTypeFeed = function() {
-	return 'Feed';
+exports.WKCSubscriptionTypeFeedRSS = function() {
+	return 'FeedRSS';
 };
 
 //_ WKCSubscriptionTypeFile
@@ -28,7 +28,7 @@ exports.WKCSubscriptionTypePage = function() {
 
 exports.WKCSubscriptionTypes = function() {
 	return [
-		exports.WKCSubscriptionTypeFeed(),
+		exports.WKCSubscriptionTypeFeedRSS(),
 		exports.WKCSubscriptionTypeFile(),
 		exports.WKCSubscriptionTypePage(),
 	];

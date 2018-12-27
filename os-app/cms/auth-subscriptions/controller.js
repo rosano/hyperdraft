@@ -52,7 +52,7 @@ exports.WKCTaskSubscriptionsFetch = function() {
 							].join(' '));
 						}
 
-						if (!err && subscriptionObject.WKCSubscriptionType === apiSubscriptionsModel.WKCSubscriptionTypeFeed()) {
+						if (!err && subscriptionObject.WKCSubscriptionType === apiSubscriptionsModel.WKCSubscriptionTypeFeedRSS()) {
 							articleObjects = articleObjects.concat(diffLibrary.WKCDiffArticlesForFeedRSS(subscriptionObject.WKCSubscriptionFetchContent, body));
 						}
 
@@ -163,7 +163,7 @@ exports.WKCActionSubscriptionsIndex = function(req, res, next) {
 		__dirname,
 		'index',
 	].join('/'), {
-		WKCSubscriptionTypeFeed: apiSubscriptionsModel.WKCSubscriptionTypeFeed(),
+		WKCSubscriptionTypeFeedRSS: apiSubscriptionsModel.WKCSubscriptionTypeFeedRSS(),
 		WKCSubscriptionTypeFile: apiSubscriptionsModel.WKCSubscriptionTypeFile(),
 		WKCSubscriptionTypePage: apiSubscriptionsModel.WKCSubscriptionTypePage(),
 	});

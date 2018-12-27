@@ -9,6 +9,7 @@ var assert = require('assert');
 var testingLibrary = require('OLSKTesting');
 
 var controllerModule = require('./controller');
+var apiSubscriptionsModel = require('../../api/auth-subscriptions/model');
 
 describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 
@@ -71,7 +72,11 @@ describe('WKCActionSubscriptionsIndex', function testWKCActionSubscriptionsIndex
 	it('returns pageData', function() {
 		assert.deepEqual(controllerModule.WKCActionSubscriptionsIndex(null, testingLibrary.OLSKTestingFakeResponseForRender(function(viewPath, pageData) {
 			return pageData;
-		})), {});
+		})), {
+			WKCSubscriptionTypeFeedRSS: apiSubscriptionsModel.WKCSubscriptionTypeFeedRSS(),
+			WKCSubscriptionTypeFile: apiSubscriptionsModel.WKCSubscriptionTypeFile(),
+			WKCSubscriptionTypePage: apiSubscriptionsModel.WKCSubscriptionTypePage(),
+		});
 	});
 
 });

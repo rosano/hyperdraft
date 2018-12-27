@@ -124,11 +124,11 @@
 	//_ commandsConfirmURLFeed
 
 	moi.commandsConfirmURLFeed = function (inputData, parsedXML) {
-		moi.reactConfirmationType(OLSKPublicConstants.WKCSubscriptionTypeFeed);
+		moi.reactConfirmationType(OLSKPublicConstants.WKCSubscriptionTypeFeedRSS);
 
 		moi.reactPreviewFeedItems([].slice.call(parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('item')));
 		
-		moi.reactPreviewShared(parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('title')[0].textContent.trim(), parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('description')[0].textContent.trim(), OLSKLocalized('WKCSubscriptionsModuleCreatePreviewTypeFeedText'));
+		moi.reactPreviewShared(parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('title')[0].textContent.trim(), parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('description')[0].textContent.trim(), OLSKLocalized('WKCSubscriptionsModuleCreatePreviewTypeFeedRSSText'));
 	};
 
 	//_ commandsConfirmURLFile
