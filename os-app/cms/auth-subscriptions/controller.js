@@ -54,15 +54,15 @@ exports.WKCTaskSubscriptionsFetch = function() {
 							}
 
 							if (!err && subscriptionObject.WKCSubscriptionType === apiSubscriptionsModel.WKCSubscriptionTypeFeedRSS()) {
-								articleObjects = articleObjects.concat(diffLibrary.WKCDiffArticlesForFeedRSS(subscriptionObject.WKCSubscriptionFetchContent, body));
+								articleObjects.push(...diffLibrary.WKCDiffArticlesForFeedRSS(subscriptionObject.WKCSubscriptionFetchContent, body));
 							}
 
 							if (!err && subscriptionObject.WKCSubscriptionType === apiSubscriptionsModel.WKCSubscriptionTypeFile()) {
-								articleObjects = articleObjects.concat(diffLibrary.WKCDiffArticlesForFile(subscriptionObject.WKCSubscriptionFetchContent, body));
+								articleObjects.push(...diffLibrary.WKCDiffArticlesForFile(subscriptionObject.WKCSubscriptionFetchContent, body));
 							}
 
 							if (!err && subscriptionObject.WKCSubscriptionType === apiSubscriptionsModel.WKCSubscriptionTypePage()) {
-								articleObjects = articleObjects.concat(diffLibrary.WKCDiffArticlesForPage(subscriptionObject.WKCSubscriptionFetchContent, body).map(function(e) {
+								articleObjects.push(...diffLibrary.WKCDiffArticlesForPage(subscriptionObject.WKCSubscriptionFetchContent, body).map(function(e) {
 									return Object.assign(e, {
 										WKCArticleBody: resolveLibrary.WKCResolveRelativeURLs(subscriptionObject.WKCSubscriptionURL, e.WKCArticleBody),
 									});
