@@ -165,7 +165,10 @@
 		moi.reactConfirmationType(OLSKPublicConstants.WKCSubscriptionTypePage);
 		
 		moi.reactAlternatives([].slice.call(parsedHTML.getElementsByTagName('link')).filter(function(e) {
-			return e.type.trim().toLowerCase() === 'application/rss+xml';
+			return [
+				'application/rss+xml',
+				'application/atom+xml',
+				].indexOf(e.type.trim().toLowerCase()) !== -1;
 		}).map(function(e) {
 			return WKSubscriptionsLogic.WKSubscriptionsModuleCreateCompleteURL(d3.select(e).attr('href'), inputData);
 		}));
