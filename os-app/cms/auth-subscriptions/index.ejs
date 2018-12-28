@@ -68,7 +68,21 @@ locals.OLSKPagePublicRouteKeys = [
 
 	<div id="WKCSubscriptionsSources">
 		<div id="WKCSubscriptionsSourcesContent">
-			<h5 id="WKCSubscriptionsSourcesContentHeading"><%= OLSKLocalized('WKCSubscriptionsSourcesContentHeadingText') %></h5>
+			<ul id="WKCSubscriptionsSourcesContentList">
+				<li>
+					<h6 id="WKCSubscriptionsSourcesContentListGeneralHeading" class="WKCSubscriptionsSourcesContentListHeading">&nbsp;</h6>
+
+					<ul id="WKCSubscriptionsSourcesContentListGeneralList" class="WKCSubscriptionsSourcesContentListChildList">
+						<li class="WKCSubscriptionsSourcesContentListChildListItem WKCSubscriptionsSourcesContentListChildListItemSelected WKCSharedElementTappable"><span class="WKCSubscriptionsText"><%= OLSKLocalized('WKCSubscriptionsSourcesContentListItemInboxText') %></span></li>
+					</ul>
+				</li>
+				<li>
+					<h6 class="WKCSubscriptionsSourcesContentListHeading"><span class="WKCSubscriptionsText"><%= OLSKLocalized('WKCSubscriptionsHeadingText') %></span></h6>
+
+					<ul id="WKCSubscriptionsSourcesContentListSubscriptionsList" class="WKCSubscriptionsSourcesContentListChildList"></ul>
+				</li>
+				
+			</ul>
 		</div>
 	</div>
 

@@ -108,14 +108,68 @@ body {
 }
 
 #WKCSubscriptionsSourcesContent {
-	padding: 6px;
+	cursor: default;
+
+	/* @DisableTextSelection */
+	-webkit-touch-callout: none; /* iOS Safari */
+	-webkit-user-select: none; /* Safari */
+	-khtml-user-select: none; /* Konqueror HTML */
+	-moz-user-select: none; /* Firefox */
+	-ms-user-select: none; /* Internet Explorer/Edge */
+	user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
 
 	/* @FlexboxWKCSubscriptionsSources child */
 	overflow: auto;
 }
 
-#WKCSubscriptionsSourcesContentHeading {
+#WKCSubscriptionsSourcesContentList {
+	/* browser defaults */
+	padding-left: 0;
 	margin: 0;
+}
+
+#WKCSubscriptionsSourcesContentList li {
+	/* browser defaults */
+	list-style: none;
+}
+
+.WKCSubscriptionsSourcesContentListHeading {
+	margin: 0;
+	border-bottom: 1px solid #ddd;
+
+	font-size: 110%;
+	text-transform: uppercase;
+	text-align: center;
+}
+
+#WKCSubscriptionsSourcesContentListGeneralHeading {
+	border-bottom: none;
+}
+
+.WKCSubscriptionsSourcesContentListHeading .WKCSubscriptionsText {
+	opacity: 0.5;
+}
+
+.WKCSubscriptionsSourcesContentListChildList {
+	padding: 5px 0;
+
+	font-size: 80%;
+
+	/* browser defaults */
+	padding-left: 0;
+	margin: 0;
+}
+
+.WKCSubscriptionsSourcesContentListChildListItem {
+	padding: 5px;
+}
+
+.WKCSubscriptionsSourcesContentListChildListItem .WKCSubscriptionsText {
+	opacity: 0.7;
+}
+
+.WKCSubscriptionsSourcesContentListChildListItemSelected {
+	background: #d9d9d9;
 }
 
 #WKCSubscriptionsMaster {
