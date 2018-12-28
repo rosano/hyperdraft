@@ -1,3 +1,4 @@
+WKCSubscriptionsModuleCreateHeadingText: Add subscription
 WKCSubscriptionsModuleCreateFetchFormSubmitText: Fetch
 WKCSubscriptionsModuleCreateErrorFetchText: Error fetching URL. Please check the input and try again.
 WKCSubscriptionsModuleCreateErrorCreateText: Error adding subscription. Please check the input and try again.
