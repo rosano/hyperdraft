@@ -248,6 +248,7 @@
 			Object.assign(subscriptionObject, responseJSON);
 
 			moi.commandsConfirmationClear();
+			moi.reactFetchFlash(OLSKFormatted(OLSKLocalized('WKCSubscriptionsModuleCreateFlashFormat'), subscriptionObject.WKCSubscriptionURL));
 		}, moi._commandsSubscriptionsAlertErrorCreate);
 	};
 
@@ -271,6 +272,26 @@
 
 	moi.reactFetchLoaderVisibility = function (isVisible) {
 		d3.select('#WKCSubscriptionsModuleCreateLoader').classed('WKCSubscriptionsHidden', !isVisible);
+	};
+
+	//_ reactFetchFlash
+
+	moi.reactFetchFlash = function (inputData) {
+		d3.select('#WKCSubscriptionsModuleCreateFetchFlash')
+			.text(inputData)
+			.classed('WKCSubscriptionsHidden', false)
+			.style('opacity', 0)
+			.transition()
+				.duration(275)
+				.style('opacity', 1)
+				.transition()
+					.delay(2000)
+					.style('opacity', 0)
+					.on('end', function () {
+						d3.select('#WKCSubscriptionsModuleCreateFetchFlash')
+		        	.text(inputData)
+		        	.classed('WKCSubscriptionsHidden', true);
+		      });
 	};
 
 	//_ reactAlternatives

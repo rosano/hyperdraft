@@ -12,3 +12,4 @@ WKCSubscriptionsModuleCreatePreviewTypeFeedRSSText: RSS Feed
 WKCSubscriptionsModuleCreatePreviewTypeFeedAtomText: Atom Feed
 WKCSubscriptionsModuleCreatePreviewTypeFileText: File
 WKCSubscriptionsModuleCreatePreviewTypePageText: Page
+WKCSubscriptionsModuleCreateFlashFormat: Subscribed to %@
