@@ -292,8 +292,7 @@
 			.classed('WKCSubscriptionsText', true);
 
 		parentElement.append('span')
-			.attr('class', 'WKCSubscriptionsSourcesContentListChildListItemName')
-			.classed('WKCSubscriptionsText', true);
+			.attr('class', 'WKCSubscriptionsSourcesContentListChildListItemName');
 
 		parentElement.append('span')
 			.attr('class', 'WKCSubscriptionsSourcesContentListChildListItemUnreadCount')
@@ -311,6 +310,7 @@
 				margin: 0.2,
 				size: 20,
 				format: 'svg',
+				foreground: [0, 0, 0, 255],
 		  }).toString();
 		});
 
