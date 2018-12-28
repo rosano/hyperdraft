@@ -67,13 +67,20 @@ locals.OLSKPagePublicRouteKeys = [
 	</div>
 
 	<div id="WKCSubscriptionsSources">
+		<header id="WKCSubscriptionsSourcesToolbar" class="WKCSharedToolbar">&nbsp;</header>
+
 		<div id="WKCSubscriptionsSourcesContent">
 			<ul id="WKCSubscriptionsSourcesContentList">
 				<li>
-					<h6 id="WKCSubscriptionsSourcesContentListGeneralHeading" class="WKCSubscriptionsSourcesContentListHeading">&nbsp;</h6>
+					<!-- <h6 id="WKCSubscriptionsSourcesContentListGeneralHeading" class="WKCSubscriptionsSourcesContentListHeading">&nbsp;</h6> -->
 
 					<ul id="WKCSubscriptionsSourcesContentListGeneralList" class="WKCSubscriptionsSourcesContentListChildList">
-						<li class="WKCSubscriptionsSourcesContentListChildListItem WKCSubscriptionsSourcesContentListChildListItemSelected WKCSharedElementTappable"><span class="WKCSubscriptionsText"><%= OLSKLocalized('WKCSubscriptionsSourcesContentListItemInboxText') %></span></li>
+						<li class="WKCSubscriptionsSourcesContentListChildListItem WKCSubscriptionsSourcesContentListChildListItemSelected WKCSharedElementTappable">
+							<span class="WKCSubscriptionsSourcesContentListChildListItemName WKCSubscriptionsText"><%= OLSKLocalized('WKCSubscriptionsSourcesContentListItemInboxText') %></span>
+							<span class="WKCSubscriptionsSourcesContentListChildListItemUnreadCount">
+								<span class="WKCSubscriptionsText">123</span>
+							</span>
+						</li>
 					</ul>
 				</li>
 				<li>
