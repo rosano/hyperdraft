@@ -161,6 +161,9 @@ body {
 
 .WKCSubscriptionsSourcesContentListChildListItem {
 	padding: 5px;
+	min-height: 20px;
+
+	white-space: nowrap;
 
 	/* @FlexboxWKCSubscriptionsSources parent */
 	display: flex;
@@ -180,17 +183,21 @@ body {
 
 	/* @FlexboxWKCSubscriptionsMasterContentListItemContext child */
 	flex-grow: 1;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .WKCSubscriptionsSourcesContentListChildListItemUnreadCount {
 	padding: 4px 6px;
 	border-radius: 10px;
+	min-width: 10px;
 	
 	background: #7f7f7f;
 	color: #ffffff;
 	
 	font-size: 85%;
 	font-weight: bold;
+	text-align: center;
 }
 
 .WKCSubscriptionsSourcesContentListChildListItemUnreadCount .WKCSubscriptionsText {
@@ -240,7 +247,7 @@ body {
 }
 
 .WKCSubscriptionsMasterContentListItemSelected {
-	background: #ddd;
+	background: #e6e6e6;
 }
 
 .WKCSubscriptionsMasterContentListItemContext {

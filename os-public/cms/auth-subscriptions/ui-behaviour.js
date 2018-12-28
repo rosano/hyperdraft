@@ -36,6 +36,8 @@
 			return WKSubscriptionsPropertySubscriptionObjects;
 		}
 
+		moi.reactSubscriptionObjects(inputData);
+
 		moi._propertiesSubscriptionObjectsByID((WKSubscriptionsPropertySubscriptionObjects = inputData).reduce(function(map, e) {
 			map[e.WKCSubscriptionID] = e;
 			return map;
@@ -190,6 +192,8 @@
 			d3.selectAll('.WKCSubscriptionsMasterContentListItem').filter(function(obj) {
 				return obj === item;
 			}).classed('WKCSubscriptionsMasterContentListItemUnread', false);
+
+			moi.reactSourcesUnreadCount();
 		}, moi.commandsArticlesAlertErrorMarkAsRead);
 	};
 
@@ -273,11 +277,42 @@
 
 	//# REACT
 
+	//_ reactSubscriptionObjects
+
+	moi.reactSubscriptionObjects = function (subscriptionObjects) {
+		var selection = d3.select('#WKCSubscriptionsSourcesContentListSubscriptionsList')
+			.selectAll('.WKCSubscriptionsSourcesContentListChildListItem').data(subscriptionObjects);
+		
+		var parentElement = selection.enter()
+			.append('li')
+				.attr('class', 'WKCSubscriptionsSourcesContentListChildListItem')
+				.classed('WKCSharedElementTappable', true);
+
+		parentElement.append('span')
+			.attr('class', 'WKCSubscriptionsSourcesContentListChildListItemName')
+			.classed('WKCSubscriptionsText', true);
+
+		parentElement.append('span')
+			.attr('class', 'WKCSubscriptionsSourcesContentListChildListItemUnreadCount')
+			.append('span')
+				.classed('WKCSubscriptionsText', true);
+
+		parentElement = parentElement.merge(selection);
+
+		parentElement.select('.WKCSubscriptionsSourcesContentListChildListItemName').text(function(obj) {
+			return obj.WKCSubscriptionName;
+		});
+
+		moi.reactSourcesUnreadCount();
+
+		selection.exit().remove();
+	};
+
 	//_ reactArticleObjects
 
-	moi.reactArticleObjects = function (noteObjects) {
+	moi.reactArticleObjects = function (articleObjects) {
 		var selection = d3.select('#WKCSubscriptionsMasterContent')
-			.selectAll('.WKCSubscriptionsMasterContentListItem').data(noteObjects);
+			.selectAll('.WKCSubscriptionsMasterContentListItem').data(articleObjects);
 		
 		var parentElement = selection.enter()
 			.append('div')
@@ -334,6 +369,51 @@
 		d3.select('#WKCSubscriptionsCreate').classed('WKCSubscriptionsCreateInactive', !isVisible);
 	};
 
+	//_ reactSourcesUnreadCount
+
+	moi.reactSourcesUnreadCount = function () {
+		console.log(moi.propertiesArticleObjects().filter(function (e) {
+				return !e.WKCArticleIsRead;
+			}));
+		d3.select('#WKCSubscriptionsSourcesContentListGeneralListItemInbox .WKCSubscriptionsSourcesContentListChildListItemUnreadCount')
+			.classed('WKCSubscriptionsHidden', !moi.propertiesArticleObjects().filter(function (e) {
+				return !e.WKCArticleIsRead;
+			}).length)
+			.select('.WKCSubscriptionsText')
+				.text(moi.propertiesArticleObjects().filter(function (e) {
+					return !e.WKCArticleIsRead;
+				}).length);
+
+		d3.selectAll('#WKCSubscriptionsSourcesContentListSubscriptionsList .WKCSubscriptionsSourcesContentListChildListItemUnreadCount')
+			.classed('WKCSubscriptionsHidden', function(obj) {
+				return !moi.propertiesArticleObjects().filter(function (e) {
+					if (e.WKCArticleSubscriptionID !== obj.WKCSubscriptionID) {
+						return false;
+					}
+
+					if (e.WKCArticleIsRead) {
+						return false;
+					}
+
+					return true;
+				}).length;
+			})
+			.select('.WKCSubscriptionsText')
+				.text(function(obj) {
+					return moi.propertiesArticleObjects().filter(function (e) {
+						if (e.WKCArticleSubscriptionID !== obj.WKCSubscriptionID) {
+							return false;
+						}
+
+						if (e.WKCArticleIsRead) {
+							return false;
+						}
+
+						return true;
+					}).length;
+				});
+	};
+
 	//_ reactSelectedArticle
 
 	moi.reactSelectedArticle = function () {
@@ -384,6 +464,8 @@
 		moi.setupAPIToken(function () {
 			moi.setupSubscriptionObjects(function() {
 				moi.setupArticleObjects(function() {
+					moi.setupSourceList();
+					
 					d3.select('#WKCSubscriptions').classed('WKCSubscriptionsLoading', false);
 				});
 			});
@@ -452,6 +534,12 @@
 
 			completionHandler();
 		}, moi.commandsAlertConnectionError);
+	};
+
+	//_ setupSourceList
+
+	moi.setupSourceList = function () {
+		moi.propertiesSubscriptionObjects(moi.propertiesSubscriptionObjects());
 	};
 
 	//# LIFECYCLE
