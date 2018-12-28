@@ -41,7 +41,9 @@
 
 	<% if (locals.OLSKPagePublicLocalizedStringKeys) { %>
 	<script src="/shared-assets/vendor/OLSKInternational/main.js"></script>
+	<script src="/shared-assets/vendor/OLSKString/main.js"></script>
 	<script type="text/javascript">
+		window.OLSKFormatted = OLSKString.OLSKStringWithFormat;
 		window.OLSKLocalized = function(translationConstant) {
 			return OLSKInternational.OLSKInternationalLocalizedStringWithTranslationKeyAndTranslationDictionary(translationConstant, <%- JSON.stringify(OLSKPagePublicLocalizedStringKeys.reduce(function(map, e) {
 					map[e] = OLSKLocalized(e);
