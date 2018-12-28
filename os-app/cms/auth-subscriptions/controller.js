@@ -57,7 +57,11 @@ exports.WKCTaskSubscriptionsFetch = function() {
 						var articleObjects = [];
 
 						(function WKCTaskSubscriptionsFetchProcess() {
-							if (!err && res.statusCode === 404) {
+							if (err) {
+								return;
+							}
+
+							if (res.statusCode === 404) {
 								return (err = new Error([
 									res.statusCode,
 									res.statusMessage,
