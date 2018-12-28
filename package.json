@@ -38,6 +38,7 @@
     "OLSKRouting": "https://github.com/olsk/OLSKRouting.git#master",
     "OLSKTasks": "https://github.com/olsk/OLSKTasks.git#master",
     "OLSKType": "https://github.com/olsk/OLSKType.git#master",
+    "OLSKString": "https://github.com/olsk/OLSKString.git#master",
     "ispinner.css": "latest",
     "turndown": "latest",
     "showdown": "latest",
