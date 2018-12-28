@@ -17,6 +17,8 @@ function install() {
 		'OLSKType',
 		'OLSKString',
 		'ispinner.css',
+		'identicon.js',
+		'blueimp-md5',
 		'turndown',
 		'showdown',
 		'moment',

@@ -288,6 +288,9 @@
 				.attr('class', 'WKCSubscriptionsSourcesContentListChildListItem')
 				.classed('WKCSharedElementTappable', true);
 
+		parentElement.append('img')
+			.classed('WKCSubscriptionsText', true);
+
 		parentElement.append('span')
 			.attr('class', 'WKCSubscriptionsSourcesContentListChildListItemName')
 			.classed('WKCSubscriptionsText', true);
@@ -301,6 +304,14 @@
 
 		parentElement.select('.WKCSubscriptionsSourcesContentListChildListItemName').text(function(obj) {
 			return obj.WKCSubscriptionName;
+		});
+
+		parentElement.select('img').attr('src', function (e) {
+			return 'data:image/svg+xml;base64,' + new Identicon(md5(e.WKCSubscriptionURL), {
+				margin: 0.2,
+				size: 20,
+				format: 'svg',
+		  }).toString();
 		});
 
 		moi.reactSourcesUnreadCount();
@@ -372,9 +383,6 @@
 	//_ reactSourcesUnreadCount
 
 	moi.reactSourcesUnreadCount = function () {
-		console.log(moi.propertiesArticleObjects().filter(function (e) {
-				return !e.WKCArticleIsRead;
-			}));
 		d3.select('#WKCSubscriptionsSourcesContentListGeneralListItemInbox .WKCSubscriptionsSourcesContentListChildListItemUnreadCount')
 			.classed('WKCSubscriptionsHidden', !moi.propertiesArticleObjects().filter(function (e) {
 				return !e.WKCArticleIsRead;

@@ -40,6 +40,8 @@
     "OLSKType": "https://github.com/olsk/OLSKType.git#master",
     "OLSKString": "https://github.com/olsk/OLSKString.git#master",
     "ispinner.css": "latest",
+    "identicon.js": "latest",
+    "blueimp-md5": "latest",
     "turndown": "latest",
     "showdown": "latest",
     "moment": "latest",
