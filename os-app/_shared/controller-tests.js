@@ -6,15 +6,15 @@
 
 var assert = require('assert');
 
-var sharedController = require('./controller');
+var controllerModule = require('./controller');
 
 describe('OLSKControllerSharedConnections', function testOLSKControllerSharedConnections() {
 
 	it('returns connection functions', function() {
-		assert.deepEqual(sharedController.OLSKControllerSharedConnections(), {
+		assert.deepEqual(controllerModule.OLSKControllerSharedConnections(), {
 			WKCSharedConnectionMongo: {
-				OLSKConnectionInitializer: sharedController.WKCSharedConnectionInitializerMongo,
-				OLSKConnectionCleanup: sharedController.WKCSharedConnectionCleanupMongo,
+				OLSKConnectionInitializer: controllerModule.WKCSharedConnectionInitializerMongo,
+				OLSKConnectionCleanup: controllerModule.WKCSharedConnectionCleanupMongo,
 			},
 		});
 	});
@@ -24,8 +24,8 @@ describe('OLSKControllerSharedConnections', function testOLSKControllerSharedCon
 describe('OLSKControllerSharedMiddlewares', function testOLSKControllerSharedMiddlewares() {
 
 	it('returns middleware functions', function() {
-		assert.deepEqual(sharedController.OLSKControllerSharedMiddlewares(), {
-			WKCSharedMiddlewareEnsureDatabase: sharedController.WKCSharedMiddlewareEnsureDatabase,
+		assert.deepEqual(controllerModule.OLSKControllerSharedMiddlewares(), {
+			WKCSharedMiddlewareEnsureDatabase: controllerModule.WKCSharedMiddlewareEnsureDatabase,
 		});
 	});
 
@@ -48,24 +48,39 @@ describe('WKCSharedMiddlewareEnsureDatabase', function testWKCSharedMiddlewareEn
 	};
 
 	it('returns next(WKCErrorConnectionNotAttempted) if not attempted', function() {
-		assert.deepEqual(sharedController.WKCSharedMiddlewareEnsureDatabase(fakeRequest({
+		assert.deepEqual(controllerModule.WKCSharedMiddlewareEnsureDatabase(fakeRequest({
 			OLSKConnectionAttempted: false,
 		}), fakeResponse, fakeNext), new Error('WKCErrorConnectionNotAttempted'));
 	});
 
 	it('returns next(WKCErrorConnectionFailed) if error', function() {
 		var error = new Error('MongoErrorConnectionFailed');
-		assert.deepEqual(sharedController.WKCSharedMiddlewareEnsureDatabase(fakeRequest({
+		assert.deepEqual(controllerModule.WKCSharedMiddlewareEnsureDatabase(fakeRequest({
 			OLSKConnectionAttempted: true,
 			OLSKConnectionError: error,
 		}), fakeResponse, fakeNext), error);
 	});
 
 	it('returns next(undefined) if no error', function() {
-		assert.strictEqual(sharedController.WKCSharedMiddlewareEnsureDatabase(fakeRequest({
+		assert.strictEqual(controllerModule.WKCSharedMiddlewareEnsureDatabase(fakeRequest({
 			OLSKConnectionAttempted: true,
 			OLSKConnectionError: null,
 		}), fakeResponse, fakeNext), 'RETURNED_UNDEFINED');
+	});
+
+});
+
+describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
+
+	it('returns route objects', function() {
+		assert.deepEqual(controllerModule.OLSKControllerRoutes(), {
+			WKCRouteSharedIgnoreMapJS: {
+				OLSKRoutePath: /\/shared-assets\/vendor\/.*\.map/,
+				OLSKRouteMethod: 'get',
+				OLSKRouteFunction: controllerModule.WKCActionIgnoreMapJS,
+				OLSKRouteLanguages: ['en'],
+			},
+		});
 	});
 
 });
