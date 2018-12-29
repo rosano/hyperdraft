@@ -383,7 +383,7 @@
 	//_ reactSourcesUnreadCount
 
 	moi.reactSourcesUnreadCount = function () {
-		d3.select('#WKCSubscriptionsSourcesContentListGeneralListItemInbox .WKCSubscriptionsSourcesContentListChildListItemUnreadCount')
+		d3.select('#WKCSubscriptionsSourcesContentListOutlooksListItemInbox .WKCSubscriptionsSourcesContentListChildListItemUnreadCount')
 			.classed('WKCSubscriptionsHidden', !moi.propertiesArticleObjects().filter(function (e) {
 				return !e.WKCArticleIsRead;
 			}).length)
