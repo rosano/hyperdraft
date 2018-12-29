@@ -132,6 +132,10 @@ body {
 	list-style: none;
 }
 
+.WKCSubscriptionsSourcesContentListHeading, #WKCSubscriptionsSourcesContentListSubscriptionsList {
+	display: none;
+}
+
 .WKCSubscriptionsSourcesContentListHeading {
 	margin: 0;
 	border-bottom: 1px solid #ddd;
