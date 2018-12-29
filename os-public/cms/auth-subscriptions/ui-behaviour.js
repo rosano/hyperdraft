@@ -16,6 +16,10 @@
 	var WKSubscriptionsPropertySubscriptionObjects;
 	var WKSubscriptionsPropertySubscriptionObjectsByID;
 	var WKSubscriptionsPropertySelectedArticle;
+	var kWKCSubscriptionsOutlookInbox;
+	var kWKCSubscriptionsOutlookArchived;
+	var kWKCSubscriptionsOutlookObjects;
+	
 
 	//# PROPERTIES
 
@@ -275,13 +279,19 @@
 		throw error;
 	};
 
+	//_ commandsSourcesSelectOutlook
+
+	moi.commandsSourcesSelectOutlook = function (inputData) {
+		moi.reactSourcesOutlooksSelected(inputData);
+	};
+
 	//# REACT
 
-	//_ reactOutlooksData
+	//_ reactSourcesOutlookObjects
 
-	moi.reactOutlooksData = function (inputData) {
+	moi.reactSourcesOutlookObjects = function (outlookObjects) {
 		var selection = d3.select('#WKCSubscriptionsSourcesContentListOutlooksList')
-			.selectAll('.WKCSubscriptionsSourcesContentListChildListItem').data(inputData);
+			.selectAll('.WKCSubscriptionsSourcesContentListChildListItem').data(outlookObjects);
 		
 		var parentElement = selection.enter()
 			.append('li')
@@ -319,6 +329,15 @@
 		});
 
 		selection.exit().remove();
+	};
+
+	//_ reactSourcesOutlooksSelected
+
+	moi.reactSourcesOutlooksSelected = function (inputData) {
+		d3.selectAll('.WKCSubscriptionsSourcesContentListChildListItem')
+			.classed('WKCSubscriptionsSourcesContentListChildListItemSelected', function (obj) {
+				return obj === inputData;
+			});
 	};
 
 	//_ reactSubscriptionObjects
@@ -428,6 +447,8 @@
 	//_ reactSourcesUnreadCount
 
 	moi.reactSourcesUnreadCount = function () {
+		console.log(d3.select('#WKCSubscriptionsSourcesContentListOutlooksListItemInbox')
+		);
 		d3.select('#WKCSubscriptionsSourcesContentListOutlooksListItemInbox .WKCSubscriptionsSourcesContentListChildListItemUnreadCount')
 			.classed('WKCSubscriptionsHidden', !moi.propertiesArticleObjects().filter(function (e) {
 				return !e.WKCArticleIsRead;
@@ -592,20 +613,27 @@
 	//_ setupSourceList
 
 	moi.setupSourceList = function () {
-		moi.reactOutlooksData([
-			{
-				WKCOutlookID: 'WKCSubscriptionsSourcesContentListOutlooksListItemInbox',
-				WKCOutlookText: OLSKLocalized('WKCSubscriptionsSourcesContentListItemInboxText'),
-				WKCOutlookData: {},
-			},
-			{
-				WKCOutlookID: 'WKCSubscriptionsSourcesContentListOutlooksListItemArchived',
-				WKCOutlookText: OLSKLocalized('WKCSubscriptionsSourcesContentListItemArchivedText'),
-				WKCOutlookData: {},
-			},
-		]);
+		// browser quirks: call OLSKLocalized after package is loaded
+		kWKCSubscriptionsOutlookInbox = {
+			WKCOutlookID: 'WKCSubscriptionsSourcesContentListOutlooksListItemInbox',
+			WKCOutlookText: OLSKLocalized('WKCSubscriptionsSourcesContentListItemInboxText'),
+			WKCOutlookData: {},
+		};
+		kWKCSubscriptionsOutlookArchived = {
+			WKCOutlookID: 'WKCSubscriptionsSourcesContentListOutlooksListItemArchived',
+			WKCOutlookText: OLSKLocalized('WKCSubscriptionsSourcesContentListItemArchivedText'),
+			WKCOutlookData: {},
+		};
+		kWKCSubscriptionsOutlookObjects = [
+			kWKCSubscriptionsOutlookInbox,
+			kWKCSubscriptionsOutlookArchived,
+		];
+
+		moi.reactSourcesOutlookObjects(kWKCSubscriptionsOutlookObjects);
 
 		moi.propertiesSubscriptionObjects(moi.propertiesSubscriptionObjects());
+
+		moi.commandsSourcesSelectOutlook(kWKCSubscriptionsOutlookInbox);
 	};
 
 	//# LIFECYCLE
