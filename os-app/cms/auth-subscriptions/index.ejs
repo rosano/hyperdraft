@@ -17,6 +17,8 @@ locals.OLSKPageAssets = [
 locals.OLSKPagePublicLocalizedStringKeys = [
 	'WKSharedErrorServiceUnavailable',
 	'WKSharedErrorTokenUnavailable',
+	'WKCSubscriptionsSourcesContentListItemInboxText',
+	'WKCSubscriptionsSourcesContentListItemArchivedText',
 	'WKCSubscriptionsErrorArticlesMarkAsDiscardedText',
 	'WKCSubscriptionsErrorArticlesMarkAsReadText',
 	'WKCSubscriptionsErrorArticlesUnavailableText',
@@ -76,14 +78,7 @@ locals.OLSKPagePublicRouteKeys = [
 				<li>
 					<!-- <h6 id="WKCSubscriptionsSourcesContentListOutlooksHeading" class="WKCSubscriptionsSourcesContentListHeading">&nbsp;</h6> -->
 
-					<ul id="WKCSubscriptionsSourcesContentListOutlooksList" class="WKCSubscriptionsSourcesContentListChildList">
-						<li id="WKCSubscriptionsSourcesContentListOutlooksListItemInbox" class="WKCSubscriptionsSourcesContentListChildListItem WKCSubscriptionsSourcesContentListChildListItemSelected WKCSharedElementTappable">
-							<span class="WKCSubscriptionsSourcesContentListChildListItemName WKCSubscriptionsText"><%= OLSKLocalized('WKCSubscriptionsSourcesContentListItemInboxText') %></span>
-							<span class="WKCSubscriptionsSourcesContentListChildListItemUnreadCount">
-								<span class="WKCSubscriptionsText"></span>
-							</span>
-						</li>
-					</ul>
+					<ul id="WKCSubscriptionsSourcesContentListOutlooksList" class="WKCSubscriptionsSourcesContentListChildList"></ul>
 				</li>
 				<li>
 					<h6 class="WKCSubscriptionsSourcesContentListHeading"><span class="WKCSubscriptionsText"><%= OLSKLocalized('WKCSubscriptionsHeadingText') %></span></h6>

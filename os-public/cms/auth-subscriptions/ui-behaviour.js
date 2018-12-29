@@ -277,6 +277,49 @@
 
 	//# REACT
 
+	//_ reactOutlooksData
+
+	moi.reactOutlooksData = function (inputData) {
+		var selection = d3.select('#WKCSubscriptionsSourcesContentListOutlooksList')
+			.selectAll('.WKCSubscriptionsSourcesContentListChildListItem').data(inputData);
+		
+		var parentElement = selection.enter()
+			.append('li')
+				.attr('id', function (obj) {
+					return obj.WKCOutlookID
+				})
+				.classed('WKCSubscriptionsSourcesContentListChildListItem', true)
+				.classed('WKCSharedElementTappable', true);
+
+		parentElement.append('img');
+
+		parentElement.append('span')
+			.classed('WKCSubscriptionsSourcesContentListChildListItemName', true)
+			.classed('WKCSubscriptionsText', true);
+
+		parentElement.append('span')
+			.attr('class', 'WKCSubscriptionsSourcesContentListChildListItemUnreadCount')
+			.append('span')
+				.classed('WKCSubscriptionsText', true);
+
+		parentElement = parentElement.merge(selection);
+
+		parentElement.select('.WKCSubscriptionsSourcesContentListChildListItemName').text(function(obj) {
+			return obj.WKCOutlookText;
+		});
+
+		parentElement.select('img').attr('src', function (e) {
+			return 'data:image/svg+xml;base64,' + new Identicon(md5(e.WKCOutlookID), {
+				margin: 0.2,
+				size: 20,
+				format: 'svg',
+				foreground: [0, 0, 0, 255],
+		  }).toString();
+		});
+
+		selection.exit().remove();
+	};
+
 	//_ reactSubscriptionObjects
 
 	moi.reactSubscriptionObjects = function (subscriptionObjects) {
@@ -547,6 +590,19 @@
 	//_ setupSourceList
 
 	moi.setupSourceList = function () {
+		moi.reactOutlooksData([
+			{
+				WKCOutlookID: 'WKCSubscriptionsSourcesContentListOutlooksListItemInbox',
+				WKCOutlookText: OLSKLocalized('WKCSubscriptionsSourcesContentListItemInboxText'),
+				WKCOutlookData: {},
+			},
+			{
+				WKCOutlookID: 'WKCSubscriptionsSourcesContentListOutlooksListItemArchived',
+				WKCOutlookText: OLSKLocalized('WKCSubscriptionsSourcesContentListItemArchivedText'),
+				WKCOutlookData: {},
+			},
+		]);
+
 		moi.propertiesSubscriptionObjects(moi.propertiesSubscriptionObjects());
 	};
 
