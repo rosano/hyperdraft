@@ -18,8 +18,6 @@
 	var WKSubscriptionsPropertySelectedArticle;
 	var kWKCSubscriptionsOutlookInbox;
 	var kWKCSubscriptionsOutlookArchived;
-	var kWKCSubscriptionsOutlookObjects;
-	
 
 	//# PROPERTIES
 
@@ -31,6 +29,16 @@
 		}
 
 		WKSubscriptionsPropertyAPIToken = inputData;
+	};
+
+	//_ propertiesOutlookObjects
+
+	moi.propertiesOutlookObjects = function (inputData) {
+		if (typeof inputData === 'undefined') {
+			return d3.selectAll('#WKCSubscriptionsSourcesContentListOutlooksList .WKCSubscriptionsSourcesContentListChildListItem').data();
+		}
+
+		moi.reactOutlookObjects(inputData);
 	};
 
 	//_ propertiesSubscriptionObjects
@@ -287,11 +295,10 @@
 
 	//# REACT
 
-	//_ reactSourcesOutlookObjects
+	//_ reactOutlookObjects
 
-	moi.reactSourcesOutlookObjects = function (outlookObjects) {
-		var selection = d3.select('#WKCSubscriptionsSourcesContentListOutlooksList')
-			.selectAll('.WKCSubscriptionsSourcesContentListChildListItem').data(outlookObjects);
+	moi.reactOutlookObjects = function (outlookObjects) {
+		var selection = d3.select('#WKCSubscriptionsSourcesContentListOutlooksList').selectAll('.WKCSubscriptionsSourcesContentListChildListItem').data(outlookObjects);
 		
 		var parentElement = selection.enter()
 			.append('li')
@@ -449,8 +456,6 @@
 	//_ reactSourcesUnreadCount
 
 	moi.reactSourcesUnreadCount = function () {
-		console.log(d3.select('#WKCSubscriptionsSourcesContentListOutlooksListItemInbox')
-		);
 		d3.select('#WKCSubscriptionsSourcesContentListOutlooksListItemInbox .WKCSubscriptionsSourcesContentListChildListItemUnreadCount')
 			.classed('WKCSubscriptionsHidden', !moi.propertiesArticleObjects().filter(function (e) {
 				return !e.WKCArticleIsRead;
@@ -626,12 +631,11 @@
 			WKCOutlookText: OLSKLocalized('WKCSubscriptionsSourcesContentListItemArchivedText'),
 			WKCOutlookData: {},
 		};
-		kWKCSubscriptionsOutlookObjects = [
+		
+		moi.propertiesOutlookObjects([
 			kWKCSubscriptionsOutlookInbox,
 			kWKCSubscriptionsOutlookArchived,
-		];
-
-		moi.reactSourcesOutlookObjects(kWKCSubscriptionsOutlookObjects);
+		]);
 
 		moi.propertiesSubscriptionObjects(moi.propertiesSubscriptionObjects());
 
