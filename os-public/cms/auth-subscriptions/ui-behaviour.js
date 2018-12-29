@@ -279,10 +279,10 @@
 		throw error;
 	};
 
-	//_ commandsSourcesSelectOutlook
+	//_ commandsSourcesSelect
 
-	moi.commandsSourcesSelectOutlook = function (inputData) {
-		moi.reactSourcesOutlooksSelected(inputData);
+	moi.commandsSourcesSelect = function (inputData) {
+		moi.reactSourcesSelectedSource(inputData);
 	};
 
 	//# REACT
@@ -299,7 +299,8 @@
 					return obj.WKCOutlookID
 				})
 				.classed('WKCSubscriptionsSourcesContentListChildListItem', true)
-				.classed('WKCSharedElementTappable', true);
+				.classed('WKCSharedElementTappable', true)
+				.on('click', moi.commandsSourcesSelect);
 
 		parentElement.append('img');
 
@@ -331,9 +332,9 @@
 		selection.exit().remove();
 	};
 
-	//_ reactSourcesOutlooksSelected
+	//_ reactSourcesSelectedSource
 
-	moi.reactSourcesOutlooksSelected = function (inputData) {
+	moi.reactSourcesSelectedSource = function (inputData) {
 		d3.selectAll('.WKCSubscriptionsSourcesContentListChildListItem')
 			.classed('WKCSubscriptionsSourcesContentListChildListItemSelected', function (obj) {
 				return obj === inputData;
@@ -349,7 +350,8 @@
 		var parentElement = selection.enter()
 			.append('li')
 				.attr('class', 'WKCSubscriptionsSourcesContentListChildListItem')
-				.classed('WKCSharedElementTappable', true);
+				.classed('WKCSharedElementTappable', true)
+				.on('click', moi.commandsSourcesSelect);
 
 		parentElement.append('img')
 			.classed('WKCSubscriptionsText', true);
@@ -633,7 +635,7 @@
 
 		moi.propertiesSubscriptionObjects(moi.propertiesSubscriptionObjects());
 
-		moi.commandsSourcesSelectOutlook(kWKCSubscriptionsOutlookInbox);
+		moi.commandsSourcesSelect(kWKCSubscriptionsOutlookInbox);
 	};
 
 	//# LIFECYCLE
