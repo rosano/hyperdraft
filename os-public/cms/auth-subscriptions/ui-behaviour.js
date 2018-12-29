@@ -395,7 +395,7 @@
 	//_ reactArticleObjects
 
 	moi.reactArticleObjects = function (articleObjects) {
-		var selection = d3.select('#WKCSubscriptionsMasterContent')
+		var selection = d3.select('#WKCSubscriptionsMasterContentList')
 			.selectAll('.WKCSubscriptionsMasterContentListItem').data(articleObjects);
 		
 		var parentElement = selection.enter()
