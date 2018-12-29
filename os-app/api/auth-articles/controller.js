@@ -113,7 +113,7 @@ exports.WKCActionAPIArticlesDelete = function(req, res, next) {
 //_ WKCActionAPIArticlesSearch
 
 exports.WKCActionAPIArticlesSearch = function(req, res, next) {
-	return metalLibrary.WKCMetalArticlesSearch(req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, '', function(err, responseJSON) {
+	return metalLibrary.WKCMetalArticlesSearch(req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, req.body, function(err, responseJSON) {
 		if (err) {
 			throw err;
 		}

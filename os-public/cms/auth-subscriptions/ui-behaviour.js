@@ -293,6 +293,35 @@
 		moi.reactSourcesSelectedSource(inputData);
 
 		moi.reactMasterLoaderVisibility(true);
+		moi.propertiesArticleObjects([]);
+
+		moi._commandsSourcesFetchArticles(inputData)
+	};
+
+	//_ _commandsSourcesFetchArticles
+
+	moi._commandsSourcesFetchArticles = function (inputData) {
+		d3.json(OLSKCanonicalFor('WKCRouteAPIArticlesSearch'), {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'x-client-key': moi.propertiesAPIToken(),
+			},
+			body: JSON.stringify(inputData.WKCOutlookSearchParameters),
+		}).then(function(responseJSON) {
+			if (!Array.isArray(responseJSON)) {
+				return moi.commandsAlertArticlesUnavailable();
+			}
+
+			moi.propertiesArticleObjects(responseJSON.map(function(e) {
+				return Object.assign(e, {
+					WKCArticlePublishDate: new Date(e.WKCArticlePublishDate),
+				});
+			}).sort(WKSubscriptionsLogic.WKSubscriptionsListSort));
+		}, moi.commandsAlertConnectionError)
+		.finally(function () {
+			moi.reactMasterLoaderVisibility(false);
+		});
 	};
 
 	//# REACT
@@ -459,7 +488,7 @@
 
 	moi.reactSourcesUnreadCount = function () {
 		return;
-		
+
 		d3.select('#WKCSubscriptionsSourcesContentListOutlooksListItemInbox .WKCSubscriptionsSourcesContentListChildListItemUnreadCount')
 			.classed('WKCSubscriptionsHidden', !moi.propertiesArticleObjects().filter(function (e) {
 				return !e.WKCArticleIsRead;
@@ -554,11 +583,9 @@
 	moi.setupEverything = function () {
 		moi.setupAPIToken(function () {
 			moi.setupSubscriptionObjects(function() {
-				moi.setupArticleObjects(function() {
-					moi.setupSourceList();
-					
-					d3.select('#WKCSubscriptions').classed('WKCSubscriptionsLoading', false);
-				});
+				moi.setupOutlookObjects();
+				
+				d3.select('#WKCSubscriptions').classed('WKCSubscriptionsLoading', false);
 			});
 		});
 	};
@@ -604,42 +631,31 @@
 		}, moi.commandsAlertConnectionError);
 	};
 
-	//_ setupArticleObjects
+	//_ setupOutlookObjects
 
-	moi.setupArticleObjects = function (completionHandler) {
-		d3.json(OLSKCanonicalFor('WKCRouteAPIArticlesSearch'), {
-			method: 'GET',
-			headers: {
-				'x-client-key': moi.propertiesAPIToken(),
-			},
-		}).then(function(responseJSON) {
-			if (!Array.isArray(responseJSON)) {
-				return moi.commandsAlertArticlesUnavailable();
-			}
-
-			moi.propertiesArticleObjects(responseJSON.map(function(e) {
-				return Object.assign(e, {
-					WKCArticlePublishDate: new Date(e.WKCArticlePublishDate),
-				});
-			}).sort(WKSubscriptionsLogic.WKSubscriptionsListSort));
-
-			completionHandler();
-		}, moi.commandsAlertConnectionError);
-	};
-
-	//_ setupSourceList
-
-	moi.setupSourceList = function () {
+	moi.setupOutlookObjects = function () {
 		// browser quirks: call OLSKLocalized after package is loaded
 		kWKCSubscriptionsOutlookInbox = {
 			WKCOutlookID: 'WKCSubscriptionsSourcesContentListOutlooksListItemInbox',
 			WKCOutlookText: OLSKLocalized('WKCSubscriptionsSourcesContentListItemInboxText'),
-			WKCOutlookData: {},
+			WKCOutlookSearchParameters: {
+				WKCArticleIsArchived: {
+					'$ne': true,
+				},
+				WKCArticleIsDiscarded: {
+					'$ne': true,
+				},
+			},
 		};
 		kWKCSubscriptionsOutlookArchived = {
 			WKCOutlookID: 'WKCSubscriptionsSourcesContentListOutlooksListItemArchived',
 			WKCOutlookText: OLSKLocalized('WKCSubscriptionsSourcesContentListItemArchivedText'),
-			WKCOutlookData: {},
+			WKCOutlookSearchParameters: {
+				WKCArticleIsArchived: true,
+				WKCArticleIsDiscarded: {
+					'$ne': true,
+				},
+			},
 		};
 		
 		moi.propertiesOutlookObjects([
@@ -647,11 +663,7 @@
 			kWKCSubscriptionsOutlookArchived,
 		]);
 
-		moi.propertiesSubscriptionObjects(moi.propertiesSubscriptionObjects());
-
 		moi.commandsSourcesSelect(kWKCSubscriptionsOutlookInbox);
-
-		moi.reactMasterLoaderVisibility(false);
 	};
 
 	//# LIFECYCLE
