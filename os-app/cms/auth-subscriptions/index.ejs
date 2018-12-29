@@ -123,7 +123,12 @@ locals.OLSKPagePublicRouteKeys = [
 
 	<div id="WKCSubscriptionsDetail" class="WKCSubscriptionsDetailInactive">
 		<header id="WKCSubscriptionsDetailToolbar" class="WKCSharedToolbar">
-			<button id="WKCSubscriptionsDetailToolbarInboxButton" class="WKCSharedElementTappable WKCSharedButtonNoStyle WKCSubscriptionsHidden" accesskey="a"><%= OLSKLocalized('WKCSubscriptionsDetailToolbarInboxButtonText') %></button>
+			<button id="WKCSubscriptionsDetailToolbarUnreadButton" class="WKCSharedElementTappable WKCSharedButtonNoStyle WKCSubscriptionsHidden"><%= OLSKLocalized('WKCSubscriptionsDetailToolbarUnreadButtonText') %></button>
+			<script type="text/javascript">
+				d3.select('#WKCSubscriptionsDetailToolbarUnreadButton').on('click', WKSubscriptions.interfaceArticlesUnreadButtonDidClick);
+			</script>
+
+			<button id="WKCSubscriptionsDetailToolbarInboxButton" class="WKCSharedElementTappable WKCSharedButtonNoStyle WKCSubscriptionsHidden"><%= OLSKLocalized('WKCSubscriptionsDetailToolbarInboxButtonText') %></button>
 			<script type="text/javascript">
 				d3.select('#WKCSubscriptionsDetailToolbarInboxButton').on('click', WKSubscriptions.interfaceArticlesInboxButtonDidClick);
 			</script>

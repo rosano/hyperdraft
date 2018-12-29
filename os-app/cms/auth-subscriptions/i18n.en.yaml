@@ -5,6 +5,7 @@ WKCSubscriptionsSourcesContentHeadingText: Sources
 WKCSubscriptionsSourcesContentListItemInboxText: Inbox
 WKCSubscriptionsSourcesContentListItemArchivedText: Archived
 WKCSubscriptionsSourcesContentListItemDiscardedText: Discarded
+WKCSubscriptionsDetailToolbarUnreadButtonText: Mark as unread
 WKCSubscriptionsDetailToolbarInboxButtonText: Move to inbox
 WKCSubscriptionsDetailPlaceholderText: No Article Selected
 WKCSubscriptionsDetailContentLinkText: Original source

@@ -126,6 +126,16 @@
 		moi.commandsArticlesArchive(moi.propertiesSelectedArticle());
 	};
 
+	//_ interfaceArticlesUnreadButtonDidClick
+
+	moi.interfaceArticlesUnreadButtonDidClick = function () {
+		if (!moi.propertiesSelectedArticle()) {
+			return;
+		}
+
+		moi.commandsArticlesMarkAsUnread(moi.propertiesSelectedArticle());
+	};
+
 	//_ interfaceArticlesInboxButtonDidClick
 
 	moi.interfaceArticlesInboxButtonDidClick = function () {
@@ -222,15 +232,44 @@
 			body: JSON.stringify({
 				WKCArticleIsRead: true,
 			}),
-		}).then(function(responseJSON) {
+		})
+		.then(function(responseJSON) {
 			Object.assign(item, responseJSON);
-
+		}, moi.commandsArticlesAlertErrorMarkAsRead)
+		.finally(function () {
 			d3.selectAll('.WKCSubscriptionsMasterContentListItem').filter(function(obj) {
 				return obj === item;
-			}).classed('WKCSubscriptionsMasterContentListItemUnread', false);
+			}).classed('WKCSubscriptionsMasterContentListItemUnread', !item.WKCArticleIsRead)
 
-			moi.reactSourcesUnreadCount();
-		}, moi.commandsArticlesAlertErrorMarkAsRead);
+			d3.select('#WKCSubscriptionsDetailToolbarUnreadButton').classed('WKCSubscriptionsHidden', !item.WKCArticleIsRead);
+		});;
+	};
+
+	//_ commandsArticlesMarkAsUnread
+
+	moi.commandsArticlesMarkAsUnread = function (item) {
+		d3.json(OLSKCanonicalFor('WKCRouteAPIArticlesUpdate', {
+			wkc_article_id: item.WKCArticleID
+		}), {
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json',
+				'x-client-key': moi.propertiesAPIToken(),
+			},
+			body: JSON.stringify({
+				WKCArticleIsRead: null,
+			}),
+		})
+		.then(function(responseJSON) {
+			Object.assign(item, responseJSON);
+		}, moi.commandsArticlesAlertErrorUpdate)
+		.finally(function () {
+			d3.selectAll('.WKCSubscriptionsMasterContentListItem').filter(function(obj) {
+				return obj === item;
+			}).classed('WKCSubscriptionsMasterContentListItemUnread', !item.WKCArticleIsRead)
+
+			d3.select('#WKCSubscriptionsDetailToolbarUnreadButton').classed('WKCSubscriptionsHidden', !item.WKCArticleIsRead);
+		});
 	};
 
 	//_ commandsArticlesAlertErrorMarkAsRead
@@ -634,6 +673,8 @@
 				.style('max-width', '100%')
 				.style('height', 'auto');
 		});
+
+		d3.select('#WKCSubscriptionsDetailToolbarUnreadButton').classed('WKCSubscriptionsHidden', !moi.propertiesSelectedArticle().WKCArticleIsRead)
 
 		d3.select('#WKCSubscriptionsDetail').classed('WKCSubscriptionsDetailInactive', false);
 	};
