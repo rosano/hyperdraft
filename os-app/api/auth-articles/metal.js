@@ -94,8 +94,8 @@ exports.WKCMetalArticlesUpdate = function(databaseClient, inputData1, inputData2
 	}
 
 	if (!modelLibrary.WKCModelInputDataIsArticleObject(inputData2, {
-			WKCModelValidatePresentOnly: true,
-		})) {
+		WKCModelValidatePresentOnly: true,
+	})) {
 		return completionHandler(null, inputData2);
 	}
 

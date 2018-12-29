@@ -27,7 +27,7 @@ turndownInstance.addRule('trim whitespace in link text', {
 			'](',
 			node.getAttribute('href'),
 			')',
-			].join('');
+		].join('');
 	},
 });
 turndownInstance.addRule('populate blank links', {
@@ -41,7 +41,7 @@ turndownInstance.addRule('populate blank links', {
 			'](',
 			node.getAttribute('href'),
 			')',
-			].join('');
+		].join('');
 	},
 });
 var showdownPackage = require('showdown');
@@ -50,7 +50,7 @@ showdownPackage.setOption('noHeaderId', true);
 
 const stringContentForFirstElement = function (inputData) {
 	return inputData[0] ? inputData[0].textContent : '';
-}
+};
 
 //_ WKCDiffArticlesForFeedRSS
 

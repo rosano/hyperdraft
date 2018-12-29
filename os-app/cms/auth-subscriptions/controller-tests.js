@@ -44,8 +44,8 @@ describe('WKCSubscribeMiddlewareIgnoreJSMap', function testWKCSubscribeMiddlewar
 	it('returns status 200', function() {
 		var res = testingLibrary.OLSKTestingFakeResponseForStatus();
 		controllerModule.WKCSubscribeMiddlewareIgnoreJSMap(Object.assign(testingLibrary.OLSKTestingFakeRequest(), {
-					originalUrl: '/alfa.js.map',
-				}), res, testingLibrary.OLSKTestingFakeNext())
+			originalUrl: '/alfa.js.map',
+		}), res, testingLibrary.OLSKTestingFakeNext());
 		// assert.deepEqual(, 'hello');
 		assert.strictEqual(res.statusCode, 200);
 	});
