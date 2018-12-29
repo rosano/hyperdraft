@@ -4,6 +4,7 @@ WKCSubscriptionsErrorArticlesUnavailableText: Unable to fetch articles
 WKCSubscriptionsSourcesContentHeadingText: Sources
 WKCSubscriptionsSourcesContentListItemInboxText: Inbox
 WKCSubscriptionsSourcesContentListItemArchivedText: Archived
+WKCSubscriptionsSourcesContentListItemDiscardedText: Discarded
 WKCSubscriptionsDetailToolbarInboxButtonText: Move to inbox
 WKCSubscriptionsDetailPlaceholderText: No Article Selected
 WKCSubscriptionsDetailContentLinkText: Original source
