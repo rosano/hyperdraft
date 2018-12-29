@@ -6,7 +6,7 @@
   },
   "dependencies": {
     "// OLDSKOOL": null,
-    "OldSkool": "https://github.com/olsk/OldSkool.git#master",
+    "OldSkool": "olsk/OldSkool",
 
     "// MARKDOWN": null,
     "marked": "latest",
@@ -15,14 +15,14 @@
     "mongodb": "^3.0.7",
 
     "// TASKS": null,
-    "OLSKTasks": "https://github.com/olsk/OLSKTasks.git#master",
+    "OLSKTasks": "olsk/OLSKTasks",
 
     "// FETCH": null,
     "request": "latest",
 
     "// PARSE": null,
     "jsdom": "latest",
-    "OLSKType": "https://github.com/olsk/OLSKType.git#master",
+    "OLSKType": "olsk/OLSKType",
 
     "// DIFF": null,
     "diff": "latest",
@@ -34,11 +34,11 @@
     "// FRONTEND": null,
     "normalize.css": "latest",
     "d3": "latest",
-    "OLSKInternational": "https://github.com/olsk/OLSKInternational.git#master",
-    "OLSKRouting": "https://github.com/olsk/OLSKRouting.git#master",
-    "OLSKTasks": "https://github.com/olsk/OLSKTasks.git#master",
-    "OLSKType": "https://github.com/olsk/OLSKType.git#master",
-    "OLSKString": "https://github.com/olsk/OLSKString.git#master",
+    "OLSKInternational": "olsk/OLSKInternational",
+    "OLSKRouting": "olsk/OLSKRouting",
+    "OLSKTasks": "olsk/OLSKTasks",
+    "OLSKType": "olsk/OLSKType",
+    "OLSKString": "olsk/OLSKString",
     "ispinner.css": "latest",
     "identicon.js": "latest",
     "blueimp-md5": "latest",
@@ -50,6 +50,6 @@
   },
   "devDependencies": {
     "gulp": "4.0",
-    "OLSKTesting": "https://github.com/olsk/OLSKTesting.git#master"
+    "OLSKTesting": "olsk/OLSKTesting"
   }
 }
