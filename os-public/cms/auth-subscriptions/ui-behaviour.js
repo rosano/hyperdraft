@@ -314,6 +314,7 @@
 				size: 20,
 				format: 'svg',
 				foreground: [0, 0, 0, 255],
+				background: [0, 0, 0, 0],
 		  }).toString();
 		});
 
@@ -354,6 +355,7 @@
 				size: 20,
 				format: 'svg',
 				foreground: [0, 0, 0, 255],
+				background: [0, 0, 0, 0],
 		  }).toString();
 		});
 
