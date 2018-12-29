@@ -197,6 +197,10 @@ body {
 }
 
 .WKCSubscriptionsSourcesContentListChildListItemUnreadCount {
+	display: none !important;
+}
+
+.WKCSubscriptionsSourcesContentListChildListItemUnreadCount {
 	padding: 1px 4px;
 	border-radius: 10px;
 	min-width: 15px;
