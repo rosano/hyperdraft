@@ -189,42 +189,44 @@ describe('WKCMetalArticlesDelete', function testWKCMetalArticlesDelete() {
 
 describe('WKCMetalArticlesSearch', function testWKCMetalArticlesSearch() {
 
+	it('throws error if param2 not function', function() {
+		assert.throws(function() {
+			metalLibrary.WKCMetalArticlesSearch(WKCTestingMongoClient, null, function () {});
+		}, /WKCErrorInvalidInput/);
+	});
+
 	it('throws error if param3 not function', function() {
 		assert.throws(function() {
-			metalLibrary.WKCMetalArticlesSearch(WKCTestingMongoClient, '', null);
+			metalLibrary.WKCMetalArticlesSearch(WKCTestingMongoClient, {}, null);
 		}, /WKCErrorInvalidInput/);
 	});
 
 	it('returns all if param2 empty', function(done) {
-		metalLibrary.WKCMetalArticlesCreate(WKCTestingMongoClient, kTestingValidArticle(), function(err, articleObject) {
-			metalLibrary.WKCMetalArticlesSearch(WKCTestingMongoClient, '', function(err, responseJSON) {
-				assert.deepEqual(responseJSON, [articleObject]);
+		metalLibrary.WKCMetalArticlesCreate(WKCTestingMongoClient, kTestingValidArticle(), function(err, articleObject1) {
+			metalLibrary.WKCMetalArticlesCreate(WKCTestingMongoClient, kTestingValidArticle(), function(err, articleObject2) {
+				metalLibrary.WKCMetalArticlesSearch(WKCTestingMongoClient, {}, function(err, responseJSON) {
+					assert.deepEqual(responseJSON, [articleObject1, articleObject2]);
 
-				done();
+					done();
+				});
 			});
 		});
 	});
 
-	it('excludes if WKCArticleIsArchived true', function(done) {
-		metalLibrary.WKCMetalArticlesCreate(WKCTestingMongoClient, Object.assign(kTestingValidArticle(), {
-			WKCArticleIsArchived: true,
-		}), function(err, articleObject) {
-			metalLibrary.WKCMetalArticlesSearch(WKCTestingMongoClient, '', function(err, responseJSON) {
-				assert.deepEqual(responseJSON, []);
+	it('returns filtered if param2 filled', function(done) {
+		metalLibrary.WKCMetalArticlesCreate(WKCTestingMongoClient, kTestingValidArticle(), function(err, articleObject1) {
+			metalLibrary.WKCMetalArticlesCreate(WKCTestingMongoClient, Object.assign(kTestingValidArticle(), {
+				WKCArticleIsArchived: true,
+			}), function(err, articleObject2) {
+				metalLibrary.WKCMetalArticlesSearch(WKCTestingMongoClient, {
+					WKCArticleIsArchived: {
+						'$ne': true,
+					},
+				}, function(err, responseJSON) {
+					assert.deepEqual(responseJSON, [articleObject1]);
 
-				done();
-			});
-		});
-	});
-
-	it('excludes if WKCArticleIsDiscarded true', function(done) {
-		metalLibrary.WKCMetalArticlesCreate(WKCTestingMongoClient, Object.assign(kTestingValidArticle(), {
-			WKCArticleIsDiscarded: true,
-		}), function(err, articleObject) {
-			metalLibrary.WKCMetalArticlesSearch(WKCTestingMongoClient, '', function(err, responseJSON) {
-				assert.deepEqual(responseJSON, []);
-
-				done();
+					done();
+				});
 			});
 		});
 	});

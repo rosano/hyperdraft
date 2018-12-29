@@ -157,14 +157,19 @@ exports.WKCMetalArticlesSearch = function(databaseClient, inputData, completionH
 		throw new Error('WKCErrorInvalidInput');
 	}
 
-	return databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_articles').find({
-		WKCArticleIsArchived: {
-			'$ne': true,
-		},
-		WKCArticleIsDiscarded: {
-			'$ne': true,
-		},
+	if (typeof inputData !== 'object' || inputData === null) {
+		throw new Error('WKCErrorInvalidInput');
 	}
+
+	return databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_articles').find(inputData
+	// {
+	// 		WKCArticleIsArchived: {
+	// 			'$ne': true,
+	// 		},
+	// 		WKCArticleIsDiscarded: {
+	// 			'$ne': true,
+	// 		},
+	// 	}
 	// ).project(modelLibrary.WKCArticleHiddenPropertyNames().reduce(function(hash, e) {
 	// 	hash[e] = 0;
 		
