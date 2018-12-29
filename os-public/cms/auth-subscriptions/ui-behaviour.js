@@ -291,6 +291,8 @@
 
 	moi.commandsSourcesSelect = function (inputData) {
 		moi.reactSourcesSelectedSource(inputData);
+
+		moi.reactMasterLoaderVisibility(true);
 	};
 
 	//# REACT
@@ -537,6 +539,12 @@
 		d3.select('#WKCSubscriptionsDetail').classed('WKCSubscriptionsDetailInactive', false);
 	};
 
+	//_ reactMasterLoaderVisibility
+
+	moi.reactMasterLoaderVisibility = function (isVisible) {
+		d3.select('#WKCSubscriptionsMasterLoader').classed('WKCSubscriptionsHidden', !isVisible);
+	};
+
 	//# SETUP
 
 	//_ setupEverything
@@ -640,6 +648,8 @@
 		moi.propertiesSubscriptionObjects(moi.propertiesSubscriptionObjects());
 
 		moi.commandsSourcesSelect(kWKCSubscriptionsOutlookInbox);
+
+		moi.reactMasterLoaderVisibility(false);
 	};
 
 	//# LIFECYCLE

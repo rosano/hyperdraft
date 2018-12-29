@@ -303,6 +303,14 @@ body {
 	opacity: 0.5;
 }
 
+#WKCSubscriptionsMasterLoader {
+	padding: 20px;
+}
+
+#WKCSubscriptionsMasterLoader .ispinner {
+	margin: auto;
+}
+
 #WKCSubscriptionsDetail {
 	border-left: 1px solid #ddd;
 
