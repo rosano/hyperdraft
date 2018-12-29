@@ -22,6 +22,7 @@ locals.OLSKPagePublicLocalizedStringKeys = [
 	'WKCSubscriptionsErrorArticlesMarkAsDiscardedText',
 	'WKCSubscriptionsErrorArticlesMarkAsReadText',
 	'WKCSubscriptionsErrorArticlesUnavailableText',
+	'WKCSubscriptionsErrorArticlesUpdateText',
 	'WKCSubscriptionsErrorSubscriptionsUnavailableText',
 	'WKCSubscriptionsModuleCreateErrorCreateText',
 	'WKCSubscriptionsModuleCreateErrorFetchText',
@@ -121,6 +122,11 @@ locals.OLSKPagePublicRouteKeys = [
 
 	<div id="WKCSubscriptionsDetail" class="WKCSubscriptionsDetailInactive">
 		<header id="WKCSubscriptionsDetailToolbar" class="WKCSharedToolbar">
+			<button id="WKCSubscriptionsDetailToolbarInboxButton" class="WKCSharedElementTappable WKCSharedButtonNoStyle WKCSubscriptionsHidden" accesskey="a"><%= OLSKLocalized('WKCSubscriptionsDetailToolbarInboxButtonText') %></button>
+			<script type="text/javascript">
+				d3.select('#WKCSubscriptionsDetailToolbarInboxButton').on('click', WKSubscriptions.interfaceArticlesInboxButtonDidClick);
+			</script>
+
 			<button id="WKCSubscriptionsDetailToolbarArchiveButton" class="WKCSharedElementTappable WKCSharedButtonNoStyle" accesskey="a">📂</button>
 			<script type="text/javascript">
 				d3.select('#WKCSubscriptionsDetailToolbarArchiveButton').on('click', WKSubscriptions.interfaceArticlesArchiveButtonDidClick);
