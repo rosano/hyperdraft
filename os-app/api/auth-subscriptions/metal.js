@@ -174,8 +174,12 @@ exports.WKCMetalSubscriptionsSearch = function(databaseClient, inputData, comple
 
 //_ WKCMetalSubscriptionsNeedingFetch
 
-exports.WKCMetalSubscriptionsNeedingFetch = function(databaseClient, completionHandler) {
+exports.WKCMetalSubscriptionsNeedingFetch = function(databaseClient, completionHandler, options) {
 	if (typeof completionHandler !== 'function') {
+		throw new Error('WKCErrorInvalidInput');
+	}
+
+	if (options && typeof options !== 'object' || options === null) {
 		throw new Error('WKCErrorInvalidInput');
 	}
 

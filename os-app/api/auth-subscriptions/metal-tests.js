@@ -225,6 +225,12 @@ describe('WKCMetalSubscriptionsNeedingFetch', function testWKCMetalSubscriptions
 		}, /WKCErrorInvalidInput/);
 	});
 
+	it('throws error if param3 not object', function() {
+		assert.throws(function() {
+			metalLibrary.WKCMetalSubscriptionsNeedingFetch(WKCTestingMongoClient, function() {}, null);
+		}, /WKCErrorInvalidInput/);
+	});
+
 	it('returns subscriptionObjects with fetch date older than one hour', function(done) {
 		metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTesting.kTestingValidSubscription(), {
 			WKCSubscriptionName: 'alfa',
