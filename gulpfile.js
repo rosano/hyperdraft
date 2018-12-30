@@ -24,20 +24,14 @@ function install() {
 		'moment',
 	].map(function(e) {
 		return [
-			[
-				'node_modules',
-				e,
-				'**/*.js',
-			].join('/'), [
-				'node_modules',
-				e,
-				'**/*.css',
-			].join('/')
+			pathPackage.join('node_modules', e, '**/*.js'),
+			pathPackage.join('node_modules', e, '**/*.map'),
+			pathPackage.join('node_modules', e, '**/*.css'),
 		];
 	}).reduce(function(collection, e) {
 		return collection.concat(e);
 	}), []).pipe(gulpPackage.dest(function(vinylFile) {
-		return pathPackage.join('os-public/shared-assets/vendor/', vinylFile.path.replace(pathPackage.join(__dirname, 'node_modules/'), '').split('/').shift());
+		return pathPackage.join('os-public/shared-assets/vendor', vinylFile.path.replace(pathPackage.join(__dirname, 'node_modules'), '').split('/').slice(1).shift());
 	}));
 }
 
