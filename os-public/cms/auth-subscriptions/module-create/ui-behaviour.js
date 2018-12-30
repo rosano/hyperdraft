@@ -230,6 +230,10 @@
 		moi.reactAlternatives([]);
 
 		d3.selectAll('.WKCSubscriptionsModuleCreatePreview').classed('WKCSubscriptionsHidden', true);
+
+		d3.select('#WKCSubscriptionsModuleCreateConfirmationFormName').property('value', '');
+		d3.select('#WKCSubscriptionsModuleCreateConfirmationFormBlurb').property('value', '');
+
 		d3.select('#WKCSubscriptionsModuleCreateFetchFormInput').property('value', '');
 		d3.select('#WKCSubscriptionsModuleCreateFetchFormInput').node().focus();
 	};
@@ -329,7 +333,7 @@
 	//_ reactConfirmationType
 
 	moi.reactConfirmationType = function (inputData) {
-		d3.select('#WKCSubscriptionsModuleCreateConfirmationFormType').node().value = inputData;
+		d3.select('#WKCSubscriptionsModuleCreateConfirmationFormType').property('value', inputData);
 	};
 
 	//_ reactPreviewShared
@@ -338,11 +342,11 @@
 		moi.reactFetchLoaderVisibility(false);
 
 		if (titleContent) {
-			d3.select('#WKCSubscriptionsModuleCreateConfirmationFormName').node().value = titleContent;
+			d3.select('#WKCSubscriptionsModuleCreateConfirmationFormName').property('value', titleContent);
 		}
 
 		if (blurbContent) {
-			d3.select('#WKCSubscriptionsModuleCreateConfirmationFormBlurb').node().value = blurbContent;
+			d3.select('#WKCSubscriptionsModuleCreateConfirmationFormBlurb').property('value', blurbContent);
 		}
 		d3.select('#WKCSubscriptionsModuleCreatePreviewHeadingType').html(typeContent);
 
