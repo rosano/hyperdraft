@@ -17,6 +17,9 @@
     "// TASKS": null,
     "OLSKTasks": "olsk/OLSKTasks",
 
+    "// SUGGEST": null,
+    "url-parse": "latest",
+
     "// FETCH": null,
     "request": "latest",
 
@@ -45,6 +48,7 @@
     "turndown": "latest",
     "showdown": "latest",
     "moment": "latest",
+    "url-parse": "latest",
 
     "// I sacrifice myself for the commas of others": null
   },

@@ -28,6 +28,7 @@ gulpPackage.task('default', gulpPackage.series(function (completionHandler) {
 		'turndown',
 		'showdown',
 		'moment',
+		'url-parse',
 	].map(function(e) {
 		return [
 			pathPackage.join('node_modules', e, '**/*.js'),
