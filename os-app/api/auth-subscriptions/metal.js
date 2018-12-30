@@ -174,7 +174,7 @@ exports.WKCMetalSubscriptionsSearch = function(databaseClient, inputData, comple
 
 //_ WKCMetalSubscriptionsNeedingFetch
 
-exports.WKCMetalSubscriptionsNeedingFetch = function(databaseClient, completionHandler, options) {
+exports.WKCMetalSubscriptionsNeedingFetch = function(databaseClient, completionHandler, options = {}) {
 	if (typeof completionHandler !== 'function') {
 		throw new Error('WKCErrorInvalidInput');
 	}
@@ -212,7 +212,7 @@ exports.WKCMetalSubscriptionsNeedingFetch = function(databaseClient, completionH
 			},
 		},
 		],
-	}).project(modelLibrary.WKCSubscriptionHiddenPropertyNames().reduce(function(hash, e) {
+	}).project(modelLibrary.WKCSubscriptionHiddenPropertyNames().concat(options && options.WKCOptionExcludeWKCSubscriptionFetchData ? ['WKCSubscriptionFetchData'] : []).reduce(function(hash, e) {
 		hash[e] = 0;
 
 		return hash;

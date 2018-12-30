@@ -331,4 +331,36 @@ describe('WKCMetalSubscriptionsNeedingFetch', function testWKCMetalSubscriptions
 
 	});
 
+	context('WKCOptionExcludeWKCSubscriptionFetchData', function () {
+
+		it('returns with WKCSubscriptionFetchData if true', function(done) {
+			metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTesting.kTestingValidSubscription(), {
+				WKCSubscriptionFetchData: 'alfa',
+			}), function(err, subscriptionObject1) {
+				delete subscriptionObject1.WKCSubscriptionFetchData;
+				
+				metalLibrary.WKCMetalSubscriptionsNeedingFetch(WKCTestingMongoClient, function(err, responseJSON) {
+					assert.deepEqual(responseJSON, [subscriptionObject1]);
+
+					done();
+				}, {
+					WKCOptionExcludeWKCSubscriptionFetchData: true,
+				});
+			});
+		});
+
+		it('returns without WKCSubscriptionFetchData', function(done) {
+			metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTesting.kTestingValidSubscription(), {
+				WKCSubscriptionFetchData: 'alfa',
+			}), function(err, subscriptionObject1) {
+				metalLibrary.WKCMetalSubscriptionsNeedingFetch(WKCTestingMongoClient, function(err, responseJSON) {
+					assert.deepEqual(responseJSON, [subscriptionObject1]);
+
+					done();
+				});
+			});
+		});
+		
+	});
+
 });
