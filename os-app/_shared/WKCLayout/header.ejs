@@ -21,9 +21,9 @@
 		<% }) %>
 	<% } %>
 
-	<link rel="stylesheet" type="text/css" href="/shared-assets/vendor/normalize.css/normalize.css">
+	<link rel="stylesheet" type="text/css" href="/shared-assets/external/normalize.css/normalize.css">
 
-	<script src="/shared-assets/vendor/d3/dist/d3.min.js"></script>
+	<script src="/shared-assets/external/d3/dist/d3.min.js"></script>
 
 	<% if (locals.OLSKSharedPageControllerSlug && Array.isArray(locals.OLSKPageAssets)) { %>
 		<% locals.OLSKPageAssets.forEach(function(e) { %>
@@ -40,8 +40,8 @@
 	<% } %>
 
 	<% if (locals.OLSKPagePublicLocalizedStringKeys) { %>
-	<script src="/shared-assets/vendor/OLSKInternational/main.js"></script>
-	<script src="/shared-assets/vendor/OLSKString/main.js"></script>
+	<script src="/shared-assets/external/OLSKInternational/main.js"></script>
+	<script src="/shared-assets/external/OLSKString/main.js"></script>
 	<script type="text/javascript">
 		window.OLSKFormatted = OLSKString.OLSKStringWithFormat;
 		window.OLSKLocalized = function(translationConstant) {
@@ -54,7 +54,7 @@
 	<% } %>
 
 	<% if (locals.OLSKPagePublicRouteKeys) { %>
-	<script src="/shared-assets/vendor/OLSKRouting/main.js"></script>
+	<script src="/shared-assets/external/OLSKRouting/main.js"></script>
 	<script type="text/javascript">
 		window.OLSKCanonicalFor = function(routeConstant, optionalParams) {
 			return OLSKRouting.OLSKRoutingCanonicalPathWithRoutePathAndOptionalParams((<%- JSON.stringify(OLSKPagePublicRouteKeys.reduce(function (map, e) {

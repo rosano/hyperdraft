@@ -3,7 +3,7 @@ var pathPackage = require('path');
 var filesystemLibrary = require('OLSKFilesystem');
 
 function clean(callback) {
-	filesystemLibrary.OLSKFilesystemHelpDeleteDirectoryRecursive(pathPackage.join(__dirname, 'os-public/shared-assets/vendor'));
+	filesystemLibrary.OLSKFilesystemHelpDeleteDirectoryRecursive(pathPackage.join(__dirname, 'os-public/shared-assets/external'));
 	return callback();
 }
 
@@ -31,7 +31,7 @@ function install() {
 	}).reduce(function(collection, e) {
 		return collection.concat(e);
 	}), []).pipe(gulpPackage.dest(function(vinylFile) {
-		return pathPackage.join('os-public/shared-assets/vendor', vinylFile.path.replace(pathPackage.join(__dirname, 'node_modules'), '').split('/').slice(1).shift());
+		return pathPackage.join('os-public/shared-assets/external', vinylFile.path.replace(pathPackage.join(__dirname, 'node_modules'), '').split('/').slice(1).shift());
 	}));
 }
 
