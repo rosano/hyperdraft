@@ -80,6 +80,8 @@
 			return;
 		}
 		
+		moi.commandsConfirmationClear();
+
 		moi.reactFetchFormVisibility(true);
 		moi.reactFetchLoaderVisibility(true);
 		moi.reactConfirmationVisibility(false);
@@ -93,7 +95,8 @@
 			body: JSON.stringify({
 				WKCInputURL: inputData,
 			})
-		}).then(function(data) {
+		})
+		.then(function(data) {
 			var parsedXML = (new DOMParser()).parseFromString(data, 'application/xml');
 
 			if (OLSKType.OLSKTypeInputDataIsDOMDocumentRSS(parsedXML)) {
@@ -111,7 +114,11 @@
 			}
 
 			return moi.commandsConfirmURLFile(inputData, data);
-		}).catch(moi.commandsFetchAlertError);
+		})
+		.catch(moi.commandsFetchAlertError)
+		.finally(function () {
+			moi.reactAlternativesSources(WKCSubscriptionsModuleCreateSuggest.WKCSubscriptionsModuleCreateSuggestFor(inputData));
+		});
 	};
 
 	//_ commandsFetchAlertError
@@ -228,6 +235,7 @@
 		moi.reactFetchFormVisibility(true);
 		moi.reactPreviewFeedItems([]);
 		moi.reactAlternativesFeeds([]);
+		moi.reactAlternativesSources([]);
 
 		d3.selectAll('.WKCSubscriptionsModuleCreatePreview').classed('WKCSubscriptionsHidden', true);
 
@@ -309,8 +317,6 @@
 				.attr('class', 'WKCSubscriptionsModuleCreateAlternativesFeedsItem')
 				.append('button')
 				.on('click', function(e) {
-					moi.commandsConfirmationClear();
-
 					d3.select('#WKCSubscriptionsModuleCreateFetchFormInput').property('value', e)
 					moi.commandsFetchURL(e);
 				})
@@ -322,6 +328,36 @@
 		selection.exit().remove();
 
 		d3.select('#WKCSubscriptionsModuleCreateAlternativesFeeds').classed('WKCSubscriptionsHidden', !alternativeURLs.length);
+	};
+
+	//_ reactAlternativesSources
+
+	moi.reactAlternativesSources = function (alternativeURLs) {
+		var selection = d3.select('#WKCSubscriptionsModuleCreateAlternativesSources ul')
+			.selectAll('.WKCSubscriptionsModuleCreateAlternativesSourcesItem').data(alternativeURLs);
+		
+		var parentElement = selection.enter()
+			.append('li')
+				.attr('class', 'WKCSubscriptionsModuleCreateAlternativesSourcesItem');
+
+		parentElement
+				.append('button');
+
+		parentElement = parentElement.merge(selection);
+
+		parentElement.select('button')
+			.on('click', function(e) {
+				d3.select('#WKCSubscriptionsModuleCreateFetchFormInput').property('value', e)
+				
+				moi.commandsFetchURL(e);
+			})
+			.text(function(e) {
+				return e;
+			});
+
+		selection.exit().remove();
+
+		d3.select('#WKCSubscriptionsModuleCreateAlternativesSources').classed('WKCSubscriptionsHidden', !alternativeURLs.length);
 	};
 
 	//_ reactConfirmationVisibility

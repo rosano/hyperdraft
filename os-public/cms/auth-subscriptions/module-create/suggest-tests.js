@@ -24,6 +24,14 @@ describe('WKCSubscriptionsModuleCreateSuggestFor', function testWKCSubscriptions
 		assert.deepEqual(suggestLibrary.WKCSubscriptionsModuleCreateSuggestFor(' '), []);
 	});
 
+	it('returns none if word', function() {
+		assert.deepEqual(suggestLibrary.WKCSubscriptionsModuleCreateSuggestFor('alfa'), []);
+	});
+
+	it('returns none if localhost', function() {
+		assert.deepEqual(suggestLibrary.WKCSubscriptionsModuleCreateSuggestFor('localhost'), []);
+	});
+
 	it('returns urls from domain', function() {
 		assert.deepEqual(suggestLibrary.WKCSubscriptionsModuleCreateSuggestFor('alfa.com'), [
 			'https://alfa.com',

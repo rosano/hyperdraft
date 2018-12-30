@@ -19,13 +19,11 @@
 			throw new Error('WKCErrorInvalidInput');
 		}
 
-		var suggestedURL = inputData.trim();
-
-		if (!suggestedURL) {
+		if (!inputData.trim()) {
 			return [];
 		}
 
-		var urlObject = new urlparsePackage(suggestedURL);
+		var urlObject = urlparsePackage(inputData, {}); // To parse an input independently of the browser's current URL (e.g. for functionality parity with the library in a Node environment), pass an empty location object as the second parameter
 
 		if (!urlObject.hostname && !urlObject.pathname.match(/\W/)) {
 			urlObject.set('hostname', urlObject.pathname);

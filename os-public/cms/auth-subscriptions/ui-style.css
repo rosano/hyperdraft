@@ -80,6 +80,14 @@ body {
 	background: #ccff66;
 }
 
+#WKCSubscriptionsModuleCreateAlternativesSources {
+	padding: 10px;
+	margin: 20px 0;
+
+	border: 1px solid #66ccff;
+	background: #d1f1ff;
+}
+
 .WKCSubscriptionsModuleCreatePreview {
 	padding-left: 20px;
 	overflow-x: hidden;
