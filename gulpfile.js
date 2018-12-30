@@ -31,6 +31,7 @@ gulpPackage.task('default', gulpPackage.series(function (completionHandler) {
 	].map(function(e) {
 		return [
 			pathPackage.join('node_modules', e, '**/*.js'),
+			pathPackage.join('!node_modules/OLSK*/*-tests.js'),
 			pathPackage.join('node_modules', e, '**/*.map'),
 			pathPackage.join('node_modules', e, '**/*.css'),
 		];
