@@ -10,7 +10,7 @@
 	(factory((global.WKCSubscriptionsModuleCreateSuggest = global.WKCSubscriptionsModuleCreateSuggest || {})));
 }(this, (function (exports) { 'use strict';
 
-	const urlparsePackage = require('url-parse');
+	const urlparsePackage = typeof require === 'undefined' ? window.URLParse : require('url-parse');
 
 	//_ WKCSubscriptionsModuleCreateSuggestFor
 
@@ -25,21 +25,29 @@
 			return [];
 		}
 
-		if (!suggestedURL.match(/\./)) {
-			suggestedURL = suggestedURL.concat('.com');
-		}
-
-		if (!suggestedURL.match('://')) {
-			suggestedURL = 'http://'.concat(suggestedURL);
-		}
-
 		var urlObject = new urlparsePackage(suggestedURL);
 
-		if (!urlObject.hostname) {
-			urlObject.set('hostname', suggestedURL.concat('.com'));
+		if (!urlObject.hostname && !urlObject.pathname.match(/\W/)) {
+			urlObject.set('hostname', urlObject.pathname);
+			urlObject.set('pathname', '');
 		}
 
-		return ['https'].concat(urlObject.protocol === 'https:' ? [] : ['http']).map(function (e) {
+		if (!urlObject.hostname && !urlObject.pathname.match(/[^\w\.]/)) {
+			urlObject.set('hostname', urlObject.pathname);
+			urlObject.set('pathname', '');
+		}
+
+		var pathComponents = urlObject.pathname.split('/');
+		if (!urlObject.hostname && !pathComponents[0].match(/[^\w\.]/)) {
+			urlObject.set('hostname', pathComponents.shift());
+			urlObject.set('pathname', pathComponents.join('/'));
+		}
+
+		if (!urlObject.hostname.match(/\./)) {
+			return [];
+		}
+
+		return (urlObject.hostname === 'localhost' ? [] : ['https']).concat(urlObject.protocol === 'https:' ? [] : ['http']).map(function (e) {
 			urlObject.set('protocol', e);
 
 			return urlObject.toString();

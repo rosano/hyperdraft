@@ -24,13 +24,6 @@ describe('WKCSubscriptionsModuleCreateSuggestFor', function testWKCSubscriptions
 		assert.deepEqual(suggestLibrary.WKCSubscriptionsModuleCreateSuggestFor(' '), []);
 	});
 
-	it('returns urls from keyword', function() {
-		assert.deepEqual(suggestLibrary.WKCSubscriptionsModuleCreateSuggestFor('alfa'), [
-			'https://alfa.com',
-			'http://alfa.com',
-			]);
-	});
-
 	it('returns urls from domain', function() {
 		assert.deepEqual(suggestLibrary.WKCSubscriptionsModuleCreateSuggestFor('alfa.com'), [
 			'https://alfa.com',
@@ -42,6 +35,13 @@ describe('WKCSubscriptionsModuleCreateSuggestFor', function testWKCSubscriptions
 		assert.deepEqual(suggestLibrary.WKCSubscriptionsModuleCreateSuggestFor('alfa.com/bravo'), [
 			'https://alfa.com/bravo',
 			'http://alfa.com/bravo',
+			]);
+	});
+
+	it('returns urls from domain with slash and query', function() {
+		assert.deepEqual(suggestLibrary.WKCSubscriptionsModuleCreateSuggestFor('alfa.com/bravo?charlie=delta'), [
+			'https://alfa.com/bravo?charlie=delta',
+			'http://alfa.com/bravo?charlie=delta',
 			]);
 	});
 
