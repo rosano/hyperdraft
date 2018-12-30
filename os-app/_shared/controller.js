@@ -56,22 +56,3 @@ exports.WKCSharedMiddlewareEnsureDatabase = function(req, res, next) {
 
 	return next();
 };
-
-//_ OLSKControllerRoutes
-
-exports.OLSKControllerRoutes = function() {
-	return {
-		WKCRouteSharedIgnoreMapJS: {
-			OLSKRoutePath: /\/shared-assets\/vendor\/.*\.map/,
-			OLSKRouteMethod: 'get',
-			OLSKRouteFunction: exports.WKCActionIgnoreMapJS,
-			OLSKRouteLanguages: ['en'],
-		},
-	};
-};
-
-//_ WKCActionIgnoreMapJS
-
-exports.WKCActionIgnoreMapJS = function(req, res, next) {
-	return res.send('WKCActionIgnoreMapJS');
-};

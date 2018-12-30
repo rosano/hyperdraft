@@ -69,18 +69,3 @@ describe('WKCSharedMiddlewareEnsureDatabase', function testWKCSharedMiddlewareEn
 	});
 
 });
-
-describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
-
-	it('returns route objects', function() {
-		assert.deepEqual(controllerModule.OLSKControllerRoutes(), {
-			WKCRouteSharedIgnoreMapJS: {
-				OLSKRoutePath: /\/shared-assets\/vendor\/.*\.map/,
-				OLSKRouteMethod: 'get',
-				OLSKRouteFunction: controllerModule.WKCActionIgnoreMapJS,
-				OLSKRouteLanguages: ['en'],
-			},
-		});
-	});
-
-});

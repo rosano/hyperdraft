@@ -29,35 +29,6 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 
 });
 
-describe('OLSKControllerSharedMiddlewares', function testOLSKControllerSharedMiddlewares() {
-
-	it('returns middleware functions', function() {
-		assert.deepEqual(controllerModule.OLSKControllerSharedMiddlewares(), {
-			WKCSubscribeMiddlewareIgnoreJSMap: controllerModule.WKCSubscribeMiddlewareIgnoreJSMap,
-		});
-	});
-
-});
-
-describe('WKCSubscribeMiddlewareIgnoreJSMap', function testWKCSubscribeMiddlewareIgnoreJSMap() {
-
-	it('returns status 200', function() {
-		var res = testingLibrary.OLSKTestingFakeResponseForStatus();
-		controllerModule.WKCSubscribeMiddlewareIgnoreJSMap(Object.assign(testingLibrary.OLSKTestingFakeRequest(), {
-			originalUrl: '/alfa.js.map',
-		}), res, testingLibrary.OLSKTestingFakeNext());
-		// assert.deepEqual(, 'hello');
-		assert.strictEqual(res.statusCode, 200);
-	});
-
-	it('returns next(undefined)', function() {
-		assert.deepEqual(controllerModule.WKCSubscribeMiddlewareIgnoreJSMap(Object.assign(testingLibrary.OLSKTestingFakeRequest(), {
-			originalUrl: '/alfa.js',
-		}), testingLibrary.OLSKTestingFakeResponseForStatus(), testingLibrary.OLSKTestingFakeNext()), 'RETURNED_UNDEFINED');
-	});
-
-});
-
 describe('WKCActionSubscriptionsIndex', function testWKCActionSubscriptionsIndex() {
 
 	it('renders page', function() {
