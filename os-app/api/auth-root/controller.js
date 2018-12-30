@@ -13,6 +13,7 @@ exports.OLSKControllerRoutes = function() {
 			OLSKRouteMethod: 'get',
 			OLSKRouteFunction: exports.WKCActionAPIRoot,
 			OLSKRouteMiddlewares: [
+				'WKCSharedMiddlewareAuthenticate',
 				'WKCSharedMiddlewareAPIAuthenticate',
 			],
 		},
@@ -20,6 +21,9 @@ exports.OLSKControllerRoutes = function() {
 			OLSKRoutePath: '/api/token',
 			OLSKRouteMethod: 'get',
 			OLSKRouteFunction: exports.WKCActionAPIToken,
+			OLSKRouteMiddlewares: [
+				'WKCSharedMiddlewareAuthenticate',
+			],
 		},
 	};
 };
