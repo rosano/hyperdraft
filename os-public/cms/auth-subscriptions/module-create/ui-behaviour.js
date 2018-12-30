@@ -161,7 +161,7 @@
 	moi.commandsConfirmURLPage = function (inputData, parsedHTML) {
 		moi.reactConfirmationType(OLSKPublicConstants.WKCSubscriptionTypePage);
 		
-		moi.reactAlternatives([].slice.call(parsedHTML.getElementsByTagName('link')).filter(function(e) {
+		moi.reactAlternativesFeeds([].slice.call(parsedHTML.getElementsByTagName('link')).filter(function(e) {
 			return [
 				'application/rss+xml',
 				'application/atom+xml',
@@ -227,7 +227,7 @@
 		moi.reactConfirmationVisibility(false);
 		moi.reactFetchFormVisibility(true);
 		moi.reactPreviewFeedItems([]);
-		moi.reactAlternatives([]);
+		moi.reactAlternativesFeeds([]);
 
 		d3.selectAll('.WKCSubscriptionsModuleCreatePreview').classed('WKCSubscriptionsHidden', true);
 
@@ -298,15 +298,15 @@
 		      });
 	};
 
-	//_ reactAlternatives
+	//_ reactAlternativesFeeds
 
-	moi.reactAlternatives = function (alternativeURLs) {
-		var selection = d3.select('#WKCSubscriptionsModuleCreateAlternatives ul')
-			.selectAll('.WKCSubscriptionsModuleCreateAlternativesItem').data(alternativeURLs);
+	moi.reactAlternativesFeeds = function (alternativeURLs) {
+		var selection = d3.select('#WKCSubscriptionsModuleCreateAlternativesFeeds ul')
+			.selectAll('.WKCSubscriptionsModuleCreateAlternativesFeedsItem').data(alternativeURLs);
 		
 		selection.enter()
 			.append('li')
-				.attr('class', 'WKCSubscriptionsModuleCreateAlternativesItem')
+				.attr('class', 'WKCSubscriptionsModuleCreateAlternativesFeedsItem')
 				.append('button')
 				.on('click', function(e) {
 					moi.commandsConfirmationClear();
@@ -321,7 +321,7 @@
 
 		selection.exit().remove();
 
-		d3.select('#WKCSubscriptionsModuleCreateAlternatives').classed('WKCSubscriptionsHidden', !alternativeURLs.length);
+		d3.select('#WKCSubscriptionsModuleCreateAlternativesFeeds').classed('WKCSubscriptionsHidden', !alternativeURLs.length);
 	};
 
 	//_ reactConfirmationVisibility
