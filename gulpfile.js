@@ -2,13 +2,10 @@ var gulpPackage = require('gulp');
 var pathPackage = require('path');
 var filesystemLibrary = require('OLSKFilesystem');
 
-function clean(callback) {
+gulpPackage.task('default', gulpPackage.series(function (completionHandler) {
 	filesystemLibrary.OLSKFilesystemHelpDeleteDirectoryRecursive(pathPackage.join(__dirname, 'os-public/shared-assets/external'));
-	return callback();
-}
-
-function install() {
-	return gulpPackage.src([
+	
+	gulpPackage.src([
 		'normalize.css',
 		'd3',
 		'OLSKTasks',
@@ -33,8 +30,6 @@ function install() {
 	}), []).pipe(gulpPackage.dest(function(vinylFile) {
 		return pathPackage.join('os-public/shared-assets/external', vinylFile.path.replace(pathPackage.join(__dirname, 'node_modules'), '').split('/').slice(1).shift());
 	}));
-}
 
-var build = gulpPackage.series(clean, install);
-
-gulpPackage.task('default', build);
+	return completionHandler();
+}));
