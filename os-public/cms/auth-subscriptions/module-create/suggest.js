@@ -7,7 +7,7 @@
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
 	typeof define === 'function' && define.amd ? define(['exports'], factory) :
-	(factory((global.WKCSubscriptionsModuleCreateSuggest = global.WKCSubscriptionsModuleCreateSuggest || {})));
+	(factory((global.WKCSubscriptionsModuleCreateSuggestions = global.WKCSubscriptionsModuleCreateSuggestions || {})));
 }(this, (function (exports) { 'use strict';
 
 	const urlparsePackage = typeof require === 'undefined' ? window.URLParse : require('url-parse');
@@ -24,9 +24,9 @@
 		return 'kWKCSubscriptionsModuleCreateSuggestionsTypeSecure';
 	};
 
-	//_ WKCSubscriptionsModuleCreateSuggestFor
+	//_ WKCSubscriptionsModuleCreateSuggestionsFor
 
-	exports.WKCSubscriptionsModuleCreateSuggestFor = function (inputData) {
+	exports.WKCSubscriptionsModuleCreateSuggestionsFor = function (inputData) {
 		if (typeof inputData !== 'string') {
 			throw new Error('WKCErrorInvalidInput');
 		}

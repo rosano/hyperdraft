@@ -117,7 +117,7 @@
 		})
 		.catch(moi.commandsFetchAlertError)
 		.finally(function () {
-			moi.reactAlternativesSources(WKCSubscriptionsModuleCreateSuggest.WKCSubscriptionsModuleCreateSuggestFor(inputData));
+			moi.reactAlternativesSources(WKCSubscriptionsModuleCreateSuggestions.WKCSubscriptionsModuleCreateSuggestionsFor(inputData));
 		});
 	};
 

@@ -24,32 +24,32 @@ describe('WKCSubscriptionsModuleCreateSuggestionsTypeSecure', function testWKCSu
 
 });
 
-describe('WKCSubscriptionsModuleCreateSuggestFor', function testWKCSubscriptionsModuleCreateSuggestFor() {
+describe('WKCSubscriptionsModuleCreateSuggestionsFor', function testWKCSubscriptionsModuleCreateSuggestionsFor() {
 
 	it('throws error if not string', function() {
 		assert.throws(function() {
-			suggestLibrary.WKCSubscriptionsModuleCreateSuggestFor(null);
+			suggestLibrary.WKCSubscriptionsModuleCreateSuggestionsFor(null);
 		}, /WKCErrorInvalidInput/);
 	});
 
 	it('returns none if empty', function() {
-		assert.deepEqual(suggestLibrary.WKCSubscriptionsModuleCreateSuggestFor(''), []);
+		assert.deepEqual(suggestLibrary.WKCSubscriptionsModuleCreateSuggestionsFor(''), []);
 	});
 
 	it('returns none if blank', function() {
-		assert.deepEqual(suggestLibrary.WKCSubscriptionsModuleCreateSuggestFor(' '), []);
+		assert.deepEqual(suggestLibrary.WKCSubscriptionsModuleCreateSuggestionsFor(' '), []);
 	});
 
 	it('returns none if word', function() {
-		assert.deepEqual(suggestLibrary.WKCSubscriptionsModuleCreateSuggestFor('alfa'), []);
+		assert.deepEqual(suggestLibrary.WKCSubscriptionsModuleCreateSuggestionsFor('alfa'), []);
 	});
 
 	it('returns none if localhost', function() {
-		assert.deepEqual(suggestLibrary.WKCSubscriptionsModuleCreateSuggestFor('localhost'), []);
+		assert.deepEqual(suggestLibrary.WKCSubscriptionsModuleCreateSuggestionsFor('localhost'), []);
 	});
 
 	it('returns urls from domain', function() {
-		assert.deepEqual(suggestLibrary.WKCSubscriptionsModuleCreateSuggestFor('alfa.com').map(function (e) {
+		assert.deepEqual(suggestLibrary.WKCSubscriptionsModuleCreateSuggestionsFor('alfa.com').map(function (e) {
 			return e.WKCSuggestionURL;
 		}), [
 			'https://alfa.com',
@@ -58,7 +58,7 @@ describe('WKCSubscriptionsModuleCreateSuggestFor', function testWKCSubscriptions
 	});
 
 	it('returns urls from domain with slash', function() {
-		assert.deepEqual(suggestLibrary.WKCSubscriptionsModuleCreateSuggestFor('alfa.com/bravo').map(function (e) {
+		assert.deepEqual(suggestLibrary.WKCSubscriptionsModuleCreateSuggestionsFor('alfa.com/bravo').map(function (e) {
 			return e.WKCSuggestionURL;
 		}), [
 			'https://alfa.com/bravo',
@@ -67,7 +67,7 @@ describe('WKCSubscriptionsModuleCreateSuggestFor', function testWKCSubscriptions
 	});
 
 	it('returns urls from domain with slash and query', function() {
-		assert.deepEqual(suggestLibrary.WKCSubscriptionsModuleCreateSuggestFor('alfa.com/bravo?charlie=delta').map(function (e) {
+		assert.deepEqual(suggestLibrary.WKCSubscriptionsModuleCreateSuggestionsFor('alfa.com/bravo?charlie=delta').map(function (e) {
 			return e.WKCSuggestionURL;
 		}), [
 			'https://alfa.com/bravo?charlie=delta',
@@ -76,7 +76,7 @@ describe('WKCSubscriptionsModuleCreateSuggestFor', function testWKCSubscriptions
 	});
 
 	it('returns https if no http', function() {
-		assert.deepEqual(suggestLibrary.WKCSubscriptionsModuleCreateSuggestFor('http://alfa.com/bravo').map(function (e) {
+		assert.deepEqual(suggestLibrary.WKCSubscriptionsModuleCreateSuggestionsFor('http://alfa.com/bravo').map(function (e) {
 			return e.WKCSuggestionURL;
 		}), [
 			'https://alfa.com/bravo',
@@ -84,7 +84,7 @@ describe('WKCSubscriptionsModuleCreateSuggestFor', function testWKCSubscriptions
 	});
 
 	it('returns none if https', function() {
-		assert.deepEqual(suggestLibrary.WKCSubscriptionsModuleCreateSuggestFor('https://alfa.com/bravo').map(function (e) {
+		assert.deepEqual(suggestLibrary.WKCSubscriptionsModuleCreateSuggestionsFor('https://alfa.com/bravo').map(function (e) {
 			return e.WKCSuggestionURL;
 		}), []);
 	});
