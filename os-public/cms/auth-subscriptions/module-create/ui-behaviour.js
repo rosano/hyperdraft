@@ -269,7 +269,6 @@
 			Object.assign(subscriptionObject, responseJSON);
 
 			moi.commandsConfirmationClear();
-			moi.propertiesFetchURL('');
 			moi.reactFetchFlash(OLSKFormatted(OLSKLocalized('WKCSubscriptionsModuleCreateFlashFormat'), subscriptionObject.WKCSubscriptionURL));
 		}, moi._commandsSubscriptionsAlertErrorCreate);
 	};
@@ -327,7 +326,6 @@
 				.attr('class', 'WKCSubscriptionsModuleCreateAlternativesFeedsItem')
 				.append('button')
 				.on('click', function(e) {
-					moi.propertiesFetchURL(e);
 					moi.commandsFetchURL(e);
 				})
 				.merge(selection)
