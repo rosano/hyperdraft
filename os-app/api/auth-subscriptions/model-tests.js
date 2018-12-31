@@ -67,7 +67,7 @@ describe('WKCSubscriptionHandlerCustomTwitterRequestCallback', function testWKCS
 
 	it('returns error if no kWKCSettingKeyTwitterToken', function(done) {
 		modelLibrary.WKCSubscriptionHandlerCustomTwitterRequestCallback(WKCTestingMongoClient, function(err, responseJSON) {
-			assert.deepEqual(err.message, 'WKCErrorMissingToken');
+			assert.deepEqual(err.message, 'WKCErrorTwitterMissingToken');
 			assert.deepEqual(err.responseJSON, undefined);
 
 			done();

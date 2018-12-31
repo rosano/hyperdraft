@@ -1,6 +1,7 @@
 WKCSubscriptionsModuleCreateHeadingText: Add subscription
 WKCSubscriptionsModuleCreateFetchFormSubmitText: Fetch
 WKCSubscriptionsModuleCreateErrorFetchText: Error fetching URL. Please check the input and try again.
+WKCSubscriptionsModuleCreateErrorTwitterMissingToken: To subscribe to Twitter profiles, first setup your account in Settings.
 WKCSubscriptionsModuleCreateErrorCreateText: Error adding subscription. Please check the input and try again.
 WKCSubscriptionsModuleCreateAlternativesFeedsAlertText: 'If you would like to add one of the feeds found on this page, click the corresponding button below:'
 WKCSubscriptionsModuleCreateAlternativesSourcesAlertText: 'Did you mean:'

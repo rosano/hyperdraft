@@ -19,7 +19,6 @@
 			OLSKPublicConstants.WKCSubscriptionHandlerCustomTwitter,
 		],
 	].reduce(function (map, e) {
-		console.log(map, e);
 		map[e.shift()] = e.pop();
 
 		return map;
@@ -120,7 +119,15 @@
 			} : {})),
 		})
 		.then(function(data) {
-			var parsedXML = (new DOMParser()).parseFromString(data, 'application/xml');
+			data = JSON.parse(data);
+
+			if (data.err === 'WKCErrorTwitterMissingToken') {
+				return moi.commandsFetchAlertErrorTwitterMissingToken();
+			} else if (data.err) {
+				throw new Error(data.err);
+			}
+
+			var parsedXML = (new DOMParser()).parseFromString(data.body, 'application/xml');
 
 			if (OLSKType.OLSKTypeInputDataIsDOMDocumentRSS(parsedXML)) {
 				return moi.commandsConfirmURLFeedRSS(inputData, parsedXML);
@@ -130,17 +137,19 @@
 				return moi.commandsConfirmURLFeedAtom(inputData, parsedXML);
 			}
 
-			var parsedHTML = (new DOMParser()).parseFromString(data, 'text/html');
+			var parsedHTML = (new DOMParser()).parseFromString(data.body, 'text/html');
 
 			if (OLSKType.OLSKTypeInputDataIsDOMDocumentHTML(parsedHTML)) {
 				return moi.commandsConfirmURLPage(inputData, parsedHTML);
 			}
 
-			return moi.commandsConfirmURLFile(inputData, data);
+			return moi.commandsConfirmURLFile(inputData, data.body);
 		})
 		.catch(moi.commandsFetchAlertError)
 		.finally(function () {
-			moi.reactAlternativesSources(WKCSubscriptionsModuleCreateSuggestions.WKCSubscriptionsModuleCreateSuggestionsFor(inputData));
+			moi.reactSuggestions(WKCSubscriptionsModuleCreateSuggestions.WKCSubscriptionsModuleCreateSuggestionsFor(inputData));
+
+			moi.reactFetchLoaderVisibility(false);
 		});
 	};
 
@@ -154,6 +163,12 @@
 		d3.select('#WKCSubscriptionsModuleCreateFetchFormURL').node().focus();
 
 		throw error;
+	};
+
+	//_ commandsFetchAlertErrorTwitterMissingToken
+
+	moi.commandsFetchAlertErrorTwitterMissingToken = function (error) {
+		window.alert(OLSKLocalized('WKCSubscriptionsModuleCreateErrorTwitterMissingToken'));
 	};
 
 	//_ commandsConfirmURLFeedRSS
@@ -260,12 +275,14 @@
 		moi.reactFetchFormVisibility(true);
 		moi.reactPreviewFeedItems([]);
 		moi.reactAlternativesFeeds([]);
-		moi.reactAlternativesSources([]);
+		moi.reactSuggestions([]);
 
 		d3.selectAll('.WKCSubscriptionsModuleCreatePreview').classed('WKCSubscriptionsHidden', true);
 
 		d3.select('#WKCSubscriptionsModuleCreateConfirmationFormName').property('value', '');
 		d3.select('#WKCSubscriptionsModuleCreateConfirmationFormBlurb').property('value', '');
+
+		d3.select('#WKCSubscriptionsModuleCreateFetchFormURL').node().focus();
 	};
 
 	//_ _commandsSubscriptionsCreate
@@ -351,9 +368,9 @@
 		d3.select('#WKCSubscriptionsModuleCreateAlternativesFeeds').classed('WKCSubscriptionsHidden', !feedURLs.length);
 	};
 
-	//_ reactAlternativesSources
+	//_ reactSuggestions
 
-	moi.reactAlternativesSources = function (suggestionObjects) {
+	moi.reactSuggestions = function (suggestionObjects) {
 		var selection = d3.select('#WKCSubscriptionsModuleCreateAlternativesSourcesList')
 			.selectAll('.WKCSubscriptionsModuleCreateAlternativesSourcesListItem').data(suggestionObjects);
 		
@@ -408,8 +425,6 @@
 	//_ reactPreviewShared
 
 	moi.reactPreviewShared = function (titleContent, blurbContent, typeContent) {
-		moi.reactFetchLoaderVisibility(false);
-
 		if (titleContent) {
 			d3.select('#WKCSubscriptionsModuleCreateConfirmationFormName').property('value', titleContent);
 		}

@@ -51,7 +51,7 @@ exports.WKCSubscriptionHandlerCustomTwitterRequestCallback = function(databaseCl
 		}
 
 		if (!result) {
-			return completionHandler(new Error('WKCErrorMissingToken'));
+			return completionHandler(new Error('WKCErrorTwitterMissingToken'));
 		}
 
 		var settingObject = result;

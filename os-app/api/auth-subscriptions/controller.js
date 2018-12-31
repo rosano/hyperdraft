@@ -138,17 +138,20 @@ exports.WKCActionAPISubscriptionsSearch = function(req, res, next) {
 //_ WKCActionAPISubscriptionsFetch
 
 exports.WKCActionAPISubscriptionsFetch = function(req, res, next) {
-	if (!urlPackage.parse(req.body.WKCSubscriptionsAPIFetchURL).hostname) {
-		return res.status(400).send('WKCErrorInvalidInput');
-	}
-
-	return requestPackage(metalLibrary.WKCMetalSubscriptionsScrape(req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, req.body.WKCSubscriptionsAPIFetchURL, function(err, response, body) {
+	return metalLibrary.WKCMetalSubscriptionsScrape(req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, req.body.WKCSubscriptionsAPIFetchURL, function (err, responseJSON) {
 		if (err) {
-			console.log(err);
+			return res.status(200).json({
+				err: err.message,
+			});
 		}
 
-		return res.status(200).send(body);
+		return requestPackage(responseJSON, function(err, response, body) {
+			return res.status(200).json({
+				err: err ? err.message : undefined,
+				body: body,
+			});
+		});
 	}, {
 		WKCOptionHandler: req.body.WKCSubscriptionsAPIFetchHandler,
-	}));
+	});
 };
