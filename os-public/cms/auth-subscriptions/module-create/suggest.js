@@ -66,18 +66,28 @@
 		if (!urlObject.protocol) {
 			urlObject.set('protocol', 'http:');
 
-			suggestionObjects.push(urlObject.toString());
+			suggestionObjects.push({
+				WKCSuggestionURL: urlObject.toString(),
+				WKCSuggestionType: exports.WKCSubscriptionsModuleCreateSuggestionsTypeComplete(),
+			});
 		}
 
 		if (urlObject.protocol === 'http:') {
 			urlObject.set('protocol', 'https:');
 
-			suggestionObjects.push(urlObject.toString());
+			suggestionObjects.push({
+				WKCSuggestionURL: urlObject.toString(),
+				WKCSuggestionType: exports.WKCSubscriptionsModuleCreateSuggestionsTypeSecure(),
+			});
 		}
 
 		return suggestionObjects.sort(function (a, b) {
-			return a < b;
-		});
+			const typesOrder = [
+				exports.WKCSubscriptionsModuleCreateSuggestionsTypeComplete(),
+				exports.WKCSubscriptionsModuleCreateSuggestionsTypeSecure(),
+			];
+			return typesOrder.indexOf(a.WKCSuggestionType) > typesOrder.indexOf(b.WKCSuggestionType);
+		}).reverse();
 	};
 
 	Object.defineProperty(exports, '__esModule', { value: true });
