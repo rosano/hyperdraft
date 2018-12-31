@@ -8,6 +8,22 @@ var assert = require('assert');
 
 var suggestLibrary = require('./suggest');
 
+describe('WKCSubscriptionsModuleCreateSuggestionsTypeComplete', function testWKCSubscriptionsModuleCreateSuggestionsTypeComplete() {
+
+	it('returns constant', function() {
+		assert.deepEqual(suggestLibrary.WKCSubscriptionsModuleCreateSuggestionsTypeComplete(), 'kWKCSubscriptionsModuleCreateSuggestionsTypeComplete');
+	});
+
+});
+
+describe('WKCSubscriptionsModuleCreateSuggestionsTypeSecure', function testWKCSubscriptionsModuleCreateSuggestionsTypeSecure() {
+
+	it('returns constant', function() {
+		assert.deepEqual(suggestLibrary.WKCSubscriptionsModuleCreateSuggestionsTypeSecure(), 'kWKCSubscriptionsModuleCreateSuggestionsTypeSecure');
+	});
+
+});
+
 describe('WKCSubscriptionsModuleCreateSuggestFor', function testWKCSubscriptionsModuleCreateSuggestFor() {
 
 	it('throws error if not string', function() {

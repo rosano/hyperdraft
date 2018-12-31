@@ -12,6 +12,18 @@
 
 	const urlparsePackage = typeof require === 'undefined' ? window.URLParse : require('url-parse');
 
+	//_ WKCSubscriptionsModuleCreateSuggestionsTypeComplete
+
+	exports.WKCSubscriptionsModuleCreateSuggestionsTypeComplete = function () {
+		return 'kWKCSubscriptionsModuleCreateSuggestionsTypeComplete';
+	};
+
+	//_ WKCSubscriptionsModuleCreateSuggestionsTypeSecure
+
+	exports.WKCSubscriptionsModuleCreateSuggestionsTypeSecure = function () {
+		return 'kWKCSubscriptionsModuleCreateSuggestionsTypeSecure';
+	};
+
 	//_ WKCSubscriptionsModuleCreateSuggestFor
 
 	exports.WKCSubscriptionsModuleCreateSuggestFor = function (inputData) {
