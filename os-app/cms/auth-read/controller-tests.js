@@ -36,7 +36,7 @@ describe('WKCReadAction', function testWKCReadAction() {
 			return viewPath;
 		})), [
 			__dirname,
-			'index',
+			'view',
 		].join('/'));
 	});
 

@@ -13,8 +13,8 @@ locals.OLSKPageAssets = [
 	'ui-style.css',
 	'ui-logic.js',
 	'ui-behaviour.js',
-	'module-create/suggest.js',
-	'module-create/ui-behaviour.js',
+	'module-subscribe/suggest.js',
+	'module-subscribe/ui-behaviour.js',
 ];
 locals.OLSKPagePublicLocalizedStringKeys = [
 	'WKSharedErrorServiceUnavailable',
@@ -74,7 +74,7 @@ locals.OLSKPagePublicRouteKeys = [
 				d3.select('#WKCSubscriptionsCreateHeaderCloseButton').on('click', WKSubscriptions.interfaceSubscriptionsCreateCloseButtonDidClick);
 			</script>
 		</header>
-		<%- include('./module-create/view.ejs') %>
+		<%- include('./module-subscribe/view.ejs') %>
 	</div>
 
 	<div id="WKCSubscriptionsSources">
