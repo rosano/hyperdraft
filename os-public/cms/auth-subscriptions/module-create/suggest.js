@@ -45,12 +45,26 @@
 			return [];
 		}
 
-		return (urlObject.hostname === 'localhost' ? [] : ['https']).concat(urlObject.protocol === 'https:' ? [] : ['http']).map(function (e) {
-			urlObject.set('protocol', e);
+		if (urlObject.protocol === 'https:') {
+			return [];
+		}
 
-			return urlObject.toString();
-		}).filter(function (e) {
-			return e !== inputData;
+		var suggestionObjects = [];
+
+		if (!urlObject.protocol) {
+			urlObject.set('protocol', 'http:');
+
+			suggestionObjects.push(urlObject.toString());
+		}
+
+		if (urlObject.protocol === 'http:') {
+			urlObject.set('protocol', 'https:');
+
+			suggestionObjects.push(urlObject.toString());
+		}
+
+		return suggestionObjects.sort(function (a, b) {
+			return a < b;
 		});
 	};
 
