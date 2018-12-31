@@ -423,7 +423,7 @@
 	//_ reactPreviewPage
 
 	moi.reactPreviewPage = function (inputData) {
-		d3.select('#WKCSubscriptionsModuleCreatePreviewPageContent').html(inputData);
+		d3.select('#WKCSubscriptionsModuleCreatePreviewPage').html(inputData);
 
 		d3.select('#WKCSubscriptionsModuleCreatePreviewPage').classed('WKCSubscriptionsHidden', false);
 	};
