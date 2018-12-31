@@ -330,9 +330,9 @@
 
 	//_ reactAlternativesFeeds
 
-	moi.reactAlternativesFeeds = function (alternativeURLs) {
+	moi.reactAlternativesFeeds = function (feedURLs) {
 		var selection = d3.select('#WKCSubscriptionsModuleCreateAlternativesFeeds ul')
-			.selectAll('.WKCSubscriptionsModuleCreateAlternativesFeedsItem').data(alternativeURLs);
+			.selectAll('.WKCSubscriptionsModuleCreateAlternativesFeedsItem').data(feedURLs);
 		
 		selection.enter()
 			.append('li')
@@ -348,14 +348,14 @@
 
 		selection.exit().remove();
 
-		d3.select('#WKCSubscriptionsModuleCreateAlternativesFeeds').classed('WKCSubscriptionsHidden', !alternativeURLs.length);
+		d3.select('#WKCSubscriptionsModuleCreateAlternativesFeeds').classed('WKCSubscriptionsHidden', !feedURLs.length);
 	};
 
 	//_ reactAlternativesSources
 
-	moi.reactAlternativesSources = function (alternativeURLs) {
+	moi.reactAlternativesSources = function (suggestionObjects) {
 		var selection = d3.select('#WKCSubscriptionsModuleCreateAlternativesSourcesList')
-			.selectAll('.WKCSubscriptionsModuleCreateAlternativesSourcesListItem').data(alternativeURLs);
+			.selectAll('.WKCSubscriptionsModuleCreateAlternativesSourcesListItem').data(suggestionObjects);
 		
 		var parentElement = selection.enter()
 			.append('li')
@@ -390,7 +390,7 @@
 
 		selection.exit().remove();
 
-		d3.select('#WKCSubscriptionsModuleCreateAlternativesSources').classed('WKCSubscriptionsHidden', !alternativeURLs.length);
+		d3.select('#WKCSubscriptionsModuleCreateAlternativesSources').classed('WKCSubscriptionsHidden', !suggestionObjects.length);
 	};
 
 	//_ reactConfirmationVisibility
