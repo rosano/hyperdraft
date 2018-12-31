@@ -103,7 +103,7 @@
 				'x-client-key': moi.propertiesAPIToken(),
 			},
 			body: JSON.stringify({
-				WKCInputURL: inputData,
+				WKCSubscriptionsAPIFetchURL: inputData,
 			})
 		})
 		.then(function(data) {

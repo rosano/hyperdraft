@@ -138,11 +138,11 @@ exports.WKCActionAPISubscriptionsSearch = function(req, res, next) {
 //_ WKCActionAPISubscriptionsFetch
 
 exports.WKCActionAPISubscriptionsFetch = function(req, res, next) {
-	if (!urlPackage.parse(req.body.WKCInputURL).hostname) {
+	if (!urlPackage.parse(req.body.WKCSubscriptionsAPIFetchURL).hostname) {
 		return res.status(400).send('WKCErrorInvalidInput');
 	}
 
-	return requestPackage.get(req.body.WKCInputURL, function(err, response, body) {
+	return requestPackage.get(req.body.WKCSubscriptionsAPIFetchURL, function(err, response, body) {
 		res.status(200).send(body);
 	});
 };
