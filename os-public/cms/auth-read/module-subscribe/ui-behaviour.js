@@ -371,23 +371,23 @@
 	//_ reactSuggestions
 
 	moi.reactSuggestions = function (suggestionObjects) {
-		var selection = d3.select('#WKCSubscriptionsModuleCreateAlternativesSourcesList')
-			.selectAll('.WKCSubscriptionsModuleCreateAlternativesSourcesListItem').data(suggestionObjects);
+		var selection = d3.select('#WKCSubscriptionsModuleCreateSuggestionsList')
+			.selectAll('.WKCSubscriptionsModuleCreateSuggestionsListItem').data(suggestionObjects);
 		
 		var parentElement = selection.enter()
 			.append('li')
-				.attr('class', 'WKCSubscriptionsModuleCreateAlternativesSourcesListItem');
+				.attr('class', 'WKCSubscriptionsModuleCreateSuggestionsListItem');
 
 		parentElement.append('button')
-			.attr('class', 'WKCSubscriptionsModuleCreateAlternativesSourcesListItemButton');
+			.attr('class', 'WKCSubscriptionsModuleCreateSuggestionsListItemButton');
 
 		parentElement.append('span')
 			.append('span')
-				.attr('class', 'WKCSubscriptionsModuleCreateAlternativesSourcesListItemName');
+				.attr('class', 'WKCSubscriptionsModuleCreateSuggestionsListItemName');
 
 		parentElement = parentElement.merge(selection);
 
-		parentElement.select('.WKCSubscriptionsModuleCreateAlternativesSourcesListItemButton')
+		parentElement.select('.WKCSubscriptionsModuleCreateSuggestionsListItemButton')
 			.on('click', function(e) {
 				moi.commandsFetchURL(e.WKCSuggestionURL, kWKCSubscriptionsModuleCreateHandlerMap[e.WKCSuggestionType]);
 			})
@@ -395,19 +395,19 @@
 				return e.WKCSuggestionURL;
 			});
 
-		parentElement.select('.WKCSubscriptionsModuleCreateAlternativesSourcesListItemName')
+		parentElement.select('.WKCSubscriptionsModuleCreateSuggestionsListItemName')
 			.html(function(e) {
 				return [
 					'&nbsp;',
 					'(',
-					OLSKLocalized('WKCSubscriptionsModuleCreateAlternativesSourcesNameText'.concat(e.WKCSuggestionType)),
+					OLSKLocalized('WKCSubscriptionsModuleCreateSuggestionsNameText'.concat(e.WKCSuggestionType)),
 					')',
 				].join('');
 			});
 
 		selection.exit().remove();
 
-		d3.select('#WKCSubscriptionsModuleCreateAlternativesSources').classed('WKCSubscriptionsHidden', !suggestionObjects.length);
+		d3.select('#WKCSubscriptionsModuleCreateSuggestions').classed('WKCSubscriptionsHidden', !suggestionObjects.length);
 	};
 
 	//_ reactConfirmationVisibility
