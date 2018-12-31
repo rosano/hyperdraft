@@ -57,6 +57,43 @@ describe('WKCSubscriptionHandlerCustomTwitter', function testWKCSubscriptionHand
 
 });
 
+describe('WKCSubscriptionHandlerCustomTwitterRequestCallback', function testWKCSubscriptionHandlerCustomTwitterRequestCallback() {
+
+	it('throws error if param1 not function', function() {
+		assert.throws(function() {
+			modelLibrary.WKCSubscriptionHandlerCustomTwitterRequestCallback(WKCTestingMongoClient, null);
+		}, /WKCErrorInvalidInput/);
+	});
+
+	it('returns error if no kWKCSettingKeyTwitterToken', function(done) {
+		modelLibrary.WKCSubscriptionHandlerCustomTwitterRequestCallback(WKCTestingMongoClient, function(err, responseJSON) {
+			assert.deepEqual(err.message, 'WKCErrorMissingToken');
+			assert.deepEqual(err.responseJSON, undefined);
+
+			done();
+		});
+	});
+
+	it('returns kWKCSettingKeyTwitterToken', function(done) {
+		WKCTestingMongoClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_settings').insertOne({
+			WKCSettingKey: 'kWKCSettingKeyTwitterToken',
+			WKCSettingValue: 'alfa',
+		}, function(err, result) {
+			modelLibrary.WKCSubscriptionHandlerCustomTwitterRequestCallback(WKCTestingMongoClient, function(err, responseJSON) {
+				assert.deepEqual(err, undefined);
+				assert.deepEqual(responseJSON, {
+					auth: {
+						bearer: 'alfa',
+					},
+				});
+				
+				done();
+			});
+		});
+	});
+
+});
+
 describe('WKCSubscriptionHandlers', function testWKCSubscriptionHandlers() {
 
 	it('returns constant', function() {

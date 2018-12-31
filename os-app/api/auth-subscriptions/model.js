@@ -36,6 +36,38 @@ exports.WKCSubscriptionHandlerCustomTwitter = function() {
 	return 'CustomTwitter';
 };
 
+//_ WKCSubscriptionHandlerCustomTwitterRequestCallback
+
+exports.WKCSubscriptionHandlerCustomTwitterRequestCallback = function(databaseClient, completionHandler) {
+	if (typeof completionHandler !== 'function') {
+		throw new Error('WKCErrorInvalidInput');
+	}
+
+	return databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_settings').findOne({
+		WKCSettingKey: 'kWKCSettingKeyTwitterToken',
+	}, function(err, result) {
+		if (err) {
+			return completionHandler(err);
+		}
+
+		if (!result) {
+			return completionHandler(new Error('WKCErrorMissingToken'));
+		}
+
+		var settingObject = result;
+
+		exports.WKCSubscriptionHiddenPropertyNames().forEach(function(obj) {
+			delete settingObject[obj];
+		});
+
+		return completionHandler(undefined, {
+			auth: {
+				bearer: settingObject.WKCSettingValue,
+			},
+		});
+	});
+};
+
 //_ WKCSubscriptionHandlers
 
 exports.WKCSubscriptionHandlers = function() {
