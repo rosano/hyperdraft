@@ -13,6 +13,17 @@
 	var moi = {};
 
 	var WKSubscriptionsModuleCreatePropertyAPIToken;
+	var kWKCSubscriptionsModuleCreateHandlerMap = [
+		[
+			WKCSubscriptionsModuleCreateSuggestions.WKCSubscriptionsModuleCreateSuggestionsTypeCustomTwitter(),
+			OLSKPublicConstants.WKCSubscriptionHandlerCustomTwitter,
+		],
+	].reduce(function (map, e) {
+		console.log(map, e);
+		map[e.shift()] = e.pop();
+
+		return map;
+	}, {});
 
 	var stringContentForFirstElement = function (inputData) {
 		return inputData[0] ? inputData[0].textContent.trim() : '';
@@ -85,7 +96,7 @@
 
 	//_ commandsFetchURL
 
-	moi.commandsFetchURL = function (inputData) {
+	moi.commandsFetchURL = function (inputData, fetchHandler) {
 		if (!inputData) {
 			return;
 		}
@@ -102,9 +113,11 @@
 				'Content-Type': 'application/json',
 				'x-client-key': moi.propertiesAPIToken(),
 			},
-			body: JSON.stringify({
+			body: JSON.stringify(Object.assign({
 				WKCSubscriptionsAPIFetchURL: inputData,
-			})
+			}, fetchHandler ? {
+				WKCSubscriptionsAPIFetchHandler: fetchHandler,
+			} : {})),
 		})
 		.then(function(data) {
 			var parsedXML = (new DOMParser()).parseFromString(data, 'application/xml');
@@ -359,7 +372,7 @@
 
 		parentElement.select('.WKCSubscriptionsModuleCreateAlternativesSourcesListItemButton')
 			.on('click', function(e) {
-				moi.commandsFetchURL(e.WKCSuggestionURL);
+				moi.commandsFetchURL(e.WKCSuggestionURL, kWKCSubscriptionsModuleCreateHandlerMap[e.WKCSuggestionType]);
 			})
 			.text(function(e) {
 				return e.WKCSuggestionURL;
