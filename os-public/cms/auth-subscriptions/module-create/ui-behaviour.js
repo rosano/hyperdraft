@@ -30,19 +30,29 @@
 		WKSubscriptionsModuleCreatePropertyAPIToken = inputData;
 	};
 
+	//_ propertiesFetchURL
+
+	moi.propertiesFetchURL = function (inputData) {
+		if (typeof inputData === 'undefined') {
+			return d3.select('#WKCSubscriptionsModuleCreateFetchFormInput').property('value');
+		}
+
+		d3.select('#WKCSubscriptionsModuleCreateFetchFormInput').property('value', inputData);
+	};
+
 	//# INTERFACE
 
 	//_ interfaceFetchFormDidSubmit
 
 	moi.interfaceFetchFormDidSubmit = function () {
-		moi.commandsFetchURL(d3.select('#WKCSubscriptionsModuleCreateFetchFormInput').property('value'));
+		moi.commandsFetchURL(moi.propertiesFetchURL());
 	};
 
 	//_ interfaceConfirmationFormDidSubmit
 
 	moi.interfaceConfirmationFormDidSubmit = function () {
 		moi._commandsSubscriptionsCreate({
-			WKCSubscriptionURL: d3.select('#WKCSubscriptionsModuleCreateFetchFormInput').node().value,
+			WKCSubscriptionURL: moi.propertiesFetchURL(),
 			WKCSubscriptionType: d3.select('#WKCSubscriptionsModuleCreateConfirmationFormType').node().value,
 			WKCSubscriptionName: d3.select('#WKCSubscriptionsModuleCreateConfirmationFormName').node().value,
 			WKCSubscriptionBlurb: d3.select('#WKCSubscriptionsModuleCreateConfirmationFormBlurb').node().value,
@@ -317,7 +327,7 @@
 				.attr('class', 'WKCSubscriptionsModuleCreateAlternativesFeedsItem')
 				.append('button')
 				.on('click', function(e) {
-					d3.select('#WKCSubscriptionsModuleCreateFetchFormInput').property('value', e)
+					moi.propertiesFetchURL(e);
 					moi.commandsFetchURL(e);
 				})
 				.merge(selection)
