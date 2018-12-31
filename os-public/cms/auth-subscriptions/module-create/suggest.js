@@ -12,16 +12,16 @@
 
 	const urlparsePackage = typeof require === 'undefined' ? window.URLParse : require('url-parse');
 
-	//_ WKCSubscriptionsModuleCreateSuggestionsTypeComplete
+	//_ WKCSubscriptionsModuleCreateSuggestionsTypeStandard
 
-	exports.WKCSubscriptionsModuleCreateSuggestionsTypeComplete = function () {
-		return 'kWKCSubscriptionsModuleCreateSuggestionsTypeComplete';
+	exports.WKCSubscriptionsModuleCreateSuggestionsTypeStandard = function () {
+		return 'SuggestionsTypeStandard';
 	};
 
 	//_ WKCSubscriptionsModuleCreateSuggestionsTypeSecure
 
 	exports.WKCSubscriptionsModuleCreateSuggestionsTypeSecure = function () {
-		return 'kWKCSubscriptionsModuleCreateSuggestionsTypeSecure';
+		return 'SuggestionsTypeSecure';
 	};
 
 	//_ WKCSubscriptionsModuleCreateSuggestionsFor
@@ -68,7 +68,7 @@
 
 			suggestionObjects.push({
 				WKCSuggestionURL: urlObject.toString(),
-				WKCSuggestionType: exports.WKCSubscriptionsModuleCreateSuggestionsTypeComplete(),
+				WKCSuggestionType: exports.WKCSubscriptionsModuleCreateSuggestionsTypeStandard(),
 			});
 		}
 
@@ -83,7 +83,7 @@
 
 		return suggestionObjects.sort(function (a, b) {
 			const typesOrder = [
-				exports.WKCSubscriptionsModuleCreateSuggestionsTypeComplete(),
+				exports.WKCSubscriptionsModuleCreateSuggestionsTypeStandard(),
 				exports.WKCSubscriptionsModuleCreateSuggestionsTypeSecure(),
 			];
 			return typesOrder.indexOf(a.WKCSuggestionType) > typesOrder.indexOf(b.WKCSuggestionType);

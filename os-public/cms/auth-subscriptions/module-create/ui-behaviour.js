@@ -333,26 +333,40 @@
 	//_ reactAlternativesSources
 
 	moi.reactAlternativesSources = function (alternativeURLs) {
-		var selection = d3.select('#WKCSubscriptionsModuleCreateAlternativesSources ul')
-			.selectAll('.WKCSubscriptionsModuleCreateAlternativesSourcesItem').data(alternativeURLs);
+		var selection = d3.select('#WKCSubscriptionsModuleCreateAlternativesSourcesList')
+			.selectAll('.WKCSubscriptionsModuleCreateAlternativesSourcesListItem').data(alternativeURLs);
 		
 		var parentElement = selection.enter()
 			.append('li')
-				.attr('class', 'WKCSubscriptionsModuleCreateAlternativesSourcesItem');
+				.attr('class', 'WKCSubscriptionsModuleCreateAlternativesSourcesListItem');
 
-		parentElement
-				.append('button');
+		parentElement.append('button')
+			.attr('class', 'WKCSubscriptionsModuleCreateAlternativesSourcesListItemButton');
+
+		parentElement.append('span')
+			.append('span')
+				.attr('class', 'WKCSubscriptionsModuleCreateAlternativesSourcesListItemName');
 
 		parentElement = parentElement.merge(selection);
 
-		parentElement.select('button')
+		parentElement.select('.WKCSubscriptionsModuleCreateAlternativesSourcesListItemButton')
 			.on('click', function(e) {
-				d3.select('#WKCSubscriptionsModuleCreateFetchFormInput').property('value', e)
+				d3.select('#WKCSubscriptionsModuleCreateFetchFormInput').property('value', e.WKCSuggestionURL)
 				
-				moi.commandsFetchURL(e);
+				moi.commandsFetchURL(e.WKCSuggestionURL);
 			})
 			.text(function(e) {
-				return e;
+				return e.WKCSuggestionURL;
+			});
+
+		parentElement.select('.WKCSubscriptionsModuleCreateAlternativesSourcesListItemName')
+			.html(function(e) {
+				return [
+					'&nbsp;',
+					'(',
+					OLSKLocalized('WKCSubscriptionsModuleCreateAlternativesSourcesNameText'.concat(e.WKCSuggestionType)),
+					')',
+				].join('');
 			});
 
 		selection.exit().remove();

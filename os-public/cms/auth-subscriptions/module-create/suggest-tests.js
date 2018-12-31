@@ -8,10 +8,10 @@ var assert = require('assert');
 
 var suggestLibrary = require('./suggest');
 
-describe('WKCSubscriptionsModuleCreateSuggestionsTypeComplete', function testWKCSubscriptionsModuleCreateSuggestionsTypeComplete() {
+describe('WKCSubscriptionsModuleCreateSuggestionsTypeStandard', function testWKCSubscriptionsModuleCreateSuggestionsTypeStandard() {
 
 	it('returns constant', function() {
-		assert.deepEqual(suggestLibrary.WKCSubscriptionsModuleCreateSuggestionsTypeComplete(), 'kWKCSubscriptionsModuleCreateSuggestionsTypeComplete');
+		assert.deepEqual(suggestLibrary.WKCSubscriptionsModuleCreateSuggestionsTypeStandard(), 'SuggestionsTypeStandard');
 	});
 
 });
@@ -19,7 +19,7 @@ describe('WKCSubscriptionsModuleCreateSuggestionsTypeComplete', function testWKC
 describe('WKCSubscriptionsModuleCreateSuggestionsTypeSecure', function testWKCSubscriptionsModuleCreateSuggestionsTypeSecure() {
 
 	it('returns constant', function() {
-		assert.deepEqual(suggestLibrary.WKCSubscriptionsModuleCreateSuggestionsTypeSecure(), 'kWKCSubscriptionsModuleCreateSuggestionsTypeSecure');
+		assert.deepEqual(suggestLibrary.WKCSubscriptionsModuleCreateSuggestionsTypeSecure(), 'SuggestionsTypeSecure');
 	});
 
 });
