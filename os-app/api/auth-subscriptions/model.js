@@ -30,6 +30,12 @@ exports.WKCSubscriptionTypePage = function() {
 	return 'Page';
 };
 
+//_ WKCSubscriptionTypeCustomTwitter
+
+exports.WKCSubscriptionTypeCustomTwitter = function() {
+	return 'CustomTwitter';
+};
+
 //_ WKCSubscriptionTypes
 
 exports.WKCSubscriptionTypes = function() {

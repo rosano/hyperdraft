@@ -49,6 +49,14 @@ describe('WKCSubscriptionTypePage', function testWKCSubscriptionTypePage() {
 
 });
 
+describe('WKCSubscriptionTypeCustomTwitter', function testWKCSubscriptionTypeCustomTwitter() {
+
+	it('returns constant', function() {
+		assert.strictEqual(modelLibrary.WKCSubscriptionTypeCustomTwitter(), 'CustomTwitter');
+	});
+
+});
+
 describe('WKCSubscriptionTypes', function testWKCSubscriptionTypes() {
 
 	it('returns constant', function() {
