@@ -24,6 +24,12 @@
 		return 'SuggestionsTypeSecure';
 	};
 
+	//_ WKCSubscriptionsModuleCreateSuggestionsTypeCustomTwitter
+
+	exports.WKCSubscriptionsModuleCreateSuggestionsTypeCustomTwitter = function () {
+		return 'SuggestionsTypeCustomTwitter';
+	};
+
 	//_ WKCSubscriptionsModuleCreateSuggestionsFor
 
 	exports.WKCSubscriptionsModuleCreateSuggestionsFor = function (inputData) {
@@ -33,6 +39,14 @@
 
 		if (!inputData.trim()) {
 			return [];
+		}
+
+		var suggestionObjects = [];
+
+		suggestionObjects.push(...exports._WKCSubscriptionsModuleCreateSuggestionsForTwitter(inputData));
+
+		if (suggestionObjects.length) {
+			return suggestionObjects;
 		}
 
 		var urlObject = urlparsePackage(inputData, {}); // To parse an input independently of the browser's current URL (e.g. for functionality parity with the library in a Node environment), pass an empty location object as the second parameter
@@ -54,14 +68,12 @@
 		}
 
 		if (!urlObject.hostname.match(/\./)) {
-			return [];
+			return suggestionObjects;
 		}
 
 		if (urlObject.protocol === 'https:') {
-			return [];
+			return suggestionObjects;
 		}
-
-		var suggestionObjects = [];
 
 		if (!urlObject.protocol) {
 			urlObject.set('protocol', 'http:');
@@ -88,6 +100,33 @@
 			];
 			return typesOrder.indexOf(a.WKCSuggestionType) > typesOrder.indexOf(b.WKCSuggestionType);
 		}).reverse();
+	};
+
+	//_ _WKCSubscriptionsModuleCreateSuggestionsForTwitter
+
+	exports._WKCSubscriptionsModuleCreateSuggestionsForTwitter = function (inputData) {
+		const urlHandle = inputData.match(/https?:\/\/(www\.)?twitter\.com\/(?!(search\b))(\#\!\/)?(intent\/user\?screen_name=)?@?(\w+)/i);
+
+		if (urlHandle && urlHandle.slice(-1).pop()) {
+			return [
+				{
+					WKCSuggestionType: exports.WKCSubscriptionsModuleCreateSuggestionsTypeCustomTwitter(),
+					WKCSuggestionURL: 'https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name='.concat(urlHandle.slice(-1).pop()),
+				},
+			];
+		}
+
+		const userHandle = inputData.match(/@(\w+)$/i);
+		if (userHandle && userHandle.slice(-1).pop()) {
+			return [
+				{
+					WKCSuggestionType: exports.WKCSubscriptionsModuleCreateSuggestionsTypeCustomTwitter(),
+					WKCSuggestionURL: 'https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name='.concat(userHandle.slice(-1).pop()),
+				},
+			];
+		}
+
+		return [];
 	};
 
 	Object.defineProperty(exports, '__esModule', { value: true });
