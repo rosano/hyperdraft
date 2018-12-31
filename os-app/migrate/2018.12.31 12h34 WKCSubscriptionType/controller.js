@@ -9,11 +9,12 @@ const subscriptionsMetalLibrary = require('../../api/auth-subscriptions/metal.js
 //_ OLSKControllerRoutes
 
 exports.OLSKControllerRoutes = function() {
+	return {};
 	return {
 		WKCMigrateMainRoute: {
 			OLSKRoutePath: '/migrate/2018-12-31T12:34',
 			OLSKRouteMethod: 'get',
-			OLSKRouteFunction: exports.WKCMigrateMainAction,,
+			OLSKRouteFunction: exports.WKCMigrateMainAction,
 			OLSKRouteMiddlewares: [
 				'WKCSharedMiddlewareAuthenticate',
 			],
