@@ -121,7 +121,7 @@ describe('WKCMetalArticlesUpdate', function testWKCMetalArticlesUpdate() {
 		});
 	});
 
-	it('returns WKCErrors if not valid WKCArticle', function(done) {
+	it('returns WKCErrors if not valid value', function(done) {
 		metalLibrary.WKCMetalArticlesCreate(WKCTestingMongoClient, kTestingValidArticle(), function(err, articleObject) {
 			metalLibrary.WKCMetalArticlesUpdate(WKCTestingMongoClient, articleObject.WKCArticleID, {
 				WKCArticlePublishDate: new Date('alfa'),

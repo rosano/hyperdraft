@@ -659,7 +659,7 @@
 
 				return textarea.value;
 			})(moi.propertiesSelectedArticle().WKCArticleBody))
-			.classed('WKCSubscriptionsDetailContentBodyFile', moi._propertiesSubscriptionObjectsByID()[moi.propertiesSelectedArticle().WKCArticleSubscriptionID].WKCSubscriptionType === 'File');
+			.classed('WKCSubscriptionsDetailContentBodyFile', moi._propertiesSubscriptionObjectsByID()[moi.propertiesSelectedArticle().WKCArticleSubscriptionID].WKCSubscriptionHandler === 'File');
 
 		d3.selectAll('#WKCSubscriptionsDetailContentBody a').attr('target', '_blank');
 

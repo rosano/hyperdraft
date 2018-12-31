@@ -13,7 +13,7 @@ const kTesting = {
 	kTestingValidSubscription: function() {
 		return {
 			WKCSubscriptionURL: 'https://google.com',
-			WKCSubscriptionType: modelLibrary.WKCSubscriptionTypePage(),
+			WKCSubscriptionHandler: modelLibrary.WKCSubscriptionHandlerPage(),
 		};
 	},
 };
@@ -35,7 +35,7 @@ describe('WKCMetalSubscriptionsCreate', function testWKCMetalSubscriptionsCreate
 	it('returns WKCErrors if not valid WKCSubscription', function(done) {
 		metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, {
 			WKCSubscriptionURL: 'google.com',
-			WKCSubscriptionType: modelLibrary.WKCSubscriptionTypePage(),
+			WKCSubscriptionHandler: modelLibrary.WKCSubscriptionHandlerPage(),
 		}, function(err, responseJSON) {
 			assert.deepEqual(responseJSON.WKCErrors, {
 				WKCSubscriptionURL: [

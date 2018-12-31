@@ -53,7 +53,7 @@
 	moi.interfaceConfirmationFormDidSubmit = function () {
 		moi._commandsSubscriptionsCreate({
 			WKCSubscriptionURL: moi.propertiesFetchURL(),
-			WKCSubscriptionType: d3.select('#WKCSubscriptionsModuleCreateConfirmationFormType').node().value,
+			WKCSubscriptionHandler: d3.select('#WKCSubscriptionsModuleCreateConfirmationFormType').node().value,
 			WKCSubscriptionName: d3.select('#WKCSubscriptionsModuleCreateConfirmationFormName').node().value,
 			WKCSubscriptionBlurb: d3.select('#WKCSubscriptionsModuleCreateConfirmationFormBlurb').node().value,
 		});
@@ -146,7 +146,7 @@
 	//_ commandsConfirmURLFeedRSS
 
 	moi.commandsConfirmURLFeedRSS = function (inputData, parsedXML) {
-		moi.reactConfirmationType(OLSKPublicConstants.WKCSubscriptionTypeFeedRSS);
+		moi.reactConfirmationType(OLSKPublicConstants.WKCSubscriptionHandlerFeedRSS);
 
 		moi.reactPreviewFeedItems([].slice.call(parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('item')));
 		
@@ -156,7 +156,7 @@
 	//_ commandsConfirmURLFeedAtom
 
 	moi.commandsConfirmURLFeedAtom = function (inputData, parsedXML) {
-		moi.reactConfirmationType(OLSKPublicConstants.WKCSubscriptionTypeFeedAtom);
+		moi.reactConfirmationType(OLSKPublicConstants.WKCSubscriptionHandlerFeedAtom);
 
 		moi.reactPreviewFeedItems([].slice.call(parsedXML.getElementsByTagName('entry')));
 		
@@ -166,7 +166,7 @@
 	//_ commandsConfirmURLFile
 
 	moi.commandsConfirmURLFile = function (inputData, rawData) {
-		moi.reactConfirmationType(OLSKPublicConstants.WKCSubscriptionTypeFile);
+		moi.reactConfirmationType(OLSKPublicConstants.WKCSubscriptionHandlerFile);
 		
 		moi.reactPreviewFile(rawData);
 
@@ -176,7 +176,7 @@
 	//_ commandsConfirmURLPage
 
 	moi.commandsConfirmURLPage = function (inputData, parsedHTML) {
-		moi.reactConfirmationType(OLSKPublicConstants.WKCSubscriptionTypePage);
+		moi.reactConfirmationType(OLSKPublicConstants.WKCSubscriptionHandlerPage);
 		
 		moi.reactAlternativesFeeds([].slice.call(parsedHTML.getElementsByTagName('link')).filter(function(e) {
 			return [

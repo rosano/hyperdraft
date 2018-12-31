@@ -6,44 +6,45 @@
 
 var urlPackage = require('url');
 
-//_ WKCSubscriptionTypeFeedRSS
+//_ WKCSubscriptionHandlerFeedRSS
 
-exports.WKCSubscriptionTypeFeedRSS = function() {
+exports.WKCSubscriptionHandlerFeedRSS = function() {
 	return 'FeedRSS';
 };
 
-//_ WKCSubscriptionTypeFeedAtom
+//_ WKCSubscriptionHandlerFeedAtom
 
-exports.WKCSubscriptionTypeFeedAtom = function() {
+exports.WKCSubscriptionHandlerFeedAtom = function() {
 	return 'FeedAtom';
 };
 
-//_ WKCSubscriptionTypeFile
+//_ WKCSubscriptionHandlerFile
 
-exports.WKCSubscriptionTypeFile = function() {
+exports.WKCSubscriptionHandlerFile = function() {
 	return 'File';
 };
 
-//_ WKCSubscriptionTypePage
+//_ WKCSubscriptionHandlerPage
 
-exports.WKCSubscriptionTypePage = function() {
+exports.WKCSubscriptionHandlerPage = function() {
 	return 'Page';
 };
 
-//_ WKCSubscriptionTypeCustomTwitter
+//_ WKCSubscriptionHandlerCustomTwitter
 
-exports.WKCSubscriptionTypeCustomTwitter = function() {
+exports.WKCSubscriptionHandlerCustomTwitter = function() {
 	return 'CustomTwitter';
 };
 
-//_ WKCSubscriptionTypes
+//_ WKCSubscriptionHandlers
 
-exports.WKCSubscriptionTypes = function() {
+exports.WKCSubscriptionHandlers = function() {
 	return [
-		exports.WKCSubscriptionTypeFeedRSS(),
-		exports.WKCSubscriptionTypeFeedAtom(),
-		exports.WKCSubscriptionTypeFile(),
-		exports.WKCSubscriptionTypePage(),
+		exports.WKCSubscriptionHandlerFeedRSS(),
+		exports.WKCSubscriptionHandlerFeedAtom(),
+		exports.WKCSubscriptionHandlerFile(),
+		exports.WKCSubscriptionHandlerPage(),
+		exports.WKCSubscriptionHandlerCustomTwitter(),
 	];
 };
 
@@ -72,8 +73,8 @@ exports.WKCSubscriptionsModelErrorsFor = function(inputData, options) {
 		];
 	}
 
-	if (exports.WKCSubscriptionTypes().indexOf(inputData.WKCSubscriptionType) === -1) {
-		errors.WKCSubscriptionType = [
+	if (exports.WKCSubscriptionHandlers().indexOf(inputData.WKCSubscriptionHandler) === -1) {
+		errors.WKCSubscriptionHandler = [
 			'WKCErrorNotValid',
 		];
 	}

@@ -45,10 +45,10 @@ describe('WKCActionSubscriptionsIndex', function testWKCActionSubscriptionsIndex
 			return pageData;
 		})), {
 			OLSKPagePublicConstants: {
-				WKCSubscriptionTypeFeedRSS: apiSubscriptionsModel.WKCSubscriptionTypeFeedRSS(),
-				WKCSubscriptionTypeFeedAtom: apiSubscriptionsModel.WKCSubscriptionTypeFeedAtom(),
-				WKCSubscriptionTypeFile: apiSubscriptionsModel.WKCSubscriptionTypeFile(),
-				WKCSubscriptionTypePage: apiSubscriptionsModel.WKCSubscriptionTypePage(),
+				WKCSubscriptionHandlerFeedRSS: apiSubscriptionsModel.WKCSubscriptionHandlerFeedRSS(),
+				WKCSubscriptionHandlerFeedAtom: apiSubscriptionsModel.WKCSubscriptionHandlerFeedAtom(),
+				WKCSubscriptionHandlerFile: apiSubscriptionsModel.WKCSubscriptionHandlerFile(),
+				WKCSubscriptionHandlerPage: apiSubscriptionsModel.WKCSubscriptionHandlerPage(),
 			},
 		});
 	});

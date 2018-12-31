@@ -12,59 +12,60 @@ const kTesting = {
 	kTestingValidSubscription: function() {
 		return {
 			WKCSubscriptionURL: 'https://google.com',
-			WKCSubscriptionType: modelLibrary.WKCSubscriptionTypePage(),
+			WKCSubscriptionHandler: modelLibrary.WKCSubscriptionHandlerPage(),
 		};
 	},
 };
 
-describe('WKCSubscriptionTypeFeedRSS', function testWKCSubscriptionTypeFeedRSS() {
+describe('WKCSubscriptionHandlerFeedRSS', function testWKCSubscriptionHandlerFeedRSS() {
 
 	it('returns constant', function() {
-		assert.strictEqual(modelLibrary.WKCSubscriptionTypeFeedRSS(), 'FeedRSS');
+		assert.strictEqual(modelLibrary.WKCSubscriptionHandlerFeedRSS(), 'FeedRSS');
 	});
 
 });
 
-describe('WKCSubscriptionTypeFeedAtom', function testWKCSubscriptionTypeFeedAtom() {
+describe('WKCSubscriptionHandlerFeedAtom', function testWKCSubscriptionHandlerFeedAtom() {
 
 	it('returns constant', function() {
-		assert.strictEqual(modelLibrary.WKCSubscriptionTypeFeedAtom(), 'FeedAtom');
+		assert.strictEqual(modelLibrary.WKCSubscriptionHandlerFeedAtom(), 'FeedAtom');
 	});
 
 });
 
-describe('WKCSubscriptionTypeFile', function testWKCSubscriptionTypeFile() {
+describe('WKCSubscriptionHandlerFile', function testWKCSubscriptionHandlerFile() {
 
 	it('returns constant', function() {
-		assert.strictEqual(modelLibrary.WKCSubscriptionTypeFile(), 'File');
+		assert.strictEqual(modelLibrary.WKCSubscriptionHandlerFile(), 'File');
 	});
 
 });
 
-describe('WKCSubscriptionTypePage', function testWKCSubscriptionTypePage() {
+describe('WKCSubscriptionHandlerPage', function testWKCSubscriptionHandlerPage() {
 
 	it('returns constant', function() {
-		assert.strictEqual(modelLibrary.WKCSubscriptionTypePage(), 'Page');
+		assert.strictEqual(modelLibrary.WKCSubscriptionHandlerPage(), 'Page');
 	});
 
 });
 
-describe('WKCSubscriptionTypeCustomTwitter', function testWKCSubscriptionTypeCustomTwitter() {
+describe('WKCSubscriptionHandlerCustomTwitter', function testWKCSubscriptionHandlerCustomTwitter() {
 
 	it('returns constant', function() {
-		assert.strictEqual(modelLibrary.WKCSubscriptionTypeCustomTwitter(), 'CustomTwitter');
+		assert.strictEqual(modelLibrary.WKCSubscriptionHandlerCustomTwitter(), 'CustomTwitter');
 	});
 
 });
 
-describe('WKCSubscriptionTypes', function testWKCSubscriptionTypes() {
+describe('WKCSubscriptionHandlers', function testWKCSubscriptionHandlers() {
 
 	it('returns constant', function() {
-		assert.deepEqual(modelLibrary.WKCSubscriptionTypes(), [
-			modelLibrary.WKCSubscriptionTypeFeedRSS(),
-			modelLibrary.WKCSubscriptionTypeFeedAtom(),
-			modelLibrary.WKCSubscriptionTypeFile(),
-			modelLibrary.WKCSubscriptionTypePage(),
+		assert.deepEqual(modelLibrary.WKCSubscriptionHandlers(), [
+			modelLibrary.WKCSubscriptionHandlerFeedRSS(),
+			modelLibrary.WKCSubscriptionHandlerFeedAtom(),
+			modelLibrary.WKCSubscriptionHandlerFile(),
+			modelLibrary.WKCSubscriptionHandlerPage(),
+			modelLibrary.WKCSubscriptionHandlerCustomTwitter(),
 		]);
 	});
 
@@ -124,11 +125,11 @@ describe('WKCSubscriptionsModelErrorsFor', function testWKCSubscriptionsModelErr
 		});
 	});
 
-	it('returns errors if WKCSubscriptionType not valid', function() {
+	it('returns errors if WKCSubscriptionHandler not valid', function() {
 		assert.deepEqual(modelLibrary.WKCSubscriptionsModelErrorsFor(Object.assign(kTesting.kTestingValidSubscription(), {
-			WKCSubscriptionType: 'alfa',
+			WKCSubscriptionHandler: 'alfa',
 		})), {
-			WKCSubscriptionType: [
+			WKCSubscriptionHandler: [
 				'WKCErrorNotValid',
 			],
 		});
@@ -140,11 +141,11 @@ describe('WKCSubscriptionsModelErrorsFor', function testWKCSubscriptionsModelErr
 
 	it('ignores unpresent fields if WKCModelValidatePresentOnly true', function() {
 		assert.deepEqual(modelLibrary.WKCSubscriptionsModelErrorsFor({
-			WKCSubscriptionType: 'alfa',
+			WKCSubscriptionHandler: 'alfa',
 		}, {
 			WKCModelValidatePresentOnly: true,
 		}), {
-			WKCSubscriptionType: [
+			WKCSubscriptionHandler: [
 				'WKCErrorNotValid',
 			],
 		});
