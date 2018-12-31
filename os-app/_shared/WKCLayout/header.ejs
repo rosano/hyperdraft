@@ -25,20 +25,6 @@
 
 	<script src="/shared-assets/external/d3/dist/d3.min.js"></script>
 
-	<% if (locals.OLSKSharedPageControllerSlug && Array.isArray(locals.OLSKPageAssets)) { %>
-		<% locals.OLSKPageAssets.forEach(function(e) { %>
-			<% var defaultDirectory = e[0] === '/' ? '' : '/' + (locals.OLSKSharedPageControllerSlug + '/'); %>
-			
-			<% if (e.split('.').pop() === 'js') { %>
-	<script src="<%= defaultDirectory %><%= e %>"></script>
-			<% } %>
-
-			<% if (e.split('.').pop() === 'css') { %>
-	<link rel="stylesheet" type="text/css" href="<%= defaultDirectory %><%= e %>">
-			<% } %>
-		<% }) %>
-	<% } %>
-
 	<% if (locals.OLSKPagePublicLocalizedStringKeys) { %>
 	<script src="/shared-assets/external/OLSKInternational/main.js"></script>
 	<script src="/shared-assets/external/OLSKString/main.js"></script>
@@ -69,6 +55,20 @@
 	<script type="text/javascript">
 		window.OLSKPublicConstants = <%- JSON.stringify(OLSKPagePublicConstants) %>;
 	</script>
+	<% } %>
+
+	<% if (locals.OLSKSharedPageControllerSlug && Array.isArray(locals.OLSKPageAssets)) { %>
+		<% locals.OLSKPageAssets.forEach(function(e) { %>
+			<% var defaultDirectory = e[0] === '/' ? '' : '/' + (locals.OLSKSharedPageControllerSlug + '/'); %>
+			
+			<% if (e.split('.').pop() === 'js') { %>
+	<script src="<%= defaultDirectory %><%= e %>"></script>
+			<% } %>
+
+			<% if (e.split('.').pop() === 'css') { %>
+	<link rel="stylesheet" type="text/css" href="<%= defaultDirectory %><%= e %>">
+			<% } %>
+		<% }) %>
 	<% } %>
 </head>
 

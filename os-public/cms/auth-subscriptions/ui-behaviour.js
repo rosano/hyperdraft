@@ -17,9 +17,35 @@
 	var WKSubscriptionsPropertySubscriptionObjectsByID;
 	var WKSubscriptionsPropertySelectedArticle;
 	var WKSubscriptionsPropertySelectedSource;
-	var kWKCSubscriptionsOutlookInbox;
-	var kWKCSubscriptionsOutlookArchived;
-	var kWKCSubscriptionsOutlookDiscarded;
+	var kWKCSubscriptionsOutlookInbox = {
+		WKCOutlookID: 'WKCSubscriptionsSourcesContentListOutlooksListItemInbox',
+		WKCOutlookText: OLSKLocalized('WKCSubscriptionsSourcesContentListItemInboxText'),
+		WKCOutlookSearchParameters: {
+			WKCArticleIsArchived: {
+				'$ne': true,
+			},
+			WKCArticleIsDiscarded: {
+				'$ne': true,
+			},
+		},
+	};
+	var kWKCSubscriptionsOutlookArchived = {
+		WKCOutlookID: 'WKCSubscriptionsSourcesContentListOutlooksListItemArchived',
+		WKCOutlookText: OLSKLocalized('WKCSubscriptionsSourcesContentListItemArchivedText'),
+		WKCOutlookSearchParameters: {
+			WKCArticleIsArchived: true,
+			WKCArticleIsDiscarded: {
+				'$ne': true,
+			},
+		},
+	};
+	var kWKCSubscriptionsOutlookDiscarded = {
+		WKCOutlookID: 'WKCSubscriptionsSourcesContentListOutlooksListItemDiscarded',
+		WKCOutlookText: OLSKLocalized('WKCSubscriptionsSourcesContentListItemDiscardedText'),
+		WKCOutlookSearchParameters: {
+			WKCArticleIsDiscarded: true,
+		},
+	};
 
 	//# PROPERTIES
 
@@ -743,37 +769,6 @@
 	//_ setupOutlookObjects
 
 	moi.setupOutlookObjects = function () {
-		// browser quirks: call OLSKLocalized after package is loaded
-		kWKCSubscriptionsOutlookInbox = {
-			WKCOutlookID: 'WKCSubscriptionsSourcesContentListOutlooksListItemInbox',
-			WKCOutlookText: OLSKLocalized('WKCSubscriptionsSourcesContentListItemInboxText'),
-			WKCOutlookSearchParameters: {
-				WKCArticleIsArchived: {
-					'$ne': true,
-				},
-				WKCArticleIsDiscarded: {
-					'$ne': true,
-				},
-			},
-		};
-		kWKCSubscriptionsOutlookArchived = {
-			WKCOutlookID: 'WKCSubscriptionsSourcesContentListOutlooksListItemArchived',
-			WKCOutlookText: OLSKLocalized('WKCSubscriptionsSourcesContentListItemArchivedText'),
-			WKCOutlookSearchParameters: {
-				WKCArticleIsArchived: true,
-				WKCArticleIsDiscarded: {
-					'$ne': true,
-				},
-			},
-		};
-		kWKCSubscriptionsOutlookDiscarded = {
-			WKCOutlookID: 'WKCSubscriptionsSourcesContentListOutlooksListItemDiscarded',
-			WKCOutlookText: OLSKLocalized('WKCSubscriptionsSourcesContentListItemDiscardedText'),
-			WKCOutlookSearchParameters: {
-				WKCArticleIsDiscarded: true,
-			},
-		};
-		
 		moi.propertiesOutlookObjects([
 			kWKCSubscriptionsOutlookInbox,
 			kWKCSubscriptionsOutlookArchived,
