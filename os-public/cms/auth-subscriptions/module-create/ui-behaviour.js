@@ -34,10 +34,10 @@
 
 	moi.propertiesFetchURL = function (inputData) {
 		if (typeof inputData === 'undefined') {
-			return d3.select('#WKCSubscriptionsModuleCreateFetchFormInput').property('value');
+			return d3.select('#WKCSubscriptionsModuleCreateFetchFormURL').property('value');
 		}
 
-		d3.select('#WKCSubscriptionsModuleCreateFetchFormInput').property('value', inputData);
+		d3.select('#WKCSubscriptionsModuleCreateFetchFormURL').property('value', inputData);
 	};
 
 	//# INTERFACE
@@ -138,7 +138,7 @@
 
 		moi.reactFetchLoaderVisibility(false);
 
-		d3.select('#WKCSubscriptionsModuleCreateFetchFormInput').node().focus();
+		d3.select('#WKCSubscriptionsModuleCreateFetchFormURL').node().focus();
 
 		throw error;
 	};
