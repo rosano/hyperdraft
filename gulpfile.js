@@ -3,26 +3,33 @@ var pathPackage = require('path');
 
 var filesystemLibrary = require('OLSKFilesystem');
 
-gulpPackage.task('default', gulpPackage.series(function (completionHandler) {
-	filesystemLibrary.OLSKFilesystemHelpDeleteDirectoryRecursive(pathPackage.join(__dirname, 'os-public/shared-assets/external'));
-	filesystemLibrary.OLSKFilesystemHelpDeleteDirectoryRecursive(pathPackage.join(__dirname, 'os-public/shared-assets/internal'));
+const NODE_MODULE_NAMES = [
+	'normalize.css',
+	'd3',
+	'OLSKTasks',
+	'OLSKInternational',
+	'OLSKRouting',
+	'OLSKType',
+	'OLSKString',
+	'ispinner.css',
+	'identicon.js',
+	'blueimp-md5',
+	'turndown',
+	'showdown',
+	'moment',
+	'url-parse',
+];
 
-	gulpPackage.src([
-		'normalize.css',
-		'd3',
-		'OLSKTasks',
-		'OLSKInternational',
-		'OLSKRouting',
-		'OLSKType',
-		'OLSKString',
-		'ispinner.css',
-		'identicon.js',
-		'blueimp-md5',
-		'turndown',
-		'showdown',
-		'moment',
-		'url-parse',
-	].map(function(e) {
+const INTERNAL_PATHS = [];
+
+gulpPackage.task('default', gulpPackage.series(function (completionHandler) {
+	if (!NODE_MODULE_NAMES.length) {
+		return completionHandler();
+	}
+
+	filesystemLibrary.OLSKFilesystemHelpDeleteDirectoryRecursive(pathPackage.join(__dirname, 'os-public/shared-assets/external'));
+
+	gulpPackage.src(NODE_MODULE_NAMES.map(function(e) {
 		return [
 			pathPackage.join('node_modules', e, '**/*.js'),
 			pathPackage.join('!node_modules/OLSK*/*-tests.js'),
@@ -35,8 +42,15 @@ gulpPackage.task('default', gulpPackage.series(function (completionHandler) {
 		return pathPackage.join('os-public/shared-assets/external', vinylFile.path.replace(pathPackage.join(__dirname, 'node_modules'), '').split('/').slice(1).shift());
 	}));
 
-	gulpPackage.src([
-	].map(function(e) {
+	return completionHandler();
+}, function (completionHandler) {
+	if (!INTERNAL_PATHS.length) {
+		return completionHandler();
+	}
+
+	filesystemLibrary.OLSKFilesystemHelpDeleteDirectoryRecursive(pathPackage.join(__dirname, 'os-public/shared-assets/internal'));
+
+	gulpPackage.src(INTERNAL_PATHS.map(function(e) {
 		return pathPackage.join('os-app', e);
 	})).pipe(gulpPackage.dest(function(vinylFile) {
 		return pathPackage.join('os-public/shared-assets/internal', vinylFile.path.replace(pathPackage.join(__dirname, 'os-app'), '').split('/').slice(1).shift());
