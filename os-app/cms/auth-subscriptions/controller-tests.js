@@ -16,9 +16,9 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 	it('returns route objects', function() {
 		assert.deepEqual(controllerModule.OLSKControllerRoutes(), {
 			WKCRouteSubscriptions: {
-				OLSKRoutePath: '/cms/subscriptions',
+				OLSKRoutePath: '/cms/read',
 				OLSKRouteMethod: 'get',
-				OLSKRouteFunction: controllerModule.WKCActionSubscriptionsIndex,
+				OLSKRouteFunction: controllerModule.WKCReadAction,
 				OLSKRouteLanguages: ['en'],
 				OLSKRouteMiddlewares: [
 					'WKCSharedMiddlewareAuthenticate',
@@ -29,10 +29,10 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 
 });
 
-describe('WKCActionSubscriptionsIndex', function testWKCActionSubscriptionsIndex() {
+describe('WKCReadAction', function testWKCReadAction() {
 
 	it('renders page', function() {
-		assert.strictEqual(controllerModule.WKCActionSubscriptionsIndex(null, testingLibrary.OLSKTestingFakeResponseForRender(function(viewPath) {
+		assert.strictEqual(controllerModule.WKCReadAction(null, testingLibrary.OLSKTestingFakeResponseForRender(function(viewPath) {
 			return viewPath;
 		})), [
 			__dirname,
@@ -41,7 +41,7 @@ describe('WKCActionSubscriptionsIndex', function testWKCActionSubscriptionsIndex
 	});
 
 	it('returns pageData', function() {
-		assert.deepEqual(controllerModule.WKCActionSubscriptionsIndex(null, testingLibrary.OLSKTestingFakeResponseForRender(function(viewPath, pageData) {
+		assert.deepEqual(controllerModule.WKCReadAction(null, testingLibrary.OLSKTestingFakeResponseForRender(function(viewPath, pageData) {
 			return pageData;
 		})), {
 			OLSKPagePublicConstants: {

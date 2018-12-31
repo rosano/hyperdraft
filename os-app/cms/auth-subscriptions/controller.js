@@ -11,9 +11,9 @@ const apiSubscriptionsModel = require('../../api/auth-subscriptions/model');
 exports.OLSKControllerRoutes = function() {
 	return {
 		WKCRouteSubscriptions: {
-			OLSKRoutePath: '/cms/subscriptions',
+			OLSKRoutePath: '/cms/read',
 			OLSKRouteMethod: 'get',
-			OLSKRouteFunction: exports.WKCActionSubscriptionsIndex,
+			OLSKRouteFunction: exports.WKCReadAction,
 			OLSKRouteLanguages: ['en'],
 			OLSKRouteMiddlewares: [
 				'WKCSharedMiddlewareAuthenticate',
@@ -22,9 +22,9 @@ exports.OLSKControllerRoutes = function() {
 	};
 };
 
-//_ WKCActionSubscriptionsIndex
+//_ WKCReadAction
 
-exports.WKCActionSubscriptionsIndex = function(req, res, next) {
+exports.WKCReadAction = function(req, res, next) {
 	return res.render([
 		__dirname,
 		'index',
