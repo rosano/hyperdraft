@@ -142,7 +142,13 @@ exports.WKCActionAPISubscriptionsFetch = function(req, res, next) {
 		return res.status(400).send('WKCErrorInvalidInput');
 	}
 
-	return requestPackage.get(req.body.WKCSubscriptionsAPIFetchURL, function(err, response, body) {
-		res.status(200).send(body);
-	});
+	return requestPackage(metalLibrary.WKCMetalSubscriptionsScrape(req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, req.body.WKCSubscriptionsAPIFetchURL, function(err, response, body) {
+		if (err) {
+			console.log(err);
+		}
+
+		return res.status(200).send(body);
+	}, {
+		WKCOptionHandler: req.body.WKCSubscriptionsAPIFetchHandler,
+	}));
 };
