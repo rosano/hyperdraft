@@ -224,3 +224,36 @@ exports.WKCMetalSubscriptionsNeedingFetch = function(databaseClient, completionH
 		return completionHandler(null, items);
 	});
 };
+
+//_ WKCMetalSubscriptionsScrape
+
+exports.WKCMetalSubscriptionsScrape = function(databaseClient, inputData, completionHandler, options = {}) {
+	if (typeof inputData !== 'string') {
+		throw new Error('WKCErrorInvalidInput');
+	}
+
+	if (typeof completionHandler !== 'function') {
+		throw new Error('WKCErrorInvalidInput');
+	}
+
+	if (options && typeof options !== 'object' || options === null) {
+		throw new Error('WKCErrorInvalidInput');
+	}
+
+	var requestObject = {
+		method: 'GET',
+		uri: inputData,
+	};
+
+	if (options && options.WKCOptionHandler === modelLibrary.WKCSubscriptionHandlerCustomTwitter()) {
+		return modelLibrary.WKCSubscriptionHandlerCustomTwitterRequestCallback(databaseClient, function (err, responseJSON) {
+			if (err) {
+				return completionHandler(err, undefined);
+			}
+
+			return completionHandler(undefined, Object.assign(requestObject, responseJSON));
+		});
+	}
+
+	return completionHandler(undefined, requestObject);
+};

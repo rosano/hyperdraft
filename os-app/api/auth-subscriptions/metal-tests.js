@@ -364,3 +364,61 @@ describe('WKCMetalSubscriptionsNeedingFetch', function testWKCMetalSubscriptions
 	});
 
 });
+
+describe('WKCMetalSubscriptionsScrape', function testWKCMetalSubscriptionsScrape() {
+
+	it('throws error if param2 not string', function() {
+		assert.throws(function() {
+			metalLibrary.WKCMetalSubscriptionsScrape(WKCTestingMongoClient, null, function () {});
+		}, /WKCErrorInvalidInput/);
+	});
+
+	it('throws error if param3 not function', function() {
+		assert.throws(function() {
+			metalLibrary.WKCMetalSubscriptionsScrape(WKCTestingMongoClient, '', null);
+		}, /WKCErrorInvalidInput/);
+	});
+
+	it('throws error if param3 not object', function() {
+		assert.throws(function() {
+			metalLibrary.WKCMetalSubscriptionsScrape(WKCTestingMongoClient, '', function() {}, null);
+		}, /WKCErrorInvalidInput/);
+	});
+
+	it('returns parameters', function(done) {
+		metalLibrary.WKCMetalSubscriptionsScrape(WKCTestingMongoClient, 'alfa', function(err, responseJSON) {
+			assert.deepEqual(responseJSON, {
+				method: 'GET',
+				uri: 'alfa',
+			});
+
+			done();
+		});
+	});
+
+	context('WKCOptionHandler', function () {
+
+		it('returns parameters if WKCSubscriptionHandlerCustomTwitter', function(done) {
+			WKCTestingMongoClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_settings').insertOne({
+				WKCSettingKey: 'kWKCSettingKeyTwitterToken',
+				WKCSettingValue: 'bravo',
+			}, function(err, result) {
+				metalLibrary.WKCMetalSubscriptionsScrape(WKCTestingMongoClient, 'alfa', function(err, responseJSON) {
+					assert.deepEqual(responseJSON, {
+						method: 'GET',
+						uri: 'alfa',
+						auth: {
+							bearer: 'bravo',
+						},
+					});
+
+					done();
+				}, {
+					WKCOptionHandler: modelLibrary.WKCSubscriptionHandlerCustomTwitter(),
+				});
+			});
+		});
+
+	});
+
+});
