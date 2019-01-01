@@ -12,10 +12,10 @@
 
 	var moi = {};
 
-	var WKBehaviourPropertyAPIToken;
-	var WKBehaviourPropertySelectedNote;
-	var WKBehaviourPropertyPersistenceTask;
-	var WKBehaviourPropertyUnsavedNotes;
+	var WCKWriteBehaviourPropertyAPIToken;
+	var WCKWriteBehaviourPropertySelectedNote;
+	var WCKWriteBehaviourPropertyPersistenceTask;
+	var WCKWriteBehaviourPropertyUnsavedNotes;
 
 	//# PROPERTIES
 
@@ -23,10 +23,10 @@
 
 	moi.propertiesAPIToken = function (inputData) {
 		if (typeof inputData === 'undefined') {
-			return WKBehaviourPropertyAPIToken;
+			return WCKWriteBehaviourPropertyAPIToken;
 		}
 
-		WKBehaviourPropertyAPIToken = inputData;
+		WCKWriteBehaviourPropertyAPIToken = inputData;
 	};
 
 	//_ propertiesNoteObjects
@@ -43,10 +43,10 @@
 
 	moi.propertiesSelectedNote = function (inputData) {
 		if (typeof inputData === 'undefined') {
-			return WKBehaviourPropertySelectedNote;
+			return WCKWriteBehaviourPropertySelectedNote;
 		}
 
-		WKBehaviourPropertySelectedNote = inputData === null ? undefined : inputData;
+		WCKWriteBehaviourPropertySelectedNote = inputData === null ? undefined : inputData;
 
 		moi.reactSelectedNote();
 	};
@@ -55,20 +55,20 @@
 
 	moi.propertiesUnsavedNotes = function (inputData) {
 		if (typeof inputData === 'undefined') {
-			return WKBehaviourPropertyUnsavedNotes;
+			return WCKWriteBehaviourPropertyUnsavedNotes;
 		}
 
-		WKBehaviourPropertyUnsavedNotes = inputData === null ? undefined : inputData;
+		WCKWriteBehaviourPropertyUnsavedNotes = inputData === null ? undefined : inputData;
 	};
 
 	//_ propertiesPersistenceTask
 
 	moi.propertiesPersistenceTask = function (inputData) {
 		if (typeof inputData === 'undefined') {
-			return WKBehaviourPropertyPersistenceTask;
+			return WCKWriteBehaviourPropertyPersistenceTask;
 		}
 
-		WKBehaviourPropertyPersistenceTask = inputData;
+		WCKWriteBehaviourPropertyPersistenceTask = inputData;
 	};
 
 	//# DATA
