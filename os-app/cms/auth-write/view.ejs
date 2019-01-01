@@ -11,19 +11,19 @@ locals.OLSKPagePublicLocalizedStringKeys = [
 	'WKSharedErrorServiceUnavailable',
 	'WKSharedErrorTokenUnavailable',
 	'WKCNotesErrorNotesUnavailable',
-	'WKCNotesDetailToolbarPersistenceStatusSaving',
-	'WKCNotesDetailToolbarPersistenceStatusSaved',
+	'WKCWriteDetailToolbarPersistenceStatusSaving',
+	'WKCWriteDetailToolbarPersistenceStatusSaved',
 	'WKCNotesErrorPersistenceSaveDidFail',
-	'WKCNotesDetailToolbarPersistenceStatusUnableToSave',
-	'WKCNotesDetailToolbarPublishStatusPublishing',
+	'WKCWriteDetailToolbarPersistenceStatusUnableToSave',
+	'WKCWriteDetailToolbarPublishStatusPublishing',
 	'WKCNotesErrorPublishDidFail',
-	'WKCNotesDetailToolbarPublishStatusUnableToPublish',
+	'WKCWriteDetailToolbarPublishStatusUnableToPublish',
 	'WKCNotesDeleteConfirmation',
-	'WKCNotesDetailToolbarPersistenceStatusDeleting',
-	'WKCNotesDetailToolbarPersistenceStatusDeleted',
+	'WKCWriteDetailToolbarPersistenceStatusDeleting',
+	'WKCWriteDetailToolbarPersistenceStatusDeleted',
 	'WKCNotesErrorPersistenceDeleteDidFail',
-	'WKCNotesDetailToolbarPersistenceStatusUnableToDelete',
-	'WKCNotesDetailToolbarPublishStatusPublished',
+	'WKCWriteDetailToolbarPersistenceStatusUnableToDelete',
+	'WKCWriteDetailToolbarPublishStatusPublished',
 ];
 locals.OLSKPagePublicRouteKeys = [
 	'WKCRouteAPINotesCreate',
@@ -55,31 +55,31 @@ locals.OLSKPagePublicRouteKeys = [
 		<div id="WKCWriteMasterContent"></div>
 	</div>
 
-	<div id="WKCNotesDetail" class="WKCNotesDetailInactive">
-		<header id="WKCNotesDetailToolbar" class="WKCSharedToolbar">
-			<span id="WKCNotesDetailToolbarPersistenceStatus"></span>
+	<div id="WKCWriteDetail" class="WKCWriteDetailInactive">
+		<header id="WKCWriteDetailToolbar" class="WKCSharedToolbar">
+			<span id="WKCWriteDetailToolbarPersistenceStatus"></span>
 			
-			<span id="WKCNotesDetailToolbarPublishStatus"></span>
+			<span id="WKCWriteDetailToolbarPublishStatus"></span>
 
-			<button id="WKCNotesDetailToolbarPublishButton" class="WKCSharedElementTappable WKCSharedButtonNoStyle" title="<%= OLSKLocalized('WKCNotesDetailToolbarPublishButtonText') %>" disabled>⬆️</button>
+			<button id="WKCWriteDetailToolbarPublishButton" class="WKCSharedElementTappable WKCSharedButtonNoStyle" title="<%= OLSKLocalized('WKCWriteDetailToolbarPublishButtonText') %>" disabled>⬆️</button>
 			<script type="text/javascript">
-				d3.select('#WKCNotesDetailToolbarPublishButton').on('click', WKCWriteBehaviour.interfacePublishButtonDidClick);
+				d3.select('#WKCWriteDetailToolbarPublishButton').on('click', WKCWriteBehaviour.interfacePublishButtonDidClick);
 			</script>
 
-			<button id="WKCNotesDetailToolbarDiscardButton" class="WKCSharedElementTappable WKCSharedButtonNoStyle" title="<%= OLSKLocalized('WKCNotesDetailToolbarDiscardButtonText') %>" disabled>🗑</button>
+			<button id="WKCWriteDetailToolbarDiscardButton" class="WKCSharedElementTappable WKCSharedButtonNoStyle" title="<%= OLSKLocalized('WKCWriteDetailToolbarDiscardButtonText') %>" disabled>🗑</button>
 			<script type="text/javascript">
-				d3.select('#WKCNotesDetailToolbarDiscardButton').on('click', WKCWriteBehaviour.interfaceDeleteButtonDidClick);
+				d3.select('#WKCWriteDetailToolbarDiscardButton').on('click', WKCWriteBehaviour.interfaceDeleteButtonDidClick);
 			</script>
 		</header>
 
-		<div id="WKCNotesDetailContent">
-			<textarea id="WKCNotesDetailContentTextarea"></textarea>
+		<div id="WKCWriteDetailContent">
+			<textarea id="WKCWriteDetailContentTextarea"></textarea>
 			<script type="text/javascript">
-				d3.select('#WKCNotesDetailContentTextarea').on('input', WKCWriteBehaviour.interfaceEditorTextareaDidReceiveInput);
+				d3.select('#WKCWriteDetailContentTextarea').on('input', WKCWriteBehaviour.interfaceEditorTextareaDidReceiveInput);
 			</script>
 		</div>
 
-		<div id="WKCNotesDetailPlaceholder"><span><%= OLSKLocalized('WKCNotesDetailPlaceholderText') %></span></div>
+		<div id="WKCWriteDetailPlaceholder"><span><%= OLSKLocalized('WKCWriteDetailPlaceholderText') %></span></div>
 	</div>
 </div>
 

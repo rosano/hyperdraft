@@ -14,7 +14,7 @@ body {
 	display: flex;
 }
 
-.WKCNotesLoading .WKCSharedToolbar *, .WKCNotesLoading #WKCWriteMasterContent *, .WKCNotesLoading #WKCNotesDetailContent * {
+.WKCNotesLoading .WKCSharedToolbar *, .WKCNotesLoading #WKCWriteMasterContent *, .WKCNotesLoading #WKCWriteDetailContent * {
 	visibility: hidden;
 }
 
@@ -61,67 +61,67 @@ body {
 	word-wrap: break-word;       /* Internet Explorer 5.5+ */
 }
 
-#WKCNotesDetail {
+#WKCWriteDetail {
 	border-left: 1px solid #ddd;
 
 	/* @FlexboxWKCNotes child */
 	flex-grow: 1;
 
-	/* @FlexboxWKCNotesDetail parent */
+	/* @FlexboxWKCWriteDetail parent */
 	display: flex;
 	flex-direction: column;
 }
 
-.WKCNotesDetailInactive {
+.WKCWriteDetailInactive {
 	border-top: 1px solid #ddd;
 	justify-content: center;
 }
 
-.WKCNotesDetailInactive #WKCNotesDetailToolbar, .WKCNotesDetailInactive #WKCNotesDetailContent {
+.WKCWriteDetailInactive #WKCWriteDetailToolbar, .WKCWriteDetailInactive #WKCWriteDetailContent {
 	display: none;
 }
 
-.WKCNotesDetailInactive #WKCNotesDetailPlaceholder {
+.WKCWriteDetailInactive #WKCWriteDetailPlaceholder {
 	display: block;
 	width: 100%;
 	text-align: center;
 }
 
-#WKCNotesDetailPlaceholder {
+#WKCWriteDetailPlaceholder {
 	opacity: 0.5;
 	display: none;
 }
 
-#WKCNotesDetailToolbarPersistenceStatus {
+#WKCWriteDetailToolbarPersistenceStatus {
 	margin: auto 5px;
 
 	color: #bfbfbf
 }
 
-#WKCNotesDetailToolbarPublishStatus {
+#WKCWriteDetailToolbarPublishStatus {
 	margin: auto 5px;
 
 	color: #bfbfbf
 }
 
-#WKCNotesDetailContent {
+#WKCWriteDetailContent {
 	font-size: 80%;
 
-	/* @FlexboxWKCNotesDetail child */
+	/* @FlexboxWKCWriteDetail child */
 	flex-grow: 1;
 
-	/* @FlexboxWKCNotesDetailContent parent */
+	/* @FlexboxWKCWriteDetailContent parent */
 	display: flex;
 	flex-direction: column;
 }
 
-#WKCNotesDetailContentTextarea {
+#WKCWriteDetailContentTextarea {
 	padding: 10px;
 
 	font-family: 'monaco', monospace;
 	line-height: 1.4;
 
-	/* @FlexboxWKCNotesDetailContent child */
+	/* @FlexboxWKCWriteDetailContent child */
 	flex-grow: 1;
 
 	/* browser defaults */

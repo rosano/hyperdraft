@@ -191,7 +191,7 @@
 	moi.commandsPersistNote = function (inputData) {
 		(new Promise(function(resolve, reject) {
 			if (inputData === moi.propertiesSelectedNote()) {
-				moi.reactPersistenceStatus(OLSKLocalized('WKCNotesDetailToolbarPersistenceStatusSaving'));
+				moi.reactPersistenceStatus(OLSKLocalized('WKCWriteDetailToolbarPersistenceStatusSaving'));
 			}
 
 			if (!inputData.WKCNoteID) {
@@ -202,7 +202,7 @@
 			
 		})).then(function() {
 			if (inputData === moi.propertiesSelectedNote()) {
-				moi.reactPersistenceStatus(OLSKLocalized('WKCNotesDetailToolbarPersistenceStatusSaved'), true);
+				moi.reactPersistenceStatus(OLSKLocalized('WKCWriteDetailToolbarPersistenceStatusSaved'), true);
 			}
 
 			moi.propertiesUnsavedNotes().splice(moi.propertiesUnsavedNotes().indexOf(inputData), 1);
@@ -212,7 +212,7 @@
 			};
 
 			if (inputData === moi.propertiesSelectedNote()) {
-				moi.reactPersistenceStatus(OLSKLocalized('WKCNotesDetailToolbarPersistenceStatusUnableToSave'));
+				moi.reactPersistenceStatus(OLSKLocalized('WKCWriteDetailToolbarPersistenceStatusUnableToSave'));
 			}
 
 			throw error;
@@ -252,7 +252,7 @@
 	//_ commandsPublishNote
 
 	moi.commandsPublishNote = function (inputData) {
-		d3.select('#WKCNotesDetailToolbarPublishStatus').text(OLSKLocalized('WKCNotesDetailToolbarPublishStatusPublishing'));
+		d3.select('#WKCWriteDetailToolbarPublishStatus').text(OLSKLocalized('WKCWriteDetailToolbarPublishStatusPublishing'));
 
 		d3.json(OLSKCanonicalFor('WKCRouteAPINotesPublish', {
 			wkc_note_id: inputData.WKCNoteID,
@@ -272,7 +272,7 @@
 				return moi.commandsPublishNote(inputData);
 			};
 
-			d3.select('#WKCNotesDetailToolbarPublishStatus').text(OLSKLocalized('WKCNotesDetailToolbarPublishStatusUnableToPublish'));
+			d3.select('#WKCWriteDetailToolbarPublishStatus').text(OLSKLocalized('WKCWriteDetailToolbarPublishStatusUnableToPublish'));
 
 			throw error;
 		});
@@ -301,7 +301,7 @@
 	moi._commandsDeleteNoteWithoutConfirmation = function (inputData) {
 		var persistenceIsCued = !!moi.propertiesPersistenceTask()._OLSKTaskTimerID;
 
-		moi.reactPersistenceStatus(OLSKLocalized('WKCNotesDetailToolbarPersistenceStatusDeleting'));
+		moi.reactPersistenceStatus(OLSKLocalized('WKCWriteDetailToolbarPersistenceStatusDeleting'));
 
 		d3.json(OLSKCanonicalFor('WKCRouteAPINotesDelete', {
 			wkc_note_id: inputData.WKCNoteID,
@@ -322,13 +322,13 @@
 
 			moi.commandsSelectNote(null);
 
-			moi.reactPersistenceStatus(OLSKLocalized('WKCNotesDetailToolbarPersistenceStatusDeleted'), true);
+			moi.reactPersistenceStatus(OLSKLocalized('WKCWriteDetailToolbarPersistenceStatusDeleted'), true);
 		}, function(error) {
 			if (window.confirm(OLSKLocalized('WKCNotesErrorPersistenceDeleteDidFail'))) {
 				return moi._commandsDeleteNoteWithoutConfirmation(inputData);
 			};
 
-			moi.reactPersistenceStatus(OLSKLocalized('WKCNotesDetailToolbarPersistenceStatusUnableToDelete'));
+			moi.reactPersistenceStatus(OLSKLocalized('WKCWriteDetailToolbarPersistenceStatusUnableToDelete'));
 
 			throw error;
 		}).finally(function() {
@@ -367,20 +367,20 @@
 	//_ reactSelectedNote
 
 	moi.reactSelectedNote = function () {
-		d3.select('#WKCNotesDetailContentTextarea').node().value = moi.propertiesSelectedNote() ? moi.propertiesSelectedNote().WKCNoteBody : null;
-		d3.select('#WKCNotesDetailContentTextarea').attr('disabled', moi.propertiesSelectedNote() ? null : true);
+		d3.select('#WKCWriteDetailContentTextarea').node().value = moi.propertiesSelectedNote() ? moi.propertiesSelectedNote().WKCNoteBody : null;
+		d3.select('#WKCWriteDetailContentTextarea').attr('disabled', moi.propertiesSelectedNote() ? null : true);
 
 		d3.selectAll('.WKCWriteMasterContentListItem').classed('WKCWriteMasterContentListItemSelected', function(d) {
 			return d === moi.propertiesSelectedNote();
 		});
 
-		d3.select('#WKCNotesDetailToolbarDiscardButton').attr('disabled', moi.propertiesSelectedNote() ? null : undefined);
-		d3.select('#WKCNotesDetailToolbarPublishButton').attr('disabled', moi.propertiesSelectedNote() ? null : undefined);
+		d3.select('#WKCWriteDetailToolbarDiscardButton').attr('disabled', moi.propertiesSelectedNote() ? null : undefined);
+		d3.select('#WKCWriteDetailToolbarPublishButton').attr('disabled', moi.propertiesSelectedNote() ? null : undefined);
 
-		d3.select('#WKCNotesDetail').classed('WKCNotesDetailInactive', !moi.propertiesSelectedNote());
+		d3.select('#WKCWriteDetail').classed('WKCWriteDetailInactive', !moi.propertiesSelectedNote());
 		
 		if (moi.propertiesSelectedNote()) {
-			d3.select('#WKCNotesDetailContentTextarea').node().focus();
+			d3.select('#WKCWriteDetailContentTextarea').node().focus();
 		}
 
 		if (!moi.propertiesSelectedNote()) {
@@ -393,20 +393,20 @@
 	//_ reactPublishStatus
 
 	moi.reactPublishStatus = function () {
-		d3.select('#WKCNotesDetailToolbarPublishStatus').html(moi.propertiesSelectedNote().WKCNoteIsPublished ? OLSKLocalized('WKCNotesDetailToolbarPublishStatusPublished') + '<a href="/' + moi.propertiesSelectedNote().WKCNotePublicID + '" target="_blank">/' + moi.propertiesSelectedNote().WKCNotePublicID + '</a>': null);
+		d3.select('#WKCWriteDetailToolbarPublishStatus').html(moi.propertiesSelectedNote().WKCNoteIsPublished ? OLSKLocalized('WKCWriteDetailToolbarPublishStatusPublished') + '<a href="/' + moi.propertiesSelectedNote().WKCNotePublicID + '" target="_blank">/' + moi.propertiesSelectedNote().WKCNotePublicID + '</a>': null);
 	};
 
 	//_ reactPersistenceStatus
 
 	moi.reactPersistenceStatus = function (inputData, shouldClear) {
-		d3.select('#WKCNotesDetailToolbarPersistenceStatus').text(inputData);
+		d3.select('#WKCWriteDetailToolbarPersistenceStatus').text(inputData);
 
 		if (!shouldClear) {
 			return;
 		}
 
 		setTimeout(function() {
-			d3.select('#WKCNotesDetailToolbarPersistenceStatus').text(null);
+			d3.select('#WKCWriteDetailToolbarPersistenceStatus').text(null);
 		}, 1000);
 	};
 
