@@ -5,10 +5,10 @@ WKCSubscriptionsSourcesContentHeadingText: Sources
 WKCSubscriptionsSourcesContentListItemInboxText: Inbox
 WKCSubscriptionsSourcesContentListItemArchivedText: Archived
 WKCSubscriptionsSourcesContentListItemDiscardedText: Discarded
-WKCSubscriptionsDetailToolbarUnreadButtonText: Mark as unread
-WKCSubscriptionsDetailToolbarInboxButtonText: Move to inbox
-WKCSubscriptionsDetailPlaceholderText: No Article Selected
-WKCSubscriptionsDetailContentLinkText: Original source
+WKCReadDetailToolbarUnreadButtonText: Mark as unread
+WKCReadDetailToolbarInboxButtonText: Move to inbox
+WKCReadDetailPlaceholderText: No Article Selected
+WKCReadDetailContentLinkText: Original source
 WKCSubscriptionsErrorArticlesMarkAsReadText: Unable to mark article as read
 WKCSubscriptionsErrorArticlesMarkAsArchivedText: Unable to archive article
 WKCSubscriptionsErrorArticlesMarkAsDiscardedText: Unable to discard article

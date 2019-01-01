@@ -127,43 +127,43 @@ locals.OLSKPagePublicRouteKeys = [
 		</div>
 	</div>
 
-	<div id="WKCSubscriptionsDetail" class="WKCSubscriptionsDetailInactive">
-		<header id="WKCSubscriptionsDetailToolbar" class="WKCSharedToolbar">
-			<button id="WKCSubscriptionsDetailToolbarUnreadButton" class="WKCSharedElementTappable WKCSharedButtonNoStyle WKCSubscriptionsHidden">⚫︎</button>
+	<div id="WKCReadDetail" class="WKCReadDetailInactive">
+		<header id="WKCReadDetailToolbar" class="WKCSharedToolbar">
+			<button id="WKCReadDetailToolbarUnreadButton" class="WKCSharedElementTappable WKCSharedButtonNoStyle WKCSubscriptionsHidden">⚫︎</button>
 			<script type="text/javascript">
-				d3.select('#WKCSubscriptionsDetailToolbarUnreadButton').on('click', WKSubscriptions.interfaceArticlesUnreadButtonDidClick);
+				d3.select('#WKCReadDetailToolbarUnreadButton').on('click', WKSubscriptions.interfaceArticlesUnreadButtonDidClick);
 			</script>
 
-			<button id="WKCSubscriptionsDetailToolbarInboxButton" class="WKCSharedElementTappable WKCSharedButtonNoStyle WKCSubscriptionsHidden"><%= OLSKLocalized('WKCSubscriptionsDetailToolbarInboxButtonText') %></button>
+			<button id="WKCReadDetailToolbarInboxButton" class="WKCSharedElementTappable WKCSharedButtonNoStyle WKCSubscriptionsHidden"><%= OLSKLocalized('WKCReadDetailToolbarInboxButtonText') %></button>
 			<script type="text/javascript">
-				d3.select('#WKCSubscriptionsDetailToolbarInboxButton').on('click', WKSubscriptions.interfaceArticlesInboxButtonDidClick);
+				d3.select('#WKCReadDetailToolbarInboxButton').on('click', WKSubscriptions.interfaceArticlesInboxButtonDidClick);
 			</script>
 
-			<button id="WKCSubscriptionsDetailToolbarArchiveButton" class="WKCSharedElementTappable WKCSharedButtonNoStyle" accesskey="a">📂</button>
+			<button id="WKCReadDetailToolbarArchiveButton" class="WKCSharedElementTappable WKCSharedButtonNoStyle" accesskey="a">📂</button>
 			<script type="text/javascript">
-				d3.select('#WKCSubscriptionsDetailToolbarArchiveButton').on('click', WKSubscriptions.interfaceArticlesArchiveButtonDidClick);
+				d3.select('#WKCReadDetailToolbarArchiveButton').on('click', WKSubscriptions.interfaceArticlesArchiveButtonDidClick);
 			</script>
 
-			<button id="WKCSubscriptionsDetailToolbarDiscardButton" class="WKCSharedElementTappable WKCSharedButtonNoStyle">🗑</button>
+			<button id="WKCReadDetailToolbarDiscardButton" class="WKCSharedElementTappable WKCSharedButtonNoStyle">🗑</button>
 			<script type="text/javascript">
-				d3.select('#WKCSubscriptionsDetailToolbarDiscardButton').on('click', WKSubscriptions.interfaceArticlesDiscardButtonDidClick);
+				d3.select('#WKCReadDetailToolbarDiscardButton').on('click', WKSubscriptions.interfaceArticlesDiscardButtonDidClick);
 			</script>
 		</header>
 
-		<article id="WKCSubscriptionsDetailContent">
-			<h1 id="WKCSubscriptionsDetailContentHeading"></h1>
-			<span id="WKCSubscriptionsDetailContentInfo">
-				<span id="WKCSubscriptionsDetailContentAuthor"></span>
+		<article id="WKCReadDetailContent">
+			<h1 id="WKCReadDetailContentHeading"></h1>
+			<span id="WKCReadDetailContentInfo">
+				<span id="WKCReadDetailContentAuthor"></span>
 				&mdash;
-				<span id="WKCSubscriptionsDetailContentDate"></span>
+				<span id="WKCReadDetailContentDate"></span>
 				&mdash;
-				<span id="WKCSubscriptionsDetailContentSource"></span>
+				<span id="WKCReadDetailContentSource"></span>
 			</span>
-			<a id="WKCSubscriptionsDetailContentLink" target="_blank"><%= OLSKLocalized('WKCSubscriptionsDetailContentLinkText') %></a></span>
-			<div id="WKCSubscriptionsDetailContentBody"></div>
+			<a id="WKCReadDetailContentLink" target="_blank"><%= OLSKLocalized('WKCReadDetailContentLinkText') %></a></span>
+			<div id="WKCReadDetailContentBody"></div>
 		</article>
 
-		<div id="WKCSubscriptionsDetailPlaceholder"><span><%= OLSKLocalized('WKCSubscriptionsDetailPlaceholderText') %></span></div>
+		<div id="WKCReadDetailPlaceholder"><span><%= OLSKLocalized('WKCReadDetailPlaceholderText') %></span></div>
 	</div>
 </div>
 

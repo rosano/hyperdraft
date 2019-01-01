@@ -14,7 +14,7 @@ body {
 	display: flex;
 }
 
-.WKCSubscriptionsLoading .WKCSharedToolbar *, .WKCSubscriptionsLoading #WKCSubscriptionsSourcesContent *, .WKCSubscriptionsLoading #WKCReadMasterContent *, .WKCSubscriptionsLoading #WKCSubscriptionsDetailContent *, .WKCSubscriptionsLoading #WKCSubscriptionsDetailPlaceholder * {
+.WKCSubscriptionsLoading .WKCSharedToolbar *, .WKCSubscriptionsLoading #WKCSubscriptionsSourcesContent *, .WKCSubscriptionsLoading #WKCReadMasterContent *, .WKCSubscriptionsLoading #WKCReadDetailContent *, .WKCSubscriptionsLoading #WKCReadDetailPlaceholder * {
 	visibility: hidden;
 }
 
@@ -315,61 +315,61 @@ body {
 	margin: auto;
 }
 
-#WKCSubscriptionsDetail {
+#WKCReadDetail {
 	border-left: 1px solid #ddd;
 
 	/* @FlexboxWKCSubscriptions child */
 	flex-grow: 1;
 
-	/* @FlexboxWKCSubscriptionsDetail parent */
+	/* @FlexboxWKCReadDetail parent */
 	display: flex;
 	flex-direction: column;
 }
 
-.WKCSubscriptionsDetailInactive {
+.WKCReadDetailInactive {
 	border-top: 1px solid #ddd;
 	/*display: flex;*/
 	justify-content: center;
 	/*align-items: center;*/
 }
 
-.WKCSubscriptionsDetailInactive #WKCSubscriptionsDetailToolbar, .WKCSubscriptionsDetailInactive #WKCSubscriptionsDetailContent {
+.WKCReadDetailInactive #WKCReadDetailToolbar, .WKCReadDetailInactive #WKCReadDetailContent {
 	display: none;
 }
 
-.WKCSubscriptionsDetailInactive #WKCSubscriptionsDetailPlaceholder {
+.WKCReadDetailInactive #WKCReadDetailPlaceholder {
 	display: block;
 	width: 100%;
 	text-align: center;
 }
 
-#WKCSubscriptionsDetailPlaceholder {
+#WKCReadDetailPlaceholder {
 	opacity: 0.5;
 	display: none;
 }
 
-#WKCSubscriptionsDetailContent {
-	/* @FlexboxWKCSubscriptionsDetail child */
+#WKCReadDetailContent {
+	/* @FlexboxWKCReadDetail child */
 	padding: 10px;
 	overflow: auto;
 }
 
-#WKCSubscriptionsDetailContentHeading {
+#WKCReadDetailContentHeading {
 	margin-top: 0;
 	margin-bottom: 10px;
 }
 
-#WKCSubscriptionsDetailContentInfo {
+#WKCReadDetailContentInfo {
 	opacity: 0.5;
 }
 
-#WKCSubscriptionsDetailContentLink {
+#WKCReadDetailContentLink {
 	display: block;
 
 	opacity: 1;
 }
 
-#WKCSubscriptionsDetailContentBody {
+#WKCReadDetailContentBody {
 	margin-top: 10px;
 
 	width: 100%;
@@ -377,21 +377,21 @@ body {
 	overflow-x: scroll;
 }
 
-.WKCSubscriptionsDetailContentBodyFile {
+.WKCReadDetailContentBodyFile {
 	font-family: 'monaco', monospace;
 
 	line-height: 1.4;
 }
 
-#WKCSubscriptionsDetailContentBody img {
+#WKCReadDetailContentBody img {
 	max-width: 100%;
 	height: auto;
 }
 
-#WKCSubscriptionsDetailContentBody ins {
+#WKCReadDetailContentBody ins {
 	background: #eaffbf;
 }
 
-#WKCSubscriptionsDetailContentBody del {
+#WKCReadDetailContentBody del {
 	background: #fdbfc0;
 }
