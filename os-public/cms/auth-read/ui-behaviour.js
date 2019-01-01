@@ -98,7 +98,7 @@
 
 	moi.propertiesArticleObjects = function (inputData) {
 		if (typeof inputData === 'undefined') {
-			return d3.selectAll('.WKCSubscriptionsMasterContentListItem').data();
+			return d3.selectAll('.WKCReadMasterContentListItem').data();
 		}
 
 		moi.reactArticleObjects(inputData);
@@ -263,9 +263,9 @@
 			Object.assign(item, responseJSON);
 		}, moi.commandsArticlesAlertErrorMarkAsRead)
 		.finally(function () {
-			d3.selectAll('.WKCSubscriptionsMasterContentListItem').filter(function(obj) {
+			d3.selectAll('.WKCReadMasterContentListItem').filter(function(obj) {
 				return obj === item;
-			}).classed('WKCSubscriptionsMasterContentListItemUnread', !item.WKCArticleIsRead)
+			}).classed('WKCReadMasterContentListItemUnread', !item.WKCArticleIsRead)
 
 			d3.select('#WKCSubscriptionsDetailToolbarUnreadButton').classed('WKCSubscriptionsHidden', !item.WKCArticleIsRead);
 		});;
@@ -290,9 +290,9 @@
 			Object.assign(item, responseJSON);
 		}, moi.commandsArticlesAlertErrorUpdate)
 		.finally(function () {
-			d3.selectAll('.WKCSubscriptionsMasterContentListItem').filter(function(obj) {
+			d3.selectAll('.WKCReadMasterContentListItem').filter(function(obj) {
 				return obj === item;
-			}).classed('WKCSubscriptionsMasterContentListItemUnread', !item.WKCArticleIsRead)
+			}).classed('WKCReadMasterContentListItemUnread', !item.WKCArticleIsRead)
 
 			d3.select('#WKCSubscriptionsDetailToolbarUnreadButton').classed('WKCSubscriptionsHidden', !item.WKCArticleIsRead);
 		});
@@ -559,33 +559,33 @@
 	//_ reactArticleObjects
 
 	moi.reactArticleObjects = function (articleObjects) {
-		var selection = d3.select('#WKCSubscriptionsMasterContentList')
-			.selectAll('.WKCSubscriptionsMasterContentListItem').data(articleObjects);
+		var selection = d3.select('#WKCReadMasterContentList')
+			.selectAll('.WKCReadMasterContentListItem').data(articleObjects);
 		
 		var parentElement = selection.enter()
 			.append('div')
-				.attr('class', 'WKCSubscriptionsMasterContentListItem')
+				.attr('class', 'WKCReadMasterContentListItem')
 				.classed('WKCSharedElementTappable', true);
-		var contextElement = parentElement.append('div').attr('class', 'WKCSubscriptionsMasterContentListItemContext');
+		var contextElement = parentElement.append('div').attr('class', 'WKCReadMasterContentListItemContext');
 
-		contextElement.append('span').attr('class', 'WKCSubscriptionsMasterContentListItemReadStatus').text('⚫︎');
-		contextElement.append('span').attr('class', 'WKCSubscriptionsMasterContentListItemContextSource');
-		contextElement.append('span').attr('class', 'WKCSubscriptionsMasterContentListItemContextTiming');
+		contextElement.append('span').attr('class', 'WKCReadMasterContentListItemReadStatus').text('⚫︎');
+		contextElement.append('span').attr('class', 'WKCReadMasterContentListItemContextSource');
+		contextElement.append('span').attr('class', 'WKCReadMasterContentListItemContextTiming');
 
-		parentElement.append('span').attr('class', 'WKCSubscriptionsMasterContentListItemHeadline');
-		parentElement.append('span').attr('class', 'WKCSubscriptionsMasterContentListItemSnippet');
+		parentElement.append('span').attr('class', 'WKCReadMasterContentListItemHeadline');
+		parentElement.append('span').attr('class', 'WKCReadMasterContentListItemSnippet');
 
 		parentElement = parentElement.merge(selection);
 
 		parentElement
-			.classed('WKCSubscriptionsMasterContentListItemUnread', function(obj) {
+			.classed('WKCReadMasterContentListItemUnread', function(obj) {
 				return !obj.WKCArticleIsRead;
 			})
 			.on('click', moi.commandsSelectArticle);
-		parentElement.select('.WKCSubscriptionsMasterContentListItemHeadline').text(function(obj) {
+		parentElement.select('.WKCReadMasterContentListItemHeadline').text(function(obj) {
 			return obj.WKCArticleTitle || 'untitled_article';
 		});
-		parentElement.select('.WKCSubscriptionsMasterContentListItemSnippet').text(function(obj) {
+		parentElement.select('.WKCReadMasterContentListItemSnippet').text(function(obj) {
 			var textarea = document.createElement('textarea');
 			
 			textarea.innerHTML = obj.WKCArticleSnippet || 'no_snippet';
@@ -595,10 +595,10 @@
 
 			return div.innerText;
 		});
-		parentElement.select('.WKCSubscriptionsMasterContentListItemContextSource').text(function(obj) {
+		parentElement.select('.WKCReadMasterContentListItemContextSource').text(function(obj) {
 			return moi._propertiesSubscriptionObjectsByID()[obj.WKCArticleSubscriptionID].WKCSubscriptionName;
 		});
-		parentElement.select('.WKCSubscriptionsMasterContentListItemContextTiming').text(function(obj) {
+		parentElement.select('.WKCReadMasterContentListItemContextTiming').text(function(obj) {
 			return moment(obj.WKCArticlePublishDate).calendar(null, {
 				sameDay: 'hh:mm',
 				lastDay: '[Yesterday]',
@@ -664,7 +664,7 @@
 	//_ reactSelectedArticle
 
 	moi.reactSelectedArticle = function () {
-		d3.selectAll('.WKCSubscriptionsMasterContentListItem').classed('WKCSubscriptionsMasterContentListItemSelected', function(obj) {
+		d3.selectAll('.WKCReadMasterContentListItem').classed('WKCReadMasterContentListItemSelected', function(obj) {
 			return obj === moi.propertiesSelectedArticle();
 		});
 
@@ -708,7 +708,7 @@
 	//_ reactMasterLoaderVisibility
 
 	moi.reactMasterLoaderVisibility = function (isVisible) {
-		d3.select('#WKCSubscriptionsMasterLoader').classed('WKCSubscriptionsHidden', !isVisible);
+		d3.select('#WKCReadMasterLoader').classed('WKCSubscriptionsHidden', !isVisible);
 	};
 
 	//# SETUP
