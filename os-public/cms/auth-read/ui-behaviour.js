@@ -720,7 +720,7 @@
 			moi.setupSubscriptionObjects(function() {
 				moi.setupOutlookObjects();
 				
-				d3.select('#WKCSubscriptions').classed('WKCSubscriptionsLoading', false);
+				d3.select('#WKCSubscriptions').classed('WKCReadLoading', false);
 			});
 		});
 	};

@@ -14,7 +14,7 @@ body {
 	display: flex;
 }
 
-.WKCSubscriptionsLoading .WKCSharedToolbar *, .WKCSubscriptionsLoading #WKCReadSourcesContent *, .WKCSubscriptionsLoading #WKCReadMasterContent *, .WKCSubscriptionsLoading #WKCReadDetailContent *, .WKCSubscriptionsLoading #WKCReadDetailPlaceholder * {
+.WKCReadLoading .WKCSharedToolbar *, .WKCReadLoading #WKCReadSourcesContent *, .WKCReadLoading #WKCReadMasterContent *, .WKCReadLoading #WKCReadDetailContent *, .WKCReadLoading #WKCReadDetailPlaceholder * {
 	visibility: hidden;
 }
 
