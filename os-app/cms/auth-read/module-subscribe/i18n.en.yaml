@@ -1,21 +1,21 @@
-WKCSubscriptionsModuleCreateHeadingText: Add subscription
-WKCSubscriptionsModuleCreateFetchFormSubmitText: Fetch
-WKCSubscriptionsModuleCreateErrorFetchText: Error fetching URL. Please check the input and try again.
-WKCSubscriptionsModuleCreateErrorTwitterMissingToken: To subscribe to Twitter profiles, first setup your account in Settings.
-WKCSubscriptionsModuleCreateErrorCreateText: Error adding subscription. Please check the input and try again.
-WKCSubscriptionsModuleCreateAlternativesFeedsAlertText: 'If you would like to add one of the feeds found on this page, click the corresponding button below:'
-WKCSubscriptionsModuleCreateSuggestionsAlertText: 'Did you mean:'
-WKCSubscriptionsModuleCreateSuggestionsNameTextSuggestionsTypeStandard: 'Standard Link'
-WKCSubscriptionsModuleCreateSuggestionsNameTextSuggestionsTypeSecure: 'Secure Link'
-WKCSubscriptionsModuleCreateSuggestionsNameTextSuggestionsTypeCustomTwitter: 'Twitter Feed'
-WKCSubscriptionsModuleCreateConfirmationHeadingText: Confirm subscription
-WKCSubscriptionsModuleCreateConfirmationFormNameText: Name
-WKCSubscriptionsModuleCreateConfirmationFormBlurbText: Description
-WKCSubscriptionsModuleCreateConfirmationFormSubmitText: Add
-WKCSubscriptionsModuleCreateConfirmationClearButtonText: Restart
-WKCSubscriptionsModuleCreatePreviewHeadingText: Preview
-WKCSubscriptionsModuleCreatePreviewTypeFeedRSSText: RSS Feed
-WKCSubscriptionsModuleCreatePreviewTypeFeedAtomText: Atom Feed
-WKCSubscriptionsModuleCreatePreviewTypeFileText: File
-WKCSubscriptionsModuleCreatePreviewTypePageText: Page
-WKCSubscriptionsModuleCreateFlashFormat: Subscribed to %@
+WKCReadModuleSubscribeHeadingText: Add subscription
+WKCReadModuleSubscribeFetchFormSubmitText: Fetch
+WKCReadModuleSubscribeErrorFetchText: Error fetching URL. Please check the input and try again.
+WKCReadModuleSubscribeErrorTwitterMissingToken: To subscribe to Twitter profiles, first setup your account in Settings.
+WKCReadModuleSubscribeErrorCreateText: Error adding subscription. Please check the input and try again.
+WKCReadModuleSubscribeAlternativesFeedsAlertText: 'If you would like to add one of the feeds found on this page, click the corresponding button below:'
+WKCReadModuleSubscribeSuggestionsAlertText: 'Did you mean:'
+WKCReadModuleSubscribeSuggestionsNameTextSuggestionsTypeStandard: 'Standard Link'
+WKCReadModuleSubscribeSuggestionsNameTextSuggestionsTypeSecure: 'Secure Link'
+WKCReadModuleSubscribeSuggestionsNameTextSuggestionsTypeCustomTwitter: 'Twitter Feed'
+WKCReadModuleSubscribeConfirmationHeadingText: Confirm subscription
+WKCReadModuleSubscribeConfirmationFormNameText: Name
+WKCReadModuleSubscribeConfirmationFormBlurbText: Description
+WKCReadModuleSubscribeConfirmationFormSubmitText: Add
+WKCReadModuleSubscribeConfirmationClearButtonText: Restart
+WKCReadModuleSubscribePreviewHeadingText: Preview
+WKCReadModuleSubscribePreviewTypeFeedRSSText: RSS Feed
+WKCReadModuleSubscribePreviewTypeFeedAtomText: Atom Feed
+WKCReadModuleSubscribePreviewTypeFileText: File
+WKCReadModuleSubscribePreviewTypePageText: Page
+WKCReadModuleSubscribeFlashFormat: Subscribed to %@

@@ -13,9 +13,9 @@
 	var moi = {};
 
 	var WKSubscriptionsModuleCreatePropertyAPIToken;
-	var kWKCSubscriptionsModuleCreateHandlerMap = [
+	var kWKCReadModuleSubscribeHandlerMap = [
 		[
-			WKCSubscriptionsModuleCreateSuggestions.WKCSubscriptionsModuleCreateSuggestionsTypeCustomTwitter(),
+			WKCReadModuleSubscribeSuggestions.WKCReadModuleSubscribeSuggestionsTypeCustomTwitter(),
 			OLSKPublicConstants.WKCSubscriptionHandlerCustomTwitter,
 		],
 	].reduce(function (map, e) {
@@ -44,10 +44,10 @@
 
 	moi.propertiesFetchURL = function (inputData) {
 		if (typeof inputData === 'undefined') {
-			return d3.select('#WKCSubscriptionsModuleCreateFetchFormURL').property('value');
+			return d3.select('#WKCReadModuleSubscribeFetchFormURL').property('value');
 		}
 
-		d3.select('#WKCSubscriptionsModuleCreateFetchFormURL').property('value', inputData);
+		d3.select('#WKCReadModuleSubscribeFetchFormURL').property('value', inputData);
 	};
 
 	//# INTERFACE
@@ -63,9 +63,9 @@
 	moi.interfaceConfirmationFormDidSubmit = function () {
 		moi._commandsSubscriptionsCreate({
 			WKCSubscriptionURL: moi.propertiesFetchURL(),
-			WKCSubscriptionHandler: d3.select('#WKCSubscriptionsModuleCreateConfirmationFormType').node().value,
-			WKCSubscriptionName: d3.select('#WKCSubscriptionsModuleCreateConfirmationFormName').node().value,
-			WKCSubscriptionBlurb: d3.select('#WKCSubscriptionsModuleCreateConfirmationFormBlurb').node().value,
+			WKCSubscriptionHandler: d3.select('#WKCReadModuleSubscribeConfirmationFormType').node().value,
+			WKCSubscriptionName: d3.select('#WKCReadModuleSubscribeConfirmationFormName').node().value,
+			WKCSubscriptionBlurb: d3.select('#WKCReadModuleSubscribeConfirmationFormBlurb').node().value,
 		});
 	};
 
@@ -147,7 +147,7 @@
 		})
 		.catch(moi.commandsFetchAlertError)
 		.finally(function () {
-			moi.reactSuggestions(WKCSubscriptionsModuleCreateSuggestions.WKCSubscriptionsModuleCreateSuggestionsFor(inputData));
+			moi.reactSuggestions(WKCReadModuleSubscribeSuggestions.WKCReadModuleSubscribeSuggestionsFor(inputData));
 
 			moi.reactFetchLoaderVisibility(false);
 		});
@@ -156,11 +156,11 @@
 	//_ commandsFetchAlertError
 
 	moi.commandsFetchAlertError = function (error) {
-		window.alert(OLSKLocalized('WKCSubscriptionsModuleCreateErrorFetchText'));
+		window.alert(OLSKLocalized('WKCReadModuleSubscribeErrorFetchText'));
 
 		moi.reactFetchLoaderVisibility(false);
 
-		d3.select('#WKCSubscriptionsModuleCreateFetchFormURL').node().focus();
+		d3.select('#WKCReadModuleSubscribeFetchFormURL').node().focus();
 
 		throw error;
 	};
@@ -168,7 +168,7 @@
 	//_ commandsFetchAlertErrorTwitterMissingToken
 
 	moi.commandsFetchAlertErrorTwitterMissingToken = function (error) {
-		window.alert(OLSKLocalized('WKCSubscriptionsModuleCreateErrorTwitterMissingToken'));
+		window.alert(OLSKLocalized('WKCReadModuleSubscribeErrorTwitterMissingToken'));
 	};
 
 	//_ commandsConfirmURLFeedRSS
@@ -178,7 +178,7 @@
 
 		moi.reactPreviewFeedItems([].slice.call(parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('item')));
 		
-		moi.reactPreviewShared(stringContentForFirstElement(parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('title')), stringContentForFirstElement(parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('description')), OLSKLocalized('WKCSubscriptionsModuleCreatePreviewTypeFeedRSSText'));
+		moi.reactPreviewShared(stringContentForFirstElement(parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('title')), stringContentForFirstElement(parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('description')), OLSKLocalized('WKCReadModuleSubscribePreviewTypeFeedRSSText'));
 	};
 
 	//_ commandsConfirmURLFeedAtom
@@ -188,7 +188,7 @@
 
 		moi.reactPreviewFeedItems([].slice.call(parsedXML.getElementsByTagName('entry')));
 		
-		moi.reactPreviewShared(stringContentForFirstElement(parsedXML.getElementsByTagName('title')), stringContentForFirstElement(parsedXML.getElementsByTagName('subtitle')), OLSKLocalized('WKCSubscriptionsModuleCreatePreviewTypeFeedAtomText'));
+		moi.reactPreviewShared(stringContentForFirstElement(parsedXML.getElementsByTagName('title')), stringContentForFirstElement(parsedXML.getElementsByTagName('subtitle')), OLSKLocalized('WKCReadModuleSubscribePreviewTypeFeedAtomText'));
 	};
 
 	//_ commandsConfirmURLFile
@@ -198,7 +198,7 @@
 		
 		moi.reactPreviewFile(rawData);
 
-		moi.reactPreviewShared(inputData.match(/https?:\/\/(.*)/)[1], null, OLSKLocalized('WKCSubscriptionsModuleCreatePreviewTypeFileText'));
+		moi.reactPreviewShared(inputData.match(/https?:\/\/(.*)/)[1], null, OLSKLocalized('WKCReadModuleSubscribePreviewTypeFileText'));
 	};
 
 	//_ commandsConfirmURLPage
@@ -263,7 +263,7 @@
 			return false;
 		}).map(function(e) {
 			return e.content;
-		}).shift(), OLSKLocalized('WKCSubscriptionsModuleCreatePreviewTypePageText'));
+		}).shift(), OLSKLocalized('WKCReadModuleSubscribePreviewTypePageText'));
 	};
 
 	//_ commandsConfirmationClear
@@ -279,12 +279,12 @@
 		moi.reactConfirmationVisibility(false);
 		moi.reactFetchFormVisibility(true);
 
-		d3.selectAll('.WKCSubscriptionsModuleCreatePreview').classed('WKCSubscriptionsHidden', true);
+		d3.selectAll('.WKCReadModuleSubscribePreview').classed('WKCSubscriptionsHidden', true);
 
-		d3.select('#WKCSubscriptionsModuleCreateConfirmationFormName').property('value', '');
-		d3.select('#WKCSubscriptionsModuleCreateConfirmationFormBlurb').property('value', '');
+		d3.select('#WKCReadModuleSubscribeConfirmationFormName').property('value', '');
+		d3.select('#WKCReadModuleSubscribeConfirmationFormBlurb').property('value', '');
 
-		d3.select('#WKCSubscriptionsModuleCreateFetchFormURL').node().focus();
+		d3.select('#WKCReadModuleSubscribeFetchFormURL').node().focus();
 	};
 
 	//_ _commandsSubscriptionsCreate
@@ -301,14 +301,14 @@
 			Object.assign(subscriptionObject, responseJSON);
 
 			moi.commandsConfirmationClear();
-			moi.reactFetchFlash(OLSKFormatted(OLSKLocalized('WKCSubscriptionsModuleCreateFlashFormat'), subscriptionObject.WKCSubscriptionURL));
+			moi.reactFetchFlash(OLSKFormatted(OLSKLocalized('WKCReadModuleSubscribeFlashFormat'), subscriptionObject.WKCSubscriptionURL));
 		}, moi._commandsSubscriptionsAlertErrorCreate);
 	};
 
 	//_ _commandsSubscriptionsAlertErrorCreate
 
 	moi._commandsSubscriptionsAlertErrorCreate = function (error) {
-		window.alert(OLSKLocalized('WKCSubscriptionsModuleCreateErrorCreateText'));
+		window.alert(OLSKLocalized('WKCReadModuleSubscribeErrorCreateText'));
 
 		throw error;
 	};
@@ -318,19 +318,19 @@
 	//_ reactFetchFormVisibility
 
 	moi.reactFetchFormVisibility = function (isVisible) {
-		d3.select('#WKCSubscriptionsModuleCreateFetchForm').classed('WKCSubscriptionsHidden', !isVisible);
+		d3.select('#WKCReadModuleSubscribeFetchForm').classed('WKCSubscriptionsHidden', !isVisible);
 	};
 
 	//_ reactFetchLoaderVisibility
 
 	moi.reactFetchLoaderVisibility = function (isVisible) {
-		d3.select('#WKCSubscriptionsModuleCreateLoader').classed('WKCSubscriptionsHidden', !isVisible);
+		d3.select('#WKCReadModuleSubscribeLoader').classed('WKCSubscriptionsHidden', !isVisible);
 	};
 
 	//_ reactFetchFlash
 
 	moi.reactFetchFlash = function (inputData) {
-		d3.select('#WKCSubscriptionsModuleCreateFetchFlash')
+		d3.select('#WKCReadModuleSubscribeFetchFlash')
 			.text(inputData)
 			.classed('WKCSubscriptionsHidden', false)
 			.style('opacity', 0)
@@ -341,7 +341,7 @@
 					.delay(2000)
 					.style('opacity', 0)
 					.on('end', function () {
-						d3.select('#WKCSubscriptionsModuleCreateFetchFlash')
+						d3.select('#WKCReadModuleSubscribeFetchFlash')
 		        	.text(inputData)
 		        	.classed('WKCSubscriptionsHidden', true);
 		      });
@@ -350,12 +350,12 @@
 	//_ reactAlternativesFeeds
 
 	moi.reactAlternativesFeeds = function (feedURLs) {
-		var selection = d3.select('#WKCSubscriptionsModuleCreateAlternativesFeeds ul')
-			.selectAll('.WKCSubscriptionsModuleCreateAlternativesFeedsItem').data(feedURLs);
+		var selection = d3.select('#WKCReadModuleSubscribeAlternativesFeeds ul')
+			.selectAll('.WKCReadModuleSubscribeAlternativesFeedsItem').data(feedURLs);
 		
 		selection.enter()
 			.append('li')
-				.attr('class', 'WKCSubscriptionsModuleCreateAlternativesFeedsItem')
+				.attr('class', 'WKCReadModuleSubscribeAlternativesFeedsItem')
 				.append('button')
 				.on('click', function(e) {
 					moi.commandsFetchURL(e);
@@ -367,91 +367,91 @@
 
 		selection.exit().remove();
 
-		d3.select('#WKCSubscriptionsModuleCreateAlternativesFeeds').classed('WKCSubscriptionsHidden', !feedURLs.length);
+		d3.select('#WKCReadModuleSubscribeAlternativesFeeds').classed('WKCSubscriptionsHidden', !feedURLs.length);
 	};
 
 	//_ reactSuggestions
 
 	moi.reactSuggestions = function (suggestionObjects) {
-		var selection = d3.select('#WKCSubscriptionsModuleCreateSuggestionsList')
-			.selectAll('.WKCSubscriptionsModuleCreateSuggestionsListItem').data(suggestionObjects);
+		var selection = d3.select('#WKCReadModuleSubscribeSuggestionsList')
+			.selectAll('.WKCReadModuleSubscribeSuggestionsListItem').data(suggestionObjects);
 		
 		var parentElement = selection.enter()
 			.append('li')
-				.attr('class', 'WKCSubscriptionsModuleCreateSuggestionsListItem');
+				.attr('class', 'WKCReadModuleSubscribeSuggestionsListItem');
 
 		parentElement.append('button')
-			.attr('class', 'WKCSubscriptionsModuleCreateSuggestionsListItemButton');
+			.attr('class', 'WKCReadModuleSubscribeSuggestionsListItemButton');
 
 		parentElement.append('span')
 			.append('span')
-				.attr('class', 'WKCSubscriptionsModuleCreateSuggestionsListItemName');
+				.attr('class', 'WKCReadModuleSubscribeSuggestionsListItemName');
 
 		parentElement = parentElement.merge(selection);
 
-		parentElement.select('.WKCSubscriptionsModuleCreateSuggestionsListItemButton')
+		parentElement.select('.WKCReadModuleSubscribeSuggestionsListItemButton')
 			.on('click', function(e) {
-				moi.commandsFetchURL(e.WKCSuggestionURL, kWKCSubscriptionsModuleCreateHandlerMap[e.WKCSuggestionType]);
+				moi.commandsFetchURL(e.WKCSuggestionURL, kWKCReadModuleSubscribeHandlerMap[e.WKCSuggestionType]);
 			})
 			.text(function(e) {
 				return e.WKCSuggestionURL;
 			});
 
-		parentElement.select('.WKCSubscriptionsModuleCreateSuggestionsListItemName')
+		parentElement.select('.WKCReadModuleSubscribeSuggestionsListItemName')
 			.html(function(e) {
 				return [
 					'&nbsp;',
 					'(',
-					OLSKLocalized('WKCSubscriptionsModuleCreateSuggestionsNameText'.concat(e.WKCSuggestionType)),
+					OLSKLocalized('WKCReadModuleSubscribeSuggestionsNameText'.concat(e.WKCSuggestionType)),
 					')',
 				].join('');
 			});
 
 		selection.exit().remove();
 
-		d3.select('#WKCSubscriptionsModuleCreateSuggestions').classed('WKCSubscriptionsHidden', !suggestionObjects.length);
+		d3.select('#WKCReadModuleSubscribeSuggestions').classed('WKCSubscriptionsHidden', !suggestionObjects.length);
 	};
 
 	//_ reactConfirmationVisibility
 
 	moi.reactConfirmationVisibility = function (isVisible) {
-		d3.select('#WKCSubscriptionsModuleCreateConfirmation').classed('WKCSubscriptionsHidden', !isVisible);
+		d3.select('#WKCReadModuleSubscribeConfirmation').classed('WKCSubscriptionsHidden', !isVisible);
 	};
 
 	//_ reactConfirmationType
 
 	moi.reactConfirmationType = function (inputData) {
-		d3.select('#WKCSubscriptionsModuleCreateConfirmationFormType').property('value', inputData);
+		d3.select('#WKCReadModuleSubscribeConfirmationFormType').property('value', inputData);
 	};
 
 	//_ reactPreviewShared
 
 	moi.reactPreviewShared = function (titleContent, blurbContent, typeContent) {
 		if (titleContent) {
-			d3.select('#WKCSubscriptionsModuleCreateConfirmationFormName').property('value', titleContent);
+			d3.select('#WKCReadModuleSubscribeConfirmationFormName').property('value', titleContent);
 		}
 
 		if (blurbContent) {
-			d3.select('#WKCSubscriptionsModuleCreateConfirmationFormBlurb').property('value', blurbContent);
+			d3.select('#WKCReadModuleSubscribeConfirmationFormBlurb').property('value', blurbContent);
 		}
-		d3.select('#WKCSubscriptionsModuleCreatePreviewHeadingType').html(typeContent);
+		d3.select('#WKCReadModuleSubscribePreviewHeadingType').html(typeContent);
 
 		moi.reactConfirmationVisibility(true);
 		
 		moi.reactFetchFormVisibility(false);
 
-		d3.select('#WKCSubscriptionsModuleCreateConfirmationFormName').attr('autofocus', true);
+		d3.select('#WKCReadModuleSubscribeConfirmationFormName').attr('autofocus', true);
 	};
 
 	//_ reactPreviewFeedItems
 
 	moi.reactPreviewFeedItems = function (itemElements) {
-		var selection = d3.select('#WKCSubscriptionsModuleCreatePreviewFeedList')
-			.selectAll('.WKCSubscriptionsModuleCreatePreviewFeedItem').data(itemElements);
+		var selection = d3.select('#WKCReadModuleSubscribePreviewFeedList')
+			.selectAll('.WKCReadModuleSubscribePreviewFeedItem').data(itemElements);
 		
 		selection.enter()
 			.append('li')
-				.attr('class', 'WKCSubscriptionsModuleCreatePreviewFeedItem')
+				.attr('class', 'WKCReadModuleSubscribePreviewFeedItem')
 				.merge(selection)
 					.html(function(e) {
 						return stringContentForFirstElement(e.getElementsByTagName('title'));
@@ -459,23 +459,23 @@
 
 		selection.exit().remove();
 
-		d3.select('#WKCSubscriptionsModuleCreatePreviewFeed').classed('WKCSubscriptionsHidden', !itemElements.length);
+		d3.select('#WKCReadModuleSubscribePreviewFeed').classed('WKCSubscriptionsHidden', !itemElements.length);
 	};
 
 	//_ reactPreviewFile
 
 	moi.reactPreviewFile = function (inputData) {
-		d3.select('#WKCSubscriptionsModuleCreatePreviewFile pre').html(inputData);
+		d3.select('#WKCReadModuleSubscribePreviewFile pre').html(inputData);
 
-		d3.select('#WKCSubscriptionsModuleCreatePreviewFile').classed('WKCSubscriptionsHidden', !inputData);
+		d3.select('#WKCReadModuleSubscribePreviewFile').classed('WKCSubscriptionsHidden', !inputData);
 	};
 
 	//_ reactPreviewPage
 
 	moi.reactPreviewPage = function (inputData) {
-		d3.select('#WKCSubscriptionsModuleCreatePreviewPage').html(inputData);
+		d3.select('#WKCReadModuleSubscribePreviewPage').html(inputData);
 
-		d3.select('#WKCSubscriptionsModuleCreatePreviewPage').classed('WKCSubscriptionsHidden', !inputData);
+		d3.select('#WKCReadModuleSubscribePreviewPage').classed('WKCSubscriptionsHidden', !inputData);
 	};
 
 	//# SETUP

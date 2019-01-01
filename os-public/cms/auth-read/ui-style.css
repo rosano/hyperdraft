@@ -58,33 +58,33 @@ body {
 	display: none;
 }
 
-#WKCSubscriptionsModuleCreate {
+#WKCReadModuleSubscribe {
 	padding: 20px;
 
 	/* @FlexboxWKCSubscriptionsCreate child */
 	overflow: auto;
 }
 
-#WKCSubscriptionsModuleCreateHeading {
+#WKCReadModuleSubscribeHeading {
 	margin-top: 0;
 }
 
-#WKCSubscriptionsModuleCreateLoader {
+#WKCReadModuleSubscribeLoader {
 	padding: 20px 0;
 }
 
-#WKCSubscriptionsModuleCreateAlternativesFeeds {
+#WKCReadModuleSubscribeAlternativesFeeds {
 	padding: 10px;
 
 	border: 1px solid #408002;
 	background: #ccff66;
 }
 
-#WKCSubscriptionsModuleCreateSuggestions {
+#WKCReadModuleSubscribeSuggestions {
 	margin: 20px 0;
 }
 
-.WKCSubscriptionsModuleCreatePreview {
+.WKCReadModuleSubscribePreview {
 	padding-left: 20px;
 	overflow-x: hidden;
 
@@ -92,7 +92,7 @@ body {
 	border-left: 10px solid #ddd;
 }
 
-#WKCSubscriptionsModuleCreatePreviewFeedList {
+#WKCReadModuleSubscribePreviewFeedList {
 	padding-left: 10px;
 }
 

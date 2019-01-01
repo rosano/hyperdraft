@@ -2,25 +2,25 @@
 	WKSubscriptionsModuleCreate.lifecyclePageWillLoad();
 </script>
 
-<div id="WKCSubscriptionsModuleCreate">
-	<h1 id="WKCSubscriptionsModuleCreateHeading"><%= OLSKLocalized('WKCSubscriptionsModuleCreateHeadingText') %></h1>
+<div id="WKCReadModuleSubscribe">
+	<h1 id="WKCReadModuleSubscribeHeading"><%= OLSKLocalized('WKCReadModuleSubscribeHeadingText') %></h1>
 
-	<form id="WKCSubscriptionsModuleCreateFetchForm">
-		<input type="text" placeholder="http(s)://…" autofocus id="WKCSubscriptionsModuleCreateFetchFormURL" value="http://localhost:8000/test.html" />
-		<input type="submit" value="<%= OLSKLocalized('WKCSubscriptionsModuleCreateFetchFormSubmitText') %>">
+	<form id="WKCReadModuleSubscribeFetchForm">
+		<input type="text" placeholder="http(s)://…" autofocus id="WKCReadModuleSubscribeFetchFormURL" value="http://localhost:8000/test.html" />
+		<input type="submit" value="<%= OLSKLocalized('WKCReadModuleSubscribeFetchFormSubmitText') %>">
 	</form>
 
-	<p id="WKCSubscriptionsModuleCreateFetchFlash" class="WKCSubscriptionsHidden WKCSharedFlash"></p>
+	<p id="WKCReadModuleSubscribeFetchFlash" class="WKCSubscriptionsHidden WKCSharedFlash"></p>
 
 	<script type="text/javascript">
-		d3.select('#WKCSubscriptionsModuleCreateFetchForm').on('submit', function() {
+		d3.select('#WKCReadModuleSubscribeFetchForm').on('submit', function() {
 			d3.event.preventDefault();
 			
 			WKSubscriptionsModuleCreate.interfaceFetchFormDidSubmit();
 		});
 	</script>
 
-	<div id="WKCSubscriptionsModuleCreateLoader" class="WKCSubscriptionsHidden">
+	<div id="WKCReadModuleSubscribeLoader" class="WKCSubscriptionsHidden">
 		<div class="ispinner ispinner--gray ispinner--animating">
 		  <div class="ispinner__blade"></div>
 		  <div class="ispinner__blade"></div>
@@ -37,64 +37,64 @@
 		</div>
 	</div>
 
-	<div id="WKCSubscriptionsModuleCreateSuggestions" class="WKCSubscriptionsHidden">
-		<p><%= OLSKLocalized('WKCSubscriptionsModuleCreateSuggestionsAlertText') %></p>
-		<ul id="WKCSubscriptionsModuleCreateSuggestionsList"></ul>
+	<div id="WKCReadModuleSubscribeSuggestions" class="WKCSubscriptionsHidden">
+		<p><%= OLSKLocalized('WKCReadModuleSubscribeSuggestionsAlertText') %></p>
+		<ul id="WKCReadModuleSubscribeSuggestionsList"></ul>
 	</div>
 
-	<div id="WKCSubscriptionsModuleCreateAlternativesFeeds" class="WKCSubscriptionsHidden">
-		<p><%= OLSKLocalized('WKCSubscriptionsModuleCreateAlternativesFeedsAlertText') %></p>
+	<div id="WKCReadModuleSubscribeAlternativesFeeds" class="WKCSubscriptionsHidden">
+		<p><%= OLSKLocalized('WKCReadModuleSubscribeAlternativesFeedsAlertText') %></p>
 		<ul></ul>
 	</div>
 
-	<div id="WKCSubscriptionsModuleCreateConfirmation" class="WKCSubscriptionsHidden">
+	<div id="WKCReadModuleSubscribeConfirmation" class="WKCSubscriptionsHidden">
 
-		<h2><%= OLSKLocalized('WKCSubscriptionsModuleCreateConfirmationHeadingText') %></h2>
+		<h2><%= OLSKLocalized('WKCReadModuleSubscribeConfirmationHeadingText') %></h2>
 
-		<form id="WKCSubscriptionsModuleCreateConfirmationForm">
+		<form id="WKCReadModuleSubscribeConfirmationForm">
 			<p>
-				<input type="text" placeholder="<%= OLSKLocalized('WKCSubscriptionsModuleCreateConfirmationFormNameText') %>" id="WKCSubscriptionsModuleCreateConfirmationFormName">
+				<input type="text" placeholder="<%= OLSKLocalized('WKCReadModuleSubscribeConfirmationFormNameText') %>" id="WKCReadModuleSubscribeConfirmationFormName">
 			</p>
 			
 			<p>
-				<textarea placeholder="<%= OLSKLocalized('WKCSubscriptionsModuleCreateConfirmationFormBlurbText') %>" id="WKCSubscriptionsModuleCreateConfirmationFormBlurb"></textarea>
+				<textarea placeholder="<%= OLSKLocalized('WKCReadModuleSubscribeConfirmationFormBlurbText') %>" id="WKCReadModuleSubscribeConfirmationFormBlurb"></textarea>
 			</p>
 			
 			<p>
-				<input type="text" hidden id="WKCSubscriptionsModuleCreateConfirmationFormType">
+				<input type="text" hidden id="WKCReadModuleSubscribeConfirmationFormType">
 			</p>
 
 			<p>
-				<input type="submit" value="<%= OLSKLocalized('WKCSubscriptionsModuleCreateConfirmationFormSubmitText') %>">
+				<input type="submit" value="<%= OLSKLocalized('WKCReadModuleSubscribeConfirmationFormSubmitText') %>">
 			</p>
 
 			<p>
-				<button type="button" id="WKCSubscriptionsModuleCreateConfirmationClearButton"><%= OLSKLocalized('WKCSubscriptionsModuleCreateConfirmationClearButtonText') %></button>
+				<button type="button" id="WKCReadModuleSubscribeConfirmationClearButton"><%= OLSKLocalized('WKCReadModuleSubscribeConfirmationClearButtonText') %></button>
 			</p>
 			<script type="text/javascript">
-				d3.select('#WKCSubscriptionsModuleCreateConfirmationClearButton').on('click', WKSubscriptionsModuleCreate.interfaceConfirmationClearButtonDidClick);
+				d3.select('#WKCReadModuleSubscribeConfirmationClearButton').on('click', WKSubscriptionsModuleCreate.interfaceConfirmationClearButtonDidClick);
 			</script>
 		</form>
 
 		<script type="text/javascript">
-			d3.select('#WKCSubscriptionsModuleCreateConfirmationForm').on('submit', function() {
+			d3.select('#WKCReadModuleSubscribeConfirmationForm').on('submit', function() {
 				d3.event.preventDefault();
 				
 				WKSubscriptionsModuleCreate.interfaceConfirmationFormDidSubmit();
 			});
 		</script>
 
-		<h3><%= OLSKLocalized('WKCSubscriptionsModuleCreatePreviewHeadingText') %> (<span id="WKCSubscriptionsModuleCreatePreviewHeadingType"></span>)</h3>
+		<h3><%= OLSKLocalized('WKCReadModuleSubscribePreviewHeadingText') %> (<span id="WKCReadModuleSubscribePreviewHeadingType"></span>)</h3>
 
-		<section id="WKCSubscriptionsModuleCreatePreviewFeed" class="WKCSubscriptionsModuleCreatePreview">
-			<ul id="WKCSubscriptionsModuleCreatePreviewFeedList"></ul>
+		<section id="WKCReadModuleSubscribePreviewFeed" class="WKCReadModuleSubscribePreview">
+			<ul id="WKCReadModuleSubscribePreviewFeedList"></ul>
 		</section>
 
-		<section id="WKCSubscriptionsModuleCreatePreviewFile" class="WKCSubscriptionsModuleCreatePreview">
+		<section id="WKCReadModuleSubscribePreviewFile" class="WKCReadModuleSubscribePreview">
 			<pre></pre>
 		</section>
 
-		<section id="WKCSubscriptionsModuleCreatePreviewPage" class="WKCSubscriptionsModuleCreatePreview">
+		<section id="WKCReadModuleSubscribePreviewPage" class="WKCReadModuleSubscribePreview">
 		</section>
 	</div>
 </div>
