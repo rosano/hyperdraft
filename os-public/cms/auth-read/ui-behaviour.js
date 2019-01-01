@@ -444,7 +444,7 @@
 				return Object.assign(e, {
 					WKCArticlePublishDate: new Date(e.WKCArticlePublishDate),
 				});
-			}).sort(WKSubscriptionsLogic.WKSubscriptionsListSort));
+			}).sort(WKCReadLogic.WKSubscriptionsListSort));
 		}, moi.commandsAlertConnectionError)
 		.finally(function () {
 			moi.reactMasterLoaderVisibility(false);

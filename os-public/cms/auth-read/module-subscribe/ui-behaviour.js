@@ -212,7 +212,7 @@
 				'application/atom+xml',
 				].indexOf(e.type.trim().toLowerCase()) !== -1;
 		}).map(function(e) {
-			return WKSubscriptionsLogic.WKCReadModuleSubscribeCompleteURL(d3.select(e).attr('href'), inputData);
+			return WKCReadLogic.WKCReadModuleSubscribeCompleteURL(d3.select(e).attr('href'), inputData);
 		}));
 
 		var turndownInstance = new TurndownService();

@@ -7,7 +7,7 @@
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
 	typeof define === 'function' && define.amd ? define(['exports'], factory) :
-	(factory((global.WKSubscriptionsLogic = global.WKSubscriptionsLogic || {})));
+	(factory((global.WKCReadLogic = global.WKCReadLogic || {})));
 }(this, (function (exports) { 'use strict';
 
 	//_ WKCReadModuleSubscribeCompleteURL
