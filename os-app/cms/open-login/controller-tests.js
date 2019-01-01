@@ -18,7 +18,7 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 			WKCRouteLogin: {
 				OLSKRoutePath: '/login',
 				OLSKRouteMethod: 'get',
-				OLSKRouteFunction: controllerModule.WKCActionLoginIndex,
+				OLSKRouteFunction: controllerModule.WKCLoginAction,
 				OLSKRouteLanguages: ['en'],
 				OLSKRouteMiddlewares: [
 					'WKCSharedMiddlewareEnsureDatabase',
@@ -27,7 +27,7 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 			WKCRouteLoginSubmit: {
 				OLSKRoutePath: '/login',
 				OLSKRouteMethod: 'post',
-				OLSKRouteFunction: controllerModule.WKCActionLoginSubmit,
+				OLSKRouteFunction: controllerModule.WKCLoginSubmitAction,
 				OLSKRouteLanguages: ['en'],
 			},
 			WKCRouteLoginDestroy: {

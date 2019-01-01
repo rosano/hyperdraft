@@ -13,7 +13,7 @@ exports.OLSKControllerRoutes = function() {
 		WKCRouteLogin: {
 			OLSKRoutePath: '/login',
 			OLSKRouteMethod: 'get',
-			OLSKRouteFunction: exports.WKCActionLoginIndex,
+			OLSKRouteFunction: exports.WKCLoginAction,
 			OLSKRouteLanguages: ['en'],
 			OLSKRouteMiddlewares: [
 				'WKCSharedMiddlewareEnsureDatabase',
@@ -22,7 +22,7 @@ exports.OLSKControllerRoutes = function() {
 		WKCRouteLoginSubmit: {
 			OLSKRoutePath: '/login',
 			OLSKRouteMethod: 'post',
-			OLSKRouteFunction: exports.WKCActionLoginSubmit,
+			OLSKRouteFunction: exports.WKCLoginSubmitAction,
 			OLSKRouteLanguages: ['en'],
 		},
 		WKCRouteLoginDestroy: {
@@ -60,20 +60,20 @@ exports.WKCLoginMiddlewareAuthenticate = function(req, res, next) {
 	return next();
 };
 
-//_ WKCActionLoginIndex
+//_ WKCLoginAction
 
-exports.WKCActionLoginIndex = function(req, res, next) {
+exports.WKCLoginAction = function(req, res, next) {
 	return res.render([
 		__dirname,
-		'index',
+		'view',
 	].join('/'), {
 		WKCLoginReturnPath: req.query.returnPath || undefined,
 	});
 };
 
-//_ WKCActionLoginSubmit
+//_ WKCLoginSubmitAction
 
-exports.WKCActionLoginSubmit = function(req, res, next) {
+exports.WKCLoginSubmitAction = function(req, res, next) {
 	if (!process.env.WKC_SHARED_DATABASE_NAME) {
 		throw new Error('WKCErrorMissingDatabaseName');
 	}
