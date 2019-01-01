@@ -149,7 +149,7 @@ body {
 	border-bottom: none;
 }
 
-.WKCReadSourcesContentListHeading .WKCSubscriptionsText {
+.WKCReadSourcesContentListHeading .WKCReadText {
 	opacity: 0.5;
 }
 
@@ -216,7 +216,7 @@ body {
 	margin-top: -3px;
 }
 
-.WKCReadSourcesContentListChildListItemUnreadCount .WKCSubscriptionsText {
+.WKCReadSourcesContentListChildListItemUnreadCount .WKCReadText {
 	opacity: 0.8;
 }
 

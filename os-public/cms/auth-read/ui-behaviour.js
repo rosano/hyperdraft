@@ -471,12 +471,12 @@
 
 		parentElement.append('span')
 			.classed('WKCReadSourcesContentListChildListItemName', true)
-			.classed('WKCSubscriptionsText', true);
+			.classed('WKCReadText', true);
 
 		parentElement.append('span')
 			.attr('class', 'WKCReadSourcesContentListChildListItemUnreadCount')
 			.append('span')
-				.classed('WKCSubscriptionsText', true);
+				.classed('WKCReadText', true);
 
 		parentElement = parentElement.merge(selection);
 
@@ -525,7 +525,7 @@
 				.on('click', moi.commandsSourcesSelect);
 
 		parentElement.append('img')
-			.classed('WKCSubscriptionsText', true);
+			.classed('WKCReadText', true);
 
 		parentElement.append('span')
 			.attr('class', 'WKCReadSourcesContentListChildListItemName');
@@ -533,7 +533,7 @@
 		parentElement.append('span')
 			.attr('class', 'WKCReadSourcesContentListChildListItemUnreadCount')
 			.append('span')
-				.classed('WKCSubscriptionsText', true);
+				.classed('WKCReadText', true);
 
 		parentElement = parentElement.merge(selection);
 
@@ -626,7 +626,7 @@
 			.classed('WKCSharedHidden', !moi.propertiesArticleObjects().filter(function (e) {
 				return !e.WKCArticleIsRead;
 			}).length)
-			.select('.WKCSubscriptionsText')
+			.select('.WKCReadText')
 				.text(moi.propertiesArticleObjects().filter(function (e) {
 					return !e.WKCArticleIsRead;
 				}).length);
@@ -645,7 +645,7 @@
 					return true;
 				}).length;
 			})
-			.select('.WKCSubscriptionsText')
+			.select('.WKCReadText')
 				.text(function(obj) {
 					return moi.propertiesArticleObjects().filter(function (e) {
 						if (e.WKCArticleSubscriptionID !== obj.WKCSubscriptionID) {
