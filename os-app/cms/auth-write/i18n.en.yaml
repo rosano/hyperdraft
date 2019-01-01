@@ -13,7 +13,7 @@ WKCWriteDetailToolbarPersistenceStatusDeleting: Deleting…
 WKCWriteDetailToolbarPersistenceStatusDeleted: Deleted
 WKCWriteDetailToolbarPersistenceStatusUnableToSave: Unable to save
 WKCWriteDetailToolbarPersistenceStatusUnableToDelete: Unable to delete
-WKCNotesErrorNotesUnavailable: Unable to fetch notes
-WKCNotesErrorPersistenceSaveDidFail: Unable to save note. Would you like to try again?
-WKCNotesErrorPersistenceDeleteDidFail: Unable to delete note. Would you like to try again?
-WKCNotesErrorPublishDidFail: Unable to publish note. Would you like to try again?
+WKCWriteErrorNotesUnavailable: Unable to fetch notes
+WKCWriteErrorPersistenceSaveDidFail: Unable to save note. Would you like to try again?
+WKCWriteErrorPersistenceDeleteDidFail: Unable to delete note. Would you like to try again?
+WKCWriteErrorPublishDidFail: Unable to publish note. Would you like to try again?

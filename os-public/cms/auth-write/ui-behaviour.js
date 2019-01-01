@@ -129,9 +129,9 @@
 	//_ commandsAlertNotesUnavailable
 
 	moi.commandsAlertNotesUnavailable = function () {
-		window.alert(OLSKLocalized('WKCNotesErrorNotesUnavailable'));
+		window.alert(OLSKLocalized('WKCWriteErrorNotesUnavailable'));
 
-		throw new Error('WKCNotesErrorNotesUnavailable');
+		throw new Error('WKCWriteErrorNotesUnavailable');
 	};
 
 	//_ commandsNotesCreate
@@ -207,7 +207,7 @@
 
 			moi.propertiesUnsavedNotes().splice(moi.propertiesUnsavedNotes().indexOf(inputData), 1);
 		}, function(error) {
-			if (window.confirm(OLSKLocalized('WKCNotesErrorPersistenceSaveDidFail'))) {
+			if (window.confirm(OLSKLocalized('WKCWriteErrorPersistenceSaveDidFail'))) {
 				return moi.commandsPersistNote(inputData);
 			};
 
@@ -268,7 +268,7 @@
 		}).then(function(responseJSON) {
 			moi.reactPublishStatus();
 		}, function(error) {
-			if (window.confirm(OLSKLocalized('WKCNotesErrorPublishDidFail'))) {
+			if (window.confirm(OLSKLocalized('WKCWriteErrorPublishDidFail'))) {
 				return moi.commandsPublishNote(inputData);
 			};
 
@@ -324,7 +324,7 @@
 
 			moi.reactPersistenceStatus(OLSKLocalized('WKCWriteDetailToolbarPersistenceStatusDeleted'), true);
 		}, function(error) {
-			if (window.confirm(OLSKLocalized('WKCNotesErrorPersistenceDeleteDidFail'))) {
+			if (window.confirm(OLSKLocalized('WKCWriteErrorPersistenceDeleteDidFail'))) {
 				return moi._commandsDeleteNoteWithoutConfirmation(inputData);
 			};
 
