@@ -54,15 +54,15 @@ locals.OLSKPagePublicRouteKeys = [
 <%- include('../_shared/layout-header.ejs') %>
 
 <script type="text/javascript">
-	WKSubscriptions.lifecyclePageWillLoad();
+	WKCReadBehaviour.lifecyclePageWillLoad();
 
 	d3.select(document.body).on('keydown', function () {
 		if (d3.event.code === 'Backspace') {
-			return WKSubscriptions.interfaceArticlesDiscardButtonDidClick();
+			return WKCReadBehaviour.interfaceArticlesDiscardButtonDidClick();
 		}
 
 		if (d3.event.code === 'Escape') {
-			return WKSubscriptions.interfaceSubscriptionsCreateCloseButtonDidClick();
+			return WKCReadBehaviour.interfaceSubscriptionsCreateCloseButtonDidClick();
 		}
 	});
 </script>
@@ -72,7 +72,7 @@ locals.OLSKPagePublicRouteKeys = [
 		<header id="WKCReadSubscribeHeader" class="WKCSharedToolbar">
 			<button id="WKCReadSubscribeHeaderCloseButton" class="WKCSharedElementTappable WKCSharedButtonNoStyle">✖️</button>
 			<script type="text/javascript">
-				d3.select('#WKCReadSubscribeHeaderCloseButton').on('click', WKSubscriptions.interfaceSubscriptionsCreateCloseButtonDidClick);
+				d3.select('#WKCReadSubscribeHeaderCloseButton').on('click', WKCReadBehaviour.interfaceSubscriptionsCreateCloseButtonDidClick);
 			</script>
 		</header>
 		<%- include('./module-subscribe/view.ejs') %>
@@ -102,7 +102,7 @@ locals.OLSKPagePublicRouteKeys = [
 		<header id="WKCReadMasterToolbar" class="WKCSharedToolbar">
 			<button id="WKCReadMasterToolbarCreateButton" class="WKCSharedElementTappable WKCSharedButtonNoStyle" accesskey="n">➕</button>
 			<script type="text/javascript">
-				d3.select('#WKCReadMasterToolbarCreateButton').on('click', WKSubscriptions.interfaceSubscriptionsCreateButtonDidClick);
+				d3.select('#WKCReadMasterToolbarCreateButton').on('click', WKCReadBehaviour.interfaceSubscriptionsCreateButtonDidClick);
 			</script>
 		</header>
 
@@ -131,22 +131,22 @@ locals.OLSKPagePublicRouteKeys = [
 		<header id="WKCReadDetailToolbar" class="WKCSharedToolbar">
 			<button id="WKCReadDetailToolbarUnreadButton" class="WKCSharedElementTappable WKCSharedButtonNoStyle WKCSubscriptionsHidden">⚫︎</button>
 			<script type="text/javascript">
-				d3.select('#WKCReadDetailToolbarUnreadButton').on('click', WKSubscriptions.interfaceArticlesUnreadButtonDidClick);
+				d3.select('#WKCReadDetailToolbarUnreadButton').on('click', WKCReadBehaviour.interfaceArticlesUnreadButtonDidClick);
 			</script>
 
 			<button id="WKCReadDetailToolbarInboxButton" class="WKCSharedElementTappable WKCSharedButtonNoStyle WKCSubscriptionsHidden"><%= OLSKLocalized('WKCReadDetailToolbarInboxButtonText') %></button>
 			<script type="text/javascript">
-				d3.select('#WKCReadDetailToolbarInboxButton').on('click', WKSubscriptions.interfaceArticlesInboxButtonDidClick);
+				d3.select('#WKCReadDetailToolbarInboxButton').on('click', WKCReadBehaviour.interfaceArticlesInboxButtonDidClick);
 			</script>
 
 			<button id="WKCReadDetailToolbarArchiveButton" class="WKCSharedElementTappable WKCSharedButtonNoStyle" accesskey="a">📂</button>
 			<script type="text/javascript">
-				d3.select('#WKCReadDetailToolbarArchiveButton').on('click', WKSubscriptions.interfaceArticlesArchiveButtonDidClick);
+				d3.select('#WKCReadDetailToolbarArchiveButton').on('click', WKCReadBehaviour.interfaceArticlesArchiveButtonDidClick);
 			</script>
 
 			<button id="WKCReadDetailToolbarDiscardButton" class="WKCSharedElementTappable WKCSharedButtonNoStyle">🗑</button>
 			<script type="text/javascript">
-				d3.select('#WKCReadDetailToolbarDiscardButton').on('click', WKSubscriptions.interfaceArticlesDiscardButtonDidClick);
+				d3.select('#WKCReadDetailToolbarDiscardButton').on('click', WKCReadBehaviour.interfaceArticlesDiscardButtonDidClick);
 			</script>
 		</header>
 
