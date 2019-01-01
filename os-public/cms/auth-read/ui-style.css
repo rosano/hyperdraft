@@ -22,7 +22,7 @@ body {
 	display: none;
 }
 
-#WKCSubscriptionsCreate {
+#WKCReadSubscribe {
 	position: fixed;
 	top: 0;
 	bottom: 0;
@@ -36,7 +36,7 @@ body {
 	display: none;
 }
 
-@keyframes WKCSubscriptionsCreateActive {
+@keyframes WKCReadSubscribeActive {
   from {
   	opacity: 0;
   }
@@ -45,23 +45,23 @@ body {
   }
 }
 
-.WKCSubscriptionsCreateActive {
-  animation-name: WKCSubscriptionsCreateActive;
+.WKCReadSubscribeActive {
+  animation-name: WKCReadSubscribeActive;
   animation-duration: 0.235s;
 
-  /* @FlexboxWKCSubscriptionsCreate parent */
+  /* @FlexboxWKCReadSubscribe parent */
   display: flex !important;
   flex-direction: column;
 }
 
-.WKCSubscriptionsCreateInactive {
+.WKCReadSubscribeInactive {
 	display: none;
 }
 
 #WKCReadModuleSubscribe {
 	padding: 20px;
 
-	/* @FlexboxWKCSubscriptionsCreate child */
+	/* @FlexboxWKCReadSubscribe child */
 	overflow: auto;
 }
 

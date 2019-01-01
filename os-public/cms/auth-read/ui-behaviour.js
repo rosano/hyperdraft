@@ -613,8 +613,8 @@
 	//_ reactSubscriptionsCreateVisibility
 
 	moi.reactSubscriptionsCreateVisibility = function (isVisible) {
-		d3.select('#WKCSubscriptionsCreate').classed('WKCSubscriptionsCreateActive', isVisible);
-		d3.select('#WKCSubscriptionsCreate').classed('WKCSubscriptionsCreateInactive', !isVisible);
+		d3.select('#WKCReadSubscribe').classed('WKCReadSubscribeActive', isVisible);
+		d3.select('#WKCReadSubscribe').classed('WKCReadSubscribeInactive', !isVisible);
 	};
 
 	//_ reactSourcesUnreadCount

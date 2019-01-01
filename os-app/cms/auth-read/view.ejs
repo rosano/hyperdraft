@@ -68,11 +68,11 @@ locals.OLSKPagePublicRouteKeys = [
 </script>
 
 <div id="WKCSubscriptions" class="WKCSubscriptionsLoading">
-	<div id="WKCSubscriptionsCreate">
-		<header id="WKCSubscriptionsCreateHeader" class="WKCSharedToolbar">
-			<button id="WKCSubscriptionsCreateHeaderCloseButton" class="WKCSharedElementTappable WKCSharedButtonNoStyle">✖️</button>
+	<div id="WKCReadSubscribe">
+		<header id="WKCReadSubscribeHeader" class="WKCSharedToolbar">
+			<button id="WKCReadSubscribeHeaderCloseButton" class="WKCSharedElementTappable WKCSharedButtonNoStyle">✖️</button>
 			<script type="text/javascript">
-				d3.select('#WKCSubscriptionsCreateHeaderCloseButton').on('click', WKSubscriptions.interfaceSubscriptionsCreateCloseButtonDidClick);
+				d3.select('#WKCReadSubscribeHeaderCloseButton').on('click', WKSubscriptions.interfaceSubscriptionsCreateCloseButtonDidClick);
 			</script>
 		</header>
 		<%- include('./module-subscribe/view.ejs') %>
