@@ -419,7 +419,7 @@
 			moi.setupNoteObjects(function() {
 				moi.setupPersistenceTask();
 
-				d3.select('#WKCNotes').classed('WKCWriteLoading', false);
+				d3.select('#WKCWrite').classed('WKCWriteLoading', false);
 			});
 		});
 	};

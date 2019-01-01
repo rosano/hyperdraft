@@ -3,14 +3,14 @@ body {
 	font-size: 90%;
 }
 
-#WKCNotes {
+#WKCWrite {
 	position: absolute;
 	top: 24px;
 	right: 0;
 	bottom: 0;
 	left: 0;
 
-	/* @FlexboxWKCNotes parent */
+	/* @FlexboxWKCWrite parent */
 	display: flex;
 }
 
@@ -19,7 +19,7 @@ body {
 }
 
 #WKCWriteMaster {
-	/* @FlexboxWKCNotes child */
+	/* @FlexboxWKCWrite child */
 	flex-basis: 300px;
 	flex-shrink: 0;
 
@@ -64,7 +64,7 @@ body {
 #WKCWriteDetail {
 	border-left: 1px solid #ddd;
 
-	/* @FlexboxWKCNotes child */
+	/* @FlexboxWKCWrite child */
 	flex-grow: 1;
 
 	/* @FlexboxWKCWriteDetail parent */
