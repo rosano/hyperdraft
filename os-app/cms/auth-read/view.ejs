@@ -19,9 +19,9 @@ locals.OLSKPageAssets = [
 locals.OLSKPagePublicLocalizedStringKeys = [
 	'WKSharedErrorServiceUnavailable',
 	'WKSharedErrorTokenUnavailable',
-	'WKCSubscriptionsSourcesContentListItemInboxText',
-	'WKCSubscriptionsSourcesContentListItemArchivedText',
-	'WKCSubscriptionsSourcesContentListItemDiscardedText',
+	'WKCReadSourcesContentListItemInboxText',
+	'WKCReadSourcesContentListItemArchivedText',
+	'WKCReadSourcesContentListItemDiscardedText',
 	'WKCSubscriptionsErrorArticlesMarkAsDiscardedText',
 	'WKCSubscriptionsErrorArticlesMarkAsReadText',
 	'WKCSubscriptionsErrorArticlesUnavailableText',
@@ -78,20 +78,20 @@ locals.OLSKPagePublicRouteKeys = [
 		<%- include('./module-subscribe/view.ejs') %>
 	</div>
 
-	<div id="WKCSubscriptionsSources">
-		<header id="WKCSubscriptionsSourcesToolbar" class="WKCSharedToolbar">&nbsp;</header>
+	<div id="WKCReadSources">
+		<header id="WKCReadSourcesToolbar" class="WKCSharedToolbar">&nbsp;</header>
 
-		<div id="WKCSubscriptionsSourcesContent">
-			<ul id="WKCSubscriptionsSourcesContentList">
+		<div id="WKCReadSourcesContent">
+			<ul id="WKCReadSourcesContentList">
 				<li>
-					<!-- <h6 id="WKCSubscriptionsSourcesContentListOutlooksHeading" class="WKCSubscriptionsSourcesContentListHeading">&nbsp;</h6> -->
+					<!-- <h6 id="WKCReadSourcesContentListOutlooksHeading" class="WKCReadSourcesContentListHeading">&nbsp;</h6> -->
 
-					<ul id="WKCSubscriptionsSourcesContentListOutlooksList" class="WKCSubscriptionsSourcesContentListChildList"></ul>
+					<ul id="WKCReadSourcesContentListOutlooksList" class="WKCReadSourcesContentListChildList"></ul>
 				</li>
 				<li>
-					<h6 class="WKCSubscriptionsSourcesContentListHeading"><span class="WKCSubscriptionsText"><%= OLSKLocalized('WKCSubscriptionsHeadingText') %></span></h6>
+					<h6 class="WKCReadSourcesContentListHeading"><span class="WKCSubscriptionsText"><%= OLSKLocalized('WKCSubscriptionsHeadingText') %></span></h6>
 
-					<ul id="WKCSubscriptionsSourcesContentListSubscriptionsList" class="WKCSubscriptionsSourcesContentListChildList"></ul>
+					<ul id="WKCReadSourcesContentListSubscriptionsList" class="WKCReadSourcesContentListChildList"></ul>
 				</li>
 				
 			</ul>

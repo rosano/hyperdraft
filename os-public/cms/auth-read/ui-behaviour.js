@@ -18,8 +18,8 @@
 	var WKSubscriptionsPropertySelectedArticle;
 	var WKSubscriptionsPropertySelectedSource;
 	var kWKCSubscriptionsOutlookInbox = {
-		WKCOutlookID: 'WKCSubscriptionsSourcesContentListOutlooksListItemInbox',
-		WKCOutlookText: OLSKLocalized('WKCSubscriptionsSourcesContentListItemInboxText'),
+		WKCOutlookID: 'WKCReadSourcesContentListOutlooksListItemInbox',
+		WKCOutlookText: OLSKLocalized('WKCReadSourcesContentListItemInboxText'),
 		WKCOutlookSearchParameters: {
 			WKCArticleIsArchived: {
 				'$ne': true,
@@ -30,8 +30,8 @@
 		},
 	};
 	var kWKCSubscriptionsOutlookArchived = {
-		WKCOutlookID: 'WKCSubscriptionsSourcesContentListOutlooksListItemArchived',
-		WKCOutlookText: OLSKLocalized('WKCSubscriptionsSourcesContentListItemArchivedText'),
+		WKCOutlookID: 'WKCReadSourcesContentListOutlooksListItemArchived',
+		WKCOutlookText: OLSKLocalized('WKCReadSourcesContentListItemArchivedText'),
 		WKCOutlookSearchParameters: {
 			WKCArticleIsArchived: true,
 			WKCArticleIsDiscarded: {
@@ -40,8 +40,8 @@
 		},
 	};
 	var kWKCSubscriptionsOutlookDiscarded = {
-		WKCOutlookID: 'WKCSubscriptionsSourcesContentListOutlooksListItemDiscarded',
-		WKCOutlookText: OLSKLocalized('WKCSubscriptionsSourcesContentListItemDiscardedText'),
+		WKCOutlookID: 'WKCReadSourcesContentListOutlooksListItemDiscarded',
+		WKCOutlookText: OLSKLocalized('WKCReadSourcesContentListItemDiscardedText'),
 		WKCOutlookSearchParameters: {
 			WKCArticleIsDiscarded: true,
 		},
@@ -63,7 +63,7 @@
 
 	moi.propertiesOutlookObjects = function (inputData) {
 		if (typeof inputData === 'undefined') {
-			return d3.selectAll('#WKCSubscriptionsSourcesContentListOutlooksList .WKCSubscriptionsSourcesContentListChildListItem').data();
+			return d3.selectAll('#WKCReadSourcesContentListOutlooksList .WKCReadSourcesContentListChildListItem').data();
 		}
 
 		moi.reactOutlookObjects(inputData);
@@ -456,31 +456,31 @@
 	//_ reactOutlookObjects
 
 	moi.reactOutlookObjects = function (outlookObjects) {
-		var selection = d3.select('#WKCSubscriptionsSourcesContentListOutlooksList').selectAll('.WKCSubscriptionsSourcesContentListChildListItem').data(outlookObjects);
+		var selection = d3.select('#WKCReadSourcesContentListOutlooksList').selectAll('.WKCReadSourcesContentListChildListItem').data(outlookObjects);
 		
 		var parentElement = selection.enter()
 			.append('li')
 				.attr('id', function (obj) {
 					return obj.WKCOutlookID
 				})
-				.classed('WKCSubscriptionsSourcesContentListChildListItem', true)
+				.classed('WKCReadSourcesContentListChildListItem', true)
 				.classed('WKCSharedElementTappable', true)
 				.on('click', moi.commandsSourcesSelect);
 
 		parentElement.append('img');
 
 		parentElement.append('span')
-			.classed('WKCSubscriptionsSourcesContentListChildListItemName', true)
+			.classed('WKCReadSourcesContentListChildListItemName', true)
 			.classed('WKCSubscriptionsText', true);
 
 		parentElement.append('span')
-			.attr('class', 'WKCSubscriptionsSourcesContentListChildListItemUnreadCount')
+			.attr('class', 'WKCReadSourcesContentListChildListItemUnreadCount')
 			.append('span')
 				.classed('WKCSubscriptionsText', true);
 
 		parentElement = parentElement.merge(selection);
 
-		parentElement.select('.WKCSubscriptionsSourcesContentListChildListItemName').text(function(obj) {
+		parentElement.select('.WKCReadSourcesContentListChildListItemName').text(function(obj) {
 			return obj.WKCOutlookText;
 		});
 
@@ -500,8 +500,8 @@
 	//_ reactSourcesSelectedSource
 
 	moi.reactSourcesSelectedSource = function () {
-		d3.selectAll('.WKCSubscriptionsSourcesContentListChildListItem')
-			.classed('WKCSubscriptionsSourcesContentListChildListItemSelected', function (obj) {
+		d3.selectAll('.WKCReadSourcesContentListChildListItem')
+			.classed('WKCReadSourcesContentListChildListItemSelected', function (obj) {
 				return obj === moi.propertiesSelectedSource();
 			});
 
@@ -515,12 +515,12 @@
 	//_ reactSubscriptionObjects
 
 	moi.reactSubscriptionObjects = function (subscriptionObjects) {
-		var selection = d3.select('#WKCSubscriptionsSourcesContentListSubscriptionsList')
-			.selectAll('.WKCSubscriptionsSourcesContentListChildListItem').data(subscriptionObjects);
+		var selection = d3.select('#WKCReadSourcesContentListSubscriptionsList')
+			.selectAll('.WKCReadSourcesContentListChildListItem').data(subscriptionObjects);
 		
 		var parentElement = selection.enter()
 			.append('li')
-				.attr('class', 'WKCSubscriptionsSourcesContentListChildListItem')
+				.attr('class', 'WKCReadSourcesContentListChildListItem')
 				.classed('WKCSharedElementTappable', true)
 				.on('click', moi.commandsSourcesSelect);
 
@@ -528,16 +528,16 @@
 			.classed('WKCSubscriptionsText', true);
 
 		parentElement.append('span')
-			.attr('class', 'WKCSubscriptionsSourcesContentListChildListItemName');
+			.attr('class', 'WKCReadSourcesContentListChildListItemName');
 
 		parentElement.append('span')
-			.attr('class', 'WKCSubscriptionsSourcesContentListChildListItemUnreadCount')
+			.attr('class', 'WKCReadSourcesContentListChildListItemUnreadCount')
 			.append('span')
 				.classed('WKCSubscriptionsText', true);
 
 		parentElement = parentElement.merge(selection);
 
-		parentElement.select('.WKCSubscriptionsSourcesContentListChildListItemName').text(function(obj) {
+		parentElement.select('.WKCReadSourcesContentListChildListItemName').text(function(obj) {
 			return obj.WKCSubscriptionName;
 		});
 
@@ -622,7 +622,7 @@
 	moi.reactSourcesUnreadCount = function () {
 		return;
 
-		d3.select('#WKCSubscriptionsSourcesContentListOutlooksListItemInbox .WKCSubscriptionsSourcesContentListChildListItemUnreadCount')
+		d3.select('#WKCReadSourcesContentListOutlooksListItemInbox .WKCReadSourcesContentListChildListItemUnreadCount')
 			.classed('WKCSubscriptionsHidden', !moi.propertiesArticleObjects().filter(function (e) {
 				return !e.WKCArticleIsRead;
 			}).length)
@@ -631,7 +631,7 @@
 					return !e.WKCArticleIsRead;
 				}).length);
 
-		d3.selectAll('#WKCSubscriptionsSourcesContentListSubscriptionsList .WKCSubscriptionsSourcesContentListChildListItemUnreadCount')
+		d3.selectAll('#WKCReadSourcesContentListSubscriptionsList .WKCReadSourcesContentListChildListItemUnreadCount')
 			.classed('WKCSubscriptionsHidden', function(obj) {
 				return !moi.propertiesArticleObjects().filter(function (e) {
 					if (e.WKCArticleSubscriptionID !== obj.WKCSubscriptionID) {
