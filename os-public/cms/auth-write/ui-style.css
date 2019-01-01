@@ -14,7 +14,7 @@ body {
 	display: flex;
 }
 
-.WKCNotesLoading .WKCSharedToolbar *, .WKCNotesLoading #WKCWriteMasterContent *, .WKCNotesLoading #WKCWriteDetailContent * {
+.WKCWriteLoading .WKCSharedToolbar *, .WKCWriteLoading #WKCWriteMasterContent *, .WKCWriteLoading #WKCWriteDetailContent * {
 	visibility: hidden;
 }
 
