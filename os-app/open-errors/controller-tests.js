@@ -8,15 +8,15 @@ var assert = require('assert');
 
 var testingLibrary = require('OLSKTesting');
 
-var errorController = require('./controller');
+var controllerModule = require('./controller');
 
 describe('OLSKControllerSharedErrorHandlers', function testOLSKControllerSharedErrorHandlers() {
 
 	it('returns shared error handlers', function() {
-		assert.deepEqual(errorController.OLSKControllerSharedErrorHandlers(), [
-			errorController.WKCErrorsFirstHandler,
-			errorController.WKCErrors404Handler,
-			errorController.WKCErrorsFinalHandler,
+		assert.deepEqual(controllerModule.OLSKControllerSharedErrorHandlers(), [
+			controllerModule.WKCErrorsFirstHandler,
+			controllerModule.WKCErrors404Handler,
+			controllerModule.WKCErrorsFinalHandler,
 		]);
 	});
 
@@ -28,13 +28,13 @@ describe('WKCErrorsFirstHandler', function testWKCErrorsFirstHandler() {
 
 	it('sets res.locals.OLSKSharedPageControllerSlug to directory name', function() {
 		var res = testingLibrary.OLSKTestingFakeResponseForLocals();
-		errorController.WKCErrorsFirstHandler(new Error('alpha'), null, res, testingLibrary.OLSKTestingFakeNext());
+		controllerModule.WKCErrorsFirstHandler(new Error('alpha'), null, res, testingLibrary.OLSKTestingFakeNext());
 		assert.strictEqual(res.locals.OLSKSharedPageControllerSlug, pathPackage.basename(__dirname));
 	});
 
 	it('returns next(error)', function() {
 		var errorObject = new Error('alpha');
-		assert.deepEqual(errorController.WKCErrorsFirstHandler(errorObject, null, testingLibrary.OLSKTestingFakeResponseForLocals(), testingLibrary.OLSKTestingFakeNext()), errorObject);
+		assert.deepEqual(controllerModule.WKCErrorsFirstHandler(errorObject, null, testingLibrary.OLSKTestingFakeResponseForLocals(), testingLibrary.OLSKTestingFakeNext()), errorObject);
 	});
 
 });
@@ -42,7 +42,7 @@ describe('WKCErrorsFirstHandler', function testWKCErrorsFirstHandler() {
 describe('WKCErrors404Handler', function testWKCErrors404Handler() {
 
 	it('renders page if res.statusCode 404', function() {
-		assert.deepEqual(errorController.WKCErrors404Handler(null, testingLibrary.OLSKTestingFakeRequest(), Object.assign(testingLibrary.OLSKTestingFakeResponseForRender(function(viewPath) {
+		assert.deepEqual(controllerModule.WKCErrors404Handler(null, testingLibrary.OLSKTestingFakeRequest(), Object.assign(testingLibrary.OLSKTestingFakeResponseForRender(function(viewPath) {
 			return viewPath;
 		}), {
 			statusCode: 404,
@@ -54,7 +54,7 @@ describe('WKCErrors404Handler', function testWKCErrors404Handler() {
 
 	it('returns next(error)', function() {
 		var errorObject = new Error('alpha');
-		assert.deepEqual(errorController.WKCErrors404Handler(errorObject, null, testingLibrary.OLSKTestingFakeRequest(), testingLibrary.OLSKTestingFakeNext()), errorObject);
+		assert.deepEqual(controllerModule.WKCErrors404Handler(errorObject, null, testingLibrary.OLSKTestingFakeRequest(), testingLibrary.OLSKTestingFakeNext()), errorObject);
 	});
 
 });
@@ -62,7 +62,7 @@ describe('WKCErrors404Handler', function testWKCErrors404Handler() {
 describe('WKCErrorsFinalHandler', function testWKCErrorsFinalHandler() {
 
 	it('renders page', function() {
-		assert.deepEqual(errorController.WKCErrorsFinalHandler(null, testingLibrary.OLSKTestingFakeRequest(), testingLibrary.OLSKTestingFakeResponseForRender(function(viewPath) {
+		assert.deepEqual(controllerModule.WKCErrorsFinalHandler(null, testingLibrary.OLSKTestingFakeRequest(), testingLibrary.OLSKTestingFakeResponseForRender(function(viewPath) {
 			return viewPath;
 		})), [
 			__dirname,

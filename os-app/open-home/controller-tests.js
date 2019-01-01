@@ -8,22 +8,22 @@ var assert = require('assert');
 
 var testingLibrary = require('OLSKTesting');
 
-var homeController = require('./controller');
+var controllerModule = require('./controller');
 
 describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 
 	it('returns route objects', function() {
-		assert.deepEqual(homeController.OLSKControllerRoutes(), {
+		assert.deepEqual(controllerModule.OLSKControllerRoutes(), {
 			WKCRouteHome: {
 				OLSKRoutePath: '/',
 				OLSKRouteMethod: 'get',
-				OLSKRouteFunction: homeController.WKCActionHomeIndex,
+				OLSKRouteFunction: controllerModule.WKCActionHomeIndex,
 				OLSKRouteLanguages: ['en'],
 			},
 			WKCRouteRefsRead: {
 				OLSKRoutePath: '/:wkc_note_public_id(\\d+)',
 				OLSKRouteMethod: 'get',
-				OLSKRouteFunction: homeController.WKCActionRefsRead,
+				OLSKRouteFunction: controllerModule.WKCActionRefsRead,
 			},
 		});
 	});

@@ -8,16 +8,16 @@ var assert = require('assert');
 
 var testingLibrary = require('OLSKTesting');
 
-var apiNotesController = require('./controller');
+var controllerModule = require('./controller');
 
 describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 
 	it('returns route objects', function() {
-		assert.deepEqual(apiNotesController.OLSKControllerRoutes(), {
+		assert.deepEqual(controllerModule.OLSKControllerRoutes(), {
 			WKCRouteAPINotesCreate: {
 				OLSKRoutePath: '/api/notes',
 				OLSKRouteMethod: 'post',
-				OLSKRouteFunction: apiNotesController.WKCActionAPINotesCreate,
+				OLSKRouteFunction: controllerModule.WKCActionAPINotesCreate,
 				OLSKRouteMiddlewares: [
 					'WKCSharedMiddlewareAPIAuthenticate',
 				],
@@ -25,7 +25,7 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 			WKCRouteAPINotesRead: {
 				OLSKRoutePath: '/api/notes/:wkc_note_id(\\d+)',
 				OLSKRouteMethod: 'get',
-				OLSKRouteFunction: apiNotesController.WKCActionAPINotesRead,
+				OLSKRouteFunction: controllerModule.WKCActionAPINotesRead,
 				OLSKRouteMiddlewares: [
 					'WKCSharedMiddlewareAPIAuthenticate',
 				],
@@ -33,12 +33,12 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 			WKCRouteAPINotesPublicRead: {
 				OLSKRoutePath: '/api/notes/:wkc_note_public_id(\\d+)',
 				OLSKRouteMethod: 'get',
-				OLSKRouteFunction: apiNotesController.WKCActionAPINotesPublicRead,
+				OLSKRouteFunction: controllerModule.WKCActionAPINotesPublicRead,
 			},
 			WKCRouteAPINotesUpdate: {
 				OLSKRoutePath: '/api/notes/:wkc_note_id(\\d+)',
 				OLSKRouteMethod: 'put',
-				OLSKRouteFunction: apiNotesController.WKCActionAPINotesUpdate,
+				OLSKRouteFunction: controllerModule.WKCActionAPINotesUpdate,
 				OLSKRouteMiddlewares: [
 					'WKCSharedMiddlewareAPIAuthenticate',
 				],
@@ -46,7 +46,7 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 			WKCRouteAPINotesPublish: {
 				OLSKRoutePath: '/api/notes/:wkc_note_id(\\d+)/publish',
 				OLSKRouteMethod: 'put',
-				OLSKRouteFunction: apiNotesController.WKCActionAPINotesPublish,
+				OLSKRouteFunction: controllerModule.WKCActionAPINotesPublish,
 				OLSKRouteMiddlewares: [
 					'WKCSharedMiddlewareAPIAuthenticate',
 					'WKCSharedMiddlewareAPINotesFindByID',
@@ -55,7 +55,7 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 			WKCRouteAPINotesDelete: {
 				OLSKRoutePath: '/api/notes/:wkc_note_id(\\d+)',
 				OLSKRouteMethod: 'delete',
-				OLSKRouteFunction: apiNotesController.WKCActionAPINotesDelete,
+				OLSKRouteFunction: controllerModule.WKCActionAPINotesDelete,
 				OLSKRouteMiddlewares: [
 					'WKCSharedMiddlewareAPIAuthenticate',
 				],
@@ -63,7 +63,7 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 			WKCRouteAPINotesSearch: {
 				OLSKRoutePath: '/api/notes/search',
 				OLSKRouteMethod: 'get',
-				OLSKRouteFunction: apiNotesController.WKCActionAPINotesSearch,
+				OLSKRouteFunction: controllerModule.WKCActionAPINotesSearch,
 				OLSKRouteMiddlewares: [
 					'WKCSharedMiddlewareAPIAuthenticate',
 				],
@@ -76,8 +76,8 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 describe('OLSKControllerSharedMiddlewares', function testOLSKControllerSharedMiddlewares() {
 
 	it('returns middleware functions', function() {
-		assert.deepEqual(apiNotesController.OLSKControllerSharedMiddlewares(), {
-			WKCSharedMiddlewareAPINotesFindByID: apiNotesController.WKCAPINotesMiddlewareFindByID,
+		assert.deepEqual(controllerModule.OLSKControllerSharedMiddlewares(), {
+			WKCSharedMiddlewareAPINotesFindByID: controllerModule.WKCAPINotesMiddlewareFindByID,
 		});
 	});
 
@@ -115,13 +115,13 @@ var WKCFakeResponseAsync = function(callback) {
 describe('WKCAPINotesMiddlewareFindByID', function WKCAPINotesMiddlewareFindByID() {
 
 	it('returns next(WKCAPIClientError) without wkc_note_id', function() {
-		assert.deepEqual(apiNotesController.WKCAPINotesMiddlewareFindByID(WKCFakeRequest({
+		assert.deepEqual(controllerModule.WKCAPINotesMiddlewareFindByID(WKCFakeRequest({
 			params: {},
 		}), testingLibrary.OLSKTestingFakeResponseForJSON(), testingLibrary.OLSKTestingFakeNext()), new Error('WKCAPIClientErrorNotFound'));
 	});
 
 	it('returns next(WKCAPIClientError) with null wkc_note_id', function() {
-		assert.deepEqual(apiNotesController.WKCAPINotesMiddlewareFindByID(WKCFakeRequest({
+		assert.deepEqual(controllerModule.WKCAPINotesMiddlewareFindByID(WKCFakeRequest({
 			params: {
 				wkc_note_id: null,
 			},
@@ -129,7 +129,7 @@ describe('WKCAPINotesMiddlewareFindByID', function WKCAPINotesMiddlewareFindByID
 	});
 
 	it('returns next(WKCAPIClientError) with whitespace wkc_note_id', function() {
-		assert.deepEqual(apiNotesController.WKCAPINotesMiddlewareFindByID(WKCFakeRequest({
+		assert.deepEqual(controllerModule.WKCAPINotesMiddlewareFindByID(WKCFakeRequest({
 			params: {
 				wkc_note_id: ' ',
 			},
@@ -137,7 +137,7 @@ describe('WKCAPINotesMiddlewareFindByID', function WKCAPINotesMiddlewareFindByID
 	});
 
 	it('returns next(WKCAPIClientError) with non-existant wkc_note_id', function(done) {
-		apiNotesController.WKCAPINotesMiddlewareFindByID(WKCFakeRequest({
+		controllerModule.WKCAPINotesMiddlewareFindByID(WKCFakeRequest({
 			params: {
 				wkc_note_id: 'alfa',
 			},
@@ -149,7 +149,7 @@ describe('WKCAPINotesMiddlewareFindByID', function WKCAPINotesMiddlewareFindByID
 	});
 
 	it('returns next(undefined)', function(done) {
-		apiNotesController.WKCActionAPINotesCreate(WKCFakeRequest({
+		controllerModule.WKCActionAPINotesCreate(WKCFakeRequest({
 			body: {
 				WKCNoteBody: 'alpha',
 			},
@@ -160,7 +160,7 @@ describe('WKCAPINotesMiddlewareFindByID', function WKCAPINotesMiddlewareFindByID
 				},
 			});
 
-			apiNotesController.WKCAPINotesMiddlewareFindByID(requestObject, testingLibrary.OLSKTestingFakeResponseForJSON(), function(inputData) {
+			controllerModule.WKCAPINotesMiddlewareFindByID(requestObject, testingLibrary.OLSKTestingFakeResponseForJSON(), function(inputData) {
 				assert.deepEqual(inputData, undefined);
 
 				assert.deepEqual(requestObject._WKCAPINotesMiddlewareFindByIDResult, responseJSON);
@@ -176,18 +176,18 @@ describe('WKCAPISettingsLastGeneratedPublicIDWithClientAndCallback', function te
 
 	it('throws error if param1 empty', function() {
 		assert.throws(function() {
-			apiNotesController.WKCAPISettingsLastGeneratedPublicIDWithClientAndCallback(null, function() {});
+			controllerModule.WKCAPISettingsLastGeneratedPublicIDWithClientAndCallback(null, function() {});
 		}, /WKCErrorInvalidInput/);
 	});
 
 	it('throws error if param2 not function', function() {
 		assert.throws(function() {
-			apiNotesController.WKCAPISettingsLastGeneratedPublicIDWithClientAndCallback({}, null);
+			controllerModule.WKCAPISettingsLastGeneratedPublicIDWithClientAndCallback({}, null);
 		}, /WKCErrorInvalidInput/);
 	});
 
 	it('returns 0 if no existing items', function(done) {
-		apiNotesController.WKCAPISettingsLastGeneratedPublicIDWithClientAndCallback(global.WKCTestingMongoClient, function(lastRepoID) {
+		controllerModule.WKCAPISettingsLastGeneratedPublicIDWithClientAndCallback(global.WKCTestingMongoClient, function(lastRepoID) {
 			assert.strictEqual(lastRepoID, 0);
 
 			done();
@@ -195,12 +195,12 @@ describe('WKCAPISettingsLastGeneratedPublicIDWithClientAndCallback', function te
 	});
 
 	it('returns 1 if published one item', function(done) {
-		apiNotesController.WKCActionAPINotesCreate(WKCFakeRequest({
+		controllerModule.WKCActionAPINotesCreate(WKCFakeRequest({
 			body: {
 				WKCNoteBody: 'alpha',
 			},
 		}), WKCFakeResponseAsync(function(noteObject) {
-			apiNotesController.WKCActionAPINotesPublish(WKCFakeRequest({
+			controllerModule.WKCActionAPINotesPublish(WKCFakeRequest({
 				params: {
 					wkc_note_id: noteObject.WKCNoteID,
 				},
@@ -209,7 +209,7 @@ describe('WKCAPISettingsLastGeneratedPublicIDWithClientAndCallback', function te
 					WKCNotePublishStatusIsPublished: true,
 				},
 			}), WKCFakeResponseAsync(function(responseJSON) {
-				apiNotesController.WKCAPISettingsLastGeneratedPublicIDWithClientAndCallback(global.WKCTestingMongoClient, function(lastRepoID) {
+				controllerModule.WKCAPISettingsLastGeneratedPublicIDWithClientAndCallback(global.WKCTestingMongoClient, function(lastRepoID) {
 					assert.strictEqual(lastRepoID, 1);
 
 					done();
@@ -219,12 +219,12 @@ describe('WKCAPISettingsLastGeneratedPublicIDWithClientAndCallback', function te
 	});
 
 	it('returns 2 if published two items and deleted first one', function(done) {
-		apiNotesController.WKCActionAPINotesCreate(WKCFakeRequest({
+		controllerModule.WKCActionAPINotesCreate(WKCFakeRequest({
 			body: {
 				WKCNoteBody: 'alpha',
 			},
 		}), WKCFakeResponseAsync(function(noteObject) {
-			apiNotesController.WKCActionAPINotesPublish(WKCFakeRequest({
+			controllerModule.WKCActionAPINotesPublish(WKCFakeRequest({
 				params: {
 					wkc_note_id: noteObject.WKCNoteID,
 				},
@@ -233,17 +233,17 @@ describe('WKCAPISettingsLastGeneratedPublicIDWithClientAndCallback', function te
 					WKCNotePublishStatusIsPublished: true,
 				},
 			}), WKCFakeResponseAsync(function(responseJSON) {
-				apiNotesController.WKCActionAPINotesDelete(WKCFakeRequest({
+				controllerModule.WKCActionAPINotesDelete(WKCFakeRequest({
 					params: {
 						wkc_note_id: noteObject.WKCNoteID.toString(),
 					},
 				}), WKCFakeResponseAsync(function() {
-					apiNotesController.WKCActionAPINotesCreate(WKCFakeRequest({
+					controllerModule.WKCActionAPINotesCreate(WKCFakeRequest({
 						body: {
 							WKCNoteBody: 'alpha',
 						},
 					}), WKCFakeResponseAsync(function(noteObject) {
-						apiNotesController.WKCActionAPINotesPublish(WKCFakeRequest({
+						controllerModule.WKCActionAPINotesPublish(WKCFakeRequest({
 							params: {
 								wkc_note_id: noteObject.WKCNoteID,
 							},
@@ -252,7 +252,7 @@ describe('WKCAPISettingsLastGeneratedPublicIDWithClientAndCallback', function te
 								WKCNotePublishStatusIsPublished: true,
 							},
 						}), WKCFakeResponseAsync(function(responseJSON) {
-							apiNotesController.WKCAPISettingsLastGeneratedPublicIDWithClientAndCallback(global.WKCTestingMongoClient, function(lastRepoID) {
+							controllerModule.WKCAPISettingsLastGeneratedPublicIDWithClientAndCallback(global.WKCTestingMongoClient, function(lastRepoID) {
 								assert.strictEqual(lastRepoID, 2);
 
 								done();
@@ -269,7 +269,7 @@ describe('WKCAPISettingsLastGeneratedPublicIDWithClientAndCallback', function te
 describe('WKCActionAPINotesCreate', function testWKCActionAPINotesCreate() {
 
 	it('returns WKCErrors if not valid noteObject', function() {
-		assert.deepEqual(apiNotesController.WKCActionAPINotesCreate(WKCFakeRequest({
+		assert.deepEqual(controllerModule.WKCActionAPINotesCreate(WKCFakeRequest({
 			body: {},
 		}), WKCFakeResponseSync()).WKCErrors, {
 			WKCNoteBody: [
@@ -279,7 +279,7 @@ describe('WKCActionAPINotesCreate', function testWKCActionAPINotesCreate() {
 	});
 
 	it('returns noteObject with WKCNoteID', function(done) {
-		apiNotesController.WKCActionAPINotesCreate(WKCFakeRequest({
+		controllerModule.WKCActionAPINotesCreate(WKCFakeRequest({
 			body: {
 				WKCNoteBody: 'alpha',
 			},
@@ -299,7 +299,7 @@ describe('WKCActionAPINotesCreate', function testWKCActionAPINotesCreate() {
 describe('WKCActionAPINotesRead', function testWKCActionAPINotesRead() {
 
 	it('returns next(WKCAPIClientError) if wkc_note_id does not exist', function(done) {
-		apiNotesController.WKCActionAPINotesRead(WKCFakeRequest({
+		controllerModule.WKCActionAPINotesRead(WKCFakeRequest({
 			params: {
 				wkc_note_id: 'alpha',
 			},
@@ -311,12 +311,12 @@ describe('WKCActionAPINotesRead', function testWKCActionAPINotesRead() {
 	});
 
 	it('returns noteObject', function(done) {
-		apiNotesController.WKCActionAPINotesCreate(WKCFakeRequest({
+		controllerModule.WKCActionAPINotesCreate(WKCFakeRequest({
 			body: {
 				WKCNoteBody: 'alpha',
 			},
 		}), WKCFakeResponseAsync(function(noteObject) {
-			apiNotesController.WKCActionAPINotesRead(WKCFakeRequest({
+			controllerModule.WKCActionAPINotesRead(WKCFakeRequest({
 				params: {
 					wkc_note_id: noteObject.WKCNoteID.toString(),
 				},
@@ -333,7 +333,7 @@ describe('WKCActionAPINotesRead', function testWKCActionAPINotesRead() {
 describe('WKCActionAPINotesUpdate', function testWKCActionAPINotesUpdate() {
 
 	it('returns next(WKCAPIClientError) if wkc_note_id does not exist', function(done) {
-		apiNotesController.WKCActionAPINotesUpdate(WKCFakeRequest({
+		controllerModule.WKCActionAPINotesUpdate(WKCFakeRequest({
 			params: {
 				wkc_note_id: 'alpha',
 			},
@@ -348,7 +348,7 @@ describe('WKCActionAPINotesUpdate', function testWKCActionAPINotesUpdate() {
 	});
 
 	it('returns WKCErrors if not valid noteObject', function(done) {
-		apiNotesController.WKCActionAPINotesCreate(WKCFakeRequest({
+		controllerModule.WKCActionAPINotesCreate(WKCFakeRequest({
 			params: {
 				wkc_note_id: '',
 			},
@@ -356,7 +356,7 @@ describe('WKCActionAPINotesUpdate', function testWKCActionAPINotesUpdate() {
 				WKCNoteBody: 'alpha',
 			},
 		}), WKCFakeResponseAsync(function(responseJSON) {
-			assert.deepEqual(apiNotesController.WKCActionAPINotesUpdate(WKCFakeRequest({
+			assert.deepEqual(controllerModule.WKCActionAPINotesUpdate(WKCFakeRequest({
 				params: {
 					wkc_note_id: responseJSON.WKCNoteID,
 				},
@@ -374,14 +374,14 @@ describe('WKCActionAPINotesUpdate', function testWKCActionAPINotesUpdate() {
 	});
 
 	it('returns noteObject with updated properties', function(done) {
-		apiNotesController.WKCActionAPINotesCreate(WKCFakeRequest({
+		controllerModule.WKCActionAPINotesCreate(WKCFakeRequest({
 			body: {
 				WKCNoteBody: 'alpha',
 			},
 		}), WKCFakeResponseAsync(function(responseJSON) {
 			var originalDateUpdated = responseJSON.WKCNoteDateUpdated;
 
-			apiNotesController.WKCActionAPINotesUpdate(WKCFakeRequest({
+			controllerModule.WKCActionAPINotesUpdate(WKCFakeRequest({
 				params: {
 					wkc_note_id: responseJSON.WKCNoteID,
 				},
@@ -402,7 +402,7 @@ describe('WKCActionAPINotesUpdate', function testWKCActionAPINotesUpdate() {
 describe('WKCActionAPINotesPublish', function testWKCActionAPINotesPublish() {
 
 	it('returns WKCErrors if not valid WKCNotePublishStatus', function(done) {
-		apiNotesController.WKCActionAPINotesCreate(WKCFakeRequest({
+		controllerModule.WKCActionAPINotesCreate(WKCFakeRequest({
 			params: {
 				wkc_note_id: '',
 			},
@@ -410,7 +410,7 @@ describe('WKCActionAPINotesPublish', function testWKCActionAPINotesPublish() {
 				WKCNotePublishStatusIsPublished: null,
 			},
 		}), WKCFakeResponseAsync(function(noteObject) {
-			assert.deepEqual(apiNotesController.WKCActionAPINotesPublish(WKCFakeRequest({
+			assert.deepEqual(controllerModule.WKCActionAPINotesPublish(WKCFakeRequest({
 				params: {
 					wkc_note_id: noteObject.WKCNoteID,
 				},
@@ -429,7 +429,7 @@ describe('WKCActionAPINotesPublish', function testWKCActionAPINotesPublish() {
 	});
 
 	it('returns noteObject with updated properties', function(done) {
-		apiNotesController.WKCActionAPINotesCreate(WKCFakeRequest({
+		controllerModule.WKCActionAPINotesCreate(WKCFakeRequest({
 			body: {
 				WKCNoteBody: 'alpha',
 			},
@@ -439,7 +439,7 @@ describe('WKCActionAPINotesPublish', function testWKCActionAPINotesPublish() {
 			assert.strictEqual(noteObject.WKCNoteIsPublished, undefined);
 			assert.strictEqual(noteObject.WKCNotePublicID, undefined);
 
-			apiNotesController.WKCActionAPINotesPublish(WKCFakeRequest({
+			controllerModule.WKCActionAPINotesPublish(WKCFakeRequest({
 				params: {
 					wkc_note_id: noteObject.WKCNoteID,
 				},
@@ -452,7 +452,7 @@ describe('WKCActionAPINotesPublish', function testWKCActionAPINotesPublish() {
 					WKCNotePublishStatusIsPublished: true,
 				});
 
-				apiNotesController.WKCActionAPINotesRead(WKCFakeRequest({
+				controllerModule.WKCActionAPINotesRead(WKCFakeRequest({
 					params: {
 						wkc_note_id: noteObject.WKCNoteID.toString(),
 					},
@@ -472,7 +472,7 @@ describe('WKCActionAPINotesPublish', function testWKCActionAPINotesPublish() {
 describe('WKCActionAPINotesPublicRead', function testWKCActionAPINotesPublicRead() {
 
 	it('returns next(WKCAPIClientError) if wkc_note_id does not exist', function(done) {
-		apiNotesController.WKCActionAPINotesPublicRead(WKCFakeRequest({
+		controllerModule.WKCActionAPINotesPublicRead(WKCFakeRequest({
 			params: {
 				wkc_note_public_id: 'alpha',
 			},
@@ -484,12 +484,12 @@ describe('WKCActionAPINotesPublicRead', function testWKCActionAPINotesPublicRead
 	});
 
 	it('returns noteObject', function(done) {
-		apiNotesController.WKCActionAPINotesCreate(WKCFakeRequest({
+		controllerModule.WKCActionAPINotesCreate(WKCFakeRequest({
 			body: {
 				WKCNoteBody: 'alpha\nbravo',
 			},
 		}), WKCFakeResponseAsync(function(noteObject) {
-			apiNotesController.WKCActionAPINotesPublish(WKCFakeRequest({
+			controllerModule.WKCActionAPINotesPublish(WKCFakeRequest({
 				params: {
 					wkc_note_id: noteObject.WKCNoteID,
 				},
@@ -498,7 +498,7 @@ describe('WKCActionAPINotesPublicRead', function testWKCActionAPINotesPublicRead
 					WKCNotePublishStatusIsPublished: true,
 				},
 			}), WKCFakeResponseAsync(function(responseJSON) {
-				apiNotesController.WKCActionAPINotesPublicRead(WKCFakeRequest({
+				controllerModule.WKCActionAPINotesPublicRead(WKCFakeRequest({
 					params: {
 						wkc_note_public_id: noteObject.WKCNotePublicID,
 					},
@@ -523,7 +523,7 @@ describe('WKCActionAPINotesPublicRead', function testWKCActionAPINotesPublicRead
 describe('WKCActionAPINotesDelete', function testWKCActionAPINotesDelete() {
 
 	it('returns next(WKCAPIClientError) if wkc_note_id does not exist', function(done) {
-		apiNotesController.WKCActionAPINotesDelete(WKCFakeRequest({
+		controllerModule.WKCActionAPINotesDelete(WKCFakeRequest({
 			params: {
 				wkc_note_id: 'alpha',
 			},
@@ -535,20 +535,20 @@ describe('WKCActionAPINotesDelete', function testWKCActionAPINotesDelete() {
 	});
 
 	it('returns true', function(done) {
-		apiNotesController.WKCActionAPINotesCreate(WKCFakeRequest({
+		controllerModule.WKCActionAPINotesCreate(WKCFakeRequest({
 			body: {
 				WKCNoteBody: 'alpha',
 			}
 		}), WKCFakeResponseAsync(function(responseJSON) {
 			var noteID = responseJSON.WKCNoteID.toString();
-			apiNotesController.WKCActionAPINotesDelete(WKCFakeRequest({
+			controllerModule.WKCActionAPINotesDelete(WKCFakeRequest({
 				params: {
 					wkc_note_id: noteID,
 				},
 			}), WKCFakeResponseAsync(function(responseJSON) {
 				assert.strictEqual(responseJSON.WKCAPIResponse, true);
 
-				apiNotesController.WKCActionAPINotesRead(WKCFakeRequest({
+				controllerModule.WKCActionAPINotesRead(WKCFakeRequest({
 					params: {
 						wkc_note_id: noteID,
 					},
@@ -566,12 +566,12 @@ describe('WKCActionAPINotesDelete', function testWKCActionAPINotesDelete() {
 describe('WKCActionAPINotesSearch', function testWKCActionAPINotesSearch() {
 
 	it('returns noteObject', function(done) {
-		apiNotesController.WKCActionAPINotesCreate(WKCFakeRequest({
+		controllerModule.WKCActionAPINotesCreate(WKCFakeRequest({
 			body: {
 				WKCNoteBody: 'alpha',
 			},
 		}), WKCFakeResponseAsync(function(noteObject) {
-			apiNotesController.WKCActionAPINotesSearch(WKCFakeRequest(), WKCFakeResponseAsync(function(responseJSON) {
+			controllerModule.WKCActionAPINotesSearch(WKCFakeRequest(), WKCFakeResponseAsync(function(responseJSON) {
 				assert.deepEqual(responseJSON, [noteObject]);
 
 				done();
