@@ -12,11 +12,11 @@
 
 	var moi = {};
 
-	var WKSubscriptionsPropertyAPIToken;
-	var WKSubscriptionsPropertySubscriptionObjects;
-	var WKSubscriptionsPropertySubscriptionObjectsByID;
-	var WKSubscriptionsPropertySelectedArticle;
-	var WKSubscriptionsPropertySelectedSource;
+	var WCKReadBehaviourPropertyAPIToken;
+	var WCKReadBehaviourPropertySubscriptionObjects;
+	var WCKReadBehaviourPropertySubscriptionObjectsByID;
+	var WCKReadBehaviourPropertySelectedArticle;
+	var WCKReadBehaviourPropertySelectedSource;
 	var kWKCSubscriptionsOutlookInbox = {
 		WKCOutlookID: 'WKCReadSourcesContentListOutlooksListItemInbox',
 		WKCOutlookText: OLSKLocalized('WKCReadSourcesContentListItemInboxText'),
@@ -53,10 +53,10 @@
 
 	moi.propertiesAPIToken = function (inputData) {
 		if (typeof inputData === 'undefined') {
-			return WKSubscriptionsPropertyAPIToken;
+			return WCKReadBehaviourPropertyAPIToken;
 		}
 
-		WKSubscriptionsPropertyAPIToken = inputData;
+		WCKReadBehaviourPropertyAPIToken = inputData;
 	};
 
 	//_ propertiesOutlookObjects
@@ -73,12 +73,12 @@
 
 	moi.propertiesSubscriptionObjects = function (inputData) {
 		if (typeof inputData === 'undefined') {
-			return WKSubscriptionsPropertySubscriptionObjects;
+			return WCKReadBehaviourPropertySubscriptionObjects;
 		}
 
 		moi.reactSubscriptionObjects(inputData);
 
-		moi._propertiesSubscriptionObjectsByID((WKSubscriptionsPropertySubscriptionObjects = inputData).reduce(function(map, e) {
+		moi._propertiesSubscriptionObjectsByID((WCKReadBehaviourPropertySubscriptionObjects = inputData).reduce(function(map, e) {
 			map[e.WKCSubscriptionID] = e;
 			return map;
 		}, {}));
@@ -88,10 +88,10 @@
 
 	moi._propertiesSubscriptionObjectsByID = function (inputData) {
 		if (typeof inputData === 'undefined') {
-			return WKSubscriptionsPropertySubscriptionObjectsByID;
+			return WCKReadBehaviourPropertySubscriptionObjectsByID;
 		}
 
-		WKSubscriptionsPropertySubscriptionObjectsByID = inputData;
+		WCKReadBehaviourPropertySubscriptionObjectsByID = inputData;
 	};
 
 	//_ propertiesArticleObjects
@@ -108,10 +108,10 @@
 
 	moi.propertiesSelectedArticle = function (inputData) {
 		if (typeof inputData === 'undefined') {
-			return WKSubscriptionsPropertySelectedArticle;
+			return WCKReadBehaviourPropertySelectedArticle;
 		}
 
-		WKSubscriptionsPropertySelectedArticle = inputData === null ? undefined : inputData;
+		WCKReadBehaviourPropertySelectedArticle = inputData === null ? undefined : inputData;
 
 		moi.reactSelectedArticle();
 	};
@@ -120,10 +120,10 @@
 
 	moi.propertiesSelectedSource = function (inputData) {
 		if (typeof inputData === 'undefined') {
-			return WKSubscriptionsPropertySelectedSource;
+			return WCKReadBehaviourPropertySelectedSource;
 		}
 
-		WKSubscriptionsPropertySelectedSource = inputData === null ? undefined : inputData;
+		WCKReadBehaviourPropertySelectedSource = inputData === null ? undefined : inputData;
 
 		moi.reactSourcesSelectedSource();
 	};
