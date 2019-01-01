@@ -19,7 +19,7 @@ exports.OLSKControllerRoutes = function() {
 				'WKCSharedMiddlewareEnsureDatabase',
 			],
 		},
-		WKCRouteLoginSubmit: {
+		WKCLoginSubmitRoute: {
 			OLSKRoutePath: '/login',
 			OLSKRouteMethod: 'post',
 			OLSKRouteFunction: exports.WKCLoginSubmitAction,

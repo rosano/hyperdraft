@@ -24,7 +24,7 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 					'WKCSharedMiddlewareEnsureDatabase',
 				],
 			},
-			WKCRouteLoginSubmit: {
+			WKCLoginSubmitRoute: {
 				OLSKRoutePath: '/login',
 				OLSKRouteMethod: 'post',
 				OLSKRouteFunction: controllerModule.WKCLoginSubmitAction,

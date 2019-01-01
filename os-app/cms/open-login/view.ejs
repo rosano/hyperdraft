@@ -13,7 +13,7 @@ locals.OLSKPageAssets = [
 	<p><%= OLSKLocalized('WKCLoginFormFieldErrorText') %></p>
 <% } %>
 
-<form method="POST" action="<%= OLSKCanonicalFor('WKCRouteLoginSubmit') %>">
+<form method="POST" action="<%= OLSKCanonicalFor('WKCLoginSubmitRoute') %>">
 	<p>
 		<input type="text" name="WKCLoginUsername" placeholder="<%= OLSKLocalized('WKCLoginFormFieldUsernameTitle') %>" value="<%= locals.WKCLoginUsername %>" autofocus />
 	</p>
