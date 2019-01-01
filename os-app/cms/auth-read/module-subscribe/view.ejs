@@ -1,5 +1,5 @@
 <script type="text/javascript">
-	WKSubscriptionsModuleCreate.lifecyclePageWillLoad();
+	WKCReadModuleSubscribe.lifecyclePageWillLoad();
 </script>
 
 <div id="WKCReadModuleSubscribe">
@@ -16,7 +16,7 @@
 		d3.select('#WKCReadModuleSubscribeFetchForm').on('submit', function() {
 			d3.event.preventDefault();
 			
-			WKSubscriptionsModuleCreate.interfaceFetchFormDidSubmit();
+			WKCReadModuleSubscribe.interfaceFetchFormDidSubmit();
 		});
 	</script>
 
@@ -72,7 +72,7 @@
 				<button type="button" id="WKCReadModuleSubscribeConfirmationClearButton"><%= OLSKLocalized('WKCReadModuleSubscribeConfirmationClearButtonText') %></button>
 			</p>
 			<script type="text/javascript">
-				d3.select('#WKCReadModuleSubscribeConfirmationClearButton').on('click', WKSubscriptionsModuleCreate.interfaceConfirmationClearButtonDidClick);
+				d3.select('#WKCReadModuleSubscribeConfirmationClearButton').on('click', WKCReadModuleSubscribe.interfaceConfirmationClearButtonDidClick);
 			</script>
 		</form>
 
@@ -80,7 +80,7 @@
 			d3.select('#WKCReadModuleSubscribeConfirmationForm').on('submit', function() {
 				d3.event.preventDefault();
 				
-				WKSubscriptionsModuleCreate.interfaceConfirmationFormDidSubmit();
+				WKCReadModuleSubscribe.interfaceConfirmationFormDidSubmit();
 			});
 		</script>
 

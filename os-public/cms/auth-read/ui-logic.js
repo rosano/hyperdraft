@@ -10,9 +10,9 @@
 	(factory((global.WKSubscriptionsLogic = global.WKSubscriptionsLogic || {})));
 }(this, (function (exports) { 'use strict';
 
-	//_ WKSubscriptionsModuleCreateCompleteURL
+	//_ WKCReadModuleSubscribeCompleteURL
 
-	exports.WKSubscriptionsModuleCreateCompleteURL = function (param1, param2) {
+	exports.WKCReadModuleSubscribeCompleteURL = function (param1, param2) {
 		if (typeof param1 !== 'string') {
 			throw new Error('WKCErrorInvalidInput');
 		}

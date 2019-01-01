@@ -7,12 +7,12 @@
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
 	typeof define === 'function' && define.amd ? define(['exports'], factory) :
-	(factory((global.WKSubscriptionsModuleCreate = global.WKSubscriptionsModuleCreate || {})));
+	(factory((global.WKCReadModuleSubscribe = global.WKCReadModuleSubscribe || {})));
 }(this, (function (exports) { 'use strict';
 
 	var moi = {};
 
-	var WKSubscriptionsModuleCreatePropertyAPIToken;
+	var WKCReadModuleSubscribePropertyAPIToken;
 	var kWKCReadModuleSubscribeHandlerMap = [
 		[
 			WKCReadModuleSubscribeSuggestions.WKCReadModuleSubscribeSuggestionsTypeCustomTwitter(),
@@ -34,10 +34,10 @@
 
 	moi.propertiesAPIToken = function (inputData) {
 		if (typeof inputData === 'undefined') {
-			return WKSubscriptionsModuleCreatePropertyAPIToken;
+			return WKCReadModuleSubscribePropertyAPIToken;
 		}
 
-		WKSubscriptionsModuleCreatePropertyAPIToken = inputData;
+		WKCReadModuleSubscribePropertyAPIToken = inputData;
 	};
 
 	//_ propertiesFetchURL
@@ -212,7 +212,7 @@
 				'application/atom+xml',
 				].indexOf(e.type.trim().toLowerCase()) !== -1;
 		}).map(function(e) {
-			return WKSubscriptionsLogic.WKSubscriptionsModuleCreateCompleteURL(d3.select(e).attr('href'), inputData);
+			return WKSubscriptionsLogic.WKCReadModuleSubscribeCompleteURL(d3.select(e).attr('href'), inputData);
 		}));
 
 		var turndownInstance = new TurndownService();
