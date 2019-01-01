@@ -108,7 +108,7 @@ locals.OLSKPagePublicRouteKeys = [
 
 		<div id="WKCReadMasterContent">
 			<div id="WKCReadMasterContentList"></div>
-			<div id="WKCReadMasterLoader" class="WKCSubscriptionsHidden">
+			<div id="WKCReadMasterLoader" class="WKCSharedHidden">
 				<div class="ispinner ispinner--gray ispinner--animating">
 				  <div class="ispinner__blade"></div>
 				  <div class="ispinner__blade"></div>
@@ -129,12 +129,12 @@ locals.OLSKPagePublicRouteKeys = [
 
 	<div id="WKCReadDetail" class="WKCReadDetailInactive">
 		<header id="WKCReadDetailToolbar" class="WKCSharedToolbar">
-			<button id="WKCReadDetailToolbarUnreadButton" class="WKCSharedElementTappable WKCSharedButtonNoStyle WKCSubscriptionsHidden">⚫︎</button>
+			<button id="WKCReadDetailToolbarUnreadButton" class="WKCSharedElementTappable WKCSharedButtonNoStyle WKCSharedHidden">⚫︎</button>
 			<script type="text/javascript">
 				d3.select('#WKCReadDetailToolbarUnreadButton').on('click', WKCReadBehaviour.interfaceArticlesUnreadButtonDidClick);
 			</script>
 
-			<button id="WKCReadDetailToolbarInboxButton" class="WKCSharedElementTappable WKCSharedButtonNoStyle WKCSubscriptionsHidden"><%= OLSKLocalized('WKCReadDetailToolbarInboxButtonText') %></button>
+			<button id="WKCReadDetailToolbarInboxButton" class="WKCSharedElementTappable WKCSharedButtonNoStyle WKCSharedHidden"><%= OLSKLocalized('WKCReadDetailToolbarInboxButtonText') %></button>
 			<script type="text/javascript">
 				d3.select('#WKCReadDetailToolbarInboxButton').on('click', WKCReadBehaviour.interfaceArticlesInboxButtonDidClick);
 			</script>

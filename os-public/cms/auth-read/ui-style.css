@@ -18,10 +18,6 @@ body {
 	visibility: hidden;
 }
 
-.WKCSubscriptionsHidden {
-	display: none;
-}
-
 #WKCReadSubscribe {
 	position: fixed;
 	top: 0;

@@ -10,7 +10,7 @@
 		<input type="submit" value="<%= OLSKLocalized('WKCReadModuleSubscribeFetchFormSubmitText') %>">
 	</form>
 
-	<p id="WKCReadModuleSubscribeFetchFlash" class="WKCSubscriptionsHidden WKCSharedFlash"></p>
+	<p id="WKCReadModuleSubscribeFetchFlash" class="WKCSharedHidden WKCSharedFlash"></p>
 
 	<script type="text/javascript">
 		d3.select('#WKCReadModuleSubscribeFetchForm').on('submit', function() {
@@ -20,7 +20,7 @@
 		});
 	</script>
 
-	<div id="WKCReadModuleSubscribeLoader" class="WKCSubscriptionsHidden">
+	<div id="WKCReadModuleSubscribeLoader" class="WKCSharedHidden">
 		<div class="ispinner ispinner--gray ispinner--animating">
 		  <div class="ispinner__blade"></div>
 		  <div class="ispinner__blade"></div>
@@ -37,17 +37,17 @@
 		</div>
 	</div>
 
-	<div id="WKCReadModuleSubscribeSuggestions" class="WKCSubscriptionsHidden">
+	<div id="WKCReadModuleSubscribeSuggestions" class="WKCSharedHidden">
 		<p><%= OLSKLocalized('WKCReadModuleSubscribeSuggestionsAlertText') %></p>
 		<ul id="WKCReadModuleSubscribeSuggestionsList"></ul>
 	</div>
 
-	<div id="WKCReadModuleSubscribeAlternativesFeeds" class="WKCSubscriptionsHidden">
+	<div id="WKCReadModuleSubscribeAlternativesFeeds" class="WKCSharedHidden">
 		<p><%= OLSKLocalized('WKCReadModuleSubscribeAlternativesFeedsAlertText') %></p>
 		<ul></ul>
 	</div>
 
-	<div id="WKCReadModuleSubscribeConfirmation" class="WKCSubscriptionsHidden">
+	<div id="WKCReadModuleSubscribeConfirmation" class="WKCSharedHidden">
 
 		<h2><%= OLSKLocalized('WKCReadModuleSubscribeConfirmationHeadingText') %></h2>
 
