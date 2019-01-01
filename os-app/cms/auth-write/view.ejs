@@ -40,7 +40,7 @@ locals.OLSKPagePublicRouteKeys = [
 <%- include('../_shared/layout-header.ejs') %>
 
 <script type="text/javascript">
-	WKBehaviour.lifecyclePageWillLoad();
+	WKCWriteBehaviour.lifecyclePageWillLoad();
 </script>
 
 <div id="WKCNotes" class="WKCNotesLoading">
@@ -48,7 +48,7 @@ locals.OLSKPagePublicRouteKeys = [
 		<header id="WKCNotesMasterToolbar" class="WKCSharedToolbar">
 			<button id="WKCNotesMasterToolbarCreateButton" class="WKCSharedElementTappable WKCSharedButtonNoStyle" accesskey="n" title="<%= OLSKLocalized('WKCNotesMasterToolbarCreateButtonText') %>">➕</button>
 			<script type="text/javascript">
-				d3.select('#WKCNotesMasterToolbarCreateButton').on('click', WKBehaviour.interfaceNotesMasterToolbarCreateButtonDidClick);
+				d3.select('#WKCNotesMasterToolbarCreateButton').on('click', WKCWriteBehaviour.interfaceNotesMasterToolbarCreateButtonDidClick);
 			</script>
 		</header>
 
@@ -63,19 +63,19 @@ locals.OLSKPagePublicRouteKeys = [
 
 			<button id="WKCNotesDetailToolbarPublishButton" class="WKCSharedElementTappable WKCSharedButtonNoStyle" title="<%= OLSKLocalized('WKCNotesDetailToolbarPublishButtonText') %>" disabled>⬆️</button>
 			<script type="text/javascript">
-				d3.select('#WKCNotesDetailToolbarPublishButton').on('click', WKBehaviour.interfacePublishButtonDidClick);
+				d3.select('#WKCNotesDetailToolbarPublishButton').on('click', WKCWriteBehaviour.interfacePublishButtonDidClick);
 			</script>
 
 			<button id="WKCNotesDetailToolbarDiscardButton" class="WKCSharedElementTappable WKCSharedButtonNoStyle" title="<%= OLSKLocalized('WKCNotesDetailToolbarDiscardButtonText') %>" disabled>🗑</button>
 			<script type="text/javascript">
-				d3.select('#WKCNotesDetailToolbarDiscardButton').on('click', WKBehaviour.interfaceDeleteButtonDidClick);
+				d3.select('#WKCNotesDetailToolbarDiscardButton').on('click', WKCWriteBehaviour.interfaceDeleteButtonDidClick);
 			</script>
 		</header>
 
 		<div id="WKCNotesDetailContent">
 			<textarea id="WKCNotesDetailContentTextarea"></textarea>
 			<script type="text/javascript">
-				d3.select('#WKCNotesDetailContentTextarea').on('input', WKBehaviour.interfaceEditorTextareaDidReceiveInput);
+				d3.select('#WKCNotesDetailContentTextarea').on('input', WKCWriteBehaviour.interfaceEditorTextareaDidReceiveInput);
 			</script>
 		</div>
 
