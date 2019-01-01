@@ -11,7 +11,7 @@ exports.OLSKControllerRoutes = function() {
 		WKCRouteNotes: {
 			OLSKRoutePath: '/cms',
 			OLSKRouteMethod: 'get',
-			OLSKRouteFunction: exports.WKCActionNotesIndex,
+			OLSKRouteFunction: exports.WKCWriteAction,
 			OLSKRouteLanguages: ['en'],
 			OLSKRouteMiddlewares: [
 				'WKCSharedMiddlewareAuthenticate',
@@ -20,11 +20,11 @@ exports.OLSKControllerRoutes = function() {
 	};
 };
 
-//_ WKCActionNotesIndex
+//_ WKCWriteAction
 
-exports.WKCActionNotesIndex = function(req, res, next) {
+exports.WKCWriteAction = function(req, res, next) {
 	return res.render([
 		__dirname,
-		'index',
+		'view',
 	].join('/'), {});
 };

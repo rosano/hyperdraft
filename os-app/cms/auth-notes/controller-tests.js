@@ -17,7 +17,7 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 			WKCRouteNotes: {
 				OLSKRoutePath: '/cms',
 				OLSKRouteMethod: 'get',
-				OLSKRouteFunction: notesController.WKCActionNotesIndex,
+				OLSKRouteFunction: notesController.WKCWriteAction,
 				OLSKRouteLanguages: ['en'],
 				OLSKRouteMiddlewares: [
 					'WKCSharedMiddlewareAuthenticate',
@@ -28,19 +28,19 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 
 });
 
-describe('WKCActionNotesIndex', function testWKCActionNotesIndex() {
+describe('WKCWriteAction', function testWKCWriteAction() {
 
 	it('renders page', function() {
-		assert.strictEqual(notesController.WKCActionNotesIndex(null, testingLibrary.OLSKTestingFakeResponseForRender(function(viewPath) {
+		assert.strictEqual(notesController.WKCWriteAction(null, testingLibrary.OLSKTestingFakeResponseForRender(function(viewPath) {
 			return viewPath;
 		})), [
 			__dirname,
-			'index',
+			'view',
 		].join('/'));
 	});
 
 	it('returns pageData', function() {
-		assert.deepEqual(notesController.WKCActionNotesIndex(null, testingLibrary.OLSKTestingFakeResponseForRender(function(viewPath, pageData) {
+		assert.deepEqual(notesController.WKCWriteAction(null, testingLibrary.OLSKTestingFakeResponseForRender(function(viewPath, pageData) {
 			return pageData;
 		})), {});
 	});
