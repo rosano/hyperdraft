@@ -10,7 +10,7 @@ var sharedController = require('../../_shared/controller');
 
 exports.OLSKControllerRoutes = function() {
 	return {
-		WKCRouteLogin: {
+		WKCLoginRoute: {
 			OLSKRoutePath: '/login',
 			OLSKRouteMethod: 'get',
 			OLSKRouteFunction: exports.WKCLoginAction,
@@ -50,7 +50,7 @@ exports.OLSKControllerSharedMiddlewares = function() {
 exports.WKCLoginMiddlewareAuthenticate = function(req, res, next) {
 	if (!req.session.WKCInsecureSessionToken || !req.session.WKCInsecureSessionToken.trim()) {
 		return res.redirect([
-			exports.OLSKControllerRoutes().WKCRouteLogin.OLSKRoutePath,
+			exports.OLSKControllerRoutes().WKCLoginRoute.OLSKRoutePath,
 			req.originalUrl ? encodeURIComponent(req.originalUrl) : undefined,
 		].filter(function (e) {
 			return !!e;
@@ -79,11 +79,11 @@ exports.WKCLoginSubmitAction = function(req, res, next) {
 	}
 
 	if (!req.body.WKCLoginUsername || !req.body.WKCLoginUsername.trim()) {
-		return res.redirect(res.locals.OLSKCanonicalFor('WKCRouteLogin'));
+		return res.redirect(res.locals.OLSKCanonicalFor('WKCLoginRoute'));
 	}
 
 	if (!req.body.WKCLoginPassword || !req.body.WKCLoginPassword.trim()) {
-		return res.redirect(res.locals.OLSKCanonicalFor('WKCRouteLogin'));
+		return res.redirect(res.locals.OLSKCanonicalFor('WKCLoginRoute'));
 	}
 
 	return req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_members').find({}).toArray(function(err, items) {

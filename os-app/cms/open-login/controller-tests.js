@@ -15,7 +15,7 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 
 	it('returns route objects', function() {
 		assert.deepEqual(controllerModule.OLSKControllerRoutes(), {
-			WKCRouteLogin: {
+			WKCLoginRoute: {
 				OLSKRoutePath: '/login',
 				OLSKRouteMethod: 'get',
 				OLSKRouteFunction: controllerModule.WKCLoginAction,
@@ -57,25 +57,25 @@ describe('OLSKControllerSharedMiddlewares', function testOLSKControllerSharedMid
 describe('WKCLoginMiddlewareAuthenticate', function testWKCLoginMiddlewareAuthenticate() {
 
 	it('redirects to login without session data', function() {
-		assert.deepEqual(controllerModule.WKCLoginMiddlewareAuthenticate(testingLibrary.OLSKTestingFakeRequestForSession(), testingLibrary.OLSKTestingFakeResponseForRedirect()), controllerModule.OLSKControllerRoutes().WKCRouteLogin.OLSKRoutePath);
+		assert.deepEqual(controllerModule.WKCLoginMiddlewareAuthenticate(testingLibrary.OLSKTestingFakeRequestForSession(), testingLibrary.OLSKTestingFakeResponseForRedirect()), controllerModule.OLSKControllerRoutes().WKCLoginRoute.OLSKRoutePath);
 	});
 
 	it('redirects to login without token', function() {
 		assert.deepEqual(controllerModule.WKCLoginMiddlewareAuthenticate(testingLibrary.OLSKTestingFakeRequestForSession({
 			WKCInsecureSessionToken: null,
-		}), testingLibrary.OLSKTestingFakeResponseForRedirect()), controllerModule.OLSKControllerRoutes().WKCRouteLogin.OLSKRoutePath);
+		}), testingLibrary.OLSKTestingFakeResponseForRedirect()), controllerModule.OLSKControllerRoutes().WKCLoginRoute.OLSKRoutePath);
 	});
 
 	it('redirects to login with blank token', function() {
 		assert.deepEqual(controllerModule.WKCLoginMiddlewareAuthenticate(testingLibrary.OLSKTestingFakeRequestForSession({
 			WKCInsecureSessionToken: '',
-		}), testingLibrary.OLSKTestingFakeResponseForRedirect()), controllerModule.OLSKControllerRoutes().WKCRouteLogin.OLSKRoutePath);
+		}), testingLibrary.OLSKTestingFakeResponseForRedirect()), controllerModule.OLSKControllerRoutes().WKCLoginRoute.OLSKRoutePath);
 	});
 
 	it('redirects to login with whitespace token', function() {
 		assert.deepEqual(controllerModule.WKCLoginMiddlewareAuthenticate(testingLibrary.OLSKTestingFakeRequestForSession({
 			WKCInsecureSessionToken: ' ',
-		}), testingLibrary.OLSKTestingFakeResponseForRedirect()), controllerModule.OLSKControllerRoutes().WKCRouteLogin.OLSKRoutePath);
+		}), testingLibrary.OLSKTestingFakeResponseForRedirect()), controllerModule.OLSKControllerRoutes().WKCLoginRoute.OLSKRoutePath);
 	});
 
 	it('returns next(undefined) with any token', function() {
@@ -89,7 +89,7 @@ describe('WKCLoginMiddlewareAuthenticate', function testWKCLoginMiddlewareAuthen
 			WKCInsecureSessionToken: ' ',
 		}), {
 			originalUrl: '/alfa'
-		}), testingLibrary.OLSKTestingFakeResponseForRedirect()), controllerModule.OLSKControllerRoutes().WKCRouteLogin.OLSKRoutePath + '?returnPath=%2Falfa');
+		}), testingLibrary.OLSKTestingFakeResponseForRedirect()), controllerModule.OLSKControllerRoutes().WKCLoginRoute.OLSKRoutePath + '?returnPath=%2Falfa');
 	});
 
 });
