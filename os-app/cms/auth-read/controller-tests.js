@@ -15,7 +15,7 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 
 	it('returns route objects', function() {
 		assert.deepEqual(controllerModule.OLSKControllerRoutes(), {
-			WKCRouteSubscriptions: {
+			WKCReadRoute: {
 				OLSKRoutePath: '/cms/read',
 				OLSKRouteMethod: 'get',
 				OLSKRouteFunction: controllerModule.WKCReadAction,
