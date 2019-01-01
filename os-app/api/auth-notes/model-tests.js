@@ -4,7 +4,7 @@
  * MIT Licensed
  */
 
-var assert = require('assert');
+const assert = require('assert');
 
 var notesLibrary = require('./model');
 
