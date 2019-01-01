@@ -17,7 +17,7 @@ exports.OLSKControllerRoutes = function() {
 				'WKCSharedMiddlewareAuthenticate',
 			],
 		},
-		WKCNotesLegacyRoute: {
+		WKCWriteLegacyRoute: {
 			OLSKRoutePath: '/cms',
 			OLSKRouteMethod: 'get',
 			OLSKRouteRedirect: '/cms/write',
