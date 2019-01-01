@@ -61,9 +61,9 @@
 		return pathComponents.join('/');
 	};
 
-	//_ WKSubscriptionsListSort
+	//_ WKCReadLogicArticlesSort
 
-	exports.WKSubscriptionsListSort = function (a, b) {
+	exports.WKCReadLogicArticlesSort = function (a, b) {
 		return b.WKCArticlePublishDate > a.WKCArticlePublishDate;
 	};
 

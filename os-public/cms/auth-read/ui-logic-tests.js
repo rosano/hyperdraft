@@ -62,7 +62,7 @@ describe('WKCReadModuleSubscribeCompleteURL', function testWKCReadModuleSubscrib
 
 });
 
-describe('WKSubscriptionsListSort', function testWKSubscriptionsListSort() {
+describe('WKCReadLogicArticlesSort', function testWKCReadLogicArticlesSort() {
 
 	it('sorts by WKCArticlePublishDate descending', function() {
 		var item1 = {
@@ -72,7 +72,7 @@ describe('WKSubscriptionsListSort', function testWKSubscriptionsListSort() {
 			WKCArticlePublishDate: new Date(1),
 		};
 
-		assert.deepEqual([item1, item2].sort(logicLibrary.WKSubscriptionsListSort), [item2, item1]);
+		assert.deepEqual([item1, item2].sort(logicLibrary.WKCReadLogicArticlesSort), [item2, item1]);
 	});
 
 });
