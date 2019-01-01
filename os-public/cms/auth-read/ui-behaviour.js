@@ -17,7 +17,7 @@
 	var WCKReadBehaviourPropertySubscriptionObjectsByID;
 	var WCKReadBehaviourPropertySelectedArticle;
 	var WCKReadBehaviourPropertySelectedSource;
-	var kWKCSubscriptionsOutlookInbox = {
+	var kWKCReadOutlookInbox = {
 		WKCOutlookID: 'WKCReadSourcesContentListOutlooksListItemInbox',
 		WKCOutlookText: OLSKLocalized('WKCReadSourcesContentListItemInboxText'),
 		WKCOutlookSearchParameters: {
@@ -29,7 +29,7 @@
 			},
 		},
 	};
-	var kWKCSubscriptionsOutlookArchived = {
+	var kWKCReadOutlookArchived = {
 		WKCOutlookID: 'WKCReadSourcesContentListOutlooksListItemArchived',
 		WKCOutlookText: OLSKLocalized('WKCReadSourcesContentListItemArchivedText'),
 		WKCOutlookSearchParameters: {
@@ -39,7 +39,7 @@
 			},
 		},
 	};
-	var kWKCSubscriptionsOutlookDiscarded = {
+	var kWKCReadOutlookDiscarded = {
 		WKCOutlookID: 'WKCReadSourcesContentListOutlooksListItemDiscarded',
 		WKCOutlookText: OLSKLocalized('WKCReadSourcesContentListItemDiscardedText'),
 		WKCOutlookSearchParameters: {
@@ -505,11 +505,11 @@
 				return obj === moi.propertiesSelectedSource();
 			});
 
-		d3.select('#WKCReadDetailToolbarInboxButton').classed('WKCSharedHidden', moi.propertiesSelectedSource() === kWKCSubscriptionsOutlookInbox);
+		d3.select('#WKCReadDetailToolbarInboxButton').classed('WKCSharedHidden', moi.propertiesSelectedSource() === kWKCReadOutlookInbox);
 
-		d3.select('#WKCReadDetailToolbarArchiveButton').classed('WKCSharedHidden', moi.propertiesSelectedSource() === kWKCSubscriptionsOutlookArchived);
+		d3.select('#WKCReadDetailToolbarArchiveButton').classed('WKCSharedHidden', moi.propertiesSelectedSource() === kWKCReadOutlookArchived);
 
-		d3.select('#WKCReadDetailToolbarDiscardButton').classed('WKCSharedHidden', moi.propertiesSelectedSource() === kWKCSubscriptionsOutlookDiscarded);
+		d3.select('#WKCReadDetailToolbarDiscardButton').classed('WKCSharedHidden', moi.propertiesSelectedSource() === kWKCReadOutlookDiscarded);
 	};
 
 	//_ reactSubscriptionObjects
@@ -770,12 +770,12 @@
 
 	moi.setupOutlookObjects = function () {
 		moi.propertiesOutlookObjects([
-			kWKCSubscriptionsOutlookInbox,
-			kWKCSubscriptionsOutlookArchived,
-			kWKCSubscriptionsOutlookDiscarded,
+			kWKCReadOutlookInbox,
+			kWKCReadOutlookArchived,
+			kWKCReadOutlookDiscarded,
 		]);
 
-		moi.commandsSourcesSelect(kWKCSubscriptionsOutlookInbox);
+		moi.commandsSourcesSelect(kWKCReadOutlookInbox);
 	};
 
 	//# LIFECYCLE
