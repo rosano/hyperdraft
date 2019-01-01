@@ -2,7 +2,7 @@ WKCNotesHeadingText: Notes
 WKCWriteMasterToolbarCreateButtonText: Add note
 WKCWriteDetailToolbarPublishButtonText: Publish note
 WKCWriteDetailToolbarDiscardButtonText: Delete note
-WKCNotesDeleteConfirmation: Permanantly delete note?
+WKCWriteNotesDeleteAlertText: Permanantly delete note?
 WKCWriteDetailPlaceholderText: No Note Selected
 WKCWriteDetailToolbarPublishStatusPublishing: Publishing…
 WKCWriteDetailToolbarPublishStatusPublished: Public

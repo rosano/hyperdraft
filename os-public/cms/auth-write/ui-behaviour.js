@@ -285,7 +285,7 @@
 
 		moi.commandsPersistenceTaskStop();
 
-		if (!window.confirm(OLSKLocalized('WKCNotesDeleteConfirmation'))) {
+		if (!window.confirm(OLSKLocalized('WKCWriteNotesDeleteAlertText'))) {
 			if (persistenceIsCued) {
 				moi.commandsPersistenceTaskStart();
 			}
