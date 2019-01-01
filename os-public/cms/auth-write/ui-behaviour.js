@@ -33,7 +33,7 @@
 
 	moi.propertiesNoteObjects = function (inputData) {
 		if (typeof inputData === 'undefined') {
-			return d3.selectAll('.WKCNotesMasterContentListItem').data();
+			return d3.selectAll('.WKCWriteMasterContentListItem').data();
 		}
 
 		moi.reactNoteObjects(inputData.sort(WKCWriteLogic.WKCWriteLogicListSort));
@@ -343,21 +343,21 @@
 	//_ reactNoteObjects
 
 	moi.reactNoteObjects = function (noteObjects) {
-		var selection = d3.select('#WKCNotesMasterContent')
-			.selectAll('.WKCNotesMasterContentListItem').data(noteObjects);
+		var selection = d3.select('#WKCWriteMasterContent')
+			.selectAll('.WKCWriteMasterContentListItem').data(noteObjects);
 		
 		var parentElement = selection.enter()
 			.append('div')
-				.attr('class', 'WKCNotesMasterContentListItem')
+				.attr('class', 'WKCWriteMasterContentListItem')
 				.classed('WKCSharedElementTappable', true);
-		parentElement.append('pre').attr('class', 'WKCNotesMasterContentListItemSnippet');
+		parentElement.append('pre').attr('class', 'WKCWriteMasterContentListItemSnippet');
 		parentElement = parentElement.merge(selection);
 
 		parentElement
 			.on('click', function(obj) {
 				moi.commandsSelectNote(obj);
 			});
-		parentElement.select('.WKCNotesMasterContentListItemSnippet').text(function(obj) {
+		parentElement.select('.WKCWriteMasterContentListItemSnippet').text(function(obj) {
 			return (obj.WKCNoteBody || '').split('\n').slice(0, 3).join('\n');
 		});
 
@@ -370,7 +370,7 @@
 		d3.select('#WKCNotesDetailContentTextarea').node().value = moi.propertiesSelectedNote() ? moi.propertiesSelectedNote().WKCNoteBody : null;
 		d3.select('#WKCNotesDetailContentTextarea').attr('disabled', moi.propertiesSelectedNote() ? null : true);
 
-		d3.selectAll('.WKCNotesMasterContentListItem').classed('WKCNotesMasterContentListItemSelected', function(d) {
+		d3.selectAll('.WKCWriteMasterContentListItem').classed('WKCWriteMasterContentListItemSelected', function(d) {
 			return d === moi.propertiesSelectedNote();
 		});
 

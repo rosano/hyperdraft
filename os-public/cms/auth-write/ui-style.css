@@ -14,36 +14,36 @@ body {
 	display: flex;
 }
 
-.WKCNotesLoading .WKCSharedToolbar *, .WKCNotesLoading #WKCNotesMasterContent *, .WKCNotesLoading #WKCNotesDetailContent * {
+.WKCNotesLoading .WKCSharedToolbar *, .WKCNotesLoading #WKCWriteMasterContent *, .WKCNotesLoading #WKCNotesDetailContent * {
 	visibility: hidden;
 }
 
-#WKCNotesMaster {
+#WKCWriteMaster {
 	/* @FlexboxWKCNotes child */
 	flex-basis: 300px;
 	flex-shrink: 0;
 
-	/* @FlexboxWKCNotesMaster parent */
+	/* @FlexboxWKCWriteMaster parent */
 	display: flex;
 	flex-direction: column;
 }
 
-#WKCNotesMasterContent {
-	/* @FlexboxWKCNotesMaster child */
+#WKCWriteMasterContent {
+	/* @FlexboxWKCWriteMaster child */
 	overflow: auto;
 }
 
-.WKCNotesMasterContentListItem {
+.WKCWriteMasterContentListItem {
 	height: 50px;
 	padding: 10px;
 	border-bottom: 1px solid #ddd;
 }
 
-.WKCNotesMasterContentListItemSelected {
+.WKCWriteMasterContentListItemSelected {
 	background: #e6e6e6;
 }
 
-.WKCNotesMasterContentListItemSnippet {
+.WKCWriteMasterContentListItemSnippet {
 	width: 200px;
 	height: inherit;
 

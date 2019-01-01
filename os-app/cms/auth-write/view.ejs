@@ -44,15 +44,15 @@ locals.OLSKPagePublicRouteKeys = [
 </script>
 
 <div id="WKCNotes" class="WKCNotesLoading">
-	<div id="WKCNotesMaster">
-		<header id="WKCNotesMasterToolbar" class="WKCSharedToolbar">
-			<button id="WKCNotesMasterToolbarCreateButton" class="WKCSharedElementTappable WKCSharedButtonNoStyle" accesskey="n" title="<%= OLSKLocalized('WKCNotesMasterToolbarCreateButtonText') %>">➕</button>
+	<div id="WKCWriteMaster">
+		<header id="WKCWriteMasterToolbar" class="WKCSharedToolbar">
+			<button id="WKCWriteMasterToolbarCreateButton" class="WKCSharedElementTappable WKCSharedButtonNoStyle" accesskey="n" title="<%= OLSKLocalized('WKCWriteMasterToolbarCreateButtonText') %>">➕</button>
 			<script type="text/javascript">
-				d3.select('#WKCNotesMasterToolbarCreateButton').on('click', WKCWriteBehaviour.interfaceNotesMasterToolbarCreateButtonDidClick);
+				d3.select('#WKCWriteMasterToolbarCreateButton').on('click', WKCWriteBehaviour.interfaceNotesMasterToolbarCreateButtonDidClick);
 			</script>
 		</header>
 
-		<div id="WKCNotesMasterContent"></div>
+		<div id="WKCWriteMasterContent"></div>
 	</div>
 
 	<div id="WKCNotesDetail" class="WKCNotesDetailInactive">
