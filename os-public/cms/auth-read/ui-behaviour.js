@@ -203,17 +203,17 @@
 	//_ commandsAlertSubscriptionsUnavailable
 
 	moi.commandsAlertSubscriptionsUnavailable = function () {
-		window.alert(OLSKLocalized('WKCSubscriptionsErrorSubscriptionsUnavailableText'));
+		window.alert(OLSKLocalized('WKCReadErrorSubscriptionsUnavailableText'));
 
-		throw new Error('WKCSubscriptionsErrorSubscriptionsUnavailable');
+		throw new Error('WKCReadErrorSubscriptionsUnavailable');
 	};
 
 	//_ commandsAlertArticlesUnavailable
 
 	moi.commandsAlertArticlesUnavailable = function () {
-		window.alert(OLSKLocalized('WKCSubscriptionsErrorArticlesUnavailableText'));
+		window.alert(OLSKLocalized('WKCReadErrorArticlesUnavailableText'));
 
-		throw new Error('WKCSubscriptionsErrorArticlesUnavailable');
+		throw new Error('WKCReadErrorArticlesUnavailable');
 	};
 
 	//_ commandsSubscriptionsCreate
@@ -301,9 +301,9 @@
 	//_ commandsArticlesAlertErrorMarkAsRead
 
 	moi.commandsArticlesAlertErrorMarkAsRead = function () {
-		window.alert(OLSKLocalized('WKCSubscriptionsErrorArticlesMarkAsReadText'));
+		window.alert(OLSKLocalized('WKCReadErrorArticlesMarkAsReadText'));
 
-		throw new Error('WKCSubscriptionsErrorArticlesMarkAsRead');
+		throw new Error('WKCReadErrorArticlesMarkAsRead');
 	};
 
 	//_ commandsArticlesDiscard
@@ -336,7 +336,7 @@
 	//_ commandsArticlesAlertErrorMarkAsDiscarded
 
 	moi.commandsArticlesAlertErrorMarkAsDiscarded = function (error) {
-		window.alert(OLSKLocalized('WKCSubscriptionsErrorArticlesMarkAsDiscardedText'));
+		window.alert(OLSKLocalized('WKCReadErrorArticlesMarkAsDiscardedText'));
 
 		throw error;
 	};
@@ -371,7 +371,7 @@
 	//_ commandsArticlesAlertErrorMarkAsArchived
 
 	moi.commandsArticlesAlertErrorMarkAsArchived = function (error) {
-		window.alert(OLSKLocalized('WKCSubscriptionsErrorArticlesMarkAsArchivedText'));
+		window.alert(OLSKLocalized('WKCReadErrorArticlesMarkAsArchivedText'));
 
 		throw error;
 	};
@@ -407,7 +407,7 @@
 	//_ commandsArticlesAlertErrorUpdate
 
 	moi.commandsArticlesAlertErrorUpdate = function (error) {
-		window.alert(OLSKLocalized('WKCSubscriptionsErrorArticlesUpdateText'));
+		window.alert(OLSKLocalized('WKCReadErrorArticlesUpdateText'));
 
 		throw error;
 	};

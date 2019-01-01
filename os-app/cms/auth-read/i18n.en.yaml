@@ -1,6 +1,6 @@
 WKCSubscriptionsHeadingText: Subscriptions
-WKCSubscriptionsErrorSubscriptionsUnavailableText: Unable to fetch subscriptions
-WKCSubscriptionsErrorArticlesUnavailableText: Unable to fetch articles
+WKCReadErrorSubscriptionsUnavailableText: Unable to fetch subscriptions
+WKCReadErrorArticlesUnavailableText: Unable to fetch articles
 WKCReadSourcesContentHeadingText: Sources
 WKCReadSourcesContentListItemInboxText: Inbox
 WKCReadSourcesContentListItemArchivedText: Archived
@@ -9,7 +9,7 @@ WKCReadDetailToolbarUnreadButtonText: Mark as unread
 WKCReadDetailToolbarInboxButtonText: Move to inbox
 WKCReadDetailPlaceholderText: No Article Selected
 WKCReadDetailContentLinkText: Original source
-WKCSubscriptionsErrorArticlesMarkAsReadText: Unable to mark article as read
-WKCSubscriptionsErrorArticlesMarkAsArchivedText: Unable to archive article
-WKCSubscriptionsErrorArticlesMarkAsDiscardedText: Unable to discard article
-WKCSubscriptionsErrorArticlesUpdateText: Unable to update article
+WKCReadErrorArticlesMarkAsReadText: Unable to mark article as read
+WKCReadErrorArticlesMarkAsArchivedText: Unable to archive article
+WKCReadErrorArticlesMarkAsDiscardedText: Unable to discard article
+WKCReadErrorArticlesUpdateText: Unable to update article
