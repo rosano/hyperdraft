@@ -3,14 +3,14 @@ body {
   font-size: 90%;
 }
 
-#WKCSubscriptions {
+#WKCRead {
 	position: absolute;
 	top: 24px;
 	right: 0;
 	bottom: 0;
 	left: 0;
 
-	/* @FlexboxWKCSubscriptions parent */
+	/* @FlexboxWKCRead parent */
 	display: flex;
 }
 
@@ -96,7 +96,7 @@ body {
 	border-right: 1px solid #ddd;
 	background: #eeeeee;
 
-	/* @FlexboxWKCSubscriptions child */
+	/* @FlexboxWKCRead child */
 	flex-basis: 170px;
 	flex-shrink: 0;
 	max-width: 170px;
@@ -221,7 +221,7 @@ body {
 }
 
 #WKCReadMaster {
-	/* @FlexboxWKCSubscriptions child */
+	/* @FlexboxWKCRead child */
 	flex-basis: 300px;
 	flex-shrink: 0;
 	max-width: 300px;
@@ -314,7 +314,7 @@ body {
 #WKCReadDetail {
 	border-left: 1px solid #ddd;
 
-	/* @FlexboxWKCSubscriptions child */
+	/* @FlexboxWKCRead child */
 	flex-grow: 1;
 
 	/* @FlexboxWKCReadDetail parent */
