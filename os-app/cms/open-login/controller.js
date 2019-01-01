@@ -28,7 +28,7 @@ exports.OLSKControllerRoutes = function() {
 		WKCRouteLoginDestroy: {
 			OLSKRoutePath: '/logout',
 			OLSKRouteMethod: 'get',
-			OLSKRouteFunction: exports.WKCActionLoginDestroy,
+			OLSKRouteFunction: exports.WKCLoginDestroyAction,
 			OLSKRouteLanguages: ['en'],
 		},
 	};
@@ -112,9 +112,9 @@ exports.WKCLoginSubmitAction = function(req, res, next) {
 	});
 };
 
-//_ WKCActionLoginDestroy
+//_ WKCLoginDestroyAction
 
-exports.WKCActionLoginDestroy = function(req, res, next) {
+exports.WKCLoginDestroyAction = function(req, res, next) {
 	req.session = null;
 
 	return res.redirect(res.locals.OLSKCanonicalFor('WKCRouteHome'));
