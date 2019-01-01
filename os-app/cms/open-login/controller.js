@@ -25,7 +25,7 @@ exports.OLSKControllerRoutes = function() {
 			OLSKRouteFunction: exports.WKCLoginSubmitAction,
 			OLSKRouteLanguages: ['en'],
 		},
-		WKCRouteLoginDestroy: {
+		WKCLoginDestroyRoute: {
 			OLSKRoutePath: '/logout',
 			OLSKRouteMethod: 'get',
 			OLSKRouteFunction: exports.WKCLoginDestroyAction,

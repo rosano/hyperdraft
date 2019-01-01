@@ -30,7 +30,7 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 				OLSKRouteFunction: controllerModule.WKCLoginSubmitAction,
 				OLSKRouteLanguages: ['en'],
 			},
-			WKCRouteLoginDestroy: {
+			WKCLoginDestroyRoute: {
 				OLSKRoutePath: '/logout',
 				OLSKRouteMethod: 'get',
 				OLSKRouteFunction: controllerModule.WKCLoginDestroyAction,
