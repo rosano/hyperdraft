@@ -108,7 +108,7 @@ exports.WKCActionLoginSubmit = function(req, res, next) {
 
 		req.session.WKCInsecureSessionToken = memberObject.WKCMemberHandle;
 
-		return res.redirect(req.body.WKCLoginReturnPath ? decodeURIComponent(req.body.WKCLoginReturnPath) : res.locals.OLSKCanonicalFor('WKCRouteNotes'));
+		return res.redirect(req.body.WKCLoginReturnPath ? decodeURIComponent(req.body.WKCLoginReturnPath) : res.locals.OLSKCanonicalFor('WKCWriteRoute'));
 	});
 };
 

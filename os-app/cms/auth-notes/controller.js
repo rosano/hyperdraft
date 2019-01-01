@@ -8,14 +8,19 @@
 
 exports.OLSKControllerRoutes = function() {
 	return {
-		WKCRouteNotes: {
-			OLSKRoutePath: '/cms',
+		WKCWriteRoute: {
+			OLSKRoutePath: '/cms/write',
 			OLSKRouteMethod: 'get',
 			OLSKRouteFunction: exports.WKCWriteAction,
 			OLSKRouteLanguages: ['en'],
 			OLSKRouteMiddlewares: [
 				'WKCSharedMiddlewareAuthenticate',
 			],
+		},
+		WKCNotesLegacyRoute: {
+			OLSKRoutePath: '/cms',
+			OLSKRouteMethod: 'get',
+			OLSKRouteRedirect: '/cms/write',
 		},
 	};
 };

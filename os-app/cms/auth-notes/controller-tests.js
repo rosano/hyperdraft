@@ -14,14 +14,19 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 
 	it('returns route objects', function() {
 		assert.deepEqual(notesController.OLSKControllerRoutes(), {
-			WKCRouteNotes: {
-				OLSKRoutePath: '/cms',
+			WKCWriteRoute: {
+				OLSKRoutePath: '/cms/write',
 				OLSKRouteMethod: 'get',
 				OLSKRouteFunction: notesController.WKCWriteAction,
 				OLSKRouteLanguages: ['en'],
 				OLSKRouteMiddlewares: [
 					'WKCSharedMiddlewareAuthenticate',
 				],
+			},
+			WKCNotesLegacyRoute: {
+				OLSKRoutePath: '/cms',
+				OLSKRouteMethod: 'get',
+				OLSKRouteRedirect: '/cms/write',
 			},
 		});
 	});
