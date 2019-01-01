@@ -8,7 +8,7 @@ const assert = require('assert');
 
 var logicLibrary = require('./ui-logic');
 
-describe('WKLogicListSort', function testWKLogicListSort() {
+describe('WKCWriteLogicListSort', function testWKCWriteLogicListSort() {
 
 	it('sorts by WKCNoteDateUpdated descending', function() {
 		var item1 = {
@@ -18,7 +18,7 @@ describe('WKLogicListSort', function testWKLogicListSort() {
 			WKCNoteDateUpdated: new Date(1),
 		};
 
-		assert.deepEqual([item1, item2].sort(logicLibrary.WKLogicListSort), [item2, item1]);
+		assert.deepEqual([item1, item2].sort(logicLibrary.WKCWriteLogicListSort), [item2, item1]);
 	});
 
 	it('sorts by WKCNoteDateCreated descending if no WKCNoteDateUpdated', function() {
@@ -29,7 +29,7 @@ describe('WKLogicListSort', function testWKLogicListSort() {
 			WKCNoteDateCreated: new Date(1),
 		};
 
-		assert.deepEqual([item1, item2].sort(logicLibrary.WKLogicListSort), [item2, item1]);
+		assert.deepEqual([item1, item2].sort(logicLibrary.WKCWriteLogicListSort), [item2, item1]);
 	});
 
 });

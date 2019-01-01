@@ -36,7 +36,7 @@
 			return d3.selectAll('.WKCNotesMasterContentListItem').data();
 		}
 
-		moi.reactNoteObjects(inputData.sort(WKLogic.WKLogicListSort));
+		moi.reactNoteObjects(inputData.sort(WKCWriteLogic.WKCWriteLogicListSort));
 	};
 
 	//_ propertiesSelectedNote
