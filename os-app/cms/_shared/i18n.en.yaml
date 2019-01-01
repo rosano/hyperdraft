@@ -1,4 +1,4 @@
-WKSharedHeaderSubscriptionsText: Subscriptions
-WKSharedHeaderNotesText: Notes
+WKCSharedHeaderTextWKCRead: Read
+WKSharedHeaderNotesText: Write
 WKSharedErrorServiceUnavailable: Connection error
 WKSharedErrorTokenUnavailable: Authentication error
