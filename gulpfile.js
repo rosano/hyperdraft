@@ -20,7 +20,9 @@ const NODE_MODULE_NAMES = [
 	'url-parse',
 ];
 
-const INTERNAL_PATHS = [];
+const INTERNAL_PATHS = [
+	'WKCResponseParser/main.js',
+];
 
 gulpPackage.task('default', gulpPackage.series(function (completionHandler) {
 	if (!NODE_MODULE_NAMES.length) {
@@ -51,9 +53,9 @@ gulpPackage.task('default', gulpPackage.series(function (completionHandler) {
 	filesystemLibrary.OLSKFilesystemHelpDeleteDirectoryRecursive(pathPackage.join(__dirname, 'os-public/shared-assets/internal'));
 
 	gulpPackage.src(INTERNAL_PATHS.map(function(e) {
-		return pathPackage.join('os-app', e);
+		return pathPackage.join('os-app/_shared', e);
 	})).pipe(gulpPackage.dest(function(vinylFile) {
-		return pathPackage.join('os-public/shared-assets/internal', vinylFile.path.replace(pathPackage.join(__dirname, 'os-app'), '').split('/').slice(1).shift());
+		return pathPackage.join('os-public/shared-assets/internal', vinylFile.path.replace(pathPackage.join(__dirname, 'os-app'), '').split('/').slice(2).shift());
 	}));
 
 	return completionHandler();
