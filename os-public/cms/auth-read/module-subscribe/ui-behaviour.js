@@ -183,8 +183,10 @@
 		moi.reactPreviewFeedItems([].slice.call(parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('item')));
 
 		moi.reactConfirmationFormName(stringContentForFirstElement(parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('title')));
+
+		moi.reactConfirmationFormBlurb(stringContentForFirstElement(parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('description')));
 		
-		moi.reactPreviewShared(stringContentForFirstElement(parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('description')), OLSKLocalized('WKCReadModuleSubscribeConfirmationPreviewTypeFeedRSSText'));
+		moi.reactPreviewShared(OLSKLocalized('WKCReadModuleSubscribeConfirmationPreviewTypeFeedRSSText'));
 	};
 
 	//_ commandsConfirmURLFeedAtom
@@ -195,8 +197,10 @@
 		moi.reactPreviewFeedItems([].slice.call(parsedXML.getElementsByTagName('entry')));
 
 		moi.reactConfirmationFormName(stringContentForFirstElement(parsedXML.getElementsByTagName('title')));
+
+		moi.reactConfirmationFormBlurb(stringContentForFirstElement(parsedXML.getElementsByTagName('subtitle')));
 		
-		moi.reactPreviewShared(stringContentForFirstElement(parsedXML.getElementsByTagName('subtitle')), OLSKLocalized('WKCReadModuleSubscribeConfirmationPreviewTypeFeedAtomText'));
+		moi.reactPreviewShared(OLSKLocalized('WKCReadModuleSubscribeConfirmationPreviewTypeFeedAtomText'));
 	};
 
 	//_ commandsConfirmURLTwitterProfile
@@ -211,8 +215,12 @@
 		moi.reactConfirmationFormName(['Twitter', (articleObjects.length ? `@${JSON.parse(responseJSON)[0].user.screen_name}` : null)].filter(function (e) {
 			return !!e;
 		}).join(': '));
+
+		if (articleObjects.length) {
+			moi.reactConfirmationFormBlurb(JSON.parse(responseJSON)[0].user.description);
+		}
 		
-		moi.reactPreviewShared(articleObjects.length ? JSON.parse(responseJSON)[0].user.description : '', OLSKLocalized('WKCReadModuleSubscribeConfirmationPreviewTypeCustomTwitterProfileText'));
+		moi.reactPreviewShared(OLSKLocalized('WKCReadModuleSubscribeConfirmationPreviewTypeCustomTwitterProfileText'));
 	};
 
 	//_ commandsConfirmURLFile
@@ -224,7 +232,7 @@
 
 		moi.reactConfirmationFormName(inputData.match(/https?:\/\/(.*)/)[1]);
 
-		moi.reactPreviewShared(null, OLSKLocalized('WKCReadModuleSubscribeConfirmationPreviewTypeFileText'));
+		moi.reactPreviewShared(OLSKLocalized('WKCReadModuleSubscribeConfirmationPreviewTypeFileText'));
 	};
 
 	//_ commandsConfirmURLPage
@@ -279,7 +287,7 @@
 
 		moi.reactConfirmationFormName(parsedHTML.getElementsByTagName('title')[0].textContent);
 
-		moi.reactPreviewShared([].slice.call(parsedHTML.getElementsByTagName('meta')).filter(function(e) {
+		moi.reactConfirmationFormBlurb([].slice.call(parsedHTML.getElementsByTagName('meta')).filter(function(e) {
 			if (e.name === 'description') {
 				return true;
 			}
@@ -291,7 +299,9 @@
 			return false;
 		}).map(function(e) {
 			return e.content;
-		}).shift(), OLSKLocalized('WKCReadModuleSubscribeConfirmationPreviewTypePageText'));
+		}).shift());
+
+		moi.reactPreviewShared(OLSKLocalized('WKCReadModuleSubscribeConfirmationPreviewTypePageText'));
 	};
 
 	//_ commandsConfirmationClear
@@ -452,6 +462,12 @@
 		d3.select('#WKCReadModuleSubscribeConfirmationFormName').property('value', inputData)
 	};
 
+	//_ reactConfirmationFormBlurb
+
+	moi.reactConfirmationFormBlurb = function (inputData) {
+		d3.select('#WKCReadModuleSubscribeConfirmationFormBlurb').property('value', inputData)
+	};
+
 	//_ reactConfirmationType
 
 	moi.reactConfirmationType = function (inputData) {
@@ -460,10 +476,7 @@
 
 	//_ reactPreviewShared
 
-	moi.reactPreviewShared = function (blurbContent, typeContent) {
-		if (blurbContent) {
-			d3.select('#WKCReadModuleSubscribeConfirmationFormBlurb').property('value', blurbContent);
-		}
+	moi.reactPreviewShared = function (typeContent) {
 		d3.select('#WKCReadModuleSubscribeConfirmationPreviewHeadingType').html(typeContent);
 
 		moi.reactConfirmationVisibility(true);
