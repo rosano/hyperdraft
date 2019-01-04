@@ -10,6 +10,12 @@
 	(factory((global.WKCResponseParser = global.WKCResponseParser || {})));
 }(this, (function (exports) { 'use strict';
 
+	//_ WKCResponseParserInputDataIsTwitterTimeline
+
+	exports.WKCResponseParserInputDataIsTwitterTimeline = function(inputData) {
+		return Array.isArray(inputData);
+	};
+
 	//_ WKCResponseParserArticlesForTwitterTimeline
 
 	exports.WKCResponseParserArticlesForTwitterTimeline = function(oldBody, newBody) {

@@ -6,7 +6,7 @@
 
 const assert = require('assert');
 
-var diffLibrary = require('./main');
+var mainModule = require('./main');
 
 const k = {
 	kStubResponseTwitterTimelineValid: function() {
@@ -17,36 +17,48 @@ const k = {
 	},
 };
 
+describe('WKCResponseParserInputDataIsTwitterTimeline', function testWKCResponseParserInputDataIsTwitterTimeline() {
+
+	it('returns false if not array', function() {
+		assert.strictEqual(mainModule.WKCResponseParserInputDataIsTwitterTimeline(null), false);
+	});
+
+	it('returns true', function() {
+		assert.strictEqual(mainModule.WKCResponseParserInputDataIsTwitterTimeline([]), true);
+	});
+
+});
+
 describe('WKCResponseParserArticlesForTwitterTimeline', function testWKCResponseParserArticlesForTwitterTimeline() {
 
 	it('throws error if param2 not string', function() {
 		assert.throws(function() {
-			diffLibrary.WKCResponseParserArticlesForTwitterTimeline('[]', null);
+			mainModule.WKCResponseParserArticlesForTwitterTimeline('[]', null);
 		}, /WKCErrorInvalidInput/);
 	});
 
 	it('throws error if param1 not format', function() {
 		assert.throws(function() {
-			diffLibrary.WKCResponseParserArticlesForTwitterTimeline('{}', '[]');
+			mainModule.WKCResponseParserArticlesForTwitterTimeline('{}', '[]');
 		}, /WKCErrorInvalidInput/);
 	});
 
 	it('throws error if param2 not format', function() {
 		assert.throws(function() {
-			diffLibrary.WKCResponseParserArticlesForTwitterTimeline('[]', '{}');
+			mainModule.WKCResponseParserArticlesForTwitterTimeline('[]', '{}');
 		}, /WKCErrorInvalidInput/);
 	});
 
 	it('returns none if identical', function() {
-		assert.deepEqual(diffLibrary.WKCResponseParserArticlesForTwitterTimeline(k.kStubResponseTwitterTimelineValid(), k.kStubResponseTwitterTimelineValid()), []);
+		assert.deepEqual(mainModule.WKCResponseParserArticlesForTwitterTimeline(k.kStubResponseTwitterTimelineValid(), k.kStubResponseTwitterTimelineValid()), []);
 	});
 
 	it('returns none if new empty', function() {
-		assert.deepEqual(diffLibrary.WKCResponseParserArticlesForTwitterTimeline(k.kStubResponseTwitterTimelineValid(), '[]'), []);
+		assert.deepEqual(mainModule.WKCResponseParserArticlesForTwitterTimeline(k.kStubResponseTwitterTimelineValid(), '[]'), []);
 	});
 
 	it('returns all if old empty', function() {
-		assert.deepEqual(diffLibrary.WKCResponseParserArticlesForTwitterTimeline(null, k.kStubResponseTwitterTimelineValid()).map(function(e) {
+		assert.deepEqual(mainModule.WKCResponseParserArticlesForTwitterTimeline(null, k.kStubResponseTwitterTimelineValid()).map(function(e) {
 			return e.WKCArticleOriginalGUID;
 		}), [
 			'alfa',
@@ -55,7 +67,7 @@ describe('WKCResponseParserArticlesForTwitterTimeline', function testWKCResponse
 	});
 
 	it('returns articles with new guid', function() {
-		assert.deepEqual(diffLibrary.WKCResponseParserArticlesForTwitterTimeline(k.kStubResponseTwitterTimelineValid(), k.kStubResponseTwitterTimelineValid().replace(/alfa/g, 'charlie')).map(function(e) {
+		assert.deepEqual(mainModule.WKCResponseParserArticlesForTwitterTimeline(k.kStubResponseTwitterTimelineValid(), k.kStubResponseTwitterTimelineValid().replace(/alfa/g, 'charlie')).map(function(e) {
 			return e.WKCArticleOriginalGUID;
 		}), [
 			'charlie',
@@ -63,31 +75,31 @@ describe('WKCResponseParserArticlesForTwitterTimeline', function testWKCResponse
 	});
 
 	it('populates WKCArticleTitle undefined', function() {
-		assert.strictEqual(diffLibrary.WKCResponseParserArticlesForTwitterTimeline(null, k.kStubResponseTwitterTimelineValid()).pop().WKCArticleTitle, undefined);
+		assert.strictEqual(mainModule.WKCResponseParserArticlesForTwitterTimeline(null, k.kStubResponseTwitterTimelineValid()).pop().WKCArticleTitle, undefined);
 	});
 
 	it('populates WKCArticleOriginalURL', function() {
-		assert.strictEqual(diffLibrary.WKCResponseParserArticlesForTwitterTimeline(null, k.kStubResponseTwitterTimelineValid()).pop().WKCArticleOriginalURL, 'https://twitter.com/foxtrot/status/delta');
+		assert.strictEqual(mainModule.WKCResponseParserArticlesForTwitterTimeline(null, k.kStubResponseTwitterTimelineValid()).pop().WKCArticleOriginalURL, 'https://twitter.com/foxtrot/status/delta');
 	});
 
 	it('populates WKCArticleOriginalGUID', function() {
-		assert.strictEqual(diffLibrary.WKCResponseParserArticlesForTwitterTimeline(null, k.kStubResponseTwitterTimelineValid()).pop().WKCArticleOriginalGUID, 'delta');
+		assert.strictEqual(mainModule.WKCResponseParserArticlesForTwitterTimeline(null, k.kStubResponseTwitterTimelineValid()).pop().WKCArticleOriginalGUID, 'delta');
 	});
 
 	it('populates WKCArticlePublishDate', function() {
-		assert.deepEqual(diffLibrary.WKCResponseParserArticlesForTwitterTimeline(null, k.kStubResponseTwitterTimelineValid()).pop().WKCArticlePublishDate, new Date('2018-10-08T13:40:12.000Z'));
+		assert.deepEqual(mainModule.WKCResponseParserArticlesForTwitterTimeline(null, k.kStubResponseTwitterTimelineValid()).pop().WKCArticlePublishDate, new Date('2018-10-08T13:40:12.000Z'));
 	});
 
 	it('populates WKCArticleAuthor undefined', function() {
-		assert.strictEqual(diffLibrary.WKCResponseParserArticlesForTwitterTimeline(null, k.kStubResponseTwitterTimelineValid()).pop().WKCArticleAuthor, undefined);
+		assert.strictEqual(mainModule.WKCResponseParserArticlesForTwitterTimeline(null, k.kStubResponseTwitterTimelineValid()).pop().WKCArticleAuthor, undefined);
 	});
 
 	it('populates WKCArticleBody', function() {
-		assert.strictEqual(diffLibrary.WKCResponseParserArticlesForTwitterTimeline(null, k.kStubResponseTwitterTimelineValid()).pop().WKCArticleBody, 'echo');
+		assert.strictEqual(mainModule.WKCResponseParserArticlesForTwitterTimeline(null, k.kStubResponseTwitterTimelineValid()).pop().WKCArticleBody, 'echo');
 	});
 
 	it('populates WKCArticleSnippet undefined', function() {
-		assert.strictEqual(diffLibrary.WKCResponseParserArticlesForTwitterTimeline(null, k.kStubResponseTwitterTimelineValid()).pop().WKCArticleSnippet, undefined);
+		assert.strictEqual(mainModule.WKCResponseParserArticlesForTwitterTimeline(null, k.kStubResponseTwitterTimelineValid()).pop().WKCArticleSnippet, undefined);
 	});
 
 });
