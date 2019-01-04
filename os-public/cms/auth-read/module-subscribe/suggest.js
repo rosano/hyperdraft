@@ -24,9 +24,9 @@
 		return 'SuggestionsTypeSecure';
 	};
 
-	//_ WKCReadModuleSubscribeSuggestionsTypeCustomTwitter
+	//_ WKCReadModuleSubscribeSuggestionsTypeCustomTwitterTimeline
 
-	exports.WKCReadModuleSubscribeSuggestionsTypeCustomTwitter = function () {
+	exports.WKCReadModuleSubscribeSuggestionsTypeCustomTwitterTimeline = function () {
 		return 'SuggestionsTypeCustomTwitter';
 	};
 
@@ -110,7 +110,7 @@
 		if (urlHandle && urlHandle.slice(-1).pop()) {
 			return [
 				{
-					WKCSuggestionType: exports.WKCReadModuleSubscribeSuggestionsTypeCustomTwitter(),
+					WKCSuggestionType: exports.WKCReadModuleSubscribeSuggestionsTypeCustomTwitterTimeline(),
 					WKCSuggestionURL: 'https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name='.concat(urlHandle.slice(-1).pop()),
 				},
 			];
@@ -120,7 +120,7 @@
 		if (userHandle && userHandle.slice(-1).pop()) {
 			return [
 				{
-					WKCSuggestionType: exports.WKCReadModuleSubscribeSuggestionsTypeCustomTwitter(),
+					WKCSuggestionType: exports.WKCReadModuleSubscribeSuggestionsTypeCustomTwitterTimeline(),
 					WKCSuggestionURL: 'https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name='.concat(userHandle.slice(-1).pop()),
 				},
 			];

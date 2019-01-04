@@ -15,7 +15,7 @@
 	var WKCReadModuleSubscribePropertyAPIToken;
 	var kWKCReadModuleSubscribeHandlerMap = [
 		[
-			WKCReadModuleSubscribeSuggestions.WKCReadModuleSubscribeSuggestionsTypeCustomTwitter(),
+			WKCReadModuleSubscribeSuggestions.WKCReadModuleSubscribeSuggestionsTypeCustomTwitterTimeline(),
 			OLSKPublicConstants.WKCSubscriptionHandlerCustomTwitterTimeline,
 		],
 	].reduce(function (map, e) {
@@ -309,7 +309,7 @@
 		
 		moi.reactConfirmationFormType(OLSKPublicConstants.WKCSubscriptionHandlerCustomTwitterTimeline);
 
-		moi.reactConfirmationPreviewHeadingType(OLSKLocalized('WKCReadModuleSubscribeConfirmationPreviewHeadingTypeCustomTwitterText'));
+		moi.reactConfirmationPreviewHeadingType(OLSKLocalized('WKCReadModuleSubscribeConfirmationPreviewHeadingTypeCustomTwitterTimelineText'));
 
 		moi.reactConfirmationShared();
 	};

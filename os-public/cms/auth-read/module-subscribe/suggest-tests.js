@@ -10,7 +10,7 @@ var suggestLibrary = require('./suggest');
 
 const kTestingSuggestionTwitterFor = function(inputData) {
 	return {
-		WKCSuggestionType: suggestLibrary.WKCReadModuleSubscribeSuggestionsTypeCustomTwitter(),
+		WKCSuggestionType: suggestLibrary.WKCReadModuleSubscribeSuggestionsTypeCustomTwitterTimeline(),
 		WKCSuggestionURL: 'https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name='.concat(inputData),
 	};
 };
@@ -31,10 +31,10 @@ describe('WKCReadModuleSubscribeSuggestionsTypeSecure', function testWKCReadModu
 
 });
 
-describe('WKCReadModuleSubscribeSuggestionsTypeCustomTwitter', function testWKCReadModuleSubscribeSuggestionsTypeCustomTwitter() {
+describe('WKCReadModuleSubscribeSuggestionsTypeCustomTwitterTimeline', function testWKCReadModuleSubscribeSuggestionsTypeCustomTwitterTimeline() {
 
 	it('returns constant', function() {
-		assert.deepEqual(suggestLibrary.WKCReadModuleSubscribeSuggestionsTypeCustomTwitter(), 'SuggestionsTypeCustomTwitter');
+		assert.deepEqual(suggestLibrary.WKCReadModuleSubscribeSuggestionsTypeCustomTwitterTimeline(), 'SuggestionsTypeCustomTwitter');
 	});
 
 });

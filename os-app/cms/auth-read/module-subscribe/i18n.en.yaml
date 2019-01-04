@@ -1,13 +1,13 @@
 WKCReadModuleSubscribeHeadingText: Add subscription
 WKCReadModuleSubscribeFetchFormSubmitText: Fetch
 WKCReadModuleSubscribeErrorFetchText: Error fetching URL. Please check the input and try again.
-WKCReadModuleSubscribeErrorCustomTwitterMissingToken: To subscribe to Twitter profiles, first setup your account in Settings.
+WKCReadModuleSubscribeErrorCustomTwitterMissingToken: To subscribe to Twitter timelines, first setup your account in Settings.
 WKCReadModuleSubscribeErrorCreateText: Error adding subscription. Please check the input and try again.
 WKCReadModuleSubscribeAlternativesAlertText: 'If you would like to add one of the feeds found on this page, click the corresponding button below:'
 WKCReadModuleSubscribeSuggestionsAlertText: 'Did you mean:'
 WKCReadModuleSubscribeSuggestionsNameTextSuggestionsTypeStandard: 'Standard Link'
 WKCReadModuleSubscribeSuggestionsNameTextSuggestionsTypeSecure: 'Secure Link'
-WKCReadModuleSubscribeSuggestionsNameTextSuggestionsTypeCustomTwitter: 'Twitter Profile'
+WKCReadModuleSubscribeSuggestionsNameTextSuggestionsTypeCustomTwitterTimeline: 'Twitter Timeline'
 WKCReadModuleSubscribeConfirmationHeadingText: Confirm subscription
 WKCReadModuleSubscribeConfirmationFormNameText: Name
 WKCReadModuleSubscribeConfirmationFormBlurbText: Description
@@ -16,7 +16,7 @@ WKCReadModuleSubscribeConfirmationClearButtonText: Restart
 WKCReadModuleSubscribeConfirmationPreviewHeadingText: Preview
 WKCReadModuleSubscribeConfirmationPreviewHeadingTypeFeedRSSText: RSS Feed
 WKCReadModuleSubscribeConfirmationPreviewHeadingTypeFeedAtomText: Atom Feed
-WKCReadModuleSubscribeConfirmationPreviewHeadingTypeCustomTwitterText: Twitter Profile
+WKCReadModuleSubscribeConfirmationPreviewHeadingTypeCustomTwitterTimelineText: Twitter Timeline
 WKCReadModuleSubscribeConfirmationPreviewHeadingTypeFileText: File
 WKCReadModuleSubscribeConfirmationPreviewHeadingTypePageText: Page
 WKCReadModuleSubscribeFlashFormat: Subscribed to %@
