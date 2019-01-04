@@ -40,6 +40,18 @@ const kStubs = {
 
 describe('WKCResponseParserArticlesForFeedRSS', function testWKCResponseParserArticlesForFeedRSS() {
 
+	it('throws error if param1 not object', function() {
+		assert.throws(function() {
+			mainModule.WKCResponseParserArticlesForFeedRSS(null, '[]', null);
+		}, /WKCErrorInvalidInput/);
+	});
+
+	it('throws error if param1 missing parseFromString', function() {
+		assert.throws(function() {
+			mainModule.WKCResponseParserArticlesForFeedRSS({}, '[]', null);
+		}, /WKCErrorInvalidInput/);
+	});
+
 	it('returns none if no rss', function() {
 		assert.deepEqual(mainModule.WKCResponseParserArticlesForFeedRSS(kStubs.kStubsDOMParserInstance(), kStubs.kStubsRSSValid(), kStubs.kStubsRSSValid().replace('rss', 'rssx')), []);
 	});

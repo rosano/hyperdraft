@@ -17,6 +17,14 @@
 	//_ WKCResponseParserArticlesForFeedRSS
 
 	exports.WKCResponseParserArticlesForFeedRSS = function(DOMParserInstance, oldString, newString) {
+		if (typeof DOMParserInstance !== 'object' || DOMParserInstance === null) {
+			throw new Error('WKCErrorInvalidInput');
+		}
+
+		if (typeof DOMParserInstance.parseFromString !== 'function') {
+			throw new Error('WKCErrorInvalidInput');
+		}
+
 		const parsedXML = DOMParserInstance.parseFromString(oldString, 'application/xml');
 
 		var oldIDs = (!oldString ? [] : [].slice.call(parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('item'))).map(function (e) {
