@@ -141,14 +141,14 @@ exports.WKCActionAPISubscriptionsFetch = function(req, res, next) {
 	return metalLibrary.WKCMetalSubscriptionsScrape(req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, req.body.WKCSubscriptionsAPIFetchURL, function (err, responseJSON) {
 		if (err) {
 			return res.status(200).json({
-				err: err.message,
+				error: err.message,
 			});
 		}
 
 		return requestPackage(responseJSON, function(err, response, body) {
 			return res.status(200).json({
-				err: err ? err.message : undefined,
-				body: body,
+				error: err ? err.message : undefined,
+				contents: body,
 			});
 		});
 	}, {

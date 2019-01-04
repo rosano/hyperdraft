@@ -106,7 +106,7 @@
 
 		moi.reactFetchLoaderVisibility(true);
 
-		d3.text(OLSKCanonicalFor('WKCRouteAPISubscriptionsFetch'), {
+		d3.json(OLSKCanonicalFor('WKCRouteAPISubscriptionsFetch'), {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -118,16 +118,16 @@
 				WKCSubscriptionsAPIFetchHandler: fetchHandler,
 			} : {})),
 		})
-		.then(function(data) {
-			data = JSON.parse(data);
-
-			if (data.err === 'WKCErrorTwitterMissingToken') {
+		.then(function(responseJSON) {
+			if (responseJSON.error === 'WKCErrorTwitterMissingToken') {
 				return moi.commandsFetchAlertErrorTwitterMissingToken();
-			} else if (data.err) {
-				throw new Error(data.err);
 			}
 
-			var parsedXML = (new DOMParser()).parseFromString(data.body, 'application/xml');
+			if (responseJSON.error) {
+				throw new Error(responseJSON.error);
+			}
+
+			var parsedXML = (new DOMParser()).parseFromString(responseJSON.contents, 'application/xml');
 
 			if (OLSKType.OLSKTypeInputDataIsDOMDocumentRSS(parsedXML)) {
 				return moi.commandsConfirmURLFeedRSS(inputData, parsedXML);
@@ -137,13 +137,13 @@
 				return moi.commandsConfirmURLFeedAtom(inputData, parsedXML);
 			}
 
-			var parsedHTML = (new DOMParser()).parseFromString(data.body, 'text/html');
+			var parsedHTML = (new DOMParser()).parseFromString(responseJSON.contents, 'text/html');
 
 			if (OLSKType.OLSKTypeInputDataIsDOMDocumentHTML(parsedHTML)) {
 				return moi.commandsConfirmURLPage(inputData, parsedHTML);
 			}
 
-			return moi.commandsConfirmURLFile(inputData, data.body);
+			return moi.commandsConfirmURLFile(inputData, responseJSON.contents);
 		})
 		.catch(moi.commandsFetchAlertError)
 		.finally(function () {
