@@ -188,7 +188,7 @@
 
 		moi.reactConfirmationPreviewHeadingType(OLSKLocalized('WKCReadModuleSubscribeConfirmationPreviewHeadingTypeFeedRSSText'));
 
-		moi.reactPreviewShared();
+		moi.reactConfirmationShared();
 	};
 
 	//_ commandsConfirmURLFeedAtom
@@ -204,7 +204,7 @@
 
 		moi.reactConfirmationPreviewHeadingType(OLSKLocalized('WKCReadModuleSubscribeConfirmationPreviewHeadingTypeFeedAtomText'));
 
-		moi.reactPreviewShared();
+		moi.reactConfirmationShared();
 	};
 
 	//_ commandsConfirmURLTwitterProfile
@@ -226,7 +226,7 @@
 
 		moi.reactConfirmationPreviewHeadingType(OLSKLocalized('WKCReadModuleSubscribeConfirmationPreviewHeadingTypeCustomTwitterProfileText'));
 
-		moi.reactPreviewShared();
+		moi.reactConfirmationShared();
 	};
 
 	//_ commandsConfirmURLFile
@@ -240,7 +240,7 @@
 
 		moi.reactConfirmationPreviewHeadingType(OLSKLocalized('WKCReadModuleSubscribeConfirmationPreviewHeadingTypeFileText'));
 
-		moi.reactPreviewShared();
+		moi.reactConfirmationShared();
 	};
 
 	//_ commandsConfirmURLPage
@@ -311,7 +311,7 @@
 
 		moi.reactConfirmationPreviewHeadingType(OLSKLocalized('WKCReadModuleSubscribeConfirmationPreviewHeadingTypePageText'));
 
-		moi.reactPreviewShared();
+		moi.reactConfirmationShared();
 	};
 
 	//_ commandsConfirmationClear
@@ -490,9 +490,9 @@
 		d3.select('#WKCReadModuleSubscribeConfirmationPreviewHeadingType').text(inputData);
 	};
 
-	//_ reactPreviewShared
+	//_ reactConfirmationShared
 
-	moi.reactPreviewShared = function () {
+	moi.reactConfirmationShared = function () {
 		moi.reactConfirmationVisibility(true);
 		
 		moi.reactFetchFormVisibility(false);
