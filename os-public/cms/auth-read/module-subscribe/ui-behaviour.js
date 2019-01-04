@@ -224,7 +224,7 @@
 	moi.commandsConfirmURLPage = function (inputData, parsedHTML) {
 		moi.reactConfirmationType(OLSKPublicConstants.WKCSubscriptionHandlerPage);
 		
-		moi.reactAlternativesFeeds([].slice.call(parsedHTML.getElementsByTagName('link')).filter(function(e) {
+		moi.reactAlternatives([].slice.call(parsedHTML.getElementsByTagName('link')).filter(function(e) {
 			return [
 				'application/rss+xml',
 				'application/atom+xml',
@@ -289,7 +289,7 @@
 	moi.commandsConfirmationClear = function () {
 		moi.propertiesFetchURL('');
 
-		moi.reactAlternativesFeeds([]);
+		moi.reactAlternatives([]);
 		moi.reactSuggestions([]);
 		moi.reactPreviewFeedItems([]);
 		moi.reactPreviewPage('');
@@ -365,29 +365,6 @@
 		      });
 	};
 
-	//_ reactAlternativesFeeds
-
-	moi.reactAlternativesFeeds = function (feedURLs) {
-		var selection = d3.select('#WKCReadModuleSubscribeAlternatives ul')
-			.selectAll('.WKCReadModuleSubscribeAlternativesItem').data(feedURLs);
-		
-		selection.enter()
-			.append('li')
-				.attr('class', 'WKCReadModuleSubscribeAlternativesItem')
-				.append('button')
-				.on('click', function(e) {
-					moi.commandsFetchURL(e);
-				})
-				.merge(selection)
-					.html(function(e) {
-						return e;
-					});
-
-		selection.exit().remove();
-
-		d3.select('#WKCReadModuleSubscribeAlternatives').classed('WKCSharedHidden', !feedURLs.length);
-	};
-
 	//_ reactSuggestions
 
 	moi.reactSuggestions = function (suggestionObjects) {
@@ -428,6 +405,29 @@
 		selection.exit().remove();
 
 		d3.select('#WKCReadModuleSubscribeSuggestions').classed('WKCSharedHidden', !suggestionObjects.length);
+	};
+
+	//_ reactAlternatives
+
+	moi.reactAlternatives = function (feedURLs) {
+		var selection = d3.select('#WKCReadModuleSubscribeAlternatives ul')
+			.selectAll('.WKCReadModuleSubscribeAlternativesItem').data(feedURLs);
+		
+		selection.enter()
+			.append('li')
+				.attr('class', 'WKCReadModuleSubscribeAlternativesItem')
+				.append('button')
+				.on('click', function(e) {
+					moi.commandsFetchURL(e);
+				})
+				.merge(selection)
+					.html(function(e) {
+						return e;
+					});
+
+		selection.exit().remove();
+
+		d3.select('#WKCReadModuleSubscribeAlternatives').classed('WKCSharedHidden', !feedURLs.length);
 	};
 
 	//_ reactConfirmationVisibility
