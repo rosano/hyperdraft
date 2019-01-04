@@ -151,9 +151,9 @@
 		})
 		.catch(moi.commandsFetchAlertError)
 		.finally(function () {
-			moi.reactSuggestions(WKCReadModuleSubscribeSuggestions.WKCReadModuleSubscribeSuggestionsFor(inputData));
-
 			moi.reactFetchLoaderVisibility(false);
+			
+			moi.reactSuggestions(WKCReadModuleSubscribeSuggestions.WKCReadModuleSubscribeSuggestionsFor(inputData));
 		});
 	};
 
