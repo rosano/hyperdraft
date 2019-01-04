@@ -80,7 +80,7 @@ body {
 	margin: 20px 0;
 }
 
-.WKCReadModuleSubscribePreview {
+.WKCReadModuleSubscribeConfirmationPreview {
 	padding-left: 20px;
 	overflow-x: hidden;
 
@@ -88,7 +88,7 @@ body {
 	border-left: 10px solid #ddd;
 }
 
-#WKCReadModuleSubscribePreviewFeedList {
+#WKCReadModuleSubscribeConfirmationPreviewFeedList {
 	padding-left: 10px;
 }
 
