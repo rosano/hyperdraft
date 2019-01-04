@@ -25,6 +25,18 @@ describe('WKCResponseParserArticlesForTwitterTimeline', function testWKCResponse
 		}, /WKCErrorInvalidInput/);
 	});
 
+	it('throws error if param1 not format', function() {
+		assert.throws(function() {
+			diffLibrary.WKCResponseParserArticlesForTwitterTimeline('{}', '[]');
+		}, /WKCErrorInvalidInput/);
+	});
+
+	it('throws error if param2 not format', function() {
+		assert.throws(function() {
+			diffLibrary.WKCResponseParserArticlesForTwitterTimeline('[]', '{}');
+		}, /WKCErrorInvalidInput/);
+	});
+
 	it('returns none if identical', function() {
 		assert.deepEqual(diffLibrary.WKCResponseParserArticlesForTwitterTimeline(k.kStubResponseTwitterTimelineValid(), k.kStubResponseTwitterTimelineValid()), []);
 	});
