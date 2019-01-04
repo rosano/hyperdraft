@@ -181,8 +181,10 @@
 		moi.reactConfirmationType(OLSKPublicConstants.WKCSubscriptionHandlerFeedRSS);
 
 		moi.reactPreviewFeedItems([].slice.call(parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('item')));
+
+		moi.reactConfirmationFormName(stringContentForFirstElement(parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('title')));
 		
-		moi.reactPreviewShared(stringContentForFirstElement(parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('title')), stringContentForFirstElement(parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('description')), OLSKLocalized('WKCReadModuleSubscribeConfirmationPreviewTypeFeedRSSText'));
+		moi.reactPreviewShared(stringContentForFirstElement(parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('description')), OLSKLocalized('WKCReadModuleSubscribeConfirmationPreviewTypeFeedRSSText'));
 	};
 
 	//_ commandsConfirmURLFeedAtom
@@ -191,8 +193,10 @@
 		moi.reactConfirmationType(OLSKPublicConstants.WKCSubscriptionHandlerFeedAtom);
 
 		moi.reactPreviewFeedItems([].slice.call(parsedXML.getElementsByTagName('entry')));
+
+		moi.reactConfirmationFormName(stringContentForFirstElement(parsedXML.getElementsByTagName('title')));
 		
-		moi.reactPreviewShared(stringContentForFirstElement(parsedXML.getElementsByTagName('title')), stringContentForFirstElement(parsedXML.getElementsByTagName('subtitle')), OLSKLocalized('WKCReadModuleSubscribeConfirmationPreviewTypeFeedAtomText'));
+		moi.reactPreviewShared(stringContentForFirstElement(parsedXML.getElementsByTagName('subtitle')), OLSKLocalized('WKCReadModuleSubscribeConfirmationPreviewTypeFeedAtomText'));
 	};
 
 	//_ commandsConfirmURLTwitterProfile
@@ -203,10 +207,12 @@
 		const articleObjects = WKCResponseParser.WKCResponseParserArticlesForCustomTwitterTimeline(null, responseJSON);
 
 		moi.reactPreviewArticles(articleObjects);
-		
-		moi.reactPreviewShared(['Twitter', (articleObjects.length ? `@${JSON.parse(responseJSON)[0].user.screen_name}` : null)].filter(function (e) {
+
+		moi.reactConfirmationFormName(['Twitter', (articleObjects.length ? `@${JSON.parse(responseJSON)[0].user.screen_name}` : null)].filter(function (e) {
 			return !!e;
-		}).join(': '), articleObjects.length ? JSON.parse(responseJSON)[0].user.description : '', OLSKLocalized('WKCReadModuleSubscribeConfirmationPreviewTypeCustomTwitterProfileText'));
+		}).join(': '));
+		
+		moi.reactPreviewShared(articleObjects.length ? JSON.parse(responseJSON)[0].user.description : '', OLSKLocalized('WKCReadModuleSubscribeConfirmationPreviewTypeCustomTwitterProfileText'));
 	};
 
 	//_ commandsConfirmURLFile
@@ -216,7 +222,9 @@
 		
 		moi.reactPreviewFile(rawData);
 
-		moi.reactPreviewShared(inputData.match(/https?:\/\/(.*)/)[1], null, OLSKLocalized('WKCReadModuleSubscribeConfirmationPreviewTypeFileText'));
+		moi.reactConfirmationFormName(inputData.match(/https?:\/\/(.*)/)[1]);
+
+		moi.reactPreviewShared(null, OLSKLocalized('WKCReadModuleSubscribeConfirmationPreviewTypeFileText'));
 	};
 
 	//_ commandsConfirmURLPage
@@ -269,7 +277,9 @@
 		showdownInstance.setOption('noHeaderId', true);
 		moi.reactPreviewPage(showdownInstance.makeHtml(turndownInstance.turndown(parsedHTML.body)));
 
-		moi.reactPreviewShared(parsedHTML.getElementsByTagName('title')[0].textContent, [].slice.call(parsedHTML.getElementsByTagName('meta')).filter(function(e) {
+		moi.reactConfirmationFormName(parsedHTML.getElementsByTagName('title')[0].textContent);
+
+		moi.reactPreviewShared([].slice.call(parsedHTML.getElementsByTagName('meta')).filter(function(e) {
 			if (e.name === 'description') {
 				return true;
 			}
@@ -436,6 +446,12 @@
 		d3.select('#WKCReadModuleSubscribeConfirmation').classed('WKCSharedHidden', !isVisible);
 	};
 
+	//_ reactConfirmationFormName
+
+	moi.reactConfirmationFormName = function (inputData) {
+		d3.select('#WKCReadModuleSubscribeConfirmationFormName').property('value', inputData)
+	};
+
 	//_ reactConfirmationType
 
 	moi.reactConfirmationType = function (inputData) {
@@ -444,11 +460,7 @@
 
 	//_ reactPreviewShared
 
-	moi.reactPreviewShared = function (titleContent, blurbContent, typeContent) {
-		if (titleContent) {
-			d3.select('#WKCReadModuleSubscribeConfirmationFormName').property('value', titleContent);
-		}
-
+	moi.reactPreviewShared = function (blurbContent, typeContent) {
 		if (blurbContent) {
 			d3.select('#WKCReadModuleSubscribeConfirmationFormBlurb').property('value', blurbContent);
 		}
