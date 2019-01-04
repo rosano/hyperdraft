@@ -368,12 +368,12 @@
 	//_ reactAlternativesFeeds
 
 	moi.reactAlternativesFeeds = function (feedURLs) {
-		var selection = d3.select('#WKCReadModuleSubscribeAlternativesFeeds ul')
-			.selectAll('.WKCReadModuleSubscribeAlternativesFeedsItem').data(feedURLs);
+		var selection = d3.select('#WKCReadModuleSubscribeAlternatives ul')
+			.selectAll('.WKCReadModuleSubscribeAlternativesItem').data(feedURLs);
 		
 		selection.enter()
 			.append('li')
-				.attr('class', 'WKCReadModuleSubscribeAlternativesFeedsItem')
+				.attr('class', 'WKCReadModuleSubscribeAlternativesItem')
 				.append('button')
 				.on('click', function(e) {
 					moi.commandsFetchURL(e);
@@ -385,7 +385,7 @@
 
 		selection.exit().remove();
 
-		d3.select('#WKCReadModuleSubscribeAlternativesFeeds').classed('WKCSharedHidden', !feedURLs.length);
+		d3.select('#WKCReadModuleSubscribeAlternatives').classed('WKCSharedHidden', !feedURLs.length);
 	};
 
 	//_ reactSuggestions
