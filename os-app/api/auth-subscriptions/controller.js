@@ -138,7 +138,7 @@ exports.WKCActionAPISubscriptionsSearch = function(req, res, next) {
 //_ WKCActionAPISubscriptionsFetch
 
 exports.WKCActionAPISubscriptionsFetch = function(req, res, next) {
-	return metalLibrary.WKCMetalSubscriptionsScrape(req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, req.body.WKCSubscriptionsAPIFetchURL, function (err, responseJSON) {
+	return metalLibrary.WKCSubscriptionsMetalRequestParameters(req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, req.body.WKCSubscriptionsAPIFetchURL, function (err, responseJSON) {
 		if (err) {
 			return res.status(200).json({
 				error: err.message,

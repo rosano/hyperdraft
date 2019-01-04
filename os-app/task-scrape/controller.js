@@ -54,7 +54,7 @@ exports.WKCTaskScrape = function() {
 				}
 
 				return responseJSON.forEach(function(subscriptionObject) {
-					return apiSubscriptionsMetal.WKCMetalSubscriptionsScrape(callbackInput.OLSKLive.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, subscriptionObject.WKCSubscriptionURL, function (error, responseJSON) {
+					return apiSubscriptionsMetal.WKCSubscriptionsMetalRequestParameters(callbackInput.OLSKLive.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, subscriptionObject.WKCSubscriptionURL, function (error, responseJSON) {
 
 						return requestPackage(responseJSON, function(err, res, body) {
 							var articleObjects = [];

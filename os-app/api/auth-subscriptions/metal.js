@@ -225,9 +225,9 @@ exports.WKCMetalSubscriptionsNeedingFetch = function(databaseClient, completionH
 	});
 };
 
-//_ WKCMetalSubscriptionsScrape
+//_ WKCSubscriptionsMetalRequestParameters
 
-exports.WKCMetalSubscriptionsScrape = function(databaseClient, inputData, completionHandler, options = {}) {
+exports.WKCSubscriptionsMetalRequestParameters = function(databaseClient, inputData, completionHandler, options = {}) {
 	if (typeof inputData !== 'string') {
 		throw new Error('WKCErrorInvalidInput');
 	}

@@ -365,28 +365,28 @@ describe('WKCMetalSubscriptionsNeedingFetch', function testWKCMetalSubscriptions
 
 });
 
-describe('WKCMetalSubscriptionsScrape', function testWKCMetalSubscriptionsScrape() {
+describe('WKCSubscriptionsMetalRequestParameters', function testWKCSubscriptionsMetalRequestParameters() {
 
 	it('throws error if param2 not string', function() {
 		assert.throws(function() {
-			metalLibrary.WKCMetalSubscriptionsScrape(WKCTestingMongoClient, null, function () {});
+			metalLibrary.WKCSubscriptionsMetalRequestParameters(WKCTestingMongoClient, null, function () {});
 		}, /WKCErrorInvalidInput/);
 	});
 
 	it('throws error if param3 not function', function() {
 		assert.throws(function() {
-			metalLibrary.WKCMetalSubscriptionsScrape(WKCTestingMongoClient, '', null);
+			metalLibrary.WKCSubscriptionsMetalRequestParameters(WKCTestingMongoClient, '', null);
 		}, /WKCErrorInvalidInput/);
 	});
 
 	it('throws error if param3 not object', function() {
 		assert.throws(function() {
-			metalLibrary.WKCMetalSubscriptionsScrape(WKCTestingMongoClient, '', function() {}, null);
+			metalLibrary.WKCSubscriptionsMetalRequestParameters(WKCTestingMongoClient, '', function() {}, null);
 		}, /WKCErrorInvalidInput/);
 	});
 
 	it('returns parameters', function(done) {
-		metalLibrary.WKCMetalSubscriptionsScrape(WKCTestingMongoClient, 'alfa', function(err, responseJSON) {
+		metalLibrary.WKCSubscriptionsMetalRequestParameters(WKCTestingMongoClient, 'alfa', function(err, responseJSON) {
 			assert.deepEqual(responseJSON, {
 				method: 'GET',
 				uri: 'alfa',
@@ -403,7 +403,7 @@ describe('WKCMetalSubscriptionsScrape', function testWKCMetalSubscriptionsScrape
 				WKCSettingKey: 'kWKCSettingKeyCustomTwitterToken',
 				WKCSettingValue: 'bravo',
 			}, function(err, result) {
-				metalLibrary.WKCMetalSubscriptionsScrape(WKCTestingMongoClient, 'alfa', function(err, responseJSON) {
+				metalLibrary.WKCSubscriptionsMetalRequestParameters(WKCTestingMongoClient, 'alfa', function(err, responseJSON) {
 					assert.deepEqual(responseJSON, {
 						method: 'GET',
 						uri: 'alfa',
