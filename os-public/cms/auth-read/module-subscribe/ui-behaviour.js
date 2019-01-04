@@ -178,8 +178,6 @@
 	//_ commandsConfirmURLFeedRSS
 
 	moi.commandsConfirmURLFeedRSS = function (inputData, parsedXML) {
-		moi.reactPreviewFeedItems([].slice.call(parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('item')));
-
 		moi.reactConfirmationFormName(stringContentForFirstElement(parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('title')));
 
 		moi.reactConfirmationFormBlurb(stringContentForFirstElement(parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('description')));
@@ -187,6 +185,8 @@
 		moi.reactConfirmationFormType(OLSKPublicConstants.WKCSubscriptionHandlerFeedRSS);
 
 		moi.reactConfirmationPreviewHeadingType(OLSKLocalized('WKCReadModuleSubscribeConfirmationPreviewHeadingTypeFeedRSSText'));
+
+		moi.reactConfirmationPreviewArticles(WKCResponseParser.WKCResponseParserArticlesForFeedRSS(new DOMParser(), null, new XMLSerializer().serializeToString(parsedXML.documentElement)));
 
 		moi.reactConfirmationShared();
 	};
@@ -212,7 +212,7 @@
 	moi.commandsConfirmURLTwitterProfile = function (inputData, responseJSON) {
 		const articleObjects = WKCResponseParser.WKCResponseParserArticlesForCustomTwitterTimeline(null, responseJSON);
 
-		moi.reactPreviewArticles(articleObjects);
+		moi.reactConfirmationPreviewArticles(articleObjects);
 
 		moi.reactConfirmationFormName(['Twitter', (articleObjects.length ? `@${JSON.parse(responseJSON)[0].user.screen_name}` : null)].filter(function (e) {
 			return !!e;
@@ -490,25 +490,15 @@
 		d3.select('#WKCReadModuleSubscribeConfirmationPreviewHeadingType').text(inputData);
 	};
 
-	//_ reactConfirmationShared
-
-	moi.reactConfirmationShared = function () {
-		moi.reactConfirmationVisibility(true);
-		
-		moi.reactFetchFormVisibility(false);
-
-		d3.select('#WKCReadModuleSubscribeConfirmationFormName').attr('autofocus', true);
-	};
-
 	//_ reactPreviewFeedItems
 
 	moi.reactPreviewFeedItems = function (itemElements) {
-		var selection = d3.select('#WKCReadModuleSubscribeConfirmationPreviewFeedList')
-			.selectAll('.WKCReadModuleSubscribeConfirmationPreviewFeedItem').data(itemElements);
+		var selection = d3.select('#WKCReadModuleSubscribeConfirmationPreviewArticlesList')
+			.selectAll('.WKCReadModuleSubscribeConfirmationPreviewArticlesItem').data(itemElements);
 		
 		selection.enter()
 			.append('li')
-				.attr('class', 'WKCReadModuleSubscribeConfirmationPreviewFeedItem')
+				.attr('class', 'WKCReadModuleSubscribeConfirmationPreviewArticlesItem')
 				.merge(selection)
 					.html(function(e) {
 						return stringContentForFirstElement(e.getElementsByTagName('title'));
@@ -516,18 +506,18 @@
 
 		selection.exit().remove();
 
-		d3.select('#WKCReadModuleSubscribeConfirmationPreviewFeed').classed('WKCSharedHidden', !itemElements.length);
+		d3.select('#WKCReadModuleSubscribeConfirmationPreviewArticles').classed('WKCSharedHidden', !itemElements.length);
 	};
 
-	//_ reactPreviewArticles
+	//_ reactConfirmationPreviewArticles
 
-	moi.reactPreviewArticles = function (articleObjects) {
-		var selection = d3.select('#WKCReadModuleSubscribeConfirmationPreviewFeedList')
-			.selectAll('.WKCReadModuleSubscribeConfirmationPreviewFeedItem').data(articleObjects);
+	moi.reactConfirmationPreviewArticles = function (articleObjects) {
+		var selection = d3.select('#WKCReadModuleSubscribeConfirmationPreviewArticlesList')
+			.selectAll('.WKCReadModuleSubscribeConfirmationPreviewArticlesItem').data(articleObjects);
 		
 		selection.enter()
 			.append('li')
-				.attr('class', 'WKCReadModuleSubscribeConfirmationPreviewFeedItem')
+				.attr('class', 'WKCReadModuleSubscribeConfirmationPreviewArticlesItem')
 				.merge(selection)
 					.text(function(e) {
 						return [
@@ -538,7 +528,7 @@
 
 		selection.exit().remove();
 
-		d3.select('#WKCReadModuleSubscribeConfirmationPreviewFeed').classed('WKCSharedHidden', !articleObjects.length);
+		d3.select('#WKCReadModuleSubscribeConfirmationPreviewArticles').classed('WKCSharedHidden', !articleObjects.length);
 	};
 
 	//_ reactPreviewFile
@@ -555,6 +545,16 @@
 		d3.select('#WKCReadModuleSubscribeConfirmationPreviewPage').html(inputData);
 
 		d3.select('#WKCReadModuleSubscribeConfirmationPreviewPage').classed('WKCSharedHidden', !inputData);
+	};
+
+	//_ reactConfirmationShared
+
+	moi.reactConfirmationShared = function () {
+		moi.reactConfirmationVisibility(true);
+		
+		moi.reactFetchFormVisibility(false);
+
+		d3.select('#WKCReadModuleSubscribeConfirmationFormName').attr('autofocus', true);
 	};
 
 	//# SETUP
