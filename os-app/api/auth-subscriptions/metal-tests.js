@@ -400,7 +400,7 @@ describe('WKCMetalSubscriptionsScrape', function testWKCMetalSubscriptionsScrape
 
 		it('returns parameters if WKCSubscriptionHandlerCustomTwitter', function(done) {
 			WKCTestingMongoClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_settings').insertOne({
-				WKCSettingKey: 'kWKCSettingKeyTwitterToken',
+				WKCSettingKey: 'kWKCSettingKeyCustomTwitterToken',
 				WKCSettingValue: 'bravo',
 			}, function(err, result) {
 				metalLibrary.WKCMetalSubscriptionsScrape(WKCTestingMongoClient, 'alfa', function(err, responseJSON) {

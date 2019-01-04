@@ -10,15 +10,15 @@
 	(factory((global.WKCResponseParser = global.WKCResponseParser || {})));
 }(this, (function (exports) { 'use strict';
 
-	//_ WKCResponseParserInputDataIsTwitterTimeline
+	//_ WKCResponseParserInputDataIsCustomTwitterTimeline
 
-	exports.WKCResponseParserInputDataIsTwitterTimeline = function(inputData) {
+	exports.WKCResponseParserInputDataIsCustomTwitterTimeline = function(inputData) {
 		return Array.isArray(inputData);
 	};
 
-	//_ WKCResponseParserArticlesForTwitterTimeline
+	//_ WKCResponseParserArticlesForCustomTwitterTimeline
 
-	exports.WKCResponseParserArticlesForTwitterTimeline = function(oldBody, newBody) {
+	exports.WKCResponseParserArticlesForCustomTwitterTimeline = function(oldBody, newBody) {
 		if (typeof newBody !== 'string') {
 			throw new Error('WKCErrorInvalidInput');
 		}

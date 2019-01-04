@@ -119,8 +119,8 @@
 			} : {})),
 		})
 		.then(function(responseJSON) {
-			if (responseJSON.error === 'WKCErrorTwitterMissingToken') {
-				return moi.commandsFetchAlertErrorTwitterMissingToken();
+			if (responseJSON.error === 'WKCErrorCustomTwitterMissingToken') {
+				return moi.commandsFetchAlertErrorCustomTwitterMissingToken();
 			}
 
 			if (responseJSON.error) {
@@ -169,10 +169,10 @@
 		throw error;
 	};
 
-	//_ commandsFetchAlertErrorTwitterMissingToken
+	//_ commandsFetchAlertErrorCustomTwitterMissingToken
 
-	moi.commandsFetchAlertErrorTwitterMissingToken = function (error) {
-		window.alert(OLSKLocalized('WKCReadModuleSubscribeErrorTwitterMissingToken'));
+	moi.commandsFetchAlertErrorCustomTwitterMissingToken = function (error) {
+		window.alert(OLSKLocalized('WKCReadModuleSubscribeErrorCustomTwitterMissingToken'));
 	};
 
 	//_ commandsConfirmURLFeedRSS
@@ -200,13 +200,13 @@
 	moi.commandsConfirmURLTwitterProfile = function (inputData, responseJSON) {
 		moi.reactConfirmationType(OLSKPublicConstants.WKCSubscriptionHandlerCustomTwitter);
 
-		const articleObjects = WKCResponseParser.WKCResponseParserArticlesForTwitterTimeline(null, responseJSON);
+		const articleObjects = WKCResponseParser.WKCResponseParserArticlesForCustomTwitterTimeline(null, responseJSON);
 
 		moi.reactPreviewArticles(articleObjects);
 		
 		moi.reactPreviewShared(['Twitter', (articleObjects.length ? `@${JSON.parse(responseJSON)[0].user.screen_name}` : null)].filter(function (e) {
 			return !!e;
-		}).join(': '), articleObjects.length ? JSON.parse(responseJSON)[0].user.description : '', OLSKLocalized('WKCReadModuleSubscribePreviewTypeTwitterProfileText'));
+		}).join(': '), articleObjects.length ? JSON.parse(responseJSON)[0].user.description : '', OLSKLocalized('WKCReadModuleSubscribePreviewTypeCustomTwitterProfileText'));
 	};
 
 	//_ commandsConfirmURLFile

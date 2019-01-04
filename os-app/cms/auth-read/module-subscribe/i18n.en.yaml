@@ -1,7 +1,7 @@
 WKCReadModuleSubscribeHeadingText: Add subscription
 WKCReadModuleSubscribeFetchFormSubmitText: Fetch
 WKCReadModuleSubscribeErrorFetchText: Error fetching URL. Please check the input and try again.
-WKCReadModuleSubscribeErrorTwitterMissingToken: To subscribe to Twitter profiles, first setup your account in Settings.
+WKCReadModuleSubscribeErrorCustomTwitterMissingToken: To subscribe to Twitter profiles, first setup your account in Settings.
 WKCReadModuleSubscribeErrorCreateText: Error adding subscription. Please check the input and try again.
 WKCReadModuleSubscribeAlternativesFeedsAlertText: 'If you would like to add one of the feeds found on this page, click the corresponding button below:'
 WKCReadModuleSubscribeSuggestionsAlertText: 'Did you mean:'
@@ -16,7 +16,7 @@ WKCReadModuleSubscribeConfirmationClearButtonText: Restart
 WKCReadModuleSubscribePreviewHeadingText: Preview
 WKCReadModuleSubscribePreviewTypeFeedRSSText: RSS Feed
 WKCReadModuleSubscribePreviewTypeFeedAtomText: Atom Feed
-WKCReadModuleSubscribePreviewTypeTwitterProfileText: Twitter Profile
+WKCReadModuleSubscribePreviewTypeCustomTwitterProfileText: Twitter Profile
 WKCReadModuleSubscribePreviewTypeFileText: File
 WKCReadModuleSubscribePreviewTypePageText: Page
 WKCReadModuleSubscribeFlashFormat: Subscribed to %@

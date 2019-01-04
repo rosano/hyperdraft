@@ -65,18 +65,18 @@ describe('WKCSubscriptionHandlerCustomTwitterRequestCallback', function testWKCS
 		}, /WKCErrorInvalidInput/);
 	});
 
-	it('returns error if no kWKCSettingKeyTwitterToken', function(done) {
+	it('returns error if no kWKCSettingKeyCustomTwitterToken', function(done) {
 		modelLibrary.WKCSubscriptionHandlerCustomTwitterRequestCallback(WKCTestingMongoClient, function(err, responseJSON) {
-			assert.deepEqual(err.message, 'WKCErrorTwitterMissingToken');
+			assert.deepEqual(err.message, 'WKCErrorCustomTwitterMissingToken');
 			assert.deepEqual(err.responseJSON, undefined);
 
 			done();
 		});
 	});
 
-	it('returns kWKCSettingKeyTwitterToken', function(done) {
+	it('returns kWKCSettingKeyCustomTwitterToken', function(done) {
 		WKCTestingMongoClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_settings').insertOne({
-			WKCSettingKey: 'kWKCSettingKeyTwitterToken',
+			WKCSettingKey: 'kWKCSettingKeyCustomTwitterToken',
 			WKCSettingValue: 'alfa',
 		}, function(err, result) {
 			modelLibrary.WKCSubscriptionHandlerCustomTwitterRequestCallback(WKCTestingMongoClient, function(err, responseJSON) {

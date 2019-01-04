@@ -43,7 +43,7 @@
 
 		var suggestionObjects = [];
 
-		suggestionObjects.push(...exports._WKCReadModuleSubscribeSuggestionsForTwitter(inputData));
+		suggestionObjects.push(...exports._WKCReadModuleSubscribeSuggestionsForCustomTwitter(inputData));
 
 		if (suggestionObjects.length) {
 			return suggestionObjects;
@@ -102,9 +102,9 @@
 		}).reverse();
 	};
 
-	//_ _WKCReadModuleSubscribeSuggestionsForTwitter
+	//_ _WKCReadModuleSubscribeSuggestionsForCustomTwitter
 
-	exports._WKCReadModuleSubscribeSuggestionsForTwitter = function (inputData) {
+	exports._WKCReadModuleSubscribeSuggestionsForCustomTwitter = function (inputData) {
 		const urlHandle = inputData.match(/https?:\/\/(www\.)?twitter\.com\/(?!(search\b))(\#\!\/)?(intent\/user\?screen_name=)?@?(\w+)/i);
 
 		if (urlHandle && urlHandle.slice(-1).pop()) {

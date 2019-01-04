@@ -44,14 +44,14 @@ exports.WKCSubscriptionHandlerCustomTwitterRequestCallback = function(databaseCl
 	}
 
 	return databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_settings').findOne({
-		WKCSettingKey: 'kWKCSettingKeyTwitterToken',
+		WKCSettingKey: 'kWKCSettingKeyCustomTwitterToken',
 	}, function(err, result) {
 		if (err) {
 			return completionHandler(err);
 		}
 
 		if (!result) {
-			return completionHandler(new Error('WKCErrorTwitterMissingToken'));
+			return completionHandler(new Error('WKCErrorCustomTwitterMissingToken'));
 		}
 
 		var settingObject = result;
