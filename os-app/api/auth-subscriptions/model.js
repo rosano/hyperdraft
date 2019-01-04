@@ -33,7 +33,7 @@ exports.WKCSubscriptionHandlerPage = function() {
 //_ WKCSubscriptionHandlerCustomTwitterTimeline
 
 exports.WKCSubscriptionHandlerCustomTwitterTimeline = function() {
-	return 'CustomTwitter';
+	return 'CustomTwitterTimeline';
 };
 
 //_ WKCSubscriptionHandlerCustomTwitterTimelineRequestCallback

@@ -52,7 +52,7 @@ describe('WKCSubscriptionHandlerPage', function testWKCSubscriptionHandlerPage()
 describe('WKCSubscriptionHandlerCustomTwitterTimeline', function testWKCSubscriptionHandlerCustomTwitterTimeline() {
 
 	it('returns constant', function() {
-		assert.strictEqual(modelLibrary.WKCSubscriptionHandlerCustomTwitterTimeline(), 'CustomTwitter');
+		assert.strictEqual(modelLibrary.WKCSubscriptionHandlerCustomTwitterTimeline(), 'CustomTwitterTimeline');
 	});
 
 });
