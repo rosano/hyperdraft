@@ -128,26 +128,26 @@
 			}
 
 			if (fetchHandler === OLSKPublicConstants.WKCSubscriptionHandlerCustomTwitter) {
-				return moi.commandsConfirmURLTwitterProfile(inputData, responseJSON.contents);
+				return moi.commandsConfirmationCustomTwitter(inputData, responseJSON.contents);
 			}
 
 			var parsedXML = (new DOMParser()).parseFromString(responseJSON.contents, 'application/xml');
 
 			if (OLSKType.OLSKTypeInputDataIsDOMDocumentRSS(parsedXML)) {
-				return moi.commandsConfirmURLFeedRSS(inputData, parsedXML);
+				return moi.commandsConfirmationFeedRSS(inputData, parsedXML);
 			}
 
 			if (OLSKType.OLSKTypeInputDataIsDOMDocumentAtom(parsedXML)) {
-				return moi.commandsConfirmURLFeedAtom(inputData, parsedXML);
+				return moi.commandsConfirmationFeedAtom(inputData, parsedXML);
 			}
 
 			var parsedHTML = (new DOMParser()).parseFromString(responseJSON.contents, 'text/html');
 
 			if (OLSKType.OLSKTypeInputDataIsDOMDocumentHTML(parsedHTML)) {
-				return moi.commandsConfirmURLPage(inputData, parsedHTML);
+				return moi.commandsConfirmationPage(inputData, parsedHTML);
 			}
 
-			return moi.commandsConfirmURLFile(inputData, responseJSON.contents);
+			return moi.commandsConfirmationFile(inputData, responseJSON.contents);
 		})
 		.catch(moi.commandsFetchAlertError)
 		.finally(function () {
@@ -175,9 +175,9 @@
 		window.alert(OLSKLocalized('WKCReadModuleSubscribeErrorCustomTwitterMissingToken'));
 	};
 
-	//_ commandsConfirmURLFeedRSS
+	//_ commandsConfirmationFeedRSS
 
-	moi.commandsConfirmURLFeedRSS = function (inputData, parsedXML) {
+	moi.commandsConfirmationFeedRSS = function (inputData, parsedXML) {
 		moi.reactConfirmationFormName(stringContentForFirstElement(parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('title')));
 
 		moi.reactConfirmationFormBlurb(stringContentForFirstElement(parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('description')));
@@ -191,9 +191,9 @@
 		moi.reactConfirmationShared();
 	};
 
-	//_ commandsConfirmURLFeedAtom
+	//_ commandsConfirmationFeedAtom
 
-	moi.commandsConfirmURLFeedAtom = function (inputData, parsedXML) {
+	moi.commandsConfirmationFeedAtom = function (inputData, parsedXML) {
 		moi.reactConfirmationFormName(stringContentForFirstElement(parsedXML.getElementsByTagName('title')));
 
 		moi.reactConfirmationFormBlurb(stringContentForFirstElement(parsedXML.getElementsByTagName('subtitle')));
@@ -207,45 +207,9 @@
 		moi.reactConfirmationShared();
 	};
 
-	//_ commandsConfirmURLTwitterProfile
+	//_ commandsConfirmationPage
 
-	moi.commandsConfirmURLTwitterProfile = function (inputData, responseJSON) {
-		const articleObjects = WKCResponseParser.WKCResponseParserArticlesForCustomTwitterTimeline(null, responseJSON);
-
-		moi.reactConfirmationPreviewArticles(articleObjects);
-
-		moi.reactConfirmationFormName(['Twitter', (articleObjects.length ? `@${JSON.parse(responseJSON)[0].user.screen_name}` : null)].filter(function (e) {
-			return !!e;
-		}).join(': '));
-
-		if (articleObjects.length) {
-			moi.reactConfirmationFormBlurb(JSON.parse(responseJSON)[0].user.description);
-		}
-		
-		moi.reactConfirmationFormType(OLSKPublicConstants.WKCSubscriptionHandlerCustomTwitter);
-
-		moi.reactConfirmationPreviewHeadingType(OLSKLocalized('WKCReadModuleSubscribeConfirmationPreviewHeadingTypeCustomTwitterProfileText'));
-
-		moi.reactConfirmationShared();
-	};
-
-	//_ commandsConfirmURLFile
-
-	moi.commandsConfirmURLFile = function (inputData, rawData) {
-		moi.reactPreviewFile(rawData);
-
-		moi.reactConfirmationFormName(inputData.match(/https?:\/\/(.*)/)[1]);
-
-		moi.reactConfirmationFormType(OLSKPublicConstants.WKCSubscriptionHandlerFile);
-
-		moi.reactConfirmationPreviewHeadingType(OLSKLocalized('WKCReadModuleSubscribeConfirmationPreviewHeadingTypeFileText'));
-
-		moi.reactConfirmationShared();
-	};
-
-	//_ commandsConfirmURLPage
-
-	moi.commandsConfirmURLPage = function (inputData, parsedHTML) {
+	moi.commandsConfirmationPage = function (inputData, parsedHTML) {
 		moi.reactAlternatives([].slice.call(parsedHTML.getElementsByTagName('link')).filter(function(e) {
 			return [
 				'application/rss+xml',
@@ -289,7 +253,7 @@
 		});
 		var showdownInstance = new showdown.Converter();
 		showdownInstance.setOption('noHeaderId', true);
-		moi.reactPreviewPage(showdownInstance.makeHtml(turndownInstance.turndown(parsedHTML.body)));
+		moi.reactConfirmationPreviewPage(showdownInstance.makeHtml(turndownInstance.turndown(parsedHTML.body)));
 
 		moi.reactConfirmationFormName(parsedHTML.getElementsByTagName('title')[0].textContent);
 
@@ -314,6 +278,42 @@
 		moi.reactConfirmationShared();
 	};
 
+	//_ commandsConfirmationFile
+
+	moi.commandsConfirmationFile = function (inputData, rawData) {
+		moi.reactConfirmationPreviewFile(rawData);
+
+		moi.reactConfirmationFormName(inputData.match(/https?:\/\/(.*)/)[1]);
+
+		moi.reactConfirmationFormType(OLSKPublicConstants.WKCSubscriptionHandlerFile);
+
+		moi.reactConfirmationPreviewHeadingType(OLSKLocalized('WKCReadModuleSubscribeConfirmationPreviewHeadingTypeFileText'));
+
+		moi.reactConfirmationShared();
+	};
+
+	//_ commandsConfirmationCustomTwitter
+
+	moi.commandsConfirmationCustomTwitter = function (inputData, responseJSON) {
+		const articleObjects = WKCResponseParser.WKCResponseParserArticlesForCustomTwitterTimeline(null, responseJSON);
+
+		moi.reactConfirmationPreviewArticles(articleObjects);
+
+		moi.reactConfirmationFormName(['Twitter', (articleObjects.length ? `@${JSON.parse(responseJSON)[0].user.screen_name}` : null)].filter(function (e) {
+			return !!e;
+		}).join(': '));
+
+		if (articleObjects.length) {
+			moi.reactConfirmationFormBlurb(JSON.parse(responseJSON)[0].user.description);
+		}
+		
+		moi.reactConfirmationFormType(OLSKPublicConstants.WKCSubscriptionHandlerCustomTwitter);
+
+		moi.reactConfirmationPreviewHeadingType(OLSKLocalized('WKCReadModuleSubscribeConfirmationPreviewHeadingTypeCustomTwitterText'));
+
+		moi.reactConfirmationShared();
+	};
+
 	//_ commandsConfirmationClear
 
 	moi.commandsConfirmationClear = function () {
@@ -322,8 +322,8 @@
 		moi.reactAlternatives([]);
 		moi.reactSuggestions([]);
 		moi.reactConfirmationPreviewArticles([]);
-		moi.reactPreviewPage('');
-		moi.reactPreviewFile('');
+		moi.reactConfirmationPreviewPage('');
+		moi.reactConfirmationPreviewFile('');
 		moi.reactConfirmationVisibility(false);
 		moi.reactFetchFormVisibility(true);
 
@@ -512,20 +512,20 @@
 		d3.select('#WKCReadModuleSubscribeConfirmationPreviewArticles').classed('WKCSharedHidden', !articleObjects.length);
 	};
 
-	//_ reactPreviewFile
+	//_ reactConfirmationPreviewPage
 
-	moi.reactPreviewFile = function (inputData) {
-		d3.select('#WKCReadModuleSubscribeConfirmationPreviewFile pre').html(inputData);
-
-		d3.select('#WKCReadModuleSubscribeConfirmationPreviewFile').classed('WKCSharedHidden', !inputData);
-	};
-
-	//_ reactPreviewPage
-
-	moi.reactPreviewPage = function (inputData) {
+	moi.reactConfirmationPreviewPage = function (inputData) {
 		d3.select('#WKCReadModuleSubscribeConfirmationPreviewPage').html(inputData);
 
 		d3.select('#WKCReadModuleSubscribeConfirmationPreviewPage').classed('WKCSharedHidden', !inputData);
+	};
+
+	//_ reactConfirmationPreviewFile
+
+	moi.reactConfirmationPreviewFile = function (inputData) {
+		d3.select('#WKCReadModuleSubscribeConfirmationPreviewFile pre').html(inputData);
+
+		d3.select('#WKCReadModuleSubscribeConfirmationPreviewFile').classed('WKCSharedHidden', !inputData);
 	};
 
 	//_ reactConfirmationShared
