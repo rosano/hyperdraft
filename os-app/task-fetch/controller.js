@@ -6,7 +6,6 @@
 
 const requestPackage = require('request');
 const jsdomPackage = require('jsdom');
-const { JSDOM } = jsdomPackage;
 
 const typeLibrary = require('OLSKType');
 
@@ -18,11 +17,11 @@ var diffLibrary = require('./diff');
 var resolveLibrary = require('./resolve');
 var responseParserLibrary = require('../_shared/WKCResponseParser/main.js');
 
-const kWKCTaskSubscriptionsUtilitiesXMLDocumentFrom = function(e) {
-	return (new (new JSDOM('')).window.DOMParser()).parseFromString(e, 'application/xml');
-};
-const kWKCTaskSubscriptionsUtilitiesHTMLDocumentFrom = function(e) {
-	return new JSDOM(e).window.document;
+
+const kConst = {
+	kWKCTaskFetchDOMParserInstance: function() {
+		return new (new jsdomPackage.JSDOM('')).window.DOMParser();
+	},
 };
 
 //_ OLSKControllerTasks
@@ -78,15 +77,15 @@ exports.WKCTaskFetch = function() {
 
 								const typeChangeError = new Error('WKCErrorParsingSubscriptionTypeChanged');
 
-								if (subscriptionObject.WKCSubscriptionHandler === apiSubscriptionsModel.WKCSubscriptionHandlerFeedRSS() && !typeLibrary.OLSKTypeInputDataIsDOMDocumentRSS(kWKCTaskSubscriptionsUtilitiesXMLDocumentFrom(body))) {
+								if (subscriptionObject.WKCSubscriptionHandler === apiSubscriptionsModel.WKCSubscriptionHandlerFeedRSS() && !typeLibrary.OLSKTypeInputDataIsDOMDocumentRSS(kConst.kWKCTaskFetchDOMParserInstance().parseFromString(body, 'application/xml'))) {
 									return (err = typeChangeError);
 								}
 
-								if (subscriptionObject.WKCSubscriptionHandler === apiSubscriptionsModel.WKCSubscriptionHandlerFeedAtom() && !typeLibrary.OLSKTypeInputDataIsDOMDocumentAtom(kWKCTaskSubscriptionsUtilitiesXMLDocumentFrom(body))) {
+								if (subscriptionObject.WKCSubscriptionHandler === apiSubscriptionsModel.WKCSubscriptionHandlerFeedAtom() && !typeLibrary.OLSKTypeInputDataIsDOMDocumentAtom(kConst.kWKCTaskFetchDOMParserInstance().parseFromString(body, 'application/xml'))) {
 									return (err = typeChangeError);
 								}
 
-								if (subscriptionObject.WKCSubscriptionHandler === apiSubscriptionsModel.WKCSubscriptionHandlerPage() && !typeLibrary.OLSKTypeInputDataIsDOMDocumentHTML(kWKCTaskSubscriptionsUtilitiesHTMLDocumentFrom(body))) {
+								if (subscriptionObject.WKCSubscriptionHandler === apiSubscriptionsModel.WKCSubscriptionHandlerPage() && !typeLibrary.OLSKTypeInputDataIsDOMDocumentHTML(new jsdomPackage.JSDOM(body).window.document)) {
 									return (err = typeChangeError);
 								}
 
@@ -95,11 +94,11 @@ exports.WKCTaskFetch = function() {
 								}
 
 								if (subscriptionObject.WKCSubscriptionHandler === apiSubscriptionsModel.WKCSubscriptionHandlerFeedRSS()) {
-									return articleObjects.push(...responseParserLibrary.WKCResponseParserArticlesForFeedRSS(subscriptionObject.WKCSubscriptionFetchContent, body));
+									return articleObjects.push(...responseParserLibrary.WKCResponseParserArticlesForFeedRSS(kConst.kWKCTaskFetchDOMParserInstance(), subscriptionObject.WKCSubscriptionFetchContent, body));
 								}
 
 								if (subscriptionObject.WKCSubscriptionHandler === apiSubscriptionsModel.WKCSubscriptionHandlerFeedAtom()) {
-									return articleObjects.push(...responseParserLibrary.WKCResponseParserArticlesForFeedAtom(subscriptionObject.WKCSubscriptionFetchContent, body));
+									return articleObjects.push(...responseParserLibrary.WKCResponseParserArticlesForFeedAtom(kConst.kWKCTaskFetchDOMParserInstance(), subscriptionObject.WKCSubscriptionFetchContent, body));
 								}
 
 								if (subscriptionObject.WKCSubscriptionHandler === apiSubscriptionsModel.WKCSubscriptionHandlerFile()) {
