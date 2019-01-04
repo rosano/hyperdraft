@@ -53,7 +53,9 @@
 
 	<% if (locals.OLSKPagePublicConstants) { %>
 	<script type="text/javascript">
-		window.OLSKPublicConstants = <%- JSON.stringify(OLSKPagePublicConstants) %>;
+		window.OLSKPublicConstants = function (inputData) {
+			return <%- JSON.stringify(OLSKPagePublicConstants) %>[inputData];
+		};
 	</script>
 	<% } %>
 

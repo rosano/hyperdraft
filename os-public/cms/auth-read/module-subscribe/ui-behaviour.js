@@ -16,7 +16,7 @@
 	var kWKCReadModuleSubscribeHandlerMap = [
 		[
 			WKCReadModuleSubscribeSuggestions.WKCReadModuleSubscribeSuggestionsTypeCustomTwitterTimeline(),
-			OLSKPublicConstants.WKCSubscriptionHandlerCustomTwitterTimeline,
+			OLSKPublicConstants('WKCSubscriptionHandlerCustomTwitterTimeline'),
 		],
 	].reduce(function (map, e) {
 		map[e.shift()] = e.pop();
@@ -127,7 +127,7 @@
 				throw new Error(responseJSON.error);
 			}
 
-			if (fetchHandler === OLSKPublicConstants.WKCSubscriptionHandlerCustomTwitterTimeline) {
+			if (fetchHandler === OLSKPublicConstants('WKCSubscriptionHandlerCustomTwitterTimeline')) {
 				return moi.commandsConfirmationCustomTwitterTimeline(inputData, responseJSON.contents);
 			}
 
@@ -182,7 +182,7 @@
 
 		moi.reactConfirmationFormBlurb(stringContentForFirstElement(parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('description')));
 		
-		moi.reactConfirmationFormType(OLSKPublicConstants.WKCSubscriptionHandlerFeedRSS);
+		moi.reactConfirmationFormType(OLSKPublicConstants('WKCSubscriptionHandlerFeedRSS'));
 
 		moi.reactConfirmationPreviewHeadingType(OLSKLocalized('WKCReadModuleSubscribeConfirmationPreviewHeadingTypeFeedRSSText'));
 
@@ -198,7 +198,7 @@
 
 		moi.reactConfirmationFormBlurb(stringContentForFirstElement(parsedXML.getElementsByTagName('subtitle')));
 		
-		moi.reactConfirmationFormType(OLSKPublicConstants.WKCSubscriptionHandlerFeedAtom);
+		moi.reactConfirmationFormType(OLSKPublicConstants('WKCSubscriptionHandlerFeedAtom'));
 
 		moi.reactConfirmationPreviewHeadingType(OLSKLocalized('WKCReadModuleSubscribeConfirmationPreviewHeadingTypeFeedAtomText'));
 
@@ -271,7 +271,7 @@
 			return e.content;
 		}).shift());
 
-		moi.reactConfirmationFormType(OLSKPublicConstants.WKCSubscriptionHandlerPage);
+		moi.reactConfirmationFormType(OLSKPublicConstants('WKCSubscriptionHandlerPage'));
 
 		moi.reactConfirmationPreviewHeadingType(OLSKLocalized('WKCReadModuleSubscribeConfirmationPreviewHeadingTypePageText'));
 
@@ -285,7 +285,7 @@
 
 		moi.reactConfirmationFormName(inputData.match(/https?:\/\/(.*)/)[1]);
 
-		moi.reactConfirmationFormType(OLSKPublicConstants.WKCSubscriptionHandlerFile);
+		moi.reactConfirmationFormType(OLSKPublicConstants('WKCSubscriptionHandlerFile'));
 
 		moi.reactConfirmationPreviewHeadingType(OLSKLocalized('WKCReadModuleSubscribeConfirmationPreviewHeadingTypeFileText'));
 
@@ -307,7 +307,7 @@
 			moi.reactConfirmationFormBlurb(JSON.parse(responseJSON)[0].user.description);
 		}
 		
-		moi.reactConfirmationFormType(OLSKPublicConstants.WKCSubscriptionHandlerCustomTwitterTimeline);
+		moi.reactConfirmationFormType(OLSKPublicConstants('WKCSubscriptionHandlerCustomTwitterTimeline'));
 
 		moi.reactConfirmationPreviewHeadingType(OLSKLocalized('WKCReadModuleSubscribeConfirmationPreviewHeadingTypeCustomTwitterTimelineText'));
 
