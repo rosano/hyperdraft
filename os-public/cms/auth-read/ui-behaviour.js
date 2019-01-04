@@ -696,6 +696,7 @@
 
 			d3.select(this)
 				.attr('width', null)
+				.style('width', null)
 				.style('max-width', '100%')
 				.style('height', 'auto');
 		});
