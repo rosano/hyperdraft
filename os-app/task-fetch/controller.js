@@ -29,15 +29,15 @@ const kWKCTaskSubscriptionsUtilitiesHTMLDocumentFrom = function(e) {
 
 exports.OLSKControllerTasks = function() {
 	return [
-		exports.WKCTaskScrape(),
+		exports.WKCTaskFetch(),
 	];
 };
 
-//_ WKCTaskScrape
+//_ WKCTaskFetch
 
-exports.WKCTaskScrape = function() {
+exports.WKCTaskFetch = function() {
 	var taskObject = {
-		OLSKTaskName: 'WKCTaskScrape',
+		OLSKTaskName: 'WKCTaskFetch',
 		OLSKTaskFireTimeInterval: process.env.NODE_ENV === 'production' ? 60 : 1,
 		OLSKTaskFireLimit: process.env.NODE_ENV === 'production' ? Infinity : 1,
 		OLSKTaskShouldBePerformed: function() {
@@ -59,7 +59,7 @@ exports.WKCTaskScrape = function() {
 						return requestPackage(responseJSON, function(err, res, body) {
 							var articleObjects = [];
 
-							(function WKCTaskScrapeProcess() {
+							(function WKCTaskFetchProcess() {
 								if (error) {
 									err = error;
 									return;
