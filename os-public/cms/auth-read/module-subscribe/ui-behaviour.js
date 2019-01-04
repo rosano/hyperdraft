@@ -178,36 +178,34 @@
 	//_ commandsConfirmURLFeedRSS
 
 	moi.commandsConfirmURLFeedRSS = function (inputData, parsedXML) {
-		moi.reactConfirmationType(OLSKPublicConstants.WKCSubscriptionHandlerFeedRSS);
-
 		moi.reactPreviewFeedItems([].slice.call(parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('item')));
 
 		moi.reactConfirmationFormName(stringContentForFirstElement(parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('title')));
 
 		moi.reactConfirmationFormBlurb(stringContentForFirstElement(parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('description')));
 		
+		moi.reactConfirmationFormType(OLSKPublicConstants.WKCSubscriptionHandlerFeedRSS);
+
 		moi.reactPreviewShared(OLSKLocalized('WKCReadModuleSubscribeConfirmationPreviewTypeFeedRSSText'));
 	};
 
 	//_ commandsConfirmURLFeedAtom
 
 	moi.commandsConfirmURLFeedAtom = function (inputData, parsedXML) {
-		moi.reactConfirmationType(OLSKPublicConstants.WKCSubscriptionHandlerFeedAtom);
-
 		moi.reactPreviewFeedItems([].slice.call(parsedXML.getElementsByTagName('entry')));
 
 		moi.reactConfirmationFormName(stringContentForFirstElement(parsedXML.getElementsByTagName('title')));
 
 		moi.reactConfirmationFormBlurb(stringContentForFirstElement(parsedXML.getElementsByTagName('subtitle')));
 		
+		moi.reactConfirmationFormType(OLSKPublicConstants.WKCSubscriptionHandlerFeedAtom);
+
 		moi.reactPreviewShared(OLSKLocalized('WKCReadModuleSubscribeConfirmationPreviewTypeFeedAtomText'));
 	};
 
 	//_ commandsConfirmURLTwitterProfile
 
 	moi.commandsConfirmURLTwitterProfile = function (inputData, responseJSON) {
-		moi.reactConfirmationType(OLSKPublicConstants.WKCSubscriptionHandlerCustomTwitter);
-
 		const articleObjects = WKCResponseParser.WKCResponseParserArticlesForCustomTwitterTimeline(null, responseJSON);
 
 		moi.reactPreviewArticles(articleObjects);
@@ -220,26 +218,26 @@
 			moi.reactConfirmationFormBlurb(JSON.parse(responseJSON)[0].user.description);
 		}
 		
+		moi.reactConfirmationFormType(OLSKPublicConstants.WKCSubscriptionHandlerCustomTwitter);
+
 		moi.reactPreviewShared(OLSKLocalized('WKCReadModuleSubscribeConfirmationPreviewTypeCustomTwitterProfileText'));
 	};
 
 	//_ commandsConfirmURLFile
 
 	moi.commandsConfirmURLFile = function (inputData, rawData) {
-		moi.reactConfirmationType(OLSKPublicConstants.WKCSubscriptionHandlerFile);
-		
 		moi.reactPreviewFile(rawData);
 
 		moi.reactConfirmationFormName(inputData.match(/https?:\/\/(.*)/)[1]);
 
+		moi.reactConfirmationFormType(OLSKPublicConstants.WKCSubscriptionHandlerFile);
+		
 		moi.reactPreviewShared(OLSKLocalized('WKCReadModuleSubscribeConfirmationPreviewTypeFileText'));
 	};
 
 	//_ commandsConfirmURLPage
 
 	moi.commandsConfirmURLPage = function (inputData, parsedHTML) {
-		moi.reactConfirmationType(OLSKPublicConstants.WKCSubscriptionHandlerPage);
-		
 		moi.reactAlternatives([].slice.call(parsedHTML.getElementsByTagName('link')).filter(function(e) {
 			return [
 				'application/rss+xml',
@@ -301,6 +299,8 @@
 			return e.content;
 		}).shift());
 
+		moi.reactConfirmationFormType(OLSKPublicConstants.WKCSubscriptionHandlerPage);
+		
 		moi.reactPreviewShared(OLSKLocalized('WKCReadModuleSubscribeConfirmationPreviewTypePageText'));
 	};
 
@@ -468,9 +468,9 @@
 		d3.select('#WKCReadModuleSubscribeConfirmationFormBlurb').property('value', inputData)
 	};
 
-	//_ reactConfirmationType
+	//_ reactConfirmationFormType
 
-	moi.reactConfirmationType = function (inputData) {
+	moi.reactConfirmationFormType = function (inputData) {
 		d3.select('#WKCReadModuleSubscribeConfirmationFormType').property('value', inputData);
 	};
 
