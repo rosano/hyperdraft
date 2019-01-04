@@ -19,4 +19,5 @@ WKCReadModuleSubscribeConfirmationPreviewHeadingTypeFeedAtomText: Atom Feed
 WKCReadModuleSubscribeConfirmationPreviewHeadingTypeCustomTwitterTimelineText: Twitter Timeline
 WKCReadModuleSubscribeConfirmationPreviewHeadingTypeFileText: File
 WKCReadModuleSubscribeConfirmationPreviewHeadingTypePageText: Page
+WKCReadModuleSubscribeConfirmationFrequencyFormat: '%@ per week'
 WKCReadModuleSubscribeFlashFormat: Subscribed to %@

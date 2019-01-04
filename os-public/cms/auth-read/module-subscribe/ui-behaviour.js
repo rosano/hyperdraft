@@ -493,6 +493,10 @@
 	//_ reactConfirmationPreviewArticles
 
 	moi.reactConfirmationPreviewArticles = function (articleObjects) {
+		articleObjects = articleObjects.sort(function (a, b) {
+			return a.WKCArticlePublishDate < b.WKCArticlePublishDate;
+		});
+
 		var selection = d3.select('#WKCReadModuleSubscribeConfirmationPreviewArticlesList')
 			.selectAll('.WKCReadModuleSubscribeConfirmationPreviewArticlesItem').data(articleObjects);
 		
@@ -510,6 +514,24 @@
 		selection.exit().remove();
 
 		d3.select('#WKCReadModuleSubscribeConfirmationPreviewArticles').classed('WKCSharedHidden', !articleObjects.length);
+
+		d3.select('#WKCReadModuleSubscribeConfirmationFrequency').classed('WKCSharedHidden', articleObjects.length < 10);
+
+		if (articleObjects.length < 10) {
+			return;
+		}
+
+		d3.select('#WKCReadModuleSubscribeConfirmationFrequency').text(OLSKFormatted(OLSKLocalized('WKCReadModuleSubscribeConfirmationFrequencyFormat'), Math.round(articleObjects.length / articleObjects.map(function (e) {
+				return e.WKCArticlePublishDate;
+			}).filter(function (a, index, coll) {
+				return index === 0 || index === coll.length - 1
+			}).reduce(function (coll, e) {
+				if (!coll) {
+					return moment(e);
+				}
+
+				return coll.diff(moment(e), 'days')
+			}, null) * 7 * 10) / 10));
 	};
 
 	//_ reactConfirmationPreviewPage
