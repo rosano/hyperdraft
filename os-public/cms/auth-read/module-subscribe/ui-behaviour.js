@@ -186,7 +186,9 @@
 		
 		moi.reactConfirmationFormType(OLSKPublicConstants.WKCSubscriptionHandlerFeedRSS);
 
-		moi.reactPreviewShared(OLSKLocalized('WKCReadModuleSubscribeConfirmationPreviewTypeFeedRSSText'));
+		moi.reactConfirmationPreviewHeadingType(OLSKLocalized('WKCReadModuleSubscribeConfirmationPreviewHeadingTypeFeedRSSText'));
+
+		moi.reactPreviewShared();
 	};
 
 	//_ commandsConfirmURLFeedAtom
@@ -200,7 +202,9 @@
 		
 		moi.reactConfirmationFormType(OLSKPublicConstants.WKCSubscriptionHandlerFeedAtom);
 
-		moi.reactPreviewShared(OLSKLocalized('WKCReadModuleSubscribeConfirmationPreviewTypeFeedAtomText'));
+		moi.reactConfirmationPreviewHeadingType(OLSKLocalized('WKCReadModuleSubscribeConfirmationPreviewHeadingTypeFeedAtomText'));
+
+		moi.reactPreviewShared();
 	};
 
 	//_ commandsConfirmURLTwitterProfile
@@ -220,7 +224,9 @@
 		
 		moi.reactConfirmationFormType(OLSKPublicConstants.WKCSubscriptionHandlerCustomTwitter);
 
-		moi.reactPreviewShared(OLSKLocalized('WKCReadModuleSubscribeConfirmationPreviewTypeCustomTwitterProfileText'));
+		moi.reactConfirmationPreviewHeadingType(OLSKLocalized('WKCReadModuleSubscribeConfirmationPreviewHeadingTypeCustomTwitterProfileText'));
+
+		moi.reactPreviewShared();
 	};
 
 	//_ commandsConfirmURLFile
@@ -231,8 +237,10 @@
 		moi.reactConfirmationFormName(inputData.match(/https?:\/\/(.*)/)[1]);
 
 		moi.reactConfirmationFormType(OLSKPublicConstants.WKCSubscriptionHandlerFile);
-		
-		moi.reactPreviewShared(OLSKLocalized('WKCReadModuleSubscribeConfirmationPreviewTypeFileText'));
+
+		moi.reactConfirmationPreviewHeadingType(OLSKLocalized('WKCReadModuleSubscribeConfirmationPreviewHeadingTypeFileText'));
+
+		moi.reactPreviewShared();
 	};
 
 	//_ commandsConfirmURLPage
@@ -300,8 +308,10 @@
 		}).shift());
 
 		moi.reactConfirmationFormType(OLSKPublicConstants.WKCSubscriptionHandlerPage);
-		
-		moi.reactPreviewShared(OLSKLocalized('WKCReadModuleSubscribeConfirmationPreviewTypePageText'));
+
+		moi.reactConfirmationPreviewHeadingType(OLSKLocalized('WKCReadModuleSubscribeConfirmationPreviewHeadingTypePageText'));
+
+		moi.reactPreviewShared();
 	};
 
 	//_ commandsConfirmationClear
@@ -474,11 +484,15 @@
 		d3.select('#WKCReadModuleSubscribeConfirmationFormType').property('value', inputData);
 	};
 
+	//_ reactConfirmationPreviewHeadingType
+
+	moi.reactConfirmationPreviewHeadingType = function (inputData) {
+		d3.select('#WKCReadModuleSubscribeConfirmationPreviewHeadingType').text(inputData);
+	};
+
 	//_ reactPreviewShared
 
-	moi.reactPreviewShared = function (typeContent) {
-		d3.select('#WKCReadModuleSubscribeConfirmationPreviewHeadingType').html(typeContent);
-
+	moi.reactPreviewShared = function () {
 		moi.reactConfirmationVisibility(true);
 		
 		moi.reactFetchFormVisibility(false);
