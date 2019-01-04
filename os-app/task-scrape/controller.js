@@ -54,20 +54,6 @@ exports.WKCTaskScrape = function() {
 				}
 
 				return responseJSON.forEach(function(subscriptionObject) {
-					// if (subscriptionObject.WKCSubscriptionHandler !== 'CustomTwitter') {
-					// 	return;
-					// }
-
-					var options = {};
-
-					// if (subscriptionObject.WKCSubscriptionHandler === 'CustomTwitter') {
-					// 	Object.assign(options, {
-					// 		auth: {
-					// 			bearer: 'AAAAAAAAAAAAAAAAAAAAAIkOTgAAAAAA1Iz0odX7OhMJJ5%2F05AxpwoetjJA%3D1cNscxTL2nZ52MW4mojruRvPMreZikaeDUK5vzejhek2ejVILK',
-					// 		},
-					// 	});
-					// }
-
 					return apiSubscriptionsMetal.WKCMetalSubscriptionsScrape(callbackInput.OLSKLive.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, subscriptionObject.WKCSubscriptionURL, function (error, responseJSON) {
 
 						return requestPackage(responseJSON, function(err, res, body) {
