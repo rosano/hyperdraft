@@ -52,40 +52,6 @@ const stringContentForFirstElement = function (inputData) {
 	return inputData[0] ? inputData[0].textContent : '';
 };
 
-//_ WKCDiffArticlesForFeedRSS
-
-exports.WKCDiffArticlesForFeedRSS = function(oldString, newString) {
-	var parsedXML = (new (new JSDOM('')).window.DOMParser()).parseFromString(oldString, 'application/xml');
-
-	var oldIDs = (!oldString ? [] : [].slice.call(parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('item'))).map(function (e) {
-		return stringContentForFirstElement(e.getElementsByTagName('guid'));
-	});
-
-	const channelElement = (new (new JSDOM('')).window.DOMParser()).parseFromString(newString, 'application/xml').getElementsByTagName('channel')[0];
-
-	if (!channelElement) {
-		return [];
-	}
-
-	var newItems = [].slice.call(channelElement.getElementsByTagName('item'));
-
-	return newItems.filter(function(e) {
-		return oldIDs.indexOf(stringContentForFirstElement(e.getElementsByTagName('guid'))) === -1;
-	}).map(function(e) {
-		var itemContent = (stringContentForFirstElement(e.getElementsByTagName('content:encoded')) || stringContentForFirstElement(e.getElementsByTagName('description')) || '').trim();
-
-		return {
-			WKCArticleTitle: stringContentForFirstElement(e.getElementsByTagName('title')),
-			WKCArticleOriginalURL: stringContentForFirstElement(e.getElementsByTagName('link')),
-			WKCArticleOriginalGUID: stringContentForFirstElement(e.getElementsByTagName('guid')),
-			WKCArticlePublishDate: new Date(stringContentForFirstElement(e.getElementsByTagName('pubDate'))),
-			WKCArticleAuthor: stringContentForFirstElement(e.getElementsByTagName('author')),
-			WKCArticleBody: itemContent,
-			WKCArticleSnippet: exports.WKCSnippetFromText(JSDOM.fragment(itemContent).textContent),
-		};
-	});
-};
-
 //_ WKCDiffArticlesForFeedAtom
 
 exports.WKCDiffArticlesForFeedAtom = function(oldString, newString) {

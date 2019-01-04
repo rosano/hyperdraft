@@ -95,7 +95,7 @@ exports.WKCTaskScrape = function() {
 								}
 
 								if (subscriptionObject.WKCSubscriptionHandler === apiSubscriptionsModel.WKCSubscriptionHandlerFeedRSS()) {
-									return articleObjects.push(...diffLibrary.WKCDiffArticlesForFeedRSS(subscriptionObject.WKCSubscriptionFetchContent, body));
+									return articleObjects.push(...responseParserLibrary.WKCResponseParserArticlesForFeedRSS(subscriptionObject.WKCSubscriptionFetchContent, body));
 								}
 
 								if (subscriptionObject.WKCSubscriptionHandler === apiSubscriptionsModel.WKCSubscriptionHandlerFile()) {

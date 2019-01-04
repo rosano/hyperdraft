@@ -9,18 +9,6 @@ const assert = require('assert');
 var diffLibrary = require('./diff');
 
 const kTests = {
-	kTestsRSSValid: function() {
-		return '<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><item><title>bravo</title><guid>bravo</guid><description>bravo</description></item><item><title>alfa</title><guid>alfa</guid><description>alfa</description></item></channel></rss>';
-	},
-	kTestsRSSComplete: function() {
-		return '<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><item><title>alfa</title><link>https://www.cbc.ca/bravo</link><guid isPermaLink="false">charlie</guid><pubDate>Fri, 7 Dec 2018 10:03:15 EST</pubDate><author>delta</author><description><![CDATA[\
-                        <p>echo</p>\
-        ]]>\
-        </description><content:encoded><![CDATA[\
-                        <p>foxtrot</p>\
-        ]]>\
-        </content:encoded></item></channel></rss>';
-	},
 	kTestsAtomValid: function() {
 		return '<?xml version="1.0" encoding="UTF-8"?><feed xmlns="http://www.w3.org/2005/Atom"><entry><title>bravo</title><id>bravo</id><summary>bravo</summary></entry><entry><title>alfa</title><id>alfa</id><summary>alfa</summary></entry></feed>';
 	},
@@ -41,75 +29,6 @@ const kTests = {
 		return 'alfa bravo charlie delta echo foxtrot golf hotel indigo juliet kilo'.split(' ').slice(0, typeof count === 'undefined' ? Infinity : count).join('\n').concat('\n');
 	},
 };
-
-describe('WKCDiffArticlesForFeedRSS', function testWKCDiffArticlesForFeedRSS() {
-
-	it('returns none if no rss', function() {
-		assert.deepEqual(diffLibrary.WKCDiffArticlesForFeedRSS(kTests.kTestsRSSValid(), kTests.kTestsRSSValid().replace('rss', 'rssx')), []);
-	});
-
-	it('returns none if no channel', function() {
-		assert.deepEqual(diffLibrary.WKCDiffArticlesForFeedRSS(kTests.kTestsRSSValid(), kTests.kTestsRSSValid().replace('channel', 'channelx')), []);
-	});
-
-	it('returns none if no items', function() {
-		assert.deepEqual(diffLibrary.WKCDiffArticlesForFeedRSS(kTests.kTestsRSSValid(), kTests.kTestsRSSValid().replace('item', 'itemx')), []);
-	});
-
-	it('returns all if old empty', function() {
-		assert.deepEqual(diffLibrary.WKCDiffArticlesForFeedRSS(null, kTests.kTestsRSSValid()).map(function(e) {
-			return e.WKCArticleTitle;
-		}), [
-			'bravo',
-			'alfa',
-		]);
-	});
-
-	it('returns articles with new guid', function() {
-		assert.deepEqual(diffLibrary.WKCDiffArticlesForFeedRSS(kTests.kTestsRSSValid(), kTests.kTestsRSSValid().replace(/alfa/g, 'charlie')).map(function(e) {
-			return e.WKCArticleTitle;
-		}), [
-			'charlie',
-		]);
-	});
-
-	it('populates WKCArticleTitle', function() {
-		assert.strictEqual(diffLibrary.WKCDiffArticlesForFeedRSS(null, kTests.kTestsRSSComplete()).pop().WKCArticleTitle, 'alfa');
-	});
-
-	it('populates WKCArticleOriginalURL', function() {
-		assert.strictEqual(diffLibrary.WKCDiffArticlesForFeedRSS(null, kTests.kTestsRSSComplete()).pop().WKCArticleOriginalURL, 'https://www.cbc.ca/bravo');
-	});
-
-	it('populates WKCArticleOriginalGUID', function() {
-		assert.strictEqual(diffLibrary.WKCDiffArticlesForFeedRSS(null, kTests.kTestsRSSComplete()).pop().WKCArticleOriginalGUID, 'charlie');
-	});
-
-	it('populates WKCArticleOriginalGUID as string', function() {
-		assert.strictEqual(diffLibrary.WKCDiffArticlesForFeedRSS(null, kTests.kTestsRSSComplete().replace('charlie', '12345')).pop().WKCArticleOriginalGUID, '12345');
-	});
-
-	it('populates WKCArticlePublishDate', function() {
-		assert.deepEqual(diffLibrary.WKCDiffArticlesForFeedRSS(null, kTests.kTestsRSSComplete()).pop().WKCArticlePublishDate, new Date('2018-12-07T15:03:15.000Z'));
-	});
-
-	it('populates WKCArticleAuthor', function() {
-		assert.strictEqual(diffLibrary.WKCDiffArticlesForFeedRSS(null, kTests.kTestsRSSComplete()).pop().WKCArticleAuthor, 'delta');
-	});
-
-	it('populates WKCArticleBody', function() {
-		assert.strictEqual(diffLibrary.WKCDiffArticlesForFeedRSS(null, kTests.kTestsRSSComplete()).pop().WKCArticleBody, '<p>foxtrot</p>');
-	});
-
-	it('populates WKCArticleBody with description if no content:encoded', function() {
-		assert.strictEqual(diffLibrary.WKCDiffArticlesForFeedRSS(null, kTests.kTestsRSSComplete().replace(/<content:encoded>.*<\/content:encoded>/, '')).pop().WKCArticleBody, '<p>echo</p>');
-	});
-
-	it('populates WKCArticleSnippet', function() {
-		assert.strictEqual(diffLibrary.WKCDiffArticlesForFeedRSS(null, kTests.kTestsRSSComplete()).pop().WKCArticleSnippet, 'foxtrot');
-	});
-
-});
 
 describe('WKCDiffArticlesForFeedAtom', function testWKCDiffArticlesForFeedAtom() {
 
