@@ -16,7 +16,7 @@
 	var kWKCReadModuleSubscribeHandlerMap = [
 		[
 			WKCReadModuleSubscribeSuggestions.WKCReadModuleSubscribeSuggestionsTypeCustomTwitter(),
-			OLSKPublicConstants.WKCSubscriptionHandlerCustomTwitter,
+			OLSKPublicConstants.WKCSubscriptionHandlerCustomTwitterTimeline,
 		],
 	].reduce(function (map, e) {
 		map[e.shift()] = e.pop();
@@ -127,7 +127,7 @@
 				throw new Error(responseJSON.error);
 			}
 
-			if (fetchHandler === OLSKPublicConstants.WKCSubscriptionHandlerCustomTwitter) {
+			if (fetchHandler === OLSKPublicConstants.WKCSubscriptionHandlerCustomTwitterTimeline) {
 				return moi.commandsConfirmationCustomTwitter(inputData, responseJSON.contents);
 			}
 
@@ -307,7 +307,7 @@
 			moi.reactConfirmationFormBlurb(JSON.parse(responseJSON)[0].user.description);
 		}
 		
-		moi.reactConfirmationFormType(OLSKPublicConstants.WKCSubscriptionHandlerCustomTwitter);
+		moi.reactConfirmationFormType(OLSKPublicConstants.WKCSubscriptionHandlerCustomTwitterTimeline);
 
 		moi.reactConfirmationPreviewHeadingType(OLSKLocalized('WKCReadModuleSubscribeConfirmationPreviewHeadingTypeCustomTwitterText'));
 

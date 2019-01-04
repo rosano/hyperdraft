@@ -398,7 +398,7 @@ describe('WKCSubscriptionsMetalRequestParameters', function testWKCSubscriptions
 
 	context('WKCOptionHandler', function () {
 
-		it('returns parameters if WKCSubscriptionHandlerCustomTwitter', function(done) {
+		it('returns parameters if WKCSubscriptionHandlerCustomTwitterTimeline', function(done) {
 			WKCTestingMongoClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_settings').insertOne({
 				WKCSettingKey: 'kWKCSettingKeyCustomTwitterToken',
 				WKCSettingValue: 'bravo',
@@ -414,7 +414,7 @@ describe('WKCSubscriptionsMetalRequestParameters', function testWKCSubscriptions
 
 					done();
 				}, {
-					WKCOptionHandler: modelLibrary.WKCSubscriptionHandlerCustomTwitter(),
+					WKCOptionHandler: modelLibrary.WKCSubscriptionHandlerCustomTwitterTimeline(),
 				});
 			});
 		});

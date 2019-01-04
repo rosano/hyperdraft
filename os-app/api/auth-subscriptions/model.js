@@ -30,15 +30,15 @@ exports.WKCSubscriptionHandlerPage = function() {
 	return 'Page';
 };
 
-//_ WKCSubscriptionHandlerCustomTwitter
+//_ WKCSubscriptionHandlerCustomTwitterTimeline
 
-exports.WKCSubscriptionHandlerCustomTwitter = function() {
+exports.WKCSubscriptionHandlerCustomTwitterTimeline = function() {
 	return 'CustomTwitter';
 };
 
-//_ WKCSubscriptionHandlerCustomTwitterRequestCallback
+//_ WKCSubscriptionHandlerCustomTwitterTimelineRequestCallback
 
-exports.WKCSubscriptionHandlerCustomTwitterRequestCallback = function(databaseClient, completionHandler) {
+exports.WKCSubscriptionHandlerCustomTwitterTimelineRequestCallback = function(databaseClient, completionHandler) {
 	if (typeof completionHandler !== 'function') {
 		throw new Error('WKCErrorInvalidInput');
 	}
@@ -76,7 +76,7 @@ exports.WKCSubscriptionHandlers = function() {
 		exports.WKCSubscriptionHandlerFeedAtom(),
 		exports.WKCSubscriptionHandlerFile(),
 		exports.WKCSubscriptionHandlerPage(),
-		exports.WKCSubscriptionHandlerCustomTwitter(),
+		exports.WKCSubscriptionHandlerCustomTwitterTimeline(),
 	];
 };
 

@@ -49,7 +49,7 @@ describe('WKCReadAction', function testWKCReadAction() {
 				WKCSubscriptionHandlerFeedAtom: apiSubscriptionsModel.WKCSubscriptionHandlerFeedAtom(),
 				WKCSubscriptionHandlerFile: apiSubscriptionsModel.WKCSubscriptionHandlerFile(),
 				WKCSubscriptionHandlerPage: apiSubscriptionsModel.WKCSubscriptionHandlerPage(),
-				WKCSubscriptionHandlerCustomTwitter: apiSubscriptionsModel.WKCSubscriptionHandlerCustomTwitter(),
+				WKCSubscriptionHandlerCustomTwitterTimeline: apiSubscriptionsModel.WKCSubscriptionHandlerCustomTwitterTimeline(),
 			},
 		});
 	});

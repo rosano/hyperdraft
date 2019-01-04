@@ -34,7 +34,7 @@ exports.WKCReadAction = function(req, res, next) {
 			WKCSubscriptionHandlerFeedAtom: apiSubscriptionsModel.WKCSubscriptionHandlerFeedAtom(),
 			WKCSubscriptionHandlerFile: apiSubscriptionsModel.WKCSubscriptionHandlerFile(),
 			WKCSubscriptionHandlerPage: apiSubscriptionsModel.WKCSubscriptionHandlerPage(),
-			WKCSubscriptionHandlerCustomTwitter: apiSubscriptionsModel.WKCSubscriptionHandlerCustomTwitter(),
+			WKCSubscriptionHandlerCustomTwitterTimeline: apiSubscriptionsModel.WKCSubscriptionHandlerCustomTwitterTimeline(),
 		},
 	});
 };

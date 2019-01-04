@@ -245,8 +245,8 @@ exports.WKCSubscriptionsMetalRequestParameters = function(databaseClient, inputD
 		uri: inputData,
 	};
 
-	if (options && options.WKCOptionHandler === modelLibrary.WKCSubscriptionHandlerCustomTwitter()) {
-		return modelLibrary.WKCSubscriptionHandlerCustomTwitterRequestCallback(databaseClient, function (err, responseJSON) {
+	if (options && options.WKCOptionHandler === modelLibrary.WKCSubscriptionHandlerCustomTwitterTimeline()) {
+		return modelLibrary.WKCSubscriptionHandlerCustomTwitterTimelineRequestCallback(databaseClient, function (err, responseJSON) {
 			if (err) {
 				return completionHandler(err, undefined);
 			}

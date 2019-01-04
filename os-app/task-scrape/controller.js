@@ -90,7 +90,7 @@ exports.WKCTaskScrape = function() {
 									return (err = typeChangeError);
 								}
 
-								if (subscriptionObject.WKCSubscriptionHandler === apiSubscriptionsModel.WKCSubscriptionHandlerCustomTwitter() && !responseParserLibrary.WKCResponseParserInputDataIsCustomTwitterTimeline(JSON.parse(body))) {
+								if (subscriptionObject.WKCSubscriptionHandler === apiSubscriptionsModel.WKCSubscriptionHandlerCustomTwitterTimeline() && !responseParserLibrary.WKCResponseParserInputDataIsCustomTwitterTimeline(JSON.parse(body))) {
 									return (err = typeChangeError);
 								}
 
@@ -114,7 +114,7 @@ exports.WKCTaskScrape = function() {
 									}));
 								}
 
-								if (subscriptionObject.WKCSubscriptionHandler === apiSubscriptionsModel.WKCSubscriptionHandlerCustomTwitter()) {
+								if (subscriptionObject.WKCSubscriptionHandler === apiSubscriptionsModel.WKCSubscriptionHandlerCustomTwitterTimeline()) {
 									return articleObjects.push(...responseParserLibrary.WKCResponseParserArticlesForCustomTwitterTimeline(subscriptionObject.WKCSubscriptionFetchContent, body));
 								}
 							})();
