@@ -6,11 +6,15 @@
 
 const assert = require('assert');
 
-var mainModule = require('./main');
+const mainModule = require('./main.js');
+const stubsModule = require('./main-tests-stubs.js');
 
-const k = {
-	kStubResponseCustomTwitterTimelineValid: function() {
+const kStubs = {
+	kStubsResponseCustomTwitterTimelineValid: function() {
 		return "[{\"created_at\":\"Wed Oct 31 15:59:13 +0000 2018\",\"id_str\":\"alfa\",\"text\":\"bravo\",\"entities\":{\"hashtags\":[],\"symbols\":[],\"user_mentions\":[],\"urls\":[]},\"user\":{\"screen_name\":\"charlie\"}},{\"created_at\":\"Mon Oct 08 13:40:12 +0000 2018\",\"id_str\":\"delta\",\"text\":\"echo\",\"entities\":{\"hashtags\":[],\"symbols\":[],\"user_mentions\":[],\"urls\":[]},\"user\":{\"screen_name\":\"foxtrot\"}}]";
+	},
+	kStubsResponseCustomTwitterTimelineComplete: function() {
+		return stubsModule.kStubsResponseCustomTwitterTimelineComplete;
 	},
 };
 
@@ -47,15 +51,15 @@ describe('WKCResponseParserArticlesForCustomTwitterTimeline', function testWKCRe
 	});
 
 	it('returns none if identical', function() {
-		assert.deepEqual(mainModule.WKCResponseParserArticlesForCustomTwitterTimeline(k.kStubResponseCustomTwitterTimelineValid(), k.kStubResponseCustomTwitterTimelineValid()), []);
+		assert.deepEqual(mainModule.WKCResponseParserArticlesForCustomTwitterTimeline(kStubs.kStubsResponseCustomTwitterTimelineValid(), kStubs.kStubsResponseCustomTwitterTimelineValid()), []);
 	});
 
 	it('returns none if new empty', function() {
-		assert.deepEqual(mainModule.WKCResponseParserArticlesForCustomTwitterTimeline(k.kStubResponseCustomTwitterTimelineValid(), '[]'), []);
+		assert.deepEqual(mainModule.WKCResponseParserArticlesForCustomTwitterTimeline(kStubs.kStubsResponseCustomTwitterTimelineValid(), '[]'), []);
 	});
 
 	it('returns all if old empty', function() {
-		assert.deepEqual(mainModule.WKCResponseParserArticlesForCustomTwitterTimeline(null, k.kStubResponseCustomTwitterTimelineValid()).map(function(e) {
+		assert.deepEqual(mainModule.WKCResponseParserArticlesForCustomTwitterTimeline(null, kStubs.kStubsResponseCustomTwitterTimelineValid()).map(function(e) {
 			return e.WKCArticleOriginalGUID;
 		}), [
 			'alfa',
@@ -64,7 +68,7 @@ describe('WKCResponseParserArticlesForCustomTwitterTimeline', function testWKCRe
 	});
 
 	it('returns articles with new guid', function() {
-		assert.deepEqual(mainModule.WKCResponseParserArticlesForCustomTwitterTimeline(k.kStubResponseCustomTwitterTimelineValid(), k.kStubResponseCustomTwitterTimelineValid().replace(/alfa/g, 'charlie')).map(function(e) {
+		assert.deepEqual(mainModule.WKCResponseParserArticlesForCustomTwitterTimeline(kStubs.kStubsResponseCustomTwitterTimelineValid(), kStubs.kStubsResponseCustomTwitterTimelineValid().replace(/alfa/g, 'charlie')).map(function(e) {
 			return e.WKCArticleOriginalGUID;
 		}), [
 			'charlie',
@@ -72,31 +76,31 @@ describe('WKCResponseParserArticlesForCustomTwitterTimeline', function testWKCRe
 	});
 
 	it('populates WKCArticleTitle undefined', function() {
-		assert.strictEqual(mainModule.WKCResponseParserArticlesForCustomTwitterTimeline(null, k.kStubResponseCustomTwitterTimelineValid()).pop().WKCArticleTitle, undefined);
+		assert.strictEqual(mainModule.WKCResponseParserArticlesForCustomTwitterTimeline(null, kStubs.kStubsResponseCustomTwitterTimelineValid()).pop().WKCArticleTitle, undefined);
 	});
 
 	it('populates WKCArticleOriginalURL', function() {
-		assert.strictEqual(mainModule.WKCResponseParserArticlesForCustomTwitterTimeline(null, k.kStubResponseCustomTwitterTimelineValid()).pop().WKCArticleOriginalURL, 'https://twitter.com/foxtrot/status/delta');
+		assert.strictEqual(mainModule.WKCResponseParserArticlesForCustomTwitterTimeline(null, kStubs.kStubsResponseCustomTwitterTimelineValid()).pop().WKCArticleOriginalURL, 'https://twitter.com/foxtrot/status/delta');
 	});
 
 	it('populates WKCArticleOriginalGUID', function() {
-		assert.strictEqual(mainModule.WKCResponseParserArticlesForCustomTwitterTimeline(null, k.kStubResponseCustomTwitterTimelineValid()).pop().WKCArticleOriginalGUID, 'delta');
+		assert.strictEqual(mainModule.WKCResponseParserArticlesForCustomTwitterTimeline(null, kStubs.kStubsResponseCustomTwitterTimelineValid()).pop().WKCArticleOriginalGUID, 'delta');
 	});
 
 	it('populates WKCArticlePublishDate', function() {
-		assert.deepEqual(mainModule.WKCResponseParserArticlesForCustomTwitterTimeline(null, k.kStubResponseCustomTwitterTimelineValid()).pop().WKCArticlePublishDate, new Date('2018-10-08T13:40:12.000Z'));
+		assert.deepEqual(mainModule.WKCResponseParserArticlesForCustomTwitterTimeline(null, kStubs.kStubsResponseCustomTwitterTimelineValid()).pop().WKCArticlePublishDate, new Date('2018-10-08T13:40:12.000Z'));
 	});
 
 	it('populates WKCArticleAuthor undefined', function() {
-		assert.strictEqual(mainModule.WKCResponseParserArticlesForCustomTwitterTimeline(null, k.kStubResponseCustomTwitterTimelineValid()).pop().WKCArticleAuthor, undefined);
+		assert.strictEqual(mainModule.WKCResponseParserArticlesForCustomTwitterTimeline(null, kStubs.kStubsResponseCustomTwitterTimelineValid()).pop().WKCArticleAuthor, undefined);
 	});
 
 	it('populates WKCArticleBody', function() {
-		assert.strictEqual(mainModule.WKCResponseParserArticlesForCustomTwitterTimeline(null, k.kStubResponseCustomTwitterTimelineValid()).pop().WKCArticleBody, 'echo');
+		assert.strictEqual(mainModule.WKCResponseParserArticlesForCustomTwitterTimeline(null, kStubs.kStubsResponseCustomTwitterTimelineValid()).pop().WKCArticleBody, 'echo');
 	});
 
 	it('populates WKCArticleSnippet undefined', function() {
-		assert.strictEqual(mainModule.WKCResponseParserArticlesForCustomTwitterTimeline(null, k.kStubResponseCustomTwitterTimelineValid()).pop().WKCArticleSnippet, undefined);
+		assert.strictEqual(mainModule.WKCResponseParserArticlesForCustomTwitterTimeline(null, kStubs.kStubsResponseCustomTwitterTimelineValid()).pop().WKCArticleSnippet, undefined);
 	});
 
 });
