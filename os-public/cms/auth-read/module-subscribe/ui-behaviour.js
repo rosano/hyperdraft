@@ -128,7 +128,7 @@
 			}
 
 			if (fetchHandler === OLSKPublicConstants.WKCSubscriptionHandlerCustomTwitterTimeline) {
-				return moi.commandsConfirmationCustomTwitter(inputData, responseJSON.contents);
+				return moi.commandsConfirmationCustomTwitterTimeline(inputData, responseJSON.contents);
 			}
 
 			var parsedXML = (new DOMParser()).parseFromString(responseJSON.contents, 'application/xml');
@@ -292,9 +292,9 @@
 		moi.reactConfirmationShared();
 	};
 
-	//_ commandsConfirmationCustomTwitter
+	//_ commandsConfirmationCustomTwitterTimeline
 
-	moi.commandsConfirmationCustomTwitter = function (inputData, responseJSON) {
+	moi.commandsConfirmationCustomTwitterTimeline = function (inputData, responseJSON) {
 		const articleObjects = WKCResponseParser.WKCResponseParserArticlesForCustomTwitterTimeline(null, responseJSON);
 
 		moi.reactConfirmationPreviewArticles(articleObjects);
