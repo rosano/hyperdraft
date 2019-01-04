@@ -27,7 +27,7 @@
 	//_ WKCReadModuleSubscribeSuggestionsTypeCustomTwitterTimeline
 
 	exports.WKCReadModuleSubscribeSuggestionsTypeCustomTwitterTimeline = function () {
-		return 'SuggestionsTypeCustomTwitter';
+		return 'SuggestionsTypeCustomTwitterTimeline';
 	};
 
 	//_ WKCReadModuleSubscribeSuggestionsFor
@@ -43,7 +43,7 @@
 
 		var suggestionObjects = [];
 
-		suggestionObjects.push(...exports._WKCReadModuleSubscribeSuggestionsForCustomTwitter(inputData));
+		suggestionObjects.push(...exports._WKCReadModuleSubscribeSuggestionsForCustomTwitterTimeline(inputData));
 
 		if (suggestionObjects.length) {
 			return suggestionObjects;
@@ -102,9 +102,9 @@
 		}).reverse();
 	};
 
-	//_ _WKCReadModuleSubscribeSuggestionsForCustomTwitter
+	//_ _WKCReadModuleSubscribeSuggestionsForCustomTwitterTimeline
 
-	exports._WKCReadModuleSubscribeSuggestionsForCustomTwitter = function (inputData) {
+	exports._WKCReadModuleSubscribeSuggestionsForCustomTwitterTimeline = function (inputData) {
 		const urlHandle = inputData.match(/https?:\/\/(www\.)?twitter\.com\/(?!(search\b))(\#\!\/)?(intent\/user\?screen_name=)?@?(\w+)/i);
 
 		if (urlHandle && urlHandle.slice(-1).pop()) {

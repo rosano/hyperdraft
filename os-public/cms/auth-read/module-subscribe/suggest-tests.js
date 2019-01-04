@@ -34,7 +34,7 @@ describe('WKCReadModuleSubscribeSuggestionsTypeSecure', function testWKCReadModu
 describe('WKCReadModuleSubscribeSuggestionsTypeCustomTwitterTimeline', function testWKCReadModuleSubscribeSuggestionsTypeCustomTwitterTimeline() {
 
 	it('returns constant', function() {
-		assert.deepEqual(suggestLibrary.WKCReadModuleSubscribeSuggestionsTypeCustomTwitterTimeline(), 'SuggestionsTypeCustomTwitter');
+		assert.deepEqual(suggestLibrary.WKCReadModuleSubscribeSuggestionsTypeCustomTwitterTimeline(), 'SuggestionsTypeCustomTwitterTimeline');
 	});
 
 });
