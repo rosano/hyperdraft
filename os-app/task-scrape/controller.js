@@ -98,6 +98,10 @@ exports.WKCTaskScrape = function() {
 									return articleObjects.push(...responseParserLibrary.WKCResponseParserArticlesForFeedRSS(subscriptionObject.WKCSubscriptionFetchContent, body));
 								}
 
+								if (subscriptionObject.WKCSubscriptionHandler === apiSubscriptionsModel.WKCSubscriptionHandlerFeedAtom()) {
+									return articleObjects.push(...responseParserLibrary.WKCResponseParserArticlesForFeedAtom(subscriptionObject.WKCSubscriptionFetchContent, body));
+								}
+
 								if (subscriptionObject.WKCSubscriptionHandler === apiSubscriptionsModel.WKCSubscriptionHandlerFile()) {
 									return articleObjects.push(...diffLibrary.WKCDiffArticlesForFile(subscriptionObject.WKCSubscriptionFetchContent, body));
 								}

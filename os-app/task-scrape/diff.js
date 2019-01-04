@@ -48,42 +48,6 @@ var showdownPackage = require('showdown');
 showdownPackage = new showdownPackage.Converter();
 showdownPackage.setOption('noHeaderId', true);
 
-const stringContentForFirstElement = function (inputData) {
-	return inputData[0] ? inputData[0].textContent : '';
-};
-
-//_ WKCDiffArticlesForFeedAtom
-
-exports.WKCDiffArticlesForFeedAtom = function(oldString, newString) {
-	var parsedXML = (new (new JSDOM('')).window.DOMParser()).parseFromString(oldString, 'application/xml');
-
-	var oldIDs = (!oldString ? [] : [].slice.call(parsedXML.getElementsByTagName('entry'))).map(function (e) {
-		return stringContentForFirstElement(e.getElementsByTagName('id'));
-	});
-
-	var newItems = [].slice.call((new (new JSDOM('')).window.DOMParser()).parseFromString(newString, 'application/xml').getElementsByTagName('entry'));
-
-	return newItems.filter(function(e) {
-		return oldIDs.indexOf(stringContentForFirstElement(e.getElementsByTagName('id'))) === -1;
-	}).map(function(e) {
-		var itemContent = (e.getElementsByTagName('content')[0] || e.getElementsByTagName('summary')[0]).innerHTML;
-
-		return {
-			WKCArticleTitle: stringContentForFirstElement(e.getElementsByTagName('title')),
-			WKCArticleOriginalURL: [].slice.call(e.getElementsByTagName('link')).sort(function (a, b) {
-				return !!a.getAttribute('rel') - !!b.getAttribute('rel');
-			}).map(function (e) {
-				return e.getAttribute('href');
-			}).shift(),
-			WKCArticleOriginalGUID: stringContentForFirstElement(e.getElementsByTagName('id')),
-			WKCArticlePublishDate: new Date(stringContentForFirstElement(e.getElementsByTagName('updated'))),
-			WKCArticleAuthor: stringContentForFirstElement(e.getElementsByTagName('author')),
-			WKCArticleBody: itemContent,
-			WKCArticleSnippet: exports.WKCSnippetFromText(JSDOM.fragment(itemContent).textContent),
-		};
-	});
-};
-
 //_ _WKCDiffArticleBodyForStrings
 
 exports._WKCDiffArticleBodyForStrings = function(oldString, newString) {

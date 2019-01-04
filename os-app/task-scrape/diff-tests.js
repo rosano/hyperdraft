@@ -9,12 +9,6 @@ const assert = require('assert');
 var diffLibrary = require('./diff');
 
 const kTests = {
-	kTestsAtomValid: function() {
-		return '<?xml version="1.0" encoding="UTF-8"?><feed xmlns="http://www.w3.org/2005/Atom"><entry><title>bravo</title><id>bravo</id><summary>bravo</summary></entry><entry><title>alfa</title><id>alfa</id><summary>alfa</summary></entry></feed>';
-	},
-	kTestsAtomComplete: function() {
-		return '<?xml version="1.0" encoding="UTF-8"?><feed xmlns="http://www.w3.org/2005/Atom"><entry><title>alfa</title><link href="https://www.cbc.ca/bravo" /><link rel="edit" href="http://example.org/golf" /><id>charlie</id><updated>2018-12-07T15:03:15Z</updated><summary>echo</summary><content type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml"><p>foxtrot</p></div></content><author><name>delta</name></author></entry></feed>';
-	},
 	kTestsHTML: function(inputData) {
 		return [
 			'<!DOCTYPE html><html><head><title>bravo</title></head><body>',
@@ -29,75 +23,6 @@ const kTests = {
 		return 'alfa bravo charlie delta echo foxtrot golf hotel indigo juliet kilo'.split(' ').slice(0, typeof count === 'undefined' ? Infinity : count).join('\n').concat('\n');
 	},
 };
-
-describe('WKCDiffArticlesForFeedAtom', function testWKCDiffArticlesForFeedAtom() {
-
-	it('returns none if no feed', function() {
-		assert.deepEqual(diffLibrary.WKCDiffArticlesForFeedAtom(kTests.kTestsAtomValid(), kTests.kTestsAtomValid().replace('feed', 'feedx')), []);
-	});
-
-	it('returns none if no items', function() {
-		assert.deepEqual(diffLibrary.WKCDiffArticlesForFeedAtom(kTests.kTestsAtomValid(), kTests.kTestsAtomValid().replace('entry', 'entryx')), []);
-	});
-
-	it('returns all if old empty', function() {
-		assert.deepEqual(diffLibrary.WKCDiffArticlesForFeedAtom(null, kTests.kTestsAtomValid()).map(function(e) {
-			return e.WKCArticleTitle;
-		}), [
-			'bravo',
-			'alfa',
-		]);
-	});
-
-	it('returns articles with new guid', function() {
-		assert.deepEqual(diffLibrary.WKCDiffArticlesForFeedAtom(kTests.kTestsAtomValid(), kTests.kTestsAtomValid().replace(/alfa/g, 'charlie')).map(function(e) {
-			return e.WKCArticleTitle;
-		}), [
-			'charlie',
-		]);
-	});
-
-	it('populates WKCArticleTitle', function() {
-		assert.strictEqual(diffLibrary.WKCDiffArticlesForFeedAtom(null, kTests.kTestsAtomComplete()).pop().WKCArticleTitle, 'alfa');
-	});
-
-	it('populates WKCArticleOriginalURL', function() {
-		assert.strictEqual(diffLibrary.WKCDiffArticlesForFeedAtom(null, kTests.kTestsAtomComplete()).pop().WKCArticleOriginalURL, 'https://www.cbc.ca/bravo');
-	});
-
-	it('populates WKCArticleOriginalURL if no neutral', function() {
-		assert.strictEqual(diffLibrary.WKCDiffArticlesForFeedAtom(null, kTests.kTestsAtomComplete().replace('<link href="https://www.cbc.ca/bravo" />', '')).pop().WKCArticleOriginalURL, 'http://example.org/golf');
-	});
-
-	it('populates WKCArticleOriginalGUID', function() {
-		assert.strictEqual(diffLibrary.WKCDiffArticlesForFeedAtom(null, kTests.kTestsAtomComplete()).pop().WKCArticleOriginalGUID, 'charlie');
-	});
-
-	it('populates WKCArticleOriginalGUID as string', function() {
-		assert.strictEqual(diffLibrary.WKCDiffArticlesForFeedAtom(null, kTests.kTestsAtomComplete().replace('charlie', '12345')).pop().WKCArticleOriginalGUID, '12345');
-	});
-
-	it('populates WKCArticlePublishDate', function() {
-		assert.deepEqual(diffLibrary.WKCDiffArticlesForFeedAtom(null, kTests.kTestsAtomComplete()).pop().WKCArticlePublishDate, new Date('2018-12-07T15:03:15.000Z'));
-	});
-
-	it('populates WKCArticleAuthor', function() {
-		assert.strictEqual(diffLibrary.WKCDiffArticlesForFeedAtom(null, kTests.kTestsAtomComplete()).pop().WKCArticleAuthor, 'delta');
-	});
-
-	it('populates WKCArticleBody', function() {
-		assert.strictEqual(diffLibrary.WKCDiffArticlesForFeedAtom(null, kTests.kTestsAtomComplete()).pop().WKCArticleBody, '<div xmlns="http://www.w3.org/1999/xhtml"><p>foxtrot</p></div>');
-	});
-
-	it('populates WKCArticleBody with description if no content', function() {
-		assert.strictEqual(diffLibrary.WKCDiffArticlesForFeedAtom(null, kTests.kTestsAtomComplete().replace(/<content type="xhtml">.*<\/content>/, '')).pop().WKCArticleBody, 'echo');
-	});
-
-	it('populates WKCArticleSnippet', function() {
-		assert.strictEqual(diffLibrary.WKCDiffArticlesForFeedAtom(null, kTests.kTestsAtomComplete()).pop().WKCArticleSnippet, 'foxtrot');
-	});
-
-});
 
 describe('_WKCDiffArticleBodyForStrings', function test_WKCDiffArticleBodyForStrings() {
 

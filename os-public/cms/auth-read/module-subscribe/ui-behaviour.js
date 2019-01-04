@@ -194,8 +194,6 @@
 	//_ commandsConfirmURLFeedAtom
 
 	moi.commandsConfirmURLFeedAtom = function (inputData, parsedXML) {
-		moi.reactPreviewFeedItems([].slice.call(parsedXML.getElementsByTagName('entry')));
-
 		moi.reactConfirmationFormName(stringContentForFirstElement(parsedXML.getElementsByTagName('title')));
 
 		moi.reactConfirmationFormBlurb(stringContentForFirstElement(parsedXML.getElementsByTagName('subtitle')));
@@ -203,6 +201,8 @@
 		moi.reactConfirmationFormType(OLSKPublicConstants.WKCSubscriptionHandlerFeedAtom);
 
 		moi.reactConfirmationPreviewHeadingType(OLSKLocalized('WKCReadModuleSubscribeConfirmationPreviewHeadingTypeFeedAtomText'));
+
+		moi.reactConfirmationPreviewArticles(WKCResponseParser.WKCResponseParserArticlesForFeedAtom(new DOMParser(), null, new XMLSerializer().serializeToString(parsedXML.documentElement)));
 
 		moi.reactConfirmationShared();
 	};
@@ -321,7 +321,7 @@
 
 		moi.reactAlternatives([]);
 		moi.reactSuggestions([]);
-		moi.reactPreviewFeedItems([]);
+		moi.reactConfirmationPreviewArticles([]);
 		moi.reactPreviewPage('');
 		moi.reactPreviewFile('');
 		moi.reactConfirmationVisibility(false);
@@ -488,25 +488,6 @@
 
 	moi.reactConfirmationPreviewHeadingType = function (inputData) {
 		d3.select('#WKCReadModuleSubscribeConfirmationPreviewHeadingType').text(inputData);
-	};
-
-	//_ reactPreviewFeedItems
-
-	moi.reactPreviewFeedItems = function (itemElements) {
-		var selection = d3.select('#WKCReadModuleSubscribeConfirmationPreviewArticlesList')
-			.selectAll('.WKCReadModuleSubscribeConfirmationPreviewArticlesItem').data(itemElements);
-		
-		selection.enter()
-			.append('li')
-				.attr('class', 'WKCReadModuleSubscribeConfirmationPreviewArticlesItem')
-				.merge(selection)
-					.html(function(e) {
-						return stringContentForFirstElement(e.getElementsByTagName('title'));
-					});
-
-		selection.exit().remove();
-
-		d3.select('#WKCReadModuleSubscribeConfirmationPreviewArticles').classed('WKCSharedHidden', !itemElements.length);
 	};
 
 	//_ reactConfirmationPreviewArticles

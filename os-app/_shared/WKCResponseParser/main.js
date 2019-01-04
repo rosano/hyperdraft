@@ -56,6 +56,46 @@
 		});
 	};
 
+	//_ WKCResponseParserArticlesForFeedAtom
+
+	exports.WKCResponseParserArticlesForFeedAtom = function(DOMParserInstance, oldString, newString) {
+		if (typeof DOMParserInstance !== 'object' || DOMParserInstance === null) {
+			throw new Error('WKCErrorInvalidInput');
+		}
+
+		if (typeof DOMParserInstance.parseFromString !== 'function') {
+			throw new Error('WKCErrorInvalidInput');
+		}
+
+		var parsedXML = DOMParserInstance.parseFromString(oldString, 'application/xml');
+
+		var oldIDs = (!oldString ? [] : [].slice.call(parsedXML.getElementsByTagName('entry'))).map(function (e) {
+			return stringContentForFirstElement(e.getElementsByTagName('id'));
+		});
+
+		var newItems = [].slice.call(DOMParserInstance.parseFromString(newString, 'application/xml').getElementsByTagName('entry'));
+
+		return newItems.filter(function(e) {
+			return oldIDs.indexOf(stringContentForFirstElement(e.getElementsByTagName('id'))) === -1;
+		}).map(function(e) {
+			var itemContent = (e.getElementsByTagName('content')[0] || e.getElementsByTagName('summary')[0]).innerHTML;
+
+			return {
+				WKCArticleTitle: stringContentForFirstElement(e.getElementsByTagName('title')),
+				WKCArticleOriginalURL: [].slice.call(e.getElementsByTagName('link')).sort(function (a, b) {
+					return !!a.getAttribute('rel') - !!b.getAttribute('rel');
+				}).map(function (e) {
+					return e.getAttribute('href');
+				}).shift(),
+				WKCArticleOriginalGUID: stringContentForFirstElement(e.getElementsByTagName('id')),
+				WKCArticlePublishDate: new Date(stringContentForFirstElement(e.getElementsByTagName('updated'))),
+				WKCArticleAuthor: stringContentForFirstElement(e.getElementsByTagName('author')),
+				WKCArticleBody: itemContent,
+				WKCArticleSnippet: exports.WKCResponseParserSnippetFromText(DOMParserInstance.parseFromString(`<div>${itemContent}</div>`, 'text/html').body.textContent),
+			};
+		});
+	};
+
 	//_ WKCResponseParserInputDataIsCustomTwitterTimeline
 
 	exports.WKCResponseParserInputDataIsCustomTwitterTimeline = function(inputData) {

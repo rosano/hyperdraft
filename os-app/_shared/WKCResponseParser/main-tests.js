@@ -27,6 +27,12 @@ const kStubs = {
         ]]>\
         </content:encoded></item></channel></rss>';
 	},
+	kStubsAtomValid: function() {
+		return '<?xml version="1.0" encoding="UTF-8"?><feed xmlns="http://www.w3.org/2005/Atom"><entry><title>bravo</title><id>bravo</id><summary>bravo</summary></entry><entry><title>alfa</title><id>alfa</id><summary>alfa</summary></entry></feed>';
+	},
+	kStubsAtomComplete: function() {
+		return '<?xml version="1.0" encoding="UTF-8"?><feed xmlns="http://www.w3.org/2005/Atom"><entry><title>alfa</title><link href="https://www.cbc.ca/bravo" /><link rel="edit" href="http://example.org/golf" /><id>charlie</id><updated>2018-12-07T15:03:15Z</updated><summary>echo</summary><content type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml"><p>foxtrot</p></div></content><author><name>delta</name></author></entry></feed>';
+	},
 	kStubsResponseCustomTwitterTimelineValid: function() {
 		return "[{\"created_at\":\"Wed Oct 31 15:59:13 +0000 2018\",\"id_str\":\"alfa\",\"text\":\"bravo\",\"entities\":{\"hashtags\":[],\"symbols\":[],\"user_mentions\":[],\"urls\":[]},\"user\":{\"screen_name\":\"charlie\"}},{\"created_at\":\"Mon Oct 08 13:40:12 +0000 2018\",\"id_str\":\"delta\",\"text\":\"echo\",\"entities\":{\"hashtags\":[],\"symbols\":[],\"user_mentions\":[],\"urls\":[]},\"user\":{\"screen_name\":\"foxtrot\"}}]";
 	},
@@ -42,13 +48,13 @@ describe('WKCResponseParserArticlesForFeedRSS', function testWKCResponseParserAr
 
 	it('throws error if param1 not object', function() {
 		assert.throws(function() {
-			mainModule.WKCResponseParserArticlesForFeedRSS(null, '[]', null);
+			mainModule.WKCResponseParserArticlesForFeedRSS(null, kStubs.kStubsRSSValid(), kStubs.kStubsRSSValid());
 		}, /WKCErrorInvalidInput/);
 	});
 
 	it('throws error if param1 missing parseFromString', function() {
 		assert.throws(function() {
-			mainModule.WKCResponseParserArticlesForFeedRSS({}, '[]', null);
+			mainModule.WKCResponseParserArticlesForFeedRSS({}, kStubs.kStubsRSSValid(), kStubs.kStubsRSSValid());
 		}, /WKCErrorInvalidInput/);
 	});
 
@@ -115,6 +121,87 @@ describe('WKCResponseParserArticlesForFeedRSS', function testWKCResponseParserAr
 
 	it('populates WKCArticleSnippet', function() {
 		assert.strictEqual(mainModule.WKCResponseParserArticlesForFeedRSS(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsRSSComplete()).pop().WKCArticleSnippet, 'foxtrot');
+	});
+
+});
+
+describe('WKCResponseParserArticlesForFeedAtom', function testWKCResponseParserArticlesForFeedAtom() {
+
+	it('throws error if param1 not object', function() {
+		assert.throws(function() {
+			mainModule.WKCResponseParserArticlesForFeedAtom(null, null, kStubs.kStubsRSSValid(), kStubs.kStubsRSSValid());
+		}, /WKCErrorInvalidInput/);
+	});
+
+	it('throws error if param1 missing parseFromString', function() {
+		assert.throws(function() {
+			mainModule.WKCResponseParserArticlesForFeedAtom({}, kStubs.kStubsRSSValid(), kStubs.kStubsRSSValid());
+		}, /WKCErrorInvalidInput/);
+	});
+
+	it('returns none if no feed', function() {
+		assert.deepEqual(mainModule.WKCResponseParserArticlesForFeedAtom(kStubs.kStubsDOMParserInstance(), kStubs.kStubsAtomValid(), kStubs.kStubsAtomValid().replace('feed', 'feedx')), []);
+	});
+
+	it('returns none if no items', function() {
+		assert.deepEqual(mainModule.WKCResponseParserArticlesForFeedAtom(kStubs.kStubsDOMParserInstance(), kStubs.kStubsAtomValid(), kStubs.kStubsAtomValid().replace('entry', 'entryx')), []);
+	});
+
+	it('returns all if old empty', function() {
+		assert.deepEqual(mainModule.WKCResponseParserArticlesForFeedAtom(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsAtomValid()).map(function(e) {
+			return e.WKCArticleTitle;
+		}), [
+			'bravo',
+			'alfa',
+		]);
+	});
+
+	it('returns articles with new guid', function() {
+		assert.deepEqual(mainModule.WKCResponseParserArticlesForFeedAtom(kStubs.kStubsDOMParserInstance(), kStubs.kStubsAtomValid(), kStubs.kStubsAtomValid().replace(/alfa/g, 'charlie')).map(function(e) {
+			return e.WKCArticleTitle;
+		}), [
+			'charlie',
+		]);
+	});
+
+	it('populates WKCArticleTitle', function() {
+		assert.strictEqual(mainModule.WKCResponseParserArticlesForFeedAtom(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsAtomComplete()).pop().WKCArticleTitle, 'alfa');
+	});
+
+	it('populates WKCArticleOriginalURL', function() {
+		assert.strictEqual(mainModule.WKCResponseParserArticlesForFeedAtom(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsAtomComplete()).pop().WKCArticleOriginalURL, 'https://www.cbc.ca/bravo');
+	});
+
+	it('populates WKCArticleOriginalURL if no neutral', function() {
+		assert.strictEqual(mainModule.WKCResponseParserArticlesForFeedAtom(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsAtomComplete().replace('<link href="https://www.cbc.ca/bravo" />', '')).pop().WKCArticleOriginalURL, 'http://example.org/golf');
+	});
+
+	it('populates WKCArticleOriginalGUID', function() {
+		assert.strictEqual(mainModule.WKCResponseParserArticlesForFeedAtom(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsAtomComplete()).pop().WKCArticleOriginalGUID, 'charlie');
+	});
+
+	it('populates WKCArticleOriginalGUID as string', function() {
+		assert.strictEqual(mainModule.WKCResponseParserArticlesForFeedAtom(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsAtomComplete().replace('charlie', '12345')).pop().WKCArticleOriginalGUID, '12345');
+	});
+
+	it('populates WKCArticlePublishDate', function() {
+		assert.deepEqual(mainModule.WKCResponseParserArticlesForFeedAtom(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsAtomComplete()).pop().WKCArticlePublishDate, new Date('2018-12-07T15:03:15.000Z'));
+	});
+
+	it('populates WKCArticleAuthor', function() {
+		assert.strictEqual(mainModule.WKCResponseParserArticlesForFeedAtom(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsAtomComplete()).pop().WKCArticleAuthor, 'delta');
+	});
+
+	it('populates WKCArticleBody', function() {
+		assert.strictEqual(mainModule.WKCResponseParserArticlesForFeedAtom(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsAtomComplete()).pop().WKCArticleBody, '<div xmlns="http://www.w3.org/1999/xhtml"><p>foxtrot</p></div>');
+	});
+
+	it('populates WKCArticleBody with description if no content', function() {
+		assert.strictEqual(mainModule.WKCResponseParserArticlesForFeedAtom(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsAtomComplete().replace(/<content type="xhtml">.*<\/content>/, '')).pop().WKCArticleBody, 'echo');
+	});
+
+	it('populates WKCArticleSnippet', function() {
+		assert.strictEqual(mainModule.WKCResponseParserArticlesForFeedAtom(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsAtomComplete()).pop().WKCArticleSnippet, 'foxtrot');
 	});
 
 });
