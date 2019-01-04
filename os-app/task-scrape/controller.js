@@ -16,6 +16,7 @@ var apiArticlesMetal = require('../api/auth-articles/metal');
 var apiSnapshotsMetal = require('../api/auth-snapshots/metal');
 var diffLibrary = require('./diff');
 var resolveLibrary = require('./resolve');
+var responseParserLibrary = require('../_shared/WKCResponseParser/main.js');
 
 const kWKCTaskSubscriptionsUtilitiesXMLDocumentFrom = function(e) {
 	return (new (new JSDOM('')).window.DOMParser()).parseFromString(e, 'application/xml');
@@ -67,98 +68,117 @@ exports.WKCTaskScrape = function() {
 					// 	});
 					// }
 
-					return requestPackage.get(subscriptionObject.WKCSubscriptionURL, options, function(err, res, body) {
-						var articleObjects = [];
+					return apiSubscriptionsMetal.WKCMetalSubscriptionsScrape(callbackInput.OLSKLive.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, subscriptionObject.WKCSubscriptionURL, function (error, responseJSON) {
 
-						(function WKCTaskScrapeProcess() {
-							if (err) {
-								return;
-							}
+						return requestPackage(responseJSON, function(err, res, body) {
+							var articleObjects = [];
 
-							if (res.statusCode === 404) {
-								return (err = new Error([
-									res.statusCode,
-									res.statusMessage,
-								].join(' ')));
-							}
-
-							const typeChangeError = new Error('WKCErrorParsingSubscriptionTypeChanged');
-
-							if (subscriptionObject.WKCSubscriptionHandler === apiSubscriptionsModel.WKCSubscriptionHandlerFeedRSS() && !typeLibrary.OLSKTypeInputDataIsDOMDocumentRSS(kWKCTaskSubscriptionsUtilitiesXMLDocumentFrom(body))) {
-								return (err = typeChangeError);
-							}
-
-							if (subscriptionObject.WKCSubscriptionHandler === apiSubscriptionsModel.WKCSubscriptionHandlerFeedAtom() && !typeLibrary.OLSKTypeInputDataIsDOMDocumentAtom(kWKCTaskSubscriptionsUtilitiesXMLDocumentFrom(body))) {
-								return (err = typeChangeError);
-							}
-
-							if (subscriptionObject.WKCSubscriptionHandler === apiSubscriptionsModel.WKCSubscriptionHandlerPage() && !typeLibrary.OLSKTypeInputDataIsDOMDocumentHTML(kWKCTaskSubscriptionsUtilitiesHTMLDocumentFrom(body))) {
-								return (err = typeChangeError);
-							}
-
-							if (subscriptionObject.WKCSubscriptionHandler === apiSubscriptionsModel.WKCSubscriptionHandlerFeedRSS()) {
-								return articleObjects.push(...diffLibrary.WKCDiffArticlesForFeedRSS(subscriptionObject.WKCSubscriptionFetchContent, body));
-							}
-
-							if (subscriptionObject.WKCSubscriptionHandler === apiSubscriptionsModel.WKCSubscriptionHandlerFile()) {
-								return articleObjects.push(...diffLibrary.WKCDiffArticlesForFile(subscriptionObject.WKCSubscriptionFetchContent, body));
-							}
-
-							if (subscriptionObject.WKCSubscriptionHandler === apiSubscriptionsModel.WKCSubscriptionHandlerPage()) {
-								return articleObjects.push(...diffLibrary.WKCDiffArticlesForPage(subscriptionObject.WKCSubscriptionFetchContent, body).map(function(e) {
-									return Object.assign(e, {
-										WKCArticleBody: resolveLibrary.WKCResolveRelativeURLs(subscriptionObject.WKCSubscriptionURL, e.WKCArticleBody),
-									});
-								}));
-							}
-						})();
-
-						if (err && subscriptionObject.WKCSubscriptionErrorMessage !== err.toString()) {
-							articleObjects.push({
-								WKCArticleTitle: 'WKCErrorAccessingSubscription',
-								WKCArticlePublishDate: new Date(),
-								WKCArticleBody: err.toString(),
-							});
-						}
-
-						return Promise.all(articleObjects.map(function(e) {
-							return new Promise(function(resolve, reject) {
-								apiArticlesMetal.WKCMetalArticlesCreate(callbackInput.OLSKLive.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, Object.assign(e, {
-									WKCArticleSubscriptionID: subscriptionObject.WKCSubscriptionID,
-								}), function(err, responseJSON) {
-									return err ? reject(err) : resolve();
-								});
-							});
-						})).then(function() {
-							return apiSubscriptionsMetal.WKCMetalSubscriptionsUpdate(callbackInput.OLSKLive.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, subscriptionObject.WKCSubscriptionID, err ? {
-								WKCSubscriptionErrorDate: new Date(),
-								WKCSubscriptionErrorMessage: err.toString(),
-							} : {
-								WKCSubscriptionFetchDate: new Date(),
-								WKCSubscriptionFetchContent: body,
-								WKCSubscriptionErrorDate: null,
-								WKCSubscriptionErrorMessage: null,
-							}, function(err, responseJSON) {
-								if (err) {
-									return console.log(err);
-								}
-
-								if (!articleObjects.length) {
+							(function WKCTaskScrapeProcess() {
+								if (error) {
+									err = error;
 									return;
 								}
 
-								return apiSnapshotsMetal.WKCSnapshotsMetalCreate(callbackInput.OLSKLive.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, {
-									WKCSnapshotSubscriptionID: subscriptionObject.WKCSubscriptionID,
-									WKCSnapshotBody: body,
+								if (err) {
+									return;
+								}
+
+								if (res.statusCode === 404) {
+									return (err = new Error([
+										res.statusCode,
+										res.statusMessage,
+									].join(' ')));
+								}
+
+								const typeChangeError = new Error('WKCErrorParsingSubscriptionTypeChanged');
+
+								if (subscriptionObject.WKCSubscriptionHandler === apiSubscriptionsModel.WKCSubscriptionHandlerFeedRSS() && !typeLibrary.OLSKTypeInputDataIsDOMDocumentRSS(kWKCTaskSubscriptionsUtilitiesXMLDocumentFrom(body))) {
+									return (err = typeChangeError);
+								}
+
+								if (subscriptionObject.WKCSubscriptionHandler === apiSubscriptionsModel.WKCSubscriptionHandlerFeedAtom() && !typeLibrary.OLSKTypeInputDataIsDOMDocumentAtom(kWKCTaskSubscriptionsUtilitiesXMLDocumentFrom(body))) {
+									return (err = typeChangeError);
+								}
+
+								if (subscriptionObject.WKCSubscriptionHandler === apiSubscriptionsModel.WKCSubscriptionHandlerPage() && !typeLibrary.OLSKTypeInputDataIsDOMDocumentHTML(kWKCTaskSubscriptionsUtilitiesHTMLDocumentFrom(body))) {
+									return (err = typeChangeError);
+								}
+
+								if (subscriptionObject.WKCSubscriptionHandler === apiSubscriptionsModel.WKCSubscriptionHandlerCustomTwitter() && !responseParserLibrary.WKCResponseParserInputDataIsTwitterTimeline(JSON.parse(body))) {
+									return (err = typeChangeError);
+								}
+
+								if (subscriptionObject.WKCSubscriptionHandler === apiSubscriptionsModel.WKCSubscriptionHandlerFeedRSS()) {
+									return articleObjects.push(...diffLibrary.WKCDiffArticlesForFeedRSS(subscriptionObject.WKCSubscriptionFetchContent, body));
+								}
+
+								if (subscriptionObject.WKCSubscriptionHandler === apiSubscriptionsModel.WKCSubscriptionHandlerFile()) {
+									return articleObjects.push(...diffLibrary.WKCDiffArticlesForFile(subscriptionObject.WKCSubscriptionFetchContent, body));
+								}
+
+								if (subscriptionObject.WKCSubscriptionHandler === apiSubscriptionsModel.WKCSubscriptionHandlerPage()) {
+									return articleObjects.push(...diffLibrary.WKCDiffArticlesForPage(subscriptionObject.WKCSubscriptionFetchContent, body).map(function(e) {
+										return Object.assign(e, {
+											WKCArticleBody: resolveLibrary.WKCResolveRelativeURLs(subscriptionObject.WKCSubscriptionURL, e.WKCArticleBody),
+										});
+									}));
+								}
+
+								if (subscriptionObject.WKCSubscriptionHandler === apiSubscriptionsModel.WKCSubscriptionHandlerCustomTwitter()) {
+									return articleObjects.push(...responseParserLibrary.WKCResponseParserArticlesForTwitterTimeline(subscriptionObject.WKCSubscriptionFetchContent, body));
+								}
+							})();
+
+							if (err && subscriptionObject.WKCSubscriptionErrorMessage !== err.toString()) {
+								articleObjects.push({
+									WKCArticleTitle: 'WKCErrorAccessingSubscription',
+									WKCArticlePublishDate: new Date(),
+									WKCArticleBody: err.toString(),
+								});
+							}
+
+							return Promise.all(articleObjects.map(function(e) {
+								return new Promise(function(resolve, reject) {
+									apiArticlesMetal.WKCMetalArticlesCreate(callbackInput.OLSKLive.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, Object.assign(e, {
+										WKCArticleSubscriptionID: subscriptionObject.WKCSubscriptionID,
+									}), function(err, responseJSON) {
+										return err ? reject(err) : resolve();
+									});
+								});
+							})).then(function() {
+								return apiSubscriptionsMetal.WKCMetalSubscriptionsUpdate(callbackInput.OLSKLive.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, subscriptionObject.WKCSubscriptionID, err ? {
+									WKCSubscriptionErrorDate: new Date(),
+									WKCSubscriptionErrorMessage: err.toString(),
+								} : {
+									WKCSubscriptionFetchDate: new Date(),
+									WKCSubscriptionFetchContent: body,
+									WKCSubscriptionErrorDate: null,
+									WKCSubscriptionErrorMessage: null,
 								}, function(err, responseJSON) {
 									if (err) {
 										return console.log(err);
 									}
+
+									if (!articleObjects.length) {
+										return;
+									}
+
+									return apiSnapshotsMetal.WKCSnapshotsMetalCreate(callbackInput.OLSKLive.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, {
+										WKCSnapshotSubscriptionID: subscriptionObject.WKCSubscriptionID,
+										WKCSnapshotBody: body,
+									}, function(err, responseJSON) {
+										if (err) {
+											return console.log(err);
+										}
+									});
 								});
+							}, function(err) {
+								console.log(err);
 							});
-						}, function(err) {
-							console.log(err);
+
 						});
+					}, {
+						WKCOptionHandler: subscriptionObject.WKCSubscriptionHandler,
 					});
 				});
 			});
