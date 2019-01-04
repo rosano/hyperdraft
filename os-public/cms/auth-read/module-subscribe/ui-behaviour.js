@@ -127,6 +127,10 @@
 				throw new Error(responseJSON.error);
 			}
 
+			if (fetchHandler === OLSKPublicConstants.WKCSubscriptionHandlerCustomTwitter) {
+				return moi.commandsConfirmURLTwitterProfile(inputData, responseJSON.contents);
+			}
+
 			var parsedXML = (new DOMParser()).parseFromString(responseJSON.contents, 'application/xml');
 
 			if (OLSKType.OLSKTypeInputDataIsDOMDocumentRSS(parsedXML)) {
@@ -189,6 +193,20 @@
 		moi.reactPreviewFeedItems([].slice.call(parsedXML.getElementsByTagName('entry')));
 		
 		moi.reactPreviewShared(stringContentForFirstElement(parsedXML.getElementsByTagName('title')), stringContentForFirstElement(parsedXML.getElementsByTagName('subtitle')), OLSKLocalized('WKCReadModuleSubscribePreviewTypeFeedAtomText'));
+	};
+
+	//_ commandsConfirmURLTwitterProfile
+
+	moi.commandsConfirmURLTwitterProfile = function (inputData, responseJSON) {
+		moi.reactConfirmationType(OLSKPublicConstants.WKCSubscriptionHandlerCustomTwitter);
+
+		const articleObjects = WKCResponseParser.WKCResponseParserArticlesForTwitterTimeline(null, responseJSON);
+
+		moi.reactPreviewArticles(articleObjects);
+		
+		moi.reactPreviewShared(['Twitter', (articleObjects.length ? `@${JSON.parse(responseJSON)[0].user.screen_name}` : null)].filter(function (e) {
+			return !!e;
+		}).join(': '), articleObjects.length ? JSON.parse(responseJSON)[0].user.description : '', OLSKLocalized('WKCReadModuleSubscribePreviewTypeTwitterProfileText'));
 	};
 
 	//_ commandsConfirmURLFile
@@ -460,6 +478,28 @@
 		selection.exit().remove();
 
 		d3.select('#WKCReadModuleSubscribePreviewFeed').classed('WKCSharedHidden', !itemElements.length);
+	};
+
+	//_ reactPreviewArticles
+
+	moi.reactPreviewArticles = function (articleObjects) {
+		var selection = d3.select('#WKCReadModuleSubscribePreviewFeedList')
+			.selectAll('.WKCReadModuleSubscribePreviewFeedItem').data(articleObjects);
+		
+		selection.enter()
+			.append('li')
+				.attr('class', 'WKCReadModuleSubscribePreviewFeedItem')
+				.merge(selection)
+					.text(function(e) {
+						return [
+							moment(e.WKCArticlePublishDate).format('MMMM Do YYYY, h:mm:ss a'),
+							e.WKCArticleTitle || e.WKCArticleBody,
+						].join(': ');
+					});
+
+		selection.exit().remove();
+
+		d3.select('#WKCReadModuleSubscribePreviewFeed').classed('WKCSharedHidden', !articleObjects.length);
 	};
 
 	//_ reactPreviewFile

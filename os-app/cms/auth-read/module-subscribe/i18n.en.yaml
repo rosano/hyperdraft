@@ -7,7 +7,7 @@ WKCReadModuleSubscribeAlternativesFeedsAlertText: 'If you would like to add one 
 WKCReadModuleSubscribeSuggestionsAlertText: 'Did you mean:'
 WKCReadModuleSubscribeSuggestionsNameTextSuggestionsTypeStandard: 'Standard Link'
 WKCReadModuleSubscribeSuggestionsNameTextSuggestionsTypeSecure: 'Secure Link'
-WKCReadModuleSubscribeSuggestionsNameTextSuggestionsTypeCustomTwitter: 'Twitter Feed'
+WKCReadModuleSubscribeSuggestionsNameTextSuggestionsTypeCustomTwitter: 'Twitter Profile'
 WKCReadModuleSubscribeConfirmationHeadingText: Confirm subscription
 WKCReadModuleSubscribeConfirmationFormNameText: Name
 WKCReadModuleSubscribeConfirmationFormBlurbText: Description
@@ -16,6 +16,7 @@ WKCReadModuleSubscribeConfirmationClearButtonText: Restart
 WKCReadModuleSubscribePreviewHeadingText: Preview
 WKCReadModuleSubscribePreviewTypeFeedRSSText: RSS Feed
 WKCReadModuleSubscribePreviewTypeFeedAtomText: Atom Feed
+WKCReadModuleSubscribePreviewTypeTwitterProfileText: Twitter Profile
 WKCReadModuleSubscribePreviewTypeFileText: File
 WKCReadModuleSubscribePreviewTypePageText: Page
 WKCReadModuleSubscribeFlashFormat: Subscribed to %@
