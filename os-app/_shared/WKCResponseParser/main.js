@@ -10,34 +10,31 @@
 	(factory((global.WKCResponseParser = global.WKCResponseParser || {})));
 }(this, (function (exports) { 'use strict';
 
-	var jsdomPackage = require('jsdom');
-	const { JSDOM } = jsdomPackage;
-
 	const stringContentForFirstElement = function (inputData) {
 		return inputData[0] ? inputData[0].textContent : '';
 	};
 
 	//_ WKCResponseParserArticlesForFeedRSS
 
-	exports.WKCResponseParserArticlesForFeedRSS = function(oldString, newString) {
-		var parsedXML = (new (new JSDOM('')).window.DOMParser()).parseFromString(oldString, 'application/xml');
+	exports.WKCResponseParserArticlesForFeedRSS = function(DOMParserInstance, oldString, newString) {
+		const parsedXML = DOMParserInstance.parseFromString(oldString, 'application/xml');
 
 		var oldIDs = (!oldString ? [] : [].slice.call(parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('item'))).map(function (e) {
 			return stringContentForFirstElement(e.getElementsByTagName('guid'));
 		});
 
-		const channelElement = (new (new JSDOM('')).window.DOMParser()).parseFromString(newString, 'application/xml').getElementsByTagName('channel')[0];
+		const channelElement = DOMParserInstance.parseFromString(newString, 'application/xml').getElementsByTagName('channel')[0];
 
 		if (!channelElement) {
 			return [];
 		}
 
-		var newItems = [].slice.call(channelElement.getElementsByTagName('item'));
+		const newItems = [].slice.call(channelElement.getElementsByTagName('item'));
 
 		return newItems.filter(function(e) {
 			return oldIDs.indexOf(stringContentForFirstElement(e.getElementsByTagName('guid'))) === -1;
 		}).map(function(e) {
-			var itemContent = (stringContentForFirstElement(e.getElementsByTagName('content:encoded')) || stringContentForFirstElement(e.getElementsByTagName('description')) || '').trim();
+			const itemContent = (stringContentForFirstElement(e.getElementsByTagName('content:encoded')) || stringContentForFirstElement(e.getElementsByTagName('description')) || '').trim();
 
 			return {
 				WKCArticleTitle: stringContentForFirstElement(e.getElementsByTagName('title')),
@@ -46,7 +43,7 @@
 				WKCArticlePublishDate: new Date(stringContentForFirstElement(e.getElementsByTagName('pubDate'))),
 				WKCArticleAuthor: stringContentForFirstElement(e.getElementsByTagName('author')),
 				WKCArticleBody: itemContent,
-				WKCArticleSnippet: exports.WKCResponseParserSnippetFromText(JSDOM.fragment(itemContent).textContent),
+				WKCArticleSnippet: exports.WKCResponseParserSnippetFromText(DOMParserInstance.parseFromString(`<div>${itemContent}</div>`, 'text/html').body.textContent),
 			};
 		});
 	};
