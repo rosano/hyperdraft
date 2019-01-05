@@ -85,7 +85,13 @@
 		return newItems.filter(function(e) {
 			return oldIDs.indexOf(stringContentForFirstElement(e.getElementsByTagName('id'))) === -1;
 		}).map(function(e) {
-			var itemContent = (e.getElementsByTagName('content')[0] || e.getElementsByTagName('summary')[0]).innerHTML;
+			var itemContent = (function () {
+				var contentString = e.getElementsByTagName('content')[0] || e.getElementsByTagName('summary')[0];
+
+				contentString = contentString ? contentString.innerHTML : '';
+
+				return contentString.trim();
+			})();
 
 			return {
 				WKCArticleTitle: stringContentForFirstElement(e.getElementsByTagName('title')),

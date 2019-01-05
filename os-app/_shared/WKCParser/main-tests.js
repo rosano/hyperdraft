@@ -200,6 +200,10 @@ describe('WKCParserArticlesForFeedAtom', function testWKCParserArticlesForFeedAt
 		assert.strictEqual(mainModule.WKCParserArticlesForFeedAtom(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsAtomComplete().replace(/<content type="xhtml">.*<\/content>/, '')).pop().WKCArticleBody, 'echo');
 	});
 
+	it('populates WKCArticleBody with empty if no element', function() {
+		assert.strictEqual(mainModule.WKCParserArticlesForFeedAtom(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsAtomValid().replace(/<summary>.*<\/summary>/g, '')).pop().WKCArticleBody, '');
+	});
+
 	it('populates WKCArticleSnippet', function() {
 		assert.strictEqual(mainModule.WKCParserArticlesForFeedAtom(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsAtomComplete()).pop().WKCArticleSnippet, 'foxtrot');
 	});
