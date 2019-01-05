@@ -205,6 +205,12 @@ describe('WKCMetalSubscriptionsSearch', function testWKCMetalSubscriptionsSearch
 		}, /WKCErrorInvalidInput/);
 	});
 
+	it('throws error if param4 not object', function() {
+		assert.throws(function() {
+			metalLibrary.WKCMetalSubscriptionsNeedingFetch(WKCTestingMongoClient, '', function() {}, null);
+		}, /WKCErrorInvalidInput/);
+	});
+
 	it('returns all if param2 empty', function(done) {
 		metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, kTesting.kTestingValidSubscription(), function(err, subscriptionObject) {
 			metalLibrary.WKCMetalSubscriptionsSearch(WKCTestingMongoClient, '', function(err, responseJSON) {
@@ -215,6 +221,38 @@ describe('WKCMetalSubscriptionsSearch', function testWKCMetalSubscriptionsSearch
 		});
 	});
 
+	context('WKCOptionExcludeWKCSubscriptionFetchContent', function () {
+
+		it('returns with WKCSubscriptionFetchContent if true', function(done) {
+			metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTesting.kTestingValidSubscription(), {
+				WKCSubscriptionFetchContent: 'alfa',
+			}), function(err, subscriptionObject1) {
+				delete subscriptionObject1.WKCSubscriptionFetchContent;
+				
+				metalLibrary.WKCMetalSubscriptionsSearch(WKCTestingMongoClient, '', function(err, responseJSON) {
+					assert.deepEqual(responseJSON, [subscriptionObject1]);
+
+					done();
+				}, {
+					WKCOptionExcludeWKCSubscriptionFetchContent: true,
+				});
+			});
+		});
+
+		it('returns without WKCSubscriptionFetchContent', function(done) {
+			metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTesting.kTestingValidSubscription(), {
+				WKCSubscriptionFetchContent: 'alfa',
+			}), function(err, subscriptionObject1) {
+				metalLibrary.WKCMetalSubscriptionsSearch(WKCTestingMongoClient, '', function(err, responseJSON) {
+					assert.deepEqual(responseJSON, [subscriptionObject1]);
+
+					done();
+				});
+			});
+		});
+		
+	});
+
 });
 
 describe('WKCMetalSubscriptionsNeedingFetch', function testWKCMetalSubscriptionsNeedingFetch() {
@@ -222,12 +260,6 @@ describe('WKCMetalSubscriptionsNeedingFetch', function testWKCMetalSubscriptions
 	it('throws error if param2 not function', function() {
 		assert.throws(function() {
 			metalLibrary.WKCMetalSubscriptionsNeedingFetch(WKCTestingMongoClient, null);
-		}, /WKCErrorInvalidInput/);
-	});
-
-	it('throws error if param3 not object', function() {
-		assert.throws(function() {
-			metalLibrary.WKCMetalSubscriptionsNeedingFetch(WKCTestingMongoClient, function() {}, null);
 		}, /WKCErrorInvalidInput/);
 	});
 
@@ -329,38 +361,6 @@ describe('WKCMetalSubscriptionsNeedingFetch', function testWKCMetalSubscriptions
 			});
 		});
 
-	});
-
-	context('WKCOptionExcludeWKCSubscriptionFetchContent', function () {
-
-		it('returns with WKCSubscriptionFetchContent if true', function(done) {
-			metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTesting.kTestingValidSubscription(), {
-				WKCSubscriptionFetchContent: 'alfa',
-			}), function(err, subscriptionObject1) {
-				delete subscriptionObject1.WKCSubscriptionFetchContent;
-				
-				metalLibrary.WKCMetalSubscriptionsNeedingFetch(WKCTestingMongoClient, function(err, responseJSON) {
-					assert.deepEqual(responseJSON, [subscriptionObject1]);
-
-					done();
-				}, {
-					WKCOptionExcludeWKCSubscriptionFetchContent: true,
-				});
-			});
-		});
-
-		it('returns without WKCSubscriptionFetchContent', function(done) {
-			metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTesting.kTestingValidSubscription(), {
-				WKCSubscriptionFetchContent: 'alfa',
-			}), function(err, subscriptionObject1) {
-				metalLibrary.WKCMetalSubscriptionsNeedingFetch(WKCTestingMongoClient, function(err, responseJSON) {
-					assert.deepEqual(responseJSON, [subscriptionObject1]);
-
-					done();
-				});
-			});
-		});
-		
 	});
 
 });

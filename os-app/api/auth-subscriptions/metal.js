@@ -154,12 +154,16 @@ exports.WKCMetalSubscriptionsDelete = function(databaseClient, inputData, comple
 
 //_ WKCMetalSubscriptionsSearch
 
-exports.WKCMetalSubscriptionsSearch = function(databaseClient, inputData, completionHandler) {
+exports.WKCMetalSubscriptionsSearch = function(databaseClient, inputData, completionHandler, options = {}) {
 	if (typeof completionHandler !== 'function') {
 		throw new Error('WKCErrorInvalidInput');
 	}
 
-	return databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_subscriptions').find({}).project(modelLibrary.WKCSubscriptionHiddenPropertyNames().reduce(function(hash, e) {
+	if (options && typeof options !== 'object' || options === null) {
+		throw new Error('WKCErrorInvalidInput');
+	}
+
+	return databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_subscriptions').find({}).project(modelLibrary.WKCSubscriptionHiddenPropertyNames().concat(options && options.WKCOptionExcludeWKCSubscriptionFetchContent ? ['WKCSubscriptionFetchContent'] : []).reduce(function(hash, e) {
 		hash[e] = 0;
 
 		return hash;
@@ -174,12 +178,8 @@ exports.WKCMetalSubscriptionsSearch = function(databaseClient, inputData, comple
 
 //_ WKCMetalSubscriptionsNeedingFetch
 
-exports.WKCMetalSubscriptionsNeedingFetch = function(databaseClient, completionHandler, options = {}) {
+exports.WKCMetalSubscriptionsNeedingFetch = function(databaseClient, completionHandler) {
 	if (typeof completionHandler !== 'function') {
-		throw new Error('WKCErrorInvalidInput');
-	}
-
-	if (options && typeof options !== 'object' || options === null) {
 		throw new Error('WKCErrorInvalidInput');
 	}
 
@@ -212,7 +212,7 @@ exports.WKCMetalSubscriptionsNeedingFetch = function(databaseClient, completionH
 			},
 		},
 		],
-	}).project(modelLibrary.WKCSubscriptionHiddenPropertyNames().concat(options && options.WKCOptionExcludeWKCSubscriptionFetchContent ? ['WKCSubscriptionFetchContent'] : []).reduce(function(hash, e) {
+	}).project(modelLibrary.WKCSubscriptionHiddenPropertyNames().reduce(function(hash, e) {
 		hash[e] = 0;
 
 		return hash;
