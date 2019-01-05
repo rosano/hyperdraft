@@ -107,6 +107,10 @@ describe('WKCParserArticlesForFeedRSS', function testWKCParserArticlesForFeedRSS
 		assert.deepEqual(mainModule.WKCParserArticlesForFeedRSS(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsRSSComplete()).pop().WKCArticlePublishDate, new Date('2018-12-07T15:03:15.000Z'));
 	});
 
+	it('populates WKCArticlePublishDate if none', function() {
+		assert.strictEqual(new Date() - mainModule.WKCParserArticlesForFeedRSS(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsRSSValid()).pop().WKCArticlePublishDate < 50, true);
+	});
+
 	it('populates WKCArticleAuthor', function() {
 		assert.strictEqual(mainModule.WKCParserArticlesForFeedRSS(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsRSSComplete()).pop().WKCArticleAuthor, 'delta');
 	});
@@ -186,6 +190,10 @@ describe('WKCParserArticlesForFeedAtom', function testWKCParserArticlesForFeedAt
 
 	it('populates WKCArticlePublishDate', function() {
 		assert.deepEqual(mainModule.WKCParserArticlesForFeedAtom(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsAtomComplete()).pop().WKCArticlePublishDate, new Date('2018-12-07T15:03:15.000Z'));
+	});
+
+	it('populates WKCArticlePublishDate if nane', function() {
+		assert.deepEqual(new Date() - mainModule.WKCParserArticlesForFeedAtom(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsAtomValid()).pop().WKCArticlePublishDate < 50, true);
 	});
 
 	it('populates WKCArticlePublishDate if published', function() {
