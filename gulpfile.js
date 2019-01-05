@@ -21,7 +21,7 @@ const NODE_MODULE_NAMES = [
 ];
 
 const INTERNAL_PATHS = [
-	'WKCResponseParser/main.js',
+	'WKCParser/main.js',
 ];
 
 gulpPackage.task('default', gulpPackage.series(function (completionHandler) {

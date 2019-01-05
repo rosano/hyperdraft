@@ -44,34 +44,34 @@ const kStubs = {
 	},
 };
 
-describe('WKCResponseParserArticlesForFeedRSS', function testWKCResponseParserArticlesForFeedRSS() {
+describe('WKCParserArticlesForFeedRSS', function testWKCParserArticlesForFeedRSS() {
 
 	it('throws error if param1 not object', function() {
 		assert.throws(function() {
-			mainModule.WKCResponseParserArticlesForFeedRSS(null, kStubs.kStubsRSSValid(), kStubs.kStubsRSSValid());
+			mainModule.WKCParserArticlesForFeedRSS(null, kStubs.kStubsRSSValid(), kStubs.kStubsRSSValid());
 		}, /WKCErrorInvalidInput/);
 	});
 
 	it('throws error if param1 missing parseFromString', function() {
 		assert.throws(function() {
-			mainModule.WKCResponseParserArticlesForFeedRSS({}, kStubs.kStubsRSSValid(), kStubs.kStubsRSSValid());
+			mainModule.WKCParserArticlesForFeedRSS({}, kStubs.kStubsRSSValid(), kStubs.kStubsRSSValid());
 		}, /WKCErrorInvalidInput/);
 	});
 
 	it('returns none if no rss', function() {
-		assert.deepEqual(mainModule.WKCResponseParserArticlesForFeedRSS(kStubs.kStubsDOMParserInstance(), kStubs.kStubsRSSValid(), kStubs.kStubsRSSValid().replace('rss', 'rssx')), []);
+		assert.deepEqual(mainModule.WKCParserArticlesForFeedRSS(kStubs.kStubsDOMParserInstance(), kStubs.kStubsRSSValid(), kStubs.kStubsRSSValid().replace('rss', 'rssx')), []);
 	});
 
 	it('returns none if no channel', function() {
-		assert.deepEqual(mainModule.WKCResponseParserArticlesForFeedRSS(kStubs.kStubsDOMParserInstance(), kStubs.kStubsRSSValid(), kStubs.kStubsRSSValid().replace('channel', 'channelx')), []);
+		assert.deepEqual(mainModule.WKCParserArticlesForFeedRSS(kStubs.kStubsDOMParserInstance(), kStubs.kStubsRSSValid(), kStubs.kStubsRSSValid().replace('channel', 'channelx')), []);
 	});
 
 	it('returns none if no items', function() {
-		assert.deepEqual(mainModule.WKCResponseParserArticlesForFeedRSS(kStubs.kStubsDOMParserInstance(), kStubs.kStubsRSSValid(), kStubs.kStubsRSSValid().replace('item', 'itemx')), []);
+		assert.deepEqual(mainModule.WKCParserArticlesForFeedRSS(kStubs.kStubsDOMParserInstance(), kStubs.kStubsRSSValid(), kStubs.kStubsRSSValid().replace('item', 'itemx')), []);
 	});
 
 	it('returns all if old empty', function() {
-		assert.deepEqual(mainModule.WKCResponseParserArticlesForFeedRSS(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsRSSValid()).map(function(e) {
+		assert.deepEqual(mainModule.WKCParserArticlesForFeedRSS(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsRSSValid()).map(function(e) {
 			return e.WKCArticleTitle;
 		}), [
 			'bravo',
@@ -80,7 +80,7 @@ describe('WKCResponseParserArticlesForFeedRSS', function testWKCResponseParserAr
 	});
 
 	it('returns articles with new guid', function() {
-		assert.deepEqual(mainModule.WKCResponseParserArticlesForFeedRSS(kStubs.kStubsDOMParserInstance(), kStubs.kStubsRSSValid(), kStubs.kStubsRSSValid().replace(/alfa/g, 'charlie')).map(function(e) {
+		assert.deepEqual(mainModule.WKCParserArticlesForFeedRSS(kStubs.kStubsDOMParserInstance(), kStubs.kStubsRSSValid(), kStubs.kStubsRSSValid().replace(/alfa/g, 'charlie')).map(function(e) {
 			return e.WKCArticleTitle;
 		}), [
 			'charlie',
@@ -88,67 +88,67 @@ describe('WKCResponseParserArticlesForFeedRSS', function testWKCResponseParserAr
 	});
 
 	it('populates WKCArticleTitle', function() {
-		assert.strictEqual(mainModule.WKCResponseParserArticlesForFeedRSS(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsRSSComplete()).pop().WKCArticleTitle, 'alfa');
+		assert.strictEqual(mainModule.WKCParserArticlesForFeedRSS(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsRSSComplete()).pop().WKCArticleTitle, 'alfa');
 	});
 
 	it('populates WKCArticleOriginalURL', function() {
-		assert.strictEqual(mainModule.WKCResponseParserArticlesForFeedRSS(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsRSSComplete()).pop().WKCArticleOriginalURL, 'https://www.cbc.ca/bravo');
+		assert.strictEqual(mainModule.WKCParserArticlesForFeedRSS(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsRSSComplete()).pop().WKCArticleOriginalURL, 'https://www.cbc.ca/bravo');
 	});
 
 	it('populates WKCArticleOriginalGUID', function() {
-		assert.strictEqual(mainModule.WKCResponseParserArticlesForFeedRSS(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsRSSComplete()).pop().WKCArticleOriginalGUID, 'charlie');
+		assert.strictEqual(mainModule.WKCParserArticlesForFeedRSS(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsRSSComplete()).pop().WKCArticleOriginalGUID, 'charlie');
 	});
 
 	it('populates WKCArticleOriginalGUID as string', function() {
-		assert.strictEqual(mainModule.WKCResponseParserArticlesForFeedRSS(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsRSSComplete().replace('charlie', '12345')).pop().WKCArticleOriginalGUID, '12345');
+		assert.strictEqual(mainModule.WKCParserArticlesForFeedRSS(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsRSSComplete().replace('charlie', '12345')).pop().WKCArticleOriginalGUID, '12345');
 	});
 
 	it('populates WKCArticlePublishDate', function() {
-		assert.deepEqual(mainModule.WKCResponseParserArticlesForFeedRSS(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsRSSComplete()).pop().WKCArticlePublishDate, new Date('2018-12-07T15:03:15.000Z'));
+		assert.deepEqual(mainModule.WKCParserArticlesForFeedRSS(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsRSSComplete()).pop().WKCArticlePublishDate, new Date('2018-12-07T15:03:15.000Z'));
 	});
 
 	it('populates WKCArticleAuthor', function() {
-		assert.strictEqual(mainModule.WKCResponseParserArticlesForFeedRSS(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsRSSComplete()).pop().WKCArticleAuthor, 'delta');
+		assert.strictEqual(mainModule.WKCParserArticlesForFeedRSS(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsRSSComplete()).pop().WKCArticleAuthor, 'delta');
 	});
 
 	it('populates WKCArticleBody', function() {
-		assert.strictEqual(mainModule.WKCResponseParserArticlesForFeedRSS(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsRSSComplete()).pop().WKCArticleBody, '<p>foxtrot</p>');
+		assert.strictEqual(mainModule.WKCParserArticlesForFeedRSS(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsRSSComplete()).pop().WKCArticleBody, '<p>foxtrot</p>');
 	});
 
 	it('populates WKCArticleBody with description if no content:encoded', function() {
-		assert.strictEqual(mainModule.WKCResponseParserArticlesForFeedRSS(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsRSSComplete().replace(/<content:encoded>.*<\/content:encoded>/, '')).pop().WKCArticleBody, '<p>echo</p>');
+		assert.strictEqual(mainModule.WKCParserArticlesForFeedRSS(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsRSSComplete().replace(/<content:encoded>.*<\/content:encoded>/, '')).pop().WKCArticleBody, '<p>echo</p>');
 	});
 
 	it('populates WKCArticleSnippet', function() {
-		assert.strictEqual(mainModule.WKCResponseParserArticlesForFeedRSS(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsRSSComplete()).pop().WKCArticleSnippet, 'foxtrot');
+		assert.strictEqual(mainModule.WKCParserArticlesForFeedRSS(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsRSSComplete()).pop().WKCArticleSnippet, 'foxtrot');
 	});
 
 });
 
-describe('WKCResponseParserArticlesForFeedAtom', function testWKCResponseParserArticlesForFeedAtom() {
+describe('WKCParserArticlesForFeedAtom', function testWKCParserArticlesForFeedAtom() {
 
 	it('throws error if param1 not object', function() {
 		assert.throws(function() {
-			mainModule.WKCResponseParserArticlesForFeedAtom(null, null, kStubs.kStubsRSSValid(), kStubs.kStubsRSSValid());
+			mainModule.WKCParserArticlesForFeedAtom(null, null, kStubs.kStubsRSSValid(), kStubs.kStubsRSSValid());
 		}, /WKCErrorInvalidInput/);
 	});
 
 	it('throws error if param1 missing parseFromString', function() {
 		assert.throws(function() {
-			mainModule.WKCResponseParserArticlesForFeedAtom({}, kStubs.kStubsRSSValid(), kStubs.kStubsRSSValid());
+			mainModule.WKCParserArticlesForFeedAtom({}, kStubs.kStubsRSSValid(), kStubs.kStubsRSSValid());
 		}, /WKCErrorInvalidInput/);
 	});
 
 	it('returns none if no feed', function() {
-		assert.deepEqual(mainModule.WKCResponseParserArticlesForFeedAtom(kStubs.kStubsDOMParserInstance(), kStubs.kStubsAtomValid(), kStubs.kStubsAtomValid().replace('feed', 'feedx')), []);
+		assert.deepEqual(mainModule.WKCParserArticlesForFeedAtom(kStubs.kStubsDOMParserInstance(), kStubs.kStubsAtomValid(), kStubs.kStubsAtomValid().replace('feed', 'feedx')), []);
 	});
 
 	it('returns none if no items', function() {
-		assert.deepEqual(mainModule.WKCResponseParserArticlesForFeedAtom(kStubs.kStubsDOMParserInstance(), kStubs.kStubsAtomValid(), kStubs.kStubsAtomValid().replace('entry', 'entryx')), []);
+		assert.deepEqual(mainModule.WKCParserArticlesForFeedAtom(kStubs.kStubsDOMParserInstance(), kStubs.kStubsAtomValid(), kStubs.kStubsAtomValid().replace('entry', 'entryx')), []);
 	});
 
 	it('returns all if old empty', function() {
-		assert.deepEqual(mainModule.WKCResponseParserArticlesForFeedAtom(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsAtomValid()).map(function(e) {
+		assert.deepEqual(mainModule.WKCParserArticlesForFeedAtom(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsAtomValid()).map(function(e) {
 			return e.WKCArticleTitle;
 		}), [
 			'bravo',
@@ -157,7 +157,7 @@ describe('WKCResponseParserArticlesForFeedAtom', function testWKCResponseParserA
 	});
 
 	it('returns articles with new guid', function() {
-		assert.deepEqual(mainModule.WKCResponseParserArticlesForFeedAtom(kStubs.kStubsDOMParserInstance(), kStubs.kStubsAtomValid(), kStubs.kStubsAtomValid().replace(/alfa/g, 'charlie')).map(function(e) {
+		assert.deepEqual(mainModule.WKCParserArticlesForFeedAtom(kStubs.kStubsDOMParserInstance(), kStubs.kStubsAtomValid(), kStubs.kStubsAtomValid().replace(/alfa/g, 'charlie')).map(function(e) {
 			return e.WKCArticleTitle;
 		}), [
 			'charlie',
@@ -165,89 +165,89 @@ describe('WKCResponseParserArticlesForFeedAtom', function testWKCResponseParserA
 	});
 
 	it('populates WKCArticleTitle', function() {
-		assert.strictEqual(mainModule.WKCResponseParserArticlesForFeedAtom(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsAtomComplete()).pop().WKCArticleTitle, 'alfa');
+		assert.strictEqual(mainModule.WKCParserArticlesForFeedAtom(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsAtomComplete()).pop().WKCArticleTitle, 'alfa');
 	});
 
 	it('populates WKCArticleOriginalURL', function() {
-		assert.strictEqual(mainModule.WKCResponseParserArticlesForFeedAtom(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsAtomComplete()).pop().WKCArticleOriginalURL, 'https://www.cbc.ca/bravo');
+		assert.strictEqual(mainModule.WKCParserArticlesForFeedAtom(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsAtomComplete()).pop().WKCArticleOriginalURL, 'https://www.cbc.ca/bravo');
 	});
 
 	it('populates WKCArticleOriginalURL if no neutral', function() {
-		assert.strictEqual(mainModule.WKCResponseParserArticlesForFeedAtom(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsAtomComplete().replace('<link href="https://www.cbc.ca/bravo" />', '')).pop().WKCArticleOriginalURL, 'http://example.org/golf');
+		assert.strictEqual(mainModule.WKCParserArticlesForFeedAtom(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsAtomComplete().replace('<link href="https://www.cbc.ca/bravo" />', '')).pop().WKCArticleOriginalURL, 'http://example.org/golf');
 	});
 
 	it('populates WKCArticleOriginalGUID', function() {
-		assert.strictEqual(mainModule.WKCResponseParserArticlesForFeedAtom(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsAtomComplete()).pop().WKCArticleOriginalGUID, 'charlie');
+		assert.strictEqual(mainModule.WKCParserArticlesForFeedAtom(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsAtomComplete()).pop().WKCArticleOriginalGUID, 'charlie');
 	});
 
 	it('populates WKCArticleOriginalGUID as string', function() {
-		assert.strictEqual(mainModule.WKCResponseParserArticlesForFeedAtom(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsAtomComplete().replace('charlie', '12345')).pop().WKCArticleOriginalGUID, '12345');
+		assert.strictEqual(mainModule.WKCParserArticlesForFeedAtom(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsAtomComplete().replace('charlie', '12345')).pop().WKCArticleOriginalGUID, '12345');
 	});
 
 	it('populates WKCArticlePublishDate', function() {
-		assert.deepEqual(mainModule.WKCResponseParserArticlesForFeedAtom(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsAtomComplete()).pop().WKCArticlePublishDate, new Date('2018-12-07T15:03:15.000Z'));
+		assert.deepEqual(mainModule.WKCParserArticlesForFeedAtom(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsAtomComplete()).pop().WKCArticlePublishDate, new Date('2018-12-07T15:03:15.000Z'));
 	});
 
 	it('populates WKCArticleAuthor', function() {
-		assert.strictEqual(mainModule.WKCResponseParserArticlesForFeedAtom(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsAtomComplete()).pop().WKCArticleAuthor, 'delta');
+		assert.strictEqual(mainModule.WKCParserArticlesForFeedAtom(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsAtomComplete()).pop().WKCArticleAuthor, 'delta');
 	});
 
 	it('populates WKCArticleBody', function() {
-		assert.strictEqual(mainModule.WKCResponseParserArticlesForFeedAtom(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsAtomComplete()).pop().WKCArticleBody, '<div xmlns="http://www.w3.org/1999/xhtml"><p>foxtrot</p></div>');
+		assert.strictEqual(mainModule.WKCParserArticlesForFeedAtom(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsAtomComplete()).pop().WKCArticleBody, '<div xmlns="http://www.w3.org/1999/xhtml"><p>foxtrot</p></div>');
 	});
 
 	it('populates WKCArticleBody with description if no content', function() {
-		assert.strictEqual(mainModule.WKCResponseParserArticlesForFeedAtom(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsAtomComplete().replace(/<content type="xhtml">.*<\/content>/, '')).pop().WKCArticleBody, 'echo');
+		assert.strictEqual(mainModule.WKCParserArticlesForFeedAtom(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsAtomComplete().replace(/<content type="xhtml">.*<\/content>/, '')).pop().WKCArticleBody, 'echo');
 	});
 
 	it('populates WKCArticleSnippet', function() {
-		assert.strictEqual(mainModule.WKCResponseParserArticlesForFeedAtom(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsAtomComplete()).pop().WKCArticleSnippet, 'foxtrot');
+		assert.strictEqual(mainModule.WKCParserArticlesForFeedAtom(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsAtomComplete()).pop().WKCArticleSnippet, 'foxtrot');
 	});
 
 });
 
-describe('WKCResponseParserInputDataIsCustomTwitterTimeline', function testWKCResponseParserInputDataIsCustomTwitterTimeline() {
+describe('WKCParserInputDataIsCustomTwitterTimeline', function testWKCParserInputDataIsCustomTwitterTimeline() {
 
 	it('returns false if not array', function() {
-		assert.strictEqual(mainModule.WKCResponseParserInputDataIsCustomTwitterTimeline(null), false);
+		assert.strictEqual(mainModule.WKCParserInputDataIsCustomTwitterTimeline(null), false);
 	});
 
 	it('returns true', function() {
-		assert.strictEqual(mainModule.WKCResponseParserInputDataIsCustomTwitterTimeline([]), true);
+		assert.strictEqual(mainModule.WKCParserInputDataIsCustomTwitterTimeline([]), true);
 	});
 
 });
 
-describe('WKCResponseParserArticlesForCustomTwitterTimeline', function testWKCResponseParserArticlesForCustomTwitterTimeline() {
+describe('WKCParserArticlesForCustomTwitterTimeline', function testWKCParserArticlesForCustomTwitterTimeline() {
 
 	it('throws error if param2 not string', function() {
 		assert.throws(function() {
-			mainModule.WKCResponseParserArticlesForCustomTwitterTimeline('[]', null);
+			mainModule.WKCParserArticlesForCustomTwitterTimeline('[]', null);
 		}, /WKCErrorInvalidInput/);
 	});
 
 	it('throws error if param1 not format', function() {
 		assert.throws(function() {
-			mainModule.WKCResponseParserArticlesForCustomTwitterTimeline('{}', '[]');
+			mainModule.WKCParserArticlesForCustomTwitterTimeline('{}', '[]');
 		}, /WKCErrorInvalidInput/);
 	});
 
 	it('throws error if param2 not format', function() {
 		assert.throws(function() {
-			mainModule.WKCResponseParserArticlesForCustomTwitterTimeline('[]', '{}');
+			mainModule.WKCParserArticlesForCustomTwitterTimeline('[]', '{}');
 		}, /WKCErrorInvalidInput/);
 	});
 
 	it('returns none if identical', function() {
-		assert.deepEqual(mainModule.WKCResponseParserArticlesForCustomTwitterTimeline(kStubs.kStubsResponseCustomTwitterTimelineValid(), kStubs.kStubsResponseCustomTwitterTimelineValid()), []);
+		assert.deepEqual(mainModule.WKCParserArticlesForCustomTwitterTimeline(kStubs.kStubsResponseCustomTwitterTimelineValid(), kStubs.kStubsResponseCustomTwitterTimelineValid()), []);
 	});
 
 	it('returns none if new empty', function() {
-		assert.deepEqual(mainModule.WKCResponseParserArticlesForCustomTwitterTimeline(kStubs.kStubsResponseCustomTwitterTimelineValid(), '[]'), []);
+		assert.deepEqual(mainModule.WKCParserArticlesForCustomTwitterTimeline(kStubs.kStubsResponseCustomTwitterTimelineValid(), '[]'), []);
 	});
 
 	it('returns all if old empty', function() {
-		assert.deepEqual(mainModule.WKCResponseParserArticlesForCustomTwitterTimeline(null, kStubs.kStubsResponseCustomTwitterTimelineValid()).map(function(e) {
+		assert.deepEqual(mainModule.WKCParserArticlesForCustomTwitterTimeline(null, kStubs.kStubsResponseCustomTwitterTimelineValid()).map(function(e) {
 			return e.WKCArticleOriginalGUID;
 		}), [
 			'alfa',
@@ -256,7 +256,7 @@ describe('WKCResponseParserArticlesForCustomTwitterTimeline', function testWKCRe
 	});
 
 	it('returns articles with new guid', function() {
-		assert.deepEqual(mainModule.WKCResponseParserArticlesForCustomTwitterTimeline(kStubs.kStubsResponseCustomTwitterTimelineValid(), kStubs.kStubsResponseCustomTwitterTimelineValid().replace(/alfa/g, 'charlie')).map(function(e) {
+		assert.deepEqual(mainModule.WKCParserArticlesForCustomTwitterTimeline(kStubs.kStubsResponseCustomTwitterTimelineValid(), kStubs.kStubsResponseCustomTwitterTimelineValid().replace(/alfa/g, 'charlie')).map(function(e) {
 			return e.WKCArticleOriginalGUID;
 		}), [
 			'charlie',
@@ -264,95 +264,95 @@ describe('WKCResponseParserArticlesForCustomTwitterTimeline', function testWKCRe
 	});
 
 	it('populates WKCArticleTitle undefined', function() {
-		assert.strictEqual(mainModule.WKCResponseParserArticlesForCustomTwitterTimeline(null, kStubs.kStubsResponseCustomTwitterTimelineValid()).pop().WKCArticleTitle, undefined);
+		assert.strictEqual(mainModule.WKCParserArticlesForCustomTwitterTimeline(null, kStubs.kStubsResponseCustomTwitterTimelineValid()).pop().WKCArticleTitle, undefined);
 	});
 
 	it('populates WKCArticleOriginalURL', function() {
-		assert.strictEqual(mainModule.WKCResponseParserArticlesForCustomTwitterTimeline(null, kStubs.kStubsResponseCustomTwitterTimelineValid()).pop().WKCArticleOriginalURL, 'https://twitter.com/charlie/status/delta');
+		assert.strictEqual(mainModule.WKCParserArticlesForCustomTwitterTimeline(null, kStubs.kStubsResponseCustomTwitterTimelineValid()).pop().WKCArticleOriginalURL, 'https://twitter.com/charlie/status/delta');
 	});
 
 	it('populates WKCArticleOriginalGUID', function() {
-		assert.strictEqual(mainModule.WKCResponseParserArticlesForCustomTwitterTimeline(null, kStubs.kStubsResponseCustomTwitterTimelineValid()).pop().WKCArticleOriginalGUID, 'delta');
+		assert.strictEqual(mainModule.WKCParserArticlesForCustomTwitterTimeline(null, kStubs.kStubsResponseCustomTwitterTimelineValid()).pop().WKCArticleOriginalGUID, 'delta');
 	});
 
 	it('populates WKCArticlePublishDate', function() {
-		assert.deepEqual(mainModule.WKCResponseParserArticlesForCustomTwitterTimeline(null, kStubs.kStubsResponseCustomTwitterTimelineValid()).pop().WKCArticlePublishDate, new Date('2018-10-08T13:40:12.000Z'));
+		assert.deepEqual(mainModule.WKCParserArticlesForCustomTwitterTimeline(null, kStubs.kStubsResponseCustomTwitterTimelineValid()).pop().WKCArticlePublishDate, new Date('2018-10-08T13:40:12.000Z'));
 	});
 
 	it('populates WKCArticleAuthor undefined', function() {
-		assert.strictEqual(mainModule.WKCResponseParserArticlesForCustomTwitterTimeline(null, kStubs.kStubsResponseCustomTwitterTimelineValid()).pop().WKCArticleAuthor, undefined);
+		assert.strictEqual(mainModule.WKCParserArticlesForCustomTwitterTimeline(null, kStubs.kStubsResponseCustomTwitterTimelineValid()).pop().WKCArticleAuthor, undefined);
 	});
 
 	it('populates WKCArticleBody', function() {
-		assert.strictEqual(mainModule.WKCResponseParserArticlesForCustomTwitterTimeline(null, kStubs.kStubsResponseCustomTwitterTimelineValid()).pop().WKCArticleBody, '<p>echo</p>');
+		assert.strictEqual(mainModule.WKCParserArticlesForCustomTwitterTimeline(null, kStubs.kStubsResponseCustomTwitterTimelineValid()).pop().WKCArticleBody, '<p>echo</p>');
 	});
 
 	it('populates WKCArticleSnippet undefined', function() {
-		assert.strictEqual(mainModule.WKCResponseParserArticlesForCustomTwitterTimeline(null, kStubs.kStubsResponseCustomTwitterTimelineValid()).pop().WKCArticleSnippet, 'echo');
+		assert.strictEqual(mainModule.WKCParserArticlesForCustomTwitterTimeline(null, kStubs.kStubsResponseCustomTwitterTimelineValid()).pop().WKCArticleSnippet, 'echo');
 	});
 
 	context('WKCArticleBody', function () {
 		
 		it('converts line breaks', function() {
-			assert.strictEqual(mainModule.WKCResponseParserArticlesForCustomTwitterTimeline(null, kStubs.kStubsResponseCustomTwitterTimelineValid().replace('echo', 'echo\\n\\nfoxtrot')).pop().WKCArticleBody, '<p>echo</p>\n<p>foxtrot</p>');
+			assert.strictEqual(mainModule.WKCParserArticlesForCustomTwitterTimeline(null, kStubs.kStubsResponseCustomTwitterTimelineValid().replace('echo', 'echo\\n\\nfoxtrot')).pop().WKCArticleBody, '<p>echo</p>\n<p>foxtrot</p>');
 		});
 		
 		it('converts hashtags', function() {
-			assert.strictEqual(mainModule.WKCResponseParserArticlesForCustomTwitterTimeline(null, kStubs.kStubsResponseCustomTwitterTimelineValid().replace('echo', '#echo #foxtrot')).pop().WKCArticleBody, '<p><a href="https://twitter.com/hashtag/echo">#echo</a> <a href="https://twitter.com/hashtag/foxtrot">#foxtrot</a></p>');
+			assert.strictEqual(mainModule.WKCParserArticlesForCustomTwitterTimeline(null, kStubs.kStubsResponseCustomTwitterTimelineValid().replace('echo', '#echo #foxtrot')).pop().WKCArticleBody, '<p><a href="https://twitter.com/hashtag/echo">#echo</a> <a href="https://twitter.com/hashtag/foxtrot">#foxtrot</a></p>');
 		});
 		
 		it('converts usernames', function() {
-			assert.strictEqual(mainModule.WKCResponseParserArticlesForCustomTwitterTimeline(null, kStubs.kStubsResponseCustomTwitterTimelineValid().replace('echo', '@echo @foxtrot')).pop().WKCArticleBody, '<p><a href="https://twitter.com/echo">@echo</a> <a href="https://twitter.com/foxtrot">@foxtrot</a></p>');
+			assert.strictEqual(mainModule.WKCParserArticlesForCustomTwitterTimeline(null, kStubs.kStubsResponseCustomTwitterTimelineValid().replace('echo', '@echo @foxtrot')).pop().WKCArticleBody, '<p><a href="https://twitter.com/echo">@echo</a> <a href="https://twitter.com/foxtrot">@foxtrot</a></p>');
 		});
 
 	});
 
 });
 
-describe('WKCResponseParserHTMLForPlaintext', function testWKCResponseParserHTMLForPlaintext() {
+describe('WKCParserHTMLForPlaintext', function testWKCParserHTMLForPlaintext() {
 
 	it('throws error if not string', function() {
 		assert.throws(function() {
-			mainModule.WKCResponseParserHTMLForPlaintext(null);
+			mainModule.WKCParserHTMLForPlaintext(null);
 		}, /WKCErrorInvalidInput/);
 	});
 
 	it('returns string as p', function() {
-		assert.strictEqual(mainModule.WKCResponseParserHTMLForPlaintext('alfa'), '<p>alfa</p>');
+		assert.strictEqual(mainModule.WKCParserHTMLForPlaintext('alfa'), '<p>alfa</p>');
 	});
 
 	it('converts simple headers without anchors', function() {
-		assert.strictEqual(mainModule.WKCResponseParserHTMLForPlaintext('# alfa'), '<h1>alfa</h1>');
+		assert.strictEqual(mainModule.WKCParserHTMLForPlaintext('# alfa'), '<h1>alfa</h1>');
 	});
 
 	it('converts single newline as br', function() {
-		assert.strictEqual(mainModule.WKCResponseParserHTMLForPlaintext('alfa\nbravo'), '<p>alfa<br />\nbravo</p>');
+		assert.strictEqual(mainModule.WKCParserHTMLForPlaintext('alfa\nbravo'), '<p>alfa<br />\nbravo</p>');
 	});
 
 	it('converts double newline as p', function() {
-		assert.strictEqual(mainModule.WKCResponseParserHTMLForPlaintext('alfa\n\nbravo'), '<p>alfa</p>\n<p>bravo</p>');
+		assert.strictEqual(mainModule.WKCParserHTMLForPlaintext('alfa\n\nbravo'), '<p>alfa</p>\n<p>bravo</p>');
 	});
 
 	it('converts www domains to links', function() {
-		assert.strictEqual(mainModule.WKCResponseParserHTMLForPlaintext('www.alfa.com'), '<p><a href="http://www.alfa.com">www.alfa.com</a></p>');
+		assert.strictEqual(mainModule.WKCParserHTMLForPlaintext('www.alfa.com'), '<p><a href="http://www.alfa.com">www.alfa.com</a></p>');
 	});
 
 });
 
-describe('WKCResponseParserSnippetFromText', function testWKCResponseParserSnippetFromText() {
+describe('WKCParserSnippetFromText', function testWKCParserSnippetFromText() {
 
 	it('throws error if not string', function() {
 		assert.throws(function() {
-			mainModule.WKCResponseParserSnippetFromText(null);
+			mainModule.WKCParserSnippetFromText(null);
 		}, /WKCErrorInvalidInput/);
 	});
 
 	it('returns subset if large', function() {
-		assert.strictEqual(mainModule.WKCResponseParserSnippetFromText(kStubs.kStubsBody()), kStubs.kStubsBody().slice(0, 100).split(' ').slice(0, -1).join(' ') + '…');
+		assert.strictEqual(mainModule.WKCParserSnippetFromText(kStubs.kStubsBody()), kStubs.kStubsBody().slice(0, 100).split(' ').slice(0, -1).join(' ') + '…');
 	});
 
 	it('returns all if small', function() {
-		assert.strictEqual(mainModule.WKCResponseParserSnippetFromText('alfa bravo'), 'alfa bravo');
+		assert.strictEqual(mainModule.WKCParserSnippetFromText('alfa bravo'), 'alfa bravo');
 	});
 
 });

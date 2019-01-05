@@ -186,7 +186,7 @@
 
 		moi.reactConfirmationPreviewHeadingType(OLSKLocalized('WKCReadModuleSubscribeConfirmationPreviewHeadingTypeFeedRSSText'));
 
-		moi.reactConfirmationPreviewArticles(WKCResponseParser.WKCResponseParserArticlesForFeedRSS(new DOMParser(), null, new XMLSerializer().serializeToString(parsedXML.documentElement)));
+		moi.reactConfirmationPreviewArticles(WKCParser.WKCParserArticlesForFeedRSS(new DOMParser(), null, new XMLSerializer().serializeToString(parsedXML.documentElement)));
 
 		moi.reactConfirmationShared();
 	};
@@ -202,7 +202,7 @@
 
 		moi.reactConfirmationPreviewHeadingType(OLSKLocalized('WKCReadModuleSubscribeConfirmationPreviewHeadingTypeFeedAtomText'));
 
-		moi.reactConfirmationPreviewArticles(WKCResponseParser.WKCResponseParserArticlesForFeedAtom(new DOMParser(), null, new XMLSerializer().serializeToString(parsedXML.documentElement)));
+		moi.reactConfirmationPreviewArticles(WKCParser.WKCParserArticlesForFeedAtom(new DOMParser(), null, new XMLSerializer().serializeToString(parsedXML.documentElement)));
 
 		moi.reactConfirmationShared();
 	};
@@ -295,7 +295,7 @@
 	//_ commandsConfirmationCustomTwitterTimeline
 
 	moi.commandsConfirmationCustomTwitterTimeline = function (inputData, responseJSON) {
-		const articleObjects = WKCResponseParser.WKCResponseParserArticlesForCustomTwitterTimeline(null, responseJSON);
+		const articleObjects = WKCParser.WKCParserArticlesForCustomTwitterTimeline(null, responseJSON);
 
 		moi.reactConfirmationPreviewArticles(articleObjects);
 

@@ -7,7 +7,7 @@
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
 	typeof define === 'function' && define.amd ? define(['exports'], factory) :
-	(factory((global.WKCResponseParser = global.WKCResponseParser || {})));
+	(factory((global.WKCParser = global.WKCParser || {})));
 }(this, (function (exports) { 'use strict';
 
 	const showdownPackage = typeof require === 'undefined' ? window.showdown : require('showdown');
@@ -21,9 +21,9 @@
 		return inputData[0] ? inputData[0].textContent : '';
 	};
 
-	//_ WKCResponseParserArticlesForFeedRSS
+	//_ WKCParserArticlesForFeedRSS
 
-	exports.WKCResponseParserArticlesForFeedRSS = function(DOMParserInstance, oldString, newString) {
+	exports.WKCParserArticlesForFeedRSS = function(DOMParserInstance, oldString, newString) {
 		if (typeof DOMParserInstance !== 'object' || DOMParserInstance === null) {
 			throw new Error('WKCErrorInvalidInput');
 		}
@@ -58,14 +58,14 @@
 				WKCArticlePublishDate: new Date(stringContentForFirstElement(e.getElementsByTagName('pubDate'))),
 				WKCArticleAuthor: stringContentForFirstElement(e.getElementsByTagName('author')),
 				WKCArticleBody: itemContent,
-				WKCArticleSnippet: exports.WKCResponseParserSnippetFromText(DOMParserInstance.parseFromString(`<div>${itemContent}</div>`, 'text/html').body.textContent),
+				WKCArticleSnippet: exports.WKCParserSnippetFromText(DOMParserInstance.parseFromString(`<div>${itemContent}</div>`, 'text/html').body.textContent),
 			};
 		});
 	};
 
-	//_ WKCResponseParserArticlesForFeedAtom
+	//_ WKCParserArticlesForFeedAtom
 
-	exports.WKCResponseParserArticlesForFeedAtom = function(DOMParserInstance, oldString, newString) {
+	exports.WKCParserArticlesForFeedAtom = function(DOMParserInstance, oldString, newString) {
 		if (typeof DOMParserInstance !== 'object' || DOMParserInstance === null) {
 			throw new Error('WKCErrorInvalidInput');
 		}
@@ -98,20 +98,20 @@
 				WKCArticlePublishDate: new Date(stringContentForFirstElement(e.getElementsByTagName('updated'))),
 				WKCArticleAuthor: stringContentForFirstElement(e.getElementsByTagName('author')),
 				WKCArticleBody: itemContent,
-				WKCArticleSnippet: exports.WKCResponseParserSnippetFromText(DOMParserInstance.parseFromString(`<div>${itemContent}</div>`, 'text/html').body.textContent),
+				WKCArticleSnippet: exports.WKCParserSnippetFromText(DOMParserInstance.parseFromString(`<div>${itemContent}</div>`, 'text/html').body.textContent),
 			};
 		});
 	};
 
-	//_ WKCResponseParserInputDataIsCustomTwitterTimeline
+	//_ WKCParserInputDataIsCustomTwitterTimeline
 
-	exports.WKCResponseParserInputDataIsCustomTwitterTimeline = function(inputData) {
+	exports.WKCParserInputDataIsCustomTwitterTimeline = function(inputData) {
 		return Array.isArray(inputData);
 	};
 
-	//_ WKCResponseParserArticlesForCustomTwitterTimeline
+	//_ WKCParserArticlesForCustomTwitterTimeline
 
-	exports.WKCResponseParserArticlesForCustomTwitterTimeline = function(oldBody, newBody) {
+	exports.WKCParserArticlesForCustomTwitterTimeline = function(oldBody, newBody) {
 		if (typeof newBody !== 'string') {
 			throw new Error('WKCErrorInvalidInput');
 		}
@@ -141,15 +141,15 @@
 				WKCArticleOriginalGUID: e.id_str,
 				WKCArticleOriginalURL: `https://twitter.com/${e.user.screen_name}/status/${e.id_str}`,
 				WKCArticlePublishDate: new Date(e.created_at),
-				WKCArticleBody: exports.WKCResponseParserHTMLForPlaintext(exports._WKCResponseParserTweetBodyForTweetObject(e)),
-				WKCArticleSnippet: exports.WKCResponseParserSnippetFromText(e.full_text),
+				WKCArticleBody: exports.WKCParserHTMLForPlaintext(exports._WKCParserTweetBodyForTweetObject(e)),
+				WKCArticleSnippet: exports.WKCParserSnippetFromText(e.full_text),
 			};
 		});
 	};
 
-	//_ _WKCResponseParserTweetBodyForTweetObject
+	//_ _WKCParserTweetBodyForTweetObject
 
-	exports._WKCResponseParserTweetBodyForTweetObject = function(inputData) {
+	exports._WKCParserTweetBodyForTweetObject = function(inputData) {
 		var tweetBody = inputData.full_text;
 
 		(tweetBody.match(/#([^\W ]+)/g) || []).forEach(function (e) {
@@ -163,9 +163,9 @@
 		return tweetBody;
 	};
 
-	//_ WKCResponseParserHTMLForPlaintext
+	//_ WKCParserHTMLForPlaintext
 
-	exports.WKCResponseParserHTMLForPlaintext = function(inputData) {
+	exports.WKCParserHTMLForPlaintext = function(inputData) {
 		if (typeof inputData !== 'string') {
 			throw new Error('WKCErrorInvalidInput');
 		}
@@ -173,9 +173,9 @@
 		return showdownConverter.makeHtml(inputData);
 	};
 
-	//_ WKCResponseParserSnippetFromText
+	//_ WKCParserSnippetFromText
 
-	exports.WKCResponseParserSnippetFromText = function(inputData) {
+	exports.WKCParserSnippetFromText = function(inputData) {
 		if (typeof inputData !== 'string') {
 			throw new Error('WKCErrorInvalidInput');
 		}
