@@ -188,6 +188,10 @@ describe('WKCParserArticlesForFeedAtom', function testWKCParserArticlesForFeedAt
 		assert.deepEqual(mainModule.WKCParserArticlesForFeedAtom(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsAtomComplete()).pop().WKCArticlePublishDate, new Date('2018-12-07T15:03:15.000Z'));
 	});
 
+	it('populates WKCArticlePublishDate if published', function() {
+		assert.deepEqual(mainModule.WKCParserArticlesForFeedAtom(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsAtomComplete().replace('<updated>2018-12-07T15:03:15Z</updated>', '<published>2016-02-09T19:59:15+00:00</published>')).pop().WKCArticlePublishDate, new Date('2016-02-09T19:59:15.000Z'));
+	});
+
 	it('populates WKCArticleAuthor', function() {
 		assert.strictEqual(mainModule.WKCParserArticlesForFeedAtom(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsAtomComplete()).pop().WKCArticleAuthor, 'delta');
 	});

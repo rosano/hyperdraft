@@ -101,7 +101,7 @@
 					return e.getAttribute('href');
 				}).shift(),
 				WKCArticleOriginalGUID: stringContentForFirstElement(e.getElementsByTagName('id')),
-				WKCArticlePublishDate: new Date(stringContentForFirstElement(e.getElementsByTagName('updated'))),
+				WKCArticlePublishDate: new Date(stringContentForFirstElement(e.getElementsByTagName('published')) || stringContentForFirstElement(e.getElementsByTagName('updated'))),
 				WKCArticleAuthor: stringContentForFirstElement(e.getElementsByTagName('author')),
 				WKCArticleBody: itemContent,
 				WKCArticleSnippet: exports.WKCParserSnippetFromText(DOMParserInstance.parseFromString(`<div>${itemContent}</div>`, 'text/html').body.textContent),
