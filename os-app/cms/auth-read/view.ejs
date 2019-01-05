@@ -140,18 +140,19 @@ locals.OLSKPagePublicRouteKeys = [
 			</script>
 		</header>
 
-		<article id="WKCReadDetailContent">
-			<h1 id="WKCReadDetailContentHeading"></h1>
-			<span id="WKCReadDetailContentInfo">
-				<span id="WKCReadDetailContentAuthor"></span>
-				&mdash;
-				<span id="WKCReadDetailContentDate"></span>
-				&mdash;
-				<span id="WKCReadDetailContentSource"></span>
-			</span>
-			<a id="WKCReadDetailContentLink" target="_blank"><%= OLSKLocalized('WKCReadDetailContentLinkText') %></a></span>
-			<div id="WKCReadDetailContentBody"></div>
-		</article>
+		<div id="WKCReadDetailContent">
+			<div id="WKCReadDetailContentContext">
+				<strong id="WKCReadDetailContentContextSource"></strong>
+				<a id="WKCReadDetailContentContextLink" target="_blank"><span id="WKCReadDetailContentContextTiming"></span></a>
+			</div>
+			
+			<article>
+				<h4 id="WKCReadDetailContentHeading"></h4>
+				
+				<p id="WKCReadDetailContentAuthor"></p>
+				<div id="WKCReadDetailContentBody"></div>
+			</article>
+		</div>
 
 		<div id="WKCReadDetailPlaceholder"><span><%= OLSKLocalized('WKCReadDetailPlaceholderText') %></span></div>
 	</div>

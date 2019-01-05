@@ -582,9 +582,13 @@
 				return !obj.WKCArticleIsRead;
 			})
 			.on('click', moi.commandsSelectArticle);
-		parentElement.select('.WKCReadMasterContentListItemHeadline').text(function(obj) {
-			return obj.WKCArticleTitle || 'untitled_article';
-		});
+		parentElement.select('.WKCReadMasterContentListItemHeadline')
+			.classed('WKCSharedHidden', function(obj) {
+				return !obj.WKCArticleTitle;
+			})
+			.text(function(obj) {
+				return obj.WKCArticleTitle;
+			});
 		parentElement.select('.WKCReadMasterContentListItemSnippet').text(function(obj) {
 			var textarea = document.createElement('textarea');
 			
@@ -672,11 +676,16 @@
 			return d3.select('#WKCReadDetail').classed('WKCReadDetailInactive', true);
 		}
 
-		d3.select('#WKCReadDetailContentHeading').text(moi.propertiesSelectedArticle().WKCArticleTitle || 'untitled_article');
-		d3.select('#WKCReadDetailContentAuthor').text(moi.propertiesSelectedArticle().WKCArticleAuthor || 'no_author');
-		d3.select('#WKCReadDetailContentDate').text(moment(moi.propertiesSelectedArticle().WKCArticlePublishDate).format('MMMM Do YYYY, h:mm:ss a'));
-		d3.select('#WKCReadDetailContentSource').text(moi._propertiesSubscriptionObjectsByID()[moi.propertiesSelectedArticle().WKCArticleSubscriptionID].WKCSubscriptionName);
-		d3.select('#WKCReadDetailContentLink').attr('href', moi.propertiesSelectedArticle().WKCArticleOriginalURL || moi._propertiesSubscriptionObjectsByID()[moi.propertiesSelectedArticle().WKCArticleSubscriptionID].WKCSubscriptionURL);
+		d3.select('#WKCReadDetailContentHeading')
+			.text(moi.propertiesSelectedArticle().WKCArticleTitle)
+			.classed('WKCSharedHidden', !moi.propertiesSelectedArticle().WKCArticleTitle);
+		d3.select('#WKCReadDetailContentAuthor')
+			.text(moi.propertiesSelectedArticle().WKCArticleAuthor)
+			.classed('WKCSharedHidden', !moi.propertiesSelectedArticle().WKCArticleAuthor)
+			.classed('WKCSharedHidden', true);
+		d3.select('#WKCReadDetailContentContextTiming').text(moment(moi.propertiesSelectedArticle().WKCArticlePublishDate).format('MMMM Do YYYY, h:mm:ss a'));
+		d3.select('#WKCReadDetailContentContextSource').text(moi._propertiesSubscriptionObjectsByID()[moi.propertiesSelectedArticle().WKCArticleSubscriptionID].WKCSubscriptionName);
+		d3.select('#WKCReadDetailContentContextLink').attr('href', moi.propertiesSelectedArticle().WKCArticleOriginalURL || moi._propertiesSubscriptionObjectsByID()[moi.propertiesSelectedArticle().WKCArticleSubscriptionID].WKCSubscriptionURL);
 		d3.select('#WKCReadDetailContentBody')
 			.html((function(inputData) {
 				var textarea = document.createElement('textarea');
