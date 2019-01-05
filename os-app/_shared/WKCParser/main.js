@@ -47,7 +47,7 @@
 		return [].slice.call(channelElement.getElementsByTagName('item')).filter(function(e) {
 			return oldIDs.indexOf(contentForFirst(e.getElementsByTagName('guid'))) === -1;
 		}).map(function(e) {
-			const itemContent = (contentForFirst(e.getElementsByTagName('content:encoded')) || contentForFirst(e.getElementsByTagName('description')) || '').trim();
+			const itemContent = (contentForFirst(e.getElementsByTagName('content:encoded')) || contentForFirst(e.getElementsByTagName('description'))).trim();
 
 			return {
 				WKCArticleTitle: contentForFirst(e.getElementsByTagName('title')),
