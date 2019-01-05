@@ -11,7 +11,7 @@ const apiSubscriptionsModel = require('../../api/auth-subscriptions/model');
 exports.OLSKControllerRoutes = function() {
 	return {
 		WKCReadRoute: {
-			OLSKRoutePath: '/cms/read',
+			OLSKRoutePath: '/panel/read',
 			OLSKRouteMethod: 'get',
 			OLSKRouteFunction: exports.WKCReadAction,
 			OLSKRouteLanguages: ['en'],

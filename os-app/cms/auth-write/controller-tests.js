@@ -15,7 +15,7 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 	it('returns route objects', function() {
 		assert.deepEqual(controllerModule.OLSKControllerRoutes(), {
 			WKCWriteRoute: {
-				OLSKRoutePath: '/cms/write',
+				OLSKRoutePath: '/panel/write',
 				OLSKRouteMethod: 'get',
 				OLSKRouteFunction: controllerModule.WKCWriteAction,
 				OLSKRouteLanguages: ['en'],
@@ -26,7 +26,7 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 			WKCWriteLegacyRoute: {
 				OLSKRoutePath: '/cms',
 				OLSKRouteMethod: 'get',
-				OLSKRouteRedirect: '/cms/write',
+				OLSKRouteRedirect: '/panel/write',
 			},
 		});
 	});

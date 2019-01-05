@@ -9,7 +9,7 @@
 exports.OLSKControllerRoutes = function() {
 	return {
 		WKCWriteRoute: {
-			OLSKRoutePath: '/cms/write',
+			OLSKRoutePath: '/panel/write',
 			OLSKRouteMethod: 'get',
 			OLSKRouteFunction: exports.WKCWriteAction,
 			OLSKRouteLanguages: ['en'],
@@ -20,7 +20,7 @@ exports.OLSKControllerRoutes = function() {
 		WKCWriteLegacyRoute: {
 			OLSKRoutePath: '/cms',
 			OLSKRouteMethod: 'get',
-			OLSKRouteRedirect: '/cms/write',
+			OLSKRouteRedirect: '/panel/write',
 		},
 	};
 };
