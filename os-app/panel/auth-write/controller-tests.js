@@ -24,7 +24,7 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 				],
 			},
 			WKCWriteLegacyRoute: {
-				OLSKRoutePath: '/cms',
+				OLSKRoutePath: '/panel',
 				OLSKRouteMethod: 'get',
 				OLSKRouteRedirect: '/panel/write',
 			},

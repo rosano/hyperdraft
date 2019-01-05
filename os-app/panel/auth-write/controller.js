@@ -18,7 +18,7 @@ exports.OLSKControllerRoutes = function() {
 			],
 		},
 		WKCWriteLegacyRoute: {
-			OLSKRoutePath: '/cms',
+			OLSKRoutePath: '/panel',
 			OLSKRouteMethod: 'get',
 			OLSKRouteRedirect: '/panel/write',
 		},
