@@ -34,10 +34,10 @@ const kStubs = {
 		return '<?xml version="1.0" encoding="UTF-8"?><feed xmlns="http://www.w3.org/2005/Atom"><entry><title>alfa</title><link href="https://www.cbc.ca/bravo" /><link rel="edit" href="http://example.org/golf" /><id>charlie</id><updated>2018-12-07T15:03:15Z</updated><summary>echo</summary><content type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml"><p>foxtrot</p></div></content><author><name>delta</name></author></entry></feed>';
 	},
 	kStubsResponseCustomTwitterTimelineValid: function() {
-		return "[{\"created_at\":\"Wed Oct 31 15:59:13 +0000 2018\",\"id_str\":\"alfa\",\"full_text\":\"bravo\",\"entities\":{\"hashtags\":[],\"symbols\":[],\"user_mentions\":[],\"urls\":[]},\"user\":{\"screen_name\":\"charlie\"}},{\"created_at\":\"Mon Oct 08 13:40:12 +0000 2018\",\"id_str\":\"delta\",\"full_text\":\"echo\",\"entities\":{\"hashtags\":[],\"symbols\":[],\"user_mentions\":[],\"urls\":[]},\"user\":{\"screen_name\":\"foxtrot\"}}]";
+		return "[{\"created_at\":\"Wed Oct 31 15:59:13 +0000 2018\",\"id_str\":\"alfa\",\"full_text\":\"bravo\",\"entities\":{\"hashtags\":[],\"symbols\":[],\"user_mentions\":[],\"urls\":[]},\"user\":{\"screen_name\":\"charlie\"}},{\"created_at\":\"Mon Oct 08 13:40:12 +0000 2018\",\"id_str\":\"delta\",\"full_text\":\"echo\",\"entities\":{\"hashtags\":[],\"symbols\":[],\"user_mentions\":[],\"urls\":[]},\"user\":{\"screen_name\":\"charlie\"}}]";
 	},
 	kStubsResponseCustomTwitterTimelineComplete: function() {
-		return stubsModule.kStubsResponseCustomTwitterTimelineComplete;
+		return JSON.stringify(stubsModule.kStubsResponseCustomTwitterTimelineComplete());
 	},
 	kStubsBody: function() {
 		return 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.';
@@ -268,7 +268,7 @@ describe('WKCResponseParserArticlesForCustomTwitterTimeline', function testWKCRe
 	});
 
 	it('populates WKCArticleOriginalURL', function() {
-		assert.strictEqual(mainModule.WKCResponseParserArticlesForCustomTwitterTimeline(null, kStubs.kStubsResponseCustomTwitterTimelineValid()).pop().WKCArticleOriginalURL, 'https://twitter.com/foxtrot/status/delta');
+		assert.strictEqual(mainModule.WKCResponseParserArticlesForCustomTwitterTimeline(null, kStubs.kStubsResponseCustomTwitterTimelineValid()).pop().WKCArticleOriginalURL, 'https://twitter.com/charlie/status/delta');
 	});
 
 	it('populates WKCArticleOriginalGUID', function() {
@@ -294,7 +294,11 @@ describe('WKCResponseParserArticlesForCustomTwitterTimeline', function testWKCRe
 	context('WKCArticleBody', function () {
 		
 		it('converts line breaks', function() {
-			assert.strictEqual(mainModule.WKCResponseParserArticlesForCustomTwitterTimeline(null, kStubs.kStubsResponseCustomTwitterTimelineValid().replace('echo', 'echo\\n\\nx')).pop().WKCArticleBody, '<p>echo</p>\n<p>x</p>');
+			assert.strictEqual(mainModule.WKCResponseParserArticlesForCustomTwitterTimeline(null, kStubs.kStubsResponseCustomTwitterTimelineValid().replace('echo', 'echo\\n\\nfoxtrot')).pop().WKCArticleBody, '<p>echo</p>\n<p>foxtrot</p>');
+		});
+		
+		it('converts hashtags', function() {
+			assert.strictEqual(mainModule.WKCResponseParserArticlesForCustomTwitterTimeline(null, kStubs.kStubsResponseCustomTwitterTimelineValid().replace('echo', '#echo #foxtrot')).pop().WKCArticleBody, '<p><a href="https://twitter.com/hashtag/echo">#echo</a> <a href="https://twitter.com/hashtag/foxtrot">#foxtrot</a></p>');
 		});
 
 	});
@@ -313,12 +317,20 @@ describe('WKCResponseParserHTMLForPlaintext', function testWKCResponseParserHTML
 		assert.strictEqual(mainModule.WKCResponseParserHTMLForPlaintext('alfa'), '<p>alfa</p>');
 	});
 
-	it('returns single newline as br', function() {
+	it('converts simple headers without anchors', function() {
+		assert.strictEqual(mainModule.WKCResponseParserHTMLForPlaintext('# alfa'), '<h1>alfa</h1>');
+	});
+
+	it('converts single newline as br', function() {
 		assert.strictEqual(mainModule.WKCResponseParserHTMLForPlaintext('alfa\nbravo'), '<p>alfa<br />\nbravo</p>');
 	});
 
-	it('returns double newline as p', function() {
+	it('converts double newline as p', function() {
 		assert.strictEqual(mainModule.WKCResponseParserHTMLForPlaintext('alfa\n\nbravo'), '<p>alfa</p>\n<p>bravo</p>');
+	});
+
+	it('converts www domains to links', function() {
+		assert.strictEqual(mainModule.WKCResponseParserHTMLForPlaintext('www.alfa.com'), '<p><a href="http://www.alfa.com">www.alfa.com</a></p>');
 	});
 
 });

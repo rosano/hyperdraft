@@ -13,7 +13,9 @@
 	const showdownPackage = typeof require === 'undefined' ? window.showdown : require('showdown');
 
 	const showdownConverter = new showdownPackage.Converter();
-	showdownConverter.setOption('simpleLineBreaks', true);
+	showdownConverter.setOption('simpleLineBreaks', true)
+	showdownConverter.setOption('simplifiedAutoLink', true);
+	showdownConverter.setOption('noHeaderId', true);
 
 	const stringContentForFirstElement = function (inputData) {
 		return inputData[0] ? inputData[0].textContent : '';
@@ -139,10 +141,22 @@
 				WKCArticleOriginalGUID: e.id_str,
 				WKCArticleOriginalURL: `https://twitter.com/${e.user.screen_name}/status/${e.id_str}`,
 				WKCArticlePublishDate: new Date(e.created_at),
-				WKCArticleBody: exports.WKCResponseParserHTMLForPlaintext(e.full_text),
+				WKCArticleBody: exports.WKCResponseParserHTMLForPlaintext(exports._WKCResponseParserTweetBodyForTweetObject(e)),
 				WKCArticleSnippet: exports.WKCResponseParserSnippetFromText(e.full_text),
 			};
 		});
+	};
+
+	//_ _WKCResponseParserTweetBodyForTweetObject
+
+	exports._WKCResponseParserTweetBodyForTweetObject = function(inputData) {
+		var tweetBody = inputData.full_text;
+
+		(tweetBody.match(/#([^\W ]+)/g) || []).forEach(function (e) {
+			tweetBody = tweetBody.replace(new RegExp(e, 'g'), `[${e}](https://twitter.com/hashtag/${e.replace('#', '')})`);
+		});
+
+		return tweetBody;
 	};
 
 	//_ WKCResponseParserHTMLForPlaintext
