@@ -11,8 +11,12 @@ Object.assign(exports, {
 			"created_at":"Wed Oct 31 15:59:13 +0000 2018",
 			"id":1057663290741002241,
 			"id_str":"1057663290741002241",
-			"text":"RT @AnandWrites: \u201cI\u2019m sorry, I don\u2019t fully understand the issue you are experiencing\u201d may be the best epitaph for the dying fantasy of Sili\u2026",
+			"full_text":"RT @AnandWrites: \u201cI\u2019m sorry, I don\u2019t fully understand the issue you are experiencing\u201d may be the best epitaph for the dying fantasy of Sili\u2026",
 			"truncated":false,
+			"display_text_range":[
+			0,
+			140
+			],
 			"entities":{
 				"hashtags":[
 
@@ -80,7 +84,7 @@ Object.assign(exports, {
 				"time_zone":null,
 				"geo_enabled":true,
 				"verified":false,
-				"statuses_count":2107,
+				"statuses_count":2106,
 				"lang":"en",
 				"contributors_enabled":false,
 				"is_translator":false,
@@ -112,8 +116,12 @@ Object.assign(exports, {
 				"created_at":"Tue Oct 30 16:55:30 +0000 2018",
 				"id":1057315068428324864,
 				"id_str":"1057315068428324864",
-				"text":"\u201cI\u2019m sorry, I don\u2019t fully understand the issue you are experiencing\u201d may be the best epitaph for the dying fantasy\u2026 https:\/\/t.co\/pyy7fFnu0T",
-				"truncated":true,
+				"full_text":"\u201cI\u2019m sorry, I don\u2019t fully understand the issue you are experiencing\u201d may be the best epitaph for the dying fantasy of Silicon Valley utopianism.",
+				"truncated":false,
+				"display_text_range":[
+				0,
+				144
+				],
 				"entities":{
 					"hashtags":[
 
@@ -125,15 +133,7 @@ Object.assign(exports, {
 
 					],
 					"urls":[
-					{
-						"url":"https:\/\/t.co\/pyy7fFnu0T",
-						"expanded_url":"https:\/\/twitter.com\/i\/web\/status\/1057315068428324864",
-						"display_url":"twitter.com\/i\/web\/status\/1\u2026",
-						"indices":[
-						116,
-						139
-						]
-					}
+
 					]
 				},
 				"source":"\u003ca href=\"http:\/\/twitter.com\/download\/iphone\" rel=\"nofollow\"\u003eTwitter for iPhone\u003c\/a\u003e",
@@ -171,16 +171,16 @@ Object.assign(exports, {
 						}
 					},
 					"protected":false,
-					"followers_count":396769,
-					"friends_count":5778,
-					"listed_count":1781,
+					"followers_count":396821,
+					"friends_count":5777,
+					"listed_count":1778,
 					"created_at":"Tue Mar 17 14:33:12 +0000 2009",
-					"favourites_count":11099,
+					"favourites_count":11104,
 					"utc_offset":null,
 					"time_zone":null,
 					"geo_enabled":true,
 					"verified":true,
-					"statuses_count":2310,
+					"statuses_count":2319,
 					"lang":"en",
 					"contributors_enabled":false,
 					"is_translator":false,
@@ -227,8 +227,12 @@ Object.assign(exports, {
 			"created_at":"Mon Oct 08 13:40:12 +0000 2018",
 			"id":1049293386249895936,
 			"id_str":"1049293386249895936",
-			"text":"#MakeBoxingGreatAgain https:\/\/t.co\/4h6utVw0rM",
+			"full_text":"#MakeBoxingGreatAgain https:\/\/t.co\/4h6utVw0rM",
 			"truncated":false,
+			"display_text_range":[
+			0,
+			21
+			],
 			"entities":{
 				"hashtags":[
 				{
@@ -301,7 +305,7 @@ Object.assign(exports, {
 				"time_zone":null,
 				"geo_enabled":true,
 				"verified":false,
-				"statuses_count":2107,
+				"statuses_count":2106,
 				"lang":"en",
 				"contributors_enabled":false,
 				"is_translator":false,
@@ -332,12 +336,21 @@ Object.assign(exports, {
 			"is_quote_status":true,
 			"quoted_status_id":1048383728257576961,
 			"quoted_status_id_str":"1048383728257576961",
+			"quoted_status_permalink":{
+				"url":"https:\/\/t.co\/4h6utVw0rM",
+				"expanded":"https:\/\/twitter.com\/WordOnRd\/status\/1048383728257576961",
+				"display":"twitter.com\/WordOnRd\/statu\u2026"
+			},
 			"quoted_status":{
 				"created_at":"Sat Oct 06 01:25:33 +0000 2018",
 				"id":1048383728257576961,
 				"id_str":"1048383728257576961",
-				"text":"Drake tonight in Vegas with @TheNotoriousMMA at the #ufc229 weigh ins. https:\/\/t.co\/17pETksUwJ",
+				"full_text":"Drake tonight in Vegas with @TheNotoriousMMA at the #ufc229 weigh ins. https:\/\/t.co\/17pETksUwJ",
 				"truncated":false,
+				"display_text_range":[
+				0,
+				70
+				],
 				"entities":{
 					"hashtags":[
 					{
@@ -480,7 +493,7 @@ Object.assign(exports, {
 						}
 					},
 					"protected":false,
-					"followers_count":119128,
+					"followers_count":119124,
 					"friends_count":81,
 					"listed_count":716,
 					"created_at":"Thu Mar 15 01:46:36 +0000 2012",
@@ -557,7 +570,7 @@ Object.assign(exports, {
 				"contributors":null,
 				"is_quote_status":false,
 				"retweet_count":1550,
-				"favorite_count":9808,
+				"favorite_count":9804,
 				"favorited":false,
 				"retweeted":false,
 				"possibly_sensitive":false,
@@ -574,8 +587,12 @@ Object.assign(exports, {
 			"created_at":"Fri Sep 07 21:53:27 +0000 2018",
 			"id":1038183492859899908,
 			"id_str":"1038183492859899908",
-			"text":"I would like to make an offering at the altar of @rhythmnecklace. May @starakaj and @mearabai be pleased. \u3030\ufe0f\u2728\ud83c\udfb9\ud83c\udfa7\ud83c\udf9b\ud83d\udd70\ud83d\udd2e\ud83d\udece\u2026 https:\/\/t.co\/34X20JnS5m",
-			"truncated":true,
+			"full_text":"I would like to make an offering at the altar of @rhythmnecklace. May @starakaj and @mearabai be pleased. \u3030\ufe0f\u2728\ud83c\udfb9\ud83c\udfa7\ud83c\udf9b\ud83d\udd70\ud83d\udd2e\ud83d\udece\ud83d\udc9b\u26a0\ufe0f\u25b6\ufe0f\ud83c\udfb5\ud83c\udfb6\ud83c\udfb5\ud83c\udfb6\ud83c\udfb5\ud83c\udfb6\u27bf\u27b0\u3030\ufe0f\n\nhttps:\/\/t.co\/jxFx1uA31B",
+			"truncated":false,
+			"display_text_range":[
+			0,
+			155
+			],
 			"entities":{
 				"hashtags":[
 
@@ -617,12 +634,12 @@ Object.assign(exports, {
 				],
 				"urls":[
 				{
-					"url":"https:\/\/t.co\/34X20JnS5m",
-					"expanded_url":"https:\/\/twitter.com\/i\/web\/status\/1038183492859899908",
-					"display_url":"twitter.com\/i\/web\/status\/1\u2026",
+					"url":"https:\/\/t.co\/jxFx1uA31B",
+					"expanded_url":"https:\/\/rosano.ca\/sonogrid",
+					"display_url":"rosano.ca\/sonogrid",
 					"indices":[
-					117,
-					140
+					132,
+					155
 					]
 				}
 				]
@@ -671,7 +688,7 @@ Object.assign(exports, {
 				"time_zone":null,
 				"geo_enabled":true,
 				"verified":false,
-				"statuses_count":2107,
+				"statuses_count":2106,
 				"lang":"en",
 				"contributors_enabled":false,
 				"is_translator":false,

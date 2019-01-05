@@ -11,7 +11,7 @@ var suggestLibrary = require('./suggest');
 const kTestingSuggestionTwitterFor = function(inputData) {
 	return {
 		WKCSuggestionType: suggestLibrary.WKCReadModuleSubscribeSuggestionsTypeCustomTwitterTimeline(),
-		WKCSuggestionURL: 'https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name='.concat(inputData),
+		WKCSuggestionURL: 'https://api.twitter.com/1.1/statuses/user_timeline.json?tweet_mode=extended&screen_name='.concat(inputData),
 	};
 };
 
