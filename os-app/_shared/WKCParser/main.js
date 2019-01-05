@@ -44,9 +44,7 @@
 			return [];
 		}
 
-		const newItems = [].slice.call(channelElement.getElementsByTagName('item'));
-
-		return newItems.filter(function(e) {
+		return [].slice.call(channelElement.getElementsByTagName('item')).filter(function(e) {
 			return oldIDs.indexOf(contentForFirst(e.getElementsByTagName('guid'))) === -1;
 		}).map(function(e) {
 			const itemContent = (contentForFirst(e.getElementsByTagName('content:encoded')) || contentForFirst(e.getElementsByTagName('description')) || '').trim();
@@ -80,9 +78,7 @@
 			return contentForFirst(e.getElementsByTagName('id'));
 		});
 
-		var newItems = [].slice.call(DOMParserInstance.parseFromString(newString, 'application/xml').getElementsByTagName('entry'));
-
-		return newItems.filter(function(e) {
+		return [].slice.call(DOMParserInstance.parseFromString(newString, 'application/xml').getElementsByTagName('entry')).filter(function(e) {
 			return oldIDs.indexOf(contentForFirst(e.getElementsByTagName('id'))) === -1;
 		}).map(function(e) {
 			var itemContent = (function () {
