@@ -103,6 +103,10 @@ describe('WKCParserArticlesForFeedRSS', function testWKCParserArticlesForFeedRSS
 		assert.strictEqual(mainModule.WKCParserArticlesForFeedRSS(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsRSSComplete().replace('charlie', '12345')).pop().WKCArticleOriginalGUID, '12345');
 	});
 
+	it('populates WKCArticleOriginalGUID if none', function() {
+		assert.strictEqual(mainModule.WKCParserArticlesForFeedRSS(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsRSSComplete().replace(/<guid.*guid>/g, '')).pop().WKCArticleOriginalGUID, 'https://www.cbc.ca/bravo');
+	});
+
 	it('populates WKCArticlePublishDate', function() {
 		assert.deepEqual(mainModule.WKCParserArticlesForFeedRSS(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsRSSComplete()).pop().WKCArticlePublishDate, new Date('2018-12-07T15:03:15.000Z'));
 	});
@@ -186,6 +190,10 @@ describe('WKCParserArticlesForFeedAtom', function testWKCParserArticlesForFeedAt
 
 	it('populates WKCArticleOriginalGUID as string', function() {
 		assert.strictEqual(mainModule.WKCParserArticlesForFeedAtom(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsAtomComplete().replace('charlie', '12345')).pop().WKCArticleOriginalGUID, '12345');
+	});
+
+	it('populates WKCArticleOriginalGUID if none', function() {
+		assert.strictEqual(mainModule.WKCParserArticlesForFeedAtom(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsAtomComplete().replace(/<id.*id>/, '')).pop().WKCArticleOriginalGUID, 'https://www.cbc.ca/bravo');
 	});
 
 	it('populates WKCArticlePublishDate', function() {

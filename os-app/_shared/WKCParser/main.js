@@ -17,7 +17,7 @@
 	showdownConverter.setOption('simplifiedAutoLink', true);
 	showdownConverter.setOption('noHeaderId', true);
 
-	const stringContentForFirstElement = function (inputData) {
+	const contentForFirst = function (inputData) {
 		return inputData[0] ? inputData[0].textContent : '';
 	};
 
@@ -35,7 +35,7 @@
 		const parsedXML = DOMParserInstance.parseFromString(oldString, 'application/xml');
 
 		var oldIDs = (!oldString ? [] : [].slice.call(parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('item'))).map(function (e) {
-			return stringContentForFirstElement(e.getElementsByTagName('guid'));
+			return contentForFirst(e.getElementsByTagName('guid'));
 		});
 
 		const channelElement = DOMParserInstance.parseFromString(newString, 'application/xml').getElementsByTagName('channel')[0];
@@ -47,16 +47,16 @@
 		const newItems = [].slice.call(channelElement.getElementsByTagName('item'));
 
 		return newItems.filter(function(e) {
-			return oldIDs.indexOf(stringContentForFirstElement(e.getElementsByTagName('guid'))) === -1;
+			return oldIDs.indexOf(contentForFirst(e.getElementsByTagName('guid'))) === -1;
 		}).map(function(e) {
-			const itemContent = (stringContentForFirstElement(e.getElementsByTagName('content:encoded')) || stringContentForFirstElement(e.getElementsByTagName('description')) || '').trim();
+			const itemContent = (contentForFirst(e.getElementsByTagName('content:encoded')) || contentForFirst(e.getElementsByTagName('description')) || '').trim();
 
 			return {
-				WKCArticleTitle: stringContentForFirstElement(e.getElementsByTagName('title')),
-				WKCArticleOriginalURL: stringContentForFirstElement(e.getElementsByTagName('link')),
-				WKCArticleOriginalGUID: stringContentForFirstElement(e.getElementsByTagName('guid')),
-				WKCArticlePublishDate: new Date(stringContentForFirstElement(e.getElementsByTagName('pubDate')) || Date.now()),
-				WKCArticleAuthor: stringContentForFirstElement(e.getElementsByTagName('author')),
+				WKCArticleTitle: contentForFirst(e.getElementsByTagName('title')),
+				WKCArticleOriginalURL: contentForFirst(e.getElementsByTagName('link')),
+				WKCArticleOriginalGUID: contentForFirst(e.getElementsByTagName('guid')) || contentForFirst(e.getElementsByTagName('link')),
+				WKCArticlePublishDate: new Date(contentForFirst(e.getElementsByTagName('pubDate')) || Date.now()),
+				WKCArticleAuthor: contentForFirst(e.getElementsByTagName('author')),
 				WKCArticleBody: itemContent,
 				WKCArticleSnippet: exports.WKCParserSnippetFromText(DOMParserInstance.parseFromString(`<div>${itemContent}</div>`, 'text/html').body.textContent),
 			};
@@ -77,13 +77,13 @@
 		var parsedXML = DOMParserInstance.parseFromString(oldString, 'application/xml');
 
 		var oldIDs = (!oldString ? [] : [].slice.call(parsedXML.getElementsByTagName('entry'))).map(function (e) {
-			return stringContentForFirstElement(e.getElementsByTagName('id'));
+			return contentForFirst(e.getElementsByTagName('id'));
 		});
 
 		var newItems = [].slice.call(DOMParserInstance.parseFromString(newString, 'application/xml').getElementsByTagName('entry'));
 
 		return newItems.filter(function(e) {
-			return oldIDs.indexOf(stringContentForFirstElement(e.getElementsByTagName('id'))) === -1;
+			return oldIDs.indexOf(contentForFirst(e.getElementsByTagName('id'))) === -1;
 		}).map(function(e) {
 			var itemContent = (function () {
 				var contentString = e.getElementsByTagName('content')[0] || e.getElementsByTagName('summary')[0];
@@ -93,16 +93,18 @@
 				return contentString.trim();
 			})();
 
+			var itemLink = [].slice.call(e.getElementsByTagName('link')).sort(function (a, b) {
+				return !!a.getAttribute('rel') - !!b.getAttribute('rel');
+			}).map(function (e) {
+				return e.getAttribute('href');
+			}).shift();
+
 			return {
-				WKCArticleTitle: stringContentForFirstElement(e.getElementsByTagName('title')),
-				WKCArticleOriginalURL: [].slice.call(e.getElementsByTagName('link')).sort(function (a, b) {
-					return !!a.getAttribute('rel') - !!b.getAttribute('rel');
-				}).map(function (e) {
-					return e.getAttribute('href');
-				}).shift(),
-				WKCArticleOriginalGUID: stringContentForFirstElement(e.getElementsByTagName('id')),
-				WKCArticlePublishDate: new Date(stringContentForFirstElement(e.getElementsByTagName('published')) || stringContentForFirstElement(e.getElementsByTagName('updated')) || Date.now()),
-				WKCArticleAuthor: stringContentForFirstElement(e.getElementsByTagName('author')),
+				WKCArticleTitle: contentForFirst(e.getElementsByTagName('title')),
+				WKCArticleOriginalURL: itemLink,
+				WKCArticleOriginalGUID: contentForFirst(e.getElementsByTagName('id')) || itemLink,
+				WKCArticlePublishDate: new Date(contentForFirst(e.getElementsByTagName('published')) || contentForFirst(e.getElementsByTagName('updated')) || Date.now()),
+				WKCArticleAuthor: contentForFirst(e.getElementsByTagName('author')),
 				WKCArticleBody: itemContent,
 				WKCArticleSnippet: exports.WKCParserSnippetFromText(DOMParserInstance.parseFromString(`<div>${itemContent}</div>`, 'text/html').body.textContent),
 			};
