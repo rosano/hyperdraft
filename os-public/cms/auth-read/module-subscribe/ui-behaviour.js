@@ -507,7 +507,7 @@
 					.text(function(e) {
 						return [
 							moment(e.WKCArticlePublishDate).format('MMMM Do YYYY, h:mm:ss a'),
-							e.WKCArticleTitle || e.WKCArticleBody,
+							e.WKCArticleTitle || e.WKCArticleSnippet,
 						].join(': ');
 					});
 

@@ -284,11 +284,41 @@ describe('WKCResponseParserArticlesForCustomTwitterTimeline', function testWKCRe
 	});
 
 	it('populates WKCArticleBody', function() {
-		assert.strictEqual(mainModule.WKCResponseParserArticlesForCustomTwitterTimeline(null, kStubs.kStubsResponseCustomTwitterTimelineValid()).pop().WKCArticleBody, 'echo');
+		assert.strictEqual(mainModule.WKCResponseParserArticlesForCustomTwitterTimeline(null, kStubs.kStubsResponseCustomTwitterTimelineValid()).pop().WKCArticleBody, '<p>echo</p>');
 	});
 
 	it('populates WKCArticleSnippet undefined', function() {
 		assert.strictEqual(mainModule.WKCResponseParserArticlesForCustomTwitterTimeline(null, kStubs.kStubsResponseCustomTwitterTimelineValid()).pop().WKCArticleSnippet, 'echo');
+	});
+
+	context('WKCArticleBody', function () {
+		
+		it('converts line breaks', function() {
+			assert.strictEqual(mainModule.WKCResponseParserArticlesForCustomTwitterTimeline(null, kStubs.kStubsResponseCustomTwitterTimelineValid().replace('echo', 'echo\\n\\nx')).pop().WKCArticleBody, '<p>echo</p>\n<p>x</p>');
+		});
+
+	});
+
+});
+
+describe('WKCResponseParserHTMLForPlaintext', function testWKCResponseParserHTMLForPlaintext() {
+
+	it('throws error if not string', function() {
+		assert.throws(function() {
+			mainModule.WKCResponseParserHTMLForPlaintext(null);
+		}, /WKCErrorInvalidInput/);
+	});
+
+	it('returns string as p', function() {
+		assert.strictEqual(mainModule.WKCResponseParserHTMLForPlaintext('alfa'), '<p>alfa</p>');
+	});
+
+	it('returns single newline as br', function() {
+		assert.strictEqual(mainModule.WKCResponseParserHTMLForPlaintext('alfa\nbravo'), '<p>alfa<br />\nbravo</p>');
+	});
+
+	it('returns double newline as p', function() {
+		assert.strictEqual(mainModule.WKCResponseParserHTMLForPlaintext('alfa\n\nbravo'), '<p>alfa</p>\n<p>bravo</p>');
 	});
 
 });
