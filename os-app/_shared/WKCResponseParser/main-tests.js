@@ -300,6 +300,10 @@ describe('WKCResponseParserArticlesForCustomTwitterTimeline', function testWKCRe
 		it('converts hashtags', function() {
 			assert.strictEqual(mainModule.WKCResponseParserArticlesForCustomTwitterTimeline(null, kStubs.kStubsResponseCustomTwitterTimelineValid().replace('echo', '#echo #foxtrot')).pop().WKCArticleBody, '<p><a href="https://twitter.com/hashtag/echo">#echo</a> <a href="https://twitter.com/hashtag/foxtrot">#foxtrot</a></p>');
 		});
+		
+		it('converts usernames', function() {
+			assert.strictEqual(mainModule.WKCResponseParserArticlesForCustomTwitterTimeline(null, kStubs.kStubsResponseCustomTwitterTimelineValid().replace('echo', '@echo @foxtrot')).pop().WKCArticleBody, '<p><a href="https://twitter.com/echo">@echo</a> <a href="https://twitter.com/foxtrot">@foxtrot</a></p>');
+		});
 
 	});
 

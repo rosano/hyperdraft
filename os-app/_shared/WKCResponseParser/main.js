@@ -156,6 +156,10 @@
 			tweetBody = tweetBody.replace(new RegExp(e, 'g'), `[${e}](https://twitter.com/hashtag/${e.replace('#', '')})`);
 		});
 
+		(tweetBody.match(/@([^\W ]+)/g) || []).forEach(function (e) {
+			tweetBody = tweetBody.replace(new RegExp(e, 'g'), `[${e}](https://twitter.com/${e.replace('@', '')})`);
+		});
+
 		return tweetBody;
 	};
 
