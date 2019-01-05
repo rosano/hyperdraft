@@ -135,6 +135,7 @@
 				WKCArticleOriginalURL: `https://twitter.com/${e.user.screen_name}/status/${e.id_str}`,
 				WKCArticlePublishDate: new Date(e.created_at),
 				WKCArticleBody: e.full_text,
+				WKCArticleSnippet: exports.WKCResponseParserSnippetFromText(e.full_text),
 			};
 		});
 	};

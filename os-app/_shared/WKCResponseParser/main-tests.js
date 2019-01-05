@@ -288,7 +288,7 @@ describe('WKCResponseParserArticlesForCustomTwitterTimeline', function testWKCRe
 	});
 
 	it('populates WKCArticleSnippet undefined', function() {
-		assert.strictEqual(mainModule.WKCResponseParserArticlesForCustomTwitterTimeline(null, kStubs.kStubsResponseCustomTwitterTimelineValid()).pop().WKCArticleSnippet, undefined);
+		assert.strictEqual(mainModule.WKCResponseParserArticlesForCustomTwitterTimeline(null, kStubs.kStubsResponseCustomTwitterTimelineValid()).pop().WKCArticleSnippet, 'echo');
 	});
 
 });
