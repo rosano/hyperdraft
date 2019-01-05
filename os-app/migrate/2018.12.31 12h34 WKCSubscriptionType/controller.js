@@ -27,7 +27,7 @@ exports.OLSKControllerRoutes = function() {
 exports.WKCMigrateMainAction = function(req, res, next) {
 	return req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_subscriptions').find({
 		WKCSubscriptionHandler: null,
-	}).project(['WKCSubscriptionFetchData'].reduce(function(hash, e) {
+	}).project(['WKCSubscriptionFetchContent'].reduce(function(hash, e) {
 		hash[e] = 0;
 
 		return hash;

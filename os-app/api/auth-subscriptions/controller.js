@@ -131,7 +131,7 @@ exports.WKCActionAPISubscriptionsSearch = function(req, res, next) {
 
 		return res.json(responseJSON);
 	}, {
-		WKCOptionExcludeWKCSubscriptionFetchData: true,
+		WKCOptionExcludeWKCSubscriptionFetchContent: true,
 	});
 };
 

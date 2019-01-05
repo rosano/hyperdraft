@@ -212,7 +212,7 @@ exports.WKCMetalSubscriptionsNeedingFetch = function(databaseClient, completionH
 			},
 		},
 		],
-	}).project(modelLibrary.WKCSubscriptionHiddenPropertyNames().concat(options && options.WKCOptionExcludeWKCSubscriptionFetchData ? ['WKCSubscriptionFetchData'] : []).reduce(function(hash, e) {
+	}).project(modelLibrary.WKCSubscriptionHiddenPropertyNames().concat(options && options.WKCOptionExcludeWKCSubscriptionFetchContent ? ['WKCSubscriptionFetchContent'] : []).reduce(function(hash, e) {
 		hash[e] = 0;
 
 		return hash;

@@ -331,27 +331,27 @@ describe('WKCMetalSubscriptionsNeedingFetch', function testWKCMetalSubscriptions
 
 	});
 
-	context('WKCOptionExcludeWKCSubscriptionFetchData', function () {
+	context('WKCOptionExcludeWKCSubscriptionFetchContent', function () {
 
-		it('returns with WKCSubscriptionFetchData if true', function(done) {
+		it('returns with WKCSubscriptionFetchContent if true', function(done) {
 			metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTesting.kTestingValidSubscription(), {
-				WKCSubscriptionFetchData: 'alfa',
+				WKCSubscriptionFetchContent: 'alfa',
 			}), function(err, subscriptionObject1) {
-				delete subscriptionObject1.WKCSubscriptionFetchData;
+				delete subscriptionObject1.WKCSubscriptionFetchContent;
 				
 				metalLibrary.WKCMetalSubscriptionsNeedingFetch(WKCTestingMongoClient, function(err, responseJSON) {
 					assert.deepEqual(responseJSON, [subscriptionObject1]);
 
 					done();
 				}, {
-					WKCOptionExcludeWKCSubscriptionFetchData: true,
+					WKCOptionExcludeWKCSubscriptionFetchContent: true,
 				});
 			});
 		});
 
-		it('returns without WKCSubscriptionFetchData', function(done) {
+		it('returns without WKCSubscriptionFetchContent', function(done) {
 			metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTesting.kTestingValidSubscription(), {
-				WKCSubscriptionFetchData: 'alfa',
+				WKCSubscriptionFetchContent: 'alfa',
 			}), function(err, subscriptionObject1) {
 				metalLibrary.WKCMetalSubscriptionsNeedingFetch(WKCTestingMongoClient, function(err, responseJSON) {
 					assert.deepEqual(responseJSON, [subscriptionObject1]);
