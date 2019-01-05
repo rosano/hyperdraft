@@ -84,7 +84,12 @@
 			var itemContent = (function () {
 				var contentString = e.getElementsByTagName('content')[0] || e.getElementsByTagName('summary')[0];
 
-				contentString = contentString ? contentString.innerHTML : '';
+				try {
+					contentString = contentString ? contentString.innerHTML : '';
+				} catch(e) {
+					console.log([e, 'using textContent']);
+					contentString = contentString ? contentString.textContent : '';
+				}
 
 				return contentString.trim();
 			})();
