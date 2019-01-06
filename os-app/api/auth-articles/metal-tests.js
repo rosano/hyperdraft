@@ -201,6 +201,12 @@ describe('WKCMetalArticlesSearch', function testWKCMetalArticlesSearch() {
 		}, /WKCErrorInvalidInput/);
 	});
 
+	it('throws error if param4 not object', function() {
+		assert.throws(function() {
+			metalLibrary.WKCMetalArticlesSearch(WKCTestingMongoClient, {}, function() {}, null);
+		}, /WKCErrorInvalidInput/);
+	});
+
 	it('returns all if param2 empty', function(done) {
 		metalLibrary.WKCMetalArticlesCreate(WKCTestingMongoClient, kTestingValidArticle(), function(err, articleObject1) {
 			metalLibrary.WKCMetalArticlesCreate(WKCTestingMongoClient, kTestingValidArticle(), function(err, articleObject2) {
@@ -229,6 +235,32 @@ describe('WKCMetalArticlesSearch', function testWKCMetalArticlesSearch() {
 				});
 			});
 		});
+	});
+
+	context('WKCOptionLimit', function () {
+
+		it('throws error if not int', function() {
+			assert.throws(function() {
+				metalLibrary.WKCMetalArticlesSearch(WKCTestingMongoClient, {}, function() {}, {
+					WKCOptionLimit: '1',
+				});
+			}, /WKCErrorInvalidInput/);
+		});
+
+		it('returns limited if WKCOptionLimit set', function(done) {
+			metalLibrary.WKCMetalArticlesCreate(WKCTestingMongoClient, kTestingValidArticle(), function(err, articleObject1) {
+				metalLibrary.WKCMetalArticlesCreate(WKCTestingMongoClient, kTestingValidArticle(), function(err, articleObject2) {
+					metalLibrary.WKCMetalArticlesSearch(WKCTestingMongoClient, {}, function(err, responseJSON) {
+						assert.deepEqual(responseJSON, [articleObject1]);
+
+						done();
+					}, {
+						WKCOptionLimit: 1,
+					});
+				});
+			});
+		});
+
 	});
 
 });

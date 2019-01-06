@@ -157,12 +157,20 @@ exports.WKCMetalArticlesDelete = function(databaseClient, inputData, completionH
 
 //_ WKCMetalArticlesSearch
 
-exports.WKCMetalArticlesSearch = function(databaseClient, inputData, completionHandler) {
+exports.WKCMetalArticlesSearch = function(databaseClient, inputData, completionHandler, options) {
 	if (typeof completionHandler !== 'function') {
 		throw new Error('WKCErrorInvalidInput');
 	}
 
 	if (typeof inputData !== 'object' || inputData === null) {
+		throw new Error('WKCErrorInvalidInput');
+	}
+
+	if (options && typeof options !== 'object' || options === null) {
+		throw new Error('WKCErrorInvalidInput');
+	}
+
+	if (options && options.WKCOptionLimit && parseInt(options.WKCOptionLimit) !== options.WKCOptionLimit) {
 		throw new Error('WKCErrorInvalidInput');
 	}
 
@@ -180,7 +188,7 @@ exports.WKCMetalArticlesSearch = function(databaseClient, inputData, completionH
 		
 	// 	return hash;
 	// }, {})
-	).toArray(function(err, result) {
+	).limit(options && options.WKCOptionLimit ? options.WKCOptionLimit : 0).toArray(function(err, result) {
 		if (err) {
 			return completionHandler(err);
 		}
