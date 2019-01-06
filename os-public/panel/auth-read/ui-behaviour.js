@@ -182,6 +182,26 @@
 		moi.commandsArticlesDiscard(moi.propertiesSelectedArticle());
 	};
 
+	//_ interfaceArticlesDeleteShortcutDidClick
+
+	moi.interfaceArticlesDeleteShortcutDidClick = function () {
+		if (!moi.propertiesSelectedArticle()) {
+			return;
+		}
+
+		if (moi.propertiesSelectedSource() === kWKCReadOutlookInbox) {
+			return moi.interfaceArticlesDiscardButtonDidClick();
+		}
+
+		if (moi.propertiesSelectedSource() === kWKCReadOutlookArchived) {
+			return moi.interfaceArticlesInboxButtonDidClick();
+		}
+
+		if (moi.propertiesSelectedSource() === kWKCReadOutlookDiscarded) {
+			return moi.interfaceArticlesInboxButtonDidClick();
+		}
+	};
+
 	//# COMMANDS
 
 	//_ commandsAlertConnectionError
