@@ -211,7 +211,7 @@ describe('WKCMetalArticlesSearch', function testWKCMetalArticlesSearch() {
 		metalLibrary.WKCMetalArticlesCreate(WKCTestingMongoClient, kTestingValidArticle(), function(err, articleObject1) {
 			metalLibrary.WKCMetalArticlesCreate(WKCTestingMongoClient, kTestingValidArticle(), function(err, articleObject2) {
 				metalLibrary.WKCMetalArticlesSearch(WKCTestingMongoClient, {}, function(err, responseJSON) {
-					assert.deepEqual(responseJSON, [articleObject1, articleObject2]);
+					assert.deepEqual(responseJSON, [articleObject2, articleObject1]);
 
 					done();
 				});
@@ -251,7 +251,7 @@ describe('WKCMetalArticlesSearch', function testWKCMetalArticlesSearch() {
 			metalLibrary.WKCMetalArticlesCreate(WKCTestingMongoClient, kTestingValidArticle(), function(err, articleObject1) {
 				metalLibrary.WKCMetalArticlesCreate(WKCTestingMongoClient, kTestingValidArticle(), function(err, articleObject2) {
 					metalLibrary.WKCMetalArticlesSearch(WKCTestingMongoClient, {}, function(err, responseJSON) {
-						assert.deepEqual(responseJSON, [articleObject1]);
+						assert.deepEqual(responseJSON, [articleObject2]);
 
 						done();
 					}, {
