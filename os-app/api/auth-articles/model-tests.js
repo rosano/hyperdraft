@@ -29,6 +29,14 @@ describe('WKCModelArticlePrepare', function testWKCModelArticlePrepare() {
 		});
 	});
 
+	it('returns input with WKCArticleDateDiscarded as date', function() {
+		assert.deepEqual(modelLibrary.WKCModelArticlePrepare({
+			WKCArticleDateDiscarded: '2018-12-09T19:07:01.902Z',
+		}), {
+			WKCArticleDateDiscarded: new Date('2018-12-09T19:07:01.902Z'),
+		});
+	});
+
 });
 
 describe('WKCModelInputDataIsArticleObject', function testWKCModelInputDataIsArticleObject() {

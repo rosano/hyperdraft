@@ -7,8 +7,12 @@
 //_ WKCModelArticlePrepare
 
 exports.WKCModelArticlePrepare = function(inputData) {
-	if (inputData.WKCArticlePublishDate !== undefined) {
+	if (inputData.WKCArticlePublishDate) {
 		inputData.WKCArticlePublishDate = new Date(inputData.WKCArticlePublishDate);
+	}
+
+	if (inputData.WKCArticleDateDiscarded) {
+		inputData.WKCArticleDateDiscarded = new Date(inputData.WKCArticleDateDiscarded);
 	}
 
 	return inputData;
