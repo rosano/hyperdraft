@@ -4,8 +4,6 @@
  * MIT Licensed
  */
 
-const subscriptionsMetalLibrary = require('../../api/auth-subscriptions/metal.js');
-
 //_ OLSKControllerRoutes
 
 exports.OLSKControllerRoutes = function() {
