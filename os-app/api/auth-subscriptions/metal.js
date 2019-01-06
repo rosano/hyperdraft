@@ -4,6 +4,8 @@
  * MIT Licensed
  */
 
+var OLSKIdentifier = require('OLSKIdentifier');
+
 var modelLibrary = require('./model');
 
 //_ WKCMetalSubscriptionsCreate
@@ -24,24 +26,27 @@ exports.WKCMetalSubscriptionsCreate = function(databaseClient, inputData, comple
 		}));
 	}
 
-	var currentDate = new Date();
+	return OLSKIdentifier.OLSKIdentifierTimeBased().then(function (id) {
+		var currentDate = new Date();
 
-	return databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_subscriptions').insertOne(Object.assign(inputData, {
-		WKCSubscriptionID: parseInt(new Date() * 1).toString(),
-		WKCSubscriptionDateCreated: currentDate,
-		WKCSubscriptionDateUpdated: currentDate,
-	}), function(err, result) {
-		if (err) {
-			return completionHandler(err);
-		}
+		return databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_subscriptions').insertOne(Object.assign(inputData, {
+			WKCSubscriptionID: parseInt(new Date() * 1).toString(),
+			WKCSubscriptionID2: id,
+			WKCSubscriptionDateCreated: currentDate,
+			WKCSubscriptionDateUpdated: currentDate,
+		}), function(err, result) {
+			if (err) {
+				return completionHandler(err);
+			}
 
-		var subscriptionObject = result.ops.pop();
+			var subscriptionObject = result.ops.pop();
 
-		modelLibrary.WKCSubscriptionHiddenPropertyNames().forEach(function(obj) {
-			delete subscriptionObject[obj];
+			modelLibrary.WKCSubscriptionHiddenPropertyNames().forEach(function(obj) {
+				delete subscriptionObject[obj];
+			});
+
+			return completionHandler(null, subscriptionObject);
 		});
-
-		return completionHandler(null, subscriptionObject);
 	});
 };
 

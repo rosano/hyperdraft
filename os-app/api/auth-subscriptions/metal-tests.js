@@ -51,6 +51,7 @@ describe('WKCMetalSubscriptionsCreate', function testWKCMetalSubscriptionsCreate
 		metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, kTesting.kTestingValidSubscription(), function(err, responseJSON) {
 			assert.deepEqual(responseJSON, Object.assign(kTesting.kTestingValidSubscription(), {
 				WKCSubscriptionID: responseJSON.WKCSubscriptionID,
+				WKCSubscriptionID2: responseJSON.WKCSubscriptionID2,
 				WKCSubscriptionDateCreated: responseJSON.WKCSubscriptionDateCreated,
 				WKCSubscriptionDateUpdated: responseJSON.WKCSubscriptionDateUpdated,
 			}));
