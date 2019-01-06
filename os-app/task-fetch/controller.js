@@ -8,12 +8,12 @@ const requestPackage = require('request');
 const jsdomPackage = require('jsdom');
 
 const typeLibrary = require('OLSKType');
+var WKCDiff = require('./_shared/WKCDiff/main.js');
 
 var apiSubscriptionsModel = require('../api/auth-subscriptions/model');
 var apiSubscriptionsMetal = require('../api/auth-subscriptions/metal');
 var apiArticlesMetal = require('../api/auth-articles/metal');
 var apiSnapshotsMetal = require('../api/auth-snapshots/metal');
-var diffLibrary = require('./diff');
 var resolveLibrary = require('./resolve');
 var responseParserLibrary = require('../_shared/WKCParser/main.js');
 

@@ -10,13 +10,52 @@
 	(factory((global.WKCParser = global.WKCParser || {})));
 }(this, (function (exports) { 'use strict';
 
+	const turndownPackage = typeof require === 'undefined' ? window.turndown : require('turndown');
 	const showdownPackage = typeof require === 'undefined' ? window.showdown : require('showdown');
+	const htmlEntitiesPackage = typeof require === 'undefined' ? window.htmlEntities : require('html-entities');
+
 	const WKCDiffPackage = typeof require === 'undefined' ? window.WKCDiff : require('../WKCDiff/main.js');
+
+	const turndownInstance = new turndownPackage({
+		headingStyle: 'atx',
+	});
+	turndownInstance.remove('script');
+	turndownInstance.remove('style');
+	turndownInstance.addRule('trim whitespace in link text', {
+		filter: function (node, options) {
+			return node.nodeName === 'A' && node.innerHTML !== node.textContent;
+		},
+		replacement: function (content, node) {
+			return [
+				'[',
+				content.trim(),
+				'](',
+				node.getAttribute('href'),
+				')',
+			].join('');
+		},
+	});
+	turndownInstance.addRule('populate blank links', {
+		filter: function (node, options) {
+			return node.nodeName === 'A' && !node.textContent.trim();
+		},
+		replacement: function (content, node) {
+			return [
+				'[',
+				node.getAttribute('title') || '\\[\\_\\_\\_\\_\\_\\]',
+				'](',
+				node.getAttribute('href'),
+				')',
+			].join('');
+		},
+	});
 
 	const showdownConverter = new showdownPackage.Converter();
 	showdownConverter.setOption('simpleLineBreaks', true)
 	showdownConverter.setOption('simplifiedAutoLink', true);
 	showdownConverter.setOption('noHeaderId', true);
+
+	const htmlEntitiesInstance = new (htmlEntitiesPackage.AllHtmlEntities)();
 
 	const contentForFirst = function (inputData) {
 		return inputData[0] ? inputData[0].textContent : '';
@@ -111,6 +150,34 @@
 				WKCArticleSnippet: exports.WKCParserSnippetFromText(DOMParserInstance.parseFromString(`<div>${itemContent}</div>`, 'text/html').body.textContent),
 			};
 		});
+	};
+
+	//_ WKCParserArticlesForPage
+
+	exports.WKCParserArticlesForPage = function(DOMParserInstance, oldString, newString) {
+		if (typeof DOMParserInstance !== 'object' || DOMParserInstance === null) {
+			throw new Error('WKCErrorInvalidInput');
+		}
+
+		if (typeof DOMParserInstance.parseFromString !== 'function') {
+			throw new Error('WKCErrorInvalidInput');
+		}
+
+		if (typeof newString !== 'string') {
+			throw new Error('WKCErrorInvalidInput');
+		}
+
+		oldString = turndownInstance.turndown(DOMParserInstance.parseFromString(oldString || '', 'text/html').body.innerHTML);
+		newString = turndownInstance.turndown(DOMParserInstance.parseFromString(newString, 'text/html').body.innerHTML);
+
+		if (oldString === newString) {
+			return [];
+		}
+
+		return [{
+			WKCArticleBody: WKCDiffPackage._WKCDiffConvertDiffTagsToHTML(exports.WKCParserHTMLForPlaintext(WKCDiffPackage.WKCDiffHTMLForStrings(oldString, newString))),
+			WKCArticlePublishDate: new Date(),
+		}];
 	};
 
 	//_ WKCParserArticlesForFile

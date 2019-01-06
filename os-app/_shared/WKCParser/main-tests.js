@@ -39,6 +39,13 @@ const kStubs = {
 	kStubsResponseCustomTwitterTimelineComplete: function() {
 		return JSON.stringify(stubsModule.kStubsResponseCustomTwitterTimelineComplete());
 	},
+	kStubsHTML: function(inputData) {
+		return [
+			'<!DOCTYPE html><html><head><title>bravo</title></head><body>',
+			inputData || '<h1>alfa</h1><script>var charlie = "delta";</script><style type="text/css">.echo {foxtrot: "golf";}</style>',
+			'</body></html>',
+		].join('');
+	},
 	kStubsBody: function() {
 		return 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.';
 	},
@@ -49,7 +56,7 @@ const kStubs = {
 
 describe('WKCParserArticlesForFeedRSS', function testWKCParserArticlesForFeedRSS() {
 
-	it('throws error if param1 not object', function() {
+	it('throws error if param1 not DOMParser', function() {
 		assert.throws(function() {
 			mainModule.WKCParserArticlesForFeedRSS(null, kStubs.kStubsRSSValid(), kStubs.kStubsRSSValid());
 		}, /WKCErrorInvalidInput/);
@@ -229,6 +236,76 @@ describe('WKCParserArticlesForFeedAtom', function testWKCParserArticlesForFeedAt
 
 	it('populates WKCArticleSnippet', function() {
 		assert.strictEqual(mainModule.WKCParserArticlesForFeedAtom(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsAtomComplete()).pop().WKCArticleSnippet, 'foxtrot');
+	});
+
+});
+
+describe('WKCParserArticlesForPage', function testWKCParserArticlesForPage() {
+
+	it('throws error if param1 not DOMParser', function() {
+		assert.throws(function() {
+			mainModule.WKCParserArticlesForPage(null, kStubs.kStubsRSSValid(), kStubs.kStubsRSSValid());
+		}, /WKCErrorInvalidInput/);
+	});
+
+	it('throws error if param1 missing parseFromString', function() {
+		assert.throws(function() {
+			mainModule.WKCParserArticlesForPage({}, kStubs.kStubsRSSValid(), kStubs.kStubsRSSValid());
+		}, /WKCErrorInvalidInput/);
+	});
+
+	it('throws error if param3 not string', function() {
+		assert.throws(function() {
+			mainModule.WKCParserArticlesForPage(kStubs.kStubsDOMParserInstance(), 'alfa', null);
+		}, /WKCErrorInvalidInput/);
+	});
+
+	it('returns none if identical', function() {
+		assert.deepEqual(mainModule.WKCParserArticlesForPage(kStubs.kStubsDOMParserInstance(), kStubs.kStubsHTML(), kStubs.kStubsHTML()), []);
+	});
+
+	it('returns none if head changes', function() {
+		assert.deepEqual(mainModule.WKCParserArticlesForPage(kStubs.kStubsDOMParserInstance(), kStubs.kStubsHTML(), kStubs.kStubsHTML().replace('bravo', 'bravox')), []);
+	});
+
+	it('ignores script', function() {
+		assert.deepEqual(mainModule.WKCParserArticlesForPage(kStubs.kStubsDOMParserInstance(), kStubs.kStubsHTML(), kStubs.kStubsHTML().replace('delta', 'deltax')), []);
+	});
+
+	it('ignores style', function() {
+		assert.deepEqual(mainModule.WKCParserArticlesForPage(kStubs.kStubsDOMParserInstance(), kStubs.kStubsHTML(), kStubs.kStubsHTML().replace('golf', 'golfx')), []);
+	});
+
+	it('returns one if not identical', function() {
+		assert.deepEqual(mainModule.WKCParserArticlesForPage(kStubs.kStubsDOMParserInstance(), kStubs.kStubsHTML(), kStubs.kStubsHTML().replace('alfa', 'alfax')).length, 1);
+	});
+
+	it('populates article date', function() {
+		assert.strictEqual(mainModule.WKCParserArticlesForPage(kStubs.kStubsDOMParserInstance(), kStubs.kStubsHTML(), kStubs.kStubsHTML().replace('alfa', 'alfax')).pop().WKCArticlePublishDate - (new Date()) < 100, true);
+	});
+
+	it('populates article body', function() {
+		assert.strictEqual(mainModule.WKCParserArticlesForPage(kStubs.kStubsDOMParserInstance(), kStubs.kStubsHTML(), kStubs.kStubsHTML().replace('alfa', 'alfax')).pop().WKCArticleBody, '<h1>alfa<ins>x</ins></h1>');
+	});
+
+	it('populates blank links with title value', function() {
+		assert.strictEqual(mainModule.WKCParserArticlesForPage(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsHTML('<a href="hotel" title="alfa"></a>')).pop().WKCArticleBody, '<p><ins><a href="hotel">alfa</a></ins></p>');
+	});
+
+	it('populates blank links with placeholder', function() {
+		assert.strictEqual(mainModule.WKCParserArticlesForPage(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsHTML('<a href="hotel"></a>')).pop().WKCArticleBody, '<p><ins><a href="hotel">[_____]</a></ins></p>');
+	});
+
+	it('strips whitespace from link content', function() {
+		assert.strictEqual(mainModule.WKCParserArticlesForPage(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsHTML('<a href="hotel"><div><p><strong>indigo</strong><br></p></div></a>')).pop().WKCArticleBody, '<p><ins><a href="hotel"><strong>indigo</strong></a></ins></p>');
+	});
+
+	it('handles multiple link tasks simultaneously', function() {
+		assert.strictEqual(mainModule.WKCParserArticlesForPage(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsHTML('<a href="hotel"><div><p>indigo<br></p></div></a><a href="hotel"></a><a href="hotel"><div><p>indigo<br></p></div></a><a href="hotel"></a>')).pop().WKCArticleBody, '<p><ins><a href="hotel">indigo</a><a href="hotel">[_____]</a><a href="hotel">indigo</a><a href="hotel">[_____]</a></ins></p>');
+	});
+
+	it.skip('wraps children with ins', function() {
+		assert.strictEqual(mainModule.WKCParserArticlesForPage(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsHTML('<h1>alfa</h1><p>bravo</p><a href="delta">charlie</a>')).pop().WKCArticleBody, '<h1><ins>alfa</ins></h1><p><ins>bravo</ins></p><a href="delta"><ins>charlie</ins></a>');
 	});
 
 });
