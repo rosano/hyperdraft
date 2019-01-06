@@ -83,6 +83,14 @@ exports.WKCModelInputDataIsArticleObject = function(inputData, options) {
 		}
 	}
 
+	if (inputData.WKCArticleDateDiscarded) {
+		if (!(inputData.WKCArticleDateDiscarded instanceof Date) || Number.isNaN(inputData.WKCArticleDateDiscarded.getTime())) {
+			errors.WKCArticleDateDiscarded = [
+				'WKCErrorNotDate',
+			];
+		}
+	}
+
 	if (options && options.WKCModelValidatePresentOnly) {
 		Object.keys(errors).forEach(function(e) {
 			if (typeof inputData[e] === 'undefined') {

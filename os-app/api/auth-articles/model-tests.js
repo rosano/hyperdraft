@@ -180,6 +180,31 @@ describe('WKCModelInputDataIsArticleObject', function testWKCModelInputDataIsArt
 
 	});
 
+	context('WKCArticleDateDiscarded', function() {
+
+		it('returns false with WKCErrors if not date', function() {
+			var item = Object.assign(kTestingValidArticle(), {
+				WKCArticleDateDiscarded: Date.now(),
+			});
+
+			assert.strictEqual(modelLibrary.WKCModelInputDataIsArticleObject(item), false);
+			assert.deepEqual(item.WKCErrors, {
+				WKCArticleDateDiscarded: [
+					'WKCErrorNotDate',
+				],
+			});
+		});
+
+		it('returns true', function() {
+			var item = Object.assign(kTestingValidArticle(), {
+				WKCArticleDateDiscarded: new Date(),
+			});
+
+			assert.strictEqual(modelLibrary.WKCModelInputDataIsArticleObject(item), true);
+		});
+
+	});
+
 });
 
 describe('WKCArticleHiddenPropertyNames', function testWKCArticleHiddenPropertyNames() {
