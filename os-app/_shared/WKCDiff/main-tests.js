@@ -6,7 +6,7 @@
 
 const assert = require('assert');
 
-var mainModule = require('./main');
+const mainModule = require('./main');
 
 const kTests = {
 	kTestsTextMultiline: function(count) {

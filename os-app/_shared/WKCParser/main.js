@@ -11,6 +11,7 @@
 }(this, (function (exports) { 'use strict';
 
 	const showdownPackage = typeof require === 'undefined' ? window.showdown : require('showdown');
+	const WKCDiffPackage = typeof require === 'undefined' ? window.WKCDiff : require('../WKCDiff/main.js');
 
 	const showdownConverter = new showdownPackage.Converter();
 	showdownConverter.setOption('simpleLineBreaks', true)
@@ -110,6 +111,23 @@
 				WKCArticleSnippet: exports.WKCParserSnippetFromText(DOMParserInstance.parseFromString(`<div>${itemContent}</div>`, 'text/html').body.textContent),
 			};
 		});
+	};
+
+	//_ WKCParserArticlesForFile
+
+	exports.WKCParserArticlesForFile = function(oldString, newString) {
+		if (typeof newString !== 'string') {
+			throw new Error('WKCErrorInvalidInput');
+		}
+
+		if (oldString === newString) {
+			return [];
+		}
+
+		return [{
+			WKCArticleBody: WKCDiffPackage._WKCDiffConvertDiffTagsToHTML(htmlEntitiesInstance.encode(WKCDiffPackage.WKCDiffHTMLForStrings(oldString, newString)).replace(/\n/g, '<br>')),
+			WKCArticlePublishDate: new Date(),
+		}];
 	};
 
 	//_ WKCParserInputDataIsCustomTwitterTimeline

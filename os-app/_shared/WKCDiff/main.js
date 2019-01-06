@@ -7,6 +7,12 @@
 // const diffPackage = require('diff');
 const diffPatchMatchPackage = require('diff-match-patch');
 
+//_ _WKCDiffConvertDiffTagsToHTML
+
+exports._WKCDiffConvertDiffTagsToHTML = function(inputData) {
+	return inputData.replace(/\{(\/)?WKCDiffInsert\}/g, '<$1ins>').replace(/\{(\/)?WKCDiffDelete\}/g, '<$1del>');
+};
+
 //_ WKCDiffHTMLForStrings
 
 exports.WKCDiffHTMLForStrings = function(oldString, newString) {

@@ -24,40 +24,6 @@ const kTests = {
 	},
 };
 
-describe('WKCDiffArticlesForFile', function testWKCDiffArticlesForFile() {
-
-	it('throws error if param2 not string', function() {
-		assert.throws(function() {
-			diffLibrary.WKCDiffArticlesForFile('alfa', null);
-		}, /WKCErrorInvalidInput/);
-	});
-
-	it('returns none if identical', function() {
-		assert.deepEqual(diffLibrary.WKCDiffArticlesForFile('alfa', 'alfa'), []);
-	});
-
-	it('returns one if not identical', function() {
-		assert.deepEqual(diffLibrary.WKCDiffArticlesForFile('alfa', 'alfax').length, 1);
-	});
-
-	it('populates article date', function() {
-		assert.strictEqual(diffLibrary.WKCDiffArticlesForFile('alfa', 'alfax').pop().WKCArticlePublishDate - (new Date()) < 100, true);
-	});
-
-	it('populates article body', function() {
-		assert.strictEqual(diffLibrary.WKCDiffArticlesForFile('alfa', 'alfax').pop().WKCArticleBody, 'alfa<ins>x</ins>');
-	});
-
-	it('escapes html tags', function() {
-		assert.strictEqual(diffLibrary.WKCDiffArticlesForFile('<b>alfa</b>', '<b>alfax</b>').pop().WKCArticleBody, '&lt;b&gt;alfa<ins>x</ins>&lt;/b&gt;');
-	});
-
-	it('adds markup for line breaks', function() {
-		assert.strictEqual(diffLibrary.WKCDiffArticlesForFile(kTests.kTestsTextMultiline(3), kTests.kTestsTextMultiline(3).replace('alfa', 'alfax')).pop().WKCArticleBody, kTests.kTestsTextMultiline(3).replace('alfa', 'alfa<ins>x</ins>').replace(/\n/g, '<br>'));
-	});
-
-});
-
 describe('WKCDiffArticlesForPage', function testWKCDiffArticlesForPage() {
 
 	it('throws error if param2 not string', function() {

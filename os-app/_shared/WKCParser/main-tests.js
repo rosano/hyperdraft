@@ -42,6 +42,9 @@ const kStubs = {
 	kStubsBody: function() {
 		return 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.';
 	},
+	kStubsTextMultiline: function(count) {
+		return 'alfa bravo charlie delta echo foxtrot golf hotel indigo juliet kilo'.split(' ').slice(0, typeof count === 'undefined' ? Infinity : count).join('\n').concat('\n');
+	},
 };
 
 describe('WKCParserArticlesForFeedRSS', function testWKCParserArticlesForFeedRSS() {
@@ -226,6 +229,40 @@ describe('WKCParserArticlesForFeedAtom', function testWKCParserArticlesForFeedAt
 
 	it('populates WKCArticleSnippet', function() {
 		assert.strictEqual(mainModule.WKCParserArticlesForFeedAtom(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsAtomComplete()).pop().WKCArticleSnippet, 'foxtrot');
+	});
+
+});
+
+describe('WKCParserArticlesForFile', function testWKCParserArticlesForFile() {
+
+	it('throws error if param2 not string', function() {
+		assert.throws(function() {
+			mainModule.WKCParserArticlesForFile('alfa', null);
+		}, /WKCErrorInvalidInput/);
+	});
+
+	it('returns none if identical', function() {
+		assert.deepEqual(mainModule.WKCParserArticlesForFile('alfa', 'alfa'), []);
+	});
+
+	it('returns one if not identical', function() {
+		assert.deepEqual(mainModule.WKCParserArticlesForFile('alfa', 'alfax').length, 1);
+	});
+
+	it('populates article date', function() {
+		assert.strictEqual(mainModule.WKCParserArticlesForFile('alfa', 'alfax').pop().WKCArticlePublishDate - (new Date()) < 100, true);
+	});
+
+	it('populates article body', function() {
+		assert.strictEqual(mainModule.WKCParserArticlesForFile('alfa', 'alfax').pop().WKCArticleBody, 'alfa<ins>x</ins>');
+	});
+
+	it('escapes html tags', function() {
+		assert.strictEqual(mainModule.WKCParserArticlesForFile('<b>alfa</b>', '<b>alfax</b>').pop().WKCArticleBody, '&lt;b&gt;alfa<ins>x</ins>&lt;/b&gt;');
+	});
+
+	it('adds markup for line breaks', function() {
+		assert.strictEqual(mainModule.WKCParserArticlesForFile(kStubs.kStubsTextMultiline(3), kStubs.kStubsTextMultiline(3).replace('alfa', 'alfax')).pop().WKCArticleBody, kStubs.kStubsTextMultiline(3).replace('alfa', 'alfa<ins>x</ins>').replace(/\n/g, '<br>'));
 	});
 
 });

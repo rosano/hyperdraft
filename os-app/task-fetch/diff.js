@@ -48,33 +48,6 @@ var showdownPackage = require('showdown');
 showdownPackage = new showdownPackage.Converter();
 showdownPackage.setOption('noHeaderId', true);
 
-exports._WKCDiffConvertDiffTagsToHTML = function(inputData) {
-	return inputData.replace(/\{(\/)?WKCDiffInsert\}/g, '<$1ins>').replace(/\{(\/)?WKCDiffDelete\}/g, '<$1del>');
-};
-
-//_ _WKCDiffConvertDiffTagsToHTML
-
-exports._WKCDiffConvertDiffTagsToHTML = function(inputData) {
-	return inputData.replace(/\{(\/)?WKCDiffInsert\}/g, '<$1ins>').replace(/\{(\/)?WKCDiffDelete\}/g, '<$1del>');
-};
-
-//_ WKCDiffArticlesForFile
-
-exports.WKCDiffArticlesForFile = function(oldString, newString) {
-	if (typeof newString !== 'string') {
-		throw new Error('WKCErrorInvalidInput');
-	}
-
-	if (oldString === newString) {
-		return [];
-	}
-
-	return [{
-		WKCArticleBody: exports._WKCDiffConvertDiffTagsToHTML(htmlEntitiesInstance.encode(WKCDiff.WKCDiffHTMLForStrings(oldString, newString)).replace(/\n/g, '<br>')),
-		WKCArticlePublishDate: new Date(),
-	}];
-};
-
 //_ WKCDiffArticlesForPage
 
 exports.WKCDiffArticlesForPage = function(oldString, newString) {
@@ -90,7 +63,7 @@ exports.WKCDiffArticlesForPage = function(oldString, newString) {
 	}
 
 	return [{
-		WKCArticleBody: exports._WKCDiffConvertDiffTagsToHTML(showdownPackage.makeHtml(WKCDiff.WKCDiffHTMLForStrings(oldString, newString))),
+		WKCArticleBody: WKCDiff._WKCDiffConvertDiffTagsToHTML(showdownPackage.makeHtml(WKCDiff.WKCDiffHTMLForStrings(oldString, newString))),
 		WKCArticlePublishDate: new Date(),
 	}];
 };
