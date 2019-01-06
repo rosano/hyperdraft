@@ -11,7 +11,7 @@ var metalLibrary = require('./metal');
 const kTestingValidArticle = function() {
 	return {
 		WKCArticleSubscriptionID: 'alfa',
-		WKCArticlePublishDate: new Date(),
+		WKCArticlePublishDate: new Date('2019-01-06T15:12:22.333Z'),
 	};
 };
 
@@ -44,10 +44,10 @@ describe('WKCMetalArticlesCreate', function testWKCMetalArticlesCreate() {
 	});
 
 	it('returns WKCArticle', function(done) {
-		const item = kTestingValidArticle();
-
-		metalLibrary.WKCMetalArticlesCreate(WKCTestingMongoClient, item, function(err, responseJSON) {
-			assert.deepEqual(responseJSON, Object.assign(item, {
+		metalLibrary.WKCMetalArticlesCreate(WKCTestingMongoClient, kTestingValidArticle(), function(err, responseJSON) {
+			assert.deepEqual(responseJSON, Object.assign(kTestingValidArticle(), {
+				WKCArticleID: responseJSON.WKCArticleID,
+				WKCArticleID2: responseJSON.WKCArticleID2,
 				WKCArticleDateCreated: responseJSON.WKCArticleDateCreated,
 				WKCArticleDateUpdated: responseJSON.WKCArticleDateUpdated,
 			}));

@@ -5,6 +5,8 @@
  */
 
 var mongodbPackage = require('mongodb');
+const OLSKIdentifier = require('OLSKIdentifier');
+
 var modelLibrary = require('./model');
 
 //_ WKCMetalArticlesCreate
@@ -22,25 +24,28 @@ exports.WKCMetalArticlesCreate = function(databaseClient, inputData, completionH
 		return completionHandler(null, inputData);
 	}
 
-	var currentDate = new Date();
+	return OLSKIdentifier.OLSKIdentifierTimeBased().then(function (id) {
+		var currentDate = new Date();
 
-	return databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_articles').insertOne(Object.assign(inputData, {
-		WKCArticleDateCreated: currentDate,
-		WKCArticleDateUpdated: currentDate,
-	}), function(err, result) {
-		if (err) {
-			return completionHandler(err);
-		}
+		return databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_articles').insertOne(Object.assign(inputData, {
+			WKCArticleID2: id,
+			WKCArticleDateCreated: currentDate,
+			WKCArticleDateUpdated: currentDate,
+		}), function(err, result) {
+			if (err) {
+				return completionHandler(err);
+			}
 
-		var articleObject = Object.assign(result.ops.slice(-1).pop(), {
-			WKCArticleID: result.ops.slice(-1).pop()._id.toString(),
+			var articleObject = Object.assign(result.ops.slice(-1).pop(), {
+				WKCArticleID: result.ops.slice(-1).pop()._id.toString(),
+			});
+
+			modelLibrary.WKCArticleHiddenPropertyNames().forEach(function(obj) {
+				delete articleObject[obj];
+			});
+
+			return completionHandler(null, articleObject);
 		});
-
-		modelLibrary.WKCArticleHiddenPropertyNames().forEach(function(obj) {
-			delete articleObject[obj];
-		});
-
-		return completionHandler(null, articleObject);
 	});
 };
 
