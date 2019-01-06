@@ -466,7 +466,7 @@
 				return Object.assign(e, {
 					WKCArticlePublishDate: new Date(e.WKCArticlePublishDate),
 				});
-			}).sort(WKCReadLogic.WKCReadLogicArticlesSort));
+			}).sort(inputData === kWKCReadOutlookDiscarded ? WKCReadLogic.WKCReadLogicArticlesDiscardedSort : WKCReadLogic.WKCReadLogicArticlesSort));
 		}, moi.commandsAlertConnectionError)
 		.finally(function () {
 			moi.reactMasterLoaderVisibility(false);

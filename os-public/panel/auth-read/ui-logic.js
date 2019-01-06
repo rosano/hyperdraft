@@ -66,13 +66,13 @@
 	//_ WKCReadLogicArticlesSort
 
 	exports.WKCReadLogicArticlesSort = function (a, b) {
-		return d3Package.descending(a.WKCArticlePublishDate.valueOf(), b.WKCArticlePublishDate.valueOf());
+		return d3Package.descending(a.WKCArticlePublishDate, b.WKCArticlePublishDate);
 	};
 
 	//_ WKCReadLogicArticlesDiscardedSort
 
 	exports.WKCReadLogicArticlesDiscardedSort = function (a, b) {
-		return d3Package.descending(a.WKCArticleDateDiscarded.valueOf(), b.WKCArticleDateDiscarded.valueOf());
+		return d3Package.descending(a.WKCArticleDateDiscarded, b.WKCArticleDateDiscarded);
 	};
 
 	Object.defineProperty(exports, '__esModule', { value: true });
