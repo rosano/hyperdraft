@@ -10,6 +10,8 @@
 	(factory((global.WKCReadLogic = global.WKCReadLogic || {})));
 }(this, (function (exports) { 'use strict';
 
+	const d3Package = typeof require === 'undefined' ? window.d3 : require('d3');
+
 	//_ WKCReadModuleSubscribeCompleteURL
 
 	exports.WKCReadModuleSubscribeCompleteURL = function (param1, param2) {
@@ -64,7 +66,7 @@
 	//_ WKCReadLogicArticlesSort
 
 	exports.WKCReadLogicArticlesSort = function (a, b) {
-		return b.WKCArticlePublishDate > a.WKCArticlePublishDate;
+		return d3Package.descending(a.WKCArticlePublishDate.valueOf(), b.WKCArticlePublishDate.valueOf());
 	};
 
 	Object.defineProperty(exports, '__esModule', { value: true });
