@@ -49,6 +49,7 @@ describe('WKCSnapshotsMetalCreate', function tesSnapshotsMetalCreate() {
 		metalLibrary.WKCSnapshotsMetalCreate(WKCTestingMongoClient, kTesting.kTestingValidSnapshot(), function(err, responseJSON) {
 			assert.deepEqual(responseJSON, Object.assign(kTesting.kTestingValidSnapshot(), {
 				WKCSnapshotID: responseJSON.WKCSnapshotID,
+				WKCSnapshotID2: responseJSON.WKCSnapshotID2,
 				WKCSnapshotDateCreated: responseJSON.WKCSnapshotDateCreated,
 				WKCSnapshotDateUpdated: responseJSON.WKCSnapshotDateUpdated,
 			}));

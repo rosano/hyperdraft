@@ -4,7 +4,7 @@
  * MIT Licensed
  */
 
-var OLSKIdentifier = require('OLSKIdentifier');
+const OLSKIdentifier = require('OLSKIdentifier');
 
 var modelLibrary = require('./model');
 
