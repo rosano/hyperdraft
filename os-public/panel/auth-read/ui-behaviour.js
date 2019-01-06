@@ -319,6 +319,7 @@
 			},
 			body: JSON.stringify({
 				WKCArticleIsDiscarded: true,
+				WKCArticleDateDiscarded: new Date(),
 			}),
 		}).then(function(responseJSON) {
 			Object.assign(item, responseJSON);
@@ -390,6 +391,7 @@
 			body: JSON.stringify({
 				WKCArticleIsArchived: null,
 				WKCArticleIsDiscarded: null,
+				WKCArticleDateDiscarded: null,
 			}),
 		}).then(function(responseJSON) {
 			Object.assign(item, responseJSON);
