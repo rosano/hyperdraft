@@ -284,11 +284,18 @@ describe('WKCActionAPINotesCreate', function testWKCActionAPINotesCreate() {
 				WKCNoteBody: 'alpha',
 			},
 		}), WKCFakeResponseAsync(function(responseJSON) {
-			assert.strictEqual(responseJSON._id, undefined);
-			assert.strictEqual(responseJSON.WKCNoteID - (new Date()) > -200, true);
-			assert.strictEqual(responseJSON.WKCNoteBody, 'alpha');
-			assert.strictEqual(responseJSON.WKCNoteDateCreated instanceof Date, true);
-			assert.strictEqual(responseJSON.WKCNoteDateUpdated instanceof Date, true);
+			assert.deepEqual(responseJSON, Object.assign({
+					WKCNoteBody: 'alpha',
+				}, {
+				WKCNoteID: responseJSON.WKCNoteID,
+				WKCNoteID2: responseJSON.WKCNoteID2,
+				WKCNoteDateCreated: responseJSON.WKCNoteDateCreated,
+				WKCNoteDateUpdated: responseJSON.WKCNoteDateUpdated,
+			}));
+
+			assert.strictEqual(parseInt(responseJSON.WKCNoteID) - (new Date()) > -500, true);
+			assert.strictEqual(responseJSON.WKCNoteDateCreated - (new Date()) > -500, true);
+			assert.strictEqual(responseJSON.WKCNoteDateUpdated - (new Date()) > -500, true);
 
 			done();
 		}));

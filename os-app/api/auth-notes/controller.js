@@ -4,6 +4,8 @@
  * MIT Licensed
  */
 
+const OLSKIdentifier = require('OLSKIdentifier');
+
 var modelLibrary = require('./model');
 
 //_ OLSKControllerRoutes
@@ -140,23 +142,26 @@ exports.WKCActionAPINotesCreate = function(req, res, next) {
 		return res.json(inputData);
 	}
 
-	var noteDate = new Date();
-	return req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_notes').insertOne(Object.assign(inputData, {
-		WKCNoteID: (new Date()) * 1,
-		WKCNoteDateCreated: noteDate,
-		WKCNoteDateUpdated: noteDate,
-	}), function(err, result) {
-		if (err) {
-			throw new Error('WKCErrorDatabaseCreate');
-		}
+	return OLSKIdentifier.OLSKIdentifierTimeBased().then(function (id) {
+		var noteDate = new Date();
+		return req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_notes').insertOne(Object.assign(inputData, {
+			WKCNoteID: (new Date()) * 1,
+			WKCNoteID2: id,
+			WKCNoteDateCreated: noteDate,
+			WKCNoteDateUpdated: noteDate,
+		}), function(err, result) {
+			if (err) {
+				throw new Error('WKCErrorDatabaseCreate');
+			}
 
-		var noteObject = result.ops.pop();
+			var noteObject = result.ops.pop();
 
-		modelLibrary.WKCModelNotesHiddenPropertyNames().forEach(function(obj) {
-			delete noteObject[obj];
+			modelLibrary.WKCModelNotesHiddenPropertyNames().forEach(function(obj) {
+				delete noteObject[obj];
+			});
+
+			return res.json(noteObject);
 		});
-
-		return res.json(noteObject);
 	});
 };
 
