@@ -119,5 +119,7 @@ exports.WKCActionAPIArticlesSearch = function(req, res, next) {
 		}
 
 		return res.json(responseJSON);
+	}, {
+		WKCOptionLimit: 50,
 	});
 };
