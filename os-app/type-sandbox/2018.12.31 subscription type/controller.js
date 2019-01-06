@@ -9,20 +9,18 @@
 exports.OLSKControllerRoutes = function() {
 	return {};
 	return {
-		WKCMigrateMainRoute: {
-			OLSKRoutePath: '/migrate/2018-12-31T12:34',
+		WKCSandboxSubscriptionTypeRoute: {
+			OLSKRoutePath: '/sandbox/2019-01-06-unique-ids',
 			OLSKRouteMethod: 'get',
-			OLSKRouteFunction: exports.WKCMigrateMainAction,
-			OLSKRouteMiddlewares: [
-				'WKCSharedMiddlewareAuthenticate',
-			],
+			OLSKRouteFunction: exports.WKCSandboxSubscriptionTypeAction,
+			OLSKRouteIsHidden: process.env.NODE_ENV === 'production',
 		},
 	};
 };
 
-//_ WKCMigrateMainAction
+//_ WKCSandboxSubscriptionTypeAction
 
-exports.WKCMigrateMainAction = function(req, res, next) {
+exports.WKCSandboxSubscriptionTypeAction = function(req, res, next) {
 	return req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_subscriptions').find({
 		WKCSubscriptionHandler: null,
 	}).project(['WKCSubscriptionFetchContent'].reduce(function(hash, e) {

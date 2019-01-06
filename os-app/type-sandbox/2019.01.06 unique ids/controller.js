@@ -4,7 +4,7 @@
  * MIT Licensed
  */
 
-kConst = {
+const kConst = {
 	kConstFrequencyHashFor: function(inputData) {
 		return inputData.reduce(function(coll, e) {
 			if (coll[e] === undefined) {
@@ -22,18 +22,20 @@ kConst = {
 
 exports.OLSKControllerRoutes = function() {
 	return {
-		WKCSandboxMainRoute: {
+		WKCSandboxUniqueIDsRoute: {
 			OLSKRoutePath: '/sandbox/2019-01-06-unique-ids',
 			OLSKRouteMethod: 'get',
-			OLSKRouteFunction: exports.WKCSandboxMainAction,
+			OLSKRouteFunction: exports.WKCSandboxUniqueIDsAction,
+			OLSKRouteIsHidden: process.env.NODE_ENV === 'production',
 		},
 	};
 };
 
-//_ WKCSandboxMainAction
+//_ WKCSandboxUniqueIDsAction
 
-exports.WKCSandboxMainAction = function(req, res, next) {
+exports.WKCSandboxUniqueIDsAction = function(req, res, next) {
 	const ids = {};
+	
 	return req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_subscriptions').find({}).project(['WKCSubscriptionFetchContent'].reduce(function(hash, e) {
 		hash[e] = 0;
 
