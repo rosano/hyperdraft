@@ -64,17 +64,17 @@ exports._WKCDiffArticleBodyForStrings = function(oldString, newString) {
 	}).map(function(e, index, collection) {
 		if (e.added) {
 			return [
-				'<WKCDiffInsert>',
+				'{WKCDiffInsert}',
 				e.value,
-				'</WKCDiffInsert>',
+				'{/WKCDiffInsert}',
 			].join('');
 		}
 
 		if (e.removed) {
 			return [
-				'<WKCDiffDelete>',
+				'{WKCDiffDelete}',
 				e.value,
-				'</WKCDiffDelete>',
+				'{/WKCDiffDelete}',
 			].join('');
 		}
 
@@ -138,22 +138,28 @@ exports._WKCDiffArticleBodyForStrings = function(oldString, newString) {
 	}).join('')).map(function(e) {
 		if (e.added === true) {
 			return [
-				'<WKCDiffInsert>',
+				'{WKCDiffInsert}',
 				e.value,
-				'</WKCDiffInsert>',
+				'{/WKCDiffInsert}',
 			].join('');
 		}
 
 		if (e.removed === true) {
 			return [
-				'<WKCDiffDelete>',
+				'{WKCDiffDelete}',
 				e.value,
-				'</WKCDiffDelete>',
+				'{/WKCDiffDelete}',
 			].join('');
 		}
 
 		return e.value;
 	}).join('');
+};
+
+//_ _WKCDiffConvertDiffTagsToHTML
+
+exports._WKCDiffConvertDiffTagsToHTML = function(inputData) {
+	return inputData.replace(/\{(\/)?WKCDiffInsert\}/g, '<$1ins>').replace(/\{(\/)?WKCDiffDelete\}/g, '<$1del>');
 };
 
 //_ WKCDiffArticlesForFile
@@ -168,7 +174,7 @@ exports.WKCDiffArticlesForFile = function(oldString, newString) {
 	}
 
 	return [{
-		WKCArticleBody: exports._WKCDiffArticleBodyForStrings(htmlEntitiesInstance.encode(oldString), htmlEntitiesInstance.encode(newString)).replace(/\n/g, '<br>').replace(/WKCDiffInsert/g, 'ins').replace(/WKCDiffDelete/g, 'del'),
+		WKCArticleBody: exports._WKCDiffConvertDiffTagsToHTML(htmlEntitiesInstance.encode(exports._WKCDiffArticleBodyForStrings(oldString, newString)).replace(/\n/g, '<br>')),
 		WKCArticlePublishDate: new Date(),
 	}];
 };
@@ -188,7 +194,7 @@ exports.WKCDiffArticlesForPage = function(oldString, newString) {
 	}
 
 	return [{
-		WKCArticleBody: showdownPackage.makeHtml(exports._WKCDiffArticleBodyForStrings(oldString, newString)).replace(/WKCDiffInsert/g, 'ins').replace(/WKCDiffDelete/g, 'del'),
+		WKCArticleBody: exports._WKCDiffConvertDiffTagsToHTML(showdownPackage.makeHtml(exports._WKCDiffArticleBodyForStrings(oldString, newString))),
 		WKCArticlePublishDate: new Date(),
 	}];
 };
