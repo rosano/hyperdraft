@@ -98,7 +98,7 @@ exports.WKCMetalArticlesUpdate = function(databaseClient, inputData1, inputData2
 		throw new Error('WKCErrorInvalidInput');
 	}
 
-	if (!modelLibrary.WKCModelInputDataIsArticleObject(inputData2, {
+	if (!modelLibrary.WKCModelInputDataIsArticleObject(modelLibrary.WKCModelArticlePrepare(inputData2), {
 		WKCModelValidatePresentOnly: true,
 	})) {
 		return completionHandler(null, inputData2);
