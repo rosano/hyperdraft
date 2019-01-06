@@ -8,7 +8,7 @@ const requestPackage = require('request');
 const jsdomPackage = require('jsdom');
 
 const typeLibrary = require('OLSKType');
-var WKCDiff = require('./_shared/WKCDiff/main.js');
+var WKCDiff = require('../_shared/WKCDiff/main.js');
 
 var apiSubscriptionsModel = require('../api/auth-subscriptions/model');
 var apiSubscriptionsMetal = require('../api/auth-subscriptions/metal');
@@ -102,11 +102,11 @@ exports.WKCTaskFetch = function() {
 								}
 
 								if (subscriptionObject.WKCSubscriptionHandler === apiSubscriptionsModel.WKCSubscriptionHandlerFile()) {
-									return articleObjects.push(...diffLibrary.WKCDiffArticlesForFile(subscriptionObject.WKCSubscriptionFetchContent, body));
+									return articleObjects.push(...WKCParser.WKCParserArticlesForFile(subscriptionObject.WKCSubscriptionFetchContent, body));
 								}
 
 								if (subscriptionObject.WKCSubscriptionHandler === apiSubscriptionsModel.WKCSubscriptionHandlerPage()) {
-									return articleObjects.push(...diffLibrary.WKCDiffArticlesForPage(subscriptionObject.WKCSubscriptionFetchContent, body).map(function(e) {
+									return articleObjects.push(...WKCParser.WKCParserArticlesForPage(subscriptionObject.WKCSubscriptionFetchContent, body).map(function(e) {
 										return Object.assign(e, {
 											WKCArticleBody: resolveLibrary.WKCResolveRelativeURLs(subscriptionObject.WKCSubscriptionURL, e.WKCArticleBody),
 										});

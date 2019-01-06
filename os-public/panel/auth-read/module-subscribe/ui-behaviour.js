@@ -219,41 +219,7 @@
 			return WKCReadLogic.WKCReadModuleSubscribeCompleteURL(d3.select(e).attr('href'), inputData);
 		}));
 
-		var turndownInstance = new TurndownService();
-		turndownInstance.remove('script');
-		turndownInstance.remove('style');
-		turndownInstance.remove('img');
-		turndownInstance.addRule('trim whitespace in link text', {
-			filter: function (node, options) {
-				return node.nodeName === 'A' && node.innerHTML !== node.textContent;
-			},
-			replacement: function (content, node) {
-				return [
-					'[',
-					content.trim(),
-					'](',
-					node.getAttribute('href'),
-					')',
-					].join('');
-			},
-		});
-		turndownInstance.addRule('populate blank links', {
-			filter: function (node, options) {
-				return node.nodeName === 'A' && !node.textContent.trim();
-			},
-			replacement: function (content, node) {
-				return [
-					'[',
-					node.getAttribute('title') || '\\[\\_\\_\\_\\_\\_\\]',
-					'](',
-					node.getAttribute('href'),
-					')',
-					].join('');
-			},
-		});
-		var showdownInstance = new showdown.Converter();
-		showdownInstance.setOption('noHeaderId', true);
-		moi.reactConfirmationPreviewPage(showdownInstance.makeHtml(turndownInstance.turndown(parsedHTML.body)));
+		moi.reactConfirmationPreviewPage(WKCParser.WKCParserHTMLForPlaintext(WKCParser.WKCParserPlaintextForHTML(parsedHTML.body.innerHTML)));
 
 		moi.reactConfirmationFormName(parsedHTML.getElementsByTagName('title')[0].textContent);
 
@@ -565,7 +531,9 @@
 	//_ setupEverything
 
 	moi.setupEverything = function () {
-		moi.setupAPIToken(function () {});
+		moi.setupAPIToken(function () {
+			moi.propertiesFetchURL('http://loc.wiki:3000/panel/read');
+		});
 	};
 
 	//_ setupAPIToken

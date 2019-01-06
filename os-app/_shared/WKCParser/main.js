@@ -10,9 +10,9 @@
 	(factory((global.WKCParser = global.WKCParser || {})));
 }(this, (function (exports) { 'use strict';
 
-	const turndownPackage = typeof require === 'undefined' ? window.turndown : require('turndown');
+	const turndownPackage = typeof require === 'undefined' ? window.TurndownService : require('turndown');
 	const showdownPackage = typeof require === 'undefined' ? window.showdown : require('showdown');
-	const htmlEntitiesPackage = typeof require === 'undefined' ? window.htmlEntities : require('html-entities');
+	const htmlEntitiesPackage = typeof require === 'undefined' ? {} : require('html-entities');
 
 	const WKCDiffPackage = typeof require === 'undefined' ? window.WKCDiff : require('../WKCDiff/main.js');
 
@@ -54,8 +54,6 @@
 	showdownConverter.setOption('simpleLineBreaks', true)
 	showdownConverter.setOption('simplifiedAutoLink', true);
 	showdownConverter.setOption('noHeaderId', true);
-
-	const htmlEntitiesInstance = new (htmlEntitiesPackage.AllHtmlEntities)();
 
 	const contentForFirst = function (inputData) {
 		return inputData[0] ? inputData[0].textContent : '';
@@ -167,8 +165,8 @@
 			throw new Error('WKCErrorInvalidInput');
 		}
 
-		oldString = turndownInstance.turndown(DOMParserInstance.parseFromString(oldString || '', 'text/html').body.innerHTML);
-		newString = turndownInstance.turndown(DOMParserInstance.parseFromString(newString, 'text/html').body.innerHTML);
+		oldString = exports.WKCParserPlaintextForHTML(DOMParserInstance.parseFromString(oldString || '', 'text/html').body.innerHTML);
+		newString = exports.WKCParserPlaintextForHTML(DOMParserInstance.parseFromString(newString, 'text/html').body.innerHTML);
 
 		if (oldString === newString) {
 			return [];
@@ -192,7 +190,7 @@
 		}
 
 		return [{
-			WKCArticleBody: WKCDiffPackage._WKCDiffConvertDiffTagsToHTML(htmlEntitiesInstance.encode(WKCDiffPackage.WKCDiffHTMLForStrings(oldString, newString)).replace(/\n/g, '<br>')),
+			WKCArticleBody: WKCDiffPackage._WKCDiffConvertDiffTagsToHTML(new (htmlEntitiesPackage.AllHtmlEntities)().encode(WKCDiffPackage.WKCDiffHTMLForStrings(oldString, newString)).replace(/\n/g, '<br>')),
 			WKCArticlePublishDate: new Date(),
 		}];
 	};
@@ -265,6 +263,16 @@
 		}
 
 		return showdownConverter.makeHtml(inputData);
+	};
+
+	//_ WKCParserPlaintextForHTML
+
+	exports.WKCParserPlaintextForHTML = function(inputData) {
+		if (typeof inputData !== 'string') {
+			throw new Error('WKCErrorInvalidInput');
+		}
+
+		return turndownInstance.turndown(inputData);
 	};
 
 	//_ WKCParserSnippetFromText
