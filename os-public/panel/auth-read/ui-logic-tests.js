@@ -76,3 +76,20 @@ describe('WKCReadLogicArticlesSort', function testWKCReadLogicArticlesSort() {
 	});
 
 });
+
+describe('WKCReadLogicArticlesDiscardedSort', function testWKCReadLogicArticlesDiscardedSort() {
+
+	it('sorts by WKCArticleDateDiscarded descending', function() {
+		var item1 = {
+			WKCArticlePublishDate: new Date(1),
+			WKCArticleDateDiscarded: new Date(0),
+		};
+		var item2 = {
+			WKCArticlePublishDate: new Date(0),
+			WKCArticleDateDiscarded: new Date(1),
+		};
+
+		assert.deepEqual([item1, item2].sort(logicLibrary.WKCReadLogicArticlesDiscardedSort), [item2, item1]);
+	});
+
+});

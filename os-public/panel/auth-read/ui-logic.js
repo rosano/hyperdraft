@@ -69,6 +69,12 @@
 		return d3Package.descending(a.WKCArticlePublishDate.valueOf(), b.WKCArticlePublishDate.valueOf());
 	};
 
+	//_ WKCReadLogicArticlesDiscardedSort
+
+	exports.WKCReadLogicArticlesDiscardedSort = function (a, b) {
+		return d3Package.descending(a.WKCArticleDateDiscarded.valueOf(), b.WKCArticleDateDiscarded.valueOf());
+	};
+
 	Object.defineProperty(exports, '__esModule', { value: true });
 
 })));
