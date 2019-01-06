@@ -192,13 +192,3 @@ exports.WKCDiffArticlesForPage = function(oldString, newString) {
 		WKCArticlePublishDate: new Date(),
 	}];
 };
-
-//_ WKCSnippetFromText
-
-exports.WKCSnippetFromText = function(inputData) {
-	if (typeof inputData !== 'string') {
-		throw new Error('WKCErrorInvalidInput');
-	}
-
-	return inputData.length <= 100 ? inputData : inputData.slice(0, 100).split(' ').slice(0, -1).join(' ').concat('…');
-};
