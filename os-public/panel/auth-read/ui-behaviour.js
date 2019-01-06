@@ -323,7 +323,7 @@
 		}).then(function(responseJSON) {
 			Object.assign(item, responseJSON);
 
-			var nextArticle = moi.utilitiesNextArticle();
+			var nextArticle = moi.utilitiesNextArticle(item);
 
 			moi.propertiesArticleObjects(moi.propertiesArticleObjects().filter(function (e) {
 				return e !== item;
@@ -358,7 +358,7 @@
 		}).then(function(responseJSON) {
 			Object.assign(item, responseJSON);
 
-			var nextArticle = moi.utilitiesNextArticle()
+			var nextArticle = moi.utilitiesNextArticle(item)
 
 			moi.propertiesArticleObjects(moi.propertiesArticleObjects().filter(function (e) {
 				return e !== item;
@@ -394,7 +394,7 @@
 		}).then(function(responseJSON) {
 			Object.assign(item, responseJSON);
 
-			var nextArticle = moi.utilitiesNextArticle()
+			var nextArticle = moi.utilitiesNextArticle(item)
 
 			moi.propertiesArticleObjects(moi.propertiesArticleObjects().filter(function (e) {
 				return e !== item;
@@ -800,8 +800,8 @@
 
 	//_ utilitiesNextArticle
 
-	moi.utilitiesNextArticle = function () {
-		var currentIndex = moi.propertiesArticleObjects().indexOf(moi.propertiesSelectedArticle());
+	moi.utilitiesNextArticle = function (currentArticle) {
+		var currentIndex = moi.propertiesArticleObjects().indexOf(currentArticle);
 
 		if (currentIndex < (moi.propertiesArticleObjects().length - 1)) {
 			return moi.propertiesArticleObjects()[currentIndex + 1];
