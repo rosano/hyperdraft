@@ -28,7 +28,7 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 				OLSKRouteMethod: 'get',
 				OLSKRouteFunction: controllerModule.WKCActionAPIToken,
 				OLSKRouteMiddlewares: [
-				'WKCSharedMiddlewareAuthenticate',
+					'WKCSharedMiddlewareAuthenticate',
 				],
 			},
 		});

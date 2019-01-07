@@ -285,8 +285,8 @@ describe('WKCActionAPINotesCreate', function testWKCActionAPINotesCreate() {
 			},
 		}), WKCFakeResponseAsync(function(responseJSON) {
 			assert.deepEqual(responseJSON, Object.assign({
-					WKCNoteBody: 'alpha',
-				}, {
+				WKCNoteBody: 'alpha',
+			}, {
 				WKCNoteID: responseJSON.WKCNoteID,
 				WKCNoteID2: responseJSON.WKCNoteID2,
 				WKCNoteDateCreated: responseJSON.WKCNoteDateCreated,

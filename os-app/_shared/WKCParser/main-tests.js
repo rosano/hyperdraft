@@ -34,7 +34,7 @@ const kStubs = {
 		return '<?xml version="1.0" encoding="UTF-8"?><feed xmlns="http://www.w3.org/2005/Atom"><entry><title>alfa</title><link href="https://www.cbc.ca/bravo" /><link rel="edit" href="http://example.org/golf" /><id>charlie</id><updated>2018-12-07T15:03:15Z</updated><summary>echo</summary><content type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml"><p>foxtrot</p></div></content><author><name>delta</name></author></entry></feed>';
 	},
 	kStubsResponseCustomTwitterTimelineValid: function() {
-		return "[{\"created_at\":\"Wed Oct 31 15:59:13 +0000 2018\",\"id_str\":\"alfa\",\"full_text\":\"bravo\",\"entities\":{\"hashtags\":[],\"symbols\":[],\"user_mentions\":[],\"urls\":[]},\"user\":{\"screen_name\":\"charlie\"}},{\"created_at\":\"Mon Oct 08 13:40:12 +0000 2018\",\"id_str\":\"delta\",\"full_text\":\"echo\",\"entities\":{\"hashtags\":[],\"symbols\":[],\"user_mentions\":[],\"urls\":[]},\"user\":{\"screen_name\":\"charlie\"}}]";
+		return '[{"created_at":"Wed Oct 31 15:59:13 +0000 2018","id_str":"alfa","full_text":"bravo","entities":{"hashtags":[],"symbols":[],"user_mentions":[],"urls":[]},"user":{"screen_name":"charlie"}},{"created_at":"Mon Oct 08 13:40:12 +0000 2018","id_str":"delta","full_text":"echo","entities":{"hashtags":[],"symbols":[],"user_mentions":[],"urls":[]},"user":{"screen_name":"charlie"}}]';
 	},
 	kStubsResponseCustomTwitterTimelineComplete: function() {
 		return JSON.stringify(stubsModule.kStubsResponseCustomTwitterTimelineComplete());

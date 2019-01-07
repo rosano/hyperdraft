@@ -52,7 +52,7 @@
 	});
 
 	const showdownConverter = new showdownPackage.Converter();
-	showdownConverter.setOption('simpleLineBreaks', true)
+	showdownConverter.setOption('simpleLineBreaks', true);
 	showdownConverter.setOption('simplifiedAutoLink', true);
 	showdownConverter.setOption('noHeaderId', true);
 
