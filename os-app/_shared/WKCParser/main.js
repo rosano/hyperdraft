@@ -19,6 +19,7 @@
 	const turndownInstance = new turndownPackage({
 		headingStyle: 'atx',
 	});
+	turndownInstance.remove('title');
 	turndownInstance.remove('script');
 	turndownInstance.remove('style');
 	turndownInstance.addRule('trim whitespace in link text', {
@@ -165,8 +166,8 @@
 			throw new Error('WKCErrorInvalidInput');
 		}
 
-		oldString = exports.WKCParserPlaintextForHTML(DOMParserInstance.parseFromString(oldString || '', 'text/html').body.innerHTML);
-		newString = exports.WKCParserPlaintextForHTML(DOMParserInstance.parseFromString(newString, 'text/html').body.innerHTML);
+		oldString = exports.WKCParserPlaintextForHTML(oldString || '');
+		newString = exports.WKCParserPlaintextForHTML(newString);
 
 		if (oldString === newString) {
 			return [];
