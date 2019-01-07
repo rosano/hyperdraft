@@ -9,13 +9,13 @@ const jsdomPackage = require('jsdom');
 
 const typeLibrary = require('OLSKType');
 var WKCDiff = require('../_shared/WKCDiff/main.js');
+var WKCParser = require('../_shared/WKCParser/main.js');
 
 var apiSubscriptionsModel = require('../api/auth-subscriptions/model');
 var apiSubscriptionsMetal = require('../api/auth-subscriptions/metal');
 var apiArticlesMetal = require('../api/auth-articles/metal');
 var apiSnapshotsMetal = require('../api/auth-snapshots/metal');
 var resolveLibrary = require('./resolve');
-var responseParserLibrary = require('../_shared/WKCParser/main.js');
 
 
 const kConst = {
@@ -89,16 +89,16 @@ exports.WKCTaskFetch = function() {
 									return (err = typeChangeError);
 								}
 
-								if (subscriptionObject.WKCSubscriptionHandler === apiSubscriptionsModel.WKCSubscriptionHandlerCustomTwitterTimeline() && !responseParserLibrary.WKCParserInputDataIsCustomTwitterTimeline(JSON.parse(body))) {
+								if (subscriptionObject.WKCSubscriptionHandler === apiSubscriptionsModel.WKCSubscriptionHandlerCustomTwitterTimeline() && !WKCParser.WKCParserInputDataIsCustomTwitterTimeline(JSON.parse(body))) {
 									return (err = typeChangeError);
 								}
 
 								if (subscriptionObject.WKCSubscriptionHandler === apiSubscriptionsModel.WKCSubscriptionHandlerFeedRSS()) {
-									return articleObjects.push(...responseParserLibrary.WKCParserArticlesForFeedRSS(kConst.kWKCTaskFetchDOMParserInstance(), subscriptionObject.WKCSubscriptionFetchContent, body));
+									return articleObjects.push(...WKCParser.WKCParserArticlesForFeedRSS(kConst.kWKCTaskFetchDOMParserInstance(), subscriptionObject.WKCSubscriptionFetchContent, body));
 								}
 
 								if (subscriptionObject.WKCSubscriptionHandler === apiSubscriptionsModel.WKCSubscriptionHandlerFeedAtom()) {
-									return articleObjects.push(...responseParserLibrary.WKCParserArticlesForFeedAtom(kConst.kWKCTaskFetchDOMParserInstance(), subscriptionObject.WKCSubscriptionFetchContent, body));
+									return articleObjects.push(...WKCParser.WKCParserArticlesForFeedAtom(kConst.kWKCTaskFetchDOMParserInstance(), subscriptionObject.WKCSubscriptionFetchContent, body));
 								}
 
 								if (subscriptionObject.WKCSubscriptionHandler === apiSubscriptionsModel.WKCSubscriptionHandlerFile()) {
@@ -106,7 +106,7 @@ exports.WKCTaskFetch = function() {
 								}
 
 								if (subscriptionObject.WKCSubscriptionHandler === apiSubscriptionsModel.WKCSubscriptionHandlerPage()) {
-									return articleObjects.push(...WKCParser.WKCParserArticlesForPage(subscriptionObject.WKCSubscriptionFetchContent, body).map(function(e) {
+									return articleObjects.push(...WKCParser.WKCParserArticlesForPage(kConst.kWKCTaskFetchDOMParserInstance(), subscriptionObject.WKCSubscriptionFetchContent, body).map(function(e) {
 										return Object.assign(e, {
 											WKCArticleBody: resolveLibrary.WKCResolveRelativeURLs(subscriptionObject.WKCSubscriptionURL, e.WKCArticleBody),
 										});
@@ -114,7 +114,7 @@ exports.WKCTaskFetch = function() {
 								}
 
 								if (subscriptionObject.WKCSubscriptionHandler === apiSubscriptionsModel.WKCSubscriptionHandlerCustomTwitterTimeline()) {
-									return articleObjects.push(...responseParserLibrary.WKCParserArticlesForCustomTwitterTimeline(subscriptionObject.WKCSubscriptionFetchContent, body));
+									return articleObjects.push(...WKCParser.WKCParserArticlesForCustomTwitterTimeline(subscriptionObject.WKCSubscriptionFetchContent, body));
 								}
 							})();
 
