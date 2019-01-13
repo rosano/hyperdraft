@@ -92,7 +92,7 @@
 				WKCArticleTitle: contentForFirst(e.getElementsByTagName('title')),
 				WKCArticleOriginalURL: contentForFirst(e.getElementsByTagName('link')),
 				WKCArticleOriginalGUID: contentForFirst(e.getElementsByTagName('guid')) || contentForFirst(e.getElementsByTagName('link')),
-				WKCArticlePublishDate: new Date(contentForFirst(e.getElementsByTagName('pubDate')) || Date.now()),
+				WKCArticlePublishDate: new Date(contentForFirst(e.getElementsByTagName('pubDate')) || contentForFirst(e.getElementsByTagName('dc:date')) || Date.now()),
 				WKCArticleAuthor: contentForFirst(e.getElementsByTagName('author')),
 				WKCArticleBody: itemContent,
 				WKCArticleSnippet: exports.WKCParserSnippetFromText(DOMParserInstance.parseFromString(`<div>${itemContent}</div>`, 'text/html').body.textContent),

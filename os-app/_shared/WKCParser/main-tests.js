@@ -121,6 +121,10 @@ describe('WKCParserArticlesForFeedRSS', function testWKCParserArticlesForFeedRSS
 		assert.deepEqual(mainModule.WKCParserArticlesForFeedRSS(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsRSSComplete()).pop().WKCArticlePublishDate, new Date('2018-12-07T15:03:15.000Z'));
 	});
 
+	it('populates WKCArticlePublishDate if dc:date', function() {
+		assert.deepEqual(mainModule.WKCParserArticlesForFeedRSS(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsRSSComplete().replace('version="2.0"', 'version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"').replace(/pubDate/g, 'dc:date')).pop().WKCArticlePublishDate, new Date('2018-12-07T15:03:15.000Z'));
+	});
+
 	it('populates WKCArticlePublishDate if none', function() {
 		assert.strictEqual(new Date() - mainModule.WKCParserArticlesForFeedRSS(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsRSSValid()).pop().WKCArticlePublishDate < 50, true);
 	});
