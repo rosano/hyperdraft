@@ -531,9 +531,7 @@
 	//_ setupEverything
 
 	moi.setupEverything = function () {
-		moi.setupAPIToken(function () {
-			moi.propertiesFetchURL('http://loc.wiki:3000/panel/read');
-		});
+		moi.setupAPIToken(function () {});
 	};
 
 	//_ setupAPIToken
