@@ -377,6 +377,12 @@ body {
 	white-space: nowrap;
 }
 
+#WKCReadDetailContentRemote {
+	padding: 10px;
+
+	background: #e9f8ff
+}
+
 #WKCReadDetailContent article {
 	padding: 10px;
 }

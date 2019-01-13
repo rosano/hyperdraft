@@ -182,6 +182,16 @@
 		moi.commandsArticlesDiscard(moi.propertiesSelectedArticle());
 	};
 
+	//_ interfaceArticlesLoadRemoteContentButtonDidClick
+
+	moi.interfaceArticlesLoadRemoteContentButtonDidClick = function () {
+		if (!moi.propertiesSelectedArticle()) {
+			return;
+		}
+
+		moi.commandsArticlesLoadRemoteContent();
+	};
+
 	//_ interfaceArticlesDeleteShortcutDidClick
 
 	moi.interfaceArticlesDeleteShortcutDidClick = function () {
@@ -432,6 +442,18 @@
 		window.alert(OLSKLocalized('WKCReadErrorArticlesUpdateText'));
 
 		throw error;
+	};
+
+	//_ commandsArticlesLoadRemoteContent
+
+	moi.commandsArticlesLoadRemoteContent = function () {
+		d3.selectAll('#WKCReadDetailContentBody img')
+			.each(function () {
+				d3.select(this).attr('src', d3.select(this).attr('WKCDisabled-src'));
+				d3.select(this).attr('WKCDisabled-src', null);
+			});
+
+		moi.reactArticlesRemoteContentWarningVisibility(false);
 	};
 
 	//_ commandsSourcesSelect
@@ -712,8 +734,12 @@
 		d3.select('#WKCReadDetailContentBody')
 			.html((function(inputData) {
 				var textarea = document.createElement('textarea');
+
+				let contentBody = item.WKCArticleBody.replace(/<img(.*)src=(.*)>/g, '<img$1WKCDisabled-src=$2');
 				
-				textarea.innerHTML = item.WKCArticleBody;
+				textarea.innerHTML = contentBody;;
+
+				moi.reactArticlesRemoteContentWarningVisibility(contentBody !== item.WKCArticleBody);
 
 				return textarea.value;
 			})(item.WKCArticleBody))
@@ -736,6 +762,13 @@
 		d3.select('#WKCReadDetailToolbarUnreadButton').classed('WKCSharedHidden', !item.WKCArticleIsRead)
 
 		d3.select('#WKCReadDetail').classed('WKCReadDetailInactive', false);
+	};
+
+	//_ reactArticlesRemoteContentWarningVisibility
+
+	moi.reactArticlesRemoteContentWarningVisibility = function (isVisible) {
+		d3.select('#WKCReadDetailContentRemote')
+			.classed('WKCSharedHidden', !isVisible);
 	};
 
 	//_ reactMasterLoaderVisibility

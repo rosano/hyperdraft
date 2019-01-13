@@ -146,6 +146,13 @@ locals.OLSKPagePublicRouteKeys = [
 				<a id="WKCReadDetailContentContextLink" target="_blank"><span id="WKCReadDetailContentContextTiming"></span></a>
 			</div>
 			
+			<div id="WKCReadDetailContentRemote">
+				<button id="WKCReadDetailContentRemoteLink" target="_blank"><%= OLSKLocalized('WKCReadDetailContentRemoteButtonText') %></button>
+				<script type="text/javascript">
+					d3.select('#WKCReadDetailContentRemoteLink').on('click', WKCReadBehaviour.interfaceArticlesLoadRemoteContentButtonDidClick);
+				</script>
+			</div>
+			
 			<article>
 				<h4 id="WKCReadDetailContentHeading"></h4>
 				

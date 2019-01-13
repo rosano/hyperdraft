@@ -9,6 +9,7 @@ WKCReadDetailToolbarUnreadButtonText: Mark as unread
 WKCReadDetailToolbarInboxButtonText: Move to inbox
 WKCReadDetailPlaceholderText: No Article Selected
 WKCReadDetailContentLinkText: Original source
+WKCReadDetailContentRemoteButtonText: Load images
 WKCReadErrorArticlesMarkAsReadText: Unable to mark article as read
 WKCReadErrorArticlesMarkAsArchivedText: Unable to archive article
 WKCReadErrorArticlesMarkAsDiscardedText: Unable to discard article
