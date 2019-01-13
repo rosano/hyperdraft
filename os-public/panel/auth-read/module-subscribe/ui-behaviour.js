@@ -216,7 +216,10 @@
 				'application/atom+xml',
 				].indexOf(e.type.trim().toLowerCase()) !== -1;
 		}).map(function(e) {
-			return WKCReadLogic.WKCReadModuleSubscribeCompleteURL(d3.select(e).attr('href'), inputData);
+			return {
+				WKCAlternativeURL: WKCReadLogic.WKCReadModuleSubscribeCompleteURL(d3.select(e).attr('href'), inputData),
+				WKCAlternativeTitle: d3.select(e).attr('title'),
+			};
 		}));
 
 		moi.reactConfirmationPreviewPage(WKCParser.WKCParserHTMLForPlaintext(WKCParser.WKCParserPlaintextForHTML(parsedHTML.body.innerHTML)));
@@ -405,25 +408,43 @@
 
 	//_ reactAlternatives
 
-	moi.reactAlternatives = function (feedURLs) {
-		var selection = d3.select('#WKCReadModuleSubscribeAlternatives ul')
-			.selectAll('.WKCReadModuleSubscribeAlternativesItem').data(feedURLs);
-		
-		selection.enter()
+	moi.reactAlternatives = function (alternativeObjects) {
+		var selection = d3.select('#WKCReadModuleSubscribeAlternativesList')
+			.selectAll('.WKCReadModuleSubscribeAlternativesItem').data(alternativeObjects);
+
+		var parentElement = selection.enter()
 			.append('li')
-				.attr('class', 'WKCReadModuleSubscribeAlternativesItem')
-				.append('button')
-				.on('click', function(e) {
-					moi.commandsFetchURL(e);
-				})
-				.merge(selection)
-					.html(function(e) {
-						return e;
-					});
+				.attr('class', 'WKCReadModuleSubscribeAlternativesItem');
+
+		parentElement.append('button')
+			.attr('class', 'WKCReadModuleSubscribeSuggestionsListItemButton');
+
+		parentElement.append('span')
+			.attr('class', 'WKCReadModuleSubscribeAlternativesItemItemName')
+			.html('&nbsp;(<span></span>)');
+
+		parentElement = parentElement.merge(selection);
+
+		parentElement.select('.WKCReadModuleSubscribeSuggestionsListItemButton')
+			.html(function(e) {
+				return e.WKCAlternativeURL;
+			})
+			.on('click', function(e) {
+				moi.commandsFetchURL(e.WKCAlternativeURL);
+			});
+
+		parentElement.select('.WKCReadModuleSubscribeAlternativesItemItemName')
+			.classed('WKCSharedHidden', function (e) {
+				return !e.WKCAlternativeTitle;
+			})
+			.select('span')
+				.html(function(e) {
+					return e.WKCAlternativeTitle;
+				});
 
 		selection.exit().remove();
 
-		d3.select('#WKCReadModuleSubscribeAlternatives').classed('WKCSharedHidden', !feedURLs.length);
+		d3.select('#WKCReadModuleSubscribeAlternatives').classed('WKCSharedHidden', !alternativeObjects.length);
 	};
 
 	//_ reactConfirmationVisibility
