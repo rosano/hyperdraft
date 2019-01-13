@@ -504,6 +504,8 @@
 
 		d3.select('#WKCReadModuleSubscribeConfirmationFrequency').classed('WKCSharedHidden', articleObjects.length < 10);
 
+		d3.select('#WKCReadModuleSubscribeConfirmationEmpty').classed('WKCSharedHidden', articleObjects.length);
+
 		if (articleObjects.length < 10) {
 			return;
 		}
@@ -529,6 +531,8 @@
 		d3.select('#WKCReadModuleSubscribeConfirmationPreviewPage').html(inputData);
 
 		d3.select('#WKCReadModuleSubscribeConfirmationPreviewPage').classed('WKCSharedHidden', !inputData);
+
+		d3.select('#WKCReadModuleSubscribeConfirmationEmpty').classed('WKCSharedHidden', !!inputData.trim());
 	};
 
 	//_ reactConfirmationPreviewFile
@@ -537,6 +541,8 @@
 		d3.select('#WKCReadModuleSubscribeConfirmationPreviewFile pre').html(inputData);
 
 		d3.select('#WKCReadModuleSubscribeConfirmationPreviewFile').classed('WKCSharedHidden', !inputData);
+
+		d3.select('#WKCReadModuleSubscribeConfirmationEmpty').classed('WKCSharedHidden', !!inputData.trim());
 	};
 
 	//_ reactConfirmationShared
