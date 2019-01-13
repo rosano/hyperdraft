@@ -508,16 +508,18 @@
 			return;
 		}
 
-		d3.select('#WKCReadModuleSubscribeConfirmationFrequency').text(OLSKFormatted(OLSKLocalized('WKCReadModuleSubscribeConfirmationFrequencyFormat'), Math.round(articleObjects.length / articleObjects.map(function (e) {
+		if (d3.extent(articleObjects.map(function (e) {
 				return e.WKCArticlePublishDate;
-			}).filter(function (a, index, coll) {
-				return index === 0 || index === coll.length - 1
-			}).reduce(function (coll, e) {
-				if (!coll) {
-					return moment(e);
-				}
+			})).reverse().reduce(function (coll, e) {
+				return !coll ? moment(e) : moment.duration(coll.diff(moment(e))).as('hours');
+			}, null) < 1) {
+			return;
+		}
 
-				return coll.diff(moment(e), 'days')
+		d3.select('#WKCReadModuleSubscribeConfirmationFrequency').text(OLSKFormatted(OLSKLocalized('WKCReadModuleSubscribeConfirmationFrequencyFormat'), Math.round(articleObjects.length / d3.extent(articleObjects.map(function (e) {
+				return e.WKCArticlePublishDate;
+			})).reverse().reduce(function (coll, e) {
+				return !coll ? moment(e) : moment.duration(coll.diff(moment(e))).as('days');
 			}, null) * 7 * 10) / 10));
 	};
 
