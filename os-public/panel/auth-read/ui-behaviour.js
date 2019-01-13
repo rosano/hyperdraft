@@ -537,6 +537,7 @@
 	//_ reactSubscriptionObjects
 
 	moi.reactSubscriptionObjects = function (subscriptionObjects) {
+		return;
 		var selection = d3.select('#WKCReadSourcesContentListSubscriptionsList')
 			.selectAll('.WKCReadSourcesContentListChildListItem').data(subscriptionObjects);
 		
