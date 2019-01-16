@@ -336,6 +336,11 @@ exports.WKCActionAPINotesSearch = function(req, res, next) {
 			throw new Error('WKCErrorDatabaseFind');
 		}
 
-		return res.json(items);
+		return res.json(items.map(function (e) {
+			return Object.assign(e, {
+				WKCNoteDetectedTitle: modelLibrary.WKCModelNoteDetectedTitleFor(e.WKCNoteBody),
+				WKCNoteDetectedBody: modelLibrary.WKCModelNoteDetectedBodyFor(e.WKCNoteBody),
+			});
+		}));
 	});
 };
