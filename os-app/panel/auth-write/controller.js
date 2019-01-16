@@ -17,11 +17,6 @@ exports.OLSKControllerRoutes = function() {
 				'WKCSharedMiddlewareAuthenticate',
 			],
 		},
-		WKCWriteLegacyRoute: {
-			OLSKRoutePath: '/panel',
-			OLSKRouteMethod: 'get',
-			OLSKRouteRedirect: '/panel/write',
-		},
 	};
 };
 
