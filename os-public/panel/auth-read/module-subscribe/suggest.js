@@ -111,7 +111,7 @@
 			return [
 				{
 					WKCSuggestionType: exports.WKCReadModuleSubscribeSuggestionsTypeCustomTwitterTimeline(),
-					WKCSuggestionURL: 'https://api.twitter.com/1.1/statuses/user_timeline.json?tweet_mode=extended&screen_name='.concat(urlHandle.slice(-1).pop()),
+					WKCSuggestionURL: 'https://api.twitter.com/1.1/statuses/user_timeline.json?tweet_mode=extended&exclude_replies=true&screen_name='.concat(urlHandle.slice(-1).pop()),
 				},
 			];
 		}
@@ -121,7 +121,7 @@
 			return [
 				{
 					WKCSuggestionType: exports.WKCReadModuleSubscribeSuggestionsTypeCustomTwitterTimeline(),
-					WKCSuggestionURL: 'https://api.twitter.com/1.1/statuses/user_timeline.json?tweet_mode=extended&screen_name='.concat(userHandle.slice(-1).pop()),
+					WKCSuggestionURL: 'https://api.twitter.com/1.1/statuses/user_timeline.json?tweet_mode=extended&exclude_replies=true&screen_name='.concat(userHandle.slice(-1).pop()),
 				},
 			];
 		}
