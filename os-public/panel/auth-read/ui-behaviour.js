@@ -449,8 +449,11 @@
 	moi.commandsArticlesLoadRemoteContent = function () {
 		d3.selectAll('#WKCReadDetailContentBody img')
 			.each(function () {
-				d3.select(this).attr('src', d3.select(this).attr('WKCDisabled-src'));
-				d3.select(this).attr('WKCDisabled-src', null);
+				d3.select(this)
+					.attr('src', d3.select(this).attr('WKCDisabled-src'))
+					.attr('srcset', d3.select(this).attr('WKCDisabled-srcset'))
+					.attr('WKCDisabled-src', null)
+					.attr('WKCDisabled-srcset', null);
 			});
 
 		moi.reactArticlesRemoteContentWarningVisibility(false);
@@ -735,7 +738,9 @@
 			.html((function(inputData) {
 				var textarea = document.createElement('textarea');
 
-				let contentBody = item.WKCArticleBody.replace(/<img(.*)src=(.*)>/g, '<img$1WKCDisabled-src=$2');
+				let contentBody = item.WKCArticleBody
+					.replace(/<img(.*)src=(.*)>/g, '<img$1WKCDisabled-src=$2')
+					.replace(/<img(.*)srcset=(.*)>/g, '<img$1WKCDisabled-srcset=$2');
 				
 				textarea.innerHTML = contentBody;;
 
