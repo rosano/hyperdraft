@@ -8,11 +8,11 @@
 
 exports.OLSKControllerRoutes = function() {
 	return {
-		WKCSandboxUniqueIDsRoute: {
-			OLSKRoutePath: '/sandbox/2019-01-16-twitter-urls',
+		WKCSandboxGapSubscriptionsRoute: {
+			OLSKRoutePath: '/sandbox/2019-01-16-gap-subscriptions',
 			OLSKRouteMethod: 'get',
 			OLSKRouteFunction: function (req, res, next) {
-				return exports.WKCSandboxTwitterURLsProcess(req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient).then(function (result) {
+				return WKCSandboxGapSubscriptionsProcess(req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient).then(function (result) {
 					return res.send(`<pre>${JSON.stringify(result, 0, '\t')}</pre>`);
 				});
 			},
@@ -21,21 +21,23 @@ exports.OLSKControllerRoutes = function() {
 	};
 };
 
-//_ WKCSandboxTwitterURLsProcess
+//_ WKCSandboxGapSubscriptionsProcess
 
-exports.WKCSandboxTwitterURLsProcess = async (databaseClient) => {
+WKCSandboxGapSubscriptionsProcess = async function (databaseClient) {
 	return Promise.all((await databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_subscriptions').find({
-		WKCSubscriptionURL: /extended\&screen_name/i,
+		WKCSubscriptionIsPaused: true,
 	}).project(['WKCSubscriptionFetchContent'].reduce(function(hash, e) {
 		hash[e] = 0;
 
 		return hash;
 	}, {})).toArray()).slice(-1).map(function (e) {
+		return Promise.resolve(e);
+
 		return databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_subscriptions').findOneAndUpdate({
 			WKCSubscriptionID: e.WKCSubscriptionID,
 		}, {
 			'$set': {
-				WKCSubscriptionURL: e.WKCSubscriptionURL.replace('extended\&screen_name', 'extended\&exclude_replies=true\&screen_name'),
+				WKCSubscriptionIsPaused: true,
 			},
 		}, {
 			returnOriginal: false,
