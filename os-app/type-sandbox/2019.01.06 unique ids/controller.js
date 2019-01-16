@@ -34,54 +34,68 @@ exports.OLSKControllerRoutes = function() {
 //_ WKCSandboxUniqueIDsAction
 
 exports.WKCSandboxUniqueIDsAction = function(req, res, next) {
-	const ids = {};
-	
-	return req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_subscriptions').find({}).project(['WKCSubscriptionFetchContent'].reduce(function(hash, e) {
-		hash[e] = 0;
+	return WKCSandboxUniqueIDsProcess(req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient).then(function (result) {
+		return res.send(`<pre>${JSON.stringify(result, 0, '\t')}</pre>`);
+	});
+};
 
-		return hash;
-	}, {})).toArray()
-		.then(function (items) {
-			ids.wkc_subscriptions = items.map(function (e) {
+//_ WKCSandboxUniqueIDsProcess
+
+WKCSandboxUniqueIDsProcess = async function(databaseClient) {
+	return [
+		{
+			key: 'wkc_subscriptions',
+			value: (await databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_subscriptions').find({}).project(['WKCSubscriptionFetchContent'].reduce(function(hash, e) {
+				hash[e] = 0;
+
+				return hash;
+			}, {})).toArray()).map(function (e) {
 				return e.WKCSubscriptionID2;
-			}).sort();
-		}).catch(function (err) {
-			return res.json(err);
-		})
-		.then(function () {
-			return req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_articles').find({}).toArray()
-		})
-		.then(function (items) {
-			ids.wkc_articles = items.map(function (e) {
+			}),
+		},
+		{
+			key: 'wkc_articles',
+			value: (await databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_articles').find({}).toArray()).map(function (e) {
 				return e.WKCArticleID2;
-			}).sort();
-		}).catch(function (err) {
-			return res.json(err);
-		})
-		.then(function () {
-			return req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_snapshots').find({}).toArray()
-		})
-		.then(function (items) {
-			ids.wkc_snapshots = items.map(function (e) {
+			}),
+		},
+		{
+			key: 'wkc_snapshots',
+			value: (await databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_snapshots').find({}).project(['WKCSnapshotBody'].reduce(function(hash, e) {
+				hash[e] = 0;
+
+				return hash;
+			}, {})).toArray()).map(function (e) {
 				return e.WKCSnapshotID2;
-			}).sort();
-		}).catch(function (err) {
-			return res.json(err);
-		})
-		.then(function () {
-			const hash = Object.keys(ids).reduce(function (coll, e) {
-				coll[e] = {};
+			}),
+		},
+		].reduce(function (coll, e) {
+			coll[e.key] = {
+				ids: e.value.sort().filter(function (e) {
+					if (parseInt(e) <= 1547652298269) {
+						return;
+					}
 
-				coll[e].frequency = kConst.kConstFrequencyHashFor(ids[e].filter(function (e) {
-					return typeof e !== 'undefined';
-				}));
-				coll[e].duplicates = Object.keys(coll[e].frequency).filter(function (id) {
-					return coll[e].frequency[id] !== 1;
-				});
+					if (typeof e === 'undefined') {
+						return;
+					}
 
-				return coll;
+					return true;
+				}),
+			};
+
+			coll[e.key].frequency = kConst.kConstFrequencyHashFor(coll[e.key].ids);
+			coll[e.key].duplicates = Object.keys(coll[e.key].frequency).filter(function (id) {
+				return coll[e.key].frequency[id] !== 1;
+			}).reduce(function (coll2, id) {
+				coll2[id] = coll[e.key].frequency[id];
+
+				return coll2;
 			}, {});
 
-			return res.send(`<pre>${JSON.stringify(hash, 0, '\t')}</pre>`);
-		});
+			delete coll[e.key].ids;
+			delete coll[e.key].frequency;
+
+			return coll;
+		}, {});
 };
