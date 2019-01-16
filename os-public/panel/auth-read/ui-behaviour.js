@@ -758,6 +758,9 @@
 				.style('width', null);
 		});
 
+		d3.selectAll('#WKCReadDetailContentBody *[aria-hidden="true"]')
+			.style('display', 'none');
+
 		d3.select('#WKCReadDetailToolbarUnreadButton').classed('WKCSharedHidden', !item.WKCArticleIsRead)
 
 		d3.select('#WKCReadDetail').classed('WKCReadDetailInactive', false);
