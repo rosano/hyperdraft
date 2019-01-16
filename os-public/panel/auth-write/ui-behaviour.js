@@ -343,22 +343,32 @@
 	//_ reactNoteObjects
 
 	moi.reactNoteObjects = function (noteObjects) {
-		var selection = d3.select('#WKCWriteMasterContent')
+		var selection = d3.select('#WKCWriteMasterContentList')
 			.selectAll('.WKCWriteMasterContentListItem').data(noteObjects);
 		
-		var parentElement = selection.enter()
-			.append('div')
-				.attr('class', 'WKCWriteMasterContentListItem')
-				.classed('WKCSharedElementTappable', true);
-		parentElement.append('pre').attr('class', 'WKCWriteMasterContentListItemSnippet');
+		var parentElement = selection.enter().append('div')
+			.attr('class', 'WKCWriteMasterContentListItem')
+			.classed('WKCSharedElementTappable', true);
+
+		var contextElement = parentElement.append('div')
+			.attr('class', 'WKCWriteMasterContentListItemContext');
+
+		contextElement.append('span').attr('class', 'WKCWriteMasterContentListItemContextTitle');
+
+		parentElement.append('span').attr('class', 'WKCWriteMasterContentListItemSnippet');
+
 		parentElement = parentElement.merge(selection);
 
 		parentElement
 			.on('click', function(obj) {
 				moi.commandsSelectNote(obj);
 			});
+		parentElement.select('.WKCWriteMasterContentListItemContextTitle')
+			.text(function (e) {
+				return e.WKCNoteDetectedTitle;
+			})
 		parentElement.select('.WKCWriteMasterContentListItemSnippet').text(function(obj) {
-			return (obj.WKCNoteBody || '').split('\n').slice(0, 3).join('\n');
+			return (obj.WKCNoteDetectedBody || '').slice(0, 140);
 		});
 
 		selection.exit().remove();

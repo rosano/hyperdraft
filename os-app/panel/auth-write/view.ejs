@@ -52,7 +52,12 @@ locals.OLSKPagePublicRouteKeys = [
 			</script>
 		</header>
 
-		<div id="WKCWriteMasterContent"></div>
+		<div id="WKCWriteMasterContent">
+			<div id="WKCWriteMasterContentList"></div>
+			<div id="WKCWriteMasterLoader" class="WKCSharedHidden">
+				<%- include('../_shared/WKCLoader/view.ejs') %>
+			</div>
+		</div>
 	</div>
 
 	<div id="WKCWriteDetail" class="WKCWriteDetailInactive">

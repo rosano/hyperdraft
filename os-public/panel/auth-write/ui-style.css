@@ -37,28 +37,30 @@ body {
 	height: 50px;
 	padding: 10px;
 	border-bottom: 1px solid #ddd;
+
+	overflow: hidden;
+	text-overflow: ellipsis;
+
+	font-size: 12px;
+
+	/* prevent breaking from long urls */
+	overflow-wrap: break-word;
+	word-wrap: break-word;
+	word-break: break-word;
+	hyphens: auto;
 }
 
 .WKCWriteMasterContentListItemSelected {
 	background: #e6e6e6;
 }
 
+.WKCWriteMasterContentListItemContextTitle {
+	font-weight: bold;
+}
+
 .WKCWriteMasterContentListItemSnippet {
-	width: 200px;
-	height: inherit;
-
-	overflow: hidden;
-	text-overflow: ellipsis;
-
-	/* browser defaults */
-	margin: 0;
-
-	/* wrap pre tag */
-	white-space: pre-wrap;       /* Since CSS 2.1 */
-	white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
-	white-space: -pre-wrap;      /* Opera 4-6 */
-	white-space: -o-pre-wrap;    /* Opera 7 */
-	word-wrap: break-word;       /* Internet Explorer 5.5+ */
+	display: block;
+	margin-top: 5px;
 }
 
 #WKCWriteDetail {
