@@ -107,8 +107,6 @@ body {
 }
 
 #WKCWriteDetailContent {
-	font-size: 80%;
-
 	/* @FlexboxWKCWriteDetail child */
 	flex-grow: 1;
 
@@ -120,7 +118,6 @@ body {
 #WKCWriteDetailContentTextarea {
 	padding: 10px;
 
-	font-family: 'monaco', monospace;
 	line-height: 1.4;
 
 	/* @FlexboxWKCWriteDetailContent child */
