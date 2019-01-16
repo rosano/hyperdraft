@@ -748,10 +748,6 @@
 		d3.selectAll('#WKCReadDetailContentBody a').attr('target', '_blank');
 
 		d3.selectAll('#WKCReadDetailContentBody *').each(function (a, b, c) {
-			if (!d3.select(this).attr('width')) {
-				return null;
-			}
-
 			d3.select(this)
 				.attr('width', null)
 				.style('width', null)
