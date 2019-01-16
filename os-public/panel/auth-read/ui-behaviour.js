@@ -755,9 +755,7 @@
 		d3.selectAll('#WKCReadDetailContentBody *').each(function (a, b, c) {
 			d3.select(this)
 				.attr('width', null)
-				.style('width', null)
-				.style('max-width', '100%')
-				.style('height', 'auto');
+				.style('width', null);
 		});
 
 		d3.select('#WKCReadDetailToolbarUnreadButton').classed('WKCSharedHidden', !item.WKCArticleIsRead)
