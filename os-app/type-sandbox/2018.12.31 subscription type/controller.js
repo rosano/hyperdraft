@@ -10,7 +10,7 @@ exports.OLSKControllerRoutes = function() {
 	return {};
 	return {
 		WKCSandboxSubscriptionTypeRoute: {
-			OLSKRoutePath: '/sandbox/2019-01-06-unique-ids',
+			OLSKRoutePath: '/sandbox/2018-12-31-subscription-type',
 			OLSKRouteMethod: 'get',
 			OLSKRouteFunction: exports.WKCSandboxSubscriptionTypeAction,
 			OLSKRouteIsHidden: process.env.NODE_ENV === 'production',
