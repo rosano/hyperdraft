@@ -481,6 +481,54 @@ describe('WKCParserHTMLForPlaintext', function testWKCParserHTMLForPlaintext() {
 
 });
 
+describe('WKCParserTitleForPlaintext', function testWKCParserTitleForPlaintext() {
+
+	it('returns empty if empty', function() {
+		assert.deepEqual(mainModule.WKCParserTitleForPlaintext(), '');
+		assert.deepEqual(mainModule.WKCParserTitleForPlaintext(null), '');
+		assert.deepEqual(mainModule.WKCParserTitleForPlaintext(''), '');
+	});
+
+	it('returns first line if single', function() {
+		assert.deepEqual(mainModule.WKCParserTitleForPlaintext('alpha'), 'alpha');
+	});
+
+	it('returns first line if multiple', function() {
+		assert.deepEqual(mainModule.WKCParserTitleForPlaintext('alpha\n'), 'alpha');
+		assert.deepEqual(mainModule.WKCParserTitleForPlaintext('alpha\nbravo'), 'alpha');
+	});
+
+	it('returns empty if blank', function() {
+		assert.deepEqual(mainModule.WKCParserTitleForPlaintext('\nalpha'), '');
+		assert.deepEqual(mainModule.WKCParserTitleForPlaintext('\n\nalpha'), '');
+	});
+
+});
+
+describe('WKCParserBodyForPlaintext', function testWKCParserBodyForPlaintext() {
+
+	it('returns empty if empty', function() {
+		assert.deepEqual(mainModule.WKCParserBodyForPlaintext(), '');
+		assert.deepEqual(mainModule.WKCParserBodyForPlaintext(null), '');
+		assert.deepEqual(mainModule.WKCParserBodyForPlaintext(''), '');
+	});
+
+	it('returns empty if single', function() {
+		assert.deepEqual(mainModule.WKCParserBodyForPlaintext('alpha'), '');
+	});
+
+	it('returns first line if multiple', function() {
+		assert.deepEqual(mainModule.WKCParserBodyForPlaintext('\n'), '');
+		assert.deepEqual(mainModule.WKCParserBodyForPlaintext('alpha\n'), '');
+		assert.deepEqual(mainModule.WKCParserBodyForPlaintext('alpha\nbravo'), 'bravo');
+	});
+
+	it('returns first line if blank', function() {
+		assert.deepEqual(mainModule.WKCParserBodyForPlaintext('alpha\n\nbravo'), 'bravo');
+	});
+
+});
+
 describe('WKCParserSnippetFromText', function testWKCParserSnippetFromText() {
 
 	it('throws error if not string', function() {

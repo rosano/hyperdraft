@@ -276,6 +276,26 @@
 		return turndownInstance.turndown(inputData);
 	};
 
+	//_ WKCParserTitleForPlaintext
+
+	exports.WKCParserTitleForPlaintext = function(inputData) {
+		if (typeof inputData !== 'string') {
+			return '';
+		}
+
+		return inputData.split('\n').shift();
+	};
+
+	//_ WKCParserBodyForPlaintext
+
+	exports.WKCParserBodyForPlaintext = function(inputData) {
+		if (typeof inputData !== 'string') {
+			return '';
+		}
+
+		return inputData.split('\n').slice(1).join('\n').trim();
+	};
+
 	//_ WKCParserSnippetFromText
 
 	exports.WKCParserSnippetFromText = function(inputData) {

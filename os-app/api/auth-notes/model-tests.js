@@ -63,45 +63,6 @@ describe('WKCModelInputDataIsNotePublishStatusObject', function testWKCModelInpu
 
 });
 
-describe('WKCModelNoteDetectedTitleFor', function testWKCModelNoteDetectedTitleFor() {
-
-	it('returns empty string if empty', function() {
-		assert.deepEqual(notesLibrary.WKCModelNoteDetectedTitleFor(), '');
-		assert.deepEqual(notesLibrary.WKCModelNoteDetectedTitleFor(null), '');
-		assert.deepEqual(notesLibrary.WKCModelNoteDetectedTitleFor(''), '');
-	});
-
-	it('returns first line if single', function() {
-		assert.deepEqual(notesLibrary.WKCModelNoteDetectedTitleFor('alpha'), 'alpha');
-	});
-
-	it('returns first line if multiple', function() {
-		assert.deepEqual(notesLibrary.WKCModelNoteDetectedTitleFor('alpha\n'), 'alpha');
-		assert.deepEqual(notesLibrary.WKCModelNoteDetectedTitleFor('alpha\nbravo'), 'alpha');
-	});
-
-});
-
-describe('WKCModelNoteDetectedBodyFor', function testWKCModelNoteDetectedBodyFor() {
-
-	it('returns empty string if empty', function() {
-		assert.deepEqual(notesLibrary.WKCModelNoteDetectedBodyFor(), '');
-		assert.deepEqual(notesLibrary.WKCModelNoteDetectedBodyFor(null), '');
-		assert.deepEqual(notesLibrary.WKCModelNoteDetectedBodyFor(''), '');
-	});
-
-	it('returns empty string if single', function() {
-		assert.deepEqual(notesLibrary.WKCModelNoteDetectedBodyFor('alpha'), '');
-	});
-
-	it('returns first line if multiple', function() {
-		assert.deepEqual(notesLibrary.WKCModelNoteDetectedBodyFor('alpha\n'), '');
-		assert.deepEqual(notesLibrary.WKCModelNoteDetectedBodyFor('alpha\nbravo'), 'bravo');
-		assert.deepEqual(notesLibrary.WKCModelNoteDetectedBodyFor('alpha\n\nbravo'), 'bravo');
-	});
-
-});
-
 describe('WKCModelNotesHiddenPropertyNames', function testWKCModelNotesHiddenPropertyNames() {
 
 	it('returns array', function() {

@@ -6,6 +6,8 @@
 
 const OLSKIdentifier = require('OLSKIdentifier');
 
+const WKCParser = require('../../_shared/WKCParser/main.js');
+
 var modelLibrary = require('./model');
 
 //_ OLSKControllerRoutes
@@ -297,8 +299,8 @@ exports.WKCActionAPINotesPublicRead = function(req, res, next) {
 			noteObject[obj] = result[obj];
 		});
 
-		noteObject.WKCNoteDetectedTitle = modelLibrary.WKCModelNoteDetectedTitleFor(noteObject.WKCNoteBody);
-		noteObject.WKCNoteDetectedBody = modelLibrary.WKCModelNoteDetectedBodyFor(noteObject.WKCNoteBody);
+		noteObject.WKCNoteDetectedTitle = WKCParser.WKCParserTitleForPlaintext(noteObject.WKCNoteBody);
+		noteObject.WKCNoteDetectedBody = WKCParser.WKCParserBodyForPlaintext(noteObject.WKCNoteBody);
 
 		return res.json(noteObject);
 	});
@@ -338,8 +340,8 @@ exports.WKCActionAPINotesSearch = function(req, res, next) {
 
 		return res.json(items.map(function (e) {
 			return Object.assign(e, {
-				WKCNoteDetectedTitle: modelLibrary.WKCModelNoteDetectedTitleFor(e.WKCNoteBody),
-				WKCNoteDetectedBody: modelLibrary.WKCModelNoteDetectedBodyFor(e.WKCNoteBody),
+				WKCNoteDetectedTitle: WKCParser.WKCParserTitleForPlaintext(e.WKCNoteBody),
+				WKCNoteDetectedBody: WKCParser.WKCParserBodyForPlaintext(e.WKCNoteBody),
 			});
 		}));
 	});
