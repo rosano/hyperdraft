@@ -579,10 +579,7 @@ describe('WKCActionAPINotesSearch', function testWKCActionAPINotesSearch() {
 			},
 		}), WKCFakeResponseAsync(function(noteObject) {
 			controllerModule.WKCActionAPINotesSearch(WKCFakeRequest(), WKCFakeResponseAsync(function(responseJSON) {
-				assert.deepEqual(responseJSON, [Object.assign({
-					WKCNoteDetectedTitle: 'alpha',
-					WKCNoteDetectedBody: '',
-				}, noteObject)]);
+				assert.deepEqual(responseJSON, [noteObject]);
 
 				done();
 			}));
