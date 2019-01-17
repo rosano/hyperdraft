@@ -95,7 +95,7 @@
 				WKCArticlePublishDate: new Date(contentForFirst(e.getElementsByTagName('pubDate')) || contentForFirst(e.getElementsByTagName('dc:date')) || Date.now()),
 				WKCArticleAuthor: contentForFirst(e.getElementsByTagName('author')),
 				WKCArticleBody: itemContent,
-				WKCArticleSnippet: exports.WKCParserSnippetFromText(DOMParserInstance.parseFromString(`<div>${itemContent}</div>`, 'text/html').body.textContent),
+				WKCArticleSnippet: exports.WKCParserSnippetForPlaintext(DOMParserInstance.parseFromString(`<div>${itemContent}</div>`, 'text/html').body.textContent),
 			};
 		});
 	};
@@ -146,7 +146,7 @@
 				WKCArticlePublishDate: new Date(contentForFirst(e.getElementsByTagName('published')) || contentForFirst(e.getElementsByTagName('updated')) || Date.now()),
 				WKCArticleAuthor: contentForFirst(e.getElementsByTagName('author')),
 				WKCArticleBody: itemContent,
-				WKCArticleSnippet: exports.WKCParserSnippetFromText(DOMParserInstance.parseFromString(`<div>${itemContent}</div>`, 'text/html').body.textContent),
+				WKCArticleSnippet: exports.WKCParserSnippetForPlaintext(DOMParserInstance.parseFromString(`<div>${itemContent}</div>`, 'text/html').body.textContent),
 			};
 		});
 	};
@@ -235,7 +235,7 @@
 				WKCArticleOriginalURL: `https://twitter.com/${e.user.screen_name}/status/${e.id_str}`,
 				WKCArticlePublishDate: new Date(e.created_at),
 				WKCArticleBody: exports.WKCParserHTMLForPlaintext(exports._WKCParserTweetBodyForTweetObject(e)),
-				WKCArticleSnippet: exports.WKCParserSnippetFromText(e.full_text),
+				WKCArticleSnippet: exports.WKCParserSnippetForPlaintext(e.full_text),
 			};
 		});
 	};
@@ -296,9 +296,9 @@
 		return inputData.split('\n').slice(1).join('\n').trim();
 	};
 
-	//_ WKCParserSnippetFromText
+	//_ WKCParserSnippetForPlaintext
 
-	exports.WKCParserSnippetFromText = function(inputData) {
+	exports.WKCParserSnippetForPlaintext = function(inputData) {
 		if (typeof inputData !== 'string') {
 			throw new Error('WKCErrorInvalidInput');
 		}

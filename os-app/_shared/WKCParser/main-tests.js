@@ -529,20 +529,20 @@ describe('WKCParserBodyForPlaintext', function testWKCParserBodyForPlaintext() {
 
 });
 
-describe('WKCParserSnippetFromText', function testWKCParserSnippetFromText() {
+describe('WKCParserSnippetForPlaintext', function testWKCParserSnippetForPlaintext() {
 
 	it('throws error if not string', function() {
 		assert.throws(function() {
-			mainModule.WKCParserSnippetFromText(null);
+			mainModule.WKCParserSnippetForPlaintext(null);
 		}, /WKCErrorInvalidInput/);
 	});
 
 	it('returns subset if large', function() {
-		assert.strictEqual(mainModule.WKCParserSnippetFromText(kStubs.kStubsBody()), kStubs.kStubsBody().slice(0, 100).split(' ').slice(0, -1).join(' ') + '…');
+		assert.strictEqual(mainModule.WKCParserSnippetForPlaintext(kStubs.kStubsBody()), kStubs.kStubsBody().slice(0, 100).split(' ').slice(0, -1).join(' ') + '…');
 	});
 
 	it('returns all if small', function() {
-		assert.strictEqual(mainModule.WKCParserSnippetFromText('alfa bravo'), 'alfa bravo');
+		assert.strictEqual(mainModule.WKCParserSnippetForPlaintext('alfa bravo'), 'alfa bravo');
 	});
 
 });
