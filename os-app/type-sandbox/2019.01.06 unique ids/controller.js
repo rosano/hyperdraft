@@ -72,7 +72,7 @@ WKCSandboxUniqueIDsProcess = async function(databaseClient) {
 		].reduce(function (coll, e) {
 			coll[e.key] = {
 				ids: e.value.sort().filter(function (e) {
-					if (parseInt(e) <= 1547652298269) {
+					if (parseInt(e) <= parseInt('1547681579356')) {
 						return;
 					}
 
