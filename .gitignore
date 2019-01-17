@@ -12,3 +12,4 @@ os-public/shared-assets/internal
 
 # LOCAL
 .env
+.env.production
