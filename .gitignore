@@ -13,7 +13,4 @@ os-public/shared-assets/internal
 # LOCAL
 .env
 .env.production
-
-.env.test
-
 .env.test
