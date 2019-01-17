@@ -34,7 +34,7 @@ body {
 }
 
 .WKCWriteMasterContentListItem {
-	height: 50px;
+	min-height: 46px;
 	padding: 10px;
 	border-bottom: 1px solid #ddd;
 
