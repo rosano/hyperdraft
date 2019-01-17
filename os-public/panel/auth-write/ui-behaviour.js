@@ -353,9 +353,11 @@
 		var contextElement = parentElement.append('div')
 			.attr('class', 'WKCWriteMasterContentListItemContext');
 
-		contextElement.append('span').attr('class', 'WKCWriteMasterContentListItemContextTitle');
+		contextElement.append('span')
+			.attr('class', 'WKCWriteMasterContentListItemContextTitle');
 
-		parentElement.append('span').attr('class', 'WKCWriteMasterContentListItemSnippet');
+		parentElement.append('span')
+			.attr('class', 'WKCWriteMasterContentListItemSnippet');
 
 		parentElement = parentElement.merge(selection);
 
@@ -365,10 +367,10 @@
 			});
 		parentElement.select('.WKCWriteMasterContentListItemContextTitle')
 			.text(function (e) {
-				return e.WKCNoteDetectedTitle;
+				return WKCParser.WKCParserTitleForPlaintext(e.WKCNoteBody);
 			})
 		parentElement.select('.WKCWriteMasterContentListItemSnippet').text(function(obj) {
-			return (obj.WKCNoteDetectedBody || '').slice(0, 140);
+			return WKCParser.WKCParserSnippetForPlaintext(WKCParser.WKCParserBodyForPlaintext(obj.WKCNoteBody));
 		});
 
 		selection.exit().remove();
