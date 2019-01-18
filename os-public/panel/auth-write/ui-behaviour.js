@@ -490,8 +490,6 @@
 			OLSKTaskFireLimit: 1,
 			OLSKTaskCallback: function () {
 				moi.commandsPersistUnsavedNotes();
-
-				delete moi.propertiesPersistenceTask()._OLSKTaskTimerID;
 			},
 		});
 	};
