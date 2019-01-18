@@ -189,7 +189,7 @@ exports.WKCMetalArticlesSearch = function(databaseClient, inputData, completionH
 	// 	return hash;
 	// }, {})
 	).limit(options && options.WKCOptionLimit ? options.WKCOptionLimit : 0).sort({
-		WKCArticleDateUpdated: -1,
+		WKCArticleDateCreated: -1,
 	}).toArray(function(err, result) {
 		if (err) {
 			return completionHandler(err);
