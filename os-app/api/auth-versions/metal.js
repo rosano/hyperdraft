@@ -30,3 +30,22 @@ exports.WKCVersionsMetalCreate = async function(databaseClient, inputData) {
 		return coll;
 	}, {}));
 };
+
+//_ WKCVersionsMetalSearch
+
+exports.WKCVersionsMetalSearch = async function(databaseClient, inputData) {
+	if (typeof inputData !== 'object' || inputData === null) {
+		return Promise.reject(new Error('WKCErrorInvalidInput'));
+	}
+
+	return Promise.resolve((await databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_versions').find(inputData
+		).sort({
+			WKCVersionID: -1,
+		}).toArray()).map(function(e) {
+			modelLibrary.WKCVersionsHiddenPropertyNames().forEach(function(key) {
+				delete e[key];
+			});
+
+			return e;
+		}));
+};
