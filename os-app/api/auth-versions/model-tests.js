@@ -13,7 +13,7 @@ const kTesting = {
 		return {
 			WKCVersionNoteID: 'alfa',
 			WKCVersionBody: 'bravo',
-			WKCVersionDateCreated: new Date(),
+			WKCVersionDate: new Date(),
 		};
 	},
 };
@@ -60,11 +60,11 @@ describe('WKCVersionsModelErrorsFor', function testWKCVersionsModelErrorsFor() {
 		});
 	});
 
-	it('returns object if WKCVersionDateCreated not date', function() {
+	it('returns object if WKCVersionDate not date', function() {
 		assert.deepEqual(mainModule.WKCVersionsModelErrorsFor(Object.assign(kTesting.kTestingValidVersion(), {
-			WKCVersionDateCreated: new Date('alfa'),
+			WKCVersionDate: new Date('alfa'),
 		})), {
-			WKCVersionDateCreated: [
+			WKCVersionDate: [
 				'WKCErrorNotDate',
 			],
 		});

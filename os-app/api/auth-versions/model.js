@@ -31,8 +31,8 @@ exports.WKCVersionsModelErrorsFor = function(inputData) {
 		];
 	}
 
-	if (!(inputData.WKCVersionDateCreated instanceof Date) || Number.isNaN(inputData.WKCVersionDateCreated.getTime())) {
-		errors.WKCVersionDateCreated = [
+	if (!(inputData.WKCVersionDate instanceof Date) || Number.isNaN(inputData.WKCVersionDate.getTime())) {
+		errors.WKCVersionDate = [
 			'WKCErrorNotDate',
 		];
 	}
