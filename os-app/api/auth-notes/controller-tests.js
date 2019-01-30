@@ -9,6 +9,7 @@ const assert = require('assert');
 var testingLibrary = require('OLSKTesting');
 
 var controllerModule = require('./controller');
+const versionsMetal = require('../auth-versions/metal.js');
 
 describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 
@@ -400,6 +401,39 @@ describe('WKCActionAPINotesUpdate', function testWKCActionAPINotesUpdate() {
 				assert.strictEqual(responseJSON.WKCNoteDateUpdated > originalDateUpdated, true);
 
 				done();
+			}));
+		}));
+	});
+
+	it('returns noteObject with updated properties', function(done) {
+		controllerModule.WKCActionAPINotesCreate(WKCFakeRequest({
+			body: {
+				WKCNoteBody: 'alpha',
+			},
+		}), WKCFakeResponseAsync(function(responseJSON) {
+			var originalDateUpdated = responseJSON.WKCNoteDateUpdated;
+
+			controllerModule.WKCActionAPINotesUpdate(WKCFakeRequest({
+				params: {
+					wkc_note_id: responseJSON.WKCNoteID,
+				},
+				body: Object.assign(responseJSON, {
+					WKCNoteBody: 'bravo',
+				}),
+			}), WKCFakeResponseAsync(function(responseJSON) {
+				assert.strictEqual(responseJSON.WKCNoteBody, 'bravo');
+				assert.strictEqual(responseJSON.WKCNoteDateUpdated > originalDateUpdated, true);
+
+				versionsMetal.WKCVersionsMetalSearch(WKCTestingMongoClient, {}).then(function (result) {
+					// console.log(result);
+					// assert.deepEqual(result, [{
+					// 	WKCVersionNoteID: responseJSON.WKCNoteID,
+					// 	WKCVersionBody: responseJSON.WKCNoteBody,
+					// 	WKCVersionDate: responseJSON.WKCNoteDateUpdated,
+					// 	WKCVersionID: result.WKCVersionID,
+					// }]);
+					done();
+				});
 			}));
 		}));
 	});
