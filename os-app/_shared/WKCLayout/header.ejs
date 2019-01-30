@@ -2,14 +2,12 @@
 <html<%- locals.OLSKSharedPageCurrentLanguage ? [' lang="', OLSKSharedPageCurrentLanguage, '"'].join('') : ''; %>>
 
 <head>
-	<% var pageTitle = locals.OLSKPageTitle || (locals.OLSKLocalized ? OLSKLocalized('WKCSharedDefaultPageTitle') : null) || locals.OLSKSharedDefaultPageTitle  %>
-	<% if (pageTitle) { %>
-		<title><%= pageTitle %></title>
+	<% if (locals.OLSKPageTitle) { %>
+		<title><%= locals.OLSKPageTitle %></title>
 	<% } %>
 
-	<% var pageDescription = locals.OLSKPageDescription || (locals.OLSKLocalized ? OLSKLocalized('WKCSharedDefaultPageDescription') : null) || locals.OLSKSharedDefaultPageDescription  %>
-	<% if (pageDescription) { %>
-		<meta name="description" content="<%= pageDescription %>" />
+	<% if (locals.OLSKPageDescription) { %>
+		<meta name="description" content="<%= locals.OLSKPageDescription %>" />
 	<% } %>
 
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
