@@ -206,6 +206,8 @@ exports.WKCActionAPINotesUpdate = function(req, res, next) {
 		'$set': Object.assign(inputData, {
 			WKCNoteDateUpdated: new Date(),
 		}),
+	}, {
+		returnOriginal: false,
 	}, function(err, result) {
 		if (err) {
 			throw new Error('WKCErrorDatabaseFindOne');
@@ -215,7 +217,7 @@ exports.WKCActionAPINotesUpdate = function(req, res, next) {
 			return next(new Error('WKCAPIClientErrorNotFound'));
 		}
 
-		return res.json(inputData);
+		return res.json(result.value);
 	});
 };
 
