@@ -8,6 +8,8 @@ const OLSKIdentifier = require('OLSKIdentifier');
 
 const WKCParser = require('../../_shared/WKCParser/main.js');
 
+const versionsMetal = require('../auth-versions/metal.js');
+
 var modelLibrary = require('./model');
 
 //_ OLSKControllerRoutes
@@ -217,7 +219,13 @@ exports.WKCActionAPINotesUpdate = function(req, res, next) {
 			return next(new Error('WKCAPIClientErrorNotFound'));
 		}
 
-		return res.json(result.value);
+		versionsMetal.WKCVersionsMetalCreate(req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, {
+			WKCVersionNoteID: result.value.WKCNoteID.toString(),
+			WKCVersionBody: result.value.WKCNoteBody,
+			WKCVersionDate: result.value.WKCNoteDateUpdated,
+		}).then(function () {
+			return res.json(result.value)
+		});
 	});
 };
 
