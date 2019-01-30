@@ -128,6 +128,10 @@
 			'- ',
 			this.value.substring(d3.select(this).property('selectionEnd')),
 		].join('');
+
+		d3.select(this)
+			.property('selectionStart', cursorPositon + 2)
+			.property('selectionEnd', cursorPositon + 2);
 	};
 
 	//# COMMANDS
