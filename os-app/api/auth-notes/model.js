@@ -70,6 +70,14 @@ exports.WKCModelInputDataIsNotePublishStatusObject = function(inputData) {
 	return true;
 };
 
+//_ WKCNotesHiddenPropertyNames
+
+exports.WKCNotesHiddenPropertyNames = function() {
+	return [
+		'_id',
+	];
+};
+
 //_ WKCModelNotesHiddenPropertyNames
 
 exports.WKCModelNotesHiddenPropertyNames = function() {

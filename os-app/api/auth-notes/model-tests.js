@@ -95,6 +95,16 @@ describe('WKCModelInputDataIsNotePublishStatusObject', function testWKCModelInpu
 
 });
 
+describe('WKCNotesHiddenPropertyNames', function testWKCNotesHiddenPropertyNames() {
+
+	it('returns array', function() {
+		assert.deepEqual(mainModule.WKCNotesHiddenPropertyNames(), [
+			'_id',
+		]);
+	});
+
+});
+
 describe('WKCModelNotesHiddenPropertyNames', function testWKCModelNotesHiddenPropertyNames() {
 
 	it('returns array', function() {
