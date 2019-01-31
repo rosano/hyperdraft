@@ -293,6 +293,17 @@ exports.WKCActionAPINotesPublish = function(req, res, next) {
 //_ WKCActionAPINotesPublicRead
 
 exports.WKCActionAPINotesPublicRead = function(req, res, next) {
+	// let outputData = await metalLibrary.WKCNotesMetalRead(req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, req.params.wkc_note_id);
+
+	// if (!outputData) {
+	// 	return next(new Error('WKCAPIClientErrorNotFound'));
+	// }
+
+	// return res.json(Object.assign(outputData, {
+	// 	WKCNoteDetectedTitle: WKCParser.WKCParserTitleForPlaintext(outputData.WKCNoteBody),
+	// 	WKCNoteDetectedBody: WKCParser.WKCParserBodyForPlaintext(outputData.WKCNoteBody),
+	// }));
+
 	return req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_notes').findOne({
 		WKCNotePublicID: parseInt(req.params.wkc_note_public_id),
 	}, function(err, result) {
