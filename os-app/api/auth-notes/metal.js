@@ -1,3 +1,4 @@
+/*!
  * wikiavec
  * Copyright(c) 2018 Rosano Coutinho
  * MIT Licensed
@@ -32,3 +33,41 @@ exports.WKCNotesMetalCreate = async function(databaseClient, inputData) {
 
 	return Promise.resolve(outputData);
 };
+
+//_ WKCNotesMetalUpdate
+
+exports.WKCNotesMetalUpdate = async function(databaseClient, param1, param2) {
+	if (typeof param1 !== 'string') {
+		return Promise.reject(new Error('WKCErrorInvalidInput'));
+	}
+
+	if (typeof param2 !== 'object' || param2 === null) {
+		return Promise.reject(new Error('WKCErrorInvalidInput'));
+	}
+
+	let errors;
+	if (errors = modelLibrary.WKCNotesModelErrorsFor(param2)) {
+		return Promise.resolve(Object.assign(param2, {
+			WKCErrors: errors,
+		}));
+	}
+
+	let outputData = (await databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_notes').findOneAndUpdate({
+		WKCNoteID: param1,
+	}, {
+		'$set': Object.assign(param2, {
+			WKCNoteDateUpdated: new Date(),
+		}),
+	}, {
+		returnOriginal: false,
+	})).value;
+
+	if (outputData) {
+		modelLibrary.WKCNotesHiddenPropertyNames().forEach(function (e) {
+			delete outputData[e];
+		});
+	}
+
+	return Promise.resolve(outputData);
+};
+
