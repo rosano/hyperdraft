@@ -8,6 +8,7 @@ const OLSKIdentifier = require('OLSKIdentifier');
 
 const WKCParser = require('../../_shared/WKCParser/main.js');
 
+const metalLibrary = require('./metal.js');
 const versionsMetal = require('../auth-versions/metal.js');
 
 var modelLibrary = require('./model');
@@ -65,7 +66,7 @@ exports.OLSKControllerRoutes = function() {
 		WKCRouteAPINotesSearch: {
 			OLSKRoutePath: '/api/notes/search',
 			OLSKRouteMethod: 'get',
-			OLSKRouteFunction: exports.WKCActionAPINotesSearch,
+			OLSKRouteFunction: exports.WKCAPINotesSearchAction,
 			OLSKRouteMiddlewares: [
 				'WKCSharedMiddlewareAPIAuthenticate',
 			],
@@ -336,18 +337,8 @@ exports.WKCActionAPINotesDelete = function(req, res, next) {
 	});
 };
 
-//_ WKCActionAPINotesSearch
+//_ WKCAPINotesSearchAction
 
-exports.WKCActionAPINotesSearch = function(req, res, next) {
-	return req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_notes').find({}).project(modelLibrary.WKCModelNotesHiddenPropertyNames().reduce(function(hash, e) {
-		hash[e] = 0;
-
-		return hash;
-	}, {})).toArray(function(err, items) {
-		if (err) {
-			throw new Error('WKCErrorDatabaseFind');
-		}
-
-		return res.json(items);
-	});
+exports.WKCAPINotesSearchAction = async function(req, res, next) {
+	return res.json(await metalLibrary.WKCNotesMetalSearch(req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, req.body));
 };

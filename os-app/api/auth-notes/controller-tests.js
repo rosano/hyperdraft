@@ -64,7 +64,7 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 			WKCRouteAPINotesSearch: {
 				OLSKRoutePath: '/api/notes/search',
 				OLSKRouteMethod: 'get',
-				OLSKRouteFunction: controllerModule.WKCActionAPINotesSearch,
+				OLSKRouteFunction: controllerModule.WKCAPINotesSearchAction,
 				OLSKRouteMiddlewares: [
 					'WKCSharedMiddlewareAPIAuthenticate',
 				],
@@ -598,24 +598,6 @@ describe('WKCActionAPINotesDelete', function testWKCActionAPINotesDelete() {
 
 					done();
 				});
-			}));
-		}));
-	});
-
-});
-
-describe('WKCActionAPINotesSearch', function testWKCActionAPINotesSearch() {
-
-	it('returns noteObject', function(done) {
-		controllerModule.WKCActionAPINotesCreate(WKCFakeRequest({
-			body: {
-				WKCNoteBody: 'alpha',
-			},
-		}), WKCFakeResponseAsync(function(noteObject) {
-			controllerModule.WKCActionAPINotesSearch(WKCFakeRequest(), WKCFakeResponseAsync(function(responseJSON) {
-				assert.deepEqual(responseJSON, [noteObject]);
-
-				done();
 			}));
 		}));
 	});
