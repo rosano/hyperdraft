@@ -58,7 +58,7 @@ exports.OLSKControllerRoutes = function() {
 		WKCRouteAPINotesDelete: {
 			OLSKRoutePath: '/api/notes/:wkc_note_id(\\d+)',
 			OLSKRouteMethod: 'delete',
-			OLSKRouteFunction: exports.WKCActionAPINotesDelete,
+			OLSKRouteFunction: exports.WKCAPINotesDeleteAction,
 			OLSKRouteMiddlewares: [
 				'WKCSharedMiddlewareAPIAuthenticate',
 			],
@@ -317,24 +317,16 @@ exports.WKCActionAPINotesPublicRead = function(req, res, next) {
 	});
 };
 
-//_ WKCActionAPINotesDelete
+//_ WKCAPINotesDeleteAction
 
-exports.WKCActionAPINotesDelete = function(req, res, next) {
-	return req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_notes').deleteOne({
-		WKCNoteID: parseInt(req.params.wkc_note_id),
-	}, function(err, result) {
-		if (err) {
-			throw new Error('WKCErrorDatabaseFindOne');
-		}
+exports.WKCAPINotesDeleteAction = async function(req, res, next) {
+	let outputData = await metalLibrary.WKCNotesMetalDelete(req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, req.params.wkc_note_id);
+	
+	if (outputData !== true) {
+		return next(new Error('WKCAPIClientErrorNotFound'));
+	}
 
-		if (!result.result.n) {
-			return next(new Error('WKCAPIClientErrorNotFound'));
-		}
-
-		return res.json({
-			WKCAPIResponse: true,
-		});
-	});
+	return res.json(outputData);
 };
 
 //_ WKCAPINotesSearchAction

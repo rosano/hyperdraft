@@ -56,7 +56,7 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 			WKCRouteAPINotesDelete: {
 				OLSKRoutePath: '/api/notes/:wkc_note_id(\\d+)',
 				OLSKRouteMethod: 'delete',
-				OLSKRouteFunction: controllerModule.WKCActionAPINotesDelete,
+				OLSKRouteFunction: controllerModule.WKCAPINotesDeleteAction,
 				OLSKRouteMiddlewares: [
 					'WKCSharedMiddlewareAPIAuthenticate',
 				],
@@ -234,7 +234,7 @@ describe('WKCAPISettingsLastGeneratedPublicIDWithClientAndCallback', function te
 					WKCNotePublishStatusIsPublished: true,
 				},
 			}), WKCFakeResponseAsync(function(responseJSON) {
-				controllerModule.WKCActionAPINotesDelete(WKCFakeRequest({
+				controllerModule.WKCAPINotesDeleteAction(WKCFakeRequest({
 					params: {
 						wkc_note_id: noteObject.WKCNoteID.toString(),
 					},
@@ -555,49 +555,6 @@ describe('WKCActionAPINotesPublicRead', function testWKCActionAPINotesPublicRead
 
 					done();
 				}));
-			}));
-		}));
-	});
-
-});
-
-describe('WKCActionAPINotesDelete', function testWKCActionAPINotesDelete() {
-
-	it('returns next(WKCAPIClientError) if wkc_note_id does not exist', function(done) {
-		controllerModule.WKCActionAPINotesDelete(WKCFakeRequest({
-			params: {
-				wkc_note_id: 'alpha',
-			},
-		}), WKCFakeResponseAsync(), function(inputData) {
-			assert.deepEqual(inputData, new Error('WKCAPIClientErrorNotFound'));
-
-			done();
-		});
-	});
-
-	it('returns true', function(done) {
-		controllerModule.WKCActionAPINotesCreate(WKCFakeRequest({
-			body: {
-				WKCNoteBody: 'alpha',
-			}
-		}), WKCFakeResponseAsync(function(responseJSON) {
-			var noteID = responseJSON.WKCNoteID.toString();
-			controllerModule.WKCActionAPINotesDelete(WKCFakeRequest({
-				params: {
-					wkc_note_id: noteID,
-				},
-			}), WKCFakeResponseAsync(function(responseJSON) {
-				assert.strictEqual(responseJSON.WKCAPIResponse, true);
-
-				controllerModule.WKCActionAPINotesRead(WKCFakeRequest({
-					params: {
-						wkc_note_id: noteID,
-					},
-				}), WKCFakeResponseAsync(), function(inputData) {
-					assert.deepEqual(inputData, new Error('WKCAPIClientErrorNotFound'));
-
-					done();
-				});
 			}));
 		}));
 	});
