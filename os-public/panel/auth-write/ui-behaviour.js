@@ -292,6 +292,8 @@
 				WKCNotePublishStatusIsPublished: true,
 			}),
 		}).then(function(responseJSON) {
+			Object.assign(inputData, responseJSON);
+
 			moi.reactPublishStatus();
 		}, function(error) {
 			if (window.confirm(OLSKLocalized('WKCWriteErrorPublishDidFail'))) {
@@ -431,7 +433,6 @@
 	//_ reactPublishStatus
 
 	moi.reactPublishStatus = function () {
-		console.log(moi.propertiesSelectedNote());
 		d3.select('#WKCWriteDetailToolbarPublishStatus').html(moi.propertiesSelectedNote().WKCNotePublishStatusIsPublished ? OLSKLocalized('WKCWriteDetailToolbarPublishStatusPublished') + '<a href="/' + moi.propertiesSelectedNote().WKCNotePublicID + '" target="_blank">/' + moi.propertiesSelectedNote().WKCNotePublicID + '</a>': null);
 	};
 
