@@ -4,6 +4,24 @@
  * MIT Licensed
  */
 
+//_ WKCNotesModelErrorsFor
+
+exports.WKCNotesModelErrorsFor = function(inputData) {
+	if (typeof inputData !== 'object' || inputData === null) {
+		throw new Error('WKCErrorInvalidInput');
+	}
+
+	var errors = {};
+
+	if (typeof inputData.WKCNoteBody !== 'string') {
+		errors.WKCNoteBody = [
+			'WKCErrorNotString',
+		];
+	}
+
+	return Object.entries(errors).length ? errors : null;
+};
+
 //_ WKCModelInputDataIsNotesObject
 
 exports.WKCModelInputDataIsNotesObject = function(inputData) {

@@ -6,19 +6,51 @@
 
 const assert = require('assert');
 
-var notesLibrary = require('./model');
+var mainModule = require('./model');
+
+const kTesting = {
+	kTestingValidNote: function() {
+		return {
+			WKCNoteBody: 'bravo',
+		};
+	},
+};
+
+describe('WKCNotesModelErrorsFor', function testWKCNotesModelErrorsFor() {
+
+	it('throws error if not object', function() {
+		assert.throws(function() {
+			mainModule.WKCNotesModelErrorsFor(null);
+		}, /WKCErrorInvalidInput/);
+	});
+
+	it('returns object if WKCNoteBody not string', function() {
+		assert.deepEqual(mainModule.WKCNotesModelErrorsFor(Object.assign(kTesting.kTestingValidNote(), {
+			WKCNoteBody: null,
+		})), {
+			WKCNoteBody: [
+				'WKCErrorNotString',
+			],
+		});
+	});
+
+	it('returns null', function() {
+		assert.deepEqual(mainModule.WKCNotesModelErrorsFor(kTesting.kTestingValidNote()), null);
+	});
+
+});
 
 describe('WKCModelInputDataIsNotesObject', function testWKCModelInputDataIsNotesObject() {
 
 	it('returns false if not object', function() {
-		assert.strictEqual(notesLibrary.WKCModelInputDataIsNotesObject(null), false);
+		assert.strictEqual(mainModule.WKCModelInputDataIsNotesObject(null), false);
 	});
 
 	it('returns false with WKCErrors if WKCNoteBody not string', function() {
 		var item = {
 			WKCNoteBody: null,
 		};
-		assert.strictEqual(notesLibrary.WKCModelInputDataIsNotesObject(item), false);
+		assert.strictEqual(mainModule.WKCModelInputDataIsNotesObject(item), false);
 		assert.deepEqual(item.WKCErrors, {
 			WKCNoteBody: [
 				'WKCErrorNotString',
@@ -27,7 +59,7 @@ describe('WKCModelInputDataIsNotesObject', function testWKCModelInputDataIsNotes
 	});
 
 	it('returns true', function() {
-		assert.deepEqual(notesLibrary.WKCModelInputDataIsNotesObject({
+		assert.deepEqual(mainModule.WKCModelInputDataIsNotesObject({
 			WKCNoteBody: 'alpha',
 		}), true);
 	});
@@ -37,14 +69,14 @@ describe('WKCModelInputDataIsNotesObject', function testWKCModelInputDataIsNotes
 describe('WKCModelInputDataIsNotePublishStatusObject', function testWKCModelInputDataIsNotePublishStatusObject() {
 
 	it('returns false if not object', function() {
-		assert.strictEqual(notesLibrary.WKCModelInputDataIsNotePublishStatusObject(null), false);
+		assert.strictEqual(mainModule.WKCModelInputDataIsNotePublishStatusObject(null), false);
 	});
 
 	it('returns false with WKCErrors if WKCNotePublishStatusIsPublished not boolean', function() {
 		var item = {
 			WKCNotePublishStatusIsPublished: null,
 		};
-		assert.strictEqual(notesLibrary.WKCModelInputDataIsNotePublishStatusObject(item), false);
+		assert.strictEqual(mainModule.WKCModelInputDataIsNotePublishStatusObject(item), false);
 		assert.deepEqual(item.WKCErrors, {
 			WKCNotePublishStatusIsPublished: [
 				'WKCErrorNotBoolean',
@@ -53,10 +85,10 @@ describe('WKCModelInputDataIsNotePublishStatusObject', function testWKCModelInpu
 	});
 
 	it('returns true', function() {
-		assert.deepEqual(notesLibrary.WKCModelInputDataIsNotePublishStatusObject({
+		assert.deepEqual(mainModule.WKCModelInputDataIsNotePublishStatusObject({
 			WKCNotePublishStatusIsPublished: false,
 		}), true);
-		assert.deepEqual(notesLibrary.WKCModelInputDataIsNotePublishStatusObject({
+		assert.deepEqual(mainModule.WKCModelInputDataIsNotePublishStatusObject({
 			WKCNotePublishStatusIsPublished: true,
 		}), true);
 	});
@@ -66,7 +98,7 @@ describe('WKCModelInputDataIsNotePublishStatusObject', function testWKCModelInpu
 describe('WKCModelNotesHiddenPropertyNames', function testWKCModelNotesHiddenPropertyNames() {
 
 	it('returns array', function() {
-		assert.deepEqual(notesLibrary.WKCModelNotesHiddenPropertyNames(), [
+		assert.deepEqual(mainModule.WKCModelNotesHiddenPropertyNames(), [
 			'_id',
 		]);
 	});
@@ -76,7 +108,7 @@ describe('WKCModelNotesHiddenPropertyNames', function testWKCModelNotesHiddenPro
 describe('WKCModelNotesPublicPropertyNames', function testWKCModelNotesHiddenPropertyNames() {
 
 	it('returns array', function() {
-		assert.deepEqual(notesLibrary.WKCModelNotesPublicPropertyNames(), [
+		assert.deepEqual(mainModule.WKCModelNotesPublicPropertyNames(), [
 			'WKCNotePublicID',
 			'WKCNoteDateCreated',
 			'WKCNoteDateUpdated',
