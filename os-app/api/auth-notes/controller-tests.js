@@ -477,7 +477,7 @@ describe('WKCActionAPINotesPublish', function testWKCActionAPINotesPublish() {
 		}), WKCFakeResponseAsync(function(noteObject) {
 			var originalDateUpdated = noteObject.WKCNoteDateUpdated;
 
-			assert.strictEqual(noteObject.WKCNoteIsPublished, undefined);
+			assert.strictEqual(noteObject.WKCNotePublishStatusIsPublished, undefined);
 			assert.strictEqual(noteObject.WKCNotePublicID, undefined);
 
 			controllerModule.WKCActionAPINotesPublish(WKCFakeRequest({
@@ -498,7 +498,7 @@ describe('WKCActionAPINotesPublish', function testWKCActionAPINotesPublish() {
 						wkc_note_id: noteObject.WKCNoteID.toString(),
 					},
 				}), WKCFakeResponseAsync(function(noteObject) {
-					assert.strictEqual(noteObject.WKCNoteIsPublished, true);
+					assert.strictEqual(noteObject.WKCNotePublishStatusIsPublished, true);
 					assert.strictEqual(noteObject.WKCNotePublicID, 1);
 					assert.strictEqual(noteObject.WKCNoteDateUpdated > originalDateUpdated, true);
 

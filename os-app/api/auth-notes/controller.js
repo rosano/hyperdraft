@@ -243,7 +243,7 @@ exports.WKCActionAPINotesPublish = function(req, res, next) {
 			WKCNoteID: parseInt(req.params.wkc_note_id),
 		}, {
 			'$set': Object.assign(req._WKCAPINotesMiddlewareFindByIDResult, {
-				WKCNoteIsPublished: inputData.WKCNotePublishStatusIsPublished,
+				WKCNotePublishStatusIsPublished: inputData.WKCNotePublishStatusIsPublished,
 				WKCNoteDateUpdated: new Date(),
 			}),
 		}, function(err, result) {
