@@ -10,7 +10,7 @@ var metalLibrary = require('./metal');
 var modelLibrary = require('./model');
 
 const kTesting = {
-	kTestingValidSubscription: function() {
+	StubValidSubscription: function() {
 		return {
 			WKCSubscriptionURL: 'https://google.com',
 			WKCSubscriptionHandler: modelLibrary.WKCSubscriptionHandlerPage(),
@@ -48,8 +48,8 @@ describe('WKCMetalSubscriptionsCreate', function testWKCMetalSubscriptionsCreate
 	});
 
 	it('returns WKCSubscription', function(done) {
-		metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, kTesting.kTestingValidSubscription(), function(err, responseJSON) {
-			assert.deepEqual(responseJSON, Object.assign(kTesting.kTestingValidSubscription(), {
+		metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, kTesting.StubValidSubscription(), function(err, responseJSON) {
+			assert.deepEqual(responseJSON, Object.assign(kTesting.StubValidSubscription(), {
 				WKCSubscriptionID: responseJSON.WKCSubscriptionID,
 				WKCSubscriptionID2: responseJSON.WKCSubscriptionID2,
 				WKCSubscriptionDateCreated: responseJSON.WKCSubscriptionDateCreated,
@@ -89,7 +89,7 @@ describe('WKCMetalSubscriptionsRead', function testWKCMetalSubscriptionsRead() {
 	});
 
 	it('returns WKCSubscription', function(done) {
-		metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, kTesting.kTestingValidSubscription(), function(err, subscriptionObject) {
+		metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, kTesting.StubValidSubscription(), function(err, subscriptionObject) {
 			metalLibrary.WKCMetalSubscriptionsRead(WKCTestingMongoClient, subscriptionObject.WKCSubscriptionID, function(err, responseJSON) {
 				assert.deepEqual(responseJSON, subscriptionObject);
 
@@ -121,7 +121,7 @@ describe('WKCMetalSubscriptionsUpdate', function testWKCMetalSubscriptionsUpdate
 	});
 
 	it('returns error if WKCSubscriptionID not found', function(done) {
-		metalLibrary.WKCMetalSubscriptionsUpdate(WKCTestingMongoClient, '0', kTesting.kTestingValidSubscription(), function(err) {
+		metalLibrary.WKCMetalSubscriptionsUpdate(WKCTestingMongoClient, '0', kTesting.StubValidSubscription(), function(err) {
 			assert.deepEqual(err, new Error('WKCErrorNotFound'));
 
 			done();
@@ -129,7 +129,7 @@ describe('WKCMetalSubscriptionsUpdate', function testWKCMetalSubscriptionsUpdate
 	});
 
 	it('returns WKCErrors if not valid WKCSubscription', function(done) {
-		metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, kTesting.kTestingValidSubscription(), function(err, subscriptionObject) {
+		metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, kTesting.StubValidSubscription(), function(err, subscriptionObject) {
 			metalLibrary.WKCMetalSubscriptionsUpdate(WKCTestingMongoClient, subscriptionObject.WKCSubscriptionID, {
 				WKCSubscriptionURL: 'google.com',
 			}, function(err, responseJSON) {
@@ -145,7 +145,7 @@ describe('WKCMetalSubscriptionsUpdate', function testWKCMetalSubscriptionsUpdate
 	});
 
 	it('returns WKCSubscription', function(done) {
-		metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, kTesting.kTestingValidSubscription(), function(err, subscriptionObject) {
+		metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, kTesting.StubValidSubscription(), function(err, subscriptionObject) {
 			var newURL = 'https://yahoo.com';
 
 			metalLibrary.WKCMetalSubscriptionsUpdate(WKCTestingMongoClient, subscriptionObject.WKCSubscriptionID, {
@@ -187,7 +187,7 @@ describe('WKCMetalSubscriptionsDelete', function testWKCMetalSubscriptionsDelete
 	});
 
 	it('returns WKCSubscription', function(done) {
-		metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, kTesting.kTestingValidSubscription(), function(err, responseJSON) {
+		metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, kTesting.StubValidSubscription(), function(err, responseJSON) {
 			metalLibrary.WKCMetalSubscriptionsDelete(WKCTestingMongoClient, responseJSON.WKCSubscriptionID, function(err, responseJSON) {
 				assert.deepEqual(responseJSON, true);
 
@@ -213,7 +213,7 @@ describe('WKCMetalSubscriptionsSearch', function testWKCMetalSubscriptionsSearch
 	});
 
 	it('returns all if param2 empty', function(done) {
-		metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, kTesting.kTestingValidSubscription(), function(err, subscriptionObject) {
+		metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, kTesting.StubValidSubscription(), function(err, subscriptionObject) {
 			metalLibrary.WKCMetalSubscriptionsSearch(WKCTestingMongoClient, '', function(err, responseJSON) {
 				assert.deepEqual(responseJSON, [subscriptionObject]);
 
@@ -225,7 +225,7 @@ describe('WKCMetalSubscriptionsSearch', function testWKCMetalSubscriptionsSearch
 	context('WKCOptionExcludeWKCSubscriptionFetchContent', function () {
 
 		it('returns with WKCSubscriptionFetchContent if true', function(done) {
-			metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTesting.kTestingValidSubscription(), {
+			metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTesting.StubValidSubscription(), {
 				WKCSubscriptionFetchContent: 'alfa',
 			}), function(err, subscriptionObject1) {
 				delete subscriptionObject1.WKCSubscriptionFetchContent;
@@ -241,7 +241,7 @@ describe('WKCMetalSubscriptionsSearch', function testWKCMetalSubscriptionsSearch
 		});
 
 		it('returns without WKCSubscriptionFetchContent', function(done) {
-			metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTesting.kTestingValidSubscription(), {
+			metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTesting.StubValidSubscription(), {
 				WKCSubscriptionFetchContent: 'alfa',
 			}), function(err, subscriptionObject1) {
 				metalLibrary.WKCMetalSubscriptionsSearch(WKCTestingMongoClient, '', function(err, responseJSON) {
@@ -265,11 +265,11 @@ describe('WKCMetalSubscriptionsNeedingFetch', function testWKCMetalSubscriptions
 	});
 
 	it('returns subscriptionObjects with fetch date older than one hour', function(done) {
-		metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTesting.kTestingValidSubscription(), {
+		metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTesting.StubValidSubscription(), {
 			WKCSubscriptionName: 'alfa',
 			WKCSubscriptionFetchDate: new Date(new Date() - 1000 * 60 * 60),
 		}), function(err, subscriptionObject1) {
-			metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTesting.kTestingValidSubscription(), {
+			metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTesting.StubValidSubscription(), {
 				WKCSubscriptionName: 'bravo',
 				WKCSubscriptionFetchDate: new Date(),
 			}), function(err, subscriptionObject2) {
@@ -283,11 +283,11 @@ describe('WKCMetalSubscriptionsNeedingFetch', function testWKCMetalSubscriptions
 	});
 
 	it('returns subscriptionObjects with no fetch date', function(done) {
-		metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTesting.kTestingValidSubscription(), {
+		metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTesting.StubValidSubscription(), {
 			WKCSubscriptionName: 'alfa',
 			WKCSubscriptionFetchDate: new Date(),
 		}), function(err, subscriptionObject1) {
-			metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTesting.kTestingValidSubscription(), {
+			metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTesting.StubValidSubscription(), {
 				WKCSubscriptionName: 'bravo',
 			}), function(err, subscriptionObject2) {
 				metalLibrary.WKCMetalSubscriptionsNeedingFetch(WKCTestingMongoClient, function(err, responseJSON) {
@@ -302,12 +302,12 @@ describe('WKCMetalSubscriptionsNeedingFetch', function testWKCMetalSubscriptions
 	context('WKCSubscriptionErrorDate', function() {
 
 		it('excludes if less than one hour', function(done) {
-			metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTesting.kTestingValidSubscription(), {
+			metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTesting.StubValidSubscription(), {
 				WKCSubscriptionName: 'alfa',
 				WKCSubscriptionFetchDate: new Date(new Date() - 1000 * 60 * 60),
 				WKCSubscriptionErrorDate: new Date(),
 			}), function(err, subscriptionObject) {
-				metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTesting.kTestingValidSubscription(), {
+				metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTesting.StubValidSubscription(), {
 					WKCSubscriptionName: 'bravo',
 					WKCSubscriptionFetchDate: new Date(),
 				}), function(err, subscriptionObject) {
@@ -321,12 +321,12 @@ describe('WKCMetalSubscriptionsNeedingFetch', function testWKCMetalSubscriptions
 		});
 
 		it('includes if older than one hour', function(done) {
-			metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTesting.kTestingValidSubscription(), {
+			metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTesting.StubValidSubscription(), {
 				WKCSubscriptionName: 'alfa',
 				WKCSubscriptionFetchDate: new Date(new Date() - 1000 * 60 * 60),
 				WKCSubscriptionErrorDate: new Date(new Date() - 1000 * 60 * 60),
 			}), function(err, subscriptionObject1) {
-				metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTesting.kTestingValidSubscription(), {
+				metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTesting.StubValidSubscription(), {
 					WKCSubscriptionName: 'bravo',
 					WKCSubscriptionFetchDate: new Date(),
 				}), function(err, subscriptionObject2) {
@@ -344,12 +344,12 @@ describe('WKCMetalSubscriptionsNeedingFetch', function testWKCMetalSubscriptions
 	context('WKCSubscriptionIsPaused', function() {
 
 		it('excludes if true', function(done) {
-			metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTesting.kTestingValidSubscription(), {
+			metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTesting.StubValidSubscription(), {
 				WKCSubscriptionName: 'alfa',
 				WKCSubscriptionFetchDate: new Date(new Date() - 1000 * 60 * 60),
 				WKCSubscriptionIsPaused: true,
 			}), function(err, subscriptionObject) {
-				metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTesting.kTestingValidSubscription(), {
+				metalLibrary.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTesting.StubValidSubscription(), {
 					WKCSubscriptionName: 'bravo',
 					WKCSubscriptionFetchDate: new Date(),
 				}), function(err, subscriptionObject) {

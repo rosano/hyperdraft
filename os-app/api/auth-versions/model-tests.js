@@ -9,7 +9,7 @@ const assert = require('assert');
 var mainModule = require('./model');
 
 const kTesting = {
-	kTestingValidVersion: function() {
+	StubValidVersion: function() {
 		return {
 			WKCVersionNoteID: 'alfa',
 			WKCVersionBody: 'bravo',
@@ -27,7 +27,7 @@ describe('WKCVersionsModelErrorsFor', function testWKCVersionsModelErrorsFor() {
 	});
 
 	it('returns object if WKCVersionNoteID not string', function() {
-		var item = Object.assign(kTesting.kTestingValidVersion(), {
+		var item = Object.assign(kTesting.StubValidVersion(), {
 			WKCVersionNoteID: null,
 		});
 
@@ -39,7 +39,7 @@ describe('WKCVersionsModelErrorsFor', function testWKCVersionsModelErrorsFor() {
 	});
 
 	it('returns object if WKCVersionNoteID not unempty', function() {
-		var item = Object.assign(kTesting.kTestingValidVersion(), {
+		var item = Object.assign(kTesting.StubValidVersion(), {
 			WKCVersionNoteID: '',
 		});
 
@@ -51,7 +51,7 @@ describe('WKCVersionsModelErrorsFor', function testWKCVersionsModelErrorsFor() {
 	});
 
 	it('returns object if WKCVersionBody not string', function() {
-		assert.deepEqual(mainModule.WKCVersionsModelErrorsFor(Object.assign(kTesting.kTestingValidVersion(), {
+		assert.deepEqual(mainModule.WKCVersionsModelErrorsFor(Object.assign(kTesting.StubValidVersion(), {
 			WKCVersionBody: null,
 		})), {
 			WKCVersionBody: [
@@ -61,7 +61,7 @@ describe('WKCVersionsModelErrorsFor', function testWKCVersionsModelErrorsFor() {
 	});
 
 	it('returns object if WKCVersionDate not date', function() {
-		assert.deepEqual(mainModule.WKCVersionsModelErrorsFor(Object.assign(kTesting.kTestingValidVersion(), {
+		assert.deepEqual(mainModule.WKCVersionsModelErrorsFor(Object.assign(kTesting.StubValidVersion(), {
 			WKCVersionDate: new Date('alfa'),
 		})), {
 			WKCVersionDate: [
@@ -71,7 +71,7 @@ describe('WKCVersionsModelErrorsFor', function testWKCVersionsModelErrorsFor() {
 	});
 
 	it('returns null', function() {
-		assert.deepEqual(mainModule.WKCVersionsModelErrorsFor(kTesting.kTestingValidVersion()), null);
+		assert.deepEqual(mainModule.WKCVersionsModelErrorsFor(kTesting.StubValidVersion()), null);
 	});
 
 });

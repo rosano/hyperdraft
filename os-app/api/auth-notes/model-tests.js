@@ -9,7 +9,7 @@ const assert = require('assert');
 var mainModule = require('./model');
 
 const kTesting = {
-	kTestingValidNote: function() {
+	StubValidNote: function() {
 		return {
 			WKCNoteBody: 'bravo',
 		};
@@ -25,7 +25,7 @@ describe('WKCNotesModelErrorsFor', function testWKCNotesModelErrorsFor() {
 	});
 
 	it('returns object if WKCNoteBody not string', function() {
-		assert.deepEqual(mainModule.WKCNotesModelErrorsFor(Object.assign(kTesting.kTestingValidNote(), {
+		assert.deepEqual(mainModule.WKCNotesModelErrorsFor(Object.assign(kTesting.StubValidNote(), {
 			WKCNoteBody: null,
 		})), {
 			WKCNoteBody: [
@@ -35,7 +35,7 @@ describe('WKCNotesModelErrorsFor', function testWKCNotesModelErrorsFor() {
 	});
 
 	it('returns null', function() {
-		assert.deepEqual(mainModule.WKCNotesModelErrorsFor(kTesting.kTestingValidNote()), null);
+		assert.deepEqual(mainModule.WKCNotesModelErrorsFor(kTesting.StubValidNote()), null);
 	});
 
 });

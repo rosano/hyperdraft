@@ -8,7 +8,7 @@ const assert = require('assert');
 
 var modelLibrary = require('./model');
 
-const kTestingValidArticle = function() {
+const StubValidArticle = function() {
 	return {
 		WKCArticleSubscriptionID: 'alfa',
 		WKCArticlePublishDate: new Date(),
@@ -46,7 +46,7 @@ describe('WKCModelInputDataIsArticleObject', function testWKCModelInputDataIsArt
 	});
 
 	it('returns false with WKCErrors if WKCArticleSubscriptionID not string', function() {
-		var item = Object.assign(kTestingValidArticle(), {
+		var item = Object.assign(StubValidArticle(), {
 			WKCArticleSubscriptionID: null,
 		});
 
@@ -59,7 +59,7 @@ describe('WKCModelInputDataIsArticleObject', function testWKCModelInputDataIsArt
 	});
 
 	it('returns false with WKCErrors if WKCArticleSubscriptionID not blank', function() {
-		var item = Object.assign(kTestingValidArticle(), {
+		var item = Object.assign(StubValidArticle(), {
 			WKCArticleSubscriptionID: '',
 		});
 
@@ -72,7 +72,7 @@ describe('WKCModelInputDataIsArticleObject', function testWKCModelInputDataIsArt
 	});
 
 	it('returns false with WKCErrors if WKCArticlePublishDate not date', function() {
-		var item = Object.assign(kTestingValidArticle(), {
+		var item = Object.assign(StubValidArticle(), {
 			WKCArticlePublishDate: new Date('alfa'),
 		});
 
@@ -85,7 +85,7 @@ describe('WKCModelInputDataIsArticleObject', function testWKCModelInputDataIsArt
 	});
 
 	it('returns true', function() {
-		assert.deepEqual(modelLibrary.WKCModelInputDataIsArticleObject(kTestingValidArticle()), true);
+		assert.deepEqual(modelLibrary.WKCModelInputDataIsArticleObject(StubValidArticle()), true);
 	});
 
 	it('ignores unpresent fields if WKCModelValidatePresentOnly true', function() {
@@ -106,7 +106,7 @@ describe('WKCModelInputDataIsArticleObject', function testWKCModelInputDataIsArt
 	context('WKCArticleTitle', function() {
 
 		it('returns false with WKCErrors if not string', function() {
-			var item = Object.assign(kTestingValidArticle(), {
+			var item = Object.assign(StubValidArticle(), {
 				WKCArticleTitle: 123
 			});
 
@@ -123,7 +123,7 @@ describe('WKCModelInputDataIsArticleObject', function testWKCModelInputDataIsArt
 	context('WKCArticleSnippet', function() {
 
 		it('returns false with WKCErrors if not string', function() {
-			var item = Object.assign(kTestingValidArticle(), {
+			var item = Object.assign(StubValidArticle(), {
 				WKCArticleBody: 123
 			});
 
@@ -140,7 +140,7 @@ describe('WKCModelInputDataIsArticleObject', function testWKCModelInputDataIsArt
 	context('WKCArticleIsRead', function() {
 
 		it('returns false with WKCErrors if not boolean', function() {
-			var item = Object.assign(kTestingValidArticle(), {
+			var item = Object.assign(StubValidArticle(), {
 				WKCArticleIsRead: 'true'
 			});
 
@@ -157,7 +157,7 @@ describe('WKCModelInputDataIsArticleObject', function testWKCModelInputDataIsArt
 	context('WKCArticleIsArchived', function() {
 
 		it('returns false with WKCErrors if not boolean', function() {
-			var item = Object.assign(kTestingValidArticle(), {
+			var item = Object.assign(StubValidArticle(), {
 				WKCArticleIsArchived: 'true'
 			});
 
@@ -174,7 +174,7 @@ describe('WKCModelInputDataIsArticleObject', function testWKCModelInputDataIsArt
 	context('WKCArticleIsDiscarded', function() {
 
 		it('returns false with WKCErrors if not boolean', function() {
-			var item = Object.assign(kTestingValidArticle(), {
+			var item = Object.assign(StubValidArticle(), {
 				WKCArticleIsDiscarded: 'true'
 			});
 
@@ -191,7 +191,7 @@ describe('WKCModelInputDataIsArticleObject', function testWKCModelInputDataIsArt
 	context('WKCArticleDateDiscarded', function() {
 
 		it('returns false with WKCErrors if not date', function() {
-			var item = Object.assign(kTestingValidArticle(), {
+			var item = Object.assign(StubValidArticle(), {
 				WKCArticleDateDiscarded: Date.now(),
 			});
 
@@ -204,7 +204,7 @@ describe('WKCModelInputDataIsArticleObject', function testWKCModelInputDataIsArt
 		});
 
 		it('returns true', function() {
-			var item = Object.assign(kTestingValidArticle(), {
+			var item = Object.assign(StubValidArticle(), {
 				WKCArticleDateDiscarded: new Date(),
 			});
 

@@ -9,7 +9,7 @@ const assert = require('assert');
 var modelLibrary = require('./model');
 
 const kTesting = {
-	kTestingValidSubscription: function() {
+	StubValidSubscription: function() {
 		return {
 			WKCSubscriptionURL: 'https://google.com',
 			WKCSubscriptionHandler: modelLibrary.WKCSubscriptionHandlerPage(),
@@ -133,7 +133,7 @@ describe('WKCSubscriptionsModelErrorsFor', function testWKCSubscriptionsModelErr
 	});
 
 	it('returns object if WKCSubscriptionURL not string', function() {
-		assert.deepEqual(modelLibrary.WKCSubscriptionsModelErrorsFor(Object.assign(kTesting.kTestingValidSubscription(), {
+		assert.deepEqual(modelLibrary.WKCSubscriptionsModelErrorsFor(Object.assign(kTesting.StubValidSubscription(), {
 			WKCSubscriptionURL: null,
 		})), {
 			WKCSubscriptionURL: [
@@ -143,7 +143,7 @@ describe('WKCSubscriptionsModelErrorsFor', function testWKCSubscriptionsModelErr
 	});
 
 	it('returns object if WKCSubscriptionURL not filled', function() {
-		assert.deepEqual(modelLibrary.WKCSubscriptionsModelErrorsFor(Object.assign(kTesting.kTestingValidSubscription(), {
+		assert.deepEqual(modelLibrary.WKCSubscriptionsModelErrorsFor(Object.assign(kTesting.StubValidSubscription(), {
 			WKCSubscriptionURL: '',
 		})), {
 			WKCSubscriptionURL: [
@@ -153,7 +153,7 @@ describe('WKCSubscriptionsModelErrorsFor', function testWKCSubscriptionsModelErr
 	});
 
 	it('returns object if WKCSubscriptionURL not formatted', function() {
-		assert.deepEqual(modelLibrary.WKCSubscriptionsModelErrorsFor(Object.assign(kTesting.kTestingValidSubscription(), {
+		assert.deepEqual(modelLibrary.WKCSubscriptionsModelErrorsFor(Object.assign(kTesting.StubValidSubscription(), {
 			WKCSubscriptionURL: 'google.com',
 		})), {
 			WKCSubscriptionURL: [
@@ -163,7 +163,7 @@ describe('WKCSubscriptionsModelErrorsFor', function testWKCSubscriptionsModelErr
 	});
 
 	it('returns object if WKCSubscriptionHandler not valid', function() {
-		assert.deepEqual(modelLibrary.WKCSubscriptionsModelErrorsFor(Object.assign(kTesting.kTestingValidSubscription(), {
+		assert.deepEqual(modelLibrary.WKCSubscriptionsModelErrorsFor(Object.assign(kTesting.StubValidSubscription(), {
 			WKCSubscriptionHandler: 'alfa',
 		})), {
 			WKCSubscriptionHandler: [
@@ -173,7 +173,7 @@ describe('WKCSubscriptionsModelErrorsFor', function testWKCSubscriptionsModelErr
 	});
 
 	it('returns null', function() {
-		assert.deepEqual(modelLibrary.WKCSubscriptionsModelErrorsFor(kTesting.kTestingValidSubscription()), null);
+		assert.deepEqual(modelLibrary.WKCSubscriptionsModelErrorsFor(kTesting.StubValidSubscription()), null);
 	});
 
 	it('ignores unpresent fields if WKCModelValidatePresentOnly true', function() {
@@ -191,7 +191,7 @@ describe('WKCSubscriptionsModelErrorsFor', function testWKCSubscriptionsModelErr
 	context('WKCSubscriptionName', function() {
 
 		it('returns object if not string', function() {
-			assert.deepEqual(modelLibrary.WKCSubscriptionsModelErrorsFor(Object.assign(kTesting.kTestingValidSubscription(), {
+			assert.deepEqual(modelLibrary.WKCSubscriptionsModelErrorsFor(Object.assign(kTesting.StubValidSubscription(), {
 				WKCSubscriptionName: 123
 			})), {
 				WKCSubscriptionName: [
@@ -205,7 +205,7 @@ describe('WKCSubscriptionsModelErrorsFor', function testWKCSubscriptionsModelErr
 	context('WKCSubscriptionBlurb', function() {
 
 		it('returns object if not string', function() {
-			assert.deepEqual(modelLibrary.WKCSubscriptionsModelErrorsFor(Object.assign(kTesting.kTestingValidSubscription(), {
+			assert.deepEqual(modelLibrary.WKCSubscriptionsModelErrorsFor(Object.assign(kTesting.StubValidSubscription(), {
 				WKCSubscriptionBlurb: 123
 			})), {
 				WKCSubscriptionBlurb: [
@@ -219,7 +219,7 @@ describe('WKCSubscriptionsModelErrorsFor', function testWKCSubscriptionsModelErr
 	context('WKCSubscriptionFetchDate', function() {
 
 		it('returns object if not date', function() {
-			assert.deepEqual(modelLibrary.WKCSubscriptionsModelErrorsFor(Object.assign(kTesting.kTestingValidSubscription(), {
+			assert.deepEqual(modelLibrary.WKCSubscriptionsModelErrorsFor(Object.assign(kTesting.StubValidSubscription(), {
 				WKCSubscriptionFetchDate: new Date('alfa'),
 			})), {
 				WKCSubscriptionFetchDate: [
@@ -233,7 +233,7 @@ describe('WKCSubscriptionsModelErrorsFor', function testWKCSubscriptionsModelErr
 	context('WKCSubscriptionFetchContent', function() {
 
 		it('returns object if not string', function() {
-			assert.deepEqual(modelLibrary.WKCSubscriptionsModelErrorsFor(Object.assign(kTesting.kTestingValidSubscription(), {
+			assert.deepEqual(modelLibrary.WKCSubscriptionsModelErrorsFor(Object.assign(kTesting.StubValidSubscription(), {
 				WKCSubscriptionFetchContent: 123
 			})), {
 				WKCSubscriptionFetchContent: [
@@ -247,7 +247,7 @@ describe('WKCSubscriptionsModelErrorsFor', function testWKCSubscriptionsModelErr
 	context('WKCSubscriptionErrorDate', function() {
 
 		it('returns object if not date', function() {
-			assert.deepEqual(modelLibrary.WKCSubscriptionsModelErrorsFor(Object.assign(kTesting.kTestingValidSubscription(), {
+			assert.deepEqual(modelLibrary.WKCSubscriptionsModelErrorsFor(Object.assign(kTesting.StubValidSubscription(), {
 				WKCSubscriptionErrorDate: new Date('alfa'),
 			})), {
 				WKCSubscriptionErrorDate: [
@@ -261,7 +261,7 @@ describe('WKCSubscriptionsModelErrorsFor', function testWKCSubscriptionsModelErr
 	context('WKCSubscriptionErrorMessage', function() {
 
 		it('returns object if not string', function() {
-			assert.deepEqual(modelLibrary.WKCSubscriptionsModelErrorsFor(Object.assign(kTesting.kTestingValidSubscription(), {
+			assert.deepEqual(modelLibrary.WKCSubscriptionsModelErrorsFor(Object.assign(kTesting.StubValidSubscription(), {
 				WKCSubscriptionErrorMessage: 123
 			})), {
 				WKCSubscriptionErrorMessage: [
@@ -275,7 +275,7 @@ describe('WKCSubscriptionsModelErrorsFor', function testWKCSubscriptionsModelErr
 	context('WKCSubscriptionIsPaused', function() {
 
 		it('returns object if not boolean', function() {
-			assert.deepEqual(modelLibrary.WKCSubscriptionsModelErrorsFor(Object.assign(kTesting.kTestingValidSubscription(), {
+			assert.deepEqual(modelLibrary.WKCSubscriptionsModelErrorsFor(Object.assign(kTesting.StubValidSubscription(), {
 				WKCSubscriptionIsPaused: 'true'
 			})), {
 				WKCSubscriptionIsPaused: [

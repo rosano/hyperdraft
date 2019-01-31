@@ -9,7 +9,7 @@ const assert = require('assert');
 var modelLibrary = require('./model');
 
 const kTesting = {
-	kTestingValidSnapshot: function() {
+	StubValidSnapshot: function() {
 		return {
 			WKCSnapshotSubscriptionID: 'alfa',
 			WKCSnapshotBody: 'bravo',
@@ -26,7 +26,7 @@ describe('WKCSnapshotsModelErrorsFor', function testnapshotsModelErrorsFor() {
 	});
 
 	it('returns false with WKCErrors if WKCSnapshotSubscriptionID not string', function() {
-		var item = Object.assign(kTesting.kTestingValidSnapshot(), {
+		var item = Object.assign(kTesting.StubValidSnapshot(), {
 			WKCSnapshotSubscriptionID: null,
 		});
 
@@ -38,7 +38,7 @@ describe('WKCSnapshotsModelErrorsFor', function testnapshotsModelErrorsFor() {
 	});
 
 	it('returns false with WKCErrors if WKCSnapshotSubscriptionID not unempty', function() {
-		var item = Object.assign(kTesting.kTestingValidSnapshot(), {
+		var item = Object.assign(kTesting.StubValidSnapshot(), {
 			WKCSnapshotSubscriptionID: '',
 		});
 
@@ -50,7 +50,7 @@ describe('WKCSnapshotsModelErrorsFor', function testnapshotsModelErrorsFor() {
 	});
 
 	it('returns errors if WKCSnapshotBody not string', function() {
-		assert.deepEqual(modelLibrary.WKCSnapshotsModelErrorsFor(Object.assign(kTesting.kTestingValidSnapshot(), {
+		assert.deepEqual(modelLibrary.WKCSnapshotsModelErrorsFor(Object.assign(kTesting.StubValidSnapshot(), {
 			WKCSnapshotBody: null,
 		})), {
 			WKCSnapshotBody: [
@@ -60,7 +60,7 @@ describe('WKCSnapshotsModelErrorsFor', function testnapshotsModelErrorsFor() {
 	});
 
 	it('returns null', function() {
-		assert.deepEqual(modelLibrary.WKCSnapshotsModelErrorsFor(kTesting.kTestingValidSnapshot()), null);
+		assert.deepEqual(modelLibrary.WKCSnapshotsModelErrorsFor(kTesting.StubValidSnapshot()), null);
 	});
 
 });

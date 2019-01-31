@@ -9,7 +9,7 @@ const assert = require('assert');
 var metalLibrary = require('./metal');
 
 const kTesting = {
-	kTestingValidSnapshot: function() {
+	StubValidSnapshot: function() {
 		return {
 			WKCSnapshotSubscriptionID: 'alfa',
 			WKCSnapshotBody: 'bravo',
@@ -32,7 +32,7 @@ describe('WKCSnapshotsMetalCreate', function tesSnapshotsMetalCreate() {
 	});
 
 	it('returns WKCErrors if not valid WKCSnapshot', function(done) {
-		metalLibrary.WKCSnapshotsMetalCreate(WKCTestingMongoClient, Object.assign(kTesting.kTestingValidSnapshot(), {
+		metalLibrary.WKCSnapshotsMetalCreate(WKCTestingMongoClient, Object.assign(kTesting.StubValidSnapshot(), {
 			WKCSnapshotBody: null,
 		}), function(err, responseJSON) {
 			assert.deepEqual(responseJSON.WKCErrors, {
@@ -46,8 +46,8 @@ describe('WKCSnapshotsMetalCreate', function tesSnapshotsMetalCreate() {
 	});
 
 	it('returns WKCSnapshot', function(done) {
-		metalLibrary.WKCSnapshotsMetalCreate(WKCTestingMongoClient, kTesting.kTestingValidSnapshot(), function(err, responseJSON) {
-			assert.deepEqual(responseJSON, Object.assign(kTesting.kTestingValidSnapshot(), {
+		metalLibrary.WKCSnapshotsMetalCreate(WKCTestingMongoClient, kTesting.StubValidSnapshot(), function(err, responseJSON) {
+			assert.deepEqual(responseJSON, Object.assign(kTesting.StubValidSnapshot(), {
 				WKCSnapshotID: responseJSON.WKCSnapshotID,
 				WKCSnapshotID2: responseJSON.WKCSnapshotID2,
 				WKCSnapshotDateCreated: responseJSON.WKCSnapshotDateCreated,
