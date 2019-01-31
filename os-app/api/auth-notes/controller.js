@@ -20,7 +20,7 @@ exports.OLSKControllerRoutes = function() {
 		WKCRouteAPINotesCreate: {
 			OLSKRoutePath: '/api/notes',
 			OLSKRouteMethod: 'post',
-			OLSKRouteFunction: exports.WKCActionAPINotesCreate,
+			OLSKRouteFunction: exports.WKCAPINotesCreateAction,
 			OLSKRouteMiddlewares: [
 				'WKCSharedMiddlewareAPIAuthenticate',
 			],
@@ -138,36 +138,16 @@ exports.WKCAPISettingsLastGeneratedPublicIDWithClientAndCallback = function(clie
 	});
 };
 
-//_ WKCActionAPINotesCreate
+//_ WKCAPINotesCreateAction
 
-exports.WKCActionAPINotesCreate = function(req, res, next) {
-	var inputData = req.body;
+exports.WKCAPINotesCreateAction = function(req, res, next) {
+	let outputData = metalLibrary.WKCNotesMetalCreate(req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, req.body);
 
-	if (!modelLibrary.WKCModelInputDataIsNotesObject(inputData)) {
-		return res.json(inputData);
+	if (outputData.WKCErrors) {
+		res.status(400);
 	}
 
-	return OLSKIdentifier.OLSKIdentifierTimeBased().then(function (id) {
-		var noteDate = new Date();
-		return req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_notes').insertOne(Object.assign(inputData, {
-			WKCNoteID: (new Date()) * 1,
-			WKCNoteID2: id,
-			WKCNoteDateCreated: noteDate,
-			WKCNoteDateUpdated: noteDate,
-		}), function(err, result) {
-			if (err) {
-				throw new Error('WKCErrorDatabaseCreate');
-			}
-
-			var noteObject = result.ops.pop();
-
-			modelLibrary.WKCModelNotesHiddenPropertyNames().forEach(function(obj) {
-				delete noteObject[obj];
-			});
-
-			return res.json(noteObject);
-		});
-	});
+	return res.json(outputData);
 };
 
 //_ WKCActionAPINotesRead
