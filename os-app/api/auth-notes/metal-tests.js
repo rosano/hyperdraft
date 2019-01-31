@@ -101,3 +101,25 @@ describe('WKCNotesMetalDelete', function testWKCNotesMetalDelete() {
 
 });
 
+describe('WKCNotesMetalSearch', function testWKCNotesMetalSearch() {
+
+	it('rejects if not object', function() {
+		assert.rejects(mainModule.WKCNotesMetalSearch(WKCTestingMongoClient, null), /WKCErrorInvalidInput/);
+	});
+
+	it('returns array if no results', async function() {
+		assert.deepEqual(await mainModule.WKCNotesMetalSearch(WKCTestingMongoClient, {}), []);
+	});
+
+	it('returns array if results', async function() {
+		let items = await Promise.all(['alfa', 'bravo'].map(async function (e) {
+			return await mainModule.WKCNotesMetalCreate(WKCTestingMongoClient, Object.assign(kTesting.TestValidNote(), {
+				WKCNoteBody: e,
+			}));
+		}));
+
+		assert.deepEqual(await mainModule.WKCNotesMetalSearch(WKCTestingMongoClient, {}), items.reverse());
+	});
+
+});
+
