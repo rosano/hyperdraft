@@ -70,9 +70,9 @@ exports.WKCModelInputDataIsNotePublishStatusObject = function(inputData) {
 	return true;
 };
 
-//_ WKCNotesHiddenPropertyNames
+//_ WKCNotesModelHiddenPropertyNames
 
-exports.WKCNotesHiddenPropertyNames = function() {
+exports.WKCNotesModelHiddenPropertyNames = function() {
 	return [
 		'_id',
 	];

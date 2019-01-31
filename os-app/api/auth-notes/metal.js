@@ -27,7 +27,7 @@ exports.WKCNotesMetalCreate = async function(databaseClient, inputData) {
 		WKCNoteDateUpdated: sharedDate,
 	}))).ops.pop();
 
-	modelLibrary.WKCNotesHiddenPropertyNames().forEach(function (e) {
+	modelLibrary.WKCNotesModelHiddenPropertyNames().forEach(function (e) {
 		delete outputData[e];
 	});
 
@@ -63,7 +63,7 @@ exports.WKCNotesMetalUpdate = async function(databaseClient, param1, param2) {
 	})).value;
 
 	if (outputData) {
-		modelLibrary.WKCNotesHiddenPropertyNames().forEach(function (e) {
+		modelLibrary.WKCNotesModelHiddenPropertyNames().forEach(function (e) {
 			delete outputData[e];
 		});
 	}
@@ -89,7 +89,7 @@ exports.WKCNotesMetalSearch = async function(databaseClient, inputData) {
 	return Promise.resolve((await databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_notes').find(inputData).sort({
 		_id: -1,
 	}).toArray()).map(function(e) {
-		modelLibrary.WKCNotesHiddenPropertyNames().forEach(function(key) {
+		modelLibrary.WKCNotesModelHiddenPropertyNames().forEach(function(key) {
 			delete e[key];
 		});
 

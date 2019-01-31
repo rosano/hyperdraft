@@ -9,7 +9,7 @@ const assert = require('assert');
 var mainModule = require('./metal');
 
 const kTesting = {
-	TestValidNote: function() {
+	StubValidNote: function() {
 		return {
 			WKCNoteBody: 'alfa',
 		};
@@ -23,7 +23,7 @@ describe('WKCNotesMetalCreate', function testWKCNotesMetalCreate() {
 	});
 
 	it('returns inputData with WKCErrors if not valid', async function() {
-		assert.deepEqual((await mainModule.WKCNotesMetalCreate(WKCTestingMongoClient, Object.assign(kTesting.TestValidNote(), {
+		assert.deepEqual((await mainModule.WKCNotesMetalCreate(WKCTestingMongoClient, Object.assign(kTesting.StubValidNote(), {
 			WKCNoteBody: null,
 		}))).WKCErrors, {
 			WKCNoteBody: [
@@ -33,9 +33,9 @@ describe('WKCNotesMetalCreate', function testWKCNotesMetalCreate() {
 	});
 
 	it('returns object', async function() {
-		let item = await mainModule.WKCNotesMetalCreate(WKCTestingMongoClient, kTesting.TestValidNote());
+		let item = await mainModule.WKCNotesMetalCreate(WKCTestingMongoClient, kTesting.StubValidNote());
 		
-		assert.deepEqual(item, Object.assign(kTesting.TestValidNote(), {
+		assert.deepEqual(item, Object.assign(kTesting.StubValidNote(), {
 			WKCNoteID: item.WKCNoteID,
 			WKCNoteDateCreated: item.WKCNoteDateCreated,
 			WKCNoteDateUpdated: item.WKCNoteDateUpdated,
@@ -56,11 +56,11 @@ describe('WKCNotesMetalUpdate', function testWKCNotesMetalUpdate() {
 	});
 
 	it('returns null if not found', async function() {
-		assert.strictEqual(await mainModule.WKCNotesMetalUpdate(WKCTestingMongoClient, 'alfa', kTesting.TestValidNote()), null);
+		assert.strictEqual(await mainModule.WKCNotesMetalUpdate(WKCTestingMongoClient, 'alfa', kTesting.StubValidNote()), null);
 	});
 
 	it('returns inputData with WKCErrors if not valid', async function() {
-		assert.deepEqual((await mainModule.WKCNotesMetalUpdate(WKCTestingMongoClient, (await mainModule.WKCNotesMetalCreate(WKCTestingMongoClient, kTesting.TestValidNote())).WKCNoteID, {
+		assert.deepEqual((await mainModule.WKCNotesMetalUpdate(WKCTestingMongoClient, (await mainModule.WKCNotesMetalCreate(WKCTestingMongoClient, kTesting.StubValidNote())).WKCNoteID, {
 			WKCNoteBody: null,
 		})).WKCErrors, {
 			WKCNoteBody: [
@@ -70,7 +70,7 @@ describe('WKCNotesMetalUpdate', function testWKCNotesMetalUpdate() {
 	});
 
 	it('returns updated object', async function() {
-		let itemCreated = await mainModule.WKCNotesMetalCreate(WKCTestingMongoClient, kTesting.TestValidNote());
+		let itemCreated = await mainModule.WKCNotesMetalCreate(WKCTestingMongoClient, kTesting.StubValidNote());
 		let itemUpdated = await mainModule.WKCNotesMetalUpdate(WKCTestingMongoClient, itemCreated.WKCNoteID, {
 			WKCNoteBody: 'bravo',
 		});
@@ -96,7 +96,7 @@ describe('WKCNotesMetalDelete', function testWKCNotesMetalDelete() {
 	});
 
 	it('returns true', async function() {
-		assert.deepEqual(await mainModule.WKCNotesMetalDelete(WKCTestingMongoClient, (await mainModule.WKCNotesMetalCreate(WKCTestingMongoClient, kTesting.TestValidNote())).WKCNoteID), true);
+		assert.deepEqual(await mainModule.WKCNotesMetalDelete(WKCTestingMongoClient, (await mainModule.WKCNotesMetalCreate(WKCTestingMongoClient, kTesting.StubValidNote())).WKCNoteID), true);
 	});
 
 });
@@ -113,7 +113,7 @@ describe('WKCNotesMetalSearch', function testWKCNotesMetalSearch() {
 
 	it('returns array if results', async function() {
 		let items = await Promise.all(['alfa', 'bravo'].map(async function (e) {
-			return await mainModule.WKCNotesMetalCreate(WKCTestingMongoClient, Object.assign(kTesting.TestValidNote(), {
+			return await mainModule.WKCNotesMetalCreate(WKCTestingMongoClient, Object.assign(kTesting.StubValidNote(), {
 				WKCNoteBody: e,
 			}));
 		}));

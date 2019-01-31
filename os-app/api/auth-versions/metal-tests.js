@@ -9,7 +9,7 @@ const assert = require('assert');
 var mainModule = require('./metal');
 
 const kTesting = {
-	TestValidVersion: function() {
+	StubValidVersion: function() {
 		return {
 			WKCVersionNoteID: 'alfa',
 			WKCVersionBody: 'bravo',
@@ -25,7 +25,7 @@ describe('WKCVersionsMetalCreate', function testWKCVersionsMetalCreate() {
 	});
 
 	it('returns inputData if not valid', async function() {
-		assert.deepEqual((await mainModule.WKCVersionsMetalCreate(WKCTestingMongoClient, Object.assign(kTesting.TestValidVersion(), {
+		assert.deepEqual((await mainModule.WKCVersionsMetalCreate(WKCTestingMongoClient, Object.assign(kTesting.StubValidVersion(), {
 			WKCVersionBody: null,
 		}))).WKCErrors, {
 			WKCVersionBody: [
@@ -35,9 +35,9 @@ describe('WKCVersionsMetalCreate', function testWKCVersionsMetalCreate() {
 	});
 
 	it('returns object', async function() {
-		let responseJSON = await mainModule.WKCVersionsMetalCreate(WKCTestingMongoClient, kTesting.TestValidVersion());
+		let responseJSON = await mainModule.WKCVersionsMetalCreate(WKCTestingMongoClient, kTesting.StubValidVersion());
 		
-		assert.deepEqual(responseJSON, Object.assign(kTesting.TestValidVersion(), {
+		assert.deepEqual(responseJSON, Object.assign(kTesting.StubValidVersion(), {
 			WKCVersionID: responseJSON.WKCVersionID,
 		}));
 		assert.strictEqual(parseInt(responseJSON.WKCVersionID) - (new Date()) > -500, true);
@@ -57,7 +57,7 @@ describe('WKCVersionsMetalSearch', function testWKCVersionsMetalSearch() {
 
 	it('returns array', async function() {
 		let items = await Promise.all(['alfa', 'bravo'].map(async function (e) {
-			return await mainModule.WKCVersionsMetalCreate(WKCTestingMongoClient, Object.assign(kTesting.TestValidVersion(), {
+			return await mainModule.WKCVersionsMetalCreate(WKCTestingMongoClient, Object.assign(kTesting.StubValidVersion(), {
 				WKCVersionBody: e,
 			}));
 		}));
