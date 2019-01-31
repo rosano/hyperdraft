@@ -32,7 +32,7 @@ describe('WKCNotesMetalCreate', function testWKCNotesMetalCreate() {
 		})
 	});
 
-	it('returns object', async function() {
+	it('returns WKCNote', async function() {
 		let item = await mainModule.WKCNotesMetalCreate(WKCTestingMongoClient, kTesting.StubValidNote());
 		
 		assert.deepEqual(item, Object.assign(kTesting.StubValidNote(), {
@@ -41,6 +41,23 @@ describe('WKCNotesMetalCreate', function testWKCNotesMetalCreate() {
 			WKCNoteDateUpdated: item.WKCNoteDateUpdated,
 		}));
 		assert.strictEqual(parseInt(item.WKCNoteID) - (new Date()) > -500, true);
+	});
+
+});
+
+describe('WKCNotesMetalRead', function testWKCNotesMetalRead() {
+
+	it('rejects if not string', function() {
+		assert.rejects(mainModule.WKCNotesMetalRead(WKCTestingMongoClient, 1), /WKCErrorInvalidInput/);
+	});
+
+	it('returns null if not found', async function() {
+		assert.deepEqual(await mainModule.WKCNotesMetalRead(WKCTestingMongoClient, 'alfa'), null);
+	});
+
+	it('returns WKCNote', async function() {
+		let item = await mainModule.WKCNotesMetalCreate(WKCTestingMongoClient, kTesting.StubValidNote());
+		assert.deepEqual(await mainModule.WKCNotesMetalRead(WKCTestingMongoClient, item.WKCNoteID), item);
 	});
 
 });
@@ -56,7 +73,7 @@ describe('WKCNotesMetalUpdate', function testWKCNotesMetalUpdate() {
 	});
 
 	it('returns null if not found', async function() {
-		assert.strictEqual(await mainModule.WKCNotesMetalUpdate(WKCTestingMongoClient, 'alfa', kTesting.StubValidNote()), null);
+		assert.deepEqual(await mainModule.WKCNotesMetalUpdate(WKCTestingMongoClient, 'alfa', kTesting.StubValidNote()), null);
 	});
 
 	it('returns inputData with WKCErrors if not valid', async function() {
@@ -69,7 +86,7 @@ describe('WKCNotesMetalUpdate', function testWKCNotesMetalUpdate() {
 		});
 	});
 
-	it('returns updated object', async function() {
+	it('returns WKCNote with updates', async function() {
 		let itemCreated = await mainModule.WKCNotesMetalCreate(WKCTestingMongoClient, kTesting.StubValidNote());
 		let itemUpdated = await mainModule.WKCNotesMetalUpdate(WKCTestingMongoClient, itemCreated.WKCNoteID, {
 			WKCNoteBody: 'bravo',
@@ -91,7 +108,7 @@ describe('WKCNotesMetalDelete', function testWKCNotesMetalDelete() {
 		}, /WKCErrorInvalidInput/);
 	});
 
-	it('returns error if WKCNoteID not found', async function() {
+	it('returns error if not found', async function() {
 		assert.deepEqual(await mainModule.WKCNotesMetalDelete(WKCTestingMongoClient, 'alfa'), new Error('WKCErrorNotFound'))
 	});
 
