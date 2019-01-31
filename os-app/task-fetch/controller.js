@@ -52,7 +52,7 @@ exports.WKCTaskFetch = function() {
 					return;
 				}
 
-				return responseJSON.forEach(function(subscriptionObject) {
+				return responseJSON.slice(-2).forEach(function(subscriptionObject) {
 					return apiSubscriptionsMetal.WKCSubscriptionsMetalRequestParameters(callbackInput.OLSKLive.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, subscriptionObject.WKCSubscriptionURL, function (error, responseJSON) {
 
 						return requestPackage(responseJSON, function(err, res, body) {
