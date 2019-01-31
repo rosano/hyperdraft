@@ -9,7 +9,7 @@ const assert = require('assert');
 var mainModule = require('./metal');
 
 const kTesting = {
-	kTestingValidVersion: function() {
+	TestValidVersion: function() {
 		return {
 			WKCVersionNoteID: 'alfa',
 			WKCVersionBody: 'bravo',
@@ -20,12 +20,12 @@ const kTesting = {
 
 describe('WKCVersionsMetalCreate', function testWKCVersionsMetalCreate() {
 
-	it('throws error if not object', function() {
+	it('rejects if not object', function() {
 		assert.rejects(mainModule.WKCVersionsMetalCreate(WKCTestingMongoClient, null), /WKCErrorInvalidInput/);
 	});
 
 	it('returns inputData if not valid', async function() {
-		assert.deepEqual((await mainModule.WKCVersionsMetalCreate(WKCTestingMongoClient, Object.assign(kTesting.kTestingValidVersion(), {
+		assert.deepEqual((await mainModule.WKCVersionsMetalCreate(WKCTestingMongoClient, Object.assign(kTesting.TestValidVersion(), {
 			WKCVersionBody: null,
 		}))).WKCErrors, {
 			WKCVersionBody: [
@@ -35,9 +35,9 @@ describe('WKCVersionsMetalCreate', function testWKCVersionsMetalCreate() {
 	});
 
 	it('returns object', async function() {
-		let responseJSON = await mainModule.WKCVersionsMetalCreate(WKCTestingMongoClient, kTesting.kTestingValidVersion());
+		let responseJSON = await mainModule.WKCVersionsMetalCreate(WKCTestingMongoClient, kTesting.TestValidVersion());
 		
-		assert.deepEqual(responseJSON, Object.assign(kTesting.kTestingValidVersion(), {
+		assert.deepEqual(responseJSON, Object.assign(kTesting.TestValidVersion(), {
 			WKCVersionID: responseJSON.WKCVersionID,
 		}));
 		assert.strictEqual(parseInt(responseJSON.WKCVersionID) - (new Date()) > -500, true);
@@ -47,17 +47,17 @@ describe('WKCVersionsMetalCreate', function testWKCVersionsMetalCreate() {
 
 describe('WKCVersionsMetalSearch', function testWKCVersionsMetalSearch() {
 
-	it('throws error if not object', function() {
+	it('rejects if not object', function() {
 		assert.rejects(mainModule.WKCVersionsMetalSearch(WKCTestingMongoClient, null), /WKCErrorInvalidInput/);
 	});
 
-	it('returns empty if none', async function() {
+	it('returns array if none', async function() {
 		assert.deepEqual(await mainModule.WKCVersionsMetalSearch(WKCTestingMongoClient, {}), []);
 	});
 
-	it('returns all', async function() {
+	it('returns array', async function() {
 		let items = await Promise.all(['alfa', 'bravo'].map(async function (e) {
-			return await mainModule.WKCVersionsMetalCreate(WKCTestingMongoClient, Object.assign(kTesting.kTestingValidVersion(), {
+			return await mainModule.WKCVersionsMetalCreate(WKCTestingMongoClient, Object.assign(kTesting.TestValidVersion(), {
 				WKCVersionBody: e,
 			}));
 		}));
