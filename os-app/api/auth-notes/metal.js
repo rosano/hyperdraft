@@ -71,3 +71,11 @@ exports.WKCNotesMetalUpdate = async function(databaseClient, param1, param2) {
 	return Promise.resolve(outputData);
 };
 
+//_ WKCNotesMetalDelete
+
+exports.WKCNotesMetalDelete = async function(databaseClient, inputData) {
+	return Promise.resolve(!(await databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_notes').deleteOne({
+		WKCNoteID: inputData,
+	})).result.n ? new Error('WKCErrorNotFound') : true);
+};
+
