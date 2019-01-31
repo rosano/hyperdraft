@@ -140,8 +140,8 @@ exports.WKCAPISettingsLastGeneratedPublicIDWithClientAndCallback = function(clie
 
 //_ WKCAPINotesCreateAction
 
-exports.WKCAPINotesCreateAction = function(req, res, next) {
-	let outputData = metalLibrary.WKCNotesMetalCreate(req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, req.body);
+exports.WKCAPINotesCreateAction = async function(req, res, next) {
+	let outputData = await metalLibrary.WKCNotesMetalCreate(req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, req.body);
 
 	if (outputData.WKCErrors) {
 		res.status(400);
@@ -152,38 +152,14 @@ exports.WKCAPINotesCreateAction = function(req, res, next) {
 
 //_ WKCActionAPINotesUpdate
 
-exports.WKCActionAPINotesUpdate = function(req, res, next) {
-	var inputData = req.body;
+exports.WKCActionAPINotesUpdate = async function(req, res, next) {
+	let outputData = await metalLibrary.WKCNotesMetalUpdate(req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, req.params.wkc_note_id, req.body);
 
-	if (!modelLibrary.WKCModelInputDataIsNotesObject(inputData)) {
-		return res.json(inputData);
+	if (outputData.WKCErrors) {
+		res.status(400);
 	}
 
-	return req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_notes').findOneAndUpdate({
-		WKCNoteID: parseInt(req.params.wkc_note_id),
-	}, {
-		'$set': Object.assign(inputData, {
-			WKCNoteDateUpdated: new Date(),
-		}),
-	}, {
-		returnOriginal: false,
-	}, function(err, result) {
-		if (err) {
-			throw new Error('WKCErrorDatabaseFindOne');
-		}
-
-		if (!result.value) {
-			return next(new Error('WKCAPIClientErrorNotFound'));
-		}
-
-		versionsMetal.WKCVersionsMetalCreate(req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, {
-			WKCVersionNoteID: result.value.WKCNoteID.toString(),
-			WKCVersionBody: result.value.WKCNoteBody,
-			WKCVersionDate: result.value.WKCNoteDateUpdated,
-		}).then(function () {
-			return res.json(result.value)
-		});
-	});
+	return res.json(outputData);
 };
 
 //_ WKCActionAPINotesPublish
