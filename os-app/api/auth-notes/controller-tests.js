@@ -8,6 +8,7 @@ const assert = require('assert');
 
 var testingLibrary = require('OLSKTesting');
 
+var metalLibrary = require('./metal.js');
 var controllerModule = require('./controller');
 const versionsMetal = require('../auth-versions/metal.js');
 
@@ -19,14 +20,6 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 				OLSKRoutePath: '/api/notes',
 				OLSKRouteMethod: 'post',
 				OLSKRouteFunction: controllerModule.WKCAPINotesCreateAction,
-				OLSKRouteMiddlewares: [
-					'WKCSharedMiddlewareAPIAuthenticate',
-				],
-			},
-			WKCRouteAPINotesRead: {
-				OLSKRoutePath: '/api/notes/:wkc_note_id(\\d+)',
-				OLSKRouteMethod: 'get',
-				OLSKRouteFunction: controllerModule.WKCActionAPINotesRead,
 				OLSKRouteMiddlewares: [
 					'WKCSharedMiddlewareAPIAuthenticate',
 				],
@@ -267,40 +260,6 @@ describe('WKCAPISettingsLastGeneratedPublicIDWithClientAndCallback', function te
 
 });
 
-describe('WKCActionAPINotesRead', function testWKCActionAPINotesRead() {
-
-	it('returns next(WKCAPIClientError) if wkc_note_id does not exist', function(done) {
-		controllerModule.WKCActionAPINotesRead(WKCFakeRequest({
-			params: {
-				wkc_note_id: 'alpha',
-			},
-		}), WKCFakeResponseAsync(), function(inputData) {
-			assert.deepEqual(inputData, new Error('WKCAPIClientErrorNotFound'));
-
-			done();
-		});
-	});
-
-	it('returns noteObject', function(done) {
-		controllerModule.WKCAPINotesCreateAction(WKCFakeRequest({
-			body: {
-				WKCNoteBody: 'alpha',
-			},
-		}), WKCFakeResponseAsync(function(noteObject) {
-			controllerModule.WKCActionAPINotesRead(WKCFakeRequest({
-				params: {
-					wkc_note_id: noteObject.WKCNoteID.toString(),
-				},
-			}), WKCFakeResponseAsync(function(responseJSON) {
-				assert.deepEqual(responseJSON, noteObject);
-
-				done();
-			}));
-		}));
-	});
-
-});
-
 describe('WKCActionAPINotesUpdate', function testWKCActionAPINotesUpdate() {
 
 	it('returns next(WKCAPIClientError) if wkc_note_id does not exist', function(done) {
@@ -456,17 +415,13 @@ describe('WKCActionAPINotesPublish', function testWKCActionAPINotesPublish() {
 					WKCNotePublishStatusIsPublished: true,
 				});
 
-				controllerModule.WKCActionAPINotesRead(WKCFakeRequest({
-					params: {
-						wkc_note_id: noteObject.WKCNoteID.toString(),
-					},
-				}), WKCFakeResponseAsync(function(noteObject) {
+				metalLibrary.WKCNotesMetalRead(WKCTestingMongoClient, noteObject.WKCNoteID.toString()).then(function(noteObject) {
 					assert.strictEqual(noteObject.WKCNotePublishStatusIsPublished, true);
 					assert.strictEqual(noteObject.WKCNotePublicID, 1);
 					assert.strictEqual(noteObject.WKCNoteDateUpdated > originalDateUpdated, true);
 
 					done();
-				}));
+				});
 			}));
 		}));
 	});

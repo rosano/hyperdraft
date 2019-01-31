@@ -150,30 +150,6 @@ exports.WKCAPINotesCreateAction = function(req, res, next) {
 	return res.json(outputData);
 };
 
-//_ WKCActionAPINotesRead
-
-exports.WKCActionAPINotesRead = function(req, res, next) {
-	return req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_notes').findOne({
-		WKCNoteID: parseInt(req.params.wkc_note_id),
-	}, function(err, result) {
-		if (err) {
-			throw new Error('WKCErrorDatabaseFindOne');
-		}
-
-		if (!result) {
-			return next(new Error('WKCAPIClientErrorNotFound'));
-		}
-
-		var noteObject = result;
-
-		modelLibrary.WKCModelNotesHiddenPropertyNames().forEach(function(obj) {
-			delete noteObject[obj];
-		});
-
-		return res.json(noteObject);
-	});
-};
-
 //_ WKCActionAPINotesUpdate
 
 exports.WKCActionAPINotesUpdate = function(req, res, next) {
