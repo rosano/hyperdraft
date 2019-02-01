@@ -99,7 +99,7 @@ exports.WKCMetalArticlesUpdate = function(databaseClient, inputData1, inputData2
 	}
 
 	if (!modelLibrary.WKCModelInputDataIsArticleObject(modelLibrary.WKCModelArticlePrepare(inputData2), {
-		WKCModelValidatePresentOnly: true,
+		WKCOptionValidatePresentOnly: true,
 	})) {
 		return completionHandler(null, inputData2);
 	}

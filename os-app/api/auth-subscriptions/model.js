@@ -167,7 +167,7 @@ exports.WKCSubscriptionsModelErrorsFor = function(inputData, options) {
 		}
 	}
 
-	if (options && options.WKCModelValidatePresentOnly) {
+	if (options && options.WKCOptionValidatePresentOnly) {
 		Object.keys(errors).forEach(function(e) {
 			if (typeof inputData[e] === 'undefined') {
 				delete errors[e];

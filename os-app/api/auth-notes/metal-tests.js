@@ -139,4 +139,3 @@ describe('WKCNotesMetalSearch', function testWKCNotesMetalSearch() {
 	});
 
 });
-

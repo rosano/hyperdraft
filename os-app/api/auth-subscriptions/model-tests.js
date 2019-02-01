@@ -176,11 +176,11 @@ describe('WKCSubscriptionsModelErrorsFor', function testWKCSubscriptionsModelErr
 		assert.deepEqual(modelLibrary.WKCSubscriptionsModelErrorsFor(kTesting.StubValidSubscription()), null);
 	});
 
-	it('ignores unpresent fields if WKCModelValidatePresentOnly true', function() {
+	it('ignores unpresent fields if WKCOptionValidatePresentOnly true', function() {
 		assert.deepEqual(modelLibrary.WKCSubscriptionsModelErrorsFor({
 			WKCSubscriptionHandler: 'alfa',
 		}, {
-			WKCModelValidatePresentOnly: true,
+			WKCOptionValidatePresentOnly: true,
 		}), {
 			WKCSubscriptionHandler: [
 				'WKCErrorNotValid',

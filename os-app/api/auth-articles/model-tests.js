@@ -88,13 +88,13 @@ describe('WKCModelInputDataIsArticleObject', function testWKCModelInputDataIsArt
 		assert.deepEqual(modelLibrary.WKCModelInputDataIsArticleObject(StubValidArticle()), true);
 	});
 
-	it('ignores unpresent fields if WKCModelValidatePresentOnly true', function() {
+	it('ignores unpresent fields if WKCOptionValidatePresentOnly true', function() {
 		var item = {
 			WKCArticlePublishDate: new Date('alfa'),
 		};
 
 		assert.strictEqual(modelLibrary.WKCModelInputDataIsArticleObject(item, {
-			WKCModelValidatePresentOnly: true,
+			WKCOptionValidatePresentOnly: true,
 		}), false);
 		assert.deepEqual(item.WKCErrors, {
 			WKCArticlePublishDate: [

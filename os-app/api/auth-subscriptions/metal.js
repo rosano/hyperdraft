@@ -98,7 +98,7 @@ exports.WKCMetalSubscriptionsUpdate = function(databaseClient, objectID, inputDa
 	}
 
 	const errors = modelLibrary.WKCSubscriptionsModelErrorsFor(modelLibrary.WKCModelSubscriptionPrepare(inputData), {
-		WKCModelValidatePresentOnly: true,
+		WKCOptionValidatePresentOnly: true,
 	});
 	if (errors) {
 		return completionHandler(null, Object.assign(inputData, {
