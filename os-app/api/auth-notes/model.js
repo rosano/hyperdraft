@@ -94,14 +94,6 @@ exports.WKCNotesModelHiddenPropertyNames = function() {
 	];
 };
 
-//_ WKCModelNotesHiddenPropertyNames
-
-exports.WKCModelNotesHiddenPropertyNames = function() {
-	return [
-		'_id',
-	];
-};
-
 //_ WKCModelNotesPublicPropertyNames
 
 exports.WKCModelNotesPublicPropertyNames = function() {

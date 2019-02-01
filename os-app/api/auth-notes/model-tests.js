@@ -129,16 +129,6 @@ describe('WKCNotesModelHiddenPropertyNames', function testWKCNotesModelHiddenPro
 
 });
 
-describe('WKCModelNotesHiddenPropertyNames', function testWKCModelNotesHiddenPropertyNames() {
-
-	it('returns array', function() {
-		assert.deepEqual(mainModule.WKCModelNotesHiddenPropertyNames(), [
-			'_id',
-		]);
-	});
-
-});
-
 describe('WKCModelNotesPublicPropertyNames', function testWKCModelNotesHiddenPropertyNames() {
 
 	it('returns array', function() {

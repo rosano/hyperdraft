@@ -42,7 +42,7 @@ exports.WKCNotesMetalRead = async function(databaseClient, inputData) {
 	});
 
 	if (outputData) {
-		modelLibrary.WKCModelNotesHiddenPropertyNames().forEach(function(obj) {
+		modelLibrary.WKCNotesModelHiddenPropertyNames().forEach(function(obj) {
 			delete outputData[obj];
 		});
 	}
@@ -58,7 +58,7 @@ exports.WKCNotesMetalPublicRead = async function(databaseClient, inputData) {
 	});
 
 	if (outputData) {
-		modelLibrary.WKCModelNotesHiddenPropertyNames().forEach(function(obj) {
+		modelLibrary.WKCNotesModelHiddenPropertyNames().forEach(function(obj) {
 			delete outputData[obj];
 		});
 	}
