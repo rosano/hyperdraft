@@ -35,13 +35,19 @@ describe('WKCNotesActionPublish', function testWKCNotesActionPublish() {
 	});
 
 	it('returns WKCNote with updates if one published', async function() {
-		let items = await Promise.all(['alfa', 'bravo'].map(async function (e) {
-			return await mainModule.WKCNotesActionPublish(WKCTestingMongoClient, (await metalLibrary.WKCNotesMetalCreate(WKCTestingMongoClient, Object.assign(kTesting.StubValidNote(), {
-				WKCNoteBody: e,
-			}))).WKCNoteID);
-		}));
+		let itemCreated = await metalLibrary.WKCNotesMetalCreate(WKCTestingMongoClient, kTesting.StubValidNote());
+		let itemUpdated = await mainModule.WKCNotesActionPublish(WKCTestingMongoClient, itemCreated.WKCNoteID);
 
-		assert.deepEqual(items.map(function (e) {
+		let itemCreated2 = await metalLibrary.WKCNotesMetalCreate(WKCTestingMongoClient, kTesting.StubValidNote());
+		let itemUpdated2 = await mainModule.WKCNotesActionPublish(WKCTestingMongoClient, itemCreated2.WKCNoteID);
+
+		// let items = await Promise.all(['alfa', 'bravo'].map(async function (e) {
+		// 	return await mainModule.WKCNotesActionPublish(WKCTestingMongoClient, (await metalLibrary.WKCNotesMetalCreate(WKCTestingMongoClient, Object.assign(kTesting.StubValidNote(), {
+		// 		WKCNoteBody: e,
+		// 	}))).WKCNoteID);
+		// }));
+
+		assert.deepEqual([itemUpdated, itemUpdated2].map(function (e) {
 			return e.WKCNotePublicID;
 		}).sort(), ['1','2'].sort());
 	});
