@@ -9,6 +9,7 @@ const OLSKIdentifier = require('OLSKIdentifier');
 const WKCParser = require('../../_shared/WKCParser/main.js');
 
 const metalLibrary = require('./metal.js');
+const actionLibrary = require('./action.js');
 const versionsMetal = require('../auth-versions/metal.js');
 
 var modelLibrary = require('./model');
@@ -44,10 +45,9 @@ exports.OLSKControllerRoutes = function() {
 		WKCRouteAPINotesPublish: {
 			OLSKRoutePath: '/api/notes/:wkc_note_id(\\d+)/publish',
 			OLSKRouteMethod: 'put',
-			OLSKRouteFunction: exports.WKCActionAPINotesPublish,
+			OLSKRouteFunction: exports.WKCAPINotesPublishAction,
 			OLSKRouteMiddlewares: [
 				'WKCSharedMiddlewareAPIAuthenticate',
-				'WKCSharedMiddlewareAPINotesFindByID',
 			],
 		},
 		WKCRouteAPINotesPublicRead: {
@@ -155,6 +155,10 @@ exports.WKCAPINotesCreateAction = async function(req, res, next) {
 exports.WKCActionAPINotesUpdate = async function(req, res, next) {
 	let outputData = await metalLibrary.WKCNotesMetalUpdate(req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, req.params.wkc_note_id, req.body);
 
+	if (!outputData) {
+		return next(new Error('WKCAPIClientErrorNotFound'));
+	}
+
 	if (outputData.WKCErrors) {
 		res.status(400);
 	}
@@ -162,64 +166,16 @@ exports.WKCActionAPINotesUpdate = async function(req, res, next) {
 	return res.json(outputData);
 };
 
-//_ WKCActionAPINotesPublish
+//_ WKCAPINotesPublishAction
 
-exports.WKCActionAPINotesPublish = function(req, res, next) {
-	var inputData = Object.assign({}, req.body);
-
-	if (!modelLibrary.WKCModelInputDataIsNotePublishStatusObject(inputData)) {
-		return res.json(inputData);
+exports.WKCAPINotesPublishAction = async function(req, res, next) {
+	let outputData = await actionLibrary.WKCNotesActionPublish(req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, req.params.wkc_note_id);
+	
+	if (modelLibrary.WKCNotesModelErrorsFor(outputData)) {
+		return next(new Error('WKCAPIClientErrorNotFound'));
 	}
 
-	var completionHandler = function() {
-		return req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_notes').findOneAndUpdate({
-			WKCNoteID: parseInt(req.params.wkc_note_id),
-		}, {
-			'$set': Object.assign(req._WKCAPINotesMiddlewareFindByIDResult, {
-				WKCNotePublishStatusIsPublished: inputData.WKCNotePublishStatusIsPublished,
-				WKCNoteDateUpdated: new Date(),
-			}),
-		}, function(err, result) {
-			if (err) {
-				throw new Error('WKCErrorDatabaseFindOne');
-			}
-
-			if (!result.value) {
-				return next(new Error('WKCAPIClientErrorNotFound'));
-			}
-
-			return res.json(req.body);
-		});
-	};
-
-	if (inputData.WKCNotePublishStatusIsPublished && !req._WKCAPINotesMiddlewareFindByIDResult.WKCNotePublicID) {
-		return exports.WKCAPISettingsLastGeneratedPublicIDWithClientAndCallback(req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, function(lastRepoID) {
-			var newRepoID = lastRepoID + 1;
-
-			Object.assign(req._WKCAPINotesMiddlewareFindByIDResult, {
-				WKCNotePublicID: newRepoID,
-			});
-
-			return req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_settings').findOneAndUpdate({
-				WKCSettingsKey: 'WKCSettingsLastRepoID',
-			}, {
-				'$set': {
-					WKCSettingsKey: 'WKCSettingsLastRepoID',
-					WKCSettingsValue: newRepoID,
-				},
-			}, {
-				upsert: true,
-			}, function(err) {
-				if (err) {
-					throw err;
-				}
-
-				return completionHandler();
-			});
-		});
-	}
-
-	return completionHandler();
+	return res.json(outputData);
 };
 
 //_ WKCActionAPINotesPublicRead

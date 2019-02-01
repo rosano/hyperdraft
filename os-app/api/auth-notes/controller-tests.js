@@ -40,7 +40,7 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 			WKCRouteAPINotesPublish: {
 				OLSKRoutePath: '/api/notes/:wkc_note_id(\\d+)/publish',
 				OLSKRouteMethod: 'put',
-				OLSKRouteFunction: controllerModule.WKCActionAPINotesPublish,
+				OLSKRouteFunction: controllerModule.WKCAPINotesPublishAction,
 				OLSKRouteMiddlewares: [
 					'WKCSharedMiddlewareAPIAuthenticate',
 					'WKCSharedMiddlewareAPINotesFindByID',
@@ -194,7 +194,7 @@ describe('WKCAPISettingsLastGeneratedPublicIDWithClientAndCallback', function te
 				WKCNoteBody: 'alpha',
 			},
 		}), WKCFakeResponseAsync(function(noteObject) {
-			controllerModule.WKCActionAPINotesPublish(WKCFakeRequest({
+			controllerModule.WKCAPINotesPublishAction(WKCFakeRequest({
 				params: {
 					wkc_note_id: noteObject.WKCNoteID,
 				},
@@ -218,7 +218,7 @@ describe('WKCAPISettingsLastGeneratedPublicIDWithClientAndCallback', function te
 				WKCNoteBody: 'alpha',
 			},
 		}), WKCFakeResponseAsync(function(noteObject) {
-			controllerModule.WKCActionAPINotesPublish(WKCFakeRequest({
+			controllerModule.WKCAPINotesPublishAction(WKCFakeRequest({
 				params: {
 					wkc_note_id: noteObject.WKCNoteID,
 				},
@@ -237,7 +237,7 @@ describe('WKCAPISettingsLastGeneratedPublicIDWithClientAndCallback', function te
 							WKCNoteBody: 'alpha',
 						},
 					}), WKCFakeResponseAsync(function(noteObject) {
-						controllerModule.WKCActionAPINotesPublish(WKCFakeRequest({
+						controllerModule.WKCAPINotesPublishAction(WKCFakeRequest({
 							params: {
 								wkc_note_id: noteObject.WKCNoteID,
 							},
@@ -254,72 +254,6 @@ describe('WKCAPISettingsLastGeneratedPublicIDWithClientAndCallback', function te
 						}));
 					}));
 				}));
-			}));
-		}));
-	});
-
-});
-
-describe('WKCActionAPINotesPublish', function testWKCActionAPINotesPublish() {
-
-	it('returns WKCErrors if not valid WKCNotePublishStatus', function(done) {
-		controllerModule.WKCAPINotesCreateAction(WKCFakeRequest({
-			params: {
-				wkc_note_id: '',
-			},
-			body: {
-				WKCNotePublishStatusIsPublished: null,
-			},
-		}), WKCFakeResponseAsync(function(noteObject) {
-			assert.deepEqual(controllerModule.WKCActionAPINotesPublish(WKCFakeRequest({
-				params: {
-					wkc_note_id: noteObject.WKCNoteID,
-				},
-				_WKCAPINotesMiddlewareFindByIDResult: noteObject,
-				body: {
-					WKCNotePublishStatusIsPublished: null,
-				},
-			}), WKCFakeResponseSync()).WKCErrors, {
-				WKCNotePublishStatusIsPublished: [
-					'WKCErrorNotBoolean',
-				],
-			});
-
-			done();
-		}));
-	});
-
-	it('returns noteObject with updated properties', function(done) {
-		controllerModule.WKCAPINotesCreateAction(WKCFakeRequest({
-			body: {
-				WKCNoteBody: 'alpha',
-			},
-		}), WKCFakeResponseAsync(function(noteObject) {
-			var originalDateUpdated = noteObject.WKCNoteDateUpdated;
-
-			assert.strictEqual(noteObject.WKCNotePublishStatusIsPublished, undefined);
-			assert.strictEqual(noteObject.WKCNotePublicID, undefined);
-
-			controllerModule.WKCActionAPINotesPublish(WKCFakeRequest({
-				params: {
-					wkc_note_id: noteObject.WKCNoteID,
-				},
-				_WKCAPINotesMiddlewareFindByIDResult: noteObject,
-				body: {
-					WKCNotePublishStatusIsPublished: true,
-				},
-			}), WKCFakeResponseAsync(function(responseJSON) {
-				assert.deepEqual(responseJSON, {
-					WKCNotePublishStatusIsPublished: true,
-				});
-
-				metalLibrary.WKCNotesMetalRead(WKCTestingMongoClient, noteObject.WKCNoteID.toString()).then(function(noteObject) {
-					assert.strictEqual(noteObject.WKCNotePublishStatusIsPublished, true);
-					assert.strictEqual(noteObject.WKCNotePublicID, 1);
-					assert.strictEqual(noteObject.WKCNoteDateUpdated > originalDateUpdated, true);
-
-					done();
-				});
 			}));
 		}));
 	});
@@ -346,7 +280,7 @@ describe('WKCActionAPINotesPublicRead', function testWKCActionAPINotesPublicRead
 				WKCNoteBody: 'alpha\nbravo',
 			},
 		}), WKCFakeResponseAsync(function(noteObject) {
-			controllerModule.WKCActionAPINotesPublish(WKCFakeRequest({
+			controllerModule.WKCAPINotesPublishAction(WKCFakeRequest({
 				params: {
 					wkc_note_id: noteObject.WKCNoteID,
 				},
