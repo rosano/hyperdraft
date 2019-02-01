@@ -74,32 +74,6 @@ exports.OLSKControllerRoutes = function() {
 	};
 };
 
-//_ WKCAPISettingsLastGeneratedPublicIDWithClientAndCallback
-
-exports.WKCAPISettingsLastGeneratedPublicIDWithClientAndCallback = function(client, callback) {
-	if (!client) {
-		throw new Error('WKCErrorInvalidInput');
-	}
-
-	if (typeof callback !== 'function') {
-		throw new Error('WKCErrorInvalidInput');
-	}
-
-	return client.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_settings').findOne({
-		WKCSettingsKey: 'WKCSettingsLastRepoID',
-	}, function(err, result) {
-		if (err) {
-			throw new Error('WKCErrorDatabaseFind');
-		}
-
-		if (!result) {
-			return callback(0);
-		}
-
-		return callback(result.WKCSettingsValue);
-	});
-};
-
 //_ WKCAPINotesCreateAction
 
 exports.WKCAPINotesCreateAction = async function(req, res, next) {
