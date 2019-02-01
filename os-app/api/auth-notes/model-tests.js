@@ -64,35 +64,6 @@ describe('WKCNotesModelErrorsFor', function testWKCNotesModelErrorsFor() {
 
 });
 
-describe('WKCModelInputDataIsNotePublishStatusObject', function testWKCModelInputDataIsNotePublishStatusObject() {
-
-	it('returns false if not object', function() {
-		assert.strictEqual(mainModule.WKCModelInputDataIsNotePublishStatusObject(null), false);
-	});
-
-	it('returns false with WKCErrors if WKCNotePublishStatusIsPublished not boolean', function() {
-		var item = {
-			WKCNotePublishStatusIsPublished: null,
-		};
-		assert.strictEqual(mainModule.WKCModelInputDataIsNotePublishStatusObject(item), false);
-		assert.deepEqual(item.WKCErrors, {
-			WKCNotePublishStatusIsPublished: [
-				'WKCErrorNotBoolean',
-			],
-		});
-	});
-
-	it('returns true', function() {
-		assert.deepEqual(mainModule.WKCModelInputDataIsNotePublishStatusObject({
-			WKCNotePublishStatusIsPublished: false,
-		}), true);
-		assert.deepEqual(mainModule.WKCModelInputDataIsNotePublishStatusObject({
-			WKCNotePublishStatusIsPublished: true,
-		}), true);
-	});
-
-});
-
 describe('WKCNotesModelHiddenPropertyNames', function testWKCNotesModelHiddenPropertyNames() {
 
 	it('returns array', function() {
