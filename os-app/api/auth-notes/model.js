@@ -19,6 +19,14 @@ exports.WKCNotesModelErrorsFor = function(inputData) {
 		];
 	}
 
+	if (typeof inputData.WKCNotePublishStatusIsPublished !== 'undefined') {
+		if (typeof inputData.WKCNotePublishStatusIsPublished !== 'boolean') {
+			errors.WKCNotePublishStatusIsPublished = [
+				'WKCErrorNotBoolean',
+			];
+		}
+	}
+
 	return Object.entries(errors).length ? errors : null;
 };
 
