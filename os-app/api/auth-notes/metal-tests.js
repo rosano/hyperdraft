@@ -98,6 +98,16 @@ describe('WKCNotesMetalUpdate', function testWKCNotesMetalUpdate() {
 		}));
 	});
 
+	it('validates only present fields', async function() {
+		assert.deepEqual((await mainModule.WKCNotesMetalUpdate(WKCTestingMongoClient, (await mainModule.WKCNotesMetalCreate(WKCTestingMongoClient, kTesting.StubValidNote())).WKCNoteID, {
+			WKCNotePublishStatusIsPublished: 'true',
+		})).WKCErrors, {
+			WKCNotePublishStatusIsPublished: [
+				'WKCErrorNotBoolean',
+			],
+		});
+	});
+
 });
 
 describe('WKCNotesMetalDelete', function testWKCNotesMetalDelete() {

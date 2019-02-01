@@ -62,7 +62,9 @@ exports.WKCNotesMetalUpdate = async function(databaseClient, param1, param2) {
 	}
 
 	let errors;
-	if (errors = modelLibrary.WKCNotesModelErrorsFor(param2)) {
+	if (errors = modelLibrary.WKCNotesModelErrorsFor(param2, {
+		WKCOptionValidatePresentOnly: true,
+	})) {
 		return Promise.resolve(Object.assign(param2, {
 			WKCErrors: errors,
 		}));
