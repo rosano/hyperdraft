@@ -6,7 +6,7 @@
 
 //_ WKCNotesModelErrorsFor
 
-exports.WKCNotesModelErrorsFor = function(inputData) {
+exports.WKCNotesModelErrorsFor = function(inputData, options) {
 	if (typeof inputData !== 'object' || inputData === null) {
 		throw new Error('WKCErrorInvalidInput');
 	}
@@ -25,6 +25,14 @@ exports.WKCNotesModelErrorsFor = function(inputData) {
 				'WKCErrorNotBoolean',
 			];
 		}
+	}
+
+	if (options && options.WKCOptionValidatePresentOnly) {
+		Object.keys(errors).forEach(function(e) {
+			if (typeof inputData[e] === 'undefined') {
+				delete errors[e];
+			}
+		});
 	}
 
 	return Object.entries(errors).length ? errors : null;

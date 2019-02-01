@@ -38,14 +38,28 @@ describe('WKCNotesModelErrorsFor', function testWKCNotesModelErrorsFor() {
 		assert.deepEqual(mainModule.WKCNotesModelErrorsFor(kTesting.StubValidNote()), null);
 	});
 
-	it('returns object if WKCNotePublishStatusIsPublished not boolean', function() {
-		assert.deepEqual(mainModule.WKCNotesModelErrorsFor(Object.assign(kTesting.StubValidNote(), {
-			WKCNotePublishStatusIsPublished: 'true',
-		})), {
-			WKCNotePublishStatusIsPublished: [
-				'WKCErrorNotBoolean',
-			],
+	it('ignores unpresent fields if WKCOptionValidatePresentOnly true', function() {
+		assert.deepEqual(mainModule.WKCNotesModelErrorsFor({
+			alfa: 'bravo',
+		}, {
+			WKCOptionValidatePresentOnly: true,
+		}), null);
+	});
+
+	context('WKCNotePublishStatusIsPublished', function() {
+
+		it('returns object if WKCNotePublishStatusIsPublished not boolean', function() {
+			assert.deepEqual(mainModule.WKCNotesModelErrorsFor({
+				WKCNotePublishStatusIsPublished: 'true',
+			}, {
+				WKCOptionValidatePresentOnly: true,
+			}), {
+				WKCNotePublishStatusIsPublished: [
+					'WKCErrorNotBoolean',
+				],
+			});
 		});
+
 	});
 
 });
