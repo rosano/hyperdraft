@@ -18,8 +18,8 @@ const kTesting = {
 
 describe('WKCNotesMetalCreate', function testWKCNotesMetalCreate() {
 
-	it('rejects if not object', function() {
-		assert.rejects(mainModule.WKCNotesMetalCreate(WKCTestingMongoClient, null), /WKCErrorInvalidInput/);
+	it('rejects if not object', async function() {
+		await assert.rejects(mainModule.WKCNotesMetalCreate(WKCTestingMongoClient, null), /WKCErrorInvalidInput/);
 	});
 
 	it('returns inputData with WKCErrors if not valid', async function() {
@@ -47,8 +47,8 @@ describe('WKCNotesMetalCreate', function testWKCNotesMetalCreate() {
 
 describe('WKCNotesMetalRead', function testWKCNotesMetalRead() {
 
-	it('rejects if not string', function() {
-		assert.rejects(mainModule.WKCNotesMetalRead(WKCTestingMongoClient, 1), /WKCErrorInvalidInput/);
+	it('rejects if not string', async function() {
+		await assert.rejects(mainModule.WKCNotesMetalRead(WKCTestingMongoClient, 1), /WKCErrorInvalidInput/);
 	});
 
 	it('returns null if not found', async function() {
@@ -64,12 +64,12 @@ describe('WKCNotesMetalRead', function testWKCNotesMetalRead() {
 
 describe('WKCNotesMetalUpdate', function testWKCNotesMetalUpdate() {
 
-	it('rejects if param2 not string', function() {
-		assert.rejects(mainModule.WKCNotesMetalUpdate(WKCTestingMongoClient, 1, {}), /WKCErrorInvalidInput/);
+	it('rejects if param2 not string', async function() {
+		await assert.rejects(mainModule.WKCNotesMetalUpdate(WKCTestingMongoClient, 1, {}), /WKCErrorInvalidInput/);
 	});
 
-	it('rejects if param3 not object', function() {
-		assert.rejects(mainModule.WKCNotesMetalUpdate(WKCTestingMongoClient, '1', null), /WKCErrorInvalidInput/);
+	it('rejects if param3 not object', async function() {
+		await assert.rejects(mainModule.WKCNotesMetalUpdate(WKCTestingMongoClient, '1', null), /WKCErrorInvalidInput/);
 	});
 
 	it('returns null if not found', async function() {
@@ -112,10 +112,8 @@ describe('WKCNotesMetalUpdate', function testWKCNotesMetalUpdate() {
 
 describe('WKCNotesMetalDelete', function testWKCNotesMetalDelete() {
 
-	it('rejects if not string', function() {
-		assert.rejects(function() {
-			mainModule.WKCNotesMetalDelete(WKCTestingMongoClient, 1);
-		}, /WKCErrorInvalidInput/);
+	it('rejects if not string', async function() {
+		await assert.rejects(mainModule.WKCNotesMetalDelete(WKCTestingMongoClient, 1), /WKCErrorInvalidInput/);
 	});
 
 	it('returns error if not found', async function() {
@@ -130,8 +128,8 @@ describe('WKCNotesMetalDelete', function testWKCNotesMetalDelete() {
 
 describe('WKCNotesMetalSearch', function testWKCNotesMetalSearch() {
 
-	it('rejects if not object', function() {
-		assert.rejects(mainModule.WKCNotesMetalSearch(WKCTestingMongoClient, null), /WKCErrorInvalidInput/);
+	it('rejects if not object', async function() {
+		await assert.rejects(mainModule.WKCNotesMetalSearch(WKCTestingMongoClient, null), /WKCErrorInvalidInput/);
 	});
 
 	it('returns array if no results', async function() {

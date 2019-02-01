@@ -20,8 +20,8 @@ const kTesting = {
 
 describe('WKCVersionsMetalCreate', function testWKCVersionsMetalCreate() {
 
-	it('rejects if not object', function() {
-		assert.rejects(mainModule.WKCVersionsMetalCreate(WKCTestingMongoClient, null), /WKCErrorInvalidInput/);
+	it('rejects if not object', async function() {
+		await assert.rejects(mainModule.WKCVersionsMetalCreate(WKCTestingMongoClient, null), /WKCErrorInvalidInput/);
 	});
 
 	it('returns inputData if not valid', async function() {
@@ -47,8 +47,8 @@ describe('WKCVersionsMetalCreate', function testWKCVersionsMetalCreate() {
 
 describe('WKCVersionsMetalSearch', function testWKCVersionsMetalSearch() {
 
-	it('rejects if not object', function() {
-		assert.rejects(mainModule.WKCVersionsMetalSearch(WKCTestingMongoClient, null), /WKCErrorInvalidInput/);
+	it('rejects if not object', async function() {
+		await assert.rejects(mainModule.WKCVersionsMetalSearch(WKCTestingMongoClient, null), /WKCErrorInvalidInput/);
 	});
 
 	it('returns array if none', async function() {

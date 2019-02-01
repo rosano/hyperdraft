@@ -6,8 +6,8 @@
 
 const assert = require('assert');
 
-var metalLibrary = require('./metal.js');
 var mainModule = require('./action.js');
+var metalLibrary = require('./metal.js');
 
 const kTesting = {
 	StubValidNote: function() {
@@ -18,6 +18,10 @@ const kTesting = {
 };
 
 describe('WKCNotesActionPublish', function testWKCNotesActionPublish() {
+
+	it('rejects if not string', async function() {
+		await assert.rejects(mainModule.WKCNotesActionPublish(WKCTestingMongoClient, null), /WKCErrorInvalidInput/)
+	});
 
 	it('returns error if not found', async function() {
 		assert.deepEqual(await mainModule.WKCNotesActionPublish(WKCTestingMongoClient, 'alfa'), new Error('WKCErrorNotFound'))

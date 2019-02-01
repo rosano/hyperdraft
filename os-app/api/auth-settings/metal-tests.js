@@ -10,8 +10,8 @@ var mainModule = require('./metal.js');
 
 describe('WKCSettingsMetalProperty', function testWKCSettingsMetalProperty() {
 
-	it('rejects if param1 not string', function() {
-		assert.rejects(mainModule.WKCSettingsMetalProperty(WKCTestingMongoClient, null));
+	it('rejects if param1 not string', async function() {
+		await assert.rejects(mainModule.WKCSettingsMetalProperty(WKCTestingMongoClient, null));
 	});
 
 	it('returns undefined if param1 not found', async function() {

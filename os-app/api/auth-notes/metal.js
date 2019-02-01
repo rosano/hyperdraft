@@ -37,6 +37,10 @@ exports.WKCNotesMetalCreate = async function(databaseClient, inputData) {
 //_ WKCNotesMetalRead
 
 exports.WKCNotesMetalRead = async function(databaseClient, inputData) {
+	if (typeof inputData !== 'string') {
+		return Promise.reject(new Error('WKCErrorInvalidInput'));
+	}
+
 	let outputData = await databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_notes').findOne({
 		WKCNoteID: inputData,
 	});
@@ -53,6 +57,10 @@ exports.WKCNotesMetalRead = async function(databaseClient, inputData) {
 //_ WKCNotesMetalPublicRead
 
 exports.WKCNotesMetalPublicRead = async function(databaseClient, inputData) {
+	if (typeof inputData !== 'string') {
+		return Promise.reject(new Error('WKCErrorInvalidInput'));
+	}
+
 	let outputData = await databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_notes').findOne({
 		WKCNotePublicID: inputData,
 	});
@@ -108,6 +116,10 @@ exports.WKCNotesMetalUpdate = async function(databaseClient, param1, param2) {
 //_ WKCNotesMetalDelete
 
 exports.WKCNotesMetalDelete = async function(databaseClient, inputData) {
+	if (typeof inputData !== 'string') {
+		return Promise.reject(new Error('WKCErrorInvalidInput'));
+	}
+
 	return Promise.resolve(!(await databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_notes').deleteOne({
 		WKCNoteID: inputData,
 	})).result.n ? new Error('WKCErrorNotFound') : true);
