@@ -14,8 +14,8 @@ describe('WKCSettingsMetalProperty', function testWKCSettingsMetalProperty() {
 		assert.rejects(mainModule.WKCSettingsMetalProperty(WKCTestingMongoClient, null));
 	});
 
-	it('returns null if param1 not found', async function() {
-		assert.deepEqual(await mainModule.WKCSettingsMetalProperty(WKCTestingMongoClient, 'alfa'), null);
+	it('returns undefined if param1 not found', async function() {
+		assert.deepEqual(await mainModule.WKCSettingsMetalProperty(WKCTestingMongoClient, 'alfa'), undefined);
 	});
 
 	context('param2', function () {
