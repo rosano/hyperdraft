@@ -52,9 +52,3 @@ exports.WKCSettingsMetalProperty = async function(databaseClient, param1, param2
 
 	return await exports._WKCSettingsMetalSet(databaseClient, param1, param2);
 };
-
-//_ WKCSettingsMetalNotesLastPublicID
-
-exports.WKCSettingsMetalNotesLastPublicID = async function(databaseClient) {
-	return Promise.resolve(0);
-};
