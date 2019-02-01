@@ -4,9 +4,7 @@
  * MIT Licensed
  */
 
-var markedPackage = require('marked');
-
-var apiNotesController = require('../api/auth-notes/controller');
+const markedPackage = require('marked');
 
 //_ OLSKControllerRoutes
 
@@ -43,16 +41,24 @@ exports.WKCActionHomeIndex = function(req, res, next) {
 
 //_ WKCActionRefsRead
 
-exports.WKCActionRefsRead = function(req, res, next) {
-	apiNotesController.WKCActionAPINotesPublicRead(req, {
-		json: function(inputData) {
-			return res.render([
-				__dirname,
-				'read',
-			].join('/'), {
-				WKCNoteObject: inputData,
-				markedPackage: markedPackage,
-			});
-		},
-	}, next);
+const apiNotesMetal = require('../api/auth-notes/metal.js');
+const WKCParser = require('../_shared/WKCParser/main.js');
+
+exports.WKCActionRefsRead = async function(req, res, next) {
+	let item = await apiNotesMetal.WKCNotesMetalPublicRead(req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, req.params.wkc_note_public_id);
+
+	if (!item) {
+		return next(new Error('WKCErrorNotFound'));
+	}
+
+	item.WKCNoteDetectedTitle = WKCParser.WKCParserTitleForPlaintext(item.WKCNoteBody);
+	item.WKCNoteDetectedBody = WKCParser.WKCParserBodyForPlaintext(item.WKCNoteBody);
+
+	return res.render([
+		__dirname,
+		'read',
+	].join('/'), {
+		WKCNoteObject: item,
+		markedPackage: markedPackage,
+	});
 };
