@@ -64,32 +64,6 @@ describe('WKCNotesModelErrorsFor', function testWKCNotesModelErrorsFor() {
 
 });
 
-describe('WKCModelInputDataIsNotesObject', function testWKCModelInputDataIsNotesObject() {
-
-	it('returns false if not object', function() {
-		assert.strictEqual(mainModule.WKCModelInputDataIsNotesObject(null), false);
-	});
-
-	it('returns false with WKCErrors if WKCNoteBody not string', function() {
-		var item = {
-			WKCNoteBody: null,
-		};
-		assert.strictEqual(mainModule.WKCModelInputDataIsNotesObject(item), false);
-		assert.deepEqual(item.WKCErrors, {
-			WKCNoteBody: [
-				'WKCErrorNotString',
-			],
-		});
-	});
-
-	it('returns true', function() {
-		assert.deepEqual(mainModule.WKCModelInputDataIsNotesObject({
-			WKCNoteBody: 'alpha',
-		}), true);
-	});
-
-});
-
 describe('WKCModelInputDataIsNotePublishStatusObject', function testWKCModelInputDataIsNotePublishStatusObject() {
 
 	it('returns false if not object', function() {
