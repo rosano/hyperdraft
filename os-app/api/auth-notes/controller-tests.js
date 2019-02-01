@@ -24,11 +24,6 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 					'WKCSharedMiddlewareAPIAuthenticate',
 				],
 			},
-			WKCRouteAPINotesPublicRead: {
-				OLSKRoutePath: '/api/notes/:wkc_note_public_id(\\d+)',
-				OLSKRouteMethod: 'get',
-				OLSKRouteFunction: controllerModule.WKCAPINotesPublicReadAction,
-			},
 			WKCRouteAPINotesUpdate: {
 				OLSKRoutePath: '/api/notes/:wkc_note_id(\\d+)',
 				OLSKRouteMethod: 'put',
