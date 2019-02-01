@@ -17,7 +17,7 @@ const kTesting = {
 	},
 };
 
-describe.only('WKCNotesActionPublish', function testWKCNotesActionPublish() {
+describe('WKCNotesActionPublish', function testWKCNotesActionPublish() {
 
 	it('returns error if not found', async function() {
 		assert.deepEqual(await mainModule.WKCNotesActionPublish(WKCTestingMongoClient, 'alfa'), new Error('WKCErrorNotFound'))
