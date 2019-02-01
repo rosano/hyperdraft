@@ -73,16 +73,3 @@ describe('WKCNotesModelHiddenPropertyNames', function testWKCNotesModelHiddenPro
 	});
 
 });
-
-describe('WKCModelNotesPublicPropertyNames', function testWKCModelNotesHiddenPropertyNames() {
-
-	it('returns array', function() {
-		assert.deepEqual(mainModule.WKCModelNotesPublicPropertyNames(), [
-			'WKCNotePublicID',
-			'WKCNoteDateCreated',
-			'WKCNoteDateUpdated',
-			'WKCNoteBody',
-		]);
-	});
-
-});

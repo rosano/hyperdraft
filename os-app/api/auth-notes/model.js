@@ -45,14 +45,3 @@ exports.WKCNotesModelHiddenPropertyNames = function() {
 		'_id',
 	];
 };
-
-//_ WKCModelNotesPublicPropertyNames
-
-exports.WKCModelNotesPublicPropertyNames = function() {
-	return [
-		'WKCNotePublicID',
-		'WKCNoteDateCreated',
-		'WKCNoteDateUpdated',
-		'WKCNoteBody',
-	];
-};
