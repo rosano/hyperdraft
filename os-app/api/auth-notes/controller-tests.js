@@ -43,7 +43,6 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 				OLSKRouteFunction: controllerModule.WKCAPINotesPublishAction,
 				OLSKRouteMiddlewares: [
 					'WKCSharedMiddlewareAPIAuthenticate',
-					'WKCSharedMiddlewareAPINotesFindByID',
 				],
 			},
 			WKCRouteAPINotesDelete: {
@@ -62,16 +61,6 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 					'WKCSharedMiddlewareAPIAuthenticate',
 				],
 			},
-		});
-	});
-
-});
-
-describe('OLSKControllerSharedMiddlewares', function testOLSKControllerSharedMiddlewares() {
-
-	it('returns middleware functions', function() {
-		assert.deepEqual(controllerModule.OLSKControllerSharedMiddlewares(), {
-			WKCSharedMiddlewareAPINotesFindByID: controllerModule.WKCAPINotesMiddlewareFindByID,
 		});
 	});
 
@@ -105,66 +94,6 @@ var WKCFakeResponseAsync = function(callback) {
 		},
 	};
 };
-
-describe('WKCAPINotesMiddlewareFindByID', function WKCAPINotesMiddlewareFindByID() {
-
-	it('returns next(WKCAPIClientError) without wkc_note_id', function() {
-		assert.deepEqual(controllerModule.WKCAPINotesMiddlewareFindByID(WKCFakeRequest({
-			params: {},
-		}), testingLibrary.OLSKTestingFakeResponseForJSON(), testingLibrary.OLSKTestingFakeNext()), new Error('WKCAPIClientErrorNotFound'));
-	});
-
-	it('returns next(WKCAPIClientError) with null wkc_note_id', function() {
-		assert.deepEqual(controllerModule.WKCAPINotesMiddlewareFindByID(WKCFakeRequest({
-			params: {
-				wkc_note_id: null,
-			},
-		}), testingLibrary.OLSKTestingFakeResponseForJSON(), testingLibrary.OLSKTestingFakeNext()), new Error('WKCAPIClientErrorNotFound'));
-	});
-
-	it('returns next(WKCAPIClientError) with whitespace wkc_note_id', function() {
-		assert.deepEqual(controllerModule.WKCAPINotesMiddlewareFindByID(WKCFakeRequest({
-			params: {
-				wkc_note_id: ' ',
-			},
-		}), testingLibrary.OLSKTestingFakeResponseForJSON(), testingLibrary.OLSKTestingFakeNext()), new Error('WKCAPIClientErrorNotFound'));
-	});
-
-	it('returns next(WKCAPIClientError) with non-existant wkc_note_id', function(done) {
-		controllerModule.WKCAPINotesMiddlewareFindByID(WKCFakeRequest({
-			params: {
-				wkc_note_id: 'alfa',
-			},
-		}), testingLibrary.OLSKTestingFakeResponseForJSON(), function(inputData) {
-			assert.deepEqual(inputData, new Error('WKCAPIClientErrorNotFound'));
-
-			done();
-		});
-	});
-
-	it('returns next(undefined)', function(done) {
-		controllerModule.WKCAPINotesCreateAction(WKCFakeRequest({
-			body: {
-				WKCNoteBody: 'alpha',
-			},
-		}), WKCFakeResponseAsync(function(responseJSON) {
-			var requestObject = WKCFakeRequest({
-				params: {
-					wkc_note_id: responseJSON.WKCNoteID.toString(),
-				},
-			});
-
-			controllerModule.WKCAPINotesMiddlewareFindByID(requestObject, testingLibrary.OLSKTestingFakeResponseForJSON(), function(inputData) {
-				assert.deepEqual(inputData, undefined);
-
-				assert.deepEqual(requestObject._WKCAPINotesMiddlewareFindByIDResult, responseJSON);
-
-				done();
-			});
-		}));
-	});
-
-});
 
 describe('WKCAPISettingsLastGeneratedPublicIDWithClientAndCallback', function testWKCAPISettingsLastGeneratedPublicIDWithClientAndCallback() {
 
