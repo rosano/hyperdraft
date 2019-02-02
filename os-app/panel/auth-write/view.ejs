@@ -34,6 +34,7 @@ locals.OLSKPagePublicRouteKeys = [
 	'WKCRouteAPINotesSearch',
 	'WKCRouteAPINotesUpdate',
 	'WKCRouteAPINotesPublish',
+	'WKCRouteRefsRead',
 	'WKCRouteAPINotesDelete',
 ];
 %>
@@ -65,6 +66,8 @@ locals.OLSKPagePublicRouteKeys = [
 			<span id="WKCWriteDetailToolbarPersistenceStatus"></span>
 			
 			<span id="WKCWriteDetailToolbarPublishStatus"></span>
+
+			<a id="WKCWriteDetailToolbarVisitButton" class="WKCSharedToolbarButton WKCSharedElementTappable" title="<%= OLSKLocalized('WKCWriteDetailToolbarVisitButtonText') %>" style="background-image: url('/panel/_shared/wIKWriteVisit.svg')" target="_blank"></a>
 
 			<button id="WKCWriteDetailToolbarPublishButton" class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" title="<%= OLSKLocalized('WKCWriteDetailToolbarPublishButtonText') %>" style="background-image: url('/panel/_shared/wIKWritePublish.svg')" onclick="WKCWriteBehaviour.interfacePublishButtonDidClick()" ></button>
 

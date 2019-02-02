@@ -432,9 +432,18 @@
 	//_ reactPublishStatus
 
 	moi.reactPublishStatus = function () {
-		d3.select('#WKCWriteDetailToolbarPublishStatus').html(moi.propertiesSelectedNote().WKCNotePublishStatusIsPublished ? OLSKLocalized('WKCWriteDetailToolbarPublishStatusPublished') + '<a href="/' + moi.propertiesSelectedNote().WKCNotePublicID + '" target="_blank">/' + moi.propertiesSelectedNote().WKCNotePublicID + '</a>': null);
+		d3.select('#WKCWriteDetailToolbarPublishStatus').html(moi.propertiesSelectedNote().WKCNotePublishStatusIsPublished ? OLSKLocalized('WKCWriteDetailToolbarPublishStatusPublished') : null);
 
-		d3.select('#WKCWriteDetailToolbarPublishButton').classed('WKCSharedHidden', moi.propertiesSelectedNote() ? moi.propertiesSelectedNote().WKCNotePublishStatusIsPublished : false);
+		d3.select('#WKCWriteDetailToolbarVisitButton')
+			.classed('WKCSharedHidden', moi.propertiesSelectedNote() ? !moi.propertiesSelectedNote().WKCNotePublishStatusIsPublished : false)
+			.attr('href', moi.propertiesSelectedNote() && moi.propertiesSelectedNote().WKCNotePublishStatusIsPublished ? OLSKCanonicalFor('WKCRouteRefsRead', {
+				wkc_note_public_id: moi.propertiesSelectedNote().WKCNotePublicID,
+			}) : undefined);
+
+		d3.select('#WKCWriteDetailToolbarPublishButton')
+			.classed('WKCSharedHidden', moi.propertiesSelectedNote() ? moi.propertiesSelectedNote().WKCNotePublishStatusIsPublished : false);
+
+			console.log(moi.propertiesSelectedNote() ? moi.propertiesSelectedNote().WKCNotePublishStatusIsPublished : false);
 	};
 
 	//_ reactPersistenceStatus

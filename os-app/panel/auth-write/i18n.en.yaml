@@ -1,5 +1,6 @@
 WKCWriteHeadingText: Notes
 WKCWriteMasterToolbarCreateButtonText: Add note
+WKCWriteDetailToolbarVisitButtonText: Visit public page
 WKCWriteDetailToolbarPublishButtonText: Publish note
 WKCWriteDetailToolbarDiscardButtonText: Delete note
 WKCWriteNotesDeleteAlertText: Permanantly delete note?

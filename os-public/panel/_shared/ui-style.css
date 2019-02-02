@@ -24,7 +24,7 @@
 	justify-content: flex-end;
 }
 
-.WKCSharedToolbar button {
+.WKCSharedToolbar * {
 	margin: 0 2px;
 }
 
@@ -53,12 +53,12 @@
 	background: #f3f3f3;
 }
 
-.WKCSharedHidden {
-	display: none;
-}
-
 .WKCSharedToolbarButton {
 	display: inline-block;
 	width: 16px;
 	height: 16px;
+}
+
+.WKCSharedHidden {
+	display: none;
 }
