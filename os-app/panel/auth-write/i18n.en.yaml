@@ -1,13 +1,16 @@
 WKCWriteHeadingText: Notes
 WKCWriteMasterToolbarCreateButtonText: Add note
 WKCWriteDetailToolbarVisitButtonText: Visit public page
-WKCWriteDetailToolbarPublishButtonText: Publish note
-WKCWriteDetailToolbarDiscardButtonText: Delete note
-WKCWriteNotesDeleteAlertText: Permanantly delete note?
+WKCWriteDetailToolbarUnpublishButtonText: Unpublish
+WKCWriteDetailToolbarPublishButtonText: Publish
+WKCWriteDetailToolbarDiscardButtonText: Delete
+WKCWriteNotesDeleteAlertText: Are you sure?
 WKCWriteDetailPlaceholderText: No Note Selected
 WKCWriteDetailToolbarPublishStatusPublishing: Publishing…
+WKCWriteDetailToolbarPublishStatusUnpublishing: Unpublishing…
 WKCWriteDetailToolbarPublishStatusPublished: Public
 WKCWriteDetailToolbarPublishStatusUnableToPublish: Unable to publish
+WKCWriteDetailToolbarPublishStatusUnableToUnpublish: Unable to unpublish
 WKCWriteDetailToolbarPersistenceStatusSaving: Saving…
 WKCWriteDetailToolbarPersistenceStatusSaved: Saved
 WKCWriteDetailToolbarPersistenceStatusDeleting: Deleting…
@@ -18,3 +21,4 @@ WKCWriteErrorNotesUnavailable: Unable to fetch notes
 WKCWriteErrorPersistenceSaveDidFail: Unable to save note. Would you like to try again?
 WKCWriteErrorPersistenceDeleteDidFail: Unable to delete note. Would you like to try again?
 WKCWriteErrorPublishDidFail: Unable to publish note. Would you like to try again?
+WKCWriteErrorUnpublishDidFail: Unable to unpublish note. Would you like to try again?

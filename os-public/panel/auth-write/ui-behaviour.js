@@ -102,6 +102,12 @@
 		moi.commandsPublishNote(moi.propertiesSelectedNote());
 	};
 
+	//_ interfaceUnpublishButtonDidClick
+
+	moi.interfaceUnpublishButtonDidClick = function () {
+		moi.commandsUnpublishNote(moi.propertiesSelectedNote());
+	};
+
 	//_ interfaceEditorTextareaDidReceiveInput
 
 	moi.interfaceEditorTextareaDidReceiveInput = function () {
@@ -306,6 +312,34 @@
 		});
 	};
 
+	//_ commandsUnpublishNote
+
+	moi.commandsUnpublishNote = function (inputData) {
+		d3.select('#WKCWriteDetailToolbarPublishStatus').text(OLSKLocalized('WKCWriteDetailToolbarPublishStatusUnpublishing'));
+
+		d3.json(OLSKCanonicalFor('WKCRouteAPINotesUnpublish', {
+			wkc_note_id: inputData.WKCNoteID,
+		}), {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+				'x-client-key': moi.propertiesAPIToken(),
+			},
+		}).then(function(responseJSON) {
+			Object.assign(inputData, responseJSON);
+
+			moi.reactPublishStatus();
+		}, function(error) {
+			if (window.confirm(OLSKLocalized('WKCWriteErrorUnpublishDidFail'))) {
+				return moi.commandsUnpublishNote(inputData);
+			};
+
+			d3.select('#WKCWriteDetailToolbarPublishStatus').text(OLSKLocalized('WKCWriteDetailToolbarPublishStatusUnableToUnpublish'));
+
+			throw error;
+		});
+	};
+
 	//_ commandsDeleteNoteWithConfirmation
 
 	moi.commandsDeleteNoteWithConfirmation = function (inputData) {
@@ -442,8 +476,8 @@
 
 		d3.select('#WKCWriteDetailToolbarPublishButton')
 			.classed('WKCSharedHidden', moi.propertiesSelectedNote() ? moi.propertiesSelectedNote().WKCNotePublishStatusIsPublished : false);
-
-			console.log(moi.propertiesSelectedNote() ? moi.propertiesSelectedNote().WKCNotePublishStatusIsPublished : false);
+		d3.select('#WKCWriteDetailToolbarUnpublishButton')
+			.classed('WKCSharedHidden', moi.propertiesSelectedNote() ? !moi.propertiesSelectedNote().WKCNotePublishStatusIsPublished : false);
 	};
 
 	//_ reactPersistenceStatus

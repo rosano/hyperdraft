@@ -19,14 +19,18 @@ locals.OLSKPagePublicLocalizedStringKeys = [
 	'WKCWriteErrorPersistenceSaveDidFail',
 	'WKCWriteDetailToolbarPersistenceStatusUnableToSave',
 	'WKCWriteDetailToolbarPublishStatusPublishing',
+	'WKCWriteDetailToolbarPublishStatusUnpublishing',
 	'WKCWriteErrorPublishDidFail',
+	'WKCWriteErrorUnpublishDidFail',
 	'WKCWriteDetailToolbarPublishStatusUnableToPublish',
+	'WKCWriteDetailToolbarPublishStatusUnableToUnpublish',
 	'WKCWriteNotesDeleteAlertText',
 	'WKCWriteDetailToolbarPersistenceStatusDeleting',
 	'WKCWriteDetailToolbarPersistenceStatusDeleted',
 	'WKCWriteErrorPersistenceDeleteDidFail',
 	'WKCWriteDetailToolbarPersistenceStatusUnableToDelete',
 	'WKCWriteDetailToolbarPublishStatusPublished',
+	'WKCWriteDetailToolbarPublishStatusUnpublished',
 ];
 locals.OLSKPagePublicRouteKeys = [
 	'WKCRouteAPINotesCreate',
@@ -34,6 +38,7 @@ locals.OLSKPagePublicRouteKeys = [
 	'WKCRouteAPINotesSearch',
 	'WKCRouteAPINotesUpdate',
 	'WKCRouteAPINotesPublish',
+	'WKCRouteAPINotesUnpublish',
 	'WKCRouteRefsRead',
 	'WKCRouteAPINotesDelete',
 ];
@@ -68,6 +73,8 @@ locals.OLSKPagePublicRouteKeys = [
 			<span id="WKCWriteDetailToolbarPublishStatus"></span>
 
 			<a id="WKCWriteDetailToolbarVisitButton" class="WKCSharedToolbarButton WKCSharedElementTappable" title="<%= OLSKLocalized('WKCWriteDetailToolbarVisitButtonText') %>" style="background-image: url('/panel/_shared/wIKWriteVisit.svg')" target="_blank"></a>
+
+			<button id="WKCWriteDetailToolbarUnpublishButton" class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" title="<%= OLSKLocalized('WKCWriteDetailToolbarUnpublishButtonText') %>" style="background-image: url('/panel/_shared/wIKWriteUnpublish.svg')" onclick="WKCWriteBehaviour.interfaceUnpublishButtonDidClick()" ></button>
 
 			<button id="WKCWriteDetailToolbarPublishButton" class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" title="<%= OLSKLocalized('WKCWriteDetailToolbarPublishButtonText') %>" style="background-image: url('/panel/_shared/wIKWritePublish.svg')" onclick="WKCWriteBehaviour.interfacePublishButtonDidClick()" ></button>
 
