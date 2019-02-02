@@ -41,14 +41,14 @@ exports.WKCActionHomeIndex = function(req, res, next) {
 
 //_ WKCActionRefsRead
 
-const apiNotesMetal = require('../api/auth-notes/metal.js');
+const apiNotesAction = require('../api/auth-notes/action.js');
 const WKCParser = require('../_shared/WKCParser/main.js');
 
 exports.WKCActionRefsRead = async function(req, res, next) {
-	let item = await apiNotesMetal.WKCNotesMetalPublicRead(req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, req.params.wkc_note_public_id);
+	let item = await apiNotesAction.WKCNotesActionPublicRead(req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, req.params.wkc_note_public_id);
 
-	if (!item) {
-		return next(new Error('WKCErrorNotFound'));
+	if ((item.message || '').match(/NotFound/)) {
+		return next();
 	}
 
 	item.WKCNoteDetectedTitle = WKCParser.WKCParserTitleForPlaintext(item.WKCNoteBody);

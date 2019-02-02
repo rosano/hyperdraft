@@ -54,26 +54,6 @@ exports.WKCNotesMetalRead = async function(databaseClient, inputData) {
 	return outputData;
 };
 
-//_ WKCNotesMetalPublicRead
-
-exports.WKCNotesMetalPublicRead = async function(databaseClient, inputData) {
-	if (typeof inputData !== 'string') {
-		return Promise.reject(new Error('WKCErrorInvalidInput'));
-	}
-
-	let outputData = await databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_notes').findOne({
-		WKCNotePublicID: inputData,
-	});
-
-	if (outputData) {
-		modelLibrary.WKCNotesModelHiddenPropertyNames().forEach(function(obj) {
-			delete outputData[obj];
-		});
-	}
-
-	return outputData;
-};
-
 //_ WKCNotesMetalUpdate
 
 exports.WKCNotesMetalUpdate = async function(databaseClient, param1, param2) {

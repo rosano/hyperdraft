@@ -31,6 +31,25 @@ exports.WKCNotesActionPublish = async function(databaseClient, inputData) {
 	return Promise.resolve(outputData);
 };
 
+//_ WKCNotesActionPublicRead
+
+exports.WKCNotesActionPublicRead = async function(databaseClient, inputData) {
+	if (typeof inputData !== 'string') {
+		return Promise.reject(new Error('WKCErrorInvalidInput'));
+	}
+
+	let outputData = (await metalLibrary.WKCNotesMetalQuery(databaseClient, {
+		WKCNotePublishStatusIsPublished: true,
+		WKCNotePublicID: inputData,
+	})).shift();
+
+	if (!outputData) {
+		return new Error('WKCErrorNotFound');
+	}
+
+	return Promise.resolve(outputData);
+};
+
 //_ WKCNotesActionUnpublish
 
 exports.WKCNotesActionUnpublish = async function(databaseClient, inputData) {
