@@ -126,14 +126,14 @@ describe('WKCNotesMetalDelete', function testWKCNotesMetalDelete() {
 
 });
 
-describe('WKCNotesMetalSearch', function testWKCNotesMetalSearch() {
+describe('WKCNotesMetalQuery', function testWKCNotesMetalQuery() {
 
 	it('rejects if not object', async function() {
-		await assert.rejects(mainModule.WKCNotesMetalSearch(WKCTestingMongoClient, null), /WKCErrorInvalidInput/);
+		await assert.rejects(mainModule.WKCNotesMetalQuery(WKCTestingMongoClient, null), /WKCErrorInvalidInput/);
 	});
 
 	it('returns array if no results', async function() {
-		assert.deepEqual(await mainModule.WKCNotesMetalSearch(WKCTestingMongoClient, {}), []);
+		assert.deepEqual(await mainModule.WKCNotesMetalQuery(WKCTestingMongoClient, {}), []);
 	});
 
 	it('returns array if results', async function() {
@@ -143,7 +143,7 @@ describe('WKCNotesMetalSearch', function testWKCNotesMetalSearch() {
 			}));
 		}));
 
-		assert.deepEqual(await mainModule.WKCNotesMetalSearch(WKCTestingMongoClient, {}), items.reverse());
+		assert.deepEqual(await mainModule.WKCNotesMetalQuery(WKCTestingMongoClient, {}), items.reverse());
 	});
 
 });

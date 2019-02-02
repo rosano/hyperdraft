@@ -131,5 +131,5 @@ exports.WKCAPINotesDeleteAction = async function(req, res, next) {
 //_ WKCAPINotesSearchAction
 
 exports.WKCAPINotesSearchAction = async function(req, res, next) {
-	return res.json(await metalLibrary.WKCNotesMetalSearch(req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, req.body));
+	return res.json(await metalLibrary.WKCNotesMetalQuery(req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, req.body));
 };
