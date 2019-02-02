@@ -116,10 +116,7 @@ locals.OLSKPagePublicRouteKeys = [
 
 	<div id="WKCReadDetail" class="WKCReadDetailInactive">
 		<header id="WKCReadDetailToolbar" class="WKCSharedToolbar">
-			<button id="WKCReadDetailToolbarUnreadButton" class="WKCSharedElementTappable WKCSharedButtonNoStyle WKCSharedHidden">⚫︎</button>
-			<script type="text/javascript">
-				d3.select('#WKCReadDetailToolbarUnreadButton').on('click', WKCReadBehaviour.interfaceArticlesUnreadButtonDidClick);
-			</script>
+			<button id="WKCReadDetailToolbarUnreadButton" class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle WKCSharedHidden" title="<%= OLSKLocalized('WKCReadDetailToolbarUnreadButtonText') %>" style="background-image: url('/panel/_shared/wIKReadUnread.svg')" onclick="WKCReadBehaviour.interfaceArticlesUnreadButtonDidClick()"></button>
 
 			<button id="WKCReadDetailToolbarInboxButton" class="WKCSharedElementTappable WKCSharedButtonNoStyle WKCSharedHidden"><%= OLSKLocalized('WKCReadDetailToolbarInboxButtonText') %></button>
 			<script type="text/javascript">
