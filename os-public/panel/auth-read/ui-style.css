@@ -233,6 +233,9 @@ body {
 
 #WKCReadMasterToolbar {
 	border-top: 1px solid #ddd;
+	
+	/* @FlexboxWKCReadMaster child */
+	flex-shrink: 0;
 }
 
 #WKCReadMasterContent {

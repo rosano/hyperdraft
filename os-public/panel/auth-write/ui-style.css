@@ -28,6 +28,11 @@ body {
 	flex-direction: column;
 }
 
+#WKCWriteMasterToolbar {
+	/* @FlexboxWKCWriteMaster child */
+	flex-shrink: 0;
+}
+
 #WKCWriteMasterContent {
 	/* @FlexboxWKCWriteMaster child */
 	overflow: auto;
