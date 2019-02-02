@@ -7,6 +7,8 @@ WKCReadSourcesContentListItemArchivedText: Archived
 WKCReadSourcesContentListItemDiscardedText: Discarded
 WKCReadDetailToolbarUnreadButtonText: Mark as unread
 WKCReadDetailToolbarInboxButtonText: Move to inbox
+WKCReadDetailToolbarArchiveButtonText: Archive
+WKCReadDetailToolbarDiscardButtonText: Discard
 WKCReadDetailPlaceholderText: No Article Selected
 WKCReadDetailContentLinkText: Original source
 WKCReadDetailContentRemoteButtonText: Load images

@@ -126,12 +126,9 @@ locals.OLSKPagePublicRouteKeys = [
 				d3.select('#WKCReadDetailToolbarInboxButton').on('click', WKCReadBehaviour.interfaceArticlesInboxButtonDidClick);
 			</script>
 
-			<button id="WKCReadDetailToolbarArchiveButton" class="WKCSharedElementTappable WKCSharedButtonNoStyle" accesskey="a">📂</button>
-			<script type="text/javascript">
-				d3.select('#WKCReadDetailToolbarArchiveButton').on('click', WKCReadBehaviour.interfaceArticlesArchiveButtonDidClick);
-			</script>
+			<button id="WKCReadDetailToolbarArchiveButton" class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" title="<%= OLSKLocalized('WKCReadDetailToolbarArchiveButtonText') %>" style="background-image: url('/panel/_shared/wIKReadArchive.svg')" onclick="WKCReadBehaviour.interfaceArticlesArchiveButtonDidClick()" accesskey="a"></button>
 
-			<button id="WKCReadDetailToolbarDiscardButton" class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle"title="<%= OLSKLocalized('WKCReadDetailToolbarDiscardButtonText') %>" style="background-image: url('/panel/_shared/wIKReadDiscard.svg')" onclick="WKCReadBehaviour.interfaceArticlesDiscardButtonDidClick()"></button>
+			<button id="WKCReadDetailToolbarDiscardButton" class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" title="<%= OLSKLocalized('WKCReadDetailToolbarDiscardButtonText') %>" style="background-image: url('/panel/_shared/wIKReadDiscard.svg')" onclick="WKCReadBehaviour.interfaceArticlesDiscardButtonDidClick()"></button>
 		</header>
 
 		<div id="WKCReadDetailContent">
