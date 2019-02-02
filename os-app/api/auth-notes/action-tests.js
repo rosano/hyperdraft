@@ -64,7 +64,7 @@ describe('WKCNotesActionPublish', function testWKCNotesActionPublish() {
 		assert.deepEqual((await serialPromises()).map(function (e) {
 			return e.WKCNotePublicID;
 		}).sort(), ['1','2'].sort());
-		
+
 		// let itemCreated = await metalLibrary.WKCNotesMetalCreate(WKCTestingMongoClient, kTesting.StubValidNote());
 		// let itemUpdated = await mainModule.WKCNotesActionPublish(WKCTestingMongoClient, itemCreated.WKCNoteID);
 
@@ -98,6 +98,29 @@ describe('WKCNotesActionPublish', function testWKCNotesActionPublish() {
 		// }));
 
 		assert.deepEqual((await mainModule.WKCNotesActionPublish(WKCTestingMongoClient, (await metalLibrary.WKCNotesMetalCreate(WKCTestingMongoClient, kTesting.StubValidNote())).WKCNoteID)).WKCNotePublicID, '3');
+	});
+
+});
+
+describe('WKCNotesActionUnpublish', function testWKCNotesActionUnpublish() {
+
+	it('rejects if not string', async function() {
+		await assert.rejects(mainModule.WKCNotesActionUnpublish(WKCTestingMongoClient, null), /WKCErrorInvalidInput/)
+	});
+
+	it('returns error if not found', async function() {
+		assert.deepEqual(await mainModule.WKCNotesActionUnpublish(WKCTestingMongoClient, 'alfa'), new Error('WKCErrorNotFound'))
+	});
+
+	it('returns WKCNote with updates if none published', async function() {
+		let itemCreated = await metalLibrary.WKCNotesMetalCreate(WKCTestingMongoClient, kTesting.StubValidNote());
+		let itemUpdated = await mainModule.WKCNotesActionUnpublish(WKCTestingMongoClient, (await mainModule.WKCNotesActionPublish(WKCTestingMongoClient, itemCreated.WKCNoteID)).WKCNoteID);
+
+		assert.deepEqual(itemUpdated, Object.assign(itemCreated, {
+			WKCNoteDateUpdated: itemUpdated.WKCNoteDateUpdated,
+			WKCNotePublishStatusIsPublished: false,
+			WKCNotePublicID: '1',
+		}));
 	});
 
 });

@@ -31,6 +31,22 @@ exports.WKCNotesActionPublish = async function(databaseClient, inputData) {
 	return Promise.resolve(outputData);
 };
 
+//_ WKCNotesActionUnpublish
+
+exports.WKCNotesActionUnpublish = async function(databaseClient, inputData) {
+	let item = await metalLibrary.WKCNotesMetalRead(databaseClient, inputData);
+
+	if (!item) {
+		return new Error('WKCErrorNotFound');
+	}
+
+	let outputData = await metalLibrary.WKCNotesMetalUpdate(databaseClient, inputData, {
+		WKCNotePublishStatusIsPublished: false,
+	});
+
+	return Promise.resolve(outputData);
+};
+
 //_ WKCNotesActionVersion
 
 exports.WKCNotesActionVersion = async function(databaseClient, inputData) {
