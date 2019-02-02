@@ -5,6 +5,7 @@
  */
 
 var metalLibrary = require('./metal.js');
+var versionsMetalLibrary = require('../auth-versions/metal.js');
 var settingsMetalLibrary = require('../auth-settings/metal.js');
 
 //_ WKCNotesActionPublish
@@ -26,6 +27,24 @@ exports.WKCNotesActionPublish = async function(databaseClient, inputData) {
 		WKCNotePublishStatusIsPublished: true,
 		WKCNotePublicID: item.WKCNotePublicID,
 	});
+
+	return Promise.resolve(outputData);
+};
+
+//_ WKCNotesActionVersion
+
+exports.WKCNotesActionVersion = async function(databaseClient, inputData) {
+	let outputData = await metalLibrary.WKCNotesMetalUpdate(databaseClient, inputData.WKCVersionNoteID, {
+		WKCNoteBody: inputData.WKCVersionBody,
+	});
+
+	if (!outputData) {
+		return new Error('WKCErrorNotFound');
+	}
+
+	if ((await versionsMetalLibrary.WKCVersionsMetalCreate(databaseClient, inputData)).WKCErrors) {
+		return Promise.reject(new Error('WKCErrorInvalidInput'));
+	};
 
 	return Promise.resolve(outputData);
 };

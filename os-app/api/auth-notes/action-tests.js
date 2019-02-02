@@ -8,11 +8,19 @@ const assert = require('assert');
 
 var mainModule = require('./action.js');
 var metalLibrary = require('./metal.js');
+var versionsMetalLibrary = require('../auth-versions/metal.js');
 
 const kTesting = {
 	StubValidNote: function() {
 		return {
 			WKCNoteBody: 'alfa',
+		};
+	},
+	StubValidVersion: function() {
+		return {
+			WKCVersionNoteID: 'alfa',
+			WKCVersionBody: 'bravo',
+			WKCVersionDate: new Date('2019-01-30T18:10:00.000Z'),
 		};
 	},
 };
@@ -72,6 +80,32 @@ describe('WKCNotesActionPublish', function testWKCNotesActionPublish() {
 		// }));
 
 		assert.deepEqual((await mainModule.WKCNotesActionPublish(WKCTestingMongoClient, (await metalLibrary.WKCNotesMetalCreate(WKCTestingMongoClient, kTesting.StubValidNote())).WKCNoteID)).WKCNotePublicID, '3');
+	});
+
+});
+
+describe('WKCNotesActionVersion', function testWKCNotesActionVersion() {
+
+	it('rejects if not valid', async function() {
+		await assert.rejects(mainModule.WKCNotesActionVersion(WKCTestingMongoClient, {}), /WKCErrorInvalidInput/)
+	});
+
+	it('returns error if not found', async function() {
+		assert.deepEqual(await mainModule.WKCNotesActionVersion(WKCTestingMongoClient, kTesting.StubValidVersion()), new Error('WKCErrorNotFound'))
+	});
+
+	it('returns WKCNote with updates if none published', async function() {
+		let itemCreated = await metalLibrary.WKCNotesMetalCreate(WKCTestingMongoClient, kTesting.StubValidNote());
+		let versionObject = Object.assign(kTesting.StubValidVersion(), {
+			WKCVersionNoteID: itemCreated.WKCNoteID,
+		});
+		let itemUpdated = await mainModule.WKCNotesActionVersion(WKCTestingMongoClient, versionObject);
+
+		assert.deepEqual(itemUpdated, Object.assign(itemCreated, {
+			WKCNoteDateUpdated: itemUpdated.WKCNoteDateUpdated,
+			WKCNoteBody: 'bravo',
+		}));
+		assert.deepEqual(await versionsMetalLibrary.WKCVersionsMetalSearch(WKCTestingMongoClient, {}), [Object.assign(versionObject)]);
 	});
 
 });
