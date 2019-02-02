@@ -116,7 +116,7 @@ locals.OLSKPagePublicRouteKeys = [
 
 	<div id="WKCReadDetail" class="WKCReadDetailInactive">
 		<header id="WKCReadDetailToolbar" class="WKCSharedToolbar">
-			<button id="WKCReadDetailToolbarInboxButton" class="WKCSharedElementTappable WKCSharedButtonNoStyle WKCSharedHidden" onclick="WKCReadBehaviour.interfaceArticlesInboxButtonDidClick()"><%= OLSKLocalized('WKCReadDetailToolbarInboxButtonText') %></button>
+			<button id="WKCReadDetailToolbarInboxButton" class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle WKCSharedHidden" title="<%= OLSKLocalized('WKCReadDetailToolbarInboxButtonText') %>" style="background-image: url('/panel/_shared/wIKReadInbox.svg')"onclick="WKCReadBehaviour.interfaceArticlesInboxButtonDidClick()"></button>
 
 			<button id="WKCReadDetailToolbarUnreadButton" class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle WKCSharedHidden" title="<%= OLSKLocalized('WKCReadDetailToolbarUnreadButtonText') %>" style="background-image: url('/panel/_shared/wIKReadUnread.svg')" onclick="WKCReadBehaviour.interfaceArticlesUnreadButtonDidClick()"></button>
 
