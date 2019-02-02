@@ -173,6 +173,8 @@ body {
 }
 
 .WKCReadSourcesContentListChildListItem img {
+	margin-right: 3px;
+
 	/* browser quirks */
 	margin-top: -1px;
 }

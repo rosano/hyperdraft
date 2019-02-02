@@ -532,13 +532,17 @@
 		});
 
 		parentElement.select('img').attr('src', function (e) {
-			return 'data:image/svg+xml;base64,' + new Identicon(md5(e.WKCOutlookID), {
-				margin: 0.2,
-				size: 20,
-				format: 'svg',
-				foreground: [0, 0, 0, 255],
-				background: [0, 0, 0, 0],
-		  }).toString();
+			if (e.WKCOutlookID === 'WKCReadSourcesContentListOutlooksListItemInbox') {
+				return '/panel/_shared/wIKReadInbox.svg';
+			}
+
+			if (e.WKCOutlookID === 'WKCReadSourcesContentListOutlooksListItemArchived') {
+				return '/panel/_shared/wIKReadArchive.svg';
+			}
+
+			if (e.WKCOutlookID === 'WKCReadSourcesContentListOutlooksListItemDiscarded') {
+				return '/panel/_shared/wIKReadDiscard.svg';
+			}
 		});
 
 		selection.exit().remove();
