@@ -116,12 +116,9 @@ locals.OLSKPagePublicRouteKeys = [
 
 	<div id="WKCReadDetail" class="WKCReadDetailInactive">
 		<header id="WKCReadDetailToolbar" class="WKCSharedToolbar">
-			<button id="WKCReadDetailToolbarUnreadButton" class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle WKCSharedHidden" title="<%= OLSKLocalized('WKCReadDetailToolbarUnreadButtonText') %>" style="background-image: url('/panel/_shared/wIKReadUnread.svg')" onclick="WKCReadBehaviour.interfaceArticlesUnreadButtonDidClick()"></button>
+			<button id="WKCReadDetailToolbarInboxButton" class="WKCSharedElementTappable WKCSharedButtonNoStyle WKCSharedHidden" onclick="WKCReadBehaviour.interfaceArticlesInboxButtonDidClick()"><%= OLSKLocalized('WKCReadDetailToolbarInboxButtonText') %></button>
 
-			<button id="WKCReadDetailToolbarInboxButton" class="WKCSharedElementTappable WKCSharedButtonNoStyle WKCSharedHidden"><%= OLSKLocalized('WKCReadDetailToolbarInboxButtonText') %></button>
-			<script type="text/javascript">
-				d3.select('#WKCReadDetailToolbarInboxButton').on('click', WKCReadBehaviour.interfaceArticlesInboxButtonDidClick);
-			</script>
+			<button id="WKCReadDetailToolbarUnreadButton" class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle WKCSharedHidden" title="<%= OLSKLocalized('WKCReadDetailToolbarUnreadButtonText') %>" style="background-image: url('/panel/_shared/wIKReadUnread.svg')" onclick="WKCReadBehaviour.interfaceArticlesUnreadButtonDidClick()"></button>
 
 			<button id="WKCReadDetailToolbarArchiveButton" class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" title="<%= OLSKLocalized('WKCReadDetailToolbarArchiveButtonText') %>" style="background-image: url('/panel/_shared/wIKReadArchive.svg')" onclick="WKCReadBehaviour.interfaceArticlesArchiveButtonDidClick()" accesskey="a"></button>
 
