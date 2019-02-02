@@ -143,7 +143,9 @@ describe('WKCNotesMetalQuery', function testWKCNotesMetalQuery() {
 			}));
 		}));
 
-		assert.deepEqual(await mainModule.WKCNotesMetalQuery(WKCTestingMongoClient, {}), items.reverse());
+		assert.deepEqual(await mainModule.WKCNotesMetalQuery(WKCTestingMongoClient, {
+			WKCNoteBody: 'alfa',
+		}), [items.shift()]);
 	});
 
 });

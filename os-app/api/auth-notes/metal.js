@@ -132,9 +132,7 @@ exports.WKCNotesMetalQuery = async function(databaseClient, inputData) {
 		return Promise.reject(new Error('WKCErrorInvalidInput'));
 	}
 
-	return Promise.resolve((await databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_notes').find(inputData).sort({
-		_id: -1,
-	}).toArray()).map(function(e) {
+	return Promise.resolve((await databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_notes').find(inputData).toArray()).map(function(e) {
 		modelLibrary.WKCNotesModelHiddenPropertyNames().forEach(function(key) {
 			delete e[key];
 		});
