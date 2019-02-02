@@ -20,15 +20,15 @@ exports.WKCVersionsMetalCreate = async function(databaseClient, inputData) {
 		}));
 	}
 
-	return Promise.resolve(Object.entries((await databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_versions').insertOne(Object.assign(inputData, {
+	let outputData = (await databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_versions').insertOne(Object.assign(inputData, {
 		WKCVersionID: parseInt(new Date() * 1).toString(),
-	}))).ops.pop()).filter(function ([key, value]) {
-		return modelLibrary.WKCVersionsHiddenPropertyNames().indexOf(key) === -1;
-	}).reduce(function (coll, [key, value]) {
-		coll[key] = value;
+	}))).ops.pop();
 
-		return coll;
-	}, {}));
+	modelLibrary.WKCVersionsHiddenPropertyNames().forEach(function(key) {
+		delete outputData[key];
+	});
+
+	return Promise.resolve(outputData);
 };
 
 //_ WKCVersionsMetalSearch
