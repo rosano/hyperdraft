@@ -37,6 +37,14 @@ exports.OLSKControllerRoutes = function() {
 				'WKCSharedMiddlewareAPIAuthenticate',
 			],
 		},
+		WKCRouteAPINotesUnpublish: {
+			OLSKRoutePath: '/api/notes/:wkc_note_id(\\d+)/unpublish',
+			OLSKRouteMethod: 'get',
+			OLSKRouteFunction: exports.WKCAPINotesUnpublishAction,
+			OLSKRouteMiddlewares: [
+				'WKCSharedMiddlewareAPIAuthenticate',
+			],
+		},
 		WKCRouteAPINotesDelete: {
 			OLSKRoutePath: '/api/notes/:wkc_note_id(\\d+)',
 			OLSKRouteMethod: 'delete',
@@ -88,6 +96,18 @@ exports.WKCActionAPINotesUpdate = async function(req, res, next) {
 
 exports.WKCAPINotesPublishAction = async function(req, res, next) {
 	let outputData = await actionLibrary.WKCNotesActionPublish(req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, req.params.wkc_note_id);
+	
+	if (outputData instanceof Error) {
+		return next(new Error('WKCAPIClientErrorNotFound'));
+	}
+
+	return res.json(outputData);
+};
+
+//_ WKCAPINotesUnpublishAction
+
+exports.WKCAPINotesUnpublishAction = async function(req, res, next) {
+	let outputData = await actionLibrary.WKCNotesActionUnpublish(req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, req.params.wkc_note_id);
 	
 	if (outputData instanceof Error) {
 		return next(new Error('WKCAPIClientErrorNotFound'));

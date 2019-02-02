@@ -40,6 +40,14 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 					'WKCSharedMiddlewareAPIAuthenticate',
 				],
 			},
+			WKCRouteAPINotesUnpublish: {
+				OLSKRoutePath: '/api/notes/:wkc_note_id(\\d+)/unpublish',
+				OLSKRouteMethod: 'get',
+				OLSKRouteFunction: controllerModule.WKCAPINotesUnpublishAction,
+				OLSKRouteMiddlewares: [
+					'WKCSharedMiddlewareAPIAuthenticate',
+				],
+			},
 			WKCRouteAPINotesDelete: {
 				OLSKRoutePath: '/api/notes/:wkc_note_id(\\d+)',
 				OLSKRouteMethod: 'delete',
