@@ -103,10 +103,7 @@ locals.OLSKPagePublicRouteKeys = [
 
 	<div id="WKCReadMaster">
 		<header id="WKCReadMasterToolbar" class="WKCSharedToolbar">
-			<button id="WKCReadMasterToolbarCreateButton" class="WKCSharedElementTappable WKCSharedButtonNoStyle" accesskey="n">➕</button>
-			<script type="text/javascript">
-				d3.select('#WKCReadMasterToolbarCreateButton').on('click', WKCReadBehaviour.interfaceSubscriptionsCreateButtonDidClick);
-			</script>
+			<button id="WKCReadMasterToolbarCreateButton" class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" title="<%= OLSKLocalized('WKCReadModuleSubscribeHeadingText') %>" style="background-image: url('/panel/_shared/wIKSharedCreate.svg')" accesskey="n" onclick="WKCReadBehaviour.interfaceSubscriptionsCreateButtonDidClick()"></button>
 		</header>
 
 		<div id="WKCReadMasterContent">
