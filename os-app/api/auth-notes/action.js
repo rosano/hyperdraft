@@ -34,15 +34,13 @@ exports.WKCNotesActionPublish = async function(databaseClient, inputData) {
 //_ WKCNotesActionUnpublish
 
 exports.WKCNotesActionUnpublish = async function(databaseClient, inputData) {
-	let item = await metalLibrary.WKCNotesMetalRead(databaseClient, inputData);
-
-	if (!item) {
-		return new Error('WKCErrorNotFound');
-	}
-
 	let outputData = await metalLibrary.WKCNotesMetalUpdate(databaseClient, inputData, {
 		WKCNotePublishStatusIsPublished: false,
 	});
+
+	if (!outputData) {
+		return new Error('WKCErrorNotFound');
+	}
 
 	return Promise.resolve(outputData);
 };
