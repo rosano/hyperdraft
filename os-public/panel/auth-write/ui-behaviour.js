@@ -415,7 +415,6 @@
 		});
 
 		d3.select('#WKCWriteDetailToolbarDiscardButton').attr('disabled', moi.propertiesSelectedNote() ? null : undefined);
-		d3.select('#WKCWriteDetailToolbarPublishButton').attr('disabled', moi.propertiesSelectedNote() ? null : undefined);
 
 		d3.select('#WKCWriteDetail').classed('WKCWriteDetailInactive', !moi.propertiesSelectedNote());
 		
@@ -434,6 +433,8 @@
 
 	moi.reactPublishStatus = function () {
 		d3.select('#WKCWriteDetailToolbarPublishStatus').html(moi.propertiesSelectedNote().WKCNotePublishStatusIsPublished ? OLSKLocalized('WKCWriteDetailToolbarPublishStatusPublished') + '<a href="/' + moi.propertiesSelectedNote().WKCNotePublicID + '" target="_blank">/' + moi.propertiesSelectedNote().WKCNotePublicID + '</a>': null);
+
+		d3.select('#WKCWriteDetailToolbarPublishButton').classed('WKCSharedHidden', moi.propertiesSelectedNote() ? moi.propertiesSelectedNote().WKCNotePublishStatusIsPublished : false);
 	};
 
 	//_ reactPersistenceStatus

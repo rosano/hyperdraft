@@ -49,10 +49,7 @@ locals.OLSKPagePublicRouteKeys = [
 <div id="WKCWrite" class="WKCWriteLoading">
 	<div id="WKCWriteMaster">
 		<header id="WKCWriteMasterToolbar" class="WKCSharedToolbar">
-			<button id="WKCWriteMasterToolbarCreateButton" class="WKCSharedElementTappable WKCSharedButtonNoStyle" accesskey="n" title="<%= OLSKLocalized('WKCWriteMasterToolbarCreateButtonText') %>">➕</button>
-			<script type="text/javascript">
-				d3.select('#WKCWriteMasterToolbarCreateButton').on('click', WKCWriteBehaviour.interfaceNotesMasterToolbarCreateButtonDidClick);
-			</script>
+			<button id="WKCWriteMasterToolbarCreateButton" class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" title="<%= OLSKLocalized('WKCWriteMasterToolbarCreateButtonText') %>" style="background-image: url('/panel/_shared/wIKSharedCreate.svg')" accesskey="n" onclick="WKCWriteBehaviour.interfaceNotesMasterToolbarCreateButtonDidClick()"></button>
 		</header>
 
 		<div id="WKCWriteMasterContent">
@@ -69,15 +66,9 @@ locals.OLSKPagePublicRouteKeys = [
 			
 			<span id="WKCWriteDetailToolbarPublishStatus"></span>
 
-			<button id="WKCWriteDetailToolbarPublishButton" class="WKCSharedElementTappable WKCSharedButtonNoStyle" title="<%= OLSKLocalized('WKCWriteDetailToolbarPublishButtonText') %>" disabled>⬆️</button>
-			<script type="text/javascript">
-				d3.select('#WKCWriteDetailToolbarPublishButton').on('click', WKCWriteBehaviour.interfacePublishButtonDidClick);
-			</script>
+			<button id="WKCWriteDetailToolbarPublishButton" class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" title="<%= OLSKLocalized('WKCWriteDetailToolbarPublishButtonText') %>" style="background-image: url('/panel/_shared/wIKWritePublish.svg')" onclick="WKCWriteBehaviour.interfacePublishButtonDidClick()" ></button>
 
-			<button id="WKCWriteDetailToolbarDiscardButton" class="WKCSharedElementTappable WKCSharedButtonNoStyle" title="<%= OLSKLocalized('WKCWriteDetailToolbarDiscardButtonText') %>" disabled>🗑</button>
-			<script type="text/javascript">
-				d3.select('#WKCWriteDetailToolbarDiscardButton').on('click', WKCWriteBehaviour.interfaceDeleteButtonDidClick);
-			</script>
+			<button id="WKCWriteDetailToolbarDiscardButton" class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" title="<%= OLSKLocalized('WKCWriteDetailToolbarDiscardButtonText') %>" style="background-image: url('/panel/_shared/wIKWriteDiscard.svg')" onclick="WKCWriteBehaviour.interfaceDeleteButtonDidClick()"></button>
 		</header>
 
 		<div id="WKCWriteDetailContent">
