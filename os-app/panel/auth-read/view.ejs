@@ -131,10 +131,7 @@ locals.OLSKPagePublicRouteKeys = [
 				d3.select('#WKCReadDetailToolbarArchiveButton').on('click', WKCReadBehaviour.interfaceArticlesArchiveButtonDidClick);
 			</script>
 
-			<button id="WKCReadDetailToolbarDiscardButton" class="WKCSharedElementTappable WKCSharedButtonNoStyle">🗑</button>
-			<script type="text/javascript">
-				d3.select('#WKCReadDetailToolbarDiscardButton').on('click', WKCReadBehaviour.interfaceArticlesDiscardButtonDidClick);
-			</script>
+			<button id="WKCReadDetailToolbarDiscardButton" class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle"title="<%= OLSKLocalized('WKCReadDetailToolbarDiscardButtonText') %>" style="background-image: url('/panel/_shared/wIKReadDiscard.svg')" onclick="WKCReadBehaviour.interfaceArticlesDiscardButtonDidClick()"></button>
 		</header>
 
 		<div id="WKCReadDetailContent">
