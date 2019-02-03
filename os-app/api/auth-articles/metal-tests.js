@@ -47,7 +47,6 @@ describe('WKCMetalArticlesCreate', function testWKCMetalArticlesCreate() {
 		metalLibrary.WKCMetalArticlesCreate(WKCTestingMongoClient, StubValidArticle(), function(err, responseJSON) {
 			assert.deepEqual(responseJSON, Object.assign(StubValidArticle(), {
 				WKCArticleID: responseJSON.WKCArticleID,
-				WKCArticleID2: responseJSON.WKCArticleID2,
 				WKCArticleDateCreated: responseJSON.WKCArticleDateCreated,
 				WKCArticleDateUpdated: responseJSON.WKCArticleDateUpdated,
 			}));
