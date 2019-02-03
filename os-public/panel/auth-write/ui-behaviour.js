@@ -139,6 +139,14 @@
 
 	moi.commandsNotesFilter = function (inputData) {
 		moi.propertiesCurrentFilter(inputData)
+
+		let item = moi.propertiesNoteObjects().filter(function (e) {
+			return WKCParser.WKCParserTitleForPlaintext(e.WKCNoteBody).toLowerCase() === inputData.toLowerCase();
+		}).shift();
+
+		if (item) {
+			moi.commandsSelectNote(item);
+		}
 	};
 
 	//_ commandsNotesFilterManual
