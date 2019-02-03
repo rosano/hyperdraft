@@ -145,8 +145,12 @@
 		}).shift();
 
 		if (item) {
-			moi.commandsSelectNote(item);
+			return moi.commandsSelectNote(item);
 		}
+
+		setTimeout(function () {
+			document.getElementById('WKCWriteMasterToolbarFilterInput').focus()
+		});
 	};
 
 	//_ commandsNotesFilterManual
@@ -441,10 +445,6 @@
 
 	moi.reactCurrentFilterManual = function (inputData) {
 		document.getElementById('WKCWriteMasterToolbarFilterInput').value = inputData;
-		
-		setTimeout(function () {
-			document.getElementById('WKCWriteMasterToolbarFilterInput').focus()
-		});
 	};
 
 	//_ reactSelectedNote
