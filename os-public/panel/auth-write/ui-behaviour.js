@@ -83,6 +83,10 @@
 
 	moi.interfaceNotesMasterToolbarFilterInputDidInput = function () {
 		moi.commandsNotesFilter(document.getElementById('WKCWriteMasterToolbarFilterInput').value);
+		
+		setTimeout(function () {
+			document.getElementById('WKCWriteMasterToolbarFilterInput').focus()
+		});
 	};
 
 	//_ interfaceNotesMasterToolbarCreateButtonDidClick
@@ -147,10 +151,6 @@
 		if (item) {
 			return moi.commandsSelectNote(item);
 		}
-
-		setTimeout(function () {
-			document.getElementById('WKCWriteMasterToolbarFilterInput').focus()
-		});
 	};
 
 	//_ commandsNotesFilterManual
