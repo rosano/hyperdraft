@@ -111,9 +111,9 @@
 	//_ interfaceEditorTextareaDidReceiveInput
 
 	moi.interfaceEditorTextareaDidReceiveInput = function () {
-		if (d3.event.inputType !== 'insertLineBreak') {
+		// if (d3.event.inputType !== 'insertLineBreak') {
 			return moi.commandsSelectedNoteUpdateBody(this.value);
-		}
+		// }
 
 		let previousLines = this.value.substring(0, d3.select(this).property('selectionStart')).split('\n').slice(-3);
 
