@@ -186,19 +186,21 @@
 		// moi.commandsPersistenceTaskStop();
 		// moi.commandsPersistenceTaskStart();
 
-		Object.assign(moi.propertiesSelectedNote(), {
+		let item = Object.assign(moi.propertiesSelectedNote(), {
 			WKCNoteBody: inputData,
 			WKCNoteDateUpdated: new Date(),
-			_WKCWriteIsUnpersisted: true,
 		});
 
-		// if (moi.propertiesUnsavedNotes().indexOf(moi.propertiesSelectedNote()) === -1) {
-		// 	moi.propertiesUnsavedNotes().push(moi.propertiesSelectedNote());
-		// }
+		if (!item._WKCWriteThrottleObject) {
+			item._WKCWriteThrottleObject = {
+				OLSKThrottleDuration: 2000,
+				OLSKThrottleCallback: function () {
+					moi.commandsPersistNote(item);
+				},
+			};
+		}
 
-		// if (moi.propertiesUnsavedNotes().indexOf(moi.propertiesSelectedNote()) === -1) {
-		// 	moi.propertiesUnsavedNotes().push(moi.propertiesSelectedNote());
-		// }
+		OLSKThrottle.OLSKThrottleTimeoutFor(item._WKCWriteThrottleObject);
 
 		moi.reactNoteObjects(moi.propertiesNoteObjects());
 	};
