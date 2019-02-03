@@ -79,9 +79,9 @@
 
 	//# INTERFACE
 
-	//_ interfaceNotesMasterToolbarFilterInputDidChange
+	//_ interfaceNotesMasterToolbarFilterInputDidInput
 
-	moi.interfaceNotesMasterToolbarFilterInputDidChange = function () {
+	moi.interfaceNotesMasterToolbarFilterInputDidInput = function () {
 		moi.commandsNotesFilter(document.getElementById('WKCWriteMasterToolbarFilterInput').value);
 	};
 
@@ -139,6 +139,14 @@
 
 	moi.commandsNotesFilter = function (inputData) {
 		moi.propertiesCurrentFilter(inputData)
+	};
+
+	//_ commandsNotesFilterManual
+
+	moi.commandsNotesFilterManual = function (inputData) {
+		moi.commandsNotesFilter(inputData);
+
+		moi.reactCurrentFilterManual(inputData);
 	};
 
 	//_ commandsNotesCreate
@@ -421,6 +429,16 @@
 		selection.exit().remove();
 	};
 
+	//_ reactCurrentFilterManual
+
+	moi.reactCurrentFilterManual = function (inputData) {
+		document.getElementById('WKCWriteMasterToolbarFilterInput').value = inputData;
+		
+		setTimeout(function () {
+			document.getElementById('WKCWriteMasterToolbarFilterInput').focus()
+		});
+	};
+
 	//_ reactSelectedNote
 
 	moi.reactSelectedNote = function (inputData) {
@@ -565,7 +583,13 @@
 			}
 
 			if (!!URLParse(event.target.textContent, {}).protocol) {
-				open(event.target.textContent);
+				return open(event.target.textContent);
+			}
+
+			let matches = event.target.textContent.match(/\[\[(.*)\]\]/);
+			if (matches) {
+				event.preventDefault();
+				return moi.commandsNotesFilterManual(matches.pop());
 			}
 		});
 	};
