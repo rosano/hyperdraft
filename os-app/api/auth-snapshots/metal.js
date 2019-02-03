@@ -4,8 +4,6 @@
  * MIT Licensed
  */
 
-const OLSKIdentifier = require('OLSKIdentifier');
-
 var modelLibrary = require('./model');
 
 //_ WKCSnapshotsMetalCreate
@@ -26,26 +24,23 @@ exports.WKCSnapshotsMetalCreate = function(databaseClient, inputData, completion
 		}));
 	}
 
-	return OLSKIdentifier.OLSKIdentifierTimeBased().then(function (id) {
-		var currentDate = new Date();
+	var currentDate = new Date();
 
-		return databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_snapshots').insertOne(Object.assign(inputData, {
-			WKCSnapshotID: parseInt(new Date() * 1).toString(),
-			WKCSnapshotID2: id,
-			WKCSnapshotDateCreated: currentDate,
-			WKCSnapshotDateUpdated: currentDate,
-		}), function(err, result) {
-			if (err) {
-				return completionHandler(err);
-			}
+	return databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_snapshots').insertOne(Object.assign(inputData, {
+		WKCSnapshotID: parseInt(new Date() * 1).toString(),
+		WKCSnapshotDateCreated: currentDate,
+		WKCSnapshotDateUpdated: currentDate,
+	}), function(err, result) {
+		if (err) {
+			return completionHandler(err);
+		}
 
-			var snapshotObject = result.ops.pop();
+		var snapshotObject = result.ops.pop();
 
-			modelLibrary.WKCSnapshotHiddenPropertyNames().forEach(function(obj) {
-				delete snapshotObject[obj];
-			});
-
-			return completionHandler(null, snapshotObject);
+		modelLibrary.WKCSnapshotHiddenPropertyNames().forEach(function(obj) {
+			delete snapshotObject[obj];
 		});
+
+		return completionHandler(null, snapshotObject);
 	});
 };

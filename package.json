@@ -14,9 +14,6 @@
     "// PERSIST": null,
     "mongodb": "^3.0.7",
 
-    "// IDENTIFIERS": null,
-    "OLSKIdentifier": "olsk/OLSKIdentifier",
-
     "// TASKS": null,
     "OLSKTasks": "olsk/OLSKTasks",
 
