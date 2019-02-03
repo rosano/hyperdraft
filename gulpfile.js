@@ -6,7 +6,6 @@ var filesystemLibrary = require('OLSKFilesystem');
 const NODE_MODULE_NAMES = [
 	'normalize.css',
 	'd3',
-	'OLSKTasks',
 	'OLSKInternational',
 	'OLSKRouting',
 	'OLSKType',
