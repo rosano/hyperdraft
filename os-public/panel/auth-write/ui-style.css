@@ -146,6 +146,7 @@ body {
 }
 
 .CodeMirror {
+	font-family: inherit;
 	/* @FlexboxWKCWriteDetailContent child */
 	/*flex-grow: 1;*/
 	
