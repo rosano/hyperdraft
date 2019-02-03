@@ -474,6 +474,7 @@
 	moi.setupEverything = function () {
 		moi.setupAPIToken(function () {
 			moi.setupNoteObjects(function() {
+				moi.setupBeforeUnload();
 
 				d3.select('#WKCWrite').classed('WKCWriteLoading', false);
 			});
@@ -523,22 +524,15 @@
 	//_ setupBeforeUnload
 
 	moi.setupBeforeUnload = function () {
-		window.onbeforeunload = function (e) {
-			console.log(moi.propertiesPersistenceTask().OLSKTaskStoppedAt);
-
-			if (!moi.propertiesPersistenceTask()._OLSKTaskTimerID) {
+		window.addEventListener('beforeunload', function (event) {
+			if (!moi.propertiesNoteObjects().filter(function (e) {
+				return e._WKCWriteThrottleObject;
+			}).length) {
 				return;
 			}
-		  var message = "Your confirmation message goes here.",
-		  e = e || window.event;
-		  // For IE and Firefox
-		  if (e) {
-		    e.returnValue = message;
-		  }
 
-		  // For Safari
-		  return message;
-		};
+		  return 'true';
+		});
 	};
 
 	//# LIFECYCLE
