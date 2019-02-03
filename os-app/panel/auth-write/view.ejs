@@ -13,6 +13,7 @@ locals.OLSKPageAssets = [
 	'/shared-assets/external/codemirror/mode/gfm/gfm.js',
 	'/panel/_shared/ui-style.css',
 	'ui-style.css',
+	'ui-editor-theme.css',
 	'ui-logic.js',
 	'ui-behaviour.js',
 ];
@@ -88,9 +89,6 @@ locals.OLSKPagePublicRouteKeys = [
 
 		<div id="WKCWriteDetailContent">
 			<textarea id="WKCWriteDetailContentTextarea"></textarea>
-			<script type="text/javascript">
-				d3.select('#WKCWriteDetailContentTextarea').on('input', WKCWriteBehaviour.interfaceEditorTextareaDidReceiveInput);
-			</script>
 		</div>
 
 		<div id="WKCWriteDetailPlaceholder"><span><%= OLSKLocalized('WKCWriteDetailPlaceholderText') %></span></div>

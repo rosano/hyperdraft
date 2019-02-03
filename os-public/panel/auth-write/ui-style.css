@@ -121,15 +121,17 @@ body {
 }
 
 #WKCWriteDetailContent {
+	padding: 10px;
+
 	/* @FlexboxWKCWriteDetail child */
 	flex-grow: 1;
 
 	/* @FlexboxWKCWriteDetailContent parent */
-	display: flex;
-	flex-direction: column;
+	/*display: flex;*/
+	/*flex-direction: column;*/
 }
 
-#WKCWriteDetailContentTextarea {
+#ignore #WKCWriteDetailContentTextarea {
 	padding: 10px;
 
 	line-height: 1.4;
@@ -141,4 +143,24 @@ body {
 	border: none;
 	outline: none;
 	resize: none;
+}
+
+.CodeMirror {
+	/* @FlexboxWKCWriteDetailContent child */
+	/*flex-grow: 1;*/
+	
+	/* override defaults */
+	/*height: 100%;*/
+}
+
+.CodeMirror-scroll {
+	background: #f8f8f8;
+}
+
+.CodeMirror pre {
+	word-break: break-all;
+}
+
+.cm-link:hover {
+  cursor: pointer;
 }

@@ -14,6 +14,7 @@
 
 	var WCKWriteBehaviourPropertyAPIToken;
 	var WCKWriteBehaviourPropertySelectedNote;
+	let WCKWriteBehaviourPropertyEditor;
 
 	//# PROPERTIES
 
@@ -414,9 +415,6 @@
 	//_ reactSelectedNote
 
 	moi.reactSelectedNote = function (inputData) {
-		d3.select('#WKCWriteDetailContentTextarea').node().value = inputData ? inputData.WKCNoteBody : null;
-		d3.select('#WKCWriteDetailContentTextarea').attr('disabled', inputData ? null : true);
-
 		d3.selectAll('.WKCWriteMasterContentListItem').classed('WKCWriteMasterContentListItemSelected', function(d) {
 			return d === inputData;
 		});
@@ -424,9 +422,11 @@
 		d3.select('#WKCWriteDetailToolbarDiscardButton').attr('disabled', inputData ? null : undefined);
 
 		d3.select('#WKCWriteDetail').classed('WKCWriteDetailInactive', !inputData);
+
+		WCKWriteBehaviourPropertyEditor.setValue(inputData ? inputData.WKCNoteBody : null);
 		
 		if (inputData) {
-			d3.select('#WKCWriteDetailContentTextarea').node().focus();
+			WCKWriteBehaviourPropertyEditor.focus();
 		}
 
 		if (!inputData) {
@@ -474,6 +474,7 @@
 	moi.setupEverything = function () {
 		moi.setupAPIToken(function () {
 			moi.setupNoteObjects(function() {
+				moi.setupEditor();
 				moi.setupBeforeUnload();
 
 				d3.select('#WKCWrite').classed('WKCWriteLoading', false);
@@ -519,6 +520,44 @@
 
 			completionHandler();
 		}, moi.commandsAlertConnectionError);
+	};
+
+	//_ setupEditor
+
+	moi.setupEditor = function () {
+		WCKWriteBehaviourPropertyEditor = CodeMirror.fromTextArea(document.getElementById('WKCWriteDetailContentTextarea'), {
+		  mode: {
+		    name: 'gfm',
+		    gitHubSpice: false,
+		    emoji: false,
+		  },
+		  lineNumbers: false,
+		  lineWrapping: true,
+		  extraKeys: {
+		    Enter: 'newlineAndIndentContinueMarkdownList',
+		    Esc: function () {
+		      return d3.select('#WKCWriteMasterToolbarCreateButton').node().focus();
+		    },
+		  },
+		  theme: 'wkv',
+		});
+
+		WCKWriteBehaviourPropertyEditor.on('change', function (instance, changeObject) {
+			if (changeObject.origin === 'setValue') {
+				return;
+			}
+
+			moi.commandsSelectedNoteUpdateBody(instance.getValue());
+		});
+
+		WCKWriteBehaviourPropertyEditor.on('mousedown', function(instance, e) {
+		  if (e.target.className.match('cm-link'))  {
+		    console.log( e.target.textContent );
+
+		    return e.preventDefault();
+		  }
+		    
+		});
 	};
 
 	//_ setupBeforeUnload
