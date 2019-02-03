@@ -46,7 +46,7 @@
 
 		WCKWriteBehaviourPropertySelectedNote = inputData === null ? undefined : inputData;
 
-		moi.reactSelectedNote();
+		moi.reactSelectedNote(WCKWriteBehaviourPropertySelectedNote);
 	};
 
 	//# DATA
@@ -413,23 +413,23 @@
 
 	//_ reactSelectedNote
 
-	moi.reactSelectedNote = function () {
-		d3.select('#WKCWriteDetailContentTextarea').node().value = moi.propertiesSelectedNote() ? moi.propertiesSelectedNote().WKCNoteBody : null;
-		d3.select('#WKCWriteDetailContentTextarea').attr('disabled', moi.propertiesSelectedNote() ? null : true);
+	moi.reactSelectedNote = function (inputData) {
+		d3.select('#WKCWriteDetailContentTextarea').node().value = inputData ? inputData.WKCNoteBody : null;
+		d3.select('#WKCWriteDetailContentTextarea').attr('disabled', inputData ? null : true);
 
 		d3.selectAll('.WKCWriteMasterContentListItem').classed('WKCWriteMasterContentListItemSelected', function(d) {
-			return d === moi.propertiesSelectedNote();
+			return d === inputData;
 		});
 
-		d3.select('#WKCWriteDetailToolbarDiscardButton').attr('disabled', moi.propertiesSelectedNote() ? null : undefined);
+		d3.select('#WKCWriteDetailToolbarDiscardButton').attr('disabled', inputData ? null : undefined);
 
-		d3.select('#WKCWriteDetail').classed('WKCWriteDetailInactive', !moi.propertiesSelectedNote());
+		d3.select('#WKCWriteDetail').classed('WKCWriteDetailInactive', !inputData);
 		
-		if (moi.propertiesSelectedNote()) {
+		if (inputData) {
 			d3.select('#WKCWriteDetailContentTextarea').node().focus();
 		}
 
-		if (!moi.propertiesSelectedNote()) {
+		if (!inputData) {
 			return;
 		}
 
