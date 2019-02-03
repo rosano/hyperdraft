@@ -34,7 +34,7 @@
 
 	moi.propertiesNoteObjects = function (inputData) {
 		if (typeof inputData === 'undefined') {
-			return WCKWriteBehaviourPropertyNoteObjects;
+			return WCKWriteBehaviourPropertyNoteObjects.slice();
 		}
 
 		WCKWriteBehaviourPropertyNoteObjects = inputData
