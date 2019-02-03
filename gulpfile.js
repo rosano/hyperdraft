@@ -18,6 +18,7 @@ const NODE_MODULE_NAMES = [
 	'showdown',
 	'moment',
 	'url-parse',
+	'codemirror',
 ];
 
 const INTERNAL_PATHS = [

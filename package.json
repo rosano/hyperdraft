@@ -56,8 +56,11 @@
     "// FRONTEND SPINNER": null,
     "ispinner.css": "latest",
 
-    "// FRONTEND URL PARSE": null,    
+    "// FRONTEND URL PARSE": null,
     "url-parse": "latest",
+
+    "// FRONTEND EDITOR": null,
+    "codemirror": "rosano/CodeMirror#add-distribution",
 
     "// I sacrifice myself for the commas of others": null
   },
