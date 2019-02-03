@@ -191,9 +191,13 @@
 			WKCNoteDateUpdated: new Date(),
 		});
 
-		if (moi.propertiesUnsavedNotes().indexOf(moi.propertiesSelectedNote()) == -1) {
-			moi.propertiesUnsavedNotes().push(moi.propertiesSelectedNote());
-		}
+		// if (moi.propertiesUnsavedNotes().indexOf(moi.propertiesSelectedNote()) === -1) {
+		// 	moi.propertiesUnsavedNotes().push(moi.propertiesSelectedNote());
+		// }
+
+		// if (moi.propertiesUnsavedNotes().indexOf(moi.propertiesSelectedNote()) === -1) {
+		// 	moi.propertiesUnsavedNotes().push(moi.propertiesSelectedNote());
+		// }
 
 		moi.reactNoteObjects(moi.propertiesNoteObjects());
 	};
