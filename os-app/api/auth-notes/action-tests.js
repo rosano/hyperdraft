@@ -11,12 +11,12 @@ var metalLibrary = require('./metal.js');
 var versionsMetalLibrary = require('../auth-versions/metal.js');
 
 const kTesting = {
-	StubValidNote: function() {
+	StubNoteObjectValid: function() {
 		return {
 			WKCNoteBody: 'alfa',
 		};
 	},
-	StubValidVersion: function() {
+	StubVersionObjectValid: function() {
 		return {
 			WKCVersionNoteID: 'alfa',
 			WKCVersionBody: 'bravo',
@@ -36,7 +36,7 @@ describe('WKCNotesActionPublish', function testWKCNotesActionPublish() {
 	});
 
 	it('returns WKCNote with updates if none published', async function() {
-		let itemCreated = await metalLibrary.WKCNotesMetalCreate(WKCTestingMongoClient, kTesting.StubValidNote());
+		let itemCreated = await metalLibrary.WKCNotesMetalCreate(WKCTestingMongoClient, kTesting.StubNoteObjectValid());
 		let itemUpdated = await mainModule.WKCNotesActionPublish(WKCTestingMongoClient, itemCreated.WKCNoteID);
 
 		assert.deepEqual(itemUpdated, Object.assign(itemCreated, {
@@ -51,7 +51,7 @@ describe('WKCNotesActionPublish', function testWKCNotesActionPublish() {
 			return ['alfa', 'bravo'].reduce(function (coll, e) {
 				return coll.then(async function (result) {
 					return result.concat([
-						await mainModule.WKCNotesActionPublish(WKCTestingMongoClient, (await metalLibrary.WKCNotesMetalCreate(WKCTestingMongoClient, Object.assign(kTesting.StubValidNote(), {
+						await mainModule.WKCNotesActionPublish(WKCTestingMongoClient, (await metalLibrary.WKCNotesMetalCreate(WKCTestingMongoClient, Object.assign(kTesting.StubNoteObjectValid(), {
 							WKCNoteBody: e,
 						}))).WKCNoteID)
 						]);
@@ -70,7 +70,7 @@ describe('WKCNotesActionPublish', function testWKCNotesActionPublish() {
 		let serialPromises = async function () {
 			return ['alfa', 'bravo'].reduce(function (coll, e) {
 				return coll.then(async function () {
-					await metalLibrary.WKCNotesMetalDelete(WKCTestingMongoClient, (await mainModule.WKCNotesActionPublish(WKCTestingMongoClient, (await metalLibrary.WKCNotesMetalCreate(WKCTestingMongoClient, Object.assign(kTesting.StubValidNote(), {
+					await metalLibrary.WKCNotesMetalDelete(WKCTestingMongoClient, (await mainModule.WKCNotesActionPublish(WKCTestingMongoClient, (await metalLibrary.WKCNotesMetalCreate(WKCTestingMongoClient, Object.assign(kTesting.StubNoteObjectValid(), {
 						WKCNoteBody: e,
 					}))).WKCNoteID)).WKCNoteID);
 				});
@@ -81,7 +81,7 @@ describe('WKCNotesActionPublish', function testWKCNotesActionPublish() {
 
 		await serialPromises();
 
-		assert.deepEqual((await mainModule.WKCNotesActionPublish(WKCTestingMongoClient, (await metalLibrary.WKCNotesMetalCreate(WKCTestingMongoClient, kTesting.StubValidNote())).WKCNoteID)).WKCNotePublicID, '3');
+		assert.deepEqual((await mainModule.WKCNotesActionPublish(WKCTestingMongoClient, (await metalLibrary.WKCNotesMetalCreate(WKCTestingMongoClient, kTesting.StubNoteObjectValid())).WKCNoteID)).WKCNotePublicID, '3');
 	});
 
 });
@@ -97,13 +97,13 @@ describe('WKCNotesActionPublicRead', function testWKCNotesActionPublicRead() {
 	});
 
 	it('returns WKCNote', async function() {
-		let item = await mainModule.WKCNotesActionPublish(WKCTestingMongoClient, (await metalLibrary.WKCNotesMetalCreate(WKCTestingMongoClient, kTesting.StubValidNote())).WKCNoteID);
+		let item = await mainModule.WKCNotesActionPublish(WKCTestingMongoClient, (await metalLibrary.WKCNotesMetalCreate(WKCTestingMongoClient, kTesting.StubNoteObjectValid())).WKCNoteID);
 
 		assert.deepEqual(await mainModule.WKCNotesActionPublicRead(WKCTestingMongoClient, item.WKCNotePublicID), item);
 	});
 
 	it('returns null if not WKCNotePublishStatusIsPublished', async function() {
-		assert.deepEqual(await mainModule.WKCNotesActionUnpublish(WKCTestingMongoClient, (await mainModule.WKCNotesActionPublish(WKCTestingMongoClient, (await metalLibrary.WKCNotesMetalCreate(WKCTestingMongoClient, kTesting.StubValidNote())).WKCNoteID)).WKCNoteID).WKCNotePublicID, null);
+		assert.deepEqual(await mainModule.WKCNotesActionUnpublish(WKCTestingMongoClient, (await mainModule.WKCNotesActionPublish(WKCTestingMongoClient, (await metalLibrary.WKCNotesMetalCreate(WKCTestingMongoClient, kTesting.StubNoteObjectValid())).WKCNoteID)).WKCNoteID).WKCNotePublicID, null);
 	});
 
 });
@@ -119,7 +119,7 @@ describe('WKCNotesActionUnpublish', function testWKCNotesActionUnpublish() {
 	});
 
 	it('returns updated WKCNote', async function() {
-		let itemCreated = await metalLibrary.WKCNotesMetalCreate(WKCTestingMongoClient, kTesting.StubValidNote());
+		let itemCreated = await metalLibrary.WKCNotesMetalCreate(WKCTestingMongoClient, kTesting.StubNoteObjectValid());
 		let itemUpdated = await mainModule.WKCNotesActionUnpublish(WKCTestingMongoClient, (await mainModule.WKCNotesActionPublish(WKCTestingMongoClient, itemCreated.WKCNoteID)).WKCNoteID);
 
 		assert.deepEqual(itemUpdated, Object.assign(itemCreated, {
@@ -138,12 +138,12 @@ describe('WKCNotesActionVersion', function testWKCNotesActionVersion() {
 	});
 
 	it('returns error if not found', async function() {
-		assert.deepEqual(await mainModule.WKCNotesActionVersion(WKCTestingMongoClient, kTesting.StubValidVersion()), new Error('WKCErrorNotFound'))
+		assert.deepEqual(await mainModule.WKCNotesActionVersion(WKCTestingMongoClient, kTesting.StubVersionObjectValid()), new Error('WKCErrorNotFound'))
 	});
 
 	it('returns WKCNote with updates if none published', async function() {
-		let itemCreated = await metalLibrary.WKCNotesMetalCreate(WKCTestingMongoClient, kTesting.StubValidNote());
-		let versionObject = Object.assign(kTesting.StubValidVersion(), {
+		let itemCreated = await metalLibrary.WKCNotesMetalCreate(WKCTestingMongoClient, kTesting.StubNoteObjectValid());
+		let versionObject = Object.assign(kTesting.StubVersionObjectValid(), {
 			WKCVersionNoteID: itemCreated.WKCNoteID,
 		});
 		let itemUpdated = await mainModule.WKCNotesActionVersion(WKCTestingMongoClient, versionObject);

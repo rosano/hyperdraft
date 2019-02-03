@@ -29,22 +29,6 @@ exports.OLSKControllerRoutes = function() {
 				'WKCSharedMiddlewareAPIAuthenticate',
 			],
 		},
-		WKCRouteAPINotesPublish: {
-			OLSKRoutePath: '/api/notes/:wkc_note_id/publish',
-			OLSKRouteMethod: 'get',
-			OLSKRouteFunction: exports.WKCAPINotesPublishAction,
-			OLSKRouteMiddlewares: [
-				'WKCSharedMiddlewareAPIAuthenticate',
-			],
-		},
-		WKCRouteAPINotesUnpublish: {
-			OLSKRoutePath: '/api/notes/:wkc_note_id/unpublish',
-			OLSKRouteMethod: 'get',
-			OLSKRouteFunction: exports.WKCAPINotesUnpublishAction,
-			OLSKRouteMiddlewares: [
-				'WKCSharedMiddlewareAPIAuthenticate',
-			],
-		},
 		WKCRouteAPINotesDelete: {
 			OLSKRoutePath: '/api/notes/:wkc_note_id',
 			OLSKRouteMethod: 'delete',
@@ -57,6 +41,22 @@ exports.OLSKControllerRoutes = function() {
 			OLSKRoutePath: '/api/notes/search',
 			OLSKRouteMethod: 'get',
 			OLSKRouteFunction: exports.WKCAPINotesSearchAction,
+			OLSKRouteMiddlewares: [
+				'WKCSharedMiddlewareAPIAuthenticate',
+			],
+		},
+		WKCRouteAPINotesPublish: {
+			OLSKRoutePath: '/api/notes/:wkc_note_id/publish',
+			OLSKRouteMethod: 'get',
+			OLSKRouteFunction: exports.WKCAPINotesPublishAction,
+			OLSKRouteMiddlewares: [
+				'WKCSharedMiddlewareAPIAuthenticate',
+			],
+		},
+		WKCRouteAPINotesUnpublish: {
+			OLSKRoutePath: '/api/notes/:wkc_note_id/unpublish',
+			OLSKRouteMethod: 'get',
+			OLSKRouteFunction: exports.WKCAPINotesUnpublishAction,
 			OLSKRouteMiddlewares: [
 				'WKCSharedMiddlewareAPIAuthenticate',
 			],
