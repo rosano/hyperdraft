@@ -395,7 +395,7 @@
 
 		d3.select('#WKCWriteDetail').classed('WKCWriteDetailInactive', !inputData);
 
-		WCKWriteBehaviourPropertyEditor.setValue(inputData ? inputData.WKCNoteBody : null);
+		WCKWriteBehaviourPropertyEditor.setValue(inputData ? inputData.WKCNoteBody : '');
 		
 		if (inputData) {
 			WCKWriteBehaviourPropertyEditor.focus();
