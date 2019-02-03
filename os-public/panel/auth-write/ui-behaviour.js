@@ -183,8 +183,8 @@
 	//_ commandsUpdateText
 
 	moi.commandsUpdateText = function (inputData) {
-		moi.commandsPersistenceTaskStop();
-		moi.commandsPersistenceTaskStart();
+		// moi.commandsPersistenceTaskStop();
+		// moi.commandsPersistenceTaskStart();
 
 		Object.assign(moi.propertiesSelectedNote(), {
 			WKCNoteBody: inputData,
@@ -501,7 +501,7 @@
 	moi.setupEverything = function () {
 		moi.setupAPIToken(function () {
 			moi.setupNoteObjects(function() {
-				moi.setupPersistenceTask();
+				// moi.setupPersistenceTask();
 				// moi.setupBeforeUnload();
 
 				d3.select('#WKCWrite').classed('WKCWriteLoading', false);
