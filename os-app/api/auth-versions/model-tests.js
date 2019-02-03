@@ -76,6 +76,22 @@ describe('WKCVersionsModelErrorsFor', function testWKCVersionsModelErrorsFor() {
 
 });
 
+describe('WKCVersionsModelPrepare', function testWKCVersionsModelPrepare() {
+
+	it('returns input', function() {
+		assert.deepEqual(mainModule.WKCVersionsModelPrepare({}), {});
+	});
+
+	it('parses WKCVersionDate as date', function() {
+		assert.deepEqual(mainModule.WKCVersionsModelPrepare({
+			WKCVersionDate: '2018-12-09T19:07:01.902Z',
+		}), {
+			WKCVersionDate: new Date('2018-12-09T19:07:01.902Z'),
+		});
+	});
+
+});
+
 describe('WKCVersionsHiddenPropertyNames', function testWKCVersionsHiddenPropertyNames() {
 
 	it('returns array', function() {

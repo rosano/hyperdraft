@@ -40,6 +40,16 @@ exports.WKCVersionsModelErrorsFor = function(inputData) {
 	return Object.entries(errors).length ? errors : null;
 };
 
+//_ WKCVersionsModelPrepare
+
+exports.WKCVersionsModelPrepare = function(inputData) {
+	if (inputData.WKCVersionDate !== undefined) {
+		inputData.WKCVersionDate = new Date(inputData.WKCVersionDate);
+	}
+
+	return inputData;
+};
+
 //_ WKCVersionsHiddenPropertyNames
 
 exports.WKCVersionsHiddenPropertyNames = function() {
