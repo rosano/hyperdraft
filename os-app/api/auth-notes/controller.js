@@ -79,6 +79,8 @@ exports.WKCAPINotesCreateAction = async function(req, res, next) {
 //_ WKCActionAPINotesUpdate
 
 exports.WKCActionAPINotesUpdate = async function(req, res, next) {
+	return next(new Error('WKCAPIClientErrorNotAvailable'));
+
 	let outputData = await metalLibrary.WKCNotesMetalUpdate(req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, req.params.wkc_note_id, req.body);
 
 	if (!outputData) {
