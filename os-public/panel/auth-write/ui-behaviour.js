@@ -189,6 +189,7 @@
 		Object.assign(moi.propertiesSelectedNote(), {
 			WKCNoteBody: inputData,
 			WKCNoteDateUpdated: new Date(),
+			_WKCWriteIsUnpersisted: true,
 		});
 
 		// if (moi.propertiesUnsavedNotes().indexOf(moi.propertiesSelectedNote()) === -1) {
@@ -420,6 +421,8 @@
 			.attr('class', 'WKCWriteMasterContentListItemContext');
 
 		contextElement.append('span')
+			.attr('class', 'WKCWriteMasterContentListItemContextUnpersistedStatus').text('⦿');
+		contextElement.append('span')
 			.attr('class', 'WKCWriteMasterContentListItemContextTitle');
 
 		parentElement.append('span')
@@ -431,10 +434,15 @@
 			.on('click', function(obj) {
 				moi.commandsSelectNote(obj);
 			});
+
+		parentElement.classed('WKCWriteMasterContentListItemUnpersisted', function (obj) {
+			return obj._WKCWriteIsUnpersisted;
+		});
 		parentElement.select('.WKCWriteMasterContentListItemContextTitle')
 			.text(function (e) {
 				return WKCParser.WKCParserTitleForPlaintext(e.WKCNoteBody);
-			})
+			});
+
 		parentElement.select('.WKCWriteMasterContentListItemSnippet').text(function(obj) {
 			return WKCParser.WKCParserSnippetForPlaintext(WKCParser.WKCParserBodyForPlaintext(obj.WKCNoteBody));
 		});
