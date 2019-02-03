@@ -248,7 +248,9 @@
 				moi.reactPersistenceStatus(OLSKLocalized('WKCWriteDetailToolbarPersistenceStatusSaved'), true);
 			}
 
-			moi.propertiesUnsavedNotes().splice(moi.propertiesUnsavedNotes().indexOf(inputData), 1);
+			delete inputData._WKCWriteThrottleObject;
+
+			moi.reactNoteObjects(moi.propertiesNoteObjects());
 		}, function(error) {
 			if (window.confirm(OLSKLocalized('WKCWriteErrorPersistenceSaveDidFail'))) {
 				return moi.commandsPersistNote(inputData);
