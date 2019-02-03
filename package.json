@@ -37,19 +37,26 @@
     "turndown": "latest",
     "showdown": "latest",
 
-    "// FRONTEND": null,
+    "// FRONTEND GENERAL": null,
     "normalize.css": "latest",
     "d3": "latest",
-    "OLSKInternational": "olsk/OLSKInternational",
-    "OLSKRouting": "olsk/OLSKRouting",
-    "OLSKType": "olsk/OLSKType",
-    "OLSKString": "olsk/OLSKString",
-    "ispinner.css": "latest",
     "identicon.js": "latest",
     "blueimp-md5": "latest",
-    "turndown": "latest",
-    "showdown": "latest",
+    
+    "// FRONTEND ROUTES ACCESS": null,
+    "OLSKRouting": "olsk/OLSKRouting",
+
+    "// FRONTEND LOCALIZATION": null,
+    "OLSKInternational": "olsk/OLSKInternational",
+    "OLSKString": "olsk/OLSKString",
+
+    "// FRONTEND DATES": null,
     "moment": "latest",
+
+    "// FRONTEND SPINNER": null,
+    "ispinner.css": "latest",
+
+    "// FRONTEND URL PARSE": null,    
     "url-parse": "latest",
 
     "// I sacrifice myself for the commas of others": null
