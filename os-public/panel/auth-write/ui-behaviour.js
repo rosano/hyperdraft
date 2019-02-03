@@ -14,8 +14,6 @@
 
 	var WCKWriteBehaviourPropertyAPIToken;
 	var WCKWriteBehaviourPropertySelectedNote;
-	var WCKWriteBehaviourPropertyPersistenceTask;
-	var WCKWriteBehaviourPropertyUnsavedNotes;
 
 	//# PROPERTIES
 
@@ -49,26 +47,6 @@
 		WCKWriteBehaviourPropertySelectedNote = inputData === null ? undefined : inputData;
 
 		moi.reactSelectedNote();
-	};
-
-	//_ propertiesUnsavedNotes
-
-	moi.propertiesUnsavedNotes = function (inputData) {
-		if (typeof inputData === 'undefined') {
-			return WCKWriteBehaviourPropertyUnsavedNotes;
-		}
-
-		WCKWriteBehaviourPropertyUnsavedNotes = inputData === null ? undefined : inputData;
-	};
-
-	//_ propertiesPersistenceTask
-
-	moi.propertiesPersistenceTask = function (inputData) {
-		if (typeof inputData === 'undefined') {
-			return WCKWriteBehaviourPropertyPersistenceTask;
-		}
-
-		WCKWriteBehaviourPropertyPersistenceTask = inputData;
 	};
 
 	//# DATA
@@ -183,9 +161,6 @@
 	//_ commandsSelectedNoteUpdateBody
 
 	moi.commandsSelectedNoteUpdateBody = function (inputData) {
-		// moi.commandsPersistenceTaskStop();
-		// moi.commandsPersistenceTaskStart();
-
 		let item = Object.assign(moi.propertiesSelectedNote(), {
 			WKCNoteBody: inputData,
 			WKCNoteDateUpdated: new Date(),
@@ -203,26 +178,6 @@
 		OLSKThrottle.OLSKThrottleTimeoutFor(item._WKCWriteThrottleObject);
 
 		moi.reactNoteObjects(moi.propertiesNoteObjects());
-	};
-
-	//_ commandsPersistenceTaskStop
-
-	moi.commandsPersistenceTaskStop = function () {
-		clearInterval(moi.propertiesPersistenceTask()._OLSKTaskTimerID);
-	};
-
-	//_ commandsPersistenceTaskStart
-
-	moi.commandsPersistenceTaskStart = function () {
-		OLSKTasks.OLSKTasksTimeoutForTaskObject(moi.propertiesPersistenceTask());
-	};
-
-	//_ commandsPersistUnsavedNotes
-
-	moi.commandsPersistUnsavedNotes = function () {
-		moi.propertiesUnsavedNotes().forEach(function(obj) {
-			moi.commandsPersistNote(obj);
-		});
 	};
 
 	//_ commandsPersistNote
@@ -356,13 +311,13 @@
 	//_ commandsDeleteNoteWithConfirmation
 
 	moi.commandsDeleteNoteWithConfirmation = function (inputData) {
-		var persistenceIsCued = !!moi.propertiesPersistenceTask()._OLSKTaskTimerID;
-
-		moi.commandsPersistenceTaskStop();
+		if (inputData._WKCWriteThrottleObject) {
+			clearInterval(inputData._WKCWriteThrottleObject._OLSKThrottleTimeoutID);
+		}
 
 		if (!window.confirm(OLSKLocalized('WKCWriteNotesDeleteAlertText'))) {
-			if (persistenceIsCued) {
-				moi.commandsPersistenceTaskStart();
+			if (inputData._WKCWriteThrottleObject) {
+				OLSKThrottle.OLSKThrottleTimeoutFor(inputData._WKCWriteThrottleObject);
 			}
 
 			return;
@@ -374,7 +329,9 @@
 	//_ _commandsDeleteNoteWithoutConfirmation
 
 	moi._commandsDeleteNoteWithoutConfirmation = function (inputData) {
-		var persistenceIsCued = !!moi.propertiesPersistenceTask()._OLSKTaskTimerID;
+		if (inputData._WKCWriteThrottleObject) {
+			clearInterval(inputData._WKCWriteThrottleObject._OLSKThrottleTimeoutID);
+		}
 
 		moi.reactPersistenceStatus(OLSKLocalized('WKCWriteDetailToolbarPersistenceStatusDeleting'));
 
@@ -391,10 +348,6 @@
 				return e !== inputData;
 			}));
 
-			moi.propertiesUnsavedNotes(moi.propertiesUnsavedNotes().filter(function(e) {
-				return e !== inputData;
-			}));
-
 			moi.commandsSelectNote(null);
 
 			moi.reactPersistenceStatus(OLSKLocalized('WKCWriteDetailToolbarPersistenceStatusDeleted'), true);
@@ -407,8 +360,8 @@
 
 			throw error;
 		}).finally(function() {
-			if (persistenceIsCued) {
-				moi.commandsPersistenceTaskStart();
+			if (inputData._WKCWriteThrottleObject) {
+				OLSKThrottle.OLSKThrottleTimeoutFor(inputData._WKCWriteThrottleObject);
 			}
 		});
 	};
@@ -521,8 +474,6 @@
 	moi.setupEverything = function () {
 		moi.setupAPIToken(function () {
 			moi.setupNoteObjects(function() {
-				// moi.setupPersistenceTask();
-				// moi.setupBeforeUnload();
 
 				d3.select('#WKCWrite').classed('WKCWriteLoading', false);
 			});
@@ -567,24 +518,6 @@
 
 			completionHandler();
 		}, moi.commandsAlertConnectionError);
-	};
-
-	//_ setupPersistenceTask
-
-	moi.setupPersistenceTask = function () {
-		moi.propertiesUnsavedNotes([]);
-
-		moi.propertiesPersistenceTask({
-			OLSKTaskName: 'WKCTasksEditorPersistence',
-			OLSKTaskFireTimeInterval: 3,
-			OLSKTaskShouldBePerformed: function() {
-				return true;
-			},
-			OLSKTaskFireLimit: 1,
-			OLSKTaskCallback: function () {
-				moi.commandsPersistUnsavedNotes();
-			},
-		});
 	};
 
 	//_ setupBeforeUnload
