@@ -25,7 +25,7 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 				],
 			},
 			WKCRouteAPINotesUpdate: {
-				OLSKRoutePath: '/api/notes/:wkc_note_id(\\d+)',
+				OLSKRoutePath: '/api/notes/:wkc_note_id',
 				OLSKRouteMethod: 'put',
 				OLSKRouteFunction: controllerModule.WKCActionAPINotesUpdate,
 				OLSKRouteMiddlewares: [
@@ -33,7 +33,7 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 				],
 			},
 			WKCRouteAPINotesPublish: {
-				OLSKRoutePath: '/api/notes/:wkc_note_id(\\d+)/publish',
+				OLSKRoutePath: '/api/notes/:wkc_note_id/publish',
 				OLSKRouteMethod: 'put',
 				OLSKRouteFunction: controllerModule.WKCAPINotesPublishAction,
 				OLSKRouteMiddlewares: [
@@ -41,7 +41,7 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 				],
 			},
 			WKCRouteAPINotesUnpublish: {
-				OLSKRoutePath: '/api/notes/:wkc_note_id(\\d+)/unpublish',
+				OLSKRoutePath: '/api/notes/:wkc_note_id/unpublish',
 				OLSKRouteMethod: 'get',
 				OLSKRouteFunction: controllerModule.WKCAPINotesUnpublishAction,
 				OLSKRouteMiddlewares: [
@@ -49,7 +49,7 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 				],
 			},
 			WKCRouteAPINotesDelete: {
-				OLSKRoutePath: '/api/notes/:wkc_note_id(\\d+)',
+				OLSKRoutePath: '/api/notes/:wkc_note_id',
 				OLSKRouteMethod: 'delete',
 				OLSKRouteFunction: controllerModule.WKCAPINotesDeleteAction,
 				OLSKRouteMiddlewares: [
