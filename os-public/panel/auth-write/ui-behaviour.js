@@ -157,15 +157,11 @@
 				moi.reactPersistenceStatus(OLSKLocalized('WKCWriteDetailToolbarPersistenceStatusSaving'));
 			}
 
-			let item = Object.assign({}, inputData);
-
-			delete item._WKCWriteThrottleObject;
-
-			if (!item.WKCNoteID) {
-				return moi._commandsPersistNoteCreate(item, resolve, reject);
+			if (!inputData.WKCNoteID) {
+				return moi._commandsPersistNoteCreate(inputData, resolve, reject);
 			}
 
-			return moi._commandsPersistNoteUpdate(item, resolve, reject);
+			return moi._commandsPersistNoteUpdate(inputData, resolve, reject);
 			
 		})).then(function() {
 			if (inputData === moi.propertiesSelectedNote()) {
@@ -191,13 +187,17 @@
 	//_ _commandsPersistNoteCreate
 
 	moi._commandsPersistNoteCreate = function (inputData, resolve, reject) {
+		let item = Object.assign({}, inputData);
+
+		delete item._WKCWriteThrottleObject;
+
 		return resolve(d3.json(OLSKCanonicalFor('WKCRouteAPINotesCreate'), {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
 				'x-client-key': moi.propertiesAPIToken(),
 			},
-			body: JSON.stringify(inputData),
+			body: JSON.stringify(item),
 		}).then(function(responseJSON) {
 			Object.assign(inputData, responseJSON);
 		}, reject));
@@ -206,6 +206,10 @@
 	//_ _commandsPersistNoteUpdate
 
 	moi._commandsPersistNoteUpdate = function (inputData, resolve, reject) {
+		let item = Object.assign({}, inputData);
+
+		delete item._WKCWriteThrottleObject;
+
 		return resolve(d3.json(OLSKCanonicalFor('WKCRouteAPINotesUpdate', {
 			wkc_note_id: inputData.WKCNoteID,
 		}), {
@@ -214,7 +218,7 @@
 				'Content-Type': 'application/json',
 				'x-client-key': moi.propertiesAPIToken(),
 			},
-			body: JSON.stringify(inputData),
+			body: JSON.stringify(item),
 		}));
 	};
 
