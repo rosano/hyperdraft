@@ -8,6 +8,7 @@ const metalLibrary = require('./metal.js');
 const actionLibrary = require('./action.js');
 
 var modelLibrary = require('./model');
+const versionsModelLibrary = require('../auth-versions/model.js');
 
 //_ OLSKControllerRoutes
 
@@ -41,6 +42,14 @@ exports.OLSKControllerRoutes = function() {
 			OLSKRoutePath: '/api/notes/search',
 			OLSKRouteMethod: 'get',
 			OLSKRouteFunction: exports.WKCAPINotesSearchAction,
+			OLSKRouteMiddlewares: [
+				'WKCSharedMiddlewareAPIAuthenticate',
+			],
+		},
+		WKCRouteAPINotesVersion: {
+			OLSKRoutePath: '/api/notes/:wkc_note_id/version',
+			OLSKRouteMethod: 'post',
+			OLSKRouteFunction: exports.WKCAPINotesVersionAction,
 			OLSKRouteMiddlewares: [
 				'WKCSharedMiddlewareAPIAuthenticate',
 			],
@@ -89,6 +98,18 @@ exports.WKCActionAPINotesUpdate = async function(req, res, next) {
 
 	if (outputData.WKCErrors) {
 		res.status(400);
+	}
+
+	return res.json(outputData);
+};
+
+//_ WKCAPINotesVersionAction
+
+exports.WKCAPINotesVersionAction = async function(req, res, next) {
+	let outputData = await actionLibrary.WKCNotesActionVersion(req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, versionsModelLibrary.WKCVersionsModelPrepare(req.body));
+	
+	if (outputData instanceof Error) {
+		return next(new Error('WKCAPIClientErrorNotFound'));
 	}
 
 	return res.json(outputData);

@@ -161,7 +161,7 @@
 				return moi._commandsPersistNoteCreate(inputData, resolve, reject);
 			}
 
-			return moi._commandsPersistNoteUpdate(inputData, resolve, reject);
+			return moi._commandsPersistNoteVersion(inputData, resolve, reject);
 			
 		})).then(function() {
 			if (inputData === moi.propertiesSelectedNote()) {
@@ -203,22 +203,26 @@
 		}, reject));
 	};
 
-	//_ _commandsPersistNoteUpdate
+	//_ _commandsPersistNoteVersion
 
-	moi._commandsPersistNoteUpdate = function (inputData, resolve, reject) {
+	moi._commandsPersistNoteVersion = function (inputData, resolve, reject) {
 		let item = Object.assign({}, inputData);
 
 		delete item._WKCWriteThrottleObject;
 
-		return resolve(d3.json(OLSKCanonicalFor('WKCRouteAPINotesUpdate', {
+		return resolve(d3.json(OLSKCanonicalFor('WKCRouteAPINotesVersion', {
 			wkc_note_id: inputData.WKCNoteID,
 		}), {
-			method: 'PUT',
+			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
 				'x-client-key': moi.propertiesAPIToken(),
 			},
-			body: JSON.stringify(item),
+			body: JSON.stringify({
+				WKCVersionNoteID: item.WKCNoteID,
+				WKCVersionBody: item.WKCNoteBody,
+				WKCVersionDate: item.WKCNoteDateUpdated,
+			}),
 		}));
 	};
 
