@@ -618,11 +618,15 @@
 			.append('div')
 				.attr('class', 'WKCReadMasterContentListItem')
 				.classed('WKCSharedElementTappable', true);
-		var contextElement = parentElement.append('div').attr('class', 'WKCReadMasterContentListItemContext');
+		var contextElement = parentElement.append('div')
+			.attr('class', 'WKCReadMasterContentListItemContext');
 
-		contextElement.append('span').attr('class', 'WKCReadMasterContentListItemReadStatus').text('⚫︎');
-		contextElement.append('span').attr('class', 'WKCReadMasterContentListItemContextSource');
-		contextElement.append('span').attr('class', 'WKCReadMasterContentListItemContextTiming');
+		contextElement.append('span')
+			.attr('class', 'WKCReadMasterContentListItemReadStatus').text('⚫︎');
+		contextElement.append('span')
+			.attr('class', 'WKCReadMasterContentListItemContextSource');
+		contextElement.append('span')
+			.attr('class', 'WKCReadMasterContentListItemContextTiming');
 
 		parentElement.append('span').attr('class', 'WKCReadMasterContentListItemHeadline');
 		parentElement.append('span').attr('class', 'WKCReadMasterContentListItemSnippet');
