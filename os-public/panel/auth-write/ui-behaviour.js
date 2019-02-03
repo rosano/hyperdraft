@@ -112,7 +112,7 @@
 
 	moi.interfaceEditorTextareaDidReceiveInput = function () {
 		if (d3.event.inputType !== 'insertLineBreak') {
-			return moi.commandsUpdateText(this.value);
+			return moi.commandsSelectedNoteUpdateText(this.value);
 		}
 
 		let previousLines = this.value.substring(0, d3.select(this).property('selectionStart')).split('\n').slice(-3);
@@ -180,9 +180,9 @@
 		moi.propertiesSelectedNote(item);
 	};
 
-	//_ commandsUpdateText
+	//_ commandsSelectedNoteUpdateText
 
-	moi.commandsUpdateText = function (inputData) {
+	moi.commandsSelectedNoteUpdateText = function (inputData) {
 		// moi.commandsPersistenceTaskStop();
 		// moi.commandsPersistenceTaskStart();
 
