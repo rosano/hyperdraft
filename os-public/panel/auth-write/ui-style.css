@@ -33,6 +33,17 @@ body {
 	flex-shrink: 0;
 }
 
+#WKCWriteMasterToolbarFilterInput {
+	height: 14px;
+	padding: 0;
+	margin: 0;
+
+	font-size: 80%;
+
+	/* WKCSharedToolbarFlexboxChild */
+	flex-grow: 1;
+}
+
 #WKCWriteMasterContent {
 	/* @FlexboxWKCWriteMaster child */
 	overflow: auto;
