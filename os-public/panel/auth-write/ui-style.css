@@ -153,6 +153,10 @@ body {
 	/*height: 100%;*/
 }
 
+.CodeMirror-line:nth-child(1) {
+	font-weight: bold;
+}
+
 .CodeMirror-scroll {
 	background: #f8f8f8;
 }
