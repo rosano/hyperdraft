@@ -327,11 +327,11 @@
 
 			moi.reactPersistenceStatus(OLSKLocalized('WKCWriteDetailToolbarPersistenceStatusUnableToDelete'));
 
-			throw error;
-		}).finally(function() {
 			if (inputData._WKCWriteThrottleObject) {
 				OLSKThrottle.OLSKThrottleTimeoutFor(inputData._WKCWriteThrottleObject);
 			}
+
+			throw error;
 		});
 	};
 
