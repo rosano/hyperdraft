@@ -233,11 +233,15 @@
 				moi.reactPersistenceStatus(OLSKLocalized('WKCWriteDetailToolbarPersistenceStatusSaving'));
 			}
 
-			if (!inputData.WKCNoteID) {
-				return moi._commandsPersistNoteCreate(inputData, resolve, reject);
+			let item = Object.assign({}, inputData);
+
+			delete item._WKCWriteThrottleObject;
+
+			if (!item.WKCNoteID) {
+				return moi._commandsPersistNoteCreate(item, resolve, reject);
 			}
 
-			return moi._commandsPersistNoteUpdate(inputData, resolve, reject);
+			return moi._commandsPersistNoteUpdate(item, resolve, reject);
 			
 		})).then(function() {
 			if (inputData === moi.propertiesSelectedNote()) {
