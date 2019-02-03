@@ -34,7 +34,7 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 			},
 			WKCRouteAPINotesPublish: {
 				OLSKRoutePath: '/api/notes/:wkc_note_id/publish',
-				OLSKRouteMethod: 'put',
+				OLSKRouteMethod: 'get',
 				OLSKRouteFunction: controllerModule.WKCAPINotesPublishAction,
 				OLSKRouteMiddlewares: [
 					'WKCSharedMiddlewareAPIAuthenticate',

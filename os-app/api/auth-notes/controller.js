@@ -31,7 +31,7 @@ exports.OLSKControllerRoutes = function() {
 		},
 		WKCRouteAPINotesPublish: {
 			OLSKRoutePath: '/api/notes/:wkc_note_id/publish',
-			OLSKRouteMethod: 'put',
+			OLSKRouteMethod: 'get',
 			OLSKRouteFunction: exports.WKCAPINotesPublishAction,
 			OLSKRouteMiddlewares: [
 				'WKCSharedMiddlewareAPIAuthenticate',

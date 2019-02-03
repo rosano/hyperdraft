@@ -230,7 +230,7 @@
 		d3.json(OLSKCanonicalFor('WKCRouteAPINotesPublish', {
 			wkc_note_id: inputData.WKCNoteID,
 		}), {
-			method: 'PUT',
+			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',
 				'x-client-key': moi.propertiesAPIToken(),
