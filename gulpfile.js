@@ -11,6 +11,7 @@ const NODE_MODULE_NAMES = [
 	'OLSKRouting',
 	'OLSKType',
 	'OLSKString',
+	'OLSKThrottle',
 	'ispinner.css',
 	'identicon.js',
 	'blueimp-md5',

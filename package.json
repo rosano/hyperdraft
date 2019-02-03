@@ -17,6 +17,9 @@
     "// TASKS": null,
     "OLSKTasks": "olsk/OLSKTasks",
 
+    "// THROTTLE": null,
+    "OLSKThrottle": "olsk/OLSKThrottle",
+
     "// SUGGEST": null,
     "url-parse": "latest",
 
