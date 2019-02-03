@@ -87,38 +87,6 @@
 		moi.commandsUnpublishNote(moi.propertiesSelectedNote());
 	};
 
-	//_ interfaceEditorTextareaDidReceiveInput
-
-	moi.interfaceEditorTextareaDidReceiveInput = function () {
-		// if (d3.event.inputType !== 'insertLineBreak') {
-			return moi.commandsSelectedNoteUpdateBody(this.value);
-		// }
-
-		let previousLines = this.value.substring(0, d3.select(this).property('selectionStart')).split('\n').slice(-3);
-
-		if (previousLines.slice(-2).shift().indexOf('-') !== 0) {
-			return;
-		}
-
-		if (previousLines.filter(function (e) {
-			return e === '- ';
-		}).length) {
-			return;
-		}
-
-		let cursorPositon = d3.select(this).property('selectionStart');
-		
-		this.value = [
-			this.value.substring(0, d3.select(this).property('selectionStart')),
-			'- ',
-			this.value.substring(d3.select(this).property('selectionEnd')),
-		].join('');
-
-		d3.select(this)
-			.property('selectionStart', cursorPositon + 2)
-			.property('selectionEnd', cursorPositon + 2);
-	};
-
 	//# COMMANDS
 
 	//_ commandsAlertConnectionError
