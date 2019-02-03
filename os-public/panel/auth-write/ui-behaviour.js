@@ -444,7 +444,7 @@
 			});
 
 		parentElement.classed('WKCWriteMasterContentListItemUnpersisted', function (obj) {
-			return obj._WKCWriteIsUnpersisted;
+			return obj._WKCWriteThrottleObject;
 		});
 		parentElement.select('.WKCWriteMasterContentListItemContextTitle')
 			.text(function (e) {
