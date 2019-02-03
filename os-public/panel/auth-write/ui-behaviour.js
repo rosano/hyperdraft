@@ -13,6 +13,8 @@
 	var moi = {};
 
 	var WCKWriteBehaviourPropertyAPIToken;
+	let WCKWriteBehaviourPropertyNoteObjects;
+	let WCKWriteBehaviourPropertyCurrentFilter;
 	var WCKWriteBehaviourPropertySelectedNote;
 	let WCKWriteBehaviourPropertyEditor;
 
@@ -32,10 +34,24 @@
 
 	moi.propertiesNoteObjects = function (inputData) {
 		if (typeof inputData === 'undefined') {
-			return d3.selectAll('.WKCWriteMasterContentListItem').data();
+			return WCKWriteBehaviourPropertyNoteObjects;
 		}
 
-		moi.reactNoteObjects(inputData.sort(WKCWriteLogic.WKCWriteLogicListSort));
+		WCKWriteBehaviourPropertyNoteObjects = inputData
+
+		moi.reactNoteObjects(WCKWriteBehaviourPropertyNoteObjects.sort(WKCWriteLogic.WKCWriteLogicListSort));
+	};
+
+	//_ propertiesCurrentFilter
+
+	moi.propertiesCurrentFilter = function (inputData) {
+		if (typeof inputData === 'undefined') {
+			return WCKWriteBehaviourPropertyCurrentFilter;
+		}
+
+		WCKWriteBehaviourPropertyCurrentFilter = inputData === null ? undefined : inputData;
+
+		moi.propertiesNoteObjects(moi.propertiesNoteObjects());
 	};
 
 	//_ propertiesSelectedNote
@@ -62,6 +78,12 @@
 	};
 
 	//# INTERFACE
+
+	//_ interfaceNotesMasterToolbarFilterInputDidChange
+
+	moi.interfaceNotesMasterToolbarFilterInputDidChange = function () {
+		moi.commandsNotesFilter(document.getElementById('WKCWriteMasterToolbarFilterInput').value);
+	};
 
 	//_ interfaceNotesMasterToolbarCreateButtonDidClick
 
@@ -111,6 +133,12 @@
 		window.alert(OLSKLocalized('WKCWriteErrorNotesUnavailable'));
 
 		throw new Error('WKCWriteErrorNotesUnavailable');
+	};
+
+	//_ commandsNotesFilter
+
+	moi.commandsNotesFilter = function (inputData) {
+		moi.propertiesCurrentFilter(inputData)
 	};
 
 	//_ commandsNotesCreate
@@ -349,7 +377,12 @@
 
 	moi.reactNoteObjects = function (noteObjects) {
 		var selection = d3.select('#WKCWriteMasterContentList')
-			.selectAll('.WKCWriteMasterContentListItem').data(noteObjects);
+			.selectAll('.WKCWriteMasterContentListItem').data(noteObjects.filter(function (e) {
+				if (moi.propertiesCurrentFilter()) {
+					return e.WKCNoteBody.toLowerCase().match(moi.propertiesCurrentFilter().toLowerCase())
+				}
+				return true;
+			}));
 		
 		var parentElement = selection.enter().append('div')
 			.attr('class', 'WKCWriteMasterContentListItem')
