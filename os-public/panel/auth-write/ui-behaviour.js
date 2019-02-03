@@ -550,13 +550,14 @@
 			moi.commandsSelectedNoteUpdateBody(instance.getValue());
 		});
 
-		WCKWriteBehaviourPropertyEditor.on('mousedown', function(instance, e) {
-		  if (e.target.className.match('cm-link'))  {
-		    console.log( e.target.textContent );
+		document.querySelector('.CodeMirror').addEventListener('mouseup', function (event) {
+			if (!event.target.className.match('cm-link'))  {
+				return;
+			}
 
-		    return e.preventDefault();
-		  }
-		    
+			if (!!URLParse(event.target.textContent, {}).protocol) {
+				open(event.target.textContent);
+			}
 		});
 	};
 
