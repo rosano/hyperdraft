@@ -81,4 +81,16 @@ describe('WKCVersionsMetalQuery', function testWKCVersionsMetalQuery() {
 		assert.deepEqual(await mainModule.WKCVersionsMetalQuery(WKCTestingMongoClient, {}), items.reverse());
 	});
 
+	it('filters result by query', async function() {
+		let items = await Promise.all(['alfa', 'bravo'].map(async function (e) {
+			return await mainModule.WKCVersionsMetalCreate(WKCTestingMongoClient, Object.assign(kTesting.StubValidVersion(), {
+				WKCVersionBody: e,
+			}));
+		}));
+
+		assert.deepEqual(await mainModule.WKCVersionsMetalQuery(WKCTestingMongoClient, {
+			WKCVersionBody: 'bravo',
+		}), [items.pop()]);
+	});
+
 });
