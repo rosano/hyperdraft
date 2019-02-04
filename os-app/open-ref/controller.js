@@ -32,7 +32,7 @@ exports.WKCActionHomeIndex = function(req, res, next) {
 		'read',
 	].join('/'), {
 		WKCNoteObject: {
-			WKCNoteDetectedTitle: 'Welcome',
+			WKCNoteDetectedTitle: res.locals.OLSKLocalized('WKCHomeTitle'),
 			WKCNoteDetectedBody: '',
 		},
 		markedPackage: markedPackage,
