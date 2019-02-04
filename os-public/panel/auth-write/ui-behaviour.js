@@ -165,28 +165,6 @@
 		throw new Error('WKCWriteErrorNotesUnavailable');
 	};
 
-	//_ commandsNotesFilter
-
-	moi.commandsNotesFilter = function (inputData) {
-		moi.propertiesCurrentFilter(inputData)
-
-		let item = moi.propertiesNoteObjects().filter(function (e) {
-			return WKCParser.WKCParserTitleForPlaintext(e.WKCNoteBody).toLowerCase() === inputData.toLowerCase();
-		}).shift();
-
-		if (item) {
-			return moi.commandsNotesSelect(item);
-		}
-	};
-
-	//_ commandsNotesFilterManual
-
-	moi.commandsNotesFilterManual = function (inputData) {
-		moi.commandsNotesFilter(inputData);
-
-		moi.reactCurrentFilterManual(inputData);
-	};
-
 	//_ commandsNotesCreate
 
 	moi.commandsNotesCreate = function () {
@@ -302,6 +280,28 @@
 				WKCVersionDate: item.WKCNoteDateUpdated,
 			}),
 		}));
+	};
+
+	//_ commandsNotesFilter
+
+	moi.commandsNotesFilter = function (inputData) {
+		moi.propertiesCurrentFilter(inputData)
+
+		let item = moi.propertiesNoteObjects().filter(function (e) {
+			return WKCParser.WKCParserTitleForPlaintext(e.WKCNoteBody).toLowerCase() === inputData.toLowerCase();
+		}).shift();
+
+		if (item) {
+			return moi.commandsNotesSelect(item);
+		}
+	};
+
+	//_ commandsNotesFilterManual
+
+	moi.commandsNotesFilterManual = function (inputData) {
+		moi.commandsNotesFilter(inputData);
+
+		moi.reactCurrentFilterManual(inputData);
 	};
 
 	//_ commandsPublishNote
