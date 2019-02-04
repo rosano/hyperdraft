@@ -26,6 +26,16 @@
 		return document.getElementById('WKCWriteMasterToolbarFilterInput');
 	};
 
+	//# DATA
+
+	//_ dataNoteObjectsFiltered
+
+	moi.dataNoteObjectsFiltered = function () {
+		return moi.propertiesNoteObjects().filter(function (e) {
+			return !moi.propertiesCurrentFilter() ? true : e.WKCNoteBody.toLowerCase().match(moi.propertiesCurrentFilter().toLowerCase());
+		})
+	};
+
 	//# PROPERTIES
 
 	//_ propertiesAPIToken
@@ -45,9 +55,9 @@
 			return WCKWriteBehaviourPropertyNoteObjects.slice();
 		}
 
-		WCKWriteBehaviourPropertyNoteObjects = inputData
+		WCKWriteBehaviourPropertyNoteObjects = inputData.sort(WKCWriteLogic.WKCWriteLogicListSort);
 
-		moi.reactNoteObjects(WCKWriteBehaviourPropertyNoteObjects.sort(WKCWriteLogic.WKCWriteLogicListSort));
+		moi.reactNoteObjects(moi.dataNoteObjectsFiltered());
 	};
 
 	//_ propertiesCurrentFilter
@@ -182,13 +192,15 @@
 	//_ commandsNotesSelectPrevious
 
 	moi.commandsNotesSelectPrevious = function () {
-		moi.commandsNotesSelect(moi.propertiesNoteObjects()[Math.max(moi.propertiesNoteObjects().indexOf(moi.propertiesSelectedNote()) - 1, 0)]);
+		let items = moi.dataNoteObjectsFiltered();
+		moi.commandsNotesSelect(items[Math.max(items.indexOf(moi.propertiesSelectedNote()) - 1, 0)]);
 	};
 
 	//_ commandsNotesSelectNext
 
 	moi.commandsNotesSelectNext = function () {
-		moi.commandsNotesSelect(moi.propertiesNoteObjects()[Math.min(moi.propertiesNoteObjects().indexOf(moi.propertiesSelectedNote()) + 1, moi.propertiesNoteObjects().length - 1)]);
+		let items = moi.dataNoteObjectsFiltered();
+		moi.commandsNotesSelect(items[Math.min(items.indexOf(moi.propertiesSelectedNote()) + 1, items.length - 1)]);
 	};
 
 	//_ commandsSelectedNoteUpdateBody
@@ -210,7 +222,7 @@
 
 		OLSKThrottle.OLSKThrottleTimeoutFor(item._WKCWriteThrottleObject);
 
-		moi.reactNoteObjects(moi.propertiesNoteObjects());
+		moi.reactNoteObjects(moi.dataNoteObjectsFiltered());
 	};
 
 	//_ commandsPersistNote
@@ -463,14 +475,9 @@
 
 	//_ reactNoteObjects
 
-	moi.reactNoteObjects = function (noteObjects) {
+	moi.reactNoteObjects = function (inputData) {
 		var selection = d3.select('#WKCWriteMasterContentList')
-			.selectAll('.WKCWriteMasterContentListItem').data(noteObjects.filter(function (e) {
-				if (moi.propertiesCurrentFilter()) {
-					return e.WKCNoteBody.toLowerCase().match(moi.propertiesCurrentFilter().toLowerCase())
-				}
-				return true;
-			}));
+			.selectAll('.WKCWriteMasterContentListItem').data(inputData);
 		
 		var parentElement = selection.enter().append('div')
 			.attr('class', 'WKCWriteMasterContentListItem')
