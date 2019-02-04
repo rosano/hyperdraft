@@ -185,7 +185,7 @@
 
 		if (!item._WKCWriteThrottleObject) {
 			item._WKCWriteThrottleObject = {
-				OLSKThrottleDuration: 2000,
+				OLSKThrottleDuration: 3000,
 				OLSKThrottleCallback: function () {
 					moi.commandsPersistNote(item);
 				},
