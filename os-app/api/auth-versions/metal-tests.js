@@ -45,6 +45,22 @@ describe('WKCVersionsMetalCreate', function testWKCVersionsMetalCreate() {
 
 });
 
+describe('WKCVersionsMetalDelete', function testWKCVersionsMetalDelete() {
+
+	it('rejects if not string', async function() {
+		await assert.rejects(mainModule.WKCVersionsMetalDelete(WKCTestingMongoClient, 1), /WKCErrorInvalidInput/);
+	});
+
+	it('returns error if not found', async function() {
+		assert.deepEqual(await mainModule.WKCVersionsMetalDelete(WKCTestingMongoClient, 'alfa'), new Error('WKCErrorNotFound'))
+	});
+
+	it('returns true', async function() {
+		assert.deepEqual(await mainModule.WKCVersionsMetalDelete(WKCTestingMongoClient, (await mainModule.WKCVersionsMetalCreate(WKCTestingMongoClient, kTesting.StubValidVersion())).WKCVersionID), true);
+	});
+
+});
+
 describe('WKCVersionsMetalSearch', function testWKCVersionsMetalSearch() {
 
 	it('rejects if not object', async function() {

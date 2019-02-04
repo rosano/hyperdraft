@@ -31,6 +31,18 @@ exports.WKCVersionsMetalCreate = async function(databaseClient, inputData) {
 	return Promise.resolve(outputData);
 };
 
+//_ WKCVersionsMetalDelete
+
+exports.WKCVersionsMetalDelete = async function(databaseClient, inputData) {
+	if (typeof inputData !== 'string') {
+		return Promise.reject(new Error('WKCErrorInvalidInput'));
+	}
+
+	return Promise.resolve(!(await databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_versions').deleteOne({
+		WKCVersionID: inputData,
+	})).result.n ? new Error('WKCErrorNotFound') : true);
+};
+
 //_ WKCVersionsMetalSearch
 
 exports.WKCVersionsMetalSearch = async function(databaseClient, inputData) {
