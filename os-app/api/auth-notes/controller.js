@@ -142,7 +142,7 @@ exports.WKCAPINotesUnpublishAction = async function(req, res, next) {
 //_ WKCAPINotesDeleteAction
 
 exports.WKCAPINotesDeleteAction = async function(req, res, next) {
-	let outputData = await metalLibrary.WKCNotesMetalDelete(req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, req.params.wkc_note_id);
+	let outputData = await actionLibrary.WKCNotesActionDelete(req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, req.params.wkc_note_id);
 	
 	if (outputData !== true) {
 		return next(new Error('WKCAPIClientErrorNotFound'));

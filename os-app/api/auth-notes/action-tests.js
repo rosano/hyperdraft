@@ -70,7 +70,7 @@ describe('WKCNotesActionPublish', function testWKCNotesActionPublish() {
 		let serialPromises = async function () {
 			return ['alfa', 'bravo'].reduce(function (coll, e) {
 				return coll.then(async function () {
-					await metalLibrary.WKCNotesMetalDelete(WKCTestingMongoClient, (await mainModule.WKCNotesActionPublish(WKCTestingMongoClient, (await metalLibrary.WKCNotesMetalCreate(WKCTestingMongoClient, Object.assign(kTesting.StubNoteObjectValid(), {
+					await mainModule.WKCNotesActionDelete(WKCTestingMongoClient, (await mainModule.WKCNotesActionPublish(WKCTestingMongoClient, (await metalLibrary.WKCNotesMetalCreate(WKCTestingMongoClient, Object.assign(kTesting.StubNoteObjectValid(), {
 						WKCNoteBody: e,
 					}))).WKCNoteID)).WKCNoteID);
 				});
