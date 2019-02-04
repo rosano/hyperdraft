@@ -391,6 +391,22 @@
 		});
 	};
 
+	//_ _commandsOpenTextObject
+
+	moi._commandsOpenTextObject = function (inputData) {
+		if (!!URLParse(inputData, {}).protocol) {
+			return window.open(inputData, '_blank');
+		}
+
+		let matches = inputData.match(/\[\[(.*)\]\]/);
+		if (!matches) {
+			return;
+		}
+
+		event.preventDefault();
+		return moi.commandsNotesFilterManual(matches.pop());
+	};
+
 	//# REACT
 
 	//_ reactNoteObjects
@@ -570,6 +586,19 @@
 		  lineWrapping: true,
 		  extraKeys: {
 		    Enter: 'newlineAndIndentContinueMarkdownList',
+		    'Cmd-Alt-Enter': function (a, b, c) {
+		    	let cursor = WCKWriteBehaviourPropertyEditor.getCursor();
+
+		    	let currentObject = WKCWriteLogic.WKCWriteLineObjectsFor(WCKWriteBehaviourPropertyEditor.getLineTokens(cursor.line)).filter(function (e) {
+		    		return Math.max(e.start, Math.min(e.end, cursor.ch)) === cursor.ch;
+		    	}).shift();
+
+		    	if (!currentObject.type.match('link')) {
+		    		return;
+		    	}
+
+		    	moi._commandsOpenTextObject(currentObject.string);
+		    },
 		    Esc: function () {
 		      return d3.select('#WKCWriteMasterToolbarCreateButton').node().focus();
 		    },
@@ -590,15 +619,7 @@
 				return;
 			}
 
-			if (!!URLParse(event.target.textContent, {}).protocol) {
-				return open(event.target.textContent);
-			}
-
-			let matches = event.target.textContent.match(/\[\[(.*)\]\]/);
-			if (matches) {
-				event.preventDefault();
-				return moi.commandsNotesFilterManual(matches.pop());
-			}
+			moi._commandsOpenTextObject(event.target.textContent);
 		});
 	};
 
