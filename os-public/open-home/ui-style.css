@@ -13,6 +13,8 @@ header,article {
 
 article {
 	background: #ffffff;
+
+	word-wrap: break-word;
 }
 
 blockquote {
