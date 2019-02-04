@@ -492,6 +492,8 @@
 		parentElement
 			.on('click', function(obj) {
 				moi.commandsNotesSelect(obj);
+				
+				WCKWriteBehaviourPropertyEditor.focus();
 			});
 
 		parentElement.classed('WKCWriteMasterContentListItemUnpersisted', function (obj) {
@@ -527,10 +529,6 @@
 		d3.select('#WKCWriteDetail').classed('WKCWriteDetailInactive', !inputData);
 
 		WCKWriteBehaviourPropertyEditor.setValue(inputData ? inputData.WKCNoteBody : '');
-		
-		if (inputData) {
-			WCKWriteBehaviourPropertyEditor.focus();
-		}
 
 		moi.reactPublishStatus(inputData);
 	};
