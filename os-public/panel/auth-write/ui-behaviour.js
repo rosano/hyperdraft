@@ -131,6 +131,12 @@
 		moi.commandsUnpublishNote(moi.propertiesSelectedNote());
 	};
 
+	//_ interfaceClearInputShortcutDidInvoke
+
+	moi.interfaceClearInputShortcutDidInvoke = function (event) {
+		moi.commandsNotesFilterManual('');
+	};
+
 	//_ interfaceToggleTabFocusShortcutDidInvoke
 
 	moi.interfaceToggleTabFocusShortcutDidInvoke = function (event) {
@@ -745,6 +751,16 @@
 				return event.key === 'Tab';
 			})()) {
 				return moi.interfaceToggleTabFocusShortcutDidInvoke(event);
+			};
+
+			if ((function() {
+				if (document.activeElement !== moi.kDefaultFocusNode()) {
+					return false;
+				}
+
+				return event.key === 'Escape';
+			})()) {
+				return moi.interfaceClearInputShortcutDidInvoke(event);
 			};
 		});
 	};
