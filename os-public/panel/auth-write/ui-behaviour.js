@@ -287,9 +287,6 @@
 				'Content-Type': 'application/json',
 				'x-client-key': moi.propertiesAPIToken(),
 			},
-			body: JSON.stringify({
-				WKCNotePublishStatusIsPublished: true,
-			}),
 		}).then(function(responseJSON) {
 			Object.assign(inputData, responseJSON);
 
