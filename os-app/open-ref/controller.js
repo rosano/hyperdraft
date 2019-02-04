@@ -4,8 +4,6 @@
  * MIT Licensed
  */
 
-const markedPackage = require('marked');
-
 //_ OLSKControllerRoutes
 
 exports.OLSKControllerRoutes = function() {
@@ -27,15 +25,11 @@ exports.OLSKControllerRoutes = function() {
 //_ WKCActionHomeIndex
 
 exports.WKCActionHomeIndex = function(req, res, next) {
-	return res.render([
-		__dirname,
-		'read',
-	].join('/'), {
+	return res.render(req.OLSKLive.OLSKLivePathJoin(__dirname, 'view'), {
 		WKCNoteObject: {
 			WKCNoteDetectedTitle: res.locals.OLSKLocalized('WKCHomeTitle'),
 			WKCNoteDetectedBody: '',
 		},
-		markedPackage: markedPackage,
 	});
 };
 
@@ -52,13 +46,9 @@ exports.WKCActionRefsRead = async function(req, res, next) {
 	}
 
 	item.WKCNoteDetectedTitle = WKCParser.WKCParserTitleForPlaintext(item.WKCNoteBody);
-	item.WKCNoteDetectedBody = WKCParser.WKCParserBodyForPlaintext(item.WKCNoteBody);
+	item.WKCNoteDetectedBody = WKCParser.WKCParserHTMLForPlaintext(WKCParser.WKCParserBodyForPlaintext(item.WKCNoteBody));
 
-	return res.render([
-		__dirname,
-		'read',
-	].join('/'), {
+	return res.render(req.OLSKLive.OLSKLivePathJoin(__dirname, 'view'), {
 		WKCNoteObject: item,
-		markedPackage: markedPackage,
 	});
 };

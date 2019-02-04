@@ -9,7 +9,8 @@
     "OldSkool": "olsk/OldSkool",
 
     "// MARKDOWN": null,
-    "marked": "latest",
+    "turndown": "latest",
+    "showdown": "latest",
 
     "// PERSIST": null,
     "mongodb": "^3.0.7",

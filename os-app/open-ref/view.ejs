@@ -14,7 +14,7 @@ locals.OLSKPageAssets = [
 <article>
 	<h1><%= locals.WKCNoteObject.WKCNoteDetectedTitle %></h1>
 
-	<%- markedPackage(locals.WKCNoteObject.WKCNoteDetectedBody) %>
+	<%- locals.WKCNoteObject.WKCNoteDetectedBody %>
 </article>
 
 <%- include('../_shared/WKCLayout/footer.ejs') %>
