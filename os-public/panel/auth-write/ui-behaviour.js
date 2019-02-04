@@ -37,7 +37,16 @@
 
 		return moi.propertiesNoteObjects().filter(function (e) {
 			return e.WKCNoteBody.toLowerCase().match(moi.propertiesCurrentFilter().toLowerCase());
-		})
+		});
+	};
+
+	//_ dataNoteObjectPreparedFor
+
+	moi.dataNoteObjectPreparedFor = function (inputData) {
+		return Object.assign(inputData, {
+			WKCNoteDateCreated: new Date(inputData.WKCNoteDateCreated),
+			WKCNoteDateUpdated: new Date(inputData.WKCNoteDateUpdated),
+		});
 	};
 
 	//# PROPERTIES
@@ -283,7 +292,7 @@
 			},
 			body: JSON.stringify(item),
 		}).then(function(responseJSON) {
-			Object.assign(inputData, responseJSON);
+			Object.assign(inputData, moi.dataNoteObjectPreparedFor(responseJSON));
 		}, reject));
 	};
 
@@ -350,7 +359,7 @@
 				'x-client-key': moi.propertiesAPIToken(),
 			},
 		}).then(function(responseJSON) {
-			moi.reactPublishStatus(Object.assign(inputData, responseJSON));
+			moi.reactPublishStatus(Object.assign(inputData, moi.dataNoteObjectPreparedFor(responseJSON)));
 		}, function(error) {
 			if (window.confirm(OLSKLocalized('WKCWriteErrorPublishDidFail'))) {
 				return moi.commandsPublishNote(inputData);
@@ -376,7 +385,7 @@
 				'x-client-key': moi.propertiesAPIToken(),
 			},
 		}).then(function(responseJSON) {
-			moi.reactPublishStatus(Object.assign(inputData, responseJSON));
+			moi.reactPublishStatus(Object.assign(inputData, moi.dataNoteObjectPreparedFor(responseJSON)));
 		}, function(error) {
 			if (window.confirm(OLSKLocalized('WKCWriteErrorUnpublishDidFail'))) {
 				return moi.commandsUnpublishNote(inputData);
@@ -642,12 +651,7 @@
 				return moi.commandsAlertNotesUnavailable();
 			}
 
-			moi.propertiesNoteObjects(responseJSON.map(function(e) {
-				return Object.assign(e, {
-					WKCNoteDateCreated: new Date(e.WKCNoteDateCreated),
-					WKCNoteDateUpdated: new Date(e.WKCNoteDateUpdated),
-				});
-			}));
+			moi.propertiesNoteObjects(responseJSON.map(moi.dataNoteObjectPreparedFor));
 
 			completionHandler();
 		}, moi.commandsAlertConnectionError);
