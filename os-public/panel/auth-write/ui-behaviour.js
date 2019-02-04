@@ -212,6 +212,10 @@
 
 	moi.commandsNotesSelect = function (item) {
 		moi.propertiesSelectedNote(item);
+
+		if (!item) {
+			moi.kDefaultFocusNode().focus();
+		}
 	};
 
 	//_ commandsNotesSelectPrevious
