@@ -318,9 +318,7 @@
 				'x-client-key': moi.propertiesAPIToken(),
 			},
 		}).then(function(responseJSON) {
-			Object.assign(inputData, responseJSON);
-
-			moi.reactPublishStatus();
+			moi.reactPublishStatus(Object.assign(inputData, responseJSON));
 		}, function(error) {
 			if (window.confirm(OLSKLocalized('WKCWriteErrorPublishDidFail'))) {
 				return moi.commandsPublishNote(inputData);
@@ -346,9 +344,7 @@
 				'x-client-key': moi.propertiesAPIToken(),
 			},
 		}).then(function(responseJSON) {
-			Object.assign(inputData, responseJSON);
-
-			moi.reactPublishStatus();
+			moi.reactPublishStatus(Object.assign(inputData, responseJSON));
 		}, function(error) {
 			if (window.confirm(OLSKLocalized('WKCWriteErrorUnpublishDidFail'))) {
 				return moi.commandsUnpublishNote(inputData);
@@ -536,28 +532,24 @@
 			WCKWriteBehaviourPropertyEditor.focus();
 		}
 
-		if (!inputData) {
-			return;
-		}
-
-		moi.reactPublishStatus();
+		moi.reactPublishStatus(inputData);
 	};
 
 	//_ reactPublishStatus
 
-	moi.reactPublishStatus = function () {
-		d3.select('#WKCWriteDetailToolbarPublishStatus').html(moi.propertiesSelectedNote().WKCNotePublishStatusIsPublished ? OLSKLocalized('WKCWriteDetailToolbarPublishStatusPublished') : null);
+	moi.reactPublishStatus = function (inputData) {
+		d3.select('#WKCWriteDetailToolbarPublishStatus').html(inputData && inputData.WKCNotePublishStatusIsPublished ? OLSKLocalized('WKCWriteDetailToolbarPublishStatusPublished') : null);
 
 		d3.select('#WKCWriteDetailToolbarVisitButton')
-			.classed('WKCSharedHidden', moi.propertiesSelectedNote() ? !moi.propertiesSelectedNote().WKCNotePublishStatusIsPublished : false)
-			.attr('href', moi.propertiesSelectedNote() && moi.propertiesSelectedNote().WKCNotePublishStatusIsPublished ? OLSKCanonicalFor('WKCRouteRefsRead', {
-				wkc_note_public_id: moi.propertiesSelectedNote().WKCNotePublicID,
+			.classed('WKCSharedHidden', inputData ? !inputData.WKCNotePublishStatusIsPublished : false)
+			.attr('href', inputData && inputData.WKCNotePublishStatusIsPublished ? OLSKCanonicalFor('WKCRouteRefsRead', {
+				wkc_note_public_id: inputData.WKCNotePublicID,
 			}) : undefined);
 
 		d3.select('#WKCWriteDetailToolbarPublishButton')
-			.classed('WKCSharedHidden', moi.propertiesSelectedNote() ? moi.propertiesSelectedNote().WKCNotePublishStatusIsPublished : false);
+			.classed('WKCSharedHidden', inputData ? inputData.WKCNotePublishStatusIsPublished : false);
 		d3.select('#WKCWriteDetailToolbarUnpublishButton')
-			.classed('WKCSharedHidden', moi.propertiesSelectedNote() ? !moi.propertiesSelectedNote().WKCNotePublishStatusIsPublished : false);
+			.classed('WKCSharedHidden', inputData ? !inputData.WKCNotePublishStatusIsPublished : false);
 	};
 
 	//_ reactPersistenceStatus
