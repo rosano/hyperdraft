@@ -307,7 +307,11 @@
 	//_ commandsNotesFilter
 
 	moi.commandsNotesFilter = function (inputData) {
-		moi.propertiesCurrentFilter(inputData)
+		moi.propertiesCurrentFilter(inputData);
+
+		if (!inputData.length) {
+			return moi.commandsNotesSelect(null);
+		}
 
 		let item = moi.propertiesNoteObjects().filter(function (e) {
 			return WKCParser.WKCParserTitleForPlaintext(e.WKCNoteBody).toLowerCase().match(inputData.toLowerCase());
