@@ -719,6 +719,16 @@
 					return moi.interfaceSelectNextShortcutDidInvoke();
 				}
 			};
+
+			if ((function() {
+				if (document.activeElement !== moi.kDefaultFocusNode()) {
+					return false;
+				}
+
+				return event.key === 'Tab';
+			})()) {
+				return moi.interfaceToggleTabFocusShortcutDidInvoke(event);
+			};
 		});
 	};
 
