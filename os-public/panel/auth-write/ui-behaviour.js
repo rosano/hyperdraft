@@ -121,6 +121,12 @@
 		moi.commandsUnpublishNote(moi.propertiesSelectedNote());
 	};
 
+	//_ interfaceToggleTabFocusShortcutDidInvoke
+
+	moi.interfaceToggleTabFocusShortcutDidInvoke = function (event) {
+		moi.commandsToggleTabFocus(event);
+	};
+
 	//# COMMANDS
 
 	//_ commandsAlertConnectionError
@@ -420,6 +426,19 @@
 		return moi.commandsNotesFilterManual(matches.pop());
 	};
 
+	//_ commandsToggleTabFocus
+
+	moi.commandsToggleTabFocus = function (event) {
+		if (WCKWriteBehaviourPropertyEditor.hasFocus()) {
+			return moi.kDefaultFocusNode().focus();
+		}
+
+		if (document.activeElement === moi.kDefaultFocusNode()) {
+			event.preventDefault();
+			return WCKWriteBehaviourPropertyEditor.focus();
+		}
+	};
+
 	//# REACT
 
 	//_ reactNoteObjects
@@ -539,6 +558,7 @@
 		moi.setupAPIToken(function () {
 			moi.setupNoteObjects(function() {
 				moi.setupEditor();
+				moi.setupShortcuts();
 				moi.setupBeforeUnload();
 
 				d3.select('#WKCWrite').classed('WKCWriteLoading', false);
@@ -649,6 +669,30 @@
 			}
 
 			moi._commandsOpenTextObject(event.target.textContent);
+		});
+	};
+
+	//_ setupShortcuts
+
+	moi.setupShortcuts = function () {
+		window.addEventListener('keydown', function (event) {
+			if ((function() {
+				if (!moi.propertiesSelectedNote()) {
+					return false;
+				}
+
+				if (!event.shiftKey) {
+					return false;
+				}
+
+				if (event.key !== 'Tab') {
+					return false;
+				}
+
+				return true;
+			})()) {
+				return moi.interfaceToggleTabFocusShortcutDidInvoke(event);
+			};
 		});
 	};
 
