@@ -31,8 +31,12 @@
 	//_ dataNoteObjectsFiltered
 
 	moi.dataNoteObjectsFiltered = function () {
+		if (!moi.propertiesCurrentFilter()) {
+			return moi.propertiesNoteObjects();
+		}
+
 		return moi.propertiesNoteObjects().filter(function (e) {
-			return !moi.propertiesCurrentFilter() ? true : e.WKCNoteBody.toLowerCase().match(moi.propertiesCurrentFilter().toLowerCase());
+			return e.WKCNoteBody.toLowerCase().match(moi.propertiesCurrentFilter().toLowerCase());
 		})
 	};
 
