@@ -697,7 +697,7 @@
 			event.preventDefault();
 
 			setTimeout(function () {
-				moi.kDefaultFocusNode().focus()
+				// moi.kDefaultFocusNode().focus()
 				// moi.kDefaultFocusNode().dispatchEvent(new KeyboardEvent('keydown', {
 				// 	altKey: true,
 				// 	ctrlKey: true,
