@@ -16,7 +16,7 @@ exports._WKCSettingsMetalSet = async function(databaseClient, param1, param2) {
 	}
 
 	let outputData = (await databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_settings').findOneAndUpdate({
-		WKCSettingsKey: param1,
+		WKCSettingKey: param1,
 	}, {
 		'$set': {
 			WKCSettingValue: param2,
@@ -37,7 +37,7 @@ exports._WKCSettingsMetalGet = async function(databaseClient, inputData) {
 	}
 
 	let outputData = await databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_settings').findOne({
-		WKCSettingsKey: inputData,
+		WKCSettingKey: inputData,
 	});
 
 	return Promise.resolve(outputData ? outputData.WKCSettingValue : undefined);
