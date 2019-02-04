@@ -332,6 +332,10 @@
 			return moi.commandsNotesSelect(null);
 		}
 
+		if (!moi.dataNoteObjectsFiltered().length) {
+			return moi.commandsNotesSelect(null);
+		}
+
 		let item = moi.dataNoteObjectsFiltered().filter(function (e) {
 			return WKCParser.WKCParserTitleForPlaintext(e.WKCNoteBody).toLowerCase().match(inputData.toLowerCase());
 		}).shift();
