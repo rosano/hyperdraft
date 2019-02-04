@@ -149,7 +149,7 @@
 
 	moi.interfaceSelectNextShortcutDidInvoke = function () {
 		moi.commandsNotesSelectNext();
-		
+
 		event.preventDefault();
 	};
 
@@ -591,6 +591,8 @@
 				moi.setupBeforeUnload();
 
 				d3.select('#WKCWrite').classed('WKCWriteLoading', false);
+
+				moi.kDefaultFocusNode().focus();
 			});
 		});
 	};

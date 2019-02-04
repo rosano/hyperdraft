@@ -56,10 +56,6 @@ locals.OLSKPagePublicRouteKeys = [
 
 <%- include('../_shared/layout-header.ejs') %>
 
-<script type="text/javascript">
-	WKCWriteBehaviour.lifecyclePageWillLoad();
-</script>
-
 <div id="WKCWrite" class="WKCWriteLoading">
 	<div id="WKCWriteMaster">
 		<header id="WKCWriteMasterToolbar" class="WKCSharedToolbar">
@@ -98,5 +94,9 @@ locals.OLSKPagePublicRouteKeys = [
 		<div id="WKCWriteDetailPlaceholder"><span><%= OLSKLocalized('WKCWriteDetailPlaceholderText') %></span></div>
 	</div>
 </div>
+
+<script type="text/javascript">
+	WKCWriteBehaviour.lifecyclePageWillLoad();
+</script>
 
 <%- include('../../_shared/WKCLayout/footer.ejs') %>
