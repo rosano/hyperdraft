@@ -175,7 +175,7 @@
 		}).shift();
 
 		if (item) {
-			return moi.commandsSelectNote(item);
+			return moi.commandsNotesSelect(item);
 		}
 	};
 
@@ -195,22 +195,22 @@
 		moi.propertiesSelectedNote(moi.propertiesNoteObjects().shift());
 	};
 
-	//_ commandsSelectNote
+	//_ commandsNotesSelect
 
-	moi.commandsSelectNote = function (item) {
+	moi.commandsNotesSelect = function (item) {
 		moi.propertiesSelectedNote(item);
 	};
 
 	//_ commandsNotesSelectPrevious
 
 	moi.commandsNotesSelectPrevious = function () {
-		moi.commandsSelectNote(moi.propertiesNoteObjects()[Math.max(moi.propertiesNoteObjects().indexOf(moi.propertiesSelectedNote()) - 1, 0)]);
+		moi.commandsNotesSelect(moi.propertiesNoteObjects()[Math.max(moi.propertiesNoteObjects().indexOf(moi.propertiesSelectedNote()) - 1, 0)]);
 	};
 
 	//_ commandsNotesSelectNext
 
 	moi.commandsNotesSelectNext = function () {
-		moi.commandsSelectNote(moi.propertiesNoteObjects()[Math.min(moi.propertiesNoteObjects().indexOf(moi.propertiesSelectedNote()) + 1, moi.propertiesNoteObjects().length - 1)]);
+		moi.commandsNotesSelect(moi.propertiesNoteObjects()[Math.min(moi.propertiesNoteObjects().indexOf(moi.propertiesSelectedNote()) + 1, moi.propertiesNoteObjects().length - 1)]);
 	};
 
 	//_ commandsSelectedNoteUpdateBody
@@ -400,7 +400,7 @@
 				return e !== inputData;
 			}));
 
-			moi.commandsSelectNote(null);
+			moi.commandsNotesSelect(null);
 
 			moi.reactPersistenceStatus(OLSKLocalized('WKCWriteDetailToolbarPersistenceStatusDeleted'), true);
 		}, function(error) {
@@ -495,7 +495,7 @@
 
 		parentElement
 			.on('click', function(obj) {
-				moi.commandsSelectNote(obj);
+				moi.commandsNotesSelect(obj);
 			});
 
 		parentElement.classed('WKCWriteMasterContentListItemUnpersisted', function (obj) {
