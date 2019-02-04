@@ -722,6 +722,8 @@
 
 				return ['ArrowUp', 'ArrowDown'].indexOf(event.key) !== -1;
 			})()) {
+				event.preventDefault();
+				
 				if (event.key === 'ArrowUp') {
 					return moi.interfaceSelectPreviousShortcutDidInvoke();
 				}
