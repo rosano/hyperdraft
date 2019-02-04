@@ -310,7 +310,7 @@
 		moi.propertiesCurrentFilter(inputData)
 
 		let item = moi.propertiesNoteObjects().filter(function (e) {
-			return WKCParser.WKCParserTitleForPlaintext(e.WKCNoteBody).toLowerCase() === inputData.toLowerCase();
+			return WKCParser.WKCParserTitleForPlaintext(e.WKCNoteBody).toLowerCase().match(inputData.toLowerCase());
 		}).shift();
 
 		if (item) {
