@@ -141,12 +141,16 @@
 
 	moi.interfaceSelectPreviousShortcutDidInvoke = function () {
 		moi.commandsNotesSelectPrevious();
+		
+		event.preventDefault();
 	};
 
 	//_ interfaceSelectNextShortcutDidInvoke
 
 	moi.interfaceSelectNextShortcutDidInvoke = function () {
 		moi.commandsNotesSelectNext();
+		
+		event.preventDefault();
 	};
 
 	//# COMMANDS
@@ -722,14 +726,12 @@
 
 				return ['ArrowUp', 'ArrowDown'].indexOf(event.key) !== -1;
 			})()) {
-				event.preventDefault();
-				
 				if (event.key === 'ArrowUp') {
-					return moi.interfaceSelectPreviousShortcutDidInvoke();
+					return moi.interfaceSelectPreviousShortcutDidInvoke(event);
 				}
 
 				if (event.key === 'ArrowDown') {
-					return moi.interfaceSelectNextShortcutDidInvoke();
+					return moi.interfaceSelectNextShortcutDidInvoke(event);
 				}
 			};
 
