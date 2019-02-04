@@ -111,6 +111,8 @@
 
 	moi.interfaceNotesMasterToolbarCreateButtonDidClick = function () {
 		moi.commandsNotesCreate();
+
+		WCKWriteBehaviourPropertyEditor.focus();
 	};
 
 	//_ interfaceDeleteButtonDidClick
