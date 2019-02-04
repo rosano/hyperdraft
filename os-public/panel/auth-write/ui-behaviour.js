@@ -201,10 +201,6 @@
 
 	moi.commandsPersistNote = function (inputData) {
 		(new Promise(function(resolve, reject) {
-			if (inputData === moi.propertiesSelectedNote()) {
-				moi.reactPersistenceStatus(OLSKLocalized('WKCWriteDetailToolbarPersistenceStatusSaving'));
-			}
-
 			if (!inputData.WKCNoteID) {
 				return moi._commandsPersistNoteCreate(inputData, resolve, reject);
 			}
@@ -212,10 +208,6 @@
 			return moi._commandsPersistNoteVersion(inputData, resolve, reject);
 			
 		})).then(function() {
-			if (inputData === moi.propertiesSelectedNote()) {
-				moi.reactPersistenceStatus(OLSKLocalized('WKCWriteDetailToolbarPersistenceStatusSaved'), true);
-			}
-
 			delete inputData._WKCWriteThrottleObject;
 
 			moi.reactNoteObjects(moi.propertiesNoteObjects());
