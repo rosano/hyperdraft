@@ -152,7 +152,7 @@ describe('WKCNotesActionVersion', function testWKCNotesActionVersion() {
 			WKCNoteDateUpdated: itemUpdated.WKCNoteDateUpdated,
 			WKCNoteBody: 'bravo',
 		}));
-		assert.deepEqual(await versionsMetalLibrary.WKCVersionsMetalSearch(WKCTestingMongoClient, {}), [Object.assign(versionObject)]);
+		assert.deepEqual(await versionsMetalLibrary.WKCVersionsMetalQuery(WKCTestingMongoClient, {}), [Object.assign(versionObject)]);
 	});
 
 });

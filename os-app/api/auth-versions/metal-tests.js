@@ -35,12 +35,12 @@ describe('WKCVersionsMetalCreate', function testWKCVersionsMetalCreate() {
 	});
 
 	it('returns object', async function() {
-		let responseJSON = await mainModule.WKCVersionsMetalCreate(WKCTestingMongoClient, kTesting.StubValidVersion());
+		let item = await mainModule.WKCVersionsMetalCreate(WKCTestingMongoClient, kTesting.StubValidVersion());
 		
-		assert.deepEqual(responseJSON, Object.assign(kTesting.StubValidVersion(), {
-			WKCVersionID: responseJSON.WKCVersionID,
+		assert.deepEqual(item, Object.assign(kTesting.StubValidVersion(), {
+			WKCVersionID: item.WKCVersionID,
 		}));
-		assert.strictEqual(parseInt(responseJSON.WKCVersionID) - (new Date()) > -500, true);
+		assert.strictEqual(parseInt(item.WKCVersionID) - (new Date()) > -500, true);
 	});
 
 });
@@ -61,14 +61,14 @@ describe('WKCVersionsMetalDelete', function testWKCVersionsMetalDelete() {
 
 });
 
-describe('WKCVersionsMetalSearch', function testWKCVersionsMetalSearch() {
+describe('WKCVersionsMetalQuery', function testWKCVersionsMetalQuery() {
 
 	it('rejects if not object', async function() {
-		await assert.rejects(mainModule.WKCVersionsMetalSearch(WKCTestingMongoClient, null), /WKCErrorInvalidInput/);
+		await assert.rejects(mainModule.WKCVersionsMetalQuery(WKCTestingMongoClient, null), /WKCErrorInvalidInput/);
 	});
 
 	it('returns array if none', async function() {
-		assert.deepEqual(await mainModule.WKCVersionsMetalSearch(WKCTestingMongoClient, {}), []);
+		assert.deepEqual(await mainModule.WKCVersionsMetalQuery(WKCTestingMongoClient, {}), []);
 	});
 
 	it('returns array', async function() {
@@ -78,7 +78,7 @@ describe('WKCVersionsMetalSearch', function testWKCVersionsMetalSearch() {
 			}));
 		}));
 
-		assert.deepEqual(await mainModule.WKCVersionsMetalSearch(WKCTestingMongoClient, {}), items.reverse());
+		assert.deepEqual(await mainModule.WKCVersionsMetalQuery(WKCTestingMongoClient, {}), items.reverse());
 	});
 
 });

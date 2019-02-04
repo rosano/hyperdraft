@@ -43,9 +43,9 @@ exports.WKCVersionsMetalDelete = async function(databaseClient, inputData) {
 	})).result.n ? new Error('WKCErrorNotFound') : true);
 };
 
-//_ WKCVersionsMetalSearch
+//_ WKCVersionsMetalQuery
 
-exports.WKCVersionsMetalSearch = async function(databaseClient, inputData) {
+exports.WKCVersionsMetalQuery = async function(databaseClient, inputData) {
 	if (typeof inputData !== 'object' || inputData === null) {
 		return Promise.reject(new Error('WKCErrorInvalidInput'));
 	}
