@@ -713,53 +713,27 @@
 
 	moi.setupShortcuts = function () {
 		window.addEventListener('keydown', function (event) {
-			if ((function() {
-				if (!moi.propertiesSelectedNote()) {
-					return false;
-				}
-
-				if (!event.shiftKey) {
-					return false;
-				}
-
-				return event.key === 'Tab';
-			})()) {
+			if (moi.propertiesSelectedNote() && event.shiftKey && (event.key === 'Tab')) {
 				return moi.interfaceToggleTabFocusShortcutDidInvoke(event);
 			};
 
-			if ((function() {
-				if (document.activeElement !== moi.kDefaultFocusNode()) {
-					return false;
-				}
+			if (document.activeElement !== moi.kDefaultFocusNode()) {
+				return;
+			}
 
-				return ['ArrowUp', 'ArrowDown'].indexOf(event.key) !== -1;
-			})()) {
-				if (event.key === 'ArrowUp') {
-					return moi.interfaceSelectPreviousShortcutDidInvoke(event);
-				}
+			if (event.key === 'ArrowUp') {
+				return moi.interfaceSelectPreviousShortcutDidInvoke(event);
+			}
 
-				if (event.key === 'ArrowDown') {
-					return moi.interfaceSelectNextShortcutDidInvoke(event);
-				}
-			};
+			if (event.key === 'ArrowDown') {
+				return moi.interfaceSelectNextShortcutDidInvoke(event);
+			}
 
-			if ((function() {
-				if (document.activeElement !== moi.kDefaultFocusNode()) {
-					return false;
-				}
-
-				return event.key === 'Tab';
-			})()) {
+			if (event.key === 'Tab') {
 				return moi.interfaceToggleTabFocusShortcutDidInvoke(event);
 			};
 
-			if ((function() {
-				if (document.activeElement !== moi.kDefaultFocusNode()) {
-					return false;
-				}
-
-				return event.key === 'Escape';
-			})()) {
+			if (event.key === 'Escape') {
 				return moi.interfaceClearInputShortcutDidInvoke(event);
 			};
 		});
