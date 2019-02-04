@@ -522,7 +522,10 @@
 
 	moi.reactCurrentFilterManual = function (inputData) {
 		document.getElementById('WKCWriteMasterToolbarFilterInput').value = inputData;
-		moi.kDefaultFocusNode().focus();
+
+		setTimeout(function () {
+			moi.kDefaultFocusNode().focus()
+		});
 	};
 
 	//_ reactSelectedNote
