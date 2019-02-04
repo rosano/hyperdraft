@@ -388,6 +388,22 @@
 		});
 	};
 
+	//_ _commandsOpenCursorObject
+
+	moi._commandsOpenCursorObject = function (inputData) {
+		let cursor = WCKWriteBehaviourPropertyEditor.getCursor();
+
+  	let currentObject = WKCWriteLogic.WKCWriteLineObjectsFor(WCKWriteBehaviourPropertyEditor.getLineTokens(cursor.line)).filter(function (e) {
+  		return Math.max(e.start, Math.min(e.end, cursor.ch)) === cursor.ch;
+  	}).shift();
+
+  	if (!currentObject.type.match('link')) {
+  		return;
+  	}
+
+  	moi._commandsOpenTextObject(currentObject.string);
+	};
+
 	//_ _commandsOpenTextObject
 
 	moi._commandsOpenTextObject = function (inputData) {
@@ -583,19 +599,8 @@
 		  lineWrapping: true,
 		  extraKeys: {
 		    Enter: 'newlineAndIndentContinueMarkdownList',
-		    'Cmd-Alt-Enter': function (a, b, c) {
-		    	let cursor = WCKWriteBehaviourPropertyEditor.getCursor();
-
-		    	let currentObject = WKCWriteLogic.WKCWriteLineObjectsFor(WCKWriteBehaviourPropertyEditor.getLineTokens(cursor.line)).filter(function (e) {
-		    		return Math.max(e.start, Math.min(e.end, cursor.ch)) === cursor.ch;
-		    	}).shift();
-
-		    	if (!currentObject.type.match('link')) {
-		    		return;
-		    	}
-
-		    	moi._commandsOpenTextObject(currentObject.string);
-		    },
+		    'Cmd-Enter': moi._commandsOpenCursorObject,
+		    'Ctrl-Enter': moi._commandsOpenCursorObject,
 		    Esc: function () {
 		      return d3.select('#WKCWriteMasterToolbarCreateButton').node().focus();
 		    },
