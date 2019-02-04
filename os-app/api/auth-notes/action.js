@@ -81,3 +81,21 @@ exports.WKCNotesActionVersion = async function(databaseClient, inputData) {
 
 	return Promise.resolve(outputData);
 };
+
+//_ WKCNotesActionDelete
+
+exports.WKCNotesActionDelete = async function(databaseClient, inputData) {
+	if (typeof inputData !== 'string') {
+		return Promise.reject(new Error('WKCErrorInvalidInput'));
+	}
+
+	(await versionsMetalLibrary.WKCVersionsMetalQuery(databaseClient, {
+		WKCVersionNoteID: inputData,
+	})).map(async function (e) {
+		return await versionsMetalLibrary.WKCVersionsMetalDelete(databaseClient, e.WKCVersionID);
+	});
+
+	return Promise.resolve(!(await databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_notes').deleteOne({
+		WKCNoteID: inputData,
+	})).result.n ? new Error('WKCErrorNotFound') : true);
+};

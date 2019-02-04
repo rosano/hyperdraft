@@ -156,3 +156,32 @@ describe('WKCNotesActionVersion', function testWKCNotesActionVersion() {
 	});
 
 });
+
+describe('WKCNotesActionDelete', function testWKCNotesActionDelete() {
+
+	it('rejects if not string', async function() {
+		await assert.rejects(mainModule.WKCNotesActionDelete(WKCTestingMongoClient, 1), /WKCErrorInvalidInput/);
+	});
+
+	it('returns error if not found', async function() {
+		assert.deepEqual(await mainModule.WKCNotesActionDelete(WKCTestingMongoClient, 'alfa'), new Error('WKCErrorNotFound'))
+	});
+
+	it('returns true', async function() {
+		assert.deepEqual(await mainModule.WKCNotesActionDelete(WKCTestingMongoClient, (await metalLibrary.WKCNotesMetalCreate(WKCTestingMongoClient, kTesting.StubNoteObjectValid())).WKCNoteID), true);
+	});
+
+	it('deletes corresponding versionObjects', async function() {
+		let item = Object.assign(kTesting.StubVersionObjectValid(), {
+			WKCVersionNoteID: (await metalLibrary.WKCNotesMetalCreate(WKCTestingMongoClient, kTesting.StubNoteObjectValid())).WKCNoteID,
+		});
+		await mainModule.WKCNotesActionVersion(WKCTestingMongoClient, item);
+
+		await mainModule.WKCNotesActionDelete(WKCTestingMongoClient, (await mainModule.WKCNotesActionVersion(WKCTestingMongoClient, Object.assign(kTesting.StubVersionObjectValid(), {
+			WKCVersionBody: 'charlie',
+			WKCVersionNoteID: (await metalLibrary.WKCNotesMetalCreate(WKCTestingMongoClient, kTesting.StubNoteObjectValid())).WKCNoteID,
+		}))).WKCNoteID);
+		assert.deepEqual(await versionsMetalLibrary.WKCVersionsMetalQuery(WKCTestingMongoClient, {}), [item]);
+	});
+
+});
