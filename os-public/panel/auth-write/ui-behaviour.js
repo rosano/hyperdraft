@@ -614,6 +614,31 @@
 			moi.commandsSelectedNoteUpdateBody(instance.getValue());
 		});
 
+		WCKWriteBehaviourPropertyEditor.on('keydown', function (instance, event) {
+			if (event.altKey) {
+				return d3.select('#WKCWriteMasterToolbarCreateButton').node().focus();
+			}
+
+			if (!event.altKey) {
+				return;
+			}
+
+			if (event.key.length > 1) {
+				return;
+			}
+
+			if (event.key.match(/\W/)) {
+				return;
+			}
+
+			event.codemirrorIgnore = true;
+
+			event.preventDefault();
+
+			d3.select('#WKCWriteMasterToolbarCreateButton').node().focus();
+			d3.select('#WKCWriteMasterToolbarCreateButton').node().dispatchEvent(new KeyboardEvent('keydown', event))
+		});
+
 		document.querySelector('.CodeMirror').addEventListener('mouseup', function (event) {
 			if (!event.target.className.match('cm-link'))  {
 				return;
