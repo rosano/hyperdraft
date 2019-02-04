@@ -612,10 +612,6 @@
 		});
 
 		WCKWriteBehaviourPropertyEditor.on('keydown', function (instance, event) {
-			if (event.altKey) {
-				return d3.select('#WKCWriteMasterToolbarCreateButton').node().focus();
-			}
-
 			if (!event.altKey) {
 				return;
 			}
