@@ -250,7 +250,7 @@
 		})).then(function() {
 			delete inputData._WKCWriteThrottleObject;
 
-			moi.reactNoteObjects(moi.propertiesNoteObjects());
+			moi.reactNoteObjects(moi.dataNoteObjectsFiltered());
 		}, function(error) {
 			if (window.confirm(OLSKLocalized('WKCWriteErrorPersistenceSaveDidFail'))) {
 				return moi.commandsPersistNote(inputData);
@@ -315,7 +315,7 @@
 			return moi.commandsNotesSelect(null);
 		}
 
-		let item = moi.propertiesNoteObjects().filter(function (e) {
+		let item = moi.dataNoteObjectsFiltered().filter(function (e) {
 			return WKCParser.WKCParserTitleForPlaintext(e.WKCNoteBody).toLowerCase().match(inputData.toLowerCase());
 		}).shift();
 
@@ -420,7 +420,7 @@
 				'x-client-key': moi.propertiesAPIToken(),
 			},
 		}).then(function(responseJSON) {
-			moi.propertiesNoteObjects(moi.propertiesNoteObjects().filter(function(e) {
+			moi.propertiesNoteObjects(moi.dataNoteObjectsFiltered().filter(function(e) {
 				return e !== inputData;
 			}));
 
