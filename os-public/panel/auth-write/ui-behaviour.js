@@ -127,6 +127,18 @@
 		moi.commandsToggleTabFocus(event);
 	};
 
+	//_ interfaceSelectPreviousShortcutDidInvoke
+
+	moi.interfaceSelectPreviousShortcutDidInvoke = function () {
+		moi.commandsNotesSelectPrevious();
+	};
+
+	//_ interfaceSelectNextShortcutDidInvoke
+
+	moi.interfaceSelectNextShortcutDidInvoke = function () {
+		moi.commandsNotesSelectNext();
+	};
+
 	//# COMMANDS
 
 	//_ commandsAlertConnectionError
@@ -187,6 +199,18 @@
 
 	moi.commandsSelectNote = function (item) {
 		moi.propertiesSelectedNote(item);
+	};
+
+	//_ commandsNotesSelectPrevious
+
+	moi.commandsNotesSelectPrevious = function () {
+		moi.commandsSelectNote(moi.propertiesNoteObjects()[Math.max(moi.propertiesNoteObjects().indexOf(moi.propertiesSelectedNote()) - 1, 0)]);
+	};
+
+	//_ commandsNotesSelectNext
+
+	moi.commandsNotesSelectNext = function () {
+		moi.commandsSelectNote(moi.propertiesNoteObjects()[Math.min(moi.propertiesNoteObjects().indexOf(moi.propertiesSelectedNote()) + 1, moi.propertiesNoteObjects().length - 1)]);
 	};
 
 	//_ commandsSelectedNoteUpdateBody
@@ -685,13 +709,25 @@
 					return false;
 				}
 
-				if (event.key !== 'Tab') {
+				return event.key === 'Tab';
+			})()) {
+				return moi.interfaceToggleTabFocusShortcutDidInvoke(event);
+			};
+
+			if ((function() {
+				if (document.activeElement !== moi.kDefaultFocusNode()) {
 					return false;
 				}
 
-				return true;
+				return ['ArrowUp', 'ArrowDown'].indexOf(event.key) !== -1;
 			})()) {
-				return moi.interfaceToggleTabFocusShortcutDidInvoke(event);
+				if (event.key === 'ArrowUp') {
+					return moi.interfaceSelectPreviousShortcutDidInvoke();
+				}
+
+				if (event.key === 'ArrowDown') {
+					return moi.interfaceSelectNextShortcutDidInvoke();
+				}
 			};
 		});
 	};
