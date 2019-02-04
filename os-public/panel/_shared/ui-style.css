@@ -15,7 +15,7 @@
 }
 
 .WKCSharedToolbar {
-	padding: 10px;
+	padding: 0 4px;
 	border-top: 1px solid #ddd;
 	border-bottom: 1px solid #ddd;
 
@@ -26,7 +26,7 @@
 }
 
 .WKCSharedToolbar * {
-	margin: 0 2px;
+	margin: 10px 4px;
 }
 
 .WKCSharedElementTappable {

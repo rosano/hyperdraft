@@ -35,11 +35,14 @@ body {
 
 #WKCWriteMasterToolbarFilterInput {
 	height: 14px;
-	padding: 0;
+	padding: 4px;
 	margin: 0;
 	border: 1px solid #e6e6e6;
+	border-radius: 10px;
 
 	font-size: 80%;
+	text-indent: 2px;
+	line-height: 1.4;
 
 	/* WKCSharedToolbarFlexboxChild */
 	flex-grow: 1;
