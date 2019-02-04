@@ -18,6 +18,14 @@
 	var WCKWriteBehaviourPropertySelectedNote;
 	let WCKWriteBehaviourPropertyEditor;
 
+	//# CONSTANTS
+
+	//_ kDefaultFocusNode
+
+	moi.kDefaultFocusNode = function () {
+		return document.getElementById('WKCWriteMasterToolbarFilterInput');
+	};
+
 	//# PROPERTIES
 
 	//_ propertiesAPIToken
@@ -594,7 +602,7 @@
 		    'Cmd-Enter': moi._commandsOpenCursorObject,
 		    'Ctrl-Enter': moi._commandsOpenCursorObject,
 		    Esc: function () {
-		      return d3.select('#WKCWriteMasterToolbarCreateButton').node().focus();
+		      return moi.kDefaultFocusNode().focus();
 		    },
 		  },
 		  theme: 'wkv',
@@ -625,8 +633,14 @@
 
 			event.preventDefault();
 
-			d3.select('#WKCWriteMasterToolbarCreateButton').node().focus();
-			d3.select('#WKCWriteMasterToolbarCreateButton').node().dispatchEvent(new KeyboardEvent('keydown', event))
+			setTimeout(function () {
+				moi.kDefaultFocusNode().focus()
+				// moi.kDefaultFocusNode().dispatchEvent(new KeyboardEvent('keydown', {
+				// 	altKey: true,
+				// 	ctrlKey: true,
+				// 	key: 'f',
+				// }))
+			}, 100);
 		});
 
 		document.querySelector('.CodeMirror').addEventListener('mouseup', function (event) {
