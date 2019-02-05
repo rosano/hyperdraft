@@ -306,6 +306,22 @@
 		return inputData.length <= 100 ? inputData : inputData.slice(0, 100).split(' ').slice(0, -1).join(' ').concat('…');
 	};
 
+	//_ WKCParserReplaceLinks
+
+	exports.WKCParserReplaceLinks = function(param1, param2) {
+		if (typeof param1 !== 'string') {
+			throw new Error('WKCErrorInvalidInput');
+		}
+
+		if (typeof param2 !== 'object' || param2 === null) {
+			throw new Error('WKCErrorInvalidInput');
+		}
+
+		return Object.entries(param2).reduce(function (coll, e) {
+			return coll.replace(new RegExp(`\\[\\[${ e[0] }\\]\\]`, 'g'), e[1]);
+		}, param1);
+	};
+
 	Object.defineProperty(exports, '__esModule', { value: true });
 
 })));

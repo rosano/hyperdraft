@@ -546,3 +546,54 @@ describe('WKCParserSnippetForPlaintext', function testWKCParserSnippetForPlainte
 	});
 
 });
+
+describe('WKCParserReplaceLinks', function testWKCParserReplaceLinks() {
+
+	it('throws error if param1 not string', function() {
+		assert.throws(function() {
+			mainModule.WKCParserReplaceLinks(null, {});
+		}, /WKCErrorInvalidInput/);
+	});
+
+	it('throws error if param2 not object', function() {
+		assert.throws(function() {
+			mainModule.WKCParserReplaceLinks('', null);
+		}, /WKCErrorInvalidInput/);
+	});
+
+	it('returns input', function() {
+		assert.strictEqual(mainModule.WKCParserReplaceLinks('alfa', {}), 'alfa');
+	});
+
+	it('ignores if no replacement', function() {
+		assert.strictEqual(mainModule.WKCParserReplaceLinks('[[alfa]]', {
+			bravo: 'charlie',
+		}), '[[alfa]]');
+	});
+
+	it('ignores if not double-bracket', function() {
+		assert.strictEqual(mainModule.WKCParserReplaceLinks('[alfa]', {
+			alfa: 'bravo',
+		}), '[alfa]');
+	});
+
+	it('replaces single', function() {
+		assert.strictEqual(mainModule.WKCParserReplaceLinks('[[alfa]]', {
+			alfa: 'bravo',
+		}), 'bravo');
+	});
+
+	it('replaces multiple', function() {
+		assert.strictEqual(mainModule.WKCParserReplaceLinks('[[alfa]] [[charlie]]', {
+			alfa: 'bravo',
+			charlie: 'delta',
+		}), 'bravo delta');
+	});
+
+	it('replaces global', function() {
+		assert.strictEqual(mainModule.WKCParserReplaceLinks('[[alfa]] [[alfa]]', {
+			alfa: 'bravo',
+		}), 'bravo bravo');
+	});
+
+});
