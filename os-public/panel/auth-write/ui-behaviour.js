@@ -441,7 +441,7 @@
 				'x-client-key': moi.propertiesAPIToken(),
 			},
 		}).then(function(responseJSON) {
-			moi.propertiesNoteObjects(moi.dataNoteObjectsFiltered().filter(function(e) {
+			moi.propertiesNoteObjects(moi.propertiesNoteObjects().filter(function(e) {
 				return e !== inputData;
 			}));
 
