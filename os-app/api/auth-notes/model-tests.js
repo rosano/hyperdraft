@@ -16,6 +16,30 @@ const kTesting = {
 	},
 };
 
+describe('WKCNotesModelPrepare', function testWKCNotesModelPrepare() {
+
+	it('returns input', function() {
+		assert.deepEqual(mainModule.WKCNotesModelPrepare({}), {});
+	});
+
+	it('returns input with WKCNoteDateCreated as date', function() {
+		assert.deepEqual(mainModule.WKCNotesModelPrepare({
+			WKCNoteDateCreated: '2018-12-09T19:07:01.902Z',
+		}), {
+			WKCNoteDateCreated: new Date('2018-12-09T19:07:01.902Z'),
+		});
+	});
+
+	it('returns input with WKCNoteDateUpdated as date', function() {
+		assert.deepEqual(mainModule.WKCNotesModelPrepare({
+			WKCNoteDateUpdated: '2018-12-09T19:07:01.902Z',
+		}), {
+			WKCNoteDateUpdated: new Date('2018-12-09T19:07:01.902Z'),
+		});
+	});
+
+});
+
 describe('WKCNotesModelErrorsFor', function testWKCNotesModelErrorsFor() {
 
 	it('throws error if not object', function() {

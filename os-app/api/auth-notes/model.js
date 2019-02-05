@@ -4,6 +4,20 @@
  * MIT Licensed
  */
 
+//_ WKCNotesModelPrepare
+
+exports.WKCNotesModelPrepare = function(inputData) {
+	if (inputData.WKCNoteDateCreated) {
+		inputData.WKCNoteDateCreated = new Date(inputData.WKCNoteDateCreated);
+	}
+
+	if (inputData.WKCNoteDateUpdated) {
+		inputData.WKCNoteDateUpdated = new Date(inputData.WKCNoteDateUpdated);
+	}
+
+	return inputData;
+};
+
 //_ WKCNotesModelErrorsFor
 
 exports.WKCNotesModelErrorsFor = function(inputData, options) {
