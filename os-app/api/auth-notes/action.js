@@ -4,9 +4,11 @@
  * MIT Licensed
  */
 
+const modelLibrary = require('./model.js');
 var metalLibrary = require('./metal.js');
 var versionsMetalLibrary = require('../auth-versions/metal.js');
 var settingsMetalLibrary = require('../auth-settings/metal.js');
+const WKCParser = require('../../_shared/WKCParser/main.js');
 
 //_ WKCNotesActionPublish
 
@@ -98,4 +100,20 @@ exports.WKCNotesActionDelete = async function(databaseClient, inputData) {
 	return Promise.resolve(!(await databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_notes').deleteOne({
 		WKCNoteID: inputData,
 	})).result.n ? new Error('WKCErrorNotFound') : true);
+};
+
+//_ WKCNotesActionGetPublicLinks
+
+exports.WKCNotesActionGetPublicLinks = async function(databaseClient) {
+	return Promise.resolve((await metalLibrary.WKCNotesMetalQuery(databaseClient, {
+		WKCNotePublishStatusIsPublished: true,
+	})).map(modelLibrary.WKCNotesModelPrepare).sort(function (a, b) {
+		return a.WKCNoteDateUpdated > b.WKCNoteDateUpdated;
+	}).map(function (e) {
+		return [WKCParser.WKCParserTitleForPlaintext(e.WKCNoteBody), e.WKCNotePublicID];
+	}).reduce(function (coll, e) {
+		coll[e[0]] = e[1];
+
+		return coll;
+	}, {}));
 };

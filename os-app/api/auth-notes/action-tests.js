@@ -185,3 +185,44 @@ describe('WKCNotesActionDelete', function testWKCNotesActionDelete() {
 	});
 
 });
+
+describe('WKCNotesActionGetPublicLinks', function testWKCNotesActionGetPublicLinks() {
+
+	it('returns hash', async function() {
+		assert.deepEqual(await mainModule.WKCNotesActionGetPublicLinks(WKCTestingMongoClient), {})
+	});
+
+	it('excludes if not published', async function() {
+		await metalLibrary.WKCNotesMetalCreate(WKCTestingMongoClient, kTesting.StubNoteObjectValid());
+		assert.deepEqual(await mainModule.WKCNotesActionGetPublicLinks(WKCTestingMongoClient), {})
+	});
+
+	it('excludes if unpublished', async function() {
+		await mainModule.WKCNotesActionUnpublish(WKCTestingMongoClient, (await mainModule.WKCNotesActionPublish(WKCTestingMongoClient, (await metalLibrary.WKCNotesMetalCreate(WKCTestingMongoClient, kTesting.StubNoteObjectValid())).WKCNoteID)).WKCNoteID);
+		assert.deepEqual(await mainModule.WKCNotesActionGetPublicLinks(WKCTestingMongoClient), {})
+	});
+
+	it('includes if published', async function() {
+		let item = await mainModule.WKCNotesActionPublish(WKCTestingMongoClient, (await metalLibrary.WKCNotesMetalCreate(WKCTestingMongoClient, kTesting.StubNoteObjectValid())).WKCNoteID);
+
+		assert.deepEqual(await mainModule.WKCNotesActionGetPublicLinks(WKCTestingMongoClient), [[item.WKCNoteBody, item.WKCNotePublicID]].reduce(function (coll, e) {
+			coll[e[0]] = e[1];
+
+			return coll;
+		}, {}));
+	});
+
+	it('selects last updated note if duplicate title', async function() {
+		await mainModule.WKCNotesActionPublish(WKCTestingMongoClient, (await metalLibrary.WKCNotesMetalCreate(WKCTestingMongoClient, Object.assign(kTesting.StubNoteObjectValid(), {
+			WKCNoteBody: `heading\nalfa`,
+		}))).WKCNoteID);
+		await mainModule.WKCNotesActionPublish(WKCTestingMongoClient, (await metalLibrary.WKCNotesMetalCreate(WKCTestingMongoClient, Object.assign(kTesting.StubNoteObjectValid(), {
+			WKCNoteBody: `heading\nbravo`,
+		}))).WKCNoteID);
+
+		assert.deepEqual(await mainModule.WKCNotesActionGetPublicLinks(WKCTestingMongoClient), {
+			heading: '2',
+		});
+	});
+
+});
