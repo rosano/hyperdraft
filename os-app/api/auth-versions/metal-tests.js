@@ -16,6 +16,10 @@ const kTesting = {
 			WKCVersionDate: new Date('2019-01-30T18:10:00.000Z'),
 		};
 	},
+	uSleep(inputData) {
+		let endTime = new Date().getTime();
+		while (new Date().getTime() < endTime + inputData) {}
+	},
 };
 
 describe('WKCVersionsMetalCreate', function testWKCVersionsMetalCreate() {
@@ -73,6 +77,7 @@ describe('WKCVersionsMetalQuery', function testWKCVersionsMetalQuery() {
 
 	it('returns array', async function() {
 		let items = await Promise.all(['alfa', 'bravo'].map(async function (e) {
+			kTesting.uSleep(10);
 			return await mainModule.WKCVersionsMetalCreate(WKCTestingMongoClient, Object.assign(kTesting.StubValidVersion(), {
 				WKCVersionBody: e,
 			}));
