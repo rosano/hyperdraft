@@ -696,30 +696,37 @@
 		});
 
 		WCKWriteBehaviourPropertyEditor.on('keydown', function (instance, event) {
-			if (!event.altKey) {
+			if (!navigator.platform.match(/mac/i)) {
 				return;
 			}
 
-			if (event.key.length > 1) {
+			if (!navigator.userAgent.match(/^((?!chrome|android).)*safari/i)) {
 				return;
 			}
 
-			if (event.key.match(/\W/)) {
+			if (!event.altKey || !event.ctrlKey) {
 				return;
 			}
 
-			event.codemirrorIgnore = true;
+			let elements = document.querySelectorAll('[accesskey]');
+
+			if (!elements.length) {
+				return;
+			}
+
+			let match = [].slice.call(elements).filter(function (e) {
+				return e.getAttribute('accesskey') === event.key;
+			}).shift();
+
+			if (!match) {
+				return;
+			}
 
 			event.preventDefault();
 
 			setTimeout(function () {
-				// moi.kDefaultFocusNode().focus()
-				// moi.kDefaultFocusNode().dispatchEvent(new KeyboardEvent('keydown', {
-				// 	altKey: true,
-				// 	ctrlKey: true,
-				// 	key: 'f',
-				// }))
-			}, 100);
+				match.focus();
+			});
 		});
 
 		document.querySelector('.CodeMirror').addEventListener('mouseup', function (event) {
