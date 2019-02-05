@@ -102,8 +102,8 @@ describe('WKCNotesActionPublicRead', function testWKCNotesActionPublicRead() {
 		assert.deepEqual(await mainModule.WKCNotesActionPublicRead(WKCTestingMongoClient, item.WKCNotePublicID), item);
 	});
 
-	it('returns null if not WKCNotePublishStatusIsPublished', async function() {
-		assert.deepEqual(await mainModule.WKCNotesActionUnpublish(WKCTestingMongoClient, (await mainModule.WKCNotesActionPublish(WKCTestingMongoClient, (await metalLibrary.WKCNotesMetalCreate(WKCTestingMongoClient, kTesting.StubNoteObjectValid())).WKCNoteID)).WKCNoteID).WKCNotePublicID, null);
+	it('returns error if not WKCNotePublishStatusIsPublished', async function() {
+		assert.deepEqual(await mainModule.WKCNotesActionPublicRead(WKCTestingMongoClient, (await mainModule.WKCNotesActionUnpublish(WKCTestingMongoClient, (await mainModule.WKCNotesActionPublish(WKCTestingMongoClient, (await metalLibrary.WKCNotesMetalCreate(WKCTestingMongoClient, kTesting.StubNoteObjectValid())).WKCNoteID)).WKCNoteID)).WKCNotePublicID), new Error('WKCErrorNotFound'));
 	});
 
 });
