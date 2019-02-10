@@ -795,6 +795,7 @@
 		moi.setupAPIToken(function () {
 			moi.setupSubscriptionObjects(function() {
 				moi.setupOutlookObjects();
+				moi.setupShortcuts();
 				
 				d3.select('#WKCRead').classed('WKCReadLoading', false);
 			});
@@ -852,6 +853,20 @@
 		]);
 
 		moi.commandsSourcesSelect(kWKCReadOutlookInbox);
+	};
+
+	//_ setupShortcuts
+
+	moi.setupShortcuts = function () {
+		window.addEventListener('keydown', function (event) {
+			if (event.key === 'Backspace') {
+				return moi.interfaceArticlesDeleteShortcutDidClick();
+			}
+
+			if (event.key === 'Escape') {
+				return moi.interfaceSubscriptionsCreateCloseButtonDidClick();
+			};
+		});
 	};
 
 	//# LIFECYCLE

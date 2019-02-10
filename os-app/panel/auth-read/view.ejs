@@ -58,16 +58,6 @@ locals.OLSKPagePublicRouteKeys = [
 
 <script type="text/javascript">
 	WKCReadBehaviour.lifecyclePageWillLoad();
-
-	d3.select(document.body).on('keydown', function () {
-		if (d3.event.code === 'Backspace') {
-			return WKCReadBehaviour.interfaceArticlesDeleteShortcutDidClick();
-		}
-
-		if (d3.event.code === 'Escape') {
-			return WKCReadBehaviour.interfaceSubscriptionsCreateCloseButtonDidClick();
-		}
-	});
 </script>
 
 <div id="WKCRead" class="WKCReadLoading">
