@@ -50,7 +50,7 @@ const kStubs = {
 		return 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.';
 	},
 	kStubsTextMultiline: function(count) {
-		return 'alfa bravo charlie delta echo foxtrot golf hotel indigo juliet kilo'.split(' ').slice(0, typeof count === 'undefined' ? Infinity : count).join('\n').concat('\n');
+		return 'alfa bravo charlie delta echo foxtrot golf hotel india juliet kilo'.split(' ').slice(0, typeof count === 'undefined' ? Infinity : count).join('\n').concat('\n');
 	},
 };
 
@@ -301,11 +301,11 @@ describe('WKCParserArticlesForPage', function testWKCParserArticlesForPage() {
 	});
 
 	it('strips whitespace from link content', function() {
-		assert.strictEqual(mainModule.WKCParserArticlesForPage(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsHTML('<a href="hotel"><div><p><strong>indigo</strong><br></p></div></a>')).pop().WKCArticleBody, '<p><ins><a href="hotel"><strong>indigo</strong></a></ins></p>');
+		assert.strictEqual(mainModule.WKCParserArticlesForPage(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsHTML('<a href="hotel"><div><p><strong>india</strong><br></p></div></a>')).pop().WKCArticleBody, '<p><ins><a href="hotel"><strong>india</strong></a></ins></p>');
 	});
 
 	it('handles multiple link tasks simultaneously', function() {
-		assert.strictEqual(mainModule.WKCParserArticlesForPage(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsHTML('<a href="hotel"><div><p>indigo<br></p></div></a><a href="hotel"></a><a href="hotel"><div><p>indigo<br></p></div></a><a href="hotel"></a>')).pop().WKCArticleBody, '<p><ins><a href="hotel">indigo</a><a href="hotel">[_____]</a><a href="hotel">indigo</a><a href="hotel">[_____]</a></ins></p>');
+		assert.strictEqual(mainModule.WKCParserArticlesForPage(kStubs.kStubsDOMParserInstance(), null, kStubs.kStubsHTML('<a href="hotel"><div><p>india<br></p></div></a><a href="hotel"></a><a href="hotel"><div><p>india<br></p></div></a><a href="hotel"></a>')).pop().WKCArticleBody, '<p><ins><a href="hotel">india</a><a href="hotel">[_____]</a><a href="hotel">india</a><a href="hotel">[_____]</a></ins></p>');
 	});
 
 	it.skip('wraps children with ins', function() {

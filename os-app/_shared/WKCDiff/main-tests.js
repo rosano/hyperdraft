@@ -10,7 +10,7 @@ const mainModule = require('./main');
 
 const kTests = {
 	kTestsTextMultiline: function(count) {
-		return 'alfa bravo charlie delta echo foxtrot golf hotel indigo juliet kilo'.split(' ').slice(0, typeof count === 'undefined' ? Infinity : count).join('\n').concat('\n');
+		return 'alfa bravo charlie delta echo foxtrot golf hotel india juliet kilo'.split(' ').slice(0, typeof count === 'undefined' ? Infinity : count).join('\n').concat('\n');
 	},
 };
 
@@ -65,7 +65,7 @@ describe('WKCDiffHTMLForStrings', function testWKCDiffHTMLForStrings() {
 		});
 
 		it('shows truncated body if not in range', function() {
-			assert.strictEqual(mainModule.WKCDiffHTMLForStrings(kTests.kTestsTextMultiline(9), kTests.kTestsTextMultiline(9).replace('alfa', 'alfax').replace('indigo', 'indigox')), kTests.kTestsTextMultiline(9).replace('echo', '…').replace('alfa', 'alfa{WKCDiffInsert}x{/WKCDiffInsert}').replace('indigo', 'indigo{WKCDiffInsert}x{/WKCDiffInsert}'));
+			assert.strictEqual(mainModule.WKCDiffHTMLForStrings(kTests.kTestsTextMultiline(9), kTests.kTestsTextMultiline(9).replace('alfa', 'alfax').replace('india', 'indiax')), kTests.kTestsTextMultiline(9).replace('echo', '…').replace('alfa', 'alfa{WKCDiffInsert}x{/WKCDiffInsert}').replace('india', 'india{WKCDiffInsert}x{/WKCDiffInsert}'));
 		});
 
 	});
