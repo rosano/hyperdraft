@@ -1,8 +1,8 @@
 {
   "private": true,
   "scripts": {
-    "start": "node ./os-launch",
-    "postinstall": "gulp default"
+    "start": "node ./os-launch.js",
+    "postinstall": "node ./os-build.js"
   },
   "dependencies": {
     "// OLDSKOOL": null,
