@@ -7,7 +7,7 @@ os-cache
 os-workspace-testing
 
 # BUILD
-os-public/shared-assets/external
+os-app/_shared/_external
 os-public/shared-assets/internal
 
 # LOCAL

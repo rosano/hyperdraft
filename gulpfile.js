@@ -30,7 +30,7 @@ gulpPackage.task('default', gulpPackage.series(function (completionHandler) {
 		return completionHandler();
 	}
 
-	filesystemLibrary.OLSKFilesystemHelpDeleteDirectoryRecursive(pathPackage.join(__dirname, 'os-public/shared-assets/external'));
+	filesystemLibrary.OLSKFilesystemHelpDeleteDirectoryRecursive(pathPackage.join(__dirname, 'os-public/_shared/_external'));
 
 	gulpPackage.src(NODE_MODULE_NAMES.map(function(e) {
 		return [
@@ -42,7 +42,7 @@ gulpPackage.task('default', gulpPackage.series(function (completionHandler) {
 	}).reduce(function(collection, e) {
 		return collection.concat(e);
 	}), []).pipe(gulpPackage.dest(function(vinylFile) {
-		return pathPackage.join('os-public/shared-assets/external', vinylFile.path.replace(pathPackage.join(__dirname, 'node_modules'), '').split('/').slice(1).shift());
+		return pathPackage.join('os-public/_shared/_external', vinylFile.path.replace(pathPackage.join(__dirname, 'node_modules'), '').split('/').slice(1).shift());
 	}));
 
 	return completionHandler();

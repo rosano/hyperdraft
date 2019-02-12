@@ -35,6 +35,14 @@ exports.WKCSharedConnectionCleanupMongo = function(client) {
 	return client.close();
 };
 
+//_ OLSKControllerSharedStaticAssetFolders
+
+exports.OLSKControllerSharedStaticAssetFolders = function() {
+	return [
+		'_shared/_external',
+	];
+};
+
 //_ OLSKControllerSharedMiddlewares
 
 exports.OLSKControllerSharedMiddlewares = function() {
