@@ -533,15 +533,15 @@
 
 		parentElement.select('img').attr('src', function (e) {
 			if (e.WKCOutlookID === 'WKCReadSourcesContentListOutlooksListItemInbox') {
-				return '/panel/_shared/wIKReadInbox.svg';
+				return '/panel/_shared/ui-assets/wIKReadInbox.svg';
 			}
 
 			if (e.WKCOutlookID === 'WKCReadSourcesContentListOutlooksListItemArchived') {
-				return '/panel/_shared/wIKReadArchive.svg';
+				return '/panel/_shared/ui-assets/wIKReadArchive.svg';
 			}
 
 			if (e.WKCOutlookID === 'WKCReadSourcesContentListOutlooksListItemDiscarded') {
-				return '/panel/_shared/wIKReadDiscard.svg';
+				return '/panel/_shared/ui-assets/wIKReadDiscard.svg';
 			}
 		});
 
