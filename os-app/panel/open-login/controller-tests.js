@@ -9,7 +9,7 @@ const assert = require('assert');
 var testingLibrary = require('OLSKTesting');
 
 var controllerModule = require('./controller');
-var sharedController = require('../../_shared/controller');
+var sharedController = require('../../_shared/common/controller');
 
 describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 

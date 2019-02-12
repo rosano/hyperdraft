@@ -4,7 +4,7 @@
  * MIT Licensed
  */
 
-var sharedController = require('../../_shared/controller');
+var sharedController = require('../../_shared/common/controller');
 
 //_ OLSKControllerRoutes
 
