@@ -8,7 +8,6 @@ os-workspace-testing
 
 # BUILD
 os-app/_shared/_external
-os-public/shared-assets/internal
 
 # LOCAL
 .env
