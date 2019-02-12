@@ -2,78 +2,99 @@
 <html<%- locals.OLSKSharedPageCurrentLanguage ? [' lang="', OLSKSharedPageCurrentLanguage, '"'].join('') : ''; %>>
 
 <head>
-	<% if (locals.OLSKPageTitle) { %>
-		<title><%= locals.OLSKPageTitle %></title>
-	<% } %>
+	<%- (function(outputData = []) {
+	if (locals.OLSKPageTitle) {
+		outputData.push(`<title>${ locals.OLSKPageTitle }</title>`);
+	}
 
-	<% if (locals.OLSKPageDescription) { %>
-		<meta name="description" content="<%= locals.OLSKPageDescription %>" />
-	<% } %>
+	if (locals.OLSKPageDescription) {
+		outputData.push(`<meta name="description" content="${ locals.OLSKPageDescription }" />`);
+	}
 
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<meta name="viewport" content="width=device-width">
+	outputData.push(...[
+		`<meta http-equiv="Content-Type" content="text/html; charset=utf-8">`,
+		`<meta name="viewport" content="width=device-width">`,
+		]);
 
-	<% if (process.env.WKC_TEMP_TOUCH_ICON_URL) { -%>
-	<link rel="apple-touch-icon" href="<%= process.env.WKC_TEMP_TOUCH_ICON_URL %>">
-	<% } -%>
+	outputData.push(...Object.keys(locals.OLSKPageMetaTags || {}).map(function(e) {
+		return `<meta name="${ e }" content="${ locals.OLSKPageMetaTags[e] }">`;
+	}));
 
-	<% if (typeof locals.OLSKPageMetaTags === 'object') { %>
-		<% Object.keys(locals.OLSKPageMetaTags).forEach(function(e) { %>
-			<meta name="<%= e %>" content="<%= locals.OLSKPageMetaTags[e] %>">
-		<% }) %>
-	<% } %>
+	if (locals.OLSKSharedActiveRouteConstant) {
+		outputData.push(`<link rel="canonical" href="${ OLSKCanonicalFor(locals.OLSKSharedActiveRouteConstant) }" />`);
+	}
 
-	<link rel="stylesheet" type="text/css" href="/_shared/_external/normalize.css/normalize.css">
+	outputData.push(...(locals.OLSKSharedPageLanguagesAvailable || []).map(function (e) {
+		return `<link rel="alternate" hreflang="${ e }" href="${ OLSKCanonicalLocalizedFor(OLSKSharedActiveRouteConstant, {
+			OLSKRoutingLanguage: e,
+		}) }" />`;
+	}));
 
-	<script src="/_shared/_external/d3/dist/d3.min.js"></script>
+	if (locals.OLSKPagePublicConstants) {
+		outputData.push(`<script type="text/javascript">
+		window.OLSKPublicConstants = function (inputData) {
+			return ${ JSON.stringify(OLSKPagePublicConstants) }[inputData];
+		};
+	</script>`);
+	}
 
-	<% if (locals.OLSKPagePublicLocalizedStringKeys) { %>
-	<script src="/_shared/_external/OLSKInternational/main.js"></script>
-	<script src="/_shared/_external/OLSKString/main.js"></script>
-	<script type="text/javascript">
+	if (process.env.WKC_TEMP_TOUCH_ICON_URL) {
+		outputData.push(`<link rel="apple-touch-icon" href="${ process.env.WKC_TEMP_TOUCH_ICON_URL }">`);
+	}
+
+	let pathToTag = function (e) {
+		let path = (e[0] === '/' ? '' : `/${ locals.OLSKSharedPageControllerSlug }/`).concat(e);
+
+		if (path.split('.').pop() === 'css') {
+			return `<link rel="stylesheet" type="text/css" href="${ path }">`;
+		}
+
+		if (path.split('.').pop() === 'js') {
+			return `<script src="${ path }"></script>`;
+		}
+	};
+
+	outputData.push(...[
+		'/_shared/_external/normalize.css/normalize.css',
+		'/_shared/_external/d3/dist/d3.min.js',
+	].map(pathToTag));
+
+	if (locals.OLSKPagePublicLocalizedStringKeys) {
+		outputData.push(...[
+			'/_shared/_external/OLSKInternational/main.js',
+			'/_shared/_external/OLSKString/main.js',
+			].map(pathToTag));
+		
+		outputData.push(`<script type="text/javascript">
 		window.OLSKFormatted = OLSKString.OLSKStringWithFormat;
 		window.OLSKLocalized = function(translationConstant) {
-			return OLSKInternational.OLSKInternationalLocalizedStringWithTranslationKeyAndTranslationDictionary(translationConstant, <%- JSON.stringify(OLSKPagePublicLocalizedStringKeys.reduce(function(map, e) {
+			return OLSKInternational.OLSKInternationalLocalizedStringWithTranslationKeyAndTranslationDictionary(translationConstant, ${ JSON.stringify(OLSKPagePublicLocalizedStringKeys.reduce(function(map, e) {
 					map[e] = OLSKLocalized(e);
 					return map;
-				}, {})) %>);
+				}, {})) });
 		};
-	</script>
-	<% } %>
+	</script>`);
+	}
 
-	<% if (locals.OLSKPagePublicRouteKeys) { %>
-	<script src="/_shared/_external/OLSKRouting/main.js"></script>
-	<script type="text/javascript">
+	if (locals.OLSKPagePublicRouteKeys) {
+		outputData.push(...[
+			'/_shared/_external/OLSKRouting/main.js',
+			].map(pathToTag));
+		
+		outputData.push(`<script type="text/javascript">
 		window.OLSKCanonicalFor = function(routeConstant, optionalParams) {
-			return OLSKRouting.OLSKRoutingCanonicalPathWithRoutePathAndOptionalParams((<%- JSON.stringify(OLSKPagePublicRouteKeys.reduce(function (map, e) {
+			return OLSKRouting.OLSKRoutingCanonicalPathWithRoutePathAndOptionalParams((${ JSON.stringify(OLSKPagePublicRouteKeys.reduce(function (map, e) {
 				map[e] = OLSKRouteObjectFor(e).OLSKRoutePath;
 				return map;
-			}, {})) %>)[routeConstant], optionalParams);
+			}, {})) })[routeConstant], optionalParams);
 		};
-	</script>
-	<% } %>
+	</script>`);
+	}
 
-	<% if (locals.OLSKPagePublicConstants) { %>
-	<script type="text/javascript">
-		window.OLSKPublicConstants = function (inputData) {
-			return <%- JSON.stringify(OLSKPagePublicConstants) %>[inputData];
-		};
-	</script>
-	<% } %>
+	outputData.push(...(locals.OLSKPageAssets || []).map(pathToTag));
 
-	<% if (locals.OLSKSharedPageControllerSlug && Array.isArray(locals.OLSKPageAssets)) { %>
-		<% locals.OLSKPageAssets.forEach(function(e) { %>
-			<% var defaultDirectory = e[0] === '/' ? '' : '/' + (locals.OLSKSharedPageControllerSlug + '/'); %>
-			
-			<% if (e.split('.').pop() === 'js') { %>
-	<script src="<%= defaultDirectory %><%= e %>"></script>
-			<% } %>
-
-			<% if (e.split('.').pop() === 'css') { %>
-	<link rel="stylesheet" type="text/css" href="<%= defaultDirectory %><%= e %>">
-			<% } %>
-		<% }) %>
-	<% } %>
+	return outputData.join('\n\t');
+})(); %>
 </head>
 
 <body id="OLSKSharedBody">
