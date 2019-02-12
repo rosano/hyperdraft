@@ -64,11 +64,11 @@
 
 	exports.WKCParserArticlesForFeedRSS = function(DOMParserInstance, oldString, newString) {
 		if (typeof DOMParserInstance !== 'object' || DOMParserInstance === null) {
-			throw new Error('WKCErrorInvalidInput');
+			throw new Error('WKCErrorInputInvalid');
 		}
 
 		if (typeof DOMParserInstance.parseFromString !== 'function') {
-			throw new Error('WKCErrorInvalidInput');
+			throw new Error('WKCErrorInputInvalid');
 		}
 
 		const parsedXML = DOMParserInstance.parseFromString(oldString, 'application/xml');
@@ -104,11 +104,11 @@
 
 	exports.WKCParserArticlesForFeedAtom = function(DOMParserInstance, oldString, newString) {
 		if (typeof DOMParserInstance !== 'object' || DOMParserInstance === null) {
-			throw new Error('WKCErrorInvalidInput');
+			throw new Error('WKCErrorInputInvalid');
 		}
 
 		if (typeof DOMParserInstance.parseFromString !== 'function') {
-			throw new Error('WKCErrorInvalidInput');
+			throw new Error('WKCErrorInputInvalid');
 		}
 
 		var parsedXML = DOMParserInstance.parseFromString(oldString, 'application/xml');
@@ -155,15 +155,15 @@
 
 	exports.WKCParserArticlesForPage = function(DOMParserInstance, oldString, newString) {
 		if (typeof DOMParserInstance !== 'object' || DOMParserInstance === null) {
-			throw new Error('WKCErrorInvalidInput');
+			throw new Error('WKCErrorInputInvalid');
 		}
 
 		if (typeof DOMParserInstance.parseFromString !== 'function') {
-			throw new Error('WKCErrorInvalidInput');
+			throw new Error('WKCErrorInputInvalid');
 		}
 
 		if (typeof newString !== 'string') {
-			throw new Error('WKCErrorInvalidInput');
+			throw new Error('WKCErrorInputInvalid');
 		}
 
 		oldString = exports.WKCParserPlaintextForHTML(oldString || '');
@@ -183,7 +183,7 @@
 
 	exports.WKCParserArticlesForFile = function(oldString, newString) {
 		if (typeof newString !== 'string') {
-			throw new Error('WKCErrorInvalidInput');
+			throw new Error('WKCErrorInputInvalid');
 		}
 
 		if (oldString === newString) {
@@ -206,19 +206,19 @@
 
 	exports.WKCParserArticlesForCustomTwitterTimeline = function(oldBody, newBody) {
 		if (typeof newBody !== 'string') {
-			throw new Error('WKCErrorInvalidInput');
+			throw new Error('WKCErrorInputInvalid');
 		}
 
 		const oldJSON = JSON.parse(oldBody || '[]');
 
 		if (!Array.isArray(oldJSON)) {
-			throw new Error('WKCErrorInvalidInput');
+			throw new Error('WKCErrorInputInvalid');
 		}
 
 		const newJSON = JSON.parse(newBody);
 
 		if (!Array.isArray(newJSON)) {
-			throw new Error('WKCErrorInvalidInput');
+			throw new Error('WKCErrorInputInvalid');
 		}
 
 		if (!newJSON) {
@@ -260,7 +260,7 @@
 
 	exports.WKCParserHTMLForPlaintext = function(inputData) {
 		if (typeof inputData !== 'string') {
-			throw new Error('WKCErrorInvalidInput');
+			throw new Error('WKCErrorInputInvalid');
 		}
 
 		return showdownConverter.makeHtml(inputData);
@@ -270,7 +270,7 @@
 
 	exports.WKCParserPlaintextForHTML = function(inputData) {
 		if (typeof inputData !== 'string') {
-			throw new Error('WKCErrorInvalidInput');
+			throw new Error('WKCErrorInputInvalid');
 		}
 
 		return turndownInstance.turndown(inputData);
@@ -300,7 +300,7 @@
 
 	exports.WKCParserSnippetForPlaintext = function(inputData) {
 		if (typeof inputData !== 'string') {
-			throw new Error('WKCErrorInvalidInput');
+			throw new Error('WKCErrorInputInvalid');
 		}
 
 		return inputData.length <= 100 ? inputData : inputData.slice(0, 100).split(' ').slice(0, -1).join(' ').concat('…');
@@ -310,11 +310,11 @@
 
 	exports.WKCParserReplaceLinks = function(param1, param2) {
 		if (typeof param1 !== 'string') {
-			throw new Error('WKCErrorInvalidInput');
+			throw new Error('WKCErrorInputInvalid');
 		}
 
 		if (typeof param2 !== 'object' || param2 === null) {
-			throw new Error('WKCErrorInvalidInput');
+			throw new Error('WKCErrorInputInvalid');
 		}
 
 		return Object.entries(param2).reduce(function (coll, e) {

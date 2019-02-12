@@ -8,7 +8,7 @@
 
 exports.WKCVersionsModelErrorsFor = function(inputData) {
 	if (typeof inputData !== 'object' || inputData === null) {
-		throw new Error('WKCErrorInvalidInput');
+		throw new Error('WKCErrorInputInvalid');
 	}
 
 	var errors = {};

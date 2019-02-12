@@ -28,7 +28,7 @@ const kTesting = {
 describe('WKCNotesActionPublish', function testWKCNotesActionPublish() {
 
 	it('rejects if not string', async function() {
-		await assert.rejects(mainModule.WKCNotesActionPublish(WKCTestingMongoClient, null), /WKCErrorInvalidInput/)
+		await assert.rejects(mainModule.WKCNotesActionPublish(WKCTestingMongoClient, null), /WKCErrorInputInvalid/)
 	});
 
 	it('returns error if not found', async function() {
@@ -89,7 +89,7 @@ describe('WKCNotesActionPublish', function testWKCNotesActionPublish() {
 describe('WKCNotesActionPublicRead', function testWKCNotesActionPublicRead() {
 
 	it('rejects if not string', async function() {
-		await assert.rejects(mainModule.WKCNotesActionPublicRead(WKCTestingMongoClient, 1), /WKCErrorInvalidInput/);
+		await assert.rejects(mainModule.WKCNotesActionPublicRead(WKCTestingMongoClient, 1), /WKCErrorInputInvalid/);
 	});
 
 	it('returns error if not found', async function() {
@@ -111,7 +111,7 @@ describe('WKCNotesActionPublicRead', function testWKCNotesActionPublicRead() {
 describe('WKCNotesActionUnpublish', function testWKCNotesActionUnpublish() {
 
 	it('rejects if not string', async function() {
-		await assert.rejects(mainModule.WKCNotesActionUnpublish(WKCTestingMongoClient, null), /WKCErrorInvalidInput/)
+		await assert.rejects(mainModule.WKCNotesActionUnpublish(WKCTestingMongoClient, null), /WKCErrorInputInvalid/)
 	});
 
 	it('returns error if not found', async function() {
@@ -134,7 +134,7 @@ describe('WKCNotesActionUnpublish', function testWKCNotesActionUnpublish() {
 describe('WKCNotesActionVersion', function testWKCNotesActionVersion() {
 
 	it('rejects if not valid', async function() {
-		await assert.rejects(mainModule.WKCNotesActionVersion(WKCTestingMongoClient, {}), /WKCErrorInvalidInput/)
+		await assert.rejects(mainModule.WKCNotesActionVersion(WKCTestingMongoClient, {}), /WKCErrorInputInvalid/)
 	});
 
 	it('returns error if not found', async function() {
@@ -160,7 +160,7 @@ describe('WKCNotesActionVersion', function testWKCNotesActionVersion() {
 describe('WKCNotesActionDelete', function testWKCNotesActionDelete() {
 
 	it('rejects if not string', async function() {
-		await assert.rejects(mainModule.WKCNotesActionDelete(WKCTestingMongoClient, 1), /WKCErrorInvalidInput/);
+		await assert.rejects(mainModule.WKCNotesActionDelete(WKCTestingMongoClient, 1), /WKCErrorInputInvalid/);
 	});
 
 	it('returns error if not found', async function() {

@@ -10,7 +10,7 @@ var modelLibrary = require('./model');
 
 exports.WKCNotesMetalCreate = async function(databaseClient, inputData) {
 	if (typeof inputData !== 'object' || inputData === null) {
-		return Promise.reject(new Error('WKCErrorInvalidInput'));
+		return Promise.reject(new Error('WKCErrorInputInvalid'));
 	}
 
 	let errors;
@@ -38,7 +38,7 @@ exports.WKCNotesMetalCreate = async function(databaseClient, inputData) {
 
 exports.WKCNotesMetalRead = async function(databaseClient, inputData) {
 	if (typeof inputData !== 'string') {
-		return Promise.reject(new Error('WKCErrorInvalidInput'));
+		return Promise.reject(new Error('WKCErrorInputInvalid'));
 	}
 
 	let outputData = await databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_notes').findOne({
@@ -58,11 +58,11 @@ exports.WKCNotesMetalRead = async function(databaseClient, inputData) {
 
 exports.WKCNotesMetalUpdate = async function(databaseClient, param1, param2) {
 	if (typeof param1 !== 'string') {
-		return Promise.reject(new Error('WKCErrorInvalidInput'));
+		return Promise.reject(new Error('WKCErrorInputInvalid'));
 	}
 
 	if (typeof param2 !== 'object' || param2 === null) {
-		return Promise.reject(new Error('WKCErrorInvalidInput'));
+		return Promise.reject(new Error('WKCErrorInputInvalid'));
 	}
 
 	let errors;
@@ -97,7 +97,7 @@ exports.WKCNotesMetalUpdate = async function(databaseClient, param1, param2) {
 
 exports.WKCNotesMetalQuery = async function(databaseClient, inputData) {
 	if (typeof inputData !== 'object' || inputData === null) {
-		return Promise.reject(new Error('WKCErrorInvalidInput'));
+		return Promise.reject(new Error('WKCErrorInputInvalid'));
 	}
 
 	return Promise.resolve((await databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_notes').find(inputData).toArray()).map(function(e) {

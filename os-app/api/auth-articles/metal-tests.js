@@ -20,13 +20,13 @@ describe('WKCMetalArticlesCreate', function testWKCMetalArticlesCreate() {
 	it('throws error if param2 not object', function() {
 		assert.throws(function() {
 			metalLibrary.WKCMetalArticlesCreate(WKCTestingMongoClient, '', function() {});
-		}, /WKCErrorInvalidInput/);
+		}, /WKCErrorInputInvalid/);
 	});
 
 	it('throws error if param3 not function', function() {
 		assert.throws(function() {
 			metalLibrary.WKCMetalArticlesCreate(WKCTestingMongoClient, {}, null);
-		}, /WKCErrorInvalidInput/);
+		}, /WKCErrorInputInvalid/);
 	});
 
 	it('returns WKCErrors if not valid WKCArticle', function(done) {
@@ -62,13 +62,13 @@ describe('WKCMetalArticlesRead', function testWKCMetalArticlesRead() {
 	it('throws error if param2 not string', function() {
 		assert.throws(function() {
 			metalLibrary.WKCMetalArticlesRead(WKCTestingMongoClient, 1, function() {});
-		}, /WKCErrorInvalidInput/);
+		}, /WKCErrorInputInvalid/);
 	});
 
 	it('throws error if param3 not function', function() {
 		assert.throws(function() {
 			metalLibrary.WKCMetalArticlesRead(WKCTestingMongoClient, '1', null);
-		}, /WKCErrorInvalidInput/);
+		}, /WKCErrorInputInvalid/);
 	});
 
 	it('returns error if WKCArticleID not found', function(done) {
@@ -97,19 +97,19 @@ describe('WKCMetalArticlesUpdate', function testWKCMetalArticlesUpdate() {
 	it('throws error if param2 not string', function() {
 		assert.throws(function() {
 			metalLibrary.WKCMetalArticlesUpdate(WKCTestingMongoClient, 1, {}, function() {});
-		}, /WKCErrorInvalidInput/);
+		}, /WKCErrorInputInvalid/);
 	});
 
 	it('throws error if param3 not object', function() {
 		assert.throws(function() {
 			metalLibrary.WKCMetalArticlesUpdate(WKCTestingMongoClient, '1', null, function() {});
-		}, /WKCErrorInvalidInput/);
+		}, /WKCErrorInputInvalid/);
 	});
 
 	it('throws error if param4 not function', function() {
 		assert.throws(function() {
 			metalLibrary.WKCMetalArticlesUpdate(WKCTestingMongoClient, '1', {}, null);
-		}, /WKCErrorInvalidInput/);
+		}, /WKCErrorInputInvalid/);
 	});
 
 	it('returns error if WKCArticleID not found', function(done) {
@@ -157,13 +157,13 @@ describe('WKCMetalArticlesDelete', function testWKCMetalArticlesDelete() {
 	it('throws error if param2 not string', function() {
 		assert.throws(function() {
 			metalLibrary.WKCMetalArticlesDelete(WKCTestingMongoClient, 1, function() {});
-		}, /WKCErrorInvalidInput/);
+		}, /WKCErrorInputInvalid/);
 	});
 
 	it('throws error if param3 not function', function() {
 		assert.throws(function() {
 			metalLibrary.WKCMetalArticlesDelete(WKCTestingMongoClient, '1', null);
-		}, /WKCErrorInvalidInput/);
+		}, /WKCErrorInputInvalid/);
 	});
 
 	it('returns error if WKCArticleID not found', function(done) {
@@ -191,19 +191,19 @@ describe('WKCMetalArticlesSearch', function testWKCMetalArticlesSearch() {
 	it('throws error if param2 not function', function() {
 		assert.throws(function() {
 			metalLibrary.WKCMetalArticlesSearch(WKCTestingMongoClient, null, function () {});
-		}, /WKCErrorInvalidInput/);
+		}, /WKCErrorInputInvalid/);
 	});
 
 	it('throws error if param3 not function', function() {
 		assert.throws(function() {
 			metalLibrary.WKCMetalArticlesSearch(WKCTestingMongoClient, {}, null);
-		}, /WKCErrorInvalidInput/);
+		}, /WKCErrorInputInvalid/);
 	});
 
 	it('throws error if param4 not object', function() {
 		assert.throws(function() {
 			metalLibrary.WKCMetalArticlesSearch(WKCTestingMongoClient, {}, function() {}, null);
-		}, /WKCErrorInvalidInput/);
+		}, /WKCErrorInputInvalid/);
 	});
 
 	it('returns all if param2 empty', function(done) {
@@ -243,7 +243,7 @@ describe('WKCMetalArticlesSearch', function testWKCMetalArticlesSearch() {
 				metalLibrary.WKCMetalArticlesSearch(WKCTestingMongoClient, {}, function() {}, {
 					WKCOptionLimit: '1',
 				});
-			}, /WKCErrorInvalidInput/);
+			}, /WKCErrorInputInvalid/);
 		});
 
 		it('returns limited if WKCOptionLimit set', function(done) {

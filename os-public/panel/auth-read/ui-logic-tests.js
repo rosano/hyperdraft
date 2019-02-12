@@ -13,19 +13,19 @@ describe('WKCReadModuleSubscribeCompleteURL', function testWKCReadModuleSubscrib
 	it('throws error if param1 not string', function() {
 		assert.throws(function() {
 			logicLibrary.WKCReadModuleSubscribeCompleteURL(null, 'https://google.com');
-		}, /WKCErrorInvalidInput/);
+		}, /WKCErrorInputInvalid/);
 	});
 
 	it('throws error if param1 not filled', function() {
 		assert.throws(function() {
 			logicLibrary.WKCReadModuleSubscribeCompleteURL('', 'https://google.com');
-		}, /WKCErrorInvalidInput/);
+		}, /WKCErrorInputInvalid/);
 	});
 
 	it('throws error if param2 not formatted', function() {
 		assert.throws(function() {
 			logicLibrary.WKCReadModuleSubscribeCompleteURL('/', 'google.com');
-		}, /WKCErrorInvalidInput/);
+		}, /WKCErrorInputInvalid/);
 	});
 
 	it('returns input if formatted', function() {

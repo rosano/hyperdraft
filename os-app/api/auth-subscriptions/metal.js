@@ -10,11 +10,11 @@ var modelLibrary = require('./model');
 
 exports.WKCMetalSubscriptionsCreate = function(databaseClient, inputData, completionHandler) {
 	if (typeof inputData !== 'object' || inputData === null) {
-		throw new Error('WKCErrorInvalidInput');
+		throw new Error('WKCErrorInputInvalid');
 	}
 
 	if (typeof completionHandler !== 'function') {
-		throw new Error('WKCErrorInvalidInput');
+		throw new Error('WKCErrorInputInvalid');
 	}
 
 	const errors = modelLibrary.WKCSubscriptionsModelErrorsFor(modelLibrary.WKCModelSubscriptionPrepare(inputData));
@@ -49,11 +49,11 @@ exports.WKCMetalSubscriptionsCreate = function(databaseClient, inputData, comple
 
 exports.WKCMetalSubscriptionsRead = function(databaseClient, inputData, completionHandler) {
 	if (typeof inputData !== 'string') {
-		throw new Error('WKCErrorInvalidInput');
+		throw new Error('WKCErrorInputInvalid');
 	}
 
 	if (typeof completionHandler !== 'function') {
-		throw new Error('WKCErrorInvalidInput');
+		throw new Error('WKCErrorInputInvalid');
 	}
 
 	return databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_subscriptions').findOne({
@@ -81,15 +81,15 @@ exports.WKCMetalSubscriptionsRead = function(databaseClient, inputData, completi
 
 exports.WKCMetalSubscriptionsUpdate = function(databaseClient, objectID, inputData, completionHandler) {
 	if (typeof objectID !== 'string') {
-		throw new Error('WKCErrorInvalidInput');
+		throw new Error('WKCErrorInputInvalid');
 	}
 
 	if (typeof inputData !== 'object' || inputData === null) {
-		throw new Error('WKCErrorInvalidInput');
+		throw new Error('WKCErrorInputInvalid');
 	}
 
 	if (typeof completionHandler !== 'function') {
-		throw new Error('WKCErrorInvalidInput');
+		throw new Error('WKCErrorInputInvalid');
 	}
 
 	const errors = modelLibrary.WKCSubscriptionsModelErrorsFor(modelLibrary.WKCModelSubscriptionPrepare(inputData), {
@@ -130,11 +130,11 @@ exports.WKCMetalSubscriptionsUpdate = function(databaseClient, objectID, inputDa
 
 exports.WKCMetalSubscriptionsDelete = function(databaseClient, inputData, completionHandler) {
 	if (typeof inputData !== 'string') {
-		throw new Error('WKCErrorInvalidInput');
+		throw new Error('WKCErrorInputInvalid');
 	}
 
 	if (typeof completionHandler !== 'function') {
-		throw new Error('WKCErrorInvalidInput');
+		throw new Error('WKCErrorInputInvalid');
 	}
 
 	return databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_subscriptions').deleteOne({
@@ -156,11 +156,11 @@ exports.WKCMetalSubscriptionsDelete = function(databaseClient, inputData, comple
 
 exports.WKCMetalSubscriptionsSearch = function(databaseClient, inputData, completionHandler, options = {}) {
 	if (typeof completionHandler !== 'function') {
-		throw new Error('WKCErrorInvalidInput');
+		throw new Error('WKCErrorInputInvalid');
 	}
 
 	if (options && typeof options !== 'object' || options === null) {
-		throw new Error('WKCErrorInvalidInput');
+		throw new Error('WKCErrorInputInvalid');
 	}
 
 	return databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_subscriptions').find({}).project(modelLibrary.WKCSubscriptionHiddenPropertyNames().concat(options && options.WKCOptionExcludeWKCSubscriptionFetchContent ? ['WKCSubscriptionFetchContent'] : []).reduce(function(hash, e) {
@@ -180,7 +180,7 @@ exports.WKCMetalSubscriptionsSearch = function(databaseClient, inputData, comple
 
 exports.WKCMetalSubscriptionsNeedingFetch = function(databaseClient, completionHandler) {
 	if (typeof completionHandler !== 'function') {
-		throw new Error('WKCErrorInvalidInput');
+		throw new Error('WKCErrorInputInvalid');
 	}
 
 	return databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_subscriptions').find({
@@ -229,15 +229,15 @@ exports.WKCMetalSubscriptionsNeedingFetch = function(databaseClient, completionH
 
 exports.WKCSubscriptionsMetalRequestParameters = function(databaseClient, inputData, completionHandler, options = {}) {
 	if (typeof inputData !== 'string') {
-		throw new Error('WKCErrorInvalidInput');
+		throw new Error('WKCErrorInputInvalid');
 	}
 
 	if (typeof completionHandler !== 'function') {
-		throw new Error('WKCErrorInvalidInput');
+		throw new Error('WKCErrorInputInvalid');
 	}
 
 	if (options && typeof options !== 'object' || options === null) {
-		throw new Error('WKCErrorInvalidInput');
+		throw new Error('WKCErrorInputInvalid');
 	}
 
 	var requestObject = {

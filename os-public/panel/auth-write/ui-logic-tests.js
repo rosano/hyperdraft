@@ -62,7 +62,7 @@ describe('WKCWriteLineObjectsFor', function testWKCWriteLineObjectsFor() {
 	it('throws error if not array', function() {
 		assert.throws(function() {
 			mainModule.WKCWriteLineObjectsFor(null);
-		}, /WKCErrorInvalidInput/);
+		}, /WKCErrorInputInvalid/);
 	});
 
 	it('returns array', function() {

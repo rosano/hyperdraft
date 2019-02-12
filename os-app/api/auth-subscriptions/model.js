@@ -40,7 +40,7 @@ exports.WKCSubscriptionHandlerCustomTwitterTimeline = function() {
 
 exports.WKCSubscriptionHandlerCustomTwitterTimelineRequestCallback = function(databaseClient, completionHandler) {
 	if (typeof completionHandler !== 'function') {
-		throw new Error('WKCErrorInvalidInput');
+		throw new Error('WKCErrorInputInvalid');
 	}
 
 	return databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_settings').findOne({
@@ -94,7 +94,7 @@ exports.WKCModelSubscriptionPrepare = function(inputData) {
 
 exports.WKCSubscriptionsModelErrorsFor = function(inputData, options) {
 	if (typeof inputData !== 'object' || inputData === null) {
-		throw new Error('WKCErrorInvalidInput');
+		throw new Error('WKCErrorInputInvalid');
 	}
 
 	var errors = {};

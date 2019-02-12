@@ -19,7 +19,7 @@ const kTesting = {
 describe('WKCNotesMetalCreate', function testWKCNotesMetalCreate() {
 
 	it('rejects if not object', async function() {
-		await assert.rejects(mainModule.WKCNotesMetalCreate(WKCTestingMongoClient, null), /WKCErrorInvalidInput/);
+		await assert.rejects(mainModule.WKCNotesMetalCreate(WKCTestingMongoClient, null), /WKCErrorInputInvalid/);
 	});
 
 	it('returns inputData with WKCErrors if not valid', async function() {
@@ -48,7 +48,7 @@ describe('WKCNotesMetalCreate', function testWKCNotesMetalCreate() {
 describe('WKCNotesMetalRead', function testWKCNotesMetalRead() {
 
 	it('rejects if not string', async function() {
-		await assert.rejects(mainModule.WKCNotesMetalRead(WKCTestingMongoClient, 1), /WKCErrorInvalidInput/);
+		await assert.rejects(mainModule.WKCNotesMetalRead(WKCTestingMongoClient, 1), /WKCErrorInputInvalid/);
 	});
 
 	it('returns null if not found', async function() {
@@ -65,11 +65,11 @@ describe('WKCNotesMetalRead', function testWKCNotesMetalRead() {
 describe('WKCNotesMetalUpdate', function testWKCNotesMetalUpdate() {
 
 	it('rejects if param2 not string', async function() {
-		await assert.rejects(mainModule.WKCNotesMetalUpdate(WKCTestingMongoClient, 1, {}), /WKCErrorInvalidInput/);
+		await assert.rejects(mainModule.WKCNotesMetalUpdate(WKCTestingMongoClient, 1, {}), /WKCErrorInputInvalid/);
 	});
 
 	it('rejects if param3 not object', async function() {
-		await assert.rejects(mainModule.WKCNotesMetalUpdate(WKCTestingMongoClient, '1', null), /WKCErrorInvalidInput/);
+		await assert.rejects(mainModule.WKCNotesMetalUpdate(WKCTestingMongoClient, '1', null), /WKCErrorInputInvalid/);
 	});
 
 	it('returns null if not found', async function() {
@@ -113,7 +113,7 @@ describe('WKCNotesMetalUpdate', function testWKCNotesMetalUpdate() {
 describe('WKCNotesMetalQuery', function testWKCNotesMetalQuery() {
 
 	it('rejects if not object', async function() {
-		await assert.rejects(mainModule.WKCNotesMetalQuery(WKCTestingMongoClient, null), /WKCErrorInvalidInput/);
+		await assert.rejects(mainModule.WKCNotesMetalQuery(WKCTestingMongoClient, null), /WKCErrorInputInvalid/);
 	});
 
 	it('returns array if no results', async function() {

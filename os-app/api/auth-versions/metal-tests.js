@@ -25,7 +25,7 @@ const kTesting = {
 describe('WKCVersionsMetalCreate', function testWKCVersionsMetalCreate() {
 
 	it('rejects if not object', async function() {
-		await assert.rejects(mainModule.WKCVersionsMetalCreate(WKCTestingMongoClient, null), /WKCErrorInvalidInput/);
+		await assert.rejects(mainModule.WKCVersionsMetalCreate(WKCTestingMongoClient, null), /WKCErrorInputInvalid/);
 	});
 
 	it('returns inputData if not valid', async function() {
@@ -52,7 +52,7 @@ describe('WKCVersionsMetalCreate', function testWKCVersionsMetalCreate() {
 describe('WKCVersionsMetalDelete', function testWKCVersionsMetalDelete() {
 
 	it('rejects if not string', async function() {
-		await assert.rejects(mainModule.WKCVersionsMetalDelete(WKCTestingMongoClient, 1), /WKCErrorInvalidInput/);
+		await assert.rejects(mainModule.WKCVersionsMetalDelete(WKCTestingMongoClient, 1), /WKCErrorInputInvalid/);
 	});
 
 	it('returns error if not found', async function() {
@@ -68,7 +68,7 @@ describe('WKCVersionsMetalDelete', function testWKCVersionsMetalDelete() {
 describe('WKCVersionsMetalQuery', function testWKCVersionsMetalQuery() {
 
 	it('rejects if not object', async function() {
-		await assert.rejects(mainModule.WKCVersionsMetalQuery(WKCTestingMongoClient, null), /WKCErrorInvalidInput/);
+		await assert.rejects(mainModule.WKCVersionsMetalQuery(WKCTestingMongoClient, null), /WKCErrorInputInvalid/);
 	});
 
 	it('returns array if none', async function() {

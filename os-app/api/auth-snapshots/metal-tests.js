@@ -22,13 +22,13 @@ describe('WKCSnapshotsMetalCreate', function tesSnapshotsMetalCreate() {
 	it('throws error if param2 not object', function() {
 		assert.throws(function() {
 			metalLibrary.WKCSnapshotsMetalCreate(WKCTestingMongoClient, '', function() {});
-		}, /WKCErrorInvalidInput/);
+		}, /WKCErrorInputInvalid/);
 	});
 
 	it('throws error if param3 not function', function() {
 		assert.throws(function() {
 			metalLibrary.WKCSnapshotsMetalCreate(WKCTestingMongoClient, {}, null);
-		}, /WKCErrorInvalidInput/);
+		}, /WKCErrorInputInvalid/);
 	});
 
 	it('returns WKCErrors if not valid WKCSnapshot', function(done) {

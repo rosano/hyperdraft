@@ -37,7 +37,7 @@ exports.WKCNotesActionPublish = async function(databaseClient, inputData) {
 
 exports.WKCNotesActionPublicRead = async function(databaseClient, inputData) {
 	if (typeof inputData !== 'string') {
-		return Promise.reject(new Error('WKCErrorInvalidInput'));
+		return Promise.reject(new Error('WKCErrorInputInvalid'));
 	}
 
 	let outputData = (await metalLibrary.WKCNotesMetalQuery(databaseClient, {
@@ -78,7 +78,7 @@ exports.WKCNotesActionVersion = async function(databaseClient, inputData) {
 	}
 
 	if ((await versionsMetalLibrary.WKCVersionsMetalCreate(databaseClient, inputData)).WKCErrors) {
-		return Promise.reject(new Error('WKCErrorInvalidInput'));
+		return Promise.reject(new Error('WKCErrorInputInvalid'));
 	};
 
 	return Promise.resolve(outputData);
@@ -88,7 +88,7 @@ exports.WKCNotesActionVersion = async function(databaseClient, inputData) {
 
 exports.WKCNotesActionDelete = async function(databaseClient, inputData) {
 	if (typeof inputData !== 'string') {
-		return Promise.reject(new Error('WKCErrorInvalidInput'));
+		return Promise.reject(new Error('WKCErrorInputInvalid'));
 	}
 
 	(await versionsMetalLibrary.WKCVersionsMetalQuery(databaseClient, {

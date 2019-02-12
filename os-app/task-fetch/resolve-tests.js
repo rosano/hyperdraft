@@ -17,13 +17,13 @@ describe('WKCResolveRelativeURLs', function testWKCResolveRelativeURLs() {
 	it('throws error if param1 not formatted', function() {
 		assert.throws(function() {
 			resolveLibrary.WKCResolveRelativeURLs('google.com', '');
-		}, /WKCErrorInvalidInput/);
+		}, /WKCErrorInputInvalid/);
 	});
 
 	it('throws error if param2 not string', function() {
 		assert.throws(function() {
 			resolveLibrary.WKCResolveRelativeURLs('https://google.com', null);
-		}, /WKCErrorInvalidInput/);
+		}, /WKCErrorInputInvalid/);
 	});
 
 	it('includes a href', function() {

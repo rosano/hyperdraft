@@ -24,7 +24,7 @@
 
 	exports.WKCWriteLineObjectsFor = function (inputData) {
 		if (!Array.isArray(inputData)) {
-			throw new Error('WKCErrorInvalidInput');
+			throw new Error('WKCErrorInputInvalid');
 		}
 
 		return Object.values(inputData.reduce(function (coll, e) {

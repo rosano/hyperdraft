@@ -45,7 +45,7 @@ describe('WKCNotesModelErrorsFor', function testWKCNotesModelErrorsFor() {
 	it('throws error if not object', function() {
 		assert.throws(function() {
 			mainModule.WKCNotesModelErrorsFor(null);
-		}, /WKCErrorInvalidInput/);
+		}, /WKCErrorInputInvalid/);
 	});
 
 	it('returns object if WKCNoteBody not string', function() {

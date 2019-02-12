@@ -22,7 +22,7 @@ exports.WKCNotesModelPrepare = function(inputData) {
 
 exports.WKCNotesModelErrorsFor = function(inputData, options) {
 	if (typeof inputData !== 'object' || inputData === null) {
-		throw new Error('WKCErrorInvalidInput');
+		throw new Error('WKCErrorInputInvalid');
 	}
 
 	var errors = {};

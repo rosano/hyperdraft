@@ -23,7 +23,7 @@ describe('WKCVersionsModelErrorsFor', function testWKCVersionsModelErrorsFor() {
 	it('throws error if not object', function() {
 		assert.throws(function() {
 			mainModule.WKCVersionsModelErrorsFor(null);
-		}, /WKCErrorInvalidInput/);
+		}, /WKCErrorInputInvalid/);
 	});
 
 	it('returns object if WKCVersionNoteID not string', function() {

@@ -19,7 +19,7 @@ describe('WKCDiffHTMLForStrings', function testWKCDiffHTMLForStrings() {
 	it('throws error if param2 not string', function() {
 		assert.throws(function() {
 			mainModule.WKCDiffHTMLForStrings('alfa', null);
-		}, /WKCErrorInvalidInput/);
+		}, /WKCErrorInputInvalid/);
 	});
 
 	it('adds markup if param1 null', function() {

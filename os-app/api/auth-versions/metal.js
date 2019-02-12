@@ -10,7 +10,7 @@ var modelLibrary = require('./model');
 
 exports.WKCVersionsMetalCreate = async function(databaseClient, inputData) {
 	if (typeof inputData !== 'object' || inputData === null) {
-		return Promise.reject(new Error('WKCErrorInvalidInput'));
+		return Promise.reject(new Error('WKCErrorInputInvalid'));
 	}
 
 	let errors;
@@ -35,7 +35,7 @@ exports.WKCVersionsMetalCreate = async function(databaseClient, inputData) {
 
 exports.WKCVersionsMetalDelete = async function(databaseClient, inputData) {
 	if (typeof inputData !== 'string') {
-		return Promise.reject(new Error('WKCErrorInvalidInput'));
+		return Promise.reject(new Error('WKCErrorInputInvalid'));
 	}
 
 	return Promise.resolve(!(await databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_versions').deleteOne({
@@ -47,7 +47,7 @@ exports.WKCVersionsMetalDelete = async function(databaseClient, inputData) {
 
 exports.WKCVersionsMetalQuery = async function(databaseClient, inputData) {
 	if (typeof inputData !== 'object' || inputData === null) {
-		return Promise.reject(new Error('WKCErrorInvalidInput'));
+		return Promise.reject(new Error('WKCErrorInputInvalid'));
 	}
 
 	return Promise.resolve((await databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_versions').find(inputData).sort({

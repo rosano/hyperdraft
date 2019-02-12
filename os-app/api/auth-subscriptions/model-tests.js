@@ -62,7 +62,7 @@ describe('WKCSubscriptionHandlerCustomTwitterTimelineRequestCallback', function 
 	it('throws error if param1 not function', function() {
 		assert.throws(function() {
 			modelLibrary.WKCSubscriptionHandlerCustomTwitterTimelineRequestCallback(WKCTestingMongoClient, null);
-		}, /WKCErrorInvalidInput/);
+		}, /WKCErrorInputInvalid/);
 	});
 
 	it('returns error if no kWKCSettingKeyCustomTwitterToken', function(done) {
@@ -129,7 +129,7 @@ describe('WKCSubscriptionsModelErrorsFor', function testWKCSubscriptionsModelErr
 	it('throws error if param2 not object', function() {
 		assert.throws(function() {
 			modelLibrary.WKCSubscriptionsModelErrorsFor(null);
-		}, /WKCErrorInvalidInput/);
+		}, /WKCErrorInputInvalid/);
 	});
 
 	it('returns object if WKCSubscriptionURL not string', function() {
