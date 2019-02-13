@@ -63,10 +63,7 @@ exports.WKCLoginMiddlewareAuthenticate = function(req, res, next) {
 //_ WKCLoginAction
 
 exports.WKCLoginAction = function(req, res, next) {
-	return res.render([
-		__dirname,
-		'view',
-	].join('/'), {
+	return res.render(req.OLSKLive.OLSKLivePathJoin(__dirname, 'view'), {
 		WKCLoginReturnPath: req.query.returnPath || undefined,
 	});
 };
@@ -96,10 +93,7 @@ exports.WKCLoginSubmitAction = function(req, res, next) {
 		}).pop();
 
 		if (!memberObject) {
-			return res.render([
-				__dirname,
-				'index',
-			].join('/'), {
+			return res.render(req.OLSKLive.OLSKLivePathJoin(__dirname, 'view'), {
 				WKCLoginUsername: req.body.WKCLoginUsername,
 				WKCLoginError: true,
 				WKCLoginReturnPath: req.body.WKCLoginReturnPath,

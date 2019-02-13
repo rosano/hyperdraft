@@ -6,10 +6,7 @@ exports.OLSKControllerRoutes = function() {
 			OLSKRoutePath: '/robots.txt',
 			OLSKRouteMethod: 'get',
 			OLSKRouteFunction: function(req, res, next) {
-				return res.render([
-					__dirname,
-					'view',
-				].join('/'), {
+				return res.render(req.OLSKLive.OLSKLivePathJoin(__dirname, 'view'), {
 					WKCRobotsAllowedRouteConstants: process.env.WKC_ROBOTS_ALLOWED === 'true' ? [
 						'WKCRouteHome',
 					] : [],

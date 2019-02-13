@@ -25,10 +25,7 @@ exports.OLSKControllerRoutes = function() {
 //_ WKCReadAction
 
 exports.WKCReadAction = function(req, res, next) {
-	return res.render([
-		__dirname,
-		'view',
-	].join('/'), {
+	return res.render(req.OLSKLive.OLSKLivePathJoin(__dirname, 'view'), {
 		OLSKPagePublicConstants: {
 			WKCSubscriptionHandlerFeedRSS: apiSubscriptionsModel.WKCSubscriptionHandlerFeedRSS(),
 			WKCSubscriptionHandlerFeedAtom: apiSubscriptionsModel.WKCSubscriptionHandlerFeedAtom(),

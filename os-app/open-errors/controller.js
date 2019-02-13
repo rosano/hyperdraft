@@ -31,10 +31,7 @@ exports.WKCErrors404Handler = function(err, req, res, next) {
 		return next(err);
 	}
 
-	return res.render([
-		__dirname,
-		'404',
-	].join('/'), {});
+	return res.render(req.OLSKLive.OLSKLivePathJoin(__dirname, '404'), {});
 };
 
 //_ WKCErrorsFinalHandler
@@ -52,8 +49,5 @@ exports.WKCErrorsFinalHandler = function(err, req, res, next) {
 		console.log(err);
 	}
 
-	return res.render([
-		__dirname,
-		'500',
-	].join('/'), {});
+	return res.render(req.OLSKLive.OLSKLivePathJoin(__dirname, '500'), {});
 };

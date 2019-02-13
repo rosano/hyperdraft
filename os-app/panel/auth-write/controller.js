@@ -23,8 +23,5 @@ exports.OLSKControllerRoutes = function() {
 //_ WKCWriteAction
 
 exports.WKCWriteAction = function(req, res, next) {
-	return res.render([
-		__dirname,
-		'view',
-	].join('/'), {});
+	return res.render(req.OLSKLive.OLSKLivePathJoin(__dirname, 'view'), {});
 };
