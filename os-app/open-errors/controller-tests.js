@@ -26,7 +26,7 @@ describe('WKCErrorsFirstHandler', function testWKCErrorsFirstHandler() {
 
 	var pathPackage = require('path');
 
-	it('sets res.locals.OLSKSharedPageControllerSlug to directory name', function() {
+	it('sets res.locals.OLSKSharedPageControllerSlug to folder name', function() {
 		var res = testingLibrary.OLSKTestingFakeResponseForLocals();
 		controllerModule.WKCErrorsFirstHandler(new Error('alpha'), null, res, testingLibrary.OLSKTestingFakeNext());
 		assert.strictEqual(res.locals.OLSKSharedPageControllerSlug, pathPackage.basename(__dirname));
