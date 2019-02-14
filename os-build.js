@@ -1,10 +1,10 @@
 //# OLSKStartExternalAssets
 
 (function OLSKStartExternalAssets() {
-	const OLSKExternalAssets = require('./node_modules/OldSkool/modules/OLSKExternalAssets/main.js');
+	const OLSKAssets = require('./node_modules/OldSkool/modules/OLSKAssets/main.js');
 	const pathPackage = require('path');
 
-	OLSKExternalAssets.OLSKExternalAssetsCopyAssetsFromTo([
+	OLSKAssets.OLSKAssetsCopyAssetsFromTo([
 		'normalize.css',
 		'd3',
 		'OLSKInternational',
