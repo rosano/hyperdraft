@@ -2,7 +2,9 @@
 <html<%- locals.OLSKSharedPageCurrentLanguage ? [' lang="', OLSKSharedPageCurrentLanguage, '"'].join('') : ''; %>>
 
 <head>
-	<%- (function(outputData = []) {
+	<%- (function() {
+	let outputData = [];
+
 	if (locals.OLSKPageTitle) {
 		outputData.push(`<title>${ locals.OLSKPageTitle }</title>`);
 	}
@@ -18,16 +20,6 @@
 
 	outputData.push(...Object.keys(locals.OLSKPageMetaTags || {}).map(function(e) {
 		return `<meta name="${ e }" content="${ locals.OLSKPageMetaTags[e] }">`;
-	}));
-
-	if (locals.OLSKSharedActiveRouteConstant) {
-		outputData.push(`<link rel="canonical" href="${ OLSKCanonicalFor(locals.OLSKSharedActiveRouteConstant) }" />`);
-	}
-
-	outputData.push(...(locals.OLSKSharedPageLanguagesAvailable || []).map(function (e) {
-		return `<link rel="alternate" hreflang="${ e }" href="${ OLSKCanonicalLocalizedFor(OLSKSharedActiveRouteConstant, {
-			OLSKRoutingLanguage: e,
-		}) }" />`;
 	}));
 
 	if (locals.OLSKPagePublicConstants) {
