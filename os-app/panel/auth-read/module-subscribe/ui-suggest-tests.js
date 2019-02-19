@@ -6,7 +6,7 @@
 
 const assert = require('assert');
 
-var suggestLibrary = require('./suggest');
+var suggestLibrary = require('./ui-suggest.js');
 
 const kTestingSuggestionTwitterFor = function(inputData) {
 	return {
