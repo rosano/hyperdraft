@@ -6,7 +6,7 @@
 
 const assert = require('assert');
 
-var mainModule = require('./metal.js');
+const mainModule = require('./metal.js');
 
 describe('WKCSettingsMetalProperty', function testWKCSettingsMetalProperty() {
 

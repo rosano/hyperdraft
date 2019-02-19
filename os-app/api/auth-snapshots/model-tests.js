@@ -6,7 +6,7 @@
 
 const assert = require('assert');
 
-var modelLibrary = require('./model');
+const modelLibrary = require('./model.js');
 
 const kTesting = {
 	StubValidSnapshot: function() {

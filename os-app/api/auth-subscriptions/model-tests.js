@@ -6,13 +6,13 @@
 
 const assert = require('assert');
 
-var modelLibrary = require('./model');
+const mainModule = require('./model.js');
 
 const kTesting = {
 	StubValidSubscription: function() {
 		return {
 			WKCSubscriptionURL: 'https://google.com',
-			WKCSubscriptionHandler: modelLibrary.WKCSubscriptionHandlerPage(),
+			WKCSubscriptionHandler: mainModule.WKCSubscriptionHandlerPage(),
 		};
 	},
 };
@@ -20,7 +20,7 @@ const kTesting = {
 describe('WKCSubscriptionHandlerFeedRSS', function testWKCSubscriptionHandlerFeedRSS() {
 
 	it('returns constant', function() {
-		assert.strictEqual(modelLibrary.WKCSubscriptionHandlerFeedRSS(), 'FeedRSS');
+		assert.strictEqual(mainModule.WKCSubscriptionHandlerFeedRSS(), 'FeedRSS');
 	});
 
 });
@@ -28,7 +28,7 @@ describe('WKCSubscriptionHandlerFeedRSS', function testWKCSubscriptionHandlerFee
 describe('WKCSubscriptionHandlerFeedAtom', function testWKCSubscriptionHandlerFeedAtom() {
 
 	it('returns constant', function() {
-		assert.strictEqual(modelLibrary.WKCSubscriptionHandlerFeedAtom(), 'FeedAtom');
+		assert.strictEqual(mainModule.WKCSubscriptionHandlerFeedAtom(), 'FeedAtom');
 	});
 
 });
@@ -36,7 +36,7 @@ describe('WKCSubscriptionHandlerFeedAtom', function testWKCSubscriptionHandlerFe
 describe('WKCSubscriptionHandlerFile', function testWKCSubscriptionHandlerFile() {
 
 	it('returns constant', function() {
-		assert.strictEqual(modelLibrary.WKCSubscriptionHandlerFile(), 'File');
+		assert.strictEqual(mainModule.WKCSubscriptionHandlerFile(), 'File');
 	});
 
 });
@@ -44,7 +44,7 @@ describe('WKCSubscriptionHandlerFile', function testWKCSubscriptionHandlerFile()
 describe('WKCSubscriptionHandlerPage', function testWKCSubscriptionHandlerPage() {
 
 	it('returns constant', function() {
-		assert.strictEqual(modelLibrary.WKCSubscriptionHandlerPage(), 'Page');
+		assert.strictEqual(mainModule.WKCSubscriptionHandlerPage(), 'Page');
 	});
 
 });
@@ -52,7 +52,7 @@ describe('WKCSubscriptionHandlerPage', function testWKCSubscriptionHandlerPage()
 describe('WKCSubscriptionHandlerCustomTwitterTimeline', function testWKCSubscriptionHandlerCustomTwitterTimeline() {
 
 	it('returns constant', function() {
-		assert.strictEqual(modelLibrary.WKCSubscriptionHandlerCustomTwitterTimeline(), 'CustomTwitterTimeline');
+		assert.strictEqual(mainModule.WKCSubscriptionHandlerCustomTwitterTimeline(), 'CustomTwitterTimeline');
 	});
 
 });
@@ -61,12 +61,12 @@ describe('WKCSubscriptionHandlerCustomTwitterTimelineRequestCallback', function 
 
 	it('throws error if param1 not function', function() {
 		assert.throws(function() {
-			modelLibrary.WKCSubscriptionHandlerCustomTwitterTimelineRequestCallback(WKCTestingMongoClient, null);
+			mainModule.WKCSubscriptionHandlerCustomTwitterTimelineRequestCallback(WKCTestingMongoClient, null);
 		}, /WKCErrorInputInvalid/);
 	});
 
 	it('returns error if no kWKCSettingKeyCustomTwitterToken', function(done) {
-		modelLibrary.WKCSubscriptionHandlerCustomTwitterTimelineRequestCallback(WKCTestingMongoClient, function(err, responseJSON) {
+		mainModule.WKCSubscriptionHandlerCustomTwitterTimelineRequestCallback(WKCTestingMongoClient, function(err, responseJSON) {
 			assert.deepEqual(err.message, 'WKCErrorCustomTwitterMissingToken');
 			assert.deepEqual(err.responseJSON, undefined);
 
@@ -79,7 +79,7 @@ describe('WKCSubscriptionHandlerCustomTwitterTimelineRequestCallback', function 
 			WKCSettingKey: 'kWKCSettingKeyCustomTwitterToken',
 			WKCSettingValue: 'alfa',
 		}, function(err, result) {
-			modelLibrary.WKCSubscriptionHandlerCustomTwitterTimelineRequestCallback(WKCTestingMongoClient, function(err, responseJSON) {
+			mainModule.WKCSubscriptionHandlerCustomTwitterTimelineRequestCallback(WKCTestingMongoClient, function(err, responseJSON) {
 				assert.deepEqual(err, undefined);
 				assert.deepEqual(responseJSON, {
 					auth: {
@@ -97,12 +97,12 @@ describe('WKCSubscriptionHandlerCustomTwitterTimelineRequestCallback', function 
 describe('WKCSubscriptionHandlers', function testWKCSubscriptionHandlers() {
 
 	it('returns constant', function() {
-		assert.deepEqual(modelLibrary.WKCSubscriptionHandlers(), [
-			modelLibrary.WKCSubscriptionHandlerFeedRSS(),
-			modelLibrary.WKCSubscriptionHandlerFeedAtom(),
-			modelLibrary.WKCSubscriptionHandlerFile(),
-			modelLibrary.WKCSubscriptionHandlerPage(),
-			modelLibrary.WKCSubscriptionHandlerCustomTwitterTimeline(),
+		assert.deepEqual(mainModule.WKCSubscriptionHandlers(), [
+			mainModule.WKCSubscriptionHandlerFeedRSS(),
+			mainModule.WKCSubscriptionHandlerFeedAtom(),
+			mainModule.WKCSubscriptionHandlerFile(),
+			mainModule.WKCSubscriptionHandlerPage(),
+			mainModule.WKCSubscriptionHandlerCustomTwitterTimeline(),
 		]);
 	});
 
@@ -111,11 +111,11 @@ describe('WKCSubscriptionHandlers', function testWKCSubscriptionHandlers() {
 describe('WKCModelSubscriptionPrepare', function testWKCModelSubscriptionPrepare() {
 
 	it('returns input', function() {
-		assert.deepEqual(modelLibrary.WKCModelSubscriptionPrepare({}), {});
+		assert.deepEqual(mainModule.WKCModelSubscriptionPrepare({}), {});
 	});
 
 	it('returns input with WKCSubscriptionFetchDate as date', function() {
-		assert.deepEqual(modelLibrary.WKCModelSubscriptionPrepare({
+		assert.deepEqual(mainModule.WKCModelSubscriptionPrepare({
 			WKCSubscriptionFetchDate: '2018-12-09T19:07:01.902Z',
 		}), {
 			WKCSubscriptionFetchDate: new Date('2018-12-09T19:07:01.902Z'),
@@ -128,12 +128,12 @@ describe('WKCSubscriptionsModelErrorsFor', function testWKCSubscriptionsModelErr
 
 	it('throws error if param2 not object', function() {
 		assert.throws(function() {
-			modelLibrary.WKCSubscriptionsModelErrorsFor(null);
+			mainModule.WKCSubscriptionsModelErrorsFor(null);
 		}, /WKCErrorInputInvalid/);
 	});
 
 	it('returns object if WKCSubscriptionURL not string', function() {
-		assert.deepEqual(modelLibrary.WKCSubscriptionsModelErrorsFor(Object.assign(kTesting.StubValidSubscription(), {
+		assert.deepEqual(mainModule.WKCSubscriptionsModelErrorsFor(Object.assign(kTesting.StubValidSubscription(), {
 			WKCSubscriptionURL: null,
 		})), {
 			WKCSubscriptionURL: [
@@ -143,7 +143,7 @@ describe('WKCSubscriptionsModelErrorsFor', function testWKCSubscriptionsModelErr
 	});
 
 	it('returns object if WKCSubscriptionURL not filled', function() {
-		assert.deepEqual(modelLibrary.WKCSubscriptionsModelErrorsFor(Object.assign(kTesting.StubValidSubscription(), {
+		assert.deepEqual(mainModule.WKCSubscriptionsModelErrorsFor(Object.assign(kTesting.StubValidSubscription(), {
 			WKCSubscriptionURL: '',
 		})), {
 			WKCSubscriptionURL: [
@@ -153,7 +153,7 @@ describe('WKCSubscriptionsModelErrorsFor', function testWKCSubscriptionsModelErr
 	});
 
 	it('returns object if WKCSubscriptionURL not formatted', function() {
-		assert.deepEqual(modelLibrary.WKCSubscriptionsModelErrorsFor(Object.assign(kTesting.StubValidSubscription(), {
+		assert.deepEqual(mainModule.WKCSubscriptionsModelErrorsFor(Object.assign(kTesting.StubValidSubscription(), {
 			WKCSubscriptionURL: 'google.com',
 		})), {
 			WKCSubscriptionURL: [
@@ -163,7 +163,7 @@ describe('WKCSubscriptionsModelErrorsFor', function testWKCSubscriptionsModelErr
 	});
 
 	it('returns object if WKCSubscriptionHandler not valid', function() {
-		assert.deepEqual(modelLibrary.WKCSubscriptionsModelErrorsFor(Object.assign(kTesting.StubValidSubscription(), {
+		assert.deepEqual(mainModule.WKCSubscriptionsModelErrorsFor(Object.assign(kTesting.StubValidSubscription(), {
 			WKCSubscriptionHandler: 'alfa',
 		})), {
 			WKCSubscriptionHandler: [
@@ -173,11 +173,11 @@ describe('WKCSubscriptionsModelErrorsFor', function testWKCSubscriptionsModelErr
 	});
 
 	it('returns null', function() {
-		assert.deepEqual(modelLibrary.WKCSubscriptionsModelErrorsFor(kTesting.StubValidSubscription()), null);
+		assert.deepEqual(mainModule.WKCSubscriptionsModelErrorsFor(kTesting.StubValidSubscription()), null);
 	});
 
 	it('ignores unpresent fields if WKCOptionValidatePresentOnly true', function() {
-		assert.deepEqual(modelLibrary.WKCSubscriptionsModelErrorsFor({
+		assert.deepEqual(mainModule.WKCSubscriptionsModelErrorsFor({
 			WKCSubscriptionHandler: 'alfa',
 		}, {
 			WKCOptionValidatePresentOnly: true,
@@ -191,7 +191,7 @@ describe('WKCSubscriptionsModelErrorsFor', function testWKCSubscriptionsModelErr
 	context('WKCSubscriptionName', function() {
 
 		it('returns object if not string', function() {
-			assert.deepEqual(modelLibrary.WKCSubscriptionsModelErrorsFor(Object.assign(kTesting.StubValidSubscription(), {
+			assert.deepEqual(mainModule.WKCSubscriptionsModelErrorsFor(Object.assign(kTesting.StubValidSubscription(), {
 				WKCSubscriptionName: 123
 			})), {
 				WKCSubscriptionName: [
@@ -205,7 +205,7 @@ describe('WKCSubscriptionsModelErrorsFor', function testWKCSubscriptionsModelErr
 	context('WKCSubscriptionBlurb', function() {
 
 		it('returns object if not string', function() {
-			assert.deepEqual(modelLibrary.WKCSubscriptionsModelErrorsFor(Object.assign(kTesting.StubValidSubscription(), {
+			assert.deepEqual(mainModule.WKCSubscriptionsModelErrorsFor(Object.assign(kTesting.StubValidSubscription(), {
 				WKCSubscriptionBlurb: 123
 			})), {
 				WKCSubscriptionBlurb: [
@@ -219,7 +219,7 @@ describe('WKCSubscriptionsModelErrorsFor', function testWKCSubscriptionsModelErr
 	context('WKCSubscriptionFetchDate', function() {
 
 		it('returns object if not date', function() {
-			assert.deepEqual(modelLibrary.WKCSubscriptionsModelErrorsFor(Object.assign(kTesting.StubValidSubscription(), {
+			assert.deepEqual(mainModule.WKCSubscriptionsModelErrorsFor(Object.assign(kTesting.StubValidSubscription(), {
 				WKCSubscriptionFetchDate: new Date('alfa'),
 			})), {
 				WKCSubscriptionFetchDate: [
@@ -233,7 +233,7 @@ describe('WKCSubscriptionsModelErrorsFor', function testWKCSubscriptionsModelErr
 	context('WKCSubscriptionFetchContent', function() {
 
 		it('returns object if not string', function() {
-			assert.deepEqual(modelLibrary.WKCSubscriptionsModelErrorsFor(Object.assign(kTesting.StubValidSubscription(), {
+			assert.deepEqual(mainModule.WKCSubscriptionsModelErrorsFor(Object.assign(kTesting.StubValidSubscription(), {
 				WKCSubscriptionFetchContent: 123
 			})), {
 				WKCSubscriptionFetchContent: [
@@ -247,7 +247,7 @@ describe('WKCSubscriptionsModelErrorsFor', function testWKCSubscriptionsModelErr
 	context('WKCSubscriptionErrorDate', function() {
 
 		it('returns object if not date', function() {
-			assert.deepEqual(modelLibrary.WKCSubscriptionsModelErrorsFor(Object.assign(kTesting.StubValidSubscription(), {
+			assert.deepEqual(mainModule.WKCSubscriptionsModelErrorsFor(Object.assign(kTesting.StubValidSubscription(), {
 				WKCSubscriptionErrorDate: new Date('alfa'),
 			})), {
 				WKCSubscriptionErrorDate: [
@@ -261,7 +261,7 @@ describe('WKCSubscriptionsModelErrorsFor', function testWKCSubscriptionsModelErr
 	context('WKCSubscriptionErrorMessage', function() {
 
 		it('returns object if not string', function() {
-			assert.deepEqual(modelLibrary.WKCSubscriptionsModelErrorsFor(Object.assign(kTesting.StubValidSubscription(), {
+			assert.deepEqual(mainModule.WKCSubscriptionsModelErrorsFor(Object.assign(kTesting.StubValidSubscription(), {
 				WKCSubscriptionErrorMessage: 123
 			})), {
 				WKCSubscriptionErrorMessage: [
@@ -275,7 +275,7 @@ describe('WKCSubscriptionsModelErrorsFor', function testWKCSubscriptionsModelErr
 	context('WKCSubscriptionIsPaused', function() {
 
 		it('returns object if not boolean', function() {
-			assert.deepEqual(modelLibrary.WKCSubscriptionsModelErrorsFor(Object.assign(kTesting.StubValidSubscription(), {
+			assert.deepEqual(mainModule.WKCSubscriptionsModelErrorsFor(Object.assign(kTesting.StubValidSubscription(), {
 				WKCSubscriptionIsPaused: 'true'
 			})), {
 				WKCSubscriptionIsPaused: [
@@ -291,7 +291,7 @@ describe('WKCSubscriptionsModelErrorsFor', function testWKCSubscriptionsModelErr
 describe('WKCSubscriptionHiddenPropertyNames', function testWKCSubscriptionHiddenPropertyNames() {
 
 	it('returns array', function() {
-		assert.deepEqual(modelLibrary.WKCSubscriptionHiddenPropertyNames(), [
+		assert.deepEqual(mainModule.WKCSubscriptionHiddenPropertyNames(), [
 			'_id',
 		]);
 	});

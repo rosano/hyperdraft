@@ -5,7 +5,7 @@
  */
 
 const modelLibrary = require('./model.js');
-var metalLibrary = require('./metal.js');
+const metalLibrary = require('./metal.js');
 var versionsMetalLibrary = require('../auth-versions/metal.js');
 var settingsMetalLibrary = require('../auth-settings/metal.js');
 const WKCParser = require('../../_shared/WKCParser/main.js');

@@ -6,9 +6,9 @@
 
 const assert = require('assert');
 
-var testingLibrary = require('OLSKTesting');
+const OLSKTesting = require('OLSKTesting');
 
-var controllerModule = require('./controller');
+var controllerModule = require('./controller.js');
 
 describe('OLSKControllerSharedErrorHandlers', function testOLSKControllerSharedErrorHandlers() {
 
@@ -27,14 +27,14 @@ describe('WKCErrorsFirstHandler', function testWKCErrorsFirstHandler() {
 	var pathPackage = require('path');
 
 	it('sets res.locals.OLSKSharedPageControllerSlug to folder name', function() {
-		var res = testingLibrary.OLSKTestingFakeResponseForLocals();
-		controllerModule.WKCErrorsFirstHandler(new Error('alpha'), null, res, testingLibrary.OLSKTestingFakeNext());
+		var res = OLSKTesting.OLSKTestingFakeResponseForLocals();
+		controllerModule.WKCErrorsFirstHandler(new Error('alpha'), null, res, OLSKTesting.OLSKTestingFakeNext());
 		assert.strictEqual(res.locals.OLSKSharedPageControllerSlug, pathPackage.basename(__dirname));
 	});
 
 	it('returns next(error)', function() {
 		var errorObject = new Error('alpha');
-		assert.deepEqual(controllerModule.WKCErrorsFirstHandler(errorObject, null, testingLibrary.OLSKTestingFakeResponseForLocals(), testingLibrary.OLSKTestingFakeNext()), errorObject);
+		assert.deepEqual(controllerModule.WKCErrorsFirstHandler(errorObject, null, OLSKTesting.OLSKTestingFakeResponseForLocals(), OLSKTesting.OLSKTestingFakeNext()), errorObject);
 	});
 
 });
@@ -42,7 +42,7 @@ describe('WKCErrorsFirstHandler', function testWKCErrorsFirstHandler() {
 describe('WKCErrors404Handler', function testWKCErrors404Handler() {
 
 	it('renders page if res.statusCode 404', function() {
-		assert.deepEqual(controllerModule.WKCErrors404Handler(null, testingLibrary.OLSKTestingFakeRequest(), Object.assign(testingLibrary.OLSKTestingFakeResponseForRender(function(viewPath) {
+		assert.deepEqual(controllerModule.WKCErrors404Handler(null, OLSKTesting.OLSKTestingFakeRequest(), Object.assign(OLSKTesting.OLSKTestingFakeResponseForRender(function(viewPath) {
 			return viewPath;
 		}), {
 			statusCode: 404,
@@ -54,7 +54,7 @@ describe('WKCErrors404Handler', function testWKCErrors404Handler() {
 
 	it('returns next(error)', function() {
 		var errorObject = new Error('alpha');
-		assert.deepEqual(controllerModule.WKCErrors404Handler(errorObject, null, testingLibrary.OLSKTestingFakeRequest(), testingLibrary.OLSKTestingFakeNext()), errorObject);
+		assert.deepEqual(controllerModule.WKCErrors404Handler(errorObject, null, OLSKTesting.OLSKTestingFakeRequest(), OLSKTesting.OLSKTestingFakeNext()), errorObject);
 	});
 
 });
@@ -62,7 +62,7 @@ describe('WKCErrors404Handler', function testWKCErrors404Handler() {
 describe('WKCErrorsFinalHandler', function testWKCErrorsFinalHandler() {
 
 	it('renders page', function() {
-		assert.deepEqual(controllerModule.WKCErrorsFinalHandler(null, testingLibrary.OLSKTestingFakeRequest(), testingLibrary.OLSKTestingFakeResponseForRender(function(viewPath) {
+		assert.deepEqual(controllerModule.WKCErrorsFinalHandler(null, OLSKTesting.OLSKTestingFakeRequest(), OLSKTesting.OLSKTestingFakeResponseForRender(function(viewPath) {
 			return viewPath;
 		})), [
 			__dirname,

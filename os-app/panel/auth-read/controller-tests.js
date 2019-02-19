@@ -6,9 +6,9 @@
 
 const assert = require('assert');
 
-var testingLibrary = require('OLSKTesting');
+const OLSKTesting = require('OLSKTesting');
 
-var controllerModule = require('./controller');
+var controllerModule = require('./controller.js');
 var apiSubscriptionsModel = require('../../api/auth-subscriptions/model');
 
 describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
@@ -32,7 +32,7 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 describe('WKCReadAction', function testWKCReadAction() {
 
 	it('renders page', function() {
-		assert.strictEqual(controllerModule.WKCReadAction(null, testingLibrary.OLSKTestingFakeResponseForRender(function(viewPath) {
+		assert.strictEqual(controllerModule.WKCReadAction(null, OLSKTesting.OLSKTestingFakeResponseForRender(function(viewPath) {
 			return viewPath;
 		})), [
 			__dirname,
@@ -41,7 +41,7 @@ describe('WKCReadAction', function testWKCReadAction() {
 	});
 
 	it('returns pageData', function() {
-		assert.deepEqual(controllerModule.WKCReadAction(null, testingLibrary.OLSKTestingFakeResponseForRender(function(viewPath, pageData) {
+		assert.deepEqual(controllerModule.WKCReadAction(null, OLSKTesting.OLSKTestingFakeResponseForRender(function(viewPath, pageData) {
 			return pageData;
 		})), {
 			OLSKPagePublicConstants: {

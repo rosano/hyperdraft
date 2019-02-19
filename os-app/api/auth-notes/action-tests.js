@@ -6,8 +6,8 @@
 
 const assert = require('assert');
 
-var mainModule = require('./action.js');
-var metalLibrary = require('./metal.js');
+const mainModule = require('./action.js');
+const metalLibrary = require('./metal.js');
 var versionsMetalLibrary = require('../auth-versions/metal.js');
 
 const kTesting = {

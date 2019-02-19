@@ -7,7 +7,7 @@
 const metalLibrary = require('./metal.js');
 const actionLibrary = require('./action.js');
 
-var modelLibrary = require('./model');
+const modelLibrary = require('./model.js');
 const versionsModelLibrary = require('../auth-versions/model.js');
 
 //_ OLSKControllerRoutes

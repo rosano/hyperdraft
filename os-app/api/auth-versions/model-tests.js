@@ -6,7 +6,7 @@
 
 const assert = require('assert');
 
-var mainModule = require('./model');
+const mainModule = require('./model.js');
 
 const kTesting = {
 	StubValidVersion: function() {

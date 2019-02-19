@@ -6,7 +6,7 @@
 
 const assert = require('assert');
 
-var metalLibrary = require('./metal');
+const mainModule = require('./metal.js');
 
 const kTesting = {
 	StubValidSnapshot: function() {
@@ -21,18 +21,18 @@ describe('WKCSnapshotsMetalCreate', function tesSnapshotsMetalCreate() {
 
 	it('throws error if param2 not object', function() {
 		assert.throws(function() {
-			metalLibrary.WKCSnapshotsMetalCreate(WKCTestingMongoClient, '', function() {});
+			mainModule.WKCSnapshotsMetalCreate(WKCTestingMongoClient, '', function() {});
 		}, /WKCErrorInputInvalid/);
 	});
 
 	it('throws error if param3 not function', function() {
 		assert.throws(function() {
-			metalLibrary.WKCSnapshotsMetalCreate(WKCTestingMongoClient, {}, null);
+			mainModule.WKCSnapshotsMetalCreate(WKCTestingMongoClient, {}, null);
 		}, /WKCErrorInputInvalid/);
 	});
 
 	it('returns WKCErrors if not valid WKCSnapshot', function(done) {
-		metalLibrary.WKCSnapshotsMetalCreate(WKCTestingMongoClient, Object.assign(kTesting.StubValidSnapshot(), {
+		mainModule.WKCSnapshotsMetalCreate(WKCTestingMongoClient, Object.assign(kTesting.StubValidSnapshot(), {
 			WKCSnapshotBody: null,
 		}), function(err, responseJSON) {
 			assert.deepEqual(responseJSON.WKCErrors, {
@@ -46,7 +46,7 @@ describe('WKCSnapshotsMetalCreate', function tesSnapshotsMetalCreate() {
 	});
 
 	it('returns WKCSnapshot', function(done) {
-		metalLibrary.WKCSnapshotsMetalCreate(WKCTestingMongoClient, kTesting.StubValidSnapshot(), function(err, responseJSON) {
+		mainModule.WKCSnapshotsMetalCreate(WKCTestingMongoClient, kTesting.StubValidSnapshot(), function(err, responseJSON) {
 			assert.deepEqual(responseJSON, Object.assign(kTesting.StubValidSnapshot(), {
 				WKCSnapshotID: responseJSON.WKCSnapshotID,
 				WKCSnapshotDateCreated: responseJSON.WKCSnapshotDateCreated,

@@ -4,7 +4,7 @@
  * MIT Licensed
  */
 
-var modelLibrary = require('./model');
+const modelLibrary = require('./model.js');
 
 //_ WKCSnapshotsMetalCreate
 

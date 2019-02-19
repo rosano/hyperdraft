@@ -6,7 +6,7 @@
 
 const assert = require('assert');
 
-const mainModule = require('./controller');
+const mainModule = require('./controller.js');
 
 describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 

@@ -6,7 +6,7 @@
 
 var mongodbPackage = require('mongodb');
 
-var modelLibrary = require('./model');
+const modelLibrary = require('./model.js');
 
 //_ WKCMetalArticlesCreate
 

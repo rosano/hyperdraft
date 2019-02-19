@@ -6,7 +6,7 @@
 
 const assert = require('assert');
 
-var mainModule = require('./metal');
+const mainModule = require('./metal.js');
 
 const kTesting = {
 	StubValidVersion: function() {

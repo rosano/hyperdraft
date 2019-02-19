@@ -6,18 +6,16 @@
 
 const assert = require('assert');
 
-var testingLibrary = require('OLSKTesting');
-
-var controllerModule = require('./controller');
+const mainModule = require('./controller.js');
 
 describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 
 	it('returns route objects', function() {
-		assert.deepEqual(controllerModule.OLSKControllerRoutes(), {
+		assert.deepEqual(mainModule.OLSKControllerRoutes(), {
 			WKCRouteAPIArticlesCreate: {
 				OLSKRoutePath: '/api/articles',
 				OLSKRouteMethod: 'post',
-				OLSKRouteFunction: controllerModule.WKCActionAPIArticlesCreate,
+				OLSKRouteFunction: mainModule.WKCActionAPIArticlesCreate,
 				OLSKRouteMiddlewares: [
 					'WKCSharedMiddlewareAPIAuthenticate',
 				],
@@ -25,7 +23,7 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 			WKCRouteAPIArticlesRead: {
 				OLSKRoutePath: '/api/articles/:wkc_article_id',
 				OLSKRouteMethod: 'get',
-				OLSKRouteFunction: controllerModule.WKCActionAPIArticlesRead,
+				OLSKRouteFunction: mainModule.WKCActionAPIArticlesRead,
 				OLSKRouteMiddlewares: [
 					'WKCSharedMiddlewareAPIAuthenticate',
 				],
@@ -33,7 +31,7 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 			WKCRouteAPIArticlesUpdate: {
 				OLSKRoutePath: '/api/articles/:wkc_article_id',
 				OLSKRouteMethod: 'put',
-				OLSKRouteFunction: controllerModule.WKCActionAPIArticlesUpdate,
+				OLSKRouteFunction: mainModule.WKCActionAPIArticlesUpdate,
 				OLSKRouteMiddlewares: [
 					'WKCSharedMiddlewareAPIAuthenticate',
 				],
@@ -41,7 +39,7 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 			WKCRouteAPIArticlesDelete: {
 				OLSKRoutePath: '/api/articles/:wkc_article_id',
 				OLSKRouteMethod: 'delete',
-				OLSKRouteFunction: controllerModule.WKCActionAPIArticlesDelete,
+				OLSKRouteFunction: mainModule.WKCActionAPIArticlesDelete,
 				OLSKRouteMiddlewares: [
 					'WKCSharedMiddlewareAPIAuthenticate',
 				],
@@ -49,7 +47,7 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 			WKCRouteAPIArticlesSearch: {
 				OLSKRoutePath: '/api/articles/search',
 				OLSKRouteMethod: 'post',
-				OLSKRouteFunction: controllerModule.WKCActionAPIArticlesSearch,
+				OLSKRouteFunction: mainModule.WKCActionAPIArticlesSearch,
 				OLSKRouteMiddlewares: [
 					'WKCSharedMiddlewareAPIAuthenticate',
 				],

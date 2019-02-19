@@ -6,7 +6,7 @@
 
 const assert = require('assert');
 
-var metalLibrary = require('./metal');
+const mainModule = require('./metal.js');
 
 const StubValidArticle = function() {
 	return {
@@ -19,18 +19,18 @@ describe('WKCMetalArticlesCreate', function testWKCMetalArticlesCreate() {
 
 	it('throws error if param2 not object', function() {
 		assert.throws(function() {
-			metalLibrary.WKCMetalArticlesCreate(WKCTestingMongoClient, '', function() {});
+			mainModule.WKCMetalArticlesCreate(WKCTestingMongoClient, '', function() {});
 		}, /WKCErrorInputInvalid/);
 	});
 
 	it('throws error if param3 not function', function() {
 		assert.throws(function() {
-			metalLibrary.WKCMetalArticlesCreate(WKCTestingMongoClient, {}, null);
+			mainModule.WKCMetalArticlesCreate(WKCTestingMongoClient, {}, null);
 		}, /WKCErrorInputInvalid/);
 	});
 
 	it('returns WKCErrors if not valid WKCArticle', function(done) {
-		metalLibrary.WKCMetalArticlesCreate(WKCTestingMongoClient, Object.assign(StubValidArticle(), {
+		mainModule.WKCMetalArticlesCreate(WKCTestingMongoClient, Object.assign(StubValidArticle(), {
 			WKCArticlePublishDate: new Date('alfa'),
 		}), function(err, responseJSON) {
 			assert.deepEqual(responseJSON.WKCErrors, {
@@ -44,7 +44,7 @@ describe('WKCMetalArticlesCreate', function testWKCMetalArticlesCreate() {
 	});
 
 	it('returns WKCArticle', function(done) {
-		metalLibrary.WKCMetalArticlesCreate(WKCTestingMongoClient, StubValidArticle(), function(err, responseJSON) {
+		mainModule.WKCMetalArticlesCreate(WKCTestingMongoClient, StubValidArticle(), function(err, responseJSON) {
 			assert.deepEqual(responseJSON, Object.assign(StubValidArticle(), {
 				WKCArticleID: responseJSON.WKCArticleID,
 				WKCArticleDateCreated: responseJSON.WKCArticleDateCreated,
@@ -61,18 +61,18 @@ describe('WKCMetalArticlesRead', function testWKCMetalArticlesRead() {
 
 	it('throws error if param2 not string', function() {
 		assert.throws(function() {
-			metalLibrary.WKCMetalArticlesRead(WKCTestingMongoClient, 1, function() {});
+			mainModule.WKCMetalArticlesRead(WKCTestingMongoClient, 1, function() {});
 		}, /WKCErrorInputInvalid/);
 	});
 
 	it('throws error if param3 not function', function() {
 		assert.throws(function() {
-			metalLibrary.WKCMetalArticlesRead(WKCTestingMongoClient, '1', null);
+			mainModule.WKCMetalArticlesRead(WKCTestingMongoClient, '1', null);
 		}, /WKCErrorInputInvalid/);
 	});
 
 	it('returns error if WKCArticleID not found', function(done) {
-		metalLibrary.WKCMetalArticlesRead(WKCTestingMongoClient, '5c192c1edb2f6c6d8a78c9f0', function(err) {
+		mainModule.WKCMetalArticlesRead(WKCTestingMongoClient, '5c192c1edb2f6c6d8a78c9f0', function(err) {
 			assert.deepEqual(err, new Error('WKCErrorNotFound'));
 
 			done();
@@ -80,9 +80,9 @@ describe('WKCMetalArticlesRead', function testWKCMetalArticlesRead() {
 	});
 
 	it('returns WKCArticle', function(done) {
-		metalLibrary.WKCMetalArticlesCreate(WKCTestingMongoClient, StubValidArticle(), function(err, articleObject) {
+		mainModule.WKCMetalArticlesCreate(WKCTestingMongoClient, StubValidArticle(), function(err, articleObject) {
 
-			metalLibrary.WKCMetalArticlesRead(WKCTestingMongoClient, articleObject.WKCArticleID, function(err, responseJSON) {
+			mainModule.WKCMetalArticlesRead(WKCTestingMongoClient, articleObject.WKCArticleID, function(err, responseJSON) {
 				assert.deepEqual(responseJSON, articleObject);
 
 				done();
@@ -96,24 +96,24 @@ describe('WKCMetalArticlesUpdate', function testWKCMetalArticlesUpdate() {
 
 	it('throws error if param2 not string', function() {
 		assert.throws(function() {
-			metalLibrary.WKCMetalArticlesUpdate(WKCTestingMongoClient, 1, {}, function() {});
+			mainModule.WKCMetalArticlesUpdate(WKCTestingMongoClient, 1, {}, function() {});
 		}, /WKCErrorInputInvalid/);
 	});
 
 	it('throws error if param3 not object', function() {
 		assert.throws(function() {
-			metalLibrary.WKCMetalArticlesUpdate(WKCTestingMongoClient, '1', null, function() {});
+			mainModule.WKCMetalArticlesUpdate(WKCTestingMongoClient, '1', null, function() {});
 		}, /WKCErrorInputInvalid/);
 	});
 
 	it('throws error if param4 not function', function() {
 		assert.throws(function() {
-			metalLibrary.WKCMetalArticlesUpdate(WKCTestingMongoClient, '1', {}, null);
+			mainModule.WKCMetalArticlesUpdate(WKCTestingMongoClient, '1', {}, null);
 		}, /WKCErrorInputInvalid/);
 	});
 
 	it('returns error if WKCArticleID not found', function(done) {
-		metalLibrary.WKCMetalArticlesUpdate(WKCTestingMongoClient, '5c192c1edb2f6c6d8a78c9f0', StubValidArticle(), function(err) {
+		mainModule.WKCMetalArticlesUpdate(WKCTestingMongoClient, '5c192c1edb2f6c6d8a78c9f0', StubValidArticle(), function(err) {
 			assert.deepEqual(err, new Error('WKCErrorNotFound'));
 
 			done();
@@ -121,8 +121,8 @@ describe('WKCMetalArticlesUpdate', function testWKCMetalArticlesUpdate() {
 	});
 
 	it('returns WKCErrors if not valid value', function(done) {
-		metalLibrary.WKCMetalArticlesCreate(WKCTestingMongoClient, StubValidArticle(), function(err, articleObject) {
-			metalLibrary.WKCMetalArticlesUpdate(WKCTestingMongoClient, articleObject.WKCArticleID, {
+		mainModule.WKCMetalArticlesCreate(WKCTestingMongoClient, StubValidArticle(), function(err, articleObject) {
+			mainModule.WKCMetalArticlesUpdate(WKCTestingMongoClient, articleObject.WKCArticleID, {
 				WKCArticlePublishDate: new Date('alfa'),
 			}, function(err, responseJSON) {
 				assert.deepEqual(responseJSON.WKCErrors, {
@@ -137,10 +137,10 @@ describe('WKCMetalArticlesUpdate', function testWKCMetalArticlesUpdate() {
 	});
 
 	it('returns WKCArticle', function(done) {
-		metalLibrary.WKCMetalArticlesCreate(WKCTestingMongoClient, Object.assign(StubValidArticle(), {
+		mainModule.WKCMetalArticlesCreate(WKCTestingMongoClient, Object.assign(StubValidArticle(), {
 			WKCArticleTitle: 'alfa',
 		}), function(err, articleObject) {
-			metalLibrary.WKCMetalArticlesUpdate(WKCTestingMongoClient, articleObject.WKCArticleID, {
+			mainModule.WKCMetalArticlesUpdate(WKCTestingMongoClient, articleObject.WKCArticleID, {
 				WKCArticleTitle: 'bravo',
 			}, function(err, responseJSON) {
 				assert.deepEqual(responseJSON.WKCArticleTitle, 'bravo');
@@ -156,18 +156,18 @@ describe('WKCMetalArticlesDelete', function testWKCMetalArticlesDelete() {
 
 	it('throws error if param2 not string', function() {
 		assert.throws(function() {
-			metalLibrary.WKCMetalArticlesDelete(WKCTestingMongoClient, 1, function() {});
+			mainModule.WKCMetalArticlesDelete(WKCTestingMongoClient, 1, function() {});
 		}, /WKCErrorInputInvalid/);
 	});
 
 	it('throws error if param3 not function', function() {
 		assert.throws(function() {
-			metalLibrary.WKCMetalArticlesDelete(WKCTestingMongoClient, '1', null);
+			mainModule.WKCMetalArticlesDelete(WKCTestingMongoClient, '1', null);
 		}, /WKCErrorInputInvalid/);
 	});
 
 	it('returns error if WKCArticleID not found', function(done) {
-		metalLibrary.WKCMetalArticlesDelete(WKCTestingMongoClient, '5c192c1edb2f6c6d8a78c9f0', function(err) {
+		mainModule.WKCMetalArticlesDelete(WKCTestingMongoClient, '5c192c1edb2f6c6d8a78c9f0', function(err) {
 			assert.deepEqual(err, new Error('WKCErrorNotFound'));
 
 			done();
@@ -175,8 +175,8 @@ describe('WKCMetalArticlesDelete', function testWKCMetalArticlesDelete() {
 	});
 
 	it('returns WKCArticle', function(done) {
-		metalLibrary.WKCMetalArticlesCreate(WKCTestingMongoClient, StubValidArticle(), function(err, responseJSON) {
-			metalLibrary.WKCMetalArticlesDelete(WKCTestingMongoClient, responseJSON.WKCArticleID, function(err, responseJSON) {
+		mainModule.WKCMetalArticlesCreate(WKCTestingMongoClient, StubValidArticle(), function(err, responseJSON) {
+			mainModule.WKCMetalArticlesDelete(WKCTestingMongoClient, responseJSON.WKCArticleID, function(err, responseJSON) {
 				assert.deepEqual(responseJSON, true);
 
 				done();
@@ -190,26 +190,26 @@ describe('WKCMetalArticlesSearch', function testWKCMetalArticlesSearch() {
 
 	it('throws error if param2 not function', function() {
 		assert.throws(function() {
-			metalLibrary.WKCMetalArticlesSearch(WKCTestingMongoClient, null, function () {});
+			mainModule.WKCMetalArticlesSearch(WKCTestingMongoClient, null, function () {});
 		}, /WKCErrorInputInvalid/);
 	});
 
 	it('throws error if param3 not function', function() {
 		assert.throws(function() {
-			metalLibrary.WKCMetalArticlesSearch(WKCTestingMongoClient, {}, null);
+			mainModule.WKCMetalArticlesSearch(WKCTestingMongoClient, {}, null);
 		}, /WKCErrorInputInvalid/);
 	});
 
 	it('throws error if param4 not object', function() {
 		assert.throws(function() {
-			metalLibrary.WKCMetalArticlesSearch(WKCTestingMongoClient, {}, function() {}, null);
+			mainModule.WKCMetalArticlesSearch(WKCTestingMongoClient, {}, function() {}, null);
 		}, /WKCErrorInputInvalid/);
 	});
 
 	it('returns all if param2 empty', function(done) {
-		metalLibrary.WKCMetalArticlesCreate(WKCTestingMongoClient, StubValidArticle(), function(err, articleObject1) {
-			metalLibrary.WKCMetalArticlesCreate(WKCTestingMongoClient, StubValidArticle(), function(err, articleObject2) {
-				metalLibrary.WKCMetalArticlesSearch(WKCTestingMongoClient, {}, function(err, responseJSON) {
+		mainModule.WKCMetalArticlesCreate(WKCTestingMongoClient, StubValidArticle(), function(err, articleObject1) {
+			mainModule.WKCMetalArticlesCreate(WKCTestingMongoClient, StubValidArticle(), function(err, articleObject2) {
+				mainModule.WKCMetalArticlesSearch(WKCTestingMongoClient, {}, function(err, responseJSON) {
 					assert.deepEqual(responseJSON, [articleObject2, articleObject1]);
 
 					done();
@@ -219,11 +219,11 @@ describe('WKCMetalArticlesSearch', function testWKCMetalArticlesSearch() {
 	});
 
 	it('returns filtered if param2 filled', function(done) {
-		metalLibrary.WKCMetalArticlesCreate(WKCTestingMongoClient, StubValidArticle(), function(err, articleObject1) {
-			metalLibrary.WKCMetalArticlesCreate(WKCTestingMongoClient, Object.assign(StubValidArticle(), {
+		mainModule.WKCMetalArticlesCreate(WKCTestingMongoClient, StubValidArticle(), function(err, articleObject1) {
+			mainModule.WKCMetalArticlesCreate(WKCTestingMongoClient, Object.assign(StubValidArticle(), {
 				WKCArticleIsArchived: true,
 			}), function(err, articleObject2) {
-				metalLibrary.WKCMetalArticlesSearch(WKCTestingMongoClient, {
+				mainModule.WKCMetalArticlesSearch(WKCTestingMongoClient, {
 					WKCArticleIsArchived: {
 						'$ne': true,
 					},
@@ -240,16 +240,16 @@ describe('WKCMetalArticlesSearch', function testWKCMetalArticlesSearch() {
 
 		it('throws error if not int', function() {
 			assert.throws(function() {
-				metalLibrary.WKCMetalArticlesSearch(WKCTestingMongoClient, {}, function() {}, {
+				mainModule.WKCMetalArticlesSearch(WKCTestingMongoClient, {}, function() {}, {
 					WKCOptionLimit: '1',
 				});
 			}, /WKCErrorInputInvalid/);
 		});
 
 		it('returns limited if WKCOptionLimit set', function(done) {
-			metalLibrary.WKCMetalArticlesCreate(WKCTestingMongoClient, StubValidArticle(), function(err, articleObject1) {
-				metalLibrary.WKCMetalArticlesCreate(WKCTestingMongoClient, StubValidArticle(), function(err, articleObject2) {
-					metalLibrary.WKCMetalArticlesSearch(WKCTestingMongoClient, {}, function(err, responseJSON) {
+			mainModule.WKCMetalArticlesCreate(WKCTestingMongoClient, StubValidArticle(), function(err, articleObject1) {
+				mainModule.WKCMetalArticlesCreate(WKCTestingMongoClient, StubValidArticle(), function(err, articleObject2) {
+					mainModule.WKCMetalArticlesSearch(WKCTestingMongoClient, {}, function(err, responseJSON) {
 						assert.deepEqual(responseJSON, [articleObject2]);
 
 						done();

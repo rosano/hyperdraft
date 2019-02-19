@@ -4,8 +4,8 @@
  * MIT Licensed
  */
 
-var modelLibrary = require('./model');
-var metalLibrary = require('./metal');
+const modelLibrary = require('./model.js');
+const metalLibrary = require('./metal.js');
 
 //_ OLSKControllerRoutes
 

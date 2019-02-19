@@ -6,18 +6,18 @@
 
 const assert = require('assert');
 
-var testingLibrary = require('OLSKTesting');
+const OLSKTesting = require('OLSKTesting');
 
-var controllerModule = require('./controller');
+const mainModule = require('./controller.js');
 
 describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 
 	it('returns route objects', function() {
-		assert.deepEqual(controllerModule.OLSKControllerRoutes(), {
+		assert.deepEqual(mainModule.OLSKControllerRoutes(), {
 			WKCWriteRoute: {
 				OLSKRoutePath: '/panel/write',
 				OLSKRouteMethod: 'get',
-				OLSKRouteFunction: controllerModule.WKCWriteAction,
+				OLSKRouteFunction: mainModule.WKCWriteAction,
 				OLSKRouteLanguages: ['en'],
 				OLSKRouteMiddlewares: [
 					'WKCSharedMiddlewareAuthenticate',
@@ -31,7 +31,7 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 describe('WKCWriteAction', function testWKCWriteAction() {
 
 	it('renders page', function() {
-		assert.strictEqual(controllerModule.WKCWriteAction(null, testingLibrary.OLSKTestingFakeResponseForRender(function(viewPath) {
+		assert.strictEqual(mainModule.WKCWriteAction(null, OLSKTesting.OLSKTestingFakeResponseForRender(function(viewPath) {
 			return viewPath;
 		})), [
 			__dirname,
@@ -40,7 +40,7 @@ describe('WKCWriteAction', function testWKCWriteAction() {
 	});
 
 	it('returns pageData', function() {
-		assert.deepEqual(controllerModule.WKCWriteAction(null, testingLibrary.OLSKTestingFakeResponseForRender(function(viewPath, pageData) {
+		assert.deepEqual(mainModule.WKCWriteAction(null, OLSKTesting.OLSKTestingFakeResponseForRender(function(viewPath, pageData) {
 			return pageData;
 		})), {});
 	});
