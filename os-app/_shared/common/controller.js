@@ -20,7 +20,9 @@ exports.OLSKControllerSharedConnections = function() {
 exports.WKCSharedConnectionInitializerMongo = function(olskCallback) {
 	var mongodbPackage = require('mongodb');
 
-	mongodbPackage.MongoClient.connect(process.env.WKC_DATABASE_URL, function(err, client) {
+	mongodbPackage.MongoClient.connect(process.env.WKC_DATABASE_URL, {
+		useNewUrlParser: true,
+	}, function(err, client) {
 		if (err) {
 			return olskCallback(err);
 		}

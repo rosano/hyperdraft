@@ -1,7 +1,9 @@
 var mongodbPackage = require('mongodb');
 
 before(function(done) {
-	mongodbPackage.MongoClient.connect(process.env.WKC_DATABASE_URL, function(err, client) {
+	mongodbPackage.MongoClient.connect(process.env.WKC_DATABASE_URL, {
+		useNewUrlParser: true,
+	}, function(err, client) {
 		if (err) {
 			throw err;
 		}
