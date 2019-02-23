@@ -205,7 +205,7 @@
 	moi.commandsNotesCreate = function () {
 		moi.propertiesNoteObjects(moi.propertiesNoteObjects().concat(moi.dataNewNoteObject()));
 
-		moi.propertiesSelectedNote(moi.propertiesNoteObjects().shift());
+		moi.commandsNotesSelect(moi.propertiesNoteObjects().shift());
 	};
 
 	//_ commandsNotesSelect
