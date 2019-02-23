@@ -8,6 +8,12 @@
     "// OLDSKOOL": null,
     "OldSkool": "olsk/OldSkool",
 
+    "// NORMALIZE CSS": null,
+    "normalize.css": "latest",
+
+    "// DOM MANIPULATION": null,
+    "d3": "latest",
+
     "// MARKDOWN": null,
     "turndown": "latest",
     "showdown": "latest",
@@ -39,8 +45,6 @@
     "showdown": "latest",
 
     "// FRONTEND GENERAL": null,
-    "normalize.css": "latest",
-    "d3": "latest",
     "identicon.js": "latest",
     "blueimp-md5": "latest",
     
