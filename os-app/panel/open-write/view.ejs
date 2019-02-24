@@ -1,0 +1,57 @@
+<%
+locals.OLSKPageTitle = OLSKLocalized('WKCWriteHeadingText');
+locals.OLSKPageAssets = [
+	'/panel/_shared/ui-style.css',
+	'ui-style.css',
+	'/_shared/_external/remotestoragejs/release/remotestorage.js',
+	'/_shared/_external/remotestorage-widget/build/widget.js',
+	'/_shared/_external/ulid/dist/index.umd.js',
+	'/_shared/rs-modules/rsp_notes/model.js',
+	'/_shared/rs-modules/rsp_notes/rs-module.js',
+	'/_shared/RSStorageClient/storage.js',
+	'/_shared/rs-modules/rsp_notes/metal.js',
+	'/_shared/rs-modules/rsp_notes/action.js',
+	'ui-behaviour.js',
+];
+locals.OLSKPagePublicLocalizedStringKeys = [
+	'WKSharedErrorServiceUnavailable',
+	'WKSharedErrorTokenUnavailable',
+	'WKCWriteErrorNotesUnavailable',
+	'WKCWriteDetailToolbarPersistenceStatusSaving',
+	'WKCWriteDetailToolbarPersistenceStatusSaved',
+	'WKCWriteErrorPersistenceSaveDidFail',
+	'WKCWriteDetailToolbarPersistenceStatusUnableToSave',
+	'WKCWriteDetailToolbarPublishStatusPublishing',
+	'WKCWriteDetailToolbarPublishStatusUnpublishing',
+	'WKCWriteErrorPublishDidFail',
+	'WKCWriteErrorUnpublishDidFail',
+	'WKCWriteDetailToolbarPublishStatusUnableToPublish',
+	'WKCWriteDetailToolbarPublishStatusUnableToUnpublish',
+	'WKCWriteNotesDeleteAlertText',
+	'WKCWriteDetailToolbarPersistenceStatusDeleting',
+	'WKCWriteDetailToolbarPersistenceStatusDeleted',
+	'WKCWriteErrorPersistenceDeleteDidFail',
+	'WKCWriteDetailToolbarPersistenceStatusUnableToDelete',
+	'WKCWriteDetailToolbarPublishStatusPublished',
+];
+locals.OLSKPagePublicRouteKeys = [
+	'WKCRouteRefsRead',
+];
+%>
+
+<%- include('../../_shared/common/layout-header.ejs') %>
+
+<%- include('../_shared/layout-header.ejs') %>
+
+<p><button onclick="RSPHomeBehaviour.interfaceCreateButtonDidClick()">Create</button></p>
+<ul id="RSProofList"></ul>
+
+<div id="RSPNotification" class="OLSKSharedHidden">Update Available: <button id="RSPReloadButton">Reload</button></div>
+
+<div id="RSProofConnectWidget"></div>
+
+<script type="text/javascript">
+	RSPHomeBehaviour.lifecyclePageWillLoad();
+</script>
+
+<%- include('../../_shared/common/layout-footer.ejs') %>
