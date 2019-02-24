@@ -51,7 +51,7 @@ locals.OLSKPagePublicRouteKeys = [
 <%- include('../../_shared/common/layout-header.ejs') %>
 
 <div id="WKCWrite" class="WKCWriteLoading">
-	<div id="WKCWriteMaster" class="WKCSharedContextMobileActiveView">
+	<div id="WKCWriteMaster" class="WKC_ContextMobileView WKC_ContextMobileActiveView">
 		<header id="WKCWriteMasterToolbar" class="WKCSharedToolbar">
 			<input id="WKCWriteMasterToolbarFilterInput" placeholder="<%= OLSKLocalized('WKCWriteMasterToolbarFilterInputPlaceholderText') %>" oninput="WIKWriteBehaviour.interfaceNotesMasterToolbarFilterInputDidInput()" accesskey="f">
 
@@ -66,7 +66,7 @@ locals.OLSKPagePublicRouteKeys = [
 		</div>
 	</div>
 
-	<div id="WKCWriteDetail" class="WKCWriteDetailInactive WKCSharedContextMobileInactiveView">
+	<div id="WKCWriteDetail" class="WKCWriteDetailInactive WKC_ContextMobileInactiveView">
 		<header id="WKCWriteDetailToolbar" class="WKCSharedToolbar">
 			<span id="WKCWriteDetailToolbarPublishStatus"></span>
 

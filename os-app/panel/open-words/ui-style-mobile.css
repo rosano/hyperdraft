@@ -11,11 +11,11 @@
 	-webkit-overflow-scrolling: touch;
 }
 
-.WKCSharedContextMobileInactiveView {
+.WKC_ContextMobileInactiveView {
 	display: none !important;
 }
 
-.WKCSharedContextMobileActiveView {
+.WKC_ContextMobileActiveView {
 	flex-basis: 100vw !important;
 }
 
