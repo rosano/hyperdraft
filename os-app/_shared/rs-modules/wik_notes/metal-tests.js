@@ -23,15 +23,15 @@ beforeEach(async function() {
 describe('WKCNotesMetalWrite', function testWKCNotesMetalWrite() {
 
 	it('rejects if not object', async function() {
-		await assert.rejects(mainModule.WKCNotesMetalWrite(storageClient, null), /RSErrorInputInvalid/);
+		await assert.rejects(mainModule.WKCNotesMetalWrite(storageClient, null), /WKCErrorInputInvalid/);
 	});
 
-	it('returns object with RSErrors if not valid', async function() {
+	it('returns object with WKCErrors if not valid', async function() {
 		assert.deepEqual((await mainModule.WKCNotesMetalWrite(storageClient, Object.assign(kTesting.StubNoteObjectValid(), {
 			WKCNoteID: null,
-		}))).RSErrors, {
+		}))).WKCErrors, {
 			WKCNoteID: [
-				'RSErrorNotString',
+				'WKCErrorNotString',
 			],
 		})
 	});
@@ -49,7 +49,7 @@ describe('WKCNotesMetalWrite', function testWKCNotesMetalWrite() {
 describe('WKCNotesMetalRead', function testWKCNotesMetalRead() {
 
 	it('rejects if not string', async function() {
-		await assert.rejects(mainModule.WKCNotesMetalRead(storageClient, 1), /RSErrorInputInvalid/);
+		await assert.rejects(mainModule.WKCNotesMetalRead(storageClient, 1), /WKCErrorInputInvalid/);
 	});
 
 	it('returns null if not found', async function() {
@@ -81,7 +81,7 @@ describe('WKCNotesMetalList', function testWKCNotesMetalList() {
 describe('WKCNotesMetalDelete', function testWKCNotesMetalDelete() {
 
 	it('rejects if not string', async function() {
-		await assert.rejects(mainModule.WKCNotesMetalDelete(storageClient, 1), /RSErrorInputInvalid/);
+		await assert.rejects(mainModule.WKCNotesMetalDelete(storageClient, 1), /WKCErrorInputInvalid/);
 	});
 
 	it('returns statusCode', async function() {

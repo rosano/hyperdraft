@@ -18,7 +18,7 @@ describe('WKCNotesModelErrorsFor', function testWKCNotesModelErrorsFor() {
 	it('throws error if not object', function() {
 		assert.throws(function() {
 			mainModule.WKCNotesModelErrorsFor(null);
-		}, /RSErrorInputInvalid/);
+		}, /WKCErrorInputInvalid/);
 	});
 
 	it('returns object if WKCNoteID not string', function() {
@@ -26,7 +26,7 @@ describe('WKCNotesModelErrorsFor', function testWKCNotesModelErrorsFor() {
 			WKCNoteID: null,
 		})), {
 			WKCNoteID: [
-				'RSErrorNotString',
+				'WKCErrorNotString',
 			],
 		});
 	});
@@ -36,7 +36,7 @@ describe('WKCNotesModelErrorsFor', function testWKCNotesModelErrorsFor() {
 			WKCNoteBody: null,
 		})), {
 			WKCNoteBody: [
-				'RSErrorNotString',
+				'WKCErrorNotString',
 			],
 		});
 	});
@@ -46,7 +46,7 @@ describe('WKCNotesModelErrorsFor', function testWKCNotesModelErrorsFor() {
 			WKCNoteDateCreated: new Date('alfa'),
 		})), {
 			WKCNoteDateCreated: [
-				'RSErrorNotDate',
+				'WKCErrorNotDate',
 			],
 		});
 	});
@@ -56,7 +56,7 @@ describe('WKCNotesModelErrorsFor', function testWKCNotesModelErrorsFor() {
 			RSNoteModificationDate: new Date('alfa'),
 		})), {
 			RSNoteModificationDate: [
-				'RSErrorNotDate',
+				'WKCErrorNotDate',
 			],
 		});
 	});
@@ -72,7 +72,7 @@ describe('WKCNotesModelErrorsFor', function testWKCNotesModelErrorsFor() {
 				RSNotePublishStatusIsPublished: 'true',
 			})), {
 				RSNotePublishStatusIsPublished: [
-					'RSErrorNotBoolean',
+					'WKCErrorNotBoolean',
 				],
 			});
 		});
@@ -138,7 +138,7 @@ describe('OLSKTypeJSONSchemaForErrors', function OLSKTypeJSONSchemaForErrors() {
 	it('throws error if not object', function() {
 		assert.throws(function() {
 			mainModule.OLSKTypeJSONSchemaForErrors(null);
-		}, /RSErrorInputInvalid/);
+		}, /WKCErrorInputInvalid/);
 	});
 
 	it('returns object', function() {
@@ -153,7 +153,7 @@ describe('OLSKTypeJSONSchemaForErrors', function OLSKTypeJSONSchemaForErrors() {
 		
 		it('declares string', function() {
 			assert.deepEqual(mainModule.OLSKTypeJSONSchemaForErrors({
-				alfa: ['RSErrorNotString']
+				alfa: ['WKCErrorNotString']
 			}), {
 				type: 'object',
 				properties: {
@@ -169,7 +169,7 @@ describe('OLSKTypeJSONSchemaForErrors', function OLSKTypeJSONSchemaForErrors() {
 		
 		it('declares boolean', function() {
 			assert.deepEqual(mainModule.OLSKTypeJSONSchemaForErrors({
-				alfa: ['RSErrorNotBoolean']
+				alfa: ['WKCErrorNotBoolean']
 			}), {
 				type: 'object',
 				properties: {
@@ -185,7 +185,7 @@ describe('OLSKTypeJSONSchemaForErrors', function OLSKTypeJSONSchemaForErrors() {
 		
 		it('declares date', function() {
 			assert.deepEqual(mainModule.OLSKTypeJSONSchemaForErrors({
-				alfa: ['RSErrorNotDate']
+				alfa: ['WKCErrorNotDate']
 			}), {
 				type: 'object',
 				properties: {
@@ -206,7 +206,7 @@ describe('OLSKTypeJSONSchemaForErrors', function OLSKTypeJSONSchemaForErrors() {
 		
 		it('declares if required', function() {
 			assert.deepEqual(mainModule.OLSKTypeJSONSchemaForErrors({
-				alfa: ['RSErrorNotString']
+				alfa: ['WKCErrorNotString']
 			}), {
 				type: 'object',
 				properties: {
@@ -222,7 +222,7 @@ describe('OLSKTypeJSONSchemaForErrors', function OLSKTypeJSONSchemaForErrors() {
 
 		it('ignores', function() {
 			assert.deepEqual(mainModule.OLSKTypeJSONSchemaForErrors({
-				alfa: ['RSErrorNotString', '__RSOptional']
+				alfa: ['WKCErrorNotString', '__RSOptional']
 			}), {
 				type: 'object',
 				properties: {

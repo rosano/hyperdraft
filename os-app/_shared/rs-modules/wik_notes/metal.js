@@ -10,13 +10,13 @@
 
 	exports.WKCNotesMetalWrite = async function(storageClient, inputData) {
 		if (typeof inputData !== 'object' || inputData === null) {
-			return Promise.reject(new Error('RSErrorInputInvalid'));
+			return Promise.reject(new Error('WKCErrorInputInvalid'));
 		}
 
 		let errors = WKCNotesModel.WKCNotesModelErrorsFor(inputData);
 		if (errors) {
 			return Promise.resolve({
-				RSErrors: errors,
+				WKCErrors: errors,
 			});
 		}
 
@@ -27,7 +27,7 @@
 
 	exports.WKCNotesMetalRead = async function(storageClient, inputData) {
 		if (typeof inputData !== 'string') {
-			return Promise.reject(new Error('RSErrorInputInvalid'));
+			return Promise.reject(new Error('WKCErrorInputInvalid'));
 		}
 
 		return WKCNotesModel.WKCNotesModelPostJSONParse(await storageClient.wik_notes.readObject(inputData));
@@ -49,7 +49,7 @@
 
 	exports.WKCNotesMetalDelete = async function(storageClient, inputData) {
 		if (typeof inputData !== 'string') {
-			return Promise.reject(new Error('RSErrorInputInvalid'));
+			return Promise.reject(new Error('WKCErrorInputInvalid'));
 		}
 
 		return await storageClient.wik_notes.deleteObject(inputData);

@@ -8,39 +8,39 @@
 
 	exports.WKCNotesModelErrorsFor = function(inputData) {
 		if (typeof inputData !== 'object' || inputData === null) {
-			throw new Error('RSErrorInputInvalid');
+			throw new Error('WKCErrorInputInvalid');
 		}
 
 		var errors = {};
 
 		if (typeof inputData.WKCNoteID !== 'string') {
 			errors.WKCNoteID = [
-				'RSErrorNotString',
+				'WKCErrorNotString',
 			];
 		}
 
 		if (typeof inputData.WKCNoteBody !== 'string') {
 			errors.WKCNoteBody = [
-				'RSErrorNotString',
+				'WKCErrorNotString',
 			];
 		}
 
 		if (!(inputData.WKCNoteDateCreated instanceof Date) || Number.isNaN(inputData.WKCNoteDateCreated.getTime())) {
 			errors.WKCNoteDateCreated = [
-				'RSErrorNotDate',
+				'WKCErrorNotDate',
 			];
 		}
 
 		if (!(inputData.RSNoteModificationDate instanceof Date) || Number.isNaN(inputData.RSNoteModificationDate.getTime())) {
 			errors.RSNoteModificationDate = [
-				'RSErrorNotDate',
+				'WKCErrorNotDate',
 			];
 		}
 
 		if (typeof inputData.RSNotePublishStatusIsPublished !== 'undefined') {
 			if (typeof inputData.RSNotePublishStatusIsPublished !== 'boolean') {
 				errors.RSNotePublishStatusIsPublished = [
-					'RSErrorNotBoolean',
+					'WKCErrorNotBoolean',
 				];
 			}
 		}
@@ -84,7 +84,7 @@
 
 	exports.OLSKTypeJSONSchemaForErrors = function(inputData) {
 		if (typeof inputData !== 'object' || inputData === null) {
-			throw new Error('RSErrorInputInvalid');
+			throw new Error('WKCErrorInputInvalid');
 		}
 
 		return {
@@ -92,7 +92,7 @@
 			properties: Object.entries(inputData).reduce(function (coll, [key, val]) {
 				coll[key] = {};
 
-				coll[key].type = [...val].shift().replace('RSErrorNot', '').toLowerCase();
+				coll[key].type = [...val].shift().replace('WKCErrorNot', '').toLowerCase();
 
 				if (coll[key].type === 'date') {
 					coll[key].type = 'string';

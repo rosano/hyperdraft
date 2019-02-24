@@ -16,15 +16,15 @@ const kTesting = {
 describe('WKCNotesActionCreate', function testWKCNotesActionCreate() {
 
 	it('rejects if not object', async function() {
-		await assert.rejects(mainModule.WKCNotesActionCreate(storageClient, null), /RSErrorInputInvalid/);
+		await assert.rejects(mainModule.WKCNotesActionCreate(storageClient, null), /WKCErrorInputInvalid/);
 	});
 
-	it('returns object with RSErrors if not valid', async function() {
+	it('returns object with WKCErrors if not valid', async function() {
 		assert.deepEqual((await mainModule.WKCNotesActionCreate(storageClient, Object.assign(kTesting.StubNoteObject(), {
 			WKCNoteBody: null,
-		}))).RSErrors, {
+		}))).WKCErrors, {
 			WKCNoteBody: [
-				'RSErrorNotString',
+				'WKCErrorNotString',
 			],
 		})
 	});
@@ -62,15 +62,15 @@ describe('WKCNotesActionCreate', function testWKCNotesActionCreate() {
 describe('WKCNotesActionUpdate', function testWKCNotesActionUpdate() {
 
 	it('rejects if not object', async function() {
-		await assert.rejects(mainModule.WKCNotesActionUpdate(storageClient, null), /RSErrorInputInvalid/);
+		await assert.rejects(mainModule.WKCNotesActionUpdate(storageClient, null), /WKCErrorInputInvalid/);
 	});
 
-	it('returns object with RSErrors if not valid', async function() {
+	it('returns object with WKCErrors if not valid', async function() {
 		assert.deepEqual((await mainModule.WKCNotesActionUpdate(storageClient, Object.assign(await mainModule.WKCNotesActionCreate(storageClient, kTesting.StubNoteObject()), {
 			WKCNoteID: null,
-		}))).RSErrors, {
+		}))).WKCErrors, {
 			WKCNoteID: [
-				'RSErrorNotString',
+				'WKCErrorNotString',
 			],
 		})
 	});

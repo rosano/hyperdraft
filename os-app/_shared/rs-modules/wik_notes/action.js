@@ -12,7 +12,7 @@
 
 	exports.WKCNotesActionCreate = async function(storageClient, inputData) {
 		if (typeof inputData !== 'object' || inputData === null) {
-			return Promise.reject(new Error('RSErrorInputInvalid'));
+			return Promise.reject(new Error('WKCErrorInputInvalid'));
 		}
 
 		let creationDate = new Date();
@@ -28,7 +28,7 @@
 
 	exports.WKCNotesActionUpdate = async function(storageClient, inputData) {
 		if (typeof inputData !== 'object' || inputData === null) {
-			return Promise.reject(new Error('RSErrorInputInvalid'));
+			return Promise.reject(new Error('WKCErrorInputInvalid'));
 		}
 
 		return await WKCNotesMetal.WKCNotesMetalWrite(storageClient, Object.assign(inputData, {
