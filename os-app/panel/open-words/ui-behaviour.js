@@ -453,7 +453,7 @@
 
 		var contextElement = parentElement.append('div')
 			.attr('class', 'WKCWriteMasterContentListItemContext');
-			
+
 		contextElement.append('span')
 			.attr('class', 'WKCWriteMasterContentListItemContextTitle');
 
@@ -470,10 +470,7 @@
 				
 				WCKWriteBehaviourPropertyEditor.focus();
 			});
-
-		parentElement.classed('WKCWriteMasterContentListItemUnpersisted', function (obj) {
-			return obj._WKCWriteThrottleObject;
-		});
+			
 		parentElement.select('.WKCWriteMasterContentListItemContextTitle')
 			.text(function (e) {
 				return WKCParser.WKCParserTitleForPlaintext(e.WKCNoteBody);
