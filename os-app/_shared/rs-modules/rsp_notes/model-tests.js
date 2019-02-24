@@ -6,8 +6,8 @@ const kTesting = {
 	StubNoteObject: function() {
 		return {
 			RSNoteID: 'alfa',
-			RSNoteBody: 'bravo',
-			RSNoteCreationDate: new Date('2019-02-23T13:56:36Z'),
+			WKCNoteBody: 'bravo',
+			WKCNoteDateCreated: new Date('2019-02-23T13:56:36Z'),
 			RSNoteModificationDate: new Date('2019-02-23T13:56:36Z'),
 		};
 	},
@@ -31,21 +31,21 @@ describe('RSNotesModelErrorsFor', function testRSNotesModelErrorsFor() {
 		});
 	});
 
-	it('returns object if RSNoteBody not string', function() {
+	it('returns object if WKCNoteBody not string', function() {
 		assert.deepEqual(mainModule.RSNotesModelErrorsFor(Object.assign(kTesting.StubNoteObject(), {
-			RSNoteBody: null,
+			WKCNoteBody: null,
 		})), {
-			RSNoteBody: [
+			WKCNoteBody: [
 				'RSErrorNotString',
 			],
 		});
 	});
 
-	it('returns object if RSNoteCreationDate not date', function() {
+	it('returns object if WKCNoteDateCreated not date', function() {
 		assert.deepEqual(mainModule.RSNotesModelErrorsFor(Object.assign(kTesting.StubNoteObject(), {
-			RSNoteCreationDate: new Date('alfa'),
+			WKCNoteDateCreated: new Date('alfa'),
 		})), {
-			RSNoteCreationDate: [
+			WKCNoteDateCreated: [
 				'RSErrorNotDate',
 			],
 		});
@@ -87,11 +87,11 @@ describe('RSNotesModelPreJSONSchemaValidate', function testRSNotesModelPreJSONSc
 		assert.deepEqual(mainModule.RSNotesModelPreJSONSchemaValidate({}), {});
 	});
 
-	it('returns input with RSNoteCreationDate as string', function() {
+	it('returns input with WKCNoteDateCreated as string', function() {
 		assert.deepEqual(mainModule.RSNotesModelPreJSONSchemaValidate({
-			RSNoteCreationDate: new Date('2018-12-09T19:07:01.902Z'),
+			WKCNoteDateCreated: new Date('2018-12-09T19:07:01.902Z'),
 		}), {
-			RSNoteCreationDate: '2018-12-09T19:07:01.902Z',
+			WKCNoteDateCreated: '2018-12-09T19:07:01.902Z',
 		});
 	});
 
@@ -115,11 +115,11 @@ describe('RSNotesModelPostJSONParse', function testRSNotesModelPostJSONParse() {
 		assert.deepEqual(mainModule.RSNotesModelPostJSONParse({}), {});
 	});
 
-	it('returns input with RSNoteCreationDate as date', function() {
+	it('returns input with WKCNoteDateCreated as date', function() {
 		assert.deepEqual(mainModule.RSNotesModelPostJSONParse({
-			RSNoteCreationDate: '2018-12-09T19:07:01.902Z',
+			WKCNoteDateCreated: '2018-12-09T19:07:01.902Z',
 		}), {
-			RSNoteCreationDate: new Date('2018-12-09T19:07:01.902Z'),
+			WKCNoteDateCreated: new Date('2018-12-09T19:07:01.902Z'),
 		});
 	});
 

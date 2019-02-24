@@ -9,8 +9,8 @@ const kTesting = {
 	StubNoteObjectValid: function() {
 		return {
 			RSNoteID: 'alfa',
-			RSNoteBody: 'bravo',
-			RSNoteCreationDate: new Date('2019-02-23T13:56:36Z'),
+			WKCNoteBody: 'bravo',
+			WKCNoteDateCreated: new Date('2019-02-23T13:56:36Z'),
 			RSNoteModificationDate: new Date('2019-02-23T13:56:36Z'),
 		};
 	},

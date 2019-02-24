@@ -21,8 +21,8 @@ const kTesting = {
 	StubNoteObjectValid: function() {
 		return {
 			RSNoteID: 'alfa',
-			RSNoteBody: 'bravo',
-			RSNoteCreationDate: new Date('2019-02-23T13:56:36Z'),
+			WKCNoteBody: 'bravo',
+			WKCNoteDateCreated: new Date('2019-02-23T13:56:36Z'),
 			RSNoteModificationDate: new Date('2019-02-23T13:56:36Z'),
 		};
 	},
@@ -39,7 +39,7 @@ describe('RSChangeDelegateProtocol', function testRSChangeDelegateProtocol() {
 		kTesting.StubRemoteStorage({
 			RSChangeDelegateAdd: function (inputData) {
 				assert.deepEqual(inputData, Object.assign(kTesting.StubNoteObjectValid(), {
-					RSNoteCreationDate: inputData.RSNoteCreationDate,
+					WKCNoteDateCreated: inputData.WKCNoteDateCreated,
 					RSNoteModificationDate: inputData.RSNoteModificationDate,
 					'@context': inputData['@context'],
 				}));
@@ -52,7 +52,7 @@ describe('RSChangeDelegateProtocol', function testRSChangeDelegateProtocol() {
 	it('calls RSChangeDelegateUpdate on update', async function(done) {
 		let remoteStorage = kTesting.StubRemoteStorage({
 			RSChangeDelegateUpdate: function (inputData) {
-				assert.deepEqual(inputData.RSNoteBody, 'charlie');
+				assert.deepEqual(inputData.WKCNoteBody, 'charlie');
 				
 				done();
 			},
@@ -61,7 +61,7 @@ describe('RSChangeDelegateProtocol', function testRSChangeDelegateProtocol() {
 		let item = remoteStorage.rsp_notes.writeObject('alfa', kTesting.StubNoteObjectValid());
 
 		remoteStorage.rsp_notes.writeObject(item.RSNoteID, Object.assign(item, {
-			RSNoteBody: 'charlie',
+			WKCNoteBody: 'charlie',
 		}));
 	});
 

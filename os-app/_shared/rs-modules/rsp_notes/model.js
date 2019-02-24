@@ -19,14 +19,14 @@
 			];
 		}
 
-		if (typeof inputData.RSNoteBody !== 'string') {
-			errors.RSNoteBody = [
+		if (typeof inputData.WKCNoteBody !== 'string') {
+			errors.WKCNoteBody = [
 				'RSErrorNotString',
 			];
 		}
 
-		if (!(inputData.RSNoteCreationDate instanceof Date) || Number.isNaN(inputData.RSNoteCreationDate.getTime())) {
-			errors.RSNoteCreationDate = [
+		if (!(inputData.WKCNoteDateCreated instanceof Date) || Number.isNaN(inputData.WKCNoteDateCreated.getTime())) {
+			errors.WKCNoteDateCreated = [
 				'RSErrorNotDate',
 			];
 		}
@@ -51,8 +51,8 @@
 	//_ RSNotesModelPreJSONSchemaValidate
 
 	exports.RSNotesModelPreJSONSchemaValidate = function(inputData) {
-		if (inputData.RSNoteCreationDate) {
-			inputData.RSNoteCreationDate = inputData.RSNoteCreationDate.toISOString();
+		if (inputData.WKCNoteDateCreated) {
+			inputData.WKCNoteDateCreated = inputData.WKCNoteDateCreated.toISOString();
 		}
 
 		if (inputData.RSNoteModificationDate) {
@@ -69,8 +69,8 @@
 			return inputData;
 		}
 		
-		if (inputData.RSNoteCreationDate) {
-			inputData.RSNoteCreationDate = new Date(inputData.RSNoteCreationDate);
+		if (inputData.WKCNoteDateCreated) {
+			inputData.WKCNoteDateCreated = new Date(inputData.WKCNoteDateCreated);
 		}
 
 		if (inputData.RSNoteModificationDate) {

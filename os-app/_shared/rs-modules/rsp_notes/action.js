@@ -19,7 +19,7 @@
 
 		return await RSNotesMetal.RSNotesMetalWrite(storageClient, Object.assign(inputData, {
 			RSNoteID: ULIDPackage.ulid(),
-			RSNoteCreationDate: creationDate,
+			WKCNoteDateCreated: creationDate,
 			RSNoteModificationDate: creationDate,
 		}));
 	};

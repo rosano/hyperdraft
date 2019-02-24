@@ -8,7 +8,7 @@ const storageClient = require('../RSStorageClient/storage.js').RSStorageClientFo
 const kTesting = {
 	StubNoteObject: function() {
 		return {
-			RSNoteBody: 'alfa',
+			WKCNoteBody: 'alfa',
 		};
 	},
 };
@@ -21,9 +21,9 @@ describe('RSNotesActionCreate', function testRSNotesActionCreate() {
 
 	it('returns object with RSErrors if not valid', async function() {
 		assert.deepEqual((await mainModule.RSNotesActionCreate(storageClient, Object.assign(kTesting.StubNoteObject(), {
-			RSNoteBody: null,
+			WKCNoteBody: null,
 		}))).RSErrors, {
-			RSNoteBody: [
+			WKCNoteBody: [
 				'RSErrorNotString',
 			],
 		})
@@ -34,7 +34,7 @@ describe('RSNotesActionCreate', function testRSNotesActionCreate() {
 
 		assert.deepEqual(item, Object.assign(kTesting.StubNoteObject(), {
 			RSNoteID: item.RSNoteID,
-			RSNoteCreationDate: item.RSNoteCreationDate,
+			WKCNoteDateCreated: item.WKCNoteDateCreated,
 			RSNoteModificationDate: item.RSNoteModificationDate,
 			'@context': item['@context'],
 		}));
@@ -49,8 +49,8 @@ describe('RSNotesActionCreate', function testRSNotesActionCreate() {
 		assert.deepEqual((new Set(items)).values(), items);
 	});
 
-	it('sets RSNoteCreationDate to now', async function() {
-		assert.strictEqual(new Date() - (await mainModule.RSNotesActionCreate(storageClient, kTesting.StubNoteObject())).RSNoteCreationDate < 100, true);
+	it('sets WKCNoteDateCreated to now', async function() {
+		assert.strictEqual(new Date() - (await mainModule.RSNotesActionCreate(storageClient, kTesting.StubNoteObject())).WKCNoteDateCreated < 100, true);
 	});
 
 	it('sets RSNoteModificationDate to now', async function() {
