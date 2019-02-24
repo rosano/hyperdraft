@@ -552,7 +552,7 @@
 
 	let setupStorageClient = function () {
 		storageClient = RSStorageClient.RSStorageClientForChangeDelegateMap({
-			rsp_notes: {
+			wik_notes: {
 				RSChangeDelegateAdd: function (inputData) {
 					// console.log('RSChangeDelegateAdd', inputData);
 					return moi.propertiesNoteObjects(moi.propertiesNoteObjects().concat(inputData));
@@ -580,7 +580,7 @@
 		remoteStorage.on('ready', async () => {
 			console.debug('ready');
 
-			await remoteStorage.rsp_notes.init();
+			await remoteStorage.wik_notes.init();
 
 			setupFinalize();
 		});

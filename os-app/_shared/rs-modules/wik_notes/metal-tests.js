@@ -1,8 +1,8 @@
 const assert = require('assert');
 
 const mainModule = require('./metal.js');
-const storageClient = require('../RSStorageClient/storage.js').RSStorageClientForChangeDelegateMap({
-	rsp_notes: null,
+const storageClient = require('../../RSStorageClient/storage.js').RSStorageClientForChangeDelegateMap({
+	wik_notes: null,
 });
 
 const kTesting = {
@@ -17,7 +17,7 @@ const kTesting = {
 };
 
 beforeEach(async function() {
-	await Promise.all(Object.keys(await storageClient.rsp_notes.listObjects()).map(storageClient.rsp_notes.deleteObject));
+	await Promise.all(Object.keys(await storageClient.wik_notes.listObjects()).map(storageClient.wik_notes.deleteObject));
 });
 
 describe('RSNotesMetalWrite', function testRSNotesMetalWrite() {

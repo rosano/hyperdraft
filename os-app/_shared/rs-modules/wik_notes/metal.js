@@ -20,7 +20,7 @@
 			});
 		}
 
-		return await storageClient.rsp_notes.writeObject(inputData.WKCNoteID, inputData);
+		return await storageClient.wik_notes.writeObject(inputData.WKCNoteID, inputData);
 	};
 
 	//_ RSNotesMetalRead
@@ -30,13 +30,13 @@
 			return Promise.reject(new Error('RSErrorInputInvalid'));
 		}
 
-		return RSNotesModel.RSNotesModelPostJSONParse(await storageClient.rsp_notes.readObject(inputData));
+		return RSNotesModel.RSNotesModelPostJSONParse(await storageClient.wik_notes.readObject(inputData));
 	};
 
 	//_ RSNotesMetalList
 
 	exports.RSNotesMetalList = async function(storageClient) {
-		let outputData = await storageClient.rsp_notes.listObjects();
+		let outputData = await storageClient.wik_notes.listObjects();
 
 		for (let key in outputData) {
 			RSNotesModel.RSNotesModelPostJSONParse(outputData[key]);
@@ -52,7 +52,7 @@
 			return Promise.reject(new Error('RSErrorInputInvalid'));
 		}
 
-		return await storageClient.rsp_notes.deleteObject(inputData);
+		return await storageClient.wik_notes.deleteObject(inputData);
 	};
 
 	Object.defineProperty(exports, '__esModule', { value: true });

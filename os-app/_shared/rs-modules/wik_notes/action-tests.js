@@ -1,8 +1,8 @@
 const assert = require('assert');
 
 const mainModule = require('./action.js');
-const storageClient = require('../RSStorageClient/storage.js').RSStorageClientForChangeDelegateMap({
-	rsp_notes: null,
+const storageClient = require('../../RSStorageClient/storage.js').RSStorageClientForChangeDelegateMap({
+	wik_notes: null,
 });
 
 const kTesting = {

@@ -30,7 +30,7 @@ const kTesting = {
 
 beforeEach(async function() {
 	let remoteStorage = kTesting.StubRemoteStorage();
-	await Promise.all(Object.keys(await remoteStorage.rsp_notes.listObjects()).map(remoteStorage.rsp_notes.deleteObject));
+	await Promise.all(Object.keys(await remoteStorage.wik_notes.listObjects()).map(remoteStorage.wik_notes.deleteObject));
 });
 
 describe('RSChangeDelegateProtocol', function testRSChangeDelegateProtocol() {
@@ -46,7 +46,7 @@ describe('RSChangeDelegateProtocol', function testRSChangeDelegateProtocol() {
 
 				done();
 			},
-		}).rsp_notes.writeObject('alfa', kTesting.StubNoteObjectValid());
+		}).wik_notes.writeObject('alfa', kTesting.StubNoteObjectValid());
 	});
 
 	it('calls RSChangeDelegateUpdate on update', async function(done) {
@@ -58,9 +58,9 @@ describe('RSChangeDelegateProtocol', function testRSChangeDelegateProtocol() {
 			},
 		});
 
-		let item = remoteStorage.rsp_notes.writeObject('alfa', kTesting.StubNoteObjectValid());
+		let item = remoteStorage.wik_notes.writeObject('alfa', kTesting.StubNoteObjectValid());
 
-		remoteStorage.rsp_notes.writeObject(item.WKCNoteID, Object.assign(item, {
+		remoteStorage.wik_notes.writeObject(item.WKCNoteID, Object.assign(item, {
 			WKCNoteBody: 'charlie',
 		}));
 	});
@@ -74,7 +74,7 @@ describe('RSChangeDelegateProtocol', function testRSChangeDelegateProtocol() {
 			},
 		});
 
-		remoteStorage.rsp_notes.deleteObject((await remoteStorage.rsp_notes.writeObject('alfa', kTesting.StubNoteObjectValid())).WKCNoteID);
+		remoteStorage.wik_notes.deleteObject((await remoteStorage.wik_notes.writeObject('alfa', kTesting.StubNoteObjectValid())).WKCNoteID);
 	});
 
 });
