@@ -570,7 +570,7 @@
 		storageClient = RSStorageClient.RSStorageClientForChangeDelegateMap({
 			rsp_notes: {
 				RSChangeDelegateAdd: function (inputData) {
-					console.log('RSChangeDelegateAdd', inputData);
+					// console.log('RSChangeDelegateAdd', inputData);
 					return moi.propertiesNoteObjects(moi.propertiesNoteObjects().concat(inputData));
 				},
 				RSChangeDelegateRemove: function (inputData) {
