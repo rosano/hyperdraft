@@ -242,10 +242,6 @@
 				return moi.commandsPersistNote(inputData);
 			};
 
-			if (inputData === moi.propertiesSelectedNote()) {
-				moi.reactPersistenceStatus(OLSKLocalized('WKCWriteDetailToolbarPersistenceStatusUnableToSave'));
-			}
-
 			throw error;
 		});
 	};
@@ -533,20 +529,6 @@
 			.classed('WKCSharedHidden', inputData ? inputData.WKCNotePublishStatusIsPublished : false);
 		d3.select('#WKCWriteDetailToolbarUnpublishButton')
 			.classed('WKCSharedHidden', inputData ? !inputData.WKCNotePublishStatusIsPublished : false);
-	};
-
-	//_ reactPersistenceStatus
-
-	moi.reactPersistenceStatus = function (inputData, shouldClear) {
-		d3.select('#WKCWriteDetailToolbarPersistenceStatus').text(inputData);
-
-		if (!shouldClear) {
-			return;
-		}
-
-		setTimeout(function() {
-			d3.select('#WKCWriteDetailToolbarPersistenceStatus').text(null);
-		}, 1000);
 	};
 
 	//# SETUP
