@@ -238,7 +238,7 @@
 		moi.reactNoteObjects(moi.dataNoteObjectsFiltered());
 	};
 
-	//_ commandsPersistNote
+	//_ commandsPersistNote #pendext
 
 	moi.commandsPersistNote = function (inputData) {
 		(new Promise(function(resolve, reject) {
@@ -265,7 +265,7 @@
 		});
 	};
 
-	//_ _commandsPersistNoteCreate
+	//_ _commandsPersistNoteCreate #pendext
 
 	moi._commandsPersistNoteCreate = function (inputData, resolve, reject) {
 		let item = Object.assign({}, inputData);
@@ -284,7 +284,7 @@
 		}, reject));
 	};
 
-	//_ _commandsPersistNoteVersion
+	//_ _commandsPersistNoteVersion #pendext
 
 	moi._commandsPersistNoteVersion = function (inputData, resolve, reject) {
 		let item = Object.assign({}, inputData);
