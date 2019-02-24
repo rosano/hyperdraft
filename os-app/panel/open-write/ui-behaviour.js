@@ -340,6 +340,8 @@
 	//_ commandsPublishNote
 
 	moi.commandsPublishNote = function (inputData) {
+		return console.info('temporarily disabled');
+		
 		d3.select('#WKCWriteDetailToolbarPublishStatus').text(OLSKLocalized('WKCWriteDetailToolbarPublishStatusPublishing'));
 
 		d3.json(OLSKCanonicalFor('WKCRouteAPINotesPublish', {
