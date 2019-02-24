@@ -196,22 +196,6 @@
 		}));
 	};
 
-	//_ commandsAlertConnectionError
-
-	moi.commandsAlertConnectionError = function (error) {
-		window.alert(OLSKLocalized('WKSharedErrorServiceUnavailable'));
-
-		throw error;
-	};
-
-	//_ commandsAlertTokenUnavailable
-
-	moi.commandsAlertTokenUnavailable = function () {
-		window.alert(OLSKLocalized('WKSharedErrorTokenUnavailable'));
-
-		throw new Error('WKCAppErrorTokenUnavailable');
-	};
-
 	//_ commandsAlertNotesUnavailable
 
 	moi.commandsAlertNotesUnavailable = function () {
