@@ -33,11 +33,11 @@ beforeEach(async function() {
 	await Promise.all(Object.keys(await remoteStorage.wik_notes.listObjects()).map(remoteStorage.wik_notes.deleteObject));
 });
 
-describe('RSChangeDelegateProtocol', function testRSChangeDelegateProtocol() {
+describe('OLSKChangeDelegateProtocol', function testOLSKChangeDelegateProtocol() {
 
-	it('calls RSChangeDelegateAdd on create', function(done) {
+	it('calls OLSKChangeDelegateAdd on create', function(done) {
 		kTesting.StubRemoteStorage({
-			RSChangeDelegateAdd: function (inputData) {
+			OLSKChangeDelegateAdd: function (inputData) {
 				assert.deepEqual(inputData, Object.assign(kTesting.StubNoteObjectValid(), {
 					WKCNoteDateCreated: inputData.WKCNoteDateCreated,
 					WKCNoteModificationDate: inputData.WKCNoteModificationDate,
@@ -49,9 +49,9 @@ describe('RSChangeDelegateProtocol', function testRSChangeDelegateProtocol() {
 		}).wik_notes.writeObject('alfa', kTesting.StubNoteObjectValid());
 	});
 
-	it('calls RSChangeDelegateUpdate on update', async function(done) {
+	it('calls OLSKChangeDelegateUpdate on update', async function(done) {
 		let remoteStorage = kTesting.StubRemoteStorage({
-			RSChangeDelegateUpdate: function (inputData) {
+			OLSKChangeDelegateUpdate: function (inputData) {
 				assert.deepEqual(inputData.WKCNoteBody, 'charlie');
 				
 				done();
@@ -65,9 +65,9 @@ describe('RSChangeDelegateProtocol', function testRSChangeDelegateProtocol() {
 		}));
 	});
 
-	it('calls RSChangeDelegateRemove on delete', async function(done) {
+	it('calls OLSKChangeDelegateRemove on delete', async function(done) {
 		let remoteStorage = kTesting.StubRemoteStorage({
-			RSChangeDelegateRemove: function (inputData) {
+			OLSKChangeDelegateRemove: function (inputData) {
 				assert.deepEqual(inputData.WKCNoteID, 'alfa');
 				
 				done();

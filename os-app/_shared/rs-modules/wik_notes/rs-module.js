@@ -14,15 +14,15 @@
 
 				!changeDelegate ? null : privateClient.on('change', function (event) {
 					if (typeof event.oldValue === 'undefined') {
-						return typeof changeDelegate.RSChangeDelegateAdd === 'function' ? changeDelegate.RSChangeDelegateAdd(WKCNotesModel.WKCNotesModelPostJSONParse(event.newValue)) : console.warn('RSChangeDelegateAdd not function');
+						return typeof changeDelegate.OLSKChangeDelegateAdd === 'function' ? changeDelegate.OLSKChangeDelegateAdd(WKCNotesModel.WKCNotesModelPostJSONParse(event.newValue)) : console.warn('OLSKChangeDelegateAdd not function');
 					}
 
 					if (typeof event.newValue === 'undefined') {
-						return typeof changeDelegate.RSChangeDelegateRemove === 'function' ? changeDelegate.RSChangeDelegateRemove(event.oldValue) : console.warn('RSChangeDelegateRemove not function');
+						return typeof changeDelegate.OLSKChangeDelegateRemove === 'function' ? changeDelegate.OLSKChangeDelegateRemove(event.oldValue) : console.warn('OLSKChangeDelegateRemove not function');
 					}
 
 					if (JSON.stringify(event.oldValue) !== JSON.stringify(event.newValue)) {
-						return typeof changeDelegate.RSChangeDelegateUpdate === 'function' ? changeDelegate.RSChangeDelegateUpdate(event.newValue) : console.warn('RSChangeDelegateUpdate not function');
+						return typeof changeDelegate.OLSKChangeDelegateUpdate === 'function' ? changeDelegate.OLSKChangeDelegateUpdate(event.newValue) : console.warn('OLSKChangeDelegateUpdate not function');
 					}
 
 					console.log(event);

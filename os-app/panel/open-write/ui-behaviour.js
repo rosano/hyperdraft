@@ -553,18 +553,18 @@
 	let setupStorageClient = function () {
 		storageClient = WKCStorageClient.WKCStorageClientForChangeDelegateMap({
 			wik_notes: {
-				RSChangeDelegateAdd: function (inputData) {
-					// console.log('RSChangeDelegateAdd', inputData);
+				OLSKChangeDelegateAdd: function (inputData) {
+					// console.log('OLSKChangeDelegateAdd', inputData);
 					return moi.propertiesNoteObjects(moi.propertiesNoteObjects().concat(inputData));
 				},
-				RSChangeDelegateRemove: function (inputData) {
-					console.log('RSChangeDelegateRemove', inputData);
+				OLSKChangeDelegateRemove: function (inputData) {
+					console.log('OLSKChangeDelegateRemove', inputData);
 					return moi.propertiesNoteObjects(moi.propertiesNoteObjects().filter(function (e) {
 						return e.WKCNoteID !== inputData.WKCNoteID;
 					}))
 				},
-				RSChangeDelegateUpdate: function (inputData) {
-					console.log('RSChangeDelegateUpdate', inputData);
+				OLSKChangeDelegateUpdate: function (inputData) {
+					console.log('OLSKChangeDelegateUpdate', inputData);
 					return moi.propertiesNoteObjects(moi.propertiesNoteObjects().map(function (e) {
 						return Object.assign(e, e.WKCNoteID === inputData.WKCNoteID ? inputData : {});
 					}));
