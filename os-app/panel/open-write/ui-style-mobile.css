@@ -28,3 +28,14 @@
 	-webkit-overflow-scrolling: touch;
 }
 
+.WKCSharedToolbar {
+	padding: 10px;
+}
+
+#WKCWriteMasterToolbarFilterInput {
+	height: 24px;
+	padding: 4px;
+	border-radius: 10px;
+
+	font-size: 100%;
+}
