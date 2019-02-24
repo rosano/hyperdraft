@@ -22,7 +22,7 @@
 					}
 
 					if (JSON.stringify(event.oldValue) !== JSON.stringify(event.newValue)) {
-						return typeof changeDelegate.OLSKChangeDelegateUpdate === 'function' ? changeDelegate.OLSKChangeDelegateUpdate(event.newValue) : console.warn('OLSKChangeDelegateUpdate not function');
+						return typeof changeDelegate.OLSKChangeDelegateUpdate === 'function' ? changeDelegate.OLSKChangeDelegateUpdate(WKCNotesModel.WKCNotesModelPostJSONParse(event.newValue)) : console.warn('OLSKChangeDelegateUpdate not function');
 					}
 
 					console.log(event);
