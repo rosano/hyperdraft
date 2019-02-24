@@ -33,23 +33,23 @@ const kTest = {
 
 describe('WKCWriteLogicListSort', function testWKCWriteLogicListSort() {
 
-	it('sorts by WKCNoteDateUpdated descending', function() {
+	it('sorts by WKCNoteModificationDate descending', function() {
 		var item1 = {
-			WKCNoteDateUpdated: new Date(0),
+			WKCNoteModificationDate: new Date(0),
 		};
 		var item2 = {
-			WKCNoteDateUpdated: new Date(1),
+			WKCNoteModificationDate: new Date(1),
 		};
 
 		assert.deepEqual([item1, item2].sort(mainModule.WKCWriteLogicListSort), [item2, item1]);
 	});
 
-	it('sorts by WKCNoteDateCreated descending if no WKCNoteDateUpdated', function() {
+	it('sorts by WKCNoteCreationDate descending if no WKCNoteModificationDate', function() {
 		var item1 = {
-			WKCNoteDateCreated: new Date(0),
+			WKCNoteCreationDate: new Date(0),
 		};
 		var item2 = {
-			WKCNoteDateCreated: new Date(1),
+			WKCNoteCreationDate: new Date(1),
 		};
 
 		assert.deepEqual([item1, item2].sort(mainModule.WKCWriteLogicListSort), [item2, item1]);
