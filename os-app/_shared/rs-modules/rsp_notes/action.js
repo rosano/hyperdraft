@@ -18,7 +18,7 @@
 		let creationDate = new Date();
 
 		return await RSNotesMetal.RSNotesMetalWrite(storageClient, Object.assign(inputData, {
-			RSNoteID: ULIDPackage.ulid(),
+			WKCNoteID: ULIDPackage.ulid(),
 			WKCNoteDateCreated: creationDate,
 			RSNoteModificationDate: creationDate,
 		}));

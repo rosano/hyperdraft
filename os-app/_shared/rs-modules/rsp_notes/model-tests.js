@@ -5,7 +5,7 @@ const mainModule = require('./model.js');
 const kTesting = {
 	StubNoteObject: function() {
 		return {
-			RSNoteID: 'alfa',
+			WKCNoteID: 'alfa',
 			WKCNoteBody: 'bravo',
 			WKCNoteDateCreated: new Date('2019-02-23T13:56:36Z'),
 			RSNoteModificationDate: new Date('2019-02-23T13:56:36Z'),
@@ -21,11 +21,11 @@ describe('RSNotesModelErrorsFor', function testRSNotesModelErrorsFor() {
 		}, /RSErrorInputInvalid/);
 	});
 
-	it('returns object if RSNoteID not string', function() {
+	it('returns object if WKCNoteID not string', function() {
 		assert.deepEqual(mainModule.RSNotesModelErrorsFor(Object.assign(kTesting.StubNoteObject(), {
-			RSNoteID: null,
+			WKCNoteID: null,
 		})), {
-			RSNoteID: [
+			WKCNoteID: [
 				'RSErrorNotString',
 			],
 		});

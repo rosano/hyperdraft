@@ -620,12 +620,12 @@
 				},
 				RSChangeDelegateRemove: function (inputData) {
 					// propertiesViewItems(propertiesViewItems().filter(function (e) {
-					// 	return e.RSNoteID !== inputData.RSNoteID;
+					// 	return e.WKCNoteID !== inputData.WKCNoteID;
 					// }))
 				},
 				RSChangeDelegateUpdate: function (inputData) {
 					// propertiesViewItems(propertiesViewItems().map(function (e) {
-					// 	return Object.assign(e, e.RSNoteID === inputData.RSNoteID ? inputData : {});
+					// 	return Object.assign(e, e.WKCNoteID === inputData.WKCNoteID ? inputData : {});
 					// }));
 				},
 			},

@@ -33,18 +33,18 @@ describe('RSNotesActionCreate', function testRSNotesActionCreate() {
 		let item = await mainModule.RSNotesActionCreate(storageClient, kTesting.StubNoteObject());
 
 		assert.deepEqual(item, Object.assign(kTesting.StubNoteObject(), {
-			RSNoteID: item.RSNoteID,
+			WKCNoteID: item.WKCNoteID,
 			WKCNoteDateCreated: item.WKCNoteDateCreated,
 			RSNoteModificationDate: item.RSNoteModificationDate,
 			'@context': item['@context'],
 		}));
 	});
 
-	it('sets RSNoteID to unique value', async function() {
+	it('sets WKCNoteID to unique value', async function() {
 		let items = []
 
 		Array.from(Array(10)).forEach(async function (e) {
-			items.push((await mainModule.RSNotesActionCreate(storageClient, kTesting.StubNoteObject())).RSNoteID);
+			items.push((await mainModule.RSNotesActionCreate(storageClient, kTesting.StubNoteObject())).WKCNoteID);
 		});
 		assert.deepEqual((new Set(items)).values(), items);
 	});
@@ -67,9 +67,9 @@ describe('RSNotesActionUpdate', function testRSNotesActionUpdate() {
 
 	it('returns object with RSErrors if not valid', async function() {
 		assert.deepEqual((await mainModule.RSNotesActionUpdate(storageClient, Object.assign(await mainModule.RSNotesActionCreate(storageClient, kTesting.StubNoteObject()), {
-			RSNoteID: null,
+			WKCNoteID: null,
 		}))).RSErrors, {
-			RSNoteID: [
+			WKCNoteID: [
 				'RSErrorNotString',
 			],
 		})

@@ -13,8 +13,8 @@
 
 		var errors = {};
 
-		if (typeof inputData.RSNoteID !== 'string') {
-			errors.RSNoteID = [
+		if (typeof inputData.WKCNoteID !== 'string') {
+			errors.WKCNoteID = [
 				'RSErrorNotString',
 			];
 		}

@@ -20,7 +20,7 @@ const kTesting = {
 	},
 	StubNoteObjectValid: function() {
 		return {
-			RSNoteID: 'alfa',
+			WKCNoteID: 'alfa',
 			WKCNoteBody: 'bravo',
 			WKCNoteDateCreated: new Date('2019-02-23T13:56:36Z'),
 			RSNoteModificationDate: new Date('2019-02-23T13:56:36Z'),
@@ -60,7 +60,7 @@ describe('RSChangeDelegateProtocol', function testRSChangeDelegateProtocol() {
 
 		let item = remoteStorage.rsp_notes.writeObject('alfa', kTesting.StubNoteObjectValid());
 
-		remoteStorage.rsp_notes.writeObject(item.RSNoteID, Object.assign(item, {
+		remoteStorage.rsp_notes.writeObject(item.WKCNoteID, Object.assign(item, {
 			WKCNoteBody: 'charlie',
 		}));
 	});
@@ -68,13 +68,13 @@ describe('RSChangeDelegateProtocol', function testRSChangeDelegateProtocol() {
 	it('calls RSChangeDelegateRemove on delete', async function(done) {
 		let remoteStorage = kTesting.StubRemoteStorage({
 			RSChangeDelegateRemove: function (inputData) {
-				assert.deepEqual(inputData.RSNoteID, 'alfa');
+				assert.deepEqual(inputData.WKCNoteID, 'alfa');
 				
 				done();
 			},
 		});
 
-		remoteStorage.rsp_notes.deleteObject((await remoteStorage.rsp_notes.writeObject('alfa', kTesting.StubNoteObjectValid())).RSNoteID);
+		remoteStorage.rsp_notes.deleteObject((await remoteStorage.rsp_notes.writeObject('alfa', kTesting.StubNoteObjectValid())).WKCNoteID);
 	});
 
 });

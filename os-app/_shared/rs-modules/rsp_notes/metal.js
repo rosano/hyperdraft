@@ -20,7 +20,7 @@
 			});
 		}
 
-		return await storageClient.rsp_notes.writeObject(inputData.RSNoteID, inputData);
+		return await storageClient.rsp_notes.writeObject(inputData.WKCNoteID, inputData);
 	};
 
 	//_ RSNotesMetalRead

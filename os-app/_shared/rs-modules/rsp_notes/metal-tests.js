@@ -8,7 +8,7 @@ const storageClient = require('../RSStorageClient/storage.js').RSStorageClientFo
 const kTesting = {
 	StubNoteObjectValid: function() {
 		return {
-			RSNoteID: 'alfa',
+			WKCNoteID: 'alfa',
 			WKCNoteBody: 'bravo',
 			WKCNoteDateCreated: new Date('2019-02-23T13:56:36Z'),
 			RSNoteModificationDate: new Date('2019-02-23T13:56:36Z'),
@@ -28,9 +28,9 @@ describe('RSNotesMetalWrite', function testRSNotesMetalWrite() {
 
 	it('returns object with RSErrors if not valid', async function() {
 		assert.deepEqual((await mainModule.RSNotesMetalWrite(storageClient, Object.assign(kTesting.StubNoteObjectValid(), {
-			RSNoteID: null,
+			WKCNoteID: null,
 		}))).RSErrors, {
-			RSNoteID: [
+			WKCNoteID: [
 				'RSErrorNotString',
 			],
 		})
@@ -59,7 +59,7 @@ describe('RSNotesMetalRead', function testRSNotesMetalRead() {
 	it('returns RSNote', async function() {
 		let item = await mainModule.RSNotesMetalWrite(storageClient, kTesting.StubNoteObjectValid());
 
-		assert.deepEqual(await mainModule.RSNotesMetalRead(storageClient, item.RSNoteID), item);
+		assert.deepEqual(await mainModule.RSNotesMetalRead(storageClient, item.WKCNoteID), item);
 	});
 
 });
@@ -73,7 +73,7 @@ describe('RSNotesMetalList', function testRSNotesMetalList() {
 	it('returns existing RSNotes', async function() {
 		let item = await mainModule.RSNotesMetalWrite(storageClient, kTesting.StubNoteObjectValid());
 			assert.deepEqual(Object.values(await mainModule.RSNotesMetalList(storageClient)), [item]);
-			assert.deepEqual(Object.keys(await mainModule.RSNotesMetalList(storageClient)), [item.RSNoteID]);
+			assert.deepEqual(Object.keys(await mainModule.RSNotesMetalList(storageClient)), [item.WKCNoteID]);
 	});
 
 });
@@ -85,7 +85,7 @@ describe('RSNotesMetalDelete', function testRSNotesMetalDelete() {
 	});
 
 	it('returns statusCode', async function() {
-		assert.deepEqual(await mainModule.RSNotesMetalDelete(storageClient, (await mainModule.RSNotesMetalWrite(storageClient, kTesting.StubNoteObjectValid())).RSNoteID), {
+		assert.deepEqual(await mainModule.RSNotesMetalDelete(storageClient, (await mainModule.RSNotesMetalWrite(storageClient, kTesting.StubNoteObjectValid())).WKCNoteID), {
 			statusCode: 200,
 		});
 	});
