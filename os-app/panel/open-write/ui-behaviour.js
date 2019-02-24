@@ -551,7 +551,7 @@
 	//_ setupStorageClient
 
 	let setupStorageClient = function () {
-		storageClient = RSStorageClient.RSStorageClientForChangeDelegateMap({
+		storageClient = WKCStorageClient.WKCStorageClientForChangeDelegateMap({
 			wik_notes: {
 				RSChangeDelegateAdd: function (inputData) {
 					// console.log('RSChangeDelegateAdd', inputData);

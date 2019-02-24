@@ -1,7 +1,7 @@
 const assert = require('assert');
 
 const mainModule = require('./action.js');
-const storageClient = require('../../RSStorageClient/storage.js').RSStorageClientForChangeDelegateMap({
+const storageClient = require('../../WKCStorageClient/storage.js').WKCStorageClientForChangeDelegateMap({
 	wik_notes: null,
 });
 

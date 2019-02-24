@@ -1,12 +1,12 @@
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
 	typeof define === 'function' && define.amd ? define(['exports'], factory) :
-	(factory((global.RSStorageClient = global.RSStorageClient || {})));
+	(factory((global.WKCStorageClient = global.WKCStorageClient || {})));
 }(this, (function (exports) { 'use strict';
 
 	const RemoteStorage = typeof require === 'undefined' ? window.RemoteStorage : require('remotestoragejs');
 
-	exports.RSStorageClientForChangeDelegateMap = function (changeDelegateMap) {
+	exports.WKCStorageClientForChangeDelegateMap = function (changeDelegateMap) {
 		let modules = Object.entries(changeDelegateMap).map(function ([key, val]) {
 			return (typeof require === 'undefined' ? window[`RSModuleProtocol_${ key }`] : require(`../rs-modules/${ key }/rs-module.js`)).RSModuleProtocolModuleForChangeDelegate(val);
 		});
