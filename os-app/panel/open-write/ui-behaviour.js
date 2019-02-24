@@ -88,7 +88,6 @@
 
 	moi.dataNewNoteObject = function () {
 		return {
-			WKCNoteDateCreated: new Date(),
 			WKCNoteBody: '',
 		};
 	};
@@ -108,7 +107,7 @@
 	//_ interfaceNotesMasterToolbarCreateButtonDidClick
 
 	moi.interfaceNotesMasterToolbarCreateButtonDidClick = function () {
-		moi.commandsNotesCreate();
+		moi.goNotesCreate();
 
 		WCKWriteBehaviourPropertyEditor.focus();
 	};
@@ -161,14 +160,6 @@
 
 	//# COMMANDS
 
-	//_ goItemsCreate
-
-	moi.goItemsCreate = async function () {
-		propertiesViewItems(propertiesViewItems().concat(await RSNotesAction.RSNotesActionCreate(storageClient, {
-			RSNoteBody: 'alfa',
-		})));
-	};
-
 	//_ goItemsRead
 
 	moi.goItemsRead = async function (inputData, parentElement) {
@@ -204,10 +195,10 @@
 		throw new Error('WKCWriteErrorNotesUnavailable');
 	};
 
-	//_ commandsNotesCreate
+	//_ goNotesCreate
 
-	moi.commandsNotesCreate = function () {
-		moi.propertiesNoteObjects(moi.propertiesNoteObjects().concat(moi.dataNewNoteObject()));
+	moi.goNotesCreate = async function () {
+		moi.propertiesNoteObjects(moi.propertiesNoteObjects().concat(await RSNotesAction.RSNotesActionCreate(storageClient, moi.dataNewNoteObject())));
 
 		moi.commandsNotesSelect(moi.propertiesNoteObjects().shift());
 	};
