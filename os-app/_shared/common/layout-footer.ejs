@@ -1,12 +1,10 @@
 <script type="text/javascript">
 	(async function () {
-		return;
-		
 		if (!navigator.serviceWorker) {
 			return console.log('Service worker not available');
 		}
 
-		let registration = await navigator.serviceWorker.register('sw.js');
+		let registration = await navigator.serviceWorker.register('<%= OLSKCanonicalFor('WKCServiceWorkerRoute') %>');
 		
 		console.log('Service Worker Registered');
 
