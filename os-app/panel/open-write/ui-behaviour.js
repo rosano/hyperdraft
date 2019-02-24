@@ -174,6 +174,8 @@
 		moi.propertiesNoteObjects(moi.propertiesNoteObjects().concat(await RSNotesAction.RSNotesActionCreate(storageClient, moi.dataNewNoteObject())));
 
 		moi.commandsNotesSelect(moi.propertiesNoteObjects().shift());
+
+		WCKWriteBehaviourPropertyEditor.focus();
 	};
 
 	//_ commandsNotesSelect
