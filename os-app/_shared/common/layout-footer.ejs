@@ -1,2 +1,50 @@
+<script type="text/javascript">
+	(async function () {
+		return;
+		
+		if (!navigator.serviceWorker) {
+			return console.log('Service worker not available');
+		}
+
+		let registration = await navigator.serviceWorker.register('sw.js');
+		
+		console.log('Service Worker Registered');
+
+		registration.addEventListener('updatefound', (event) => {
+			console.log('updatefound', event);
+
+			let nextWorker = registration.installing;
+
+			nextWorker.addEventListener('statechange', (event) => {
+				console.log('statechange', nextWorker.state, event, navigator.serviceWorker.controller);
+
+				if (nextWorker.state !== 'installed') {
+					return;
+				}
+
+				if (!navigator.serviceWorker.controller) {
+					return;
+				}
+
+				document.getElementById('RSPNotification').className = '';
+			});
+
+			console.log(document.getElementById('RSPReloadButton'));
+
+			document.getElementById('RSPReloadButton').addEventListener('click', () => {
+				nextWorker.postMessage({
+					action: 'skipWaiting',
+				});
+			});
+		});
+
+		navigator.serviceWorker.addEventListener('controllerchange', (event) => {
+			console.log('controllerchange', event);
+
+			window.location.reload();
+		});
+	})();
+</script>
+
 </body>
 </html>
