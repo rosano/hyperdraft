@@ -177,6 +177,8 @@
 	moi.goNotesCreate = async function () {
 		moi.propertiesNoteObjects(moi.propertiesNoteObjects().concat(await WKCNotesAction.WKCNotesActionCreate(storageClient, moi.dataNewNoteObject())));
 
+		moi.reactFocusDetail();
+
 		moi.commandsNotesSelect(moi.propertiesNoteObjects().shift());
 
 		WCKWriteBehaviourPropertyEditor.focus();
