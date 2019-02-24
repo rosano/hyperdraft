@@ -63,3 +63,14 @@
 .WKCSharedHidden {
 	display: none;
 }
+
+#WKCSharedUpdateNotification {
+	padding: 10px;
+	border: 1px solid #7f7f7f;
+
+	position: fixed;
+	top: 0;
+	right: 0;
+
+	background: #f3f3f3;
+}

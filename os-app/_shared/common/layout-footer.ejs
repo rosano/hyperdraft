@@ -24,10 +24,10 @@
 					return;
 				}
 
-				document.getElementById('WKCUpdateNotification').className = '';
+				document.getElementById('WKCSharedUpdateNotification').className = '';
 			});
 
-			document.getElementById('WKCUpdateNotificationReloadButton').addEventListener('click', () => {
+			document.getElementById('WKCSharedUpdateNotificationReloadButton').addEventListener('click', () => {
 				nextWorker.postMessage({
 					action: 'skipWaiting',
 				});
@@ -41,6 +41,10 @@
 		});
 	})();
 </script>
+
+<div id="WKCSharedUpdateNotification" class="WKCSharedHidden">
+	<%= OLSKLocalized('WKCUpdateAvailableText') %> <button id="WKCSharedUpdateNotificationReloadButton"><%= OLSKLocalized('WKCUpdateReloadText') %></button>
+</div>
 
 </body>
 </html>
