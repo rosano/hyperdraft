@@ -341,7 +341,7 @@
 
 	moi.commandsPublishNote = function (inputData) {
 		return console.info('temporarily disabled');
-		
+
 		d3.select('#WKCWriteDetailToolbarPublishStatus').text(OLSKLocalized('WKCWriteDetailToolbarPublishStatusPublishing'));
 
 		d3.json(OLSKCanonicalFor('WKCRouteAPINotesPublish', {
@@ -368,6 +368,8 @@
 	//_ commandsUnpublishNote
 
 	moi.commandsUnpublishNote = function (inputData) {
+		return console.info('temporarily disabled');
+		
 		d3.select('#WKCWriteDetailToolbarPublishStatus').text(OLSKLocalized('WKCWriteDetailToolbarPublishStatusUnpublishing'));
 
 		d3.json(OLSKCanonicalFor('WKCRouteAPINotesUnpublish', {
