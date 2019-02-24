@@ -8,7 +8,7 @@ const kTesting = {
 			WKCNoteID: 'alfa',
 			WKCNoteBody: 'bravo',
 			WKCNoteDateCreated: new Date('2019-02-23T13:56:36Z'),
-			RSNoteModificationDate: new Date('2019-02-23T13:56:36Z'),
+			WKCNoteModificationDate: new Date('2019-02-23T13:56:36Z'),
 		};
 	},
 };
@@ -51,11 +51,11 @@ describe('WKCNotesModelErrorsFor', function testWKCNotesModelErrorsFor() {
 		});
 	});
 
-	it('returns object if RSNoteModificationDate not date', function() {
+	it('returns object if WKCNoteModificationDate not date', function() {
 		assert.deepEqual(mainModule.WKCNotesModelErrorsFor(Object.assign(kTesting.StubNoteObject(), {
-			RSNoteModificationDate: new Date('alfa'),
+			WKCNoteModificationDate: new Date('alfa'),
 		})), {
-			RSNoteModificationDate: [
+			WKCNoteModificationDate: [
 				'WKCErrorNotDate',
 			],
 		});
@@ -65,13 +65,13 @@ describe('WKCNotesModelErrorsFor', function testWKCNotesModelErrorsFor() {
 		assert.deepEqual(mainModule.WKCNotesModelErrorsFor(kTesting.StubNoteObject()), null);
 	});
 
-	context('RSNotePublishStatusIsPublished', function() {
+	context('WKCNotePublishStatusIsPublished', function() {
 
-		it('returns object if RSNotePublishStatusIsPublished not boolean', function() {
+		it('returns object if WKCNotePublishStatusIsPublished not boolean', function() {
 			assert.deepEqual(mainModule.WKCNotesModelErrorsFor(Object.assign(kTesting.StubNoteObject(), {
-				RSNotePublishStatusIsPublished: 'true',
+				WKCNotePublishStatusIsPublished: 'true',
 			})), {
-				RSNotePublishStatusIsPublished: [
+				WKCNotePublishStatusIsPublished: [
 					'WKCErrorNotBoolean',
 				],
 			});
@@ -95,11 +95,11 @@ describe('WKCNotesModelPreJSONSchemaValidate', function testWKCNotesModelPreJSON
 		});
 	});
 
-	it('returns input with RSNoteModificationDate as string', function() {
+	it('returns input with WKCNoteModificationDate as string', function() {
 		assert.deepEqual(mainModule.WKCNotesModelPreJSONSchemaValidate({
-			RSNoteModificationDate: new Date('2018-12-09T19:07:01.902Z'),
+			WKCNoteModificationDate: new Date('2018-12-09T19:07:01.902Z'),
 		}), {
-			RSNoteModificationDate: '2018-12-09T19:07:01.902Z',
+			WKCNoteModificationDate: '2018-12-09T19:07:01.902Z',
 		});
 	});
 
@@ -123,11 +123,11 @@ describe('WKCNotesModelPostJSONParse', function testWKCNotesModelPostJSONParse()
 		});
 	});
 
-	it('returns input with RSNoteModificationDate as date', function() {
+	it('returns input with WKCNoteModificationDate as date', function() {
 		assert.deepEqual(mainModule.WKCNotesModelPostJSONParse({
-			RSNoteModificationDate: '2018-12-09T19:07:01.902Z',
+			WKCNoteModificationDate: '2018-12-09T19:07:01.902Z',
 		}), {
-			RSNoteModificationDate: new Date('2018-12-09T19:07:01.902Z'),
+			WKCNoteModificationDate: new Date('2018-12-09T19:07:01.902Z'),
 		});
 	});
 

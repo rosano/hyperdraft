@@ -11,7 +11,7 @@ const kTesting = {
 			WKCNoteID: 'alfa',
 			WKCNoteBody: 'bravo',
 			WKCNoteDateCreated: new Date('2019-02-23T13:56:36Z'),
-			RSNoteModificationDate: new Date('2019-02-23T13:56:36Z'),
+			WKCNoteModificationDate: new Date('2019-02-23T13:56:36Z'),
 		};
 	},
 };
@@ -36,7 +36,7 @@ describe('WKCNotesMetalWrite', function testWKCNotesMetalWrite() {
 		})
 	});
 
-	it('returns RSNote', async function() {
+	it('returns WKCNote', async function() {
 		let item = await mainModule.WKCNotesMetalWrite(storageClient, kTesting.StubNoteObjectValid());
 
 		assert.deepEqual(item, Object.assign(kTesting.StubNoteObjectValid(), {
@@ -56,7 +56,7 @@ describe('WKCNotesMetalRead', function testWKCNotesMetalRead() {
 		assert.deepEqual(await mainModule.WKCNotesMetalRead(storageClient, 'alfa'), null);
 	});
 
-	it('returns RSNote', async function() {
+	it('returns WKCNote', async function() {
 		let item = await mainModule.WKCNotesMetalWrite(storageClient, kTesting.StubNoteObjectValid());
 
 		assert.deepEqual(await mainModule.WKCNotesMetalRead(storageClient, item.WKCNoteID), item);

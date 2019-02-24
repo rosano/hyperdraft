@@ -23,7 +23,7 @@ const kTesting = {
 			WKCNoteID: 'alfa',
 			WKCNoteBody: 'bravo',
 			WKCNoteDateCreated: new Date('2019-02-23T13:56:36Z'),
-			RSNoteModificationDate: new Date('2019-02-23T13:56:36Z'),
+			WKCNoteModificationDate: new Date('2019-02-23T13:56:36Z'),
 		};
 	},
 };
@@ -40,7 +40,7 @@ describe('RSChangeDelegateProtocol', function testRSChangeDelegateProtocol() {
 			RSChangeDelegateAdd: function (inputData) {
 				assert.deepEqual(inputData, Object.assign(kTesting.StubNoteObjectValid(), {
 					WKCNoteDateCreated: inputData.WKCNoteDateCreated,
-					RSNoteModificationDate: inputData.RSNoteModificationDate,
+					WKCNoteModificationDate: inputData.WKCNoteModificationDate,
 					'@context': inputData['@context'],
 				}));
 

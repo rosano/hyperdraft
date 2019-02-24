@@ -31,15 +31,15 @@
 			];
 		}
 
-		if (!(inputData.RSNoteModificationDate instanceof Date) || Number.isNaN(inputData.RSNoteModificationDate.getTime())) {
-			errors.RSNoteModificationDate = [
+		if (!(inputData.WKCNoteModificationDate instanceof Date) || Number.isNaN(inputData.WKCNoteModificationDate.getTime())) {
+			errors.WKCNoteModificationDate = [
 				'WKCErrorNotDate',
 			];
 		}
 
-		if (typeof inputData.RSNotePublishStatusIsPublished !== 'undefined') {
-			if (typeof inputData.RSNotePublishStatusIsPublished !== 'boolean') {
-				errors.RSNotePublishStatusIsPublished = [
+		if (typeof inputData.WKCNotePublishStatusIsPublished !== 'undefined') {
+			if (typeof inputData.WKCNotePublishStatusIsPublished !== 'boolean') {
+				errors.WKCNotePublishStatusIsPublished = [
 					'WKCErrorNotBoolean',
 				];
 			}
@@ -55,8 +55,8 @@
 			inputData.WKCNoteDateCreated = inputData.WKCNoteDateCreated.toISOString();
 		}
 
-		if (inputData.RSNoteModificationDate) {
-			inputData.RSNoteModificationDate = inputData.RSNoteModificationDate.toISOString();
+		if (inputData.WKCNoteModificationDate) {
+			inputData.WKCNoteModificationDate = inputData.WKCNoteModificationDate.toISOString();
 		}
 
 		return inputData;
@@ -73,8 +73,8 @@
 			inputData.WKCNoteDateCreated = new Date(inputData.WKCNoteDateCreated);
 		}
 
-		if (inputData.RSNoteModificationDate) {
-			inputData.RSNoteModificationDate = new Date(inputData.RSNoteModificationDate);
+		if (inputData.WKCNoteModificationDate) {
+			inputData.WKCNoteModificationDate = new Date(inputData.WKCNoteModificationDate);
 		}
 
 		return inputData;

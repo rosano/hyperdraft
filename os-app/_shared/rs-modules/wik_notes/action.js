@@ -20,7 +20,7 @@
 		return await WKCNotesMetal.WKCNotesMetalWrite(storageClient, Object.assign(inputData, {
 			WKCNoteID: ULIDPackage.ulid(),
 			WKCNoteDateCreated: creationDate,
-			RSNoteModificationDate: creationDate,
+			WKCNoteModificationDate: creationDate,
 		}));
 	};
 
@@ -32,7 +32,7 @@
 		}
 
 		return await WKCNotesMetal.WKCNotesMetalWrite(storageClient, Object.assign(inputData, {
-			RSNoteModificationDate: new Date(),
+			WKCNoteModificationDate: new Date(),
 		}));
 	};
 
