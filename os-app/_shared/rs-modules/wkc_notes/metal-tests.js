@@ -2,7 +2,7 @@ const assert = require('assert');
 
 const mainModule = require('./metal.js');
 const storageClient = require('../../WKCStorageClient/storage.js').WKCStorageClientForChangeDelegateMap({
-	wik_notes: null,
+	wkc_notes: null,
 });
 
 const kTesting = {
@@ -17,7 +17,7 @@ const kTesting = {
 };
 
 beforeEach(async function() {
-	await Promise.all(Object.keys(await storageClient.wik_notes.listObjects()).map(storageClient.wik_notes.deleteObject));
+	await Promise.all(Object.keys(await storageClient.wkc_notes.listObjects()).map(storageClient.wkc_notes.deleteObject));
 });
 
 describe('WKCNotesMetalWrite', function testWKCNotesMetalWrite() {

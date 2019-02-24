@@ -2,7 +2,7 @@ const assert = require('assert');
 
 const mainModule = require('./action.js');
 const storageClient = require('../../WKCStorageClient/storage.js').WKCStorageClientForChangeDelegateMap({
-	wik_notes: null,
+	wkc_notes: null,
 });
 
 const kTesting = {

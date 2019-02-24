@@ -552,7 +552,7 @@
 
 	let setupStorageClient = function () {
 		storageClient = WKCStorageClient.WKCStorageClientForChangeDelegateMap({
-			wik_notes: {
+			wkc_notes: {
 				OLSKChangeDelegateAdd: function (inputData) {
 					// console.log('OLSKChangeDelegateAdd', inputData);
 					return moi.propertiesNoteObjects(moi.propertiesNoteObjects().concat(inputData));
@@ -580,7 +580,7 @@
 		remoteStorage.on('ready', async () => {
 			console.debug('ready');
 
-			await remoteStorage.wik_notes.init();
+			await remoteStorage.wkc_notes.init();
 
 			setupFinalize();
 		});

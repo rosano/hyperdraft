@@ -1,14 +1,14 @@
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
 	typeof define === 'function' && define.amd ? define(['exports'], factory) :
-	(factory((global.RSModuleProtocol_wik_notes = global.RSModuleProtocol_wik_notes || {})));
+	(factory((global.RSModuleProtocol_wkc_notes = global.RSModuleProtocol_wkc_notes || {})));
 }(this, (function (exports) { 'use strict';
 
 	const WKCNotesModel = typeof require === 'undefined' ? window.WKCNotesModel : require('./model.js');
 
 	exports.RSModuleProtocolModuleForChangeDelegate = function (changeDelegate) {
 		return {
-			name: 'wik_notes',
+			name: 'wkc_notes',
 			builder: function(privateClient, publicClient) {
 				privateClient.declareType('wkc_note', WKCNotesModel.OLSKTypeJSONSchemaForErrors(WKCNotesModel.WKCNotesModelErrorsFor({})));
 

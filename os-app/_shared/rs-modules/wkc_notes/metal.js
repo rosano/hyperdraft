@@ -20,7 +20,7 @@
 			});
 		}
 
-		return await storageClient.wik_notes.writeObject(inputData.WKCNoteID, inputData);
+		return await storageClient.wkc_notes.writeObject(inputData.WKCNoteID, inputData);
 	};
 
 	//_ WKCNotesMetalRead
@@ -30,13 +30,13 @@
 			return Promise.reject(new Error('WKCErrorInputInvalid'));
 		}
 
-		return WKCNotesModel.WKCNotesModelPostJSONParse(await storageClient.wik_notes.readObject(inputData));
+		return WKCNotesModel.WKCNotesModelPostJSONParse(await storageClient.wkc_notes.readObject(inputData));
 	};
 
 	//_ WKCNotesMetalList
 
 	exports.WKCNotesMetalList = async function(storageClient) {
-		let outputData = await storageClient.wik_notes.listObjects();
+		let outputData = await storageClient.wkc_notes.listObjects();
 
 		for (let key in outputData) {
 			WKCNotesModel.WKCNotesModelPostJSONParse(outputData[key]);
@@ -52,7 +52,7 @@
 			return Promise.reject(new Error('WKCErrorInputInvalid'));
 		}
 
-		return await storageClient.wik_notes.deleteObject(inputData);
+		return await storageClient.wkc_notes.deleteObject(inputData);
 	};
 
 	Object.defineProperty(exports, '__esModule', { value: true });
