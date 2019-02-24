@@ -70,21 +70,12 @@ body {
 	hyphens: auto;
 }
 
-.WKCWriteMasterContentListItemUnpersisted .WKCWriteMasterContentListItemContextUnpersistedStatus {
-	display: inline;
-}
-
 .WKCWriteMasterContentListItemSelected {
 	background: #e6e6e6;
 }
 
 .WKCWriteMasterContentListItemContextTitle {
 	font-weight: bold;
-}
-
-.WKCWriteMasterContentListItemContextUnpersistedStatus {
-	display: none;
-	margin-right: 5px;
 }
 
 .WKCWriteMasterContentListItemSnippet {

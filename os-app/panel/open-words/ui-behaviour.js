@@ -453,9 +453,7 @@
 
 		var contextElement = parentElement.append('div')
 			.attr('class', 'WKCWriteMasterContentListItemContext');
-
-		contextElement.append('span')
-			.attr('class', 'WKCWriteMasterContentListItemContextUnpersistedStatus').text('⦿');
+			
 		contextElement.append('span')
 			.attr('class', 'WKCWriteMasterContentListItemContextTitle');
 
