@@ -160,23 +160,6 @@
 
 	//# COMMANDS
 
-	//_ goItemsRead
-
-	moi.goItemsRead = async function (inputData, parentElement) {
-		d3.select(parentElement).select('.RSProofListItemJSON')
-			.html(JSON.stringify(await RSNotesMetal.RSNotesMetalRead(storageClient, inputData.RSNoteID)))
-	};
-
-	//_ goItemsDelete
-
-	moi.goItemsDelete = async function (inputData) {
-		await RSNotesMetal.RSNotesMetalDelete(storageClient, inputData.RSNoteID);
-
-		propertiesViewItems(propertiesViewItems().filter(function (e) {
-			return e !== inputData;
-		}));
-	};
-
 	//_ commandsAlertNotesUnavailable
 
 	moi.commandsAlertNotesUnavailable = function () {
@@ -369,7 +352,7 @@
 
 	moi.commandsUnpublishNote = function (inputData) {
 		return console.info('temporarily disabled');
-		
+
 		d3.select('#WKCWriteDetailToolbarPublishStatus').text(OLSKLocalized('WKCWriteDetailToolbarPublishStatusUnpublishing'));
 
 		d3.json(OLSKCanonicalFor('WKCRouteAPINotesUnpublish', {
@@ -396,59 +379,23 @@
 	//_ commandsDeleteNoteWithConfirmation
 
 	moi.commandsDeleteNoteWithConfirmation = function (inputData) {
-		if (inputData._WKCWriteThrottleObject) {
-			clearInterval(inputData._WKCWriteThrottleObject._OLSKThrottleTimeoutID);
-		}
-
 		if (!window.confirm(OLSKLocalized('WKCWriteNotesDeleteAlertText'))) {
-			if (inputData._WKCWriteThrottleObject) {
-				OLSKThrottle.OLSKThrottleTimeoutFor(inputData._WKCWriteThrottleObject);
-			}
-
 			return;
 		};
 
-		moi._commandsDeleteNoteWithoutConfirmation(inputData);
+		moi._goNotesDeleteWithoutConfirmation(inputData);
 	};
 
-	//_ _commandsDeleteNoteWithoutConfirmation
+	//_ _goNotesDeleteWithoutConfirmation
 
-	moi._commandsDeleteNoteWithoutConfirmation = function (inputData) {
-		if (inputData._WKCWriteThrottleObject) {
-			clearInterval(inputData._WKCWriteThrottleObject._OLSKThrottleTimeoutID);
-		}
+	moi._goNotesDeleteWithoutConfirmation = async function (inputData) {
+		await RSNotesMetal.RSNotesMetalDelete(storageClient, inputData.WKCNoteID);
 
-		moi.reactPersistenceStatus(OLSKLocalized('WKCWriteDetailToolbarPersistenceStatusDeleting'));
+		moi.propertiesNoteObjects(moi.propertiesNoteObjects().filter(function(e) {
+			return e !== inputData;
+		}));
 
-		d3.json(OLSKCanonicalFor('WKCRouteAPINotesDelete', {
-			wkc_note_id: inputData.WKCNoteID,
-		}), {
-			method: 'DELETE',
-			headers: {
-				'Content-Type': 'application/json',
-				'x-client-key': moi.propertiesAPIToken(),
-			},
-		}).then(function(responseJSON) {
-			moi.propertiesNoteObjects(moi.propertiesNoteObjects().filter(function(e) {
-				return e !== inputData;
-			}));
-
-			moi.commandsNotesSelect(null);
-
-			moi.reactPersistenceStatus(OLSKLocalized('WKCWriteDetailToolbarPersistenceStatusDeleted'), true);
-		}, function(error) {
-			if (window.confirm(OLSKLocalized('WKCWriteErrorPersistenceDeleteDidFail'))) {
-				return moi._commandsDeleteNoteWithoutConfirmation(inputData);
-			};
-
-			moi.reactPersistenceStatus(OLSKLocalized('WKCWriteDetailToolbarPersistenceStatusUnableToDelete'));
-
-			if (inputData._WKCWriteThrottleObject) {
-				OLSKThrottle.OLSKThrottleTimeoutFor(inputData._WKCWriteThrottleObject);
-			}
-
-			throw error;
-		});
+		moi.commandsNotesSelect(null);
 	};
 
 	//_ _commandsOpenCursorObject
