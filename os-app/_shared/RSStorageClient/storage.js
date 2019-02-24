@@ -8,7 +8,7 @@
 
 	exports.RSStorageClientForChangeDelegateMap = function (changeDelegateMap) {
 		let modules = Object.entries(changeDelegateMap).map(function ([key, val]) {
-			return (typeof require === 'undefined' ? window[`RSPModuleProtocol_${ key }`] : require(`../rs-modules/${ key }/rs-module.js`)).RSPModuleProtocolModuleForChangeDelegate(val);
+			return (typeof require === 'undefined' ? window[`RSModuleProtocol_${ key }`] : require(`../rs-modules/${ key }/rs-module.js`)).RSModuleProtocolModuleForChangeDelegate(val);
 		});
 
 		let remoteStorage = new RemoteStorage({

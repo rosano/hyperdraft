@@ -26,12 +26,10 @@
 					return;
 				}
 
-				document.getElementById('RSPNotification').className = '';
+				document.getElementById('WKCUpdateNotification').className = '';
 			});
 
-			console.log(document.getElementById('RSPReloadButton'));
-
-			document.getElementById('RSPReloadButton').addEventListener('click', () => {
+			document.getElementById('WKCUpdateNotificationReloadButton').addEventListener('click', () => {
 				nextWorker.postMessage({
 					action: 'skipWaiting',
 				});

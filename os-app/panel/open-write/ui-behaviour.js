@@ -575,7 +575,7 @@
 		let remoteStorage = storageClient.remoteStorage;
 
 		const widget = new Widget(remoteStorage);
-		widget.attach('RSProofConnectWidget');
+		widget.attach('WKCStorageWidget');
 
 		remoteStorage.on('ready', async () => {
 			console.debug('ready');

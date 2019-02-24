@@ -1,12 +1,12 @@
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
 	typeof define === 'function' && define.amd ? define(['exports'], factory) :
-	(factory((global.RSPModuleProtocol_wik_notes = global.RSPModuleProtocol_wik_notes || {})));
+	(factory((global.RSModuleProtocol_wik_notes = global.RSModuleProtocol_wik_notes || {})));
 }(this, (function (exports) { 'use strict';
 
 	const RSNotesModel = typeof require === 'undefined' ? window.RSNotesModel : require('./model.js');
 
-	exports.RSPModuleProtocolModuleForChangeDelegate = function (changeDelegate) {
+	exports.RSModuleProtocolModuleForChangeDelegate = function (changeDelegate) {
 		return {
 			name: 'wik_notes',
 			builder: function(privateClient, publicClient) {
