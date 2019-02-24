@@ -206,6 +206,8 @@
 		moi.propertiesNoteObjects(moi.propertiesNoteObjects().concat(moi.dataNewNoteObject()));
 
 		moi.commandsNotesSelect(moi.propertiesNoteObjects().shift());
+
+		WCKWriteBehaviourPropertyEditor.focus();
 	};
 
 	//_ commandsNotesSelect
