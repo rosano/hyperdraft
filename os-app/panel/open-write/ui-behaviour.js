@@ -171,7 +171,7 @@
 	//_ goNotesCreate
 
 	moi.goNotesCreate = async function () {
-		moi.propertiesNoteObjects(moi.propertiesNoteObjects().concat(await RSNotesAction.RSNotesActionCreate(storageClient, moi.dataNewNoteObject())));
+		moi.propertiesNoteObjects(moi.propertiesNoteObjects().concat(await WKCNotesAction.WKCNotesActionCreate(storageClient, moi.dataNewNoteObject())));
 
 		moi.commandsNotesSelect(moi.propertiesNoteObjects().shift());
 
@@ -205,7 +205,7 @@
 	//_ commandsSelectedNoteUpdateBody
 
 	moi.commandsSelectedNoteUpdateBody = async function (inputData) {
-		await RSNotesAction.RSNotesActionUpdate(storageClient, Object.assign(moi.propertiesSelectedNote(), {
+		await WKCNotesAction.WKCNotesActionUpdate(storageClient, Object.assign(moi.propertiesSelectedNote(), {
 			WKCNoteBody: inputData,
 		}));
 
@@ -387,7 +387,7 @@
 	//_ _goNotesDeleteWithoutConfirmation
 
 	moi._goNotesDeleteWithoutConfirmation = async function (inputData) {
-		await RSNotesMetal.RSNotesMetalDelete(storageClient, inputData.WKCNoteID);
+		await WKCNotesMetal.WKCNotesMetalDelete(storageClient, inputData.WKCNoteID);
 
 		moi.propertiesNoteObjects(moi.propertiesNoteObjects().filter(function(e) {
 			return e !== inputData;

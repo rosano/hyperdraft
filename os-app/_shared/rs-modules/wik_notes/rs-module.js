@@ -4,17 +4,17 @@
 	(factory((global.RSModuleProtocol_wik_notes = global.RSModuleProtocol_wik_notes || {})));
 }(this, (function (exports) { 'use strict';
 
-	const RSNotesModel = typeof require === 'undefined' ? window.RSNotesModel : require('./model.js');
+	const WKCNotesModel = typeof require === 'undefined' ? window.WKCNotesModel : require('./model.js');
 
 	exports.RSModuleProtocolModuleForChangeDelegate = function (changeDelegate) {
 		return {
 			name: 'wik_notes',
 			builder: function(privateClient, publicClient) {
-				privateClient.declareType('rs_note', RSNotesModel.OLSKTypeJSONSchemaForErrors(RSNotesModel.RSNotesModelErrorsFor({})));
+				privateClient.declareType('rs_note', WKCNotesModel.OLSKTypeJSONSchemaForErrors(WKCNotesModel.WKCNotesModelErrorsFor({})));
 
 				!changeDelegate ? null : privateClient.on('change', function (event) {
 					if (typeof event.oldValue === 'undefined') {
-						return typeof changeDelegate.RSChangeDelegateAdd === 'function' ? changeDelegate.RSChangeDelegateAdd(RSNotesModel.RSNotesModelPostJSONParse(event.newValue)) : console.warn('RSChangeDelegateAdd not function');
+						return typeof changeDelegate.RSChangeDelegateAdd === 'function' ? changeDelegate.RSChangeDelegateAdd(WKCNotesModel.WKCNotesModelPostJSONParse(event.newValue)) : console.warn('RSChangeDelegateAdd not function');
 					}
 
 					if (typeof event.newValue === 'undefined') {
@@ -37,8 +37,8 @@
 							return privateClient.getAll('');
 						},
 						writeObject: async function (param1, param2) {
-							await privateClient.storeObject('rs_note', param1, RSNotesModel.RSNotesModelPreJSONSchemaValidate(param2));
-							return RSNotesModel.RSNotesModelPostJSONParse(param2);
+							await privateClient.storeObject('rs_note', param1, WKCNotesModel.WKCNotesModelPreJSONSchemaValidate(param2));
+							return WKCNotesModel.WKCNotesModelPostJSONParse(param2);
 						},
 						readObject: function (inputData) {
 							return privateClient.getObject(inputData);

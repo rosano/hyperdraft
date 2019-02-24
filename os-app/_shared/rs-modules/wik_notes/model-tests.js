@@ -13,16 +13,16 @@ const kTesting = {
 	},
 };
 
-describe('RSNotesModelErrorsFor', function testRSNotesModelErrorsFor() {
+describe('WKCNotesModelErrorsFor', function testWKCNotesModelErrorsFor() {
 
 	it('throws error if not object', function() {
 		assert.throws(function() {
-			mainModule.RSNotesModelErrorsFor(null);
+			mainModule.WKCNotesModelErrorsFor(null);
 		}, /RSErrorInputInvalid/);
 	});
 
 	it('returns object if WKCNoteID not string', function() {
-		assert.deepEqual(mainModule.RSNotesModelErrorsFor(Object.assign(kTesting.StubNoteObject(), {
+		assert.deepEqual(mainModule.WKCNotesModelErrorsFor(Object.assign(kTesting.StubNoteObject(), {
 			WKCNoteID: null,
 		})), {
 			WKCNoteID: [
@@ -32,7 +32,7 @@ describe('RSNotesModelErrorsFor', function testRSNotesModelErrorsFor() {
 	});
 
 	it('returns object if WKCNoteBody not string', function() {
-		assert.deepEqual(mainModule.RSNotesModelErrorsFor(Object.assign(kTesting.StubNoteObject(), {
+		assert.deepEqual(mainModule.WKCNotesModelErrorsFor(Object.assign(kTesting.StubNoteObject(), {
 			WKCNoteBody: null,
 		})), {
 			WKCNoteBody: [
@@ -42,7 +42,7 @@ describe('RSNotesModelErrorsFor', function testRSNotesModelErrorsFor() {
 	});
 
 	it('returns object if WKCNoteDateCreated not date', function() {
-		assert.deepEqual(mainModule.RSNotesModelErrorsFor(Object.assign(kTesting.StubNoteObject(), {
+		assert.deepEqual(mainModule.WKCNotesModelErrorsFor(Object.assign(kTesting.StubNoteObject(), {
 			WKCNoteDateCreated: new Date('alfa'),
 		})), {
 			WKCNoteDateCreated: [
@@ -52,7 +52,7 @@ describe('RSNotesModelErrorsFor', function testRSNotesModelErrorsFor() {
 	});
 
 	it('returns object if RSNoteModificationDate not date', function() {
-		assert.deepEqual(mainModule.RSNotesModelErrorsFor(Object.assign(kTesting.StubNoteObject(), {
+		assert.deepEqual(mainModule.WKCNotesModelErrorsFor(Object.assign(kTesting.StubNoteObject(), {
 			RSNoteModificationDate: new Date('alfa'),
 		})), {
 			RSNoteModificationDate: [
@@ -62,13 +62,13 @@ describe('RSNotesModelErrorsFor', function testRSNotesModelErrorsFor() {
 	});
 
 	it('returns null', function() {
-		assert.deepEqual(mainModule.RSNotesModelErrorsFor(kTesting.StubNoteObject()), null);
+		assert.deepEqual(mainModule.WKCNotesModelErrorsFor(kTesting.StubNoteObject()), null);
 	});
 
 	context('RSNotePublishStatusIsPublished', function() {
 
 		it('returns object if RSNotePublishStatusIsPublished not boolean', function() {
-			assert.deepEqual(mainModule.RSNotesModelErrorsFor(Object.assign(kTesting.StubNoteObject(), {
+			assert.deepEqual(mainModule.WKCNotesModelErrorsFor(Object.assign(kTesting.StubNoteObject(), {
 				RSNotePublishStatusIsPublished: 'true',
 			})), {
 				RSNotePublishStatusIsPublished: [
@@ -81,14 +81,14 @@ describe('RSNotesModelErrorsFor', function testRSNotesModelErrorsFor() {
 
 });
 
-describe('RSNotesModelPreJSONSchemaValidate', function testRSNotesModelPreJSONSchemaValidate() {
+describe('WKCNotesModelPreJSONSchemaValidate', function testWKCNotesModelPreJSONSchemaValidate() {
 
 	it('returns input', function() {
-		assert.deepEqual(mainModule.RSNotesModelPreJSONSchemaValidate({}), {});
+		assert.deepEqual(mainModule.WKCNotesModelPreJSONSchemaValidate({}), {});
 	});
 
 	it('returns input with WKCNoteDateCreated as string', function() {
-		assert.deepEqual(mainModule.RSNotesModelPreJSONSchemaValidate({
+		assert.deepEqual(mainModule.WKCNotesModelPreJSONSchemaValidate({
 			WKCNoteDateCreated: new Date('2018-12-09T19:07:01.902Z'),
 		}), {
 			WKCNoteDateCreated: '2018-12-09T19:07:01.902Z',
@@ -96,7 +96,7 @@ describe('RSNotesModelPreJSONSchemaValidate', function testRSNotesModelPreJSONSc
 	});
 
 	it('returns input with RSNoteModificationDate as string', function() {
-		assert.deepEqual(mainModule.RSNotesModelPreJSONSchemaValidate({
+		assert.deepEqual(mainModule.WKCNotesModelPreJSONSchemaValidate({
 			RSNoteModificationDate: new Date('2018-12-09T19:07:01.902Z'),
 		}), {
 			RSNoteModificationDate: '2018-12-09T19:07:01.902Z',
@@ -105,18 +105,18 @@ describe('RSNotesModelPreJSONSchemaValidate', function testRSNotesModelPreJSONSc
 
 });
 
-describe('RSNotesModelPostJSONParse', function testRSNotesModelPostJSONParse() {
+describe('WKCNotesModelPostJSONParse', function testWKCNotesModelPostJSONParse() {
 
 	it('returns input', function() {
-		assert.deepEqual(mainModule.RSNotesModelPostJSONParse(null), null);
+		assert.deepEqual(mainModule.WKCNotesModelPostJSONParse(null), null);
 	});
 
 	it('returns input', function() {
-		assert.deepEqual(mainModule.RSNotesModelPostJSONParse({}), {});
+		assert.deepEqual(mainModule.WKCNotesModelPostJSONParse({}), {});
 	});
 
 	it('returns input with WKCNoteDateCreated as date', function() {
-		assert.deepEqual(mainModule.RSNotesModelPostJSONParse({
+		assert.deepEqual(mainModule.WKCNotesModelPostJSONParse({
 			WKCNoteDateCreated: '2018-12-09T19:07:01.902Z',
 		}), {
 			WKCNoteDateCreated: new Date('2018-12-09T19:07:01.902Z'),
@@ -124,7 +124,7 @@ describe('RSNotesModelPostJSONParse', function testRSNotesModelPostJSONParse() {
 	});
 
 	it('returns input with RSNoteModificationDate as date', function() {
-		assert.deepEqual(mainModule.RSNotesModelPostJSONParse({
+		assert.deepEqual(mainModule.WKCNotesModelPostJSONParse({
 			RSNoteModificationDate: '2018-12-09T19:07:01.902Z',
 		}), {
 			RSNoteModificationDate: new Date('2018-12-09T19:07:01.902Z'),

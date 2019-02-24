@@ -13,14 +13,14 @@ const kTesting = {
 	},
 };
 
-describe('RSNotesActionCreate', function testRSNotesActionCreate() {
+describe('WKCNotesActionCreate', function testWKCNotesActionCreate() {
 
 	it('rejects if not object', async function() {
-		await assert.rejects(mainModule.RSNotesActionCreate(storageClient, null), /RSErrorInputInvalid/);
+		await assert.rejects(mainModule.WKCNotesActionCreate(storageClient, null), /RSErrorInputInvalid/);
 	});
 
 	it('returns object with RSErrors if not valid', async function() {
-		assert.deepEqual((await mainModule.RSNotesActionCreate(storageClient, Object.assign(kTesting.StubNoteObject(), {
+		assert.deepEqual((await mainModule.WKCNotesActionCreate(storageClient, Object.assign(kTesting.StubNoteObject(), {
 			WKCNoteBody: null,
 		}))).RSErrors, {
 			WKCNoteBody: [
@@ -30,7 +30,7 @@ describe('RSNotesActionCreate', function testRSNotesActionCreate() {
 	});
 
 	it('returns RSNote', async function() {
-		let item = await mainModule.RSNotesActionCreate(storageClient, kTesting.StubNoteObject());
+		let item = await mainModule.WKCNotesActionCreate(storageClient, kTesting.StubNoteObject());
 
 		assert.deepEqual(item, Object.assign(kTesting.StubNoteObject(), {
 			WKCNoteID: item.WKCNoteID,
@@ -44,29 +44,29 @@ describe('RSNotesActionCreate', function testRSNotesActionCreate() {
 		let items = []
 
 		Array.from(Array(10)).forEach(async function (e) {
-			items.push((await mainModule.RSNotesActionCreate(storageClient, kTesting.StubNoteObject())).WKCNoteID);
+			items.push((await mainModule.WKCNotesActionCreate(storageClient, kTesting.StubNoteObject())).WKCNoteID);
 		});
 		assert.deepEqual((new Set(items)).values(), items);
 	});
 
 	it('sets WKCNoteDateCreated to now', async function() {
-		assert.strictEqual(new Date() - (await mainModule.RSNotesActionCreate(storageClient, kTesting.StubNoteObject())).WKCNoteDateCreated < 100, true);
+		assert.strictEqual(new Date() - (await mainModule.WKCNotesActionCreate(storageClient, kTesting.StubNoteObject())).WKCNoteDateCreated < 100, true);
 	});
 
 	it('sets RSNoteModificationDate to now', async function() {
-		assert.strictEqual(new Date() - (await mainModule.RSNotesActionCreate(storageClient, kTesting.StubNoteObject())).RSNoteModificationDate < 100, true);
+		assert.strictEqual(new Date() - (await mainModule.WKCNotesActionCreate(storageClient, kTesting.StubNoteObject())).RSNoteModificationDate < 100, true);
 	});
 
 });
 
-describe('RSNotesActionUpdate', function testRSNotesActionUpdate() {
+describe('WKCNotesActionUpdate', function testWKCNotesActionUpdate() {
 
 	it('rejects if not object', async function() {
-		await assert.rejects(mainModule.RSNotesActionUpdate(storageClient, null), /RSErrorInputInvalid/);
+		await assert.rejects(mainModule.WKCNotesActionUpdate(storageClient, null), /RSErrorInputInvalid/);
 	});
 
 	it('returns object with RSErrors if not valid', async function() {
-		assert.deepEqual((await mainModule.RSNotesActionUpdate(storageClient, Object.assign(await mainModule.RSNotesActionCreate(storageClient, kTesting.StubNoteObject()), {
+		assert.deepEqual((await mainModule.WKCNotesActionUpdate(storageClient, Object.assign(await mainModule.WKCNotesActionCreate(storageClient, kTesting.StubNoteObject()), {
 			WKCNoteID: null,
 		}))).RSErrors, {
 			WKCNoteID: [
@@ -76,9 +76,9 @@ describe('RSNotesActionUpdate', function testRSNotesActionUpdate() {
 	});
 
 	it('returns RSNote', async function() {
-		let itemCreated = await mainModule.RSNotesActionCreate(storageClient, kTesting.StubNoteObject());
+		let itemCreated = await mainModule.WKCNotesActionCreate(storageClient, kTesting.StubNoteObject());
 
-		let item = await mainModule.RSNotesActionUpdate(storageClient, itemCreated);
+		let item = await mainModule.WKCNotesActionUpdate(storageClient, itemCreated);
 
 		assert.deepEqual(item, Object.assign(itemCreated, {
 			RSNoteModificationDate: item.RSNoteModificationDate,
@@ -86,7 +86,7 @@ describe('RSNotesActionUpdate', function testRSNotesActionUpdate() {
 	});
 
 	it('sets RSNoteModificationDate to now', async function() {
-		assert.strictEqual(new Date() - (await mainModule.RSNotesActionUpdate(storageClient, await mainModule.RSNotesActionCreate(storageClient, kTesting.StubNoteObject()))).RSNoteModificationDate < 100, true);
+		assert.strictEqual(new Date() - (await mainModule.WKCNotesActionUpdate(storageClient, await mainModule.WKCNotesActionCreate(storageClient, kTesting.StubNoteObject()))).RSNoteModificationDate < 100, true);
 	});
 
 });

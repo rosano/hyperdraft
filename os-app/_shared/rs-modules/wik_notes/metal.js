@@ -1,19 +1,19 @@
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
 	typeof define === 'function' && define.amd ? define(['exports'], factory) :
-	(factory((global.RSNotesMetal = global.RSNotesMetal || {})));
+	(factory((global.WKCNotesMetal = global.WKCNotesMetal || {})));
 }(this, (function (exports) { 'use strict';	
 
-	const RSNotesModel = typeof require === 'undefined' ? window.RSNotesModel : require('./model.js');
+	const WKCNotesModel = typeof require === 'undefined' ? window.WKCNotesModel : require('./model.js');
 
-	//_ RSNotesMetalWrite
+	//_ WKCNotesMetalWrite
 
-	exports.RSNotesMetalWrite = async function(storageClient, inputData) {
+	exports.WKCNotesMetalWrite = async function(storageClient, inputData) {
 		if (typeof inputData !== 'object' || inputData === null) {
 			return Promise.reject(new Error('RSErrorInputInvalid'));
 		}
 
-		let errors = RSNotesModel.RSNotesModelErrorsFor(inputData);
+		let errors = WKCNotesModel.WKCNotesModelErrorsFor(inputData);
 		if (errors) {
 			return Promise.resolve({
 				RSErrors: errors,
@@ -23,31 +23,31 @@
 		return await storageClient.wik_notes.writeObject(inputData.WKCNoteID, inputData);
 	};
 
-	//_ RSNotesMetalRead
+	//_ WKCNotesMetalRead
 
-	exports.RSNotesMetalRead = async function(storageClient, inputData) {
+	exports.WKCNotesMetalRead = async function(storageClient, inputData) {
 		if (typeof inputData !== 'string') {
 			return Promise.reject(new Error('RSErrorInputInvalid'));
 		}
 
-		return RSNotesModel.RSNotesModelPostJSONParse(await storageClient.wik_notes.readObject(inputData));
+		return WKCNotesModel.WKCNotesModelPostJSONParse(await storageClient.wik_notes.readObject(inputData));
 	};
 
-	//_ RSNotesMetalList
+	//_ WKCNotesMetalList
 
-	exports.RSNotesMetalList = async function(storageClient) {
+	exports.WKCNotesMetalList = async function(storageClient) {
 		let outputData = await storageClient.wik_notes.listObjects();
 
 		for (let key in outputData) {
-			RSNotesModel.RSNotesModelPostJSONParse(outputData[key]);
+			WKCNotesModel.WKCNotesModelPostJSONParse(outputData[key]);
 		}
 		
 		return outputData;
 	};
 
-	//_ RSNotesMetalDelete
+	//_ WKCNotesMetalDelete
 
-	exports.RSNotesMetalDelete = async function(storageClient, inputData) {
+	exports.WKCNotesMetalDelete = async function(storageClient, inputData) {
 		if (typeof inputData !== 'string') {
 			return Promise.reject(new Error('RSErrorInputInvalid'));
 		}

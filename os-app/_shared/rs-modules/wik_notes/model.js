@@ -1,12 +1,12 @@
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
 	typeof define === 'function' && define.amd ? define(['exports'], factory) :
-	(factory((global.RSNotesModel = global.RSNotesModel || {})));
+	(factory((global.WKCNotesModel = global.WKCNotesModel || {})));
 }(this, (function (exports) { 'use strict';
 
-	//_ RSNotesModelErrorsFor
+	//_ WKCNotesModelErrorsFor
 
-	exports.RSNotesModelErrorsFor = function(inputData) {
+	exports.WKCNotesModelErrorsFor = function(inputData) {
 		if (typeof inputData !== 'object' || inputData === null) {
 			throw new Error('RSErrorInputInvalid');
 		}
@@ -48,9 +48,9 @@
 		return Object.entries(errors).length ? errors : null;
 	};
 
-	//_ RSNotesModelPreJSONSchemaValidate
+	//_ WKCNotesModelPreJSONSchemaValidate
 
-	exports.RSNotesModelPreJSONSchemaValidate = function(inputData) {
+	exports.WKCNotesModelPreJSONSchemaValidate = function(inputData) {
 		if (inputData.WKCNoteDateCreated) {
 			inputData.WKCNoteDateCreated = inputData.WKCNoteDateCreated.toISOString();
 		}
@@ -62,9 +62,9 @@
 		return inputData;
 	};
 
-	//_ RSNotesModelPostJSONParse
+	//_ WKCNotesModelPostJSONParse
 
-	exports.RSNotesModelPostJSONParse = function(inputData) {
+	exports.WKCNotesModelPostJSONParse = function(inputData) {
 		if (!inputData) {
 			return inputData;
 		}
