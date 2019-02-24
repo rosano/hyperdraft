@@ -204,7 +204,7 @@
 
 	moi.commandsSelectedNoteUpdateBody = async function (inputData) {
 		await RSNotesAction.RSNotesActionUpdate(storageClient, Object.assign(moi.propertiesSelectedNote(), {
-			RSNoteBody: `${ inputData.RSNoteBody }-${ inputData.RSNoteBody.length }`,
+			WKCNoteBody: inputData,
 		}));
 
 		// if (!item._WKCWriteThrottleObject) {
@@ -552,9 +552,16 @@
 	//_ setupEverything
 
 	let setupEverything = function () {
+		moi.setupNoteObjects();
 		setupStorageClient();
 		moi.setupEditor();
 		moi.setupShortcuts();
+	};
+
+	//_ setupNoteObjects
+
+	moi.setupNoteObjects = function () {
+		moi.propertiesNoteObjects([]);
 	};
 
 	//_ setupStorageClient
@@ -563,17 +570,20 @@
 		storageClient = RSStorageClient.RSStorageClientForChangeDelegateMap({
 			rsp_notes: {
 				RSChangeDelegateAdd: function (inputData) {
-					// return propertiesViewItems(propertiesViewItems().concat(inputData));
+					console.log('RSChangeDelegateAdd', inputData);
+					return moi.propertiesNoteObjects(moi.propertiesNoteObjects().concat(inputData));
 				},
 				RSChangeDelegateRemove: function (inputData) {
-					// propertiesViewItems(propertiesViewItems().filter(function (e) {
-					// 	return e.WKCNoteID !== inputData.WKCNoteID;
-					// }))
+					console.log('RSChangeDelegateRemove', inputData);
+					return moi.propertiesNoteObjects(moi.propertiesNoteObjects().filter(function (e) {
+						return e.WKCNoteID !== inputData.WKCNoteID;
+					}))
 				},
 				RSChangeDelegateUpdate: function (inputData) {
-					// propertiesViewItems(propertiesViewItems().map(function (e) {
-					// 	return Object.assign(e, e.WKCNoteID === inputData.WKCNoteID ? inputData : {});
-					// }));
+					console.log('RSChangeDelegateUpdate', inputData);
+					return moi.propertiesNoteObjects(moi.propertiesNoteObjects().map(function (e) {
+						return Object.assign(e, e.WKCNoteID === inputData.WKCNoteID ? inputData : {});
+					}));
 				},
 			},
 		});
