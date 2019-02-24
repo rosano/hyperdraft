@@ -41,8 +41,44 @@ locals.OLSKPagePublicRouteKeys = [
 
 <%- include('../../_shared/common/layout-header.ejs') %>
 
-<p><button onclick="RSPHomeBehaviour.interfaceCreateButtonDidClick()">Create</button></p>
-<ul id="RSProofList"></ul>
+<div id="WKCWrite" class="WKCWriteLoading">
+	<div id="WKCWriteMaster">
+		<header id="WKCWriteMasterToolbar" class="WKCSharedToolbar">
+			<input id="WKCWriteMasterToolbarFilterInput" placeholder="<%= OLSKLocalized('WKCWriteMasterToolbarFilterInputPlaceholderText') %>" oninput="WIKWriteBehaviour.interfaceNotesMasterToolbarFilterInputDidInput()" accesskey="f">
+
+			<button id="WKCWriteMasterToolbarCreateButton" class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" title="<%= OLSKLocalized('WKCWriteMasterToolbarCreateButtonText') %>" style="background-image: url('/panel/_shared/ui-assets/wIKSharedCreate.svg')" accesskey="n" onclick="WIKWriteBehaviour.interfaceNotesMasterToolbarCreateButtonDidClick()"></button>
+		</header>
+
+		<div id="WKCWriteMasterContent">
+			<div id="WKCWriteMasterContentList"></div>
+			<div id="WKCWriteMasterLoader" class="WKCSharedHidden">
+				<%- include('../_shared/WKCLoader/view.ejs') %>
+			</div>
+		</div>
+	</div>
+
+	<div id="WKCWriteDetail" class="WKCWriteDetailInactive">
+		<header id="WKCWriteDetailToolbar" class="WKCSharedToolbar">
+			<span id="WKCWriteDetailToolbarPersistenceStatus"></span>
+			
+			<span id="WKCWriteDetailToolbarPublishStatus"></span>
+
+			<a id="WKCWriteDetailToolbarVisitButton" class="WKCSharedToolbarButton WKCSharedElementTappable" title="<%= OLSKLocalized('WKCWriteDetailToolbarVisitButtonText') %>" style="background-image: url('/panel/_shared/ui-assets/wIKWriteVisit.svg')" target="_blank"></a>
+
+			<button id="WKCWriteDetailToolbarUnpublishButton" class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" title="<%= OLSKLocalized('WKCWriteDetailToolbarUnpublishButtonText') %>" style="background-image: url('/panel/_shared/ui-assets/wIKWriteUnpublish.svg')" onclick="WIKWriteBehaviour.interfaceUnpublishButtonDidClick()" ></button>
+
+			<button id="WKCWriteDetailToolbarPublishButton" class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" title="<%= OLSKLocalized('WKCWriteDetailToolbarPublishButtonText') %>" style="background-image: url('/panel/_shared/ui-assets/wIKWritePublish.svg')" onclick="WIKWriteBehaviour.interfacePublishButtonDidClick()" ></button>
+
+			<button id="WKCWriteDetailToolbarDiscardButton" class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" title="<%= OLSKLocalized('WKCWriteDetailToolbarDiscardButtonText') %>" style="background-image: url('/panel/_shared/ui-assets/wIKWriteDiscard.svg')" onclick="WIKWriteBehaviour.interfaceDeleteButtonDidClick()"></button>
+		</header>
+
+		<div id="WKCWriteDetailContent">
+			<textarea id="WKCWriteDetailContentTextarea"></textarea>
+		</div>
+
+		<div id="WKCWriteDetailPlaceholder"><span><%= OLSKLocalized('WKCWriteDetailPlaceholderText') %></span></div>
+	</div>
+</div>
 
 <div id="RSPNotification" class="WKCSharedHidden">Update Available: <button id="RSPReloadButton">Reload</button></div>
 
