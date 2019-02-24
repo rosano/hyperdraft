@@ -120,6 +120,10 @@ body {
 	color: #bfbfbf
 }
 
+#WKCWriteDetailToolbar {
+	justify-content: space-between;
+}
+
 #WKCWriteDetailContent {
 	position:relative;
 

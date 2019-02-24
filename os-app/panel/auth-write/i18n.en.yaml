@@ -4,6 +4,7 @@ WKCWriteMasterToolbarCreateButtonText: Add note
 WKCWriteDetailToolbarVisitButtonText: Visit public page
 WKCWriteDetailToolbarUnpublishButtonText: Unpublish
 WKCWriteDetailToolbarPublishButtonText: Publish
+WKCWriteDetailToolbarBackButtonText: Back
 WKCWriteDetailToolbarDiscardButtonText: Delete
 WKCWriteNotesDeleteAlertText: Are you sure?
 WKCWriteDetailPlaceholderText: No Note Selected

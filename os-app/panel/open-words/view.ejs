@@ -71,6 +71,9 @@ locals.OLSKPagePublicRouteKeys = [
 	<div id="WKCWriteDetail" class="WKCWriteDetailInactive WKC_ContextMobileView WKC_ContextMobileViewInactive">
 		<header id="WKCWriteDetailToolbar" class="WKCSharedToolbar">
 			<div class="WKCSharedToolbarElementGroup">
+				<button id="WKCWriteDetailToolbarBackButton" class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle WKC_ContextMobileExclusive" title="<%= OLSKLocalized('WKCWriteDetailToolbarBackButtonText') %>" style="background-image: url('/panel/_shared/ui-assets/wIKWriteBack.svg')" onclick="WIKWriteBehaviour.interfaceBackButtonDidClick()"></button>
+			</div>
+			<div class="WKCSharedToolbarElementGroup">
 				<span id="WKCWriteDetailToolbarPublishStatus"></span>
 
 				<a id="WKCWriteDetailToolbarVisitButton" class="WKCSharedToolbarButton WKCSharedElementTappable" title="<%= OLSKLocalized('WKCWriteDetailToolbarVisitButtonText') %>" style="background-image: url('/panel/_shared/ui-assets/wIKWriteVisit.svg')" target="_blank"></a>

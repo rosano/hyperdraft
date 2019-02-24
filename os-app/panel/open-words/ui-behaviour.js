@@ -110,6 +110,12 @@
 		moi.goNotesCreate();
 	};
 
+	//_ interfaceBackButtonDidClick
+
+	moi.interfaceBackButtonDidClick = function () {
+		moi.reactFocusMaster();
+	};
+
 	//_ interfaceDeleteButtonDidClick
 
 	moi.interfaceDeleteButtonDidClick = function () {
@@ -470,7 +476,7 @@
 				
 				WCKWriteBehaviourPropertyEditor.focus();
 			});
-			
+
 		parentElement.select('.WKCWriteMasterContentListItemContextTitle')
 			.text(function (e) {
 				return WKCParser.WKCParserTitleForPlaintext(e.WKCNoteBody);
@@ -532,6 +538,16 @@
 			.classed('WKCSharedHidden', inputData ? inputData.WKCNotePublishStatusIsPublished : false);
 		d3.select('#WKCWriteDetailToolbarUnpublishButton')
 			.classed('WKCSharedHidden', inputData ? !inputData.WKCNotePublishStatusIsPublished : false);
+	};
+
+	//_ reactFocusMaster
+
+	moi.reactFocusMaster = function () {
+		d3.selectAll('.WKC_ContextMobileView').classed('WKC_ContextMobileViewActive', function () {
+			return this.id === 'WKCWriteMaster';
+		}).classed('WKC_ContextMobileViewInactive', function () {
+			return this.id !== 'WKCWriteMaster';
+		});
 	};
 
 	//_ reactFocusDetail
