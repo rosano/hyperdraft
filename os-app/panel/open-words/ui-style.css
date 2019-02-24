@@ -183,3 +183,7 @@ body {
 	bottom: 0;
 	right: 0;
 }
+
+.WKC_ContextMobileExclusive {
+	display: none;
+}
