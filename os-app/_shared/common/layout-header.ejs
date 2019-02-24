@@ -38,7 +38,7 @@
 		let path = (e[0] === '/' ? '' : `/${ locals.OLSKSharedPageControllerSlug }/`).concat(e);
 
 		if (path.split('.').pop() === 'css') {
-			return `<link rel="stylesheet" type="text/css" href="${ path }">`;
+			return `<link rel="stylesheet" type="text/css" ${ path.match('-mobile.') ? 'media="screen and (max-width: 760px)"' : '' } href="${ path }">`;
 		}
 
 		if (path.split('.').pop() === 'js') {

@@ -1,0 +1,30 @@
+#WKCWrite {
+	overflow: hidden;
+	position: fixed;
+}
+
+#WKCWriteMasterContent {
+	/* WKCWriteMasterFlexboxChild */
+	overflow: auto;
+
+	/* browser quirks */
+	-webkit-overflow-scrolling: touch;
+}
+
+.WKCSharedContextMobileInactiveView {
+	display: none !important;
+}
+
+.WKCSharedContextMobileActiveView {
+	flex-basis: 100vw !important;
+}
+
+.MLPSharedContextMobile {
+	display: initial;
+}
+
+#WKCWriteDetailContentTextarea {
+	/* browser quirks */
+	-webkit-overflow-scrolling: touch;
+}
+

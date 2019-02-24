@@ -16,6 +16,7 @@ locals.OLSKPageAssets = [
 	'/_shared/common/ui-style.css',
 	'/panel/_shared/ui-style.css',
 	'ui-style.css',
+	'ui-style-mobile.css',
 	'ui-logic.js',
 	'/_shared/_external/remotestoragejs/release/remotestorage.js',
 	'/_shared/_external/remotestorage-widget/build/widget.js',
@@ -50,7 +51,7 @@ locals.OLSKPagePublicRouteKeys = [
 <%- include('../../_shared/common/layout-header.ejs') %>
 
 <div id="WKCWrite" class="WKCWriteLoading">
-	<div id="WKCWriteMaster">
+	<div id="WKCWriteMaster" class="WKCSharedContextMobileActiveView">
 		<header id="WKCWriteMasterToolbar" class="WKCSharedToolbar">
 			<input id="WKCWriteMasterToolbarFilterInput" placeholder="<%= OLSKLocalized('WKCWriteMasterToolbarFilterInputPlaceholderText') %>" oninput="WIKWriteBehaviour.interfaceNotesMasterToolbarFilterInputDidInput()" accesskey="f">
 
@@ -65,7 +66,7 @@ locals.OLSKPagePublicRouteKeys = [
 		</div>
 	</div>
 
-	<div id="WKCWriteDetail" class="WKCWriteDetailInactive">
+	<div id="WKCWriteDetail" class="WKCWriteDetailInactive WKCSharedContextMobileInactiveView">
 		<header id="WKCWriteDetailToolbar" class="WKCSharedToolbar">
 			<span id="WKCWriteDetailToolbarPublishStatus"></span>
 
