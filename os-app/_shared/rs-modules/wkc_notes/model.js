@@ -25,8 +25,8 @@
 			];
 		}
 
-		if (!(inputData.WKCNoteDateCreated instanceof Date) || Number.isNaN(inputData.WKCNoteDateCreated.getTime())) {
-			errors.WKCNoteDateCreated = [
+		if (!(inputData.WKCNoteCreationDate instanceof Date) || Number.isNaN(inputData.WKCNoteCreationDate.getTime())) {
+			errors.WKCNoteCreationDate = [
 				'WKCErrorNotDate',
 			];
 		}
@@ -51,8 +51,8 @@
 	//_ WKCNotesModelPreJSONSchemaValidate
 
 	exports.WKCNotesModelPreJSONSchemaValidate = function(inputData) {
-		if (inputData.WKCNoteDateCreated) {
-			inputData.WKCNoteDateCreated = inputData.WKCNoteDateCreated.toISOString();
+		if (inputData.WKCNoteCreationDate) {
+			inputData.WKCNoteCreationDate = inputData.WKCNoteCreationDate.toISOString();
 		}
 
 		if (inputData.WKCNoteModificationDate) {
@@ -69,8 +69,8 @@
 			return inputData;
 		}
 		
-		if (inputData.WKCNoteDateCreated) {
-			inputData.WKCNoteDateCreated = new Date(inputData.WKCNoteDateCreated);
+		if (inputData.WKCNoteCreationDate) {
+			inputData.WKCNoteCreationDate = new Date(inputData.WKCNoteCreationDate);
 		}
 
 		if (inputData.WKCNoteModificationDate) {

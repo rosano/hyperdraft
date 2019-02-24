@@ -22,7 +22,7 @@ const kTesting = {
 		return {
 			WKCNoteID: 'alfa',
 			WKCNoteBody: 'bravo',
-			WKCNoteDateCreated: new Date('2019-02-23T13:56:36Z'),
+			WKCNoteCreationDate: new Date('2019-02-23T13:56:36Z'),
 			WKCNoteModificationDate: new Date('2019-02-23T13:56:36Z'),
 		};
 	},
@@ -39,7 +39,7 @@ describe('OLSKChangeDelegateProtocol', function testOLSKChangeDelegateProtocol()
 		kTesting.StubRemoteStorage({
 			OLSKChangeDelegateAdd: function (inputData) {
 				assert.deepEqual(inputData, Object.assign(kTesting.StubNoteObjectValid(), {
-					WKCNoteDateCreated: inputData.WKCNoteDateCreated,
+					WKCNoteCreationDate: inputData.WKCNoteCreationDate,
 					WKCNoteModificationDate: inputData.WKCNoteModificationDate,
 					'@context': inputData['@context'],
 				}));

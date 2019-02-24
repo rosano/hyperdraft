@@ -39,8 +39,8 @@
 
 	moi.dataNoteObjectPreparedFor = function (inputData) {
 		return Object.assign(inputData, {
-			WKCNoteDateCreated: new Date(inputData.WKCNoteDateCreated),
-			WKCNoteDateUpdated: new Date(inputData.WKCNoteDateUpdated),
+			WKCNoteCreationDate: new Date(inputData.WKCNoteCreationDate),
+			WKCNoteModificationDate: new Date(inputData.WKCNoteModificationDate),
 		});
 	};
 
@@ -287,7 +287,7 @@
 			body: JSON.stringify({
 				WKCVersionNoteID: item.WKCNoteID,
 				WKCVersionBody: item.WKCNoteBody,
-				WKCVersionDate: item.WKCNoteDateUpdated,
+				WKCVersionDate: item.WKCNoteModificationDate,
 			}),
 		}));
 	};

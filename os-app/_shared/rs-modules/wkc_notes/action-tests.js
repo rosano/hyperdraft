@@ -34,7 +34,7 @@ describe('WKCNotesActionCreate', function testWKCNotesActionCreate() {
 
 		assert.deepEqual(item, Object.assign(kTesting.StubNoteObject(), {
 			WKCNoteID: item.WKCNoteID,
-			WKCNoteDateCreated: item.WKCNoteDateCreated,
+			WKCNoteCreationDate: item.WKCNoteCreationDate,
 			WKCNoteModificationDate: item.WKCNoteModificationDate,
 			'@context': item['@context'],
 		}));
@@ -49,8 +49,8 @@ describe('WKCNotesActionCreate', function testWKCNotesActionCreate() {
 		assert.deepEqual((new Set(items)).values(), items);
 	});
 
-	it('sets WKCNoteDateCreated to now', async function() {
-		assert.strictEqual(new Date() - (await mainModule.WKCNotesActionCreate(storageClient, kTesting.StubNoteObject())).WKCNoteDateCreated < 100, true);
+	it('sets WKCNoteCreationDate to now', async function() {
+		assert.strictEqual(new Date() - (await mainModule.WKCNotesActionCreate(storageClient, kTesting.StubNoteObject())).WKCNoteCreationDate < 100, true);
 	});
 
 	it('sets WKCNoteModificationDate to now', async function() {

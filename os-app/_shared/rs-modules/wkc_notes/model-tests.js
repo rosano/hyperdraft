@@ -7,7 +7,7 @@ const kTesting = {
 		return {
 			WKCNoteID: 'alfa',
 			WKCNoteBody: 'bravo',
-			WKCNoteDateCreated: new Date('2019-02-23T13:56:36Z'),
+			WKCNoteCreationDate: new Date('2019-02-23T13:56:36Z'),
 			WKCNoteModificationDate: new Date('2019-02-23T13:56:36Z'),
 		};
 	},
@@ -41,11 +41,11 @@ describe('WKCNotesModelErrorsFor', function testWKCNotesModelErrorsFor() {
 		});
 	});
 
-	it('returns object if WKCNoteDateCreated not date', function() {
+	it('returns object if WKCNoteCreationDate not date', function() {
 		assert.deepEqual(mainModule.WKCNotesModelErrorsFor(Object.assign(kTesting.StubNoteObject(), {
-			WKCNoteDateCreated: new Date('alfa'),
+			WKCNoteCreationDate: new Date('alfa'),
 		})), {
-			WKCNoteDateCreated: [
+			WKCNoteCreationDate: [
 				'WKCErrorNotDate',
 			],
 		});
@@ -87,11 +87,11 @@ describe('WKCNotesModelPreJSONSchemaValidate', function testWKCNotesModelPreJSON
 		assert.deepEqual(mainModule.WKCNotesModelPreJSONSchemaValidate({}), {});
 	});
 
-	it('returns input with WKCNoteDateCreated as string', function() {
+	it('returns input with WKCNoteCreationDate as string', function() {
 		assert.deepEqual(mainModule.WKCNotesModelPreJSONSchemaValidate({
-			WKCNoteDateCreated: new Date('2018-12-09T19:07:01.902Z'),
+			WKCNoteCreationDate: new Date('2018-12-09T19:07:01.902Z'),
 		}), {
-			WKCNoteDateCreated: '2018-12-09T19:07:01.902Z',
+			WKCNoteCreationDate: '2018-12-09T19:07:01.902Z',
 		});
 	});
 
@@ -115,11 +115,11 @@ describe('WKCNotesModelPostJSONParse', function testWKCNotesModelPostJSONParse()
 		assert.deepEqual(mainModule.WKCNotesModelPostJSONParse({}), {});
 	});
 
-	it('returns input with WKCNoteDateCreated as date', function() {
+	it('returns input with WKCNoteCreationDate as date', function() {
 		assert.deepEqual(mainModule.WKCNotesModelPostJSONParse({
-			WKCNoteDateCreated: '2018-12-09T19:07:01.902Z',
+			WKCNoteCreationDate: '2018-12-09T19:07:01.902Z',
 		}), {
-			WKCNoteDateCreated: new Date('2018-12-09T19:07:01.902Z'),
+			WKCNoteCreationDate: new Date('2018-12-09T19:07:01.902Z'),
 		});
 	});
 

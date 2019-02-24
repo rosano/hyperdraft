@@ -10,7 +10,7 @@ const kTesting = {
 		return {
 			WKCNoteID: 'alfa',
 			WKCNoteBody: 'bravo',
-			WKCNoteDateCreated: new Date('2019-02-23T13:56:36Z'),
+			WKCNoteCreationDate: new Date('2019-02-23T13:56:36Z'),
 			WKCNoteModificationDate: new Date('2019-02-23T13:56:36Z'),
 		};
 	},
