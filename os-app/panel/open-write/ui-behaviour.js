@@ -634,7 +634,7 @@
 		      return moi.kDefaultFocusNode().focus();
 		    },
 		  },
-		  theme: 'wkv',
+		  theme: 'wkc',
 		});
 
 		WCKWriteBehaviourPropertyEditor.on('change', function (instance, changeObject) {
