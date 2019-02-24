@@ -466,6 +466,8 @@
 
 		parentElement
 			.on('click', function(obj) {
+				moi.reactFocusDetail();
+
 				moi.commandsNotesSelect(obj);
 				
 				WCKWriteBehaviourPropertyEditor.focus();
@@ -535,6 +537,16 @@
 			.classed('WKCSharedHidden', inputData ? inputData.WKCNotePublishStatusIsPublished : false);
 		d3.select('#WKCWriteDetailToolbarUnpublishButton')
 			.classed('WKCSharedHidden', inputData ? !inputData.WKCNotePublishStatusIsPublished : false);
+	};
+
+	//_ reactFocusDetail
+
+	moi.reactFocusDetail = function () {
+		d3.selectAll('.WKC_ContextMobileView').classed('WKC_ContextMobileViewActive', function () {
+			return this.id === 'WKCWriteDetail';
+		}).classed('WKC_ContextMobileViewInactive', function () {
+			return this.id !== 'WKCWriteDetail';
+		});
 	};
 
 	//# SETUP
