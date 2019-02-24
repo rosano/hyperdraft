@@ -60,10 +60,6 @@
 	height: 16px;
 }
 
-.WKCSharedHidden {
-	display: none;
-}
-
 #WKCSharedUpdateNotification {
 	padding: 10px;
 	border: 1px solid #7f7f7f;
