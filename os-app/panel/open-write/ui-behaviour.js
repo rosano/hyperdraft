@@ -485,6 +485,8 @@
 			return WKCParser.WKCParserSnippetForPlaintext(WKCParser.WKCParserBodyForPlaintext(obj.WKCNoteBody));
 		});
 
+		_reactSharedSelectedNote(moi.propertiesSelectedNote())
+
 		selection.exit().remove();
 	};
 
@@ -501,9 +503,7 @@
 	//_ reactSelectedNote
 
 	moi.reactSelectedNote = function (inputData) {
-		d3.selectAll('.WKCWriteMasterContentListItem').classed('WKCWriteMasterContentListItemSelected', function(d) {
-			return d === inputData;
-		});
+		_reactSharedSelectedNote(inputData);
 
 		d3.select('#WKCWriteDetailToolbarDiscardButton').attr('disabled', inputData ? null : undefined);
 
@@ -512,6 +512,14 @@
 		WCKWriteBehaviourPropertyEditor.setValue(inputData ? inputData.WKCNoteBody : '');
 
 		moi.reactPublishStatus(inputData);
+	};
+
+	//_ _reactSharedSelectedNote
+
+	let _reactSharedSelectedNote = function (inputData) {
+		d3.selectAll('.WKCWriteMasterContentListItem').classed('WKCWriteMasterContentListItemSelected', function(d) {
+			return d === inputData;
+		});
 	};
 
 	//_ reactPublishStatus
