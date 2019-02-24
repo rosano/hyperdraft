@@ -14,6 +14,13 @@
     "// DOM MANIPULATION": null,
     "d3": "latest",
 
+    "// REMOTE STORAGE": null,
+    "remotestoragejs": "latest",
+    "remotestorage-widget": "latest",
+
+    "// UNIQUE IDS": null,
+    "ulid": "latest",
+
     "// MARKDOWN": null,
     "turndown": "latest",
     "showdown": "latest",
