@@ -10,7 +10,7 @@
 		return {
 			name: 'wik_notes',
 			builder: function(privateClient, publicClient) {
-				privateClient.declareType('rs_note', WKCNotesModel.OLSKTypeJSONSchemaForErrors(WKCNotesModel.WKCNotesModelErrorsFor({})));
+				privateClient.declareType('wkc_note', WKCNotesModel.OLSKTypeJSONSchemaForErrors(WKCNotesModel.WKCNotesModelErrorsFor({})));
 
 				!changeDelegate ? null : privateClient.on('change', function (event) {
 					if (typeof event.oldValue === 'undefined') {
@@ -37,7 +37,7 @@
 							return privateClient.getAll('');
 						},
 						writeObject: async function (param1, param2) {
-							await privateClient.storeObject('rs_note', param1, WKCNotesModel.WKCNotesModelPreJSONSchemaValidate(param2));
+							await privateClient.storeObject('wkc_note', param1, WKCNotesModel.WKCNotesModelPreJSONSchemaValidate(param2));
 							return WKCNotesModel.WKCNotesModelPostJSONParse(param2);
 						},
 						readObject: function (inputData) {
