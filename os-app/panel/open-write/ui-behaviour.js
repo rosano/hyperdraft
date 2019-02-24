@@ -167,16 +167,6 @@
 			.html(JSON.stringify(await RSNotesMetal.RSNotesMetalRead(storageClient, inputData.RSNoteID)))
 	};
 
-	//_ goItemsUpdate
-
-	moi.goItemsUpdate = async function (inputData) {
-		await RSNotesAction.RSNotesActionUpdate(storageClient, Object.assign(inputData, {
-			RSNoteBody: `${ inputData.RSNoteBody }-${ inputData.RSNoteBody.length }`,
-		}));
-
-		propertiesViewItems(propertiesViewItems());
-	};
-
 	//_ goItemsDelete
 
 	moi.goItemsDelete = async function (inputData) {
@@ -229,22 +219,21 @@
 
 	//_ commandsSelectedNoteUpdateBody
 
-	moi.commandsSelectedNoteUpdateBody = function (inputData) {
-		let item = Object.assign(moi.propertiesSelectedNote(), {
-			WKCNoteBody: inputData,
-			WKCNoteDateUpdated: new Date(),
-		});
+	moi.commandsSelectedNoteUpdateBody = async function (inputData) {
+		await RSNotesAction.RSNotesActionUpdate(storageClient, Object.assign(moi.propertiesSelectedNote(), {
+			RSNoteBody: `${ inputData.RSNoteBody }-${ inputData.RSNoteBody.length }`,
+		}));
 
-		if (!item._WKCWriteThrottleObject) {
-			item._WKCWriteThrottleObject = {
-				OLSKThrottleDuration: 3000,
-				OLSKThrottleCallback: function () {
-					moi.commandsPersistNote(item);
-				},
-			};
-		}
+		// if (!item._WKCWriteThrottleObject) {
+		// 	item._WKCWriteThrottleObject = {
+		// 		OLSKThrottleDuration: 3000,
+		// 		OLSKThrottleCallback: function () {
+		// 			moi.commandsPersistNote(item);
+		// 		},
+		// 	};
+		// }
 
-		OLSKThrottle.OLSKThrottleTimeoutFor(item._WKCWriteThrottleObject);
+		// OLSKThrottle.OLSKThrottleTimeoutFor(item._WKCWriteThrottleObject);
 
 		moi.reactNoteObjects(moi.dataNoteObjectsFiltered());
 	};
