@@ -3,7 +3,7 @@ const assert = require('assert');
 const mainModule = require('./model.js');
 
 const kTesting = {
-	StubNoteObject: function() {
+	StubVersionObjectValid: function() {
 		return {
 			WKCVersionID: 'alfa',
 			WKCVersionNoteID: 'bravo',
@@ -22,7 +22,7 @@ describe('WKCVersionsModelErrorsFor', function testWKCVersionsModelErrorsFor() {
 	});
 
 	it('returns object if WKCVersionID not string', function() {
-		assert.deepEqual(mainModule.WKCVersionsModelErrorsFor(Object.assign(kTesting.StubNoteObject(), {
+		assert.deepEqual(mainModule.WKCVersionsModelErrorsFor(Object.assign(kTesting.StubVersionObjectValid(), {
 			WKCVersionID: null,
 		})), {
 			WKCVersionID: [
@@ -32,7 +32,7 @@ describe('WKCVersionsModelErrorsFor', function testWKCVersionsModelErrorsFor() {
 	});
 
 	it('returns object if WKCVersionID not filled', function() {
-		assert.deepEqual(mainModule.WKCVersionsModelErrorsFor(Object.assign(kTesting.StubNoteObject(), {
+		assert.deepEqual(mainModule.WKCVersionsModelErrorsFor(Object.assign(kTesting.StubVersionObjectValid(), {
 			WKCVersionID: ' ',
 		})), {
 			WKCVersionID: [
@@ -42,7 +42,7 @@ describe('WKCVersionsModelErrorsFor', function testWKCVersionsModelErrorsFor() {
 	});
 
 	it('returns object if WKCVersionBody not string', function() {
-		assert.deepEqual(mainModule.WKCVersionsModelErrorsFor(Object.assign(kTesting.StubNoteObject(), {
+		assert.deepEqual(mainModule.WKCVersionsModelErrorsFor(Object.assign(kTesting.StubVersionObjectValid(), {
 			WKCVersionBody: null,
 		})), {
 			WKCVersionBody: [
@@ -52,7 +52,7 @@ describe('WKCVersionsModelErrorsFor', function testWKCVersionsModelErrorsFor() {
 	});
 
 	it('returns object if WKCVersionDate not date', function() {
-		assert.deepEqual(mainModule.WKCVersionsModelErrorsFor(Object.assign(kTesting.StubNoteObject(), {
+		assert.deepEqual(mainModule.WKCVersionsModelErrorsFor(Object.assign(kTesting.StubVersionObjectValid(), {
 			WKCVersionDate: new Date('alfa'),
 		})), {
 			WKCVersionDate: [
@@ -62,7 +62,7 @@ describe('WKCVersionsModelErrorsFor', function testWKCVersionsModelErrorsFor() {
 	});
 
 	it('returns null', function() {
-		assert.deepEqual(mainModule.WKCVersionsModelErrorsFor(kTesting.StubNoteObject()), null);
+		assert.deepEqual(mainModule.WKCVersionsModelErrorsFor(kTesting.StubVersionObjectValid()), null);
 	});
 
 });
