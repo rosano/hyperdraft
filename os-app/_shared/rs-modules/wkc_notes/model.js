@@ -96,7 +96,7 @@
 			properties: Object.entries(inputData).reduce(function (coll, [key, val]) {
 				coll[key] = {};
 
-				coll[key].type = [...val].shift().replace('WKCErrorNot', '').toLowerCase();
+				coll[key].type = [...val].shift().replace('WKCErrorNot', '').toLowerCase().replace('filled', 'string');
 
 				if (coll[key].type === 'date') {
 					coll[key].type = 'string';

@@ -210,6 +210,22 @@ describe('OLSKTypeJSONSchemaForErrors', function OLSKTypeJSONSchemaForErrors() {
 			});
 		});
 		
+		it('declares filled', function() {
+			assert.deepEqual(mainModule.OLSKTypeJSONSchemaForErrors({
+				alfa: ['WKCErrorNotFilled']
+			}), {
+				type: 'object',
+				properties: {
+					alfa: {
+						type: 'string',
+					},
+				},
+				required: [
+					'alfa',
+				],
+			});
+		});
+		
 	});
 
 	context('required', function() {
