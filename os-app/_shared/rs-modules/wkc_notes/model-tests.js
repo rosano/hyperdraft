@@ -3,7 +3,7 @@ const assert = require('assert');
 const mainModule = require('./model.js');
 
 const kTesting = {
-	StubNoteObject: function() {
+	StubNoteObjectValid: function() {
 		return {
 			WKCNoteID: 'alfa',
 			WKCNoteBody: 'bravo',
@@ -22,7 +22,7 @@ describe('WKCNotesModelErrorsFor', function testWKCNotesModelErrorsFor() {
 	});
 
 	it('returns object if WKCNoteID not string', function() {
-		assert.deepEqual(mainModule.WKCNotesModelErrorsFor(Object.assign(kTesting.StubNoteObject(), {
+		assert.deepEqual(mainModule.WKCNotesModelErrorsFor(Object.assign(kTesting.StubNoteObjectValid(), {
 			WKCNoteID: null,
 		})), {
 			WKCNoteID: [
@@ -32,7 +32,7 @@ describe('WKCNotesModelErrorsFor', function testWKCNotesModelErrorsFor() {
 	});
 
 	it('returns object if WKCNoteID not filled', function() {
-		assert.deepEqual(mainModule.WKCNotesModelErrorsFor(Object.assign(kTesting.StubNoteObject(), {
+		assert.deepEqual(mainModule.WKCNotesModelErrorsFor(Object.assign(kTesting.StubNoteObjectValid(), {
 			WKCNoteID: ' ',
 		})), {
 			WKCNoteID: [
@@ -42,7 +42,7 @@ describe('WKCNotesModelErrorsFor', function testWKCNotesModelErrorsFor() {
 	});
 
 	it('returns object if WKCNoteBody not string', function() {
-		assert.deepEqual(mainModule.WKCNotesModelErrorsFor(Object.assign(kTesting.StubNoteObject(), {
+		assert.deepEqual(mainModule.WKCNotesModelErrorsFor(Object.assign(kTesting.StubNoteObjectValid(), {
 			WKCNoteBody: null,
 		})), {
 			WKCNoteBody: [
@@ -52,7 +52,7 @@ describe('WKCNotesModelErrorsFor', function testWKCNotesModelErrorsFor() {
 	});
 
 	it('returns object if WKCNoteCreationDate not date', function() {
-		assert.deepEqual(mainModule.WKCNotesModelErrorsFor(Object.assign(kTesting.StubNoteObject(), {
+		assert.deepEqual(mainModule.WKCNotesModelErrorsFor(Object.assign(kTesting.StubNoteObjectValid(), {
 			WKCNoteCreationDate: new Date('alfa'),
 		})), {
 			WKCNoteCreationDate: [
@@ -62,7 +62,7 @@ describe('WKCNotesModelErrorsFor', function testWKCNotesModelErrorsFor() {
 	});
 
 	it('returns object if WKCNoteModificationDate not date', function() {
-		assert.deepEqual(mainModule.WKCNotesModelErrorsFor(Object.assign(kTesting.StubNoteObject(), {
+		assert.deepEqual(mainModule.WKCNotesModelErrorsFor(Object.assign(kTesting.StubNoteObjectValid(), {
 			WKCNoteModificationDate: new Date('alfa'),
 		})), {
 			WKCNoteModificationDate: [
@@ -72,13 +72,13 @@ describe('WKCNotesModelErrorsFor', function testWKCNotesModelErrorsFor() {
 	});
 
 	it('returns null', function() {
-		assert.deepEqual(mainModule.WKCNotesModelErrorsFor(kTesting.StubNoteObject()), null);
+		assert.deepEqual(mainModule.WKCNotesModelErrorsFor(kTesting.StubNoteObjectValid()), null);
 	});
 
 	context('WKCNotePublishStatusIsPublished', function() {
 
 		it('returns object if WKCNotePublishStatusIsPublished not boolean', function() {
-			assert.deepEqual(mainModule.WKCNotesModelErrorsFor(Object.assign(kTesting.StubNoteObject(), {
+			assert.deepEqual(mainModule.WKCNotesModelErrorsFor(Object.assign(kTesting.StubNoteObjectValid(), {
 				WKCNotePublishStatusIsPublished: 'true',
 			})), {
 				WKCNotePublishStatusIsPublished: [
