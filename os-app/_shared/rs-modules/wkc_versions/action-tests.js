@@ -8,11 +8,15 @@ const storageClient = require('../../WKCStorageClient/storage.js').WKCStorageCli
 const kTesting = {
 	StubVersionObject: function() {
 		return {
-			WKCVersionNoteID: 'bravo',
-			WKCVersionBody: 'charlie',
+			WKCVersionNoteID: 'alfa',
+			WKCVersionBody: 'bravo',
 		};
 	},
 };
+
+beforeEach(async function() {
+	await Promise.all(Object.keys(await storageClient.wkc_versions.listObjects()).map(storageClient.wkc_versions.deleteObject));
+});
 
 describe('WKCVersionsActionCreate', function testWKCVersionsActionCreate() {
 
@@ -51,6 +55,40 @@ describe('WKCVersionsActionCreate', function testWKCVersionsActionCreate() {
 
 	it('sets WKCVersionDate to now', async function() {
 		assert.strictEqual(new Date() - (await mainModule.WKCVersionsActionCreate(storageClient, kTesting.StubVersionObject())).WKCVersionDate < 100, true);
+	});
+
+});
+
+describe('WKCVersionsActionQuery', function testWKCVersionsActionQuery() {
+
+	it('rejects if not object', async function() {
+		await assert.rejects(mainModule.WKCVersionsActionQuery(WKCTestingMongoClient, null), /WKCErrorInputInvalid/);
+	});
+
+	it('returns array', async function() {
+		assert.deepEqual(await mainModule.WKCVersionsActionQuery(storageClient, {}), []);
+	});
+
+	it('includes all WKCVersions if no query', async function() {
+		let items = await Promise.all(['alfa', 'bravo', 'charlie'].map(async function (e) {
+			return await mainModule.WKCVersionsActionCreate(storageClient, Object.assign(kTesting.StubVersionObject(), {
+				WKCVersionBody: e,
+			}));
+		}));
+
+		assert.deepEqual(await mainModule.WKCVersionsActionQuery(storageClient, {}), items.reverse());
+	});
+
+	it('filters by WKCVersionNoteID', async function() {
+		let items = await Promise.all(['alfa', 'bravo', 'charlie'].map(async function (e) {
+			return await mainModule.WKCVersionsActionCreate(storageClient, Object.assign(kTesting.StubVersionObject(), {
+				WKCVersionNoteID: e,
+			}));
+		}));
+
+		assert.deepEqual(await mainModule.WKCVersionsActionQuery(storageClient, {
+			WKCVersionNoteID: 'charlie',
+		}), items.slice(-1));
 	});
 
 });

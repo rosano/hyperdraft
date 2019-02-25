@@ -5,6 +5,12 @@
 }(this, (function (exports) { 'use strict';	
 
 	const WKCVersionsMetal = typeof require === 'undefined' ? window.WKCVersionsMetal : require('./metal.js');
+	const d3Package = typeof require === 'undefined' ? window.d3 : require('d3');
+
+	const uSleep = function (inputData) {
+		let endTime = new Date().getTime();
+		while (new Date().getTime() < endTime + inputData) {}
+	};
 
 	//_ WKCVersionsActionCreate
 
@@ -15,11 +21,37 @@
 			return Promise.reject(new Error('WKCErrorInputInvalid'));
 		}
 
+		uSleep(Math.random()); // #purge
+
 		return await WKCVersionsMetal.WKCVersionsMetalWrite(storageClient, Object.assign(inputData, {
 			WKCVersionID: ULIDPackage.ulid(),
 			WKCVersionDate: new Date(),
 		}));
 	};
+
+//_ WKCVersionsActionQuery
+
+exports.WKCVersionsActionQuery = async function(storageClient, inputData) {
+	if (typeof inputData !== 'object' || inputData === null) {
+		return Promise.reject(new Error('WKCErrorInputInvalid'));
+	}
+
+	return Promise.resolve(Object.values(await WKCVersionsMetal.WKCVersionsMetalList(storageClient)).sort(function (a, b) {
+		return d3Package.descending(a.WKCVersionID, b.WKCVersionID)
+	}).filter(function(e) {
+		if (!Object.keys(inputData).length) {
+			return true;
+		}
+
+		if (Object.keys(inputData).filter(function (key) {
+			return e[key].match(inputData[key]);
+		}).length) {
+			return true;
+		}
+
+		return false;
+	}));
+};
 
 	Object.defineProperty(exports, '__esModule', { value: true });
 
