@@ -6,7 +6,7 @@
 
 	const WKCNotesMetal = typeof require === 'undefined' ? window.WKCNotesMetal : require('./metal.js');
 
-	//_ WKCNotesActionUpdate
+	//_ WKCNotesActionCreate
 
 	const ULIDPackage = typeof require === 'undefined' ? window.ULID : require('ulid');
 
