@@ -27,22 +27,3 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 	});
 
 });
-
-describe('WKCWriteAction', function testWKCWriteAction() {
-
-	it('renders page', function() {
-		assert.strictEqual(mainModule.WKCWriteAction(null, OLSKTesting.OLSKTestingFakeResponseForRender(function(viewPath) {
-			return viewPath;
-		})), [
-			__dirname,
-			'view',
-		].join('/'));
-	});
-
-	it('returns pageData', function() {
-		assert.deepEqual(mainModule.WKCWriteAction(null, OLSKTesting.OLSKTestingFakeResponseForRender(function(viewPath, pageData) {
-			return pageData;
-		})), {});
-	});
-
-});
