@@ -4,13 +4,14 @@
 	(factory((global.RSModuleProtocol_wkc_notes = global.RSModuleProtocol_wkc_notes || {})));
 }(this, (function (exports) { 'use strict';
 
+	const RSModuleShared = typeof require === 'undefined' ? window.RSModuleShared : require('../_shared/main.js');
 	const WKCNotesModel = typeof require === 'undefined' ? window.WKCNotesModel : require('./model.js');
 
 	exports.RSModuleProtocolModuleForChangeDelegate = function (changeDelegate) {
 		return {
 			name: 'wkc_notes',
 			builder: function(privateClient, publicClient) {
-				privateClient.declareType('wkc_note', WKCNotesModel.OLSKTypeJSONSchemaForErrors(WKCNotesModel.WKCNotesModelErrorsFor({})));
+				privateClient.declareType('wkc_note', RSModuleShared.RSModulesSharedJSONSchemaForErrors(WKCNotesModel.WKCNotesModelErrorsFor({})));
 
 				!changeDelegate ? null : privateClient.on('change', function (event) {
 					if (typeof event.oldValue === 'undefined') {
