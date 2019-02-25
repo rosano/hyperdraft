@@ -28,30 +28,3 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 	});
 
 });
-
-describe('WKCReadAction', function testWKCReadAction() {
-
-	it('renders page', function() {
-		assert.strictEqual(controllerModule.WKCReadAction(null, OLSKTesting.OLSKTestingFakeResponseForRender(function(viewPath) {
-			return viewPath;
-		})), [
-			__dirname,
-			'view',
-		].join('/'));
-	});
-
-	it('returns pageData', function() {
-		assert.deepEqual(controllerModule.WKCReadAction(null, OLSKTesting.OLSKTestingFakeResponseForRender(function(viewPath, pageData) {
-			return pageData;
-		})), {
-			OLSKPagePublicConstants: {
-				WKCSubscriptionHandlerFeedRSS: apiSubscriptionsModel.WKCSubscriptionHandlerFeedRSS(),
-				WKCSubscriptionHandlerFeedAtom: apiSubscriptionsModel.WKCSubscriptionHandlerFeedAtom(),
-				WKCSubscriptionHandlerFile: apiSubscriptionsModel.WKCSubscriptionHandlerFile(),
-				WKCSubscriptionHandlerPage: apiSubscriptionsModel.WKCSubscriptionHandlerPage(),
-				WKCSubscriptionHandlerCustomTwitterTimeline: apiSubscriptionsModel.WKCSubscriptionHandlerCustomTwitterTimeline(),
-			},
-		});
-	});
-
-});
