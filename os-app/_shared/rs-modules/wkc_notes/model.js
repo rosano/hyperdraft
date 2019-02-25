@@ -17,6 +17,10 @@
 			errors.WKCNoteID = [
 				'WKCErrorNotString',
 			];
+		} else if (inputData.WKCNoteID.trim() === '') {
+			errors.WKCNoteID = [
+				'WKCErrorNotFilled',
+			];
 		}
 
 		if (typeof inputData.WKCNoteBody !== 'string') {

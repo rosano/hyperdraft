@@ -31,6 +31,16 @@ describe('WKCNotesModelErrorsFor', function testWKCNotesModelErrorsFor() {
 		});
 	});
 
+	it('returns object if WKCNoteID not filled', function() {
+		assert.deepEqual(mainModule.WKCNotesModelErrorsFor(Object.assign(kTesting.StubNoteObject(), {
+			WKCNoteID: ' ',
+		})), {
+			WKCNoteID: [
+				'WKCErrorNotFilled',
+			],
+		});
+	});
+
 	it('returns object if WKCNoteBody not string', function() {
 		assert.deepEqual(mainModule.WKCNotesModelErrorsFor(Object.assign(kTesting.StubNoteObject(), {
 			WKCNoteBody: null,
