@@ -54,12 +54,10 @@ describe('WKCVersionsActionCreate', function testWKCVersionsActionCreate() {
 	});
 
 	it('sets WKCVersionID to unique value', async function() {
-		let items = []
-
-		Array.from(Array(10)).forEach(async function (e) {
-			items.push((await mainModule.WKCVersionsActionCreate(storageClient, kTesting.StubVersionObject())).WKCVersionID);
-		});
-		assert.deepEqual((new Set(items)).values(), items);
+		let items = await kTesting.uSerial(Array.from(Array(10)).map(async function (e) {
+			return (await mainModule.WKCVersionsActionCreate(storageClient, kTesting.StubVersionObject())).WKCVersionID;
+		}));
+		assert.deepEqual([...(new Set(items))], items);
 	});
 
 	it('sets WKCVersionDate to now', async function() {
@@ -90,7 +88,7 @@ describe('WKCVersionsActionQuery', function testWKCVersionsActionQuery() {
 	});
 
 	it('filters by WKCVersionNoteID', async function() {
-		let items = await Promise.all(['alfa', 'bravo', 'charlie'].map(async function (e) {
+		let items = await kTesting.uSerial(['alfa', 'bravo', 'charlie'].map(async function (e) {
 			return await mainModule.WKCVersionsActionCreate(storageClient, Object.assign(kTesting.StubVersionObject(), {
 				WKCVersionNoteID: e,
 			}));
