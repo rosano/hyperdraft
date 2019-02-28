@@ -1,6 +1,7 @@
 const assert = require('assert');
 
 const mainModule = require('./action.js');
+const WKCVersionsAction = require('../wkc_versions/action.js');
 const storageClient = require('../../WKCStorageClient/storage.js').WKCStorageClientForChangeDelegateMap({
 	wkc_notes: null,
 });
@@ -10,6 +11,15 @@ const kTesting = {
 		return {
 			WKCNoteBody: 'alfa',
 		};
+	},
+	uSerial: function (inputData) {
+		return inputData.reduce(async function (coll, e) {
+			return e.then(Array.prototype.concat.bind(await coll));
+		}, Promise.resolve([]));
+	},
+	uSleep: function (inputData) {
+		let endTime = new Date().getTime();
+		while (new Date().getTime() < endTime + inputData) {}
 	},
 };
 
@@ -103,3 +113,39 @@ describe('WKCNotesActionUpdate', function testWKCNotesActionUpdate() {
 	});
 
 });
+
+describe('WKCNotesActionQuery', function testWKCNotesActionQuery() {
+
+	it('rejects if not object', async function() {
+		await assert.rejects(mainModule.WKCNotesActionQuery(WKCTestingMongoClient, null), /WKCErrorInputInvalid/);
+	});
+
+	it('returns array', async function() {
+		assert.deepEqual(await mainModule.WKCNotesActionQuery(storageClient, {}), []);
+	});
+
+	it('includes all WKCNotes if no query', async function() {
+		let items = await kTesting.uSerial(['alfa', 'bravo', 'charlie'].map(async function (e) {
+			kTesting.uSleep(1);
+			return await mainModule.WKCNotesActionCreate(storageClient, Object.assign(kTesting.StubNoteObject(), {
+				WKCNoteBody: e,
+			}));
+		}));
+
+		assert.deepEqual(await mainModule.WKCNotesActionQuery(storageClient, {}), items.reverse());
+	});
+
+	it('filters by WKCNoteID', async function() {
+		let items = await kTesting.uSerial(['alfa', 'bravo', 'charlie'].map(async function (e) {
+			return await mainModule.WKCNotesActionCreate(storageClient, Object.assign(kTesting.StubNoteObject(), {
+				WKCNoteID: e,
+			}));
+		}));
+
+		assert.deepEqual(await mainModule.WKCNotesActionQuery(storageClient, {
+			WKCNoteID: items.slice(-1).pop().WKCNoteID,
+		}), items.slice(-1));
+	});
+
+});
+

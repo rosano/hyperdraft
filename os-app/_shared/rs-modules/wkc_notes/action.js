@@ -36,6 +36,32 @@
 		}));
 	};
 
+	//_ WKCNotesActionQuery
+	
+	const d3Package = typeof require === 'undefined' ? window.d3 : require('d3');
+
+	exports.WKCNotesActionQuery = async function(storageClient, inputData) {
+		if (typeof inputData !== 'object' || inputData === null) {
+			return Promise.reject(new Error('WKCErrorInputInvalid'));
+		}
+
+		return Promise.resolve(Object.values(await WKCNotesMetal.WKCNotesMetalList(storageClient)).sort(function (a, b) {
+			return d3Package.descending(a.WKCNoteID, b.WKCNoteID)
+		}).filter(function(e) {
+			if (!Object.keys(inputData).length) {
+				return true;
+			}
+
+			if (Object.keys(inputData).filter(function (key) {
+				return e[key].match(inputData[key]);
+			}).length) {
+				return true;
+			}
+
+			return false;
+		}));
+	};
+
 	Object.defineProperty(exports, '__esModule', { value: true });
 
 })));
