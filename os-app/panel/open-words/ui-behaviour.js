@@ -211,6 +211,15 @@
 	//_ commandsSelectedNoteUpdateBody
 
 	moi.commandsSelectedNoteUpdateBody = async function (inputData) {
+		(async function(noteObject) {
+
+			await WKCVersionsAction.WKCVersionsActionCreate(storageClient, {
+				WKCVersionNoteID: noteObject.WKCNoteID,
+				WKCVersionBody: noteObject.WKCNoteBody,
+				WKCVersionDate: noteObject.WKCNoteModificationDate,
+			});
+		})(Object.assign({}, moi.propertiesSelectedNote()));
+
 		await WKCNotesAction.WKCNotesActionUpdate(storageClient, Object.assign(moi.propertiesSelectedNote(), {
 			WKCNoteBody: inputData,
 		}));
