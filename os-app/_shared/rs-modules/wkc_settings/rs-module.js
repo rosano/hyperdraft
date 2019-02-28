@@ -22,8 +22,8 @@
 							return privateClient.getAll('');
 						},
 						writeObject: async function (param1, param2) {
-							await privateClient.storeObject('wkc_setting', param1, WKCSettingsModel.WKCSettingsModelPreJSONSchemaValidate(param2));
-							return WKCSettingsModel.WKCSettingsModelPostJSONParse(param2);
+							await privateClient.storeObject('wkc_setting', param1, param2);
+							return param2;
 						},
 						readObject: function (inputData) {
 							return privateClient.getObject(inputData);
