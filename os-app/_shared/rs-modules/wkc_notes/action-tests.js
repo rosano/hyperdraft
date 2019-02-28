@@ -23,6 +23,9 @@ const kTesting = {
 	},
 };
 
+beforeEach(async function() {
+	await Promise.all(Object.keys(await storageClient.wkc_notes.listObjects()).map(storageClient.wkc_notes.deleteObject));
+});
 describe('WKCNotesActionCreate', function testWKCNotesActionCreate() {
 
 	it('rejects if not object', async function() {
