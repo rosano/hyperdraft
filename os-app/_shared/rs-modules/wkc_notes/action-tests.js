@@ -48,12 +48,10 @@ describe('WKCNotesActionCreate', function testWKCNotesActionCreate() {
 	});
 
 	it('sets WKCNoteID to unique value', async function() {
-		let items = []
-
-		Array.from(Array(10)).forEach(async function (e) {
-			items.push((await mainModule.WKCNotesActionCreate(WKCTestingStorageClient, kTesting.StubNoteObject())).WKCNoteID);
-		});
-		assert.deepEqual((new Set(items)).values(), items);
+		let items = await kTesting.uSerial(Array.from(Array(10)).map(async function (e) {
+			return (await mainModule.WKCNotesActionCreate(WKCTestingStorageClient, kTesting.StubNoteObject())).WKCNoteID;
+		}));
+		assert.deepEqual([...(new Set(items))], items);
 	});
 
 	it('sets WKCNoteCreationDate to now', async function() {
