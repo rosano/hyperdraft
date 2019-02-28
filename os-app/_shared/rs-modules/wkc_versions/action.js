@@ -7,11 +7,6 @@
 	const WKCVersionsMetal = typeof require === 'undefined' ? window.WKCVersionsMetal : require('./metal.js');
 	const d3Package = typeof require === 'undefined' ? window.d3 : require('d3');
 
-	const uSleep = function (inputData) {
-		let endTime = new Date().getTime();
-		while (new Date().getTime() < endTime + inputData) {}
-	};
-
 	//_ WKCVersionsActionCreate
 
 	const ULIDPackage = typeof require === 'undefined' ? window.ULID : require('ulid');
@@ -20,8 +15,6 @@
 		if (typeof inputData !== 'object' || inputData === null) {
 			return Promise.reject(new Error('WKCErrorInputInvalid'));
 		}
-
-		uSleep(Math.random()); // #purge
 
 		return await WKCVersionsMetal.WKCVersionsMetalWrite(storageClient, Object.assign(inputData, {
 			WKCVersionID: ULIDPackage.ulid(),

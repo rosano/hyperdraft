@@ -12,6 +12,15 @@ const kTesting = {
 			WKCVersionBody: 'bravo',
 		};
 	},
+	uSerial: function (inputData) {
+		return inputData.reduce(async function (coll, e) {
+			return e.then(Array.prototype.concat.bind(await coll));
+		}, Promise.resolve([]));
+	},
+	uSleep: function (inputData) {
+		let endTime = new Date().getTime();
+		while (new Date().getTime() < endTime + inputData) {}
+	},
 };
 
 beforeEach(async function() {
@@ -70,7 +79,8 @@ describe('WKCVersionsActionQuery', function testWKCVersionsActionQuery() {
 	});
 
 	it('includes all WKCVersions if no query', async function() {
-		let items = await Promise.all(['alfa', 'bravo', 'charlie'].map(async function (e) {
+		let items = await kTesting.uSerial(['alfa', 'bravo', 'charlie'].map(async function (e) {
+			kTesting.uSleep(1);
 			return await mainModule.WKCVersionsActionCreate(storageClient, Object.assign(kTesting.StubVersionObject(), {
 				WKCVersionBody: e,
 			}));
