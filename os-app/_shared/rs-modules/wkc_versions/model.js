@@ -4,49 +4,49 @@
 	(factory((global.WKCVersionsModel = global.WKCVersionsModel || {})));
 }(this, (function (exports) { 'use strict';
 
-//_ WKCVersionsModelErrorsFor
+	//_ WKCVersionsModelErrorsFor
 
-exports.WKCVersionsModelErrorsFor = function(inputData) {
-	if (typeof inputData !== 'object' || inputData === null) {
-		throw new Error('WKCErrorInputInvalid');
-	}
+	exports.WKCVersionsModelErrorsFor = function(inputData) {
+		if (typeof inputData !== 'object' || inputData === null) {
+			throw new Error('WKCErrorInputInvalid');
+		}
 
-	var errors = {};
+		var errors = {};
 
-	if (typeof inputData.WKCVersionID !== 'string') {
-		errors.WKCVersionID = [
-			'WKCErrorNotString',
-		];
-	} else if (inputData.WKCVersionID.trim() === '') {
-		errors.WKCVersionID = [
-			'WKCErrorNotFilled',
-		];
-	}
+		if (typeof inputData.WKCVersionID !== 'string') {
+			errors.WKCVersionID = [
+				'WKCErrorNotString',
+			];
+		} else if (inputData.WKCVersionID.trim() === '') {
+			errors.WKCVersionID = [
+				'WKCErrorNotFilled',
+			];
+		}
 
-	if (typeof inputData.WKCVersionNoteID !== 'string') {
-		errors.WKCVersionNoteID = [
-			'WKCErrorNotString',
-		];
-	} else if (inputData.WKCVersionNoteID.trim() === '') {
-		errors.WKCVersionNoteID = [
-			'WKCErrorNotFilled',
-		];
-	}
+		if (typeof inputData.WKCVersionNoteID !== 'string') {
+			errors.WKCVersionNoteID = [
+				'WKCErrorNotString',
+			];
+		} else if (inputData.WKCVersionNoteID.trim() === '') {
+			errors.WKCVersionNoteID = [
+				'WKCErrorNotFilled',
+			];
+		}
 
-	if (typeof inputData.WKCVersionBody !== 'string') {
-		errors.WKCVersionBody = [
-			'WKCErrorNotString',
-		];
-	}
+		if (typeof inputData.WKCVersionBody !== 'string') {
+			errors.WKCVersionBody = [
+				'WKCErrorNotString',
+			];
+		}
 
-	if (!(inputData.WKCVersionDate instanceof Date) || Number.isNaN(inputData.WKCVersionDate.getTime())) {
-		errors.WKCVersionDate = [
-			'WKCErrorNotDate',
-		];
-	}
+		if (!(inputData.WKCVersionDate instanceof Date) || Number.isNaN(inputData.WKCVersionDate.getTime())) {
+			errors.WKCVersionDate = [
+				'WKCErrorNotDate',
+			];
+		}
 
-	return Object.entries(errors).length ? errors : null;
-};
+		return Object.entries(errors).length ? errors : null;
+	};
 
 	//_ WKCVersionsModelPreJSONSchemaValidate
 
