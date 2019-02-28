@@ -72,8 +72,8 @@ describe('WKCVersionsMetalList', function testWKCVersionsMetalList() {
 
 	it('returns existing WKCVersions', async function() {
 		let item = await mainModule.WKCVersionsMetalWrite(storageClient, kTesting.StubVersionObjectValid());
-			assert.deepEqual(Object.values(await mainModule.WKCVersionsMetalList(storageClient)), [item]);
-			assert.deepEqual(Object.keys(await mainModule.WKCVersionsMetalList(storageClient)), [item.WKCVersionID]);
+		assert.deepEqual(Object.values(await mainModule.WKCVersionsMetalList(storageClient)), [item]);
+		assert.deepEqual(Object.keys(await mainModule.WKCVersionsMetalList(storageClient)), [item.WKCVersionID]);
 	});
 
 });

@@ -72,8 +72,8 @@ describe('WKCNotesMetalList', function testWKCNotesMetalList() {
 
 	it('returns existing WKCNotes', async function() {
 		let item = await mainModule.WKCNotesMetalWrite(storageClient, kTesting.StubNoteObjectValid());
-			assert.deepEqual(Object.values(await mainModule.WKCNotesMetalList(storageClient)), [item]);
-			assert.deepEqual(Object.keys(await mainModule.WKCNotesMetalList(storageClient)), [item.WKCNoteID]);
+		assert.deepEqual(Object.values(await mainModule.WKCNotesMetalList(storageClient)), [item]);
+		assert.deepEqual(Object.keys(await mainModule.WKCNotesMetalList(storageClient)), [item.WKCNoteID]);
 	});
 
 });
@@ -91,9 +91,7 @@ describe('WKCNotesMetalDelete', function testWKCNotesMetalDelete() {
 	});
 
 	it('deletes WKCNote', async function() {
-		await mainModule.WKCNotesMetalDelete(storageClient, (await mainModule.WKCNotesMetalWrite(storageClient, kTesting.StubNoteObjectValid())).WKCNoteID), {
-					statusCode: 200,
-				}
+		await mainModule.WKCNotesMetalDelete(storageClient, (await mainModule.WKCNotesMetalWrite(storageClient, kTesting.StubNoteObjectValid())).WKCNoteID);
 		assert.deepEqual(await mainModule.WKCNotesMetalList(storageClient), {});
 	});
 
