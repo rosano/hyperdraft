@@ -393,7 +393,7 @@
 	//_ _goNotesDeleteWithoutConfirmation
 
 	moi._goNotesDeleteWithoutConfirmation = async function (inputData) {
-		await WKCNotesMetal.WKCNotesMetalDelete(storageClient, inputData.WKCNoteID);
+		await WKCNotesAction.WKCNotesActionDelete(storageClient, inputData.WKCNoteID);
 
 		moi.propertiesNoteObjects(moi.propertiesNoteObjects().filter(function(e) {
 			return e !== inputData;
@@ -583,6 +583,7 @@
 
 	let setupStorageClient = function () {
 		storageClient = WKCStorageClient.WKCStorageClientForChangeDelegateMap({
+			wkc_versions: null,
 			wkc_notes: {
 				OLSKChangeDelegateAdd: function (inputData) {
 					// console.log('OLSKChangeDelegateAdd', inputData);
