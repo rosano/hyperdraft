@@ -66,7 +66,11 @@
 			}
 
 			if (Object.keys(inputData).filter(function (key) {
-				return e[key].match(inputData[key]);
+				if (typeof e[key] === 'string') {
+					return e[key].match(inputData[key]);
+				}
+
+				return e[key] === inputData[key];
 			}).length) {
 				return true;
 			}

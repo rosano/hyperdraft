@@ -130,7 +130,7 @@ describe('WKCNotesActionQuery', function testWKCNotesActionQuery() {
 		assert.deepEqual(await mainModule.WKCNotesActionQuery(WKCTestingStorageClient, {}), items.reverse());
 	});
 
-	it('filters by WKCNoteID', async function() {
+	it('filters string', async function() {
 		let items = await kTesting.uSerial(['alfa', 'bravo', 'charlie'].map(async function (e) {
 			return await mainModule.WKCNotesActionCreate(WKCTestingStorageClient, Object.assign(kTesting.StubNoteObject(), {
 				WKCNoteID: e,
@@ -140,6 +140,18 @@ describe('WKCNotesActionQuery', function testWKCNotesActionQuery() {
 		assert.deepEqual(await mainModule.WKCNotesActionQuery(WKCTestingStorageClient, {
 			WKCNoteID: items.slice(-1).pop().WKCNoteID,
 		}), items.slice(-1));
+	});
+
+	it('filters boolean', async function() {
+		let items = await kTesting.uSerial(Array.from(Array(3)).map(async function (e, index) {
+			return await mainModule.WKCNotesActionCreate(WKCTestingStorageClient, Object.assign(kTesting.StubNoteObject(), {
+				WKCNotePublishStatusIsPublished: !!index,
+			}));
+		}));
+
+		assert.deepEqual(await mainModule.WKCNotesActionQuery(WKCTestingStorageClient, {
+			WKCNotePublishStatusIsPublished: false,
+		}), items.slice(0, 1));
 	});
 
 });
