@@ -90,4 +90,11 @@ describe('WKCNotesMetalDelete', function testWKCNotesMetalDelete() {
 		});
 	});
 
+	it('deletes WKCNote', async function() {
+		await mainModule.WKCNotesMetalDelete(storageClient, (await mainModule.WKCNotesMetalWrite(storageClient, kTesting.StubNoteObjectValid())).WKCNoteID), {
+					statusCode: 200,
+				}
+		assert.deepEqual(await mainModule.WKCNotesMetalList(storageClient), {});
+	});
+
 });

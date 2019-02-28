@@ -90,4 +90,9 @@ describe('WKCVersionsMetalDelete', function testWKCVersionsMetalDelete() {
 		});
 	});
 
+	it('deletes WKCVersion', async function() {
+		await mainModule.WKCVersionsMetalDelete(storageClient, (await mainModule.WKCVersionsMetalWrite(storageClient, kTesting.StubVersionObjectValid())).WKCVersionID)
+		assert.deepEqual(await mainModule.WKCVersionsMetalList(storageClient), {});
+	});
+
 });
