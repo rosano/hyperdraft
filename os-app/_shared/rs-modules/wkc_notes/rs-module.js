@@ -11,7 +11,7 @@
 		return {
 			name: 'wkc_notes',
 			builder: function(privateClient, publicClient) {
-				privateClient.declareType('wkc_note', RSModuleShared.RSModulesSharedJSONSchemaForErrors(WKCNotesModel.WKCNotesModelErrorsFor({})));
+				privateClient.declareType('wkc_note', RSModuleShared.RSModuleSharedJSONSchemaForErrors(WKCNotesModel.WKCNotesModelErrorsFor({})));
 
 				!changeDelegate ? null : privateClient.on('change', function (event) {
 					if (typeof event.oldValue === 'undefined') {

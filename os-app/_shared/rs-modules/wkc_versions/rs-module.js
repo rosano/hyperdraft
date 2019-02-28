@@ -11,7 +11,7 @@
 		return {
 			name: 'wkc_versions',
 			builder: function(privateClient, publicClient) {
-				privateClient.declareType('wkc_version', RSModuleShared.RSModulesSharedJSONSchemaForErrors(WKCVersionsModel.WKCVersionsModelErrorsFor({})));
+				privateClient.declareType('wkc_version', RSModuleShared.RSModuleSharedJSONSchemaForErrors(WKCVersionsModel.WKCVersionsModelErrorsFor({})));
 
 				return {
 					exports: {

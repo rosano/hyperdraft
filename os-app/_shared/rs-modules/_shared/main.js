@@ -1,6 +1,12 @@
-//_ RSModulesSharedJSONSchemaForErrors
+(function (global, factory) {
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
+	typeof define === 'function' && define.amd ? define(['exports'], factory) :
+	(factory((global.RSModuleShared = global.RSModuleShared || {})));
+}(this, (function (exports) { 'use strict';	
 
-exports.RSModulesSharedJSONSchemaForErrors = function(inputData) {
+//_ RSModuleSharedJSONSchemaForErrors
+
+exports.RSModuleSharedJSONSchemaForErrors = function(inputData) {
 	if (typeof inputData !== 'object' || inputData === null) {
 		throw new Error('WKCErrorInputInvalid');
 	}
@@ -26,3 +32,7 @@ exports.RSModulesSharedJSONSchemaForErrors = function(inputData) {
 		}),
 	};
 };
+
+	Object.defineProperty(exports, '__esModule', { value: true });
+
+})));

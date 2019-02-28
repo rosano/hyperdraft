@@ -2,16 +2,16 @@ const assert = require('assert');
 
 const mainModule = require('./main.js');
 
-describe('RSModulesSharedJSONSchemaForErrors', function RSModulesSharedJSONSchemaForErrors() {
+describe('RSModuleSharedJSONSchemaForErrors', function RSModuleSharedJSONSchemaForErrors() {
 
 	it('throws error if not object', function() {
 		assert.throws(function() {
-			mainModule.RSModulesSharedJSONSchemaForErrors(null);
+			mainModule.RSModuleSharedJSONSchemaForErrors(null);
 		}, /WKCErrorInputInvalid/);
 	});
 
 	it('returns object', function() {
-		assert.deepEqual(mainModule.RSModulesSharedJSONSchemaForErrors({}), {
+		assert.deepEqual(mainModule.RSModuleSharedJSONSchemaForErrors({}), {
 			type: 'object',
 			properties: {},
 			required: [],
@@ -21,7 +21,7 @@ describe('RSModulesSharedJSONSchemaForErrors', function RSModulesSharedJSONSchem
 	context('properties', function() {
 		
 		it('declares string', function() {
-			assert.deepEqual(mainModule.RSModulesSharedJSONSchemaForErrors({
+			assert.deepEqual(mainModule.RSModuleSharedJSONSchemaForErrors({
 				alfa: ['WKCErrorNotString']
 			}), {
 				type: 'object',
@@ -37,7 +37,7 @@ describe('RSModulesSharedJSONSchemaForErrors', function RSModulesSharedJSONSchem
 		});
 		
 		it('declares boolean', function() {
-			assert.deepEqual(mainModule.RSModulesSharedJSONSchemaForErrors({
+			assert.deepEqual(mainModule.RSModuleSharedJSONSchemaForErrors({
 				alfa: ['WKCErrorNotBoolean']
 			}), {
 				type: 'object',
@@ -53,7 +53,7 @@ describe('RSModulesSharedJSONSchemaForErrors', function RSModulesSharedJSONSchem
 		});
 		
 		it('declares date', function() {
-			assert.deepEqual(mainModule.RSModulesSharedJSONSchemaForErrors({
+			assert.deepEqual(mainModule.RSModuleSharedJSONSchemaForErrors({
 				alfa: ['WKCErrorNotDate']
 			}), {
 				type: 'object',
@@ -70,7 +70,7 @@ describe('RSModulesSharedJSONSchemaForErrors', function RSModulesSharedJSONSchem
 		});
 		
 		it('declares filled', function() {
-			assert.deepEqual(mainModule.RSModulesSharedJSONSchemaForErrors({
+			assert.deepEqual(mainModule.RSModuleSharedJSONSchemaForErrors({
 				alfa: ['WKCErrorNotFilled']
 			}), {
 				type: 'object',
@@ -90,7 +90,7 @@ describe('RSModulesSharedJSONSchemaForErrors', function RSModulesSharedJSONSchem
 	context('required', function() {
 		
 		it('declares if required', function() {
-			assert.deepEqual(mainModule.RSModulesSharedJSONSchemaForErrors({
+			assert.deepEqual(mainModule.RSModuleSharedJSONSchemaForErrors({
 				alfa: ['WKCErrorNotString']
 			}), {
 				type: 'object',
@@ -106,7 +106,7 @@ describe('RSModulesSharedJSONSchemaForErrors', function RSModulesSharedJSONSchem
 		});
 
 		it('ignores', function() {
-			assert.deepEqual(mainModule.RSModulesSharedJSONSchemaForErrors({
+			assert.deepEqual(mainModule.RSModuleSharedJSONSchemaForErrors({
 				alfa: ['WKCErrorNotString', '__RSOptional']
 			}), {
 				type: 'object',
