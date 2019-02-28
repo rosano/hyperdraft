@@ -12,6 +12,7 @@
 	let WCKWriteBehaviourPropertyCurrentFilter;
 	let WCKWriteBehaviourPropertySelectedNote;
 	let WCKWriteBehaviourPropertyEditor;
+	let WCKWriteBehaviourPropertyNotesThrottleMap = {};
 
 	//# CONSTANTS
 
@@ -212,6 +213,16 @@
 
 	moi.commandsSelectedNoteUpdateBody = async function (inputData) {
 		(async function(noteObject) {
+			if (WCKWriteBehaviourPropertyNotesThrottleMap[noteObject.WKCNoteID]) {
+				return OLSKThrottle.OLSKThrottleTimeoutFor(WCKWriteBehaviourPropertyNotesThrottleMap[noteObject.WKCNoteID]);
+			}
+
+			WCKWriteBehaviourPropertyNotesThrottleMap[noteObject.WKCNoteID] = {
+				OLSKThrottleDuration: 3000,
+				OLSKThrottleCallback: function () {
+					delete WCKWriteBehaviourPropertyNotesThrottleMap[noteObject.WKCNoteID]
+				},
+			};
 
 			if (!noteObject.WKCNoteCreationDate) {
 				return;
@@ -227,17 +238,6 @@
 		await WKCNotesAction.WKCNotesActionUpdate(storageClient, Object.assign(moi.propertiesSelectedNote(), {
 			WKCNoteBody: inputData,
 		}));
-
-		// if (!item._WKCWriteThrottleObject) {
-		// 	item._WKCWriteThrottleObject = {
-		// 		OLSKThrottleDuration: 3000,
-		// 		OLSKThrottleCallback: function () {
-		// 			moi.commandsPersistNote(item);
-		// 		},
-		// 	};
-		// }
-
-		// OLSKThrottle.OLSKThrottleTimeoutFor(item._WKCWriteThrottleObject);
 
 		moi.reactNoteObjects(moi.dataNoteObjectsFiltered());
 	};
