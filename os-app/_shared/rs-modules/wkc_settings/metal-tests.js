@@ -87,29 +87,3 @@ describe('WKCSettingsMetalDelete', function testWKCSettingsMetalDelete() {
 	});
 
 });
-
-describe.skip('WKCSettingsMetalProperty', function testWKCSettingsMetalProperty() {
-
-	it('rejects if param1 not string', async function() {
-		await assert.rejects(mainModule.WKCSettingsMetalProperty(WKCTestingStorageClient, null));
-	});
-
-	it('returns undefined if param1 not found', async function() {
-		assert.deepEqual(await mainModule.WKCSettingsMetalProperty(WKCTestingStorageClient, 'alfa'), undefined);
-	});
-
-	context('param2', function () {
-
-		it('returns value if undefined', async function() {
-			await mainModule.WKCSettingsMetalProperty(WKCTestingStorageClient, 'alfa', 'bravo');
-
-			assert.deepEqual(await mainModule.WKCSettingsMetalProperty(WKCTestingStorageClient, 'alfa'), 'bravo');
-		});
-
-		it('returns true and sets value', async function() {
-			assert.deepEqual(await mainModule.WKCSettingsMetalProperty(WKCTestingStorageClient, 'alfa', 'bravo'), true);
-		});
-		
-	});
-
-});
