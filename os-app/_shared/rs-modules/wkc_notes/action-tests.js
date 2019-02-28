@@ -245,6 +245,28 @@ describe('WKCNotesActionPublish', function testWKCNotesActionPublish() {
 
 });
 
+describe('WKCNotesActionPublicRead', function testWKCNotesActionPublicRead() {
+
+	it('rejects if not string', async function() {
+		await assert.rejects(mainModule.WKCNotesActionPublicRead(WKCTestingStorageClient, 1), /WKCErrorInputInvalid/);
+	});
+
+	it('returns WKCErrorNotFound if not found', async function() {
+		assert.deepEqual(await mainModule.WKCNotesActionPublicRead(WKCTestingStorageClient, 'alfa'), new Error('WKCErrorNotFound'))
+	});
+
+	it('returns WKCErrorNotFound if WKCNotePublishStatusIsPublished false', async function() {
+		assert.deepEqual(await mainModule.WKCNotesActionPublicRead(WKCTestingStorageClient, (await mainModule.WKCNotesActionUnpublish(WKCTestingStorageClient, (await mainModule.WKCNotesActionPublish(WKCTestingStorageClient, (await mainModule.WKCNotesActionCreate(WKCTestingStorageClient, kTesting.StubNoteObject())))))).WKCNotePublicID), new Error('WKCErrorNotFound'));
+	});
+
+	it('returns WKCNote', async function() {
+		let item = await mainModule.WKCNotesActionPublish(WKCTestingStorageClient, (await mainModule.WKCNotesActionCreate(WKCTestingStorageClient, kTesting.StubNoteObject())));
+
+		assert.deepEqual(await mainModule.WKCNotesActionPublicRead(WKCTestingStorageClient, item.WKCNotePublicID), item);
+	});
+
+});
+
 describe('WKCNotesActionUnpublish', function testWKCNotesActionUnpublish() {
 
 	it('rejects if not object', async function() {

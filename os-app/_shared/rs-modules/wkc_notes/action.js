@@ -65,17 +65,15 @@
 				return true;
 			}
 
-			if (Object.keys(inputData).filter(function (key) {
-				if (typeof e[key] === 'string') {
-					return e[key].match(inputData[key]);
-				}
-
-				return e[key] === inputData[key];
+			if (Object.entries(inputData).map(function ([key, value]) {
+				return value === e[key];
+			}).filter(function (e) {
+				return !e;
 			}).length) {
-				return true;
+				return false;
 			}
 
-			return false;
+			return true;
 		}));
 	};
 
@@ -95,6 +93,19 @@
 		return await exports.WKCNotesActionUpdate(storageClient, Object.assign(inputData, {
 			WKCNotePublishStatusIsPublished: true,
 		}));
+	};
+
+	//_ WKCNotesActionPublicRead
+
+	exports.WKCNotesActionPublicRead = async function(storageClient, inputData) {
+		if (typeof inputData !== 'string') {
+			return Promise.reject(new Error('WKCErrorInputInvalid'));
+		}
+
+		return (await exports.WKCNotesActionQuery(storageClient, {
+			WKCNotePublishStatusIsPublished: true,
+			WKCNotePublicID: inputData,
+		})).pop() || new Error('WKCErrorNotFound');
 	};
 
 	//_ WKCNotesActionUnpublish
