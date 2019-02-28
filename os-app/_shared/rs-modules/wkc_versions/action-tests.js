@@ -101,3 +101,17 @@ describe('WKCVersionsActionQuery', function testWKCVersionsActionQuery() {
 	});
 
 });
+
+describe('WKCVersionsActionDelete', function testWKCVersionsActionDelete() {
+
+	it('rejects if not string', async function() {
+		await assert.rejects(mainModule.WKCVersionsActionDelete(storageClient, 1), /WKCErrorInputInvalid/);
+	});
+
+	it('returns statusCode', async function() {
+		assert.deepEqual(await mainModule.WKCVersionsActionDelete(storageClient, (await mainModule.WKCVersionsActionCreate(storageClient, kTesting.StubVersionObject())).WKCVersionID), {
+			statusCode: 200,
+		});
+	});
+
+});

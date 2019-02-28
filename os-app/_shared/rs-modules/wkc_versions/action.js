@@ -5,7 +5,6 @@
 }(this, (function (exports) { 'use strict';	
 
 	const WKCVersionsMetal = typeof require === 'undefined' ? window.WKCVersionsMetal : require('./metal.js');
-	const d3Package = typeof require === 'undefined' ? window.d3 : require('d3');
 
 	//_ WKCVersionsActionCreate
 
@@ -21,7 +20,15 @@
 		}));
 	};
 
+	//_ WKCVersionsActionDelete
+
+	exports.WKCVersionsActionDelete = async function(storageClient, inputData) {
+		return await WKCVersionsMetal.WKCVersionsMetalDelete(storageClient, inputData);
+	};
+
 	//_ WKCVersionsActionQuery
+	
+	const d3Package = typeof require === 'undefined' ? window.d3 : require('d3');
 
 	exports.WKCVersionsActionQuery = async function(storageClient, inputData) {
 		if (typeof inputData !== 'object' || inputData === null) {
