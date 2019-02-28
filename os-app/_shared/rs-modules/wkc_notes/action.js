@@ -6,6 +6,7 @@
 
 	const WKCNotesMetal = typeof require === 'undefined' ? window.WKCNotesMetal : require('./metal.js');
 	const WKCVersionsAction = typeof require === 'undefined' ? window.WKCVersionsAction : require('../wkc_versions/action.js');
+	const WKCSettingsAction = typeof require === 'undefined' ? window.WKCSettingsAction : require('../wkc_settings/action.js');
 
 	//_ WKCNotesActionCreate
 
@@ -71,6 +72,24 @@
 			}
 
 			return false;
+		}));
+	};
+
+	//_ WKCNotesActionPublish
+
+	exports.WKCNotesActionPublish = async function(storageClient, inputData) {
+		if (typeof inputData !== 'object' || inputData === null) {
+			return Promise.reject(new Error('WKCErrorInputInvalid'));
+		}
+
+		if (!inputData.WKCNotePublicID) {
+			inputData.WKCNotePublicID = (parseInt((await WKCSettingsAction.WKCSettingsActionProperty(storageClient, 'WKCSettingsLastRepoID')) || 0) + 1).toString();
+
+			await WKCSettingsAction.WKCSettingsActionProperty(storageClient, 'WKCSettingsLastRepoID', inputData.WKCNotePublicID);
+		}
+
+		return await exports.WKCNotesActionUpdate(storageClient, Object.assign(inputData, {
+			WKCNotePublishStatusIsPublished: true,
 		}));
 	};
 
