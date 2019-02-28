@@ -4,6 +4,7 @@ const mainModule = require('./action.js');
 const WKCVersionsAction = require('../wkc_versions/action.js');
 const storageClient = require('../../WKCStorageClient/storage.js').WKCStorageClientForChangeDelegateMap({
 	wkc_notes: null,
+	wkc_versions: null,
 });
 
 const kTesting = {
@@ -25,6 +26,7 @@ const kTesting = {
 
 beforeEach(async function() {
 	await Promise.all(Object.keys(await storageClient.wkc_notes.listObjects()).map(storageClient.wkc_notes.deleteObject));
+	// await Promise.all(Object.keys(await storageClient.wkc_versions.listObjects()).map(storageClient.wkc_versions.deleteObject));
 });
 describe('WKCNotesActionCreate', function testWKCNotesActionCreate() {
 
@@ -152,3 +154,30 @@ describe('WKCNotesActionQuery', function testWKCNotesActionQuery() {
 
 });
 
+describe('WKCNotesActionDelete', function testWKCNotesActionDelete() {
+
+	it('rejects if not string', async function() {
+		await assert.rejects(mainModule.WKCNotesActionDelete(storageClient, null), /WKCErrorInputInvalid/);
+	});
+
+	it('returns statusCode', async function() {
+		assert.deepEqual(await mainModule.WKCNotesActionDelete(storageClient, (await mainModule.WKCNotesActionCreate(storageClient, kTesting.StubNoteObject())).WKCNoteID), {
+			statusCode: 200,
+		});
+	});
+
+	it('deletes WKCNote', async function() {
+		await mainModule.WKCNotesActionDelete(storageClient, (await mainModule.WKCNotesActionCreate(storageClient, kTesting.StubNoteObject())).WKCNoteID);
+		assert.deepEqual(await mainModule.WKCNotesActionQuery(storageClient, {}), []);
+	});
+
+	it('deletes corresponding versionObjects', async function() {
+		await mainModule.WKCNotesActionDelete(storageClient, (await WKCVersionsAction.WKCVersionsActionCreate(storageClient, {
+			WKCVersionBody: 'charlie',
+			WKCVersionNoteID: (await mainModule.WKCNotesActionCreate(storageClient, kTesting.StubNoteObject())).WKCNoteID,
+			WKCVersionDate: new Date(),
+		})).WKCVersionNoteID);
+		assert.deepEqual(await WKCVersionsAction.WKCVersionsActionQuery(storageClient, {}), []);
+	});
+
+});

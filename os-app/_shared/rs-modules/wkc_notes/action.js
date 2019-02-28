@@ -5,6 +5,7 @@
 }(this, (function (exports) { 'use strict';	
 
 	const WKCNotesMetal = typeof require === 'undefined' ? window.WKCNotesMetal : require('./metal.js');
+	const WKCVersionsAction = typeof require === 'undefined' ? window.WKCVersionsAction : require('../wkc_versions/action.js');
 
 	//_ WKCNotesActionCreate
 
@@ -36,8 +37,19 @@
 		}));
 	};
 
+	//_ WKCNotesActionDelete
+
+	exports.WKCNotesActionDelete = async function(storageClient, inputData) {
+		await Promise.all((await WKCVersionsAction.WKCVersionsActionQuery(storageClient, {
+			WKCVersionNoteID: inputData,
+		})).map(function (e) {
+			return WKCVersionsAction.WKCVersionsActionDelete(storageClient, e.WKCVersionID)
+		}));
+		return await WKCNotesMetal.WKCNotesMetalDelete(storageClient, inputData);
+	};
+
 	//_ WKCNotesActionQuery
-	
+
 	const d3Package = typeof require === 'undefined' ? window.d3 : require('d3');
 
 	exports.WKCNotesActionQuery = async function(storageClient, inputData) {
