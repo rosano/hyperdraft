@@ -53,10 +53,10 @@ locals.OLSKPagePublicRouteKeys = [
 <div id="WKCWrite" class="WKCWriteLoading">
 	<div id="WKCWriteMaster" class="WKC_ContextMobileView WKC_ContextMobileViewActive">
 		<header id="WKCWriteMasterToolbar" class="WKCSharedToolbar">
-			<input id="WKCWriteMasterToolbarFilterInput" placeholder="<%= OLSKLocalized('WKCWriteMasterToolbarFilterInputPlaceholderText') %>" oninput="WIKWriteBehaviour.interfaceNotesMasterToolbarFilterInputDidInput()" accesskey="f">
+			<input id="WKCWriteMasterToolbarFilterInput" placeholder="<%= OLSKLocalized('WKCWriteMasterToolbarFilterInputPlaceholderText') %>" oninput="WKCWriteBehaviour.interfaceNotesMasterToolbarFilterInputDidInput()" accesskey="f">
 
 			<div class="WKCSharedToolbarElementGroup">
-				<button id="WKCWriteMasterToolbarCreateButton" class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" title="<%= OLSKLocalized('WKCWriteMasterToolbarCreateButtonText') %>" style="background-image: url('/panel/_shared/ui-assets/wIKSharedCreate.svg')" accesskey="n" onclick="WIKWriteBehaviour.interfaceNotesMasterToolbarCreateButtonDidClick()"></button>
+				<button id="WKCWriteMasterToolbarCreateButton" class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" title="<%= OLSKLocalized('WKCWriteMasterToolbarCreateButtonText') %>" style="background-image: url('/panel/_shared/ui-assets/wIKSharedCreate.svg')" accesskey="n" onclick="WKCWriteBehaviour.interfaceNotesMasterToolbarCreateButtonDidClick()"></button>
 			</div>
 		</header>
 
@@ -71,18 +71,18 @@ locals.OLSKPagePublicRouteKeys = [
 	<div id="WKCWriteDetail" class="WKCWriteDetailInactive WKC_ContextMobileView WKC_ContextMobileViewInactive">
 		<header id="WKCWriteDetailToolbar" class="WKCSharedToolbar">
 			<div class="WKCSharedToolbarElementGroup">
-				<button id="WKCWriteDetailToolbarBackButton" class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle WKC_ContextMobileExclusive" title="<%= OLSKLocalized('WKCWriteDetailToolbarBackButtonText') %>" style="background-image: url('/panel/_shared/ui-assets/wIKWriteBack.svg')" onclick="WIKWriteBehaviour.interfaceBackButtonDidClick()"></button>
+				<button id="WKCWriteDetailToolbarBackButton" class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle WKC_ContextMobileExclusive" title="<%= OLSKLocalized('WKCWriteDetailToolbarBackButtonText') %>" style="background-image: url('/panel/_shared/ui-assets/wIKWriteBack.svg')" onclick="WKCWriteBehaviour.interfaceBackButtonDidClick()"></button>
 			</div>
 			<div class="WKCSharedToolbarElementGroup">
 				<span id="WKCWriteDetailToolbarPublishStatus"></span>
 
 				<a id="WKCWriteDetailToolbarVisitButton" class="WKCSharedToolbarButton WKCSharedElementTappable" title="<%= OLSKLocalized('WKCWriteDetailToolbarVisitButtonText') %>" style="background-image: url('/panel/_shared/ui-assets/wIKWriteVisit.svg')" target="_blank"></a>
 
-				<button id="WKCWriteDetailToolbarUnpublishButton" class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" title="<%= OLSKLocalized('WKCWriteDetailToolbarUnpublishButtonText') %>" style="background-image: url('/panel/_shared/ui-assets/wIKWriteUnpublish.svg')" onclick="WIKWriteBehaviour.interfaceUnpublishButtonDidClick()" disabled></button>
+				<button id="WKCWriteDetailToolbarUnpublishButton" class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" title="<%= OLSKLocalized('WKCWriteDetailToolbarUnpublishButtonText') %>" style="background-image: url('/panel/_shared/ui-assets/wIKWriteUnpublish.svg')" onclick="WKCWriteBehaviour.interfaceUnpublishButtonDidClick()" disabled></button>
 
-				<button id="WKCWriteDetailToolbarPublishButton" class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" title="<%= OLSKLocalized('WKCWriteDetailToolbarPublishButtonText') %>" style="background-image: url('/panel/_shared/ui-assets/wIKWritePublish.svg')" onclick="WIKWriteBehaviour.interfacePublishButtonDidClick()" disabled></button>
+				<button id="WKCWriteDetailToolbarPublishButton" class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" title="<%= OLSKLocalized('WKCWriteDetailToolbarPublishButtonText') %>" style="background-image: url('/panel/_shared/ui-assets/wIKWritePublish.svg')" onclick="WKCWriteBehaviour.interfacePublishButtonDidClick()" disabled></button>
 
-				<button id="WKCWriteDetailToolbarDiscardButton" class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" title="<%= OLSKLocalized('WKCWriteDetailToolbarDiscardButtonText') %>" style="background-image: url('/panel/_shared/ui-assets/wIKWriteDiscard.svg')" onclick="WIKWriteBehaviour.interfaceDeleteButtonDidClick()"></button>
+				<button id="WKCWriteDetailToolbarDiscardButton" class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" title="<%= OLSKLocalized('WKCWriteDetailToolbarDiscardButtonText') %>" style="background-image: url('/panel/_shared/ui-assets/wIKWriteDiscard.svg')" onclick="WKCWriteBehaviour.interfaceDeleteButtonDidClick()"></button>
 			</div>
 		</header>
 
@@ -97,7 +97,7 @@ locals.OLSKPagePublicRouteKeys = [
 <div id="WKCStorageWidget"></div>
 
 <script type="text/javascript">
-	WIKWriteBehaviour.lifecyclePageWillLoad();
+	WKCWriteBehaviour.lifecyclePageWillLoad();
 </script>
 
 <%- include('../../_shared/common/layout-footer.ejs') %>
