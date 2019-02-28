@@ -89,4 +89,17 @@ describe('WKCNotesActionUpdate', function testWKCNotesActionUpdate() {
 		assert.strictEqual(new Date() - (await mainModule.WKCNotesActionUpdate(storageClient, await mainModule.WKCNotesActionCreate(storageClient, kTesting.StubNoteObject()))).WKCNoteModificationDate < 100, true);
 	});
 
+	it('writes inputData if not found', async function() {
+		let item = await mainModule.WKCNotesActionUpdate(storageClient, Object.assign(kTesting.StubNoteObject(), {
+			WKCNoteID: 'alfa',
+			WKCNoteCreationDate: new Date(),
+		}));
+		assert.deepEqual(item, Object.assign(kTesting.StubNoteObject(), {
+			WKCNoteID: item.WKCNoteID,
+			WKCNoteCreationDate: item.WKCNoteCreationDate,
+			WKCNoteModificationDate: item.WKCNoteModificationDate,
+			'@context': item['@context'],
+		}));
+	});
+
 });
