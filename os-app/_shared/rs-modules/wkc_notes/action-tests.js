@@ -294,8 +294,43 @@ describe('WKCNotesActionUnpublish', function testWKCNotesActionUnpublish() {
 
 	it('sets WKCNotePublishStatusIsPublished to false', async function() {
 		assert.strictEqual((await mainModule.WKCNotesActionUnpublish(WKCTestingStorageClient, await mainModule.WKCNotesActionPublish(WKCTestingStorageClient, await mainModule.WKCNotesActionCreate(WKCTestingStorageClient, kTesting.StubNoteObject())))).WKCNotePublishStatusIsPublished, false);
+	});	
+
+});
+
+describe('WKCNotesActionGetPublicLinks', function testWKCNotesActionGetPublicLinks() {
+
+	it('returns hash', async function() {
+		assert.deepEqual(await mainModule.WKCNotesActionGetPublicLinks(WKCTestingStorageClient), {})
 	});
 
-	
+	it('excludes if WKCNotePublishStatusIsPublished false', async function() {
+		await mainModule.WKCNotesActionCreate(WKCTestingStorageClient, kTesting.StubNoteObject());
+		assert.deepEqual(await mainModule.WKCNotesActionGetPublicLinks(WKCTestingStorageClient), {})
+	});
+
+	it('includes if WKCNotePublishStatusIsPublished true', async function() {
+		let item = await mainModule.WKCNotesActionPublish(WKCTestingStorageClient, (await mainModule.WKCNotesActionCreate(WKCTestingStorageClient, kTesting.StubNoteObject())));
+
+		assert.deepEqual(await mainModule.WKCNotesActionGetPublicLinks(WKCTestingStorageClient), [[item.WKCNoteBody, item.WKCNotePublicID]].reduce(function (coll, e) {
+			coll[e[0]] = e[1];
+
+			return coll;
+		}, {}));
+	});
+
+	it('selects last updated note if duplicate title', async function() {
+		await mainModule.WKCNotesActionPublish(WKCTestingStorageClient, (await mainModule.WKCNotesActionCreate(WKCTestingStorageClient, Object.assign(kTesting.StubNoteObject(), {
+			WKCNoteBody: `heading\nalfa`,
+		}))));
+		kTesting.uSleep(1);
+		await mainModule.WKCNotesActionPublish(WKCTestingStorageClient, (await mainModule.WKCNotesActionCreate(WKCTestingStorageClient, Object.assign(kTesting.StubNoteObject(), {
+			WKCNoteBody: `heading\nbravo`,
+		}))));
+
+		assert.deepEqual(await mainModule.WKCNotesActionGetPublicLinks(WKCTestingStorageClient), {
+			heading: '2',
+		});
+	});
 
 });

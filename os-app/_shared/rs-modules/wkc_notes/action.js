@@ -4,9 +4,11 @@
 	(factory((global.WKCNotesAction = global.WKCNotesAction || {})));
 }(this, (function (exports) { 'use strict';	
 
+	const WKCNotesModel = typeof require === 'undefined' ? window.WKCNotesModel : require('./model.js');
 	const WKCNotesMetal = typeof require === 'undefined' ? window.WKCNotesMetal : require('./metal.js');
 	const WKCVersionsAction = typeof require === 'undefined' ? window.WKCVersionsAction : require('../wkc_versions/action.js');
 	const WKCSettingsAction = typeof require === 'undefined' ? window.WKCSettingsAction : require('../wkc_settings/action.js');
+	const WKCParser = typeof require === 'undefined' ? window.WKCParser : require('../../WKCParser/main.js');
 
 	//_ WKCNotesActionCreate
 
@@ -59,7 +61,7 @@
 		}
 
 		return Promise.resolve(Object.values(await WKCNotesMetal.WKCNotesMetalList(storageClient)).sort(function (a, b) {
-			return d3Package.descending(a.WKCNoteID, b.WKCNoteID)
+			return d3Package.descending(a.WKCNoteModificationDate, b.WKCNoteModificationDate)
 		}).filter(function(e) {
 			if (!Object.keys(inputData).length) {
 				return true;
@@ -118,6 +120,22 @@
 		return await exports.WKCNotesActionUpdate(storageClient, Object.assign(inputData, {
 			WKCNotePublishStatusIsPublished: false,
 		}));
+	};
+
+	//_ WKCNotesActionGetPublicLinks
+
+	exports.WKCNotesActionGetPublicLinks = async function(storageClient) {
+		return Promise.resolve((await exports.WKCNotesActionQuery(storageClient, {
+			WKCNotePublishStatusIsPublished: true,
+		})).map(WKCNotesModel.WKCNotesModelPostJSONParse).map(function (e) {
+			return [WKCParser.WKCParserTitleForPlaintext(e.WKCNoteBody), e.WKCNotePublicID];
+		}).reduce(function (coll, [key, val]) {
+			if (typeof coll[key] === 'undefined') {
+				coll[key] = val;
+			}
+
+			return coll;
+		}, {}));
 	};
 
 	Object.defineProperty(exports, '__esModule', { value: true });
