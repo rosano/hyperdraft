@@ -107,4 +107,9 @@ describe('WKCVersionsActionDelete', function testWKCVersionsActionDelete() {
 		});
 	});
 
+	it('deletes WKCVersion', async function() {
+		await mainModule.WKCVersionsActionDelete(WKCTestingStorageClient, (await mainModule.WKCVersionsActionCreate(WKCTestingStorageClient, kTesting.StubVersionObject())).WKCVersionID)
+		assert.deepEqual(await mainModule.WKCVersionsActionQuery(WKCTestingStorageClient, {}), {});
+	});
+
 });
