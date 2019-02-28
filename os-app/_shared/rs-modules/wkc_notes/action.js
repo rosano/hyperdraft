@@ -93,6 +93,18 @@
 		}));
 	};
 
+	//_ WKCNotesActionUnpublish
+
+	exports.WKCNotesActionUnpublish = async function(storageClient, inputData) {
+		if (typeof inputData !== 'object' || inputData === null) {
+			return Promise.reject(new Error('WKCErrorInputInvalid'));
+		}
+
+		return await exports.WKCNotesActionUpdate(storageClient, Object.assign(inputData, {
+			WKCNotePublishStatusIsPublished: false,
+		}));
+	};
+
 	Object.defineProperty(exports, '__esModule', { value: true });
 
 })));
