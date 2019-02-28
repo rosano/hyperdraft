@@ -213,6 +213,10 @@
 	moi.commandsSelectedNoteUpdateBody = async function (inputData) {
 		(async function(noteObject) {
 
+			if (!noteObject.WKCNoteCreationDate) {
+				return;
+			}
+
 			await WKCVersionsAction.WKCVersionsActionCreate(storageClient, {
 				WKCVersionNoteID: noteObject.WKCNoteID,
 				WKCVersionBody: noteObject.WKCNoteBody,
