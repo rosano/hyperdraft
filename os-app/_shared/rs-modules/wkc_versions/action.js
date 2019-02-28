@@ -18,7 +18,6 @@
 
 		return await WKCVersionsMetal.WKCVersionsMetalWrite(storageClient, Object.assign(inputData, {
 			WKCVersionID: ULIDPackage.ulid(),
-			WKCVersionDate: new Date(),
 		}));
 	};
 

@@ -10,6 +10,7 @@ const kTesting = {
 		return {
 			WKCVersionNoteID: 'alfa',
 			WKCVersionBody: 'bravo',
+			WKCVersionDate: new Date(),
 		};
 	},
 	uSerial: function (inputData) {
