@@ -695,6 +695,7 @@
 		    },
 		  },
 		  theme: 'wkc',
+		  keyMap: 'sublime',
 		});
 
 		WCKWriteBehaviourPropertyEditor.on('change', function (instance, changeObject) {
