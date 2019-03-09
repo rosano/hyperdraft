@@ -657,8 +657,8 @@
 		});
 
 		remoteStorage.on('connected', () => {
+			// console.log(remoteStorage.remote.userAddress);
 			// console.log(remoteStorage.remote.token);
-			console.debug('connected', remoteStorage.remote.userAddress);
 			d3.select('#WKCLoginButton').classed('WKCSharedHidden', true);
 		});
 
