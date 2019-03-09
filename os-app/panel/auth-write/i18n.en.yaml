@@ -1,4 +1,6 @@
 WKCWriteHeadingText: Write
+WKCLoginPromptUserAddressText: User Address
+WKCLoginPromptUserTokenText: User Token
 WKCWriteMasterToolbarFilterInputPlaceholderText: Filter
 WKCWriteMasterToolbarCreateButtonText: Add note
 WKCWriteDetailToolbarVisitButtonText: Visit public page

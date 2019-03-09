@@ -34,6 +34,8 @@ locals.OLSKPageAssets = [
 	'ui-behaviour.js',
 ];
 locals.OLSKPagePublicLocalizedStringKeys = [
+	'WKCLoginPromptUserAddressText',
+	'WKCLoginPromptUserTokenText',
 	'WKSharedErrorServiceUnavailable',
 	'WKSharedErrorTokenUnavailable',
 	'WKCWriteErrorNotesUnavailable',
@@ -54,7 +56,6 @@ locals.OLSKPagePublicRouteKeys = [
 %>
 
 <%- include('../../_shared/common/layout-header.ejs') %>
-
 <div id="WKCWrite" class="WKCWriteLoading">
 	<div id="WKCWriteMaster" class="WKC_ContextMobileView WKC_ContextMobileViewActive">
 		<header id="WKCWriteMasterToolbar" class="WKCSharedToolbar">
@@ -100,6 +101,7 @@ locals.OLSKPagePublicRouteKeys = [
 </div>
 
 <div id="WKCStorageWidget"></div>
+<button id="WKCLoginButton" class="WKCSharedHidden" onclick="WKCWriteBehaviour.interfaceLoginButtonDidClick()"><%= OLSKLocalized('WKCLoginPromptText') %></button>
 
 <script type="text/javascript">
 	WKCWriteBehaviour.lifecyclePageWillLoad();

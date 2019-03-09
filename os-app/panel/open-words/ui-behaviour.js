@@ -95,6 +95,12 @@
 
 	//# INTERFACE
 
+	//_ interfaceLoginButtonDidClick
+
+	moi.interfaceLoginButtonDidClick = function () {
+		storageClient.remoteStorage.connect(window.prompt(OLSKLocalized('WKCLoginPromptUserAddressText')), window.prompt(OLSKLocalized('WKCLoginPromptUserTokenText')));
+	};
+
 	//_ interfaceNotesMasterToolbarFilterInputDidInput
 
 	moi.interfaceNotesMasterToolbarFilterInputDidInput = function () {
@@ -639,7 +645,7 @@
 		});
 
 		remoteStorage.on('not-connected', (a, b, c) => {
-			console.debug(`not-connected`, a, b, c);
+			d3.select('#WKCLoginButton').classed('WKCSharedHidden', false);
 		});
 
 		remoteStorage.on('disconnected', (a, b, c) => {
@@ -653,6 +659,7 @@
 		remoteStorage.on('connected', () => {
 			// console.log(remoteStorage.remote.token);
 			console.debug('connected', remoteStorage.remote.userAddress);
+			d3.select('#WKCLoginButton').classed('WKCSharedHidden', true);
 		});
 
 		remoteStorage.on('network-offline', () => {
