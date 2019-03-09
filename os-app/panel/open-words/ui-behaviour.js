@@ -242,6 +242,14 @@
 		moi.reactNoteObjects(moi.dataNoteObjectsFiltered());
 	};
 
+	//_ commandsSelectedNoteLogVersions
+
+	moi.commandsSelectedNoteLogVersions = async function () {
+		console.log(await WKCVersionsAction.WKCVersionsActionQuery(storageClient, {
+			WKCVersionNoteID: moi.propertiesSelectedNote().WKCNoteID,
+		}));
+	};
+
 	//_ commandsPersistNote #pendext
 
 	moi.commandsPersistNote = function (inputData) {
