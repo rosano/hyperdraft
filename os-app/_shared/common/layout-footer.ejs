@@ -32,6 +32,10 @@
 					action: 'skipWaiting',
 				});
 			});
+
+			document.getElementById('WKCSharedUpdateNotification').addEventListener('click', () => {
+				document.getElementById('WKCSharedUpdateNotification').remove();
+			});
 		});
 
 		navigator.serviceWorker.addEventListener('controllerchange', (event) => {
