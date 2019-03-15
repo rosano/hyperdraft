@@ -467,14 +467,13 @@
 	//_ commandsToggleTabFocus
 
 	moi.commandsToggleTabFocus = function (event) {
+		event.preventDefault();
+
 		if (WCKWriteBehaviourPropertyEditor.hasFocus()) {
 			return moi.kDefaultFocusNode().focus();
 		}
 
-		if (document.activeElement === moi.kDefaultFocusNode()) {
-			event.preventDefault();
-			return WCKWriteBehaviourPropertyEditor.focus();
-		}
+		return WCKWriteBehaviourPropertyEditor.focus();
 	};
 
 	//# REACT
@@ -701,6 +700,7 @@
 		    Esc: function () {
 		      return moi.kDefaultFocusNode().focus();
 		    },
+		    Tab: false,
 		  },
 		  theme: 'wkc',
 		  keyMap: 'sublime',
@@ -764,10 +764,6 @@
 			if (moi.propertiesSelectedNote() && event.shiftKey && (event.key === 'Tab')) {
 				return moi.interfaceToggleTabFocusShortcutDidInvoke(event);
 			};
-
-			if (document.activeElement !== moi.kDefaultFocusNode()) {
-				return;
-			}
 
 			if (event.key === 'ArrowUp') {
 				return moi.interfaceSelectPreviousShortcutDidInvoke(event);
