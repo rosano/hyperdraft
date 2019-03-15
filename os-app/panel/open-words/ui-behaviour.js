@@ -251,9 +251,12 @@
 	//_ commandsSelectedNoteLogVersions
 
 	moi.commandsSelectedNoteLogVersions = async function () {
-		console.log(await WKCVersionsAction.WKCVersionsActionQuery(storageClient, {
+		(await WKCVersionsAction.WKCVersionsActionQuery(storageClient, {
 			WKCVersionNoteID: moi.propertiesSelectedNote().WKCNoteID,
-		}));
+		})).slice(0, 5).forEach(function (e) {
+			console.log(e)
+			console.log(e.WKCVersionBody);
+		});
 	};
 
 	//_ commandsPersistNote #pendext
