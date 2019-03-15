@@ -770,9 +770,17 @@
 
 	moi.setupShortcuts = function () {
 		window.addEventListener('keydown', function (event) {
-			if (moi.propertiesSelectedNote() && event.shiftKey && (event.key === 'Tab')) {
+			if (event.key === 'Tab') {
 				return moi.interfaceToggleTabFocusShortcutDidInvoke(event);
 			};
+
+			if (event.key === 'Escape') {
+				return moi.interfaceClearInputShortcutDidInvoke(event);
+			};
+
+			if (document.activeElement !== moi.kDefaultFocusNode()) {
+				return;
+			}
 
 			if (event.key === 'ArrowUp') {
 				return moi.interfaceSelectPreviousShortcutDidInvoke(event);
@@ -781,14 +789,6 @@
 			if (event.key === 'ArrowDown') {
 				return moi.interfaceSelectNextShortcutDidInvoke(event);
 			}
-
-			if (event.key === 'Tab') {
-				return moi.interfaceToggleTabFocusShortcutDidInvoke(event);
-			};
-
-			if (event.key === 'Escape') {
-				return moi.interfaceClearInputShortcutDidInvoke(event);
-			};
 		});
 	};
 
