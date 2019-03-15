@@ -601,6 +601,7 @@
 		setupStorageClient();
 		moi.setupEditor();
 		moi.setupShortcuts();
+		setupMobile();
 	};
 
 	//_ setupNoteObjects
@@ -780,6 +781,12 @@
 				return moi.interfaceClearInputShortcutDidInvoke(event);
 			};
 		});
+	};
+
+	//_ setupMobile
+
+	let setupMobile = function () {
+		d3.select('#WKCWrite').classed('WKCSharedMobile', window.innerWidth <= 760);
 	};
 
 	//_ setupFinalize
