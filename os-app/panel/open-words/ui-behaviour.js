@@ -505,6 +505,10 @@
 				moi.reactFocusDetail();
 
 				moi.commandsNotesSelect(obj);
+
+				if (d3.select('#WKCWrite').classed('WKCSharedMobile')) {
+					return;
+				}
 				
 				WCKWriteBehaviourPropertyEditor.focus();
 			});
