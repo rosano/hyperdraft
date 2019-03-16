@@ -360,8 +360,7 @@
 		d3.select('#WKCWriteDetailToolbarPublishStatus').text(OLSKLocalized('WKCWriteDetailToolbarPublishStatusPublishing'));
 
 		try {
-			await WKCNotesAction.WKCNotesActionPublish(storageClient, inputData);
-			moi.reactPublishStatus(Object.assign(inputData, moi.dataNoteObjectPreparedFor(responseJSON)));
+			moi.reactPublishStatus(await WKCNotesAction.WKCNotesActionPublish(storageClient, inputData));
 		} catch(error) {
 			if (window.confirm(OLSKLocalized('WKCWriteErrorPublishDidFail'))) {
 				return moi.commandsPublishNote(inputData);
@@ -375,22 +374,12 @@
 
 	//_ commandsUnpublishNote
 
-	moi.commandsUnpublishNote = function (inputData) {
-		return console.info('temporarily disabled');
-
+	moi.commandsUnpublishNote = async function (inputData) {
 		d3.select('#WKCWriteDetailToolbarPublishStatus').text(OLSKLocalized('WKCWriteDetailToolbarPublishStatusUnpublishing'));
 
-		d3.json(OLSKCanonicalFor('WKCRouteAPINotesUnpublish', {
-			wkc_note_id: inputData.WKCNoteID,
-		}), {
-			method: 'GET',
-			headers: {
-				'Content-Type': 'application/json',
-				'x-client-key': moi.propertiesAPIToken(),
-			},
-		}).then(function(responseJSON) {
-			moi.reactPublishStatus(Object.assign(inputData, moi.dataNoteObjectPreparedFor(responseJSON)));
-		}, function(error) {
+		try {
+			moi.reactPublishStatus(await WKCNotesAction.WKCNotesActionUnpublish(storageClient, inputData));
+		} catch(error) {
 			if (window.confirm(OLSKLocalized('WKCWriteErrorUnpublishDidFail'))) {
 				return moi.commandsUnpublishNote(inputData);
 			};
@@ -398,7 +387,7 @@
 			d3.select('#WKCWriteDetailToolbarPublishStatus').text(OLSKLocalized('WKCWriteDetailToolbarPublishStatusUnableToUnpublish'));
 
 			throw error;
-		});
+		}
 	};
 
 	//_ commandsDeleteNoteWithConfirmation
