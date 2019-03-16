@@ -28,6 +28,10 @@ self.addEventListener('fetch', function (event) {
 		return console.log('ignoring cors', event.request);
 	}
 
+	if (event.request.url.match('/panel/read')) {
+		return console.log('ignoring panel read', event.request);
+	}
+
 	if (event.request.url.match('/login')) {
 		return console.log('ignoring login', event.request);
 	}
