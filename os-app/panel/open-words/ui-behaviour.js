@@ -356,22 +356,13 @@
 
 	//_ commandsPublishNote
 
-	moi.commandsPublishNote = function (inputData) {
-		return console.info('temporarily disabled');
-
+	moi.commandsPublishNote = async function (inputData) {
 		d3.select('#WKCWriteDetailToolbarPublishStatus').text(OLSKLocalized('WKCWriteDetailToolbarPublishStatusPublishing'));
 
-		d3.json(OLSKCanonicalFor('WKCRouteAPINotesPublish', {
-			wkc_note_id: inputData.WKCNoteID,
-		}), {
-			method: 'GET',
-			headers: {
-				'Content-Type': 'application/json',
-				'x-client-key': moi.propertiesAPIToken(),
-			},
-		}).then(function(responseJSON) {
+		try {
+			await WKCNotesAction.WKCNotesActionPublish(storageClient, inputData);
 			moi.reactPublishStatus(Object.assign(inputData, moi.dataNoteObjectPreparedFor(responseJSON)));
-		}, function(error) {
+		} catch(error) {
 			if (window.confirm(OLSKLocalized('WKCWriteErrorPublishDidFail'))) {
 				return moi.commandsPublishNote(inputData);
 			};
@@ -379,7 +370,7 @@
 			d3.select('#WKCWriteDetailToolbarPublishStatus').text(OLSKLocalized('WKCWriteDetailToolbarPublishStatusUnableToPublish'));
 
 			throw error;
-		});
+		}
 	};
 
 	//_ commandsUnpublishNote
@@ -617,6 +608,7 @@
 
 	let setupStorageClient = function () {
 		storageClient = WKCStorageClient.WKCStorageClientForChangeDelegateMap({
+			wkc_settings: null,
 			wkc_versions: null,
 			wkc_notes: {
 				OLSKChangeDelegateAdd: function (inputData) {
@@ -749,7 +741,6 @@
 		});
 
 		WCKWriteBehaviourPropertyEditor.on('mousedown', function (instance, event) {
-
 			if (!event.target.className.match('cm-link'))  {
 				return;
 			}

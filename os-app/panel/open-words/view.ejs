@@ -25,6 +25,10 @@ locals.OLSKPageAssets = [
 	'/_shared/_external/remotestorage-widget/build/widget.js',
 	'/_shared/_external/ulid/dist/index.umd.js',
 	'/_shared/rs-modules/_shared/main.js',
+	'/_shared/rs-modules/wkc_settings/model.js',
+	'/_shared/rs-modules/wkc_settings/rs-module.js',
+	'/_shared/rs-modules/wkc_settings/metal.js',
+	'/_shared/rs-modules/wkc_settings/action.js',
 	'/_shared/rs-modules/wkc_versions/model.js',
 	'/_shared/rs-modules/wkc_versions/rs-module.js',
 	'/_shared/rs-modules/wkc_versions/metal.js',
@@ -89,7 +93,7 @@ locals.OLSKPagePublicRouteKeys = [
 
 				<button id="WKCWriteDetailToolbarUnpublishButton" class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" title="<%= OLSKLocalized('WKCWriteDetailToolbarUnpublishButtonText') %>" style="background-image: url('/panel/_shared/ui-assets/wIKWriteUnpublish.svg')" onclick="WKCWriteBehaviour.interfaceUnpublishButtonDidClick()" disabled></button>
 
-				<button id="WKCWriteDetailToolbarPublishButton" class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" title="<%= OLSKLocalized('WKCWriteDetailToolbarPublishButtonText') %>" style="background-image: url('/panel/_shared/ui-assets/wIKWritePublish.svg')" onclick="WKCWriteBehaviour.interfacePublishButtonDidClick()" disabled></button>
+				<button id="WKCWriteDetailToolbarPublishButton" class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" title="<%= OLSKLocalized('WKCWriteDetailToolbarPublishButtonText') %>" style="background-image: url('/panel/_shared/ui-assets/wIKWritePublish.svg')" onclick="WKCWriteBehaviour.interfacePublishButtonDidClick()"></button>
 
 				<button id="WKCWriteDetailToolbarDiscardButton" class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" title="<%= OLSKLocalized('WKCWriteDetailToolbarDiscardButtonText') %>" style="background-image: url('/panel/_shared/ui-assets/wIKWriteDiscard.svg')" onclick="WKCWriteBehaviour.interfaceDeleteButtonDidClick()"></button>
 			</div>
