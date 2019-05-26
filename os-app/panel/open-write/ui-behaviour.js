@@ -219,6 +219,8 @@
 
 	moi.commandsSelectedNoteUpdateBody = async function (inputData) {
 		(async function(noteObject) {
+			return;
+			
 			if (WCKWriteBehaviourPropertyNotesThrottleMap[noteObject.WKCNoteID]) {
 				return OLSKThrottle.OLSKThrottleTimeoutFor(WCKWriteBehaviourPropertyNotesThrottleMap[noteObject.WKCNoteID]);
 			}
