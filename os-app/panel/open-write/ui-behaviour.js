@@ -12,7 +12,7 @@
 	let WCKWriteBehaviourPropertyCurrentFilter;
 	let WCKWriteBehaviourPropertySelectedNote;
 	let WCKWriteBehaviourPropertyEditor;
-	let WCKWriteBehaviourPropertyNotesThrottleMap = {};
+	let WCKWriteBehaviourPropertyNotesVersionThrottleMap = {};
 
 	//# CONSTANTS
 
@@ -221,14 +221,14 @@
 		(async function(noteObject) {
 			return;
 			
-			if (WCKWriteBehaviourPropertyNotesThrottleMap[noteObject.WKCNoteID]) {
-				return OLSKThrottle.OLSKThrottleTimeoutFor(WCKWriteBehaviourPropertyNotesThrottleMap[noteObject.WKCNoteID]);
+			if (WCKWriteBehaviourPropertyNotesVersionThrottleMap[noteObject.WKCNoteID]) {
+				return OLSKThrottle.OLSKThrottleTimeoutFor(WCKWriteBehaviourPropertyNotesVersionThrottleMap[noteObject.WKCNoteID]);
 			}
 
-			WCKWriteBehaviourPropertyNotesThrottleMap[noteObject.WKCNoteID] = {
+			WCKWriteBehaviourPropertyNotesVersionThrottleMap[noteObject.WKCNoteID] = {
 				OLSKThrottleDuration: 3000,
 				OLSKThrottleCallback: function () {
-					delete WCKWriteBehaviourPropertyNotesThrottleMap[noteObject.WKCNoteID]
+					delete WCKWriteBehaviourPropertyNotesVersionThrottleMap[noteObject.WKCNoteID]
 				},
 			};
 
