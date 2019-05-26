@@ -1,4 +1,4 @@
-const kWKCServiceWorkerVersionID = Date.now();
+const kWKCServiceWorkerVersionID = process.env.HEROKU_SLUG_COMMIT || Date.now();
 
 //_ OLSKControllerRoutes
 
