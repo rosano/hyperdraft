@@ -13,6 +13,7 @@
 	let WCKWriteBehaviourPropertySelectedNote;
 	let WCKWriteBehaviourPropertyEditor;
 	let WCKWriteBehaviourPropertyNotesVersionThrottleMap = {};
+	let WCKWriteBehaviourPropertyNotesBodyThrottleMap = {};
 
 	//# CONSTANTS
 
@@ -243,11 +244,24 @@
 			});
 		})(Object.assign({}, moi.propertiesSelectedNote()));
 
-		await WKCNotesAction.WKCNotesActionUpdate(storageClient, Object.assign(moi.propertiesSelectedNote(), {
+		let noteObject = Object.assign(moi.propertiesSelectedNote(), {
 			WKCNoteBody: inputData,
-		}));
+		});
 
 		moi.reactNoteObjects(moi.dataNoteObjectsFiltered());
+
+		if (!WCKWriteBehaviourPropertyNotesBodyThrottleMap[noteObject.WKCNoteID]) {
+			WCKWriteBehaviourPropertyNotesBodyThrottleMap[noteObject.WKCNoteID] = {
+				OLSKThrottleDuration: 500,
+				OLSKThrottleCallback: async function () {
+					delete WCKWriteBehaviourPropertyNotesBodyThrottleMap[noteObject.WKCNoteID];
+
+					await WKCNotesAction.WKCNotesActionUpdate(storageClient, noteObject);
+				},
+			};	
+		}
+
+		OLSKThrottle.OLSKThrottleTimeoutFor(WCKWriteBehaviourPropertyNotesBodyThrottleMap[noteObject.WKCNoteID]);
 	};
 
 	//_ commandsSelectedNoteLogVersions
