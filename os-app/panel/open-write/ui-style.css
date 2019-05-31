@@ -94,6 +94,10 @@ body {
 	margin-top: 5px;
 }
 
+#WKCWriteMasterDebug {
+	padding: 10px;
+}
+
 #WKCWriteDetail {
 	border-left: 1px solid #ddd;
 
