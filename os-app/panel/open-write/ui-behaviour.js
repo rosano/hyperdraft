@@ -520,6 +520,12 @@
 		selection.exit().remove();
 	};
 
+	//_ reactCurrentFilter
+
+	moi.reactCurrentFilter = function (inputData) {
+		d3.select('#WKCWriteMasterDebug').classed('WKCSharedHidden', inputData);
+	};
+
 	//_ reactCurrentFilterManual
 
 	moi.reactCurrentFilterManual = function (inputData) {
