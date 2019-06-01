@@ -74,6 +74,10 @@
     "// FRONTEND EDITOR": null,
     "codemirror": "rosano/CodeMirror#add-distribution",
 
+    "// FRONTEND EXPORT": null,
+    "jszip": "latest",
+    "file-saver": "latest",
+
     "// I sacrifice myself for the commas of others": null
   },
   "devDependencies": {

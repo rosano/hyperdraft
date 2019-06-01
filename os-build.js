@@ -23,5 +23,7 @@
 		'moment',
 		'url-parse',
 		'codemirror',
+		'jszip',
+		'file-saver',
 	], pathPackage.join(__dirname, 'node_modules'), pathPackage.join(__dirname, 'os-app/_shared/_external'));
 })();
