@@ -70,6 +70,8 @@
 		WCKWriteBehaviourPropertyCurrentFilter = inputData === null ? undefined : inputData;
 
 		moi.propertiesNoteObjects(moi.propertiesNoteObjects());
+
+		moi.reactCurrentFilter(WCKWriteBehaviourPropertyCurrentFilter);
 	};
 
 	//_ propertiesSelectedNote
@@ -468,6 +470,22 @@
 		}
 
 		return WCKWriteBehaviourPropertyEditor.focus();
+	};
+
+	//_ commandsExportNotes
+
+	moi.commandsExportNotes = function () {
+		let zip = new JSZip();
+
+		moi.propertiesNoteObjects().forEach(function (e) {
+			zip.file(`${ e.WKCNoteID }.txt`, e.WKCNoteBody, {
+				date: e.WKCNoteModificationDate,
+			});
+		});
+		
+		zip.generateAsync({type: 'blob'}).then(function (content) {
+			saveAs(content, 'notes.zip');
+		});
 	};
 
 	//# REACT
