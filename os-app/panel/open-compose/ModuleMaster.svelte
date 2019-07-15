@@ -5,7 +5,9 @@ import WKCParser from '../../_shared/WKCParser/main.js';
 
 import WKCWriteLogic from '../open-write/ui-logic.js';
 
-import { storageClient, notesAll, noteSelected, filterText } from './persistence.js';
+import { storageClient, notesAll, noteSelected, filterText, defaultFocusNode } from './persistence.js';
+
+import { editorInstance, editorPostInitializeQueue } from './ModuleDetail.svelte'
 
 async function noteCreate() {
 	let item = await WKCNotesAction.WKCNotesActionCreate(storageClient, {
@@ -20,7 +22,9 @@ async function noteCreate() {
 }
 
 async function noteSelect(inputData) {
-	return noteSelected.set(inputData);
+	return editorPostInitializeQueue.push(function () {
+		editorInstance.focus();
+	}) && noteSelected.set(inputData) ;
 }
 
 let notesVisible = []
