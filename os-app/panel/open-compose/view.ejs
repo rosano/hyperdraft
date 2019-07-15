@@ -1,0 +1,11 @@
+<%
+locals.OLSKPageTitle = OLSKLocalized('WKCWriteHeadingText');
+locals.OLSKPageAssets = [
+];
+locals.OLSKPagePublicLocalizedStringKeys = locals.OLSKLocalizedStringKeys();%>
+
+<%- include('../../_shared/common/layout-header.ejs') %>
+
+<script src="/<%= OLSKSharedPageControllerSlug %>/_compiled/ui-behaviour.js"></script>
+
+<%- include('../../_shared/common/layout-footer.ejs') %>
