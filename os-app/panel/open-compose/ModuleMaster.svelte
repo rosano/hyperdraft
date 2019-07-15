@@ -10,7 +10,7 @@ async function noteCreate() {
 	});
 
 	notesAll.update(function (val) {
-		return val.concat(item).sort(WKCWriteLogic.WKCWriteLogicSort);
+		return val.concat(item).sort(WKCWriteLogic.WKCWriteLogicListSort);
 	});
 
 	return noteSelect(item);
