@@ -333,6 +333,7 @@ window.addEventListener('keydown', function (event) {
 .PlaceholderContainer {
 	opacity: 0.5;
 	text-align: center;
+	font-size: 14px;
 
 	/* ContainerFlexboxChild */
 	flex-grow: 1;
