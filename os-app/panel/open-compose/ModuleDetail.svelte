@@ -162,25 +162,49 @@ afterUpdate(function () {
 	editorInitializeValue();
 });
 
-let throttleMap = {};
-import * as OLSKThrottle from '../../_shared/_external/OLSKThrottle/main.js';
+let throttleMapNotes = {};
+let throttleMapVersions = {};
+import OLSKThrottle from '../../_shared/_external/OLSKThrottle/main.js';
 async function noteSave() {
 	notesAll.update(function (val) {
 		return val;
 	});
 
-	if (!throttleMap[$noteSelected.WKCNoteID]) {
-		throttleMap[$noteSelected.WKCNoteID] = {
+	(async function(noteObject) {
+		if (throttleMapVersions[noteObject.WKCNoteID]) {
+			return OLSKThrottle.OLSKThrottleTimeoutFor(throttleMapVersions[noteObject.WKCNoteID]);
+		}
+
+		throttleMapVersions[noteObject.WKCNoteID] = {
+			OLSKThrottleDuration: 3000,
+			OLSKThrottleCallback: function () {
+				delete throttleMapVersions[noteObject.WKCNoteID]
+			},
+		};
+
+		if (!noteObject.WKCNoteCreationDate) {
+			return;
+		}
+
+		await WKCVersionsAction.WKCVersionsActionCreate(storageClient, {
+			WKCVersionNoteID: noteObject.WKCNoteID,
+			WKCVersionBody: noteObject.WKCNoteBody,
+			WKCVersionDate: noteObject.WKCNoteModificationDate,
+		});
+	})($noteSelected);
+
+	if (!throttleMapNotes[$noteSelected.WKCNoteID]) {
+		throttleMapNotes[$noteSelected.WKCNoteID] = {
 			OLSKThrottleDuration: 500,
 			OLSKThrottleCallback: async function () {
-				delete throttleMap[$noteSelected.WKCNoteID];
+				delete throttleMapNotes[$noteSelected.WKCNoteID];
 
 				await WKCNotesAction.WKCNotesActionUpdate(storageClient, $noteSelected);
 			},
 		};	
 	}
 
-	OLSKThrottle.default.OLSKThrottleTimeoutFor(throttleMap[$noteSelected.WKCNoteID]);
+	OLSKThrottle.OLSKThrottleTimeoutFor(throttleMapNotes[$noteSelected.WKCNoteID]);
 }
 
 async function noteDelete() {
