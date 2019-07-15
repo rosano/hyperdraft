@@ -2,6 +2,7 @@
 let editorInstance = null;
 let editorPostInitializeQueue = [];
 export let editorConfigure = function (inputData) {
+	// console.log(editorInstance ? 'run' : 'queue', inputData);
 	return editorInstance ? inputData(editorInstance) : editorPostInitializeQueue.push(inputData);
 }
 </script>
@@ -158,10 +159,12 @@ afterUpdate(function () {
 		});
 	})();
 
-	editorPostInitializeQueue.forEach(function(e) {
-		e(editorInstance);
-		
-		return editorPostInitializeQueue.shift();
+	// console.log(editorPostInitializeQueue);
+
+	editorPostInitializeQueue.splice(0, editorPostInitializeQueue.length).forEach(function(e) {
+		// console.log('run', e);
+
+		return e(editorInstance);
 	});
 });
 

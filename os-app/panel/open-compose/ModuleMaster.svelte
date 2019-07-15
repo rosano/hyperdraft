@@ -24,7 +24,7 @@ async function noteCreate() {
 async function noteSelect(inputData) {
 	editorConfigure(function (editorInstance) {
 		return editorInstance.focus();
-	})
+	});
 	return noteSelected.set(inputData) ;
 }
 
@@ -49,11 +49,15 @@ async function exportNotes() {
 }
 
 function handleArrowUp () {
-	return noteSelected.set(notesVisible[Math.max(notesVisible.indexOf($noteSelected) - 1, 0)]) && event.preventDefault();
+	noteSelected.set(notesVisible[Math.max(notesVisible.indexOf($noteSelected) - 1, 0)]);
+
+	return event.preventDefault();
 };
 
 function handleArrowDown () {
-	return noteSelected.set(notesVisible[Math.min(notesVisible.indexOf($noteSelected) + 1, notesVisible.length - 1)]) && event.preventDefault();
+	noteSelected.set(notesVisible[Math.min(notesVisible.indexOf($noteSelected) + 1, notesVisible.length - 1)]);
+
+	return event.preventDefault();
 };
 
 window.addEventListener('keydown', function (event) {
