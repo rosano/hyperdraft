@@ -1,5 +1,8 @@
 <script>
 import WKCNotesAction from '../../_shared/rs-modules/wkc_notes/action.js';
+
+import WKCParser from '../../_shared/WKCParser/main.js';
+
 import WKCWriteLogic from '../open-write/ui-logic.js';
 
 import { storageClient, notesAll, noteSelected, filterText } from './persistence.js';
@@ -50,15 +53,20 @@ async function exportNotes() {
 		<button on:click={ noteCreate } class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" title={ window.OLSKLocalized('WKCWriteMasterToolbarCreateButtonText') } style="background-image: url('/panel/_shared/ui-assets/wIKSharedCreate.svg')" accesskey="n"></button>
 	</div>
 </header>
-<div class="List">
-	{#each notesVisible as e}
-		<div on:click={ () => noteSelect(e) } class="ListItem WKCSharedElementTappable">
-			<strong>{ e.WKCNoteBody }</strong>
-		</div>
-	{/each}
-</div>
-<div id="WKCWriteMasterDebug">
-	<button on:click={ exportNotes } class="WKCSharedElementTappable WKCSharedButtonNoStyle">{ OLSKLocalized('WKCUpdateExportText') }</button>
+
+<div class="ContentContainer">
+	<div class="List">
+		{#each notesVisible as e}
+			<div on:click={ () => noteSelect(e) } class="ListItem WKCSharedElementTappable" class:ListItemSelected={ $noteSelected === e }>
+				<strong>{ WKCParser.WKCParserTitleForPlaintext(e.WKCNoteBody) }</strong>
+				<span>{ WKCParser.WKCParserSnippetForPlaintext(WKCParser.WKCParserBodyForPlaintext(e.WKCNoteBody)) }</span>
+			</div>
+		{/each}
+	</div>
+	
+	<div id="WKCWriteMasterDebug">
+		<button on:click={ exportNotes } class="WKCSharedElementTappable WKCSharedButtonNoStyle">{ OLSKLocalized('WKCUpdateExportText') }</button>
+	</div>
 </div>
 
 </div>
@@ -76,6 +84,11 @@ async function exportNotes() {
 	flex-direction: column;
 }
 
+header {
+	/* ContainerFlexboxChild */
+	flex-shrink: 0;
+}
+
 input {
 	height: 14px;
 	padding: 4px;
@@ -91,15 +104,40 @@ input {
 	flex-grow: 1;
 }
 
-.List {
+.ContentContainer {
+	overflow: auto;
+
 	/* ContainerFlexboxChild */
 	flex-grow: 1;
-	overflow: auto;
 }
 
 .ListItem {
-	min-height: 40px;
-	padding: 5px;
-	border-bottom: var(--WIKBorderStyle)
+	min-height: 46px;
+	padding: 10px;
+	border-bottom: var(--WIKBorderStyle);
+
+	overflow: hidden;
+	text-overflow: ellipsis;
+
+	font-size: 12px;
+
+	/* prevent breaking from long urls */
+	overflow-wrap: break-word;
+	word-wrap: break-word;
+	word-break: break-word;
+	hyphens: auto;
+}
+
+.ListItemSelected {
+	background: #e6e6e6;
+}
+
+.ListItem span {
+	display: block;
+	margin-top: 5px;
+}
+
+#WKCWriteMasterDebug {
+	padding: 10px;
 }
 </style>
