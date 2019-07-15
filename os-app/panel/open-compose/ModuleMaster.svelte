@@ -30,10 +30,12 @@ $: notesVisible = $notesAll.filter(function (e) {
 
 <div class="Container WKC_ContextMobileView WKC_ContextMobileViewActive">
 
-<header class="WIKSharedToolbar">
-	<input placeholder="{ OLSKLocalized('WKCWriteMasterToolbarFilterInputPlaceholderText') }" bind:value={ $filterText } accesskey="f" id="WIKDefaultFocusNode" autofocus />
+<header class="WKCSharedToolbar">
+	<input bind:value={ $filterText } placeholder="{ OLSKLocalized('WKCWriteMasterToolbarFilterInputPlaceholderText') }" accesskey="f" id="WIKDefaultFocusNode" autofocus />
 
-	<button on:click={ noteCreate } class="WKCSharedButtonNoStyle" accesskey="n">{ window.OLSKLocalized('WKCWriteMasterToolbarCreateButtonText') }</button>
+	<div class="WKCSharedToolbarElementGroup">
+		<button on:click={ noteCreate } class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" title={ window.OLSKLocalized('WKCWriteMasterToolbarCreateButtonText') } style="background-image: url('/panel/_shared/ui-assets/wIKSharedCreate.svg')" accesskey="n"></button>
+	</div>
 </header>
 <div class="List">
 	{#each notesVisible as e}
@@ -56,8 +58,23 @@ $: notesVisible = $notesAll.filter(function (e) {
 	flex-direction: column;
 }
 
-.WIKSharedToolbar {
+header {
 	border-right: var(--WIKBorderStyle);
+}
+
+input {
+	height: 14px;
+	padding: 4px;
+	margin: 0;
+	border: 1px solid #e6e6e6;
+	border-radius: 10px;
+
+	font-size: 80%;
+	text-indent: 2px;
+	line-height: 1.4;
+
+	/* WKCSharedToolbarFlexboxChild */
+	flex-grow: 1;
 }
 
 .List {

@@ -30,6 +30,7 @@ onMount(function () {
 	height: 100vh;
 
 	font-family: 'Helvetica Neue', 'Helvetica', sans;
+	font-size: 11pt;
 
 	/* AppContainerFlexboxParent */
 	display: flex;
