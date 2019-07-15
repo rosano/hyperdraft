@@ -12,7 +12,7 @@ import WKCNotesAction from '../../_shared/rs-modules/wkc_notes/action.js';
 import WKCVersionsAction from '../../_shared/rs-modules/wkc_versions/action.js';
 import WKCWriteLogic from '../open-write/ui-logic.js';
 
-import { storageClient, notesAll, noteSelected, filterText, defaultFocusNode } from './persistence.js';
+import { storageClient, notesAll, noteSelected, filterText, defaultFocusNode, mobileViewCurrent } from './persistence.js';
 
 noteSelected.subscribe(function (val) {
 	if (!val && editorInstance) {
@@ -279,7 +279,7 @@ window.addEventListener('keydown', function (event) {
 });
 </script>
 
-<div class="Container" class:WKC_ContextMobileViewActive={ $noteSelected } class:WKC_ContextMobileViewInactive={ !$noteSelected }>
+<div class="Container WKC_ContextMobileView" class:WKC_ContextMobileViewActive={ $mobileViewCurrent === 'ModuleDetail' } class:WKC_ContextMobileViewInactive={ $mobileViewCurrent !== 'ModuleDetail' }>
 
 {#if $noteSelected}
 	<header class="WKCSharedToolbar">

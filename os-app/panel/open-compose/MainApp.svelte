@@ -48,16 +48,22 @@ onMount(function () {
 @media screen and (max-width: 760px) {
 
 .AppContainer {
-  position: fixed;
+  position: relative;
+
   overflow: hidden;
 }
 
-.AppContainer :global(.WKC_ContextMobileViewInactive) {
-	display: none !important;
+.AppContainer :global(.WKC_ContextMobileView) {
+	width: 100vw;
+	height: 100vh;
+
+	position: absolute;
+	left: 0;
+	top: 0;
 }
 
-.AppContainer :global(.WKC_ContextMobileViewActive) {
-	flex-basis: 100vw !important;
+.AppContainer :global(.WKC_ContextMobileViewInactive) {
+	left: 100vw;
 }
 
 .AppContainer :global(.WKC_ContextMobileExclusive) {

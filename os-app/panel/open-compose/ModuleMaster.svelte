@@ -5,7 +5,7 @@ import WKCParser from '../../_shared/WKCParser/main.js';
 
 import WKCWriteLogic from '../open-write/ui-logic.js';
 
-import { storageClient, notesAll, noteSelected, filterText, defaultFocusNode, isMobile } from './persistence.js';
+import { storageClient, notesAll, noteSelected, filterText, defaultFocusNode, isMobile, mobileViewCurrent } from './persistence.js';
 
 import { editorConfigure } from './ModuleDetail.svelte'
 
@@ -22,6 +22,8 @@ async function noteCreate() {
 }
 
 async function noteSelect(inputData) {
+	mobileViewCurrent.set('ModuleDetail');
+
 	editorConfigure(function (editorInstance) {
 		if (isMobile()) {
 			return;
@@ -32,6 +34,14 @@ async function noteSelect(inputData) {
 	
 	return noteSelected.set(inputData);
 }
+
+noteSelected.subscribe(function (val) {
+	if (val) {
+		return;
+	}
+
+	mobileViewCurrent.set('ModuleMaster');
+})
 
 let notesVisible = []
 
@@ -99,7 +109,7 @@ window.addEventListener('keydown', function (event) {
 });
 </script>
 
-<div class="Container" class:WKC_ContextMobileViewActive={ !$noteSelected } class:WKC_ContextMobileViewInactive={ $noteSelected }>
+<div class="Container WKC_ContextMobileView" class:WKC_ContextMobileViewActive={ $mobileViewCurrent === 'ModuleMaster' } class:WKC_ContextMobileViewInactive={ $mobileViewCurrent !== 'ModuleMaster' }>
 
 <header class="WKCSharedToolbar">
 	<input bind:value={ $filterText } placeholder="{ OLSKLocalized('WKCWriteMasterToolbarFilterInputPlaceholderText') }" accesskey="f" id="WIKDefaultFocusNode" autofocus />
