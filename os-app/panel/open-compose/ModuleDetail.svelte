@@ -222,6 +222,15 @@ async function noteUnpublish() {
 	return await WKCNotesAction.WKCNotesActionUnpublish(storageClient, $noteSelected);
 }
 
+async function noteVersions() {
+	(await WKCVersionsAction.WKCVersionsActionQuery(storageClient, {
+		WKCVersionNoteID: $noteSelected.WKCNoteID,
+	})).slice(0, 5).forEach(function (e) {
+		console.log(e)
+		console.log(e.WKCVersionBody);
+	})
+}
+
 async function noteDelete() {
 	if (!window.confirm(window.OLSKLocalized('WKCWriteNotesDeleteAlertText'))) {
 		return;
@@ -282,6 +291,8 @@ window.addEventListener('keydown', function (event) {
 			{#if !$noteSelected.WKCNotePublishStatusIsPublished }
 				<button on:click={ notePublish } class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" title={ window.OLSKLocalized('WKCWriteDetailToolbarPublishButtonText') } style="background-image: url('/panel/_shared/ui-assets/wIKWritePublish.svg')"></button>
 			{/if}
+
+			<button on:click={ noteVersions } class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle">{ window.OLSKLocalized('WKCWriteDetailToolbarVersionsButtonText') }</button>
 
 			<button on:click={ noteDelete } class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" title={ window.OLSKLocalized('WKCWriteDetailToolbarDiscardButtonText') } style="background-image: url('/panel/_shared/ui-assets/wIKWriteDiscard.svg')"></button>
 		</div>

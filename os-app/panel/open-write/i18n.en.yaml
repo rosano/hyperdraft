@@ -8,6 +8,7 @@ WKCWriteDetailToolbarVisitButtonText: Visit public page
 WKCWriteDetailToolbarUnpublishButtonText: Unpublish
 WKCWriteDetailToolbarPublishButtonText: Publish
 WKCWriteDetailToolbarBackButtonText: Back
+WKCWriteDetailToolbarVersionsButtonText: Versions
 WKCWriteDetailToolbarDiscardButtonText: Delete
 WKCWriteNotesDeleteAlertText: Are you sure?
 WKCWriteDetailPlaceholderText: No Note Selected
