@@ -1,0 +1,36 @@
+:root {
+	--WIKBorderStyle: 1px solid #ddd;
+
+	font-size: 9pt;
+}
+
+.WIKSharedToolbar {
+	padding: 5px;
+	border-bottom: var(--WIKBorderStyle);
+}
+
+#remotestorage-widget {
+	bottom: 0;
+	right: 0;
+}
+
+.WIKComposeDebug {
+	display: none;
+
+	font-family: sans-serif;
+}
+
+.WIKComposeDebug button {
+	padding: 10px;
+	border: 1px solid #bbb;
+
+	margin: 10px;
+}
+
+.remotestorage-widget-error-state + .WIKComposeDebug {
+	display: unset;
+
+	position: absolute;
+	bottom: 100px;
+	right: 0;
+}
