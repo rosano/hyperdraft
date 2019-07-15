@@ -344,7 +344,7 @@ window.addEventListener('keydown', function (event) {
 	align-items: center;
 }
 
-header {
+.WKCSharedToolbar {
 	font-size: 14px;
 
 	/* WKCSharedToolbarFlexboxChild */
@@ -397,5 +397,23 @@ header {
 
 .EditorContainer :global(.cm-link:hover) {
   cursor: pointer;
+}
+
+@media screen and (max-width: 760px) {
+
+.WKCSharedToolbar {
+	padding: 12px 8px;
+}
+
+.WKCSharedToolbarElementGroup {
+	margin: unset;
+
+	display: flex;
+}
+
+.WKCSharedToolbarElementGroup * {
+	margin: 0 8px;
+}
+
 }
 </style>

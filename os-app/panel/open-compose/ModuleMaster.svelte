@@ -210,7 +210,7 @@ input {
 	-webkit-overflow-scrolling: touch;
 }
 
-header {
+.WKCSharedToolbar {
 	padding: 8px;
 }
 

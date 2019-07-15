@@ -66,6 +66,12 @@ onMount(function () {
 	left: 100vw;
 }
 
+.AppContainer :global(.WKCSharedToolbarButton) {
+	width: 20px;
+	height: 20px;
+	background-size: 20px 20px;
+}
+
 .AppContainer :global(.WKC_ContextMobileExclusive) {
 	display: unset;
 }
