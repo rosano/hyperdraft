@@ -220,7 +220,7 @@ async function noteUnpublish() {
 }
 
 async function noteDelete() {
-	if (!window.confirm(window.OLSKLocalized('WIKComposeListItemDeletePromptText'))) {
+	if (!window.confirm(window.OLSKLocalized('WKCWriteNotesDeleteAlertText'))) {
 		return;
 	}
 
@@ -259,7 +259,7 @@ async function noteDelete() {
 				<button on:click={ notePublish } class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" title={ window.OLSKLocalized('WKCWriteDetailToolbarPublishButtonText') } style="background-image: url('/panel/_shared/ui-assets/wIKWritePublish.svg')"></button>
 			{/if}
 
-			<button on:click={ noteDelete } class="WKCSharedButtonNoStyle">{ window.window.OLSKLocalized('WKCWriteDetailToolbarDiscardButtonText') }</button>
+			<button on:click={ noteDelete } class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" title={ window.OLSKLocalized('WKCWriteDetailToolbarDiscardButtonText') } style="background-image: url('/panel/_shared/ui-assets/wIKWriteDiscard.svg')"></button>
 		</div>
 	</header>
 
