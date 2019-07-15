@@ -159,7 +159,9 @@ afterUpdate(function () {
 	})();
 
 	editorPostInitializeQueue.forEach(function(e) {
-		return e(editorInstance) && editorPostInitializeQueue.shift();
+		e(editorInstance);
+		
+		return editorPostInitializeQueue.shift();
 	});
 });
 
@@ -243,7 +245,8 @@ function toggleTabFocus (event) {
 };
 
 function handleEsc (event) {
-	return noteSelected.set(null) && filterText.set('');
+	noteSelected.set(null)
+	return filterText.set('');
 };
 
 window.addEventListener('keydown', function (event) {
