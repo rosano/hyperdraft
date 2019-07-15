@@ -1,3 +1,11 @@
+<script context="module">
+export let editorInstance = null;
+export let editorPostInitializeQueue = [];
+function editorConfigure (inputData) {
+	return editorInstance ? inputData() : editorPostInitializeQueue.push(inputData);
+}
+</script>
+
 <script>
 import WKCNotesAction from '../../_shared/rs-modules/wkc_notes/action.js';
 import WKCVersionsAction from '../../_shared/rs-modules/wkc_versions/action.js';
@@ -5,33 +13,20 @@ import WKCWriteLogic from '../open-write/ui-logic.js';
 
 import { storageClient, notesAll, noteSelected, filterText, defaultFocusNode } from './persistence.js';
 
-let editorInstance;
-let editorInitializeValue = function () {
-	editorInstance.focus();
-
-	editorInstance.setValue($noteSelected.WKCNoteBody);
-	editorInstance.getDoc().clearHistory();
-}
-
-let _noteSelected;
 noteSelected.subscribe(function (val) {
-	_noteSelected = val;
-
 	if (!val && editorInstance) {
 		editorInstance.toTextArea();
+		editorInstance = null;
 	}
 
 	if (!val) {
-		editorInstance = null;
-
 		return;
 	}
 
-	if (!editorInstance) {
-		return;
-	}
-
-	editorInitializeValue();
+	return editorConfigure(function () {
+		editorInstance.setValue($noteSelected.WKCNoteBody);
+		editorInstance.getDoc().clearHistory();
+	});
 });
 
 function openTextObject (inputData) {
@@ -163,7 +158,9 @@ afterUpdate(function () {
 		});
 	})();
 
-	editorInitializeValue();
+	editorPostInitializeQueue.forEach(function(e) {
+		return e() && editorPostInitializeQueue.shift();
+	});
 });
 
 let throttleMapNotes = {};
