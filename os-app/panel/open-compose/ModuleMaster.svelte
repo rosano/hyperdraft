@@ -26,6 +26,19 @@ $: notesVisible = $notesAll.filter(function (e) {
 	return e.WKCNoteBody.toLowerCase().match($filterText.toLowerCase());
 });
 
+async function exportNotes() {
+	let zip = new JSZip();
+
+	$notesAll.forEach(function (e) {
+		zip.file(`${ e.WKCNoteID }.txt`, e.WKCNoteBody, {
+			date: e.WKCNoteModificationDate,
+		});
+	});
+	
+	zip.generateAsync({type: 'blob'}).then(function (content) {
+		saveAs(content, 'notes.zip');
+	});
+}
 </script>
 
 <div class="Container WKC_ContextMobileView WKC_ContextMobileViewActive">
@@ -44,11 +57,16 @@ $: notesVisible = $notesAll.filter(function (e) {
 		</div>
 	{/each}
 </div>
+<div id="WKCWriteMasterDebug">
+	<button on:click={ exportNotes } class="WKCSharedElementTappable WKCSharedButtonNoStyle">{ OLSKLocalized('WKCUpdateExportText') }</button>
+</div>
 
 </div>
 
 <style>
 .Container {
+	border-right: var(--WIKBorderStyle);
+
 	/* AppContentContainerFlexboxChild */
 	flex-basis: 300px;
 	flex-shrink: 0;
@@ -56,10 +74,6 @@ $: notesVisible = $notesAll.filter(function (e) {
 	/* ContainerFlexboxParent */
 	display: flex;
 	flex-direction: column;
-}
-
-header {
-	border-right: var(--WIKBorderStyle);
 }
 
 input {
@@ -78,8 +92,6 @@ input {
 }
 
 .List {
-	border-right: var(--WIKBorderStyle);
-
 	/* ContainerFlexboxChild */
 	flex-grow: 1;
 	overflow: auto;
