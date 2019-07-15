@@ -3,7 +3,7 @@
 exports.OLSKControllerRoutes = function() {
 	return {
 		WIKComposeRoute: {
-			OLSKRoutePath: '/panel/compose',
+			OLSKRoutePath: '/panel/write',
 			OLSKRouteMethod: 'get',
 			OLSKRouteFunction: function (req, res, next) {
 				return res.render(req.OLSKLive.OLSKLivePathJoin(__dirname, 'view'), {});
