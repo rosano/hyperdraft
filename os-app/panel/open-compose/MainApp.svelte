@@ -5,7 +5,7 @@ import ModuleDetail from './ModuleDetail.svelte';
 import { storageClient } from './persistence.js';
 
 import { onMount } from 'svelte';
-import Widget from '../_shared/_external/remotestorage-widget/build/widget.js';
+import Widget from '../../_shared/_external/remotestorage-widget/build/widget.js';
 onMount(function () {
 	(new Widget(storageClient.remoteStorage)).attach('WIKComposeStorageWidget');	
 });

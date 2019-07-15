@@ -1,8 +1,8 @@
-import * as WKCStorageClient from '../_shared/WKCStorageClient/main.js';
-import * as RSModuleProtocol_wkc_notes from '../_shared/rs-modules/wkc_notes/rs-module.js';
+import * as WIKStorageClient from '../../_shared/WIKStorageClient/main.js';
+import * as RSModuleProtocol_wkc_notes from '../../_shared/rs-modules/wkc_notes/rs-module.js';
 import * as WKCWriteLogic from '../open-write/ui-logic.js';
 
-import * as WKCNotesAction from '../_shared/rs-modules/wkc_notes/action.js';
+import * as WKCNotesAction from '../../_shared/rs-modules/wkc_notes/action.js';
 
 import { writable } from 'svelte/store';
 
@@ -13,7 +13,7 @@ let _noteSelected;
 noteSelected.subscribe(function (val) {
 	_noteSelected = val;
 });
-export const storageClient = WKCStorageClient.WKCStorageClientForModules([
+export const storageClient = WIKStorageClient.WIKStorageClientForModules([
 	RSModuleProtocol_wkc_notes.RSModuleProtocolModuleForChangeDelegate({
 		OLSKChangeDelegateAdd: function (inputData) {
 			// console.log('OLSKChangeDelegateAdd', inputData);
@@ -22,8 +22,6 @@ export const storageClient = WKCStorageClient.WKCStorageClientForModules([
 					return e.WKCNoteID !== inputData.WKCNoteID;
 				}).concat(inputData).sort(WKCWriteLogic.default.WKCWriteLogicSort);
 			});
-
-			modelDidChange.set(Date.now());
 		},
 		OLSKChangeDelegateRemove: function (inputData) {
 			// console.log('OLSKChangeDelegateRemove', inputData);
@@ -37,8 +35,6 @@ export const storageClient = WKCStorageClient.WKCStorageClientForModules([
 					return e.WKCNoteID !== inputData.WKCNoteID;
 				});
 			});
-
-			modelDidChange.set(Date.now());
 		},
 		OLSKChangeDelegateUpdate: function (inputData) {
 			// console.log('OLSKChangeDelegateUpdate', inputData);
@@ -53,8 +49,6 @@ export const storageClient = WKCStorageClient.WKCStorageClientForModules([
 					return Object.assign(e, e.WKCNoteID === inputData.WKCNoteID ? inputData : {});
 				});
 			});
-
-			modelDidChange.set(Date.now());
 		},
 	}),
 ]);
