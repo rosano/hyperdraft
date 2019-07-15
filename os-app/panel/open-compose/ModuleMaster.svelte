@@ -2,7 +2,7 @@
 import WKCNotesAction from '../../_shared/rs-modules/wkc_notes/action.js';
 import WKCWriteLogic from '../open-write/ui-logic.js';
 
-import { storageClient, notesAll, noteSelected } from './persistence.js';
+import { storageClient, notesAll, noteSelected, filterText } from './persistence.js';
 
 async function noteCreate() {
 	let item = await WKCNotesAction.WKCNotesActionCreate(storageClient, {
@@ -19,17 +19,26 @@ async function noteCreate() {
 async function noteSelect(inputData) {
 	return noteSelected.set(inputData);
 }
+
+let notesVisible = []
+
+$: notesVisible = $notesAll.filter(function (e) {
+	return e.WKCNoteBody.toLowerCase().match($filterText.toLowerCase());
+});
+
 </script>
 
 <div class="Container WKC_ContextMobileView WKC_ContextMobileViewActive">
 
 <header class="WIKSharedToolbar">
+	<input placeholder="{ OLSKLocalized('WKCWriteMasterToolbarFilterInputPlaceholderText') }" bind:value={ $filterText } accesskey="f" id="WIKDefaultFocusNode" autofocus />
+
 	<button on:click={ noteCreate } class="WKCSharedButtonNoStyle" accesskey="n">{ window.OLSKLocalized('WKCWriteMasterToolbarCreateButtonText') }</button>
 </header>
 <div class="List">
-	{#each $notesAll as e}
+	{#each notesVisible as e}
 		<div on:click={ () => noteSelect(e) } class="ListItem WKCSharedElementTappable">
-			<strong>{ e.WKCNoteName || e.WKCNoteSignature || e.WKCNoteID }</strong>
+			<strong>{ e.WKCNoteBody }</strong>
 		</div>
 	{/each}
 </div>

@@ -9,6 +9,8 @@ import { writable } from 'svelte/store';
 
 export const notesAll = writable([]);
 export const noteSelected = writable(null);
+export let filterText = writable('');
+
 export const defaultFocusNode = function () {
 	return document.getElementById('WIKDefaultFocusNode');
 };
