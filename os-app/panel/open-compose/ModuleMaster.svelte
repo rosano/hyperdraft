@@ -21,10 +21,10 @@ async function noteSelect(inputData) {
 }
 </script>
 
-<div class="Container">
+<div class="Container WKC_ContextMobileView WKC_ContextMobileViewActive">
 
 <header class="WIKSharedToolbar">
-	<button on:click={ noteCreate } class="WKCSharedButtonNoStyle" accesskey="n">{ window.OLSKLocalized('WKCWriteToolbarCreateButtonText') }</button>
+	<button on:click={ noteCreate } class="WKCSharedButtonNoStyle" accesskey="n">{ window.OLSKLocalized('WKCWriteMasterToolbarCreateButtonText') }</button>
 </header>
 <div class="List">
 	{#each $notesAll as e}
