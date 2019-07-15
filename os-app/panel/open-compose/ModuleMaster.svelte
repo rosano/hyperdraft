@@ -46,6 +46,28 @@ async function exportNotes() {
 		saveAs(content, 'notes.zip');
 	});
 }
+
+function handleArrowUp () {
+	return noteSelected.set(notesVisible[Math.max(notesVisible.indexOf($noteSelected) - 1, 0)]) && event.preventDefault();
+};
+
+function handleArrowDown () {
+	return noteSelected.set(notesVisible[Math.min(notesVisible.indexOf($noteSelected) + 1, notesVisible.length - 1)]) && event.preventDefault();
+};
+
+window.addEventListener('keydown', function (event) {
+	if (document.activeElement !== defaultFocusNode()) {
+		return;
+	}
+
+	if (event.key === 'ArrowUp') {
+		return handleArrowUp(event);
+	}
+
+	if (event.key === 'ArrowDown') {
+		return handleArrowDown(event);
+	}
+});
 </script>
 
 <div class="Container">
