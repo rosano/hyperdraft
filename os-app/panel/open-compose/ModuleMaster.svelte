@@ -119,7 +119,7 @@ window.addEventListener('keydown', function (event) {
 	</div>
 </header>
 
-<div class="ContentContainer">
+<div class="MasterContentContainer">
 	<div class="List">
 		{#each notesVisible as e}
 			<div on:click={ () => noteSelect(e) } class="ListItem WKCSharedElementTappable" class:ListItemSelected={ $noteSelected === e }>
@@ -168,7 +168,7 @@ input {
 	flex-grow: 1;
 }
 
-.ContentContainer {
+.MasterContentContainer {
 	overflow: auto;
 
 	/* ContainerFlexboxChild */
@@ -205,7 +205,7 @@ input {
 
 @media screen and (max-width: 760px) {
 
-.ContentContainer {
+.MasterContentContainer {
   /* smooth scrolling on mobile safari */
 	-webkit-overflow-scrolling: touch;
 }

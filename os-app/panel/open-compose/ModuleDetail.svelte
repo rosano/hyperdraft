@@ -307,13 +307,13 @@ window.addEventListener('keydown', function (event) {
 		</div>
 	</header>
 
-	<div class="EditorContainer">
+	<div class="DetailContentContainer EditorContainer">
 		<textarea bind:this={ editorElement }></textarea>
 	</div>
 {/if}
 
 {#if !$noteSelected}
-	<div class="PlaceholderContainer">
+	<div class="DetailContentContainer PlaceholderContainer">
 		<span>{ window.window.OLSKLocalized('WKCWriteDetailPlaceholderText') }</span>
 	</div>
 {/if}

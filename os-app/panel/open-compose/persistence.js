@@ -11,6 +11,7 @@ import { writable } from 'svelte/store';
 export const notesAll = writable([]);
 export const noteSelected = writable(null);
 export const mobileViewCurrent = writable('ModuleMaster');
+export const isLoading = writable(true);
 export let filterText = writable('');
 
 export const defaultFocusNode = function () {
@@ -74,7 +75,7 @@ remoteStorage.on('ready', async () => {
 
 	await remoteStorage.wkc_notes.init();
 
-	// setupFinalize(); remove loading class
+	isLoading.set(false);
 });
 
 (function SetupStorageClientLogging() {

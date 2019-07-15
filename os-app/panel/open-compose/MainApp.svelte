@@ -2,7 +2,7 @@
 import ModuleMaster from './ModuleMaster.svelte';
 import ModuleDetail from './ModuleDetail.svelte';
 
-import { storageClient } from './persistence.js';
+import { storageClient, isLoading } from './persistence.js';
 
 import { onMount } from 'svelte';
 import Widget from '../../_shared/_external/remotestorage-widget/build/widget.js';
@@ -11,7 +11,7 @@ onMount(function () {
 });
 </script>
 
-<div class="AppContainer">
+<div class="AppContainer" class:AppIsLoading={ $isLoading }>
 
 <div class="AppContentContainer">
 	<ModuleMaster />
@@ -35,6 +35,10 @@ onMount(function () {
 	/* AppContainerFlexboxParent */
 	display: flex;
 	flex-direction: column;
+}
+
+.AppIsLoading :global(.WKCSharedToolbar *), .AppIsLoading :global(.MasterContentContainer *), .AppIsLoading :global(.DetailContentContainer *) {
+	visibility: hidden;
 }
 
 .AppContentContainer {
