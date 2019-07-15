@@ -150,7 +150,7 @@ afterUpdate(function () {
 			event.preventDefault();
 		});
 
-		document.querySelector('.CodeMirror').addEventListener('mouseup)', function (event) {
+		document.querySelector('.CodeMirror').addEventListener('mouseup', function (event) {
 			if (!event.target.className.match('cm-link'))  {
 				return;
 			}
