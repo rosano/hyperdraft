@@ -27,3 +27,21 @@
 		'file-saver',
 	], pathPackage.join(__dirname, 'node_modules'), pathPackage.join(__dirname, 'os-app/_shared/_external'));
 })();
+
+//# OLSKStartRollup
+
+(function OLSKStartRollup() {
+	const executeCommand = require('child_process').exec;
+
+	const globPackage = require('glob');
+	const pathPackage = require('path');
+
+	globPackage.sync(['os-app/**/rollup-config.js'], {
+		matchBase: true,
+	}).filter(function (e) {
+		return !e.match(/node_modules|_external/ig);
+	}).forEach(function (e) {
+		executeCommand(`ROLLUP_PATH='${ e }' npm run svelte-build-manual`);
+	});
+})();
+
