@@ -95,7 +95,7 @@ window.addEventListener('keydown', function (event) {
 });
 </script>
 
-<div class="Container">
+<div class="Container" class:WKC_ContextMobileViewActive={ !$noteSelected } class:WKC_ContextMobileViewInactive={ $noteSelected }>
 
 <header class="WKCSharedToolbar">
 	<input bind:value={ $filterText } placeholder="{ OLSKLocalized('WKCWriteMasterToolbarFilterInputPlaceholderText') }" accesskey="f" id="WIKDefaultFocusNode" autofocus />
@@ -187,5 +187,29 @@ input {
 
 #WKCWriteMasterDebug {
 	padding: 10px;
+}
+
+@media screen and (max-width: 760px) {
+
+.ContentContainer {
+  /* smooth scrolling on mobile safari */
+	-webkit-overflow-scrolling: touch;
+}
+
+header {
+	padding: 8px;
+}
+
+input {
+	height: 30px;
+	border-radius: 10px;
+
+	font-size: 14px;
+}
+
+.WKCSharedToolbarElementGroup {
+	margin-left: 8px;
+}
+
 }
 </style>

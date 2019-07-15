@@ -279,7 +279,7 @@ window.addEventListener('keydown', function (event) {
 });
 </script>
 
-<div class="Container">
+<div class="Container" class:WKC_ContextMobileViewActive={ $noteSelected } class:WKC_ContextMobileViewInactive={ !$noteSelected }>
 
 {#if $noteSelected}
 	<header class="WKCSharedToolbar">

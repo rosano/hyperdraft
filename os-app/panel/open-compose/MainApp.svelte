@@ -44,4 +44,25 @@ onMount(function () {
 	/* AppContentContainerFlexboxParent */
 	display: flex;
 }
+
+@media screen and (max-width: 760px) {
+
+.AppContainer {
+  position: fixed;
+  overflow: hidden;
+}
+
+.AppContainer :global(.WKC_ContextMobileViewInactive) {
+	display: none !important;
+}
+
+.AppContainer :global(.WKC_ContextMobileViewActive) {
+	flex-basis: 100vw !important;
+}
+
+.AppContainer :global(.WKC_ContextMobileExclusive) {
+	display: unset;
+}
+
+}
 </style>
