@@ -17,6 +17,10 @@ let _noteSelected;
 noteSelected.subscribe(function (val) {
 	_noteSelected = val;
 
+	if (!val && editorInstance) {
+		editorInstance.toTextArea();
+	}
+
 	if (!val) {
 		editorInstance = null;
 
