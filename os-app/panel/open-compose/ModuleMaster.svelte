@@ -44,7 +44,7 @@ async function exportNotes() {
 }
 </script>
 
-<div class="Container WKC_ContextMobileView WKC_ContextMobileViewActive">
+<div class="Container">
 
 <header class="WKCSharedToolbar">
 	<input bind:value={ $filterText } placeholder="{ OLSKLocalized('WKCWriteMasterToolbarFilterInputPlaceholderText') }" accesskey="f" id="WIKDefaultFocusNode" autofocus />
