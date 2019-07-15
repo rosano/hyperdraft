@@ -25,7 +25,7 @@ noteSelected.subscribe(function (val) {
 	}
 
 	return editorConfigure(function () {
-		editorInstance.setValue($noteSelected.WKCNoteBody);
+		editorInstance.setValue(val.WKCNoteBody);
 		editorInstance.getDoc().clearHistory();
 	});
 });
@@ -213,16 +213,22 @@ async function noteSave() {
 	OLSKThrottle.OLSKThrottleTimeoutFor(throttleMapNotes[$noteSelected.WKCNoteID]);
 }
 
-async function noteClear() {
+function noteClear() {
 	return noteSelected.set(null);
 }
 
 async function notePublish() {
-	return await WKCNotesAction.WKCNotesActionPublish(storageClient, $noteSelected);
+	let item = await WKCNotesAction.WKCNotesActionPublish(storageClient, $noteSelected);
+	return noteSelected.update(function (val) {
+		return Object.assign(val, item);
+	});
 }
 
 async function noteUnpublish() {
-	return await WKCNotesAction.WKCNotesActionUnpublish(storageClient, $noteSelected);
+	let item = await WKCNotesAction.WKCNotesActionUnpublish(storageClient, $noteSelected);
+	return noteSelected.update(function (val) {
+		return Object.assign(val, item);
+	});
 }
 
 async function noteVersions() {
@@ -281,9 +287,8 @@ window.addEventListener('keydown', function (event) {
 		</div>
 
 		<div class="WKCSharedToolbarElementGroup">
-			<span id="WKCWriteDetailToolbarPublishStatus"></span>
-
 			{#if $noteSelected.WKCNotePublishStatusIsPublished}
+				<span id="PublishStatus">{ window.OLSKLocalized('WKCWriteDetailToolbarPublishStatusPublished') }</span>
 				<a class="WKCSharedToolbarButton WKCSharedElementTappable" href={ window.OLSKCanonicalFor('WKCRouteRefsRead', {
 						wkc_note_public_id: $noteSelected.WKCNotePublicID,
 					}) } title="{ window.OLSKLocalized('WKCWriteDetailToolbarVisitButtonText') }" style="background-image: url('/panel/_shared/ui-assets/wIKWriteVisit.svg')" target="_blank"></a>
@@ -338,8 +343,14 @@ window.addEventListener('keydown', function (event) {
 }
 
 header {
+	font-size: 14px;
+
 	/* WKCSharedToolbarFlexboxChild */
 	justify-content: space-between;
+}
+
+#PublishStatus {
+	color: #bfbfbf
 }
 
 .EditorContainer {

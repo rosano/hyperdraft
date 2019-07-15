@@ -25,7 +25,8 @@ async function noteSelect(inputData) {
 	editorConfigure(function (editorInstance) {
 		return editorInstance.focus();
 	});
-	return noteSelected.set(inputData) ;
+	
+	return noteSelected.set(inputData);
 }
 
 let notesVisible = []

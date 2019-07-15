@@ -1,6 +1,7 @@
 import * as WIKStorageClient from '../../_shared/WIKStorageClient/main.js';
 import RSModuleProtocol_wkc_notes from '../../_shared/rs-modules/wkc_notes/rs-module.js';
 import RSModuleProtocol_wkc_versions from '../../_shared/rs-modules/wkc_versions/rs-module.js';
+import RSModuleProtocol_wkc_settings from '../../_shared/rs-modules/wkc_settings/rs-module.js';
 import WKCWriteLogic from '../open-write/ui-logic.js';
 
 import * as WKCNotesAction from '../../_shared/rs-modules/wkc_notes/action.js';
@@ -58,6 +59,7 @@ export const storageClient = WIKStorageClient.WIKStorageClientForModules([
 		},
 	}),
 	RSModuleProtocol_wkc_versions.RSModuleProtocolModuleForChangeDelegate(null),
+	RSModuleProtocol_wkc_settings.RSModuleProtocolModuleForChangeDelegate(null),
 ]);
 
 let remoteStorage = storageClient.remoteStorage;
