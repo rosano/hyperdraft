@@ -32,3 +32,7 @@
 	bottom: 100px;
 	right: 0;
 }
+
+.WKC_ContextMobileExclusive {
+	display: none;
+}

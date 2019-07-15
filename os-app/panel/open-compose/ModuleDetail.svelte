@@ -355,15 +355,17 @@ header {
 }
 
 .EditorContainer {
-	position:relative;
-
 	/* ContainerFlexboxChild */
 	flex-grow: 1;
+
+	/* EditorContainerStationParent */
+	position: relative;
 }
 
 .EditorContainer :global(.CodeMirror) {
 	height: 100%;
 
+	/* EditorContainerStationChild */
 	position: absolute;
 	top: 0;
 	bottom: 0;
