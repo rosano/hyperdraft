@@ -241,9 +241,17 @@ function toggleTabFocus (event) {
 	return ((!editorInstance || editorInstance.hasFocus()) ? defaultFocusNode() :editorInstance).focus();
 };
 
+function handleEsc (event) {
+	return noteSelected.set(null) && filterText.set('');
+};
+
 window.addEventListener('keydown', function (event) {
 	if (event.key === 'Tab') {
 		return toggleTabFocus(event);
+	};
+
+	if (event.key === 'Escape') {
+		return handleEsc(event);
 	};
 });
 </script>
