@@ -44,7 +44,7 @@ describe('WKCSettingsActionDelete', function testWKCSettingsActionDelete() {
 	it('deletes WKCSetting', async function() {
 		await mainModule.WKCSettingsActionProperty(WKCTestingStorageClient, 'alfa', 'bravo');
 		await mainModule.WKCSettingsActionDelete(WKCTestingStorageClient, 'alfa');
-		assert.deepEqual(await mainModule.WKCSettingsActionQuery(WKCTestingStorageClient, {}), {});
+		assert.deepEqual(await mainModule.WKCSettingsActionQuery(WKCTestingStorageClient, {}), []);
 	});
 
 });

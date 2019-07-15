@@ -14,10 +14,10 @@
 
 	exports.WKCWriteLogicListSort = function (a, b) {
 		if (b.WKCNoteModificationDate && a.WKCNoteModificationDate) {
-			return b.WKCNoteModificationDate > a.WKCNoteModificationDate;
+			return b.WKCNoteModificationDate - a.WKCNoteModificationDate;
 		}
 
-		return b.WKCNoteCreationDate > a.WKCNoteCreationDate;
+		return b.WKCNoteCreationDate - a.WKCNoteCreationDate;
 	};
 
 	//_ WKCWriteLineObjectsFor
