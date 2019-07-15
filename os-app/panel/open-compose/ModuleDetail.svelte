@@ -1,8 +1,8 @@
 <script context="module">
-export let editorInstance = null;
-export let editorPostInitializeQueue = [];
-function editorConfigure (inputData) {
-	return editorInstance ? inputData() : editorPostInitializeQueue.push(inputData);
+let editorInstance = null;
+let editorPostInitializeQueue = [];
+export let editorConfigure = function (inputData) {
+	return editorInstance ? inputData(editorInstance) : editorPostInitializeQueue.push(inputData);
 }
 </script>
 
@@ -159,7 +159,7 @@ afterUpdate(function () {
 	})();
 
 	editorPostInitializeQueue.forEach(function(e) {
-		return e() && editorPostInitializeQueue.shift();
+		return e(editorInstance) && editorPostInitializeQueue.shift();
 	});
 });
 
