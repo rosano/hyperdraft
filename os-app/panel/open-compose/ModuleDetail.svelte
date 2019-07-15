@@ -211,8 +211,12 @@ async function noteClear() {
 	return noteSelected.set(null);
 }
 
+async function noteUnpublish() {
+	return await WKCNotesAction.WKCNotesActionUnpublish(storageClient, $noteSelected);
+}
+
 async function noteDelete() {
-	if (!window.confirm(OLSKLocalized('WIKComposeListItemDeletePromptText'))) {
+	if (!window.confirm(window.OLSKLocalized('WIKComposeListItemDeletePromptText'))) {
 		return;
 	}
 
@@ -233,19 +237,21 @@ async function noteDelete() {
 {#if $noteSelected}
 	<header class="WKCSharedToolbar">
 		<div class="WKCSharedToolbarElementGroup">
-			<button on:click={ noteClear } class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle WKC_ContextMobileExclusive" title="<%= OLSKLocalized('WKCWriteDetailToolbarBackButtonText') %>" style="background-image: url('/panel/_shared/ui-assets/wIKWriteBack.svg')"></button>
+			<button on:click={ noteClear } class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle WKC_ContextMobileExclusive" title="<%= window.OLSKLocalized('WKCWriteDetailToolbarBackButtonText') %>" style="background-image: url('/panel/_shared/ui-assets/wIKWriteBack.svg')"></button>
 		</div>
 
 		<div class="WKCSharedToolbarElementGroup">
 			<span id="WKCWriteDetailToolbarPublishStatus"></span>
 
 			{#if $noteSelected.WKCNotePublishStatusIsPublished}
-				<a class="WKCSharedToolbarButton WKCSharedElementTappable" href={ OLSKCanonicalFor('WKCRouteRefsRead', {
+				<a class="WKCSharedToolbarButton WKCSharedElementTappable" href={ window.OLSKCanonicalFor('WKCRouteRefsRead', {
 						wkc_note_public_id: $noteSelected.WKCNotePublicID,
-					}) } title="{ OLSKLocalized('WKCWriteDetailToolbarVisitButtonText') }" style="background-image: url('/panel/_shared/ui-assets/wIKWriteVisit.svg')" target="_blank"></a>
+					}) } title="{ window.OLSKLocalized('WKCWriteDetailToolbarVisitButtonText') }" style="background-image: url('/panel/_shared/ui-assets/wIKWriteVisit.svg')" target="_blank"></a>
+
+				<button on:click={ noteUnpublish } class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" title={ window.OLSKLocalized('WKCWriteDetailToolbarUnpublishButtonText') } style="background-image: url('/panel/_shared/ui-assets/wIKWriteUnpublish.svg')"></button>
 			{/if}
 
-			<button on:click={ noteDelete } class="WKCSharedButtonNoStyle">{ window.OLSKLocalized('WKCWriteDetailToolbarDiscardButtonText') }</button>
+			<button on:click={ noteDelete } class="WKCSharedButtonNoStyle">{ window.window.OLSKLocalized('WKCWriteDetailToolbarDiscardButtonText') }</button>
 		</div>
 	</header>
 
@@ -256,7 +262,7 @@ async function noteDelete() {
 
 {#if !$noteSelected}
 	<div class="PlaceholderContainer">
-		<span>{ window.OLSKLocalized('WKCWriteDetailPlaceholderText') }</span>
+		<span>{ window.window.OLSKLocalized('WKCWriteDetailPlaceholderText') }</span>
 	</div>
 {/if}
 
