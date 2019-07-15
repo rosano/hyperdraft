@@ -35,6 +35,25 @@ $: notesVisible = $notesAll.filter(function (e) {
 	return e.WKCNoteBody.toLowerCase().match($filterText.toLowerCase());
 });
 
+let filterTextDidChange = function (val) {
+	if (!val.length) {
+		return noteSelected.set(null);
+	}
+
+	if (!notesVisible.length) {
+		return noteSelected.set(null);
+	}
+
+	let item = notesVisible.filter(function (e) {
+		return WKCParser.WKCParserTitleForPlaintext(e.WKCNoteBody).toLowerCase().match(val.toLowerCase());
+	}).shift();
+
+	if (item) {
+		return noteSelected.set(item);
+	}
+};
+$: filterTextDidChange($filterText);
+
 async function exportNotes() {
 	let zip = new JSZip();
 

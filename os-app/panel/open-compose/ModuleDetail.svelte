@@ -263,8 +263,9 @@ function toggleTabFocus (event) {
 };
 
 function handleEsc (event) {
-	noteSelected.set(null)
-	return filterText.set('');
+	filterText.set('');
+	noteSelected.set(null);
+	defaultFocusNode().focus();
 };
 
 window.addEventListener('keydown', function (event) {
