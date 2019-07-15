@@ -20,7 +20,7 @@ export const defaultFocusNode = function () {
 
 export const isMobile = function () {
 	return window.innerWidth <= 760;
-}
+};
 
 let _noteSelected;
 noteSelected.subscribe(function (val) {

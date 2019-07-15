@@ -7,7 +7,7 @@ import WKCWriteLogic from '../open-write/ui-logic.js';
 
 import { storageClient, notesAll, noteSelected, filterText, defaultFocusNode, isMobile, mobileViewCurrent } from './persistence.js';
 
-import { editorConfigure } from './ModuleDetail.svelte'
+import { editorConfigure } from './ModuleDetail.svelte';
 
 async function noteCreate() {
 	let item = await WKCNotesAction.WKCNotesActionCreate(storageClient, {
@@ -41,9 +41,9 @@ noteSelected.subscribe(function (val) {
 	}
 
 	mobileViewCurrent.set('ModuleMaster');
-})
+});
 
-let notesVisible = []
+let notesVisible = [];
 
 $: notesVisible = $notesAll.filter(function (e) {
 	return e.WKCNoteBody.toLowerCase().match($filterText.toLowerCase());
@@ -86,13 +86,13 @@ function handleArrowUp () {
 	noteSelected.set(notesVisible[Math.max(notesVisible.indexOf($noteSelected) - 1, 0)]);
 
 	return event.preventDefault();
-};
+}
 
 function handleArrowDown () {
 	noteSelected.set(notesVisible[Math.min(notesVisible.indexOf($noteSelected) + 1, notesVisible.length - 1)]);
 
 	return event.preventDefault();
-};
+}
 
 window.addEventListener('keydown', function (event) {
 	if (document.activeElement !== defaultFocusNode()) {

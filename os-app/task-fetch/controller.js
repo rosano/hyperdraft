@@ -152,7 +152,7 @@ exports.WKCTaskFetch = function() {
 										return;
 									}
 
-									return
+									return;
 
 									return apiSnapshotsMetal.WKCSnapshotsMetalCreate(callbackInput.OLSKLive.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, {
 										WKCSnapshotSubscriptionID: subscriptionObject.WKCSubscriptionID,

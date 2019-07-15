@@ -26,7 +26,7 @@ describe('WKCVersionsMetalWrite', function testWKCVersionsMetalWrite() {
 			WKCVersionID: [
 				'WKCErrorNotString',
 			],
-		})
+		});
 	});
 
 	it('returns WKCVersion', async function() {
@@ -84,7 +84,7 @@ describe('WKCVersionsMetalDelete', function testWKCVersionsMetalDelete() {
 	});
 
 	it('deletes WKCVersion', async function() {
-		await mainModule.WKCVersionsMetalDelete(WKCTestingStorageClient, (await mainModule.WKCVersionsMetalWrite(WKCTestingStorageClient, kTesting.StubVersionObjectValid())).WKCVersionID)
+		await mainModule.WKCVersionsMetalDelete(WKCTestingStorageClient, (await mainModule.WKCVersionsMetalWrite(WKCTestingStorageClient, kTesting.StubVersionObjectValid())).WKCVersionID);
 		assert.deepEqual(await mainModule.WKCVersionsMetalList(WKCTestingStorageClient), {});
 	});
 

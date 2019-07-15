@@ -46,7 +46,7 @@
 		await Promise.all((await WKCVersionsAction.WKCVersionsActionQuery(storageClient, {
 			WKCVersionNoteID: inputData,
 		})).map(function (e) {
-			return WKCVersionsAction.WKCVersionsActionDelete(storageClient, e.WKCVersionID)
+			return WKCVersionsAction.WKCVersionsActionDelete(storageClient, e.WKCVersionID);
 		}));
 		return await WKCNotesMetal.WKCNotesMetalDelete(storageClient, inputData);
 	};
@@ -61,7 +61,7 @@
 		}
 
 		return Promise.resolve(Object.values(await WKCNotesMetal.WKCNotesMetalList(storageClient)).sort(function (a, b) {
-			return d3Package.descending(a.WKCNoteModificationDate, b.WKCNoteModificationDate)
+			return d3Package.descending(a.WKCNoteModificationDate, b.WKCNoteModificationDate);
 		}).filter(function(e) {
 			if (!Object.keys(inputData).length) {
 				return true;

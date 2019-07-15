@@ -36,7 +36,7 @@
 		}
 
 		return Promise.resolve(Object.values(await WKCVersionsMetal.WKCVersionsMetalList(storageClient)).sort(function (a, b) {
-			return d3Package.descending(a.WKCVersionID, b.WKCVersionID)
+			return d3Package.descending(a.WKCVersionID, b.WKCVersionID);
 		}).filter(function(e) {
 			if (!Object.keys(inputData).length) {
 				return true;

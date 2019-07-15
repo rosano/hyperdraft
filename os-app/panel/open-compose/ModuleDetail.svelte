@@ -4,7 +4,7 @@ let editorPostInitializeQueue = [];
 export let editorConfigure = function (inputData) {
 	// console.log(editorInstance ? 'run' : 'queue', inputData);
 	return editorInstance ? inputData(editorInstance) : editorPostInitializeQueue.push(inputData);
-}
+};
 </script>
 
 <script>
@@ -43,7 +43,7 @@ function openTextObject (inputData) {
 	event.preventDefault();
 	
 	$filterText = matches.pop();
-};
+}
 
 function openCursorObject (inputData) {
 	let cursor = editorInstance.getCursor();
@@ -57,7 +57,7 @@ function openCursorObject (inputData) {
 	}
 
 	openTextObject(currentObject.string);
-};
+}
 
 let editorElement;
 import { afterUpdate } from 'svelte';
@@ -184,7 +184,7 @@ async function noteSave() {
 		throttleMapVersions[noteObject.WKCNoteID] = {
 			OLSKThrottleDuration: 3000,
 			OLSKThrottleCallback: function () {
-				delete throttleMapVersions[noteObject.WKCNoteID]
+				delete throttleMapVersions[noteObject.WKCNoteID];
 			},
 		};
 
@@ -235,9 +235,9 @@ async function noteVersions() {
 	(await WKCVersionsAction.WKCVersionsActionQuery(storageClient, {
 		WKCVersionNoteID: $noteSelected.WKCNoteID,
 	})).slice(0, 5).forEach(function (e) {
-		console.log(e)
+		console.log(e);
 		console.log(e.WKCVersionBody);
-	})
+	});
 }
 
 async function noteDelete() {
@@ -260,22 +260,22 @@ function toggleTabFocus (event) {
 	event.preventDefault();
 
 	return ((!editorInstance || editorInstance.hasFocus()) ? defaultFocusNode() :editorInstance).focus();
-};
+}
 
 function handleEsc (event) {
 	filterText.set('');
 	noteSelected.set(null);
 	defaultFocusNode().focus();
-};
+}
 
 window.addEventListener('keydown', function (event) {
 	if (event.key === 'Tab') {
 		return toggleTabFocus(event);
-	};
+	}
 
 	if (event.key === 'Escape') {
 		return handleEsc(event);
-	};
+	}
 });
 </script>
 

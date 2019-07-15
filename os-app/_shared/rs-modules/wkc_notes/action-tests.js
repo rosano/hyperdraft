@@ -33,7 +33,7 @@ describe('WKCNotesActionCreate', function testWKCNotesActionCreate() {
 			WKCNoteBody: [
 				'WKCErrorNotString',
 			],
-		})
+		});
 	});
 
 	it('returns WKCNote', async function() {
@@ -77,7 +77,7 @@ describe('WKCNotesActionUpdate', function testWKCNotesActionUpdate() {
 			WKCNoteID: [
 				'WKCErrorNotString',
 			],
-		})
+		});
 	});
 
 	it('returns WKCNote', async function() {
@@ -197,7 +197,7 @@ describe('WKCNotesActionPublish', function testWKCNotesActionPublish() {
 			WKCNoteID: [
 				'WKCErrorNotString',
 			],
-		})
+		});
 	});
 
 	it('returns WKCNote', async function() {
@@ -252,7 +252,7 @@ describe('WKCNotesActionPublicRead', function testWKCNotesActionPublicRead() {
 	});
 
 	it('returns WKCErrorNotFound if not found', async function() {
-		assert.deepEqual(await mainModule.WKCNotesActionPublicRead(WKCTestingStorageClient, 'alfa'), new Error('WKCErrorNotFound'))
+		assert.deepEqual(await mainModule.WKCNotesActionPublicRead(WKCTestingStorageClient, 'alfa'), new Error('WKCErrorNotFound'));
 	});
 
 	it('returns WKCErrorNotFound if WKCNotePublishStatusIsPublished false', async function() {
@@ -301,12 +301,12 @@ describe('WKCNotesActionUnpublish', function testWKCNotesActionUnpublish() {
 describe('WKCNotesActionGetPublicLinks', function testWKCNotesActionGetPublicLinks() {
 
 	it('returns hash', async function() {
-		assert.deepEqual(await mainModule.WKCNotesActionGetPublicLinks(WKCTestingStorageClient), {})
+		assert.deepEqual(await mainModule.WKCNotesActionGetPublicLinks(WKCTestingStorageClient), {});
 	});
 
 	it('excludes if WKCNotePublishStatusIsPublished false', async function() {
 		await mainModule.WKCNotesActionCreate(WKCTestingStorageClient, kTesting.StubNoteObject());
-		assert.deepEqual(await mainModule.WKCNotesActionGetPublicLinks(WKCTestingStorageClient), {})
+		assert.deepEqual(await mainModule.WKCNotesActionGetPublicLinks(WKCTestingStorageClient), {});
 	});
 
 	it('includes if WKCNotePublishStatusIsPublished true', async function() {

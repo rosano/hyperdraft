@@ -24,7 +24,7 @@ describe('WKCSettingsMetalWrite', function testWKCSettingsMetalWrite() {
 			WKCSettingKey: [
 				'WKCErrorNotString',
 			],
-		})
+		});
 	});
 
 	it('returns WKCSetting', async function() {

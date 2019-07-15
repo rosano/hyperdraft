@@ -26,7 +26,7 @@ describe('WKCNotesMetalWrite', function testWKCNotesMetalWrite() {
 			WKCNoteID: [
 				'WKCErrorNotString',
 			],
-		})
+		});
 	});
 
 	it('returns WKCNote', async function() {

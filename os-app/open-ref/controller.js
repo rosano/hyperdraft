@@ -11,7 +11,7 @@ exports.OLSKControllerSharedConnections = function() {
 		WKCSharedConnectionRS: {
 			OLSKConnectionInitializer: function(olskCallback) {
 				storageClient.remoteStorage.on('error', (error) => {
-					console.log(`error`, error);
+					console.log('error', error);
 
 					olskCallback(error);
 				});
@@ -84,7 +84,7 @@ exports.OLSKControllerRoutes = function() {
 				item.WKCNoteDetectedBody = WKCParser.WKCParserHTMLForPlaintext(WKCParser.WKCParserReplaceLinks(WKCParser.WKCParserBodyForPlaintext(item.WKCNoteBody), Object.entries(await WKCNotesAction.WKCNotesActionGetPublicLinks(req.OLSKSharedConnectionFor('WKCSharedConnectionRS').OLSKConnectionClient)).map(function (e) {
 					return [e[0], `[${ e[0] }](${ res.locals.OLSKCanonicalFor('WKCRouteRefsRead', {
 						wkc_note_public_id: e[1],
-					}) })`]
+					}) })`];
 				}).reduce(function (coll, e) {
 					coll[e[0]] = e[1];
 
