@@ -211,6 +211,10 @@ async function noteClear() {
 	return noteSelected.set(null);
 }
 
+async function notePublish() {
+	return await WKCNotesAction.WKCNotesActionPublish(storageClient, $noteSelected);
+}
+
 async function noteUnpublish() {
 	return await WKCNotesAction.WKCNotesActionUnpublish(storageClient, $noteSelected);
 }
@@ -249,6 +253,10 @@ async function noteDelete() {
 					}) } title="{ window.OLSKLocalized('WKCWriteDetailToolbarVisitButtonText') }" style="background-image: url('/panel/_shared/ui-assets/wIKWriteVisit.svg')" target="_blank"></a>
 
 				<button on:click={ noteUnpublish } class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" title={ window.OLSKLocalized('WKCWriteDetailToolbarUnpublishButtonText') } style="background-image: url('/panel/_shared/ui-assets/wIKWriteUnpublish.svg')"></button>
+			{/if}
+
+			{#if !$noteSelected.WKCNotePublishStatusIsPublished }
+				<button on:click={ notePublish } class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" title={ window.OLSKLocalized('WKCWriteDetailToolbarPublishButtonText') } style="background-image: url('/panel/_shared/ui-assets/wIKWritePublish.svg')"></button>
 			{/if}
 
 			<button on:click={ noteDelete } class="WKCSharedButtonNoStyle">{ window.window.OLSKLocalized('WKCWriteDetailToolbarDiscardButtonText') }</button>
