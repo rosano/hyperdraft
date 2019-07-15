@@ -234,6 +234,18 @@ async function noteDelete() {
 
 	return noteSelected.set(null);
 }
+
+function toggleTabFocus (event) {
+	event.preventDefault();
+
+	return ((!editorInstance || editorInstance.hasFocus()) ? defaultFocusNode() :editorInstance).focus();
+};
+
+window.addEventListener('keydown', function (event) {
+	if (event.key === 'Tab') {
+		return toggleTabFocus(event);
+	};
+});
 </script>
 
 <div class="Container">
