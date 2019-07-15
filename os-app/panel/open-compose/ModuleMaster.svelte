@@ -96,7 +96,6 @@ input {
 	border: 1px solid #e6e6e6;
 	border-radius: 10px;
 
-	font-size: 80%;
 	text-indent: 2px;
 	line-height: 1.4;
 
@@ -118,8 +117,6 @@ input {
 
 	overflow: hidden;
 	text-overflow: ellipsis;
-
-	font-size: 12px;
 
 	/* prevent breaking from long urls */
 	overflow-wrap: break-word;

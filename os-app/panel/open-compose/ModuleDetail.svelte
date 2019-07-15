@@ -321,6 +321,7 @@ header {
 	right: 0;
 
 	font-family: inherit;
+	font-size: 14px;
 }
 
 .EditorContainer :global(.CodeMirror-scroll) {
