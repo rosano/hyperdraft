@@ -236,7 +236,17 @@ async function noteDelete() {
 			<button on:click={ noteClear } class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle WKC_ContextMobileExclusive" title="<%= OLSKLocalized('WKCWriteDetailToolbarBackButtonText') %>" style="background-image: url('/panel/_shared/ui-assets/wIKWriteBack.svg')"></button>
 		</div>
 
-		<button on:click={ noteDelete } class="WKCSharedButtonNoStyle">{ window.OLSKLocalized('WKCWriteDetailToolbarDiscardButtonText') }</button>
+		<div class="WKCSharedToolbarElementGroup">
+			<span id="WKCWriteDetailToolbarPublishStatus"></span>
+
+			{#if $noteSelected.WKCNotePublishStatusIsPublished}
+				<a class="WKCSharedToolbarButton WKCSharedElementTappable" href={ OLSKCanonicalFor('WKCRouteRefsRead', {
+						wkc_note_public_id: $noteSelected.WKCNotePublicID,
+					}) } title="{ OLSKLocalized('WKCWriteDetailToolbarVisitButtonText') }" style="background-image: url('/panel/_shared/ui-assets/wIKWriteVisit.svg')" target="_blank"></a>
+			{/if}
+
+			<button on:click={ noteDelete } class="WKCSharedButtonNoStyle">{ window.OLSKLocalized('WKCWriteDetailToolbarDiscardButtonText') }</button>
+		</div>
 	</header>
 
 	<div class="EditorContainer">
