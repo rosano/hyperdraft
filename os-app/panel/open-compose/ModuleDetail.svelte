@@ -3,7 +3,7 @@ import WKCNotesAction from '../../_shared/rs-modules/wkc_notes/action.js';
 import WKCVersionsAction from '../../_shared/rs-modules/wkc_versions/action.js';
 import WKCWriteLogic from '../open-write/ui-logic.js';
 
-import { storageClient, notesAll, noteSelected } from './persistence.js';
+import { storageClient, notesAll, noteSelected, filterText, defaultFocusNode } from './persistence.js';
 
 let editorInstance;
 let editorInitializeValue = function () {
@@ -86,7 +86,7 @@ afterUpdate(function () {
 			  'Cmd-Enter': openCursorObject,
 			  'Ctrl-Enter': openCursorObject,
 			  Esc: function () {
-			    return moi.kDefaultFocusNode().focus();
+			    return defaultFocusNode().focus();
 			  },
 			  Tab: false,
 			},

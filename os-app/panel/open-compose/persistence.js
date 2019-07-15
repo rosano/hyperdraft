@@ -9,6 +9,9 @@ import { writable } from 'svelte/store';
 
 export const notesAll = writable([]);
 export const noteSelected = writable(null);
+export const defaultFocusNode = function () {
+	return document.getElementById('WIKDefaultFocusNode');
+};
 
 let _noteSelected;
 noteSelected.subscribe(function (val) {
