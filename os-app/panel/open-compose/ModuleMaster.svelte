@@ -5,7 +5,7 @@ import WKCParser from '../../_shared/WKCParser/main.js';
 
 import WKCWriteLogic from '../open-write/ui-logic.js';
 
-import { storageClient, notesAll, noteSelected, filterText, defaultFocusNode } from './persistence.js';
+import { storageClient, notesAll, noteSelected, filterText, defaultFocusNode, isMobile } from './persistence.js';
 
 import { editorConfigure } from './ModuleDetail.svelte'
 
@@ -23,6 +23,10 @@ async function noteCreate() {
 
 async function noteSelect(inputData) {
 	editorConfigure(function (editorInstance) {
+		if (isMobile()) {
+			return;
+		}
+		
 		return editorInstance.focus();
 	});
 	

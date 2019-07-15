@@ -16,6 +16,10 @@ export const defaultFocusNode = function () {
 	return document.getElementById('WIKDefaultFocusNode');
 };
 
+export const isMobile = function () {
+	return window.innerWidth <= 760;
+}
+
 let _noteSelected;
 noteSelected.subscribe(function (val) {
 	_noteSelected = val;
