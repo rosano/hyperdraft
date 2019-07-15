@@ -207,6 +207,10 @@ async function noteSave() {
 	OLSKThrottle.OLSKThrottleTimeoutFor(throttleMapNotes[$noteSelected.WKCNoteID]);
 }
 
+async function noteClear() {
+	return noteSelected.set(null);
+}
+
 async function noteDelete() {
 	if (!window.confirm(OLSKLocalized('WIKComposeListItemDeletePromptText'))) {
 		return;
@@ -227,9 +231,14 @@ async function noteDelete() {
 <div class="Container">
 
 {#if $noteSelected}
-	<header class="WIKSharedToolbar">
+	<header class="WKCSharedToolbar">
+		<div class="WKCSharedToolbarElementGroup">
+			<button on:click={ noteClear } class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle WKC_ContextMobileExclusive" title="<%= OLSKLocalized('WKCWriteDetailToolbarBackButtonText') %>" style="background-image: url('/panel/_shared/ui-assets/wIKWriteBack.svg')"></button>
+		</div>
+
 		<button on:click={ noteDelete } class="WKCSharedButtonNoStyle">{ window.OLSKLocalized('WKCWriteDetailToolbarDiscardButtonText') }</button>
 	</header>
+
 	<div class="EditorContainer">
 		<textarea bind:this={ editorElement }></textarea>
 	</div>
@@ -264,6 +273,11 @@ async function noteDelete() {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+}
+
+header {
+	/* WKCSharedToolbarFlexboxChild */
+	justify-content: space-between;
 }
 
 .EditorContainer {
