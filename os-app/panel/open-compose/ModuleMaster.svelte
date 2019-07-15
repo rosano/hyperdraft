@@ -1,6 +1,6 @@
 <script>
 import WKCNotesAction from '../../_shared/rs-modules/wkc_notes/action.js';
-import * as WKCWriteLogic from '../open-write/ui-logic.js';
+import WKCWriteLogic from '../open-write/ui-logic.js';
 
 import { storageClient, notesAll, noteSelected } from './persistence.js';
 
@@ -10,7 +10,7 @@ async function noteCreate() {
 	});
 
 	notesAll.update(function (val) {
-		return val.concat(item).sort(WKCWriteLogic.default.WKCWriteLogicSort);
+		return val.concat(item).sort(WKCWriteLogic.WKCWriteLogicSort);
 	});
 
 	return noteSelect(item);
