@@ -22,7 +22,7 @@ onMount(function () {
 
 <div id="WIKComposeStorageWidget"></div>
 <div class="WIKComposeDebug">
-	<button class="WIKSharedButtonNoStyle" onclick="location.reload();">{ window.OLSKLocalized('WIKUpdateReloadText') }</button>
+	<button class="WIKSharedButtonNoStyle" onclick="location.reload();">{ window.OLSKLocalized('WKCUpdateReloadText') }</button>
 </div>
 
 <style>
