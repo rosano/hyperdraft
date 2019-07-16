@@ -46,7 +46,7 @@ export const storageClient = WIKStorageClient.WIKStorageClientForModules([
 			notesAll.update(function (val) {
 				return val.filter(function (e) {
 					return e.WKCNoteID !== inputData.WKCNoteID;
-				});
+				}).sort(WKCWriteLogic.WKCWriteLogicListSort);
 			});
 		},
 		OLSKChangeDelegateUpdate: function (inputData) {
@@ -60,7 +60,7 @@ export const storageClient = WIKStorageClient.WIKStorageClientForModules([
 			notesAll.update(function (val) {
 				return val.map(function (e) {
 					return Object.assign(e, e.WKCNoteID === inputData.WKCNoteID ? inputData : {});
-				});
+				}).sort(WKCWriteLogic.WKCWriteLogicListSort);
 			});
 		},
 	}),
