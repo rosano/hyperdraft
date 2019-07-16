@@ -88,6 +88,9 @@ afterUpdate(function () {
 			  Esc: function () {
 			    return defaultFocusNode().focus();
 			  },
+			  'Cmd-H': function (event) {
+			  	return event.preventDefault();
+			  },
 			  Tab: false,
 			},
 
