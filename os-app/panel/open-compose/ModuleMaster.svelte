@@ -155,7 +155,6 @@ header {
 }
 
 input {
-	height: 14px;
 	padding: 4px;
 	margin: 0;
 	border: 1px solid #e6e6e6;
