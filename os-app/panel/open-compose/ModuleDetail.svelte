@@ -253,7 +253,9 @@ async function noteDelete() {
 
 	await WKCNotesAction.WKCNotesActionDelete(storageClient, $noteSelected.WKCNoteID);
 
-	return noteSelected.set(null);
+	noteSelected.set(null);
+
+	defaultFocusNode().focus();
 }
 
 function toggleTabFocus (event) {
