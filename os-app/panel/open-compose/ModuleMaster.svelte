@@ -18,7 +18,15 @@ async function noteCreate() {
 		return [].concat(val, item).sort(WKCWriteLogic.WKCWriteLogicListSort);
 	});
 
-	return noteSelect(item);
+	editorConfigure(function (editorInstance) {
+		if (!isMobile()) {
+			return;
+		}
+
+		return editorInstance.focus();
+	});
+
+	noteSelect(item);
 }
 
 async function noteSelect(inputData) {
