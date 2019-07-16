@@ -50,6 +50,8 @@ $: notesVisible = $notesAll.filter(function (e) {
 });
 
 let filterTextDidChange = function (val) {
+	notesVisible = notesVisible.sort(WKCWriteLogic.WKCWriteLogicListSort);
+
 	if (!val.length) {
 		return noteSelected.set(null);
 	}
