@@ -15,7 +15,7 @@ async function noteCreate() {
 	});
 
 	notesAll.update(function (val) {
-		return val.concat(item).sort(WKCWriteLogic.WKCWriteLogicListSort);
+		return [].concat(val, item);
 	});
 
 	return noteSelect(item);

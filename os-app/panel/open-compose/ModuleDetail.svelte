@@ -265,6 +265,9 @@ function toggleTabFocus (event) {
 function handleEsc (event) {
 	filterText.set('');
 	noteSelected.set(null);
+	notesAll.update(function (val) {
+		return val.sort(WKCWriteLogic.WKCWriteLogicListSort);
+	})
 	defaultFocusNode().focus();
 }
 
