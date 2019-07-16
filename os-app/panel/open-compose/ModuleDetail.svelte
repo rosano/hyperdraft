@@ -105,7 +105,7 @@ afterUpdate(function () {
 				WKCNoteBody: instance.getValue(),
 			}); // @DependancySvelteIgnoresMutableChanges
 
-			noteSave();
+			noteSave($noteSelected);
 		});
 
 		editorInstance.on('keydown', function (instance, event) {
@@ -171,46 +171,46 @@ afterUpdate(function () {
 let throttleMapNotes = {};
 let throttleMapVersions = {};
 import OLSKThrottle from '../../_shared/_external/OLSKThrottle/main.js';
-async function noteSave() {
+async function noteSave(inputData) {
 	notesAll.update(function (val) {
 		return val;
 	});
 
-	(async function(noteObject) {
-		if (throttleMapVersions[noteObject.WKCNoteID]) {
-			return OLSKThrottle.OLSKThrottleTimeoutFor(throttleMapVersions[noteObject.WKCNoteID]);
+	(async function() {
+		if (throttleMapVersions[inputData.WKCNoteID]) {
+			return OLSKThrottle.OLSKThrottleTimeoutFor(throttleMapVersions[inputData.WKCNoteID]);
 		}
 
-		throttleMapVersions[noteObject.WKCNoteID] = {
+		throttleMapVersions[inputData.WKCNoteID] = {
 			OLSKThrottleDuration: 3000,
 			OLSKThrottleCallback: function () {
-				delete throttleMapVersions[noteObject.WKCNoteID];
+				delete throttleMapVersions[inputData.WKCNoteID];
 			},
 		};
 
-		if (!noteObject.WKCNoteCreationDate) {
+		if (!inputData.WKCNoteCreationDate) {
 			return;
 		}
 
 		await WKCVersionsAction.WKCVersionsActionCreate(storageClient, {
-			WKCVersionNoteID: noteObject.WKCNoteID,
-			WKCVersionBody: noteObject.WKCNoteBody,
-			WKCVersionDate: noteObject.WKCNoteModificationDate,
+			WKCVersionNoteID: inputData.WKCNoteID,
+			WKCVersionBody: inputData.WKCNoteBody,
+			WKCVersionDate: inputData.WKCNoteModificationDate,
 		});
-	})($noteSelected);
+	})();
 
-	if (!throttleMapNotes[$noteSelected.WKCNoteID]) {
-		throttleMapNotes[$noteSelected.WKCNoteID] = {
+	if (!throttleMapNotes[inputData.WKCNoteID]) {
+		throttleMapNotes[inputData.WKCNoteID] = {
 			OLSKThrottleDuration: 500,
 			OLSKThrottleCallback: async function () {
-				delete throttleMapNotes[$noteSelected.WKCNoteID];
+				delete throttleMapNotes[inputData.WKCNoteID];
 
-				await WKCNotesAction.WKCNotesActionUpdate(storageClient, $noteSelected);
+				await WKCNotesAction.WKCNotesActionUpdate(storageClient, inputData);
 			},
 		};	
 	}
 
-	OLSKThrottle.OLSKThrottleTimeoutFor(throttleMapNotes[$noteSelected.WKCNoteID]);
+	OLSKThrottle.OLSKThrottleTimeoutFor(throttleMapNotes[inputData.WKCNoteID]);
 }
 
 function noteClear() {
