@@ -216,10 +216,6 @@ async function noteSave(inputData) {
 	OLSKThrottle.OLSKThrottleTimeoutFor(throttleMapNotes[inputData.WKCNoteID]);
 }
 
-function noteClear() {
-	return noteSelected.set(null);
-}
-
 async function notePublish() {
 	let item = await WKCNotesAction.WKCNotesActionPublish(storageClient, $noteSelected);
 	return noteSelected.update(function (val) {
@@ -267,12 +263,17 @@ function toggleTabFocus (event) {
 	return ((!editorInstance || editorInstance.hasFocus()) ? defaultFocusNode() :editorInstance).focus();
 }
 
-function handleEsc (event) {
+function noteClear () {
 	filterText.set('');
 	noteSelected.set(null);
 	notesAll.update(function (val) {
 		return val.sort(WKCWriteLogic.WKCWriteLogicListSort);
 	})
+
+	if (isMobile()) {
+		return;
+	}
+
 	defaultFocusNode().focus();
 }
 
@@ -282,7 +283,7 @@ window.addEventListener('keydown', function (event) {
 	}
 
 	if (event.key === 'Escape') {
-		return handleEsc(event);
+		return noteClear();
 	}
 });
 </script>
