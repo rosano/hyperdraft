@@ -168,7 +168,7 @@ input {
 	padding: 4px;
 	margin: 0;
 	border: 1px solid #e6e6e6;
-	border-radius: 10px;
+	border-radius: 5px;
 
 	text-indent: 2px;
 	line-height: 1.4;
@@ -220,12 +220,11 @@ input {
 }
 
 .WKCSharedToolbar {
-	padding: 8px;
+	padding: 4px;
 }
 
 input {
-	height: 30px;
-	border-radius: 10px;
+	height: 36px;
 
 	font-size: 14px;
 }
