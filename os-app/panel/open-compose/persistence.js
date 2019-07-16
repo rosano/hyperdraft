@@ -76,6 +76,9 @@ remoteStorage.on('ready', async () => {
 	await remoteStorage.wkc_notes.init();
 
 	isLoading.set(false);
+	setTimeout(function () {
+		defaultFocusNode().focus()
+	});
 });
 
 (function SetupStorageClientLogging() {
