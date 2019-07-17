@@ -2,6 +2,7 @@
   "private": true,
   "scripts": {
     "start": "node ./os-launch.js",
+    "preinstall": "node ./os-preinstall.js",
     "postinstall": "node ./os-build.js",
 
     "svelte-build-manual": "rollup -c $ROLLUP_PATH",
