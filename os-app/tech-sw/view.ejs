@@ -49,6 +49,10 @@ self.addEventListener('fetch', function (event) {
 
 		let networkResponse = await fetch(event.request);
 
+		if (networkResponse.status !== 200) {
+			return networkResponse;
+		}
+
 		(await caches.open(cacheName)).put(event.request, networkResponse.clone());
 
 		return networkResponse;
