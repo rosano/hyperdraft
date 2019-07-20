@@ -85,12 +85,10 @@ afterUpdate(function () {
 			  Enter: 'newlineAndIndentContinueMarkdownList',
 			  'Cmd-Enter': openCursorObject,
 			  'Ctrl-Enter': openCursorObject,
-			  Esc: function () {
-			    return defaultFocusNode().focus();
-			  },
 			  'Cmd-H': function (event) {
 			  	return event.preventDefault();
 			  },
+			  Esc: function () {}, // overwrite to control via other binding
 			  Tab: false,
 			},
 
@@ -283,6 +281,10 @@ window.addEventListener('keydown', function (event) {
 	}
 
 	if (event.key === 'Escape') {
+		if (editorInstance && editorInstance.getDoc().listSelections().length > 1) {
+			return editorInstance.setSelections(editorInstance.getDoc().listSelections().slice(0, 1));
+		}
+
 		return noteClear();
 	}
 });
