@@ -5,6 +5,7 @@ import WKCParser from '../../_shared/WKCParser/main.js';
 
 import WKCWriteLogic from '../open-write/ui-logic.js';
 
+import { OLSKLocalized } from '../../_shared/common/global.js'
 import { storageClient, notesAll, noteSelected, filterText, defaultFocusNode, isMobile, mobileViewCurrent } from './persistence.js';
 
 import { editorConfigure } from './ModuleDetail.svelte';
@@ -125,7 +126,7 @@ window.addEventListener('keydown', function (event) {
 	<input type="search" bind:value={ $filterText } placeholder="{ OLSKLocalized('WKCWriteMasterToolbarFilterInputPlaceholderText') }" accesskey="f" id="WIKDefaultFocusNode" autofocus />
 
 	<div class="WKCSharedToolbarElementGroup">
-		<button on:click={ noteCreate } class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" title={ window.OLSKLocalized('WKCWriteMasterToolbarCreateButtonText') } style="background-image: url('/panel/_shared/ui-assets/wIKSharedCreate.svg')" accesskey="n"></button>
+		<button on:click={ noteCreate } class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" title={ OLSKLocalized('WKCWriteMasterToolbarCreateButtonText') } style="background-image: url('/panel/_shared/ui-assets/wIKSharedCreate.svg')" accesskey="n"></button>
 	</div>
 </header>
 

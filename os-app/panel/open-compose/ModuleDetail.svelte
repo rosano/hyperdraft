@@ -1,4 +1,6 @@
 <script context="module">
+import { OLSKLocalized } from '../../_shared/common/global.js'
+
 let editorInstance = null;
 let editorPostInitializeQueue = [];
 export let editorConfigure = function (inputData) {
@@ -238,7 +240,7 @@ async function noteVersions() {
 }
 
 async function noteDelete() {
-	if (!window.confirm(window.OLSKLocalized('WKCWriteNotesDeleteAlertText'))) {
+	if (!window.confirm(OLSKLocalized('WKCWriteNotesDeleteAlertText'))) {
 		return;
 	}
 
@@ -295,26 +297,26 @@ window.addEventListener('keydown', function (event) {
 {#if $noteSelected}
 	<header class="WKCSharedToolbar">
 		<div class="WKCSharedToolbarElementGroup">
-			<button on:click={ noteClear } class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle WKC_ContextMobileExclusive" title="<%= window.OLSKLocalized('WKCWriteDetailToolbarBackButtonText') %>" style="background-image: url('/panel/_shared/ui-assets/wIKWriteBack.svg')"></button>
+			<button on:click={ noteClear } class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle WKC_ContextMobileExclusive" title="<%= OLSKLocalized('WKCWriteDetailToolbarBackButtonText') %>" style="background-image: url('/panel/_shared/ui-assets/wIKWriteBack.svg')"></button>
 		</div>
 
 		<div class="WKCSharedToolbarElementGroup">
 			{#if $noteSelected.WKCNotePublishStatusIsPublished}
-				<span id="PublishStatus">{ window.OLSKLocalized('WKCWriteDetailToolbarPublishStatusPublished') }</span>
+				<span id="PublishStatus">{ OLSKLocalized('WKCWriteDetailToolbarPublishStatusPublished') }</span>
 				<a class="WKCSharedToolbarButton WKCSharedElementTappable" href={ window.OLSKCanonicalFor('WKCRouteRefsRead', {
 						wkc_note_public_id: $noteSelected.WKCNotePublicID,
-					}) } title="{ window.OLSKLocalized('WKCWriteDetailToolbarVisitButtonText') }" style="background-image: url('/panel/_shared/ui-assets/wIKWriteVisit.svg')" target="_blank"></a>
+					}) } title="{ OLSKLocalized('WKCWriteDetailToolbarVisitButtonText') }" style="background-image: url('/panel/_shared/ui-assets/wIKWriteVisit.svg')" target="_blank"></a>
 
-				<button on:click={ noteUnpublish } class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" title={ window.OLSKLocalized('WKCWriteDetailToolbarUnpublishButtonText') } style="background-image: url('/panel/_shared/ui-assets/wIKWriteUnpublish.svg')"></button>
+				<button on:click={ noteUnpublish } class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" title={ OLSKLocalized('WKCWriteDetailToolbarUnpublishButtonText') } style="background-image: url('/panel/_shared/ui-assets/wIKWriteUnpublish.svg')"></button>
 			{/if}
 
 			{#if !$noteSelected.WKCNotePublishStatusIsPublished }
-				<button on:click={ notePublish } class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" title={ window.OLSKLocalized('WKCWriteDetailToolbarPublishButtonText') } style="background-image: url('/panel/_shared/ui-assets/wIKWritePublish.svg')"></button>
+				<button on:click={ notePublish } class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" title={ OLSKLocalized('WKCWriteDetailToolbarPublishButtonText') } style="background-image: url('/panel/_shared/ui-assets/wIKWritePublish.svg')"></button>
 			{/if}
 
-			<button on:click={ noteVersions } class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle">{ window.OLSKLocalized('WKCWriteDetailToolbarVersionsButtonText') }</button>
+			<button on:click={ noteVersions } class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle">{ OLSKLocalized('WKCWriteDetailToolbarVersionsButtonText') }</button>
 
-			<button on:click={ noteDelete } class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" title={ window.OLSKLocalized('WKCWriteDetailToolbarDiscardButtonText') } style="background-image: url('/panel/_shared/ui-assets/wIKWriteDiscard.svg')"></button>
+			<button on:click={ noteDelete } class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" title={ OLSKLocalized('WKCWriteDetailToolbarDiscardButtonText') } style="background-image: url('/panel/_shared/ui-assets/wIKWriteDiscard.svg')"></button>
 		</div>
 	</header>
 
@@ -325,7 +327,7 @@ window.addEventListener('keydown', function (event) {
 
 {#if !$noteSelected}
 	<div class="DetailContentContainer PlaceholderContainer">
-		<span>{ window.window.OLSKLocalized('WKCWriteDetailPlaceholderText') }</span>
+		<span>{ OLSKLocalized('WKCWriteDetailPlaceholderText') }</span>
 	</div>
 {/if}
 

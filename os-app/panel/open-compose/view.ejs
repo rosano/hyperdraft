@@ -32,10 +32,13 @@ locals.OLSKPageAssets = [
 	'/panel/open-write/ui-editor-theme.css',
 	'ui-style.css',
 ];
-locals.OLSKPagePublicLocalizedStringKeys = locals.OLSKLocalizedStringKeys();
 locals.OLSKPagePublicRouteKeys = [
 	'WKCRouteRefsRead',
 ];
+
+locals.OLSKPagePublicConstants = {
+	OLSKSharedPageCurrentLanguage: OLSKSharedPageCurrentLanguage,
+};
 %>
 
 <%- include('../../_shared/common/layout-header.ejs') %>

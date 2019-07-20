@@ -2,6 +2,7 @@
 import ModuleMaster from './ModuleMaster.svelte';
 import ModuleDetail from './ModuleDetail.svelte';
 
+import { OLSKLocalized } from '../../_shared/common/global.js'
 import { storageClient, isLoading } from './persistence.js';
 
 import { onMount } from 'svelte';
@@ -22,7 +23,7 @@ onMount(function () {
 
 <div id="WIKComposeStorageWidget"></div>
 <div class="WIKComposeDebug">
-	<button class="WIKSharedButtonNoStyle" onclick="location.reload();">{ window.OLSKLocalized('WKCUpdateReloadText') }</button>
+	<button class="WIKSharedButtonNoStyle" onclick="location.reload();">{ OLSKLocalized('WKCUpdateReloadText') }</button>
 </div>
 
 <style>
