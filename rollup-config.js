@@ -20,7 +20,7 @@ export default globPackage.sync(['os-app/**/svelte-start.js'], {
 	  output: {
 	  	sourcemap: true,
 	  	format: 'iife',
-	  	name: 'MainApp',
+	  	name: 'Main',
 	    file: pathPackage.join(pathPackage.dirname(e), '_compiled/ui-behaviour.js'),
 	  },
   	onwarn: (warning, handler) => {
