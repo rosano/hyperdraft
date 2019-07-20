@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "// OLDSKOOL": null,
-    "OldSkool": "olsk/OldSkool",
+    "OLSKApp": "olsk/OLSKApp",
 
     "// NORMALIZE CSS": null,
     "normalize.css": "latest",

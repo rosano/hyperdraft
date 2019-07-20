@@ -14,7 +14,6 @@
 			require('OLSKDisk').OLSKDiskDeleteFolder(require('path').join(param2, e));
 		});
 	})([
-		'OldSkool',
 		'OLSK*',
 	], require('path').join(__dirname, 'node_modules'));
 

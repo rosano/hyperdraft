@@ -1,7 +1,7 @@
 //# OLSKStartExternalAssets
 
 (function OLSKStartExternalAssets() {
-	const OLSKAssets = require('./node_modules/OldSkool/modules/OLSKAssets/main.js');
+	const OLSKAssets = require('./node_modules/OLSKApp/modules/OLSKAssets/main.js');
 	const pathPackage = require('path');
 
 	OLSKAssets.OLSKAssetsCopyAssetsFromTo([
