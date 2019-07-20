@@ -1,9 +1,14 @@
-//# OLSKPreinstall
+//# OLSKPreinstallPurgeOLSK
 
-(function OLSKPreinstall() {
-
+(function OLSKPreinstallPurgeOLSK() {
 	if (process.env.NODE_ENV !== 'production') {
 		return;
+	}
+
+	try {
+		const OLSKDisk = require('OLSKDisk');
+	} catch (e) {
+		return console.warn('error requiring OLSKDisk');
 	}
 
 	(function (param1, param2) {
@@ -11,7 +16,7 @@
 			matchBase: true,
 			cwd: param2,
 		}).forEach(function (e) {
-			require('OLSKDisk').OLSKDiskDeleteFolder(require('path').join(param2, e));
+			OLSKDisk.OLSKDiskDeleteFolder(require('path').join(param2, e));
 		});
 	})([
 		'OLSK*',
