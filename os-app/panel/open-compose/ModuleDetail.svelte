@@ -12,7 +12,7 @@ import WKCNotesAction from '../../_shared/rs-modules/wkc_notes/action.js';
 import WKCVersionsAction from '../../_shared/rs-modules/wkc_versions/action.js';
 import WKCWriteLogic from '../open-write/ui-logic.js';
 
-import { storageClient, notesAll, noteSelected, filterText, defaultFocusNode, mobileViewCurrent } from './persistence.js';
+import { storageClient, notesAll, noteSelected, filterText, defaultFocusNode, mobileViewCurrent, isMobile } from './persistence.js';
 
 noteSelected.subscribe(function (val) {
 	if (!val && editorInstance) {
