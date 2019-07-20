@@ -31,17 +31,10 @@
 //# OLSKStartRollup
 
 (function OLSKStartRollup() {
-	const executeCommand = require('child_process').exec;
+	if (process.env.NODE_ENV !== 'production') {
+		return;
+	}
 
-	const globPackage = require('glob');
-	const pathPackage = require('path');
-
-	globPackage.sync(['os-app/**/rollup-config.js'], {
-		matchBase: true,
-	}).filter(function (e) {
-		return !e.match(/node_modules|_external/ig);
-	}).forEach(function (e) {
-		executeCommand(`ROLLUP_PATH='${ e }' npm run svelte-build-manual`);
-	});
+	require('child_process').exec('npm run svelte-build');
 })();
 
