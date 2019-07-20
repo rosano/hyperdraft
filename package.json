@@ -5,10 +5,8 @@
     "preinstall": "node ./os-preinstall.js",
     "postinstall": "node ./os-build.js",
 
-    "svelte-build-manual": "rollup -c $ROLLUP_PATH",
-    "svelte-build": "rollup -w -c ./os-app/$PROJECT_PATH/rollup-config.js",
-    "svelt-dev": "sirv ./os-app/$PROJECT_PATH/_compiled --single --dev",
-    "svelte": "run-p svelt-dev svelte-build"
+    "svelte-build": "rollup -c rollup-config.js",
+    "svelte-build-watch": "rollup -w -c rollup-config.js"
   },
   "dependencies": {
     "// OLDSKOOL": null,
@@ -96,6 +94,7 @@
     "rollup-plugin-node-resolve": "^4.2.3",
     "rollup-plugin-svelte": "^5.0.3",
     "rollup-plugin-terser": "^4.0.4",
+    "rollup-plugin-i18n": "olsk/rollup-plugin-i18n",
     "sirv-cli": "^0.4.4",
     "svelte": "^3.0.0",
 
