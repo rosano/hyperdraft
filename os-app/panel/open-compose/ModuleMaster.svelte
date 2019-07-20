@@ -105,7 +105,7 @@ function handleArrowDown () {
 	return event.preventDefault();
 }
 
-window.addEventListener('keydown', function (event) {
+function handleKeydown(event) {
 	if (document.activeElement !== defaultFocusNode()) {
 		return;
 	}
@@ -117,8 +117,9 @@ window.addEventListener('keydown', function (event) {
 	if (event.key === 'ArrowDown') {
 		return handleArrowDown(event);
 	}
-});
+}
 </script>
+<svelte:window on:keydown={ handleKeydown }/>
 
 <div class="Container WKC_ContextMobileView" class:WKC_ContextMobileViewActive={ $mobileViewCurrent === 'ModuleMaster' } class:WKC_ContextMobileViewInactive={ $mobileViewCurrent !== 'ModuleMaster' }>
 

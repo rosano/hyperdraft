@@ -277,7 +277,7 @@ function noteClear () {
 	defaultFocusNode().focus();
 }
 
-window.addEventListener('keydown', function (event) {
+function handleKeydown(event) {
 	if (event.key === 'Tab') {
 		return toggleTabFocus(event);
 	}
@@ -289,8 +289,9 @@ window.addEventListener('keydown', function (event) {
 
 		return noteClear();
 	}
-});
+}
 </script>
+<svelte:window on:keydown={ handleKeydown }/>
 
 <div class="Container WKC_ContextMobileView" class:WKC_ContextMobileViewActive={ $mobileViewCurrent === 'ModuleDetail' } class:WKC_ContextMobileViewInactive={ $mobileViewCurrent !== 'ModuleDetail' }>
 
