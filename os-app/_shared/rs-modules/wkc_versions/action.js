@@ -27,8 +27,7 @@
 	};
 
 	//_ WKCVersionsActionQuery
-	
-	const d3Package = typeof require === 'undefined' ? window.d3 : require('d3');
+
 
 	exports.WKCVersionsActionQuery = async function(storageClient, inputData) {
 		if (typeof inputData !== 'object' || inputData === null) {
@@ -36,7 +35,7 @@
 		}
 
 		return Promise.resolve(Object.values(await WKCVersionsMetal.WKCVersionsMetalList(storageClient)).sort(function (a, b) {
-			return d3Package.descending(a.WKCVersionID, b.WKCVersionID);
+			return b.WKCVersionDate - a.WKCVersionDate;
 		}).filter(function(e) {
 			if (!Object.keys(inputData).length) {
 				return true;
