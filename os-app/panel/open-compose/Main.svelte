@@ -6,7 +6,7 @@ import { OLSKLocalized } from '../../_shared/common/global.js'
 import { storageClient, isLoading } from './persistence.js';
 
 import { onMount } from 'svelte';
-import Widget from '../../_shared/_external/remotestorage-widget/build/widget.js';
+import Widget from 'remotestorage-widget';
 onMount(function () {
 	(new Widget(storageClient.remoteStorage)).attach('WIKComposeStorageWidget');	
 });

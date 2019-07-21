@@ -173,7 +173,7 @@ afterUpdate(function () {
 
 let throttleMapNotes = {};
 let throttleMapVersions = {};
-import OLSKThrottle from '../../_shared/_external/OLSKThrottle/main.js';
+import OLSKThrottle from 'OLSKThrottle';
 async function noteSave(inputData) {
 	notesAll.update(function (val) {
 		return val;
