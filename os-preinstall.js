@@ -18,6 +18,7 @@
 		});
 	})([
 		'OLSK*',
+		'rollup-plugin-i18n',
 	], require('path').join(__dirname, 'node_modules'));
 
 })();
