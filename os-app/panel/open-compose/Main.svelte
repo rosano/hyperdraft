@@ -57,18 +57,17 @@ onMount(function () {
 @media screen and (max-width: 760px) {
 
 .AppContainer {
-  position: relative;
+  position: fixed;
 
   overflow: hidden;
 }
 
 .AppContainer :global(.WKC_ContextMobileView) {
-	width: 100vw;
-	height: 100vh;
-
 	position: absolute;
-	left: 0;
 	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
 }
 
 .AppContainer :global(.WKC_ContextMobileViewInactive) {
