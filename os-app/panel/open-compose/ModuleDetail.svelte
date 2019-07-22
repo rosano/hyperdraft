@@ -315,7 +315,7 @@ function handleKeydown(event) {
 				<button on:click={ notePublish } class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" title={ OLSKLocalized('WKCWriteDetailToolbarPublishButtonText') } style="background-image: url('/panel/_shared/ui-assets/wIKWritePublish.svg')"></button>
 			{/if}
 
-			<button on:click={ noteVersions } class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle">{ OLSKLocalized('WKCWriteDetailToolbarVersionsButtonText') }</button>
+			<button on:click={ noteVersions } class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle WKCVersionsButton">{ OLSKLocalized('WKCWriteDetailToolbarVersionsButtonText') }</button>
 
 			<button on:click={ noteDelete } class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" title={ OLSKLocalized('WKCWriteDetailToolbarDiscardButtonText') } style="background-image: url('/panel/_shared/ui-assets/wIKWriteDiscard.svg')"></button>
 		</div>
@@ -363,6 +363,11 @@ function handleKeydown(event) {
 
 	/* WKCSharedToolbarFlexboxChild */
 	justify-content: space-between;
+}
+
+.WKCVersionsButton {
+	max-width: 16px;
+	overflow: hidden;
 }
 
 #PublishStatus {
