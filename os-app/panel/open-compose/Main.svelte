@@ -72,6 +72,7 @@ onMount(function () {
 
 .AppContainer :global(.WKC_ContextMobileViewInactive) {
 	left: 100vw;
+	right: -100vw;
 }
 
 .AppContainer :global(.WKCSharedToolbarButton) {
