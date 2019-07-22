@@ -398,6 +398,9 @@ function handleKeydown(event) {
 
 .EditorContainer :global(.CodeMirror-scroll) {
 	background: #f8f8f8;
+
+  /* MobileSafariSmoothScrolling */
+	-webkit-overflow-scrolling: touch;
 }
 
 .EditorContainer :global(.CodeMirror-lines) {

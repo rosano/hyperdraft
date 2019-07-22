@@ -217,7 +217,7 @@ input {
 @media screen and (max-width: 760px) {
 
 .MasterContentContainer {
-  /* smooth scrolling on mobile safari */
+  /* MobileSafariSmoothScrolling */
 	-webkit-overflow-scrolling: touch;
 }
 
