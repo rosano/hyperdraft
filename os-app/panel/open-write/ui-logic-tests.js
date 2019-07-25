@@ -18,11 +18,11 @@ const kTest = {
 				};
 			});
 		}).reduce(function (coll, e) {
-			return coll.concat([{
+			return coll.concat(coll.length ? [{
 				string: ' ',
 				type: 'variable-2',
-			}]).concat(e);
-		}, []).slice(1).map(function (e, index) {
+			}] : []).concat(e);
+		}, []).map(function (e, index) {
 			return Object.assign(e, {
 				start: index,
 				end: index + 1,
