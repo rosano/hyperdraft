@@ -1,28 +1,16 @@
-/*!
- * wikiavec
- * Copyright(c) 2018 Rosano Coutinho
- * MIT Licensed
- */
-
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
 	typeof define === 'function' && define.amd ? define(['exports'], factory) :
 	(factory((global.WKCWriteLogic = global.WKCWriteLogic || {})));
-}(this, (function (exports) { 'use strict';
-
-	//_ WKCWriteLogicListSort
-
-	exports.WKCWriteLogicListSort = function (a, b) {
+}(this, (function (exports) { 'use strict'; Object.defineProperty(exports, '__esModule', { value: true }); let mod = {}; Object.assign(exports, mod = {
+	WKCWriteLogicListSort (a, b) {
 		if (b.WKCNoteModificationDate && a.WKCNoteModificationDate) {
 			return b.WKCNoteModificationDate - a.WKCNoteModificationDate;
 		}
 
 		return b.WKCNoteCreationDate - a.WKCNoteCreationDate;
-	};
-
-	//_ WKCWriteLineObjectsFor
-
-	exports.WKCWriteLineObjectsFor = function (inputData) {
+	},
+	WKCWriteLineObjectsFor (inputData) {
 		if (!Array.isArray(inputData)) {
 			throw new Error('WKCErrorInputInvalid');
 		}
@@ -43,8 +31,5 @@
 
 			return coll;
 		}, {}));
-	};
-
-	Object.defineProperty(exports, '__esModule', { value: true });
-
-})));
+	},
+}); })));
