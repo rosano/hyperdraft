@@ -10,6 +10,15 @@ const mainModule = require('./ui-logic.js');
 
 const kTest = {
 	uStubLineTokensFor: function (inputData) {
+		if (inputData.trim()[0] === '#') {
+			return [{
+				string: inputData,
+				type: 'header header-1',
+				start: 0,
+				end: inputData.length,
+			}];
+		}
+		
 		return inputData.split(' ').map(function (e1, index1) {
 			return e1.split('').map(function (e2, index2) {
 				return {
@@ -112,6 +121,15 @@ describe('WKCWriteLineObjectsFor', function testWKCWriteLineObjectsFor() {
 			end: 18,
 			string: '[[bravo]]',
 			type: 'variable-2 link',
+		}]);
+	});
+
+	it('converts header', function() {
+		assert.deepEqual(mainModule.WKCWriteLineObjectsFor(kTest.uStubLineTokensFor('# alfa')), [{
+			start: 0,
+			end: 6,
+			string: '# alfa',
+			type: 'header header-1',
 		}]);
 	});
 
