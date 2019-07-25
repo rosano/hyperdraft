@@ -17,6 +17,8 @@ import WKCWriteLogic from '../open-write/ui-logic.js';
 import { storageClient, notesAll, noteSelected, filterText, defaultFocusNode, mobileViewCurrent, isMobile } from './persistence.js';
 
 noteSelected.subscribe(function (val) {
+	window.LCHPageFormulas = null;
+
 	if (!val && editorInstance) {
 		editorInstance.toTextArea();
 		editorInstance = null;
@@ -27,6 +29,20 @@ noteSelected.subscribe(function (val) {
 	}
 
 	return editorConfigure(function () {
+		window.LCHPageFormulas = function () {
+			return WKCWriteLogic.WKCWriteHeaderTokensFrom([...Array(editorInstance.getDoc().size)].map(function (e, i) {
+				return WKCWriteLogic.WKCWriteLineObjectsFor(editorInstance.getLineTokens(i))
+			})).map(function (e) {
+				return {
+					id: Math.random().toString(),
+					fn: function () {
+						return editorInstance.setSelection(CodeMirror.Pos(e.line, e.start), CodeMirror.Pos(e.line, e.end));
+					},
+					name: `Jump to ${ e.string }`,
+				};
+			});
+		};
+
 		editorInstance.setValue(val.WKCNoteBody);
 		editorInstance.getDoc().clearHistory();
 	});
