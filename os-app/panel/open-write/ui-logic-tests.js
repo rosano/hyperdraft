@@ -134,3 +134,53 @@ describe('WKCWriteLineObjectsFor', function testWKCWriteLineObjectsFor() {
 	});
 
 });
+
+describe('WKCWriteHeaderTokensFrom', function testWKCWriteHeaderTokensFrom() {
+
+	it('throws error if not array', function() {
+		assert.throws(function() {
+			mainModule.WKCWriteHeaderTokensFrom(null);
+		}, /WKCErrorInputInvalid/);
+	});
+
+	it('returns array', function() {
+		assert.deepEqual(mainModule.WKCWriteHeaderTokensFrom([]), []);
+	});
+
+	it('excludes if not header', function() {
+		assert.deepEqual(mainModule.WKCWriteHeaderTokensFrom([
+			mainModule.WKCWriteLineObjectsFor(kTest.uStubLineTokensFor('alfa')),
+			mainModule.WKCWriteLineObjectsFor(kTest.uStubLineTokensFor('[[bravo]]')),
+			]), []);
+	});
+
+	it('includes if header', function() {
+		assert.deepEqual(mainModule.WKCWriteHeaderTokensFrom([
+			mainModule.WKCWriteLineObjectsFor(kTest.uStubLineTokensFor('# alfa')),
+			]), mainModule.WKCWriteLineObjectsFor(kTest.uStubLineTokensFor('# alfa')).map(function (e) {
+				return Object.assign(e, {
+					line: 0,
+				});
+			}));
+	});
+
+	it('excludes if not verbal', function() {
+		assert.deepEqual(mainModule.WKCWriteHeaderTokensFrom([
+			mainModule.WKCWriteLineObjectsFor(kTest.uStubLineTokensFor('alfa')),
+			mainModule.WKCWriteLineObjectsFor(kTest.uStubLineTokensFor('====')),
+		].map(function (e) {
+			return e.map(function (e) {
+				return Object.assign(e, {
+					type: 'header header-1',
+				})
+			});
+		})), [{
+			start: 0,
+			end: 4,
+			string: 'alfa',
+			type: 'header header-1',
+			line: 0,
+		}]);
+	});
+
+});

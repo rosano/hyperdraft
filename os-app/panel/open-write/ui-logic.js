@@ -32,4 +32,19 @@
 			return coll;
 		}, {}));
 	},
+	WKCWriteHeaderTokensFrom (inputData) {
+		if (!Array.isArray(inputData)) {
+			throw new Error('WKCErrorInputInvalid');
+		}
+
+		return [].concat.apply([], inputData.map(function (e, i) {
+			return e.filter(function (e) {
+				return e.type && e.type.match('header') && e.string.match(/\w/);
+			}).map(function (e) {
+				return Object.assign(e, {
+					line: i,
+				});
+			});
+		}))
+	},
 }); })));
