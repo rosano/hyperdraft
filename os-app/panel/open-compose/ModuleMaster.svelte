@@ -19,15 +19,13 @@ async function noteCreate(inputData) {
 		return [].concat(val, item).sort(WKCWriteLogic.WKCWriteLogicListSort);
 	});
 
-	editorConfigure(function (editorInstance) {
-		if (!isMobile()) {
-			return;
-		}
-
-		return editorInstance.focus();
-	});
-
 	noteSelect(item);
+
+	editorConfigure(function (editorInstance) {
+		editorInstance.setCursor(CodeMirror.Pos(0, item.WKCNoteBody.length));
+
+		editorInstance.focus();
+	});
 }
 
 async function noteSelect(inputData) {
