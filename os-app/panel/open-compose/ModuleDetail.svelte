@@ -20,6 +20,7 @@ let headerTokens = [];
 
 noteSelected.subscribe(function (val) {
 	window.LCHPageFormulas = null;
+	headerTokens = [];
 
 	if (!val && editorInstance) {
 		editorInstance.toTextArea();
