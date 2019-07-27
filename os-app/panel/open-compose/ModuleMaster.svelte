@@ -10,9 +10,9 @@ import { storageClient, notesAll, noteSelected, filterText, defaultFocusNode, is
 
 import { editorConfigure } from './ModuleDetail.svelte';
 
-async function noteCreate() {
+async function noteCreate(inputData = '') {
 	let item = await WKCNotesAction.WKCNotesActionCreate(storageClient, {
-		WKCNoteBody: '',
+		WKCNoteBody: inputData,
 	});
 
 	notesAll.update(function (val) {
@@ -103,6 +103,18 @@ function handleArrowDown () {
 	return event.preventDefault();
 }
 
+function handleEnter () {
+	if (!$filterText.length) {
+		return;
+	}
+
+	if (notesVisible.length) {
+		return;
+	}
+
+	return noteCreate($filterText);
+}
+
 function handleKeydown(event) {
 	if (document.activeElement !== defaultFocusNode()) {
 		return;
@@ -114,6 +126,10 @@ function handleKeydown(event) {
 
 	if (event.key === 'ArrowDown') {
 		return handleArrowDown(event);
+	}
+
+	if (event.key === 'Enter') {
+		return handleEnter(event);
 	}
 }
 </script>
@@ -138,6 +154,12 @@ function handleKeydown(event) {
 			</div>
 		{/each}
 	</div>
+
+	{#if $filterText.length && !notesVisible.length}
+		<div class="FilterNoMatches">
+		<button on:click={ () => noteCreate($filterText) }>{ OLSKLocalized('WKCWriteMasterFilterNoMatchesButton') }</button>
+	</div>
+	{/if}
 	
 	<div id="WKCWriteMasterDebug">
 		<button on:click={ exportNotes } class="WKCSharedElementTappable WKCSharedButtonNoStyle">{ OLSKLocalized('WKCUpdateExportText') }</button>
@@ -206,6 +228,10 @@ input {
 .ListItem span {
 	display: block;
 	margin-top: 5px;
+}
+
+.FilterNoMatches {
+	padding: 10px;
 }
 
 #WKCWriteMasterDebug {

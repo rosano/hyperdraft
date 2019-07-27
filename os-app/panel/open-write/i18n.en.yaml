@@ -4,6 +4,7 @@ WKCLoginPromptUserAddressText: User Address
 WKCLoginPromptUserTokenText: User Token
 WKCWriteMasterToolbarFilterInputPlaceholderText: Filter
 WKCWriteMasterToolbarCreateButtonText: Add note
+WKCWriteMasterFilterNoMatchesButton: Create note from text
 WKCWriteDetailToolbarVisitButtonText: Visit public page
 WKCWriteDetailToolbarUnpublishButtonText: Unpublish
 WKCWriteDetailToolbarPublishButtonText: Publish
