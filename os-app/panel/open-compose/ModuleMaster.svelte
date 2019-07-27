@@ -116,6 +116,10 @@ function handleEnter () {
 }
 
 function handleKeydown(event) {
+	if (window.Launchlet.instanceExists()) {
+		return;
+	}
+	
 	if (document.activeElement !== defaultFocusNode()) {
 		return;
 	}

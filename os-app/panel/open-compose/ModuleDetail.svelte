@@ -304,6 +304,10 @@ function noteClear () {
 }
 
 function handleKeydown(event) {
+	if (window.Launchlet.instanceExists()) {
+		return;
+	}
+
 	if (event.key === 'Tab') {
 		return toggleTabFocus(event);
 	}
