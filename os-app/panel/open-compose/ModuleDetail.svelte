@@ -397,11 +397,6 @@ function handleKeydown(event) {
 	justify-content: space-between;
 }
 
-.WKCVersionsButton {
-	max-width: 16px;
-	overflow: hidden;
-}
-
 #PublishStatus {
 	color: #bfbfbf
 }
