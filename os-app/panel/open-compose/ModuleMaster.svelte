@@ -107,8 +107,12 @@ function handleEnter () {
 	if (!$filterText.length) {
 		return;
 	}
+	
+	if (document.activeElement !== defaultFocusNode()) {
+		return;
+	}
 
-	if (notesVisible.length) {
+	if ($noteSelected && WKCParser.WKCParserTitleForPlaintext($noteSelected.WKCNoteBody) === $filterText) {
 		return;
 	}
 
