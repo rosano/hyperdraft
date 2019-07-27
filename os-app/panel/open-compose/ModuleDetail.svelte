@@ -16,6 +16,8 @@ import WKCWriteLogic from '../open-write/ui-logic.js';
 
 import { storageClient, notesAll, noteSelected, filterText, defaultFocusNode, mobileViewCurrent, isMobile } from './persistence.js';
 
+let headerTokens = [];
+
 noteSelected.subscribe(function (val) {
 	window.LCHPageFormulas = null;
 
@@ -29,10 +31,15 @@ noteSelected.subscribe(function (val) {
 	}
 
 	return editorConfigure(function () {
+		editorInstance.setValue(val.WKCNoteBody);
+		editorInstance.getDoc().clearHistory();
+
+		headerTokens = WKCWriteLogic.WKCWriteHeaderTokensFrom([...Array(editorInstance.getDoc().size)].map(function (e, i) {
+			return WKCWriteLogic.WKCWriteLineObjectsFor(editorInstance.getLineTokens(i))
+		}));
+
 		window.LCHPageFormulas = function () {
-			return WKCWriteLogic.WKCWriteHeaderTokensFrom([...Array(editorInstance.getDoc().size)].map(function (e, i) {
-				return WKCWriteLogic.WKCWriteLineObjectsFor(editorInstance.getLineTokens(i))
-			})).map(function (e) {
+			return headerTokens.map(function (e) {
 				return {
 					id: Math.random().toString(),
 					fn: function () {
@@ -42,9 +49,6 @@ noteSelected.subscribe(function (val) {
 				};
 			});
 		};
-
-		editorInstance.setValue(val.WKCNoteBody);
-		editorInstance.getDoc().clearHistory();
 	});
 });
 
@@ -232,6 +236,10 @@ async function noteSave(inputData) {
 	OLSKThrottle.OLSKThrottleTimeoutFor(throttleMapNotes[inputData.WKCNoteID]);
 }
 
+function noteJump() {
+	window.Launchlet.instanceCreate();
+}
+
 async function notePublish() {
 	let item = await WKCNotesAction.WKCNotesActionPublish(storageClient, $noteSelected);
 	return noteSelected.update(function (val) {
@@ -318,6 +326,8 @@ function handleKeydown(event) {
 		</div>
 
 		<div class="WKCSharedToolbarElementGroup">
+			<button on:click={ noteJump } class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle WKCVersionsButton" disabled={ !headerTokens.length }>{ OLSKLocalized('WKCWriteDetailToolbarJumpButtonText') }</button>
+
 			{#if $noteSelected.WKCNotePublishStatusIsPublished}
 				<span id="PublishStatus">{ OLSKLocalized('WKCWriteDetailToolbarPublishStatusPublished') }</span>
 				<a class="WKCSharedToolbarButton WKCSharedElementTappable" href={ window.OLSKCanonicalFor('WKCRouteRefsRead', {
