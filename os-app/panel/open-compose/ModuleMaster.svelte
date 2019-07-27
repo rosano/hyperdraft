@@ -69,15 +69,11 @@ let filterTextDidChange = function (val) {
 		return noteSelected.set(null);
 	}
 
-	let titleMatch = notesVisible.filter(function (e) {
+	return noteSelected.set(notesVisible.filter(function (e) {
 		return WKCParser.WKCParserTitleForPlaintext(e.WKCNoteBody).toLowerCase() === val.toLowerCase();
 	}).concat(notesVisible.filter(function (e) {
 		return WKCParser.WKCParserTitleForPlaintext(e.WKCNoteBody).toLowerCase().match(val.toLowerCase());
-	})).shift();
-
-	if (titleMatch) {
-		return noteSelected.set(titleMatch);
-	}
+	})).shift());
 };
 $: filterTextDidChange($filterText);
 
