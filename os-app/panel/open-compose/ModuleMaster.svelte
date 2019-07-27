@@ -162,12 +162,6 @@ function handleKeydown(event) {
 			</div>
 		{/each}
 	</div>
-
-	{#if $filterText.length && !notesVisible.length}
-		<div class="FilterNoMatches">
-		<button on:click={ () => noteCreate($filterText) }>{ OLSKLocalized('WKCWriteMasterFilterNoMatchesButton') }</button>
-	</div>
-	{/if}
 	
 	<div id="WKCWriteMasterDebug">
 		<button on:click={ exportNotes } class="WKCSharedElementTappable WKCSharedButtonNoStyle">{ OLSKLocalized('WKCUpdateExportText') }</button>
