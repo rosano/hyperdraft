@@ -81,6 +81,9 @@
     "// FRONTEND EXPORT": null,
     "jszip": "latest",
     "file-saver": "latest",
+    
+    "// FRONTEND LAUNCHER": null,
+    "launchlet": "latest",
 
     "// I sacrifice myself for the commas of others": null
   },
