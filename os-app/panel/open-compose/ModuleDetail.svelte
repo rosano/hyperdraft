@@ -306,6 +306,10 @@ function handleKeydown(event) {
 		return toggleTabFocus(event);
 	}
 
+	if (event.ctrlKey && event.key === 'r' && headerTokens.length) {
+		return noteJump();
+	}
+
 	if (event.key === 'Escape') {
 		if (editorInstance && editorInstance.getDoc().listSelections().length > 1) {
 			return editorInstance.setSelections(editorInstance.getDoc().listSelections().slice(0, 1));
@@ -326,7 +330,7 @@ function handleKeydown(event) {
 		</div>
 
 		<div class="WKCSharedToolbarElementGroup">
-			<button on:click={ noteJump } class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle WKCVersionsButton" disabled={ !headerTokens.length }>{ OLSKLocalized('WKCWriteDetailToolbarJumpButtonText') }</button>
+			<button on:click={ noteJump } class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle WKCVersionsButton" disabled={ !headerTokens.length } accesskey="r">{ OLSKLocalized('WKCWriteDetailToolbarJumpButtonText') }</button>
 
 			{#if $noteSelected.WKCNotePublishStatusIsPublished}
 				<span id="PublishStatus">{ OLSKLocalized('WKCWriteDetailToolbarPublishStatusPublished') }</span>
