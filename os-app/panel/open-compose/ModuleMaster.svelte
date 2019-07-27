@@ -10,9 +10,9 @@ import { storageClient, notesAll, noteSelected, filterText, defaultFocusNode, is
 
 import { editorConfigure } from './ModuleDetail.svelte';
 
-async function noteCreate(inputData = '') {
+async function noteCreate(inputData) {
 	let item = await WKCNotesAction.WKCNotesActionCreate(storageClient, {
-		WKCNoteBody: inputData,
+		WKCNoteBody: typeof inputData === 'string' ? inputData : '',
 	});
 
 	notesAll.update(function (val) {
