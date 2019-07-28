@@ -38,25 +38,6 @@ noteSelected.subscribe(function (val) {
 		headerTokens = WKCWriteLogic.WKCWriteHeaderTokensFrom([...Array(editorInstance.getDoc().size)].map(function (e, i) {
 			return WKCWriteLogic.WKCWriteLineObjectsFor(editorInstance.getLineTokens(i))
 		}));
-
-		window.LCHPageFormulas = function () {
-			return headerTokens.map(function (e) {
-				return {
-					id: Math.random().toString(),
-					fn: function () {
-						editorInstance.scrollIntoView(CodeMirror.Pos(e.line, e.start), 300);
-						editorInstance.setSelection(CodeMirror.Pos(e.line, e.start), CodeMirror.Pos(e.line, e.end));
-
-						if (isMobile()) {
-							return;
-						}
-
-						editorInstance.focus();
-					},
-					name: `Jump to ${ e.string }`,
-				};
-			});
-		};
 	});
 });
 
@@ -245,7 +226,23 @@ async function noteSave(inputData) {
 }
 
 function noteJump() {
-	window.Launchlet.instanceCreate();
+	window.Launchlet.instanceCreate(headerTokens.map(function (e) {
+		return {
+			LCHRecipeTitle: `Jump to ${ e.string }`,
+			LCHRecipeCallback: function () {
+				editorInstance.scrollIntoView(CodeMirror.Pos(e.line, e.start), 300);
+				editorInstance.setSelection(CodeMirror.Pos(e.line, e.start), CodeMirror.Pos(e.line, e.end));
+
+				if (isMobile()) {
+					return;
+				}
+
+				// editorInstance.focus();
+			},
+		};
+	}), {
+		runMode: 'jump',
+	});
 }
 
 async function notePublish() {
