@@ -339,7 +339,7 @@ function handleKeydown(event) {
 		</div>
 
 		<div class="WKCSharedToolbarElementGroup">
-			<button on:click={ () => setTimeout(noteJump) } class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle WKCVersionsButton" disabled={ !headerTokens.length } accesskey="r" style="background-image: url('/panel/_shared/ui-assets/wIKWriteJump.svg')" title="{ OLSKLocalized('WKCWriteDetailToolbarJumpButtonText') }"></button>
+			<button on:click={ () => setTimeout(noteJump) } class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" disabled={ !headerTokens.length } accesskey="r" style="background-image: url('/panel/_shared/ui-assets/wIKWriteJump.svg')" title="{ OLSKLocalized('WKCWriteDetailToolbarJumpButtonText') }"></button>
 
 			{#if $noteSelected.WKCNotePublishStatusIsPublished}
 				<span id="PublishStatus">{ OLSKLocalized('WKCWriteDetailToolbarPublishStatusPublished') }</span>
@@ -354,7 +354,7 @@ function handleKeydown(event) {
 				<button on:click={ notePublish } class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" title={ OLSKLocalized('WKCWriteDetailToolbarPublishButtonText') } style="background-image: url('/panel/_shared/ui-assets/wIKWritePublish.svg')"></button>
 			{/if}
 
-			<button on:click={ noteVersions } class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle WKCVersionsButton" style="background-image: url('/panel/_shared/ui-assets/wIKWriteVersions.svg')" title="{ OLSKLocalized('WKCWriteDetailToolbarVersionsButtonText') }"></button>
+			<button on:click={ noteVersions } class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" style="background-image: url('/panel/_shared/ui-assets/wIKWriteVersions.svg')" title="{ OLSKLocalized('WKCWriteDetailToolbarVersionsButtonText') }"></button>
 
 			<button on:click={ noteDelete } class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" title={ OLSKLocalized('WKCWriteDetailToolbarDiscardButtonText') } style="background-image: url('/panel/_shared/ui-assets/wIKWriteDiscard.svg')"></button>
 		</div>
