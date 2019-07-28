@@ -10,13 +10,13 @@ const production = !process.env.ROLLUP_WATCH;
 import pathPackage from 'path';
 import globPackage from 'glob';
 
-export default globPackage.sync(['os-app/**/svelte-start.js'], {
+export default globPackage.sync(['os-app/**/rollup-start.js'], {
 	matchBase: true,
 }).filter(function (e) {
 	return !e.match(/node_modules|_external/ig);
 }).map(function (e, i) {
 	return {
-	  input: pathPackage.join(pathPackage.dirname(e), 'svelte-start.js'),
+	  input: pathPackage.join(pathPackage.dirname(e), 'rollup-start.js'),
 	  output: {
 	  	sourcemap: true,
 	  	format: 'iife',
