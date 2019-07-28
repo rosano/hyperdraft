@@ -97,7 +97,7 @@
     "rollup-plugin-node-resolve": "^4.2.3",
     "rollup-plugin-svelte": "^5.0.3",
     "rollup-plugin-terser": "^4.0.4",
-    "rollup-plugin-i18n": "olsk/rollup-plugin-i18n",
+    "olsk-rollup-i18n": "latest",
     "sirv-cli": "^0.4.4",
     "svelte": "^3.0.0",
 
