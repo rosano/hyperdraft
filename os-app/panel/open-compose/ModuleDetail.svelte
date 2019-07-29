@@ -230,7 +230,7 @@ async function noteSave(inputData) {
 function noteJump() {
 	window.Launchlet.instanceCreate(headerTokens.map(function (e) {
 		return {
-			LCHRecipeTitle: `Jump to ${ e.string }`,
+			LCHRecipeTitle: e.string,
 			LCHRecipeCallback: function () {
 				editorInstance.scrollIntoView(CodeMirror.Pos(e.line, e.start), 300);
 				editorInstance.setSelection(CodeMirror.Pos(e.line, e.start), CodeMirror.Pos(e.line, e.end));
