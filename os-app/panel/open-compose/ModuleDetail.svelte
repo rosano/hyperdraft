@@ -10,6 +10,8 @@ export let editorConfigure = function (inputData) {
 </script>
 
 <script>
+import ModuleFooter from './ModuleFooter.svelte';
+
 import WKCNotesAction from '../../_shared/rs-modules/wkc_notes/action.js';
 import WKCVersionsAction from '../../_shared/rs-modules/wkc_versions/action.js';
 import WKCWriteLogic from '../open-write/ui-logic.js';
@@ -370,6 +372,10 @@ function handleKeydown(event) {
 	<div class="DetailContentContainer PlaceholderContainer">
 		<span>{ OLSKLocalized('WKCWriteDetailPlaceholderText') }</span>
 	</div>
+{/if}
+
+{#if isMobile()}
+	<ModuleFooter />
 {/if}
 
 </div>

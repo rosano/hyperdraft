@@ -1,9 +1,10 @@
 <script>
 import ModuleMaster from './ModuleMaster.svelte';
 import ModuleDetail from './ModuleDetail.svelte';
+import ModuleFooter from './ModuleFooter.svelte';
 
 import { OLSKLocalized } from '../../_shared/common/global.js'
-import { storageClient, isLoading } from './persistence.js';
+import { storageClient, isLoading, isMobile } from './persistence.js';
 
 import { onMount } from 'svelte';
 import Widget from 'remotestorage-widget';
@@ -18,6 +19,10 @@ onMount(function () {
 	<ModuleMaster />
 	<ModuleDetail />
 </div>
+
+{#if !isMobile()}
+	<ModuleFooter />
+{/if}
 
 </div>
 

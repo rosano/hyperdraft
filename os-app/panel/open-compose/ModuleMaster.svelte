@@ -1,4 +1,6 @@
 <script>
+import ModuleFooter from './ModuleFooter.svelte';
+
 import WKCNotesAction from '../../_shared/rs-modules/wkc_notes/action.js';
 
 import WKCParser from '../../_shared/WKCParser/main.js';
@@ -165,6 +167,10 @@ function handleKeydown(event) {
 		<button on:click={ exportNotes } class="WKCSharedElementTappable WKCSharedButtonNoStyle">{ OLSKLocalized('WKCUpdateExportText') }</button>
 	</div>
 </div>
+
+{#if isMobile()}
+	<ModuleFooter />
+{/if}
 
 </div>
 
