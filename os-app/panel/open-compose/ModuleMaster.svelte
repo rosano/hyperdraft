@@ -209,7 +209,7 @@ input {
 	overflow: auto;
 
 	/* ContainerFlexboxChild */
-	/*flex-grow: 1;*/
+	flex-grow: 1;
 }
 
 .ListItem {
