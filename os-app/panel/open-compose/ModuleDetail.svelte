@@ -236,12 +236,13 @@ function noteJump() {
 				if (isMobile()) {
 					return;
 				}
-
-				// editorInstance.focus();
 			},
 		};
 	}), {
-		runMode: 'jump',
+		runMode: window.Launchlet.kRunModeJump,
+		completionHandler () {
+			editorInstance.focus();
+		}
 	});
 }
 
