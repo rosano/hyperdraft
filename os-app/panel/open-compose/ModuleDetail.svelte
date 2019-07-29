@@ -38,7 +38,7 @@ noteSelected.subscribe(function (val) {
 		editorInstance.getDoc().clearHistory();
 
 		headerTokens = WKCWriteLogic.WKCWriteHeaderTokensFrom([...Array(editorInstance.getDoc().size)].map(function (e, i) {
-			return WKCWriteLogic.WKCWriteLineObjectsFor(editorInstance.getLineTokens(i))
+			return WKCWriteLogic.WKCWriteLineObjectsFor(editorInstance.getLineTokens(i));
 		}));
 	});
 });

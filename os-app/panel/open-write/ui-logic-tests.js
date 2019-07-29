@@ -10,26 +10,19 @@ const mainModule = require('./ui-logic.js');
 
 const kTest = {
 	uStubLineTokensFor: function (inputData) {
-		if (inputData.trim()[0] === '#') {
-			return [{
-				string: inputData,
-				type: 'header header-1',
-				start: 0,
-				end: inputData.length,
-			}];
-		}
+		let defaultType = inputData.trim()[0] === '#' ? 'header header-1' : 'variable-2';
 		
 		return inputData.split(' ').map(function (e1, index1) {
 			return e1.split('').map(function (e2, index2) {
 				return {
 					string: e2,
-					type: e1.match(/(http|\[\[)/) ? 'variable-2 link' : 'variable-2',
+					type: e1.match(/(http|\[\[)/) ? `${ defaultType } link` : defaultType,
 				};
 			});
 		}).reduce(function (coll, e) {
 			return coll.concat(coll.length ? [{
 				string: ' ',
-				type: 'variable-2',
+				type: defaultType,
 			}] : []).concat(e);
 		}, []).map(function (e, index) {
 			return Object.assign(e, {
@@ -133,6 +126,20 @@ describe('WKCWriteLineObjectsFor', function testWKCWriteLineObjectsFor() {
 		}]);
 	});
 
+	it('converts multiple header objects', function() {
+		assert.deepEqual(mainModule.WKCWriteLineObjectsFor(kTest.uStubLineTokensFor('# alfa [[bravo]]')), [{
+			start: 0,
+			end: 7,
+			string: '# alfa ',
+			type: 'header header-1',
+		}, {
+			start: 7,
+			end: 16,
+			string: '[[bravo]]',
+			type: 'header header-1 link',
+		}]);
+	});
+
 });
 
 describe('WKCWriteHeaderTokensFrom', function testWKCWriteHeaderTokensFrom() {
@@ -178,6 +185,18 @@ describe('WKCWriteHeaderTokensFrom', function testWKCWriteHeaderTokensFrom() {
 			start: 0,
 			end: 4,
 			string: 'alfa',
+			type: 'header header-1',
+			line: 0,
+		}]);
+	});
+
+	it('merges multiple header objects', function() {
+		assert.deepEqual(mainModule.WKCWriteHeaderTokensFrom([
+			mainModule.WKCWriteLineObjectsFor(kTest.uStubLineTokensFor('# PA PARC https://www.supermarchepa.com/pages/weekly-flyer')),
+			]), [{
+			start: 0,
+			end: 58,
+			string: '# PA PARC https://www.supermarchepa.com/pages/weekly-flyer',
 			type: 'header header-1',
 			line: 0,
 		}]);

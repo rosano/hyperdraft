@@ -20,6 +20,7 @@
 
 			if (!coll[key] || (coll[key].type !== e.type)) {
 				key += 1;
+
 				coll[key] = {
 					start: e.start,
 					type: e.type,
@@ -38,12 +39,29 @@
 		}
 
 		return [].concat.apply([], inputData.map(function (e, i) {
-			return e.filter(function (e) {
+			let validTokens = e.filter(function (e) {
 				return e.type && e.type.match('header') && e.string.match(/\w/);
-			}).map(function (e) {
-				return Object.assign(e, {
-					line: i,
-				});
+			});
+
+			if (!validTokens.length) {
+				return [];
+			}
+
+			return validTokens.reduce(function (coll, e) {
+				if (typeof coll.start === 'undefined') {
+					coll.start = e.start;
+				}
+				
+				if (typeof coll.type === 'undefined') {
+					coll.type = e.type;
+				}
+				
+				coll.string = (coll.string || '').concat(e.string);
+				coll.end = e.end;
+
+				return coll;
+			}, {
+				line: i,
 			});
 		}))
 	},
