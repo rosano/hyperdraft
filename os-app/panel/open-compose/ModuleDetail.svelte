@@ -1,5 +1,5 @@
 <script context="module">
-import { OLSKLocalized } from '../../_shared/common/global.js'
+import { OLSKLocalized } from '../../_shared/common/global.js';
 
 let editorInstance = null;
 let editorPostInitializeQueue = [];
@@ -40,7 +40,7 @@ noteSelected.subscribe(function (val) {
 });
 
 function openTextObject (inputData) {
-	if (!!URLParse(inputData, {}).protocol) {
+	if (URLParse(inputData, {}).protocol) {
 		return window.open(inputData, '_blank');
 	}
 
@@ -304,7 +304,7 @@ function noteClear () {
 	noteSelected.set(null);
 	notesAll.update(function (val) {
 		return val.sort(WKCWriteLogic.WKCWriteLogicListSort);
-	})
+	});
 
 	if (isMobile()) {
 		return;

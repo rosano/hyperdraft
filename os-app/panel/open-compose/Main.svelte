@@ -3,7 +3,7 @@ import ModuleMaster from './ModuleMaster.svelte';
 import ModuleDetail from './ModuleDetail.svelte';
 import ModuleFooter from './ModuleFooter.svelte';
 
-import { OLSKLocalized } from '../../_shared/common/global.js'
+import { OLSKLocalized } from '../../_shared/common/global.js';
 import { storageClient, isLoading, isMobile } from './persistence.js';
 
 import { onMount } from 'svelte';

@@ -1,1 +1,1 @@
-require('OLSKApp')(__dirname);;
+require('OLSKApp')(__dirname);

@@ -77,7 +77,7 @@ remoteStorage.on('ready', async () => {
 
 	isLoading.set(false);
 	setTimeout(function () {
-		defaultFocusNode().focus()
+		defaultFocusNode().focus();
 	});
 });
 
