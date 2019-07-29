@@ -36,10 +36,6 @@ noteSelected.subscribe(function (val) {
 	return editorConfigure(function () {
 		editorInstance.setValue(val.WKCNoteBody);
 		editorInstance.getDoc().clearHistory();
-
-		headerTokens = WKCWriteLogic.WKCWriteHeaderTokensFrom([...Array(editorInstance.getDoc().size)].map(function (e, i) {
-			return WKCWriteLogic.WKCWriteLineObjectsFor(editorInstance.getLineTokens(i));
-		}));
 	});
 });
 
@@ -111,6 +107,10 @@ afterUpdate(function () {
 		});
 
 		editorInstance.on('change', function (instance, changeObject) {
+			headerTokens = WKCWriteLogic.WKCWriteHeaderTokensFrom([...Array(editorInstance.getDoc().size)].map(function (e, i) {
+				return WKCWriteLogic.WKCWriteLineObjectsFor(editorInstance.getLineTokens(i));
+			}));
+
 			if (changeObject.origin === 'setValue') {
 				return;
 			}
