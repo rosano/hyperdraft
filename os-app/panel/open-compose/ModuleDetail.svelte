@@ -243,6 +243,10 @@ function noteJump() {
 	}), {
 		runMode: window.Launchlet.kRunModeJump,
 		completionHandler () {
+			if (isMobile()) {
+				return;
+			}
+			
 			editorInstance.focus();
 		}
 	});
