@@ -1,7 +1,7 @@
 const assert = require('assert');
 
-const mainModule = require('./action.js');
-const WKCVersionsAction = require('../wkc_versions/action.js');
+import * as mainModule from './action.js';
+import * as WKCVersionsAction from '../wkc_versions/action.js';
 
 const kTesting = {
 	StubNoteObject: function() {
