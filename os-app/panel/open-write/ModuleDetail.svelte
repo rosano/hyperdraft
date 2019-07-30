@@ -340,30 +340,30 @@ function handleKeydown(event) {
 <div class="Container WKC_ContextMobileView" class:WKC_ContextMobileViewActive={ $mobileViewCurrent === 'ModuleDetail' } class:WKC_ContextMobileViewInactive={ $mobileViewCurrent !== 'ModuleDetail' }>
 
 {#if $noteSelected}
-	<header class="WKCSharedToolbar">
+	<header class="WKCSharedToolbar" id="WKCWriteDetailToolbar">
 		<div class="WKCSharedToolbarElementGroup">
-			<button on:click={ noteClear } class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle WKC_ContextMobileExclusive" title="<%= OLSKLocalized('WKCWriteDetailToolbarBackButtonText') %>" style="background-image: url('/panel/_shared/ui-assets/wIKWriteBack.svg')"></button>
+			<button on:click={ noteClear } class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle WKC_ContextMobileExclusive"style="background-image: url('/panel/_shared/ui-assets/wIKWriteBack.svg')"  title={ OLSKLocalized('WKCWriteDetailToolbarBackButtonText')} id="WKCWriteDetailToolbarBackButton"></button>
 		</div>
 
 		<div class="WKCSharedToolbarElementGroup">
-			<button on:click={ () => setTimeout(noteJump) } class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" disabled={ !headerTokens.length } accesskey="r" style="background-image: url('/panel/_shared/ui-assets/wIKWriteJump.svg')" title="{ OLSKLocalized('WKCWriteDetailToolbarJumpButtonText') }"></button>
+			<button on:click={ () => setTimeout(noteJump) } class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" disabled={ !headerTokens.length } accesskey="r" style="background-image: url('/panel/_shared/ui-assets/wIKWriteJump.svg')" title={ OLSKLocalized('WKCWriteDetailToolbarJumpButtonText') } id="WKCWriteDetailToolbarJumpButton"></button>
 
 			{#if $noteSelected.WKCNotePublishStatusIsPublished}
 				<span id="PublishStatus">{ OLSKLocalized('WKCWriteDetailToolbarPublishStatusPublished') }</span>
 				<a class="WKCSharedToolbarButton WKCSharedElementTappable" href={ window.OLSKCanonicalFor('WIKRefsRoute', {
 						wkc_note_public_id: $noteSelected.WKCNotePublicID,
-					}) } title="{ OLSKLocalized('WKCWriteDetailToolbarVisitButtonText') }" style="background-image: url('/panel/_shared/ui-assets/wIKWriteVisit.svg')" target="_blank"></a>
+					}) } title={ OLSKLocalized('WKCWriteDetailToolbarVisitButtonText') } style="background-image: url('/panel/_shared/ui-assets/wIKWriteVisit.svg')" target="_blank"></a>
 
-				<button on:click={ noteUnpublish } class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" title={ OLSKLocalized('WKCWriteDetailToolbarUnpublishButtonText') } style="background-image: url('/panel/_shared/ui-assets/wIKWriteUnpublish.svg')"></button>
+				<button on:click={ noteUnpublish } class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" style="background-image: url('/panel/_shared/ui-assets/wIKWriteUnpublish.svg')" title={ OLSKLocalized('WKCWriteDetailToolbarUnpublishButtonText') } id="WKCWriteDetailToolbarUnpublishButton"></button>
 			{/if}
 
-			{#if !$noteSelected.WKCNotePublishStatusIsPublished }
-				<button on:click={ notePublish } class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" title={ OLSKLocalized('WKCWriteDetailToolbarPublishButtonText') } style="background-image: url('/panel/_shared/ui-assets/wIKWritePublish.svg')"></button>
+			{#if false && !$noteSelected.WKCNotePublishStatusIsPublished }
+				<button on:click={ notePublish } class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" style="background-image: url('/panel/_shared/ui-assets/wIKWritePublish.svg')" title={ OLSKLocalized('WKCWriteDetailToolbarPublishButtonText') } id="WKCWriteDetailToolbarPublishButton"></button>
 			{/if}
 
-			<button on:click={ noteVersions } class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" style="background-image: url('/panel/_shared/ui-assets/wIKWriteVersions.svg')" title="{ OLSKLocalized('WKCWriteDetailToolbarVersionsButtonText') }"></button>
+			<button on:click={ noteVersions } class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" style="background-image: url('/panel/_shared/ui-assets/wIKWriteVersions.svg')" title={ OLSKLocalized('WKCWriteDetailToolbarVersionsButtonText') } id="WKCWriteDetailToolbarVersionsButton"></button>
 
-			<button on:click={ noteDelete } class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" title={ OLSKLocalized('WKCWriteDetailToolbarDiscardButtonText') } style="background-image: url('/panel/_shared/ui-assets/wIKWriteDiscard.svg')"></button>
+			<button on:click={ noteDelete } class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" style="background-image: url('/panel/_shared/ui-assets/wIKWriteDiscard.svg')" title={ OLSKLocalized('WKCWriteDetailToolbarDiscardButtonText') } id="WKCWriteDetailToolbarDiscardButton"></button>
 		</div>
 	</header>
 
