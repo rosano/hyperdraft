@@ -10,5 +10,12 @@ exports.OLSKControllerRoutes = function() {
 			},
 			OLSKRouteLanguages: ['en'],
 		},
+		WIKRefsRoute: {
+			OLSKRoutePath: '/:wkc_note_public_id(\\d+)',
+			OLSKRouteMethod: 'get',
+			OLSKRouteFunction: async function(req, res, next) {
+				return next();
+			},
+		},
 	};
 };

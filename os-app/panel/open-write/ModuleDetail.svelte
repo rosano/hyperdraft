@@ -350,7 +350,7 @@ function handleKeydown(event) {
 
 			{#if $noteSelected.WKCNotePublishStatusIsPublished}
 				<span id="PublishStatus">{ OLSKLocalized('WKCWriteDetailToolbarPublishStatusPublished') }</span>
-				<a class="WKCSharedToolbarButton WKCSharedElementTappable" href={ window.OLSKCanonicalFor('WKCRouteRefsRead', {
+				<a class="WKCSharedToolbarButton WKCSharedElementTappable" href={ window.OLSKCanonicalFor('WIKRefsRoute', {
 						wkc_note_public_id: $noteSelected.WKCNotePublicID,
 					}) } title="{ OLSKLocalized('WKCWriteDetailToolbarVisitButtonText') }" style="background-image: url('/panel/_shared/ui-assets/wIKWriteVisit.svg')" target="_blank"></a>
 
