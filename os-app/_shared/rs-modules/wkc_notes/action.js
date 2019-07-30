@@ -4,7 +4,8 @@ const WKCVersionsAction = typeof require === 'undefined' ? window.WKCVersionsAct
 const WKCSettingsAction = typeof require === 'undefined' ? window.WKCSettingsAction : require('../wkc_settings/action.js');
 const WKCParser = typeof require === 'undefined' ? window.WKCParser : require('../../WKCParser/main.js');
 
-import * as ULIDPackage from 'ulid';
+import { ulid } from 'ulid';
+const uniqueID = ulid;
 
 export const WKCNotesActionCreate = async function(storageClient, inputData) {
 	if (typeof inputData !== 'object' || inputData === null) {
@@ -14,7 +15,7 @@ export const WKCNotesActionCreate = async function(storageClient, inputData) {
 	let creationDate = new Date();
 
 	return await WKCNotesMetal.WKCNotesMetalWrite(storageClient, Object.assign(inputData, {
-		WKCNoteID: ULIDPackage.ulid(),
+		WKCNoteID: uniqueID(),
 		WKCNoteCreationDate: creationDate,
 		WKCNoteModificationDate: creationDate,
 	}));

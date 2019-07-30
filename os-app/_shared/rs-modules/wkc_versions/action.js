@@ -1,5 +1,6 @@
 const WKCVersionsMetal = typeof require === 'undefined' ? window.WKCVersionsMetal : require('./metal.js');
-import * as ULIDPackage from 'ulid';
+import { ulid } from 'ulid';
+const uniqueID = ulid;
 
 export const WKCVersionsActionCreate = async function(storageClient, inputData) {
 	if (typeof inputData !== 'object' || inputData === null) {
@@ -7,7 +8,7 @@ export const WKCVersionsActionCreate = async function(storageClient, inputData) 
 	}
 
 	return await WKCVersionsMetal.WKCVersionsMetalWrite(storageClient, Object.assign(inputData, {
-		WKCVersionID: ULIDPackage.ulid(),
+		WKCVersionID: uniqueID(),
 	}));
 };
 
