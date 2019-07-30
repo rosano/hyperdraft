@@ -2,7 +2,7 @@ import * as WIKStorageClient from '../../_shared/WIKStorageClient/main.js';
 import RSModuleProtocol_wkc_notes from '../../_shared/rs-modules/wkc_notes/rs-module.js';
 import RSModuleProtocol_wkc_versions from '../../_shared/rs-modules/wkc_versions/rs-module.js';
 import RSModuleProtocol_wkc_settings from '../../_shared/rs-modules/wkc_settings/rs-module.js';
-import WKCWriteLogic from '../open-write/ui-logic.js';
+import WKCWriteLogic from './ui-logic.js';
 
 import * as WKCNotesAction from '../../_shared/rs-modules/wkc_notes/action.js';
 
@@ -97,7 +97,7 @@ remoteStorage.on('ready', async () => {
 	remoteStorage.on('error', (error) => {
 		console.debug('error', error);
 
-		document.querySelector('#WIKComposeStorageWidget').classList.add('remotestorage-widget-error-state');
+		document.querySelector('#WIKWriteStorageWidget').classList.add('remotestorage-widget-error-state');
 	});
 
 	remoteStorage.on('network-offline', () => {

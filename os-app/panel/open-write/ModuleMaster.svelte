@@ -5,7 +5,7 @@ import WKCNotesAction from '../../_shared/rs-modules/wkc_notes/action.js';
 
 import WKCParser from '../../_shared/WKCParser/main.js';
 
-import WKCWriteLogic from '../open-write/ui-logic.js';
+import WKCWriteLogic from './ui-logic.js';
 
 import { OLSKLocalized } from '../../_shared/common/global.js';
 import { storageClient, notesAll, noteSelected, filterText, defaultFocusNode, isMobile, mobileViewCurrent } from './persistence.js';

@@ -1,126 +1,51 @@
 <%
 locals.OLSKPageTitle = OLSKLocalized('WKCWriteHeadingText');
 locals.OLSKPageAssets = [
-	'/_shared/_external/turndown/dist/turndown.js',
-	'/_shared/_external/showdown/dist/showdown.js',
-	'/_shared/WKCParser/main.js',
-	'/_shared/_external/OLSKThrottle/main.js',
-	'ui-editor-theme.css',
+	'/_shared/common/ui-style.css',
+	'/_shared/_external/normalize.css/normalize.css',
+	
 	'/_shared/_external/codemirror/lib/codemirror.css',
 	'/_shared/_external/codemirror/lib/codemirror.js',
+	
 	'/_shared/_external/codemirror/addon/edit/continuelist.js',
+	
 	'/_shared/_external/codemirror/addon/mode/overlay.js',
+	
 	'/_shared/_external/codemirror/mode/markdown/markdown.js',
 	'/_shared/_external/codemirror/mode/gfm/gfm.js',
+	
 	'/_shared/_external/codemirror/addon/search/search.js',
 	'/_shared/_external/codemirror/addon/search/searchcursor.js',
 	'/_shared/_external/codemirror/addon/search/jump-to-line.js',
 	'/_shared/_external/codemirror/addon/dialog/dialog.css',
 	'/_shared/_external/codemirror/addon/dialog/dialog.js',
+	
 	'/_shared/_external/codemirror/keymap/sublime.js',
+
 	'/_shared/_external/url-parse/dist/url-parse.min.js',
-	'/_shared/common/ui-style.css',
-	'/panel/_shared/ui-style.css',
-	'ui-style.css',
-	'ui-style-mobile.css',
-	'ui-logic.js',
-	'/_shared/_external/remotestoragejs/release/remotestorage.js',
-	'/_shared/_external/remotestorage-widget/build/widget.js',
-	'/_shared/_external/ulid/dist/index.umd.js',
+	
 	'/_shared/_external/jszip/dist/jszip.js',
 	'/_shared/_external/file-saver/dist/FileSaver.js',
-	'/_shared/rs-modules/_shared/main.js',
-	'/_shared/rs-modules/wkc_settings/model.js',
-	'/_shared/rs-modules/wkc_settings/rs-module.js',
-	'/_shared/rs-modules/wkc_settings/metal.js',
-	'/_shared/rs-modules/wkc_settings/action.js',
-	'/_shared/rs-modules/wkc_versions/model.js',
-	'/_shared/rs-modules/wkc_versions/rs-module.js',
-	'/_shared/rs-modules/wkc_versions/metal.js',
-	'/_shared/rs-modules/wkc_versions/action.js',
-	'/_shared/rs-modules/wkc_notes/model.js',
-	'/_shared/rs-modules/wkc_notes/rs-module.js',
-	'/_shared/rs-modules/wkc_notes/metal.js',
-	'/_shared/rs-modules/wkc_notes/action.js',
-	'/_shared/WKCStorageClient/storage.js',
-	'ui-behaviour.js',
-];
-locals.OLSKPagePublicLocalizedStringKeys = [
-	'WKCLoginPromptUserAddressText',
-	'WKCLoginPromptUserTokenText',
-	'WKSharedErrorServiceUnavailable',
-	'WKSharedErrorTokenUnavailable',
-	'WKCWriteErrorNotesUnavailable',
-	'WKCWriteErrorPersistenceSaveDidFail',
-	'WKCWriteDetailToolbarPublishStatusPublishing',
-	'WKCWriteDetailToolbarPublishStatusUnpublishing',
-	'WKCWriteErrorPublishDidFail',
-	'WKCWriteErrorUnpublishDidFail',
-	'WKCWriteDetailToolbarPublishStatusUnableToPublish',
-	'WKCWriteDetailToolbarPublishStatusUnableToUnpublish',
-	'WKCWriteNotesDeleteAlertText',
-	'WKCWriteErrorPersistenceDeleteDidFail',
-	'WKCWriteDetailToolbarPublishStatusPublished',
+
+	'/_shared/_external/launchlet/launchlet.css',
+	'/_shared/_external/launchlet/launchlet.js',
+	
+	'/panel/_shared/ui-style.css',
+	'_compiled/ui-style.css',
+	'ui-editor-theme.css',
+	'ui-style.css',
 ];
 locals.OLSKPagePublicRouteKeys = [
 	'WKCRouteRefsRead',
 ];
+
+locals.OLSKPagePublicConstants = {
+	OLSKSharedPageCurrentLanguage: OLSKSharedPageCurrentLanguage,
+};
 %>
 
 <%- include('../../_shared/common/layout-header.ejs') %>
-<div id="WKCWrite" class="WKCWriteLoading">
-	<div id="WKCWriteMaster" class="WKC_ContextMobileView WKC_ContextMobileViewActive">
-		<header id="WKCWriteMasterToolbar" class="WKCSharedToolbar">
-			<input id="WKCWriteMasterToolbarFilterInput" placeholder="<%= OLSKLocalized('WKCWriteMasterToolbarFilterInputPlaceholderText') %>" oninput="WKCWriteBehaviour.interfaceNotesMasterToolbarFilterInputDidInput()" accesskey="f">
 
-			<div class="WKCSharedToolbarElementGroup">
-				<button id="WKCWriteMasterToolbarCreateButton" class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" title="<%= OLSKLocalized('WKCWriteMasterToolbarCreateButtonText') %>" style="background-image: url('/panel/_shared/ui-assets/wIKSharedCreate.svg')" accesskey="n" onclick="WKCWriteBehaviour.interfaceNotesMasterToolbarCreateButtonDidClick()"></button>
-			</div>
-		</header>
-
-		<div id="WKCWriteMasterContent">
-			<div id="WKCWriteMasterContentList"></div>
-			<div id="WKCWriteMasterDebug">
-				<a href="javascript:location.reload();"><%= OLSKLocalized('WKCUpdateReloadText') %></a>
-				<a href="javascript:WKCWriteBehaviour.commandsExportNotes();"><%= OLSKLocalized('WKCUpdateExportText') %></a>
-			</div>
-			<div id="WKCWriteMasterLoader" class="WKCSharedHidden">
-				<%- include('../_shared/WKCLoader/view.ejs') %>
-			</div>
-		</div>
-	</div>
-
-	<div id="WKCWriteDetail" class="WKCWriteDetailInactive WKC_ContextMobileView WKC_ContextMobileViewInactive">
-		<header id="WKCWriteDetailToolbar" class="WKCSharedToolbar">
-			<div class="WKCSharedToolbarElementGroup">
-				<button id="WKCWriteDetailToolbarBackButton" class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle WKC_ContextMobileExclusive" title="<%= OLSKLocalized('WKCWriteDetailToolbarBackButtonText') %>" style="background-image: url('/panel/_shared/ui-assets/wIKWriteBack.svg')" onclick="WKCWriteBehaviour.interfaceBackButtonDidClick()"></button>
-			</div>
-			<div class="WKCSharedToolbarElementGroup">
-				<span id="WKCWriteDetailToolbarPublishStatus"></span>
-
-				<a id="WKCWriteDetailToolbarVisitButton" class="WKCSharedToolbarButton WKCSharedElementTappable" title="<%= OLSKLocalized('WKCWriteDetailToolbarVisitButtonText') %>" style="background-image: url('/panel/_shared/ui-assets/wIKWriteVisit.svg')" target="_blank"></a>
-
-				<button id="WKCWriteDetailToolbarUnpublishButton" class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" title="<%= OLSKLocalized('WKCWriteDetailToolbarUnpublishButtonText') %>" style="background-image: url('/panel/_shared/ui-assets/wIKWriteUnpublish.svg')" onclick="WKCWriteBehaviour.interfaceUnpublishButtonDidClick()"></button>
-
-				<button id="WKCWriteDetailToolbarPublishButton" class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" title="<%= OLSKLocalized('WKCWriteDetailToolbarPublishButtonText') %>" style="background-image: url('/panel/_shared/ui-assets/wIKWritePublish.svg')" onclick="WKCWriteBehaviour.interfacePublishButtonDidClick()"></button>
-
-				<button id="WKCWriteDetailToolbarDiscardButton" class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" title="<%= OLSKLocalized('WKCWriteDetailToolbarDiscardButtonText') %>" style="background-image: url('/panel/_shared/ui-assets/wIKWriteDiscard.svg')" onclick="WKCWriteBehaviour.interfaceDeleteButtonDidClick()"></button>
-			</div>
-		</header>
-
-		<div id="WKCWriteDetailContent">
-			<textarea id="WKCWriteDetailContentTextarea"></textarea>
-		</div>
-
-		<div id="WKCWriteDetailPlaceholder"><span><%= OLSKLocalized('WKCWriteDetailPlaceholderText') %></span></div>
-	</div>
-</div>
-
-<div id="WKCStorageWidget"></div>
-<button id="WKCLoginButton" class="WKCSharedHidden" onclick="WKCWriteBehaviour.interfaceLoginButtonDidClick()"><%= OLSKLocalized('WKCLoginPromptAuthenticateText') %></button>
-
-<script type="text/javascript">
-	WKCWriteBehaviour.lifecyclePageWillLoad();
-</script>
+<script src="/<%= OLSKSharedPageControllerSlug %>/_compiled/ui-behaviour.js"></script>
 
 <%- include('../../_shared/common/layout-footer.ejs') %>

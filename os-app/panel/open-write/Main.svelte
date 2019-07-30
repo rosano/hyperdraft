@@ -9,7 +9,7 @@ import { storageClient, isLoading, isMobile } from './persistence.js';
 import { onMount } from 'svelte';
 import Widget from 'remotestorage-widget';
 onMount(function () {
-	(new Widget(storageClient.remoteStorage)).attach('WIKComposeStorageWidget');	
+	(new Widget(storageClient.remoteStorage)).attach('WIKWriteStorageWidget');	
 });
 </script>
 
@@ -26,8 +26,8 @@ onMount(function () {
 
 </div>
 
-<div id="WIKComposeStorageWidget"></div>
-<div class="WIKComposeDebug">
+<div id="WIKWriteStorageWidget"></div>
+<div class="WIKWriteDebug">
 	<button class="WIKSharedButtonNoStyle" onclick="location.reload();">{ OLSKLocalized('WKCUpdateReloadText') }</button>
 </div>
 

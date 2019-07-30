@@ -14,7 +14,7 @@ import ModuleFooter from './ModuleFooter.svelte';
 
 import WKCNotesAction from '../../_shared/rs-modules/wkc_notes/action.js';
 import WKCVersionsAction from '../../_shared/rs-modules/wkc_versions/action.js';
-import WKCWriteLogic from '../open-write/ui-logic.js';
+import WKCWriteLogic from './ui-logic.js';
 
 import { storageClient, notesAll, noteSelected, filterText, defaultFocusNode, mobileViewCurrent, isMobile } from './persistence.js';
 

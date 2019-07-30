@@ -1,201 +1,35 @@
-body {
-  font-family: 'Helvetica Neue';
-	font-size: 90%;
+:root {
+	--WIKBorderStyle: 1px solid #ddd;
 }
 
-#WKCLoginButton {
-	position: absolute;
-	bottom: 80px;
-	right: 10px;
-	height: 50px;
-	z-index: 1000;
-	border: 1px solid #aaa;
-
-	background: #eee;
-}
-
-#WKCWrite {
-	position: absolute;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-
-	/* WKCWriteFlexboxParent */
-	display: flex;
-}
-
-.WKCWriteLoading .WKCSharedToolbar *, .WKCWriteLoading #WKCWriteMasterContent *, .WKCWriteLoading #WKCWriteDetailContent * {
-	visibility: hidden;
-}
-
-#WKCWriteMaster {
-	/* WKCWriteFlexboxChild */
-	flex-basis: 300px;
-	flex-shrink: 0;
-
-	/* WKCWriteMasterFlexboxParent */
-	display: flex;
-	flex-direction: column;
-}
-
-#WKCWriteMasterToolbar {
-	/* WKCWriteMasterFlexboxChild */
-	flex-shrink: 0;
-}
-
-#WKCWriteMasterToolbarFilterInput {
-	height: 14px;
-	padding: 4px;
-	margin: 0;
-	border: 1px solid #e6e6e6;
-	border-radius: 10px;
-
-	font-size: 80%;
-	text-indent: 2px;
-	line-height: 1.4;
-
-	/* WKCSharedToolbarFlexboxChild */
-	flex-grow: 1;
-}
-
-#WKCWriteMasterContent {
-	/* WKCWriteMasterFlexboxChild */
-	overflow: auto;
-}
-
-.WKCWriteMasterContentListItem {
-	min-height: 46px;
-	padding: 10px;
-	border-bottom: 1px solid #ddd;
-
-	overflow: hidden;
-	text-overflow: ellipsis;
-
-	font-size: 12px;
-
-	/* prevent breaking from long urls */
-	overflow-wrap: break-word;
-	word-wrap: break-word;
-	word-break: break-word;
-	hyphens: auto;
-}
-
-.WKCWriteMasterContentListItemSelected {
-	background: #e6e6e6;
-}
-
-.WKCWriteMasterContentListItemContextTitle {
-	font-weight: bold;
-}
-
-.WKCWriteMasterContentListItemSnippet {
-	display: block;
-	margin-top: 5px;
-}
-
-#WKCWriteMasterDebug {
-	padding: 10px;
-}
-
-#WKCWriteDetail {
-	border-left: 1px solid #ddd;
-
-	/* WKCWriteFlexboxChild */
-	flex-grow: 1;
-
-	/* WKCWriteDetailFlexboxParent */
-	display: flex;
-	flex-direction: column;
-}
-
-.WKCWriteDetailInactive {
-	border-top: 1px solid #ddd;
-	justify-content: center;
-}
-
-.WKCWriteDetailInactive #WKCWriteDetailToolbar, .WKCWriteDetailInactive #WKCWriteDetailContent {
-	display: none;
-}
-
-.WKCWriteDetailInactive #WKCWriteDetailPlaceholder {
-	display: block;
-	width: 100%;
-	text-align: center;
-}
-
-#WKCWriteDetailPlaceholder {
-	opacity: 0.5;
-	display: none;
-}
-
-#WKCWriteDetailToolbarPublishStatus {
-	margin: auto 5px;
-
-	color: #bfbfbf
-}
-
-#WKCWriteDetailToolbar {
-	justify-content: space-between;
-}
-
-#WKCWriteDetailContent {
-	position:relative;
-
-	/* WKCWriteDetailFlexboxChild */
-	flex-grow: 1;
-}
-
-#ignore #WKCWriteDetailContentTextarea {
-	padding: 10px;
-
-	line-height: 1.4;
-
-	/* WKCWriteDetailContentFlexboxChild */
-	flex-grow: 1;
-
-	/* browser defaults */
-	border: none;
-	outline: none;
-	resize: none;
-}
-
-.CodeMirror {
-	height: 100%;
-
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-
-	font-family: inherit;
-}
-
-.CodeMirror-scroll {
-	background: #f8f8f8;
-}
-
-.CodeMirror-lines {
-	/* override defaults */
-	padding: 10px;
-}
-
-.CodeMirror pre {
-	/* override defaults */
-	padding: 0;
-}
-
-.CodeMirror-line:nth-child(1) {
-	font-weight: bold;
-}
-
-.cm-link:hover {
-  cursor: pointer;
+.WIKSharedToolbar {
+	padding: 5px;
+	border-bottom: var(--WIKBorderStyle);
 }
 
 #remotestorage-widget {
 	bottom: 0;
+	right: 0;
+}
+
+.WIKWriteDebug {
+	display: none;
+
+	font-family: sans-serif;
+}
+
+.WIKWriteDebug button {
+	padding: 10px;
+	border: 1px solid #bbb;
+
+	margin: 10px;
+}
+
+.remotestorage-widget-error-state + .WIKWriteDebug {
+	display: unset;
+
+	position: absolute;
+	bottom: 100px;
 	right: 0;
 }
 
