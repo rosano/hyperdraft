@@ -1,77 +1,61 @@
-(function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
-	typeof define === 'function' && define.amd ? define(['exports'], factory) :
-	(factory((global.WKCVersionsModel = global.WKCVersionsModel || {})));
-}(this, (function (exports) { 'use strict';
+export const WKCVersionsModelErrorsFor = function(inputData) {
+	if (typeof inputData !== 'object' || inputData === null) {
+		throw new Error('WKCErrorInputInvalid');
+	}
 
-	//_ WKCVersionsModelErrorsFor
+	var errors = {};
 
-	exports.WKCVersionsModelErrorsFor = function(inputData) {
-		if (typeof inputData !== 'object' || inputData === null) {
-			throw new Error('WKCErrorInputInvalid');
-		}
+	if (typeof inputData.WKCVersionID !== 'string') {
+		errors.WKCVersionID = [
+			'WKCErrorNotString',
+		];
+	} else if (inputData.WKCVersionID.trim() === '') {
+		errors.WKCVersionID = [
+			'WKCErrorNotFilled',
+		];
+	}
 
-		var errors = {};
+	if (typeof inputData.WKCVersionNoteID !== 'string') {
+		errors.WKCVersionNoteID = [
+			'WKCErrorNotString',
+		];
+	} else if (inputData.WKCVersionNoteID.trim() === '') {
+		errors.WKCVersionNoteID = [
+			'WKCErrorNotFilled',
+		];
+	}
 
-		if (typeof inputData.WKCVersionID !== 'string') {
-			errors.WKCVersionID = [
-				'WKCErrorNotString',
-			];
-		} else if (inputData.WKCVersionID.trim() === '') {
-			errors.WKCVersionID = [
-				'WKCErrorNotFilled',
-			];
-		}
+	if (typeof inputData.WKCVersionBody !== 'string') {
+		errors.WKCVersionBody = [
+			'WKCErrorNotString',
+		];
+	}
 
-		if (typeof inputData.WKCVersionNoteID !== 'string') {
-			errors.WKCVersionNoteID = [
-				'WKCErrorNotString',
-			];
-		} else if (inputData.WKCVersionNoteID.trim() === '') {
-			errors.WKCVersionNoteID = [
-				'WKCErrorNotFilled',
-			];
-		}
+	if (!(inputData.WKCVersionDate instanceof Date) || Number.isNaN(inputData.WKCVersionDate.getTime())) {
+		errors.WKCVersionDate = [
+			'WKCErrorNotDate',
+		];
+	}
 
-		if (typeof inputData.WKCVersionBody !== 'string') {
-			errors.WKCVersionBody = [
-				'WKCErrorNotString',
-			];
-		}
+	return Object.entries(errors).length ? errors : null;
+};
 
-		if (!(inputData.WKCVersionDate instanceof Date) || Number.isNaN(inputData.WKCVersionDate.getTime())) {
-			errors.WKCVersionDate = [
-				'WKCErrorNotDate',
-			];
-		}
+export const WKCVersionsModelPreJSONSchemaValidate = function(inputData) {
+	if (inputData.WKCVersionDate) {
+		inputData.WKCVersionDate = inputData.WKCVersionDate.toISOString();
+	}
 
-		return Object.entries(errors).length ? errors : null;
-	};
+	return inputData;
+};
 
-	//_ WKCVersionsModelPreJSONSchemaValidate
-
-	exports.WKCVersionsModelPreJSONSchemaValidate = function(inputData) {
-		if (inputData.WKCVersionDate) {
-			inputData.WKCVersionDate = inputData.WKCVersionDate.toISOString();
-		}
-
+export const WKCVersionsModelPostJSONParse = function(inputData) {
+	if (!inputData) {
 		return inputData;
-	};
+	}
+	
+	if (inputData.WKCVersionDate) {
+		inputData.WKCVersionDate = new Date(inputData.WKCVersionDate);
+	}
 
-	//_ WKCVersionsModelPostJSONParse
-
-	exports.WKCVersionsModelPostJSONParse = function(inputData) {
-		if (!inputData) {
-			return inputData;
-		}
-		
-		if (inputData.WKCVersionDate) {
-			inputData.WKCVersionDate = new Date(inputData.WKCVersionDate);
-		}
-
-		return inputData;
-	};
-
-	Object.defineProperty(exports, '__esModule', { value: true });
-
-})));
+	return inputData;
+};

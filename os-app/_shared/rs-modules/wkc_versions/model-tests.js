@@ -1,6 +1,6 @@
-const assert = require('assert');
+import { throws, deepEqual } from 'assert';
 
-const mainModule = require('./model.js');
+import * as mainModule from './model.js';
 
 const kTesting = {
 	StubVersionObjectValid: function() {
@@ -16,13 +16,13 @@ const kTesting = {
 describe('WKCVersionsModelErrorsFor', function testWKCVersionsModelErrorsFor() {
 
 	it('throws error if not object', function() {
-		assert.throws(function() {
+		throws(function() {
 			mainModule.WKCVersionsModelErrorsFor(null);
 		}, /WKCErrorInputInvalid/);
 	});
 
 	it('returns object if WKCVersionID not string', function() {
-		assert.deepEqual(mainModule.WKCVersionsModelErrorsFor(Object.assign(kTesting.StubVersionObjectValid(), {
+		deepEqual(mainModule.WKCVersionsModelErrorsFor(Object.assign(kTesting.StubVersionObjectValid(), {
 			WKCVersionID: null,
 		})), {
 			WKCVersionID: [
@@ -32,7 +32,7 @@ describe('WKCVersionsModelErrorsFor', function testWKCVersionsModelErrorsFor() {
 	});
 
 	it('returns object if WKCVersionID not filled', function() {
-		assert.deepEqual(mainModule.WKCVersionsModelErrorsFor(Object.assign(kTesting.StubVersionObjectValid(), {
+		deepEqual(mainModule.WKCVersionsModelErrorsFor(Object.assign(kTesting.StubVersionObjectValid(), {
 			WKCVersionID: ' ',
 		})), {
 			WKCVersionID: [
@@ -42,7 +42,7 @@ describe('WKCVersionsModelErrorsFor', function testWKCVersionsModelErrorsFor() {
 	});
 
 	it('returns object if WKCVersionBody not string', function() {
-		assert.deepEqual(mainModule.WKCVersionsModelErrorsFor(Object.assign(kTesting.StubVersionObjectValid(), {
+		deepEqual(mainModule.WKCVersionsModelErrorsFor(Object.assign(kTesting.StubVersionObjectValid(), {
 			WKCVersionBody: null,
 		})), {
 			WKCVersionBody: [
@@ -52,7 +52,7 @@ describe('WKCVersionsModelErrorsFor', function testWKCVersionsModelErrorsFor() {
 	});
 
 	it('returns object if WKCVersionDate not date', function() {
-		assert.deepEqual(mainModule.WKCVersionsModelErrorsFor(Object.assign(kTesting.StubVersionObjectValid(), {
+		deepEqual(mainModule.WKCVersionsModelErrorsFor(Object.assign(kTesting.StubVersionObjectValid(), {
 			WKCVersionDate: new Date('alfa'),
 		})), {
 			WKCVersionDate: [
@@ -62,7 +62,7 @@ describe('WKCVersionsModelErrorsFor', function testWKCVersionsModelErrorsFor() {
 	});
 
 	it('returns null', function() {
-		assert.deepEqual(mainModule.WKCVersionsModelErrorsFor(kTesting.StubVersionObjectValid()), null);
+		deepEqual(mainModule.WKCVersionsModelErrorsFor(kTesting.StubVersionObjectValid()), null);
 	});
 
 });
@@ -70,11 +70,11 @@ describe('WKCVersionsModelErrorsFor', function testWKCVersionsModelErrorsFor() {
 describe('WKCVersionsModelPreJSONSchemaValidate', function testWKCVersionsModelPreJSONSchemaValidate() {
 
 	it('returns input', function() {
-		assert.deepEqual(mainModule.WKCVersionsModelPreJSONSchemaValidate({}), {});
+		deepEqual(mainModule.WKCVersionsModelPreJSONSchemaValidate({}), {});
 	});
 
 	it('returns input with WKCVersionDate as string', function() {
-		assert.deepEqual(mainModule.WKCVersionsModelPreJSONSchemaValidate({
+		deepEqual(mainModule.WKCVersionsModelPreJSONSchemaValidate({
 			WKCVersionDate: new Date('2018-12-09T19:07:01.902Z'),
 		}), {
 			WKCVersionDate: '2018-12-09T19:07:01.902Z',
@@ -86,15 +86,15 @@ describe('WKCVersionsModelPreJSONSchemaValidate', function testWKCVersionsModelP
 describe('WKCVersionsModelPostJSONParse', function testWKCVersionsModelPostJSONParse() {
 
 	it('returns input', function() {
-		assert.deepEqual(mainModule.WKCVersionsModelPostJSONParse(null), null);
+		deepEqual(mainModule.WKCVersionsModelPostJSONParse(null), null);
 	});
 
 	it('returns input', function() {
-		assert.deepEqual(mainModule.WKCVersionsModelPostJSONParse({}), {});
+		deepEqual(mainModule.WKCVersionsModelPostJSONParse({}), {});
 	});
 
 	it('returns input with WKCVersionDate as date', function() {
-		assert.deepEqual(mainModule.WKCVersionsModelPostJSONParse({
+		deepEqual(mainModule.WKCVersionsModelPostJSONParse({
 			WKCVersionDate: '2018-12-09T19:07:01.902Z',
 		}), {
 			WKCVersionDate: new Date('2018-12-09T19:07:01.902Z'),
