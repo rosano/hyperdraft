@@ -1,12 +1,10 @@
 const storageClient = require('../_shared/WKCStorageClient/storage.js').WKCStorageClientForChangeDelegateMap({
 	wkc_notes: null,
 });
-const WKCNotesAction = require('../_shared/rs-modules/wkc_notes/action.js');
-const WKCParser = require('../_shared/WKCParser/main.js');
 
 //_ OLSKControllerSharedConnections
 
-exports.OLSKControllerSharedConnections = function() {
+exports.OLSKControllerSharedConnectionsx = function() {
 	return {
 		WKCSharedConnectionRS: {
 			OLSKConnectionInitializer: function(olskCallback) {
@@ -33,15 +31,15 @@ exports.OLSKControllerSharedConnections = function() {
 
 //_ OLSKControllerSharedMiddlewares
 
-exports.OLSKControllerSharedMiddlewares = function() {
+exports.OLSKControllerSharedMiddlewaresx = function() {
 	return {
-		WKCSharedMiddlewareEnsureConnection: exports.WKCSharedMiddlewareEnsureConnection,
+		WKCSharedMiddlewareEnsureConnection: exports.WKCSharedMiddlewareEnsureConnectionx,
 	};
 };
 
 //_ WKCSharedMiddlewareEnsureConnection
 
-exports.WKCSharedMiddlewareEnsureConnection = function(req, res, next) {
+exports.WKCSharedMiddlewareEnsureConnectionx = function(req, res, next) {
 	if (!req.OLSKSharedConnectionFor('WKCSharedConnectionRS').OLSKConnectionAttempted) {
 		return next(new Error('WKCErrorConnectionNotAttempted'));
 	}
@@ -74,6 +72,10 @@ exports.OLSKControllerRoutes = function() {
 			OLSKRoutePath: '/:wkc_note_public_id(\\d+)',
 			OLSKRouteMethod: 'get',
 			OLSKRouteFunction: async function(req, res, next) {
+				return next();
+				const WKCNotesAction = require('../_shared/rs-modules/wkc_notes/action.js');
+				const WKCParser = require('../_shared/WKCParser/main.js');
+
 				let item = await WKCNotesAction.WKCNotesActionPublicRead(req.OLSKSharedConnectionFor('WKCSharedConnectionRS').OLSKConnectionClient, req.params.wkc_note_public_id);
 
 				if ((item.message || '').match(/NotFound/)) {
