@@ -19,3 +19,17 @@ describe('WKCWriteBehaviourVisibility', function() {
   });
 
 });
+
+describe('WKCWriteBehaviourLocalizationEN', function() {
+
+  const browser = new Browser();
+
+  before(function() {
+    return browser.visit('/panel/write');
+  });
+
+  it('contains create button', function() {
+    browser.assert.attribute(kTesting.WKCWriteCreateButton, 'title', 'Add note');
+  });
+
+});
