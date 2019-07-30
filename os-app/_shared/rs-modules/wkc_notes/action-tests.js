@@ -55,11 +55,11 @@ describe('WKCNotesActionCreate', function testWKCNotesActionCreate() {
 	});
 
 	it('sets WKCNoteCreationDate to now', async function() {
-		assert.strictEqual(new Date() - (await mainModule.WKCNotesActionCreate(WKCTestingStorageClient, kTesting.StubNoteObject())).WKCNoteCreationDate < 100, true);
+		deepEqual(new Date() - (await mainModule.WKCNotesActionCreate(WKCTestingStorageClient, kTesting.StubNoteObject())).WKCNoteCreationDate < 100, true);
 	});
 
 	it('sets WKCNoteModificationDate to now', async function() {
-		assert.strictEqual(new Date() - (await mainModule.WKCNotesActionCreate(WKCTestingStorageClient, kTesting.StubNoteObject())).WKCNoteModificationDate < 100, true);
+		deepEqual(new Date() - (await mainModule.WKCNotesActionCreate(WKCTestingStorageClient, kTesting.StubNoteObject())).WKCNoteModificationDate < 100, true);
 	});
 
 });
@@ -91,7 +91,7 @@ describe('WKCNotesActionUpdate', function testWKCNotesActionUpdate() {
 	});
 
 	it('sets WKCNoteModificationDate to now', async function() {
-		assert.strictEqual(new Date() - (await mainModule.WKCNotesActionUpdate(WKCTestingStorageClient, await mainModule.WKCNotesActionCreate(WKCTestingStorageClient, kTesting.StubNoteObject()))).WKCNoteModificationDate < 100, true);
+		deepEqual(new Date() - (await mainModule.WKCNotesActionUpdate(WKCTestingStorageClient, await mainModule.WKCNotesActionCreate(WKCTestingStorageClient, kTesting.StubNoteObject()))).WKCNoteModificationDate < 100, true);
 	});
 
 	it('writes inputData if not found', async function() {
@@ -213,16 +213,16 @@ describe('WKCNotesActionPublish', function testWKCNotesActionPublish() {
 	});
 
 	it('sets WKCNotePublishStatusIsPublished to true', async function() {
-		assert.strictEqual((await mainModule.WKCNotesActionPublish(WKCTestingStorageClient, await mainModule.WKCNotesActionCreate(WKCTestingStorageClient, kTesting.StubNoteObject()))).WKCNotePublishStatusIsPublished, true);
+		deepEqual((await mainModule.WKCNotesActionPublish(WKCTestingStorageClient, await mainModule.WKCNotesActionCreate(WKCTestingStorageClient, kTesting.StubNoteObject()))).WKCNotePublishStatusIsPublished, true);
 	});
 
 	it('sets WKCNotePublicID to 1 if none published', async function() {
-		assert.strictEqual((await mainModule.WKCNotesActionPublish(WKCTestingStorageClient, await mainModule.WKCNotesActionCreate(WKCTestingStorageClient, kTesting.StubNoteObject()))).WKCNotePublicID, '1');
+		deepEqual((await mainModule.WKCNotesActionPublish(WKCTestingStorageClient, await mainModule.WKCNotesActionCreate(WKCTestingStorageClient, kTesting.StubNoteObject()))).WKCNotePublicID, '1');
 	});
 
 	it('sets WKCNotePublicID to 2 if one published and deleted', async function() {
 		mainModule.WKCNotesActionDelete(WKCTestingStorageClient, await mainModule.WKCNotesActionPublish(WKCTestingStorageClient, await mainModule.WKCNotesActionCreate(WKCTestingStorageClient, kTesting.StubNoteObject())));
-		assert.strictEqual((await mainModule.WKCNotesActionPublish(WKCTestingStorageClient, await mainModule.WKCNotesActionCreate(WKCTestingStorageClient, kTesting.StubNoteObject()))).WKCNotePublicID, '2');
+		deepEqual((await mainModule.WKCNotesActionPublish(WKCTestingStorageClient, await mainModule.WKCNotesActionCreate(WKCTestingStorageClient, kTesting.StubNoteObject()))).WKCNotePublicID, '2');
 	});
 
 	it('sets WKCNotePublicID to 3 if two published and deleted', async function() {
@@ -293,7 +293,7 @@ describe('WKCNotesActionUnpublish', function testWKCNotesActionUnpublish() {
 	});
 
 	it('sets WKCNotePublishStatusIsPublished to false', async function() {
-		assert.strictEqual((await mainModule.WKCNotesActionUnpublish(WKCTestingStorageClient, await mainModule.WKCNotesActionPublish(WKCTestingStorageClient, await mainModule.WKCNotesActionCreate(WKCTestingStorageClient, kTesting.StubNoteObject())))).WKCNotePublishStatusIsPublished, false);
+		deepEqual((await mainModule.WKCNotesActionUnpublish(WKCTestingStorageClient, await mainModule.WKCNotesActionPublish(WKCTestingStorageClient, await mainModule.WKCNotesActionCreate(WKCTestingStorageClient, kTesting.StubNoteObject())))).WKCNotePublishStatusIsPublished, false);
 	});	
 
 });

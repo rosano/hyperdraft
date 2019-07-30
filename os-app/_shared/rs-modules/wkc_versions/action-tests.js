@@ -55,7 +55,7 @@ describe('WKCVersionsActionCreate', function testWKCVersionsActionCreate() {
 	});
 
 	it('sets WKCVersionDate to now', async function() {
-		assert.strictEqual(new Date() - (await mainModule.WKCVersionsActionCreate(WKCTestingStorageClient, kTesting.StubVersionObject())).WKCVersionDate < 100, true);
+		deepEqual(new Date() - (await mainModule.WKCVersionsActionCreate(WKCTestingStorageClient, kTesting.StubVersionObject())).WKCVersionDate < 100, true);
 	});
 
 });
