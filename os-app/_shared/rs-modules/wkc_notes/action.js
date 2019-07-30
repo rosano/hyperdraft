@@ -1,8 +1,8 @@
-const WKCNotesModel = typeof require === 'undefined' ? window.WKCNotesModel : require('./model.js');
-const WKCNotesMetal = typeof require === 'undefined' ? window.WKCNotesMetal : require('./metal.js');
-const WKCVersionsAction = typeof require === 'undefined' ? window.WKCVersionsAction : require('../wkc_versions/action.js');
-const WKCSettingsAction = typeof require === 'undefined' ? window.WKCSettingsAction : require('../wkc_settings/action.js');
-const WKCParser = typeof require === 'undefined' ? window.WKCParser : require('../../WKCParser/main.js');
+import * as WKCNotesModel from './model.js';
+import * as WKCNotesMetal from './metal.js';
+import * as WKCVersionsAction from '../wkc_versions/action.js';
+import * as WKCSettingsAction from '../wkc_settings/action.js';
+import * as WKCParser from '../../WKCParser/main.js';
 
 import { factory, detectPrng } from 'ulid'
 const uniqueID = typeof require === 'undefined' && navigator.appName === 'Zombie' ? factory(detectPrng(true)) : factory();
