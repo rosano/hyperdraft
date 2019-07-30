@@ -1,3 +1,5 @@
+return;
+
 const storageClient = require('../_shared/WKCStorageClient/storage.js').WKCStorageClientForChangeDelegateMap({
 	wkc_notes: null,
 });
