@@ -12,7 +12,7 @@ export let editorConfigure = function (inputData) {
 <script>
 import ModuleFooter from './ModuleFooter.svelte';
 
-import WKCNotesAction from '../../_shared/rs-modules/wkc_notes/action.js';
+import * as WKCNotesAction from '../../_shared/rs-modules/wkc_notes/action.js';
 import * as WKCVersionsAction from '../../_shared/rs-modules/wkc_versions/action.js';
 import WKCWriteLogic from './ui-logic.js';
 

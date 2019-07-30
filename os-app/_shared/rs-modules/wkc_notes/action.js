@@ -1,5 +1,5 @@
 const WKCNotesModel = typeof require === 'undefined' ? window.WKCNotesModel : require('./model.js');
-import * as WKCNotesMetal from './metal.js';
+const WKCNotesMetal = typeof require === 'undefined' ? window.WKCNotesMetal : require('./metal.js');
 const WKCVersionsAction = typeof require === 'undefined' ? window.WKCVersionsAction : require('../wkc_versions/action.js');
 const WKCSettingsAction = typeof require === 'undefined' ? window.WKCSettingsAction : require('../wkc_settings/action.js');
 const WKCParser = typeof require === 'undefined' ? window.WKCParser : require('../../WKCParser/main.js');

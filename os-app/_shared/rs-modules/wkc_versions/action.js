@@ -1,4 +1,4 @@
-import * as WKCVersionsMetal from './metal.js';
+const WKCVersionsMetal = typeof require === 'undefined' ? window.WKCVersionsMetal : require('./metal.js');
 import * as ULIDPackage from 'ulid';
 
 export const WKCVersionsActionCreate = async function(storageClient, inputData) {

@@ -1,7 +1,7 @@
 <script>
 import ModuleFooter from './ModuleFooter.svelte';
 
-import WKCNotesAction from '../../_shared/rs-modules/wkc_notes/action.js';
+import * as WKCNotesAction from '../../_shared/rs-modules/wkc_notes/action.js';
 
 import WKCParser from '../../_shared/WKCParser/main.js';
 
