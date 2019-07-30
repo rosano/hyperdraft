@@ -1,6 +1,7 @@
 const WKCVersionsMetal = typeof require === 'undefined' ? window.WKCVersionsMetal : require('./metal.js');
-import { ulid } from 'ulid';
-const uniqueID = ulid;
+
+import { factory, detectPrng } from 'ulid'
+const uniqueID = typeof require === 'undefined' && navigator.appName === 'Zombie' ? factory(detectPrng(true)) : factory();
 
 export const WKCVersionsActionCreate = async function(storageClient, inputData) {
 	if (typeof inputData !== 'object' || inputData === null) {

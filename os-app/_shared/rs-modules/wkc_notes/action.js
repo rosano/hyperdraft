@@ -4,8 +4,8 @@ const WKCVersionsAction = typeof require === 'undefined' ? window.WKCVersionsAct
 const WKCSettingsAction = typeof require === 'undefined' ? window.WKCSettingsAction : require('../wkc_settings/action.js');
 const WKCParser = typeof require === 'undefined' ? window.WKCParser : require('../../WKCParser/main.js');
 
-import { ulid } from 'ulid';
-const uniqueID = ulid;
+import { factory, detectPrng } from 'ulid'
+const uniqueID = typeof require === 'undefined' && navigator.appName === 'Zombie' ? factory(detectPrng(true)) : factory();
 
 export const WKCNotesActionCreate = async function(storageClient, inputData) {
 	if (typeof inputData !== 'object' || inputData === null) {
