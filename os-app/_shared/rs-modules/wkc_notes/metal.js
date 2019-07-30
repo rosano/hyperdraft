@@ -1,60 +1,42 @@
-(function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
-	typeof define === 'function' && define.amd ? define(['exports'], factory) :
-	(factory((global.WKCNotesMetal = global.WKCNotesMetal || {})));
-}(this, (function (exports) { 'use strict';
+import * as WKCNotesModel from './model.js';
 
-	const WKCNotesModel = typeof require === 'undefined' ? window.WKCNotesModel : require('./model.js');
+export const WKCNotesMetalWrite = async function(storageClient, inputData) {
+	if (typeof inputData !== 'object' || inputData === null) {
+		return Promise.reject(new Error('WKCErrorInputInvalid'));
+	}
 
-	//_ WKCNotesMetalWrite
+	let errors = WKCNotesModel.WKCNotesModelErrorsFor(inputData);
+	if (errors) {
+		return Promise.resolve({
+			WKCErrors: errors,
+		});
+	}
 
-	exports.WKCNotesMetalWrite = async function(storageClient, inputData) {
-		if (typeof inputData !== 'object' || inputData === null) {
-			return Promise.reject(new Error('WKCErrorInputInvalid'));
-		}
+	return await storageClient.wkc_notes.writeObject(inputData.WKCNoteID, inputData);
+};
 
-		let errors = WKCNotesModel.WKCNotesModelErrorsFor(inputData);
-		if (errors) {
-			return Promise.resolve({
-				WKCErrors: errors,
-			});
-		}
+export const WKCNotesMetalRead = async function(storageClient, inputData) {
+	if (typeof inputData !== 'string') {
+		return Promise.reject(new Error('WKCErrorInputInvalid'));
+	}
 
-		return await storageClient.wkc_notes.writeObject(inputData.WKCNoteID, inputData);
-	};
+	return WKCNotesModel.WKCNotesModelPostJSONParse(await storageClient.wkc_notes.readObject(inputData));
+};
 
-	//_ WKCNotesMetalRead
+export const WKCNotesMetalList = async function(storageClient) {
+	let outputData = await storageClient.wkc_notes.listObjects();
 
-	exports.WKCNotesMetalRead = async function(storageClient, inputData) {
-		if (typeof inputData !== 'string') {
-			return Promise.reject(new Error('WKCErrorInputInvalid'));
-		}
+	for (let key in outputData) {
+		WKCNotesModel.WKCNotesModelPostJSONParse(outputData[key]);
+	}
+	
+	return outputData;
+};
 
-		return WKCNotesModel.WKCNotesModelPostJSONParse(await storageClient.wkc_notes.readObject(inputData));
-	};
+export const WKCNotesMetalDelete = async function(storageClient, inputData) {
+	if (typeof inputData !== 'string') {
+		return Promise.reject(new Error('WKCErrorInputInvalid'));
+	}
 
-	//_ WKCNotesMetalList
-
-	exports.WKCNotesMetalList = async function(storageClient) {
-		let outputData = await storageClient.wkc_notes.listObjects();
-
-		for (let key in outputData) {
-			WKCNotesModel.WKCNotesModelPostJSONParse(outputData[key]);
-		}
-		
-		return outputData;
-	};
-
-	//_ WKCNotesMetalDelete
-
-	exports.WKCNotesMetalDelete = async function(storageClient, inputData) {
-		if (typeof inputData !== 'string') {
-			return Promise.reject(new Error('WKCErrorInputInvalid'));
-		}
-
-		return await storageClient.wkc_notes.deleteObject(inputData);
-	};
-
-	Object.defineProperty(exports, '__esModule', { value: true });
-
-})));
+	return await storageClient.wkc_notes.deleteObject(inputData);
+};
