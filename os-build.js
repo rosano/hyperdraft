@@ -1,6 +1,10 @@
 //# ROCOHotfixULIDForBrowserTesting
 
 (function ROCOHotfixULIDForBrowserTesting() {
+	if (process.env.NODE_ENV === 'production') {
+		return;
+	}
+
 	let filePath = './node_modules/ulid/dist/index.esm.js';
 	require('fs').writeFileSync(filePath, require('fs')
 		.readFileSync(filePath, 'utf8')
