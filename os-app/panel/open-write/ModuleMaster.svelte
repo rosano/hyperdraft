@@ -164,7 +164,7 @@ function handleKeydown(event) {
 	</div>
 	
 	<div id="WKCWriteMasterDebug">
-		<button on:click={ exportNotes } class="WKCSharedElementTappable WKCSharedButtonNoStyle">{ OLSKLocalized('WKCUpdateExportText') }</button>
+		<button on:click={ exportNotes } class="WKCSharedElementTappable WKCSharedButtonNoStyle" id="WKCWriteExportButton">{ OLSKLocalized('WKCUpdateExportText') }</button>
 	</div>
 </div>
 
