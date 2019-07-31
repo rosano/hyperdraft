@@ -105,7 +105,33 @@ describe('Language', function testLanguage() {
 			});
 
 			it('localizes interface', function() {
+				deepEqual(browser.query(WKCWriteFilterInput).placeholder, uLocalized('WKCWriteMasterToolbarFilterInputPlaceholderText'));
 				deepEqual(browser.query(WKCWriteCreateButton).title, uLocalized('WKCWriteMasterToolbarCreateButtonText'));
+
+				deepEqual(browser.query(WKCWriteExportButton).textContent, uLocalized('WKCUpdateExportText'));
+
+				deepEqual(browser.query(WKCWriteDetailPlaceholderContainer).textContent, uLocalized('WKCWriteDetailPlaceholderText'));
+
+				deepEqual(browser.query(WKCWriteReloadButton).title, uLocalized('WKCWriteFooterToolbarReloadButtonText'));
+			});
+
+			it('on create', async function() {
+				await uCreateNote(browser);
+
+				// browser.assert.elements(WKCWriteListItem, 1);
+
+				// browser.assert.elements(WKCWriteDetailPlaceholderContainer, 0);
+
+				// browser.assert.elements(WKCWriteDetailToolbar, 1);
+				deepEqual(browser.query(WKCWriteDetailToolbarBackButton).title, uLocalized('WKCWriteDetailToolbarBackButtonText'));
+				deepEqual(browser.query(WKCWriteDetailToolbarJumpButton).title, uLocalized('WKCWriteDetailToolbarJumpButtonText'));
+				browser.assert.attribute(WKCWriteDetailToolbarJumpButton, 'disabled', '');
+				// browser.assert.elements(WKCWriteDetailToolbarUnpublishButton, 0);
+				// browser.assert.elements(WKCWriteDetailToolbarPublishButton, 0);
+				deepEqual(browser.query(WKCWriteDetailToolbarVersionsButton).title, uLocalized('WKCWriteDetailToolbarVersionsButtonText'));
+				deepEqual(browser.query(WKCWriteDetailToolbarDiscardButton).title, uLocalized('WKCWriteDetailToolbarDiscardButtonText'));
+
+				// browser.assert.elements(WKCWriteEditorContainer, 1);
 			});
 
 		});
