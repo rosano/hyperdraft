@@ -1,10 +1,33 @@
-//# OLSKMochaReplaceES6Import
-
 (function OLSKMochaReplaceES6Import() {
 	require('OLSKTesting')._OLSKTestingMochaReplaceES6Import();
 })();
 
-//# WKCMochaSetup
+(function OLSKMochaLocalizedStrings() {
+	if (process.env.OLSK_TESTING_BEHAVIOUR !== 'true') {
+		return;
+	}
+
+	const pathPackage = require('path');
+	const OLSKInternational = require('OLSKInternational');
+
+	let baseDirectory = pathPackage.join(__dirname, 'os-app');
+	let languageDictionary = require('glob').sync('*i18n*.y*(a)ml', {
+	  matchBase: true,
+	  cwd: baseDirectory,
+	}).filter(function(e) {
+	  return OLSKInternational.OLSKInternationalInputDataIsTranslationFileBasename(pathPackage.basename(e));
+	}).map(function (e) {
+		return pathPackage.join(baseDirectory, e);
+	}).reduce(function(coll, item) {
+		let languageID = OLSKInternational.OLSKInternationalLanguageIDForTranslationFileBasename(pathPackage.basename(item));
+
+		return (coll[languageID] = Object.assign(coll[languageID] || {}, require('js-yaml').safeLoad(require('fs').readFileSync(item, 'utf8')))) && coll;
+	}, {});
+
+	global.OLSKTestingLocalized = function(translationConstant, languageCode) {
+		return OLSKInternational.OLSKInternationalLocalizedStringWithTranslationKeyAndTranslationDictionary(translationConstant, languageDictionary[languageCode]);
+	};
+})();
 
 (function WKCMochaSetup() {
 	let moduleSlugs = [
@@ -55,8 +78,6 @@
 		global.WKCTestingMongoClient.db(process.env.WKC_SHARED_DATABASE_NAME).dropDatabase();
 	});
 })();
-
-//# OLSKMochaErrors
 
 (function OLSKMochaErrors() {
 	process.on('unhandledRejection', () => {
