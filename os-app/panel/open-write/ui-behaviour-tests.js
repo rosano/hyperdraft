@@ -85,14 +85,25 @@ describe('WKCWriteDiscovery', function() {
 
 describe('WKCWriteLanguage', function() {
 
-	const browser = new Browser();
+	['en'].forEach(function (languageCode) {
 
-	before(function() {
-		return browser.visit('/panel/write');
-	});
+		context(languageCode, function () {
+			
+			const browser = new Browser();
+			const uLocalized = function (inputData) {
+				return OLSKTestingLocalized(inputData, languageCode);
+			};
 
-	it('localizes interface', function() {
-		deepEqual(browser.query(WKCWriteCreateButton).title, 'Add note');
+			before(function() {
+				return browser.visit(`${ languageCode }/panel/write`);
+			});
+
+			it('localizes interface', function() {
+				deepEqual(browser.query(WKCWriteCreateButton).title, uLocalized('WKCWriteMasterToolbarCreateButtonText'));
+			});
+
+		});
+		
 	});
 
 });
