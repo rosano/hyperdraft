@@ -79,10 +79,10 @@ describe('Discovery', function testDiscovery() {
 		browser.assert.elements(WKCWriteEditorContainer, 1);
 	});
 
-	it.skip('on publish', async function() {
+	it.skip('on publish', function() {
 	});
 
-	it.skip('type header', async function() {
+	it.skip('type header', function() {
 		// browser.fire(WKCWriteEditorContainer, 'keydown')
 		browser.assert.attribute(WKCWriteDetailToolbarJumpButton, 'disabled', '');
 	});
@@ -111,7 +111,6 @@ describe('Language', function testLanguage() {
 		});
 		
 	});
-
 });
 
 describe('Interaction', function testInteraction() {
@@ -122,7 +121,7 @@ describe('Interaction', function testInteraction() {
 		return browser.visit('/panel/write');
 	});
 
-	it('has no items', async function() {
+	it('has no items', function() {
 		browser.assert.elements(WKCWriteListItem, 0);
 	});
 
