@@ -29,7 +29,7 @@ Object.entries({
 	return global[e.shift()]  = e.pop();
 });
 
-describe('WKCWriteBehaviourDiscovery', function() {
+describe('WKCWriteDiscovery', function() {
 
 	const browser = new Browser();
 
@@ -83,7 +83,7 @@ describe('WKCWriteBehaviourDiscovery', function() {
 
 });
 
-describe('WKCWriteBehaviourLocalizationEN', function() {
+describe('WKCWriteLanguage', function() {
 
 	const browser = new Browser();
 
@@ -97,7 +97,7 @@ describe('WKCWriteBehaviourLocalizationEN', function() {
 
 });
 
-describe('WKCWriteBehaviourInteraction', function() {
+describe('WKCWriteInteraction', function() {
 
 	const browser = new Browser();
 
