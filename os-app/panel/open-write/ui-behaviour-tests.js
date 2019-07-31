@@ -25,6 +25,11 @@ Object.entries({
 	WKCWriteEditorContainer: '.EditorContainer',
 
 	WKCWriteReloadButton: '#WKCWriteReloadButton',
+
+	uCreateNote: async function (browser) {
+		browser.pressButton(WKCWriteCreateButton);
+		await browser.wait({ element: WKCWriteListItem });
+	},
 }).map(function (e) {
 	return global[e.shift()]  = e.pop();
 });
@@ -56,8 +61,7 @@ describe('Discovery', function testDiscovery() {
 	});
 
 	it('on create', async function() {
-		browser.pressButton(WKCWriteCreateButton);
-		await browser.wait({ element: WKCWriteListItem });
+		await uCreateNote(browser);
 
 		browser.assert.elements(WKCWriteListItem, 1);
 
@@ -123,8 +127,7 @@ describe('Interaction', function testInteraction() {
 	});
 
 	it('creates item', async function() {
-		browser.pressButton(WKCWriteCreateButton);
-		await browser.wait({ element: WKCWriteListItem });
+		await uCreateNote(browser);
 		browser.assert.elements(WKCWriteListItem, 1);
 	});
 
