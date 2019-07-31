@@ -2,7 +2,7 @@ import { throws, deepEqual } from 'assert';
 
 const Browser = require('zombie');
 
-Browser.localhost(process.env.ZOMBIE_HOST, 3000);
+Browser.localhost('loc.tests', 3000);
 
 Object.entries({
 	WKCWriteFilterInput: '#WIKDefaultFocusNode',
