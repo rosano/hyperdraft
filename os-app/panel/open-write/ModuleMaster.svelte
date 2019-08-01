@@ -52,6 +52,20 @@ noteSelected.subscribe(function (val) {
 	mobileViewCurrent.set('ModuleMaster');
 });
 
+import { afterUpdate } from 'svelte';
+afterUpdate(function () {
+	let element = document.querySelector('.ListItemSelected');
+
+	if (!element) {
+		return;
+	}
+
+	element.scrollIntoView({
+		block: 'nearest',
+		inline: 'nearest',
+	});
+});
+
 let notesVisible = [];
 
 $: notesVisible = $notesAll.filter(function (e) {
