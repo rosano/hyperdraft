@@ -50,6 +50,14 @@ noteSelected.subscribe(function (val) {
 	}
 
 	mobileViewCurrent.set('ModuleMaster');
+
+	let element = document.querySelector('.MasterContentContainer');
+
+	if (!element) {
+		return;
+	}
+
+	element.scrollTo(0, 0);
 });
 
 import { afterUpdate } from 'svelte';
