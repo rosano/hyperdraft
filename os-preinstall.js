@@ -5,6 +5,13 @@
 		return;
 	}
 
+	try {
+		 require('glob')
+	} catch(e) {
+		console.log(e);
+		return;
+	}
+
 	(function (param1, param2) {
 		return require('glob').sync(`+(${ param1.join('|') })/`, {
 			matchBase: true,
