@@ -68,6 +68,10 @@ afterUpdate(function () {
 		return;
 	}
 
+	if (isMobile()) {
+		return;
+	}
+	
 	element.scrollIntoView({
 		block: 'nearest',
 		inline: 'nearest',
