@@ -13,6 +13,7 @@ export const noteSelected = writable(null);
 export const mobileViewCurrent = writable('ModuleMaster');
 export const isLoading = writable(true);
 export let filterText = writable('');
+export const isInErrorState = writable(false);
 
 export const defaultFocusNode = function () {
 	return document.getElementById('WIKDefaultFocusNode');
@@ -97,7 +98,7 @@ remoteStorage.on('ready', async () => {
 	remoteStorage.on('error', (error) => {
 		console.debug('error', error);
 
-		document.querySelector('#WIKWriteStorageWidget').classList.add('remotestorage-widget-error-state');
+		isInErrorState.set(true);
 	});
 
 	remoteStorage.on('network-offline', () => {

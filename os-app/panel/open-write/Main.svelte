@@ -4,7 +4,7 @@ import ModuleDetail from './ModuleDetail.svelte';
 import ModuleFooter from './ModuleFooter.svelte';
 
 import { OLSKLocalized } from '../../_shared/common/global.js';
-import { storageClient, isLoading, isMobile } from './persistence.js';
+import { storageClient, isLoading, isMobile, isInErrorState } from './persistence.js';
 
 import { onMount } from 'svelte';
 import Widget from 'remotestorage-widget';
@@ -27,9 +27,11 @@ onMount(function () {
 </div>
 
 <div id="WIKWriteStorageWidget"></div>
-<div class="WIKWriteDebug">
-	<button class="WIKSharedButtonNoStyle" onclick="location.reload();">{ OLSKLocalized('WKCUpdateReloadText') }</button>
-</div>
+{#if $isInErrorState}
+	<div class="WIKWriteDebug">
+		<button class="WIKSharedButtonNoStyle" onclick="location.reload();">{ OLSKLocalized('WKCUpdateReloadText') }</button>
+	</div>
+{/if}
 
 <style>
 .AppContainer {
