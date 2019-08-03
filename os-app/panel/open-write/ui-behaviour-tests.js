@@ -26,7 +26,7 @@ Object.entries({
 
 	WKCWriteReloadButton: '#WKCWriteReloadButton',
 
-	uCreateNote: async function (browser) {
+	async uCreateNote (browser) {
 		browser.pressButton(WKCWriteCreateButton);
 		await browser.wait({ element: WKCWriteListItem });
 	},
