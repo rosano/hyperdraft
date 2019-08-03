@@ -37,8 +37,17 @@ async function noteCreate(inputData) {
 	noteSelect(item);
 
 	editorConfigure(function (editorInstance) {
-		editorInstance.setCursor(CodeMirror.Pos(inputData.split('\n').length - 1, 0));
 		editorInstance.focus();
+		
+		if (typeof inputData !== 'string') {
+			return;
+		}
+
+		if (!inputData.match('\n')) {
+			return;
+		}
+
+		editorInstance.setCursor(CodeMirror.Pos(inputData.split('\n').length - 1, 0));
 	});
 }
 
