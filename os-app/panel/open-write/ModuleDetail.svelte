@@ -51,7 +51,8 @@ function openTextObject (inputData) {
 
 	event.preventDefault();
 	
-	$filterText = match;
+	filterText.set('');
+	filterText.set(match);
 }
 
 function openCursorObject (inputData) {
