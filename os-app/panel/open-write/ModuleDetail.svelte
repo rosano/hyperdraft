@@ -313,6 +313,14 @@ function noteClear () {
 	defaultFocusNode().focus();
 }
 
+function debugTextAreaDidInput() {
+	Object.assign($noteSelected, {
+		WKCNoteBody: this.value,
+	}); // @DependancySvelteIgnoresMutableChanges
+
+	noteSave($noteSelected);
+}
+
 function handleKeydown(event) {
 	if (window.Launchlet.instanceExists()) {
 		return;
@@ -368,6 +376,7 @@ function handleKeydown(event) {
 	</header>
 
 	<div class="DetailContentContainer EditorContainer">
+		<!-- <textarea on:input={ debugTextAreaDidInput } id="WKCWriteEditorDebugInput"></textarea> -->
 		<textarea bind:this={ editorElement }></textarea>
 	</div>
 {/if}

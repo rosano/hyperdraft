@@ -134,7 +134,11 @@ describe('WKCWriteUITestLanguage', function testLanguage() {
 			});
 
 			it.skip('on write', async function() {
-				deepEqual(browser.query(WKCWriteListItemAccessibilitySummary).textContent, '');
+				browser.fill('#WKCWriteEditorDebugInput', 'test');
+
+				await browser.wait({ element: WKCWriteListItem });
+				
+				deepEqual(browser.query(WKCWriteListItemAccessibilitySummary).textContent, 'test');
 				deepEqual(browser.query(WKCWriteListItemTitle).textContent, '');
 				deepEqual(browser.query(WKCWriteListItemSnippet).textContent, '');
 
