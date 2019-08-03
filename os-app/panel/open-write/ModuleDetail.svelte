@@ -282,13 +282,13 @@ async function noteDelete() {
 		return;
 	}
 
+	await WKCNotesAction.WKCNotesActionDelete(storageClient, $noteSelected.WKCNoteID);
+
 	notesAll.update(function (val) {
 		return val.filter(function(e) {
 			return e !== $noteSelected;
 		});
 	});
-
-	await WKCNotesAction.WKCNotesActionDelete(storageClient, $noteSelected.WKCNoteID);
 
 	noteSelected.set(null);
 
