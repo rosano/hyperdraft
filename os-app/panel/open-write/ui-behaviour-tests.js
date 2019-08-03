@@ -34,9 +34,7 @@ Object.entries({
 	return global[e.shift()]  = e.pop();
 });
 
-describe('WKCWrite', function() {
-
-describe('Discovery', function testDiscovery() {
+describe('WKCWriteUITestDiscovery', function testDiscovery() {
 
 	const browser = new Browser();
 
@@ -89,7 +87,7 @@ describe('Discovery', function testDiscovery() {
 
 });
 
-describe('Language', function testLanguage() {
+describe('WKCWriteUITestLanguage', function testLanguage() {
 
 	['en'].forEach(function (languageCode) {
 
@@ -139,7 +137,7 @@ describe('Language', function testLanguage() {
 	});
 });
 
-describe('Interaction', function testInteraction() {
+describe('WKCWriteUITestInteraction', function testInteraction() {
 
 	const browser = new Browser();
 
@@ -155,7 +153,5 @@ describe('Interaction', function testInteraction() {
 		await uCreateNote(browser);
 		browser.assert.elements(WKCWriteListItem, 1);
 	});
-
-});
 
 });
