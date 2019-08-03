@@ -58,6 +58,8 @@ noteSelected.subscribe(function noteSelectedDidChange (val) {
 	}
 
 	element.scrollTo(0, 0);
+
+	defaultFocusNode().focus();
 });
 
 import { afterUpdate } from 'svelte';
