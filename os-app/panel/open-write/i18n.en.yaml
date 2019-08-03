@@ -3,6 +3,7 @@ WKCLoginPromptAuthenticateText: Authenticate
 WKCLoginPromptUserAddressText: User Address
 WKCLoginPromptUserTokenText: User Token
 WKCWriteMasterToolbarFilterInputPlaceholderText: Filter or create
+WKCWriteFilterClearButtonText: Clear filter
 WKCWriteMasterToolbarCreateButtonText: Add note
 WKCWriteDetailToolbarVisitButtonText: Visit public page
 WKCWriteDetailToolbarUnpublishButtonText: Unpublish
