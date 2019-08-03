@@ -302,7 +302,6 @@ function toggleTabFocus (event) {
 }
 
 function noteClear () {
-	filterText.set('');
 	noteSelected.set(null);
 	notesAll.update(function (val) {
 		return val.sort(WKCWriteLogic.WKCWriteLogicListSort);
