@@ -59,6 +59,23 @@ onMount(function () {
 	display: flex;
 }
 
+.WIKWriteDebug {
+	font-family: sans-serif;
+
+	position: absolute;
+	bottom: 50vh;
+	right: 0;
+}
+
+.WIKWriteDebug button {
+	padding: 10px;
+	border: 1px solid #bbb;
+
+	margin: 10px;
+
+	background: #ddd;
+}
+
 @media screen and (max-width: 760px) {
 
 .AppContainer {

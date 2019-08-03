@@ -12,27 +12,6 @@
 	right: 0;
 }
 
-.WIKWriteDebug {
-	display: none;
-
-	font-family: sans-serif;
-}
-
-.WIKWriteDebug button {
-	padding: 10px;
-	border: 1px solid #bbb;
-
-	margin: 10px;
-}
-
-.remotestorage-widget-error-state + .WIKWriteDebug {
-	display: unset;
-
-	position: absolute;
-	bottom: 100px;
-	right: 0;
-}
-
 .WKC_ContextMobileExclusive {
 	display: none;
 }
