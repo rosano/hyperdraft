@@ -67,6 +67,8 @@ onMount(function () {
 	position: absolute;
 	bottom: 50vh;
 	right: 0;
+
+	z-index: 10;
 }
 
 .WIKWriteDebug button {
