@@ -44,14 +44,14 @@ function openTextObject (inputData) {
 		return window.open(inputData, '_blank');
 	}
 
-	let matches = inputData.match(/\[\[(.*)\]\]/);
-	if (!matches) {
+	let match = inputData.match(/\[\[(.*)\]\]/).pop();
+	if (!match) {
 		return;
 	}
 
 	event.preventDefault();
 	
-	$filterText = matches.pop();
+	$filterText = match;
 }
 
 function openCursorObject (inputData) {
