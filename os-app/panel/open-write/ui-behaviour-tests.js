@@ -8,6 +8,7 @@ const browser = new Browser();
 
 Object.entries({
 	WKCWriteFilterInput: '#WIKDefaultFocusNode',
+	WKCWriteFilterClearButton: '#WKCWriteFilterClearButton',
 	WKCWriteCreateButton: '#WKCWriteCreateButton',
 
 	WKCWriteListItem: '.ListItem',
@@ -47,6 +48,7 @@ describe('WKCWriteUITestDiscovery', function testDiscovery() {
 
 	it('on startup', function() {
 		browser.assert.elements(WKCWriteFilterInput, 1);
+		browser.assert.elements(WKCWriteFilterClearButton, 0);
 		browser.assert.elements(WKCWriteCreateButton, 1);
 
 		browser.assert.elements(WKCWriteListItem, 0);
@@ -81,6 +83,18 @@ describe('WKCWriteUITestDiscovery', function testDiscovery() {
 		browser.assert.elements(WKCWriteDetailToolbarDiscardButton, 1);
 
 		browser.assert.elements(WKCWriteEditorContainer, 1);
+	});
+
+	it.skip('on filter', async function() {
+		browser.fill(WKCWriteFilterInput, 'alfa');
+		await browser.wait({ element: WKCWriteFilterClearButton });
+
+		browser.assert.elements(WKCWriteFilterClearButton, 1);
+		
+		browser.pressButton(WKCWriteFilterClearButton);
+		await browser.wait({ element: WKCWriteFilterClearButton });
+
+		browser.assert.elements(WKCWriteFilterClearButton, 0);
 	});
 
 	it.skip('on publish', function() {
@@ -131,6 +145,18 @@ describe('WKCWriteUITestLanguage', function testLanguage() {
 				deepEqual(browser.query(WKCWriteDetailToolbarDiscardButton).title, uLocalized('WKCWriteDetailToolbarDiscardButtonText'));
 
 				// browser.assert.elements(WKCWriteEditorContainer, 1);
+			});
+
+			it.skip('on filter', async function() {
+				browser.fill(WKCWriteFilterInput, 'alfa');
+				await browser.wait({ element: WKCWriteFilterClearButton });
+
+				deepEqual(browser.query(WKCWriteFilterClearButton).title, uLocalized('WKCWriteFilterClearButtonText'));
+				
+				browser.pressButton(WKCWriteFilterClearButton);
+				await browser.wait({ element: WKCWriteFilterClearButton });
+
+				browser.assert.elements(WKCWriteFilterClearButton, 0);
 			});
 
 			it.skip('on write', async function() {
