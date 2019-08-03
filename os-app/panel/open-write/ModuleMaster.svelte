@@ -37,8 +37,7 @@ async function noteCreate(inputData) {
 	noteSelect(item);
 
 	editorConfigure(function (editorInstance) {
-		editorInstance.setCursor(CodeMirror.Pos(0, item.WKCNoteBody.length));
-
+		editorInstance.setCursor(CodeMirror.Pos(inputData.split('\n').length - 1, 0));
 		editorInstance.focus();
 	});
 }
@@ -167,7 +166,7 @@ function handleEnter () {
 		return;
 	}
 
-	return noteCreate($filterText);
+	return noteCreate($filterText + "\n\n");
 }
 
 function handleKeydown(event) {
