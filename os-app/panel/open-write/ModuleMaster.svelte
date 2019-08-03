@@ -126,7 +126,7 @@ filterText.subscribe(function filterTextDidChange (val) {
 	return noteSelected.set(notesVisible.filter(function (e) {
 		return WKCParser.WKCParserTitleForPlaintext(e.WKCNoteBody).toLowerCase() === val.toLowerCase();
 	}).concat(notesVisible.filter(function (e) {
-		return WKCParser.WKCParserTitleForPlaintext(e.WKCNoteBody).toLowerCase().match(val.toLowerCase());
+		return WKCParser.WKCParserTitleForPlaintext(e.WKCNoteBody).toLowerCase().includes(val.toLowerCase());
 	})).shift());
 });
 
