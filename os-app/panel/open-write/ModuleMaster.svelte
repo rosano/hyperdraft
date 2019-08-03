@@ -13,6 +13,18 @@ import { noteSelected } from './_shared.js';
 
 import { editorConfigure } from './ModuleDetail.svelte';
 
+let inputFocused = false;
+import { onMount } from 'svelte';
+onMount(function () {
+	defaultFocusNode().addEventListener('focus', function () {
+		inputFocused = true;
+	})
+
+	defaultFocusNode().addEventListener('blur', function () {
+		inputFocused = false;
+	})
+});
+
 async function noteCreate(inputData) {
 	let item = await WKCNotesAction.WKCNotesActionCreate(storageClient, {
 		WKCNoteBody: typeof inputData === 'string' ? inputData : '',
@@ -112,6 +124,7 @@ filterText.subscribe(function filterTextDidChange (val) {
 
 function clearButtonDidClick() {
 	filterText.set('');
+	
 	defaultFocusNode().focus();
 }
 
@@ -181,7 +194,7 @@ function handleKeydown(event) {
 </script>
 <svelte:window on:keydown={ handleKeydown }/>
 
-<div class="Container WKC_ContextMobileView" class:WKC_ContextMobileViewActive={ $mobileViewCurrent === 'ModuleMaster' } class:WKC_ContextMobileViewInactive={ $mobileViewCurrent !== 'ModuleMaster' } aria-hidden={ $mobileViewCurrent !== 'ModuleMaster' }>
+<div class="Container WKC_ContextMobileView" class:WKC_ContextMobileViewActive={ $mobileViewCurrent === 'ModuleMaster' } class:WKC_ContextMobileViewInactive={ $mobileViewCurrent !== 'ModuleMaster' } aria-hidden={ $mobileViewCurrent !== 'ModuleMaster' } class:WKCWriteMasterContainerFocused={ inputFocused }>
 
 <header class="WKCSharedToolbar">
 	<input bind:value={ $filterText } placeholder="{ OLSKLocalized('WKCWriteMasterToolbarFilterInputPlaceholderText') }" accesskey="f" id="WIKDefaultFocusNode" autofocus />
@@ -294,6 +307,11 @@ input {
 
 .ListItemSelected {
 	background: #e6e6e6;
+}
+
+.WKCWriteMasterContainerFocused .ListItemSelected {
+	background: #1a81ff;
+	color: white;
 }
 
 .ListItemSnippet {
