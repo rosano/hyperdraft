@@ -342,6 +342,9 @@ function handleKeydown(event) {
 
 		noteClear();
 		filterText.set('');
+		notesAll.update(function (val) {
+			return val.sort(WKCWriteLogic.WKCWriteLogicListSort);
+		});
 		return;
 	}
 }
