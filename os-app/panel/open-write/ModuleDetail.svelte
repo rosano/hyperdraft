@@ -50,7 +50,7 @@ function openTextObject (inputData) {
 		return;
 	}
 
-	event.preventDefault();
+	event.stopPropagation();
 	
 	filterText.set('');
 	filterText.set(match);
