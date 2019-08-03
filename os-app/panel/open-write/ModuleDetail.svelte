@@ -340,7 +340,9 @@ function handleKeydown(event) {
 			return editorInstance.setSelections(editorInstance.getDoc().listSelections().slice(0, 1));
 		}
 
-		return noteClear();
+		noteClear();
+		filterText.set('');
+		return;
 	}
 }
 </script>
