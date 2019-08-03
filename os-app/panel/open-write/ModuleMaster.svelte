@@ -110,6 +110,11 @@ filterText.subscribe(function filterTextDidChange (val) {
 	})).shift());
 });
 
+function clearButtonDidClick() {
+	filterText.set('');
+	defaultFocusNode().focus();
+}
+
 async function exportNotes() {
 	let zip = new JSZip();
 
@@ -180,6 +185,9 @@ function handleKeydown(event) {
 
 <header class="WKCSharedToolbar">
 	<input bind:value={ $filterText } placeholder="{ OLSKLocalized('WKCWriteMasterToolbarFilterInputPlaceholderText') }" accesskey="f" id="WIKDefaultFocusNode" autofocus />
+	{#if $filterText}
+		<button on:click={ clearButtonDidClick } class="WKCSharedElementTappable WKCSharedButtonNoStyle" style="background-image: url('/panel/_shared/ui-assets/wIKFilterClear.svg')" title={ OLSKLocalized('WKCWriteFilterClearButtonText') } id="WKCWriteFilterClearButton"></button>
+	{/if}
 
 	<div class="WKCSharedToolbarElementGroup">
 		<button on:click={ noteCreate } class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" title={ OLSKLocalized('WKCWriteMasterToolbarCreateButtonText') } style="background-image: url('/panel/_shared/ui-assets/wIKSharedCreate.svg')" accesskey="n" id="WKCWriteCreateButton"></button>
@@ -231,6 +239,8 @@ function handleKeydown(event) {
 }
 
 header {
+	position: relative;
+
 	/* ContainerFlexboxChild */
 	flex-shrink: 0;
 }
@@ -246,6 +256,18 @@ input {
 
 	/* WKCSharedToolbarFlexboxChild */
 	flex-grow: 1;
+}
+
+#WKCWriteFilterClearButton {
+	width: 22px;
+	height: 22px;
+
+	position: absolute;
+	right: 32px;
+	top: 50%;
+	margin-top: -11px;
+
+	background-size: cover;
 }
 
 .MasterContentContainer {
@@ -296,6 +318,10 @@ input {
 
 .WKCSharedToolbar {
 	padding: 4px;
+}
+
+#WKCWriteFilterClearButton {
+	margin-right: 12px;
 }
 
 input {
