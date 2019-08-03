@@ -6,10 +6,11 @@ import WKCWriteLogic from './ui-logic.js';
 
 import * as WKCNotesAction from '../../_shared/rs-modules/wkc_notes/action.js';
 
+import { noteSelected } from './_shared.js';
+
 import { writable } from 'svelte/store';
 
 export const notesAll = writable([]);
-export const noteSelected = writable(null);
 export const mobileViewCurrent = writable('ModuleMaster');
 export const isLoading = writable(true);
 export let filterText = writable('');
