@@ -44,7 +44,7 @@ async function noteSelect(inputData) {
 	return noteSelected.set(inputData);
 }
 
-noteSelected.subscribe(function (val) {
+noteSelected.subscribe(function noteSelectedDidChange (val) {
 	if (val) {
 		return;
 	}
@@ -80,11 +80,16 @@ afterUpdate(function () {
 
 let notesVisible = [];
 
-$: notesVisible = $notesAll.filter(function (e) {
-	return e.WKCNoteBody.toLowerCase().match($filterText.toLowerCase());
-});
+function notesVisibleNeedsChange () {
+	notesVisible = $notesAll.filter(function (e) {
+		return e.WKCNoteBody.toLowerCase().match($filterText.toLowerCase());
+	});
+};
 
-let filterTextDidChange = function (val) {
+notesAll.subscribe(notesVisibleNeedsChange);
+filterText.subscribe(function filterTextDidChange (val) {
+	notesVisibleNeedsChange();
+	
 	notesVisible = notesVisible.sort(WKCWriteLogic.WKCWriteLogicListSort);
 
 	if (!val.length) {
@@ -100,8 +105,7 @@ let filterTextDidChange = function (val) {
 	}).concat(notesVisible.filter(function (e) {
 		return WKCParser.WKCParserTitleForPlaintext(e.WKCNoteBody).toLowerCase().match(val.toLowerCase());
 	})).shift());
-};
-$: filterTextDidChange($filterText);
+});
 
 async function exportNotes() {
 	let zip = new JSZip();
