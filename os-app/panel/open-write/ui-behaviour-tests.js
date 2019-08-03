@@ -133,6 +133,14 @@ describe('WKCWriteUITestLanguage', function testLanguage() {
 				// browser.assert.elements(WKCWriteEditorContainer, 1);
 			});
 
+			it.skip('on write', async function() {
+				deepEqual(browser.query(WKCWriteListItemAccessibilitySummary).textContent, '');
+				deepEqual(browser.query(WKCWriteListItemTitle).textContent, '');
+				deepEqual(browser.query(WKCWriteListItemSnippet).textContent, '');
+
+				// browser.assert.elements(WKCWriteEditorContainer, 1);
+			});
+
 		});
 		
 	});
@@ -144,11 +152,7 @@ describe('WKCWriteUITestInteraction', function testInteraction() {
 		return browser.visit('/panel/write');
 	});
 
-	it('has no items', function() {
-		browser.assert.elements(WKCWriteListItem, 0);
-	});
-
-	it('creates item', async function() {
+	it('on create', async function() {
 		await uCreateNote(browser);
 		browser.assert.elements(WKCWriteListItem, 1);
 	});
