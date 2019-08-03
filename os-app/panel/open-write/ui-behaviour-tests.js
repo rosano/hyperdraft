@@ -1,8 +1,9 @@
 import { throws, deepEqual } from 'assert';
 
 const Browser = require('zombie');
-
 Browser.localhost('loc.tests', 3000);
+
+const browser = new Browser();
 
 Object.entries({
 	WKCWriteFilterInput: '#WIKDefaultFocusNode',
@@ -35,8 +36,6 @@ Object.entries({
 });
 
 describe('WKCWriteUITestDiscovery', function testDiscovery() {
-
-	const browser = new Browser();
 
 	before(function() {
 		return browser.visit('/panel/write');
@@ -92,8 +91,7 @@ describe('WKCWriteUITestLanguage', function testLanguage() {
 	['en'].forEach(function (languageCode) {
 
 		context(languageCode, function () {
-			
-			const browser = new Browser();
+
 			const uLocalized = function (inputData) {
 				return OLSKTestingLocalized(inputData, languageCode);
 			};
@@ -138,8 +136,6 @@ describe('WKCWriteUITestLanguage', function testLanguage() {
 });
 
 describe('WKCWriteUITestInteraction', function testInteraction() {
-
-	const browser = new Browser();
 
 	before(function() {
 		return browser.visit('/panel/write');
