@@ -169,7 +169,7 @@ function handleKeydown(event) {
 </script>
 <svelte:window on:keydown={ handleKeydown }/>
 
-<div class="Container WKC_ContextMobileView" class:WKC_ContextMobileViewActive={ $mobileViewCurrent === 'ModuleMaster' } class:WKC_ContextMobileViewInactive={ $mobileViewCurrent !== 'ModuleMaster' }>
+<div class="Container WKC_ContextMobileView" class:WKC_ContextMobileViewActive={ $mobileViewCurrent === 'ModuleMaster' } class:WKC_ContextMobileViewInactive={ $mobileViewCurrent !== 'ModuleMaster' } aria-hidden={ $mobileViewCurrent !== 'ModuleMaster' }>
 
 <header class="WKCSharedToolbar">
 	<input type="search" bind:value={ $filterText } placeholder="{ OLSKLocalized('WKCWriteMasterToolbarFilterInputPlaceholderText') }" accesskey="f" id="WIKDefaultFocusNode" autofocus />
@@ -183,8 +183,9 @@ function handleKeydown(event) {
 	<div class="List">
 		{#each notesVisible as e}
 			<div on:click={ () => noteSelect(e) } class="ListItem WKCSharedElementTappable" class:ListItemSelected={ $noteSelected === e }>
-				<strong>{ WKCParser.WKCParserTitleForPlaintext(e.WKCNoteBody) }</strong>
-				<span>{ WKCParser.WKCParserSnippetForPlaintext(WKCParser.WKCParserBodyForPlaintext(e.WKCNoteBody)) }</span>
+				<strong class="WKCWriteListItemAccessibilitySummary OLSKScreenReaderOnly">{ WKCParser.WKCParserTitleForPlaintext(e.WKCNoteBody) }</strong>
+				<strong class="ListItemTitle " aria-hidden="true">{ WKCParser.WKCParserTitleForPlaintext(e.WKCNoteBody) }</strong>
+				<span class="ListItemSnippet" aria-hidden="true">{ WKCParser.WKCParserSnippetForPlaintext(WKCParser.WKCParserBodyForPlaintext(e.WKCNoteBody)) }</span>
 			</div>
 		{/each}
 	</div>
@@ -201,6 +202,15 @@ function handleKeydown(event) {
 </div>
 
 <style>
+.OLSKScreenReaderOnly {
+	width: 0px;
+	height: 0px;
+
+	position: absolute;
+	
+	overflow: hidden;
+}
+
 .Container {
 	border-right: var(--WIKBorderStyle);
 
@@ -257,7 +267,7 @@ input {
 	background: #e6e6e6;
 }
 
-.ListItem span {
+.ListItemSnippet {
 	display: block;
 	margin-top: 5px;
 }
