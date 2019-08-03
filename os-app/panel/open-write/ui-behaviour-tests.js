@@ -152,13 +152,19 @@ describe('WKCWriteUITestLanguage', function testLanguage() {
 
 describe('WKCWriteUITestInteraction', function testInteraction() {
 
-	before(function() {
-		return browser.visit('/panel/write');
-	});
+	context('filter', function () {
+		
+		before(function() {
+			return browser.visit('/panel/write');
+		});
 
-	it('on create', async function() {
-		await uCreateNote(browser);
-		browser.assert.elements(WKCWriteListItem, 1);
+		it.skip('on create', async function() {
+			await uCreateNote(browser);
+			await uCreateNote(browser);
+			await uCreateNote(browser);
+			browser.assert.elements(WKCWriteListItem, 3);
+		});
+
 	});
 
 });
