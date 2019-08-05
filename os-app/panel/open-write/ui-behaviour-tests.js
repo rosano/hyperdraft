@@ -29,6 +29,7 @@ Object.entries({
 	WKCWriteDetailToolbarDiscardButton: '#WKCWriteDetailToolbarDiscardButton',
 
 	WKCWriteEditorContainer: '.EditorContainer',
+	WKCWriteEditorDebugInput: '#WKCWriteEditorDebugInput',
 
 	WKCWriteReloadButton: '#WKCWriteReloadButton',
 
@@ -207,7 +208,16 @@ describe('WKCWriteUITestLanguage', function testLanguage() {
 				deepEqual(browser.query(WKCWriteDetailToolbarVersionsButton).title, uLocalized('WKCWriteDetailToolbarVersionsButtonText'));
 				deepEqual(browser.query(WKCWriteDetailToolbarDiscardButton).title, uLocalized('WKCWriteDetailToolbarDiscardButtonText'));
 
-				// browser.assert.elements(WKCWriteEditorContainer, 1);
+				deepEqual(browser.query(WKCWriteEditorDebugInput).value, '');
+			});
+
+			it('on edit', async function() {
+				browser.fill(WKCWriteEditorDebugInput, 'alfa');
+				await browser.wait({ element: WKCWriteListItem });
+
+				deepEqual(browser.query(WKCWriteListItemAccessibilitySummary).textContent, 'alfa');
+				deepEqual(browser.query(WKCWriteListItemTitle).textContent, 'alfa');
+				deepEqual(browser.query(WKCWriteListItemSnippet).textContent, '');
 			});
 
 			it.skip('on filter', async function() {
