@@ -87,6 +87,14 @@ describe('WKCWriteUITestDiscovery', function testDiscovery() {
 		browser.assert.elements(WKCWriteEditorContainer, 1);
 	});
 
+	it('on create nth item', async function() {
+		await uCreateItem(browser);
+		
+		browser.assert.elements(WKCWriteListItem, 2);
+		
+		browser.assert.elements(WKCWriteDetailToolbar, 1);
+	});
+
 	it.skip('on filter', async function() {
 		browser.fill(WKCWriteFilterInput, 'alfa');
 		await browser.wait({ element: WKCWriteFilterClearButton });
