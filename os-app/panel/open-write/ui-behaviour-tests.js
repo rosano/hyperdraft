@@ -221,18 +221,25 @@ describe('WKCWriteUITestLanguage', function testLanguage() {
 			});
 
 			it('on edit body', async function() {
-				browser.fill(WKCWriteEditorDebugInput, '\nalfa');
+				browser.fill(WKCWriteEditorDebugInput, 'alfa\nbravo');
 				await browser.wait({ element: WKCWriteListItem });
 
-				deepEqual(browser.query(WKCWriteListItemAccessibilitySummary).textContent, '');
-				deepEqual(browser.query(WKCWriteListItemTitle).textContent, '');
-				deepEqual(browser.query(WKCWriteListItemSnippet).textContent, 'alfa');
+				deepEqual(browser.query(WKCWriteListItemAccessibilitySummary).textContent, 'alfa');
+				deepEqual(browser.query(WKCWriteListItemTitle).textContent, 'alfa');
+				deepEqual(browser.query(WKCWriteListItemSnippet).textContent, 'bravo');
 			});
 
 			it('on create nth item', async function() {
 				await uCreateItem(browser);
 
 				deepEqual(browser.query(WKCWriteEditorDebugInput).value, '');
+			});
+
+			it('on select 1st item', async function() {
+				browser.click(`${ WKCWriteListItem }:nth-child(2)`);
+				await browser.wait({ element: WKCWriteListItem });
+
+				deepEqual(browser.query(WKCWriteEditorDebugInput).value, 'alfa\nbravo');
 			});
 
 			it.skip('on filter', async function() {
