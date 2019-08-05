@@ -242,6 +242,23 @@ describe('WKCWriteUITestLanguage', function testLanguage() {
 				deepEqual(browser.query(WKCWriteEditorDebugInput).value, 'alfa\nbravo');
 			});
 
+			it('on delete', async function() {
+				const browser = new Browser();
+
+				await browser.visit(`${ languageCode }${ DefaultRoutePath }`);
+
+				await uCreateItem(browser);
+
+				deepEqual((await new Promise(async function (resolve, reject) {
+					browser.on('confirm', function (dialog) {
+						resolve(dialog);
+					});
+
+					browser.pressButton(WKCWriteDetailToolbarDiscardButton);
+					await browser.wait({ element: WKCWriteListItem });
+				})).question, uLocalized('WKCWriteNotesDeleteAlertText'));
+			});
+
 			it.skip('on filter', async function() {
 				browser.fill(WKCWriteFilterInput, 'alfa');
 				await browser.wait({ element: WKCWriteFilterClearButton });
