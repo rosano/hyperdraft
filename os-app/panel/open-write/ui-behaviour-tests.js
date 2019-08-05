@@ -115,6 +115,58 @@ describe('WKCWriteUITestDiscovery', function testDiscovery() {
 		browser.assert.attribute(WKCWriteDetailToolbarJumpButton, 'disabled', '');
 	});
 
+	context.skip('delete', function () {
+
+		it('on cancel', async function() {
+			const browser = new Browser();
+
+			await browser.visit('/panel/write');
+
+			await uCreateItem(browser);
+
+			await new Promise(async function (resolve, reject) {
+				browser.on('confirm', function (dialog) {
+					dialog.response = false;
+
+					return resolve(dialog);
+				});
+
+				browser.pressButton(WKCWriteDetailToolbarDiscardButton);
+				await browser.wait({ element: WKCWriteListItem });
+			});
+
+			await browser.wait({ element: WKCWriteListItem });
+
+			browser.assert.elements(WKCWriteDetailPlaceholderContainer, 0);
+
+			browser.assert.elements(WKCWriteDetailToolbar, 1);
+		});
+
+		it('on confirm', async function() {
+			const browser = new Browser();
+
+			await browser.visit('/panel/write');
+
+			await uCreateItem(browser);
+
+			await new Promise(async function (resolve, reject) {
+				browser.on('confirm', function (dialog) {
+					return resolve(dialog);
+				});
+
+				browser.pressButton(WKCWriteDetailToolbarDiscardButton);
+				await browser.wait({ element: WKCWriteListItem });
+			});
+
+			await browser.wait({ element: WKCWriteListItem });
+
+			browser.assert.elements(WKCWriteDetailPlaceholderContainer, 1);
+
+			browser.assert.elements(WKCWriteDetailToolbar, 0);
+		});
+		
+	});
+
 });
 
 describe('WKCWriteUITestLanguage', function testLanguage() {
