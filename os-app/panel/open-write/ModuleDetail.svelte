@@ -382,7 +382,9 @@ function handleKeydown(event) {
 	</header>
 
 	<div class="DetailContentContainer EditorContainer">
-		<!-- <textarea on:input={ debugTextAreaDidInput } id="WKCWriteEditorDebugInput"></textarea> -->
+		{#if navigator.appName === 'Zombie'}
+			<textarea on:input={ debugTextAreaDidInput } id="WKCWriteEditorDebugInput"></textarea>
+		{/if}
 		<textarea bind:this={ editorElement }></textarea>
 	</div>
 {/if}
