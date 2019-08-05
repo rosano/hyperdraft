@@ -304,6 +304,19 @@ describe('WKCWriteUITestInteraction', function testInteraction() {
 
 	});
 
+	context('on select', async function() {
+
+		it('focuses .CodeMirror textarea', async function() {
+			await uCreateItem(browser);
+
+			browser.click(`${ WKCWriteListItem }:nth-child(2)`);
+			await browser.wait({ element: WKCWriteListItem });
+
+			deepEqual(browser.document.activeElement, browser.query('.CodeMirror textarea'));
+		});
+
+	});
+
 	context('filter', function () {
 		
 		before(function() {
