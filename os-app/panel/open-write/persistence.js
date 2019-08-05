@@ -2,7 +2,7 @@ import * as WIKStorageClient from '../../_shared/WIKStorageClient/main.js';
 import RSModuleProtocol_wkc_notes from '../../_shared/rs-modules/wkc_notes/rs-module.js';
 import RSModuleProtocol_wkc_versions from '../../_shared/rs-modules/wkc_versions/rs-module.js';
 import RSModuleProtocol_wkc_settings from '../../_shared/rs-modules/wkc_settings/rs-module.js';
-import WKCWriteLogic from './ui-logic.js';
+import { WKCWriteLogicListSort } from './ui-logic.js';
 
 import * as WKCNotesAction from '../../_shared/rs-modules/wkc_notes/action.js';
 
@@ -35,7 +35,7 @@ export const storageClient = WIKStorageClient.WIKStorageClientForModules([
 			notesAll.update(function (val) {
 				return val.filter(function (e) { // @Hotfix Dropbox sending DelegateAdd
 					return e.WKCNoteID !== inputData.WKCNoteID;
-				}).concat(inputData).sort(WKCWriteLogic.WKCWriteLogicListSort);
+				}).concat(inputData).sort(WKCWriteLogicListSort);
 			});
 		},
 		OLSKChangeDelegateRemove: function (inputData) {
@@ -48,7 +48,7 @@ export const storageClient = WIKStorageClient.WIKStorageClientForModules([
 			notesAll.update(function (val) {
 				return val.filter(function (e) {
 					return e.WKCNoteID !== inputData.WKCNoteID;
-				}).sort(WKCWriteLogic.WKCWriteLogicListSort);
+				}).sort(WKCWriteLogicListSort);
 			});
 		},
 		OLSKChangeDelegateUpdate: function (inputData) {
@@ -62,7 +62,7 @@ export const storageClient = WIKStorageClient.WIKStorageClientForModules([
 			notesAll.update(function (val) {
 				return val.map(function (e) {
 					return Object.assign(e, e.WKCNoteID === inputData.WKCNoteID ? inputData : {});
-				}).sort(WKCWriteLogic.WKCWriteLogicListSort);
+				}).sort(WKCWriteLogicListSort);
 			});
 		},
 	}),

@@ -1,15 +1,9 @@
-/*!
- * wikiavec
- * Copyright(c) 2018 Rosano Coutinho
- * MIT Licensed
- */
+import { throws, deepEqual } from 'assert';
 
-const assert = require('assert');
+import * as mainModule from './ui-logic.js';
 
-const mainModule = require('./ui-logic.js');
-
-const kTest = {
-	uStubLineTokensFor: function (inputData) {
+const kTesting = {
+	uStubLineTokensFor (inputData) {
 		let defaultType = inputData.trim()[0] === '#' ? 'header header-1' : 'variable-2';
 		
 		return inputData.split(' ').map(function (e1, index1) {
@@ -43,7 +37,7 @@ describe('WKCWriteLogicListSort', function testWKCWriteLogicListSort() {
 			WKCNoteModificationDate: new Date(1),
 		};
 
-		assert.deepEqual([item1, item2].sort(mainModule.WKCWriteLogicListSort), [item2, item1]);
+		deepEqual([item1, item2].sort(mainModule.WKCWriteLogicListSort), [item2, item1]);
 	});
 
 	it('sorts by WKCNoteCreationDate descending if no WKCNoteModificationDate', function() {
@@ -54,7 +48,7 @@ describe('WKCWriteLogicListSort', function testWKCWriteLogicListSort() {
 			WKCNoteCreationDate: new Date(1),
 		};
 
-		assert.deepEqual([item1, item2].sort(mainModule.WKCWriteLogicListSort), [item2, item1]);
+		deepEqual([item1, item2].sort(mainModule.WKCWriteLogicListSort), [item2, item1]);
 	});
 
 });
@@ -62,17 +56,17 @@ describe('WKCWriteLogicListSort', function testWKCWriteLogicListSort() {
 describe('WKCWriteLineObjectsFor', function testWKCWriteLineObjectsFor() {
 
 	it('throws error if not array', function() {
-		assert.throws(function() {
+		throws(function() {
 			mainModule.WKCWriteLineObjectsFor(null);
 		}, /WKCErrorInputInvalid/);
 	});
 
 	it('returns array', function() {
-		assert.deepEqual(mainModule.WKCWriteLineObjectsFor([]), []);
+		deepEqual(mainModule.WKCWriteLineObjectsFor([]), []);
 	});
 
 	it('converts non-link single', function() {
-		assert.deepEqual(mainModule.WKCWriteLineObjectsFor(kTest.uStubLineTokensFor('alfa')), [{
+		deepEqual(mainModule.WKCWriteLineObjectsFor(kTesting.uStubLineTokensFor('alfa')), [{
 			start: 0,
 			end: 4,
 			string: 'alfa',
@@ -81,7 +75,7 @@ describe('WKCWriteLineObjectsFor', function testWKCWriteLineObjectsFor() {
 	});
 
 	it('converts non-link multiple', function() {
-		assert.deepEqual(mainModule.WKCWriteLineObjectsFor(kTest.uStubLineTokensFor('alfa bravo')), [{
+		deepEqual(mainModule.WKCWriteLineObjectsFor(kTesting.uStubLineTokensFor('alfa bravo')), [{
 			start: 0,
 			end: 10,
 			string: 'alfa bravo',
@@ -90,7 +84,7 @@ describe('WKCWriteLineObjectsFor', function testWKCWriteLineObjectsFor() {
 	});
 
 	it('converts link single', function() {
-		assert.deepEqual(mainModule.WKCWriteLineObjectsFor(kTest.uStubLineTokensFor('[[alfa]]')), [{
+		deepEqual(mainModule.WKCWriteLineObjectsFor(kTesting.uStubLineTokensFor('[[alfa]]')), [{
 			start: 0,
 			end: 8,
 			string: '[[alfa]]',
@@ -99,7 +93,7 @@ describe('WKCWriteLineObjectsFor', function testWKCWriteLineObjectsFor() {
 	});
 
 	it('converts link multiple', function() {
-		assert.deepEqual(mainModule.WKCWriteLineObjectsFor(kTest.uStubLineTokensFor('[[alfa]] [[bravo]]')), [{
+		deepEqual(mainModule.WKCWriteLineObjectsFor(kTesting.uStubLineTokensFor('[[alfa]] [[bravo]]')), [{
 			start: 0,
 			end: 8,
 			string: '[[alfa]]',
@@ -118,7 +112,7 @@ describe('WKCWriteLineObjectsFor', function testWKCWriteLineObjectsFor() {
 	});
 
 	it('converts header', function() {
-		assert.deepEqual(mainModule.WKCWriteLineObjectsFor(kTest.uStubLineTokensFor('# alfa')), [{
+		deepEqual(mainModule.WKCWriteLineObjectsFor(kTesting.uStubLineTokensFor('# alfa')), [{
 			start: 0,
 			end: 6,
 			string: '# alfa',
@@ -127,7 +121,7 @@ describe('WKCWriteLineObjectsFor', function testWKCWriteLineObjectsFor() {
 	});
 
 	it('converts multiple header objects', function() {
-		assert.deepEqual(mainModule.WKCWriteLineObjectsFor(kTest.uStubLineTokensFor('# alfa [[bravo]]')), [{
+		deepEqual(mainModule.WKCWriteLineObjectsFor(kTesting.uStubLineTokensFor('# alfa [[bravo]]')), [{
 			start: 0,
 			end: 7,
 			string: '# alfa ',
@@ -145,26 +139,26 @@ describe('WKCWriteLineObjectsFor', function testWKCWriteLineObjectsFor() {
 describe('WKCWriteHeaderTokensFrom', function testWKCWriteHeaderTokensFrom() {
 
 	it('throws error if not array', function() {
-		assert.throws(function() {
+		throws(function() {
 			mainModule.WKCWriteHeaderTokensFrom(null);
 		}, /WKCErrorInputInvalid/);
 	});
 
 	it('returns array', function() {
-		assert.deepEqual(mainModule.WKCWriteHeaderTokensFrom([]), []);
+		deepEqual(mainModule.WKCWriteHeaderTokensFrom([]), []);
 	});
 
 	it('excludes if not header', function() {
-		assert.deepEqual(mainModule.WKCWriteHeaderTokensFrom([
-			mainModule.WKCWriteLineObjectsFor(kTest.uStubLineTokensFor('alfa')),
-			mainModule.WKCWriteLineObjectsFor(kTest.uStubLineTokensFor('[[bravo]]')),
+		deepEqual(mainModule.WKCWriteHeaderTokensFrom([
+			mainModule.WKCWriteLineObjectsFor(kTesting.uStubLineTokensFor('alfa')),
+			mainModule.WKCWriteLineObjectsFor(kTesting.uStubLineTokensFor('[[bravo]]')),
 			]), []);
 	});
 
 	it('includes if header', function() {
-		assert.deepEqual(mainModule.WKCWriteHeaderTokensFrom([
-			mainModule.WKCWriteLineObjectsFor(kTest.uStubLineTokensFor('# alfa')),
-			]), mainModule.WKCWriteLineObjectsFor(kTest.uStubLineTokensFor('# alfa')).map(function (e) {
+		deepEqual(mainModule.WKCWriteHeaderTokensFrom([
+			mainModule.WKCWriteLineObjectsFor(kTesting.uStubLineTokensFor('# alfa')),
+			]), mainModule.WKCWriteLineObjectsFor(kTesting.uStubLineTokensFor('# alfa')).map(function (e) {
 				return Object.assign(e, {
 					line: 0,
 				});
@@ -172,9 +166,9 @@ describe('WKCWriteHeaderTokensFrom', function testWKCWriteHeaderTokensFrom() {
 	});
 
 	it('excludes if not verbal', function() {
-		assert.deepEqual(mainModule.WKCWriteHeaderTokensFrom([
-			mainModule.WKCWriteLineObjectsFor(kTest.uStubLineTokensFor('alfa')),
-			mainModule.WKCWriteLineObjectsFor(kTest.uStubLineTokensFor('====')),
+		deepEqual(mainModule.WKCWriteHeaderTokensFrom([
+			mainModule.WKCWriteLineObjectsFor(kTesting.uStubLineTokensFor('alfa')),
+			mainModule.WKCWriteLineObjectsFor(kTesting.uStubLineTokensFor('====')),
 		].map(function (e) {
 			return e.map(function (e) {
 				return Object.assign(e, {
@@ -191,8 +185,8 @@ describe('WKCWriteHeaderTokensFrom', function testWKCWriteHeaderTokensFrom() {
 	});
 
 	it('merges multiple header objects', function() {
-		assert.deepEqual(mainModule.WKCWriteHeaderTokensFrom([
-			mainModule.WKCWriteLineObjectsFor(kTest.uStubLineTokensFor('# PA PARC https://www.supermarchepa.com/pages/weekly-flyer')),
+		deepEqual(mainModule.WKCWriteHeaderTokensFrom([
+			mainModule.WKCWriteLineObjectsFor(kTesting.uStubLineTokensFor('# PA PARC https://www.supermarchepa.com/pages/weekly-flyer')),
 			]), [{
 			start: 0,
 			end: 58,
