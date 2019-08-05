@@ -1,12 +1,11 @@
 import { throws, deepEqual } from 'assert';
 
 const Browser = require('zombie');
-
 Browser.localhost('loc.tests', 3000);
 
-const browser = new Browser();
-
 Object.entries({
+	browser: new Browser(),
+
 	WKCWriteFilterInput: '#WIKDefaultFocusNode',
 	WKCWriteFilterClearButton: '#WKCWriteFilterClearButton',
 	WKCWriteCreateButton: '#WKCWriteCreateButton',
@@ -48,8 +47,10 @@ describe('WKCWriteUITestDiscovery', function testDiscovery() {
 
 	it('on startup', function() {
 		browser.assert.elements(WKCWriteFilterInput, 1);
+		browser.assert.attribute(WKCWriteFilterInput, 'accesskey', 'f');
 		browser.assert.elements(WKCWriteFilterClearButton, 0);
 		browser.assert.elements(WKCWriteCreateButton, 1);
+		browser.assert.attribute(WKCWriteCreateButton, 'accesskey', 'n');
 
 		browser.assert.elements(WKCWriteListItem, 0);
 		browser.assert.elements(WKCWriteExportButton, 1);
@@ -76,6 +77,7 @@ describe('WKCWriteUITestDiscovery', function testDiscovery() {
 		browser.assert.elements(WKCWriteDetailToolbar, 1);
 		browser.assert.elements(WKCWriteDetailToolbarBackButton, 1);
 		browser.assert.elements(WKCWriteDetailToolbarJumpButton, 1);
+		browser.assert.attribute(WKCWriteDetailToolbarJumpButton, 'accesskey', 'r');
 		browser.assert.attribute(WKCWriteDetailToolbarJumpButton, 'disabled', '');
 		browser.assert.elements(WKCWriteDetailToolbarUnpublishButton, 0);
 		browser.assert.elements(WKCWriteDetailToolbarPublishButton, 0);
