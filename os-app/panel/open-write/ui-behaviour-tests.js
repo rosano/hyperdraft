@@ -32,7 +32,7 @@ Object.entries({
 
 	WKCWriteReloadButton: '#WKCWriteReloadButton',
 
-	async uCreateNote (browser) {
+	async uCreateItem (browser) {
 		browser.pressButton(WKCWriteCreateButton);
 		await browser.wait({ element: WKCWriteListItem });
 	},
@@ -64,7 +64,7 @@ describe('WKCWriteUITestDiscovery', function testDiscovery() {
 	});
 
 	it('on create', async function() {
-		await uCreateNote(browser);
+		await uCreateItem(browser);
 
 		browser.assert.elements(WKCWriteListItem, 1);
 		browser.assert.elements(WKCWriteListItemAccessibilitySummary, 1);
@@ -133,7 +133,7 @@ describe('WKCWriteUITestLanguage', function testLanguage() {
 			});
 
 			it('on create', async function() {
-				await uCreateNote(browser);
+				await uCreateItem(browser);
 
 				deepEqual(browser.query(WKCWriteListItemAccessibilitySummary).textContent, '');
 				deepEqual(browser.query(WKCWriteListItemTitle).textContent, '');
@@ -185,9 +185,10 @@ describe('WKCWriteUITestInteraction', function testInteraction() {
 		});
 
 		it.skip('on create', async function() {
-			await uCreateNote(browser);
-			await uCreateNote(browser);
-			await uCreateNote(browser);
+			// focuses editor
+			await uCreateItem(browser);
+			await uCreateItem(browser);
+			await uCreateItem(browser);
 			browser.assert.elements(WKCWriteListItem, 3);
 		});
 
