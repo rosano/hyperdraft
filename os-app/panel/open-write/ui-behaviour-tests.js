@@ -5,6 +5,7 @@ Browser.localhost('loc.tests', 3000);
 
 Object.entries({
 	browser: new Browser(),
+	DefaultRoutePath: '/panel/write',
 
 	WKCWriteFilterInput: '#WIKDefaultFocusNode',
 	WKCWriteFilterClearButton: '#WKCWriteFilterClearButton',
@@ -42,7 +43,7 @@ Object.entries({
 describe('WKCWriteUITestDiscovery', function testDiscovery() {
 
 	before(function() {
-		return browser.visit('/panel/write');
+		return browser.visit(DefaultRoutePath);
 	});
 
 	it('on startup', function() {
@@ -120,7 +121,7 @@ describe('WKCWriteUITestDiscovery', function testDiscovery() {
 		it('on cancel', async function() {
 			const browser = new Browser();
 
-			await browser.visit('/panel/write');
+			await browser.visit(DefaultRoutePath);
 
 			await uCreateItem(browser);
 
@@ -145,7 +146,7 @@ describe('WKCWriteUITestDiscovery', function testDiscovery() {
 		it('on confirm', async function() {
 			const browser = new Browser();
 
-			await browser.visit('/panel/write');
+			await browser.visit(DefaultRoutePath);
 
 			await uCreateItem(browser);
 
@@ -180,7 +181,7 @@ describe('WKCWriteUITestLanguage', function testLanguage() {
 			};
 
 			before(function() {
-				return browser.visit(`${ languageCode }/panel/write`);
+				return browser.visit(`${ languageCode }${ DefaultRoutePath }`);
 			});
 
 			it('localizes interface', function() {
@@ -243,7 +244,7 @@ describe('WKCWriteUITestInteraction', function testInteraction() {
 	context('filter', function () {
 		
 		before(function() {
-			return browser.visit('/panel/write');
+			return browser.visit(DefaultRoutePath);
 		});
 
 		it.skip('on create', async function() {
