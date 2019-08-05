@@ -211,13 +211,22 @@ describe('WKCWriteUITestLanguage', function testLanguage() {
 				deepEqual(browser.query(WKCWriteEditorDebugInput).value, '');
 			});
 
-			it('on edit', async function() {
+			it('on edit title', async function() {
 				browser.fill(WKCWriteEditorDebugInput, 'alfa');
 				await browser.wait({ element: WKCWriteListItem });
 
 				deepEqual(browser.query(WKCWriteListItemAccessibilitySummary).textContent, 'alfa');
 				deepEqual(browser.query(WKCWriteListItemTitle).textContent, 'alfa');
 				deepEqual(browser.query(WKCWriteListItemSnippet).textContent, '');
+			});
+
+			it('on edit body', async function() {
+				browser.fill(WKCWriteEditorDebugInput, '\nalfa');
+				await browser.wait({ element: WKCWriteListItem });
+
+				deepEqual(browser.query(WKCWriteListItemAccessibilitySummary).textContent, '');
+				deepEqual(browser.query(WKCWriteListItemTitle).textContent, '');
+				deepEqual(browser.query(WKCWriteListItemSnippet).textContent, 'alfa');
 			});
 
 			it.skip('on filter', async function() {
