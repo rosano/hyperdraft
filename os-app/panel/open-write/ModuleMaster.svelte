@@ -85,6 +85,10 @@ noteSelected.subscribe(function noteSelectedDidChange (val) {
 
 import { afterUpdate } from 'svelte';
 afterUpdate(function () {
+	if (navigator.appName === 'Zombie') {
+		return;
+	}
+	
 	let element = document.querySelector('.ListItemSelected');
 
 	if (!element) {
