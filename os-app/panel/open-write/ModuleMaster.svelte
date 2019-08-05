@@ -5,7 +5,7 @@ import * as WKCNotesAction from '../../_shared/rs-modules/wkc_notes/action.js';
 
 import WKCParser from '../../_shared/WKCParser/main.js';
 
-import WKCWriteLogic from './ui-logic.js';
+import { WKCWriteLogicListSort } from './ui-logic.js';
 
 import { OLSKLocalized } from '../../_shared/common/global.js';
 import { storageClient, notesAll, filterText, defaultFocusNode, isMobile, mobileViewCurrent } from './persistence.js';
@@ -31,7 +31,7 @@ async function noteCreate(inputData) {
 	});
 
 	notesAll.update(function (val) {
-		return [].concat(val, item).sort(WKCWriteLogic.WKCWriteLogicListSort);
+		return [].concat(val, item).sort(WKCWriteLogicListSort);
 	});
 
 	noteSelect(item);
@@ -113,7 +113,7 @@ notesAll.subscribe(notesVisibleNeedsChange);
 filterText.subscribe(function filterTextDidChange (val) {
 	notesVisibleNeedsChange();
 	
-	notesVisible = notesVisible.sort(WKCWriteLogic.WKCWriteLogicListSort);
+	notesVisible = notesVisible.sort(WKCWriteLogicListSort);
 
 	if (!val.length) {
 		return noteSelected.set(null);
