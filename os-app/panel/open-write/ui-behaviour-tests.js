@@ -290,6 +290,20 @@ describe('WKCWriteUITestLanguage', function testLanguage() {
 
 describe('WKCWriteUITestInteraction', function testInteraction() {
 
+	before(function() {
+		return browser.visit(DefaultRoutePath);
+	});
+
+	context('on create', async function() {
+
+		it('focuses .CodeMirror textarea', async function() {
+			await uCreateItem(browser);
+
+			deepEqual(browser.document.activeElement, browser.query('.CodeMirror textarea'));
+		});
+
+	});
+
 	context('filter', function () {
 		
 		before(function() {
