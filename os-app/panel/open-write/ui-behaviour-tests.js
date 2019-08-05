@@ -229,6 +229,12 @@ describe('WKCWriteUITestLanguage', function testLanguage() {
 				deepEqual(browser.query(WKCWriteListItemSnippet).textContent, 'alfa');
 			});
 
+			it('on create nth item', async function() {
+				await uCreateItem(browser);
+
+				deepEqual(browser.query(WKCWriteEditorDebugInput).value, '');
+			});
+
 			it.skip('on filter', async function() {
 				browser.fill(WKCWriteFilterInput, 'alfa');
 				await browser.wait({ element: WKCWriteFilterClearButton });

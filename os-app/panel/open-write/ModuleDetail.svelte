@@ -35,6 +35,9 @@ noteSelected.subscribe(function (val) {
 	}
 
 	return editorConfigure(function () {
+		if (document.querySelector('#WKCWriteEditorDebugInput')) {
+			document.querySelector('#WKCWriteEditorDebugInput').value = val.WKCNoteBody;
+		}
 		editorInstance.setValue(val.WKCNoteBody);
 		editorInstance.getDoc().clearHistory();
 	});
