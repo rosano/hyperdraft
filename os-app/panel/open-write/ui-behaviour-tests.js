@@ -5,7 +5,7 @@ Browser.localhost('loc.tests', 3000);
 
 Object.entries({
 	browser: new Browser(),
-	DefaultRoutePath: '/panel/write',
+	kDefaultRoutePath: '/panel/write',
 
 	WKCWriteFilterInput: '#WIKDefaultFocusNode',
 	WKCWriteFilterClearButton: '#WKCWriteFilterClearButton',
@@ -44,7 +44,7 @@ Object.entries({
 describe('WKCWriteUITestDiscovery', function testDiscovery() {
 
 	before(function() {
-		return browser.visit(DefaultRoutePath);
+		return browser.visit(kDefaultRoutePath);
 	});
 
 	it('on startup', function() {
@@ -122,7 +122,7 @@ describe('WKCWriteUITestDiscovery', function testDiscovery() {
 		it('on cancel', async function() {
 			const browser = new Browser();
 
-			await browser.visit(DefaultRoutePath);
+			await browser.visit(kDefaultRoutePath);
 
 			await uCreateItem(browser);
 
@@ -147,7 +147,7 @@ describe('WKCWriteUITestDiscovery', function testDiscovery() {
 		it('on confirm', async function() {
 			const browser = new Browser();
 
-			await browser.visit(DefaultRoutePath);
+			await browser.visit(kDefaultRoutePath);
 
 			await uCreateItem(browser);
 
@@ -182,7 +182,7 @@ describe('WKCWriteUITestLanguage', function testLanguage() {
 			};
 
 			before(function() {
-				return browser.visit(`${ languageCode }${ DefaultRoutePath }`);
+				return browser.visit(`${ languageCode }${ kDefaultRoutePath }`);
 			});
 
 			it('localizes interface', function() {
@@ -245,7 +245,7 @@ describe('WKCWriteUITestLanguage', function testLanguage() {
 			it('on delete', async function() {
 				const browser = new Browser();
 
-				await browser.visit(`${ languageCode }${ DefaultRoutePath }`);
+				await browser.visit(`${ languageCode }${ kDefaultRoutePath }`);
 
 				await uCreateItem(browser);
 
@@ -291,7 +291,7 @@ describe('WKCWriteUITestLanguage', function testLanguage() {
 describe('WKCWriteUITestInteraction', function testInteraction() {
 
 	before(function() {
-		return browser.visit(DefaultRoutePath);
+		return browser.visit(kDefaultRoutePath);
 	});
 
 	context('on create', async function() {
@@ -320,7 +320,7 @@ describe('WKCWriteUITestInteraction', function testInteraction() {
 	context('filter', function () {
 		
 		before(function() {
-			return browser.visit(DefaultRoutePath);
+			return browser.visit(kDefaultRoutePath);
 		});
 
 		it.skip('on create', async function() {
