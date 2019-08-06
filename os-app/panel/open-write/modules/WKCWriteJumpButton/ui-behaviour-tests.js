@@ -18,6 +18,7 @@ describe('WKCWriteJumpButtonDiscovery', function testWKCWriteJumpButtonDiscovery
 		browser.assert.elements(WKCWriteJumpButton, 1);
 		browser.assert.attribute(WKCWriteJumpButton, 'accesskey', 'r');
 		browser.assert.attribute(WKCWriteJumpButton, 'disabled', '');
+		browser.assert.attribute(WKCWriteJumpButton, 'tabIndex', '-1');
 	});
 
 	describe('inputData', function() {
@@ -56,6 +57,7 @@ describe('WKCWriteJumpButtonLanguage', function testWKCWriteJumpButtonLanguage()
 
 			it('on startup', function() {
 				deepEqual(browser.query(WKCWriteJumpButton).textContent, '');
+				// deepEqual(browser.query(WKCWriteJumpButton).title, uLocalized('WKCWriteJumpButtonText'));
 				deepEqual(browser.query(WKCWriteJumpButton).title, 'Jump');
 			});
 

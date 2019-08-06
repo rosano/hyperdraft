@@ -11,6 +11,7 @@ export let editorConfigure = function (inputData) {
 </script>
 
 <script>
+import WKCWriteJumpButton from './modules/WKCWriteJumpButton/main.svelte';
 import ModuleFooter from './ModuleFooter.svelte';
 
 import * as WKCNotesAction from '../../_shared/rs-modules/wkc_notes/action.js';
@@ -20,11 +21,11 @@ import * as WKCWriteLogic from './ui-logic.js';
 import { storageClient, notesAll, filterText, defaultFocusNode, mobileViewCurrent, isMobile } from './persistence.js';
 import { noteSelected } from './_shared.js';
 
-let headerTokens = [];
+let jumpRecipes = [];
 
 noteSelected.subscribe(function (val) {
 	window.LCHPageFormulas = null;
-	headerTokens = [];
+	jumpRecipes = [];
 
 	if (!val && editorInstance) {
 		editorInstance.toTextArea();
@@ -113,9 +114,21 @@ afterUpdate(function () {
 		});
 
 		editorInstance.on('change', function (instance, changeObject) {
-			headerTokens = WKCWriteLogic.WKCWriteHeaderTokensFrom([...Array(editorInstance.getDoc().size)].map(function (e, i) {
+			jumpRecipes = WKCWriteLogic.WKCWriteHeaderTokensFrom([...Array(editorInstance.getDoc().size)].map(function (e, i) {
 				return WKCWriteLogic.WKCWriteLineObjectsFor(editorInstance.getLineTokens(i));
-			}));
+			})).map(function (e) {
+				return {
+					LCHRecipeTitle: e.string,
+					LCHRecipeCallback: function () {
+						editorInstance.scrollIntoView(CodeMirror.Pos(e.line, e.start), 300);
+						editorInstance.setSelection(CodeMirror.Pos(e.line, e.start), CodeMirror.Pos(e.line, e.end));
+
+						if (isMobile()) {
+							return;
+						}
+					},
+				};
+			});
 
 			if (changeObject.origin === 'setValue') {
 				return;
@@ -233,31 +246,6 @@ async function noteSave(inputData) {
 	OLSKThrottle.OLSKThrottleTimeoutFor(throttleMapNotes[inputData.WKCNoteID]);
 }
 
-function noteJump() {
-	window.Launchlet.instanceCreate(headerTokens.map(function (e) {
-		return {
-			LCHRecipeTitle: e.string,
-			LCHRecipeCallback: function () {
-				editorInstance.scrollIntoView(CodeMirror.Pos(e.line, e.start), 300);
-				editorInstance.setSelection(CodeMirror.Pos(e.line, e.start), CodeMirror.Pos(e.line, e.end));
-
-				if (isMobile()) {
-					return;
-				}
-			},
-		};
-	}), {
-		runMode: window.Launchlet.kRunModeJump,
-		completionHandler () {
-			if (isMobile()) {
-				return;
-			}
-			
-			editorInstance.focus();
-		}
-	});
-}
-
 async function notePublish() {
 	let item = await WKCNotesAction.WKCNotesActionPublish(storageClient, $noteSelected);
 	return noteSelected.update(function (val) {
@@ -335,10 +323,6 @@ function handleKeydown(event) {
 		return toggleTabFocus(event);
 	}
 
-	if (event.ctrlKey && event.key === 'r' && headerTokens.length) {
-		return noteJump();
-	}
-
 	if (event.key === 'Escape') {
 		if (editorInstance && editorInstance.getDoc().listSelections().length > 1) {
 			return editorInstance.setSelections(editorInstance.getDoc().listSelections().slice(0, 1));
@@ -366,7 +350,7 @@ function handleKeydown(event) {
 		</div>
 
 		<div class="WKCSharedToolbarElementGroup">
-			<button on:click={ () => window.setTimeout(noteJump) } class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" disabled={ !headerTokens.length } accesskey="r" style="background-image: url('/panel/_shared/ui-assets/wIKWriteJump.svg')" title={ OLSKLocalized('WKCWriteDetailToolbarJumpButtonText') } id="WKCWriteDetailToolbarJumpButton"></button>
+			<WKCWriteJumpButton inputData={ jumpRecipes } />
 
 			{#if $noteSelected.WKCNotePublishStatusIsPublished}
 				<span id="PublishStatus">{ OLSKLocalized('WKCWriteDetailToolbarPublishStatusPublished') }</span>

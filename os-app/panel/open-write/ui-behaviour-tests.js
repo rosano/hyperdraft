@@ -22,7 +22,7 @@ Object.entries({
 	WKCWriteDetailToolbar: '#WKCWriteDetailToolbar',
 	WKCWriteDetailToolbarBackButton: '#WKCWriteDetailToolbarBackButton',
 
-	WKCWriteDetailToolbarJumpButton: '#WKCWriteDetailToolbarJumpButton',
+	WKCWriteJumpButton: '.WKCWriteJumpButton',
 	WKCWriteDetailToolbarUnpublishButton: '#WKCWriteDetailToolbarUnpublishButton',
 	WKCWriteDetailToolbarPublishButton: '#WKCWriteDetailToolbarPublishButton',
 	WKCWriteDetailToolbarVersionsButton: '#WKCWriteDetailToolbarVersionsButton',
@@ -78,9 +78,7 @@ describe('WKCWriteBehaviourDiscovery', function testWKCWriteBehaviourDiscovery()
 
 		browser.assert.elements(WKCWriteDetailToolbar, 1);
 		browser.assert.elements(WKCWriteDetailToolbarBackButton, 0);
-		browser.assert.elements(WKCWriteDetailToolbarJumpButton, 1);
-		browser.assert.attribute(WKCWriteDetailToolbarJumpButton, 'accesskey', 'r');
-		browser.assert.attribute(WKCWriteDetailToolbarJumpButton, 'disabled', '');
+		browser.assert.elements(WKCWriteJumpButton, 1);
 		browser.assert.elements(WKCWriteDetailToolbarUnpublishButton, 0);
 		browser.assert.elements(WKCWriteDetailToolbarPublishButton, 0);
 		browser.assert.elements(WKCWriteDetailToolbarVersionsButton, 1);
@@ -146,7 +144,7 @@ describe('WKCWriteBehaviourDiscovery', function testWKCWriteBehaviourDiscovery()
 
 	it.skip('type header', function() {
 		// browser.fire(WKCWriteEditorContainer, 'keydown')
-		browser.assert.attribute(WKCWriteDetailToolbarJumpButton, 'disabled', '');
+		browser.assert.attribute(WKCWriteJumpButton, 'disabled', '');
 	});
 
 	context('delete', function () {
@@ -236,7 +234,6 @@ describe('WKCWriteBehaviourLanguage', function testWKCWriteBehaviourLanguage() {
 				deepEqual(browser.query(WKCWriteListItemSnippet).textContent, '');
 
 				// deepEqual(browser.query(WKCWriteDetailToolbarBackButton).title, uLocalized('WKCWriteDetailToolbarBackButtonText'));
-				deepEqual(browser.query(WKCWriteDetailToolbarJumpButton).title, uLocalized('WKCWriteDetailToolbarJumpButtonText'));
 				deepEqual(browser.query(WKCWriteDetailToolbarVersionsButton).title, uLocalized('WKCWriteDetailToolbarVersionsButtonText'));
 				deepEqual(browser.query(WKCWriteDetailToolbarDiscardButton).title, uLocalized('WKCWriteDetailToolbarDiscardButtonText'));
 
