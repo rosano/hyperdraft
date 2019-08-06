@@ -6,7 +6,7 @@ export const OLSKLocalized = function(translationConstant) {
 	return OLSKInternational.OLSKInternationalLocalizedStringWithTranslationKeyAndTranslationDictionary(translationConstant, localizationDictionary[window.OLSKPublicConstants('OLSKSharedPageCurrentLanguage')]);
 };
 
-export const WIKIsTestingBehaviour = function () {
+export const _WIKIsTestingBehaviour = function () {
 	if (typeof require !== 'undefined') {
 		return false;
 	}

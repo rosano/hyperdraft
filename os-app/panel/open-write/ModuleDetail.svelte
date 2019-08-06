@@ -1,6 +1,6 @@
 <script context="module">
 import { OLSKLocalized } from '../../_shared/common/global.js';
-import { WIKIsTestingBehaviour } from '../../_shared/common/global.js';
+import { _WIKIsTestingBehaviour } from '../../_shared/common/global.js';
 
 let editorInstance = null;
 let editorPostInitializeQueue = [];
@@ -386,7 +386,7 @@ function handleKeydown(event) {
 	</header>
 
 	<div class="DetailContentContainer EditorContainer">
-		{#if WIKIsTestingBehaviour()}
+		{#if _WIKIsTestingBehaviour()}
 			<textarea on:input={ debugTextAreaDidInput } id="WKCWriteEditorDebugInput"></textarea>
 		{/if}
 		<textarea bind:this={ editorElement }></textarea>
