@@ -10,6 +10,7 @@ import { WKCWriteLogicListSort } from './ui-logic.js';
 import { OLSKLocalized } from '../../_shared/common/global.js';
 import { storageClient, notesAll, filterText, defaultFocusNode, isMobile, mobileViewCurrent } from './persistence.js';
 import { noteSelected } from './_shared.js';
+import { WIKIsTestingBehaviour } from '../../_shared/common/global.js';
 
 import { editorConfigure } from './ModuleDetail.svelte';
 
@@ -85,7 +86,7 @@ noteSelected.subscribe(function noteSelectedDidChange (val) {
 
 import { afterUpdate } from 'svelte';
 afterUpdate(function () {
-	if (navigator.appName === 'Zombie') {
+	if (WIKIsTestingBehaviour()) {
 		return;
 	}
 	

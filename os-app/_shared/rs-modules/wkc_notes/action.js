@@ -3,9 +3,10 @@ import * as WKCNotesMetal from './metal.js';
 import * as WKCVersionsAction from '../wkc_versions/action.js';
 import * as WKCSettingsAction from '../wkc_settings/action.js';
 import * as WKCParser from '../../WKCParser/main.js';
+import { WIKIsTestingBehaviour } from '../../common/global.js';
 
-import { factory, detectPrng } from 'ulid'
-const uniqueID = typeof require === 'undefined' && navigator.appName === 'Zombie' ? factory(detectPrng(true)) : factory();
+import { factory, detectPrng } from 'ulid';
+const uniqueID = WIKIsTestingBehaviour() ? factory(detectPrng(true)) : factory();
 
 export const WKCNotesActionCreate = async function(storageClient, inputData) {
 	if (typeof inputData !== 'object' || inputData === null) {
