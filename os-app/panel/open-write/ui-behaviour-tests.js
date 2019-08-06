@@ -361,18 +361,26 @@ describe('WKCWriteUITestInteraction', function testInteraction() {
 
 	});
 
-	context('filter', function () {
+	context('on filter', function () {
 		
-		before(function() {
-			return browser.visit(kDefaultRoutePath);
+		before(async function() {
+			browser.fill('#WKCWriteEditorDebugInput', 'alfa');
+
+			browser.click(`${ WKCWriteListItem }:nth-child(2)`);
+			await browser.wait({ element: WKCWriteListItem });
+
+			browser.fill('#WKCWriteEditorDebugInput', 'bravo');
+			await browser.wait({ element: WKCWriteListItem });
 		});
 
-		it.skip('on create', async function() {
-			// focuses editor
-			await uCreateItem(browser);
-			await uCreateItem(browser);
-			await uCreateItem(browser);
-			browser.assert.elements(WKCWriteListItem, 3);
+		it.skip('selects item if exact title match', async function() {
+			browser.assert.elements(WKCWriteListItem, 2);
+
+			browser.fill(WKCWriteFilterInput, 'bravo');
+			await browser.wait({ element: WKCWriteFilterClearButton });
+			// console.log(browser.queryAll(WKCWriteListItem).map((e) => e.outerHTML));
+
+			browser.assert.elements(WKCWriteListItem, 1);
 		});
 
 	});
