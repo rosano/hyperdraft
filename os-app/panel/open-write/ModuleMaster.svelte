@@ -327,6 +327,10 @@ input {
 	color: white;
 }
 
+.ListItemTitle {
+	display: inline-block;
+}
+
 .ListItemSnippet {
 	display: block;
 	margin-top: 5px;
