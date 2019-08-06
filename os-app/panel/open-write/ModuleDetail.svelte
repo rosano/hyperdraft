@@ -360,7 +360,9 @@ function handleKeydown(event) {
 {#if $noteSelected}
 	<header class="WKCSharedToolbar" id="WKCWriteDetailToolbar">
 		<div class="WKCSharedToolbarElementGroup">
-			<button on:click={ noteClear } class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle WKC_ContextMobileExclusive"style="background-image: url('/panel/_shared/ui-assets/wIKWriteBack.svg')"  title={ OLSKLocalized('WKCWriteDetailToolbarBackButtonText')} id="WKCWriteDetailToolbarBackButton"></button>
+			{#if isMobile()}
+				<button on:click={ noteClear } class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle WKC_ContextMobileExclusive"style="background-image: url('/panel/_shared/ui-assets/wIKWriteBack.svg')"  title={ OLSKLocalized('WKCWriteDetailToolbarBackButtonText')} id="WKCWriteDetailToolbarBackButton"></button>
+			{/if}
 		</div>
 
 		<div class="WKCSharedToolbarElementGroup">

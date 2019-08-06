@@ -77,7 +77,7 @@ describe('WKCWriteBehaviourDiscovery', function testWKCWriteBehaviourDiscovery()
 		browser.assert.elements(WKCWriteDetailPlaceholderContainer, 0);
 
 		browser.assert.elements(WKCWriteDetailToolbar, 1);
-		browser.assert.elements(WKCWriteDetailToolbarBackButton, 1);
+		browser.assert.elements(WKCWriteDetailToolbarBackButton, 0);
 		browser.assert.elements(WKCWriteDetailToolbarJumpButton, 1);
 		browser.assert.attribute(WKCWriteDetailToolbarJumpButton, 'accesskey', 'r');
 		browser.assert.attribute(WKCWriteDetailToolbarJumpButton, 'disabled', '');
@@ -235,7 +235,7 @@ describe('WKCWriteBehaviourLanguage', function testWKCWriteBehaviourLanguage() {
 				deepEqual(browser.query(WKCWriteListItemTitle).textContent, '');
 				deepEqual(browser.query(WKCWriteListItemSnippet).textContent, '');
 
-				deepEqual(browser.query(WKCWriteDetailToolbarBackButton).title, uLocalized('WKCWriteDetailToolbarBackButtonText'));
+				// deepEqual(browser.query(WKCWriteDetailToolbarBackButton).title, uLocalized('WKCWriteDetailToolbarBackButtonText'));
 				deepEqual(browser.query(WKCWriteDetailToolbarJumpButton).title, uLocalized('WKCWriteDetailToolbarJumpButtonText'));
 				deepEqual(browser.query(WKCWriteDetailToolbarVersionsButton).title, uLocalized('WKCWriteDetailToolbarVersionsButtonText'));
 				deepEqual(browser.query(WKCWriteDetailToolbarDiscardButton).title, uLocalized('WKCWriteDetailToolbarDiscardButtonText'));
