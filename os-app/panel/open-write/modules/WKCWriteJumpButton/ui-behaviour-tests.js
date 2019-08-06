@@ -8,7 +8,7 @@ const browser = new Browser();
 const kDefaultRoutePath = '/modules/WKCWriteJumpButton';
 const WKCWriteJumpButton = '.WKCWriteJumpButton'; 
 
-describe.only('WKCWriteJumpButtonDiscovery', function testWKCWriteJumpButtonDiscovery() {
+describe('WKCWriteJumpButtonDiscovery', function testWKCWriteJumpButtonDiscovery() {
 
 	before(function() {
 		return browser.visit(kDefaultRoutePath);
@@ -40,7 +40,7 @@ describe.only('WKCWriteJumpButtonDiscovery', function testWKCWriteJumpButtonDisc
 
 });
 
-describe.only('WKCWriteJumpButtonLanguage', function testWKCWriteJumpButtonLanguage() {
+describe('WKCWriteJumpButtonLanguage', function testWKCWriteJumpButtonLanguage() {
 
 	['en'].forEach(function (languageCode) {
 
@@ -64,7 +64,7 @@ describe.only('WKCWriteJumpButtonLanguage', function testWKCWriteJumpButtonLangu
 	});
 });
 
-describe.only('WKCWriteJumpButtonInteraction', function testWKCWriteJumpButtonInteraction() {
+describe('WKCWriteJumpButtonInteraction', function testWKCWriteJumpButtonInteraction() {
 
 	before(function() {
 		return browser.visit(kDefaultRoutePath);
