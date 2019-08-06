@@ -8,7 +8,7 @@ function interfaceButtonDidClick() {
 }
 </script>
 
-<div class="Container">
+<div class="WKCWriteSearchInputContainer">
 
 <input bind:value={ inputData } placeholder="Filter or create" accesskey="f" class="WKCWriteSearchInput" autofocus />
 
@@ -19,11 +19,12 @@ function interfaceButtonDidClick() {
 </div>
 
 <style>
-.Container {
-	display: inline-block;
-
+.WKCWriteSearchInputContainer {
 	/* @ContainerStation:Parent */
 	position: relative;
+
+	/* @ContainerFlexbox:Parent */
+	display: flex;
 }
 
 input {
@@ -35,7 +36,7 @@ input {
 	text-indent: 2px;
 	line-height: 1.4;
 
-	/* WKCSharedToolbarFlexboxChild */
+	/* @ContainerFlexbox:Child */
 	flex-grow: 1;
 }
 

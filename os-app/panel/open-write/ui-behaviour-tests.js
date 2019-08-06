@@ -7,8 +7,8 @@ Object.entries({
 	browser: new Browser(),
 	kDefaultRoutePath: '/panel/write',
 
-	WKCWriteFilterInput: '#WIKDefaultFocusNode',
-	WKCWriteFilterClearButton: '#WKCWriteFilterClearButton',
+	WKCWriteSearchInput: '.WKCWriteSearchInput',
+	WKCWriteSearchInputClearButton: '.WKCWriteSearchInputClearButton',
 	WKCWriteCreateButton: '#WKCWriteCreateButton',
 
 	WKCWriteListItem: '.ListItem',
@@ -48,9 +48,7 @@ describe('WKCWriteBehaviourDiscovery', function testWKCWriteBehaviourDiscovery()
 	});
 
 	it('on startup', function() {
-		browser.assert.elements(WKCWriteFilterInput, 1);
-		browser.assert.attribute(WKCWriteFilterInput, 'accesskey', 'f');
-		browser.assert.elements(WKCWriteFilterClearButton, 0);
+		browser.assert.elements(WKCWriteSearchInput, 1);
 		browser.assert.elements(WKCWriteCreateButton, 1);
 		browser.assert.attribute(WKCWriteCreateButton, 'accesskey', 'n');
 
@@ -106,29 +104,29 @@ describe('WKCWriteBehaviourDiscovery', function testWKCWriteBehaviourDiscovery()
 			browser.fill('#WKCWriteEditorDebugInput', 'bravo');
 		});
 
-		it('presents clear button on input', async function() {
-			browser.fill(WKCWriteFilterInput, 'test');
-			await browser.wait({ element: WKCWriteFilterClearButton });
-
-			browser.assert.elements(WKCWriteFilterClearButton, 1);
-		});
-
 		it('presents no items if no match', async function() {
+			browser.fill(WKCWriteSearchInput, 'test');
+			await browser.wait({ element: WKCWriteSearchInputClearButton });
+
 			browser.assert.elements(WKCWriteListItem, 0);
 		});
 
 		it('presents items if match', async function() {
-			browser.fill(WKCWriteFilterInput, 'alfa');
-			await browser.wait({ element: WKCWriteFilterClearButton });
+			browser.fill(WKCWriteSearchInput, 'alfa');
+			await browser.wait({ element: WKCWriteSearchInputClearButton });
 
 			browser.assert.elements(WKCWriteListItem, 1);
 		});
 
-		it.skip('hides clear button on click', async function() {
-			browser.click(WKCWriteFilterClearButton);
-			await browser.wait({ element: WKCWriteFilterClearButton });
+		it.skip('clears WKCWriteSearchInput on click WKCWriteSearchInputClearButton', async function() {
+			browser.pressButton(WKCWriteSearchInputClearButton);
+			await browser.wait({ element: WKCWriteSearchInputClearButton });
 
-			browser.assert.elements(WKCWriteFilterClearButton, 0);
+			deepEqual(browser.query(WKCWriteSearchInput).value, '');
+		});
+
+		it.skip('clears items', async function() {
+			browser.assert.elements(WKCWriteListItem, 0);
 		});
 
 		it.skip('presents all items if empty', async function() {
@@ -216,7 +214,6 @@ describe('WKCWriteBehaviourLanguage', function testWKCWriteBehaviourLanguage() {
 			});
 
 			it('localizes interface', function() {
-				deepEqual(browser.query(WKCWriteFilterInput).placeholder, uLocalized('WKCWriteMasterToolbarFilterInputPlaceholderText'));
 				deepEqual(browser.query(WKCWriteCreateButton).title, uLocalized('WKCWriteMasterToolbarCreateButtonText'));
 
 				deepEqual(browser.query(WKCWriteExportButton).textContent, uLocalized('WKCUpdateExportText'));
@@ -308,18 +305,6 @@ describe('WKCWriteBehaviourLanguage', function testWKCWriteBehaviourLanguage() {
 				})).question, uLocalized('WKCWriteNotesDeleteAlertText'));
 			});
 
-			it.skip('on filter', async function() {
-				browser.fill(WKCWriteFilterInput, 'alfa');
-				await browser.wait({ element: WKCWriteFilterClearButton });
-
-				deepEqual(browser.query(WKCWriteFilterClearButton).title, uLocalized('WKCWriteFilterClearButtonText'));
-				
-				browser.pressButton(WKCWriteFilterClearButton);
-				await browser.wait({ element: WKCWriteFilterClearButton });
-
-				browser.assert.elements(WKCWriteFilterClearButton, 0);
-			});
-
 			it.skip('on write', async function() {
 				browser.fill('#WKCWriteEditorDebugInput', 'test');
 
@@ -381,8 +366,8 @@ describe('WKCWriteBehaviourInteraction', function testWKCWriteBehaviourInteracti
 		it.skip('selects item if exact title match', async function() {
 			browser.assert.elements(WKCWriteListItem, 2);
 
-			browser.fill(WKCWriteFilterInput, 'bravo');
-			await browser.wait({ element: WKCWriteFilterClearButton });
+			browser.fill(WKCWriteSearchInput, 'bravo');
+			await browser.wait({ element: WKCWriteSearchInputClearButton });
 			// console.log(browser.queryAll(WKCWriteListItem).map((e) => e.outerHTML));
 
 			browser.assert.elements(WKCWriteListItem, 1);

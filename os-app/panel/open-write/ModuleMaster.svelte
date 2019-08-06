@@ -1,4 +1,5 @@
 <script>
+import WKCWriteSearchInput from './modules/WKCWriteSearchInput/main.svelte';
 import ModuleFooter from './ModuleFooter.svelte';
 
 import * as WKCNotesAction from '../../_shared/rs-modules/wkc_notes/action.js';
@@ -212,10 +213,7 @@ function handleKeydown(event) {
 <div class="Container WKC_ContextMobileView" class:WKC_ContextMobileViewActive={ $mobileViewCurrent === 'ModuleMaster' } class:WKC_ContextMobileViewInactive={ $mobileViewCurrent !== 'ModuleMaster' } aria-hidden={ $mobileViewCurrent !== 'ModuleMaster' } class:WKCWriteMasterContainerFocused={ inputFocused }>
 
 <header class="WKCSharedToolbar">
-	<input bind:value={ $filterText } placeholder="{ OLSKLocalized('WKCWriteMasterToolbarFilterInputPlaceholderText') }" accesskey="f" id="WIKDefaultFocusNode" autofocus />
-	{#if $filterText}
-		<button on:click={ clearButtonDidClick } class="WKCSharedElementTappable WKCSharedButtonNoStyle" style="background-image: url('/panel/_shared/ui-assets/wIKFilterClear.svg')" title={ OLSKLocalized('WKCWriteFilterClearButtonText') } id="WKCWriteFilterClearButton"></button>
-	{/if}
+	<WKCWriteSearchInput bind:inputData={ $filterText } on:WKCWriteSearchInputClearButtonDidClick={ clearButtonDidClick } />
 
 	<div class="WKCSharedToolbarElementGroup">
 		<button on:click={ noteCreate } class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" title={ OLSKLocalized('WKCWriteMasterToolbarCreateButtonText') } style="background-image: url('/panel/_shared/ui-assets/wIKSharedCreate.svg')" accesskey="n" id="WKCWriteCreateButton"></button>
@@ -267,35 +265,13 @@ function handleKeydown(event) {
 }
 
 header {
-	position: relative;
-
 	/* ContainerFlexboxChild */
 	flex-shrink: 0;
 }
 
-input {
-	padding: 4px;
-	margin: 0;
-	border: 1px solid #e6e6e6;
-	border-radius: 5px;
-
-	text-indent: 2px;
-	line-height: 1.4;
-
+header :global(.WKCWriteSearchInputContainer) {
 	/* WKCSharedToolbarFlexboxChild */
 	flex-grow: 1;
-}
-
-#WKCWriteFilterClearButton {
-	width: 22px;
-	height: 22px;
-
-	position: absolute;
-	right: 32px;
-	top: 50%;
-	margin-top: -11px;
-
-	background-size: cover;
 }
 
 .MasterContentContainer {
@@ -355,21 +331,6 @@ input {
 
 .WKCSharedToolbar {
 	padding: 4px;
-}
-
-#WKCWriteFilterClearButton {
-	margin-right: 12px;
-}
-
-input {
-	height: 30px;
-
-	font-size: 14px;
-
-	/* MobileSafariRemoveDefaultInputStyle */
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	appearance: none;
 }
 
 .WKCSharedToolbarElementGroup {

@@ -17,7 +17,7 @@ export let filterText = writable('');
 export const isInErrorState = writable(false);
 
 export const defaultFocusNode = function () {
-	return document.getElementById('WIKDefaultFocusNode');
+	return document.querySelector('.WKCWriteSearchInput');
 };
 
 export const isMobile = function () {
