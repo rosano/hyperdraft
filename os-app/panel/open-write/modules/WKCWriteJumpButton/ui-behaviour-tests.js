@@ -6,7 +6,7 @@ Browser.localhost('loc.tests', 3000);
 
 const browser = new Browser();
 const kDefaultRoutePath = '/modules/WKCWriteJumpButton';
-const WKCWriteJumpButton = '.WKCWriteJumpButton'; 
+const WKCWriteJumpButton = '.WKCWriteJumpButton';
 
 describe('WKCWriteJumpButtonDiscovery', function testWKCWriteJumpButtonDiscovery() {
 
@@ -21,7 +21,7 @@ describe('WKCWriteJumpButtonDiscovery', function testWKCWriteJumpButtonDiscovery
 		browser.assert.attribute(WKCWriteJumpButton, 'tabIndex', '-1');
 	});
 
-	describe('inputData', function() {
+	context('inputData', function() {
 
 		it('enables if not empty', async function() {
 			browser.pressButton('#WKCWriteJumpButtonTestSetOne');
