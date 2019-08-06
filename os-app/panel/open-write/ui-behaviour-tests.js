@@ -97,16 +97,40 @@ describe('WKCWriteUITestDiscovery', function testDiscovery() {
 		browser.assert.elements(WKCWriteDetailToolbar, 1);
 	});
 
-	it.skip('on filter', async function() {
-		browser.fill(WKCWriteFilterInput, 'alfa');
-		await browser.wait({ element: WKCWriteFilterClearButton });
-
-		browser.assert.elements(WKCWriteFilterClearButton, 1);
+	context('on filter', function () {
 		
-		browser.pressButton(WKCWriteFilterClearButton);
-		await browser.wait({ element: WKCWriteFilterClearButton });
+		before(async function() {
+			browser.fill('#WKCWriteEditorDebugInput', 'alfa');
 
-		browser.assert.elements(WKCWriteFilterClearButton, 0);
+			browser.click(`${ WKCWriteListItem }:nth-child(2)`);
+			await browser.wait({ element: WKCWriteListItem });
+
+			browser.fill('#WKCWriteEditorDebugInput', 'bravo');
+		});
+
+		it('presents no items if no match', async function() {
+			browser.fill(WKCWriteFilterInput, 'test');
+			await browser.wait({ element: WKCWriteFilterClearButton });
+
+			browser.assert.elements(WKCWriteListItem, 0);
+		});
+
+		it('presents items if match', async function() {
+			browser.fill(WKCWriteFilterInput, 'alfa');
+			await browser.wait({ element: WKCWriteFilterClearButton });
+
+			browser.assert.elements(WKCWriteListItem, 1);
+		});
+
+		it.skip('presents all items if empty', async function() {
+			browser.click(WKCWriteFilterClearButton);
+			await browser.wait({ element: WKCWriteListItem });
+
+			// console.log(browser.queryAll('.ListItem').map((e) => e.innerHTML));
+
+			browser.assert.elements(WKCWriteListItem, 2);
+		});
+
 	});
 
 	it.skip('on publish', function() {
