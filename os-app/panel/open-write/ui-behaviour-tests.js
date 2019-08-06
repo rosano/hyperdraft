@@ -108,10 +108,14 @@ describe('WKCWriteBehaviourDiscovery', function testWKCWriteBehaviourDiscovery()
 			browser.fill('#WKCWriteEditorDebugInput', 'bravo');
 		});
 
-		it('presents no items if no match', async function() {
+		it('presents clear button on input', async function() {
 			browser.fill(WKCWriteFilterInput, 'test');
 			await browser.wait({ element: WKCWriteFilterClearButton });
 
+			browser.assert.elements(WKCWriteFilterClearButton, 1);
+		});
+
+		it('presents no items if no match', async function() {
 			browser.assert.elements(WKCWriteListItem, 0);
 		});
 
