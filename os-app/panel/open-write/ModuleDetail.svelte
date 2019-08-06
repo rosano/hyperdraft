@@ -364,7 +364,7 @@ function handleKeydown(event) {
 		</div>
 
 		<div class="WKCSharedToolbarElementGroup">
-			<button on:click={ () => setTimeout(noteJump) } class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" disabled={ !headerTokens.length } accesskey="r" style="background-image: url('/panel/_shared/ui-assets/wIKWriteJump.svg')" title={ OLSKLocalized('WKCWriteDetailToolbarJumpButtonText') } id="WKCWriteDetailToolbarJumpButton"></button>
+			<button on:click={ () => window.setTimeout(noteJump) } class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" disabled={ !headerTokens.length } accesskey="r" style="background-image: url('/panel/_shared/ui-assets/wIKWriteJump.svg')" title={ OLSKLocalized('WKCWriteDetailToolbarJumpButtonText') } id="WKCWriteDetailToolbarJumpButton"></button>
 
 			{#if $noteSelected.WKCNotePublishStatusIsPublished}
 				<span id="PublishStatus">{ OLSKLocalized('WKCWriteDetailToolbarPublishStatusPublished') }</span>
