@@ -79,7 +79,9 @@ noteSelected.subscribe(function noteSelectedDidChange (val) {
 		return;
 	}
 
-	element.scrollTo(0, 0);
+	if (!_WIKIsTestingBehaviour()) {
+		element.scrollTo(0, 0);
+	}
 
 	defaultFocusNode().focus();
 });
