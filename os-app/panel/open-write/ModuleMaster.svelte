@@ -5,7 +5,7 @@ import * as WKCNotesAction from '../../_shared/rs-modules/wkc_notes/action.js';
 
 import WKCParser from '../../_shared/WKCParser/main.js';
 
-import { WKCWriteLogicListSort } from './ui-logic.js';
+import { WIKWriteTruncatedTitleFor, WKCWriteLogicListSort } from './ui-logic.js';
 
 import { OLSKLocalized } from '../../_shared/common/global.js';
 import { storageClient, notesAll, filterText, defaultFocusNode, isMobile, mobileViewCurrent } from './persistence.js';
@@ -224,8 +224,8 @@ function handleKeydown(event) {
 	<div class="List">
 		{#each notesVisible as e}
 			<div on:click={ () => noteSelect(e) } class="ListItem WKCSharedElementTappable" class:ListItemSelected={ $noteSelected === e }>
-				<strong class="WKCWriteListItemAccessibilitySummary OLSKScreenReaderOnly">{ WKCParser.WKCParserTitleForPlaintext(e.WKCNoteBody) }</strong>
-				<strong class="ListItemTitle " aria-hidden="true">{ WKCParser.WKCParserTitleForPlaintext(e.WKCNoteBody) }</strong>
+				<strong class="WKCWriteListItemAccessibilitySummary OLSKScreenReaderOnly">{ WIKWriteTruncatedTitleFor(WKCParser.WKCParserTitleForPlaintext(e.WKCNoteBody), true) }</strong>
+				<strong class="ListItemTitle " aria-hidden="true">{ WIKWriteTruncatedTitleFor(WKCParser.WKCParserTitleForPlaintext(e.WKCNoteBody)) }</strong>
 				<span class="ListItemSnippet" aria-hidden="true">{ WKCParser.WKCParserSnippetForPlaintext(WKCParser.WKCParserBodyForPlaintext(e.WKCNoteBody)) }</span>
 			</div>
 		{/each}

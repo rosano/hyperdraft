@@ -229,6 +229,17 @@ describe('WKCWriteUITestLanguage', function testLanguage() {
 				deepEqual(browser.query(WKCWriteListItemSnippet).textContent, 'bravo');
 			});
 
+			it('on edit long title', async function() {
+				browser.fill(WKCWriteEditorDebugInput, 'alfa bravo charlie delta echo foxtrot golf hotel juliet kilos');
+				await browser.wait({ element: WKCWriteListItem });
+
+				deepEqual(browser.query(WKCWriteListItemAccessibilitySummary).textContent, 'alfa bravo charlie delta echo foxtrot golf hotel juliet…');
+				deepEqual(browser.query(WKCWriteListItemTitle).textContent, 'alfa bravo charlie delta echo foxtrot golf hotel juliet');
+				deepEqual(browser.query(WKCWriteListItemSnippet).textContent, '');
+
+				browser.fill(WKCWriteEditorDebugInput, 'alfa\nbravo');
+			});
+
 			it('on create nth item', async function() {
 				await uCreateItem(browser);
 
