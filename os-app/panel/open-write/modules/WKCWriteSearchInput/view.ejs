@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="/_shared/_external/normalize.css/normalize.css">
+	<link rel="stylesheet" type="text/css" href="/panel/_shared/ui-style.css">
+	<link rel="stylesheet" type="text/css" href="/<%= OLSKSharedPageControllerSlug %>/_compiled/ui-style.css">
+
+	<link rel="stylesheet" type="text/css" href="/_shared/_external/launchlet/launchlet.css">
+	<script src="/_shared/_external/launchlet/launchlet.js"></script>
+</head>
+<body>
+
+<script src="/<%= OLSKSharedPageControllerSlug %>/_compiled/ui-behaviour.js"></script>
+
+<hr>
+
+<p>
+	<strong>inputData</strong>
+	<button onclick="Main.$set({inputData: 'alfa'})" id="WKCWriteSearchInputTestSetFilled">filled</button>
+	<button onclick="Main.$set({inputData: ''})" id="WKCWriteSearchInputTestSetBlank">blank</button>
+</p>
+
+<p>
+	<strong>didRun</strong>
+	<script type="text/javascript">
+		Main.$on('WKCWriteSearchInputClearButtonDidClick', function() {
+			window.WKCWriteSearchInputTestRun.innerHTML = parseInt(window.WKCWriteSearchInputTestRun.innerHTML) + 1;
+		});
+	</script>
+	<span id="WKCWriteSearchInputTestRun">0</span>
+</p>
+
+</body>
+</html>
