@@ -126,10 +126,14 @@ describe('WKCWriteBehaviourDiscovery', function testWKCWriteBehaviourDiscovery()
 			browser.assert.elements(WKCWriteListItem, 1);
 		});
 
-		it.skip('presents all items if empty', async function() {
+		it.skip('hides clear button on click', async function() {
 			browser.click(WKCWriteFilterClearButton);
-			await browser.wait({ element: WKCWriteListItem });
+			await browser.wait({ element: WKCWriteFilterClearButton });
 
+			browser.assert.elements(WKCWriteFilterClearButton, 0);
+		});
+
+		it.skip('presents all items if empty', async function() {
 			// console.log(browser.queryAll('.ListItem').map((e) => e.innerHTML));
 
 			browser.assert.elements(WKCWriteListItem, 2);
