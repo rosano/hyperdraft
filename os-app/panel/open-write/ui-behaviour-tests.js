@@ -41,7 +41,7 @@ Object.entries({
 	return global[e.shift()]  = e.pop();
 });
 
-describe('WKCWriteUITestDiscovery', function testDiscovery() {
+describe('WKCWriteBehaviourDiscovery', function testWKCWriteBehaviourDiscovery() {
 
 	before(function() {
 		return browser.visit(kDefaultRoutePath);
@@ -195,7 +195,7 @@ describe('WKCWriteUITestDiscovery', function testDiscovery() {
 
 });
 
-describe('WKCWriteUITestLanguage', function testLanguage() {
+describe('WKCWriteBehaviourLanguage', function testWKCWriteBehaviourLanguage() {
 
 	['en'].forEach(function (languageCode) {
 
@@ -332,7 +332,7 @@ describe('WKCWriteUITestLanguage', function testLanguage() {
 	});
 });
 
-describe('WKCWriteUITestInteraction', function testInteraction() {
+describe('WKCWriteBehaviourInteraction', function testWKCWriteBehaviourInteraction() {
 
 	before(function() {
 		return browser.visit(kDefaultRoutePath);
