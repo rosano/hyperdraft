@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="/_shared/_external/normalize.css/normalize.css">
+	<link rel="stylesheet" type="text/css" href="/panel/_shared/ui-style.css">
+	<link rel="stylesheet" type="text/css" href="/panel/open-write/modules/WKCWriteJumpButton/_compiled/ui-style.css">
+
+	<link rel="stylesheet" type="text/css" href="/_shared/_external/launchlet/launchlet.css">
+	<script src="/_shared/_external/launchlet/launchlet.js"></script>
+</head>
+<body>
+
+<script src="/panel/open-write/modules/WKCWriteJumpButton/_compiled/ui-behaviour.js"></script>
+
+<hr>
+
+<p>
+	<strong>inputData</strong>
+	<button onclick="Main.$set({inputData: [{
+		LCHRecipeTitle: 'WKCWriteJumpButtonTest',
+		LCHRecipeCallback () {
+			window.WKCWriteJumpButtonTestRun.innerHTML = parseInt(window.WKCWriteJumpButtonTestRun.innerHTML) + 1;
+		},
+	}]})" id="WKCWriteJumpButtonTestSetOne">one</button>
+	<button onclick="Main.$set({inputData: []})" id="WKCWriteJumpButtonTestSetZero">zero</button>
+</p>
+
+<p>
+	<strong>didRun</strong>
+	<span id="WKCWriteJumpButtonTestRun">0</span>
+</p>
+
+</body>
+</html>
