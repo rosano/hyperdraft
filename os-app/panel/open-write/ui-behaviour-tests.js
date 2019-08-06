@@ -149,7 +149,7 @@ describe('WKCWriteBehaviourDiscovery', function testWKCWriteBehaviourDiscovery()
 		browser.assert.attribute(WKCWriteDetailToolbarJumpButton, 'disabled', '');
 	});
 
-	context.skip('delete', function () {
+	context('delete', function () {
 
 		it('on cancel', async function() {
 			const browser = new Browser();
