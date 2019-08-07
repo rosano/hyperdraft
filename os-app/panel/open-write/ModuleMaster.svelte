@@ -210,7 +210,7 @@ function handleKeydown(event) {
 </script>
 <svelte:window on:keydown={ handleKeydown }/>
 
-<div class="Container WKC_ContextMobileView" class:WKC_ContextMobileViewActive={ $mobileViewCurrent === 'ModuleMaster' } class:WKC_ContextMobileViewInactive={ $mobileViewCurrent !== 'ModuleMaster' } aria-hidden={ $mobileViewCurrent !== 'ModuleMaster' } class:WKCWriteMasterContainerFocused={ inputFocused }>
+<div class="Container WKCWriteMaster WKC_ContextMobileView" class:WKC_ContextMobileViewActive={ $mobileViewCurrent === 'ModuleMaster' } class:WKC_ContextMobileViewInactive={ $mobileViewCurrent !== 'ModuleMaster' } aria-hidden={ $mobileViewCurrent !== 'ModuleMaster' } class:WKCWriteMasterContainerFocused={ inputFocused }>
 
 <header class="WKCSharedToolbar">
 	<WKCWriteSearchInput bind:inputData={ $filterText } on:WKCWriteSearchInputClearButtonDidClick={ clearButtonDidClick } />

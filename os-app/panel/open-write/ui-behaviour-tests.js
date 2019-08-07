@@ -330,10 +330,25 @@ describe('WKCWriteBehaviourInteraction', function testWKCWriteBehaviourInteracti
 		return browser.visit(kDefaultRoutePath);
 	});
 
-	context('on startup', async function() {
+	context('on startup', function() {
 
 		it('focuses .CodeMirror textarea', async function() {
 			deepEqual(browser.document.activeElement, browser.query(WKCWriteSearchInput));
+		});
+
+	});
+
+	context('WKCWriteSearchInput', function() {
+		
+		it('removes class if not active', function() {
+			browser.click(WKCWriteDetailPlaceholderContainer)
+			browser.assert.hasNoClass('.WKCWriteMaster', 'WKCWriteMasterContainerFocused');
+		});
+		
+		it.skip('adds class if active', async function() {
+			browser.click(WKCWriteSearchInput)
+			await browser.wait({ element: WKCWriteListItem });
+			browser.assert.hasClass('.WKCWriteMaster', 'WKCWriteMasterContainerFocused');
 		});
 
 	});
