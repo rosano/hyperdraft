@@ -121,7 +121,7 @@ describe('WKCWriteBehaviourDiscovery', function testWKCWriteBehaviourDiscovery()
 
 		before(async function() {
 			browser.pressButton(WKCWriteSearchInputClearButton);
-			return await browser.wait({ element: WKCWriteListItem });
+			await browser.wait({ element: WKCWriteListItem });
 		});
 
 		it('clears WKCWriteSearchInput ', function() {
@@ -138,8 +138,12 @@ describe('WKCWriteBehaviourDiscovery', function testWKCWriteBehaviourDiscovery()
 	it.skip('on publish', function() {
 	});
 
-	it.skip('type header', function() {
-		// browser.fire(WKCWriteEditorContainer, 'keydown')
+	it('type header', async function() {
+		await uCreateItem(browser);
+		browser.fill(WKCWriteEditorDebugInput, 'alfa\n# bravo');
+		await browser.wait({ element: WKCWriteListItem });
+
+		deepEqual(browser.query(WKCWriteListItemAccessibilitySummary).textContent, 'alfa');
 		browser.assert.attribute(WKCWriteJumpButton, 'disabled', '');
 	});
 
