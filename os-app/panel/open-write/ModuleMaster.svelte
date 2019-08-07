@@ -84,6 +84,10 @@ noteSelected.subscribe(function noteSelectedDidChange (val) {
 		element.scrollTo(0, 0);
 	}
 
+	if (isMobile()) {
+		return;
+	}
+
 	defaultFocusNode().focus();
 });
 

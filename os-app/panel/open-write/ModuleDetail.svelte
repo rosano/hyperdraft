@@ -298,12 +298,6 @@ function noteClear () {
 	notesAll.update(function (val) {
 		return val.sort(WKCWriteLogic.WKCWriteLogicListSort);
 	});
-
-	if (isMobile()) {
-		return;
-	}
-
-	defaultFocusNode().focus();
 }
 
 function debugTextAreaDidInput() {
