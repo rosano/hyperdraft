@@ -38,7 +38,7 @@ Object.entries({
 	return global[e.shift()]  = e.pop();
 });
 
-describe('WKCWriteBehaviourDiscovery', function testWKCWriteBehaviourDiscovery() {
+describe('WKCWriteBehaviourElements', function testWKCWriteBehaviourElements() {
 
 	before(function() {
 		return browser.visit(kDefaultRoutePath);
@@ -201,7 +201,7 @@ describe('WKCWriteBehaviourDiscovery', function testWKCWriteBehaviourDiscovery()
 
 });
 
-describe('WKCWriteBehaviourLanguage', function testWKCWriteBehaviourLanguage() {
+describe('WKCWriteBehaviourText', function testWKCWriteBehaviourText() {
 
 	['en'].forEach(function (languageCode) {
 
