@@ -304,11 +304,6 @@ header :global(.WKCWriteSearchInputContainer) {
 	background: #e6e6e6;
 }
 
-.WKCWriteMasterContainerFocused .ListItemSelected {
-	background: #1a81ff;
-	color: white;
-}
-
 .ListItemTitle {
 	display: inline-block;
 }
@@ -339,6 +334,15 @@ header :global(.WKCWriteSearchInputContainer) {
 
 .WKCSharedToolbarElementGroup {
 	margin-left: 8px;
+}
+
+}
+
+@media screen and (min-width: 760px) {
+
+.WKCWriteMasterContainerFocused .ListItemSelected {
+	background: #1a81ff;
+	color: white;
 }
 
 }
