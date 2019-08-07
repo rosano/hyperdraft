@@ -115,20 +115,21 @@ describe('WKCWriteBehaviourDiscovery', function testWKCWriteBehaviourDiscovery()
 			browser.assert.elements(WKCWriteListItem, 1);
 		});
 
-		it.skip('clears WKCWriteSearchInput on click WKCWriteSearchInputClearButton', async function() {
-			browser.pressButton(WKCWriteSearchInputClearButton);
-			await browser.wait({ element: WKCWriteSearchInputClearButton });
+	});
 
+	context.skip('on click WKCWriteSearchInputClearButton', function() {
+
+		before(async function() {
+			browser.pressButton(WKCWriteSearchInputClearButton);
+			return await browser.wait({ element: WKCWriteListItem });
+		});
+
+		it('clears WKCWriteSearchInput ', function() {
 			deepEqual(browser.query(WKCWriteSearchInput).value, '');
 		});
 
-		it.skip('clears items', async function() {
-			browser.assert.elements(WKCWriteListItem, 0);
-		});
-
-		it.skip('presents all items if empty', async function() {
+		it('shows all items', function() {
 			// console.log(browser.queryAll('.ListItem').map((e) => e.innerHTML));
-
 			browser.assert.elements(WKCWriteListItem, 2);
 		});
 
