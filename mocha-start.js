@@ -2,6 +2,32 @@
 	require('OLSKTesting')._OLSKTestingMochaReplaceES6Import();
 })();
 
+(function OLSKMochaBrowser() {
+	if (process.env.OLSK_TESTING_BEHAVIOUR !== 'true') {
+		return;
+	}
+
+	const Browser = require('zombie');
+
+	Browser.localhost('loc.tests', 3000);
+	
+	Browser.prototype.OLSKFireKeyboardEvent = function(target, keyCode, eventName = 'keydown') {
+		const event = this.window.document.createEvent('HTMLEvents');
+		event.initEvent(eventName, true, true);
+		event.which = event.keyCode = event.key = event.code = keyCode;
+
+		target = typeof target === 'string' ? this.query(target) : target;
+
+		if (!target) {
+			throw new Error('no target');
+		}
+
+		target.dispatchEvent(event);
+	};
+
+	global.OLSKBrowser = Browser;
+})();
+
 (function OLSKMochaLocalizedStrings() {
 	if (process.env.OLSK_TESTING_BEHAVIOUR !== 'true') {
 		return;

@@ -1,10 +1,7 @@
 import { throws, deepEqual } from 'assert';
 
-const Browser = require('zombie');
-Browser.localhost('loc.tests', 3000);
-
 Object.entries({
-	browser: new Browser(),
+	browser: new OLSKBrowser(),
 	kDefaultRoutePath: '/panel/write',
 
 	WKCWriteSearchInput: '.WKCWriteSearchInput',
@@ -148,7 +145,7 @@ describe('WKCWriteBehaviourDiscovery', function testWKCWriteBehaviourDiscovery()
 	context('delete', function () {
 
 		it('on cancel', async function() {
-			const browser = new Browser();
+			const browser = new OLSKBrowser();
 
 			await browser.visit(kDefaultRoutePath);
 
@@ -173,7 +170,7 @@ describe('WKCWriteBehaviourDiscovery', function testWKCWriteBehaviourDiscovery()
 		});
 
 		it('on confirm', async function() {
-			const browser = new Browser();
+			const browser = new OLSKBrowser();
 
 			await browser.visit(kDefaultRoutePath);
 
@@ -289,7 +286,7 @@ describe('WKCWriteBehaviourLanguage', function testWKCWriteBehaviourLanguage() {
 			});
 
 			it('on delete', async function() {
-				const browser = new Browser();
+				const browser = new OLSKBrowser();
 
 				await browser.visit(`${ languageCode }${ kDefaultRoutePath }`);
 
