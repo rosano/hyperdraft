@@ -53,8 +53,7 @@ describe('WKCWriteJumpButtonLanguage', function testWKCWriteJumpButtonLanguage()
 
 			it('on startup', function() {
 				deepEqual(browser.query(WKCWriteJumpButton).textContent, '');
-				// deepEqual(browser.query(WKCWriteJumpButton).title, uLocalized('WKCWriteJumpButtonText'));
-				deepEqual(browser.query(WKCWriteJumpButton).title, 'Jump');
+				deepEqual(browser.query(WKCWriteJumpButton).title, uLocalized('WKCWriteJumpButtonText'));
 			});
 
 		});

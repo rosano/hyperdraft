@@ -53,16 +53,14 @@ describe('WKCWriteSearchInputLanguage', function testWKCWriteSearchInputLanguage
 			});
 
 			it('on startup', function() {
-				// deepEqual(browser.query(WKCWriteSearchInput).placeholder, uLocalized('WKCWriteSearchInputPlaceholderText'));
-				deepEqual(browser.query(WKCWriteSearchInput).placeholder, 'Filter or create');
+				deepEqual(browser.query(WKCWriteSearchInput).placeholder, uLocalized('WKCWriteSearchInputPlaceholderText'));
 			});
 
 			it('if inputData', async function() { 
 				browser.pressButton('#WKCWriteSearchInputTestSetFilled');
 				await browser.wait({ element: WKCWriteSearchInputClearButton });
 
-				// deepEqual(browser.query(WKCWriteSearchInputClearButton).title, uLocalized('WKCWriteSearchInputClearButtonText'));
-				deepEqual(browser.query(WKCWriteSearchInputClearButton).title, 'Clear text');
+				deepEqual(browser.query(WKCWriteSearchInputClearButton).title, uLocalized('WKCWriteSearchInputClearButtonText'));
 				deepEqual(browser.query(WKCWriteSearchInputClearButton).textContent, '');
 			});
 
