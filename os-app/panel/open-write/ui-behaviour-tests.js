@@ -330,6 +330,14 @@ describe('WKCWriteBehaviourInteraction', function testWKCWriteBehaviourInteracti
 		return browser.visit(kDefaultRoutePath);
 	});
 
+	context('on startup', async function() {
+
+		it('focuses .CodeMirror textarea', async function() {
+			deepEqual(browser.document.activeElement, browser.query(WKCWriteSearchInput));
+		});
+
+	});
+
 	context('on create', async function() {
 
 		it('focuses .CodeMirror textarea', async function() {
