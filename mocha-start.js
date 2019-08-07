@@ -1,7 +1,3 @@
-(function OLSKMochaReplaceES6Import() {
-	require('OLSKTesting')._OLSKTestingMochaReplaceES6Import();
-})();
-
 (function OLSKMochaBrowser() {
 	if (process.env.OLSK_TESTING_BEHAVIOUR !== 'true') {
 		return;
@@ -28,6 +24,7 @@
 	global.OLSKBrowser = Browser;
 })();
 
+let languageDictionary;
 (function OLSKMochaLocalizedStrings() {
 	if (process.env.OLSK_TESTING_BEHAVIOUR !== 'true') {
 		return;
@@ -37,7 +34,7 @@
 	const OLSKInternational = require('OLSKInternational');
 
 	let baseDirectory = pathPackage.join(__dirname, 'os-app');
-	let languageDictionary = require('glob').sync('*i18n*.y*(a)ml', {
+	languageDictionary = require('glob').sync('*i18n*.y*(a)ml', {
 	  matchBase: true,
 	  cwd: baseDirectory,
 	}).filter(function(e) {
@@ -111,4 +108,30 @@
 		// Recommended: send the information to sentry.io
 		// or whatever crash reporting service you use
 	});
+})();
+
+(function OLSKMochaPreprocess() {
+	const fs = require('fs');
+	const oldRequire = require('olsk-rollup-i18n')()._OLSKRollupI18NReplaceInternationalizationToken;
+	const replaceFunctions = [
+		require('OLSKTesting')._OLSKTestingMochaReplaceES6Import,
+		function (inputData) {
+			return (oldRequire({
+				code: inputData,
+			}, languageDictionary) || {
+				code: inputData,
+			}).code;
+		},
+	];
+
+	require.extensions['.js'] = function(module, filename) {
+		try {
+			return module._compile(replaceFunctions.reduce(function (coll, item) {
+				return item(coll);
+			}, fs.readFileSync(filename, 'utf-8')), filename);
+		} catch (err) {
+			// console.log(code); // eslint-disable-line no-console
+			throw err;
+		}
+	};
 })();
