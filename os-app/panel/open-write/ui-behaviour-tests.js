@@ -332,38 +332,69 @@ describe('WKCWriteBehaviourInteraction', function testWKCWriteBehaviourInteracti
 
 	context('on startup', function() {
 
-		it('focuses .CodeMirror textarea', async function() {
-			deepEqual(browser.document.activeElement, browser.query(WKCWriteSearchInput));
+		it('focuses .CodeMirror textarea', function() {
+			browser.document.hasFocus(WKCWriteSearchInput);
 		});
 
 	});
 
 	context('WKCWriteSearchInput', function() {
 		
-		it('removes class if not active', function() {
+		it('removes class if not active', async function() {
 			browser.click(WKCWriteDetailPlaceholderContainer)
 			browser.assert.hasNoClass('.WKCWriteMaster', 'WKCWriteMasterContainerFocused');
 		});
 		
 		it.skip('adds class if active', async function() {
-			browser.click(WKCWriteSearchInput)
-			await browser.wait({ element: WKCWriteListItem });
+			browser.click(WKCWriteSearchInput);
+			await browser.wait({ element: WKCWriteSearchInput });
+
+			browser.document.hasFocus(WKCWriteSearchInput);
+
+			await browser.wait({ element: WKCWriteSearchInput });
 			browser.assert.hasClass('.WKCWriteMaster', 'WKCWriteMasterContainerFocused');
+		});
+
+		it.skip('creates note on Enter', async function() {
+			browser.fill(WKCWriteSearchInput, 'bravo');
+			browser.OLSKFireKeyboardEvent(browser.window, 'Enter');
+			await browser.wait({ element: WKCWriteListItem });
+
+			browser.assert.elements(WKCWriteListItem, 1);
 		});
 
 	});
 
 	context('on create', async function() {
 
-		it('focuses .CodeMirror textarea', async function() {
-			await uCreateItem(browser);
+		before(async function() {
+			browser.document.hasFocus(WKCWriteSearchInput);
 
-			deepEqual(browser.document.activeElement, browser.query('.CodeMirror textarea'));
+			await uCreateItem(browser);
+			browser.assert.elements(WKCWriteListItem, 1);
+		});
+
+		it('focuses .CodeMirror textarea', async function() {
+			browser.document.hasFocus('.CodeMirror textarea');
 		});
 
 	});
 
 	context('on select', async function() {
+
+		before(async function() {
+			await uCreateItem(browser);
+			browser.assert.elements(WKCWriteListItem, 2);
+
+			browser.click(WKCWriteSearchInput);
+			await browser.wait({ element: WKCWriteSearchInput });
+
+			browser.document.hasFocus(WKCWriteSearchInput);
+		});
+
+		it('focuses .CodeMirror textarea', async function() {
+			browser.document.hasFocus('.CodeMirror textarea');
+		});
 
 		it('focuses .CodeMirror textarea', async function() {
 			await uCreateItem(browser);
@@ -371,7 +402,7 @@ describe('WKCWriteBehaviourInteraction', function testWKCWriteBehaviourInteracti
 			browser.click(`${ WKCWriteListItem }:nth-child(2)`);
 			await browser.wait({ element: WKCWriteListItem });
 
-			deepEqual(browser.document.activeElement, browser.query('.CodeMirror textarea'));
+			browser.document.hasFocus('.CodeMirror textarea');
 		});
 
 	});
