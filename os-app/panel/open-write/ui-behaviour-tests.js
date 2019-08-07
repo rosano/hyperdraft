@@ -307,18 +307,6 @@ describe('WKCWriteBehaviourText', function testWKCWriteBehaviourText() {
 				})).question, uLocalized('WKCWriteNotesDeleteAlertText'));
 			});
 
-			it.skip('on write', async function() {
-				browser.fill('#WKCWriteEditorDebugInput', 'test');
-
-				await browser.wait({ element: WKCWriteListItem });
-				
-				deepEqual(browser.query(WKCWriteListItemAccessibilitySummary).textContent, 'test');
-				deepEqual(browser.query(WKCWriteListItemTitle).textContent, '');
-				deepEqual(browser.query(WKCWriteListItemSnippet).textContent, '');
-
-				// browser.assert.elements(WKCWriteEditorContainer, 1);
-			});
-
 		});
 		
 	});
