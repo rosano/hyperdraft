@@ -178,17 +178,17 @@ describe('WKCWriteHeaderTokensFrom', function testWKCWriteHeaderTokensFrom() {
 		deepEqual(mainModule.WKCWriteHeaderTokensFrom([
 			mainModule.WKCWriteLineObjectsFor(kTesting.uStubLineTokensFor('alfa')),
 			mainModule.WKCWriteLineObjectsFor(kTesting.uStubLineTokensFor('[[bravo]]')),
-			]), []);
+		]), []);
 	});
 
 	it('includes if header', function() {
 		deepEqual(mainModule.WKCWriteHeaderTokensFrom([
 			mainModule.WKCWriteLineObjectsFor(kTesting.uStubLineTokensFor('# alfa')),
-			]), mainModule.WKCWriteLineObjectsFor(kTesting.uStubLineTokensFor('# alfa')).map(function (e) {
-				return Object.assign(e, {
-					line: 0,
-				});
-			}));
+		]), mainModule.WKCWriteLineObjectsFor(kTesting.uStubLineTokensFor('# alfa')).map(function (e) {
+			return Object.assign(e, {
+				line: 0,
+			});
+		}));
 	});
 
 	it('excludes if not verbal', function() {
@@ -199,7 +199,7 @@ describe('WKCWriteHeaderTokensFrom', function testWKCWriteHeaderTokensFrom() {
 			return e.map(function (e) {
 				return Object.assign(e, {
 					type: 'header header-1',
-				})
+				});
 			});
 		})), [{
 			start: 0,
@@ -213,7 +213,7 @@ describe('WKCWriteHeaderTokensFrom', function testWKCWriteHeaderTokensFrom() {
 	it('merges multiple header objects', function() {
 		deepEqual(mainModule.WKCWriteHeaderTokensFrom([
 			mainModule.WKCWriteLineObjectsFor(kTesting.uStubLineTokensFor('# PA PARC https://www.supermarchepa.com/pages/weekly-flyer')),
-			]), [{
+		]), [{
 			start: 0,
 			end: 58,
 			string: '# PA PARC https://www.supermarchepa.com/pages/weekly-flyer',

@@ -20,11 +20,11 @@ import { onMount } from 'svelte';
 onMount(function () {
 	defaultFocusNode().addEventListener('focus', function () {
 		inputFocused = true;
-	})
+	});
 
 	defaultFocusNode().addEventListener('blur', function () {
 		inputFocused = false;
-	})
+	});
 });
 
 async function noteCreate(inputData) {
@@ -119,7 +119,7 @@ function notesVisibleNeedsChange () {
 	notesVisible = $notesAll.filter(function (e) {
 		return e.WKCNoteBody.toLowerCase().match($filterText.toLowerCase());
 	});
-};
+}
 
 notesAll.subscribe(notesVisibleNeedsChange);
 filterText.subscribe(function filterTextDidChange (val) {
@@ -187,7 +187,7 @@ function handleEnter () {
 		return;
 	}
 
-	return noteCreate($filterText + "\n\n");
+	return noteCreate($filterText + '\n\n');
 }
 
 function handleKeydown(event) {

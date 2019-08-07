@@ -6,9 +6,9 @@
 	}
 
 	try {
-		require('glob')
+		require('glob');
 	} catch(e) {
-		return console.log(e);;
+		return console.log(e);
 	}
 
 	(function (param1, param2) {

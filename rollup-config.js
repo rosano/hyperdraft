@@ -48,9 +48,9 @@ export default globPackage.sync(['os-app/**/rollup-start.js'], {
   			browser: true
   		}),
   		commonjs(),
-      i18n({
-        baseDirectory: 'os-app',
-      }),
+			i18n({
+				baseDirectory: 'os-app',
+			}),
 
   		// Watch the `public` directory and refresh the
   		// browser on changes when not in production
@@ -63,5 +63,5 @@ export default globPackage.sync(['os-app/**/rollup-start.js'], {
   		// instead of npm run dev), minify
   		production && terser()
   	],
-  };
+	};
 });

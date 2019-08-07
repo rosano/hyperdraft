@@ -74,5 +74,5 @@ export const WKCWriteHeaderTokensFrom = function (inputData) {
 		}, {
 			line: i,
 		});
-	}))
+	}));
 };

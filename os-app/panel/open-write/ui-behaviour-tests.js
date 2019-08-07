@@ -329,7 +329,7 @@ describe('WKCWriteBehaviourInteraction', function testWKCWriteBehaviourInteracti
 	context('WKCWriteSearchInput', function() {
 		
 		it('removes class if not active', async function() {
-			browser.click(WKCWriteDetailPlaceholderContainer)
+			browser.click(WKCWriteDetailPlaceholderContainer);
 			browser.assert.hasNoClass('.WKCWriteMaster', 'WKCWriteMasterContainerFocused');
 		});
 		
