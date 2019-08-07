@@ -24,7 +24,7 @@
 	global.OLSKBrowser = Browser;
 })();
 
-let languageDictionary;
+let languageDictionary = {};
 (function OLSKMochaLocalizedStrings() {
 	if (process.env.OLSK_TESTING_BEHAVIOUR !== 'true') {
 		return;
