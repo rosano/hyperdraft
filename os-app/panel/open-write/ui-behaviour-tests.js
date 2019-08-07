@@ -215,7 +215,7 @@ describe('WKCWriteBehaviourText', function testWKCWriteBehaviourText() {
 				return browser.visit(`${ languageCode }${ kDefaultRoutePath }`);
 			});
 
-			it('localizes interface', function() {
+			it('on startup', function() {
 				deepEqual(browser.query(WKCWriteCreateButton).title, uLocalized('WKCWriteMasterToolbarCreateButtonText'));
 
 				deepEqual(browser.query(WKCWriteExportButton).textContent, uLocalized('WKCUpdateExportText'));
