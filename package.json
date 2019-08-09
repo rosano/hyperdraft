@@ -66,6 +66,9 @@
     "OLSKInternational": "olsk/OLSKInternational",
     "OLSKString": "olsk/OLSKString",
 
+    "// FRONTEND SERVICE WORKER": null,
+    "OLSKServiceWorker": "olsk/OLSKServiceWorker",
+
     "// FRONTEND DATES": null,
     "moment": "latest",
 

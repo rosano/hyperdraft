@@ -38,6 +38,7 @@ export { replaceCharAt, incrementBase32, randomChar, encodeTime, encodeRandom, d
 		'OLSKType',
 		'OLSKString',
 		'OLSKThrottle',
+		'OLSKServiceWorker',
 		'ispinner.css',
 		'identicon.js',
 		'blueimp-md5',
