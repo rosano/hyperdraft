@@ -6,6 +6,8 @@ import { WKCWriteLogicListSort } from './ui-logic.js';
 
 import * as WKCNotesAction from '../../_shared/rs-modules/wkc_notes/action.js';
 
+import { _WIKIsTestingBehaviour } from '../../_shared/common/global.js';
+
 import { noteSelected } from './_shared.js';
 
 import { writable } from 'svelte/store';
@@ -73,7 +75,9 @@ export const storageClient = WIKStorageClient.WIKStorageClientForModules([
 let remoteStorage = storageClient.remoteStorage;
 
 remoteStorage.on('ready', async () => {
-	console.debug('ready', arguments);
+	if (!_WIKIsTestingBehaviour()) {
+		console.debug('ready', arguments);
+	}
 
 	await remoteStorage.wkc_notes.init();
 
@@ -85,32 +89,46 @@ remoteStorage.on('ready', async () => {
 
 (function SetupStorageClientLogging() {
 	remoteStorage.on('not-connected', () => {
-		console.debug('not-connected', arguments);
+		if (!_WIKIsTestingBehaviour()) {
+			console.debug('not-connected', arguments);
+		}
 	});
 
 	remoteStorage.on('disconnected', () => {
-		console.debug('disconnected', arguments);
+		if (!_WIKIsTestingBehaviour()) {
+			console.debug('disconnected', arguments);
+		}
 	});
 
 	remoteStorage.on('connected', () => {
-		console.debug('connected', arguments);
+		if (!_WIKIsTestingBehaviour()) {
+			console.debug('connected', arguments);
+		}
 	});
 
 	remoteStorage.on('error', (error) => {
-		console.debug('error', error);
+		if (!_WIKIsTestingBehaviour()) {
+			console.debug('error', error);
+		}
 
 		isInErrorState.set(true);
 	});
 
 	remoteStorage.on('network-offline', () => {
-		console.debug('network-offline', arguments);
+		if (!_WIKIsTestingBehaviour()) {
+			console.debug('network-offline', arguments);
+		}
 	});
 
 	remoteStorage.on('network-online', () => {
-		console.debug('network-online', arguments);
+		if (!_WIKIsTestingBehaviour()) {
+			console.debug('network-online', arguments);
+		}
 	});
 
 	remoteStorage.on('sync-done', () => {
-		console.debug('sync-done', arguments);
+		if (!_WIKIsTestingBehaviour()) {
+			console.debug('sync-done', arguments);
+		}
 	});
 })();
