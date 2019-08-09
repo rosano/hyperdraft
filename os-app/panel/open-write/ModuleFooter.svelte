@@ -1,6 +1,10 @@
 <script>
-import { OLSKLocalized } from '../../_shared/common/global.js';
 import OLSKServiceWorker from '../../_shared/_external/OLSKServiceWorker/Main.svelte';
+
+import {
+	OLSKLocalized,
+	_WIKIsTestingBehaviour,
+} from '../../_shared/common/global.js';
 </script>
 
 <footer class="WKCSharedToolbar">
@@ -9,7 +13,9 @@ import OLSKServiceWorker from '../../_shared/_external/OLSKServiceWorker/Main.sv
 	</div>
 </footer>
 
+{#if !_WIKIsTestingBehaviour()}
 	<OLSKServiceWorker OLSKLocalized={ OLSKLocalized } registrationRoute={ window.OLSKCanonicalFor('WKCServiceWorkerRoute') } />
+{/if}
 
 <style>
 footer {
