@@ -19,6 +19,26 @@
 		}
 
 		target.dispatchEvent(event);
+
+		return this._wait(null);
+	};
+
+	Browser.extend(function(browser) {
+	  browser.on('confirm', function(dialog) {
+	    return browser.OLSKConfirmCallback ? browser.OLSKConfirmCallback(dialog) : dialog;
+	  });
+	});
+	
+	Browser.prototype.OLSKConfirm = async function(param1, param2) {
+		let browser = this;
+		return await new Promise(async function (resolve, reject) {
+			browser.OLSKConfirmCallback = function (dialog) {
+				delete browser.OLSKConfirmCallback;
+				return resolve(param2 ? param2(dialog) : dialog);
+			};
+
+			param1();
+		});
 	};
 
 	global.OLSKBrowser = Browser;
