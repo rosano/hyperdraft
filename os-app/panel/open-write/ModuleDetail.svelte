@@ -1,6 +1,8 @@
 <script context="module">
-import { OLSKLocalized } from '../../_shared/common/global.js';
-import { _WIKIsTestingBehaviour } from '../../_shared/common/global.js';
+import {
+	OLSKLocalized,
+	_WIKIsTestingBehaviour,
+} from '../../_shared/common/global.js';
 
 let editorInstance = null;
 let editorPostInitializeQueue = [];

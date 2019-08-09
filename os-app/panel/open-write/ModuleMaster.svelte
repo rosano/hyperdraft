@@ -8,10 +8,12 @@ import WKCParser from '../../_shared/WKCParser/main.js';
 
 import { WIKWriteTruncatedTitleFor, WKCWriteLogicListSort } from './ui-logic.js';
 
-import { OLSKLocalized } from '../../_shared/common/global.js';
+import {
+	OLSKLocalized,
+	_WIKIsTestingBehaviour,
+} from '../../_shared/common/global.js';
 import { storageClient, notesAll, filterText, defaultFocusNode, isMobile, mobileViewCurrent } from './persistence.js';
 import { noteSelected } from './_shared.js';
-import { _WIKIsTestingBehaviour } from '../../_shared/common/global.js';
 
 import { editorConfigure } from './ModuleDetail.svelte';
 
