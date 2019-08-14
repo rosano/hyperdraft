@@ -54,6 +54,9 @@ onMount(function () {
 }
 
 .AppContentContainer {
+	/* Chrome/Firefox scroll flexbox child */
+	overflow: auto;
+
 	/* AppContainerFlexboxChild */
 	flex-grow: 1;
 
