@@ -25,6 +25,9 @@ function interfaceButtonDidClick() {
 
 	/* @ContainerFlexbox:Parent */
 	display: flex;
+
+	/* ChromeRemoveInputOutline */
+	outline: none;
 }
 
 input {
