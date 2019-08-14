@@ -18,6 +18,9 @@
 	padding: 0 4px;
 	border-bottom: 1px solid #ddd;
 
+	/* Firefox header spacing */
+	line-height: 0;
+
 	/* WKCSharedToolbarFlexboxParent */
 	display: flex;
 	justify-content: flex-end;
