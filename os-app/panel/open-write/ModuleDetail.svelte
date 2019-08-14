@@ -481,7 +481,7 @@ function handleKeydown(event) {
 	display: flex;
 }
 
-.WKCSharedToolbarElementGroup * {
+.WKCSharedToolbarElementGroup :global(*) {
 	margin: 0 8px;
 }
 
