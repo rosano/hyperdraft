@@ -31,16 +31,4 @@ app.on('ready', function () {
     // Open the DevTools.
     // win.webContents.openDevTools()
   }());
-
-  globalShortcut.register('Control+Space', () => {
-    // if (win === null) {
-    //   return createWindow();
-    // }
-  
-    if (win.isFocused()) {
-      return win.hide();
-    };
-
-    win.show();
-  });
 });
