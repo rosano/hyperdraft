@@ -1,10 +1,9 @@
 <script>
 export let inputData = [];
-
 function interfaceButtonDidClick() {
 	setTimeout(function () {
 		window.Launchlet.instanceCreate(inputData, {
-			runMode: window.Launchlet.kRunModeJump,
+			runMode: window.Launchlet.kRunModePreview,
 		});
 	});
 }

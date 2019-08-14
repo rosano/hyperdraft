@@ -39,7 +39,7 @@ noteSelected.subscribe(function (val) {
 	}
 
 	return editorConfigure(function () {
-		if (document.querySelector('#WKCWriteEditorDebugInput')) {
+		if (_WIKIsTestingBehaviour()) {
 			document.querySelector('#WKCWriteEditorDebugInput').value = val.WKCNoteBody;
 		}
 		editorInstance.setValue(val.WKCNoteBody);
@@ -120,7 +120,7 @@ afterUpdate(function () {
 				return WKCWriteLogic.WKCWriteLineObjectsFor(editorInstance.getLineTokens(i));
 			})).map(function (e) {
 				return {
-					LCHRecipeTitle: e.string,
+					LCHRecipeName: e.string,
 					LCHRecipeCallback: function () {
 						editorInstance.scrollIntoView(CodeMirror.Pos(e.line, e.start), 300);
 						editorInstance.setSelection(CodeMirror.Pos(e.line, e.start), CodeMirror.Pos(e.line, e.end));

@@ -26,6 +26,7 @@ Object.entries({
 	WKCWriteDetailToolbarDiscardButton: '#WKCWriteDetailToolbarDiscardButton',
 
 	WKCWriteEditorContainer: '.EditorContainer',
+	WKCWriteEditorInput: '.EditorContainer .CodeMirror',
 	WKCWriteEditorDebugInput: '#WKCWriteEditorDebugInput',
 
 	WKCWriteReloadButton: '#WKCWriteReloadButton',
@@ -80,6 +81,7 @@ describe('WKCWriteBehaviourElements', function testWKCWriteBehaviourElements() {
 		browser.assert.elements(WKCWriteDetailToolbarDiscardButton, 1);
 
 		browser.assert.elements(WKCWriteEditorContainer, 1);
+		browser.assert.elements(WKCWriteEditorInput, 1);
 	});
 
 	it('on create nth item', async function() {
@@ -181,7 +183,7 @@ describe('WKCWriteBehaviourElements', function testWKCWriteBehaviourElements() {
 
 });
 
-describe('WKCWriteBehaviourText', function testWKCWriteBehaviourText() {
+describe('WKCWriteBehaviourLanguage', function testWKCWriteBehaviourLanguage() {
 
 	['en'].forEach(function (languageCode) {
 
@@ -215,7 +217,7 @@ describe('WKCWriteBehaviourText', function testWKCWriteBehaviourText() {
 				// deepEqual(browser.query(WKCWriteDetailToolbarBackButton).title, uLocalized('WKCWriteDetailToolbarBackButtonText'));
 				deepEqual(browser.query(WKCWriteDetailToolbarVersionsButton).title, uLocalized('WKCWriteDetailToolbarVersionsButtonText'));
 				deepEqual(browser.query(WKCWriteDetailToolbarDiscardButton).title, uLocalized('WKCWriteDetailToolbarDiscardButtonText'));
-
+				
 				deepEqual(browser.query(WKCWriteEditorDebugInput).value, '');
 			});
 
