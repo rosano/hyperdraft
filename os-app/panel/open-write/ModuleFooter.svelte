@@ -9,7 +9,7 @@ import {
 
 <footer class="WKCSharedToolbar">
 	<div class="WKCSharedToolbarElementGroup">
-		<button on:click={ () => window.location.reload() } class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" title={ OLSKLocalized('WKCWriteFooterToolbarReloadButtonText') } style="background-image: url('/panel/_shared/ui-assets/wIKSharedReload.svg')" id="WKCWriteReloadButton"></button>
+		<button on:click={ () => window.location.reload() } class="WKCSharedToolbarButton WKCSharedElementTappable OLSKLayoutButtonNoStyle" title={ OLSKLocalized('WKCWriteFooterToolbarReloadButtonText') } style="background-image: url('/panel/_shared/ui-assets/wIKSharedReload.svg')" id="WKCWriteReloadButton"></button>
 	</div>
 </footer>
 

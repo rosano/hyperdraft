@@ -222,7 +222,7 @@ function handleKeydown(event) {
 	<WKCWriteSearchInput bind:inputData={ $filterText } on:WKCWriteSearchInputClearButtonDidClick={ clearButtonDidClick } />
 
 	<div class="WKCSharedToolbarElementGroup">
-		<button on:click={ noteCreate } class="WKCSharedToolbarButton WKCSharedElementTappable WKCSharedButtonNoStyle" title={ OLSKLocalized('WKCWriteMasterToolbarCreateButtonText') } style="background-image: url('/panel/_shared/ui-assets/wIKSharedCreate.svg')" accesskey="n" id="WKCWriteCreateButton"></button>
+		<button on:click={ noteCreate } class="WKCSharedToolbarButton WKCSharedElementTappable OLSKLayoutButtonNoStyle" title={ OLSKLocalized('WKCWriteMasterToolbarCreateButtonText') } style="background-image: url('/panel/_shared/ui-assets/wIKSharedCreate.svg')" accesskey="n" id="WKCWriteCreateButton"></button>
 	</div>
 </header>
 
@@ -238,7 +238,7 @@ function handleKeydown(event) {
 	</div>
 	
 	<div id="WKCWriteMasterDebug">
-		<button on:click={ exportNotes } class="WKCSharedElementTappable WKCSharedButtonNoStyle" id="WKCWriteExportButton">{ OLSKLocalized('WKCUpdateExportText') }</button>
+		<button on:click={ exportNotes } class="WKCSharedElementTappable OLSKLayoutButtonNoStyle" id="WKCWriteExportButton">{ OLSKLocalized('WKCUpdateExportText') }</button>
 	</div>
 </div>
 
