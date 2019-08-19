@@ -146,7 +146,7 @@ filterText.subscribe(function filterTextDidChange (val) {
 	})).shift());
 });
 
-function clearButtonDidClick() {
+function SearchInputDispatchClear() {
 	filterText.set('');
 	
 	defaultFocusNode().focus();
@@ -222,7 +222,7 @@ function handleKeydown(event) {
 
 <header>
 	<OLSKToolbar>
-		<WKCWriteSearchInput bind:inputData={ $filterText } on:WKCWriteSearchInputClearButtonDidClick={ clearButtonDidClick } />
+		<WKCWriteSearchInput bind:inputData={ $filterText } on:SearchInputDispatchClear={ SearchInputDispatchClear } />
 
 		<OLSKToolbarElementGroup>
 			<button on:click={ noteCreate } class="OLSKToolbarButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle" title={ OLSKLocalized('WKCWriteMasterToolbarCreateButtonText') } style="background-image: url('/panel/_shared/ui-assets/wIKSharedCreate.svg')" accesskey="n" id="WKCWriteCreateButton"></button>
