@@ -23,4 +23,9 @@
 	flex-basis: var(--OLSKViewportMasterWidth);
 	flex-shrink: 0;
 }
+
+.OLSKViewportContent :global(.OLSKViewportDetail) {
+	/* @OLSKViewportContentFlexbox:Child */
+	flex-grow: 1;
+}
 </style>

@@ -335,7 +335,7 @@ function handleKeydown(event) {
 </script>
 <svelte:window on:keydown={ handleKeydown }/>
 
-<div class="Container WKC_ContextMobileView" class:WKC_ContextMobileViewActive={ $mobileViewCurrent === 'ModuleDetail' } class:WKC_ContextMobileViewInactive={ $mobileViewCurrent !== 'ModuleDetail' }>
+<div class="Container OLSKViewportDetail WKC_ContextMobileView" class:WKC_ContextMobileViewActive={ $mobileViewCurrent === 'ModuleDetail' } class:WKC_ContextMobileViewInactive={ $mobileViewCurrent !== 'ModuleDetail' }>
 
 {#if $noteSelected}
 	<header class="WKCSharedToolbar" id="WKCWriteDetailToolbar">
@@ -389,9 +389,6 @@ function handleKeydown(event) {
 
 <style>
 .Container {
-	/* @OLSKViewportContentFlexbox:Child */
-	flex-grow: 1;
-
 	/* ContainerFlexboxParent */
 	display: flex;
 	flex-direction: column;
