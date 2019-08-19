@@ -389,7 +389,7 @@ function handleKeydown(event) {
 
 <style>
 .Container {
-	/* OLSKViewportContentContainerFlexboxChild */
+	/* @OLSKViewportContentContainerFlexbox:Child */
 	flex-grow: 1;
 
 	/* ContainerFlexboxParent */

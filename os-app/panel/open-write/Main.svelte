@@ -1,4 +1,5 @@
 <script>
+import OLSKViewportContentContainer from './modules/OLSKViewportContentContainer/main.svelte';
 import ModuleMaster from './ModuleMaster.svelte';
 import ModuleDetail from './ModuleDetail.svelte';
 import ModuleFooter from './ModuleFooter.svelte';
@@ -15,10 +16,10 @@ onMount(function () {
 
 <div class="Container OLSKViewport" class:OLSKIsLoading={ $isLoading }>
 
-<div class="OLSKViewportContentContainer">
+<OLSKViewportContentContainer>
 	<ModuleMaster />
 	<ModuleDetail />
-</div>
+</OLSKViewportContentContainer>
 
 {#if !isMobile()}
 	<ModuleFooter />
@@ -41,17 +42,6 @@ onMount(function () {
 .Container {
 	font-family: 'Helvetica Neue', 'Helvetica', sans;
 	font-size: 12px;
-}
-
-.OLSKViewportContentContainer {
-	/* Chrome/Firefox scroll flexbox child */
-	overflow: auto;
-
-	/* OLSKViewportFlexboxChild */
-	flex-grow: 1;
-
-	/* OLSKViewportContentContainerFlexboxParent */
-	display: flex;
 }
 
 .WIKWriteDebug {
