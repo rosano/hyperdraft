@@ -409,8 +409,6 @@ function handleKeydown(event) {
 }
 
 .OLSKToolbar {
-	font-size: 14px;
-
 	/* OLSKToolbarFlexboxChild */
 	justify-content: space-between;
 }
@@ -464,19 +462,5 @@ function handleKeydown(event) {
 
 .EditorContainer :global(.cm-link:hover) {
   cursor: pointer;
-}
-
-@media screen and (max-width: 760px) {
-
-.OLSKToolbarElementGroup {
-	margin: unset;
-
-	display: flex;
-}
-
-.OLSKToolbarElementGroup :global(*) {
-	margin: 0 8px;
-}
-
 }
 </style>
