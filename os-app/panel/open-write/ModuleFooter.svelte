@@ -7,9 +7,9 @@ import {
 } from '../../_shared/common/global.js';
 </script>
 
-<footer class="WKCSharedToolbar">
-	<div class="WKCSharedToolbarElementGroup">
-		<button on:click={ () => window.location.reload() } class="WKCSharedToolbarButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle" title={ OLSKLocalized('WKCWriteFooterToolbarReloadButtonText') } style="background-image: url('/panel/_shared/ui-assets/wIKSharedReload.svg')" id="WKCWriteReloadButton"></button>
+<footer class="OLSKToolbar">
+	<div class="OLSKToolbarElementGroup">
+		<button on:click={ () => window.location.reload() } class="OLSKToolbarButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle" title={ OLSKLocalized('WKCWriteFooterToolbarReloadButtonText') } style="background-image: url('/panel/_shared/ui-assets/wIKSharedReload.svg')" id="WKCWriteReloadButton"></button>
 	</div>
 </footer>
 
@@ -21,10 +21,10 @@ import {
 footer {
 	border-top: var(--WIKBorderStyle);
 
-	/* OLSKViewportFlexboxChild */
+	/* @OLSKViewportFlexbox:Child */
 	flex-shrink: 0;
 
-	/* WKCSharedToolbarFlexboxParent */
+	/* @OLSKToolbarFlexbox:Parent */
 	justify-content: flex-start;
 }
 </style>

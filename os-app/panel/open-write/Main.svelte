@@ -35,7 +35,7 @@ onMount(function () {
 {/if}
 
 <style>
-.OLSKIsLoading :global(.WKCSharedToolbar *), .OLSKIsLoading :global(.MasterContentContainer *), .OLSKIsLoading :global(.DetailContentContainer *) {
+.OLSKIsLoading :global(.OLSKToolbar *), .OLSKIsLoading :global(.MasterContentContainer *), .OLSKIsLoading :global(.DetailContentContainer *) {
 	visibility: hidden;
 }
 
@@ -78,7 +78,7 @@ onMount(function () {
 	right: -100vw;
 }
 
-.OLSKViewport :global(.WKCSharedToolbarButton) {
+.OLSKViewport :global(.OLSKToolbarButton) {
 	width: 20px;
 	height: 20px;
 	background-size: 20px 20px;

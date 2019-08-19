@@ -218,11 +218,11 @@ function handleKeydown(event) {
 
 <div class="Container OLSKViewportMaster WKCWriteMaster WKC_ContextMobileView" class:WKC_ContextMobileViewActive={ $mobileViewCurrent === 'ModuleMaster' } class:WKC_ContextMobileViewInactive={ $mobileViewCurrent !== 'ModuleMaster' } aria-hidden={ $mobileViewCurrent !== 'ModuleMaster' } class:WKCWriteMasterContainerFocused={ inputFocused }>
 
-<header class="WKCSharedToolbar">
+<header class="OLSKToolbar">
 	<WKCWriteSearchInput bind:inputData={ $filterText } on:WKCWriteSearchInputClearButtonDidClick={ clearButtonDidClick } />
 
-	<div class="WKCSharedToolbarElementGroup">
-		<button on:click={ noteCreate } class="WKCSharedToolbarButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle" title={ OLSKLocalized('WKCWriteMasterToolbarCreateButtonText') } style="background-image: url('/panel/_shared/ui-assets/wIKSharedCreate.svg')" accesskey="n" id="WKCWriteCreateButton"></button>
+	<div class="OLSKToolbarElementGroup">
+		<button on:click={ noteCreate } class="OLSKToolbarButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle" title={ OLSKLocalized('WKCWriteMasterToolbarCreateButtonText') } style="background-image: url('/panel/_shared/ui-assets/wIKSharedCreate.svg')" accesskey="n" id="WKCWriteCreateButton"></button>
 	</div>
 </header>
 
@@ -266,7 +266,7 @@ header {
 }
 
 header :global(.WKCWriteSearchInputContainer) {
-	/* WKCSharedToolbarFlexboxChild */
+	/* @OLSKToolbarFlexbox:Child */
 	flex-grow: 1;
 }
 
@@ -320,11 +320,11 @@ header :global(.WKCWriteSearchInputContainer) {
 	-webkit-overflow-scrolling: touch;
 }
 
-.WKCSharedToolbar {
+.OLSKToolbar {
 	padding: 4px;
 }
 
-.WKCSharedToolbarElementGroup {
+.OLSKToolbarElementGroup {
 	margin-left: 8px;
 }
 
