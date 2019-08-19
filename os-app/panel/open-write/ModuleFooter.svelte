@@ -23,8 +23,5 @@ footer {
 
 	/* @OLSKViewportFlexbox:Child */
 	flex-shrink: 0;
-
-	/* @OLSKToolbarFlexbox:Parent */
-	justify-content: flex-start;
 }
 </style>
