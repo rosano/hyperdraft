@@ -315,10 +315,6 @@ header {
 	-webkit-overflow-scrolling: touch;
 }
 
-.OLSKToolbar {
-	padding: 4px;
-}
-
 .OLSKToolbarElementGroup {
 	margin-left: 8px;
 }

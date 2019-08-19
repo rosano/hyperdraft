@@ -468,10 +468,6 @@ function handleKeydown(event) {
 
 @media screen and (max-width: 760px) {
 
-.OLSKToolbar {
-	padding: 12px 8px;
-}
-
 .OLSKToolbarElementGroup {
 	margin: unset;
 
