@@ -249,14 +249,6 @@ function handleKeydown(event) {
 </div>
 
 <style>
-.OLSKScreenReaderOnly {
-	width: 0px;
-	height: 0px;
-
-	position: absolute;
-	
-	overflow: hidden;
-}
 
 .Container {
 	--OLSKViewportMasterWidth: 300px;
