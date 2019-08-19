@@ -1,5 +1,5 @@
 <script>
-import OLSKViewportContentContainer from './modules/OLSKViewportContentContainer/main.svelte';
+import OLSKViewportContent from './modules/OLSKViewportContent/main.svelte';
 import ModuleMaster from './ModuleMaster.svelte';
 import ModuleDetail from './ModuleDetail.svelte';
 import ModuleFooter from './ModuleFooter.svelte';
@@ -16,10 +16,10 @@ onMount(function () {
 
 <div class="Container OLSKViewport" class:OLSKIsLoading={ $isLoading }>
 
-<OLSKViewportContentContainer>
+<OLSKViewportContent>
 	<ModuleMaster />
 	<ModuleDetail />
-</OLSKViewportContentContainer>
+</OLSKViewportContent>
 
 {#if !isMobile()}
 	<ModuleFooter />

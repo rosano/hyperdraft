@@ -1,12 +1,12 @@
 <script>
 </script>
 
-<div class="OLSKViewportContentContainer">
+<div class="OLSKViewportContent">
 	<slot></slot>
 </div>
 
 <style>
-.OLSKViewportContentContainer {
+.OLSKViewportContent {
 	--OLSKViewportMasterWidth: 300px;
 	/* Chrome/Firefox scroll flexbox child */
 	overflow: auto;
@@ -14,12 +14,12 @@
 	/* @OLSKViewportFlexbox:Child */
 	flex-grow: 1;
 
-	/* @OLSKViewportContentContainerFlexbox:Parent */
+	/* @OLSKViewportContentFlexbox:Parent */
 	display: flex;
 }
 
-.OLSKViewportContentContainer :global(.OLSKViewportMaster) {
-	/* @OLSKViewportContentContainerFlexbox:Child */
+.OLSKViewportContent :global(.OLSKViewportMaster) {
+	/* @OLSKViewportContentFlexbox:Child */
 	flex-basis: var(--OLSKViewportMasterWidth);
 	flex-shrink: 0;
 }
