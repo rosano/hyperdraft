@@ -21,7 +21,7 @@ import {
 footer {
 	border-top: var(--WIKBorderStyle);
 
-	/* AppContainerFlexboxChild */
+	/* OLSKAppContainerFlexboxChild */
 	flex-shrink: 0;
 
 	/* WKCSharedToolbarFlexboxParent */
