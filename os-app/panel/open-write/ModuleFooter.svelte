@@ -20,8 +20,5 @@ import {
 <style>
 footer {
 	border-top: var(--WIKBorderStyle);
-
-	/* @OLSKViewportFlexbox:Child */
-	flex-shrink: 0;
 }
 </style>
