@@ -123,11 +123,11 @@ describe('WKCWriteBehaviourElements', function testWKCWriteBehaviourElements() {
 
 		before(async function() {
 			browser.pressButton(WKCWriteSearchInputClearButton);
-			await browser.wait({ element: WKCWriteListItem });
+			await browser.wait({ element: `${WKCWriteListItem}:nth-child(2)` });
 		});
 
-		it('clears WKCWriteSearchInput ', function() {
-			deepEqual(browser.query(WKCWriteSearchInput).value, '');
+		it('clears WKCWriteSearchInput', function() {
+			browser.assert.input(WKCWriteSearchInput, '');
 		});
 
 		it('shows all items', function() {
