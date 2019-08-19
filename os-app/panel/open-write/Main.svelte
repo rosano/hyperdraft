@@ -13,7 +13,7 @@ onMount(function () {
 });
 </script>
 
-<div class="OLSKViewport" class:OLSKIsLoading={ $isLoading }>
+<div class="Container OLSKViewport" class:OLSKIsLoading={ $isLoading }>
 
 <div class="AppContentContainer">
 	<ModuleMaster />
@@ -41,9 +41,6 @@ onMount(function () {
 	bottom: 0;
 	left: 0;
 
-	font-family: 'Helvetica Neue', 'Helvetica', sans;
-	font-size: 12px;
-
 	/* OLSKViewportFlexboxParent */
 	display: flex;
 	flex-direction: column;
@@ -51,6 +48,11 @@ onMount(function () {
 
 .OLSKIsLoading :global(.WKCSharedToolbar *), .OLSKIsLoading :global(.MasterContentContainer *), .OLSKIsLoading :global(.DetailContentContainer *) {
 	visibility: hidden;
+}
+
+.Container {
+	font-family: 'Helvetica Neue', 'Helvetica', sans;
+	font-size: 12px;
 }
 
 .AppContentContainer {
