@@ -34,18 +34,6 @@ onMount(function () {
 {/if}
 
 <style>
-.OLSKViewport {
-	position: absolute;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-
-	/* OLSKViewportFlexboxParent */
-	display: flex;
-	flex-direction: column;
-}
-
 .OLSKIsLoading :global(.WKCSharedToolbar *), .OLSKIsLoading :global(.MasterContentContainer *), .OLSKIsLoading :global(.DetailContentContainer *) {
 	visibility: hidden;
 }
@@ -86,12 +74,6 @@ onMount(function () {
 }
 
 @media screen and (max-width: 760px) {
-
-.OLSKViewport {
-  position: fixed;
-
-  overflow: hidden;
-}
 
 .OLSKViewport :global(.WKC_ContextMobileView) {
 	position: absolute;
