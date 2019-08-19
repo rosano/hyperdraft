@@ -15,7 +15,7 @@ onMount(function () {
 
 <div class="Container OLSKViewport" class:OLSKIsLoading={ $isLoading }>
 
-<div class="AppContentContainer">
+<div class="OLSKViewportContentContainer">
 	<ModuleMaster />
 	<ModuleDetail />
 </div>
@@ -55,14 +55,14 @@ onMount(function () {
 	font-size: 12px;
 }
 
-.AppContentContainer {
+.OLSKViewportContentContainer {
 	/* Chrome/Firefox scroll flexbox child */
 	overflow: auto;
 
 	/* OLSKViewportFlexboxChild */
 	flex-grow: 1;
 
-	/* AppContentContainerFlexboxParent */
+	/* OLSKViewportContentContainerFlexboxParent */
 	display: flex;
 }
 

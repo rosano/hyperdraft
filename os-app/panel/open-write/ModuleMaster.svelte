@@ -261,7 +261,7 @@ function handleKeydown(event) {
 .Container {
 	border-right: var(--WIKBorderStyle);
 
-	/* AppContentContainerFlexboxChild */
+	/* OLSKViewportContentContainerFlexboxChild */
 	flex-basis: 300px;
 	flex-shrink: 0;
 
