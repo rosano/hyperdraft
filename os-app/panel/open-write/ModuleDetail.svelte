@@ -16,6 +16,7 @@ export let editorConfigure = function (inputData) {
 import WKCWriteJumpButton from './modules/WKCWriteJumpButton/main.svelte';
 import ModuleFooter from './ModuleFooter.svelte';
 import OLSKToolbar from './modules/OLSKToolbar/main.svelte';
+import OLSKToolbarElementGroup from './modules/OLSKToolbarElementGroup/main.svelte';
 
 import * as WKCNotesAction from '../../_shared/rs-modules/wkc_notes/action.js';
 import * as WKCVersionsAction from '../../_shared/rs-modules/wkc_versions/action.js';
@@ -341,13 +342,13 @@ function handleKeydown(event) {
 {#if $noteSelected}
 	<header id="WKCWriteDetailToolbar">
 		<OLSKToolbar OLSKToolbarJustify={ true }>
-			<div class="OLSKToolbarElementGroup">
+			<OLSKToolbarElementGroup>
 				{#if isMobile()}
 					<button on:click={ noteClear } class="OLSKToolbarButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle WKC_ContextMobileExclusive"style="background-image: url('/panel/_shared/ui-assets/wIKWriteBack.svg')"  title={ OLSKLocalized('WKCWriteDetailToolbarBackButtonText')} id="WKCWriteDetailToolbarBackButton"></button>
 				{/if}
-			</div>
+			</OLSKToolbarElementGroup>
 
-			<div class="OLSKToolbarElementGroup">
+			<OLSKToolbarElementGroup>
 				<WKCWriteJumpButton inputData={ jumpRecipes } />
 
 				{#if $noteSelected.WKCNotePublishStatusIsPublished}
@@ -366,7 +367,7 @@ function handleKeydown(event) {
 				<button on:click={ noteVersions } class="OLSKToolbarButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle" style="background-image: url('/panel/_shared/ui-assets/wIKWriteVersions.svg')" title={ OLSKLocalized('WKCWriteDetailToolbarVersionsButtonText') } id="WKCWriteDetailToolbarVersionsButton"></button>
 
 				<button on:click={ noteDelete } class="OLSKToolbarButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle" style="background-image: url('/panel/_shared/ui-assets/wIKWriteDiscard.svg')" title={ OLSKLocalized('WKCWriteDetailToolbarDiscardButtonText') } id="WKCWriteDetailToolbarDiscardButton"></button>
-			</div>
+			</OLSKToolbarElementGroup>
 		</OLSKToolbar>
 	</header>
 

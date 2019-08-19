@@ -2,6 +2,7 @@
 import WKCWriteSearchInput from './modules/WKCWriteSearchInput/main.svelte';
 import ModuleFooter from './ModuleFooter.svelte';
 import OLSKToolbar from './modules/OLSKToolbar/main.svelte';
+import OLSKToolbarElementGroup from './modules/OLSKToolbarElementGroup/main.svelte';
 
 import * as WKCNotesAction from '../../_shared/rs-modules/wkc_notes/action.js';
 
@@ -223,9 +224,9 @@ function handleKeydown(event) {
 	<OLSKToolbar>
 		<WKCWriteSearchInput bind:inputData={ $filterText } on:WKCWriteSearchInputClearButtonDidClick={ clearButtonDidClick } />
 
-		<div class="OLSKToolbarElementGroup">
+		<OLSKToolbarElementGroup>
 			<button on:click={ noteCreate } class="OLSKToolbarButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle" title={ OLSKLocalized('WKCWriteMasterToolbarCreateButtonText') } style="background-image: url('/panel/_shared/ui-assets/wIKSharedCreate.svg')" accesskey="n" id="WKCWriteCreateButton"></button>
-		</div>
+		</OLSKToolbarElementGroup>
 	</OLSKToolbar>
 </header>
 
@@ -268,6 +269,10 @@ header {
 
 	/* ContainerFlexboxChild */
 	flex-shrink: 0;
+}
+
+header :global(.OLSKToolbarElementGroup) {
+	margin-left: 4px;
 }
 
 .MasterContentContainer {
@@ -315,7 +320,7 @@ header {
 
 @media screen and (max-width: 760px) {
 
-.OLSKToolbarElementGroup {
+header :global(.OLSKToolbarElementGroup) {
 	margin-left: 8px;
 }
 
