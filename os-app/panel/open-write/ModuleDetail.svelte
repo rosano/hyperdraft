@@ -437,7 +437,7 @@ function handleKeydown(event) {
 .EditorContainer :global(.CodeMirror-scroll) {
 	background: #f8f8f8;
 
-  /* MobileSafariSmoothScrolling */
+  /* OLSKMobileSafariSmoothScrolling */
 	-webkit-overflow-scrolling: touch;
 }
 

@@ -226,7 +226,7 @@ function handleKeydown(event) {
 	</div>
 </header>
 
-<div class="MasterContentContainer">
+<div class="MasterContentContainer OLSKMobileSafariSmoothScrolling">
 	<div class="List">
 		{#each notesVisible as e}
 			<div on:click={ () => noteSelect(e) } class="ListItem OLSKLayoutElementTappable" class:ListItemSelected={ $noteSelected === e }>
@@ -309,11 +309,6 @@ header {
 }
 
 @media screen and (max-width: 760px) {
-
-.MasterContentContainer {
-  /* MobileSafariSmoothScrolling */
-	-webkit-overflow-scrolling: touch;
-}
 
 .OLSKToolbarElementGroup {
 	margin-left: 8px;
