@@ -35,7 +35,7 @@ onMount(function () {
 {/if}
 
 <style>
-.OLSKIsLoading :global(.OLSKToolbar *), .OLSKIsLoading :global(.MasterContentContainer *), .OLSKIsLoading :global(.DetailContentContainer *) {
+.OLSKIsLoading :global(.MasterContentContainer *), .OLSKIsLoading :global(.DetailContentContainer *) {
 	visibility: hidden;
 }
 
