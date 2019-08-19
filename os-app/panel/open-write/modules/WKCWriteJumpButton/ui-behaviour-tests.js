@@ -80,8 +80,8 @@ describe('WKCWriteJumpButtonInteraction', function testWKCWriteJumpButtonInterac
 	it('runs callback on select', async function() {
 		deepEqual(browser.query('#WKCWriteJumpButtonTestRun').textContent, '0');
 
-		browser.click('.ListItem');
-		await browser.wait({ element: '.ListItem' });
+		browser.click('.LCHLauncherResultListItem');
+		// await browser.wait({ element: '.LCHLauncherResultListItem' });
 
 		browser.assert.elements('.Container .Bezel', 0);
 		deepEqual(browser.query('#WKCWriteJumpButtonTestRun').textContent, '1');
