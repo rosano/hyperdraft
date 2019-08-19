@@ -338,7 +338,7 @@ function handleKeydown(event) {
 <div class="Container OLSKViewportDetail WKC_ContextMobileView" class:WKC_ContextMobileViewActive={ $mobileViewCurrent === 'ModuleDetail' } class:WKC_ContextMobileViewInactive={ $mobileViewCurrent !== 'ModuleDetail' }>
 
 {#if $noteSelected}
-	<header class="OLSKToolbar" id="WKCWriteDetailToolbar">
+	<header class="OLSKToolbar OLSKToolbarJustify" id="WKCWriteDetailToolbar">
 		<div class="OLSKToolbarElementGroup">
 			{#if isMobile()}
 				<button on:click={ noteClear } class="OLSKToolbarButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle WKC_ContextMobileExclusive"style="background-image: url('/panel/_shared/ui-assets/wIKWriteBack.svg')"  title={ OLSKLocalized('WKCWriteDetailToolbarBackButtonText')} id="WKCWriteDetailToolbarBackButton"></button>
@@ -406,11 +406,6 @@ function handleKeydown(event) {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-}
-
-.OLSKToolbar {
-	/* OLSKToolbarFlexboxChild */
-	justify-content: space-between;
 }
 
 #PublishStatus {
