@@ -13,7 +13,7 @@ function interfaceButtonDidClick() {
 <input bind:value={ inputData } placeholder="Filter or create" accesskey="f" class="WKCWriteSearchInput" autofocus />
 
 {#if inputData}
-	<button on:click={ interfaceButtonDidClick } class="WKCWriteSearchInputClearButton WKCSharedElementTappable OLSKLayoutButtonNoStyle" style="background-image: url('/panel/_shared/ui-assets/wIKFilterClear.svg')" title="Clear text"></button>
+	<button on:click={ interfaceButtonDidClick } class="WKCWriteSearchInputClearButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle" style="background-image: url('/panel/_shared/ui-assets/wIKFilterClear.svg')" title="Clear text"></button>
 {/if}
 
 </div>

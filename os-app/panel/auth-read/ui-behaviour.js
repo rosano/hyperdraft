@@ -511,7 +511,7 @@
 					return obj.WKCOutlookID
 				})
 				.classed('WKCReadSourcesContentListChildListItem', true)
-				.classed('WKCSharedElementTappable', true)
+				.classed('OLSKLayoutElementTappable', true)
 				.on('click', moi.commandsSourcesSelect);
 
 		parentElement.append('img');
@@ -573,7 +573,7 @@
 		var parentElement = selection.enter()
 			.append('li')
 				.attr('class', 'WKCReadSourcesContentListChildListItem')
-				.classed('WKCSharedElementTappable', true)
+				.classed('OLSKLayoutElementTappable', true)
 				.on('click', moi.commandsSourcesSelect);
 
 		parentElement.append('img')
@@ -617,7 +617,7 @@
 		var parentElement = selection.enter()
 			.append('div')
 				.attr('class', 'WKCReadMasterContentListItem')
-				.classed('WKCSharedElementTappable', true);
+				.classed('OLSKLayoutElementTappable', true);
 		var contextElement = parentElement.append('div')
 			.attr('class', 'WKCReadMasterContentListItemContext');
 

@@ -222,14 +222,14 @@ function handleKeydown(event) {
 	<WKCWriteSearchInput bind:inputData={ $filterText } on:WKCWriteSearchInputClearButtonDidClick={ clearButtonDidClick } />
 
 	<div class="WKCSharedToolbarElementGroup">
-		<button on:click={ noteCreate } class="WKCSharedToolbarButton WKCSharedElementTappable OLSKLayoutButtonNoStyle" title={ OLSKLocalized('WKCWriteMasterToolbarCreateButtonText') } style="background-image: url('/panel/_shared/ui-assets/wIKSharedCreate.svg')" accesskey="n" id="WKCWriteCreateButton"></button>
+		<button on:click={ noteCreate } class="WKCSharedToolbarButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle" title={ OLSKLocalized('WKCWriteMasterToolbarCreateButtonText') } style="background-image: url('/panel/_shared/ui-assets/wIKSharedCreate.svg')" accesskey="n" id="WKCWriteCreateButton"></button>
 	</div>
 </header>
 
 <div class="MasterContentContainer">
 	<div class="List">
 		{#each notesVisible as e}
-			<div on:click={ () => noteSelect(e) } class="ListItem WKCSharedElementTappable" class:ListItemSelected={ $noteSelected === e }>
+			<div on:click={ () => noteSelect(e) } class="ListItem OLSKLayoutElementTappable" class:ListItemSelected={ $noteSelected === e }>
 				<strong class="WKCWriteListItemAccessibilitySummary OLSKScreenReaderOnly">{ WIKWriteTruncatedTitleFor(WKCParser.WKCParserTitleForPlaintext(e.WKCNoteBody), true) }</strong>
 				<strong class="ListItemTitle " aria-hidden="true">{ WIKWriteTruncatedTitleFor(WKCParser.WKCParserTitleForPlaintext(e.WKCNoteBody)) }</strong>
 				<span class="ListItemSnippet" aria-hidden="true">{ WKCParser.WKCParserSnippetForPlaintext(WKCParser.WKCParserBodyForPlaintext(e.WKCNoteBody)) }</span>
@@ -238,7 +238,7 @@ function handleKeydown(event) {
 	</div>
 	
 	<div id="WKCWriteMasterDebug">
-		<button on:click={ exportNotes } class="WKCSharedElementTappable OLSKLayoutButtonNoStyle" id="WKCWriteExportButton">{ OLSKLocalized('WKCUpdateExportText') }</button>
+		<button on:click={ exportNotes } class="OLSKLayoutElementTappable OLSKLayoutButtonNoStyle" id="WKCWriteExportButton">{ OLSKLocalized('WKCUpdateExportText') }</button>
 	</div>
 </div>
 

@@ -16,7 +16,7 @@ function interfaceDidReceiveKeydown() {
 </script>
 <svelte:window on:keydown={ interfaceDidReceiveKeydown }/>
 
-<button on:click={ interfaceButtonDidClick  } class="WKCWriteJumpButton WKCSharedToolbarButton WKCSharedElementTappable OLSKLayoutButtonNoStyle" disabled={ !inputData.length } accesskey="r" style="background-image: url('/panel/_shared/ui-assets/wIKWriteJump.svg')" title="Jump" tabindex="-1"></button>
+<button on:click={ interfaceButtonDidClick  } class="WKCWriteJumpButton WKCSharedToolbarButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle" disabled={ !inputData.length } accesskey="r" style="background-image: url('/panel/_shared/ui-assets/wIKWriteJump.svg')" title="Jump" tabindex="-1"></button>
 
 <style>
 </style>

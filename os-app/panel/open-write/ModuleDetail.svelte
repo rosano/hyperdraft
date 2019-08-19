@@ -341,7 +341,7 @@ function handleKeydown(event) {
 	<header class="WKCSharedToolbar" id="WKCWriteDetailToolbar">
 		<div class="WKCSharedToolbarElementGroup">
 			{#if isMobile()}
-				<button on:click={ noteClear } class="WKCSharedToolbarButton WKCSharedElementTappable OLSKLayoutButtonNoStyle WKC_ContextMobileExclusive"style="background-image: url('/panel/_shared/ui-assets/wIKWriteBack.svg')"  title={ OLSKLocalized('WKCWriteDetailToolbarBackButtonText')} id="WKCWriteDetailToolbarBackButton"></button>
+				<button on:click={ noteClear } class="WKCSharedToolbarButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle WKC_ContextMobileExclusive"style="background-image: url('/panel/_shared/ui-assets/wIKWriteBack.svg')"  title={ OLSKLocalized('WKCWriteDetailToolbarBackButtonText')} id="WKCWriteDetailToolbarBackButton"></button>
 			{/if}
 		</div>
 
@@ -350,20 +350,20 @@ function handleKeydown(event) {
 
 			{#if $noteSelected.WKCNotePublishStatusIsPublished}
 				<span id="PublishStatus">{ OLSKLocalized('WKCWriteDetailToolbarPublishStatusPublished') }</span>
-				<a class="WKCSharedToolbarButton WKCSharedElementTappable" href={ window.OLSKCanonicalFor('WIKRefsRoute', {
+				<a class="WKCSharedToolbarButton OLSKLayoutElementTappable" href={ window.OLSKCanonicalFor('WIKRefsRoute', {
 						wkc_note_public_id: $noteSelected.WKCNotePublicID,
 					}) } title={ OLSKLocalized('WKCWriteDetailToolbarVisitButtonText') } style="background-image: url('/panel/_shared/ui-assets/wIKWriteVisit.svg')" target="_blank">&nbsp;</a>
 
-				<button on:click={ noteUnpublish } class="WKCSharedToolbarButton WKCSharedElementTappable OLSKLayoutButtonNoStyle" style="background-image: url('/panel/_shared/ui-assets/wIKWriteUnpublish.svg')" title={ OLSKLocalized('WKCWriteDetailToolbarUnpublishButtonText') } id="WKCWriteDetailToolbarUnpublishButton"></button>
+				<button on:click={ noteUnpublish } class="WKCSharedToolbarButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle" style="background-image: url('/panel/_shared/ui-assets/wIKWriteUnpublish.svg')" title={ OLSKLocalized('WKCWriteDetailToolbarUnpublishButtonText') } id="WKCWriteDetailToolbarUnpublishButton"></button>
 			{/if}
 
 			{#if false && !$noteSelected.WKCNotePublishStatusIsPublished }
-				<button on:click={ notePublish } class="WKCSharedToolbarButton WKCSharedElementTappable OLSKLayoutButtonNoStyle" style="background-image: url('/panel/_shared/ui-assets/wIKWritePublish.svg')" title={ OLSKLocalized('WKCWriteDetailToolbarPublishButtonText') } id="WKCWriteDetailToolbarPublishButton"></button>
+				<button on:click={ notePublish } class="WKCSharedToolbarButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle" style="background-image: url('/panel/_shared/ui-assets/wIKWritePublish.svg')" title={ OLSKLocalized('WKCWriteDetailToolbarPublishButtonText') } id="WKCWriteDetailToolbarPublishButton"></button>
 			{/if}
 
-			<button on:click={ noteVersions } class="WKCSharedToolbarButton WKCSharedElementTappable OLSKLayoutButtonNoStyle" style="background-image: url('/panel/_shared/ui-assets/wIKWriteVersions.svg')" title={ OLSKLocalized('WKCWriteDetailToolbarVersionsButtonText') } id="WKCWriteDetailToolbarVersionsButton"></button>
+			<button on:click={ noteVersions } class="WKCSharedToolbarButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle" style="background-image: url('/panel/_shared/ui-assets/wIKWriteVersions.svg')" title={ OLSKLocalized('WKCWriteDetailToolbarVersionsButtonText') } id="WKCWriteDetailToolbarVersionsButton"></button>
 
-			<button on:click={ noteDelete } class="WKCSharedToolbarButton WKCSharedElementTappable OLSKLayoutButtonNoStyle" style="background-image: url('/panel/_shared/ui-assets/wIKWriteDiscard.svg')" title={ OLSKLocalized('WKCWriteDetailToolbarDiscardButtonText') } id="WKCWriteDetailToolbarDiscardButton"></button>
+			<button on:click={ noteDelete } class="WKCSharedToolbarButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle" style="background-image: url('/panel/_shared/ui-assets/wIKWriteDiscard.svg')" title={ OLSKLocalized('WKCWriteDetailToolbarDiscardButtonText') } id="WKCWriteDetailToolbarDiscardButton"></button>
 		</div>
 	</header>
 
