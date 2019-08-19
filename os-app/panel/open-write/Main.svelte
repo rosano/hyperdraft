@@ -13,7 +13,7 @@ onMount(function () {
 });
 </script>
 
-<div class="OLSKAppContainer" class:OLSKIsLoading={ $isLoading }>
+<div class="OLSKViewport" class:OLSKIsLoading={ $isLoading }>
 
 <div class="AppContentContainer">
 	<ModuleMaster />
@@ -34,7 +34,7 @@ onMount(function () {
 {/if}
 
 <style>
-.OLSKAppContainer {
+.OLSKViewport {
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -44,7 +44,7 @@ onMount(function () {
 	font-family: 'Helvetica Neue', 'Helvetica', sans;
 	font-size: 12px;
 
-	/* OLSKAppContainerFlexboxParent */
+	/* OLSKViewportFlexboxParent */
 	display: flex;
 	flex-direction: column;
 }
@@ -57,7 +57,7 @@ onMount(function () {
 	/* Chrome/Firefox scroll flexbox child */
 	overflow: auto;
 
-	/* OLSKAppContainerFlexboxChild */
+	/* OLSKViewportFlexboxChild */
 	flex-grow: 1;
 
 	/* AppContentContainerFlexboxParent */
@@ -85,13 +85,13 @@ onMount(function () {
 
 @media screen and (max-width: 760px) {
 
-.OLSKAppContainer {
+.OLSKViewport {
   position: fixed;
 
   overflow: hidden;
 }
 
-.OLSKAppContainer :global(.WKC_ContextMobileView) {
+.OLSKViewport :global(.WKC_ContextMobileView) {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -99,18 +99,18 @@ onMount(function () {
 	bottom: 0;
 }
 
-.OLSKAppContainer :global(.WKC_ContextMobileViewInactive) {
+.OLSKViewport :global(.WKC_ContextMobileViewInactive) {
 	left: 100vw;
 	right: -100vw;
 }
 
-.OLSKAppContainer :global(.WKCSharedToolbarButton) {
+.OLSKViewport :global(.WKCSharedToolbarButton) {
 	width: 20px;
 	height: 20px;
 	background-size: 20px 20px;
 }
 
-.OLSKAppContainer :global(.WKC_ContextMobileExclusive) {
+.OLSKViewport :global(.WKC_ContextMobileExclusive) {
 	display: unset;
 }
 
