@@ -8,7 +8,7 @@ function interfaceButtonDidClick() {
 }
 </script>
 
-<div class="WKCWriteSearchInputContainer">
+<div class="WKCWriteSearchInputContainer OLSKToolbarFlexible">
 
 <input bind:value={ inputData } placeholder="Filter or create" accesskey="f" class="WKCWriteSearchInput" autofocus />
 

@@ -265,11 +265,6 @@ header {
 	flex-shrink: 0;
 }
 
-header :global(.WKCWriteSearchInputContainer) {
-	/* @OLSKToolbarFlexbox:Child */
-	flex-grow: 1;
-}
-
 .MasterContentContainer {
 	overflow: auto;
 
