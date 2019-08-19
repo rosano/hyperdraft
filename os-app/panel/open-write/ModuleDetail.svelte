@@ -15,6 +15,7 @@ export let editorConfigure = function (inputData) {
 <script>
 import WKCWriteJumpButton from './modules/WKCWriteJumpButton/main.svelte';
 import ModuleFooter from './ModuleFooter.svelte';
+import OLSKToolbar from './modules/OLSKToolbar/main.svelte';
 
 import * as WKCNotesAction from '../../_shared/rs-modules/wkc_notes/action.js';
 import * as WKCVersionsAction from '../../_shared/rs-modules/wkc_versions/action.js';
@@ -338,8 +339,8 @@ function handleKeydown(event) {
 <div class="Container OLSKViewportDetail WKC_ContextMobileView" class:WKC_ContextMobileViewActive={ $mobileViewCurrent === 'ModuleDetail' } class:WKC_ContextMobileViewInactive={ $mobileViewCurrent !== 'ModuleDetail' }>
 
 {#if $noteSelected}
-	<header>
-		<div class="OLSKToolbar OLSKToolbarJustify" id="WKCWriteDetailToolbar">
+	<header id="WKCWriteDetailToolbar">
+		<OLSKToolbar OLSKToolbarJustify={ true }>
 			<div class="OLSKToolbarElementGroup">
 				{#if isMobile()}
 					<button on:click={ noteClear } class="OLSKToolbarButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle WKC_ContextMobileExclusive"style="background-image: url('/panel/_shared/ui-assets/wIKWriteBack.svg')"  title={ OLSKLocalized('WKCWriteDetailToolbarBackButtonText')} id="WKCWriteDetailToolbarBackButton"></button>
@@ -366,7 +367,7 @@ function handleKeydown(event) {
 
 				<button on:click={ noteDelete } class="OLSKToolbarButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle" style="background-image: url('/panel/_shared/ui-assets/wIKWriteDiscard.svg')" title={ OLSKLocalized('WKCWriteDetailToolbarDiscardButtonText') } id="WKCWriteDetailToolbarDiscardButton"></button>
 			</div>
-		</div>
+		</OLSKToolbar>
 	</header>
 
 	<div class="DetailContentContainer EditorContainer">

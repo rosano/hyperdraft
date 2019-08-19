@@ -1,4 +1,5 @@
 <script>
+import OLSKToolbar from './modules/OLSKToolbar/main.svelte';
 import OLSKServiceWorker from '../../_shared/_external/OLSKServiceWorker/Main.svelte';
 
 import {
@@ -8,11 +9,11 @@ import {
 </script>
 
 <footer>
-	<div class="OLSKToolbar">
+	<OLSKToolbar>
 		<div class="OLSKToolbarElementGroup">
 			<button on:click={ () => window.location.reload() } class="OLSKToolbarButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle" title={ OLSKLocalized('WKCWriteFooterToolbarReloadButtonText') } style="background-image: url('/panel/_shared/ui-assets/wIKSharedReload.svg')" id="WKCWriteReloadButton"></button>
 		</div>
-	</div>
+	</OLSKToolbar>
 </footer>
 
 {#if !_WIKIsTestingBehaviour()}

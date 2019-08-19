@@ -1,6 +1,7 @@
 <script>
 import WKCWriteSearchInput from './modules/WKCWriteSearchInput/main.svelte';
 import ModuleFooter from './ModuleFooter.svelte';
+import OLSKToolbar from './modules/OLSKToolbar/main.svelte';
 
 import * as WKCNotesAction from '../../_shared/rs-modules/wkc_notes/action.js';
 
@@ -219,13 +220,13 @@ function handleKeydown(event) {
 <div class="Container OLSKViewportMaster WKCWriteMaster WKC_ContextMobileView" class:WKC_ContextMobileViewActive={ $mobileViewCurrent === 'ModuleMaster' } class:WKC_ContextMobileViewInactive={ $mobileViewCurrent !== 'ModuleMaster' } aria-hidden={ $mobileViewCurrent !== 'ModuleMaster' } class:WKCWriteMasterContainerFocused={ inputFocused }>
 
 <header>
-	<div class="OLSKToolbar">
+	<OLSKToolbar>
 		<WKCWriteSearchInput bind:inputData={ $filterText } on:WKCWriteSearchInputClearButtonDidClick={ clearButtonDidClick } />
 
 		<div class="OLSKToolbarElementGroup">
 			<button on:click={ noteCreate } class="OLSKToolbarButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle" title={ OLSKLocalized('WKCWriteMasterToolbarCreateButtonText') } style="background-image: url('/panel/_shared/ui-assets/wIKSharedCreate.svg')" accesskey="n" id="WKCWriteCreateButton"></button>
 		</div>
-	</div>
+	</OLSKToolbar>
 </header>
 
 <div class="MasterContentContainer OLSKMobileSafariSmoothScrolling">
