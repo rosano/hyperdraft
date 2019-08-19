@@ -7,9 +7,11 @@ import {
 } from '../../_shared/common/global.js';
 </script>
 
-<footer class="OLSKToolbar">
-	<div class="OLSKToolbarElementGroup">
-		<button on:click={ () => window.location.reload() } class="OLSKToolbarButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle" title={ OLSKLocalized('WKCWriteFooterToolbarReloadButtonText') } style="background-image: url('/panel/_shared/ui-assets/wIKSharedReload.svg')" id="WKCWriteReloadButton"></button>
+<footer>
+	<div class="OLSKToolbar">
+		<div class="OLSKToolbarElementGroup">
+			<button on:click={ () => window.location.reload() } class="OLSKToolbarButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle" title={ OLSKLocalized('WKCWriteFooterToolbarReloadButtonText') } style="background-image: url('/panel/_shared/ui-assets/wIKSharedReload.svg')" id="WKCWriteReloadButton"></button>
+		</div>
 	</div>
 </footer>
 

@@ -338,32 +338,34 @@ function handleKeydown(event) {
 <div class="Container OLSKViewportDetail WKC_ContextMobileView" class:WKC_ContextMobileViewActive={ $mobileViewCurrent === 'ModuleDetail' } class:WKC_ContextMobileViewInactive={ $mobileViewCurrent !== 'ModuleDetail' }>
 
 {#if $noteSelected}
-	<header class="OLSKToolbar OLSKToolbarJustify" id="WKCWriteDetailToolbar">
-		<div class="OLSKToolbarElementGroup">
-			{#if isMobile()}
-				<button on:click={ noteClear } class="OLSKToolbarButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle WKC_ContextMobileExclusive"style="background-image: url('/panel/_shared/ui-assets/wIKWriteBack.svg')"  title={ OLSKLocalized('WKCWriteDetailToolbarBackButtonText')} id="WKCWriteDetailToolbarBackButton"></button>
-			{/if}
-		</div>
+	<header>
+		<div class="OLSKToolbar OLSKToolbarJustify" id="WKCWriteDetailToolbar">
+			<div class="OLSKToolbarElementGroup">
+				{#if isMobile()}
+					<button on:click={ noteClear } class="OLSKToolbarButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle WKC_ContextMobileExclusive"style="background-image: url('/panel/_shared/ui-assets/wIKWriteBack.svg')"  title={ OLSKLocalized('WKCWriteDetailToolbarBackButtonText')} id="WKCWriteDetailToolbarBackButton"></button>
+				{/if}
+			</div>
 
-		<div class="OLSKToolbarElementGroup">
-			<WKCWriteJumpButton inputData={ jumpRecipes } />
+			<div class="OLSKToolbarElementGroup">
+				<WKCWriteJumpButton inputData={ jumpRecipes } />
 
-			{#if $noteSelected.WKCNotePublishStatusIsPublished}
-				<span id="PublishStatus">{ OLSKLocalized('WKCWriteDetailToolbarPublishStatusPublished') }</span>
-				<a class="OLSKToolbarButton OLSKLayoutElementTappable" href={ window.OLSKCanonicalFor('WIKRefsRoute', {
-						wkc_note_public_id: $noteSelected.WKCNotePublicID,
-					}) } title={ OLSKLocalized('WKCWriteDetailToolbarVisitButtonText') } style="background-image: url('/panel/_shared/ui-assets/wIKWriteVisit.svg')" target="_blank">&nbsp;</a>
+				{#if $noteSelected.WKCNotePublishStatusIsPublished}
+					<span id="PublishStatus">{ OLSKLocalized('WKCWriteDetailToolbarPublishStatusPublished') }</span>
+					<a class="OLSKToolbarButton OLSKLayoutElementTappable" href={ window.OLSKCanonicalFor('WIKRefsRoute', {
+							wkc_note_public_id: $noteSelected.WKCNotePublicID,
+						}) } title={ OLSKLocalized('WKCWriteDetailToolbarVisitButtonText') } style="background-image: url('/panel/_shared/ui-assets/wIKWriteVisit.svg')" target="_blank">&nbsp;</a>
 
-				<button on:click={ noteUnpublish } class="OLSKToolbarButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle" style="background-image: url('/panel/_shared/ui-assets/wIKWriteUnpublish.svg')" title={ OLSKLocalized('WKCWriteDetailToolbarUnpublishButtonText') } id="WKCWriteDetailToolbarUnpublishButton"></button>
-			{/if}
+					<button on:click={ noteUnpublish } class="OLSKToolbarButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle" style="background-image: url('/panel/_shared/ui-assets/wIKWriteUnpublish.svg')" title={ OLSKLocalized('WKCWriteDetailToolbarUnpublishButtonText') } id="WKCWriteDetailToolbarUnpublishButton"></button>
+				{/if}
 
-			{#if false && !$noteSelected.WKCNotePublishStatusIsPublished }
-				<button on:click={ notePublish } class="OLSKToolbarButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle" style="background-image: url('/panel/_shared/ui-assets/wIKWritePublish.svg')" title={ OLSKLocalized('WKCWriteDetailToolbarPublishButtonText') } id="WKCWriteDetailToolbarPublishButton"></button>
-			{/if}
+				{#if false && !$noteSelected.WKCNotePublishStatusIsPublished }
+					<button on:click={ notePublish } class="OLSKToolbarButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle" style="background-image: url('/panel/_shared/ui-assets/wIKWritePublish.svg')" title={ OLSKLocalized('WKCWriteDetailToolbarPublishButtonText') } id="WKCWriteDetailToolbarPublishButton"></button>
+				{/if}
 
-			<button on:click={ noteVersions } class="OLSKToolbarButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle" style="background-image: url('/panel/_shared/ui-assets/wIKWriteVersions.svg')" title={ OLSKLocalized('WKCWriteDetailToolbarVersionsButtonText') } id="WKCWriteDetailToolbarVersionsButton"></button>
+				<button on:click={ noteVersions } class="OLSKToolbarButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle" style="background-image: url('/panel/_shared/ui-assets/wIKWriteVersions.svg')" title={ OLSKLocalized('WKCWriteDetailToolbarVersionsButtonText') } id="WKCWriteDetailToolbarVersionsButton"></button>
 
-			<button on:click={ noteDelete } class="OLSKToolbarButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle" style="background-image: url('/panel/_shared/ui-assets/wIKWriteDiscard.svg')" title={ OLSKLocalized('WKCWriteDetailToolbarDiscardButtonText') } id="WKCWriteDetailToolbarDiscardButton"></button>
+				<button on:click={ noteDelete } class="OLSKToolbarButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle" style="background-image: url('/panel/_shared/ui-assets/wIKWriteDiscard.svg')" title={ OLSKLocalized('WKCWriteDetailToolbarDiscardButtonText') } id="WKCWriteDetailToolbarDiscardButton"></button>
+			</div>
 		</div>
 	</header>
 
@@ -392,6 +394,10 @@ function handleKeydown(event) {
 	/* ContainerFlexboxParent */
 	display: flex;
 	flex-direction: column;
+}
+
+header {
+	border-bottom: var(--WIKBorderStyle);
 }
 
 .PlaceholderContainer {
