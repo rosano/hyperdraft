@@ -1,8 +1,8 @@
 <script>
-import OLSKFilterInput from 'OLSKFilterInput';
 import ModuleFooter from './ModuleFooter.svelte';
 import OLSKToolbar from 'OLSKToolbar';
 import OLSKToolbarElementGroup from 'OLSKToolbarElementGroup';
+import OLSKFilterInput from 'OLSKFilterInput';
 
 import * as WKCNotesAction from '../../_shared/rs-modules/wkc_notes/action.js';
 

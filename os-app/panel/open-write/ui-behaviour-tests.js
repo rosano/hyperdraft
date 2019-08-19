@@ -292,8 +292,8 @@ describe('WKCWriteBehaviourInteraction', function testWKCWriteBehaviourInteracti
 
 	context('on startup', function() {
 
-		it('focuses .CodeMirror textarea', function() {
-			browser.document.hasFocus(OLSKFilterInput);
+		it('focuses OLSKFilterInput', function() {
+			deepEqual(browser.document.hasFocus(OLSKFilterInput), true);
 		});
 
 	});
@@ -309,7 +309,7 @@ describe('WKCWriteBehaviourInteraction', function testWKCWriteBehaviourInteracti
 			browser.click(OLSKFilterInput);
 			await browser.wait({ element: OLSKFilterInput });
 
-			browser.document.hasFocus(OLSKFilterInput);
+			deepEqual(browser.document.hasFocus(OLSKFilterInput), true);
 
 			await browser.wait({ element: OLSKFilterInput });
 			browser.assert.hasClass('.WKCWriteMaster', 'WKCWriteMasterContainerFocused');
@@ -328,14 +328,14 @@ describe('WKCWriteBehaviourInteraction', function testWKCWriteBehaviourInteracti
 	context('on create', async function() {
 
 		before(async function() {
-			browser.document.hasFocus(OLSKFilterInput);
+			deepEqual(browser.document.hasFocus(OLSKFilterInput), true);
 
 			await uCreateItem(browser);
 			browser.assert.elements(WKCWriteListItem, 1);
 		});
 
 		it('focuses .CodeMirror textarea', async function() {
-			browser.document.hasFocus('.CodeMirror textarea');
+			deepEqual(browser.document.hasFocus('.CodeMirror textarea'), true);
 		});
 
 	});
@@ -349,11 +349,11 @@ describe('WKCWriteBehaviourInteraction', function testWKCWriteBehaviourInteracti
 			browser.click(OLSKFilterInput);
 			await browser.wait({ element: OLSKFilterInput });
 
-			browser.document.hasFocus(OLSKFilterInput);
+			deepEqual(browser.document.hasFocus(OLSKFilterInput), true);
 		});
 
 		it('focuses .CodeMirror textarea', async function() {
-			browser.document.hasFocus('.CodeMirror textarea');
+			deepEqual(browser.document.hasFocus('.CodeMirror textarea'), true);
 		});
 
 		it('focuses .CodeMirror textarea', async function() {
@@ -362,7 +362,7 @@ describe('WKCWriteBehaviourInteraction', function testWKCWriteBehaviourInteracti
 			browser.click(`${ WKCWriteListItem }:nth-child(2)`);
 			await browser.wait({ element: WKCWriteListItem });
 
-			browser.document.hasFocus('.CodeMirror textarea');
+			deepEqual(browser.document.hasFocus('.CodeMirror textarea'), true);
 		});
 
 	});
