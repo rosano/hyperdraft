@@ -222,7 +222,7 @@ function handleKeydown(event) {
 
 <header>
 	<OLSKToolbar>
-		<WKCWriteSearchInput bind:SearchInputText={ $filterText } on:SearchInputDispatchClear={ SearchInputDispatchClear } OLSKLocalized={ OLSKLocalized } />
+		<WKCWriteSearchInput bind:SearchInputText={ $filterText } on:SearchInputDispatchClear={ SearchInputDispatchClear } SearchInputPlaceholder={ OLSKLocalized('WKCWriteSearchInputPlaceholderText') } OLSKLocalized={ OLSKLocalized } />
 
 		<OLSKToolbarElementGroup>
 			<button on:click={ noteCreate } class="OLSKToolbarButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle" title={ OLSKLocalized('WKCWriteMasterToolbarCreateButtonText') } style="background-image: url('/panel/_shared/ui-assets/wIKSharedCreate.svg')" accesskey="n" id="WKCWriteCreateButton"></button>

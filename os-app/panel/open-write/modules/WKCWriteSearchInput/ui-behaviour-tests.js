@@ -53,15 +53,29 @@ describe('WKCWriteSearchInputLanguage', function testWKCWriteSearchInputLanguage
 			});
 
 			it('on startup', function() {
-				deepEqual(browser.query(WKCWriteSearchInput).placeholder, uLocalized('WKCWriteSearchInputPlaceholderText'));
+				browser.assert.attribute(WKCWriteSearchInput, 'placeholder', uLocalized('WKCWriteSearchInputPlaceholderText'));
 			});
 
 			it('if inputData', async function() { 
 				browser.pressButton('#WKCWriteSearchInputTestSetFilled');
 				await browser.wait({ element: WKCWriteSearchInputClearButton });
 
-				deepEqual(browser.query(WKCWriteSearchInputClearButton).title, uLocalized('WKCWriteSearchInputClearButtonText'));
+				browser.assert.attribute(WKCWriteSearchInputClearButton, 'title', uLocalized('WKCWriteSearchInputClearButtonText'));
 				deepEqual(browser.query(WKCWriteSearchInputClearButton).textContent, '');
+			});
+
+			it('on set SearchInputPlaceholder filled', async function() {
+				browser.pressButton('#WKCWriteSearchInputTestSetSearchInputPlaceholderFilled');
+				await browser.wait({ element: WKCWriteSearchInput });
+
+				browser.assert.attribute(WKCWriteSearchInput, 'placeholder', 'alfa');
+			});
+
+			it('on set SearchInputPlaceholder blank', async function() {
+				browser.pressButton('#WKCWriteSearchInputTestSetSearchInputPlaceholderBlank');
+				await browser.wait({ element: WKCWriteSearchInput });
+
+				browser.assert.attribute(WKCWriteSearchInput, 'placeholder', uLocalized('WKCWriteSearchInputPlaceholderText'));
 			});
 
 		});

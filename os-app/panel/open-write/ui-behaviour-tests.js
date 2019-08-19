@@ -198,6 +198,7 @@ describe('WKCWriteBehaviourLanguage', function testWKCWriteBehaviourLanguage() {
 			});
 
 			it('on startup', function() {
+				browser.assert.attribute(WKCWriteSearchInput, 'placeholder', uLocalized('WKCWriteSearchInputPlaceholderText'))
 				deepEqual(browser.query(WKCWriteCreateButton).title, uLocalized('WKCWriteMasterToolbarCreateButtonText'));
 
 				deepEqual(browser.query(WKCWriteExportButton).textContent, uLocalized('WKCUpdateExportText'));

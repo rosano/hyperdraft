@@ -1,5 +1,6 @@
 <script>
 export let TestSearchInputText = '';
+export let TestSearchInputPlaceholder = '';
 
 import Module from './main.svelte';
 import { OLSKLocalized } from './../../../../_shared/common/global.js'
@@ -11,4 +12,4 @@ function SearchInputDispatchClear() {
 }
 </script>
 
-<Module SearchInputText={ TestSearchInputText } OLSKLocalized={ OLSKLocalized } on:SearchInputDispatchClear={ SearchInputDispatchClear } />
+<Module SearchInputText={ TestSearchInputText } SearchInputPlaceholder={ TestSearchInputPlaceholder } OLSKLocalized={ OLSKLocalized } on:SearchInputDispatchClear={ SearchInputDispatchClear } />
