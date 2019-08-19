@@ -1,8 +1,8 @@
 <script>
 import WKCWriteSearchInput from './modules/WKCWriteSearchInput/main.svelte';
 import ModuleFooter from './ModuleFooter.svelte';
-import OLSKToolbar from './modules/OLSKToolbar/main.svelte';
-import OLSKToolbarElementGroup from './modules/OLSKToolbarElementGroup/main.svelte';
+import OLSKToolbar from 'OLSKToolbar';
+import OLSKToolbarElementGroup from 'OLSKToolbarElementGroup';
 
 import * as WKCNotesAction from '../../_shared/rs-modules/wkc_notes/action.js';
 

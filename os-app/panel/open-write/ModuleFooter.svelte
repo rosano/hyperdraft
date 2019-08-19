@@ -1,6 +1,6 @@
 <script>
-import OLSKToolbar from './modules/OLSKToolbar/main.svelte';
-import OLSKToolbarElementGroup from './modules/OLSKToolbarElementGroup/main.svelte';
+import OLSKToolbar from 'OLSKToolbar';
+import OLSKToolbarElementGroup from 'OLSKToolbarElementGroup';
 import OLSKServiceWorker from '../../_shared/_external/OLSKServiceWorker/Main.svelte';
 
 import {

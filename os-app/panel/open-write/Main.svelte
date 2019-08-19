@@ -1,5 +1,5 @@
 <script>
-import OLSKViewportContent from './modules/OLSKViewportContent/main.svelte';
+import OLSKViewportContent from 'OLSKViewportContent';
 import ModuleMaster from './ModuleMaster.svelte';
 import ModuleDetail from './ModuleDetail.svelte';
 import ModuleFooter from './ModuleFooter.svelte';

@@ -55,6 +55,9 @@
     "// FRONTEND NORMALIZE CSS": null,
     "normalize.css": "latest",
     "OLSKLayout": "olsk/OLSKLayout",
+    "OLSKViewportContent": "olsk/OLSKViewportContent",
+    "OLSKToolbar": "olsk/OLSKToolbar",
+    "OLSKToolbarElementGroup": "olsk/OLSKToolbarElementGroup",
 
     "// FRONTEND GENERAL": null,
     "identicon.js": "latest",

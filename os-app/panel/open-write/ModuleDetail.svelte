@@ -15,8 +15,8 @@ export let editorConfigure = function (inputData) {
 <script>
 import WKCWriteJumpButton from './modules/WKCWriteJumpButton/main.svelte';
 import ModuleFooter from './ModuleFooter.svelte';
-import OLSKToolbar from './modules/OLSKToolbar/main.svelte';
-import OLSKToolbarElementGroup from './modules/OLSKToolbarElementGroup/main.svelte';
+import OLSKToolbar from 'OLSKToolbar';
+import OLSKToolbarElementGroup from 'OLSKToolbarElementGroup';
 
 import * as WKCNotesAction from '../../_shared/rs-modules/wkc_notes/action.js';
 import * as WKCVersionsAction from '../../_shared/rs-modules/wkc_versions/action.js';
