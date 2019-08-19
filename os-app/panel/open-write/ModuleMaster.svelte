@@ -1,5 +1,5 @@
 <script>
-import WKCWriteSearchInput from './modules/WKCWriteSearchInput/main.svelte';
+import OLSKFilterInput from 'OLSKFilterInput';
 import ModuleFooter from './ModuleFooter.svelte';
 import OLSKToolbar from 'OLSKToolbar';
 import OLSKToolbarElementGroup from 'OLSKToolbarElementGroup';
@@ -146,7 +146,7 @@ filterText.subscribe(function filterTextDidChange (val) {
 	})).shift());
 });
 
-function SearchInputDispatchClear() {
+function FilterInputDispatchClear() {
 	filterText.set('');
 	
 	defaultFocusNode().focus();
@@ -222,7 +222,7 @@ function handleKeydown(event) {
 
 <header>
 	<OLSKToolbar>
-		<WKCWriteSearchInput bind:SearchInputText={ $filterText } on:SearchInputDispatchClear={ SearchInputDispatchClear } SearchInputPlaceholder={ OLSKLocalized('WKCWriteSearchInputPlaceholderText') } OLSKLocalized={ OLSKLocalized } />
+		<OLSKFilterInput bind:FilterInputText={ $filterText } on:FilterInputDispatchClear={ FilterInputDispatchClear } FilterInputPlaceholder={ OLSKLocalized('WKCWriteFilterInputPlaceholderText') } OLSKLocalized={ OLSKLocalized } />
 
 		<OLSKToolbarElementGroup>
 			<button on:click={ noteCreate } class="OLSKToolbarButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle" title={ OLSKLocalized('WKCWriteMasterToolbarCreateButtonText') } style="background-image: url('/panel/_shared/ui-assets/wIKSharedCreate.svg')" accesskey="n" id="WKCWriteCreateButton"></button>
