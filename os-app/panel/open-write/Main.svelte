@@ -13,7 +13,7 @@ onMount(function () {
 });
 </script>
 
-<div class="AppContainer" class:AppIsLoading={ $isLoading }>
+<div class="AppContainer" class:OLSKIsLoading={ $isLoading }>
 
 <div class="AppContentContainer">
 	<ModuleMaster />
@@ -49,7 +49,7 @@ onMount(function () {
 	flex-direction: column;
 }
 
-.AppIsLoading :global(.WKCSharedToolbar *), .AppIsLoading :global(.MasterContentContainer *), .AppIsLoading :global(.DetailContentContainer *) {
+.OLSKIsLoading :global(.WKCSharedToolbar *), .OLSKIsLoading :global(.MasterContentContainer *), .OLSKIsLoading :global(.DetailContentContainer *) {
 	visibility: hidden;
 }
 
