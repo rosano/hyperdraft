@@ -12,9 +12,6 @@
     "// OLDSKOOL": null,
     "OLSKApp": "olsk/OLSKApp",
 
-    "// NORMALIZE CSS": null,
-    "normalize.css": "latest",
-
     "// DOM MANIPULATION": null,
     "d3": "latest",
 
@@ -54,6 +51,10 @@
     "html-entities": "latest",
     "turndown": "latest",
     "showdown": "latest",
+
+    "// FRONTEND NORMALIZE CSS": null,
+    "normalize.css": "latest",
+    "OLSKLayout": "olsk/OLSKLayout",
 
     "// FRONTEND GENERAL": null,
     "identicon.js": "latest",

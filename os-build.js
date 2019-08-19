@@ -28,6 +28,7 @@
 
 	OLSKAssets.OLSKAssetsCopyAssetsFromTo([
 		'normalize.css',
+		'OLSKLayout',
 		'd3',
 		'remotestoragejs',
 		'remotestorage-widget',
