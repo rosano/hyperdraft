@@ -6,7 +6,7 @@ exports.OLSKControllerRoutes = function() {
 			OLSKRoutePath: '/modules/WKCWriteSearchInput',
 			OLSKRouteMethod: 'get',
 			OLSKRouteFunction: function(req, res, next) {
-				return res.render(req.OLSKLive.OLSKLivePathJoin(__dirname, 'view'));
+				return res.render(req.OLSKLive.OLSKLivePathJoin(__dirname, 'stub-view'));
 			},
 			OLSKRouteLanguages: ['en'],
 		},

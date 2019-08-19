@@ -5,8 +5,13 @@
 	<link rel="stylesheet" type="text/css" href="/panel/_shared/ui-style.css">
 	<link rel="stylesheet" type="text/css" href="/<%= OLSKSharedPageControllerSlug %>/_compiled/ui-style.css">
 
-	<link rel="stylesheet" type="text/css" href="/_shared/_external/launchlet/launchlet.css">
-	<script src="/_shared/_external/launchlet/launchlet.js"></script>
+	<script type="text/javascript">
+		window.OLSKPublicConstants = function (inputData) {
+			return {
+				OLSKSharedPageCurrentLanguage: 'en',
+			}[inputData];
+		};
+	</script>
 </head>
 <body>
 
@@ -15,9 +20,9 @@
 <hr>
 
 <p>
-	<strong>inputData</strong>
-	<button onclick="Main.$set({inputData: 'alfa'})" id="WKCWriteSearchInputTestSetFilled">filled</button>
-	<button onclick="Main.$set({inputData: ''})" id="WKCWriteSearchInputTestSetBlank">blank</button>
+	<strong>TestSearchInputText</strong>
+	<button onclick="Main.$set({TestSearchInputText: 'alfa'})" id="WKCWriteSearchInputTestSetFilled">filled</button>
+	<button onclick="Main.$set({TestSearchInputText: ''})" id="WKCWriteSearchInputTestSetBlank">blank</button>
 </p>
 
 <p>

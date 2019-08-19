@@ -1,5 +1,6 @@
 <script>
-export let inputData = '';
+export let SearchInputText = '';
+export let OLSKLocalized = null;
 
 import { createEventDispatcher } from 'svelte';
 const dispatch = createEventDispatcher();
@@ -10,10 +11,10 @@ function SearchInputDispatchClear() {
 
 <div class="WKCWriteSearchInputContainer OLSKToolbarFlexible">
 
-<input bind:value={ inputData } placeholder="Filter or create" accesskey="f" class="WKCWriteSearchInput" autofocus />
+<input bind:value={ SearchInputText } placeholder={ 'TRANSLATIONMISSING' } accesskey="f" class="WKCWriteSearchInput" autofocus />
 
-{#if inputData}
-	<button on:click={ SearchInputDispatchClear } class="WKCWriteSearchInputClearButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle" style="background-image: url('/panel/_shared/ui-assets/wIKFilterClear.svg')" title="Clear text"></button>
+{#if SearchInputText}
+	<button on:click={ SearchInputDispatchClear } class="WKCWriteSearchInputClearButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle" style="background-image: url('/panel/_shared/ui-assets/wIKFilterClear.svg')" title={ OLSKLocalized('WKCWriteSearchInputClearButtonText') }></button>
 {/if}
 
 </div>
