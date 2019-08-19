@@ -216,7 +216,7 @@ function handleKeydown(event) {
 </script>
 <svelte:window on:keydown={ handleKeydown }/>
 
-<div class="Container WKCWriteMaster WKC_ContextMobileView" class:WKC_ContextMobileViewActive={ $mobileViewCurrent === 'ModuleMaster' } class:WKC_ContextMobileViewInactive={ $mobileViewCurrent !== 'ModuleMaster' } aria-hidden={ $mobileViewCurrent !== 'ModuleMaster' } class:WKCWriteMasterContainerFocused={ inputFocused }>
+<div class="Container OLSKViewportMaster WKCWriteMaster WKC_ContextMobileView" class:WKC_ContextMobileViewActive={ $mobileViewCurrent === 'ModuleMaster' } class:WKC_ContextMobileViewInactive={ $mobileViewCurrent !== 'ModuleMaster' } aria-hidden={ $mobileViewCurrent !== 'ModuleMaster' } class:WKCWriteMasterContainerFocused={ inputFocused }>
 
 <header class="WKCSharedToolbar">
 	<WKCWriteSearchInput bind:inputData={ $filterText } on:WKCWriteSearchInputClearButtonDidClick={ clearButtonDidClick } />
@@ -259,11 +259,9 @@ function handleKeydown(event) {
 }
 
 .Container {
-	border-right: var(--WIKBorderStyle);
+	--OLSKViewportMasterWidth: 300px;
 
-	/* @OLSKViewportContentContainerFlexbox:Child */
-	flex-basis: 300px;
-	flex-shrink: 0;
+	border-right: var(--WIKBorderStyle);
 
 	/* ContainerFlexboxParent */
 	display: flex;

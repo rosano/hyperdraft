@@ -7,6 +7,7 @@
 
 <style>
 .OLSKViewportContentContainer {
+	--OLSKViewportMasterWidth: 300px;
 	/* Chrome/Firefox scroll flexbox child */
 	overflow: auto;
 
@@ -15,5 +16,11 @@
 
 	/* @OLSKViewportContentContainerFlexbox:Parent */
 	display: flex;
+}
+
+.OLSKViewportContentContainer :global(.OLSKViewportMaster) {
+	/* @OLSKViewportContentContainerFlexbox:Child */
+	flex-basis: var(--OLSKViewportMasterWidth);
+	flex-shrink: 0;
 }
 </style>
