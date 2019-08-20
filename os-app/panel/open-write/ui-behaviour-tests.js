@@ -4,8 +4,8 @@ Object.entries({
 	browser: new OLSKBrowser(),
 	kDefaultRoutePath: '/panel/write',
 
-	OLSKFilterInput: '.OLSKFilterInput',
-	OLSKFilterInputClearButton: '.OLSKFilterInputClearButton',
+	WKCWriteFilterInput: '.WKCWriteFilterInput',
+	OLSKInputWrapperClearButton: '.OLSKInputWrapperClearButton',
 	WKCWriteCreateButton: '#WKCWriteCreateButton',
 
 	WKCWriteListItem: '.ListItem',
@@ -46,7 +46,7 @@ describe('WKCWriteBehaviourElements', function testWKCWriteBehaviourElements() {
 	});
 
 	it('on startup', function() {
-		browser.assert.elements(OLSKFilterInput, 1);
+		browser.assert.elements(WKCWriteFilterInput, 1);
 		browser.assert.elements(WKCWriteCreateButton, 1);
 		browser.assert.attribute(WKCWriteCreateButton, 'accesskey', 'n');
 
@@ -104,30 +104,30 @@ describe('WKCWriteBehaviourElements', function testWKCWriteBehaviourElements() {
 		});
 
 		it('presents no items if no match', async function() {
-			browser.fill(OLSKFilterInput, 'test');
-			await browser.wait({ element: OLSKFilterInputClearButton });
+			browser.fill(WKCWriteFilterInput, 'test');
+			await browser.wait({ element: OLSKInputWrapperClearButton });
 
 			browser.assert.elements(WKCWriteListItem, 0);
 		});
 
 		it('presents items if match', async function() {
-			browser.fill(OLSKFilterInput, 'alfa');
-			await browser.wait({ element: OLSKFilterInputClearButton });
+			browser.fill(WKCWriteFilterInput, 'alfa');
+			await browser.wait({ element: OLSKInputWrapperClearButton });
 
 			browser.assert.elements(WKCWriteListItem, 1);
 		});
 
 	});
 
-	context.skip('on click OLSKFilterInputClearButton', function() {
+	context.skip('on click OLSKInputWrapperClearButton', function() {
 
 		before(async function() {
-			browser.pressButton(OLSKFilterInputClearButton);
+			browser.pressButton(OLSKInputWrapperClearButton);
 			await browser.wait({ element: `${WKCWriteListItem}:nth-child(2)` });
 		});
 
-		it('clears OLSKFilterInput', function() {
-			browser.assert.input(OLSKFilterInput, '');
+		it('clears WKCWriteFilterInput', function() {
+			browser.assert.input(WKCWriteFilterInput, '');
 		});
 
 		it('shows all items', function() {
@@ -198,7 +198,7 @@ describe('WKCWriteBehaviourLanguage', function testWKCWriteBehaviourLanguage() {
 			});
 
 			it('on startup', function() {
-				browser.assert.attribute(OLSKFilterInput, 'placeholder', uLocalized('WKCWriteFilterInputPlaceholderText'))
+				browser.assert.attribute(WKCWriteFilterInput, 'placeholder', uLocalized('WKCWriteFilterInputPlaceholderText'))
 				deepEqual(browser.query(WKCWriteCreateButton).title, uLocalized('WKCWriteMasterToolbarCreateButtonText'));
 
 				deepEqual(browser.query(WKCWriteExportButton).textContent, uLocalized('WKCUpdateExportText'));
@@ -292,13 +292,13 @@ describe('WKCWriteBehaviourInteraction', function testWKCWriteBehaviourInteracti
 
 	context('on startup', function() {
 
-		it('focuses OLSKFilterInput', function() {
-			deepEqual(browser.document.hasFocus(OLSKFilterInput), true);
+		it('focuses WKCWriteFilterInput', function() {
+			deepEqual(browser.document.hasFocus(WKCWriteFilterInput), true);
 		});
 
 	});
 
-	context('OLSKFilterInput', function() {
+	context('WKCWriteFilterInput', function() {
 		
 		it('removes class if not active', async function() {
 			browser.click(WKCWriteDetailPlaceholderContainer);
@@ -306,17 +306,17 @@ describe('WKCWriteBehaviourInteraction', function testWKCWriteBehaviourInteracti
 		});
 		
 		it.skip('adds class if active', async function() {
-			browser.click(OLSKFilterInput);
-			await browser.wait({ element: OLSKFilterInput });
+			browser.click(WKCWriteFilterInput);
+			await browser.wait({ element: WKCWriteFilterInput });
 
-			deepEqual(browser.document.hasFocus(OLSKFilterInput), true);
+			deepEqual(browser.document.hasFocus(WKCWriteFilterInput), true);
 
-			await browser.wait({ element: OLSKFilterInput });
+			await browser.wait({ element: WKCWriteFilterInput });
 			browser.assert.hasClass('.WKCWriteMaster', 'WKCWriteMasterContainerFocused');
 		});
 
 		it.skip('creates note on Enter', async function() {
-			browser.fill(OLSKFilterInput, 'bravo');
+			browser.fill(WKCWriteFilterInput, 'bravo');
 			browser.OLSKFireKeyboardEvent(browser.window, 'Enter');
 			await browser.wait({ element: WKCWriteListItem });
 
@@ -328,7 +328,7 @@ describe('WKCWriteBehaviourInteraction', function testWKCWriteBehaviourInteracti
 	context('on create', async function() {
 
 		before(async function() {
-			deepEqual(browser.document.hasFocus(OLSKFilterInput), true);
+			deepEqual(browser.document.hasFocus(WKCWriteFilterInput), true);
 
 			await uCreateItem(browser);
 			browser.assert.elements(WKCWriteListItem, 1);
@@ -346,10 +346,10 @@ describe('WKCWriteBehaviourInteraction', function testWKCWriteBehaviourInteracti
 			await uCreateItem(browser);
 			browser.assert.elements(WKCWriteListItem, 2);
 
-			browser.click(OLSKFilterInput);
-			await browser.wait({ element: OLSKFilterInput });
+			browser.click(WKCWriteFilterInput);
+			await browser.wait({ element: WKCWriteFilterInput });
 
-			deepEqual(browser.document.hasFocus(OLSKFilterInput), true);
+			deepEqual(browser.document.hasFocus(WKCWriteFilterInput), true);
 		});
 
 		it('focuses .CodeMirror textarea', async function() {
@@ -382,8 +382,8 @@ describe('WKCWriteBehaviourInteraction', function testWKCWriteBehaviourInteracti
 		it.skip('selects item if exact title match', async function() {
 			browser.assert.elements(WKCWriteListItem, 2);
 
-			browser.fill(OLSKFilterInput, 'bravo');
-			await browser.wait({ element: OLSKFilterInputClearButton });
+			browser.fill(WKCWriteFilterInput, 'bravo');
+			await browser.wait({ element: OLSKInputWrapperClearButton });
 			// console.log(browser.queryAll(WKCWriteListItem).map((e) => e.outerHTML));
 
 			browser.assert.elements(WKCWriteListItem, 1);

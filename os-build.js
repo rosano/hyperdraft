@@ -52,7 +52,7 @@
 		'url-parse',
 
 		// pass tests
-		'OLSKFilterInput',
+		'OLSKInputWrapper',
 	].concat([
 		]), pathPackage.join(__dirname, 'node_modules'), pathPackage.join(__dirname, 'os-app/_shared/_external'));
 })();

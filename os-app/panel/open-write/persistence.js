@@ -19,7 +19,7 @@ export let filterText = writable('');
 export const isInErrorState = writable(false);
 
 export const defaultFocusNode = function () {
-	return document.querySelector('.OLSKFilterInput');
+	return document.querySelector('.WKCWriteFilterInput');
 };
 
 export const isMobile = function () {

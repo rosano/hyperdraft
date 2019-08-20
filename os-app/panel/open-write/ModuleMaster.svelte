@@ -2,7 +2,7 @@
 import ModuleFooter from './ModuleFooter.svelte';
 import OLSKToolbar from 'OLSKToolbar';
 import OLSKToolbarElementGroup from 'OLSKToolbarElementGroup';
-import OLSKFilterInput from 'OLSKFilterInput';
+import OLSKInputWrapper from 'OLSKInputWrapper';
 
 import * as WKCNotesAction from '../../_shared/rs-modules/wkc_notes/action.js';
 
@@ -22,13 +22,15 @@ import { editorConfigure } from './ModuleDetail.svelte';
 let inputFocused = false;
 import { onMount } from 'svelte';
 onMount(function () {
-	defaultFocusNode().addEventListener('focus', function () {
-		inputFocused = true;
-	});
+	setTimeout(function () {
+		defaultFocusNode().addEventListener('focus', function () {
+			inputFocused = true;
+		});
 
-	defaultFocusNode().addEventListener('blur', function () {
-		inputFocused = false;
-	});
+		defaultFocusNode().addEventListener('blur', function () {
+			inputFocused = false;
+		});
+	}, 100)
 });
 
 async function noteCreate(inputData) {
@@ -222,7 +224,9 @@ function handleKeydown(event) {
 
 <header>
 	<OLSKToolbar>
-		<OLSKFilterInput bind:FilterInputText={ $filterText } on:FilterInputDispatchClear={ FilterInputDispatchClear } FilterInputPlaceholder={ OLSKLocalized('WKCWriteFilterInputPlaceholderText') } OLSKLocalized={ OLSKLocalized } />
+		<OLSKInputWrapper bind:InputWrapperValue={ $filterText } on:InputWrapperDispatchClear={ FilterInputDispatchClear } OLSKLocalized={ OLSKLocalized }>
+			<input bind:value={ $filterText } class="WKCWriteFilterInput" placeholder={ OLSKLocalized('WKCWriteFilterInputPlaceholderText') } />
+		</OLSKInputWrapper>
 
 		<OLSKToolbarElementGroup>
 			<button on:click={ noteCreate } class="OLSKToolbarButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle" title={ OLSKLocalized('WKCWriteMasterToolbarCreateButtonText') } style="background-image: url('/panel/_shared/ui-assets/wIKSharedCreate.svg')" accesskey="n" id="WKCWriteCreateButton"></button>
