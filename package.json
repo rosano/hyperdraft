@@ -2,8 +2,8 @@
   "private": true,
   "scripts": {
     "start": "node ./os-start.js",
-    "preinstall": "node ./os-preinstall.js",
-    "postinstall": "node ./os-build.js",
+    "preinstall": "node ./package-preinstall.js",
+    "postinstall": "node ./package-postinstall.js",
 
     "svelte-build": "rollup -c rollup-config.js",
     "svelte-build-watch": "rollup -w -c rollup-config.js"
