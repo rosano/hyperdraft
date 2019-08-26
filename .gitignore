@@ -7,7 +7,7 @@ os-workspace-testing
 
 # BUILD
 os-app/_shared/_external
-os-app/**/_compiled
+os-app/**/__compiled
 
 # LOCAL
 .env

@@ -21,7 +21,7 @@ export default globPackage.sync(['os-app/**/rollup-start.js'], {
 	  	sourcemap: true,
 	  	format: 'iife',
 	  	name: 'Main',
-	    file: pathPackage.join(pathPackage.dirname(e), '_compiled/ui-behaviour.js'),
+	    file: pathPackage.join(pathPackage.dirname(e), '__compiled/ui-behaviour.js'),
 	  },
   	onwarn: (warning, handler) => {
   		if (['a11y-accesskey', 'a11y-autofocus'].indexOf(warning.pluginCode) !== -1) return;
@@ -35,7 +35,7 @@ export default globPackage.sync(['os-app/**/rollup-start.js'], {
 
   			// extract component CSS into separate file for better performance
   			css: function (css) {
-  				return css.write(pathPackage.join(pathPackage.dirname(e), '_compiled/ui-style.css'));
+  				return css.write(pathPackage.join(pathPackage.dirname(e), '__compiled/ui-style.css'));
   			}
   		}),
 
@@ -55,7 +55,7 @@ export default globPackage.sync(['os-app/**/rollup-start.js'], {
   		// Watch the `public` directory and refresh the
   		// browser on changes when not in production
   		!production && livereload({
-  			watch: pathPackage.join(pathPackage.dirname(e), '_compiled'),
+  			watch: pathPackage.join(pathPackage.dirname(e), '__compiled'),
   			port: 5000 + i,
   		}),
 
