@@ -111,7 +111,7 @@
     "rollup-plugin-terser": "latest",
     "olsk-rollup-i18n": "latest",
     "sirv-cli": "latest",
-    "svelte": "latest",
+    "svelte": "3.9.0",
 
     "eslint-plugin-svelte3": "latest"
   }
