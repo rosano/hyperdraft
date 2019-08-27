@@ -1,7 +1,7 @@
 import * as WKCVersionsMetal from './metal.js';
 import { _WIKIsTestingBehaviour } from '../../common/global.js';
 
-import { factory, detectPrng } from 'ulid'
+import { factory, detectPrng } from 'ulid';
 const uniqueID = _WIKIsTestingBehaviour() ? factory(detectPrng(true)) : factory();
 
 export const WKCVersionsActionCreate = async function(storageClient, inputData) {
