@@ -13,7 +13,7 @@ import globPackage from 'glob';
 export default globPackage.sync(['os-app/**/rollup-start.js'], {
 	matchBase: true,
 }).filter(function (e) {
-	return !e.match(/node_modules|_external/ig);
+	return !e.match(/node_modules|__external/ig);
 }).map(function (e, i) {
 	return {
 	  input: pathPackage.join(pathPackage.dirname(e), 'rollup-start.js'),

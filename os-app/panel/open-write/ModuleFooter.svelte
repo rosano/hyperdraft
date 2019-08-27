@@ -1,7 +1,7 @@
 <script>
 import OLSKToolbar from 'OLSKToolbar';
 import OLSKToolbarElementGroup from 'OLSKToolbarElementGroup';
-import OLSKServiceWorker from '../../_shared/_external/OLSKServiceWorker/Main.svelte';
+import OLSKServiceWorker from '../../_shared/__external/OLSKServiceWorker/Main.svelte';
 
 import {
 	OLSKLocalized,

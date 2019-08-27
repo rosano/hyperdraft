@@ -47,14 +47,14 @@
 	};
 
 	outputData.push(...[
-		'/_shared/_external/normalize.css/normalize.css',
-		'/_shared/_external/d3/dist/d3.min.js',
+		'/_shared/__external/normalize.css/normalize.css',
+		'/_shared/__external/d3/dist/d3.min.js',
 	].map(pathToTag));
 
 	if (locals.OLSKPagePublicLocalizedStringKeys) {
 		outputData.push(...[
-			'/_shared/_external/OLSKInternational/main.js',
-			'/_shared/_external/OLSKString/main.js',
+			'/_shared/__external/OLSKInternational/main.js',
+			'/_shared/__external/OLSKString/main.js',
 			].map(pathToTag));
 		
 		outputData.push(`<script type="text/javascript">
@@ -70,7 +70,7 @@
 
 	if (locals.OLSKPagePublicRouteKeys) {
 		outputData.push(...[
-			'/_shared/_external/OLSKRouting/main.js',
+			'/_shared/__external/OLSKRouting/main.js',
 			].map(pathToTag));
 		
 		outputData.push(`<script type="text/javascript">

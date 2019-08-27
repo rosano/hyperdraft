@@ -6,7 +6,7 @@ os-cache
 os-workspace-testing
 
 # BUILD
-os-app/_shared/_external
+os-app/_shared/__external
 os-app/**/__compiled
 
 # LOCAL
