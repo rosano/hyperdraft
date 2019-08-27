@@ -20,9 +20,9 @@
 	);
 })();
 
-//# OLSKStartExternalAssets
+//# OLSKPostinstallExternalAssets
 
-(function OLSKStartExternalAssets() {
+(function OLSKPostinstallExternalAssets() {
 	const OLSKAssets = require('./node_modules/OLSKApp/modules/OLSKAssets/main.js');
 	const pathPackage = require('path');
 
@@ -57,9 +57,9 @@
 	]), pathPackage.join(__dirname, 'node_modules'), pathPackage.join(__dirname, 'os-app/_shared/__external'));
 })();
 
-//# OLSKStartRollup
+//# OLSKPostinstallRollup
 
-(function OLSKStartRollup() {
+(function OLSKPostinstallRollup() {
 	if (process.env.NODE_ENV !== 'production') {
 		return;
 	}
