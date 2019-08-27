@@ -30,7 +30,7 @@ onMount(function () {
 		defaultFocusNode().addEventListener('blur', function () {
 			inputFocused = false;
 		});
-	}, 100)
+	}, 100);
 });
 
 async function noteCreate(inputData) {

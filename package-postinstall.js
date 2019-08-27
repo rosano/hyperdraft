@@ -9,15 +9,15 @@
 	require('fs').writeFileSync(filePath, require('fs')
 		.readFileSync(filePath, 'utf8')
 		.replace(
-			`console.error("secure crypto unusable, falling back to insecure Math.random()!");`,
+			'console.error("secure crypto unusable, falling back to insecure Math.random()!");',
 			'// console.error("secure crypto unusable, falling back to insecure Math.random()!");')
 		.replace(
-			`var ulid = factory();`,
-			`// var ulid = factory();`)
+			'var ulid = factory();',
+			'// var ulid = factory();')
 		.replace(
-			`export { replaceCharAt, incrementBase32, randomChar, encodeTime, encodeRandom, decodeTime, detectPrng, factory, monotonicFactory, ulid };`,
-			`export { replaceCharAt, incrementBase32, randomChar, encodeTime, encodeRandom, decodeTime, detectPrng, factory, monotonicFactory };`)
-		)
+			'export { replaceCharAt, incrementBase32, randomChar, encodeTime, encodeRandom, decodeTime, detectPrng, factory, monotonicFactory, ulid };',
+			'export { replaceCharAt, incrementBase32, randomChar, encodeTime, encodeRandom, decodeTime, detectPrng, factory, monotonicFactory };')
+	);
 })();
 
 //# OLSKStartExternalAssets
@@ -54,7 +54,7 @@
 		// pass tests
 		'OLSKInputWrapper',
 	].concat([
-		]), pathPackage.join(__dirname, 'node_modules'), pathPackage.join(__dirname, 'os-app/_shared/__external'));
+	]), pathPackage.join(__dirname, 'node_modules'), pathPackage.join(__dirname, 'os-app/_shared/__external'));
 })();
 
 //# OLSKStartRollup

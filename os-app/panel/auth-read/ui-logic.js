@@ -6,8 +6,8 @@
 
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
-	typeof define === 'function' && define.amd ? define(['exports'], factory) :
-	(factory((global.WKCReadLogic = global.WKCReadLogic || {})));
+		typeof define === 'function' && define.amd ? define(['exports'], factory) :
+			(factory((global.WKCReadLogic = global.WKCReadLogic || {})));
 }(this, (function (exports) { 'use strict';
 
 	const d3Package = typeof require === 'undefined' ? window.d3 : require('d3');
@@ -28,7 +28,7 @@
 		}
 
 		if (/^(ftp|http|https):\/\/[^ "]+$/.test(param1)) {
-			return param1
+			return param1;
 		}
 
 		var hostMatch = param2.match(/https?:\/\/(.[^/]+)/);
