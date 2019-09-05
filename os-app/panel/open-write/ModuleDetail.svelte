@@ -28,7 +28,7 @@ import { noteSelected } from './_shared.js';
 let jumpRecipes = [];
 
 noteSelected.subscribe(function (val) {
-	window.LCHPageFormulas = null;
+	window.LCHPageRecipes = null;
 	jumpRecipes = [];
 
 	if (!val && editorInstance) {
