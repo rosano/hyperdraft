@@ -70,7 +70,7 @@ let languageDictionary = {};
 	}, {});
 
 	global.OLSKTestingLocalized = function(translationConstant, languageCode) {
-		return OLSKInternational.OLSKInternationalLocalizedString(translationConstant, languageDictionary[languageCode]);
+		return OLSKInternational.OLSKInternationalLocalizedString(translationConstant, languageDictionary[languageCode]).replace('TRANSLATION_MISSING', '');
 	};
 })();
 
