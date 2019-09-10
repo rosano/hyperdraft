@@ -60,17 +60,17 @@ let languageDictionary = {};
 	  matchBase: true,
 	  cwd: baseDirectory,
 	}).filter(function(e) {
-	  return OLSKInternational.OLSKInternationalInputDataIsTranslationFileBasename(pathPackage.basename(e));
+	  return OLSKInternational.OLSKInternationalIsTranslationFileBasename(pathPackage.basename(e));
 	}).map(function (e) {
 		return pathPackage.join(baseDirectory, e);
 	}).reduce(function(coll, item) {
-		let languageID = OLSKInternational.OLSKInternationalLanguageIDForTranslationFileBasename(pathPackage.basename(item));
+		let languageID = OLSKInternational.OLSKInternationalLanguageID(pathPackage.basename(item));
 
 		return (coll[languageID] = Object.assign(coll[languageID] || {}, require('js-yaml').safeLoad(require('fs').readFileSync(item, 'utf8')))) && coll;
 	}, {});
 
 	global.OLSKTestingLocalized = function(translationConstant, languageCode) {
-		return OLSKInternational.OLSKInternationalLocalizedStringWithTranslationKeyAndTranslationDictionary(translationConstant, languageDictionary[languageCode]);
+		return OLSKInternational.OLSKInternationalLocalizedString(translationConstant, languageDictionary[languageCode]);
 	};
 })();
 

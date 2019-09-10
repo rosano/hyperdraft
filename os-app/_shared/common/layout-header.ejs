@@ -60,7 +60,7 @@
 		outputData.push(`<script type="text/javascript">
 		window.OLSKFormatted = OLSKString.OLSKStringWithFormat;
 		window.OLSKLocalized = function(translationConstant) {
-			return OLSKInternational.OLSKInternationalLocalizedStringWithTranslationKeyAndTranslationDictionary(translationConstant, ${ JSON.stringify(OLSKPagePublicLocalizedStringKeys.reduce(function(map, e) {
+			return OLSKInternational.OLSKInternationalLocalizedString(translationConstant, ${ JSON.stringify(OLSKPagePublicLocalizedStringKeys.reduce(function(map, e) {
 					map[e] = OLSKLocalized(e);
 					return map;
 				}, {})) });
