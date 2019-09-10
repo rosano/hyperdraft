@@ -72,9 +72,9 @@ describe('WKCWriteJumpButtonInteraction', function testWKCWriteJumpButtonInterac
 		await browser.wait({ element: WKCWriteJumpButton });
 
 		browser.pressButton(WKCWriteJumpButton);
-		await browser.wait({ element: '.Container .Bezel' });
+		await browser.wait({ element: '.LCHLauncherFilterPrompt' });
 
-		browser.assert.elements('.Container .Bezel', 1);
+		browser.assert.elements('.LCHLauncherFilterPrompt', 1);
 	});
 
 	it('runs callback on select', async function() {
@@ -83,7 +83,7 @@ describe('WKCWriteJumpButtonInteraction', function testWKCWriteJumpButtonInterac
 		browser.click('.LCHLauncherResultListItem');
 		// await browser.wait({ element: '.LCHLauncherResultListItem' });
 
-		browser.assert.elements('.Container .Bezel', 0);
+		browser.assert.elements('.LCHLauncherFilterPrompt', 0);
 		deepEqual(browser.query('#WKCWriteJumpButtonTestRun').textContent, '1');
 	});
 
