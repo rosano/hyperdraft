@@ -1,9 +1,8 @@
-import { throws, deepEqual } from 'assert';
+import { deepEqual } from 'assert';
+
+const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().WIKWriteRoute;
 
 Object.entries({
-	browser: new OLSKBrowser(),
-	kDefaultRoutePath: '/panel/write',
-
 	WKCWriteFilterInput: '.WKCWriteFilterInput',
 	OLSKInputWrapperClearButton: '.OLSKInputWrapperClearButton',
 	WKCWriteCreateButton: '#WKCWriteCreateButton',
@@ -39,10 +38,10 @@ Object.entries({
 	return global[e.shift()]  = e.pop();
 });
 
-describe('WKCWriteBehaviourElements', function testWKCWriteBehaviourElements() {
+describe('WKCWriteUIAccess', function () {
 
 	before(function() {
-		return browser.visit(kDefaultRoutePath);
+		return browser.visit(kDefaultRoute.OLSKRoutePath);
 	});
 
 	it('on startup', function() {
@@ -179,216 +178,6 @@ describe('WKCWriteBehaviourElements', function testWKCWriteBehaviourElements() {
 			browser.assert.elements(WKCWriteDetailToolbar, 0);
 		});
 		
-	});
-
-});
-
-describe('WKCWriteBehaviourLanguage', function testWKCWriteBehaviourLanguage() {
-
-	['en'].forEach(function (languageCode) {
-
-		context(languageCode, function () {
-
-			const uLocalized = function (inputData) {
-				return OLSKTestingLocalized(inputData, languageCode);
-			};
-
-			before(function() {
-				return browser.visit(`${ languageCode }${ kDefaultRoutePath }`);
-			});
-
-			it('on startup', function() {
-				browser.assert.attribute(WKCWriteFilterInput, 'placeholder', uLocalized('WKCWriteFilterInputPlaceholderText'));
-				deepEqual(browser.query(WKCWriteCreateButton).title, uLocalized('WKCWriteMasterToolbarCreateButtonText'));
-
-				deepEqual(browser.query(WKCWriteExportButton).textContent, uLocalized('WKCUpdateExportText'));
-
-				deepEqual(browser.query(WKCWriteDetailPlaceholderContainer).textContent, uLocalized('WKCWriteDetailPlaceholderText'));
-
-				deepEqual(browser.query(WKCWriteReloadButton).title, uLocalized('WKCWriteFooterToolbarReloadButtonText'));
-			});
-
-			it('on create', async function() {
-				await uCreateItem(browser);
-
-				deepEqual(browser.query(WKCWriteListItemAccessibilitySummary).textContent, '');
-				deepEqual(browser.query(WKCWriteListItemTitle).textContent, '');
-				deepEqual(browser.query(WKCWriteListItemSnippet).textContent, '');
-
-				// deepEqual(browser.query(WKCWriteDetailToolbarBackButton).title, uLocalized('WKCWriteDetailToolbarBackButtonText'));
-				deepEqual(browser.query(WKCWriteDetailToolbarVersionsButton).title, uLocalized('WKCWriteDetailToolbarVersionsButtonText'));
-				deepEqual(browser.query(WKCWriteDetailToolbarDiscardButton).title, uLocalized('WKCWriteDetailToolbarDiscardButtonText'));
-				
-				deepEqual(browser.query(WKCWriteEditorDebugInput).value, '');
-			});
-
-			it('on edit title', async function() {
-				browser.fill(WKCWriteEditorDebugInput, 'alfa');
-				await browser.wait({ element: WKCWriteListItem });
-
-				deepEqual(browser.query(WKCWriteListItemAccessibilitySummary).textContent, 'alfa');
-				deepEqual(browser.query(WKCWriteListItemTitle).textContent, 'alfa');
-				deepEqual(browser.query(WKCWriteListItemSnippet).textContent, '');
-			});
-
-			it('on edit body', async function() {
-				browser.fill(WKCWriteEditorDebugInput, 'alfa\nbravo');
-				await browser.wait({ element: WKCWriteListItem });
-
-				deepEqual(browser.query(WKCWriteListItemAccessibilitySummary).textContent, 'alfa');
-				deepEqual(browser.query(WKCWriteListItemTitle).textContent, 'alfa');
-				deepEqual(browser.query(WKCWriteListItemSnippet).textContent, 'bravo');
-			});
-
-			it('on edit long title', async function() {
-				browser.fill(WKCWriteEditorDebugInput, 'alfa bravo charlie delta echo foxtrot golf hotel juliet kilos');
-				await browser.wait({ element: WKCWriteListItem });
-
-				deepEqual(browser.query(WKCWriteListItemAccessibilitySummary).textContent, 'alfa bravo charlie delta echo foxtrot golf hotel juliet…');
-				deepEqual(browser.query(WKCWriteListItemTitle).textContent, 'alfa bravo charlie delta echo foxtrot golf hotel juliet');
-				deepEqual(browser.query(WKCWriteListItemSnippet).textContent, '');
-			});
-
-			it('on edit long body', async function() {
-				browser.fill(WKCWriteEditorDebugInput, '\nLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.');
-				await browser.wait({ element: WKCWriteListItem });
-
-				deepEqual(browser.query(WKCWriteListItemAccessibilitySummary).textContent, '');
-				deepEqual(browser.query(WKCWriteListItemTitle).textContent, '');
-				deepEqual(browser.query(WKCWriteListItemSnippet).textContent, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the…');
-
-				browser.fill(WKCWriteEditorDebugInput, 'alfa\nbravo');
-			});
-
-			it('on create nth item', async function() {
-				await uCreateItem(browser);
-
-				deepEqual(browser.query(WKCWriteEditorDebugInput).value, '');
-			});
-
-			it('on select 1st item', async function() {
-				browser.click(`${ WKCWriteListItem }:nth-child(2)`);
-				await browser.wait({ element: WKCWriteListItem });
-
-				deepEqual(browser.query(WKCWriteEditorDebugInput).value, 'alfa\nbravo');
-			});
-
-			it('on delete', async function() {
-				deepEqual((await browser.OLSKConfirm(async function () {
-					await browser.pressButton(WKCWriteDetailToolbarDiscardButton);
-				})).question, uLocalized('WKCWriteNotesDeleteAlertText'));
-			});
-
-		});
-		
-	});
-});
-
-describe('WKCWriteBehaviourInteraction', function testWKCWriteBehaviourInteraction() {
-
-	before(function() {
-		return browser.visit(kDefaultRoutePath);
-	});
-
-	context('on startup', function() {
-
-		it('focuses WKCWriteFilterInput', function() {
-			deepEqual(browser.document.hasFocus(WKCWriteFilterInput), true);
-		});
-
-	});
-
-	context('WKCWriteFilterInput', function() {
-		
-		it('removes class if not active', async function() {
-			browser.click(WKCWriteDetailPlaceholderContainer);
-			browser.assert.hasNoClass('.WKCWriteMaster', 'WKCWriteMasterContainerFocused');
-		});
-		
-		it.skip('adds class if active', async function() {
-			browser.click(WKCWriteFilterInput);
-			await browser.wait({ element: WKCWriteFilterInput });
-
-			deepEqual(browser.document.hasFocus(WKCWriteFilterInput), true);
-
-			await browser.wait({ element: WKCWriteFilterInput });
-			browser.assert.hasClass('.WKCWriteMaster', 'WKCWriteMasterContainerFocused');
-		});
-
-		it.skip('creates note on Enter', async function() {
-			browser.fill(WKCWriteFilterInput, 'bravo');
-			browser.OLSKFireKeyboardEvent(browser.window, 'Enter');
-			await browser.wait({ element: WKCWriteListItem });
-
-			browser.assert.elements(WKCWriteListItem, 1);
-		});
-
-	});
-
-	context('on create', async function() {
-
-		before(async function() {
-			deepEqual(browser.document.hasFocus(WKCWriteFilterInput), true);
-
-			await uCreateItem(browser);
-			browser.assert.elements(WKCWriteListItem, 1);
-		});
-
-		it('focuses .CodeMirror textarea', async function() {
-			deepEqual(browser.document.hasFocus('.CodeMirror textarea'), true);
-		});
-
-	});
-
-	context('on select', async function() {
-
-		before(async function() {
-			await uCreateItem(browser);
-			browser.assert.elements(WKCWriteListItem, 2);
-
-			browser.click(WKCWriteFilterInput);
-			await browser.wait({ element: WKCWriteFilterInput });
-
-			deepEqual(browser.document.hasFocus(WKCWriteFilterInput), true);
-		});
-
-		it('focuses .CodeMirror textarea', async function() {
-			deepEqual(browser.document.hasFocus('.CodeMirror textarea'), true);
-		});
-
-		it('focuses .CodeMirror textarea', async function() {
-			await uCreateItem(browser);
-
-			browser.click(`${ WKCWriteListItem }:nth-child(2)`);
-			await browser.wait({ element: WKCWriteListItem });
-
-			deepEqual(browser.document.hasFocus('.CodeMirror textarea'), true);
-		});
-
-	});
-
-	context('on filter', function () {
-		
-		before(async function() {
-			browser.fill('#WKCWriteEditorDebugInput', 'alfa');
-
-			browser.click(`${ WKCWriteListItem }:nth-child(2)`);
-			await browser.wait({ element: WKCWriteListItem });
-
-			browser.fill('#WKCWriteEditorDebugInput', 'bravo');
-			await browser.wait({ element: WKCWriteListItem });
-		});
-
-		it.skip('selects item if exact title match', async function() {
-			browser.assert.elements(WKCWriteListItem, 2);
-
-			browser.fill(WKCWriteFilterInput, 'bravo');
-			await browser.wait({ element: OLSKInputWrapperClearButton });
-			// console.log(browser.queryAll(WKCWriteListItem).map((e) => e.outerHTML));
-
-			browser.assert.elements(WKCWriteListItem, 1);
-		});
-
 	});
 
 });

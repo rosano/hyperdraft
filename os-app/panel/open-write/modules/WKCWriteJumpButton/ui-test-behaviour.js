@@ -1,6 +1,5 @@
-import { throws, deepEqual } from 'assert';
+import { deepEqual } from 'assert';
 
-const browser = new OLSKBrowser();
 const kDefaultRoutePath = '/modules/WKCWriteJumpButton';
 const WKCWriteJumpButton = '.WKCWriteJumpButton';
 

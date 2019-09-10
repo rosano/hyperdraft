@@ -42,6 +42,8 @@
 	};
 
 	global.OLSKBrowser = Browser;
+
+	global.browser = new OLSKBrowser();
 })();
 
 let languageDictionary = {};
