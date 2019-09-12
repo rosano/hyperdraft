@@ -134,7 +134,7 @@ let languageDictionary = {};
 
 (function OLSKMochaPreprocess() {
 	const fs = require('fs');
-	const oldRequire = require('olsk-rollup-i18n')()._OLSKRollupI18NReplaceInternationalizationToken;
+	const oldRequire = require('olsk-rollup-plugin-localize')()._OLSKRollupI18NReplaceInternationalizationToken;
 	const replaceFunctions = [
 		require('OLSKTesting')._OLSKTestingMochaReplaceES6Import,
 		function (inputData) {
