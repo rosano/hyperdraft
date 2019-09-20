@@ -360,7 +360,7 @@ function handleKeydown(event) {
 					<button on:click={ noteUnpublish } class="OLSKToolbarButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle" style="background-image: url('/panel/_shared/ui-assets/wIKWriteUnpublish.svg')" title={ OLSKLocalized('WKCWriteDetailToolbarUnpublishButtonText') } id="WKCWriteDetailToolbarUnpublishButton"></button>
 				{/if}
 
-				{#if false && !$noteSelected.WKCNotePublishStatusIsPublished }
+				{#if !$noteSelected.WKCNotePublishStatusIsPublished }
 					<button on:click={ notePublish } class="OLSKToolbarButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle" style="background-image: url('/panel/_shared/ui-assets/wIKWritePublish.svg')" title={ OLSKLocalized('WKCWriteDetailToolbarPublishButtonText') } id="WKCWriteDetailToolbarPublishButton"></button>
 				{/if}
 

@@ -1,7 +1,7 @@
 import * as WKCNotesModel from './model.js';
 import * as WKCNotesMetal from './metal.js';
 import * as WKCVersionsAction from '../wkc_versions/action.js';
-import * as WKCSettingsAction from '../wkc_settings/action.js';
+import WKCSettingsAction from '../wkc_settings/action.js';
 import * as WKCParser from '../../WKCParser/main.js';
 import { _WIKIsTestingBehaviour } from '../../common/global.js';
 
