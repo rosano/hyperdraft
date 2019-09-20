@@ -18,6 +18,7 @@
     "// REMOTE STORAGE": null,
     "remotestoragejs": "latest",
     "remotestorage-widget": "latest",
+    "OLSKRemoteStorage": "olsk/OLSKRemoteStorage",
 
     "// UNIQUE IDS": null,
     "ulid": "latest",
