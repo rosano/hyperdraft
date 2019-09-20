@@ -4,6 +4,14 @@ body {
 	background: #eeeeee;
 }
 
+h1, h2,  h3 {
+	font-family: 'Helvetica Neue';
+}
+
+h1:first-child {
+	margin-top: 10px;
+}
+
 header,article {
 	max-width: 400px;
 	padding: 20px;
@@ -12,6 +20,9 @@ header,article {
 }
 
 article {
+
+	font-family: 'Lucida Grande', sans-serif;
+	font-size: 10pt;
 	background: #ffffff;
 
 	word-wrap: break-word;
@@ -32,8 +43,8 @@ li {
 }
 
 hr {
-	border: 1px solid #dddddd;
-	border-bottom: none;
+	height: 1px;
+	border: none;
 
-	margin: 15px auto;
+	background: black;
 }
