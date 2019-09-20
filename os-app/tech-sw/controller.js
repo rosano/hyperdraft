@@ -1,6 +1,6 @@
 const kWKCServiceWorkerVersionID = process.env.HEROKU_SLUG_COMMIT || Date.now();
 
-//_ OLSKControllerRoutes
+const OLSKServiceWorker = require('../_shared/__external/OLSKServiceWorker/main.js');
 
 exports.OLSKControllerRoutes = function() {
 	return {
@@ -8,9 +8,10 @@ exports.OLSKControllerRoutes = function() {
 			OLSKRoutePath: '/sw.js',
 			OLSKRouteMethod: 'get',
 			OLSKRouteFunction: function(req, res, next) {
-				return res.type('js').render(req.OLSKLive.OLSKLivePathJoin(__dirname, 'view.ejs'), {
-					WKCServiceWorkerVersionID: kWKCServiceWorkerVersionID,
-				});
+				return res.type('js').send(OLSKServiceWorker.OLSKServiceWorkerView({
+					VERSION_ID_TOKEN: kWKCServiceWorkerVersionID.toString(),
+					REFERRER_MATCH_TOKEN: require('../panel/open-write/controller.js').OLSKControllerRoutes().WIKWriteRoute.OLSKRoutePath.replace(/\//g, '\\/'),
+				}));
 			},
 		},
 	};
