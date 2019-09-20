@@ -58,7 +58,7 @@ exports.OLSKControllerTasks = function () {
 	return [
 		{
 			OLSKTaskName: 'WKCRefCacheTask',
-			OLSKTaskFireTimeInterval: 60 * 60,
+			OLSKTaskFireTimeInterval: 60 * 2,
 			OLSKTaskShouldBePerformed: function () {
 				return true;
 			},
