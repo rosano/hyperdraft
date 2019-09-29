@@ -44,7 +44,7 @@ describe('WKCReadModuleSubscribeSuggestionsFor', function testWKCReadModuleSubsc
 	it('throws error if not string', function() {
 		assert.throws(function() {
 			suggestLibrary.WKCReadModuleSubscribeSuggestionsFor(null);
-		}, /WKCErrorInputInvalid/);
+		}, /WKCErrorInputNotValid/);
 	});
 
 	it('returns none if empty', function() {

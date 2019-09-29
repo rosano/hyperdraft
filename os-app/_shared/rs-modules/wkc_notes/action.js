@@ -10,7 +10,7 @@ const uniqueID = _WIKIsTestingBehaviour() ? factory(detectPrng(true)) : factory(
 
 export const WKCNotesActionCreate = async function(storageClient, inputData) {
 	if (typeof inputData !== 'object' || inputData === null) {
-		return Promise.reject(new Error('WKCErrorInputInvalid'));
+		return Promise.reject(new Error('WKCErrorInputNotValid'));
 	}
 
 	let creationDate = new Date();
@@ -24,7 +24,7 @@ export const WKCNotesActionCreate = async function(storageClient, inputData) {
 
 export const WKCNotesActionUpdate = async function(storageClient, inputData) {
 	if (typeof inputData !== 'object' || inputData === null) {
-		return Promise.reject(new Error('WKCErrorInputInvalid'));
+		return Promise.reject(new Error('WKCErrorInputNotValid'));
 	}
 
 	return await WKCNotesMetal.WKCNotesMetalWrite(storageClient, Object.assign(inputData, {
@@ -43,7 +43,7 @@ export const WKCNotesActionDelete = async function(storageClient, inputData) {
 
 export const WKCNotesActionQuery = async function(storageClient, inputData) {
 	if (typeof inputData !== 'object' || inputData === null) {
-		return Promise.reject(new Error('WKCErrorInputInvalid'));
+		return Promise.reject(new Error('WKCErrorInputNotValid'));
 	}
 
 	return Promise.resolve(Object.values(await WKCNotesMetal.WKCNotesMetalList(storageClient)).sort(function (a, b) {
@@ -67,7 +67,7 @@ export const WKCNotesActionQuery = async function(storageClient, inputData) {
 
 export const WKCNotesActionPublish = async function(storageClient, inputData) {
 	if (typeof inputData !== 'object' || inputData === null) {
-		return Promise.reject(new Error('WKCErrorInputInvalid'));
+		return Promise.reject(new Error('WKCErrorInputNotValid'));
 	}
 
 	if (!inputData.WKCNotePublicID) {
@@ -83,7 +83,7 @@ export const WKCNotesActionPublish = async function(storageClient, inputData) {
 
 export const WKCNotesActionPublicRead = async function(storageClient, inputData) {
 	if (typeof inputData !== 'string') {
-		return Promise.reject(new Error('WKCErrorInputInvalid'));
+		return Promise.reject(new Error('WKCErrorInputNotValid'));
 	}
 
 	return (await WKCNotesActionQuery(storageClient, {
@@ -94,7 +94,7 @@ export const WKCNotesActionPublicRead = async function(storageClient, inputData)
 
 export const WKCNotesActionUnpublish = async function(storageClient, inputData) {
 	if (typeof inputData !== 'object' || inputData === null) {
-		return Promise.reject(new Error('WKCErrorInputInvalid'));
+		return Promise.reject(new Error('WKCErrorInputNotValid'));
 	}
 
 	return await WKCNotesActionUpdate(storageClient, Object.assign(inputData, {

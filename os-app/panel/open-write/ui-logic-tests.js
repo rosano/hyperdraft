@@ -32,7 +32,7 @@ describe('WIKWriteTruncatedTitleFor', function testWIKWriteTruncatedTitleFor() {
 	it('throws error if not string', function() {
 		throws(function() {
 			mainModule.WIKWriteTruncatedTitleFor(null);
-		}, /WKCErrorInputInvalid/);
+		}, /WKCErrorInputNotValid/);
 	});
 
 	it('returns input', function() {
@@ -84,7 +84,7 @@ describe('WKCWriteLineObjectsFor', function testWKCWriteLineObjectsFor() {
 	it('throws error if not array', function() {
 		throws(function() {
 			mainModule.WKCWriteLineObjectsFor(null);
-		}, /WKCErrorInputInvalid/);
+		}, /WKCErrorInputNotValid/);
 	});
 
 	it('returns array', function() {
@@ -167,7 +167,7 @@ describe('WKCWriteHeaderTokensFrom', function testWKCWriteHeaderTokensFrom() {
 	it('throws error if not array', function() {
 		throws(function() {
 			mainModule.WKCWriteHeaderTokensFrom(null);
-		}, /WKCErrorInputInvalid/);
+		}, /WKCErrorInputNotValid/);
 	});
 
 	it('returns array', function() {

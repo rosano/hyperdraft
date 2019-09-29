@@ -1,6 +1,6 @@
 export const WIKWriteTruncatedTitleFor = function (inputData, param2) {
 	if (typeof inputData !== 'string') {
-		throw new Error('WKCErrorInputInvalid');
+		throw new Error('WKCErrorInputNotValid');
 	}
 
 	const threshold = 60;
@@ -22,7 +22,7 @@ export const WKCWriteLogicListSort = function (a, b) {
 
 export const WKCWriteLineObjectsFor = function (inputData) {
 	if (!Array.isArray(inputData)) {
-		throw new Error('WKCErrorInputInvalid');
+		throw new Error('WKCErrorInputNotValid');
 	}
 
 	return Object.values(inputData.reduce(function (coll, e) {
@@ -46,7 +46,7 @@ export const WKCWriteLineObjectsFor = function (inputData) {
 
 export const WKCWriteHeaderTokensFrom = function (inputData) {
 	if (!Array.isArray(inputData)) {
-		throw new Error('WKCErrorInputInvalid');
+		throw new Error('WKCErrorInputNotValid');
 	}
 
 	return [].concat.apply([], inputData.map(function (e, i) {

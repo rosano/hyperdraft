@@ -24,7 +24,7 @@ const kTesting = {
 describe('WKCVersionsActionCreate', function testWKCVersionsActionCreate() {
 
 	it('rejects if not object', async function() {
-		await rejects(mainModule.WKCVersionsActionCreate(WKCTestingStorageClient, null), /WKCErrorInputInvalid/);
+		await rejects(mainModule.WKCVersionsActionCreate(WKCTestingStorageClient, null), /WKCErrorInputNotValid/);
 	});
 
 	it('returns object with WKCErrors if not valid', async function() {
@@ -63,7 +63,7 @@ describe('WKCVersionsActionCreate', function testWKCVersionsActionCreate() {
 describe('WKCVersionsActionQuery', function testWKCVersionsActionQuery() {
 
 	it('rejects if not object', async function() {
-		await rejects(mainModule.WKCVersionsActionQuery(WKCTestingMongoClient, null), /WKCErrorInputInvalid/);
+		await rejects(mainModule.WKCVersionsActionQuery(WKCTestingMongoClient, null), /WKCErrorInputNotValid/);
 	});
 
 	it('returns array', async function() {
@@ -98,7 +98,7 @@ describe('WKCVersionsActionQuery', function testWKCVersionsActionQuery() {
 describe('WKCVersionsActionDelete', function testWKCVersionsActionDelete() {
 
 	it('rejects if not string', async function() {
-		await rejects(mainModule.WKCVersionsActionDelete(WKCTestingStorageClient, 1), /WKCErrorInputInvalid/);
+		await rejects(mainModule.WKCVersionsActionDelete(WKCTestingStorageClient, 1), /WKCErrorInputNotValid/);
 	});
 
 	it('returns statusCode', async function() {

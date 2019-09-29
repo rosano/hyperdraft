@@ -2,7 +2,7 @@ import * as WKCVersionsModel from './model.js';
 
 export const WKCVersionsMetalWrite = async function(storageClient, inputData) {
 	if (typeof inputData !== 'object' || inputData === null) {
-		return Promise.reject(new Error('WKCErrorInputInvalid'));
+		return Promise.reject(new Error('WKCErrorInputNotValid'));
 	}
 
 	let errors = WKCVersionsModel.WKCVersionsModelErrorsFor(inputData);
@@ -17,7 +17,7 @@ export const WKCVersionsMetalWrite = async function(storageClient, inputData) {
 
 export const WKCVersionsMetalRead = async function(storageClient, inputData) {
 	if (typeof inputData !== 'string') {
-		return Promise.reject(new Error('WKCErrorInputInvalid'));
+		return Promise.reject(new Error('WKCErrorInputNotValid'));
 	}
 
 	return WKCVersionsModel.WKCVersionsModelPostJSONParse(await storageClient.wkc_versions.readObject(inputData));
@@ -35,7 +35,7 @@ export const WKCVersionsMetalList = async function(storageClient) {
 
 export const WKCVersionsMetalDelete = async function(storageClient, inputData) {
 	if (typeof inputData !== 'string') {
-		return Promise.reject(new Error('WKCErrorInputInvalid'));
+		return Promise.reject(new Error('WKCErrorInputNotValid'));
 	}
 
 	return await storageClient.wkc_versions.deleteObject(inputData);

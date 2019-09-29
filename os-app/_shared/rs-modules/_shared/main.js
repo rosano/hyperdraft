@@ -8,7 +8,7 @@
 
 exports.RSModuleSharedJSONSchemaForErrors = function(inputData) {
 	if (typeof inputData !== 'object' || inputData === null) {
-		throw new Error('WKCErrorInputInvalid');
+		throw new Error('WKCErrorInputNotValid');
 	}
 
 	return {

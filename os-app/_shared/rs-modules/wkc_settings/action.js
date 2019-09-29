@@ -10,11 +10,11 @@
 
 	exports._WKCSettingsActionSet = async function(storageClient, param1, param2) {
 		if (typeof param1 !== 'string') {
-			return Promise.reject(new Error('WKCErrorInputInvalid'));
+			return Promise.reject(new Error('WKCErrorInputNotValid'));
 		}
 
 		if (typeof param2 === 'undefined') {
-			return Promise.reject(new Error('WKCErrorInputInvalid'));
+			return Promise.reject(new Error('WKCErrorInputNotValid'));
 		}
 
 		let outputData = (await WKCSettingsMetal.WKCSettingsMetalWrite(storageClient, {
@@ -29,7 +29,7 @@
 
 	exports._WKCSettingsActionGet = async function(storageClient, inputData) {
 		if (typeof inputData !== 'string') {
-			return Promise.reject(new Error('WKCErrorInputInvalid'));
+			return Promise.reject(new Error('WKCErrorInputNotValid'));
 		}
 
 		let outputData = await WKCSettingsMetal.WKCSettingsMetalRead(storageClient, inputData);
@@ -57,7 +57,7 @@
 
 	exports.WKCSettingsActionQuery = async function(storageClient, inputData) {
 		if (typeof inputData !== 'object' || inputData === null) {
-			return Promise.reject(new Error('WKCErrorInputInvalid'));
+			return Promise.reject(new Error('WKCErrorInputNotValid'));
 		}
 
 		return Promise.resolve(Object.values(await WKCSettingsMetal.WKCSettingsMetalList(storageClient)).filter(function(e) {

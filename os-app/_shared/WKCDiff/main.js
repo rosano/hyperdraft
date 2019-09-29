@@ -17,7 +17,7 @@ exports._WKCDiffConvertDiffTagsToHTML = function(inputData) {
 
 exports.WKCDiffHTMLForStrings = function(oldString, newString) {
 	if (typeof newString !== 'string') {
-		throw new Error('WKCErrorInputInvalid');
+		throw new Error('WKCErrorInputNotValid');
 	}
 
 	return (new diffPatchMatchPackage()).diff_main(oldString || '', newString).map(function(e) {

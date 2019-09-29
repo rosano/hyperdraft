@@ -14,7 +14,7 @@ const kTesting = {
 describe('WKCSettingsMetalWrite', function testWKCSettingsMetalWrite() {
 
 	it('rejects if not object', async function() {
-		await assert.rejects(mainModule.WKCSettingsMetalWrite(WKCTestingStorageClient, null), /WKCErrorInputInvalid/);
+		await assert.rejects(mainModule.WKCSettingsMetalWrite(WKCTestingStorageClient, null), /WKCErrorInputNotValid/);
 	});
 
 	it('returns object with WKCErrors if not valid', async function() {
@@ -40,7 +40,7 @@ describe('WKCSettingsMetalWrite', function testWKCSettingsMetalWrite() {
 describe('WKCSettingsMetalRead', function testWKCSettingsMetalRead() {
 
 	it('rejects if not string', async function() {
-		await assert.rejects(mainModule.WKCSettingsMetalRead(WKCTestingStorageClient, 1), /WKCErrorInputInvalid/);
+		await assert.rejects(mainModule.WKCSettingsMetalRead(WKCTestingStorageClient, 1), /WKCErrorInputNotValid/);
 	});
 
 	it('returns null if not found', async function() {
@@ -72,7 +72,7 @@ describe('WKCSettingsMetalList', function testWKCSettingsMetalList() {
 describe('WKCSettingsMetalDelete', function testWKCSettingsMetalDelete() {
 
 	it('rejects if not string', async function() {
-		await assert.rejects(mainModule.WKCSettingsMetalDelete(WKCTestingStorageClient, 1), /WKCErrorInputInvalid/);
+		await assert.rejects(mainModule.WKCSettingsMetalDelete(WKCTestingStorageClient, 1), /WKCErrorInputNotValid/);
 	});
 
 	it('returns statusCode', async function() {

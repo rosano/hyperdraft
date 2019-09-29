@@ -23,13 +23,13 @@ describe('WKCMetalSubscriptionsCreate', function testWKCMetalSubscriptionsCreate
 	it('throws error if param2 not object', function() {
 		assert.throws(function() {
 			mainModule.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, '', function() {});
-		}, /WKCErrorInputInvalid/);
+		}, /WKCErrorInputNotValid/);
 	});
 
 	it('throws error if param3 not function', function() {
 		assert.throws(function() {
 			mainModule.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, {}, null);
-		}, /WKCErrorInputInvalid/);
+		}, /WKCErrorInputNotValid/);
 	});
 
 	it('returns WKCErrors if not valid WKCSubscription', function(done) {
@@ -70,13 +70,13 @@ describe('WKCMetalSubscriptionsRead', function testWKCMetalSubscriptionsRead() {
 	it('throws error if param2 not string', function() {
 		assert.throws(function() {
 			mainModule.WKCMetalSubscriptionsRead(WKCTestingMongoClient, 1, function() {});
-		}, /WKCErrorInputInvalid/);
+		}, /WKCErrorInputNotValid/);
 	});
 
 	it('throws error if param3 not function', function() {
 		assert.throws(function() {
 			mainModule.WKCMetalSubscriptionsRead(WKCTestingMongoClient, '1', null);
-		}, /WKCErrorInputInvalid/);
+		}, /WKCErrorInputNotValid/);
 	});
 
 	it('returns error if WKCSubscriptionID not found', function(done) {
@@ -104,19 +104,19 @@ describe('WKCMetalSubscriptionsUpdate', function testWKCMetalSubscriptionsUpdate
 	it('throws error if param2 not string', function() {
 		assert.throws(function() {
 			mainModule.WKCMetalSubscriptionsUpdate(WKCTestingMongoClient, 1, {}, function() {});
-		}, /WKCErrorInputInvalid/);
+		}, /WKCErrorInputNotValid/);
 	});
 
 	it('throws error if param3 not object', function() {
 		assert.throws(function() {
 			mainModule.WKCMetalSubscriptionsUpdate(WKCTestingMongoClient, '1', null, function() {});
-		}, /WKCErrorInputInvalid/);
+		}, /WKCErrorInputNotValid/);
 	});
 
 	it('throws error if param4 not function', function() {
 		assert.throws(function() {
 			mainModule.WKCMetalSubscriptionsUpdate(WKCTestingMongoClient, '1', {}, null);
-		}, /WKCErrorInputInvalid/);
+		}, /WKCErrorInputNotValid/);
 	});
 
 	it('returns error if WKCSubscriptionID not found', function(done) {
@@ -168,13 +168,13 @@ describe('WKCMetalSubscriptionsDelete', function testWKCMetalSubscriptionsDelete
 	it('throws error if param2 not string', function() {
 		assert.throws(function() {
 			mainModule.WKCMetalSubscriptionsDelete(WKCTestingMongoClient, 1, function() {});
-		}, /WKCErrorInputInvalid/);
+		}, /WKCErrorInputNotValid/);
 	});
 
 	it('throws error if param3 not function', function() {
 		assert.throws(function() {
 			mainModule.WKCMetalSubscriptionsDelete(WKCTestingMongoClient, '1', null);
-		}, /WKCErrorInputInvalid/);
+		}, /WKCErrorInputNotValid/);
 	});
 
 	it('returns error if WKCSubscriptionID not found', function(done) {
@@ -202,13 +202,13 @@ describe('WKCMetalSubscriptionsSearch', function testWKCMetalSubscriptionsSearch
 	it('throws error if param3 not function', function() {
 		assert.throws(function() {
 			mainModule.WKCMetalSubscriptionsSearch(WKCTestingMongoClient, '', null);
-		}, /WKCErrorInputInvalid/);
+		}, /WKCErrorInputNotValid/);
 	});
 
 	it('throws error if param4 not object', function() {
 		assert.throws(function() {
 			mainModule.WKCMetalSubscriptionsNeedingFetch(WKCTestingMongoClient, '', function() {}, null);
-		}, /WKCErrorInputInvalid/);
+		}, /WKCErrorInputNotValid/);
 	});
 
 	it('returns all if param2 empty', function(done) {
@@ -260,7 +260,7 @@ describe('WKCMetalSubscriptionsNeedingFetch', function testWKCMetalSubscriptions
 	it('throws error if param2 not function', function() {
 		assert.throws(function() {
 			mainModule.WKCMetalSubscriptionsNeedingFetch(WKCTestingMongoClient, null);
-		}, /WKCErrorInputInvalid/);
+		}, /WKCErrorInputNotValid/);
 	});
 
 	it('returns subscriptionObjects with fetch date older than one hour', function(done) {
@@ -370,19 +370,19 @@ describe('WKCSubscriptionsMetalRequestParameters', function testWKCSubscriptions
 	it('throws error if param2 not string', function() {
 		assert.throws(function() {
 			mainModule.WKCSubscriptionsMetalRequestParameters(WKCTestingMongoClient, null, function () {});
-		}, /WKCErrorInputInvalid/);
+		}, /WKCErrorInputNotValid/);
 	});
 
 	it('throws error if param3 not function', function() {
 		assert.throws(function() {
 			mainModule.WKCSubscriptionsMetalRequestParameters(WKCTestingMongoClient, '', null);
-		}, /WKCErrorInputInvalid/);
+		}, /WKCErrorInputNotValid/);
 	});
 
 	it('throws error if param3 not object', function() {
 		assert.throws(function() {
 			mainModule.WKCSubscriptionsMetalRequestParameters(WKCTestingMongoClient, '', function() {}, null);
-		}, /WKCErrorInputInvalid/);
+		}, /WKCErrorInputNotValid/);
 	});
 
 	it('returns parameters', function(done) {

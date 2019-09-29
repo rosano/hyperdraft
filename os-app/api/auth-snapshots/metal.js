@@ -10,11 +10,11 @@ const modelLibrary = require('./model.js');
 
 exports.WKCSnapshotsMetalCreate = function(databaseClient, inputData, completionHandler) {
 	if (typeof inputData !== 'object' || inputData === null) {
-		throw new Error('WKCErrorInputInvalid');
+		throw new Error('WKCErrorInputNotValid');
 	}
 
 	if (typeof completionHandler !== 'function') {
-		throw new Error('WKCErrorInputInvalid');
+		throw new Error('WKCErrorInputNotValid');
 	}
 
 	const errors = modelLibrary.WKCSnapshotsModelErrorsFor(inputData);

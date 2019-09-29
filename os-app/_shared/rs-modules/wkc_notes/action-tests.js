@@ -23,7 +23,7 @@ const kTesting = {
 describe('WKCNotesActionCreate', function testWKCNotesActionCreate() {
 
 	it('rejects if not object', async function() {
-		await rejects(mainModule.WKCNotesActionCreate(WKCTestingStorageClient, null), /WKCErrorInputInvalid/);
+		await rejects(mainModule.WKCNotesActionCreate(WKCTestingStorageClient, null), /WKCErrorInputNotValid/);
 	});
 
 	it('returns object with WKCErrors if not valid', async function() {
@@ -67,7 +67,7 @@ describe('WKCNotesActionCreate', function testWKCNotesActionCreate() {
 describe('WKCNotesActionUpdate', function testWKCNotesActionUpdate() {
 
 	it('rejects if not object', async function() {
-		await rejects(mainModule.WKCNotesActionUpdate(WKCTestingStorageClient, null), /WKCErrorInputInvalid/);
+		await rejects(mainModule.WKCNotesActionUpdate(WKCTestingStorageClient, null), /WKCErrorInputNotValid/);
 	});
 
 	it('returns object with WKCErrors if not valid', async function() {
@@ -112,7 +112,7 @@ describe('WKCNotesActionUpdate', function testWKCNotesActionUpdate() {
 describe('WKCNotesActionQuery', function testWKCNotesActionQuery() {
 
 	it('rejects if not object', async function() {
-		await rejects(mainModule.WKCNotesActionQuery(WKCTestingStorageClient, null), /WKCErrorInputInvalid/);
+		await rejects(mainModule.WKCNotesActionQuery(WKCTestingStorageClient, null), /WKCErrorInputNotValid/);
 	});
 
 	it('returns array', async function() {
@@ -159,7 +159,7 @@ describe('WKCNotesActionQuery', function testWKCNotesActionQuery() {
 describe('WKCNotesActionDelete', function testWKCNotesActionDelete() {
 
 	it('rejects if not string', async function() {
-		await rejects(mainModule.WKCNotesActionDelete(WKCTestingStorageClient, null), /WKCErrorInputInvalid/);
+		await rejects(mainModule.WKCNotesActionDelete(WKCTestingStorageClient, null), /WKCErrorInputNotValid/);
 	});
 
 	it('returns statusCode', async function() {
@@ -187,7 +187,7 @@ describe('WKCNotesActionDelete', function testWKCNotesActionDelete() {
 describe('WKCNotesActionPublish', function testWKCNotesActionPublish() {
 
 	it('rejects if not object', async function() {
-		await rejects(mainModule.WKCNotesActionPublish(WKCTestingStorageClient, null), /WKCErrorInputInvalid/);
+		await rejects(mainModule.WKCNotesActionPublish(WKCTestingStorageClient, null), /WKCErrorInputNotValid/);
 	});
 
 	it('returns object with WKCErrors if not valid', async function() {
@@ -248,7 +248,7 @@ describe('WKCNotesActionPublish', function testWKCNotesActionPublish() {
 describe('WKCNotesActionPublicRead', function testWKCNotesActionPublicRead() {
 
 	it('rejects if not string', async function() {
-		await rejects(mainModule.WKCNotesActionPublicRead(WKCTestingStorageClient, 1), /WKCErrorInputInvalid/);
+		await rejects(mainModule.WKCNotesActionPublicRead(WKCTestingStorageClient, 1), /WKCErrorInputNotValid/);
 	});
 
 	it('returns WKCErrorNotFound if not found', async function() {
@@ -270,7 +270,7 @@ describe('WKCNotesActionPublicRead', function testWKCNotesActionPublicRead() {
 describe('WKCNotesActionUnpublish', function testWKCNotesActionUnpublish() {
 
 	it('rejects if not object', async function() {
-		await rejects(mainModule.WKCNotesActionPublish(WKCTestingStorageClient, null), /WKCErrorInputInvalid/);
+		await rejects(mainModule.WKCNotesActionPublish(WKCTestingStorageClient, null), /WKCErrorInputNotValid/);
 	});
 
 	it('returns object with WKCErrors if not valid', async function() {

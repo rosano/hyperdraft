@@ -1,6 +1,6 @@
 export const WKCVersionsModelErrorsFor = function(inputData) {
 	if (typeof inputData !== 'object' || inputData === null) {
-		throw new Error('WKCErrorInputInvalid');
+		throw new Error('WKCErrorInputNotValid');
 	}
 
 	var errors = {};

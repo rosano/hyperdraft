@@ -34,7 +34,7 @@
 
 	exports.WKCReadModuleSubscribeSuggestionsFor = function (inputData) {
 		if (typeof inputData !== 'string') {
-			throw new Error('WKCErrorInputInvalid');
+			throw new Error('WKCErrorInputNotValid');
 		}
 
 		if (!inputData.trim()) {

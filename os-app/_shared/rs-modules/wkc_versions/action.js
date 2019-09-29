@@ -6,7 +6,7 @@ const uniqueID = _WIKIsTestingBehaviour() ? factory(detectPrng(true)) : factory(
 
 export const WKCVersionsActionCreate = async function(storageClient, inputData) {
 	if (typeof inputData !== 'object' || inputData === null) {
-		return Promise.reject(new Error('WKCErrorInputInvalid'));
+		return Promise.reject(new Error('WKCErrorInputNotValid'));
 	}
 
 	return await WKCVersionsMetal.WKCVersionsMetalWrite(storageClient, Object.assign(inputData, {
@@ -20,7 +20,7 @@ export const WKCVersionsActionDelete = async function(storageClient, inputData) 
 
 export const WKCVersionsActionQuery = async function(storageClient, inputData) {
 	if (typeof inputData !== 'object' || inputData === null) {
-		return Promise.reject(new Error('WKCErrorInputInvalid'));
+		return Promise.reject(new Error('WKCErrorInputNotValid'));
 	}
 
 	return Promise.resolve(Object.values(await WKCVersionsMetal.WKCVersionsMetalList(storageClient)).sort(function (a, b) {

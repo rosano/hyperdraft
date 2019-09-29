@@ -12,11 +12,11 @@ const modelLibrary = require('./model.js');
 
 exports.WKCMetalArticlesCreate = function(databaseClient, inputData, completionHandler) {
 	if (typeof inputData !== 'object' || inputData === null) {
-		throw new Error('WKCErrorInputInvalid');
+		throw new Error('WKCErrorInputNotValid');
 	}
 
 	if (typeof completionHandler !== 'function') {
-		throw new Error('WKCErrorInputInvalid');
+		throw new Error('WKCErrorInputNotValid');
 	}
 
 	if (!modelLibrary.WKCModelInputDataIsArticleObject(modelLibrary.WKCModelArticlePrepare(inputData))) {
@@ -49,11 +49,11 @@ exports.WKCMetalArticlesCreate = function(databaseClient, inputData, completionH
 
 exports.WKCMetalArticlesRead = function(databaseClient, inputData, completionHandler) {
 	if (typeof inputData !== 'string') {
-		throw new Error('WKCErrorInputInvalid');
+		throw new Error('WKCErrorInputNotValid');
 	}
 
 	if (typeof completionHandler !== 'function') {
-		throw new Error('WKCErrorInputInvalid');
+		throw new Error('WKCErrorInputNotValid');
 	}
 
 	return databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_articles').findOne({
@@ -83,15 +83,15 @@ exports.WKCMetalArticlesRead = function(databaseClient, inputData, completionHan
 
 exports.WKCMetalArticlesUpdate = function(databaseClient, inputData1, inputData2, completionHandler) {
 	if (typeof inputData1 !== 'string') {
-		throw new Error('WKCErrorInputInvalid');
+		throw new Error('WKCErrorInputNotValid');
 	}
 
 	if (typeof inputData2 !== 'object' || inputData2 === null) {
-		throw new Error('WKCErrorInputInvalid');
+		throw new Error('WKCErrorInputNotValid');
 	}
 
 	if (typeof completionHandler !== 'function') {
-		throw new Error('WKCErrorInputInvalid');
+		throw new Error('WKCErrorInputNotValid');
 	}
 
 	if (!modelLibrary.WKCModelInputDataIsArticleObject(modelLibrary.WKCModelArticlePrepare(inputData2), {
@@ -129,11 +129,11 @@ exports.WKCMetalArticlesUpdate = function(databaseClient, inputData1, inputData2
 
 exports.WKCMetalArticlesDelete = function(databaseClient, inputData, completionHandler) {
 	if (typeof inputData !== 'string') {
-		throw new Error('WKCErrorInputInvalid');
+		throw new Error('WKCErrorInputNotValid');
 	}
 
 	if (typeof completionHandler !== 'function') {
-		throw new Error('WKCErrorInputInvalid');
+		throw new Error('WKCErrorInputNotValid');
 	}
 
 	return databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_articles').deleteOne({
@@ -155,19 +155,19 @@ exports.WKCMetalArticlesDelete = function(databaseClient, inputData, completionH
 
 exports.WKCMetalArticlesSearch = function(databaseClient, inputData, completionHandler, options) {
 	if (typeof completionHandler !== 'function') {
-		throw new Error('WKCErrorInputInvalid');
+		throw new Error('WKCErrorInputNotValid');
 	}
 
 	if (typeof inputData !== 'object' || inputData === null) {
-		throw new Error('WKCErrorInputInvalid');
+		throw new Error('WKCErrorInputNotValid');
 	}
 
 	if (options && typeof options !== 'object' || options === null) {
-		throw new Error('WKCErrorInputInvalid');
+		throw new Error('WKCErrorInputNotValid');
 	}
 
 	if (options && options.WKCOptionLimit && parseInt(options.WKCOptionLimit) !== options.WKCOptionLimit) {
-		throw new Error('WKCErrorInputInvalid');
+		throw new Error('WKCErrorInputNotValid');
 	}
 
 	return databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_articles').find(inputData

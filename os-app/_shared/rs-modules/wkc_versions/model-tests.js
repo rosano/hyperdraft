@@ -18,7 +18,7 @@ describe('WKCVersionsModelErrorsFor', function testWKCVersionsModelErrorsFor() {
 	it('throws error if not object', function() {
 		throws(function() {
 			mainModule.WKCVersionsModelErrorsFor(null);
-		}, /WKCErrorInputInvalid/);
+		}, /WKCErrorInputNotValid/);
 	});
 
 	it('returns object if WKCVersionID not string', function() {

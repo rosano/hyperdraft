@@ -31,7 +31,7 @@ describe('WKCSettingsActionProperty', function testWKCSettingsActionProperty() {
 describe('WKCSettingsActionDelete', function testWKCSettingsActionDelete() {
 
 	it('rejects if not string', async function() {
-		await assert.rejects(mainModule.WKCSettingsActionDelete(WKCTestingStorageClient, 1), /WKCErrorInputInvalid/);
+		await assert.rejects(mainModule.WKCSettingsActionDelete(WKCTestingStorageClient, 1), /WKCErrorInputNotValid/);
 	});
 
 	it('returns statusCode', async function() {

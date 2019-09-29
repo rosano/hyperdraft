@@ -7,7 +7,7 @@ describe('RSModuleSharedJSONSchemaForErrors', function RSModuleSharedJSONSchemaF
 	it('throws error if not object', function() {
 		assert.throws(function() {
 			mainModule.RSModuleSharedJSONSchemaForErrors(null);
-		}, /WKCErrorInputInvalid/);
+		}, /WKCErrorInputNotValid/);
 	});
 
 	it('returns object', function() {

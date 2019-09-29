@@ -14,11 +14,11 @@ const {
 
 exports.WKCResolveRelativeURLs = function(absoluteURL, sourceHTML) {
 	if (!/^(http|https):\/\/[^ "]+$/.test(absoluteURL)) {
-		throw new Error('WKCErrorInputInvalid');
+		throw new Error('WKCErrorInputNotValid');
 	}
 
 	if (typeof sourceHTML !== 'string') {
-		throw new Error('WKCErrorInputInvalid');
+		throw new Error('WKCErrorInputNotValid');
 	}
 
 	var domObject = new JSDOM(sourceHTML);

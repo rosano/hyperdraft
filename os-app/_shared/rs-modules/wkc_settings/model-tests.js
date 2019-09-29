@@ -16,7 +16,7 @@ describe('WKCSettingsModelErrorsFor', function testWKCSettingsModelErrorsFor() {
 	it('throws error if not object', function() {
 		assert.throws(function() {
 			mainModule.WKCSettingsModelErrorsFor(null);
-		}, /WKCErrorInputInvalid/);
+		}, /WKCErrorInputNotValid/);
 	});
 
 	it('returns object if WKCSettingKey not string', function() {

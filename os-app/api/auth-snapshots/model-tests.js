@@ -22,7 +22,7 @@ describe('WKCSnapshotsModelErrorsFor', function testnapshotsModelErrorsFor() {
 	it('throws error if not object', function() {
 		assert.throws(function() {
 			modelLibrary.WKCSnapshotsModelErrorsFor(null);
-		}, /WKCErrorInputInvalid/);
+		}, /WKCErrorInputNotValid/);
 	});
 
 	it('returns false with WKCErrors if WKCSnapshotSubscriptionID not string', function() {

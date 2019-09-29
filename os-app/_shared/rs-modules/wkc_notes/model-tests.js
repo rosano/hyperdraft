@@ -18,7 +18,7 @@ describe('WKCNotesModelErrorsFor', function testWKCNotesModelErrorsFor() {
 	it('throws error if not object', function() {
 		throws(function() {
 			mainModule.WKCNotesModelErrorsFor(null);
-		}, /WKCErrorInputInvalid/);
+		}, /WKCErrorInputNotValid/);
 	});
 
 	it('returns object if WKCNoteID not string', function() {
