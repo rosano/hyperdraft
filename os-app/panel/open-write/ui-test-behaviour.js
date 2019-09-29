@@ -144,7 +144,7 @@ describe('WKCWriteUIAccess', function () {
 		browser.fill(WKCWriteEditorDebugInput, 'alfa\n# bravo');
 		await browser.wait({ element: WKCWriteListItem });
 
-		deepEqual(browser.query(WKCWriteListItemAccessibilitySummary).textContent, 'alfa');
+		browser.assert.text(WKCWriteListItemAccessibilitySummary, 'alfa');
 		browser.assert.attribute(WKCWriteJumpButton, 'disabled', '');
 	});
 

@@ -51,7 +51,7 @@ describe('WKCWriteJumpButtonLanguage', function testWKCWriteJumpButtonLanguage()
 			});
 
 			it('on startup', function() {
-				deepEqual(browser.query(WKCWriteJumpButton).textContent, '');
+				browser.assert.text(WKCWriteJumpButton, '');
 				deepEqual(browser.query(WKCWriteJumpButton).title, uLocalized('WKCWriteJumpButtonText'));
 			});
 
@@ -77,13 +77,13 @@ describe('WKCWriteJumpButtonInteraction', function testWKCWriteJumpButtonInterac
 	});
 
 	it('runs callback on select', async function() {
-		deepEqual(browser.query('#WKCWriteJumpButtonTestRun').textContent, '0');
+		browser.assert.text('#WKCWriteJumpButtonTestRun', '0');
 
 		browser.click('.LCHLauncherResultListItem');
 		// await browser.wait({ element: '.LCHLauncherResultListItem' });
 
 		browser.assert.elements('.LCHLauncherFilterPrompt', 0);
-		deepEqual(browser.query('#WKCWriteJumpButtonTestRun').textContent, '1');
+		browser.assert.text('#WKCWriteJumpButtonTestRun', '1');
 	});
 
 });
