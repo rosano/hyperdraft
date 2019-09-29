@@ -1,21 +1,25 @@
 <%
 locals.OLSKPageTitle = locals.WKCNoteObject.WKCNoteDetectedTitle;
 locals.OLSKPageAssets = [
-	'/_shared/common/ui-style.css',
+	'/_shared/__external/OLSKLayout/ui-style.css',
 	'ui-style.css',
 ];
 %>
 
 <%- include('../_shared/common/layout-header.ejs') %>
 
-<header>
-	<a href="/">Home</a>
-</header>
+<div class="OLSKCommon">
+	<header>
+		<a href="/">Home</a>
+	</header>
 
-<article>
-	<h1><%= locals.WKCNoteObject.WKCNoteDetectedTitle %></h1>
+	<hr>
 
-	<%- locals.WKCNoteObject.WKCNoteDetectedBody %>
-</article>
+	<article>
+		<h1><%= locals.WKCNoteObject.WKCNoteDetectedTitle %></h1>
+
+		<%- locals.WKCNoteObject.WKCNoteDetectedBody %>
+	</article>
+</div>
 
 <%- include('../_shared/common/layout-footer.ejs') %>
