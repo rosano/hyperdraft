@@ -197,7 +197,7 @@ function handleEnter () {
 }
 
 function handleKeydown(event) {
-	if (window.Launchlet.instanceExists()) {
+	if (window.Launchlet.LCHSingletonExists()) {
 		return;
 	}
 	

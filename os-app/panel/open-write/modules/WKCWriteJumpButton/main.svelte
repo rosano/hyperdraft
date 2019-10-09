@@ -2,8 +2,9 @@
 export let inputData = [];
 function interfaceButtonDidClick() {
 	setTimeout(function () {
-		window.Launchlet.instanceCreate(inputData, {
-			runMode: window.Launchlet.kRunModePreview,
+		window.Launchlet.LCHSingletonCreate({
+			LCHOptionRecipes: inputData,
+			LCHOptionMode: window.Launchlet.LCHModePreview,
 		});
 	});
 }
