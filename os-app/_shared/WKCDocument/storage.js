@@ -1,14 +1,14 @@
-import * as WKXDocumentModel from './model.js';
+import * as WKCDocumentModel from './model.js';
 import * as OLSKRemoteStorage from 'OLSKRemoteStorage';
 
 const kType = 'wkc_document';
 const kCollection = 'wkc_documents';
 
-export const WKXDocumentStoragePath = function(inputData) {
+export const WKCDocumentStoragePath = function(inputData) {
 	return `${ kCollection }/${ inputData || '' }`;
 };
 
-export const WKXDocumentStorage = function (privateClient, publicClient, changeDelegate) {
+export const WKCDocumentStorage = function (privateClient, publicClient, changeDelegate) {
 	privateClient.on('change', function (event) {
 		if (!changeDelegate) {
 			return;
@@ -28,29 +28,29 @@ export const WKXDocumentStorage = function (privateClient, publicClient, changeD
 			return console.warn(`${ delegateMethod } not function`);
 		};
 
-		changeDelegate[delegateMethod](WKXDocumentModel.WKXDocumentModelPostJSONParse(event[OLSKRemoteStorage.OLSKRemoteStorageChangeDelegateInput(delegateMethod)]));
+		changeDelegate[delegateMethod](WKCDocumentModel.WKCDocumentModelPostJSONParse(event[OLSKRemoteStorage.OLSKRemoteStorageChangeDelegateInput(delegateMethod)]));
 	});
 
 	return {
 		WKXStorageCollection: kCollection,
 		WKXStorageType: kType,
-		WKXStorageModelErrors: WKXDocumentModel.WKXDocumentModelErrorsFor({}),
+		WKXStorageModelErrors: WKCDocumentModel.WKCDocumentModelErrorsFor({}),
 		WKXStorageExports: {
 			init: function () {
-				return privateClient.cache(WKXDocumentStoragePath());
+				return privateClient.cache(WKCDocumentStoragePath());
 			},
 			listObjects: function () {
-				return privateClient.getAll(WKXDocumentStoragePath(), false);
+				return privateClient.getAll(WKCDocumentStoragePath(), false);
 			},
 			writeObject: async function (param1, param2) {
-				await privateClient.storeObject(kType, WKXDocumentStoragePath(param1), WKXDocumentModel.WKXDocumentModelPreJSONSchemaValidate(param2));
-				return WKXDocumentModel.WKXDocumentModelPostJSONParse(param2);
+				await privateClient.storeObject(kType, WKCDocumentStoragePath(param1), WKCDocumentModel.WKCDocumentModelPreJSONSchemaValidate(param2));
+				return WKCDocumentModel.WKCDocumentModelPostJSONParse(param2);
 			},
 			readObject: function (inputData) {
-				return privateClient.getObject(WKXDocumentStoragePath(inputData));
+				return privateClient.getObject(WKCDocumentStoragePath(inputData));
 			},
 			deleteObject: function (inputData) {
-				return privateClient.remove(WKXDocumentStoragePath(inputData));
+				return privateClient.remove(WKCDocumentStoragePath(inputData));
 			},
 		},
 	};

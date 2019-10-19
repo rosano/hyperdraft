@@ -2,8 +2,8 @@ import { _WIKIsTestingBehaviour } from '../../_shared/common/global.js';
 
 import * as WKCStorageClient from '../../_shared/WKCStorageClient/main.js';
 import { WKCStorageModule } from '../../_shared/WKCStorageModule/main.js';
-import { WKXDocumentStorage } from '../../_shared/WKXDocument/storage.js';
-import { WKXDocumentActionQuery } from '../../_shared/WKXDocument/action.js';
+import { WKCDocumentStorage } from '../../_shared/WKCDocument/storage.js';
+import { WKCDocumentActionQuery } from '../../_shared/WKCDocument/action.js';
 import { WKCSettingStorage } from '../../_shared/WKCSetting/storage.js';
 import { WKCVersionStorage } from '../../_shared/WKCVersion/storage.js';
 
@@ -35,13 +35,13 @@ noteSelected.subscribe(function (val) {
 export const storageClient = WKCStorageClient.WKCStorageClient({
 	modules: [
 		WKCStorageModule([
-			WKXDocumentStorage,
+			WKCDocumentStorage,
 			WKCVersionStorage,
 			WKCSettingStorage,
 			].map(function (e) {
 				return {
 					WKXCollectionStorageGenerator: e,
-					WKXCollectionChangeDelegate: e === WKXDocumentStorage ? {
+					WKXCollectionChangeDelegate: e === WKCDocumentStorage ? {
 						OLSKChangeDelegateCreate: function (inputData) {
 							console.log('OLSKChangeDelegateCreate', inputData);
 
@@ -95,7 +95,7 @@ remoteStorage.on('ready', async () => {
 	await remoteStorage.wikiavec.wkc_documents.init();
 	// await remoteStorage.wikiavec.wkc_settings.init();
 	// await remoteStorage.wikiavec.wkc_versions.init();
-	notesAll.set((await WKXDocumentActionQuery(storageClient, {})).sort(WKCWriteLogicListSort));
+	notesAll.set((await WKCDocumentActionQuery(storageClient, {})).sort(WKCWriteLogicListSort));
 
 	isLoading.set(false);
 
