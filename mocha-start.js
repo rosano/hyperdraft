@@ -108,6 +108,36 @@ let languageDictionary = {};
 	};
 })();
 
+(function WKCMochaMongo() {
+	var mongodbPackage = require('mongodb');
+
+	before(function(done) {
+		mongodbPackage.MongoClient.connect(process.env.WKC_DATABASE_URL, {
+			useNewUrlParser: true,
+		}, function(err, client) {
+			if (err) {
+				throw err;
+			}
+
+			global.WKCTestingMongoClient = client;
+
+			done();
+		});
+	});
+
+	after(function() {
+		if (!global.WKCTestingMongoClient) {
+			return;
+		}
+
+		global.WKCTestingMongoClient.close();
+	});
+
+	beforeEach(async function() {
+		global.WKCTestingMongoClient.db(process.env.WKC_SHARED_DATABASE_NAME).dropDatabase();
+	});
+})();
+
 const WKCStorageModule = require('./os-app/_shared/WKCStorageModule/main.js');
 const WKCDocumentStorage = require('./os-app/_shared/WKCDocument/storage.js');
 const WKCSettingStorage = require('./os-app/_shared/WKCSetting/storage.js');
