@@ -250,10 +250,6 @@ function handleKeydown(event) {
 	</div>
 </div>
 
-{#if isMobile()}
-	<ModuleFooter />
-{/if}
-
 </div>
 
 <style>

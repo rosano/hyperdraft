@@ -101,9 +101,7 @@ const mod = {
 
 <div id="WIKWriteStorageWidget" class:StorageHidden={ mod._ValueStorageHidden }></div>
 
-{#if !isMobile()}
-	<ModuleFooter on:FooterDispatchExport={ mod.FooterDispatchExport } on:FooterDispatchImport={ mod.FooterDispatchImport } on:WIKWriteFooterDispatchStorage={ mod.WIKWriteFooterDispatchStorage } { WIKWriteFooterStorageStatus } />
-{/if}
+<ModuleFooter on:FooterDispatchExport={ mod.FooterDispatchExport } on:FooterDispatchImport={ mod.FooterDispatchImport } on:WIKWriteFooterDispatchStorage={ mod.WIKWriteFooterDispatchStorage } { WIKWriteFooterStorageStatus } />
 
 </div>
 
