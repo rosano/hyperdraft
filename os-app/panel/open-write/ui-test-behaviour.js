@@ -28,6 +28,8 @@ Object.entries({
 	WKCWriteEditorInput: '.EditorContainer .CodeMirror',
 	WKCWriteEditorDebugInput: '#WKCWriteEditorDebugInput',
 
+	WIKWriteStorageWidget: '#WIKWriteStorageWidget',
+
 	WKCWriteReloadButton: '#WKCWriteReloadButton',
 
 	async uCreateItem (browser) {
@@ -57,6 +59,9 @@ describe('WKCWriteUIAccess', function () {
 		browser.assert.elements(WKCWriteDetailToolbar, 0);
 
 		browser.assert.elements(WKCWriteEditorContainer, 0);
+
+		browser.assert.elements(WIKWriteStorageWidget, 1);
+		browser.assert.hasClass(WIKWriteStorageWidget, 'StorageHidden');
 
 		browser.assert.elements(WKCWriteReloadButton, 1);
 	});

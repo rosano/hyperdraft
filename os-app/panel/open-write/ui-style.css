@@ -7,11 +7,10 @@
 	border-bottom: var(--WIKBorderStyle);
 }
 
-#remotestorage-widget {
-	bottom: 0;
-	right: 0;
-}
-
 .WKC_ContextMobileExclusive {
 	display: none;
+}
+
+#WIKWriteStorageWidget {
+	border-top: var(--WIKBorderStyle)
 }
