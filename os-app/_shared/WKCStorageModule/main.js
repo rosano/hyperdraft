@@ -1,6 +1,6 @@
 import * as OLSKRemoteStorage from 'OLSKRemoteStorage';
 
-export const WKXStorageModule = function (inputData) {
+export const WKCStorageModule = function (inputData) {
 	return {
 		name: 'wikiavec',
 		builder: function(privateClient, publicClient) {

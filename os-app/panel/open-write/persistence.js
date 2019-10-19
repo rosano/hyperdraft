@@ -1,7 +1,7 @@
 import { _WIKIsTestingBehaviour } from '../../_shared/common/global.js';
 
 import * as WKCStorageClient from '../../_shared/WKCStorageClient/main.js';
-import { WKXStorageModule } from '../../_shared/WKXStorageModule/main.js';
+import { WKCStorageModule } from '../../_shared/WKCStorageModule/main.js';
 import { WKXDocumentStorage } from '../../_shared/WKXDocument/storage.js';
 import { WKXDocumentActionQuery } from '../../_shared/WKXDocument/action.js';
 import { WKCSettingStorage } from '../../_shared/WKCSetting/storage.js';
@@ -34,7 +34,7 @@ noteSelected.subscribe(function (val) {
 });
 export const storageClient = WKCStorageClient.WKCStorageClient({
 	modules: [
-		WKXStorageModule([
+		WKCStorageModule([
 			WKXDocumentStorage,
 			WKXVersionStorage,
 			WKCSettingStorage,

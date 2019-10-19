@@ -108,7 +108,7 @@ let languageDictionary = {};
 	};
 })();
 
-const WKXStorageModule = require('./os-app/_shared/WKXStorageModule/main.js');
+const WKCStorageModule = require('./os-app/_shared/WKCStorageModule/main.js');
 const WKXDocumentStorage = require('./os-app/_shared/WKXDocument/storage.js');
 const WKCSettingStorage = require('./os-app/_shared/WKCSetting/storage.js');
 const WKXVersionStorage = require('./os-app/_shared/WKXVersion/storage.js');
@@ -127,7 +127,7 @@ const WKXVersionStorage = require('./os-app/_shared/WKXVersion/storage.js');
 	before(function(done) {
 		global.WKXTestingStorageClient = require('./os-app/_shared/WKCStorageClient/main.js').WKCStorageClient({
 			modules: [
-				WKXStorageModule.WKXStorageModule([
+				WKCStorageModule.WKCStorageModule([
 					WKXDocumentStorage.WKXDocumentStorage,
 					WKCSettingStorage.WKCSettingStorage,
 					WKXVersionStorage.WKXVersionStorage,
