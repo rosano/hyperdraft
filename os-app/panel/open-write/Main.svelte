@@ -24,7 +24,6 @@ export const DocumentsExport = async function () {
 
 	zip.file(`${ fileName }.json`, JSON.stringify({
 		WKCNoteObjects: $notesAll,
-		WKCSettingObjects: await WKCSettingsAction.WKCSettingsActionQuery(storageClient, {}),
 		WKCSettingObjects: await WKCSettingAction.WKCSettingsActionQuery(storageClient, {}),
 	}));
 	
