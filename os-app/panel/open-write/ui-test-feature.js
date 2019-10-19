@@ -109,4 +109,18 @@ describe('WIKWriteUIFeature', function () {
 
 	});
 
+	describe.skip('WIKWriteFooterStorageStatus', function testWIKWriteFooterStorageStatus () {
+
+		before(function() {
+			return browser.visit(OLSKTestingCanonicalFor(kDefaultRoute.OLSKRoutePath, {
+				WIKWriteFooterStorageStatus: 'alfa',
+			}));
+		});
+
+		it('shows WIKWriteFooterStorageStatus', function () {
+			browser.assert.text(OSWRootRemoteStorageError, 'alfa')
+		});
+
+	});
+
 });

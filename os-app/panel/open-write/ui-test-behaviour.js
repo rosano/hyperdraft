@@ -32,6 +32,8 @@ Object.entries({
 
 	WKCWriteReloadButton: '#WKCWriteReloadButton',
 
+	WIKWriteFooterStorageStatus: '.WIKWriteFooterStorageStatus',
+
 	async uCreateItem (browser) {
 		browser.pressButton(WKCWriteCreateButton);
 		await browser.wait({ element: WKCWriteListItem });
@@ -64,6 +66,10 @@ describe('WKCWriteUIAccess', function () {
 		browser.assert.hasClass(WIKWriteStorageWidget, 'StorageHidden');
 
 		browser.assert.elements(WKCWriteReloadButton, 1);
+	});
+
+	it('shows WIKWriteFooterStorageStatus', function () {
+		browser.assert.elements(WIKWriteFooterStorageStatus, 1)
 	});
 
 	it('on create', async function() {
