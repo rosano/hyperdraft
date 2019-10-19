@@ -12,7 +12,7 @@ import {
 </script>
 
 <footer>
-	<OLSKToolbar>
+	<OLSKToolbar OLSKToolbarJustify={ true }>
 		<OLSKToolbarElementGroup>
 			<button on:click={ () => window.location.reload() } class="OLSKToolbarButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle" title={ OLSKLocalized('WKCWriteFooterToolbarReloadButtonText') } style="background-image: url('/panel/_shared/ui-assets/wIKSharedReload.svg')" id="WKCWriteReloadButton"></button>
 		</OLSKToolbarElementGroup>

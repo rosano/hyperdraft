@@ -109,6 +109,18 @@ describe('WIKWriteUIFeature', function () {
 
 	});
 
+	describe.skip('WIKWriteFooter', function testWIKWriteFooter () {
+
+		before(function() {
+			return browser.visit(kDefaultRoute.OLSKRoutePath);
+		});
+
+		it('sets class', function () {
+			browser.assert.hasClass(`WIKWriteFooter .OLSKToolbar`, 'OLSKToolbarJustify')
+		});
+
+	});
+
 	describe.skip('WIKWriteFooterStorageStatus', function testWIKWriteFooterStorageStatus () {
 
 		before(function() {
