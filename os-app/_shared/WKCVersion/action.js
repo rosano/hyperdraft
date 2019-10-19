@@ -1,28 +1,28 @@
-import * as WKXVersionMetal from './metal.js';
+import * as WKCVersionMetal from './metal.js';
 import { factory, detectPrng } from 'ulid';
 const uniqueID = typeof require === 'undefined' && navigator.appName === 'Zombie' ? factory(detectPrng(true)) : factory();
 
-export const WKXVersionActionCreate = async function(storageClient, inputData) {
+export const WKCVersionActionCreate = async function(storageClient, inputData) {
 	if (typeof inputData !== 'object' || inputData === null) {
 		return Promise.reject(new Error('WKCErrorInputNotValid'));
 	}
 
-	return await WKXVersionMetal.WKXVersionMetalWrite(storageClient, Object.assign(inputData, {
-		WKXVersionID: uniqueID(),
+	return await WKCVersionMetal.WKCVersionMetalWrite(storageClient, Object.assign(inputData, {
+		WKCVersionID: uniqueID(),
 	}));
 };
 
-export const WKXVersionActionDelete = async function(storageClient, inputData) {
-	return await WKXVersionMetal.WKXVersionMetalDelete(storageClient, inputData);
+export const WKCVersionActionDelete = async function(storageClient, inputData) {
+	return await WKCVersionMetal.WKCVersionMetalDelete(storageClient, inputData);
 };
 
-export const WKXVersionActionQuery = async function(storageClient, inputData) {
+export const WKCVersionActionQuery = async function(storageClient, inputData) {
 	if (typeof inputData !== 'object' || inputData === null) {
 		return Promise.reject(new Error('WKCErrorInputNotValid'));
 	}
 
-	return Promise.resolve(Object.values(await WKXVersionMetal.WKXVersionMetalList(storageClient)).sort(function (a, b) {
-		return b.WKXVersionDate - a.WKXVersionDate;
+	return Promise.resolve(Object.values(await WKCVersionMetal.WKCVersionMetalList(storageClient)).sort(function (a, b) {
+		return b.WKCVersionDate - a.WKCVersionDate;
 	}).filter(function(e) {
 		if (!Object.keys(inputData).length) {
 			return true;

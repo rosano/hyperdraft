@@ -111,7 +111,7 @@ let languageDictionary = {};
 const WKCStorageModule = require('./os-app/_shared/WKCStorageModule/main.js');
 const WKXDocumentStorage = require('./os-app/_shared/WKXDocument/storage.js');
 const WKCSettingStorage = require('./os-app/_shared/WKCSetting/storage.js');
-const WKXVersionStorage = require('./os-app/_shared/WKXVersion/storage.js');
+const WKCVersionStorage = require('./os-app/_shared/WKCVersion/storage.js');
 
 (function WKXMochaStorage() {
 	if (process.env.OLSK_TESTING_BEHAVIOUR === 'true') {
@@ -130,7 +130,7 @@ const WKXVersionStorage = require('./os-app/_shared/WKXVersion/storage.js');
 				WKCStorageModule.WKCStorageModule([
 					WKXDocumentStorage.WKXDocumentStorage,
 					WKCSettingStorage.WKCSettingStorage,
-					WKXVersionStorage.WKXVersionStorage,
+					WKCVersionStorage.WKCVersionStorage,
 				].map(function (e) {
 					return {
 						WKXCollectionStorageGenerator: e,

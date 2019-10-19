@@ -1,7 +1,7 @@
 import * as WKXDocumentMetal from './metal.js';
 import * as WKXDocumentModel from './model.js';
 import * as WKCSettingAction from '../WKCSetting/action.js';
-import * as WKXVersionAction from '../WKXVersion/action.js';
+import * as WKCVersionAction from '../WKCVersion/action.js';
 import * as WKCParser from '../WKCParser/main.js';
 import { factory, detectPrng } from 'ulid';
 const uniqueID = typeof require === 'undefined' && navigator.appName === 'Zombie' ? factory(detectPrng(true)) : factory();
@@ -35,10 +35,10 @@ export const WKXDocumentActionUpdate = async function(storageClient, inputData) 
 };
 
 export const WKXDocumentActionDelete = async function(storageClient, inputData) {
-	await Promise.all((await WKXVersionAction.WKXVersionActionQuery(storageClient, {
-		WKXVersionDocumentID: inputData,
+	await Promise.all((await WKCVersionAction.WKCVersionActionQuery(storageClient, {
+		WKCVersionDocumentID: inputData,
 	})).map(function (e) {
-		return WKXVersionAction.WKXVersionActionDelete(storageClient, e.WKXVersionID);
+		return WKCVersionAction.WKCVersionActionDelete(storageClient, e.WKCVersionID);
 	}));
 	
 	return await WKXDocumentMetal.WKXDocumentMetalDelete(storageClient, inputData);

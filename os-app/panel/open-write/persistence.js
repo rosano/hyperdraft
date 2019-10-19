@@ -5,7 +5,7 @@ import { WKCStorageModule } from '../../_shared/WKCStorageModule/main.js';
 import { WKXDocumentStorage } from '../../_shared/WKXDocument/storage.js';
 import { WKXDocumentActionQuery } from '../../_shared/WKXDocument/action.js';
 import { WKCSettingStorage } from '../../_shared/WKCSetting/storage.js';
-import { WKXVersionStorage } from '../../_shared/WKXVersion/storage.js';
+import { WKCVersionStorage } from '../../_shared/WKCVersion/storage.js';
 
 import { WKCWriteLogicListSort } from './ui-logic.js';
 
@@ -36,7 +36,7 @@ export const storageClient = WKCStorageClient.WKCStorageClient({
 	modules: [
 		WKCStorageModule([
 			WKXDocumentStorage,
-			WKXVersionStorage,
+			WKCVersionStorage,
 			WKCSettingStorage,
 			].map(function (e) {
 				return {

@@ -1,7 +1,7 @@
 import { rejects, deepEqual } from 'assert';
 
 import * as mainModule from './action.js';
-import * as WKCVersionsAction from '../WKXVersion/action.js';
+import * as WKCVersionsAction from '../WKCVersion/action.js';
 
 const kTesting = {
 	StubDocumentObject: function() {
@@ -146,12 +146,12 @@ describe('WKXDocumentActionDelete', function testWKXDocumentActionDelete() {
 	});
 
 	it('deletes corresponding versionObjects', async function() {
-		await mainModule.WKXDocumentActionDelete(WKXTestingStorageClient, (await WKCVersionsAction.WKXVersionActionCreate(WKXTestingStorageClient, {
-			WKXVersionBody: 'charlie',
-			WKXVersionDocumentID: (await mainModule.WKXDocumentActionCreate(WKXTestingStorageClient, kTesting.StubDocumentObject())).WKXDocumentID,
-			WKXVersionDate: new Date(),
-		})).WKXVersionDocumentID);
-		deepEqual(await WKCVersionsAction.WKXVersionActionQuery(WKXTestingStorageClient, {}), []);
+		await mainModule.WKXDocumentActionDelete(WKXTestingStorageClient, (await WKCVersionsAction.WKCVersionActionCreate(WKXTestingStorageClient, {
+			WKCVersionBody: 'charlie',
+			WKCVersionDocumentID: (await mainModule.WKXDocumentActionCreate(WKXTestingStorageClient, kTesting.StubDocumentObject())).WKXDocumentID,
+			WKCVersionDate: new Date(),
+		})).WKCVersionDocumentID);
+		deepEqual(await WKCVersionsAction.WKCVersionActionQuery(WKXTestingStorageClient, {}), []);
 	});
 
 });

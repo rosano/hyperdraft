@@ -1,14 +1,14 @@
-import * as WKXVersionModel from './model.js';
+import * as WKCVersionModel from './model.js';
 import * as OLSKRemoteStorage from 'OLSKRemoteStorage';
 
 const kType = 'wkc_version';
 const kCollection = 'wkc_versions';
 
-export const WKXVersionStoragePath = function(inputData) {
+export const WKCVersionStoragePath = function(inputData) {
 	return `${ kCollection }/${ inputData || '' }`;
 };
 
-export const WKXVersionStorage = function (privateClient, publicClient, changeDelegate) {
+export const WKCVersionStorage = function (privateClient, publicClient, changeDelegate) {
 	privateClient.on('change', function (event) {
 		if (!changeDelegate) {
 			return;
@@ -28,29 +28,29 @@ export const WKXVersionStorage = function (privateClient, publicClient, changeDe
 			return console.warn(`${ delegateMethod } not function`);
 		};
 
-		changeDelegate[delegateMethod](WKXVersionModel.WKXVersionModelPostJSONParse(event[OLSKRemoteStorage.OLSKRemoteStorageChangeDelegateInput(delegateMethod)]));
+		changeDelegate[delegateMethod](WKCVersionModel.WKCVersionModelPostJSONParse(event[OLSKRemoteStorage.OLSKRemoteStorageChangeDelegateInput(delegateMethod)]));
 	});
 
 	return {
 		WKXStorageCollection: kCollection,
 		WKXStorageType: kType,
-		WKXStorageModelErrors: WKXVersionModel.WKXVersionModelErrorsFor({}),
+		WKXStorageModelErrors: WKCVersionModel.WKCVersionModelErrorsFor({}),
 		WKXStorageExports: {
 			init: function () {
-				return privateClient.cache(WKXVersionStoragePath());
+				return privateClient.cache(WKCVersionStoragePath());
 			},
 			listObjects: function () {
-				return privateClient.getAll(WKXVersionStoragePath(), false);
+				return privateClient.getAll(WKCVersionStoragePath(), false);
 			},
 			writeObject: async function (param1, param2) {
-				await privateClient.storeObject(kType, WKXVersionStoragePath(param1), WKXVersionModel.WKXVersionModelPreJSONSchemaValidate(param2));
-				return WKXVersionModel.WKXVersionModelPostJSONParse(param2);
+				await privateClient.storeObject(kType, WKCVersionStoragePath(param1), WKCVersionModel.WKCVersionModelPreJSONSchemaValidate(param2));
+				return WKCVersionModel.WKCVersionModelPostJSONParse(param2);
 			},
 			readObject: function (inputData) {
-				return privateClient.getObject(WKXVersionStoragePath(inputData));
+				return privateClient.getObject(WKCVersionStoragePath(inputData));
 			},
 			deleteObject: function (inputData) {
-				return privateClient.remove(WKXVersionStoragePath(inputData));
+				return privateClient.remove(WKCVersionStoragePath(inputData));
 			},
 		},
 	};
