@@ -135,4 +135,27 @@ describe('WIKWriteUIFeature', function () {
 
 	});
 
+	describe.skip('WIKWriteFooterStorageButton', function testWIKWriteFooterStorageButton () {
+
+		before(function() {
+			return browser.visit(kDefaultRoute.OLSKRoutePath);
+		});
+
+		before(function () {
+			browser.assert.text('#TestWIKWriteFooterDispatchStorage', '0')
+
+			browser.click(WIKWriteFooterStorageButton)
+		});
+		
+		it('has class', function () {
+			browser.assert.hasClass(WIKWriteFooterStorageButton, 'OLSKLayoutButtonNoStyle')
+			browser.assert.hasClass(WIKWriteFooterStorageButton, 'OLSKLayoutElementTappable')
+		});
+		
+		it('sends WIKWriteFooterDispatchStorage', function () {
+			browser.assert.text('#TestWIKWriteFooterDispatchStorage', '1')
+		});
+
+	});
+
 });

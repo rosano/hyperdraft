@@ -9,6 +9,19 @@ import {
 	OLSKLocalized,
 	_WIKIsTestingBehaviour,
 } from '../../_shared/common/global.js';
+
+import { createEventDispatcher } from 'svelte';
+const dispatch = createEventDispatcher();
+
+const mod = {
+
+	// INTERFACE
+
+	InterfaceStorageButtonDidClick () {
+		dispatch('WIKWriteFooterDispatchStorage')
+	},
+
+};
 </script>
 
 <footer>
@@ -19,6 +32,9 @@ import {
 
 		<div>
 			<div class="WIKWriteFooterStorageStatus">{ WIKWriteFooterStorageStatus }</div>
+			<button class="WIKWriteFooterStorageButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable" title={ OLSKLocalized('WIKWriteFooterStorageButtonText') } on:click={ mod.InterfaceStorageButtonDidClick } class:OSWIconVisible={ false }>
+				<img src="/open-compose/submodules/WIKWriteFooter/ui-images/WIKWriteFooterStorageButton.svg">
+			</button>
 		</div>
 	</OLSKToolbar>
 </footer>
