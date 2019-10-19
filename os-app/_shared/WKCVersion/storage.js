@@ -9,28 +9,6 @@ export const WKCVersionStoragePath = function(inputData) {
 };
 
 export const WKCVersionStorage = function (privateClient, publicClient, changeDelegate) {
-	privateClient.on('change', function (event) {
-		if (!changeDelegate) {
-			return;
-		};
-		
-		if (event.relativePath.indexOf(kCollection) !== 0) {
-			return;
-		};
-
-		const delegateMethod = OLSKRemoteStorage.OLSKRemoteStorageChangeDelegateProperty(event);
-
-		if (!delegateMethod) {
-			return;
-		};
-
-		if (typeof changeDelegate[delegateMethod] !== 'function') {
-			return console.warn(`${ delegateMethod } not function`);
-		};
-
-		changeDelegate[delegateMethod](WKCVersionModel.WKCVersionModelPostJSONParse(event[OLSKRemoteStorage.OLSKRemoteStorageChangeDelegateInput(delegateMethod)]));
-	});
-
 	return {
 		WKCStorageCollection: kCollection,
 		WKCStorageType: kType,
