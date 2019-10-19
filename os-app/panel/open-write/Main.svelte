@@ -7,7 +7,6 @@ import ModuleFooter from './ModuleFooter.svelte';
 import { OLSKLocalized } from '../../_shared/common/global.js';
 import { storageClient, isLoading, isMobile, isInErrorState, notesAll } from './persistence.js';
 
-<<<<<<< HEAD
 import * as WKCNotesMetal from '../../_shared/rs-modules/wkc_notes/metal.js';
 import { WKCNotesModelPostJSONParse } from '../../_shared/rs-modules/wkc_notes/model.js';
 import * as WKCNotesAction from '../../_shared/rs-modules/wkc_notes/action.js';
