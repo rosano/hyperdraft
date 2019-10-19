@@ -4,7 +4,7 @@ import * as mainModule from './action.js';
 import * as WKCVersionsAction from '../wkc_versions/action.js';
 
 const kTesting = {
-	StubNoteObject: function() {
+	StubNoteObject () {
 		return {
 			WKCNoteBody: 'alfa',
 		};

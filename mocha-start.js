@@ -74,6 +74,40 @@ let languageDictionary = {};
 	};
 })();
 
+(function OLSKMochaErrors() {
+	process.on('unhandledRejection', () => {
+		// console.log('Unhandledd Rejection at:', arguments)
+		// Recommended: send the information to sentry.io
+		// or whatever crash reporting service you use
+	});
+})();
+
+(function OLSKMochaPreprocess() {
+	const fs = require('fs');
+	const oldRequire = require('olsk-rollup-plugin-localize')()._OLSKRollupI18NReplaceInternationalizationToken;
+	const replaceFunctions = [
+		require('OLSKTesting')._OLSKTestingMochaReplaceES6Import,
+		function (inputData) {
+			return (oldRequire({
+				code: inputData,
+			}, languageDictionary) || {
+				code: inputData,
+			}).code;
+		},
+	];
+
+	require.extensions['.js'] = function(module, filename) {
+		try {
+			return module._compile(replaceFunctions.reduce(function (coll, item) {
+				return item(coll);
+			}, fs.readFileSync(filename, 'utf-8')), filename);
+		} catch (err) {
+			// console.log(code); // eslint-disable-line no-console
+			throw err;
+		}
+	};
+})();
+
 (function WKCMochaSetup() {
 	let moduleSlugs = [
 		'wkc_notes',
@@ -124,36 +158,48 @@ let languageDictionary = {};
 	});
 })();
 
-(function OLSKMochaErrors() {
-	process.on('unhandledRejection', () => {
-		// console.log('Unhandledd Rejection at:', arguments)
-		// Recommended: send the information to sentry.io
-		// or whatever crash reporting service you use
-	});
-})();
+const WKXStorageModule = require('./os-app/_shared/WKXStorageModule/main.js');
+const WKXDocumentStorage = require('./os-app/_shared/WKXDocument/storage.js');
+const WKXSettingStorage = require('./os-app/_shared/WKXSetting/storage.js');
+const WKXVersionStorage = require('./os-app/_shared/WKXVersion/storage.js');
 
-(function OLSKMochaPreprocess() {
-	const fs = require('fs');
-	const oldRequire = require('olsk-rollup-plugin-localize')()._OLSKRollupI18NReplaceInternationalizationToken;
-	const replaceFunctions = [
-		require('OLSKTesting')._OLSKTestingMochaReplaceES6Import,
-		function (inputData) {
-			return (oldRequire({
-				code: inputData,
-			}, languageDictionary) || {
-				code: inputData,
-			}).code;
-		},
-	];
+(function WKXMochaStorage() {
+	if (process.env.OLSK_TESTING_BEHAVIOUR === 'true') {
+		return;
+	}
 
-	require.extensions['.js'] = function(module, filename) {
-		try {
-			return module._compile(replaceFunctions.reduce(function (coll, item) {
-				return item(coll);
-			}, fs.readFileSync(filename, 'utf-8')), filename);
-		} catch (err) {
-			// console.log(code); // eslint-disable-line no-console
-			throw err;
-		}
+	const uSerial = function (inputData) {
+		return inputData.reduce(async function (coll, e) {
+			return e.then(Array.prototype.concat.bind(await coll));
+		}, Promise.resolve([]));
 	};
+
+	before(function(done) {
+		global.WKXTestingStorageClient = require('./os-app/_shared/WKXStorageClient/main.js').WKXStorageClient({
+			modules: [
+				WKXStorageModule.WKXStorageModule([
+					WKXDocumentStorage.WKXDocumentStorage,
+					WKXSettingStorage.WKXSettingStorage,
+					WKXVersionStorage.WKXVersionStorage,
+				].map(function (e) {
+					return {
+						WKXCollectionStorageGenerator: e,
+						WKXCollectionChangeDelegate: null,
+					};
+				}))
+			],
+		});
+
+		done();
+	});
+
+	beforeEach(async function() {
+		await uSerial([
+			'wkc_documents',
+			'wkc_settings',
+			'wkc_versions',
+		].map(async function (e) {
+			return await Promise.all(Object.keys(await global.WKXTestingStorageClient.wikiavec[e].listObjects()).map(global.WKXTestingStorageClient.wikiavec[e].deleteObject));
+		}));
+	});
 })();
