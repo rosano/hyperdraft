@@ -15,12 +15,12 @@ export const WKCVersionModelErrorsFor = function(inputData, options = {}) {
 		];
 	}
 
-	if (typeof inputData.WKCVersionDocumentID !== 'string') {
-		errors.WKCVersionDocumentID = [
+	if (typeof inputData.WKCVersionNoteID !== 'string') {
+		errors.WKCVersionNoteID = [
 			'WKCErrorNotString',
 		];
-	} else if (inputData.WKCVersionDocumentID.trim() === '') {
-		errors.WKCVersionDocumentID = [
+	} else if (inputData.WKCVersionNoteID.trim() === '') {
+		errors.WKCVersionNoteID = [
 			'WKCErrorNotFilled',
 		];
 	}

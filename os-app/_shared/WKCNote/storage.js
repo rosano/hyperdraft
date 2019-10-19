@@ -1,8 +1,8 @@
 import * as WKCNoteModel from './model.js';
 import * as OLSKRemoteStorage from 'OLSKRemoteStorage';
 
-const kType = 'wkc_document';
-const kCollection = 'wkc_documents';
+const kType = 'wkc_note';
+const kCollection = 'wkc_notes';
 
 export const WKCNoteStoragePath = function(inputData) {
 	return `${ kCollection }/${ inputData || '' }`;

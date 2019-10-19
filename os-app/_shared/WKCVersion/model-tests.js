@@ -3,10 +3,10 @@ import { throws, deepEqual } from 'assert';
 import * as mainModule from './model.js';
 
 const kTesting = {
-	StubDocumentObjectValid: function() {
+	StubNoteObjectValid: function() {
 		return {
 			WKCVersionID: 'alfa',
-			WKCVersionDocumentID: 'bravo',
+			WKCVersionNoteID: 'bravo',
 			WKCVersionBody: '',
 			WKCVersionDate: new Date(),
 		};
@@ -22,7 +22,7 @@ describe('WKCVersionModelErrorsFor', function testWKCVersionModelErrorsFor() {
 	});
 
 	it('returns object if WKCVersionID not string', function() {
-		deepEqual(mainModule.WKCVersionModelErrorsFor(Object.assign(kTesting.StubDocumentObjectValid(), {
+		deepEqual(mainModule.WKCVersionModelErrorsFor(Object.assign(kTesting.StubNoteObjectValid(), {
 			WKCVersionID: null,
 		})), {
 			WKCVersionID: [
@@ -32,7 +32,7 @@ describe('WKCVersionModelErrorsFor', function testWKCVersionModelErrorsFor() {
 	});
 
 	it('returns object if WKCVersionID not filled', function() {
-		deepEqual(mainModule.WKCVersionModelErrorsFor(Object.assign(kTesting.StubDocumentObjectValid(), {
+		deepEqual(mainModule.WKCVersionModelErrorsFor(Object.assign(kTesting.StubNoteObjectValid(), {
 			WKCVersionID: ' ',
 		})), {
 			WKCVersionID: [
@@ -41,28 +41,28 @@ describe('WKCVersionModelErrorsFor', function testWKCVersionModelErrorsFor() {
 		});
 	});
 
-	it('returns object if WKCVersionDocumentID not string', function() {
-		deepEqual(mainModule.WKCVersionModelErrorsFor(Object.assign(kTesting.StubDocumentObjectValid(), {
-			WKCVersionDocumentID: null,
+	it('returns object if WKCVersionNoteID not string', function() {
+		deepEqual(mainModule.WKCVersionModelErrorsFor(Object.assign(kTesting.StubNoteObjectValid(), {
+			WKCVersionNoteID: null,
 		})), {
-			WKCVersionDocumentID: [
+			WKCVersionNoteID: [
 				'WKCErrorNotString',
 			],
 		});
 	});
 
-	it('returns object if WKCVersionDocumentID not filled', function() {
-		deepEqual(mainModule.WKCVersionModelErrorsFor(Object.assign(kTesting.StubDocumentObjectValid(), {
-			WKCVersionDocumentID: ' ',
+	it('returns object if WKCVersionNoteID not filled', function() {
+		deepEqual(mainModule.WKCVersionModelErrorsFor(Object.assign(kTesting.StubNoteObjectValid(), {
+			WKCVersionNoteID: ' ',
 		})), {
-			WKCVersionDocumentID: [
+			WKCVersionNoteID: [
 				'WKCErrorNotFilled',
 			],
 		});
 	});
 
 	it('returns object if WKCVersionBody not string', function() {
-		deepEqual(mainModule.WKCVersionModelErrorsFor(Object.assign(kTesting.StubDocumentObjectValid(), {
+		deepEqual(mainModule.WKCVersionModelErrorsFor(Object.assign(kTesting.StubNoteObjectValid(), {
 			WKCVersionBody: null,
 		})), {
 			WKCVersionBody: [
@@ -72,7 +72,7 @@ describe('WKCVersionModelErrorsFor', function testWKCVersionModelErrorsFor() {
 	});
 
 	it('returns object if WKCVersionDate not date', function() {
-		deepEqual(mainModule.WKCVersionModelErrorsFor(Object.assign(kTesting.StubDocumentObjectValid(), {
+		deepEqual(mainModule.WKCVersionModelErrorsFor(Object.assign(kTesting.StubNoteObjectValid(), {
 			WKCVersionDate: new Date('alfa'),
 		})), {
 			WKCVersionDate: [
@@ -82,7 +82,7 @@ describe('WKCVersionModelErrorsFor', function testWKCVersionModelErrorsFor() {
 	});
 
 	it('returns null', function() {
-		deepEqual(mainModule.WKCVersionModelErrorsFor(kTesting.StubDocumentObjectValid()), null);
+		deepEqual(mainModule.WKCVersionModelErrorsFor(kTesting.StubNoteObjectValid()), null);
 	});
 
 });

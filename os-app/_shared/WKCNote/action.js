@@ -36,7 +36,7 @@ export const WKCNoteActionUpdate = async function(storageClient, inputData) {
 
 export const WKCNoteActionDelete = async function(storageClient, inputData) {
 	await Promise.all((await WKCVersionAction.WKCVersionActionQuery(storageClient, {
-		WKCVersionDocumentID: inputData,
+		WKCVersionNoteID: inputData,
 	})).map(function (e) {
 		return WKCVersionAction.WKCVersionActionDelete(storageClient, e.WKCVersionID);
 	}));

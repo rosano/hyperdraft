@@ -6,7 +6,7 @@ import * as WKCVersionsAction from '../WKCVersion/action.js';
 const kTesting = {
 	StubVersionObject: function() {
 		return {
-			WKCVersionDocumentID: 'alfa',
+			WKCVersionNoteID: 'alfa',
 			WKCVersionBody: 'bravo',
 			WKCVersionDate: new Date(),
 		};
@@ -78,15 +78,15 @@ describe('WKCVersionActionQuery', function testWKCVersionActionQuery() {
 		deepEqual(await mainModule.WKCVersionActionQuery(WKCTestingStorageClient, {}), items.reverse());
 	});
 
-	it('filters by WKCVersionDocumentID', async function() {
+	it('filters by WKCVersionNoteID', async function() {
 		let items = await kTesting.uSerial(['alfa', 'bravo', 'charlie'].map(async function (e) {
 			return await mainModule.WKCVersionActionCreate(WKCTestingStorageClient, Object.assign(kTesting.StubVersionObject(), {
-				WKCVersionDocumentID: e,
+				WKCVersionNoteID: e,
 			}));
 		}));
 
 		deepEqual(await mainModule.WKCVersionActionQuery(WKCTestingStorageClient, {
-			WKCVersionDocumentID: 'charlie',
+			WKCVersionNoteID: 'charlie',
 		}), items.slice(-1));
 	});
 
@@ -108,7 +108,7 @@ describe('WKCVersionActionDelete', function testWKCVersionActionDelete() {
 		let itemID;
 		await mainModule.WKCVersionActionDelete(WKCTestingStorageClient, itemID = (await mainModule.WKCVersionActionCreate(WKCTestingStorageClient, kTesting.StubVersionObject())).WKCVersionID);
 		deepEqual(await mainModule.WKCVersionActionQuery(WKCTestingStorageClient, {
-			WKCVersionDocumentID: itemID,
+			WKCVersionNoteID: itemID,
 		}), []);
 	});
 

@@ -175,7 +175,7 @@ const WKCVersionStorage = require('./os-app/_shared/WKCVersion/storage.js');
 
 	beforeEach(async function() {
 		await uSerial([
-			'wkc_documents',
+			'wkc_notes',
 			'wkc_settings',
 			'wkc_versions',
 		].map(async function (e) {

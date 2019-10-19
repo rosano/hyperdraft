@@ -3,10 +3,10 @@ import { rejects, deepEqual } from 'assert';
 import * as mainModule from './metal.js';
 
 const kTesting = {
-	StubDocumentObjectValid: function() {
+	StubNoteObjectValid: function() {
 		return {
 			WKCVersionID: 'alfa',
-			WKCVersionDocumentID: 'bravo',
+			WKCVersionNoteID: 'bravo',
 			WKCVersionBody: 'charlie',
 			WKCVersionDate: new Date('2019-02-23T13:56:36Z'),
 		};
@@ -20,7 +20,7 @@ describe('WKCVersionMetalWrite', function testWKCVersionMetalWrite() {
 	});
 
 	it('returns object with WKCErrors if not valid', async function() {
-		deepEqual((await mainModule.WKCVersionMetalWrite(WKCTestingStorageClient, Object.assign(kTesting.StubDocumentObjectValid(), {
+		deepEqual((await mainModule.WKCVersionMetalWrite(WKCTestingStorageClient, Object.assign(kTesting.StubNoteObjectValid(), {
 			WKCVersionID: null,
 		}))).WKCErrors, {
 			WKCVersionID: [
@@ -30,9 +30,9 @@ describe('WKCVersionMetalWrite', function testWKCVersionMetalWrite() {
 	});
 
 	it('resolves object', async function() {
-		let item = await mainModule.WKCVersionMetalWrite(WKCTestingStorageClient, kTesting.StubDocumentObjectValid());
+		let item = await mainModule.WKCVersionMetalWrite(WKCTestingStorageClient, kTesting.StubNoteObjectValid());
 
-		deepEqual(item, Object.assign(kTesting.StubDocumentObjectValid(), {
+		deepEqual(item, Object.assign(kTesting.StubNoteObjectValid(), {
 			'@context': item['@context'],
 		}));
 	});
@@ -50,7 +50,7 @@ describe('WKCVersionMetalRead', function testWKCVersionMetalRead() {
 	});
 
 	it('resolves object', async function() {
-		let item = await mainModule.WKCVersionMetalWrite(WKCTestingStorageClient, kTesting.StubDocumentObjectValid());
+		let item = await mainModule.WKCVersionMetalWrite(WKCTestingStorageClient, kTesting.StubNoteObjectValid());
 
 		deepEqual(await mainModule.WKCVersionMetalRead(WKCTestingStorageClient, item.WKCVersionID), item);
 	});
@@ -64,7 +64,7 @@ describe('WKCVersionMetalList', function testWKCVersionMetalList() {
 	});
 
 	it('resolves array', async function() {
-		let item = await mainModule.WKCVersionMetalWrite(WKCTestingStorageClient, kTesting.StubDocumentObjectValid());
+		let item = await mainModule.WKCVersionMetalWrite(WKCTestingStorageClient, kTesting.StubNoteObjectValid());
 		deepEqual(Object.values(await mainModule.WKCVersionMetalList(WKCTestingStorageClient)), [item]);
 		deepEqual(Object.keys(await mainModule.WKCVersionMetalList(WKCTestingStorageClient)), [item.WKCVersionID]);
 	});
@@ -78,13 +78,13 @@ describe('WKCVersionMetalDelete', function testWKCVersionMetalDelete() {
 	});
 
 	it('resolves object', async function() {
-		deepEqual(await mainModule.WKCVersionMetalDelete(WKCTestingStorageClient, (await mainModule.WKCVersionMetalWrite(WKCTestingStorageClient, kTesting.StubDocumentObjectValid())).WKCVersionID), {
+		deepEqual(await mainModule.WKCVersionMetalDelete(WKCTestingStorageClient, (await mainModule.WKCVersionMetalWrite(WKCTestingStorageClient, kTesting.StubNoteObjectValid())).WKCVersionID), {
 			statusCode: 200,
 		});
 	});
 
 	it('deletes WKCVersion', async function() {
-		await mainModule.WKCVersionMetalDelete(WKCTestingStorageClient, (await mainModule.WKCVersionMetalWrite(WKCTestingStorageClient, kTesting.StubDocumentObjectValid())).WKCVersionID);
+		await mainModule.WKCVersionMetalDelete(WKCTestingStorageClient, (await mainModule.WKCVersionMetalWrite(WKCTestingStorageClient, kTesting.StubNoteObjectValid())).WKCVersionID);
 		deepEqual(await mainModule.WKCVersionMetalList(WKCTestingStorageClient), {});
 	});
 
