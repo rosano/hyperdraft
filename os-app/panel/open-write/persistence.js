@@ -43,7 +43,7 @@ export const storageClient = WKCStorageClient.WKCStorageClient({
 					WKCCollectionStorageGenerator: e,
 					WKCCollectionChangeDelegate: e === WKCNoteStorage ? {
 						OLSKChangeDelegateCreate: function (inputData) {
-							console.log('OLSKChangeDelegateCreate', inputData);
+							// console.log('OLSKChangeDelegateCreate', inputData);
 
 							notesAll.update(function (val) {
 								return val.filter(function (e) { // @Hotfix Dropbox sending DelegateAdd
@@ -52,7 +52,7 @@ export const storageClient = WKCStorageClient.WKCStorageClient({
 							});
 						},
 						OLSKChangeDelegateUpdate: function (inputData) {
-							console.log('OLSKChangeDelegateUpdate', inputData);
+							// console.log('OLSKChangeDelegateUpdate', inputData);
 
 							if (_noteSelected && (_noteSelected.WKCNoteID === inputData.WKCNoteID)) {
 								noteSelected.update(function (val) {
@@ -67,7 +67,7 @@ export const storageClient = WKCStorageClient.WKCStorageClient({
 							});
 						},
 						OLSKChangeDelegateDelete: function (inputData) {
-							console.log('OLSKChangeDelegateDelete', inputData);
+							// console.log('OLSKChangeDelegateDelete', inputData);
 
 							if (_noteSelected && (_noteSelected.WKCNoteID === inputData.WKCNoteID)) {
 								noteSelected.set(null);
