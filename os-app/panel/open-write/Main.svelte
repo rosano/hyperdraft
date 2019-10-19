@@ -7,11 +7,25 @@ import ModuleFooter from './ModuleFooter.svelte';
 import { OLSKLocalized } from '../../_shared/common/global.js';
 import { storageClient, isLoading, isMobile, isInErrorState } from './persistence.js';
 
+let WKCWriteFooterStorageStatus = '';
+import * as OLSKRemoteStorage from '../_shared/__external/OLSKRemoteStorage/main.js'
+OLSKRemoteStorage.OLSKRemoteStorageStatus(storageClient.remoteStorage, function (inputData) {
+	WKCWriteFooterStorageStatus = inputData
+}, OLSKLocalized)
+
 import { onMount } from 'svelte';
-import Widget from 'remotestorage-widget';
 onMount(function () {
-	(new Widget(storageClient.remoteStorage)).attach('WIKWriteStorageWidget');	
+	(new window.OLSKStorageWidget(storageClient.remoteStorage)).attach('WKCWriteStorageWidget').backend(document.querySelector('.WKCWriteFooterStorageButton'));
 });
+
+const mod = {
+
+	_ValueStorageHidden: true,
+	WIKWriteFooterDispatchStorage () {
+		mod._ValueStorageHidden = !mod._ValueStorageHidden;
+	},
+
+};
 </script>
 
 <div class="Container OLSKViewport" class:OLSKIsLoading={ $isLoading }>
@@ -21,13 +35,14 @@ onMount(function () {
 	<ModuleDetail />
 </OLSKViewportContent>
 
+<div id="WIKWriteStorageWidget" class:StorageHidden={ mod._ValueStorageHidden }></div>
+
 {#if !isMobile()}
-	<ModuleFooter />
+	<ModuleFooter on:WIKWriteFooterDispatchStorage={ mod.WIKWriteFooterDispatchStorage } { WKCWriteFooterStorageStatus } />
 {/if}
 
 </div>
 
-<div id="WIKWriteStorageWidget"></div>
 {#if $isInErrorState}
 	<div class="WIKWriteDebug">
 		<button class="WIKSharedButtonNoStyle" onclick="location.reload();">{ OLSKLocalized('WKCUpdateReloadText') }</button>
