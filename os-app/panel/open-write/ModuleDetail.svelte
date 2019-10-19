@@ -236,18 +236,16 @@ async function noteSave(inputData) {
 		});
 	})();
 
-	if (!throttleMapNotes[inputData.WKCNoteID]) {
-		throttleMapNotes[inputData.WKCNoteID] = {
+	OLSKThrottle.OLSKThrottleMappedTimeoutFor(throttleMapNotes, inputData.WKCNoteID, function (inputData) {
+		return {
 			OLSKThrottleDuration: 500,
 			OLSKThrottleCallback: async function () {
 				delete throttleMapNotes[inputData.WKCNoteID];
 
 				await WKCNoteAction.WKCNoteActionUpdate(storageClient, inputData);
 			},
-		};	
-	}
-
-	OLSKThrottle.OLSKThrottleTimeoutFor(throttleMapNotes[inputData.WKCNoteID]);
+		};
+	}, inputData);
 }
 
 async function notePublish() {
