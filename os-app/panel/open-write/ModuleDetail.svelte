@@ -213,28 +213,24 @@ async function noteSave(inputData) {
 		return val;
 	});
 
-	(async function() {
-		if (throttleMapVersions[inputData.WKCNoteID]) {
-			return OLSKThrottle.OLSKThrottleTimeoutFor(throttleMapVersions[inputData.WKCNoteID]);
-		}
-
-		throttleMapVersions[inputData.WKCNoteID] = {
+	OLSKThrottle.OLSKThrottleMappedTimeoutFor(throttleMapVersions, inputData.WKCNoteID, function (inputData) {
+		return {
 			OLSKThrottleDuration: 3000,
-			OLSKThrottleCallback: function () {
+			OLSKThrottleCallback: async function () {
 				delete throttleMapVersions[inputData.WKCNoteID];
+
+				if (!inputData.WKCNoteCreationDate) {
+					return;
+				}
+
+				await WKCVersionAction.WKCVersionActionCreate(storageClient, {
+					WKCVersionNoteID: inputData.WKCNoteID,
+					WKCVersionBody: inputData.WKCNoteBody,
+					WKCVersionDate: inputData.WKCNoteModificationDate,
+				});
 			},
 		};
-
-		if (!inputData.WKCNoteCreationDate) {
-			return;
-		}
-
-		await WKCVersionAction.WKCVersionActionCreate(storageClient, {
-			WKCVersionNoteID: inputData.WKCNoteID,
-			WKCVersionBody: inputData.WKCNoteBody,
-			WKCVersionDate: inputData.WKCNoteModificationDate,
-		});
-	})();
+	}, inputData);
 
 	OLSKThrottle.OLSKThrottleMappedTimeoutFor(throttleMapNotes, inputData.WKCNoteID, function (inputData) {
 		return {
