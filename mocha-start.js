@@ -125,7 +125,7 @@ const WKXVersionStorage = require('./os-app/_shared/WKXVersion/storage.js');
 	};
 
 	before(function(done) {
-		global.WKXTestingStorageClient = require('./os-app/_shared/WKXStorageClient/main.js').WKXStorageClient({
+		global.WKXTestingStorageClient = require('./os-app/_shared/WKCStorageClient/main.js').WKCStorageClient({
 			modules: [
 				WKXStorageModule.WKXStorageModule([
 					WKXDocumentStorage.WKXDocumentStorage,
