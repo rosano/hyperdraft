@@ -14,21 +14,3 @@
 #WIKWriteStorageWidget {
 	border-top: var(--WIKBorderStyle)
 }
-
-.WIKWriteFooterStorageButton {
-	padding: 0 5px;
-}
-
-.WIKWriteFooterStorageButton :global(svg,img) {
-	width: 20px;
-	height: 20px;
-}
-
-.WIKWriteFooterStorageButton :global(path) {
-	fill: black;
-}
-
-.WIKWriteFooterStorageButton.OSWIconVisible img {
-	display: none;
-}
-

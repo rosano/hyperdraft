@@ -33,7 +33,7 @@ const mod = {
 		<div>
 			<div class="WIKWriteFooterStorageStatus">{ WIKWriteFooterStorageStatus }</div>
 			<button class="WIKWriteFooterStorageButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable" title={ OLSKLocalized('WIKWriteFooterStorageButtonText') } on:click={ mod.InterfaceStorageButtonDidClick } class:OSWIconVisible={ false }>
-				<img src="/open-compose/submodules/WIKWriteFooter/ui-images/WIKWriteFooterStorageButton.svg">
+				<img src="/panel/open-write/modules/WIKWriteFooter/ui-images/WIKWriteFooterStorageButton.svg">
 			</button>
 		</div>
 	</OLSKToolbar>
@@ -46,5 +46,31 @@ const mod = {
 <style>
 footer {
 	border-top: var(--WIKBorderStyle);
+}
+
+footer :global(.OLSKToolbar) {
+	flex-grow: 1;
+}
+
+footer :global(.OLSKToolbar > div) {
+	display: flex;
+	align-items: center;
+}
+
+.WIKWriteFooterStorageButton {
+	padding: 0 5px;
+}
+
+.WIKWriteFooterStorageButton :global(svg,img) {
+	width: 20px;
+	height: 20px;
+}
+
+.WIKWriteFooterStorageButton :global(path) {
+	fill: black;
+}
+
+.WIKWriteFooterStorageButton.OSWIconVisible img {
+	display: none;
 }
 </style>

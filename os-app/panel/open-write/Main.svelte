@@ -7,15 +7,15 @@ import ModuleFooter from './ModuleFooter.svelte';
 import { OLSKLocalized } from '../../_shared/common/global.js';
 import { storageClient, isLoading, isMobile, isInErrorState } from './persistence.js';
 
-let WKCWriteFooterStorageStatus = '';
-import * as OLSKRemoteStorage from '../_shared/__external/OLSKRemoteStorage/main.js'
+let WIKWriteFooterStorageStatus = '';
+import * as OLSKRemoteStorage from '../../_shared/__external/OLSKRemoteStorage/main.js'
 OLSKRemoteStorage.OLSKRemoteStorageStatus(storageClient.remoteStorage, function (inputData) {
-	WKCWriteFooterStorageStatus = inputData
+	WIKWriteFooterStorageStatus = inputData
 }, OLSKLocalized)
 
 import { onMount } from 'svelte';
 onMount(function () {
-	(new window.OLSKStorageWidget(storageClient.remoteStorage)).attach('WKCWriteStorageWidget').backend(document.querySelector('.WKCWriteFooterStorageButton'));
+	(new window.OLSKStorageWidget(storageClient.remoteStorage)).attach('WIKWriteStorageWidget').backend(document.querySelector('.WIKWriteFooterStorageButton'));
 });
 
 const mod = {
@@ -38,7 +38,7 @@ const mod = {
 <div id="WIKWriteStorageWidget" class:StorageHidden={ mod._ValueStorageHidden }></div>
 
 {#if !isMobile()}
-	<ModuleFooter on:WIKWriteFooterDispatchStorage={ mod.WIKWriteFooterDispatchStorage } { WKCWriteFooterStorageStatus } />
+	<ModuleFooter on:WIKWriteFooterDispatchStorage={ mod.WIKWriteFooterDispatchStorage } { WIKWriteFooterStorageStatus } />
 {/if}
 
 </div>
@@ -76,6 +76,10 @@ const mod = {
 	margin: 10px;
 
 	background: #ddd;
+}
+
+.StorageHidden {
+	display: none;
 }
 
 @media screen and (max-width: 760px) {
