@@ -110,7 +110,7 @@ let languageDictionary = {};
 
 const WKXStorageModule = require('./os-app/_shared/WKXStorageModule/main.js');
 const WKXDocumentStorage = require('./os-app/_shared/WKXDocument/storage.js');
-const WKXSettingStorage = require('./os-app/_shared/WKXSetting/storage.js');
+const WKCSettingStorage = require('./os-app/_shared/WKCSetting/storage.js');
 const WKXVersionStorage = require('./os-app/_shared/WKXVersion/storage.js');
 
 (function WKXMochaStorage() {
@@ -129,7 +129,7 @@ const WKXVersionStorage = require('./os-app/_shared/WKXVersion/storage.js');
 			modules: [
 				WKXStorageModule.WKXStorageModule([
 					WKXDocumentStorage.WKXDocumentStorage,
-					WKXSettingStorage.WKXSettingStorage,
+					WKCSettingStorage.WKCSettingStorage,
 					WKXVersionStorage.WKXVersionStorage,
 				].map(function (e) {
 					return {

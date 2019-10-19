@@ -1,6 +1,6 @@
 import * as WKXDocumentMetal from './metal.js';
 import * as WKXDocumentModel from './model.js';
-import * as WKXSettingAction from '../WKXSetting/action.js';
+import * as WKCSettingAction from '../WKCSetting/action.js';
 import * as WKXVersionAction from '../WKXVersion/action.js';
 import * as WKCParser from '../WKCParser/main.js';
 import { factory, detectPrng } from 'ulid';
@@ -74,9 +74,9 @@ export const WKXDocumentActionPublish = async function(storageClient, inputData)
 	}
 
 	if (!inputData.WKXDocumentPublicID) {
-		inputData.WKXDocumentPublicID = (parseInt((await WKXSettingAction.WKXSettingsActionProperty(storageClient, 'WKCSettingsLastRepoID')) || 0) + 1).toString();
+		inputData.WKXDocumentPublicID = (parseInt((await WKCSettingAction.WKCSettingsActionProperty(storageClient, 'WKCSettingsLastRepoID')) || 0) + 1).toString();
 
-		await WKXSettingAction.WKXSettingsActionProperty(storageClient, 'WKCSettingsLastRepoID', inputData.WKXDocumentPublicID);
+		await WKCSettingAction.WKCSettingsActionProperty(storageClient, 'WKCSettingsLastRepoID', inputData.WKXDocumentPublicID);
 	}
 
 	return await WKXDocumentActionUpdate(storageClient, Object.assign(inputData, {
