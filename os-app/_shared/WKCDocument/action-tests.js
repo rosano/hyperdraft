@@ -23,11 +23,11 @@ const kTesting = {
 describe('WKCDocumentActionCreate', function testWKCDocumentActionCreate() {
 
 	it('rejects if not object', async function() {
-		await rejects(mainModule.WKCDocumentActionCreate(WKXTestingStorageClient, null), /WKCErrorInputNotValid/);
+		await rejects(mainModule.WKCDocumentActionCreate(WKCTestingStorageClient, null), /WKCErrorInputNotValid/);
 	});
 
 	it('returns object with WKCErrors if not valid', async function() {
-		deepEqual((await mainModule.WKCDocumentActionCreate(WKXTestingStorageClient, Object.assign(kTesting.StubDocumentObject(), {
+		deepEqual((await mainModule.WKCDocumentActionCreate(WKCTestingStorageClient, Object.assign(kTesting.StubDocumentObject(), {
 			WKCDocumentBody: null,
 		}))).WKCErrors, {
 			WKCDocumentBody: [
@@ -37,7 +37,7 @@ describe('WKCDocumentActionCreate', function testWKCDocumentActionCreate() {
 	});
 
 	it('returns WKCDocument', async function() {
-		let item = await mainModule.WKCDocumentActionCreate(WKXTestingStorageClient, kTesting.StubDocumentObject());
+		let item = await mainModule.WKCDocumentActionCreate(WKCTestingStorageClient, kTesting.StubDocumentObject());
 
 		deepEqual(item, Object.assign(kTesting.StubDocumentObject(), {
 			WKCDocumentID: item.WKCDocumentID,
@@ -49,17 +49,17 @@ describe('WKCDocumentActionCreate', function testWKCDocumentActionCreate() {
 
 	it('sets WKCDocumentID to unique value', async function() {
 		let items = await kTesting.uSerial(Array.from(Array(10)).map(async function (e) {
-			return (await mainModule.WKCDocumentActionCreate(WKXTestingStorageClient, kTesting.StubDocumentObject())).WKCDocumentID;
+			return (await mainModule.WKCDocumentActionCreate(WKCTestingStorageClient, kTesting.StubDocumentObject())).WKCDocumentID;
 		}));
 		deepEqual([...(new Set(items))], items);
 	});
 
 	it('sets WKCDocumentCreationDate to now', async function() {
-		deepEqual(new Date() - (await mainModule.WKCDocumentActionCreate(WKXTestingStorageClient, kTesting.StubDocumentObject())).WKCDocumentCreationDate < 100, true);
+		deepEqual(new Date() - (await mainModule.WKCDocumentActionCreate(WKCTestingStorageClient, kTesting.StubDocumentObject())).WKCDocumentCreationDate < 100, true);
 	});
 
 	it('sets WKCDocumentModificationDate to now', async function() {
-		deepEqual(new Date() - (await mainModule.WKCDocumentActionCreate(WKXTestingStorageClient, kTesting.StubDocumentObject())).WKCDocumentModificationDate < 100, true);
+		deepEqual(new Date() - (await mainModule.WKCDocumentActionCreate(WKCTestingStorageClient, kTesting.StubDocumentObject())).WKCDocumentModificationDate < 100, true);
 	});
 
 });
@@ -67,17 +67,17 @@ describe('WKCDocumentActionCreate', function testWKCDocumentActionCreate() {
 describe('WKCDocumentActionRead', function testWKCDocumentActionRead() {
 
 	it('rejects if not string', async function() {
-		await rejects(mainModule.WKCDocumentActionRead(WKXTestingStorageClient, null), /WKCErrorInputNotValid/);
+		await rejects(mainModule.WKCDocumentActionRead(WKCTestingStorageClient, null), /WKCErrorInputNotValid/);
 	});
 
 	it('returns null if not found', async function() {
-		deepEqual(await mainModule.WKCDocumentActionRead(WKXTestingStorageClient, 'alfa'), null);
+		deepEqual(await mainModule.WKCDocumentActionRead(WKCTestingStorageClient, 'alfa'), null);
 	});
 
 	it('returns WKCDocument', async function() {
-		let item = await mainModule.WKCDocumentActionCreate(WKXTestingStorageClient, kTesting.StubDocumentObject());
+		let item = await mainModule.WKCDocumentActionCreate(WKCTestingStorageClient, kTesting.StubDocumentObject());
 
-		deepEqual(item, await mainModule.WKCDocumentActionRead(WKXTestingStorageClient, item.WKCDocumentID));
+		deepEqual(item, await mainModule.WKCDocumentActionRead(WKCTestingStorageClient, item.WKCDocumentID));
 	});
 
 });
@@ -85,11 +85,11 @@ describe('WKCDocumentActionRead', function testWKCDocumentActionRead() {
 describe('WKCDocumentActionUpdate', function testWKCDocumentActionUpdate() {
 
 	it('rejects if not object', async function() {
-		await rejects(mainModule.WKCDocumentActionUpdate(WKXTestingStorageClient, null), /WKCErrorInputNotValid/);
+		await rejects(mainModule.WKCDocumentActionUpdate(WKCTestingStorageClient, null), /WKCErrorInputNotValid/);
 	});
 
 	it('returns object with WKCErrors if not valid', async function() {
-		deepEqual((await mainModule.WKCDocumentActionUpdate(WKXTestingStorageClient, Object.assign(await mainModule.WKCDocumentActionCreate(WKXTestingStorageClient, kTesting.StubDocumentObject()), {
+		deepEqual((await mainModule.WKCDocumentActionUpdate(WKCTestingStorageClient, Object.assign(await mainModule.WKCDocumentActionCreate(WKCTestingStorageClient, kTesting.StubDocumentObject()), {
 			WKCDocumentID: null,
 		}))).WKCErrors, {
 			WKCDocumentID: [
@@ -99,9 +99,9 @@ describe('WKCDocumentActionUpdate', function testWKCDocumentActionUpdate() {
 	});
 
 	it('returns WKCDocument', async function() {
-		let itemCreated = await mainModule.WKCDocumentActionCreate(WKXTestingStorageClient, kTesting.StubDocumentObject());
+		let itemCreated = await mainModule.WKCDocumentActionCreate(WKCTestingStorageClient, kTesting.StubDocumentObject());
 
-		let item = await mainModule.WKCDocumentActionUpdate(WKXTestingStorageClient, itemCreated);
+		let item = await mainModule.WKCDocumentActionUpdate(WKCTestingStorageClient, itemCreated);
 
 		deepEqual(item, Object.assign(itemCreated, {
 			WKCDocumentModificationDate: item.WKCDocumentModificationDate,
@@ -109,11 +109,11 @@ describe('WKCDocumentActionUpdate', function testWKCDocumentActionUpdate() {
 	});
 
 	it('sets WKCDocumentModificationDate to now', async function() {
-		deepEqual(new Date() - (await mainModule.WKCDocumentActionUpdate(WKXTestingStorageClient, await mainModule.WKCDocumentActionCreate(WKXTestingStorageClient, kTesting.StubDocumentObject()))).WKCDocumentModificationDate < 100, true);
+		deepEqual(new Date() - (await mainModule.WKCDocumentActionUpdate(WKCTestingStorageClient, await mainModule.WKCDocumentActionCreate(WKCTestingStorageClient, kTesting.StubDocumentObject()))).WKCDocumentModificationDate < 100, true);
 	});
 
 	it('writes inputData if not found', async function() {
-		let item = await mainModule.WKCDocumentActionUpdate(WKXTestingStorageClient, Object.assign(kTesting.StubDocumentObject(), {
+		let item = await mainModule.WKCDocumentActionUpdate(WKCTestingStorageClient, Object.assign(kTesting.StubDocumentObject(), {
 			WKCDocumentID: 'alfa',
 			WKCDocumentCreationDate: new Date(),
 		}));
@@ -130,28 +130,28 @@ describe('WKCDocumentActionUpdate', function testWKCDocumentActionUpdate() {
 describe('WKCDocumentActionDelete', function testWKCDocumentActionDelete() {
 
 	it('rejects if not string', async function() {
-		await rejects(mainModule.WKCDocumentActionDelete(WKXTestingStorageClient, null), /WKCErrorInputNotValid/);
+		await rejects(mainModule.WKCDocumentActionDelete(WKCTestingStorageClient, null), /WKCErrorInputNotValid/);
 	});
 
 	it('returns object', async function() {
-		deepEqual(await mainModule.WKCDocumentActionDelete(WKXTestingStorageClient, (await mainModule.WKCDocumentActionCreate(WKXTestingStorageClient, kTesting.StubDocumentObject())).WKCDocumentID), {
+		deepEqual(await mainModule.WKCDocumentActionDelete(WKCTestingStorageClient, (await mainModule.WKCDocumentActionCreate(WKCTestingStorageClient, kTesting.StubDocumentObject())).WKCDocumentID), {
 			statusCode: 200,
 		});
 	});
 
 	it('deletes WKCDocument', async function() {
 		let itemID;
-		await mainModule.WKCDocumentActionDelete(WKXTestingStorageClient, itemID = (await mainModule.WKCDocumentActionCreate(WKXTestingStorageClient, kTesting.StubDocumentObject())).WKCDocumentID);
-		deepEqual(await mainModule.WKCDocumentActionRead(WKXTestingStorageClient, itemID), null);
+		await mainModule.WKCDocumentActionDelete(WKCTestingStorageClient, itemID = (await mainModule.WKCDocumentActionCreate(WKCTestingStorageClient, kTesting.StubDocumentObject())).WKCDocumentID);
+		deepEqual(await mainModule.WKCDocumentActionRead(WKCTestingStorageClient, itemID), null);
 	});
 
 	it('deletes corresponding versionObjects', async function() {
-		await mainModule.WKCDocumentActionDelete(WKXTestingStorageClient, (await WKCVersionsAction.WKCVersionActionCreate(WKXTestingStorageClient, {
+		await mainModule.WKCDocumentActionDelete(WKCTestingStorageClient, (await WKCVersionsAction.WKCVersionActionCreate(WKCTestingStorageClient, {
 			WKCVersionBody: 'charlie',
-			WKCVersionDocumentID: (await mainModule.WKCDocumentActionCreate(WKXTestingStorageClient, kTesting.StubDocumentObject())).WKCDocumentID,
+			WKCVersionDocumentID: (await mainModule.WKCDocumentActionCreate(WKCTestingStorageClient, kTesting.StubDocumentObject())).WKCDocumentID,
 			WKCVersionDate: new Date(),
 		})).WKCVersionDocumentID);
-		deepEqual(await WKCVersionsAction.WKCVersionActionQuery(WKXTestingStorageClient, {}), []);
+		deepEqual(await WKCVersionsAction.WKCVersionActionQuery(WKCTestingStorageClient, {}), []);
 	});
 
 });
@@ -159,44 +159,44 @@ describe('WKCDocumentActionDelete', function testWKCDocumentActionDelete() {
 describe('WKCDocumentActionQuery', function testWKCDocumentActionQuery() {
 
 	it('rejects if not object', async function() {
-		await rejects(mainModule.WKCDocumentActionQuery(WKXTestingStorageClient, null), /WKCErrorInputNotValid/);
+		await rejects(mainModule.WKCDocumentActionQuery(WKCTestingStorageClient, null), /WKCErrorInputNotValid/);
 	});
 
 	it('returns array', async function() {
-		deepEqual(await mainModule.WKCDocumentActionQuery(WKXTestingStorageClient, {}), []);
+		deepEqual(await mainModule.WKCDocumentActionQuery(WKCTestingStorageClient, {}), []);
 	});
 
 	it('includes all WKCDocuments if no query', async function() {
 		let items = await kTesting.uSerial(['alfa', 'bravo', 'charlie'].map(async function (e) {
 			kTesting.uSleep(1);
-			return await mainModule.WKCDocumentActionCreate(WKXTestingStorageClient, Object.assign(kTesting.StubDocumentObject(), {
+			return await mainModule.WKCDocumentActionCreate(WKCTestingStorageClient, Object.assign(kTesting.StubDocumentObject(), {
 				WKCDocumentBody: e,
 			}));
 		}));
 
-		deepEqual(await mainModule.WKCDocumentActionQuery(WKXTestingStorageClient, {}), items.reverse());
+		deepEqual(await mainModule.WKCDocumentActionQuery(WKCTestingStorageClient, {}), items.reverse());
 	});
 
 	it('filters string', async function() {
 		let items = await kTesting.uSerial(['alfa', 'bravo', 'charlie'].map(async function (e) {
-			return await mainModule.WKCDocumentActionCreate(WKXTestingStorageClient, Object.assign(kTesting.StubDocumentObject(), {
+			return await mainModule.WKCDocumentActionCreate(WKCTestingStorageClient, Object.assign(kTesting.StubDocumentObject(), {
 				WKCDocumentID: e,
 			}));
 		}));
 
-		deepEqual(await mainModule.WKCDocumentActionQuery(WKXTestingStorageClient, {
+		deepEqual(await mainModule.WKCDocumentActionQuery(WKCTestingStorageClient, {
 			WKCDocumentID: items.slice(-1).pop().WKCDocumentID,
 		}), items.slice(-1));
 	});
 
 	it('filters boolean', async function() {
 		let items = await kTesting.uSerial(Array.from(Array(3)).map(async function (e, index) {
-			return await mainModule.WKCDocumentActionCreate(WKXTestingStorageClient, Object.assign(kTesting.StubDocumentObject(), {
+			return await mainModule.WKCDocumentActionCreate(WKCTestingStorageClient, Object.assign(kTesting.StubDocumentObject(), {
 				WKCDocumentPublishStatusIsPublished: !!index,
 			}));
 		}));
 
-		deepEqual(await mainModule.WKCDocumentActionQuery(WKXTestingStorageClient, {
+		deepEqual(await mainModule.WKCDocumentActionQuery(WKCTestingStorageClient, {
 			WKCDocumentPublishStatusIsPublished: false,
 		}), items.slice(0, 1));
 	});
@@ -206,11 +206,11 @@ describe('WKCDocumentActionQuery', function testWKCDocumentActionQuery() {
 describe('WKCDocumentActionPublish', function testWKCDocumentActionPublish() {
 
 	it('rejects if not object', async function() {
-		await rejects(mainModule.WKCDocumentActionPublish(WKXTestingStorageClient, null), /WKCErrorInputNotValid/);
+		await rejects(mainModule.WKCDocumentActionPublish(WKCTestingStorageClient, null), /WKCErrorInputNotValid/);
 	});
 
 	it('returns object with WKCErrors if not valid', async function() {
-		deepEqual((await mainModule.WKCDocumentActionPublish(WKXTestingStorageClient, Object.assign(await mainModule.WKCDocumentActionCreate(WKXTestingStorageClient, kTesting.StubDocumentObject()), {
+		deepEqual((await mainModule.WKCDocumentActionPublish(WKCTestingStorageClient, Object.assign(await mainModule.WKCDocumentActionCreate(WKCTestingStorageClient, kTesting.StubDocumentObject()), {
 			WKCDocumentID: null,
 		}))).WKCErrors, {
 			WKCDocumentID: [
@@ -220,9 +220,9 @@ describe('WKCDocumentActionPublish', function testWKCDocumentActionPublish() {
 	});
 
 	it('returns WKCDocument', async function() {
-		let itemCreated = await mainModule.WKCDocumentActionCreate(WKXTestingStorageClient, kTesting.StubDocumentObject());
+		let itemCreated = await mainModule.WKCDocumentActionCreate(WKCTestingStorageClient, kTesting.StubDocumentObject());
 
-		let item = await mainModule.WKCDocumentActionPublish(WKXTestingStorageClient, itemCreated);
+		let item = await mainModule.WKCDocumentActionPublish(WKCTestingStorageClient, itemCreated);
 
 		deepEqual(item, Object.assign(itemCreated, {
 			WKCDocumentModificationDate: item.WKCDocumentModificationDate,
@@ -232,23 +232,23 @@ describe('WKCDocumentActionPublish', function testWKCDocumentActionPublish() {
 	});
 
 	it('sets WKCDocumentPublishStatusIsPublished to true', async function() {
-		deepEqual((await mainModule.WKCDocumentActionPublish(WKXTestingStorageClient, await mainModule.WKCDocumentActionCreate(WKXTestingStorageClient, kTesting.StubDocumentObject()))).WKCDocumentPublishStatusIsPublished, true);
+		deepEqual((await mainModule.WKCDocumentActionPublish(WKCTestingStorageClient, await mainModule.WKCDocumentActionCreate(WKCTestingStorageClient, kTesting.StubDocumentObject()))).WKCDocumentPublishStatusIsPublished, true);
 	});
 
 	it('sets WKCDocumentPublicID to 1 if none published', async function() {
-		deepEqual((await mainModule.WKCDocumentActionPublish(WKXTestingStorageClient, await mainModule.WKCDocumentActionCreate(WKXTestingStorageClient, kTesting.StubDocumentObject()))).WKCDocumentPublicID, '1');
+		deepEqual((await mainModule.WKCDocumentActionPublish(WKCTestingStorageClient, await mainModule.WKCDocumentActionCreate(WKCTestingStorageClient, kTesting.StubDocumentObject()))).WKCDocumentPublicID, '1');
 	});
 
 	it('sets WKCDocumentPublicID to 2 if one published and deleted', async function() {
-		mainModule.WKCDocumentActionDelete(WKXTestingStorageClient, await mainModule.WKCDocumentActionPublish(WKXTestingStorageClient, await mainModule.WKCDocumentActionCreate(WKXTestingStorageClient, kTesting.StubDocumentObject())));
-		deepEqual((await mainModule.WKCDocumentActionPublish(WKXTestingStorageClient, await mainModule.WKCDocumentActionCreate(WKXTestingStorageClient, kTesting.StubDocumentObject()))).WKCDocumentPublicID, '2');
+		mainModule.WKCDocumentActionDelete(WKCTestingStorageClient, await mainModule.WKCDocumentActionPublish(WKCTestingStorageClient, await mainModule.WKCDocumentActionCreate(WKCTestingStorageClient, kTesting.StubDocumentObject())));
+		deepEqual((await mainModule.WKCDocumentActionPublish(WKCTestingStorageClient, await mainModule.WKCDocumentActionCreate(WKCTestingStorageClient, kTesting.StubDocumentObject()))).WKCDocumentPublicID, '2');
 	});
 
 	it('sets WKCDocumentPublicID to 3 if two published and deleted', async function() {
 		let serialPromises = async function () {
 			return ['alfa', 'bravo'].reduce(function (coll, e) {
 				return coll.then(async function () {
-					return await mainModule.WKCDocumentActionDelete(WKXTestingStorageClient, (await mainModule.WKCDocumentActionPublish(WKXTestingStorageClient, (await mainModule.WKCDocumentActionCreate(WKXTestingStorageClient, Object.assign(kTesting.StubDocumentObject(), {
+					return await mainModule.WKCDocumentActionDelete(WKCTestingStorageClient, (await mainModule.WKCDocumentActionPublish(WKCTestingStorageClient, (await mainModule.WKCDocumentActionCreate(WKCTestingStorageClient, Object.assign(kTesting.StubDocumentObject(), {
 						WKCDocumentBody: e,
 					}))))).WKCDocumentID);
 				});
@@ -259,7 +259,7 @@ describe('WKCDocumentActionPublish', function testWKCDocumentActionPublish() {
 
 		await serialPromises();
 
-		deepEqual((await mainModule.WKCDocumentActionPublish(WKXTestingStorageClient, (await mainModule.WKCDocumentActionCreate(WKXTestingStorageClient, kTesting.StubDocumentObject())))).WKCDocumentPublicID, '3');
+		deepEqual((await mainModule.WKCDocumentActionPublish(WKCTestingStorageClient, (await mainModule.WKCDocumentActionCreate(WKCTestingStorageClient, kTesting.StubDocumentObject())))).WKCDocumentPublicID, '3');
 	});
 
 });
@@ -267,11 +267,11 @@ describe('WKCDocumentActionPublish', function testWKCDocumentActionPublish() {
 describe('WKCDocumentActionUnpublish', function testWKCDocumentActionUnpublish() {
 
 	it('rejects if not object', async function() {
-		await rejects(mainModule.WKCDocumentActionPublish(WKXTestingStorageClient, null), /WKCErrorInputNotValid/);
+		await rejects(mainModule.WKCDocumentActionPublish(WKCTestingStorageClient, null), /WKCErrorInputNotValid/);
 	});
 
 	it('returns object with WKCErrors if not valid', async function() {
-		deepEqual((await mainModule.WKCDocumentActionUnpublish(WKXTestingStorageClient, Object.assign(await mainModule.WKCDocumentActionPublish(WKXTestingStorageClient, await mainModule.WKCDocumentActionCreate(WKXTestingStorageClient, kTesting.StubDocumentObject())), {
+		deepEqual((await mainModule.WKCDocumentActionUnpublish(WKCTestingStorageClient, Object.assign(await mainModule.WKCDocumentActionPublish(WKCTestingStorageClient, await mainModule.WKCDocumentActionCreate(WKCTestingStorageClient, kTesting.StubDocumentObject())), {
 			WKCDocumentID: null,
 		}))).WKCErrors, {
 			WKCDocumentID: [
@@ -281,16 +281,16 @@ describe('WKCDocumentActionUnpublish', function testWKCDocumentActionUnpublish()
 	});
 
 	it('returns WKCDocument', async function() {
-		let item = await mainModule.WKCDocumentActionPublish(WKXTestingStorageClient, await mainModule.WKCDocumentActionCreate(WKXTestingStorageClient, kTesting.StubDocumentObject()));
+		let item = await mainModule.WKCDocumentActionPublish(WKCTestingStorageClient, await mainModule.WKCDocumentActionCreate(WKCTestingStorageClient, kTesting.StubDocumentObject()));
 
-		deepEqual(await mainModule.WKCDocumentActionPublish(WKXTestingStorageClient, item), Object.assign(item, {
+		deepEqual(await mainModule.WKCDocumentActionPublish(WKCTestingStorageClient, item), Object.assign(item, {
 			WKCDocumentModificationDate: item.WKCDocumentModificationDate,
 			WKCDocumentPublishStatusIsPublished: item.WKCDocumentPublishStatusIsPublished,
 		}));
 	});
 
 	it('sets WKCDocumentPublishStatusIsPublished to false', async function() {
-		deepEqual((await mainModule.WKCDocumentActionUnpublish(WKXTestingStorageClient, await mainModule.WKCDocumentActionPublish(WKXTestingStorageClient, await mainModule.WKCDocumentActionCreate(WKXTestingStorageClient, kTesting.StubDocumentObject())))).WKCDocumentPublishStatusIsPublished, false);
+		deepEqual((await mainModule.WKCDocumentActionUnpublish(WKCTestingStorageClient, await mainModule.WKCDocumentActionPublish(WKCTestingStorageClient, await mainModule.WKCDocumentActionCreate(WKCTestingStorageClient, kTesting.StubDocumentObject())))).WKCDocumentPublishStatusIsPublished, false);
 	});	
 
 });
@@ -298,18 +298,18 @@ describe('WKCDocumentActionUnpublish', function testWKCDocumentActionUnpublish()
 describe('WKCDocumentActionGetPublicLinks', function testWKCDocumentActionGetPublicLinks() {
 
 	it('returns hash', async function() {
-		deepEqual(await mainModule.WKCDocumentActionGetPublicLinks(WKXTestingStorageClient), {});
+		deepEqual(await mainModule.WKCDocumentActionGetPublicLinks(WKCTestingStorageClient), {});
 	});
 
 	it('excludes if WKCDocumentPublishStatusIsPublished false', async function() {
-		await mainModule.WKCDocumentActionCreate(WKXTestingStorageClient, kTesting.StubDocumentObject());
-		deepEqual(await mainModule.WKCDocumentActionGetPublicLinks(WKXTestingStorageClient), {});
+		await mainModule.WKCDocumentActionCreate(WKCTestingStorageClient, kTesting.StubDocumentObject());
+		deepEqual(await mainModule.WKCDocumentActionGetPublicLinks(WKCTestingStorageClient), {});
 	});
 
 	it('includes if WKCDocumentPublishStatusIsPublished true', async function() {
-		let item = await mainModule.WKCDocumentActionPublish(WKXTestingStorageClient, (await mainModule.WKCDocumentActionCreate(WKXTestingStorageClient, kTesting.StubDocumentObject())));
+		let item = await mainModule.WKCDocumentActionPublish(WKCTestingStorageClient, (await mainModule.WKCDocumentActionCreate(WKCTestingStorageClient, kTesting.StubDocumentObject())));
 
-		deepEqual(await mainModule.WKCDocumentActionGetPublicLinks(WKXTestingStorageClient), [[item.WKCDocumentBody, item.WKCDocumentPublicID]].reduce(function (coll, e) {
+		deepEqual(await mainModule.WKCDocumentActionGetPublicLinks(WKCTestingStorageClient), [[item.WKCDocumentBody, item.WKCDocumentPublicID]].reduce(function (coll, e) {
 			coll[e[0]] = e[1];
 
 			return coll;
@@ -317,15 +317,15 @@ describe('WKCDocumentActionGetPublicLinks', function testWKCDocumentActionGetPub
 	});
 
 	it('selects last updated note if duplicate title', async function() {
-		await mainModule.WKCDocumentActionPublish(WKXTestingStorageClient, (await mainModule.WKCDocumentActionCreate(WKXTestingStorageClient, Object.assign(kTesting.StubDocumentObject(), {
+		await mainModule.WKCDocumentActionPublish(WKCTestingStorageClient, (await mainModule.WKCDocumentActionCreate(WKCTestingStorageClient, Object.assign(kTesting.StubDocumentObject(), {
 			WKCDocumentBody: `heading\nalfa`,
 		}))));
 		kTesting.uSleep(1);
-		await mainModule.WKCDocumentActionPublish(WKXTestingStorageClient, (await mainModule.WKCDocumentActionCreate(WKXTestingStorageClient, Object.assign(kTesting.StubDocumentObject(), {
+		await mainModule.WKCDocumentActionPublish(WKCTestingStorageClient, (await mainModule.WKCDocumentActionCreate(WKCTestingStorageClient, Object.assign(kTesting.StubDocumentObject(), {
 			WKCDocumentBody: `heading\nbravo`,
 		}))));
 
-		deepEqual(await mainModule.WKCDocumentActionGetPublicLinks(WKXTestingStorageClient), {
+		deepEqual(await mainModule.WKCDocumentActionGetPublicLinks(WKCTestingStorageClient), {
 			heading: '2',
 		});
 	});

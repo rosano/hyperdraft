@@ -40,8 +40,8 @@ export const storageClient = WKCStorageClient.WKCStorageClient({
 			WKCSettingStorage,
 			].map(function (e) {
 				return {
-					WKXCollectionStorageGenerator: e,
-					WKXCollectionChangeDelegate: e === WKCDocumentStorage ? {
+					WKCCollectionStorageGenerator: e,
+					WKCCollectionChangeDelegate: e === WKCDocumentStorage ? {
 						OLSKChangeDelegateCreate: function (inputData) {
 							console.log('OLSKChangeDelegateCreate', inputData);
 

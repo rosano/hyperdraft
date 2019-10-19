@@ -9,10 +9,10 @@ import * as WKCSettingModel from './model.js';
 
 export const WKCSettingStorage = function (privateClient, publicClient, changeDelegate) {
 	return {
-		WKXStorageCollection: kCollection,
-		WKXStorageType: kType,
-		WKXStorageModelErrors: WKCSettingModel.WKCSettingModelErrorsFor({}),
-		WKXStorageExports: {
+		WKCStorageCollection: kCollection,
+		WKCStorageType: kType,
+		WKCStorageModelErrors: WKCSettingModel.WKCSettingModelErrorsFor({}),
+		WKCStorageExports: {
 			init: function () {
 				return privateClient.cache(WKCSettingStoragePath());
 			},

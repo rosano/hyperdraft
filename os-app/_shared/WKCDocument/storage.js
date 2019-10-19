@@ -32,10 +32,10 @@ export const WKCDocumentStorage = function (privateClient, publicClient, changeD
 	});
 
 	return {
-		WKXStorageCollection: kCollection,
-		WKXStorageType: kType,
-		WKXStorageModelErrors: WKCDocumentModel.WKCDocumentModelErrorsFor({}),
-		WKXStorageExports: {
+		WKCStorageCollection: kCollection,
+		WKCStorageType: kType,
+		WKCStorageModelErrors: WKCDocumentModel.WKCDocumentModelErrorsFor({}),
+		WKCStorageExports: {
 			init: function () {
 				return privateClient.cache(WKCDocumentStoragePath());
 			},

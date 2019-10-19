@@ -113,7 +113,7 @@ const WKCDocumentStorage = require('./os-app/_shared/WKCDocument/storage.js');
 const WKCSettingStorage = require('./os-app/_shared/WKCSetting/storage.js');
 const WKCVersionStorage = require('./os-app/_shared/WKCVersion/storage.js');
 
-(function WKXMochaStorage() {
+(function WKCMochaStorage() {
 	if (process.env.OLSK_TESTING_BEHAVIOUR === 'true') {
 		return;
 	}
@@ -125,7 +125,7 @@ const WKCVersionStorage = require('./os-app/_shared/WKCVersion/storage.js');
 	};
 
 	before(function(done) {
-		global.WKXTestingStorageClient = require('./os-app/_shared/WKCStorageClient/main.js').WKCStorageClient({
+		global.WKCTestingStorageClient = require('./os-app/_shared/WKCStorageClient/main.js').WKCStorageClient({
 			modules: [
 				WKCStorageModule.WKCStorageModule([
 					WKCDocumentStorage.WKCDocumentStorage,
@@ -133,8 +133,8 @@ const WKCVersionStorage = require('./os-app/_shared/WKCVersion/storage.js');
 					WKCVersionStorage.WKCVersionStorage,
 				].map(function (e) {
 					return {
-						WKXCollectionStorageGenerator: e,
-						WKXCollectionChangeDelegate: null,
+						WKCCollectionStorageGenerator: e,
+						WKCCollectionChangeDelegate: null,
 					};
 				}))
 			],
@@ -149,7 +149,7 @@ const WKCVersionStorage = require('./os-app/_shared/WKCVersion/storage.js');
 			'wkc_settings',
 			'wkc_versions',
 		].map(async function (e) {
-			return await Promise.all(Object.keys(await global.WKXTestingStorageClient.wikiavec[e].listObjects()).map(global.WKXTestingStorageClient.wikiavec[e].deleteObject));
+			return await Promise.all(Object.keys(await global.WKCTestingStorageClient.wikiavec[e].listObjects()).map(global.WKCTestingStorageClient.wikiavec[e].deleteObject));
 		}));
 	});
 })();

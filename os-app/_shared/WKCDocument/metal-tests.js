@@ -16,11 +16,11 @@ const kTesting = {
 describe('WKCDocumentMetalWrite', function testWKCDocumentMetalWrite() {
 
 	it('rejects if not object', async function() {
-		await rejects(mainModule.WKCDocumentMetalWrite(WKXTestingStorageClient, null), /WKCErrorInputNotValid/);
+		await rejects(mainModule.WKCDocumentMetalWrite(WKCTestingStorageClient, null), /WKCErrorInputNotValid/);
 	});
 
 	it('returns object with WKCErrors if not valid', async function() {
-		deepEqual((await mainModule.WKCDocumentMetalWrite(WKXTestingStorageClient, Object.assign(kTesting.StubDocumentObjectValid(), {
+		deepEqual((await mainModule.WKCDocumentMetalWrite(WKCTestingStorageClient, Object.assign(kTesting.StubDocumentObjectValid(), {
 			WKCDocumentID: null,
 		}))).WKCErrors, {
 			WKCDocumentID: [
@@ -30,7 +30,7 @@ describe('WKCDocumentMetalWrite', function testWKCDocumentMetalWrite() {
 	});
 
 	it('resolves object', async function() {
-		let item = await mainModule.WKCDocumentMetalWrite(WKXTestingStorageClient, kTesting.StubDocumentObjectValid());
+		let item = await mainModule.WKCDocumentMetalWrite(WKCTestingStorageClient, kTesting.StubDocumentObjectValid());
 
 		deepEqual(item, Object.assign(kTesting.StubDocumentObjectValid(), {
 			'@context': item['@context'],
@@ -42,17 +42,17 @@ describe('WKCDocumentMetalWrite', function testWKCDocumentMetalWrite() {
 describe('WKCDocumentMetalRead', function testWKCDocumentMetalRead() {
 
 	it('rejects if not string', async function() {
-		await rejects(mainModule.WKCDocumentMetalRead(WKXTestingStorageClient, 1), /WKCErrorInputNotValid/);
+		await rejects(mainModule.WKCDocumentMetalRead(WKCTestingStorageClient, 1), /WKCErrorInputNotValid/);
 	});
 
 	it('resolves null if not found', async function() {
-		deepEqual(await mainModule.WKCDocumentMetalRead(WKXTestingStorageClient, 'alfa'), null);
+		deepEqual(await mainModule.WKCDocumentMetalRead(WKCTestingStorageClient, 'alfa'), null);
 	});
 
 	it('resolves object', async function() {
-		let item = await mainModule.WKCDocumentMetalWrite(WKXTestingStorageClient, kTesting.StubDocumentObjectValid());
+		let item = await mainModule.WKCDocumentMetalWrite(WKCTestingStorageClient, kTesting.StubDocumentObjectValid());
 
-		deepEqual(await mainModule.WKCDocumentMetalRead(WKXTestingStorageClient, item.WKCDocumentID), item);
+		deepEqual(await mainModule.WKCDocumentMetalRead(WKCTestingStorageClient, item.WKCDocumentID), item);
 	});
 
 });
@@ -60,13 +60,13 @@ describe('WKCDocumentMetalRead', function testWKCDocumentMetalRead() {
 describe('WKCDocumentMetalList', function testWKCDocumentMetalList() {
 
 	it('resolves empty array if none', async function() {
-		deepEqual(await mainModule.WKCDocumentMetalList(WKXTestingStorageClient), {});
+		deepEqual(await mainModule.WKCDocumentMetalList(WKCTestingStorageClient), {});
 	});
 
 	it('resolves array', async function() {
-		let item = await mainModule.WKCDocumentMetalWrite(WKXTestingStorageClient, kTesting.StubDocumentObjectValid());
-		deepEqual(Object.values(await mainModule.WKCDocumentMetalList(WKXTestingStorageClient)), [item]);
-		deepEqual(Object.keys(await mainModule.WKCDocumentMetalList(WKXTestingStorageClient)), [item.WKCDocumentID]);
+		let item = await mainModule.WKCDocumentMetalWrite(WKCTestingStorageClient, kTesting.StubDocumentObjectValid());
+		deepEqual(Object.values(await mainModule.WKCDocumentMetalList(WKCTestingStorageClient)), [item]);
+		deepEqual(Object.keys(await mainModule.WKCDocumentMetalList(WKCTestingStorageClient)), [item.WKCDocumentID]);
 	});
 
 });
@@ -74,18 +74,18 @@ describe('WKCDocumentMetalList', function testWKCDocumentMetalList() {
 describe('WKCDocumentMetalDelete', function testWKCDocumentMetalDelete() {
 
 	it('rejects if not string', async function() {
-		await rejects(mainModule.WKCDocumentMetalDelete(WKXTestingStorageClient, 1), /WKCErrorInputNotValid/);
+		await rejects(mainModule.WKCDocumentMetalDelete(WKCTestingStorageClient, 1), /WKCErrorInputNotValid/);
 	});
 
 	it('resolves object', async function() {
-		deepEqual(await mainModule.WKCDocumentMetalDelete(WKXTestingStorageClient, (await mainModule.WKCDocumentMetalWrite(WKXTestingStorageClient, kTesting.StubDocumentObjectValid())).WKCDocumentID), {
+		deepEqual(await mainModule.WKCDocumentMetalDelete(WKCTestingStorageClient, (await mainModule.WKCDocumentMetalWrite(WKCTestingStorageClient, kTesting.StubDocumentObjectValid())).WKCDocumentID), {
 			statusCode: 200,
 		});
 	});
 
 	it('deletes WKCDocument', async function() {
-		await mainModule.WKCDocumentMetalDelete(WKXTestingStorageClient, (await mainModule.WKCDocumentMetalWrite(WKXTestingStorageClient, kTesting.StubDocumentObjectValid())).WKCDocumentID);
-		deepEqual(await mainModule.WKCDocumentMetalList(WKXTestingStorageClient), {});
+		await mainModule.WKCDocumentMetalDelete(WKCTestingStorageClient, (await mainModule.WKCDocumentMetalWrite(WKCTestingStorageClient, kTesting.StubDocumentObjectValid())).WKCDocumentID);
+		deepEqual(await mainModule.WKCDocumentMetalList(WKCTestingStorageClient), {});
 	});
 
 });
