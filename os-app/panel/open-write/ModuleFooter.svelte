@@ -21,6 +21,23 @@ const mod = {
 		dispatch('WIKWriteFooterDispatchStorage')
 	},
 
+	InterfaceExportButtonDidClick () {
+		dispatch('FooterDispatchExport');
+	},
+
+	InterfaceImportButtonDidClick (event) {
+		let inputElement = event.target;
+		let reader = new FileReader();
+		
+		reader.onload = function (event) {
+			dispatch('FooterDispatchImport', event.target.result);
+			
+			inputElement.value = null;
+		};
+
+		reader.readAsText(event.target.files.item(0));
+	},
+
 };
 </script>
 
@@ -28,6 +45,10 @@ const mod = {
 	<OLSKToolbar OLSKToolbarJustify={ true }>
 		<OLSKToolbarElementGroup>
 			<button on:click={ () => window.location.reload() } class="OLSKToolbarButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle" title={ OLSKLocalized('WKCWriteFooterToolbarReloadButtonText') } style="background-image: url('/panel/_shared/ui-assets/wIKSharedReload.svg')" id="WKCWriteReloadButton"></button>
+
+			<button on:click={ mod.InterfaceExportButtonDidClick }>Export</button>
+
+			<input type="file" accept=".json" on:change={ mod.InterfaceImportButtonDidClick } />
 		</OLSKToolbarElementGroup>
 
 		<div>
