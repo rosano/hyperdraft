@@ -18,8 +18,8 @@ import ModuleFooter from './ModuleFooter.svelte';
 import OLSKToolbar from 'OLSKToolbar';
 import OLSKToolbarElementGroup from 'OLSKToolbarElementGroup';
 
-import * as WKCNotesAction from '../../_shared/rs-modules/wkc_notes/action.js';
-import * as WKCVersionsAction from '../../_shared/rs-modules/wkc_versions/action.js';
+import * as WKCNoteAction from '../../_shared/WKCNote/action.js';
+import * as WKCVersionAction from '../../_shared/WKCVersion/action.js';
 import * as WKCWriteLogic from './ui-logic.js';
 
 import { storageClient, notesAll, filterText, defaultFocusNode, mobileViewCurrent, isMobile } from './persistence.js';
@@ -229,7 +229,7 @@ async function noteSave(inputData) {
 			return;
 		}
 
-		await WKCVersionsAction.WKCVersionsActionCreate(storageClient, {
+		await WKCVersionAction.WKCVersionActionCreate(storageClient, {
 			WKCVersionNoteID: inputData.WKCNoteID,
 			WKCVersionBody: inputData.WKCNoteBody,
 			WKCVersionDate: inputData.WKCNoteModificationDate,
@@ -242,7 +242,7 @@ async function noteSave(inputData) {
 			OLSKThrottleCallback: async function () {
 				delete throttleMapNotes[inputData.WKCNoteID];
 
-				await WKCNotesAction.WKCNotesActionUpdate(storageClient, inputData);
+				await WKCNoteAction.WKCNoteActionUpdate(storageClient, inputData);
 			},
 		};	
 	}
@@ -251,21 +251,21 @@ async function noteSave(inputData) {
 }
 
 async function notePublish() {
-	let item = await WKCNotesAction.WKCNotesActionPublish(storageClient, $noteSelected);
+	let item = await WKCNoteAction.WKCNoteActionPublish(storageClient, $noteSelected);
 	return noteSelected.update(function (val) {
 		return Object.assign(val, item);
 	});
 }
 
 async function noteUnpublish() {
-	let item = await WKCNotesAction.WKCNotesActionUnpublish(storageClient, $noteSelected);
+	let item = await WKCNoteAction.WKCNoteActionUnpublish(storageClient, $noteSelected);
 	return noteSelected.update(function (val) {
 		return Object.assign(val, item);
 	});
 }
 
 async function noteVersions() {
-	(await WKCVersionsAction.WKCVersionsActionQuery(storageClient, {
+	(await WKCVersionAction.WKCVersionActionQuery(storageClient, {
 		WKCVersionNoteID: $noteSelected.WKCNoteID,
 	})).slice(0, 5).forEach(function (e) {
 		console.log(e);
@@ -278,7 +278,7 @@ async function noteDelete() {
 		return;
 	}
 
-	await WKCNotesAction.WKCNotesActionDelete(storageClient, $noteSelected.WKCNoteID);
+	await WKCNoteAction.WKCNoteActionDelete(storageClient, $noteSelected.WKCNoteID);
 
 	notesAll.update(function (val) {
 		return val.filter(function(e) {

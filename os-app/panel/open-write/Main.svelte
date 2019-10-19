@@ -7,11 +7,11 @@ import ModuleFooter from './ModuleFooter.svelte';
 import { OLSKLocalized } from '../../_shared/common/global.js';
 import { storageClient, isLoading, isMobile, isInErrorState, notesAll } from './persistence.js';
 
-import * as WKCNotesMetal from '../../_shared/rs-modules/wkc_notes/metal.js';
-import { WKCNotesModelPostJSONParse } from '../../_shared/rs-modules/wkc_notes/model.js';
-import * as WKCNotesAction from '../../_shared/rs-modules/wkc_notes/action.js';
-import WKCSettingsMetal from '../../_shared/rs-modules/wkc_settings/metal.js';
-import WKCSettingsAction from '../../_shared/rs-modules/wkc_settings/action.js';
+import * as WKCNoteMetal from '../../_shared/WKCNote/metal.js';
+import { WKCNoteModelPostJSONParse } from '../../_shared/WKCNote/model.js';
+import * as WKCNoteAction from '../../_shared/WKCNote/action.js';
+import * as WKCSettingMetal from '../../_shared/WKCSetting/metal.js';
+import * as WKCSettingAction from '../../_shared/WKCSetting/action.js';
 import { WKCWriteLogicListSort } from './ui-logic.js';
 
 export const DocumentsExport = async function () {
@@ -25,6 +25,7 @@ export const DocumentsExport = async function () {
 	zip.file(`${ fileName }.json`, JSON.stringify({
 		WKCNoteObjects: $notesAll,
 		WKCSettingObjects: await WKCSettingsAction.WKCSettingsActionQuery(storageClient, {}),
+		WKCSettingObjects: await WKCSettingAction.WKCSettingsActionQuery(storageClient, {}),
 	}));
 	
 	zip.generateAsync({type: 'blob'}).then(function (content) {
@@ -53,14 +54,14 @@ export const DocumentsImport = async function(inputData) {
 	}
 
 	await Promise.all(outputData.WKCSettingObjects.map(function (e) {
-		return WKCSettingsMetal.WKCSettingsMetalWrite(storageClient, e);
+		return WKCSettingMetal.WKCSettingsMetalWrite(storageClient, e);
 	}));
 
 	await Promise.all(outputData.WKCNoteObjects.map(function (e) {
-		return WKCNotesMetal.WKCNotesMetalWrite(storageClient, WKCNotesModelPostJSONParse(e));
+		return WKCNoteMetal.WKCNoteMetalWrite(storageClient, WKCNoteModelPostJSONParse(e));
 	}));
 
-	notesAll.set(await WKCNotesAction.WKCNotesActionQuery(storageClient, {}));
+	notesAll.set(await WKCNoteAction.WKCNoteActionQuery(storageClient, {}));
 };
 
 let WIKWriteFooterStorageStatus = '';

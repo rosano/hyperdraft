@@ -4,7 +4,7 @@ import OLSKToolbar from 'OLSKToolbar';
 import OLSKToolbarElementGroup from 'OLSKToolbarElementGroup';
 import OLSKInputWrapper from 'OLSKInputWrapper';
 
-import * as WKCNotesAction from '../../_shared/rs-modules/wkc_notes/action.js';
+import * as WKCNoteAction from '../../_shared/WKCNote/action.js';
 
 import WKCParser from '../../_shared/WKCParser/main.js';
 
@@ -34,7 +34,7 @@ onMount(function () {
 });
 
 async function noteCreate(inputData) {
-	let item = await WKCNotesAction.WKCNotesActionCreate(storageClient, {
+	let item = await WKCNoteAction.WKCNoteActionCreate(storageClient, {
 		WKCNoteBody: typeof inputData === 'string' ? inputData : '',
 	});
 
