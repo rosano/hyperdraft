@@ -1,13 +1,13 @@
 exports.WKCRefNotesModule = function () {
 	return {
-		name: 'wkc_notes',
+		name: 'wikiavec',
 		builder: function(privateClient, publicClient) {
 			privateClient.declareType('wkc_note', require('OLSKRemoteStorage').OLSKRemoteStorageJSONSchema({}));
 
 			return {
 				exports: {
 					listObjects: function () {
-						return privateClient.getAll('');
+						return privateClient.getAll('wkc_notes/');
 					},
 				},
 			};
