@@ -147,7 +147,7 @@ const mod = {
 @media screen and (max-width: 760px) {
 
 .OLSKViewport :global(.WKC_ContextMobileView) {
-	/*position: absolute;*/
+	position: absolute;
 	top: 0;
 	left: 0;
 	right: 0;
