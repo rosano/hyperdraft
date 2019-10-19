@@ -139,7 +139,7 @@ let languageDictionary = {};
 })();
 
 const WKCStorageModule = require('./os-app/_shared/WKCStorageModule/main.js');
-const WKCDocumentStorage = require('./os-app/_shared/WKCDocument/storage.js');
+const WKCNoteStorage = require('./os-app/_shared/WKCNote/storage.js');
 const WKCSettingStorage = require('./os-app/_shared/WKCSetting/storage.js');
 const WKCVersionStorage = require('./os-app/_shared/WKCVersion/storage.js');
 
@@ -158,7 +158,7 @@ const WKCVersionStorage = require('./os-app/_shared/WKCVersion/storage.js');
 		global.WKCTestingStorageClient = require('./os-app/_shared/WKCStorageClient/main.js').WKCStorageClient({
 			modules: [
 				WKCStorageModule.WKCStorageModule([
-					WKCDocumentStorage.WKCDocumentStorage,
+					WKCNoteStorage.WKCNoteStorage,
 					WKCSettingStorage.WKCSettingStorage,
 					WKCVersionStorage.WKCVersionStorage,
 				].map(function (e) {

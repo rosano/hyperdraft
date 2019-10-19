@@ -1,14 +1,14 @@
-import * as WKCDocumentModel from './model.js';
+import * as WKCNoteModel from './model.js';
 import * as OLSKRemoteStorage from 'OLSKRemoteStorage';
 
 const kType = 'wkc_document';
 const kCollection = 'wkc_documents';
 
-export const WKCDocumentStoragePath = function(inputData) {
+export const WKCNoteStoragePath = function(inputData) {
 	return `${ kCollection }/${ inputData || '' }`;
 };
 
-export const WKCDocumentStorage = function (privateClient, publicClient, changeDelegate) {
+export const WKCNoteStorage = function (privateClient, publicClient, changeDelegate) {
 	privateClient.on('change', function (event) {
 		if (!changeDelegate) {
 			return;
@@ -28,29 +28,29 @@ export const WKCDocumentStorage = function (privateClient, publicClient, changeD
 			return console.warn(`${ delegateMethod } not function`);
 		};
 
-		changeDelegate[delegateMethod](WKCDocumentModel.WKCDocumentModelPostJSONParse(event[OLSKRemoteStorage.OLSKRemoteStorageChangeDelegateInput(delegateMethod)]));
+		changeDelegate[delegateMethod](WKCNoteModel.WKCNoteModelPostJSONParse(event[OLSKRemoteStorage.OLSKRemoteStorageChangeDelegateInput(delegateMethod)]));
 	});
 
 	return {
 		WKCStorageCollection: kCollection,
 		WKCStorageType: kType,
-		WKCStorageModelErrors: WKCDocumentModel.WKCDocumentModelErrorsFor({}),
+		WKCStorageModelErrors: WKCNoteModel.WKCNoteModelErrorsFor({}),
 		WKCStorageExports: {
 			init: function () {
-				return privateClient.cache(WKCDocumentStoragePath());
+				return privateClient.cache(WKCNoteStoragePath());
 			},
 			listObjects: function () {
-				return privateClient.getAll(WKCDocumentStoragePath(), false);
+				return privateClient.getAll(WKCNoteStoragePath(), false);
 			},
 			writeObject: async function (param1, param2) {
-				await privateClient.storeObject(kType, WKCDocumentStoragePath(param1), WKCDocumentModel.WKCDocumentModelPreJSONSchemaValidate(param2));
-				return WKCDocumentModel.WKCDocumentModelPostJSONParse(param2);
+				await privateClient.storeObject(kType, WKCNoteStoragePath(param1), WKCNoteModel.WKCNoteModelPreJSONSchemaValidate(param2));
+				return WKCNoteModel.WKCNoteModelPostJSONParse(param2);
 			},
 			readObject: function (inputData) {
-				return privateClient.getObject(WKCDocumentStoragePath(inputData));
+				return privateClient.getObject(WKCNoteStoragePath(inputData));
 			},
 			deleteObject: function (inputData) {
-				return privateClient.remove(WKCDocumentStoragePath(inputData));
+				return privateClient.remove(WKCNoteStoragePath(inputData));
 			},
 		},
 	};
