@@ -113,6 +113,7 @@
     "olsk-rollup-plugin-localize": "latest",
     "sirv-cli": "latest",
     "svelte": "3.9.0",
+    "OLSKRollup": "olsk/OLSKRollup",
 
     "eslint-plugin-svelte3": "latest"
   }
