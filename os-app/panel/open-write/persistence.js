@@ -121,29 +121,39 @@ storageClient.remoteStorage.on('ready', async () => {
 		}
 	});
 
-	storageClient.remoteStorage.on('error', (error) => {
+	storageClient.remoteStorage.on('sync-done', () => {
 		if (!_WIKIsTestingBehaviour()) {
-			console.debug('error', error);
+			console.debug('sync-done', arguments);
 		}
-
-		isInErrorState.set(true);
 	});
+
+	let isOffline;
 
 	storageClient.remoteStorage.on('network-offline', () => {
 		if (!_WIKIsTestingBehaviour()) {
 			console.debug('network-offline', arguments);
 		}
+
+		isOffline = true;
 	});
 
 	storageClient.remoteStorage.on('network-online', () => {
 		if (!_WIKIsTestingBehaviour()) {
 			console.debug('network-online', arguments);
 		}
+		
+		isOffline = false;
 	});
 
-	storageClient.remoteStorage.on('sync-done', () => {
+	storageClient.remoteStorage.on('error', (error) => {
+		if (isOffline && inputData.message === 'Sync failed: Network request failed.') {
+			return;
+		};
+
 		if (!_WIKIsTestingBehaviour()) {
-			console.debug('sync-done', arguments);
+			console.debug('error', error);
 		}
+
+		isInErrorState.set(true);
 	});
 })();
