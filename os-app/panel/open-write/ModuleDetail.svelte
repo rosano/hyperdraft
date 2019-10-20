@@ -123,7 +123,7 @@ afterUpdate(function () {
 			})).map(function (e) {
 				return {
 					LCHRecipeName: e.string,
-					LCHRecipeCallback: function () {
+					LCHRecipeCallback () {
 						editorInstance.scrollIntoView(CodeMirror.Pos(e.line, e.start), 300);
 						editorInstance.setSelection(CodeMirror.Pos(e.line, e.start), CodeMirror.Pos(e.line, e.end));
 
@@ -328,6 +328,14 @@ function handleKeydown(event) {
 		return;
 	}
 }
+
+const mod = {
+
+	WKCWriteJumpButtonDispatchComplete () {
+		editorInstance.focus();
+	},
+
+};
 </script>
 <svelte:window on:keydown={ handleKeydown }/>
 
@@ -343,7 +351,7 @@ function handleKeydown(event) {
 			</OLSKToolbarElementGroup>
 
 			<OLSKToolbarElementGroup>
-				<WKCWriteJumpButton inputData={ jumpRecipes } />
+				<WKCWriteJumpButton WKCWriteJumpButtonRecipes={ jumpRecipes } WKCWriteJumpButtonDispatchComplete={ mod.WKCWriteJumpButtonDispatchComplete } />
 
 				{#if $noteSelected.WKCNotePublishStatusIsPublished}
 					<span id="PublishStatus">{ OLSKLocalized('WKCWriteDetailToolbarPublishStatusPublished') }</span>
