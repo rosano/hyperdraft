@@ -1,6 +1,7 @@
 import { deepEqual } from 'assert';
 
-const kDefaultRoutePath = '/modules/WKCWriteJumpButton';
+const kDefaultRoutePath = require('./controller.js').OLSKControllerRoutes().WKCWriteJumpButtonStubRoute.OLSKRoutePath;
+
 const WKCWriteJumpButton = '.WKCWriteJumpButton';
 
 describe('WKCWriteJumpButtonDiscovery', function testWKCWriteJumpButtonDiscovery() {

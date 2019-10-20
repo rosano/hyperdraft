@@ -54,7 +54,7 @@ const mod = {
 		<div>
 			<div class="WIKWriteFooterStorageStatus">{ WIKWriteFooterStorageStatus }</div>
 			<button class="WIKWriteFooterStorageButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable" title={ OLSKLocalized('WIKWriteFooterStorageButtonText') } on:click={ mod.InterfaceStorageButtonDidClick } class:OSWIconVisible={ false }>
-				<img src="/panel/open-write/modules/WIKWriteFooter/ui-images/WIKWriteFooterStorageButton.svg">
+				<img src="/panel/open-write/submodules/WIKWriteFooter/ui-images/WIKWriteFooterStorageButton.svg">
 			</button>
 		</div>
 	</OLSKToolbar>

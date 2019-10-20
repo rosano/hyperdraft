@@ -13,7 +13,7 @@ export let editorConfigure = function (inputData) {
 </script>
 
 <script>
-import WKCWriteJumpButton from './modules/WKCWriteJumpButton/main.svelte';
+import WKCWriteJumpButton from './submodules/WKCWriteJumpButton/main.svelte';
 import ModuleFooter from './ModuleFooter.svelte';
 import OLSKToolbar from 'OLSKToolbar';
 import OLSKToolbarElementGroup from 'OLSKToolbarElementGroup';
