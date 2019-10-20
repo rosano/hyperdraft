@@ -92,7 +92,7 @@ remoteStorage.on('ready', async () => {
 		console.debug('ready', arguments);
 	}
 
-	await remoteStorage.wikiavec.wkc_notes.init();
+	await remoteStorage.wikiavec.wkc_notes.WKCNoteStorageCache();
 	// await remoteStorage.wikiavec.wkc_settings.init();
 	// await remoteStorage.wikiavec.wkc_versions.init();
 	notesAll.set((await WKCNoteActionQuery(storageClient, {})).sort(WKCWriteLogicListSort));

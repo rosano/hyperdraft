@@ -14,7 +14,7 @@ export const WKCVersionStorage = function (privateClient, publicClient, changeDe
 		WKCStorageType: kType,
 		WKCStorageModelErrors: WKCVersionModel.WKCVersionModelErrorsFor({}),
 		WKCStorageExports: {
-			init () {
+			WKCVersionStorageCache () {
 				return privateClient.cache(WKCVersionStoragePath());
 			},
 			listObjects () {

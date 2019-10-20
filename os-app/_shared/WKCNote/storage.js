@@ -36,7 +36,7 @@ export const WKCNoteStorage = function (privateClient, publicClient, changeDeleg
 		WKCStorageType: kType,
 		WKCStorageModelErrors: WKCNoteModel.WKCNoteModelErrorsFor({}),
 		WKCStorageExports: {
-			init () {
+			WKCNoteStorageCache () {
 				return privateClient.cache(WKCNoteStoragePath());
 			},
 			listObjects () {

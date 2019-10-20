@@ -13,7 +13,7 @@ export const WKCSettingStorage = function (privateClient, publicClient, changeDe
 		WKCStorageType: kType,
 		WKCStorageModelErrors: WKCSettingModel.WKCSettingModelErrorsFor({}),
 		WKCStorageExports: {
-			init () {
+			WKCSettingStorageCache () {
 				return privateClient.cache(WKCSettingStoragePath());
 			},
 			listObjects () {
