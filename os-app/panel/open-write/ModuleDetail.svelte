@@ -340,6 +340,10 @@ const mod = {
 	},
 
 	WKCWriteJumpButtonDispatchComplete () {
+		if (isMobile()) {
+			return;
+		};
+		
 		editorInstance.focus();
 	},
 
