@@ -63,16 +63,30 @@ exports.OLSKControllerTasks = function () {
 				return true;
 			},
 			OLSKTaskCallback: async function (callbackInput) {
-				callbackInput.OLSKLive.OLSKCacheWriteWithCacheKeyAndCacheObject(kWKCRefCacheKey, await exports.RCSRefFetchPublicNotes());
+				exports.RCSRefUpdateCachedPublicNotes(callbackInput.OLSKLive.OLSKCacheWriteWithCacheKeyAndCacheObject, await exports.RCSRefFetchPublicNotesArray());
 			},
 		},
 	];
 };
 
-exports.RCSRefFetchPublicNotes = async function () {
+exports.RCSRefFetchPublicNotesArray = async function () {
 	return Object.values(await storageClient.wikiavec.WKCRefStorageList()).filter(function (e) {
 		return e.WKCNotePublishStatusIsPublished;
 	});
+};
+
+exports.RCSRefUpdateCachedPublicNotes = function (writeFunction, inputData) {
+	let outputData = inputData.reduce(function (coll, item) {
+		if (typeof coll[item.WKCNotePublicID] === 'undefined') {
+			coll[item.WKCNotePublicID] = item;
+		}
+
+		return coll;
+	}, {});
+
+	writeFunction(kWKCRefCacheKey, outputData);
+
+	return outputData;
 };
 
 //_ OLSKControllerRoutes
@@ -96,17 +110,9 @@ exports.OLSKControllerRoutes = function() {
 			OLSKRoutePath: '/:wkc_note_public_id(\\d+)',
 			OLSKRouteMethod: 'get',
 			OLSKRouteFunction: async function(req, res, next) {
-				let publicNotes = req.OLSKCacheReadForCacheKey(kWKCRefCacheKey);
+				let publicNotes = req.OLSKCacheReadForCacheKey(kWKCRefCacheKey) || exports.RCSRefUpdateCachedPublicNotes(req.OLSKCacheWriteWithCacheKeyAndCacheObject, await exports.RCSRefFetchPublicNotesArray());
 
-				if (!publicNotes) {
-					publicNotes = await exports.RCSRefFetchPublicNotes()
-
-					req.OLSKCacheWriteWithCacheKeyAndCacheObject(kWKCRefCacheKey, publicNotes);
-				};
-
-				let item = publicNotes.filter(function (e) {
-					return e.WKCNotePublicID === req.params.wkc_note_public_id;
-				}).shift();
+				let item = publicNotes[req.params.wkc_note_public_id];
 
 				if (!item) {
 					return next();
@@ -114,7 +120,7 @@ exports.OLSKControllerRoutes = function() {
 
 				const WKCParser = require('../_shared/WKCParser/main.js');
 
-				const publicLinks = publicNotes.map(function (e) {
+				const publicLinks = Object.values(publicNotes).map(function (e) {
 					return [WKCParser.WKCParserTitleForPlaintext(e.WKCNoteBody), e.WKCNotePublicID];
 				}).reduce(function (coll, [key, val]) {
 					if (typeof coll[key] === 'undefined') {
