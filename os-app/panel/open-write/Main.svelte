@@ -146,7 +146,7 @@ const mod = {
 
 @media screen and (max-width: 760px) {
 
-.OLSKViewport :global(.WKC_ContextMobileView) {
+x.OLSKViewport :global(.WKC_ContextMobileView) {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -154,9 +154,17 @@ const mod = {
 	bottom: 0;
 }
 
-.OLSKViewport :global(.WKC_ContextMobileViewInactive) {
+x.OLSKViewport :global(.WKC_ContextMobileViewInactive) {
 	left: 100vw;
 	right: -100vw;
+}
+
+.OLSKViewport :global(.WKC_ContextMobileViewActive) {
+	flex-basis: 100% !important;
+}
+
+.OLSKViewport :global(.WKC_ContextMobileViewInactive) {
+	display: none;
 }
 
 .OLSKViewport :global(.WKC_ContextMobileExclusive) {
