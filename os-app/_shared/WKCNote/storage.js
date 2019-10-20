@@ -36,20 +36,20 @@ export const WKCNoteStorage = function (privateClient, publicClient, changeDeleg
 		WKCStorageType: kType,
 		WKCStorageModelErrors: WKCNoteModel.WKCNoteModelErrorsFor({}),
 		WKCStorageExports: {
-			init: function () {
+			init () {
 				return privateClient.cache(WKCNoteStoragePath());
 			},
-			listObjects: function () {
+			listObjects () {
 				return privateClient.getAll(WKCNoteStoragePath(), false);
 			},
-			writeObject: async function (param1, param2) {
+			async writeObject (param1, param2) {
 				await privateClient.storeObject(kType, WKCNoteStoragePath(param1), WKCNoteModel.WKCNoteModelPreJSONSchemaValidate(param2));
 				return WKCNoteModel.WKCNoteModelPostJSONParse(param2);
 			},
-			readObject: function (inputData) {
+			readObject (inputData) {
 				return privateClient.getObject(WKCNoteStoragePath(inputData));
 			},
-			deleteObject: function (inputData) {
+			deleteObject (inputData) {
 				return privateClient.remove(WKCNoteStoragePath(inputData));
 			},
 		},

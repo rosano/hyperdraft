@@ -14,20 +14,20 @@ export const WKCVersionStorage = function (privateClient, publicClient, changeDe
 		WKCStorageType: kType,
 		WKCStorageModelErrors: WKCVersionModel.WKCVersionModelErrorsFor({}),
 		WKCStorageExports: {
-			init: function () {
+			init () {
 				return privateClient.cache(WKCVersionStoragePath());
 			},
-			listObjects: function () {
+			listObjects () {
 				return privateClient.getAll(WKCVersionStoragePath(), false);
 			},
-			writeObject: async function (param1, param2) {
+			async writeObject (param1, param2) {
 				await privateClient.storeObject(kType, WKCVersionStoragePath(param1), WKCVersionModel.WKCVersionModelPreJSONSchemaValidate(param2));
 				return WKCVersionModel.WKCVersionModelPostJSONParse(param2);
 			},
-			readObject: function (inputData) {
+			readObject (inputData) {
 				return privateClient.getObject(WKCVersionStoragePath(inputData));
 			},
-			deleteObject: function (inputData) {
+			deleteObject (inputData) {
 				return privateClient.remove(WKCVersionStoragePath(inputData));
 			},
 		},

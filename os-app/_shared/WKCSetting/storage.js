@@ -13,20 +13,20 @@ export const WKCSettingStorage = function (privateClient, publicClient, changeDe
 		WKCStorageType: kType,
 		WKCStorageModelErrors: WKCSettingModel.WKCSettingModelErrorsFor({}),
 		WKCStorageExports: {
-			init: function () {
+			init () {
 				return privateClient.cache(WKCSettingStoragePath());
 			},
-			listObjects: function () {
+			listObjects () {
 				return privateClient.getAll(WKCSettingStoragePath(), false);
 			},
-			writeObject: async function (param1, param2) {
+			async writeObject (param1, param2) {
 				await privateClient.storeObject(kType, WKCSettingStoragePath(param1), param2);
 				return param2;
 			},
-			readObject: function (inputData) {
+			readObject (inputData) {
 				return privateClient.getObject(WKCSettingStoragePath(inputData));
 			},
-			deleteObject: function (inputData) {
+			deleteObject (inputData) {
 				return privateClient.remove(WKCSettingStoragePath(inputData));
 			},
 		},
