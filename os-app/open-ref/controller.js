@@ -70,7 +70,7 @@ exports.OLSKControllerTasks = function () {
 };
 
 exports.RCSRefFetchPublicNotes = async function () {
-	return Object.values(await storageClient.wikiavec.listObjects()).filter(function (e) {
+	return Object.values(await storageClient.wikiavec.WKCRefStorageList()).filter(function (e) {
 		return e.WKCNotePublishStatusIsPublished;
 	});
 };

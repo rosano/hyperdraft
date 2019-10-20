@@ -1,24 +1,18 @@
-exports.WKCRefNotesModule = function () {
-	return {
-		name: 'wikiavec',
-		builder: function(privateClient, publicClient) {
-			privateClient.declareType('wkc_note', require('OLSKRemoteStorage').OLSKRemoteStorageJSONSchema({}));
+const RemoteStorage = require('remotestoragejs');
 
+exports.WKCRefStorageClient = function () {
+	let modules = [{
+		name: 'wikiavec',
+		builder (privateClient, publicClient) {
 			return {
 				exports: {
-					listObjects: function () {
+					WKCRefStorageList () {
 						return privateClient.getAll('wkc_notes/');
 					},
 				},
 			};
 		},
-	};
-};
-
-const RemoteStorage = require('remotestoragejs');
-
-exports.WKCRefStorageClient = function () {
-	let modules = [exports.WKCRefNotesModule()];
+	}];
 
 	let remoteStorage = new RemoteStorage({
 		modules: modules,
@@ -29,7 +23,7 @@ exports.WKCRefStorageClient = function () {
 	outputData.remoteStorage = remoteStorage;
 
 	modules.forEach(function (e) {
-		remoteStorage.access.claim(e.name, 'rw');
+		remoteStorage.access.claim(e.name, 'r');
 
 		remoteStorage.caching.enable(`/${e.name}/`);
 
