@@ -85,16 +85,14 @@ export const storageClient = WKCStorageClient.WKCStorageClient({
 	],
 });
 
-let remoteStorage = storageClient.remoteStorage;
-
-remoteStorage.on('ready', async () => {
+storageClient.remoteStorage.on('ready', async () => {
 	if (!_WIKIsTestingBehaviour()) {
 		console.debug('ready', arguments);
 	}
 
-	await remoteStorage.wikiavec.wkc_notes.WKCNoteStorageCache();
-	await remoteStorage.wikiavec.wkc_settings.WKCSettingStorageCache();
-	await remoteStorage.wikiavec.wkc_versions.WKCVersionStorageCache();
+	await storageClient.remoteStorage.wikiavec.wkc_notes.WKCNoteStorageCache();
+	await storageClient.remoteStorage.wikiavec.wkc_settings.WKCSettingStorageCache();
+	await storageClient.remoteStorage.wikiavec.wkc_versions.WKCVersionStorageCache();
 	notesAll.set((await WKCNoteActionQuery(storageClient, {})).sort(WKCWriteLogicListSort));
 
 	isLoading.set(false);
@@ -105,25 +103,25 @@ remoteStorage.on('ready', async () => {
 });
 
 (function SetupStorageClientLogging() {
-	remoteStorage.on('not-connected', () => {
+	storageClient.remoteStorage.on('not-connected', () => {
 		if (!_WIKIsTestingBehaviour()) {
 			console.debug('not-connected', arguments);
 		}
 	});
 
-	remoteStorage.on('disconnected', () => {
+	storageClient.remoteStorage.on('disconnected', () => {
 		if (!_WIKIsTestingBehaviour()) {
 			console.debug('disconnected', arguments);
 		}
 	});
 
-	remoteStorage.on('connected', () => {
+	storageClient.remoteStorage.on('connected', () => {
 		if (!_WIKIsTestingBehaviour()) {
 			console.debug('connected', arguments);
 		}
 	});
 
-	remoteStorage.on('error', (error) => {
+	storageClient.remoteStorage.on('error', (error) => {
 		if (!_WIKIsTestingBehaviour()) {
 			console.debug('error', error);
 		}
@@ -131,19 +129,19 @@ remoteStorage.on('ready', async () => {
 		isInErrorState.set(true);
 	});
 
-	remoteStorage.on('network-offline', () => {
+	storageClient.remoteStorage.on('network-offline', () => {
 		if (!_WIKIsTestingBehaviour()) {
 			console.debug('network-offline', arguments);
 		}
 	});
 
-	remoteStorage.on('network-online', () => {
+	storageClient.remoteStorage.on('network-online', () => {
 		if (!_WIKIsTestingBehaviour()) {
 			console.debug('network-online', arguments);
 		}
 	});
 
-	remoteStorage.on('sync-done', () => {
+	storageClient.remoteStorage.on('sync-done', () => {
 		if (!_WIKIsTestingBehaviour()) {
 			console.debug('sync-done', arguments);
 		}
