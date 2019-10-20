@@ -179,21 +179,13 @@ afterUpdate(function () {
 			});
 		});
 
-		editorInstance.on('mousedown', function (instance, event) {
-			if (!event.target.className.match('cm-link'))  {
-				return;
-			}
+		editorInstance.on('mousedown', mod.EventEditorDidTap);
 
-			event.preventDefault();
-		});
+		editorInstance.on('touchstart', mod.EventEditorDidTap);
 
-		document.querySelector('.CodeMirror').addEventListener('mouseup', function (event) {
-			if (!event.target.className.match('cm-link'))  {
-				return;
-			}
+		document.querySelector('.CodeMirror').addEventListener('mouseup', mod.EventEditorDidRelease);
 
-			openTextObject(event.target.textContent);
-		});
+		document.querySelector('.CodeMirror').addEventListener('touchend', mod.EventEditorDidRelease);
 	})();
 
 	// console.log(editorPostInitializeQueue);
@@ -330,6 +322,22 @@ function handleKeydown(event) {
 }
 
 const mod = {
+
+	EventEditorDidTap (instance, event) {
+		if (!event.target.className.match('cm-link'))  {
+			return;
+		}
+
+		event.preventDefault();
+	},
+
+	EventEditorDidRelease (event) {
+		if (!event.target.className.match('cm-link'))  {
+			return;
+		}
+
+		openTextObject(event.target.textContent);
+	},
 
 	WKCWriteJumpButtonDispatchComplete () {
 		editorInstance.focus();
