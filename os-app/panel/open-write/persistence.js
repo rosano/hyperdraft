@@ -97,6 +97,10 @@ storageClient.remoteStorage.on('ready', async () => {
 
 	isLoading.set(false);
 
+	if (isMobile()) {
+		return;
+	};
+
 	setTimeout(function () {
 		defaultFocusNode().focus();
 	});
