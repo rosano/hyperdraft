@@ -1,9 +1,27 @@
+const kWKCRefCacheKey = 'open-ref';
+
 const { WKCRefStorageClient } = require('./client.js');
 const storageClient = WKCRefStorageClient();
 
-const kWKCRefCacheKey = 'open-ref';
+exports.RCSRefFetchPublicNotesArray = async function () {
+	return Object.values(await storageClient.wikiavec.WKCRefStorageList()).filter(function (e) {
+		return e.WKCNotePublishStatusIsPublished;
+	});
+};
 
-//_ OLSKControllerSharedConnections
+exports.RCSRefUpdateCachedPublicNotes = function (writeFunction, inputData) {
+	let outputData = inputData.reduce(function (coll, item) {
+		if (typeof coll[item.WKCNotePublicID] === 'undefined') {
+			coll[item.WKCNotePublicID] = item;
+		}
+
+		return coll;
+	}, {});
+
+	writeFunction(kWKCRefCacheKey, outputData);
+
+	return outputData;
+};
 
 exports.OLSKControllerSharedConnections = function() {
 	return {
@@ -29,8 +47,6 @@ exports.OLSKControllerSharedConnections = function() {
 		},
 	};
 };
-
-//_ OLSKControllerSharedMiddlewares
 
 exports.OLSKControllerSharedMiddlewares = function() {
 	return {
@@ -68,28 +84,6 @@ exports.OLSKControllerTasks = function () {
 		},
 	];
 };
-
-exports.RCSRefFetchPublicNotesArray = async function () {
-	return Object.values(await storageClient.wikiavec.WKCRefStorageList()).filter(function (e) {
-		return e.WKCNotePublishStatusIsPublished;
-	});
-};
-
-exports.RCSRefUpdateCachedPublicNotes = function (writeFunction, inputData) {
-	let outputData = inputData.reduce(function (coll, item) {
-		if (typeof coll[item.WKCNotePublicID] === 'undefined') {
-			coll[item.WKCNotePublicID] = item;
-		}
-
-		return coll;
-	}, {});
-
-	writeFunction(kWKCRefCacheKey, outputData);
-
-	return outputData;
-};
-
-//_ OLSKControllerRoutes
 
 exports.OLSKControllerRoutes = function() {
 	return {
