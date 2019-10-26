@@ -27,8 +27,14 @@ exports.OLSKControllerSharedConnections = function() {
 	return {
 		WKCSharedConnectionRS: {
 			OLSKConnectionInitializer: function(olskCallback) {
+				let didConnect = false;
+
 				storageClient.remoteStorage.on('error', (error) => {
 					console.log('error', error);
+
+					if (didConnect) {
+						return;
+					};
 
 					olskCallback(error);
 				});
@@ -37,6 +43,8 @@ exports.OLSKControllerSharedConnections = function() {
 					console.log('connected', storageClient.remoteStorage.remote.userAddress);
 
 					olskCallback(null, storageClient.remoteStorage);
+
+					didConnect = true;
 				});
 				
 				storageClient.remoteStorage.connect(process.env.WKC_REMOTE_STORAGE_ACCOUNT, process.env.WKC_REMOTE_STORAGE_KEY);
