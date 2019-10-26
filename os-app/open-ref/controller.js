@@ -143,5 +143,23 @@ exports.OLSKControllerRoutes = function() {
 				'WKCSharedMiddlewareEnsureConnection',
 			],
 		},
+		WKCRefsReadPlaintext: {
+			OLSKRoutePath: '/:wkc_note_public_id(\\d+)/plaintext',
+			OLSKRouteMethod: 'get',
+			OLSKRouteFunction: async function(req, res, next) {
+				let publicNotes = req.OLSKCacheReadForCacheKey(kWKCRefCacheKey) || exports.RCSRefUpdateCachedPublicNotes(req.OLSKCacheWriteWithCacheKeyAndCacheObject, await exports.RCSRefFetchPublicNotesArray());
+
+				let item = publicNotes[req.params.wkc_note_public_id];
+
+				if (!item) {
+					return next();
+				}
+				
+				return res.send(item.WKCNoteBody);
+			},
+			OLSKRouteMiddlewares: [
+				'WKCSharedMiddlewareEnsureConnection',
+			],
+		},
 	};
 };
