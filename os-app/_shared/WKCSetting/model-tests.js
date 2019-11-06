@@ -1,6 +1,6 @@
-import { throws, deepEqual } from 'assert';
+const { throws, deepEqual } = require('assert');
 
-import * as mainModule from './model.js';
+const mainModule = require('./model.js');
 
 const kTesting = {
 	StubSettingObjectValid: function() {

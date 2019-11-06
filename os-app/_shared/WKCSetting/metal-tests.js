@@ -1,6 +1,6 @@
-import { rejects, deepEqual } from 'assert';
+const { rejects, deepEqual } = require('assert');
 
-import * as mainModule from './metal.js';
+const mainModule = require('./metal.js');
 
 const kTesting = {
 	StubSettingObjectValid: function() {

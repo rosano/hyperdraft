@@ -1,6 +1,6 @@
-import { rejects, deepEqual } from 'assert';
+const { rejects, deepEqual } = require('assert');
 
-import * as mainModule from './action.js';
+const mainModule = require('./action.js');
 import * as WKCVersionsAction from '../WKCVersion/action.js';
 
 const kTesting = {

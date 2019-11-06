@@ -1,6 +1,6 @@
-import { throws, deepEqual } from 'assert';
+const { throws, deepEqual } = require('assert');
 
-import * as mainModule from './storage.js';
+const mainModule = require('./storage.js');
 
 describe('WKCVersionStoragePath', function testWKCVersionStoragePath() {
 

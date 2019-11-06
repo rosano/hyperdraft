@@ -1,6 +1,6 @@
-import { throws, deepEqual } from 'assert';
+const { throws, deepEqual } = require('assert');
 
-import * as mainModule from './ui-logic.js';
+const mainModule = require('./ui-logic.js');
 
 const kTesting = {
 	uStubLineTokensFor (inputData) {
