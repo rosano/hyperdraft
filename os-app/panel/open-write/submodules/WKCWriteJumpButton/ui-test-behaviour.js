@@ -1,13 +1,13 @@
 import { deepEqual } from 'assert';
 
-const kDefaultRoutePath = require('./controller.js').OLSKControllerRoutes().WKCWriteJumpButtonStubRoute.OLSKRoutePath;
+const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().WKCWriteJumpButtonStubRoute;
 
 const WKCWriteJumpButton = '.WKCWriteJumpButton';
 
 describe('WKCWriteJumpButtonDiscovery', function testWKCWriteJumpButtonDiscovery() {
 
 	before(function() {
-		return browser.visit(kDefaultRoutePath);
+		return browser.OLSKVisit(kDefaultRoute);
 	});
 	
 	it('on startup', function() {
@@ -48,7 +48,7 @@ describe('WKCWriteJumpButtonLanguage', function testWKCWriteJumpButtonLanguage()
 			};
 
 			before(function() {
-				return browser.visit(kDefaultRoutePath);
+				return browser.OLSKVisit(kDefaultRoute);
 			});
 
 			it('on startup', function() {
@@ -64,7 +64,7 @@ describe('WKCWriteJumpButtonLanguage', function testWKCWriteJumpButtonLanguage()
 describe('WKCWriteJumpButtonInteraction', function testWKCWriteJumpButtonInteraction() {
 
 	before(function() {
-		return browser.visit(kDefaultRoutePath);
+		return browser.OLSKVisit(kDefaultRoute);
 	});
 
 	it('runs Launchlet on click', async function() {

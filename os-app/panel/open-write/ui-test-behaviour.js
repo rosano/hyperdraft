@@ -46,7 +46,7 @@ Object.entries({
 describe('WKCWriteUIAccess', function () {
 
 	before(function() {
-		return browser.visit(kDefaultRoute.OLSKRoutePath);
+		return browser.OLSKVisit(kDefaultRoute);
 	});
 
 	it('on startup', function() {

@@ -5,7 +5,7 @@ const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().WIKWrite
 describe('WIKWriteUIFeature', function () {
 
 	before(function() {
-		return browser.visit(kDefaultRoute.OLSKRoutePath);
+		return browser.OLSKVisit(kDefaultRoute);
 	});
 
 	context('on startup', function() {
@@ -112,7 +112,7 @@ describe('WIKWriteUIFeature', function () {
 	describe.skip('WIKWriteFooter', function testWIKWriteFooter () {
 
 		before(function() {
-			return browser.visit(kDefaultRoute.OLSKRoutePath);
+			return browser.OLSKVisit(kDefaultRoute);
 		});
 
 		it('sets class', function () {
@@ -124,9 +124,9 @@ describe('WIKWriteUIFeature', function () {
 	describe.skip('WIKWriteFooterStorageStatus', function testWIKWriteFooterStorageStatus () {
 
 		before(function() {
-			return browser.visit(OLSKTestingCanonicalFor(kDefaultRoute.OLSKRoutePath, {
+			return browser.OLSKVisit(kDefaultRoute, {
 				WIKWriteFooterStorageStatus: 'alfa',
-			}));
+			});
 		});
 
 		it('shows WIKWriteFooterStorageStatus', function () {
@@ -138,7 +138,7 @@ describe('WIKWriteUIFeature', function () {
 	describe.skip('WIKWriteFooterStorageButton', function testWIKWriteFooterStorageButton () {
 
 		before(function() {
-			return browser.visit(kDefaultRoute.OLSKRoutePath);
+			return browser.OLSKVisit(kDefaultRoute);
 		});
 
 		before(function () {
