@@ -112,7 +112,6 @@
     "rollup-plugin-node-resolve": "latest",
     "rollup-plugin-svelte": "latest",
     "rollup-plugin-terser": "latest",
-    "olsk-rollup-plugin-localize": "latest",
     "sirv-cli": "latest",
     "svelte": "3.9.0",
     "OLSKRollup": "olsk/OLSKRollup",
