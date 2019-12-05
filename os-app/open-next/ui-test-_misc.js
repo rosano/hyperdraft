@@ -29,7 +29,7 @@ describe('WKCWrite_Misc', function () {
 		context('back', function() {
 
 			before(function () {
-				return browser.pressButton(WKCWriteDetailToolbarBackButton);
+				return browser.pressButton(WIKWriteDetailToolbarBackButton);
 			});
 
 			it('sets class', function() {
@@ -40,14 +40,14 @@ describe('WKCWrite_Misc', function () {
 	
 	});
 
-	describe('WKCWriteDetail', function () {
+	describe('WIKWriteDetail', function () {
 
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute);
 		});
 		
 		it('sets class', function () {
-			browser.assert.hasClass('.WKCWriteDetail', 'OLSKMobileViewInactive');
+			browser.assert.hasClass('.WIKWriteDetail', 'OLSKMobileViewInactive');
 		});
 
 		context('create', function() {
@@ -57,7 +57,7 @@ describe('WKCWrite_Misc', function () {
 			});
 
 			it('sets class', function() {
-				browser.assert.hasNoClass('.WKCWriteDetail', 'OLSKMobileViewInactive');
+				browser.assert.hasNoClass('.WIKWriteDetail', 'OLSKMobileViewInactive');
 			});
 
 		});
@@ -65,11 +65,11 @@ describe('WKCWrite_Misc', function () {
 		context('back', function() {
 
 			before(function () {
-				return browser.pressButton(WKCWriteDetailToolbarBackButton);
+				return browser.pressButton(WIKWriteDetailToolbarBackButton);
 			});
 
 			it('sets class', function() {
-				browser.assert.hasClass('.WKCWriteDetail', 'OLSKMobileViewInactive');
+				browser.assert.hasClass('.WIKWriteDetail', 'OLSKMobileViewInactive');
 			});
 
 		});
@@ -104,7 +104,7 @@ describe('WKCWrite_Misc', function () {
 		});
 
 		it('sets document.activeElement', function() {
-			deepEqual(browser.document.activeElement, browser.query('.WKCWriteDetailFormNameField'));
+			deepEqual(browser.document.activeElement, browser.query('.WIKWriteDetailFormNameField'));
 		});
 
 	});
