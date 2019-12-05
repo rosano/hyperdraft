@@ -71,6 +71,14 @@ const mod = {
 		mod._ValueDocumentsAll = $WKCNotesAllStore;
 	},
 
+	FooterDispatchExport () {
+		CommandDocumentsExport();
+	},
+
+	FooterDispatchImport (event) {
+		CommandDocumentsImport(event.detail);
+	},
+
 	// COMMAND
 
 	CommandDocumentSave() {
@@ -123,6 +131,55 @@ const mod = {
 		WKCNoteSelectedStore.set(null);
 	},
 
+	async CommandDocumentsExport () {
+		let zip = new JSZip();
+
+		const fileName = [
+			'com.wikiavec.export',
+			(new Date()).toJSON(),
+		].join(' ');
+
+		zip.file(`${ fileName }.json`, JSON.stringify({
+			WKCNoteObjects: $WKCNotesAllStore,
+			WKCSettingObjects: await WKCSettingAction.WKCSettingsActionQuery(storageClient, {}),
+		}));
+		
+		zip.generateAsync({type: 'blob'}).then(function (content) {
+			saveAs(content, `${ fileName }.zip`);
+		});	
+	},
+
+	async CommandDocumentsImport (inputData) {
+		let outputData;
+		try {
+			outputData = JSON.parse(inputData);
+		} catch (e)  {
+			console.log(e);
+		}
+
+		if (typeof outputData !== 'object' || outputData === null) {
+			return;
+		}
+
+		if (!Array.isArray(outputData.WKCNoteObjects)) {
+			return;
+		}
+
+		if (!Array.isArray(outputData.WKCSettingObjects)) {
+			return;
+		}
+
+		await Promise.all(outputData.WKCSettingObjects.map(function (e) {
+			return WKCSettingMetal.WKCSettingsMetalWrite(storageClient, e);
+		}));
+
+		await Promise.all(outputData.WKCNoteObjects.map(function (e) {
+			return WKCNoteMetal.WKCNoteMetalWrite(storageClient, WKCNoteModelPostJSONParse(e));
+		}));
+
+		WKCNotesAllStore.set(await WKCNoteAction.WKCNoteActionQuery(storageClient, {}));
+	},
+
 	// SETUP
 
 	SetupEverything () {
@@ -173,7 +230,7 @@ import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svel
 
 <div id="WKCWriteStorageWidget" class="OLSKMobileViewFooter" class:WKCWriteStorageWidgetHidden={ mod._ValueStorageWidgetHidden }></div>
 
-<WKCWriteFooter WKCWriteFooterStorageStatus={ mod._ValueFooterStorageStatus } WKCWriteFooterDispatchStorage={ mod.WKCWriteFooterDispatchStorage } />
+<WKCWriteFooter on:FooterDispatchExport={ mod.FooterDispatchExport } on:FooterDispatchImport={ mod.FooterDispatchImport } WKCWriteFooterStorageStatus={ mod._ValueFooterStorageStatus } WKCWriteFooterDispatchStorage={ mod.WKCWriteFooterDispatchStorage } />
 
 </div>
 
