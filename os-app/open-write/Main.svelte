@@ -1,6 +1,6 @@
 <script>
 import { OLSKLocalized } from '../_shared/common/global.js';
-import { storageClient, isLoading, isMobile, isInErrorState, WKCNotesAllStore } from './persistence.js';
+import { storageClient, WKCPersistenceIsLoading, isMobile, isInErrorState, WKCNotesAllStore } from './persistence.js';
 
 
 import { _WIKIsTestingBehaviour } from '../_shared/common/global.js';
@@ -97,7 +97,7 @@ import WKCWriteFooter from './submodules/WKCWriteFooter/main.svelte';
 import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svelte';
 </script>
 
-<div class="Container OLSKViewport" class:OLSKIsLoading={ $isLoading }>
+<div class="Container OLSKViewport" class:OLSKIsLoading={ $WKCPersistenceIsLoading }>
 
 <OLSKViewportContent>
 	<ModuleMaster />

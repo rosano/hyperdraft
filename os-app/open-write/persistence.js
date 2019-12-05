@@ -14,7 +14,7 @@ import { writable } from 'svelte/store';
 export const WKCNoteSelectedStore = writable(null);
 export const WKCNotesAllStore = writable([]);
 export const mobileViewCurrent = writable('ModuleMaster');
-export const isLoading = writable(true);
+export const WKCPersistenceIsLoading = writable(true);
 export let filterText = writable('');
 export const isInErrorState = writable(false);
 
@@ -93,7 +93,7 @@ storageClient.remoteStorage.on('ready', async () => {
 	await storageClient.remoteStorage.wikiavec.wkc_versions.WKCVersionStorageCache();
 	WKCNotesAllStore.set((await WKCNoteActionQuery(storageClient, {})).sort(WKCWriteLogicListSort));
 
-	isLoading.set(false);
+	WKCPersistenceIsLoading.set(false);
 
 	if (isMobile()) {
 		return;
