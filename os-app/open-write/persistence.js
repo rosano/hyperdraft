@@ -18,7 +18,7 @@ export const WKCPersistenceIsLoading = writable(true);
 export let filterText = writable('');
 export const isInErrorState = writable(false);
 
-export const defaultFocusNode = function () {
+export const WKCWriteDefaultFocusNode = function () {
 	return document.querySelector('.WKCWriteFilterInput');
 };
 
@@ -100,7 +100,7 @@ storageClient.remoteStorage.on('ready', async () => {
 	};
 
 	setTimeout(function () {
-		defaultFocusNode().focus();
+		WKCWriteDefaultFocusNode().focus();
 	});
 });
 

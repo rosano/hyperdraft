@@ -4,18 +4,18 @@ import WKCParser from '../_shared/WKCParser/main.js';
 import { editorConfigure } from './ModuleDetail.svelte';
 import { WKCNoteSelectedStore } from './persistence.js';
 import { OLSKLocalized, _WIKIsTestingBehaviour } from '../_shared/common/global.js';
-import { storageClient, WKCNotesAllStore, filterText, defaultFocusNode, isMobile, mobileViewCurrent } from './persistence.js';
+import { storageClient, WKCNotesAllStore, filterText, WKCWriteDefaultFocusNode, isMobile, mobileViewCurrent } from './persistence.js';
 import { WIKWriteTruncatedTitleFor, WKCWriteLogicListSort } from './ui-logic.js';
 
 let inputFocused = false;
 import { onMount } from 'svelte';
 onMount(function () {
 	setTimeout(function () {
-		defaultFocusNode().addEventListener('focus', function () {
+		WKCWriteDefaultFocusNode().addEventListener('focus', function () {
 			inputFocused = true;
 		});
 
-		defaultFocusNode().addEventListener('blur', function () {
+		WKCWriteDefaultFocusNode().addEventListener('blur', function () {
 			inputFocused = false;
 		});
 	}, 100);
@@ -82,7 +82,7 @@ WKCNoteSelectedStore.subscribe(function WKCNoteSelectedStoreDidChange (val) {
 		return;
 	}
 
-	defaultFocusNode().focus();
+	WKCWriteDefaultFocusNode().focus();
 });
 
 import { afterUpdate } from 'svelte';
@@ -139,7 +139,7 @@ filterText.subscribe(function filterTextDidChange (val) {
 function FilterInputDispatchClear() {
 	filterText.set('');
 	
-	defaultFocusNode().focus();
+	WKCWriteDefaultFocusNode().focus();
 }
 
 async function exportNotes() {
@@ -173,7 +173,7 @@ function handleEnter () {
 		return;
 	}
 	
-	if (document.activeElement !== defaultFocusNode()) {
+	if (document.activeElement !== WKCWriteDefaultFocusNode()) {
 		return;
 	}
 
@@ -189,7 +189,7 @@ function handleKeydown(event) {
 		return;
 	}
 	
-	if (document.activeElement !== defaultFocusNode()) {
+	if (document.activeElement !== WKCWriteDefaultFocusNode()) {
 		return;
 	}
 

@@ -16,7 +16,7 @@ export let editorConfigure = function (inputData) {
 import * as WKCNoteAction from '../_shared/WKCNote/action.js';
 import * as WKCVersionAction from '../_shared/WKCVersion/action.js';
 import * as WKCWriteLogic from './ui-logic.js';
-import { storageClient, WKCNotesAllStore, filterText, defaultFocusNode, mobileViewCurrent, isMobile } from './persistence.js';
+import { storageClient, WKCNotesAllStore, filterText, WKCWriteDefaultFocusNode, mobileViewCurrent, isMobile } from './persistence.js';
 import { WKCNoteSelectedStore } from './persistence.js';
 
 let jumpRecipes = [];
@@ -268,13 +268,13 @@ async function noteDelete() {
 
 	WKCNoteSelectedStore.set(null);
 
-	defaultFocusNode().focus();
+	WKCWriteDefaultFocusNode().focus();
 }
 
 function toggleTabFocus (event) {
 	event.preventDefault();
 
-	return ((!editorInstance || editorInstance.hasFocus()) ? defaultFocusNode() :editorInstance).focus();
+	return ((!editorInstance || editorInstance.hasFocus()) ? WKCWriteDefaultFocusNode() :editorInstance).focus();
 }
 
 function noteClear () {
