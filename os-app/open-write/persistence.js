@@ -9,11 +9,9 @@ import { WKCVersionStorage } from '../_shared/WKCVersion/storage.js';
 
 import { WKCWriteLogicListSort } from './ui-logic.js';
 
-
-import { noteSelected } from './_shared.js';
-
 import { writable } from 'svelte/store';
 
+export const WKCNoteSelectedStore = writable(null);
 export const WKCNotesAllStore = writable([]);
 export const mobileViewCurrent = writable('ModuleMaster');
 export const isLoading = writable(true);
@@ -28,9 +26,9 @@ export const isMobile = function () {
 	return window.innerWidth <= 760;
 };
 
-let _noteSelected;
-noteSelected.subscribe(function (val) {
-	_noteSelected = val;
+let _WKCNoteSelectedStore;
+WKCNoteSelectedStore.subscribe(function (val) {
+	_WKCNoteSelectedStore = val;
 });
 export const storageClient = WKCStorageClient.WKCStorageClient({
 	modules: [
@@ -54,8 +52,8 @@ export const storageClient = WKCStorageClient.WKCStorageClient({
 						OLSKChangeDelegateUpdate: function (inputData) {
 							// console.log('OLSKChangeDelegateUpdate', inputData);
 
-							if (_noteSelected && (_noteSelected.WKCNoteID === inputData.WKCNoteID)) {
-								noteSelected.update(function (val) {
+							if (_WKCNoteSelectedStore && (_WKCNoteSelectedStore.WKCNoteID === inputData.WKCNoteID)) {
+								WKCNoteSelectedStore.update(function (val) {
 									return Object.assign(val, inputData);
 								});
 							}
@@ -69,8 +67,8 @@ export const storageClient = WKCStorageClient.WKCStorageClient({
 						OLSKChangeDelegateDelete: function (inputData) {
 							// console.log('OLSKChangeDelegateDelete', inputData);
 
-							if (_noteSelected && (_noteSelected.WKCNoteID === inputData.WKCNoteID)) {
-								noteSelected.set(null);
+							if (_WKCNoteSelectedStore && (_WKCNoteSelectedStore.WKCNoteID === inputData.WKCNoteID)) {
+								WKCNoteSelectedStore.set(null);
 							}
 
 							WKCNotesAllStore.update(function (val) {

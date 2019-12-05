@@ -2,7 +2,7 @@
 import * as WKCNoteAction from '../_shared/WKCNote/action.js';
 import WKCParser from '../_shared/WKCParser/main.js';
 import { editorConfigure } from './ModuleDetail.svelte';
-import { noteSelected } from './_shared.js';
+import { WKCNoteSelectedStore } from './persistence.js';
 import { OLSKLocalized, _WIKIsTestingBehaviour } from '../_shared/common/global.js';
 import { storageClient, WKCNotesAllStore, filterText, defaultFocusNode, isMobile, mobileViewCurrent } from './persistence.js';
 import { WIKWriteTruncatedTitleFor, WKCWriteLogicListSort } from './ui-logic.js';
@@ -58,10 +58,10 @@ async function noteSelect(inputData) {
 		return editorInstance.focus();
 	});
 	
-	return noteSelected.set(inputData);
+	return WKCNoteSelectedStore.set(inputData);
 }
 
-noteSelected.subscribe(function noteSelectedDidChange (val) {
+WKCNoteSelectedStore.subscribe(function WKCNoteSelectedStoreDidChange (val) {
 	if (val) {
 		return;
 	}
@@ -122,14 +122,14 @@ filterText.subscribe(function filterTextDidChange (val) {
 	notesVisible = notesVisible.sort(WKCWriteLogicListSort);
 
 	if (!val.length) {
-		return noteSelected.set(null);
+		return WKCNoteSelectedStore.set(null);
 	}
 
 	if (!notesVisible.length) {
-		return noteSelected.set(null);
+		return WKCNoteSelectedStore.set(null);
 	}
 
-	return noteSelected.set(notesVisible.filter(function (e) {
+	return WKCNoteSelectedStore.set(notesVisible.filter(function (e) {
 		return WKCParser.WKCParserTitleForPlaintext(e.WKCNoteBody).toLowerCase() === val.toLowerCase();
 	}).concat(notesVisible.filter(function (e) {
 		return WKCParser.WKCParserTitleForPlaintext(e.WKCNoteBody).toLowerCase().includes(val.toLowerCase());
@@ -157,13 +157,13 @@ async function exportNotes() {
 }
 
 function handleArrowUp () {
-	noteSelected.set(notesVisible[Math.max(notesVisible.indexOf($noteSelected) - 1, 0)]);
+	WKCNoteSelectedStore.set(notesVisible[Math.max(notesVisible.indexOf($WKCNoteSelectedStore) - 1, 0)]);
 
 	return event.preventDefault();
 }
 
 function handleArrowDown () {
-	noteSelected.set(notesVisible[Math.min(notesVisible.indexOf($noteSelected) + 1, notesVisible.length - 1)]);
+	WKCNoteSelectedStore.set(notesVisible[Math.min(notesVisible.indexOf($WKCNoteSelectedStore) + 1, notesVisible.length - 1)]);
 
 	return event.preventDefault();
 }
@@ -177,7 +177,7 @@ function handleEnter () {
 		return;
 	}
 
-	if ($noteSelected && WKCParser.WKCParserTitleForPlaintext($noteSelected.WKCNoteBody) === $filterText) {
+	if ($WKCNoteSelectedStore && WKCParser.WKCParserTitleForPlaintext($WKCNoteSelectedStore.WKCNoteBody) === $filterText) {
 		return;
 	}
 
@@ -229,7 +229,7 @@ import OLSKInputWrapper from 'OLSKInputWrapper';
 <div class="MasterContentContainer OLSKMobileSafariSmoothScrolling">
 	<div class="List">
 		{#each notesVisible as e}
-			<div on:click={ () => noteSelect(e) } class="ListItem OLSKLayoutElementTappable" class:ListItemSelected={ $noteSelected === e }>
+			<div on:click={ () => noteSelect(e) } class="ListItem OLSKLayoutElementTappable" class:ListItemSelected={ $WKCNoteSelectedStore === e }>
 				<strong class="WKCWriteListItemAccessibilitySummary OLSKScreenReaderOnly">{ WIKWriteTruncatedTitleFor(WKCParser.WKCParserTitleForPlaintext(e.WKCNoteBody), true) }</strong>
 				<strong class="ListItemTitle " aria-hidden="true">{ WIKWriteTruncatedTitleFor(WKCParser.WKCParserTitleForPlaintext(e.WKCNoteBody)) }</strong>
 				<span class="ListItemSnippet" aria-hidden="true">{ WKCParser.WKCParserSnippetForPlaintext(WKCParser.WKCParserBodyForPlaintext(e.WKCNoteBody)) }</span>

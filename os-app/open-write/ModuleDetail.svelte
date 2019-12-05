@@ -17,11 +17,11 @@ import * as WKCNoteAction from '../_shared/WKCNote/action.js';
 import * as WKCVersionAction from '../_shared/WKCVersion/action.js';
 import * as WKCWriteLogic from './ui-logic.js';
 import { storageClient, WKCNotesAllStore, filterText, defaultFocusNode, mobileViewCurrent, isMobile } from './persistence.js';
-import { noteSelected } from './_shared.js';
+import { WKCNoteSelectedStore } from './persistence.js';
 
 let jumpRecipes = [];
 
-noteSelected.subscribe(function (val) {
+WKCNoteSelectedStore.subscribe(function (val) {
 	window.LCHPageRecipes = null;
 	jumpRecipes = [];
 
@@ -132,11 +132,11 @@ afterUpdate(function () {
 				return;
 			}
 
-			Object.assign($noteSelected, {
+			Object.assign($WKCNoteSelectedStore, {
 				WKCNoteBody: instance.getValue(),
 			}); // @DependancySvelteIgnoresMutableChanges
 
-			noteSave($noteSelected);
+			noteSave($WKCNoteSelectedStore);
 		});
 
 		editorInstance.on('keydown', function (instance, event) {
@@ -231,22 +231,22 @@ async function noteSave(inputData) {
 }
 
 async function notePublish() {
-	let item = await WKCNoteAction.WKCNoteActionPublish(storageClient, $noteSelected);
-	return noteSelected.update(function (val) {
+	let item = await WKCNoteAction.WKCNoteActionPublish(storageClient, $WKCNoteSelectedStore);
+	return WKCNoteSelectedStore.update(function (val) {
 		return Object.assign(val, item);
 	});
 }
 
 async function noteUnpublish() {
-	let item = await WKCNoteAction.WKCNoteActionUnpublish(storageClient, $noteSelected);
-	return noteSelected.update(function (val) {
+	let item = await WKCNoteAction.WKCNoteActionUnpublish(storageClient, $WKCNoteSelectedStore);
+	return WKCNoteSelectedStore.update(function (val) {
 		return Object.assign(val, item);
 	});
 }
 
 async function noteVersions() {
 	(await WKCVersionAction.WKCVersionActionQuery(storageClient, {
-		WKCVersionNoteID: $noteSelected.WKCNoteID,
+		WKCVersionNoteID: $WKCNoteSelectedStore.WKCNoteID,
 	})).slice(0, 5).forEach(function (e) {
 		console.log(e);
 		console.log(e.WKCVersionBody);
@@ -258,15 +258,15 @@ async function noteDelete() {
 		return;
 	}
 
-	await WKCNoteAction.WKCNoteActionDelete(storageClient, $noteSelected.WKCNoteID);
+	await WKCNoteAction.WKCNoteActionDelete(storageClient, $WKCNoteSelectedStore.WKCNoteID);
 
 	WKCNotesAllStore.update(function (val) {
 		return val.filter(function(e) {
-			return e !== $noteSelected;
+			return e !== $WKCNoteSelectedStore;
 		});
 	});
 
-	noteSelected.set(null);
+	WKCNoteSelectedStore.set(null);
 
 	defaultFocusNode().focus();
 }
@@ -278,18 +278,18 @@ function toggleTabFocus (event) {
 }
 
 function noteClear () {
-	noteSelected.set(null);
+	WKCNoteSelectedStore.set(null);
 	WKCNotesAllStore.update(function (val) {
 		return val.sort(WKCWriteLogic.WKCWriteLogicListSort);
 	});
 }
 
 function debugTextAreaDidInput() {
-	Object.assign($noteSelected, {
+	Object.assign($WKCNoteSelectedStore, {
 		WKCNoteBody: this.value,
 	}); // @DependancySvelteIgnoresMutableChanges
 
-	noteSave($noteSelected);
+	noteSave($WKCNoteSelectedStore);
 }
 
 function handleKeydown(event) {
@@ -351,7 +351,7 @@ import OLSKToolbarElementGroup from 'OLSKToolbarElementGroup';
 
 <div class="Container OLSKViewportDetail WKC_ContextMobileView" class:WKC_ContextMobileViewActive={ $mobileViewCurrent === 'ModuleDetail' } class:WKC_ContextMobileViewInactive={ $mobileViewCurrent !== 'ModuleDetail' }>
 
-{#if $noteSelected}
+{#if $WKCNoteSelectedStore}
 	<header id="WKCWriteDetailToolbar">
 		<OLSKToolbar OLSKToolbarJustify={ true }>
 			<OLSKToolbarElementGroup>
@@ -363,16 +363,16 @@ import OLSKToolbarElementGroup from 'OLSKToolbarElementGroup';
 			<OLSKToolbarElementGroup>
 				<WKCWriteJumpButton WKCWriteJumpButtonRecipes={ jumpRecipes } WKCWriteJumpButtonDispatchComplete={ mod.WKCWriteJumpButtonDispatchComplete } />
 
-				{#if $noteSelected.WKCNotePublishStatusIsPublished}
+				{#if $WKCNoteSelectedStore.WKCNotePublishStatusIsPublished}
 					<span id="PublishStatus">{ OLSKLocalized('WKCWriteDetailToolbarPublishStatusPublished') }</span>
 					<a class="OLSKToolbarButton OLSKLayoutElementTappable" href={ window.OLSKCanonicalFor('WKCRouteRefsRead', {
-							wkc_note_public_id: $noteSelected.WKCNotePublicID,
+							wkc_note_public_id: $WKCNoteSelectedStore.WKCNotePublicID,
 						}) } title={ OLSKLocalized('WKCWriteDetailToolbarVisitButtonText') } style="background-image: url('/panel/_shared/ui-assets/wIKWriteVisit.svg')" target="_blank">&nbsp;</a>
 
 					<button on:click={ noteUnpublish } class="OLSKToolbarButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle" style="background-image: url('/panel/_shared/ui-assets/wIKWriteUnpublish.svg')" title={ OLSKLocalized('WKCWriteDetailToolbarUnpublishButtonText') } id="WKCWriteDetailToolbarUnpublishButton"></button>
 				{/if}
 
-				{#if !$noteSelected.WKCNotePublishStatusIsPublished }
+				{#if !$WKCNoteSelectedStore.WKCNotePublishStatusIsPublished }
 					<button on:click={ notePublish } class="OLSKToolbarButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle" style="background-image: url('/panel/_shared/ui-assets/wIKWritePublish.svg')" title={ OLSKLocalized('WKCWriteDetailToolbarPublishButtonText') } id="WKCWriteDetailToolbarPublishButton"></button>
 				{/if}
 
@@ -391,7 +391,7 @@ import OLSKToolbarElementGroup from 'OLSKToolbarElementGroup';
 	</div>
 {/if}
 
-{#if !$noteSelected}
+{#if !$WKCNoteSelectedStore}
 	<div class="DetailContentContainer PlaceholderContainer">
 		<span>{ OLSKLocalized('WKCWriteDetailPlaceholderText') }</span>
 	</div>
