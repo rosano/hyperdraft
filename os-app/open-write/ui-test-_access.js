@@ -3,7 +3,7 @@ import { deepEqual } from 'assert';
 const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().WIKWriteRoute;
 
 Object.entries({
-	WKCWriteFilterInput: '.WKCWriteFilterInput',
+	WKCWriteMasterFilterField: '.WKCWriteMasterFilterField',
 	OLSKInputWrapperClearButton: '.OLSKInputWrapperClearButton',
 	WKCWriteCreateButton: '#WKCWriteCreateButton',
 
@@ -51,7 +51,7 @@ describe('WKCWriteUIAccess', function () {
 	});
 
 	it('on startup', function() {
-		browser.assert.elements(WKCWriteFilterInput, 1);
+		browser.assert.elements(WKCWriteMasterFilterField, 1);
 		browser.assert.elements(WKCWriteCreateButton, 1);
 		browser.assert.attribute(WKCWriteCreateButton, 'accesskey', 'n');
 
@@ -110,14 +110,14 @@ describe('WKCWriteUIAccess', function () {
 		});
 
 		it('presents no items if no match', async function() {
-			browser.fill(WKCWriteFilterInput, 'test');
+			browser.fill(WKCWriteMasterFilterField, 'test');
 			await browser.wait({ element: OLSKInputWrapperClearButton });
 
 			browser.assert.elements(WKCWriteListItem, 0);
 		});
 
 		it('presents items if match', async function() {
-			browser.fill(WKCWriteFilterInput, 'alfa');
+			browser.fill(WKCWriteMasterFilterField, 'alfa');
 			await browser.wait({ element: OLSKInputWrapperClearButton });
 
 			browser.assert.elements(WKCWriteListItem, 1);
@@ -132,8 +132,8 @@ describe('WKCWriteUIAccess', function () {
 			await browser.wait({ element: `${WKCWriteListItem}:nth-child(2)` });
 		});
 
-		it('clears WKCWriteFilterInput', function() {
-			browser.assert.input(WKCWriteFilterInput, '');
+		it('clears WKCWriteMasterFilterField', function() {
+			browser.assert.input(WKCWriteMasterFilterField, '');
 		});
 
 		it('shows all items', function() {

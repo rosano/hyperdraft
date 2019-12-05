@@ -17,7 +17,7 @@ describe(`WKCWriteUILocalize-${ languageCode }`, function () {
 	});
 
 	it('on startup', function() {
-		browser.assert.attribute(WKCWriteFilterInput, 'placeholder', uLocalized('WKCWriteFilterInputPlaceholderText'));
+		browser.assert.attribute(WKCWriteMasterFilterField, 'placeholder', uLocalized('WKCWriteMasterFilterFieldText'));
 		deepEqual(browser.query(WKCWriteCreateButton).title, uLocalized('WKCWriteMasterToolbarCreateButtonText'));
 
 		browser.assert.text(WKCWriteExportButton, uLocalized('WKCUpdateExportText'));

@@ -217,7 +217,7 @@ import OLSKInputWrapper from 'OLSKInputWrapper';
 <header>
 	<OLSKToolbar>
 		<OLSKInputWrapper bind:InputWrapperValue={ $filterText } on:InputWrapperDispatchClear={ FilterInputDispatchClear } OLSKLocalized={ OLSKLocalized }>
-			<input bind:value={ $filterText } class="WKCWriteFilterInput" placeholder={ OLSKLocalized('WKCWriteFilterInputPlaceholderText') } />
+			<input class="WKCWriteMasterFilterField" bind:value={ $filterText } placeholder={ OLSKLocalized('WKCWriteMasterFilterFieldText') } />
 		</OLSKInputWrapper>
 
 		<OLSKToolbarElementGroup>
