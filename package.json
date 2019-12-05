@@ -98,6 +98,9 @@
     "// FRONTEND FILTER INPUT": null,
     "OLSKInputWrapper": "olsk/OLSKInputWrapper",
 
+    "// FRONTEND RELOAD BUTTON": null,
+    "OLSKReloadButton": "olsk/OLSKReloadButton",
+
     "// I sacrifice myself for the commas of others": null
   },
   "devDependencies": {

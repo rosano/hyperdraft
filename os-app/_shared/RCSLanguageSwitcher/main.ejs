@@ -1,0 +1,14 @@
+<section id="RCSLanguageSwitcher">
+	<% OLSKSharedPageLanguagesAvailable.forEach(function (e) { %>
+		<% if (e === OLSKSharedPageCurrentLanguage) { %>
+			<span><%= e.toUpperCase() %></span>
+		<% } %>
+
+		<% if (e !== OLSKSharedPageCurrentLanguage) { %>
+			<% titleLabel = OLSKFormatted(OLSKLocalized('RCSLanguageSwitcherLinkTextFormat'), OLSKLocalized('RCSLanguageSwitcherLinkTextLanguageName')[e]) %>
+			<a aria-label="<%- titleLabel %>" title="<%- titleLabel %>" href="<%= OLSKCanonicalLocalizedFor(OLSKSharedActiveRouteConstant, {
+				OLSKRoutingLanguage: e,
+			}) %>"><%= e.toUpperCase() %></a>
+		<% } %>
+	<% }) %>
+</section>

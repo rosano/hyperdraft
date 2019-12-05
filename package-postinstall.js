@@ -39,6 +39,7 @@
 		'normalize.css',
 		'OLSKInternational',
 		'OLSKLayout',
+		'OLSKReloadButton',
 		'OLSKRemoteStorage',
 		'OLSKRouting',
 		'OLSKServiceWorker',
