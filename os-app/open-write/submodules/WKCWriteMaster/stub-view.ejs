@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="/_shared/__external/normalize.css/normalize.css">
+	<link rel="stylesheet" type="text/css" href="/<%= OLSKSharedPageControllerSlug %>/__compiled/ui-style.css">
+
+	<script type="text/javascript">
+		window.OLSKPublicConstants = function (inputData) {
+			return {
+				OLSKSharedPageCurrentLanguage: '<%= OLSKSharedPageCurrentLanguage %>',
+			}[inputData];
+		};
+	</script>
+</head>
+<body>
+
+<script src="/<%= OLSKSharedPageControllerSlug %>/__compiled/ui-behaviour.js"></script>
+
+<p>
+	<strong>TestWKCWriteMasterDispatchCreate</strong>
+	<span id="TestWKCWriteMasterDispatchCreate">0</span>
+</p>
+
+<p>
+	<strong>TestWKCWriteMasterDispatchSelect</strong>
+	<span id="TestWKCWriteMasterDispatchSelect">0</span>
+	<span id="TestWKCWriteMasterDispatchSelectData">undefined</span>
+</p>
+
+</body>
+</html>
