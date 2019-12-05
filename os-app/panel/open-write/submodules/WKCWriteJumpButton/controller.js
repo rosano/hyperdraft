@@ -1,14 +1,12 @@
-//_ OLSKControllerRoutes
-
 exports.OLSKControllerRoutes = function() {
-	return process.env.NODE_ENV === 'production' ? {} : {
-		WKCWriteJumpButtonStubRoute: {
-			OLSKRoutePath: '/stub/WKCWriteJumpButton',
-			OLSKRouteMethod: 'get',
-			OLSKRouteFunction: function(req, res, next) {
-				return res.render(req.OLSKLive.OLSKLivePathJoin(__dirname, 'stub-view'));
-			},
-			OLSKRouteLanguages: ['en'],
+	return [{
+		OLSKRoutePath: '/stub/WKCWriteJumpButton',
+		OLSKRouteMethod: 'get',
+		OLSKRouteFunction: function(req, res, next) {
+			return res.render(require('path').join(__dirname, 'stub-view'));
 		},
-	};
+		OLSKRouteSignature: 'WKCWriteJumpButtonStubRoute',
+		OLSKRouteLanguages: ['en'],
+		OLSKRouteIsHidden: process.env.NODE_ENV === 'production',
+	}];
 };
