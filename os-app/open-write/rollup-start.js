@@ -1,4 +1,4 @@
-import App from './Main.svelte';
+import App from './next.svelte';
 
 const WIKWrite = new App({
 	target: document.body,
