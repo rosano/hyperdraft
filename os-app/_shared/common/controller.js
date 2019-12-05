@@ -50,6 +50,9 @@ exports.OLSKControllerSharedStaticAssetFolders = function() {
 exports.OLSKControllerSharedMiddlewares = function() {
 	return {
 		WKCSharedMiddlewareEnsureDatabase: exports.WKCSharedMiddlewareEnsureDatabase,
+		WKCSharedDonateLinkGuardMiddleware (req, res, next) {
+			return next(require('./logic.js').WKCSharedDonateLinkGuard(process.env));
+		},
 	};
 };
 

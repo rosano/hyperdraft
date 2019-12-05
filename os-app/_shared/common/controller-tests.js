@@ -21,16 +21,6 @@ describe('OLSKControllerSharedConnections', function testOLSKControllerSharedCon
 
 });
 
-describe('OLSKControllerSharedMiddlewares', function testOLSKControllerSharedMiddlewares() {
-
-	it('returns middleware functions', function() {
-		assert.deepEqual(controllerModule.OLSKControllerSharedMiddlewares(), {
-			WKCSharedMiddlewareEnsureDatabase: controllerModule.WKCSharedMiddlewareEnsureDatabase,
-		});
-	});
-
-});
-
 describe('WKCSharedMiddlewareEnsureDatabase', function testWKCSharedMiddlewareEnsureDatabase() {
 
 	var fakeRequest = function(inputData = {}) {
