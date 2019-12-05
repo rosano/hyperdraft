@@ -2,11 +2,12 @@
 <html>
 <head>
 	<link rel="stylesheet" type="text/css" href="/_shared/__external/normalize.css/normalize.css">
+	<link rel="stylesheet" type="text/css" href="/_shared/__external/OLSKLayout/ui-style.css">
 	<link rel="stylesheet" type="text/css" href="/panel/_shared/ui-style.css">
 	<link rel="stylesheet" type="text/css" href="/<%= OLSKSharedPageControllerSlug %>/__compiled/ui-style.css">
 
-	<link rel="stylesheet" type="text/css" href="/_shared/__external/launchlet/launchlet.css">
-	<script src="/_shared/__external/launchlet/launchlet.js"></script>
+	<link rel="stylesheet" type="text/css" href="/_shared/__external/launchlet/__compiled/launchlet.css">
+	<script src="/_shared/__external/launchlet/__compiled/launchlet.js"></script>
 </head>
 <body>
 
@@ -15,14 +16,14 @@
 <hr>
 
 <p>
-	<strong>inputData</strong>
-	<button onclick="Main.$set({inputData: [{
+	<strong>WKCWriteJumpButtonRecipes</strong>
+	<button onclick="WKCWriteJumpButton.$set({WKCWriteJumpButtonRecipes: [{
 		LCHRecipeName: 'WKCWriteJumpButtonTest',
 		LCHRecipeCallback () {
 			window.WKCWriteJumpButtonTestRun.innerHTML = parseInt(window.WKCWriteJumpButtonTestRun.innerHTML) + 1;
 		},
-	}]})" id="WKCWriteJumpButtonTestSetOne">one</button>
-	<button onclick="Main.$set({inputData: []})" id="WKCWriteJumpButtonTestSetZero">zero</button>
+	}], WKCWriteJumpButtonDispatchComplete () {}})" id="WKCWriteJumpButtonTestSetOne">one</button>
+	<button onclick="WKCWriteJumpButton.$set({WKCWriteJumpButtonRecipes: [], WKCWriteJumpButtonDispatchComplete () {}})" id="WKCWriteJumpButtonTestSetZero">zero</button>
 </p>
 
 <p>

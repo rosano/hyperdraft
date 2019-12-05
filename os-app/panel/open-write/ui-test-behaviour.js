@@ -91,7 +91,7 @@ describe('WKCWriteUIAccess', function () {
 		browser.assert.elements(WKCWriteDetailToolbarBackButton, 0);
 		browser.assert.elements(WKCWriteJumpButton, 1);
 		browser.assert.elements(WKCWriteDetailToolbarUnpublishButton, 0);
-		browser.assert.elements(WKCWriteDetailToolbarPublishButton, 0);
+		browser.assert.elements(WKCWriteDetailToolbarPublishButton, 1);
 		browser.assert.elements(WKCWriteDetailToolbarVersionsButton, 1);
 		browser.assert.elements(WKCWriteDetailToolbarDiscardButton, 1);
 
