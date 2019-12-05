@@ -9,15 +9,15 @@ import { OLSK_TESTING_BEHAVIOUR } from 'OLSKTesting'
 import * as OLSKRemoteStorage from '../_shared/__external/OLSKRemoteStorage/main.js'
 import * as WKCNoteAction from '../_shared/WKCNote/action.js';
 import * as WKCWriteLogic from '../open-write/ui-logic.js';
-import { storageClient, WKCPersistenceIsLoading, WKCNotesAllStore, WKCNoteSelectedStore } from '../open-write/persistence.js';
+import { storageClient, WKCPersistenceIsLoading, WKCNotesAllStore, WKCNoteSelectedStore, WKCWriteDefaultFocusNode } from '../open-write/persistence.js';
 
 const mod = {
 
 	// VALUE
 
-	_ValueDocumentsAll: [],
+	_ValueNotesAll: [],
 	
-	_ValueDocumentSelected: undefined,
+	_ValueNoteSelected: undefined,
 	
 	_ValueStorageWidgetHidden: true,
 
@@ -32,31 +32,31 @@ const mod = {
 	},
 
 	WKCWriteMasterDispatchCreate () {
-		mod.CommandDocumentCreate();
+		mod.CommandNoteCreate();
 	},
 
 	WKCWriteMasterDispatchSelect (inputData) {
-		mod.CommandDocumentSelect(inputData);
+		mod.CommandNoteSelect(inputData);
 	},
 
 	WIKWriteDetailDispatchBack () {
-		mod.CommandDocumentSelect(null);
+		mod.CommandNoteSelect(null);
 	},
 
 	WIKWriteDetailDispatchDiscard (inputData) {
-		mod.CommandDocumentDiscard(inputData);
+		mod.CommandNoteDiscard(inputData);
 	},
 
 	WIKWriteDetailDispatchUpdate () {
-		mod.CommandDocumentSave();
+		mod.CommandNoteSave();
 	},
 
-	MessageDocumentSelectedDidChange (inputData) {
+	MessageNoteSelectedDidChange (inputData) {
 		if (!inputData) {
 			return;
 		}
 
-		if (inputData === mod._ValueDocumentSelected) {
+		if (inputData === mod._ValueNoteSelected) {
 			return;
 		};
 
@@ -64,24 +64,24 @@ const mod = {
 			document.querySelector('.WIKWriteDetailFormNameField').focus();
 		});
 
-		mod._ValueDocumentSelected = inputData;
+		mod._ValueNoteSelected = inputData;
 	},
 
-	MessageDocumentsAllDidChange() {
-		mod._ValueDocumentsAll = $WKCNotesAllStore;
+	MessageNotesAllDidChange() {
+		mod._ValueNotesAll = $WKCNotesAllStore;
 	},
 
 	FooterDispatchExport () {
-		CommandDocumentsExport();
+		CommandNotesExport();
 	},
 
 	FooterDispatchImport (event) {
-		CommandDocumentsImport(event.detail);
+		CommandNotesImport(event.detail);
 	},
 
 	// COMMAND
 
-	CommandDocumentSave() {
+	CommandNoteSave() {
 		WKCNotesAllStore.update(function (val) {
 			return val;
 		});
@@ -102,24 +102,23 @@ const mod = {
 		};
 	},
 
-	async CommandDocumentCreate() {
+	async CommandNoteCreate(inputData) {
 		let item = await WKCNoteAction.WKCNoteActionCreate(storageClient, {
-			WKCNoteName: '',
-			WKCNoteModificationDate: new Date(),
+			WKCNoteBody: typeof inputData === 'string' ? inputData : '',
 		});
 
 		WKCNotesAllStore.update(function (val) {
 			return val.concat(item).sort(WKCWriteLogic.WKCWriteSort);
 		});
 
-		mod.CommandDocumentSelect(item);
+		mod.CommandNoteSelect(item);
 	},
 	
-	CommandDocumentSelect(inputData) {
+	CommandNoteSelect(inputData) {
 		return WKCNoteSelectedStore.set(inputData);
 	},
 	
-	async CommandDocumentDiscard (inputData) {
+	async CommandNoteDiscard (inputData) {
 		WKCNotesAllStore.update(function (val) {
 			return val.filter(function(e) {
 				return e !== inputData;
@@ -131,7 +130,7 @@ const mod = {
 		WKCNoteSelectedStore.set(null);
 	},
 
-	async CommandDocumentsExport () {
+	async CommandNotesExport () {
 		let zip = new JSZip();
 
 		const fileName = [
@@ -149,7 +148,7 @@ const mod = {
 		});	
 	},
 
-	async CommandDocumentsImport (inputData) {
+	async CommandNotesImport (inputData) {
 		let outputData;
 		try {
 			outputData = JSON.parse(inputData);
@@ -206,9 +205,9 @@ const mod = {
 
 };
 
-WKCNotesAllStore.subscribe(mod.MessageDocumentsAllDidChange);
+WKCNotesAllStore.subscribe(mod.MessageNotesAllDidChange);
 
-WKCNoteSelectedStore.subscribe(mod.MessageDocumentSelectedDidChange);
+WKCNoteSelectedStore.subscribe(mod.MessageNoteSelectedDidChange);
 
 import { onMount } from 'svelte';
 onMount(mod.LifecycleModuleWillMount);
@@ -223,7 +222,7 @@ import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svel
 <div class="WKCWrite OLSKViewport" class:OLSKIsLoading={ $WKCPersistenceIsLoading }>
 
 <OLSKViewportContent>
-	<WKCWriteMaster WKCWriteMasterListItems={ mod._ValueDocumentsAll } WKCWriteMasterListItemSelected={ $WKCNoteSelectedStore } WKCWriteMasterDispatchCreate={ mod.WKCWriteMasterDispatchCreate } WKCWriteMasterDispatchSelect={ mod.WKCWriteMasterDispatchSelect } OLSKMobileViewInactive={ $WKCNoteSelectedStore } />
+	<WKCWriteMaster WKCWriteMasterListItems={ mod._ValueNotesAll } WKCWriteMasterListItemSelected={ $WKCNoteSelectedStore } WKCWriteMasterDispatchCreate={ mod.WKCWriteMasterDispatchCreate } WKCWriteMasterDispatchSelect={ mod.WKCWriteMasterDispatchSelect } OLSKMobileViewInactive={ $WKCNoteSelectedStore } />
 	
 	<WIKWriteDetail WIKWriteDetailItem={ $WKCNoteSelectedStore } WIKWriteDetailDispatchBack={ mod.WIKWriteDetailDispatchBack } WIKWriteDetailDispatchDiscard={ mod.WIKWriteDetailDispatchDiscard } WIKWriteDetailDispatchUpdate={ mod.WIKWriteDetailDispatchUpdate } OLSKMobileViewInactive={ !$WKCNoteSelectedStore } />
 </OLSKViewportContent>
