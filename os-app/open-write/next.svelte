@@ -8,7 +8,7 @@ import OLSKThrottle from 'OLSKThrottle';
 import { OLSK_TESTING_BEHAVIOUR } from 'OLSKTesting'
 import * as OLSKRemoteStorage from '../_shared/__external/OLSKRemoteStorage/main.js'
 import * as WKCNoteAction from '../_shared/WKCNote/action.js';
-import WKCWriteLogic from './ui-logic.js';
+import * as WKCWriteLogic from './ui-logic.js';
 import { storageClient, WKCPersistenceIsLoading, WKCNotesAllStore, WKCNoteSelectedStore } from './persistence.js';
 
 const mod = {
