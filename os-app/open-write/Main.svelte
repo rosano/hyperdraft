@@ -4,14 +4,14 @@ import ModuleMaster from './ModuleMaster.svelte';
 import ModuleDetail from './ModuleDetail.svelte';
 import ModuleFooter from './ModuleFooter.svelte';
 
-import { OLSKLocalized } from '../../_shared/common/global.js';
+import { OLSKLocalized } from '../_shared/common/global.js';
 import { storageClient, isLoading, isMobile, isInErrorState, notesAll } from './persistence.js';
 
-import * as WKCNoteMetal from '../../_shared/WKCNote/metal.js';
-import { WKCNoteModelPostJSONParse } from '../../_shared/WKCNote/model.js';
-import * as WKCNoteAction from '../../_shared/WKCNote/action.js';
-import * as WKCSettingMetal from '../../_shared/WKCSetting/metal.js';
-import * as WKCSettingAction from '../../_shared/WKCSetting/action.js';
+import * as WKCNoteMetal from '../_shared/WKCNote/metal.js';
+import { WKCNoteModelPostJSONParse } from '../_shared/WKCNote/model.js';
+import * as WKCNoteAction from '../_shared/WKCNote/action.js';
+import * as WKCSettingMetal from '../_shared/WKCSetting/metal.js';
+import * as WKCSettingAction from '../_shared/WKCSetting/action.js';
 import { WKCWriteLogicListSort } from './ui-logic.js';
 
 export const DocumentsExport = async function () {
@@ -64,7 +64,7 @@ export const DocumentsImport = async function(inputData) {
 };
 
 let WIKWriteFooterStorageStatus = '';
-import * as OLSKRemoteStorage from '../../_shared/__external/OLSKRemoteStorage/main.js'
+import * as OLSKRemoteStorage from '../_shared/__external/OLSKRemoteStorage/main.js'
 OLSKRemoteStorage.OLSKRemoteStorageStatus(storageClient.remoteStorage, function (inputData) {
 	WIKWriteFooterStorageStatus = inputData
 }, OLSKLocalized)

@@ -4,16 +4,16 @@ import OLSKToolbar from 'OLSKToolbar';
 import OLSKToolbarElementGroup from 'OLSKToolbarElementGroup';
 import OLSKInputWrapper from 'OLSKInputWrapper';
 
-import * as WKCNoteAction from '../../_shared/WKCNote/action.js';
+import * as WKCNoteAction from '../_shared/WKCNote/action.js';
 
-import WKCParser from '../../_shared/WKCParser/main.js';
+import WKCParser from '../_shared/WKCParser/main.js';
 
 import { WIKWriteTruncatedTitleFor, WKCWriteLogicListSort } from './ui-logic.js';
 
 import {
 	OLSKLocalized,
 	_WIKIsTestingBehaviour,
-} from '../../_shared/common/global.js';
+} from '../_shared/common/global.js';
 import { storageClient, notesAll, filterText, defaultFocusNode, isMobile, mobileViewCurrent } from './persistence.js';
 import { noteSelected } from './_shared.js';
 

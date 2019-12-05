@@ -3,12 +3,12 @@ export let WIKWriteFooterStorageStatus = '';
 
 import OLSKToolbar from 'OLSKToolbar';
 import OLSKToolbarElementGroup from 'OLSKToolbarElementGroup';
-import OLSKServiceWorker from '../../_shared/__external/OLSKServiceWorker/main.svelte';
+import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svelte';
 
 import {
 	OLSKLocalized,
 	_WIKIsTestingBehaviour,
-} from '../../_shared/common/global.js';
+} from '../_shared/common/global.js';
 
 import { createEventDispatcher } from 'svelte';
 const dispatch = createEventDispatcher();

@@ -2,7 +2,7 @@
 import {
 	OLSKLocalized,
 	_WIKIsTestingBehaviour,
-} from '../../_shared/common/global.js';
+} from '../_shared/common/global.js';
 
 let editorInstance = null;
 let editorPostInitializeQueue = [];
@@ -18,8 +18,8 @@ import ModuleFooter from './ModuleFooter.svelte';
 import OLSKToolbar from 'OLSKToolbar';
 import OLSKToolbarElementGroup from 'OLSKToolbarElementGroup';
 
-import * as WKCNoteAction from '../../_shared/WKCNote/action.js';
-import * as WKCVersionAction from '../../_shared/WKCVersion/action.js';
+import * as WKCNoteAction from '../_shared/WKCNote/action.js';
+import * as WKCVersionAction from '../_shared/WKCVersion/action.js';
 import * as WKCWriteLogic from './ui-logic.js';
 
 import { storageClient, notesAll, filterText, defaultFocusNode, mobileViewCurrent, isMobile } from './persistence.js';

@@ -1,11 +1,11 @@
-import { _WIKIsTestingBehaviour } from '../../_shared/common/global.js';
+import { _WIKIsTestingBehaviour } from '../_shared/common/global.js';
 
-import * as WKCStorageClient from '../../_shared/WKCStorageClient/main.js';
-import { WKCStorageModule } from '../../_shared/WKCStorageModule/main.js';
-import { WKCNoteStorage } from '../../_shared/WKCNote/storage.js';
-import { WKCNoteActionQuery } from '../../_shared/WKCNote/action.js';
-import { WKCSettingStorage } from '../../_shared/WKCSetting/storage.js';
-import { WKCVersionStorage } from '../../_shared/WKCVersion/storage.js';
+import * as WKCStorageClient from '../_shared/WKCStorageClient/main.js';
+import { WKCStorageModule } from '../_shared/WKCStorageModule/main.js';
+import { WKCNoteStorage } from '../_shared/WKCNote/storage.js';
+import { WKCNoteActionQuery } from '../_shared/WKCNote/action.js';
+import { WKCSettingStorage } from '../_shared/WKCSetting/storage.js';
+import { WKCVersionStorage } from '../_shared/WKCVersion/storage.js';
 
 import { WKCWriteLogicListSort } from './ui-logic.js';
 
