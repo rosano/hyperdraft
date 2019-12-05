@@ -1,12 +1,9 @@
 <script>
-import OLSKViewportContent from 'OLSKViewportContent';
-import ModuleMaster from './ModuleMaster.svelte';
-import ModuleDetail from './ModuleDetail.svelte';
-import ModuleFooter from './ModuleFooter.svelte';
-
 import { OLSKLocalized } from '../_shared/common/global.js';
 import { storageClient, isLoading, isMobile, isInErrorState, notesAll } from './persistence.js';
 
+
+import { _WIKIsTestingBehaviour } from '../_shared/common/global.js';
 import * as WKCNoteMetal from '../_shared/WKCNote/metal.js';
 import { WKCNoteModelPostJSONParse } from '../_shared/WKCNote/model.js';
 import * as WKCNoteAction from '../_shared/WKCNote/action.js';
@@ -63,18 +60,21 @@ export const DocumentsImport = async function(inputData) {
 	notesAll.set(await WKCNoteAction.WKCNoteActionQuery(storageClient, {}));
 };
 
-let WIKWriteFooterStorageStatus = '';
 import * as OLSKRemoteStorage from '../_shared/__external/OLSKRemoteStorage/main.js'
 OLSKRemoteStorage.OLSKRemoteStorageStatus(storageClient.remoteStorage, function (inputData) {
-	WIKWriteFooterStorageStatus = inputData
+	mod._ValueFooterStorageStatus = inputData;
 }, OLSKLocalized)
 
 import { onMount } from 'svelte';
 onMount(function () {
-	(new window.OLSKStorageWidget(storageClient.remoteStorage)).attach('WIKWriteStorageWidget').backend(document.querySelector('.WIKWriteFooterStorageButton'));
+	(new window.OLSKStorageWidget(storageClient.remoteStorage)).attach('WIKWriteStorageWidget').backend(document.querySelector('.WKCWriteFooterStorageButton'));
 });
 
 const mod = {
+
+	_ValueStorageWidgetHidden: true,
+
+	_ValueFooterStorageStatus: '',
 
 	FooterDispatchExport () {
 		DocumentsExport();
@@ -84,12 +84,17 @@ const mod = {
 		DocumentsImport(event.detail);
 	},
 
-	_ValueStorageHidden: true,
-	WIKWriteFooterDispatchStorage () {
-		mod._ValueStorageHidden = !mod._ValueStorageHidden;
+	WKCWriteFooterDispatchStorage () {
+		mod._ValueStorageWidgetHidden = !mod._ValueStorageWidgetHidden;
 	},
 
 };
+
+import OLSKViewportContent from 'OLSKViewportContent';
+import ModuleMaster from './ModuleMaster.svelte';
+import ModuleDetail from './ModuleDetail.svelte';
+import WKCWriteFooter from './submodules/WKCWriteFooter/main.svelte';
+import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svelte';
 </script>
 
 <div class="Container OLSKViewport" class:OLSKIsLoading={ $isLoading }>
@@ -99,9 +104,13 @@ const mod = {
 	<ModuleDetail />
 </OLSKViewportContent>
 
-<div id="WIKWriteStorageWidget" class:StorageHidden={ mod._ValueStorageHidden }></div>
+<div id="WIKWriteStorageWidget" class:StorageHidden={ mod._ValueStorageWidgetHidden }></div>
 
-<ModuleFooter on:FooterDispatchExport={ mod.FooterDispatchExport } on:FooterDispatchImport={ mod.FooterDispatchImport } on:WIKWriteFooterDispatchStorage={ mod.WIKWriteFooterDispatchStorage } { WIKWriteFooterStorageStatus } />
+<WKCWriteFooter on:FooterDispatchExport={ mod.FooterDispatchExport } on:FooterDispatchImport={ mod.FooterDispatchImport } WKCWriteFooterStorageStatus={ mod._ValueFooterStorageStatus } WKCWriteFooterDispatchStorage={ mod.WKCWriteFooterDispatchStorage } />
+
+{#if !_WIKIsTestingBehaviour()}
+	<OLSKServiceWorker OLSKLocalized={ OLSKLocalized } registrationRoute={ window.OLSKCanonicalFor('WKCServiceWorkerRoute') } />
+{/if}
 
 </div>
 
@@ -112,13 +121,15 @@ const mod = {
 {/if}
 
 <style>
-.OLSKIsLoading :global(.MasterContentContainer *), .OLSKIsLoading :global(.DetailContentContainer *) {
-	visibility: hidden;
-}
-
 .Container {
+	--WKCBorderStyle: 1px solid #bbb;	
+	
 	font-family: 'Helvetica Neue', 'Helvetica', sans;
 	font-size: 12px;
+}
+
+.OLSKIsLoading :global(.MasterContentContainer *), .OLSKIsLoading :global(.DetailContentContainer *) {
+	visibility: hidden;
 }
 
 .WIKWriteDebug {

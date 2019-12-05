@@ -83,7 +83,7 @@ describe('WKCWriteFooter_Misc', function () {
 		});
 	
 		it('sets src', function () {
-			browser.assert.attribute(WKCWriteFooterStorageButtonImage, 'src', '/open-track/submodules/WKCWriteFooter/ui-images/WKCWriteFooterStorageButton.svg');
+			browser.assert.attribute(WKCWriteFooterStorageButtonImage, 'src', '/open-write/submodules/WKCWriteFooter/ui-images/WKCWriteFooterStorageButton.svg');
 		});
 
 	});

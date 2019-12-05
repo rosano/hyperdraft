@@ -30,10 +30,7 @@ Object.entries({
 
 	WIKWriteStorageWidget: '#WIKWriteStorageWidget',
 
-	WKCWriteReloadButton: '#WKCWriteReloadButton',
-
-	WIKWriteFooterStorageStatus: '.WIKWriteFooterStorageStatus',
-	WIKWriteFooterStorageButton: '.WIKWriteFooterStorageButton',
+	WKCWriteFooter: '.WKCWriteFooter',
 
 	async uCreateItem (browser) {
 		browser.pressButton(WKCWriteCreateButton);
@@ -47,6 +44,10 @@ describe('WKCWriteUIAccess', function () {
 
 	before(function() {
 		return browser.OLSKVisit(kDefaultRoute);
+	});
+
+	it('shows WKCWriteFooter', function () {
+		browser.assert.elements(WKCWriteFooter, 1);
 	});
 
 	it('on startup', function() {
@@ -65,16 +66,6 @@ describe('WKCWriteUIAccess', function () {
 
 		browser.assert.elements(WIKWriteStorageWidget, 1);
 		browser.assert.hasClass(WIKWriteStorageWidget, 'StorageHidden');
-
-		browser.assert.elements(WKCWriteReloadButton, 1);
-	});
-
-	it('shows WIKWriteFooterStorageStatus', function () {
-		browser.assert.elements(WIKWriteFooterStorageStatus, 1)
-	});
-
-	it('shows WIKWriteFooterStorageButton', function () {
-		browser.assert.elements(WIKWriteFooterStorageButton, 1)
 	});
 
 	it('on create', async function() {

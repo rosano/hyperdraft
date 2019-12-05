@@ -23,12 +23,6 @@ describe(`WKCWriteUILocalize-${ languageCode }`, function () {
 		browser.assert.text(WKCWriteExportButton, uLocalized('WKCUpdateExportText'));
 
 		browser.assert.text(WKCWriteDetailPlaceholderContainer, uLocalized('WKCWriteDetailPlaceholderText'));
-
-		deepEqual(browser.query(WKCWriteReloadButton).title, uLocalized('WKCWriteFooterToolbarReloadButtonText'));
-	});
-
-	it('localizes WIKWriteFooterStorageButton', function() {
-		browser.assert.attribute(WIKWriteFooterStorageButton, 'title', uLocalized('WIKWriteFooterStorageButtonText'));
 	});
 
 	it('on create', async function() {
