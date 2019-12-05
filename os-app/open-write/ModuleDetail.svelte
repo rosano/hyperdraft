@@ -367,7 +367,7 @@ const mod = {
 
 				{#if $noteSelected.WKCNotePublishStatusIsPublished}
 					<span id="PublishStatus">{ OLSKLocalized('WKCWriteDetailToolbarPublishStatusPublished') }</span>
-					<a class="OLSKToolbarButton OLSKLayoutElementTappable" href={ window.OLSKCanonicalFor('WIKRefsRoute', {
+					<a class="OLSKToolbarButton OLSKLayoutElementTappable" href={ window.OLSKCanonicalFor('WKCRouteRefsRead', {
 							wkc_note_public_id: $noteSelected.WKCNotePublicID,
 						}) } title={ OLSKLocalized('WKCWriteDetailToolbarVisitButtonText') } style="background-image: url('/panel/_shared/ui-assets/wIKWriteVisit.svg')" target="_blank">&nbsp;</a>
 
