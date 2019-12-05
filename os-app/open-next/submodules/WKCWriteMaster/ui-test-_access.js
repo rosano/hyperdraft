@@ -7,6 +7,7 @@ Object.entries({
 	
 	WKCWriteMasterToolbar: '.WKCWriteMasterToolbar',
 	
+	WKCWriteMasterFilterField: '.WKCWriteMasterFilterField',
 	WKCWriteMasterCreateButton: '.WKCWriteMasterCreateButton',
 
 	WKCWriteMasterBody: '.WKCWriteMasterBody',
@@ -31,6 +32,14 @@ describe('WKCWriteMaster_Access', function () {
 
 	it('shows OLSKToolbar', function () {
 		browser.assert.elements('.OLSKToolbar', 1);
+	});
+
+	it('shows OLSKInputWrapperContainer', function () {
+		browser.assert.elements('.OLSKInputWrapperContainer', 1);
+	});
+
+	it('shows WKCWriteMasterFilterField', function () {
+		browser.assert.elements(WKCWriteMasterFilterField, 1);
 	});
 
 	it('shows WKCWriteMasterCreateButton', function () {

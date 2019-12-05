@@ -12,12 +12,17 @@ export const OLSKLocalized = function(translationConstant) {
 
 import OLSKToolbar from 'OLSKToolbar';
 import OLSKToolbarElementGroup from 'OLSKToolbarElementGroup';
+import OLSKInputWrapper from 'OLSKInputWrapper';
 </script>
 
 <div class="WKCWriteMaster OLSKViewportMaster" class:OLSKMobileViewInactive={ OLSKMobileViewInactive }>
 
 <header class="WKCWriteMasterToolbar OLSKMobileViewHeader">
 	<OLSKToolbar>
+		<OLSKInputWrapper OLSKLocalized={ OLSKLocalized }>
+			<input class="WKCWriteMasterFilterField" placeholder={ OLSKLocalized('WKCWriteMasterFilterFieldText') } />
+		</OLSKInputWrapper>
+
 		<OLSKToolbarElementGroup>
 			<button class="WKCWriteMasterCreateButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable" on:click={ WKCWriteMasterDispatchCreate } accesskey="n">{ OLSKLocalized('WKCWriteMasterCreateButtonText') }</button>
 		</OLSKToolbarElementGroup>

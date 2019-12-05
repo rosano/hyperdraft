@@ -16,6 +16,10 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 			});
 		});
 	
+		it('localizes WKCWriteMasterFilterField', function () {
+			browser.assert.attribute(WKCWriteMasterFilterField, 'placeholder', uLocalized('WKCWriteMasterFilterFieldText'));
+		});
+	
 		it('localizes WKCWriteMasterCreateButton', function () {
 			browser.assert.text(WKCWriteMasterCreateButton, uLocalized('WKCWriteMasterCreateButtonText'));
 		});
