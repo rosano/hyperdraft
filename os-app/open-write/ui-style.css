@@ -2,24 +2,6 @@
 	--WIKBorderStyle: 1px solid #ddd;
 }
 
-.WKCWrite {
-	--WKCBorderStyle: 1px solid #ddd;
-	
-	font-family: 'Helvetica Neue', 'Helvetica', sans-serif;
-	font-size: 9pt;
-
-	background: var(--WKCCommonBackground);
-	color: var(--WKCCommonForeground);
-}
-
-#WKCWriteStorageWidget {
-	border-top: var(--WKCBorderStyle)
-}
-
-.WKCWriteStorageWidgetHidden {
-	display: none;
-}
-
 .WIKSharedToolbar {
 	padding: 5px;
 	border-bottom: var(--WIKBorderStyle);

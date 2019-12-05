@@ -93,7 +93,7 @@ const mod = {
 import OLSKViewportContent from 'OLSKViewportContent';
 import ModuleMaster from './ModuleMaster.svelte';
 import ModuleDetail from './ModuleDetail.svelte';
-import WKCWriteFooter from './submodules/WKCWriteFooter/main.svelte';
+import WKCWriteFooter from '../open-next/submodules/WKCWriteFooter/main.svelte';
 import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svelte';
 </script>
 
