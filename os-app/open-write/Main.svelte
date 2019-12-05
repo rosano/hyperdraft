@@ -1,6 +1,6 @@
 <script>
 import { OLSKLocalized } from '../_shared/common/global.js';
-import { storageClient, isLoading, isMobile, isInErrorState, notesAll } from './persistence.js';
+import { storageClient, isLoading, isMobile, isInErrorState, WKCNotesAllStore } from './persistence.js';
 
 
 import { _WIKIsTestingBehaviour } from '../_shared/common/global.js';
@@ -20,7 +20,7 @@ export const DocumentsExport = async function () {
 	].join(' ');
 
 	zip.file(`${ fileName }.json`, JSON.stringify({
-		WKCNoteObjects: $notesAll,
+		WKCNoteObjects: $WKCNotesAllStore,
 		WKCSettingObjects: await WKCSettingAction.WKCSettingsActionQuery(storageClient, {}),
 	}));
 	
@@ -57,7 +57,7 @@ export const DocumentsImport = async function(inputData) {
 		return WKCNoteMetal.WKCNoteMetalWrite(storageClient, WKCNoteModelPostJSONParse(e));
 	}));
 
-	notesAll.set(await WKCNoteAction.WKCNoteActionQuery(storageClient, {}));
+	WKCNotesAllStore.set(await WKCNoteAction.WKCNoteActionQuery(storageClient, {}));
 };
 
 import * as OLSKRemoteStorage from '../_shared/__external/OLSKRemoteStorage/main.js'

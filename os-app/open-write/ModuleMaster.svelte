@@ -4,7 +4,7 @@ import WKCParser from '../_shared/WKCParser/main.js';
 import { editorConfigure } from './ModuleDetail.svelte';
 import { noteSelected } from './_shared.js';
 import { OLSKLocalized, _WIKIsTestingBehaviour } from '../_shared/common/global.js';
-import { storageClient, notesAll, filterText, defaultFocusNode, isMobile, mobileViewCurrent } from './persistence.js';
+import { storageClient, WKCNotesAllStore, filterText, defaultFocusNode, isMobile, mobileViewCurrent } from './persistence.js';
 import { WIKWriteTruncatedTitleFor, WKCWriteLogicListSort } from './ui-logic.js';
 
 let inputFocused = false;
@@ -26,7 +26,7 @@ async function noteCreate(inputData) {
 		WKCNoteBody: typeof inputData === 'string' ? inputData : '',
 	});
 
-	notesAll.update(function (val) {
+	WKCNotesAllStore.update(function (val) {
 		return [].concat(val, item).sort(WKCWriteLogicListSort);
 	});
 
@@ -110,12 +110,12 @@ afterUpdate(function () {
 let notesVisible = [];
 
 function notesVisibleNeedsChange () {
-	notesVisible = $notesAll.filter(function (e) {
+	notesVisible = $WKCNotesAllStore.filter(function (e) {
 		return e.WKCNoteBody.toLowerCase().match($filterText.toLowerCase());
 	});
 }
 
-notesAll.subscribe(notesVisibleNeedsChange);
+WKCNotesAllStore.subscribe(notesVisibleNeedsChange);
 filterText.subscribe(function filterTextDidChange (val) {
 	notesVisibleNeedsChange();
 	
@@ -145,7 +145,7 @@ function FilterInputDispatchClear() {
 async function exportNotes() {
 	let zip = new JSZip();
 
-	$notesAll.forEach(function (e) {
+	$WKCNotesAllStore.forEach(function (e) {
 		zip.file(`${ e.WKCNoteID }.txt`, e.WKCNoteBody, {
 			date: e.WKCNoteModificationDate,
 		});

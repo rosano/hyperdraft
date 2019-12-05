@@ -16,7 +16,7 @@ export let editorConfigure = function (inputData) {
 import * as WKCNoteAction from '../_shared/WKCNote/action.js';
 import * as WKCVersionAction from '../_shared/WKCVersion/action.js';
 import * as WKCWriteLogic from './ui-logic.js';
-import { storageClient, notesAll, filterText, defaultFocusNode, mobileViewCurrent, isMobile } from './persistence.js';
+import { storageClient, WKCNotesAllStore, filterText, defaultFocusNode, mobileViewCurrent, isMobile } from './persistence.js';
 import { noteSelected } from './_shared.js';
 
 let jumpRecipes = [];
@@ -195,7 +195,7 @@ let throttleMapNotes = {};
 let throttleMapVersions = {};
 import OLSKThrottle from 'OLSKThrottle';
 async function noteSave(inputData) {
-	notesAll.update(function (val) {
+	WKCNotesAllStore.update(function (val) {
 		return val;
 	});
 
@@ -260,7 +260,7 @@ async function noteDelete() {
 
 	await WKCNoteAction.WKCNoteActionDelete(storageClient, $noteSelected.WKCNoteID);
 
-	notesAll.update(function (val) {
+	WKCNotesAllStore.update(function (val) {
 		return val.filter(function(e) {
 			return e !== $noteSelected;
 		});
@@ -279,7 +279,7 @@ function toggleTabFocus (event) {
 
 function noteClear () {
 	noteSelected.set(null);
-	notesAll.update(function (val) {
+	WKCNotesAllStore.update(function (val) {
 		return val.sort(WKCWriteLogic.WKCWriteLogicListSort);
 	});
 }
@@ -308,7 +308,7 @@ function handleKeydown(event) {
 
 		noteClear();
 		filterText.set('');
-		notesAll.update(function (val) {
+		WKCNotesAllStore.update(function (val) {
 			return val.sort(WKCWriteLogic.WKCWriteLogicListSort);
 		});
 		return;

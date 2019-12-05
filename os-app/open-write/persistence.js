@@ -14,7 +14,7 @@ import { noteSelected } from './_shared.js';
 
 import { writable } from 'svelte/store';
 
-export const notesAll = writable([]);
+export const WKCNotesAllStore = writable([]);
 export const mobileViewCurrent = writable('ModuleMaster');
 export const isLoading = writable(true);
 export let filterText = writable('');
@@ -45,7 +45,7 @@ export const storageClient = WKCStorageClient.WKCStorageClient({
 						OLSKChangeDelegateCreate: function (inputData) {
 							// console.log('OLSKChangeDelegateCreate', inputData);
 
-							notesAll.update(function (val) {
+							WKCNotesAllStore.update(function (val) {
 								return val.filter(function (e) { // @Hotfix Dropbox sending DelegateAdd
 									return e.WKCNoteID !== inputData.WKCNoteID;
 								}).concat(inputData).sort(WKCWriteLogicListSort);
@@ -60,7 +60,7 @@ export const storageClient = WKCStorageClient.WKCStorageClient({
 								});
 							}
 
-							notesAll.update(function (val) {
+							WKCNotesAllStore.update(function (val) {
 								return val.map(function (e) {
 									return Object.assign(e, e.WKCNoteID === inputData.WKCNoteID ? inputData : {});
 								});
@@ -73,7 +73,7 @@ export const storageClient = WKCStorageClient.WKCStorageClient({
 								noteSelected.set(null);
 							}
 
-							notesAll.update(function (val) {
+							WKCNotesAllStore.update(function (val) {
 								return val.filter(function (e) {
 									return e.WKCNoteID !== inputData.WKCNoteID;
 								});
@@ -93,7 +93,7 @@ storageClient.remoteStorage.on('ready', async () => {
 	await storageClient.remoteStorage.wikiavec.wkc_notes.WKCNoteStorageCache();
 	await storageClient.remoteStorage.wikiavec.wkc_settings.WKCSettingStorageCache();
 	await storageClient.remoteStorage.wikiavec.wkc_versions.WKCVersionStorageCache();
-	notesAll.set((await WKCNoteActionQuery(storageClient, {})).sort(WKCWriteLogicListSort));
+	WKCNotesAllStore.set((await WKCNoteActionQuery(storageClient, {})).sort(WKCWriteLogicListSort));
 
 	isLoading.set(false);
 
