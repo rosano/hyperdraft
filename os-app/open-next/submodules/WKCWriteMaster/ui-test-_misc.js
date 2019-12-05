@@ -14,6 +14,34 @@ describe('WKCWriteMaster_Misc', function () {
 			browser.assert.hasClass(WKCWriteMaster, 'OLSKViewportMaster');
 		});
 
+		context('blur WKCWriteMasterFilterField', function() {
+
+			before(function () {
+				browser.assert.hasClass(WKCWriteMaster, 'WKCWriteMasterFocused')
+			});
+
+			before(function () {
+				browser.click(WKCWriteMasterCreateButton);
+			});
+			
+			it.skip('sets class', function() {
+				browser.assert.hasNoClass(WKCWriteMaster, 'WKCWriteMasterFocused');
+			});
+
+		});
+
+		context('focus WKCWriteMasterFilterField', function() {
+
+			before(function () {
+				return browser.click(WKCWriteMasterFilterField);
+			});
+			
+			it('sets class', function() {
+				browser.assert.hasClass(WKCWriteMaster, 'WKCWriteMasterFocused');
+			});
+
+		});
+
 		context('OLSKMobileViewInactive', function () {
 
 			before(function () {

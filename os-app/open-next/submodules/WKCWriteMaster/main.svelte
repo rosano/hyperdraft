@@ -10,12 +10,46 @@ export const OLSKLocalized = function(translationConstant) {
 	return OLSKInternational.OLSKInternationalLocalizedString(translationConstant, JSON.parse(`{"OLSK_I18N_SEARCH_REPLACE":"OLSK_I18N_SEARCH_REPLACE"}`)[window.OLSKPublicConstants('OLSKSharedPageCurrentLanguage')]);
 };
 
+const mod = {
+
+	// VALUE
+
+	_ValueFilterFieldFocused: true,
+
+	// SETUP
+
+	SetupEverything () {
+		mod.SetupFilterFieldEventListeners();
+	},
+
+	SetupFilterFieldEventListeners () {
+		setTimeout(function () {
+			document.querySelector('.WKCWriteMasterFilterField').addEventListener('focus', function () {
+				mod._ValueFilterFieldFocused = true;
+			});
+
+			document.querySelector('.WKCWriteMasterFilterField').addEventListener('blur', function () {
+				mod._ValueFilterFieldFocused = false;
+			});
+		}, 100);
+	},
+
+	// LIFECYCLE
+
+	LifecycleComponentWillMount () {
+		mod.SetupEverything();
+	},
+};
+
+import { onMount } from 'svelte';
+onMount(mod.LifecycleComponentWillMount);
+
 import OLSKToolbar from 'OLSKToolbar';
 import OLSKToolbarElementGroup from 'OLSKToolbarElementGroup';
 import OLSKInputWrapper from 'OLSKInputWrapper';
 </script>
 
-<div class="WKCWriteMaster OLSKViewportMaster" class:OLSKMobileViewInactive={ OLSKMobileViewInactive }>
+<div class="WKCWriteMaster OLSKViewportMaster" class:OLSKMobileViewInactive={ OLSKMobileViewInactive } class:WKCWriteMasterFocused={ mod._ValueFilterFieldFocused }>
 
 <header class="WKCWriteMasterToolbar OLSKMobileViewHeader">
 	<OLSKToolbar>
