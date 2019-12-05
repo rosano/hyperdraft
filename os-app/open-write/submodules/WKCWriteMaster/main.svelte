@@ -43,7 +43,7 @@ import OLSKToolbarElementGroup from 'OLSKToolbarElementGroup';
 	flex-direction: column;
 }
 
-header {
+.WKCWriteMasterToolbar {
 	border-bottom: var(--WKCBorderStyle);
 }
 
