@@ -99,10 +99,10 @@ afterUpdate(function () {
 			  Enter: 'newlineAndIndentContinueMarkdownList',
 			  'Cmd-Enter': openCursorObject,
 			  'Ctrl-Enter': openCursorObject,
-			  'Cmd-H': function (event) {
+			  'Cmd-H' (event) {
 			  	return event.preventDefault();
 			  },
-			  Esc: function () {}, // overwrite to control via other binding
+			  Esc () {}, // overwrite to control via other binding
 			  Tab: false,
 			},
 

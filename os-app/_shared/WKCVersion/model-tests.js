@@ -3,7 +3,7 @@ const { throws, deepEqual } = require('assert');
 const mainModule = require('./model.js');
 
 const kTesting = {
-	StubNoteObjectValid: function() {
+	StubNoteObjectValid() {
 		return {
 			WKCVersionID: 'alfa',
 			WKCVersionNoteID: 'bravo',

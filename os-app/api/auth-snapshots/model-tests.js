@@ -9,7 +9,7 @@ const assert = require('assert');
 const modelLibrary = require('./model.js');
 
 const kTesting = {
-	StubValidSnapshot: function() {
+	StubValidSnapshot() {
 		return {
 			WKCSnapshotSubscriptionID: 'alfa',
 			WKCSnapshotBody: 'bravo',

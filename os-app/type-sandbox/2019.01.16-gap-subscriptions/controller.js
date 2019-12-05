@@ -11,7 +11,7 @@ exports.OLSKControllerRoutes = function() {
 		WKCSandboxGapSubscriptionsRoute: {
 			OLSKRoutePath: '/sandbox/2019-01-16-gap-subscriptions',
 			OLSKRouteMethod: 'get',
-			OLSKRouteFunction: function (req, res, next) {
+			OLSKRouteFunction (req, res, next) {
 				return WKCSandboxGapSubscriptionsProcess(req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient).then(function (result) {
 					return res.send(`<pre>${JSON.stringify(result, 0, '\t')}</pre>`);
 				});

@@ -26,7 +26,7 @@ exports.RCSRefUpdateCachedPublicNotes = function (writeFunction, inputData) {
 exports.OLSKControllerSharedConnections = function() {
 	return {
 		WKCSharedConnectionRS: {
-			OLSKConnectionInitializer: function(olskCallback) {
+			OLSKConnectionInitializer(olskCallback) {
 				let didConnect = false;
 
 				storageClient.remoteStorage.on('error', (error) => {
@@ -49,7 +49,7 @@ exports.OLSKControllerSharedConnections = function() {
 				
 				storageClient.remoteStorage.connect(process.env.WKC_REMOTE_STORAGE_ACCOUNT, process.env.WKC_REMOTE_STORAGE_KEY);
 			},
-			OLSKConnectionCleanup: function (client) {
+			OLSKConnectionCleanup (client) {
 				return;
 			},
 		},
@@ -83,7 +83,7 @@ exports.OLSKControllerTasks = function () {
 		{
 			OLSKTaskName: 'WKCRefCacheTask',
 			OLSKTaskFireTimeInterval: 60,
-			OLSKTaskShouldBePerformed: function () {
+			OLSKTaskShouldBePerformed () {
 				return true;
 			},
 			OLSKTaskCallback: async function (callbackInput) {
@@ -98,7 +98,7 @@ exports.OLSKControllerRoutes = function() {
 		WKCRouteHome: {
 			OLSKRoutePath: '/',
 			OLSKRouteMethod: 'get',
-			OLSKRouteFunction: function(req, res, next) {
+			OLSKRouteFunction(req, res, next) {
 				return res.render(req.OLSKLive.OLSKLivePathJoin(__dirname, 'view'), {
 					WKCNoteObject: {
 						WKCNoteDetectedTitle: res.locals.OLSKLocalized('WKCHomeTitle'),

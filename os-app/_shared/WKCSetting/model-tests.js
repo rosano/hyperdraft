@@ -3,7 +3,7 @@ const { throws, deepEqual } = require('assert');
 const mainModule = require('./model.js');
 
 const kTesting = {
-	StubSettingObjectValid: function() {
+	StubSettingObjectValid() {
 		return {
 			WKCSettingKey: 'alfa',
 			WKCSettingValue: 'bravo',

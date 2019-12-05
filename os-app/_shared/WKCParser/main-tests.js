@@ -12,13 +12,13 @@ const mainModule = require('./main.js');
 const stubsModule = require('./main-tests-stubs.js');
 
 const kStubs = {
-	kStubsDOMParserInstance: function() {
+	kStubsDOMParserInstance() {
 		return new (new jsdomPackage.JSDOM('')).window.DOMParser();
 	},
-	kStubsRSSValid: function() {
+	kStubsRSSValid() {
 		return '<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><item><title>bravo</title><guid>bravo</guid><description>bravo</description></item><item><title>alfa</title><guid>alfa</guid><description>alfa</description></item></channel></rss>';
 	},
-	kStubsRSSComplete: function() {
+	kStubsRSSComplete() {
 		return '<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><item><title>alfa</title><link>https://www.cbc.ca/bravo</link><guid isPermaLink="false">charlie</guid><pubDate>Fri, 7 Dec 2018 10:03:15 EST</pubDate><author>delta</author><description><![CDATA[\
                         <p>echo</p>\
         ]]>\
@@ -27,29 +27,29 @@ const kStubs = {
         ]]>\
         </content:encoded></item></channel></rss>';
 	},
-	kStubsAtomValid: function() {
+	kStubsAtomValid() {
 		return '<?xml version="1.0" encoding="UTF-8"?><feed xmlns="http://www.w3.org/2005/Atom"><entry><title>bravo</title><id>bravo</id><summary>bravo</summary></entry><entry><title>alfa</title><id>alfa</id><summary>alfa</summary></entry></feed>';
 	},
-	kStubsAtomComplete: function() {
+	kStubsAtomComplete() {
 		return '<?xml version="1.0" encoding="UTF-8"?><feed xmlns="http://www.w3.org/2005/Atom"><entry><title>alfa</title><link href="https://www.cbc.ca/bravo" /><link rel="edit" href="http://example.org/golf" /><id>charlie</id><updated>2018-12-07T15:03:15Z</updated><summary>echo</summary><content type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml"><p>foxtrot</p></div></content><author><name>delta</name></author></entry></feed>';
 	},
-	kStubsResponseCustomTwitterTimelineValid: function() {
+	kStubsResponseCustomTwitterTimelineValid() {
 		return '[{"created_at":"Wed Oct 31 15:59:13 +0000 2018","id_str":"alfa","full_text":"bravo","entities":{"hashtags":[],"symbols":[],"user_mentions":[],"urls":[]},"user":{"screen_name":"charlie"}},{"created_at":"Mon Oct 08 13:40:12 +0000 2018","id_str":"delta","full_text":"echo","entities":{"hashtags":[],"symbols":[],"user_mentions":[],"urls":[]},"user":{"screen_name":"charlie"}}]';
 	},
-	kStubsResponseCustomTwitterTimelineComplete: function() {
+	kStubsResponseCustomTwitterTimelineComplete() {
 		return JSON.stringify(stubsModule.kStubsResponseCustomTwitterTimelineComplete());
 	},
-	kStubsHTML: function(inputData) {
+	kStubsHTML(inputData) {
 		return [
 			'<!DOCTYPE html><html><head><title>bravo</title></head><body>',
 			inputData || '<h1>alfa</h1><script>var charlie = "delta";</script><style type="text/css">.echo {foxtrot: "golf";}</style>',
 			'</body></html>',
 		].join('');
 	},
-	kStubsBody: function() {
+	kStubsBody() {
 		return 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.';
 	},
-	kStubsTextMultiline: function(count) {
+	kStubsTextMultiline(count) {
 		return 'alfa bravo charlie delta echo foxtrot golf hotel india juliet kilo'.split(' ').slice(0, typeof count === 'undefined' ? Infinity : count).join('\n').concat('\n');
 	},
 };

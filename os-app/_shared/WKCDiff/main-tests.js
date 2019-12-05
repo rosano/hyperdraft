@@ -9,7 +9,7 @@ const assert = require('assert');
 const mainModule = require('./main');
 
 const kTests = {
-	kTestsTextMultiline: function(count) {
+	kTestsTextMultiline(count) {
 		return 'alfa bravo charlie delta echo foxtrot golf hotel india juliet kilo'.split(' ').slice(0, typeof count === 'undefined' ? Infinity : count).join('\n').concat('\n');
 	},
 };

@@ -3,7 +3,7 @@ const { rejects, deepEqual } = require('assert');
 const mainModule = require('./metal.js');
 
 const kTesting = {
-	StubNoteObjectValid: function() {
+	StubNoteObjectValid() {
 		return {
 			WKCNoteID: 'alfa',
 			WKCNoteBody: 'charlie',

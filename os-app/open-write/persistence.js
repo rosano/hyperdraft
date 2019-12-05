@@ -40,7 +40,7 @@ export const storageClient = WKCStorageClient.WKCStorageClient({
 				return {
 					WKCCollectionStorageGenerator: e,
 					WKCCollectionChangeDelegate: e === WKCNoteStorage ? {
-						OLSKChangeDelegateCreate: function (inputData) {
+						OLSKChangeDelegateCreate (inputData) {
 							// console.log('OLSKChangeDelegateCreate', inputData);
 
 							WKCNotesAllStore.update(function (val) {
@@ -49,7 +49,7 @@ export const storageClient = WKCStorageClient.WKCStorageClient({
 								}).concat(inputData).sort(WKCWriteLogicListSort);
 							});
 						},
-						OLSKChangeDelegateUpdate: function (inputData) {
+						OLSKChangeDelegateUpdate (inputData) {
 							// console.log('OLSKChangeDelegateUpdate', inputData);
 
 							if (_WKCNoteSelectedStore && (_WKCNoteSelectedStore.WKCNoteID === inputData.WKCNoteID)) {
@@ -64,7 +64,7 @@ export const storageClient = WKCStorageClient.WKCStorageClient({
 								});
 							});
 						},
-						OLSKChangeDelegateDelete: function (inputData) {
+						OLSKChangeDelegateDelete (inputData) {
 							// console.log('OLSKChangeDelegateDelete', inputData);
 
 							if (_WKCNoteSelectedStore && (_WKCNoteSelectedStore.WKCNoteID === inputData.WKCNoteID)) {

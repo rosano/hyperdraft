@@ -5,7 +5,7 @@
  */
 
 const kConst = {
-	kConstFrequencyHashFor: function(inputData) {
+	kConstFrequencyHashFor(inputData) {
 		return inputData.reduce(function(coll, e) {
 			if (coll[e] === undefined) {
 				coll[e] = 0;

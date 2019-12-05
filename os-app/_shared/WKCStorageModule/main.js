@@ -3,7 +3,7 @@ import * as OLSKRemoteStorage from 'OLSKRemoteStorage';
 export const WKCStorageModule = function (inputData) {
 	return {
 		name: 'wikiavec',
-		builder: function(privateClient, publicClient) {
+		builder(privateClient, publicClient) {
 			return {
 				exports: inputData.reduce(function (coll, item) {
 					let storage = item.WKCCollectionStorageGenerator(privateClient, publicClient, item.WKCCollectionChangeDelegate);

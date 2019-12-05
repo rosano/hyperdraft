@@ -89,7 +89,7 @@ const mod = {
 		OLSKThrottle.OLSKThrottleMappedTimeoutFor(mod._ValueSaveThrottleMap, $WKCNoteSelectedStore.WKCNoteID, function (inputData) {
 			return {
 				OLSKThrottleDuration: 500,
-				OLSKThrottleCallback: async function () {
+				async OLSKThrottleCallback () {
 					delete mod._ValueSaveThrottleMap[inputData.WKCNoteID];
 
 					await WKCNoteAction.WKCNoteActionUpdate(storageClient, inputData);

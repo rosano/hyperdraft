@@ -25,7 +25,7 @@ describe('WKCSharedMiddlewareEnsureDatabase', function testWKCSharedMiddlewareEn
 
 	var fakeRequest = function(inputData = {}) {
 		return {
-			OLSKSharedConnectionFor: function() {
+			OLSKSharedConnectionFor() {
 				return Object.assign({}, inputData);
 			},
 		};

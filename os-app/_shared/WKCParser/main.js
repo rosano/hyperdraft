@@ -23,10 +23,10 @@
 	turndownInstance.remove('script');
 	turndownInstance.remove('style');
 	turndownInstance.addRule('trim whitespace in link text', {
-		filter: function (node, options) {
+		filter (node, options) {
 			return node.nodeName === 'A' && node.innerHTML !== node.textContent;
 		},
-		replacement: function (content, node) {
+		replacement (content, node) {
 			return [
 				'[',
 				content.trim(),
@@ -37,10 +37,10 @@
 		},
 	});
 	turndownInstance.addRule('populate blank links', {
-		filter: function (node, options) {
+		filter (node, options) {
 			return node.nodeName === 'A' && !node.textContent.trim();
 		},
-		replacement: function (content, node) {
+		replacement (content, node) {
 			return [
 				'[',
 				node.getAttribute('title') || '\\[\\_\\_\\_\\_\\_\\]',

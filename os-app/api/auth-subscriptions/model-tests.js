@@ -9,7 +9,7 @@ const assert = require('assert');
 const mainModule = require('./model.js');
 
 const kTesting = {
-	StubValidSubscription: function() {
+	StubValidSubscription() {
 		return {
 			WKCSubscriptionURL: 'https://google.com',
 			WKCSubscriptionHandler: mainModule.WKCSubscriptionHandlerPage(),

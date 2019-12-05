@@ -4,19 +4,19 @@ const mainModule = require('./action.js');
 import * as WKCVersionsAction from '../WKCVersion/action.js';
 
 const kTesting = {
-	StubVersionObject: function() {
+	StubVersionObject() {
 		return {
 			WKCVersionNoteID: 'alfa',
 			WKCVersionBody: 'bravo',
 			WKCVersionDate: new Date(),
 		};
 	},
-	uSerial: function (inputData) {
+	uSerial (inputData) {
 		return inputData.reduce(async function (coll, e) {
 			return e.then(Array.prototype.concat.bind(await coll));
 		}, Promise.resolve([]));
 	},
-	uSleep: function (inputData) {
+	uSleep (inputData) {
 		let endTime = new Date().getTime();
 		while (new Date().getTime() < endTime + inputData) {}
 	},

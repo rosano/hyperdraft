@@ -3,7 +3,7 @@ const { rejects, deepEqual } = require('assert');
 const mainModule = require('./metal.js');
 
 const kTesting = {
-	StubSettingObjectValid: function() {
+	StubSettingObjectValid() {
 		return {
 			WKCSettingKey: 'alfa',
 			WKCSettingValue: 'bravo',

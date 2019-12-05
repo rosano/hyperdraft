@@ -9,7 +9,7 @@ const assert = require('assert');
 const mainModule = require('./metal.js');
 
 const kTesting = {
-	StubValidSnapshot: function() {
+	StubValidSnapshot() {
 		return {
 			WKCSnapshotSubscriptionID: 'alfa',
 			WKCSnapshotBody: 'bravo',

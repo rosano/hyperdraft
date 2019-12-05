@@ -19,7 +19,7 @@ var resolveLibrary = require('./resolve');
 
 
 const kConst = {
-	kWKCTaskFetchDOMParserInstance: function() {
+	kWKCTaskFetchDOMParserInstance() {
 		return new (new jsdomPackage.JSDOM('')).window.DOMParser();
 	},
 };
@@ -39,10 +39,10 @@ exports.WKCTaskFetch = function() {
 		OLSKTaskName: 'WKCTaskFetch',
 		OLSKTaskFireTimeInterval: process.env.NODE_ENV === 'production' ? 60 : 1,
 		OLSKTaskFireLimit: process.env.NODE_ENV === 'production' ? Infinity : 1,
-		OLSKTaskShouldBePerformed: function() {
+		OLSKTaskShouldBePerformed() {
 			return true;
 		},
-		OLSKTaskCallback: function(callbackInput) {
+		OLSKTaskCallback(callbackInput) {
 			return apiSubscriptionsMetal.WKCMetalSubscriptionsNeedingFetch(callbackInput.OLSKLive.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, function(err, responseJSON) {
 				if (err) {
 					return console.log(err);

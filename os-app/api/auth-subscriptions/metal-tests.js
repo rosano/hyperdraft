@@ -10,7 +10,7 @@ const mainModule = require('./metal.js');
 const modelLibrary = require('./model.js');
 
 const kTesting = {
-	StubValidSubscription: function() {
+	StubValidSubscription() {
 		return {
 			WKCSubscriptionURL: 'https://google.com',
 			WKCSubscriptionHandler: modelLibrary.WKCSubscriptionHandlerPage(),
