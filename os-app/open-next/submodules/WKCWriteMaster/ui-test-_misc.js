@@ -70,8 +70,61 @@ describe('WKCWriteMaster_Misc', function () {
 	
 	});
 
+	describe.skip('WKCWriteMasterFilterField', function() {
+
+		before(function() {
+			return browser.OLSKVisit(kDefaultRoute);
+		});
+
+		context('keydown Enter', function () {
+			
+			before(function () {
+				browser.assert.text('#TestWKCWriteMasterDispatchCreate', '0');
+			});
+			
+			context('input empty', function () {
+				
+				before(function () {
+					browser.fill(WKCWriteMasterFilterField, ' ');
+				});
+				
+				before(function () {
+					browser.OLSKFireKeyboardEvent(browser.window, 'Enter');
+				});
+
+				it('sends WKCWriteMasterDispatchCreate', function () {
+					browser.assert.text('#TestWKCWriteMasterDispatchCreate', '0');
+				});
+			
+			});
+
+			context('input not empty', function () {
+				
+				before(function () {
+					browser.fill(WKCWriteMasterFilterField, 'bravo');
+				});
+				
+				before(function () {
+					browser.OLSKFireKeyboardEvent(browser.window, 'Enter');
+				});
+
+				it('sends WKCWriteMasterDispatchCreate', function () {
+					browser.assert.text('#TestWKCWriteMasterDispatchCreate', '1');
+					browser.assert.text('#TestWKCWriteMasterDispatchCreateData', 'bravo');
+				});
+			
+			});
+		
+		});
+
+	});
+
 	describe('WKCWriteMasterCreateButton', function () {
 		
+		before(function() {
+			return browser.OLSKVisit(kDefaultRoute);
+		});
+
 		it('classes OLSKLayoutButtonNoStyle', function () {
 			browser.assert.hasClass(WKCWriteMasterCreateButton, 'OLSKLayoutButtonNoStyle');
 			browser.assert.hasClass(WKCWriteMasterCreateButton, 'OLSKLayoutElementTappable');

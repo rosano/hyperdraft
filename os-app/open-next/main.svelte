@@ -39,8 +39,8 @@ const mod = {
 		mod._ValueStorageWidgetHidden = !mod._ValueStorageWidgetHidden;
 	},
 
-	WKCWriteMasterDispatchCreate () {
-		mod.CommandNoteCreate();
+	WKCWriteMasterDispatchCreate (inputData) {
+		mod.CommandNoteCreate(inputData);
 	},
 
 	WKCWriteMasterDispatchSelect (inputData) {
@@ -108,6 +108,10 @@ const mod = {
 		});
 
 		mod.CommandNoteSelect(item);
+
+		if (!mod.DataIsMobile()) {
+			return;
+		}
 
 		mod.WIKWriteDetailInstance.WIKWriteDetailFocus();
 	},

@@ -16,6 +16,31 @@ const mod = {
 
 	_ValueFilterFieldFocused: true,
 
+	_ValueFilterFieldText: '',
+
+	// INTERFACE
+
+	InterfaceWindowDidKeydown (event) {
+		if (!mod._ValueFilterFieldFocused) {
+			return;
+		}
+
+
+		if (event.key === 'Enter') {
+			return mod.CommandCreateStub();
+		}
+	},
+
+	// COMMAND
+
+	CommandCreateStub () {
+		if (!mod._ValueFilterFieldText.trim().length) {
+			return;
+		}
+
+		return WKCWriteMasterDispatchCreate(`${ mod._ValueFilterFieldText }\n\n`);
+	},
+
 	// SETUP
 
 	SetupEverything () {
@@ -48,13 +73,14 @@ import OLSKToolbar from 'OLSKToolbar';
 import OLSKToolbarElementGroup from 'OLSKToolbarElementGroup';
 import OLSKInputWrapper from 'OLSKInputWrapper';
 </script>
+<svelte:window on:keydown={ mod.InterfaceWindowDidKeydown }/>
 
 <div class="WKCWriteMaster OLSKViewportMaster" class:OLSKMobileViewInactive={ OLSKMobileViewInactive } class:WKCWriteMasterFocused={ mod._ValueFilterFieldFocused }>
 
 <header class="WKCWriteMasterToolbar OLSKMobileViewHeader">
 	<OLSKToolbar>
 		<OLSKInputWrapper OLSKLocalized={ OLSKLocalized }>
-			<input class="WKCWriteMasterFilterField" placeholder={ OLSKLocalized('WKCWriteMasterFilterFieldText') } />
+			<input class="WKCWriteMasterFilterField" placeholder={ OLSKLocalized('WKCWriteMasterFilterFieldText') } bind:value={ mod._ValueFilterFieldText } />
 		</OLSKInputWrapper>
 
 		<OLSKToolbarElementGroup>
