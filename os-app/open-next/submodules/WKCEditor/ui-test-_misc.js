@@ -37,6 +37,22 @@ describe('WKCEditor_Misc', function () {
 			browser.assert.input(CodeMirror, 'alfa');
 		});
 
+		context('WKCEditorFocus', function () {
+
+			before(function () {
+				browser.assert.hasNoClass('CodeMirror-focused');
+			});
+
+			before(function () {
+				browser.pressButton('#TestWKCEditorFocus');
+			});
+
+			it('classes CodeMirror-focused', function () {
+				browser.assert.hasClass('CodeMirror-focused');
+			});
+			
+		});
+
 		context('input', function () {
 
 			before(function () {

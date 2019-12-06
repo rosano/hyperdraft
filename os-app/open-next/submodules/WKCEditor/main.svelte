@@ -3,10 +3,14 @@ export let WKCEditorInitialValue;
 export let WKCEditorDispatchUpdate;
 export let WKCEditorDispatchOpen;
 
+export const WKCEditorFocus = function () {
+	mod._ValueEditorInstance.focus();
+};
+
 export const WKCEditorSetDocument = function (inputData) {
 	mod._ValueEditorInstance.setValue(inputData);
 	mod._ValueEditorInstance.getDoc().clearHistory();
-}
+};
 
 export const WKCEditorConfigure = function (e) {
 	// console.log(mod._ValueEditorInstance ? 'run' : 'queue', e);

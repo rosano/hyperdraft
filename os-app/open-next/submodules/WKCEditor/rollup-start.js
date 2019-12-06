@@ -11,4 +11,10 @@ const WKCEditor = new RollupStart({
 	}, Object.fromEntries((new window.URLSearchParams(window.location.search)).entries())),
 });
 
+window.WKCEditorBehaviour = {
+	TestWKCEditorFocus () {
+		WKCEditor.WKCEditorFocus();
+	},
+};
+
 export default WKCEditor;
