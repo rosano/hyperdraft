@@ -25,7 +25,7 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 			before(function() {
 				return browser.OLSKVisit(kDefaultRoute, {
 					WIKWriteDetailItem: JSON.stringify({
-						EMTDocumentName: 'alfa',
+						WKCNoteBody: 'alfa',
 					}),
 				});
 			});

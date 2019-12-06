@@ -44,7 +44,7 @@ describe('WIKWriteDetail_Access', function () {
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
 				WIKWriteDetailItem: JSON.stringify({
-					EMTDocumentName: 'alfa',
+					WKCNoteBody: 'alfa',
 				}),
 			});
 		});

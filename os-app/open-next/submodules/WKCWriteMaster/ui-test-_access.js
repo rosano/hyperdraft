@@ -59,7 +59,7 @@ describe('WKCWriteMaster_Access', function () {
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
 				WKCWriteMasterListItems: JSON.stringify([{
-					WKCDocumentName: 'alfa',
+					WKCNoteBody: 'alfa',
 				}]),
 			});
 		});

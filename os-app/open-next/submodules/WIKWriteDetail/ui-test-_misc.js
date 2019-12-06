@@ -6,7 +6,7 @@ describe('WIKWriteDetail_Misc', function () {
 
 	const uItem = function () {
 		return {
-			EMTDocumentName: 'alfa',
+			WKCNoteBody: 'alfa',
 		};
 	};
 
@@ -117,8 +117,8 @@ describe('WIKWriteDetail_Misc', function () {
 			browser.assert.attribute(WIKWriteDetailFormNameField, 'autofocus', '');
 		});
 		
-		it('binds EMTDocumentName', function () {
-			browser.assert.input(WIKWriteDetailFormNameField, uItem().EMTDocumentName);
+		it('binds WKCNoteBody', function () {
+			browser.assert.input(WIKWriteDetailFormNameField, uItem().WKCNoteBody);
 		});
 
 		context('input', function () {
