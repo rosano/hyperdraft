@@ -10,7 +10,7 @@ describe('WKCWriteMaster_Misc', function () {
 			return browser.OLSKVisit(kDefaultRoute);
 		});
 		
-		it('sets class', function () {
+		it('classes OLSKViewportMaster', function () {
 			browser.assert.hasClass(WKCWriteMaster, 'OLSKViewportMaster');
 		});
 
@@ -24,7 +24,7 @@ describe('WKCWriteMaster_Misc', function () {
 				browser.click(WKCWriteMasterCreateButton);
 			});
 			
-			it.skip('sets class', function() {
+			it.skip('classes WKCWriteMasterFocused', function() {
 				browser.assert.hasNoClass(WKCWriteMaster, 'WKCWriteMasterFocused');
 			});
 
@@ -36,7 +36,7 @@ describe('WKCWriteMaster_Misc', function () {
 				return browser.click(WKCWriteMasterFilterField);
 			});
 			
-			it('sets class', function() {
+			it('classes WKCWriteMasterFocused', function() {
 				browser.assert.hasClass(WKCWriteMaster, 'WKCWriteMasterFocused');
 			});
 
@@ -54,7 +54,7 @@ describe('WKCWriteMaster_Misc', function () {
 				});
 			});
 
-			it('sets class', function () {
+			it('classes OLSKMobileViewInactive', function () {
 				browser.assert.hasClass(WKCWriteMaster, 'OLSKMobileViewInactive');
 			});
 		
@@ -64,7 +64,7 @@ describe('WKCWriteMaster_Misc', function () {
 
 	describe('WKCWriteMasterToolbar', function () {
 		
-		it('sets class', function () {
+		it('classes OLSKMobileViewHeader', function () {
 			browser.assert.hasClass(WKCWriteMasterToolbar, 'OLSKMobileViewHeader');
 		});
 	
@@ -72,7 +72,7 @@ describe('WKCWriteMaster_Misc', function () {
 
 	describe('WKCWriteMasterCreateButton', function () {
 		
-		it('sets class', function () {
+		it('classes OLSKLayoutButtonNoStyle', function () {
 			browser.assert.hasClass(WKCWriteMasterCreateButton, 'OLSKLayoutButtonNoStyle');
 			browser.assert.hasClass(WKCWriteMasterCreateButton, 'OLSKLayoutElementTappable');
 		});
@@ -101,7 +101,7 @@ describe('WKCWriteMaster_Misc', function () {
 
 	describe('WKCWriteMasterBody', function () {
 		
-		it('sets class', function () {
+		it('classes OLSKMobileViewBody', function () {
 			browser.assert.hasClass(WKCWriteMasterBody, 'OLSKMobileViewBody');
 		});
 	
@@ -164,7 +164,7 @@ describe('WKCWriteMaster_Misc', function () {
 			});
 		});
 
-		it('sets class', function () {
+		it('classes 1', function () {
 			browser.assert.elements('.WKCWriteMasterListItemSelected', 1);
 			browser.assert.hasClass(`${ WKCWriteMasterListItem }:nth-child(2)`, 'WKCWriteMasterListItemSelected');
 		});
