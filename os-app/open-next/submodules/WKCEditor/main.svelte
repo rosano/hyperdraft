@@ -37,9 +37,8 @@ const mod = {
 	// COMMAND
 
 	CommandConfigureEditor (inputData) {
-		// console.log(mod.WKCEditorInstance ? 'run' : 'queue', inputData);
-		if (mod.WKCEditorInstance) {
-			return inputData(mod.WKCEditorInstance);
+		if (mod._ValueEditorInstance) {
+			return inputData(mod._ValueEditorInstance);
 		};
 
 		mod._ValueEditorPostInitializeQueue.push(inputData);
@@ -122,7 +121,7 @@ const mod = {
 		});
 
 		mod._ValueEditorPostInitializeQueue.splice(0, mod._ValueEditorPostInitializeQueue.length).forEach(function(e) {
-			return e(mod.WKCEditorInstance);
+			return e(mod._ValueEditorInstance);
 		});
 
 		WKCEditorDispatchReady();
