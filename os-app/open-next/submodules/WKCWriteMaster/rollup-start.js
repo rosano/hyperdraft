@@ -12,6 +12,9 @@ const WKCWriteMaster = new RollupStart({
 			window.TestWKCWriteMasterDispatchSelect.innerHTML = parseInt(window.TestWKCWriteMasterDispatchSelect.innerHTML) + 1;
 			window.TestWKCWriteMasterDispatchSelectData.innerHTML = JSON.stringify(inputData);
 		}),
+		WKCWriteMasterDelegateItemTitle: (function _WKCWriteMasterDelegateItemTitle (inputData) {
+			return inputData.WKCNoteBody.split('\n').shift();
+		}),
 	}, Object.fromEntries(Array.from((new window.URLSearchParams(window.location.search)).entries()).map(function (e) {
 		if (['WKCWriteMasterListItems', 'WKCWriteMasterListItemSelected'].includes(e[0])) {
 			e[1] = JSON.parse(e[1]);

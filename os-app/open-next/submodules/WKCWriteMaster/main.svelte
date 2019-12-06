@@ -3,6 +3,7 @@ export let WKCWriteMasterListItems;
 export let WKCWriteMasterListItemSelected = null;
 export let WKCWriteMasterDispatchCreate;
 export let WKCWriteMasterDispatchSelect;
+export let WKCWriteMasterDelegateItemTitle;
 export let OLSKMobileViewInactive = false;
 
 import OLSKInternational from 'OLSKInternational';
@@ -34,6 +35,10 @@ const mod = {
 
 	CommandCreateStub () {
 		if (!mod._ValueFilterFieldText.trim().length) {
+			return;
+		}
+
+		if (WKCWriteMasterListItemSelected && WKCWriteMasterDelegateItemTitle(WKCWriteMasterListItemSelected) === mod._ValueFilterFieldText) {
 			return;
 		}
 

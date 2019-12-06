@@ -115,6 +115,35 @@ describe('WKCWriteMaster_Misc', function () {
 				});
 			
 			});
+
+			context('input identical to selected', function () {
+
+				before(function () {
+					return browser.OLSKVisit(kDefaultRoute, {
+						WKCWriteMasterListItems: JSON.stringify([{
+							WKCDocumentID: 'alfa',
+							WKCNoteBody: 'bravo',
+						}]),
+						WKCWriteMasterListItemSelected: JSON.stringify({
+							WKCDocumentID: 'alfa',
+							WKCNoteBody: 'bravo',
+						}),
+					});
+				});
+				
+				before(function () {
+					browser.fill(WKCWriteMasterFilterField, 'bravo');
+				});
+				
+				before(function () {
+					browser.OLSKFireKeyboardEvent(browser.window, 'Enter');
+				});
+
+				it('sends WKCWriteMasterDispatchCreate', function () {
+					browser.assert.text('#TestWKCWriteMasterDispatchCreate', '0');
+				});
+			
+			});
 		
 		});
 

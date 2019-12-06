@@ -5,6 +5,7 @@ export const OLSKLocalized = function(translationConstant) {
 };
 
 import OLSKThrottle from 'OLSKThrottle';
+import WKCParser from '../_shared/WKCParser/main.js';
 import { OLSK_TESTING_BEHAVIOUR } from 'OLSKTesting'
 import * as OLSKRemoteStorage from '../_shared/__external/OLSKRemoteStorage/main.js'
 import * as WKCNoteAction from '../_shared/WKCNote/action.js';
@@ -45,6 +46,10 @@ const mod = {
 
 	WKCWriteMasterDispatchSelect (inputData) {
 		mod.CommandNoteSelect(inputData);
+	},
+
+	WKCWriteMasterDelegateItemTitle (inputData) {
+		return WKCParser.WKCParserTitleForPlaintext(inputData.WKCNoteBody);
 	},
 
 	WIKWriteDetailDispatchBack () {
@@ -232,7 +237,14 @@ import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svel
 <div class="WKCWrite OLSKViewport" class:OLSKIsLoading={ $WKCPersistenceIsLoading }>
 
 <OLSKViewportContent>
-	<WKCWriteMaster WKCWriteMasterListItems={ mod._ValueNotesAll } WKCWriteMasterListItemSelected={ mod._ValueNoteSelected } WKCWriteMasterDispatchCreate={ mod.WKCWriteMasterDispatchCreate } WKCWriteMasterDispatchSelect={ mod.WKCWriteMasterDispatchSelect } OLSKMobileViewInactive={ mod._ValueNoteSelected } />
+	<WKCWriteMaster
+		WKCWriteMasterListItems={ mod._ValueNotesAll }
+		WKCWriteMasterListItemSelected={ mod._ValueNoteSelected }
+		WKCWriteMasterDispatchCreate={ mod.WKCWriteMasterDispatchCreate }
+		WKCWriteMasterDispatchSelect={ mod.WKCWriteMasterDispatchSelect }
+		WKCWriteMasterDelegateItemTitle={ mod.WKCWriteMasterDelegateItemTitle }
+		OLSKMobileViewInactive={ mod._ValueNoteSelected }
+		/>
 	
 	<WIKWriteDetail
 		WIKWriteDetailItem={ mod._ValueNoteSelected }
