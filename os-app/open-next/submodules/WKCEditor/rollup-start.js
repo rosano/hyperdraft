@@ -8,6 +8,7 @@ const WKCEditor = new RollupStart({
 			window.TestWKCEditorDispatchUpdateData.innerHTML = inputData;
 		}),
 		WKCEditorDispatchOpen: (function _WKCEditorDispatchOpen () {}),
+		WKCEditorDispatchReady: (function _WKCEditorDispatchReady () {}),
 	}, Object.fromEntries((new window.URLSearchParams(window.location.search)).entries())),
 });
 
