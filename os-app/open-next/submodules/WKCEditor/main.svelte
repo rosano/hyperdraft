@@ -5,7 +5,9 @@ export let WKCEditorDispatchOpen;
 export let WKCEditorDispatchReady;
 
 export const WKCEditorFocus = function () {
-	mod._ValueEditorInstance.focus();
+	mod.CommandConfigureEditor(function (inputData) {
+		mod._ValueEditorInstance.focus();
+	});
 };
 
 export const WKCEditorSetDocument = function (inputData) {
@@ -24,6 +26,8 @@ const mod = {
 
 	_ValueEditorInstance: undefined,
 
+	_ValueEditorPostInitializeQueue: [],
+
 	// INTERFACE
 
 	InterfaceEditorFieldDebugDidInput () {
@@ -31,6 +35,15 @@ const mod = {
 	},
 
 	// COMMAND
+
+	CommandConfigureEditor (inputData) {
+		// console.log(mod.WKCEditorInstance ? 'run' : 'queue', inputData);
+		if (mod.WKCEditorInstance) {
+			return inputData(mod.WKCEditorInstance);
+		};
+
+		mod._ValueEditorPostInitializeQueue.push(inputData);
+	},
 
 	CommandOpenCursorObject (inputData) {
 		let cursor = mod._ValueEditorInstance.getCursor();
@@ -106,6 +119,10 @@ const mod = {
 			}
 
 			WKCEditorDispatchUpdate(instance.getValue());
+		});
+
+		mod._ValueEditorPostInitializeQueue.splice(0, mod._ValueEditorPostInitializeQueue.length).forEach(function(e) {
+			return e(mod.WKCEditorInstance);
 		});
 
 		WKCEditorDispatchReady();
