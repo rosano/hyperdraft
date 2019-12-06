@@ -27,6 +27,12 @@ const mod = {
 
 	WIKWriteDetailInstance: undefined,
 
+	// DATA
+
+	DataIsMobile () {
+		return window.innerWidth <= 760;
+	},
+
 	// MESSAGE
 
 	WKCWriteFooterDispatchStorage () {
@@ -108,6 +114,12 @@ const mod = {
 	
 	CommandNoteSelect(inputData) {
 		mod._ValueNoteSelected = inputData;
+
+		if (mod.DataIsMobile()) {
+			return;
+		}
+		
+		mod.WIKWriteDetailInstance.WIKWriteDetailFocus();
 	},
 	
 	async CommandNoteDiscard (inputData) {

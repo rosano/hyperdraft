@@ -4,6 +4,50 @@ const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
 describe('WKCWrite_Misc', function () {
 
+	describe('WKCWrite', function () {
+
+		before(function() {
+			return browser.OLSKVisit(kDefaultRoute);
+		});
+		
+		context('create', function() {
+
+			before(function () {
+				// browser.assert.hasNoClass('.CodeMirror', 'CodeMirror-focused');
+			});
+
+			before(function () {
+				return browser.pressButton('.WKCWriteMasterCreateButton');
+			});
+
+			it.skip('focus WKCEditor', function() {
+				browser.assert.hasClass('.CodeMirror', 'CodeMirror-focused');
+			});
+
+		});
+
+		context('select', function() {
+			
+			before(function () {
+				return browser.click('.WKCWriteMasterFilterField');
+			});
+
+			before(function () {
+				// browser.assert.hasNoClass('.CodeMirror', 'CodeMirror-focused');
+			});
+			
+			before(function () {
+				return browser.click('.WKCWriteMasterListItem');
+			});
+
+			it.skip('focus WKCEditor', function() {
+				browser.assert.hasClass('.CodeMirror', 'CodeMirror-focused');
+			});
+
+		});
+	
+	});
+
 	describe('WKCWriteMaster', function () {
 
 		before(function() {
@@ -16,8 +60,8 @@ describe('WKCWrite_Misc', function () {
 
 		context('create', function() {
 
-			before.skip(function () {
-				browser.assert.hasNoClass('.CodeMirror', 'CodeMirror-focused');
+			before(function () {
+				// browser.assert.hasNoClass('.CodeMirror', 'CodeMirror-focused');
 			});
 
 			before(function () {
@@ -103,18 +147,6 @@ describe('WKCWrite_Misc', function () {
 		
 		});
 	
-	});
-
-	context.skip('create', function() {
-
-		before(function () {
-			return browser.pressButton('.WKCWriteMasterCreateButton');
-		});
-
-		it('sets document.activeElement', function() {
-			deepEqual(browser.document.activeElement, browser.query('.WIKWriteDetailFormNameField'));
-		});
-
 	});
 
 });
