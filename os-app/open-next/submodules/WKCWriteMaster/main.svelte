@@ -36,13 +36,13 @@ const mod = {
 
 	// LIFECYCLE
 
-	LifecycleComponentWillMount () {
+	LifecycleComponentDidMount () {
 		mod.SetupEverything();
 	},
 };
 
 import { onMount } from 'svelte';
-onMount(mod.LifecycleComponentWillMount);
+onMount(mod.LifecycleComponentDidMount);
 
 import OLSKToolbar from 'OLSKToolbar';
 import OLSKToolbarElementGroup from 'OLSKToolbarElementGroup';
