@@ -16,12 +16,20 @@ describe('WKCWrite_Misc', function () {
 
 		context('create', function() {
 
+			before.skip(function () {
+				browser.assert.hasNoClass('.CodeMirror', 'CodeMirror-focused');
+			});
+
 			before(function () {
 				return browser.pressButton(WKCWriteMasterCreateButton);
 			});
 
 			it('classes OLSKMobileViewInactive', function() {
 				browser.assert.hasClass('.WKCWriteMaster', 'OLSKMobileViewInactive');
+			});
+
+			it.skip('focus WKCEditor', function() {
+				browser.assert.hasClass('.CodeMirror', 'CodeMirror-focused');
 			});
 
 		});
