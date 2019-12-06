@@ -81,7 +81,7 @@ import WKCEditor from '../WKCEditor/main.svelte';
 }
 
 .WIKWriteDetailToolbar {
-	border-bottom: var(--EMTBorderStyle);
+	border-bottom: var(--WKCBorderStyle);
 }
 
 .WIKWriteDetailForm {
@@ -92,7 +92,7 @@ import WKCEditor from '../WKCEditor/main.svelte';
 
 .WIKWriteDetailForm input[type=text] {
 	width: 50%;
-	border: var(--EMTBorderStyle);
+	border: var(--WKCBorderStyle);
 	border-radius: 5px;
 	padding: 5px;
 }
