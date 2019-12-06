@@ -10,8 +10,19 @@ export const OLSKLocalized = function(translationConstant) {
 	return OLSKInternational.OLSKInternationalLocalizedString(translationConstant, JSON.parse(`{"OLSK_I18N_SEARCH_REPLACE":"OLSK_I18N_SEARCH_REPLACE"}`)[window.OLSKPublicConstants('OLSKSharedPageCurrentLanguage')]);
 };
 
+const mod = {
+
+	// MESSAGE
+
+	WKCEditorDispatchUpdate (inputData) {
+		WIKWriteDetailDispatchUpdate(inputData);
+	},
+
+};
+
 import OLSKToolbar from 'OLSKToolbar';
 import OLSKToolbarElementGroup from 'OLSKToolbarElementGroup';
+import WKCEditor from '../WKCEditor/main.svelte';
 </script>
 
 <div class="WIKWriteDetail OLSKViewportDetail" class:OLSKMobileViewInactive={ OLSKMobileViewInactive }>
@@ -34,9 +45,7 @@ import OLSKToolbarElementGroup from 'OLSKToolbarElementGroup';
 </header>
 
 <div class="WIKWriteDetailForm">
-	<p>
-		<input type="text" class="WIKWriteDetailFormNameField" bind:value={ WIKWriteDetailItem.EMTDocumentName } on:input={ WIKWriteDetailDispatchUpdate } placeholder="{ OLSKLocalized('WIKWriteDetailFormNameFieldPlaceholderText') }" autofocus />
-	</p>
+	<WKCEditor WKCEditorInitialValue={ WIKWriteDetailItem.WKCNoteBody } WKCEditorDispatchUpdate={ mod.WKCEditorDispatchUpdate } />
 </div>
 {/if}
 

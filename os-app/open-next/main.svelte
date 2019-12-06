@@ -60,9 +60,9 @@ const mod = {
 			return;
 		};
 
-		setTimeout(function () {
-			document.querySelector('.WIKWriteDetailFormNameField').focus();
-		});
+		// setTimeout(function () {
+		// 	document.querySelector('.WIKWriteDetailFormNameField').focus();
+		// });
 
 		mod._ValueNoteSelected = inputData;
 	},

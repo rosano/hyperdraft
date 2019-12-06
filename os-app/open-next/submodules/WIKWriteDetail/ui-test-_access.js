@@ -12,7 +12,6 @@ Object.entries({
 	WIKWriteDetailToolbarDiscardButton: '.WIKWriteDetailToolbarDiscardButton',
 	
 	WIKWriteDetailForm: '.WIKWriteDetailForm',
-	WIKWriteDetailFormNameField: '.WIKWriteDetailFormNameField',
 }).map(function (e) {
 	return global[e.shift()]  = e.pop();
 });
@@ -73,8 +72,8 @@ describe('WIKWriteDetail_Access', function () {
 			browser.assert.elements(WIKWriteDetailForm, 1);
 		});
 
-		it('shows WIKWriteDetailFormNameField', function () {
-			browser.assert.elements(WIKWriteDetailFormNameField, 1);
+		it('shows WKCEditor', function () {
+			browser.assert.elements('.WKCEditor', 1);
 		});
 		
 	});

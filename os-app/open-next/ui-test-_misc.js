@@ -97,7 +97,7 @@ describe('WKCWrite_Misc', function () {
 	
 	});
 
-	context('create', function() {
+	context.skip('create', function() {
 
 		before(function () {
 			return browser.pressButton(WKCWriteMasterCreateButton);

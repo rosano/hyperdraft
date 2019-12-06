@@ -110,30 +110,6 @@ describe('WIKWriteDetail_Misc', function () {
 		});
 	
 	});
-	
-	describe('WIKWriteDetailFormNameField', function() {
-		
-		it('sets autofocus', function () {
-			browser.assert.attribute(WIKWriteDetailFormNameField, 'autofocus', '');
-		});
-		
-		it('binds WKCNoteBody', function () {
-			browser.assert.input(WIKWriteDetailFormNameField, uItem().WKCNoteBody);
-		});
-
-		context('input', function () {
-
-			before(function () {
-				browser.fill(WIKWriteDetailFormNameField, 'alfa');
-			});
-
-			it('sends WIKWriteDetailDispatchUpdate', function () {
-				browser.assert.text('#TestWIKWriteDetailDispatchUpdate', '1');
-			});
-		
-		});
-
-	});
 
 	describe('WIKWriteDetailPlaceholder', function() {
 
