@@ -114,11 +114,19 @@ const mod = {
 
 		mod.CommandNoteSelect(item);
 
-		if (!mod.DataIsMobile()) {
+		if (mod.DataIsMobile()) {
+			mod.WIKWriteDetailInstance.WIKWriteDetailFocus();
+		}
+		
+		if (typeof inputData !== 'string') {
 			return;
 		}
 
-		mod.WIKWriteDetailInstance.WIKWriteDetailFocus();
+		if (!inputData.match('\n')) {
+			return;
+		}
+
+		mod.WIKWriteDetailInstance.WIKWriteDetailSetCursor(inputData.split('\n').length - 1, 0);
 	},
 	
 	CommandNoteSelect(inputData) {

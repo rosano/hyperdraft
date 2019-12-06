@@ -6,13 +6,19 @@ export let WKCEditorDispatchReady;
 
 export const WKCEditorFocus = function () {
 	mod.CommandConfigureEditor(function (inputData) {
-		mod._ValueEditorInstance.focus();
+		inputData.focus();
 	});
 };
 
 export const WKCEditorSetDocument = function (inputData) {
 	mod._ValueEditorInstance.setValue(inputData);
 	mod._ValueEditorInstance.getDoc().clearHistory();
+};
+
+export const WKCEditorSetCursor = function (param1, param2) {
+	mod.CommandConfigureEditor(function (inputData) {
+		inputData.setCursor(CodeMirror.Pos(param1, param2));
+	});
 };
 
 import { OLSK_TESTING_BEHAVIOUR } from 'OLSKTesting';
