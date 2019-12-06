@@ -115,6 +115,10 @@ const mod = {
 	CommandNoteSelect(inputData) {
 		mod._ValueNoteSelected = inputData;
 
+		if (!inputData) {
+			return;
+		}
+
 		if (mod.DataIsMobile()) {
 			return;
 		}
