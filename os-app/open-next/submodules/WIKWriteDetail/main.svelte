@@ -3,6 +3,7 @@ export let WIKWriteDetailItem = null;
 export let WIKWriteDetailDispatchBack;
 export let WIKWriteDetailDispatchDiscard;
 export let WIKWriteDetailDispatchUpdate;
+export let WIKWriteDetailDispatchOpen;
 export let OLSKMobileViewInactive = false;
 
 import OLSKInternational from 'OLSKInternational';
@@ -16,6 +17,10 @@ const mod = {
 
 	WKCEditorDispatchUpdate (inputData) {
 		WIKWriteDetailDispatchUpdate(inputData);
+	},
+
+	WKCEditorDispatchOpen (inputData) {
+		WIKWriteDetailDispatchOpen(inputData);
 	},
 
 };
@@ -45,7 +50,7 @@ import WKCEditor from '../WKCEditor/main.svelte';
 </header>
 
 <div class="WIKWriteDetailForm">
-	<WKCEditor WKCEditorInitialValue={ WIKWriteDetailItem.WKCNoteBody } WKCEditorDispatchUpdate={ mod.WKCEditorDispatchUpdate } />
+	<WKCEditor WKCEditorInitialValue={ WIKWriteDetailItem.WKCNoteBody } WKCEditorDispatchUpdate={ mod.WKCEditorDispatchUpdate } WKCEditorDispatchOpen={ mod.WKCEditorDispatchOpen } />
 </div>
 {/if}
 

@@ -1,6 +1,7 @@
 <script>
 export let WKCEditorInitialValue;
 export let WKCEditorDispatchUpdate;
+export let WKCEditorDispatchOpen;
 
 export const WKCEditorSetDocument = function (inputData) {
 	mod._ValueEditorInstance.setValue(inputData);
@@ -13,6 +14,7 @@ export const WKCEditorConfigure = function (e) {
 };
 
 import { OLSK_TESTING_BEHAVIOUR } from 'OLSKTesting';
+import WKCEditorLogic from './ui-logic.js';
 
 const mod = {
 
@@ -28,6 +30,37 @@ const mod = {
 
 	InterfaceEditorFieldDebugDidInput () {
 		WKCEditorDispatchUpdate(this.value);
+	},
+
+	// COMMAND
+
+	CommandOpenCursorObject (inputData) {
+		let cursor = mod._ValueEditorInstance.getCursor();
+
+		let currentObject = WKCEditorLogic.WKCEditorLineObjectsFor(mod._ValueEditorInstance.getLineTokens(cursor.line)).filter(function (e) {
+			return Math.max(e.start, Math.min(e.end, cursor.ch)) === cursor.ch;
+		}).shift();
+
+		if (!currentObject.type.match('link')) {
+			return;
+		}
+
+		mod.CommandOpenTextObject(currentObject.string);
+	},
+
+	CommandOpenTextObject (inputData) {
+		if (URLParse(inputData, {}).protocol) {
+			return window.open(inputData, '_blank');
+		}
+
+		let match = inputData.match(/\[\[(.*)\]\]/).pop();
+		if (!match) {
+			return;
+		}
+
+		event.stopPropagation();
+
+		WKCEditorDispatchOpen(match);
 	},
 
 	// SETUP
@@ -53,8 +86,8 @@ const mod = {
 
 			extraKeys: {
 			  Enter: 'newlineAndIndentContinueMarkdownList',
-			  'Cmd-Enter': openCursorObject,
-			  'Ctrl-Enter': openCursorObject,
+			  'Cmd-Enter': mod.CommandOpenCursorObject,
+			  'Ctrl-Enter': mod.CommandOpenCursorObject,
 			  'Cmd-H' (event) {
 			  	return event.preventDefault();
 			  },
