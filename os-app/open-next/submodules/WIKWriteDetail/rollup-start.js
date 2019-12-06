@@ -10,8 +10,9 @@ const WIKWriteDetail = new RollupStart({
 			window.TestWIKWriteDetailDispatchDiscard.innerHTML = parseInt(window.TestWIKWriteDetailDispatchDiscard.innerHTML) + 1;
 			window.TestWIKWriteDetailDispatchDiscardData.innerHTML = JSON.stringify(inputData);
 		}),
-		WIKWriteDetailDispatchUpdate: (function _WIKWriteDetailDispatchUpdate () {
+		WIKWriteDetailDispatchUpdate: (function _WIKWriteDetailDispatchUpdate (inputData) {
 			window.TestWIKWriteDetailDispatchUpdate.innerHTML = parseInt(window.TestWIKWriteDetailDispatchUpdate.innerHTML) + 1;
+			window.TestWIKWriteDetailDispatchUpdateData.innerHTML = inputData;
 		}),
 		WIKWriteDetailDispatchOpen: (function _WIKWriteDetailDispatchOpen () {}),
 	}, Object.fromEntries(Array.from((new window.URLSearchParams(window.location.search)).entries()).map(function (e) {
@@ -22,5 +23,11 @@ const WIKWriteDetail = new RollupStart({
 		return e;
 	}))),
 });
+
+window.WIKWriteDetailBehaviour = {
+	TestWIKWriteDetailFocus () {
+		WIKWriteDetail.WIKWriteDetailFocus();
+	},
+};
 
 export default WIKWriteDetail;

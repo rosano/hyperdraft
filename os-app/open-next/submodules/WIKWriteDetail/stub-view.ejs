@@ -4,6 +4,26 @@
 	<link rel="stylesheet" type="text/css" href="/_shared/__external/normalize.css/normalize.css">
 	<link rel="stylesheet" type="text/css" href="/<%= OLSKSharedPageControllerSlug %>/__compiled/ui-style.css">
 
+	<link rel="stylesheet" type="text/css" href="/_shared/__external/codemirror/lib/codemirror.css">
+	<script type="text/javascript" src="/_shared/__external/codemirror/lib/codemirror.js"></script>
+	
+	<script type="text/javascript" src="/_shared/__external/codemirror/addon/edit/continuelist.js"></script>
+	
+	<script type="text/javascript" src="/_shared/__external/codemirror/addon/mode/overlay.js"></script>
+	
+	<script type="text/javascript" src="/_shared/__external/codemirror/mode/markdown/markdown.js"></script>
+	<script type="text/javascript" src="/_shared/__external/codemirror/mode/gfm/gfm.js"></script>
+	
+	<script type="text/javascript" src="/_shared/__external/codemirror/addon/search/search.js"></script>
+	<script type="text/javascript" src="/_shared/__external/codemirror/addon/search/searchcursor.js"></script>
+	<script type="text/javascript" src="/_shared/__external/codemirror/addon/search/jump-to-line.js"></script>
+	<link rel="stylesheet" type="text/css" href="/_shared/__external/codemirror/addon/dialog/dialog.css">
+	<script type="text/javascript" src="/_shared/__external/codemirror/addon/dialog/dialog.js"></script>
+	
+	<script type="text/javascript" src="/_shared/__external/codemirror/keymap/sublime.js"></script>
+
+	<script type="text/javascript" src="/_shared/__external/url-parse/dist/url-parse.min.js"></script>
+
 	<script type="text/javascript">
 		window.OLSKPublicConstants = function (inputData) {
 			return {
@@ -30,6 +50,11 @@
 <p>
 	<strong>TestWIKWriteDetailDispatchUpdate</strong>
 	<span id="TestWIKWriteDetailDispatchUpdate">0</span>
+	<span id="TestWIKWriteDetailDispatchUpdateData">undefined</span>
+</p>
+
+<p>
+	<button id="TestWIKWriteDetailFocus" onclick="window.WIKWriteDetailBehaviour.TestWIKWriteDetailFocus()">TestWIKWriteDetailFocus</button>
 </p>
 
 </body>

@@ -122,5 +122,53 @@ describe('WIKWriteDetail_Misc', function () {
 		});
 		
 	});
+	
+	describe('WKCEditor', function() {
+		
+		before(function() {
+			return browser.OLSKVisit(kDefaultRoute, {
+				WIKWriteDetailItem: JSON.stringify(uItem()),
+			});
+		});
+		
+		it.skip('binds WKCNoteBody', function () {
+			browser.assert.input('.CodeMirror', 'alfa');
+		});
+			
+		it('binds WKCNoteBody', function () {
+			browser.assert.input('.WKCEditorFieldDebug', 'alfa');
+		});
+
+		context.skip('WKCDetailFocus', function () {
+
+			before(function () {
+				browser.assert.hasNoClass('.CodeMirror', 'CodeMirror-focused');
+			});
+
+			before(function () {
+				browser.pressButton('#TestWKCDetailFocus');
+			});
+
+			it('classes CodeMirror-focused', function () {
+				browser.assert.hasClass('.CodeMirror', 'CodeMirror-focused');
+			});
+			
+		});
+
+		context('input', function () {
+
+			before(function () {
+				// browser.fill('CodeMirror', 'bravo');
+				browser.fill('.WKCEditorFieldDebug', 'bravo');
+			});
+
+			it('sends WIKWriteDetailDispatchUpdate', function () {
+				browser.assert.text('#TestWIKWriteDetailDispatchUpdate', '1');
+				browser.assert.text('#TestWIKWriteDetailDispatchUpdateData', 'bravo');
+			});
+		
+		});
+
+	});
 
 });

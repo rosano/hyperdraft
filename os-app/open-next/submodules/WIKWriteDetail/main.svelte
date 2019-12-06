@@ -6,6 +6,10 @@ export let WIKWriteDetailDispatchUpdate;
 export let WIKWriteDetailDispatchOpen;
 export let OLSKMobileViewInactive = false;
 
+export const WIKWriteDetailFocus = function () {
+	mod.WKCEditorInstance.WKCEditorFocus();
+};
+
 import OLSKInternational from 'OLSKInternational';
 export const OLSKLocalized = function(translationConstant) {
 	return OLSKInternational.OLSKInternationalLocalizedString(translationConstant, JSON.parse(`{"OLSK_I18N_SEARCH_REPLACE":"OLSK_I18N_SEARCH_REPLACE"}`)[window.OLSKPublicConstants('OLSKSharedPageCurrentLanguage')]);
@@ -22,6 +26,10 @@ const mod = {
 	WKCEditorDispatchOpen (inputData) {
 		WIKWriteDetailDispatchOpen(inputData);
 	},
+
+	// VALUE
+
+	WKCEditorInstance: undefined,
 
 };
 
@@ -50,7 +58,7 @@ import WKCEditor from '../WKCEditor/main.svelte';
 </header>
 
 <div class="WIKWriteDetailForm">
-	<WKCEditor WKCEditorInitialValue={ WIKWriteDetailItem.WKCNoteBody } WKCEditorDispatchUpdate={ mod.WKCEditorDispatchUpdate } WKCEditorDispatchOpen={ mod.WKCEditorDispatchOpen } />
+	<WKCEditor WKCEditorInitialValue={ WIKWriteDetailItem.WKCNoteBody } WKCEditorDispatchUpdate={ mod.WKCEditorDispatchUpdate } WKCEditorDispatchOpen={ mod.WKCEditorDispatchOpen } bind:this={ mod.WKCEditorInstance } />
 </div>
 {/if}
 
