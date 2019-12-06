@@ -9,7 +9,7 @@ import { OLSK_TESTING_BEHAVIOUR } from 'OLSKTesting'
 import * as OLSKRemoteStorage from '../_shared/__external/OLSKRemoteStorage/main.js'
 import * as WKCNoteAction from '../_shared/WKCNote/action.js';
 import * as WKCWriteLogic from '../open-write/ui-logic.js';
-import { storageClient, WKCPersistenceIsLoading, WKCNotesAllStore, WKCNoteSelectedStore } from '../open-write/persistence.js';
+import { storageClient, WKCPersistenceIsLoading, WKCNotesAllStore } from '../open-write/persistence.js';
 
 const mod = {
 
@@ -53,22 +53,6 @@ const mod = {
 
 	WIKWriteDetailDispatchOpen () {},
 
-	MessageNoteSelectedDidChange (inputData) {
-		if (!inputData) {
-			return;
-		}
-
-		if (inputData === mod._ValueNoteSelected) {
-			return;
-		};
-
-		// setTimeout(function () {
-		// 	document.querySelector('.WIKWriteDetailFormNameField').focus();
-		// });
-
-		mod._ValueNoteSelected = inputData;
-	},
-
 	MessageNotesAllDidChange() {
 		mod._ValueNotesAll = $WKCNotesAllStore;
 	},
@@ -88,7 +72,7 @@ const mod = {
 			return val;
 		});
 
-		OLSKThrottle.OLSKThrottleMappedTimeoutFor(mod._ValueSaveThrottleMap, $WKCNoteSelectedStore.WKCNoteID, function (inputData) {
+		OLSKThrottle.OLSKThrottleMappedTimeoutFor(mod._ValueSaveThrottleMap, mod._ValueNoteSelected.WKCNoteID, function (inputData) {
 			return {
 				OLSKThrottleDuration: 500,
 				async OLSKThrottleCallback () {
@@ -97,10 +81,10 @@ const mod = {
 					await WKCNoteAction.WKCNoteActionUpdate(storageClient, inputData);
 				},
 			};
-		}, $WKCNoteSelectedStore);
+		}, mod._ValueNoteSelected);
 
 		if (OLSK_TESTING_BEHAVIOUR()) {
-			OLSKThrottle.OLSKThrottleSkip(mod._ValueSaveThrottleMap[$WKCNoteSelectedStore.WKCNoteID])	
+			OLSKThrottle.OLSKThrottleSkip(mod._ValueSaveThrottleMap[mod._ValueNoteSelected.WKCNoteID])	
 		};
 	},
 
@@ -117,7 +101,7 @@ const mod = {
 	},
 	
 	CommandNoteSelect(inputData) {
-		return WKCNoteSelectedStore.set(inputData);
+		mod._ValueNoteSelected = inputData;
 	},
 	
 	async CommandNoteDiscard (inputData) {
@@ -129,7 +113,7 @@ const mod = {
 
 		await WKCNoteAction.WKCNoteActionDelete(storageClient, inputData.WKCNoteID);
 
-		WKCNoteSelectedStore.set(null);
+		mod.CommandNoteSelect(null);
 	},
 
 	async CommandNotesExport () {
@@ -209,8 +193,6 @@ const mod = {
 
 WKCNotesAllStore.subscribe(mod.MessageNotesAllDidChange);
 
-WKCNoteSelectedStore.subscribe(mod.MessageNoteSelectedDidChange);
-
 import { onMount } from 'svelte';
 onMount(mod.LifecycleModuleWillMount);
 
@@ -224,15 +206,15 @@ import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svel
 <div class="WKCWrite OLSKViewport" class:OLSKIsLoading={ $WKCPersistenceIsLoading }>
 
 <OLSKViewportContent>
-	<WKCWriteMaster WKCWriteMasterListItems={ mod._ValueNotesAll } WKCWriteMasterListItemSelected={ $WKCNoteSelectedStore } WKCWriteMasterDispatchCreate={ mod.WKCWriteMasterDispatchCreate } WKCWriteMasterDispatchSelect={ mod.WKCWriteMasterDispatchSelect } OLSKMobileViewInactive={ $WKCNoteSelectedStore } />
+	<WKCWriteMaster WKCWriteMasterListItems={ mod._ValueNotesAll } WKCWriteMasterListItemSelected={ mod._ValueNoteSelected } WKCWriteMasterDispatchCreate={ mod.WKCWriteMasterDispatchCreate } WKCWriteMasterDispatchSelect={ mod.WKCWriteMasterDispatchSelect } OLSKMobileViewInactive={ mod._ValueNoteSelected } />
 	
 	<WIKWriteDetail
-		WIKWriteDetailItem={ $WKCNoteSelectedStore }
+		WIKWriteDetailItem={ mod._ValueNoteSelected }
 		WIKWriteDetailDispatchBack={ mod.WIKWriteDetailDispatchBack }
 		WIKWriteDetailDispatchDiscard={ mod.WIKWriteDetailDispatchDiscard }
 		WIKWriteDetailDispatchUpdate={ mod.WIKWriteDetailDispatchUpdate }
 		WIKWriteDetailDispatchOpen={ mod.WIKWriteDetailDispatchOpen }
-		OLSKMobileViewInactive={ !$WKCNoteSelectedStore }
+		OLSKMobileViewInactive={ !mod._ValueNoteSelected }
 		/>
 </OLSKViewportContent>
 
