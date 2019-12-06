@@ -41,7 +41,35 @@ describe('WKCWrite_Access', function () {
 	context('create', function () {
 		
 		before(function () {
-			return browser.pressButton(WKCWriteMasterCreateButton);
+			return browser.pressButton('.WKCWriteMasterCreateButton');
+		});
+
+		it('shows WKCWriteMasterListItem', function () {
+			browser.assert.elements('.WKCWriteMasterListItem', 1);
+		});
+
+		it('hides WIKWriteDetailPlaceholder', function () {
+			browser.assert.elements('.WIKWriteDetailPlaceholder', 0);
+		});
+	
+	});
+
+	context('back', function () {
+		
+		before(function () {
+			return browser.pressButton('.WIKWriteDetailToolbarBackButton');
+		});
+
+		it('shows WIKWriteDetailPlaceholder', function () {
+			browser.assert.elements('.WIKWriteDetailPlaceholder', 1);
+		});
+	
+	});
+
+	context('select', function () {
+		
+		before(function () {
+			return browser.click('.WKCWriteMasterListItem');
 		});
 
 		it('shows WKCWriteMasterListItem', function () {
