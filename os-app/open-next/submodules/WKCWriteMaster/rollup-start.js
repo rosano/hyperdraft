@@ -4,8 +4,9 @@ const WKCWriteMaster = new RollupStart({
 	target: document.body,
 	props: Object.assign({
 		WKCWriteMasterListItems: [],
-		WKCWriteMasterDispatchCreate: (function _WKCWriteMasterDispatchCreate () {
+		WKCWriteMasterDispatchCreate: (function _WKCWriteMasterDispatchCreate (inputData) {
 			window.TestWKCWriteMasterDispatchCreate.innerHTML = parseInt(window.TestWKCWriteMasterDispatchCreate.innerHTML) + 1;
+			window.TestWKCWriteMasterDispatchCreateData.innerHTML = inputData;
 		}),
 		WKCWriteMasterDispatchSelect: (function _WKCWriteMasterDispatchSelect (inputData) {
 			window.TestWKCWriteMasterDispatchSelect.innerHTML = parseInt(window.TestWKCWriteMasterDispatchSelect.innerHTML) + 1;

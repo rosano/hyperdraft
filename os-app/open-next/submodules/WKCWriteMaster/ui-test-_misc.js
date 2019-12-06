@@ -70,7 +70,7 @@ describe('WKCWriteMaster_Misc', function () {
 	
 	});
 
-	describe.skip('WKCWriteMasterFilterField', function() {
+	describe('WKCWriteMasterFilterField', function() {
 
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute);
@@ -80,6 +80,7 @@ describe('WKCWriteMaster_Misc', function () {
 			
 			before(function () {
 				browser.assert.text('#TestWKCWriteMasterDispatchCreate', '0');
+				browser.assert.text('#TestWKCWriteMasterDispatchCreateData', 'undefined');
 			});
 			
 			context('input empty', function () {
@@ -92,7 +93,7 @@ describe('WKCWriteMaster_Misc', function () {
 					browser.OLSKFireKeyboardEvent(browser.window, 'Enter');
 				});
 
-				it('sends WKCWriteMasterDispatchCreate', function () {
+				it('sends no WKCWriteMasterDispatchCreate', function () {
 					browser.assert.text('#TestWKCWriteMasterDispatchCreate', '0');
 				});
 			

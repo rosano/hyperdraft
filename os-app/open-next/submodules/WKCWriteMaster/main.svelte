@@ -21,10 +21,9 @@ const mod = {
 	// INTERFACE
 
 	InterfaceWindowDidKeydown (event) {
-		if (!mod._ValueFilterFieldFocused) {
+		if (document.activeElement !== document.querySelector('.WKCWriteMasterFilterField')) {
 			return;
 		}
-
 
 		if (event.key === 'Enter') {
 			return mod.CommandCreateStub();
