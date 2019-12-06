@@ -16,7 +16,7 @@ export let editorConfigure = function (inputData) {
 import * as WKCNoteAction from '../_shared/WKCNote/action.js';
 import * as WKCVersionAction from '../_shared/WKCVersion/action.js';
 import * as WKCWriteLogic from './ui-logic.js';
-import * as WKCEditorLogic from '../open-next/submodules/WKCEditor/ui-logic.js';
+import WKCEditorLogic from '../open-next/submodules/WKCEditor/ui-logic.js';
 import { storageClient, WKCNotesAllStore, filterText, WKCWriteDefaultFocusNode, mobileViewCurrent, isMobile } from './persistence.js';
 import { WKCNoteSelectedStore } from './persistence.js';
 
