@@ -51,6 +51,8 @@ const mod = {
 		mod.CommandNoteSave();
 	},
 
+	WIKWriteDetailDispatchOpen () {},
+
 	MessageNoteSelectedDidChange (inputData) {
 		if (!inputData) {
 			return;
@@ -224,7 +226,14 @@ import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svel
 <OLSKViewportContent>
 	<WKCWriteMaster WKCWriteMasterListItems={ mod._ValueNotesAll } WKCWriteMasterListItemSelected={ $WKCNoteSelectedStore } WKCWriteMasterDispatchCreate={ mod.WKCWriteMasterDispatchCreate } WKCWriteMasterDispatchSelect={ mod.WKCWriteMasterDispatchSelect } OLSKMobileViewInactive={ $WKCNoteSelectedStore } />
 	
-	<WIKWriteDetail WIKWriteDetailItem={ $WKCNoteSelectedStore } WIKWriteDetailDispatchBack={ mod.WIKWriteDetailDispatchBack } WIKWriteDetailDispatchDiscard={ mod.WIKWriteDetailDispatchDiscard } WIKWriteDetailDispatchUpdate={ mod.WIKWriteDetailDispatchUpdate } OLSKMobileViewInactive={ !$WKCNoteSelectedStore } />
+	<WIKWriteDetail
+		WIKWriteDetailItem={ $WKCNoteSelectedStore }
+		WIKWriteDetailDispatchBack={ mod.WIKWriteDetailDispatchBack }
+		WIKWriteDetailDispatchDiscard={ mod.WIKWriteDetailDispatchDiscard }
+		WIKWriteDetailDispatchUpdate={ mod.WIKWriteDetailDispatchUpdate }
+		WIKWriteDetailDispatchOpen={ mod.WIKWriteDetailDispatchOpen }
+		OLSKMobileViewInactive={ !$WKCNoteSelectedStore }
+		/>
 </OLSKViewportContent>
 
 <div id="WKCWriteStorageWidget" class="OLSKMobileViewFooter" class:WKCWriteStorageWidgetHidden={ mod._ValueStorageWidgetHidden }></div>
