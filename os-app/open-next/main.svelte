@@ -47,7 +47,9 @@ const mod = {
 		mod.CommandNoteDiscard(inputData);
 	},
 
-	WIKWriteDetailDispatchUpdate () {
+	WIKWriteDetailDispatchUpdate (inputData) {
+		mod._ValueNoteSelected.WKCNoteBody = inputData;
+		
 		mod.CommandNoteSave();
 	},
 
