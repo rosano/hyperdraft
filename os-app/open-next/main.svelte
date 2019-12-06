@@ -25,6 +25,8 @@ const mod = {
 
 	_ValueSaveThrottleMap: {},
 
+	WIKWriteDetailInstance: undefined,
+
 	// MESSAGE
 
 	WKCWriteFooterDispatchStorage () {
@@ -100,6 +102,8 @@ const mod = {
 		});
 
 		mod.CommandNoteSelect(item);
+
+		mod.WIKWriteDetailInstance.WIKWriteDetailFocus();
 	},
 	
 	CommandNoteSelect(inputData) {
@@ -217,6 +221,7 @@ import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svel
 		WIKWriteDetailDispatchUpdate={ mod.WIKWriteDetailDispatchUpdate }
 		WIKWriteDetailDispatchOpen={ mod.WIKWriteDetailDispatchOpen }
 		OLSKMobileViewInactive={ !mod._ValueNoteSelected }
+		bind:this={ mod.WIKWriteDetailInstance }
 		/>
 </OLSKViewportContent>
 

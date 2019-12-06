@@ -7,7 +7,9 @@ export let WIKWriteDetailDispatchOpen;
 export let OLSKMobileViewInactive = false;
 
 export const WIKWriteDetailFocus = function () {
-	mod.WKCEditorInstance.WKCEditorFocus();
+	mod.CommandConfigureEditor(function (inputData) {
+		inputData.WKCEditorFocus();
+	});
 };
 
 import OLSKInternational from 'OLSKInternational';
@@ -25,6 +27,27 @@ const mod = {
 
 	WKCEditorDispatchOpen (inputData) {
 		WIKWriteDetailDispatchOpen(inputData);
+	},
+
+	WKCEditorDispatchReady () {
+		mod._ValueEditorPostInitializeQueue.splice(0, mod._ValueEditorPostInitializeQueue.length).forEach(function(e) {
+			return e(mod.WKCEditorInstance);
+		});
+	},
+
+	// VALUE
+
+	_ValueEditorPostInitializeQueue: [],
+
+	// COMMAND
+
+	CommandConfigureEditor (inputData) {
+		// console.log(mod.WKCEditorInstance ? 'run' : 'queue', inputData);
+		if (mod.WKCEditorInstance) {
+			return inputData(mod.WKCEditorInstance);
+		};
+
+		mod._ValueEditorPostInitializeQueue.push(inputData);
 	},
 
 	// VALUE
@@ -58,7 +81,13 @@ import WKCEditor from '../WKCEditor/main.svelte';
 </header>
 
 <div class="WIKWriteDetailForm">
-	<WKCEditor WKCEditorInitialValue={ WIKWriteDetailItem.WKCNoteBody } WKCEditorDispatchUpdate={ mod.WKCEditorDispatchUpdate } WKCEditorDispatchOpen={ mod.WKCEditorDispatchOpen } bind:this={ mod.WKCEditorInstance } />
+	<WKCEditor
+		WKCEditorInitialValue={ WIKWriteDetailItem.WKCNoteBody }
+		WKCEditorDispatchUpdate={ mod.WKCEditorDispatchUpdate }
+		WKCEditorDispatchOpen={ mod.WKCEditorDispatchOpen }
+		WKCEditorDispatchReady={ mod.WKCEditorDispatchReady }
+		bind:this={ mod.WKCEditorInstance }
+		/>
 </div>
 {/if}
 

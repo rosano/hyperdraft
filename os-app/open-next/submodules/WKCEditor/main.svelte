@@ -2,6 +2,7 @@
 export let WKCEditorInitialValue;
 export let WKCEditorDispatchUpdate;
 export let WKCEditorDispatchOpen;
+export let WKCEditorDispatchReady;
 
 export const WKCEditorFocus = function () {
 	mod._ValueEditorInstance.focus();
@@ -10,11 +11,6 @@ export const WKCEditorFocus = function () {
 export const WKCEditorSetDocument = function (inputData) {
 	mod._ValueEditorInstance.setValue(inputData);
 	mod._ValueEditorInstance.getDoc().clearHistory();
-};
-
-export const WKCEditorConfigure = function (e) {
-	// console.log(mod._ValueEditorInstance ? 'run' : 'queue', e);
-	return mod._ValueEditorInstance ? e(mod._ValueEditorInstance) : mod._ValueEditorPostInitializeQueue.push(e);
 };
 
 import { OLSK_TESTING_BEHAVIOUR } from 'OLSKTesting';
@@ -27,8 +23,6 @@ const mod = {
 	_ValueEditorElement: undefined,
 
 	_ValueEditorInstance: undefined,
-
-	_ValueEditorPostInitializeQueue: [],
 
 	// INTERFACE
 
@@ -114,11 +108,7 @@ const mod = {
 			WKCEditorDispatchUpdate(instance.getValue());
 		});
 
-		// console.log(mod._ValueEditorPostInitializeQueue);
-		
-		mod._ValueEditorPostInitializeQueue.splice(0, mod._ValueEditorPostInitializeQueue.length).forEach(function(e) {
-			return e(mod._ValueEditorInstance);
-		});
+		WKCEditorDispatchReady();
 	},
 
 	// LIFECYCLE
