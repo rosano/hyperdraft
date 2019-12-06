@@ -34,13 +34,13 @@ describe('WKCEditor_Misc', function () {
 	describe.skip('CodeMirror', function() {
 		
 		it('binds WKCEditorInitialValue', function () {
-			browser.assert.input(CodeMirror, 'alfa');
+			browser.assert.input('.CodeMirror', 'alfa');
 		});
 
 		context('WKCEditorFocus', function () {
 
 			before(function () {
-				browser.assert.hasNoClass('CodeMirror-focused');
+				browser.assert.hasNoClass('.CodeMirror', 'CodeMirror-focused');
 			});
 
 			before(function () {
@@ -48,7 +48,7 @@ describe('WKCEditor_Misc', function () {
 			});
 
 			it('classes CodeMirror-focused', function () {
-				browser.assert.hasClass('CodeMirror-focused');
+				browser.assert.hasClass('.CodeMirror', 'CodeMirror-focused');
 			});
 			
 		});
@@ -56,7 +56,7 @@ describe('WKCEditor_Misc', function () {
 		context('input', function () {
 
 			before(function () {
-				browser.fill(CodeMirror, 'bravo');
+				browser.fill('.CodeMirror', 'bravo');
 			});
 
 			it('sends WKCEditorDispatchUpdate', function () {
