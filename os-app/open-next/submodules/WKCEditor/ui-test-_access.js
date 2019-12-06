@@ -22,6 +22,10 @@ describe('WKCEditor_Access', function () {
 		browser.assert.elements(WKCEditor, 1);
 	});
 
+	it.skip('shows CodeMirror', function () {
+		browser.assert.elements('.CodeMirror', 1);
+	});
+
 	it('shows WKCEditorFieldDebug', function () {
 		browser.assert.elements(WKCEditorFieldDebug, 1);
 	});
