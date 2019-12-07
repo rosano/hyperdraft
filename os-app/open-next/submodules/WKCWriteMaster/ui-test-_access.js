@@ -50,6 +50,10 @@ describe('WKCWriteMaster_Access', function () {
 		browser.assert.elements(WKCWriteMasterBody, 1);
 	});
 
+	it('shows OLSKResults', function () {
+		browser.assert.elements('.OLSKResults', 1);
+	});
+
 	it('hides WKCWriteMasterListItem', function () {
 		browser.assert.elements(WKCWriteMasterListItem, 0);
 	});

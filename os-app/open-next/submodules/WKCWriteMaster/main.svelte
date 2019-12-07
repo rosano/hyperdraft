@@ -126,6 +126,7 @@ afterUpdate(mod.LifecycleComponentDidUpdate);
 import OLSKToolbar from 'OLSKToolbar';
 import OLSKToolbarElementGroup from 'OLSKToolbarElementGroup';
 import OLSKInputWrapper from 'OLSKInputWrapper';
+import OLSKResults from 'OLSKResults';
 </script>
 <svelte:window on:keydown={ mod.InterfaceWindowDidKeydown }/>
 
@@ -144,12 +145,12 @@ import OLSKInputWrapper from 'OLSKInputWrapper';
 </header>
 
 <section class="WKCWriteMasterBody OLSKMobileViewBody">
-	{#each WKCWriteMasterListItems as e}
-		<div class="WKCWriteMasterListItem OLSKLayoutElementTappable" class:WKCWriteMasterListItemSelected={ WKCWriteMasterListItemSelected === e } on:click={ () => WKCWriteMasterDispatchSelect(e) } >
+	<OLSKResults OLSKResultsListItems={ WKCWriteMasterListItems } OLSKResultsListItemSelected={ WKCWriteMasterListItemSelected } OLSKResultsDispatchClick={ WKCWriteMasterDispatchSelect } OLSKResultsDispatchArrow={ WKCWriteMasterDispatchSelect } let:OLSKResultsListItem={ e } >
+		<div class="WKCWriteMasterListItem">
 			<strong>{ e.WKCNoteBody }</strong>
 		</div>
-	{/each}
-	
+	</OLSKResults>
+
 	<div class="WKCWriteMasterDebug">
 		<button class="WKCWriteExportButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle" on:click={ mod.InterfaceExportButtonDidClick }>{ OLSKLocalized('WKCUpdateExportText') }</button>
 	</div>

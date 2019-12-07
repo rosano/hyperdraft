@@ -97,6 +97,9 @@
     
     "// FRONTEND FILTER INPUT": null,
     "OLSKInputWrapper": "olsk/OLSKInputWrapper",
+    
+    "// FRONTEND RESULTS": null,
+    "OLSKResults": "olsk/OLSKResults",
 
     "// FRONTEND RELOAD BUTTON": null,
     "OLSKReloadButton": "olsk/OLSKReloadButton",

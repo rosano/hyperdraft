@@ -13,7 +13,7 @@ describe('WKCWrite_Misc', function () {
 	});
 
 	it('sets WKCWriteMasterListItemSelected', function () {
-		browser.assert.elements('.WKCWriteMasterListItemSelected', 0);
+		browser.assert.elements('.OLSKResultsListItemSelected', 0);
 	});
 
 	it('classes WIKWriteDetail', function () {
@@ -39,7 +39,7 @@ describe('WKCWrite_Misc', function () {
 		});
 
 		it('sets WKCWriteMasterListItemSelected', function () {
-			browser.assert.elements('.WKCWriteMasterListItemSelected', 1);
+			browser.assert.elements('.OLSKResultsListItemSelected', 1);
 		});
 
 		it('classes WIKWriteDetail', function() {
@@ -67,7 +67,7 @@ describe('WKCWrite_Misc', function () {
 		});
 
 		it('sets WKCWriteMasterListItemSelected', function () {
-			browser.assert.elements('.WKCWriteMasterListItemSelected', 0);
+			browser.assert.elements('.OLSKResultsListItemSelected', 0);
 		});
 
 		it('classes WIKWriteDetail', function() {
@@ -103,7 +103,7 @@ describe('WKCWrite_Misc', function () {
 		});
 
 		it('sets WKCWriteMasterListItemSelected', function () {
-			browser.assert.elements('.WKCWriteMasterListItemSelected', 1);
+			browser.assert.elements('.OLSKResultsListItemSelected', 1);
 		});
 
 		it('classes WIKWriteDetail', function() {
@@ -161,7 +161,7 @@ describe('WKCWrite_Misc', function () {
 			});
 
 			it('sets WKCWriteMasterListItemSelected', function () {
-				browser.assert.elements('.WKCWriteMasterListItemSelected', 1);
+				browser.assert.elements('.OLSKResultsListItemSelected', 1);
 			});
 
 			it('sets WIKWriteDetailItem', function () {
@@ -181,7 +181,7 @@ describe('WKCWrite_Misc', function () {
 			});
 
 			it('sets WKCWriteMasterListItemSelected', function () {
-				browser.assert.elements('.WKCWriteMasterListItemSelected', 1);
+				browser.assert.elements('.OLSKResultsListItemSelected', 1);
 			});
 
 			it('sets WIKWriteDetailItem', function () {
@@ -201,7 +201,7 @@ describe('WKCWrite_Misc', function () {
 			});
 
 			it('sets WKCWriteMasterListItemSelected', function () {
-				browser.assert.elements('.WKCWriteMasterListItemSelected', 0);
+				browser.assert.elements('.OLSKResultsListItemSelected', 0);
 			});
 
 			it('sets WIKWriteDetailItem', function () {

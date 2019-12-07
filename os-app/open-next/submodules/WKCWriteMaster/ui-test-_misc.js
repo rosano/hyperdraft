@@ -59,6 +59,49 @@ describe('WKCWriteMaster_Misc', function () {
 			});
 		
 		});
+
+		context('OLSKResultsDispatchArrow', function () {
+
+			before(function() {
+				return browser.OLSKVisit(kDefaultRoute, {
+					WKCWriteMasterListItems: JSON.stringify([{
+						WKCDocumentID: 'alfa',
+						WKCNoteBody: 'bravo',
+					}, {
+						WKCDocumentID: 'charlie',
+						WKCNoteBody: 'delta',
+					}, {
+						WKCDocumentID: 'echo',
+						WKCNoteBody: 'foxtrot',
+					}]),
+					WKCWriteMasterListItemSelected: JSON.stringify({
+						WKCDocumentID: 'charlie',
+						WKCNoteBody: 'delta',
+					}),
+				});
+			});
+
+			context('keydown ArrowUp', function() {
+
+				before(function () {
+					browser.assert.text('#TestWKCWriteMasterDispatchSelect', '0');
+				});
+
+				before(function () {
+					return browser.OLSKFireKeyboardEvent(browser.window, 'ArrowUp');
+				});
+
+				it('sends WKCWriteMasterDispatchSelect', function () {
+					browser.assert.text('#TestWKCWriteMasterDispatchSelect', '1');
+					browser.assert.text('#TestWKCWriteMasterDispatchSelectData', JSON.stringify({
+						WKCDocumentID: 'alfa',
+						WKCNoteBody: 'bravo',
+					}));
+				});
+
+			});
+		
+		});
 	
 	});
 
@@ -246,7 +289,6 @@ describe('WKCWriteMaster_Misc', function () {
 			browser.assert.text(WKCWriteMasterListItem, 'bravo');
 		});
 
-
 		context('click', function () {
 			
 			before(function () {
@@ -288,9 +330,9 @@ describe('WKCWriteMaster_Misc', function () {
 			});
 		});
 
-		it('classes WKCWriteMasterListItemSelected', function () {
-			browser.assert.elements('.WKCWriteMasterListItemSelected', 1);
-			browser.assert.hasClass(`${ WKCWriteMasterListItem }:nth-child(2)`, 'WKCWriteMasterListItemSelected');
+		it('sets OLSKResultsListItemSelected', function () {
+			browser.assert.elements('.OLSKResultsListItemSelected', 1);
+			browser.assert.hasClass(`.OLSKResultsListItem:nth-child(2)`, 'OLSKResultsListItemSelected');
 		});
 		
 	});
