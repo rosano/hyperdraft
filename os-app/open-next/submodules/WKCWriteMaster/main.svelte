@@ -1,8 +1,10 @@
 <script>
+export let WKCWriteMasterFilterText;
 export let WKCWriteMasterListItems;
 export let WKCWriteMasterListItemSelected = null;
 export let WKCWriteMasterDispatchCreate;
 export let WKCWriteMasterDispatchSelect;
+export let WKCWriteMasterDispatchFilter;
 export let WKCWriteMasterDelegateItemTitle;
 export let OLSKMobileViewInactive = false;
 
@@ -19,8 +21,6 @@ const mod = {
 
 	_ValueFilterFieldFocused: true,
 
-	_ValueFilterFieldText: '',
-
 	// DATA
 
 	DataIsMobile () {
@@ -28,6 +28,10 @@ const mod = {
 	},
 
 	// INTERFACE
+
+	InterfaceFilterFieldDidInput (event) {
+		WKCWriteMasterDispatchFilter(this.value);
+	},
 
 	InterfaceWindowDidKeydown (event) {
 		if (document.activeElement !== document.querySelector('.WKCWriteMasterFilterField')) {
@@ -42,15 +46,15 @@ const mod = {
 	// COMMAND
 
 	CommandCreateStub () {
-		if (!mod._ValueFilterFieldText.trim().length) {
+		if (!WKCWriteMasterFilterText.trim().length) {
 			return;
 		}
 
-		if (WKCWriteMasterListItemSelected && WKCWriteMasterDelegateItemTitle(WKCWriteMasterListItemSelected) === mod._ValueFilterFieldText) {
+		if (WKCWriteMasterListItemSelected && WKCWriteMasterDelegateItemTitle(WKCWriteMasterListItemSelected) === WKCWriteMasterFilterText) {
 			return;
 		}
 
-		return WKCWriteMasterDispatchCreate(`${ mod._ValueFilterFieldText }\n\n`);
+		return WKCWriteMasterDispatchCreate(`${ WKCWriteMasterFilterText }\n\n`);
 	},
 
 	// SETUP
@@ -117,7 +121,7 @@ import OLSKInputWrapper from 'OLSKInputWrapper';
 <header class="WKCWriteMasterToolbar OLSKMobileViewHeader">
 	<OLSKToolbar>
 		<OLSKInputWrapper OLSKLocalized={ OLSKLocalized }>
-			<input class="WKCWriteMasterFilterField" placeholder={ OLSKLocalized('WKCWriteMasterFilterFieldText') } bind:value={ mod._ValueFilterFieldText } />
+			<input class="WKCWriteMasterFilterField" placeholder={ OLSKLocalized('WKCWriteMasterFilterFieldText') } bind:value={ WKCWriteMasterFilterText } on:input={ mod.InterfaceFilterFieldDidInput } />
 		</OLSKInputWrapper>
 
 		<OLSKToolbarElementGroup>

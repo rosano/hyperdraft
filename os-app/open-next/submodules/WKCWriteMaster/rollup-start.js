@@ -4,6 +4,7 @@ const WKCWriteMaster = new RollupStart({
 	target: document.body,
 	props: Object.assign({
 		WKCWriteMasterListItems: [],
+		WKCWriteMasterFilterText: '',
 		WKCWriteMasterDispatchCreate: (function _WKCWriteMasterDispatchCreate (inputData) {
 			window.TestWKCWriteMasterDispatchCreate.innerHTML = parseInt(window.TestWKCWriteMasterDispatchCreate.innerHTML) + 1;
 			window.TestWKCWriteMasterDispatchCreateData.innerHTML = inputData;
@@ -11,6 +12,10 @@ const WKCWriteMaster = new RollupStart({
 		WKCWriteMasterDispatchSelect: (function _WKCWriteMasterDispatchSelect (inputData) {
 			window.TestWKCWriteMasterDispatchSelect.innerHTML = parseInt(window.TestWKCWriteMasterDispatchSelect.innerHTML) + 1;
 			window.TestWKCWriteMasterDispatchSelectData.innerHTML = JSON.stringify(inputData);
+		}),
+		WKCWriteMasterDispatchFilter: (function _WKCWriteMasterDispatchFilter (inputData) {
+			window.TestWKCWriteMasterDispatchFilter.innerHTML = parseInt(window.TestWKCWriteMasterDispatchFilter.innerHTML) + 1;
+			window.TestWKCWriteMasterDispatchFilterData.innerHTML = inputData;
 		}),
 		WKCWriteMasterDelegateItemTitle: (function _WKCWriteMasterDelegateItemTitle (inputData) {
 			return inputData.WKCNoteBody.split('\n').shift();

@@ -73,7 +73,31 @@ describe('WKCWriteMaster_Misc', function () {
 	describe('WKCWriteMasterFilterField', function() {
 
 		before(function() {
-			return browser.OLSKVisit(kDefaultRoute);
+			return browser.OLSKVisit(kDefaultRoute, {
+				WKCWriteMasterFilterText: 'alfa',
+			});
+		});
+
+		it('binds WKCWriteMasterFilterText', function () {
+			browser.assert.input(WKCWriteMasterFilterField, 'alfa');
+		});
+			
+		context('input', function () {
+		
+			before(function () {
+				browser.assert.text('#TestWKCWriteMasterDispatchFilter', '0');
+				browser.assert.text('#TestWKCWriteMasterDispatchFilterData', 'undefined');
+			});
+
+			before(function () {
+				browser.fill(WKCWriteMasterFilterField, 'bravo');
+			});
+
+			it('sends WKCWriteMasterDispatchFilter', function () {
+				browser.assert.text('#TestWKCWriteMasterDispatchFilter', '1');
+				browser.assert.text('#TestWKCWriteMasterDispatchFilterData', 'bravo');
+			});
+		
 		});
 
 		context('keydown Enter', function () {
