@@ -184,11 +184,11 @@ const mod = {
 			return mod.CommandNoteSelect(null);
 		}
 
-		mod.CommandNoteSelect(mod._ValueNotesVisible.filter(function (e) {
+		mod._ValueNoteSelected = mod._ValueNotesVisible.filter(function (e) {
 			return WKCParser.WKCParserTitleForPlaintext(e.WKCNoteBody).toLowerCase() === inputData.toLowerCase();
 		}).concat(mod._ValueNotesVisible.filter(function (e) {
 			return WKCParser.WKCParserTitleForPlaintext(e.WKCNoteBody).toLowerCase().includes(inputData.toLowerCase());
-		})).shift());
+		})).shift();
 	},
 
 	async CommandNotesExport () {
