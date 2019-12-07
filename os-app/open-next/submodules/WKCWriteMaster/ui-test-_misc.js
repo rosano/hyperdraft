@@ -81,6 +81,10 @@ describe('WKCWriteMaster_Misc', function () {
 		it('binds WKCWriteMasterFilterText', function () {
 			browser.assert.input(WKCWriteMasterFilterField, 'alfa');
 		});
+
+		it('sets InputWrapperValue', function () {
+			browser.assert.elements('.OLSKInputWrapperClearButton', 1);
+		});
 			
 		context('input', function () {
 		

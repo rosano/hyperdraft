@@ -120,7 +120,7 @@ import OLSKInputWrapper from 'OLSKInputWrapper';
 
 <header class="WKCWriteMasterToolbar OLSKMobileViewHeader">
 	<OLSKToolbar>
-		<OLSKInputWrapper OLSKLocalized={ OLSKLocalized }>
+		<OLSKInputWrapper OLSKLocalized={ OLSKLocalized } InputWrapperValue={ WKCWriteMasterFilterText }>
 			<input class="WKCWriteMasterFilterField" placeholder={ OLSKLocalized('WKCWriteMasterFilterFieldText') } bind:value={ WKCWriteMasterFilterText } on:input={ mod.InterfaceFilterFieldDidInput } />
 		</OLSKInputWrapper>
 
