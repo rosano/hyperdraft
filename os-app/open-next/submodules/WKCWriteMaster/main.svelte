@@ -11,6 +11,8 @@ export const OLSKLocalized = function(translationConstant) {
 	return OLSKInternational.OLSKInternationalLocalizedString(translationConstant, JSON.parse(`{"OLSK_I18N_SEARCH_REPLACE":"OLSK_I18N_SEARCH_REPLACE"}`)[window.OLSKPublicConstants('OLSKSharedPageCurrentLanguage')]);
 };
 
+import { OLSK_TESTING_BEHAVIOUR } from 'OLSKTesting'
+
 const mod = {
 
 	// VALUE
@@ -18,6 +20,12 @@ const mod = {
 	_ValueFilterFieldFocused: true,
 
 	_ValueFilterFieldText: '',
+
+	// DATA
+
+	DataIsMobile () {
+		return window.innerWidth <= 760;
+	},
 
 	// INTERFACE
 
@@ -68,10 +76,35 @@ const mod = {
 	LifecycleComponentDidMount () {
 		mod.SetupEverything();
 	},
+
+	LifecycleComponentDidUpdate () {
+		if (OLSK_TESTING_BEHAVIOUR()) {
+			return;
+		}
+
+		if (mod.DataIsMobile()) {
+			return;
+		}
+		
+		const element = document.querySelector('.WKCWriteMasterListItemSelected');
+
+		if (!element) {
+			return;
+		}
+		
+		element.scrollIntoView({
+			block: 'nearest',
+			inline: 'nearest',
+		});
+	},
+
 };
 
 import { onMount } from 'svelte';
 onMount(mod.LifecycleComponentDidMount);
+
+import { afterUpdate } from 'svelte';
+afterUpdate(mod.LifecycleComponentDidUpdate);
 
 import OLSKToolbar from 'OLSKToolbar';
 import OLSKToolbarElementGroup from 'OLSKToolbarElementGroup';
