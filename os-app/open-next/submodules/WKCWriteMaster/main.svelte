@@ -104,7 +104,7 @@ const mod = {
 			return;
 		}
 		
-		const element = document.querySelector('.WKCWriteMasterListItemSelected');
+		const element = document.querySelector('.OLSKResultsListItemSelected');
 
 		if (!element) {
 			return;
@@ -185,8 +185,17 @@ import OLSKResults from 'OLSKResults';
 	border-bottom: var(--WKCBorderStyle);
 }
 
-.WKCWriteMasterListItemSelected {
+.WKCWriteMasterBody :global(.OLSKResultsListItemSelected) {
 	background: #e6e6e6;
+}
+
+@media screen and (min-width: 760px) {
+
+.WKCWriteMasterFocused :global(.OLSKResultsListItemSelected) {
+	background: #1a81ff;
+	color: white;
+}
+
 }
 
 .WKCWriteMasterDebug {
