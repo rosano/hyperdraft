@@ -17,6 +17,12 @@ import { OLSK_TESTING_BEHAVIOUR } from 'OLSKTesting'
 
 const mod = {
 
+	// MESSAGE
+
+	InputWrapperDispatchClear () {
+		WKCWriteMasterDispatchFilter('');
+	},
+
 	// VALUE
 
 	_ValueFilterFieldFocused: true,
@@ -120,7 +126,7 @@ import OLSKInputWrapper from 'OLSKInputWrapper';
 
 <header class="WKCWriteMasterToolbar OLSKMobileViewHeader">
 	<OLSKToolbar>
-		<OLSKInputWrapper OLSKLocalized={ OLSKLocalized } InputWrapperValue={ WKCWriteMasterFilterText }>
+		<OLSKInputWrapper OLSKLocalized={ OLSKLocalized } InputWrapperValue={ WKCWriteMasterFilterText } on:InputWrapperDispatchClear={ mod.InputWrapperDispatchClear } >
 			<input class="WKCWriteMasterFilterField" placeholder={ OLSKLocalized('WKCWriteMasterFilterFieldText') } bind:value={ WKCWriteMasterFilterText } on:input={ mod.InterfaceFilterFieldDidInput } />
 		</OLSKInputWrapper>
 

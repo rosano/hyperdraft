@@ -104,6 +104,19 @@ describe('WKCWriteMaster_Misc', function () {
 		
 		});
 
+		context('clear', function () {
+
+			before(function () {
+				return browser.pressButton('.OLSKInputWrapperClearButton');
+			});
+
+			it('sends WKCWriteMasterDispatchFilter', function () {
+				browser.assert.text('#TestWKCWriteMasterDispatchFilter', '2');
+				browser.assert.text('#TestWKCWriteMasterDispatchFilterData', '');
+			});
+		
+		});
+
 		context('keydown Enter', function () {
 			
 			before(function () {

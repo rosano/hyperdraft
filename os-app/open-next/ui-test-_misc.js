@@ -193,7 +193,7 @@ describe('WKCWrite_Misc', function () {
 		context('clear', function () {
 			
 			before(function () {
-				browser.fill('.WKCWriteMasterFilterField', '');
+				return browser.pressButton('.OLSKInputWrapperClearButton');
 			});
 
 			it('filters no WKCWriteMasterListItem', function() {
