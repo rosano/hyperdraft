@@ -26,6 +26,18 @@ describe('WKCWrite_Misc', function () {
 
 		});
 
+		context('back', function() {
+
+			before(function () {
+				return browser.pressButton('.WIKWriteDetailToolbarBackButton');
+			});
+
+			it('focuses WKCWriteMasterFilterField', function() {
+				browser.assert.hasFocus('.WKCWriteMasterFilterField');
+			});
+
+		});
+
 		context('select', function() {
 			
 			before(function () {

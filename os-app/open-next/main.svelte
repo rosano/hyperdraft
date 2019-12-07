@@ -133,6 +133,7 @@ const mod = {
 		mod._ValueNoteSelected = inputData;
 
 		if (!inputData) {
+			document.querySelector('.WKCWriteMasterFilterField').focus();
 			return;
 		}
 
