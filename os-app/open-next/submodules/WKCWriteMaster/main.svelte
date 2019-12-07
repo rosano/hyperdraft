@@ -165,4 +165,8 @@ import OLSKInputWrapper from 'OLSKInputWrapper';
 .WKCWriteMasterListItem:last-of-type {
 	border-bottom: none;
 }
+
+.WKCWriteMasterListItemSelected {
+	background: #e6e6e6;
+}
 </style>
