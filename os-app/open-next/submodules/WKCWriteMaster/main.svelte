@@ -40,11 +40,11 @@ const mod = {
 		WKCWriteMasterDispatchFilter(this.value);
 	},
 
-	InterfaceCreateButtonDidKeydown () {
+	InterfaceCreateButtonDidClick () {
 		WKCWriteMasterDispatchCreate();
 	},
 
-	InterfaceExportButtonDidKeydown () {
+	InterfaceExportButtonDidClick () {
 		WKCWriteMasterDispatchExport();
 	},
 
@@ -140,7 +140,7 @@ import OLSKInputWrapper from 'OLSKInputWrapper';
 		</OLSKInputWrapper>
 
 		<OLSKToolbarElementGroup>
-			<button class="WKCWriteMasterCreateButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable" on:click={ mod.InterfaceCreateButtonDidKeydown } accesskey="n">{ OLSKLocalized('WKCWriteMasterCreateButtonText') }</button>
+			<button class="WKCWriteMasterCreateButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable" on:click={ mod.InterfaceCreateButtonDidClick } accesskey="n">{ OLSKLocalized('WKCWriteMasterCreateButtonText') }</button>
 		</OLSKToolbarElementGroup>
 	</OLSKToolbar>
 </header>
@@ -153,7 +153,7 @@ import OLSKInputWrapper from 'OLSKInputWrapper';
 	{/each}
 	
 	<div class="WKCWriteMasterDebug">
-		<button class="WKCWriteExportButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle" on:click={ mod.InterfaceExportButtonDidKeydown }>{ OLSKLocalized('WKCUpdateExportText') }</button>
+		<button class="WKCWriteExportButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle" on:click={ mod.InterfaceExportButtonDidClick }>{ OLSKLocalized('WKCUpdateExportText') }</button>
 	</div>
 </section>
 
