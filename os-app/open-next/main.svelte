@@ -132,9 +132,12 @@ const mod = {
 	CommandNoteSelect(inputData) {
 		mod._ValueNoteSelected = inputData;
 
+		if (!inputData && !OLSK_TESTING_BEHAVIOUR()) {
+			document.querySelector('.WKCWriteMasterBody').scrollTo(0, 0);
+		};
+
 		if (!inputData) {
-			document.querySelector('.WKCWriteMasterFilterField').focus();
-			return;
+			return document.querySelector('.WKCWriteMasterFilterField').focus();
 		}
 
 		if (mod.DataIsMobile()) {
