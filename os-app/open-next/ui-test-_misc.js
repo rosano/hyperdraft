@@ -16,7 +16,7 @@ describe('WKCWrite_Misc', function () {
 		browser.assert.elements('.OLSKResultsListItemSelected', 0);
 	});
 
-	it('classes WIKWriteDetail', function () {
+	it('classes OLSKMobileViewInactive', function () {
 		browser.assert.hasClass('.WIKWriteDetail', 'OLSKMobileViewInactive');
 	});
 
@@ -42,7 +42,7 @@ describe('WKCWrite_Misc', function () {
 			browser.assert.elements('.OLSKResultsListItemSelected', 1);
 		});
 
-		it('classes WIKWriteDetail', function() {
+		it('classes OLSKMobileViewInactive', function() {
 			browser.assert.hasNoClass('.WIKWriteDetail', 'OLSKMobileViewInactive');
 		});
 
@@ -70,7 +70,7 @@ describe('WKCWrite_Misc', function () {
 			browser.assert.elements('.OLSKResultsListItemSelected', 0);
 		});
 
-		it('classes WIKWriteDetail', function() {
+		it('classes OLSKMobileViewInactive', function() {
 			browser.assert.hasClass('.WIKWriteDetail', 'OLSKMobileViewInactive');
 		});
 
@@ -98,7 +98,7 @@ describe('WKCWrite_Misc', function () {
 			return browser.click('.WKCWriteMasterListItem');
 		});
 
-		it('classes WKCWriteMaster', function() {
+		it('classes OLSKMobileViewInactive', function() {
 			browser.assert.hasClass('.WKCWriteMaster', 'OLSKMobileViewInactive');
 		});
 
@@ -106,7 +106,7 @@ describe('WKCWrite_Misc', function () {
 			browser.assert.elements('.OLSKResultsListItemSelected', 1);
 		});
 
-		it('classes WIKWriteDetail', function() {
+		it('classes OLSKMobileViewInactive', function() {
 			browser.assert.hasNoClass('.WIKWriteDetail', 'OLSKMobileViewInactive');
 		});
 
