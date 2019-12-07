@@ -52,7 +52,7 @@ const mod = {
 		mod.ControlNoteCreate(inputData);
 	},
 
-	WKCWriteMasterDispatchSelect (inputData) {
+	WKCWriteMasterDispatchClick (inputData) {
 		mod.ControlNoteSelect(inputData);
 	},
 
@@ -304,7 +304,7 @@ import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svel
 		WKCWriteMasterListItemSelected={ mod._ValueNoteSelected }
 		WKCWriteMasterFilterText={ mod._ValueFilterText }
 		WKCWriteMasterDispatchCreate={ mod.WKCWriteMasterDispatchCreate }
-		WKCWriteMasterDispatchSelect={ mod.WKCWriteMasterDispatchSelect }
+		WKCWriteMasterDispatchClick={ mod.WKCWriteMasterDispatchClick }
 		WKCWriteMasterDispatchFilter={ mod.WKCWriteMasterDispatchFilter }
 		WKCWriteMasterDispatchExport={ mod.WKCWriteMasterDispatchExport }
 		WKCWriteMasterDelegateItemTitle={ mod.WKCWriteMasterDelegateItemTitle }

@@ -9,9 +9,9 @@ const WKCWriteMaster = new RollupStart({
 			window.TestWKCWriteMasterDispatchCreate.innerHTML = parseInt(window.TestWKCWriteMasterDispatchCreate.innerHTML) + 1;
 			window.TestWKCWriteMasterDispatchCreateData.innerHTML = inputData;
 		}),
-		WKCWriteMasterDispatchSelect: (function _WKCWriteMasterDispatchSelect (inputData) {
-			window.TestWKCWriteMasterDispatchSelect.innerHTML = parseInt(window.TestWKCWriteMasterDispatchSelect.innerHTML) + 1;
-			window.TestWKCWriteMasterDispatchSelectData.innerHTML = JSON.stringify(inputData);
+		WKCWriteMasterDispatchClick: (function _WKCWriteMasterDispatchClick (inputData) {
+			window.TestWKCWriteMasterDispatchClick.innerHTML = parseInt(window.TestWKCWriteMasterDispatchClick.innerHTML) + 1;
+			window.TestWKCWriteMasterDispatchClickData.innerHTML = JSON.stringify(inputData);
 		}),
 		WKCWriteMasterDispatchFilter: (function _WKCWriteMasterDispatchFilter (inputData) {
 			window.TestWKCWriteMasterDispatchFilter.innerHTML = parseInt(window.TestWKCWriteMasterDispatchFilter.innerHTML) + 1;

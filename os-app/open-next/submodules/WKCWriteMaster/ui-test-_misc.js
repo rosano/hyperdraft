@@ -292,17 +292,17 @@ describe('WKCWriteMaster_Misc', function () {
 		context('click', function () {
 			
 			before(function () {
-				browser.assert.text('#TestWKCWriteMasterDispatchSelect', '0');
-				browser.assert.text('#TestWKCWriteMasterDispatchSelectData', 'undefined');
+				browser.assert.text('#TestWKCWriteMasterDispatchClick', '0');
+				browser.assert.text('#TestWKCWriteMasterDispatchClickData', 'undefined');
 			});
 			
 			before(function () {
 				return browser.click(WKCWriteMasterListItem);
 			});
 
-			it('sends WKCWriteMasterDispatchSelect', function () {
-				browser.assert.text('#TestWKCWriteMasterDispatchSelect', '1');
-				browser.assert.text('#TestWKCWriteMasterDispatchSelectData', JSON.stringify({
+			it('sends WKCWriteMasterDispatchClick', function () {
+				browser.assert.text('#TestWKCWriteMasterDispatchClick', '1');
+				browser.assert.text('#TestWKCWriteMasterDispatchClickData', JSON.stringify({
 					WKCDocumentID: 'alfa',
 					WKCNoteBody: 'bravo',
 				}));

@@ -3,7 +3,8 @@ export let WKCWriteMasterFilterText;
 export let WKCWriteMasterListItems;
 export let WKCWriteMasterListItemSelected = null;
 export let WKCWriteMasterDispatchCreate;
-export let WKCWriteMasterDispatchSelect;
+export let WKCWriteMasterDispatchClick;
+export let WKCWriteMasterDispatchArrow;
 export let WKCWriteMasterDispatchFilter;
 export let WKCWriteMasterDispatchExport;
 export let WKCWriteMasterDelegateItemTitle;
@@ -145,7 +146,7 @@ import OLSKResults from 'OLSKResults';
 </header>
 
 <section class="WKCWriteMasterBody OLSKMobileViewBody">
-	<OLSKResults OLSKResultsListItems={ WKCWriteMasterListItems } OLSKResultsListItemSelected={ WKCWriteMasterListItemSelected } OLSKResultsDispatchClick={ WKCWriteMasterDispatchSelect } OLSKResultsDispatchArrow={ WKCWriteMasterDispatchSelect } let:OLSKResultsListItem={ e } >
+	<OLSKResults OLSKResultsListItems={ WKCWriteMasterListItems } OLSKResultsListItemSelected={ WKCWriteMasterListItemSelected } OLSKResultsDispatchClick={ WKCWriteMasterDispatchClick } OLSKResultsDispatchArrow={ WKCWriteMasterDispatchArrow } let:OLSKResultsListItem={ e } >
 		<div class="WKCWriteMasterListItem">
 			<strong>{ e.WKCNoteBody }</strong>
 		</div>
