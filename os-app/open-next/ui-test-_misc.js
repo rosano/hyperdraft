@@ -57,6 +57,30 @@ describe('WKCWrite_Misc', function () {
 			});
 
 		});
+
+		context('filter', function() {
+
+			before(function () {
+				browser.fill('.WKCEditorFieldDebug', 'alfa');
+			});
+
+			before(function () {
+				return browser.pressButton('.WKCWriteMasterCreateButton');
+			});
+
+			before(function () {
+				browser.fill('.WKCEditorFieldDebug', 'bravo');
+			});
+
+			before(function () {
+				browser.fill('.WKCWriteMasterFilterField', 'bravo');
+			});
+
+			it('filters WKCWriteMasterListItem', function() {
+				browser.assert.elements('.WKCWriteMasterListItem', 1);
+			});
+
+		});
 	
 	});
 

@@ -20,6 +20,8 @@ const mod = {
 	
 	_ValueNoteSelected: undefined,
 	
+	_ValueFilterText: '',
+	
 	_ValueStorageWidgetHidden: true,
 
 	_ValueFooterStorageStatus: '',
@@ -48,6 +50,10 @@ const mod = {
 		mod.CommandNoteSelect(inputData);
 	},
 
+	WKCWriteMasterDispatchFilter (inputData) {
+		mod.CommandFilter(inputData);
+	},
+
 	WKCWriteMasterDelegateItemTitle (inputData) {
 		return WKCParser.WKCParserTitleForPlaintext(inputData.WKCNoteBody);
 	},
@@ -69,7 +75,7 @@ const mod = {
 	WIKWriteDetailDispatchOpen () {},
 
 	MessageNotesAllDidChange() {
-		mod._ValueNotesAll = $WKCNotesAllStore;
+		mod.ReactNotesAll();
 	},
 
 	FooterDispatchExport () {
@@ -158,6 +164,12 @@ const mod = {
 
 		mod.CommandNoteSelect(null);
 	},
+	
+	CommandFilter(inputData) {
+		mod._ValueFilterText = inputData;
+
+		mod.ReactNotesAll();
+	},
 
 	async CommandNotesExport () {
 		let zip = new JSZip();
@@ -208,6 +220,20 @@ const mod = {
 		WKCNotesAllStore.set(await WKCNoteAction.WKCNoteActionQuery(storageClient, {}));
 	},
 
+	// REACT
+
+	ReactNotesAll () {
+		mod._ValueNotesAll = (function(inputData) {
+			if (!mod._ValueFilterText) {
+				return inputData;
+			}
+
+			return inputData.filter(function (e) {
+				return e.WKCNoteBody.toLowerCase().match(mod._ValueFilterText.toLowerCase());
+			});
+		})($WKCNotesAllStore).sort(WKCWriteLogic.WKCWriteSort);
+	},
+
 	// SETUP
 
 	SetupEverything () {
@@ -252,8 +278,10 @@ import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svel
 	<WKCWriteMaster
 		WKCWriteMasterListItems={ mod._ValueNotesAll }
 		WKCWriteMasterListItemSelected={ mod._ValueNoteSelected }
+		WKCWriteMasterFilterText={ mod._ValueFilterText }
 		WKCWriteMasterDispatchCreate={ mod.WKCWriteMasterDispatchCreate }
 		WKCWriteMasterDispatchSelect={ mod.WKCWriteMasterDispatchSelect }
+		WKCWriteMasterDispatchFilter={ mod.WKCWriteMasterDispatchFilter }
 		WKCWriteMasterDelegateItemTitle={ mod.WKCWriteMasterDelegateItemTitle }
 		OLSKMobileViewInactive={ mod._ValueNoteSelected }
 		/>

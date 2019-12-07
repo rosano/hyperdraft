@@ -2,7 +2,6 @@
 import { OLSKLocalized } from '../_shared/common/global.js';
 import { storageClient, WKCPersistenceIsLoading, isMobile, isInErrorState, WKCNotesAllStore } from './persistence.js';
 
-
 import { _WIKIsTestingBehaviour } from '../_shared/common/global.js';
 import * as WKCNoteMetal from '../_shared/WKCNote/metal.js';
 import { WKCNoteModelPostJSONParse } from '../_shared/WKCNote/model.js';
