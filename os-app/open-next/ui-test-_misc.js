@@ -84,8 +84,40 @@ describe('WKCWrite_Misc', function () {
 
 	});
 
+	context('arrow', function test_arrow () {
+		
+		before(function () {
+			return browser.OLSKFireKeyboardEvent(browser.window, 'ArrowDown');
+		});
+
+		it('classes WKCWriteMasterFocused', function() {
+			browser.assert.hasClass('.WKCWriteMaster', 'WKCWriteMasterFocused');
+		});
+
+		it('classes OLSKMobileViewInactive', function() {
+			browser.assert.hasNoClass('.WKCWriteMaster', 'OLSKMobileViewInactive');
+		});
+
+		it('sets WKCWriteMasterListItemSelected', function () {
+			browser.assert.elements('.OLSKResultsListItemSelected', 1);
+		});
+
+		it('classes OLSKMobileViewInactive', function() {
+			browser.assert.hasClass('.WIKWriteDetail', 'OLSKMobileViewInactive');
+		});
+
+		it('sets WIKWriteDetailItem', function () {
+			browser.assert.elements('.WIKWriteDetailPlaceholder', 0);
+		});
+
+	});
+
 	context('click', function test_click () {
 		
+		before(function () {
+			return browser.pressButton('.WIKWriteDetailToolbarBackButton');
+		});
+
 		before(function () {
 			return browser.click('.WKCWriteMasterFilterField');
 		});
@@ -96,6 +128,10 @@ describe('WKCWrite_Misc', function () {
 		
 		before(function () {
 			return browser.click('.WKCWriteMasterListItem');
+		});
+
+		it.skip('classes WKCWriteMasterFocused', function() {
+			browser.assert.hasNoClass('.WKCWriteMaster', 'WKCWriteMasterFocused');
 		});
 
 		it('classes OLSKMobileViewInactive', function() {

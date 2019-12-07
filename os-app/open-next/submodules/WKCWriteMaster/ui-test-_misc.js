@@ -84,16 +84,16 @@ describe('WKCWriteMaster_Misc', function () {
 			context('keydown ArrowUp', function() {
 
 				before(function () {
-					browser.assert.text('#TestWKCWriteMasterDispatchSelect', '0');
+					browser.assert.text('#TestWKCWriteMasterDispatchArrow', '0');
 				});
 
 				before(function () {
 					return browser.OLSKFireKeyboardEvent(browser.window, 'ArrowUp');
 				});
 
-				it('sends WKCWriteMasterDispatchSelect', function () {
-					browser.assert.text('#TestWKCWriteMasterDispatchSelect', '1');
-					browser.assert.text('#TestWKCWriteMasterDispatchSelectData', JSON.stringify({
+				it('sends WKCWriteMasterDispatchArrow', function () {
+					browser.assert.text('#TestWKCWriteMasterDispatchArrow', '1');
+					browser.assert.text('#TestWKCWriteMasterDispatchArrowData', JSON.stringify({
 						WKCDocumentID: 'alfa',
 						WKCNoteBody: 'bravo',
 					}));

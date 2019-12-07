@@ -36,6 +36,8 @@ const mod = {
 
 	WIKWriteDetailInstance: undefined,
 
+	OLSKMobileViewInactive: false,
+
 	// DATA
 
 	DataIsMobile () {
@@ -54,6 +56,10 @@ const mod = {
 
 	WKCWriteMasterDispatchClick (inputData) {
 		mod.ControlNoteSelect(inputData);
+	},
+
+	WKCWriteMasterDispatchArrow (inputData) {
+		mod._ValueNoteSelected = inputData;
 	},
 
 	WKCWriteMasterDispatchFilter (inputData) {
@@ -153,8 +159,12 @@ const mod = {
 		};
 
 		if (!inputData) {
+			mod.OLSKMobileViewInactive = false;
+
 			return document.querySelector('.WKCWriteMasterFilterField').focus();
 		}
+
+		mod.OLSKMobileViewInactive = true;
 
 		if (mod.DataIsMobile()) {
 			return;
@@ -305,10 +315,11 @@ import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svel
 		WKCWriteMasterFilterText={ mod._ValueFilterText }
 		WKCWriteMasterDispatchCreate={ mod.WKCWriteMasterDispatchCreate }
 		WKCWriteMasterDispatchClick={ mod.WKCWriteMasterDispatchClick }
+		WKCWriteMasterDispatchArrow={ mod.WKCWriteMasterDispatchArrow }
 		WKCWriteMasterDispatchFilter={ mod.WKCWriteMasterDispatchFilter }
 		WKCWriteMasterDispatchExport={ mod.WKCWriteMasterDispatchExport }
 		WKCWriteMasterDelegateItemTitle={ mod.WKCWriteMasterDelegateItemTitle }
-		OLSKMobileViewInactive={ mod._ValueNoteSelected }
+		OLSKMobileViewInactive={ mod.OLSKMobileViewInactive }
 		/>
 	
 	<WIKWriteDetail
@@ -317,7 +328,7 @@ import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svel
 		WIKWriteDetailDispatchDiscard={ mod.WIKWriteDetailDispatchDiscard }
 		WIKWriteDetailDispatchUpdate={ mod.WIKWriteDetailDispatchUpdate }
 		WIKWriteDetailDispatchOpen={ mod.WIKWriteDetailDispatchOpen }
-		OLSKMobileViewInactive={ !mod._ValueNoteSelected }
+		OLSKMobileViewInactive={ !mod.OLSKMobileViewInactive }
 		bind:this={ mod.WIKWriteDetailInstance }
 		/>
 </OLSKViewportContent>

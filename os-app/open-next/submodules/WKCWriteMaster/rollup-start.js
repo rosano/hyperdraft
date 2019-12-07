@@ -13,6 +13,10 @@ const WKCWriteMaster = new RollupStart({
 			window.TestWKCWriteMasterDispatchClick.innerHTML = parseInt(window.TestWKCWriteMasterDispatchClick.innerHTML) + 1;
 			window.TestWKCWriteMasterDispatchClickData.innerHTML = JSON.stringify(inputData);
 		}),
+		WKCWriteMasterDispatchArrow: (function _WKCWriteMasterDispatchArrow (inputData) {
+			window.TestWKCWriteMasterDispatchArrow.innerHTML = parseInt(window.TestWKCWriteMasterDispatchArrow.innerHTML) + 1;
+			window.TestWKCWriteMasterDispatchArrowData.innerHTML = JSON.stringify(inputData);
+		}),
 		WKCWriteMasterDispatchFilter: (function _WKCWriteMasterDispatchFilter (inputData) {
 			window.TestWKCWriteMasterDispatchFilter.innerHTML = parseInt(window.TestWKCWriteMasterDispatchFilter.innerHTML) + 1;
 			window.TestWKCWriteMasterDispatchFilterData.innerHTML = inputData;
