@@ -54,13 +54,11 @@ const mod = {
 		}
 
 		if (event.key === 'Enter') {
-			return mod.CommandCreateStub();
+			return mod.InterfaceWindowDidKeydownEnter();
 		}
 	},
 
-	// COMMAND
-
-	CommandCreateStub () {
+	InterfaceWindowDidKeydownEnter () {
 		if (!WKCWriteMasterFilterText.trim().length) {
 			return;
 		}
@@ -68,7 +66,7 @@ const mod = {
 		if (WKCWriteMasterListItemSelected && WKCWriteMasterDelegateItemTitle(WKCWriteMasterListItemSelected) === WKCWriteMasterFilterText) {
 			return;
 		}
-
+		
 		return WKCWriteMasterDispatchCreate(`${ WKCWriteMasterFilterText }\n\n`);
 	},
 
