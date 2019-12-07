@@ -16,7 +16,13 @@ const mod = {
 
 	// VALUE
 
-	_ValueNotesAll: [],
+	_ValueNotesVisible: [],
+
+	ValueNotesVisible(inputData) {
+		mod._ValueNotesVisible = (!mod._ValueFilterText ? inputData : inputData.filter(function (e) {
+			return e.WKCNoteBody.toLowerCase().match(mod._ValueFilterText.toLowerCase());
+		})).sort(WKCWriteLogic.WKCWriteSort);
+	},
 	
 	_ValueNoteSelected: undefined,
 	
@@ -74,8 +80,8 @@ const mod = {
 
 	WIKWriteDetailDispatchOpen () {},
 
-	MessageNotesAllDidChange() {
-		mod.ReactNotesAll();
+	MessageNotesAllDidChange(inputData) {
+		mod.ValueNotesVisible(inputData);
 	},
 
 	FooterDispatchExport () {
@@ -168,7 +174,21 @@ const mod = {
 	CommandFilter(inputData) {
 		mod._ValueFilterText = inputData;
 
-		mod.ReactNotesAll();
+		mod.ValueNotesVisible($WKCNotesAllStore);
+
+		if (!inputData) {
+			return mod.CommandNoteSelect(null);
+		}
+
+		if (!mod._ValueNotesVisible.length) {
+			return mod.CommandNoteSelect(null);
+		}
+
+		mod.CommandNoteSelect(mod._ValueNotesVisible.filter(function (e) {
+			return WKCParser.WKCParserTitleForPlaintext(e.WKCNoteBody).toLowerCase() === inputData.toLowerCase();
+		}).concat(mod._ValueNotesVisible.filter(function (e) {
+			return WKCParser.WKCParserTitleForPlaintext(e.WKCNoteBody).toLowerCase().includes(inputData.toLowerCase());
+		})).shift());
 	},
 
 	async CommandNotesExport () {
@@ -220,20 +240,6 @@ const mod = {
 		WKCNotesAllStore.set(await WKCNoteAction.WKCNoteActionQuery(storageClient, {}));
 	},
 
-	// REACT
-
-	ReactNotesAll () {
-		mod._ValueNotesAll = (function(inputData) {
-			if (!mod._ValueFilterText) {
-				return inputData;
-			}
-
-			return inputData.filter(function (e) {
-				return e.WKCNoteBody.toLowerCase().match(mod._ValueFilterText.toLowerCase());
-			});
-		})($WKCNotesAllStore).sort(WKCWriteLogic.WKCWriteSort);
-	},
-
 	// SETUP
 
 	SetupEverything () {
@@ -276,7 +282,7 @@ import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svel
 
 <OLSKViewportContent>
 	<WKCWriteMaster
-		WKCWriteMasterListItems={ mod._ValueNotesAll }
+		WKCWriteMasterListItems={ mod._ValueNotesVisible }
 		WKCWriteMasterListItemSelected={ mod._ValueNoteSelected }
 		WKCWriteMasterFilterText={ mod._ValueFilterText }
 		WKCWriteMasterDispatchCreate={ mod.WKCWriteMasterDispatchCreate }
