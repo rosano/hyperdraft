@@ -15,9 +15,15 @@ const WKCWriteMaster = new RollupStart({
 		WKCWriteMasterDelegateItemTitle: (function _WKCWriteMasterDelegateItemTitle (inputData) {
 			return inputData.WKCNoteBody.split('\n').shift();
 		}),
-	}, Object.fromEntries(Array.from((new window.URLSearchParams(window.location.search)).entries()).map(function (e) {
+	}, Object.fromEntries(Array.from((new window.URLSearchParams(window.location.search)).entries()).map(function (e, index, coll) {
 		if (['WKCWriteMasterListItems', 'WKCWriteMasterListItemSelected'].includes(e[0])) {
 			e[1] = JSON.parse(e[1]);
+		}
+
+		if (e[0] === 'WKCWriteMasterListItemSelected') {
+			e[1] = coll[0][1].filter(function (item) {
+				return item.WKCDocumentID === e[1].WKCDocumentID;
+			}).shift();
 		}
 
 		return e;

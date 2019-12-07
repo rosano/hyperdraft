@@ -247,7 +247,7 @@ describe('WKCWriteMaster_Misc', function () {
 			});
 		});
 
-		it('classes 1', function () {
+		it('classes WKCWriteMasterListItemSelected', function () {
 			browser.assert.elements('.WKCWriteMasterListItemSelected', 1);
 			browser.assert.hasClass(`${ WKCWriteMasterListItem }:nth-child(2)`, 'WKCWriteMasterListItemSelected');
 		});

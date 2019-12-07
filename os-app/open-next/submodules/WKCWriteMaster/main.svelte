@@ -128,7 +128,7 @@ import OLSKInputWrapper from 'OLSKInputWrapper';
 
 <section class="WKCWriteMasterBody OLSKMobileViewBody">
 	{#each WKCWriteMasterListItems as e}
-		<div class="WKCWriteMasterListItem OLSKLayoutElementTappable" class:WKCWriteMasterListItemSelected={ (WKCWriteMasterListItemSelected || {}).WKCDocumentID === e.WKCDocumentID } on:click={ () => WKCWriteMasterDispatchSelect(e) } >
+		<div class="WKCWriteMasterListItem OLSKLayoutElementTappable" class:WKCWriteMasterListItemSelected={ WKCWriteMasterListItemSelected === e } on:click={ () => WKCWriteMasterDispatchSelect(e) } >
 			<strong>{ e.WKCNoteBody }</strong>
 		</div>
 	{/each}
