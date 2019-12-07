@@ -5,6 +5,7 @@ export let WKCWriteMasterListItemSelected = null;
 export let WKCWriteMasterDispatchCreate;
 export let WKCWriteMasterDispatchSelect;
 export let WKCWriteMasterDispatchFilter;
+export let WKCWriteMasterDispatchExport;
 export let WKCWriteMasterDelegateItemTitle;
 export let OLSKMobileViewInactive = false;
 
@@ -37,6 +38,14 @@ const mod = {
 
 	InterfaceFilterFieldDidInput (event) {
 		WKCWriteMasterDispatchFilter(this.value);
+	},
+
+	InterfaceCreateButtonDidKeydown () {
+		WKCWriteMasterDispatchCreate();
+	},
+
+	InterfaceExportButtonDidKeydown () {
+		WKCWriteMasterDispatchExport();
 	},
 
 	InterfaceWindowDidKeydown (event) {
@@ -131,7 +140,7 @@ import OLSKInputWrapper from 'OLSKInputWrapper';
 		</OLSKInputWrapper>
 
 		<OLSKToolbarElementGroup>
-			<button class="WKCWriteMasterCreateButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable" on:click={ WKCWriteMasterDispatchCreate } accesskey="n">{ OLSKLocalized('WKCWriteMasterCreateButtonText') }</button>
+			<button class="WKCWriteMasterCreateButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable" on:click={ mod.InterfaceCreateButtonDidKeydown } accesskey="n">{ OLSKLocalized('WKCWriteMasterCreateButtonText') }</button>
 		</OLSKToolbarElementGroup>
 	</OLSKToolbar>
 </header>
@@ -142,6 +151,10 @@ import OLSKInputWrapper from 'OLSKInputWrapper';
 			<strong>{ e.WKCNoteBody }</strong>
 		</div>
 	{/each}
+	
+	<div class="WKCWriteMasterDebug">
+		<button class="WKCWriteExportButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle" on:click={ mod.InterfaceExportButtonDidKeydown }>{ OLSKLocalized('WKCUpdateExportText') }</button>
+	</div>
 </section>
 
 </div>
@@ -172,11 +185,11 @@ import OLSKInputWrapper from 'OLSKInputWrapper';
 	border-bottom: var(--WKCBorderStyle);
 }
 
-.WKCWriteMasterListItem:last-of-type {
-	border-bottom: none;
-}
-
 .WKCWriteMasterListItemSelected {
 	background: #e6e6e6;
+}
+
+.WKCWriteMasterDebug {
+	padding: 5px;
 }
 </style>

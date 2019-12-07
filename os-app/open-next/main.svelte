@@ -60,6 +60,10 @@ const mod = {
 		mod.CommandFilter(inputData);
 	},
 
+	WKCWriteMasterDispatchExport () {
+		mod.CommandNotesExportTXT();
+	},
+
 	WKCWriteMasterDelegateItemTitle (inputData) {
 		return WKCParser.WKCParserTitleForPlaintext(inputData.WKCNoteBody);
 	},
@@ -240,6 +244,20 @@ const mod = {
 		WKCNotesAllStore.set(await WKCNoteAction.WKCNoteActionQuery(storageClient, {}));
 	},
 
+	CommandNotesExportTXT () {
+		let zip = new JSZip();
+
+		$WKCNotesAllStore.forEach(function (e) {
+			zip.file(`${ e.WKCNoteID }.txt`, e.WKCNoteBody, {
+				date: e.WKCNoteModificationDate,
+			});
+		});
+		
+		zip.generateAsync({type: 'blob'}).then(function (content) {
+			saveAs(content, 'notes.zip');
+		});
+	},
+
 	// SETUP
 
 	SetupEverything () {
@@ -288,6 +306,7 @@ import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svel
 		WKCWriteMasterDispatchCreate={ mod.WKCWriteMasterDispatchCreate }
 		WKCWriteMasterDispatchSelect={ mod.WKCWriteMasterDispatchSelect }
 		WKCWriteMasterDispatchFilter={ mod.WKCWriteMasterDispatchFilter }
+		WKCWriteMasterDispatchExport={ mod.WKCWriteMasterDispatchExport }
 		WKCWriteMasterDelegateItemTitle={ mod.WKCWriteMasterDelegateItemTitle }
 		OLSKMobileViewInactive={ mod._ValueNoteSelected }
 		/>

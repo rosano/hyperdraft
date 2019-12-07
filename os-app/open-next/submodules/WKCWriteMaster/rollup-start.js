@@ -17,6 +17,7 @@ const WKCWriteMaster = new RollupStart({
 			window.TestWKCWriteMasterDispatchFilter.innerHTML = parseInt(window.TestWKCWriteMasterDispatchFilter.innerHTML) + 1;
 			window.TestWKCWriteMasterDispatchFilterData.innerHTML = inputData;
 		}),
+		WKCWriteMasterDispatchExport: (function _WKCWriteMasterDispatchExport () {}),
 		WKCWriteMasterDelegateItemTitle: (function _WKCWriteMasterDelegateItemTitle (inputData) {
 			return inputData.WKCNoteBody.split('\n').shift();
 		}),
