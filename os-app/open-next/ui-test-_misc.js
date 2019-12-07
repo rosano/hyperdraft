@@ -72,12 +72,40 @@ describe('WKCWrite_Misc', function () {
 				browser.fill('.WKCEditorFieldDebug', 'bravo');
 			});
 
-			before(function () {
-				browser.fill('.WKCWriteMasterFilterField', 'bravo');
+			context('no match', function () {
+				
+				before(function () {
+					browser.fill('.WKCWriteMasterFilterField', 'charlie');
+				});
+
+				it('filters all WKCWriteMasterListItem', function() {
+					browser.assert.elements('.WKCWriteMasterListItem', 0);
+				});
+			
 			});
 
-			it('filters WKCWriteMasterListItem', function() {
-				browser.assert.elements('.WKCWriteMasterListItem', 1);
+			context('match', function () {
+
+				before(function () {
+					browser.fill('.WKCWriteMasterFilterField', 'bravo');
+				});
+
+				it('filters some WKCWriteMasterListItem', function() {
+					browser.assert.elements('.WKCWriteMasterListItem', 1);
+				});
+			
+			});
+
+			context('clear', function () {
+				
+				before(function () {
+					browser.fill('.WKCWriteMasterFilterField', '');
+				});
+
+				it('filters no WKCWriteMasterListItem', function() {
+					browser.assert.elements('.WKCWriteMasterListItem', 2);
+				});
+			
 			});
 
 		});
