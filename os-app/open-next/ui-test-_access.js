@@ -66,7 +66,7 @@ describe('WKCWrite_Access', function () {
 	
 	});
 
-	context('select', function () {
+	context('click', function () {
 		
 		before(function () {
 			return browser.click('.WKCWriteMasterListItem');

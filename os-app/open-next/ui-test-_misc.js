@@ -84,7 +84,7 @@ describe('WKCWrite_Misc', function () {
 
 	});
 
-	context('select', function test_select () {
+	context('click', function test_click () {
 		
 		before(function () {
 			return browser.click('.WKCWriteMasterFilterField');
