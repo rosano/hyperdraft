@@ -4,7 +4,7 @@ const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
 describe('WKCWriteMaster_Misc', function () {
 
-	describe('WKCWriteMaster', function () {
+	describe('WKCWriteMaster', function test_WKCWriteMaster () {
 
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute);
@@ -62,7 +62,7 @@ describe('WKCWriteMaster_Misc', function () {
 	
 	});
 
-	describe('WKCWriteMasterToolbar', function () {
+	describe('WKCWriteMasterToolbar', function test_WKCWriteMasterToolbar () {
 		
 		it('classes OLSKMobileViewHeader', function () {
 			browser.assert.hasClass(WKCWriteMasterToolbar, 'OLSKMobileViewHeader');
@@ -70,7 +70,7 @@ describe('WKCWriteMaster_Misc', function () {
 	
 	});
 
-	describe('WKCWriteMasterFilterField', function() {
+	describe('WKCWriteMasterFilterField', function test_WKCWriteMasterFilterField() {
 
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
@@ -173,7 +173,7 @@ describe('WKCWriteMaster_Misc', function () {
 
 	});
 
-	describe('WKCWriteMasterCreateButton', function () {
+	describe('WKCWriteMasterCreateButton', function test_WKCWriteMasterCreateButton () {
 		
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute);
@@ -206,7 +206,7 @@ describe('WKCWriteMaster_Misc', function () {
 	
 	});
 
-	describe('WKCWriteMasterBody', function () {
+	describe('WKCWriteMasterBody', function test_WKCWriteMasterBody () {
 		
 		it('classes OLSKMobileViewBody', function () {
 			browser.assert.hasClass(WKCWriteMasterBody, 'OLSKMobileViewBody');
@@ -214,7 +214,7 @@ describe('WKCWriteMaster_Misc', function () {
 	
 	});
 
-	describe('WKCWriteMasterListItem', function() {
+	describe('WKCWriteMasterListItem', function test_WKCWriteMasterListItem() {
 		
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
@@ -253,7 +253,7 @@ describe('WKCWriteMaster_Misc', function () {
 		
 	});
 
-	describe('WKCWriteMasterListItemSelected', function() {
+	describe('WKCWriteMasterListItemSelected', function test_WKCWriteMasterListItemSelected() {
 		
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
