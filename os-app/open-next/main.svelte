@@ -49,19 +49,19 @@ const mod = {
 	},
 
 	WKCWriteMasterDispatchCreate (inputData) {
-		mod.CommandNoteCreate(inputData);
+		mod.ControlNoteCreate(inputData);
 	},
 
 	WKCWriteMasterDispatchSelect (inputData) {
-		mod.CommandNoteSelect(inputData);
+		mod.ControlNoteSelect(inputData);
 	},
 
 	WKCWriteMasterDispatchFilter (inputData) {
-		mod.CommandFilter(inputData);
+		mod.ControlFilter(inputData);
 	},
 
 	WKCWriteMasterDispatchExport () {
-		mod.CommandNotesExportTXT();
+		mod.ControlNotesExportTXT();
 	},
 
 	WKCWriteMasterDelegateItemTitle (inputData) {
@@ -69,17 +69,17 @@ const mod = {
 	},
 
 	WIKWriteDetailDispatchBack () {
-		mod.CommandNoteSelect(null);
+		mod.ControlNoteSelect(null);
 	},
 
 	WIKWriteDetailDispatchDiscard (inputData) {
-		mod.CommandNoteDiscard(inputData);
+		mod.ControlNoteDiscard(inputData);
 	},
 
 	WIKWriteDetailDispatchUpdate (inputData) {
 		mod._ValueNoteSelected.WKCNoteBody = inputData;
 		
-		mod.CommandNoteSave();
+		mod.ControlNoteSave();
 	},
 
 	WIKWriteDetailDispatchOpen () {},
@@ -89,16 +89,16 @@ const mod = {
 	},
 
 	FooterDispatchExport () {
-		CommandNotesExport();
+		ControlNotesExport();
 	},
 
 	FooterDispatchImport (event) {
-		CommandNotesImport(event.detail);
+		ControlNotesImport(event.detail);
 	},
 
-	// COMMAND
+	// CONTROL
 
-	CommandNoteSave() {
+	ControlNoteSave() {
 		WKCNotesAllStore.update(function (val) {
 			return val;
 		});
@@ -119,7 +119,7 @@ const mod = {
 		};
 	},
 
-	async CommandNoteCreate(inputData) {
+	async ControlNoteCreate(inputData) {
 		let item = await WKCNoteAction.WKCNoteActionCreate(storageClient, {
 			WKCNoteBody: typeof inputData === 'string' ? inputData : '',
 		});
@@ -128,7 +128,7 @@ const mod = {
 			return val.concat(item).sort(WKCWriteLogic.WKCWriteSort);
 		});
 
-		mod.CommandNoteSelect(item);
+		mod.ControlNoteSelect(item);
 
 		if (mod.DataIsMobile()) {
 			mod.WIKWriteDetailInstance.WIKWriteDetailFocus();
@@ -145,7 +145,7 @@ const mod = {
 		mod.WIKWriteDetailInstance.WIKWriteDetailSetCursor(inputData.split('\n').length - 1, 0);
 	},
 	
-	CommandNoteSelect(inputData) {
+	ControlNoteSelect(inputData) {
 		mod._ValueNoteSelected = inputData;
 
 		if (!inputData && !OLSK_TESTING_BEHAVIOUR()) {
@@ -163,7 +163,7 @@ const mod = {
 		mod.WIKWriteDetailInstance.WIKWriteDetailFocus();
 	},
 	
-	async CommandNoteDiscard (inputData) {
+	async ControlNoteDiscard (inputData) {
 		WKCNotesAllStore.update(function (val) {
 			return val.filter(function(e) {
 				return e !== inputData;
@@ -172,20 +172,20 @@ const mod = {
 
 		await WKCNoteAction.WKCNoteActionDelete(storageClient, inputData.WKCNoteID);
 
-		mod.CommandNoteSelect(null);
+		mod.ControlNoteSelect(null);
 	},
 	
-	CommandFilter(inputData) {
+	ControlFilter(inputData) {
 		mod._ValueFilterText = inputData;
 
 		mod.ValueNotesVisible($WKCNotesAllStore);
 
 		if (!inputData) {
-			return mod.CommandNoteSelect(null);
+			return mod.ControlNoteSelect(null);
 		}
 
 		if (!mod._ValueNotesVisible.length) {
-			return mod.CommandNoteSelect(null);
+			return mod.ControlNoteSelect(null);
 		}
 
 		mod._ValueNoteSelected = mod._ValueNotesVisible.filter(function (e) {
@@ -195,7 +195,7 @@ const mod = {
 		})).shift();
 	},
 
-	async CommandNotesExport () {
+	async ControlNotesExport () {
 		let zip = new JSZip();
 
 		const fileName = [
@@ -213,7 +213,7 @@ const mod = {
 		});	
 	},
 
-	async CommandNotesImport (inputData) {
+	async ControlNotesImport (inputData) {
 		let outputData;
 		try {
 			outputData = JSON.parse(inputData);
@@ -244,7 +244,7 @@ const mod = {
 		WKCNotesAllStore.set(await WKCNoteAction.WKCNoteActionQuery(storageClient, {}));
 	},
 
-	CommandNotesExportTXT () {
+	ControlNotesExportTXT () {
 		let zip = new JSZip();
 
 		$WKCNotesAllStore.forEach(function (e) {

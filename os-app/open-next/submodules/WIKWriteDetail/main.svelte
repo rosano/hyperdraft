@@ -7,13 +7,13 @@ export let WIKWriteDetailDispatchOpen;
 export let OLSKMobileViewInactive = false;
 
 export const WIKWriteDetailFocus = function () {
-	mod.CommandConfigureEditor(function (inputData) {
+	mod.ControlConfigureEditor(function (inputData) {
 		inputData.WKCEditorFocus();
 	});
 };
 
 export const WIKWriteDetailSetCursor = function (param1, param2) {
-	mod.CommandConfigureEditor(function (inputData) {
+	mod.ControlConfigureEditor(function (inputData) {
 		inputData.WKCEditorSetCursor(param1, param2);
 	});
 };
@@ -45,9 +45,9 @@ const mod = {
 
 	_ValueEditorPostInitializeQueue: [],
 
-	// COMMAND
+	// CONTROL
 
-	CommandConfigureEditor (inputData) {
+	ControlConfigureEditor (inputData) {
 		// console.log(mod.WKCEditorInstance ? 'run' : 'queue', inputData);
 		if (mod.WKCEditorInstance) {
 			return inputData(mod.WKCEditorInstance);

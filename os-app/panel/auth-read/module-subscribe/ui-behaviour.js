@@ -55,13 +55,13 @@
 	//_ interfaceFetchFormDidSubmit
 
 	moi.interfaceFetchFormDidSubmit = function () {
-		moi.commandsFetchURL(moi.propertiesFetchURL());
+		moi.ControlFetchURL(moi.propertiesFetchURL());
 	};
 
 	//_ interfaceConfirmationFormDidSubmit
 
 	moi.interfaceConfirmationFormDidSubmit = function () {
-		moi._commandsSubscriptionsCreate({
+		moi._ControlSubscriptionsCreate({
 			WKCSubscriptionURL: moi.propertiesFetchURL(),
 			WKCSubscriptionHandler: d3.select('#WKCReadModuleSubscribeConfirmationFormType').node().value,
 			WKCSubscriptionName: d3.select('#WKCReadModuleSubscribeConfirmationFormName').node().value,
@@ -72,35 +72,35 @@
 	//_ interfaceConfirmationClearButtonDidClick
 
 	moi.interfaceConfirmationClearButtonDidClick = function () {
-		moi.commandsConfirmationClear();
+		moi.ControlConfirmationClear();
 	};
 
-	//# COMMANDS
+	//# CONTROL
 
-	//_ commandsAlertConnectionError
+	//_ ControlAlertConnectionError
 
-	moi.commandsAlertConnectionError = function (error) {
+	moi.ControlAlertConnectionError = function (error) {
 		window.alert(OLSKLocalized('WKSharedErrorServiceUnavailable'));
 
 		throw error;
 	};
 
-	//_ commandsAlertTokenUnavailable
+	//_ ControlAlertTokenUnavailable
 
-	moi.commandsAlertTokenUnavailable = function () {
+	moi.ControlAlertTokenUnavailable = function () {
 		window.alert(OLSKLocalized('WKSharedErrorTokenUnavailable'));
 
 		throw new Error('WKCAppErrorTokenUnavailable');
 	};
 
-	//_ commandsFetchURL
+	//_ ControlFetchURL
 
-	moi.commandsFetchURL = function (inputData, fetchHandler) {
+	moi.ControlFetchURL = function (inputData, fetchHandler) {
 		if (!inputData) {
 			return;
 		}
 
-		moi.commandsConfirmationClear();
+		moi.ControlConfirmationClear();
 
 		moi.propertiesFetchURL(inputData);
 
@@ -120,7 +120,7 @@
 		})
 		.then(function(responseJSON) {
 			if (responseJSON.error === 'WKCErrorCustomTwitterMissingToken') {
-				return moi.commandsFetchAlertErrorCustomTwitterMissingToken();
+				return moi.ControlFetchAlertErrorCustomTwitterMissingToken();
 			}
 
 			if (responseJSON.error) {
@@ -128,28 +128,28 @@
 			}
 
 			if (fetchHandler === OLSKPublicConstants('WKCSubscriptionHandlerCustomTwitterTimeline')) {
-				return moi.commandsConfirmationCustomTwitterTimeline(inputData, responseJSON.contents);
+				return moi.ControlConfirmationCustomTwitterTimeline(inputData, responseJSON.contents);
 			}
 
 			var parsedXML = (new DOMParser()).parseFromString(responseJSON.contents, 'application/xml');
 
 			if (OLSKType.OLSKTypeInputDataIsDOMDocumentRSS(parsedXML)) {
-				return moi.commandsConfirmationFeedRSS(inputData, parsedXML);
+				return moi.ControlConfirmationFeedRSS(inputData, parsedXML);
 			}
 
 			if (OLSKType.OLSKTypeInputDataIsDOMDocumentAtom(parsedXML)) {
-				return moi.commandsConfirmationFeedAtom(inputData, parsedXML);
+				return moi.ControlConfirmationFeedAtom(inputData, parsedXML);
 			}
 
 			var parsedHTML = (new DOMParser()).parseFromString(responseJSON.contents, 'text/html');
 
 			if (OLSKType.OLSKTypeInputDataIsDOMDocumentHTML(parsedHTML)) {
-				return moi.commandsConfirmationPage(inputData, parsedHTML);
+				return moi.ControlConfirmationPage(inputData, parsedHTML);
 			}
 
-			return moi.commandsConfirmationFile(inputData, responseJSON.contents);
+			return moi.ControlConfirmationFile(inputData, responseJSON.contents);
 		})
-		.catch(moi.commandsFetchAlertError)
+		.catch(moi.ControlFetchAlertError)
 		.finally(function () {
 			moi.reactFetchLoaderVisibility(false);
 			
@@ -157,9 +157,9 @@
 		});
 	};
 
-	//_ commandsFetchAlertError
+	//_ ControlFetchAlertError
 
-	moi.commandsFetchAlertError = function (error) {
+	moi.ControlFetchAlertError = function (error) {
 		window.alert(OLSKLocalized('WKCReadModuleSubscribeErrorFetchText'));
 
 		moi.reactFetchLoaderVisibility(false);
@@ -169,15 +169,15 @@
 		throw error;
 	};
 
-	//_ commandsFetchAlertErrorCustomTwitterMissingToken
+	//_ ControlFetchAlertErrorCustomTwitterMissingToken
 
-	moi.commandsFetchAlertErrorCustomTwitterMissingToken = function (error) {
+	moi.ControlFetchAlertErrorCustomTwitterMissingToken = function (error) {
 		window.alert(OLSKLocalized('WKCReadModuleSubscribeErrorCustomTwitterMissingToken'));
 	};
 
-	//_ commandsConfirmationFeedRSS
+	//_ ControlConfirmationFeedRSS
 
-	moi.commandsConfirmationFeedRSS = function (inputData, parsedXML) {
+	moi.ControlConfirmationFeedRSS = function (inputData, parsedXML) {
 		moi.reactConfirmationFormName(stringContentForFirstElement(parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('title')));
 
 		moi.reactConfirmationFormBlurb(stringContentForFirstElement(parsedXML.getElementsByTagName('channel')[0].getElementsByTagName('description')));
@@ -191,9 +191,9 @@
 		moi.reactConfirmationShared();
 	};
 
-	//_ commandsConfirmationFeedAtom
+	//_ ControlConfirmationFeedAtom
 
-	moi.commandsConfirmationFeedAtom = function (inputData, parsedXML) {
+	moi.ControlConfirmationFeedAtom = function (inputData, parsedXML) {
 		moi.reactConfirmationFormName(stringContentForFirstElement(parsedXML.getElementsByTagName('title')));
 
 		moi.reactConfirmationFormBlurb(stringContentForFirstElement(parsedXML.getElementsByTagName('subtitle')));
@@ -207,9 +207,9 @@
 		moi.reactConfirmationShared();
 	};
 
-	//_ commandsConfirmationPage
+	//_ ControlConfirmationPage
 
-	moi.commandsConfirmationPage = function (inputData, parsedHTML) {
+	moi.ControlConfirmationPage = function (inputData, parsedHTML) {
 		moi.reactAlternatives([].slice.call(parsedHTML.getElementsByTagName('link')).filter(function(e) {
 			return [
 				'application/rss+xml',
@@ -247,9 +247,9 @@
 		moi.reactConfirmationShared();
 	};
 
-	//_ commandsConfirmationFile
+	//_ ControlConfirmationFile
 
-	moi.commandsConfirmationFile = function (inputData, rawData) {
+	moi.ControlConfirmationFile = function (inputData, rawData) {
 		moi.reactConfirmationPreviewFile(rawData);
 
 		moi.reactConfirmationFormName(inputData.match(/https?:\/\/(.*)/)[1]);
@@ -261,9 +261,9 @@
 		moi.reactConfirmationShared();
 	};
 
-	//_ commandsConfirmationCustomTwitterTimeline
+	//_ ControlConfirmationCustomTwitterTimeline
 
-	moi.commandsConfirmationCustomTwitterTimeline = function (inputData, responseJSON) {
+	moi.ControlConfirmationCustomTwitterTimeline = function (inputData, responseJSON) {
 		const articleObjects = WKCParser.WKCParserArticlesForCustomTwitterTimeline(null, responseJSON);
 
 		moi.reactConfirmationPreviewArticles(articleObjects);
@@ -283,9 +283,9 @@
 		moi.reactConfirmationShared();
 	};
 
-	//_ commandsConfirmationClear
+	//_ ControlConfirmationClear
 
-	moi.commandsConfirmationClear = function () {
+	moi.ControlConfirmationClear = function () {
 		moi.propertiesFetchURL('');
 
 		moi.reactAlternatives([]);
@@ -304,9 +304,9 @@
 		d3.select('#WKCReadModuleSubscribeFetchFormURL').node().focus();
 	};
 
-	//_ _commandsSubscriptionsCreate
+	//_ _ControlSubscriptionsCreate
 
-	moi._commandsSubscriptionsCreate = function (subscriptionObject) {
+	moi._ControlSubscriptionsCreate = function (subscriptionObject) {
 		return d3.json(OLSKCanonicalFor('WKCRouteAPISubscriptionsCreate'), {
 			method: 'POST',
 			headers: {
@@ -317,14 +317,14 @@
 		}).then(function(responseJSON) {
 			Object.assign(subscriptionObject, responseJSON);
 
-			moi.commandsConfirmationClear();
+			moi.ControlConfirmationClear();
 			moi.reactFetchFlash(OLSKFormatted(OLSKLocalized('WKCReadModuleSubscribeFlashFormat'), subscriptionObject.WKCSubscriptionURL));
-		}, moi._commandsSubscriptionsAlertErrorCreate);
+		}, moi._ControlSubscriptionsAlertErrorCreate);
 	};
 
-	//_ _commandsSubscriptionsAlertErrorCreate
+	//_ _ControlSubscriptionsAlertErrorCreate
 
-	moi._commandsSubscriptionsAlertErrorCreate = function (error) {
+	moi._ControlSubscriptionsAlertErrorCreate = function (error) {
 		window.alert(OLSKLocalized('WKCReadModuleSubscribeErrorCreateText'));
 
 		throw error;
@@ -385,7 +385,7 @@
 
 		parentElement.select('.WKCReadModuleSubscribeSuggestionsListItemButton')
 			.on('click', function(e) {
-				moi.commandsFetchURL(e.WKCSuggestionURL, kWKCReadModuleSubscribeHandlerMap[e.WKCSuggestionType]);
+				moi.ControlFetchURL(e.WKCSuggestionURL, kWKCReadModuleSubscribeHandlerMap[e.WKCSuggestionType]);
 			})
 			.text(function(e) {
 				return e.WKCSuggestionURL;
@@ -430,7 +430,7 @@
 				return e.WKCAlternativeURL;
 			})
 			.on('click', function(e) {
-				moi.commandsFetchURL(e.WKCAlternativeURL);
+				moi.ControlFetchURL(e.WKCAlternativeURL);
 			});
 
 		parentElement.select('.WKCReadModuleSubscribeAlternativesItemItemName')
@@ -570,13 +570,13 @@
 			method: 'GET',
 		}).then(function(responseJSON) {
 			if (!responseJSON.WKCAPIToken) {
-				return moi.commandsAlertTokenUnavailable();
+				return moi.ControlAlertTokenUnavailable();
 			}
 
 			moi.propertiesAPIToken(responseJSON.WKCAPIToken);
 
 			completionHandler();
-		}, moi.commandsAlertConnectionError);
+		}, moi.ControlAlertConnectionError);
 	};
 
 	//# LIFECYCLE

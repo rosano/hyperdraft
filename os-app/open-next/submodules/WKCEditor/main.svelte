@@ -5,7 +5,7 @@ export let WKCEditorDispatchOpen;
 export let WKCEditorDispatchReady;
 
 export const WKCEditorFocus = function () {
-	mod.CommandConfigureEditor(function (inputData) {
+	mod.ControlConfigureEditor(function (inputData) {
 		inputData.focus();
 	});
 };
@@ -16,7 +16,7 @@ export const WKCEditorSetDocument = function (inputData) {
 };
 
 export const WKCEditorSetCursor = function (param1, param2) {
-	mod.CommandConfigureEditor(function (inputData) {
+	mod.ControlConfigureEditor(function (inputData) {
 		inputData.setCursor(CodeMirror.Pos(param1, param2));
 	});
 };
@@ -40,9 +40,9 @@ const mod = {
 		WKCEditorDispatchUpdate(this.value);
 	},
 
-	// COMMAND
+	// CONTROL
 
-	CommandConfigureEditor (inputData) {
+	ControlConfigureEditor (inputData) {
 		if (mod._ValueEditorInstance) {
 			return inputData(mod._ValueEditorInstance);
 		};
@@ -50,7 +50,7 @@ const mod = {
 		mod._ValueEditorPostInitializeQueue.push(inputData);
 	},
 
-	CommandOpenCursorObject (inputData) {
+	ControlOpenCursorObject (inputData) {
 		let cursor = mod._ValueEditorInstance.getCursor();
 
 		let currentObject = WKCEditorLogic.WKCEditorLineObjectsFor(mod._ValueEditorInstance.getLineTokens(cursor.line)).filter(function (e) {
@@ -61,10 +61,10 @@ const mod = {
 			return;
 		}
 
-		mod.CommandOpenTextObject(currentObject.string);
+		mod.ControlOpenTextObject(currentObject.string);
 	},
 
-	CommandOpenTextObject (inputData) {
+	ControlOpenTextObject (inputData) {
 		if (URLParse(inputData, {}).protocol) {
 			return window.open(inputData, '_blank');
 		}
@@ -102,8 +102,8 @@ const mod = {
 
 			extraKeys: {
 			  Enter: 'newlineAndIndentContinueMarkdownList',
-			  'Cmd-Enter': mod.CommandOpenCursorObject,
-			  'Ctrl-Enter': mod.CommandOpenCursorObject,
+			  'Cmd-Enter': mod.ControlOpenCursorObject,
+			  'Ctrl-Enter': mod.ControlOpenCursorObject,
 			  'Cmd-H' (event) {
 			  	return event.preventDefault();
 			  },
