@@ -7,6 +7,14 @@ export let OLSKMobileViewInactive = false;
 
 export const WIKWriteDetailSetItem = function (inputData) {
 	mod._ValueItem = inputData;
+
+	if (!inputData) {
+		return;
+	}
+	
+	mod.ControlConfigureEditor(function (inputData) {
+		inputData.WKCWriteEditorSetDocument(mod._ValueItem.WKCNoteBody);
+	});
 };
 
 export const WIKWriteDetailFocus = function () {
@@ -93,7 +101,6 @@ import WKCWriteEditor from '../WKCWriteEditor/main.svelte';
 
 <div class="WIKWriteDetailForm">
 	<WKCWriteEditor
-		WKCWriteEditorInitialValue={ mod._ValueItem.WKCNoteBody }
 		WKCWriteEditorDispatchUpdate={ mod.WKCWriteEditorDispatchUpdate }
 		WKCWriteEditorDispatchOpen={ mod.WKCWriteEditorDispatchOpen }
 		WKCWriteEditorDispatchReady={ mod.WKCWriteEditorDispatchReady }

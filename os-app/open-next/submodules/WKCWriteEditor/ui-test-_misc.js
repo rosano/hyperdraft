@@ -6,13 +6,17 @@ describe('WKCWriteEditor_Misc', function () {
 
 	before(function() {
 		return browser.OLSKVisit(kDefaultRoute, {
-			WKCWriteEditorInitialValue: 'alfa',
+			WKCWriteEditorSetDocument: 'alfa',
 		});
+	});
+
+	before(function () {
+		browser.pressButton('#TestWKCWriteEditorSetDocument');
 	});
 	
 	describe('WKCWriteEditorFieldDebug', function() {
 		
-		it('binds WKCWriteEditorInitialValue', function () {
+		it('binds WKCWriteEditorSetDocument', function () {
 			browser.assert.input(WKCWriteEditorFieldDebug, 'alfa');
 		});
 
@@ -33,7 +37,7 @@ describe('WKCWriteEditor_Misc', function () {
 	
 	describe.skip('CodeMirror', function() {
 		
-		it('binds WKCWriteEditorInitialValue', function () {
+		it('binds WKCWriteEditorSetDocument', function () {
 			browser.assert.input('.CodeMirror', 'alfa');
 		});
 

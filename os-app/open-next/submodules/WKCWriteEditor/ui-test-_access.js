@@ -13,9 +13,7 @@ Object.entries({
 describe('WKCWriteEditor_Access', function () {
 
 	before(function() {
-		return browser.OLSKVisit(kDefaultRoute, {
-			WKCWriteEditorInitialValue: 'alfa',
-		});
+		return browser.OLSKVisit(kDefaultRoute);
 	});
 
 	it('shows WKCWriteEditor', function () {

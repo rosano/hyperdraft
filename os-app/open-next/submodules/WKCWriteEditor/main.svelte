@@ -1,5 +1,4 @@
 <script>
-export let WKCWriteEditorInitialValue;
 export let WKCWriteEditorDispatchUpdate;
 export let WKCWriteEditorDispatchOpen;
 export let WKCWriteEditorDispatchReady;
@@ -11,8 +10,14 @@ export const WKCWriteEditorFocus = function () {
 };
 
 export const WKCWriteEditorSetDocument = function (inputData) {
-	mod._ValueEditorInstance.setValue(inputData);
-	mod._ValueEditorInstance.getDoc().clearHistory();
+	if (OLSK_TESTING_BEHAVIOUR()) {
+		return (mod._ValueEditorFieldDebugValue = inputData);
+	}
+	
+	mod.ControlConfigureEditor(function () {
+		mod._ValueEditorInstance.setValue(inputData);
+		mod._ValueEditorInstance.getDoc().clearHistory();
+	});
 };
 
 export const WKCWriteEditorSetCursor = function (param1, param2) {
@@ -33,6 +38,8 @@ const mod = {
 	_ValueEditorInstance: undefined,
 
 	_ValueEditorPostInitializeQueue: [],
+	
+	_ValueEditorFieldDebugValue: '',
 
 	// INTERFACE
 
@@ -43,6 +50,10 @@ const mod = {
 	// CONTROL
 
 	ControlConfigureEditor (inputData) {
+		if (OLSK_TESTING_BEHAVIOUR()) {
+			return;
+		}
+		
 		if (mod._ValueEditorInstance) {
 			return inputData(mod._ValueEditorInstance);
 		};
@@ -87,7 +98,7 @@ const mod = {
 
 	SetupEditor () {
 		if (OLSK_TESTING_BEHAVIOUR()) {
-			return;
+ 			return WKCWriteEditorDispatchReady();
 		}
 
 		mod._ValueEditorInstance = CodeMirror.fromTextArea(mod._ValueEditorElement, {
@@ -115,8 +126,6 @@ const mod = {
 
 			keyMap: 'sublime',
 		});
-
-		mod._ValueEditorInstance.setValue(WKCWriteEditorInitialValue);
 
 		mod._ValueEditorInstance.on('change', function (instance, changeObject) {
 			if (changeObject.origin === 'setValue') {
@@ -147,7 +156,7 @@ onMount(mod.LifecycleComponentDidMount);
 
 <div class="WKCWriteEditor">
 	{#if OLSK_TESTING_BEHAVIOUR()}
-		<textarea class="WKCWriteEditorFieldDebug" on:input={ mod.InterfaceEditorFieldDebugDidInput }>{ WKCWriteEditorInitialValue }</textarea>
+		<textarea class="WKCWriteEditorFieldDebug" on:input={ mod.InterfaceEditorFieldDebugDidInput }>{ mod._ValueEditorFieldDebugValue }</textarea>
 	{/if}
 	
 	<textarea bind:this={ mod._ValueEditorElement }></textarea>
