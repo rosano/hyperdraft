@@ -10,7 +10,7 @@ describe('WIKWriteDetail_Misc', function () {
 		};
 	};
 
-	describe('WIKWriteDetail', function () {
+	describe('WIKWriteDetail', function test_WIKWriteDetail () {
 
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
@@ -46,7 +46,7 @@ describe('WIKWriteDetail_Misc', function () {
 
 	});
 
-	describe('OLSKToolbar', function () {
+	describe('OLSKToolbar', function test_OLSKToolbar () {
 
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
@@ -64,7 +64,7 @@ describe('WIKWriteDetail_Misc', function () {
 	
 	});
 
-	describe('WIKWriteDetailToolbarBackButton', function () {
+	describe('WIKWriteDetailToolbarBackButton', function test_WIKWriteDetailToolbarBackButton () {
 		
 		it('sets class', function () {
 			browser.assert.hasClass(WIKWriteDetailToolbarBackButton, 'OLSKLayoutButtonNoStyle');
@@ -89,7 +89,7 @@ describe('WIKWriteDetail_Misc', function () {
 	
 	});
 
-	describe('WIKWriteDetailToolbarDiscardButton', function () {
+	describe('WIKWriteDetailToolbarDiscardButton', function test_WIKWriteDetailToolbarDiscardButton () {
 		
 		it('sets class', function () {
 			browser.assert.hasClass(WIKWriteDetailToolbarDiscardButton, 'OLSKLayoutButtonNoStyle');
@@ -119,7 +119,7 @@ describe('WIKWriteDetail_Misc', function () {
 	
 	});
 
-	describe('WIKWriteDetailPlaceholder', function() {
+	describe('WIKWriteDetailPlaceholder', function test_WIKWriteDetailPlaceholder() {
 
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute);
@@ -131,7 +131,7 @@ describe('WIKWriteDetail_Misc', function () {
 		
 	});
 	
-	describe('WKCWriteEditor', function() {
+	describe('WKCWriteEditor', function test_WKCWriteEditor() {
 		
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
