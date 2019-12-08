@@ -1,6 +1,6 @@
 const mod = {
 
-	WKCEditorLineObjectsFor (inputData) {
+	WKCWriteEditorLineObjectsFor (inputData) {
 		if (!Array.isArray(inputData)) {
 			throw new Error('WKCErrorInputNotValid');
 		}

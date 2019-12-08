@@ -72,8 +72,8 @@ describe('WIKWriteDetail_Access', function () {
 			browser.assert.elements(WIKWriteDetailForm, 1);
 		});
 
-		it('shows WKCEditor', function () {
-			browser.assert.elements('.WKCEditor', 1);
+		it('shows WKCWriteEditor', function () {
+			browser.assert.elements('.WKCWriteEditor', 1);
 		});
 		
 	});

@@ -1,7 +1,7 @@
 const { throws, deepEqual } = require('assert');
 
 const mainModule = require('./ui-logic.js');
-const WKCEditorLogic = require('../open-next/submodules/WKCEditor/ui-logic.js');
+const WKCWriteEditorLogic = require('../open-next/submodules/WKCWriteEditor/ui-logic.js');
 
 const kTesting = {
 	uStubLineTokensFor (inputData) {
@@ -94,15 +94,15 @@ describe('WKCWriteHeaderTokensFrom', function testWKCWriteHeaderTokensFrom() {
 
 	it('excludes if not header', function() {
 		deepEqual(mainModule.WKCWriteHeaderTokensFrom([
-			WKCEditorLogic.WKCEditorLineObjectsFor(kTesting.uStubLineTokensFor('alfa')),
-			WKCEditorLogic.WKCEditorLineObjectsFor(kTesting.uStubLineTokensFor('[[bravo]]')),
+			WKCWriteEditorLogic.WKCWriteEditorLineObjectsFor(kTesting.uStubLineTokensFor('alfa')),
+			WKCWriteEditorLogic.WKCWriteEditorLineObjectsFor(kTesting.uStubLineTokensFor('[[bravo]]')),
 		]), []);
 	});
 
 	it('includes if header', function() {
 		deepEqual(mainModule.WKCWriteHeaderTokensFrom([
-			WKCEditorLogic.WKCEditorLineObjectsFor(kTesting.uStubLineTokensFor('# alfa')),
-		]), WKCEditorLogic.WKCEditorLineObjectsFor(kTesting.uStubLineTokensFor('# alfa')).map(function (e) {
+			WKCWriteEditorLogic.WKCWriteEditorLineObjectsFor(kTesting.uStubLineTokensFor('# alfa')),
+		]), WKCWriteEditorLogic.WKCWriteEditorLineObjectsFor(kTesting.uStubLineTokensFor('# alfa')).map(function (e) {
 			return Object.assign(e, {
 				line: 0,
 			});
@@ -111,8 +111,8 @@ describe('WKCWriteHeaderTokensFrom', function testWKCWriteHeaderTokensFrom() {
 
 	it('excludes if not verbal', function() {
 		deepEqual(mainModule.WKCWriteHeaderTokensFrom([
-			WKCEditorLogic.WKCEditorLineObjectsFor(kTesting.uStubLineTokensFor('alfa')),
-			WKCEditorLogic.WKCEditorLineObjectsFor(kTesting.uStubLineTokensFor('====')),
+			WKCWriteEditorLogic.WKCWriteEditorLineObjectsFor(kTesting.uStubLineTokensFor('alfa')),
+			WKCWriteEditorLogic.WKCWriteEditorLineObjectsFor(kTesting.uStubLineTokensFor('====')),
 		].map(function (e) {
 			return e.map(function (e) {
 				return Object.assign(e, {
@@ -130,7 +130,7 @@ describe('WKCWriteHeaderTokensFrom', function testWKCWriteHeaderTokensFrom() {
 
 	it('merges multiple header objects', function() {
 		deepEqual(mainModule.WKCWriteHeaderTokensFrom([
-			WKCEditorLogic.WKCEditorLineObjectsFor(kTesting.uStubLineTokensFor('# PA PARC https://www.supermarchepa.com/pages/weekly-flyer')),
+			WKCWriteEditorLogic.WKCWriteEditorLineObjectsFor(kTesting.uStubLineTokensFor('# PA PARC https://www.supermarchepa.com/pages/weekly-flyer')),
 		]), [{
 			start: 0,
 			end: 58,

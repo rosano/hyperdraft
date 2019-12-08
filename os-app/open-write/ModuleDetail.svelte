@@ -16,7 +16,7 @@ export let editorConfigure = function (inputData) {
 import * as WKCNoteAction from '../_shared/WKCNote/action.js';
 import * as WKCVersionAction from '../_shared/WKCVersion/action.js';
 import * as WKCWriteLogic from './ui-logic.js';
-import WKCEditorLogic from '../open-next/submodules/WKCEditor/ui-logic.js';
+import WKCWriteEditorLogic from '../open-next/submodules/WKCWriteEditor/ui-logic.js';
 import { storageClient, WKCNotesAllStore, filterText, WKCWriteDefaultFocusNode, mobileViewCurrent, isMobile } from './persistence.js';
 import { WKCNoteSelectedStore } from './persistence.js';
 
@@ -63,7 +63,7 @@ function openTextObject (inputData) {
 function openCursorObject (inputData) {
 	let cursor = editorInstance.getCursor();
 
-	let currentObject = WKCEditorLogic.WKCEditorLineObjectsFor(editorInstance.getLineTokens(cursor.line)).filter(function (e) {
+	let currentObject = WKCWriteEditorLogic.WKCWriteEditorLineObjectsFor(editorInstance.getLineTokens(cursor.line)).filter(function (e) {
 		return Math.max(e.start, Math.min(e.end, cursor.ch)) === cursor.ch;
 	}).shift();
 
@@ -114,7 +114,7 @@ afterUpdate(function () {
 
 		editorInstance.on('change', function (instance, changeObject) {
 			jumpRecipes = WKCWriteLogic.WKCWriteHeaderTokensFrom([...Array(editorInstance.getDoc().size)].map(function (e, i) {
-				return WKCEditorLogic.WKCEditorLineObjectsFor(editorInstance.getLineTokens(i));
+				return WKCWriteEditorLogic.WKCWriteEditorLineObjectsFor(editorInstance.getLineTokens(i));
 			})).map(function (e) {
 				return {
 					LCHRecipeName: e.string,

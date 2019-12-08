@@ -50,7 +50,7 @@ describe('WKCWrite_Misc', function () {
 			browser.assert.elements('.WIKWriteDetailPlaceholder', 0);
 		});
 
-		it.skip('focus WKCEditor', function() {
+		it.skip('focus WKCWriteEditor', function() {
 			browser.assert.hasClass('.CodeMirror', 'CodeMirror-focused');
 		});
 
@@ -150,7 +150,7 @@ describe('WKCWrite_Misc', function () {
 			browser.assert.elements('.WIKWriteDetailPlaceholder', 0);
 		});
 
-		it.skip('focus WKCEditor', function() {
+		it.skip('focus WKCWriteEditor', function() {
 			browser.assert.hasClass('.CodeMirror', 'CodeMirror-focused');
 		});
 
@@ -159,7 +159,7 @@ describe('WKCWrite_Misc', function () {
 	context('filter', function test_filter () {
 
 		before(function () {
-			browser.fill('.WKCEditorFieldDebug', 'alfa');
+			browser.fill('.WKCWriteEditorFieldDebug', 'alfa');
 		});
 
 		before(function () {
@@ -167,7 +167,7 @@ describe('WKCWrite_Misc', function () {
 		});
 
 		before(function () {
-			browser.fill('.WKCEditorFieldDebug', 'bravo');
+			browser.fill('.WKCWriteEditorFieldDebug', 'bravo');
 		});
 
 		context('no match', function () {

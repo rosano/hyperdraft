@@ -8,13 +8,13 @@ export let OLSKMobileViewInactive = false;
 
 export const WIKWriteDetailFocus = function () {
 	mod.ControlConfigureEditor(function (inputData) {
-		inputData.WKCEditorFocus();
+		inputData.WKCWriteEditorFocus();
 	});
 };
 
 export const WIKWriteDetailSetCursor = function (param1, param2) {
 	mod.ControlConfigureEditor(function (inputData) {
-		inputData.WKCEditorSetCursor(param1, param2);
+		inputData.WKCWriteEditorSetCursor(param1, param2);
 	});
 };
 
@@ -27,17 +27,17 @@ const mod = {
 
 	// MESSAGE
 
-	WKCEditorDispatchUpdate (inputData) {
+	WKCWriteEditorDispatchUpdate (inputData) {
 		WIKWriteDetailDispatchUpdate(inputData);
 	},
 
-	WKCEditorDispatchOpen (inputData) {
+	WKCWriteEditorDispatchOpen (inputData) {
 		WIKWriteDetailDispatchOpen(inputData);
 	},
 
-	WKCEditorDispatchReady () {
+	WKCWriteEditorDispatchReady () {
 		mod._ValueEditorPostInitializeQueue.splice(0, mod._ValueEditorPostInitializeQueue.length).forEach(function(e) {
-			return e(mod.WKCEditorInstance);
+			return e(mod.WKCWriteEditorInstance);
 		});
 	},
 
@@ -48,9 +48,9 @@ const mod = {
 	// CONTROL
 
 	ControlConfigureEditor (inputData) {
-		// console.log(mod.WKCEditorInstance ? 'run' : 'queue', inputData);
-		if (mod.WKCEditorInstance) {
-			return inputData(mod.WKCEditorInstance);
+		// console.log(mod.WKCWriteEditorInstance ? 'run' : 'queue', inputData);
+		if (mod.WKCWriteEditorInstance) {
+			return inputData(mod.WKCWriteEditorInstance);
 		};
 
 		mod._ValueEditorPostInitializeQueue.push(inputData);
@@ -58,13 +58,13 @@ const mod = {
 
 	// VALUE
 
-	WKCEditorInstance: undefined,
+	WKCWriteEditorInstance: undefined,
 
 };
 
 import OLSKToolbar from 'OLSKToolbar';
 import OLSKToolbarElementGroup from 'OLSKToolbarElementGroup';
-import WKCEditor from '../WKCEditor/main.svelte';
+import WKCWriteEditor from '../WKCWriteEditor/main.svelte';
 </script>
 
 <div class="WIKWriteDetail OLSKViewportDetail" class:OLSKMobileViewInactive={ OLSKMobileViewInactive }>
@@ -87,12 +87,12 @@ import WKCEditor from '../WKCEditor/main.svelte';
 </header>
 
 <div class="WIKWriteDetailForm">
-	<WKCEditor
-		WKCEditorInitialValue={ WIKWriteDetailItem.WKCNoteBody }
-		WKCEditorDispatchUpdate={ mod.WKCEditorDispatchUpdate }
-		WKCEditorDispatchOpen={ mod.WKCEditorDispatchOpen }
-		WKCEditorDispatchReady={ mod.WKCEditorDispatchReady }
-		bind:this={ mod.WKCEditorInstance }
+	<WKCWriteEditor
+		WKCWriteEditorInitialValue={ WIKWriteDetailItem.WKCNoteBody }
+		WKCWriteEditorDispatchUpdate={ mod.WKCWriteEditorDispatchUpdate }
+		WKCWriteEditorDispatchOpen={ mod.WKCWriteEditorDispatchOpen }
+		WKCWriteEditorDispatchReady={ mod.WKCWriteEditorDispatchReady }
+		bind:this={ mod.WKCWriteEditorInstance }
 		/>
 </div>
 {/if}

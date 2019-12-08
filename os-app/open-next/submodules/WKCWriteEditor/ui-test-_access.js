@@ -3,31 +3,31 @@ import { deepEqual } from 'assert';
 const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
 Object.entries({
-	WKCEditor: '.WKCEditor',
+	WKCWriteEditor: '.WKCWriteEditor',
 	
-	WKCEditorFieldDebug: '.WKCEditorFieldDebug',
+	WKCWriteEditorFieldDebug: '.WKCWriteEditorFieldDebug',
 }).map(function (e) {
 	return global[e.shift()]  = e.pop();
 });
 
-describe('WKCEditor_Access', function () {
+describe('WKCWriteEditor_Access', function () {
 
 	before(function() {
 		return browser.OLSKVisit(kDefaultRoute, {
-			WKCEditorInitialValue: 'alfa',
+			WKCWriteEditorInitialValue: 'alfa',
 		});
 	});
 
-	it('shows WKCEditor', function () {
-		browser.assert.elements(WKCEditor, 1);
+	it('shows WKCWriteEditor', function () {
+		browser.assert.elements(WKCWriteEditor, 1);
 	});
 
 	it.skip('shows CodeMirror', function () {
 		browser.assert.elements('.CodeMirror', 1);
 	});
 
-	it('shows WKCEditorFieldDebug', function () {
-		browser.assert.elements(WKCEditorFieldDebug, 1);
+	it('shows WKCWriteEditorFieldDebug', function () {
+		browser.assert.elements(WKCWriteEditorFieldDebug, 1);
 	});
 
 });

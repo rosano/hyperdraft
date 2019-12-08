@@ -1,28 +1,28 @@
 <script>
-export let WKCEditorInitialValue;
-export let WKCEditorDispatchUpdate;
-export let WKCEditorDispatchOpen;
-export let WKCEditorDispatchReady;
+export let WKCWriteEditorInitialValue;
+export let WKCWriteEditorDispatchUpdate;
+export let WKCWriteEditorDispatchOpen;
+export let WKCWriteEditorDispatchReady;
 
-export const WKCEditorFocus = function () {
+export const WKCWriteEditorFocus = function () {
 	mod.ControlConfigureEditor(function (inputData) {
 		inputData.focus();
 	});
 };
 
-export const WKCEditorSetDocument = function (inputData) {
+export const WKCWriteEditorSetDocument = function (inputData) {
 	mod._ValueEditorInstance.setValue(inputData);
 	mod._ValueEditorInstance.getDoc().clearHistory();
 };
 
-export const WKCEditorSetCursor = function (param1, param2) {
+export const WKCWriteEditorSetCursor = function (param1, param2) {
 	mod.ControlConfigureEditor(function (inputData) {
 		inputData.setCursor(CodeMirror.Pos(param1, param2));
 	});
 };
 
 import { OLSK_TESTING_BEHAVIOUR } from 'OLSKTesting';
-import WKCEditorLogic from './ui-logic.js';
+import WKCWriteEditorLogic from './ui-logic.js';
 
 const mod = {
 
@@ -37,7 +37,7 @@ const mod = {
 	// INTERFACE
 
 	InterfaceEditorFieldDebugDidInput () {
-		WKCEditorDispatchUpdate(this.value);
+		WKCWriteEditorDispatchUpdate(this.value);
 	},
 
 	// CONTROL
@@ -53,7 +53,7 @@ const mod = {
 	ControlOpenCursorObject (inputData) {
 		let cursor = mod._ValueEditorInstance.getCursor();
 
-		let currentObject = WKCEditorLogic.WKCEditorLineObjectsFor(mod._ValueEditorInstance.getLineTokens(cursor.line)).filter(function (e) {
+		let currentObject = WKCWriteEditorLogic.WKCWriteEditorLineObjectsFor(mod._ValueEditorInstance.getLineTokens(cursor.line)).filter(function (e) {
 			return Math.max(e.start, Math.min(e.end, cursor.ch)) === cursor.ch;
 		}).shift();
 
@@ -76,7 +76,7 @@ const mod = {
 
 		event.stopPropagation();
 
-		WKCEditorDispatchOpen(match);
+		WKCWriteEditorDispatchOpen(match);
 	},
 
 	// SETUP
@@ -116,21 +116,21 @@ const mod = {
 			keyMap: 'sublime',
 		});
 
-		mod._ValueEditorInstance.setValue(WKCEditorInitialValue);
+		mod._ValueEditorInstance.setValue(WKCWriteEditorInitialValue);
 
 		mod._ValueEditorInstance.on('change', function (instance, changeObject) {
 			if (changeObject.origin === 'setValue') {
 				return;
 			}
 
-			WKCEditorDispatchUpdate(instance.getValue());
+			WKCWriteEditorDispatchUpdate(instance.getValue());
 		});
 
 		mod._ValueEditorPostInitializeQueue.splice(0, mod._ValueEditorPostInitializeQueue.length).forEach(function(e) {
 			return e(mod._ValueEditorInstance);
 		});
 
-		WKCEditorDispatchReady();
+		WKCWriteEditorDispatchReady();
 	},
 
 	// LIFECYCLE
@@ -145,9 +145,9 @@ import { onMount } from 'svelte';
 onMount(mod.LifecycleComponentDidMount);
 </script>
 
-<div class="WKCEditor">
+<div class="WKCWriteEditor">
 	{#if OLSK_TESTING_BEHAVIOUR()}
-		<textarea class="WKCEditorFieldDebug" on:input={ mod.InterfaceEditorFieldDebugDidInput }>{ WKCEditorInitialValue }</textarea>
+		<textarea class="WKCWriteEditorFieldDebug" on:input={ mod.InterfaceEditorFieldDebugDidInput }>{ WKCWriteEditorInitialValue }</textarea>
 	{/if}
 	
 	<textarea bind:this={ mod._ValueEditorElement }></textarea>

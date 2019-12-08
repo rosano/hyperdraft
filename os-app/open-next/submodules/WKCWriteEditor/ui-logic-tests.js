@@ -27,20 +27,20 @@ const kTesting = {
 	},
 };
 
-describe('WKCEditorLineObjectsFor', function testWKCEditorLineObjectsFor() {
+describe('WKCWriteEditorLineObjectsFor', function testWKCWriteEditorLineObjectsFor() {
 
 	it('throws error if not array', function() {
 		throws(function() {
-			mainModule.WKCEditorLineObjectsFor(null);
+			mainModule.WKCWriteEditorLineObjectsFor(null);
 		}, /WKCErrorInputNotValid/);
 	});
 
 	it('returns array', function() {
-		deepEqual(mainModule.WKCEditorLineObjectsFor([]), []);
+		deepEqual(mainModule.WKCWriteEditorLineObjectsFor([]), []);
 	});
 
 	it('converts non-link single', function() {
-		deepEqual(mainModule.WKCEditorLineObjectsFor(kTesting.uStubLineTokensFor('alfa')), [{
+		deepEqual(mainModule.WKCWriteEditorLineObjectsFor(kTesting.uStubLineTokensFor('alfa')), [{
 			start: 0,
 			end: 4,
 			string: 'alfa',
@@ -49,7 +49,7 @@ describe('WKCEditorLineObjectsFor', function testWKCEditorLineObjectsFor() {
 	});
 
 	it('converts non-link multiple', function() {
-		deepEqual(mainModule.WKCEditorLineObjectsFor(kTesting.uStubLineTokensFor('alfa bravo')), [{
+		deepEqual(mainModule.WKCWriteEditorLineObjectsFor(kTesting.uStubLineTokensFor('alfa bravo')), [{
 			start: 0,
 			end: 10,
 			string: 'alfa bravo',
@@ -58,7 +58,7 @@ describe('WKCEditorLineObjectsFor', function testWKCEditorLineObjectsFor() {
 	});
 
 	it('converts link single', function() {
-		deepEqual(mainModule.WKCEditorLineObjectsFor(kTesting.uStubLineTokensFor('[[alfa]]')), [{
+		deepEqual(mainModule.WKCWriteEditorLineObjectsFor(kTesting.uStubLineTokensFor('[[alfa]]')), [{
 			start: 0,
 			end: 8,
 			string: '[[alfa]]',
@@ -67,7 +67,7 @@ describe('WKCEditorLineObjectsFor', function testWKCEditorLineObjectsFor() {
 	});
 
 	it('converts link multiple', function() {
-		deepEqual(mainModule.WKCEditorLineObjectsFor(kTesting.uStubLineTokensFor('[[alfa]] [[bravo]]')), [{
+		deepEqual(mainModule.WKCWriteEditorLineObjectsFor(kTesting.uStubLineTokensFor('[[alfa]] [[bravo]]')), [{
 			start: 0,
 			end: 8,
 			string: '[[alfa]]',
@@ -86,7 +86,7 @@ describe('WKCEditorLineObjectsFor', function testWKCEditorLineObjectsFor() {
 	});
 
 	it('converts header', function() {
-		deepEqual(mainModule.WKCEditorLineObjectsFor(kTesting.uStubLineTokensFor('# alfa')), [{
+		deepEqual(mainModule.WKCWriteEditorLineObjectsFor(kTesting.uStubLineTokensFor('# alfa')), [{
 			start: 0,
 			end: 6,
 			string: '# alfa',
@@ -95,7 +95,7 @@ describe('WKCEditorLineObjectsFor', function testWKCEditorLineObjectsFor() {
 	});
 
 	it('converts multiple header objects', function() {
-		deepEqual(mainModule.WKCEditorLineObjectsFor(kTesting.uStubLineTokensFor('# alfa [[bravo]]')), [{
+		deepEqual(mainModule.WKCWriteEditorLineObjectsFor(kTesting.uStubLineTokensFor('# alfa [[bravo]]')), [{
 			start: 0,
 			end: 7,
 			string: '# alfa ',

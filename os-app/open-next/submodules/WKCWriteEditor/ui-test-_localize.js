@@ -8,12 +8,12 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 		return OLSKTestingLocalized(inputData, languageCode);
 	};
 
-	describe(`WKCEditor_Localize-${ languageCode }`, function () {
+	describe(`WKCWriteEditor_Localize-${ languageCode }`, function () {
 
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
 				OLSKRoutingLanguage: languageCode,
-				WKCEditorInitialValue: 'alfa',
+				WKCWriteEditorInitialValue: 'alfa',
 			});
 		});
 

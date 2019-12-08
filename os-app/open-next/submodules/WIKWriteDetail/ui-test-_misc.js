@@ -123,7 +123,7 @@ describe('WIKWriteDetail_Misc', function () {
 		
 	});
 	
-	describe('WKCEditor', function() {
+	describe('WKCWriteEditor', function() {
 		
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
@@ -136,7 +136,7 @@ describe('WIKWriteDetail_Misc', function () {
 		});
 			
 		it('binds WKCNoteBody', function () {
-			browser.assert.input('.WKCEditorFieldDebug', 'alfa');
+			browser.assert.input('.WKCWriteEditorFieldDebug', 'alfa');
 		});
 
 		context.skip('WKCDetailFocus', function () {
@@ -159,7 +159,7 @@ describe('WIKWriteDetail_Misc', function () {
 
 			before(function () {
 				// browser.fill('CodeMirror', 'bravo');
-				browser.fill('.WKCEditorFieldDebug', 'bravo');
+				browser.fill('.WKCWriteEditorFieldDebug', 'bravo');
 			});
 
 			it('sends WIKWriteDetailDispatchUpdate', function () {
