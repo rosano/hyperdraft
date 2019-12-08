@@ -21,7 +21,7 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 		});
 	
 		it('localizes WKCWriteMasterCreateButton', function () {
-			browser.assert.text(WKCWriteMasterCreateButton, uLocalized('WKCWriteMasterCreateButtonText'));
+			browser.assert.attribute(WKCWriteMasterCreateButton, 'title', uLocalized('WKCWriteMasterCreateButtonText'));
 		});
 
 	});

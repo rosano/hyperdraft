@@ -249,7 +249,14 @@ describe('WKCWriteMaster_Misc', function () {
 
 		it('classes OLSKLayoutButtonNoStyle', function () {
 			browser.assert.hasClass(WKCWriteMasterCreateButton, 'OLSKLayoutButtonNoStyle');
+		});
+
+		it('classes OLSKLayoutElementTappable', function () {
 			browser.assert.hasClass(WKCWriteMasterCreateButton, 'OLSKLayoutElementTappable');
+		});
+
+		it('classes OLSKToolbarButton', function () {
+			browser.assert.hasClass(WKCWriteMasterCreateButton, 'OLSKToolbarButton');
 		});
 		
 		it('sets accesskey', function () {

@@ -140,7 +140,7 @@ import OLSKResults from 'OLSKResults';
 		</OLSKInputWrapper>
 
 		<OLSKToolbarElementGroup>
-			<button class="WKCWriteMasterCreateButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable" on:click={ mod.InterfaceCreateButtonDidClick } accesskey="n">{ OLSKLocalized('WKCWriteMasterCreateButtonText') }</button>
+			<button class="WKCWriteMasterCreateButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" on:click={ mod.InterfaceCreateButtonDidClick } accesskey="n" title={ OLSKLocalized('WKCWriteMasterCreateButtonText') } style="background-image: url('/panel/_shared/ui-assets/wIKSharedCreate.svg')"></button>
 		</OLSKToolbarElementGroup>
 	</OLSKToolbar>
 </header>
