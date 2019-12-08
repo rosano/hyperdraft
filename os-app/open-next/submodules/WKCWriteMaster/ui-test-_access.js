@@ -11,7 +11,6 @@ Object.entries({
 	WKCWriteMasterCreateButton: '.WKCWriteMasterCreateButton',
 
 	WKCWriteMasterBody: '.WKCWriteMasterBody',
-	WKCWriteMasterListItem: '.WKCWriteMasterListItem',
 }).map(function (e) {
 	return global[e.shift()]  = e.pop();
 });
@@ -55,7 +54,7 @@ describe('WKCWriteMaster_Access', function () {
 	});
 
 	it('hides WKCWriteMasterListItem', function () {
-		browser.assert.elements(WKCWriteMasterListItem, 0);
+		browser.assert.elements('.WKCWriteMasterListItem', 0);
 	});
 
 	context('WKCWriteMasterListItems', function() {
@@ -69,7 +68,7 @@ describe('WKCWriteMaster_Access', function () {
 		});
 
 		it('shows WKCWriteMasterListItem', function () {
-			browser.assert.elements(WKCWriteMasterListItem, 1);
+			browser.assert.elements('.WKCWriteMasterListItem', 1);
 		});
 		
 	});

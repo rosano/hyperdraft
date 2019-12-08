@@ -301,7 +301,7 @@ describe('WKCWriteMaster_Misc', function () {
 		});
 
 		it('sets text', function () {
-			browser.assert.text(WKCWriteMasterListItem, 'bravo');
+			browser.assert.text('.WKCWriteMasterListItem', 'bravo');
 		});
 
 		context('click', function () {
@@ -312,7 +312,7 @@ describe('WKCWriteMaster_Misc', function () {
 			});
 			
 			before(function () {
-				return browser.click(WKCWriteMasterListItem);
+				return browser.click('.WKCWriteMasterListItem');
 			});
 
 			it('sends WKCWriteMasterDispatchClick', function () {
