@@ -1,10 +1,13 @@
 <script>
-export let WIKWriteDetailItem = null;
 export let WIKWriteDetailDispatchBack;
 export let WIKWriteDetailDispatchDiscard;
 export let WIKWriteDetailDispatchUpdate;
 export let WIKWriteDetailDispatchOpen;
 export let OLSKMobileViewInactive = false;
+
+export const WIKWriteDetailSetItem = function (inputData) {
+	mod._ValueItem = inputData;
+};
 
 export const WIKWriteDetailFocus = function () {
 	mod.ControlConfigureEditor(function (inputData) {
@@ -24,6 +27,8 @@ export const OLSKLocalized = function(translationConstant) {
 };
 
 const mod = {
+
+	_ValueItem: undefined,
 
 	// MESSAGE
 
@@ -69,11 +74,11 @@ import WKCWriteEditor from '../WKCWriteEditor/main.svelte';
 
 <div class="WIKWriteDetail OLSKViewportDetail" class:OLSKMobileViewInactive={ OLSKMobileViewInactive }>
 
-{#if !WIKWriteDetailItem}
+{#if !mod._ValueItem}
 <div class="WIKWriteDetailPlaceholder OLSKLayoutElementTextVisual">{ OLSKLocalized('WIKWriteDetailPlaceholderText') }</div>
 {/if}
 
-{#if WIKWriteDetailItem}
+{#if mod._ValueItem}
 <header class="WIKWriteDetailToolbar">
 	<OLSKToolbar OLSKToolbarJustify={ true }>
 		<OLSKToolbarElementGroup>
@@ -81,14 +86,14 @@ import WKCWriteEditor from '../WKCWriteEditor/main.svelte';
 		</OLSKToolbarElementGroup>
 
 		<OLSKToolbarElementGroup>
-			<button class="WIKWriteDetailToolbarDiscardButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable" on:click={ () => window.confirm(OLSKLocalized('WIKWriteDetailDiscardPromptText')) && WIKWriteDetailDispatchDiscard(WIKWriteDetailItem) }>{ OLSKLocalized('WIKWriteDetailToolbarDiscardButtonText') }</button>
+			<button class="WIKWriteDetailToolbarDiscardButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable" on:click={ () => window.confirm(OLSKLocalized('WIKWriteDetailDiscardPromptText')) && WIKWriteDetailDispatchDiscard(mod._ValueItem) }>{ OLSKLocalized('WIKWriteDetailToolbarDiscardButtonText') }</button>
 		</OLSKToolbarElementGroup>
 	</OLSKToolbar>
 </header>
 
 <div class="WIKWriteDetailForm">
 	<WKCWriteEditor
-		WKCWriteEditorInitialValue={ WIKWriteDetailItem.WKCNoteBody }
+		WKCWriteEditorInitialValue={ mod._ValueItem.WKCNoteBody }
 		WKCWriteEditorDispatchUpdate={ mod.WKCWriteEditorDispatchUpdate }
 		WKCWriteEditorDispatchOpen={ mod.WKCWriteEditorDispatchOpen }
 		WKCWriteEditorDispatchReady={ mod.WKCWriteEditorDispatchReady }

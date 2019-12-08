@@ -1,5 +1,13 @@
 import RollupStart from './main.svelte';
 
+const params = Object.fromEntries(Array.from((new window.URLSearchParams(window.location.search)).entries()).map(function (e) {
+	if (['WIKWriteDetailItem'].includes(e[0])) {
+		e[1] = JSON.parse(e[1]);
+	}
+
+	return e;
+}));
+
 const WIKWriteDetail = new RollupStart({
 	target: document.body,
 	props: Object.assign({
@@ -15,19 +23,21 @@ const WIKWriteDetail = new RollupStart({
 			window.TestWIKWriteDetailDispatchUpdateData.innerHTML = inputData;
 		}),
 		WIKWriteDetailDispatchOpen: (function _WIKWriteDetailDispatchOpen () {}),
-	}, Object.fromEntries(Array.from((new window.URLSearchParams(window.location.search)).entries()).map(function (e) {
-		if (['WIKWriteDetailItem'].includes(e[0])) {
-			e[1] = JSON.parse(e[1]);
-		}
-
-		return e;
+	}, Object.fromEntries(Object.entries(params).filter(function (e) {
+		return e[0] !== 'WIKWriteDetailItem'
 	}))),
 });
 
 window.WIKWriteDetailBehaviour = {
+
 	TestWIKWriteDetailFocus () {
 		WIKWriteDetail.WIKWriteDetailFocus();
 	},
+
+	TestWIKWriteDetailSetItem () {
+		WIKWriteDetail.WIKWriteDetailSetItem(params.WIKWriteDetailItem);
+	},
+
 };
 
 export default WIKWriteDetail;

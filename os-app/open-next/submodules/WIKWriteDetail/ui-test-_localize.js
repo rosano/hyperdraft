@@ -30,6 +30,10 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 				});
 			});
 
+			before(function () {
+				browser.pressButton('#TestWIKWriteDetailSetItem');
+			});
+
 			it('localizes WIKWriteDetailToolbarBackButton', function () {
 				browser.assert.text(WIKWriteDetailToolbarBackButton, uLocalized('WIKWriteDetailToolbarBackButtonText'));
 			});

@@ -18,13 +18,17 @@ const mod = {
 
 	_ValueNotesVisible: [],
 
-	ValueNotesVisible(inputData) {
+	ValueNotesVisible (inputData) {
 		mod._ValueNotesVisible = (!mod._ValueFilterText ? inputData : inputData.filter(function (e) {
 			return e.WKCNoteBody.toLowerCase().match(mod._ValueFilterText.toLowerCase());
 		})).sort(WKCWriteLogic.WKCWriteSort);
 	},
 	
 	_ValueNoteSelected: undefined,
+
+	ValueNoteSelected (inputData) {
+		mod.WIKWriteDetailInstance.WIKWriteDetailSetItem(mod._ValueNoteSelected = inputData);
+	},
 	
 	_ValueFilterText: '',
 	
@@ -59,7 +63,7 @@ const mod = {
 	},
 
 	WKCWriteMasterDispatchArrow (inputData) {
-		mod._ValueNoteSelected = inputData;
+		mod.ValueNoteSelected(inputData);
 	},
 
 	WKCWriteMasterDispatchFilter (inputData) {
@@ -156,7 +160,7 @@ const mod = {
 	},
 	
 	ControlNoteSelect(inputData) {
-		mod._ValueNoteSelected = inputData;
+		mod.ValueNoteSelected(inputData);
 
 		if (!inputData && !OLSK_TESTING_BEHAVIOUR()) {
 			document.querySelector('.WKCWriteMasterBody').scrollTo(0, 0);
@@ -202,11 +206,11 @@ const mod = {
 			return mod.ControlNoteSelect(null);
 		}
 
-		mod._ValueNoteSelected = mod._ValueNotesVisible.filter(function (e) {
+		mod.ValueNoteSelected(mod._ValueNotesVisible.filter(function (e) {
 			return WKCParser.WKCParserTitleForPlaintext(e.WKCNoteBody).toLowerCase() === inputData.toLowerCase();
 		}).concat(mod._ValueNotesVisible.filter(function (e) {
 			return WKCParser.WKCParserTitleForPlaintext(e.WKCNoteBody).toLowerCase().includes(inputData.toLowerCase());
-		})).shift();
+		})).shift());
 	},
 
 	async ControlNotesExport () {
@@ -328,7 +332,6 @@ import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svel
 		/>
 	
 	<WIKWriteDetail
-		WIKWriteDetailItem={ mod._ValueNoteSelected }
 		WIKWriteDetailDispatchBack={ mod.WIKWriteDetailDispatchBack }
 		WIKWriteDetailDispatchDiscard={ mod.WIKWriteDetailDispatchDiscard }
 		WIKWriteDetailDispatchUpdate={ mod.WIKWriteDetailDispatchUpdate }

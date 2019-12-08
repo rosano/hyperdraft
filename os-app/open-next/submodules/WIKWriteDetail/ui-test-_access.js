@@ -17,9 +17,13 @@ Object.entries({
 });
 
 describe('WIKWriteDetail_Access', function () {
-
+	
 	before(function() {
-		return browser.OLSKVisit(kDefaultRoute);
+		return browser.OLSKVisit(kDefaultRoute, {
+			WIKWriteDetailItem: JSON.stringify({
+				WKCNoteBody: 'alfa',
+			}),
+		});
 	});
 
 	it('shows WIKWriteDetail', function () {
@@ -39,13 +43,9 @@ describe('WIKWriteDetail_Access', function () {
 	});
 
 	context('WIKWriteDetailItem', function() {
-		
-		before(function() {
-			return browser.OLSKVisit(kDefaultRoute, {
-				WIKWriteDetailItem: JSON.stringify({
-					WKCNoteBody: 'alfa',
-				}),
-			});
+
+		before(function () {
+			browser.pressButton('#TestWIKWriteDetailSetItem');
 		});
 
 		it('hides WIKWriteDetailPlaceholder', function () {

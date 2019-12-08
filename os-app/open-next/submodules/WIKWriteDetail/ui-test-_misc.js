@@ -17,6 +17,10 @@ describe('WIKWriteDetail_Misc', function () {
 				WIKWriteDetailItem: JSON.stringify(uItem()),
 			});
 		});
+
+		before(function () {
+			browser.pressButton('#TestWIKWriteDetailSetItem');
+		});
 		
 		it('sets class', function () {
 			browser.assert.hasClass(WIKWriteDetail, 'OLSKViewportDetail');
@@ -48,6 +52,10 @@ describe('WIKWriteDetail_Misc', function () {
 			return browser.OLSKVisit(kDefaultRoute, {
 				WIKWriteDetailItem: JSON.stringify(uItem()),
 			});
+		});
+
+		before(function () {
+			browser.pressButton('#TestWIKWriteDetailSetItem');
 		});
 		
 		it('sets class', function () {
@@ -129,6 +137,10 @@ describe('WIKWriteDetail_Misc', function () {
 			return browser.OLSKVisit(kDefaultRoute, {
 				WIKWriteDetailItem: JSON.stringify(uItem()),
 			});
+		});
+
+		before(function () {
+			browser.pressButton('#TestWIKWriteDetailSetItem');
 		});
 		
 		it.skip('binds WKCNoteBody', function () {
