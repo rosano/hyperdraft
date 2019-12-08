@@ -96,7 +96,9 @@ const mod = {
 		mod.ControlNoteSave();
 	},
 
-	WIKWriteDetailDispatchOpen () {},
+	WIKWriteDetailDispatchOpen (inputData) {
+		mod.ControlFilter(inputData);
+	},
 
 	MessageNotesAllDidChange(inputData) {
 		mod.ValueNotesVisible(inputData);

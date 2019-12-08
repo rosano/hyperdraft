@@ -43,6 +43,22 @@ const mod = {
 
 	// INTERFACE
 
+	InterfaceEditorDidTouchDown (instance, event) {
+		if (!event.target.className.match('cm-link'))  {
+			return;
+		}
+
+		event.preventDefault();
+	},
+
+	InterfaceEditorDidTouchUp (event) {
+		if (!event.target.className.match('cm-link'))  {
+			return;
+		}
+
+		mod.ControlOpenTextObject(event.target.textContent);
+	},
+
 	InterfaceEditorFieldDebugDidInput () {
 		WKCWriteEditorDispatchUpdate(this.value);
 	},
@@ -140,6 +156,48 @@ const mod = {
 		});
 
 		WKCWriteEditorDispatchReady();
+
+		mod._ValueEditorInstance.on('keydown', function (instance, event) {
+			if (!navigator.platform.match(/mac/i)) {
+				return;
+			}
+
+			if (!navigator.userAgent.match(/^((?!chrome|android).)*safari/i)) {
+				return;
+			}
+
+			if (!event.altKey || !event.ctrlKey) {
+				return;
+			}
+
+			let elements = document.querySelectorAll('[accesskey]');
+
+			if (!elements.length) {
+				return;
+			}
+
+			let match = [].slice.call(elements).filter(function (e) {
+				return e.getAttribute('accesskey') === event.key;
+			}).shift();
+
+			if (!match) {
+				return;
+			}
+
+			event.preventDefault();
+
+			setTimeout(function () {
+				match.focus();
+			});
+		});
+
+		mod._ValueEditorInstance.on('mousedown', mod.InterfaceEditorDidTouchDown);
+
+		mod._ValueEditorInstance.on('touchstart', mod.InterfaceEditorDidTouchDown);
+
+		document.querySelector('.CodeMirror').addEventListener('mouseup', mod.InterfaceEditorDidTouchUp);
+
+		document.querySelector('.CodeMirror').addEventListener('touchend', mod.InterfaceEditorDidTouchUp);
 	},
 
 	// LIFECYCLE
