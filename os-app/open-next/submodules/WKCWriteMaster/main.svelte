@@ -167,19 +167,34 @@ import WKCWriteMasterListItem from '../WKCWriteMasterListItem/main.svelte';
 .WKCWriteMaster {
 	border-right: var(--WKCBorderStyle);
 
-	/* WKCWriteMasterFlexboxParent */
+	/* WKCWriteMasterFlexbox:Parent */
 	display: flex;
 	flex-direction: column;
 }
 
 .WKCWriteMasterToolbar {
 	border-bottom: var(--WKCBorderStyle);
+
+	/* WKCWriteMasterFlexbox:Child */
+	flex-shrink: 0;
+}
+
+.WKCWriteMasterToolbar :global(.OLSKToolbarElementGroup) {
+	margin-left: 4px;
+}
+
+@media screen and (max-width: 760px) {
+
+.WKCWriteMasterToolbar :global(.OLSKToolbarElementGroup) {
+	margin-left: 8px;
+}
+
 }
 
 .WKCWriteMasterBody {
 	overflow: auto;
 	
-	/* WKCWriteMasterFlexboxChild */
+	/* WKCWriteMasterFlexbox:Child */
 	flex-grow: 1;
 }
 
@@ -197,6 +212,6 @@ import WKCWriteMasterListItem from '../WKCWriteMasterListItem/main.svelte';
 }
 
 .WKCWriteMasterDebug {
-	padding: 5px;
+	padding: 10px;
 }
 </style>
