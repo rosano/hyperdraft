@@ -71,7 +71,11 @@ const mod = {
 	},
 
 	WKCWriteMasterDelegateItemTitle (inputData) {
-		return WKCParser.WKCParserTitleForPlaintext(inputData.WKCNoteBody);
+		return WKCParser.WKCParserTitleForPlaintext(inputData);
+	},
+
+	WKCWriteMasterDelegateItemBody (inputData) {
+		return WKCParser.WKCParserBodyForPlaintext(inputData);
 	},
 
 	WIKWriteDetailDispatchBack () {
@@ -319,6 +323,7 @@ import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svel
 		WKCWriteMasterDispatchFilter={ mod.WKCWriteMasterDispatchFilter }
 		WKCWriteMasterDispatchExport={ mod.WKCWriteMasterDispatchExport }
 		WKCWriteMasterDelegateItemTitle={ mod.WKCWriteMasterDelegateItemTitle }
+		WKCWriteMasterDelegateItemBody={ mod.WKCWriteMasterDelegateItemBody }
 		OLSKMobileViewInactive={ mod.OLSKMobileViewInactive }
 		/>
 	

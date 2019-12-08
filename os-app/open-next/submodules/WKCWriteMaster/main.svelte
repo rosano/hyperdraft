@@ -8,6 +8,7 @@ export let WKCWriteMasterDispatchArrow;
 export let WKCWriteMasterDispatchFilter;
 export let WKCWriteMasterDispatchExport;
 export let WKCWriteMasterDelegateItemTitle;
+export let WKCWriteMasterDelegateItemBody;
 export let OLSKMobileViewInactive = false;
 
 import OLSKInternational from 'OLSKInternational';
@@ -128,6 +129,7 @@ import OLSKToolbar from 'OLSKToolbar';
 import OLSKToolbarElementGroup from 'OLSKToolbarElementGroup';
 import OLSKInputWrapper from 'OLSKInputWrapper';
 import OLSKResults from 'OLSKResults';
+import WKCWriteMasterListItem from '../WKCWriteMasterListItem/main.svelte';
 </script>
 <svelte:window on:keydown={ mod.InterfaceWindowDidKeydown }/>
 
@@ -147,9 +149,11 @@ import OLSKResults from 'OLSKResults';
 
 <section class="WKCWriteMasterBody OLSKMobileViewBody">
 	<OLSKResults OLSKResultsListItems={ WKCWriteMasterListItems } OLSKResultsListItemSelected={ WKCWriteMasterListItemSelected } OLSKResultsDispatchClick={ WKCWriteMasterDispatchClick } OLSKResultsDispatchArrow={ WKCWriteMasterDispatchArrow } let:OLSKResultsListItem={ e } >
-		<div class="WKCWriteMasterListItem">
-			<strong>{ e.WKCNoteBody }</strong>
-		</div>
+		<WKCWriteMasterListItem
+			WKCWriteMasterListItemAccessibilitySummary={ WKCWriteMasterDelegateItemTitle(e.WKCNoteBody) }
+			WKCWriteMasterListItemTitle={ WKCWriteMasterDelegateItemTitle(e.WKCNoteBody) }
+			WKCWriteMasterListItemSnippet={ WKCWriteMasterDelegateItemBody(e.WKCNoteBody) }
+			/>
 	</OLSKResults>
 
 	<div class="WKCWriteMasterDebug">
@@ -177,12 +181,6 @@ import OLSKResults from 'OLSKResults';
 	
 	/* WKCWriteMasterFlexboxChild */
 	flex-grow: 1;
-}
-
-.WKCWriteMasterListItem {
-	min-height: 40px;
-	padding: 5px;
-	border-bottom: var(--WKCBorderStyle);
 }
 
 .WKCWriteMasterBody :global(.OLSKResultsListItemSelected) {

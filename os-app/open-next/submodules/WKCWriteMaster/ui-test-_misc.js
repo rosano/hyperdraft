@@ -295,13 +295,21 @@ describe('WKCWriteMaster_Misc', function () {
 			return browser.OLSKVisit(kDefaultRoute, {
 				WKCWriteMasterListItems: JSON.stringify([{
 					WKCDocumentID: 'alfa',
-					WKCNoteBody: 'bravo',
+					WKCNoteBody: 'bravo\ncharlie',
 				}]),
 			});
 		});
 
-		it('sets text', function () {
-			browser.assert.text('.WKCWriteMasterListItem', 'bravo');
+		it('sets WKCWriteMasterListItemAccessibilitySummary', function () {
+			browser.assert.text('.WKCWriteMasterListItemAccessibilitySummary', 'bravo');
+		});
+
+		it('sets WKCWriteMasterListItemTitle', function () {
+			browser.assert.text('.WKCWriteMasterListItemTitle', 'bravo');
+		});
+
+		it('sets WKCWriteMasterListItemSnippet', function () {
+			browser.assert.text('.WKCWriteMasterListItemSnippet', 'charlie');
 		});
 
 		context('click', function () {
@@ -319,7 +327,7 @@ describe('WKCWriteMaster_Misc', function () {
 				browser.assert.text('#TestWKCWriteMasterDispatchClick', '1');
 				browser.assert.text('#TestWKCWriteMasterDispatchClickData', JSON.stringify({
 					WKCDocumentID: 'alfa',
-					WKCNoteBody: 'bravo',
+					WKCNoteBody: 'bravo\ncharlie',
 				}));
 			});
 		

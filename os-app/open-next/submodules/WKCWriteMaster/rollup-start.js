@@ -23,7 +23,10 @@ const WKCWriteMaster = new RollupStart({
 		}),
 		WKCWriteMasterDispatchExport: (function _WKCWriteMasterDispatchExport () {}),
 		WKCWriteMasterDelegateItemTitle: (function _WKCWriteMasterDelegateItemTitle (inputData) {
-			return inputData.WKCNoteBody.split('\n').shift();
+			return inputData.split('\n').shift();
+		}),
+		WKCWriteMasterDelegateItemBody: (function _WKCWriteMasterDelegateItemBody (inputData) {
+			return inputData.split('\n').slice(1).join('\n');
 		}),
 	}, Object.fromEntries(Array.from((new window.URLSearchParams(window.location.search)).entries()).map(function (e, index, coll) {
 		if (['WKCWriteMasterListItems', 'WKCWriteMasterListItemSelected'].includes(e[0])) {
