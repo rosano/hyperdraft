@@ -93,7 +93,7 @@ const mod = {
 	WIKWriteDetailDispatchUpdate (inputData) {
 		mod._ValueNoteSelected.WKCNoteBody = inputData;
 		
-		mod.ControlNoteSave();
+		mod.ControlNoteSave(mod._ValueNoteSelected);
 	},
 
 	WIKWriteDetailDispatchOpen (inputData) {
@@ -114,12 +114,12 @@ const mod = {
 
 	// CONTROL
 
-	ControlNoteSave() {
+	ControlNoteSave(inputData) {
 		WKCNotesAllStore.update(function (val) {
 			return val;
 		});
 
-		OLSKThrottle.OLSKThrottleMappedTimeoutFor(mod._ValueSaveThrottleMap, mod._ValueNoteSelected.WKCNoteID, function (inputData) {
+		OLSKThrottle.OLSKThrottleMappedTimeoutFor(mod._ValueSaveThrottleMap, inputData.WKCNoteID, function (inputData) {
 			return {
 				OLSKThrottleDuration: 500,
 				async OLSKThrottleCallback () {
@@ -128,10 +128,10 @@ const mod = {
 					await WKCNoteAction.WKCNoteActionUpdate(storageClient, inputData);
 				},
 			};
-		}, mod._ValueNoteSelected);
+		}, inputData);
 
 		if (OLSK_TESTING_BEHAVIOUR()) {
-			OLSKThrottle.OLSKThrottleSkip(mod._ValueSaveThrottleMap[mod._ValueNoteSelected.WKCNoteID])	
+			OLSKThrottle.OLSKThrottleSkip(mod._ValueSaveThrottleMap[inputData.WKCNoteID])	
 		};
 	},
 
