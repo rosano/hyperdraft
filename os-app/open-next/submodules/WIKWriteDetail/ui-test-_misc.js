@@ -104,6 +104,20 @@ describe('WIKWriteDetail_Misc', function () {
 		it('sets disabled', function () {
 			browser.assert.attribute(WIKWriteDetailToolbarJumpButton, 'disabled', '');
 		});
+
+		context('keydown Ctrl+r', function () {
+			
+			before(function () {
+				return browser.OLSKFireKeyboardEvent(browser.window, 'r', {
+					ctrlKey: true,
+				});
+			});
+
+			it('sends no WIKWriteDetailDispatchJump', function () {
+				browser.assert.text('#TestWIKWriteDetailDispatchJump', '0');
+			});
+		
+		});
 		
 		context('WIKWriteDetailJumpEnabled', function() {
 
@@ -120,22 +134,36 @@ describe('WIKWriteDetail_Misc', function () {
 				browser.assert.attribute(WIKWriteDetailToolbarJumpButton, 'disabled', null);
 			});
 
-		});
+			context('click', function () {
+				
+				before(function () {
+					browser.assert.text('#TestWIKWriteDetailDispatchJump', '0');
+				});
+				
+				before(function () {
+					return browser.pressButton(WIKWriteDetailToolbarJumpButton);
+				});
 
-		context('click', function () {
+				it('sends WIKWriteDetailDispatchJump', function () {
+					browser.assert.text('#TestWIKWriteDetailDispatchJump', '1');
+				});
 			
-			before(function () {
-				browser.assert.text('#TestWIKWriteDetailDispatchJump', '0');
-			});
-			
-			before(function () {
-				return browser.pressButton(WIKWriteDetailToolbarJumpButton);
 			});
 
-			it('sends WIKWriteDetailDispatchJump', function () {
-				browser.assert.text('#TestWIKWriteDetailDispatchJump', '1');
+			context('keydown Ctrl+r', function () {
+				
+				before(function () {
+					return browser.OLSKFireKeyboardEvent(browser.window, 'r', {
+						ctrlKey: true,
+					});
+				});
+
+				it('sends WIKWriteDetailDispatchJump', function () {
+					browser.assert.text('#TestWIKWriteDetailDispatchJump', '2');
+				});
+			
 			});
-		
+
 		});
 	
 	});

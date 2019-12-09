@@ -76,8 +76,18 @@ const mod = {
 		mod._ValueEditorPostInitializeQueue.push(inputData);
 	},
 
-	// VALUE
+	// INTERFACE
 
+
+	InterfaceWindowDidKeydown (event) {
+		if (!WIKWriteDetailJumpEnabled) {
+			return;
+		}
+
+		if (event.ctrlKey && event.key === 'r') {
+			return WIKWriteDetailDispatchJump();
+		}
+	},
 
 };
 
@@ -85,6 +95,7 @@ import OLSKToolbar from 'OLSKToolbar';
 import OLSKToolbarElementGroup from 'OLSKToolbarElementGroup';
 import WKCWriteEditor from '../WKCWriteEditor/main.svelte';
 </script>
+<svelte:window on:keydown={ mod.InterfaceWindowDidKeydown }/>
 
 <div class="WIKWriteDetail OLSKViewportDetail" class:OLSKMobileViewInactive={ OLSKMobileViewInactive }>
 
