@@ -32,6 +32,10 @@ const mod = {
 
 	// DATA
 
+	DataIsFocused () {
+		return document.activeElement === document.querySelector('.WKCWriteMasterFilterField');
+	},
+
 	DataIsMobile () {
 		return window.innerWidth <= 760;
 	},
@@ -51,7 +55,7 @@ const mod = {
 	},
 
 	InterfaceWindowDidKeydown (event) {
-		if (document.activeElement !== document.querySelector('.WKCWriteMasterFilterField')) {
+		if (!mod.DataIsFocused()) {
 			return;
 		}
 
@@ -148,7 +152,13 @@ import WKCWriteMasterListItem from '../WKCWriteMasterListItem/main.svelte';
 </header>
 
 <section class="WKCWriteMasterBody OLSKMobileViewBody">
-	<OLSKResults OLSKResultsListItems={ WKCWriteMasterListItems } OLSKResultsListItemSelected={ WKCWriteMasterListItemSelected } OLSKResultsDispatchClick={ WKCWriteMasterDispatchClick } OLSKResultsDispatchArrow={ WKCWriteMasterDispatchArrow } let:OLSKResultsListItem={ e } >
+	<OLSKResults
+		OLSKResultsListItems={ WKCWriteMasterListItems }
+		OLSKResultsListItemSelected={ WKCWriteMasterListItemSelected }
+		OLSKResultsDispatchClick={ WKCWriteMasterDispatchClick }
+		OLSKResultsDispatchArrow={ (inputData) => mod.DataIsFocused() && WKCWriteMasterDispatchArrow(inputData) }
+		let:OLSKResultsListItem={ e }
+		>
 		<WKCWriteMasterListItem
 			WKCWriteMasterListItemAccessibilitySummary={ WKCWriteMasterDelegateItemTitle(e.WKCNoteBody) }
 			WKCWriteMasterListItemTitle={ WKCWriteMasterDelegateItemTitle(e.WKCNoteBody) }

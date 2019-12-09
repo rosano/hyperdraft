@@ -92,6 +92,10 @@ describe('WKCWriteMaster_Misc', function () {
 			context('keydown ArrowUp', function() {
 
 				before(function () {
+					return browser.query('.WKCWriteMasterFilterField').focus();
+				});
+				
+				before(function () {
 					browser.assert.text('#TestWKCWriteMasterDispatchArrow', '0');
 				});
 

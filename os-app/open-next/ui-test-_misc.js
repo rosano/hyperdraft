@@ -248,6 +248,34 @@ describe('WKCWrite_Misc', function () {
 
 	});
 
+	context('selection', function test_selection () {
+		
+		before(function () {
+			return browser.click('.WKCWriteMasterListItem');
+		});
+
+		it('sets WKCWriteMasterListItemSelected', function () {
+			browser.assert.hasClass('.OLSKResultsListItem:first-of-type', 'OLSKResultsListItemSelected');
+		});
+
+		context('arrow', function () {
+
+			before(function () {
+				return browser.query('.WKCWriteEditorFieldDebug').focus();
+			});
+
+			before(function () {
+				return browser.OLSKFireKeyboardEvent(browser.window, 'ArrowDown');
+			});
+
+			it('sets no WKCWriteMasterListItemSelected', function () {
+				browser.assert.hasClass('.OLSKResultsListItem:first-of-type', 'OLSKResultsListItemSelected');
+			});
+		
+		});
+
+	});
+
 	describe('WKCWriteStorageWidget', function test_WKCWriteStorageWidget () {
 		
 		it('sets class', function () {
