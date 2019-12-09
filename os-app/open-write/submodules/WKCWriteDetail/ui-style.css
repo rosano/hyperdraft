@@ -1,44 +1,44 @@
-.WIKWriteDetail {
-	/* WIKWriteDetailFlexbox:Parent */
+.WKCWriteDetail {
+	/* WKCWriteDetailFlexbox:Parent */
 	display: flex;
 	flex-direction: column;
 }
 
 @media screen and (max-width: 760px) {
 
-.WIKWriteDetail {
+.WKCWriteDetail {
 	min-height: 100%;
 }
 
 }
 
-.WIKWriteDetailPlaceholder {
+.WKCWriteDetailPlaceholder {
 	opacity: 0.5;
 	text-align: center;
 
-	/* WIKWriteDetailFlexbox:Child */
+	/* WKCWriteDetailFlexbox:Child */
 	flex-grow: 1;
 
-	/* WIKWriteDetailPlaceholderFlexbox:Parent */
+	/* WKCWriteDetailPlaceholderFlexbox:Parent */
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
 
-:global(.OLSKIsLoading) .WIKWriteDetailPlaceholder {
+:global(.OLSKIsLoading) .WKCWriteDetailPlaceholder {
 	visibility: hidden;
 }
 
-.WIKWriteDetailToolbar {
+.WKCWriteDetailToolbar {
 	border-bottom: var(--WKCBorderStyle);
 
-	/* WIKWriteDetailFlexbox:Child */
+	/* WKCWriteDetailFlexbox:Child */
 	flex-shrink: 0;
 }
 
 @media screen and (max-width: 760px) {
 
-.WIKWriteDetailToolbar {
+.WKCWriteDetailToolbar {
 	/* browser quirks */
 	z-index: 999;
 }
@@ -47,21 +47,21 @@
 
 @media screen and (min-width: 760px) {
 
-.WIKWriteDetailToolbarBackButton {
+.WKCWriteDetailToolbarBackButton {
 	display: none;
 }
 
 }
 
-.WIKWriteDetail :global(.WKCWriteEditor) {
-	/* WIKWriteDetailFlexbox:Child */
+.WKCWriteDetail :global(.WKCWriteEditor) {
+	/* WKCWriteDetailFlexbox:Child */
 	flex-grow: 1;
 }
 
 @media screen and (min-width: 760px) {
 
-.WIKWriteDetail :global(.WKCWriteEditor) {
-	/* WIKWriteEditorStation:Parent */
+.WKCWriteDetail :global(.WKCWriteEditor) {
+	/* WKCWriteEditorStation:Parent */
 	position: relative;
 }
 
@@ -69,7 +69,7 @@
 
 @media screen and (max-width: 760px) {
 
-.WIKWriteDetail :global(.WKCWriteEditor) {
+.WKCWriteDetail :global(.WKCWriteEditor) {
 	min-height: 100%;
 }
 
@@ -77,17 +77,17 @@
 
 /* CodeMirror */
 
-.WIKWriteDetail :global(.CodeMirror) {
+.WKCWriteDetail :global(.CodeMirror) {
 	font-family: inherit;
 	font-size: 14px;
 }
 
 @media screen and (min-width: 760px) {
 
-.WIKWriteDetail :global(.CodeMirror) {
+.WKCWriteDetail :global(.CodeMirror) {
 	height: 100%;
 
-	/* WIKWriteEditorStation:Child */
+	/* WKCWriteEditorStation:Child */
 	position: absolute;
 	top: 0;
 	bottom: 0;
@@ -99,39 +99,39 @@
 
 @media screen and (max-width: 760px) {
 
-.WIKWriteDetail :global(.CodeMirror) {
+.WKCWriteDetail :global(.CodeMirror) {
 	/* CodeMirrorResizeToContent */
 	height: auto;
 }
 
 }
 
-.WIKWriteDetail :global(.CodeMirror-scroll) {
+.WKCWriteDetail :global(.CodeMirror-scroll) {
 	background: #f8f8f8;
 }
 
 @media screen and (max-width: 760px) {
 
-.WIKWriteDetail :global(.CodeMirror-scroll) {
+.WKCWriteDetail :global(.CodeMirror-scroll) {
 	min-height: calc(100vh - 52px - 52px);
 }
 
 }
 
-.WIKWriteDetail :global(.CodeMirror-lines) {
+.WKCWriteDetail :global(.CodeMirror-lines) {
 	/* override defaults */
 	padding: 10px;
 }
 
-.WIKWriteDetail :global(.CodeMirror pre) {
+.WKCWriteDetail :global(.CodeMirror pre) {
 	/* override defaults */
 	padding: 0;
 }
 
-.WIKWriteDetail :global(.CodeMirror-line:nth-child(1)) {
+.WKCWriteDetail :global(.CodeMirror-line:nth-child(1)) {
 	font-weight: bold;
 }
 
-.WIKWriteDetail :global(.cm-link:hover) {
+.WKCWriteDetail :global(.cm-link:hover) {
   cursor: pointer;
 }

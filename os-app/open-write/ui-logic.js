@@ -1,4 +1,4 @@
-export const WIKWriteTruncatedTitleFor = function (inputData, param2) {
+export const WKCWriteTruncatedTitleFor = function (inputData, param2) {
 	if (typeof inputData !== 'string') {
 		throw new Error('WKCErrorInputNotValid');
 	}

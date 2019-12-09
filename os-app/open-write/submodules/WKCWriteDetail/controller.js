@@ -1,8 +1,8 @@
 exports.OLSKControllerRoutes = function() {
 	return [{
-		OLSKRoutePath: '/stub/WIKWriteDetail',
+		OLSKRoutePath: '/stub/WKCWriteDetail',
 		OLSKRouteMethod: 'get',
-		OLSKRouteSignature: 'WIKWriteDetailStubRoute',
+		OLSKRouteSignature: 'WKCWriteDetailStubRoute',
 		OLSKRouteFunction (req, res, next) {
 			return res.render(require('path').join(__dirname, 'stub-view'), {});
 		},

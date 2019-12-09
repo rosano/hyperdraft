@@ -17,11 +17,11 @@ describe('WKCWrite_Misc', function () {
 	});
 
 	it('classes OLSKMobileViewInactive', function () {
-		browser.assert.hasClass('.WIKWriteDetail', 'OLSKMobileViewInactive');
+		browser.assert.hasClass('.WKCWriteDetail', 'OLSKMobileViewInactive');
 	});
 
-	it('sets WIKWriteDetailItem', function () {
-		browser.assert.elements('.WIKWriteDetailPlaceholder', 1);
+	it('sets WKCWriteDetailItem', function () {
+		browser.assert.elements('.WKCWriteDetailPlaceholder', 1);
 	});
 
 	it('focuses WKCWriteMasterFilterField', function() {
@@ -47,11 +47,11 @@ describe('WKCWrite_Misc', function () {
 		});
 
 		it('classes OLSKMobileViewInactive', function() {
-			browser.assert.hasNoClass('.WIKWriteDetail', 'OLSKMobileViewInactive');
+			browser.assert.hasNoClass('.WKCWriteDetail', 'OLSKMobileViewInactive');
 		});
 
-		it('sets WIKWriteDetailItem', function () {
-			browser.assert.elements('.WIKWriteDetailPlaceholder', 0);
+		it('sets WKCWriteDetailItem', function () {
+			browser.assert.elements('.WKCWriteDetailPlaceholder', 0);
 		});
 
 		it.skip('focus WKCWriteEditor', function() {
@@ -63,7 +63,7 @@ describe('WKCWrite_Misc', function () {
 	context('back', function test_back () {
 
 		before(function () {
-			return browser.pressButton('.WIKWriteDetailToolbarBackButton');
+			return browser.pressButton('.WKCWriteDetailToolbarBackButton');
 		});
 
 		it('classes WKCWriteMaster', function() {
@@ -75,15 +75,15 @@ describe('WKCWrite_Misc', function () {
 		});
 
 		it('classes OLSKMobileViewInactive', function() {
-			browser.assert.hasClass('.WIKWriteDetail', 'OLSKMobileViewInactive');
+			browser.assert.hasClass('.WKCWriteDetail', 'OLSKMobileViewInactive');
 		});
 
 		it('focuses WKCWriteMasterFilterField', function() {
 			browser.assert.hasFocus('.WKCWriteMasterFilterField');
 		});
 
-		it('sets WIKWriteDetailItem', function () {
-			browser.assert.elements('.WIKWriteDetailPlaceholder', 1);
+		it('sets WKCWriteDetailItem', function () {
+			browser.assert.elements('.WKCWriteDetailPlaceholder', 1);
 		});
 
 	});
@@ -107,11 +107,11 @@ describe('WKCWrite_Misc', function () {
 		});
 
 		it('classes OLSKMobileViewInactive', function() {
-			browser.assert.hasClass('.WIKWriteDetail', 'OLSKMobileViewInactive');
+			browser.assert.hasClass('.WKCWriteDetail', 'OLSKMobileViewInactive');
 		});
 
-		it('sets WIKWriteDetailItem', function () {
-			browser.assert.elements('.WIKWriteDetailPlaceholder', 0);
+		it('sets WKCWriteDetailItem', function () {
+			browser.assert.elements('.WKCWriteDetailPlaceholder', 0);
 		});
 
 	});
@@ -211,11 +211,11 @@ describe('WKCWrite_Misc', function () {
 		});
 
 		it('classes OLSKMobileViewInactive', function() {
-			browser.assert.hasNoClass('.WIKWriteDetail', 'OLSKMobileViewInactive');
+			browser.assert.hasNoClass('.WKCWriteDetail', 'OLSKMobileViewInactive');
 		});
 
-		it('sets WIKWriteDetailItem', function () {
-			browser.assert.elements('.WIKWriteDetailPlaceholder', 0);
+		it('sets WKCWriteDetailItem', function () {
+			browser.assert.elements('.WKCWriteDetailPlaceholder', 0);
 		});
 
 		it.skip('focus WKCWriteEditor', function() {
@@ -244,8 +244,8 @@ describe('WKCWrite_Misc', function () {
 				browser.assert.elements('.WKCWriteMasterListItem', 0);
 			});
 
-			it('sets WIKWriteDetailItem', function () {
-				browser.assert.elements('.WIKWriteDetailPlaceholder', 1);
+			it('sets WKCWriteDetailItem', function () {
+				browser.assert.elements('.WKCWriteDetailPlaceholder', 1);
 			});
 		
 		});
@@ -264,8 +264,8 @@ describe('WKCWrite_Misc', function () {
 				browser.assert.elements('.OLSKResultsListItemSelected', 1);
 			});
 
-			it('sets WIKWriteDetailItem', function () {
-				browser.assert.elements('.WIKWriteDetailPlaceholder', 0);
+			it('sets WKCWriteDetailItem', function () {
+				browser.assert.elements('.WKCWriteDetailPlaceholder', 0);
 			});
 		
 		});
@@ -284,8 +284,8 @@ describe('WKCWrite_Misc', function () {
 				browser.assert.elements('.OLSKResultsListItemSelected', 1);
 			});
 
-			it('sets WIKWriteDetailItem', function () {
-				browser.assert.elements('.WIKWriteDetailPlaceholder', 0);
+			it('sets WKCWriteDetailItem', function () {
+				browser.assert.elements('.WKCWriteDetailPlaceholder', 0);
 			});
 		
 		});
@@ -304,8 +304,8 @@ describe('WKCWrite_Misc', function () {
 				browser.assert.elements('.OLSKResultsListItemSelected', 0);
 			});
 
-			it('sets WIKWriteDetailItem', function () {
-				browser.assert.elements('.WIKWriteDetailPlaceholder', 1);
+			it('sets WKCWriteDetailItem', function () {
+				browser.assert.elements('.WKCWriteDetailPlaceholder', 1);
 			});
 
 			it('sorts WKCWriteMasterListItem', function () {
@@ -351,7 +351,7 @@ describe('WKCWrite_Misc', function () {
 		});
 
 		before(function () {
-			return browser.pressButton('.WIKWriteDetailToolbarJumpButton');
+			return browser.pressButton('.WKCWriteDetailToolbarJumpButton');
 		});
 
 		it('runs Launchlet', function() {
@@ -375,11 +375,11 @@ describe('WKCWrite_Misc', function () {
 	context('publish', function test_publish () {
 		
 		before(function () {
-			return browser.click('.WIKWriteDetailToolbarPublishButton');
+			return browser.click('.WKCWriteDetailToolbarPublishButton');
 		});
 
 		it('sets WKCNotePublishStatusIsPublished', function () {
-			browser.assert.elements('.WIKWriteDetailToolbarPublishButton', 0);
+			browser.assert.elements('.WKCWriteDetailToolbarPublishButton', 0);
 		});
 
 	});
@@ -387,11 +387,11 @@ describe('WKCWrite_Misc', function () {
 	context('retract', function test_retract () {
 		
 		before(function () {
-			return browser.click('.WIKWriteDetailToolbarRetractButton');
+			return browser.click('.WKCWriteDetailToolbarRetractButton');
 		});
 
 		it('sets WKCNotePublishStatusIsPublished', function () {
-			browser.assert.elements('.WIKWriteDetailToolbarPublishButton', 1);
+			browser.assert.elements('.WKCWriteDetailToolbarPublishButton', 1);
 		});
 
 	});

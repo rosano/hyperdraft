@@ -22,12 +22,12 @@ describe('WKCWrite_Access', function () {
 		browser.assert.elements('.WKCWriteMasterListItem', 0);
 	});
 
-	it('shows WIKWriteDetail', function () {
-		browser.assert.elements('.WIKWriteDetail', 1);
+	it('shows WKCWriteDetail', function () {
+		browser.assert.elements('.WKCWriteDetail', 1);
 	});
 
-	it('shows WIKWriteDetailPlaceholder', function () {
-		browser.assert.elements('.WIKWriteDetailPlaceholder', 1);
+	it('shows WKCWriteDetailPlaceholder', function () {
+		browser.assert.elements('.WKCWriteDetailPlaceholder', 1);
 	});
 
 	it('shows WKCWriteFooter', function () {
@@ -48,8 +48,8 @@ describe('WKCWrite_Access', function () {
 			browser.assert.elements('.WKCWriteMasterListItem', 1);
 		});
 
-		it('hides WIKWriteDetailPlaceholder', function () {
-			browser.assert.elements('.WIKWriteDetailPlaceholder', 0);
+		it('hides WKCWriteDetailPlaceholder', function () {
+			browser.assert.elements('.WKCWriteDetailPlaceholder', 0);
 		});
 	
 	});
@@ -57,11 +57,11 @@ describe('WKCWrite_Access', function () {
 	context('back', function () {
 		
 		before(function () {
-			return browser.pressButton('.WIKWriteDetailToolbarBackButton');
+			return browser.pressButton('.WKCWriteDetailToolbarBackButton');
 		});
 
-		it('shows WIKWriteDetailPlaceholder', function () {
-			browser.assert.elements('.WIKWriteDetailPlaceholder', 1);
+		it('shows WKCWriteDetailPlaceholder', function () {
+			browser.assert.elements('.WKCWriteDetailPlaceholder', 1);
 		});
 	
 	});
@@ -76,8 +76,8 @@ describe('WKCWrite_Access', function () {
 			browser.assert.elements('.WKCWriteMasterListItem', 1);
 		});
 
-		it('hides WIKWriteDetailPlaceholder', function () {
-			browser.assert.elements('.WIKWriteDetailPlaceholder', 0);
+		it('hides WKCWriteDetailPlaceholder', function () {
+			browser.assert.elements('.WKCWriteDetailPlaceholder', 0);
 		});
 	
 	});
@@ -88,7 +88,7 @@ describe('WKCWrite_Access', function () {
 			
 			before(async function () {
 				return browser.OLSKConfirm(function () {
-					browser.pressButton('.WIKWriteDetailToolbarDiscardButton');
+					browser.pressButton('.WKCWriteDetailToolbarDiscardButton');
 				}, function (dialog) {
 					dialog.response = false;
 
@@ -96,8 +96,8 @@ describe('WKCWrite_Access', function () {
 				});
 			});
 
-			it('hides WIKWriteDetailPlaceholder', function () {
-				browser.assert.elements('.WIKWriteDetailPlaceholder', 0);
+			it('hides WKCWriteDetailPlaceholder', function () {
+				browser.assert.elements('.WKCWriteDetailPlaceholder', 0);
 			});
 		
 		});
@@ -106,7 +106,7 @@ describe('WKCWrite_Access', function () {
 			
 			before(async function () {
 				return browser.OLSKConfirm(function () {
-					return browser.pressButton('.WIKWriteDetailToolbarDiscardButton');
+					return browser.pressButton('.WKCWriteDetailToolbarDiscardButton');
 				});
 			});
 
@@ -114,8 +114,8 @@ describe('WKCWrite_Access', function () {
 				browser.assert.elements('.WKCWriteMasterListItem', 0);
 			});
 
-			it('shows WIKWriteDetailPlaceholder', function () {
-				browser.assert.elements('.WIKWriteDetailPlaceholder', 1);
+			it('shows WKCWriteDetailPlaceholder', function () {
+				browser.assert.elements('.WKCWriteDetailPlaceholder', 1);
 			});
 		
 		});

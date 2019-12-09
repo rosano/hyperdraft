@@ -28,7 +28,7 @@ const mod = {
 	_ValueNoteSelected: undefined,
 
 	ValueNoteSelected (inputData) {
-		mod.WIKWriteDetailInstance.WIKWriteDetailSetItem(mod._ValueNoteSelected = inputData);
+		mod.WKCWriteDetailInstance.WKCWriteDetailSetItem(mod._ValueNoteSelected = inputData);
 	},
 	
 	_ValueFilterText: '',
@@ -41,7 +41,7 @@ const mod = {
 
 	_ValueSaveVersionThrottleMap: {},
 
-	WIKWriteDetailInstance: undefined,
+	WKCWriteDetailInstance: undefined,
 
 	OLSKMobileViewInactive: false,
 
@@ -78,44 +78,44 @@ const mod = {
 	},
 
 	WKCWriteMasterDelegateItemTitle (param1, param2) {
-		return WKCWriteLogic.WIKWriteTruncatedTitleFor(WKCParser.WKCParserTitleForPlaintext(param1), param2);
+		return WKCWriteLogic.WKCWriteTruncatedTitleFor(WKCParser.WKCParserTitleForPlaintext(param1), param2);
 	},
 
 	WKCWriteMasterDelegateItemBody (inputData) {
 		return WKCParser.WKCParserSnippetForPlaintext(WKCParser.WKCParserBodyForPlaintext(inputData));
 	},
 
-	WIKWriteDetailDispatchBack () {
+	WKCWriteDetailDispatchBack () {
 		mod.ControlNoteSelect(null);
 	},
 
-	WIKWriteDetailDispatchJump (inputData) {
+	WKCWriteDetailDispatchJump (inputData) {
 		mod.ControlNoteJump(inputData);
 	},
 
-	WIKWriteDetailDispatchPublish () {
+	WKCWriteDetailDispatchPublish () {
 		mod.ControlNotePublish(mod._ValueNoteSelected);
 	},
 
-	WIKWriteDetailDispatchRetract () {
+	WKCWriteDetailDispatchRetract () {
 		mod.ControlNoteRetract(mod._ValueNoteSelected);
 	},
 
-	WIKWriteDetailDispatchVersions () {
+	WKCWriteDetailDispatchVersions () {
 		mod.ControlNoteVersions(mod._ValueNoteSelected);
 	},
 
-	WIKWriteDetailDispatchDiscard () {
+	WKCWriteDetailDispatchDiscard () {
 		mod.ControlNoteDiscard(mod._ValueNoteSelected);
 	},
 
-	WIKWriteDetailDispatchUpdate (inputData) {
+	WKCWriteDetailDispatchUpdate (inputData) {
 		mod._ValueNoteSelected.WKCNoteBody = inputData;
 		
 		mod.ControlNoteSave(mod._ValueNoteSelected);
 	},
 
-	WIKWriteDetailDispatchOpen (inputData) {
+	WKCWriteDetailDispatchOpen (inputData) {
 		mod.ControlFilter(inputData);
 	},
 
@@ -143,7 +143,7 @@ const mod = {
 				mod.ControlFilter('');
 			},
 			Tab () {
-				document.activeElement !== document.querySelector('.WKCWriteMasterFilterField') ? document.querySelector('.WKCWriteMasterFilterField').focus() : mod.WIKWriteDetailInstance.WIKWriteDetailFocus();
+				document.activeElement !== document.querySelector('.WKCWriteMasterFilterField') ? document.querySelector('.WKCWriteMasterFilterField').focus() : mod.WKCWriteDetailInstance.WKCWriteDetailFocus();
 
 				event.preventDefault();
 			},
@@ -211,7 +211,7 @@ const mod = {
 		mod.ControlNoteSelect(item);
 
 		if (mod.DataIsMobile()) {
-			mod.WIKWriteDetailInstance.WIKWriteDetailFocus();
+			mod.WKCWriteDetailInstance.WKCWriteDetailFocus();
 		}
 		
 		if (typeof inputData !== 'string') {
@@ -222,7 +222,7 @@ const mod = {
 			return;
 		}
 
-		mod.WIKWriteDetailInstance.WIKWriteDetailSetCursor(inputData.split('\n').length - 1, 0);
+		mod.WKCWriteDetailInstance.WKCWriteDetailSetCursor(inputData.split('\n').length - 1, 0);
 	},
 	
 	ControlNoteSelect(inputData) {
@@ -244,7 +244,7 @@ const mod = {
 			return;
 		}
 		
-		mod.WIKWriteDetailInstance.WIKWriteDetailFocus();
+		mod.WKCWriteDetailInstance.WKCWriteDetailFocus();
 	},
 	
 	ControlNoteJump (inputData) {
@@ -256,7 +256,7 @@ const mod = {
 					return;
 				}
 
-				mod.WIKWriteDetailInstance.WIKWriteDetailFocus();
+				mod.WKCWriteDetailInstance.WKCWriteDetailFocus();
 			},
 		});
 	},
@@ -406,7 +406,7 @@ onMount(mod.LifecycleModuleWillMount);
 
 import OLSKViewportContent from 'OLSKViewportContent';
 import WKCWriteMaster from './submodules/WKCWriteMaster/main.svelte';
-import WIKWriteDetail from './submodules/WIKWriteDetail/main.svelte';
+import WKCWriteDetail from './submodules/WKCWriteDetail/main.svelte';
 import WKCWriteFooter from './submodules/WKCWriteFooter/main.svelte';
 import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svelte';
 </script>
@@ -429,17 +429,17 @@ import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svel
 		OLSKMobileViewInactive={ mod.OLSKMobileViewInactive }
 		/>
 	
-	<WIKWriteDetail
-		WIKWriteDetailDispatchBack={ mod.WIKWriteDetailDispatchBack }
-		WIKWriteDetailDispatchJump={ mod.WIKWriteDetailDispatchJump }
-		WIKWriteDetailDispatchPublish={ mod.WIKWriteDetailDispatchPublish }
-		WIKWriteDetailDispatchRetract={ mod.WIKWriteDetailDispatchRetract }
-		WIKWriteDetailDispatchVersions={ mod.WIKWriteDetailDispatchVersions }
-		WIKWriteDetailDispatchDiscard={ mod.WIKWriteDetailDispatchDiscard }
-		WIKWriteDetailDispatchUpdate={ mod.WIKWriteDetailDispatchUpdate }
-		WIKWriteDetailDispatchOpen={ mod.WIKWriteDetailDispatchOpen }
+	<WKCWriteDetail
+		WKCWriteDetailDispatchBack={ mod.WKCWriteDetailDispatchBack }
+		WKCWriteDetailDispatchJump={ mod.WKCWriteDetailDispatchJump }
+		WKCWriteDetailDispatchPublish={ mod.WKCWriteDetailDispatchPublish }
+		WKCWriteDetailDispatchRetract={ mod.WKCWriteDetailDispatchRetract }
+		WKCWriteDetailDispatchVersions={ mod.WKCWriteDetailDispatchVersions }
+		WKCWriteDetailDispatchDiscard={ mod.WKCWriteDetailDispatchDiscard }
+		WKCWriteDetailDispatchUpdate={ mod.WKCWriteDetailDispatchUpdate }
+		WKCWriteDetailDispatchOpen={ mod.WKCWriteDetailDispatchOpen }
 		OLSKMobileViewInactive={ !mod.OLSKMobileViewInactive }
-		bind:this={ mod.WIKWriteDetailInstance }
+		bind:this={ mod.WKCWriteDetailInstance }
 		/>
 </OLSKViewportContent>
 

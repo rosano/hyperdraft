@@ -27,7 +27,7 @@ export const WKCWriteEditorSetCursor = function (param1, param2) {
 	});
 };
 
-export const WIKWriteEditorScrollIntoView = function (param1, param2) {
+export const WKCWriteEditorScrollIntoView = function (param1, param2) {
 	mod.ControlConfigureEditor(function (inputData) {
 		inputData.scrollIntoView(CodeMirror.Pos(param1, param2), 300);
 	});
