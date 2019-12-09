@@ -84,3 +84,65 @@ describe('WKCWriteEditorLineObjectsFor', function testWKCWriteEditorLineObjectsF
 	});
 
 });
+
+describe('WKCWriteEditorHeaderTokensFrom', function testWKCWriteEditorHeaderTokensFrom() {
+
+	it('throws error if not array', function() {
+		throws(function() {
+			mainModule.WKCWriteEditorHeaderTokensFrom(null);
+		}, /WKCErrorInputNotValid/);
+	});
+
+	it('returns array', function() {
+		deepEqual(mainModule.WKCWriteEditorHeaderTokensFrom([]), []);
+	});
+
+	it('excludes if not header', function() {
+		deepEqual(mainModule.WKCWriteEditorHeaderTokensFrom([
+			mainModule.WKCWriteEditorLineObjectsFor(mainModule.uStubLineTokensFor('alfa')),
+			mainModule.WKCWriteEditorLineObjectsFor(mainModule.uStubLineTokensFor('[[bravo]]')),
+		]), []);
+	});
+
+	it('includes if header', function() {
+		deepEqual(mainModule.WKCWriteEditorHeaderTokensFrom([
+			mainModule.WKCWriteEditorLineObjectsFor(mainModule.uStubLineTokensFor('# alfa')),
+		]), mainModule.WKCWriteEditorLineObjectsFor(mainModule.uStubLineTokensFor('# alfa')).map(function (e) {
+			return Object.assign(e, {
+				line: 0,
+			});
+		}));
+	});
+
+	it('excludes if not verbal', function() {
+		deepEqual(mainModule.WKCWriteEditorHeaderTokensFrom([
+			mainModule.WKCWriteEditorLineObjectsFor(mainModule.uStubLineTokensFor('alfa')),
+			mainModule.WKCWriteEditorLineObjectsFor(mainModule.uStubLineTokensFor('====')),
+		].map(function (e) {
+			return e.map(function (e) {
+				return Object.assign(e, {
+					type: 'header header-1',
+				});
+			});
+		})), [{
+			start: 0,
+			end: 4,
+			string: 'alfa',
+			type: 'header header-1',
+			line: 0,
+		}]);
+	});
+
+	it('merges multiple header objects', function() {
+		deepEqual(mainModule.WKCWriteEditorHeaderTokensFrom([
+			mainModule.WKCWriteEditorLineObjectsFor(mainModule.uStubLineTokensFor('# PA PARC https://www.supermarchepa.com/pages/weekly-flyer')),
+		]), [{
+			start: 0,
+			end: 58,
+			string: '# PA PARC https://www.supermarchepa.com/pages/weekly-flyer',
+			type: 'header header-1',
+			line: 0,
+		}]);
+	});
+
+});

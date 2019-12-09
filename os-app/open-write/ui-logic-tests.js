@@ -1,32 +1,6 @@
 const { throws, deepEqual } = require('assert');
 
 const mainModule = require('./ui-logic.js');
-const WKCWriteEditorLogic = require('../open-next/submodules/WKCWriteEditor/ui-logic.js');
-
-const kTesting = {
-	uStubLineTokensFor (inputData) {
-		let defaultType = inputData.trim()[0] === '#' ? 'header header-1' : 'variable-2';
-		
-		return inputData.split(' ').map(function (e1, index1) {
-			return e1.split('').map(function (e2, index2) {
-				return {
-					string: e2,
-					type: e1.match(/(http|\[\[)/) ? `${ defaultType } link` : defaultType,
-				};
-			});
-		}).reduce(function (coll, e) {
-			return coll.concat(coll.length ? [{
-				string: ' ',
-				type: defaultType,
-			}] : []).concat(e);
-		}, []).map(function (e, index) {
-			return Object.assign(e, {
-				start: index,
-				end: index + 1,
-			});
-		});
-	},
-};
 
 describe('WIKWriteTruncatedTitleFor', function testWIKWriteTruncatedTitleFor() {
 
@@ -76,68 +50,6 @@ describe('WKCWriteLogicListSort', function testWKCWriteLogicListSort() {
 		};
 
 		deepEqual([item1, item2].sort(mainModule.WKCWriteLogicListSort), [item2, item1]);
-	});
-
-});
-
-describe('WKCWriteHeaderTokensFrom', function testWKCWriteHeaderTokensFrom() {
-
-	it('throws error if not array', function() {
-		throws(function() {
-			mainModule.WKCWriteHeaderTokensFrom(null);
-		}, /WKCErrorInputNotValid/);
-	});
-
-	it('returns array', function() {
-		deepEqual(mainModule.WKCWriteHeaderTokensFrom([]), []);
-	});
-
-	it('excludes if not header', function() {
-		deepEqual(mainModule.WKCWriteHeaderTokensFrom([
-			WKCWriteEditorLogic.WKCWriteEditorLineObjectsFor(kTesting.uStubLineTokensFor('alfa')),
-			WKCWriteEditorLogic.WKCWriteEditorLineObjectsFor(kTesting.uStubLineTokensFor('[[bravo]]')),
-		]), []);
-	});
-
-	it('includes if header', function() {
-		deepEqual(mainModule.WKCWriteHeaderTokensFrom([
-			WKCWriteEditorLogic.WKCWriteEditorLineObjectsFor(kTesting.uStubLineTokensFor('# alfa')),
-		]), WKCWriteEditorLogic.WKCWriteEditorLineObjectsFor(kTesting.uStubLineTokensFor('# alfa')).map(function (e) {
-			return Object.assign(e, {
-				line: 0,
-			});
-		}));
-	});
-
-	it('excludes if not verbal', function() {
-		deepEqual(mainModule.WKCWriteHeaderTokensFrom([
-			WKCWriteEditorLogic.WKCWriteEditorLineObjectsFor(kTesting.uStubLineTokensFor('alfa')),
-			WKCWriteEditorLogic.WKCWriteEditorLineObjectsFor(kTesting.uStubLineTokensFor('====')),
-		].map(function (e) {
-			return e.map(function (e) {
-				return Object.assign(e, {
-					type: 'header header-1',
-				});
-			});
-		})), [{
-			start: 0,
-			end: 4,
-			string: 'alfa',
-			type: 'header header-1',
-			line: 0,
-		}]);
-	});
-
-	it('merges multiple header objects', function() {
-		deepEqual(mainModule.WKCWriteHeaderTokensFrom([
-			WKCWriteEditorLogic.WKCWriteEditorLineObjectsFor(kTesting.uStubLineTokensFor('# PA PARC https://www.supermarchepa.com/pages/weekly-flyer')),
-		]), [{
-			start: 0,
-			end: 58,
-			string: '# PA PARC https://www.supermarchepa.com/pages/weekly-flyer',
-			type: 'header header-1',
-			line: 0,
-		}]);
 	});
 
 });

@@ -113,7 +113,7 @@ afterUpdate(function () {
 		});
 
 		editorInstance.on('change', function (instance, changeObject) {
-			jumpRecipes = WKCWriteLogic.WKCWriteHeaderTokensFrom([...Array(editorInstance.getDoc().size)].map(function (e, i) {
+			jumpRecipes = WKCWriteEditorLogic.WKCWriteEditorHeaderTokensFrom([...Array(editorInstance.getDoc().size)].map(function (e, i) {
 				return WKCWriteEditorLogic.WKCWriteEditorLineObjectsFor(editorInstance.getLineTokens(i));
 			})).map(function (e) {
 				return {

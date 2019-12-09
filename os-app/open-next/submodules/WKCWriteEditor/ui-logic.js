@@ -47,6 +47,39 @@ const mod = {
 		}, {}));
 	},
 
+	WKCWriteEditorHeaderTokensFrom (inputData) {
+		if (!Array.isArray(inputData)) {
+			throw new Error('WKCErrorInputNotValid');
+		}
+
+		return [].concat.apply([], inputData.map(function (e, i) {
+			let validTokens = e.filter(function (e) {
+				return e.type && e.type.match('header') && e.string.match(/\w/);
+			});
+
+			if (!validTokens.length) {
+				return [];
+			}
+
+			return validTokens.reduce(function (coll, e) {
+				if (typeof coll.start === 'undefined') {
+					coll.start = e.start;
+				}
+				
+				if (typeof coll.type === 'undefined') {
+					coll.type = e.type;
+				}
+				
+				coll.string = (coll.string || '').concat(e.string);
+				coll.end = e.end;
+
+				return coll;
+			}, {
+				line: i,
+			});
+		}));
+	},
+
 };
 
 Object.assign(exports, mod);
