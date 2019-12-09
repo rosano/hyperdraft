@@ -4,6 +4,14 @@
 	flex-direction: column;
 }
 
+@media screen and (max-width: 760px) {
+
+.WIKWriteDetail {
+	min-height: 100%;
+}
+
+}
+
 .WIKWriteDetailPlaceholder {
 	opacity: 0.5;
 	text-align: center;
@@ -26,37 +34,80 @@
 
 	/* WIKWriteDetailFlexbox:Child */
 	flex-shrink: 0;
+}
 
+@media screen and (max-width: 760px) {
+
+.WIKWriteDetailToolbar {
 	/* browser quirks */
 	z-index: 999;
 }
 
-/* CodeMirror */
+}
 
 .WIKWriteDetail :global(.WKCWriteEditor) {
 	/* WIKWriteDetailFlexbox:Child */
 	flex-grow: 1;
+}
 
-	/* WIKWriteDetailFormStationParent */
-	/*position: relative;*/
+@media screen and (min-width: 760px) {
+
+.WIKWriteDetail :global(.WKCWriteEditor) {
+	/* WIKWriteEditorStation:Parent */
+	position: relative;
+}
+
+}
+
+@media screen and (max-width: 760px) {
+
+.WIKWriteDetail :global(.WKCWriteEditor) {
 	min-height: 100%;
 }
 
-.WIKWriteDetail {
-	min-height: 100%;
 }
+
+/* CodeMirror */
 
 .WIKWriteDetail :global(.CodeMirror) {
 	font-family: inherit;
 	font-size: 14px;
-	background: #f8f8f8;
+}
 
+@media screen and (min-width: 760px) {
+
+.WIKWriteDetail :global(.CodeMirror) {
+	height: 100%;
+
+	/* WIKWriteEditorStation:Child */
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+}
+
+@media screen and (max-width: 760px) {
+
+.WIKWriteDetail :global(.CodeMirror) {
 	/* CodeMirrorResizeToContent */
 	height: auto;
-	/*height: 100vh;*/
+}
+
 }
 
 .WIKWriteDetail :global(.CodeMirror-scroll) {
+	background: #f8f8f8;
+}
+
+@media screen and (max-width: 760px) {
+
+.WIKWriteDetail :global(.CodeMirror-scroll) {
+	min-height: calc(100vh - 52px - 52px);
+}
+
 }
 
 .WIKWriteDetail :global(.CodeMirror-lines) {

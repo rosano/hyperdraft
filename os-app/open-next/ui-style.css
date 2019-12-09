@@ -8,9 +8,13 @@
 	color: var(--WKCCommonForeground);
 }
 
+@media screen and (max-width: 760px) {
+
 .WKCWrite :global(.WKCWriteFooter) {
 	/* browser quirks */
 	z-index: 999;
+}
+
 }
 
 #WKCWriteStorageWidget {
