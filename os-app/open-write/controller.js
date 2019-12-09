@@ -1,8 +1,8 @@
 exports.OLSKControllerRoutes = function() {
 	return [{
-		OLSKRoutePath: '/panel/write/next',
+		OLSKRoutePath: '/panel/write',
 		OLSKRouteMethod: 'get',
-		OLSKRouteSignature: 'WIKWriteNextRoute',
+		OLSKRouteSignature: 'WIKWriteRoute',
 		OLSKRouteFunction (req, res, next) {
 			return res.render(require('path').join(__dirname, 'ui-view.ejs'), {});
 		},
