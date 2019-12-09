@@ -127,14 +127,14 @@ import WKCWriteEditor from '../WKCWriteEditor/main.svelte';
 <header class="WKCWriteDetailToolbar OLSKMobileViewHeader">
 	<OLSKToolbar OLSKToolbarJustify={ true }>
 		<OLSKToolbarElementGroup>
-			<button class="WKCWriteDetailToolbarBackButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('WKCWriteDetailToolbarBackButtonText') } on:click={ WKCWriteDetailDispatchBack } style="background-image: url('/panel/_shared/ui-assets/WKCWriteBack.svg')"></button>
+			<button class="WKCWriteDetailToolbarBackButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('WKCWriteDetailToolbarBackButtonText') } on:click={ WKCWriteDetailDispatchBack } style="background-image: url('/panel/_shared/ui-assets/wIKWriteBack.svg')"></button>
 		</OLSKToolbarElementGroup>
 
 		<OLSKToolbarElementGroup>
-			<button class="WKCWriteDetailToolbarJumpButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('WKCWriteDetailToolbarJumpButtonText') } accesskey="r" tabindex="-1" disabled={ !mod._ValueHeaderTokens.length } on:click={ mod.InterfaceJumpButtonDidClick } style="background-image: url('/panel/_shared/ui-assets/WKCWriteJump.svg')"></button>
+			<button class="WKCWriteDetailToolbarJumpButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('WKCWriteDetailToolbarJumpButtonText') } accesskey="r" tabindex="-1" disabled={ !mod._ValueHeaderTokens.length } on:click={ mod.InterfaceJumpButtonDidClick } style="background-image: url('/panel/_shared/ui-assets/wIKWriteJump.svg')"></button>
 
 			{#if !mod._ValueItem.WKCNotePublishStatusIsPublished }
-				<button class="WKCWriteDetailToolbarPublishButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('WKCWriteDetailToolbarPublishButtonText') } on:click={ () => WKCWriteDetailDispatchPublish() } style="background-image: url('/panel/_shared/ui-assets/WKCWritePublish.svg')"></button>
+				<button class="WKCWriteDetailToolbarPublishButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('WKCWriteDetailToolbarPublishButtonText') } on:click={ () => WKCWriteDetailDispatchPublish() } style="background-image: url('/panel/_shared/ui-assets/wIKWritePublish.svg')"></button>
 			{/if}
 
 			{#if mod._ValueItem.WKCNotePublishStatusIsPublished }
@@ -142,12 +142,12 @@ import WKCWriteEditor from '../WKCWriteEditor/main.svelte';
 					wkc_note_public_id: mod._ValueItem.WKCNotePublicID,
 				}) } target="_blank">{ OLSKLocalized('WKCWriteDetailToolbarPublicLinkText') }</a>
 					
-				<button class="WKCWriteDetailToolbarRetractButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('WKCWriteDetailToolbarRetractButtonText') } on:click={ () => WKCWriteDetailDispatchRetract() } style="background-image: url('/panel/_shared/ui-assets/WKCWriteRetract.svg')"></button>
+				<button class="WKCWriteDetailToolbarRetractButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('WKCWriteDetailToolbarRetractButtonText') } on:click={ () => WKCWriteDetailDispatchRetract() } style="background-image: url('/panel/_shared/ui-assets/wIKWriteRetract.svg')"></button>
 			{/if}
 
-			<button class="WKCWriteDetailToolbarVersionsButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('WKCWriteDetailToolbarVersionsButtonText') } on:click={ () => WKCWriteDetailDispatchVersions() } style="background-image: url('/panel/_shared/ui-assets/WKCWriteVersions.svg')"></button>
+			<button class="WKCWriteDetailToolbarVersionsButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('WKCWriteDetailToolbarVersionsButtonText') } on:click={ () => WKCWriteDetailDispatchVersions() } style="background-image: url('/panel/_shared/ui-assets/wIKWriteVersions.svg')"></button>
 
-			<button class="WKCWriteDetailToolbarDiscardButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('WKCWriteDetailToolbarDiscardButtonText') } on:click={ () => window.confirm(OLSKLocalized('WKCWriteDetailDiscardPromptText')) && WKCWriteDetailDispatchDiscard() } style="background-image: url('/panel/_shared/ui-assets/WKCWriteDiscard.svg')"></button>
+			<button class="WKCWriteDetailToolbarDiscardButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('WKCWriteDetailToolbarDiscardButtonText') } on:click={ () => window.confirm(OLSKLocalized('WKCWriteDetailDiscardPromptText')) && WKCWriteDetailDispatchDiscard() } style="background-image: url('/panel/_shared/ui-assets/wIKWriteDiscard.svg')"></button>
 		</OLSKToolbarElementGroup>
 	</OLSKToolbar>
 </header>
