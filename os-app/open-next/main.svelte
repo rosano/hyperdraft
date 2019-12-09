@@ -134,13 +134,18 @@ const mod = {
 	// INTERFACE	
 
 	InterfaceWindowDidKeydown (event) {
-		if (event.key !== 'Tab') {
-			return;
-		}
+		const handlerFunctions = {
+			Escape () {
+				mod.ControlFilter('');
+			},
+			Tab () {
+				document.activeElement !== document.querySelector('.WKCWriteMasterFilterField') ? document.querySelector('.WKCWriteMasterFilterField').focus() : mod.WIKWriteDetailInstance.WIKWriteDetailFocus();
 
-		document.activeElement !== document.querySelector('.WKCWriteMasterFilterField') ? document.querySelector('.WKCWriteMasterFilterField').focus() : mod.WIKWriteDetailInstance.WIKWriteDetailFocus();
+				event.preventDefault();
+			},
+		};
 
-		event.preventDefault();
+		handlerFunctions[event.key] && handlerFunctions[event.key]();
 	},
 
 	// CONTROL

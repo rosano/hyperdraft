@@ -148,16 +148,44 @@ describe('WKCWrite_Misc', function () {
 
 	});
 
+	context('escape', function test_escape () {
+
+		before(function () {
+			browser.fill('.WKCWriteEditorFieldDebug', 'alfa');
+		});
+
+		before(function () {
+			browser.fill('.WKCWriteMasterFilterField', 'alfa');
+		});
+
+		before(function () {
+			browser.assert.input('.WKCWriteMasterFilterField', 'alfa')
+		});
+
+		before(function () {
+			browser.query('.WKCWriteEditorFieldDebug').focus();
+		});
+
+		before(function () {
+			deepEqual(browser.activeElement, browser.query('.WKCWriteEditorFieldDebug'))
+		});
+
+		before(function () {
+			return browser.OLSKFireKeyboardEvent(browser.window, 'Escape');
+		});
+		
+		it('focuses WKCWriteMasterFilterField', function() {
+			deepEqual(browser.activeElement, browser.query('.WKCWriteMasterFilterField'));
+		});
+		
+		it('clears WKCWriteMasterFilterText', function() {
+			browser.assert.input('.WKCWriteMasterFilterField', '')
+		});
+
+	});
+
 	context('click', function test_click () {
 		
-		before(function () {
-			return browser.pressButton('.WIKWriteDetailToolbarBackButton');
-		});
-
-		before(function () {
-			return browser.click('.WKCWriteMasterFilterField');
-		});
-
 		before(function () {
 			// browser.assert.hasNoClass('.CodeMirror', 'CodeMirror-focused');
 		});
@@ -193,10 +221,6 @@ describe('WKCWrite_Misc', function () {
 	});
 
 	context('filter', function test_filter () {
-
-		before(function () {
-			browser.fill('.WKCWriteEditorFieldDebug', 'alfa');
-		});
 
 		before(function () {
 			return browser.pressButton('.WKCWriteMasterCreateButton');
