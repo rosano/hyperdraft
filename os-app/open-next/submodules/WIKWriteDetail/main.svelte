@@ -41,8 +41,6 @@ const OLSKLocalized = function(translationConstant) {
 
 const mod = {
 
-	_ValueItem: undefined,
-
 	// MESSAGE
 
 	WKCWriteEditorDispatchUpdate (inputData) {
@@ -61,7 +59,11 @@ const mod = {
 
 	// VALUE
 
+	_ValueItem: undefined,
+
 	_ValueEditorPostInitializeQueue: [],
+
+	WKCWriteEditorInstance: undefined,
 
 	// CONTROL
 
@@ -76,7 +78,6 @@ const mod = {
 
 	// VALUE
 
-	WKCWriteEditorInstance: undefined,
 
 };
 
