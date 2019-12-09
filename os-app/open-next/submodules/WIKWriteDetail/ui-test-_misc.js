@@ -233,7 +233,6 @@ describe('WIKWriteDetail_Misc', function () {
 			
 			before(function () {
 				browser.assert.text('#TestWIKWriteDetailDispatchDiscard', '0');
-				browser.assert.text('#TestWIKWriteDetailDispatchDiscardData', 'undefined');
 			});
 			
 			before(function () {
@@ -244,12 +243,6 @@ describe('WIKWriteDetail_Misc', function () {
 				browser.assert.text('#TestWIKWriteDetailDispatchDiscard', '1');
 			});
 
-			it('sends WIKWriteDetailDispatchDiscardData', function () {
-				browser.assert.text('#TestWIKWriteDetailDispatchDiscardData', JSON.stringify({
-					WKCNoteBody: 'alfa',
-				}));
-			});
-		
 		});
 	
 	});

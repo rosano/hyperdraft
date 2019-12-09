@@ -101,8 +101,8 @@ const mod = {
 		mod.ControlNoteVersions(mod._ValueNoteSelected);
 	},
 
-	WIKWriteDetailDispatchDiscard (inputData) {
-		mod.ControlNoteDiscard(inputData);
+	WIKWriteDetailDispatchDiscard () {
+		mod.ControlNoteDiscard(mod._ValueNoteSelected);
 	},
 
 	WIKWriteDetailDispatchUpdate (inputData) {

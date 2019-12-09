@@ -98,7 +98,7 @@ import WKCWriteEditor from '../WKCWriteEditor/main.svelte';
 
 		<OLSKToolbarElementGroup>
 			{#if !mod._ValueItem.WKCNotePublishStatusIsPublished }
-				<button class="WIKWriteDetailToolbarPublishButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('WIKWriteDetailToolbarPublishButtonText') } on:click={ () => WIKWriteDetailDispatchPublish(mod._ValueItem) } style="background-image: url('/panel/_shared/ui-assets/wIKWritePublish.svg')"></button>
+				<button class="WIKWriteDetailToolbarPublishButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('WIKWriteDetailToolbarPublishButtonText') } on:click={ () => WIKWriteDetailDispatchPublish() } style="background-image: url('/panel/_shared/ui-assets/wIKWritePublish.svg')"></button>
 			{/if}
 
 			{#if mod._ValueItem.WKCNotePublishStatusIsPublished }
@@ -106,12 +106,12 @@ import WKCWriteEditor from '../WKCWriteEditor/main.svelte';
 					wkc_note_public_id: mod._ValueItem.WKCNotePublicID,
 				}) } target="_blank">{ OLSKLocalized('WIKWriteDetailToolbarPublicLinkText') }</a>
 					
-				<button class="WIKWriteDetailToolbarRetractButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('WIKWriteDetailToolbarRetractButtonText') } on:click={ () => WIKWriteDetailDispatchRetract(mod._ValueItem) } style="background-image: url('/panel/_shared/ui-assets/wIKWriteRetract.svg')"></button>
+				<button class="WIKWriteDetailToolbarRetractButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('WIKWriteDetailToolbarRetractButtonText') } on:click={ () => WIKWriteDetailDispatchRetract() } style="background-image: url('/panel/_shared/ui-assets/wIKWriteRetract.svg')"></button>
 			{/if}
 
-			<button class="WIKWriteDetailToolbarVersionsButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('WIKWriteDetailToolbarVersionsButtonText') } on:click={ () => WIKWriteDetailDispatchVersions(mod._ValueItem) } style="background-image: url('/panel/_shared/ui-assets/wIKWriteVersions.svg')"></button>
+			<button class="WIKWriteDetailToolbarVersionsButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('WIKWriteDetailToolbarVersionsButtonText') } on:click={ () => WIKWriteDetailDispatchVersions() } style="background-image: url('/panel/_shared/ui-assets/wIKWriteVersions.svg')"></button>
 
-			<button class="WIKWriteDetailToolbarDiscardButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('WIKWriteDetailToolbarDiscardButtonText') } on:click={ () => window.confirm(OLSKLocalized('WIKWriteDetailDiscardPromptText')) && WIKWriteDetailDispatchDiscard(mod._ValueItem) } style="background-image: url('/panel/_shared/ui-assets/wIKWriteDiscard.svg')"></button>
+			<button class="WIKWriteDetailToolbarDiscardButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('WIKWriteDetailToolbarDiscardButtonText') } on:click={ () => window.confirm(OLSKLocalized('WIKWriteDetailDiscardPromptText')) && WIKWriteDetailDispatchDiscard() } style="background-image: url('/panel/_shared/ui-assets/wIKWriteDiscard.svg')"></button>
 		</OLSKToolbarElementGroup>
 	</OLSKToolbar>
 </header>

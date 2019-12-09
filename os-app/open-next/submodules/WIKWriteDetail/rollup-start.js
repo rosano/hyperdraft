@@ -25,7 +25,6 @@ const WIKWriteDetail = new RollupStart({
 		}),
 		WIKWriteDetailDispatchDiscard: (function _WIKWriteDetailDispatchDiscard (inputData) {
 			window.TestWIKWriteDetailDispatchDiscard.innerHTML = parseInt(window.TestWIKWriteDetailDispatchDiscard.innerHTML) + 1;
-			window.TestWIKWriteDetailDispatchDiscardData.innerHTML = JSON.stringify(inputData);
 		}),
 		WIKWriteDetailDispatchUpdate: (function _WIKWriteDetailDispatchUpdate (inputData) {
 			window.TestWIKWriteDetailDispatchUpdate.innerHTML = parseInt(window.TestWIKWriteDetailDispatchUpdate.innerHTML) + 1;
