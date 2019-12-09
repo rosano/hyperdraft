@@ -64,9 +64,16 @@ describe('WIKWriteDetail_Misc', function () {
 
 	describe('WIKWriteDetailToolbarBackButton', function test_WIKWriteDetailToolbarBackButton () {
 		
-		it('sets class', function () {
+		it('classes OLSKLayoutButtonNoStyle', function () {
 			browser.assert.hasClass(WIKWriteDetailToolbarBackButton, 'OLSKLayoutButtonNoStyle');
+		});
+
+		it('classes OLSKLayoutElementTappable', function () {
 			browser.assert.hasClass(WIKWriteDetailToolbarBackButton, 'OLSKLayoutElementTappable');
+		});
+
+		it('classes OLSKToolbarButton', function () {
+			browser.assert.hasClass(WIKWriteDetailToolbarBackButton, 'OLSKToolbarButton');
 		});
 
 		context('click', function () {

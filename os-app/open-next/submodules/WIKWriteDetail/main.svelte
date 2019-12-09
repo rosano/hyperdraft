@@ -127,7 +127,7 @@ import WKCWriteEditor from '../WKCWriteEditor/main.svelte';
 <header class="WIKWriteDetailToolbar OLSKMobileViewHeader">
 	<OLSKToolbar OLSKToolbarJustify={ true }>
 		<OLSKToolbarElementGroup>
-			<button class="WIKWriteDetailToolbarBackButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable" on:click={ WIKWriteDetailDispatchBack }>{ OLSKLocalized('WIKWriteDetailToolbarBackButtonText') }</button>
+			<button class="WIKWriteDetailToolbarBackButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('WIKWriteDetailToolbarBackButtonText') } on:click={ WIKWriteDetailDispatchBack } style="background-image: url('/panel/_shared/ui-assets/wIKWriteBack.svg')"></button>
 		</OLSKToolbarElementGroup>
 
 		<OLSKToolbarElementGroup>
