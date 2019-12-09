@@ -283,7 +283,7 @@ describe('WKCWrite_Misc', function () {
 		});
 
 		it('sets WKCNotePublishStatusIsPublished', function () {
-			browser.assert.elements('.WKCNotePublishStatusIsPublished', 0);
+			browser.assert.elements('.WIKWriteDetailToolbarPublishButton', 0);
 		});
 
 	});
