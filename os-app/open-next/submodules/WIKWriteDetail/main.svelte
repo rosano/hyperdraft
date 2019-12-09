@@ -70,6 +70,22 @@ const mod = {
 
 	WKCWriteEditorInstance: undefined,
 
+	// INTERFACE
+
+	InterfaceJumpButtonDidClick () {
+		mod.ControlJump();
+	},
+
+	InterfaceWindowDidKeydown (event) {
+		if (!mod._ValueHeaderTokens.length) {
+			return;
+		}
+
+		if (event.ctrlKey && event.key === 'r') {
+			return mod.ControlJump();
+		}
+	},
+
 	// CONTROL
 
 	ControlConfigureEditor (inputData) {
@@ -81,9 +97,7 @@ const mod = {
 		mod._ValueEditorPostInitializeQueue.push(inputData);
 	},
 
-	// INTERFACE
-
-	InterfaceJumpButtonDidClick () {
+	ControlJump () {
 		WIKWriteDetailDispatchJump(mod._ValueHeaderTokens.map(function (e) {
 			return {
 				LCHRecipeName: e.string,
@@ -93,16 +107,6 @@ const mod = {
 				},
 			};
 		}));
-	},
-
-	InterfaceWindowDidKeydown (event) {
-		if (!mod._ValueHeaderTokens.length) {
-			return;
-		}
-
-		if (event.ctrlKey && event.key === 'r') {
-			return WIKWriteDetailDispatchJump();
-		}
 	},
 
 };
