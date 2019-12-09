@@ -10,10 +10,6 @@ describe('WKCWriteEditor_Misc', function () {
 		});
 	});
 
-	before(function () {
-		browser.pressButton('#TestWKCWriteEditorSetDocument');
-	});
-	
 	describe('WKCWriteEditorFieldDebug', function() {
 		
 		it('binds WKCWriteEditorSetDocument', function () {

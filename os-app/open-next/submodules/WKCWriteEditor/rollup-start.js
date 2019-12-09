@@ -16,14 +16,12 @@ const WKCWriteEditor = new RollupStart({
 	}))),
 });
 
+WKCWriteEditor.WKCWriteEditorSetDocument(params.WKCWriteEditorSetDocument);
+
 window.WKCWriteEditorBehaviour = {
 
 	TestWKCWriteEditorFocus () {
 		WKCWriteEditor.WKCWriteEditorFocus();
-	},
-
-	TestWKCWriteEditorSetDocument () {
-		WKCWriteEditor.WKCWriteEditorSetDocument(params.WKCWriteEditorSetDocument);
 	},
 
 };
