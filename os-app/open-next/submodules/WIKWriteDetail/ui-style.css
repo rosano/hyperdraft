@@ -30,33 +30,30 @@
 
 /* CodeMirror */
 
-.WIKWriteDetail .WKCWriteEditor {
+.WIKWriteDetail :global(.WKCWriteEditor) {
 	/* WIKWriteDetailFlexbox:Child */
 	flex-grow: 1;
 
 	/* WIKWriteDetailFormStationParent */
-	position: relative;
+	/*position: relative;*/
+	min-height: 100%;
+}
+
+.WIKWriteDetail {
+	min-height: 100%;
 }
 
 .WIKWriteDetail :global(.CodeMirror) {
-	height: 100%;
-
-	/* WIKWriteDetailFormStationChild */
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-
 	font-family: inherit;
 	font-size: 14px;
+	background: #f8f8f8;
+
+	/* CodeMirrorResizeToContent */
+	height: auto;
+	/*height: 100vh;*/
 }
 
 .WIKWriteDetail :global(.CodeMirror-scroll) {
-	background: #f8f8f8;
-
-  /* OLSKMobileSafariSmoothScrolling */
-	-webkit-overflow-scrolling: touch;
 }
 
 .WIKWriteDetail :global(.CodeMirror-lines) {
