@@ -17,6 +17,9 @@ const WIKWriteDetail = new RollupStart({
 		WIKWriteDetailDispatchPublish: (function _WIKWriteDetailDispatchPublish (inputData) {
 			window.TestWIKWriteDetailDispatchPublish.innerHTML = parseInt(window.TestWIKWriteDetailDispatchPublish.innerHTML) + 1;
 		}),
+		WIKWriteDetailDispatchRetract: (function _WIKWriteDetailDispatchRetract (inputData) {
+			window.TestWIKWriteDetailDispatchRetract.innerHTML = parseInt(window.TestWIKWriteDetailDispatchRetract.innerHTML) + 1;
+		}),
 		WIKWriteDetailDispatchVersions: (function _WIKWriteDetailDispatchVersions (inputData) {
 			window.TestWIKWriteDetailDispatchVersions.innerHTML = parseInt(window.TestWIKWriteDetailDispatchVersions.innerHTML) + 1;
 		}),

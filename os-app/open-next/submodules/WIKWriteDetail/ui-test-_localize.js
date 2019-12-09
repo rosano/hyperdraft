@@ -47,7 +47,7 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 				browser.assert.attribute(WIKWriteDetailToolbarDiscardButton, 'title', uLocalized('WIKWriteDetailToolbarDiscardButtonText'));
 			});
 
-			context('on discard', function () {
+			context('discard', function () {
 			
 				it('localizes WIKWriteDetailDiscardPrompt', async function() {
 					deepEqual((await browser.OLSKConfirm(async function () {
@@ -55,6 +55,24 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 					})).question, uLocalized('WIKWriteDetailDiscardPromptText'));
 				});
 		
+			});
+
+			context('WKCNotePublishStatusIsPublished', function() {
+
+				before(function() {
+					return browser.OLSKVisit(kDefaultRoute, {
+						OLSKRoutingLanguage: languageCode,
+						WIKWriteDetailItem: JSON.stringify({
+							WKCNoteBody: 'alfa',
+							WKCNotePublishStatusIsPublished: true,
+						}),
+					});
+				});
+
+				it('localizes WIKWriteDetailToolbarRetractButton', function () {
+					browser.assert.attribute(WIKWriteDetailToolbarRetractButton, 'title', uLocalized('WIKWriteDetailToolbarRetractButtonText'));
+				});
+
 			});
 		
 		});

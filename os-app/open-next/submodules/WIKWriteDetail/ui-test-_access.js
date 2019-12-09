@@ -10,6 +10,7 @@ Object.entries({
 	WIKWriteDetailToolbar: '.WIKWriteDetailToolbar',
 	WIKWriteDetailToolbarBackButton: '.WIKWriteDetailToolbarBackButton',
 	WIKWriteDetailToolbarPublishButton: '.WIKWriteDetailToolbarPublishButton',
+	WIKWriteDetailToolbarRetractButton: '.WIKWriteDetailToolbarRetractButton',
 	WIKWriteDetailToolbarVersionsButton: '.WIKWriteDetailToolbarVersionsButton',
 	WIKWriteDetailToolbarDiscardButton: '.WIKWriteDetailToolbarDiscardButton',
 	
@@ -70,6 +71,10 @@ describe('WIKWriteDetail_Access', function () {
 			browser.assert.elements(WIKWriteDetailToolbarPublishButton, 1);
 		});
 
+		it('hides WIKWriteDetailToolbarRetractButton', function () {
+			browser.assert.elements(WIKWriteDetailToolbarRetractButton, 0);
+		});
+
 		it('shows WIKWriteDetailToolbarVersionsButton', function () {
 			browser.assert.elements(WIKWriteDetailToolbarVersionsButton, 1);
 		});
@@ -101,6 +106,10 @@ describe('WIKWriteDetail_Access', function () {
 
 		it('hides WIKWriteDetailToolbarPublishButton', function () {
 			browser.assert.elements(WIKWriteDetailToolbarPublishButton, 0);
+		});
+
+		it('shows WIKWriteDetailToolbarRetractButton', function () {
+			browser.assert.elements(WIKWriteDetailToolbarRetractButton, 1);
 		});
 
 	});

@@ -1,6 +1,7 @@
 <script>
 export let WIKWriteDetailDispatchBack;
 export let WIKWriteDetailDispatchPublish;
+export let WIKWriteDetailDispatchRetract;
 export let WIKWriteDetailDispatchVersions;
 export let WIKWriteDetailDispatchDiscard;
 export let WIKWriteDetailDispatchUpdate;
@@ -98,6 +99,10 @@ import WKCWriteEditor from '../WKCWriteEditor/main.svelte';
 		<OLSKToolbarElementGroup>
 			{#if !mod._ValueItem.WKCNotePublishStatusIsPublished }
 				<button class="WIKWriteDetailToolbarPublishButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('WIKWriteDetailToolbarPublishButtonText') } on:click={ () => WIKWriteDetailDispatchPublish(mod._ValueItem) } style="background-image: url('/panel/_shared/ui-assets/wIKWritePublish.svg')"></button>
+			{/if}
+
+			{#if mod._ValueItem.WKCNotePublishStatusIsPublished }
+				<button class="WIKWriteDetailToolbarRetractButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('WIKWriteDetailToolbarRetractButtonText') } on:click={ () => WIKWriteDetailDispatchRetract(mod._ValueItem) } style="background-image: url('/panel/_shared/ui-assets/wIKWriteRetract.svg')"></button>
 			{/if}
 
 			<button class="WIKWriteDetailToolbarVersionsButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('WIKWriteDetailToolbarVersionsButtonText') } on:click={ () => WIKWriteDetailDispatchVersions(mod._ValueItem) } style="background-image: url('/panel/_shared/ui-assets/wIKWriteVersions.svg')"></button>

@@ -113,7 +113,54 @@ describe('WIKWriteDetail_Misc', function () {
 	
 	});
 
+	describe('WIKWriteDetailToolbarRetractButton', function test_WIKWriteDetailToolbarRetractButton () {
+
+		before(function() {
+			return browser.OLSKVisit(kDefaultRoute, {
+				WIKWriteDetailItem: JSON.stringify({
+					WKCNoteBody: 'alfa',
+					WKCNotePublishStatusIsPublished: true,
+				}),
+			});
+		});
+
+		it('classes OLSKLayoutButtonNoStyle', function () {
+			browser.assert.hasClass(WIKWriteDetailToolbarRetractButton, 'OLSKLayoutButtonNoStyle');
+		});
+
+		it('classes OLSKLayoutElementTappable', function () {
+			browser.assert.hasClass(WIKWriteDetailToolbarRetractButton, 'OLSKLayoutElementTappable');
+		});
+
+		it('classes OLSKToolbarButton', function () {
+			browser.assert.hasClass(WIKWriteDetailToolbarRetractButton, 'OLSKToolbarButton');
+		});
+
+		context('click', function () {
+			
+			before(function () {
+				browser.assert.text('#TestWIKWriteDetailDispatchRetract', '0');
+			});
+			
+			before(function () {
+				return browser.pressButton(WIKWriteDetailToolbarRetractButton);
+			});
+
+			it('sends WIKWriteDetailDispatchRetract', function () {
+				browser.assert.text('#TestWIKWriteDetailDispatchRetract', '1');
+			});
+		
+		});
+	
+	});
+
 	describe('WIKWriteDetailToolbarVersionsButton', function test_WIKWriteDetailToolbarVersionsButton () {
+
+		before(function() {
+			return browser.OLSKVisit(kDefaultRoute, {
+				WIKWriteDetailItem: JSON.stringify(uItem()),
+			});
+		});
 		
 		it('classes OLSKLayoutButtonNoStyle', function () {
 			browser.assert.hasClass(WIKWriteDetailToolbarVersionsButton, 'OLSKLayoutButtonNoStyle');
