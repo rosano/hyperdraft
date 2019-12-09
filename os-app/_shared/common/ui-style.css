@@ -1,6 +1,6 @@
 :root {
-	--WKCCommonBackground: rgba(0, 0, 0, 0);
-	--WKCCommonForeground: rgba(0, 0, 0, 1);
+	--WKCCommonBackground: hsl(0, 0%, 100%);
+	--WKCCommonForeground: hsl(0, 0%, 0%);
 }
 
 .WKCSharedHidden {
