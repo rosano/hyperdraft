@@ -136,11 +136,11 @@ const mod = {
 			OLSKThrottle.OLSKThrottleSkip(mod._ValueSaveNoteThrottleMap[inputData.WKCNoteID])	
 		}
 
-		OLSKThrottle.OLSKThrottleMappedTimeoutFor(_ValueSaveVersionThrottleMap, inputData.WKCNoteID, function (inputData) {
+		OLSKThrottle.OLSKThrottleMappedTimeoutFor(mod._ValueSaveVersionThrottleMap, inputData.WKCNoteID, function (inputData) {
 			return {
 				OLSKThrottleDuration: 3000,
 				OLSKThrottleCallback: async function () {
-					delete _ValueSaveVersionThrottleMap[inputData.WKCNoteID];
+					delete mod._ValueSaveVersionThrottleMap[inputData.WKCNoteID];
 
 					if (!inputData.WKCNoteCreationDate) {
 						return;
