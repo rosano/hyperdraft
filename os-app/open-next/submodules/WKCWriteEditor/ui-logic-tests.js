@@ -2,31 +2,6 @@ const { throws, deepEqual } = require('assert');
 
 const mainModule = require('./ui-logic.js');
 
-const kTesting = {
-	uStubLineTokensFor (inputData) {
-		let defaultType = inputData.trim()[0] === '#' ? 'header header-1' : 'variable-2';
-		
-		return inputData.split(' ').map(function (e1, index1) {
-			return e1.split('').map(function (e2, index2) {
-				return {
-					string: e2,
-					type: e1.match(/(http|\[\[)/) ? `${ defaultType } link` : defaultType,
-				};
-			});
-		}).reduce(function (coll, e) {
-			return coll.concat(coll.length ? [{
-				string: ' ',
-				type: defaultType,
-			}] : []).concat(e);
-		}, []).map(function (e, index) {
-			return Object.assign(e, {
-				start: index,
-				end: index + 1,
-			});
-		});
-	},
-};
-
 describe('WKCWriteEditorLineObjectsFor', function testWKCWriteEditorLineObjectsFor() {
 
 	it('throws error if not array', function() {
@@ -40,7 +15,7 @@ describe('WKCWriteEditorLineObjectsFor', function testWKCWriteEditorLineObjectsF
 	});
 
 	it('converts non-link single', function() {
-		deepEqual(mainModule.WKCWriteEditorLineObjectsFor(kTesting.uStubLineTokensFor('alfa')), [{
+		deepEqual(mainModule.WKCWriteEditorLineObjectsFor(mainModule.uStubLineTokensFor('alfa')), [{
 			start: 0,
 			end: 4,
 			string: 'alfa',
@@ -49,7 +24,7 @@ describe('WKCWriteEditorLineObjectsFor', function testWKCWriteEditorLineObjectsF
 	});
 
 	it('converts non-link multiple', function() {
-		deepEqual(mainModule.WKCWriteEditorLineObjectsFor(kTesting.uStubLineTokensFor('alfa bravo')), [{
+		deepEqual(mainModule.WKCWriteEditorLineObjectsFor(mainModule.uStubLineTokensFor('alfa bravo')), [{
 			start: 0,
 			end: 10,
 			string: 'alfa bravo',
@@ -58,7 +33,7 @@ describe('WKCWriteEditorLineObjectsFor', function testWKCWriteEditorLineObjectsF
 	});
 
 	it('converts link single', function() {
-		deepEqual(mainModule.WKCWriteEditorLineObjectsFor(kTesting.uStubLineTokensFor('[[alfa]]')), [{
+		deepEqual(mainModule.WKCWriteEditorLineObjectsFor(mainModule.uStubLineTokensFor('[[alfa]]')), [{
 			start: 0,
 			end: 8,
 			string: '[[alfa]]',
@@ -67,7 +42,7 @@ describe('WKCWriteEditorLineObjectsFor', function testWKCWriteEditorLineObjectsF
 	});
 
 	it('converts link multiple', function() {
-		deepEqual(mainModule.WKCWriteEditorLineObjectsFor(kTesting.uStubLineTokensFor('[[alfa]] [[bravo]]')), [{
+		deepEqual(mainModule.WKCWriteEditorLineObjectsFor(mainModule.uStubLineTokensFor('[[alfa]] [[bravo]]')), [{
 			start: 0,
 			end: 8,
 			string: '[[alfa]]',
@@ -86,7 +61,7 @@ describe('WKCWriteEditorLineObjectsFor', function testWKCWriteEditorLineObjectsF
 	});
 
 	it('converts header', function() {
-		deepEqual(mainModule.WKCWriteEditorLineObjectsFor(kTesting.uStubLineTokensFor('# alfa')), [{
+		deepEqual(mainModule.WKCWriteEditorLineObjectsFor(mainModule.uStubLineTokensFor('# alfa')), [{
 			start: 0,
 			end: 6,
 			string: '# alfa',
@@ -95,7 +70,7 @@ describe('WKCWriteEditorLineObjectsFor', function testWKCWriteEditorLineObjectsF
 	});
 
 	it('converts multiple header objects', function() {
-		deepEqual(mainModule.WKCWriteEditorLineObjectsFor(kTesting.uStubLineTokensFor('# alfa [[bravo]]')), [{
+		deepEqual(mainModule.WKCWriteEditorLineObjectsFor(mainModule.uStubLineTokensFor('# alfa [[bravo]]')), [{
 			start: 0,
 			end: 7,
 			string: '# alfa ',

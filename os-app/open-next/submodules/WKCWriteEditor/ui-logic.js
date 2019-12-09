@@ -1,5 +1,28 @@
 const mod = {
 
+	uStubLineTokensFor (inputData) {
+		let defaultType = inputData.trim()[0] === '#' ? 'header header-1' : 'variable-2';
+		
+		return inputData.split(' ').map(function (e1, index1) {
+			return e1.split('').map(function (e2, index2) {
+				return {
+					string: e2,
+					type: e1.match(/(http|\[\[)/) ? `${ defaultType } link` : defaultType,
+				};
+			});
+		}).reduce(function (coll, e) {
+			return coll.concat(coll.length ? [{
+				string: ' ',
+				type: defaultType,
+			}] : []).concat(e);
+		}, []).map(function (e, index) {
+			return Object.assign(e, {
+				start: index,
+				end: index + 1,
+			});
+		});
+	},
+
 	WKCWriteEditorLineObjectsFor (inputData) {
 		if (!Array.isArray(inputData)) {
 			throw new Error('WKCErrorInputNotValid');
