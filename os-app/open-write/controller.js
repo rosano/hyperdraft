@@ -1,17 +1,14 @@
-//_ OLSKControllerRoutes
-
 exports.OLSKControllerRoutes = function() {
-	return {
-		WIKWriteRoute: {
-			OLSKRoutePath: '/panel/write',
-			OLSKRouteMethod: 'get',
-			OLSKRouteFunction (req, res, next) {
-				return res.render(req.OLSKLive.OLSKLivePathJoin(__dirname, 'ui-view.ejs'), {});
-			},
-			OLSKRouteLanguages: ['en'],
-			OLSKRouteMiddlewares: [
-				'WKCSharedDonateLinkGuardMiddleware',
-			],
+	return [{
+		OLSKRoutePath: '/panel/write/next',
+		OLSKRouteMethod: 'get',
+		OLSKRouteSignature: 'WIKWriteNextRoute',
+		OLSKRouteFunction (req, res, next) {
+			return res.render(require('path').join(__dirname, 'ui-view.ejs'), {});
 		},
-	};
+		OLSKRouteLanguages: ['en'],
+		OLSKRouteMiddlewares: [
+			'WKCSharedDonateLinkGuardMiddleware',
+		],
+	}];
 };

@@ -1,16 +1,40 @@
-:root {
-	--WIKBorderStyle: 1px solid #ddd;
+.WKCWrite {
+	--WKCBorderStyle: 1px solid #ddd;
+	
+	font-family: 'Helvetica Neue', 'Helvetica', sans-serif;
+	font-size: 9pt;
+
+	background: var(--WKCCommonBackground);
+	color: var(--WKCCommonForeground);
 }
 
-.WIKSharedToolbar {
-	padding: 5px;
-	border-bottom: var(--WIKBorderStyle);
+#WKCWriteStorageWidget {
+	border-top: var(--WKCBorderStyle);
+	
+	background: var(--WKCCommonBackground);
+
+	/* AppContainerFlexboxChild */
+	flex-shrink: 0;
 }
 
-.WKC_ContextMobileExclusive {
+.WKCWriteStorageWidgetHidden {
 	display: none;
 }
 
-#WIKWriteStorageWidget {
-	border-top: var(--WIKBorderStyle)
+@media screen and (max-width: 760px) {
+
+
+#WKCWriteStorageWidget {
+	bottom: 52px;
+}
+
+}
+
+@media screen and (max-width: 760px) {
+
+.WKCWrite :global(.WKCWriteFooter) {
+	/* browser quirks */
+	z-index: 999;
+}
+
 }

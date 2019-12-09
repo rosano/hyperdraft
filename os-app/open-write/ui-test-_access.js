@@ -1,188 +1,123 @@
 import { deepEqual } from 'assert';
 
-const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().WIKWriteRoute;
+const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
 Object.entries({
-	WKCWriteMasterFilterField: '.WKCWriteMasterFilterField',
-	OLSKInputWrapperClearButton: '.OLSKInputWrapperClearButton',
-	WKCWriteCreateButton: '#WKCWriteCreateButton',
-
-	WKCWriteListItem: '.ListItem',
-	WKCWriteListItemAccessibilitySummary: '.WKCWriteListItemAccessibilitySummary',
-	WKCWriteListItemTitle: '.ListItemTitle',
-	WKCWriteListItemSnippet: '.ListItemSnippet',
-	WKCWriteExportButton: '#WKCWriteExportButton',
-
-	WKCWriteDetailPlaceholderContainer: '.PlaceholderContainer',
-
-	WKCWriteDetailToolbar: '#WKCWriteDetailToolbar',
-	WKCWriteDetailToolbarBackButton: '#WKCWriteDetailToolbarBackButton',
-
-	WKCWriteJumpButton: '.WKCWriteJumpButton',
-	WKCWriteDetailToolbarRetractButton: '#WKCWriteDetailToolbarRetractButton',
-	WKCWriteDetailToolbarPublishButton: '#WKCWriteDetailToolbarPublishButton',
-	WKCWriteDetailToolbarVersionsButton: '#WKCWriteDetailToolbarVersionsButton',
-	WKCWriteDetailToolbarDiscardButton: '#WKCWriteDetailToolbarDiscardButton',
-
-	WKCWriteEditorContainer: '.EditorContainer',
-	WKCWriteEditorInput: '.EditorContainer .CodeMirror',
-	WKCWriteEditorDebugInput: '#WKCWriteEditorDebugInput',
-
-	WIKWriteStorageWidget: '#WIKWriteStorageWidget',
-
-	WKCWriteFooter: '.WKCWriteFooter',
-
-	async uCreateItem (browser) {
-		browser.pressButton(WKCWriteCreateButton);
-		await browser.wait({ element: WKCWriteListItem });
-	},
+	WKCWriteStorageWidget: '#WKCWriteStorageWidget',
 }).map(function (e) {
 	return global[e.shift()]  = e.pop();
 });
 
-describe('WKCWriteUIAccess', function () {
+describe('WKCWrite_Access', function () {
 
 	before(function() {
 		return browser.OLSKVisit(kDefaultRoute);
 	});
 
+	it('shows WKCWriteMaster', function () {
+		browser.assert.elements('.WKCWriteMaster', 1);
+	});
+
+	it('hides WKCWriteMasterListItem', function () {
+		browser.assert.elements('.WKCWriteMasterListItem', 0);
+	});
+
+	it('shows WIKWriteDetail', function () {
+		browser.assert.elements('.WIKWriteDetail', 1);
+	});
+
+	it('shows WIKWriteDetailPlaceholder', function () {
+		browser.assert.elements('.WIKWriteDetailPlaceholder', 1);
+	});
+
 	it('shows WKCWriteFooter', function () {
-		browser.assert.elements(WKCWriteFooter, 1);
+		browser.assert.elements('.WKCWriteFooter', 1);
 	});
 
-	it('on startup', function() {
-		browser.assert.elements(WKCWriteMasterFilterField, 1);
-		browser.assert.elements(WKCWriteCreateButton, 1);
-		browser.assert.attribute(WKCWriteCreateButton, 'accesskey', 'n');
+	it('shows WKCWriteStorageWidget', function () {
+		browser.assert.elements(WKCWriteStorageWidget, 1);
+	});
 
-		browser.assert.elements(WKCWriteListItem, 0);
-		browser.assert.elements(WKCWriteExportButton, 1);
+	context('create', function () {
 		
-		browser.assert.elements(WKCWriteDetailPlaceholderContainer, 1);
+		before(function () {
+			return browser.pressButton('.WKCWriteMasterCreateButton');
+		});
 
-		browser.assert.elements(WKCWriteDetailToolbar, 0);
+		it('shows WKCWriteMasterListItem', function () {
+			browser.assert.elements('.WKCWriteMasterListItem', 1);
+		});
 
-		browser.assert.elements(WKCWriteEditorContainer, 0);
-
-		browser.assert.elements(WIKWriteStorageWidget, 1);
-		browser.assert.hasClass(WIKWriteStorageWidget, 'StorageHidden');
+		it('hides WIKWriteDetailPlaceholder', function () {
+			browser.assert.elements('.WIKWriteDetailPlaceholder', 0);
+		});
+	
 	});
 
-	it('on create', async function() {
-		await uCreateItem(browser);
-
-		browser.assert.elements(WKCWriteListItem, 1);
-		browser.assert.elements(WKCWriteListItemAccessibilitySummary, 1);
-		browser.assert.elements(WKCWriteListItemTitle, 1);
-		browser.assert.elements(WKCWriteListItemSnippet, 1);
-
-		browser.assert.elements(WKCWriteDetailPlaceholderContainer, 0);
-
-		browser.assert.elements(WKCWriteDetailToolbar, 1);
-		browser.assert.elements(WKCWriteDetailToolbarBackButton, 0);
-		browser.assert.elements(WKCWriteJumpButton, 1);
-		browser.assert.elements(WKCWriteDetailToolbarRetractButton, 0);
-		browser.assert.elements(WKCWriteDetailToolbarPublishButton, 1);
-		browser.assert.elements(WKCWriteDetailToolbarVersionsButton, 1);
-		browser.assert.elements(WKCWriteDetailToolbarDiscardButton, 1);
-
-		browser.assert.elements(WKCWriteEditorContainer, 1);
-		browser.assert.elements(WKCWriteEditorInput, 1);
-	});
-
-	it('on create nth item', async function() {
-		await uCreateItem(browser);
+	context('back', function () {
 		
-		browser.assert.elements(WKCWriteListItem, 2);
+		before(function () {
+			return browser.pressButton('.WIKWriteDetailToolbarBackButton');
+		});
+
+		it('shows WIKWriteDetailPlaceholder', function () {
+			browser.assert.elements('.WIKWriteDetailPlaceholder', 1);
+		});
+	
+	});
+
+	context('click', function () {
 		
-		browser.assert.elements(WKCWriteDetailToolbar, 1);
+		before(function () {
+			return browser.click('.WKCWriteMasterListItem');
+		});
+
+		it('shows WKCWriteMasterListItem', function () {
+			browser.assert.elements('.WKCWriteMasterListItem', 1);
+		});
+
+		it('hides WIKWriteDetailPlaceholder', function () {
+			browser.assert.elements('.WIKWriteDetailPlaceholder', 0);
+		});
+	
 	});
 
-	context('on filter', function () {
-		
-		before(async function() {
-			browser.fill('#WKCWriteEditorDebugInput', 'alfa');
+	context('discard', function () {
 
-			browser.click(`${ WKCWriteListItem }:nth-child(2)`);
-			await browser.wait({ element: WKCWriteListItem });
+		context('cancel', function () {
+			
+			before(async function () {
+				return browser.OLSKConfirm(function () {
+					browser.pressButton('.WIKWriteDetailToolbarDiscardButton');
+				}, function (dialog) {
+					dialog.response = false;
 
-			browser.fill('#WKCWriteEditorDebugInput', 'bravo');
-		});
-
-		it('presents no items if no match', async function() {
-			browser.fill(WKCWriteMasterFilterField, 'test');
-			await browser.wait({ element: OLSKInputWrapperClearButton });
-
-			browser.assert.elements(WKCWriteListItem, 0);
-		});
-
-		it('presents items if match', async function() {
-			browser.fill(WKCWriteMasterFilterField, 'alfa');
-			await browser.wait({ element: OLSKInputWrapperClearButton });
-
-			browser.assert.elements(WKCWriteListItem, 1);
-		});
-
-	});
-
-	context.skip('on click OLSKInputWrapperClearButton', function() {
-
-		before(async function() {
-			browser.pressButton(OLSKInputWrapperClearButton);
-			await browser.wait({ element: `${WKCWriteListItem}:nth-child(2)` });
-		});
-
-		it('clears WKCWriteMasterFilterField', function() {
-			browser.assert.input(WKCWriteMasterFilterField, '');
-		});
-
-		it('shows all items', function() {
-			// console.log(browser.queryAll('.ListItem').map((e) => e.innerHTML));
-			browser.assert.elements(WKCWriteListItem, 2);
-		});
-
-	});
-
-	it.skip('on publish', function() {
-	});
-
-	it('type header', async function() {
-		await uCreateItem(browser);
-		browser.fill(WKCWriteEditorDebugInput, 'alfa\n# bravo');
-		await browser.wait({ element: WKCWriteListItem });
-
-		browser.assert.text(WKCWriteListItemAccessibilitySummary, 'alfa');
-		browser.assert.attribute(WKCWriteJumpButton, 'disabled', '');
-	});
-
-	context('delete', function () {
-
-		it('on cancel', async function() {
-			await browser.OLSKConfirm(function () {
-				browser.pressButton(WKCWriteDetailToolbarDiscardButton);
-			}, function (dialog) {
-				dialog.response = false;
-
-				return dialog;
+					return dialog;
+				});
 			});
 
-			await browser.wait({ element: WKCWriteListItem });
-
-			browser.assert.elements(WKCWriteDetailPlaceholderContainer, 0);
-
-			browser.assert.elements(WKCWriteDetailToolbar, 1);
+			it('hides WIKWriteDetailPlaceholder', function () {
+				browser.assert.elements('.WIKWriteDetailPlaceholder', 0);
+			});
+		
 		});
 
-		it.skip('on confirm', async function() {
-			await browser.OLSKConfirm(async function () {
-				await browser.pressButton(WKCWriteDetailToolbarDiscardButton);
+		context('confirm', function () {
+			
+			before(async function () {
+				return browser.OLSKConfirm(function () {
+					return browser.pressButton('.WIKWriteDetailToolbarDiscardButton');
+				});
 			});
 
-			await browser.wait({ element: WKCWriteDetailPlaceholderContainer });
+			it('hides WKCWriteMasterListItem', function () {
+				browser.assert.elements('.WKCWriteMasterListItem', 0);
+			});
 
-			browser.assert.elements(WKCWriteDetailPlaceholderContainer, 1);
-
-			browser.assert.elements(WKCWriteDetailToolbar, 0);
+			it('shows WIKWriteDetailPlaceholder', function () {
+				browser.assert.elements('.WIKWriteDetailPlaceholder', 1);
+			});
+		
 		});
 		
 	});
