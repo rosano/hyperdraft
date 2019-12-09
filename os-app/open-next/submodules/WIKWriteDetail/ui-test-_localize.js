@@ -24,6 +24,7 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 		
 			before(function() {
 				return browser.OLSKVisit(kDefaultRoute, {
+					OLSKRoutingLanguage: languageCode,
 					WIKWriteDetailItem: JSON.stringify({
 						WKCNoteBody: 'alfa',
 					}),
