@@ -290,6 +290,10 @@ describe('WKCWrite_Misc', function () {
 			browser.assert.elements('.LCHLauncherFilterPrompt', 1);
 		});
 
+		it('sets LCHLauncherRecipes', function() {
+			browser.assert.elements('.LCHLauncherPipeItemTitle', '# alfa');
+		});
+
 	});
 
 	context('publish', function test_publish () {
