@@ -83,6 +83,15 @@ const mod = {
 
 	// INTERFACE
 
+	InterfaceJumpButtonDidClick () {
+		WIKWriteDetailDispatchJump(mod._ValueHeaderTokens.map(function (e) {
+			return {
+				LCHRecipeName: e.string,
+				LCHRecipeCallback () {
+				},
+			};
+		}));
+	},
 
 	InterfaceWindowDidKeydown (event) {
 		if (!mod._ValueHeaderTokens.length) {

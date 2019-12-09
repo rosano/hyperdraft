@@ -276,6 +276,22 @@ describe('WKCWrite_Misc', function () {
 
 	});
 
+	context('jump', function test_jump () {
+
+		before(function () {
+			return browser.fill('.WKCWriteEditorFieldDebug', '# alfa');
+		});
+
+		before(function () {
+			return browser.pressButton('.WIKWriteDetailToolbarJumpButton');
+		});
+
+		it('runs Launchlet', function() {
+			browser.assert.elements('.LCHLauncherFilterPrompt', 1);
+		});
+
+	});
+
 	context('publish', function test_publish () {
 		
 		before(function () {

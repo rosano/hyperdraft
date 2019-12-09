@@ -89,6 +89,10 @@ const mod = {
 		mod.ControlNoteSelect(null);
 	},
 
+	WIKWriteDetailDispatchJump (inputData) {
+		mod.ControlNoteJump(inputData);
+	},
+
 	WIKWriteDetailDispatchPublish () {
 		mod.ControlNotePublish(mod._ValueNoteSelected);
 	},
@@ -220,6 +224,14 @@ const mod = {
 		}
 		
 		mod.WIKWriteDetailInstance.WIKWriteDetailFocus();
+	},
+	
+	ControlNoteJump (inputData) {
+		window.Launchlet.LCHSingletonCreate({
+			LCHOptionRecipes: inputData,
+			LCHOptionMode: window.Launchlet.LCHModePreview,
+			LCHOptionCompletionHandler () {},
+		});
 	},
 	
 	async ControlNotePublish (inputData) {
@@ -391,6 +403,7 @@ import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svel
 	
 	<WIKWriteDetail
 		WIKWriteDetailDispatchBack={ mod.WIKWriteDetailDispatchBack }
+		WIKWriteDetailDispatchJump={ mod.WIKWriteDetailDispatchJump }
 		WIKWriteDetailDispatchPublish={ mod.WIKWriteDetailDispatchPublish }
 		WIKWriteDetailDispatchRetract={ mod.WIKWriteDetailDispatchRetract }
 		WIKWriteDetailDispatchVersions={ mod.WIKWriteDetailDispatchVersions }
