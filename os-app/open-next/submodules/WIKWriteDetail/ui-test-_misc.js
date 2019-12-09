@@ -4,17 +4,13 @@ const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
 describe('WIKWriteDetail_Misc', function () {
 
-	const uItem = function () {
-		return {
-			WKCNoteBody: 'alfa',
-		};
-	};
-
 	describe('WIKWriteDetail', function test_WIKWriteDetail () {
 
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
-				WIKWriteDetailItem: JSON.stringify(uItem()),
+				WIKWriteDetailItem: JSON.stringify({
+					WKCNoteBody: 'alfa',
+				}),
 			});
 		});
 
@@ -46,7 +42,9 @@ describe('WIKWriteDetail_Misc', function () {
 
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
-				WIKWriteDetailItem: JSON.stringify(uItem()),
+				WIKWriteDetailItem: JSON.stringify({
+					WKCNoteBody: 'alfa',
+				}),
 			});
 		});
 
@@ -181,7 +179,9 @@ describe('WIKWriteDetail_Misc', function () {
 
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
-				WIKWriteDetailItem: JSON.stringify(uItem()),
+				WIKWriteDetailItem: JSON.stringify({
+					WKCNoteBody: 'alfa',
+				}),
 			});
 		});
 		
@@ -245,7 +245,9 @@ describe('WIKWriteDetail_Misc', function () {
 			});
 
 			it('sends WIKWriteDetailDispatchDiscardData', function () {
-				browser.assert.text('#TestWIKWriteDetailDispatchDiscardData', JSON.stringify(uItem()));
+				browser.assert.text('#TestWIKWriteDetailDispatchDiscardData', JSON.stringify({
+					WKCNoteBody: 'alfa',
+				}));
 			});
 		
 		});
@@ -268,7 +270,9 @@ describe('WIKWriteDetail_Misc', function () {
 		
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
-				WIKWriteDetailItem: JSON.stringify(uItem()),
+				WIKWriteDetailItem: JSON.stringify({
+					WKCNoteBody: 'alfa',
+				}),
 			});
 		});
 
