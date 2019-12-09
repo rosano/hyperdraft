@@ -42,6 +42,10 @@ const mod = {
 
 	// MESSAGE
 
+	WKCWriteEditorDispatchHeaderTokens (inputData) {
+		mod._ValueHeaderTokens = inputData;
+	},
+
 	WKCWriteEditorDispatchUpdate (inputData) {
 		WIKWriteDetailDispatchUpdate(inputData);
 	},
@@ -135,6 +139,7 @@ import WKCWriteEditor from '../WKCWriteEditor/main.svelte';
 
 <div class="WIKWriteDetailForm">
 	<WKCWriteEditor
+		WKCWriteEditorDispatchHeaderTokens={ mod.WKCWriteEditorDispatchHeaderTokens }
 		WKCWriteEditorDispatchUpdate={ mod.WKCWriteEditorDispatchUpdate }
 		WKCWriteEditorDispatchOpen={ mod.WKCWriteEditorDispatchOpen }
 		WKCWriteEditorDispatchReady={ mod.WKCWriteEditorDispatchReady }
