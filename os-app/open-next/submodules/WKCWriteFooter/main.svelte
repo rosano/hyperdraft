@@ -3,7 +3,7 @@ export let WKCWriteFooterStorageStatus = '';
 export let WKCWriteFooterDispatchStorage;
 
 import OLSKInternational from 'OLSKInternational';
-export const OLSKLocalized = function(translationConstant) {
+const OLSKLocalized = function(translationConstant) {
 	return OLSKInternational.OLSKInternationalLocalizedString(translationConstant, JSON.parse(`{"OLSK_I18N_SEARCH_REPLACE":"OLSK_I18N_SEARCH_REPLACE"}`)[window.OLSKPublicConstants('OLSKSharedPageCurrentLanguage')]);
 };
 
