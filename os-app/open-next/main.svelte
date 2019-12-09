@@ -235,7 +235,7 @@ const mod = {
 		if (!inputData) {
 			mod.OLSKMobileViewInactive = false;
 
-			return document.querySelector('.WKCWriteMasterFilterField').focus();
+			return !mod.DataIsMobile() && document.querySelector('.WKCWriteMasterFilterField').focus();
 		}
 
 		mod.OLSKMobileViewInactive = true;
