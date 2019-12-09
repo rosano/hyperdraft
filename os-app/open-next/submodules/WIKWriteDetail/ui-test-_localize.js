@@ -65,8 +65,13 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 						WIKWriteDetailItem: JSON.stringify({
 							WKCNoteBody: 'alfa',
 							WKCNotePublishStatusIsPublished: true,
+							WKCNotePublicID: 'bravo',
 						}),
 					});
+				});
+
+				it('localizes WIKWriteDetailToolbarPublicLink', function () {
+					browser.assert.text(WIKWriteDetailToolbarPublicLink, uLocalized('WIKWriteDetailToolbarPublicLinkText'));
 				});
 
 				it('localizes WIKWriteDetailToolbarRetractButton', function () {

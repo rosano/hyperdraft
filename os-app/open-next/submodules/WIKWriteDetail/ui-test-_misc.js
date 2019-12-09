@@ -113,6 +113,28 @@ describe('WIKWriteDetail_Misc', function () {
 	
 	});
 
+	describe('WIKWriteDetailToolbarPublicLink', function test_WIKWriteDetailToolbarPublicLink () {
+
+		before(function() {
+			return browser.OLSKVisit(kDefaultRoute, {
+				WIKWriteDetailItem: JSON.stringify({
+					WKCNoteBody: 'alfa',
+					WKCNotePublishStatusIsPublished: true,
+					WKCNotePublicID: 'bravo',
+				}),
+			});
+		});
+
+		it('sets target', function () {
+			browser.assert.attribute(WIKWriteDetailToolbarPublicLink, 'target', '_blank');
+		});
+
+		it('sets href', function () {
+			browser.assert.attribute(WIKWriteDetailToolbarPublicLink, 'href', '/bravo');
+		});
+
+	});
+
 	describe('WIKWriteDetailToolbarRetractButton', function test_WIKWriteDetailToolbarRetractButton () {
 
 		before(function() {
@@ -120,6 +142,7 @@ describe('WIKWriteDetail_Misc', function () {
 				WIKWriteDetailItem: JSON.stringify({
 					WKCNoteBody: 'alfa',
 					WKCNotePublishStatusIsPublished: true,
+					WKCNotePublicID: 'bravo',
 				}),
 			});
 		});

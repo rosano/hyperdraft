@@ -31,6 +31,16 @@
 			}[inputData];
 		};
 	</script>
+
+	<script src="/_shared/__external/OLSKRouting/main.js"></script>
+	<script type="text/javascript">
+		window.OLSKCanonicalFor = function(inputData, params) {
+			return OLSKRouting.OLSKRoutingCanonicalPathWithRoutePathAndOptionalParams((<%- JSON.stringify(['WKCRouteRefsRead'].reduce(function (map, e) {
+				map[e] = OLSKRouteObjectFor(e).OLSKRoutePath;
+				return map;
+			}, {})) %>)[inputData], params);
+		};
+	</script>
 </head>
 <body>
 

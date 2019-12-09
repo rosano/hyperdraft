@@ -10,6 +10,7 @@ Object.entries({
 	WIKWriteDetailToolbar: '.WIKWriteDetailToolbar',
 	WIKWriteDetailToolbarBackButton: '.WIKWriteDetailToolbarBackButton',
 	WIKWriteDetailToolbarPublishButton: '.WIKWriteDetailToolbarPublishButton',
+	WIKWriteDetailToolbarPublicLink: '.WIKWriteDetailToolbarPublicLink',
 	WIKWriteDetailToolbarRetractButton: '.WIKWriteDetailToolbarRetractButton',
 	WIKWriteDetailToolbarVersionsButton: '.WIKWriteDetailToolbarVersionsButton',
 	WIKWriteDetailToolbarDiscardButton: '.WIKWriteDetailToolbarDiscardButton',
@@ -71,6 +72,10 @@ describe('WIKWriteDetail_Access', function () {
 			browser.assert.elements(WIKWriteDetailToolbarPublishButton, 1);
 		});
 
+		it('hides WIKWriteDetailToolbarPublicLink', function () {
+			browser.assert.elements(WIKWriteDetailToolbarPublicLink, 0);
+		});
+
 		it('hides WIKWriteDetailToolbarRetractButton', function () {
 			browser.assert.elements(WIKWriteDetailToolbarRetractButton, 0);
 		});
@@ -100,12 +105,17 @@ describe('WIKWriteDetail_Access', function () {
 				WIKWriteDetailItem: JSON.stringify({
 					WKCNoteBody: 'alfa',
 					WKCNotePublishStatusIsPublished: true,
+					WKCNotePublicID: 'bravo',
 				}),
 			});
 		});
 
 		it('hides WIKWriteDetailToolbarPublishButton', function () {
 			browser.assert.elements(WIKWriteDetailToolbarPublishButton, 0);
+		});
+
+		it('shows WIKWriteDetailToolbarPublicLink', function () {
+			browser.assert.elements(WIKWriteDetailToolbarPublicLink, 1);
 		});
 
 		it('shows WIKWriteDetailToolbarRetractButton', function () {

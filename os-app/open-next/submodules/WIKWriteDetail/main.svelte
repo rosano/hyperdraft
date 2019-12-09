@@ -102,6 +102,10 @@ import WKCWriteEditor from '../WKCWriteEditor/main.svelte';
 			{/if}
 
 			{#if mod._ValueItem.WKCNotePublishStatusIsPublished }
+				<a class="WIKWriteDetailToolbarPublicLink" href={ window.OLSKCanonicalFor('WKCRouteRefsRead', {
+					wkc_note_public_id: mod._ValueItem.WKCNotePublicID,
+				}) } target="_blank">{ OLSKLocalized('WIKWriteDetailToolbarPublicLinkText') }</a>
+					
 				<button class="WIKWriteDetailToolbarRetractButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('WIKWriteDetailToolbarRetractButtonText') } on:click={ () => WIKWriteDetailDispatchRetract(mod._ValueItem) } style="background-image: url('/panel/_shared/ui-assets/wIKWriteRetract.svg')"></button>
 			{/if}
 
