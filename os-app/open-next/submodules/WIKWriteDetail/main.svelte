@@ -154,4 +154,53 @@ import WKCWriteEditor from '../WKCWriteEditor/main.svelte';
 	border-radius: 5px;
 	padding: 5px;
 }
+
+/* CodeMirror */
+
+.WIKWriteDetailForm {
+	/* ContainerFlexboxChild */
+	flex-grow: 1;
+
+	/* WIKWriteDetailFormStationParent */
+	position: relative;
+}
+
+.WIKWriteDetailForm :global(.CodeMirror) {
+	height: 100%;
+
+	/* WIKWriteDetailFormStationChild */
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+
+	font-family: inherit;
+	font-size: 14px;
+}
+
+.WIKWriteDetailForm :global(.CodeMirror-scroll) {
+	background: #f8f8f8;
+
+  /* OLSKMobileSafariSmoothScrolling */
+	-webkit-overflow-scrolling: touch;
+}
+
+.WIKWriteDetailForm :global(.CodeMirror-lines) {
+	/* override defaults */
+	padding: 10px;
+}
+
+.WIKWriteDetailForm :global(.CodeMirror pre) {
+	/* override defaults */
+	padding: 0;
+}
+
+.WIKWriteDetailForm :global(.CodeMirror-line:nth-child(1)) {
+	font-weight: bold;
+}
+
+.WIKWriteDetailForm :global(.cm-link:hover) {
+  cursor: pointer;
+}
 </style>
