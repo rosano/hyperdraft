@@ -9,6 +9,7 @@ import WKCParser from '../_shared/WKCParser/main.js';
 import { OLSK_TESTING_BEHAVIOUR } from 'OLSKTesting'
 import * as OLSKRemoteStorage from '../_shared/__external/OLSKRemoteStorage/main.js'
 import * as WKCNoteAction from '../_shared/WKCNote/action.js';
+import * as WKCVersionAction from '../_shared/WKCVersion/action.js';
 import * as WKCWriteLogic from '../open-write/ui-logic.js';
 import { storageClient, WKCPersistenceIsLoading, WKCNotesAllStore } from '../open-write/persistence.js';
 
@@ -86,6 +87,10 @@ const mod = {
 
 	WIKWriteDetailDispatchBack () {
 		mod.ControlNoteSelect(null);
+	},
+
+	WIKWriteDetailDispatchVersions () {
+		mod.ControlNoteVersions(mod._ValueNoteSelected);
 	},
 
 	WIKWriteDetailDispatchDiscard (inputData) {
@@ -207,6 +212,15 @@ const mod = {
 		}
 		
 		mod.WIKWriteDetailInstance.WIKWriteDetailFocus();
+	},
+	
+	async ControlNoteVersions (inputData) {
+		(await WKCVersionAction.WKCVersionActionQuery(storageClient, {
+			WKCVersionNoteID: inputData.WKCNoteID,
+		})).slice(0, 5).forEach(function (e) {
+			console.log(e);
+			console.log(e.WKCVersionBody);
+		});
 	},
 	
 	async ControlNoteDiscard (inputData) {
@@ -361,6 +375,7 @@ import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svel
 	
 	<WIKWriteDetail
 		WIKWriteDetailDispatchBack={ mod.WIKWriteDetailDispatchBack }
+		WIKWriteDetailDispatchVersions={ mod.WIKWriteDetailDispatchVersions }
 		WIKWriteDetailDispatchDiscard={ mod.WIKWriteDetailDispatchDiscard }
 		WIKWriteDetailDispatchUpdate={ mod.WIKWriteDetailDispatchUpdate }
 		WIKWriteDetailDispatchOpen={ mod.WIKWriteDetailDispatchOpen }

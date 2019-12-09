@@ -82,7 +82,7 @@ describe('WKCWrite_Access', function () {
 	
 	});
 
-	context('delete', function () {
+	context('discard', function () {
 
 		context('cancel', function () {
 			

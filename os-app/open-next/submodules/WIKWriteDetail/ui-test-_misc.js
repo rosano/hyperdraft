@@ -89,6 +89,38 @@ describe('WIKWriteDetail_Misc', function () {
 	
 	});
 
+	describe('WIKWriteDetailToolbarVersionsButton', function test_WIKWriteDetailToolbarVersionsButton () {
+		
+		it('classes OLSKLayoutButtonNoStyle', function () {
+			browser.assert.hasClass(WIKWriteDetailToolbarVersionsButton, 'OLSKLayoutButtonNoStyle');
+		});
+
+		it('classes OLSKLayoutElementTappable', function () {
+			browser.assert.hasClass(WIKWriteDetailToolbarVersionsButton, 'OLSKLayoutElementTappable');
+		});
+
+		it('classes OLSKToolbarButton', function () {
+			browser.assert.hasClass(WIKWriteDetailToolbarVersionsButton, 'OLSKToolbarButton');
+		});
+
+		context('click', function () {
+			
+			before(function () {
+				browser.assert.text('#TestWIKWriteDetailDispatchVersions', '0');
+			});
+			
+			before(function () {
+				return browser.pressButton(WIKWriteDetailToolbarVersionsButton);
+			});
+
+			it('sends WIKWriteDetailDispatchVersions', function () {
+				browser.assert.text('#TestWIKWriteDetailDispatchVersions', '1');
+			});
+		
+		});
+	
+	});
+
 	describe('WIKWriteDetailToolbarDiscardButton', function test_WIKWriteDetailToolbarDiscardButton () {
 		
 		it('classes OLSKLayoutButtonNoStyle', function () {
