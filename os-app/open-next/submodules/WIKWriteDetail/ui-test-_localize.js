@@ -35,6 +35,10 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 				browser.assert.text(WIKWriteDetailToolbarBackButton, uLocalized('WIKWriteDetailToolbarBackButtonText'));
 			});
 
+			it('localizes WIKWriteDetailToolbarJumpButton', function () {
+				browser.assert.attribute(WIKWriteDetailToolbarJumpButton, 'title', uLocalized('WIKWriteDetailToolbarJumpButtonText'));
+			});
+
 			it('localizes WIKWriteDetailToolbarPublishButton', function () {
 				browser.assert.attribute(WIKWriteDetailToolbarPublishButton, 'title', uLocalized('WIKWriteDetailToolbarPublishButtonText'));
 			});

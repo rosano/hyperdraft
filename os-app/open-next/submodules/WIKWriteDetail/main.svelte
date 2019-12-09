@@ -1,5 +1,7 @@
 <script>
+export let WIKWriteDetailJumpEnabled = false;
 export let WIKWriteDetailDispatchBack;
+export let WIKWriteDetailDispatchJump;
 export let WIKWriteDetailDispatchPublish;
 export let WIKWriteDetailDispatchRetract;
 export let WIKWriteDetailDispatchVersions;
@@ -97,6 +99,8 @@ import WKCWriteEditor from '../WKCWriteEditor/main.svelte';
 		</OLSKToolbarElementGroup>
 
 		<OLSKToolbarElementGroup>
+			<button class="WIKWriteDetailToolbarJumpButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('WIKWriteDetailToolbarJumpButtonText') } accesskey="r" tabindex="-1" disabled={ !WIKWriteDetailJumpEnabled } on:click={ () => WIKWriteDetailDispatchJump() } style="background-image: url('/panel/_shared/ui-assets/wIKWriteJump.svg')"></button>
+
 			{#if !mod._ValueItem.WKCNotePublishStatusIsPublished }
 				<button class="WIKWriteDetailToolbarPublishButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('WIKWriteDetailToolbarPublishButtonText') } on:click={ () => WIKWriteDetailDispatchPublish() } style="background-image: url('/panel/_shared/ui-assets/wIKWritePublish.svg')"></button>
 			{/if}

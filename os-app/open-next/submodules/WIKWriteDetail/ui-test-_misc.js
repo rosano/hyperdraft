@@ -79,6 +79,67 @@ describe('WIKWriteDetail_Misc', function () {
 	
 	});
 
+	describe('WIKWriteDetailToolbarJumpButton', function test_WIKWriteDetailToolbarJumpButton () {
+		
+		it('classes OLSKLayoutButtonNoStyle', function () {
+			browser.assert.hasClass(WIKWriteDetailToolbarJumpButton, 'OLSKLayoutButtonNoStyle');
+		});
+
+		it('classes OLSKLayoutElementTappable', function () {
+			browser.assert.hasClass(WIKWriteDetailToolbarJumpButton, 'OLSKLayoutElementTappable');
+		});
+
+		it('classes OLSKToolbarButton', function () {
+			browser.assert.hasClass(WIKWriteDetailToolbarJumpButton, 'OLSKToolbarButton');
+		});
+
+		it('sets accesskey', function () {
+			browser.assert.attribute(WIKWriteDetailToolbarJumpButton, 'accesskey', 'r');
+		});
+
+		it('sets tabIndex', function () {
+			browser.assert.attribute(WIKWriteDetailToolbarJumpButton, 'tabIndex', '-1');
+		});
+
+		it('sets disabled', function () {
+			browser.assert.attribute(WIKWriteDetailToolbarJumpButton, 'disabled', '');
+		});
+		
+		context('WIKWriteDetailJumpEnabled', function() {
+
+			before(function() {
+				return browser.OLSKVisit(kDefaultRoute, {
+					WIKWriteDetailItem: JSON.stringify({
+						WKCNoteBody: 'alfa',
+					}),
+					WIKWriteDetailJumpEnabled: true,
+				});
+			});
+
+			it('sets disabled', function() {
+				browser.assert.attribute(WIKWriteDetailToolbarJumpButton, 'disabled', null);
+			});
+
+		});
+
+		context('click', function () {
+			
+			before(function () {
+				browser.assert.text('#TestWIKWriteDetailDispatchJump', '0');
+			});
+			
+			before(function () {
+				return browser.pressButton(WIKWriteDetailToolbarJumpButton);
+			});
+
+			it('sends WIKWriteDetailDispatchJump', function () {
+				browser.assert.text('#TestWIKWriteDetailDispatchJump', '1');
+			});
+		
+		});
+	
+	});
+
 	describe('WIKWriteDetailToolbarPublishButton', function test_WIKWriteDetailToolbarPublishButton () {
 		
 		it('classes OLSKLayoutButtonNoStyle', function () {
