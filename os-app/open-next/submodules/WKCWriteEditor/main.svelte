@@ -1,4 +1,5 @@
 <script>
+export let WKCWriteEditorDispatchHeaderTokens;
 export let WKCWriteEditorDispatchUpdate;
 export let WKCWriteEditorDispatchOpen;
 export let WKCWriteEditorDispatchReady;
@@ -11,7 +12,7 @@ export const WKCWriteEditorFocus = function () {
 
 export const WKCWriteEditorSetDocument = function (inputData) {
 	if (OLSK_TESTING_BEHAVIOUR()) {
-		return (mod._ValueEditorFieldDebugValue = inputData);
+		return mod.ReactDocumentSet(mod._ValueEditorFieldDebugValue = inputData);
 	}
 	
 	mod.ControlConfigureEditor(function () {
@@ -60,7 +61,7 @@ const mod = {
 	},
 
 	InterfaceEditorFieldDebugDidInput () {
-		WKCWriteEditorDispatchUpdate(this.value);
+		mod.ReactDocumentInput(this.value)
 	},
 
 	// CONTROL
@@ -106,6 +107,24 @@ const mod = {
 		WKCWriteEditorDispatchOpen(match);
 	},
 
+	// REACT
+
+	ReactDocumentSet (inputData) {
+		mod._ReactDocumentHeaderTokens(inputData);
+	},
+
+	ReactDocumentInput (inputData) {
+		WKCWriteEditorDispatchUpdate(inputData);
+
+		mod._ReactDocumentHeaderTokens(inputData);
+	},
+
+	_ReactDocumentHeaderTokens (inputData) {
+		WKCWriteEditorDispatchHeaderTokens(WKCWriteEditorLogic.WKCWriteEditorHeaderTokensFrom(inputData.split('\n').map(function (e, i) {
+			return WKCWriteEditorLogic.WKCWriteEditorLineObjectsFor(OLSK_TESTING_BEHAVIOUR() ? WKCWriteEditorLogic.uStubLineTokensFor(e) : editorInstance.getLineTokens(i));
+		})));
+	},
+
 	// SETUP
 
 	SetupEverything () {
@@ -145,10 +164,10 @@ const mod = {
 
 		mod._ValueEditorInstance.on('change', function (instance, changeObject) {
 			if (changeObject.origin === 'setValue') {
-				return;
+				return mod.ReactDocumentSet(instance.getValue());
 			}
 
-			WKCWriteEditorDispatchUpdate(instance.getValue());
+			mod.ReactDocumentInput(instance.getValue());
 		});
 
 		mod._ValueEditorPostInitializeQueue.splice(0, mod._ValueEditorPostInitializeQueue.length).forEach(function(e) {

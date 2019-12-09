@@ -5,6 +5,10 @@ const params = Object.fromEntries((new window.URLSearchParams(window.location.se
 const WKCWriteEditor = new RollupStart({
 	target: document.body,
 	props: Object.assign({
+		WKCWriteEditorDispatchHeaderTokens: (function _WKCWriteEditorDispatchHeaderTokens (inputData) {
+			window.TestWKCWriteEditorDispatchHeaderTokens.innerHTML = parseInt(window.TestWKCWriteEditorDispatchHeaderTokens.innerHTML) + 1;
+			window.TestWKCWriteEditorDispatchHeaderTokensData.innerHTML = JSON.stringify(inputData);
+		}),
 		WKCWriteEditorDispatchUpdate: (function _WKCWriteEditorDispatchUpdate (inputData) {
 			window.TestWKCWriteEditorDispatchUpdate.innerHTML = parseInt(window.TestWKCWriteEditorDispatchUpdate.innerHTML) + 1;
 			window.TestWKCWriteEditorDispatchUpdateData.innerHTML = inputData;
