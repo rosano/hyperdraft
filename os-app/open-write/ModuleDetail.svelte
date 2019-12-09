@@ -238,8 +238,8 @@ async function notePublish() {
 	});
 }
 
-async function noteUnpublish() {
-	let item = await WKCNoteAction.WKCNoteActionUnpublish(storageClient, $WKCNoteSelectedStore);
+async function noteRetract() {
+	let item = await WKCNoteAction.WKCNoteActionRetract(storageClient, $WKCNoteSelectedStore);
 	return WKCNoteSelectedStore.update(function (val) {
 		return Object.assign(val, item);
 	});
@@ -370,7 +370,7 @@ import OLSKToolbarElementGroup from 'OLSKToolbarElementGroup';
 							wkc_note_public_id: $WKCNoteSelectedStore.WKCNotePublicID,
 						}) } title={ OLSKLocalized('WKCWriteDetailToolbarVisitButtonText') } style="background-image: url('/panel/_shared/ui-assets/wIKWriteVisit.svg')" target="_blank">&nbsp;</a>
 
-					<button on:click={ noteUnpublish } class="OLSKToolbarButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle" style="background-image: url('/panel/_shared/ui-assets/wIKWriteUnpublish.svg')" title={ OLSKLocalized('WKCWriteDetailToolbarUnpublishButtonText') } id="WKCWriteDetailToolbarUnpublishButton"></button>
+					<button on:click={ noteRetract } class="OLSKToolbarButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle" style="background-image: url('/panel/_shared/ui-assets/wIKWriteRetract.svg')" title={ OLSKLocalized('WKCWriteDetailToolbarRetractButtonText') } id="WKCWriteDetailToolbarRetractButton"></button>
 				{/if}
 
 				{#if !$WKCNoteSelectedStore.WKCNotePublishStatusIsPublished }

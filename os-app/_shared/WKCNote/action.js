@@ -84,7 +84,7 @@ export const WKCNoteActionPublish = async function(storageClient, inputData) {
 	}));
 };
 
-export const WKCNoteActionUnpublish = async function(storageClient, inputData) {
+export const WKCNoteActionRetract = async function(storageClient, inputData) {
 	if (typeof inputData !== 'object' || inputData === null) {
 		return Promise.reject(new Error('WKCErrorInputNotValid'));
 	}

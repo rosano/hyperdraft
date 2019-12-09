@@ -5,7 +5,7 @@ WKCLoginPromptUserTokenText: User Token
 WKCWriteMasterFilterFieldText: Filter or create
 WKCWriteMasterToolbarCreateButtonText: Add note
 WKCWriteDetailToolbarVisitButtonText: Visit public page
-WKCWriteDetailToolbarUnpublishButtonText: Unpublish
+WKCWriteDetailToolbarRetractButtonText: Retract
 WKCWriteDetailToolbarPublishButtonText: Publish
 WKCWriteDetailToolbarBackButtonText: Back
 WKCWriteDetailToolbarVersionsButtonText: Versions
@@ -13,10 +13,10 @@ WKCWriteDetailToolbarDiscardButtonText: Delete
 WKCWriteNotesDeleteAlertText: Are you sure?
 WKCWriteDetailPlaceholderText: No Note Selected
 WKCWriteDetailToolbarPublishStatusPublishing: Publishing…
-WKCWriteDetailToolbarPublishStatusUnpublishing: Unpublishing…
+WKCWriteDetailToolbarPublishStatusRetracting: Retracting…
 WKCWriteDetailToolbarPublishStatusPublished: Public
 WKCWriteDetailToolbarPublishStatusUnableToPublish: Unable to publish
-WKCWriteDetailToolbarPublishStatusUnableToUnpublish: Unable to unpublish
+WKCWriteDetailToolbarPublishStatusUnableToRetract: Unable to Retract
 WKCWriteDetailToolbarPersistenceStatusSaving: Saving…
 WKCWriteDetailToolbarPersistenceStatusSaved: Saved
 WKCWriteDetailToolbarPersistenceStatusDeleting: Deleting…
@@ -27,4 +27,4 @@ WKCWriteErrorNotesUnavailable: Unable to fetch notes
 WKCWriteErrorPersistenceSaveDidFail: Unable to save note. Would you like to try again?
 WKCWriteErrorPersistenceDeleteDidFail: Unable to delete note. Would you like to try again?
 WKCWriteErrorPublishDidFail: Unable to publish note. Would you like to try again?
-WKCWriteErrorUnpublishDidFail: Unable to unpublish note. Would you like to try again?
+WKCWriteErrorRetractDidFail: Unable to Retract note. Would you like to try again?

@@ -264,14 +264,14 @@ describe('WKCNoteActionPublish', function testWKCNoteActionPublish() {
 
 });
 
-describe('WKCNoteActionUnpublish', function testWKCNoteActionUnpublish() {
+describe('WKCNoteActionRetract', function testWKCNoteActionRetract() {
 
 	it('rejects if not object', async function() {
 		await rejects(mainModule.WKCNoteActionPublish(WKCTestingStorageClient, null), /WKCErrorInputNotValid/);
 	});
 
 	it('returns object with WKCErrors if not valid', async function() {
-		deepEqual((await mainModule.WKCNoteActionUnpublish(WKCTestingStorageClient, Object.assign(await mainModule.WKCNoteActionPublish(WKCTestingStorageClient, await mainModule.WKCNoteActionCreate(WKCTestingStorageClient, kTesting.StubNoteObject())), {
+		deepEqual((await mainModule.WKCNoteActionRetract(WKCTestingStorageClient, Object.assign(await mainModule.WKCNoteActionPublish(WKCTestingStorageClient, await mainModule.WKCNoteActionCreate(WKCTestingStorageClient, kTesting.StubNoteObject())), {
 			WKCNoteID: null,
 		}))).WKCErrors, {
 			WKCNoteID: [
@@ -290,7 +290,7 @@ describe('WKCNoteActionUnpublish', function testWKCNoteActionUnpublish() {
 	});
 
 	it('sets WKCNotePublishStatusIsPublished to false', async function() {
-		deepEqual((await mainModule.WKCNoteActionUnpublish(WKCTestingStorageClient, await mainModule.WKCNoteActionPublish(WKCTestingStorageClient, await mainModule.WKCNoteActionCreate(WKCTestingStorageClient, kTesting.StubNoteObject())))).WKCNotePublishStatusIsPublished, false);
+		deepEqual((await mainModule.WKCNoteActionRetract(WKCTestingStorageClient, await mainModule.WKCNoteActionPublish(WKCTestingStorageClient, await mainModule.WKCNoteActionCreate(WKCTestingStorageClient, kTesting.StubNoteObject())))).WKCNotePublishStatusIsPublished, false);
 	});	
 
 });
