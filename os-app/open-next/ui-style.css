@@ -8,6 +8,28 @@
 	color: var(--WKCCommonForeground);
 }
 
+#WKCWriteStorageWidget {
+	border-top: var(--WKCBorderStyle);
+	
+	background: var(--WKCCommonBackground);
+
+	/* AppContainerFlexboxChild */
+	flex-shrink: 0;
+}
+
+.WKCWriteStorageWidgetHidden {
+	display: none;
+}
+
+@media screen and (max-width: 760px) {
+
+
+#WKCWriteStorageWidget {
+	bottom: 52px;
+}
+
+}
+
 @media screen and (max-width: 760px) {
 
 .WKCWrite :global(.WKCWriteFooter) {
@@ -15,12 +37,4 @@
 	z-index: 999;
 }
 
-}
-
-#WKCWriteStorageWidget {
-	border-top: var(--WKCBorderStyle)
-}
-
-.WKCWriteStorageWidgetHidden {
-	display: none;
 }
