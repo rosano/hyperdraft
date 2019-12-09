@@ -61,7 +61,11 @@ const mod = {
 			return;
 		}
 
-		if (mod._ValueEditorInstance && mod._ValueEditorInstance.getDoc().listSelections().length <= 1) {
+		if (!mod._ValueEditorInstance) {
+			return;
+		}
+
+		if (mod._ValueEditorInstance.getDoc().listSelections().length <= 1) {
 			return;
 		}
 
