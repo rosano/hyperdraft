@@ -288,6 +288,18 @@ describe('WKCWrite_Misc', function () {
 
 	});
 
+	context('retract', function test_retract () {
+		
+		before(function () {
+			return browser.click('.WIKWriteDetailToolbarRetractButton');
+		});
+
+		it('sets WKCNotePublishStatusIsPublished', function () {
+			browser.assert.elements('.WIKWriteDetailToolbarPublishButton', 1);
+		});
+
+	});
+
 	describe('WKCWriteStorageWidget', function test_WKCWriteStorageWidget () {
 		
 		it('sets class', function () {
