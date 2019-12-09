@@ -13,10 +13,7 @@ import { writable } from 'svelte/store';
 
 export const WKCNoteSelectedStore = writable(null);
 export const WKCNotesAllStore = writable([]);
-export const mobileViewCurrent = writable('ModuleMaster');
 export const WKCPersistenceIsLoading = writable(true);
-export let filterText = writable('');
-export const isInErrorState = writable(false);
 
 export const WKCWriteDefaultFocusNode = function () {
 	return document.querySelector('.WKCWriteMasterFilterField');
@@ -151,7 +148,5 @@ storageClient.remoteStorage.on('ready', async () => {
 		if (!_WIKIsTestingBehaviour()) {
 			console.debug('error', error);
 		}
-
-		isInErrorState.set(true);
 	});
 })();
