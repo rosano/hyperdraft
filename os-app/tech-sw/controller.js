@@ -10,7 +10,7 @@ exports.OLSKControllerRoutes = function() {
 			OLSKRouteFunction(req, res, next) {
 				return res.type('js').send(OLSKServiceWorker.OLSKServiceWorkerView({
 					VERSION_ID_TOKEN: kWKCServiceWorkerVersionID.toString(),
-					REFERRER_MATCH_TOKEN: require('../open-write/controller.js').OLSKControllerRoutes().WKCWriteRoute.OLSKRoutePath.replace(/\//g, '\\/'),
+					REFERRER_MATCH_TOKEN: require('../open-write/controller.js').OLSKControllerRoutes().shift().OLSKRoutePath.replace(/\//g, '\\/'),
 				}));
 			},
 		},
