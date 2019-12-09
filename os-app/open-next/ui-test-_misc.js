@@ -303,6 +303,10 @@ describe('WKCWrite_Misc', function () {
 			it('sets WIKWriteDetailItem', function () {
 				browser.assert.elements('.WIKWriteDetailPlaceholder', 1);
 			});
+
+			it('sorts WKCWriteMasterListItem', function () {
+				browser.assert.text('.WKCWriteMasterListItemTitle', 'bravoalfa')
+			});
 		
 		});
 

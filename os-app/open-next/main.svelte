@@ -22,7 +22,7 @@ const mod = {
 	ValueNotesVisible (inputData) {
 		mod._ValueNotesVisible = (!mod._ValueFilterText ? inputData : inputData.filter(function (e) {
 			return e.WKCNoteBody.toLowerCase().match(mod._ValueFilterText.toLowerCase());
-		})).sort(WKCWriteLogic.WKCWriteSort);
+		})).sort(WKCWriteLogic.WKCWriteLogicListSort);
 	},
 	
 	_ValueNoteSelected: undefined,
@@ -201,7 +201,7 @@ const mod = {
 		});
 
 		WKCNotesAllStore.update(function (val) {
-			return val.concat(item).sort(WKCWriteLogic.WKCWriteSort);
+			return val.concat(item).sort(WKCWriteLogic.WKCWriteLogicListSort);
 		});
 
 		mod.ControlNoteSelect(item);
