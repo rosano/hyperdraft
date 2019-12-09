@@ -10,8 +10,8 @@ import { OLSK_TESTING_BEHAVIOUR } from 'OLSKTesting'
 import * as OLSKRemoteStorage from '../_shared/__external/OLSKRemoteStorage/main.js'
 import * as WKCNoteAction from '../_shared/WKCNote/action.js';
 import * as WKCVersionAction from '../_shared/WKCVersion/action.js';
-import * as WKCWriteLogic from '../open-write/ui-logic.js';
-import { storageClient, WKCPersistenceIsLoading, WKCNotesAllStore } from '../open-write/persistence.js';
+import * as WKCWriteLogic from './ui-logic.js';
+import { storageClient, WKCPersistenceIsLoading, WKCNotesAllStore } from './persistence.js';
 
 const mod = {
 
