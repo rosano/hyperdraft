@@ -88,6 +88,8 @@ const mod = {
 			return {
 				LCHRecipeName: e.string,
 				LCHRecipeCallback () {
+					mod.WKCWriteEditorInstance.WIKWriteEditorScrollIntoView(e.line, e.start);
+					mod.WKCWriteEditorInstance.WKCWriteEditorSetSelection(e.line, e.start, e.line, e.end);
 				},
 			};
 		}));

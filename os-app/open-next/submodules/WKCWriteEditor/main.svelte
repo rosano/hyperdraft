@@ -27,6 +27,18 @@ export const WKCWriteEditorSetCursor = function (param1, param2) {
 	});
 };
 
+export const WIKWriteEditorScrollIntoView = function (param1, param2) {
+	mod.ControlConfigureEditor(function (inputData) {
+		inputData.scrollIntoView(CodeMirror.Pos(param1, param2), 300);
+	});
+};
+
+export const WKCWriteEditorSetSelection = function (param1, param2, param3, param4) {
+	mod.ControlConfigureEditor(function (inputData) {
+		inputData.setSelection(CodeMirror.Pos(param1, param2), CodeMirror.Pos(param3, param4));
+	});
+};
+
 import { OLSK_TESTING_BEHAVIOUR } from 'OLSKTesting';
 import WKCWriteEditorLogic from './ui-logic.js';
 
