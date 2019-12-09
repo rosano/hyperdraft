@@ -131,6 +131,18 @@ const mod = {
 		ControlNotesImport(event.detail);
 	},
 
+	// INTERFACE	
+
+	InterfaceWindowDidKeydown (event) {
+		if (event.key !== 'Tab') {
+			return;
+		}
+
+		document.activeElement !== document.querySelector('.WKCWriteMasterFilterField') ? document.querySelector('.WKCWriteMasterFilterField').focus() : mod.WIKWriteDetailInstance.WIKWriteDetailFocus();
+
+		event.preventDefault();
+	},
+
 	// CONTROL
 
 	ControlNoteSave(inputData) {
@@ -389,6 +401,7 @@ import WIKWriteDetail from './submodules/WIKWriteDetail/main.svelte';
 import WKCWriteFooter from './submodules/WKCWriteFooter/main.svelte';
 import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svelte';
 </script>
+<svelte:window on:keydown={ mod.InterfaceWindowDidKeydown } />
 
 <div class="WKCWrite OLSKViewport" class:OLSKIsLoading={ $WKCPersistenceIsLoading }>
 

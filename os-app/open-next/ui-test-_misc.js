@@ -112,6 +112,42 @@ describe('WKCWrite_Misc', function () {
 
 	});
 
+	context('tab', function test_tab () {
+		
+		context('master focused', function () {
+			
+			before(function () {
+				return browser.OLSKFireKeyboardEvent(browser.window, 'Tab');
+			});
+
+			it.skip('classes WKCWriteMasterFocused', function() {
+				browser.assert.hasNoClass('.WKCWriteMaster', 'WKCWriteMasterFocused');
+			});
+
+			it.skip('focus WKCWriteEditor', function() {
+				browser.assert.hasClass('.CodeMirror', 'CodeMirror-focused');
+			});
+		
+		});
+		
+		context('editor focused', function () {
+			
+			before(function () {
+				return browser.OLSKFireKeyboardEvent(browser.window, 'Tab');
+			});
+
+			it('classes WKCWriteMasterFocused', function() {
+				browser.assert.hasClass('.WKCWriteMaster', 'WKCWriteMasterFocused');
+			});
+
+			it.skip('focus WKCWriteEditor', function() {
+				browser.assert.hasNoClass('.CodeMirror', 'CodeMirror-focused');
+			});
+		
+		});
+
+	});
+
 	context('click', function test_click () {
 		
 		before(function () {
