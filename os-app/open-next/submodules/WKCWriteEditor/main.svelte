@@ -121,7 +121,7 @@ const mod = {
 
 	_ReactDocumentHeaderTokens (inputData) {
 		WKCWriteEditorDispatchHeaderTokens(WKCWriteEditorLogic.WKCWriteEditorHeaderTokensFrom(inputData.split('\n').map(function (e, i) {
-			return WKCWriteEditorLogic.WKCWriteEditorLineObjectsFor(OLSK_TESTING_BEHAVIOUR() ? WKCWriteEditorLogic.uStubLineTokensFor(e) : editorInstance.getLineTokens(i));
+			return WKCWriteEditorLogic.WKCWriteEditorLineObjectsFor(OLSK_TESTING_BEHAVIOUR() ? WKCWriteEditorLogic.uStubLineTokensFor(e) : mod._ValueEditorInstance.getLineTokens(i));
 		})));
 	},
 
