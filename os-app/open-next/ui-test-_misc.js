@@ -23,6 +23,10 @@ describe('WKCWrite_Misc', function () {
 	it('sets WIKWriteDetailItem', function () {
 		browser.assert.elements('.WIKWriteDetailPlaceholder', 1);
 	});
+
+	it('focuses WKCWriteMasterFilterField', function() {
+		browser.assert.hasFocus('.WKCWriteMasterFilterField');
+	});
 	
 	context('create', function test_create () {
 
