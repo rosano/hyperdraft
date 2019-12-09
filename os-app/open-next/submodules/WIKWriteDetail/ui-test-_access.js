@@ -20,11 +20,7 @@ Object.entries({
 describe('WIKWriteDetail_Access', function () {
 	
 	before(function() {
-		return browser.OLSKVisit(kDefaultRoute, {
-			WIKWriteDetailItem: JSON.stringify({
-				WKCNoteBody: 'alfa',
-			}),
-		});
+		return browser.OLSKVisit(kDefaultRoute);
 	});
 
 	it('shows WIKWriteDetail', function () {
@@ -45,8 +41,12 @@ describe('WIKWriteDetail_Access', function () {
 
 	context('WIKWriteDetailItem', function() {
 
-		before(function () {
-			browser.pressButton('#TestWIKWriteDetailSetItem');
+		before(function() {
+			return browser.OLSKVisit(kDefaultRoute, {
+				WIKWriteDetailItem: JSON.stringify({
+					WKCNoteBody: 'alfa',
+				}),
+			});
 		});
 
 		it('hides WIKWriteDetailPlaceholder', function () {

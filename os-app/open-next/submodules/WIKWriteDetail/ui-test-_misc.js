@@ -18,10 +18,6 @@ describe('WIKWriteDetail_Misc', function () {
 			});
 		});
 
-		before(function () {
-			browser.pressButton('#TestWIKWriteDetailSetItem');
-		});
-		
 		it('sets class', function () {
 			browser.assert.hasClass(WIKWriteDetail, 'OLSKViewportDetail');
 		});
@@ -54,10 +50,6 @@ describe('WIKWriteDetail_Misc', function () {
 			});
 		});
 
-		before(function () {
-			browser.pressButton('#TestWIKWriteDetailSetItem');
-		});
-		
 		it('sets class', function () {
 			browser.assert.hasClass('.OLSKToolbar', 'OLSKToolbarJustify');
 		});
@@ -178,10 +170,6 @@ describe('WIKWriteDetail_Misc', function () {
 			});
 		});
 
-		before(function () {
-			browser.pressButton('#TestWIKWriteDetailSetItem');
-		});
-		
 		it.skip('binds WKCNoteBody', function () {
 			browser.assert.input('.CodeMirror', 'alfa');
 		});

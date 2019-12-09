@@ -31,14 +31,12 @@ const WIKWriteDetail = new RollupStart({
 	}))),
 });
 
+WIKWriteDetail.WIKWriteDetailSetItem(params.WIKWriteDetailItem);
+
 window.WIKWriteDetailBehaviour = {
 
 	TestWIKWriteDetailFocus () {
 		WIKWriteDetail.WIKWriteDetailFocus();
-	},
-
-	TestWIKWriteDetailSetItem () {
-		WIKWriteDetail.WIKWriteDetailSetItem(params.WIKWriteDetailItem);
 	},
 
 };
