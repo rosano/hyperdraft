@@ -36,7 +36,9 @@ const mod = {
 
 	_ValueFooterStorageStatus: '',
 
-	_ValueSaveThrottleMap: {},
+	_ValueSaveNoteThrottleMap: {},
+
+	_ValueSaveVersionThrottleMap: {},
 
 	WIKWriteDetailInstance: undefined,
 
@@ -119,11 +121,11 @@ const mod = {
 			return val;
 		});
 
-		OLSKThrottle.OLSKThrottleMappedTimeoutFor(mod._ValueSaveThrottleMap, inputData.WKCNoteID, function (inputData) {
+		OLSKThrottle.OLSKThrottleMappedTimeoutFor(mod._ValueSaveNoteThrottleMap, inputData.WKCNoteID, function (inputData) {
 			return {
 				OLSKThrottleDuration: 500,
 				async OLSKThrottleCallback () {
-					delete mod._ValueSaveThrottleMap[inputData.WKCNoteID];
+					delete mod._ValueSaveNoteThrottleMap[inputData.WKCNoteID];
 
 					await WKCNoteAction.WKCNoteActionUpdate(storageClient, inputData);
 				},
@@ -131,8 +133,32 @@ const mod = {
 		}, inputData);
 
 		if (OLSK_TESTING_BEHAVIOUR()) {
-			OLSKThrottle.OLSKThrottleSkip(mod._ValueSaveThrottleMap[inputData.WKCNoteID])	
-		};
+			OLSKThrottle.OLSKThrottleSkip(mod._ValueSaveNoteThrottleMap[inputData.WKCNoteID])	
+		}
+
+		OLSKThrottle.OLSKThrottleMappedTimeoutFor(_ValueSaveVersionThrottleMap, inputData.WKCNoteID, function (inputData) {
+			return {
+				OLSKThrottleDuration: 3000,
+				OLSKThrottleCallback: async function () {
+					delete _ValueSaveVersionThrottleMap[inputData.WKCNoteID];
+
+					if (!inputData.WKCNoteCreationDate) {
+						return;
+					}
+
+					await WKCVersionAction.WKCVersionActionCreate(storageClient, {
+						WKCVersionNoteID: inputData.WKCNoteID,
+						WKCVersionBody: inputData.WKCNoteBody,
+						WKCVersionDate: inputData.WKCNoteModificationDate,
+					});
+				},
+			};
+		}, inputData);
+
+
+		if (OLSK_TESTING_BEHAVIOUR()) {
+			OLSKThrottle.OLSKThrottleSkip(mod._ValueSaveVersionThrottleMap[inputData.WKCNoteID])	
+		}
 	},
 
 	async ControlNoteCreate(inputData) {
