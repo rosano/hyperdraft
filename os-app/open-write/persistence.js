@@ -22,10 +22,6 @@ export const WKCWriteDefaultFocusNode = function () {
 	return document.querySelector('.WKCWriteMasterFilterField');
 };
 
-export const isMobile = function () {
-	return window.innerWidth <= 760;
-};
-
 let _WKCNoteSelectedStore;
 WKCNoteSelectedStore.subscribe(function (val) {
 	_WKCNoteSelectedStore = val;
