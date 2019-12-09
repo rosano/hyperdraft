@@ -294,6 +294,14 @@ describe('WKCWrite_Misc', function () {
 			browser.assert.elements('.LCHLauncherPipeItemTitle', '# alfa');
 		});
 
+		context('execute', function () {
+
+			it.skip('focus WKCWriteEditor', function() {
+				browser.assert.hasClass('.CodeMirror', 'CodeMirror-focused');
+			});
+		
+		});
+
 	});
 
 	context('publish', function test_publish () {

@@ -230,7 +230,13 @@ const mod = {
 		window.Launchlet.LCHSingletonCreate({
 			LCHOptionRecipes: inputData,
 			LCHOptionMode: window.Launchlet.LCHModePreview,
-			LCHOptionCompletionHandler () {},
+			LCHOptionCompletionHandler () {
+				if (mod.DataIsMobile()) {
+					return;
+				}
+
+				mod.WIKWriteDetailInstance.WIKWriteDetailFocus();
+			},
 		});
 	},
 	
