@@ -26,6 +26,9 @@
 
 	/* WIKWriteDetailFlexbox:Child */
 	flex-shrink: 0;
+
+	/* browser quirks */
+	z-index: 999;
 }
 
 /* CodeMirror */

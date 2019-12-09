@@ -8,6 +8,11 @@
 	color: var(--WKCCommonForeground);
 }
 
+.WKCWrite :global(.WKCWriteFooter) {
+	/* browser quirks */
+	z-index: 999;
+}
+
 #WKCWriteStorageWidget {
 	border-top: var(--WKCBorderStyle)
 }
