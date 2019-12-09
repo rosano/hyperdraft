@@ -184,7 +184,7 @@ describe('WKCWrite_Misc', function () {
 
 	});
 
-	context('click', function test_click () {
+	context('select', function test_select () {
 		
 		before(function () {
 			// browser.assert.hasNoClass('.CodeMirror', 'CodeMirror-focused');
@@ -388,6 +388,98 @@ describe('WKCWrite_Misc', function () {
 
 		it('sets WKCNotePublishStatusIsPublished', function () {
 			browser.assert.elements('.WIKWriteDetailToolbarPublishButton', 1);
+		});
+
+	});
+
+	context('edit', function test_edit () {
+
+		before(function() {
+			return browser.OLSKVisit(kDefaultRoute);
+		});
+		
+		before(function () {
+			return browser.pressButton('.WKCWriteMasterCreateButton');
+		});
+
+		context('title', function () {
+			
+			before(function () {
+				browser.fill('.WKCWriteEditorFieldDebug', 'alfa');
+			});
+
+			it('sets WKCWriteMasterListItemAccessibilitySummary', function () {
+				browser.assert.text('.WKCWriteMasterListItemAccessibilitySummary', 'alfa');
+			});
+
+			it('sets WKCWriteMasterListItemTitle', function () {
+				browser.assert.text('.WKCWriteMasterListItemTitle', 'alfa');
+			});
+
+			it('sets WKCWriteMasterListItemSnippet', function () {
+				browser.assert.text('.WKCWriteMasterListItemSnippet', '');
+			});
+		
+		});
+
+		context('body', function () {
+			
+			before(function () {
+				browser.fill('.WKCWriteEditorFieldDebug', 'alfa\nbravo');
+			});
+
+			it('sets WKCWriteMasterListItemAccessibilitySummary', function () {
+				browser.assert.text('.WKCWriteMasterListItemAccessibilitySummary', 'alfa');
+			});
+
+			it('sets WKCWriteMasterListItemTitle', function () {
+				browser.assert.text('.WKCWriteMasterListItemTitle', 'alfa');
+			});
+
+			it('sets WKCWriteMasterListItemSnippet', function () {
+				browser.assert.text('.WKCWriteMasterListItemSnippet', 'bravo');
+			});
+		
+		});
+
+		context('long title', function () {
+			
+			before(function () {
+				browser.fill('.WKCWriteEditorFieldDebug', 'alfa bravo charlie delta echo foxtrot golf hotel juliet kilos');
+			});
+
+			it('sets WKCWriteMasterListItemAccessibilitySummary', function () {
+				browser.assert.text('.WKCWriteMasterListItemAccessibilitySummary', 'alfa bravo charlie delta echo foxtrot golf hotel juliet…');
+			});
+
+			it('sets WKCWriteMasterListItemTitle', function () {
+				browser.assert.text('.WKCWriteMasterListItemTitle', 'alfa bravo charlie delta echo foxtrot golf hotel juliet');
+			});
+
+			it('sets WKCWriteMasterListItemSnippet', function () {
+				browser.assert.text('.WKCWriteMasterListItemSnippet', '');
+			});
+		
+		});
+
+		context('long body', function () {
+			
+			before(function () {
+				browser.fill('.WKCWriteEditorFieldDebug', '\nLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.');
+			});
+
+			it('sets WKCWriteMasterListItemAccessibilitySummary', function () {
+				browser.assert.text('.WKCWriteMasterListItemAccessibilitySummary', '');
+			});
+
+			it('sets WKCWriteMasterListItemTitle', function () {
+				browser.assert.text('.WKCWriteMasterListItemTitle', '');
+			});
+
+			it('sets WKCWriteMasterListItemSnippet', function () {
+				browser.assert.text('.WKCWriteMasterListItemSnippet', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the…');
+			});
+		
 		});
 
 	});

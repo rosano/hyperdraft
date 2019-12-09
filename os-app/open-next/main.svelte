@@ -77,12 +77,12 @@ const mod = {
 		mod.ControlNotesExportTXT();
 	},
 
-	WKCWriteMasterDelegateItemTitle (inputData) {
-		return WKCParser.WKCParserTitleForPlaintext(inputData);
+	WKCWriteMasterDelegateItemTitle (param1, param2) {
+		return WKCWriteLogic.WIKWriteTruncatedTitleFor(WKCParser.WKCParserTitleForPlaintext(param1), param2);
 	},
 
 	WKCWriteMasterDelegateItemBody (inputData) {
-		return WKCParser.WKCParserBodyForPlaintext(inputData);
+		return WKCParser.WKCParserSnippetForPlaintext(WKCParser.WKCParserBodyForPlaintext(inputData));
 	},
 
 	WIKWriteDetailDispatchBack () {
@@ -137,7 +137,7 @@ const mod = {
 		if (window.Launchlet.LCHSingletonExists()) {
 			return;
 		}
-		
+
 		const handlerFunctions = {
 			Escape () {
 				mod.ControlFilter('');
