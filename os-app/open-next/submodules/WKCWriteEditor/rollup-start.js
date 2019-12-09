@@ -20,7 +20,9 @@ const WKCWriteEditor = new RollupStart({
 	}))),
 });
 
-WKCWriteEditor.WKCWriteEditorSetDocument(params.WKCWriteEditorSetDocument);
+if (params.WKCWriteEditorSetDocument) {
+	WKCWriteEditor.WKCWriteEditorSetDocument(params.WKCWriteEditorSetDocument);
+}
 
 window.WKCWriteEditorBehaviour = {
 
