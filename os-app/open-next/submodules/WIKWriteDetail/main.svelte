@@ -152,15 +152,13 @@ import WKCWriteEditor from '../WKCWriteEditor/main.svelte';
 	</OLSKToolbar>
 </header>
 
-<div class="WIKWriteDetailForm">
-	<WKCWriteEditor
-		WKCWriteEditorDispatchHeaderTokens={ mod.WKCWriteEditorDispatchHeaderTokens }
-		WKCWriteEditorDispatchUpdate={ mod.WKCWriteEditorDispatchUpdate }
-		WKCWriteEditorDispatchOpen={ mod.WKCWriteEditorDispatchOpen }
-		WKCWriteEditorDispatchReady={ mod.WKCWriteEditorDispatchReady }
-		bind:this={ mod.WKCWriteEditorInstance }
-		/>
-</div>
+<WKCWriteEditor
+	WKCWriteEditorDispatchHeaderTokens={ mod.WKCWriteEditorDispatchHeaderTokens }
+	WKCWriteEditorDispatchUpdate={ mod.WKCWriteEditorDispatchUpdate }
+	WKCWriteEditorDispatchOpen={ mod.WKCWriteEditorDispatchOpen }
+	WKCWriteEditorDispatchReady={ mod.WKCWriteEditorDispatchReady }
+	bind:this={ mod.WKCWriteEditorInstance }
+	/>
 {/if}
 
 </div>

@@ -1,5 +1,5 @@
 .WIKWriteDetail {
-	/* WIKWriteDetailFlexboxParent */
+	/* WIKWriteDetailFlexbox:Parent */
 	display: flex;
 	flex-direction: column;
 }
@@ -8,10 +8,10 @@
 	opacity: 0.5;
 	text-align: center;
 
-	/* WIKWriteDetailFlexboxChild */
+	/* WIKWriteDetailFlexbox:Child */
 	flex-grow: 1;
 
-	/* WIKWriteDetailPlaceholderFlexboxParent */
+	/* WIKWriteDetailPlaceholderFlexbox:Parent */
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -23,32 +23,22 @@
 
 .WIKWriteDetailToolbar {
 	border-bottom: var(--WKCBorderStyle);
-}
 
-.WIKWriteDetailForm {
-	padding: 5px;
-
-	overflow-y: scroll;
-}
-
-.WIKWriteDetailForm input[type=text] {
-	width: 50%;
-	border: var(--WKCBorderStyle);
-	border-radius: 5px;
-	padding: 5px;
+	/* WIKWriteDetailFlexbox:Child */
+	flex-shrink: 0;
 }
 
 /* CodeMirror */
 
-.WIKWriteDetailForm {
-	/* ContainerFlexboxChild */
+.WIKWriteDetail .WKCWriteEditor {
+	/* WIKWriteDetailFlexbox:Child */
 	flex-grow: 1;
 
 	/* WIKWriteDetailFormStationParent */
 	position: relative;
 }
 
-.WIKWriteDetailForm :global(.CodeMirror) {
+.WIKWriteDetail :global(.CodeMirror) {
 	height: 100%;
 
 	/* WIKWriteDetailFormStationChild */
@@ -62,27 +52,27 @@
 	font-size: 14px;
 }
 
-.WIKWriteDetailForm :global(.CodeMirror-scroll) {
+.WIKWriteDetail :global(.CodeMirror-scroll) {
 	background: #f8f8f8;
 
   /* OLSKMobileSafariSmoothScrolling */
 	-webkit-overflow-scrolling: touch;
 }
 
-.WIKWriteDetailForm :global(.CodeMirror-lines) {
+.WIKWriteDetail :global(.CodeMirror-lines) {
 	/* override defaults */
 	padding: 10px;
 }
 
-.WIKWriteDetailForm :global(.CodeMirror pre) {
+.WIKWriteDetail :global(.CodeMirror pre) {
 	/* override defaults */
 	padding: 0;
 }
 
-.WIKWriteDetailForm :global(.CodeMirror-line:nth-child(1)) {
+.WIKWriteDetail :global(.CodeMirror-line:nth-child(1)) {
 	font-weight: bold;
 }
 
-.WIKWriteDetailForm :global(.cm-link:hover) {
+.WIKWriteDetail :global(.cm-link:hover) {
   cursor: pointer;
 }

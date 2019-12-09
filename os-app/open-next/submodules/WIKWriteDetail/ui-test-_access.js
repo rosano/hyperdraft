@@ -14,9 +14,7 @@ Object.entries({
 	WIKWriteDetailToolbarPublicLink: '.WIKWriteDetailToolbarPublicLink',
 	WIKWriteDetailToolbarRetractButton: '.WIKWriteDetailToolbarRetractButton',
 	WIKWriteDetailToolbarVersionsButton: '.WIKWriteDetailToolbarVersionsButton',
-	WIKWriteDetailToolbarDiscardButton: '.WIKWriteDetailToolbarDiscardButton',
-	
-	WIKWriteDetailForm: '.WIKWriteDetailForm',
+	WIKWriteDetailToolbarDiscardButton: '.WIKWriteDetailToolbarDiscardButton',	
 }).map(function (e) {
 	return global[e.shift()]  = e.pop();
 });
@@ -39,8 +37,8 @@ describe('WIKWriteDetail_Access', function () {
 		browser.assert.elements(WIKWriteDetailToolbar, 0);
 	});
 
-	it('hides WIKWriteDetailForm', function () {
-		browser.assert.elements(WIKWriteDetailForm, 0);
+	it('hides WKCWriteEditor', function () {
+		browser.assert.elements('.WKCWriteEditor', 0);
 	});
 
 	context('WIKWriteDetailItem', function() {
@@ -91,10 +89,6 @@ describe('WIKWriteDetail_Access', function () {
 
 		it('shows WIKWriteDetailToolbarDiscardButton', function () {
 			browser.assert.elements(WIKWriteDetailToolbarDiscardButton, 1);
-		});
-
-		it('shows WIKWriteDetailForm', function () {
-			browser.assert.elements(WIKWriteDetailForm, 1);
 		});
 
 		it('shows WKCWriteEditor', function () {
