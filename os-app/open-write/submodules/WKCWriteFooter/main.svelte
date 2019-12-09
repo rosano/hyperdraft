@@ -54,7 +54,7 @@ import RCSLanguageSwitcher from '../../../_shared/RCSLanguageSwitcher/main.svelt
 		<div>
 			<div class="WKCWriteFooterStorageStatus">{ WKCWriteFooterStorageStatus }</div>
 			<button class="WKCWriteFooterStorageButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable" title={ OLSKLocalized('WKCWriteFooterStorageButtonText') } on:click={ WKCWriteFooterDispatchStorage } class:OSWIconVisible={ false }>
-				<img class="WKCWriteFooterStorageButtonImage" role="img" src="/open-write/submodules/WKCWriteFooter/ui-images/WKCWriteFooterStorageButton.svg">
+				<img class="WKCWriteFooterStorageButtonImage" role="img" src="/open-write/submodules/WKCWriteFooter/ui-assets/WKCWriteFooterStorageButton.svg">
 			</button>
 		</div>
 	</OLSKToolbar>
