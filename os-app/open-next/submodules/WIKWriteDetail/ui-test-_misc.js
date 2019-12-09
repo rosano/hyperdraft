@@ -91,9 +91,16 @@ describe('WIKWriteDetail_Misc', function () {
 
 	describe('WIKWriteDetailToolbarDiscardButton', function test_WIKWriteDetailToolbarDiscardButton () {
 		
-		it('sets class', function () {
+		it('classes OLSKLayoutButtonNoStyle', function () {
 			browser.assert.hasClass(WIKWriteDetailToolbarDiscardButton, 'OLSKLayoutButtonNoStyle');
+		});
+
+		it('classes OLSKLayoutElementTappable', function () {
 			browser.assert.hasClass(WIKWriteDetailToolbarDiscardButton, 'OLSKLayoutElementTappable');
+		});
+
+		it('classes OLSKToolbarButton', function () {
+			browser.assert.hasClass(WIKWriteDetailToolbarDiscardButton, 'OLSKToolbarButton');
 		});
 
 		context('click', function () {

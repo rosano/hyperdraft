@@ -39,7 +39,7 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 			});
 
 			it('localizes WIKWriteDetailToolbarDiscardButton', function () {
-				browser.assert.text(WIKWriteDetailToolbarDiscardButton, uLocalized('WIKWriteDetailToolbarDiscardButtonText'));
+				browser.assert.attribute(WIKWriteDetailToolbarDiscardButton, 'title', uLocalized('WIKWriteDetailToolbarDiscardButtonText'));
 			});
 
 			context('on discard', function () {
