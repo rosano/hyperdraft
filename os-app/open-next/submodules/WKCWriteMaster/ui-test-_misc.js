@@ -49,7 +49,7 @@ describe('WKCWriteMaster_Misc', function () {
 			});
 
 			before(function () {
-				browser.assert.attribute(WKCWriteMaster, 'aria-hidden', 'false');
+				browser.assert.attribute(WKCWriteMaster, 'aria-hidden', null);
 			});
 			
 			before(function() {
