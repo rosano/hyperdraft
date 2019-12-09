@@ -124,7 +124,7 @@ import WKCWriteEditor from '../WKCWriteEditor/main.svelte';
 {/if}
 
 {#if mod._ValueItem}
-<header class="WIKWriteDetailToolbar">
+<header class="WIKWriteDetailToolbar OLSKMobileViewHeader">
 	<OLSKToolbar OLSKToolbarJustify={ true }>
 		<OLSKToolbarElementGroup>
 			<button class="WIKWriteDetailToolbarBackButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable" on:click={ WIKWriteDetailDispatchBack }>{ OLSKLocalized('WIKWriteDetailToolbarBackButtonText') }</button>

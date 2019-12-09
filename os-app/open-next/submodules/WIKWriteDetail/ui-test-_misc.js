@@ -38,7 +38,7 @@ describe('WIKWriteDetail_Misc', function () {
 
 	});
 
-	describe('OLSKToolbar', function test_OLSKToolbar () {
+	describe('WIKWriteDetailToolbar', function test_WIKWriteDetailToolbar () {
 
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
@@ -47,6 +47,14 @@ describe('WIKWriteDetail_Misc', function () {
 				}),
 			});
 		});
+		
+		it('classes OLSKMobileViewHeader', function () {
+			browser.assert.hasClass(WIKWriteDetailToolbar, 'OLSKMobileViewHeader');
+		});
+	
+	});
+
+	describe('OLSKToolbar', function test_OLSKToolbar () {
 
 		it('sets class', function () {
 			browser.assert.hasClass('.OLSKToolbar', 'OLSKToolbarJustify');
