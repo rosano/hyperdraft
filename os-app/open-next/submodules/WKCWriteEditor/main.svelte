@@ -91,9 +91,9 @@ const mod = {
 	},
 
 	ControlOpenCursorObject (inputData) {
-		let cursor = mod._ValueEditorInstance.getCursor();
+		const cursor = mod._ValueEditorInstance.getCursor();
 
-		let currentObject = WKCWriteEditorLogic.WKCWriteEditorLineObjectsFor(mod._ValueEditorInstance.getLineTokens(cursor.line)).filter(function (e) {
+		const currentObject = WKCWriteEditorLogic.WKCWriteEditorLineObjectsFor(mod._ValueEditorInstance.getLineTokens(cursor.line)).filter(function (e) {
 			return Math.max(e.start, Math.min(e.end, cursor.ch)) === cursor.ch;
 		}).shift();
 
@@ -109,7 +109,8 @@ const mod = {
 			return window.open(inputData, '_blank');
 		}
 
-		let match = inputData.match(/\[\[(.*)\]\]/).pop();
+		const match = inputData.match(/\[\[(.*)\]\]/).pop();
+
 		if (!match) {
 			return;
 		}
