@@ -56,6 +56,20 @@ const mod = {
 
 	// INTERFACE
 
+	InterfaceWindowDidKeydown (event) {
+		if (event.key !== 'Escape') {
+			return;
+		}
+
+		if (mod._ValueEditorInstance && mod._ValueEditorInstance.getDoc().listSelections().length <= 1) {
+			return;
+		}
+
+		mod._ValueEditorInstance.setSelections(mod._ValueEditorInstance.getDoc().listSelections().slice(0, 1));
+
+		event.stopPropagation();
+	},
+
 	InterfaceEditorDidTouchDown (instance, event) {
 		if (!event.target.className.match('cm-link'))  {
 			return;
@@ -243,6 +257,7 @@ const mod = {
 import { onMount } from 'svelte';
 onMount(mod.LifecycleComponentDidMount);
 </script>
+<svelte:window on:keydown={ mod.InterfaceWindowDidKeydown } />
 
 <div class="WKCWriteEditor">
 	{#if OLSK_TESTING_BEHAVIOUR()}
