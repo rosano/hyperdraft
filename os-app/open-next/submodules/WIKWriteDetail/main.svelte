@@ -1,5 +1,6 @@
 <script>
 export let WIKWriteDetailDispatchBack;
+export let WIKWriteDetailDispatchPublish;
 export let WIKWriteDetailDispatchVersions;
 export let WIKWriteDetailDispatchDiscard;
 export let WIKWriteDetailDispatchUpdate;
@@ -95,6 +96,10 @@ import WKCWriteEditor from '../WKCWriteEditor/main.svelte';
 		</OLSKToolbarElementGroup>
 
 		<OLSKToolbarElementGroup>
+			{#if !mod._ValueItem.WKCNotePublishStatusIsPublished }
+				<button class="WIKWriteDetailToolbarPublishButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('WIKWriteDetailToolbarPublishButtonText') } on:click={ () => WIKWriteDetailDispatchPublish(mod._ValueItem) } style="background-image: url('/panel/_shared/ui-assets/wIKWritePublish.svg')"></button>
+			{/if}
+
 			<button class="WIKWriteDetailToolbarVersionsButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('WIKWriteDetailToolbarVersionsButtonText') } on:click={ () => WIKWriteDetailDispatchVersions(mod._ValueItem) } style="background-image: url('/panel/_shared/ui-assets/wIKWriteVersions.svg')"></button>
 
 			<button class="WIKWriteDetailToolbarDiscardButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('WIKWriteDetailToolbarDiscardButtonText') } on:click={ () => window.confirm(OLSKLocalized('WIKWriteDetailDiscardPromptText')) && WIKWriteDetailDispatchDiscard(mod._ValueItem) } style="background-image: url('/panel/_shared/ui-assets/wIKWriteDiscard.svg')"></button>

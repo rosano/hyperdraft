@@ -276,6 +276,18 @@ describe('WKCWrite_Misc', function () {
 
 	});
 
+	context('publish', function test_publish () {
+		
+		before(function () {
+			return browser.click('.WIKWriteDetailToolbarPublishButton');
+		});
+
+		it('sets WKCNotePublishStatusIsPublished', function () {
+			browser.assert.elements('.WKCNotePublishStatusIsPublished', 0);
+		});
+
+	});
+
 	describe('WKCWriteStorageWidget', function test_WKCWriteStorageWidget () {
 		
 		it('sets class', function () {

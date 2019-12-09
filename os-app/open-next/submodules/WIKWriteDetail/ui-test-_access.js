@@ -9,6 +9,7 @@ Object.entries({
 
 	WIKWriteDetailToolbar: '.WIKWriteDetailToolbar',
 	WIKWriteDetailToolbarBackButton: '.WIKWriteDetailToolbarBackButton',
+	WIKWriteDetailToolbarPublishButton: '.WIKWriteDetailToolbarPublishButton',
 	WIKWriteDetailToolbarVersionsButton: '.WIKWriteDetailToolbarVersionsButton',
 	WIKWriteDetailToolbarDiscardButton: '.WIKWriteDetailToolbarDiscardButton',
 	
@@ -65,6 +66,10 @@ describe('WIKWriteDetail_Access', function () {
 			browser.assert.elements(WIKWriteDetailToolbarBackButton, 1);
 		});
 
+		it('shows WIKWriteDetailToolbarPublishButton', function () {
+			browser.assert.elements(WIKWriteDetailToolbarPublishButton, 1);
+		});
+
 		it('shows WIKWriteDetailToolbarVersionsButton', function () {
 			browser.assert.elements(WIKWriteDetailToolbarVersionsButton, 1);
 		});
@@ -81,6 +86,23 @@ describe('WIKWriteDetail_Access', function () {
 			browser.assert.elements('.WKCWriteEditor', 1);
 		});
 		
+	});
+
+	context('WKCNotePublishStatusIsPublished', function() {
+
+		before(function() {
+			return browser.OLSKVisit(kDefaultRoute, {
+				WIKWriteDetailItem: JSON.stringify({
+					WKCNoteBody: 'alfa',
+					WKCNotePublishStatusIsPublished: true,
+				}),
+			});
+		});
+
+		it('hides WIKWriteDetailToolbarPublishButton', function () {
+			browser.assert.elements(WIKWriteDetailToolbarPublishButton, 0);
+		});
+
 	});
 
 });

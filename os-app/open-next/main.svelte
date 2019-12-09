@@ -89,6 +89,10 @@ const mod = {
 		mod.ControlNoteSelect(null);
 	},
 
+	WIKWriteDetailDispatchPublish () {
+		mod.ControlNotePublish(mod._ValueNoteSelected);
+	},
+
 	WIKWriteDetailDispatchVersions () {
 		mod.ControlNoteVersions(mod._ValueNoteSelected);
 	},
@@ -212,6 +216,10 @@ const mod = {
 		}
 		
 		mod.WIKWriteDetailInstance.WIKWriteDetailFocus();
+	},
+	
+	async ControlNotePublish (inputData) {
+		mod.ValueNoteSelected(await WKCNoteAction.WKCNoteActionPublish(storageClient, inputData));
 	},
 	
 	async ControlNoteVersions (inputData) {
@@ -375,6 +383,7 @@ import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svel
 	
 	<WIKWriteDetail
 		WIKWriteDetailDispatchBack={ mod.WIKWriteDetailDispatchBack }
+		WIKWriteDetailDispatchPublish={ mod.WIKWriteDetailDispatchPublish }
 		WIKWriteDetailDispatchVersions={ mod.WIKWriteDetailDispatchVersions }
 		WIKWriteDetailDispatchDiscard={ mod.WIKWriteDetailDispatchDiscard }
 		WIKWriteDetailDispatchUpdate={ mod.WIKWriteDetailDispatchUpdate }
