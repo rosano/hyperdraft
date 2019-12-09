@@ -119,15 +119,11 @@ describe('WIKWriteDetail_Misc', function () {
 		
 		});
 		
-		context('WIKWriteDetailJumpEnabled', function() {
+		context('WKCWriteEditorDispatchHeaderTokens', function() {
 
 			before(function() {
-				return browser.OLSKVisit(kDefaultRoute, {
-					WIKWriteDetailItem: JSON.stringify({
-						WKCNoteBody: 'alfa',
-					}),
-					WIKWriteDetailJumpEnabled: true,
-				});
+				// browser.fill('CodeMirror', 'bravo');
+				browser.fill('.WKCWriteEditorFieldDebug', '# bravo');
 			});
 
 			it('sets disabled', function() {

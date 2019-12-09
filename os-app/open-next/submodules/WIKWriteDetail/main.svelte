@@ -1,5 +1,4 @@
 <script>
-export let WIKWriteDetailJumpEnabled = false;
 export let WIKWriteDetailDispatchBack;
 export let WIKWriteDetailDispatchJump;
 export let WIKWriteDetailDispatchPublish;
@@ -61,6 +60,8 @@ const mod = {
 
 	_ValueItem: undefined,
 
+	_ValueHeaderTokens: [],
+
 	_ValueEditorPostInitializeQueue: [],
 
 	WKCWriteEditorInstance: undefined,
@@ -80,7 +81,7 @@ const mod = {
 
 
 	InterfaceWindowDidKeydown (event) {
-		if (!WIKWriteDetailJumpEnabled) {
+		if (!mod._ValueHeaderTokens.length) {
 			return;
 		}
 
@@ -111,7 +112,7 @@ import WKCWriteEditor from '../WKCWriteEditor/main.svelte';
 		</OLSKToolbarElementGroup>
 
 		<OLSKToolbarElementGroup>
-			<button class="WIKWriteDetailToolbarJumpButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('WIKWriteDetailToolbarJumpButtonText') } accesskey="r" tabindex="-1" disabled={ !WIKWriteDetailJumpEnabled } on:click={ () => WIKWriteDetailDispatchJump() } style="background-image: url('/panel/_shared/ui-assets/wIKWriteJump.svg')"></button>
+			<button class="WIKWriteDetailToolbarJumpButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('WIKWriteDetailToolbarJumpButtonText') } accesskey="r" tabindex="-1" disabled={ !mod._ValueHeaderTokens.length } on:click={ mod.InterfaceJumpButtonDidClick } style="background-image: url('/panel/_shared/ui-assets/wIKWriteJump.svg')"></button>
 
 			{#if !mod._ValueItem.WKCNotePublishStatusIsPublished }
 				<button class="WIKWriteDetailToolbarPublishButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('WIKWriteDetailToolbarPublishButtonText') } on:click={ () => WIKWriteDetailDispatchPublish() } style="background-image: url('/panel/_shared/ui-assets/wIKWritePublish.svg')"></button>
