@@ -134,6 +134,10 @@ const mod = {
 	// INTERFACE	
 
 	InterfaceWindowDidKeydown (event) {
+		if (window.Launchlet.LCHSingletonExists()) {
+			return;
+		}
+		
 		const handlerFunctions = {
 			Escape () {
 				mod.ControlFilter('');
