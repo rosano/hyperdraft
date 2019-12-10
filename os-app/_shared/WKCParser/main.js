@@ -1,68 +1,56 @@
-/*!
- * wikiavec
- * Copyright(c) 2018 Rosano Coutinho
- * MIT Licensed
- */
+const turndownPackage = typeof require === 'undefined' ? window.TurndownService : require('turndown');
+const showdownPackage = typeof require === 'undefined' ? window.showdown : require('showdown');
+const htmlEntitiesPackage = typeof require === 'undefined' ? {} : require('html-entities');
 
-(function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
-	typeof define === 'function' && define.amd ? define(['exports'], factory) :
-	(factory((global.WKCParser = global.WKCParser || {})));
-}(this, (function (exports) { 'use strict';
+const WKCDiffPackage = typeof require === 'undefined' ? window.WKCDiff : require('../WKCDiff/main.js');
 
-	const turndownPackage = typeof require === 'undefined' ? window.TurndownService : require('turndown');
-	const showdownPackage = typeof require === 'undefined' ? window.showdown : require('showdown');
-	const htmlEntitiesPackage = typeof require === 'undefined' ? {} : require('html-entities');
+const turndownInstance = new turndownPackage({
+	headingStyle: 'atx',
+});
+turndownInstance.remove('title');
+turndownInstance.remove('script');
+turndownInstance.remove('style');
+turndownInstance.addRule('trim whitespace in link text', {
+	filter (node, options) {
+		return node.nodeName === 'A' && node.innerHTML !== node.textContent;
+	},
+	replacement (content, node) {
+		return [
+			'[',
+			content.trim(),
+			'](',
+			node.getAttribute('href'),
+			')',
+		].join('');
+	},
+});
+turndownInstance.addRule('populate blank links', {
+	filter (node, options) {
+		return node.nodeName === 'A' && !node.textContent.trim();
+	},
+	replacement (content, node) {
+		return [
+			'[',
+			node.getAttribute('title') || '\\[\\_\\_\\_\\_\\_\\]',
+			'](',
+			node.getAttribute('href'),
+			')',
+		].join('');
+	},
+});
 
-	const WKCDiffPackage = typeof require === 'undefined' ? window.WKCDiff : require('../WKCDiff/main.js');
+const showdownConverter = new showdownPackage.Converter();
+showdownConverter.setOption('simpleLineBreaks', true);
+showdownConverter.setOption('simplifiedAutoLink', true);
+showdownConverter.setOption('noHeaderId', true);
 
-	const turndownInstance = new turndownPackage({
-		headingStyle: 'atx',
-	});
-	turndownInstance.remove('title');
-	turndownInstance.remove('script');
-	turndownInstance.remove('style');
-	turndownInstance.addRule('trim whitespace in link text', {
-		filter (node, options) {
-			return node.nodeName === 'A' && node.innerHTML !== node.textContent;
-		},
-		replacement (content, node) {
-			return [
-				'[',
-				content.trim(),
-				'](',
-				node.getAttribute('href'),
-				')',
-			].join('');
-		},
-	});
-	turndownInstance.addRule('populate blank links', {
-		filter (node, options) {
-			return node.nodeName === 'A' && !node.textContent.trim();
-		},
-		replacement (content, node) {
-			return [
-				'[',
-				node.getAttribute('title') || '\\[\\_\\_\\_\\_\\_\\]',
-				'](',
-				node.getAttribute('href'),
-				')',
-			].join('');
-		},
-	});
+const contentForFirst = function (inputData) {
+	return inputData[0] ? inputData[0].textContent : '';
+};
 
-	const showdownConverter = new showdownPackage.Converter();
-	showdownConverter.setOption('simpleLineBreaks', true);
-	showdownConverter.setOption('simplifiedAutoLink', true);
-	showdownConverter.setOption('noHeaderId', true);
+const mod = {
 
-	const contentForFirst = function (inputData) {
-		return inputData[0] ? inputData[0].textContent : '';
-	};
-
-	//_ WKCParserArticlesForFeedRSS
-
-	exports.WKCParserArticlesForFeedRSS = function(DOMParserInstance, oldString, newString) {
+	WKCParserArticlesForFeedRSS (DOMParserInstance, oldString, newString) {
 		if (typeof DOMParserInstance !== 'object' || DOMParserInstance === null) {
 			throw new Error('WKCErrorInputNotValid');
 		}
@@ -98,11 +86,9 @@
 				WKCArticleSnippet: exports.WKCParserSnippetForPlaintext(DOMParserInstance.parseFromString(`<div>${itemContent}</div>`, 'text/html').body.textContent),
 			};
 		});
-	};
+	},
 
-	//_ WKCParserArticlesForFeedAtom
-
-	exports.WKCParserArticlesForFeedAtom = function(DOMParserInstance, oldString, newString) {
+	WKCParserArticlesForFeedAtom (DOMParserInstance, oldString, newString) {
 		if (typeof DOMParserInstance !== 'object' || DOMParserInstance === null) {
 			throw new Error('WKCErrorInputNotValid');
 		}
@@ -149,11 +135,9 @@
 				WKCArticleSnippet: exports.WKCParserSnippetForPlaintext(DOMParserInstance.parseFromString(`<div>${itemContent}</div>`, 'text/html').body.textContent),
 			};
 		});
-	};
+	},
 
-	//_ WKCParserArticlesForPage
-
-	exports.WKCParserArticlesForPage = function(DOMParserInstance, oldString, newString) {
+	WKCParserArticlesForPage (DOMParserInstance, oldString, newString) {
 		if (typeof DOMParserInstance !== 'object' || DOMParserInstance === null) {
 			throw new Error('WKCErrorInputNotValid');
 		}
@@ -177,11 +161,9 @@
 			WKCArticleBody: WKCDiffPackage._WKCDiffConvertDiffTagsToHTML(exports.WKCParserHTMLForPlaintext(WKCDiffPackage.WKCDiffHTMLForStrings(oldString, newString))),
 			WKCArticlePublishDate: new Date(),
 		}];
-	};
+	},
 
-	//_ WKCParserArticlesForFile
-
-	exports.WKCParserArticlesForFile = function(oldString, newString) {
+	WKCParserArticlesForFile (oldString, newString) {
 		if (typeof newString !== 'string') {
 			throw new Error('WKCErrorInputNotValid');
 		}
@@ -194,17 +176,13 @@
 			WKCArticleBody: WKCDiffPackage._WKCDiffConvertDiffTagsToHTML(new (htmlEntitiesPackage.AllHtmlEntities)().encode(WKCDiffPackage.WKCDiffHTMLForStrings(oldString, newString)).replace(/\n/g, '<br>')),
 			WKCArticlePublishDate: new Date(),
 		}];
-	};
+	},
 
-	//_ WKCParserInputDataIsCustomTwitterTimeline
-
-	exports.WKCParserInputDataIsCustomTwitterTimeline = function(inputData) {
+	WKCParserInputDataIsCustomTwitterTimeline (inputData) {
 		return Array.isArray(inputData);
-	};
+	},
 
-	//_ WKCParserArticlesForCustomTwitterTimeline
-
-	exports.WKCParserArticlesForCustomTwitterTimeline = function(oldBody, newBody) {
+	WKCParserArticlesForCustomTwitterTimeline (oldBody, newBody) {
 		if (typeof newBody !== 'string') {
 			throw new Error('WKCErrorInputNotValid');
 		}
@@ -238,11 +216,9 @@
 				WKCArticleSnippet: exports.WKCParserSnippetForPlaintext(e.full_text),
 			};
 		});
-	};
+	},
 
-	//_ _WKCParserTweetBodyForTweetObject
-
-	exports._WKCParserTweetBodyForTweetObject = function(inputData) {
+	_WKCParserTweetBodyForTweetObject (inputData) {
 		var tweetBody = inputData.full_text;
 
 		(tweetBody.match(/#([^\W ]+)/g) || []).forEach(function (e) {
@@ -254,61 +230,49 @@
 		});
 
 		return tweetBody;
-	};
+	},
 
-	//_ WKCParserHTMLForPlaintext
-
-	exports.WKCParserHTMLForPlaintext = function(inputData) {
+	WKCParserHTMLForPlaintext (inputData) {
 		if (typeof inputData !== 'string') {
 			throw new Error('WKCErrorInputNotValid');
 		}
 
 		return showdownConverter.makeHtml(inputData);
-	};
+	},
 
-	//_ WKCParserPlaintextForHTML
-
-	exports.WKCParserPlaintextForHTML = function(inputData) {
+	WKCParserPlaintextForHTML (inputData) {
 		if (typeof inputData !== 'string') {
 			throw new Error('WKCErrorInputNotValid');
 		}
 
 		return turndownInstance.turndown(inputData);
-	};
+	},
 
-	//_ WKCParserTitleForPlaintext
-
-	exports.WKCParserTitleForPlaintext = function(inputData) {
+	WKCParserTitleForPlaintext (inputData) {
 		if (typeof inputData !== 'string') {
 			return '';
 		}
 
 		return inputData.split('\n').shift();
-	};
+	},
 
-	//_ WKCParserBodyForPlaintext
-
-	exports.WKCParserBodyForPlaintext = function(inputData) {
+	WKCParserBodyForPlaintext (inputData) {
 		if (typeof inputData !== 'string') {
 			return '';
 		}
 
 		return inputData.split('\n').slice(1).join('\n').trim();
-	};
+	},
 
-	//_ WKCParserSnippetForPlaintext
-
-	exports.WKCParserSnippetForPlaintext = function(inputData) {
+	WKCParserSnippetForPlaintext (inputData) {
 		if (typeof inputData !== 'string') {
 			throw new Error('WKCErrorInputNotValid');
 		}
 
 		return inputData.length <= 100 ? inputData : inputData.slice(0, 100).split(' ').slice(0, -1).join(' ').concat('…');
-	};
+	},
 
-	//_ WKCParserReplaceLinks
-
-	exports.WKCParserReplaceLinks = function(param1, param2) {
+	WKCParserReplaceLinks (param1, param2) {
 		if (typeof param1 !== 'string') {
 			throw new Error('WKCErrorInputNotValid');
 		}
@@ -320,8 +284,8 @@
 		return Object.entries(param2).reduce(function (coll, e) {
 			return coll.replace(new RegExp(`\\[\\[${ e[0] }\\]\\]`, 'g'), e[1]);
 		}, param1);
-	};
+	},
 
-	Object.defineProperty(exports, '__esModule', { value: true });
+};
 
-})));
+Object.assign(exports, mod);
