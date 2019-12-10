@@ -54,7 +54,7 @@ exports.OLSKControllerSharedMiddlewares = function() {
 			return next(require('./logic.js').KVCSharedDonateLinkGuard(process.env));
 		},
 		KVCSharedGitHubLinkGuardMiddleware (req, res, next) {
-			return next(require('./logic.js').EMTSharedGitHubLinkGuard(process.env));
+			return next(require('./logic.js').KVCSharedGitHubLinkGuard(process.env));
 		},
 	};
 };
