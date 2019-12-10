@@ -74,9 +74,9 @@ export const KVCNoteActionPublish = async function(storageClient, inputData) {
 	}
 
 	if (!inputData.KVCNotePublicID) {
-		inputData.KVCNotePublicID = (parseInt((await KVCSettingAction.KVCSettingsActionProperty(storageClient, 'KVCSettingsLastRepoID')) || 0) + 1).toString();
+		inputData.KVCNotePublicID = (parseInt((await KVCSettingAction.KVCSettingsActionProperty(storageClient, 'KVCSettingsLastPublicID')) || 0) + 1).toString();
 
-		await KVCSettingAction.KVCSettingsActionProperty(storageClient, 'KVCSettingsLastRepoID', inputData.KVCNotePublicID);
+		await KVCSettingAction.KVCSettingsActionProperty(storageClient, 'KVCSettingsLastPublicID', inputData.KVCNotePublicID);
 	}
 
 	return await KVCNoteActionUpdate(storageClient, Object.assign(inputData, {
