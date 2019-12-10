@@ -150,6 +150,10 @@ const mod = {
 		const handlerFunctions = {
 			Escape () {
 				mod.ControlFilter('');
+
+				if (!inputData && !OLSK_TESTING_BEHAVIOUR()) {
+					document.querySelector('.WKCWriteMasterBody').scrollTo(0, 0);
+				}
 			},
 			Tab () {
 				document.activeElement !== document.querySelector('.WKCWriteMasterFilterField') ? document.querySelector('.WKCWriteMasterFilterField').focus() : mod.WKCWriteDetailInstance.WKCWriteDetailFocus();
@@ -232,10 +236,6 @@ const mod = {
 	
 	ControlNoteSelect(inputData) {
 		mod.ValueNoteSelected(inputData);
-
-		if (!inputData && !OLSK_TESTING_BEHAVIOUR()) {
-			document.querySelector('.WKCWriteMasterBody').scrollTo(0, 0);
-		};
 
 		if (!inputData) {
 			mod.OLSKMobileViewInactive = false;
