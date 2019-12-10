@@ -15,8 +15,8 @@ const mod = {
 			throw new Error('KVCErrorInputNotValid');
 		}
 
-		if (!(inputData.WKC_SHARED_GITHUB_URL || '').trim()) {
-			return new Error('WKC_SHARED_GITHUB_URL not defined');
+		if (!(inputData.KVC_SHARED_GITHUB_URL || '').trim()) {
+			return new Error('KVC_SHARED_GITHUB_URL not defined');
 		}
 	},
 
