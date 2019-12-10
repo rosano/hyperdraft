@@ -15,10 +15,6 @@ export const WKCNoteSelectedStore = writable(null);
 export const WKCNotesAllStore = writable([]);
 export const WKCPersistenceIsLoading = writable(true);
 
-export const WKCWriteDefaultFocusNode = function () {
-	return document.querySelector('.WKCWriteMasterFilterField');
-};
-
 let _WKCNoteSelectedStore;
 WKCNoteSelectedStore.subscribe(function (val) {
 	_WKCNoteSelectedStore = val;
@@ -87,14 +83,6 @@ storageClient.remoteStorage.on('ready', async () => {
 	WKCNotesAllStore.set((await WKCNoteActionQuery(storageClient, {})).sort(WKCWriteLogicListSort));
 
 	WKCPersistenceIsLoading.set(false);
-
-	if (isMobile()) {
-		return;
-	};
-
-	setTimeout(function () {
-		WKCWriteDefaultFocusNode().focus();
-	});
 });
 
 (function SetupStorageClientLogging() {

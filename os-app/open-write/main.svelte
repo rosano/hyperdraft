@@ -123,6 +123,20 @@ const mod = {
 		mod.ValueNotesVisible(inputData);
 	},
 
+	MessagePersistenceIsLoadingDidChange (inputData) {
+		if (inputData) {
+			return;
+		}
+
+		if (mod.DataIsMobile()) {
+			return;
+		}
+
+		setTimeout(function () {
+			document.querySelector('.WKCWriteMasterFilterField').focus();
+		})
+	},
+
 	FooterDispatchExport () {
 		ControlNotesExport();
 	},
@@ -400,6 +414,7 @@ const mod = {
 };
 
 WKCNotesAllStore.subscribe(mod.MessageNotesAllDidChange);
+WKCPersistenceIsLoading.subscribe(mod.MessagePersistenceIsLoadingDidChange);
 
 import { onMount } from 'svelte';
 onMount(mod.LifecycleModuleWillMount);
