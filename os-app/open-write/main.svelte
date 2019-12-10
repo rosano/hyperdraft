@@ -151,7 +151,7 @@ const mod = {
 			Escape () {
 				mod.ControlFilter('');
 
-				if (!inputData && !OLSK_TESTING_BEHAVIOUR()) {
+				if (!OLSK_TESTING_BEHAVIOUR()) {
 					document.querySelector('.WKCWriteMasterBody').scrollTo(0, 0);
 				}
 			},
