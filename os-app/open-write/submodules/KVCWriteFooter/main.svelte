@@ -48,9 +48,9 @@ import RCSLanguageSwitcher from '../../../_shared/RCSLanguageSwitcher/main.svelt
 
 			<a class="KVCWriteFooterDonateLink" href={ window.OLSKPublicConstants('WKC_SHARED_DONATE_URL') } target="_blank">{ OLSKLocalized('KVCWriteFooterDonateLinkText') }</a>
 
-			<button on:click={ mod.InterfaceExportButtonDidClick }>Export</button>
+			<!-- <button on:click={ mod.InterfaceExportButtonDidClick }>Export</button>
 
-			<input type="file" accept=".json" on:change={ mod.InterfaceImportButtonDidClick } />
+			<input type="file" accept=".json" on:change={ mod.InterfaceImportButtonDidClick } /> -->
 		</OLSKToolbarElementGroup>
 
 		<div>
