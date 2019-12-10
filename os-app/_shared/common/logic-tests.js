@@ -6,7 +6,7 @@ describe('KVCSharedDonateLinkGuard', function testKVCSharedDonateLinkGuard() {
 
 	const StubEnvValid = function () {
 		return {
-			KVC_SHARED_DONATE_URL: 'alfa',
+			WKC_SHARED_DONATE_URL: 'alfa',
 		};
 	};
 
@@ -16,16 +16,16 @@ describe('KVCSharedDonateLinkGuard', function testKVCSharedDonateLinkGuard() {
 		}, /KVCErrorInputNotValid/);
 	});
 
-	it('returns error if no KVC_SHARED_DONATE_URL', function () {
+	it('returns error if no WKC_SHARED_DONATE_URL', function () {
 		deepEqual(mainModule.KVCSharedDonateLinkGuard(Object.assign(StubEnvValid(), {
-			KVC_SHARED_DONATE_URL: null,
-		})), new Error('KVC_SHARED_DONATE_URL not defined'));
+			WKC_SHARED_DONATE_URL: null,
+		})), new Error('WKC_SHARED_DONATE_URL not defined'));
 	});
 
-	it('returns error if KVC_SHARED_DONATE_URL blank', function () {
+	it('returns error if WKC_SHARED_DONATE_URL blank', function () {
 		deepEqual(mainModule.KVCSharedDonateLinkGuard(Object.assign(StubEnvValid(), {
-			KVC_SHARED_DONATE_URL: ' ',
-		})), new Error('KVC_SHARED_DONATE_URL not defined'));
+			WKC_SHARED_DONATE_URL: ' ',
+		})), new Error('WKC_SHARED_DONATE_URL not defined'));
 	});
 
 });
@@ -34,7 +34,7 @@ describe('KVCSharedGitHubLinkGuard', function testKVCSharedGitHubLinkGuard() {
 
 	const StubEnvValid = function () {
 		return {
-			KVC_SHARED_GITHUB_URL: 'alfa',
+			WKC_SHARED_GITHUB_URL: 'alfa',
 		};
 	};
 
@@ -44,16 +44,16 @@ describe('KVCSharedGitHubLinkGuard', function testKVCSharedGitHubLinkGuard() {
 		}, /KVCErrorInputNotValid/);
 	});
 
-	it('returns error if no KVC_SHARED_GITHUB_URL', function () {
+	it('returns error if no WKC_SHARED_GITHUB_URL', function () {
 		deepEqual(mainModule.KVCSharedGitHubLinkGuard(Object.assign(StubEnvValid(), {
-			KVC_SHARED_GITHUB_URL: null,
-		})), new Error('KVC_SHARED_GITHUB_URL not defined'));
+			WKC_SHARED_GITHUB_URL: null,
+		})), new Error('WKC_SHARED_GITHUB_URL not defined'));
 	});
 
-	it('returns error if KVC_SHARED_GITHUB_URL blank', function () {
+	it('returns error if WKC_SHARED_GITHUB_URL blank', function () {
 		deepEqual(mainModule.KVCSharedGitHubLinkGuard(Object.assign(StubEnvValid(), {
-			KVC_SHARED_GITHUB_URL: ' ',
-		})), new Error('KVC_SHARED_GITHUB_URL not defined'));
+			WKC_SHARED_GITHUB_URL: ' ',
+		})), new Error('WKC_SHARED_GITHUB_URL not defined'));
 	});
 
 });

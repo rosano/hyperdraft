@@ -78,7 +78,7 @@ describe('WKCAPIMiddlewareAuthenticate', function testWKCAPIMiddlewareAuthentica
 
 	it('returns next(undefined)', function() {
 		assert.strictEqual(controllerModule.WKCAPIMiddlewareAuthenticate(OLSKTesting.OLSKTestingFakeRequestForHeaders({
-			'x-client-key': process.env.KVC_INSECURE_API_ACCESS_TOKEN,
+			'x-client-key': process.env.WKC_INSECURE_API_ACCESS_TOKEN,
 		}), OLSKTesting.OLSKTestingFakeResponseForJSON(), OLSKTesting.OLSKTestingFakeNext()), 'RETURNED_UNDEFINED');
 	});
 
@@ -131,7 +131,7 @@ describe('WKCActionAPIRoot', function testWKCActionAPIRoot() {
 
 	it('returns confirmation authenticated', function() {
 		assert.deepEqual(controllerModule.WKCActionAPIRoot(OLSKTesting.OLSKTestingFakeRequestForHeaders({
-			'x-client-key': process.env.KVC_INSECURE_API_ACCESS_TOKEN,
+			'x-client-key': process.env.WKC_INSECURE_API_ACCESS_TOKEN,
 		}), OLSKTesting.OLSKTestingFakeResponseForJSON()), {
 			WKCAPIResponse: 'Successfully authenticated',
 		});
@@ -143,7 +143,7 @@ describe('WKCActionAPIToken', function testWKCActionAPIToken() {
 
 	it('returns access token', function() {
 		assert.deepEqual(controllerModule.WKCActionAPIToken(OLSKTesting.OLSKTestingFakeRequestForHeaders(), OLSKTesting.OLSKTestingFakeResponseForJSON()), {
-			WKCAPIToken: process.env.KVC_INSECURE_API_ACCESS_TOKEN,
+			WKCAPIToken: process.env.WKC_INSECURE_API_ACCESS_TOKEN,
 		});
 	});
 

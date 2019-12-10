@@ -399,7 +399,7 @@ describe('WKCSubscriptionsMetalRequestParameters', function testWKCSubscriptions
 	context('WKCOptionHandler', function () {
 
 		it('returns parameters if WKCSubscriptionHandlerCustomTwitterTimeline', function(done) {
-			KVCTestingMongoClient.db(process.env.KVC_SHARED_DATABASE_NAME).collection('kvc_settings').insertOne({
+			KVCTestingMongoClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('kvc_settings').insertOne({
 				KVCSettingKey: 'kKVCSettingKeyCustomTwitterToken',
 				KVCSettingValue: 'bravo',
 			}, function(err, result) {

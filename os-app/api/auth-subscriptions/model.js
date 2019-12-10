@@ -43,7 +43,7 @@ exports.WKCSubscriptionHandlerCustomTwitterTimelineRequestCallback = function(da
 		throw new Error('KVCErrorInputNotValid');
 	}
 
-	return databaseClient.db(process.env.KVC_SHARED_DATABASE_NAME).collection('kvc_settings').findOne({
+	return databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('kvc_settings').findOne({
 		KVCSettingKey: 'kKVCSettingKeyCustomTwitterToken',
 	}, function(err, result) {
 		if (err) {

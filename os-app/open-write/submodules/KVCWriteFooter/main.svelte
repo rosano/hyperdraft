@@ -46,7 +46,7 @@ import RCSLanguageSwitcher from '../../../_shared/RCSLanguageSwitcher/main.svelt
 			
 			<RCSLanguageSwitcher />
 
-			<a class="KVCWriteFooterDonateLink" href={ window.OLSKPublicConstants('KVC_SHARED_DONATE_URL') } target="_blank">{ OLSKLocalized('KVCWriteFooterDonateLinkText') }</a>
+			<a class="KVCWriteFooterDonateLink" href={ window.OLSKPublicConstants('WKC_SHARED_DONATE_URL') } target="_blank">{ OLSKLocalized('KVCWriteFooterDonateLinkText') }</a>
 
 			<button on:click={ mod.InterfaceExportButtonDidClick }>Export</button>
 

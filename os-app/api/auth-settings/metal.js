@@ -15,7 +15,7 @@ exports._KVCSettingsMetalSet = async function(databaseClient, param1, param2) {
 		return Promise.reject(new Error('KVCErrorInputNotValid'));
 	}
 
-	let outputData = (await databaseClient.db(process.env.KVC_SHARED_DATABASE_NAME).collection('kvc_settings').findOneAndUpdate({
+	let outputData = (await databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('kvc_settings').findOneAndUpdate({
 		KVCSettingKey: param1,
 	}, {
 		'$set': {
@@ -36,7 +36,7 @@ exports._KVCSettingsMetalGet = async function(databaseClient, inputData) {
 		return Promise.reject(new Error('KVCErrorInputNotValid'));
 	}
 
-	let outputData = await databaseClient.db(process.env.KVC_SHARED_DATABASE_NAME).collection('kvc_settings').findOne({
+	let outputData = await databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('kvc_settings').findOne({
 		KVCSettingKey: inputData,
 	});
 
