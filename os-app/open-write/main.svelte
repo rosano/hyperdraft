@@ -306,7 +306,7 @@ const mod = {
 			return mod.ControlNoteSelect(null);
 		}
 
-		mod.ControlNoteSelect(mod._ValueNotesVisible.filter(function (e) {
+		mod.ValueNoteSelected(mod._ValueNotesVisible.filter(function (e) {
 			return WKCParser.WKCParserTitleForPlaintext(e.WKCNoteBody).toLowerCase() === inputData.toLowerCase();
 		}).concat(mod._ValueNotesVisible.filter(function (e) {
 			return WKCParser.WKCParserTitleForPlaintext(e.WKCNoteBody).toLowerCase().includes(inputData.toLowerCase());
