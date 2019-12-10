@@ -60,9 +60,9 @@ describe('WKCWrite_Access', function () {
 			return browser.pressButton('.WKCWriteDetailToolbarBackButton');
 		});
 
-		it('shows WKCWriteDetailPlaceholder', function () {
-			browser.assert.elements('.WKCWriteDetailPlaceholder', 1);
-		});
+		// it('shows WKCWriteDetailPlaceholder', function () {
+		// 	browser.assert.elements('.WKCWriteDetailPlaceholder', 1);
+		// });
 	
 	});
 

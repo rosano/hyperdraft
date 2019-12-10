@@ -70,21 +70,21 @@ describe('WKCWrite_Misc', function () {
 			browser.assert.hasNoClass('.WKCWriteMaster', 'OLSKMobileViewInactive');
 		});
 
-		it('sets WKCWriteMasterListItemSelected', function () {
-			browser.assert.elements('.OLSKResultsListItemSelected', 0);
-		});
+		// it('sets WKCWriteMasterListItemSelected', function () {
+		// 	browser.assert.elements('.OLSKResultsListItemSelected', 0);
+		// });
 
 		it('classes OLSKMobileViewInactive', function() {
 			browser.assert.hasClass('.WKCWriteDetail', 'OLSKMobileViewInactive');
 		});
 
-		it('focuses WKCWriteMasterFilterField', function() {
-			browser.assert.hasFocus('.WKCWriteMasterFilterField');
-		});
+		// it('focuses WKCWriteMasterFilterField', function() {
+		// 	browser.assert.hasFocus('.WKCWriteMasterFilterField');
+		// });
 
-		it('sets WKCWriteDetailItem', function () {
-			browser.assert.elements('.WKCWriteDetailPlaceholder', 1);
-		});
+		// it('sets WKCWriteDetailItem', function () {
+		// 	browser.assert.elements('.WKCWriteDetailPlaceholder', 1);
+		// });
 
 	});
 
@@ -94,9 +94,9 @@ describe('WKCWrite_Misc', function () {
 			return browser.OLSKFireKeyboardEvent(browser.window, 'ArrowDown');
 		});
 
-		it('classes WKCWriteMasterFocused', function() {
-			browser.assert.hasClass('.WKCWriteMaster', 'WKCWriteMasterFocused');
-		});
+		// it('classes WKCWriteMasterFocused', function() {
+		// 	browser.assert.hasClass('.WKCWriteMaster', 'WKCWriteMasterFocused');
+		// });
 
 		it('classes OLSKMobileViewInactive', function() {
 			browser.assert.hasNoClass('.WKCWriteMaster', 'OLSKMobileViewInactive');

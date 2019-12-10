@@ -103,7 +103,9 @@ const mod = {
 	},
 
 	WKCWriteDetailDispatchBack () {
-		mod.ControlNoteSelect(null);
+		// mod.ControlNoteSelect(null);
+
+		mod.OLSKMobileViewInactive = false;
 	},
 
 	WKCWriteDetailDispatchJump (inputData) {
