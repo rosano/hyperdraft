@@ -5,24 +5,37 @@ const OLSKLocalized = function(translationConstant) {
 };
 
 import OLSKThrottle from 'OLSKThrottle';
+import * as WKCStorageClient from '../_shared/WKCStorageClient/main.js';
+import { WKCStorageModule } from '../_shared/WKCStorageModule/main.js';
+import { WKCNoteStorage } from '../_shared/WKCNote/storage.js';
+import { WKCSettingStorage } from '../_shared/WKCSetting/storage.js';
+import { WKCVersionStorage } from '../_shared/WKCVersion/storage.js';
 import WKCParser from '../_shared/WKCParser/main.js';
 import { OLSK_TESTING_BEHAVIOUR } from 'OLSKTesting'
 import * as OLSKRemoteStorage from '../_shared/__external/OLSKRemoteStorage/main.js'
 import * as WKCNoteAction from '../_shared/WKCNote/action.js';
 import * as WKCVersionAction from '../_shared/WKCVersion/action.js';
 import * as WKCWriteLogic from './ui-logic.js';
-import { storageClient, WKCPersistenceIsLoading, WKCNotesAllStore } from './persistence.js';
 
 const mod = {
 
 	// VALUE
 
+	_ValueIsLoading: true,
+
+	_ValueNotesAll: [],
+
+	ValueNotesAll (inputData, shouldSort = true) {
+		mod.ValueNotesVisible(mod._ValueNotesAll = inputData, shouldSort);
+	},
+
 	_ValueNotesVisible: [],
 
-	ValueNotesVisible (inputData) {
-		mod._ValueNotesVisible = (!mod._ValueFilterText ? inputData : inputData.filter(function (e) {
+	ValueNotesVisible (inputData, shouldSort = true) {
+		const items = !mod._ValueFilterText ? inputData : inputData.filter(function (e) {
 			return e.WKCNoteBody.toLowerCase().match(mod._ValueFilterText.toLowerCase());
-		})).sort(WKCWriteLogic.WKCWriteLogicListSort);
+		});
+		mod._ValueNotesVisible = shouldSort ? items.sort(WKCWriteLogic.WKCWriteLogicListSort) : items;
 	},
 	
 	_ValueNoteSelected: undefined,
@@ -119,24 +132,6 @@ const mod = {
 		mod.ControlFilter(inputData);
 	},
 
-	MessageNotesAllDidChange(inputData) {
-		mod.ValueNotesVisible(inputData);
-	},
-
-	MessagePersistenceIsLoadingDidChange (inputData) {
-		if (inputData) {
-			return;
-		}
-
-		if (mod.DataIsMobile()) {
-			return;
-		}
-
-		setTimeout(function () {
-			document.querySelector('.WKCWriteMasterFilterField').focus();
-		})
-	},
-
 	FooterDispatchExport () {
 		ControlNotesExport();
 	},
@@ -169,9 +164,7 @@ const mod = {
 	// CONTROL
 
 	ControlNoteSave(inputData) {
-		WKCNotesAllStore.update(function (val) {
-			return val;
-		});
+		mod._ValueNotesAll
 
 		OLSKThrottle.OLSKThrottleMappedTimeoutFor(mod._ValueSaveNoteThrottleMap, inputData.WKCNoteID, function (inputData) {
 			return {
@@ -179,7 +172,7 @@ const mod = {
 				async OLSKThrottleCallback () {
 					delete mod._ValueSaveNoteThrottleMap[inputData.WKCNoteID];
 
-					await WKCNoteAction.WKCNoteActionUpdate(storageClient, inputData);
+					await WKCNoteAction.WKCNoteActionUpdate(mod._ValueStorageClient, inputData);
 				},
 			};
 		}, inputData);
@@ -198,7 +191,7 @@ const mod = {
 						return;
 					}
 
-					await WKCVersionAction.WKCVersionActionCreate(storageClient, {
+					await WKCVersionAction.WKCVersionActionCreate(mod._ValueStorageClient, {
 						WKCVersionNoteID: inputData.WKCNoteID,
 						WKCVersionBody: inputData.WKCNoteBody,
 						WKCVersionDate: inputData.WKCNoteModificationDate,
@@ -214,13 +207,11 @@ const mod = {
 	},
 
 	async ControlNoteCreate(inputData) {
-		let item = await WKCNoteAction.WKCNoteActionCreate(storageClient, {
+		let item = await WKCNoteAction.WKCNoteActionCreate(mod._ValueStorageClient, {
 			WKCNoteBody: typeof inputData === 'string' ? inputData : '',
 		});
 
-		WKCNotesAllStore.update(function (val) {
-			return val.concat(item).sort(WKCWriteLogic.WKCWriteLogicListSort);
-		});
+		mod.ValueNotesAll(mod._ValueNotesAll.concat(item));
 
 		mod.ControlNoteSelect(item);
 
@@ -276,15 +267,15 @@ const mod = {
 	},
 	
 	async ControlNotePublish (inputData) {
-		mod.ValueNoteSelected(await WKCNoteAction.WKCNoteActionPublish(storageClient, inputData));
+		mod.ValueNoteSelected(await WKCNoteAction.WKCNoteActionPublish(mod._ValueStorageClient, inputData));
 	},
 	
 	async ControlNoteRetract (inputData) {
-		mod.ValueNoteSelected(await WKCNoteAction.WKCNoteActionRetract(storageClient, inputData));
+		mod.ValueNoteSelected(await WKCNoteAction.WKCNoteActionRetract(mod._ValueStorageClient, inputData));
 	},
 	
 	async ControlNoteVersions (inputData) {
-		(await WKCVersionAction.WKCVersionActionQuery(storageClient, {
+		(await WKCVersionAction.WKCVersionActionQuery(mod._ValueStorageClient, {
 			WKCVersionNoteID: inputData.WKCNoteID,
 		})).slice(0, 5).forEach(function (e) {
 			console.log(e);
@@ -293,13 +284,11 @@ const mod = {
 	},
 	
 	async ControlNoteDiscard (inputData) {
-		WKCNotesAllStore.update(function (val) {
-			return val.filter(function(e) {
-				return e !== inputData;
-			});
-		});
+		mod.ValueNotesAll(mod._ValueNotesAll.filter(function (e) {
+			return e !== inputData;
+		}))
 
-		await WKCNoteAction.WKCNoteActionDelete(storageClient, inputData.WKCNoteID);
+		await WKCNoteAction.WKCNoteActionDelete(mod._ValueStorageClient, inputData.WKCNoteID);
 
 		mod.ControlNoteSelect(null);
 	},
@@ -307,7 +296,7 @@ const mod = {
 	ControlFilter(inputData) {
 		mod._ValueFilterText = inputData;
 
-		mod.ValueNotesVisible($WKCNotesAllStore);
+		mod.ValueNotesVisible(mod._ValueNotesAll);
 
 		if (!inputData) {
 			return mod.ControlNoteSelect(null);
@@ -333,8 +322,8 @@ const mod = {
 		].join(' ');
 
 		zip.file(`${ fileName }.json`, JSON.stringify({
-			WKCNoteObjects: $WKCNotesAllStore,
-			WKCSettingObjects: await WKCSettingAction.WKCSettingsActionQuery(storageClient, {}),
+			WKCNoteObjects: mod._ValueNotesAll,
+			WKCSettingObjects: await WKCSettingAction.WKCSettingsActionQuery(mod._ValueStorageClient, {}),
 		}));
 		
 		zip.generateAsync({type: 'blob'}).then(function (content) {
@@ -363,20 +352,20 @@ const mod = {
 		}
 
 		await Promise.all(outputData.WKCSettingObjects.map(function (e) {
-			return WKCSettingMetal.WKCSettingsMetalWrite(storageClient, e);
+			return WKCSettingMetal.WKCSettingsMetalWrite(mod._ValueStorageClient, e);
 		}));
 
 		await Promise.all(outputData.WKCNoteObjects.map(function (e) {
-			return WKCNoteMetal.WKCNoteMetalWrite(storageClient, WKCNoteModelPostJSONParse(e));
+			return WKCNoteMetal.WKCNoteMetalWrite(mod._ValueStorageClient, WKCNoteModelPostJSONParse(e));
 		}));
 
-		WKCNotesAllStore.set(await WKCNoteAction.WKCNoteActionQuery(storageClient, {}));
+		mod.ValueNotesAll(await WKCNoteAction.WKCNoteActionQuery(mod._ValueStorageClient, {}));
 	},
 
 	ControlNotesExportTXT () {
 		let zip = new JSZip();
 
-		$WKCNotesAllStore.forEach(function (e) {
+		mod._ValueNotesAll.forEach(function (e) {
 			zip.file(`${ e.WKCNoteID }.txt`, e.WKCNoteBody, {
 				date: e.WKCNoteModificationDate,
 			});
@@ -387,20 +376,151 @@ const mod = {
 		});
 	},
 
+	// REACT
+
+	ReactIsLoading (inputData) {
+		if (inputData) {
+			return;
+		}
+
+		if (mod.DataIsMobile()) {
+			return;
+		}
+
+		setTimeout(function () {
+			document.querySelector('.WKCWriteMasterFilterField').focus();
+		})
+	},
+
 	// SETUP
 
 	SetupEverything () {
+		mod.SetupStorageClient();
+
 		mod.SetupStorageWidget();
 
 		mod.SetupStorageStatus();
 	},
 
+	SetupStorageClient() {
+		mod._ValueStorageClient = WKCStorageClient.WKCStorageClient({
+			modules: [
+				WKCStorageModule([
+					WKCNoteStorage,
+					WKCVersionStorage,
+					WKCSettingStorage,
+					].map(function (e) {
+						return {
+							WKCCollectionStorageGenerator: e,
+							WKCCollectionChangeDelegate: e === WKCNoteStorage ? {
+								OLSKChangeDelegateCreate (inputData) {
+									// console.log('OLSKChangeDelegateCreate', inputData);
+
+									mod.ValueNotesAll(mod._ValueNotesAll.filter(function (e) {
+										return e.WKCNoteID !== inputData.WKCNoteID; // @Hotfix Dropbox sending DelegateAdd
+									}).concat(inputData));
+								},
+								OLSKChangeDelegateUpdate (inputData) {
+									// console.log('OLSKChangeDelegateUpdate', inputData);
+
+									if (mod._ValueNoteSelected && (mod._ValueNoteSelected.WKCNoteID === inputData.WKCNoteID)) {
+										mod.ControlNoteSelect(Object.assign(mod._ValueNoteSelected, inputData));
+									}
+
+									mod.ValueNotesAll(mod._ValueNotesAll.map(function (e) {
+										return Object.assign(e, e.WKCNoteID === inputData.WKCNoteID ? inputData : {});
+									}), false);
+								},
+								OLSKChangeDelegateDelete (inputData) {
+									// console.log('OLSKChangeDelegateDelete', inputData);
+
+									if (mod._ValueNoteSelected && (mod._ValueNoteSelected.WKCNoteID === inputData.WKCNoteID)) {
+										mod.ControlNoteSelect(null);
+									}
+
+									mod.ValueNotesAll(mod._ValueNotesAll.filter(function (e) {
+										return e.WKCNoteID !== inputData.WKCNoteID;
+									}), false);
+								},
+							} : null,
+						}
+					})),
+			],
+		});
+
+		mod._ValueStorageClient.remoteStorage.on('ready', async () => {
+			if (!OLSK_TESTING_BEHAVIOUR()) {
+				console.debug('ready', arguments);
+			}
+
+			await mod._ValueStorageClient.remoteStorage.wikiavec.wkc_notes.WKCNoteStorageCache();
+			await mod._ValueStorageClient.remoteStorage.wikiavec.wkc_settings.WKCSettingStorageCache();
+			await mod._ValueStorageClient.remoteStorage.wikiavec.wkc_versions.WKCVersionStorageCache();
+
+			mod.ValueNotesAll(await WKCNoteAction.WKCNoteActionQuery(mod._ValueStorageClient, {}));
+
+			mod.ReactIsLoading(mod._ValueIsLoading = false);
+		});
+
+		mod._ValueStorageClient.remoteStorage.on('not-connected', () => {
+			if (!OLSK_TESTING_BEHAVIOUR()) {
+				console.debug('not-connected', arguments);
+			}
+		});
+
+		mod._ValueStorageClient.remoteStorage.on('disconnected', () => {
+			if (!OLSK_TESTING_BEHAVIOUR()) {
+				console.debug('disconnected', arguments);
+			}
+		});
+
+		mod._ValueStorageClient.remoteStorage.on('connected', () => {
+			if (!OLSK_TESTING_BEHAVIOUR()) {
+				console.debug('connected', arguments);
+			}
+		});
+
+		mod._ValueStorageClient.remoteStorage.on('sync-done', () => {
+			if (!OLSK_TESTING_BEHAVIOUR()) {
+				console.debug('sync-done', arguments);
+			}
+		});
+
+		let isOffline;
+
+		mod._ValueStorageClient.remoteStorage.on('network-offline', () => {
+			if (!OLSK_TESTING_BEHAVIOUR()) {
+				console.debug('network-offline', arguments);
+			}
+
+			isOffline = true;
+		});
+
+		mod._ValueStorageClient.remoteStorage.on('network-online', () => {
+			if (!OLSK_TESTING_BEHAVIOUR()) {
+				console.debug('network-online', arguments);
+			}
+			
+			isOffline = false;
+		});
+
+		mod._ValueStorageClient.remoteStorage.on('error', (error) => {
+			if (isOffline && inputData.message === 'Sync failed: Network request failed.') {
+				return;
+			};
+
+			if (!OLSK_TESTING_BEHAVIOUR()) {
+				console.debug('error', error);
+			}
+		});
+	},
+
 	SetupStorageWidget () {
-		(new window.OLSKStorageWidget(storageClient.remoteStorage)).attach('WKCWriteStorageWidget').backend(document.querySelector('.WKCWriteFooterStorageButton'));
+		(new window.OLSKStorageWidget(mod._ValueStorageClient.remoteStorage)).attach('WKCWriteStorageWidget').backend(document.querySelector('.WKCWriteFooterStorageButton'));
 	},
 
 	SetupStorageStatus () {
-		OLSKRemoteStorage.OLSKRemoteStorageStatus(storageClient.remoteStorage, function (inputData) {
+		OLSKRemoteStorage.OLSKRemoteStorageStatus(mod._ValueStorageClient.remoteStorage, function (inputData) {
 			mod._ValueFooterStorageStatus = inputData;
 		}, OLSKLocalized)
 	},
@@ -413,9 +533,6 @@ const mod = {
 
 };
 
-WKCNotesAllStore.subscribe(mod.MessageNotesAllDidChange);
-WKCPersistenceIsLoading.subscribe(mod.MessagePersistenceIsLoadingDidChange);
-
 import { onMount } from 'svelte';
 onMount(mod.LifecycleModuleWillMount);
 
@@ -427,7 +544,7 @@ import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svel
 </script>
 <svelte:window on:keydown={ mod.InterfaceWindowDidKeydown } />
 
-<div class="WKCWrite OLSKViewport" class:OLSKIsLoading={ $WKCPersistenceIsLoading }>
+<div class="WKCWrite OLSKViewport" class:OLSKIsLoading={ mod._ValueIsLoading }>
 
 <OLSKViewportContent>
 	<WKCWriteMaster
