@@ -2,7 +2,7 @@ const turndownPackage = typeof require === 'undefined' ? window.TurndownService 
 const showdownPackage = typeof require === 'undefined' ? window.showdown : require('showdown');
 const htmlEntitiesPackage = typeof require === 'undefined' ? {} : require('html-entities');
 
-const WKCDiffPackage = typeof require === 'undefined' ? window.WKCDiff : require('../WKCDiff/main.js');
+const KVCDiffPackage = typeof require === 'undefined' ? window.KVCDiff : require('../KVCDiff/main.js');
 
 const turndownInstance = new turndownPackage({
 	headingStyle: 'atx',
@@ -158,7 +158,7 @@ const mod = {
 		}
 
 		return [{
-			WKCArticleBody: WKCDiffPackage._WKCDiffConvertDiffTagsToHTML(exports.WKCParserHTMLForPlaintext(WKCDiffPackage.WKCDiffHTMLForStrings(oldString, newString))),
+			WKCArticleBody: KVCDiffPackage._KVCDiffConvertDiffTagsToHTML(exports.WKCParserHTMLForPlaintext(KVCDiffPackage.KVCDiffHTMLForStrings(oldString, newString))),
 			WKCArticlePublishDate: new Date(),
 		}];
 	},
@@ -173,7 +173,7 @@ const mod = {
 		}
 
 		return [{
-			WKCArticleBody: WKCDiffPackage._WKCDiffConvertDiffTagsToHTML(new (htmlEntitiesPackage.AllHtmlEntities)().encode(WKCDiffPackage.WKCDiffHTMLForStrings(oldString, newString)).replace(/\n/g, '<br>')),
+			WKCArticleBody: KVCDiffPackage._KVCDiffConvertDiffTagsToHTML(new (htmlEntitiesPackage.AllHtmlEntities)().encode(KVCDiffPackage.KVCDiffHTMLForStrings(oldString, newString)).replace(/\n/g, '<br>')),
 			WKCArticlePublishDate: new Date(),
 		}];
 	},

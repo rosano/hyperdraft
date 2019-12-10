@@ -7,15 +7,15 @@
 // const diffPackage = require('diff');
 const diffPatchMatchPackage = require('diff-match-patch');
 
-//_ _WKCDiffConvertDiffTagsToHTML
+//_ _KVCDiffConvertDiffTagsToHTML
 
-exports._WKCDiffConvertDiffTagsToHTML = function(inputData) {
-	return inputData.replace(/\{(\/)?WKCDiffInsert\}/g, '<$1ins>').replace(/\{(\/)?WKCDiffDelete\}/g, '<$1del>');
+exports._KVCDiffConvertDiffTagsToHTML = function(inputData) {
+	return inputData.replace(/\{(\/)?KVCDiffInsert\}/g, '<$1ins>').replace(/\{(\/)?KVCDiffDelete\}/g, '<$1del>');
 };
 
-//_ WKCDiffHTMLForStrings
+//_ KVCDiffHTMLForStrings
 
-exports.WKCDiffHTMLForStrings = function(oldString, newString) {
+exports.KVCDiffHTMLForStrings = function(oldString, newString) {
 	if (typeof newString !== 'string') {
 		throw new Error('KVCErrorInputNotValid');
 	}
@@ -29,17 +29,17 @@ exports.WKCDiffHTMLForStrings = function(oldString, newString) {
 	}).map(function(e, index, collection) {
 		if (e.added) {
 			return [
-				'{WKCDiffInsert}',
+				'{KVCDiffInsert}',
 				e.value,
-				'{/WKCDiffInsert}',
+				'{/KVCDiffInsert}',
 			].join('');
 		}
 
 		if (e.removed) {
 			return [
-				'{WKCDiffDelete}',
+				'{KVCDiffDelete}',
 				e.value,
-				'{/WKCDiffDelete}',
+				'{/KVCDiffDelete}',
 			].join('');
 		}
 
@@ -103,17 +103,17 @@ exports.WKCDiffHTMLForStrings = function(oldString, newString) {
 	}).join('')).map(function(e) {
 		if (e.added === true) {
 			return [
-				'{WKCDiffInsert}',
+				'{KVCDiffInsert}',
 				e.value,
-				'{/WKCDiffInsert}',
+				'{/KVCDiffInsert}',
 			].join('');
 		}
 
 		if (e.removed === true) {
 			return [
-				'{WKCDiffDelete}',
+				'{KVCDiffDelete}',
 				e.value,
-				'{/WKCDiffDelete}',
+				'{/KVCDiffDelete}',
 			].join('');
 		}
 

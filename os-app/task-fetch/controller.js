@@ -8,7 +8,7 @@ const requestPackage = require('request');
 const jsdomPackage = require('jsdom');
 
 const typeLibrary = require('OLSKType');
-var WKCDiff = require('../_shared/WKCDiff/main.js');
+var KVCDiff = require('../_shared/KVCDiff/main.js');
 var WKCParser = require('../_shared/WKCParser/main.js');
 
 var apiSubscriptionsModel = require('../api/auth-subscriptions/model');
