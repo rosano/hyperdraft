@@ -65,7 +65,7 @@ describe('WKCSubscriptionHandlerCustomTwitterTimelineRequestCallback', function 
 		}, /KVCErrorInputNotValid/);
 	});
 
-	it('returns error if no kWKCSettingKeyCustomTwitterToken', function(done) {
+	it('returns error if no kKVCSettingKeyCustomTwitterToken', function(done) {
 		mainModule.WKCSubscriptionHandlerCustomTwitterTimelineRequestCallback(KVCTestingMongoClient, function(err, responseJSON) {
 			assert.deepEqual(err.message, 'KVCErrorCustomTwitterMissingToken');
 			assert.deepEqual(err.responseJSON, undefined);
@@ -74,10 +74,10 @@ describe('WKCSubscriptionHandlerCustomTwitterTimelineRequestCallback', function 
 		});
 	});
 
-	it('returns kWKCSettingKeyCustomTwitterToken', function(done) {
+	it('returns kKVCSettingKeyCustomTwitterToken', function(done) {
 		KVCTestingMongoClient.db(process.env.KVC_SHARED_DATABASE_NAME).collection('kvc_settings').insertOne({
-			WKCSettingKey: 'kWKCSettingKeyCustomTwitterToken',
-			WKCSettingValue: 'alfa',
+			KVCSettingKey: 'kKVCSettingKeyCustomTwitterToken',
+			KVCSettingValue: 'alfa',
 		}, function(err, result) {
 			mainModule.WKCSubscriptionHandlerCustomTwitterTimelineRequestCallback(KVCTestingMongoClient, function(err, responseJSON) {
 				assert.deepEqual(err, undefined);

@@ -4,9 +4,9 @@
  * MIT Licensed
  */
 
-//_ _WKCSettingsMetalSet
+//_ _KVCSettingsMetalSet
 
-exports._WKCSettingsMetalSet = async function(databaseClient, param1, param2) {
+exports._KVCSettingsMetalSet = async function(databaseClient, param1, param2) {
 	if (typeof param1 !== 'string') {
 		return Promise.reject(new Error('KVCErrorInputNotValid'));
 	}
@@ -16,10 +16,10 @@ exports._WKCSettingsMetalSet = async function(databaseClient, param1, param2) {
 	}
 
 	let outputData = (await databaseClient.db(process.env.KVC_SHARED_DATABASE_NAME).collection('kvc_settings').findOneAndUpdate({
-		WKCSettingKey: param1,
+		KVCSettingKey: param1,
 	}, {
 		'$set': {
-			WKCSettingValue: param2,
+			KVCSettingValue: param2,
 		},
 	}, {
 		upsert: true,
@@ -29,26 +29,26 @@ exports._WKCSettingsMetalSet = async function(databaseClient, param1, param2) {
 	return Promise.resolve(true);
 };
 
-//_ _WKCSettingsMetalGet
+//_ _KVCSettingsMetalGet
 
-exports._WKCSettingsMetalGet = async function(databaseClient, inputData) {
+exports._KVCSettingsMetalGet = async function(databaseClient, inputData) {
 	if (typeof inputData !== 'string') {
 		return Promise.reject(new Error('KVCErrorInputNotValid'));
 	}
 
 	let outputData = await databaseClient.db(process.env.KVC_SHARED_DATABASE_NAME).collection('kvc_settings').findOne({
-		WKCSettingKey: inputData,
+		KVCSettingKey: inputData,
 	});
 
-	return Promise.resolve(outputData ? outputData.WKCSettingValue : undefined);
+	return Promise.resolve(outputData ? outputData.KVCSettingValue : undefined);
 };
 
-//_ WKCSettingsMetalProperty
+//_ KVCSettingsMetalProperty
 
-exports.WKCSettingsMetalProperty = async function(databaseClient, param1, param2) {
+exports.KVCSettingsMetalProperty = async function(databaseClient, param1, param2) {
 	if (typeof param2 === 'undefined') {
-		return await exports._WKCSettingsMetalGet(databaseClient, param1);
+		return await exports._KVCSettingsMetalGet(databaseClient, param1);
 	}
 
-	return await exports._WKCSettingsMetalSet(databaseClient, param1, param2);
+	return await exports._KVCSettingsMetalSet(databaseClient, param1, param2);
 };

@@ -44,7 +44,7 @@ exports.WKCSubscriptionHandlerCustomTwitterTimelineRequestCallback = function(da
 	}
 
 	return databaseClient.db(process.env.KVC_SHARED_DATABASE_NAME).collection('kvc_settings').findOne({
-		WKCSettingKey: 'kWKCSettingKeyCustomTwitterToken',
+		KVCSettingKey: 'kKVCSettingKeyCustomTwitterToken',
 	}, function(err, result) {
 		if (err) {
 			return completionHandler(err);
@@ -62,7 +62,7 @@ exports.WKCSubscriptionHandlerCustomTwitterTimelineRequestCallback = function(da
 
 		return completionHandler(undefined, {
 			auth: {
-				bearer: settingObject.WKCSettingValue,
+				bearer: settingObject.KVCSettingValue,
 			},
 		});
 	});

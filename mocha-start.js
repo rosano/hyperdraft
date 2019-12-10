@@ -30,7 +30,7 @@
 
 const WKCStorageModule = require('./os-app/_shared/WKCStorageModule/main.js');
 const KVCNoteStorage = require('./os-app/_shared/KVCNote/storage.js');
-const WKCSettingStorage = require('./os-app/_shared/WKCSetting/storage.js');
+const KVCSettingStorage = require('./os-app/_shared/KVCSetting/storage.js');
 const WKCVersionStorage = require('./os-app/_shared/WKCVersion/storage.js');
 
 (function WKCMochaStorage() {
@@ -49,7 +49,7 @@ const WKCVersionStorage = require('./os-app/_shared/WKCVersion/storage.js');
 			modules: [
 				WKCStorageModule.WKCStorageModule([
 					KVCNoteStorage.KVCNoteStorage,
-					WKCSettingStorage.WKCSettingStorage,
+					KVCSettingStorage.KVCSettingStorage,
 					WKCVersionStorage.WKCVersionStorage,
 				].map(function (e) {
 					return {

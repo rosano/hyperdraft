@@ -1,6 +1,6 @@
 import * as KVCNoteMetal from './metal.js';
 import * as KVCNoteModel from './model.js';
-import * as WKCSettingAction from '../WKCSetting/action.js';
+import * as KVCSettingAction from '../KVCSetting/action.js';
 import * as WKCVersionAction from '../WKCVersion/action.js';
 import * as WKCParser from '../WKCParser/main.js';
 import { factory, detectPrng } from 'ulid';
@@ -74,9 +74,9 @@ export const KVCNoteActionPublish = async function(storageClient, inputData) {
 	}
 
 	if (!inputData.KVCNotePublicID) {
-		inputData.KVCNotePublicID = (parseInt((await WKCSettingAction.WKCSettingsActionProperty(storageClient, 'WKCSettingsLastRepoID')) || 0) + 1).toString();
+		inputData.KVCNotePublicID = (parseInt((await KVCSettingAction.KVCSettingsActionProperty(storageClient, 'KVCSettingsLastRepoID')) || 0) + 1).toString();
 
-		await WKCSettingAction.WKCSettingsActionProperty(storageClient, 'WKCSettingsLastRepoID', inputData.KVCNotePublicID);
+		await KVCSettingAction.KVCSettingsActionProperty(storageClient, 'KVCSettingsLastRepoID', inputData.KVCNotePublicID);
 	}
 
 	return await KVCNoteActionUpdate(storageClient, Object.assign(inputData, {

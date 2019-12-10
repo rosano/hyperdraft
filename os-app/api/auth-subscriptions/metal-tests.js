@@ -400,8 +400,8 @@ describe('WKCSubscriptionsMetalRequestParameters', function testWKCSubscriptions
 
 		it('returns parameters if WKCSubscriptionHandlerCustomTwitterTimeline', function(done) {
 			KVCTestingMongoClient.db(process.env.KVC_SHARED_DATABASE_NAME).collection('kvc_settings').insertOne({
-				WKCSettingKey: 'kWKCSettingKeyCustomTwitterToken',
-				WKCSettingValue: 'bravo',
+				KVCSettingKey: 'kKVCSettingKeyCustomTwitterToken',
+				KVCSettingValue: 'bravo',
 			}, function(err, result) {
 				mainModule.WKCSubscriptionsMetalRequestParameters(KVCTestingMongoClient, 'alfa', function(err, responseJSON) {
 					assert.deepEqual(responseJSON, {

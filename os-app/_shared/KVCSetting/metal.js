@@ -1,21 +1,21 @@
-import * as WKCSettingsModel from './model.js';
+import * as KVCSettingsModel from './model.js';
 
-export const WKCSettingsMetalWrite = async function(storageClient, inputData) {
+export const KVCSettingsMetalWrite = async function(storageClient, inputData) {
 	if (typeof inputData !== 'object' || inputData === null) {
 		return Promise.reject(new Error('KVCErrorInputNotValid'));
 	}
 
-	let errors = WKCSettingsModel.WKCSettingModelErrorsFor(inputData);
+	let errors = KVCSettingsModel.KVCSettingModelErrorsFor(inputData);
 	if (errors) {
 		return Promise.resolve({
 			KVCErrors: errors,
 		});
 	}
 
-	return await storageClient.wikiavec.kvc_settings.writeObject(inputData.WKCSettingKey, inputData);
+	return await storageClient.wikiavec.kvc_settings.writeObject(inputData.KVCSettingKey, inputData);
 };
 
-export const WKCSettingsMetalRead = async function(storageClient, inputData) {
+export const KVCSettingsMetalRead = async function(storageClient, inputData) {
 	if (typeof inputData !== 'string') {
 		return Promise.reject(new Error('KVCErrorInputNotValid'));
 	}
@@ -23,11 +23,11 @@ export const WKCSettingsMetalRead = async function(storageClient, inputData) {
 	return await storageClient.wikiavec.kvc_settings.readObject(inputData);
 };
 
-export const WKCSettingsMetalList = async function(storageClient) {
+export const KVCSettingsMetalList = async function(storageClient) {
 	return await storageClient.wikiavec.kvc_settings.listObjects();
 };
 
-export const WKCSettingsMetalDelete = async function(storageClient, inputData) {
+export const KVCSettingsMetalDelete = async function(storageClient, inputData) {
 	if (typeof inputData !== 'string') {
 		return Promise.reject(new Error('KVCErrorInputNotValid'));
 	}

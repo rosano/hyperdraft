@@ -9,7 +9,7 @@ import * as WKCStorageClient from '../_shared/WKCStorageClient/main.js';
 import { WKCStorageModule } from '../_shared/WKCStorageModule/main.js';
 import { KVCNoteStorage } from '../_shared/KVCNote/storage.js';
 import { KVCNoteModelPostJSONParse } from '../_shared/KVCNote/model.js';
-import { WKCSettingStorage } from '../_shared/WKCSetting/storage.js';
+import { KVCSettingStorage } from '../_shared/KVCSetting/storage.js';
 import { WKCVersionStorage } from '../_shared/WKCVersion/storage.js';
 import WKCParser from '../_shared/WKCParser/main.js';
 import { OLSK_TESTING_BEHAVIOUR } from 'OLSKTesting';
@@ -17,8 +17,8 @@ import * as OLSKRemoteStorage from '../_shared/__external/OLSKRemoteStorage/main
 import * as KVCNoteAction from '../_shared/KVCNote/action.js';
 import * as KVCNoteMetal from '../_shared/KVCNote/metal.js';
 import * as WKCVersionAction from '../_shared/WKCVersion/action.js';
-import * as WKCSettingAction from '../_shared/WKCSetting/action.js';
-import * as WKCSettingMetal from '../_shared/WKCSetting/metal.js';
+import * as KVCSettingAction from '../_shared/KVCSetting/action.js';
+import * as KVCSettingMetal from '../_shared/KVCSetting/metal.js';
 import * as WKCWriteLogic from './ui-logic.js';
 
 const mod = {
@@ -331,7 +331,7 @@ const mod = {
 
 		zip.file(`${ fileName }.json`, JSON.stringify({
 			KVCNoteObjects: mod._ValueNotesAll,
-			WKCSettingObjects: await WKCSettingAction.WKCSettingsActionQuery(mod._ValueStorageClient, {}),
+			KVCSettingObjects: await KVCSettingAction.KVCSettingsActionQuery(mod._ValueStorageClient, {}),
 		}));
 		
 		zip.generateAsync({type: 'blob'}).then(function (content) {
@@ -355,12 +355,12 @@ const mod = {
 			return;
 		}
 
-		if (!Array.isArray(outputData.WKCSettingObjects)) {
+		if (!Array.isArray(outputData.KVCSettingObjects)) {
 			return;
 		}
 
-		await Promise.all(outputData.WKCSettingObjects.map(function (e) {
-			return WKCSettingMetal.WKCSettingsMetalWrite(mod._ValueStorageClient, e);
+		await Promise.all(outputData.KVCSettingObjects.map(function (e) {
+			return KVCSettingMetal.KVCSettingsMetalWrite(mod._ValueStorageClient, e);
 		}));
 
 		await Promise.all(outputData.KVCNoteObjects.map(function (e) {
@@ -416,7 +416,7 @@ const mod = {
 				WKCStorageModule([
 					KVCNoteStorage,
 					WKCVersionStorage,
-					WKCSettingStorage,
+					KVCSettingStorage,
 					].map(function (e) {
 						return {
 							WKCCollectionStorageGenerator: e,
@@ -462,7 +462,7 @@ const mod = {
 			}
 
 			await mod._ValueStorageClient.remoteStorage.wikiavec.kvc_notes.KVCNoteStorageCache();
-			await mod._ValueStorageClient.remoteStorage.wikiavec.kvc_settings.WKCSettingStorageCache();
+			await mod._ValueStorageClient.remoteStorage.wikiavec.kvc_settings.KVCSettingStorageCache();
 			await mod._ValueStorageClient.remoteStorage.wikiavec.kvc_versions.WKCVersionStorageCache();
 
 			mod.ValueNotesAll(await KVCNoteAction.KVCNoteActionQuery(mod._ValueStorageClient, {}));
