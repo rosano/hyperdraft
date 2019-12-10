@@ -6,7 +6,7 @@ export const KVCStorageModule = function (inputData) {
 		builder(privateClient, publicClient) {
 			return {
 				exports: inputData.reduce(function (coll, item) {
-					let storage = item.WKCCollectionStorageGenerator(privateClient, publicClient, item.WKCCollectionChangeDelegate);
+					let storage = item.KVCCollectionStorageGenerator(privateClient, publicClient, item.KVCCollectionChangeDelegate);
 
 					privateClient.declareType(storage.KVCStorageType, OLSKRemoteStorage.OLSKRemoteStorageJSONSchema(storage.KVCStorageModelErrors));
 

@@ -53,8 +53,8 @@ const KVCVersionStorage = require('./os-app/_shared/KVCVersion/storage.js');
 					KVCVersionStorage.KVCVersionStorage,
 				].map(function (e) {
 					return {
-						WKCCollectionStorageGenerator: e,
-						WKCCollectionChangeDelegate: null,
+						KVCCollectionStorageGenerator: e,
+						KVCCollectionChangeDelegate: null,
 					};
 				}))
 			],

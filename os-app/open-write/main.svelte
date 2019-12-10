@@ -419,8 +419,8 @@ const mod = {
 					KVCSettingStorage,
 					].map(function (e) {
 						return {
-							WKCCollectionStorageGenerator: e,
-							WKCCollectionChangeDelegate: e === KVCNoteStorage ? {
+							KVCCollectionStorageGenerator: e,
+							KVCCollectionChangeDelegate: e === KVCNoteStorage ? {
 								OLSKChangeDelegateCreate (inputData) {
 									// console.log('OLSKChangeDelegateCreate', inputData);
 
