@@ -11,7 +11,7 @@ import { WKCNoteStorage } from '../_shared/WKCNote/storage.js';
 import { WKCSettingStorage } from '../_shared/WKCSetting/storage.js';
 import { WKCVersionStorage } from '../_shared/WKCVersion/storage.js';
 import WKCParser from '../_shared/WKCParser/main.js';
-import { OLSK_TESTING_BEHAVIOUR } from 'OLSKTesting'
+import { OLSK_TESTING_BEHAVIOUR } from 'OLSKTesting';
 import * as OLSKRemoteStorage from '../_shared/__external/OLSKRemoteStorage/main.js'
 import * as WKCNoteAction from '../_shared/WKCNote/action.js';
 import * as WKCVersionAction from '../_shared/WKCVersion/action.js';
