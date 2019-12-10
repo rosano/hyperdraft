@@ -10,6 +10,10 @@
 	align-items: center;
 }
 
+.WKCWriteFooter a {
+	color: var(--WKCCommonForeground);
+}
+
 .WKCWriteFooter :global(.OLSKToolbar) {
 	flex-grow: 1;
 }
