@@ -23,15 +23,15 @@ const kTesting = {
 describe('WKCNoteActionCreate', function testWKCNoteActionCreate() {
 
 	it('rejects if not object', async function() {
-		await rejects(mainModule.WKCNoteActionCreate(KVCTestingStorageClient, null), /WKCErrorInputNotValid/);
+		await rejects(mainModule.WKCNoteActionCreate(KVCTestingStorageClient, null), /KVCErrorInputNotValid/);
 	});
 
-	it('returns object with WKCErrors if not valid', async function() {
+	it('returns object with KVCErrors if not valid', async function() {
 		deepEqual((await mainModule.WKCNoteActionCreate(KVCTestingStorageClient, Object.assign(kTesting.StubNoteObject(), {
 			WKCNoteBody: null,
-		}))).WKCErrors, {
+		}))).KVCErrors, {
 			WKCNoteBody: [
-				'WKCErrorNotString',
+				'KVCErrorNotString',
 			],
 		});
 	});
@@ -67,7 +67,7 @@ describe('WKCNoteActionCreate', function testWKCNoteActionCreate() {
 describe('WKCNoteActionRead', function testWKCNoteActionRead() {
 
 	it('rejects if not string', async function() {
-		await rejects(mainModule.WKCNoteActionRead(KVCTestingStorageClient, null), /WKCErrorInputNotValid/);
+		await rejects(mainModule.WKCNoteActionRead(KVCTestingStorageClient, null), /KVCErrorInputNotValid/);
 	});
 
 	it('returns null if not found', async function() {
@@ -85,15 +85,15 @@ describe('WKCNoteActionRead', function testWKCNoteActionRead() {
 describe('WKCNoteActionUpdate', function testWKCNoteActionUpdate() {
 
 	it('rejects if not object', async function() {
-		await rejects(mainModule.WKCNoteActionUpdate(KVCTestingStorageClient, null), /WKCErrorInputNotValid/);
+		await rejects(mainModule.WKCNoteActionUpdate(KVCTestingStorageClient, null), /KVCErrorInputNotValid/);
 	});
 
-	it('returns object with WKCErrors if not valid', async function() {
+	it('returns object with KVCErrors if not valid', async function() {
 		deepEqual((await mainModule.WKCNoteActionUpdate(KVCTestingStorageClient, Object.assign(await mainModule.WKCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()), {
 			WKCNoteID: null,
-		}))).WKCErrors, {
+		}))).KVCErrors, {
 			WKCNoteID: [
-				'WKCErrorNotString',
+				'KVCErrorNotString',
 			],
 		});
 	});
@@ -130,7 +130,7 @@ describe('WKCNoteActionUpdate', function testWKCNoteActionUpdate() {
 describe('WKCNoteActionDelete', function testWKCNoteActionDelete() {
 
 	it('rejects if not string', async function() {
-		await rejects(mainModule.WKCNoteActionDelete(KVCTestingStorageClient, null), /WKCErrorInputNotValid/);
+		await rejects(mainModule.WKCNoteActionDelete(KVCTestingStorageClient, null), /KVCErrorInputNotValid/);
 	});
 
 	it('returns object', async function() {
@@ -159,7 +159,7 @@ describe('WKCNoteActionDelete', function testWKCNoteActionDelete() {
 describe('WKCNoteActionQuery', function testWKCNoteActionQuery() {
 
 	it('rejects if not object', async function() {
-		await rejects(mainModule.WKCNoteActionQuery(KVCTestingStorageClient, null), /WKCErrorInputNotValid/);
+		await rejects(mainModule.WKCNoteActionQuery(KVCTestingStorageClient, null), /KVCErrorInputNotValid/);
 	});
 
 	it('returns array', async function() {
@@ -206,15 +206,15 @@ describe('WKCNoteActionQuery', function testWKCNoteActionQuery() {
 describe('WKCNoteActionPublish', function testWKCNoteActionPublish() {
 
 	it('rejects if not object', async function() {
-		await rejects(mainModule.WKCNoteActionPublish(KVCTestingStorageClient, null), /WKCErrorInputNotValid/);
+		await rejects(mainModule.WKCNoteActionPublish(KVCTestingStorageClient, null), /KVCErrorInputNotValid/);
 	});
 
-	it('returns object with WKCErrors if not valid', async function() {
+	it('returns object with KVCErrors if not valid', async function() {
 		deepEqual((await mainModule.WKCNoteActionPublish(KVCTestingStorageClient, Object.assign(await mainModule.WKCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()), {
 			WKCNoteID: null,
-		}))).WKCErrors, {
+		}))).KVCErrors, {
 			WKCNoteID: [
-				'WKCErrorNotString',
+				'KVCErrorNotString',
 			],
 		});
 	});
@@ -267,15 +267,15 @@ describe('WKCNoteActionPublish', function testWKCNoteActionPublish() {
 describe('WKCNoteActionRetract', function testWKCNoteActionRetract() {
 
 	it('rejects if not object', async function() {
-		await rejects(mainModule.WKCNoteActionPublish(KVCTestingStorageClient, null), /WKCErrorInputNotValid/);
+		await rejects(mainModule.WKCNoteActionPublish(KVCTestingStorageClient, null), /KVCErrorInputNotValid/);
 	});
 
-	it('returns object with WKCErrors if not valid', async function() {
+	it('returns object with KVCErrors if not valid', async function() {
 		deepEqual((await mainModule.WKCNoteActionRetract(KVCTestingStorageClient, Object.assign(await mainModule.WKCNoteActionPublish(KVCTestingStorageClient, await mainModule.WKCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject())), {
 			WKCNoteID: null,
-		}))).WKCErrors, {
+		}))).KVCErrors, {
 			WKCNoteID: [
-				'WKCErrorNotString',
+				'KVCErrorNotString',
 			],
 		});
 	});

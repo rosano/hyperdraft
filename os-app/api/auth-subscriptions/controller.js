@@ -73,7 +73,7 @@ exports.WKCActionAPISubscriptionsCreate = function(req, res, next) {
 			throw err;
 		}
 
-		if (responseJSON.WKCErrors) {
+		if (responseJSON.KVCErrors) {
 			res.status(400);
 		}
 
@@ -101,7 +101,7 @@ exports.WKCActionAPISubscriptionsUpdate = function(req, res, next) {
 			throw err;
 		}
 
-		if (responseJSON.WKCErrors) {
+		if (responseJSON.KVCErrors) {
 			res.status(400);
 		}
 

@@ -16,15 +16,15 @@ const kTesting = {
 describe('WKCNoteMetalWrite', function testWKCNoteMetalWrite() {
 
 	it('rejects if not object', async function() {
-		await rejects(mainModule.WKCNoteMetalWrite(KVCTestingStorageClient, null), /WKCErrorInputNotValid/);
+		await rejects(mainModule.WKCNoteMetalWrite(KVCTestingStorageClient, null), /KVCErrorInputNotValid/);
 	});
 
-	it('returns object with WKCErrors if not valid', async function() {
+	it('returns object with KVCErrors if not valid', async function() {
 		deepEqual((await mainModule.WKCNoteMetalWrite(KVCTestingStorageClient, Object.assign(kTesting.StubNoteObjectValid(), {
 			WKCNoteID: null,
-		}))).WKCErrors, {
+		}))).KVCErrors, {
 			WKCNoteID: [
-				'WKCErrorNotString',
+				'KVCErrorNotString',
 			],
 		});
 	});
@@ -42,7 +42,7 @@ describe('WKCNoteMetalWrite', function testWKCNoteMetalWrite() {
 describe('WKCNoteMetalRead', function testWKCNoteMetalRead() {
 
 	it('rejects if not string', async function() {
-		await rejects(mainModule.WKCNoteMetalRead(KVCTestingStorageClient, 1), /WKCErrorInputNotValid/);
+		await rejects(mainModule.WKCNoteMetalRead(KVCTestingStorageClient, 1), /KVCErrorInputNotValid/);
 	});
 
 	it('resolves null if not found', async function() {
@@ -74,7 +74,7 @@ describe('WKCNoteMetalList', function testWKCNoteMetalList() {
 describe('WKCNoteMetalDelete', function testWKCNoteMetalDelete() {
 
 	it('rejects if not string', async function() {
-		await rejects(mainModule.WKCNoteMetalDelete(KVCTestingStorageClient, 1), /WKCErrorInputNotValid/);
+		await rejects(mainModule.WKCNoteMetalDelete(KVCTestingStorageClient, 1), /KVCErrorInputNotValid/);
 	});
 
 	it('resolves object', async function() {

@@ -8,7 +8,7 @@ const uniqueID = typeof require === 'undefined' && navigator.appName === 'Zombie
 
 export const WKCNoteActionCreate = async function(storageClient, inputData) {
 	if (typeof inputData !== 'object' || inputData === null) {
-		return Promise.reject(new Error('WKCErrorInputNotValid'));
+		return Promise.reject(new Error('KVCErrorInputNotValid'));
 	}
 
 	let creationDate = new Date();
@@ -26,7 +26,7 @@ export const WKCNoteActionRead = async function(storageClient, inputData) {
 
 export const WKCNoteActionUpdate = async function(storageClient, inputData) {
 	if (typeof inputData !== 'object' || inputData === null) {
-		return Promise.reject(new Error('WKCErrorInputNotValid'));
+		return Promise.reject(new Error('KVCErrorInputNotValid'));
 	}
 
 	return await WKCNoteMetal.WKCNoteMetalWrite(storageClient, Object.assign(inputData, {
@@ -46,7 +46,7 @@ export const WKCNoteActionDelete = async function(storageClient, inputData) {
 
 export const WKCNoteActionQuery = async function(storageClient, inputData) {
 	if (typeof inputData !== 'object' || inputData === null) {
-		return Promise.reject(new Error('WKCErrorInputNotValid'));
+		return Promise.reject(new Error('KVCErrorInputNotValid'));
 	}
 
 	return Promise.resolve(Object.values(await WKCNoteMetal.WKCNoteMetalList(storageClient)).sort(function (a, b) {
@@ -70,7 +70,7 @@ export const WKCNoteActionQuery = async function(storageClient, inputData) {
 
 export const WKCNoteActionPublish = async function(storageClient, inputData) {
 	if (typeof inputData !== 'object' || inputData === null) {
-		return Promise.reject(new Error('WKCErrorInputNotValid'));
+		return Promise.reject(new Error('KVCErrorInputNotValid'));
 	}
 
 	if (!inputData.WKCNotePublicID) {
@@ -86,7 +86,7 @@ export const WKCNoteActionPublish = async function(storageClient, inputData) {
 
 export const WKCNoteActionRetract = async function(storageClient, inputData) {
 	if (typeof inputData !== 'object' || inputData === null) {
-		return Promise.reject(new Error('WKCErrorInputNotValid'));
+		return Promise.reject(new Error('KVCErrorInputNotValid'));
 	}
 
 	return await WKCNoteActionUpdate(storageClient, Object.assign(inputData, {

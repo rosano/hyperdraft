@@ -45,41 +45,41 @@ describe('WKCModelInputDataIsArticleObject', function testWKCModelInputDataIsArt
 		assert.strictEqual(modelLibrary.WKCModelInputDataIsArticleObject(null), false);
 	});
 
-	it('returns false with WKCErrors if WKCArticleSubscriptionID not string', function() {
+	it('returns false with KVCErrors if WKCArticleSubscriptionID not string', function() {
 		var item = Object.assign(StubValidArticle(), {
 			WKCArticleSubscriptionID: null,
 		});
 
 		assert.strictEqual(modelLibrary.WKCModelInputDataIsArticleObject(item), false);
-		assert.deepEqual(item.WKCErrors, {
+		assert.deepEqual(item.KVCErrors, {
 			WKCArticleSubscriptionID: [
-				'WKCErrorNotValid',
+				'KVCErrorNotValid',
 			],
 		});
 	});
 
-	it('returns false with WKCErrors if WKCArticleSubscriptionID not blank', function() {
+	it('returns false with KVCErrors if WKCArticleSubscriptionID not blank', function() {
 		var item = Object.assign(StubValidArticle(), {
 			WKCArticleSubscriptionID: '',
 		});
 
 		assert.strictEqual(modelLibrary.WKCModelInputDataIsArticleObject(item), false);
-		assert.deepEqual(item.WKCErrors, {
+		assert.deepEqual(item.KVCErrors, {
 			WKCArticleSubscriptionID: [
-				'WKCErrorNotValid',
+				'KVCErrorNotValid',
 			],
 		});
 	});
 
-	it('returns false with WKCErrors if WKCArticlePublishDate not date', function() {
+	it('returns false with KVCErrors if WKCArticlePublishDate not date', function() {
 		var item = Object.assign(StubValidArticle(), {
 			WKCArticlePublishDate: new Date('alfa'),
 		});
 
 		assert.strictEqual(modelLibrary.WKCModelInputDataIsArticleObject(item), false);
-		assert.deepEqual(item.WKCErrors, {
+		assert.deepEqual(item.KVCErrors, {
 			WKCArticlePublishDate: [
-				'WKCErrorNotDate',
+				'KVCErrorNotDate',
 			],
 		});
 	});
@@ -96,24 +96,24 @@ describe('WKCModelInputDataIsArticleObject', function testWKCModelInputDataIsArt
 		assert.strictEqual(modelLibrary.WKCModelInputDataIsArticleObject(item, {
 			WKCOptionValidatePresentOnly: true,
 		}), false);
-		assert.deepEqual(item.WKCErrors, {
+		assert.deepEqual(item.KVCErrors, {
 			WKCArticlePublishDate: [
-				'WKCErrorNotDate',
+				'KVCErrorNotDate',
 			],
 		});
 	});
 
 	context('WKCArticleTitle', function() {
 
-		it('returns false with WKCErrors if not string', function() {
+		it('returns false with KVCErrors if not string', function() {
 			var item = Object.assign(StubValidArticle(), {
 				WKCArticleTitle: 123
 			});
 
 			assert.strictEqual(modelLibrary.WKCModelInputDataIsArticleObject(item), false);
-			assert.deepEqual(item.WKCErrors, {
+			assert.deepEqual(item.KVCErrors, {
 				WKCArticleTitle: [
-					'WKCErrorNotString',
+					'KVCErrorNotString',
 				],
 			});
 		});
@@ -122,15 +122,15 @@ describe('WKCModelInputDataIsArticleObject', function testWKCModelInputDataIsArt
 
 	context('WKCArticleSnippet', function() {
 
-		it('returns false with WKCErrors if not string', function() {
+		it('returns false with KVCErrors if not string', function() {
 			var item = Object.assign(StubValidArticle(), {
 				WKCArticleBody: 123
 			});
 
 			assert.strictEqual(modelLibrary.WKCModelInputDataIsArticleObject(item), false);
-			assert.deepEqual(item.WKCErrors, {
+			assert.deepEqual(item.KVCErrors, {
 				WKCArticleBody: [
-					'WKCErrorNotString',
+					'KVCErrorNotString',
 				],
 			});
 		});
@@ -139,15 +139,15 @@ describe('WKCModelInputDataIsArticleObject', function testWKCModelInputDataIsArt
 
 	context('WKCArticleIsRead', function() {
 
-		it('returns false with WKCErrors if not boolean', function() {
+		it('returns false with KVCErrors if not boolean', function() {
 			var item = Object.assign(StubValidArticle(), {
 				WKCArticleIsRead: 'true'
 			});
 
 			assert.strictEqual(modelLibrary.WKCModelInputDataIsArticleObject(item), false);
-			assert.deepEqual(item.WKCErrors, {
+			assert.deepEqual(item.KVCErrors, {
 				WKCArticleIsRead: [
-					'WKCErrorNotBoolean',
+					'KVCErrorNotBoolean',
 				],
 			});
 		});
@@ -156,15 +156,15 @@ describe('WKCModelInputDataIsArticleObject', function testWKCModelInputDataIsArt
 
 	context('WKCArticleIsArchived', function() {
 
-		it('returns false with WKCErrors if not boolean', function() {
+		it('returns false with KVCErrors if not boolean', function() {
 			var item = Object.assign(StubValidArticle(), {
 				WKCArticleIsArchived: 'true'
 			});
 
 			assert.strictEqual(modelLibrary.WKCModelInputDataIsArticleObject(item), false);
-			assert.deepEqual(item.WKCErrors, {
+			assert.deepEqual(item.KVCErrors, {
 				WKCArticleIsArchived: [
-					'WKCErrorNotBoolean',
+					'KVCErrorNotBoolean',
 				],
 			});
 		});
@@ -173,15 +173,15 @@ describe('WKCModelInputDataIsArticleObject', function testWKCModelInputDataIsArt
 
 	context('WKCArticleIsDiscarded', function() {
 
-		it('returns false with WKCErrors if not boolean', function() {
+		it('returns false with KVCErrors if not boolean', function() {
 			var item = Object.assign(StubValidArticle(), {
 				WKCArticleIsDiscarded: 'true'
 			});
 
 			assert.strictEqual(modelLibrary.WKCModelInputDataIsArticleObject(item), false);
-			assert.deepEqual(item.WKCErrors, {
+			assert.deepEqual(item.KVCErrors, {
 				WKCArticleIsDiscarded: [
-					'WKCErrorNotBoolean',
+					'KVCErrorNotBoolean',
 				],
 			});
 		});
@@ -190,15 +190,15 @@ describe('WKCModelInputDataIsArticleObject', function testWKCModelInputDataIsArt
 
 	context('WKCArticleDateDiscarded', function() {
 
-		it('returns false with WKCErrors if not date', function() {
+		it('returns false with KVCErrors if not date', function() {
 			var item = Object.assign(StubValidArticle(), {
 				WKCArticleDateDiscarded: Date.now(),
 			});
 
 			assert.strictEqual(modelLibrary.WKCModelInputDataIsArticleObject(item), false);
-			assert.deepEqual(item.WKCErrors, {
+			assert.deepEqual(item.KVCErrors, {
 				WKCArticleDateDiscarded: [
-					'WKCErrorNotDate',
+					'KVCErrorNotDate',
 				],
 			});
 		});

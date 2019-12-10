@@ -13,7 +13,7 @@ describe('KVCSharedDonateLinkGuard', function testKVCSharedDonateLinkGuard() {
 	it('throws if not object', function() {
 		throws(function() {
 			mainModule.KVCSharedDonateLinkGuard(null);
-		}, /WKCErrorInputNotValid/);
+		}, /KVCErrorInputNotValid/);
 	});
 
 	it('returns error if no KVC_SHARED_DONATE_URL', function () {
@@ -41,7 +41,7 @@ describe('KVCSharedGitHubLinkGuard', function testKVCSharedGitHubLinkGuard() {
 	it('throws if not object', function() {
 		throws(function() {
 			mainModule.KVCSharedGitHubLinkGuard(null);
-		}, /WKCErrorInputNotValid/);
+		}, /KVCErrorInputNotValid/);
 	});
 
 	it('returns error if no KVC_SHARED_GITHUB_URL', function () {

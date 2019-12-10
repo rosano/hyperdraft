@@ -4,7 +4,7 @@ const uniqueID = typeof require === 'undefined' && navigator.appName === 'Zombie
 
 export const WKCVersionActionCreate = async function(storageClient, inputData) {
 	if (typeof inputData !== 'object' || inputData === null) {
-		return Promise.reject(new Error('WKCErrorInputNotValid'));
+		return Promise.reject(new Error('KVCErrorInputNotValid'));
 	}
 
 	return await WKCVersionMetal.WKCVersionMetalWrite(storageClient, Object.assign(inputData, {
@@ -18,7 +18,7 @@ export const WKCVersionActionDelete = async function(storageClient, inputData) {
 
 export const WKCVersionActionQuery = async function(storageClient, inputData) {
 	if (typeof inputData !== 'object' || inputData === null) {
-		return Promise.reject(new Error('WKCErrorInputNotValid'));
+		return Promise.reject(new Error('KVCErrorInputNotValid'));
 	}
 
 	return Promise.resolve(Object.values(await WKCVersionMetal.WKCVersionMetalList(storageClient)).sort(function (a, b) {

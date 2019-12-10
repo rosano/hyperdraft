@@ -16,7 +16,7 @@ describe('WKCSettingModelErrorsFor', function testWKCSettingModelErrorsFor() {
 	it('throws error if not object', function() {
 		throws(function() {
 			mainModule.WKCSettingModelErrorsFor(null);
-		}, /WKCErrorInputNotValid/);
+		}, /KVCErrorInputNotValid/);
 	});
 
 	it('returns object if WKCSettingKey not string', function() {
@@ -24,7 +24,7 @@ describe('WKCSettingModelErrorsFor', function testWKCSettingModelErrorsFor() {
 			WKCSettingKey: null,
 		})), {
 			WKCSettingKey: [
-				'WKCErrorNotString',
+				'KVCErrorNotString',
 			],
 		});
 	});
@@ -34,7 +34,7 @@ describe('WKCSettingModelErrorsFor', function testWKCSettingModelErrorsFor() {
 			WKCSettingKey: ' ',
 		})), {
 			WKCSettingKey: [
-				'WKCErrorNotFilled',
+				'KVCErrorNotFilled',
 			],
 		});
 	});
@@ -44,7 +44,7 @@ describe('WKCSettingModelErrorsFor', function testWKCSettingModelErrorsFor() {
 			WKCSettingValue: null,
 		})), {
 			WKCSettingValue: [
-				'WKCErrorNotString',
+				'KVCErrorNotString',
 			],
 		});
 	});

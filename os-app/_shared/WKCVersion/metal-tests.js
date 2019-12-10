@@ -16,15 +16,15 @@ const kTesting = {
 describe('WKCVersionMetalWrite', function testWKCVersionMetalWrite() {
 
 	it('rejects if not object', async function() {
-		await rejects(mainModule.WKCVersionMetalWrite(KVCTestingStorageClient, null), /WKCErrorInputNotValid/);
+		await rejects(mainModule.WKCVersionMetalWrite(KVCTestingStorageClient, null), /KVCErrorInputNotValid/);
 	});
 
-	it('returns object with WKCErrors if not valid', async function() {
+	it('returns object with KVCErrors if not valid', async function() {
 		deepEqual((await mainModule.WKCVersionMetalWrite(KVCTestingStorageClient, Object.assign(kTesting.StubNoteObjectValid(), {
 			WKCVersionID: null,
-		}))).WKCErrors, {
+		}))).KVCErrors, {
 			WKCVersionID: [
-				'WKCErrorNotString',
+				'KVCErrorNotString',
 			],
 		});
 	});
@@ -42,7 +42,7 @@ describe('WKCVersionMetalWrite', function testWKCVersionMetalWrite() {
 describe('WKCVersionMetalRead', function testWKCVersionMetalRead() {
 
 	it('rejects if not string', async function() {
-		await rejects(mainModule.WKCVersionMetalRead(KVCTestingStorageClient, 1), /WKCErrorInputNotValid/);
+		await rejects(mainModule.WKCVersionMetalRead(KVCTestingStorageClient, 1), /KVCErrorInputNotValid/);
 	});
 
 	it('resolves null if not found', async function() {
@@ -74,7 +74,7 @@ describe('WKCVersionMetalList', function testWKCVersionMetalList() {
 describe('WKCVersionMetalDelete', function testWKCVersionMetalDelete() {
 
 	it('rejects if not string', async function() {
-		await rejects(mainModule.WKCVersionMetalDelete(KVCTestingStorageClient, 1), /WKCErrorInputNotValid/);
+		await rejects(mainModule.WKCVersionMetalDelete(KVCTestingStorageClient, 1), /KVCErrorInputNotValid/);
 	});
 
 	it('resolves object', async function() {

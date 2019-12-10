@@ -25,15 +25,15 @@ const kTesting = {
 describe('WKCVersionActionCreate', function testWKCVersionActionCreate() {
 
 	it('rejects if not object', async function() {
-		await rejects(mainModule.WKCVersionActionCreate(KVCTestingStorageClient, null), /WKCErrorInputNotValid/);
+		await rejects(mainModule.WKCVersionActionCreate(KVCTestingStorageClient, null), /KVCErrorInputNotValid/);
 	});
 
-	it('returns object with WKCErrors if not valid', async function() {
+	it('returns object with KVCErrors if not valid', async function() {
 		deepEqual((await mainModule.WKCVersionActionCreate(KVCTestingStorageClient, Object.assign(kTesting.StubVersionObject(), {
 			WKCVersionBody: null,
-		}))).WKCErrors, {
+		}))).KVCErrors, {
 			WKCVersionBody: [
-				'WKCErrorNotString',
+				'KVCErrorNotString',
 			],
 		});
 	});
@@ -60,7 +60,7 @@ describe('WKCVersionActionCreate', function testWKCVersionActionCreate() {
 describe('WKCVersionActionQuery', function testWKCVersionActionQuery() {
 
 	it('rejects if not object', async function() {
-		await rejects(mainModule.WKCVersionActionQuery(KVCTestingMongoClient, null), /WKCErrorInputNotValid/);
+		await rejects(mainModule.WKCVersionActionQuery(KVCTestingMongoClient, null), /KVCErrorInputNotValid/);
 	});
 
 	it('returns array', async function() {
@@ -95,7 +95,7 @@ describe('WKCVersionActionQuery', function testWKCVersionActionQuery() {
 describe('WKCVersionActionDelete', function testWKCVersionActionDelete() {
 
 	it('rejects if not string', async function() {
-		await rejects(mainModule.WKCVersionActionDelete(KVCTestingStorageClient, null), /WKCErrorInputNotValid/);
+		await rejects(mainModule.WKCVersionActionDelete(KVCTestingStorageClient, null), /KVCErrorInputNotValid/);
 	});
 
 	it('returns object', async function() {

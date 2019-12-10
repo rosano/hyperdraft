@@ -8,11 +8,11 @@
 
 exports._WKCSettingsMetalSet = async function(databaseClient, param1, param2) {
 	if (typeof param1 !== 'string') {
-		return Promise.reject(new Error('WKCErrorInputNotValid'));
+		return Promise.reject(new Error('KVCErrorInputNotValid'));
 	}
 
 	if (typeof param2 === 'undefined') {
-		return Promise.reject(new Error('WKCErrorInputNotValid'));
+		return Promise.reject(new Error('KVCErrorInputNotValid'));
 	}
 
 	let outputData = (await databaseClient.db(process.env.KVC_SHARED_DATABASE_NAME).collection('kvc_settings').findOneAndUpdate({
@@ -33,7 +33,7 @@ exports._WKCSettingsMetalSet = async function(databaseClient, param1, param2) {
 
 exports._WKCSettingsMetalGet = async function(databaseClient, inputData) {
 	if (typeof inputData !== 'string') {
-		return Promise.reject(new Error('WKCErrorInputNotValid'));
+		return Promise.reject(new Error('KVCErrorInputNotValid'));
 	}
 
 	let outputData = await databaseClient.db(process.env.KVC_SHARED_DATABASE_NAME).collection('kvc_settings').findOne({

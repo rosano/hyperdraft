@@ -22,22 +22,22 @@ describe('WKCSnapshotsMetalCreate', function tesSnapshotsMetalCreate() {
 	it('throws error if param2 not object', function() {
 		assert.throws(function() {
 			mainModule.WKCSnapshotsMetalCreate(KVCTestingMongoClient, '', function() {});
-		}, /WKCErrorInputNotValid/);
+		}, /KVCErrorInputNotValid/);
 	});
 
 	it('throws error if param3 not function', function() {
 		assert.throws(function() {
 			mainModule.WKCSnapshotsMetalCreate(KVCTestingMongoClient, {}, null);
-		}, /WKCErrorInputNotValid/);
+		}, /KVCErrorInputNotValid/);
 	});
 
-	it('returns WKCErrors if not valid WKCSnapshot', function(done) {
+	it('returns KVCErrors if not valid WKCSnapshot', function(done) {
 		mainModule.WKCSnapshotsMetalCreate(KVCTestingMongoClient, Object.assign(kTesting.StubValidSnapshot(), {
 			WKCSnapshotBody: null,
 		}), function(err, responseJSON) {
-			assert.deepEqual(responseJSON.WKCErrors, {
+			assert.deepEqual(responseJSON.KVCErrors, {
 				WKCSnapshotBody: [
-					'WKCErrorNotString',
+					'KVCErrorNotString',
 				],
 			});
 

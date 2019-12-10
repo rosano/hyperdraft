@@ -37,13 +37,13 @@ describe('KVCSharedMiddlewareEnsureDatabase', function testKVCSharedMiddlewareEn
 		return typeof inputData === 'undefined' ? 'RETURNED_UNDEFINED' : inputData;
 	};
 
-	it('returns next(WKCErrorConnectionNotAttempted) if not attempted', function() {
+	it('returns next(KVCErrorConnectionNotAttempted) if not attempted', function() {
 		assert.deepEqual(controllerModule.KVCSharedMiddlewareEnsureDatabase(fakeRequest({
 			OLSKConnectionAttempted: false,
-		}), fakeResponse, fakeNext), new Error('WKCErrorConnectionNotAttempted'));
+		}), fakeResponse, fakeNext), new Error('KVCErrorConnectionNotAttempted'));
 	});
 
-	it('returns next(WKCErrorConnectionFailed) if error', function() {
+	it('returns next(KVCErrorConnectionFailed) if error', function() {
 		var error = new Error('MongoErrorConnectionFailed');
 		assert.deepEqual(controllerModule.KVCSharedMiddlewareEnsureDatabase(fakeRequest({
 			OLSKConnectionAttempted: true,

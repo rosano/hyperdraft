@@ -2,7 +2,7 @@ const mod = {
 
 	KVCSharedDonateLinkGuard (inputData) {
 		if (typeof inputData !== 'object' || inputData === null) {
-			throw new Error('WKCErrorInputNotValid');
+			throw new Error('KVCErrorInputNotValid');
 		}
 
 		if (!(inputData.KVC_SHARED_DONATE_URL || '').trim()) {
@@ -12,7 +12,7 @@ const mod = {
 
 	KVCSharedGitHubLinkGuard (inputData) {
 		if (typeof inputData !== 'object' || inputData === null) {
-			throw new Error('WKCErrorInputNotValid');
+			throw new Error('KVCErrorInputNotValid');
 		}
 
 		if (!(inputData.KVC_SHARED_GITHUB_URL || '').trim()) {

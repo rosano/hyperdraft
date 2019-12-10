@@ -20,22 +20,22 @@ describe('WKCMetalArticlesCreate', function testWKCMetalArticlesCreate() {
 	it('throws error if param2 not object', function() {
 		assert.throws(function() {
 			mainModule.WKCMetalArticlesCreate(KVCTestingMongoClient, '', function() {});
-		}, /WKCErrorInputNotValid/);
+		}, /KVCErrorInputNotValid/);
 	});
 
 	it('throws error if param3 not function', function() {
 		assert.throws(function() {
 			mainModule.WKCMetalArticlesCreate(KVCTestingMongoClient, {}, null);
-		}, /WKCErrorInputNotValid/);
+		}, /KVCErrorInputNotValid/);
 	});
 
-	it('returns WKCErrors if not valid WKCArticle', function(done) {
+	it('returns KVCErrors if not valid WKCArticle', function(done) {
 		mainModule.WKCMetalArticlesCreate(KVCTestingMongoClient, Object.assign(StubValidArticle(), {
 			WKCArticlePublishDate: new Date('alfa'),
 		}), function(err, responseJSON) {
-			assert.deepEqual(responseJSON.WKCErrors, {
+			assert.deepEqual(responseJSON.KVCErrors, {
 				WKCArticlePublishDate: [
-					'WKCErrorNotDate',
+					'KVCErrorNotDate',
 				],
 			});
 
@@ -62,18 +62,18 @@ describe('WKCMetalArticlesRead', function testWKCMetalArticlesRead() {
 	it('throws error if param2 not string', function() {
 		assert.throws(function() {
 			mainModule.WKCMetalArticlesRead(KVCTestingMongoClient, 1, function() {});
-		}, /WKCErrorInputNotValid/);
+		}, /KVCErrorInputNotValid/);
 	});
 
 	it('throws error if param3 not function', function() {
 		assert.throws(function() {
 			mainModule.WKCMetalArticlesRead(KVCTestingMongoClient, '1', null);
-		}, /WKCErrorInputNotValid/);
+		}, /KVCErrorInputNotValid/);
 	});
 
 	it('returns error if WKCArticleID not found', function(done) {
 		mainModule.WKCMetalArticlesRead(KVCTestingMongoClient, '5c192c1edb2f6c6d8a78c9f0', function(err) {
-			assert.deepEqual(err, new Error('WKCErrorNotFound'));
+			assert.deepEqual(err, new Error('KVCErrorNotFound'));
 
 			done();
 		});
@@ -97,37 +97,37 @@ describe('WKCMetalArticlesUpdate', function testWKCMetalArticlesUpdate() {
 	it('throws error if param2 not string', function() {
 		assert.throws(function() {
 			mainModule.WKCMetalArticlesUpdate(KVCTestingMongoClient, 1, {}, function() {});
-		}, /WKCErrorInputNotValid/);
+		}, /KVCErrorInputNotValid/);
 	});
 
 	it('throws error if param3 not object', function() {
 		assert.throws(function() {
 			mainModule.WKCMetalArticlesUpdate(KVCTestingMongoClient, '1', null, function() {});
-		}, /WKCErrorInputNotValid/);
+		}, /KVCErrorInputNotValid/);
 	});
 
 	it('throws error if param4 not function', function() {
 		assert.throws(function() {
 			mainModule.WKCMetalArticlesUpdate(KVCTestingMongoClient, '1', {}, null);
-		}, /WKCErrorInputNotValid/);
+		}, /KVCErrorInputNotValid/);
 	});
 
 	it('returns error if WKCArticleID not found', function(done) {
 		mainModule.WKCMetalArticlesUpdate(KVCTestingMongoClient, '5c192c1edb2f6c6d8a78c9f0', StubValidArticle(), function(err) {
-			assert.deepEqual(err, new Error('WKCErrorNotFound'));
+			assert.deepEqual(err, new Error('KVCErrorNotFound'));
 
 			done();
 		});
 	});
 
-	it('returns WKCErrors if not valid value', function(done) {
+	it('returns KVCErrors if not valid value', function(done) {
 		mainModule.WKCMetalArticlesCreate(KVCTestingMongoClient, StubValidArticle(), function(err, articleObject) {
 			mainModule.WKCMetalArticlesUpdate(KVCTestingMongoClient, articleObject.WKCArticleID, {
 				WKCArticlePublishDate: new Date('alfa'),
 			}, function(err, responseJSON) {
-				assert.deepEqual(responseJSON.WKCErrors, {
+				assert.deepEqual(responseJSON.KVCErrors, {
 					WKCArticlePublishDate: [
-						'WKCErrorNotDate',
+						'KVCErrorNotDate',
 					],
 				});
 
@@ -157,18 +157,18 @@ describe('WKCMetalArticlesDelete', function testWKCMetalArticlesDelete() {
 	it('throws error if param2 not string', function() {
 		assert.throws(function() {
 			mainModule.WKCMetalArticlesDelete(KVCTestingMongoClient, 1, function() {});
-		}, /WKCErrorInputNotValid/);
+		}, /KVCErrorInputNotValid/);
 	});
 
 	it('throws error if param3 not function', function() {
 		assert.throws(function() {
 			mainModule.WKCMetalArticlesDelete(KVCTestingMongoClient, '1', null);
-		}, /WKCErrorInputNotValid/);
+		}, /KVCErrorInputNotValid/);
 	});
 
 	it('returns error if WKCArticleID not found', function(done) {
 		mainModule.WKCMetalArticlesDelete(KVCTestingMongoClient, '5c192c1edb2f6c6d8a78c9f0', function(err) {
-			assert.deepEqual(err, new Error('WKCErrorNotFound'));
+			assert.deepEqual(err, new Error('KVCErrorNotFound'));
 
 			done();
 		});
@@ -191,19 +191,19 @@ describe('WKCMetalArticlesSearch', function testWKCMetalArticlesSearch() {
 	it('throws error if param2 not function', function() {
 		assert.throws(function() {
 			mainModule.WKCMetalArticlesSearch(KVCTestingMongoClient, null, function () {});
-		}, /WKCErrorInputNotValid/);
+		}, /KVCErrorInputNotValid/);
 	});
 
 	it('throws error if param3 not function', function() {
 		assert.throws(function() {
 			mainModule.WKCMetalArticlesSearch(KVCTestingMongoClient, {}, null);
-		}, /WKCErrorInputNotValid/);
+		}, /KVCErrorInputNotValid/);
 	});
 
 	it('throws error if param4 not object', function() {
 		assert.throws(function() {
 			mainModule.WKCMetalArticlesSearch(KVCTestingMongoClient, {}, function() {}, null);
-		}, /WKCErrorInputNotValid/);
+		}, /KVCErrorInputNotValid/);
 	});
 
 	it('returns all if param2 empty', function(done) {
@@ -243,7 +243,7 @@ describe('WKCMetalArticlesSearch', function testWKCMetalArticlesSearch() {
 				mainModule.WKCMetalArticlesSearch(KVCTestingMongoClient, {}, function() {}, {
 					WKCOptionLimit: '1',
 				});
-			}, /WKCErrorInputNotValid/);
+			}, /KVCErrorInputNotValid/);
 		});
 
 		it('returns limited if WKCOptionLimit set', function(done) {

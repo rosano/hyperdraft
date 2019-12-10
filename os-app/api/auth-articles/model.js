@@ -29,20 +29,20 @@ exports.WKCModelInputDataIsArticleObject = function(inputData, options) {
 
 	if (typeof inputData.WKCArticleSubscriptionID !== 'string' || !inputData.WKCArticleSubscriptionID) {
 		errors.WKCArticleSubscriptionID = [
-			'WKCErrorNotValid',
+			'KVCErrorNotValid',
 		];
 	}
 
 	if (!(inputData.WKCArticlePublishDate instanceof Date) || Number.isNaN(inputData.WKCArticlePublishDate.getTime())) {
 		errors.WKCArticlePublishDate = [
-			'WKCErrorNotDate',
+			'KVCErrorNotDate',
 		];
 	}
 
 	if (inputData.WKCArticleTitle) {
 		if (typeof inputData.WKCArticleTitle !== 'string') {
 			errors.WKCArticleTitle = [
-				'WKCErrorNotString',
+				'KVCErrorNotString',
 			];
 		}
 	}
@@ -50,7 +50,7 @@ exports.WKCModelInputDataIsArticleObject = function(inputData, options) {
 	if (inputData.WKCArticleBody) {
 		if (typeof inputData.WKCArticleBody !== 'string') {
 			errors.WKCArticleBody = [
-				'WKCErrorNotString',
+				'KVCErrorNotString',
 			];
 		}
 	}
@@ -58,7 +58,7 @@ exports.WKCModelInputDataIsArticleObject = function(inputData, options) {
 	if (inputData.WKCArticleSnippet) {
 		if (typeof inputData.WKCArticleSnippet !== 'string') {
 			errors.WKCArticleSnippet = [
-				'WKCErrorNotString',
+				'KVCErrorNotString',
 			];
 		}
 	}
@@ -66,7 +66,7 @@ exports.WKCModelInputDataIsArticleObject = function(inputData, options) {
 	if (inputData.WKCArticleIsRead) {
 		if (typeof inputData.WKCArticleIsRead !== 'boolean') {
 			errors.WKCArticleIsRead = [
-				'WKCErrorNotBoolean',
+				'KVCErrorNotBoolean',
 			];
 		}
 	}
@@ -74,7 +74,7 @@ exports.WKCModelInputDataIsArticleObject = function(inputData, options) {
 	if (inputData.WKCArticleIsArchived) {
 		if (typeof inputData.WKCArticleIsArchived !== 'boolean') {
 			errors.WKCArticleIsArchived = [
-				'WKCErrorNotBoolean',
+				'KVCErrorNotBoolean',
 			];
 		}
 	}
@@ -82,7 +82,7 @@ exports.WKCModelInputDataIsArticleObject = function(inputData, options) {
 	if (inputData.WKCArticleIsDiscarded) {
 		if (typeof inputData.WKCArticleIsDiscarded !== 'boolean') {
 			errors.WKCArticleIsDiscarded = [
-				'WKCErrorNotBoolean',
+				'KVCErrorNotBoolean',
 			];
 		}
 	}
@@ -90,7 +90,7 @@ exports.WKCModelInputDataIsArticleObject = function(inputData, options) {
 	if (inputData.WKCArticleDateDiscarded) {
 		if (!(inputData.WKCArticleDateDiscarded instanceof Date) || Number.isNaN(inputData.WKCArticleDateDiscarded.getTime())) {
 			errors.WKCArticleDateDiscarded = [
-				'WKCErrorNotDate',
+				'KVCErrorNotDate',
 			];
 		}
 	}
@@ -104,7 +104,7 @@ exports.WKCModelInputDataIsArticleObject = function(inputData, options) {
 	}
 
 	if (Object.keys(errors).length) {
-		inputData.WKCErrors = errors;
+		inputData.KVCErrors = errors;
 
 		return false;
 	}

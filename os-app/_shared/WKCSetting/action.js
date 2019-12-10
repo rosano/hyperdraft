@@ -2,11 +2,11 @@ import * as WKCSettingsMetal from './metal.js';
 
 export const _WKCSettingsActionSet = async function(storageClient, param1, param2) {
 	if (typeof param1 !== 'string') {
-		return Promise.reject(new Error('WKCErrorInputNotValid'));
+		return Promise.reject(new Error('KVCErrorInputNotValid'));
 	}
 
 	if (typeof param2 === 'undefined') {
-		return Promise.reject(new Error('WKCErrorInputNotValid'));
+		return Promise.reject(new Error('KVCErrorInputNotValid'));
 	}
 
 	let outputData = (await WKCSettingsMetal.WKCSettingsMetalWrite(storageClient, {
@@ -19,7 +19,7 @@ export const _WKCSettingsActionSet = async function(storageClient, param1, param
 
 export const _WKCSettingsActionGet = async function(storageClient, inputData) {
 	if (typeof inputData !== 'string') {
-		return Promise.reject(new Error('WKCErrorInputNotValid'));
+		return Promise.reject(new Error('KVCErrorInputNotValid'));
 	}
 
 	let outputData = await WKCSettingsMetal.WKCSettingsMetalRead(storageClient, inputData);
@@ -41,7 +41,7 @@ export const WKCSettingsActionDelete = async function(storageClient, inputData) 
 
 export const WKCSettingsActionQuery = async function(storageClient, inputData) {
 	if (typeof inputData !== 'object' || inputData === null) {
-		return Promise.reject(new Error('WKCErrorInputNotValid'));
+		return Promise.reject(new Error('KVCErrorInputNotValid'));
 	}
 
 	return Promise.resolve(Object.values(await WKCSettingsMetal.WKCSettingsMetalList(storageClient)).filter(function(e) {

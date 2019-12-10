@@ -60,7 +60,7 @@ exports.OLSKControllerSharedMiddlewares = function() {
 
 exports.KVCSharedMiddlewareEnsureDatabase = function(req, res, next) {
 	if (!req.OLSKSharedConnectionFor('KVCSharedConnectionMongo').OLSKConnectionAttempted) {
-		return next(new Error('WKCErrorConnectionNotAttempted'));
+		return next(new Error('KVCErrorConnectionNotAttempted'));
 	}
 
 	if (req.OLSKSharedConnectionFor('KVCSharedConnectionMongo').OLSKConnectionError) {

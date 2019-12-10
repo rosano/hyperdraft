@@ -62,7 +62,7 @@ exports.WKCActionAPIArticlesCreate = function(req, res, next) {
 			throw err;
 		}
 
-		if (responseJSON.WKCErrors) {
+		if (responseJSON.KVCErrors) {
 			res.status(400);
 		}
 
@@ -90,7 +90,7 @@ exports.WKCActionAPIArticlesUpdate = function(req, res, next) {
 			throw err;
 		}
 
-		if (responseJSON.WKCErrors) {
+		if (responseJSON.KVCErrors) {
 			res.status(400);
 		}
 
