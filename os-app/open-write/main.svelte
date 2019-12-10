@@ -10,13 +10,13 @@ import { WKCStorageModule } from '../_shared/WKCStorageModule/main.js';
 import { KVCNoteStorage } from '../_shared/KVCNote/storage.js';
 import { KVCNoteModelPostJSONParse } from '../_shared/KVCNote/model.js';
 import { KVCSettingStorage } from '../_shared/KVCSetting/storage.js';
-import { WKCVersionStorage } from '../_shared/WKCVersion/storage.js';
+import { KVCVersionStorage } from '../_shared/KVCVersion/storage.js';
 import WKCParser from '../_shared/WKCParser/main.js';
 import { OLSK_TESTING_BEHAVIOUR } from 'OLSKTesting';
 import * as OLSKRemoteStorage from '../_shared/__external/OLSKRemoteStorage/main.js'
 import * as KVCNoteAction from '../_shared/KVCNote/action.js';
 import * as KVCNoteMetal from '../_shared/KVCNote/metal.js';
-import * as WKCVersionAction from '../_shared/WKCVersion/action.js';
+import * as KVCVersionAction from '../_shared/KVCVersion/action.js';
 import * as KVCSettingAction from '../_shared/KVCSetting/action.js';
 import * as KVCSettingMetal from '../_shared/KVCSetting/metal.js';
 import * as WKCWriteLogic from './ui-logic.js';
@@ -205,10 +205,10 @@ const mod = {
 						return;
 					}
 
-					await WKCVersionAction.WKCVersionActionCreate(mod._ValueStorageClient, {
-						WKCVersionNoteID: inputData.KVCNoteID,
-						WKCVersionBody: inputData.KVCNoteBody,
-						WKCVersionDate: inputData.KVCNoteModificationDate,
+					await KVCVersionAction.KVCVersionActionCreate(mod._ValueStorageClient, {
+						KVCVersionNoteID: inputData.KVCNoteID,
+						KVCVersionBody: inputData.KVCNoteBody,
+						KVCVersionDate: inputData.KVCNoteModificationDate,
 					});
 				},
 			};
@@ -283,11 +283,11 @@ const mod = {
 	},
 	
 	async ControlNoteVersions (inputData) {
-		(await WKCVersionAction.WKCVersionActionQuery(mod._ValueStorageClient, {
-			WKCVersionNoteID: inputData.KVCNoteID,
+		(await KVCVersionAction.KVCVersionActionQuery(mod._ValueStorageClient, {
+			KVCVersionNoteID: inputData.KVCNoteID,
 		})).slice(0, 5).forEach(function (e) {
 			console.log(e);
-			console.log(e.WKCVersionBody);
+			console.log(e.KVCVersionBody);
 		});
 	},
 	
@@ -415,7 +415,7 @@ const mod = {
 			modules: [
 				WKCStorageModule([
 					KVCNoteStorage,
-					WKCVersionStorage,
+					KVCVersionStorage,
 					KVCSettingStorage,
 					].map(function (e) {
 						return {
@@ -463,7 +463,7 @@ const mod = {
 
 			await mod._ValueStorageClient.remoteStorage.wikiavec.kvc_notes.KVCNoteStorageCache();
 			await mod._ValueStorageClient.remoteStorage.wikiavec.kvc_settings.KVCSettingStorageCache();
-			await mod._ValueStorageClient.remoteStorage.wikiavec.kvc_versions.WKCVersionStorageCache();
+			await mod._ValueStorageClient.remoteStorage.wikiavec.kvc_versions.KVCVersionStorageCache();
 
 			mod.ValueNotesAll(await KVCNoteAction.KVCNoteActionQuery(mod._ValueStorageClient, {}));
 

@@ -1,7 +1,7 @@
 import * as KVCNoteMetal from './metal.js';
 import * as KVCNoteModel from './model.js';
 import * as KVCSettingAction from '../KVCSetting/action.js';
-import * as WKCVersionAction from '../WKCVersion/action.js';
+import * as KVCVersionAction from '../KVCVersion/action.js';
 import * as WKCParser from '../WKCParser/main.js';
 import { factory, detectPrng } from 'ulid';
 const uniqueID = typeof require === 'undefined' && navigator.appName === 'Zombie' ? factory(detectPrng(true)) : factory();
@@ -35,10 +35,10 @@ export const KVCNoteActionUpdate = async function(storageClient, inputData) {
 };
 
 export const KVCNoteActionDelete = async function(storageClient, inputData) {
-	await Promise.all((await WKCVersionAction.WKCVersionActionQuery(storageClient, {
-		WKCVersionNoteID: inputData,
+	await Promise.all((await KVCVersionAction.KVCVersionActionQuery(storageClient, {
+		KVCVersionNoteID: inputData,
 	})).map(function (e) {
-		return WKCVersionAction.WKCVersionActionDelete(storageClient, e.WKCVersionID);
+		return KVCVersionAction.KVCVersionActionDelete(storageClient, e.KVCVersionID);
 	}));
 	
 	return await KVCNoteMetal.KVCNoteMetalDelete(storageClient, inputData);

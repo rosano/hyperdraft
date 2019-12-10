@@ -31,7 +31,7 @@
 const WKCStorageModule = require('./os-app/_shared/WKCStorageModule/main.js');
 const KVCNoteStorage = require('./os-app/_shared/KVCNote/storage.js');
 const KVCSettingStorage = require('./os-app/_shared/KVCSetting/storage.js');
-const WKCVersionStorage = require('./os-app/_shared/WKCVersion/storage.js');
+const KVCVersionStorage = require('./os-app/_shared/KVCVersion/storage.js');
 
 (function WKCMochaStorage() {
 	if (process.env.OLSK_TESTING_BEHAVIOUR === 'true') {
@@ -50,7 +50,7 @@ const WKCVersionStorage = require('./os-app/_shared/WKCVersion/storage.js');
 				WKCStorageModule.WKCStorageModule([
 					KVCNoteStorage.KVCNoteStorage,
 					KVCSettingStorage.KVCSettingStorage,
-					WKCVersionStorage.WKCVersionStorage,
+					KVCVersionStorage.KVCVersionStorage,
 				].map(function (e) {
 					return {
 						WKCCollectionStorageGenerator: e,

@@ -1,7 +1,7 @@
 const { rejects, deepEqual } = require('assert');
 
 const mainModule = require('./action.js');
-const WKCVersionsAction = require('../WKCVersion/action.js');
+const KVCVersionsAction = require('../KVCVersion/action.js');
 
 const kTesting = {
 	StubNoteObject() {
@@ -146,12 +146,12 @@ describe('KVCNoteActionDelete', function testKVCNoteActionDelete() {
 	});
 
 	it('deletes corresponding versionObjects', async function() {
-		await mainModule.KVCNoteActionDelete(KVCTestingStorageClient, (await WKCVersionsAction.WKCVersionActionCreate(KVCTestingStorageClient, {
-			WKCVersionBody: 'charlie',
-			WKCVersionNoteID: (await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject())).KVCNoteID,
-			WKCVersionDate: new Date(),
-		})).WKCVersionNoteID);
-		deepEqual(await WKCVersionsAction.WKCVersionActionQuery(KVCTestingStorageClient, {}), []);
+		await mainModule.KVCNoteActionDelete(KVCTestingStorageClient, (await KVCVersionsAction.KVCVersionActionCreate(KVCTestingStorageClient, {
+			KVCVersionBody: 'charlie',
+			KVCVersionNoteID: (await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject())).KVCNoteID,
+			KVCVersionDate: new Date(),
+		})).KVCVersionNoteID);
+		deepEqual(await KVCVersionsAction.KVCVersionActionQuery(KVCTestingStorageClient, {}), []);
 	});
 
 });
