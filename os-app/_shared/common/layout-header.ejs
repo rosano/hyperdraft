@@ -16,6 +16,7 @@
 	outputData.push(...[
 		`<meta http-equiv="Content-Type" content="text/html; charset=utf-8">`,
 		`<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">`,
+		`<link rel="icon" href="data:;base64,iVBORw0KGgo=">`, // https://stackoverflow.com/questions/1321878/how-to-prevent-favicon-ico-requests
 		]);
 
 	outputData.push(...Object.keys(locals.OLSKPageMetaTags || {}).map(function(e) {
