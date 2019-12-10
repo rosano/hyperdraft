@@ -1,6 +1,8 @@
 <script>
 export let WKCWriteFooterStorageStatus = '';
 export let WKCWriteFooterDispatchStorage;
+export let _WKCWriteFooterDispatchExport;
+export let _WKCWriteFooterDispatchImport;
 
 import OLSKInternational from 'OLSKInternational';
 const OLSKLocalized = function(translationConstant) {
@@ -12,20 +14,20 @@ const mod = {
 	// INTERFACE
 
 	InterfaceExportButtonDidClick () {
-		dispatch('FooterDispatchExport');
+		_WKCWriteFooterDispatchExport();
 	},
 
 	InterfaceImportButtonDidClick (event) {
-		let inputElement = event.target;
-		let reader = new FileReader();
+		const inputElement = event.target;
+		const fileReader = new FileReader();
 		
-		reader.onload = function (event) {
-			dispatch('FooterDispatchImport', event.target.result);
+		fileReader.onload = function (event) {
+			_WKCWriteFooterDispatchImport(event.target.result);
 			
 			inputElement.value = null;
 		};
 
-		reader.readAsText(event.target.files.item(0));
+		fileReader.readAsText(event.target.files.item(0));
 	},
 
 };
@@ -46,9 +48,9 @@ import RCSLanguageSwitcher from '../../../_shared/RCSLanguageSwitcher/main.svelt
 
 			<a class="WKCWriteFooterDonateLink" href={ window.OLSKPublicConstants('WKC_SHARED_DONATE_URL') } target="_blank">{ OLSKLocalized('WKCWriteFooterDonateLinkText') }</a>
 
-			<!-- <button on:click={ mod.InterfaceExportButtonDidClick }>Export</button> -->
+			<button on:click={ mod.InterfaceExportButtonDidClick }>Export</button>
 
-			<!-- <input type="file" accept=".json" on:change={ mod.InterfaceImportButtonDidClick } /> -->
+			<input type="file" accept=".json" on:change={ mod.InterfaceImportButtonDidClick } />
 		</OLSKToolbarElementGroup>
 
 		<div>

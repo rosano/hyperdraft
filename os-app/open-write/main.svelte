@@ -8,13 +8,17 @@ import OLSKThrottle from 'OLSKThrottle';
 import * as WKCStorageClient from '../_shared/WKCStorageClient/main.js';
 import { WKCStorageModule } from '../_shared/WKCStorageModule/main.js';
 import { WKCNoteStorage } from '../_shared/WKCNote/storage.js';
+import { WKCNoteModelPostJSONParse } from '../_shared/WKCNote/model.js';
 import { WKCSettingStorage } from '../_shared/WKCSetting/storage.js';
 import { WKCVersionStorage } from '../_shared/WKCVersion/storage.js';
 import WKCParser from '../_shared/WKCParser/main.js';
 import { OLSK_TESTING_BEHAVIOUR } from 'OLSKTesting';
 import * as OLSKRemoteStorage from '../_shared/__external/OLSKRemoteStorage/main.js'
 import * as WKCNoteAction from '../_shared/WKCNote/action.js';
+import * as WKCNoteMetal from '../_shared/WKCNote/metal.js';
 import * as WKCVersionAction from '../_shared/WKCVersion/action.js';
+import * as WKCSettingAction from '../_shared/WKCSetting/action.js';
+import * as WKCSettingMetal from '../_shared/WKCSetting/metal.js';
 import * as WKCWriteLogic from './ui-logic.js';
 
 const mod = {
@@ -138,12 +142,12 @@ const mod = {
 		mod.ControlFilter(inputData);
 	},
 
-	FooterDispatchExport () {
-		ControlNotesExport();
+	_WKCWriteFooterDispatchExport () {
+		mod.ControlNotesExportData();
 	},
 
-	FooterDispatchImport (event) {
-		ControlNotesImport(event.detail);
+	_WKCWriteFooterDispatchImport (inputData) {
+		mod.ControlNotesImportData(inputData);
 	},
 
 	// INTERFACE	
@@ -317,7 +321,7 @@ const mod = {
 		})).shift());
 	},
 
-	async ControlNotesExport () {
+	async ControlNotesExportData () {
 		let zip = new JSZip();
 
 		const fileName = [
@@ -335,7 +339,7 @@ const mod = {
 		});	
 	},
 
-	async ControlNotesImport (inputData) {
+	async ControlNotesImportData (inputData) {
 		let outputData;
 		try {
 			outputData = JSON.parse(inputData);
@@ -581,7 +585,12 @@ import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svel
 
 <div id="WKCWriteStorageWidget" class="OLSKMobileViewFooter" class:WKCWriteStorageWidgetHidden={ mod._ValueStorageWidgetHidden }></div>
 
-<WKCWriteFooter on:FooterDispatchExport={ mod.FooterDispatchExport } on:FooterDispatchImport={ mod.FooterDispatchImport } WKCWriteFooterStorageStatus={ mod._ValueFooterStorageStatus } WKCWriteFooterDispatchStorage={ mod.WKCWriteFooterDispatchStorage } />
+<WKCWriteFooter
+	WKCWriteFooterStorageStatus={ mod._ValueFooterStorageStatus }
+	WKCWriteFooterDispatchStorage={ mod.WKCWriteFooterDispatchStorage }
+	_WKCWriteFooterDispatchExport={ mod._WKCWriteFooterDispatchExport }
+	_WKCWriteFooterDispatchImport={ mod._WKCWriteFooterDispatchImport }
+	/>
 
 </div>
 
