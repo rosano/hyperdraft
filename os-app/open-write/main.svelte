@@ -5,8 +5,8 @@ const OLSKLocalized = function(translationConstant) {
 };
 
 import OLSKThrottle from 'OLSKThrottle';
-import * as WKCStorageClient from '../_shared/WKCStorageClient/main.js';
-import { WKCStorageModule } from '../_shared/WKCStorageModule/main.js';
+import * as KVCStorageClient from '../_shared/KVCStorageClient/main.js';
+import { KVCStorageModule } from '../_shared/KVCStorageModule/main.js';
 import { KVCNoteStorage } from '../_shared/KVCNote/storage.js';
 import { KVCNoteModelPostJSONParse } from '../_shared/KVCNote/model.js';
 import { KVCSettingStorage } from '../_shared/KVCSetting/storage.js';
@@ -411,9 +411,9 @@ const mod = {
 	},
 
 	SetupStorageClient() {
-		mod._ValueStorageClient = WKCStorageClient.WKCStorageClient({
+		mod._ValueStorageClient = KVCStorageClient.KVCStorageClient({
 			modules: [
-				WKCStorageModule([
+				KVCStorageModule([
 					KVCNoteStorage,
 					KVCVersionStorage,
 					KVCSettingStorage,

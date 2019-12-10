@@ -32,10 +32,10 @@ export const KVCNoteStorage = function (privateClient, publicClient, changeDeleg
 	});
 
 	return {
-		WKCStorageCollection: kCollection,
-		WKCStorageType: kType,
-		WKCStorageModelErrors: KVCNoteModel.KVCNoteModelErrorsFor({}),
-		WKCStorageExports: {
+		KVCStorageCollection: kCollection,
+		KVCStorageType: kType,
+		KVCStorageModelErrors: KVCNoteModel.KVCNoteModelErrorsFor({}),
+		KVCStorageExports: {
 			KVCNoteStorageCache () {
 				return privateClient.cache(KVCNoteStoragePath());
 			},

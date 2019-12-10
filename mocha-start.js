@@ -28,7 +28,7 @@
 	});
 })();
 
-const WKCStorageModule = require('./os-app/_shared/WKCStorageModule/main.js');
+const KVCStorageModule = require('./os-app/_shared/KVCStorageModule/main.js');
 const KVCNoteStorage = require('./os-app/_shared/KVCNote/storage.js');
 const KVCSettingStorage = require('./os-app/_shared/KVCSetting/storage.js');
 const KVCVersionStorage = require('./os-app/_shared/KVCVersion/storage.js');
@@ -45,9 +45,9 @@ const KVCVersionStorage = require('./os-app/_shared/KVCVersion/storage.js');
 	};
 
 	before(function(done) {
-		global.KVCTestingStorageClient = require('./os-app/_shared/WKCStorageClient/main.js').WKCStorageClient({
+		global.KVCTestingStorageClient = require('./os-app/_shared/KVCStorageClient/main.js').KVCStorageClient({
 			modules: [
-				WKCStorageModule.WKCStorageModule([
+				KVCStorageModule.KVCStorageModule([
 					KVCNoteStorage.KVCNoteStorage,
 					KVCSettingStorage.KVCSettingStorage,
 					KVCVersionStorage.KVCVersionStorage,

@@ -1,6 +1,6 @@
 import * as OLSKRemoteStorage from 'OLSKRemoteStorage';
 
-export const WKCStorageModule = function (inputData) {
+export const KVCStorageModule = function (inputData) {
 	return {
 		name: 'wikiavec',
 		builder(privateClient, publicClient) {
@@ -8,9 +8,9 @@ export const WKCStorageModule = function (inputData) {
 				exports: inputData.reduce(function (coll, item) {
 					let storage = item.WKCCollectionStorageGenerator(privateClient, publicClient, item.WKCCollectionChangeDelegate);
 
-					privateClient.declareType(storage.WKCStorageType, OLSKRemoteStorage.OLSKRemoteStorageJSONSchema(storage.WKCStorageModelErrors));
+					privateClient.declareType(storage.KVCStorageType, OLSKRemoteStorage.OLSKRemoteStorageJSONSchema(storage.KVCStorageModelErrors));
 
-					coll[storage.WKCStorageCollection] = storage.WKCStorageExports;
+					coll[storage.KVCStorageCollection] = storage.KVCStorageExports;
 
 					return coll;
 				}, {}),

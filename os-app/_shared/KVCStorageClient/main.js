@@ -1,7 +1,7 @@
 import * as RemoteStoragePackage from 'remotestoragejs';
 const RemoteStorage = RemoteStoragePackage.default || RemoteStoragePackage;
 
-export const WKCStorageClient = function (inputData) {
+export const KVCStorageClient = function (inputData) {
 	let remoteStorage = new RemoteStorage(inputData);
 
 	let outputData = {};

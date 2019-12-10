@@ -9,10 +9,10 @@ import * as KVCSettingModel from './model.js';
 
 export const KVCSettingStorage = function (privateClient, publicClient, changeDelegate) {
 	return {
-		WKCStorageCollection: kCollection,
-		WKCStorageType: kType,
-		WKCStorageModelErrors: KVCSettingModel.KVCSettingModelErrorsFor({}),
-		WKCStorageExports: {
+		KVCStorageCollection: kCollection,
+		KVCStorageType: kType,
+		KVCStorageModelErrors: KVCSettingModel.KVCSettingModelErrorsFor({}),
+		KVCStorageExports: {
 			KVCSettingStorageCache () {
 				return privateClient.cache(KVCSettingStoragePath());
 			},

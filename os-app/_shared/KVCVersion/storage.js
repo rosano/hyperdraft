@@ -10,10 +10,10 @@ export const KVCVersionStoragePath = function(inputData) {
 
 export const KVCVersionStorage = function (privateClient, publicClient, changeDelegate) {
 	return {
-		WKCStorageCollection: kCollection,
-		WKCStorageType: kType,
-		WKCStorageModelErrors: KVCVersionModel.KVCVersionModelErrorsFor({}),
-		WKCStorageExports: {
+		KVCStorageCollection: kCollection,
+		KVCStorageType: kType,
+		KVCStorageModelErrors: KVCVersionModel.KVCVersionModelErrorsFor({}),
+		KVCStorageExports: {
 			KVCVersionStorageCache () {
 				return privateClient.cache(KVCVersionStoragePath());
 			},
