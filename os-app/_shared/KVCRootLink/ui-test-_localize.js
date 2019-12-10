@@ -23,7 +23,7 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 		});
 
 		it('localizes href', function () {
-			browser.assert.attribute(KVCRootLink, 'href', OLSKTestingCanonicalFor('/', {
+			browser.assert.attribute(KVCRootLink, 'href', OLSKTestingCanonicalFor('/vitrine', {
 				OLSKRoutingLanguage: languageCode,
 			}));
 		});

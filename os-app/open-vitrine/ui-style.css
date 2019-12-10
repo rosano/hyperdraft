@@ -1,0 +1,41 @@
+:root {
+	--OLSKCommonBackground: var(--KVCCommonBackground);
+	--OLSKCommonForeground: var(--KVCCommonForeground);
+}
+
+body {
+	background: var(--KVCCommonBackground);
+	color: var(--KVCCommonForeground);
+}
+
+.KVCVitrineIdentity {
+	display: flex;
+
+	margin-top: 15px;
+
+	align-items: center;
+}
+
+.KVCVitrineIdentityLogo {
+	width: 48px;
+	height: 48px;
+
+	padding-right: 4px;
+}
+
+.KVCVitrineIdentityName {
+	margin: 0;
+}
+
+.ROCORootLink {
+	width: 70px;
+	display: block;
+
+	margin: 30px auto;
+	
+	background: #eaeaea;
+}
+
+.ROCORootLink img {
+	width: inherit;
+}

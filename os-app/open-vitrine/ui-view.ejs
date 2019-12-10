@@ -1,0 +1,42 @@
+<%
+locals.OLSKPageTitle = OLSKLocalized('KVCVitrineTitle');
+locals.OLSKPageDescription = OLSKLocalized('KVCVitrineDescription');
+locals.OLSKPageAssets = [
+	'/_shared/__external/normalize.css/normalize.css',
+	'/_shared/__external/OLSKLayout/ui-style.css',
+	'/_shared/common/ui-style.css',
+	'ui-style.css',
+	'__compiled/ui-behaviour.js',
+];
+locals.OLSKPageUseLivereload = process.env.NODE_ENV === 'development';
+locals.OLSKPagePublicConstants = {
+	OLSKSharedPageCurrentLanguage: OLSKSharedPageCurrentLanguage,
+};
+%>
+
+<%- include('../_shared/common/layout-header.ejs') %>
+
+<div class="KVCVitrine OLSKCommon">
+
+<%- include('../_shared/RCSLanguageSwitcher/main.ejs') %>
+
+<hr>
+
+<div class="KVCVitrineIdentity">
+	<img class="KVCVitrineIdentityLogo" src="/_shared/KVCRootLink/ui-assets/identity.svg" role="image" />
+	<h1 class="KVCVitrineIdentityName"><%= OLSKLocalized('KVCVitrineTitle') %></h1>
+</div>
+
+<article class="KVCVitrineContent">
+
+<%- OLSKStringReplaceTokens(KVCVitrineContent, {}) %>
+
+</article>
+
+<hr />
+
+<%- include('../_shared/ROCORootLink/main.ejs') %>
+
+</div>
+
+<%- include('../_shared/common/layout-footer.ejs') %>
