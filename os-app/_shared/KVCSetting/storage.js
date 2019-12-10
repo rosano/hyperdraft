@@ -1,4 +1,4 @@
-const kType = 'wkc_setting';
+const kType = 'kvc_setting';
 const kCollection = 'kvc_settings';
 
 export const KVCSettingStoragePath = function(inputData) {
