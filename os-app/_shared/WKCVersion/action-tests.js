@@ -25,11 +25,11 @@ const kTesting = {
 describe('WKCVersionActionCreate', function testWKCVersionActionCreate() {
 
 	it('rejects if not object', async function() {
-		await rejects(mainModule.WKCVersionActionCreate(WKCTestingStorageClient, null), /WKCErrorInputNotValid/);
+		await rejects(mainModule.WKCVersionActionCreate(KVCTestingStorageClient, null), /WKCErrorInputNotValid/);
 	});
 
 	it('returns object with WKCErrors if not valid', async function() {
-		deepEqual((await mainModule.WKCVersionActionCreate(WKCTestingStorageClient, Object.assign(kTesting.StubVersionObject(), {
+		deepEqual((await mainModule.WKCVersionActionCreate(KVCTestingStorageClient, Object.assign(kTesting.StubVersionObject(), {
 			WKCVersionBody: null,
 		}))).WKCErrors, {
 			WKCVersionBody: [
@@ -39,7 +39,7 @@ describe('WKCVersionActionCreate', function testWKCVersionActionCreate() {
 	});
 
 	it('returns WKCVersion', async function() {
-		let item = await mainModule.WKCVersionActionCreate(WKCTestingStorageClient, kTesting.StubVersionObject());
+		let item = await mainModule.WKCVersionActionCreate(KVCTestingStorageClient, kTesting.StubVersionObject());
 
 		deepEqual(item, Object.assign(kTesting.StubVersionObject(), {
 			WKCVersionID: item.WKCVersionID,
@@ -50,7 +50,7 @@ describe('WKCVersionActionCreate', function testWKCVersionActionCreate() {
 
 	it('sets WKCVersionID to unique value', async function() {
 		let items = await kTesting.uSerial(Array.from(Array(10)).map(async function (e) {
-			return (await mainModule.WKCVersionActionCreate(WKCTestingStorageClient, kTesting.StubVersionObject())).WKCVersionID;
+			return (await mainModule.WKCVersionActionCreate(KVCTestingStorageClient, kTesting.StubVersionObject())).WKCVersionID;
 		}));
 		deepEqual([...(new Set(items))], items);
 	});
@@ -60,32 +60,32 @@ describe('WKCVersionActionCreate', function testWKCVersionActionCreate() {
 describe('WKCVersionActionQuery', function testWKCVersionActionQuery() {
 
 	it('rejects if not object', async function() {
-		await rejects(mainModule.WKCVersionActionQuery(WKCTestingMongoClient, null), /WKCErrorInputNotValid/);
+		await rejects(mainModule.WKCVersionActionQuery(KVCTestingMongoClient, null), /WKCErrorInputNotValid/);
 	});
 
 	it('returns array', async function() {
-		deepEqual(await mainModule.WKCVersionActionQuery(WKCTestingStorageClient, {}), []);
+		deepEqual(await mainModule.WKCVersionActionQuery(KVCTestingStorageClient, {}), []);
 	});
 
 	it('includes all WKCVersions if no query', async function() {
 		let items = await kTesting.uSerial(['alfa', 'bravo', 'charlie'].map(async function (e) {
 			kTesting.uSleep(1);
-			return await mainModule.WKCVersionActionCreate(WKCTestingStorageClient, Object.assign(kTesting.StubVersionObject(), {
+			return await mainModule.WKCVersionActionCreate(KVCTestingStorageClient, Object.assign(kTesting.StubVersionObject(), {
 				WKCVersionBody: e,
 			}));
 		}));
 
-		deepEqual(await mainModule.WKCVersionActionQuery(WKCTestingStorageClient, {}), items.reverse());
+		deepEqual(await mainModule.WKCVersionActionQuery(KVCTestingStorageClient, {}), items.reverse());
 	});
 
 	it('filters by WKCVersionNoteID', async function() {
 		let items = await kTesting.uSerial(['alfa', 'bravo', 'charlie'].map(async function (e) {
-			return await mainModule.WKCVersionActionCreate(WKCTestingStorageClient, Object.assign(kTesting.StubVersionObject(), {
+			return await mainModule.WKCVersionActionCreate(KVCTestingStorageClient, Object.assign(kTesting.StubVersionObject(), {
 				WKCVersionNoteID: e,
 			}));
 		}));
 
-		deepEqual(await mainModule.WKCVersionActionQuery(WKCTestingStorageClient, {
+		deepEqual(await mainModule.WKCVersionActionQuery(KVCTestingStorageClient, {
 			WKCVersionNoteID: 'charlie',
 		}), items.slice(-1));
 	});
@@ -95,19 +95,19 @@ describe('WKCVersionActionQuery', function testWKCVersionActionQuery() {
 describe('WKCVersionActionDelete', function testWKCVersionActionDelete() {
 
 	it('rejects if not string', async function() {
-		await rejects(mainModule.WKCVersionActionDelete(WKCTestingStorageClient, null), /WKCErrorInputNotValid/);
+		await rejects(mainModule.WKCVersionActionDelete(KVCTestingStorageClient, null), /WKCErrorInputNotValid/);
 	});
 
 	it('returns object', async function() {
-		deepEqual(await mainModule.WKCVersionActionDelete(WKCTestingStorageClient, (await mainModule.WKCVersionActionCreate(WKCTestingStorageClient, kTesting.StubVersionObject())).WKCVersionID), {
+		deepEqual(await mainModule.WKCVersionActionDelete(KVCTestingStorageClient, (await mainModule.WKCVersionActionCreate(KVCTestingStorageClient, kTesting.StubVersionObject())).WKCVersionID), {
 			statusCode: 200,
 		});
 	});
 
 	it('deletes WKCVersion', async function() {
 		let itemID;
-		await mainModule.WKCVersionActionDelete(WKCTestingStorageClient, itemID = (await mainModule.WKCVersionActionCreate(WKCTestingStorageClient, kTesting.StubVersionObject())).WKCVersionID);
-		deepEqual(await mainModule.WKCVersionActionQuery(WKCTestingStorageClient, {
+		await mainModule.WKCVersionActionDelete(KVCTestingStorageClient, itemID = (await mainModule.WKCVersionActionCreate(KVCTestingStorageClient, kTesting.StubVersionObject())).WKCVersionID);
+		deepEqual(await mainModule.WKCVersionActionQuery(KVCTestingStorageClient, {
 			WKCVersionNoteID: itemID,
 		}), []);
 	});

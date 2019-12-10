@@ -16,11 +16,11 @@ const kTesting = {
 describe('WKCNoteMetalWrite', function testWKCNoteMetalWrite() {
 
 	it('rejects if not object', async function() {
-		await rejects(mainModule.WKCNoteMetalWrite(WKCTestingStorageClient, null), /WKCErrorInputNotValid/);
+		await rejects(mainModule.WKCNoteMetalWrite(KVCTestingStorageClient, null), /WKCErrorInputNotValid/);
 	});
 
 	it('returns object with WKCErrors if not valid', async function() {
-		deepEqual((await mainModule.WKCNoteMetalWrite(WKCTestingStorageClient, Object.assign(kTesting.StubNoteObjectValid(), {
+		deepEqual((await mainModule.WKCNoteMetalWrite(KVCTestingStorageClient, Object.assign(kTesting.StubNoteObjectValid(), {
 			WKCNoteID: null,
 		}))).WKCErrors, {
 			WKCNoteID: [
@@ -30,7 +30,7 @@ describe('WKCNoteMetalWrite', function testWKCNoteMetalWrite() {
 	});
 
 	it('resolves object', async function() {
-		let item = await mainModule.WKCNoteMetalWrite(WKCTestingStorageClient, kTesting.StubNoteObjectValid());
+		let item = await mainModule.WKCNoteMetalWrite(KVCTestingStorageClient, kTesting.StubNoteObjectValid());
 
 		deepEqual(item, Object.assign(kTesting.StubNoteObjectValid(), {
 			'@context': item['@context'],
@@ -42,17 +42,17 @@ describe('WKCNoteMetalWrite', function testWKCNoteMetalWrite() {
 describe('WKCNoteMetalRead', function testWKCNoteMetalRead() {
 
 	it('rejects if not string', async function() {
-		await rejects(mainModule.WKCNoteMetalRead(WKCTestingStorageClient, 1), /WKCErrorInputNotValid/);
+		await rejects(mainModule.WKCNoteMetalRead(KVCTestingStorageClient, 1), /WKCErrorInputNotValid/);
 	});
 
 	it('resolves null if not found', async function() {
-		deepEqual(await mainModule.WKCNoteMetalRead(WKCTestingStorageClient, 'alfa'), null);
+		deepEqual(await mainModule.WKCNoteMetalRead(KVCTestingStorageClient, 'alfa'), null);
 	});
 
 	it('resolves object', async function() {
-		let item = await mainModule.WKCNoteMetalWrite(WKCTestingStorageClient, kTesting.StubNoteObjectValid());
+		let item = await mainModule.WKCNoteMetalWrite(KVCTestingStorageClient, kTesting.StubNoteObjectValid());
 
-		deepEqual(await mainModule.WKCNoteMetalRead(WKCTestingStorageClient, item.WKCNoteID), item);
+		deepEqual(await mainModule.WKCNoteMetalRead(KVCTestingStorageClient, item.WKCNoteID), item);
 	});
 
 });
@@ -60,13 +60,13 @@ describe('WKCNoteMetalRead', function testWKCNoteMetalRead() {
 describe('WKCNoteMetalList', function testWKCNoteMetalList() {
 
 	it('resolves empty array if none', async function() {
-		deepEqual(await mainModule.WKCNoteMetalList(WKCTestingStorageClient), {});
+		deepEqual(await mainModule.WKCNoteMetalList(KVCTestingStorageClient), {});
 	});
 
 	it('resolves array', async function() {
-		let item = await mainModule.WKCNoteMetalWrite(WKCTestingStorageClient, kTesting.StubNoteObjectValid());
-		deepEqual(Object.values(await mainModule.WKCNoteMetalList(WKCTestingStorageClient)), [item]);
-		deepEqual(Object.keys(await mainModule.WKCNoteMetalList(WKCTestingStorageClient)), [item.WKCNoteID]);
+		let item = await mainModule.WKCNoteMetalWrite(KVCTestingStorageClient, kTesting.StubNoteObjectValid());
+		deepEqual(Object.values(await mainModule.WKCNoteMetalList(KVCTestingStorageClient)), [item]);
+		deepEqual(Object.keys(await mainModule.WKCNoteMetalList(KVCTestingStorageClient)), [item.WKCNoteID]);
 	});
 
 });
@@ -74,18 +74,18 @@ describe('WKCNoteMetalList', function testWKCNoteMetalList() {
 describe('WKCNoteMetalDelete', function testWKCNoteMetalDelete() {
 
 	it('rejects if not string', async function() {
-		await rejects(mainModule.WKCNoteMetalDelete(WKCTestingStorageClient, 1), /WKCErrorInputNotValid/);
+		await rejects(mainModule.WKCNoteMetalDelete(KVCTestingStorageClient, 1), /WKCErrorInputNotValid/);
 	});
 
 	it('resolves object', async function() {
-		deepEqual(await mainModule.WKCNoteMetalDelete(WKCTestingStorageClient, (await mainModule.WKCNoteMetalWrite(WKCTestingStorageClient, kTesting.StubNoteObjectValid())).WKCNoteID), {
+		deepEqual(await mainModule.WKCNoteMetalDelete(KVCTestingStorageClient, (await mainModule.WKCNoteMetalWrite(KVCTestingStorageClient, kTesting.StubNoteObjectValid())).WKCNoteID), {
 			statusCode: 200,
 		});
 	});
 
 	it('deletes WKCNote', async function() {
-		await mainModule.WKCNoteMetalDelete(WKCTestingStorageClient, (await mainModule.WKCNoteMetalWrite(WKCTestingStorageClient, kTesting.StubNoteObjectValid())).WKCNoteID);
-		deepEqual(await mainModule.WKCNoteMetalList(WKCTestingStorageClient), {});
+		await mainModule.WKCNoteMetalDelete(KVCTestingStorageClient, (await mainModule.WKCNoteMetalWrite(KVCTestingStorageClient, kTesting.StubNoteObjectValid())).WKCNoteID);
+		deepEqual(await mainModule.WKCNoteMetalList(KVCTestingStorageClient), {});
 	});
 
 });

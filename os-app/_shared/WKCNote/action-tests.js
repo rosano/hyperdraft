@@ -23,11 +23,11 @@ const kTesting = {
 describe('WKCNoteActionCreate', function testWKCNoteActionCreate() {
 
 	it('rejects if not object', async function() {
-		await rejects(mainModule.WKCNoteActionCreate(WKCTestingStorageClient, null), /WKCErrorInputNotValid/);
+		await rejects(mainModule.WKCNoteActionCreate(KVCTestingStorageClient, null), /WKCErrorInputNotValid/);
 	});
 
 	it('returns object with WKCErrors if not valid', async function() {
-		deepEqual((await mainModule.WKCNoteActionCreate(WKCTestingStorageClient, Object.assign(kTesting.StubNoteObject(), {
+		deepEqual((await mainModule.WKCNoteActionCreate(KVCTestingStorageClient, Object.assign(kTesting.StubNoteObject(), {
 			WKCNoteBody: null,
 		}))).WKCErrors, {
 			WKCNoteBody: [
@@ -37,7 +37,7 @@ describe('WKCNoteActionCreate', function testWKCNoteActionCreate() {
 	});
 
 	it('returns WKCNote', async function() {
-		let item = await mainModule.WKCNoteActionCreate(WKCTestingStorageClient, kTesting.StubNoteObject());
+		let item = await mainModule.WKCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject());
 
 		deepEqual(item, Object.assign(kTesting.StubNoteObject(), {
 			WKCNoteID: item.WKCNoteID,
@@ -49,17 +49,17 @@ describe('WKCNoteActionCreate', function testWKCNoteActionCreate() {
 
 	it('sets WKCNoteID to unique value', async function() {
 		let items = await kTesting.uSerial(Array.from(Array(10)).map(async function (e) {
-			return (await mainModule.WKCNoteActionCreate(WKCTestingStorageClient, kTesting.StubNoteObject())).WKCNoteID;
+			return (await mainModule.WKCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject())).WKCNoteID;
 		}));
 		deepEqual([...(new Set(items))], items);
 	});
 
 	it('sets WKCNoteCreationDate to now', async function() {
-		deepEqual(new Date() - (await mainModule.WKCNoteActionCreate(WKCTestingStorageClient, kTesting.StubNoteObject())).WKCNoteCreationDate < 100, true);
+		deepEqual(new Date() - (await mainModule.WKCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject())).WKCNoteCreationDate < 100, true);
 	});
 
 	it('sets WKCNoteModificationDate to now', async function() {
-		deepEqual(new Date() - (await mainModule.WKCNoteActionCreate(WKCTestingStorageClient, kTesting.StubNoteObject())).WKCNoteModificationDate < 100, true);
+		deepEqual(new Date() - (await mainModule.WKCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject())).WKCNoteModificationDate < 100, true);
 	});
 
 });
@@ -67,17 +67,17 @@ describe('WKCNoteActionCreate', function testWKCNoteActionCreate() {
 describe('WKCNoteActionRead', function testWKCNoteActionRead() {
 
 	it('rejects if not string', async function() {
-		await rejects(mainModule.WKCNoteActionRead(WKCTestingStorageClient, null), /WKCErrorInputNotValid/);
+		await rejects(mainModule.WKCNoteActionRead(KVCTestingStorageClient, null), /WKCErrorInputNotValid/);
 	});
 
 	it('returns null if not found', async function() {
-		deepEqual(await mainModule.WKCNoteActionRead(WKCTestingStorageClient, 'alfa'), null);
+		deepEqual(await mainModule.WKCNoteActionRead(KVCTestingStorageClient, 'alfa'), null);
 	});
 
 	it('returns WKCNote', async function() {
-		let item = await mainModule.WKCNoteActionCreate(WKCTestingStorageClient, kTesting.StubNoteObject());
+		let item = await mainModule.WKCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject());
 
-		deepEqual(item, await mainModule.WKCNoteActionRead(WKCTestingStorageClient, item.WKCNoteID));
+		deepEqual(item, await mainModule.WKCNoteActionRead(KVCTestingStorageClient, item.WKCNoteID));
 	});
 
 });
@@ -85,11 +85,11 @@ describe('WKCNoteActionRead', function testWKCNoteActionRead() {
 describe('WKCNoteActionUpdate', function testWKCNoteActionUpdate() {
 
 	it('rejects if not object', async function() {
-		await rejects(mainModule.WKCNoteActionUpdate(WKCTestingStorageClient, null), /WKCErrorInputNotValid/);
+		await rejects(mainModule.WKCNoteActionUpdate(KVCTestingStorageClient, null), /WKCErrorInputNotValid/);
 	});
 
 	it('returns object with WKCErrors if not valid', async function() {
-		deepEqual((await mainModule.WKCNoteActionUpdate(WKCTestingStorageClient, Object.assign(await mainModule.WKCNoteActionCreate(WKCTestingStorageClient, kTesting.StubNoteObject()), {
+		deepEqual((await mainModule.WKCNoteActionUpdate(KVCTestingStorageClient, Object.assign(await mainModule.WKCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()), {
 			WKCNoteID: null,
 		}))).WKCErrors, {
 			WKCNoteID: [
@@ -99,9 +99,9 @@ describe('WKCNoteActionUpdate', function testWKCNoteActionUpdate() {
 	});
 
 	it('returns WKCNote', async function() {
-		let itemCreated = await mainModule.WKCNoteActionCreate(WKCTestingStorageClient, kTesting.StubNoteObject());
+		let itemCreated = await mainModule.WKCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject());
 
-		let item = await mainModule.WKCNoteActionUpdate(WKCTestingStorageClient, itemCreated);
+		let item = await mainModule.WKCNoteActionUpdate(KVCTestingStorageClient, itemCreated);
 
 		deepEqual(item, Object.assign(itemCreated, {
 			WKCNoteModificationDate: item.WKCNoteModificationDate,
@@ -109,11 +109,11 @@ describe('WKCNoteActionUpdate', function testWKCNoteActionUpdate() {
 	});
 
 	it('sets WKCNoteModificationDate to now', async function() {
-		deepEqual(new Date() - (await mainModule.WKCNoteActionUpdate(WKCTestingStorageClient, await mainModule.WKCNoteActionCreate(WKCTestingStorageClient, kTesting.StubNoteObject()))).WKCNoteModificationDate < 100, true);
+		deepEqual(new Date() - (await mainModule.WKCNoteActionUpdate(KVCTestingStorageClient, await mainModule.WKCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()))).WKCNoteModificationDate < 100, true);
 	});
 
 	it('writes inputData if not found', async function() {
-		let item = await mainModule.WKCNoteActionUpdate(WKCTestingStorageClient, Object.assign(kTesting.StubNoteObject(), {
+		let item = await mainModule.WKCNoteActionUpdate(KVCTestingStorageClient, Object.assign(kTesting.StubNoteObject(), {
 			WKCNoteID: 'alfa',
 			WKCNoteCreationDate: new Date(),
 		}));
@@ -130,28 +130,28 @@ describe('WKCNoteActionUpdate', function testWKCNoteActionUpdate() {
 describe('WKCNoteActionDelete', function testWKCNoteActionDelete() {
 
 	it('rejects if not string', async function() {
-		await rejects(mainModule.WKCNoteActionDelete(WKCTestingStorageClient, null), /WKCErrorInputNotValid/);
+		await rejects(mainModule.WKCNoteActionDelete(KVCTestingStorageClient, null), /WKCErrorInputNotValid/);
 	});
 
 	it('returns object', async function() {
-		deepEqual(await mainModule.WKCNoteActionDelete(WKCTestingStorageClient, (await mainModule.WKCNoteActionCreate(WKCTestingStorageClient, kTesting.StubNoteObject())).WKCNoteID), {
+		deepEqual(await mainModule.WKCNoteActionDelete(KVCTestingStorageClient, (await mainModule.WKCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject())).WKCNoteID), {
 			statusCode: 200,
 		});
 	});
 
 	it('deletes WKCNote', async function() {
 		let itemID;
-		await mainModule.WKCNoteActionDelete(WKCTestingStorageClient, itemID = (await mainModule.WKCNoteActionCreate(WKCTestingStorageClient, kTesting.StubNoteObject())).WKCNoteID);
-		deepEqual(await mainModule.WKCNoteActionRead(WKCTestingStorageClient, itemID), null);
+		await mainModule.WKCNoteActionDelete(KVCTestingStorageClient, itemID = (await mainModule.WKCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject())).WKCNoteID);
+		deepEqual(await mainModule.WKCNoteActionRead(KVCTestingStorageClient, itemID), null);
 	});
 
 	it('deletes corresponding versionObjects', async function() {
-		await mainModule.WKCNoteActionDelete(WKCTestingStorageClient, (await WKCVersionsAction.WKCVersionActionCreate(WKCTestingStorageClient, {
+		await mainModule.WKCNoteActionDelete(KVCTestingStorageClient, (await WKCVersionsAction.WKCVersionActionCreate(KVCTestingStorageClient, {
 			WKCVersionBody: 'charlie',
-			WKCVersionNoteID: (await mainModule.WKCNoteActionCreate(WKCTestingStorageClient, kTesting.StubNoteObject())).WKCNoteID,
+			WKCVersionNoteID: (await mainModule.WKCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject())).WKCNoteID,
 			WKCVersionDate: new Date(),
 		})).WKCVersionNoteID);
-		deepEqual(await WKCVersionsAction.WKCVersionActionQuery(WKCTestingStorageClient, {}), []);
+		deepEqual(await WKCVersionsAction.WKCVersionActionQuery(KVCTestingStorageClient, {}), []);
 	});
 
 });
@@ -159,44 +159,44 @@ describe('WKCNoteActionDelete', function testWKCNoteActionDelete() {
 describe('WKCNoteActionQuery', function testWKCNoteActionQuery() {
 
 	it('rejects if not object', async function() {
-		await rejects(mainModule.WKCNoteActionQuery(WKCTestingStorageClient, null), /WKCErrorInputNotValid/);
+		await rejects(mainModule.WKCNoteActionQuery(KVCTestingStorageClient, null), /WKCErrorInputNotValid/);
 	});
 
 	it('returns array', async function() {
-		deepEqual(await mainModule.WKCNoteActionQuery(WKCTestingStorageClient, {}), []);
+		deepEqual(await mainModule.WKCNoteActionQuery(KVCTestingStorageClient, {}), []);
 	});
 
 	it('includes all WKCNotes if no query', async function() {
 		let items = await kTesting.uSerial(['alfa', 'bravo', 'charlie'].map(async function (e) {
 			kTesting.uSleep(1);
-			return await mainModule.WKCNoteActionCreate(WKCTestingStorageClient, Object.assign(kTesting.StubNoteObject(), {
+			return await mainModule.WKCNoteActionCreate(KVCTestingStorageClient, Object.assign(kTesting.StubNoteObject(), {
 				WKCNoteBody: e,
 			}));
 		}));
 
-		deepEqual(await mainModule.WKCNoteActionQuery(WKCTestingStorageClient, {}), items.reverse());
+		deepEqual(await mainModule.WKCNoteActionQuery(KVCTestingStorageClient, {}), items.reverse());
 	});
 
 	it('filters string', async function() {
 		let items = await kTesting.uSerial(['alfa', 'bravo', 'charlie'].map(async function (e) {
-			return await mainModule.WKCNoteActionCreate(WKCTestingStorageClient, Object.assign(kTesting.StubNoteObject(), {
+			return await mainModule.WKCNoteActionCreate(KVCTestingStorageClient, Object.assign(kTesting.StubNoteObject(), {
 				WKCNoteID: e,
 			}));
 		}));
 
-		deepEqual(await mainModule.WKCNoteActionQuery(WKCTestingStorageClient, {
+		deepEqual(await mainModule.WKCNoteActionQuery(KVCTestingStorageClient, {
 			WKCNoteID: items.slice(-1).pop().WKCNoteID,
 		}), items.slice(-1));
 	});
 
 	it('filters boolean', async function() {
 		let items = await kTesting.uSerial(Array.from(Array(3)).map(async function (e, index) {
-			return await mainModule.WKCNoteActionCreate(WKCTestingStorageClient, Object.assign(kTesting.StubNoteObject(), {
+			return await mainModule.WKCNoteActionCreate(KVCTestingStorageClient, Object.assign(kTesting.StubNoteObject(), {
 				WKCNotePublishStatusIsPublished: !!index,
 			}));
 		}));
 
-		deepEqual(await mainModule.WKCNoteActionQuery(WKCTestingStorageClient, {
+		deepEqual(await mainModule.WKCNoteActionQuery(KVCTestingStorageClient, {
 			WKCNotePublishStatusIsPublished: false,
 		}), items.slice(0, 1));
 	});
@@ -206,11 +206,11 @@ describe('WKCNoteActionQuery', function testWKCNoteActionQuery() {
 describe('WKCNoteActionPublish', function testWKCNoteActionPublish() {
 
 	it('rejects if not object', async function() {
-		await rejects(mainModule.WKCNoteActionPublish(WKCTestingStorageClient, null), /WKCErrorInputNotValid/);
+		await rejects(mainModule.WKCNoteActionPublish(KVCTestingStorageClient, null), /WKCErrorInputNotValid/);
 	});
 
 	it('returns object with WKCErrors if not valid', async function() {
-		deepEqual((await mainModule.WKCNoteActionPublish(WKCTestingStorageClient, Object.assign(await mainModule.WKCNoteActionCreate(WKCTestingStorageClient, kTesting.StubNoteObject()), {
+		deepEqual((await mainModule.WKCNoteActionPublish(KVCTestingStorageClient, Object.assign(await mainModule.WKCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()), {
 			WKCNoteID: null,
 		}))).WKCErrors, {
 			WKCNoteID: [
@@ -220,9 +220,9 @@ describe('WKCNoteActionPublish', function testWKCNoteActionPublish() {
 	});
 
 	it('returns WKCNote', async function() {
-		let itemCreated = await mainModule.WKCNoteActionCreate(WKCTestingStorageClient, kTesting.StubNoteObject());
+		let itemCreated = await mainModule.WKCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject());
 
-		let item = await mainModule.WKCNoteActionPublish(WKCTestingStorageClient, itemCreated);
+		let item = await mainModule.WKCNoteActionPublish(KVCTestingStorageClient, itemCreated);
 
 		deepEqual(item, Object.assign(itemCreated, {
 			WKCNoteModificationDate: item.WKCNoteModificationDate,
@@ -232,23 +232,23 @@ describe('WKCNoteActionPublish', function testWKCNoteActionPublish() {
 	});
 
 	it('sets WKCNotePublishStatusIsPublished to true', async function() {
-		deepEqual((await mainModule.WKCNoteActionPublish(WKCTestingStorageClient, await mainModule.WKCNoteActionCreate(WKCTestingStorageClient, kTesting.StubNoteObject()))).WKCNotePublishStatusIsPublished, true);
+		deepEqual((await mainModule.WKCNoteActionPublish(KVCTestingStorageClient, await mainModule.WKCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()))).WKCNotePublishStatusIsPublished, true);
 	});
 
 	it('sets WKCNotePublicID to 1 if none published', async function() {
-		deepEqual((await mainModule.WKCNoteActionPublish(WKCTestingStorageClient, await mainModule.WKCNoteActionCreate(WKCTestingStorageClient, kTesting.StubNoteObject()))).WKCNotePublicID, '1');
+		deepEqual((await mainModule.WKCNoteActionPublish(KVCTestingStorageClient, await mainModule.WKCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()))).WKCNotePublicID, '1');
 	});
 
 	it('sets WKCNotePublicID to 2 if one published and deleted', async function() {
-		mainModule.WKCNoteActionDelete(WKCTestingStorageClient, await mainModule.WKCNoteActionPublish(WKCTestingStorageClient, await mainModule.WKCNoteActionCreate(WKCTestingStorageClient, kTesting.StubNoteObject())));
-		deepEqual((await mainModule.WKCNoteActionPublish(WKCTestingStorageClient, await mainModule.WKCNoteActionCreate(WKCTestingStorageClient, kTesting.StubNoteObject()))).WKCNotePublicID, '2');
+		mainModule.WKCNoteActionDelete(KVCTestingStorageClient, await mainModule.WKCNoteActionPublish(KVCTestingStorageClient, await mainModule.WKCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject())));
+		deepEqual((await mainModule.WKCNoteActionPublish(KVCTestingStorageClient, await mainModule.WKCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()))).WKCNotePublicID, '2');
 	});
 
 	it('sets WKCNotePublicID to 3 if two published and deleted', async function() {
 		let serialPromises = async function () {
 			return ['alfa', 'bravo'].reduce(function (coll, e) {
 				return coll.then(async function () {
-					return await mainModule.WKCNoteActionDelete(WKCTestingStorageClient, (await mainModule.WKCNoteActionPublish(WKCTestingStorageClient, (await mainModule.WKCNoteActionCreate(WKCTestingStorageClient, Object.assign(kTesting.StubNoteObject(), {
+					return await mainModule.WKCNoteActionDelete(KVCTestingStorageClient, (await mainModule.WKCNoteActionPublish(KVCTestingStorageClient, (await mainModule.WKCNoteActionCreate(KVCTestingStorageClient, Object.assign(kTesting.StubNoteObject(), {
 						WKCNoteBody: e,
 					}))))).WKCNoteID);
 				});
@@ -259,7 +259,7 @@ describe('WKCNoteActionPublish', function testWKCNoteActionPublish() {
 
 		await serialPromises();
 
-		deepEqual((await mainModule.WKCNoteActionPublish(WKCTestingStorageClient, (await mainModule.WKCNoteActionCreate(WKCTestingStorageClient, kTesting.StubNoteObject())))).WKCNotePublicID, '3');
+		deepEqual((await mainModule.WKCNoteActionPublish(KVCTestingStorageClient, (await mainModule.WKCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject())))).WKCNotePublicID, '3');
 	});
 
 });
@@ -267,11 +267,11 @@ describe('WKCNoteActionPublish', function testWKCNoteActionPublish() {
 describe('WKCNoteActionRetract', function testWKCNoteActionRetract() {
 
 	it('rejects if not object', async function() {
-		await rejects(mainModule.WKCNoteActionPublish(WKCTestingStorageClient, null), /WKCErrorInputNotValid/);
+		await rejects(mainModule.WKCNoteActionPublish(KVCTestingStorageClient, null), /WKCErrorInputNotValid/);
 	});
 
 	it('returns object with WKCErrors if not valid', async function() {
-		deepEqual((await mainModule.WKCNoteActionRetract(WKCTestingStorageClient, Object.assign(await mainModule.WKCNoteActionPublish(WKCTestingStorageClient, await mainModule.WKCNoteActionCreate(WKCTestingStorageClient, kTesting.StubNoteObject())), {
+		deepEqual((await mainModule.WKCNoteActionRetract(KVCTestingStorageClient, Object.assign(await mainModule.WKCNoteActionPublish(KVCTestingStorageClient, await mainModule.WKCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject())), {
 			WKCNoteID: null,
 		}))).WKCErrors, {
 			WKCNoteID: [
@@ -281,16 +281,16 @@ describe('WKCNoteActionRetract', function testWKCNoteActionRetract() {
 	});
 
 	it('returns WKCNote', async function() {
-		let item = await mainModule.WKCNoteActionPublish(WKCTestingStorageClient, await mainModule.WKCNoteActionCreate(WKCTestingStorageClient, kTesting.StubNoteObject()));
+		let item = await mainModule.WKCNoteActionPublish(KVCTestingStorageClient, await mainModule.WKCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()));
 
-		deepEqual(await mainModule.WKCNoteActionPublish(WKCTestingStorageClient, item), Object.assign(item, {
+		deepEqual(await mainModule.WKCNoteActionPublish(KVCTestingStorageClient, item), Object.assign(item, {
 			WKCNoteModificationDate: item.WKCNoteModificationDate,
 			WKCNotePublishStatusIsPublished: item.WKCNotePublishStatusIsPublished,
 		}));
 	});
 
 	it('sets WKCNotePublishStatusIsPublished to false', async function() {
-		deepEqual((await mainModule.WKCNoteActionRetract(WKCTestingStorageClient, await mainModule.WKCNoteActionPublish(WKCTestingStorageClient, await mainModule.WKCNoteActionCreate(WKCTestingStorageClient, kTesting.StubNoteObject())))).WKCNotePublishStatusIsPublished, false);
+		deepEqual((await mainModule.WKCNoteActionRetract(KVCTestingStorageClient, await mainModule.WKCNoteActionPublish(KVCTestingStorageClient, await mainModule.WKCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject())))).WKCNotePublishStatusIsPublished, false);
 	});	
 
 });
@@ -298,18 +298,18 @@ describe('WKCNoteActionRetract', function testWKCNoteActionRetract() {
 describe('WKCNoteActionGetPublicLinks', function testWKCNoteActionGetPublicLinks() {
 
 	it('returns hash', async function() {
-		deepEqual(await mainModule.WKCNoteActionGetPublicLinks(WKCTestingStorageClient), {});
+		deepEqual(await mainModule.WKCNoteActionGetPublicLinks(KVCTestingStorageClient), {});
 	});
 
 	it('excludes if WKCNotePublishStatusIsPublished false', async function() {
-		await mainModule.WKCNoteActionCreate(WKCTestingStorageClient, kTesting.StubNoteObject());
-		deepEqual(await mainModule.WKCNoteActionGetPublicLinks(WKCTestingStorageClient), {});
+		await mainModule.WKCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject());
+		deepEqual(await mainModule.WKCNoteActionGetPublicLinks(KVCTestingStorageClient), {});
 	});
 
 	it('includes if WKCNotePublishStatusIsPublished true', async function() {
-		let item = await mainModule.WKCNoteActionPublish(WKCTestingStorageClient, (await mainModule.WKCNoteActionCreate(WKCTestingStorageClient, kTesting.StubNoteObject())));
+		let item = await mainModule.WKCNoteActionPublish(KVCTestingStorageClient, (await mainModule.WKCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject())));
 
-		deepEqual(await mainModule.WKCNoteActionGetPublicLinks(WKCTestingStorageClient), [[item.WKCNoteBody, item.WKCNotePublicID]].reduce(function (coll, e) {
+		deepEqual(await mainModule.WKCNoteActionGetPublicLinks(KVCTestingStorageClient), [[item.WKCNoteBody, item.WKCNotePublicID]].reduce(function (coll, e) {
 			coll[e[0]] = e[1];
 
 			return coll;
@@ -317,15 +317,15 @@ describe('WKCNoteActionGetPublicLinks', function testWKCNoteActionGetPublicLinks
 	});
 
 	it('selects last updated note if duplicate title', async function() {
-		await mainModule.WKCNoteActionPublish(WKCTestingStorageClient, (await mainModule.WKCNoteActionCreate(WKCTestingStorageClient, Object.assign(kTesting.StubNoteObject(), {
+		await mainModule.WKCNoteActionPublish(KVCTestingStorageClient, (await mainModule.WKCNoteActionCreate(KVCTestingStorageClient, Object.assign(kTesting.StubNoteObject(), {
 			WKCNoteBody: `heading\nalfa`,
 		}))));
 		kTesting.uSleep(1);
-		await mainModule.WKCNoteActionPublish(WKCTestingStorageClient, (await mainModule.WKCNoteActionCreate(WKCTestingStorageClient, Object.assign(kTesting.StubNoteObject(), {
+		await mainModule.WKCNoteActionPublish(KVCTestingStorageClient, (await mainModule.WKCNoteActionCreate(KVCTestingStorageClient, Object.assign(kTesting.StubNoteObject(), {
 			WKCNoteBody: `heading\nbravo`,
 		}))));
 
-		deepEqual(await mainModule.WKCNoteActionGetPublicLinks(WKCTestingStorageClient), {
+		deepEqual(await mainModule.WKCNoteActionGetPublicLinks(KVCTestingStorageClient), {
 			heading: '2',
 		});
 	});

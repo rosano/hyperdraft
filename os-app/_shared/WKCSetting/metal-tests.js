@@ -14,11 +14,11 @@ const kTesting = {
 describe('WKCSettingsMetalWrite', function testWKCSettingsMetalWrite() {
 
 	it('rejects if not object', async function() {
-		await rejects(mainModule.WKCSettingsMetalWrite(WKCTestingStorageClient, null), /WKCErrorInputNotValid/);
+		await rejects(mainModule.WKCSettingsMetalWrite(KVCTestingStorageClient, null), /WKCErrorInputNotValid/);
 	});
 
 	it('returns object with WKCErrors if not valid', async function() {
-		deepEqual((await mainModule.WKCSettingsMetalWrite(WKCTestingStorageClient, Object.assign(kTesting.StubSettingObjectValid(), {
+		deepEqual((await mainModule.WKCSettingsMetalWrite(KVCTestingStorageClient, Object.assign(kTesting.StubSettingObjectValid(), {
 			WKCSettingKey: null,
 		}))).WKCErrors, {
 			WKCSettingKey: [
@@ -28,7 +28,7 @@ describe('WKCSettingsMetalWrite', function testWKCSettingsMetalWrite() {
 	});
 
 	it('returns WKCSetting', async function() {
-		let item = await mainModule.WKCSettingsMetalWrite(WKCTestingStorageClient, kTesting.StubSettingObjectValid());
+		let item = await mainModule.WKCSettingsMetalWrite(KVCTestingStorageClient, kTesting.StubSettingObjectValid());
 
 		deepEqual(item, Object.assign(kTesting.StubSettingObjectValid(), {
 			'@context': item['@context'],
@@ -40,17 +40,17 @@ describe('WKCSettingsMetalWrite', function testWKCSettingsMetalWrite() {
 describe('WKCSettingsMetalRead', function testWKCSettingsMetalRead() {
 
 	it('rejects if not string', async function() {
-		await rejects(mainModule.WKCSettingsMetalRead(WKCTestingStorageClient, 1), /WKCErrorInputNotValid/);
+		await rejects(mainModule.WKCSettingsMetalRead(KVCTestingStorageClient, 1), /WKCErrorInputNotValid/);
 	});
 
 	it('returns null if not found', async function() {
-		deepEqual(await mainModule.WKCSettingsMetalRead(WKCTestingStorageClient, 'alfa'), null);
+		deepEqual(await mainModule.WKCSettingsMetalRead(KVCTestingStorageClient, 'alfa'), null);
 	});
 
 	it('returns WKCSetting', async function() {
-		let item = await mainModule.WKCSettingsMetalWrite(WKCTestingStorageClient, kTesting.StubSettingObjectValid());
+		let item = await mainModule.WKCSettingsMetalWrite(KVCTestingStorageClient, kTesting.StubSettingObjectValid());
 
-		deepEqual(await mainModule.WKCSettingsMetalRead(WKCTestingStorageClient, item.WKCSettingKey), item);
+		deepEqual(await mainModule.WKCSettingsMetalRead(KVCTestingStorageClient, item.WKCSettingKey), item);
 	});
 
 });
@@ -58,13 +58,13 @@ describe('WKCSettingsMetalRead', function testWKCSettingsMetalRead() {
 describe('WKCSettingsMetalList', function testWKCSettingsMetalList() {
 
 	it('returns empty array if none', async function() {
-		deepEqual(await mainModule.WKCSettingsMetalList(WKCTestingStorageClient), {});
+		deepEqual(await mainModule.WKCSettingsMetalList(KVCTestingStorageClient), {});
 	});
 
 	it('returns existing WKCSettings', async function() {
-		let item = await mainModule.WKCSettingsMetalWrite(WKCTestingStorageClient, kTesting.StubSettingObjectValid());
-		deepEqual(Object.values(await mainModule.WKCSettingsMetalList(WKCTestingStorageClient)), [item]);
-		deepEqual(Object.keys(await mainModule.WKCSettingsMetalList(WKCTestingStorageClient)), [item.WKCSettingKey]);
+		let item = await mainModule.WKCSettingsMetalWrite(KVCTestingStorageClient, kTesting.StubSettingObjectValid());
+		deepEqual(Object.values(await mainModule.WKCSettingsMetalList(KVCTestingStorageClient)), [item]);
+		deepEqual(Object.keys(await mainModule.WKCSettingsMetalList(KVCTestingStorageClient)), [item.WKCSettingKey]);
 	});
 
 });
@@ -72,18 +72,18 @@ describe('WKCSettingsMetalList', function testWKCSettingsMetalList() {
 describe('WKCSettingsMetalDelete', function testWKCSettingsMetalDelete() {
 
 	it('rejects if not string', async function() {
-		await rejects(mainModule.WKCSettingsMetalDelete(WKCTestingStorageClient, 1), /WKCErrorInputNotValid/);
+		await rejects(mainModule.WKCSettingsMetalDelete(KVCTestingStorageClient, 1), /WKCErrorInputNotValid/);
 	});
 
 	it('returns statusCode', async function() {
-		deepEqual(await mainModule.WKCSettingsMetalDelete(WKCTestingStorageClient, (await mainModule.WKCSettingsMetalWrite(WKCTestingStorageClient, kTesting.StubSettingObjectValid())).WKCSettingKey), {
+		deepEqual(await mainModule.WKCSettingsMetalDelete(KVCTestingStorageClient, (await mainModule.WKCSettingsMetalWrite(KVCTestingStorageClient, kTesting.StubSettingObjectValid())).WKCSettingKey), {
 			statusCode: 200,
 		});
 	});
 
 	it('deletes WKCSetting', async function() {
-		await mainModule.WKCSettingsMetalDelete(WKCTestingStorageClient, (await mainModule.WKCSettingsMetalWrite(WKCTestingStorageClient, kTesting.StubSettingObjectValid())).WKCSettingKey);
-		deepEqual(await mainModule.WKCSettingsMetalList(WKCTestingStorageClient), {});
+		await mainModule.WKCSettingsMetalDelete(KVCTestingStorageClient, (await mainModule.WKCSettingsMetalWrite(KVCTestingStorageClient, kTesting.StubSettingObjectValid())).WKCSettingKey);
+		deepEqual(await mainModule.WKCSettingsMetalList(KVCTestingStorageClient), {});
 	});
 
 });

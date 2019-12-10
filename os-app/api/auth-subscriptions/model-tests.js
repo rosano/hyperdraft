@@ -61,12 +61,12 @@ describe('WKCSubscriptionHandlerCustomTwitterTimelineRequestCallback', function 
 
 	it('throws error if param1 not function', function() {
 		assert.throws(function() {
-			mainModule.WKCSubscriptionHandlerCustomTwitterTimelineRequestCallback(WKCTestingMongoClient, null);
+			mainModule.WKCSubscriptionHandlerCustomTwitterTimelineRequestCallback(KVCTestingMongoClient, null);
 		}, /WKCErrorInputNotValid/);
 	});
 
 	it('returns error if no kWKCSettingKeyCustomTwitterToken', function(done) {
-		mainModule.WKCSubscriptionHandlerCustomTwitterTimelineRequestCallback(WKCTestingMongoClient, function(err, responseJSON) {
+		mainModule.WKCSubscriptionHandlerCustomTwitterTimelineRequestCallback(KVCTestingMongoClient, function(err, responseJSON) {
 			assert.deepEqual(err.message, 'WKCErrorCustomTwitterMissingToken');
 			assert.deepEqual(err.responseJSON, undefined);
 
@@ -75,11 +75,11 @@ describe('WKCSubscriptionHandlerCustomTwitterTimelineRequestCallback', function 
 	});
 
 	it('returns kWKCSettingKeyCustomTwitterToken', function(done) {
-		WKCTestingMongoClient.db(process.env.KVC_SHARED_DATABASE_NAME).collection('kvc_settings').insertOne({
+		KVCTestingMongoClient.db(process.env.KVC_SHARED_DATABASE_NAME).collection('kvc_settings').insertOne({
 			WKCSettingKey: 'kWKCSettingKeyCustomTwitterToken',
 			WKCSettingValue: 'alfa',
 		}, function(err, result) {
-			mainModule.WKCSubscriptionHandlerCustomTwitterTimelineRequestCallback(WKCTestingMongoClient, function(err, responseJSON) {
+			mainModule.WKCSubscriptionHandlerCustomTwitterTimelineRequestCallback(KVCTestingMongoClient, function(err, responseJSON) {
 				assert.deepEqual(err, undefined);
 				assert.deepEqual(responseJSON, {
 					auth: {

@@ -9,22 +9,22 @@
 				throw err;
 			}
 
-			global.WKCTestingMongoClient = client;
+			global.KVCTestingMongoClient = client;
 
 			done();
 		});
 	});
 
 	after(function() {
-		if (!global.WKCTestingMongoClient) {
+		if (!global.KVCTestingMongoClient) {
 			return;
 		}
 
-		global.WKCTestingMongoClient.close();
+		global.KVCTestingMongoClient.close();
 	});
 
 	beforeEach(async function() {
-		global.WKCTestingMongoClient.db(process.env.KVC_SHARED_DATABASE_NAME).dropDatabase();
+		global.KVCTestingMongoClient.db(process.env.KVC_SHARED_DATABASE_NAME).dropDatabase();
 	});
 })();
 
@@ -45,7 +45,7 @@ const WKCVersionStorage = require('./os-app/_shared/WKCVersion/storage.js');
 	};
 
 	before(function(done) {
-		global.WKCTestingStorageClient = require('./os-app/_shared/WKCStorageClient/main.js').WKCStorageClient({
+		global.KVCTestingStorageClient = require('./os-app/_shared/WKCStorageClient/main.js').WKCStorageClient({
 			modules: [
 				WKCStorageModule.WKCStorageModule([
 					WKCNoteStorage.WKCNoteStorage,
@@ -69,7 +69,7 @@ const WKCVersionStorage = require('./os-app/_shared/WKCVersion/storage.js');
 			'kvc_settings',
 			'kvc_versions',
 		].map(async function (e) {
-			return await Promise.all(Object.keys(await global.WKCTestingStorageClient.wikiavec[e].listObjects()).map(global.WKCTestingStorageClient.wikiavec[e].deleteObject));
+			return await Promise.all(Object.keys(await global.KVCTestingStorageClient.wikiavec[e].listObjects()).map(global.KVCTestingStorageClient.wikiavec[e].deleteObject));
 		}));
 	});
 })();

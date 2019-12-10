@@ -22,18 +22,18 @@ describe('WKCMetalSubscriptionsCreate', function testWKCMetalSubscriptionsCreate
 
 	it('throws error if param2 not object', function() {
 		assert.throws(function() {
-			mainModule.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, '', function() {});
+			mainModule.WKCMetalSubscriptionsCreate(KVCTestingMongoClient, '', function() {});
 		}, /WKCErrorInputNotValid/);
 	});
 
 	it('throws error if param3 not function', function() {
 		assert.throws(function() {
-			mainModule.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, {}, null);
+			mainModule.WKCMetalSubscriptionsCreate(KVCTestingMongoClient, {}, null);
 		}, /WKCErrorInputNotValid/);
 	});
 
 	it('returns WKCErrors if not valid WKCSubscription', function(done) {
-		mainModule.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, {
+		mainModule.WKCMetalSubscriptionsCreate(KVCTestingMongoClient, {
 			WKCSubscriptionURL: 'google.com',
 			WKCSubscriptionHandler: modelLibrary.WKCSubscriptionHandlerPage(),
 		}, function(err, responseJSON) {
@@ -48,7 +48,7 @@ describe('WKCMetalSubscriptionsCreate', function testWKCMetalSubscriptionsCreate
 	});
 
 	it('returns WKCSubscription', function(done) {
-		mainModule.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, kTesting.StubValidSubscription(), function(err, responseJSON) {
+		mainModule.WKCMetalSubscriptionsCreate(KVCTestingMongoClient, kTesting.StubValidSubscription(), function(err, responseJSON) {
 			assert.deepEqual(responseJSON, Object.assign(kTesting.StubValidSubscription(), {
 				WKCSubscriptionID: responseJSON.WKCSubscriptionID,
 				WKCSubscriptionDateCreated: responseJSON.WKCSubscriptionDateCreated,
@@ -69,18 +69,18 @@ describe('WKCMetalSubscriptionsRead', function testWKCMetalSubscriptionsRead() {
 
 	it('throws error if param2 not string', function() {
 		assert.throws(function() {
-			mainModule.WKCMetalSubscriptionsRead(WKCTestingMongoClient, 1, function() {});
+			mainModule.WKCMetalSubscriptionsRead(KVCTestingMongoClient, 1, function() {});
 		}, /WKCErrorInputNotValid/);
 	});
 
 	it('throws error if param3 not function', function() {
 		assert.throws(function() {
-			mainModule.WKCMetalSubscriptionsRead(WKCTestingMongoClient, '1', null);
+			mainModule.WKCMetalSubscriptionsRead(KVCTestingMongoClient, '1', null);
 		}, /WKCErrorInputNotValid/);
 	});
 
 	it('returns error if WKCSubscriptionID not found', function(done) {
-		mainModule.WKCMetalSubscriptionsRead(WKCTestingMongoClient, '0', function(err) {
+		mainModule.WKCMetalSubscriptionsRead(KVCTestingMongoClient, '0', function(err) {
 			assert.deepEqual(err, new Error('WKCErrorNotFound'));
 
 			done();
@@ -88,8 +88,8 @@ describe('WKCMetalSubscriptionsRead', function testWKCMetalSubscriptionsRead() {
 	});
 
 	it('returns WKCSubscription', function(done) {
-		mainModule.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, kTesting.StubValidSubscription(), function(err, subscriptionObject) {
-			mainModule.WKCMetalSubscriptionsRead(WKCTestingMongoClient, subscriptionObject.WKCSubscriptionID, function(err, responseJSON) {
+		mainModule.WKCMetalSubscriptionsCreate(KVCTestingMongoClient, kTesting.StubValidSubscription(), function(err, subscriptionObject) {
+			mainModule.WKCMetalSubscriptionsRead(KVCTestingMongoClient, subscriptionObject.WKCSubscriptionID, function(err, responseJSON) {
 				assert.deepEqual(responseJSON, subscriptionObject);
 
 				done();
@@ -103,24 +103,24 @@ describe('WKCMetalSubscriptionsUpdate', function testWKCMetalSubscriptionsUpdate
 
 	it('throws error if param2 not string', function() {
 		assert.throws(function() {
-			mainModule.WKCMetalSubscriptionsUpdate(WKCTestingMongoClient, 1, {}, function() {});
+			mainModule.WKCMetalSubscriptionsUpdate(KVCTestingMongoClient, 1, {}, function() {});
 		}, /WKCErrorInputNotValid/);
 	});
 
 	it('throws error if param3 not object', function() {
 		assert.throws(function() {
-			mainModule.WKCMetalSubscriptionsUpdate(WKCTestingMongoClient, '1', null, function() {});
+			mainModule.WKCMetalSubscriptionsUpdate(KVCTestingMongoClient, '1', null, function() {});
 		}, /WKCErrorInputNotValid/);
 	});
 
 	it('throws error if param4 not function', function() {
 		assert.throws(function() {
-			mainModule.WKCMetalSubscriptionsUpdate(WKCTestingMongoClient, '1', {}, null);
+			mainModule.WKCMetalSubscriptionsUpdate(KVCTestingMongoClient, '1', {}, null);
 		}, /WKCErrorInputNotValid/);
 	});
 
 	it('returns error if WKCSubscriptionID not found', function(done) {
-		mainModule.WKCMetalSubscriptionsUpdate(WKCTestingMongoClient, '0', kTesting.StubValidSubscription(), function(err) {
+		mainModule.WKCMetalSubscriptionsUpdate(KVCTestingMongoClient, '0', kTesting.StubValidSubscription(), function(err) {
 			assert.deepEqual(err, new Error('WKCErrorNotFound'));
 
 			done();
@@ -128,8 +128,8 @@ describe('WKCMetalSubscriptionsUpdate', function testWKCMetalSubscriptionsUpdate
 	});
 
 	it('returns WKCErrors if not valid WKCSubscription', function(done) {
-		mainModule.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, kTesting.StubValidSubscription(), function(err, subscriptionObject) {
-			mainModule.WKCMetalSubscriptionsUpdate(WKCTestingMongoClient, subscriptionObject.WKCSubscriptionID, {
+		mainModule.WKCMetalSubscriptionsCreate(KVCTestingMongoClient, kTesting.StubValidSubscription(), function(err, subscriptionObject) {
+			mainModule.WKCMetalSubscriptionsUpdate(KVCTestingMongoClient, subscriptionObject.WKCSubscriptionID, {
 				WKCSubscriptionURL: 'google.com',
 			}, function(err, responseJSON) {
 				assert.deepEqual(responseJSON.WKCErrors, {
@@ -144,10 +144,10 @@ describe('WKCMetalSubscriptionsUpdate', function testWKCMetalSubscriptionsUpdate
 	});
 
 	it('returns WKCSubscription', function(done) {
-		mainModule.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, kTesting.StubValidSubscription(), function(err, subscriptionObject) {
+		mainModule.WKCMetalSubscriptionsCreate(KVCTestingMongoClient, kTesting.StubValidSubscription(), function(err, subscriptionObject) {
 			var newURL = 'https://yahoo.com';
 
-			mainModule.WKCMetalSubscriptionsUpdate(WKCTestingMongoClient, subscriptionObject.WKCSubscriptionID, {
+			mainModule.WKCMetalSubscriptionsUpdate(KVCTestingMongoClient, subscriptionObject.WKCSubscriptionID, {
 				WKCSubscriptionURL: newURL,
 			}, function(err, responseJSON) {
 				assert.deepEqual(responseJSON, Object.assign(subscriptionObject, {
@@ -167,18 +167,18 @@ describe('WKCMetalSubscriptionsDelete', function testWKCMetalSubscriptionsDelete
 
 	it('throws error if param2 not string', function() {
 		assert.throws(function() {
-			mainModule.WKCMetalSubscriptionsDelete(WKCTestingMongoClient, 1, function() {});
+			mainModule.WKCMetalSubscriptionsDelete(KVCTestingMongoClient, 1, function() {});
 		}, /WKCErrorInputNotValid/);
 	});
 
 	it('throws error if param3 not function', function() {
 		assert.throws(function() {
-			mainModule.WKCMetalSubscriptionsDelete(WKCTestingMongoClient, '1', null);
+			mainModule.WKCMetalSubscriptionsDelete(KVCTestingMongoClient, '1', null);
 		}, /WKCErrorInputNotValid/);
 	});
 
 	it('returns error if WKCSubscriptionID not found', function(done) {
-		mainModule.WKCMetalSubscriptionsDelete(WKCTestingMongoClient, '0', function(err) {
+		mainModule.WKCMetalSubscriptionsDelete(KVCTestingMongoClient, '0', function(err) {
 			assert.deepEqual(err, new Error('WKCErrorNotFound'));
 
 			done();
@@ -186,8 +186,8 @@ describe('WKCMetalSubscriptionsDelete', function testWKCMetalSubscriptionsDelete
 	});
 
 	it('returns WKCSubscription', function(done) {
-		mainModule.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, kTesting.StubValidSubscription(), function(err, responseJSON) {
-			mainModule.WKCMetalSubscriptionsDelete(WKCTestingMongoClient, responseJSON.WKCSubscriptionID, function(err, responseJSON) {
+		mainModule.WKCMetalSubscriptionsCreate(KVCTestingMongoClient, kTesting.StubValidSubscription(), function(err, responseJSON) {
+			mainModule.WKCMetalSubscriptionsDelete(KVCTestingMongoClient, responseJSON.WKCSubscriptionID, function(err, responseJSON) {
 				assert.deepEqual(responseJSON, true);
 
 				done();
@@ -201,19 +201,19 @@ describe('WKCMetalSubscriptionsSearch', function testWKCMetalSubscriptionsSearch
 
 	it('throws error if param3 not function', function() {
 		assert.throws(function() {
-			mainModule.WKCMetalSubscriptionsSearch(WKCTestingMongoClient, '', null);
+			mainModule.WKCMetalSubscriptionsSearch(KVCTestingMongoClient, '', null);
 		}, /WKCErrorInputNotValid/);
 	});
 
 	it('throws error if param4 not object', function() {
 		assert.throws(function() {
-			mainModule.WKCMetalSubscriptionsNeedingFetch(WKCTestingMongoClient, '', function() {}, null);
+			mainModule.WKCMetalSubscriptionsNeedingFetch(KVCTestingMongoClient, '', function() {}, null);
 		}, /WKCErrorInputNotValid/);
 	});
 
 	it('returns all if param2 empty', function(done) {
-		mainModule.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, kTesting.StubValidSubscription(), function(err, subscriptionObject) {
-			mainModule.WKCMetalSubscriptionsSearch(WKCTestingMongoClient, '', function(err, responseJSON) {
+		mainModule.WKCMetalSubscriptionsCreate(KVCTestingMongoClient, kTesting.StubValidSubscription(), function(err, subscriptionObject) {
+			mainModule.WKCMetalSubscriptionsSearch(KVCTestingMongoClient, '', function(err, responseJSON) {
 				assert.deepEqual(responseJSON, [subscriptionObject]);
 
 				done();
@@ -224,12 +224,12 @@ describe('WKCMetalSubscriptionsSearch', function testWKCMetalSubscriptionsSearch
 	context('WKCOptionExcludeWKCSubscriptionFetchContent', function () {
 
 		it('returns with WKCSubscriptionFetchContent if true', function(done) {
-			mainModule.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTesting.StubValidSubscription(), {
+			mainModule.WKCMetalSubscriptionsCreate(KVCTestingMongoClient, Object.assign(kTesting.StubValidSubscription(), {
 				WKCSubscriptionFetchContent: 'alfa',
 			}), function(err, subscriptionObject1) {
 				delete subscriptionObject1.WKCSubscriptionFetchContent;
 				
-				mainModule.WKCMetalSubscriptionsSearch(WKCTestingMongoClient, '', function(err, responseJSON) {
+				mainModule.WKCMetalSubscriptionsSearch(KVCTestingMongoClient, '', function(err, responseJSON) {
 					assert.deepEqual(responseJSON, [subscriptionObject1]);
 
 					done();
@@ -240,10 +240,10 @@ describe('WKCMetalSubscriptionsSearch', function testWKCMetalSubscriptionsSearch
 		});
 
 		it('returns without WKCSubscriptionFetchContent', function(done) {
-			mainModule.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTesting.StubValidSubscription(), {
+			mainModule.WKCMetalSubscriptionsCreate(KVCTestingMongoClient, Object.assign(kTesting.StubValidSubscription(), {
 				WKCSubscriptionFetchContent: 'alfa',
 			}), function(err, subscriptionObject1) {
-				mainModule.WKCMetalSubscriptionsSearch(WKCTestingMongoClient, '', function(err, responseJSON) {
+				mainModule.WKCMetalSubscriptionsSearch(KVCTestingMongoClient, '', function(err, responseJSON) {
 					assert.deepEqual(responseJSON, [subscriptionObject1]);
 
 					done();
@@ -259,20 +259,20 @@ describe('WKCMetalSubscriptionsNeedingFetch', function testWKCMetalSubscriptions
 
 	it('throws error if param2 not function', function() {
 		assert.throws(function() {
-			mainModule.WKCMetalSubscriptionsNeedingFetch(WKCTestingMongoClient, null);
+			mainModule.WKCMetalSubscriptionsNeedingFetch(KVCTestingMongoClient, null);
 		}, /WKCErrorInputNotValid/);
 	});
 
 	it('returns subscriptionObjects with fetch date older than one hour', function(done) {
-		mainModule.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTesting.StubValidSubscription(), {
+		mainModule.WKCMetalSubscriptionsCreate(KVCTestingMongoClient, Object.assign(kTesting.StubValidSubscription(), {
 			WKCSubscriptionName: 'alfa',
 			WKCSubscriptionFetchDate: new Date(new Date() - 1000 * 60 * 60),
 		}), function(err, subscriptionObject1) {
-			mainModule.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTesting.StubValidSubscription(), {
+			mainModule.WKCMetalSubscriptionsCreate(KVCTestingMongoClient, Object.assign(kTesting.StubValidSubscription(), {
 				WKCSubscriptionName: 'bravo',
 				WKCSubscriptionFetchDate: new Date(),
 			}), function(err, subscriptionObject2) {
-				mainModule.WKCMetalSubscriptionsNeedingFetch(WKCTestingMongoClient, function(err, responseJSON) {
+				mainModule.WKCMetalSubscriptionsNeedingFetch(KVCTestingMongoClient, function(err, responseJSON) {
 					assert.deepEqual(responseJSON, [subscriptionObject1]);
 
 					done();
@@ -282,14 +282,14 @@ describe('WKCMetalSubscriptionsNeedingFetch', function testWKCMetalSubscriptions
 	});
 
 	it('returns subscriptionObjects with no fetch date', function(done) {
-		mainModule.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTesting.StubValidSubscription(), {
+		mainModule.WKCMetalSubscriptionsCreate(KVCTestingMongoClient, Object.assign(kTesting.StubValidSubscription(), {
 			WKCSubscriptionName: 'alfa',
 			WKCSubscriptionFetchDate: new Date(),
 		}), function(err, subscriptionObject1) {
-			mainModule.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTesting.StubValidSubscription(), {
+			mainModule.WKCMetalSubscriptionsCreate(KVCTestingMongoClient, Object.assign(kTesting.StubValidSubscription(), {
 				WKCSubscriptionName: 'bravo',
 			}), function(err, subscriptionObject2) {
-				mainModule.WKCMetalSubscriptionsNeedingFetch(WKCTestingMongoClient, function(err, responseJSON) {
+				mainModule.WKCMetalSubscriptionsNeedingFetch(KVCTestingMongoClient, function(err, responseJSON) {
 					assert.deepEqual(responseJSON, [subscriptionObject2]);
 
 					done();
@@ -301,16 +301,16 @@ describe('WKCMetalSubscriptionsNeedingFetch', function testWKCMetalSubscriptions
 	context('WKCSubscriptionErrorDate', function() {
 
 		it('excludes if less than one hour', function(done) {
-			mainModule.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTesting.StubValidSubscription(), {
+			mainModule.WKCMetalSubscriptionsCreate(KVCTestingMongoClient, Object.assign(kTesting.StubValidSubscription(), {
 				WKCSubscriptionName: 'alfa',
 				WKCSubscriptionFetchDate: new Date(new Date() - 1000 * 60 * 60),
 				WKCSubscriptionErrorDate: new Date(),
 			}), function(err, subscriptionObject) {
-				mainModule.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTesting.StubValidSubscription(), {
+				mainModule.WKCMetalSubscriptionsCreate(KVCTestingMongoClient, Object.assign(kTesting.StubValidSubscription(), {
 					WKCSubscriptionName: 'bravo',
 					WKCSubscriptionFetchDate: new Date(),
 				}), function(err, subscriptionObject) {
-					mainModule.WKCMetalSubscriptionsNeedingFetch(WKCTestingMongoClient, function(err, responseJSON) {
+					mainModule.WKCMetalSubscriptionsNeedingFetch(KVCTestingMongoClient, function(err, responseJSON) {
 						assert.deepEqual(responseJSON, []);
 
 						done();
@@ -320,16 +320,16 @@ describe('WKCMetalSubscriptionsNeedingFetch', function testWKCMetalSubscriptions
 		});
 
 		it('includes if older than one hour', function(done) {
-			mainModule.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTesting.StubValidSubscription(), {
+			mainModule.WKCMetalSubscriptionsCreate(KVCTestingMongoClient, Object.assign(kTesting.StubValidSubscription(), {
 				WKCSubscriptionName: 'alfa',
 				WKCSubscriptionFetchDate: new Date(new Date() - 1000 * 60 * 60),
 				WKCSubscriptionErrorDate: new Date(new Date() - 1000 * 60 * 60),
 			}), function(err, subscriptionObject1) {
-				mainModule.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTesting.StubValidSubscription(), {
+				mainModule.WKCMetalSubscriptionsCreate(KVCTestingMongoClient, Object.assign(kTesting.StubValidSubscription(), {
 					WKCSubscriptionName: 'bravo',
 					WKCSubscriptionFetchDate: new Date(),
 				}), function(err, subscriptionObject2) {
-					mainModule.WKCMetalSubscriptionsNeedingFetch(WKCTestingMongoClient, function(err, responseJSON) {
+					mainModule.WKCMetalSubscriptionsNeedingFetch(KVCTestingMongoClient, function(err, responseJSON) {
 						assert.deepEqual(responseJSON, [subscriptionObject1]);
 
 						done();
@@ -343,16 +343,16 @@ describe('WKCMetalSubscriptionsNeedingFetch', function testWKCMetalSubscriptions
 	context('WKCSubscriptionIsPaused', function() {
 
 		it('excludes if true', function(done) {
-			mainModule.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTesting.StubValidSubscription(), {
+			mainModule.WKCMetalSubscriptionsCreate(KVCTestingMongoClient, Object.assign(kTesting.StubValidSubscription(), {
 				WKCSubscriptionName: 'alfa',
 				WKCSubscriptionFetchDate: new Date(new Date() - 1000 * 60 * 60),
 				WKCSubscriptionIsPaused: true,
 			}), function(err, subscriptionObject) {
-				mainModule.WKCMetalSubscriptionsCreate(WKCTestingMongoClient, Object.assign(kTesting.StubValidSubscription(), {
+				mainModule.WKCMetalSubscriptionsCreate(KVCTestingMongoClient, Object.assign(kTesting.StubValidSubscription(), {
 					WKCSubscriptionName: 'bravo',
 					WKCSubscriptionFetchDate: new Date(),
 				}), function(err, subscriptionObject) {
-					mainModule.WKCMetalSubscriptionsNeedingFetch(WKCTestingMongoClient, function(err, responseJSON) {
+					mainModule.WKCMetalSubscriptionsNeedingFetch(KVCTestingMongoClient, function(err, responseJSON) {
 						assert.deepEqual(responseJSON, []);
 
 						done();
@@ -369,24 +369,24 @@ describe('WKCSubscriptionsMetalRequestParameters', function testWKCSubscriptions
 
 	it('throws error if param2 not string', function() {
 		assert.throws(function() {
-			mainModule.WKCSubscriptionsMetalRequestParameters(WKCTestingMongoClient, null, function () {});
+			mainModule.WKCSubscriptionsMetalRequestParameters(KVCTestingMongoClient, null, function () {});
 		}, /WKCErrorInputNotValid/);
 	});
 
 	it('throws error if param3 not function', function() {
 		assert.throws(function() {
-			mainModule.WKCSubscriptionsMetalRequestParameters(WKCTestingMongoClient, '', null);
+			mainModule.WKCSubscriptionsMetalRequestParameters(KVCTestingMongoClient, '', null);
 		}, /WKCErrorInputNotValid/);
 	});
 
 	it('throws error if param3 not object', function() {
 		assert.throws(function() {
-			mainModule.WKCSubscriptionsMetalRequestParameters(WKCTestingMongoClient, '', function() {}, null);
+			mainModule.WKCSubscriptionsMetalRequestParameters(KVCTestingMongoClient, '', function() {}, null);
 		}, /WKCErrorInputNotValid/);
 	});
 
 	it('returns parameters', function(done) {
-		mainModule.WKCSubscriptionsMetalRequestParameters(WKCTestingMongoClient, 'alfa', function(err, responseJSON) {
+		mainModule.WKCSubscriptionsMetalRequestParameters(KVCTestingMongoClient, 'alfa', function(err, responseJSON) {
 			assert.deepEqual(responseJSON, {
 				method: 'GET',
 				uri: 'alfa',
@@ -399,11 +399,11 @@ describe('WKCSubscriptionsMetalRequestParameters', function testWKCSubscriptions
 	context('WKCOptionHandler', function () {
 
 		it('returns parameters if WKCSubscriptionHandlerCustomTwitterTimeline', function(done) {
-			WKCTestingMongoClient.db(process.env.KVC_SHARED_DATABASE_NAME).collection('kvc_settings').insertOne({
+			KVCTestingMongoClient.db(process.env.KVC_SHARED_DATABASE_NAME).collection('kvc_settings').insertOne({
 				WKCSettingKey: 'kWKCSettingKeyCustomTwitterToken',
 				WKCSettingValue: 'bravo',
 			}, function(err, result) {
-				mainModule.WKCSubscriptionsMetalRequestParameters(WKCTestingMongoClient, 'alfa', function(err, responseJSON) {
+				mainModule.WKCSubscriptionsMetalRequestParameters(KVCTestingMongoClient, 'alfa', function(err, responseJSON) {
 					assert.deepEqual(responseJSON, {
 						method: 'GET',
 						uri: 'alfa',
