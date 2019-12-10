@@ -1,4 +1,4 @@
-.WKCWrite {
+.KVCWrite {
 	--WKCBorderStyle: 1px solid #ddd;
 	
 	font-family: 'Helvetica Neue', 'Helvetica', sans-serif;
@@ -8,7 +8,7 @@
 	color: var(--KVCCommonForeground);
 }
 
-#WKCWriteStorageWidget {
+#KVCWriteStorageWidget {
 	border-top: var(--WKCBorderStyle);
 	
 	background: var(--KVCCommonBackground);
@@ -17,14 +17,14 @@
 	flex-shrink: 0;
 }
 
-.WKCWriteStorageWidgetHidden {
+.KVCWriteStorageWidgetHidden {
 	display: none;
 }
 
 @media screen and (max-width: 760px) {
 
 
-#WKCWriteStorageWidget {
+#KVCWriteStorageWidget {
 	bottom: 52px;
 }
 
@@ -32,7 +32,7 @@
 
 @media screen and (max-width: 760px) {
 
-.WKCWrite :global(.WKCWriteFooter) {
+.KVCWrite :global(.KVCWriteFooter) {
 	/* browser quirks */
 	z-index: 999;
 }

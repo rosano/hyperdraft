@@ -19,7 +19,7 @@ import * as KVCNoteMetal from '../_shared/KVCNote/metal.js';
 import * as KVCVersionAction from '../_shared/KVCVersion/action.js';
 import * as KVCSettingAction from '../_shared/KVCSetting/action.js';
 import * as KVCSettingMetal from '../_shared/KVCSetting/metal.js';
-import * as WKCWriteLogic from './ui-logic.js';
+import * as KVCWriteLogic from './ui-logic.js';
 
 const mod = {
 
@@ -39,13 +39,13 @@ const mod = {
 		const items = !mod._ValueFilterText ? inputData : inputData.filter(function (e) {
 			return e.KVCNoteBody.toLowerCase().match(mod._ValueFilterText.toLowerCase());
 		});
-		mod._ValueNotesVisible = shouldSort ? items.sort(WKCWriteLogic.WKCWriteLogicListSort) : items;
+		mod._ValueNotesVisible = shouldSort ? items.sort(KVCWriteLogic.KVCWriteLogicListSort) : items;
 	},
 	
 	_ValueNoteSelected: undefined,
 
 	ValueNoteSelected (inputData) {
-		mod.WKCWriteDetailInstance.WKCWriteDetailSetItem(mod._ValueNoteSelected = inputData);
+		mod.KVCWriteDetailInstance.KVCWriteDetailSetItem(mod._ValueNoteSelected = inputData);
 
 		if (!inputData) {
 			mod.OLSKMobileViewInactive = false;	
@@ -62,7 +62,7 @@ const mod = {
 
 	_ValueSaveVersionThrottleMap: {},
 
-	WKCWriteDetailInstance: undefined,
+	KVCWriteDetailInstance: undefined,
 
 	OLSKMobileViewInactive: false,
 
@@ -74,79 +74,79 @@ const mod = {
 
 	// MESSAGE
 
-	WKCWriteFooterDispatchStorage () {
+	KVCWriteFooterDispatchStorage () {
 		mod._ValueStorageWidgetHidden = !mod._ValueStorageWidgetHidden;
 	},
 
-	WKCWriteMasterDispatchCreate (inputData) {
+	KVCWriteMasterDispatchCreate (inputData) {
 		mod.ControlNoteCreate(inputData);
 	},
 
-	WKCWriteMasterDispatchClick (inputData) {
+	KVCWriteMasterDispatchClick (inputData) {
 		mod.ControlNoteSelect(inputData);
 	},
 
-	WKCWriteMasterDispatchArrow (inputData) {
+	KVCWriteMasterDispatchArrow (inputData) {
 		mod.ValueNoteSelected(inputData);
 	},
 
-	WKCWriteMasterDispatchFilter (inputData) {
+	KVCWriteMasterDispatchFilter (inputData) {
 		mod.ControlFilter(inputData);
 	},
 
-	WKCWriteMasterDispatchExport () {
+	KVCWriteMasterDispatchExport () {
 		mod.ControlNotesExportTXT();
 	},
 
-	WKCWriteMasterDelegateItemTitle (param1, param2) {
-		return WKCWriteLogic.WKCWriteTruncatedTitleFor(KVCParser.KVCParserTitleForPlaintext(param1), param2);
+	KVCWriteMasterDelegateItemTitle (param1, param2) {
+		return KVCWriteLogic.KVCWriteTruncatedTitleFor(KVCParser.KVCParserTitleForPlaintext(param1), param2);
 	},
 
-	WKCWriteMasterDelegateItemBody (inputData) {
+	KVCWriteMasterDelegateItemBody (inputData) {
 		return KVCParser.KVCParserSnippetForPlaintext(KVCParser.KVCParserBodyForPlaintext(inputData));
 	},
 
-	WKCWriteDetailDispatchBack () {
+	KVCWriteDetailDispatchBack () {
 		// mod.ControlNoteSelect(null);
 
 		mod.OLSKMobileViewInactive = false;
 	},
 
-	WKCWriteDetailDispatchJump (inputData) {
+	KVCWriteDetailDispatchJump (inputData) {
 		mod.ControlNoteJump(inputData);
 	},
 
-	WKCWriteDetailDispatchPublish () {
+	KVCWriteDetailDispatchPublish () {
 		mod.ControlNotePublish(mod._ValueNoteSelected);
 	},
 
-	WKCWriteDetailDispatchRetract () {
+	KVCWriteDetailDispatchRetract () {
 		mod.ControlNoteRetract(mod._ValueNoteSelected);
 	},
 
-	WKCWriteDetailDispatchVersions () {
+	KVCWriteDetailDispatchVersions () {
 		mod.ControlNoteVersions(mod._ValueNoteSelected);
 	},
 
-	WKCWriteDetailDispatchDiscard () {
+	KVCWriteDetailDispatchDiscard () {
 		mod.ControlNoteDiscard(mod._ValueNoteSelected);
 	},
 
-	WKCWriteDetailDispatchUpdate (inputData) {
+	KVCWriteDetailDispatchUpdate (inputData) {
 		mod._ValueNoteSelected.KVCNoteBody = inputData;
 		
 		mod.ControlNoteSave(mod._ValueNoteSelected);
 	},
 
-	WKCWriteDetailDispatchOpen (inputData) {
+	KVCWriteDetailDispatchOpen (inputData) {
 		mod.ControlFilter(inputData);
 	},
 
-	_WKCWriteFooterDispatchExport () {
+	_KVCWriteFooterDispatchExport () {
 		mod.ControlNotesExportData();
 	},
 
-	_WKCWriteFooterDispatchImport (inputData) {
+	_KVCWriteFooterDispatchImport (inputData) {
 		mod.ControlNotesImportData(inputData);
 	},
 
@@ -162,11 +162,11 @@ const mod = {
 				mod.ControlFilter('');
 
 				if (!OLSK_TESTING_BEHAVIOUR()) {
-					document.querySelector('.WKCWriteMasterBody').scrollTo(0, 0);
+					document.querySelector('.KVCWriteMasterBody').scrollTo(0, 0);
 				}
 			},
 			Tab () {
-				document.activeElement !== document.querySelector('.WKCWriteMasterFilterField') ? document.querySelector('.WKCWriteMasterFilterField').focus() : mod.WKCWriteDetailInstance.WKCWriteDetailEditorFocus();
+				document.activeElement !== document.querySelector('.KVCWriteMasterFilterField') ? document.querySelector('.KVCWriteMasterFilterField').focus() : mod.KVCWriteDetailInstance.KVCWriteDetailEditorFocus();
 
 				event.preventDefault();
 			},
@@ -230,7 +230,7 @@ const mod = {
 		mod.ControlNoteSelect(item);
 
 		if (mod.DataIsMobile()) {
-			mod.WKCWriteDetailInstance.WKCWriteDetailEditorFocus();
+			mod.KVCWriteDetailInstance.KVCWriteDetailEditorFocus();
 		}
 		
 		if (typeof inputData !== 'string') {
@@ -241,14 +241,14 @@ const mod = {
 			return;
 		}
 
-		mod.WKCWriteDetailInstance.WKCWriteDetailSetCursor(inputData.split('\n').length - 1, 0);
+		mod.KVCWriteDetailInstance.KVCWriteDetailSetCursor(inputData.split('\n').length - 1, 0);
 	},
 	
 	ControlNoteSelect(inputData) {
 		mod.ValueNoteSelected(inputData);
 
 		if (!inputData) {
-			return !mod.DataIsMobile() && document.querySelector('.WKCWriteMasterFilterField').focus();
+			return !mod.DataIsMobile() && document.querySelector('.KVCWriteMasterFilterField').focus();
 		}
 
 		mod.OLSKMobileViewInactive = true;
@@ -257,7 +257,7 @@ const mod = {
 			return;
 		}
 		
-		mod.WKCWriteDetailInstance.WKCWriteDetailEditorFocus();
+		mod.KVCWriteDetailInstance.KVCWriteDetailEditorFocus();
 	},
 	
 	ControlNoteJump (inputData) {
@@ -269,7 +269,7 @@ const mod = {
 					return;
 				}
 
-				mod.WKCWriteDetailInstance.WKCWriteDetailEditorFocus();
+				mod.KVCWriteDetailInstance.KVCWriteDetailEditorFocus();
 			},
 		});
 	},
@@ -396,7 +396,7 @@ const mod = {
 		}
 
 		setTimeout(function () {
-			document.querySelector('.WKCWriteMasterFilterField').focus();
+			document.querySelector('.KVCWriteMasterFilterField').focus();
 		})
 	},
 
@@ -524,7 +524,7 @@ const mod = {
 	},
 
 	SetupStorageWidget () {
-		(new window.OLSKStorageWidget(mod._ValueStorageClient.remoteStorage)).attach('WKCWriteStorageWidget').backend(document.querySelector('.WKCWriteFooterStorageButton'));
+		(new window.OLSKStorageWidget(mod._ValueStorageClient.remoteStorage)).attach('KVCWriteStorageWidget').backend(document.querySelector('.KVCWriteFooterStorageButton'));
 	},
 
 	SetupStorageStatus () {
@@ -545,51 +545,51 @@ import { onMount } from 'svelte';
 onMount(mod.LifecycleModuleWillMount);
 
 import OLSKViewportContent from 'OLSKViewportContent';
-import WKCWriteMaster from './submodules/WKCWriteMaster/main.svelte';
-import WKCWriteDetail from './submodules/WKCWriteDetail/main.svelte';
-import WKCWriteFooter from './submodules/WKCWriteFooter/main.svelte';
+import KVCWriteMaster from './submodules/KVCWriteMaster/main.svelte';
+import KVCWriteDetail from './submodules/KVCWriteDetail/main.svelte';
+import KVCWriteFooter from './submodules/KVCWriteFooter/main.svelte';
 import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svelte';
 </script>
 <svelte:window on:keydown={ mod.InterfaceWindowDidKeydown } />
 
-<div class="WKCWrite OLSKViewport" class:OLSKIsLoading={ mod._ValueIsLoading }>
+<div class="KVCWrite OLSKViewport" class:OLSKIsLoading={ mod._ValueIsLoading }>
 
 <OLSKViewportContent>
-	<WKCWriteMaster
-		WKCWriteMasterListItems={ mod._ValueNotesVisible }
-		WKCWriteMasterListItemSelected={ mod._ValueNoteSelected }
-		WKCWriteMasterFilterText={ mod._ValueFilterText }
-		WKCWriteMasterDispatchCreate={ mod.WKCWriteMasterDispatchCreate }
-		WKCWriteMasterDispatchClick={ mod.WKCWriteMasterDispatchClick }
-		WKCWriteMasterDispatchArrow={ mod.WKCWriteMasterDispatchArrow }
-		WKCWriteMasterDispatchFilter={ mod.WKCWriteMasterDispatchFilter }
-		WKCWriteMasterDispatchExport={ mod.WKCWriteMasterDispatchExport }
-		WKCWriteMasterDelegateItemTitle={ mod.WKCWriteMasterDelegateItemTitle }
-		WKCWriteMasterDelegateItemBody={ mod.WKCWriteMasterDelegateItemBody }
+	<KVCWriteMaster
+		KVCWriteMasterListItems={ mod._ValueNotesVisible }
+		KVCWriteMasterListItemSelected={ mod._ValueNoteSelected }
+		KVCWriteMasterFilterText={ mod._ValueFilterText }
+		KVCWriteMasterDispatchCreate={ mod.KVCWriteMasterDispatchCreate }
+		KVCWriteMasterDispatchClick={ mod.KVCWriteMasterDispatchClick }
+		KVCWriteMasterDispatchArrow={ mod.KVCWriteMasterDispatchArrow }
+		KVCWriteMasterDispatchFilter={ mod.KVCWriteMasterDispatchFilter }
+		KVCWriteMasterDispatchExport={ mod.KVCWriteMasterDispatchExport }
+		KVCWriteMasterDelegateItemTitle={ mod.KVCWriteMasterDelegateItemTitle }
+		KVCWriteMasterDelegateItemBody={ mod.KVCWriteMasterDelegateItemBody }
 		OLSKMobileViewInactive={ mod.OLSKMobileViewInactive }
 		/>
 	
-	<WKCWriteDetail
-		WKCWriteDetailDispatchBack={ mod.WKCWriteDetailDispatchBack }
-		WKCWriteDetailDispatchJump={ mod.WKCWriteDetailDispatchJump }
-		WKCWriteDetailDispatchPublish={ mod.WKCWriteDetailDispatchPublish }
-		WKCWriteDetailDispatchRetract={ mod.WKCWriteDetailDispatchRetract }
-		WKCWriteDetailDispatchVersions={ mod.WKCWriteDetailDispatchVersions }
-		WKCWriteDetailDispatchDiscard={ mod.WKCWriteDetailDispatchDiscard }
-		WKCWriteDetailDispatchUpdate={ mod.WKCWriteDetailDispatchUpdate }
-		WKCWriteDetailDispatchOpen={ mod.WKCWriteDetailDispatchOpen }
+	<KVCWriteDetail
+		KVCWriteDetailDispatchBack={ mod.KVCWriteDetailDispatchBack }
+		KVCWriteDetailDispatchJump={ mod.KVCWriteDetailDispatchJump }
+		KVCWriteDetailDispatchPublish={ mod.KVCWriteDetailDispatchPublish }
+		KVCWriteDetailDispatchRetract={ mod.KVCWriteDetailDispatchRetract }
+		KVCWriteDetailDispatchVersions={ mod.KVCWriteDetailDispatchVersions }
+		KVCWriteDetailDispatchDiscard={ mod.KVCWriteDetailDispatchDiscard }
+		KVCWriteDetailDispatchUpdate={ mod.KVCWriteDetailDispatchUpdate }
+		KVCWriteDetailDispatchOpen={ mod.KVCWriteDetailDispatchOpen }
 		OLSKMobileViewInactive={ !mod.OLSKMobileViewInactive }
-		bind:this={ mod.WKCWriteDetailInstance }
+		bind:this={ mod.KVCWriteDetailInstance }
 		/>
 </OLSKViewportContent>
 
-<div id="WKCWriteStorageWidget" class="OLSKMobileViewFooter" class:WKCWriteStorageWidgetHidden={ mod._ValueStorageWidgetHidden }></div>
+<div id="KVCWriteStorageWidget" class="OLSKMobileViewFooter" class:KVCWriteStorageWidgetHidden={ mod._ValueStorageWidgetHidden }></div>
 
-<WKCWriteFooter
-	WKCWriteFooterStorageStatus={ mod._ValueFooterStorageStatus }
-	WKCWriteFooterDispatchStorage={ mod.WKCWriteFooterDispatchStorage }
-	_WKCWriteFooterDispatchExport={ mod._WKCWriteFooterDispatchExport }
-	_WKCWriteFooterDispatchImport={ mod._WKCWriteFooterDispatchImport }
+<KVCWriteFooter
+	KVCWriteFooterStorageStatus={ mod._ValueFooterStorageStatus }
+	KVCWriteFooterDispatchStorage={ mod.KVCWriteFooterDispatchStorage }
+	_KVCWriteFooterDispatchExport={ mod._KVCWriteFooterDispatchExport }
+	_KVCWriteFooterDispatchImport={ mod._KVCWriteFooterDispatchImport }
 	/>
 
 </div>

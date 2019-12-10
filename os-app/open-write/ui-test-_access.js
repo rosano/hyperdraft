@@ -3,53 +3,53 @@ import { deepEqual } from 'assert';
 const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
 Object.entries({
-	WKCWriteStorageWidget: '#WKCWriteStorageWidget',
+	KVCWriteStorageWidget: '#KVCWriteStorageWidget',
 }).map(function (e) {
 	return global[e.shift()]  = e.pop();
 });
 
-describe('WKCWrite_Access', function () {
+describe('KVCWrite_Access', function () {
 
 	before(function() {
 		return browser.OLSKVisit(kDefaultRoute);
 	});
 
-	it('shows WKCWriteMaster', function () {
-		browser.assert.elements('.WKCWriteMaster', 1);
+	it('shows KVCWriteMaster', function () {
+		browser.assert.elements('.KVCWriteMaster', 1);
 	});
 
-	it('hides WKCWriteMasterListItem', function () {
-		browser.assert.elements('.WKCWriteMasterListItem', 0);
+	it('hides KVCWriteMasterListItem', function () {
+		browser.assert.elements('.KVCWriteMasterListItem', 0);
 	});
 
-	it('shows WKCWriteDetail', function () {
-		browser.assert.elements('.WKCWriteDetail', 1);
+	it('shows KVCWriteDetail', function () {
+		browser.assert.elements('.KVCWriteDetail', 1);
 	});
 
-	it('shows WKCWriteDetailPlaceholder', function () {
-		browser.assert.elements('.WKCWriteDetailPlaceholder', 1);
+	it('shows KVCWriteDetailPlaceholder', function () {
+		browser.assert.elements('.KVCWriteDetailPlaceholder', 1);
 	});
 
-	it('shows WKCWriteFooter', function () {
-		browser.assert.elements('.WKCWriteFooter', 1);
+	it('shows KVCWriteFooter', function () {
+		browser.assert.elements('.KVCWriteFooter', 1);
 	});
 
-	it('shows WKCWriteStorageWidget', function () {
-		browser.assert.elements(WKCWriteStorageWidget, 1);
+	it('shows KVCWriteStorageWidget', function () {
+		browser.assert.elements(KVCWriteStorageWidget, 1);
 	});
 
 	context('create', function test_create () {
 		
 		before(function () {
-			return browser.pressButton('.WKCWriteMasterCreateButton');
+			return browser.pressButton('.KVCWriteMasterCreateButton');
 		});
 
-		it('shows WKCWriteMasterListItem', function () {
-			browser.assert.elements('.WKCWriteMasterListItem', 1);
+		it('shows KVCWriteMasterListItem', function () {
+			browser.assert.elements('.KVCWriteMasterListItem', 1);
 		});
 
-		it('hides WKCWriteDetailPlaceholder', function () {
-			browser.assert.elements('.WKCWriteDetailPlaceholder', 0);
+		it('hides KVCWriteDetailPlaceholder', function () {
+			browser.assert.elements('.KVCWriteDetailPlaceholder', 0);
 		});
 	
 	});
@@ -57,11 +57,11 @@ describe('WKCWrite_Access', function () {
 	context('back', function test_back () {
 		
 		before(function () {
-			return browser.pressButton('.WKCWriteDetailToolbarBackButton');
+			return browser.pressButton('.KVCWriteDetailToolbarBackButton');
 		});
 
-		// it('shows WKCWriteDetailPlaceholder', function () {
-		// 	browser.assert.elements('.WKCWriteDetailPlaceholder', 1);
+		// it('shows KVCWriteDetailPlaceholder', function () {
+		// 	browser.assert.elements('.KVCWriteDetailPlaceholder', 1);
 		// });
 	
 	});
@@ -69,15 +69,15 @@ describe('WKCWrite_Access', function () {
 	context('click', function test_click () {
 		
 		before(function () {
-			return browser.click('.WKCWriteMasterListItem');
+			return browser.click('.KVCWriteMasterListItem');
 		});
 
-		it('shows WKCWriteMasterListItem', function () {
-			browser.assert.elements('.WKCWriteMasterListItem', 1);
+		it('shows KVCWriteMasterListItem', function () {
+			browser.assert.elements('.KVCWriteMasterListItem', 1);
 		});
 
-		it('hides WKCWriteDetailPlaceholder', function () {
-			browser.assert.elements('.WKCWriteDetailPlaceholder', 0);
+		it('hides KVCWriteDetailPlaceholder', function () {
+			browser.assert.elements('.KVCWriteDetailPlaceholder', 0);
 		});
 	
 	});
@@ -88,7 +88,7 @@ describe('WKCWrite_Access', function () {
 			
 			before(async function () {
 				return browser.OLSKConfirm(function () {
-					browser.pressButton('.WKCWriteDetailToolbarDiscardButton');
+					browser.pressButton('.KVCWriteDetailToolbarDiscardButton');
 				}, function (dialog) {
 					dialog.response = false;
 
@@ -96,8 +96,8 @@ describe('WKCWrite_Access', function () {
 				});
 			});
 
-			it('hides WKCWriteDetailPlaceholder', function () {
-				browser.assert.elements('.WKCWriteDetailPlaceholder', 0);
+			it('hides KVCWriteDetailPlaceholder', function () {
+				browser.assert.elements('.KVCWriteDetailPlaceholder', 0);
 			});
 		
 		});
@@ -106,16 +106,16 @@ describe('WKCWrite_Access', function () {
 			
 			before(async function () {
 				return browser.OLSKConfirm(function () {
-					return browser.pressButton('.WKCWriteDetailToolbarDiscardButton');
+					return browser.pressButton('.KVCWriteDetailToolbarDiscardButton');
 				});
 			});
 
-			it('hides WKCWriteMasterListItem', function () {
-				browser.assert.elements('.WKCWriteMasterListItem', 0);
+			it('hides KVCWriteMasterListItem', function () {
+				browser.assert.elements('.KVCWriteMasterListItem', 0);
 			});
 
-			it('shows WKCWriteDetailPlaceholder', function () {
-				browser.assert.elements('.WKCWriteDetailPlaceholder', 1);
+			it('shows KVCWriteDetailPlaceholder', function () {
+				browser.assert.elements('.KVCWriteDetailPlaceholder', 1);
 			});
 		
 		});

@@ -1,0 +1,137 @@
+.KVCWriteDetail {
+	/* KVCWriteDetailFlexbox:Parent */
+	display: flex;
+	flex-direction: column;
+}
+
+@media screen and (max-width: 760px) {
+
+.KVCWriteDetail {
+	min-height: 100%;
+}
+
+}
+
+.KVCWriteDetailPlaceholder {
+	opacity: 0.5;
+	text-align: center;
+
+	/* KVCWriteDetailFlexbox:Child */
+	flex-grow: 1;
+
+	/* KVCWriteDetailPlaceholderFlexbox:Parent */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+:global(.OLSKIsLoading) .KVCWriteDetailPlaceholder {
+	visibility: hidden;
+}
+
+.KVCWriteDetailToolbar {
+	border-bottom: var(--WKCBorderStyle);
+
+	/* KVCWriteDetailFlexbox:Child */
+	flex-shrink: 0;
+}
+
+@media screen and (max-width: 760px) {
+
+.KVCWriteDetailToolbar {
+	/* browser quirks */
+	z-index: 999;
+}
+
+}
+
+@media screen and (min-width: 760px) {
+
+.KVCWriteDetailToolbarBackButton {
+	display: none;
+}
+
+}
+
+.KVCWriteDetail :global(.KVCWriteEditor) {
+	/* KVCWriteDetailFlexbox:Child */
+	flex-grow: 1;
+}
+
+@media screen and (min-width: 760px) {
+
+.KVCWriteDetail :global(.KVCWriteEditor) {
+	/* KVCWriteEditorStation:Parent */
+	position: relative;
+}
+
+}
+
+@media screen and (max-width: 760px) {
+
+.KVCWriteDetail :global(.KVCWriteEditor) {
+	min-height: 100%;
+}
+
+}
+
+/* CodeMirror */
+
+.KVCWriteDetail :global(.CodeMirror) {
+	font-family: inherit;
+	font-size: 14px;
+}
+
+@media screen and (min-width: 760px) {
+
+.KVCWriteDetail :global(.CodeMirror) {
+	height: 100%;
+
+	/* KVCWriteEditorStation:Child */
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+}
+
+@media screen and (max-width: 760px) {
+
+.KVCWriteDetail :global(.CodeMirror) {
+	/* CodeMirrorResizeToContent */
+	height: auto;
+}
+
+}
+
+.KVCWriteDetail :global(.CodeMirror-scroll) {
+	background: #f8f8f8;
+}
+
+@media screen and (max-width: 760px) {
+
+.KVCWriteDetail :global(.CodeMirror-scroll) {
+	min-height: calc(100vh - 52px - 52px);
+}
+
+}
+
+.KVCWriteDetail :global(.CodeMirror-lines) {
+	/* override defaults */
+	padding: 10px;
+}
+
+.KVCWriteDetail :global(.CodeMirror pre) {
+	/* override defaults */
+	padding: 0;
+}
+
+.KVCWriteDetail :global(.CodeMirror-line:nth-child(1)) {
+	font-weight: bold;
+}
+
+.KVCWriteDetail :global(.cm-link:hover) {
+  cursor: pointer;
+}

@@ -1,0 +1,54 @@
+.KVCWriteMaster {
+	border-right: var(--WKCBorderStyle);
+
+	/* KVCWriteMasterFlexbox:Parent */
+	display: flex;
+	flex-direction: column;
+}
+
+.KVCWriteMasterToolbar {
+	border-bottom: var(--WKCBorderStyle);
+
+	/* KVCWriteMasterFlexbox:Child */
+	flex-shrink: 0;
+}
+
+.KVCWriteMasterToolbar :global(.OLSKToolbarElementGroup) {
+	margin-left: 4px;
+}
+
+@media screen and (max-width: 760px) {
+
+.KVCWriteMasterToolbar :global(.OLSKToolbarElementGroup) {
+	margin-left: 8px;
+}
+
+}
+
+.KVCWriteMasterBody {
+	overflow: auto;
+	
+	/* KVCWriteMasterFlexbox:Child */
+	flex-grow: 1;
+}
+
+:global(.OLSKIsLoading) .KVCWriteMasterBody {
+	visibility: hidden;
+}
+
+.KVCWriteMasterBody :global(.OLSKResultsListItemSelected) {
+	background: #e6e6e6;
+}
+
+@media screen and (min-width: 760px) {
+
+.KVCWriteMasterFocused :global(.OLSKResultsListItemSelected) {
+	background: #1a81ff;
+	color: white;
+}
+
+}
+
+.KVCWriteMasterDebug {
+	padding: 10px;
+}

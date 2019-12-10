@@ -2,33 +2,33 @@ const { throws, deepEqual } = require('assert');
 
 const mainModule = require('./ui-logic.js');
 
-describe('WKCWriteTruncatedTitleFor', function testWKCWriteTruncatedTitleFor() {
+describe('KVCWriteTruncatedTitleFor', function testKVCWriteTruncatedTitleFor() {
 
 	it('throws error if not string', function() {
 		throws(function() {
-			mainModule.WKCWriteTruncatedTitleFor(null);
+			mainModule.KVCWriteTruncatedTitleFor(null);
 		}, /KVCErrorInputNotValid/);
 	});
 
 	it('returns input', function() {
-		deepEqual(mainModule.WKCWriteTruncatedTitleFor('alfa'), 'alfa');
+		deepEqual(mainModule.KVCWriteTruncatedTitleFor('alfa'), 'alfa');
 	});
 
 	it('includes if under 60 characters', function() {
-		deepEqual(mainModule.WKCWriteTruncatedTitleFor('alfa bravo charlie delta echo foxtrot golf hotel juliet kilo'), 'alfa bravo charlie delta echo foxtrot golf hotel juliet kilo');
+		deepEqual(mainModule.KVCWriteTruncatedTitleFor('alfa bravo charlie delta echo foxtrot golf hotel juliet kilo'), 'alfa bravo charlie delta echo foxtrot golf hotel juliet kilo');
 	});
 
 	it('truncates text', function() {
-		deepEqual(mainModule.WKCWriteTruncatedTitleFor('alfa bravo charlie delta echo foxtrot golf hotel juliet kilos'), 'alfa bravo charlie delta echo foxtrot golf hotel juliet');
+		deepEqual(mainModule.KVCWriteTruncatedTitleFor('alfa bravo charlie delta echo foxtrot golf hotel juliet kilos'), 'alfa bravo charlie delta echo foxtrot golf hotel juliet');
 	});
 
 	it('adds ellipsis if second parameter truthy', function() {
-		deepEqual(mainModule.WKCWriteTruncatedTitleFor('alfa bravo charlie delta echo foxtrot golf hotel juliet kilos', true), 'alfa bravo charlie delta echo foxtrot golf hotel juliet…');
+		deepEqual(mainModule.KVCWriteTruncatedTitleFor('alfa bravo charlie delta echo foxtrot golf hotel juliet kilos', true), 'alfa bravo charlie delta echo foxtrot golf hotel juliet…');
 	});
 
 });
 
-describe('WKCWriteLogicListSort', function testWKCWriteLogicListSort() {
+describe('KVCWriteLogicListSort', function testKVCWriteLogicListSort() {
 
 	it('sorts by KVCNoteModificationDate descending', function() {
 		var item1 = {
@@ -38,7 +38,7 @@ describe('WKCWriteLogicListSort', function testWKCWriteLogicListSort() {
 			KVCNoteModificationDate: new Date(1),
 		};
 
-		deepEqual([item1, item2].sort(mainModule.WKCWriteLogicListSort), [item2, item1]);
+		deepEqual([item1, item2].sort(mainModule.KVCWriteLogicListSort), [item2, item1]);
 	});
 
 	it('sorts by KVCNoteCreationDate descending if no KVCNoteModificationDate', function() {
@@ -49,7 +49,7 @@ describe('WKCWriteLogicListSort', function testWKCWriteLogicListSort() {
 			KVCNoteCreationDate: new Date(1),
 		};
 
-		deepEqual([item1, item2].sort(mainModule.WKCWriteLogicListSort), [item2, item1]);
+		deepEqual([item1, item2].sort(mainModule.KVCWriteLogicListSort), [item2, item1]);
 	});
 
 });

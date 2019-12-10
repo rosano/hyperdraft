@@ -2,30 +2,30 @@ import { deepEqual } from 'assert';
 
 const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
-describe('WKCWrite_Misc', function () {
+describe('KVCWrite_Misc', function () {
 
 	before(function() {
 		return browser.OLSKVisit(kDefaultRoute);
 	});
 	
-	it('classes WKCWriteMaster', function () {
-		browser.assert.hasNoClass('.WKCWriteMaster', 'OLSKMobileViewInactive');
+	it('classes KVCWriteMaster', function () {
+		browser.assert.hasNoClass('.KVCWriteMaster', 'OLSKMobileViewInactive');
 	});
 
-	it('sets WKCWriteMasterListItemSelected', function () {
+	it('sets KVCWriteMasterListItemSelected', function () {
 		browser.assert.elements('.OLSKResultsListItemSelected', 0);
 	});
 
 	it('classes OLSKMobileViewInactive', function () {
-		browser.assert.hasClass('.WKCWriteDetail', 'OLSKMobileViewInactive');
+		browser.assert.hasClass('.KVCWriteDetail', 'OLSKMobileViewInactive');
 	});
 
-	it('sets WKCWriteDetailItem', function () {
-		browser.assert.elements('.WKCWriteDetailPlaceholder', 1);
+	it('sets KVCWriteDetailItem', function () {
+		browser.assert.elements('.KVCWriteDetailPlaceholder', 1);
 	});
 
-	it('focuses WKCWriteMasterFilterField', function() {
-		browser.assert.hasFocus('.WKCWriteMasterFilterField');
+	it('focuses KVCWriteMasterFilterField', function() {
+		browser.assert.hasFocus('.KVCWriteMasterFilterField');
 	});
 	
 	context('create', function test_create () {
@@ -35,26 +35,26 @@ describe('WKCWrite_Misc', function () {
 		});
 
 		before(function () {
-			return browser.pressButton('.WKCWriteMasterCreateButton');
+			return browser.pressButton('.KVCWriteMasterCreateButton');
 		});
 
-		it('classes WKCWriteMaster', function() {
-			browser.assert.hasClass('.WKCWriteMaster', 'OLSKMobileViewInactive');
+		it('classes KVCWriteMaster', function() {
+			browser.assert.hasClass('.KVCWriteMaster', 'OLSKMobileViewInactive');
 		});
 
-		it('sets WKCWriteMasterListItemSelected', function () {
+		it('sets KVCWriteMasterListItemSelected', function () {
 			browser.assert.elements('.OLSKResultsListItemSelected', 1);
 		});
 
 		it('classes OLSKMobileViewInactive', function() {
-			browser.assert.hasNoClass('.WKCWriteDetail', 'OLSKMobileViewInactive');
+			browser.assert.hasNoClass('.KVCWriteDetail', 'OLSKMobileViewInactive');
 		});
 
-		it('sets WKCWriteDetailItem', function () {
-			browser.assert.elements('.WKCWriteDetailPlaceholder', 0);
+		it('sets KVCWriteDetailItem', function () {
+			browser.assert.elements('.KVCWriteDetailPlaceholder', 0);
 		});
 
-		it.skip('focus WKCWriteEditor', function() {
+		it.skip('focus KVCWriteEditor', function() {
 			browser.assert.hasClass('.CodeMirror', 'CodeMirror-focused');
 		});
 
@@ -63,27 +63,27 @@ describe('WKCWrite_Misc', function () {
 	context('back', function test_back () {
 
 		before(function () {
-			return browser.pressButton('.WKCWriteDetailToolbarBackButton');
+			return browser.pressButton('.KVCWriteDetailToolbarBackButton');
 		});
 
-		it('classes WKCWriteMaster', function() {
-			browser.assert.hasNoClass('.WKCWriteMaster', 'OLSKMobileViewInactive');
+		it('classes KVCWriteMaster', function() {
+			browser.assert.hasNoClass('.KVCWriteMaster', 'OLSKMobileViewInactive');
 		});
 
-		// it('sets WKCWriteMasterListItemSelected', function () {
+		// it('sets KVCWriteMasterListItemSelected', function () {
 		// 	browser.assert.elements('.OLSKResultsListItemSelected', 0);
 		// });
 
 		it('classes OLSKMobileViewInactive', function() {
-			browser.assert.hasClass('.WKCWriteDetail', 'OLSKMobileViewInactive');
+			browser.assert.hasClass('.KVCWriteDetail', 'OLSKMobileViewInactive');
 		});
 
-		// it('focuses WKCWriteMasterFilterField', function() {
-		// 	browser.assert.hasFocus('.WKCWriteMasterFilterField');
+		// it('focuses KVCWriteMasterFilterField', function() {
+		// 	browser.assert.hasFocus('.KVCWriteMasterFilterField');
 		// });
 
-		// it('sets WKCWriteDetailItem', function () {
-		// 	browser.assert.elements('.WKCWriteDetailPlaceholder', 1);
+		// it('sets KVCWriteDetailItem', function () {
+		// 	browser.assert.elements('.KVCWriteDetailPlaceholder', 1);
 		// });
 
 	});
@@ -94,24 +94,24 @@ describe('WKCWrite_Misc', function () {
 			return browser.OLSKFireKeyboardEvent(browser.window, 'ArrowDown');
 		});
 
-		// it('classes WKCWriteMasterFocused', function() {
-		// 	browser.assert.hasClass('.WKCWriteMaster', 'WKCWriteMasterFocused');
+		// it('classes KVCWriteMasterFocused', function() {
+		// 	browser.assert.hasClass('.KVCWriteMaster', 'KVCWriteMasterFocused');
 		// });
 
 		it('classes OLSKMobileViewInactive', function() {
-			browser.assert.hasNoClass('.WKCWriteMaster', 'OLSKMobileViewInactive');
+			browser.assert.hasNoClass('.KVCWriteMaster', 'OLSKMobileViewInactive');
 		});
 
-		it('sets WKCWriteMasterListItemSelected', function () {
+		it('sets KVCWriteMasterListItemSelected', function () {
 			browser.assert.elements('.OLSKResultsListItemSelected', 1);
 		});
 
 		it('classes OLSKMobileViewInactive', function() {
-			browser.assert.hasClass('.WKCWriteDetail', 'OLSKMobileViewInactive');
+			browser.assert.hasClass('.KVCWriteDetail', 'OLSKMobileViewInactive');
 		});
 
-		it('sets WKCWriteDetailItem', function () {
-			browser.assert.elements('.WKCWriteDetailPlaceholder', 0);
+		it('sets KVCWriteDetailItem', function () {
+			browser.assert.elements('.KVCWriteDetailPlaceholder', 0);
 		});
 
 	});
@@ -124,11 +124,11 @@ describe('WKCWrite_Misc', function () {
 				return browser.OLSKFireKeyboardEvent(browser.window, 'Tab');
 			});
 
-			it.skip('classes WKCWriteMasterFocused', function() {
-				browser.assert.hasNoClass('.WKCWriteMaster', 'WKCWriteMasterFocused');
+			it.skip('classes KVCWriteMasterFocused', function() {
+				browser.assert.hasNoClass('.KVCWriteMaster', 'KVCWriteMasterFocused');
 			});
 
-			it.skip('focus WKCWriteEditor', function() {
+			it.skip('focus KVCWriteEditor', function() {
 				browser.assert.hasClass('.CodeMirror', 'CodeMirror-focused');
 			});
 		
@@ -140,11 +140,11 @@ describe('WKCWrite_Misc', function () {
 				return browser.OLSKFireKeyboardEvent(browser.window, 'Tab');
 			});
 
-			it('classes WKCWriteMasterFocused', function() {
-				browser.assert.hasClass('.WKCWriteMaster', 'WKCWriteMasterFocused');
+			it('classes KVCWriteMasterFocused', function() {
+				browser.assert.hasClass('.KVCWriteMaster', 'KVCWriteMasterFocused');
 			});
 
-			it.skip('focus WKCWriteEditor', function() {
+			it.skip('focus KVCWriteEditor', function() {
 				browser.assert.hasNoClass('.CodeMirror', 'CodeMirror-focused');
 			});
 		
@@ -155,35 +155,35 @@ describe('WKCWrite_Misc', function () {
 	context('escape', function test_escape () {
 
 		before(function () {
-			browser.fill('.WKCWriteEditorFieldDebug', 'alfa');
+			browser.fill('.KVCWriteEditorFieldDebug', 'alfa');
 		});
 
 		before(function () {
-			browser.fill('.WKCWriteMasterFilterField', 'alfa');
+			browser.fill('.KVCWriteMasterFilterField', 'alfa');
 		});
 
 		before(function () {
-			browser.assert.input('.WKCWriteMasterFilterField', 'alfa')
+			browser.assert.input('.KVCWriteMasterFilterField', 'alfa')
 		});
 
 		before(function () {
-			browser.query('.WKCWriteEditorFieldDebug').focus();
+			browser.query('.KVCWriteEditorFieldDebug').focus();
 		});
 
 		before(function () {
-			deepEqual(browser.activeElement, browser.query('.WKCWriteEditorFieldDebug'))
+			deepEqual(browser.activeElement, browser.query('.KVCWriteEditorFieldDebug'))
 		});
 
 		before(function () {
 			return browser.OLSKFireKeyboardEvent(browser.window, 'Escape');
 		});
 		
-		it('focuses WKCWriteMasterFilterField', function() {
-			deepEqual(browser.activeElement, browser.query('.WKCWriteMasterFilterField'));
+		it('focuses KVCWriteMasterFilterField', function() {
+			deepEqual(browser.activeElement, browser.query('.KVCWriteMasterFilterField'));
 		});
 		
-		it('clears WKCWriteMasterFilterText', function() {
-			browser.assert.input('.WKCWriteMasterFilterField', '')
+		it('clears KVCWriteMasterFilterText', function() {
+			browser.assert.input('.KVCWriteMasterFilterField', '')
 		});
 
 	});
@@ -195,30 +195,30 @@ describe('WKCWrite_Misc', function () {
 		});
 		
 		before(function () {
-			return browser.click('.WKCWriteMasterListItem');
+			return browser.click('.KVCWriteMasterListItem');
 		});
 
-		it.skip('classes WKCWriteMasterFocused', function() {
-			browser.assert.hasNoClass('.WKCWriteMaster', 'WKCWriteMasterFocused');
+		it.skip('classes KVCWriteMasterFocused', function() {
+			browser.assert.hasNoClass('.KVCWriteMaster', 'KVCWriteMasterFocused');
 		});
 
 		it('classes OLSKMobileViewInactive', function() {
-			browser.assert.hasClass('.WKCWriteMaster', 'OLSKMobileViewInactive');
+			browser.assert.hasClass('.KVCWriteMaster', 'OLSKMobileViewInactive');
 		});
 
-		it('sets WKCWriteMasterListItemSelected', function () {
+		it('sets KVCWriteMasterListItemSelected', function () {
 			browser.assert.elements('.OLSKResultsListItemSelected', 1);
 		});
 
 		it('classes OLSKMobileViewInactive', function() {
-			browser.assert.hasNoClass('.WKCWriteDetail', 'OLSKMobileViewInactive');
+			browser.assert.hasNoClass('.KVCWriteDetail', 'OLSKMobileViewInactive');
 		});
 
-		it('sets WKCWriteDetailItem', function () {
-			browser.assert.elements('.WKCWriteDetailPlaceholder', 0);
+		it('sets KVCWriteDetailItem', function () {
+			browser.assert.elements('.KVCWriteDetailPlaceholder', 0);
 		});
 
-		it.skip('focus WKCWriteEditor', function() {
+		it.skip('focus KVCWriteEditor', function() {
 			browser.assert.hasClass('.CodeMirror', 'CodeMirror-focused');
 		});
 
@@ -227,25 +227,25 @@ describe('WKCWrite_Misc', function () {
 	context('filter', function test_filter () {
 
 		before(function () {
-			return browser.pressButton('.WKCWriteMasterCreateButton');
+			return browser.pressButton('.KVCWriteMasterCreateButton');
 		});
 
 		before(function () {
-			browser.fill('.WKCWriteEditorFieldDebug', 'bravo');
+			browser.fill('.KVCWriteEditorFieldDebug', 'bravo');
 		});
 
 		context('no match', function () {
 			
 			before(function () {
-				browser.fill('.WKCWriteMasterFilterField', 'charlie');
+				browser.fill('.KVCWriteMasterFilterField', 'charlie');
 			});
 
-			it('filters all WKCWriteMasterListItem', function() {
-				browser.assert.elements('.WKCWriteMasterListItem', 0);
+			it('filters all KVCWriteMasterListItem', function() {
+				browser.assert.elements('.KVCWriteMasterListItem', 0);
 			});
 
-			it('sets WKCWriteDetailItem', function () {
-				browser.assert.elements('.WKCWriteDetailPlaceholder', 1);
+			it('sets KVCWriteDetailItem', function () {
+				browser.assert.elements('.KVCWriteDetailPlaceholder', 1);
 			});
 		
 		});
@@ -253,19 +253,19 @@ describe('WKCWrite_Misc', function () {
 		context('partial match', function () {
 
 			before(function () {
-				browser.fill('.WKCWriteMasterFilterField', 'a');
+				browser.fill('.KVCWriteMasterFilterField', 'a');
 			});
 
-			it('filters partial WKCWriteMasterListItem', function() {
-				browser.assert.elements('.WKCWriteMasterListItem', 2);
+			it('filters partial KVCWriteMasterListItem', function() {
+				browser.assert.elements('.KVCWriteMasterListItem', 2);
 			});
 
-			it('sets WKCWriteMasterListItemSelected', function () {
+			it('sets KVCWriteMasterListItemSelected', function () {
 				browser.assert.elements('.OLSKResultsListItemSelected', 1);
 			});
 
-			it('sets WKCWriteDetailItem', function () {
-				browser.assert.elements('.WKCWriteDetailPlaceholder', 0);
+			it('sets KVCWriteDetailItem', function () {
+				browser.assert.elements('.KVCWriteDetailPlaceholder', 0);
 			});
 		
 		});
@@ -273,19 +273,19 @@ describe('WKCWrite_Misc', function () {
 		context('exact match', function () {
 
 			before(function () {
-				browser.fill('.WKCWriteMasterFilterField', 'bravo');
+				browser.fill('.KVCWriteMasterFilterField', 'bravo');
 			});
 
-			it('filters exact WKCWriteMasterListItem', function() {
-				browser.assert.elements('.WKCWriteMasterListItem', 1);
+			it('filters exact KVCWriteMasterListItem', function() {
+				browser.assert.elements('.KVCWriteMasterListItem', 1);
 			});
 
-			it('sets WKCWriteMasterListItemSelected', function () {
+			it('sets KVCWriteMasterListItemSelected', function () {
 				browser.assert.elements('.OLSKResultsListItemSelected', 1);
 			});
 
-			it('sets WKCWriteDetailItem', function () {
-				browser.assert.elements('.WKCWriteDetailPlaceholder', 0);
+			it('sets KVCWriteDetailItem', function () {
+				browser.assert.elements('.KVCWriteDetailPlaceholder', 0);
 			});
 		
 		});
@@ -296,20 +296,20 @@ describe('WKCWrite_Misc', function () {
 				return browser.pressButton('.OLSKInputWrapperClearButton');
 			});
 
-			it('filters no WKCWriteMasterListItem', function() {
-				browser.assert.elements('.WKCWriteMasterListItem', 2);
+			it('filters no KVCWriteMasterListItem', function() {
+				browser.assert.elements('.KVCWriteMasterListItem', 2);
 			});
 
-			it('sets WKCWriteMasterListItemSelected', function () {
+			it('sets KVCWriteMasterListItemSelected', function () {
 				browser.assert.elements('.OLSKResultsListItemSelected', 0);
 			});
 
-			it('sets WKCWriteDetailItem', function () {
-				browser.assert.elements('.WKCWriteDetailPlaceholder', 1);
+			it('sets KVCWriteDetailItem', function () {
+				browser.assert.elements('.KVCWriteDetailPlaceholder', 1);
 			});
 
-			it('sorts WKCWriteMasterListItem', function () {
-				browser.assert.text('.WKCWriteMasterListItemTitle', 'bravoalfa')
+			it('sorts KVCWriteMasterListItem', function () {
+				browser.assert.text('.KVCWriteMasterListItemTitle', 'bravoalfa')
 			});
 		
 		});
@@ -319,24 +319,24 @@ describe('WKCWrite_Misc', function () {
 	context('selection', function test_selection () {
 		
 		before(function () {
-			return browser.click('.WKCWriteMasterListItem');
+			return browser.click('.KVCWriteMasterListItem');
 		});
 
-		it('sets WKCWriteMasterListItemSelected', function () {
+		it('sets KVCWriteMasterListItemSelected', function () {
 			browser.assert.hasClass('.OLSKResultsListItem:first-of-type', 'OLSKResultsListItemSelected');
 		});
 
 		context('arrow', function () {
 
 			before(function () {
-				return browser.query('.WKCWriteEditorFieldDebug').focus();
+				return browser.query('.KVCWriteEditorFieldDebug').focus();
 			});
 
 			before(function () {
 				return browser.OLSKFireKeyboardEvent(browser.window, 'ArrowDown');
 			});
 
-			it('sets no WKCWriteMasterListItemSelected', function () {
+			it('sets no KVCWriteMasterListItemSelected', function () {
 				browser.assert.hasClass('.OLSKResultsListItem:first-of-type', 'OLSKResultsListItemSelected');
 			});
 		
@@ -347,11 +347,11 @@ describe('WKCWrite_Misc', function () {
 	context('jump', function test_jump () {
 
 		before(function () {
-			return browser.fill('.WKCWriteEditorFieldDebug', '# alfa');
+			return browser.fill('.KVCWriteEditorFieldDebug', '# alfa');
 		});
 
 		before(function () {
-			return browser.pressButton('.WKCWriteDetailToolbarJumpButton');
+			return browser.pressButton('.KVCWriteDetailToolbarJumpButton');
 		});
 
 		it('runs Launchlet', function() {
@@ -364,7 +364,7 @@ describe('WKCWrite_Misc', function () {
 
 		context('execute', function () {
 
-			it.skip('focus WKCWriteEditor', function() {
+			it.skip('focus KVCWriteEditor', function() {
 				browser.assert.hasClass('.CodeMirror', 'CodeMirror-focused');
 			});
 		
@@ -375,11 +375,11 @@ describe('WKCWrite_Misc', function () {
 	context('publish', function test_publish () {
 		
 		before(function () {
-			return browser.click('.WKCWriteDetailToolbarPublishButton');
+			return browser.click('.KVCWriteDetailToolbarPublishButton');
 		});
 
 		it('sets KVCNotePublishStatusIsPublished', function () {
-			browser.assert.elements('.WKCWriteDetailToolbarPublishButton', 0);
+			browser.assert.elements('.KVCWriteDetailToolbarPublishButton', 0);
 		});
 
 	});
@@ -387,11 +387,11 @@ describe('WKCWrite_Misc', function () {
 	context('retract', function test_retract () {
 		
 		before(function () {
-			return browser.click('.WKCWriteDetailToolbarRetractButton');
+			return browser.click('.KVCWriteDetailToolbarRetractButton');
 		});
 
 		it('sets KVCNotePublishStatusIsPublished', function () {
-			browser.assert.elements('.WKCWriteDetailToolbarPublishButton', 1);
+			browser.assert.elements('.KVCWriteDetailToolbarPublishButton', 1);
 		});
 
 	});
@@ -403,25 +403,25 @@ describe('WKCWrite_Misc', function () {
 		});
 		
 		before(function () {
-			return browser.pressButton('.WKCWriteMasterCreateButton');
+			return browser.pressButton('.KVCWriteMasterCreateButton');
 		});
 
 		context('title', function () {
 			
 			before(function () {
-				browser.fill('.WKCWriteEditorFieldDebug', 'alfa');
+				browser.fill('.KVCWriteEditorFieldDebug', 'alfa');
 			});
 
-			it('sets WKCWriteMasterListItemAccessibilitySummary', function () {
-				browser.assert.text('.WKCWriteMasterListItemAccessibilitySummary', 'alfa');
+			it('sets KVCWriteMasterListItemAccessibilitySummary', function () {
+				browser.assert.text('.KVCWriteMasterListItemAccessibilitySummary', 'alfa');
 			});
 
-			it('sets WKCWriteMasterListItemTitle', function () {
-				browser.assert.text('.WKCWriteMasterListItemTitle', 'alfa');
+			it('sets KVCWriteMasterListItemTitle', function () {
+				browser.assert.text('.KVCWriteMasterListItemTitle', 'alfa');
 			});
 
-			it('sets WKCWriteMasterListItemSnippet', function () {
-				browser.assert.text('.WKCWriteMasterListItemSnippet', '');
+			it('sets KVCWriteMasterListItemSnippet', function () {
+				browser.assert.text('.KVCWriteMasterListItemSnippet', '');
 			});
 		
 		});
@@ -429,19 +429,19 @@ describe('WKCWrite_Misc', function () {
 		context('body', function () {
 			
 			before(function () {
-				browser.fill('.WKCWriteEditorFieldDebug', 'alfa\nbravo');
+				browser.fill('.KVCWriteEditorFieldDebug', 'alfa\nbravo');
 			});
 
-			it('sets WKCWriteMasterListItemAccessibilitySummary', function () {
-				browser.assert.text('.WKCWriteMasterListItemAccessibilitySummary', 'alfa');
+			it('sets KVCWriteMasterListItemAccessibilitySummary', function () {
+				browser.assert.text('.KVCWriteMasterListItemAccessibilitySummary', 'alfa');
 			});
 
-			it('sets WKCWriteMasterListItemTitle', function () {
-				browser.assert.text('.WKCWriteMasterListItemTitle', 'alfa');
+			it('sets KVCWriteMasterListItemTitle', function () {
+				browser.assert.text('.KVCWriteMasterListItemTitle', 'alfa');
 			});
 
-			it('sets WKCWriteMasterListItemSnippet', function () {
-				browser.assert.text('.WKCWriteMasterListItemSnippet', 'bravo');
+			it('sets KVCWriteMasterListItemSnippet', function () {
+				browser.assert.text('.KVCWriteMasterListItemSnippet', 'bravo');
 			});
 		
 		});
@@ -449,19 +449,19 @@ describe('WKCWrite_Misc', function () {
 		context('long title', function () {
 			
 			before(function () {
-				browser.fill('.WKCWriteEditorFieldDebug', 'alfa bravo charlie delta echo foxtrot golf hotel juliet kilos');
+				browser.fill('.KVCWriteEditorFieldDebug', 'alfa bravo charlie delta echo foxtrot golf hotel juliet kilos');
 			});
 
-			it('sets WKCWriteMasterListItemAccessibilitySummary', function () {
-				browser.assert.text('.WKCWriteMasterListItemAccessibilitySummary', 'alfa bravo charlie delta echo foxtrot golf hotel juliet…');
+			it('sets KVCWriteMasterListItemAccessibilitySummary', function () {
+				browser.assert.text('.KVCWriteMasterListItemAccessibilitySummary', 'alfa bravo charlie delta echo foxtrot golf hotel juliet…');
 			});
 
-			it('sets WKCWriteMasterListItemTitle', function () {
-				browser.assert.text('.WKCWriteMasterListItemTitle', 'alfa bravo charlie delta echo foxtrot golf hotel juliet');
+			it('sets KVCWriteMasterListItemTitle', function () {
+				browser.assert.text('.KVCWriteMasterListItemTitle', 'alfa bravo charlie delta echo foxtrot golf hotel juliet');
 			});
 
-			it('sets WKCWriteMasterListItemSnippet', function () {
-				browser.assert.text('.WKCWriteMasterListItemSnippet', '');
+			it('sets KVCWriteMasterListItemSnippet', function () {
+				browser.assert.text('.KVCWriteMasterListItemSnippet', '');
 			});
 		
 		});
@@ -469,40 +469,40 @@ describe('WKCWrite_Misc', function () {
 		context('long body', function () {
 			
 			before(function () {
-				browser.fill('.WKCWriteEditorFieldDebug', '\nLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.');
+				browser.fill('.KVCWriteEditorFieldDebug', '\nLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.');
 			});
 
-			it('sets WKCWriteMasterListItemAccessibilitySummary', function () {
-				browser.assert.text('.WKCWriteMasterListItemAccessibilitySummary', '');
+			it('sets KVCWriteMasterListItemAccessibilitySummary', function () {
+				browser.assert.text('.KVCWriteMasterListItemAccessibilitySummary', '');
 			});
 
-			it('sets WKCWriteMasterListItemTitle', function () {
-				browser.assert.text('.WKCWriteMasterListItemTitle', '');
+			it('sets KVCWriteMasterListItemTitle', function () {
+				browser.assert.text('.KVCWriteMasterListItemTitle', '');
 			});
 
-			it('sets WKCWriteMasterListItemSnippet', function () {
-				browser.assert.text('.WKCWriteMasterListItemSnippet', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the…');
+			it('sets KVCWriteMasterListItemSnippet', function () {
+				browser.assert.text('.KVCWriteMasterListItemSnippet', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the…');
 			});
 		
 		});
 
 	});
 
-	describe('WKCWriteStorageWidget', function test_WKCWriteStorageWidget () {
+	describe('KVCWriteStorageWidget', function test_KVCWriteStorageWidget () {
 		
 		it('sets class', function () {
-			browser.assert.hasClass(WKCWriteStorageWidget, 'WKCWriteStorageWidgetHidden');
-			browser.assert.hasClass(WKCWriteStorageWidget, 'OLSKMobileViewFooter');
+			browser.assert.hasClass(KVCWriteStorageWidget, 'KVCWriteStorageWidgetHidden');
+			browser.assert.hasClass(KVCWriteStorageWidget, 'OLSKMobileViewFooter');
 		});
 
-		context('click WKCWriteFooterStorageButton', function () {
+		context('click KVCWriteFooterStorageButton', function () {
 			
 			before(function () {
-				return browser.pressButton('.WKCWriteFooterStorageButton');
+				return browser.pressButton('.KVCWriteFooterStorageButton');
 			});
 			
 			it('sets class', function () {
-				browser.assert.hasNoClass(WKCWriteStorageWidget, 'WKCWriteStorageWidgetHidden');
+				browser.assert.hasNoClass(KVCWriteStorageWidget, 'KVCWriteStorageWidgetHidden');
 			});
 		
 		});

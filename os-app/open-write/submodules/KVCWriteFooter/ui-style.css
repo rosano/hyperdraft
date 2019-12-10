@@ -1,0 +1,56 @@
+.KVCWriteFooter {
+	border-top: var(--WKCBorderStyle);
+	
+	/* AppContainerFlexboxChild */
+	flex-shrink: 0;
+
+	/* KVCWriteFooterFlexboxParent */
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.KVCWriteFooter a {
+	color: var(--KVCCommonForeground);
+}
+
+.KVCWriteFooter :global(.OLSKToolbar) {
+	flex-grow: 1;
+}
+
+.KVCWriteFooter :global(.OLSKToolbar > div) {
+	display: flex;
+	align-items: center;
+}
+
+h1 {
+	margin: 0;
+
+	font-size: 20px;
+}
+
+.KVCWriteFooter :global(.OLSKToolbarElementGroup > *:not(:first-child)) {
+	margin-left: 10px;
+}
+
+:global(#RCSLanguageSwitcher span) {
+	/* browser quirks */
+	padding-left: 4px;
+}
+
+.KVCWriteFooterStorageButton {
+	padding: 0 5px;
+}
+
+.KVCWriteFooterStorageButton :global(svg,img) {
+	width: 20px;
+	height: 20px;
+}
+
+.KVCWriteFooterStorageButton :global(path) {
+	fill: black;
+}
+
+.KVCWriteFooterStorageButton.OSWIconVisible img {
+	display: none;
+}

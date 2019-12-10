@@ -1,7 +1,7 @@
 import App from './main.svelte';
 
-const WKCWrite = new App({
+const KVCWrite = new App({
 	target: document.body,
 });
 
-export default WKCWrite;
+export default KVCWrite;

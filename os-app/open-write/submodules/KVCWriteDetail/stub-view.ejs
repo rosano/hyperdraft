@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="/_shared/__external/normalize.css/normalize.css">
+	<link rel="stylesheet" type="text/css" href="/<%= OLSKSharedPageControllerSlug %>/__compiled/ui-style.css">
+
+	<link rel="stylesheet" type="text/css" href="/_shared/__external/codemirror/lib/codemirror.css">
+	<script type="text/javascript" src="/_shared/__external/codemirror/lib/codemirror.js"></script>
+	
+	<script type="text/javascript" src="/_shared/__external/codemirror/addon/edit/continuelist.js"></script>
+	
+	<script type="text/javascript" src="/_shared/__external/codemirror/addon/mode/overlay.js"></script>
+	
+	<script type="text/javascript" src="/_shared/__external/codemirror/mode/markdown/markdown.js"></script>
+	<script type="text/javascript" src="/_shared/__external/codemirror/mode/gfm/gfm.js"></script>
+	
+	<script type="text/javascript" src="/_shared/__external/codemirror/addon/search/search.js"></script>
+	<script type="text/javascript" src="/_shared/__external/codemirror/addon/search/searchcursor.js"></script>
+	<script type="text/javascript" src="/_shared/__external/codemirror/addon/search/jump-to-line.js"></script>
+	<link rel="stylesheet" type="text/css" href="/_shared/__external/codemirror/addon/dialog/dialog.css">
+	<script type="text/javascript" src="/_shared/__external/codemirror/addon/dialog/dialog.js"></script>
+	
+	<script type="text/javascript" src="/_shared/__external/codemirror/keymap/sublime.js"></script>
+
+	<script type="text/javascript" src="/_shared/__external/url-parse/dist/url-parse.min.js"></script>
+
+	<script type="text/javascript">
+		window.OLSKPublicConstants = function (inputData) {
+			return {
+				OLSKSharedPageCurrentLanguage: '<%= OLSKSharedPageCurrentLanguage %>',
+			}[inputData];
+		};
+	</script>
+
+	<script src="/_shared/__external/OLSKRouting/main.js"></script>
+	<script type="text/javascript">
+		window.OLSKCanonicalFor = function(inputData, params) {
+			return OLSKRouting.OLSKRoutingCanonicalPathWithRoutePathAndOptionalParams((<%- JSON.stringify(['WKCRouteRefsRead'].reduce(function (map, e) {
+				map[e] = OLSKRouteObjectFor(e).OLSKRoutePath;
+				return map;
+			}, {})) %>)[inputData], params);
+		};
+	</script>
+</head>
+<body>
+
+<script src="/<%= OLSKSharedPageControllerSlug %>/__compiled/ui-behaviour.js"></script>
+
+<p>
+	<strong>TestKVCWriteDetailDispatchBack</strong>
+	<span id="TestKVCWriteDetailDispatchBack">0</span>
+</p>
+
+<p>
+	<strong>TestKVCWriteDetailDispatchJump</strong>
+	<span id="TestKVCWriteDetailDispatchJump">0</span>
+</p>
+
+<p>
+	<strong>TestKVCWriteDetailDispatchPublish</strong>
+	<span id="TestKVCWriteDetailDispatchPublish">0</span>
+</p>
+
+<p>
+	<strong>TestKVCWriteDetailDispatchRetract</strong>
+	<span id="TestKVCWriteDetailDispatchRetract">0</span>
+</p>
+
+<p>
+	<strong>TestKVCWriteDetailDispatchVersions</strong>
+	<span id="TestKVCWriteDetailDispatchVersions">0</span>
+</p>
+
+<p>
+	<strong>TestKVCWriteDetailDispatchDiscard</strong>
+	<span id="TestKVCWriteDetailDispatchDiscard">0</span>
+</p>
+
+<p>
+	<strong>TestKVCWriteDetailDispatchUpdate</strong>
+	<span id="TestKVCWriteDetailDispatchUpdate">0</span>
+	<span id="TestKVCWriteDetailDispatchUpdateData">undefined</span>
+</p>
+
+<p>
+	<button id="TestKVCWriteDetailEditorFocus" onclick="window.KVCWriteDetailBehaviour.TestKVCWriteDetailEditorFocus()">TestKVCWriteDetailEditorFocus</button>
+</p>
+
+</body>
+</html>
