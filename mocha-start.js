@@ -1,4 +1,4 @@
-(function WKCMochaMongo() {
+(function KVCMochaMongo() {
 	var mongodbPackage = require('mongodb');
 
 	before(function(done) {
@@ -33,7 +33,7 @@ const KVCNoteStorage = require('./os-app/_shared/KVCNote/storage.js');
 const KVCSettingStorage = require('./os-app/_shared/KVCSetting/storage.js');
 const KVCVersionStorage = require('./os-app/_shared/KVCVersion/storage.js');
 
-(function WKCMochaStorage() {
+(function KVCMochaStorage() {
 	if (process.env.OLSK_TESTING_BEHAVIOUR === 'true') {
 		return;
 	}
