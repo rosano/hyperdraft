@@ -42,6 +42,10 @@ const mod = {
 
 	ValueNoteSelected (inputData) {
 		mod.WKCWriteDetailInstance.WKCWriteDetailSetItem(mod._ValueNoteSelected = inputData);
+
+		if (!inputData) {
+			mod.OLSKMobileViewInactive = false;	
+		}
 	},
 	
 	_ValueFilterText: '',
@@ -238,8 +242,6 @@ const mod = {
 		mod.ValueNoteSelected(inputData);
 
 		if (!inputData) {
-			mod.OLSKMobileViewInactive = false;
-
 			return !mod.DataIsMobile() && document.querySelector('.WKCWriteMasterFilterField').focus();
 		}
 
