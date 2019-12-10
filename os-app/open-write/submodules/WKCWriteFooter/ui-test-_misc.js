@@ -20,7 +20,7 @@ describe('WKCWriteFooter_Misc', function () {
 	describe('WKCWriteFooterDonateLink', function testWKCWriteFooterDonateLink () {
 
 		it('sets href', function () {
-			browser.assert.attribute(WKCWriteFooterDonateLink, 'href', process.env.WKC_SHARED_DONATE_URL);
+			browser.assert.attribute(WKCWriteFooterDonateLink, 'href', process.env.KVC_SHARED_DONATE_URL);
 		});
 
 		it('sets target', function () {

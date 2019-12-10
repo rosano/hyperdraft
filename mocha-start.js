@@ -2,7 +2,7 @@
 	var mongodbPackage = require('mongodb');
 
 	before(function(done) {
-		mongodbPackage.MongoClient.connect(process.env.WKC_DATABASE_URL, {
+		mongodbPackage.MongoClient.connect(process.env.KVC_DATABASE_URL, {
 			useNewUrlParser: true,
 		}, function(err, client) {
 			if (err) {
@@ -24,7 +24,7 @@
 	});
 
 	beforeEach(async function() {
-		global.WKCTestingMongoClient.db(process.env.WKC_SHARED_DATABASE_NAME).dropDatabase();
+		global.WKCTestingMongoClient.db(process.env.KVC_SHARED_DATABASE_NAME).dropDatabase();
 	});
 })();
 

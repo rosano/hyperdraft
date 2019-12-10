@@ -45,7 +45,7 @@ WKCSandboxUniqueIDsProcess = async function(databaseClient) {
 	return [
 		{
 			key: 'wkc_subscriptions',
-			value: (await databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_subscriptions').find({}).project(['WKCSubscriptionFetchContent'].reduce(function(hash, e) {
+			value: (await databaseClient.db(process.env.KVC_SHARED_DATABASE_NAME).collection('wkc_subscriptions').find({}).project(['WKCSubscriptionFetchContent'].reduce(function(hash, e) {
 				hash[e] = 0;
 
 				return hash;
@@ -55,13 +55,13 @@ WKCSandboxUniqueIDsProcess = async function(databaseClient) {
 		},
 		{
 			key: 'wkc_articles',
-			value: (await databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_articles').find({}).toArray()).map(function (e) {
+			value: (await databaseClient.db(process.env.KVC_SHARED_DATABASE_NAME).collection('wkc_articles').find({}).toArray()).map(function (e) {
 				return e.WKCArticleID2;
 			}),
 		},
 		{
 			key: 'wkc_snapshots',
-			value: (await databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_snapshots').find({}).project(['WKCSnapshotBody'].reduce(function(hash, e) {
+			value: (await databaseClient.db(process.env.KVC_SHARED_DATABASE_NAME).collection('wkc_snapshots').find({}).project(['WKCSnapshotBody'].reduce(function(hash, e) {
 				hash[e] = 0;
 
 				return hash;

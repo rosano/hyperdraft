@@ -71,7 +71,7 @@ exports.WKCLoginAction = function(req, res, next) {
 //_ WKCLoginSubmitAction
 
 exports.WKCLoginSubmitAction = function(req, res, next) {
-	if (!process.env.WKC_SHARED_DATABASE_NAME) {
+	if (!process.env.KVC_SHARED_DATABASE_NAME) {
 		throw new Error('WKCErrorMissingDatabaseName');
 	}
 
@@ -83,7 +83,7 @@ exports.WKCLoginSubmitAction = function(req, res, next) {
 		return res.redirect(res.locals.OLSKCanonicalFor('WKCLoginRoute'));
 	}
 
-	return req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_members').find({}).toArray(function(err, items) {
+	return req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient.db(process.env.KVC_SHARED_DATABASE_NAME).collection('wkc_members').find({}).toArray(function(err, items) {
 		if (err) {
 			throw new Error('WKCErrorDatabaseFindFailed');
 		}

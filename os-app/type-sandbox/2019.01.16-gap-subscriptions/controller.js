@@ -24,7 +24,7 @@ exports.OLSKControllerRoutes = function() {
 //_ WKCSandboxGapSubscriptionsProcess
 
 WKCSandboxGapSubscriptionsProcess = async function (databaseClient) {
-	return Promise.all((await databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_subscriptions').find({
+	return Promise.all((await databaseClient.db(process.env.KVC_SHARED_DATABASE_NAME).collection('wkc_subscriptions').find({
 		WKCSubscriptionIsPaused: true,
 	}).project(['WKCSubscriptionFetchContent'].reduce(function(hash, e) {
 		hash[e] = 0;
@@ -33,7 +33,7 @@ WKCSandboxGapSubscriptionsProcess = async function (databaseClient) {
 	}, {})).toArray()).slice(-1).map(function (e) {
 		return Promise.resolve(e);
 
-		return databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_subscriptions').findOneAndUpdate({
+		return databaseClient.db(process.env.KVC_SHARED_DATABASE_NAME).collection('wkc_subscriptions').findOneAndUpdate({
 			WKCSubscriptionID: e.WKCSubscriptionID,
 		}, {
 			'$set': {

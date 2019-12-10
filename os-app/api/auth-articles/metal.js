@@ -25,7 +25,7 @@ exports.WKCMetalArticlesCreate = function(databaseClient, inputData, completionH
 
 	var currentDate = new Date();
 
-	return databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_articles').insertOne(Object.assign(inputData, {
+	return databaseClient.db(process.env.KVC_SHARED_DATABASE_NAME).collection('wkc_articles').insertOne(Object.assign(inputData, {
 		WKCArticleDateCreated: currentDate,
 		WKCArticleDateUpdated: currentDate,
 	}), function(err, result) {
@@ -56,7 +56,7 @@ exports.WKCMetalArticlesRead = function(databaseClient, inputData, completionHan
 		throw new Error('WKCErrorInputNotValid');
 	}
 
-	return databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_articles').findOne({
+	return databaseClient.db(process.env.KVC_SHARED_DATABASE_NAME).collection('wkc_articles').findOne({
 		_id: mongodbPackage.ObjectID(inputData),
 	}, function(err, result) {
 		if (err) {
@@ -100,7 +100,7 @@ exports.WKCMetalArticlesUpdate = function(databaseClient, inputData1, inputData2
 		return completionHandler(null, inputData2);
 	}
 
-	return databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_articles').findOneAndUpdate({
+	return databaseClient.db(process.env.KVC_SHARED_DATABASE_NAME).collection('wkc_articles').findOneAndUpdate({
 		_id: mongodbPackage.ObjectID(inputData1),
 	}, {
 		'$set': Object.assign(inputData2, {
@@ -136,7 +136,7 @@ exports.WKCMetalArticlesDelete = function(databaseClient, inputData, completionH
 		throw new Error('WKCErrorInputNotValid');
 	}
 
-	return databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_articles').deleteOne({
+	return databaseClient.db(process.env.KVC_SHARED_DATABASE_NAME).collection('wkc_articles').deleteOne({
 		_id: mongodbPackage.ObjectID(inputData),
 	}, function(err, result) {
 		if (err) {
@@ -170,7 +170,7 @@ exports.WKCMetalArticlesSearch = function(databaseClient, inputData, completionH
 		throw new Error('WKCErrorInputNotValid');
 	}
 
-	return databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_articles').find(inputData
+	return databaseClient.db(process.env.KVC_SHARED_DATABASE_NAME).collection('wkc_articles').find(inputData
 	// {
 	// 		WKCArticleIsArchived: {
 	// 			'$ne': true,

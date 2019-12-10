@@ -43,7 +43,7 @@ exports.WKCAPIMiddlewareAuthenticate = function(req, res, next) {
 		return next(new Error('WKCAPIClientErrorAuthenticationTokenNotSet'));
 	}
 
-	if (req.headers['x-client-key'] !== process.env.WKC_INSECURE_API_ACCESS_TOKEN) {
+	if (req.headers['x-client-key'] !== process.env.KVC_INSECURE_API_ACCESS_TOKEN) {
 		return next(new Error('WKCAPIClientErrorAuthenticationTokenNotValid'));
 	}
 
@@ -94,6 +94,6 @@ exports.WKCActionAPIRoot = function(req, res, next) {
 
 exports.WKCActionAPIToken = function(req, res, next) {
 	return res.json({
-		WKCAPIToken: process.env.WKC_INSECURE_API_ACCESS_TOKEN,
+		WKCAPIToken: process.env.KVC_INSECURE_API_ACCESS_TOKEN,
 	});
 };

@@ -75,7 +75,7 @@ describe('WKCSubscriptionHandlerCustomTwitterTimelineRequestCallback', function 
 	});
 
 	it('returns kWKCSettingKeyCustomTwitterToken', function(done) {
-		WKCTestingMongoClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('kvc_settings').insertOne({
+		WKCTestingMongoClient.db(process.env.KVC_SHARED_DATABASE_NAME).collection('kvc_settings').insertOne({
 			WKCSettingKey: 'kWKCSettingKeyCustomTwitterToken',
 			WKCSettingValue: 'alfa',
 		}, function(err, result) {

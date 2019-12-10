@@ -26,7 +26,7 @@ exports.WKCSnapshotsMetalCreate = function(databaseClient, inputData, completion
 
 	var currentDate = new Date();
 
-	return databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_snapshots').insertOne(Object.assign(inputData, {
+	return databaseClient.db(process.env.KVC_SHARED_DATABASE_NAME).collection('wkc_snapshots').insertOne(Object.assign(inputData, {
 		WKCSnapshotID: parseInt(new Date() * 1).toString(),
 		WKCSnapshotDateCreated: currentDate,
 		WKCSnapshotDateUpdated: currentDate,

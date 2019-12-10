@@ -15,7 +15,7 @@ exports._WKCSettingsMetalSet = async function(databaseClient, param1, param2) {
 		return Promise.reject(new Error('WKCErrorInputNotValid'));
 	}
 
-	let outputData = (await databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('kvc_settings').findOneAndUpdate({
+	let outputData = (await databaseClient.db(process.env.KVC_SHARED_DATABASE_NAME).collection('kvc_settings').findOneAndUpdate({
 		WKCSettingKey: param1,
 	}, {
 		'$set': {
@@ -36,7 +36,7 @@ exports._WKCSettingsMetalGet = async function(databaseClient, inputData) {
 		return Promise.reject(new Error('WKCErrorInputNotValid'));
 	}
 
-	let outputData = await databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('kvc_settings').findOne({
+	let outputData = await databaseClient.db(process.env.KVC_SHARED_DATABASE_NAME).collection('kvc_settings').findOne({
 		WKCSettingKey: inputData,
 	});
 

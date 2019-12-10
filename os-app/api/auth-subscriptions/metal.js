@@ -26,7 +26,7 @@ exports.WKCMetalSubscriptionsCreate = function(databaseClient, inputData, comple
 
 	var currentDate = new Date();
 
-	return databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_subscriptions').insertOne(Object.assign(inputData, {
+	return databaseClient.db(process.env.KVC_SHARED_DATABASE_NAME).collection('wkc_subscriptions').insertOne(Object.assign(inputData, {
 		WKCSubscriptionID: parseInt(new Date() * 1).toString(),
 		WKCSubscriptionDateCreated: currentDate,
 		WKCSubscriptionDateUpdated: currentDate,
@@ -56,7 +56,7 @@ exports.WKCMetalSubscriptionsRead = function(databaseClient, inputData, completi
 		throw new Error('WKCErrorInputNotValid');
 	}
 
-	return databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_subscriptions').findOne({
+	return databaseClient.db(process.env.KVC_SHARED_DATABASE_NAME).collection('wkc_subscriptions').findOne({
 		WKCSubscriptionID: inputData,
 	}, function(err, result) {
 		if (err) {
@@ -101,7 +101,7 @@ exports.WKCMetalSubscriptionsUpdate = function(databaseClient, objectID, inputDa
 		}));
 	}
 
-	return databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_subscriptions').findOneAndUpdate({
+	return databaseClient.db(process.env.KVC_SHARED_DATABASE_NAME).collection('wkc_subscriptions').findOneAndUpdate({
 		WKCSubscriptionID: objectID,
 	}, {
 		'$set': Object.assign(inputData, {
@@ -137,7 +137,7 @@ exports.WKCMetalSubscriptionsDelete = function(databaseClient, inputData, comple
 		throw new Error('WKCErrorInputNotValid');
 	}
 
-	return databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_subscriptions').deleteOne({
+	return databaseClient.db(process.env.KVC_SHARED_DATABASE_NAME).collection('wkc_subscriptions').deleteOne({
 		WKCSubscriptionID: inputData,
 	}, function(err, result) {
 		if (err) {
@@ -163,7 +163,7 @@ exports.WKCMetalSubscriptionsSearch = function(databaseClient, inputData, comple
 		throw new Error('WKCErrorInputNotValid');
 	}
 
-	return databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_subscriptions').find({}).project(modelLibrary.WKCSubscriptionHiddenPropertyNames().concat(options && options.WKCOptionExcludeWKCSubscriptionFetchContent ? ['WKCSubscriptionFetchContent'] : []).reduce(function(hash, e) {
+	return databaseClient.db(process.env.KVC_SHARED_DATABASE_NAME).collection('wkc_subscriptions').find({}).project(modelLibrary.WKCSubscriptionHiddenPropertyNames().concat(options && options.WKCOptionExcludeWKCSubscriptionFetchContent ? ['WKCSubscriptionFetchContent'] : []).reduce(function(hash, e) {
 		hash[e] = 0;
 
 		return hash;
@@ -183,7 +183,7 @@ exports.WKCMetalSubscriptionsNeedingFetch = function(databaseClient, completionH
 		throw new Error('WKCErrorInputNotValid');
 	}
 
-	return databaseClient.db(process.env.WKC_SHARED_DATABASE_NAME).collection('wkc_subscriptions').find({
+	return databaseClient.db(process.env.KVC_SHARED_DATABASE_NAME).collection('wkc_subscriptions').find({
 		'$and': [{
 			'$or': [{
 				WKCSubscriptionFetchDate: {

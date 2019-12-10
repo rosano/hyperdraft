@@ -47,7 +47,7 @@ exports.OLSKControllerSharedConnections = function() {
 					didConnect = true;
 				});
 				
-				storageClient.remoteStorage.connect(process.env.WKC_REMOTE_STORAGE_ACCOUNT, process.env.WKC_REMOTE_STORAGE_KEY);
+				storageClient.remoteStorage.connect(process.env.KVC_REMOTE_STORAGE_ACCOUNT, process.env.KVC_REMOTE_STORAGE_KEY);
 			},
 			OLSKConnectionCleanup (client) {
 				return;
