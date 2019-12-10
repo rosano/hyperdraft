@@ -1,6 +1,6 @@
 :root {
-	--WKCCommonBackground: hsl(0, 0%, 100%);
-	--WKCCommonForeground: hsl(0, 0%, 0%);
+	--KVCCommonBackground: hsl(0, 0%, 100%);
+	--KVCCommonForeground: hsl(0, 0%, 0%);
 }
 
 .KVCSharedHidden {

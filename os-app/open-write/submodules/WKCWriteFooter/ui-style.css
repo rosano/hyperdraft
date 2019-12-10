@@ -11,7 +11,7 @@
 }
 
 .WKCWriteFooter a {
-	color: var(--WKCCommonForeground);
+	color: var(--KVCCommonForeground);
 }
 
 .WKCWriteFooter :global(.OLSKToolbar) {
