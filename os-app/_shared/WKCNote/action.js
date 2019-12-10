@@ -2,7 +2,7 @@ import * as WKCNoteMetal from './metal.js';
 import * as WKCNoteModel from './model.js';
 import * as WKCSettingAction from '../WKCSetting/action.js';
 import * as WKCVersionAction from '../WKCVersion/action.js';
-import * as WKCParser from '../WKCParser/main.js';
+import WKCParser from '../WKCParser/main.js';
 import { factory, detectPrng } from 'ulid';
 const uniqueID = typeof require === 'undefined' && navigator.appName === 'Zombie' ? factory(detectPrng(true)) : factory();
 
