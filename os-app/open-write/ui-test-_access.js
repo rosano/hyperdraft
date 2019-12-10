@@ -38,7 +38,7 @@ describe('WKCWrite_Access', function () {
 		browser.assert.elements(WKCWriteStorageWidget, 1);
 	});
 
-	context('create', function () {
+	context('create', function test_create () {
 		
 		before(function () {
 			return browser.pressButton('.WKCWriteMasterCreateButton');
@@ -54,7 +54,7 @@ describe('WKCWrite_Access', function () {
 	
 	});
 
-	context('back', function () {
+	context('back', function test_back () {
 		
 		before(function () {
 			return browser.pressButton('.WKCWriteDetailToolbarBackButton');
@@ -66,7 +66,7 @@ describe('WKCWrite_Access', function () {
 	
 	});
 
-	context('click', function () {
+	context('click', function test_click () {
 		
 		before(function () {
 			return browser.click('.WKCWriteMasterListItem');
@@ -82,7 +82,7 @@ describe('WKCWrite_Access', function () {
 	
 	});
 
-	context('discard', function () {
+	context('discard', function test_discard () {
 
 		context('cancel', function () {
 			
