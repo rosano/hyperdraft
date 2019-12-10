@@ -62,6 +62,10 @@
     "OLSKToolbar": "olsk/OLSKToolbar",
     "OLSKToolbarElementGroup": "olsk/OLSKToolbarElementGroup",
 
+    "// FRONTEND TEXT": null,
+    "marked": "latest",
+    "OLSKString": "olsk/OLSKString",
+
     "// FRONTEND GENERAL": null,
     "identicon.js": "latest",
     "blueimp-md5": "latest",
