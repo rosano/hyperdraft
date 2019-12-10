@@ -145,7 +145,7 @@ import KVCWriteEditor from '../KVCWriteEditor/main.svelte';
 
 			{#if mod._ValueItem.KVCNotePublishStatusIsPublished }
 				<a class="KVCWriteDetailToolbarPublicLink" href={ window.OLSKCanonicalFor('WKCRouteRefsRead', {
-					wkc_note_public_id: mod._ValueItem.KVCNotePublicID,
+					kvc_note_public_id: mod._ValueItem.KVCNotePublicID,
 				}) } target="_blank">{ OLSKLocalized('KVCWriteDetailToolbarPublicLinkText') }</a>
 					
 				<button class="KVCWriteDetailToolbarRetractButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarRetractButtonText') } on:click={ () => KVCWriteDetailDispatchRetract() } style="background-image: url('/panel/_shared/ui-assets/wIKWriteRetract.svg')"></button>

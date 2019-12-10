@@ -109,12 +109,12 @@ exports.OLSKControllerRoutes = function() {
 			OLSKRouteLanguages: ['en'],
 		},
 		WKCRouteRefsRead: {
-			OLSKRoutePath: '/:wkc_note_public_id(\\d+)',
+			OLSKRoutePath: '/:kvc_note_public_id(\\d+)',
 			OLSKRouteMethod: 'get',
 			OLSKRouteFunction: async function(req, res, next) {
 				let publicNotes = req.OLSKCacheReadForCacheKey(kWKCRefCacheKey) || exports.RCSRefUpdateCachedPublicNotes(req.OLSKCacheWriteWithCacheKeyAndCacheObject, await exports.RCSRefFetchPublicNotesArray());
 
-				let item = publicNotes[req.params.wkc_note_public_id];
+				let item = publicNotes[req.params.kvc_note_public_id];
 
 				if (!item) {
 					return next();
@@ -135,7 +135,7 @@ exports.OLSKControllerRoutes = function() {
 				item.KVCNoteDetectedTitle = KVCParser.KVCParserTitleForPlaintext(item.KVCNoteBody);
 				item.KVCNoteDetectedBody = KVCParser.KVCParserHTMLForPlaintext(KVCParser.KVCParserReplaceLinks(KVCParser.KVCParserBodyForPlaintext(item.KVCNoteBody), Object.entries(publicLinks).map(function (e) {
 					return [e[0], `[${ e[0] }](${ res.locals.OLSKCanonicalFor('WKCRouteRefsRead', {
-						wkc_note_public_id: e[1],
+						kvc_note_public_id: e[1],
 					}) })`];
 				}).reduce(function (coll, e) {
 					coll[e[0]] = e[1];
@@ -152,12 +152,12 @@ exports.OLSKControllerRoutes = function() {
 			],
 		},
 		WKCRefsReadPlaintext: {
-			OLSKRoutePath: '/:wkc_note_public_id(\\d+)/plaintext',
+			OLSKRoutePath: '/:kvc_note_public_id(\\d+)/plaintext',
 			OLSKRouteMethod: 'get',
 			OLSKRouteFunction: async function(req, res, next) {
 				let publicNotes = req.OLSKCacheReadForCacheKey(kWKCRefCacheKey) || exports.RCSRefUpdateCachedPublicNotes(req.OLSKCacheWriteWithCacheKeyAndCacheObject, await exports.RCSRefFetchPublicNotesArray());
 
-				let item = publicNotes[req.params.wkc_note_public_id];
+				let item = publicNotes[req.params.kvc_note_public_id];
 
 				if (!item) {
 					return next();

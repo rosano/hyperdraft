@@ -1,7 +1,7 @@
 import * as KVCNoteModel from './model.js';
 import * as OLSKRemoteStorage from 'OLSKRemoteStorage';
 
-const kType = 'wkc_note';
+const kType = 'kvc_note';
 const kCollection = 'kvc_notes';
 
 export const KVCNoteStoragePath = function(inputData) {
