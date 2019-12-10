@@ -23,6 +23,10 @@ describe('WKCWriteDetail_Misc', function () {
 			before(function () {
 				browser.assert.hasNoClass(WKCWriteDetail, 'OLSKMobileViewInactive');
 			});
+
+			before(function () {
+				browser.assert.attribute(WKCWriteDetail, 'aria-hidden', null);
+			});
 			
 			before(function() {
 				return browser.OLSKVisit(kDefaultRoute, {
@@ -30,8 +34,12 @@ describe('WKCWriteDetail_Misc', function () {
 				});
 			});
 
-			it('sets class', function () {
+			it('classes OLSKMobileViewInactive', function () {
 				browser.assert.hasClass(WKCWriteDetail, 'OLSKMobileViewInactive');
+			});
+
+			it('sets aria-hidden', function () {
+				browser.assert.attribute(WKCWriteDetail, 'aria-hidden', 'true');
 			});
 		
 		});

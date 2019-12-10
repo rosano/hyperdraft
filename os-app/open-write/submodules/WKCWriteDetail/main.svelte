@@ -123,7 +123,7 @@ import WKCWriteEditor from '../WKCWriteEditor/main.svelte';
 </script>
 <svelte:window on:keydown={ mod.InterfaceWindowDidKeydown }/>
 
-<div class="WKCWriteDetail OLSKViewportDetail" class:OLSKMobileViewInactive={ OLSKMobileViewInactive }>
+<div class="WKCWriteDetail OLSKViewportDetail" class:OLSKMobileViewInactive={ OLSKMobileViewInactive } aria-hidden={ OLSKMobileViewInactive ? true : null }>
 
 {#if !mod._ValueItem}
 <div class="WKCWriteDetailPlaceholder OLSKLayoutElementTextVisual">{ OLSKLocalized('WKCWriteDetailPlaceholderText') }</div>
