@@ -186,7 +186,7 @@
 
 		moi.reactConfirmationPreviewHeadingType(OLSKLocalized('WKCReadModuleSubscribeConfirmationPreviewHeadingTypeFeedRSSText'));
 
-		moi.reactConfirmationPreviewArticles(WKCParser.WKCParserArticlesForFeedRSS(new DOMParser(), null, new XMLSerializer().serializeToString(parsedXML.documentElement)));
+		moi.reactConfirmationPreviewArticles(KVCParser.KVCParserArticlesForFeedRSS(new DOMParser(), null, new XMLSerializer().serializeToString(parsedXML.documentElement)));
 
 		moi.reactConfirmationShared();
 	};
@@ -202,7 +202,7 @@
 
 		moi.reactConfirmationPreviewHeadingType(OLSKLocalized('WKCReadModuleSubscribeConfirmationPreviewHeadingTypeFeedAtomText'));
 
-		moi.reactConfirmationPreviewArticles(WKCParser.WKCParserArticlesForFeedAtom(new DOMParser(), null, new XMLSerializer().serializeToString(parsedXML.documentElement)));
+		moi.reactConfirmationPreviewArticles(KVCParser.KVCParserArticlesForFeedAtom(new DOMParser(), null, new XMLSerializer().serializeToString(parsedXML.documentElement)));
 
 		moi.reactConfirmationShared();
 	};
@@ -222,7 +222,7 @@
 			};
 		}));
 
-		moi.reactConfirmationPreviewPage(WKCParser.WKCParserHTMLForPlaintext(WKCParser.WKCParserPlaintextForHTML(parsedHTML.body.innerHTML)));
+		moi.reactConfirmationPreviewPage(KVCParser.KVCParserHTMLForPlaintext(KVCParser.KVCParserPlaintextForHTML(parsedHTML.body.innerHTML)));
 
 		moi.reactConfirmationFormName(parsedHTML.getElementsByTagName('title')[0].textContent);
 
@@ -264,7 +264,7 @@
 	//_ ControlConfirmationCustomTwitterTimeline
 
 	moi.ControlConfirmationCustomTwitterTimeline = function (inputData, responseJSON) {
-		const articleObjects = WKCParser.WKCParserArticlesForCustomTwitterTimeline(null, responseJSON);
+		const articleObjects = KVCParser.KVCParserArticlesForCustomTwitterTimeline(null, responseJSON);
 
 		moi.reactConfirmationPreviewArticles(articleObjects);
 

@@ -11,7 +11,7 @@ import { KVCNoteStorage } from '../_shared/KVCNote/storage.js';
 import { KVCNoteModelPostJSONParse } from '../_shared/KVCNote/model.js';
 import { KVCSettingStorage } from '../_shared/KVCSetting/storage.js';
 import { KVCVersionStorage } from '../_shared/KVCVersion/storage.js';
-import WKCParser from '../_shared/WKCParser/main.js';
+import KVCParser from '../_shared/KVCParser/main.js';
 import { OLSK_TESTING_BEHAVIOUR } from 'OLSKTesting';
 import * as OLSKRemoteStorage from '../_shared/__external/OLSKRemoteStorage/main.js'
 import * as KVCNoteAction from '../_shared/KVCNote/action.js';
@@ -99,11 +99,11 @@ const mod = {
 	},
 
 	WKCWriteMasterDelegateItemTitle (param1, param2) {
-		return WKCWriteLogic.WKCWriteTruncatedTitleFor(WKCParser.WKCParserTitleForPlaintext(param1), param2);
+		return WKCWriteLogic.WKCWriteTruncatedTitleFor(KVCParser.KVCParserTitleForPlaintext(param1), param2);
 	},
 
 	WKCWriteMasterDelegateItemBody (inputData) {
-		return WKCParser.WKCParserSnippetForPlaintext(WKCParser.WKCParserBodyForPlaintext(inputData));
+		return KVCParser.KVCParserSnippetForPlaintext(KVCParser.KVCParserBodyForPlaintext(inputData));
 	},
 
 	WKCWriteDetailDispatchBack () {
@@ -315,9 +315,9 @@ const mod = {
 		}
 
 		mod.ValueNoteSelected(mod._ValueNotesVisible.filter(function (e) {
-			return WKCParser.WKCParserTitleForPlaintext(e.KVCNoteBody).toLowerCase() === inputData.toLowerCase();
+			return KVCParser.KVCParserTitleForPlaintext(e.KVCNoteBody).toLowerCase() === inputData.toLowerCase();
 		}).concat(mod._ValueNotesVisible.filter(function (e) {
-			return WKCParser.WKCParserTitleForPlaintext(e.KVCNoteBody).toLowerCase().includes(inputData.toLowerCase());
+			return KVCParser.KVCParserTitleForPlaintext(e.KVCNoteBody).toLowerCase().includes(inputData.toLowerCase());
 		})).shift());
 	},
 

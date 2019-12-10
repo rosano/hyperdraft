@@ -2,7 +2,7 @@ import * as KVCNoteMetal from './metal.js';
 import * as KVCNoteModel from './model.js';
 import * as KVCSettingAction from '../KVCSetting/action.js';
 import * as KVCVersionAction from '../KVCVersion/action.js';
-import * as WKCParser from '../WKCParser/main.js';
+import * as KVCParser from '../KVCParser/main.js';
 import { factory, detectPrng } from 'ulid';
 const uniqueID = typeof require === 'undefined' && navigator.appName === 'Zombie' ? factory(detectPrng(true)) : factory();
 
@@ -98,7 +98,7 @@ export const KVCNoteActionGetPublicLinks = async function(storageClient) {
 	return Promise.resolve((await KVCNoteActionQuery(storageClient, {
 		KVCNotePublishStatusIsPublished: true,
 	})).map(KVCNoteModel.KVCNoteModelPostJSONParse).map(function (e) {
-		return [WKCParser.WKCParserTitleForPlaintext(e.KVCNoteBody), e.KVCNotePublicID];
+		return [KVCParser.KVCParserTitleForPlaintext(e.KVCNoteBody), e.KVCNotePublicID];
 	}).reduce(function (coll, [key, val]) {
 		if (typeof coll[key] === 'undefined') {
 			coll[key] = val;

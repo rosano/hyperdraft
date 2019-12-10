@@ -50,7 +50,7 @@ const contentForFirst = function (inputData) {
 
 const mod = {
 
-	WKCParserArticlesForFeedRSS (DOMParserInstance, oldString, newString) {
+	KVCParserArticlesForFeedRSS (DOMParserInstance, oldString, newString) {
 		if (typeof DOMParserInstance !== 'object' || DOMParserInstance === null) {
 			throw new Error('KVCErrorInputNotValid');
 		}
@@ -83,12 +83,12 @@ const mod = {
 				WKCArticlePublishDate: new Date(contentForFirst(e.getElementsByTagName('pubDate')) || contentForFirst(e.getElementsByTagName('dc:date')) || Date.now()),
 				WKCArticleAuthor: contentForFirst(e.getElementsByTagName('author')),
 				WKCArticleBody: itemContent,
-				WKCArticleSnippet: exports.WKCParserSnippetForPlaintext(DOMParserInstance.parseFromString(`<div>${itemContent}</div>`, 'text/html').body.textContent),
+				WKCArticleSnippet: exports.KVCParserSnippetForPlaintext(DOMParserInstance.parseFromString(`<div>${itemContent}</div>`, 'text/html').body.textContent),
 			};
 		});
 	},
 
-	WKCParserArticlesForFeedAtom (DOMParserInstance, oldString, newString) {
+	KVCParserArticlesForFeedAtom (DOMParserInstance, oldString, newString) {
 		if (typeof DOMParserInstance !== 'object' || DOMParserInstance === null) {
 			throw new Error('KVCErrorInputNotValid');
 		}
@@ -132,12 +132,12 @@ const mod = {
 				WKCArticlePublishDate: new Date(contentForFirst(e.getElementsByTagName('published')) || contentForFirst(e.getElementsByTagName('updated')) || Date.now()),
 				WKCArticleAuthor: contentForFirst(e.getElementsByTagName('author')),
 				WKCArticleBody: itemContent,
-				WKCArticleSnippet: exports.WKCParserSnippetForPlaintext(DOMParserInstance.parseFromString(`<div>${itemContent}</div>`, 'text/html').body.textContent),
+				WKCArticleSnippet: exports.KVCParserSnippetForPlaintext(DOMParserInstance.parseFromString(`<div>${itemContent}</div>`, 'text/html').body.textContent),
 			};
 		});
 	},
 
-	WKCParserArticlesForPage (DOMParserInstance, oldString, newString) {
+	KVCParserArticlesForPage (DOMParserInstance, oldString, newString) {
 		if (typeof DOMParserInstance !== 'object' || DOMParserInstance === null) {
 			throw new Error('KVCErrorInputNotValid');
 		}
@@ -150,20 +150,20 @@ const mod = {
 			throw new Error('KVCErrorInputNotValid');
 		}
 
-		oldString = exports.WKCParserPlaintextForHTML(oldString || '');
-		newString = exports.WKCParserPlaintextForHTML(newString);
+		oldString = exports.KVCParserPlaintextForHTML(oldString || '');
+		newString = exports.KVCParserPlaintextForHTML(newString);
 
 		if (oldString === newString) {
 			return [];
 		}
 
 		return [{
-			WKCArticleBody: KVCDiffPackage._KVCDiffConvertDiffTagsToHTML(exports.WKCParserHTMLForPlaintext(KVCDiffPackage.KVCDiffHTMLForStrings(oldString, newString))),
+			WKCArticleBody: KVCDiffPackage._KVCDiffConvertDiffTagsToHTML(exports.KVCParserHTMLForPlaintext(KVCDiffPackage.KVCDiffHTMLForStrings(oldString, newString))),
 			WKCArticlePublishDate: new Date(),
 		}];
 	},
 
-	WKCParserArticlesForFile (oldString, newString) {
+	KVCParserArticlesForFile (oldString, newString) {
 		if (typeof newString !== 'string') {
 			throw new Error('KVCErrorInputNotValid');
 		}
@@ -178,11 +178,11 @@ const mod = {
 		}];
 	},
 
-	WKCParserInputDataIsCustomTwitterTimeline (inputData) {
+	KVCParserInputDataIsCustomTwitterTimeline (inputData) {
 		return Array.isArray(inputData);
 	},
 
-	WKCParserArticlesForCustomTwitterTimeline (oldBody, newBody) {
+	KVCParserArticlesForCustomTwitterTimeline (oldBody, newBody) {
 		if (typeof newBody !== 'string') {
 			throw new Error('KVCErrorInputNotValid');
 		}
@@ -212,13 +212,13 @@ const mod = {
 				WKCArticleOriginalGUID: e.id_str,
 				WKCArticleOriginalURL: `https://twitter.com/${e.user.screen_name}/status/${e.id_str}`,
 				WKCArticlePublishDate: new Date(e.created_at),
-				WKCArticleBody: exports.WKCParserHTMLForPlaintext(exports._WKCParserTweetBodyForTweetObject(e)),
-				WKCArticleSnippet: exports.WKCParserSnippetForPlaintext(e.full_text),
+				WKCArticleBody: exports.KVCParserHTMLForPlaintext(exports._KVCParserTweetBodyForTweetObject(e)),
+				WKCArticleSnippet: exports.KVCParserSnippetForPlaintext(e.full_text),
 			};
 		});
 	},
 
-	_WKCParserTweetBodyForTweetObject (inputData) {
+	_KVCParserTweetBodyForTweetObject (inputData) {
 		var tweetBody = inputData.full_text;
 
 		(tweetBody.match(/#([^\W ]+)/g) || []).forEach(function (e) {
@@ -232,7 +232,7 @@ const mod = {
 		return tweetBody;
 	},
 
-	WKCParserHTMLForPlaintext (inputData) {
+	KVCParserHTMLForPlaintext (inputData) {
 		if (typeof inputData !== 'string') {
 			throw new Error('KVCErrorInputNotValid');
 		}
@@ -240,7 +240,7 @@ const mod = {
 		return showdownConverter.makeHtml(inputData);
 	},
 
-	WKCParserPlaintextForHTML (inputData) {
+	KVCParserPlaintextForHTML (inputData) {
 		if (typeof inputData !== 'string') {
 			throw new Error('KVCErrorInputNotValid');
 		}
@@ -248,7 +248,7 @@ const mod = {
 		return turndownInstance.turndown(inputData);
 	},
 
-	WKCParserTitleForPlaintext (inputData) {
+	KVCParserTitleForPlaintext (inputData) {
 		if (typeof inputData !== 'string') {
 			return '';
 		}
@@ -256,7 +256,7 @@ const mod = {
 		return inputData.split('\n').shift();
 	},
 
-	WKCParserBodyForPlaintext (inputData) {
+	KVCParserBodyForPlaintext (inputData) {
 		if (typeof inputData !== 'string') {
 			return '';
 		}
@@ -264,7 +264,7 @@ const mod = {
 		return inputData.split('\n').slice(1).join('\n').trim();
 	},
 
-	WKCParserSnippetForPlaintext (inputData) {
+	KVCParserSnippetForPlaintext (inputData) {
 		if (typeof inputData !== 'string') {
 			throw new Error('KVCErrorInputNotValid');
 		}
@@ -272,7 +272,7 @@ const mod = {
 		return inputData.length <= 100 ? inputData : inputData.slice(0, 100).split(' ').slice(0, -1).join(' ').concat('…');
 	},
 
-	WKCParserReplaceLinks (param1, param2) {
+	KVCParserReplaceLinks (param1, param2) {
 		if (typeof param1 !== 'string') {
 			throw new Error('KVCErrorInputNotValid');
 		}

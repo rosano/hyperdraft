@@ -120,10 +120,10 @@ exports.OLSKControllerRoutes = function() {
 					return next();
 				}
 
-				const WKCParser = require('../_shared/WKCParser/main.js');
+				const KVCParser = require('../_shared/KVCParser/main.js');
 
 				const publicLinks = Object.values(publicNotes).map(function (e) {
-					return [WKCParser.WKCParserTitleForPlaintext(e.KVCNoteBody), e.KVCNotePublicID];
+					return [KVCParser.KVCParserTitleForPlaintext(e.KVCNoteBody), e.KVCNotePublicID];
 				}).reduce(function (coll, [key, val]) {
 					if (typeof coll[key] === 'undefined') {
 						coll[key] = val;
@@ -132,8 +132,8 @@ exports.OLSKControllerRoutes = function() {
 					return coll;
 				}, {});
 				
-				item.KVCNoteDetectedTitle = WKCParser.WKCParserTitleForPlaintext(item.KVCNoteBody);
-				item.KVCNoteDetectedBody = WKCParser.WKCParserHTMLForPlaintext(WKCParser.WKCParserReplaceLinks(WKCParser.WKCParserBodyForPlaintext(item.KVCNoteBody), Object.entries(publicLinks).map(function (e) {
+				item.KVCNoteDetectedTitle = KVCParser.KVCParserTitleForPlaintext(item.KVCNoteBody);
+				item.KVCNoteDetectedBody = KVCParser.KVCParserHTMLForPlaintext(KVCParser.KVCParserReplaceLinks(KVCParser.KVCParserBodyForPlaintext(item.KVCNoteBody), Object.entries(publicLinks).map(function (e) {
 					return [e[0], `[${ e[0] }](${ res.locals.OLSKCanonicalFor('WKCRouteRefsRead', {
 						wkc_note_public_id: e[1],
 					}) })`];
