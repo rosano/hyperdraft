@@ -156,7 +156,7 @@ const mod = {
 				}
 			},
 			Tab () {
-				document.activeElement !== document.querySelector('.WKCWriteMasterFilterField') ? document.querySelector('.WKCWriteMasterFilterField').focus() : mod.WKCWriteDetailInstance.WKCWriteDetailFocus();
+				document.activeElement !== document.querySelector('.WKCWriteMasterFilterField') ? document.querySelector('.WKCWriteMasterFilterField').focus() : mod.WKCWriteDetailInstance.WKCWriteDetailEditorFocus();
 
 				event.preventDefault();
 			},
@@ -220,7 +220,7 @@ const mod = {
 		mod.ControlNoteSelect(item);
 
 		if (mod.DataIsMobile()) {
-			mod.WKCWriteDetailInstance.WKCWriteDetailFocus();
+			mod.WKCWriteDetailInstance.WKCWriteDetailEditorFocus();
 		}
 		
 		if (typeof inputData !== 'string') {
@@ -249,7 +249,7 @@ const mod = {
 			return;
 		}
 		
-		mod.WKCWriteDetailInstance.WKCWriteDetailFocus();
+		mod.WKCWriteDetailInstance.WKCWriteDetailEditorFocus();
 	},
 	
 	ControlNoteJump (inputData) {
@@ -261,7 +261,7 @@ const mod = {
 					return;
 				}
 
-				mod.WKCWriteDetailInstance.WKCWriteDetailFocus();
+				mod.WKCWriteDetailInstance.WKCWriteDetailEditorFocus();
 			},
 		});
 	},

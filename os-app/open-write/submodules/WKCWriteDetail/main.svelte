@@ -25,7 +25,7 @@ export const WKCWriteDetailSetItem = function (inputData) {
 	}
 };
 
-export const WKCWriteDetailFocus = function () {
+export const WKCWriteDetailEditorFocus = function () {
 	mod.ControlConfigureEditor(function (inputData) {
 		inputData.WKCWriteEditorFocus();
 	});

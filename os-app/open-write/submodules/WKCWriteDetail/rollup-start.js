@@ -43,8 +43,8 @@ WKCWriteDetail.WKCWriteDetailSetItem(params.WKCWriteDetailItem);
 
 window.WKCWriteDetailBehaviour = {
 
-	TestWKCWriteDetailFocus () {
-		WKCWriteDetail.WKCWriteDetailFocus();
+	TestWKCWriteDetailEditorFocus () {
+		WKCWriteDetail.WKCWriteDetailEditorFocus();
 	},
 
 };
