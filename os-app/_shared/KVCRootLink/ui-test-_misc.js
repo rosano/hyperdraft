@@ -15,7 +15,7 @@ describe('KVCRootLink_Misc', function () {
 		});
 	
 		it('sets src', function () {
-			browser.assert.attribute(KVCRootLinkLogo, 'src', '/_shared/KVCRootLink/ui-assets/logo.svg');
+			browser.assert.attribute(KVCRootLinkLogo, 'src', '/_shared/KVCRootLink/ui-assets/identity.svg');
 		});
 	
 	});
