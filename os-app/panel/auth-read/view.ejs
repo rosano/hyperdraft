@@ -63,7 +63,7 @@ locals.OLSKPagePublicRouteKeys = [
 
 <div id="WKCRead" class="WKCReadLoading">
 	<div id="WKCReadSubscribe">
-		<header id="WKCReadSubscribeHeader" class="WKCSharedToolbar">
+		<header id="WKCReadSubscribeHeader" class="KVCSharedToolbar">
 			<button id="WKCReadSubscribeHeaderCloseButton" class="OLSKLayoutElementTappable OLSKLayoutButtonNoStyle">✖️</button>
 			<script type="text/javascript">
 				d3.select('#WKCReadSubscribeHeaderCloseButton').on('click', WKCReadBehaviour.interfaceSubscriptionsCreateCloseButtonDidClick);
@@ -73,7 +73,7 @@ locals.OLSKPagePublicRouteKeys = [
 	</div>
 
 	<div id="WKCReadSources">
-		<header id="WKCReadSourcesToolbar" class="WKCSharedToolbar">&nbsp;</header>
+		<header id="WKCReadSourcesToolbar" class="KVCSharedToolbar">&nbsp;</header>
 
 		<div id="WKCReadSourcesContent">
 			<ul id="WKCReadSourcesContentList">
@@ -93,27 +93,27 @@ locals.OLSKPagePublicRouteKeys = [
 	</div>
 
 	<div id="WKCReadMaster">
-		<header id="WKCReadMasterToolbar" class="WKCSharedToolbar">
-			<button id="WKCReadMasterToolbarCreateButton" class="WKCSharedToolbarButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle" title="<%= OLSKLocalized('WKCReadModuleSubscribeHeadingText') %>" style="background-image: url('/panel/_shared/ui-assets/wIKSharedCreate.svg')" accesskey="n" onclick="WKCReadBehaviour.interfaceSubscriptionsCreateButtonDidClick()"></button>
+		<header id="WKCReadMasterToolbar" class="KVCSharedToolbar">
+			<button id="WKCReadMasterToolbarCreateButton" class="KVCSharedToolbarButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle" title="<%= OLSKLocalized('WKCReadModuleSubscribeHeadingText') %>" style="background-image: url('/panel/_shared/ui-assets/wIKSharedCreate.svg')" accesskey="n" onclick="WKCReadBehaviour.interfaceSubscriptionsCreateButtonDidClick()"></button>
 		</header>
 
 		<div id="WKCReadMasterContent">
 			<div id="WKCReadMasterContentList"></div>
-			<div id="WKCReadMasterLoader" class="WKCSharedHidden">
+			<div id="WKCReadMasterLoader" class="KVCSharedHidden">
 				<%- include('../_shared/WKCLoader/view.ejs') %>
 			</div>
 		</div>
 	</div>
 
 	<div id="WKCReadDetail" class="WKCReadDetailInactive">
-		<header id="WKCReadDetailToolbar" class="WKCSharedToolbar">
-			<button id="WKCReadDetailToolbarInboxButton" class="WKCSharedToolbarButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle WKCSharedHidden" title="<%= OLSKLocalized('WKCReadDetailToolbarInboxButtonText') %>" style="background-image: url('/panel/_shared/ui-assets/wIKReadInbox.svg')"onclick="WKCReadBehaviour.interfaceArticlesInboxButtonDidClick()"></button>
+		<header id="WKCReadDetailToolbar" class="KVCSharedToolbar">
+			<button id="WKCReadDetailToolbarInboxButton" class="KVCSharedToolbarButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle KVCSharedHidden" title="<%= OLSKLocalized('WKCReadDetailToolbarInboxButtonText') %>" style="background-image: url('/panel/_shared/ui-assets/wIKReadInbox.svg')"onclick="WKCReadBehaviour.interfaceArticlesInboxButtonDidClick()"></button>
 
-			<button id="WKCReadDetailToolbarUnreadButton" class="WKCSharedToolbarButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle WKCSharedHidden" title="<%= OLSKLocalized('WKCReadDetailToolbarUnreadButtonText') %>" style="background-image: url('/panel/_shared/ui-assets/wIKReadUnread.svg')" onclick="WKCReadBehaviour.interfaceArticlesUnreadButtonDidClick()"></button>
+			<button id="WKCReadDetailToolbarUnreadButton" class="KVCSharedToolbarButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle KVCSharedHidden" title="<%= OLSKLocalized('WKCReadDetailToolbarUnreadButtonText') %>" style="background-image: url('/panel/_shared/ui-assets/wIKReadUnread.svg')" onclick="WKCReadBehaviour.interfaceArticlesUnreadButtonDidClick()"></button>
 
-			<button id="WKCReadDetailToolbarArchiveButton" class="WKCSharedToolbarButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle" title="<%= OLSKLocalized('WKCReadDetailToolbarArchiveButtonText') %>" style="background-image: url('/panel/_shared/ui-assets/wIKReadArchive.svg')" onclick="WKCReadBehaviour.interfaceArticlesArchiveButtonDidClick()" accesskey="a"></button>
+			<button id="WKCReadDetailToolbarArchiveButton" class="KVCSharedToolbarButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle" title="<%= OLSKLocalized('WKCReadDetailToolbarArchiveButtonText') %>" style="background-image: url('/panel/_shared/ui-assets/wIKReadArchive.svg')" onclick="WKCReadBehaviour.interfaceArticlesArchiveButtonDidClick()" accesskey="a"></button>
 
-			<button id="WKCReadDetailToolbarDiscardButton" class="WKCSharedToolbarButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle" title="<%= OLSKLocalized('WKCReadDetailToolbarDiscardButtonText') %>" style="background-image: url('/panel/_shared/ui-assets/wIKReadDiscard.svg')" onclick="WKCReadBehaviour.interfaceArticlesDiscardButtonDidClick()"></button>
+			<button id="WKCReadDetailToolbarDiscardButton" class="KVCSharedToolbarButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle" title="<%= OLSKLocalized('WKCReadDetailToolbarDiscardButtonText') %>" style="background-image: url('/panel/_shared/ui-assets/wIKReadDiscard.svg')" onclick="WKCReadBehaviour.interfaceArticlesDiscardButtonDidClick()"></button>
 		</header>
 
 		<div id="WKCReadDetailContent">

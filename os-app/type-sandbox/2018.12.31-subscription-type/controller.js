@@ -21,7 +21,7 @@ exports.OLSKControllerRoutes = function() {
 //_ WKCSandboxSubscriptionTypeAction
 
 exports.WKCSandboxSubscriptionTypeAction = function(req, res, next) {
-	return req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient.db(process.env.KVC_SHARED_DATABASE_NAME).collection('wkc_subscriptions').find({
+	return req.OLSKSharedConnectionFor('KVCSharedConnectionMongo').OLSKConnectionClient.db(process.env.KVC_SHARED_DATABASE_NAME).collection('wkc_subscriptions').find({
 		WKCSubscriptionHandler: null,
 	}).project(['WKCSubscriptionFetchContent'].reduce(function(hash, e) {
 		hash[e] = 0;
@@ -34,7 +34,7 @@ exports.WKCSandboxSubscriptionTypeAction = function(req, res, next) {
 
 		return Promise.all(items.slice(-1).map(function (e) {
 			return new Promise(function (resolve, reject) {
-				return req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient.db(process.env.KVC_SHARED_DATABASE_NAME).collection('wkc_subscriptions').findOneAndUpdate({
+				return req.OLSKSharedConnectionFor('KVCSharedConnectionMongo').OLSKConnectionClient.db(process.env.KVC_SHARED_DATABASE_NAME).collection('wkc_subscriptions').findOneAndUpdate({
 					WKCSubscriptionID: e.WKCSubscriptionID,
 				}, {
 					'$set': {

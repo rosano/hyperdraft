@@ -34,7 +34,7 @@ exports.OLSKControllerRoutes = function() {
 //_ WKCSandboxUniqueIDsAction
 
 exports.WKCSandboxUniqueIDsAction = function(req, res, next) {
-	return WKCSandboxUniqueIDsProcess(req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient).then(function (result) {
+	return WKCSandboxUniqueIDsProcess(req.OLSKSharedConnectionFor('KVCSharedConnectionMongo').OLSKConnectionClient).then(function (result) {
 		return res.send(`<pre>${JSON.stringify(result, 0, '\t')}</pre>`);
 	});
 };

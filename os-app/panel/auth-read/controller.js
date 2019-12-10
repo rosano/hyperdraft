@@ -16,7 +16,7 @@ exports.OLSKControllerRoutes = function() {
 			OLSKRouteFunction: exports.WKCReadAction,
 			OLSKRouteLanguages: ['en'],
 			OLSKRouteMiddlewares: [
-				'WKCSharedMiddlewareAuthenticate',
+				'KVCSharedMiddlewareAuthenticate',
 			],
 		},
 	};

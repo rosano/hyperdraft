@@ -13,8 +13,8 @@ exports.OLSKControllerRoutes = function() {
 			OLSKRouteMethod: 'get',
 			OLSKRouteFunction: exports.WKCActionAPIRoot,
 			OLSKRouteMiddlewares: [
-				'WKCSharedMiddlewareAuthenticate',
-				'WKCSharedMiddlewareAPIAuthenticate',
+				'KVCSharedMiddlewareAuthenticate',
+				'KVCSharedMiddlewareAPIAuthenticate',
 			],
 		},
 		WKCRouteAPIToken: {
@@ -22,7 +22,7 @@ exports.OLSKControllerRoutes = function() {
 			OLSKRouteMethod: 'get',
 			OLSKRouteFunction: exports.WKCActionAPIToken,
 			OLSKRouteMiddlewares: [
-				'WKCSharedMiddlewareAuthenticate',
+				'KVCSharedMiddlewareAuthenticate',
 			],
 		},
 	};
@@ -32,7 +32,7 @@ exports.OLSKControllerRoutes = function() {
 
 exports.OLSKControllerSharedMiddlewares = function() {
 	return {
-		WKCSharedMiddlewareAPIAuthenticate: exports.WKCAPIMiddlewareAuthenticate,
+		KVCSharedMiddlewareAPIAuthenticate: exports.WKCAPIMiddlewareAuthenticate,
 	};
 };
 

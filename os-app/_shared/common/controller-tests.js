@@ -12,16 +12,16 @@ describe('OLSKControllerSharedConnections', function testOLSKControllerSharedCon
 
 	it('returns connection functions', function() {
 		assert.deepEqual(controllerModule.OLSKControllerSharedConnections(), {
-			WKCSharedConnectionMongo: {
-				OLSKConnectionInitializer: controllerModule.WKCSharedConnectionInitializerMongo,
-				OLSKConnectionCleanup: controllerModule.WKCSharedConnectionCleanupMongo,
+			KVCSharedConnectionMongo: {
+				OLSKConnectionInitializer: controllerModule.KVCSharedConnectionInitializerMongo,
+				OLSKConnectionCleanup: controllerModule.KVCSharedConnectionCleanupMongo,
 			},
 		});
 	});
 
 });
 
-describe('WKCSharedMiddlewareEnsureDatabase', function testWKCSharedMiddlewareEnsureDatabase() {
+describe('KVCSharedMiddlewareEnsureDatabase', function testKVCSharedMiddlewareEnsureDatabase() {
 
 	var fakeRequest = function(inputData = {}) {
 		return {
@@ -38,21 +38,21 @@ describe('WKCSharedMiddlewareEnsureDatabase', function testWKCSharedMiddlewareEn
 	};
 
 	it('returns next(WKCErrorConnectionNotAttempted) if not attempted', function() {
-		assert.deepEqual(controllerModule.WKCSharedMiddlewareEnsureDatabase(fakeRequest({
+		assert.deepEqual(controllerModule.KVCSharedMiddlewareEnsureDatabase(fakeRequest({
 			OLSKConnectionAttempted: false,
 		}), fakeResponse, fakeNext), new Error('WKCErrorConnectionNotAttempted'));
 	});
 
 	it('returns next(WKCErrorConnectionFailed) if error', function() {
 		var error = new Error('MongoErrorConnectionFailed');
-		assert.deepEqual(controllerModule.WKCSharedMiddlewareEnsureDatabase(fakeRequest({
+		assert.deepEqual(controllerModule.KVCSharedMiddlewareEnsureDatabase(fakeRequest({
 			OLSKConnectionAttempted: true,
 			OLSKConnectionError: error,
 		}), fakeResponse, fakeNext), error);
 	});
 
 	it('returns next(undefined) if no error', function() {
-		assert.strictEqual(controllerModule.WKCSharedMiddlewareEnsureDatabase(fakeRequest({
+		assert.strictEqual(controllerModule.KVCSharedMiddlewareEnsureDatabase(fakeRequest({
 			OLSKConnectionAttempted: true,
 			OLSKConnectionError: null,
 		}), fakeResponse, fakeNext), 'RETURNED_UNDEFINED');

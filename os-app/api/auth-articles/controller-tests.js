@@ -17,7 +17,7 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 				OLSKRouteMethod: 'post',
 				OLSKRouteFunction: mainModule.WKCActionAPIArticlesCreate,
 				OLSKRouteMiddlewares: [
-					'WKCSharedMiddlewareAPIAuthenticate',
+					'KVCSharedMiddlewareAPIAuthenticate',
 				],
 			},
 			WKCRouteAPIArticlesRead: {
@@ -25,7 +25,7 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 				OLSKRouteMethod: 'get',
 				OLSKRouteFunction: mainModule.WKCActionAPIArticlesRead,
 				OLSKRouteMiddlewares: [
-					'WKCSharedMiddlewareAPIAuthenticate',
+					'KVCSharedMiddlewareAPIAuthenticate',
 				],
 			},
 			WKCRouteAPIArticlesUpdate: {
@@ -33,7 +33,7 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 				OLSKRouteMethod: 'put',
 				OLSKRouteFunction: mainModule.WKCActionAPIArticlesUpdate,
 				OLSKRouteMiddlewares: [
-					'WKCSharedMiddlewareAPIAuthenticate',
+					'KVCSharedMiddlewareAPIAuthenticate',
 				],
 			},
 			WKCRouteAPIArticlesDelete: {
@@ -41,7 +41,7 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 				OLSKRouteMethod: 'delete',
 				OLSKRouteFunction: mainModule.WKCActionAPIArticlesDelete,
 				OLSKRouteMiddlewares: [
-					'WKCSharedMiddlewareAPIAuthenticate',
+					'KVCSharedMiddlewareAPIAuthenticate',
 				],
 			},
 			WKCRouteAPIArticlesSearch: {
@@ -49,7 +49,7 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 				OLSKRouteMethod: 'post',
 				OLSKRouteFunction: mainModule.WKCActionAPIArticlesSearch,
 				OLSKRouteMiddlewares: [
-					'WKCSharedMiddlewareAPIAuthenticate',
+					'KVCSharedMiddlewareAPIAuthenticate',
 				],
 			},
 		});

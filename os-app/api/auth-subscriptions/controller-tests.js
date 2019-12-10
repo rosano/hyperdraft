@@ -17,7 +17,7 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 				OLSKRouteMethod: 'post',
 				OLSKRouteFunction: controllerModule.WKCActionAPISubscriptionsCreate,
 				OLSKRouteMiddlewares: [
-					'WKCSharedMiddlewareAPIAuthenticate',
+					'KVCSharedMiddlewareAPIAuthenticate',
 				],
 			},
 			WKCRouteAPISubscriptionsRead: {
@@ -25,7 +25,7 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 				OLSKRouteMethod: 'get',
 				OLSKRouteFunction: controllerModule.WKCActionAPISubscriptionsRead,
 				OLSKRouteMiddlewares: [
-					'WKCSharedMiddlewareAPIAuthenticate',
+					'KVCSharedMiddlewareAPIAuthenticate',
 				],
 			},
 			WKCRouteAPISubscriptionsUpdate: {
@@ -33,7 +33,7 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 				OLSKRouteMethod: 'put',
 				OLSKRouteFunction: controllerModule.WKCActionAPISubscriptionsUpdate,
 				OLSKRouteMiddlewares: [
-					'WKCSharedMiddlewareAPIAuthenticate',
+					'KVCSharedMiddlewareAPIAuthenticate',
 				],
 			},
 			WKCRouteAPISubscriptionsDelete: {
@@ -41,7 +41,7 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 				OLSKRouteMethod: 'delete',
 				OLSKRouteFunction: controllerModule.WKCActionAPISubscriptionsDelete,
 				OLSKRouteMiddlewares: [
-					'WKCSharedMiddlewareAPIAuthenticate',
+					'KVCSharedMiddlewareAPIAuthenticate',
 				],
 			},
 			WKCRouteAPISubscriptionsSearch: {
@@ -49,7 +49,7 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 				OLSKRouteMethod: 'get',
 				OLSKRouteFunction: controllerModule.WKCActionAPISubscriptionsSearch,
 				OLSKRouteMiddlewares: [
-					'WKCSharedMiddlewareAPIAuthenticate',
+					'KVCSharedMiddlewareAPIAuthenticate',
 				],
 			},
 			WKCRouteAPISubscriptionsFetch: {
@@ -57,7 +57,7 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 				OLSKRouteMethod: 'post',
 				OLSKRouteFunction: controllerModule.WKCActionAPISubscriptionsFetch,
 				OLSKRouteMiddlewares: [
-					'WKCSharedMiddlewareAPIAuthenticate',
+					'KVCSharedMiddlewareAPIAuthenticate',
 				],
 			},
 		});

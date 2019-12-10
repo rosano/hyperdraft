@@ -296,7 +296,7 @@
 		moi.reactConfirmationVisibility(false);
 		moi.reactFetchFormVisibility(true);
 
-		d3.selectAll('.WKCReadModuleSubscribeConfirmationPreview').classed('WKCSharedHidden', true);
+		d3.selectAll('.WKCReadModuleSubscribeConfirmationPreview').classed('KVCSharedHidden', true);
 
 		d3.select('#WKCReadModuleSubscribeConfirmationFormName').property('value', '');
 		d3.select('#WKCReadModuleSubscribeConfirmationFormBlurb').property('value', '');
@@ -335,13 +335,13 @@
 	//_ reactFetchFormVisibility
 
 	moi.reactFetchFormVisibility = function (isVisible) {
-		d3.select('#WKCReadModuleSubscribeFetchForm').classed('WKCSharedHidden', !isVisible);
+		d3.select('#WKCReadModuleSubscribeFetchForm').classed('KVCSharedHidden', !isVisible);
 	};
 
 	//_ reactFetchLoaderVisibility
 
 	moi.reactFetchLoaderVisibility = function (isVisible) {
-		d3.select('#WKCReadModuleSubscribeLoader').classed('WKCSharedHidden', !isVisible);
+		d3.select('#WKCReadModuleSubscribeLoader').classed('KVCSharedHidden', !isVisible);
 	};
 
 	//_ reactFetchFlash
@@ -349,7 +349,7 @@
 	moi.reactFetchFlash = function (inputData) {
 		d3.select('#WKCReadModuleSubscribeFetchFlash')
 			.text(inputData)
-			.classed('WKCSharedHidden', false)
+			.classed('KVCSharedHidden', false)
 			.style('opacity', 0)
 			.transition()
 				.duration(275)
@@ -360,7 +360,7 @@
 					.on('end', function () {
 						d3.select('#WKCReadModuleSubscribeFetchFlash')
 		        	.text(inputData)
-		        	.classed('WKCSharedHidden', true);
+		        	.classed('KVCSharedHidden', true);
 		      });
 	};
 
@@ -403,7 +403,7 @@
 
 		selection.exit().remove();
 
-		d3.select('#WKCReadModuleSubscribeSuggestions').classed('WKCSharedHidden', !suggestionObjects.length);
+		d3.select('#WKCReadModuleSubscribeSuggestions').classed('KVCSharedHidden', !suggestionObjects.length);
 	};
 
 	//_ reactAlternatives
@@ -434,7 +434,7 @@
 			});
 
 		parentElement.select('.WKCReadModuleSubscribeAlternativesItemItemName')
-			.classed('WKCSharedHidden', function (e) {
+			.classed('KVCSharedHidden', function (e) {
 				return !e.WKCAlternativeTitle;
 			})
 			.select('span')
@@ -444,13 +444,13 @@
 
 		selection.exit().remove();
 
-		d3.select('#WKCReadModuleSubscribeAlternatives').classed('WKCSharedHidden', !alternativeObjects.length);
+		d3.select('#WKCReadModuleSubscribeAlternatives').classed('KVCSharedHidden', !alternativeObjects.length);
 	};
 
 	//_ reactConfirmationVisibility
 
 	moi.reactConfirmationVisibility = function (isVisible) {
-		d3.select('#WKCReadModuleSubscribeConfirmation').classed('WKCSharedHidden', !isVisible);
+		d3.select('#WKCReadModuleSubscribeConfirmation').classed('KVCSharedHidden', !isVisible);
 	};
 
 	//_ reactConfirmationFormName
@@ -500,11 +500,11 @@
 
 		selection.exit().remove();
 
-		d3.select('#WKCReadModuleSubscribeConfirmationPreviewArticles').classed('WKCSharedHidden', !articleObjects.length);
+		d3.select('#WKCReadModuleSubscribeConfirmationPreviewArticles').classed('KVCSharedHidden', !articleObjects.length);
 
-		d3.select('#WKCReadModuleSubscribeConfirmationFrequency').classed('WKCSharedHidden', articleObjects.length < 10);
+		d3.select('#WKCReadModuleSubscribeConfirmationFrequency').classed('KVCSharedHidden', articleObjects.length < 10);
 
-		d3.select('#WKCReadModuleSubscribeConfirmationEmpty').classed('WKCSharedHidden', articleObjects.length);
+		d3.select('#WKCReadModuleSubscribeConfirmationEmpty').classed('KVCSharedHidden', articleObjects.length);
 
 		if (articleObjects.length < 10) {
 			return;
@@ -530,9 +530,9 @@
 	moi.reactConfirmationPreviewPage = function (inputData) {
 		d3.select('#WKCReadModuleSubscribeConfirmationPreviewPage').html(inputData);
 
-		d3.select('#WKCReadModuleSubscribeConfirmationPreviewPage').classed('WKCSharedHidden', !inputData);
+		d3.select('#WKCReadModuleSubscribeConfirmationPreviewPage').classed('KVCSharedHidden', !inputData);
 
-		d3.select('#WKCReadModuleSubscribeConfirmationEmpty').classed('WKCSharedHidden', !!inputData.trim());
+		d3.select('#WKCReadModuleSubscribeConfirmationEmpty').classed('KVCSharedHidden', !!inputData.trim());
 	};
 
 	//_ reactConfirmationPreviewFile
@@ -540,9 +540,9 @@
 	moi.reactConfirmationPreviewFile = function (inputData) {
 		d3.select('#WKCReadModuleSubscribeConfirmationPreviewFile pre').html(inputData);
 
-		d3.select('#WKCReadModuleSubscribeConfirmationPreviewFile').classed('WKCSharedHidden', !inputData);
+		d3.select('#WKCReadModuleSubscribeConfirmationPreviewFile').classed('KVCSharedHidden', !inputData);
 
-		d3.select('#WKCReadModuleSubscribeConfirmationEmpty').classed('WKCSharedHidden', !!inputData.trim());
+		d3.select('#WKCReadModuleSubscribeConfirmationEmpty').classed('KVCSharedHidden', !!inputData.trim());
 	};
 
 	//_ reactConfirmationShared

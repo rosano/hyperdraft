@@ -8,7 +8,7 @@ exports.OLSKControllerRoutes = function() {
 		},
 		OLSKRouteLanguages: ['en'],
 		OLSKRouteMiddlewares: [
-			'WKCSharedDonateLinkGuardMiddleware',
+			'KVCSharedDonateLinkGuardMiddleware',
 		],
 	}];
 };

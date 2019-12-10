@@ -1,4 +1,4 @@
-WKCSharedHeaderTextWKCRead: Read
+KVCSharedHeaderTextWKCRead: Read
 WKSharedHeaderNotesText: Write
 WKSharedErrorServiceUnavailable: Connection error
 WKSharedErrorTokenUnavailable: Authentication error

@@ -8,16 +8,16 @@
 
 exports.OLSKControllerSharedConnections = function() {
 	return {
-		WKCSharedConnectionMongo: {
-			OLSKConnectionInitializer: exports.WKCSharedConnectionInitializerMongo,
-			OLSKConnectionCleanup: exports.WKCSharedConnectionCleanupMongo,
+		KVCSharedConnectionMongo: {
+			OLSKConnectionInitializer: exports.KVCSharedConnectionInitializerMongo,
+			OLSKConnectionCleanup: exports.KVCSharedConnectionCleanupMongo,
 		},
 	};
 };
 
-//_ WKCSharedConnectionInitializerMongo
+//_ KVCSharedConnectionInitializerMongo
 
-exports.WKCSharedConnectionInitializerMongo = function(olskCallback) {
+exports.KVCSharedConnectionInitializerMongo = function(olskCallback) {
 	var mongodbPackage = require('mongodb');
 
 	mongodbPackage.MongoClient.connect(process.env.KVC_DATABASE_URL, {
@@ -31,9 +31,9 @@ exports.WKCSharedConnectionInitializerMongo = function(olskCallback) {
 	});
 };
 
-//_ WKCSharedConnectionCleanupMongo
+//_ KVCSharedConnectionCleanupMongo
 
-exports.WKCSharedConnectionCleanupMongo = function(client) {
+exports.KVCSharedConnectionCleanupMongo = function(client) {
 	return client.close();
 };
 
@@ -49,22 +49,22 @@ exports.OLSKControllerSharedStaticAssetFolders = function() {
 
 exports.OLSKControllerSharedMiddlewares = function() {
 	return {
-		WKCSharedMiddlewareEnsureDatabase: exports.WKCSharedMiddlewareEnsureDatabase,
-		WKCSharedDonateLinkGuardMiddleware (req, res, next) {
-			return next(require('./logic.js').WKCSharedDonateLinkGuard(process.env));
+		KVCSharedMiddlewareEnsureDatabase: exports.KVCSharedMiddlewareEnsureDatabase,
+		KVCSharedDonateLinkGuardMiddleware (req, res, next) {
+			return next(require('./logic.js').KVCSharedDonateLinkGuard(process.env));
 		},
 	};
 };
 
-//_ WKCSharedMiddlewareEnsureDatabase
+//_ KVCSharedMiddlewareEnsureDatabase
 
-exports.WKCSharedMiddlewareEnsureDatabase = function(req, res, next) {
-	if (!req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionAttempted) {
+exports.KVCSharedMiddlewareEnsureDatabase = function(req, res, next) {
+	if (!req.OLSKSharedConnectionFor('KVCSharedConnectionMongo').OLSKConnectionAttempted) {
 		return next(new Error('WKCErrorConnectionNotAttempted'));
 	}
 
-	if (req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionError) {
-		return next(req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionError);
+	if (req.OLSKSharedConnectionFor('KVCSharedConnectionMongo').OLSKConnectionError) {
+		return next(req.OLSKSharedConnectionFor('KVCSharedConnectionMongo').OLSKConnectionError);
 	}
 
 	return next();

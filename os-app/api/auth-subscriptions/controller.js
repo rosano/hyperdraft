@@ -19,7 +19,7 @@ exports.OLSKControllerRoutes = function() {
 			OLSKRouteMethod: 'post',
 			OLSKRouteFunction: exports.WKCActionAPISubscriptionsCreate,
 			OLSKRouteMiddlewares: [
-				'WKCSharedMiddlewareAPIAuthenticate',
+				'KVCSharedMiddlewareAPIAuthenticate',
 			],
 		},
 		WKCRouteAPISubscriptionsRead: {
@@ -27,7 +27,7 @@ exports.OLSKControllerRoutes = function() {
 			OLSKRouteMethod: 'get',
 			OLSKRouteFunction: exports.WKCActionAPISubscriptionsRead,
 			OLSKRouteMiddlewares: [
-				'WKCSharedMiddlewareAPIAuthenticate',
+				'KVCSharedMiddlewareAPIAuthenticate',
 			],
 		},
 		WKCRouteAPISubscriptionsUpdate: {
@@ -35,7 +35,7 @@ exports.OLSKControllerRoutes = function() {
 			OLSKRouteMethod: 'put',
 			OLSKRouteFunction: exports.WKCActionAPISubscriptionsUpdate,
 			OLSKRouteMiddlewares: [
-				'WKCSharedMiddlewareAPIAuthenticate',
+				'KVCSharedMiddlewareAPIAuthenticate',
 			],
 		},
 		WKCRouteAPISubscriptionsDelete: {
@@ -43,7 +43,7 @@ exports.OLSKControllerRoutes = function() {
 			OLSKRouteMethod: 'delete',
 			OLSKRouteFunction: exports.WKCActionAPISubscriptionsDelete,
 			OLSKRouteMiddlewares: [
-				'WKCSharedMiddlewareAPIAuthenticate',
+				'KVCSharedMiddlewareAPIAuthenticate',
 			],
 		},
 		WKCRouteAPISubscriptionsSearch: {
@@ -51,7 +51,7 @@ exports.OLSKControllerRoutes = function() {
 			OLSKRouteMethod: 'get',
 			OLSKRouteFunction: exports.WKCActionAPISubscriptionsSearch,
 			OLSKRouteMiddlewares: [
-				'WKCSharedMiddlewareAPIAuthenticate',
+				'KVCSharedMiddlewareAPIAuthenticate',
 			],
 		},
 		WKCRouteAPISubscriptionsFetch: {
@@ -59,7 +59,7 @@ exports.OLSKControllerRoutes = function() {
 			OLSKRouteMethod: 'post',
 			OLSKRouteFunction: exports.WKCActionAPISubscriptionsFetch,
 			OLSKRouteMiddlewares: [
-				'WKCSharedMiddlewareAPIAuthenticate',
+				'KVCSharedMiddlewareAPIAuthenticate',
 			],
 		},
 	};
@@ -68,7 +68,7 @@ exports.OLSKControllerRoutes = function() {
 //_ WKCActionAPISubscriptionsCreate
 
 exports.WKCActionAPISubscriptionsCreate = function(req, res, next) {
-	return metalLibrary.WKCMetalSubscriptionsCreate(req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, req.body, function(err, responseJSON) {
+	return metalLibrary.WKCMetalSubscriptionsCreate(req.OLSKSharedConnectionFor('KVCSharedConnectionMongo').OLSKConnectionClient, req.body, function(err, responseJSON) {
 		if (err) {
 			throw err;
 		}
@@ -84,7 +84,7 @@ exports.WKCActionAPISubscriptionsCreate = function(req, res, next) {
 //_ WKCActionAPISubscriptionsRead
 
 exports.WKCActionAPISubscriptionsRead = function(req, res, next) {
-	return metalLibrary.WKCMetalSubscriptionsRead(req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, req.params.wkc_subscription_id, function(err, responseJSON) {
+	return metalLibrary.WKCMetalSubscriptionsRead(req.OLSKSharedConnectionFor('KVCSharedConnectionMongo').OLSKConnectionClient, req.params.wkc_subscription_id, function(err, responseJSON) {
 		if (err) {
 			throw err;
 		}
@@ -96,7 +96,7 @@ exports.WKCActionAPISubscriptionsRead = function(req, res, next) {
 //_ WKCActionAPISubscriptionsUpdate
 
 exports.WKCActionAPISubscriptionsUpdate = function(req, res, next) {
-	return metalLibrary.WKCMetalSubscriptionsUpdate(req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, req.params.wkc_subscription_id, req.body, function(err, responseJSON) {
+	return metalLibrary.WKCMetalSubscriptionsUpdate(req.OLSKSharedConnectionFor('KVCSharedConnectionMongo').OLSKConnectionClient, req.params.wkc_subscription_id, req.body, function(err, responseJSON) {
 		if (err) {
 			throw err;
 		}
@@ -112,7 +112,7 @@ exports.WKCActionAPISubscriptionsUpdate = function(req, res, next) {
 //_ WKCActionAPISubscriptionsDelete
 
 exports.WKCActionAPISubscriptionsDelete = function(req, res, next) {
-	return metalLibrary.WKCMetalSubscriptionsDelete(req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, req.params.wkc_subscription_id, function(err, responseJSON) {
+	return metalLibrary.WKCMetalSubscriptionsDelete(req.OLSKSharedConnectionFor('KVCSharedConnectionMongo').OLSKConnectionClient, req.params.wkc_subscription_id, function(err, responseJSON) {
 		if (err) {
 			throw err;
 		}
@@ -124,7 +124,7 @@ exports.WKCActionAPISubscriptionsDelete = function(req, res, next) {
 //_ WKCActionAPISubscriptionsSearch
 
 exports.WKCActionAPISubscriptionsSearch = function(req, res, next) {
-	return metalLibrary.WKCMetalSubscriptionsSearch(req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, '', function(err, responseJSON) {
+	return metalLibrary.WKCMetalSubscriptionsSearch(req.OLSKSharedConnectionFor('KVCSharedConnectionMongo').OLSKConnectionClient, '', function(err, responseJSON) {
 		if (err) {
 			throw err;
 		}
@@ -138,7 +138,7 @@ exports.WKCActionAPISubscriptionsSearch = function(req, res, next) {
 //_ WKCActionAPISubscriptionsFetch
 
 exports.WKCActionAPISubscriptionsFetch = function(req, res, next) {
-	return metalLibrary.WKCSubscriptionsMetalRequestParameters(req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, req.body.WKCSubscriptionsAPIFetchURL, function (err, responseJSON) {
+	return metalLibrary.WKCSubscriptionsMetalRequestParameters(req.OLSKSharedConnectionFor('KVCSharedConnectionMongo').OLSKConnectionClient, req.body.WKCSubscriptionsAPIFetchURL, function (err, responseJSON) {
 		if (err) {
 			return res.status(200).json({
 				error: err.message,

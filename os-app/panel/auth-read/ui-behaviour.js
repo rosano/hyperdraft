@@ -297,7 +297,7 @@
 				return obj === item;
 			}).classed('WKCReadMasterContentListItemUnread', !item.WKCArticleIsRead)
 
-			d3.select('#WKCReadDetailToolbarUnreadButton').classed('WKCSharedHidden', !item.WKCArticleIsRead);
+			d3.select('#WKCReadDetailToolbarUnreadButton').classed('KVCSharedHidden', !item.WKCArticleIsRead);
 		});;
 	};
 
@@ -324,7 +324,7 @@
 				return obj === item;
 			}).classed('WKCReadMasterContentListItemUnread', !item.WKCArticleIsRead)
 
-			d3.select('#WKCReadDetailToolbarUnreadButton').classed('WKCSharedHidden', !item.WKCArticleIsRead);
+			d3.select('#WKCReadDetailToolbarUnreadButton').classed('KVCSharedHidden', !item.WKCArticleIsRead);
 		});
 	};
 
@@ -556,11 +556,11 @@
 				return obj === moi.propertiesSelectedSource();
 			});
 
-		d3.select('#WKCReadDetailToolbarInboxButton').classed('WKCSharedHidden', moi.propertiesSelectedSource() === kWKCReadOutlookInbox);
+		d3.select('#WKCReadDetailToolbarInboxButton').classed('KVCSharedHidden', moi.propertiesSelectedSource() === kWKCReadOutlookInbox);
 
-		d3.select('#WKCReadDetailToolbarArchiveButton').classed('WKCSharedHidden', moi.propertiesSelectedSource() === kWKCReadOutlookArchived);
+		d3.select('#WKCReadDetailToolbarArchiveButton').classed('KVCSharedHidden', moi.propertiesSelectedSource() === kWKCReadOutlookArchived);
 
-		d3.select('#WKCReadDetailToolbarDiscardButton').classed('WKCSharedHidden', moi.propertiesSelectedSource() === kWKCReadOutlookDiscarded);
+		d3.select('#WKCReadDetailToolbarDiscardButton').classed('KVCSharedHidden', moi.propertiesSelectedSource() === kWKCReadOutlookDiscarded);
 	};
 
 	//_ reactSubscriptionObjects
@@ -639,7 +639,7 @@
 			})
 			.on('click', moi.ControlSelectArticle);
 		parentElement.select('.WKCReadMasterContentListItemHeadline')
-			.classed('WKCSharedHidden', function(obj) {
+			.classed('KVCSharedHidden', function(obj) {
 				return !obj.WKCArticleTitle;
 			})
 			.text(function(obj) {
@@ -683,7 +683,7 @@
 		return;
 
 		d3.select('#WKCReadSourcesContentListOutlooksListItemInbox .WKCReadSourcesContentListChildListItemUnreadCount')
-			.classed('WKCSharedHidden', !moi.propertiesArticleObjects().filter(function (e) {
+			.classed('KVCSharedHidden', !moi.propertiesArticleObjects().filter(function (e) {
 				return !e.WKCArticleIsRead;
 			}).length)
 			.select('.WKCReadText')
@@ -692,7 +692,7 @@
 				}).length);
 
 		d3.selectAll('#WKCReadSourcesContentListSubscriptionsList .WKCReadSourcesContentListChildListItemUnreadCount')
-			.classed('WKCSharedHidden', function(obj) {
+			.classed('KVCSharedHidden', function(obj) {
 				return !moi.propertiesArticleObjects().filter(function (e) {
 					if (e.WKCArticleSubscriptionID !== obj.WKCSubscriptionID) {
 						return false;
@@ -734,11 +734,11 @@
 
 		d3.select('#WKCReadDetailContentHeading')
 			.text(item.WKCArticleTitle)
-			.classed('WKCSharedHidden', !item.WKCArticleTitle);
+			.classed('KVCSharedHidden', !item.WKCArticleTitle);
 		d3.select('#WKCReadDetailContentAuthor')
 			.text(item.WKCArticleAuthor)
-			.classed('WKCSharedHidden', !item.WKCArticleAuthor)
-			.classed('WKCSharedHidden', true);
+			.classed('KVCSharedHidden', !item.WKCArticleAuthor)
+			.classed('KVCSharedHidden', true);
 		d3.select('#WKCReadDetailContentContextTiming').text(moment(item.WKCArticlePublishDate).format('MMMM Do YYYY, h:mm:ss a'));
 		d3.select('#WKCReadDetailContentContextSource').text(moi._propertiesSubscriptionObjectsByID()[item.WKCArticleSubscriptionID].WKCSubscriptionName);
 		d3.select('#WKCReadDetailContentContextLink').attr('href', item.WKCArticleOriginalURL || moi._propertiesSubscriptionObjectsByID()[item.WKCArticleSubscriptionID].WKCSubscriptionURL);
@@ -769,7 +769,7 @@
 		d3.selectAll('#WKCReadDetailContentBody *[aria-hidden="true"]')
 			.style('display', 'none');
 
-		d3.select('#WKCReadDetailToolbarUnreadButton').classed('WKCSharedHidden', !item.WKCArticleIsRead)
+		d3.select('#WKCReadDetailToolbarUnreadButton').classed('KVCSharedHidden', !item.WKCArticleIsRead)
 
 		d3.select('#WKCReadDetail').classed('WKCReadDetailInactive', false);
 	};
@@ -778,13 +778,13 @@
 
 	moi.reactArticlesRemoteContentWarningVisibility = function (isVisible) {
 		d3.select('#WKCReadDetailContentRemote')
-			.classed('WKCSharedHidden', !isVisible);
+			.classed('KVCSharedHidden', !isVisible);
 	};
 
 	//_ reactMasterLoaderVisibility
 
 	moi.reactMasterLoaderVisibility = function (isVisible) {
-		d3.select('#WKCReadMasterLoader').classed('WKCSharedHidden', !isVisible);
+		d3.select('#WKCReadMasterLoader').classed('KVCSharedHidden', !isVisible);
 	};
 
 	//# SETUP

@@ -21,7 +21,7 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 				OLSKRouteFunction: controllerModule.WKCReadAction,
 				OLSKRouteLanguages: ['en'],
 				OLSKRouteMiddlewares: [
-					'WKCSharedMiddlewareAuthenticate',
+					'KVCSharedMiddlewareAuthenticate',
 				],
 			},
 		});

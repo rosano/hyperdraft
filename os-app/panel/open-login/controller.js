@@ -16,7 +16,7 @@ exports.OLSKControllerRoutes = function() {
 			OLSKRouteFunction: exports.WKCLoginAction,
 			OLSKRouteLanguages: ['en'],
 			OLSKRouteMiddlewares: [
-				'WKCSharedMiddlewareEnsureDatabase',
+				'KVCSharedMiddlewareEnsureDatabase',
 			],
 		},
 		WKCLoginSubmitRoute: {
@@ -38,8 +38,8 @@ exports.OLSKControllerRoutes = function() {
 
 exports.OLSKControllerSharedMiddlewares = function() {
 	return {
-		WKCSharedMiddlewareAuthenticate: [
-			sharedController.WKCSharedMiddlewareEnsureDatabase,
+		KVCSharedMiddlewareAuthenticate: [
+			sharedController.KVCSharedMiddlewareEnsureDatabase,
 			exports.WKCLoginMiddlewareAuthenticate,
 		],
 	};
@@ -83,7 +83,7 @@ exports.WKCLoginSubmitAction = function(req, res, next) {
 		return res.redirect(res.locals.OLSKCanonicalFor('WKCLoginRoute'));
 	}
 
-	return req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient.db(process.env.KVC_SHARED_DATABASE_NAME).collection('wkc_members').find({}).toArray(function(err, items) {
+	return req.OLSKSharedConnectionFor('KVCSharedConnectionMongo').OLSKConnectionClient.db(process.env.KVC_SHARED_DATABASE_NAME).collection('wkc_members').find({}).toArray(function(err, items) {
 		if (err) {
 			throw new Error('WKCErrorDatabaseFindFailed');
 		}

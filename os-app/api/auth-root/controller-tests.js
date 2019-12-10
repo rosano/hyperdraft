@@ -19,8 +19,8 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 				OLSKRouteMethod: 'get',
 				OLSKRouteFunction: controllerModule.WKCActionAPIRoot,
 				OLSKRouteMiddlewares: [
-					'WKCSharedMiddlewareAuthenticate',
-					'WKCSharedMiddlewareAPIAuthenticate',
+					'KVCSharedMiddlewareAuthenticate',
+					'KVCSharedMiddlewareAPIAuthenticate',
 				],
 			},
 			WKCRouteAPIToken: {
@@ -28,7 +28,7 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 				OLSKRouteMethod: 'get',
 				OLSKRouteFunction: controllerModule.WKCActionAPIToken,
 				OLSKRouteMiddlewares: [
-					'WKCSharedMiddlewareAuthenticate',
+					'KVCSharedMiddlewareAuthenticate',
 				],
 			},
 		});
@@ -40,7 +40,7 @@ describe('OLSKControllerSharedMiddlewares', function testOLSKControllerSharedMid
 
 	it('returns middleware functions', function() {
 		assert.deepEqual(controllerModule.OLSKControllerSharedMiddlewares(), {
-			WKCSharedMiddlewareAPIAuthenticate: controllerModule.WKCAPIMiddlewareAuthenticate,
+			KVCSharedMiddlewareAPIAuthenticate: controllerModule.WKCAPIMiddlewareAuthenticate,
 		});
 	});
 

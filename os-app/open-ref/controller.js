@@ -25,7 +25,7 @@ exports.RCSRefUpdateCachedPublicNotes = function (writeFunction, inputData) {
 
 exports.OLSKControllerSharedConnections = function() {
 	return {
-		WKCSharedConnectionRS: {
+		KVCSharedConnectionRS: {
 			OLSKConnectionInitializer(olskCallback) {
 				let didConnect = false;
 
@@ -58,19 +58,19 @@ exports.OLSKControllerSharedConnections = function() {
 
 exports.OLSKControllerSharedMiddlewares = function() {
 	return {
-		WKCSharedMiddlewareEnsureConnection: exports.WKCSharedMiddlewareEnsureConnection,
+		KVCSharedMiddlewareEnsureConnection: exports.KVCSharedMiddlewareEnsureConnection,
 	};
 };
 
-//_ WKCSharedMiddlewareEnsureConnection
+//_ KVCSharedMiddlewareEnsureConnection
 
-exports.WKCSharedMiddlewareEnsureConnection = function(req, res, next) {
-	if (!req.OLSKSharedConnectionFor('WKCSharedConnectionRS').OLSKConnectionAttempted) {
+exports.KVCSharedMiddlewareEnsureConnection = function(req, res, next) {
+	if (!req.OLSKSharedConnectionFor('KVCSharedConnectionRS').OLSKConnectionAttempted) {
 		return next(new Error('WKCErrorConnectionNotAttempted'));
 	}
 
-	if (req.OLSKSharedConnectionFor('WKCSharedConnectionRS').OLSKConnectionError) {
-		return next(req.OLSKSharedConnectionFor('WKCSharedConnectionRS').OLSKConnectionError);
+	if (req.OLSKSharedConnectionFor('KVCSharedConnectionRS').OLSKConnectionError) {
+		return next(req.OLSKSharedConnectionFor('KVCSharedConnectionRS').OLSKConnectionError);
 	}
 
 	return next();
@@ -148,7 +148,7 @@ exports.OLSKControllerRoutes = function() {
 				});
 			},
 			OLSKRouteMiddlewares: [
-				'WKCSharedMiddlewareEnsureConnection',
+				'KVCSharedMiddlewareEnsureConnection',
 			],
 		},
 		WKCRefsReadPlaintext: {
@@ -166,7 +166,7 @@ exports.OLSKControllerRoutes = function() {
 				return res.send(item.WKCNoteBody);
 			},
 			OLSKRouteMiddlewares: [
-				'WKCSharedMiddlewareEnsureConnection',
+				'KVCSharedMiddlewareEnsureConnection',
 			],
 		},
 	};

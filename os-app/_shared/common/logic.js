@@ -1,6 +1,6 @@
 const mod = {
 
-	WKCSharedDonateLinkGuard (inputData) {
+	KVCSharedDonateLinkGuard (inputData) {
 		if (typeof inputData !== 'object' || inputData === null) {
 			throw new Error('WKCErrorInputNotValid');
 		}
@@ -10,7 +10,7 @@ const mod = {
 		}
 	},
 
-	WKCSharedGitHubLinkGuard (inputData) {
+	KVCSharedGitHubLinkGuard (inputData) {
 		if (typeof inputData !== 'object' || inputData === null) {
 			throw new Error('WKCErrorInputNotValid');
 		}

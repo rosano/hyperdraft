@@ -43,7 +43,7 @@ exports.WKCTaskFetch = function() {
 			return true;
 		},
 		OLSKTaskCallback(callbackInput) {
-			return apiSubscriptionsMetal.WKCMetalSubscriptionsNeedingFetch(callbackInput.OLSKLive.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, function(err, responseJSON) {
+			return apiSubscriptionsMetal.WKCMetalSubscriptionsNeedingFetch(callbackInput.OLSKLive.OLSKSharedConnectionFor('KVCSharedConnectionMongo').OLSKConnectionClient, function(err, responseJSON) {
 				if (err) {
 					return console.log(err);
 				}
@@ -53,7 +53,7 @@ exports.WKCTaskFetch = function() {
 				}
 
 				return responseJSON.slice(-2).forEach(function(subscriptionObject) {
-					return apiSubscriptionsMetal.WKCSubscriptionsMetalRequestParameters(callbackInput.OLSKLive.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, subscriptionObject.WKCSubscriptionURL, function (error, responseJSON) {
+					return apiSubscriptionsMetal.WKCSubscriptionsMetalRequestParameters(callbackInput.OLSKLive.OLSKSharedConnectionFor('KVCSharedConnectionMongo').OLSKConnectionClient, subscriptionObject.WKCSubscriptionURL, function (error, responseJSON) {
 
 						return requestPackage(responseJSON, function(err, res, body) {
 							var articleObjects = [];
@@ -128,14 +128,14 @@ exports.WKCTaskFetch = function() {
 
 							return Promise.all(articleObjects.map(function(e) {
 								return new Promise(function(resolve, reject) {
-									apiArticlesMetal.WKCMetalArticlesCreate(callbackInput.OLSKLive.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, Object.assign(e, {
+									apiArticlesMetal.WKCMetalArticlesCreate(callbackInput.OLSKLive.OLSKSharedConnectionFor('KVCSharedConnectionMongo').OLSKConnectionClient, Object.assign(e, {
 										WKCArticleSubscriptionID: subscriptionObject.WKCSubscriptionID,
 									}), function(err, responseJSON) {
 										return err ? reject(err) : resolve();
 									});
 								});
 							})).then(function() {
-								return apiSubscriptionsMetal.WKCMetalSubscriptionsUpdate(callbackInput.OLSKLive.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, subscriptionObject.WKCSubscriptionID, err ? {
+								return apiSubscriptionsMetal.WKCMetalSubscriptionsUpdate(callbackInput.OLSKLive.OLSKSharedConnectionFor('KVCSharedConnectionMongo').OLSKConnectionClient, subscriptionObject.WKCSubscriptionID, err ? {
 									WKCSubscriptionErrorDate: new Date(),
 									WKCSubscriptionErrorMessage: err.toString(),
 								} : {
@@ -154,7 +154,7 @@ exports.WKCTaskFetch = function() {
 
 									return;
 
-									return apiSnapshotsMetal.WKCSnapshotsMetalCreate(callbackInput.OLSKLive.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, {
+									return apiSnapshotsMetal.WKCSnapshotsMetalCreate(callbackInput.OLSKLive.OLSKSharedConnectionFor('KVCSharedConnectionMongo').OLSKConnectionClient, {
 										WKCSnapshotSubscriptionID: subscriptionObject.WKCSubscriptionID,
 										WKCSnapshotBody: body,
 									}, function(err, responseJSON) {

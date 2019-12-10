@@ -21,7 +21,7 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 				OLSKRouteFunction: mainModule.WKCLoginAction,
 				OLSKRouteLanguages: ['en'],
 				OLSKRouteMiddlewares: [
-					'WKCSharedMiddlewareEnsureDatabase',
+					'KVCSharedMiddlewareEnsureDatabase',
 				],
 			},
 			WKCLoginSubmitRoute: {
@@ -45,8 +45,8 @@ describe('OLSKControllerSharedMiddlewares', function testOLSKControllerSharedMid
 
 	it('returns middleware functions', function() {
 		assert.deepEqual(mainModule.OLSKControllerSharedMiddlewares(), {
-			WKCSharedMiddlewareAuthenticate: [
-				sharedController.WKCSharedMiddlewareEnsureDatabase,
+			KVCSharedMiddlewareAuthenticate: [
+				sharedController.KVCSharedMiddlewareEnsureDatabase,
 				mainModule.WKCLoginMiddlewareAuthenticate,
 			],
 		});

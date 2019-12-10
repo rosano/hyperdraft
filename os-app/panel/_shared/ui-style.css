@@ -1,4 +1,4 @@
-#WKCSharedHeader {
+#KVCSharedHeader {
 	height: 14px;
 	padding: 5px;
 	
@@ -7,47 +7,47 @@
 	font-size: 80%;
 }
 
-#WKCSharedHeader a {
+#KVCSharedHeader a {
 	text-decoration: none;
 	font-weight: bold;
 
 	color: #000;
 }
 
-.WKCSharedToolbar {
+.KVCSharedToolbar {
 	padding: 0 4px;
 	border-bottom: 1px solid #ddd;
 
 	/* Firefox header spacing */
 	line-height: 0;
 
-	/* WKCSharedToolbarFlexboxParent */
+	/* KVCSharedToolbarFlexboxParent */
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
 }
 
-.WKCSharedToolbarElementGroup {
+.KVCSharedToolbarElementGroup {
 	margin: 10px 2px;
 }
 
-.WKCSharedToolbarElementGroup button {
+.KVCSharedToolbarElementGroup button {
 	margin: 0 2px;
 }
 
-.WKCSharedFlash {
+.KVCSharedFlash {
 	display: block;
 	padding: 10px;
 	border: 1px solid #d9d9d9;
 	background: #f3f3f3;
 }
 
-.WKCSharedToolbarButton {
+.KVCSharedToolbarButton {
 	display: inline-block;
 	width: 16px;
 	height: 16px;
 }
 
-.WKCSharedToolbarButton:disabled {
+.KVCSharedToolbarButton:disabled {
 	opacity: 0.3;
 }

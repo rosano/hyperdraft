@@ -16,7 +16,7 @@ exports.OLSKControllerRoutes = function() {
 			OLSKRouteMethod: 'post',
 			OLSKRouteFunction: exports.WKCActionAPIArticlesCreate,
 			OLSKRouteMiddlewares: [
-				'WKCSharedMiddlewareAPIAuthenticate',
+				'KVCSharedMiddlewareAPIAuthenticate',
 			],
 		},
 		WKCRouteAPIArticlesRead: {
@@ -24,7 +24,7 @@ exports.OLSKControllerRoutes = function() {
 			OLSKRouteMethod: 'get',
 			OLSKRouteFunction: exports.WKCActionAPIArticlesRead,
 			OLSKRouteMiddlewares: [
-				'WKCSharedMiddlewareAPIAuthenticate',
+				'KVCSharedMiddlewareAPIAuthenticate',
 			],
 		},
 		WKCRouteAPIArticlesUpdate: {
@@ -32,7 +32,7 @@ exports.OLSKControllerRoutes = function() {
 			OLSKRouteMethod: 'put',
 			OLSKRouteFunction: exports.WKCActionAPIArticlesUpdate,
 			OLSKRouteMiddlewares: [
-				'WKCSharedMiddlewareAPIAuthenticate',
+				'KVCSharedMiddlewareAPIAuthenticate',
 			],
 		},
 		WKCRouteAPIArticlesDelete: {
@@ -40,7 +40,7 @@ exports.OLSKControllerRoutes = function() {
 			OLSKRouteMethod: 'delete',
 			OLSKRouteFunction: exports.WKCActionAPIArticlesDelete,
 			OLSKRouteMiddlewares: [
-				'WKCSharedMiddlewareAPIAuthenticate',
+				'KVCSharedMiddlewareAPIAuthenticate',
 			],
 		},
 		WKCRouteAPIArticlesSearch: {
@@ -48,7 +48,7 @@ exports.OLSKControllerRoutes = function() {
 			OLSKRouteMethod: 'post',
 			OLSKRouteFunction: exports.WKCActionAPIArticlesSearch,
 			OLSKRouteMiddlewares: [
-				'WKCSharedMiddlewareAPIAuthenticate',
+				'KVCSharedMiddlewareAPIAuthenticate',
 			],
 		},
 	};
@@ -57,7 +57,7 @@ exports.OLSKControllerRoutes = function() {
 //_ WKCActionAPIArticlesCreate
 
 exports.WKCActionAPIArticlesCreate = function(req, res, next) {
-	return metalLibrary.WKCMetalArticlesCreate(req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, req.body, function(err, responseJSON) {
+	return metalLibrary.WKCMetalArticlesCreate(req.OLSKSharedConnectionFor('KVCSharedConnectionMongo').OLSKConnectionClient, req.body, function(err, responseJSON) {
 		if (err) {
 			throw err;
 		}
@@ -73,7 +73,7 @@ exports.WKCActionAPIArticlesCreate = function(req, res, next) {
 //_ WKCActionAPIArticlesRead
 
 exports.WKCActionAPIArticlesRead = function(req, res, next) {
-	return metalLibrary.WKCMetalArticlesRead(req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, req.params.wkc_article_id, function(err, responseJSON) {
+	return metalLibrary.WKCMetalArticlesRead(req.OLSKSharedConnectionFor('KVCSharedConnectionMongo').OLSKConnectionClient, req.params.wkc_article_id, function(err, responseJSON) {
 		if (err) {
 			throw err;
 		}
@@ -85,7 +85,7 @@ exports.WKCActionAPIArticlesRead = function(req, res, next) {
 //_ WKCActionAPIArticlesUpdate
 
 exports.WKCActionAPIArticlesUpdate = function(req, res, next) {
-	return metalLibrary.WKCMetalArticlesUpdate(req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, req.params.wkc_article_id, req.body, function(err, responseJSON) {
+	return metalLibrary.WKCMetalArticlesUpdate(req.OLSKSharedConnectionFor('KVCSharedConnectionMongo').OLSKConnectionClient, req.params.wkc_article_id, req.body, function(err, responseJSON) {
 		if (err) {
 			throw err;
 		}
@@ -101,7 +101,7 @@ exports.WKCActionAPIArticlesUpdate = function(req, res, next) {
 //_ WKCActionAPIArticlesDelete
 
 exports.WKCActionAPIArticlesDelete = function(req, res, next) {
-	return metalLibrary.WKCMetalArticlesDelete(req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, req.params.wkc_article_id, function(err, responseJSON) {
+	return metalLibrary.WKCMetalArticlesDelete(req.OLSKSharedConnectionFor('KVCSharedConnectionMongo').OLSKConnectionClient, req.params.wkc_article_id, function(err, responseJSON) {
 		if (err) {
 			throw err;
 		}
@@ -113,7 +113,7 @@ exports.WKCActionAPIArticlesDelete = function(req, res, next) {
 //_ WKCActionAPIArticlesSearch
 
 exports.WKCActionAPIArticlesSearch = function(req, res, next) {
-	return metalLibrary.WKCMetalArticlesSearch(req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient, req.body, function(err, responseJSON) {
+	return metalLibrary.WKCMetalArticlesSearch(req.OLSKSharedConnectionFor('KVCSharedConnectionMongo').OLSKConnectionClient, req.body, function(err, responseJSON) {
 		if (err) {
 			throw err;
 		}

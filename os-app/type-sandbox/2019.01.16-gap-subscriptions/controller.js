@@ -12,7 +12,7 @@ exports.OLSKControllerRoutes = function() {
 			OLSKRoutePath: '/sandbox/2019-01-16-gap-subscriptions',
 			OLSKRouteMethod: 'get',
 			OLSKRouteFunction (req, res, next) {
-				return WKCSandboxGapSubscriptionsProcess(req.OLSKSharedConnectionFor('WKCSharedConnectionMongo').OLSKConnectionClient).then(function (result) {
+				return WKCSandboxGapSubscriptionsProcess(req.OLSKSharedConnectionFor('KVCSharedConnectionMongo').OLSKConnectionClient).then(function (result) {
 					return res.send(`<pre>${JSON.stringify(result, 0, '\t')}</pre>`);
 				});
 			},

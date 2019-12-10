@@ -14,7 +14,7 @@ body {
 	display: flex;
 }
 
-.WKCReadLoading .WKCSharedToolbar *, .WKCReadLoading #WKCReadSourcesContent *, .WKCReadLoading #WKCReadMasterContent *, .WKCReadLoading #WKCReadDetailContent *, .WKCReadLoading #WKCReadDetailPlaceholder * {
+.WKCReadLoading .KVCSharedToolbar *, .WKCReadLoading #WKCReadSourcesContent *, .WKCReadLoading #WKCReadMasterContent *, .WKCReadLoading #WKCReadDetailContent *, .WKCReadLoading #WKCReadDetailPlaceholder * {
 	visibility: hidden;
 }
 
