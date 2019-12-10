@@ -32,6 +32,10 @@
 	flex-grow: 1;
 }
 
+:global(.OLSKIsLoading) .WKCWriteMasterBody {
+	visibility: hidden;
+}
+
 .WKCWriteMasterBody :global(.OLSKResultsListItemSelected) {
 	background: #e6e6e6;
 }
