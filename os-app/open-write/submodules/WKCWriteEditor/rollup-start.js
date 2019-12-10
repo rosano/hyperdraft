@@ -16,12 +16,12 @@ const WKCWriteEditor = new RollupStart({
 		WKCWriteEditorDispatchOpen: (function _WKCWriteEditorDispatchOpen () {}),
 		WKCWriteEditorDispatchReady: (function _WKCWriteEditorDispatchReady () {}),
 	}, Object.fromEntries(Object.entries(params).filter(function (e) {
-		return e[0] !== 'WKCWriteEditorSetDocument'
+		return e[0] !== 'WKCWriteEditorSetValue'
 	}))),
 });
 
-if (params.WKCWriteEditorSetDocument) {
-	WKCWriteEditor.WKCWriteEditorSetDocument(params.WKCWriteEditorSetDocument);
+if (params.WKCWriteEditorSetValue) {
+	WKCWriteEditor.WKCWriteEditorSetValue(params.WKCWriteEditorSetValue);
 }
 
 window.WKCWriteEditorBehaviour = {

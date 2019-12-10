@@ -8,15 +8,15 @@ describe('WKCWriteEditor_Misc', function () {
 
 	before(function() {
 		return browser.OLSKVisit(kDefaultRoute, {
-			WKCWriteEditorSetDocument: 'alfa',
+			WKCWriteEditorSetValue: 'alfa',
 		});
 	});
 
-	it('binds WKCWriteEditorSetDocument', function () {
+	it('binds WKCWriteEditorSetValue', function () {
 		browser.assert.input(WKCWriteEditorFieldDebug, 'alfa');
 	});
 
-	it.skip('binds WKCWriteEditorSetDocument', function () {
+	it.skip('binds WKCWriteEditorSetValue', function () {
 		browser.assert.input('.CodeMirror', 'alfa');
 	});
 

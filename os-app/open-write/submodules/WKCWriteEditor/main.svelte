@@ -10,7 +10,7 @@ export const WKCWriteEditorFocus = function () {
 	});
 };
 
-export const WKCWriteEditorSetDocument = function (inputData) {
+export const WKCWriteEditorSetValue = function (inputData) {
 	if (OLSK_TESTING_BEHAVIOUR()) {
 		return mod.ReactDocumentSet(mod._ValueEditorFieldDebugValue = inputData);
 	}

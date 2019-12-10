@@ -17,7 +17,7 @@ export const WKCWriteDetailSetItem = function (inputData) {
 	}
 	
 	mod.ControlConfigureEditor(function (inputData) {
-		inputData.WKCWriteEditorSetDocument(mod._ValueItem.WKCNoteBody);
+		inputData.WKCWriteEditorSetValue(mod._ValueItem.WKCNoteBody);
 	});
 
 	if (!OLSK_TESTING_BEHAVIOUR()) {
