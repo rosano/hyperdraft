@@ -12,7 +12,7 @@ export const WKCVersionMetalWrite = async function(storageClient, inputData) {
 		});
 	}
 
-	return await storageClient.wikiavec.wkc_versions.writeObject(inputData.WKCVersionID, inputData);
+	return await storageClient.wikiavec.kvc_versions.writeObject(inputData.WKCVersionID, inputData);
 };
 
 export const WKCVersionMetalRead = async function(storageClient, inputData) {
@@ -20,11 +20,11 @@ export const WKCVersionMetalRead = async function(storageClient, inputData) {
 		return Promise.reject(new Error('WKCErrorInputNotValid'));
 	}
 
-	return WKCVersionModelPostJSONParse(await storageClient.wikiavec.wkc_versions.readObject(inputData));
+	return WKCVersionModelPostJSONParse(await storageClient.wikiavec.kvc_versions.readObject(inputData));
 };
 
 export const WKCVersionMetalList = async function(storageClient) {
-	let outputData = await storageClient.wikiavec.wkc_versions.listObjects();
+	let outputData = await storageClient.wikiavec.kvc_versions.listObjects();
 
 	for (let key in outputData) {
 		WKCVersionModelPostJSONParse(outputData[key]);
@@ -38,5 +38,5 @@ export const WKCVersionMetalDelete = async function(storageClient, inputData) {
 		return Promise.reject(new Error('WKCErrorInputNotValid'));
 	}
 
-	return await storageClient.wikiavec.wkc_versions.deleteObject(inputData);
+	return await storageClient.wikiavec.kvc_versions.deleteObject(inputData);
 };

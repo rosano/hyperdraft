@@ -2,7 +2,7 @@ import * as WKCNoteModel from './model.js';
 import * as OLSKRemoteStorage from 'OLSKRemoteStorage';
 
 const kType = 'wkc_note';
-const kCollection = 'wkc_notes';
+const kCollection = 'kvc_notes';
 
 export const WKCNoteStoragePath = function(inputData) {
 	return `${ kCollection }/${ inputData || '' }`;

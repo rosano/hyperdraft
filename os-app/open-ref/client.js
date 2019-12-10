@@ -7,7 +7,7 @@ exports.WKCRefStorageClient = function () {
 			return {
 				exports: {
 					WKCRefStorageList () {
-						return privateClient.getAll('wkc_notes/');
+						return privateClient.getAll('kvc_notes/');
 					},
 				},
 			};

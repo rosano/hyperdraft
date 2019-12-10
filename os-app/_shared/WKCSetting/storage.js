@@ -1,5 +1,5 @@
 const kType = 'wkc_setting';
-const kCollection = 'wkc_settings';
+const kCollection = 'kvc_settings';
 
 export const WKCSettingStoragePath = function(inputData) {
 	return `${ kCollection }/${ inputData || '' }`;

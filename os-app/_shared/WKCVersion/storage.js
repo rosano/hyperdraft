@@ -2,7 +2,7 @@ import * as WKCVersionModel from './model.js';
 import * as OLSKRemoteStorage from 'OLSKRemoteStorage';
 
 const kType = 'wkc_version';
-const kCollection = 'wkc_versions';
+const kCollection = 'kvc_versions';
 
 export const WKCVersionStoragePath = function(inputData) {
 	return `${ kCollection }/${ inputData || '' }`;

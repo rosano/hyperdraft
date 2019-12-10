@@ -13,7 +13,7 @@ export const WKCNoteMetalWrite = async function(storageClient, inputData) {
 		});
 	}
 
-	return await storageClient.wikiavec.wkc_notes.writeObject(inputData.WKCNoteID, inputData);
+	return await storageClient.wikiavec.kvc_notes.writeObject(inputData.WKCNoteID, inputData);
 };
 
 export const WKCNoteMetalRead = async function(storageClient, inputData) {
@@ -21,11 +21,11 @@ export const WKCNoteMetalRead = async function(storageClient, inputData) {
 		return Promise.reject(new Error('WKCErrorInputNotValid'));
 	}
 
-	return WKCNoteModelPostJSONParse(await storageClient.wikiavec.wkc_notes.readObject(inputData));
+	return WKCNoteModelPostJSONParse(await storageClient.wikiavec.kvc_notes.readObject(inputData));
 };
 
 export const WKCNoteMetalList = async function(storageClient) {
-	let outputData = await storageClient.wikiavec.wkc_notes.listObjects();
+	let outputData = await storageClient.wikiavec.kvc_notes.listObjects();
 
 	for (let key in outputData) {
 		WKCNoteModelPostJSONParse(outputData[key]);
@@ -39,5 +39,5 @@ export const WKCNoteMetalDelete = async function(storageClient, inputData) {
 		return Promise.reject(new Error('WKCErrorInputNotValid'));
 	}
 
-	return await storageClient.wikiavec.wkc_notes.deleteObject(inputData);
+	return await storageClient.wikiavec.kvc_notes.deleteObject(inputData);
 };

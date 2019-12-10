@@ -65,9 +65,9 @@ const WKCVersionStorage = require('./os-app/_shared/WKCVersion/storage.js');
 
 	beforeEach(async function() {
 		await uSerial([
-			'wkc_notes',
-			'wkc_settings',
-			'wkc_versions',
+			'kvc_notes',
+			'kvc_settings',
+			'kvc_versions',
 		].map(async function (e) {
 			return await Promise.all(Object.keys(await global.WKCTestingStorageClient.wikiavec[e].listObjects()).map(global.WKCTestingStorageClient.wikiavec[e].deleteObject));
 		}));

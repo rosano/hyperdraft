@@ -12,7 +12,7 @@ export const WKCSettingsMetalWrite = async function(storageClient, inputData) {
 		});
 	}
 
-	return await storageClient.wikiavec.wkc_settings.writeObject(inputData.WKCSettingKey, inputData);
+	return await storageClient.wikiavec.kvc_settings.writeObject(inputData.WKCSettingKey, inputData);
 };
 
 export const WKCSettingsMetalRead = async function(storageClient, inputData) {
@@ -20,11 +20,11 @@ export const WKCSettingsMetalRead = async function(storageClient, inputData) {
 		return Promise.reject(new Error('WKCErrorInputNotValid'));
 	}
 
-	return await storageClient.wikiavec.wkc_settings.readObject(inputData);
+	return await storageClient.wikiavec.kvc_settings.readObject(inputData);
 };
 
 export const WKCSettingsMetalList = async function(storageClient) {
-	return await storageClient.wikiavec.wkc_settings.listObjects();
+	return await storageClient.wikiavec.kvc_settings.listObjects();
 };
 
 export const WKCSettingsMetalDelete = async function(storageClient, inputData) {
@@ -32,5 +32,5 @@ export const WKCSettingsMetalDelete = async function(storageClient, inputData) {
 		return Promise.reject(new Error('WKCErrorInputNotValid'));
 	}
 
-	return await storageClient.wikiavec.wkc_settings.deleteObject(inputData);
+	return await storageClient.wikiavec.kvc_settings.deleteObject(inputData);
 };

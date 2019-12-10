@@ -461,9 +461,9 @@ const mod = {
 				console.debug('ready', arguments);
 			}
 
-			await mod._ValueStorageClient.remoteStorage.wikiavec.wkc_notes.WKCNoteStorageCache();
-			await mod._ValueStorageClient.remoteStorage.wikiavec.wkc_settings.WKCSettingStorageCache();
-			await mod._ValueStorageClient.remoteStorage.wikiavec.wkc_versions.WKCVersionStorageCache();
+			await mod._ValueStorageClient.remoteStorage.wikiavec.kvc_notes.WKCNoteStorageCache();
+			await mod._ValueStorageClient.remoteStorage.wikiavec.kvc_settings.WKCSettingStorageCache();
+			await mod._ValueStorageClient.remoteStorage.wikiavec.kvc_versions.WKCVersionStorageCache();
 
 			mod.ValueNotesAll(await WKCNoteAction.WKCNoteActionQuery(mod._ValueStorageClient, {}));
 
