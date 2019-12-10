@@ -7,7 +7,7 @@ describe('WKCWriteEditorLineObjectsFor', function testWKCWriteEditorLineObjectsF
 	it('throws error if not array', function() {
 		throws(function() {
 			mainModule.WKCWriteEditorLineObjectsFor(null);
-		}, /WKCErrorInputNotValid/);
+		}, /KVCErrorInputNotValid/);
 	});
 
 	it('returns array', function() {
@@ -90,7 +90,7 @@ describe('WKCWriteEditorHeaderTokensFrom', function testWKCWriteEditorHeaderToke
 	it('throws error if not array', function() {
 		throws(function() {
 			mainModule.WKCWriteEditorHeaderTokensFrom(null);
-		}, /WKCErrorInputNotValid/);
+		}, /KVCErrorInputNotValid/);
 	});
 
 	it('returns array', function() {

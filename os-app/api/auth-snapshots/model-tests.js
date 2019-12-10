@@ -22,29 +22,29 @@ describe('WKCSnapshotsModelErrorsFor', function testnapshotsModelErrorsFor() {
 	it('throws error if not object', function() {
 		assert.throws(function() {
 			modelLibrary.WKCSnapshotsModelErrorsFor(null);
-		}, /WKCErrorInputNotValid/);
+		}, /KVCErrorInputNotValid/);
 	});
 
-	it('returns false with WKCErrors if WKCSnapshotSubscriptionID not string', function() {
+	it('returns false with KVCErrors if WKCSnapshotSubscriptionID not string', function() {
 		var item = Object.assign(kTesting.StubValidSnapshot(), {
 			WKCSnapshotSubscriptionID: null,
 		});
 
 		assert.deepEqual(modelLibrary.WKCSnapshotsModelErrorsFor(item), {
 			WKCSnapshotSubscriptionID: [
-				'WKCErrorNotString',
+				'KVCErrorNotString',
 			],
 		});
 	});
 
-	it('returns false with WKCErrors if WKCSnapshotSubscriptionID not unempty', function() {
+	it('returns false with KVCErrors if WKCSnapshotSubscriptionID not unempty', function() {
 		var item = Object.assign(kTesting.StubValidSnapshot(), {
 			WKCSnapshotSubscriptionID: '',
 		});
 
 		assert.deepEqual(modelLibrary.WKCSnapshotsModelErrorsFor(item), {
 			WKCSnapshotSubscriptionID: [
-				'WKCErrorNotUnempty',
+				'KVCErrorNotUnempty',
 			],
 		});
 	});
@@ -54,7 +54,7 @@ describe('WKCSnapshotsModelErrorsFor', function testnapshotsModelErrorsFor() {
 			WKCSnapshotBody: null,
 		})), {
 			WKCSnapshotBody: [
-				'WKCErrorNotString',
+				'KVCErrorNotString',
 			],
 		});
 	});

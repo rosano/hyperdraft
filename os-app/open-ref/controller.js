@@ -5,14 +5,14 @@ const storageClient = WKCRefStorageClient();
 
 exports.RCSRefFetchPublicNotesArray = async function () {
 	return Object.values(await storageClient.wikiavec.WKCRefStorageList()).filter(function (e) {
-		return e.WKCNotePublishStatusIsPublished;
+		return e.KVCNotePublishStatusIsPublished;
 	});
 };
 
 exports.RCSRefUpdateCachedPublicNotes = function (writeFunction, inputData) {
 	let outputData = inputData.reduce(function (coll, item) {
-		if (typeof coll[item.WKCNotePublicID] === 'undefined') {
-			coll[item.WKCNotePublicID] = item;
+		if (typeof coll[item.KVCNotePublicID] === 'undefined') {
+			coll[item.KVCNotePublicID] = item;
 		}
 
 		return coll;
@@ -66,7 +66,7 @@ exports.OLSKControllerSharedMiddlewares = function() {
 
 exports.KVCSharedMiddlewareEnsureConnection = function(req, res, next) {
 	if (!req.OLSKSharedConnectionFor('KVCSharedConnectionRS').OLSKConnectionAttempted) {
-		return next(new Error('WKCErrorConnectionNotAttempted'));
+		return next(new Error('KVCErrorConnectionNotAttempted'));
 	}
 
 	if (req.OLSKSharedConnectionFor('KVCSharedConnectionRS').OLSKConnectionError) {
@@ -100,9 +100,9 @@ exports.OLSKControllerRoutes = function() {
 			OLSKRouteMethod: 'get',
 			OLSKRouteFunction(req, res, next) {
 				return res.render(req.OLSKLive.OLSKLivePathJoin(__dirname, 'view'), {
-					WKCNoteObject: {
-						WKCNoteDetectedTitle: res.locals.OLSKLocalized('WKCHomeTitle'),
-						WKCNoteDetectedBody: '',
+					KVCNoteObject: {
+						KVCNoteDetectedTitle: res.locals.OLSKLocalized('WKCHomeTitle'),
+						KVCNoteDetectedBody: '',
 					},
 				});
 			},
@@ -123,7 +123,7 @@ exports.OLSKControllerRoutes = function() {
 				const WKCParser = require('../_shared/WKCParser/main.js');
 
 				const publicLinks = Object.values(publicNotes).map(function (e) {
-					return [WKCParser.WKCParserTitleForPlaintext(e.WKCNoteBody), e.WKCNotePublicID];
+					return [WKCParser.WKCParserTitleForPlaintext(e.KVCNoteBody), e.KVCNotePublicID];
 				}).reduce(function (coll, [key, val]) {
 					if (typeof coll[key] === 'undefined') {
 						coll[key] = val;
@@ -132,8 +132,8 @@ exports.OLSKControllerRoutes = function() {
 					return coll;
 				}, {});
 				
-				item.WKCNoteDetectedTitle = WKCParser.WKCParserTitleForPlaintext(item.WKCNoteBody);
-				item.WKCNoteDetectedBody = WKCParser.WKCParserHTMLForPlaintext(WKCParser.WKCParserReplaceLinks(WKCParser.WKCParserBodyForPlaintext(item.WKCNoteBody), Object.entries(publicLinks).map(function (e) {
+				item.KVCNoteDetectedTitle = WKCParser.WKCParserTitleForPlaintext(item.KVCNoteBody);
+				item.KVCNoteDetectedBody = WKCParser.WKCParserHTMLForPlaintext(WKCParser.WKCParserReplaceLinks(WKCParser.WKCParserBodyForPlaintext(item.KVCNoteBody), Object.entries(publicLinks).map(function (e) {
 					return [e[0], `[${ e[0] }](${ res.locals.OLSKCanonicalFor('WKCRouteRefsRead', {
 						wkc_note_public_id: e[1],
 					}) })`];
@@ -144,7 +144,7 @@ exports.OLSKControllerRoutes = function() {
 				}, {})));
 				
 				return res.render(require('path').join(__dirname, 'view'), {
-					WKCNoteObject: item,
+					KVCNoteObject: item,
 				});
 			},
 			OLSKRouteMiddlewares: [
@@ -163,7 +163,7 @@ exports.OLSKControllerRoutes = function() {
 					return next();
 				}
 				
-				return res.send(item.WKCNoteBody);
+				return res.send(item.KVCNoteBody);
 			},
 			OLSKRouteMiddlewares: [
 				'KVCSharedMiddlewareEnsureConnection',

@@ -8,26 +8,26 @@
 
 exports.WKCSnapshotsModelErrorsFor = function(inputData) {
 	if (typeof inputData !== 'object' || inputData === null) {
-		throw new Error('WKCErrorInputNotValid');
+		throw new Error('KVCErrorInputNotValid');
 	}
 
 	var errors = {};
 
 	if (!inputData.WKCSnapshotSubscriptionID) {
 		errors.WKCSnapshotSubscriptionID = [
-			'WKCErrorNotUnempty',
+			'KVCErrorNotUnempty',
 		];
 	}
 
 	if (typeof inputData.WKCSnapshotSubscriptionID !== 'string') {
 		errors.WKCSnapshotSubscriptionID = [
-			'WKCErrorNotString',
+			'KVCErrorNotString',
 		];
 	}
 
 	if (typeof inputData.WKCSnapshotBody !== 'string') {
 		errors.WKCSnapshotBody = [
-			'WKCErrorNotString',
+			'KVCErrorNotString',
 		];
 	}
 

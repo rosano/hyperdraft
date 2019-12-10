@@ -1,6 +1,6 @@
 export const WKCWriteTruncatedTitleFor = function (inputData, param2) {
 	if (typeof inputData !== 'string') {
-		throw new Error('WKCErrorInputNotValid');
+		throw new Error('KVCErrorInputNotValid');
 	}
 
 	const threshold = 60;
@@ -13,9 +13,9 @@ export const WKCWriteTruncatedTitleFor = function (inputData, param2) {
 };
 
 export const WKCWriteLogicListSort = function (a, b) {
-	if (b.WKCNoteModificationDate && a.WKCNoteModificationDate) {
-		return b.WKCNoteModificationDate - a.WKCNoteModificationDate;
+	if (b.KVCNoteModificationDate && a.KVCNoteModificationDate) {
+		return b.KVCNoteModificationDate - a.KVCNoteModificationDate;
 	}
 
-	return b.WKCNoteCreationDate - a.WKCNoteCreationDate;
+	return b.KVCNoteCreationDate - a.KVCNoteCreationDate;
 };

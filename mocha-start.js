@@ -29,7 +29,7 @@
 })();
 
 const WKCStorageModule = require('./os-app/_shared/WKCStorageModule/main.js');
-const WKCNoteStorage = require('./os-app/_shared/WKCNote/storage.js');
+const KVCNoteStorage = require('./os-app/_shared/KVCNote/storage.js');
 const WKCSettingStorage = require('./os-app/_shared/WKCSetting/storage.js');
 const WKCVersionStorage = require('./os-app/_shared/WKCVersion/storage.js');
 
@@ -48,7 +48,7 @@ const WKCVersionStorage = require('./os-app/_shared/WKCVersion/storage.js');
 		global.KVCTestingStorageClient = require('./os-app/_shared/WKCStorageClient/main.js').WKCStorageClient({
 			modules: [
 				WKCStorageModule.WKCStorageModule([
-					WKCNoteStorage.WKCNoteStorage,
+					KVCNoteStorage.KVCNoteStorage,
 					WKCSettingStorage.WKCSettingStorage,
 					WKCVersionStorage.WKCVersionStorage,
 				].map(function (e) {

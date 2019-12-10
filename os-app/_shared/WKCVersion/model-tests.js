@@ -18,7 +18,7 @@ describe('WKCVersionModelErrorsFor', function testWKCVersionModelErrorsFor() {
 	it('throws error if not object', function() {
 		throws(function() {
 			mainModule.WKCVersionModelErrorsFor(null);
-		}, /WKCErrorInputNotValid/);
+		}, /KVCErrorInputNotValid/);
 	});
 
 	it('returns object if WKCVersionID not string', function() {
@@ -26,7 +26,7 @@ describe('WKCVersionModelErrorsFor', function testWKCVersionModelErrorsFor() {
 			WKCVersionID: null,
 		})), {
 			WKCVersionID: [
-				'WKCErrorNotString',
+				'KVCErrorNotString',
 			],
 		});
 	});
@@ -36,7 +36,7 @@ describe('WKCVersionModelErrorsFor', function testWKCVersionModelErrorsFor() {
 			WKCVersionID: ' ',
 		})), {
 			WKCVersionID: [
-				'WKCErrorNotFilled',
+				'KVCErrorNotFilled',
 			],
 		});
 	});
@@ -46,7 +46,7 @@ describe('WKCVersionModelErrorsFor', function testWKCVersionModelErrorsFor() {
 			WKCVersionNoteID: null,
 		})), {
 			WKCVersionNoteID: [
-				'WKCErrorNotString',
+				'KVCErrorNotString',
 			],
 		});
 	});
@@ -56,7 +56,7 @@ describe('WKCVersionModelErrorsFor', function testWKCVersionModelErrorsFor() {
 			WKCVersionNoteID: ' ',
 		})), {
 			WKCVersionNoteID: [
-				'WKCErrorNotFilled',
+				'KVCErrorNotFilled',
 			],
 		});
 	});
@@ -66,7 +66,7 @@ describe('WKCVersionModelErrorsFor', function testWKCVersionModelErrorsFor() {
 			WKCVersionBody: null,
 		})), {
 			WKCVersionBody: [
-				'WKCErrorNotString',
+				'KVCErrorNotString',
 			],
 		});
 	});
@@ -76,7 +76,7 @@ describe('WKCVersionModelErrorsFor', function testWKCVersionModelErrorsFor() {
 			WKCVersionDate: new Date('alfa'),
 		})), {
 			WKCVersionDate: [
-				'WKCErrorNotDate',
+				'KVCErrorNotDate',
 			],
 		});
 	});

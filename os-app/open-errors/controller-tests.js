@@ -14,36 +14,36 @@ describe('OLSKControllerSharedErrorHandlers', function testOLSKControllerSharedE
 
 	it('returns shared error handlers', function() {
 		assert.deepEqual(controllerModule.OLSKControllerSharedErrorHandlers(), [
-			controllerModule.WKCErrorsFirstHandler,
-			controllerModule.WKCErrors404Handler,
-			controllerModule.WKCErrorsFinalHandler,
+			controllerModule.KVCErrorsFirstHandler,
+			controllerModule.KVCErrors404Handler,
+			controllerModule.KVCErrorsFinalHandler,
 		]);
 	});
 
 });
 
-describe('WKCErrorsFirstHandler', function testWKCErrorsFirstHandler() {
+describe('KVCErrorsFirstHandler', function testKVCErrorsFirstHandler() {
 
 	var pathPackage = require('path');
 
 	it('sets res.locals.OLSKSharedPageControllerSlug to folder name', function() {
 		var res = OLSKTesting.OLSKTestingFakeResponseForLocals();
-		controllerModule.WKCErrorsFirstHandler(new Error('alpha'), null, res, OLSKTesting.OLSKTestingFakeNext());
+		controllerModule.KVCErrorsFirstHandler(new Error('alpha'), null, res, OLSKTesting.OLSKTestingFakeNext());
 		assert.strictEqual(res.locals.OLSKSharedPageControllerSlug, pathPackage.basename(__dirname));
 	});
 
 	it('returns next(error)', function() {
 		var errorObject = new Error('alpha');
-		assert.deepEqual(controllerModule.WKCErrorsFirstHandler(errorObject, null, OLSKTesting.OLSKTestingFakeResponseForLocals(), OLSKTesting.OLSKTestingFakeNext()), errorObject);
+		assert.deepEqual(controllerModule.KVCErrorsFirstHandler(errorObject, null, OLSKTesting.OLSKTestingFakeResponseForLocals(), OLSKTesting.OLSKTestingFakeNext()), errorObject);
 	});
 
 });
 
-describe('WKCErrors404Handler', function testWKCErrors404Handler() {
+describe('KVCErrors404Handler', function testKVCErrors404Handler() {
 
 	it('returns next(error)', function() {
 		var errorObject = new Error('alpha');
-		assert.deepEqual(controllerModule.WKCErrors404Handler(errorObject, null, OLSKTesting.OLSKTestingFakeRequest(), OLSKTesting.OLSKTestingFakeNext()), errorObject);
+		assert.deepEqual(controllerModule.KVCErrors404Handler(errorObject, null, OLSKTesting.OLSKTestingFakeRequest(), OLSKTesting.OLSKTestingFakeNext()), errorObject);
 	});
 
 });

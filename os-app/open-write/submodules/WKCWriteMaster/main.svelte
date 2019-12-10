@@ -160,9 +160,9 @@ import WKCWriteMasterListItem from '../WKCWriteMasterListItem/main.svelte';
 		let:OLSKResultsListItem={ e }
 		>
 		<WKCWriteMasterListItem
-			WKCWriteMasterListItemAccessibilitySummary={ WKCWriteMasterDelegateItemTitle(e.WKCNoteBody, true) }
-			WKCWriteMasterListItemTitle={ WKCWriteMasterDelegateItemTitle(e.WKCNoteBody) }
-			WKCWriteMasterListItemSnippet={ WKCWriteMasterDelegateItemBody(e.WKCNoteBody) }
+			WKCWriteMasterListItemAccessibilitySummary={ WKCWriteMasterDelegateItemTitle(e.KVCNoteBody, true) }
+			WKCWriteMasterListItemTitle={ WKCWriteMasterDelegateItemTitle(e.KVCNoteBody) }
+			WKCWriteMasterListItemSnippet={ WKCWriteMasterDelegateItemBody(e.KVCNoteBody) }
 			/>
 	</OLSKResults>
 

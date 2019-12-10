@@ -7,15 +7,15 @@ const OLSKLocalized = function(translationConstant) {
 import OLSKThrottle from 'OLSKThrottle';
 import * as WKCStorageClient from '../_shared/WKCStorageClient/main.js';
 import { WKCStorageModule } from '../_shared/WKCStorageModule/main.js';
-import { WKCNoteStorage } from '../_shared/WKCNote/storage.js';
-import { WKCNoteModelPostJSONParse } from '../_shared/WKCNote/model.js';
+import { KVCNoteStorage } from '../_shared/KVCNote/storage.js';
+import { KVCNoteModelPostJSONParse } from '../_shared/KVCNote/model.js';
 import { WKCSettingStorage } from '../_shared/WKCSetting/storage.js';
 import { WKCVersionStorage } from '../_shared/WKCVersion/storage.js';
 import WKCParser from '../_shared/WKCParser/main.js';
 import { OLSK_TESTING_BEHAVIOUR } from 'OLSKTesting';
 import * as OLSKRemoteStorage from '../_shared/__external/OLSKRemoteStorage/main.js'
-import * as WKCNoteAction from '../_shared/WKCNote/action.js';
-import * as WKCNoteMetal from '../_shared/WKCNote/metal.js';
+import * as KVCNoteAction from '../_shared/KVCNote/action.js';
+import * as KVCNoteMetal from '../_shared/KVCNote/metal.js';
 import * as WKCVersionAction from '../_shared/WKCVersion/action.js';
 import * as WKCSettingAction from '../_shared/WKCSetting/action.js';
 import * as WKCSettingMetal from '../_shared/WKCSetting/metal.js';
@@ -37,7 +37,7 @@ const mod = {
 
 	ValueNotesVisible (inputData, shouldSort = true) {
 		const items = !mod._ValueFilterText ? inputData : inputData.filter(function (e) {
-			return e.WKCNoteBody.toLowerCase().match(mod._ValueFilterText.toLowerCase());
+			return e.KVCNoteBody.toLowerCase().match(mod._ValueFilterText.toLowerCase());
 		});
 		mod._ValueNotesVisible = shouldSort ? items.sort(WKCWriteLogic.WKCWriteLogicListSort) : items;
 	},
@@ -133,7 +133,7 @@ const mod = {
 	},
 
 	WKCWriteDetailDispatchUpdate (inputData) {
-		mod._ValueNoteSelected.WKCNoteBody = inputData;
+		mod._ValueNoteSelected.KVCNoteBody = inputData;
 		
 		mod.ControlNoteSave(mod._ValueNoteSelected);
 	},
@@ -180,35 +180,35 @@ const mod = {
 	ControlNoteSave(inputData) {
 		mod._ValueNotesAll
 
-		OLSKThrottle.OLSKThrottleMappedTimeoutFor(mod._ValueSaveNoteThrottleMap, inputData.WKCNoteID, function (inputData) {
+		OLSKThrottle.OLSKThrottleMappedTimeoutFor(mod._ValueSaveNoteThrottleMap, inputData.KVCNoteID, function (inputData) {
 			return {
 				OLSKThrottleDuration: 500,
 				async OLSKThrottleCallback () {
-					delete mod._ValueSaveNoteThrottleMap[inputData.WKCNoteID];
+					delete mod._ValueSaveNoteThrottleMap[inputData.KVCNoteID];
 
-					await WKCNoteAction.WKCNoteActionUpdate(mod._ValueStorageClient, inputData);
+					await KVCNoteAction.KVCNoteActionUpdate(mod._ValueStorageClient, inputData);
 				},
 			};
 		}, inputData);
 
 		if (OLSK_TESTING_BEHAVIOUR()) {
-			OLSKThrottle.OLSKThrottleSkip(mod._ValueSaveNoteThrottleMap[inputData.WKCNoteID])	
+			OLSKThrottle.OLSKThrottleSkip(mod._ValueSaveNoteThrottleMap[inputData.KVCNoteID])	
 		}
 
-		OLSKThrottle.OLSKThrottleMappedTimeoutFor(mod._ValueSaveVersionThrottleMap, inputData.WKCNoteID, function (inputData) {
+		OLSKThrottle.OLSKThrottleMappedTimeoutFor(mod._ValueSaveVersionThrottleMap, inputData.KVCNoteID, function (inputData) {
 			return {
 				OLSKThrottleDuration: 3000,
 				OLSKThrottleCallback: async function () {
-					delete mod._ValueSaveVersionThrottleMap[inputData.WKCNoteID];
+					delete mod._ValueSaveVersionThrottleMap[inputData.KVCNoteID];
 
-					if (!inputData.WKCNoteCreationDate) {
+					if (!inputData.KVCNoteCreationDate) {
 						return;
 					}
 
 					await WKCVersionAction.WKCVersionActionCreate(mod._ValueStorageClient, {
-						WKCVersionNoteID: inputData.WKCNoteID,
-						WKCVersionBody: inputData.WKCNoteBody,
-						WKCVersionDate: inputData.WKCNoteModificationDate,
+						WKCVersionNoteID: inputData.KVCNoteID,
+						WKCVersionBody: inputData.KVCNoteBody,
+						WKCVersionDate: inputData.KVCNoteModificationDate,
 					});
 				},
 			};
@@ -216,13 +216,13 @@ const mod = {
 
 
 		if (OLSK_TESTING_BEHAVIOUR()) {
-			OLSKThrottle.OLSKThrottleSkip(mod._ValueSaveVersionThrottleMap[inputData.WKCNoteID])	
+			OLSKThrottle.OLSKThrottleSkip(mod._ValueSaveVersionThrottleMap[inputData.KVCNoteID])	
 		}
 	},
 
 	async ControlNoteCreate(inputData) {
-		let item = await WKCNoteAction.WKCNoteActionCreate(mod._ValueStorageClient, {
-			WKCNoteBody: typeof inputData === 'string' ? inputData : '',
+		let item = await KVCNoteAction.KVCNoteActionCreate(mod._ValueStorageClient, {
+			KVCNoteBody: typeof inputData === 'string' ? inputData : '',
 		});
 
 		mod.ValueNotesAll(mod._ValueNotesAll.concat(item));
@@ -275,16 +275,16 @@ const mod = {
 	},
 	
 	async ControlNotePublish (inputData) {
-		mod.ValueNoteSelected(await WKCNoteAction.WKCNoteActionPublish(mod._ValueStorageClient, inputData));
+		mod.ValueNoteSelected(await KVCNoteAction.KVCNoteActionPublish(mod._ValueStorageClient, inputData));
 	},
 	
 	async ControlNoteRetract (inputData) {
-		mod.ValueNoteSelected(await WKCNoteAction.WKCNoteActionRetract(mod._ValueStorageClient, inputData));
+		mod.ValueNoteSelected(await KVCNoteAction.KVCNoteActionRetract(mod._ValueStorageClient, inputData));
 	},
 	
 	async ControlNoteVersions (inputData) {
 		(await WKCVersionAction.WKCVersionActionQuery(mod._ValueStorageClient, {
-			WKCVersionNoteID: inputData.WKCNoteID,
+			WKCVersionNoteID: inputData.KVCNoteID,
 		})).slice(0, 5).forEach(function (e) {
 			console.log(e);
 			console.log(e.WKCVersionBody);
@@ -296,7 +296,7 @@ const mod = {
 			return e !== inputData;
 		}))
 
-		await WKCNoteAction.WKCNoteActionDelete(mod._ValueStorageClient, inputData.WKCNoteID);
+		await KVCNoteAction.KVCNoteActionDelete(mod._ValueStorageClient, inputData.KVCNoteID);
 
 		mod.ControlNoteSelect(null);
 	},
@@ -315,9 +315,9 @@ const mod = {
 		}
 
 		mod.ValueNoteSelected(mod._ValueNotesVisible.filter(function (e) {
-			return WKCParser.WKCParserTitleForPlaintext(e.WKCNoteBody).toLowerCase() === inputData.toLowerCase();
+			return WKCParser.WKCParserTitleForPlaintext(e.KVCNoteBody).toLowerCase() === inputData.toLowerCase();
 		}).concat(mod._ValueNotesVisible.filter(function (e) {
-			return WKCParser.WKCParserTitleForPlaintext(e.WKCNoteBody).toLowerCase().includes(inputData.toLowerCase());
+			return WKCParser.WKCParserTitleForPlaintext(e.KVCNoteBody).toLowerCase().includes(inputData.toLowerCase());
 		})).shift());
 	},
 
@@ -330,7 +330,7 @@ const mod = {
 		].join(' ');
 
 		zip.file(`${ fileName }.json`, JSON.stringify({
-			WKCNoteObjects: mod._ValueNotesAll,
+			KVCNoteObjects: mod._ValueNotesAll,
 			WKCSettingObjects: await WKCSettingAction.WKCSettingsActionQuery(mod._ValueStorageClient, {}),
 		}));
 		
@@ -351,7 +351,7 @@ const mod = {
 			return;
 		}
 
-		if (!Array.isArray(outputData.WKCNoteObjects)) {
+		if (!Array.isArray(outputData.KVCNoteObjects)) {
 			return;
 		}
 
@@ -363,19 +363,19 @@ const mod = {
 			return WKCSettingMetal.WKCSettingsMetalWrite(mod._ValueStorageClient, e);
 		}));
 
-		await Promise.all(outputData.WKCNoteObjects.map(function (e) {
-			return WKCNoteMetal.WKCNoteMetalWrite(mod._ValueStorageClient, WKCNoteModelPostJSONParse(e));
+		await Promise.all(outputData.KVCNoteObjects.map(function (e) {
+			return KVCNoteMetal.KVCNoteMetalWrite(mod._ValueStorageClient, KVCNoteModelPostJSONParse(e));
 		}));
 
-		mod.ValueNotesAll(await WKCNoteAction.WKCNoteActionQuery(mod._ValueStorageClient, {}));
+		mod.ValueNotesAll(await KVCNoteAction.KVCNoteActionQuery(mod._ValueStorageClient, {}));
 	},
 
 	ControlNotesExportTXT () {
 		let zip = new JSZip();
 
 		mod._ValueNotesAll.forEach(function (e) {
-			zip.file(`${ e.WKCNoteID }.txt`, e.WKCNoteBody, {
-				date: e.WKCNoteModificationDate,
+			zip.file(`${ e.KVCNoteID }.txt`, e.KVCNoteBody, {
+				date: e.KVCNoteModificationDate,
 			});
 		});
 		
@@ -414,40 +414,40 @@ const mod = {
 		mod._ValueStorageClient = WKCStorageClient.WKCStorageClient({
 			modules: [
 				WKCStorageModule([
-					WKCNoteStorage,
+					KVCNoteStorage,
 					WKCVersionStorage,
 					WKCSettingStorage,
 					].map(function (e) {
 						return {
 							WKCCollectionStorageGenerator: e,
-							WKCCollectionChangeDelegate: e === WKCNoteStorage ? {
+							WKCCollectionChangeDelegate: e === KVCNoteStorage ? {
 								OLSKChangeDelegateCreate (inputData) {
 									// console.log('OLSKChangeDelegateCreate', inputData);
 
 									mod.ValueNotesAll(mod._ValueNotesAll.filter(function (e) {
-										return e.WKCNoteID !== inputData.WKCNoteID; // @Hotfix Dropbox sending DelegateAdd
+										return e.KVCNoteID !== inputData.KVCNoteID; // @Hotfix Dropbox sending DelegateAdd
 									}).concat(inputData));
 								},
 								OLSKChangeDelegateUpdate (inputData) {
 									// console.log('OLSKChangeDelegateUpdate', inputData);
 
-									if (mod._ValueNoteSelected && (mod._ValueNoteSelected.WKCNoteID === inputData.WKCNoteID)) {
+									if (mod._ValueNoteSelected && (mod._ValueNoteSelected.KVCNoteID === inputData.KVCNoteID)) {
 										mod.ControlNoteSelect(Object.assign(mod._ValueNoteSelected, inputData));
 									}
 
 									mod.ValueNotesAll(mod._ValueNotesAll.map(function (e) {
-										return Object.assign(e, e.WKCNoteID === inputData.WKCNoteID ? inputData : {});
+										return Object.assign(e, e.KVCNoteID === inputData.KVCNoteID ? inputData : {});
 									}), false);
 								},
 								OLSKChangeDelegateDelete (inputData) {
 									// console.log('OLSKChangeDelegateDelete', inputData);
 
-									if (mod._ValueNoteSelected && (mod._ValueNoteSelected.WKCNoteID === inputData.WKCNoteID)) {
+									if (mod._ValueNoteSelected && (mod._ValueNoteSelected.KVCNoteID === inputData.KVCNoteID)) {
 										mod.ControlNoteSelect(null);
 									}
 
 									mod.ValueNotesAll(mod._ValueNotesAll.filter(function (e) {
-										return e.WKCNoteID !== inputData.WKCNoteID;
+										return e.KVCNoteID !== inputData.KVCNoteID;
 									}), false);
 								},
 							} : null,
@@ -461,11 +461,11 @@ const mod = {
 				console.debug('ready', arguments);
 			}
 
-			await mod._ValueStorageClient.remoteStorage.wikiavec.kvc_notes.WKCNoteStorageCache();
+			await mod._ValueStorageClient.remoteStorage.wikiavec.kvc_notes.KVCNoteStorageCache();
 			await mod._ValueStorageClient.remoteStorage.wikiavec.kvc_settings.WKCSettingStorageCache();
 			await mod._ValueStorageClient.remoteStorage.wikiavec.kvc_versions.WKCVersionStorageCache();
 
-			mod.ValueNotesAll(await WKCNoteAction.WKCNoteActionQuery(mod._ValueStorageClient, {}));
+			mod.ValueNotesAll(await KVCNoteAction.KVCNoteActionQuery(mod._ValueStorageClient, {}));
 
 			mod.ReactIsLoading(mod._ValueIsLoading = false);
 		});

@@ -378,7 +378,7 @@ describe('WKCWrite_Misc', function () {
 			return browser.click('.WKCWriteDetailToolbarPublishButton');
 		});
 
-		it('sets WKCNotePublishStatusIsPublished', function () {
+		it('sets KVCNotePublishStatusIsPublished', function () {
 			browser.assert.elements('.WKCWriteDetailToolbarPublishButton', 0);
 		});
 
@@ -390,7 +390,7 @@ describe('WKCWrite_Misc', function () {
 			return browser.click('.WKCWriteDetailToolbarRetractButton');
 		});
 
-		it('sets WKCNotePublishStatusIsPublished', function () {
+		it('sets KVCNotePublishStatusIsPublished', function () {
 			browser.assert.elements('.WKCWriteDetailToolbarPublishButton', 1);
 		});
 

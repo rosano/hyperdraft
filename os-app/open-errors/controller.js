@@ -10,23 +10,23 @@ var pathPackage = require('path');
 
 exports.OLSKControllerSharedErrorHandlers = function() {
 	return [
-		exports.WKCErrorsFirstHandler,
-		exports.WKCErrors404Handler,
-		exports.WKCErrorsFinalHandler,
+		exports.KVCErrorsFirstHandler,
+		exports.KVCErrors404Handler,
+		exports.KVCErrorsFinalHandler,
 	];
 };
 
-//_ WKCErrorsFirstHandler
+//_ KVCErrorsFirstHandler
 
-exports.WKCErrorsFirstHandler = function(err, req, res, next) {
+exports.KVCErrorsFirstHandler = function(err, req, res, next) {
 	res.locals.OLSKSharedPageControllerSlug = pathPackage.basename(__dirname);
 
 	return next(err);
 };
 
-//_ WKCErrors404Handler
+//_ KVCErrors404Handler
 
-exports.WKCErrors404Handler = function(err, req, res, next) {
+exports.KVCErrors404Handler = function(err, req, res, next) {
 	if (res.statusCode !== 404) {
 		return next(err);
 	}
@@ -34,9 +34,9 @@ exports.WKCErrors404Handler = function(err, req, res, next) {
 	return res.render(req.OLSKLive.OLSKLivePathJoin(__dirname, '404'), {});
 };
 
-//_ WKCErrorsFinalHandler
+//_ KVCErrorsFinalHandler
 
-exports.WKCErrorsFinalHandler = function(err, req, res, next) {
+exports.KVCErrorsFinalHandler = function(err, req, res, next) {
 	if (res.statusCode === 200) {
 		res.status(500);
 	}

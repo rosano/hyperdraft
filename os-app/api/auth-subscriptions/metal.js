@@ -10,17 +10,17 @@ const modelLibrary = require('./model.js');
 
 exports.WKCMetalSubscriptionsCreate = function(databaseClient, inputData, completionHandler) {
 	if (typeof inputData !== 'object' || inputData === null) {
-		throw new Error('WKCErrorInputNotValid');
+		throw new Error('KVCErrorInputNotValid');
 	}
 
 	if (typeof completionHandler !== 'function') {
-		throw new Error('WKCErrorInputNotValid');
+		throw new Error('KVCErrorInputNotValid');
 	}
 
 	const errors = modelLibrary.WKCSubscriptionsModelErrorsFor(modelLibrary.WKCModelSubscriptionPrepare(inputData));
 	if (errors) {
 		return completionHandler(null, Object.assign(inputData, {
-			WKCErrors: errors,
+			KVCErrors: errors,
 		}));
 	}
 
@@ -49,11 +49,11 @@ exports.WKCMetalSubscriptionsCreate = function(databaseClient, inputData, comple
 
 exports.WKCMetalSubscriptionsRead = function(databaseClient, inputData, completionHandler) {
 	if (typeof inputData !== 'string') {
-		throw new Error('WKCErrorInputNotValid');
+		throw new Error('KVCErrorInputNotValid');
 	}
 
 	if (typeof completionHandler !== 'function') {
-		throw new Error('WKCErrorInputNotValid');
+		throw new Error('KVCErrorInputNotValid');
 	}
 
 	return databaseClient.db(process.env.KVC_SHARED_DATABASE_NAME).collection('wkc_subscriptions').findOne({
@@ -64,7 +64,7 @@ exports.WKCMetalSubscriptionsRead = function(databaseClient, inputData, completi
 		}
 
 		if (!result) {
-			return completionHandler(new Error('WKCErrorNotFound'));
+			return completionHandler(new Error('KVCErrorNotFound'));
 		}
 
 		var subscriptionObject = result;
@@ -81,15 +81,15 @@ exports.WKCMetalSubscriptionsRead = function(databaseClient, inputData, completi
 
 exports.WKCMetalSubscriptionsUpdate = function(databaseClient, objectID, inputData, completionHandler) {
 	if (typeof objectID !== 'string') {
-		throw new Error('WKCErrorInputNotValid');
+		throw new Error('KVCErrorInputNotValid');
 	}
 
 	if (typeof inputData !== 'object' || inputData === null) {
-		throw new Error('WKCErrorInputNotValid');
+		throw new Error('KVCErrorInputNotValid');
 	}
 
 	if (typeof completionHandler !== 'function') {
-		throw new Error('WKCErrorInputNotValid');
+		throw new Error('KVCErrorInputNotValid');
 	}
 
 	const errors = modelLibrary.WKCSubscriptionsModelErrorsFor(modelLibrary.WKCModelSubscriptionPrepare(inputData), {
@@ -97,7 +97,7 @@ exports.WKCMetalSubscriptionsUpdate = function(databaseClient, objectID, inputDa
 	});
 	if (errors) {
 		return completionHandler(null, Object.assign(inputData, {
-			WKCErrors: errors,
+			KVCErrors: errors,
 		}));
 	}
 
@@ -115,7 +115,7 @@ exports.WKCMetalSubscriptionsUpdate = function(databaseClient, objectID, inputDa
 		}
 
 		if (!result.value) {
-			return completionHandler(new Error('WKCErrorNotFound'));
+			return completionHandler(new Error('KVCErrorNotFound'));
 		}
 
 		modelLibrary.WKCSubscriptionHiddenPropertyNames().forEach(function(obj) {
@@ -130,11 +130,11 @@ exports.WKCMetalSubscriptionsUpdate = function(databaseClient, objectID, inputDa
 
 exports.WKCMetalSubscriptionsDelete = function(databaseClient, inputData, completionHandler) {
 	if (typeof inputData !== 'string') {
-		throw new Error('WKCErrorInputNotValid');
+		throw new Error('KVCErrorInputNotValid');
 	}
 
 	if (typeof completionHandler !== 'function') {
-		throw new Error('WKCErrorInputNotValid');
+		throw new Error('KVCErrorInputNotValid');
 	}
 
 	return databaseClient.db(process.env.KVC_SHARED_DATABASE_NAME).collection('wkc_subscriptions').deleteOne({
@@ -145,7 +145,7 @@ exports.WKCMetalSubscriptionsDelete = function(databaseClient, inputData, comple
 		}
 
 		if (!result.result.n) {
-			return completionHandler(new Error('WKCErrorNotFound'));
+			return completionHandler(new Error('KVCErrorNotFound'));
 		}
 
 		return completionHandler(null, true);
@@ -156,11 +156,11 @@ exports.WKCMetalSubscriptionsDelete = function(databaseClient, inputData, comple
 
 exports.WKCMetalSubscriptionsSearch = function(databaseClient, inputData, completionHandler, options = {}) {
 	if (typeof completionHandler !== 'function') {
-		throw new Error('WKCErrorInputNotValid');
+		throw new Error('KVCErrorInputNotValid');
 	}
 
 	if (options && typeof options !== 'object' || options === null) {
-		throw new Error('WKCErrorInputNotValid');
+		throw new Error('KVCErrorInputNotValid');
 	}
 
 	return databaseClient.db(process.env.KVC_SHARED_DATABASE_NAME).collection('wkc_subscriptions').find({}).project(modelLibrary.WKCSubscriptionHiddenPropertyNames().concat(options && options.WKCOptionExcludeWKCSubscriptionFetchContent ? ['WKCSubscriptionFetchContent'] : []).reduce(function(hash, e) {
@@ -180,7 +180,7 @@ exports.WKCMetalSubscriptionsSearch = function(databaseClient, inputData, comple
 
 exports.WKCMetalSubscriptionsNeedingFetch = function(databaseClient, completionHandler) {
 	if (typeof completionHandler !== 'function') {
-		throw new Error('WKCErrorInputNotValid');
+		throw new Error('KVCErrorInputNotValid');
 	}
 
 	return databaseClient.db(process.env.KVC_SHARED_DATABASE_NAME).collection('wkc_subscriptions').find({
@@ -229,15 +229,15 @@ exports.WKCMetalSubscriptionsNeedingFetch = function(databaseClient, completionH
 
 exports.WKCSubscriptionsMetalRequestParameters = function(databaseClient, inputData, completionHandler, options = {}) {
 	if (typeof inputData !== 'string') {
-		throw new Error('WKCErrorInputNotValid');
+		throw new Error('KVCErrorInputNotValid');
 	}
 
 	if (typeof completionHandler !== 'function') {
-		throw new Error('WKCErrorInputNotValid');
+		throw new Error('KVCErrorInputNotValid');
 	}
 
 	if (options && typeof options !== 'object' || options === null) {
-		throw new Error('WKCErrorInputNotValid');
+		throw new Error('KVCErrorInputNotValid');
 	}
 
 	var requestObject = {

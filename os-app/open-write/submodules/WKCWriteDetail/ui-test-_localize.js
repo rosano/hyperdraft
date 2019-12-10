@@ -26,7 +26,7 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 				return browser.OLSKVisit(kDefaultRoute, {
 					OLSKRoutingLanguage: languageCode,
 					WKCWriteDetailItem: JSON.stringify({
-						WKCNoteBody: 'alfa',
+						KVCNoteBody: 'alfa',
 					}),
 				});
 			});
@@ -61,15 +61,15 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 		
 			});
 
-			context('WKCNotePublishStatusIsPublished', function() {
+			context('KVCNotePublishStatusIsPublished', function() {
 
 				before(function() {
 					return browser.OLSKVisit(kDefaultRoute, {
 						OLSKRoutingLanguage: languageCode,
 						WKCWriteDetailItem: JSON.stringify({
-							WKCNoteBody: 'alfa',
-							WKCNotePublishStatusIsPublished: true,
-							WKCNotePublicID: 'bravo',
+							KVCNoteBody: 'alfa',
+							KVCNotePublishStatusIsPublished: true,
+							KVCNotePublicID: 'bravo',
 						}),
 					});
 				});

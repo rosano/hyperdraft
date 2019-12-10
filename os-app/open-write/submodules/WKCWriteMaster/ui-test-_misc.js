@@ -73,18 +73,18 @@ describe('WKCWriteMaster_Misc', function () {
 			before(function() {
 				return browser.OLSKVisit(kDefaultRoute, {
 					WKCWriteMasterListItems: JSON.stringify([{
-						WKCNoteID: 'alfa',
-						WKCNoteBody: 'bravo',
+						KVCNoteID: 'alfa',
+						KVCNoteBody: 'bravo',
 					}, {
-						WKCNoteID: 'charlie',
-						WKCNoteBody: 'delta',
+						KVCNoteID: 'charlie',
+						KVCNoteBody: 'delta',
 					}, {
-						WKCNoteID: 'echo',
-						WKCNoteBody: 'foxtrot',
+						KVCNoteID: 'echo',
+						KVCNoteBody: 'foxtrot',
 					}]),
 					WKCWriteMasterListItemSelected: JSON.stringify({
-						WKCNoteID: 'charlie',
-						WKCNoteBody: 'delta',
+						KVCNoteID: 'charlie',
+						KVCNoteBody: 'delta',
 					}),
 				});
 			});
@@ -106,8 +106,8 @@ describe('WKCWriteMaster_Misc', function () {
 				it('sends WKCWriteMasterDispatchArrow', function () {
 					browser.assert.text('#TestWKCWriteMasterDispatchArrow', '1');
 					browser.assert.text('#TestWKCWriteMasterDispatchArrowData', JSON.stringify({
-						WKCNoteID: 'alfa',
-						WKCNoteBody: 'bravo',
+						KVCNoteID: 'alfa',
+						KVCNoteBody: 'bravo',
 					}));
 				});
 
@@ -217,12 +217,12 @@ describe('WKCWriteMaster_Misc', function () {
 				before(function () {
 					return browser.OLSKVisit(kDefaultRoute, {
 						WKCWriteMasterListItems: JSON.stringify([{
-							WKCNoteID: 'alfa',
-							WKCNoteBody: 'bravo',
+							KVCNoteID: 'alfa',
+							KVCNoteBody: 'bravo',
 						}]),
 						WKCWriteMasterListItemSelected: JSON.stringify({
-							WKCNoteID: 'alfa',
-							WKCNoteBody: 'bravo',
+							KVCNoteID: 'alfa',
+							KVCNoteBody: 'bravo',
 						}),
 					});
 				});
@@ -298,8 +298,8 @@ describe('WKCWriteMaster_Misc', function () {
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
 				WKCWriteMasterListItems: JSON.stringify([{
-					WKCNoteID: 'alfa',
-					WKCNoteBody: 'bravo\ncharlie',
+					KVCNoteID: 'alfa',
+					KVCNoteBody: 'bravo\ncharlie',
 				}]),
 			});
 		});
@@ -330,8 +330,8 @@ describe('WKCWriteMaster_Misc', function () {
 			it('sends WKCWriteMasterDispatchClick', function () {
 				browser.assert.text('#TestWKCWriteMasterDispatchClick', '1');
 				browser.assert.text('#TestWKCWriteMasterDispatchClickData', JSON.stringify({
-					WKCNoteID: 'alfa',
-					WKCNoteBody: 'bravo\ncharlie',
+					KVCNoteID: 'alfa',
+					KVCNoteBody: 'bravo\ncharlie',
 				}));
 			});
 		
@@ -344,15 +344,15 @@ describe('WKCWriteMaster_Misc', function () {
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
 				WKCWriteMasterListItems: JSON.stringify([{
-					WKCNoteID: 'alfa',
-					WKCNoteBody: 'bravo',
+					KVCNoteID: 'alfa',
+					KVCNoteBody: 'bravo',
 				}, {
-					WKCNoteID: 'charlie',
-					WKCNoteBody: 'delta',
+					KVCNoteID: 'charlie',
+					KVCNoteBody: 'delta',
 				}]),
 				WKCWriteMasterListItemSelected: JSON.stringify({
-					WKCNoteID: 'charlie',
-					WKCNoteBody: 'delta',
+					KVCNoteID: 'charlie',
+					KVCNoteBody: 'delta',
 				}),
 			});
 		});

@@ -1,39 +1,39 @@
 export const WKCVersionModelErrorsFor = function(inputData, options = {}) {
 	if (typeof inputData !== 'object' || inputData === null) {
-		throw new Error('WKCErrorInputNotValid');
+		throw new Error('KVCErrorInputNotValid');
 	}
 
 	let errors = {};
 
 	if (typeof inputData.WKCVersionID !== 'string') {
 		errors.WKCVersionID = [
-			'WKCErrorNotString',
+			'KVCErrorNotString',
 		];
 	} else if (inputData.WKCVersionID.trim() === '') {
 		errors.WKCVersionID = [
-			'WKCErrorNotFilled',
+			'KVCErrorNotFilled',
 		];
 	}
 
 	if (typeof inputData.WKCVersionNoteID !== 'string') {
 		errors.WKCVersionNoteID = [
-			'WKCErrorNotString',
+			'KVCErrorNotString',
 		];
 	} else if (inputData.WKCVersionNoteID.trim() === '') {
 		errors.WKCVersionNoteID = [
-			'WKCErrorNotFilled',
+			'KVCErrorNotFilled',
 		];
 	}
 
 	if (typeof inputData.WKCVersionBody !== 'string') {
 		errors.WKCVersionBody = [
-			'WKCErrorNotString',
+			'KVCErrorNotString',
 		];
 	}
 
 	if (!(inputData.WKCVersionDate instanceof Date) || Number.isNaN(inputData.WKCVersionDate.getTime())) {
 		errors.WKCVersionDate = [
-			'WKCErrorNotDate',
+			'KVCErrorNotDate',
 		];
 	}
 

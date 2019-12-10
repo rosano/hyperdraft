@@ -17,7 +17,7 @@ export const WKCWriteDetailSetItem = function (inputData) {
 	}
 	
 	mod.ControlConfigureEditor(function (inputData) {
-		inputData.WKCWriteEditorSetValue(mod._ValueItem.WKCNoteBody);
+		inputData.WKCWriteEditorSetValue(mod._ValueItem.KVCNoteBody);
 	});
 
 	if (!OLSK_TESTING_BEHAVIOUR()) {
@@ -139,13 +139,13 @@ import WKCWriteEditor from '../WKCWriteEditor/main.svelte';
 		<OLSKToolbarElementGroup>
 			<button class="WKCWriteDetailToolbarJumpButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('WKCWriteDetailToolbarJumpButtonText') } accesskey="r" tabindex="-1" disabled={ !mod._ValueHeaderTokens.length } on:click={ mod.InterfaceJumpButtonDidClick } style="background-image: url('/panel/_shared/ui-assets/wIKWriteJump.svg')"></button>
 
-			{#if !mod._ValueItem.WKCNotePublishStatusIsPublished }
+			{#if !mod._ValueItem.KVCNotePublishStatusIsPublished }
 				<button class="WKCWriteDetailToolbarPublishButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('WKCWriteDetailToolbarPublishButtonText') } on:click={ () => WKCWriteDetailDispatchPublish() } style="background-image: url('/panel/_shared/ui-assets/wIKWritePublish.svg')"></button>
 			{/if}
 
-			{#if mod._ValueItem.WKCNotePublishStatusIsPublished }
+			{#if mod._ValueItem.KVCNotePublishStatusIsPublished }
 				<a class="WKCWriteDetailToolbarPublicLink" href={ window.OLSKCanonicalFor('WKCRouteRefsRead', {
-					wkc_note_public_id: mod._ValueItem.WKCNotePublicID,
+					wkc_note_public_id: mod._ValueItem.KVCNotePublicID,
 				}) } target="_blank">{ OLSKLocalized('WKCWriteDetailToolbarPublicLinkText') }</a>
 					
 				<button class="WKCWriteDetailToolbarRetractButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('WKCWriteDetailToolbarRetractButtonText') } on:click={ () => WKCWriteDetailDispatchRetract() } style="background-image: url('/panel/_shared/ui-assets/wIKWriteRetract.svg')"></button>

@@ -59,13 +59,13 @@ describe('WKCParserArticlesForFeedRSS', function testWKCParserArticlesForFeedRSS
 	it('throws error if param1 not DOMParser', function() {
 		assert.throws(function() {
 			mainModule.WKCParserArticlesForFeedRSS(null, kStubs.kStubsRSSValid(), kStubs.kStubsRSSValid());
-		}, /WKCErrorInputNotValid/);
+		}, /KVCErrorInputNotValid/);
 	});
 
 	it('throws error if param1 missing parseFromString', function() {
 		assert.throws(function() {
 			mainModule.WKCParserArticlesForFeedRSS({}, kStubs.kStubsRSSValid(), kStubs.kStubsRSSValid());
-		}, /WKCErrorInputNotValid/);
+		}, /KVCErrorInputNotValid/);
 	});
 
 	it('returns none if no rss', function() {
@@ -152,13 +152,13 @@ describe('WKCParserArticlesForFeedAtom', function testWKCParserArticlesForFeedAt
 	it('throws error if param1 not object', function() {
 		assert.throws(function() {
 			mainModule.WKCParserArticlesForFeedAtom(null, null, kStubs.kStubsRSSValid(), kStubs.kStubsRSSValid());
-		}, /WKCErrorInputNotValid/);
+		}, /KVCErrorInputNotValid/);
 	});
 
 	it('throws error if param1 missing parseFromString', function() {
 		assert.throws(function() {
 			mainModule.WKCParserArticlesForFeedAtom({}, kStubs.kStubsRSSValid(), kStubs.kStubsRSSValid());
-		}, /WKCErrorInputNotValid/);
+		}, /KVCErrorInputNotValid/);
 	});
 
 	it('returns none if no feed', function() {
@@ -249,19 +249,19 @@ describe('WKCParserArticlesForPage', function testWKCParserArticlesForPage() {
 	it('throws error if param1 not DOMParser', function() {
 		assert.throws(function() {
 			mainModule.WKCParserArticlesForPage(null, kStubs.kStubsRSSValid(), kStubs.kStubsRSSValid());
-		}, /WKCErrorInputNotValid/);
+		}, /KVCErrorInputNotValid/);
 	});
 
 	it('throws error if param1 missing parseFromString', function() {
 		assert.throws(function() {
 			mainModule.WKCParserArticlesForPage({}, kStubs.kStubsRSSValid(), kStubs.kStubsRSSValid());
-		}, /WKCErrorInputNotValid/);
+		}, /KVCErrorInputNotValid/);
 	});
 
 	it('throws error if param3 not string', function() {
 		assert.throws(function() {
 			mainModule.WKCParserArticlesForPage(kStubs.kStubsDOMParserInstance(), 'alfa', null);
-		}, /WKCErrorInputNotValid/);
+		}, /KVCErrorInputNotValid/);
 	});
 
 	it('returns none if identical', function() {
@@ -319,7 +319,7 @@ describe('WKCParserArticlesForFile', function testWKCParserArticlesForFile() {
 	it('throws error if param2 not string', function() {
 		assert.throws(function() {
 			mainModule.WKCParserArticlesForFile('alfa', null);
-		}, /WKCErrorInputNotValid/);
+		}, /KVCErrorInputNotValid/);
 	});
 
 	it('returns none if identical', function() {
@@ -365,19 +365,19 @@ describe('WKCParserArticlesForCustomTwitterTimeline', function testWKCParserArti
 	it('throws error if param2 not string', function() {
 		assert.throws(function() {
 			mainModule.WKCParserArticlesForCustomTwitterTimeline('[]', null);
-		}, /WKCErrorInputNotValid/);
+		}, /KVCErrorInputNotValid/);
 	});
 
 	it('throws error if param1 not format', function() {
 		assert.throws(function() {
 			mainModule.WKCParserArticlesForCustomTwitterTimeline('{}', '[]');
-		}, /WKCErrorInputNotValid/);
+		}, /KVCErrorInputNotValid/);
 	});
 
 	it('throws error if param2 not format', function() {
 		assert.throws(function() {
 			mainModule.WKCParserArticlesForCustomTwitterTimeline('[]', '{}');
-		}, /WKCErrorInputNotValid/);
+		}, /KVCErrorInputNotValid/);
 	});
 
 	it('returns none if identical', function() {
@@ -456,7 +456,7 @@ describe('WKCParserHTMLForPlaintext', function testWKCParserHTMLForPlaintext() {
 	it('throws error if not string', function() {
 		assert.throws(function() {
 			mainModule.WKCParserHTMLForPlaintext(null);
-		}, /WKCErrorInputNotValid/);
+		}, /KVCErrorInputNotValid/);
 	});
 
 	it('returns string as p', function() {
@@ -534,7 +534,7 @@ describe('WKCParserSnippetForPlaintext', function testWKCParserSnippetForPlainte
 	it('throws error if not string', function() {
 		assert.throws(function() {
 			mainModule.WKCParserSnippetForPlaintext(null);
-		}, /WKCErrorInputNotValid/);
+		}, /KVCErrorInputNotValid/);
 	});
 
 	it('returns subset if large', function() {
@@ -552,13 +552,13 @@ describe('WKCParserReplaceLinks', function testWKCParserReplaceLinks() {
 	it('throws error if param1 not string', function() {
 		assert.throws(function() {
 			mainModule.WKCParserReplaceLinks(null, {});
-		}, /WKCErrorInputNotValid/);
+		}, /KVCErrorInputNotValid/);
 	});
 
 	it('throws error if param2 not object', function() {
 		assert.throws(function() {
 			mainModule.WKCParserReplaceLinks('', null);
-		}, /WKCErrorInputNotValid/);
+		}, /KVCErrorInputNotValid/);
 	});
 
 	it('returns input', function() {

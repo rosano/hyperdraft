@@ -16,15 +16,15 @@
 
 	exports.WKCReadModuleSubscribeCompleteURL = function (param1, param2) {
 		if (typeof param1 !== 'string') {
-			throw new Error('WKCErrorInputNotValid');
+			throw new Error('KVCErrorInputNotValid');
 		}
 
 		if (!param1) {
-			throw new Error('WKCErrorInputNotValid');
+			throw new Error('KVCErrorInputNotValid');
 		}
 
 		if (!/^(ftp|http|https):\/\/[^ "]+$/.test(param2)) {
-			throw new Error('WKCErrorInputNotValid');
+			throw new Error('KVCErrorInputNotValid');
 		}
 
 		if (/^(ftp|http|https):\/\/[^ "]+$/.test(param1)) {

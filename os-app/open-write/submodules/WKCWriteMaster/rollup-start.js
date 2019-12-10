@@ -35,7 +35,7 @@ const WKCWriteMaster = new RollupStart({
 
 		if (e[0] === 'WKCWriteMasterListItemSelected') {
 			e[1] = coll[0][1].filter(function (item) {
-				return item.WKCNoteID === e[1].WKCNoteID;
+				return item.KVCNoteID === e[1].KVCNoteID;
 			}).shift();
 		}
 

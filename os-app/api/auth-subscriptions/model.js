@@ -40,7 +40,7 @@ exports.WKCSubscriptionHandlerCustomTwitterTimeline = function() {
 
 exports.WKCSubscriptionHandlerCustomTwitterTimelineRequestCallback = function(databaseClient, completionHandler) {
 	if (typeof completionHandler !== 'function') {
-		throw new Error('WKCErrorInputNotValid');
+		throw new Error('KVCErrorInputNotValid');
 	}
 
 	return databaseClient.db(process.env.KVC_SHARED_DATABASE_NAME).collection('kvc_settings').findOne({
@@ -51,7 +51,7 @@ exports.WKCSubscriptionHandlerCustomTwitterTimelineRequestCallback = function(da
 		}
 
 		if (!result) {
-			return completionHandler(new Error('WKCErrorCustomTwitterMissingToken'));
+			return completionHandler(new Error('KVCErrorCustomTwitterMissingToken'));
 		}
 
 		var settingObject = result;
@@ -94,27 +94,27 @@ exports.WKCModelSubscriptionPrepare = function(inputData) {
 
 exports.WKCSubscriptionsModelErrorsFor = function(inputData, options) {
 	if (typeof inputData !== 'object' || inputData === null) {
-		throw new Error('WKCErrorInputNotValid');
+		throw new Error('KVCErrorInputNotValid');
 	}
 
 	var errors = {};
 
 	if (!urlPackage.parse(inputData.WKCSubscriptionURL || '').hostname) {
 		errors.WKCSubscriptionURL = [
-			'WKCErrorNotFormatted',
+			'KVCErrorNotFormatted',
 		];
 	}
 
 	if (exports.WKCSubscriptionHandlers().indexOf(inputData.WKCSubscriptionHandler) === -1) {
 		errors.WKCSubscriptionHandler = [
-			'WKCErrorNotValid',
+			'KVCErrorNotValid',
 		];
 	}
 
 	if (inputData.WKCSubscriptionName) {
 		if (typeof inputData.WKCSubscriptionName !== 'string') {
 			errors.WKCSubscriptionName = [
-				'WKCErrorNotString',
+				'KVCErrorNotString',
 			];
 		}
 	}
@@ -122,7 +122,7 @@ exports.WKCSubscriptionsModelErrorsFor = function(inputData, options) {
 	if (inputData.WKCSubscriptionBlurb) {
 		if (typeof inputData.WKCSubscriptionBlurb !== 'string') {
 			errors.WKCSubscriptionBlurb = [
-				'WKCErrorNotString',
+				'KVCErrorNotString',
 			];
 		}
 	}
@@ -130,7 +130,7 @@ exports.WKCSubscriptionsModelErrorsFor = function(inputData, options) {
 	if (inputData.WKCSubscriptionFetchDate) {
 		if (!(inputData.WKCSubscriptionFetchDate instanceof Date) || Number.isNaN(inputData.WKCSubscriptionFetchDate.getTime())) {
 			errors.WKCSubscriptionFetchDate = [
-				'WKCErrorNotDate',
+				'KVCErrorNotDate',
 			];
 		}
 	}
@@ -138,7 +138,7 @@ exports.WKCSubscriptionsModelErrorsFor = function(inputData, options) {
 	if (inputData.WKCSubscriptionFetchContent) {
 		if (typeof inputData.WKCSubscriptionFetchContent !== 'string') {
 			errors.WKCSubscriptionFetchContent = [
-				'WKCErrorNotString',
+				'KVCErrorNotString',
 			];
 		}
 	}
@@ -146,7 +146,7 @@ exports.WKCSubscriptionsModelErrorsFor = function(inputData, options) {
 	if (inputData.WKCSubscriptionErrorDate) {
 		if (!(inputData.WKCSubscriptionErrorDate instanceof Date) || Number.isNaN(inputData.WKCSubscriptionErrorDate.getTime())) {
 			errors.WKCSubscriptionErrorDate = [
-				'WKCErrorNotDate',
+				'KVCErrorNotDate',
 			];
 		}
 	}
@@ -154,7 +154,7 @@ exports.WKCSubscriptionsModelErrorsFor = function(inputData, options) {
 	if (inputData.WKCSubscriptionErrorMessage) {
 		if (typeof inputData.WKCSubscriptionErrorMessage !== 'string') {
 			errors.WKCSubscriptionErrorMessage = [
-				'WKCErrorNotString',
+				'KVCErrorNotString',
 			];
 		}
 	}
@@ -162,7 +162,7 @@ exports.WKCSubscriptionsModelErrorsFor = function(inputData, options) {
 	if (inputData.WKCSubscriptionIsPaused) {
 		if (typeof inputData.WKCSubscriptionIsPaused !== 'boolean') {
 			errors.WKCSubscriptionIsPaused = [
-				'WKCErrorNotBoolean',
+				'KVCErrorNotBoolean',
 			];
 		}
 	}

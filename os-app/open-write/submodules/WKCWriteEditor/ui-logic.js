@@ -25,7 +25,7 @@ const mod = {
 
 	WKCWriteEditorLineObjectsFor (inputData) {
 		if (!Array.isArray(inputData)) {
-			throw new Error('WKCErrorInputNotValid');
+			throw new Error('KVCErrorInputNotValid');
 		}
 
 		return Object.values(inputData.reduce(function (coll, e) {
@@ -49,7 +49,7 @@ const mod = {
 
 	WKCWriteEditorHeaderTokensFrom (inputData) {
 		if (!Array.isArray(inputData)) {
-			throw new Error('WKCErrorInputNotValid');
+			throw new Error('KVCErrorInputNotValid');
 		}
 
 		return [].concat.apply([], inputData.map(function (e, i) {

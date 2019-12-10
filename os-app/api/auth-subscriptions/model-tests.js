@@ -62,12 +62,12 @@ describe('WKCSubscriptionHandlerCustomTwitterTimelineRequestCallback', function 
 	it('throws error if param1 not function', function() {
 		assert.throws(function() {
 			mainModule.WKCSubscriptionHandlerCustomTwitterTimelineRequestCallback(KVCTestingMongoClient, null);
-		}, /WKCErrorInputNotValid/);
+		}, /KVCErrorInputNotValid/);
 	});
 
 	it('returns error if no kWKCSettingKeyCustomTwitterToken', function(done) {
 		mainModule.WKCSubscriptionHandlerCustomTwitterTimelineRequestCallback(KVCTestingMongoClient, function(err, responseJSON) {
-			assert.deepEqual(err.message, 'WKCErrorCustomTwitterMissingToken');
+			assert.deepEqual(err.message, 'KVCErrorCustomTwitterMissingToken');
 			assert.deepEqual(err.responseJSON, undefined);
 
 			done();
@@ -129,7 +129,7 @@ describe('WKCSubscriptionsModelErrorsFor', function testWKCSubscriptionsModelErr
 	it('throws error if param2 not object', function() {
 		assert.throws(function() {
 			mainModule.WKCSubscriptionsModelErrorsFor(null);
-		}, /WKCErrorInputNotValid/);
+		}, /KVCErrorInputNotValid/);
 	});
 
 	it('returns object if WKCSubscriptionURL not string', function() {
@@ -137,7 +137,7 @@ describe('WKCSubscriptionsModelErrorsFor', function testWKCSubscriptionsModelErr
 			WKCSubscriptionURL: null,
 		})), {
 			WKCSubscriptionURL: [
-				'WKCErrorNotFormatted',
+				'KVCErrorNotFormatted',
 			],
 		});
 	});
@@ -147,7 +147,7 @@ describe('WKCSubscriptionsModelErrorsFor', function testWKCSubscriptionsModelErr
 			WKCSubscriptionURL: '',
 		})), {
 			WKCSubscriptionURL: [
-				'WKCErrorNotFormatted',
+				'KVCErrorNotFormatted',
 			],
 		});
 	});
@@ -157,7 +157,7 @@ describe('WKCSubscriptionsModelErrorsFor', function testWKCSubscriptionsModelErr
 			WKCSubscriptionURL: 'google.com',
 		})), {
 			WKCSubscriptionURL: [
-				'WKCErrorNotFormatted',
+				'KVCErrorNotFormatted',
 			],
 		});
 	});
@@ -167,7 +167,7 @@ describe('WKCSubscriptionsModelErrorsFor', function testWKCSubscriptionsModelErr
 			WKCSubscriptionHandler: 'alfa',
 		})), {
 			WKCSubscriptionHandler: [
-				'WKCErrorNotValid',
+				'KVCErrorNotValid',
 			],
 		});
 	});
@@ -183,7 +183,7 @@ describe('WKCSubscriptionsModelErrorsFor', function testWKCSubscriptionsModelErr
 			WKCOptionValidatePresentOnly: true,
 		}), {
 			WKCSubscriptionHandler: [
-				'WKCErrorNotValid',
+				'KVCErrorNotValid',
 			],
 		});
 	});
@@ -195,7 +195,7 @@ describe('WKCSubscriptionsModelErrorsFor', function testWKCSubscriptionsModelErr
 				WKCSubscriptionName: 123
 			})), {
 				WKCSubscriptionName: [
-					'WKCErrorNotString',
+					'KVCErrorNotString',
 				],
 			});
 		});
@@ -209,7 +209,7 @@ describe('WKCSubscriptionsModelErrorsFor', function testWKCSubscriptionsModelErr
 				WKCSubscriptionBlurb: 123
 			})), {
 				WKCSubscriptionBlurb: [
-					'WKCErrorNotString',
+					'KVCErrorNotString',
 				],
 			});
 		});
@@ -223,7 +223,7 @@ describe('WKCSubscriptionsModelErrorsFor', function testWKCSubscriptionsModelErr
 				WKCSubscriptionFetchDate: new Date('alfa'),
 			})), {
 				WKCSubscriptionFetchDate: [
-					'WKCErrorNotDate',
+					'KVCErrorNotDate',
 				],
 			});
 		});
@@ -237,7 +237,7 @@ describe('WKCSubscriptionsModelErrorsFor', function testWKCSubscriptionsModelErr
 				WKCSubscriptionFetchContent: 123
 			})), {
 				WKCSubscriptionFetchContent: [
-					'WKCErrorNotString',
+					'KVCErrorNotString',
 				],
 			});
 		});
@@ -251,7 +251,7 @@ describe('WKCSubscriptionsModelErrorsFor', function testWKCSubscriptionsModelErr
 				WKCSubscriptionErrorDate: new Date('alfa'),
 			})), {
 				WKCSubscriptionErrorDate: [
-					'WKCErrorNotDate',
+					'KVCErrorNotDate',
 				],
 			});
 		});
@@ -265,7 +265,7 @@ describe('WKCSubscriptionsModelErrorsFor', function testWKCSubscriptionsModelErr
 				WKCSubscriptionErrorMessage: 123
 			})), {
 				WKCSubscriptionErrorMessage: [
-					'WKCErrorNotString',
+					'KVCErrorNotString',
 				],
 			});
 		});
@@ -279,7 +279,7 @@ describe('WKCSubscriptionsModelErrorsFor', function testWKCSubscriptionsModelErr
 				WKCSubscriptionIsPaused: 'true'
 			})), {
 				WKCSubscriptionIsPaused: [
-					'WKCErrorNotBoolean',
+					'KVCErrorNotBoolean',
 				],
 			});
 		});

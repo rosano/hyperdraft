@@ -46,7 +46,7 @@ describe('WKCWriteDetail_Access', function () {
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
 				WKCWriteDetailItem: JSON.stringify({
-					WKCNoteBody: 'alfa',
+					KVCNoteBody: 'alfa',
 				}),
 			});
 		});
@@ -97,14 +97,14 @@ describe('WKCWriteDetail_Access', function () {
 		
 	});
 
-	context('WKCNotePublishStatusIsPublished', function() {
+	context('KVCNotePublishStatusIsPublished', function() {
 
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
 				WKCWriteDetailItem: JSON.stringify({
-					WKCNoteBody: 'alfa',
-					WKCNotePublishStatusIsPublished: true,
-					WKCNotePublicID: 'bravo',
+					KVCNoteBody: 'alfa',
+					KVCNotePublishStatusIsPublished: true,
+					KVCNotePublicID: 'bravo',
 				}),
 			});
 		});

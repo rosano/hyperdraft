@@ -7,7 +7,7 @@ describe('WKCWriteTruncatedTitleFor', function testWKCWriteTruncatedTitleFor() {
 	it('throws error if not string', function() {
 		throws(function() {
 			mainModule.WKCWriteTruncatedTitleFor(null);
-		}, /WKCErrorInputNotValid/);
+		}, /KVCErrorInputNotValid/);
 	});
 
 	it('returns input', function() {
@@ -30,23 +30,23 @@ describe('WKCWriteTruncatedTitleFor', function testWKCWriteTruncatedTitleFor() {
 
 describe('WKCWriteLogicListSort', function testWKCWriteLogicListSort() {
 
-	it('sorts by WKCNoteModificationDate descending', function() {
+	it('sorts by KVCNoteModificationDate descending', function() {
 		var item1 = {
-			WKCNoteModificationDate: new Date(0),
+			KVCNoteModificationDate: new Date(0),
 		};
 		var item2 = {
-			WKCNoteModificationDate: new Date(1),
+			KVCNoteModificationDate: new Date(1),
 		};
 
 		deepEqual([item1, item2].sort(mainModule.WKCWriteLogicListSort), [item2, item1]);
 	});
 
-	it('sorts by WKCNoteCreationDate descending if no WKCNoteModificationDate', function() {
+	it('sorts by KVCNoteCreationDate descending if no KVCNoteModificationDate', function() {
 		var item1 = {
-			WKCNoteCreationDate: new Date(0),
+			KVCNoteCreationDate: new Date(0),
 		};
 		var item2 = {
-			WKCNoteCreationDate: new Date(1),
+			KVCNoteCreationDate: new Date(1),
 		};
 
 		deepEqual([item1, item2].sort(mainModule.WKCWriteLogicListSort), [item2, item1]);

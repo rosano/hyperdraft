@@ -9,7 +9,7 @@ describe('WKCWriteDetail_Misc', function () {
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
 				WKCWriteDetailItem: JSON.stringify({
-					WKCNoteBody: 'alfa',
+					KVCNoteBody: 'alfa',
 				}),
 			});
 		});
@@ -51,7 +51,7 @@ describe('WKCWriteDetail_Misc', function () {
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
 				WKCWriteDetailItem: JSON.stringify({
-					WKCNoteBody: 'alfa',
+					KVCNoteBody: 'alfa',
 				}),
 			});
 		});
@@ -224,9 +224,9 @@ describe('WKCWriteDetail_Misc', function () {
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
 				WKCWriteDetailItem: JSON.stringify({
-					WKCNoteBody: 'alfa',
-					WKCNotePublishStatusIsPublished: true,
-					WKCNotePublicID: 'bravo',
+					KVCNoteBody: 'alfa',
+					KVCNotePublishStatusIsPublished: true,
+					KVCNotePublicID: 'bravo',
 				}),
 			});
 		});
@@ -246,9 +246,9 @@ describe('WKCWriteDetail_Misc', function () {
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
 				WKCWriteDetailItem: JSON.stringify({
-					WKCNoteBody: 'alfa',
-					WKCNotePublishStatusIsPublished: true,
-					WKCNotePublicID: 'bravo',
+					KVCNoteBody: 'alfa',
+					KVCNotePublishStatusIsPublished: true,
+					KVCNotePublicID: 'bravo',
 				}),
 			});
 		});
@@ -288,7 +288,7 @@ describe('WKCWriteDetail_Misc', function () {
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
 				WKCWriteDetailItem: JSON.stringify({
-					WKCNoteBody: 'alfa',
+					KVCNoteBody: 'alfa',
 				}),
 			});
 		});
@@ -372,16 +372,16 @@ describe('WKCWriteDetail_Misc', function () {
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
 				WKCWriteDetailItem: JSON.stringify({
-					WKCNoteBody: 'alfa',
+					KVCNoteBody: 'alfa',
 				}),
 			});
 		});
 
-		it.skip('binds WKCNoteBody', function () {
+		it.skip('binds KVCNoteBody', function () {
 			browser.assert.input('.CodeMirror', 'alfa');
 		});
 			
-		it('binds WKCNoteBody', function () {
+		it('binds KVCNoteBody', function () {
 			browser.assert.input('.WKCWriteEditorFieldDebug', 'alfa');
 		});
 

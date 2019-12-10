@@ -75,7 +75,7 @@ exports.WKCTaskFetch = function() {
 									].join(' ')));
 								}
 
-								const typeChangeError = new Error('WKCErrorParsingSubscriptionTypeChanged');
+								const typeChangeError = new Error('KVCErrorParsingSubscriptionTypeChanged');
 
 								if (subscriptionObject.WKCSubscriptionHandler === apiSubscriptionsModel.WKCSubscriptionHandlerFeedRSS() && !typeLibrary.OLSKTypeInputDataIsDOMDocumentRSS(kConst.kWKCTaskFetchDOMParserInstance().parseFromString(body, 'application/xml'))) {
 									return (err = typeChangeError);
@@ -120,7 +120,7 @@ exports.WKCTaskFetch = function() {
 
 							if (err && subscriptionObject.WKCSubscriptionErrorMessage !== err.toString()) {
 								articleObjects.push({
-									WKCArticleTitle: 'WKCErrorAccessingSubscription',
+									WKCArticleTitle: 'KVCErrorAccessingSubscription',
 									WKCArticlePublishDate: new Date(),
 									WKCArticleBody: err.toString(),
 								});

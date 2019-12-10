@@ -52,11 +52,11 @@ const mod = {
 
 	WKCParserArticlesForFeedRSS (DOMParserInstance, oldString, newString) {
 		if (typeof DOMParserInstance !== 'object' || DOMParserInstance === null) {
-			throw new Error('WKCErrorInputNotValid');
+			throw new Error('KVCErrorInputNotValid');
 		}
 
 		if (typeof DOMParserInstance.parseFromString !== 'function') {
-			throw new Error('WKCErrorInputNotValid');
+			throw new Error('KVCErrorInputNotValid');
 		}
 
 		const parsedXML = DOMParserInstance.parseFromString(oldString, 'application/xml');
@@ -90,11 +90,11 @@ const mod = {
 
 	WKCParserArticlesForFeedAtom (DOMParserInstance, oldString, newString) {
 		if (typeof DOMParserInstance !== 'object' || DOMParserInstance === null) {
-			throw new Error('WKCErrorInputNotValid');
+			throw new Error('KVCErrorInputNotValid');
 		}
 
 		if (typeof DOMParserInstance.parseFromString !== 'function') {
-			throw new Error('WKCErrorInputNotValid');
+			throw new Error('KVCErrorInputNotValid');
 		}
 
 		var parsedXML = DOMParserInstance.parseFromString(oldString, 'application/xml');
@@ -139,15 +139,15 @@ const mod = {
 
 	WKCParserArticlesForPage (DOMParserInstance, oldString, newString) {
 		if (typeof DOMParserInstance !== 'object' || DOMParserInstance === null) {
-			throw new Error('WKCErrorInputNotValid');
+			throw new Error('KVCErrorInputNotValid');
 		}
 
 		if (typeof DOMParserInstance.parseFromString !== 'function') {
-			throw new Error('WKCErrorInputNotValid');
+			throw new Error('KVCErrorInputNotValid');
 		}
 
 		if (typeof newString !== 'string') {
-			throw new Error('WKCErrorInputNotValid');
+			throw new Error('KVCErrorInputNotValid');
 		}
 
 		oldString = exports.WKCParserPlaintextForHTML(oldString || '');
@@ -165,7 +165,7 @@ const mod = {
 
 	WKCParserArticlesForFile (oldString, newString) {
 		if (typeof newString !== 'string') {
-			throw new Error('WKCErrorInputNotValid');
+			throw new Error('KVCErrorInputNotValid');
 		}
 
 		if (oldString === newString) {
@@ -184,19 +184,19 @@ const mod = {
 
 	WKCParserArticlesForCustomTwitterTimeline (oldBody, newBody) {
 		if (typeof newBody !== 'string') {
-			throw new Error('WKCErrorInputNotValid');
+			throw new Error('KVCErrorInputNotValid');
 		}
 
 		const oldJSON = JSON.parse(oldBody || '[]');
 
 		if (!Array.isArray(oldJSON)) {
-			throw new Error('WKCErrorInputNotValid');
+			throw new Error('KVCErrorInputNotValid');
 		}
 
 		const newJSON = JSON.parse(newBody);
 
 		if (!Array.isArray(newJSON)) {
-			throw new Error('WKCErrorInputNotValid');
+			throw new Error('KVCErrorInputNotValid');
 		}
 
 		if (!newJSON) {
@@ -234,7 +234,7 @@ const mod = {
 
 	WKCParserHTMLForPlaintext (inputData) {
 		if (typeof inputData !== 'string') {
-			throw new Error('WKCErrorInputNotValid');
+			throw new Error('KVCErrorInputNotValid');
 		}
 
 		return showdownConverter.makeHtml(inputData);
@@ -242,7 +242,7 @@ const mod = {
 
 	WKCParserPlaintextForHTML (inputData) {
 		if (typeof inputData !== 'string') {
-			throw new Error('WKCErrorInputNotValid');
+			throw new Error('KVCErrorInputNotValid');
 		}
 
 		return turndownInstance.turndown(inputData);
@@ -266,7 +266,7 @@ const mod = {
 
 	WKCParserSnippetForPlaintext (inputData) {
 		if (typeof inputData !== 'string') {
-			throw new Error('WKCErrorInputNotValid');
+			throw new Error('KVCErrorInputNotValid');
 		}
 
 		return inputData.length <= 100 ? inputData : inputData.slice(0, 100).split(' ').slice(0, -1).join(' ').concat('…');
@@ -274,11 +274,11 @@ const mod = {
 
 	WKCParserReplaceLinks (param1, param2) {
 		if (typeof param1 !== 'string') {
-			throw new Error('WKCErrorInputNotValid');
+			throw new Error('KVCErrorInputNotValid');
 		}
 
 		if (typeof param2 !== 'object' || param2 === null) {
-			throw new Error('WKCErrorInputNotValid');
+			throw new Error('KVCErrorInputNotValid');
 		}
 
 		return Object.entries(param2).reduce(function (coll, e) {

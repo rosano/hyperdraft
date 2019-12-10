@@ -2,13 +2,13 @@ import { WKCVersionModelErrorsFor, WKCVersionModelPostJSONParse } from './model.
 
 export const WKCVersionMetalWrite = async function(storageClient, inputData) {
 	if (typeof inputData !== 'object' || inputData === null) {
-		return Promise.reject(new Error('WKCErrorInputNotValid'));
+		return Promise.reject(new Error('KVCErrorInputNotValid'));
 	}
 
 	let errors = WKCVersionModelErrorsFor(inputData);
 	if (errors) {
 		return Promise.resolve({
-			WKCErrors: errors,
+			KVCErrors: errors,
 		});
 	}
 
@@ -17,7 +17,7 @@ export const WKCVersionMetalWrite = async function(storageClient, inputData) {
 
 export const WKCVersionMetalRead = async function(storageClient, inputData) {
 	if (typeof inputData !== 'string') {
-		return Promise.reject(new Error('WKCErrorInputNotValid'));
+		return Promise.reject(new Error('KVCErrorInputNotValid'));
 	}
 
 	return WKCVersionModelPostJSONParse(await storageClient.wikiavec.kvc_versions.readObject(inputData));
@@ -35,7 +35,7 @@ export const WKCVersionMetalList = async function(storageClient) {
 
 export const WKCVersionMetalDelete = async function(storageClient, inputData) {
 	if (typeof inputData !== 'string') {
-		return Promise.reject(new Error('WKCErrorInputNotValid'));
+		return Promise.reject(new Error('KVCErrorInputNotValid'));
 	}
 
 	return await storageClient.wikiavec.kvc_versions.deleteObject(inputData);

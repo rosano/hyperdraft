@@ -72,7 +72,7 @@ exports.WKCLoginAction = function(req, res, next) {
 
 exports.WKCLoginSubmitAction = function(req, res, next) {
 	if (!process.env.KVC_SHARED_DATABASE_NAME) {
-		throw new Error('WKCErrorMissingDatabaseName');
+		throw new Error('KVCErrorMissingDatabaseName');
 	}
 
 	if (!req.body.WKCLoginUsername || !req.body.WKCLoginUsername.trim()) {
@@ -85,7 +85,7 @@ exports.WKCLoginSubmitAction = function(req, res, next) {
 
 	return req.OLSKSharedConnectionFor('KVCSharedConnectionMongo').OLSKConnectionClient.db(process.env.KVC_SHARED_DATABASE_NAME).collection('wkc_members').find({}).toArray(function(err, items) {
 		if (err) {
-			throw new Error('WKCErrorDatabaseFindFailed');
+			throw new Error('KVCErrorDatabaseFindFailed');
 		}
 
 		var memberObject = items.filter(function(e) {

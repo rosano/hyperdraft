@@ -119,7 +119,7 @@
 			} : {})),
 		})
 		.then(function(responseJSON) {
-			if (responseJSON.error === 'WKCErrorCustomTwitterMissingToken') {
+			if (responseJSON.error === 'KVCErrorCustomTwitterMissingToken') {
 				return moi.ControlFetchAlertErrorCustomTwitterMissingToken();
 			}
 
