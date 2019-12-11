@@ -11,7 +11,7 @@ describe('KVCRootLink_Misc', function () {
 	describe('KVCRootLinkLogo', function () {
 		
 		it('sets role', function () {
-			browser.assert.attribute(KVCRootLinkLogo, 'role', 'img');
+			browser.assert.attribute(KVCRootLinkLogo, 'role', 'presentation');
 		});
 	
 		it('sets src', function () {

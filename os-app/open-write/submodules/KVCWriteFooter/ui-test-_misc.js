@@ -79,7 +79,7 @@ describe('KVCWriteFooter_Misc', function () {
 		});
 	
 		it('sets role', function () {
-			browser.assert.attribute(KVCWriteFooterStorageButtonImage, 'role', 'img');
+			browser.assert.attribute(KVCWriteFooterStorageButtonImage, 'role', 'presentation');
 		});
 	
 		it('sets src', function () {

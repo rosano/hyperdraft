@@ -19,7 +19,7 @@ describe('KVCVitrine_Misc', function () {
 	describe('KVCVitrineIdentityLogo', function () {
 		
 		it('sets role', function () {
-			browser.assert.attribute(KVCVitrineIdentityLogo, 'role', 'image');
+			browser.assert.attribute(KVCVitrineIdentityLogo, 'role', 'presentation');
 		});
 		
 		it('sets src', function () {
