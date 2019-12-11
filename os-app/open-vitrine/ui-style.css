@@ -26,16 +26,3 @@ body {
 .KVCVitrineIdentityName {
 	margin: 0;
 }
-
-.ROCORootLink {
-	width: 70px;
-	display: block;
-
-	margin: 30px auto;
-	
-	background: #eaeaea;
-}
-
-.ROCORootLink img {
-	width: inherit;
-}
