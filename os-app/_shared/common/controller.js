@@ -1,8 +1,12 @@
-/*!
- * wikiavec
- * Copyright(c) 2018 Rosano Coutinho
- * MIT Licensed
- */
+exports.OLSKControllerRoutes = function() {
+	return {
+		KVCCommonIdentityRedirect: {
+			OLSKRoutePath: '/identity.svg',
+			OLSKRouteMethod: 'get',
+			OLSKRouteRedirect: '/_shared/KVCRootLink/ui-assets/identity.svg',
+		},
+	};
+};
 
 //_ OLSKControllerSharedConnections
 
