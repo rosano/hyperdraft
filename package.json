@@ -108,6 +108,9 @@
     "// FRONTEND RELOAD BUTTON": null,
     "OLSKReloadButton": "olsk/OLSKReloadButton",
 
+    "// FRONTEND LANGUAGE SWITCHER": null,
+    "OLSKLanguageSwitcher": "olsk/OLSKLanguageSwitcher",
+
     "// FRONTEND ROCO ROOT LINK": null,
     "ROCORootLink": "rationalcreative/ROCORootLink",
 

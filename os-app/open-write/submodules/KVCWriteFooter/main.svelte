@@ -35,7 +35,7 @@ const mod = {
 import OLSKToolbar from 'OLSKToolbar';
 import OLSKToolbarElementGroup from 'OLSKToolbarElementGroup';
 import OLSKReloadButton from '../../../_shared/__external/OLSKReloadButton/main.svelte';
-import RCSLanguageSwitcher from '../../../_shared/RCSLanguageSwitcher/main.svelte';
+import OLSKLanguageSwitcher from '../../../_shared/__external/OLSKLanguageSwitcher/main.svelte';
 </script>
 
 <footer class="KVCWriteFooter OLSKMobileViewFooter">
@@ -44,7 +44,10 @@ import RCSLanguageSwitcher from '../../../_shared/RCSLanguageSwitcher/main.svelt
 		<OLSKToolbarElementGroup>
 			<OLSKReloadButton OLSKLocalized={ OLSKLocalized } />
 			
-			<RCSLanguageSwitcher />
+			<OLSKLanguageSwitcher OLSKSharedActiveRouteConstant={ window.OLSKPublicConstants('OLSKSharedActiveRouteConstant') }
+				OLSKSharedPageLanguagesAvailable={ window.OLSKPublicConstants('OLSKSharedPageLanguagesAvailable') }
+				OLSKSharedPageCurrentLanguage={ window.OLSKPublicConstants('OLSKSharedPageCurrentLanguage') }
+				/>
 
 			<a class="KVCWriteFooterDonateLink" href={ window.OLSKPublicConstants('KVC_SHARED_DONATE_URL') } target="_blank">{ OLSKLocalized('KVCWriteFooterDonateLinkText') }</a>
 

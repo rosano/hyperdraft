@@ -28,8 +28,8 @@ describe('KVCWriteFooter_Access', function () {
 		browser.assert.elements('.OLSKReloadButton', 1);
 	});
 
-	it('shows RCSLanguageSwitcher', function () {
-		browser.assert.elements('#RCSLanguageSwitcher', 1);
+	it('shows OLSKLanguageSwitcher', function () {
+		browser.assert.elements('.OLSKLanguageSwitcher', 1);
 	});
 
 	it('shows KVCWriteFooterDonateLink', function () {

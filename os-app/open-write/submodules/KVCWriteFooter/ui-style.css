@@ -33,7 +33,7 @@ h1 {
 	margin-left: 10px;
 }
 
-:global(#RCSLanguageSwitcher span) {
+:global(.OLSKLanguageSwitcher span) {
 	/* browser quirks */
 	padding-left: 4px;
 }

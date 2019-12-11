@@ -48,6 +48,7 @@
 		'OLSKThrottle',
 		'OLSKType',
 		'remotestoragejs',
+		'OLSKLanguageSwitcher',
 		'ROCORootLink',
 		'showdown',
 		'turndown',
