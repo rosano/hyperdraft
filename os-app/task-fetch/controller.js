@@ -55,6 +55,7 @@ exports.WKCTaskFetch = function() {
 				return responseJSON.slice(-2).forEach(function(subscriptionObject) {
 					return apiSubscriptionsMetal.WKCSubscriptionsMetalRequestParameters(callbackInput.OLSKLive.OLSKSharedConnectionFor('KVCSharedConnectionMongo').OLSKConnectionClient, subscriptionObject.WKCSubscriptionURL, function (error, responseJSON) {
 
+						console.log(subscriptionObject, responseJSON);
 						return requestPackage(responseJSON, function(err, res, body) {
 							var articleObjects = [];
 
