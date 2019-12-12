@@ -4,29 +4,21 @@
 	flex-direction: column;
 }
 
+@media screen and (min-width: 760px) {
+
+.KVCWriteDetail > :global(.OLSKDetailPlaceholder) {
+	/* KVCWriteDetailFlexbox:Child */
+	flex-grow: 1;
+}
+
+}
+
 @media screen and (max-width: 760px) {
 
 .KVCWriteDetail {
 	min-height: 100%;
 }
 
-}
-
-.KVCWriteDetailPlaceholder {
-	opacity: 0.5;
-	text-align: center;
-
-	/* KVCWriteDetailFlexbox:Child */
-	flex-grow: 1;
-
-	/* KVCWriteDetailPlaceholderFlexbox:Parent */
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-:global(.OLSKIsLoading) .KVCWriteDetailPlaceholder {
-	visibility: hidden;
 }
 
 .KVCWriteDetailToolbar {

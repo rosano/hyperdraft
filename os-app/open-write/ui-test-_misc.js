@@ -21,7 +21,7 @@ describe('KVCWrite_Misc', function () {
 	});
 
 	it('sets KVCWriteDetailItem', function () {
-		browser.assert.elements('.KVCWriteDetailPlaceholder', 1);
+		browser.assert.elements('.OLSKDetailPlaceholder', 1);
 	});
 
 	it('focuses KVCWriteMasterFilterField', function() {
@@ -51,7 +51,7 @@ describe('KVCWrite_Misc', function () {
 		});
 
 		it('sets KVCWriteDetailItem', function () {
-			browser.assert.elements('.KVCWriteDetailPlaceholder', 0);
+			browser.assert.elements('.OLSKDetailPlaceholder', 0);
 		});
 
 		it.skip('focus KVCWriteEditor', function() {
@@ -83,7 +83,7 @@ describe('KVCWrite_Misc', function () {
 		// });
 
 		// it('sets KVCWriteDetailItem', function () {
-		// 	browser.assert.elements('.KVCWriteDetailPlaceholder', 1);
+		// 	browser.assert.elements('.OLSKDetailPlaceholder', 1);
 		// });
 
 	});
@@ -111,7 +111,7 @@ describe('KVCWrite_Misc', function () {
 		});
 
 		it('sets KVCWriteDetailItem', function () {
-			browser.assert.elements('.KVCWriteDetailPlaceholder', 0);
+			browser.assert.elements('.OLSKDetailPlaceholder', 0);
 		});
 
 	});
@@ -215,7 +215,7 @@ describe('KVCWrite_Misc', function () {
 		});
 
 		it('sets KVCWriteDetailItem', function () {
-			browser.assert.elements('.KVCWriteDetailPlaceholder', 0);
+			browser.assert.elements('.OLSKDetailPlaceholder', 0);
 		});
 
 		it.skip('focus KVCWriteEditor', function() {
@@ -245,7 +245,7 @@ describe('KVCWrite_Misc', function () {
 			});
 
 			it('sets KVCWriteDetailItem', function () {
-				browser.assert.elements('.KVCWriteDetailPlaceholder', 1);
+				browser.assert.elements('.OLSKDetailPlaceholder', 1);
 			});
 		
 		});
@@ -265,7 +265,7 @@ describe('KVCWrite_Misc', function () {
 			});
 
 			it('sets KVCWriteDetailItem', function () {
-				browser.assert.elements('.KVCWriteDetailPlaceholder', 0);
+				browser.assert.elements('.OLSKDetailPlaceholder', 0);
 			});
 		
 		});
@@ -285,7 +285,7 @@ describe('KVCWrite_Misc', function () {
 			});
 
 			it('sets KVCWriteDetailItem', function () {
-				browser.assert.elements('.KVCWriteDetailPlaceholder', 0);
+				browser.assert.elements('.OLSKDetailPlaceholder', 0);
 			});
 		
 		});
@@ -305,7 +305,7 @@ describe('KVCWrite_Misc', function () {
 			});
 
 			it('sets KVCWriteDetailItem', function () {
-				browser.assert.elements('.KVCWriteDetailPlaceholder', 1);
+				browser.assert.elements('.OLSKDetailPlaceholder', 1);
 			});
 
 			it('sorts KVCWriteMasterListItem', function () {

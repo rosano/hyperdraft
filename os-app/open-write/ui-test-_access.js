@@ -26,8 +26,8 @@ describe('KVCWrite_Access', function () {
 		browser.assert.elements('.KVCWriteDetail', 1);
 	});
 
-	it('shows KVCWriteDetailPlaceholder', function () {
-		browser.assert.elements('.KVCWriteDetailPlaceholder', 1);
+	it('shows OLSKDetailPlaceholder', function () {
+		browser.assert.elements('.OLSKDetailPlaceholder', 1);
 	});
 
 	it('shows KVCWriteFooter', function () {
@@ -48,8 +48,8 @@ describe('KVCWrite_Access', function () {
 			browser.assert.elements('.KVCWriteMasterListItem', 1);
 		});
 
-		it('hides KVCWriteDetailPlaceholder', function () {
-			browser.assert.elements('.KVCWriteDetailPlaceholder', 0);
+		it('hides OLSKDetailPlaceholder', function () {
+			browser.assert.elements('.OLSKDetailPlaceholder', 0);
 		});
 	
 	});
@@ -60,8 +60,8 @@ describe('KVCWrite_Access', function () {
 			return browser.pressButton('.KVCWriteDetailToolbarBackButton');
 		});
 
-		// it('shows KVCWriteDetailPlaceholder', function () {
-		// 	browser.assert.elements('.KVCWriteDetailPlaceholder', 1);
+		// it('shows OLSKDetailPlaceholder', function () {
+		// 	browser.assert.elements('.OLSKDetailPlaceholder', 1);
 		// });
 	
 	});
@@ -76,8 +76,8 @@ describe('KVCWrite_Access', function () {
 			browser.assert.elements('.KVCWriteMasterListItem', 1);
 		});
 
-		it('hides KVCWriteDetailPlaceholder', function () {
-			browser.assert.elements('.KVCWriteDetailPlaceholder', 0);
+		it('hides OLSKDetailPlaceholder', function () {
+			browser.assert.elements('.OLSKDetailPlaceholder', 0);
 		});
 	
 	});
@@ -96,8 +96,8 @@ describe('KVCWrite_Access', function () {
 				});
 			});
 
-			it('hides KVCWriteDetailPlaceholder', function () {
-				browser.assert.elements('.KVCWriteDetailPlaceholder', 0);
+			it('hides OLSKDetailPlaceholder', function () {
+				browser.assert.elements('.OLSKDetailPlaceholder', 0);
 			});
 		
 		});
@@ -114,8 +114,8 @@ describe('KVCWrite_Access', function () {
 				browser.assert.elements('.KVCWriteMasterListItem', 0);
 			});
 
-			it('shows KVCWriteDetailPlaceholder', function () {
-				browser.assert.elements('.KVCWriteDetailPlaceholder', 1);
+			it('shows OLSKDetailPlaceholder', function () {
+				browser.assert.elements('.OLSKDetailPlaceholder', 1);
 			});
 		
 		});

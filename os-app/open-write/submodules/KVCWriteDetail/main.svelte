@@ -119,6 +119,7 @@ const mod = {
 
 import OLSKToolbar from 'OLSKToolbar';
 import OLSKToolbarElementGroup from 'OLSKToolbarElementGroup';
+import OLSKDetailPlaceholder from 'OLSKDetailPlaceholder';
 import KVCWriteEditor from '../KVCWriteEditor/main.svelte';
 </script>
 <svelte:window on:keydown={ mod.InterfaceWindowDidKeydown }/>
@@ -126,7 +127,7 @@ import KVCWriteEditor from '../KVCWriteEditor/main.svelte';
 <div class="KVCWriteDetail OLSKViewportDetail" class:OLSKMobileViewInactive={ OLSKMobileViewInactive } aria-hidden={ OLSKMobileViewInactive ? true : null }>
 
 {#if !mod._ValueItem}
-<div class="KVCWriteDetailPlaceholder OLSKLayoutElementTextVisual">{ OLSKLocalized('KVCWriteDetailPlaceholderText') }</div>
+<OLSKDetailPlaceholder />
 {/if}
 
 {#if mod._ValueItem}

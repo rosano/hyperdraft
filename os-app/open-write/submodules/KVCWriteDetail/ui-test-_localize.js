@@ -10,16 +10,6 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 
 	describe(`KVCWriteDetail_Localize-${ languageCode }`, function () {
 
-		before(function() {
-			return browser.OLSKVisit(kDefaultRoute, {
-				OLSKRoutingLanguage: languageCode,
-			});
-		});
-	
-		it('localizes KVCWriteDetailPlaceholder', function () {
-			browser.assert.text(KVCWriteDetailPlaceholder, uLocalized('KVCWriteDetailPlaceholderText'));
-		});
-
 		context('KVCWriteDetailItem', function() {
 		
 			before(function() {

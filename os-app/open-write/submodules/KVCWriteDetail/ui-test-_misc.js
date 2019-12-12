@@ -354,18 +354,6 @@ describe('KVCWriteDetail_Misc', function () {
 		});
 	
 	});
-
-	describe('KVCWriteDetailPlaceholder', function test_KVCWriteDetailPlaceholder() {
-
-		before(function() {
-			return browser.OLSKVisit(kDefaultRoute);
-		});
-
-		it('sets class', function () {
-			browser.assert.hasClass(KVCWriteDetailPlaceholder, 'OLSKLayoutElementTextVisual');
-		});
-		
-	});
 	
 	describe('KVCWriteEditor', function test_KVCWriteEditor() {
 		
