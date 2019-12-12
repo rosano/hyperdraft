@@ -4,7 +4,7 @@ exports.OLSKControllerRoutes = function() {
 		OLSKRouteMethod: 'get',
 		OLSKRouteSignature: 'KVCWriteRoute',
 		OLSKRouteFunction (req, res, next) {
-			return res.render(require('path').join(__dirname, 'ui-view.ejs'), {});
+			return res.render(require('path').join(__dirname, 'ui-view.ejs'));
 		},
 		OLSKRouteLanguages: ['en'],
 		OLSKRouteMiddlewares: [
