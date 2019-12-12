@@ -10,7 +10,7 @@ body {
 	bottom: 0;
 	left: 0;
 
-	/* WKCReadFlexboxParent */
+	/* WKCReadFlexbox:Parent */
 	display: flex;
 }
 
@@ -45,7 +45,7 @@ body {
   animation-name: WKCReadSubscribeActive;
   animation-duration: 0.235s;
 
-  /* WKCReadSubscribeFlexboxParent */
+  /* WKCReadSubscribeFlexbox:Parent */
   display: flex !important;
   flex-direction: column;
 }
@@ -101,7 +101,7 @@ body {
 	flex-shrink: 0;
 	max-width: 170px;
 
-	/* WKCReadSourcesFlexboxParent */
+	/* WKCReadSourcesFlexbox:Parent */
 	display: flex;
 	flex-direction: column;
 }
@@ -167,7 +167,7 @@ body {
 
 	white-space: nowrap;
 
-	/* WKCReadSourcesFlexboxParent */
+	/* WKCReadSourcesFlexbox:Parent */
 	display: flex;
 	align-items: center;
 }
@@ -228,7 +228,7 @@ body {
 	flex-shrink: 0;
 	max-width: 300px;
 
-	/* WKCReadMasterFlexboxParent */
+	/* WKCReadMasterFlexbox:Parent */
 	display: flex;
 	flex-direction: column;
 }
@@ -272,7 +272,7 @@ body {
 }
 
 .WKCReadMasterContentListItemContext {
-	/* WKCReadMasterContentListItemContextFlexboxParent */
+	/* WKCReadMasterContentListItemContextFlexbox:Parent */
 	display: flex;
 }
 
@@ -323,7 +323,7 @@ body {
 	/* WKCReadFlexboChild */
 	flex-grow: 1;
 
-	/* WKCReadDetailFlexboxParent */
+	/* WKCReadDetailFlexbox:Parent */
 	display: flex;
 	flex-direction: column;
 }

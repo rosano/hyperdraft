@@ -21,7 +21,7 @@
 	/* Firefox header spacing */
 	line-height: 0;
 
-	/* KVCSharedToolbarFlexboxParent */
+	/* KVCSharedToolbarFlexbox:Parent */
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;

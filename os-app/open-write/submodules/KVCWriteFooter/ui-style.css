@@ -1,10 +1,10 @@
 .KVCWriteFooter {
 	border-top: var(--WKCBorderStyle);
 	
-	/* AppContainerFlexboxChild */
+	/* AppContainerFlexbox:Child */
 	flex-shrink: 0;
 
-	/* KVCWriteFooterFlexboxParent */
+	/* KVCWriteFooterFlexbox:Parent */
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
