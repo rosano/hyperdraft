@@ -98,7 +98,7 @@ exports.OLSKControllerRoutes = function() {
 		WKCRouteHome: {
 			OLSKRoutePath: '/',
 			OLSKRouteMethod: 'get',
-			OLSKRouteFunction(req, res, next) {
+			OLSKRouteFunction (req, res, next) {
 				return res.render(req.OLSKLive.OLSKLivePathJoin(__dirname, 'view'), {
 					KVCNoteObject: {
 						KVCNoteDetectedTitle: res.locals.OLSKLocalized('WKCHomeTitle'),

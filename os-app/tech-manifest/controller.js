@@ -5,7 +5,7 @@ exports.OLSKControllerRoutes = function() {
 		WKCManifestRoute: {
 			OLSKRoutePath: '/manifest.json',
 			OLSKRouteMethod: 'get',
-			OLSKRouteFunction(req, res, next) {
+			OLSKRouteFunction (req, res, next) {
 				return res.render(req.OLSKLive.OLSKLivePathJoin(__dirname, 'view'), {});
 			},
 		},

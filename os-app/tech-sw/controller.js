@@ -7,7 +7,7 @@ exports.OLSKControllerRoutes = function() {
 		WKCServiceWorkerRoute: {
 			OLSKRoutePath: '/sw.js',
 			OLSKRouteMethod: 'get',
-			OLSKRouteFunction(req, res, next) {
+			OLSKRouteFunction (req, res, next) {
 				return res.type('js').send(OLSKServiceWorker.OLSKServiceWorkerView({
 					VERSION_ID_TOKEN: kWKCServiceWorkerVersionID.toString(),
 					REFERRER_MATCH_TOKEN: require('../open-write/controller.js').OLSKControllerRoutes().shift().OLSKRoutePath.replace(/\//g, '\\/'),

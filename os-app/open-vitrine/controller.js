@@ -7,7 +7,7 @@ exports.OLSKControllerRoutes = function() {
 		OLSKRoutePath: '/vitrine',
 		OLSKRouteMethod: 'get',
 		OLSKRouteSignature: 'KVCVitrineRoute',
-		OLSKRouteFunction: function (req, res, next) {
+		OLSKRouteFunction (req, res, next) {
 			return res.render(require('path').join(__dirname, 'ui-view'), {
 				KVCVitrineContent: require('OLSKString').OLSKStringReplaceTokens(require('marked').setOptions({
 					gfm: true,
