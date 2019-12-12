@@ -1,33 +1,29 @@
 import { deepEqual } from 'assert';
 
-const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
+require('./controller.js').OLSKControllerRoutes().forEach(function (kDefaultRoute) {
 
-const uFormatted = OLSKTestingStringWithFormat;
+	kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 
-kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
+		const uLocalized = function (inputData) {
+			return OLSKTestingLocalized(inputData, languageCode);
+		};
 
-	const uLocalized = function (inputData) {
-		return OLSKTestingLocalized(inputData, languageCode);
-	};
+		describe(`KVCRootLink_Localize-${ kDefaultRoute.OLSKRouteSignature }-${ languageCode }`, function () {
 
-	describe(`KVCRootLink_Localize-${ languageCode }`, function () {
-
-		before(function() {
-			return browser.OLSKVisit(kDefaultRoute, {
-				OLSKRoutingLanguage: languageCode,
+			before(function() {
+				return browser.OLSKVisit(kDefaultRoute, {
+					OLSKRoutingLanguage: languageCode,
+				});
 			});
-		});
 
-		it('localizes title', function () {
-			browser.assert.attribute(KVCRootLink, 'title', uFormatted(uLocalized('KVCSharedColonSeparatedFormat'), uLocalized('KVCRootLinkLogoLabel'), uLocalized('KVCRootLinkText')));
-		});
+			it('localizes OLSKRootLink', function() {
+				browser.assert.attribute('.OLSKRootLink', 'href', OLSKTestingCanonical(require('../../open-vitrine/controller.js').OLSKControllerRoutes().shift(), {
+					OLSKRoutingLanguage: languageCode,
+				}));
+			});
 
-		it('localizes href', function () {
-			browser.assert.attribute(KVCRootLink, 'href', OLSKTestingCanonicalFor('/vitrine', {
-				OLSKRoutingLanguage: languageCode,
-			}));
 		});
 
 	});
 
-});
+})

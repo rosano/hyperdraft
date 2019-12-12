@@ -1,3 +1,8 @@
-<a class="KVCRootLink" href="<%= OLSKCanonicalLocalizedFor('KVCVitrineRoute') %>" title="<%= OLSKFormatted(OLSKLocalized('KVCSharedColonSeparatedFormat'), OLSKLocalized('KVCRootLinkLogoLabel'), OLSKLocalized('KVCRootLinkText')) %>">
-	<img class="KVCRootLinkLogo" role="presentation" src="/_shared/KVCRootLink/ui-assets/identity.svg">
-</a>
+<div class="KVCRootLink">
+
+<%- include('../__external/OLSKRootLink/main.ejs', {
+	OLSKRootLinkURL: OLSKCanonicalLocalizedFor('KVCVitrineRoute'),
+	OLSKRootLinkImageURL: '/_shared/KVCRootLink/ui-assets/identity.svg',
+}) %>
+
+</div>

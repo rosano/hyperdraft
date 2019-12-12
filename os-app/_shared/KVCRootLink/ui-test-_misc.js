@@ -1,23 +1,21 @@
 import { deepEqual } from 'assert';
 
-const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
+require('./controller.js').OLSKControllerRoutes().forEach(function (kDefaultRoute) {
 
-describe('KVCRootLink_Misc', function () {
+	describe(`KVCRootLink_Misc--${ kDefaultRoute.OLSKRouteSignature }`, function () {
 
-	before(function () {
-		return browser.visit(kDefaultRoute.OLSKRoutePath);
-	});
+		before(function () {
+			return browser.OLSKVisit(kDefaultRoute);
+		});
 
-	describe('KVCRootLinkLogo', function () {
+		describe('OLSKRootLink', function () {
+			
+			it('sets OLSKRootLinkImageURL', function () {
+				browser.assert.attribute('.OLSKRootLinkImage', 'src', '/_shared/KVCRootLink/ui-assets/identity.svg');
+			});
 		
-		it('sets role', function () {
-			browser.assert.attribute(KVCRootLinkLogo, 'role', 'presentation');
 		});
-	
-		it('sets src', function () {
-			browser.assert.attribute(KVCRootLinkLogo, 'src', '/_shared/KVCRootLink/ui-assets/identity.svg');
-		});
-	
-	});
 
+	});
+	
 });

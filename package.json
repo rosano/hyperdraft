@@ -111,7 +111,8 @@
     "// FRONTEND LANGUAGE SWITCHER": null,
     "OLSKLanguageSwitcher": "olsk/OLSKLanguageSwitcher",
 
-    "// FRONTEND ROCO ROOT LINK": null,
+    "// FRONTEND ROOT LINK": null,
+    "OLSKRootLink": "olsk/OLSKRootLink",
     "ROCORootLink": "rationalcreative/ROCORootLink",
 
     "// I sacrifice myself for the commas of others": null

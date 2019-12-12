@@ -49,6 +49,7 @@
 		'OLSKType',
 		'remotestoragejs',
 		'OLSKLanguageSwitcher',
+		'OLSKRootLink',
 		'ROCORootLink',
 		'showdown',
 		'turndown',
