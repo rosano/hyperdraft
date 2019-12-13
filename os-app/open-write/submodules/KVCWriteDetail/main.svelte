@@ -120,6 +120,7 @@ const mod = {
 import OLSKToolbar from 'OLSKToolbar';
 import OLSKToolbarElementGroup from 'OLSKToolbarElementGroup';
 import OLSKDetailPlaceholder from 'OLSKDetailPlaceholder';
+import _OLSKSharedDiscard from '../../../_shared/__external/OLSKUIAssets/_OLSKSharedDiscard.svg';
 import KVCWriteEditor from '../KVCWriteEditor/main.svelte';
 </script>
 <svelte:window on:keydown={ mod.InterfaceWindowDidKeydown }/>
@@ -154,7 +155,9 @@ import KVCWriteEditor from '../KVCWriteEditor/main.svelte';
 
 			<button class="KVCWriteDetailToolbarVersionsButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarVersionsButtonText') } on:click={ () => KVCWriteDetailDispatchVersions() } style="background-image: url('/panel/_shared/ui-assets/wIKWriteVersions.svg')"></button>
 
-			<button class="KVCWriteDetailToolbarDiscardButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarDiscardButtonText') } on:click={ () => window.confirm(OLSKLocalized('KVCWriteDetailDiscardPromptText')) && KVCWriteDetailDispatchDiscard() } style="background-image: url('/panel/_shared/ui-assets/wIKWriteDiscard.svg')"></button>
+			<button class="KVCWriteDetailToolbarDiscardButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarDiscardButtonText') } on:click={ () => window.confirm(OLSKLocalized('KVCWriteDetailDiscardPromptText')) && KVCWriteDetailDispatchDiscard() }>
+				<div class="KVCWriteDetailToolbarDiscardButtonImage">{@html _OLSKSharedDiscard }</div>
+			</button>
 		</OLSKToolbarElementGroup>
 	</OLSKToolbar>
 </header>

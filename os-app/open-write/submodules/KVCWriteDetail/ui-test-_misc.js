@@ -354,6 +354,14 @@ describe('KVCWriteDetail_Misc', function () {
 		});
 	
 	});
+
+	describe('KVCWriteDetailToolbarDiscardButtonImage', function testKVCWriteDetailToolbarDiscardButtonImage () {
+
+		it('sets src', function () {
+			browser.assert.elements(`${ KVCWriteDetailToolbarDiscardButtonImage } #_OLSKSharedDiscard`, 1);
+		});
+	
+	});
 	
 	describe('KVCWriteEditor', function test_KVCWriteEditor() {
 		

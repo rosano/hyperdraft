@@ -13,6 +13,7 @@ Object.entries({
 	KVCWriteDetailToolbarRetractButton: '.KVCWriteDetailToolbarRetractButton',
 	KVCWriteDetailToolbarVersionsButton: '.KVCWriteDetailToolbarVersionsButton',
 	KVCWriteDetailToolbarDiscardButton: '.KVCWriteDetailToolbarDiscardButton',	
+	KVCWriteDetailToolbarDiscardButtonImage: '.KVCWriteDetailToolbarDiscardButtonImage',	
 }).map(function (e) {
 	return global[e.shift()]  = e.pop();
 });
@@ -87,6 +88,10 @@ describe('KVCWriteDetail_Access', function () {
 
 		it('shows KVCWriteDetailToolbarDiscardButton', function () {
 			browser.assert.elements(KVCWriteDetailToolbarDiscardButton, 1);
+		});
+
+		it('shows KVCWriteDetailToolbarDiscardButtonImage', function () {
+			browser.assert.elements(KVCWriteDetailToolbarDiscardButtonImage, 1);
 		});
 
 		it('shows KVCWriteEditor', function () {
