@@ -9,6 +9,7 @@ Object.entries({
 	
 	KVCWriteMasterFilterField: '.KVCWriteMasterFilterField',
 	KVCWriteMasterCreateButton: '.KVCWriteMasterCreateButton',
+	KVCWriteMasterCreateButtonImage: '.KVCWriteMasterCreateButtonImage',
 
 	KVCWriteMasterBody: '.KVCWriteMasterBody',
 }).map(function (e) {
@@ -43,6 +44,10 @@ describe('KVCWriteMaster_Access', function () {
 
 	it('shows KVCWriteMasterCreateButton', function () {
 		browser.assert.elements(KVCWriteMasterCreateButton, 1);
+	});
+
+	it('shows KVCWriteMasterCreateButtonImage', function () {
+		browser.assert.elements(KVCWriteMasterCreateButtonImage, 1);
 	});
 
 	it('shows KVCWriteMasterBody', function () {

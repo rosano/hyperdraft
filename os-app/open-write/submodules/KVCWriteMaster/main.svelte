@@ -132,6 +132,7 @@ afterUpdate(mod.LifecycleComponentDidUpdate);
 import OLSKToolbar from 'OLSKToolbar';
 import OLSKToolbarElementGroup from 'OLSKToolbarElementGroup';
 import OLSKInputWrapper from 'OLSKInputWrapper';
+import _OLSKSharedCreate from '../../../_shared/__external/OLSKUIAssets/_OLSKSharedCreate.svg';
 import OLSKResults from 'OLSKResults';
 import KVCWriteMasterListItem from '../KVCWriteMasterListItem/main.svelte';
 </script>
@@ -146,7 +147,9 @@ import KVCWriteMasterListItem from '../KVCWriteMasterListItem/main.svelte';
 		</OLSKInputWrapper>
 
 		<OLSKToolbarElementGroup>
-			<button class="KVCWriteMasterCreateButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" on:click={ mod.InterfaceCreateButtonDidClick } accesskey="n" title={ OLSKLocalized('KVCWriteMasterCreateButtonText') } style="background-image: url('/panel/_shared/ui-assets/wIKSharedCreate.svg')"></button>
+			<button class="KVCWriteMasterCreateButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" on:click={ mod.InterfaceCreateButtonDidClick } accesskey="n" title={ OLSKLocalized('KVCWriteMasterCreateButtonText') }>
+				<div class="KVCWriteMasterCreateButtonImage">{@html _OLSKSharedCreate }</div>
+			</button>
 		</OLSKToolbarElementGroup>
 	</OLSKToolbar>
 </header>

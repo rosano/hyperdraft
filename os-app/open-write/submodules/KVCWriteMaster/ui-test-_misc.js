@@ -285,6 +285,14 @@ describe('KVCWriteMaster_Misc', function () {
 	
 	});
 
+	describe('KVCWriteMasterCreateButtonImage', function testKVCWriteMasterCreateButtonImage () {
+
+		it('sets src', function () {
+			browser.assert.elements(`${ KVCWriteMasterCreateButtonImage } #_OLSKSharedCreate`, 1);
+		});
+	
+	});
+
 	describe('KVCWriteMasterBody', function test_KVCWriteMasterBody () {
 		
 		it('classes OLSKMobileViewBody', function () {
