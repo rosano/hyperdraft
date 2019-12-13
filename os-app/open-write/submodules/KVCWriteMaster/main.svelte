@@ -142,7 +142,7 @@ import KVCWriteMasterListItem from '../KVCWriteMasterListItem/main.svelte';
 
 <header class="KVCWriteMasterToolbar OLSKMobileViewHeader">
 	<OLSKToolbar>
-		<OLSKInputWrapper OLSKInputWrapperValue={ KVCWriteMasterFilterText } on:OLSKInputWrapperDispatchClear={ mod.OLSKInputWrapperDispatchClear } >
+		<OLSKInputWrapper OLSKInputWrapperValue={ KVCWriteMasterFilterText } OLSKInputWrapperDispatchClear={ mod.OLSKInputWrapperDispatchClear } >
 			<input class="KVCWriteMasterFilterField" placeholder={ OLSKLocalized('KVCWriteMasterFilterFieldText') } bind:value={ KVCWriteMasterFilterText } on:input={ mod.InterfaceFilterFieldDidInput } />
 		</OLSKInputWrapper>
 
