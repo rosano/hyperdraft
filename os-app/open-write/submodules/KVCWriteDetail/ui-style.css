@@ -37,11 +37,6 @@
 
 }
 
-.KVCWriteDetailToolbar :global(svg) {
-	width: 20px;
-	height: 20px;
-}
-
 @media screen and (min-width: 760px) {
 
 .KVCWriteDetailToolbarBackButton {

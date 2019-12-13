@@ -1,8 +1,14 @@
 :root {
 	--KVCCommonBackground: hsl(0, 0%, 100%);
 	--KVCCommonForeground: hsl(0, 0%, 0%);
+	--KVCToolbarButtonSize: 20px;
 }
 
 .KVCSharedHidden {
 	display: none !important;
+}
+
+.OLSKToolbarButton, .OLSKToolbarButton > *, .OLSKToolbarButton svg {
+	width: var(--KVCToolbarButtonSize);
+	height: var(--KVCToolbarButtonSize);
 }

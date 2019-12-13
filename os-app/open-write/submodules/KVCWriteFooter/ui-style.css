@@ -46,11 +46,6 @@ h1 {
 	display: none;
 }
 
-.KVCWriteFooterStorageButton :global(svg) {
-	width: 20px;
-	height: 20px;
-}
-
 .KVCWriteFooterStorageButton :global(.OSWOptionImage path) {
 	fill: black;
 }
