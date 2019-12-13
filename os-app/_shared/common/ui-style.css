@@ -8,7 +8,12 @@
 	display: none !important;
 }
 
-.OLSKToolbarButton, .OLSKToolbarButton > *, .OLSKToolbarButton svg {
+.OLSKToolbarButton {
 	width: var(--KVCToolbarButtonSize);
 	height: var(--KVCToolbarButtonSize);
+}
+
+.OLSKToolbarButton > *, .OLSKToolbarButton svg {
+	width: inherit;
+	height: inherit;
 }
