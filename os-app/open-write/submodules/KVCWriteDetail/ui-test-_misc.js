@@ -102,6 +102,14 @@ describe('KVCWriteDetail_Misc', function () {
 	
 	});
 
+	describe('KVCWriteDetailToolbarBackButtonImage', function testKVCWriteDetailToolbarBackButtonImage () {
+
+		it('sets src', function () {
+			browser.assert.elements(`${ KVCWriteDetailToolbarBackButtonImage } #_OLSKSharedBack`, 1);
+		});
+	
+	});
+
 	describe('KVCWriteDetailToolbarJumpButton', function test_KVCWriteDetailToolbarJumpButton () {
 		
 		it('classes OLSKLayoutButtonNoStyle', function () {

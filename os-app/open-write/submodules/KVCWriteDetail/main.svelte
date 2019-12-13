@@ -120,6 +120,7 @@ const mod = {
 import OLSKToolbar from 'OLSKToolbar';
 import OLSKToolbarElementGroup from 'OLSKToolbarElementGroup';
 import OLSKDetailPlaceholder from 'OLSKDetailPlaceholder';
+import _OLSKSharedBack from '../../../_shared/__external/OLSKUIAssets/_OLSKSharedBack.svg';
 import _OLSKSharedDiscard from '../../../_shared/__external/OLSKUIAssets/_OLSKSharedDiscard.svg';
 import KVCWriteEditor from '../KVCWriteEditor/main.svelte';
 </script>
@@ -135,7 +136,9 @@ import KVCWriteEditor from '../KVCWriteEditor/main.svelte';
 <header class="KVCWriteDetailToolbar OLSKMobileViewHeader">
 	<OLSKToolbar OLSKToolbarJustify={ true }>
 		<OLSKToolbarElementGroup>
-			<button class="KVCWriteDetailToolbarBackButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarBackButtonText') } on:click={ KVCWriteDetailDispatchBack } style="background-image: url('/panel/_shared/ui-assets/wIKWriteBack.svg')"></button>
+			<button class="KVCWriteDetailToolbarBackButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarBackButtonText') } on:click={ KVCWriteDetailDispatchBack }>
+				<div class="KVCWriteDetailToolbarBackButtonImage">{@html _OLSKSharedBack }</div>
+			</button>
 		</OLSKToolbarElementGroup>
 
 		<OLSKToolbarElementGroup>

@@ -7,6 +7,7 @@ Object.entries({
 	
 	KVCWriteDetailToolbar: '.KVCWriteDetailToolbar',
 	KVCWriteDetailToolbarBackButton: '.KVCWriteDetailToolbarBackButton',
+	KVCWriteDetailToolbarBackButtonImage: '.KVCWriteDetailToolbarBackButtonImage',
 	KVCWriteDetailToolbarJumpButton: '.KVCWriteDetailToolbarJumpButton',
 	KVCWriteDetailToolbarPublishButton: '.KVCWriteDetailToolbarPublishButton',
 	KVCWriteDetailToolbarPublicLink: '.KVCWriteDetailToolbarPublicLink',
@@ -64,6 +65,10 @@ describe('KVCWriteDetail_Access', function () {
 
 		it('shows KVCWriteDetailToolbarBackButton', function () {
 			browser.assert.elements(KVCWriteDetailToolbarBackButton, 1);
+		});
+
+		it('shows KVCWriteDetailToolbarBackButtonImage', function () {
+			browser.assert.elements(KVCWriteDetailToolbarBackButtonImage, 1);
 		});
 
 		it('shows KVCWriteDetailToolbarJumpButton', function () {
