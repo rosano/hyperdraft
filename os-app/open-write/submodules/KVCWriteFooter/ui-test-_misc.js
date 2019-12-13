@@ -78,12 +78,8 @@ describe('KVCWriteFooter_Misc', function () {
 			return browser.OLSKVisit(kDefaultRoute);
 		});
 	
-		it('sets role', function () {
-			browser.assert.attribute(KVCWriteFooterStorageButtonImage, 'role', 'presentation');
-		});
-	
 		it('sets src', function () {
-			browser.assert.attribute(KVCWriteFooterStorageButtonImage, 'src', '/open-write/submodules/KVCWriteFooter/ui-assets/KVCWriteFooterStorageButton.svg');
+			browser.assert.elements(`${ KVCWriteFooterStorageButtonImage } #_OLSKSharedCloud`, 1);
 		});
 
 	});

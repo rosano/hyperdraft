@@ -116,6 +116,9 @@
     "OLSKRootLink": "olsk/OLSKRootLink",
     "ROCORootLink": "rationalcreative/ROCORootLink",
 
+    "// FRONTEND UI ASSETS": null,
+    "OLSKUIAssets": "olsk/OLSKUIAssets",
+
     "// I sacrifice myself for the commas of others": null
   },
   "devDependencies": {

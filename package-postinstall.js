@@ -52,6 +52,7 @@
 		'OLSKLanguageSwitcher',
 		'OLSKRootLink',
 		'ROCORootLink',
+		'OLSKUIAssets',
 		'showdown',
 		'turndown',
 		'ulid',
