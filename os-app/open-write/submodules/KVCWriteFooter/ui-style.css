@@ -42,15 +42,15 @@ h1 {
 	padding: 0 5px;
 }
 
-.KVCWriteFooterStorageButton :global(svg,img) {
+.KVCWriteFooterStorageButton.OSWIconVisible .KVCWriteFooterStorageButtonImage {
+	display: none;
+}
+
+.KVCWriteFooterStorageButton :global(svg) {
 	width: 20px;
 	height: 20px;
 }
 
-.KVCWriteFooterStorageButton :global(path) {
+.KVCWriteFooterStorageButton :global(.OSWOptionImage path) {
 	fill: black;
-}
-
-.KVCWriteFooterStorageButton.OSWIconVisible img {
-	display: none;
 }
