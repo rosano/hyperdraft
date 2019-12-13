@@ -34,8 +34,8 @@ describe('KVCWriteMaster_Access', function () {
 		browser.assert.elements('.OLSKToolbar', 1);
 	});
 
-	it('shows OLSKInputWrapperContainer', function () {
-		browser.assert.elements('.OLSKInputWrapperContainer', 1);
+	it('shows OLSKInputWrapper', function () {
+		browser.assert.elements('.OLSKInputWrapper', 1);
 	});
 
 	it('shows KVCWriteMasterFilterField', function () {
