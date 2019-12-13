@@ -137,7 +137,7 @@ describe('KVCWriteMaster_Misc', function () {
 			browser.assert.input(KVCWriteMasterFilterField, 'alfa');
 		});
 
-		it('sets InputWrapperValue', function () {
+		it('sets OLSKInputWrapperValue', function () {
 			browser.assert.elements('.OLSKInputWrapperClearButton', 1);
 		});
 			
