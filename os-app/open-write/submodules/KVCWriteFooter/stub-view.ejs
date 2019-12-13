@@ -6,12 +6,12 @@
 
 	<script type="text/javascript">
 		window.OLSKPublicConstants = function (inputData) {
-			return {
-				KVC_SHARED_DONATE_URL: '<%= process.env.KVC_SHARED_DONATE_URL %>',
-				OLSKSharedActiveRouteConstant: '<%= OLSKSharedActiveRouteConstant %>',
-				OLSKSharedPageCurrentLanguage: '<%= OLSKSharedPageCurrentLanguage %>',
-				OLSKSharedPageLanguagesAvailable: <%- JSON.stringify(OLSKSharedPageLanguagesAvailable) %>,
-			}[inputData];
+			return <%- JSON.stringify({
+				KVC_SHARED_DONATE_URL: process.env.KVC_SHARED_DONATE_URL,
+				OLSKSharedActiveRouteConstant,
+				OLSKSharedPageCurrentLanguage,
+				OLSKSharedPageLanguagesAvailable,
+			}) %>[inputData];
 		};
 	</script>
 

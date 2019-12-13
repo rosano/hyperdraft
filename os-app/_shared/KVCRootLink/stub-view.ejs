@@ -3,9 +3,9 @@
 <head>
 	<script type="text/javascript">
 		window.OLSKPublicConstants = function (inputData) {
-			return {
-				OLSKSharedPageCurrentLanguage: '<%= OLSKSharedPageCurrentLanguage %>',
-			}[inputData];
+			return <%- JSON.stringify({
+				OLSKSharedPageCurrentLanguage,
+			}) %>[inputData];
 		};
 	</script>
 
