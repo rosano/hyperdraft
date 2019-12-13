@@ -9,10 +9,14 @@ Object.entries({
 	KVCWriteDetailToolbarBackButton: '.KVCWriteDetailToolbarBackButton',
 	KVCWriteDetailToolbarBackButtonImage: '.KVCWriteDetailToolbarBackButtonImage',
 	KVCWriteDetailToolbarJumpButton: '.KVCWriteDetailToolbarJumpButton',
+	KVCWriteDetailToolbarJumpButtonImage: '.KVCWriteDetailToolbarJumpButtonImage',
 	KVCWriteDetailToolbarPublishButton: '.KVCWriteDetailToolbarPublishButton',
+	KVCWriteDetailToolbarPublishButtonImage: '.KVCWriteDetailToolbarPublishButtonImage',
 	KVCWriteDetailToolbarPublicLink: '.KVCWriteDetailToolbarPublicLink',
 	KVCWriteDetailToolbarRetractButton: '.KVCWriteDetailToolbarRetractButton',
+	KVCWriteDetailToolbarRetractButtonImage: '.KVCWriteDetailToolbarRetractButtonImage',
 	KVCWriteDetailToolbarVersionsButton: '.KVCWriteDetailToolbarVersionsButton',
+	KVCWriteDetailToolbarVersionsButtonImage: '.KVCWriteDetailToolbarVersionsButtonImage',
 	KVCWriteDetailToolbarDiscardButton: '.KVCWriteDetailToolbarDiscardButton',	
 	KVCWriteDetailToolbarDiscardButtonImage: '.KVCWriteDetailToolbarDiscardButtonImage',	
 }).map(function (e) {
@@ -75,8 +79,16 @@ describe('KVCWriteDetail_Access', function () {
 			browser.assert.elements(KVCWriteDetailToolbarJumpButton, 1);
 		});
 
+		it('shows KVCWriteDetailToolbarJumpButtonImage', function () {
+			browser.assert.elements(KVCWriteDetailToolbarJumpButtonImage, 1);
+		});
+
 		it('shows KVCWriteDetailToolbarPublishButton', function () {
 			browser.assert.elements(KVCWriteDetailToolbarPublishButton, 1);
+		});
+
+		it('shows KVCWriteDetailToolbarPublishButtonImage', function () {
+			browser.assert.elements(KVCWriteDetailToolbarPublishButtonImage, 1);
 		});
 
 		it('hides KVCWriteDetailToolbarPublicLink', function () {
@@ -89,6 +101,10 @@ describe('KVCWriteDetail_Access', function () {
 
 		it('shows KVCWriteDetailToolbarVersionsButton', function () {
 			browser.assert.elements(KVCWriteDetailToolbarVersionsButton, 1);
+		});
+
+		it('shows KVCWriteDetailToolbarVersionsButtonImage', function () {
+			browser.assert.elements(KVCWriteDetailToolbarVersionsButtonImage, 1);
 		});
 
 		it('shows KVCWriteDetailToolbarDiscardButton', function () {
@@ -127,6 +143,10 @@ describe('KVCWriteDetail_Access', function () {
 
 		it('shows KVCWriteDetailToolbarRetractButton', function () {
 			browser.assert.elements(KVCWriteDetailToolbarRetractButton, 1);
+		});
+
+		it('shows KVCWriteDetailToolbarRetractButtonImage', function () {
+			browser.assert.elements(KVCWriteDetailToolbarRetractButtonImage, 1);
 		});
 
 	});

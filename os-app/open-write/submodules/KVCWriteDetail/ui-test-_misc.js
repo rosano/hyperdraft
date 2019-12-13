@@ -195,6 +195,14 @@ describe('KVCWriteDetail_Misc', function () {
 	
 	});
 
+	describe('KVCWriteDetailToolbarJumpButtonImage', function testKVCWriteDetailToolbarJumpButtonImage () {
+
+		it('sets src', function () {
+			browser.assert.elements(`${ KVCWriteDetailToolbarJumpButtonImage } #_KVCWriteJump`, 1);
+		});
+	
+	});
+
 	describe('KVCWriteDetailToolbarPublishButton', function test_KVCWriteDetailToolbarPublishButton () {
 		
 		it('classes OLSKLayoutButtonNoStyle', function () {
@@ -223,6 +231,14 @@ describe('KVCWriteDetail_Misc', function () {
 				browser.assert.text('#TestKVCWriteDetailDispatchPublish', '1');
 			});
 		
+		});
+	
+	});
+
+	describe('KVCWriteDetailToolbarPublishButtonImage', function testKVCWriteDetailToolbarPublishButtonImage () {
+
+		it('sets src', function () {
+			browser.assert.elements(`${ KVCWriteDetailToolbarPublishButtonImage } #_KVCWritePublish`, 1);
 		});
 	
 	});
@@ -291,6 +307,14 @@ describe('KVCWriteDetail_Misc', function () {
 	
 	});
 
+	describe('KVCWriteDetailToolbarRetractButtonImage', function testKVCWriteDetailToolbarRetractButtonImage () {
+
+		it('sets src', function () {
+			browser.assert.elements(`${ KVCWriteDetailToolbarRetractButtonImage } #_KVCWriteRetract`, 1);
+		});
+	
+	});
+
 	describe('KVCWriteDetailToolbarVersionsButton', function test_KVCWriteDetailToolbarVersionsButton () {
 
 		before(function() {
@@ -327,6 +351,14 @@ describe('KVCWriteDetail_Misc', function () {
 				browser.assert.text('#TestKVCWriteDetailDispatchVersions', '1');
 			});
 		
+		});
+	
+	});
+
+	describe('KVCWriteDetailToolbarVersionsButtonImage', function testKVCWriteDetailToolbarVersionsButtonImage () {
+
+		it('sets src', function () {
+			browser.assert.elements(`${ KVCWriteDetailToolbarVersionsButtonImage } #_KVCWriteVersions`, 1);
 		});
 	
 	});
