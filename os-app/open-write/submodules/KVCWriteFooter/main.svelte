@@ -57,12 +57,13 @@ import _OLSKSharedCloud from '../../../_shared/__external/OLSKUIAssets/_OLSKShar
 			<input type="file" accept=".json" on:change={ mod.InterfaceImportButtonDidClick } /> -->
 		</OLSKToolbarElementGroup>
 
-		<div>
+		<OLSKToolbarElementGroup>
 			<div class="KVCWriteFooterStorageStatus">{ KVCWriteFooterStorageStatus }</div>
-			<button class="KVCWriteFooterStorageButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable" title={ OLSKLocalized('KVCWriteFooterStorageButtonText') } on:click={ KVCWriteFooterDispatchStorage } class:OSWIconVisible={ false }>
+			
+			<button class="KVCWriteFooterStorageButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteFooterStorageButtonText') } on:click={ KVCWriteFooterDispatchStorage } class:OSWIconVisible={ false }>
 				<div class="KVCWriteFooterStorageButtonImage">{@html _OLSKSharedCloud }</div>
 			</button>
-		</div>
+		</OLSKToolbarElementGroup>
 	</OLSKToolbar>
 	
 </footer>

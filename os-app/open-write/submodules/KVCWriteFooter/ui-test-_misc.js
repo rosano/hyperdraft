@@ -48,12 +48,19 @@ describe('KVCWriteFooter_Misc', function () {
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute);
 		});
-	
-		it('sets class', function () {
+
+		it('classes OLSKLayoutButtonNoStyle', function () {
 			browser.assert.hasClass(KVCWriteFooterStorageButton, 'OLSKLayoutButtonNoStyle');
+		});
+
+		it('classes OLSKLayoutElementTappable', function () {
 			browser.assert.hasClass(KVCWriteFooterStorageButton, 'OLSKLayoutElementTappable');
 		});
 
+		it('classes OLSKToolbarButton', function () {
+			browser.assert.hasClass(KVCWriteFooterStorageButton, 'OLSKToolbarButton');
+		});
+	
 		context('click', function () {
 
 			before(function () {
