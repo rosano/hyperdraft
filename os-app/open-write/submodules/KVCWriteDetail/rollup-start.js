@@ -35,7 +35,7 @@ const KVCWriteDetail = new RollupStart({
 		}),
 		KVCWriteDetailDispatchOpen: (function _KVCWriteDetailDispatchOpen () {}),
 	}, Object.fromEntries(Object.entries(params).filter(function (e) {
-		return e[0] !== 'KVCWriteDetailItem'
+		return e[0] !== 'KVCWriteDetailItem';
 	}))),
 });
 

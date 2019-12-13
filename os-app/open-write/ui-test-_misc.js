@@ -163,7 +163,7 @@ describe('KVCWrite_Misc', function () {
 		});
 
 		before(function () {
-			browser.assert.input('.KVCWriteMasterFilterField', 'alfa')
+			browser.assert.input('.KVCWriteMasterFilterField', 'alfa');
 		});
 
 		before(function () {
@@ -171,7 +171,7 @@ describe('KVCWrite_Misc', function () {
 		});
 
 		before(function () {
-			deepEqual(browser.activeElement, browser.query('.KVCWriteEditorFieldDebug'))
+			deepEqual(browser.activeElement, browser.query('.KVCWriteEditorFieldDebug'));
 		});
 
 		before(function () {
@@ -183,7 +183,7 @@ describe('KVCWrite_Misc', function () {
 		});
 		
 		it('clears KVCWriteMasterFilterText', function() {
-			browser.assert.input('.KVCWriteMasterFilterField', '')
+			browser.assert.input('.KVCWriteMasterFilterField', '');
 		});
 
 	});
@@ -309,7 +309,7 @@ describe('KVCWrite_Misc', function () {
 			});
 
 			it('sorts KVCWriteMasterListItem', function () {
-				browser.assert.text('.KVCWriteMasterListItemTitle', 'bravoalfa')
+				browser.assert.text('.KVCWriteMasterListItemTitle', 'bravoalfa');
 			});
 		
 		});

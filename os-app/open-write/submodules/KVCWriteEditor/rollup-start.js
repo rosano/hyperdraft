@@ -16,7 +16,7 @@ const KVCWriteEditor = new RollupStart({
 		KVCWriteEditorDispatchOpen: (function _KVCWriteEditorDispatchOpen () {}),
 		KVCWriteEditorDispatchReady: (function _KVCWriteEditorDispatchReady () {}),
 	}, Object.fromEntries(Object.entries(params).filter(function (e) {
-		return e[0] !== 'KVCWriteEditorSetValue'
+		return e[0] !== 'KVCWriteEditorSetValue';
 	}))),
 });
 

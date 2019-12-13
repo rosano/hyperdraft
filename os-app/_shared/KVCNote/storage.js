@@ -12,21 +12,21 @@ export const KVCNoteStorage = function (privateClient, publicClient, changeDeleg
 	privateClient.on('change', function (event) {
 		if (!changeDelegate) {
 			return;
-		};
+		}
 		
 		if (event.relativePath.indexOf(kCollection) !== 0) {
 			return;
-		};
+		}
 
 		const delegateMethod = OLSKRemoteStorage.OLSKRemoteStorageChangeDelegateProperty(event);
 
 		if (!delegateMethod) {
 			return;
-		};
+		}
 
 		if (typeof changeDelegate[delegateMethod] !== 'function') {
 			return console.warn(`${ delegateMethod } not function`);
-		};
+		}
 
 		changeDelegate[delegateMethod](KVCNoteModel.KVCNoteModelPostJSONParse(event[OLSKRemoteStorage.OLSKRemoteStorageChangeDelegateInput(delegateMethod)]));
 	});

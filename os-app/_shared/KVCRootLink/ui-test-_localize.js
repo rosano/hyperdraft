@@ -26,4 +26,4 @@ require('./controller.js').OLSKControllerRoutes().forEach(function (kDefaultRout
 
 	});
 
-})
+});

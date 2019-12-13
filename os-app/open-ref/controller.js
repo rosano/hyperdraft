@@ -34,7 +34,7 @@ exports.OLSKControllerSharedConnections = function() {
 
 					if (didConnect) {
 						return;
-					};
+					}
 
 					olskCallback(error);
 				});

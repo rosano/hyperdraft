@@ -17,7 +17,7 @@ describe('KVCWriteMaster_Misc', function () {
 		context('blur KVCWriteMasterFilterField', function() {
 
 			before(function () {
-				browser.assert.hasClass(KVCWriteMaster, 'KVCWriteMasterFocused')
+				browser.assert.hasClass(KVCWriteMaster, 'KVCWriteMasterFocused');
 			});
 
 			before(function () {
@@ -367,7 +367,7 @@ describe('KVCWriteMaster_Misc', function () {
 
 		it('sets OLSKResultsListItemSelected', function () {
 			browser.assert.elements('.OLSKResultsListItemSelected', 1);
-			browser.assert.hasClass(`.OLSKResultsListItem:nth-child(2)`, 'OLSKResultsListItemSelected');
+			browser.assert.hasClass('.OLSKResultsListItem:nth-child(2)', 'OLSKResultsListItemSelected');
 		});
 		
 	});

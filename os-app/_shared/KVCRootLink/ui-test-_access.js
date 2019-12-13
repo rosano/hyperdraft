@@ -20,8 +20,8 @@ require('./controller.js').OLSKControllerRoutes().forEach(function (kDefaultRout
 		
 		it('shows OLSKRootLink', function() {
 			browser.assert.elements('.OLSKRootLink', 1);
-		})
+		});
 		
 	});
 	
-})
+});
