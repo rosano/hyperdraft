@@ -11,9 +11,9 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 	describe(`KVCVitrine_Localize-${ languageCode }`, function () {
 
 		before(function() {
-			return browser.visit(OLSKTestingCanonicalFor(kDefaultRoute.OLSKRoutePath, {
+			return browser.OLSKVisit(kDefaultRoute, {
 				OLSKRoutingLanguage: languageCode,
-			}));
+			});
 		});
 
 		it('localizes title', function() {
