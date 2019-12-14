@@ -1,6 +1,6 @@
-import App from './main.svelte';
+import RollupStart from './main.svelte';
 
-const KVCWrite = new App({
+const KVCWrite = new RollupStart({
 	target: document.body,
 });
 

@@ -3,6 +3,8 @@ import { deepEqual } from 'assert';
 const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
 Object.entries({
+	KVCWrite: '.KVCWrite',
+
 	KVCWriteStorageWidget: '#KVCWriteStorageWidget',
 }).map(function (e) {
 	return global[e.shift()]  = e.pop();
@@ -12,6 +14,10 @@ describe('KVCWrite_Access', function () {
 
 	before(function() {
 		return browser.OLSKVisit(kDefaultRoute);
+	});
+
+	it('shows KVCWrite', function () {
+		browser.assert.elements(KVCWrite, 1);
 	});
 
 	it('shows KVCWriteMaster', function () {
