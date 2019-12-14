@@ -2,7 +2,7 @@ const { throws, deepEqual } = require('assert');
 
 const mainModule = require('./ui-logic.js');
 
-describe('KVCWriteTruncatedTitleFor', function testKVCWriteTruncatedTitleFor() {
+describe('KVCWriteTruncatedTitleFor', function test_KVCWriteTruncatedTitleFor() {
 
 	it('throws error if not string', function() {
 		throws(function() {
@@ -28,7 +28,7 @@ describe('KVCWriteTruncatedTitleFor', function testKVCWriteTruncatedTitleFor() {
 
 });
 
-describe('KVCWriteLogicListSort', function testKVCWriteLogicListSort() {
+describe('KVCWriteLogicListSort', function test_KVCWriteLogicListSort() {
 
 	it('sorts by KVCNoteModificationDate descending', function() {
 		var item1 = {
