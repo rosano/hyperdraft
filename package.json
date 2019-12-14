@@ -58,10 +58,17 @@
     "// FRONTEND NORMALIZE CSS": null,
     "normalize.css": "latest",
     "OLSKLayout": "olsk/OLSKLayout",
+
+    "// FRONTEND APP LAYOUT": null,
+    "OLSKLayout": "olsk/OLSKLayout",
     "OLSKViewportContent": "olsk/OLSKViewportContent",
     "OLSKToolbar": "olsk/OLSKToolbar",
     "OLSKToolbarElementGroup": "olsk/OLSKToolbarElementGroup",
+    "OLSKInputWrapper": "olsk/OLSKInputWrapper",
+    "OLSKResults": "olsk/OLSKResults",
     "OLSKDetailPlaceholder": "olsk/OLSKDetailPlaceholder",
+    "OLSKReloadButton": "olsk/OLSKReloadButton",
+    "OLSKUIAssets": "olsk/OLSKUIAssets",
 
     "// FRONTEND TEXT": null,
     "marked": "latest",
@@ -99,15 +106,6 @@
     
     "// FRONTEND LAUNCHER": null,
     "launchlet": "latest",
-    
-    "// FRONTEND FILTER INPUT": null,
-    "OLSKInputWrapper": "olsk/OLSKInputWrapper",
-    
-    "// FRONTEND RESULTS": null,
-    "OLSKResults": "olsk/OLSKResults",
-
-    "// FRONTEND RELOAD BUTTON": null,
-    "OLSKReloadButton": "olsk/OLSKReloadButton",
 
     "// FRONTEND LANGUAGE SWITCHER": null,
     "OLSKLanguageSwitcher": "olsk/OLSKLanguageSwitcher",
@@ -115,9 +113,6 @@
     "// FRONTEND ROOT LINK": null,
     "OLSKRootLink": "olsk/OLSKRootLink",
     "ROCORootLink": "rationalcreative/ROCORootLink",
-
-    "// FRONTEND UI ASSETS": null,
-    "OLSKUIAssets": "olsk/OLSKUIAssets",
 
     "// I sacrifice myself for the commas of others": null
   },
