@@ -53,3 +53,45 @@ describe('KVCWriteLogicListSort', function testKVCWriteLogicListSort() {
 	});
 
 });
+
+describe('KVCWriteFilterFunction', function test_KVCWriteFilterFunction() {
+
+	it('throws error if not string', function() {
+		throws(function() {
+			mainModule.KVCWriteFilterFunction(null);
+		}, /KVCErrorInputNotValid/);
+	});
+
+	it('returns function', function() {
+		deepEqual(typeof mainModule.KVCWriteFilterFunction('alfa'), 'function');
+	});
+
+	context('function', function () {
+
+		it('returns false if no match', function() {
+			deepEqual(mainModule.KVCWriteFilterFunction('bravo')({
+				KVCNoteBody: 'alfa',
+			}), false);
+		});
+
+		it('returns true', function() {
+			deepEqual(mainModule.KVCWriteFilterFunction('alfa')({
+				KVCNoteBody: 'alfa',
+			}), true);
+		});
+
+		it('matches partial', function() {
+			deepEqual(mainModule.KVCWriteFilterFunction('alf')({
+				KVCNoteBody: 'alfa',
+			}), true);
+		});
+
+		it('matches case insensitive', function() {
+			deepEqual(mainModule.KVCWriteFilterFunction('ALF')({
+				KVCNoteBody: 'alfa',
+			}), true);
+		});
+
+	});
+
+});

@@ -12,6 +12,16 @@ export const KVCWriteTruncatedTitleFor = function (inputData, param2) {
 	return inputData.slice(0, 60).split(' ').slice(0, -1).join(' ') + (param2 ? '…' : '');
 };
 
+export const KVCWriteFilterFunction = function (inputData) {
+	if (typeof inputData !== 'string') {
+		throw new Error('KVCErrorInputNotValid');
+	}
+
+	return function (e) {
+		return e.KVCNoteBody.toLowerCase().match(inputData.toLowerCase());
+	};
+};
+
 export const KVCWriteLogicListSort = function (a, b) {
 	if (b.KVCNoteModificationDate && a.KVCNoteModificationDate) {
 		return b.KVCNoteModificationDate - a.KVCNoteModificationDate;

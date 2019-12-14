@@ -36,9 +36,7 @@ const mod = {
 	_ValueNotesVisible: [],
 
 	ValueNotesVisible (inputData, shouldSort = true) {
-		const items = !mod._ValueFilterText ? inputData : inputData.filter(function (e) {
-			return e.KVCNoteBody.toLowerCase().match(mod._ValueFilterText.toLowerCase());
-		});
+		const items = !mod._ValueFilterText ? inputData : inputData.filter(KVCWriteLogic.KVCWriteFilterFunction(mod._ValueFilterText));
 		mod._ValueNotesVisible = shouldSort ? items.sort(KVCWriteLogic.KVCWriteLogicListSort) : items;
 	},
 	
