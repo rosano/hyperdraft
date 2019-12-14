@@ -1,3 +1,3 @@
-export default require('OLSKRollup').OLSKRollupScaffoldScanStart(__dirname, {
+export default require('OLSKRollupScaffold').OLSKRollupScaffoldScanStart(__dirname, {
 	OLSKRollupPluginSwapTokens: require('OLSKUIAssets').OLSKUIAssetsSwapTokens(),
 });

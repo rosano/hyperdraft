@@ -135,7 +135,7 @@
     "rollup-plugin-terser": "latest",
     "sirv-cli": "latest",
     "svelte": "3.9.0",
-    "OLSKRollup": "olsk/OLSKRollup",
+    "OLSKRollupScaffold": "olsk/OLSKRollupScaffold",
 
     "// SPEC": null,
     "OLSKSpec": "olsk/OLSKSpec",
