@@ -32,5 +32,3 @@ export const KVCSettingStorage = function (privateClient, publicClient, changeDe
 		},
 	};
 };
-
-

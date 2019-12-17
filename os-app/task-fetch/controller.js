@@ -17,7 +17,6 @@ var apiArticlesMetal = require('../api/auth-articles/metal');
 var apiSnapshotsMetal = require('../api/auth-snapshots/metal');
 var resolveLibrary = require('./resolve');
 
-
 const kConst = {
 	kWKCTaskFetchDOMParserInstance() {
 		return new (new jsdomPackage.JSDOM('')).window.DOMParser();
