@@ -440,8 +440,24 @@ describe('KVCWriteDetail_Misc', function () {
 		context('input', function () {
 
 			before(function () {
+				browser.assert.text('#TestKVCWriteDetailItem', JSON.stringify({
+					KVCNoteBody: 'alfa',
+				}));
+			});
+
+			before(function () {
+				browser.assert.text('#TestKVCWriteDetailDispatchUpdate', '0');
+			});
+
+			before(function () {
 				// browser.fill('CodeMirror', 'bravo');
 				browser.fill('.KVCWriteEditorFieldDebug', 'bravo');
+			});
+
+			it('updates LCHWriteDetailItem', function () {
+				browser.assert.text('#TestKVCWriteDetailItem', JSON.stringify({
+					KVCNoteBody: 'bravo',
+				}));
 			});
 
 			it('sends KVCWriteDetailDispatchUpdate', function () {
