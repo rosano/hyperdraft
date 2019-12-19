@@ -446,7 +446,6 @@ describe('KVCWriteDetail_Misc', function () {
 
 			it('sends KVCWriteDetailDispatchUpdate', function () {
 				browser.assert.text('#TestKVCWriteDetailDispatchUpdate', '1');
-				browser.assert.text('#TestKVCWriteDetailDispatchUpdateData', 'bravo');
 			});
 		
 		});

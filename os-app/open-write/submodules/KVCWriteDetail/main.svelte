@@ -53,7 +53,9 @@ const mod = {
 	},
 
 	KVCWriteEditorDispatchUpdate (inputData) {
-		KVCWriteDetailDispatchUpdate(inputData);
+		mod._ValueItem.KVCNoteBody = inputData;
+		
+		KVCWriteDetailDispatchUpdate();
 	},
 
 	KVCWriteEditorDispatchOpen (inputData) {

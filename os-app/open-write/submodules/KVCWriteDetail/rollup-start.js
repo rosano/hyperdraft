@@ -31,7 +31,6 @@ const KVCWriteDetail = new RollupStart({
 		}),
 		KVCWriteDetailDispatchUpdate: (function _KVCWriteDetailDispatchUpdate (inputData) {
 			window.TestKVCWriteDetailDispatchUpdate.innerHTML = parseInt(window.TestKVCWriteDetailDispatchUpdate.innerHTML) + 1;
-			window.TestKVCWriteDetailDispatchUpdateData.innerHTML = inputData;
 		}),
 		KVCWriteDetailDispatchOpen: (function _KVCWriteDetailDispatchOpen () {}),
 	}, Object.fromEntries(Object.entries(params).filter(function (e) {

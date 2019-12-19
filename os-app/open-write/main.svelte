@@ -130,9 +130,7 @@ const mod = {
 		mod.ControlNoteDiscard(mod._ValueNoteSelected);
 	},
 
-	KVCWriteDetailDispatchUpdate (inputData) {
-		mod._ValueNoteSelected.KVCNoteBody = inputData;
-		
+	KVCWriteDetailDispatchUpdate () {
 		mod.ControlNoteSave(mod._ValueNoteSelected);
 	},
 
