@@ -218,7 +218,7 @@ const mod = {
 	},
 
 	async ControlNoteCreate(inputData) {
-		let item = await KVCNoteAction.KVCNoteActionCreate(mod._ValueStorageClient, {
+		const item = await KVCNoteAction.KVCNoteActionCreate(mod._ValueStorageClient, {
 			KVCNoteBody: typeof inputData === 'string' ? inputData : '',
 		});
 
@@ -319,7 +319,7 @@ const mod = {
 	},
 
 	async ControlNotesExportData () {
-		let zip = new JSZip();
+		const zip = new JSZip();
 
 		const fileName = [
 			'com.wikiavec.export',
@@ -368,7 +368,7 @@ const mod = {
 	},
 
 	ControlNotesExportTXT () {
-		let zip = new JSZip();
+		const zip = new JSZip();
 
 		mod._ValueNotesAll.forEach(function (e) {
 			zip.file(`${ e.KVCNoteID }.txt`, e.KVCNoteBody, {
