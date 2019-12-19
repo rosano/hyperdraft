@@ -174,7 +174,7 @@ const mod = {
 	// CONTROL
 
 	ControlNoteSave(inputData) {
-		mod._ValueNotesAll
+		mod._ValueNoteSelected = mod._ValueNoteSelected;
 
 		OLSKThrottle.OLSKThrottleMappedTimeoutFor(mod._ValueSaveNoteThrottleMap, inputData.KVCNoteID, function (inputData) {
 			return {
