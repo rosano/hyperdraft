@@ -397,12 +397,20 @@ const mod = {
 
 	// SETUP
 
-	SetupEverything () {
+	async SetupEverything () {
 		mod.SetupStorageClient();
 
 		mod.SetupStorageWidget();
 
 		mod.SetupStorageStatus();
+
+		await mod.SetupStorageNotifications();
+
+		await mod.SetupDataCache();
+
+		await mod.SetupValueNotesAll();
+
+		mod.ReactIsLoading(mod._ValueIsLoading = false);
 	},
 
 	SetupStorageClient() {
@@ -450,21 +458,19 @@ const mod = {
 					})),
 			],
 		});
+	},
 
-		mod._ValueStorageClient.remoteStorage.on('ready', async () => {
-			if (!OLSK_TESTING_BEHAVIOUR()) {
-				console.debug('ready', arguments);
-			}
+	SetupStorageWidget () {
+		(new window.OLSKStorageWidget(mod._ValueStorageClient.remoteStorage)).attach('KVCWriteStorageWidget').backend(document.querySelector('.OLSKAppToolbarStorageButton'));
+	},
 
-			await mod._ValueStorageClient.remoteStorage.wikiavec.kvc_notes.KVCNoteStorageCache();
-			await mod._ValueStorageClient.remoteStorage.wikiavec.kvc_settings.KVCSettingStorageCache();
-			await mod._ValueStorageClient.remoteStorage.wikiavec.kvc_versions.KVCVersionStorageCache();
+	SetupStorageStatus () {
+		OLSKRemoteStorage.OLSKRemoteStorageStatus(mod._ValueStorageClient.remoteStorage, function (inputData) {
+			mod._ValueFooterStorageStatus = inputData;
+		}, OLSKLocalized)
+	},
 
-			mod.ValueNotesAll(await KVCNoteAction.KVCNoteActionQuery(mod._ValueStorageClient, {}));
-
-			mod.ReactIsLoading(mod._ValueIsLoading = false);
-		});
-
+	async SetupStorageNotifications () {
 		mod._ValueStorageClient.remoteStorage.on('not-connected', () => {
 			if (!OLSK_TESTING_BEHAVIOUR()) {
 				console.debug('not-connected', arguments);
@@ -516,16 +522,28 @@ const mod = {
 				console.debug('error', error);
 			}
 		});
+
+		return new Promise(function (res, rej) {
+			mod._ValueStorageClient.remoteStorage.on('ready', () => {
+				if (!OLSK_TESTING_BEHAVIOUR()) {
+					console.debug('ready', arguments);
+				}
+
+				res();
+			});
+		})
 	},
 
-	SetupStorageWidget () {
-		(new window.OLSKStorageWidget(mod._ValueStorageClient.remoteStorage)).attach('KVCWriteStorageWidget').backend(document.querySelector('.OLSKAppToolbarStorageButton'));
+	async SetupDataCache() {
+		await mod._ValueStorageClient.remoteStorage.wikiavec.kvc_notes.KVCNoteStorageCache();
+		await mod._ValueStorageClient.remoteStorage.wikiavec.kvc_settings.KVCSettingStorageCache();
+		await mod._ValueStorageClient.remoteStorage.wikiavec.kvc_versions.KVCVersionStorageCache();
 	},
 
-	SetupStorageStatus () {
-		OLSKRemoteStorage.OLSKRemoteStorageStatus(mod._ValueStorageClient.remoteStorage, function (inputData) {
-			mod._ValueFooterStorageStatus = inputData;
-		}, OLSKLocalized)
+	async SetupValueNotesAll() {
+		mod.ValueNotesAll((await KVCNoteAction.KVCNoteActionQuery(mod._ValueStorageClient, {})).filter(function (e) {
+			return typeof e === 'object'; // #patch-remotestorage-true
+		}));
 	},
 
 	// LIFECYCLE
