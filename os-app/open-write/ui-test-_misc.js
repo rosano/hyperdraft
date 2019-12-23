@@ -490,23 +490,38 @@ describe('KVCWrite_Misc', function () {
 
 	describe('KVCWriteStorageWidget', function test_KVCWriteStorageWidget () {
 		
-		it('sets class', function () {
+		it('classes KVCWriteStorageWidgetHidden', function () {
 			browser.assert.hasClass(KVCWriteStorageWidget, 'KVCWriteStorageWidgetHidden');
-			browser.assert.hasClass(KVCWriteStorageWidget, 'OLSKMobileViewFooter');
 		});
 
-		context('click KVCWriteFooterStorageButton', function () {
+		context('click OLSKAppToolbarStorageButton', function () {
 			
 			before(function () {
-				return browser.pressButton('.KVCWriteFooterStorageButton');
+				return browser.pressButton('.OLSKAppToolbarStorageButton');
 			});
 			
-			it('sets class', function () {
+			it('classes KVCWriteStorageWidgetHidden', function () {
 				browser.assert.hasNoClass(KVCWriteStorageWidget, 'KVCWriteStorageWidgetHidden');
 			});
 		
 		});
 	
 	});
+
+	describe('KVCWriteViewportFooter', function test_KVCWriteViewportFooter () {
+
+		it('sets class', function () {
+			browser.assert.hasClass(KVCWriteViewportFooter, 'OLSKMobileViewFooter');
+		});
+
+	});
+
+	describe('OLSKAppToolbar', function test_OLSKAppToolbar () {
+
+		it('sets OLSKAppToolbarDonateURL', function () {
+			browser.assert.attribute('.OLSKAppToolbarDonateLink', 'href', process.env.KVC_SHARED_DONATE_URL);
+		});
+
+	});	
 
 });

@@ -67,8 +67,10 @@
     "OLSKInputWrapper": "olsk/OLSKInputWrapper",
     "OLSKResults": "olsk/OLSKResults",
     "OLSKDetailPlaceholder": "olsk/OLSKDetailPlaceholder",
-    "OLSKReloadButton": "olsk/OLSKReloadButton",
     "OLSKUIAssets": "olsk/OLSKUIAssets",
+
+    "// FRONTEND APP TOOLBAR": null,
+    "OLSKAppToolbar": "olsk/OLSKAppToolbar",
 
     "// FRONTEND TEXT": null,
     "marked": "latest",

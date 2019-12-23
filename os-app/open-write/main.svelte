@@ -72,7 +72,7 @@ const mod = {
 
 	// MESSAGE
 
-	KVCWriteFooterDispatchStorage () {
+	OLSKAppToolbarDispatchStorage () {
 		mod._ValueStorageWidgetHidden = !mod._ValueStorageWidgetHidden;
 	},
 
@@ -138,11 +138,11 @@ const mod = {
 		mod.ControlFilter(inputData);
 	},
 
-	_KVCWriteFooterDispatchExport () {
+	_OLSKAppToolbarDispatchExport () {
 		mod.ControlNotesExportData();
 	},
 
-	_KVCWriteFooterDispatchImport (inputData) {
+	_OLSKAppToolbarDispatchImport (inputData) {
 		mod.ControlNotesImportData(inputData);
 	},
 
@@ -519,7 +519,7 @@ const mod = {
 	},
 
 	SetupStorageWidget () {
-		(new window.OLSKStorageWidget(mod._ValueStorageClient.remoteStorage)).attach('KVCWriteStorageWidget').backend(document.querySelector('.KVCWriteFooterStorageButton'));
+		(new window.OLSKStorageWidget(mod._ValueStorageClient.remoteStorage)).attach('KVCWriteStorageWidget').backend(document.querySelector('.OLSKAppToolbarStorageButton'));
 	},
 
 	SetupStorageStatus () {
@@ -542,7 +542,7 @@ onMount(mod.LifecycleModuleWillMount);
 import OLSKViewportContent from 'OLSKViewportContent';
 import KVCWriteMaster from './submodules/KVCWriteMaster/main.svelte';
 import KVCWriteDetail from './submodules/KVCWriteDetail/main.svelte';
-import KVCWriteFooter from './submodules/KVCWriteFooter/main.svelte';
+import OLSKAppToolbar from 'OLSKAppToolbar';
 import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svelte';
 </script>
 <svelte:window on:keydown={ mod.InterfaceWindowDidKeydown } />
@@ -578,14 +578,17 @@ import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svel
 		/>
 </OLSKViewportContent>
 
-<div id="KVCWriteStorageWidget" class="OLSKMobileViewFooter" class:KVCWriteStorageWidgetHidden={ mod._ValueStorageWidgetHidden }></div>
+<footer class="KVCWriteViewportFooter OLSKMobileViewFooter">
+	<div id="KVCWriteStorageWidget" class:KVCWriteStorageWidgetHidden={ mod._ValueStorageWidgetHidden }></div>
 
-<KVCWriteFooter
-	KVCWriteFooterStorageStatus={ mod._ValueFooterStorageStatus }
-	KVCWriteFooterDispatchStorage={ mod.KVCWriteFooterDispatchStorage }
-	_KVCWriteFooterDispatchExport={ mod._KVCWriteFooterDispatchExport }
-	_KVCWriteFooterDispatchImport={ mod._KVCWriteFooterDispatchImport }
-	/>
+	<OLSKAppToolbar
+		OLSKAppToolbarDonateURL={ window.OLSKPublicConstants('KVC_SHARED_DONATE_URL') }
+		OLSKAppToolbarStorageStatus={ mod._ValueFooterStorageStatus }
+		OLSKAppToolbarDispatchStorage={ mod.OLSKAppToolbarDispatchStorage }
+		_OLSKAppToolbarDispatchExport={ mod._OLSKAppToolbarDispatchExport }
+		_OLSKAppToolbarDispatchImport={ mod._OLSKAppToolbarDispatchImport }
+		/>
+</footer>
 
 </div>
 

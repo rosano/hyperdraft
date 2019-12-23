@@ -39,8 +39,6 @@
 		'normalize.css',
 		'OLSKInternational',
 		'OLSKLayout',
-		'OLSKDetailPlaceholder',
-		'OLSKReloadButton',
 		'OLSKRemoteStorage',
 		'OLSKRouting',
 		'OLSKServiceWorker',
@@ -49,7 +47,6 @@
 		'OLSKThrottle',
 		'OLSKType',
 		'remotestoragejs',
-		'OLSKLanguageSwitcher',
 		'OLSKRootLink',
 		'ROCORootLink',
 		'OLSKUIAssets',
@@ -59,7 +56,11 @@
 		'url-parse',
 
 		// pass tests
+		'OLSKDetailPlaceholder',
 		'OLSKInputWrapper',
+		'OLSKAppToolbar',
+		'OLSKReloadButton',
+		'OLSKLanguageSwitcher',
 	].concat([
 	]), pathPackage.join(__dirname, 'node_modules'), pathPackage.join(__dirname, 'os-app/_shared/__external'));
 })();

@@ -5,6 +5,8 @@ const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 Object.entries({
 	KVCWrite: '.KVCWrite',
 
+	KVCWriteViewportFooter: '.KVCWriteViewportFooter',
+
 	KVCWriteStorageWidget: '#KVCWriteStorageWidget',
 }).map(function (e) {
 	return global[e.shift()]  = e.pop();
@@ -36,12 +38,16 @@ describe('KVCWrite_Access', function () {
 		browser.assert.elements('.OLSKDetailPlaceholder', 1);
 	});
 
-	it('shows KVCWriteFooter', function () {
-		browser.assert.elements('.KVCWriteFooter', 1);
+	it('shows KVCWriteViewportFooter', function () {
+		browser.assert.elements(KVCWriteViewportFooter, 1);
 	});
 
 	it('shows KVCWriteStorageWidget', function () {
 		browser.assert.elements(KVCWriteStorageWidget, 1);
+	});
+
+	it('shows OLSKAppToolbar', function () {
+		browser.assert.elements('.OLSKAppToolbar', 1);
 	});
 
 	context('create', function test_create () {

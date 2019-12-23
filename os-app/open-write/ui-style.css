@@ -31,7 +31,7 @@
 
 @media screen and (max-width: 760px) {
 
-.KVCWrite :global(.KVCWriteFooter) {
+.KVCWriteViewportFooter {
 	/* browser quirks */
 	z-index: 999;
 }
