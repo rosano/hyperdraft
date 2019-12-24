@@ -8,6 +8,7 @@ export let KVCWriteDetailDispatchDiscard;
 export let KVCWriteDetailDispatchUpdate;
 export let KVCWriteDetailDispatchOpen;
 export let OLSKMobileViewInactive = false;
+export let _KVCWriteDetailVersionsIsDisabled = false;
 
 export const KVCWriteDetailSetItem = function (inputData) {
 	mod._ValueItem = inputData;
@@ -164,9 +165,11 @@ import KVCWriteInput from '../KVCWriteInput/main.svelte';
 				</button>
 			{/if}
 
-			<button class="KVCWriteDetailToolbarVersionsButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarVersionsButtonText') } on:click={ () => KVCWriteDetailDispatchVersions() }>
-				<div class="KVCWriteDetailToolbarVersionsButtonImage">{@html _KVCWriteVersions }</div>
-			</button>
+			{#if !_KVCWriteDetailVersionsIsDisabled}
+				<button class="KVCWriteDetailToolbarVersionsButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarVersionsButtonText') } on:click={ () => KVCWriteDetailDispatchVersions() }>
+					<div class="KVCWriteDetailToolbarVersionsButtonImage">{@html _KVCWriteVersions }</div>
+				</button>
+			{/if}
 
 			<button class="KVCWriteDetailToolbarDiscardButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarDiscardButtonText') } on:click={ () => window.confirm(OLSKLocalized('KVCWriteDetailDiscardPromptText')) && KVCWriteDetailDispatchDiscard() }>
 				<div class="KVCWriteDetailToolbarDiscardButtonImage">{@html _OLSKSharedDiscard }</div>

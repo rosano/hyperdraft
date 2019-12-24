@@ -67,6 +67,11 @@ const mod = {
 		return window.innerWidth <= 760;
 	},
 
+	DataVersionsIsDisabled () {
+		return false;
+		return !OLSK_TESTING_BEHAVIOUR();
+	},
+
 	// MESSAGE
 
 	OLSKAppToolbarDispatchStorage () {
@@ -182,6 +187,10 @@ const mod = {
 
 		if (OLSK_TESTING_BEHAVIOUR()) {
 			OLSKThrottle.OLSKThrottleSkip(mod._ValueSaveNoteThrottleMap[inputData.KVCNoteID])	
+		}
+
+		if (mod.DataVersionsIsDisabled()) {
+			return;
 		}
 
 		OLSKThrottle.OLSKThrottleMappedTimeout(mod._ValueSaveVersionThrottleMap, inputData.KVCNoteID, {
@@ -581,6 +590,7 @@ import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svel
 		KVCWriteDetailDispatchUpdate={ mod.KVCWriteDetailDispatchUpdate }
 		KVCWriteDetailDispatchOpen={ mod.KVCWriteDetailDispatchOpen }
 		OLSKMobileViewInactive={ !mod.OLSKMobileViewInactive }
+		_KVCWriteDetailVersionsIsDisabled={ mod.DataVersionsIsDisabled() }
 		bind:this={ mod.KVCWriteDetailInstance }
 		/>
 </OLSKViewportContent>
