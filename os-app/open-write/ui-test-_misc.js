@@ -413,7 +413,7 @@ describe('KVCWrite_Misc', function () {
 			});
 
 			it('sets KVCWriteMasterListItemAccessibilitySummary', function () {
-				browser.assert.text('.KVCWriteMasterListItemAccessibilitySummary', 'alfa');
+				browser.assert.attribute('.KVCWriteMasterListItem', 'aria-label', 'alfa');
 			});
 
 			it('sets KVCWriteMasterListItemTitle', function () {
@@ -433,7 +433,7 @@ describe('KVCWrite_Misc', function () {
 			});
 
 			it('sets KVCWriteMasterListItemAccessibilitySummary', function () {
-				browser.assert.text('.KVCWriteMasterListItemAccessibilitySummary', 'alfa');
+				browser.assert.attribute('.KVCWriteMasterListItem', 'aria-label', 'alfa');
 			});
 
 			it('sets KVCWriteMasterListItemTitle', function () {
@@ -453,7 +453,7 @@ describe('KVCWrite_Misc', function () {
 			});
 
 			it('sets KVCWriteMasterListItemAccessibilitySummary', function () {
-				browser.assert.text('.KVCWriteMasterListItemAccessibilitySummary', 'alfa bravo charlie delta echo foxtrot golf hotel juliet…');
+				browser.assert.attribute('.KVCWriteMasterListItem', 'aria-label', 'alfa bravo charlie delta echo foxtrot golf hotel juliet…');
 			});
 
 			it('sets KVCWriteMasterListItemTitle', function () {
@@ -473,7 +473,7 @@ describe('KVCWrite_Misc', function () {
 			});
 
 			it('sets KVCWriteMasterListItemAccessibilitySummary', function () {
-				browser.assert.text('.KVCWriteMasterListItemAccessibilitySummary', '');
+				browser.assert.attribute('.KVCWriteMasterListItem', 'aria-label', '');
 			});
 
 			it('sets KVCWriteMasterListItemTitle', function () {

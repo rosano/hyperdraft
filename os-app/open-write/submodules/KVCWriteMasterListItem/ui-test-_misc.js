@@ -1,5 +1,3 @@
-import { deepEqual } from 'assert';
-
 const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
 describe('KVCWriteMasterListItem_Misc', function () {
@@ -12,16 +10,16 @@ describe('KVCWriteMasterListItem_Misc', function () {
 		});
 	});
 
-	describe('KVCWriteMasterListItemAccessibilitySummary', function test_KVCWriteMasterListItemAccessibilitySummary () {
+	describe('KVCWriteMasterListItem', function test_KVCWriteMasterListItem () {
 		
-		it('classes OLSKScreenReaderOnly', function () {
-			browser.assert.hasClass(KVCWriteMasterListItemAccessibilitySummary, 'OLSKScreenReaderOnly');
+		it('sets aria-label', function () {
+			browser.assert.attribute(KVCWriteMasterListItem, 'aria-label', 'alfa');
+		});
+		
+		it('sets role', function () {
+			browser.assert.attribute(KVCWriteMasterListItem, 'role', 'button');
 		});
 
-		it('binds KVCWriteMasterListItemAccessibilitySummary', function () {
-			browser.assert.text(KVCWriteMasterListItemAccessibilitySummary, 'alfa');
-		});
-	
 	});
 
 	describe('KVCWriteMasterListItemTitle', function test_KVCWriteMasterListItemTitle () {

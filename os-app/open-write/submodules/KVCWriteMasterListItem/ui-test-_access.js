@@ -1,11 +1,7 @@
-import { deepEqual } from 'assert';
-
 const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
 Object.entries({
 	KVCWriteMasterListItem: '.KVCWriteMasterListItem',
-	
-	KVCWriteMasterListItemAccessibilitySummary: '.KVCWriteMasterListItemAccessibilitySummary',
 	
 	KVCWriteMasterListItemTitle: '.KVCWriteMasterListItemTitle',
 	KVCWriteMasterListItemSnippet: '.KVCWriteMasterListItemSnippet',

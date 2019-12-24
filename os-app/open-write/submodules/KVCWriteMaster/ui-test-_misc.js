@@ -313,7 +313,7 @@ describe('KVCWriteMaster_Misc', function () {
 		});
 
 		it('sets KVCWriteMasterListItemAccessibilitySummary', function () {
-			browser.assert.text('.KVCWriteMasterListItemAccessibilitySummary', 'bravo');
+			browser.assert.attribute('.KVCWriteMasterListItem', 'aria-label', 'bravo');
 		});
 
 		it('sets KVCWriteMasterListItemTitle', function () {

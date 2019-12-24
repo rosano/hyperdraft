@@ -4,9 +4,8 @@ export let KVCWriteMasterListItemTitle;
 export let KVCWriteMasterListItemSnippet;
 </script>
 
-<div class="KVCWriteMasterListItem">
+<div class="KVCWriteMasterListItem" aria-label={ KVCWriteMasterListItemAccessibilitySummary } role="button">
 
-<strong class="KVCWriteMasterListItemAccessibilitySummary OLSKScreenReaderOnly">{ KVCWriteMasterListItemAccessibilitySummary }</strong>
 <strong class="KVCWriteMasterListItemTitle" aria-hidden="true">{ KVCWriteMasterListItemTitle }</strong>
 <span class="KVCWriteMasterListItemSnippet" aria-hidden="true">{ KVCWriteMasterListItemSnippet }</span>
 
