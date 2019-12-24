@@ -174,9 +174,8 @@ const mod = {
 
 	ControlNoteSave(inputData) {
 		OLSKThrottle.OLSKThrottleMappedTimeout(mod._ValueSaveNoteThrottleMap, inputData.KVCNoteID, {
-			OLSKThrottleInput: inputData,
 			OLSKThrottleDuration: 500,
-			async OLSKThrottleCallback (inputData) {
+			async OLSKThrottleCallback () {
 				await KVCNoteAction.KVCNoteActionUpdate(mod._ValueStorageClient, inputData);
 			},
 		});
@@ -186,9 +185,8 @@ const mod = {
 		}
 
 		OLSKThrottle.OLSKThrottleMappedTimeout(mod._ValueSaveVersionThrottleMap, inputData.KVCNoteID, {
-			OLSKThrottleInput: inputData,
 			OLSKThrottleDuration: 3000,
-			async OLSKThrottleCallback (inputData) {
+			async OLSKThrottleCallback () {
 				if (!inputData.KVCNoteCreationDate) {
 					return;
 				}
