@@ -7,6 +7,7 @@ export let KVCWriteDetailDispatchVersions;
 export let KVCWriteDetailDispatchDiscard;
 export let KVCWriteDetailDispatchUpdate;
 export let KVCWriteDetailDispatchOpen;
+export let KVCWriteDetailDispatchEscape;
 export let OLSKMobileViewInactive = false;
 export let _KVCWriteDetailVersionsIsDisabled = false;
 
@@ -63,6 +64,10 @@ const mod = {
 		mod._ValueEditorPostInitializeQueue.splice(0, mod._ValueEditorPostInitializeQueue.length).forEach(function(e) {
 			return e(mod.KVCWriteInputInstance);
 		});
+	},
+
+	KVCWriteInputDispatchEscape () {
+		KVCWriteDetailDispatchEscape();
 	},
 
 	// VALUE
@@ -185,6 +190,7 @@ import KVCWriteInput from '../KVCWriteInput/main.svelte';
 	KVCWriteInputDispatchUpdate={ mod.KVCWriteInputDispatchUpdate }
 	KVCWriteInputDispatchOpen={ mod.KVCWriteInputDispatchOpen }
 	KVCWriteInputDispatchReady={ mod.KVCWriteInputDispatchReady }
+	KVCWriteInputDispatchEscape={ mod.KVCWriteInputDispatchEscape }
 	bind:this={ mod.KVCWriteInputInstance }
 	/>
 {/if}

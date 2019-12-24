@@ -65,6 +65,7 @@ const KVCWriteDetail = new RollupStart({
 			mod.ReactDetailItem(params.KVCWriteDetailItem);
 		}),
 		KVCWriteDetailDispatchOpen: (function _KVCWriteDetailDispatchOpen () {}),
+		KVCWriteDetailDispatchEscape: (function _KVCWriteDetailDispatchEscape () {}),
 	}, Object.fromEntries(Object.entries(params).filter(function (e) {
 		return e[0] !== 'KVCWriteDetailItem';
 	}))),

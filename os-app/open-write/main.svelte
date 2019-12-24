@@ -146,6 +146,10 @@ const mod = {
 		mod.ControlFilter(inputData);
 	},
 
+	KVCWriteDetailDispatchEscape () {
+		mod.ControlEscape();
+	},
+
 	_OLSKAppToolbarDispatchExport () {
 		mod.ControlNotesExportData();
 	},
@@ -163,11 +167,11 @@ const mod = {
 
 		const handlerFunctions = {
 			Escape () {
-				mod.ControlFilter('');
-
-				if (!OLSK_TESTING_BEHAVIOUR()) {
-					document.querySelector('.KVCWriteMasterBody').scrollTo(0, 0);
+				if (document.activeElement.nodeName === 'TEXTAREA') {
+					return;
 				}
+
+				mod.ControlEscape();
 			},
 			Tab () {
 				document.activeElement !== document.querySelector('.KVCWriteMasterFilterField') ? document.querySelector('.KVCWriteMasterFilterField').focus() : mod.KVCWriteDetailInstance.KVCWriteDetailEditorFocus();
@@ -304,6 +308,14 @@ const mod = {
 		mod.ControlNoteSelect(null);
 
 		await KVCNoteAction.KVCNoteActionDelete(mod._ValueStorageClient, inputData.KVCNoteID);
+	},
+
+	ControlEscape() {
+		mod.ControlFilter('');
+
+		if (!OLSK_TESTING_BEHAVIOUR()) {
+			document.querySelector('.KVCWriteMasterBody').scrollTo(0, 0);
+		}
 	},
 	
 	ControlFilter(inputData) {
@@ -615,6 +627,7 @@ import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svel
 		KVCWriteDetailDispatchDiscard={ mod.KVCWriteDetailDispatchDiscard }
 		KVCWriteDetailDispatchUpdate={ mod.KVCWriteDetailDispatchUpdate }
 		KVCWriteDetailDispatchOpen={ mod.KVCWriteDetailDispatchOpen }
+		KVCWriteDetailDispatchEscape={ mod.KVCWriteDetailDispatchEscape }
 		OLSKMobileViewInactive={ !mod.OLSKMobileViewInactive }
 		_KVCWriteDetailVersionsIsDisabled={ mod.DataVersionsIsDisabled() }
 		bind:this={ mod.KVCWriteDetailInstance }

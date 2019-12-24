@@ -5,6 +5,7 @@ export let KVCWriteInputDispatchHeaderTokens;
 export let KVCWriteInputDispatchUpdate;
 export let KVCWriteInputDispatchOpen;
 export let KVCWriteInputDispatchReady;
+export let KVCWriteInputDispatchEscape;
 
 export const KVCWriteInputFocus = function () {
 	mod.ControlConfigureEditor(function (inputData) {
@@ -50,17 +51,19 @@ const mod = {
 			return;
 		}
 
+		if (OLSK_TESTING_BEHAVIOUR()) {
+			return KVCWriteInputDispatchEscape();
+		}
+
 		if (!mod._ValueEditorInstance) {
 			return;
 		}
 
 		if (mod._ValueEditorInstance.getDoc().listSelections().length <= 1) {
-			return;
+			return KVCWriteInputDispatchEscape();
 		}
 
 		mod._ValueEditorInstance.setSelections(mod._ValueEditorInstance.getDoc().listSelections().slice(0, 1));
-
-		event.stopPropagation();
 	},
 
 	InterfaceEditorDidTouchDown (instance, event) {
