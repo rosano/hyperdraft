@@ -28,20 +28,17 @@ const mod = {
 	_ValueIsLoading: true,
 
 	_ValueNotesAll: [],
-
 	ValueNotesAll (inputData, shouldSort = true) {
 		mod.ValueNotesVisible(mod._ValueNotesAll = inputData, shouldSort);
 	},
 
 	_ValueNotesVisible: [],
-
 	ValueNotesVisible (inputData, shouldSort = true) {
 		const items = !mod._ValueFilterText ? inputData : inputData.filter(KVCWriteLogic.KVCWriteFilterFunction(mod._ValueFilterText));
 		mod._ValueNotesVisible = shouldSort ? items.sort(KVCWriteLogic.KVCWriteLogicListSort) : items;
 	},
 	
 	_ValueNoteSelected: undefined,
-
 	ValueNoteSelected (inputData) {
 		mod.KVCWriteDetailInstance.KVCWriteDetailSetItem(mod._ValueNoteSelected = inputData);
 
