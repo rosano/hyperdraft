@@ -109,17 +109,10 @@ const mod = {
 		if (mod.DataIsMobile()) {
 			return;
 		}
-		
+
 		const element = document.querySelector('.OLSKResultsListItemSelected');
 
-		if (!element) {
-			return;
-		}
-		
-		element.scrollIntoView({
-			block: 'nearest',
-			inline: 'nearest',
-		});
+		element ? element.scrollIntoView(false) : document.querySelector('.KVCWriteMasterBody').scrollTo(0, 0);
 	},
 
 };

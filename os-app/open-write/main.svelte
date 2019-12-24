@@ -312,10 +312,6 @@ const mod = {
 
 	ControlEscape() {
 		mod.ControlFilterWithNoThrottle('');
-
-		if (!OLSK_TESTING_BEHAVIOUR()) {
-			document.querySelector('.KVCWriteMasterBody').scrollTo(0, 0);
-		}
 	},
 	
 	ControlFilterWithThrottle(inputData) {
