@@ -72,6 +72,10 @@ const mod = {
 		return !OLSK_TESTING_BEHAVIOUR();
 	},
 
+	DataDebugPersistenceIsEnabled () {
+		return !OLSK_TESTING_BEHAVIOUR();
+	},
+
 	// MESSAGE
 
 	OLSKAppToolbarDispatchStorage () {
@@ -178,9 +182,17 @@ const mod = {
 	// CONTROL
 
 	ControlNoteSave(inputData) {
+		if (mod.DataDebugPersistenceIsEnabled()) {
+			console.info('ControlNoteSave', inputData.KVCNoteID, inputData.KVCNoteBody);
+		}
+
 		OLSKThrottle.OLSKThrottleMappedTimeout(mod._ValueSaveNoteThrottleMap, inputData.KVCNoteID, {
 			OLSKThrottleDuration: 500,
 			async OLSKThrottleCallback () {
+				if (mod.DataDebugPersistenceIsEnabled()) {
+					console.info('OLSKThrottleCallback', inputData.KVCNoteID, inputData.KVCNoteBody);
+				}
+
 				await KVCNoteAction.KVCNoteActionUpdate(mod._ValueStorageClient, inputData);
 			},
 		});
@@ -431,6 +443,10 @@ const mod = {
 								},
 								OLSKChangeDelegateUpdate (inputData) {
 									// console.log('OLSKChangeDelegateUpdate', inputData);
+
+									if (mod.DataDebugPersistenceIsEnabled()) {
+										console.log('OLSKChangeDelegateUpdate', inputData.KVCNoteID, inputData.KVCNoteBody);
+									}
 
 									if (mod._ValueNoteSelected && (mod._ValueNoteSelected.KVCNoteID === inputData.KVCNoteID)) {
 										mod.ControlNoteSelect(Object.assign(mod._ValueNoteSelected, inputData));
