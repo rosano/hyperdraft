@@ -66,6 +66,12 @@ describe('KVCWriteFilterFunction', function test_KVCWriteFilterFunction() {
 			}), true);
 		});
 
+		it('matches diacritic insensitive', function() {
+			deepEqual(mainModule.KVCWriteFilterFunction('alfa')({
+				KVCNoteBody: 'alfá',
+			}), true);
+		});
+
 	});
 
 });
