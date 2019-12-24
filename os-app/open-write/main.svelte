@@ -176,39 +176,33 @@ const mod = {
 	ControlNoteSave(inputData) {
 		mod._ValueNoteSelected = mod._ValueNoteSelected;
 
-		OLSKThrottle.OLSKThrottleMappedTimeoutFor(mod._ValueSaveNoteThrottleMap, inputData.KVCNoteID, function (inputData) {
-			return {
-				OLSKThrottleDuration: 500,
-				async OLSKThrottleCallback () {
-					delete mod._ValueSaveNoteThrottleMap[inputData.KVCNoteID];
-
-					await KVCNoteAction.KVCNoteActionUpdate(mod._ValueStorageClient, inputData);
-				},
-			};
-		}, inputData);
+		OLSKThrottle.OLSKThrottleMappedTimeout(mod._ValueSaveNoteThrottleMap, inputData.KVCNoteID, {
+			OLSKThrottleInput: inputData,
+			OLSKThrottleDuration: 500,
+			async OLSKThrottleCallback (inputData) {
+				await KVCNoteAction.KVCNoteActionUpdate(mod._ValueStorageClient, inputData);
+			},
+		});
 
 		if (OLSK_TESTING_BEHAVIOUR()) {
 			OLSKThrottle.OLSKThrottleSkip(mod._ValueSaveNoteThrottleMap[inputData.KVCNoteID])	
 		}
 
-		OLSKThrottle.OLSKThrottleMappedTimeoutFor(mod._ValueSaveVersionThrottleMap, inputData.KVCNoteID, function (inputData) {
-			return {
-				OLSKThrottleDuration: 3000,
-				OLSKThrottleCallback: async function () {
-					delete mod._ValueSaveVersionThrottleMap[inputData.KVCNoteID];
+		OLSKThrottle.OLSKThrottleMappedTimeout(mod._ValueSaveVersionThrottleMap, inputData.KVCNoteID, {
+			OLSKThrottleInput: inputData,
+			OLSKThrottleDuration: 3000,
+			async OLSKThrottleCallback (inputData) {
+				if (!inputData.KVCNoteCreationDate) {
+					return;
+				}
 
-					if (!inputData.KVCNoteCreationDate) {
-						return;
-					}
-
-					await KVCVersionAction.KVCVersionActionCreate(mod._ValueStorageClient, {
-						KVCVersionNoteID: inputData.KVCNoteID,
-						KVCVersionBody: inputData.KVCNoteBody,
-						KVCVersionDate: inputData.KVCNoteModificationDate,
-					});
-				},
-			};
-		}, inputData);
+				await KVCVersionAction.KVCVersionActionCreate(mod._ValueStorageClient, {
+					KVCVersionNoteID: inputData.KVCNoteID,
+					KVCVersionBody: inputData.KVCNoteBody,
+					KVCVersionDate: inputData.KVCNoteModificationDate,
+				});
+			},
+		});
 
 		if (OLSK_TESTING_BEHAVIOUR()) {
 			OLSKThrottle.OLSKThrottleSkip(mod._ValueSaveVersionThrottleMap[inputData.KVCNoteID])	
