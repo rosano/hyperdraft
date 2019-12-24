@@ -95,7 +95,7 @@ const mod = {
 	},
 
 	KVCWriteMasterDispatchFilter (inputData) {
-		mod.ControlFilter(inputData);
+		mod.ControlFilterWithThrottle(inputData);
 	},
 
 	KVCWriteMasterDispatchExport () {
@@ -143,7 +143,7 @@ const mod = {
 	},
 
 	KVCWriteDetailDispatchOpen (inputData) {
-		mod.ControlFilter(inputData);
+		mod.ControlFilterWithNoThrottle(inputData);
 	},
 
 	KVCWriteDetailDispatchEscape () {
@@ -311,40 +311,30 @@ const mod = {
 	},
 
 	ControlEscape() {
-		mod.ControlFilter('');
+		mod.ControlFilterWithNoThrottle('');
 
 		if (!OLSK_TESTING_BEHAVIOUR()) {
 			document.querySelector('.KVCWriteMasterBody').scrollTo(0, 0);
 		}
 	},
 	
-	ControlFilter(inputData) {
+	ControlFilterWithThrottle(inputData) {
 		mod._ValueFilterText = inputData;
 
 		OLSKThrottle.OLSKThrottleMappedTimeout(mod, '_ValueFilterThrottle', {
 			OLSKThrottleDuration: 200,
 			async OLSKThrottleCallback () {
-				mod.ValueNotesVisible(mod._ValueNotesAll);
-
-				if (!mod._ValueFilterText) {
-					return mod.ControlNoteSelect(null);
-				}
-
-				if (!mod._ValueNotesVisible.length) {
-					return mod.ControlNoteSelect(null);
-				}
-
-				mod.ValueNoteSelected(mod._ValueNotesVisible.filter(function (e) {
-					return KVCParser.KVCParserTitleForPlaintext(e.KVCNoteBody).toLowerCase() === mod._ValueFilterText.toLowerCase();
-				}).concat(mod._ValueNotesVisible.filter(function (e) {
-					return KVCParser.KVCParserTitleForPlaintext(e.KVCNoteBody).toLowerCase().includes(mod._ValueFilterText.toLowerCase());
-				})).shift());
+				mod.ControlFilterWithNoThrottle(mod._ValueFilterText);
 			},
 		});
 
 		if (OLSK_TESTING_BEHAVIOUR()) {
 			OLSKThrottle.OLSKThrottleSkip(mod._ValueFilterThrottle);
 		}
+	},
+	
+	ControlFilterWithNoThrottle(inputData) {
+		mod.ReactFilter(mod._ValueFilterText = inputData);
 	},
 
 	async ControlNotesExportData () {
@@ -424,6 +414,24 @@ const mod = {
 		setTimeout(function () {
 			document.querySelector('.KVCWriteMasterFilterField').focus();
 		})
+	},
+	
+	ReactFilter(inputData) {
+		mod.ValueNotesVisible(mod._ValueNotesAll);
+
+		if (!inputData) {
+			return mod.ControlNoteSelect(null);
+		}
+
+		if (!mod._ValueNotesVisible.length) {
+			return mod.ControlNoteSelect(null);
+		}
+
+		mod.ValueNoteSelected(mod._ValueNotesVisible.filter(function (e) {
+			return KVCParser.KVCParserTitleForPlaintext(e.KVCNoteBody).toLowerCase() === inputData.toLowerCase();
+		}).concat(mod._ValueNotesVisible.filter(function (e) {
+			return KVCParser.KVCParserTitleForPlaintext(e.KVCNoteBody).toLowerCase().includes(inputData.toLowerCase());
+		})).shift());
 	},
 
 	// SETUP
