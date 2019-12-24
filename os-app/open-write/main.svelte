@@ -102,11 +102,11 @@ const mod = {
 		mod.ControlNotesExportTXT();
 	},
 
-	KVCWriteMasterDelegateItemTitle (param1, param2) {
-		return KVCWriteLogic.KVCWriteTruncatedTitleFor(KVCParser.KVCParserTitleForPlaintext(param1), param2);
+	KVCWriteMasterDelegateItemTitle (inputData) {
+		return KVCParser.KVCParserTitleForPlaintext(inputData);
 	},
 
-	KVCWriteMasterDelegateItemBody (inputData) {
+	KVCWriteMasterDelegateItemSnippet (inputData) {
 		return KVCParser.KVCParserSnippetForPlaintext(KVCParser.KVCParserBodyForPlaintext(inputData));
 	},
 
@@ -614,7 +614,7 @@ import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svel
 		KVCWriteMasterDispatchFilter={ mod.KVCWriteMasterDispatchFilter }
 		KVCWriteMasterDispatchExport={ mod.KVCWriteMasterDispatchExport }
 		KVCWriteMasterDelegateItemTitle={ mod.KVCWriteMasterDelegateItemTitle }
-		KVCWriteMasterDelegateItemBody={ mod.KVCWriteMasterDelegateItemBody }
+		KVCWriteMasterDelegateItemSnippet={ mod.KVCWriteMasterDelegateItemSnippet }
 		OLSKMobileViewInactive={ mod.OLSKMobileViewInactive }
 		/>
 	

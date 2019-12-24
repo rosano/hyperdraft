@@ -8,7 +8,7 @@ export let KVCWriteMasterDispatchArrow;
 export let KVCWriteMasterDispatchFilter;
 export let KVCWriteMasterDispatchExport;
 export let KVCWriteMasterDelegateItemTitle;
-export let KVCWriteMasterDelegateItemBody;
+export let KVCWriteMasterDelegateItemSnippet;
 export let OLSKMobileViewInactive = false;
 
 import OLSKInternational from 'OLSKInternational';
@@ -17,6 +17,7 @@ const OLSKLocalized = function(translationConstant) {
 };
 
 import { OLSK_TESTING_BEHAVIOUR } from 'OLSKTesting'
+import KVCWriteMasterLogic from './ui-logic.js';
 
 const mod = {
 
@@ -163,9 +164,9 @@ import KVCWriteMasterListItem from '../KVCWriteMasterListItem/main.svelte';
 		let:OLSKResultsListItem={ e }
 		>
 		<KVCWriteMasterListItem
-			KVCWriteMasterListItemAccessibilitySummary={ KVCWriteMasterDelegateItemTitle(e.KVCNoteBody, true) }
-			KVCWriteMasterListItemTitle={ KVCWriteMasterDelegateItemTitle(e.KVCNoteBody) }
-			KVCWriteMasterListItemSnippet={ KVCWriteMasterDelegateItemBody(e.KVCNoteBody) }
+			KVCWriteMasterListItemAccessibilitySummary={ KVCWriteMasterLogic.KVCWriteMasterTruncatedTitle(KVCWriteMasterDelegateItemTitle(e.KVCNoteBody), true) }
+			KVCWriteMasterListItemTitle={ KVCWriteMasterLogic.KVCWriteMasterTruncatedTitle(KVCWriteMasterDelegateItemTitle(e.KVCNoteBody)) }
+			KVCWriteMasterListItemSnippet={ KVCWriteMasterDelegateItemSnippet(e.KVCNoteBody) }
 			/>
 	</OLSKResults>
 

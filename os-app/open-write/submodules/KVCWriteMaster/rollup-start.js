@@ -25,7 +25,7 @@ const KVCWriteMaster = new RollupStart({
 		KVCWriteMasterDelegateItemTitle: (function _KVCWriteMasterDelegateItemTitle (inputData) {
 			return inputData.split('\n').shift();
 		}),
-		KVCWriteMasterDelegateItemBody: (function _KVCWriteMasterDelegateItemBody (inputData) {
+		KVCWriteMasterDelegateItemSnippet: (function _KVCWriteMasterDelegateItemSnippet (inputData) {
 			return inputData.split('\n').slice(1).join('\n');
 		}),
 	}, Object.fromEntries(Array.from((new window.URLSearchParams(window.location.search)).entries()).map(function (e, index, coll) {
