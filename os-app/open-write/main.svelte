@@ -128,6 +128,8 @@ const mod = {
 	},
 
 	KVCWriteDetailDispatchUpdate () {
+		mod._ValueNoteSelected = mod._ValueNoteSelected; // #purge-svelte-force-update
+		
 		mod.ControlNoteSave(mod._ValueNoteSelected);
 	},
 
@@ -171,8 +173,6 @@ const mod = {
 	// CONTROL
 
 	ControlNoteSave(inputData) {
-		mod._ValueNoteSelected = mod._ValueNoteSelected;
-
 		OLSKThrottle.OLSKThrottleMappedTimeout(mod._ValueSaveNoteThrottleMap, inputData.KVCNoteID, {
 			OLSKThrottleInput: inputData,
 			OLSKThrottleDuration: 500,
