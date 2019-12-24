@@ -1,17 +1,23 @@
-export const KVCWriteFilterFunction = function (inputData) {
-	if (typeof inputData !== 'string') {
-		throw new Error('KVCErrorInputNotValid');
-	}
+const mod = {
 
-	return function (e) {
-		return e.KVCNoteBody.toLowerCase().match(inputData.toLowerCase());
-	};
+	KVCWriteFilterFunction (inputData) {
+		if (typeof inputData !== 'string') {
+			throw new Error('KVCErrorInputNotValid');
+		}
+
+		return function (e) {
+			return !!e.KVCNoteBody.toLowerCase().match(inputData.toLowerCase());
+		};
+	},
+
+	KVCWriteLogicListSort (a, b) {
+		if (b.KVCNoteModificationDate && a.KVCNoteModificationDate) {
+			return b.KVCNoteModificationDate - a.KVCNoteModificationDate;
+		}
+
+		return b.KVCNoteCreationDate - a.KVCNoteCreationDate;
+	},
+
 };
 
-export const KVCWriteLogicListSort = function (a, b) {
-	if (b.KVCNoteModificationDate && a.KVCNoteModificationDate) {
-		return b.KVCNoteModificationDate - a.KVCNoteModificationDate;
-	}
-
-	return b.KVCNoteCreationDate - a.KVCNoteCreationDate;
-};
+Object.assign(exports, mod);
