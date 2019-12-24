@@ -102,6 +102,10 @@ const mod = {
 		mod.ControlNotesExportTXT();
 	},
 
+	KVCWriteMasterDispatchEscape () {
+		mod.ControlEscape();
+	},
+
 	KVCWriteMasterDelegateItemTitle (inputData) {
 		return KVCParser.KVCParserTitleForPlaintext(inputData);
 	},
@@ -631,6 +635,7 @@ import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svel
 		KVCWriteMasterDispatchClick={ mod.KVCWriteMasterDispatchClick }
 		KVCWriteMasterDispatchArrow={ mod.KVCWriteMasterDispatchArrow }
 		KVCWriteMasterDispatchFilter={ mod.KVCWriteMasterDispatchFilter }
+		KVCWriteMasterDispatchEscape={ mod.KVCWriteMasterDispatchEscape }
 		KVCWriteMasterDispatchExport={ mod.KVCWriteMasterDispatchExport }
 		KVCWriteMasterDelegateItemTitle={ mod.KVCWriteMasterDelegateItemTitle }
 		KVCWriteMasterDelegateItemSnippet={ mod.KVCWriteMasterDelegateItemSnippet }

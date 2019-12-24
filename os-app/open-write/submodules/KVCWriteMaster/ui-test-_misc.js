@@ -160,14 +160,17 @@ describe('KVCWriteMaster_Misc', function () {
 		});
 
 		context('clear', function () {
+		
+			before(function () {
+				browser.assert.text('#TestKVCWriteMasterDispatchEscape', '0');
+			});
 
 			before(function () {
 				return browser.pressButton('.OLSKInputWrapperClearButton');
 			});
 
-			it('sends KVCWriteMasterDispatchFilter', function () {
-				browser.assert.text('#TestKVCWriteMasterDispatchFilter', '2');
-				browser.assert.text('#TestKVCWriteMasterDispatchFilterData', '');
+			it('sends KVCWriteMasterDispatchEscape', function () {
+				browser.assert.text('#TestKVCWriteMasterDispatchEscape', '1');
 			});
 		
 		});

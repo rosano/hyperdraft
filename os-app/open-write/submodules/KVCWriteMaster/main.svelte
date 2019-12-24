@@ -6,6 +6,7 @@ export let KVCWriteMasterDispatchCreate;
 export let KVCWriteMasterDispatchClick;
 export let KVCWriteMasterDispatchArrow;
 export let KVCWriteMasterDispatchFilter;
+export let KVCWriteMasterDispatchEscape;
 export let KVCWriteMasterDispatchExport;
 export let KVCWriteMasterDelegateItemTitle;
 export let KVCWriteMasterDelegateItemSnippet;
@@ -20,12 +21,6 @@ import { OLSK_TESTING_BEHAVIOUR } from 'OLSKTesting'
 import KVCWriteMasterLogic from './ui-logic.js';
 
 const mod = {
-
-	// MESSAGE
-
-	OLSKInputWrapperDispatchClear () {
-		KVCWriteMasterDispatchFilter('');
-	},
 
 	// VALUE
 
@@ -136,7 +131,7 @@ import KVCWriteMasterListItem from '../KVCWriteMasterListItem/main.svelte';
 
 <header class="KVCWriteMasterToolbar OLSKMobileViewHeader">
 	<OLSKToolbar>
-		<OLSKInputWrapper OLSKInputWrapperValue={ KVCWriteMasterFilterText } OLSKInputWrapperDispatchClear={ mod.OLSKInputWrapperDispatchClear } >
+		<OLSKInputWrapper OLSKInputWrapperValue={ KVCWriteMasterFilterText } OLSKInputWrapperDispatchClear={ KVCWriteMasterDispatchEscape } >
 			<input class="KVCWriteMasterFilterField" placeholder={ OLSKLocalized('KVCWriteMasterFilterFieldText') } bind:value={ KVCWriteMasterFilterText } on:input={ mod.InterfaceFilterFieldDidInput } />
 		</OLSKInputWrapper>
 

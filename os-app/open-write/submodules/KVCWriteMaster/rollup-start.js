@@ -21,6 +21,9 @@ const KVCWriteMaster = new RollupStart({
 			window.TestKVCWriteMasterDispatchFilter.innerHTML = parseInt(window.TestKVCWriteMasterDispatchFilter.innerHTML) + 1;
 			window.TestKVCWriteMasterDispatchFilterData.innerHTML = inputData;
 		}),
+		KVCWriteMasterDispatchEscape: (function _KVCWriteMasterDispatchEscape () {
+			window.TestKVCWriteMasterDispatchEscape.innerHTML = parseInt(window.TestKVCWriteMasterDispatchEscape.innerHTML) + 1;
+		}),
 		KVCWriteMasterDispatchExport: (function _KVCWriteMasterDispatchExport () {}),
 		KVCWriteMasterDelegateItemTitle: (function _KVCWriteMasterDelegateItemTitle (inputData) {
 			return inputData.split('\n').shift();
