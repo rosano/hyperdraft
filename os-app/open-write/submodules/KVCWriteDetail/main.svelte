@@ -20,7 +20,7 @@ export const KVCWriteDetailSetItem = function (inputData) {
 	
 	mod.ControlConfigureEditor(function (inputData) {
 		if (!OLSK_TESTING_BEHAVIOUR()) {
-			document.querySelector('body').scrollIntoView(true);
+			document.body.scrollIntoView(true);
 		}
 	});
 };
