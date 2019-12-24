@@ -69,7 +69,7 @@ describe('WKCReadModuleSubscribeSuggestionsFor', function testWKCReadModuleSubsc
 		}), [
 			'https://alfa.com',
 			'http://alfa.com',
-			]);
+		]);
 	});
 
 	it('returns urls from domain with slash', function() {
@@ -78,7 +78,7 @@ describe('WKCReadModuleSubscribeSuggestionsFor', function testWKCReadModuleSubsc
 		}), [
 			'https://alfa.com/bravo',
 			'http://alfa.com/bravo',
-			]);
+		]);
 	});
 
 	it('returns urls from domain with slash and query', function() {
@@ -87,7 +87,7 @@ describe('WKCReadModuleSubscribeSuggestionsFor', function testWKCReadModuleSubsc
 		}), [
 			'https://alfa.com/bravo?charlie=delta',
 			'http://alfa.com/bravo?charlie=delta',
-			]);
+		]);
 	});
 
 	it('returns https if no http', function() {
@@ -95,7 +95,7 @@ describe('WKCReadModuleSubscribeSuggestionsFor', function testWKCReadModuleSubsc
 			return e.WKCSuggestionURL;
 		}), [
 			'https://alfa.com/bravo',
-			]);
+		]);
 	});
 
 	it('returns none if https', function() {
@@ -113,19 +113,19 @@ describe('WKCReadModuleSubscribeSuggestionsFor', function testWKCReadModuleSubsc
 		it('returns url if letters', function() {
 			assert.deepEqual(suggestLibrary.WKCReadModuleSubscribeSuggestionsFor('@alfa'), [
 				kTestingSuggestionTwitterFor('alfa'),
-				]);
+			]);
 		});
 
 		it('returns url if numbers', function() {
 			assert.deepEqual(suggestLibrary.WKCReadModuleSubscribeSuggestionsFor('@alfa1'), [
 				kTestingSuggestionTwitterFor('alfa1'),
-				]);
+			]);
 		});
 
 		it('returns url if underscore', function() {
 			assert.deepEqual(suggestLibrary.WKCReadModuleSubscribeSuggestionsFor('@alfa_bravo'), [
 				kTestingSuggestionTwitterFor('alfa_bravo'),
-				]);
+			]);
 		});
 
 		it('returns none if hyphen', function() {
@@ -139,31 +139,31 @@ describe('WKCReadModuleSubscribeSuggestionsFor', function testWKCReadModuleSubsc
 		it('returns url if standard url', function() {
 			assert.deepEqual(suggestLibrary.WKCReadModuleSubscribeSuggestionsFor('https://twitter.com/alfa'), [
 				kTestingSuggestionTwitterFor('alfa'),
-				]);
+			]);
 		});
 
 		it('returns url if www', function() {
 			assert.deepEqual(suggestLibrary.WKCReadModuleSubscribeSuggestionsFor('https://www.twitter.com/alfa'), [
 				kTestingSuggestionTwitterFor('alfa'),
-				]);
+			]);
 		});
 
 		it('returns url if hash bang', function() {
 			assert.deepEqual(suggestLibrary.WKCReadModuleSubscribeSuggestionsFor('https://twitter.com/#!/alfa'), [
 				kTestingSuggestionTwitterFor('alfa'),
-				]);
+			]);
 		});
 
 		it('returns url if intent/user\?screen_name=', function() {
 			assert.deepEqual(suggestLibrary.WKCReadModuleSubscribeSuggestionsFor('https://twitter.com/intent/user?screen_name=alfa'), [
 				kTestingSuggestionTwitterFor('alfa'),
-				]);
+			]);
 		});
 
 		it('returns url if @username', function() {
 			assert.deepEqual(suggestLibrary.WKCReadModuleSubscribeSuggestionsFor('https://twitter.com/@alfa'), [
 				kTestingSuggestionTwitterFor('alfa'),
-				]);
+			]);
 		});
 
 		it('returns none if search', function() {
