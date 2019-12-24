@@ -504,6 +504,7 @@ const mod = {
 		});
 
 		mod._ValueStorageClient.remoteStorage.on('sync-done', () => {
+			return;
 			if (!OLSK_TESTING_BEHAVIOUR()) {
 				console.debug('sync-done', arguments);
 			}
