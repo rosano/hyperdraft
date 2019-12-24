@@ -114,6 +114,21 @@ const mod = {
 		// mod.ControlNoteSelect(null);
 
 		mod.OLSKMobileViewInactive = false;
+
+		if (!mod.DataIsMobile()) {
+			return;
+		}
+
+		const element = document.querySelector('.OLSKResultsListItemSelected');
+
+		if (!element) {
+			return;
+		}
+
+		element.scrollIntoView({
+			block: 'center',
+			inline: 'center',
+		});
 	},
 
 	KVCWriteDetailDispatchJump (inputData) {
