@@ -289,9 +289,9 @@ const mod = {
 			return e !== inputData;
 		}))
 
-		await KVCNoteAction.KVCNoteActionDelete(mod._ValueStorageClient, inputData.KVCNoteID);
-
 		mod.ControlNoteSelect(null);
+
+		await KVCNoteAction.KVCNoteActionDelete(mod._ValueStorageClient, inputData.KVCNoteID);
 	},
 	
 	ControlFilter(inputData) {
