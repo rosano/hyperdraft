@@ -17,23 +17,21 @@ export const KVCWriteDetailSetItem = function (inputData) {
 	}
 	
 	mod.ControlConfigureEditor(function (inputData) {
-		inputData.KVCWriteEditorSetValue(mod._ValueItem.KVCNoteBody);
+		if (!OLSK_TESTING_BEHAVIOUR()) {
+			document.querySelector('body').scrollIntoView(true);
+		}
 	});
-
-	if (!OLSK_TESTING_BEHAVIOUR()) {
-		document.querySelector('body').scrollIntoView(true);
-	}
 };
 
 export const KVCWriteDetailEditorFocus = function () {
 	mod.ControlConfigureEditor(function (inputData) {
-		inputData.KVCWriteEditorFocus();
+		inputData.KVCWriteInputFocus();
 	});
 };
 
 export const KVCWriteDetailSetCursor = function (param1, param2) {
 	mod.ControlConfigureEditor(function (inputData) {
-		inputData.KVCWriteEditorSetCursor(param1, param2);
+		inputData.KVCWriteInputSetCursor(param1, param2);
 	});
 };
 
@@ -48,23 +46,21 @@ const mod = {
 
 	// MESSAGE
 
-	KVCWriteEditorDispatchHeaderTokens (inputData) {
+	KVCWriteInputDispatchHeaderTokens (inputData) {
 		mod._ValueHeaderTokens = inputData;
 	},
 
-	KVCWriteEditorDispatchUpdate (inputData) {
-		mod._ValueItem.KVCNoteBody = inputData;
-		
+	KVCWriteInputDispatchUpdate () {
 		KVCWriteDetailDispatchUpdate();
 	},
 
-	KVCWriteEditorDispatchOpen (inputData) {
+	KVCWriteInputDispatchOpen (inputData) {
 		KVCWriteDetailDispatchOpen(inputData);
 	},
 
-	KVCWriteEditorDispatchReady () {
+	KVCWriteInputDispatchReady () {
 		mod._ValueEditorPostInitializeQueue.splice(0, mod._ValueEditorPostInitializeQueue.length).forEach(function(e) {
-			return e(mod.KVCWriteEditorInstance);
+			return e(mod.KVCWriteInputInstance);
 		});
 	},
 
@@ -76,7 +72,7 @@ const mod = {
 
 	_ValueEditorPostInitializeQueue: [],
 
-	KVCWriteEditorInstance: undefined,
+	KVCWriteInputInstance: undefined,
 
 	// INTERFACE
 
@@ -97,9 +93,9 @@ const mod = {
 	// CONTROL
 
 	ControlConfigureEditor (inputData) {
-		// console.log(mod.KVCWriteEditorInstance ? 'run' : 'queue', inputData);
-		if (mod.KVCWriteEditorInstance) {
-			return inputData(mod.KVCWriteEditorInstance);
+		// console.log(mod.KVCWriteInputInstance ? 'run' : 'queue', inputData);
+		if (mod.KVCWriteInputInstance) {
+			return inputData(mod.KVCWriteInputInstance);
 		};
 
 		mod._ValueEditorPostInitializeQueue.push(inputData);
@@ -110,8 +106,8 @@ const mod = {
 			return {
 				LCHRecipeName: e.string,
 				LCHRecipeCallback () {
-					mod.KVCWriteEditorInstance.KVCWriteEditorScrollIntoView(e.line, e.start);
-					mod.KVCWriteEditorInstance.KVCWriteEditorSetSelection(e.line, e.start, e.line, e.end);
+					mod.KVCWriteInputInstance.KVCWriteInputScrollIntoView(e.line, e.start);
+					mod.KVCWriteInputInstance.KVCWriteInputSetSelection(e.line, e.start, e.line, e.end);
 				},
 			};
 		}));
@@ -128,7 +124,7 @@ import _KVCWritePublish from './ui-assets/_KVCWritePublish.svg';
 import _KVCWriteRetract from './ui-assets/_KVCWriteRetract.svg';
 import _KVCWriteVersions from './ui-assets/_KVCWriteVersions.svg';
 import _OLSKSharedDiscard from '../../../_shared/__external/OLSKUIAssets/_OLSKSharedDiscard.svg';
-import KVCWriteEditor from '../KVCWriteEditor/main.svelte';
+import KVCWriteInput from '../KVCWriteInput/main.svelte';
 </script>
 <svelte:window on:keydown={ mod.InterfaceWindowDidKeydown }/>
 
@@ -179,12 +175,14 @@ import KVCWriteEditor from '../KVCWriteEditor/main.svelte';
 	</OLSKToolbar>
 </header>
 
-<KVCWriteEditor
-	KVCWriteEditorDispatchHeaderTokens={ mod.KVCWriteEditorDispatchHeaderTokens }
-	KVCWriteEditorDispatchUpdate={ mod.KVCWriteEditorDispatchUpdate }
-	KVCWriteEditorDispatchOpen={ mod.KVCWriteEditorDispatchOpen }
-	KVCWriteEditorDispatchReady={ mod.KVCWriteEditorDispatchReady }
-	bind:this={ mod.KVCWriteEditorInstance }
+<KVCWriteInput
+	KVCWriteInputItem={ mod._ValueItem }
+	KVCWriteInputKey={ 'KVCNoteBody' }
+	KVCWriteInputDispatchHeaderTokens={ mod.KVCWriteInputDispatchHeaderTokens }
+	KVCWriteInputDispatchUpdate={ mod.KVCWriteInputDispatchUpdate }
+	KVCWriteInputDispatchOpen={ mod.KVCWriteInputDispatchOpen }
+	KVCWriteInputDispatchReady={ mod.KVCWriteInputDispatchReady }
+	bind:this={ mod.KVCWriteInputInstance }
 	/>
 {/if}
 

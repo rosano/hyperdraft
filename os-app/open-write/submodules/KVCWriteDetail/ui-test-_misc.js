@@ -150,11 +150,11 @@ describe('KVCWriteDetail_Misc', function () {
 		
 		});
 		
-		context('KVCWriteEditorDispatchHeaderTokens', function() {
+		context('KVCWriteInputDispatchHeaderTokens', function() {
 
 			before(function() {
 				// browser.fill('CodeMirror', 'bravo');
-				browser.fill('.KVCWriteEditorFieldDebug', '# bravo');
+				browser.fill('.KVCWriteInputFieldDebug', '# bravo');
 			});
 
 			it('sets disabled', function() {
@@ -403,7 +403,7 @@ describe('KVCWriteDetail_Misc', function () {
 	
 	});
 	
-	describe('KVCWriteEditor', function test_KVCWriteEditor() {
+	describe('KVCWriteInput', function test_KVCWriteInput() {
 		
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
@@ -418,7 +418,7 @@ describe('KVCWriteDetail_Misc', function () {
 		});
 			
 		it('binds KVCNoteBody', function () {
-			browser.assert.input('.KVCWriteEditorFieldDebug', 'alfa');
+			browser.assert.input('.KVCWriteInputFieldDebug', 'alfa');
 		});
 
 		context.skip('WKCDetailFocus', function () {
@@ -451,7 +451,7 @@ describe('KVCWriteDetail_Misc', function () {
 
 			before(function () {
 				// browser.fill('CodeMirror', 'bravo');
-				browser.fill('.KVCWriteEditorFieldDebug', 'bravo');
+				browser.fill('.KVCWriteInputFieldDebug', 'bravo');
 			});
 
 			it('updates LCHWriteDetailItem', function () {

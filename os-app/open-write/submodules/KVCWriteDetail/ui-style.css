@@ -45,15 +45,15 @@
 
 }
 
-.KVCWriteDetail :global(.KVCWriteEditor) {
+.KVCWriteDetail :global(.KVCWriteInput) {
 	/* KVCWriteDetailFlexbox:Child */
 	flex-grow: 1;
 }
 
 @media screen and (min-width: 760px) {
 
-.KVCWriteDetail :global(.KVCWriteEditor) {
-	/* KVCWriteEditorStation:Parent */
+.KVCWriteDetail :global(.KVCWriteInput) {
+	/* KVCWriteInputStation:Parent */
 	position: relative;
 }
 
@@ -61,7 +61,7 @@
 
 @media screen and (max-width: 760px) {
 
-.KVCWriteDetail :global(.KVCWriteEditor) {
+.KVCWriteDetail :global(.KVCWriteInput) {
 	min-height: 100%;
 }
 
@@ -79,7 +79,7 @@
 .KVCWriteDetail :global(.CodeMirror) {
 	height: 100%;
 
-	/* KVCWriteEditorStation:Child */
+	/* KVCWriteInputStation:Child */
 	position: absolute;
 	top: 0;
 	bottom: 0;

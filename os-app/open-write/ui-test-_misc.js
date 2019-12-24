@@ -54,7 +54,7 @@ describe('KVCWrite_Misc', function () {
 			browser.assert.elements('.OLSKDetailPlaceholder', 0);
 		});
 
-		it.skip('focus KVCWriteEditor', function() {
+		it.skip('focus KVCWriteInput', function() {
 			browser.assert.hasClass('.CodeMirror', 'CodeMirror-focused');
 		});
 
@@ -128,7 +128,7 @@ describe('KVCWrite_Misc', function () {
 				browser.assert.hasNoClass('.KVCWriteMaster', 'KVCWriteMasterFocused');
 			});
 
-			it.skip('focus KVCWriteEditor', function() {
+			it.skip('focus KVCWriteInput', function() {
 				browser.assert.hasClass('.CodeMirror', 'CodeMirror-focused');
 			});
 		
@@ -144,7 +144,7 @@ describe('KVCWrite_Misc', function () {
 				browser.assert.hasClass('.KVCWriteMaster', 'KVCWriteMasterFocused');
 			});
 
-			it.skip('focus KVCWriteEditor', function() {
+			it.skip('focus KVCWriteInput', function() {
 				browser.assert.hasNoClass('.CodeMirror', 'CodeMirror-focused');
 			});
 		
@@ -155,7 +155,7 @@ describe('KVCWrite_Misc', function () {
 	context('escape', function test_escape () {
 
 		before(function () {
-			browser.fill('.KVCWriteEditorFieldDebug', 'alfa');
+			browser.fill('.KVCWriteInputFieldDebug', 'alfa');
 		});
 
 		before(function () {
@@ -167,11 +167,11 @@ describe('KVCWrite_Misc', function () {
 		});
 
 		before(function () {
-			browser.query('.KVCWriteEditorFieldDebug').focus();
+			browser.query('.KVCWriteInputFieldDebug').focus();
 		});
 
 		before(function () {
-			deepEqual(browser.activeElement, browser.query('.KVCWriteEditorFieldDebug'));
+			deepEqual(browser.activeElement, browser.query('.KVCWriteInputFieldDebug'));
 		});
 
 		before(function () {
@@ -218,7 +218,7 @@ describe('KVCWrite_Misc', function () {
 			browser.assert.elements('.OLSKDetailPlaceholder', 0);
 		});
 
-		it.skip('focus KVCWriteEditor', function() {
+		it.skip('focus KVCWriteInput', function() {
 			browser.assert.hasClass('.CodeMirror', 'CodeMirror-focused');
 		});
 
@@ -231,7 +231,7 @@ describe('KVCWrite_Misc', function () {
 		});
 
 		before(function () {
-			browser.fill('.KVCWriteEditorFieldDebug', 'bravo');
+			browser.fill('.KVCWriteInputFieldDebug', 'bravo');
 		});
 
 		context('no match', function () {
@@ -329,7 +329,7 @@ describe('KVCWrite_Misc', function () {
 		context('arrow', function () {
 
 			before(function () {
-				return browser.query('.KVCWriteEditorFieldDebug').focus();
+				return browser.query('.KVCWriteInputFieldDebug').focus();
 			});
 
 			before(function () {
@@ -347,7 +347,7 @@ describe('KVCWrite_Misc', function () {
 	context('jump', function test_jump () {
 
 		before(function () {
-			return browser.fill('.KVCWriteEditorFieldDebug', '# alfa');
+			return browser.fill('.KVCWriteInputFieldDebug', '# alfa');
 		});
 
 		before(function () {
@@ -364,7 +364,7 @@ describe('KVCWrite_Misc', function () {
 
 		context('execute', function () {
 
-			it.skip('focus KVCWriteEditor', function() {
+			it.skip('focus KVCWriteInput', function() {
 				browser.assert.hasClass('.CodeMirror', 'CodeMirror-focused');
 			});
 		
@@ -409,7 +409,7 @@ describe('KVCWrite_Misc', function () {
 		context('title', function () {
 			
 			before(function () {
-				browser.fill('.KVCWriteEditorFieldDebug', 'alfa');
+				browser.fill('.KVCWriteInputFieldDebug', 'alfa');
 			});
 
 			it('sets KVCWriteMasterListItemAccessibilitySummary', function () {
@@ -429,7 +429,7 @@ describe('KVCWrite_Misc', function () {
 		context('body', function () {
 			
 			before(function () {
-				browser.fill('.KVCWriteEditorFieldDebug', 'alfa\nbravo');
+				browser.fill('.KVCWriteInputFieldDebug', 'alfa\nbravo');
 			});
 
 			it('sets KVCWriteMasterListItemAccessibilitySummary', function () {
@@ -449,7 +449,7 @@ describe('KVCWrite_Misc', function () {
 		context('long title', function () {
 			
 			before(function () {
-				browser.fill('.KVCWriteEditorFieldDebug', 'alfa bravo charlie delta echo foxtrot golf hotel juliet kilos');
+				browser.fill('.KVCWriteInputFieldDebug', 'alfa bravo charlie delta echo foxtrot golf hotel juliet kilos');
 			});
 
 			it('sets KVCWriteMasterListItemAccessibilitySummary', function () {
@@ -469,7 +469,7 @@ describe('KVCWrite_Misc', function () {
 		context('long body', function () {
 			
 			before(function () {
-				browser.fill('.KVCWriteEditorFieldDebug', '\nLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.');
+				browser.fill('.KVCWriteInputFieldDebug', '\nLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.');
 			});
 
 			it('sets KVCWriteMasterListItemAccessibilitySummary', function () {

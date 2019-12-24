@@ -41,8 +41,8 @@ describe('KVCWriteDetail_Access', function () {
 		browser.assert.elements(KVCWriteDetailToolbar, 0);
 	});
 
-	it('hides KVCWriteEditor', function () {
-		browser.assert.elements('.KVCWriteEditor', 0);
+	it('hides KVCWriteInput', function () {
+		browser.assert.elements('.KVCWriteInput', 0);
 	});
 
 	context('KVCWriteDetailItem', function() {
@@ -115,8 +115,8 @@ describe('KVCWriteDetail_Access', function () {
 			browser.assert.elements(KVCWriteDetailToolbarDiscardButtonImage, 1);
 		});
 
-		it('shows KVCWriteEditor', function () {
-			browser.assert.elements('.KVCWriteEditor', 1);
+		it('shows KVCWriteInput', function () {
+			browser.assert.elements('.KVCWriteInput', 1);
 		});
 		
 	});
