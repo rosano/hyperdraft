@@ -25,6 +25,12 @@ export const KVCWriteDetailSetItem = function (inputData) {
 	});
 };
 
+export const _KVCWriteDetailTriggerUpdate = function () {
+	mod.ControlConfigureEditor(function (inputData) {
+		inputData._KVCWriteInputTriggerUpdate();
+	});
+};
+
 export const KVCWriteDetailEditorFocus = function () {
 	mod.ControlConfigureEditor(function (inputData) {
 		inputData.KVCWriteInputFocus();

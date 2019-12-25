@@ -278,6 +278,11 @@ const mod = {
 		mod.KVCWriteDetailInstance.KVCWriteDetailSetCursor(inputData.split('\n').length - 1, 0);
 	},
 	
+	_ControlHotfixUpdateInPlace(inputData) {
+		mod.ControlNoteSelect(inputData);
+		mod.KVCWriteDetailInstance._KVCWriteDetailTriggerUpdate();
+	},
+	
 	ControlNoteSelect(inputData) {
 		mod.ValueNoteSelected(inputData);
 
@@ -499,7 +504,7 @@ const mod = {
 									}
 
 									if (mod._ValueNoteSelected && (mod._ValueNoteSelected.KVCNoteID === inputData.KVCNoteID)) {
-										mod.ControlNoteSelect(Object.assign(mod._ValueNoteSelected, inputData));
+										mod._ControlHotfixUpdateInPlace(Object.assign(mod._ValueNoteSelected, inputData));
 									}
 
 									mod.ValueNotesAll(mod._ValueNotesAll.map(function (e) {

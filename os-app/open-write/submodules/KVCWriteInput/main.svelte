@@ -7,6 +7,12 @@ export let KVCWriteInputDispatchOpen;
 export let KVCWriteInputDispatchReady;
 export let KVCWriteInputDispatchEscape;
 
+export const _KVCWriteInputTriggerUpdate = function () {
+	mod.ControlConfigureEditor(function (inputData) {
+		inputData.setValue(KVCWriteInputItem[KVCWriteInputKey]);
+	});
+};
+
 export const KVCWriteInputFocus = function () {
 	mod.ControlConfigureEditor(function (inputData) {
 		inputData.focus();
