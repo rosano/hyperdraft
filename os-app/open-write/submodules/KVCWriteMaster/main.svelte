@@ -159,7 +159,7 @@ import KVCWriteMasterListItem from '../KVCWriteMasterListItem/main.svelte';
 	</OLSKResults>
 
 	<div class="KVCWriteMasterDebug">
-		<button class="KVCWriteExportButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle" on:click={ mod.InterfaceExportButtonDidClick }>{ OLSKLocalized('WKCUpdateExportText') }</button>
+		<button class="KVCWriteExportButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle" on:click={ mod.InterfaceExportButtonDidClick }>{ OLSKLocalized('KVCWriteExportButtonText') }</button>
 	</div>
 </section>
 

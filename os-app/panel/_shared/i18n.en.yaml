@@ -4,4 +4,3 @@ WKSharedErrorServiceUnavailable: Connection error
 WKSharedErrorTokenUnavailable: Authentication error
 WKCUpdateAvailableText: Update available
 WKCUpdateReloadText: Reload
-WKCUpdateExportText: Export
