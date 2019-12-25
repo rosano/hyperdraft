@@ -28,6 +28,14 @@ export const KVCNoteStorage = function (privateClient, publicClient, changeDeleg
 			return console.warn(`${ delegateMethod } not function`);
 		}
 
+
+		if (event.origin === 'remote' && event.oldValue && event.newValue) {
+			// #hotfix-remotestorage-remote-event-from-local-change
+			if (JSON.stringify(event.oldValue) === JSON.stringify(event.newValue)) {
+				return console.info('RemoteIdentical', event);
+			}
+		}
+
 		changeDelegate[delegateMethod](KVCNoteModel.KVCNoteModelPostJSONParse(event[OLSKRemoteStorage.OLSKRemoteStorageChangeDelegateInput(delegateMethod)]));
 	});
 
