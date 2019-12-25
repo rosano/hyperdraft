@@ -328,7 +328,7 @@ const mod = {
 	async ControlNoteDiscard (inputData) {
 		mod.ValueNotesAll(mod._ValueNotesAll.filter(function (e) {
 			return e !== inputData;
-		}))
+		}), false);
 
 		mod.ControlNoteSelect(null);
 
