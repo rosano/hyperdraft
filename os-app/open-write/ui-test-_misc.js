@@ -531,7 +531,7 @@ describe('KVCWrite_Misc', function () {
 		});
 
 		it('redirects', function() {
-			browser.assert.url('http://loc.tests' + require('./controller.js').OLSKControllerRoutes().shift().OLSKRoutePath);
+			browser.assert.url('http://' + browser.site + require('./controller.js').OLSKControllerRoutes().shift().OLSKRoutePath);
 		});
 	
 	});

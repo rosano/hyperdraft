@@ -1,3 +1,12 @@
+(function KVCMochaBrowerHost() {
+	if (process.env.OLSK_TESTING_BEHAVIOUR !== 'true') {
+		return;
+	}
+
+	browser.site = process.env.KVC_SHARED_REF_HOST + ':3000';
+})();
+
+
 (function KVCMochaMongo() {
 	var mongodbPackage = require('mongodb');
 

@@ -4,7 +4,7 @@ const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
 describe('KVCWrite_Ref', function () {
 
-	const stubURL = function (inputData, host = 'loc.tests') {
+	const stubURL = function (inputData, host) {
 		return `http://${ host }:3000${ typeof inputData === 'string' ? inputData : inputData.OLSKRoutePath }`
 	};
 
@@ -29,7 +29,7 @@ describe('KVCWrite_Ref', function () {
 		context('other host', function () {
 
 			before(function() {
-				return browser.OLSKVisit(kDefaultRoute);
+				return browser.visit(stubURL(kDefaultRoute, 'loc.tests'));
 			});
 
 			before(function () {
@@ -65,7 +65,7 @@ describe('KVCWrite_Ref', function () {
 		context('other host', function () {
 
 			before(function() {
-				return browser.OLSKVisit(kDefaultRoute);
+				return browser.visit(stubURL(kDefaultRoute, 'loc.tests'));
 			});
 
 			before(function () {
