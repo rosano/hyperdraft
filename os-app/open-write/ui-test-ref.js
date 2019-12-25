@@ -2,7 +2,7 @@ import { deepEqual } from 'assert';
 
 const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
-describe.only('KVCWrite_Ref', function () {
+describe('KVCWrite_Ref', function () {
 
 	const stubURL = function (inputData, host = 'loc.tests') {
 		return `http://${ host }:3000${ typeof inputData === 'string' ? inputData : inputData.OLSKRoutePath }`
