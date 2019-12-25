@@ -95,7 +95,7 @@ exports.OLSKControllerTasks = function () {
 
 exports.OLSKControllerRoutes = function() {
 	return {
-		WKCRouteHome: {
+		KVCRefHomeRoute: {
 			OLSKRoutePath: '/',
 			OLSKRouteMethod: 'get',
 			OLSKRouteFunction (req, res, next) {

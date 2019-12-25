@@ -111,5 +111,5 @@ exports.WKCLoginSubmitAction = function(req, res, next) {
 exports.WKCLoginDestroyAction = function(req, res, next) {
 	req.session = null;
 
-	return res.redirect(res.locals.OLSKCanonicalFor('WKCRouteHome'));
+	return res.redirect(res.locals.OLSKCanonicalFor('KVCRefHomeRoute'));
 };

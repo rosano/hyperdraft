@@ -8,7 +8,7 @@ exports.OLSKControllerRoutes = function() {
 			OLSKRouteFunction (req, res, next) {
 				return res.render(req.OLSKLive.OLSKLivePathJoin(__dirname, 'view'), {
 					WKCRobotsAllowedRouteConstants: process.env.WKC_ROBOTS_ALLOWED === 'true' ? [
-						'WKCRouteHome',
+						'KVCRefHomeRoute',
 					] : [],
 				});
 			},
