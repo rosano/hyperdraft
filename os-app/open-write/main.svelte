@@ -154,6 +154,10 @@ const mod = {
 	},
 
 	KVCWriteDetailDispatchDiscard () {
+		if (mod.DataIsMobile()) {
+			mod.KVCWriteDetailDispatchBack();
+		}
+		
 		mod.ControlNoteDiscard(mod._ValueNoteSelected);
 	},
 
