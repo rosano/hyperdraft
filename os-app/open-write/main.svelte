@@ -504,7 +504,7 @@ const mod = {
 
 									mod.ValueNotesAll(mod._ValueNotesAll.map(function (e) {
 										return Object.assign(e, e.KVCNoteID === inputData.KVCNoteID ? inputData : {});
-									}), false);
+									}), !mod._ValueNoteSelected);
 								},
 								OLSKChangeDelegateDelete (inputData) {
 									// console.log('OLSKChangeDelegateDelete', inputData);
