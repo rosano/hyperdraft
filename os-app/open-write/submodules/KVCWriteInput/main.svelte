@@ -113,7 +113,7 @@ const mod = {
 			return Math.max(e.start, Math.min(e.end, cursor.ch)) === cursor.ch;
 		}).shift();
 
-		if (!currentObject.type.match('link')) {
+		if (!currentObject || !currentObject.type || !currentObject.type.match('link')) {
 			return;
 		}
 
