@@ -10,5 +10,6 @@ exports.OLSKControllerRoutes = function() {
 		OLSKRouteMiddlewares: [
 			'KVCSharedDonateLinkGuardMiddleware',
 		],
+		_OLSKRouteSkipLanguageRedirect: true,
 	}];
 };
