@@ -10,6 +10,7 @@ export let KVCWriteDetailDispatchOpen;
 export let KVCWriteDetailDispatchEscape;
 export let OLSKMobileViewInactive = false;
 export let _KVCWriteDetailVersionsIsDisabled = false;
+export let _KVCWriteDetailPublishIsDisabled = false;
 
 export const KVCWriteDetailSetItem = function (inputData) {
 	mod._ValueItem = inputData;
@@ -160,20 +161,22 @@ import KVCWriteInput from '../KVCWriteInput/main.svelte';
 				<div class="KVCWriteDetailToolbarJumpButtonImage">{@html _KVCWriteJump }</div>
 			</button>
 
-			{#if !mod._ValueItem.KVCNotePublishStatusIsPublished }
-				<button class="KVCWriteDetailToolbarPublishButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarPublishButtonText') } on:click={ () => KVCWriteDetailDispatchPublish() }>
-					<div class="KVCWriteDetailToolbarPublishButtonImage">{@html _KVCWritePublish }</div>
-				</button>
-			{/if}
+			{#if !_KVCWriteDetailPublishIsDisabled}
+				{#if !mod._ValueItem.KVCNotePublishStatusIsPublished }
+					<button class="KVCWriteDetailToolbarPublishButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarPublishButtonText') } on:click={ () => KVCWriteDetailDispatchPublish() }>
+						<div class="KVCWriteDetailToolbarPublishButtonImage">{@html _KVCWritePublish }</div>
+					</button>
+				{/if}
 
-			{#if mod._ValueItem.KVCNotePublishStatusIsPublished }
-				<a class="KVCWriteDetailToolbarPublicLink" href={ window.OLSKCanonicalFor('KVCRefReadRoute', {
-					kvc_note_public_id: mod._ValueItem.KVCNotePublicID,
-				}) } target="_blank">{ OLSKLocalized('KVCWriteDetailToolbarPublicLinkText') }</a>
-					
-				<button class="KVCWriteDetailToolbarRetractButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarRetractButtonText') } on:click={ () => KVCWriteDetailDispatchRetract() }>
-					<div class="KVCWriteDetailToolbarRetractButtonImage">{@html _KVCWriteRetract }</div>
-				</button>
+				{#if mod._ValueItem.KVCNotePublishStatusIsPublished }
+					<a class="KVCWriteDetailToolbarPublicLink" href={ window.OLSKCanonicalFor('KVCRefReadRoute', {
+						kvc_note_public_id: mod._ValueItem.KVCNotePublicID,
+					}) } target="_blank">{ OLSKLocalized('KVCWriteDetailToolbarPublicLinkText') }</a>
+						
+					<button class="KVCWriteDetailToolbarRetractButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarRetractButtonText') } on:click={ () => KVCWriteDetailDispatchRetract() }>
+						<div class="KVCWriteDetailToolbarRetractButtonImage">{@html _KVCWriteRetract }</div>
+					</button>
+				{/if}
 			{/if}
 
 			{#if !_KVCWriteDetailVersionsIsDisabled}

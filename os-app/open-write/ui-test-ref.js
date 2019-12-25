@@ -44,4 +44,40 @@ describe.only('KVCWrite_Ref', function () {
 		
 	});
 
+	describe('KVCWriteDetailToolbarPublishButton', function () {
+
+		context('KVC_SHARED_REF_HOST', function () {
+
+			before(function() {
+				return browser.visit(stubURL(kDefaultRoute, process.env.KVC_SHARED_REF_HOST));
+			});
+
+			before(function () {
+				return browser.pressButton('.KVCWriteMasterCreateButton');
+			});
+
+			it('shows KVCWriteDetailToolbarPublishButton', function () {
+				browser.assert.elements(KVCWriteDetailToolbarPublishButton, 1);
+			});
+		
+		});
+
+		context('other host', function () {
+
+			before(function() {
+				return browser.OLSKVisit(kDefaultRoute);
+			});
+
+			before(function () {
+				return browser.pressButton('.KVCWriteMasterCreateButton');
+			});
+
+			it('hides KVCWriteDetailToolbarPublishButton', function () {
+				browser.assert.elements('.KVCWriteDetailToolbarPublishButton', 0);
+			});
+		
+		});		
+		
+	});
+
 });
