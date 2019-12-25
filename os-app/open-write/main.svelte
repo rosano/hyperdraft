@@ -129,9 +129,11 @@ const mod = {
 			return;
 		}
 
-		element.scrollIntoView({
-			block: 'center',
-			inline: 'center',
+		setTimeout(function () {
+			element.scrollIntoView({
+				block: 'center',
+				inline: 'center',
+			});
 		});
 	},
 
