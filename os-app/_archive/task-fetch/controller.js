@@ -8,8 +8,8 @@ const requestPackage = require('request');
 const jsdomPackage = require('jsdom');
 
 const typeLibrary = require('OLSKType');
-var KVCDiff = require('../_shared/KVCDiff/main.js');
-var KVCParser = require('../_shared/KVCParser/main.js');
+var KVCDiff = require('../../_shared/KVCDiff/main.js');
+var KVCParser = require('../../_shared/KVCParser/main.js');
 
 var apiSubscriptionsModel = require('../api/auth-subscriptions/model');
 var apiSubscriptionsMetal = require('../api/auth-subscriptions/metal');

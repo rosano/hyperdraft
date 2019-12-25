@@ -46,7 +46,7 @@ describe('OLSKControllerSharedMiddlewares', function testOLSKControllerSharedMid
 
 });
 
-describe('WKCAPIMiddlewareAuthenticate', function testWKCAPIMiddlewareAuthenticate() {
+describe.skip('WKCAPIMiddlewareAuthenticate', function testWKCAPIMiddlewareAuthenticate() {
 
 	it('returns next(WKCAPIClientError) without header', function() {
 		assert.deepEqual(controllerModule.WKCAPIMiddlewareAuthenticate(OLSKTesting.OLSKTestingFakeRequestForHeaders(), OLSKTesting.OLSKTestingFakeResponseForJSON(), OLSKTesting.OLSKTestingFakeNext()), new Error('WKCAPIClientErrorAuthenticationTokenNotSet'));
@@ -94,7 +94,7 @@ describe('OLSKControllerSharedErrorHandlers', function testOLSKControllerSharedE
 
 });
 
-describe('WKCAPIErrorHandler', function testWKCAPIErrorHandler() {
+describe.skip('WKCAPIErrorHandler', function testWKCAPIErrorHandler() {
 
 	it('returns WKCAPISystemError for WKCAPISystemError', function() {
 		var res = OLSKTesting.OLSKTestingFakeResponseForStatus();
@@ -127,7 +127,7 @@ describe('WKCAPIErrorHandler', function testWKCAPIErrorHandler() {
 
 });
 
-describe('WKCActionAPIRoot', function testWKCActionAPIRoot() {
+describe.skip('WKCActionAPIRoot', function testWKCActionAPIRoot() {
 
 	it('returns confirmation authenticated', function() {
 		assert.deepEqual(controllerModule.WKCActionAPIRoot(OLSKTesting.OLSKTestingFakeRequestForHeaders({
@@ -139,7 +139,7 @@ describe('WKCActionAPIRoot', function testWKCActionAPIRoot() {
 
 });
 
-describe('WKCActionAPIToken', function testWKCActionAPIToken() {
+describe.skip('WKCActionAPIToken', function testWKCActionAPIToken() {
 
 	it('returns access token', function() {
 		assert.deepEqual(controllerModule.WKCActionAPIToken(OLSKTesting.OLSKTestingFakeRequestForHeaders(), OLSKTesting.OLSKTestingFakeResponseForJSON()), {

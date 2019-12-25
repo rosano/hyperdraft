@@ -22,7 +22,7 @@ describe('OLSKControllerSharedErrorHandlers', function testOLSKControllerSharedE
 
 });
 
-describe('KVCErrorsFirstHandler', function testKVCErrorsFirstHandler() {
+describe.skip('KVCErrorsFirstHandler', function testKVCErrorsFirstHandler() {
 
 	var pathPackage = require('path');
 
@@ -39,7 +39,7 @@ describe('KVCErrorsFirstHandler', function testKVCErrorsFirstHandler() {
 
 });
 
-describe('KVCErrors404Handler', function testKVCErrors404Handler() {
+describe.skip('KVCErrors404Handler', function testKVCErrors404Handler() {
 
 	it('returns next(error)', function() {
 		var errorObject = new Error('alpha');

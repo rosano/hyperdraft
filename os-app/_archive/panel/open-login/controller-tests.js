@@ -9,7 +9,7 @@ const assert = require('assert');
 const OLSKTesting = require('OLSKTesting');
 
 const mainModule = require('./controller.js');
-const sharedController = require('../../_shared/common/controller.js');
+const sharedController = require('../../../_shared/common/controller.js');
 
 describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 
@@ -54,7 +54,7 @@ describe('OLSKControllerSharedMiddlewares', function testOLSKControllerSharedMid
 
 });
 
-describe('WKCLoginMiddlewareAuthenticate', function testWKCLoginMiddlewareAuthenticate() {
+describe.skip('WKCLoginMiddlewareAuthenticate', function testWKCLoginMiddlewareAuthenticate() {
 
 	it('redirects to login without session data', function() {
 		assert.deepEqual(mainModule.WKCLoginMiddlewareAuthenticate(OLSKTesting.OLSKTestingFakeRequestForSession(), OLSKTesting.OLSKTestingFakeResponseForRedirect()), mainModule.OLSKControllerRoutes().WKCLoginRoute.OLSKRoutePath);
