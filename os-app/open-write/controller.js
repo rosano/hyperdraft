@@ -1,6 +1,6 @@
 exports.OLSKControllerRoutes = function() {
 	return [{
-		OLSKRoutePath: '/panel/write',
+		OLSKRoutePath: '/write',
 		OLSKRouteMethod: 'get',
 		OLSKRouteSignature: 'KVCWriteRoute',
 		OLSKRouteFunction (req, res, next) {
@@ -11,5 +11,10 @@ exports.OLSKControllerRoutes = function() {
 			'KVCSharedDonateLinkGuardMiddleware',
 		],
 		_OLSKRouteSkipLanguageRedirect: true,
+	}, {
+		OLSKRoutePath: '/panel/write',
+		OLSKRouteMethod: 'get',
+		OLSKRouteSignature: 'KVCWriteLegacyRoute',
+		OLSKRouteRedirect: '/write',
 	}];
 };

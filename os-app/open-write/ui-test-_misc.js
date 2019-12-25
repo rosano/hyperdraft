@@ -522,6 +522,18 @@ describe('KVCWrite_Misc', function () {
 			browser.assert.attribute('.OLSKAppToolbarDonateLink', 'href', process.env.KVC_SHARED_DONATE_URL);
 		});
 
-	});	
+	});
+
+	describe('KVCWriteLegacyRoute', function () {
+		
+		before(function () {
+			return browser.OLSKVisit(require('./controller.js').OLSKControllerRoutes().pop());
+		});
+
+		it('redirects', function() {
+			browser.assert.url('http://loc.tests' + require('./controller.js').OLSKControllerRoutes().shift().OLSKRoutePath);
+		});
+	
+	});
 
 });
