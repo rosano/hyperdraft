@@ -5,7 +5,7 @@ const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 describe('KVCWrite_Ref', function () {
 
 	const stubURL = function (inputData, host) {
-		return `http://${ host }:3000${ typeof inputData === 'string' ? inputData : inputData.OLSKRoutePath }`
+		return `http://${ host }:3000${ typeof inputData === 'string' ? inputData : inputData.OLSKRoutePath }`;
 	};
 
 	describe('KVCWriteDetailToolbarVersionsButton', function () {
