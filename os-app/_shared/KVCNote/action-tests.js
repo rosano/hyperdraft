@@ -295,7 +295,7 @@ describe('KVCNoteActionRetract', function testKVCNoteActionRetract() {
 
 });
 
-describe('KVCNoteActionGetPublicLinks', function testKVCNoteActionGetPublicLinks() {
+describe.skip('KVCNoteActionGetPublicLinks', function testKVCNoteActionGetPublicLinks() {
 
 	it('returns hash', async function() {
 		deepEqual(await mainModule.KVCNoteActionGetPublicLinks(KVCTestingStorageClient), {});
