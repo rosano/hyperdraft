@@ -3,10 +3,10 @@ import { deepEqual } from 'assert';
 describe('KVCRef_Misc', function () {
 
 	const stubURL = function (inputData, host = 'loc.tests') {
-		return `http://${ host }${ inputData.OLSKRoutePath}`
+		return `http://${ host }${ typeof inputData === 'string' ? inputData : inputData.OLSKRoutePath }`
 	};
 
-	describe.only('KVCRefHomeRoute', function () {		
+	describe('KVCRefHomeRoute', function () {		
 
 		context('other host', function () {
 
@@ -28,6 +28,26 @@ describe('KVCRef_Misc', function () {
 			
 			it('renders', async function() {
 				deepEqual((await browser.fetch(stubURL(require('./controller.js').OLSKControllerRoutes().KVCRefHomeRoute, process.env.KVC_SHARED_REF_HOST))).url, stubURL(require('./controller.js').OLSKControllerRoutes().KVCRefHomeRoute, process.env.KVC_SHARED_REF_HOST));
+			});
+		
+		});
+		
+	});
+
+	describe('KVCRefReadRoute', function () {		
+
+		context('other host', function () {
+
+			it.skip('sets status', async function() {
+				deepEqual((await browser.fetch(stubURL('/1'))).status, 404);
+			});
+		
+		});		
+
+		context('KVC_SHARED_REF_HOST', function () {
+
+			it.skip('sets status', async function() {
+				deepEqual((await browser.fetch(stubURL('/1', process.env.KVC_SHARED_REF_HOST))).status, 200);
 			});
 		
 		});

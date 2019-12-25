@@ -1,11 +1,3 @@
-/*!
- * wikiavec
- * Copyright(c) 2018 Rosano Coutinho
- * MIT Licensed
- */
-
-var pathPackage = require('path');
-
 //_ OLSKControllerSharedErrorHandlers
 
 exports.OLSKControllerSharedErrorHandlers = function() {
@@ -19,7 +11,7 @@ exports.OLSKControllerSharedErrorHandlers = function() {
 //_ KVCErrorsFirstHandler
 
 exports.KVCErrorsFirstHandler = function(err, req, res, next) {
-	res.locals.OLSKSharedPageControllerSlug = pathPackage.basename(__dirname);
+	res.locals.OLSKSharedPageControllerSlug = require('path').basename(__dirname);
 
 	return next(err);
 };
@@ -31,7 +23,7 @@ exports.KVCErrors404Handler = function(err, req, res, next) {
 		return next(err);
 	}
 
-	return res.render(req.OLSKLive.OLSKLivePathJoin(__dirname, '404'), {});
+	return res.render(require('path').join(__dirname, '404'));
 };
 
 //_ KVCErrorsFinalHandler
@@ -49,5 +41,5 @@ exports.KVCErrorsFinalHandler = function(err, req, res, next) {
 		console.log(err);
 	}
 
-	return res.render(req.OLSKLive.OLSKLivePathJoin(__dirname, '500'), {});
+	return res.render(require('path').join(__dirname, '500'));
 };

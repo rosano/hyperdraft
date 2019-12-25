@@ -116,6 +116,10 @@ exports.OLSKControllerRoutes = function() {
 			OLSKRoutePath: '/:kvc_note_public_id(\\d+)',
 			OLSKRouteMethod: 'get',
 			OLSKRouteFunction: async function(req, res, next) {
+				if (req.hostname !== process.env.KVC_SHARED_REF_HOST) {
+					return next();
+				}
+				
 				let publicNotes = req.OLSKCacheReadForCacheKey(kWKCRefCacheKey) || exports.RCSRefUpdateCachedPublicNotes(req.OLSKCacheWriteWithCacheKeyAndCacheObject, await exports.RCSRefFetchPublicNotesArray());
 
 				let item = publicNotes[req.params.kvc_note_public_id];
