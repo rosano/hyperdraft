@@ -13,6 +13,7 @@
 	before(function(done) {
 		mongodbPackage.MongoClient.connect(process.env.WKC_DATABASE_URL, {
 			useNewUrlParser: true,
+			useUnifiedTopology: true
 		}, function(err, client) {
 			if (err) {
 				throw err;

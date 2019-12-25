@@ -11,6 +11,7 @@ exports.OLSKControllerRoutes = function() {
 //_ OLSKControllerSharedConnections
 
 exports.OLSKControllerSharedConnections = function() {
+	return {};
 	return {
 		KVCSharedConnectionMongo: {
 			OLSKConnectionInitializer: exports.KVCSharedConnectionInitializerMongo,
@@ -26,6 +27,7 @@ exports.KVCSharedConnectionInitializerMongo = function(olskCallback) {
 
 	mongodbPackage.MongoClient.connect(process.env.WKC_DATABASE_URL, {
 		useNewUrlParser: true,
+		useUnifiedTopology: true,
 	}, function(err, client) {
 		if (err) {
 			return olskCallback(err);

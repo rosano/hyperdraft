@@ -26,6 +26,7 @@ const kConst = {
 //_ OLSKControllerTasks
 
 exports.OLSKControllerTasks = function() {
+	return [];
 	return [
 		exports.WKCTaskFetch(),
 	];

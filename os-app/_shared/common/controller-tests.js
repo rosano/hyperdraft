@@ -8,19 +8,6 @@ const assert = require('assert');
 
 var controllerModule = require('./controller.js');
 
-describe('OLSKControllerSharedConnections', function testOLSKControllerSharedConnections() {
-
-	it('returns connection functions', function() {
-		assert.deepEqual(controllerModule.OLSKControllerSharedConnections(), {
-			KVCSharedConnectionMongo: {
-				OLSKConnectionInitializer: controllerModule.KVCSharedConnectionInitializerMongo,
-				OLSKConnectionCleanup: controllerModule.KVCSharedConnectionCleanupMongo,
-			},
-		});
-	});
-
-});
-
 describe('KVCSharedMiddlewareEnsureDatabase', function testKVCSharedMiddlewareEnsureDatabase() {
 
 	var fakeRequest = function(inputData = {}) {
