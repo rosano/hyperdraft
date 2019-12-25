@@ -68,8 +68,7 @@ const mod = {
 	},
 
 	DataVersionsIsDisabled () {
-		return false;
-		return !OLSK_TESTING_BEHAVIOUR();
+		return window.location.hostname !== window.OLSKPublicConstants('KVC_SHARED_REF_HOST');
 	},
 
 	DataDebugPersistenceIsEnabled () {
