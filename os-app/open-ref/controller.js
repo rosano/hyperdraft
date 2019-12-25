@@ -112,7 +112,7 @@ exports.OLSKControllerRoutes = function() {
 			},
 			OLSKRouteLanguages: ['en'],
 		},
-		WKCRouteRefsRead: {
+		KVCRefReadRoute: {
 			OLSKRoutePath: '/:kvc_note_public_id(\\d+)',
 			OLSKRouteMethod: 'get',
 			OLSKRouteFunction: async function(req, res, next) {
@@ -138,7 +138,7 @@ exports.OLSKControllerRoutes = function() {
 				
 				item.KVCNoteDetectedTitle = KVCParser.KVCParserTitleForPlaintext(item.KVCNoteBody);
 				item.KVCNoteDetectedBody = KVCParser.KVCParserHTMLForPlaintext(KVCParser.KVCParserReplaceLinks(KVCParser.KVCParserBodyForPlaintext(item.KVCNoteBody), Object.entries(publicLinks).map(function (e) {
-					return [e[0], `[${ e[0] }](${ res.locals.OLSKCanonicalFor('WKCRouteRefsRead', {
+					return [e[0], `[${ e[0] }](${ res.locals.OLSKCanonicalFor('KVCRefReadRoute', {
 						kvc_note_public_id: e[1],
 					}) })`];
 				}).reduce(function (coll, e) {

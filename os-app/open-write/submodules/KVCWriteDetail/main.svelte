@@ -167,7 +167,7 @@ import KVCWriteInput from '../KVCWriteInput/main.svelte';
 			{/if}
 
 			{#if mod._ValueItem.KVCNotePublishStatusIsPublished }
-				<a class="KVCWriteDetailToolbarPublicLink" href={ window.OLSKCanonicalFor('WKCRouteRefsRead', {
+				<a class="KVCWriteDetailToolbarPublicLink" href={ window.OLSKCanonicalFor('KVCRefReadRoute', {
 					kvc_note_public_id: mod._ValueItem.KVCNotePublicID,
 				}) } target="_blank">{ OLSKLocalized('KVCWriteDetailToolbarPublicLinkText') }</a>
 					
