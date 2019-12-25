@@ -99,6 +99,10 @@ exports.OLSKControllerRoutes = function() {
 			OLSKRoutePath: '/',
 			OLSKRouteMethod: 'get',
 			OLSKRouteFunction (req, res, next) {
+				if (req.hostname !== process.env.KVC_SHARED_REF_HOST) {
+					return res.redirect(301, require('../open-write/controller.js').OLSKControllerRoutes().pop().OLSKRoutePath);
+				}
+
 				return res.render(req.OLSKLive.OLSKLivePathJoin(__dirname, 'view'), {
 					KVCNoteObject: {
 						KVCNoteDetectedTitle: res.locals.OLSKLocalized('WKCHomeTitle'),
