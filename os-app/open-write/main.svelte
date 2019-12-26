@@ -468,6 +468,8 @@ const mod = {
 	async SetupEverything () {
 		mod.SetupStorageClient();
 
+		mod.SetupRemoteStorage();
+
 		mod.SetupStorageWidget();
 
 		mod.SetupStorageStatus();
@@ -530,6 +532,13 @@ const mod = {
 					})),
 			],
 		});
+	},
+
+	SetupRemoteStorage () {
+		mod._ValueStorageClient.remoteStorage.setApiKeys(window.OLSKPublicConstants('KVCDropboxAppKey') ? {
+			dropbox: window.atob(window.OLSKPublicConstants('KVCDropboxAppKey')),
+			googledrive: window.atob(window.OLSKPublicConstants('KVCGoogleClientKey')),
+		} : {});
 	},
 
 	SetupStorageWidget () {
