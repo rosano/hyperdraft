@@ -11,7 +11,10 @@ exports.OLSKControllerRoutes = function() {
 //_ OLSKControllerSharedConnections
 
 exports.OLSKControllerSharedConnections = function() {
-	return {};
+	if (!process.env.WKC_DATABASE_URL) {
+		return {};
+	}
+	
 	return {
 		KVCSharedConnectionMongo: {
 			OLSKConnectionInitializer: exports.KVCSharedConnectionInitializerMongo,
