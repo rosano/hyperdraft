@@ -1,5 +1,15 @@
 const mod = {
 
+	KVCSharedDropboxAppKeyGuard (inputData) {
+		if (typeof inputData !== 'object' || inputData === null) {
+			throw new Error('KVCErrorInputNotValid');
+		}
+
+		if (!(inputData.KVC_DROPBOX_APP_KEY || '').trim()) {
+			return new Error('KVC_DROPBOX_APP_KEY not defined');
+		}
+	},
+
 	KVCSharedDonateLinkGuard (inputData) {
 		if (typeof inputData !== 'object' || inputData === null) {
 			throw new Error('KVCErrorInputNotValid');
