@@ -24,7 +24,6 @@ const KVCWriteMaster = new RollupStart({
 		KVCWriteMasterDispatchEscape: (function _KVCWriteMasterDispatchEscape () {
 			window.TestKVCWriteMasterDispatchEscape.innerHTML = parseInt(window.TestKVCWriteMasterDispatchEscape.innerHTML) + 1;
 		}),
-		KVCWriteMasterDispatchExport: (function _KVCWriteMasterDispatchExport () {}),
 		KVCWriteMasterDelegateItemTitle: (function _KVCWriteMasterDelegateItemTitle (inputData) {
 			return inputData.split('\n').shift();
 		}),

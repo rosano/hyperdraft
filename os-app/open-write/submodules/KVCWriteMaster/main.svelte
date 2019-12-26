@@ -7,7 +7,6 @@ export let KVCWriteMasterDispatchClick;
 export let KVCWriteMasterDispatchArrow;
 export let KVCWriteMasterDispatchFilter;
 export let KVCWriteMasterDispatchEscape;
-export let KVCWriteMasterDispatchExport;
 export let KVCWriteMasterDelegateItemTitle;
 export let KVCWriteMasterDelegateItemSnippet;
 export let OLSKMobileViewInactive = false;
@@ -44,10 +43,6 @@ const mod = {
 
 	InterfaceCreateButtonDidClick () {
 		KVCWriteMasterDispatchCreate();
-	},
-
-	InterfaceExportButtonDidClick () {
-		KVCWriteMasterDispatchExport();
 	},
 
 	InterfaceWindowDidKeydown (event) {
@@ -157,10 +152,6 @@ import KVCWriteMasterListItem from '../KVCWriteMasterListItem/main.svelte';
 			KVCWriteMasterListItemSnippet={ KVCWriteMasterDelegateItemSnippet(e.KVCNoteBody) }
 			/>
 	</OLSKResults>
-
-	<div class="KVCWriteMasterDebug">
-		<button class="KVCWriteExportButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle" on:click={ mod.InterfaceExportButtonDidClick }>{ OLSKLocalized('KVCWriteExportButtonText') }</button>
-	</div>
 </section>
 
 </div>

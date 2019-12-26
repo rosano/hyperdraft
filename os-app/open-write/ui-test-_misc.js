@@ -520,6 +520,18 @@ describe('KVCWrite_Misc', function () {
 	
 	});
 
+	describe('KVCWriteStorageExportButton', function test_KVCWriteStorageExportButton () {
+		
+		it('classes OLSKLayoutElementTappable', function () {
+			browser.assert.hasClass(KVCWriteStorageExportButton, 'OLSKLayoutElementTappable');
+		});
+		
+		it('classes OLSKLayoutButtonNoStyle', function () {
+			browser.assert.hasClass(KVCWriteStorageExportButton, 'OLSKLayoutButtonNoStyle');
+		});
+
+	});
+
 	describe('OLSKAppToolbar', function test_OLSKAppToolbar () {
 
 		it('sets OLSKAppToolbarDonateURL', function () {

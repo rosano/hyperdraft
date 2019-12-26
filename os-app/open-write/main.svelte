@@ -101,10 +101,6 @@ const mod = {
 		mod.ControlFilterWithThrottle(inputData);
 	},
 
-	KVCWriteMasterDispatchExport () {
-		mod.ControlNotesExportTXT();
-	},
-
 	KVCWriteMasterDispatchEscape () {
 		mod.ControlEscape();
 	},
@@ -209,6 +205,10 @@ const mod = {
 		};
 
 		handlerFunctions[event.key] && handlerFunctions[event.key]();
+	},
+
+	InterfaceStorageExportButtonDidClick () {
+		mod.ControlNotesExportTXT();
 	},
 
 	// CONTROL
@@ -661,7 +661,6 @@ import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svel
 		KVCWriteMasterDispatchArrow={ mod.KVCWriteMasterDispatchArrow }
 		KVCWriteMasterDispatchFilter={ mod.KVCWriteMasterDispatchFilter }
 		KVCWriteMasterDispatchEscape={ mod.KVCWriteMasterDispatchEscape }
-		KVCWriteMasterDispatchExport={ mod.KVCWriteMasterDispatchExport }
 		KVCWriteMasterDelegateItemTitle={ mod.KVCWriteMasterDelegateItemTitle }
 		KVCWriteMasterDelegateItemSnippet={ mod.KVCWriteMasterDelegateItemSnippet }
 		OLSKMobileViewInactive={ mod.OLSKMobileViewInactive }
@@ -688,6 +687,7 @@ import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svel
 	<div class="KVCWriteStorageToolbar OLSKStorageToolbar" class:KVCWriteStorageToolbarHidden={ mod._ValueStorageToolbarHidden }>
 		<OLSKToolbar OLSKToolbarJustify={ true }>
 			<OLSKToolbarElementGroup>
+				<button class="KVCWriteStorageExportButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle" on:click={ mod.InterfaceStorageExportButtonDidClick }>{ OLSKLocalized('KVCWriteStorageExportButtonText') }</button>
 			</OLSKToolbarElementGroup>
 
 			<OLSKToolbarElementGroup>
