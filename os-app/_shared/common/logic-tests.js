@@ -34,6 +34,38 @@ describe('KVCSharedDropboxAppKeyGuard', function testKVCSharedDropboxAppKeyGuard
 
 });
 
+describe('KVCSharedGoogleClientKeyGuard', function testKVCSharedGoogleClientKeyGuard() {
+
+	const StubEnvValid = function () {
+		return {
+			KVC_GOOGLE_CLIENT_KEY: 'alfa',
+		};
+	};
+
+	it('throws if not object', function() {
+		throws(function() {
+			mainModule.KVCSharedGoogleClientKeyGuard(null);
+		}, /KVCErrorInputNotValid/);
+	});
+
+	it('returns error if no KVC_GOOGLE_CLIENT_KEY', function () {
+		deepEqual(mainModule.KVCSharedGoogleClientKeyGuard(Object.assign(StubEnvValid(), {
+			KVC_GOOGLE_CLIENT_KEY: null,
+		})), new Error('KVC_GOOGLE_CLIENT_KEY not defined'));
+	});
+
+	it('returns error if KVC_GOOGLE_CLIENT_KEY blank', function () {
+		deepEqual(mainModule.KVCSharedGoogleClientKeyGuard(Object.assign(StubEnvValid(), {
+			KVC_GOOGLE_CLIENT_KEY: ' ',
+		})), new Error('KVC_GOOGLE_CLIENT_KEY not defined'));
+	});
+
+	it('returns undefined', function () {
+		deepEqual(typeof mainModule.KVCSharedGoogleClientKeyGuard(StubEnvValid()), 'undefined');
+	});
+
+});
+
 describe('KVCSharedDonateLinkGuard', function testKVCSharedDonateLinkGuard() {
 
 	const StubEnvValid = function () {
