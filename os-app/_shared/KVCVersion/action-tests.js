@@ -60,7 +60,7 @@ describe('KVCVersionActionCreate', function testKVCVersionActionCreate() {
 describe('KVCVersionActionQuery', function testKVCVersionActionQuery() {
 
 	it('rejects if not object', async function() {
-		await rejects(mainModule.KVCVersionActionQuery(KVCTestingMongoClient, null), /KVCErrorInputNotValid/);
+		await rejects(mainModule.KVCVersionActionQuery(KVCTestingStorageClient, null), /KVCErrorInputNotValid/);
 	});
 
 	it('returns array', async function() {
