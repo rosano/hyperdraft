@@ -1,8 +1,6 @@
-/*!
- * wikiavec
- * Copyright(c) 2018 Rosano Coutinho
- * MIT Licensed
- */
+if (global.KVCTestingMongoSkipped) {
+	return;
+}
 
 const assert = require('assert');
 

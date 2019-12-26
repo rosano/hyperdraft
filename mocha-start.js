@@ -8,6 +8,11 @@
 
 
 (function KVCMochaMongo() {
+	if (!process.env.WKC_DATABASE_URL || !process.env.WKC_SHARED_DATABASE_NAME) {
+		global.KVCTestingMongoSkipped = true;
+		return;
+	}
+
 	var mongodbPackage = require('mongodb');
 
 	before(function(done) {
