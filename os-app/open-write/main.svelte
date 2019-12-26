@@ -531,6 +531,7 @@ const mod = {
 						}
 					})),
 			],
+			OLSKPatchRemoteStorageAuthRedirectURI: OLSK_TESTING_BEHAVIOUR() ? undefined : window.location.origin + window.OLSKCanonicalFor('KVCWriteRoute'),
 		});
 	},
 

@@ -20,6 +20,18 @@
 	);
 })();
 
+(function OLSKPostinstallPatchRemoteStorageAuthRedirectURI() {
+	let filePath = './node_modules/remotestoragejs/release/remotestorage.js';
+
+	require('fs').writeFileSync(filePath, require('OLSKString').OLSKStringPatch(
+		require('fs').readFileSync(filePath, 'utf8'),
+		// 'options.redirectUri = globalContext.cordova ? config.cordovaRedirectUri : String(Authorize.getLocation());',
+		'e.redirectUri=m.cordova?l.cordovaRedirectUri:String(h.getLocation())',
+		// 'options.redirectUri = globalContext.cordova ? config.cordovaRedirectUri : String(config.OLSKPatchRemoteStorageAuthRedirectURI || Authorize.getLocation());'
+		'e.redirectUri=m.cordova?l.cordovaRedirectUri:String(l.OLSKPatchRemoteStorageAuthRedirectURI || h.getLocation())'
+	));
+})();
+
 //# OLSKPostinstallExternalAssets
 
 (function OLSKPostinstallExternalAssets() {
