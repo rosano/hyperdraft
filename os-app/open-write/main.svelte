@@ -685,7 +685,7 @@ import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svel
 </OLSKViewportContent>
 
 <footer class="KVCWriteViewportFooter OLSKMobileViewFooter">
-	<div class="KVCWriteStorageToolbar" class:KVCWriteStorageToolbarHidden={ mod._ValueStorageToolbarHidden }>
+	<div class="KVCWriteStorageToolbar OLSKStorageToolbar" class:KVCWriteStorageToolbarHidden={ mod._ValueStorageToolbarHidden }>
 		<OLSKToolbar OLSKToolbarJustify={ true }>
 			<OLSKToolbarElementGroup>
 			</OLSKToolbarElementGroup>
