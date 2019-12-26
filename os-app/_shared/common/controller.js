@@ -59,6 +59,9 @@ exports.OLSKControllerSharedMiddlewares = function() {
 		KVCSharedDropboxAppKeyGuardMiddleware (req, res, next) {
 			return next(require('./logic.js').KVCSharedDropboxAppKeyGuard(process.env));
 		},
+		KVCSharedGoogleClientKeyGuardMiddleware (req, res, next) {
+			return next(require('./logic.js').KVCSharedGoogleClientKeyGuard(process.env));
+		},
 		KVCSharedDonateLinkGuardMiddleware (req, res, next) {
 			return next(require('./logic.js').KVCSharedDonateLinkGuard(process.env));
 		},
