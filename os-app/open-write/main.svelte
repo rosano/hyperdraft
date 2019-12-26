@@ -49,7 +49,7 @@ const mod = {
 	
 	_ValueFilterText: '',
 	
-	_ValueStorageWidgetHidden: true,
+	_ValueStorageToolbarHidden: true,
 
 	_ValueFooterStorageStatus: '',
 
@@ -82,7 +82,7 @@ const mod = {
 	// MESSAGE
 
 	OLSKAppToolbarDispatchStorage () {
-		mod._ValueStorageWidgetHidden = !mod._ValueStorageWidgetHidden;
+		mod._ValueStorageToolbarHidden = !mod._ValueStorageToolbarHidden;
 	},
 
 	KVCWriteMasterDispatchCreate (inputData) {
@@ -642,6 +642,8 @@ onMount(mod.LifecycleModuleWillMount);
 import OLSKViewportContent from 'OLSKViewportContent';
 import KVCWriteMaster from './submodules/KVCWriteMaster/main.svelte';
 import KVCWriteDetail from './submodules/KVCWriteDetail/main.svelte';
+import OLSKToolbar from 'OLSKToolbar';
+import OLSKToolbarElementGroup from 'OLSKToolbarElementGroup';
 import OLSKAppToolbar from 'OLSKAppToolbar';
 import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svelte';
 </script>
@@ -683,7 +685,16 @@ import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svel
 </OLSKViewportContent>
 
 <footer class="KVCWriteViewportFooter OLSKMobileViewFooter">
-	<div id="KVCWriteStorageWidget" class:KVCWriteStorageWidgetHidden={ mod._ValueStorageWidgetHidden }></div>
+	<div class="KVCWriteStorageToolbar" class:KVCWriteStorageToolbarHidden={ mod._ValueStorageToolbarHidden }>
+		<OLSKToolbar OLSKToolbarJustify={ true }>
+			<OLSKToolbarElementGroup>
+			</OLSKToolbarElementGroup>
+
+			<OLSKToolbarElementGroup>
+				<div id="KVCWriteStorageWidget"></div>
+			</OLSKToolbarElementGroup>
+		</OLSKToolbar>
+	</div>
 
 	<OLSKAppToolbar
 		OLSKAppToolbarDonateURL={ window.OLSKPublicConstants('KVC_SHARED_DONATE_URL') }

@@ -6,7 +6,8 @@ Object.entries({
 	KVCWrite: '.KVCWrite',
 
 	KVCWriteViewportFooter: '.KVCWriteViewportFooter',
-
+	
+	KVCWriteStorageToolbar: '.KVCWriteStorageToolbar',
 	KVCWriteStorageWidget: '#KVCWriteStorageWidget',
 }).map(function (e) {
 	return global[e.shift()]  = e.pop();
@@ -40,6 +41,10 @@ describe('KVCWrite_Access', function () {
 
 	it('shows KVCWriteViewportFooter', function () {
 		browser.assert.elements(KVCWriteViewportFooter, 1);
+	});
+
+	it('shows KVCWriteStorageToolbar', function () {
+		browser.assert.elements(KVCWriteStorageToolbar, 1);
 	});
 
 	it('shows KVCWriteStorageWidget', function () {

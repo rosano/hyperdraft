@@ -8,7 +8,7 @@
 	color: var(--KVCCommonForeground);
 }
 
-#KVCWriteStorageWidget {
+.KVCWriteStorageToolbar {
 	border-top: var(--WKCBorderStyle);
 	
 	background: var(--KVCCommonBackground);
@@ -17,7 +17,7 @@
 	flex-shrink: 0;
 }
 
-.KVCWriteStorageWidgetHidden {
+.KVCWriteStorageToolbarHidden {
 	display: none;
 }
 

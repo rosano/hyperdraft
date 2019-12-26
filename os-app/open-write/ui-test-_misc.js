@@ -488,10 +488,18 @@ describe('KVCWrite_Misc', function () {
 
 	});
 
-	describe('KVCWriteStorageWidget', function test_KVCWriteStorageWidget () {
+	describe('KVCWriteViewportFooter', function test_KVCWriteViewportFooter () {
+
+		it('sets class', function () {
+			browser.assert.hasClass(KVCWriteViewportFooter, 'OLSKMobileViewFooter');
+		});
+
+	});
+
+	describe('KVCWriteStorageToolbar', function test_KVCWriteStorageToolbar () {
 		
-		it('classes KVCWriteStorageWidgetHidden', function () {
-			browser.assert.hasClass(KVCWriteStorageWidget, 'KVCWriteStorageWidgetHidden');
+		it('classes KVCWriteStorageToolbarHidden', function () {
+			browser.assert.hasClass(KVCWriteStorageToolbar, 'KVCWriteStorageToolbarHidden');
 		});
 
 		context('click OLSKAppToolbarStorageButton', function () {
@@ -500,20 +508,12 @@ describe('KVCWrite_Misc', function () {
 				return browser.pressButton('.OLSKAppToolbarStorageButton');
 			});
 			
-			it('classes KVCWriteStorageWidgetHidden', function () {
-				browser.assert.hasNoClass(KVCWriteStorageWidget, 'KVCWriteStorageWidgetHidden');
+			it('classes KVCWriteStorageToolbarHidden', function () {
+				browser.assert.hasNoClass(KVCWriteStorageToolbar, 'KVCWriteStorageToolbarHidden');
 			});
 		
 		});
 	
-	});
-
-	describe('KVCWriteViewportFooter', function test_KVCWriteViewportFooter () {
-
-		it('sets class', function () {
-			browser.assert.hasClass(KVCWriteViewportFooter, 'OLSKMobileViewFooter');
-		});
-
 	});
 
 	describe('OLSKAppToolbar', function test_OLSKAppToolbar () {
