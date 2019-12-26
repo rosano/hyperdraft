@@ -56,6 +56,9 @@ exports.OLSKControllerSharedStaticAssetFolders = function() {
 exports.OLSKControllerSharedMiddlewares = function() {
 	return {
 		KVCSharedMiddlewareEnsureDatabase: exports.KVCSharedMiddlewareEnsureDatabase,
+		KVCSharedDropboxAppKeyGuardMiddleware (req, res, next) {
+			return next(require('./logic.js').KVCSharedDropboxAppKeyGuard(process.env));
+		},
 		KVCSharedDonateLinkGuardMiddleware (req, res, next) {
 			return next(require('./logic.js').KVCSharedDonateLinkGuard(process.env));
 		},
