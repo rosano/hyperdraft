@@ -8,6 +8,7 @@ exports.OLSKControllerRoutes = function() {
 		},
 		OLSKRouteLanguages: ['en', 'fr', 'es'],
 		OLSKRouteMiddlewares: [
+			'KVCSharedDropboxAppKeyGuardMiddleware',
 			'KVCSharedDonateLinkGuardMiddleware',
 		],
 		_OLSKRouteSkipLanguageRedirect: true,
