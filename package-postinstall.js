@@ -58,7 +58,6 @@
 		'OLSKStorageWidget',
 		'OLSKThrottle',
 		'OLSKType',
-		'remotestoragejs',
 		'OLSKRootLink',
 		'ROCORootLink',
 		'OLSKUIAssets',
