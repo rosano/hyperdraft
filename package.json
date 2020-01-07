@@ -1,10 +1,11 @@
 {
   "private": true,
   "scripts": {
-    "start": "node ./os-start.js",
     "preinstall": "node ./package-preinstall.js",
     "postinstall": "node ./package-postinstall.js",
 
+    "start": "olsk-app",
+    
     "test": "olsk-spec",
 
     "build": "rollup -c rollup-config.js",

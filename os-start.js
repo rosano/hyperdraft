@@ -1,1 +1,0 @@
-require('OLSKApp')(__dirname);
