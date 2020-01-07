@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "// OLDSKOOL": null,
-    "OLSKApp": "olsk/OLSKApp",
+    "OLSKExpress": "olsk/OLSKExpress",
 
     "// DOM MANIPULATION": null,
     "d3": "latest",
