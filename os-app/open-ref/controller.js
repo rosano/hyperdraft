@@ -24,6 +24,10 @@ exports.RCSRefUpdateCachedPublicNotes = function (writeFunction, inputData) {
 };
 
 exports.OLSKControllerSharedConnections = function() {
+	if (!process.env.WKC_REMOTE_STORAGE_ACCOUNT || !process.env.WKC_REMOTE_STORAGE_KEY) {
+		return {};
+	}
+	
 	return {
 		KVCSharedConnectionRS: {
 			OLSKConnectionInitializer(olskCallback) {
