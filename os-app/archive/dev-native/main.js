@@ -21,7 +21,7 @@ app.on('ready', function () {
 
     // win.webContents.session.clearStorageData();
 
-    win.loadURL('https://ref.rosano.ca/panel/write');
+    win.loadURL('https://ref.rosano.ca/write');
 
     win.webContents.on('new-window', function(e, url) {
       e.preventDefault();
