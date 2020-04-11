@@ -18,7 +18,7 @@ import KVCNoteAction from '../_shared/KVCNote/action.js';
 import KVCNoteMetal from '../_shared/KVCNote/metal.js';
 import KVCVersionAction from '../_shared/KVCVersion/action.js';
 import KVCSettingAction from '../_shared/KVCSetting/action.js';
-import * as KVCSettingMetal from '../_shared/KVCSetting/metal.js';
+import KVCSettingMetal from '../_shared/KVCSetting/metal.js';
 import KVCWriteLogic from './ui-logic.js';
 
 const mod = {
