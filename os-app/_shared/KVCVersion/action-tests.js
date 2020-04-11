@@ -1,7 +1,6 @@
 const { rejects, deepEqual } = require('assert');
 
-const mainModule = require('./action.js');
-import * as KVCVersionsAction from '../KVCVersion/action.js';
+const mainModule = require('./action.js').default;
 
 const kTesting = {
 	StubVersionObject() {

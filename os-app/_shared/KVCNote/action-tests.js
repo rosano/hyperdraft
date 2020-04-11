@@ -1,7 +1,7 @@
 const { rejects, deepEqual } = require('assert');
 
 const mainModule = require('./action.js').default;
-const KVCVersionsAction = require('../KVCVersion/action.js');
+const KVCVersionsAction = require('../KVCVersion/action.js').default;
 
 const kTesting = {
 	StubNoteObject() {
