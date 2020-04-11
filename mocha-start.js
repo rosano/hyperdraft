@@ -43,6 +43,8 @@
 	});
 })();
 
+const RemoteStorage = require('remotestoragejs');
+
 const KVCStorageModule = require('./os-app/_shared/KVCStorageModule/main.js');
 const KVCNoteStorage = require('./os-app/_shared/KVCNote/storage.js');
 const KVCSettingStorage = require('./os-app/_shared/KVCSetting/storage.js');
@@ -59,32 +61,21 @@ const KVCVersionStorage = require('./os-app/_shared/KVCVersion/storage.js');
 		}, Promise.resolve([]));
 	};
 
-	before(function(done) {
-		global.KVCTestingStorageClient = require('./os-app/_shared/KVCStorageClient/main.js').KVCStorageClient({
-			modules: [
-				KVCStorageModule.KVCStorageModule([
-					KVCNoteStorage.KVCNoteStorage,
-					KVCSettingStorage.KVCSettingStorage,
-					KVCVersionStorage.KVCVersionStorage,
-				].map(function (e) {
-					return {
-						KVCCollectionStorageGenerator: e,
-						KVCCollectionChangeDelegate: null,
-					};
-				}))
-			],
-		});
+	const storageModule = KVCStorageModule.KVCStorageModule([
+		KVCNoteStorage.KVCNoteStorage,
+		KVCSettingStorage.KVCSettingStorage,
+		KVCVersionStorage.KVCVersionStorage,
+	]);
 
-		done();
+	before(function() {
+		global.KVCTestingStorageClient = new RemoteStorage({ modules: [ storageModule ] });
+
+		global.KVCTestingStorageClient.access.claim(storageModule.name, 'rw');
 	});
 
 	beforeEach(async function() {
-		await uSerial([
-			'kvc_notes',
-			'kvc_settings',
-			'kvc_versions',
-		].map(async function (e) {
-			return await Promise.all(Object.keys(await global.KVCTestingStorageClient.wikiavec[e].listObjects()).map(global.KVCTestingStorageClient.wikiavec[e].deleteObject));
+		await uSerial(Object.keys(global.KVCTestingStorageClient[storageModule.name]).map(async function (e) {
+			return await Promise.all(Object.keys(await global.KVCTestingStorageClient[storageModule.name][e].KVCStorageList()).map(global.KVCTestingStorageClient[storageModule.name][e].KVCStorageDelete));
 		}));
 	});
 })();

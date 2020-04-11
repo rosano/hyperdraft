@@ -27,7 +27,7 @@ const mod = {
 	},
 
 	async KVCNoteMetalList (storageClient) {
-		let outputData = await storageClient.wikiavec.kvc_notes.listObjects();
+		let outputData = await storageClient.wikiavec.kvc_notes.KVCStorageList();
 
 		for (let key in outputData) {
 			KVCNoteModelPostJSONParse(outputData[key]);
@@ -41,7 +41,7 @@ const mod = {
 			return Promise.reject(new Error('KVCErrorInputNotValid'));
 		}
 
-		return await storageClient.wikiavec.kvc_notes.deleteObject(inputData);
+		return await storageClient.wikiavec.kvc_notes.KVCStorageDelete(inputData);
 	},
 
 };

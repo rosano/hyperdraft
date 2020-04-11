@@ -14,10 +14,7 @@ export const KVCVersionStorage = function (privateClient, publicClient, changeDe
 		KVCStorageType: kType,
 		KVCStorageModelErrors: KVCVersionModel.KVCVersionModelErrorsFor({}),
 		KVCStorageExports: {
-			KVCVersionStorageCache () {
-				return privateClient.cache(KVCVersionStoragePath());
-			},
-			listObjects () {
+			KVCStorageList () {
 				return privateClient.getAll(KVCVersionStoragePath(), false);
 			},
 			async writeObject (param1, param2) {
@@ -27,7 +24,7 @@ export const KVCVersionStorage = function (privateClient, publicClient, changeDe
 			readObject (inputData) {
 				return privateClient.getObject(KVCVersionStoragePath(inputData));
 			},
-			deleteObject (inputData) {
+			KVCStorageDelete (inputData) {
 				return privateClient.remove(KVCVersionStoragePath(inputData));
 			},
 		},

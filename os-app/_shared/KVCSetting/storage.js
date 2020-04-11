@@ -13,10 +13,7 @@ export const KVCSettingStorage = function (privateClient, publicClient, changeDe
 		KVCStorageType: kType,
 		KVCStorageModelErrors: KVCSettingModel.KVCSettingModelErrorsFor({}),
 		KVCStorageExports: {
-			KVCSettingStorageCache () {
-				return privateClient.cache(KVCSettingStoragePath());
-			},
-			listObjects () {
+			KVCStorageList () {
 				return privateClient.getAll(KVCSettingStoragePath(), false);
 			},
 			async writeObject (param1, param2) {
@@ -26,7 +23,7 @@ export const KVCSettingStorage = function (privateClient, publicClient, changeDe
 			readObject (inputData) {
 				return privateClient.getObject(KVCSettingStoragePath(inputData));
 			},
-			deleteObject (inputData) {
+			KVCStorageDelete (inputData) {
 				return privateClient.remove(KVCSettingStoragePath(inputData));
 			},
 		},

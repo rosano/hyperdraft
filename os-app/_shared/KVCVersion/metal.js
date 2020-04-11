@@ -26,7 +26,7 @@ const mod = {
 	},
 
 	async KVCVersionMetalList (storageClient) {
-		let outputData = await storageClient.wikiavec.kvc_versions.listObjects();
+		let outputData = await storageClient.wikiavec.kvc_versions.KVCStorageList();
 
 		for (let key in outputData) {
 			KVCVersionModelPostJSONParse(outputData[key]);
@@ -40,7 +40,7 @@ const mod = {
 			return Promise.reject(new Error('KVCErrorInputNotValid'));
 		}
 
-		return await storageClient.wikiavec.kvc_versions.deleteObject(inputData);
+		return await storageClient.wikiavec.kvc_versions.KVCStorageDelete(inputData);
 	},
 
 };

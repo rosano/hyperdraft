@@ -44,10 +44,7 @@ export const KVCNoteStorage = function (privateClient, publicClient, changeDeleg
 		KVCStorageType: kType,
 		KVCStorageModelErrors: KVCNoteModel.KVCNoteModelErrorsFor({}),
 		KVCStorageExports: {
-			KVCNoteStorageCache () {
-				return privateClient.cache(KVCNoteStoragePath());
-			},
-			listObjects () {
+			KVCStorageList () {
 				return privateClient.getAll(KVCNoteStoragePath(), false);
 			},
 			async writeObject (param1, param2) {
@@ -57,7 +54,7 @@ export const KVCNoteStorage = function (privateClient, publicClient, changeDeleg
 			readObject (inputData) {
 				return privateClient.getObject(KVCNoteStoragePath(inputData));
 			},
-			deleteObject (inputData) {
+			KVCStorageDelete (inputData) {
 				return privateClient.remove(KVCNoteStoragePath(inputData));
 			},
 		},

@@ -5,7 +5,6 @@ const OLSKLocalized = function(translationConstant) {
 };
 
 import OLSKThrottle from 'OLSKThrottle';
-import * as KVCStorageClient from '../_shared/KVCStorageClient/main.js';
 import { KVCStorageModule } from '../_shared/KVCStorageModule/main.js';
 import { KVCNoteStorage } from '../_shared/KVCNote/storage.js';
 import { KVCNoteModelPostJSONParse } from '../_shared/KVCNote/model.js';
@@ -20,6 +19,8 @@ import KVCVersionAction from '../_shared/KVCVersion/action.js';
 import KVCSettingAction from '../_shared/KVCSetting/action.js';
 import KVCSettingMetal from '../_shared/KVCSetting/metal.js';
 import KVCWriteLogic from './ui-logic.js';
+import * as RemoteStoragePackage from 'remotestoragejs';
+const RemoteStorage = RemoteStoragePackage.default || RemoteStoragePackage;
 
 const mod = {
 
@@ -476,102 +477,107 @@ const mod = {
 
 		await mod.SetupStorageNotifications();
 
-		await mod.SetupDataCache();
-
 		await mod.SetupValueNotesAll();
 
 		mod.ReactIsLoading(mod._ValueIsLoading = false);
 	},
 
+	OLSKChangeDelegateCreateNote (inputData) {
+		// console.log('OLSKChangeDelegateCreate', inputData);
+
+		mod.ValueNotesAll(mod._ValueNotesAll.filter(function (e) {
+			return e.KVCNoteID !== inputData.KVCNoteID; // @Hotfix Dropbox sending DelegateAdd
+		}).concat(inputData));
+	},
+
+	OLSKChangeDelegateUpdateNote (inputData) {
+		// console.log('OLSKChangeDelegateUpdate', inputData);
+
+		if (mod.DataDebugPersistenceIsEnabled()) {
+			console.log('OLSKChangeDelegateUpdate', inputData.KVCNoteID, inputData.KVCNoteBody);
+		}
+
+		if (mod._ValueNoteSelected && (mod._ValueNoteSelected.KVCNoteID === inputData.KVCNoteID)) {
+			mod._ControlHotfixUpdateInPlace(Object.assign(mod._ValueNoteSelected, inputData));
+		}
+
+		mod.ValueNotesAll(mod._ValueNotesAll.map(function (e) {
+			return Object.assign(e, e.KVCNoteID === inputData.KVCNoteID ? inputData : {});
+		}), !mod._ValueNoteSelected);
+	},
+
+	OLSKChangeDelegateDeleteNote (inputData) {
+		// console.log('OLSKChangeDelegateDelete', inputData);
+
+		if (mod._ValueNoteSelected && (mod._ValueNoteSelected.KVCNoteID === inputData.KVCNoteID)) {
+			mod.ControlNoteSelect(null);
+		}
+
+		mod.ValueNotesAll(mod._ValueNotesAll.filter(function (e) {
+			return e.KVCNoteID !== inputData.KVCNoteID;
+		}), false);
+	},
+
 	SetupStorageClient() {
-		mod._ValueStorageClient = KVCStorageClient.KVCStorageClient({
-			modules: [
-				KVCStorageModule([
-					KVCNoteStorage,
-					KVCVersionStorage,
-					KVCSettingStorage,
-					].map(function (e) {
-						return {
-							KVCCollectionStorageGenerator: e,
-							KVCCollectionChangeDelegate: e === KVCNoteStorage ? {
-								OLSKChangeDelegateCreate (inputData) {
-									// console.log('OLSKChangeDelegateCreate', inputData);
-
-									mod.ValueNotesAll(mod._ValueNotesAll.filter(function (e) {
-										return e.KVCNoteID !== inputData.KVCNoteID; // @Hotfix Dropbox sending DelegateAdd
-									}).concat(inputData));
-								},
-								OLSKChangeDelegateUpdate (inputData) {
-									// console.log('OLSKChangeDelegateUpdate', inputData);
-
-									if (mod.DataDebugPersistenceIsEnabled()) {
-										console.log('OLSKChangeDelegateUpdate', inputData.KVCNoteID, inputData.KVCNoteBody);
-									}
-
-									if (mod._ValueNoteSelected && (mod._ValueNoteSelected.KVCNoteID === inputData.KVCNoteID)) {
-										mod._ControlHotfixUpdateInPlace(Object.assign(mod._ValueNoteSelected, inputData));
-									}
-
-									mod.ValueNotesAll(mod._ValueNotesAll.map(function (e) {
-										return Object.assign(e, e.KVCNoteID === inputData.KVCNoteID ? inputData : {});
-									}), !mod._ValueNoteSelected);
-								},
-								OLSKChangeDelegateDelete (inputData) {
-									// console.log('OLSKChangeDelegateDelete', inputData);
-
-									if (mod._ValueNoteSelected && (mod._ValueNoteSelected.KVCNoteID === inputData.KVCNoteID)) {
-										mod.ControlNoteSelect(null);
-									}
-
-									mod.ValueNotesAll(mod._ValueNotesAll.filter(function (e) {
-										return e.KVCNoteID !== inputData.KVCNoteID;
-									}), false);
-								},
-							} : null,
-						}
-					})),
-			],
+		const storageModule = KVCStorageModule([
+			Object.assign(KVCNoteStorage, {
+				KVCStorageChangeDelegate: {
+					OLSKChangeDelegateCreate: mod.OLSKChangeDelegateCreateNote,
+					OLSKChangeDelegateUpdate: mod.OLSKChangeDelegateUpdateNote,
+					OLSKChangeDelegateDelete: mod.OLSKChangeDelegateDeleteNote,
+				},
+			}),
+			KVCSettingStorage,
+			KVCVersionStorage,
+			]);
+		
+		mod._ValueStorageClient = new RemoteStorage({
+			modules: [ storageModule ],
 			OLSKPatchRemoteStorageAuthRedirectURI: OLSK_TESTING_BEHAVIOUR() ? undefined : window.location.origin + window.OLSKCanonicalFor('KVCWriteRoute'),
 		});
+
+		mod._ValueStorageClient.access.claim(storageModule.name, 'rw');
+
+		mod._ValueStorageClient.caching.enable(`/${ storageModule.name }/`);
 	},
 
 	SetupRemoteStorage () {
-		mod._ValueStorageClient.remoteStorage.setApiKeys(window.OLSKPublicConstants('KVCDropboxAppKey') ? {
+		mod._ValueStorageClient.setApiKeys(window.OLSKPublicConstants('KVCDropboxAppKey') ? {
 			dropbox: window.atob(window.OLSKPublicConstants('KVCDropboxAppKey')),
 			googledrive: window.atob(window.OLSKPublicConstants('KVCGoogleClientKey')),
 		} : {});
 	},
 
 	SetupStorageWidget () {
-		(new window.OLSKStorageWidget(mod._ValueStorageClient.remoteStorage)).attach('KVCWriteStorageWidget').backend(document.querySelector('.OLSKAppToolbarStorageButton'));
+		(new window.OLSKStorageWidget(mod._ValueStorageClient)).attach('KVCWriteStorageWidget').backend(document.querySelector('.OLSKAppToolbarStorageButton'));
 	},
 
 	SetupStorageStatus () {
-		OLSKRemoteStorage.OLSKRemoteStorageStatus(mod._ValueStorageClient.remoteStorage, function (inputData) {
+		OLSKRemoteStorage.OLSKRemoteStorageStatus(mod._ValueStorageClient, function (inputData) {
 			mod._ValueFooterStorageStatus = inputData;
 		}, OLSKLocalized)
 	},
 
 	async SetupStorageNotifications () {
-		mod._ValueStorageClient.remoteStorage.on('not-connected', () => {
+		mod._ValueStorageClient.on('not-connected', () => {
 			if (!OLSK_TESTING_BEHAVIOUR()) {
 				console.debug('not-connected', arguments);
 			}
 		});
 
-		mod._ValueStorageClient.remoteStorage.on('disconnected', () => {
+		mod._ValueStorageClient.on('disconnected', () => {
 			if (!OLSK_TESTING_BEHAVIOUR()) {
 				console.debug('disconnected', arguments);
 			}
 		});
 
-		mod._ValueStorageClient.remoteStorage.on('connected', () => {
+		mod._ValueStorageClient.on('connected', () => {
 			if (!OLSK_TESTING_BEHAVIOUR()) {
 				console.debug('connected', arguments);
 			}
 		});
 
-		mod._ValueStorageClient.remoteStorage.on('sync-done', () => {
+		mod._ValueStorageClient.on('sync-done', () => {
 			return;
 			if (!OLSK_TESTING_BEHAVIOUR()) {
 				console.debug('sync-done', arguments);
@@ -580,7 +586,7 @@ const mod = {
 
 		let isOffline;
 
-		mod._ValueStorageClient.remoteStorage.on('network-offline', () => {
+		mod._ValueStorageClient.on('network-offline', () => {
 			if (!OLSK_TESTING_BEHAVIOUR()) {
 				console.debug('network-offline', arguments);
 			}
@@ -588,7 +594,7 @@ const mod = {
 			isOffline = true;
 		});
 
-		mod._ValueStorageClient.remoteStorage.on('network-online', () => {
+		mod._ValueStorageClient.on('network-online', () => {
 			if (!OLSK_TESTING_BEHAVIOUR()) {
 				console.debug('network-online', arguments);
 			}
@@ -596,7 +602,7 @@ const mod = {
 			isOffline = false;
 		});
 
-		mod._ValueStorageClient.remoteStorage.on('error', (error) => {
+		mod._ValueStorageClient.on('error', (error) => {
 			if (isOffline && inputData.message === 'Sync failed: Network request failed.') {
 				return;
 			};
@@ -607,7 +613,7 @@ const mod = {
 		});
 
 		return new Promise(function (res, rej) {
-			mod._ValueStorageClient.remoteStorage.on('ready', () => {
+			mod._ValueStorageClient.on('ready', () => {
 				if (!OLSK_TESTING_BEHAVIOUR()) {
 					console.debug('ready', arguments);
 				}
@@ -615,12 +621,6 @@ const mod = {
 				res();
 			});
 		})
-	},
-
-	async SetupDataCache() {
-		await mod._ValueStorageClient.remoteStorage.wikiavec.kvc_notes.KVCNoteStorageCache();
-		await mod._ValueStorageClient.remoteStorage.wikiavec.kvc_settings.KVCSettingStorageCache();
-		await mod._ValueStorageClient.remoteStorage.wikiavec.kvc_versions.KVCVersionStorageCache();
 	},
 
 	async SetupValueNotesAll() {

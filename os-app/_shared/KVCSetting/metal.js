@@ -26,7 +26,7 @@ const mod = {
 	},
 
 	async KVCSettingsMetalList (storageClient) {
-		return await storageClient.wikiavec.kvc_settings.listObjects();
+		return await storageClient.wikiavec.kvc_settings.KVCStorageList();
 	},
 
 	async KVCSettingsMetalDelete (storageClient, inputData) {
@@ -34,7 +34,7 @@ const mod = {
 			return Promise.reject(new Error('KVCErrorInputNotValid'));
 		}
 
-		return await storageClient.wikiavec.kvc_settings.deleteObject(inputData);
+		return await storageClient.wikiavec.kvc_settings.KVCStorageDelete(inputData);
 	},
 	
 };
