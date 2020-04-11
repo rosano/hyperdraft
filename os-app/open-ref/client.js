@@ -1,7 +1,7 @@
 const RemoteStorage = require('remotestoragejs');
 
 exports.WKCRefStorageClient = function () {
-	let modules = [{
+	let storageModule = {
 		name: 'wikiavec',
 		builder (privateClient, publicClient) {
 			return {
@@ -12,23 +12,19 @@ exports.WKCRefStorageClient = function () {
 				},
 			};
 		},
-	}];
+	};
 
-	let remoteStorage = new RemoteStorage({
-		modules: modules,
-	});
+	let remoteStorage = new RemoteStorage({ modules: [ storageModule ] });
 
 	let outputData = {};
 
 	outputData.remoteStorage = remoteStorage;
 
-	modules.forEach(function (e) {
-		remoteStorage.access.claim(e.name, 'r');
+	remoteStorage.access.claim(storageModule.name, 'r');
 
-		remoteStorage.caching.enable(`/${e.name}/`);
+	remoteStorage.caching.enable(`/${storageModule.name}/`);
 
-		outputData[e.name] = remoteStorage[e.name];
-	});
+	outputData[storageModule.name] = remoteStorage[storageModule.name];
 
 	return outputData;
 };
