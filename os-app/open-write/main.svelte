@@ -528,7 +528,7 @@ const mod = {
 				},
 			}),
 			KVCSettingStorage.KVCSettingStorageBuild,
-			KVCVersionStorage.KVCVersionStorage,
+			KVCVersionStorage.KVCVersionStorageBuild,
 			]);
 		
 		mod._ValueStorageClient = new RemoteStorage({

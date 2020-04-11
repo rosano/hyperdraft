@@ -64,7 +64,7 @@ const KVCVersionStorage = require('./os-app/_shared/KVCVersion/storage.js').defa
 	const storageModule = KVCStorageModule.KVCStorageModule([
 		KVCNoteStorage.KVCNoteStorageBuild,
 		KVCSettingStorage.KVCSettingStorageBuild,
-		KVCVersionStorage.KVCVersionStorage,
+		KVCVersionStorage.KVCVersionStorageBuild,
 	]);
 
 	before(function() {

@@ -10,7 +10,7 @@ const mod = {
 		return `${ kCollection }/${ inputData || '' }`;
 	},
 
-	KVCVersionStorage  (privateClient, publicClient, changeDelegate) {
+	KVCVersionStorageBuild (privateClient, publicClient, changeDelegate) {
 		return {
 			KVCStorageCollection: kCollection,
 			KVCStorageType: kType,
