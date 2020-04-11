@@ -8,7 +8,7 @@ import OLSKThrottle from 'OLSKThrottle';
 import { KVCStorageModule } from '../_shared/KVCStorageModule/main.js';
 import KVCNoteStorage from '../_shared/KVCNote/storage.js';
 import { KVCNoteModelPostJSONParse } from '../_shared/KVCNote/model.js';
-import { KVCSettingStorage } from '../_shared/KVCSetting/storage.js';
+import KVCSettingStorage from '../_shared/KVCSetting/storage.js';
 import { KVCVersionStorage } from '../_shared/KVCVersion/storage.js';
 import KVCParser from '../_shared/KVCParser/main.js';
 import { OLSK_TESTING_BEHAVIOUR } from 'OLSKTesting';
@@ -527,7 +527,7 @@ const mod = {
 					OLSKChangeDelegateDelete: mod.OLSKChangeDelegateDeleteNote,
 				},
 			}),
-			KVCSettingStorage,
+			KVCSettingStorage.KVCSettingStorageBuild,
 			KVCVersionStorage,
 			]);
 		

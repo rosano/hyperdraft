@@ -1,6 +1,6 @@
 const { throws, deepEqual } = require('assert');
 
-const mainModule = require('./storage.js');
+const mainModule = require('./storage.js').default;
 
 describe('KVCSettingStoragePath', function testKVCSettingStoragePath() {
 

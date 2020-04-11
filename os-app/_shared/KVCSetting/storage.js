@@ -1,31 +1,37 @@
+import * as KVCSettingModel from './model.js';
+
 const kType = 'kvc_setting';
 const kCollection = 'kvc_settings';
 
-export const KVCSettingStoragePath = function(inputData) {
-	return `${ kCollection }/${ inputData || '' }`;
+const mod = {
+
+	KVCSettingStoragePath (inputData) {
+		return `${ kCollection }/${ inputData || '' }`;
+	},
+
+	KVCSettingStorageBuild (privateClient, publicClient, changeDelegate) {
+		return {
+			KVCStorageCollection: kCollection,
+			KVCStorageType: kType,
+			KVCStorageModelErrors: KVCSettingModel.KVCSettingModelErrorsFor({}),
+			KVCStorageExports: {
+				KVCStorageList () {
+					return privateClient.getAll(mod.KVCSettingStoragePath(), false);
+				},
+				async writeObject (param1, param2) {
+					await privateClient.storeObject(kType, mod.KVCSettingStoragePath(param1), param2);
+					return param2;
+				},
+				readObject (inputData) {
+					return privateClient.getObject(mod.KVCSettingStoragePath(inputData));
+				},
+				KVCStorageDelete (inputData) {
+					return privateClient.remove(mod.KVCSettingStoragePath(inputData));
+				},
+			},
+		};
+	},
+
 };
 
-import * as KVCSettingModel from './model.js';
-
-export const KVCSettingStorage = function (privateClient, publicClient, changeDelegate) {
-	return {
-		KVCStorageCollection: kCollection,
-		KVCStorageType: kType,
-		KVCStorageModelErrors: KVCSettingModel.KVCSettingModelErrorsFor({}),
-		KVCStorageExports: {
-			KVCStorageList () {
-				return privateClient.getAll(KVCSettingStoragePath(), false);
-			},
-			async writeObject (param1, param2) {
-				await privateClient.storeObject(kType, KVCSettingStoragePath(param1), param2);
-				return param2;
-			},
-			readObject (inputData) {
-				return privateClient.getObject(KVCSettingStoragePath(inputData));
-			},
-			KVCStorageDelete (inputData) {
-				return privateClient.remove(KVCSettingStoragePath(inputData));
-			},
-		},
-	};
-};
+export default mod;
