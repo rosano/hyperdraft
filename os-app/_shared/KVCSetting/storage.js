@@ -18,7 +18,7 @@ const mod = {
 				KVCStorageList () {
 					return privateClient.getAll(mod.KVCSettingStoragePath(), false);
 				},
-				async writeObject (param1, param2) {
+				async KVCStorageWrite (param1, param2) {
 					await privateClient.storeObject(kType, mod.KVCSettingStoragePath(param1), param2);
 					return param2;
 				},

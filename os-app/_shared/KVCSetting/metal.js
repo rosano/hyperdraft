@@ -14,7 +14,7 @@ const mod = {
 			});
 		}
 
-		return await storageClient.wikiavec.kvc_settings.writeObject(inputData.KVCSettingKey, inputData);
+		return await storageClient.wikiavec.kvc_settings.KVCStorageWrite(inputData.KVCSettingKey, inputData);
 	},
 
 	async KVCSettingsMetalRead (storageClient, inputData) {

@@ -17,7 +17,7 @@ export const KVCVersionStorage = function (privateClient, publicClient, changeDe
 			KVCStorageList () {
 				return privateClient.getAll(KVCVersionStoragePath(), false);
 			},
-			async writeObject (param1, param2) {
+			async KVCStorageWrite (param1, param2) {
 				await privateClient.storeObject(kType, KVCVersionStoragePath(param1), KVCVersionModel.KVCVersionModelPreJSONSchemaValidate(param2));
 				return KVCVersionModel.KVCVersionModelPostJSONParse(param2);
 			},

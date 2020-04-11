@@ -49,7 +49,7 @@ const mod = {
 				KVCStorageList () {
 					return privateClient.getAll(mod.KVCNoteStoragePath(), false);
 				},
-				async writeObject (param1, param2) {
+				async KVCStorageWrite (param1, param2) {
 					await privateClient.storeObject(kType, mod.KVCNoteStoragePath(param1), KVCNoteModel.KVCNoteModelPreJSONSchemaValidate(param2));
 					return KVCNoteModel.KVCNoteModelPostJSONParse(param2);
 				},
