@@ -17,7 +17,7 @@ import * as OLSKRemoteStorage from '../_shared/__external/OLSKRemoteStorage/main
 import KVCNoteAction from '../_shared/KVCNote/action.js';
 import * as KVCNoteMetal from '../_shared/KVCNote/metal.js';
 import * as KVCVersionAction from '../_shared/KVCVersion/action.js';
-import * as KVCSettingAction from '../_shared/KVCSetting/action.js';
+import KVCSettingAction from '../_shared/KVCSetting/action.js';
 import * as KVCSettingMetal from '../_shared/KVCSetting/metal.js';
 import KVCWriteLogic from './ui-logic.js';
 

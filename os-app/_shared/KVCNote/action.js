@@ -3,7 +3,7 @@ const uniqueID = typeof require === 'undefined' && navigator.appName === 'Zombie
 
 import * as KVCNoteMetal from './metal.js';
 import * as KVCNoteModel from './model.js';
-import * as KVCSettingAction from '../KVCSetting/action.js';
+import KVCSettingAction from '../KVCSetting/action.js';
 import * as KVCVersionAction from '../KVCVersion/action.js';
 import KVCParser from '../KVCParser/main.js';
 
