@@ -14,7 +14,7 @@ import { KVCVersionStorage } from '../_shared/KVCVersion/storage.js';
 import KVCParser from '../_shared/KVCParser/main.js';
 import { OLSK_TESTING_BEHAVIOUR } from 'OLSKTesting';
 import * as OLSKRemoteStorage from '../_shared/__external/OLSKRemoteStorage/main.js'
-import * as KVCNoteAction from '../_shared/KVCNote/action.js';
+import KVCNoteAction from '../_shared/KVCNote/action.js';
 import * as KVCNoteMetal from '../_shared/KVCNote/metal.js';
 import * as KVCVersionAction from '../_shared/KVCVersion/action.js';
 import * as KVCSettingAction from '../_shared/KVCSetting/action.js';
