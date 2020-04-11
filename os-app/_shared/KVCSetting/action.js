@@ -1,4 +1,4 @@
-import * as KVCSettingsMetal from './metal.js';
+import KVCSettingsMetal from './metal.js';
 
 const mod = {
 
