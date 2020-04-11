@@ -22,7 +22,7 @@ const mod = {
 			return Promise.reject(new Error('KVCErrorInputNotValid'));
 		}
 
-		return await storageClient.wikiavec.kvc_settings.readObject(inputData);
+		return await storageClient.wikiavec.kvc_settings.KVCStorageRead(inputData);
 	},
 
 	async KVCSettingsMetalList (storageClient) {

@@ -53,7 +53,7 @@ const mod = {
 					await privateClient.storeObject(kType, mod.KVCNoteStoragePath(param1), KVCNoteModel.KVCNoteModelPreJSONSchemaValidate(param2));
 					return KVCNoteModel.KVCNoteModelPostJSONParse(param2);
 				},
-				readObject (inputData) {
+				KVCStorageRead (inputData) {
 					return privateClient.getObject(mod.KVCNoteStoragePath(inputData));
 				},
 				KVCStorageDelete (inputData) {

@@ -9,7 +9,7 @@ import { KVCStorageModule } from '../_shared/KVCStorageModule/main.js';
 import KVCNoteStorage from '../_shared/KVCNote/storage.js';
 import { KVCNoteModelPostJSONParse } from '../_shared/KVCNote/model.js';
 import KVCSettingStorage from '../_shared/KVCSetting/storage.js';
-import { KVCVersionStorage } from '../_shared/KVCVersion/storage.js';
+import KVCVersionStorage from '../_shared/KVCVersion/storage.js';
 import KVCParser from '../_shared/KVCParser/main.js';
 import { OLSK_TESTING_BEHAVIOUR } from 'OLSKTesting';
 import * as OLSKRemoteStorage from '../_shared/__external/OLSKRemoteStorage/main.js'
@@ -528,7 +528,7 @@ const mod = {
 				},
 			}),
 			KVCSettingStorage.KVCSettingStorageBuild,
-			KVCVersionStorage,
+			KVCVersionStorage.KVCVersionStorage,
 			]);
 		
 		mod._ValueStorageClient = new RemoteStorage({

@@ -22,7 +22,7 @@ const mod = {
 					await privateClient.storeObject(kType, mod.KVCSettingStoragePath(param1), param2);
 					return param2;
 				},
-				readObject (inputData) {
+				KVCStorageRead (inputData) {
 					return privateClient.getObject(mod.KVCSettingStoragePath(inputData));
 				},
 				KVCStorageDelete (inputData) {

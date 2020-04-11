@@ -23,7 +23,7 @@ const mod = {
 			return Promise.reject(new Error('KVCErrorInputNotValid'));
 		}
 
-		return KVCNoteModelPostJSONParse(await storageClient.wikiavec.kvc_notes.readObject(inputData));
+		return KVCNoteModelPostJSONParse(await storageClient.wikiavec.kvc_notes.KVCStorageRead(inputData));
 	},
 
 	async KVCNoteMetalList (storageClient) {
