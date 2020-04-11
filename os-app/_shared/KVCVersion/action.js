@@ -1,7 +1,7 @@
 import { factory, detectPrng } from 'ulid';
 const uniqueID = typeof require === 'undefined' && navigator.appName === 'Zombie' ? factory(detectPrng(true)) : factory();
 
-import * as KVCVersionMetal from './metal.js';
+import KVCVersionMetal from './metal.js';
 
 const mod = {
 
