@@ -3,7 +3,7 @@ import { deepEqual } from 'assert';
 describe('KVCRef_Misc', function () {
 
 	const stubURL = function (inputData, host = 'loc.tests') {
-		return `http://${ host }${ typeof inputData === 'string' ? inputData : inputData.OLSKRoutePath }`;
+		return `http://${ host }:3000${ typeof inputData === 'string' ? inputData : inputData.OLSKRoutePath }`;
 	};
 
 	describe('KVCRefHomeRoute', function () {		
