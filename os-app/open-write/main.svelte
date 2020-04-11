@@ -6,7 +6,7 @@ const OLSKLocalized = function(translationConstant) {
 
 import OLSKThrottle from 'OLSKThrottle';
 import { KVCStorageModule } from '../_shared/KVCStorageModule/main.js';
-import { KVCNoteStorage } from '../_shared/KVCNote/storage.js';
+import KVCNoteStorage from '../_shared/KVCNote/storage.js';
 import { KVCNoteModelPostJSONParse } from '../_shared/KVCNote/model.js';
 import { KVCSettingStorage } from '../_shared/KVCSetting/storage.js';
 import { KVCVersionStorage } from '../_shared/KVCVersion/storage.js';
@@ -520,7 +520,7 @@ const mod = {
 
 	SetupStorageClient() {
 		const storageModule = KVCStorageModule([
-			Object.assign(KVCNoteStorage, {
+			Object.assign(KVCNoteStorage.KVCNoteStorageBuild, {
 				KVCStorageChangeDelegate: {
 					OLSKChangeDelegateCreate: mod.OLSKChangeDelegateCreateNote,
 					OLSKChangeDelegateUpdate: mod.OLSKChangeDelegateUpdateNote,

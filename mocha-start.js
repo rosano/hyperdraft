@@ -46,7 +46,7 @@
 const RemoteStorage = require('remotestoragejs');
 
 const KVCStorageModule = require('./os-app/_shared/KVCStorageModule/main.js');
-const KVCNoteStorage = require('./os-app/_shared/KVCNote/storage.js');
+const KVCNoteStorage = require('./os-app/_shared/KVCNote/storage.js').default;
 const KVCSettingStorage = require('./os-app/_shared/KVCSetting/storage.js');
 const KVCVersionStorage = require('./os-app/_shared/KVCVersion/storage.js');
 
@@ -62,7 +62,7 @@ const KVCVersionStorage = require('./os-app/_shared/KVCVersion/storage.js');
 	};
 
 	const storageModule = KVCStorageModule.KVCStorageModule([
-		KVCNoteStorage.KVCNoteStorage,
+		KVCNoteStorage.KVCNoteStorageBuild,
 		KVCSettingStorage.KVCSettingStorage,
 		KVCVersionStorage.KVCVersionStorage,
 	]);
