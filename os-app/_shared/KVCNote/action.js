@@ -1,7 +1,7 @@
 import { factory, detectPrng } from 'ulid';
 const uniqueID = typeof require === 'undefined' && navigator.appName === 'Zombie' ? factory(detectPrng(true)) : factory();
 
-import * as KVCNoteMetal from './metal.js';
+import KVCNoteMetal from './metal.js';
 import * as KVCNoteModel from './model.js';
 import KVCSettingAction from '../KVCSetting/action.js';
 import KVCVersionAction from '../KVCVersion/action.js';
