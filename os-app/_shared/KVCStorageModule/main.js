@@ -2,23 +2,29 @@ import * as OLSKRemoteStorage from 'OLSKRemoteStorage';
 
 const kModuleName = 'wikiavec';
 
-export const KVCStorageModule = function (inputData) {
-	return {
-		name: kModuleName,
-		builder(privateClient, publicClient) {
-			privateClient.cache(`${ kModuleName }/`);
-			
-			return {
-				exports: inputData.reduce(function (coll, item) {
-					let storage = item(privateClient, publicClient, item.KVCStorageChangeDelegate);
+const mod = {
 
-					privateClient.declareType(storage.KVCStorageType, OLSKRemoteStorage.OLSKRemoteStorageJSONSchema(storage.KVCStorageModelErrors));
+	KVCStorageModuleObject (inputData) {
+		return {
+			name: kModuleName,
+			builder(privateClient, publicClient) {
+				privateClient.cache(`${ kModuleName }/`);
+				
+				return {
+					exports: inputData.reduce(function (coll, item) {
+						let storage = item(privateClient, publicClient, item.KVCStorageChangeDelegate);
 
-					coll[storage.KVCStorageCollection] = storage.KVCStorageExports;
+						privateClient.declareType(storage.KVCStorageType, OLSKRemoteStorage.OLSKRemoteStorageJSONSchema(storage.KVCStorageModelErrors));
 
-					return coll;
-				}, {}),
-			};
-		},
-	};
+						coll[storage.KVCStorageCollection] = storage.KVCStorageExports;
+
+						return coll;
+					}, {}),
+				};
+			},
+		};
+	},
+
 };
+
+export default mod;
