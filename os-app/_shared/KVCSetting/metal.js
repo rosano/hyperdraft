@@ -1,4 +1,4 @@
-import * as KVCSettingsModel from './model.js';
+import KVCSettingsModel from './model.js';
 
 const mod = {
 

@@ -1,4 +1,4 @@
-import * as KVCSettingModel from './model.js';
+import KVCSettingModel from './model.js';
 
 const kType = 'kvc_setting';
 const kCollection = 'kvc_settings';
