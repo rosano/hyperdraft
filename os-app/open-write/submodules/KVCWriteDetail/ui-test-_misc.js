@@ -454,7 +454,7 @@ describe('KVCWriteDetail_Misc', function () {
 				browser.fill('.KVCWriteInputFieldDebug', 'bravo');
 			});
 
-			it('updates LCHWriteDetailItem', function () {
+			it('updates KVCWriteDetailItem', function () {
 				browser.assert.text('#TestKVCWriteDetailItem', JSON.stringify({
 					KVCNoteBody: 'bravo',
 				}));
