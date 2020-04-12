@@ -1,4 +1,4 @@
-import { KVCNoteModelErrorsFor, KVCNoteModelPostJSONParse } from './model.js';
+import KVCNoteModel from './model.js';
 
 const mod = {
 
@@ -7,7 +7,7 @@ const mod = {
 			return Promise.reject(new Error('KVCErrorInputNotValid'));
 		}
 
-		let errors = KVCNoteModelErrorsFor(inputData);
+		let errors = KVCNoteModel.KVCNoteModelErrorsFor(inputData);
 
 		if (errors) {
 			return Promise.resolve({
@@ -23,14 +23,14 @@ const mod = {
 			return Promise.reject(new Error('KVCErrorInputNotValid'));
 		}
 
-		return KVCNoteModelPostJSONParse(await storageClient.wikiavec.kvc_notes.KVCStorageRead(inputData));
+		return KVCNoteModel.KVCNoteModelPostJSONParse(await storageClient.wikiavec.kvc_notes.KVCStorageRead(inputData));
 	},
 
 	async KVCNoteMetalList (storageClient) {
 		let outputData = await storageClient.wikiavec.kvc_notes.KVCStorageList();
 
 		for (let key in outputData) {
-			KVCNoteModelPostJSONParse(outputData[key]);
+			KVCNoteModel.KVCNoteModelPostJSONParse(outputData[key]);
 		}
 		
 		return outputData;

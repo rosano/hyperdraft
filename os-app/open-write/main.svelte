@@ -7,7 +7,7 @@ const OLSKLocalized = function(translationConstant) {
 import OLSKThrottle from 'OLSKThrottle';
 import { KVCStorageModule } from '../_shared/KVCStorageModule/main.js';
 import KVCNoteStorage from '../_shared/KVCNote/storage.js';
-import { KVCNoteModelPostJSONParse } from '../_shared/KVCNote/model.js';
+import KVCNoteModel from '../_shared/KVCNote/model.js';
 import KVCSettingStorage from '../_shared/KVCSetting/storage.js';
 import KVCVersionStorage from '../_shared/KVCVersion/storage.js';
 import KVCParser from '../_shared/KVCParser/main.js';
@@ -410,7 +410,7 @@ const mod = {
 		}));
 
 		await Promise.all(outputData.KVCNoteObjects.map(function (e) {
-			return KVCNoteMetal.KVCNoteMetalWrite(mod._ValueStorageClient, KVCNoteModelPostJSONParse(e));
+			return KVCNoteMetal.KVCNoteMetalWrite(mod._ValueStorageClient, KVCNoteModel.KVCNoteModelPostJSONParse(e));
 		}));
 
 		mod.ValueNotesAll(await KVCNoteAction.KVCNoteActionQuery(mod._ValueStorageClient, {}));

@@ -1,4 +1,4 @@
-import * as KVCNoteModel from './model.js';
+import KVCNoteModel from './model.js';
 import * as OLSKRemoteStorage from 'OLSKRemoteStorage';
 
 const kType = 'kvc_note';

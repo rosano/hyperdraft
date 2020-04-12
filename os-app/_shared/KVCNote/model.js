@@ -1,73 +1,79 @@
-export const KVCNoteModelErrorsFor = function(inputData, options = {}) {
-	if (typeof inputData !== 'object' || inputData === null) {
-		throw new Error('KVCErrorInputNotValid');
-	}
+const mod = {
 
-	let errors = {};
+	KVCNoteModelErrorsFor (inputData, options = {}) {
+		if (typeof inputData !== 'object' || inputData === null) {
+			throw new Error('KVCErrorInputNotValid');
+		}
 
-	if (typeof inputData.KVCNoteID !== 'string') {
-		errors.KVCNoteID = [
-			'KVCErrorNotString',
-		];
-	} else if (inputData.KVCNoteID.trim() === '') {
-		errors.KVCNoteID = [
-			'KVCErrorNotFilled',
-		];
-	}
+		let errors = {};
 
-	if (typeof inputData.KVCNoteBody !== 'string') {
-		errors.KVCNoteBody = [
-			'KVCErrorNotString',
-		];
-	}
-
-	if (!(inputData.KVCNoteCreationDate instanceof Date) || Number.isNaN(inputData.KVCNoteCreationDate.getTime())) {
-		errors.KVCNoteCreationDate = [
-			'KVCErrorNotDate',
-		];
-	}
-
-	if (!(inputData.KVCNoteModificationDate instanceof Date) || Number.isNaN(inputData.KVCNoteModificationDate.getTime())) {
-		errors.KVCNoteModificationDate = [
-			'KVCErrorNotDate',
-		];
-	}
-
-	if (typeof inputData.KVCNotePublishStatusIsPublished !== 'undefined') {
-		if (typeof inputData.KVCNotePublishStatusIsPublished !== 'boolean') {
-			errors.KVCNotePublishStatusIsPublished = [
-				'KVCErrorNotBoolean',
+		if (typeof inputData.KVCNoteID !== 'string') {
+			errors.KVCNoteID = [
+				'KVCErrorNotString',
+			];
+		} else if (inputData.KVCNoteID.trim() === '') {
+			errors.KVCNoteID = [
+				'KVCErrorNotFilled',
 			];
 		}
-	}
 
-	return Object.entries(errors).length ? errors : null;
-};
+		if (typeof inputData.KVCNoteBody !== 'string') {
+			errors.KVCNoteBody = [
+				'KVCErrorNotString',
+			];
+		}
 
-export const KVCNoteModelPreJSONSchemaValidate = function(inputData) {
-	if (inputData.KVCNoteCreationDate) {
-		inputData.KVCNoteCreationDate = inputData.KVCNoteCreationDate.toISOString();
-	}
+		if (!(inputData.KVCNoteCreationDate instanceof Date) || Number.isNaN(inputData.KVCNoteCreationDate.getTime())) {
+			errors.KVCNoteCreationDate = [
+				'KVCErrorNotDate',
+			];
+		}
 
-	if (inputData.KVCNoteModificationDate) {
-		inputData.KVCNoteModificationDate = inputData.KVCNoteModificationDate.toISOString();
-	}
+		if (!(inputData.KVCNoteModificationDate instanceof Date) || Number.isNaN(inputData.KVCNoteModificationDate.getTime())) {
+			errors.KVCNoteModificationDate = [
+				'KVCErrorNotDate',
+			];
+		}
 
-	return inputData;
-};
+		if (typeof inputData.KVCNotePublishStatusIsPublished !== 'undefined') {
+			if (typeof inputData.KVCNotePublishStatusIsPublished !== 'boolean') {
+				errors.KVCNotePublishStatusIsPublished = [
+					'KVCErrorNotBoolean',
+				];
+			}
+		}
 
-export const KVCNoteModelPostJSONParse = function(inputData) {
-	if (!inputData) {
+		return Object.entries(errors).length ? errors : null;
+	},
+
+	KVCNoteModelPreJSONSchemaValidate (inputData) {
+		if (inputData.KVCNoteCreationDate) {
+			inputData.KVCNoteCreationDate = inputData.KVCNoteCreationDate.toISOString();
+		}
+
+		if (inputData.KVCNoteModificationDate) {
+			inputData.KVCNoteModificationDate = inputData.KVCNoteModificationDate.toISOString();
+		}
+
 		return inputData;
-	}
+	},
 
-	if (inputData.KVCNoteCreationDate) {
-		inputData.KVCNoteCreationDate = new Date(inputData.KVCNoteCreationDate);
-	}
+	KVCNoteModelPostJSONParse (inputData) {
+		if (!inputData) {
+			return inputData;
+		}
 
-	if (inputData.KVCNoteModificationDate) {
-		inputData.KVCNoteModificationDate = new Date(inputData.KVCNoteModificationDate);
-	}
+		if (inputData.KVCNoteCreationDate) {
+			inputData.KVCNoteCreationDate = new Date(inputData.KVCNoteCreationDate);
+		}
 
-	return inputData;
+		if (inputData.KVCNoteModificationDate) {
+			inputData.KVCNoteModificationDate = new Date(inputData.KVCNoteModificationDate);
+		}
+
+		return inputData;
+	},
+
 };
+
+export default mod;
