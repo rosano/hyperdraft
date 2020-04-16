@@ -80,7 +80,7 @@ describe.skip('WKCLoginMiddlewareAuthenticate', function test_WKCLoginMiddleware
 
 	it('returns next(undefined) with any token', function() {
 		assert.deepEqual(mainModule.WKCLoginMiddlewareAuthenticate(OLSKTesting.OLSKTestingFakeRequestForSession({
-			WKCInsecureSessionToken: 'alpha',
+			WKCInsecureSessionToken: 'alfa',
 		}), OLSKTesting.OLSKTestingFakeResponseForRedirect(), OLSKTesting.OLSKTestingFakeNext()), 'RETURNED_UNDEFINED');
 	});
 

@@ -490,17 +490,17 @@ describe('KVCParserTitleForPlaintext', function test_KVCParserTitleForPlaintext(
 	});
 
 	it('returns first line if single', function() {
-		assert.deepEqual(mainModule.KVCParserTitleForPlaintext('alpha'), 'alpha');
+		assert.deepEqual(mainModule.KVCParserTitleForPlaintext('alfa'), 'alfa');
 	});
 
 	it('returns first line if multiple', function() {
-		assert.deepEqual(mainModule.KVCParserTitleForPlaintext('alpha\n'), 'alpha');
-		assert.deepEqual(mainModule.KVCParserTitleForPlaintext('alpha\nbravo'), 'alpha');
+		assert.deepEqual(mainModule.KVCParserTitleForPlaintext('alfa\n'), 'alfa');
+		assert.deepEqual(mainModule.KVCParserTitleForPlaintext('alfa\nbravo'), 'alfa');
 	});
 
 	it('returns empty if blank', function() {
-		assert.deepEqual(mainModule.KVCParserTitleForPlaintext('\nalpha'), '');
-		assert.deepEqual(mainModule.KVCParserTitleForPlaintext('\n\nalpha'), '');
+		assert.deepEqual(mainModule.KVCParserTitleForPlaintext('\nalfa'), '');
+		assert.deepEqual(mainModule.KVCParserTitleForPlaintext('\n\nalfa'), '');
 	});
 
 });
@@ -514,17 +514,17 @@ describe('KVCParserBodyForPlaintext', function test_KVCParserBodyForPlaintext() 
 	});
 
 	it('returns empty if single', function() {
-		assert.deepEqual(mainModule.KVCParserBodyForPlaintext('alpha'), '');
+		assert.deepEqual(mainModule.KVCParserBodyForPlaintext('alfa'), '');
 	});
 
 	it('returns first line if multiple', function() {
 		assert.deepEqual(mainModule.KVCParserBodyForPlaintext('\n'), '');
-		assert.deepEqual(mainModule.KVCParserBodyForPlaintext('alpha\n'), '');
-		assert.deepEqual(mainModule.KVCParserBodyForPlaintext('alpha\nbravo'), 'bravo');
+		assert.deepEqual(mainModule.KVCParserBodyForPlaintext('alfa\n'), '');
+		assert.deepEqual(mainModule.KVCParserBodyForPlaintext('alfa\nbravo'), 'bravo');
 	});
 
 	it('returns first line if blank', function() {
-		assert.deepEqual(mainModule.KVCParserBodyForPlaintext('alpha\n\nbravo'), 'bravo');
+		assert.deepEqual(mainModule.KVCParserBodyForPlaintext('alfa\n\nbravo'), 'bravo');
 	});
 
 });

@@ -119,7 +119,7 @@ describe.skip('WKCAPIErrorHandler', function test_WKCAPIErrorHandler() {
 	});
 
 	it('returns next(error) for Error', function() {
-		var item = new Error('alpha');
+		var item = new Error('alfa');
 		assert.deepEqual(controllerModule.WKCAPIErrorHandler(item, {}, OLSKTesting.OLSKTestingFakeResponseForStatus(), function(inputData) {
 			return inputData;
 		}), item);

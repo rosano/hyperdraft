@@ -28,12 +28,12 @@ describe.skip('KVCErrorsFirstHandler', function test_KVCErrorsFirstHandler() {
 
 	it('sets res.locals.OLSKSharedPageControllerSlug to folder name', function() {
 		var res = OLSKTesting.OLSKTestingFakeResponseForLocals();
-		controllerModule.KVCErrorsFirstHandler(new Error('alpha'), null, res, OLSKTesting.OLSKTestingFakeNext());
+		controllerModule.KVCErrorsFirstHandler(new Error('alfa'), null, res, OLSKTesting.OLSKTestingFakeNext());
 		assert.strictEqual(res.locals.OLSKSharedPageControllerSlug, pathPackage.basename(__dirname));
 	});
 
 	it('returns next(error)', function() {
-		var errorObject = new Error('alpha');
+		var errorObject = new Error('alfa');
 		assert.deepEqual(controllerModule.KVCErrorsFirstHandler(errorObject, null, OLSKTesting.OLSKTestingFakeResponseForLocals(), OLSKTesting.OLSKTestingFakeNext()), errorObject);
 	});
 
@@ -42,7 +42,7 @@ describe.skip('KVCErrorsFirstHandler', function test_KVCErrorsFirstHandler() {
 describe.skip('KVCErrors404Handler', function test_KVCErrors404Handler() {
 
 	it('returns next(error)', function() {
-		var errorObject = new Error('alpha');
+		var errorObject = new Error('alfa');
 		assert.deepEqual(controllerModule.KVCErrors404Handler(errorObject, null, OLSKTesting.OLSKTestingFakeRequest(), OLSKTesting.OLSKTestingFakeNext()), errorObject);
 	});
 
