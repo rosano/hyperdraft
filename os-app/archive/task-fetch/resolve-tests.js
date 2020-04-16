@@ -12,7 +12,7 @@ const {
 	JSDOM
 } = jsDOMPackage;
 
-describe('WKCResolveRelativeURLs', function testWKCResolveRelativeURLs() {
+describe('WKCResolveRelativeURLs', function test_WKCResolveRelativeURLs() {
 
 	it('throws error if param1 not formatted', function() {
 		assert.throws(function() {

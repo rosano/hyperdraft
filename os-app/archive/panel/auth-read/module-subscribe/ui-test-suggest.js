@@ -15,7 +15,7 @@ const kTestingSuggestionTwitterFor = function(inputData) {
 	};
 };
 
-describe('WKCReadModuleSubscribeSuggestionsTypeStandard', function testWKCReadModuleSubscribeSuggestionsTypeStandard() {
+describe('WKCReadModuleSubscribeSuggestionsTypeStandard', function test_WKCReadModuleSubscribeSuggestionsTypeStandard() {
 
 	it('returns constant', function() {
 		assert.deepEqual(suggestLibrary.WKCReadModuleSubscribeSuggestionsTypeStandard(), 'SuggestionsTypeStandard');
@@ -23,7 +23,7 @@ describe('WKCReadModuleSubscribeSuggestionsTypeStandard', function testWKCReadMo
 
 });
 
-describe('WKCReadModuleSubscribeSuggestionsTypeSecure', function testWKCReadModuleSubscribeSuggestionsTypeSecure() {
+describe('WKCReadModuleSubscribeSuggestionsTypeSecure', function test_WKCReadModuleSubscribeSuggestionsTypeSecure() {
 
 	it('returns constant', function() {
 		assert.deepEqual(suggestLibrary.WKCReadModuleSubscribeSuggestionsTypeSecure(), 'SuggestionsTypeSecure');
@@ -31,7 +31,7 @@ describe('WKCReadModuleSubscribeSuggestionsTypeSecure', function testWKCReadModu
 
 });
 
-describe('WKCReadModuleSubscribeSuggestionsTypeCustomTwitterTimeline', function testWKCReadModuleSubscribeSuggestionsTypeCustomTwitterTimeline() {
+describe('WKCReadModuleSubscribeSuggestionsTypeCustomTwitterTimeline', function test_WKCReadModuleSubscribeSuggestionsTypeCustomTwitterTimeline() {
 
 	it('returns constant', function() {
 		assert.deepEqual(suggestLibrary.WKCReadModuleSubscribeSuggestionsTypeCustomTwitterTimeline(), 'SuggestionsTypeCustomTwitterTimeline');
@@ -39,7 +39,7 @@ describe('WKCReadModuleSubscribeSuggestionsTypeCustomTwitterTimeline', function 
 
 });
 
-describe('WKCReadModuleSubscribeSuggestionsFor', function testWKCReadModuleSubscribeSuggestionsFor() {
+describe('WKCReadModuleSubscribeSuggestionsFor', function test_WKCReadModuleSubscribeSuggestionsFor() {
 
 	it('throws error if not string', function() {
 		assert.throws(function() {

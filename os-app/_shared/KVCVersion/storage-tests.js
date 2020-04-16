@@ -2,7 +2,7 @@ const { throws, deepEqual } = require('assert');
 
 const mainModule = require('./storage.js').default;
 
-describe('KVCVersionStoragePath', function testKVCVersionStoragePath() {
+describe('KVCVersionStoragePath', function test_KVCVersionStoragePath() {
 
 	it('returns string', function() {
 		deepEqual(mainModule.KVCVersionStoragePath('alfa'), 'kvc_versions/alfa');

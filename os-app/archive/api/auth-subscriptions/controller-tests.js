@@ -8,7 +8,7 @@ const assert = require('assert');
 
 var controllerModule = require('./controller.js');
 
-describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
+describe('OLSKControllerRoutes', function test_OLSKControllerRoutes() {
 
 	it('returns route objects', function() {
 		assert.deepEqual(controllerModule.OLSKControllerRoutes(), {

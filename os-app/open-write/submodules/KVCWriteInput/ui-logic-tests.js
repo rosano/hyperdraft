@@ -2,7 +2,7 @@ const { throws, deepEqual } = require('assert');
 
 const mainModule = require('./ui-logic.js');
 
-describe('KVCWriteInputLineObjectsFor', function testKVCWriteInputLineObjectsFor() {
+describe('KVCWriteInputLineObjectsFor', function test_KVCWriteInputLineObjectsFor() {
 
 	it('throws error if not array', function() {
 		throws(function() {
@@ -85,7 +85,7 @@ describe('KVCWriteInputLineObjectsFor', function testKVCWriteInputLineObjectsFor
 
 });
 
-describe('KVCWriteInputHeaderTokensFrom', function testKVCWriteInputHeaderTokensFrom() {
+describe('KVCWriteInputHeaderTokensFrom', function test_KVCWriteInputHeaderTokensFrom() {
 
 	it('throws error if not array', function() {
 		throws(function() {

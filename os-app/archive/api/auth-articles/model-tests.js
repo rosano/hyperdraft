@@ -15,7 +15,7 @@ const StubValidArticle = function() {
 	};
 };
 
-describe('WKCModelArticlePrepare', function testWKCModelArticlePrepare() {
+describe('WKCModelArticlePrepare', function test_WKCModelArticlePrepare() {
 
 	it('returns input', function() {
 		assert.deepEqual(modelLibrary.WKCModelArticlePrepare({}), {});
@@ -39,7 +39,7 @@ describe('WKCModelArticlePrepare', function testWKCModelArticlePrepare() {
 
 });
 
-describe('WKCModelInputDataIsArticleObject', function testWKCModelInputDataIsArticleObject() {
+describe('WKCModelInputDataIsArticleObject', function test_WKCModelInputDataIsArticleObject() {
 
 	it('returns false if not object', function() {
 		assert.strictEqual(modelLibrary.WKCModelInputDataIsArticleObject(null), false);
@@ -215,7 +215,7 @@ describe('WKCModelInputDataIsArticleObject', function testWKCModelInputDataIsArt
 
 });
 
-describe('WKCArticleHiddenPropertyNames', function testWKCArticleHiddenPropertyNames() {
+describe('WKCArticleHiddenPropertyNames', function test_WKCArticleHiddenPropertyNames() {
 
 	it('returns array', function() {
 		assert.deepEqual(modelLibrary.WKCArticleHiddenPropertyNames(), [

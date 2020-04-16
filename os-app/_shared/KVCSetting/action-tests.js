@@ -2,7 +2,7 @@ const { rejects, deepEqual } = require('assert');
 
 const mainModule = require('./action.js').default;
 
-describe('KVCSettingsActionProperty', function testKVCSettingsActionProperty() {
+describe('KVCSettingsActionProperty', function test_KVCSettingsActionProperty() {
 
 	it('rejects if param1 not string', async function() {
 		await rejects(mainModule.KVCSettingsActionProperty(KVCTestingStorageClient, null));
@@ -28,7 +28,7 @@ describe('KVCSettingsActionProperty', function testKVCSettingsActionProperty() {
 
 });
 
-describe('KVCSettingsActionDelete', function testKVCSettingsActionDelete() {
+describe('KVCSettingsActionDelete', function test_KVCSettingsActionDelete() {
 
 	it('rejects if not string', async function() {
 		await rejects(mainModule.KVCSettingsActionDelete(KVCTestingStorageClient, 1), /KVCErrorInputNotValid/);

@@ -13,7 +13,7 @@ const StubValidArticle = function() {
 	};
 };
 
-describe('WKCMetalArticlesCreate', function testWKCMetalArticlesCreate() {
+describe('WKCMetalArticlesCreate', function test_WKCMetalArticlesCreate() {
 
 	it('throws error if param2 not object', function() {
 		assert.throws(function() {
@@ -55,7 +55,7 @@ describe('WKCMetalArticlesCreate', function testWKCMetalArticlesCreate() {
 
 });
 
-describe('WKCMetalArticlesRead', function testWKCMetalArticlesRead() {
+describe('WKCMetalArticlesRead', function test_WKCMetalArticlesRead() {
 
 	it('throws error if param2 not string', function() {
 		assert.throws(function() {
@@ -90,7 +90,7 @@ describe('WKCMetalArticlesRead', function testWKCMetalArticlesRead() {
 
 });
 
-describe('WKCMetalArticlesUpdate', function testWKCMetalArticlesUpdate() {
+describe('WKCMetalArticlesUpdate', function test_WKCMetalArticlesUpdate() {
 
 	it('throws error if param2 not string', function() {
 		assert.throws(function() {
@@ -150,7 +150,7 @@ describe('WKCMetalArticlesUpdate', function testWKCMetalArticlesUpdate() {
 
 });
 
-describe('WKCMetalArticlesDelete', function testWKCMetalArticlesDelete() {
+describe('WKCMetalArticlesDelete', function test_WKCMetalArticlesDelete() {
 
 	it('throws error if param2 not string', function() {
 		assert.throws(function() {
@@ -184,7 +184,7 @@ describe('WKCMetalArticlesDelete', function testWKCMetalArticlesDelete() {
 
 });
 
-describe('WKCMetalArticlesSearch', function testWKCMetalArticlesSearch() {
+describe('WKCMetalArticlesSearch', function test_WKCMetalArticlesSearch() {
 
 	it('throws error if param2 not function', function() {
 		assert.throws(function() {

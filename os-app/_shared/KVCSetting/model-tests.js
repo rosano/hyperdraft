@@ -11,7 +11,7 @@ const kTesting = {
 	},
 };
 
-describe('KVCSettingModelErrorsFor', function testKVCSettingModelErrorsFor() {
+describe('KVCSettingModelErrorsFor', function test_KVCSettingModelErrorsFor() {
 
 	it('throws error if not object', function() {
 		throws(function() {

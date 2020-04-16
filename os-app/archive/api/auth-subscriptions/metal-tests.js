@@ -16,7 +16,7 @@ const kTesting = {
 	},
 };
 
-describe('WKCMetalSubscriptionsCreate', function testWKCMetalSubscriptionsCreate() {
+describe('WKCMetalSubscriptionsCreate', function test_WKCMetalSubscriptionsCreate() {
 
 	it('throws error if param2 not object', function() {
 		assert.throws(function() {
@@ -63,7 +63,7 @@ describe('WKCMetalSubscriptionsCreate', function testWKCMetalSubscriptionsCreate
 
 });
 
-describe('WKCMetalSubscriptionsRead', function testWKCMetalSubscriptionsRead() {
+describe('WKCMetalSubscriptionsRead', function test_WKCMetalSubscriptionsRead() {
 
 	it('throws error if param2 not string', function() {
 		assert.throws(function() {
@@ -97,7 +97,7 @@ describe('WKCMetalSubscriptionsRead', function testWKCMetalSubscriptionsRead() {
 
 });
 
-describe('WKCMetalSubscriptionsUpdate', function testWKCMetalSubscriptionsUpdate() {
+describe('WKCMetalSubscriptionsUpdate', function test_WKCMetalSubscriptionsUpdate() {
 
 	it('throws error if param2 not string', function() {
 		assert.throws(function() {
@@ -161,7 +161,7 @@ describe('WKCMetalSubscriptionsUpdate', function testWKCMetalSubscriptionsUpdate
 
 });
 
-describe('WKCMetalSubscriptionsDelete', function testWKCMetalSubscriptionsDelete() {
+describe('WKCMetalSubscriptionsDelete', function test_WKCMetalSubscriptionsDelete() {
 
 	it('throws error if param2 not string', function() {
 		assert.throws(function() {
@@ -195,7 +195,7 @@ describe('WKCMetalSubscriptionsDelete', function testWKCMetalSubscriptionsDelete
 
 });
 
-describe('WKCMetalSubscriptionsSearch', function testWKCMetalSubscriptionsSearch() {
+describe('WKCMetalSubscriptionsSearch', function test_WKCMetalSubscriptionsSearch() {
 
 	it('throws error if param3 not function', function() {
 		assert.throws(function() {
@@ -253,7 +253,7 @@ describe('WKCMetalSubscriptionsSearch', function testWKCMetalSubscriptionsSearch
 
 });
 
-describe('WKCMetalSubscriptionsNeedingFetch', function testWKCMetalSubscriptionsNeedingFetch() {
+describe('WKCMetalSubscriptionsNeedingFetch', function test_WKCMetalSubscriptionsNeedingFetch() {
 
 	it('throws error if param2 not function', function() {
 		assert.throws(function() {
@@ -363,7 +363,7 @@ describe('WKCMetalSubscriptionsNeedingFetch', function testWKCMetalSubscriptions
 
 });
 
-describe('WKCSubscriptionsMetalRequestParameters', function testWKCSubscriptionsMetalRequestParameters() {
+describe('WKCSubscriptionsMetalRequestParameters', function test_WKCSubscriptionsMetalRequestParameters() {
 
 	it('throws error if param2 not string', function() {
 		assert.throws(function() {

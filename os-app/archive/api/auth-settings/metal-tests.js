@@ -6,7 +6,7 @@ const assert = require('assert');
 
 const mainModule = require('./metal.js');
 
-describe('KVCSettingsMetalProperty', function testKVCSettingsMetalProperty() {
+describe('KVCSettingsMetalProperty', function test_KVCSettingsMetalProperty() {
 
 	it('rejects if param1 not string', async function() {
 		await assert.rejects(mainModule.KVCSettingsMetalProperty(KVCTestingMongoClient, null));

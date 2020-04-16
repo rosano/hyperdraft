@@ -2,7 +2,7 @@ const { throws, deepEqual } = require('assert');
 
 const mainModule = require('./logic.js');
 
-describe('KVCSharedDropboxAppKeyGuard', function testKVCSharedDropboxAppKeyGuard() {
+describe('KVCSharedDropboxAppKeyGuard', function test_KVCSharedDropboxAppKeyGuard() {
 
 	const StubEnvValid = function () {
 		return {
@@ -34,7 +34,7 @@ describe('KVCSharedDropboxAppKeyGuard', function testKVCSharedDropboxAppKeyGuard
 
 });
 
-describe('KVCSharedGoogleClientKeyGuard', function testKVCSharedGoogleClientKeyGuard() {
+describe('KVCSharedGoogleClientKeyGuard', function test_KVCSharedGoogleClientKeyGuard() {
 
 	const StubEnvValid = function () {
 		return {
@@ -66,7 +66,7 @@ describe('KVCSharedGoogleClientKeyGuard', function testKVCSharedGoogleClientKeyG
 
 });
 
-describe('KVCSharedDonateLinkGuard', function testKVCSharedDonateLinkGuard() {
+describe('KVCSharedDonateLinkGuard', function test_KVCSharedDonateLinkGuard() {
 
 	const StubEnvValid = function () {
 		return {
@@ -94,7 +94,7 @@ describe('KVCSharedDonateLinkGuard', function testKVCSharedDonateLinkGuard() {
 
 });
 
-describe('KVCSharedGitHubLinkGuard', function testKVCSharedGitHubLinkGuard() {
+describe('KVCSharedGitHubLinkGuard', function test_KVCSharedGitHubLinkGuard() {
 
 	const StubEnvValid = function () {
 		return {

@@ -15,7 +15,7 @@ const kTesting = {
 	},
 };
 
-describe('WKCSubscriptionHandlerFeedRSS', function testWKCSubscriptionHandlerFeedRSS() {
+describe('WKCSubscriptionHandlerFeedRSS', function test_WKCSubscriptionHandlerFeedRSS() {
 
 	it('returns constant', function() {
 		assert.strictEqual(mainModule.WKCSubscriptionHandlerFeedRSS(), 'FeedRSS');
@@ -23,7 +23,7 @@ describe('WKCSubscriptionHandlerFeedRSS', function testWKCSubscriptionHandlerFee
 
 });
 
-describe('WKCSubscriptionHandlerFeedAtom', function testWKCSubscriptionHandlerFeedAtom() {
+describe('WKCSubscriptionHandlerFeedAtom', function test_WKCSubscriptionHandlerFeedAtom() {
 
 	it('returns constant', function() {
 		assert.strictEqual(mainModule.WKCSubscriptionHandlerFeedAtom(), 'FeedAtom');
@@ -31,7 +31,7 @@ describe('WKCSubscriptionHandlerFeedAtom', function testWKCSubscriptionHandlerFe
 
 });
 
-describe('WKCSubscriptionHandlerFile', function testWKCSubscriptionHandlerFile() {
+describe('WKCSubscriptionHandlerFile', function test_WKCSubscriptionHandlerFile() {
 
 	it('returns constant', function() {
 		assert.strictEqual(mainModule.WKCSubscriptionHandlerFile(), 'File');
@@ -39,7 +39,7 @@ describe('WKCSubscriptionHandlerFile', function testWKCSubscriptionHandlerFile()
 
 });
 
-describe('WKCSubscriptionHandlerPage', function testWKCSubscriptionHandlerPage() {
+describe('WKCSubscriptionHandlerPage', function test_WKCSubscriptionHandlerPage() {
 
 	it('returns constant', function() {
 		assert.strictEqual(mainModule.WKCSubscriptionHandlerPage(), 'Page');
@@ -47,7 +47,7 @@ describe('WKCSubscriptionHandlerPage', function testWKCSubscriptionHandlerPage()
 
 });
 
-describe('WKCSubscriptionHandlerCustomTwitterTimeline', function testWKCSubscriptionHandlerCustomTwitterTimeline() {
+describe('WKCSubscriptionHandlerCustomTwitterTimeline', function test_WKCSubscriptionHandlerCustomTwitterTimeline() {
 
 	it('returns constant', function() {
 		assert.strictEqual(mainModule.WKCSubscriptionHandlerCustomTwitterTimeline(), 'CustomTwitterTimeline');
@@ -55,7 +55,7 @@ describe('WKCSubscriptionHandlerCustomTwitterTimeline', function testWKCSubscrip
 
 });
 
-describe('WKCSubscriptionHandlerCustomTwitterTimelineRequestCallback', function testWKCSubscriptionHandlerCustomTwitterTimelineRequestCallback() {
+describe('WKCSubscriptionHandlerCustomTwitterTimelineRequestCallback', function test_WKCSubscriptionHandlerCustomTwitterTimelineRequestCallback() {
 
 	it('throws error if param1 not function', function() {
 		assert.throws(function() {
@@ -92,7 +92,7 @@ describe('WKCSubscriptionHandlerCustomTwitterTimelineRequestCallback', function 
 
 });
 
-describe('WKCSubscriptionHandlers', function testWKCSubscriptionHandlers() {
+describe('WKCSubscriptionHandlers', function test_WKCSubscriptionHandlers() {
 
 	it('returns constant', function() {
 		assert.deepEqual(mainModule.WKCSubscriptionHandlers(), [
@@ -106,7 +106,7 @@ describe('WKCSubscriptionHandlers', function testWKCSubscriptionHandlers() {
 
 });
 
-describe('WKCModelSubscriptionPrepare', function testWKCModelSubscriptionPrepare() {
+describe('WKCModelSubscriptionPrepare', function test_WKCModelSubscriptionPrepare() {
 
 	it('returns input', function() {
 		assert.deepEqual(mainModule.WKCModelSubscriptionPrepare({}), {});
@@ -122,7 +122,7 @@ describe('WKCModelSubscriptionPrepare', function testWKCModelSubscriptionPrepare
 
 });
 
-describe('WKCSubscriptionsModelErrorsFor', function testWKCSubscriptionsModelErrorsFor() {
+describe('WKCSubscriptionsModelErrorsFor', function test_WKCSubscriptionsModelErrorsFor() {
 
 	it('throws error if param2 not object', function() {
 		assert.throws(function() {
@@ -286,7 +286,7 @@ describe('WKCSubscriptionsModelErrorsFor', function testWKCSubscriptionsModelErr
 
 });
 
-describe('WKCSubscriptionHiddenPropertyNames', function testWKCSubscriptionHiddenPropertyNames() {
+describe('WKCSubscriptionHiddenPropertyNames', function test_WKCSubscriptionHiddenPropertyNames() {
 
 	it('returns array', function() {
 		assert.deepEqual(mainModule.WKCSubscriptionHiddenPropertyNames(), [

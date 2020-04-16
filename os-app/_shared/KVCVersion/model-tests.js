@@ -13,7 +13,7 @@ const kTesting = {
 	},
 };
 
-describe('KVCVersionModelErrorsFor', function testKVCVersionModelErrorsFor() {
+describe('KVCVersionModelErrorsFor', function test_KVCVersionModelErrorsFor() {
 
 	it('throws error if not object', function() {
 		throws(function() {
@@ -87,7 +87,7 @@ describe('KVCVersionModelErrorsFor', function testKVCVersionModelErrorsFor() {
 
 });
 
-describe('KVCVersionModelPreJSONSchemaValidate', function testKVCVersionModelPreJSONSchemaValidate() {
+describe('KVCVersionModelPreJSONSchemaValidate', function test_KVCVersionModelPreJSONSchemaValidate() {
 
 	it('returns input', function() {
 		deepEqual(mainModule.KVCVersionModelPreJSONSchemaValidate({}), {});
@@ -103,7 +103,7 @@ describe('KVCVersionModelPreJSONSchemaValidate', function testKVCVersionModelPre
 
 });
 
-describe('KVCVersionModelPostJSONParse', function testKVCVersionModelPostJSONParse() {
+describe('KVCVersionModelPostJSONParse', function test_KVCVersionModelPostJSONParse() {
 
 	it('returns input null', function() {
 		deepEqual(mainModule.KVCVersionModelPostJSONParse(null), null);

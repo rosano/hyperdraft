@@ -10,7 +10,7 @@ const OLSKTesting = require('OLSKTesting');
 
 var controllerModule = require('./controller.js');
 
-describe('OLSKControllerSharedErrorHandlers', function testOLSKControllerSharedErrorHandlers() {
+describe('OLSKControllerSharedErrorHandlers', function test_OLSKControllerSharedErrorHandlers() {
 
 	it('returns shared error handlers', function() {
 		assert.deepEqual(controllerModule.OLSKControllerSharedErrorHandlers(), [
@@ -22,7 +22,7 @@ describe('OLSKControllerSharedErrorHandlers', function testOLSKControllerSharedE
 
 });
 
-describe.skip('KVCErrorsFirstHandler', function testKVCErrorsFirstHandler() {
+describe.skip('KVCErrorsFirstHandler', function test_KVCErrorsFirstHandler() {
 
 	var pathPackage = require('path');
 
@@ -39,7 +39,7 @@ describe.skip('KVCErrorsFirstHandler', function testKVCErrorsFirstHandler() {
 
 });
 
-describe.skip('KVCErrors404Handler', function testKVCErrors404Handler() {
+describe.skip('KVCErrors404Handler', function test_KVCErrors404Handler() {
 
 	it('returns next(error)', function() {
 		var errorObject = new Error('alpha');

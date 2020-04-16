@@ -14,7 +14,7 @@ const kTests = {
 	},
 };
 
-describe('KVCDiffHTMLForStrings', function testKVCDiffHTMLForStrings() {
+describe('KVCDiffHTMLForStrings', function test_KVCDiffHTMLForStrings() {
 
 	it('throws error if param2 not string', function() {
 		assert.throws(function() {

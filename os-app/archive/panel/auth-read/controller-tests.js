@@ -11,7 +11,7 @@ const OLSKTesting = require('OLSKTesting');
 var controllerModule = require('./controller.js');
 var apiSubscriptionsModel = require('../../api/auth-subscriptions/model');
 
-describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
+describe('OLSKControllerRoutes', function test_OLSKControllerRoutes() {
 
 	it('returns route objects', function() {
 		assert.deepEqual(controllerModule.OLSKControllerRoutes(), {

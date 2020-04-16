@@ -2,7 +2,7 @@ const { throws, deepEqual } = require('assert');
 
 const mainModule = require('./storage.js').default;
 
-describe('KVCNoteStoragePath', function testKVCNoteStoragePath() {
+describe('KVCNoteStoragePath', function test_KVCNoteStoragePath() {
 
 	it('returns string', function() {
 		deepEqual(mainModule.KVCNoteStoragePath('alfa'), 'kvc_notes/alfa');

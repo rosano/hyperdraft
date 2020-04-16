@@ -20,7 +20,7 @@ const kTesting = {
 	},
 };
 
-describe('KVCNoteActionCreate', function testKVCNoteActionCreate() {
+describe('KVCNoteActionCreate', function test_KVCNoteActionCreate() {
 
 	it('rejects if not object', async function() {
 		await rejects(mainModule.KVCNoteActionCreate(KVCTestingStorageClient, null), /KVCErrorInputNotValid/);
@@ -64,7 +64,7 @@ describe('KVCNoteActionCreate', function testKVCNoteActionCreate() {
 
 });
 
-describe('KVCNoteActionRead', function testKVCNoteActionRead() {
+describe('KVCNoteActionRead', function test_KVCNoteActionRead() {
 
 	it('rejects if not string', async function() {
 		await rejects(mainModule.KVCNoteActionRead(KVCTestingStorageClient, null), /KVCErrorInputNotValid/);
@@ -82,7 +82,7 @@ describe('KVCNoteActionRead', function testKVCNoteActionRead() {
 
 });
 
-describe('KVCNoteActionUpdate', function testKVCNoteActionUpdate() {
+describe('KVCNoteActionUpdate', function test_KVCNoteActionUpdate() {
 
 	it('rejects if not object', async function() {
 		await rejects(mainModule.KVCNoteActionUpdate(KVCTestingStorageClient, null), /KVCErrorInputNotValid/);
@@ -127,7 +127,7 @@ describe('KVCNoteActionUpdate', function testKVCNoteActionUpdate() {
 
 });
 
-describe('KVCNoteActionDelete', function testKVCNoteActionDelete() {
+describe('KVCNoteActionDelete', function test_KVCNoteActionDelete() {
 
 	it('rejects if not string', async function() {
 		await rejects(mainModule.KVCNoteActionDelete(KVCTestingStorageClient, null), /KVCErrorInputNotValid/);
@@ -156,7 +156,7 @@ describe('KVCNoteActionDelete', function testKVCNoteActionDelete() {
 
 });
 
-describe('KVCNoteActionQuery', function testKVCNoteActionQuery() {
+describe('KVCNoteActionQuery', function test_KVCNoteActionQuery() {
 
 	it('rejects if not object', async function() {
 		await rejects(mainModule.KVCNoteActionQuery(KVCTestingStorageClient, null), /KVCErrorInputNotValid/);
@@ -203,7 +203,7 @@ describe('KVCNoteActionQuery', function testKVCNoteActionQuery() {
 
 });
 
-describe('KVCNoteActionPublish', function testKVCNoteActionPublish() {
+describe('KVCNoteActionPublish', function test_KVCNoteActionPublish() {
 
 	it('rejects if not object', async function() {
 		await rejects(mainModule.KVCNoteActionPublish(KVCTestingStorageClient, null), /KVCErrorInputNotValid/);
@@ -264,7 +264,7 @@ describe('KVCNoteActionPublish', function testKVCNoteActionPublish() {
 
 });
 
-describe('KVCNoteActionRetract', function testKVCNoteActionRetract() {
+describe('KVCNoteActionRetract', function test_KVCNoteActionRetract() {
 
 	it('rejects if not object', async function() {
 		await rejects(mainModule.KVCNoteActionPublish(KVCTestingStorageClient, null), /KVCErrorInputNotValid/);
@@ -295,7 +295,7 @@ describe('KVCNoteActionRetract', function testKVCNoteActionRetract() {
 
 });
 
-describe.skip('KVCNoteActionGetPublicLinks', function testKVCNoteActionGetPublicLinks() {
+describe.skip('KVCNoteActionGetPublicLinks', function test_KVCNoteActionGetPublicLinks() {
 
 	it('returns hash', async function() {
 		deepEqual(await mainModule.KVCNoteActionGetPublicLinks(KVCTestingStorageClient), {});

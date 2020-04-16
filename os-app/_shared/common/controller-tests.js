@@ -8,7 +8,7 @@ const assert = require('assert');
 
 var controllerModule = require('./controller.js');
 
-describe('KVCSharedMiddlewareEnsureDatabase', function testKVCSharedMiddlewareEnsureDatabase() {
+describe('KVCSharedMiddlewareEnsureDatabase', function test_KVCSharedMiddlewareEnsureDatabase() {
 
 	var fakeRequest = function(inputData = {}) {
 		return {

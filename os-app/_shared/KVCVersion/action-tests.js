@@ -21,7 +21,7 @@ const kTesting = {
 	},
 };
 
-describe('KVCVersionActionCreate', function testKVCVersionActionCreate() {
+describe('KVCVersionActionCreate', function test_KVCVersionActionCreate() {
 
 	it('rejects if not object', async function() {
 		await rejects(mainModule.KVCVersionActionCreate(KVCTestingStorageClient, null), /KVCErrorInputNotValid/);
@@ -56,7 +56,7 @@ describe('KVCVersionActionCreate', function testKVCVersionActionCreate() {
 
 });
 
-describe('KVCVersionActionQuery', function testKVCVersionActionQuery() {
+describe('KVCVersionActionQuery', function test_KVCVersionActionQuery() {
 
 	it('rejects if not object', async function() {
 		await rejects(mainModule.KVCVersionActionQuery(KVCTestingStorageClient, null), /KVCErrorInputNotValid/);
@@ -91,7 +91,7 @@ describe('KVCVersionActionQuery', function testKVCVersionActionQuery() {
 
 });
 
-describe('KVCVersionActionDelete', function testKVCVersionActionDelete() {
+describe('KVCVersionActionDelete', function test_KVCVersionActionDelete() {
 
 	it('rejects if not string', async function() {
 		await rejects(mainModule.KVCVersionActionDelete(KVCTestingStorageClient, null), /KVCErrorInputNotValid/);

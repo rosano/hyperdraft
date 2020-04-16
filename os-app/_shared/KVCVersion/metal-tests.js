@@ -13,7 +13,7 @@ const kTesting = {
 	},
 };
 
-describe('KVCVersionMetalWrite', function testKVCVersionMetalWrite() {
+describe('KVCVersionMetalWrite', function test_KVCVersionMetalWrite() {
 
 	it('rejects if not object', async function() {
 		await rejects(mainModule.KVCVersionMetalWrite(KVCTestingStorageClient, null), /KVCErrorInputNotValid/);
@@ -39,7 +39,7 @@ describe('KVCVersionMetalWrite', function testKVCVersionMetalWrite() {
 
 });
 
-describe('KVCVersionMetalRead', function testKVCVersionMetalRead() {
+describe('KVCVersionMetalRead', function test_KVCVersionMetalRead() {
 
 	it('rejects if not string', async function() {
 		await rejects(mainModule.KVCVersionMetalRead(KVCTestingStorageClient, 1), /KVCErrorInputNotValid/);
@@ -57,7 +57,7 @@ describe('KVCVersionMetalRead', function testKVCVersionMetalRead() {
 
 });
 
-describe('KVCVersionMetalList', function testKVCVersionMetalList() {
+describe('KVCVersionMetalList', function test_KVCVersionMetalList() {
 
 	it('resolves empty array if none', async function() {
 		deepEqual(await mainModule.KVCVersionMetalList(KVCTestingStorageClient), {});
@@ -71,7 +71,7 @@ describe('KVCVersionMetalList', function testKVCVersionMetalList() {
 
 });
 
-describe('KVCVersionMetalDelete', function testKVCVersionMetalDelete() {
+describe('KVCVersionMetalDelete', function test_KVCVersionMetalDelete() {
 
 	it('rejects if not string', async function() {
 		await rejects(mainModule.KVCVersionMetalDelete(KVCTestingStorageClient, 1), /KVCErrorInputNotValid/);

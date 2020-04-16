@@ -17,7 +17,7 @@ const kTesting = {
 	},
 };
 
-describe('WKCSnapshotsModelErrorsFor', function testnapshotsModelErrorsFor() {
+describe('WKCSnapshotsModelErrorsFor', function test_napshotsModelErrorsFor() {
 
 	it('throws error if not object', function() {
 		assert.throws(function() {
@@ -65,7 +65,7 @@ describe('WKCSnapshotsModelErrorsFor', function testnapshotsModelErrorsFor() {
 
 });
 
-describe('WKCSnapshotHiddenPropertyNames', function testnapshotHiddenPropertyNames() {
+describe('WKCSnapshotHiddenPropertyNames', function test_napshotHiddenPropertyNames() {
 
 	it('returns array', function() {
 		assert.deepEqual(modelLibrary.WKCSnapshotHiddenPropertyNames(), [

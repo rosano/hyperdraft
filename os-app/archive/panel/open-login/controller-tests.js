@@ -11,7 +11,7 @@ const OLSKTesting = require('OLSKTesting');
 const mainModule = require('./controller.js');
 const sharedController = require('../../../_shared/common/controller.js');
 
-describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
+describe('OLSKControllerRoutes', function test_OLSKControllerRoutes() {
 
 	it('returns route objects', function() {
 		assert.deepEqual(mainModule.OLSKControllerRoutes(), {
@@ -41,7 +41,7 @@ describe('OLSKControllerRoutes', function testOLSKControllerRoutes() {
 
 });
 
-describe('OLSKControllerSharedMiddlewares', function testOLSKControllerSharedMiddlewares() {
+describe('OLSKControllerSharedMiddlewares', function test_OLSKControllerSharedMiddlewares() {
 
 	it('returns middleware functions', function() {
 		assert.deepEqual(mainModule.OLSKControllerSharedMiddlewares(), {
@@ -54,7 +54,7 @@ describe('OLSKControllerSharedMiddlewares', function testOLSKControllerSharedMid
 
 });
 
-describe.skip('WKCLoginMiddlewareAuthenticate', function testWKCLoginMiddlewareAuthenticate() {
+describe.skip('WKCLoginMiddlewareAuthenticate', function test_WKCLoginMiddlewareAuthenticate() {
 
 	it('redirects to login without session data', function() {
 		assert.deepEqual(mainModule.WKCLoginMiddlewareAuthenticate(OLSKTesting.OLSKTestingFakeRequestForSession(), OLSKTesting.OLSKTestingFakeResponseForRedirect()), mainModule.OLSKControllerRoutes().WKCLoginRoute.OLSKRoutePath);

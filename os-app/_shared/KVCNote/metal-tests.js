@@ -13,7 +13,7 @@ const kTesting = {
 	},
 };
 
-describe('KVCNoteMetalWrite', function testKVCNoteMetalWrite() {
+describe('KVCNoteMetalWrite', function test_KVCNoteMetalWrite() {
 
 	it('rejects if not object', async function() {
 		await rejects(mainModule.KVCNoteMetalWrite(KVCTestingStorageClient, null), /KVCErrorInputNotValid/);
@@ -39,7 +39,7 @@ describe('KVCNoteMetalWrite', function testKVCNoteMetalWrite() {
 
 });
 
-describe('KVCNoteMetalRead', function testKVCNoteMetalRead() {
+describe('KVCNoteMetalRead', function test_KVCNoteMetalRead() {
 
 	it('rejects if not string', async function() {
 		await rejects(mainModule.KVCNoteMetalRead(KVCTestingStorageClient, 1), /KVCErrorInputNotValid/);
@@ -57,7 +57,7 @@ describe('KVCNoteMetalRead', function testKVCNoteMetalRead() {
 
 });
 
-describe('KVCNoteMetalList', function testKVCNoteMetalList() {
+describe('KVCNoteMetalList', function test_KVCNoteMetalList() {
 
 	it('resolves empty array if none', async function() {
 		deepEqual(await mainModule.KVCNoteMetalList(KVCTestingStorageClient), {});
@@ -71,7 +71,7 @@ describe('KVCNoteMetalList', function testKVCNoteMetalList() {
 
 });
 
-describe('KVCNoteMetalDelete', function testKVCNoteMetalDelete() {
+describe('KVCNoteMetalDelete', function test_KVCNoteMetalDelete() {
 
 	it('rejects if not string', async function() {
 		await rejects(mainModule.KVCNoteMetalDelete(KVCTestingStorageClient, 1), /KVCErrorInputNotValid/);

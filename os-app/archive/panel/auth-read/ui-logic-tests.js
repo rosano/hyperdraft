@@ -8,7 +8,7 @@ const assert = require('assert');
 
 var logicLibrary = require('./ui-logic');
 
-describe('WKCReadModuleSubscribeCompleteURL', function testWKCReadModuleSubscribeCompleteURL() {
+describe('WKCReadModuleSubscribeCompleteURL', function test_WKCReadModuleSubscribeCompleteURL() {
 
 	it('throws error if param1 not string', function() {
 		assert.throws(function() {
@@ -62,7 +62,7 @@ describe('WKCReadModuleSubscribeCompleteURL', function testWKCReadModuleSubscrib
 
 });
 
-describe('WKCReadLogicArticlesSort', function testWKCReadLogicArticlesSort() {
+describe('WKCReadLogicArticlesSort', function test_WKCReadLogicArticlesSort() {
 
 	it('sorts by WKCArticlePublishDate descending', function() {
 		var item1 = {
@@ -77,7 +77,7 @@ describe('WKCReadLogicArticlesSort', function testWKCReadLogicArticlesSort() {
 
 });
 
-describe('WKCReadLogicArticlesDiscardedSort', function testWKCReadLogicArticlesDiscardedSort() {
+describe('WKCReadLogicArticlesDiscardedSort', function test_WKCReadLogicArticlesDiscardedSort() {
 
 	it('sorts by WKCArticleDateDiscarded descending', function() {
 		var item1 = {

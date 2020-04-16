@@ -54,7 +54,7 @@ const kStubs = {
 	},
 };
 
-describe('KVCParserArticlesForFeedRSS', function testKVCParserArticlesForFeedRSS() {
+describe('KVCParserArticlesForFeedRSS', function test_KVCParserArticlesForFeedRSS() {
 
 	it('throws error if param1 not DOMParser', function() {
 		assert.throws(function() {
@@ -147,7 +147,7 @@ describe('KVCParserArticlesForFeedRSS', function testKVCParserArticlesForFeedRSS
 
 });
 
-describe('KVCParserArticlesForFeedAtom', function testKVCParserArticlesForFeedAtom() {
+describe('KVCParserArticlesForFeedAtom', function test_KVCParserArticlesForFeedAtom() {
 
 	it('throws error if param1 not object', function() {
 		assert.throws(function() {
@@ -244,7 +244,7 @@ describe('KVCParserArticlesForFeedAtom', function testKVCParserArticlesForFeedAt
 
 });
 
-describe('KVCParserArticlesForPage', function testKVCParserArticlesForPage() {
+describe('KVCParserArticlesForPage', function test_KVCParserArticlesForPage() {
 
 	it('throws error if param1 not DOMParser', function() {
 		assert.throws(function() {
@@ -314,7 +314,7 @@ describe('KVCParserArticlesForPage', function testKVCParserArticlesForPage() {
 
 });
 
-describe('KVCParserArticlesForFile', function testKVCParserArticlesForFile() {
+describe('KVCParserArticlesForFile', function test_KVCParserArticlesForFile() {
 
 	it('throws error if param2 not string', function() {
 		assert.throws(function() {
@@ -348,7 +348,7 @@ describe('KVCParserArticlesForFile', function testKVCParserArticlesForFile() {
 
 });
 
-describe('KVCParserInputDataIsCustomTwitterTimeline', function testKVCParserInputDataIsCustomTwitterTimeline() {
+describe('KVCParserInputDataIsCustomTwitterTimeline', function test_KVCParserInputDataIsCustomTwitterTimeline() {
 
 	it('returns false if not array', function() {
 		assert.strictEqual(mainModule.KVCParserInputDataIsCustomTwitterTimeline(null), false);
@@ -360,7 +360,7 @@ describe('KVCParserInputDataIsCustomTwitterTimeline', function testKVCParserInpu
 
 });
 
-describe('KVCParserArticlesForCustomTwitterTimeline', function testKVCParserArticlesForCustomTwitterTimeline() {
+describe('KVCParserArticlesForCustomTwitterTimeline', function test_KVCParserArticlesForCustomTwitterTimeline() {
 
 	it('throws error if param2 not string', function() {
 		assert.throws(function() {
@@ -451,7 +451,7 @@ describe('KVCParserArticlesForCustomTwitterTimeline', function testKVCParserArti
 
 });
 
-describe('KVCParserHTMLForPlaintext', function testKVCParserHTMLForPlaintext() {
+describe('KVCParserHTMLForPlaintext', function test_KVCParserHTMLForPlaintext() {
 
 	it('throws error if not string', function() {
 		assert.throws(function() {
@@ -481,7 +481,7 @@ describe('KVCParserHTMLForPlaintext', function testKVCParserHTMLForPlaintext() {
 
 });
 
-describe('KVCParserTitleForPlaintext', function testKVCParserTitleForPlaintext() {
+describe('KVCParserTitleForPlaintext', function test_KVCParserTitleForPlaintext() {
 
 	it('returns empty if empty', function() {
 		assert.deepEqual(mainModule.KVCParserTitleForPlaintext(), '');
@@ -505,7 +505,7 @@ describe('KVCParserTitleForPlaintext', function testKVCParserTitleForPlaintext()
 
 });
 
-describe('KVCParserBodyForPlaintext', function testKVCParserBodyForPlaintext() {
+describe('KVCParserBodyForPlaintext', function test_KVCParserBodyForPlaintext() {
 
 	it('returns empty if empty', function() {
 		assert.deepEqual(mainModule.KVCParserBodyForPlaintext(), '');
@@ -529,7 +529,7 @@ describe('KVCParserBodyForPlaintext', function testKVCParserBodyForPlaintext() {
 
 });
 
-describe('KVCParserSnippetForPlaintext', function testKVCParserSnippetForPlaintext() {
+describe('KVCParserSnippetForPlaintext', function test_KVCParserSnippetForPlaintext() {
 
 	it('throws error if not string', function() {
 		assert.throws(function() {
@@ -547,7 +547,7 @@ describe('KVCParserSnippetForPlaintext', function testKVCParserSnippetForPlainte
 
 });
 
-describe('KVCParserReplaceLinks', function testKVCParserReplaceLinks() {
+describe('KVCParserReplaceLinks', function test_KVCParserReplaceLinks() {
 
 	it('throws error if param1 not string', function() {
 		assert.throws(function() {

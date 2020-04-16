@@ -288,7 +288,7 @@ describe('KVCWriteMaster_Misc', function () {
 	
 	});
 
-	describe('KVCWriteMasterCreateButtonImage', function testKVCWriteMasterCreateButtonImage () {
+	describe('KVCWriteMasterCreateButtonImage', function test_KVCWriteMasterCreateButtonImage () {
 
 		it('sets src', function () {
 			browser.assert.elements(`${ KVCWriteMasterCreateButtonImage } #_OLSKSharedCreate`, 1);

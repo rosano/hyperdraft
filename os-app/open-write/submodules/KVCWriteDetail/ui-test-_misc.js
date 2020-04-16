@@ -102,7 +102,7 @@ describe('KVCWriteDetail_Misc', function () {
 	
 	});
 
-	describe('KVCWriteDetailToolbarBackButtonImage', function testKVCWriteDetailToolbarBackButtonImage () {
+	describe('KVCWriteDetailToolbarBackButtonImage', function test_KVCWriteDetailToolbarBackButtonImage () {
 
 		it('sets src', function () {
 			browser.assert.elements(`${ KVCWriteDetailToolbarBackButtonImage } #_OLSKSharedBack`, 1);
@@ -195,7 +195,7 @@ describe('KVCWriteDetail_Misc', function () {
 	
 	});
 
-	describe('KVCWriteDetailToolbarJumpButtonImage', function testKVCWriteDetailToolbarJumpButtonImage () {
+	describe('KVCWriteDetailToolbarJumpButtonImage', function test_KVCWriteDetailToolbarJumpButtonImage () {
 
 		it('sets src', function () {
 			browser.assert.elements(`${ KVCWriteDetailToolbarJumpButtonImage } #_KVCWriteJump`, 1);
@@ -235,7 +235,7 @@ describe('KVCWriteDetail_Misc', function () {
 	
 	});
 
-	describe('KVCWriteDetailToolbarPublishButtonImage', function testKVCWriteDetailToolbarPublishButtonImage () {
+	describe('KVCWriteDetailToolbarPublishButtonImage', function test_KVCWriteDetailToolbarPublishButtonImage () {
 
 		it('sets src', function () {
 			browser.assert.elements(`${ KVCWriteDetailToolbarPublishButtonImage } #_KVCWritePublish`, 1);
@@ -307,7 +307,7 @@ describe('KVCWriteDetail_Misc', function () {
 	
 	});
 
-	describe('KVCWriteDetailToolbarRetractButtonImage', function testKVCWriteDetailToolbarRetractButtonImage () {
+	describe('KVCWriteDetailToolbarRetractButtonImage', function test_KVCWriteDetailToolbarRetractButtonImage () {
 
 		it('sets src', function () {
 			browser.assert.elements(`${ KVCWriteDetailToolbarRetractButtonImage } #_KVCWriteRetract`, 1);
@@ -355,7 +355,7 @@ describe('KVCWriteDetail_Misc', function () {
 	
 	});
 
-	describe('KVCWriteDetailToolbarVersionsButtonImage', function testKVCWriteDetailToolbarVersionsButtonImage () {
+	describe('KVCWriteDetailToolbarVersionsButtonImage', function test_KVCWriteDetailToolbarVersionsButtonImage () {
 
 		it('sets src', function () {
 			browser.assert.elements(`${ KVCWriteDetailToolbarVersionsButtonImage } #_KVCWriteVersions`, 1);
@@ -395,7 +395,7 @@ describe('KVCWriteDetail_Misc', function () {
 	
 	});
 
-	describe('KVCWriteDetailToolbarDiscardButtonImage', function testKVCWriteDetailToolbarDiscardButtonImage () {
+	describe('KVCWriteDetailToolbarDiscardButtonImage', function test_KVCWriteDetailToolbarDiscardButtonImage () {
 
 		it('sets src', function () {
 			browser.assert.elements(`${ KVCWriteDetailToolbarDiscardButtonImage } #_OLSKSharedDiscard`, 1);

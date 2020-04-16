@@ -13,7 +13,7 @@ const kTesting = {
 	},
 };
 
-describe('KVCNoteModelErrorsFor', function testKVCNoteModelErrorsFor() {
+describe('KVCNoteModelErrorsFor', function test_KVCNoteModelErrorsFor() {
 
 	it('throws error if not object', function() {
 		throws(function() {
@@ -91,7 +91,7 @@ describe('KVCNoteModelErrorsFor', function testKVCNoteModelErrorsFor() {
 
 });
 
-describe('KVCNoteModelPreJSONSchemaValidate', function testKVCNoteModelPreJSONSchemaValidate() {
+describe('KVCNoteModelPreJSONSchemaValidate', function test_KVCNoteModelPreJSONSchemaValidate() {
 
 	it('returns input', function() {
 		deepEqual(mainModule.KVCNoteModelPreJSONSchemaValidate({}), {});
@@ -115,7 +115,7 @@ describe('KVCNoteModelPreJSONSchemaValidate', function testKVCNoteModelPreJSONSc
 
 });
 
-describe('KVCNoteModelPostJSONParse', function testKVCNoteModelPostJSONParse() {
+describe('KVCNoteModelPostJSONParse', function test_KVCNoteModelPostJSONParse() {
 
 	it('returns input null', function() {
 		deepEqual(mainModule.KVCNoteModelPostJSONParse(null), null);
