@@ -10,7 +10,7 @@ describe('KVCVitrine_Misc', function () {
 
 	describe('KVCVitrine', function () {
 		
-		it('sets class', function () {
+		it('classes OLSKCommon', function () {
 			browser.assert.hasClass(KVCVitrine, 'OLSKCommon');
 		});
 	

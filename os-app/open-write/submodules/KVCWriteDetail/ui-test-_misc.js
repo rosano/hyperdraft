@@ -14,7 +14,7 @@ describe('KVCWriteDetail_Misc', function () {
 			});
 		});
 
-		it('sets class', function () {
+		it('classes OLSKViewportDetail', function () {
 			browser.assert.hasClass(KVCWriteDetail, 'OLSKViewportDetail');
 		});
 
@@ -64,7 +64,7 @@ describe('KVCWriteDetail_Misc', function () {
 
 	describe('OLSKToolbar', function test_OLSKToolbar () {
 
-		it('sets class', function () {
+		it('classes OLSKToolbarJustify', function () {
 			browser.assert.hasClass('.OLSKToolbar', 'OLSKToolbarJustify');
 		});
 	

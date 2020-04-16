@@ -490,7 +490,7 @@ describe('KVCWrite_Misc', function () {
 
 	describe('KVCWriteViewportFooter', function test_KVCWriteViewportFooter () {
 
-		it('sets class', function () {
+		it('classes OLSKMobileViewFooter', function () {
 			browser.assert.hasClass(KVCWriteViewportFooter, 'OLSKMobileViewFooter');
 		});
 
