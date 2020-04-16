@@ -4,7 +4,7 @@ const kModuleName = 'wikiavec';
 
 const mod = {
 
-	KVCStorageModuleObject (inputData) {
+	KVC_DataModule (inputData) {
 		return {
 			name: kModuleName,
 			builder(privateClient, publicClient) {
