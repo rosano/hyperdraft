@@ -133,6 +133,10 @@ describe('KVCWriteMaster_Misc', function () {
 			});
 		});
 
+		it('classes OLSKMobileSafariRemoveDefaultInputStyle', function () {
+			browser.assert.hasClass(KVCWriteMasterFilterField, 'OLSKMobileSafariRemoveDefaultInputStyle');
+		});
+
 		it('binds KVCWriteMasterFilterText', function () {
 			browser.assert.input(KVCWriteMasterFilterField, 'alfa');
 		});
