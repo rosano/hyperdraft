@@ -3,7 +3,7 @@
 		return;
 	}
 
-	browser.site = process.env.KVC_SHARED_REF_HOST + ':3000';
+	browser.site = process.env.KVC_SHARED_REF_HOST + ':' + process.env.OLSK_SERVER_PORT;
 })();
 
 
