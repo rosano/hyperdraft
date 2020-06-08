@@ -12,7 +12,8 @@ import KVCSettingStorage from '../_shared/KVCSetting/storage.js';
 import KVCVersionStorage from '../_shared/KVCVersion/storage.js';
 import KVCParser from '../_shared/KVCParser/main.js';
 import { OLSK_TESTING_BEHAVIOUR } from 'OLSKTesting';
-import * as OLSKRemoteStorage from '../_shared/__external/OLSKRemoteStorage/main.js'
+import * as OLSKRemoteStoragePackage from '../_shared/__external/OLSKRemoteStorage/main.js'
+const OLSKRemoteStorage = OLSKRemoteStoragePackage.default || OLSKRemoteStoragePackage;
 import KVCNoteAction from '../_shared/KVCNote/action.js';
 import KVCNoteMetal from '../_shared/KVCNote/metal.js';
 import KVCVersionAction from '../_shared/KVCVersion/action.js';
@@ -705,7 +706,7 @@ import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svel
 </div>
 
 {#if !OLSK_TESTING_BEHAVIOUR()}
-	<OLSKServiceWorker OLSKLocalized={ OLSKLocalized } registrationRoute={ window.OLSKCanonicalFor('WKCServiceWorkerRoute') } />
+	<OLSKServiceWorker OLSKServiceWorkerRegistrationRoute={ window.OLSKCanonicalFor('WKCServiceWorkerRoute') } />
 {/if}
 
 <style src="./ui-style.css"></style>

@@ -1,5 +1,4 @@
 import * as KVCVersionModel from './model.js';
-import * as OLSKRemoteStorage from 'OLSKRemoteStorage';
 
 const kType = 'kvc_version';
 const kCollection = 'kvc_versions';

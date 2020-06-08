@@ -1,5 +1,6 @@
 import KVCNoteModel from './model.js';
-import * as OLSKRemoteStorage from 'OLSKRemoteStorage';
+import * as OLSKRemoteStoragePackage from 'OLSKRemoteStorage';
+const OLSKRemoteStorage = OLSKRemoteStoragePackage.default || OLSKRemoteStoragePackage;
 
 const kType = 'kvc_note';
 const kCollection = 'kvc_notes';
