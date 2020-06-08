@@ -643,8 +643,6 @@ onMount(mod.LifecycleModuleWillMount);
 import OLSKViewportContent from 'OLSKViewportContent';
 import KVCWriteMaster from './submodules/KVCWriteMaster/main.svelte';
 import KVCWriteDetail from './submodules/KVCWriteDetail/main.svelte';
-import OLSKToolbar from 'OLSKToolbar';
-import OLSKToolbarElementGroup from 'OLSKToolbarElementGroup';
 import OLSKAppToolbar from 'OLSKAppToolbar';
 import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svelte';
 </script>
@@ -685,16 +683,14 @@ import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svel
 </OLSKViewportContent>
 
 <footer class="KVCWriteViewportFooter OLSKMobileViewFooter">
-	<div class="KVCWriteStorageToolbar OLSKStorageToolbar" class:KVCWriteStorageToolbarHidden={ mod._ValueStorageToolbarHidden }>
-		<OLSKToolbar OLSKToolbarJustify={ true }>
-			<OLSKToolbarElementGroup>
-				<button class="KVCWriteStorageExportButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle" on:click={ mod.InterfaceStorageExportButtonDidClick }>{ OLSKLocalized('KVCWriteStorageExportButtonText') }</button>
-			</OLSKToolbarElementGroup>
+	<div class="KVCWriteStorageToolbar OLSKToolbar OLSKToolbarJustify OLSKStorageToolbar" class:KVCWriteStorageToolbarHidden={ mod._ValueStorageToolbarHidden }>
+		<div class="OLSKToolbarElementGroup">
+			<button class="KVCWriteStorageExportButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle" on:click={ mod.InterfaceStorageExportButtonDidClick }>{ OLSKLocalized('KVCWriteStorageExportButtonText') }</button>
+		</div>
 
-			<OLSKToolbarElementGroup>
-				<div id="KVCWriteStorageWidget"></div>
-			</OLSKToolbarElementGroup>
-		</OLSKToolbar>
+		<div class="OLSKToolbarElementGroup">
+			<div id="KVCWriteStorageWidget"></div>
+		</div>
 	</div>
 
 	<OLSKAppToolbar

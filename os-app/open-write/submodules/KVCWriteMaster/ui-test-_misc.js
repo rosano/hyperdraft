@@ -118,7 +118,11 @@ describe('KVCWriteMaster_Misc', function () {
 	});
 
 	describe('KVCWriteMasterToolbar', function test_KVCWriteMasterToolbar () {
-		
+
+		it('classes OLSKToolbar', function () {
+			browser.assert.hasClass(KVCWriteMasterToolbar, 'OLSKToolbar');
+		});
+
 		it('classes OLSKMobileViewHeader', function () {
 			browser.assert.hasClass(KVCWriteMasterToolbar, 'OLSKMobileViewHeader');
 		});

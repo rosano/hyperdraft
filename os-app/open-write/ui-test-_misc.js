@@ -497,6 +497,14 @@ describe('KVCWrite_Misc', function () {
 	});
 
 	describe('KVCWriteStorageToolbar', function test_KVCWriteStorageToolbar () {
+
+		it('classes OLSKToolbar', function () {
+			browser.assert.hasClass(KVCWriteStorageToolbar, 'OLSKToolbar');
+		});
+
+		it('classes OLSKToolbarJustify', function () {
+			browser.assert.hasClass(KVCWriteStorageToolbar, 'OLSKToolbarJustify');
+		});
 		
 		it('classes OLSKStorageToolbar', function () {
 			browser.assert.hasClass(KVCWriteStorageToolbar, 'OLSKStorageToolbar');

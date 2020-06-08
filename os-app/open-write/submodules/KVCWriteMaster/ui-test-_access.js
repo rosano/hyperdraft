@@ -30,10 +30,6 @@ describe('KVCWriteMaster_Access', function () {
 		browser.assert.elements(KVCWriteMasterToolbar, 1);
 	});
 
-	it('shows OLSKToolbar', function () {
-		browser.assert.elements('.OLSKToolbar', 1);
-	});
-
 	it('shows OLSKInputWrapper', function () {
 		browser.assert.elements('.OLSKInputWrapper', 1);
 	});

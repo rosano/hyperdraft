@@ -13,13 +13,13 @@
 	flex-shrink: 0;
 }
 
-.KVCWriteMasterToolbar :global(.OLSKToolbarElementGroup) {
+.KVCWriteMasterToolbar .OLSKToolbarElementGroup {
 	margin-left: 4px;
 }
 
 @media screen and (max-width: 760px) {
 
-.KVCWriteMasterToolbar :global(.OLSKToolbarElementGroup) {
+.KVCWriteMasterToolbar .OLSKToolbarElementGroup {
 	margin-left: 8px;
 }
 

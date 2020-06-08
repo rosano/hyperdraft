@@ -55,17 +55,17 @@ describe('KVCWriteDetail_Misc', function () {
 				}),
 			});
 		});
+
+		it('classes OLSKToolbar', function () {
+			browser.assert.hasClass(KVCWriteDetailToolbar, 'OLSKToolbar');
+		});
+
+		it('classes OLSKToolbarJustify', function () {
+			browser.assert.hasClass(KVCWriteDetailToolbar, 'OLSKToolbarJustify');
+		});
 		
 		it('classes OLSKMobileViewHeader', function () {
 			browser.assert.hasClass(KVCWriteDetailToolbar, 'OLSKMobileViewHeader');
-		});
-	
-	});
-
-	describe('OLSKToolbar', function test_OLSKToolbar () {
-
-		it('classes OLSKToolbarJustify', function () {
-			browser.assert.hasClass('.OLSKToolbar', 'OLSKToolbarJustify');
 		});
 	
 	});

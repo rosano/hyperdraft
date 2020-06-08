@@ -113,8 +113,6 @@ onMount(mod.LifecycleComponentDidMount);
 import { afterUpdate } from 'svelte';
 afterUpdate(mod.LifecycleComponentDidUpdate);
 
-import OLSKToolbar from 'OLSKToolbar';
-import OLSKToolbarElementGroup from 'OLSKToolbarElementGroup';
 import OLSKInputWrapper from 'OLSKInputWrapper';
 import _OLSKSharedCreate from '../../../_shared/__external/OLSKUIAssets/_OLSKSharedCreate.svg';
 import OLSKResults from 'OLSKResults';
@@ -124,18 +122,16 @@ import KVCWriteMasterListItem from '../KVCWriteMasterListItem/main.svelte';
 
 <div class="KVCWriteMaster OLSKViewportMaster" class:OLSKMobileViewInactive={ OLSKMobileViewInactive } class:KVCWriteMasterFocused={ mod._ValueFilterFieldFocused } aria-hidden={ OLSKMobileViewInactive ? true : null }>
 
-<header class="KVCWriteMasterToolbar OLSKMobileViewHeader">
-	<OLSKToolbar>
-		<OLSKInputWrapper OLSKInputWrapperValue={ KVCWriteMasterFilterText } OLSKInputWrapperDispatchClear={ KVCWriteMasterDispatchEscape } >
-			<input class="KVCWriteMasterFilterField OLSKMobileSafariRemoveDefaultInputStyle" placeholder={ OLSKLocalized('KVCWriteMasterFilterFieldText') } bind:value={ KVCWriteMasterFilterText } on:input={ mod.InterfaceFilterFieldDidInput } />
-		</OLSKInputWrapper>
+<header class="KVCWriteMasterToolbar OLSKToolbar OLSKMobileViewHeader">
+	<OLSKInputWrapper OLSKInputWrapperValue={ KVCWriteMasterFilterText } OLSKInputWrapperDispatchClear={ KVCWriteMasterDispatchEscape } >
+		<input class="KVCWriteMasterFilterField OLSKMobileSafariRemoveDefaultInputStyle" placeholder={ OLSKLocalized('KVCWriteMasterFilterFieldText') } bind:value={ KVCWriteMasterFilterText } on:input={ mod.InterfaceFilterFieldDidInput } />
+	</OLSKInputWrapper>
 
-		<OLSKToolbarElementGroup>
-			<button class="KVCWriteMasterCreateButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" on:click={ mod.InterfaceCreateButtonDidClick } accesskey="n" title={ OLSKLocalized('KVCWriteMasterCreateButtonText') }>
-				<div class="KVCWriteMasterCreateButtonImage">{@html _OLSKSharedCreate }</div>
-			</button>
-		</OLSKToolbarElementGroup>
-	</OLSKToolbar>
+	<div class="OLSKToolbarElementGroup">
+		<button class="KVCWriteMasterCreateButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" on:click={ mod.InterfaceCreateButtonDidClick } accesskey="n" title={ OLSKLocalized('KVCWriteMasterCreateButtonText') }>
+			<div class="KVCWriteMasterCreateButtonImage">{@html _OLSKSharedCreate }</div>
+		</button>
+	</div>
 </header>
 
 <section class="KVCWriteMasterBody OLSKMobileViewBody">

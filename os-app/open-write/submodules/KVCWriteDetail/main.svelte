@@ -128,8 +128,6 @@ const mod = {
 
 };
 
-import OLSKToolbar from 'OLSKToolbar';
-import OLSKToolbarElementGroup from 'OLSKToolbarElementGroup';
 import OLSKDetailPlaceholder from 'OLSKDetailPlaceholder';
 import _OLSKSharedBack from '../../../_shared/__external/OLSKUIAssets/_OLSKSharedBack.svg';
 import _KVCWriteJump from './ui-assets/_KVCWriteJump.svg';
@@ -148,48 +146,46 @@ import KVCWriteInput from '../KVCWriteInput/main.svelte';
 {/if}
 
 {#if mod._ValueItem}
-<header class="KVCWriteDetailToolbar OLSKMobileViewHeader">
-	<OLSKToolbar OLSKToolbarJustify={ true }>
-		<OLSKToolbarElementGroup>
-			<button class="KVCWriteDetailToolbarBackButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarBackButtonText') } on:click={ KVCWriteDetailDispatchBack }>
-				<div class="KVCWriteDetailToolbarBackButtonImage">{@html _OLSKSharedBack }</div>
-			</button>
-		</OLSKToolbarElementGroup>
+<header class="KVCWriteDetailToolbar OLSKToolbar OLSKToolbarJustify OLSKMobileViewHeader">
+	<div class="OLSKToolbarElementGroup">
+		<button class="KVCWriteDetailToolbarBackButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarBackButtonText') } on:click={ KVCWriteDetailDispatchBack }>
+			<div class="KVCWriteDetailToolbarBackButtonImage">{@html _OLSKSharedBack }</div>
+		</button>
+	</div>
 
-		<OLSKToolbarElementGroup>
-			<button class="KVCWriteDetailToolbarJumpButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarJumpButtonText') } accesskey="r" tabindex="-1" disabled={ !mod._ValueHeaderTokens.length } on:click={ mod.InterfaceJumpButtonDidClick }>
-				<div class="KVCWriteDetailToolbarJumpButtonImage">{@html _KVCWriteJump }</div>
-			</button>
+	<div class="OLSKToolbarElementGroup">
+		<button class="KVCWriteDetailToolbarJumpButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarJumpButtonText') } accesskey="r" tabindex="-1" disabled={ !mod._ValueHeaderTokens.length } on:click={ mod.InterfaceJumpButtonDidClick }>
+			<div class="KVCWriteDetailToolbarJumpButtonImage">{@html _KVCWriteJump }</div>
+		</button>
 
-			{#if !_KVCWriteDetailPublishIsDisabled}
-				{#if !mod._ValueItem.KVCNotePublishStatusIsPublished }
-					<button class="KVCWriteDetailToolbarPublishButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarPublishButtonText') } on:click={ () => KVCWriteDetailDispatchPublish() }>
-						<div class="KVCWriteDetailToolbarPublishButtonImage">{@html _KVCWritePublish }</div>
-					</button>
-				{/if}
-
-				{#if mod._ValueItem.KVCNotePublishStatusIsPublished }
-					<a class="KVCWriteDetailToolbarPublicLink" href={ window.OLSKCanonicalFor('KVCRefReadRoute', {
-						kvc_note_public_id: mod._ValueItem.KVCNotePublicID,
-					}) } target="_blank">{ OLSKLocalized('KVCWriteDetailToolbarPublicLinkText') }</a>
-						
-					<button class="KVCWriteDetailToolbarRetractButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarRetractButtonText') } on:click={ () => KVCWriteDetailDispatchRetract() }>
-						<div class="KVCWriteDetailToolbarRetractButtonImage">{@html _KVCWriteRetract }</div>
-					</button>
-				{/if}
-			{/if}
-
-			{#if !_KVCWriteDetailVersionsIsDisabled}
-				<button class="KVCWriteDetailToolbarVersionsButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarVersionsButtonText') } on:click={ () => KVCWriteDetailDispatchVersions() }>
-					<div class="KVCWriteDetailToolbarVersionsButtonImage">{@html _KVCWriteVersions }</div>
+		{#if !_KVCWriteDetailPublishIsDisabled}
+			{#if !mod._ValueItem.KVCNotePublishStatusIsPublished }
+				<button class="KVCWriteDetailToolbarPublishButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarPublishButtonText') } on:click={ () => KVCWriteDetailDispatchPublish() }>
+					<div class="KVCWriteDetailToolbarPublishButtonImage">{@html _KVCWritePublish }</div>
 				</button>
 			{/if}
 
-			<button class="KVCWriteDetailToolbarDiscardButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarDiscardButtonText') } on:click={ () => window.confirm(OLSKLocalized('KVCWriteDetailDiscardPromptText')) && KVCWriteDetailDispatchDiscard() }>
-				<div class="KVCWriteDetailToolbarDiscardButtonImage">{@html _OLSKSharedDiscard }</div>
+			{#if mod._ValueItem.KVCNotePublishStatusIsPublished }
+				<a class="KVCWriteDetailToolbarPublicLink" href={ window.OLSKCanonicalFor('KVCRefReadRoute', {
+					kvc_note_public_id: mod._ValueItem.KVCNotePublicID,
+				}) } target="_blank">{ OLSKLocalized('KVCWriteDetailToolbarPublicLinkText') }</a>
+					
+				<button class="KVCWriteDetailToolbarRetractButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarRetractButtonText') } on:click={ () => KVCWriteDetailDispatchRetract() }>
+					<div class="KVCWriteDetailToolbarRetractButtonImage">{@html _KVCWriteRetract }</div>
+				</button>
+			{/if}
+		{/if}
+
+		{#if !_KVCWriteDetailVersionsIsDisabled}
+			<button class="KVCWriteDetailToolbarVersionsButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarVersionsButtonText') } on:click={ () => KVCWriteDetailDispatchVersions() }>
+				<div class="KVCWriteDetailToolbarVersionsButtonImage">{@html _KVCWriteVersions }</div>
 			</button>
-		</OLSKToolbarElementGroup>
-	</OLSKToolbar>
+		{/if}
+
+		<button class="KVCWriteDetailToolbarDiscardButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarDiscardButtonText') } on:click={ () => window.confirm(OLSKLocalized('KVCWriteDetailDiscardPromptText')) && KVCWriteDetailDispatchDiscard() }>
+			<div class="KVCWriteDetailToolbarDiscardButtonImage">{@html _OLSKSharedDiscard }</div>
+		</button>
+	</div>
 </header>
 
 <KVCWriteInput
