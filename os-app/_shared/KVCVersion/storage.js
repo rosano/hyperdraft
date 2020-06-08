@@ -1,4 +1,6 @@
 import * as KVCVersionModel from './model.js';
+import * as OLSKRemoteStoragePackage from 'OLSKRemoteStorage';
+const OLSKRemoteStorage = OLSKRemoteStoragePackage.default || OLSKRemoteStoragePackage;
 
 const kType = 'kvc_version';
 const kCollection = 'kvc_versions';
@@ -19,8 +21,8 @@ const mod = {
 					return privateClient.getAll(mod.KVCVersionStoragePath(), false);
 				},
 				async KVCStorageWrite (param1, param2) {
-					await privateClient.storeObject(kType, mod.KVCVersionStoragePath(param1), KVCVersionModel.KVCVersionModelPreJSONSchemaValidate(param2));
-					return KVCVersionModel.KVCVersionModelPostJSONParse(param2);
+					await privateClient.storeObject(kType, mod.KVCVersionStoragePath(param1), OLSKRemoteStorage.OLSKRemoteStoragePreJSONSchemaValidate(param2));
+					return OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(param2);
 				},
 				KVCStorageRead (inputData) {
 					return privateClient.getObject(mod.KVCVersionStoragePath(inputData));

@@ -1,4 +1,6 @@
-import { KVCVersionModelErrorsFor, KVCVersionModelPostJSONParse } from './model.js';
+import * as KVCVersionModel from './model.js';
+import * as OLSKRemoteStoragePackage from 'OLSKRemoteStorage';
+const OLSKRemoteStorage = OLSKRemoteStoragePackage.default || OLSKRemoteStoragePackage;
 
 const mod = {
 
@@ -7,7 +9,7 @@ const mod = {
 			return Promise.reject(new Error('KVCErrorInputNotValid'));
 		}
 
-		let errors = KVCVersionModelErrorsFor(inputData);
+		let errors = KVCVersionModel.KVCVersionModelErrorsFor(inputData);
 		if (errors) {
 			return Promise.resolve({
 				KVCErrors: errors,
@@ -22,14 +24,14 @@ const mod = {
 			return Promise.reject(new Error('KVCErrorInputNotValid'));
 		}
 
-		return KVCVersionModelPostJSONParse(await storageClient.wikiavec.kvc_versions.KVCStorageRead(inputData));
+		return OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(await storageClient.wikiavec.kvc_versions.KVCStorageRead(inputData));
 	},
 
 	async KVCVersionMetalList (storageClient) {
 		let outputData = await storageClient.wikiavec.kvc_versions.KVCStorageList();
 
 		for (let key in outputData) {
-			KVCVersionModelPostJSONParse(outputData[key]);
+			OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(outputData[key]);
 		}
 		
 		return outputData;

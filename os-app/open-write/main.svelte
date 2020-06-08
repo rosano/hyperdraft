@@ -411,7 +411,7 @@ const mod = {
 		}));
 
 		await Promise.all(outputData.KVCNoteObjects.map(function (e) {
-			return KVCNoteMetal.KVCNoteMetalWrite(mod._ValueStorageClient, KVCNoteModel.KVCNoteModelPostJSONParse(e));
+			return KVCNoteMetal.KVCNoteMetalWrite(mod._ValueStorageClient, OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(e));
 		}));
 
 		mod.ValueNotesAll(await KVCNoteAction.KVCNoteActionQuery(mod._ValueStorageClient, {}));

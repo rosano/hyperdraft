@@ -6,6 +6,8 @@ import KVCNoteModel from './model.js';
 import KVCSettingAction from '../KVCSetting/action.js';
 import KVCVersionAction from '../KVCVersion/action.js';
 import KVCParser from '../KVCParser/main.js';
+import * as OLSKRemoteStoragePackage from 'OLSKRemoteStorage';
+const OLSKRemoteStorage = OLSKRemoteStoragePackage.default || OLSKRemoteStoragePackage;
 
 const mod = {
 
@@ -100,7 +102,7 @@ const mod = {
 	async KVCNoteActionGetPublicLinks (storageClient) {
 		return Promise.resolve((await mod.KVCNoteActionQuery(storageClient, {
 			KVCNotePublishStatusIsPublished: true,
-		})).map(KVCNoteModel.KVCNoteModelPostJSONParse).map(function (e) {
+		})).map(OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse).map(function (e) {
 			return [KVCParser.KVCParserTitleForPlaintext(e.KVCNoteBody), e.KVCNotePublicID];
 		}).reduce(function (coll, [key, val]) {
 			if (typeof coll[key] === 'undefined') {

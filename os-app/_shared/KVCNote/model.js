@@ -46,34 +46,6 @@ const mod = {
 		return Object.entries(errors).length ? errors : null;
 	},
 
-	KVCNoteModelPreJSONSchemaValidate (inputData) {
-		if (inputData.KVCNoteCreationDate) {
-			inputData.KVCNoteCreationDate = inputData.KVCNoteCreationDate.toISOString();
-		}
-
-		if (inputData.KVCNoteModificationDate) {
-			inputData.KVCNoteModificationDate = inputData.KVCNoteModificationDate.toISOString();
-		}
-
-		return inputData;
-	},
-
-	KVCNoteModelPostJSONParse (inputData) {
-		if (!inputData) {
-			return inputData;
-		}
-
-		if (inputData.KVCNoteCreationDate) {
-			inputData.KVCNoteCreationDate = new Date(inputData.KVCNoteCreationDate);
-		}
-
-		if (inputData.KVCNoteModificationDate) {
-			inputData.KVCNoteModificationDate = new Date(inputData.KVCNoteModificationDate);
-		}
-
-		return inputData;
-	},
-
 };
 
 export default mod;

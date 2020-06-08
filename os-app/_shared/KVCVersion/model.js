@@ -39,23 +39,3 @@ export const KVCVersionModelErrorsFor = function(inputData, options = {}) {
 
 	return Object.entries(errors).length ? errors : null;
 };
-
-export const KVCVersionModelPreJSONSchemaValidate = function(inputData) {
-	if (inputData.KVCVersionDate) {
-		inputData.KVCVersionDate = inputData.KVCVersionDate.toISOString();
-	}
-
-	return inputData;
-};
-
-export const KVCVersionModelPostJSONParse = function(inputData) {
-	if (!inputData) {
-		return inputData;
-	}
-
-	if (inputData.KVCVersionDate) {
-		inputData.KVCVersionDate = new Date(inputData.KVCVersionDate);
-	}
-
-	return inputData;
-};

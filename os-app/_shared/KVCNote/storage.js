@@ -39,7 +39,7 @@ const mod = {
 				}
 			}
 
-			changeDelegate[delegateMethod](KVCNoteModel.KVCNoteModelPostJSONParse(event[OLSKRemoteStorage.OLSKRemoteStorageChangeDelegateInput(delegateMethod)]));
+			changeDelegate[delegateMethod](OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(event[OLSKRemoteStorage.OLSKRemoteStorageChangeDelegateInput(delegateMethod)]));
 		});
 
 		return {
@@ -51,8 +51,8 @@ const mod = {
 					return privateClient.getAll(mod.KVCNoteStoragePath(), false);
 				},
 				async KVCStorageWrite (param1, param2) {
-					await privateClient.storeObject(kType, mod.KVCNoteStoragePath(param1), KVCNoteModel.KVCNoteModelPreJSONSchemaValidate(param2));
-					return KVCNoteModel.KVCNoteModelPostJSONParse(param2);
+					await privateClient.storeObject(kType, mod.KVCNoteStoragePath(param1), OLSKRemoteStorage.OLSKRemoteStoragePreJSONSchemaValidate(param2));
+					return OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(param2);
 				},
 				KVCStorageRead (inputData) {
 					return privateClient.getObject(mod.KVCNoteStoragePath(inputData));

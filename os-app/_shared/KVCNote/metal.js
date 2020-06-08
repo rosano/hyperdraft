@@ -1,4 +1,6 @@
 import KVCNoteModel from './model.js';
+import * as OLSKRemoteStoragePackage from 'OLSKRemoteStorage';
+const OLSKRemoteStorage = OLSKRemoteStoragePackage.default || OLSKRemoteStoragePackage;
 
 const mod = {
 
@@ -23,14 +25,14 @@ const mod = {
 			return Promise.reject(new Error('KVCErrorInputNotValid'));
 		}
 
-		return KVCNoteModel.KVCNoteModelPostJSONParse(await storageClient.wikiavec.kvc_notes.KVCStorageRead(inputData));
+		return OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(await storageClient.wikiavec.kvc_notes.KVCStorageRead(inputData));
 	},
 
 	async KVCNoteMetalList (storageClient) {
 		let outputData = await storageClient.wikiavec.kvc_notes.KVCStorageList();
 
 		for (let key in outputData) {
-			KVCNoteModel.KVCNoteModelPostJSONParse(outputData[key]);
+			OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(outputData[key]);
 		}
 		
 		return outputData;

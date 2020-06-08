@@ -86,39 +86,3 @@ describe('KVCVersionModelErrorsFor', function test_KVCVersionModelErrorsFor() {
 	});
 
 });
-
-describe('KVCVersionModelPreJSONSchemaValidate', function test_KVCVersionModelPreJSONSchemaValidate() {
-
-	it('returns input', function() {
-		deepEqual(mainModule.KVCVersionModelPreJSONSchemaValidate({}), {});
-	});
-
-	it('returns input with KVCVersionDate as string', function() {
-		deepEqual(mainModule.KVCVersionModelPreJSONSchemaValidate({
-			KVCVersionDate: new Date('2018-12-09T19:07:01.902Z'),
-		}), {
-			KVCVersionDate: '2018-12-09T19:07:01.902Z',
-		});
-	});
-
-});
-
-describe('KVCVersionModelPostJSONParse', function test_KVCVersionModelPostJSONParse() {
-
-	it('returns input null', function() {
-		deepEqual(mainModule.KVCVersionModelPostJSONParse(null), null);
-	});
-
-	it('returns input object', function() {
-		deepEqual(mainModule.KVCVersionModelPostJSONParse({}), {});
-	});
-
-	it('returns input with KVCVersionDate as date', function() {
-		deepEqual(mainModule.KVCVersionModelPostJSONParse({
-			KVCVersionDate: '2018-12-09T19:07:01.902Z',
-		}), {
-			KVCVersionDate: new Date('2018-12-09T19:07:01.902Z'),
-		});
-	});
-
-});
