@@ -1,5 +1,3 @@
-import { deepEqual } from 'assert';
-
 const kDefaultRoutePath = require('./controller.js').OLSKControllerRoutes().shift().OLSKRoutePath;
 
 Object.entries({

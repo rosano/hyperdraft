@@ -1,5 +1,3 @@
-import { deepEqual } from 'assert';
-
 Object.entries({
 	KVCRootLink: '.KVCRootLink',
 }).map(function (e) {

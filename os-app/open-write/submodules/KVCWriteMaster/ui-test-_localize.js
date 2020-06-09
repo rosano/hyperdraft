@@ -1,5 +1,3 @@
-import { deepEqual } from 'assert';
-
 const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
 kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
