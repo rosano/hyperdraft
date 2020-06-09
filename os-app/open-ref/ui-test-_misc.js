@@ -1,7 +1,7 @@
 describe('KVCRef_Misc', function () {
 
 	const stubURL = function (inputData, host = 'loc.tests') {
-		return `http://${ host }:${ process.env.OLSK_SERVER_PORT }${ typeof inputData === 'string' ? inputData : inputData.OLSKRoutePath }`;
+		return `http://${ host }:${ process.env.PORT }${ typeof inputData === 'string' ? inputData : inputData.OLSKRoutePath }`;
 	};
 
 	describe('KVCRefHomeRoute', function () {		

@@ -3,7 +3,7 @@ const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 describe('KVCWrite_Ref', function () {
 
 	const stubURL = function (inputData, host) {
-		return `http://${ host }:${ process.env.OLSK_SERVER_PORT }${ typeof inputData === 'string' ? inputData : inputData.OLSKRoutePath }`;
+		return `http://${ host }:${ process.env.PORT }${ typeof inputData === 'string' ? inputData : inputData.OLSKRoutePath }`;
 	};
 
 	describe('KVCWriteDetailToolbarVersionsButton', function () {
