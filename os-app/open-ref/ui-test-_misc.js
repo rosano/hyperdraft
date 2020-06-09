@@ -1,5 +1,3 @@
-import { deepEqual } from 'assert';
-
 describe('KVCRef_Misc', function () {
 
 	const stubURL = function (inputData, host = 'loc.tests') {
@@ -10,26 +8,34 @@ describe('KVCRef_Misc', function () {
 
 		context('other host', function () {
 
-			it.skip('sets status', async function() {
-				deepEqual((await browser.fetch(stubURL(require('./controller.js').OLSKControllerRoutes().KVCRefHomeRoute))).status, 307);
+			before(function () {
+				return browser.visit(stubURL(require('./controller.js').OLSKControllerRoutes().KVCRefHomeRoute));
 			});
-			
-			it('redirects', async function() {
-				deepEqual((await browser.fetch(stubURL(require('./controller.js').OLSKControllerRoutes().KVCRefHomeRoute))).url, stubURL(require('../open-write/controller.js').OLSKControllerRoutes().shift()));
+
+			it('sets status', function () {
+				browser.assert.redirected();
 			});
-		
+
+			it('redirects', function() {
+				browser.assert.url(stubURL(require('../open-write/controller.js').OLSKControllerRoutes().shift()));
+			});
+
 		});		
 
 		context('KVC_SHARED_REF_HOST', function () {
 
-			it('sets status', async function() {
-				deepEqual((await browser.fetch(stubURL(require('./controller.js').OLSKControllerRoutes().KVCRefHomeRoute, process.env.KVC_SHARED_REF_HOST))).status, 200);
+			before(function () {
+				return browser.visit(stubURL(require('./controller.js').OLSKControllerRoutes().KVCRefHomeRoute, process.env.KVC_SHARED_REF_HOST));
 			});
-			
-			it('renders', async function() {
-				deepEqual((await browser.fetch(stubURL(require('./controller.js').OLSKControllerRoutes().KVCRefHomeRoute, process.env.KVC_SHARED_REF_HOST))).url, stubURL(require('./controller.js').OLSKControllerRoutes().KVCRefHomeRoute, process.env.KVC_SHARED_REF_HOST));
+
+			it('sets status', function () {
+				browser.assert.status(200);
 			});
-		
+
+			it('renders', function() {
+				browser.assert.url(stubURL(require('./controller.js').OLSKControllerRoutes().KVCRefHomeRoute, process.env.KVC_SHARED_REF_HOST));
+			});
+
 		});
 		
 	});
@@ -38,18 +44,26 @@ describe('KVCRef_Misc', function () {
 
 		context('other host', function () {
 
-			it.skip('sets status', async function() {
-				deepEqual((await browser.fetch(stubURL('/1'))).status, 404);
+			before(function () {
+				return browser.visit(stubURL('/1'));
+			});
+
+			it('sets status', function () {
+				browser.assert.status(404);
 			});
 		
 		});		
 
 		context('KVC_SHARED_REF_HOST', function () {
 
-			it.skip('sets status', async function() {
-				deepEqual((await browser.fetch(stubURL('/1', process.env.KVC_SHARED_REF_HOST))).status, 200);
+			before(function () {
+				return browser.visit(stubURL('/1', process.env.KVC_SHARED_REF_HOST));
 			});
-		
+
+			it('sets status', function () {
+				browser.assert.success();
+			});
+
 		});
 		
 	});
