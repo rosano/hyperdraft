@@ -64,7 +64,7 @@ exports.WKCAPIErrorHandler = function(err, req, res, next) {
 	res.status(err.message.indexOf('WKCAPIClientErrorAuthentication') === 0 ? 401 : 500);
 
 	if (err.message.indexOf('WKCAPIClientError') === 0) {
-		if (err.message.indexOf('NotFound') !== -1) {
+		if (!err.message.includes('NotFound')) {
 			res.status(404);
 		}
 		

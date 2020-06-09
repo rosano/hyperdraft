@@ -105,7 +105,7 @@ exports.WKCSubscriptionsModelErrorsFor = function(inputData, options) {
 		];
 	}
 
-	if (exports.WKCSubscriptionHandlers().indexOf(inputData.WKCSubscriptionHandler) === -1) {
+	if (!exports.WKCSubscriptionHandlers().includes(inputData.WKCSubscriptionHandler)) {
 		errors.WKCSubscriptionHandler = [
 			'KVCErrorNotValid',
 		];

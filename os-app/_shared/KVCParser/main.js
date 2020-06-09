@@ -72,7 +72,7 @@ const mod = {
 		}
 
 		return [].slice.call(channelElement.getElementsByTagName('item')).filter(function(e) {
-			return oldIDs.indexOf(contentForFirst(e.getElementsByTagName('guid'))) === -1;
+			return !oldIDs.includes(contentForFirst(e.getElementsByTagName('guid')));
 		}).map(function(e) {
 			const itemContent = (contentForFirst(e.getElementsByTagName('content:encoded')) || contentForFirst(e.getElementsByTagName('description'))).trim();
 
@@ -104,7 +104,7 @@ const mod = {
 		});
 
 		return [].slice.call(DOMParserInstance.parseFromString(newString, 'application/xml').getElementsByTagName('entry')).filter(function(e) {
-			return oldIDs.indexOf(contentForFirst(e.getElementsByTagName('id'))) === -1;
+			return !oldIDs.includes(contentForFirst(e.getElementsByTagName('id')));
 		}).map(function(e) {
 			var itemContent = (function () {
 				var contentString = e.getElementsByTagName('content')[0] || e.getElementsByTagName('summary')[0];
@@ -204,9 +204,9 @@ const mod = {
 		}
 
 		return newJSON.filter(function(e) {
-			return oldJSON.map(function (e) {
+			return !oldJSON.map(function (e) {
 				return e.id_str;
-			}).indexOf(e.id_str) === -1;
+			}).includes(e.id_str);
 		}).map(function(e) {
 			return {
 				WKCArticleOriginalGUID: e.id_str,

@@ -214,7 +214,7 @@
 			return [
 				'application/rss+xml',
 				'application/atom+xml',
-				].indexOf(e.type.trim().toLowerCase()) !== -1;
+				].includes(e.type.trim().toLowerCase());
 		}).map(function(e) {
 			return {
 				WKCAlternativeURL: WKCReadLogic.WKCReadModuleSubscribeCompleteURL(d3.select(e).attr('href'), inputData),
