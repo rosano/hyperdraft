@@ -6,6 +6,10 @@ describe('KVCVitrine_Misc', function () {
 		return browser.visit(kDefaultRoute.OLSKRoutePath);
 	});
 
+	it('assigns meta:viewport', function () {
+		browser.assert.attribute('meta[name=viewport]', 'content', 'width=device-width');
+	});
+
 	describe('KVCVitrine', function () {
 		
 		it('classes OLSKCommon', function () {
