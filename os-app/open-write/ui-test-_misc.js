@@ -1,5 +1,3 @@
-import { deepEqual } from 'assert';
-
 const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
 describe('KVCWrite_Misc', function () {
@@ -171,7 +169,7 @@ describe('KVCWrite_Misc', function () {
 		});
 
 		before(function () {
-			deepEqual(browser.activeElement, browser.query('.KVCWriteInputFieldDebug'));
+			browser.assert.hasFocus('.KVCWriteInputFieldDebug');
 		});
 
 		before(function () {
@@ -179,7 +177,7 @@ describe('KVCWrite_Misc', function () {
 		});
 		
 		it('focuses KVCWriteMasterFilterField', function() {
-			deepEqual(browser.activeElement, browser.query('.KVCWriteMasterFilterField'));
+			browser.assert.hasFocus('.KVCWriteMasterFilterField');
 		});
 		
 		it('clears KVCWriteMasterFilterText', function() {
