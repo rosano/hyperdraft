@@ -97,7 +97,7 @@ exports.WKCSubscriptionsModelErrorsFor = function(inputData, options) {
 		throw new Error('KVCErrorInputNotValid');
 	}
 
-	var errors = {};
+	const errors = {};
 
 	if (!urlPackage.parse(inputData.WKCSubscriptionURL || '').hostname) {
 		errors.WKCSubscriptionURL = [

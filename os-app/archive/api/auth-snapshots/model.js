@@ -11,7 +11,7 @@ exports.WKCSnapshotsModelErrorsFor = function(inputData) {
 		throw new Error('KVCErrorInputNotValid');
 	}
 
-	var errors = {};
+	const errors = {};
 
 	if (!inputData.WKCSnapshotSubscriptionID) {
 		errors.WKCSnapshotSubscriptionID = [

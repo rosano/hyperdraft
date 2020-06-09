@@ -5,7 +5,7 @@ const mod = {
 			throw new Error('KVCErrorInputNotValid');
 		}
 
-		var errors = {};
+		const errors = {};
 
 		if (typeof inputData.KVCSettingKey !== 'string') {
 			errors.KVCSettingKey = [

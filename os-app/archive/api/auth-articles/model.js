@@ -25,7 +25,7 @@ exports.WKCModelInputDataIsArticleObject = function(inputData, options) {
 		return false;
 	}
 
-	var errors = {};
+	const errors = {};
 
 	if (typeof inputData.WKCArticleSubscriptionID !== 'string' || !inputData.WKCArticleSubscriptionID) {
 		errors.WKCArticleSubscriptionID = [
