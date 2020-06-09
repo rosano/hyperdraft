@@ -1,5 +1,3 @@
-import { deepEqual } from 'assert';
-
 const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
 kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
@@ -34,7 +32,9 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 				'\n\n': '\n',
 				'KVCVitrineDescription': uLocalized('KVCVitrineDescription'),
 			});
-			deepEqual(browser.query(KVCVitrineContent).textContent.trim().slice(0, 20), item.slice(0, 20));
+			browser.assert.OLSKTextContent(KVCVitrineContent, item.slice(0, 20), function (inputData) {
+				return inputData.slice(0, 20);
+			});
 		});
 
 		it('localizes KVC_SHARED_GITHUB_URL', function() {
