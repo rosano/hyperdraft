@@ -21,32 +21,14 @@ import KVCWriteMasterLogic from './ui-logic.js';
 
 const mod = {
 
-	// VALUE
-
-	_ValueFilterFieldFocused: true,
-
-	// DATA
-
-	DataIsFocused () {
-		return document.activeElement === document.querySelector('.KVCWriteMasterFilterField');
-	},
-
-	DataIsMobile () {
-		return window.innerWidth <= 760;
-	},
-
 	// INTERFACE
-
-	InterfaceFilterFieldDidInput (event) {
-		KVCWriteMasterDispatchFilter(this.value);
-	},
 
 	InterfaceCreateButtonDidClick () {
 		KVCWriteMasterDispatchCreate();
 	},
 
 	InterfaceWindowDidKeydown (event) {
-		if (!mod.DataIsFocused()) {
+		if (document.activeElement !== document.querySelector('.OLSKMasterListFilterField')) {
 			return;
 		}
 
@@ -60,96 +42,46 @@ const mod = {
 			return;
 		}
 
-		if (KVCWriteMasterListItemSelected && KVCWriteMasterDelegateItemTitle(KVCWriteMasterListItemSelected) === KVCWriteMasterFilterText) {
+		if (KVCWriteMasterListItemSelected && KVCWriteMasterDelegateItemTitle(KVCWriteMasterListItemSelected.KVCNoteBody) === KVCWriteMasterFilterText) {
 			return;
 		}
 		
 		return KVCWriteMasterDispatchCreate(`${ KVCWriteMasterFilterText }\n\n`);
 	},
 
-	// SETUP
-
-	SetupEverything () {
-		mod.SetupFilterFieldEventListeners();
-	},
-
-	SetupFilterFieldEventListeners () {
-		setTimeout(function () {
-			document.querySelector('.KVCWriteMasterFilterField').addEventListener('focus', function () {
-				mod._ValueFilterFieldFocused = true;
-			});
-
-			document.querySelector('.KVCWriteMasterFilterField').addEventListener('blur', function () {
-				mod._ValueFilterFieldFocused = false;
-			});
-		}, 100);
-	},
-
-	// LIFECYCLE
-
-	LifecycleComponentDidMount () {
-		mod.SetupEverything();
-	},
-
-	LifecycleComponentDidUpdate () {
-		if (OLSK_TESTING_BEHAVIOUR()) {
-			return;
-		}
-
-		if (mod.DataIsMobile()) {
-			return;
-		}
-
-		const element = document.querySelector('.OLSKResultsListItemSelected');
-
-		element ? element.scrollIntoView(false) : document.querySelector('.KVCWriteMasterBody').scrollTo(0, 0);
-	},
-
 };
 
-import { onMount } from 'svelte';
-onMount(mod.LifecycleComponentDidMount);
-
-import { afterUpdate } from 'svelte';
-afterUpdate(mod.LifecycleComponentDidUpdate);
-
-import OLSKInputWrapper from 'OLSKInputWrapper';
+import OLSKMasterList from 'OLSKMasterList';
 import _OLSKSharedCreate from '../../../_shared/__external/OLSKUIAssets/_OLSKSharedCreate.svg';
-import OLSKResults from 'OLSKResults';
 import KVCWriteMasterListItem from '../KVCWriteMasterListItem/main.svelte';
 </script>
 <svelte:window on:keydown={ mod.InterfaceWindowDidKeydown }/>
 
-<div class="KVCWriteMaster OLSKViewportMaster" class:OLSKMobileViewInactive={ OLSKMobileViewInactive } class:KVCWriteMasterFocused={ mod._ValueFilterFieldFocused } aria-hidden={ OLSKMobileViewInactive ? true : null }>
-
-<header class="KVCWriteMasterToolbar OLSKToolbar OLSKMobileViewHeader">
-	<OLSKInputWrapper OLSKInputWrapperValue={ KVCWriteMasterFilterText } OLSKInputWrapperDispatchClear={ KVCWriteMasterDispatchEscape } >
-		<input class="KVCWriteMasterFilterField OLSKMobileSafariRemoveDefaultInputStyle" placeholder={ OLSKLocalized('KVCWriteMasterFilterFieldText') } bind:value={ KVCWriteMasterFilterText } on:input={ mod.InterfaceFilterFieldDidInput } />
-	</OLSKInputWrapper>
-
-	<div class="OLSKToolbarElementGroup">
-		<button class="KVCWriteMasterCreateButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" on:click={ mod.InterfaceCreateButtonDidClick } accesskey="n" title={ OLSKLocalized('KVCWriteMasterCreateButtonText') }>
-			<div class="KVCWriteMasterCreateButtonImage">{@html _OLSKSharedCreate }</div>
-		</button>
+<OLSKMasterList
+	OLSKMasterListItems={ KVCWriteMasterListItems }
+	OLSKMasterListItemSelected={ KVCWriteMasterListItemSelected }
+	OLSKMasterListFilterText={ KVCWriteMasterFilterText }
+	OLSKMasterListDispatchClick={ KVCWriteMasterDispatchClick }
+	OLSKMasterListDispatchArrow={ KVCWriteMasterDispatchArrow }
+	OLSKMasterListDispatchFilter={ KVCWriteMasterDispatchFilter }
+	let:OLSKResultsListItem={ item }
+	OLSKMasterListItemAccessibilitySummaryFor={ (inputData) =>  KVCWriteMasterLogic.KVCWriteMasterTruncatedTitle(KVCWriteMasterDelegateItemTitle(inputData.KVCNoteBody), true) }	
+	OLSKMasterListClass={ 'KVCWriteMaster' }
+	OLSKMobileViewInactive={ OLSKMobileViewInactive }
+	>
+	<div slot="OLSKMasterListToolbarTail">
+		<div class="OLSKToolbarElementGroup">
+			<button class="KVCWriteMasterCreateButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteMasterCreateButtonText') } on:click={ mod.InterfaceCreateButtonDidClick } accesskey="n">
+				<div class="KVCWriteMasterCreateButtonImage">{@html _OLSKSharedCreate }</div>
+			</button>
+		</div>
 	</div>
-</header>
 
-<section class="KVCWriteMasterBody OLSKMobileViewBody">
-	<OLSKResults
-		OLSKResultsListItems={ KVCWriteMasterListItems }
-		OLSKResultsListItemSelected={ KVCWriteMasterListItemSelected }
-		OLSKResultsDispatchClick={ KVCWriteMasterDispatchClick }
-		OLSKResultsDispatchArrow={ (inputData) => mod.DataIsFocused() && KVCWriteMasterDispatchArrow(inputData) }
-		let:OLSKResultsListItem={ e }
-		>
-		<KVCWriteMasterListItem
-			KVCWriteMasterListItemAccessibilitySummary={ KVCWriteMasterLogic.KVCWriteMasterTruncatedTitle(KVCWriteMasterDelegateItemTitle(e.KVCNoteBody), true) }
-			KVCWriteMasterListItemTitle={ KVCWriteMasterLogic.KVCWriteMasterTruncatedTitle(KVCWriteMasterDelegateItemTitle(e.KVCNoteBody)) }
-			KVCWriteMasterListItemSnippet={ KVCWriteMasterDelegateItemSnippet(e.KVCNoteBody) }
-			/>
-	</OLSKResults>
-</section>
-
-</div>
+	<KVCWriteMasterListItem
+		KVCWriteMasterListItemAccessibilitySummary={ KVCWriteMasterLogic.KVCWriteMasterTruncatedTitle(KVCWriteMasterDelegateItemTitle(item.KVCNoteBody), true) }
+		KVCWriteMasterListItemTitle={ KVCWriteMasterLogic.KVCWriteMasterTruncatedTitle(KVCWriteMasterDelegateItemTitle(item.KVCNoteBody)) }
+		KVCWriteMasterListItemSnippet={ KVCWriteMasterDelegateItemSnippet(item.KVCNoteBody) }
+		/>
+</OLSKMasterList>	
 
 <style src="./ui-style.css"></style>

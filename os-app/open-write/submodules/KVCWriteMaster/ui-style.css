@@ -1,48 +1,30 @@
-.KVCWriteMaster {
+:global(.KVCWriteMaster) {
 	border-right: var(--WKCBorderStyle);
-
-	/* KVCWriteMasterFlexbox:Parent */
-	display: flex;
-	flex-direction: column;
 }
 
-.KVCWriteMasterToolbar {
+:global(.OLSKMasterListToolbar) {
 	border-bottom: var(--WKCBorderStyle);
-
-	/* KVCWriteMasterFlexbox:Child */
-	flex-shrink: 0;
 }
 
-.KVCWriteMasterToolbar .OLSKToolbarElementGroup {
+:global(.OLSKMasterListToolbar .OLSKToolbarElementGroup) {
 	margin-left: 4px;
 }
 
 @media screen and (max-width: 760px) {
 
-.KVCWriteMasterToolbar .OLSKToolbarElementGroup {
+:global(.OLSKMasterListToolbar .OLSKToolbarElementGroup) {
 	margin-left: 8px;
 }
 
 }
 
-.KVCWriteMasterBody {
-	overflow: auto;
-	
-	/* KVCWriteMasterFlexbox:Child */
-	flex-grow: 1;
-}
-
-:global(.OLSKIsLoading) .KVCWriteMasterBody {
-	visibility: hidden;
-}
-
-.KVCWriteMasterBody :global(.OLSKResultsListItemSelected) {
+:global(.KVCWriteMaster .OLSKMasterListBody .OLSKResultsListItemSelected .KVCWriteMasterListItem) {
 	background: #e6e6e6;
 }
 
 @media screen and (min-width: 760px) {
 
-.KVCWriteMasterFocused :global(.OLSKResultsListItemSelected) {
+:global(.KVCWriteMaster.OLSKMasterListFocused .OLSKMasterListBody  .OLSKResultsListItemSelected .KVCWriteMasterListItem) {
 	background: #1a81ff;
 	color: white;
 }

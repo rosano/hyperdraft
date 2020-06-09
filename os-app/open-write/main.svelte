@@ -200,7 +200,7 @@ const mod = {
 				mod.ControlEscape();
 			},
 			Tab () {
-				document.activeElement !== document.querySelector('.KVCWriteMasterFilterField') ? document.querySelector('.KVCWriteMasterFilterField').focus() : mod.KVCWriteDetailInstance.KVCWriteDetailEditorFocus();
+				document.activeElement !== document.querySelector('.OLSKMasterListFilterField') ? document.querySelector('.OLSKMasterListFilterField').focus() : mod.KVCWriteDetailInstance.KVCWriteDetailEditorFocus();
 
 				event.preventDefault();
 			},
@@ -292,7 +292,7 @@ const mod = {
 		mod.ValueNoteSelected(inputData);
 
 		if (!inputData) {
-			return !mod.DataIsMobile() && document.querySelector('.KVCWriteMasterFilterField').focus();
+			return !mod.DataIsMobile() && document.querySelector('.OLSKMasterListFilterField').focus();
 		}
 
 		mod.OLSKMobileViewInactive = true;
@@ -443,7 +443,7 @@ const mod = {
 		}
 
 		setTimeout(function () {
-			document.querySelector('.KVCWriteMasterFilterField').focus();
+			document.querySelector('.OLSKMasterListFilterField').focus();
 		})
 	},
 	

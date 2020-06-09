@@ -67,6 +67,7 @@
 		'url-parse',
 
 		// pass tests
+		'OLSKMasterList',
 		'OLSKDetailPlaceholder',
 		'OLSKInputWrapper',
 		'OLSKAppToolbar',

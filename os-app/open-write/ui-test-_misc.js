@@ -40,8 +40,8 @@ describe('KVCWrite_Misc', function () {
 			browser.assert.elements('.OLSKDetailPlaceholder', 1);
 		});
 
-		it('focuses KVCWriteMasterFilterField', function() {
-			browser.assert.hasFocus('.KVCWriteMasterFilterField');
+		it('focuses OLSKMasterListFilterField', function() {
+			browser.assert.hasFocus('.OLSKMasterListFilterField');
 		});
 	
 	});
@@ -96,8 +96,8 @@ describe('KVCWrite_Misc', function () {
 			browser.assert.hasClass('.KVCWriteDetail', 'OLSKMobileViewInactive');
 		});
 
-		// it('focuses KVCWriteMasterFilterField', function() {
-		// 	browser.assert.hasFocus('.KVCWriteMasterFilterField');
+		// it('focuses OLSKMasterListFilterField', function() {
+		// 	browser.assert.hasFocus('.OLSKMasterListFilterField');
 		// });
 
 		// it('sets KVCWriteDetailItem', function () {
@@ -112,8 +112,8 @@ describe('KVCWrite_Misc', function () {
 			return browser.OLSKFireKeyboardEvent(browser.window, 'ArrowDown');
 		});
 
-		// it('classes KVCWriteMasterFocused', function() {
-		// 	browser.assert.hasClass('.KVCWriteMaster', 'KVCWriteMasterFocused');
+		// it('classes OLSKMasterListFocused', function() {
+		// 	browser.assert.hasClass('.KVCWriteMaster', 'OLSKMasterListFocused');
 		// });
 
 		it('classes OLSKMobileViewInactive', function() {
@@ -142,8 +142,8 @@ describe('KVCWrite_Misc', function () {
 				return browser.OLSKFireKeyboardEvent(browser.window, 'Tab');
 			});
 
-			it.skip('classes KVCWriteMasterFocused', function() {
-				browser.assert.hasNoClass('.KVCWriteMaster', 'KVCWriteMasterFocused');
+			it.skip('classes OLSKMasterListFocused', function() {
+				browser.assert.hasNoClass('.KVCWriteMaster', 'OLSKMasterListFocused');
 			});
 
 			it.skip('focus KVCWriteInput', function() {
@@ -158,8 +158,8 @@ describe('KVCWrite_Misc', function () {
 				return browser.OLSKFireKeyboardEvent(browser.window, 'Tab');
 			});
 
-			it('classes KVCWriteMasterFocused', function() {
-				browser.assert.hasClass('.KVCWriteMaster', 'KVCWriteMasterFocused');
+			it('classes OLSKMasterListFocused', function() {
+				browser.assert.hasClass('.KVCWriteMaster', 'OLSKMasterListFocused');
 			});
 
 			it.skip('focus KVCWriteInput', function() {
@@ -177,11 +177,11 @@ describe('KVCWrite_Misc', function () {
 		});
 
 		before(function () {
-			browser.fill('.KVCWriteMasterFilterField', 'alfa');
+			browser.fill('.OLSKMasterListFilterField', 'alfa');
 		});
 
 		before(function () {
-			browser.assert.input('.KVCWriteMasterFilterField', 'alfa');
+			browser.assert.input('.OLSKMasterListFilterField', 'alfa');
 		});
 
 		before(function () {
@@ -196,12 +196,12 @@ describe('KVCWrite_Misc', function () {
 			return browser.OLSKFireKeyboardEvent(browser.window, 'Escape');
 		});
 		
-		it('focuses KVCWriteMasterFilterField', function() {
-			browser.assert.hasFocus('.KVCWriteMasterFilterField');
+		it('focuses OLSKMasterListFilterField', function() {
+			browser.assert.hasFocus('.OLSKMasterListFilterField');
 		});
 		
-		it('clears KVCWriteMasterFilterText', function() {
-			browser.assert.input('.KVCWriteMasterFilterField', '');
+		it.skip('clears KVCWriteMasterFilterText', function() {
+			browser.assert.input('.OLSKMasterListFilterField', '');
 		});
 
 	});
@@ -216,8 +216,8 @@ describe('KVCWrite_Misc', function () {
 			return browser.click('.KVCWriteMasterListItem');
 		});
 
-		it.skip('classes KVCWriteMasterFocused', function() {
-			browser.assert.hasNoClass('.KVCWriteMaster', 'KVCWriteMasterFocused');
+		it.skip('classes OLSKMasterListFocused', function() {
+			browser.assert.hasNoClass('.KVCWriteMaster', 'OLSKMasterListFocused');
 		});
 
 		it('classes OLSKMobileViewInactive', function() {
@@ -255,7 +255,7 @@ describe('KVCWrite_Misc', function () {
 		context('no match', function () {
 			
 			before(function () {
-				browser.fill('.KVCWriteMasterFilterField', 'charlie');
+				browser.fill('.OLSKMasterListFilterField', 'charlie');
 			});
 
 			it('filters all KVCWriteMasterListItem', function() {
@@ -271,7 +271,7 @@ describe('KVCWrite_Misc', function () {
 		context('partial match', function () {
 
 			before(function () {
-				browser.fill('.KVCWriteMasterFilterField', 'a');
+				browser.fill('.OLSKMasterListFilterField', 'a');
 			});
 
 			it('filters partial KVCWriteMasterListItem', function() {
@@ -291,7 +291,7 @@ describe('KVCWrite_Misc', function () {
 		context('exact match', function () {
 
 			before(function () {
-				browser.fill('.KVCWriteMasterFilterField', 'bravo');
+				browser.fill('.OLSKMasterListFilterField', 'bravo');
 			});
 
 			it('filters exact KVCWriteMasterListItem', function() {

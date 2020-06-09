@@ -63,7 +63,7 @@
     "// FRONTEND APP LAYOUT": null,
     "OLSKLayout": "olsk/OLSKLayout",
     "OLSKViewportContent": "olsk/OLSKViewportContent",
-    "OLSKInputWrapper": "olsk/OLSKInputWrapper",
+    "OLSKMasterList": "olsk/OLSKMasterList",
     "OLSKResults": "olsk/OLSKResults",
     "OLSKDetailPlaceholder": "olsk/OLSKDetailPlaceholder",
     "OLSKUIAssets": "olsk/OLSKUIAssets",
