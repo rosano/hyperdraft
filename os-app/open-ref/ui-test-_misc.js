@@ -49,7 +49,9 @@ describe('KVCRef_Misc', function () {
 		context('other host', function () {
 
 			before(function () {
-				return browser.visit(stubURL('/1'));
+				return require('assert').rejects(function () {
+					return browser.visit(stubURL('/1'));
+				});
 			});
 
 			it('sets status', function () {
