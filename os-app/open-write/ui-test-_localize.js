@@ -18,8 +18,16 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 			browser.assert.text('title', uLocalized('KVCWriteTitle'));
 		});
 
-		it('localizes KVCWriteStorageExportButton', function () {
-			browser.assert.text(KVCWriteStorageExportButton, uLocalized('KVCWriteStorageExportButtonText'));
+		context('click OLSKAppToolbarStorageButton', function () {
+			
+			before(function () {
+				return browser.pressButton('.OLSKAppToolbarStorageButton');
+			});
+
+			it('localizes KVCWriteStorageExportButton', function () {
+				browser.assert.text(KVCWriteStorageExportButton, uLocalized('KVCWriteStorageExportButtonText'));
+			});
+		
 		});
 
 	});

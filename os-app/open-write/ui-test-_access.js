@@ -7,7 +7,6 @@ Object.entries({
 	
 	KVCWriteStorageToolbar: '.KVCWriteStorageToolbar',
 	KVCWriteStorageExportButton: '.KVCWriteStorageExportButton',
-	KVCWriteStorageWidget: '#KVCWriteStorageWidget',
 }).map(function (e) {
 	return global[e.shift()]  = e.pop();
 });
@@ -42,20 +41,32 @@ describe('KVCWrite_Access', function () {
 		browser.assert.elements(KVCWriteViewportFooter, 1);
 	});
 
-	it('shows KVCWriteStorageToolbar', function () {
-		browser.assert.elements(KVCWriteStorageToolbar, 1);
-	});
-
-	it('shows KVCWriteStorageExportButton', function () {
-		browser.assert.elements(KVCWriteStorageExportButton, 1);
-	});
-
-	it('shows KVCWriteStorageWidget', function () {
-		browser.assert.elements(KVCWriteStorageWidget, 1);
+	it('hides KVCWriteStorageToolbar', function () {
+		browser.assert.elements(KVCWriteStorageToolbar, 0);
 	});
 
 	it('shows OLSKAppToolbar', function () {
 		browser.assert.elements('.OLSKAppToolbar', 1);
+	});
+
+	context('click OLSKAppToolbarStorageButton', function () {
+		
+		before(function () {
+			return browser.pressButton('.OLSKAppToolbarStorageButton');
+		});
+
+		it('shows KVCWriteStorageToolbar', function () {
+			browser.assert.elements(KVCWriteStorageToolbar, 1);
+		});
+
+		it('shows KVCWriteStorageExportButton', function () {
+			browser.assert.elements(KVCWriteStorageExportButton, 1);
+		});
+
+		it('shows OLSKStorageWidget', function () {
+			browser.assert.elements('.OLSKStorageWidget', 1);
+		});
+	
 	});
 
 	context('create', function test_create () {

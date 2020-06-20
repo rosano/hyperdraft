@@ -472,8 +472,6 @@ const mod = {
 
 		mod.SetupRemoteStorage();
 
-		mod.SetupStorageWidget();
-
 		mod.SetupStorageStatus();
 
 		await mod.SetupStorageNotifications();
@@ -547,10 +545,6 @@ const mod = {
 			dropbox: window.atob(window.OLSKPublicConstants('KVCDropboxAppKey')),
 			googledrive: window.atob(window.OLSKPublicConstants('KVCGoogleClientKey')),
 		} : {});
-	},
-
-	SetupStorageWidget () {
-		(new window.OLSKStorageWidget(mod._ValueStorageClient)).attach('KVCWriteStorageWidget').backend(document.querySelector('.OLSKAppToolbarStorageButton'));
 	},
 
 	SetupStorageStatus () {
@@ -646,6 +640,7 @@ import KVCWriteMaster from './submodules/KVCWriteMaster/main.svelte';
 import KVCWriteDetail from './submodules/KVCWriteDetail/main.svelte';
 import OLSKAppToolbar from 'OLSKAppToolbar';
 import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svelte';
+import OLSKStorageWidget from 'OLSKStorageWidget';
 </script>
 <svelte:window on:keydown={ mod.InterfaceWindowDidKeydown } />
 
@@ -684,15 +679,18 @@ import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svel
 </OLSKViewportContent>
 
 <footer class="KVCWriteViewportFooter OLSKMobileViewFooter">
-	<div class="KVCWriteStorageToolbar OLSKToolbar OLSKToolbarJustify OLSKStorageToolbar" class:KVCWriteStorageToolbarHidden={ mod._ValueStorageToolbarHidden }>
-		<div class="OLSKToolbarElementGroup">
-			<button class="KVCWriteStorageExportButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle" on:click={ mod.InterfaceStorageExportButtonDidClick }>{ OLSKLocalized('KVCWriteStorageExportButtonText') }</button>
-		</div>
 
-		<div class="OLSKToolbarElementGroup">
-			<div id="KVCWriteStorageWidget"></div>
+	{#if !mod._ValueStorageToolbarHidden }
+		<div class="KVCWriteStorageToolbar OLSKStorageToolbar OLSKToolbar OLSKToolbarJustify">
+			<div class="OLSKToolbarElementGroup">
+				<button class="KVCWriteStorageExportButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle" on:click={ mod.InterfaceStorageExportButtonDidClick }>{ OLSKLocalized('KVCWriteStorageExportButtonText') }</button>
+			</div>
+
+			<div class="OLSKToolbarElementGroup">
+				<OLSKStorageWidget StorageClient={ mod._ValueStorageClient } />
+			</div>
 		</div>
-	</div>
+	{/if}
 
 	<OLSKAppToolbar
 		OLSKAppToolbarDonateURL={ window.OLSKPublicConstants('KVC_SHARED_DONATE_URL') }

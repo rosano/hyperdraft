@@ -516,6 +516,10 @@ describe('KVCWrite_Misc', function () {
 
 	describe('KVCWriteStorageToolbar', function test_KVCWriteStorageToolbar () {
 
+		before(function () {
+			return browser.pressButton('.OLSKAppToolbarStorageButton');
+		});
+
 		it('classes OLSKToolbar', function () {
 			browser.assert.hasClass(KVCWriteStorageToolbar, 'OLSKToolbar');
 		});
@@ -526,22 +530,6 @@ describe('KVCWrite_Misc', function () {
 		
 		it('classes OLSKStorageToolbar', function () {
 			browser.assert.hasClass(KVCWriteStorageToolbar, 'OLSKStorageToolbar');
-		});
-		
-		it('classes KVCWriteStorageToolbarHidden', function () {
-			browser.assert.hasClass(KVCWriteStorageToolbar, 'KVCWriteStorageToolbarHidden');
-		});
-
-		context('click OLSKAppToolbarStorageButton', function () {
-			
-			before(function () {
-				return browser.pressButton('.OLSKAppToolbarStorageButton');
-			});
-			
-			it('classes KVCWriteStorageToolbarHidden', function () {
-				browser.assert.hasNoClass(KVCWriteStorageToolbar, 'KVCWriteStorageToolbarHidden');
-			});
-		
 		});
 	
 	});
