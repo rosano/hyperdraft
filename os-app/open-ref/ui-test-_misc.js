@@ -36,11 +36,15 @@ describe('KVCRef_Misc', function () {
 				browser.assert.url(stubURL(require('./controller.js').OLSKControllerRoutes().KVCRefHomeRoute, process.env.KVC_SHARED_REF_HOST));
 			});
 
+			it('assigns meta:viewport', function () {
+				browser.assert.attribute('meta[name=viewport]', 'content', 'width=device-width');
+			});
+
 		});
 		
 	});
 
-	describe('KVCRefReadRoute', function () {		
+	describe('KVCRefReadRoute', function () {
 
 		context('other host', function () {
 
@@ -61,7 +65,11 @@ describe('KVCRef_Misc', function () {
 			});
 
 			it('sets status', function () {
-				browser.assert.success();
+				browser.assert.status(200);
+			});
+
+			it('assigns meta:viewport', function () {
+				browser.assert.attribute('meta[name=viewport]', 'content', 'width=device-width');
 			});
 
 		});
