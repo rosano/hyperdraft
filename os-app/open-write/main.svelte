@@ -541,6 +541,7 @@ const mod = {
 	},
 
 	SetupRemoteStorage () {
+		return
 		mod._ValueStorageClient.setApiKeys(window.OLSKPublicConstants('KVCDropboxAppKey') ? {
 			dropbox: window.atob(window.OLSKPublicConstants('KVCDropboxAppKey')),
 			googledrive: window.atob(window.OLSKPublicConstants('KVCGoogleClientKey')),
