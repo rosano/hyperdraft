@@ -54,7 +54,7 @@ exports.WKCAPIMiddlewareAuthenticate = function(req, res, next) {
 
 exports.OLSKControllerSharedErrorHandlers = function() {
 	return [
-		exports.WKCAPIErrorHandler,
+		// exports.WKCAPIErrorHandler,
 	];
 };
 
