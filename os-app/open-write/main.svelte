@@ -88,7 +88,13 @@ const mod = {
 	},
 
 	OLSKAppToolbarDispatchLauncher () {
-		const items = [];
+		const items = [{
+			LCHRecipeSignature: 'KVCWriteLauncherItemJournal',
+			LCHRecipeName: OLSKLocalized('KVCWriteLauncherItemJournalText'),
+			LCHRecipeCallback () {
+				mod.ControlNoteCreate(OLSKLocalized('KVCWriteLauncherItemJournalText').toLowerCase() + '-' + KVCWriteLogic.KVCWriteHumanTimestampString(this.api.LCHDateLocalOffsetSubtracted(new Date())) + '\n\n- ');
+			},
+		}];
 		
 		window.Launchlet.LCHSingletonCreate({
 			LCHOptionRecipes: items,
@@ -288,7 +294,7 @@ const mod = {
 			return;
 		}
 
-		mod.KVCWriteDetailInstance.KVCWriteDetailSetCursor(inputData.split('\n').length - 1, 0);
+		mod.KVCWriteDetailInstance.KVCWriteDetailSetCursor(inputData.split('\n').length - 1, inputData.split('\n').pop().length);
 	},
 	
 	_ControlHotfixUpdateInPlace(inputData) {

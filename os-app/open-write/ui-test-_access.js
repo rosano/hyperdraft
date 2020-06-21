@@ -157,4 +157,20 @@ describe('KVCWrite_Access', function () {
 		
 	});
 
+	context('KVCWriteLauncherItemJournal', function test_KVCWriteLauncherItemJournal() {
+		
+		before(function () {
+			return browser.pressButton('.OLSKAppToolbarLauncherButton');
+		});
+
+		before(function () {
+			return browser.fill('.LCHLauncherFilterInput', 'KVCWriteLauncherItemJournal');
+		});
+
+		it('shows LCHLauncherResultListItem', function () {
+			browser.assert.elements('.LCHLauncherResultListItem', 1);
+		});
+
+	});
+
 });
