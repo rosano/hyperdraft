@@ -75,3 +75,18 @@ describe('KVCWriteFilterFunction', function test_KVCWriteFilterFunction() {
 	});
 
 });
+
+describe('KVCWriteHumanTimestampString', function test_KVCWriteHumanTimestampString() {
+
+	it('throws error if not date', function() {
+		throws(function() {
+			mainModule.KVCWriteHumanTimestampString(new Date('alfa'));
+		}, /KVCErrorInputNotValid/);
+	});
+
+	it('returns string', function() {
+		const item = new Date();
+		deepEqual(mainModule.KVCWriteHumanTimestampString(item), `${ item.toJSON().slice(0, 16) }`);
+	});
+
+});

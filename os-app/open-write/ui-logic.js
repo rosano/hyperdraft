@@ -19,6 +19,14 @@ const mod = {
 		return b.KVCNoteCreationDate - a.KVCNoteCreationDate;
 	},
 
+	KVCWriteHumanTimestampString (inputData) {
+		if (!(inputData instanceof Date) || Number.isNaN(inputData.getTime())) {
+			throw new Error('KVCErrorInputNotValid');
+		}
+
+		return inputData.toJSON().slice(0, 16);
+	},
+
 };
 
 Object.assign(exports, mod);
