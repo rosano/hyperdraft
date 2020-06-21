@@ -534,7 +534,7 @@ const mod = {
 	SetupStorageClient() {
 		const storageModule = KVC_Data.KVC_DataModule([
 			Object.assign(KVCNoteStorage.KVCNoteStorageBuild, {
-				KVCStorageChangeDelegate: {
+				OLSKChangeDelegate: {
 					OLSKChangeDelegateCreate: mod.OLSKChangeDelegateCreateNote,
 					OLSKChangeDelegateUpdate: mod.OLSKChangeDelegateUpdateNote,
 					OLSKChangeDelegateDelete: mod.OLSKChangeDelegateDeleteNote,
