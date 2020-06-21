@@ -39,24 +39,6 @@ describe('KVCVersionMetalWrite', function test_KVCVersionMetalWrite() {
 
 });
 
-describe('KVCVersionMetalRead', function test_KVCVersionMetalRead() {
-
-	it('rejects if not string', async function() {
-		await rejects(mainModule.KVCVersionMetalRead(KVCTestingStorageClient, 1), /KVCErrorInputNotValid/);
-	});
-
-	it('resolves null if not found', async function() {
-		deepEqual(await mainModule.KVCVersionMetalRead(KVCTestingStorageClient, 'alfa'), null);
-	});
-
-	it('resolves object', async function() {
-		let item = await mainModule.KVCVersionMetalWrite(KVCTestingStorageClient, kTesting.StubNoteObjectValid());
-
-		deepEqual(await mainModule.KVCVersionMetalRead(KVCTestingStorageClient, item.KVCVersionID), item);
-	});
-
-});
-
 describe('KVCVersionMetalList', function test_KVCVersionMetalList() {
 
 	it('resolves empty array if none', async function() {

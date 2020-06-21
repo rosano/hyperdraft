@@ -19,14 +19,6 @@ const mod = {
 		return await storageClient.wikiavec.kvc_versions.KVCStorageWrite(inputData);
 	},
 
-	async KVCVersionMetalRead (storageClient, inputData) {
-		if (typeof inputData !== 'string') {
-			return Promise.reject(new Error('KVCErrorInputNotValid'));
-		}
-
-		return OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(await storageClient.wikiavec.kvc_versions.KVCStorageRead(inputData));
-	},
-
 	async KVCVersionMetalList (storageClient) {
 		let outputData = await storageClient.wikiavec.kvc_versions.KVCStorageList();
 
