@@ -25,10 +25,6 @@ const mod = {
 		}));
 	},
 
-	async KVCNoteActionRead (storageClient, inputData) {
-		return await KVCNoteMetal.KVCNoteMetalRead(storageClient, inputData);
-	},
-
 	async KVCNoteActionUpdate (storageClient, inputData) {
 		if (typeof inputData !== 'object' || inputData === null) {
 			return Promise.reject(new Error('KVCErrorInputNotValid'));

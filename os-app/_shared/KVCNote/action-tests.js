@@ -64,24 +64,6 @@ describe('KVCNoteActionCreate', function test_KVCNoteActionCreate() {
 
 });
 
-describe('KVCNoteActionRead', function test_KVCNoteActionRead() {
-
-	it('rejects if not string', async function() {
-		await rejects(mainModule.KVCNoteActionRead(KVCTestingStorageClient, null), /KVCErrorInputNotValid/);
-	});
-
-	it('returns null if not found', async function() {
-		deepEqual(await mainModule.KVCNoteActionRead(KVCTestingStorageClient, 'alfa'), null);
-	});
-
-	it('returns KVCNote', async function() {
-		let item = await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject());
-
-		deepEqual(item, await mainModule.KVCNoteActionRead(KVCTestingStorageClient, item.KVCNoteID));
-	});
-
-});
-
 describe('KVCNoteActionUpdate', function test_KVCNoteActionUpdate() {
 
 	it('rejects if not object', async function() {
@@ -142,7 +124,7 @@ describe('KVCNoteActionDelete', function test_KVCNoteActionDelete() {
 	it('deletes KVCNote', async function() {
 		let itemID;
 		await mainModule.KVCNoteActionDelete(KVCTestingStorageClient, itemID = (await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject())).KVCNoteID);
-		deepEqual(await mainModule.KVCNoteActionRead(KVCTestingStorageClient, itemID), null);
+		deepEqual(await mainModule.KVCNoteActionQuery(KVCTestingStorageClient, {}), []);
 	});
 
 	it('deletes corresponding versionObjects', async function() {
