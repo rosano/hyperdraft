@@ -49,6 +49,10 @@ describe('KVCWrite_Access', function () {
 		browser.assert.elements('.OLSKAppToolbar', 1);
 	});
 
+	it('shows OLSKAppToolbarLauncherButton', function () {
+		browser.assert.elements('.OLSKAppToolbarLauncherButton', 1);
+	});
+
 	context('click OLSKAppToolbarStorageButton', function () {
 		
 		before(function () {
