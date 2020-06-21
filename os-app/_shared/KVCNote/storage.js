@@ -53,10 +53,6 @@ const mod = {
 				return OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(inputData);
 			},
 
-			KVCStorageRead (inputData) {
-				return privateClient.getObject(mod.KVCNoteStoragePath(inputData));
-			},
-			
 			KVCStorageDelete (inputData) {
 				return privateClient.remove(mod.KVCNoteStoragePath(inputData));
 			},

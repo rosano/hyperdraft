@@ -39,24 +39,6 @@ describe('KVCNoteMetalWrite', function test_KVCNoteMetalWrite() {
 
 });
 
-describe('KVCNoteMetalRead', function test_KVCNoteMetalRead() {
-
-	it('rejects if not string', async function() {
-		await rejects(mainModule.KVCNoteMetalRead(KVCTestingStorageClient, 1), /KVCErrorInputNotValid/);
-	});
-
-	it('resolves null if not found', async function() {
-		deepEqual(await mainModule.KVCNoteMetalRead(KVCTestingStorageClient, 'alfa'), null);
-	});
-
-	it('resolves object', async function() {
-		let item = await mainModule.KVCNoteMetalWrite(KVCTestingStorageClient, kTesting.StubNoteObjectValid());
-
-		deepEqual(await mainModule.KVCNoteMetalRead(KVCTestingStorageClient, item.KVCNoteID), item);
-	});
-
-});
-
 describe('KVCNoteMetalList', function test_KVCNoteMetalList() {
 
 	it('resolves empty array if none', async function() {

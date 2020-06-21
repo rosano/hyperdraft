@@ -20,14 +20,6 @@ const mod = {
 		return await storageClient.wikiavec.kvc_notes.KVCStorageWrite(inputData);
 	},
 
-	async KVCNoteMetalRead (storageClient, inputData) {
-		if (typeof inputData !== 'string') {
-			return Promise.reject(new Error('KVCErrorInputNotValid'));
-		}
-
-		return OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(await storageClient.wikiavec.kvc_notes.KVCStorageRead(inputData));
-	},
-
 	async KVCNoteMetalList (storageClient) {
 		let outputData = await storageClient.wikiavec.kvc_notes.KVCStorageList();
 
