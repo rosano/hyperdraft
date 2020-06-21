@@ -17,7 +17,7 @@ const mod = {
 			});
 		}
 
-		return await storageClient.wikiavec.kvc_notes.KVCStorageWrite(inputData.KVCNoteID, inputData);
+		return await storageClient.wikiavec.kvc_notes.KVCStorageWrite(inputData);
 	},
 
 	async KVCNoteMetalRead (storageClient, inputData) {

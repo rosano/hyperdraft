@@ -55,17 +55,13 @@ const KVCVersionStorage = require('./os-app/_shared/KVCVersion/storage.js').defa
 		return;
 	}
 
-	const uSerial = function (inputData) {
-		return inputData.reduce(async function (coll, e) {
-			return e.then(Array.prototype.concat.bind(await coll));
-		}, Promise.resolve([]));
-	};
-
 	const storageModule = KVC_Data.KVC_DataModule([
 		KVCNoteStorage.KVCNoteStorageBuild,
 		KVCSettingStorage.KVCSettingStorageBuild,
 		KVCVersionStorage.KVCVersionStorageBuild,
-	]);
+	], {
+		OLSKOptionIncludeDebug: true,
+	});
 
 	before(function() {
 		global.KVCTestingStorageClient = new RemoteStorage({ modules: [ storageModule ] });
@@ -74,8 +70,6 @@ const KVCVersionStorage = require('./os-app/_shared/KVCVersion/storage.js').defa
 	});
 
 	beforeEach(async function() {
-		await uSerial(Object.keys(global.KVCTestingStorageClient[storageModule.name]).map(async function (e) {
-			return await Promise.all(Object.keys(await global.KVCTestingStorageClient[storageModule.name][e].KVCStorageList()).map(global.KVCTestingStorageClient[storageModule.name][e].KVCStorageDelete));
-		}));
+		return await global.KVCTestingStorageClient[storageModule.name].__DEBUG._OLSKRemoteStorageReset();
 	});
 })();

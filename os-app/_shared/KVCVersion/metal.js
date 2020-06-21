@@ -16,7 +16,7 @@ const mod = {
 			});
 		}
 
-		return await storageClient.wikiavec.kvc_versions.KVCStorageWrite(inputData.KVCVersionID, inputData);
+		return await storageClient.wikiavec.kvc_versions.KVCStorageWrite(inputData);
 	},
 
 	async KVCVersionMetalRead (storageClient, inputData) {
