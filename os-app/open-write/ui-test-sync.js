@@ -127,4 +127,56 @@ describe('KVCWrite_Sync', function () {
 
 	});
 
+	describe('OLSKChangeDelegateDeleteNote', function test_OLSKChangeDelegateDeleteNote () {
+
+		before(function () {
+			return browser.OLSKFireKeyboardEvent(browser.window, 'Escape');
+		});
+
+		before(function () {
+			return kTesting.uLaunch('FakeOLSKChangeDelegateCreateNote');
+		});
+
+		before(function () {
+			browser.assert.elements('.OLSKResultsListItem', 4);
+		});
+
+		before(function () {
+			return kTesting.uLaunch('FakeOLSKChangeDelegateDeleteNote');
+		});
+
+		it('removes note', function () {
+			browser.assert.elements('.OLSKResultsListItem', 3);
+		});
+
+		it('sorts list', function () {
+			browser.assert.text('.OLSKResultsListItem', 'FakeOLSKChangeDelegateCreateNote bravo alfa2');
+		});
+
+		context('selected', function () {
+			
+			before(function () {
+				return browser.click('.OLSKResultsListItem:nth-child(3)');
+			});
+
+			before(function () {
+				browser.fill('.KVCWriteInputFieldDebug', 'alfa3');
+			});
+
+			before(function () {
+				return kTesting.uLaunch('FakeOLSKChangeDelegateDeleteNote');
+			});
+
+			it('removes note', function () {
+				browser.assert.elements('.OLSKResultsListItem', 2);
+			});
+
+			it('skips sort', function () {
+				browser.assert.text('.OLSKResultsListItem', 'bravo alfa3');
+			});
+		
+		});
+
+	});
+
 });

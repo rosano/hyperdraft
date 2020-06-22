@@ -120,6 +120,18 @@ const mod = {
 						})));
 					},
 				},
+				{
+					LCHRecipeName: 'FakeOLSKChangeDelegateDeleteNote',
+					LCHRecipeCallback: async function FakeOLSKChangeDelegateDeleteNote () {
+						const item = mod._ValueNotesAll.filter(function (e) {
+							return e.KVCNoteBody.match('FakeOLSKChangeDelegate');
+						}).pop();
+						
+						await KVCNoteAction.KVCNoteActionDelete(mod._ValueStorageClient, item.KVCNoteID);
+						
+						return mod.OLSKChangeDelegateDeleteNote(item);
+					},
+				},
 			]);
 		}
 		
