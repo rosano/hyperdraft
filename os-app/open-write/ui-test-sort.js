@@ -46,7 +46,7 @@ describe('KVCWrite_Sort', function () {
 
 	});
 
-	describe('unselect', function test_unselect () {
+	describe('deselect', function test_deselect () {
 
 		before(function () {
 			return browser.OLSKFireKeyboardEvent(browser.window, 'Escape');
