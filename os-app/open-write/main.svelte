@@ -132,6 +132,12 @@ const mod = {
 						return mod.OLSKChangeDelegateDeleteNote(item);
 					},
 				},
+				{
+					LCHRecipeName: 'FakeEscapeWithoutSort',
+					LCHRecipeCallback: function FakeEscapeWithoutSort () {
+						mod.ControlNoteSelect(null);
+					},
+				},
 			]);
 		}
 		
