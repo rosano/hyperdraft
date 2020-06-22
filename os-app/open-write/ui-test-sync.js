@@ -90,6 +90,10 @@ describe('KVCWrite_Sync', function () {
 		});
 
 		before(function () {
+			browser.assert.text('.OLSKResultsListItem', 'FakeOLSKChangeDelegateCreateNote alfa2 FakeOLSKChangeDelegateCreateNote');
+		});
+
+		before(function () {
 			return kTesting.uLaunch('FakeOLSKChangeDelegateUpdateNote');
 		});
 
@@ -109,6 +113,10 @@ describe('KVCWrite_Sync', function () {
 
 			before(function () {
 				browser.fill('.KVCWriteInputFieldDebug', 'bravo');
+			});
+
+			before(function () {
+				// browser.assert.text('.OLSKResultsListItem', 'bravo alfa2 FakeOLSKChangeDelegateCreateNote');
 			});
 
 			before(function () {
@@ -154,6 +162,10 @@ describe('KVCWrite_Sync', function () {
 		});
 
 		before(function () {
+			browser.assert.text('.OLSKResultsListItem', 'FakeOLSKChangeDelegateUpdateNote bravo alfa2');
+		});
+
+		before(function () {
 			return kTesting.uLaunch('FakeOLSKChangeDelegateCreateNote');
 		});
 
@@ -173,7 +185,7 @@ describe('KVCWrite_Sync', function () {
 			browser.assert.text('.OLSKResultsListItem', 'FakeOLSKChangeDelegateCreateNote bravo alfa2');
 		});
 
-		context('selected', function () {
+		context('selected different', function () {
 			
 			before(function () {
 				return browser.click('.OLSKResultsListItem:nth-child(3)');
@@ -193,6 +205,38 @@ describe('KVCWrite_Sync', function () {
 
 			it('skips sort', function () {
 				browser.assert.text('.OLSKResultsListItem', 'bravo alfa3');
+			});
+		
+		});
+
+		context('selected same', function () {
+			
+			before(function () {
+				return browser.click('.OLSKResultsListItem:nth-child(2)');
+			});
+
+			before(function () {
+				browser.fill('.KVCWriteInputFieldDebug', 'FakeOLSKChangeDelegateCreateNote');
+			});
+
+			before(function () {
+				// browser.assert.text('.OLSKResultsListItem', 'bravo OLSKChangeDelegateCreateNote');
+			});
+
+			before(function () {
+				browser.assert.elements('.OLSKResultsListItem', 2);
+			});
+
+			before(function () {
+				return kTesting.uLaunch('FakeOLSKChangeDelegateDeleteNote');
+			});
+
+			it('removes note', function () {
+				browser.assert.elements('.OLSKResultsListItem', 1);
+			});
+
+			it('clear detail', function () {
+				browser.assert.elements('.OLSKDetailPlaceholder', 1);
 			});
 		
 		});
