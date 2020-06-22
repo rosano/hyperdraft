@@ -110,6 +110,16 @@ const mod = {
 						return mod.OLSKChangeDelegateCreateNote(await KVCNoteAction.KVCNoteActionCreate(mod._ValueStorageClient, mod.FakeNoteObjectValid('FakeOLSKChangeDelegateCreateNote')));
 					},
 				},
+				{
+					LCHRecipeName: 'FakeOLSKChangeDelegateUpdateNote',
+					LCHRecipeCallback: async function FakeOLSKChangeDelegateUpdateNote () {
+						return mod.OLSKChangeDelegateUpdateNote(await KVCNoteAction.KVCNoteActionUpdate(mod._ValueStorageClient, Object.assign(mod._ValueNotesAll.filter(function (e) {
+							return e.KVCNoteBody === 'FakeOLSKChangeDelegateCreateNote';
+						}).shift(), {
+							KVCNoteBody: 'FakeOLSKChangeDelegateUpdateNote',
+						})));
+					},
+				},
 			]);
 		}
 		
