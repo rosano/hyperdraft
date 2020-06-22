@@ -81,6 +81,12 @@ const mod = {
 		return !OLSK_TESTING_BEHAVIOUR();
 	},
 
+	FakeNoteObjectValid(inputData) {
+		return {
+			KVCNoteBody: inputData || '',
+		};
+	},
+
 	// MESSAGE
 
 	OLSKAppToolbarDispatchStorage () {
@@ -95,6 +101,17 @@ const mod = {
 				mod.ControlNoteCreate(OLSKLocalized('KVCWriteLauncherItemJournalText').toLowerCase() + '-' + KVCWriteLogic.KVCWriteHumanTimestampString(this.api.LCHDateLocalOffsetSubtracted(new Date())) + '\n\n- ');
 			},
 		}];
+
+		if (OLSK_TESTING_BEHAVIOUR()) {
+			items.push(...[
+				{
+					LCHRecipeName: 'FakeOLSKChangeDelegateCreateNote',
+					LCHRecipeCallback: async function FakeOLSKChangeDelegateCreateNote () {
+						return mod.OLSKChangeDelegateCreateNote(await KVCNoteAction.KVCNoteActionCreate(mod._ValueStorageClient, mod.FakeNoteObjectValid('FakeOLSKChangeDelegateCreateNote')));
+					},
+				},
+			]);
+		}
 		
 		window.Launchlet.LCHSingletonCreate({
 			LCHOptionRecipes: items,
