@@ -36,25 +36,13 @@ describe('KVCWrite_Sync', function () {
 	});
 
 	before(function () {
-		return browser.pressButton('.KVCWriteMasterCreateButton');
-	});
-
-	before(function () {
-		browser.fill('.KVCWriteInputFieldDebug', 'bravo');
-	});
-
-	before(function () {
-		return browser.pressButton('.KVCWriteMasterCreateButton');
-	});
-
-	before(function () {
-		browser.fill('.KVCWriteInputFieldDebug', 'charlie');
+		return browser.OLSKFireKeyboardEvent(browser.window, 'Escape');
 	});
 
 	describe('OLSKChangeDelegateCreateNote', function test_OLSKChangeDelegateCreateNote () {
 
 		before(function () {
-			browser.assert.elements('.KVCWriteMasterListItem', 3);
+			browser.assert.elements('.OLSKResultsListItem', 1);
 		});
 
 		before(function () {
@@ -62,11 +50,35 @@ describe('KVCWrite_Sync', function () {
 		});
 
 		it('adds note', function () {
-			browser.assert.elements('.KVCWriteMasterListItem', 4);
+			browser.assert.elements('.OLSKResultsListItem', 2);
 		});
 
 		it('sorts list', function () {
-			browser.assert.text('.KVCWriteMasterListItem', 'FakeOLSKChangeDelegateCreateNote charlie bravo alfa');
+			browser.assert.text('.OLSKResultsListItem', 'FakeOLSKChangeDelegateCreateNote alfa');
+		});
+
+		context('selected', function () {
+			
+			before(function () {
+				return browser.click('.OLSKResultsListItem:nth-child(2)');
+			});
+
+			before(function () {
+				browser.fill('.KVCWriteInputFieldDebug', 'alfa2');
+			});
+
+			before(function () {
+				return kTesting.uLaunch('FakeOLSKChangeDelegateCreateNote');
+			});
+
+			it('adds note', function () {
+				browser.assert.elements('.OLSKResultsListItem', 3);
+			});
+
+			it('skips sort', function () {
+				browser.assert.text('.OLSKResultsListItem', 'FakeOLSKChangeDelegateCreateNote FakeOLSKChangeDelegateCreateNote alfa2');
+			});
+		
 		});
 
 	});

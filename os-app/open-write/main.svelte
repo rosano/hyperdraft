@@ -515,9 +515,9 @@ const mod = {
 	OLSKChangeDelegateCreateNote (inputData) {
 		// console.log('OLSKChangeDelegateCreate', inputData);
 
-		mod.ValueNotesAll(mod._ValueNotesAll.filter(function (e) {
+		mod.ValueNotesAll([inputData].concat(mod._ValueNotesAll.filter(function (e) {
 			return e.KVCNoteID !== inputData.KVCNoteID; // @Hotfix Dropbox sending DelegateAdd
-		}).concat(inputData));
+		})), !mod._ValueNoteSelected);
 	},
 
 	OLSKChangeDelegateUpdateNote (inputData) {
