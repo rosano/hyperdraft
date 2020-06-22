@@ -101,7 +101,7 @@ describe('KVCWrite_Sync', function () {
 			browser.assert.text('.OLSKResultsListItem', 'FakeOLSKChangeDelegateUpdateNote alfa2 FakeOLSKChangeDelegateCreateNote');
 		});
 
-		context('selected', function () {
+		context('selected different', function () {
 			
 			before(function () {
 				return browser.click('.OLSKResultsListItem:nth-child(1)');
@@ -123,6 +123,26 @@ describe('KVCWrite_Sync', function () {
 				browser.assert.text('.OLSKResultsListItem', 'bravo alfa2 FakeOLSKChangeDelegateUpdateNote');
 			});
 		
+		});
+
+		context('selected same', function () {
+			
+			before(function () {
+				return browser.click('.OLSKResultsListItem:nth-child(3)');
+			});
+
+			before(function () {
+				browser.fill('.KVCWriteInputFieldDebug', 'FakeOLSKChangeDelegateCreateNote');
+			});
+
+			before(function () {
+				return kTesting.uLaunch('FakeOLSKChangeDelegateUpdateNote');
+			});
+
+			it('updates detail', function () {
+				browser.assert.input('.KVCWriteInputFieldDebug', 'FakeOLSKChangeDelegateUpdateNote');
+			});
+
 		});
 
 	});
