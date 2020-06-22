@@ -41,14 +41,6 @@
 
 }
 
-@media screen and (min-width: 760px) {
-
-.KVCWriteDetailToolbarBackButton {
-	display: none;
-}
-
-}
-
 .KVCWriteDetail :global(.KVCWriteInput) {
 	/* KVCWriteDetailFlexbox:Child */
 	flex-grow: 1;

@@ -82,6 +82,10 @@ describe('KVCWriteDetail_Misc', function () {
 			browser.assert.hasClass(KVCWriteDetailToolbarBackButton, 'OLSKToolbarButton');
 		});
 
+		it('classes OLSKVisibilityMobile', function () {
+			browser.assert.hasClass(KVCWriteDetailToolbarBackButton, 'OLSKVisibilityMobile');
+		});
+
 		context('click', function () {
 			
 			before(function () {

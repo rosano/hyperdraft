@@ -148,7 +148,7 @@ import KVCWriteInput from '../KVCWriteInput/main.svelte';
 {#if mod._ValueItem}
 <header class="KVCWriteDetailToolbar OLSKToolbar OLSKToolbarJustify OLSKMobileViewHeader">
 	<div class="OLSKToolbarElementGroup">
-		<button class="KVCWriteDetailToolbarBackButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarBackButtonText') } on:click={ KVCWriteDetailDispatchBack }>
+		<button class="KVCWriteDetailToolbarBackButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton OLSKVisibilityMobile" title={ OLSKLocalized('KVCWriteDetailToolbarBackButtonText') } on:click={ KVCWriteDetailDispatchBack }>
 			<div class="KVCWriteDetailToolbarBackButtonImage">{@html _OLSKSharedBack }</div>
 		</button>
 	</div>
