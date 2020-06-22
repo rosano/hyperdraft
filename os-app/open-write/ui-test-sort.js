@@ -58,4 +58,30 @@ describe('KVCWrite_Sort', function () {
 
 	});
 
+	describe('delete', function test_delete () {
+
+		before(function () {
+			return browser.click('.OLSKResultsListItem:nth-child(3)');
+		});
+
+		before(function () {
+			browser.fill('.KVCWriteInputFieldDebug', 'bravo2');
+		});
+
+		before(function () {
+			return browser.click('.OLSKResultsListItem:nth-child(2)');
+		});
+
+		before(async function () {
+			return browser.OLSKConfirm(function () {
+				return browser.pressButton('.KVCWriteDetailToolbarDiscardButton');
+			});
+		});
+
+		it('skips sort', function () {
+			browser.assert.text('.OLSKResultsListItem', 'alfa2 bravo2');
+		});
+
+	});
+
 });
