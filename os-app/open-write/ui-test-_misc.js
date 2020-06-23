@@ -554,18 +554,6 @@ describe('KVCWrite_Misc', function () {
 
 	});
 
-	describe('OLSKAppToolbarLauncherButton', function test_OLSKAppToolbarLauncherButton () {
-
-		before(function () {
-			return browser.pressButton('.OLSKAppToolbarLauncherButton');
-		});
-
-		it('runs Launchlet', function() {
-			browser.assert.elements('.LCHLauncherFilterPrompt', 1);
-		});
-
-	});
-
 	describe('KVCWriteLegacyRoute', function () {
 		
 		before(function () {
