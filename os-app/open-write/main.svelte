@@ -755,7 +755,6 @@ import OLSKStorageWidget from 'OLSKStorageWidget';
 	<OLSKAppToolbar
 		OLSKAppToolbarDonateURL={ window.OLSKPublicConstants('KVC_SHARED_DONATE_URL') }
 		OLSKAppToolbarStorageStatus={ mod._ValueFooterStorageStatus }
-		OLSKAppToolbarLauncherVisible={ true }
 		OLSKAppToolbarDispatchStorage={ mod.OLSKAppToolbarDispatchStorage }
 		_OLSKAppToolbarDispatchExport={ mod._OLSKAppToolbarDispatchExport }
 		_OLSKAppToolbarDispatchImport={ mod._OLSKAppToolbarDispatchImport }
