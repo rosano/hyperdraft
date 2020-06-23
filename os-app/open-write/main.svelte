@@ -555,8 +555,8 @@ const mod = {
 			console.log('OLSKChangeDelegateUpdate', inputData.KVCNoteID, inputData.KVCNoteBody);
 		}
 
-		if (mod._ValueNoteSelected && (mod._ValueNoteSelected.KVCNoteID === inputData.KVCNoteID)) {
-			mod._ControlHotfixUpdateInPlace(Object.assign(mod._ValueNoteSelected, inputData));
+		if (mod._ValueNoteSelected && mod._ValueNoteSelected.KVCNoteID === inputData.KVCNoteID) {
+			mod._ControlHotfixUpdateInPlace(inputData);
 		}
 
 		mod.ValueNotesAll(mod._ValueNotesAll.map(function (e) {
