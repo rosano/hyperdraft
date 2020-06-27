@@ -33,7 +33,7 @@ describe('KVCWrite_Sort', function () {
 	describe('update', function test_update () {
 
 		before(function () {
-			return browser.click('.OLSKResultsListItem:nth-child(3)');
+			return browser.click('.OLSKResultsListItem:nth-child(3) .KVCWriteMasterListItem');
 		});
 
 		before(function () {
@@ -41,7 +41,7 @@ describe('KVCWrite_Sort', function () {
 		});
 
 		it('skips sort', function () {
-			browser.assert.text('.OLSKResultsListItem', 'charlie bravo alfa2');
+			browser.assert.text('.KVCWriteMasterListItem', 'charlie bravo alfa2');
 		});
 
 	});
@@ -53,7 +53,7 @@ describe('KVCWrite_Sort', function () {
 		});
 
 		it('sorts list', function () {
-			browser.assert.text('.OLSKResultsListItem', 'alfa2 charlie bravo');
+			browser.assert.text('.KVCWriteMasterListItem', 'alfa2 charlie bravo');
 		});
 
 	});
@@ -61,7 +61,7 @@ describe('KVCWrite_Sort', function () {
 	describe('delete', function test_delete () {
 
 		before(function () {
-			return browser.click('.OLSKResultsListItem:nth-child(3)');
+			return browser.click('.OLSKResultsListItem:nth-child(3) .KVCWriteMasterListItem');
 		});
 
 		before(function () {
@@ -69,7 +69,7 @@ describe('KVCWrite_Sort', function () {
 		});
 
 		before(function () {
-			return browser.click('.OLSKResultsListItem:nth-child(2)');
+			return browser.click('.OLSKResultsListItem:nth-child(2) .KVCWriteMasterListItem');
 		});
 
 		before(async function () {
@@ -79,7 +79,7 @@ describe('KVCWrite_Sort', function () {
 		});
 
 		it('skips sort', function () {
-			browser.assert.text('.OLSKResultsListItem', 'alfa2 bravo2');
+			browser.assert.text('.KVCWriteMasterListItem', 'alfa2 bravo2');
 		});
 
 	});
