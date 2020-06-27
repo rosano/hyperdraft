@@ -32,7 +32,7 @@ describe('KVCWrite_Sync', function () {
 	});
 
 	before(function () {
-		browser.fill('.KVCWriteInputFieldDebug', 'alfa');
+		return browser.fill('.KVCWriteInputFieldDebug', 'alfa');
 	});
 
 	before(function () {
@@ -64,7 +64,7 @@ describe('KVCWrite_Sync', function () {
 			});
 
 			before(function () {
-				browser.fill('.KVCWriteInputFieldDebug', 'alfa2');
+				return browser.fill('.KVCWriteInputFieldDebug', 'alfa2');
 			});
 
 			before(function () {
@@ -140,7 +140,7 @@ describe('KVCWrite_Sync', function () {
 			});
 
 			before(function () {
-				browser.fill('.KVCWriteInputFieldDebug', 'FakeOLSKChangeDelegateCreateNote');
+				return browser.fill('.KVCWriteInputFieldDebug', 'FakeOLSKChangeDelegateCreateNote');
 			});
 
 			before(function () {
@@ -162,7 +162,7 @@ describe('KVCWrite_Sync', function () {
 		});
 
 		before(function () {
-			browser.fill('.KVCWriteInputFieldDebug', 'alfa3');
+			return browser.fill('.KVCWriteInputFieldDebug', 'alfa3');
 		});
 
 		before(function () {
@@ -196,7 +196,7 @@ describe('KVCWrite_Sync', function () {
 			});
 
 			before(function () {
-				browser.fill('.KVCWriteInputFieldDebug', 'alfa4');
+				return browser.fill('.KVCWriteInputFieldDebug', 'alfa4');
 			});
 
 			before(function () {
