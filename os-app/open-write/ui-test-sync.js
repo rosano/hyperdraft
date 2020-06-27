@@ -49,7 +49,7 @@ describe('KVCWrite_Sync', function () {
 			return kTesting.uLaunch('FakeOLSKChangeDelegateCreateNote');
 		});
 
-		it('adds note', function () {
+		it('adds item', function () {
 			browser.assert.elements('.KVCWriteMasterListItem', 2);
 		});
 
@@ -71,7 +71,7 @@ describe('KVCWrite_Sync', function () {
 				return kTesting.uLaunch('FakeOLSKChangeDelegateCreateNote');
 			});
 
-			it('adds note', function () {
+			it('adds item', function () {
 				browser.assert.elements('.KVCWriteMasterListItem', 3);
 			});
 
@@ -97,7 +97,7 @@ describe('KVCWrite_Sync', function () {
 			return kTesting.uLaunch('FakeOLSKChangeDelegateUpdateNote');
 		});
 
-		it('updates note', function () {
+		it('updates item', function () {
 			browser.assert.text('.OLSKResultsListItem:nth-child(1) .KVCWriteMasterListItem', 'FakeOLSKChangeDelegateUpdateNote');
 		});
 
@@ -123,7 +123,7 @@ describe('KVCWrite_Sync', function () {
 				return kTesting.uLaunch('FakeOLSKChangeDelegateUpdateNote');
 			});
 
-			it('updates note', function () {
+			it('updates item', function () {
 				browser.assert.elements('.OLSKResultsListItem:nth-child(3) .KVCWriteMasterListItem', 'FakeOLSKChangeDelegateUpdateNote');
 			});
 
@@ -181,7 +181,7 @@ describe('KVCWrite_Sync', function () {
 			return kTesting.uLaunch('FakeOLSKChangeDelegateDeleteNote');
 		});
 
-		it('removes note', function () {
+		it('removes item', function () {
 			browser.assert.elements('.KVCWriteMasterListItem', 2);
 		});
 
@@ -211,7 +211,7 @@ describe('KVCWrite_Sync', function () {
 				return kTesting.uLaunch('FakeOLSKChangeDelegateDeleteNote');
 			});
 
-			it('removes note', function () {
+			it('removes item', function () {
 				browser.assert.elements('.KVCWriteMasterListItem', 2);
 			});
 
@@ -243,7 +243,7 @@ describe('KVCWrite_Sync', function () {
 				return kTesting.uLaunch('FakeOLSKChangeDelegateDeleteNote');
 			});
 
-			it('removes note', function () {
+			it('removes item', function () {
 				browser.assert.elements('.KVCWriteMasterListItem', 2);
 			});
 
