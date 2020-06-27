@@ -560,7 +560,7 @@ const mod = {
 		}
 
 		mod.ValueNotesAll(mod._ValueNotesAll.map(function (e) {
-			return Object.assign(e, e.KVCNoteID === inputData.KVCNoteID ? inputData : {});
+			return e.KVCNoteID === inputData.KVCNoteID ? inputData : e;
 		}), !mod._ValueNoteSelected);
 	},
 
