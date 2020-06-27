@@ -3,16 +3,12 @@ export let KVCWriteMasterListItemTitle;
 export let KVCWriteMasterListItemSnippet;
 </script>
 
-<div class="KVCWriteMasterListItem">
-
 <strong class="KVCWriteMasterListItemTitle" aria-hidden="true">{ KVCWriteMasterListItemTitle }</strong>
 <span class="KVCWriteMasterListItemSnippet" aria-hidden="true">{ KVCWriteMasterListItemSnippet }</span>
 
-</div>
-
 <style>	
 
-.KVCWriteMasterListItem {
+:global(.KVCWriteMasterListItem) {
 	min-height: 46px;
 	padding: 10px;
 	border-bottom: var(--WKCBorderStyle);

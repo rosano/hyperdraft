@@ -1,8 +1,6 @@
 const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
 Object.entries({
-	KVCWriteMasterListItem: '.KVCWriteMasterListItem',
-	
 	KVCWriteMasterListItemTitle: '.KVCWriteMasterListItemTitle',
 	KVCWriteMasterListItemSnippet: '.KVCWriteMasterListItemSnippet',
 }).map(function (e) {
@@ -16,10 +14,6 @@ describe('KVCWriteMasterListItem_Access', function () {
 			KVCWriteMasterListItemTitle: 'bravo',
 			KVCWriteMasterListItemSnippet: 'charlie',
 		});
-	});
-
-	it('shows KVCWriteMasterListItem', function () {
-		browser.assert.elements(KVCWriteMasterListItem, 1);
 	});
 
 	it('shows KVCWriteMasterListItemTitle', function () {

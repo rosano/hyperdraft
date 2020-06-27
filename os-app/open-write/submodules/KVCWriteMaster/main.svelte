@@ -67,6 +67,7 @@ import KVCWriteMasterListItem from '../KVCWriteMasterListItem/main.svelte';
 	let:OLSKResultsListItem={ item }
 	OLSKMasterListItemAccessibilitySummaryFor={ (inputData) =>  KVCWriteMasterLogic.KVCWriteMasterTruncatedTitle(KVCWriteMasterDelegateItemTitle(inputData.KVCNoteBody), true) }	
 	OLSKMasterListClass={ 'KVCWriteMaster' }
+	OLSKMasterItemClass={ 'KVCWriteMasterListItem' }
 	OLSKMobileViewInactive={ OLSKMobileViewInactive }
 	>
 	<div slot="OLSKMasterListToolbarTail">
