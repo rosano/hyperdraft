@@ -42,7 +42,7 @@ describe('KVCWrite_Sync', function () {
 	describe('OLSKChangeDelegateCreateNote', function test_OLSKChangeDelegateCreateNote () {
 
 		before(function () {
-			browser.assert.elements('.OLSKResultsListItem', 1);
+			browser.assert.elements('.KVCWriteMasterListItem', 1);
 		});
 
 		before(function () {
@@ -50,17 +50,17 @@ describe('KVCWrite_Sync', function () {
 		});
 
 		it('adds note', function () {
-			browser.assert.elements('.OLSKResultsListItem', 2);
+			browser.assert.elements('.KVCWriteMasterListItem', 2);
 		});
 
 		it('sorts list', function () {
-			browser.assert.text('.OLSKResultsListItem', 'FakeOLSKChangeDelegateCreateNote alfa');
+			browser.assert.text('.KVCWriteMasterListItem', 'FakeOLSKChangeDelegateCreateNote alfa');
 		});
 
 		context('selected', function () {
 			
 			before(function () {
-				return browser.click('.OLSKResultsListItem:nth-child(2)');
+				return browser.click('.OLSKResultsListItem:nth-child(2) .KVCWriteMasterListItem');
 			});
 
 			before(function () {
@@ -72,11 +72,11 @@ describe('KVCWrite_Sync', function () {
 			});
 
 			it('adds note', function () {
-				browser.assert.elements('.OLSKResultsListItem', 3);
+				browser.assert.elements('.KVCWriteMasterListItem', 3);
 			});
 
 			it('skips sort', function () {
-				browser.assert.text('.OLSKResultsListItem', 'FakeOLSKChangeDelegateCreateNote FakeOLSKChangeDelegateCreateNote alfa2');
+				browser.assert.text('.KVCWriteMasterListItem', 'FakeOLSKChangeDelegateCreateNote FakeOLSKChangeDelegateCreateNote alfa2');
 			});
 		
 		});
@@ -90,7 +90,7 @@ describe('KVCWrite_Sync', function () {
 		});
 
 		before(function () {
-			browser.assert.text('.OLSKResultsListItem', 'FakeOLSKChangeDelegateCreateNote alfa2 FakeOLSKChangeDelegateCreateNote');
+			browser.assert.text('.KVCWriteMasterListItem', 'FakeOLSKChangeDelegateCreateNote alfa2 FakeOLSKChangeDelegateCreateNote');
 		});
 
 		before(function () {
@@ -98,17 +98,17 @@ describe('KVCWrite_Sync', function () {
 		});
 
 		it('updates note', function () {
-			browser.assert.text('.OLSKResultsListItem:nth-child(1)', 'FakeOLSKChangeDelegateUpdateNote');
+			browser.assert.text('.OLSKResultsListItem:nth-child(1) .KVCWriteMasterListItem', 'FakeOLSKChangeDelegateUpdateNote');
 		});
 
 		it('sorts list', function () {
-			browser.assert.text('.OLSKResultsListItem', 'FakeOLSKChangeDelegateUpdateNote alfa2 FakeOLSKChangeDelegateCreateNote');
+			browser.assert.text('.KVCWriteMasterListItem', 'FakeOLSKChangeDelegateUpdateNote alfa2 FakeOLSKChangeDelegateCreateNote');
 		});
 
 		context('selected different', function () {
 			
 			before(function () {
-				return browser.click('.OLSKResultsListItem:nth-child(1)');
+				return browser.click('.OLSKResultsListItem:nth-child(1) .KVCWriteMasterListItem');
 			});
 
 			before(function () {
@@ -116,7 +116,7 @@ describe('KVCWrite_Sync', function () {
 			});
 
 			before(function () {
-				// browser.assert.text('.OLSKResultsListItem', 'bravo alfa2 FakeOLSKChangeDelegateCreateNote');
+				// browser.assert.text('.KVCWriteMasterListItem', 'bravo alfa2 FakeOLSKChangeDelegateCreateNote');
 			});
 
 			before(function () {
@@ -124,11 +124,11 @@ describe('KVCWrite_Sync', function () {
 			});
 
 			it('updates note', function () {
-				browser.assert.elements('.OLSKResultsListItem:nth-child(3)', 'FakeOLSKChangeDelegateUpdateNote');
+				browser.assert.elements('.OLSKResultsListItem:nth-child(3) .KVCWriteMasterListItem', 'FakeOLSKChangeDelegateUpdateNote');
 			});
 
 			it('skips sort', function () {
-				browser.assert.text('.OLSKResultsListItem', 'bravo alfa2 FakeOLSKChangeDelegateUpdateNote');
+				browser.assert.text('.KVCWriteMasterListItem', 'bravo alfa2 FakeOLSKChangeDelegateUpdateNote');
 			});
 		
 		});
@@ -136,7 +136,7 @@ describe('KVCWrite_Sync', function () {
 		context('selected same', function () {
 			
 			before(function () {
-				return browser.click('.OLSKResultsListItem:nth-child(3)');
+				return browser.click('.OLSKResultsListItem:nth-child(3) .KVCWriteMasterListItem');
 			});
 
 			before(function () {
@@ -158,7 +158,7 @@ describe('KVCWrite_Sync', function () {
 	describe('OLSKChangeDelegateDeleteNote', function test_OLSKChangeDelegateDeleteNote () {
 
 		before(function () {
-			return browser.click('.OLSKResultsListItem:nth-child(2)');
+			return browser.click('.OLSKResultsListItem:nth-child(2) .KVCWriteMasterListItem');
 		});
 
 		before(function () {
@@ -170,11 +170,11 @@ describe('KVCWrite_Sync', function () {
 		});
 
 		before(function () {
-			browser.assert.text('.OLSKResultsListItem', 'bravo alfa3 FakeOLSKChangeDelegateUpdateNote');
+			browser.assert.text('.KVCWriteMasterListItem', 'bravo alfa3 FakeOLSKChangeDelegateUpdateNote');
 		});
 
 		before(function () {
-			browser.assert.elements('.OLSKResultsListItem', 3);
+			browser.assert.elements('.KVCWriteMasterListItem', 3);
 		});
 
 		before(function () {
@@ -182,17 +182,17 @@ describe('KVCWrite_Sync', function () {
 		});
 
 		it('removes note', function () {
-			browser.assert.elements('.OLSKResultsListItem', 2);
+			browser.assert.elements('.KVCWriteMasterListItem', 2);
 		});
 
 		it('skips sort', function () {
-			browser.assert.text('.OLSKResultsListItem', 'bravo alfa3');
+			browser.assert.text('.KVCWriteMasterListItem', 'bravo alfa3');
 		});
 
 		context('selected different', function () {
 			
 			before(function () {
-				return browser.click('.OLSKResultsListItem:nth-child(2)');
+				return browser.click('.OLSKResultsListItem:nth-child(2) .KVCWriteMasterListItem');
 			});
 
 			before(function () {
@@ -204,7 +204,7 @@ describe('KVCWrite_Sync', function () {
 			});
 
 			before(function () {
-				browser.assert.elements('.OLSKResultsListItem', 3);
+				browser.assert.elements('.KVCWriteMasterListItem', 3);
 			});
 
 			before(function () {
@@ -212,11 +212,11 @@ describe('KVCWrite_Sync', function () {
 			});
 
 			it('removes note', function () {
-				browser.assert.elements('.OLSKResultsListItem', 2);
+				browser.assert.elements('.KVCWriteMasterListItem', 2);
 			});
 
 			it('skips sort', function () {
-				browser.assert.text('.OLSKResultsListItem', 'bravo alfa4');
+				browser.assert.text('.KVCWriteMasterListItem', 'bravo alfa4');
 			});
 		
 		});
@@ -228,15 +228,15 @@ describe('KVCWrite_Sync', function () {
 			});
 
 			before(function () {
-				return browser.click('.OLSKResultsListItem:nth-child(1)');
+				return browser.click('.OLSKResultsListItem:nth-child(1) .KVCWriteMasterListItem');
 			});
 
 			before(function () {
-				// browser.assert.text('.OLSKResultsListItem', 'FakeOLSKChangeDelegateCreateNote bravo alfa4');
+				// browser.assert.text('.KVCWriteMasterListItem', 'FakeOLSKChangeDelegateCreateNote bravo alfa4');
 			});
 
 			before(function () {
-				browser.assert.elements('.OLSKResultsListItem', 3);
+				browser.assert.elements('.KVCWriteMasterListItem', 3);
 			});
 
 			before(function () {
@@ -244,7 +244,7 @@ describe('KVCWrite_Sync', function () {
 			});
 
 			it('removes note', function () {
-				browser.assert.elements('.OLSKResultsListItem', 2);
+				browser.assert.elements('.KVCWriteMasterListItem', 2);
 			});
 
 			it('clear detail', function () {
@@ -252,7 +252,7 @@ describe('KVCWrite_Sync', function () {
 			});
 
 			it('skips sort', function () {
-				browser.assert.text('.OLSKResultsListItem', 'bravo alfa4');
+				browser.assert.text('.KVCWriteMasterListItem', 'bravo alfa4');
 			});
 		
 		});
