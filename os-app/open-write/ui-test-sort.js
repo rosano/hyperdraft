@@ -11,7 +11,7 @@ describe('KVCWrite_Sort', function () {
 	});
 
 	before(function () {
-		browser.fill('.KVCWriteInputFieldDebug', 'alfa');
+		return browser.fill('.KVCWriteInputFieldDebug', 'alfa');
 	});
 
 	before(function () {
@@ -19,7 +19,7 @@ describe('KVCWrite_Sort', function () {
 	});
 
 	before(function () {
-		browser.fill('.KVCWriteInputFieldDebug', 'bravo');
+		return browser.fill('.KVCWriteInputFieldDebug', 'bravo');
 	});
 
 	before(function () {
@@ -27,7 +27,7 @@ describe('KVCWrite_Sort', function () {
 	});
 
 	before(function () {
-		browser.fill('.KVCWriteInputFieldDebug', 'charlie');
+		return browser.fill('.KVCWriteInputFieldDebug', 'charlie');
 	});
 
 	describe('update', function test_update () {
@@ -37,7 +37,7 @@ describe('KVCWrite_Sort', function () {
 		});
 
 		before(function () {
-			browser.fill('.KVCWriteInputFieldDebug', 'alfa2');
+			return browser.fill('.KVCWriteInputFieldDebug', 'alfa2');
 		});
 
 		it('skips sort', function () {
@@ -65,7 +65,7 @@ describe('KVCWrite_Sort', function () {
 		});
 
 		before(function () {
-			browser.fill('.KVCWriteInputFieldDebug', 'bravo2');
+			return browser.fill('.KVCWriteInputFieldDebug', 'bravo2');
 		});
 
 		before(function () {
