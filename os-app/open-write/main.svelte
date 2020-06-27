@@ -115,7 +115,7 @@ const mod = {
 					LCHRecipeCallback: async function FakeOLSKChangeDelegateUpdateNote () {
 						return mod.OLSKChangeDelegateUpdateNote(await KVCNoteAction.KVCNoteActionUpdate(mod._ValueStorageClient, Object.assign(mod._ValueNotesAll.filter(function (e) {
 							return e.KVCNoteBody === 'FakeOLSKChangeDelegateCreateNote';
-						}).shift(), {
+						}).pop(), {
 							KVCNoteBody: 'FakeOLSKChangeDelegateUpdateNote',
 						})));
 					},

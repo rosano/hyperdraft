@@ -102,7 +102,7 @@ describe('KVCWrite_Sync', function () {
 		});
 
 		it('sorts list', function () {
-			browser.assert.text('.KVCWriteMasterListItem', 'FakeOLSKChangeDelegateUpdateNote alfa2 FakeOLSKChangeDelegateCreateNote');
+			browser.assert.text('.KVCWriteMasterListItem', 'FakeOLSKChangeDelegateUpdateNote FakeOLSKChangeDelegateCreateNote alfa2');
 		});
 
 		context('selected different', function () {
@@ -112,11 +112,11 @@ describe('KVCWrite_Sync', function () {
 			});
 
 			before(function () {
-				browser.fill('.KVCWriteInputFieldDebug', 'bravo');
+				return browser.fill('.KVCWriteInputFieldDebug', 'bravo');
 			});
 
 			before(function () {
-				// browser.assert.text('.KVCWriteMasterListItem', 'bravo alfa2 FakeOLSKChangeDelegateCreateNote');
+				browser.assert.text('.KVCWriteMasterListItem', 'bravo FakeOLSKChangeDelegateCreateNote alfa2');
 			});
 
 			before(function () {
@@ -128,7 +128,7 @@ describe('KVCWrite_Sync', function () {
 			});
 
 			it('skips sort', function () {
-				browser.assert.text('.KVCWriteMasterListItem', 'bravo alfa2 FakeOLSKChangeDelegateUpdateNote');
+				browser.assert.text('.KVCWriteMasterListItem', 'bravo FakeOLSKChangeDelegateUpdateNote alfa2');
 			});
 		
 		});
@@ -136,7 +136,7 @@ describe('KVCWrite_Sync', function () {
 		context('selected same', function () {
 			
 			before(function () {
-				return browser.click('.OLSKResultsListItem:nth-child(3) .KVCWriteMasterListItem');
+				return browser.click('.OLSKResultsListItem:nth-child(2) .KVCWriteMasterListItem');
 			});
 
 			before(function () {
@@ -158,7 +158,7 @@ describe('KVCWrite_Sync', function () {
 	describe('OLSKChangeDelegateDeleteNote', function test_OLSKChangeDelegateDeleteNote () {
 
 		before(function () {
-			return browser.click('.OLSKResultsListItem:nth-child(2) .KVCWriteMasterListItem');
+			return browser.click('.OLSKResultsListItem:nth-child(3) .KVCWriteMasterListItem');
 		});
 
 		before(function () {
@@ -170,7 +170,7 @@ describe('KVCWrite_Sync', function () {
 		});
 
 		before(function () {
-			browser.assert.text('.KVCWriteMasterListItem', 'bravo alfa3 FakeOLSKChangeDelegateUpdateNote');
+			browser.assert.text('.KVCWriteMasterListItem', 'bravo FakeOLSKChangeDelegateUpdateNote alfa3');
 		});
 
 		before(function () {
