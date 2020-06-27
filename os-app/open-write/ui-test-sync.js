@@ -232,7 +232,7 @@ describe('KVCWrite_Sync', function () {
 			});
 
 			before(function () {
-				// browser.assert.text('.KVCWriteMasterListItem', 'FakeOLSKChangeDelegateCreateNote bravo alfa4');
+				browser.assert.text('.KVCWriteMasterListItem', 'FakeOLSKChangeDelegateCreateNote bravo alfa4');
 			});
 
 			before(function () {
