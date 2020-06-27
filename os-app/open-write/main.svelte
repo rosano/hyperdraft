@@ -243,6 +243,42 @@ const mod = {
 		mod.ControlNotesImportData(inputData);
 	},
 
+	OLSKChangeDelegateCreateNote (inputData) {
+		// console.log('OLSKChangeDelegateCreate', inputData);
+
+		mod.ValueNotesAll([inputData].concat(mod._ValueNotesAll.filter(function (e) {
+			return e.KVCNoteID !== inputData.KVCNoteID; // @Hotfix Dropbox sending DelegateAdd
+		})), !mod._ValueNoteSelected);
+	},
+
+	OLSKChangeDelegateUpdateNote (inputData) {
+		// console.log('OLSKChangeDelegateUpdate', inputData);
+
+		if (mod.DataDebugPersistenceIsEnabled()) {
+			console.log('OLSKChangeDelegateUpdate', inputData.KVCNoteID, inputData.KVCNoteBody);
+		}
+
+		if (mod._ValueNoteSelected && mod._ValueNoteSelected.KVCNoteID === inputData.KVCNoteID) {
+			mod._ControlHotfixUpdateInPlace(inputData);
+		}
+
+		mod.ValueNotesAll(mod._ValueNotesAll.map(function (e) {
+			return e.KVCNoteID === inputData.KVCNoteID ? inputData : e;
+		}), !mod._ValueNoteSelected);
+	},
+
+	OLSKChangeDelegateDeleteNote (inputData) {
+		// console.log('OLSKChangeDelegateDelete', inputData);
+
+		if (mod._ValueNoteSelected && (mod._ValueNoteSelected.KVCNoteID === inputData.KVCNoteID)) {
+			mod.ControlNoteSelect(null);
+		}
+
+		mod.ValueNotesAll(mod._ValueNotesAll.filter(function (e) {
+			return e.KVCNoteID !== inputData.KVCNoteID;
+		}), false);
+	},
+
 	// INTERFACE	
 
 	InterfaceWindowDidKeydown (event) {
@@ -538,42 +574,6 @@ const mod = {
 		await mod.SetupValueNotesAll();
 
 		mod.ReactIsLoading(mod._ValueIsLoading = false);
-	},
-
-	OLSKChangeDelegateCreateNote (inputData) {
-		// console.log('OLSKChangeDelegateCreate', inputData);
-
-		mod.ValueNotesAll([inputData].concat(mod._ValueNotesAll.filter(function (e) {
-			return e.KVCNoteID !== inputData.KVCNoteID; // @Hotfix Dropbox sending DelegateAdd
-		})), !mod._ValueNoteSelected);
-	},
-
-	OLSKChangeDelegateUpdateNote (inputData) {
-		// console.log('OLSKChangeDelegateUpdate', inputData);
-
-		if (mod.DataDebugPersistenceIsEnabled()) {
-			console.log('OLSKChangeDelegateUpdate', inputData.KVCNoteID, inputData.KVCNoteBody);
-		}
-
-		if (mod._ValueNoteSelected && mod._ValueNoteSelected.KVCNoteID === inputData.KVCNoteID) {
-			mod._ControlHotfixUpdateInPlace(inputData);
-		}
-
-		mod.ValueNotesAll(mod._ValueNotesAll.map(function (e) {
-			return e.KVCNoteID === inputData.KVCNoteID ? inputData : e;
-		}), !mod._ValueNoteSelected);
-	},
-
-	OLSKChangeDelegateDeleteNote (inputData) {
-		// console.log('OLSKChangeDelegateDelete', inputData);
-
-		if (mod._ValueNoteSelected && (mod._ValueNoteSelected.KVCNoteID === inputData.KVCNoteID)) {
-			mod.ControlNoteSelect(null);
-		}
-
-		mod.ValueNotesAll(mod._ValueNotesAll.filter(function (e) {
-			return e.KVCNoteID !== inputData.KVCNoteID;
-		}), false);
 	},
 
 	SetupStorageClient() {
