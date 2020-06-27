@@ -430,8 +430,8 @@ describe('KVCWrite_Misc', function () {
 				browser.fill('.KVCWriteInputFieldDebug', 'alfa');
 			});
 
-			it('sets KVCWriteMasterListItemAccessibilitySummary', function () {
-				browser.assert.attribute('.KVCWriteMasterListItem', 'aria-label', 'alfa');
+			it('sets OLSKMasterListItemAccessibilitySummaryFor', function () {
+				browser.assert.attribute('.OLSKMasterListItem', 'aria-label', 'alfa');
 			});
 
 			it('sets KVCWriteMasterListItemTitle', function () {
@@ -450,8 +450,8 @@ describe('KVCWrite_Misc', function () {
 				browser.fill('.KVCWriteInputFieldDebug', 'alfa\nbravo');
 			});
 
-			it('sets KVCWriteMasterListItemAccessibilitySummary', function () {
-				browser.assert.attribute('.KVCWriteMasterListItem', 'aria-label', 'alfa');
+			it('sets OLSKMasterListItemAccessibilitySummaryFor', function () {
+				browser.assert.attribute('.OLSKMasterListItem', 'aria-label', 'alfa');
 			});
 
 			it('sets KVCWriteMasterListItemTitle', function () {
@@ -470,8 +470,8 @@ describe('KVCWrite_Misc', function () {
 				browser.fill('.KVCWriteInputFieldDebug', 'alfa bravo charlie delta echo foxtrot golf hotel juliet kilos');
 			});
 
-			it('sets KVCWriteMasterListItemAccessibilitySummary', function () {
-				browser.assert.attribute('.KVCWriteMasterListItem', 'aria-label', 'alfa bravo charlie delta echo foxtrot golf hotel juliet…');
+			it('sets OLSKMasterListItemAccessibilitySummaryFor', function () {
+				browser.assert.attribute('.OLSKMasterListItem', 'aria-label', 'alfa bravo charlie delta echo foxtrot golf hotel juliet…');
 			});
 
 			it('sets KVCWriteMasterListItemTitle', function () {
@@ -490,8 +490,8 @@ describe('KVCWrite_Misc', function () {
 				browser.fill('.KVCWriteInputFieldDebug', '\nLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.');
 			});
 
-			it('sets KVCWriteMasterListItemAccessibilitySummary', function () {
-				browser.assert.attribute('.KVCWriteMasterListItem', 'aria-label', '');
+			it('sets OLSKMasterListItemAccessibilitySummaryFor', function () {
+				browser.assert.attribute('.OLSKMasterListItem', 'aria-label', '');
 			});
 
 			it('sets KVCWriteMasterListItemTitle', function () {

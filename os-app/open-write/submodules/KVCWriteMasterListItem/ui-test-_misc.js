@@ -4,22 +4,9 @@ describe('KVCWriteMasterListItem_Misc', function () {
 
 	before(function() {
 		return browser.OLSKVisit(kDefaultRoute, {
-			KVCWriteMasterListItemAccessibilitySummary: 'alfa',
 			KVCWriteMasterListItemTitle: 'bravo',
 			KVCWriteMasterListItemSnippet: 'charlie',
 		});
-	});
-
-	describe('KVCWriteMasterListItem', function test_KVCWriteMasterListItem () {
-		
-		it('sets aria-label', function () {
-			browser.assert.attribute(KVCWriteMasterListItem, 'aria-label', 'alfa');
-		});
-		
-		it('sets role', function () {
-			browser.assert.attribute(KVCWriteMasterListItem, 'role', 'button');
-		});
-
 	});
 
 	describe('KVCWriteMasterListItemTitle', function test_KVCWriteMasterListItemTitle () {

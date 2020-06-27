@@ -1,10 +1,9 @@
 <script>
-export let KVCWriteMasterListItemAccessibilitySummary;
 export let KVCWriteMasterListItemTitle;
 export let KVCWriteMasterListItemSnippet;
 </script>
 
-<div class="KVCWriteMasterListItem" aria-label={ KVCWriteMasterListItemAccessibilitySummary } role="button">
+<div class="KVCWriteMasterListItem">
 
 <strong class="KVCWriteMasterListItemTitle" aria-hidden="true">{ KVCWriteMasterListItemTitle }</strong>
 <span class="KVCWriteMasterListItemSnippet" aria-hidden="true">{ KVCWriteMasterListItemSnippet }</span>

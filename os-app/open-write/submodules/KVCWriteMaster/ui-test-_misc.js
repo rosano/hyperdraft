@@ -204,7 +204,7 @@ describe('KVCWriteMaster_Misc', function () {
 	
 	});
 
-	describe('KVCWriteMasterListItem', function test_KVCWriteMasterListItem() {
+	describe('OLSKMasterListItem', function test_OLSKMasterListItem() {
 		
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
@@ -215,16 +215,8 @@ describe('KVCWriteMaster_Misc', function () {
 			});
 		});
 
-		it('sets KVCWriteMasterListItemAccessibilitySummary', function () {
-			browser.assert.attribute('.KVCWriteMasterListItem', 'aria-label', 'bravo');
-		});
-
-		it('sets KVCWriteMasterListItemTitle', function () {
-			browser.assert.text('.KVCWriteMasterListItemTitle', 'bravo');
-		});
-
-		it('sets KVCWriteMasterListItemSnippet', function () {
-			browser.assert.text('.KVCWriteMasterListItemSnippet', 'charlie');
+		it('sets OLSKMasterListItemAccessibilitySummaryFor', function () {
+			browser.assert.attribute('.OLSKMasterListItem', 'aria-label', 'bravo');
 		});
 
 		context('click', function () {
@@ -235,7 +227,7 @@ describe('KVCWriteMaster_Misc', function () {
 			});
 			
 			before(function () {
-				return browser.click('.KVCWriteMasterListItem');
+				return browser.click('.OLSKMasterListItem');
 			});
 
 			it('sends KVCWriteMasterDispatchClick', function () {
@@ -246,6 +238,18 @@ describe('KVCWriteMaster_Misc', function () {
 				}));
 			});
 		
+		});
+		
+	});
+
+	describe('KVCWriteMasterListItem', function test_KVCWriteMasterListItem() {
+		
+		it('sets KVCWriteMasterListItemTitle', function () {
+			browser.assert.text('.KVCWriteMasterListItemTitle', 'bravo');
+		});
+
+		it('sets KVCWriteMasterListItemSnippet', function () {
+			browser.assert.text('.KVCWriteMasterListItemSnippet', 'charlie');
 		});
 		
 	});

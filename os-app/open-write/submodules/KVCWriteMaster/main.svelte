@@ -78,7 +78,6 @@ import KVCWriteMasterListItem from '../KVCWriteMasterListItem/main.svelte';
 	</div>
 
 	<KVCWriteMasterListItem
-		KVCWriteMasterListItemAccessibilitySummary={ KVCWriteMasterLogic.KVCWriteMasterTruncatedTitle(KVCWriteMasterDelegateItemTitle(item.KVCNoteBody), true) }
 		KVCWriteMasterListItemTitle={ KVCWriteMasterLogic.KVCWriteMasterTruncatedTitle(KVCWriteMasterDelegateItemTitle(item.KVCNoteBody)) }
 		KVCWriteMasterListItemSnippet={ KVCWriteMasterDelegateItemSnippet(item.KVCNoteBody) }
 		/>

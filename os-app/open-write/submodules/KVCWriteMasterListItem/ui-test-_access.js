@@ -13,7 +13,6 @@ describe('KVCWriteMasterListItem_Access', function () {
 
 	before(function() {
 		return browser.OLSKVisit(kDefaultRoute, {
-			KVCWriteMasterListItemAccessibilitySummary: 'alfa',
 			KVCWriteMasterListItemTitle: 'bravo',
 			KVCWriteMasterListItemSnippet: 'charlie',
 		});
