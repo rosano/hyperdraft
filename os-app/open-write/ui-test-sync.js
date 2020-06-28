@@ -15,7 +15,7 @@ const kTesting = {
 				return browser.fill('.LCHLauncherFilterInput', inputData);
 			},
 			function () {
-				return browser.click('.LCHLauncherResultListItem');
+				return browser.click('.LCHLauncherPipeItem');
 			},
 		]);
 	},

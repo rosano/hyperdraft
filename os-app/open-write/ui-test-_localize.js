@@ -43,7 +43,7 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 			});
 
 			it('localizes KVCWriteLauncherItemJournal', function () {
-				browser.assert.text('.LCHLauncherResultListItem', uLocalized('KVCWriteLauncherItemJournalText'));
+				browser.assert.text('.LCHLauncherPipeItem', uLocalized('KVCWriteLauncherItemJournalText'));
 			});
 
 			context('click', function () {
@@ -53,7 +53,7 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 				})(new Date());
 
 				before(function () {
-					return browser.click('.LCHLauncherResultListItem');
+					return browser.click('.LCHLauncherPipeItem');
 				});
 
 				it('sets KVCWriteMasterListItemTitle', function () {

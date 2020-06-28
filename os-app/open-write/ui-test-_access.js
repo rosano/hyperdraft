@@ -179,8 +179,8 @@ describe('KVCWrite_Access', function () {
 			return browser.fill('.LCHLauncherFilterInput', 'KVCWriteLauncherItemJournal');
 		});
 
-		it('shows LCHLauncherResultListItem', function () {
-			browser.assert.elements('.LCHLauncherResultListItem', 1);
+		it('shows LCHLauncherPipeItem', function () {
+			browser.assert.elements('.LCHLauncherPipeItem', 1);
 		});
 
 	});
