@@ -73,6 +73,29 @@ describe('KVCNoteStorageObjectPathV1', function test_KVCNoteStorageObjectPathV1(
 
 });
 
+describe('KVCNoteStorageMatchV1', function test_KVCNoteStorageMatchV1() {
+
+	it('throws error if not string', function() {
+		throws(function() {
+			mainModule.KVCNoteStorageMatchV1(null);
+		}, /KVCErrorInputNotValid/);
+	});
+
+	it('returns false if no KVCNoteStorageCollectionPath', function() {
+		const item = mainModule.KVCNoteStorageCollectionPath();
+		deepEqual(mainModule.KVCNoteStorageMatchV1(mainModule.KVCNoteStorageObjectPathV1(kTesting.StubNoteObjectValid()).replace(item, item.slice(0, -2) + '/')), false);
+	});
+
+	it('returns false if no KVCNoteStorageObjectPathV1', function() {
+		deepEqual(mainModule.KVCNoteStorageMatchV1(mainModule.KVCNoteStorageObjectPathV1(kTesting.StubNoteObjectValid()) + '/'), false);
+	});
+
+	it('returns true', function() {
+		deepEqual(mainModule.KVCNoteStorageMatchV1(mainModule.KVCNoteStorageObjectPathV1(kTesting.StubNoteObjectValid())), true);
+	});
+
+});
+
 describe('KVCNoteStorageMatch', function test_KVCNoteStorageMatch() {
 
 	it('throws error if not string', function() {

@@ -45,6 +45,21 @@ const mod = {
 		return mod.KVCNoteStorageCollectionPath() + inputData.KVCNoteID;
 	},
 
+	KVCNoteStorageMatchV1 (inputData) {
+		if (typeof inputData !== 'string') {
+			throw new Error('KVCErrorInputNotValid');
+		}
+
+		const item = {
+			KVCNoteID: inputData.split('/')[1],
+			KVCNoteBody: '',
+			KVCNoteCreationDate: new Date(),
+			KVCNoteModificationDate: new Date(),
+		};
+
+		return inputData === mod.KVCNoteStorageObjectPathV1(item);
+	},
+
 	KVCNoteStorageMatch (inputData) {
 		if (typeof inputData !== 'string') {
 			throw new Error('KVCErrorInputNotValid');
