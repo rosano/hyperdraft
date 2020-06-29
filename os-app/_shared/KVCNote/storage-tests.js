@@ -71,4 +71,8 @@ describe('KVCNoteStorageMatch', function test_KVCNoteStorageMatch() {
 		deepEqual(mainModule.KVCNoteStorageMatch(mainModule.KVCNoteStorageObjectPath(kTesting.StubNoteObjectValid())), true);
 	});
 
+	it('returns false if old path', function () {
+		deepEqual(mainModule.KVCNoteStorageMatch('kvc_notes/01EC08S8BG8WJVM4ZYMGC7EK9W/main'), false);
+	});
+
 });

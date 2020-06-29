@@ -39,7 +39,13 @@ const mod = {
 			throw new Error('KVCErrorInputNotValid');
 		}
 
-		return inputData === mod.KVCNoteStorageObjectPath(mod.uFakeNote(inputData));
+		const item = mod.uFakeNote(inputData);
+
+		if (KVCNoteModel.KVCNoteModelErrorsFor(item)) {
+			return false;
+		}
+
+		return inputData === mod.KVCNoteStorageObjectPath(item);
 	},
 
 	KVCNoteStorageBuild (privateClient, publicClient, changeDelegate) {
