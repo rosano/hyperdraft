@@ -7,23 +7,30 @@ const kCollection = 'kvc_notes';
 
 const mod = {
 
+	uFakeNote (inputData) {
+		return {
+			KVCNoteID: inputData.split('/')[2],
+			KVCNoteBody: '',
+			KVCNoteCreationDate: new Date(inputData.split('/')[1]),
+			KVCNoteModificationDate: new Date(),
+		};
+	},
+
 	KVCNoteStorageCollectionPath () {
 		return kCollection + '/';
 	},
 
 	KVCNoteStorageFolderPath (inputData) {
-		if (!inputData) {
+		if (KVCNoteModel.KVCNoteModelErrorsFor(inputData)) {
 			throw new Error('KVCErrorInputNotValid');
 		}
+
+		return mod.KVCNoteStorageCollectionPath() + inputData.KVCNoteCreationDate.toJSON().split('T').shift() + '/' + inputData.KVCNoteID + '/';
 
 		return mod.KVCNoteStorageCollectionPath() + inputData + '/';
 	},
 
 	KVCNoteStorageObjectPath (inputData) {
-		if (!inputData) {
-			throw new Error('KVCErrorInputNotValid');
-		}
-
 		return mod.KVCNoteStorageFolderPath(inputData) + 'main';
 	},
 
@@ -32,7 +39,7 @@ const mod = {
 			throw new Error('KVCErrorInputNotValid');
 		}
 
-		return inputData === mod.KVCNoteStorageObjectPath(inputData.split('/')[1]);
+		return inputData === mod.KVCNoteStorageObjectPath(mod.uFakeNote(inputData));
 	},
 
 	KVCNoteStorageBuild (privateClient, publicClient, changeDelegate) {
@@ -68,9 +75,11 @@ const mod = {
 
 		const OLSKRemoteStorageCollectionExports = {
 
-			async KVCStorageList () {
-				return (await Promise.all(Object.keys(await privateClient.getAll(mod.KVCNoteStorageCollectionPath(), false)).map(function (e) {
-					return privateClient.getObject(mod.KVCNoteStorageObjectPath(e.slice(0, -1)), false);
+			async KVCStorageList (inputData) {
+				let storagePath = mod.KVCNoteStorageCollectionPath(inputData);
+
+				return (await Promise.all((await OLSKRemoteStorage.OLSKRemoteStorageListObjectsRecursive(privateClient, storagePath)).filter(mod.KVCNoteStorageMatch).map(function (e) {
+					return privateClient.getObject(e, false);
 				}))).reduce(function (coll, item) {
 					if (item) {
 						coll[item.KVCNoteID] = item;
@@ -81,7 +90,7 @@ const mod = {
 			},
 
 			async KVCStorageWrite (inputData) {
-				await privateClient.storeObject(kType, mod.KVCNoteStorageObjectPath(inputData.KVCNoteID), OLSKRemoteStorage.OLSKRemoteStoragePreJSONSchemaValidate(inputData));
+				await privateClient.storeObject(kType, mod.KVCNoteStorageObjectPath(inputData), OLSKRemoteStorage.OLSKRemoteStoragePreJSONSchemaValidate(inputData));
 				return OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(inputData);
 			},
 			
