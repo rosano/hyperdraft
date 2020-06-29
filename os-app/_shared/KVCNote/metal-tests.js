@@ -55,18 +55,18 @@ describe('KVCNoteMetalList', function test_KVCNoteMetalList() {
 
 describe('KVCNoteMetalDelete', function test_KVCNoteMetalDelete() {
 
-	it('rejects if not string', async function() {
-		await rejects(mainModule.KVCNoteMetalDelete(KVCTestingStorageClient, 1), /KVCErrorInputNotValid/);
+	it('rejects if not valid', async function() {
+		await rejects(mainModule.KVCNoteMetalDelete(KVCTestingStorageClient, {}), /KVCErrorInputNotValid/);
 	});
 
 	it('resolves object', async function() {
-		deepEqual(await mainModule.KVCNoteMetalDelete(KVCTestingStorageClient, (await mainModule.KVCNoteMetalWrite(KVCTestingStorageClient, kTesting.StubNoteObjectValid())).KVCNoteID), {
+		deepEqual(await mainModule.KVCNoteMetalDelete(KVCTestingStorageClient, await mainModule.KVCNoteMetalWrite(KVCTestingStorageClient, kTesting.StubNoteObjectValid())), {
 			statusCode: 200,
 		});
 	});
 
 	it('deletes KVCNote', async function() {
-		await mainModule.KVCNoteMetalDelete(KVCTestingStorageClient, (await mainModule.KVCNoteMetalWrite(KVCTestingStorageClient, kTesting.StubNoteObjectValid())).KVCNoteID);
+		await mainModule.KVCNoteMetalDelete(KVCTestingStorageClient, await mainModule.KVCNoteMetalWrite(KVCTestingStorageClient, kTesting.StubNoteObjectValid()));
 		deepEqual(await mainModule.KVCNoteMetalList(KVCTestingStorageClient), {});
 	});
 

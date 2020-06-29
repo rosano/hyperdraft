@@ -111,28 +111,32 @@ describe('KVCNoteActionUpdate', function test_KVCNoteActionUpdate() {
 
 describe('KVCNoteActionDelete', function test_KVCNoteActionDelete() {
 
-	it('rejects if not string', async function() {
-		await rejects(mainModule.KVCNoteActionDelete(KVCTestingStorageClient, null), /KVCErrorInputNotValid/);
+	it('rejects if not valid', async function() {
+		await rejects(mainModule.KVCNoteActionDelete(KVCTestingStorageClient, {}), /KVCErrorInputNotValid/);
 	});
 
 	it('returns object', async function() {
-		deepEqual(await mainModule.KVCNoteActionDelete(KVCTestingStorageClient, (await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject())).KVCNoteID), {
+		deepEqual(await mainModule.KVCNoteActionDelete(KVCTestingStorageClient, await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject())), {
 			statusCode: 200,
 		});
 	});
 
 	it('deletes KVCNote', async function() {
 		let itemID;
-		await mainModule.KVCNoteActionDelete(KVCTestingStorageClient, itemID = (await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject())).KVCNoteID);
+		await mainModule.KVCNoteActionDelete(KVCTestingStorageClient, itemID = await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()));
 		deepEqual(await mainModule.KVCNoteActionQuery(KVCTestingStorageClient, {}), []);
 	});
 
 	it('deletes corresponding versionObjects', async function() {
-		await mainModule.KVCNoteActionDelete(KVCTestingStorageClient, (await KVCVersionsAction.KVCVersionActionCreate(KVCTestingStorageClient, {
+		const item = await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject());
+
+		await KVCVersionsAction.KVCVersionActionCreate(KVCTestingStorageClient, {
 			KVCVersionBody: 'charlie',
-			KVCVersionNoteID: (await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject())).KVCNoteID,
+			KVCVersionNoteID: item.KVCNoteID,
 			KVCVersionDate: new Date(),
-		})).KVCVersionNoteID);
+		});
+
+		await mainModule.KVCNoteActionDelete(KVCTestingStorageClient, item);
 		deepEqual(await KVCVersionsAction.KVCVersionActionQuery(KVCTestingStorageClient, {}), []);
 	});
 
@@ -230,9 +234,9 @@ describe('KVCNoteActionPublish', function test_KVCNoteActionPublish() {
 		let serialPromises = async function () {
 			return ['alfa', 'bravo'].reduce(function (coll, e) {
 				return coll.then(async function () {
-					return await mainModule.KVCNoteActionDelete(KVCTestingStorageClient, (await mainModule.KVCNoteActionPublish(KVCTestingStorageClient, (await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, Object.assign(kTesting.StubNoteObject(), {
+					return await mainModule.KVCNoteActionDelete(KVCTestingStorageClient, await mainModule.KVCNoteActionPublish(KVCTestingStorageClient, (await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, Object.assign(kTesting.StubNoteObject(), {
 						KVCNoteBody: e,
-					}))))).KVCNoteID);
+					})))));
 				});
 
 				return coll;

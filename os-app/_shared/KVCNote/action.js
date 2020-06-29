@@ -37,7 +37,7 @@ const mod = {
 
 	async KVCNoteActionDelete (storageClient, inputData) {
 		await Promise.all((await KVCVersionAction.KVCVersionActionQuery(storageClient, {
-			KVCVersionNoteID: inputData,
+			KVCVersionNoteID: inputData.KVCNoteID,
 		})).map(function (e) {
 			return KVCVersionAction.KVCVersionActionDelete(storageClient, e.KVCVersionID);
 		}));

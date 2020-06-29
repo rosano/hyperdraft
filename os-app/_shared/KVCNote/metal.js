@@ -31,7 +31,7 @@ const mod = {
 	},
 
 	async KVCNoteMetalDelete (storageClient, inputData) {
-		if (typeof inputData !== 'string') {
+		if (KVCNoteModel.KVCNoteModelErrorsFor(inputData)) {
 			return Promise.reject(new Error('KVCErrorInputNotValid'));
 		}
 

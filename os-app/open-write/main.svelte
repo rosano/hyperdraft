@@ -127,7 +127,7 @@ const mod = {
 							return e.KVCNoteBody.match('FakeOLSKChangeDelegate');
 						}).pop();
 						
-						await KVCNoteAction.KVCNoteActionDelete(mod._ValueStorageClient, item.KVCNoteID);
+						await KVCNoteAction.KVCNoteActionDelete(mod._ValueStorageClient, item);
 						
 						return mod.OLSKChangeDelegateDeleteNote(item);
 					},
@@ -437,7 +437,7 @@ const mod = {
 
 		mod.ControlNoteSelect(null);
 
-		await KVCNoteAction.KVCNoteActionDelete(mod._ValueStorageClient, inputData.KVCNoteID);
+		await KVCNoteAction.KVCNoteActionDelete(mod._ValueStorageClient, inputData);
 	},
 
 	ControlEscape() {
