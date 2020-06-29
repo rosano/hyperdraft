@@ -28,6 +28,10 @@ describe('KVCWrite_Migrate', function () {
 	});
 
 	before(function () {
+		browser.assert.text('#TestControlMigrateCount', '1')
+	});
+
+	before(function () {
 		return kTesting.uLaunch('FakeCreateNoteV1');
 	});
 
@@ -37,6 +41,10 @@ describe('KVCWrite_Migrate', function () {
 	
 	before(function () {
 		return kTesting.uLaunch('FakeMigrateV1');
+	});
+	
+	before(function () {
+		browser.assert.text('#TestControlMigrateCount', '2')
 	});
 
 	it('adds item', function () {

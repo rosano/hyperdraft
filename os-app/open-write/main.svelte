@@ -153,7 +153,7 @@ const mod = {
 				{
 					LCHRecipeName: 'FakeMigrateV1',
 					LCHRecipeCallback: function FakeMigrateV1 () {
-						KVCNoteMetal.KVCNoteMetalMigrateV1(mod._ValueStorageClient, mod.OLSKChangeDelegateCreateNote);
+						mod.ControlMigrate();
 					},
 				},
 			]);
@@ -544,6 +544,14 @@ const mod = {
 		});
 	},
 
+	ControlMigrate() {
+		KVCNoteMetal.KVCNoteMetalMigrateV1(mod._ValueStorageClient, mod.OLSKChangeDelegateCreateNote);
+
+		if (OLSK_TESTING_BEHAVIOUR()) {
+			window.TestControlMigrateCount.innerHTML = parseInt(window.TestControlMigrateCount.innerHTML) + 1;
+		};
+	},
+
 	// REACT
 
 	ReactIsLoading (inputData) {
@@ -592,6 +600,8 @@ const mod = {
 		await mod.SetupValueNotesAll();
 
 		mod.ReactIsLoading(mod._ValueIsLoading = false);
+
+		mod.ControlMigrate();
 	},
 
 	SetupStorageClient() {
@@ -757,6 +767,13 @@ import OLSKStorageWidget from 'OLSKStorageWidget';
 		bind:this={ mod.KVCWriteDetailInstance }
 		/>
 </OLSKViewportContent>
+
+{#if OLSK_TESTING_BEHAVIOUR()}
+	<p>
+		<strong>TestControlMigrateCount</strong>
+		<span id="TestControlMigrateCount">0</span>
+	</p>
+{/if}
 
 <footer class="KVCWriteViewportFooter OLSKMobileViewFooter">
 
