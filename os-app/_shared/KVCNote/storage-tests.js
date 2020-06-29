@@ -15,7 +15,7 @@ describe('KVCNoteStorageFolderPath', function test_KVCNoteStorageFolderPath() {
 	it('throws error if blank', function() {
 		throws(function() {
 			mainModule.KVCNoteStorageFolderPath('');
-		}, /KOMErrorInputNotValid/);
+		}, /KVCErrorInputNotValid/);
 	});
 
 	it('returns string', function() {
@@ -29,7 +29,7 @@ describe('KVCNoteStorageObjectPath', function test_KVCNoteStorageObjectPath() {
 	it('throws error if blank', function() {
 		throws(function() {
 			mainModule.KVCNoteStorageObjectPath('');
-		}, /KOMErrorInputNotValid/);
+		}, /KVCErrorInputNotValid/);
 	});
 
 	it('returns string', function() {
@@ -43,7 +43,7 @@ describe('KVCNoteStorageMatch', function test_KVCNoteStorageMatch() {
 	it('throws error if not string', function() {
 		throws(function() {
 			mainModule.KVCNoteStorageMatch(null);
-		}, /KOMErrorInputNotValid/);
+		}, /KVCErrorInputNotValid/);
 	});
 
 	it('returns false if no KVCNoteStorageCollectionPath', function() {
@@ -56,22 +56,6 @@ describe('KVCNoteStorageMatch', function test_KVCNoteStorageMatch() {
 
 	it('returns true', function() {
 		deepEqual(mainModule.KVCNoteStorageMatch(mainModule.KVCNoteStorageObjectPath('alfa')), true);
-	});
-
-});
-
-describe('KVCNoteStoragePath', function test_KVCNoteStoragePath() {
-
-	it('returns string', function() {
-		deepEqual(mainModule.KVCNoteStoragePath('alfa'), 'kvc_notes/alfa');
-	});
-
-	it('returns string if blank', function() {
-		deepEqual(mainModule.KVCNoteStoragePath(''), 'kvc_notes/');
-	});
-
-	it('returns string if undefined', function() {
-		deepEqual(mainModule.KVCNoteStoragePath(), 'kvc_notes/');
 	});
 
 });

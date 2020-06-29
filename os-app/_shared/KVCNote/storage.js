@@ -13,7 +13,7 @@ const mod = {
 
 	KVCNoteStorageFolderPath (inputData) {
 		if (!inputData) {
-			throw new Error('KOMErrorInputNotValid');
+			throw new Error('KVCErrorInputNotValid');
 		}
 
 		return mod.KVCNoteStorageCollectionPath() + inputData + '/';
@@ -21,7 +21,7 @@ const mod = {
 
 	KVCNoteStorageObjectPath (inputData) {
 		if (!inputData) {
-			throw new Error('KOMErrorInputNotValid');
+			throw new Error('KVCErrorInputNotValid');
 		}
 
 		return mod.KVCNoteStorageFolderPath(inputData) + 'main';
@@ -29,14 +29,10 @@ const mod = {
 
 	KVCNoteStorageMatch (inputData) {
 		if (typeof inputData !== 'string') {
-			throw new Error('KOMErrorInputNotValid');
+			throw new Error('KVCErrorInputNotValid');
 		}
 
 		return inputData === mod.KVCNoteStorageObjectPath(inputData.split('/')[1]);
-	},
-
-	KVCNoteStoragePath (inputData) {
-		return `${ kCollection }/${ inputData || '' }`;
 	},
 
 	KVCNoteStorageBuild (privateClient, publicClient, changeDelegate) {
@@ -45,7 +41,7 @@ const mod = {
 				return;
 			}
 			
-			if (!mod.KOMDeckStorageMatch(event.relativePath)) {
+			if (!mod.KVCNoteStorageMatch(event.relativePath)) {
 				return;
 			}
 
@@ -73,18 +69,26 @@ const mod = {
 		const OLSKRemoteStorageCollectionExports = {
 
 			async KVCStorageList () {
-				return privateClient.getAll(mod.KVCNoteStoragePath(), false);
+				return (await Promise.all(Object.keys(await privateClient.getAll(mod.KVCNoteStorageCollectionPath(), false)).map(function (e) {
+					return privateClient.getObject(mod.KVCNoteStorageObjectPath(e.slice(0, -1)), false);
+				}))).reduce(function (coll, item) {
+					if (item) {
+						coll[item.KVCNoteID] = item;
+					}
+
+					return coll;
+				}, {});
 			},
 
 			async KVCStorageWrite (inputData) {
-				await privateClient.storeObject(kType, mod.KVCNoteStoragePath(inputData.KVCNoteID), OLSKRemoteStorage.OLSKRemoteStoragePreJSONSchemaValidate(inputData));
+				await privateClient.storeObject(kType, mod.KVCNoteStorageObjectPath(inputData.KVCNoteID), OLSKRemoteStorage.OLSKRemoteStoragePreJSONSchemaValidate(inputData));
 				return OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(inputData);
 			},
-
-			KVCStorageDelete (inputData) {
-				return privateClient.remove(mod.KVCNoteStoragePath(inputData));
-			},
 			
+			KVCStorageDelete (inputData) {
+				return privateClient.remove(mod.KVCNoteStorageObjectPath(inputData));
+			},
+
 		};
 
 		return {
