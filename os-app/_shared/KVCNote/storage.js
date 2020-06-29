@@ -7,6 +7,34 @@ const kCollection = 'kvc_notes';
 
 const mod = {
 
+	KVCNoteStorageCollectionPath () {
+		return kCollection + '/';
+	},
+
+	KVCNoteStorageFolderPath (inputData) {
+		if (!inputData) {
+			throw new Error('KOMErrorInputNotValid');
+		}
+
+		return mod.KVCNoteStorageCollectionPath() + inputData + '/';
+	},
+
+	KVCNoteStorageObjectPath (inputData) {
+		if (!inputData) {
+			throw new Error('KOMErrorInputNotValid');
+		}
+
+		return mod.KVCNoteStorageFolderPath(inputData) + 'main';
+	},
+
+	KVCNoteStorageMatch (inputData) {
+		if (typeof inputData !== 'string') {
+			throw new Error('KOMErrorInputNotValid');
+		}
+
+		return inputData === mod.KVCNoteStorageObjectPath(inputData.split('/')[1]);
+	},
+
 	KVCNoteStoragePath (inputData) {
 		return `${ kCollection }/${ inputData || '' }`;
 	},
