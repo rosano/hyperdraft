@@ -74,8 +74,8 @@ const mod = {
 
 		const OLSKRemoteStorageCollectionExports = {
 
-			async KVCStorageList (inputData) {
-				let storagePath = mod.KVCNoteStorageCollectionPath(inputData);
+			async KVCStorageList () {
+				let storagePath = mod.KVCNoteStorageCollectionPath();
 
 				return (await Promise.all((await OLSKRemoteStorage.OLSKRemoteStorageListObjectsRecursive(privateClient, storagePath)).filter(mod.KVCNoteStorageMatch).map(function (e) {
 					return privateClient.getObject(e, false);
