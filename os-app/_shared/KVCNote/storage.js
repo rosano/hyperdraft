@@ -48,10 +48,6 @@ const mod = {
 				return;
 			}
 			
-			if (!mod.KVCNoteStorageMatch(event.relativePath)) {
-				return;
-			}
-
 			const delegateMethod = OLSKRemoteStorage.OLSKRemoteStorageChangeDelegateProperty(event);
 
 			if (!delegateMethod) {
@@ -62,6 +58,9 @@ const mod = {
 				return console.warn(`${ delegateMethod } not function`);
 			}
 
+			if (!mod.KVCNoteStorageMatch(event.relativePath)) {
+				return;
+			}
 
 			if (event.origin === 'remote' && event.oldValue && event.newValue) {
 				// #hotfix-remotestorage-remote-event-from-local-change
