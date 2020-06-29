@@ -34,6 +34,14 @@ const mod = {
 		return mod.KVCNoteStorageFolderPath(inputData) + 'main';
 	},
 
+	KVCNoteStorageObjectPathV1 (inputData) {
+		if (KVCNoteModel.KVCNoteModelErrorsFor(inputData)) {
+			throw new Error('KVCErrorInputNotValid');
+		}
+
+		return mod.KVCNoteStorageCollectionPath() + inputData.KVCNoteID;
+	},
+
 	KVCNoteStorageMatch (inputData) {
 		if (typeof inputData !== 'string') {
 			throw new Error('KVCErrorInputNotValid');

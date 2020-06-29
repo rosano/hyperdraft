@@ -50,6 +50,21 @@ describe('KVCNoteStorageObjectPath', function test_KVCNoteStorageObjectPath() {
 
 });
 
+describe('KVCNoteStorageObjectPathV1', function test_KVCNoteStorageObjectPathV1() {
+
+	it('throws error if not valid', function() {
+		throws(function() {
+			mainModule.KVCNoteStorageObjectPathV1({});
+		}, /KVCErrorInputNotValid/);
+	});
+
+	it('returns string', function() {
+		const item = kTesting.StubNoteObjectValid();
+		deepEqual(mainModule.KVCNoteStorageObjectPathV1(item), mainModule.KVCNoteStorageCollectionPath() + item.KVCNoteID);
+	});
+
+});
+
 describe('KVCNoteStorageMatch', function test_KVCNoteStorageMatch() {
 
 	it('throws error if not string', function() {
