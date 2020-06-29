@@ -2,7 +2,6 @@ import KVCNoteModel from './model.js';
 import * as OLSKRemoteStoragePackage from 'OLSKRemoteStorage';
 const OLSKRemoteStorage = OLSKRemoteStoragePackage.default || OLSKRemoteStoragePackage;
 
-const kType = 'kvc_note';
 const kCollection = 'kvc_notes';
 
 const mod = {
@@ -14,6 +13,10 @@ const mod = {
 			KVCNoteCreationDate: new Date(inputData.split('/')[1]),
 			KVCNoteModificationDate: new Date(),
 		};
+	},
+
+	KVCNoteStorageCollectionType () {
+		return 'kvc_note';
 	},
 
 	KVCNoteStorageCollectionPath () {
@@ -103,7 +106,7 @@ const mod = {
 			},
 
 			async KVCStorageWrite (inputData) {
-				await privateClient.storeObject(kType, mod.KVCNoteStorageObjectPath(inputData), OLSKRemoteStorage.OLSKRemoteStoragePreJSONSchemaValidate(inputData));
+				await privateClient.storeObject(mod.KVCNoteStorageCollectionType(), mod.KVCNoteStorageObjectPath(inputData), OLSKRemoteStorage.OLSKRemoteStoragePreJSONSchemaValidate(inputData));
 				return OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(inputData);
 			},
 			
@@ -115,7 +118,7 @@ const mod = {
 
 		return {
 			OLSKRemoteStorageCollectionName: kCollection,
-			OLSKRemoteStorageCollectionType: kType,
+			OLSKRemoteStorageCollectionType: mod.KVCNoteStorageCollectionType(),
 			OLSKRemoteStorageCollectionModelErrors: Object.entries(KVCNoteModel.KVCNoteModelErrorsFor({}, {
 				KVCOptionValidateIfNotPresent: true,
 			})).map(function (e) {
