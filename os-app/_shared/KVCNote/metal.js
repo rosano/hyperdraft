@@ -38,6 +38,14 @@ const mod = {
 		return await storageClient.wikiavec.kvc_notes.KVCStorageDelete(inputData);
 	},
 
+	async KVCNoteMetalMigrateV1 (storageClient, inputData) {
+		if (typeof inputData !== 'function') {
+			return Promise.reject(new Error('KVCErrorInputNotValid'));
+		}
+
+		return await storageClient.wikiavec.kvc_notes.KVCStorageMigrateNotesV1(inputData);
+	},
+
 };
 
 export default mod;

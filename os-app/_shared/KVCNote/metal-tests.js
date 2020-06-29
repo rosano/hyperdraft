@@ -1,6 +1,10 @@
 const { rejects, deepEqual } = require('assert');
 
 const mainModule = require('./metal.js').default;
+const KVCNoteStorage = require('./storage.js').default;
+const OLSKRemoteStoragePackage = require('OLSKRemoteStorage');
+const OLSKRemoteStorage = OLSKRemoteStoragePackage.default || OLSKRemoteStoragePackage;
+
 
 const kTesting = {
 	StubNoteObjectValid() {
@@ -68,6 +72,62 @@ describe('KVCNoteMetalDelete', function test_KVCNoteMetalDelete() {
 	it('deletes KVCNote', async function() {
 		await mainModule.KVCNoteMetalDelete(KVCTestingStorageClient, await mainModule.KVCNoteMetalWrite(KVCTestingStorageClient, kTesting.StubNoteObjectValid()));
 		deepEqual(await mainModule.KVCNoteMetalList(KVCTestingStorageClient), {});
+	});
+
+});
+
+describe('KVCNoteMetalMigrateV1', function test_KVCNoteMetalMigrateV1() {
+
+	it('rejects if not function', async function() {
+		await rejects(mainModule.KVCNoteMetalDelete(KVCTestingStorageClient, null), /KVCErrorInputNotValid/);
+	});
+
+	it('resolves array', async function() {
+		deepEqual(await mainModule.KVCNoteMetalMigrateV1(KVCTestingStorageClient, function () {}), []);
+	});
+
+	context('V1', function () {
+
+		const item = {
+			KVCNoteID: 'alfa',
+			KVCNoteBody: '',
+			KVCNoteCreationDate: new Date('2019-02-23T13:56:36Z'),
+			KVCNoteModificationDate: new Date('2019-02-23T13:56:36Z'),
+		};
+		const outputData = [];
+
+		beforeEach(async function () {
+			await KVCTestingStorageClient.wikiavec.__DEBUG._OLSKRemoteStoragePrivateClient().storeObject(KVCNoteStorage.KVCNoteStorageCollectionType(), KVCNoteStorage.KVCNoteStorageObjectPathV1(item), OLSKRemoteStorage.OLSKRemoteStoragePreJSONSchemaValidate(item));
+
+			OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(item)
+		});
+
+		beforeEach(async function () {
+			deepEqual(OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(await KVCTestingStorageClient.wikiavec.__DEBUG._OLSKRemoteStoragePrivateClient().getObject(KVCNoteStorage.KVCNoteStorageObjectPathV1(item))), item);
+		});
+
+		beforeEach(async function () {
+			await mainModule.KVCNoteMetalMigrateV1(KVCTestingStorageClient, function (inputData) {
+				outputData.push(inputData);
+			});
+		});
+
+		it('creates destination object', async function () {
+			deepEqual(Object.values(await mainModule.KVCNoteMetalList(KVCTestingStorageClient)), [item]);
+		});
+
+		it('deletes source object', async function () {
+			deepEqual(await KVCTestingStorageClient.wikiavec.__DEBUG._OLSKRemoteStoragePrivateClient().getObject(KVCNoteStorage.KVCNoteStorageObjectPathV1(item)), null);
+		});
+
+		it('passes destination object to callback', function() {
+			deepEqual(outputData, [item]);
+		});
+
+		afterEach(function () {
+			outputData.pop();
+		});
+	
 	});
 
 });

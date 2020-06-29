@@ -127,6 +127,18 @@ const mod = {
 				return privateClient.remove(mod.KVCNoteStorageObjectPath(inputData));
 			},
 
+			async KVCStorageMigrateNotesV1 (inputData) {
+				return Promise.all((await OLSKRemoteStorage.OLSKRemoteStorageListObjectsRecursive(privateClient, mod.KVCNoteStorageCollectionPath())).filter(mod.KVCNoteStorageMatchV1).map(async function (e) {
+					const item = OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(await privateClient.getObject(e, false));
+					
+					inputData(await OLSKRemoteStorageCollectionExports.KVCStorageWrite(item));
+
+					await privateClient.remove(e);
+
+					return item;
+				}));
+			},
+
 		};
 
 		return {
