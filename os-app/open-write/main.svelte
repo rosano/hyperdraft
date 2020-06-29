@@ -138,6 +138,24 @@ const mod = {
 						mod.ControlNoteSelect(null);
 					},
 				},
+				{
+					LCHRecipeName: 'FakeCreateNoteV1',
+					LCHRecipeCallback: function FakeCreateNoteV1 () {
+						const item = {
+							KVCNoteID: 'alfa',
+							KVCNoteBody: '',
+							KVCNoteCreationDate: new Date('2019-02-23T13:56:36Z'),
+							KVCNoteModificationDate: new Date('2019-02-23T13:56:36Z'),
+						};
+						mod._ValueStorageClient.wikiavec.__DEBUG._OLSKRemoteStoragePrivateClient().storeObject(KVCNoteStorage.KVCNoteStorageCollectionType(), KVCNoteStorage.KVCNoteStorageObjectPathV1(item), OLSKRemoteStorage.OLSKRemoteStoragePreJSONSchemaValidate(item));
+					},
+				},
+				{
+					LCHRecipeName: 'FakeMigrateV1',
+					LCHRecipeCallback: function FakeMigrateV1 () {
+						KVCNoteMetal.KVCNoteMetalMigrateV1(mod._ValueStorageClient, mod.OLSKChangeDelegateCreateNote);
+					},
+				},
 			]);
 		}
 		
@@ -587,7 +605,9 @@ const mod = {
 			}),
 			KVCSettingStorage.KVCSettingStorageBuild,
 			KVCVersionStorage.KVCVersionStorageBuild,
-			]);
+			], {
+			OLSKOptionIncludeDebug: OLSK_TESTING_BEHAVIOUR(),
+		});
 		
 		mod._ValueStorageClient = new RemoteStorage({
 			modules: [ storageModule ],
