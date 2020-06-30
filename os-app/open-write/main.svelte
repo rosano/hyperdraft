@@ -152,8 +152,8 @@ const mod = {
 					},
 				},
 				{
-					LCHRecipeName: 'FakeMigrateV1',
-					LCHRecipeCallback: function FakeMigrateV1 () {
+					LCHRecipeName: 'FakeStorageNotConnected',
+					LCHRecipeCallback: function FakeStorageNotConnected () {
 						mod.ControlMigrate();
 					},
 				},
@@ -296,6 +296,14 @@ const mod = {
 		mod.ValueNotesAll(mod._ValueNotesAll.filter(function (e) {
 			return e.KVCNoteID !== inputData.KVCNoteID;
 		}), false);
+	},
+
+	StorageNotConnected () {
+		if (OLSK_TESTING_BEHAVIOUR() && window.location.search.match('FakeStorageConnected')) {
+			return;
+		}
+
+		mod.ControlMigrate();
 	},
 
 	// INTERFACE	
@@ -643,9 +651,7 @@ const mod = {
 	},
 
 	async SetupStorageNotifications () {
-		mod._ValueStorageClient.on('not-connected', () => {
-			mod.ControlMigrate();
-		});
+		mod._ValueStorageClient.on('not-connected', mod.StorageNotConnected);
 
 		mod._ValueStorageClient.on('sync-done', () => {
 			return;

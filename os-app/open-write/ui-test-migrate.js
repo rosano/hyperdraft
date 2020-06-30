@@ -28,7 +28,7 @@ describe('KVCWrite_Migrate', function () {
 	});
 
 	before(function () {
-		browser.assert.text('#TestControlMigrateCount', '1')
+		browser.assert.text('#TestControlMigrateCount', '1');
 	});
 
 	before(function () {
@@ -40,7 +40,7 @@ describe('KVCWrite_Migrate', function () {
 	});
 	
 	before(function () {
-		return kTesting.uLaunch('FakeMigrateV1');
+		return kTesting.uLaunch('FakeStorageNotConnected');
 	});
 	
 	before(function () {
