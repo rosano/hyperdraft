@@ -63,6 +63,8 @@ const mod = {
 
 	OLSKMobileViewInactive: false,
 
+	_ValueDidMigrate: false,
+
 	// DATA
 
 	DataIsMobile () {
@@ -155,6 +157,12 @@ const mod = {
 					LCHRecipeName: 'FakeStorageNotConnected',
 					LCHRecipeCallback: function FakeStorageNotConnected () {
 						mod.StorageNotConnected();
+					},
+				},
+				{
+					LCHRecipeName: 'FakeStorageSyncDone',
+					LCHRecipeCallback: function FakeStorageSyncDone () {
+						mod.StorageSyncDone();
 					},
 				},
 			]);
@@ -300,6 +308,14 @@ const mod = {
 
 	StorageNotConnected () {
 		if (OLSK_TESTING_BEHAVIOUR() && window.location.search.match('FakeStorageIsConnected')) {
+			return;
+		}
+
+		mod.ControlMigrate();
+	},
+
+	StorageSyncDone () {
+		if (mod._ValueDidMigrate) {
 			return;
 		}
 
@@ -558,7 +574,9 @@ const mod = {
 
 		if (OLSK_TESTING_BEHAVIOUR()) {
 			window.TestControlMigrateCount.innerHTML = parseInt(window.TestControlMigrateCount.innerHTML) + 1;
-		};
+		}
+
+		mod._ValueDidMigrate = true;
 	},
 
 	// REACT
@@ -653,12 +671,7 @@ const mod = {
 	async SetupStorageNotifications () {
 		mod._ValueStorageClient.on('not-connected', mod.StorageNotConnected);
 
-		mod._ValueStorageClient.on('sync-done', () => {
-			return;
-			if (!OLSK_TESTING_BEHAVIOUR()) {
-				console.debug('sync-done', arguments);
-			}
-		});
+		mod._ValueStorageClient.on('sync-done', mod.StorageSyncDone);
 
 		let isOffline;
 
