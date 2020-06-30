@@ -135,6 +135,24 @@ const mod = {
 					},
 				},
 				{
+					LCHRecipeName: 'FakeOLSKChangeDelegateConflictNote',
+					LCHRecipeCallback: async function FakeOLSKChangeDelegateConflictNote () {
+						const item = mod._ValueNotesAll.filter(function (e) {
+							return e.KVCNoteBody.match('FakeOLSKChangeDelegateConflictNote');
+						}).pop();
+						
+						return mod.OLSKChangeDelegateConflictNote({
+							origin: 'conflict',
+							oldValue: await KVCNoteAction.KVCNoteActionUpdate(mod._ValueStorageClient, Object.assign({}, item, {
+								KVCNoteBody: item.KVCNoteBody + '-local',
+							})),
+							newValue: Object.assign({}, item, {
+								KVCNoteBody: item.KVCNoteBody + '-remote',
+							}),
+						});
+					},
+				},
+				{
 					LCHRecipeName: 'FakeEscapeWithoutSort',
 					LCHRecipeCallback: function FakeEscapeWithoutSort () {
 						mod.ControlNoteSelect(null);
@@ -304,6 +322,10 @@ const mod = {
 		mod.ValueNotesAll(mod._ValueNotesAll.filter(function (e) {
 			return e.KVCNoteID !== inputData.KVCNoteID;
 		}), false);
+	},
+
+	async OLSKChangeDelegateConflictNote (inputData) {
+		return mod.OLSKChangeDelegateUpdateNote(await KVCNoteAction.KVCNoteActionUpdate(mod._ValueStorageClient, OLSKRemoteStorage.OLSKRemoteStorageChangeDelegateConflictSelectRecent(inputData)));
 	},
 
 	StorageNotConnected () {
@@ -636,6 +658,7 @@ const mod = {
 					OLSKChangeDelegateCreate: mod.OLSKChangeDelegateCreateNote,
 					OLSKChangeDelegateUpdate: mod.OLSKChangeDelegateUpdateNote,
 					OLSKChangeDelegateDelete: mod.OLSKChangeDelegateDeleteNote,
+					OLSKChangeDelegateConflict: mod.OLSKChangeDelegateConflictNote,
 				},
 			}),
 			KVCSettingStorage.KVCSettingStorageBuild,

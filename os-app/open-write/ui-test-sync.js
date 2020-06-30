@@ -259,4 +259,24 @@ describe('KVCWrite_Sync', function () {
 
 	});
 
+	describe('OLSKChangeDelegateConflictNote', function test_OLSKChangeDelegateConflictNote () {
+
+		before(function () {
+			return browser.pressButton('.KVCWriteMasterCreateButton');
+		});
+
+		before(function () {
+			return browser.fill('.KVCWriteInputFieldDebug', 'FakeOLSKChangeDelegateConflictNote');
+		});
+
+		before(function () {
+			return kTesting.uLaunch('FakeOLSKChangeDelegateConflictNote');
+		});
+
+		it('selects local', function () {
+			browser.assert.text('.KVCWriteMasterListItem', 'FakeOLSKChangeDelegateConflictNote-local alfa4 bravo');
+		});
+
+	});
+
 });
