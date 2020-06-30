@@ -299,7 +299,7 @@ const mod = {
 	},
 
 	StorageNotConnected () {
-		if (OLSK_TESTING_BEHAVIOUR() && window.location.search.match('FakeStorageConnected')) {
+		if (OLSK_TESTING_BEHAVIOUR() && window.location.search.match('FakeStorageIsConnected')) {
 			return;
 		}
 
