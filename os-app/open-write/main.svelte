@@ -89,261 +89,6 @@ const mod = {
 		};
 	},
 
-	// MESSAGE
-
-	OLSKAppToolbarDispatchStorage () {
-		mod._ValueStorageToolbarHidden = !mod._ValueStorageToolbarHidden;
-	},
-
-	OLSKAppToolbarDispatchLauncher () {
-		const items = [{
-			LCHRecipeSignature: 'KVCWriteLauncherItemJournal',
-			LCHRecipeName: OLSKLocalized('KVCWriteLauncherItemJournalText'),
-			LCHRecipeCallback () {
-				mod.ControlNoteCreate(OLSKLocalized('KVCWriteLauncherItemJournalText').toLowerCase() + '-' + KVCWriteLogic.KVCWriteHumanTimestampString(this.api.LCHDateLocalOffsetSubtracted(new Date())) + '\n\n- ');
-			},
-		}];
-
-		if (OLSK_TESTING_BEHAVIOUR()) {
-			items.push(...[
-				{
-					LCHRecipeName: 'FakeOLSKChangeDelegateCreateNote',
-					LCHRecipeCallback: async function FakeOLSKChangeDelegateCreateNote () {
-						return mod.OLSKChangeDelegateCreateNote(await KVCNoteAction.KVCNoteActionCreate(mod._ValueStorageClient, mod.FakeNoteObjectValid('FakeOLSKChangeDelegateCreateNote')));
-					},
-				},
-				{
-					LCHRecipeName: 'FakeOLSKChangeDelegateUpdateNote',
-					LCHRecipeCallback: async function FakeOLSKChangeDelegateUpdateNote () {
-						return mod.OLSKChangeDelegateUpdateNote(await KVCNoteAction.KVCNoteActionUpdate(mod._ValueStorageClient, Object.assign(mod._ValueNotesAll.filter(function (e) {
-							return e.KVCNoteBody.match('FakeOLSKChangeDelegate');
-						}).pop(), {
-							KVCNoteBody: 'FakeOLSKChangeDelegateUpdateNote',
-						})));
-					},
-				},
-				{
-					LCHRecipeName: 'FakeOLSKChangeDelegateDeleteNote',
-					LCHRecipeCallback: async function FakeOLSKChangeDelegateDeleteNote () {
-						const item = mod._ValueNotesAll.filter(function (e) {
-							return e.KVCNoteBody.match('FakeOLSKChangeDelegate');
-						}).pop();
-						
-						await KVCNoteAction.KVCNoteActionDelete(mod._ValueStorageClient, item);
-						
-						return mod.OLSKChangeDelegateDeleteNote(item);
-					},
-				},
-				{
-					LCHRecipeName: 'FakeOLSKChangeDelegateConflictNote',
-					LCHRecipeCallback: async function FakeOLSKChangeDelegateConflictNote () {
-						const item = mod._ValueNotesAll.filter(function (e) {
-							return e.KVCNoteBody.match('FakeOLSKChangeDelegateConflictNote');
-						}).pop();
-						
-						return mod.OLSKChangeDelegateConflictNote({
-							origin: 'conflict',
-							oldValue: await KVCNoteAction.KVCNoteActionUpdate(mod._ValueStorageClient, Object.assign({}, item, {
-								KVCNoteBody: item.KVCNoteBody + '-local',
-							})),
-							newValue: Object.assign({}, item, {
-								KVCNoteBody: item.KVCNoteBody + '-remote',
-							}),
-						});
-					},
-				},
-				{
-					LCHRecipeName: 'FakeEscapeWithoutSort',
-					LCHRecipeCallback: function FakeEscapeWithoutSort () {
-						mod.ControlNoteSelect(null);
-					},
-				},
-				{
-					LCHRecipeName: 'FakeCreateNoteV1',
-					LCHRecipeCallback: async function FakeCreateNoteV1 () {
-						const item = {
-							KVCNoteID: 'alfa',
-							KVCNoteBody: '',
-							KVCNoteCreationDate: new Date('2019-02-23T13:56:36Z'),
-							KVCNoteModificationDate: new Date('2019-02-23T13:56:36Z'),
-						};
-						await mod._ValueStorageClient.wikiavec.__DEBUG._OLSKRemoteStoragePrivateClient().storeObject(KVCNoteStorage.KVCNoteStorageCollectionType(), KVCNoteStorage.KVCNoteStorageObjectPathV1(item), OLSKRemoteStorage.OLSKRemoteStoragePreJSONSchemaValidate(item));
-						await mod.SetupValueNotesAll();
-					},
-				},
-				{
-					LCHRecipeName: 'FakeStorageNotConnected',
-					LCHRecipeCallback: function FakeStorageNotConnected () {
-						mod.StorageNotConnected();
-					},
-				},
-				{
-					LCHRecipeName: 'FakeStorageSyncDone',
-					LCHRecipeCallback: function FakeStorageSyncDone () {
-						mod.StorageSyncDone();
-					},
-				},
-			]);
-		}
-		
-		window.Launchlet.LCHSingletonCreate({
-			LCHOptionRecipes: items,
-		});
-	},
-
-	KVCWriteMasterDispatchCreate (inputData) {
-		mod.ControlNoteCreate(inputData);
-	},
-
-	KVCWriteMasterDispatchClick (inputData) {
-		mod.ControlNoteSelect(inputData);
-	},
-
-	KVCWriteMasterDispatchArrow (inputData) {
-		mod.ValueNoteSelected(inputData);
-	},
-
-	KVCWriteMasterDispatchFilter (inputData) {
-		mod.ControlFilterWithThrottle(inputData);
-	},
-
-	KVCWriteMasterDispatchEscape () {
-		mod.ControlEscape();
-	},
-
-	KVCWriteMasterDelegateItemTitle (inputData) {
-		return KVCParser.KVCParserTitleForPlaintext(inputData);
-	},
-
-	KVCWriteMasterDelegateItemSnippet (inputData) {
-		return KVCParser.KVCParserSnippetForPlaintext(KVCParser.KVCParserBodyForPlaintext(inputData));
-	},
-
-	KVCWriteDetailDispatchBack () {
-		// mod.ControlNoteSelect(null);
-
-		mod.OLSKMobileViewInactive = false;
-
-		if (!mod.DataIsMobile()) {
-			return;
-		}
-
-		const element = document.querySelector('.OLSKResultsListItemSelected');
-
-		if (!element) {
-			return;
-		}
-
-		setTimeout(function () {
-			element.scrollIntoView({
-				block: 'center',
-				inline: 'center',
-			});
-		});
-	},
-
-	KVCWriteDetailDispatchJump (inputData) {
-		mod.ControlNoteJump(inputData);
-	},
-
-	KVCWriteDetailDispatchPublish () {
-		mod.ControlNotePublish(mod._ValueNoteSelected);
-	},
-
-	KVCWriteDetailDispatchRetract () {
-		mod.ControlNoteRetract(mod._ValueNoteSelected);
-	},
-
-	KVCWriteDetailDispatchVersions () {
-		mod.ControlNoteVersions(mod._ValueNoteSelected);
-	},
-
-	KVCWriteDetailDispatchDiscard () {
-		if (mod.DataIsMobile()) {
-			mod.KVCWriteDetailDispatchBack();
-		}
-		
-		mod.ControlNoteDiscard(mod._ValueNoteSelected);
-	},
-
-	KVCWriteDetailDispatchUpdate () {
-		mod._ValueNoteSelected = mod._ValueNoteSelected; // #purge-svelte-force-update
-		
-		mod.ControlNoteSave(mod._ValueNoteSelected);
-	},
-
-	KVCWriteDetailDispatchOpen (inputData) {
-		mod.ControlFilterWithNoThrottle(inputData);
-	},
-
-	KVCWriteDetailDispatchEscape () {
-		mod.ControlEscape();
-	},
-
-	_OLSKAppToolbarDispatchExport () {
-		mod.ControlNotesExportData();
-	},
-
-	_OLSKAppToolbarDispatchImport (inputData) {
-		mod.ControlNotesImportData(inputData);
-	},
-
-	OLSKChangeDelegateCreateNote (inputData) {
-		// console.log('OLSKChangeDelegateCreate', inputData);
-
-		mod.ValueNotesAll([inputData].concat(mod._ValueNotesAll.filter(function (e) {
-			return e.KVCNoteID !== inputData.KVCNoteID; // @Hotfix Dropbox sending DelegateAdd
-		})), !mod._ValueNoteSelected);
-	},
-
-	OLSKChangeDelegateUpdateNote (inputData) {
-		// console.log('OLSKChangeDelegateUpdate', inputData);
-
-		if (mod.DataDebugPersistenceIsEnabled()) {
-			console.log('OLSKChangeDelegateUpdate', inputData.KVCNoteID, inputData.KVCNoteBody);
-		}
-
-		if (mod._ValueNoteSelected && mod._ValueNoteSelected.KVCNoteID === inputData.KVCNoteID) {
-			mod._ControlHotfixUpdateInPlace(inputData);
-		}
-
-		mod.ValueNotesAll(mod._ValueNotesAll.map(function (e) {
-			return e.KVCNoteID === inputData.KVCNoteID ? inputData : e;
-		}), !mod._ValueNoteSelected);
-	},
-
-	OLSKChangeDelegateDeleteNote (inputData) {
-		// console.log('OLSKChangeDelegateDelete', inputData);
-
-		if (mod._ValueNoteSelected && (mod._ValueNoteSelected.KVCNoteID === inputData.KVCNoteID)) {
-			mod.ControlNoteSelect(null);
-		}
-
-		mod.ValueNotesAll(mod._ValueNotesAll.filter(function (e) {
-			return e.KVCNoteID !== inputData.KVCNoteID;
-		}), false);
-	},
-
-	async OLSKChangeDelegateConflictNote (inputData) {
-		return mod.OLSKChangeDelegateUpdateNote(await KVCNoteAction.KVCNoteActionUpdate(mod._ValueStorageClient, OLSKRemoteStorage.OLSKRemoteStorageChangeDelegateConflictSelectRecent(inputData)));
-	},
-
-	StorageNotConnected () {
-		if (OLSK_TESTING_BEHAVIOUR() && window.location.search.match('FakeStorageIsConnected')) {
-			return;
-		}
-
-		mod.ControlMigrate();
-	},
-
-	StorageSyncDone () {
-		if (mod._ValueDidMigrate) {
-			return;
-		}
-
-		mod.ControlMigrate();
-	},
-
 	// INTERFACE	
 
 	InterfaceWindowDidKeydown (event) {
@@ -599,6 +344,261 @@ const mod = {
 		}
 
 		mod._ValueDidMigrate = true;
+	},
+
+	// MESSAGE
+
+	OLSKAppToolbarDispatchStorage () {
+		mod._ValueStorageToolbarHidden = !mod._ValueStorageToolbarHidden;
+	},
+
+	OLSKAppToolbarDispatchLauncher () {
+		const items = [{
+			LCHRecipeSignature: 'KVCWriteLauncherItemJournal',
+			LCHRecipeName: OLSKLocalized('KVCWriteLauncherItemJournalText'),
+			LCHRecipeCallback () {
+				mod.ControlNoteCreate(OLSKLocalized('KVCWriteLauncherItemJournalText').toLowerCase() + '-' + KVCWriteLogic.KVCWriteHumanTimestampString(this.api.LCHDateLocalOffsetSubtracted(new Date())) + '\n\n- ');
+			},
+		}];
+
+		if (OLSK_TESTING_BEHAVIOUR()) {
+			items.push(...[
+				{
+					LCHRecipeName: 'FakeOLSKChangeDelegateCreateNote',
+					LCHRecipeCallback: async function FakeOLSKChangeDelegateCreateNote () {
+						return mod.OLSKChangeDelegateCreateNote(await KVCNoteAction.KVCNoteActionCreate(mod._ValueStorageClient, mod.FakeNoteObjectValid('FakeOLSKChangeDelegateCreateNote')));
+					},
+				},
+				{
+					LCHRecipeName: 'FakeOLSKChangeDelegateUpdateNote',
+					LCHRecipeCallback: async function FakeOLSKChangeDelegateUpdateNote () {
+						return mod.OLSKChangeDelegateUpdateNote(await KVCNoteAction.KVCNoteActionUpdate(mod._ValueStorageClient, Object.assign(mod._ValueNotesAll.filter(function (e) {
+							return e.KVCNoteBody.match('FakeOLSKChangeDelegate');
+						}).pop(), {
+							KVCNoteBody: 'FakeOLSKChangeDelegateUpdateNote',
+						})));
+					},
+				},
+				{
+					LCHRecipeName: 'FakeOLSKChangeDelegateDeleteNote',
+					LCHRecipeCallback: async function FakeOLSKChangeDelegateDeleteNote () {
+						const item = mod._ValueNotesAll.filter(function (e) {
+							return e.KVCNoteBody.match('FakeOLSKChangeDelegate');
+						}).pop();
+						
+						await KVCNoteAction.KVCNoteActionDelete(mod._ValueStorageClient, item);
+						
+						return mod.OLSKChangeDelegateDeleteNote(item);
+					},
+				},
+				{
+					LCHRecipeName: 'FakeOLSKChangeDelegateConflictNote',
+					LCHRecipeCallback: async function FakeOLSKChangeDelegateConflictNote () {
+						const item = mod._ValueNotesAll.filter(function (e) {
+							return e.KVCNoteBody.match('FakeOLSKChangeDelegateConflictNote');
+						}).pop();
+						
+						return mod.OLSKChangeDelegateConflictNote({
+							origin: 'conflict',
+							oldValue: await KVCNoteAction.KVCNoteActionUpdate(mod._ValueStorageClient, Object.assign({}, item, {
+								KVCNoteBody: item.KVCNoteBody + '-local',
+							})),
+							newValue: Object.assign({}, item, {
+								KVCNoteBody: item.KVCNoteBody + '-remote',
+							}),
+						});
+					},
+				},
+				{
+					LCHRecipeName: 'FakeEscapeWithoutSort',
+					LCHRecipeCallback: function FakeEscapeWithoutSort () {
+						mod.ControlNoteSelect(null);
+					},
+				},
+				{
+					LCHRecipeName: 'FakeCreateNoteV1',
+					LCHRecipeCallback: async function FakeCreateNoteV1 () {
+						const item = {
+							KVCNoteID: 'alfa',
+							KVCNoteBody: '',
+							KVCNoteCreationDate: new Date('2019-02-23T13:56:36Z'),
+							KVCNoteModificationDate: new Date('2019-02-23T13:56:36Z'),
+						};
+						await mod._ValueStorageClient.wikiavec.__DEBUG._OLSKRemoteStoragePrivateClient().storeObject(KVCNoteStorage.KVCNoteStorageCollectionType(), KVCNoteStorage.KVCNoteStorageObjectPathV1(item), OLSKRemoteStorage.OLSKRemoteStoragePreJSONSchemaValidate(item));
+						await mod.SetupValueNotesAll();
+					},
+				},
+				{
+					LCHRecipeName: 'FakeStorageNotConnected',
+					LCHRecipeCallback: function FakeStorageNotConnected () {
+						mod.StorageNotConnected();
+					},
+				},
+				{
+					LCHRecipeName: 'FakeStorageSyncDone',
+					LCHRecipeCallback: function FakeStorageSyncDone () {
+						mod.StorageSyncDone();
+					},
+				},
+			]);
+		}
+		
+		window.Launchlet.LCHSingletonCreate({
+			LCHOptionRecipes: items,
+		});
+	},
+
+	KVCWriteMasterDispatchCreate (inputData) {
+		mod.ControlNoteCreate(inputData);
+	},
+
+	KVCWriteMasterDispatchClick (inputData) {
+		mod.ControlNoteSelect(inputData);
+	},
+
+	KVCWriteMasterDispatchArrow (inputData) {
+		mod.ValueNoteSelected(inputData);
+	},
+
+	KVCWriteMasterDispatchFilter (inputData) {
+		mod.ControlFilterWithThrottle(inputData);
+	},
+
+	KVCWriteMasterDispatchEscape () {
+		mod.ControlEscape();
+	},
+
+	KVCWriteMasterDelegateItemTitle (inputData) {
+		return KVCParser.KVCParserTitleForPlaintext(inputData);
+	},
+
+	KVCWriteMasterDelegateItemSnippet (inputData) {
+		return KVCParser.KVCParserSnippetForPlaintext(KVCParser.KVCParserBodyForPlaintext(inputData));
+	},
+
+	KVCWriteDetailDispatchBack () {
+		// mod.ControlNoteSelect(null);
+
+		mod.OLSKMobileViewInactive = false;
+
+		if (!mod.DataIsMobile()) {
+			return;
+		}
+
+		const element = document.querySelector('.OLSKResultsListItemSelected');
+
+		if (!element) {
+			return;
+		}
+
+		setTimeout(function () {
+			element.scrollIntoView({
+				block: 'center',
+				inline: 'center',
+			});
+		});
+	},
+
+	KVCWriteDetailDispatchJump (inputData) {
+		mod.ControlNoteJump(inputData);
+	},
+
+	KVCWriteDetailDispatchPublish () {
+		mod.ControlNotePublish(mod._ValueNoteSelected);
+	},
+
+	KVCWriteDetailDispatchRetract () {
+		mod.ControlNoteRetract(mod._ValueNoteSelected);
+	},
+
+	KVCWriteDetailDispatchVersions () {
+		mod.ControlNoteVersions(mod._ValueNoteSelected);
+	},
+
+	KVCWriteDetailDispatchDiscard () {
+		if (mod.DataIsMobile()) {
+			mod.KVCWriteDetailDispatchBack();
+		}
+		
+		mod.ControlNoteDiscard(mod._ValueNoteSelected);
+	},
+
+	KVCWriteDetailDispatchUpdate () {
+		mod._ValueNoteSelected = mod._ValueNoteSelected; // #purge-svelte-force-update
+		
+		mod.ControlNoteSave(mod._ValueNoteSelected);
+	},
+
+	KVCWriteDetailDispatchOpen (inputData) {
+		mod.ControlFilterWithNoThrottle(inputData);
+	},
+
+	KVCWriteDetailDispatchEscape () {
+		mod.ControlEscape();
+	},
+
+	_OLSKAppToolbarDispatchExport () {
+		mod.ControlNotesExportData();
+	},
+
+	_OLSKAppToolbarDispatchImport (inputData) {
+		mod.ControlNotesImportData(inputData);
+	},
+
+	OLSKChangeDelegateCreateNote (inputData) {
+		// console.log('OLSKChangeDelegateCreate', inputData);
+
+		mod.ValueNotesAll([inputData].concat(mod._ValueNotesAll.filter(function (e) {
+			return e.KVCNoteID !== inputData.KVCNoteID; // @Hotfix Dropbox sending DelegateAdd
+		})), !mod._ValueNoteSelected);
+	},
+
+	OLSKChangeDelegateUpdateNote (inputData) {
+		// console.log('OLSKChangeDelegateUpdate', inputData);
+
+		if (mod.DataDebugPersistenceIsEnabled()) {
+			console.log('OLSKChangeDelegateUpdate', inputData.KVCNoteID, inputData.KVCNoteBody);
+		}
+
+		if (mod._ValueNoteSelected && mod._ValueNoteSelected.KVCNoteID === inputData.KVCNoteID) {
+			mod._ControlHotfixUpdateInPlace(inputData);
+		}
+
+		mod.ValueNotesAll(mod._ValueNotesAll.map(function (e) {
+			return e.KVCNoteID === inputData.KVCNoteID ? inputData : e;
+		}), !mod._ValueNoteSelected);
+	},
+
+	OLSKChangeDelegateDeleteNote (inputData) {
+		// console.log('OLSKChangeDelegateDelete', inputData);
+
+		if (mod._ValueNoteSelected && (mod._ValueNoteSelected.KVCNoteID === inputData.KVCNoteID)) {
+			mod.ControlNoteSelect(null);
+		}
+
+		mod.ValueNotesAll(mod._ValueNotesAll.filter(function (e) {
+			return e.KVCNoteID !== inputData.KVCNoteID;
+		}), false);
+	},
+
+	async OLSKChangeDelegateConflictNote (inputData) {
+		return mod.OLSKChangeDelegateUpdateNote(await KVCNoteAction.KVCNoteActionUpdate(mod._ValueStorageClient, OLSKRemoteStorage.OLSKRemoteStorageChangeDelegateConflictSelectRecent(inputData)));
+	},
+
+	StorageNotConnected () {
+		if (OLSK_TESTING_BEHAVIOUR() && window.location.search.match('FakeStorageIsConnected')) {
+			return;
+		}
+
+		mod.ControlMigrate();
+	},
+
+	StorageSyncDone () {
+		if (mod._ValueDidMigrate) {
+			return;
+		}
+
+		mod.ControlMigrate();
 	},
 
 	// REACT
