@@ -601,8 +601,6 @@ const mod = {
 		await mod.SetupValueNotesAll();
 
 		mod.ReactIsLoading(mod._ValueIsLoading = false);
-
-		mod.ControlMigrate();
 	},
 
 	SetupStorageClient() {
@@ -645,6 +643,10 @@ const mod = {
 	},
 
 	async SetupStorageNotifications () {
+		mod._ValueStorageClient.on('not-connected', () => {
+			mod.ControlMigrate();
+		});
+
 		mod._ValueStorageClient.on('sync-done', () => {
 			return;
 			if (!OLSK_TESTING_BEHAVIOUR()) {
