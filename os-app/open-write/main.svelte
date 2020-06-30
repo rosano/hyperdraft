@@ -154,7 +154,7 @@ const mod = {
 				{
 					LCHRecipeName: 'FakeStorageNotConnected',
 					LCHRecipeCallback: function FakeStorageNotConnected () {
-						mod.ControlMigrate();
+						mod.StorageNotConnected();
 					},
 				},
 			]);
