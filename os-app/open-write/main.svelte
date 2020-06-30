@@ -592,7 +592,7 @@ const mod = {
 	},
 
 	ControlMigrate() {
-		// KVCNoteMetal.KVCNoteMetalMigrateV1(mod._ValueStorageClient, mod.OLSKChangeDelegateCreateNote);
+		KVCNoteMetal.KVCNoteMetalMigrateV1(mod._ValueStorageClient, mod.OLSKChangeDelegateCreateNote);
 
 		if (OLSK_TESTING_BEHAVIOUR()) {
 			window.TestControlMigrateCount.innerHTML = parseInt(window.TestControlMigrateCount.innerHTML) + 1;
