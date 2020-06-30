@@ -140,14 +140,15 @@ const mod = {
 				},
 				{
 					LCHRecipeName: 'FakeCreateNoteV1',
-					LCHRecipeCallback: function FakeCreateNoteV1 () {
+					LCHRecipeCallback: async function FakeCreateNoteV1 () {
 						const item = {
 							KVCNoteID: 'alfa',
 							KVCNoteBody: '',
 							KVCNoteCreationDate: new Date('2019-02-23T13:56:36Z'),
 							KVCNoteModificationDate: new Date('2019-02-23T13:56:36Z'),
 						};
-						mod._ValueStorageClient.wikiavec.__DEBUG._OLSKRemoteStoragePrivateClient().storeObject(KVCNoteStorage.KVCNoteStorageCollectionType(), KVCNoteStorage.KVCNoteStorageObjectPathV1(item), OLSKRemoteStorage.OLSKRemoteStoragePreJSONSchemaValidate(item));
+						await mod._ValueStorageClient.wikiavec.__DEBUG._OLSKRemoteStoragePrivateClient().storeObject(KVCNoteStorage.KVCNoteStorageCollectionType(), KVCNoteStorage.KVCNoteStorageObjectPathV1(item), OLSKRemoteStorage.OLSKRemoteStoragePreJSONSchemaValidate(item));
+						await mod.SetupValueNotesAll();
 					},
 				},
 				{
