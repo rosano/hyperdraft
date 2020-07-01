@@ -161,6 +161,22 @@ const mod = {
 				return await publicClient.getItemURL(param2);
 			},
 
+			async _KVCNoteStorageDeletePublic (inputData) {
+				if (typeof inputData !== 'string') {
+					return Promise.reject(new Error('KVCErrorInputNotValid'));
+				}
+
+				if (inputData[0] !== '/') {
+					return Promise.reject(new Error('KVCErrorInputNotValid'));
+				}
+
+				if (inputData.slice(1).trim() === '') {
+					return Promise.reject(new Error('KVCErrorInputNotValid'));
+				}
+
+				return await publicClient.remove(inputData);
+			},
+
 		};
 
 		return {
@@ -197,6 +213,10 @@ const mod = {
 
 	KVCNoteStorageWritePublic (storageClient, param1, param2) {
 		return storageClient.wikiavec.kvc_notes._KVCNoteStorageWritePublic(param1, param2);
+	},
+
+	KVCNoteStorageDeletePublic (storageClient, param1, param2) {
+		return storageClient.wikiavec.kvc_notes._KVCNoteStorageDeletePublic(param1, param2);
 	},
 
 };

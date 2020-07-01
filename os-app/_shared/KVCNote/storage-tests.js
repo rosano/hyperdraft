@@ -172,3 +172,28 @@ describe('KVCNoteStorageWritePublic', function test_KVCNoteStorageWritePublic() 
 	});
 
 });
+
+describe('KVCNoteStorageDeletePublic', function test_KVCNoteStorageDeletePublic() {
+
+	it('rejects if not object path', async function() {
+		await rejects(mainModule.KVCNoteStorageDeletePublic(KVCTestingStorageClient, '/'), /KVCErrorInputNotValid/);
+	});
+
+	it('returns undefined', async function() {
+		deepEqual(await mainModule.KVCNoteStorageDeletePublic(KVCTestingStorageClient, '/alfa'), {
+			statusCode: 200,
+		});
+	});
+
+	it('deletes file from public folder', async function() {
+		const item = Object.assign(kTesting.StubNoteObjectValid(), {
+			KVCNotePublicID: 'charlie',
+		});
+		await mainModule.KVCNoteStorageWritePublic(KVCTestingStorageClient, item, mainModule.KVCNoteStorageObjectPathPublic(item));
+
+		await mainModule.KVCNoteStorageDeletePublic(KVCTestingStorageClient, mainModule.KVCNoteStorageObjectPathPublic(item));
+
+		deepEqual((await KVCTestingStorageClient.wikiavec.__DEBUG._OLSKRemoteStoragePublicClient().getFile(mainModule.KVCNoteStorageObjectPathPublic(item))).data, undefined);
+	});
+
+});
