@@ -75,9 +75,7 @@ const mod = {
 		}
 
 		if (!inputData.KVCNotePublicID) {
-			inputData.KVCNotePublicID = (parseInt((await KVCSettingAction.KVCSettingsActionProperty(storageClient, 'KVCSettingsLastPublicID')) || 0) + 1).toString();
-
-			await KVCSettingAction.KVCSettingsActionProperty(storageClient, 'KVCSettingsLastPublicID', inputData.KVCNotePublicID);
+			inputData.KVCNotePublicID = uniqueID().toLowerCase();
 		}
 
 		return await mod.KVCNoteActionUpdate(storageClient, Object.assign(inputData, {
