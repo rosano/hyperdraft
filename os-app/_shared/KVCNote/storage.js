@@ -161,6 +161,18 @@ const mod = {
 		};
 	},
 
+	KVCNoteStorageObjectPathPublic (inputData) {
+		if (KVCNoteModel.KVCNoteModelErrorsFor(inputData)) {
+			throw new Error('KVCErrorInputNotValid');
+		}
+
+		if (!inputData.KVCNotePublicID) {
+			throw new Error('KVCErrorInputNotValid');
+		}
+
+		return '/' + inputData.KVCNotePublicID;
+	},
+
 };
 
 export default mod;

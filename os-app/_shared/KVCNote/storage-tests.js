@@ -122,3 +122,28 @@ describe('KVCNoteStorageMatch', function test_KVCNoteStorageMatch() {
 	});
 
 });
+
+describe('KVCNoteStorageObjectPathPublic', function test_KVCNoteStorageObjectPathPublic() {
+
+	it('throws if not valid', async function() {
+		throws(function() {
+			mainModule.KVCNoteStorageObjectPathPublic({});
+		}, /KVCErrorInputNotValid/);
+	});
+
+	it('throws if no KVCNotePublicID', async function() {
+		throws(function() {
+			mainModule.KVCNoteStorageObjectPathPublic(kTesting.StubNoteObjectValid());
+		}, /KVCErrorInputNotValid/);
+	});
+
+	it('returns string', async function() {
+		const item = Object.assign(kTesting.StubNoteObjectValid(), {
+			KVCNotePublicID: 'charlie',
+		});
+
+		deepEqual(await mainModule.KVCNoteStorageObjectPathPublic(item), '/' + item.KVCNotePublicID);
+	});
+
+});
+
