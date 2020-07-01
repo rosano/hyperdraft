@@ -139,6 +139,28 @@ const mod = {
 				}));
 			},
 
+			async _KVCNoteStorageWritePublic (param1, param2) {
+				if (KVCNoteModel.KVCNoteModelErrorsFor(param1)) {
+					return Promise.reject(new Error('KVCErrorInputNotValid'));
+				}
+
+				if (typeof param2 !== 'string') {
+					return Promise.reject(new Error('KVCErrorInputNotValid'));
+				}
+
+				if (param2[0] !== '/') {
+					return Promise.reject(new Error('KVCErrorInputNotValid'));
+				}
+
+				if (param2.slice(1).trim() === '') {
+					return Promise.reject(new Error('KVCErrorInputNotValid'));
+				}
+
+				await publicClient.storeFile('text/html', param2, param1.KVCNoteBody);
+
+				return await publicClient.getItemURL(param2);
+			},
+
 		};
 
 		return {
@@ -171,6 +193,10 @@ const mod = {
 		}
 
 		return '/' + inputData.KVCNotePublicID;
+	},
+
+	KVCNoteStorageWritePublic (storageClient, param1, param2) {
+		return storageClient.wikiavec.kvc_notes._KVCNoteStorageWritePublic(param1, param2);
 	},
 
 };

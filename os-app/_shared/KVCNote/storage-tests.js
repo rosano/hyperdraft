@@ -1,4 +1,4 @@
-const { throws, deepEqual } = require('assert');
+const { throws, rejects, deepEqual } = require('assert');
 
 const mainModule = require('./storage.js').default;
 
@@ -6,7 +6,7 @@ const kTesting = {
 	StubNoteObjectValid() {
 		return {
 			KVCNoteID: 'alfa',
-			KVCNoteBody: '',
+			KVCNoteBody: 'bravo',
 			KVCNoteCreationDate: new Date('2019-02-23T13:56:36Z'),
 			KVCNoteModificationDate: new Date('2019-02-23T13:56:36Z'),
 		};
@@ -147,3 +147,28 @@ describe('KVCNoteStorageObjectPathPublic', function test_KVCNoteStorageObjectPat
 
 });
 
+describe('KVCNoteStorageWritePublic', function test_KVCNoteStorageWritePublic() {
+
+	const item = Object.assign(kTesting.StubNoteObjectValid(), {
+		KVCNotePublicID: 'charlie',
+	});
+
+	it('rejects if not valid', async function() {
+		await rejects(mainModule.KVCNoteStorageWritePublic(KVCTestingStorageClient, {}, 'alfa'), /KVCErrorInputNotValid/);
+	});
+
+	it('rejects if not object path', async function() {
+		await rejects(mainModule.KVCNoteStorageWritePublic(KVCTestingStorageClient, kTesting.StubNoteObjectValid(), '/'), /KVCErrorInputNotValid/);
+	});
+
+	it('returns public url', async function() {
+		deepEqual(await mainModule.KVCNoteStorageWritePublic(KVCTestingStorageClient, kTesting.StubNoteObjectValid(), '/alfa'), undefined);
+	});
+
+	it('writes file to public folder', async function() {
+		await mainModule.KVCNoteStorageWritePublic(KVCTestingStorageClient, item, mainModule.KVCNoteStorageObjectPathPublic(item));
+
+		deepEqual((await KVCTestingStorageClient.wikiavec.__DEBUG._OLSKRemoteStoragePublicClient().getFile(mainModule.KVCNoteStorageObjectPathPublic(item))).data, 'bravo');
+	});
+
+});
