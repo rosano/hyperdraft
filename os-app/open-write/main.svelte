@@ -408,12 +408,12 @@ const mod = {
 						
 						return mod.OLSKChangeDelegateConflictNote({
 							origin: 'conflict',
-							oldValue: await KVCNoteAction.KVCNoteActionUpdate(mod._ValueStorageClient, Object.assign({}, item, {
+							oldValue: OLSKRemoteStorage.OLSKRemoteStoragePreJSONSchemaValidate(await KVCNoteAction.KVCNoteActionUpdate(mod._ValueStorageClient, Object.assign({}, item, {
 								KVCNoteBody: item.KVCNoteBody + '-local',
-							})),
-							newValue: Object.assign({}, item, {
+							}))),
+							newValue: OLSKRemoteStorage.OLSKRemoteStoragePreJSONSchemaValidate(Object.assign({}, item, {
 								KVCNoteBody: item.KVCNoteBody + '-remote',
-							}),
+							})),
 						});
 					},
 				},
@@ -608,7 +608,7 @@ const mod = {
 	},
 
 	async OLSKChangeDelegateConflictNote (inputData) {
-		return mod.OLSKChangeDelegateUpdateNote(await KVCNoteAction.KVCNoteActionUpdate(mod._ValueStorageClient, OLSKRemoteStorage.OLSKRemoteStorageChangeDelegateConflictSelectRecent(inputData)));
+		return mod.OLSKChangeDelegateUpdateNote(await KVCNoteAction.KVCNoteActionUpdate(mod._ValueStorageClient, OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(OLSKRemoteStorage.OLSKRemoteStorageChangeDelegateConflictSelectRecent(inputData))));
 	},
 
 	StorageConnected () {
