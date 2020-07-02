@@ -3,6 +3,7 @@ const uniqueID = typeof require === 'undefined' && navigator.appName === 'Zombie
 
 import KVCNoteMetal from './metal.js';
 import KVCNoteModel from './model.js';
+import KVCNoteStorage from './storage.js';
 import KVCSettingAction from '../KVCSetting/action.js';
 import KVCVersionAction from '../KVCVersion/action.js';
 import KVCParser from '../KVCParser/main.js';
@@ -77,6 +78,8 @@ const mod = {
 		if (!inputData.KVCNotePublicID) {
 			inputData.KVCNotePublicID = uniqueID().toLowerCase();
 		}
+
+		await KVCNoteStorage.KVCNoteStorageWritePublic(storageClient, inputData, KVCNoteStorage.KVCNoteStorageObjectPathPublic(inputData));
 
 		return await mod.KVCNoteActionUpdate(storageClient, Object.assign(inputData, {
 			KVCNotePublishStatusIsPublished: true,

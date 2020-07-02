@@ -1,6 +1,7 @@
 const { rejects, deepEqual } = require('assert');
 
 const mainModule = require('./action.js').default;
+const KVCNoteStorage = require('./storage.js').default;
 const KVCVersionsAction = require('../KVCVersion/action.js').default;
 
 const kTesting = {
@@ -238,6 +239,19 @@ describe('KVCNoteActionPublish', function test_KVCNoteActionPublish() {
 		const id = item.KVCNotePublicID;
 
 		deepEqual((await mainModule.KVCNoteActionPublish(KVCTestingStorageClient, item)).KVCNotePublicID, id);
+	});
+
+	it('keeps existing KVCNotePublicID', async function() {
+		const item = await mainModule.KVCNoteActionPublish(KVCTestingStorageClient, await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()));
+		const id = item.KVCNotePublicID;
+
+		deepEqual((await mainModule.KVCNoteActionPublish(KVCTestingStorageClient, item)).KVCNotePublicID, id);
+	});
+
+	it('writes file to public folder', async function() {
+		const item = await mainModule.KVCNoteActionPublish(KVCTestingStorageClient, await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()));
+
+		deepEqual((await KVCTestingStorageClient.wikiavec.__DEBUG._OLSKRemoteStoragePublicClient().getFile(KVCNoteStorage.KVCNoteStorageObjectPathPublic(item))).data, 'bravo');
 	});
 
 });
