@@ -73,3 +73,35 @@ const KVCVersionStorage = require('./os-app/_shared/KVCVersion/storage.js').defa
 		return await global.KVCTestingStorageClient[storageModule.name].__DEBUG._OLSKRemoteStorageReset();
 	});
 })();
+
+(function KVCMochaStubs() {
+	Object.entries({
+		uSerial (inputData) {
+			return inputData.reduce(function (coll, e) {
+				return coll.then(e);
+			}, Promise.resolve());
+		},
+
+		uLaunch (inputData) {
+			return uSerial([
+				function () {
+					return browser.pressButton('.OLSKAppToolbarLauncherButton');
+				},
+				function () {
+					return browser.fill('.LCHLauncherFilterInput', inputData);
+				},
+				function () {
+					return browser.click('.LCHLauncherPipeItem');
+				},
+			]);
+		},
+
+		uSleep (inputData) {
+			let endTime = new Date().getTime();
+			while (new Date().getTime() < endTime + inputData) {}
+		},
+	}).map(function (e) {
+		return global[e.shift()]  = e.pop();
+	});
+})();
+

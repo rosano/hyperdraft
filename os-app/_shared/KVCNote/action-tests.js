@@ -10,15 +10,6 @@ const kTesting = {
 			KVCNoteBody: 'bravo',
 		};
 	},
-	uSerial (inputData) {
-		return inputData.reduce(async function (coll, e) {
-			return e.then(Array.prototype.concat.bind(await coll));
-		}, Promise.resolve([]));
-	},
-	uSleep (inputData) {
-		let endTime = new Date().getTime();
-		while (new Date().getTime() < endTime + inputData) {}
-	},
 };
 
 describe('KVCNoteActionCreate', function test_KVCNoteActionCreate() {
@@ -49,7 +40,7 @@ describe('KVCNoteActionCreate', function test_KVCNoteActionCreate() {
 	});
 
 	it('sets KVCNoteID to unique value', async function() {
-		let items = await kTesting.uSerial(Array.from(Array(10)).map(async function (e) {
+		let items = await uSerial(Array.from(Array(10)).map(async function (e) {
 			return (await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject())).KVCNoteID;
 		}));
 		deepEqual([...(new Set(items))], items);
@@ -144,8 +135,8 @@ describe('KVCNoteActionQuery', function test_KVCNoteActionQuery() {
 	});
 
 	it('includes all KVCNotes if no query', async function() {
-		let items = await kTesting.uSerial(['alfa', 'bravo', 'charlie'].map(async function (e) {
-			kTesting.uSleep(1);
+		let items = await uSerial(['alfa', 'bravo', 'charlie'].map(async function (e) {
+			uSleep(1);
 			return await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, Object.assign(kTesting.StubNoteObject(), {
 				KVCNoteBody: e,
 			}));
@@ -155,7 +146,7 @@ describe('KVCNoteActionQuery', function test_KVCNoteActionQuery() {
 	});
 
 	it('filters string', async function() {
-		let items = await kTesting.uSerial(['alfa', 'bravo', 'charlie'].map(async function (e) {
+		let items = await uSerial(['alfa', 'bravo', 'charlie'].map(async function (e) {
 			return await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, Object.assign(kTesting.StubNoteObject(), {
 				KVCNoteID: e,
 			}));
@@ -167,7 +158,7 @@ describe('KVCNoteActionQuery', function test_KVCNoteActionQuery() {
 	});
 
 	it('filters boolean', async function() {
-		let items = await kTesting.uSerial(Array.from(Array(3)).map(async function (e, index) {
+		let items = await uSerial(Array.from(Array(3)).map(async function (e, index) {
 			return await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, Object.assign(kTesting.StubNoteObject(), {
 				KVCNotePublishStatusIsPublished: !!index,
 			}));
@@ -208,7 +199,7 @@ describe('KVCNoteActionPublish', function test_KVCNoteActionPublish() {
 	});
 
 	it('sets KVCNotePublicID to unique value', async function() {
-		let items = await kTesting.uSerial(Array.from(Array(10)).map(async function (e) {
+		let items = await uSerial(Array.from(Array(10)).map(async function (e) {
 			return (await mainModule.KVCNoteActionPublish(KVCTestingStorageClient, await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()))).KVCNotePublicID;
 		}));
 		deepEqual([...(new Set(items))], items);
@@ -288,7 +279,7 @@ describe.skip('KVCNoteActionGetPublicLinks', function test_KVCNoteActionGetPubli
 		await mainModule.KVCNoteActionPublish(KVCTestingStorageClient, (await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, Object.assign(kTesting.StubNoteObject(), {
 			KVCNoteBody: `heading\nalfa`,
 		}))));
-		kTesting.uSleep(1);
+		uSleep(1);
 		await mainModule.KVCNoteActionPublish(KVCTestingStorageClient, (await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, Object.assign(kTesting.StubNoteObject(), {
 			KVCNoteBody: `heading\nbravo`,
 		}))));

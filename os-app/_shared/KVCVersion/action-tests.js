@@ -10,15 +10,6 @@ const kTesting = {
 			KVCVersionDate: new Date(),
 		};
 	},
-	uSerial (inputData) {
-		return inputData.reduce(async function (coll, e) {
-			return e.then(Array.prototype.concat.bind(await coll));
-		}, Promise.resolve([]));
-	},
-	uSleep (inputData) {
-		let endTime = new Date().getTime();
-		while (new Date().getTime() < endTime + inputData) {}
-	},
 };
 
 describe('KVCVersionActionCreate', function test_KVCVersionActionCreate() {
@@ -48,7 +39,7 @@ describe('KVCVersionActionCreate', function test_KVCVersionActionCreate() {
 	});
 
 	it('sets KVCVersionID to unique value', async function() {
-		let items = await kTesting.uSerial(Array.from(Array(10)).map(async function (e) {
+		let items = await uSerial(Array.from(Array(10)).map(async function (e) {
 			return (await mainModule.KVCVersionActionCreate(KVCTestingStorageClient, kTesting.StubVersionObject())).KVCVersionID;
 		}));
 		deepEqual([...(new Set(items))], items);
@@ -67,8 +58,8 @@ describe('KVCVersionActionQuery', function test_KVCVersionActionQuery() {
 	});
 
 	it('includes all KVCVersions if no query', async function() {
-		let items = await kTesting.uSerial(['alfa', 'bravo', 'charlie'].map(async function (e) {
-			kTesting.uSleep(1);
+		let items = await uSerial(['alfa', 'bravo', 'charlie'].map(async function (e) {
+			uSleep(1);
 			return await mainModule.KVCVersionActionCreate(KVCTestingStorageClient, Object.assign(kTesting.StubVersionObject(), {
 				KVCVersionBody: e,
 			}));
@@ -78,7 +69,7 @@ describe('KVCVersionActionQuery', function test_KVCVersionActionQuery() {
 	});
 
 	it('filters by KVCVersionNoteID', async function() {
-		let items = await kTesting.uSerial(['alfa', 'bravo', 'charlie'].map(async function (e) {
+		let items = await uSerial(['alfa', 'bravo', 'charlie'].map(async function (e) {
 			return await mainModule.KVCVersionActionCreate(KVCTestingStorageClient, Object.assign(kTesting.StubVersionObject(), {
 				KVCVersionNoteID: e,
 			}));

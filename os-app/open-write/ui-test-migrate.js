@@ -1,26 +1,5 @@
 const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
-const kTesting = {
-	uSerial (inputData) {
-		return inputData.reduce(function (coll, e) {
-			return coll.then(e);
-		}, Promise.resolve());
-	},
-	uLaunch (inputData) {
-		return kTesting.uSerial([
-			function () {
-				return browser.pressButton('.OLSKAppToolbarLauncherButton');
-			},
-			function () {
-				return browser.fill('.LCHLauncherFilterInput', inputData);
-			},
-			function () {
-				return browser.click('.LCHLauncherPipeItem');
-			},
-		]);
-	},
-};
-
 describe('KVCWrite_Migrate', function () {
 
 	before(function() {
@@ -32,7 +11,7 @@ describe('KVCWrite_Migrate', function () {
 	});
 
 	before(function () {
-		return kTesting.uLaunch('FakeCreateNoteV1');
+		return uLaunch('FakeCreateNoteV1');
 	});
 
 	before(function () {
@@ -40,7 +19,7 @@ describe('KVCWrite_Migrate', function () {
 	});
 	
 	before(function () {
-		return kTesting.uLaunch('FakeStorageNotConnected');
+		return uLaunch('FakeStorageNotConnected');
 	});
 	
 	before(function () {
@@ -64,7 +43,7 @@ describe('KVCWrite_Migrate', function () {
 		});
 
 		before(function () {
-			return kTesting.uLaunch('FakeCreateNoteV1');
+			return uLaunch('FakeCreateNoteV1');
 		});
 
 		before(function () {
@@ -72,7 +51,7 @@ describe('KVCWrite_Migrate', function () {
 		});
 		
 		before(function () {
-			return kTesting.uLaunch('FakeStorageSyncDone');
+			return uLaunch('FakeStorageSyncDone');
 		});
 		
 		before(function () {
@@ -86,7 +65,7 @@ describe('KVCWrite_Migrate', function () {
 		context('second time', function () {
 			
 			before(function () {
-				return kTesting.uLaunch('FakeStorageSyncDone');
+				return uLaunch('FakeStorageSyncDone');
 			});
 			
 			it('skips migration', function () {

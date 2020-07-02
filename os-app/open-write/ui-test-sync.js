@@ -1,26 +1,5 @@
 const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
-const kTesting = {
-	uSerial (inputData) {
-		return inputData.reduce(function (coll, e) {
-			return coll.then(e);
-		}, Promise.resolve());
-	},
-	uLaunch (inputData) {
-		return kTesting.uSerial([
-			function () {
-				return browser.pressButton('.OLSKAppToolbarLauncherButton');
-			},
-			function () {
-				return browser.fill('.LCHLauncherFilterInput', inputData);
-			},
-			function () {
-				return browser.click('.LCHLauncherPipeItem');
-			},
-		]);
-	},
-};
-
 describe('KVCWrite_Sync', function () {	
 
 	before(function() {
@@ -46,7 +25,7 @@ describe('KVCWrite_Sync', function () {
 		});
 
 		before(function () {
-			return kTesting.uLaunch('FakeOLSKChangeDelegateCreateNote');
+			return uLaunch('FakeOLSKChangeDelegateCreateNote');
 		});
 
 		it('adds item', function () {
@@ -68,7 +47,7 @@ describe('KVCWrite_Sync', function () {
 			});
 
 			before(function () {
-				return kTesting.uLaunch('FakeOLSKChangeDelegateCreateNote');
+				return uLaunch('FakeOLSKChangeDelegateCreateNote');
 			});
 
 			it('adds item', function () {
@@ -94,7 +73,7 @@ describe('KVCWrite_Sync', function () {
 		});
 
 		before(function () {
-			return kTesting.uLaunch('FakeOLSKChangeDelegateUpdateNote');
+			return uLaunch('FakeOLSKChangeDelegateUpdateNote');
 		});
 
 		it('updates item', function () {
@@ -120,7 +99,7 @@ describe('KVCWrite_Sync', function () {
 			});
 
 			before(function () {
-				return kTesting.uLaunch('FakeOLSKChangeDelegateUpdateNote');
+				return uLaunch('FakeOLSKChangeDelegateUpdateNote');
 			});
 
 			it('updates item', function () {
@@ -144,7 +123,7 @@ describe('KVCWrite_Sync', function () {
 			});
 
 			before(function () {
-				return kTesting.uLaunch('FakeOLSKChangeDelegateUpdateNote');
+				return uLaunch('FakeOLSKChangeDelegateUpdateNote');
 			});
 
 			it('updates detail', function () {
@@ -166,7 +145,7 @@ describe('KVCWrite_Sync', function () {
 		});
 
 		before(function () {
-			return kTesting.uLaunch('FakeEscapeWithoutSort');
+			return uLaunch('FakeEscapeWithoutSort');
 		});
 
 		before(function () {
@@ -178,7 +157,7 @@ describe('KVCWrite_Sync', function () {
 		});
 
 		before(function () {
-			return kTesting.uLaunch('FakeOLSKChangeDelegateDeleteNote');
+			return uLaunch('FakeOLSKChangeDelegateDeleteNote');
 		});
 
 		it('removes item', function () {
@@ -200,7 +179,7 @@ describe('KVCWrite_Sync', function () {
 			});
 
 			before(function () {
-				return kTesting.uLaunch('FakeOLSKChangeDelegateCreateNote');
+				return uLaunch('FakeOLSKChangeDelegateCreateNote');
 			});
 
 			before(function () {
@@ -208,7 +187,7 @@ describe('KVCWrite_Sync', function () {
 			});
 
 			before(function () {
-				return kTesting.uLaunch('FakeOLSKChangeDelegateDeleteNote');
+				return uLaunch('FakeOLSKChangeDelegateDeleteNote');
 			});
 
 			it('removes item', function () {
@@ -224,7 +203,7 @@ describe('KVCWrite_Sync', function () {
 		context('selected same', function () {
 			
 			before(function () {
-				return kTesting.uLaunch('FakeOLSKChangeDelegateCreateNote');
+				return uLaunch('FakeOLSKChangeDelegateCreateNote');
 			});
 
 			before(function () {
@@ -240,7 +219,7 @@ describe('KVCWrite_Sync', function () {
 			});
 
 			before(function () {
-				return kTesting.uLaunch('FakeOLSKChangeDelegateDeleteNote');
+				return uLaunch('FakeOLSKChangeDelegateDeleteNote');
 			});
 
 			it('removes item', function () {
@@ -270,7 +249,7 @@ describe('KVCWrite_Sync', function () {
 		});
 
 		before(function () {
-			return kTesting.uLaunch('FakeOLSKChangeDelegateConflictNote');
+			return uLaunch('FakeOLSKChangeDelegateConflictNote');
 		});
 
 		it('selects local', function () {
