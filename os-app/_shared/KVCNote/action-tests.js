@@ -67,18 +67,8 @@ describe('KVCNoteActionCreate', function test_KVCNoteActionCreate() {
 
 describe('KVCNoteActionUpdate', function test_KVCNoteActionUpdate() {
 
-	it('rejects if not object', async function() {
-		await rejects(mainModule.KVCNoteActionUpdate(KVCTestingStorageClient, null), /KVCErrorInputNotValid/);
-	});
-
-	it('returns object with KVCErrors if not valid', async function() {
-		deepEqual((await mainModule.KVCNoteActionUpdate(KVCTestingStorageClient, Object.assign(await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()), {
-			KVCNoteID: null,
-		}))).KVCErrors, {
-			KVCNoteID: [
-				'KVCErrorNotString',
-			],
-		});
+	it('rejects if not valid', async function() {
+		await rejects(mainModule.KVCNoteActionUpdate(KVCTestingStorageClient, {}), /KVCErrorInputNotValid/);
 	});
 
 	it('returns KVCNote', async function() {
@@ -99,6 +89,7 @@ describe('KVCNoteActionUpdate', function test_KVCNoteActionUpdate() {
 		let item = await mainModule.KVCNoteActionUpdate(KVCTestingStorageClient, Object.assign(kTesting.StubNoteObject(), {
 			KVCNoteID: 'alfa',
 			KVCNoteCreationDate: new Date(),
+			KVCNoteModificationDate: new Date(),
 		}));
 		deepEqual(item, Object.assign(kTesting.StubNoteObject(), {
 			KVCNoteID: item.KVCNoteID,
@@ -123,8 +114,7 @@ describe('KVCNoteActionDelete', function test_KVCNoteActionDelete() {
 	});
 
 	it('deletes KVCNote', async function() {
-		let itemID;
-		await mainModule.KVCNoteActionDelete(KVCTestingStorageClient, itemID = await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()));
+		await mainModule.KVCNoteActionDelete(KVCTestingStorageClient, await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()));
 		deepEqual(await mainModule.KVCNoteActionQuery(KVCTestingStorageClient, {}), []);
 	});
 
@@ -192,18 +182,8 @@ describe('KVCNoteActionQuery', function test_KVCNoteActionQuery() {
 
 describe('KVCNoteActionPublish', function test_KVCNoteActionPublish() {
 
-	it('rejects if not object', async function() {
-		await rejects(mainModule.KVCNoteActionPublish(KVCTestingStorageClient, null), /KVCErrorInputNotValid/);
-	});
-
-	it('returns object with KVCErrors if not valid', async function() {
-		deepEqual((await mainModule.KVCNoteActionPublish(KVCTestingStorageClient, Object.assign(await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()), {
-			KVCNoteID: null,
-		}))).KVCErrors, {
-			KVCNoteID: [
-				'KVCErrorNotString',
-			],
-		});
+	it('rejects if not valid', async function() {
+		await rejects(mainModule.KVCNoteActionPublish(KVCTestingStorageClient, {}), /KVCErrorInputNotValid/);
 	});
 
 	it('returns KVCNote', async function() {
@@ -258,18 +238,8 @@ describe('KVCNoteActionPublish', function test_KVCNoteActionPublish() {
 
 describe('KVCNoteActionRetract', function test_KVCNoteActionRetract() {
 
-	it('rejects if not object', async function() {
-		await rejects(mainModule.KVCNoteActionPublish(KVCTestingStorageClient, null), /KVCErrorInputNotValid/);
-	});
-
-	it('returns object with KVCErrors if not valid', async function() {
-		deepEqual((await mainModule.KVCNoteActionRetract(KVCTestingStorageClient, Object.assign(await mainModule.KVCNoteActionPublish(KVCTestingStorageClient, await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject())), {
-			KVCNoteID: null,
-		}))).KVCErrors, {
-			KVCNoteID: [
-				'KVCErrorNotString',
-			],
-		});
+	it('rejects if not valid', async function() {
+		await rejects(mainModule.KVCNoteActionPublish(KVCTestingStorageClient, {}), /KVCErrorInputNotValid/);
 	});
 
 	it('returns KVCNote', async function() {

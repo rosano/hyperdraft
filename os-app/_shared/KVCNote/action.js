@@ -27,7 +27,7 @@ const mod = {
 	},
 
 	async KVCNoteActionUpdate (storageClient, inputData) {
-		if (typeof inputData !== 'object' || inputData === null) {
+		if (KVCNoteModel.KVCNoteModelErrorsFor(inputData)) {
 			return Promise.reject(new Error('KVCErrorInputNotValid'));
 		}
 
@@ -37,6 +37,10 @@ const mod = {
 	},
 
 	async KVCNoteActionDelete (storageClient, inputData) {
+		if (KVCNoteModel.KVCNoteModelErrorsFor(inputData)) {
+			return Promise.reject(new Error('KVCErrorInputNotValid'));
+		}
+
 		await Promise.all((await KVCVersionAction.KVCVersionActionQuery(storageClient, {
 			KVCVersionNoteID: inputData.KVCNoteID,
 		})).map(function (e) {
@@ -71,7 +75,7 @@ const mod = {
 	},
 
 	async KVCNoteActionPublish (storageClient, inputData) {
-		if (typeof inputData !== 'object' || inputData === null) {
+		if (KVCNoteModel.KVCNoteModelErrorsFor(inputData)) {
 			return Promise.reject(new Error('KVCErrorInputNotValid'));
 		}
 
@@ -87,7 +91,7 @@ const mod = {
 	},
 
 	async KVCNoteActionRetract (storageClient, inputData) {
-		if (typeof inputData !== 'object' || inputData === null) {
+		if (KVCNoteModel.KVCNoteModelErrorsFor(inputData)) {
 			return Promise.reject(new Error('KVCErrorInputNotValid'));
 		}
 
