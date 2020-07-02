@@ -144,7 +144,15 @@ const mod = {
 			},
 
 			async _KVCNoteStoragePublicWrite (param1, param2) {
-				if (KVCNoteModel.KVCNoteModelErrorsFor(param1)) {
+				if (typeof param1 !== 'string') {
+					return Promise.reject(new Error('KVCErrorInputNotValid'));
+				}
+
+				if (param1[0] !== '/') {
+					return Promise.reject(new Error('KVCErrorInputNotValid'));
+				}
+
+				if (param1.slice(1).trim() === '') {
 					return Promise.reject(new Error('KVCErrorInputNotValid'));
 				}
 
@@ -152,15 +160,7 @@ const mod = {
 					return Promise.reject(new Error('KVCErrorInputNotValid'));
 				}
 
-				if (param2[0] !== '/') {
-					return Promise.reject(new Error('KVCErrorInputNotValid'));
-				}
-
-				if (param2.slice(1).trim() === '') {
-					return Promise.reject(new Error('KVCErrorInputNotValid'));
-				}
-
-				return await publicClient.storeFile('text/html', param2, param1.KVCNoteBody);
+				return await publicClient.storeFile('text/html', param1, param2);
 			},
 
 			async _KVCNoteStoragePublicDelete (inputData) {

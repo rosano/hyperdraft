@@ -79,7 +79,7 @@ describe('KVCNoteMetalDelete', function test_KVCNoteMetalDelete() {
 			KVCNotePublicID: 'charlie',
 		}));
 
-		await KVCNoteStorage.KVCNoteStoragePublicWrite(KVCTestingStorageClient, item, KVCNoteStorage.KVCNoteStoragePublicObjectPath(item));
+		await KVCNoteStorage.KVCNoteStoragePublicWrite(KVCTestingStorageClient, KVCNoteStorage.KVCNoteStoragePublicObjectPath(item), item.KVCNoteBody);
 
 		await mainModule.KVCNoteMetalDelete(KVCTestingStorageClient, await mainModule.KVCNoteMetalWrite(KVCTestingStorageClient, item));
 
