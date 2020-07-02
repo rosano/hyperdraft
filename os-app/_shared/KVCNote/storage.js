@@ -211,7 +211,7 @@ const mod = {
 		};
 	},
 
-	KVCNoteStorageObjectPathPublic (inputData) {
+	KVCNoteStoragePublicObjectPath (inputData) {
 		if (KVCNoteModel.KVCNoteModelErrorsFor(inputData)) {
 			throw new Error('KVCErrorInputNotValid');
 		}

@@ -83,7 +83,7 @@ const mod = {
 			inputData.KVCNotePublicID = uniqueID().toLowerCase();
 		}
 
-		await KVCNoteStorage.KVCNoteStoragePublicWrite(storageClient, inputData, KVCNoteStorage.KVCNoteStorageObjectPathPublic(inputData));
+		await KVCNoteStorage.KVCNoteStoragePublicWrite(storageClient, inputData, KVCNoteStorage.KVCNoteStoragePublicObjectPath(inputData));
 
 		return await mod.KVCNoteActionUpdate(storageClient, Object.assign(inputData, {
 			KVCNotePublishStatusIsPublished: true,
@@ -95,7 +95,7 @@ const mod = {
 			return Promise.reject(new Error('KVCErrorInputNotValid'));
 		}
 
-		await KVCNoteStorage.KVCNoteStoragePublicDelete(storageClient, KVCNoteStorage.KVCNoteStorageObjectPathPublic(inputData));
+		await KVCNoteStorage.KVCNoteStoragePublicDelete(storageClient, KVCNoteStorage.KVCNoteStoragePublicObjectPath(inputData));
 
 		return await mod.KVCNoteActionUpdate(storageClient, Object.assign(inputData, {
 			KVCNotePublishStatusIsPublished: false,

@@ -123,17 +123,17 @@ describe('KVCNoteStorageMatch', function test_KVCNoteStorageMatch() {
 
 });
 
-describe('KVCNoteStorageObjectPathPublic', function test_KVCNoteStorageObjectPathPublic() {
+describe('KVCNoteStoragePublicObjectPath', function test_KVCNoteStoragePublicObjectPath() {
 
 	it('throws if not valid', async function() {
 		throws(function() {
-			mainModule.KVCNoteStorageObjectPathPublic({});
+			mainModule.KVCNoteStoragePublicObjectPath({});
 		}, /KVCErrorInputNotValid/);
 	});
 
 	it('throws if no KVCNotePublicID', async function() {
 		throws(function() {
-			mainModule.KVCNoteStorageObjectPathPublic(kTesting.StubNoteObjectValid());
+			mainModule.KVCNoteStoragePublicObjectPath(kTesting.StubNoteObjectValid());
 		}, /KVCErrorInputNotValid/);
 	});
 
@@ -142,7 +142,7 @@ describe('KVCNoteStorageObjectPathPublic', function test_KVCNoteStorageObjectPat
 			KVCNotePublicID: 'charlie',
 		});
 
-		deepEqual(await mainModule.KVCNoteStorageObjectPathPublic(item), '/' + item.KVCNotePublicID);
+		deepEqual(await mainModule.KVCNoteStoragePublicObjectPath(item), '/' + item.KVCNotePublicID);
 	});
 
 });
@@ -166,9 +166,9 @@ describe('KVCNoteStoragePublicWrite', function test_KVCNoteStoragePublicWrite() 
 	});
 
 	it('writes file to public folder', async function() {
-		await mainModule.KVCNoteStoragePublicWrite(KVCTestingStorageClient, item, mainModule.KVCNoteStorageObjectPathPublic(item));
+		await mainModule.KVCNoteStoragePublicWrite(KVCTestingStorageClient, item, mainModule.KVCNoteStoragePublicObjectPath(item));
 
-		deepEqual((await KVCTestingStorageClient.wikiavec.__DEBUG._OLSKRemoteStoragePublicClient().getFile(mainModule.KVCNoteStorageObjectPathPublic(item))).data, 'bravo');
+		deepEqual((await KVCTestingStorageClient.wikiavec.__DEBUG._OLSKRemoteStoragePublicClient().getFile(mainModule.KVCNoteStoragePublicObjectPath(item))).data, 'bravo');
 	});
 
 });
@@ -189,11 +189,11 @@ describe('KVCNoteStoragePublicDelete', function test_KVCNoteStoragePublicDelete(
 		const item = Object.assign(kTesting.StubNoteObjectValid(), {
 			KVCNotePublicID: 'charlie',
 		});
-		await mainModule.KVCNoteStoragePublicWrite(KVCTestingStorageClient, item, mainModule.KVCNoteStorageObjectPathPublic(item));
+		await mainModule.KVCNoteStoragePublicWrite(KVCTestingStorageClient, item, mainModule.KVCNoteStoragePublicObjectPath(item));
 
-		await mainModule.KVCNoteStoragePublicDelete(KVCTestingStorageClient, mainModule.KVCNoteStorageObjectPathPublic(item));
+		await mainModule.KVCNoteStoragePublicDelete(KVCTestingStorageClient, mainModule.KVCNoteStoragePublicObjectPath(item));
 
-		deepEqual((await KVCTestingStorageClient.wikiavec.__DEBUG._OLSKRemoteStoragePublicClient().getFile(mainModule.KVCNoteStorageObjectPathPublic(item))).data, undefined);
+		deepEqual((await KVCTestingStorageClient.wikiavec.__DEBUG._OLSKRemoteStoragePublicClient().getFile(mainModule.KVCNoteStoragePublicObjectPath(item))).data, undefined);
 	});
 
 });
@@ -209,13 +209,13 @@ describe('KVCNoteStoragePublicURL', function test_KVCNoteStoragePublicURL() {
 	});
 
 	it('returns undefined', async function() {
-		deepEqual(await mainModule.KVCNoteStoragePublicURL(KVCTestingStorageClient, mainModule.KVCNoteStorageObjectPathPublic(item)), undefined);
+		deepEqual(await mainModule.KVCNoteStoragePublicURL(KVCTestingStorageClient, mainModule.KVCNoteStoragePublicObjectPath(item)), undefined);
 	});
 
 	it.skip('returns url if connected', async function() {
-		await mainModule.KVCNoteStoragePublicWrite(KVCTestingStorageClient, item, mainModule.KVCNoteStorageObjectPathPublic(item));
+		await mainModule.KVCNoteStoragePublicWrite(KVCTestingStorageClient, item, mainModule.KVCNoteStoragePublicObjectPath(item));
 
-		deepEqual(await mainModule.KVCNoteStoragePublicURL(KVCTestingStorageClient, mainModule.KVCNoteStorageObjectPathPublic(item)), mainModule.KVCNoteStorageObjectPathPublic(item));
+		deepEqual(await mainModule.KVCNoteStoragePublicURL(KVCTestingStorageClient, mainModule.KVCNoteStoragePublicObjectPath(item)), mainModule.KVCNoteStoragePublicObjectPath(item));
 	});
 
 });
