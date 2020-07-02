@@ -160,7 +160,7 @@ import KVCWriteInput from '../KVCWriteInput/main.svelte';
 			<div class="KVCWriteDetailToolbarJumpButtonImage">{@html _KVCWriteJump }</div>
 		</button>
 
-		{#if !KVCWriteDetailConnected }
+		{#if !_KVCWriteDetailPublishIsDisabled && !KVCWriteDetailConnected }
 			<button class="KVCWriteDetailToolbarConnectButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarPublishButtonText') } on:click={ () => window.confirm(OLSKLocalized('KVCWriteDetailConnectPromptText')) && KVCWriteDetailDispatchConnect() }>
 				<div class="KVCWriteDetailToolbarConnectButtonImage">{@html _KVCWritePublish }</div>
 			</button>

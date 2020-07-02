@@ -54,8 +54,12 @@ describe('KVCWrite_Ref', function () {
 				return browser.pressButton('.KVCWriteMasterCreateButton');
 			});
 
-			it('shows KVCWriteDetailToolbarPublishButton', function () {
-				browser.assert.elements(KVCWriteDetailToolbarPublishButton, 1);
+			before(function () {
+				return browser.pressButton('.KVCWriteMasterCreateButton');
+			});
+
+			it('shows KVCWriteDetailToolbarConnectButton', function () {
+				browser.assert.elements(KVCWriteDetailToolbarConnectButton, 1);
 			});
 		
 		});
@@ -70,8 +74,8 @@ describe('KVCWrite_Ref', function () {
 				return browser.pressButton('.KVCWriteMasterCreateButton');
 			});
 
-			it('hides KVCWriteDetailToolbarPublishButton', function () {
-				browser.assert.elements('.KVCWriteDetailToolbarPublishButton', 0);
+			it('hides KVCWriteDetailToolbarConnectButton', function () {
+				browser.assert.elements('.KVCWriteDetailToolbarConnectButton', 0);
 			});
 		
 		});		

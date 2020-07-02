@@ -65,6 +65,8 @@ const mod = {
 
 	_ValueDidMigrate: false,
 
+	_ValueStorageIsConnected: false,
+
 	// DATA
 
 	DataIsMobile () {
@@ -440,6 +442,12 @@ const mod = {
 						mod.StorageSyncDone();
 					},
 				},
+				{
+					LCHRecipeName: 'FakeStorageConnection',
+					LCHRecipeCallback: function FakeStorageConnection () {
+						mod._ValueStorageIsConnected = true;
+					},
+				},
 			]);
 		}
 		
@@ -501,6 +509,10 @@ const mod = {
 
 	KVCWriteDetailDispatchJump (inputData) {
 		mod.ControlNoteJump(inputData);
+	},
+
+	KVCWriteDetailDispatchConnect () {
+		mod._ValueStorageToolbarHidden = false;
 	},
 
 	KVCWriteDetailDispatchPublish () {
@@ -583,6 +595,10 @@ const mod = {
 
 	async OLSKChangeDelegateConflictNote (inputData) {
 		return mod.OLSKChangeDelegateUpdateNote(await KVCNoteAction.KVCNoteActionUpdate(mod._ValueStorageClient, OLSKRemoteStorage.OLSKRemoteStorageChangeDelegateConflictSelectRecent(inputData)));
+	},
+
+	StorageConnected () {
+		mod._ValueStorageIsConnected = true;
 	},
 
 	StorageNotConnected () {
@@ -692,6 +708,8 @@ const mod = {
 	},
 
 	async SetupStorageNotifications () {
+		mod._ValueStorageClient.on('connected', mod.StorageConnected);
+
 		mod._ValueStorageClient.on('not-connected', mod.StorageNotConnected);
 
 		mod._ValueStorageClient.on('sync-done', mod.StorageSyncDone);
@@ -773,8 +791,10 @@ import OLSKStorageWidget from 'OLSKStorageWidget';
 		/>
 	
 	<KVCWriteDetail
+		KVCWriteDetailConnected={ mod._ValueStorageIsConnected }
 		KVCWriteDetailDispatchBack={ mod.KVCWriteDetailDispatchBack }
 		KVCWriteDetailDispatchJump={ mod.KVCWriteDetailDispatchJump }
+		KVCWriteDetailDispatchConnect={ mod.KVCWriteDetailDispatchConnect }
 		KVCWriteDetailDispatchPublish={ mod.KVCWriteDetailDispatchPublish }
 		KVCWriteDetailDispatchRetract={ mod.KVCWriteDetailDispatchRetract }
 		KVCWriteDetailDispatchVersions={ mod.KVCWriteDetailDispatchVersions }

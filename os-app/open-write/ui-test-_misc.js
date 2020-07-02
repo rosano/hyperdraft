@@ -393,6 +393,22 @@ describe('KVCWrite_Misc', function () {
 	context('publish', function test_publish () {
 		
 		before(function () {
+			return browser.click('.KVCWriteDetailToolbarConnectButton');
+		});
+
+		before(function () {
+			return browser.pressButton('.OLSKAppToolbarLauncherButton');
+		});
+
+		before(function () {
+			return browser.fill('.LCHLauncherFilterInput', 'FakeStorageConnection');
+		});
+
+		before(function () {
+			return browser.click('.LCHLauncherPipeItem');
+		});
+
+		before(function () {
 			return browser.click('.KVCWriteDetailToolbarPublishButton');
 		});
 

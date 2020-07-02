@@ -185,4 +185,20 @@ describe('KVCWrite_Access', function () {
 
 	});
 
+	context('FakeStorageConnection', function test_FakeStorageConnection() {
+		
+		before(function () {
+			return browser.pressButton('.OLSKAppToolbarLauncherButton');
+		});
+
+		before(function () {
+			return browser.fill('.LCHLauncherFilterInput', 'FakeStorageConnection');
+		});
+
+		it('shows LCHLauncherPipeItem', function () {
+			browser.assert.elements('.LCHLauncherPipeItem', 1);
+		});
+
+	});
+
 });
