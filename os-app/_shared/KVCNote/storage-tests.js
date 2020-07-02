@@ -197,3 +197,25 @@ describe('KVCNoteStoragePublicDelete', function test_KVCNoteStoragePublicDelete(
 	});
 
 });
+
+describe('KVCNoteStoragePublicURL', function test_KVCNoteStoragePublicURL() {
+
+	const item = Object.assign(kTesting.StubNoteObjectValid(), {
+		KVCNotePublicID: 'charlie',
+	});
+
+	it('rejects if not object path', async function() {
+		await rejects(mainModule.KVCNoteStoragePublicURL(KVCTestingStorageClient, '/'), /KVCErrorInputNotValid/);
+	});
+
+	it('returns undefined', async function() {
+		deepEqual(await mainModule.KVCNoteStoragePublicURL(KVCTestingStorageClient, mainModule.KVCNoteStorageObjectPathPublic(item)), undefined);
+	});
+
+	it.skip('returns url if connected', async function() {
+		await mainModule.KVCNoteStoragePublicWrite(KVCTestingStorageClient, item, mainModule.KVCNoteStorageObjectPathPublic(item));
+
+		deepEqual(await mainModule.KVCNoteStoragePublicURL(KVCTestingStorageClient, mainModule.KVCNoteStorageObjectPathPublic(item)), mainModule.KVCNoteStorageObjectPathPublic(item));
+	});
+
+});
