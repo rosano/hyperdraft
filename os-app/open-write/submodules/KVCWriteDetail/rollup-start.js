@@ -41,6 +41,9 @@ mod.LifecycleModuleDidLoad();
 const KVCWriteDetail = new RollupStart({
 	target: document.body,
 	props: Object.assign({
+		KVCWriteDetailPublicLinkFor: (function _KVCWriteDetailPublicLinkFor (inputData) {
+			return '[public]/' + inputData.KVCNotePublicID;
+		}),
 		KVCWriteDetailDispatchBack: (function _KVCWriteDetailDispatchBack () {
 			window.TestKVCWriteDetailDispatchBack.innerHTML = parseInt(window.TestKVCWriteDetailDispatchBack.innerHTML) + 1;
 		}),

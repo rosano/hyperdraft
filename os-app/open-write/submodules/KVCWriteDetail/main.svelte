@@ -1,5 +1,6 @@
 <script>
 export let KVCWriteDetailConnected = false;
+export let KVCWriteDetailPublicLinkFor;
 export let KVCWriteDetailDispatchBack;
 export let KVCWriteDetailDispatchJump;
 export let KVCWriteDetailDispatchConnect;
@@ -174,9 +175,7 @@ import KVCWriteInput from '../KVCWriteInput/main.svelte';
 			{/if}
 
 			{#if mod._ValueItem.KVCNotePublishStatusIsPublished }
-				<a class="KVCWriteDetailToolbarPublicLink" href={ window.OLSKCanonicalFor('KVCRefReadRoute', {
-					kvc_note_public_id: mod._ValueItem.KVCNotePublicID,
-				}) } target="_blank">{ OLSKLocalized('KVCWriteDetailToolbarPublicLinkText') }</a>
+				<a class="KVCWriteDetailToolbarPublicLink" href={ KVCWriteDetailPublicLinkFor(mod._ValueItem) } target="_blank">{ OLSKLocalized('KVCWriteDetailToolbarPublicLinkText') }</a>
 					
 				<button class="KVCWriteDetailToolbarRetractButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarRetractButtonText') } on:click={ () => KVCWriteDetailDispatchRetract() }>
 					<div class="KVCWriteDetailToolbarRetractButtonImage">{@html _KVCWriteRetract }</div>
