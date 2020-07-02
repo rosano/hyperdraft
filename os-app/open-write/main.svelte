@@ -480,7 +480,7 @@ const mod = {
 		return KVCParser.KVCParserSnippetForPlaintext(KVCParser.KVCParserBodyForPlaintext(inputData));
 	},
 
-	KVCWriteDetailPublicLinkFor (inputData) {
+	KVCWriteDetailPublicURLFor (inputData) {
 		if (OLSK_TESTING_BEHAVIOUR() && mod._ValueStorageIsConnected) {
 			return '/OLSK_TESTING_BEHAVIOUR';
 		}
@@ -796,7 +796,7 @@ import OLSKStorageWidget from 'OLSKStorageWidget';
 	
 	<KVCWriteDetail
 		KVCWriteDetailConnected={ mod._ValueStorageIsConnected }
-		KVCWriteDetailPublicLinkFor={ mod.KVCWriteDetailPublicLinkFor }
+		KVCWriteDetailPublicURLFor={ mod.KVCWriteDetailPublicURLFor }
 		KVCWriteDetailDispatchBack={ mod.KVCWriteDetailDispatchBack }
 		KVCWriteDetailDispatchJump={ mod.KVCWriteDetailDispatchJump }
 		KVCWriteDetailDispatchConnect={ mod.KVCWriteDetailDispatchConnect }

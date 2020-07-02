@@ -404,7 +404,7 @@ describe('KVCWrite_Misc', function () {
 			return browser.pressButton('.KVCWriteDetailToolbarPublishButton');
 		});
 
-		it('sets KVCWriteDetailPublicLinkFor', function () {
+		it('sets KVCWriteDetailPublicURLFor', function () {
 			browser.assert.attribute('.KVCWriteDetailToolbarPublicLink', 'href', '/OLSK_TESTING_BEHAVIOUR');
 		});
 
