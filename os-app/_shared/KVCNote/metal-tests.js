@@ -74,6 +74,19 @@ describe('KVCNoteMetalDelete', function test_KVCNoteMetalDelete() {
 		deepEqual(await mainModule.KVCNoteMetalList(KVCTestingStorageClient), {});
 	});
 
+	it('deletes file from public folder', async function() {
+		const item = await mainModule.KVCNoteMetalWrite(KVCTestingStorageClient, Object.assign(kTesting.StubNoteObjectValid(), {
+			KVCNotePublicID: 'charlie',
+		}));
+
+		await KVCNoteStorage.KVCNoteStoragePublicWrite(KVCTestingStorageClient, item, KVCNoteStorage.KVCNoteStoragePublicObjectPath(item));
+
+		await mainModule.KVCNoteMetalDelete(KVCTestingStorageClient, await mainModule.KVCNoteMetalWrite(KVCTestingStorageClient, item));
+
+
+		deepEqual((await KVCTestingStorageClient.wikiavec.__DEBUG._OLSKRemoteStoragePublicClient().getFile(KVCNoteStorage.KVCNoteStoragePublicObjectPath(item))).data, undefined);
+	});
+
 });
 
 describe('KVCNoteMetalMigrateV1', function test_KVCNoteMetalMigrateV1() {

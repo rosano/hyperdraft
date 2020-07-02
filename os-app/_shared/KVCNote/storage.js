@@ -123,7 +123,11 @@ const mod = {
 				return OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(inputData);
 			},
 			
-			KVCStorageDelete (inputData) {
+			async KVCStorageDelete (inputData) {
+				if (inputData.KVCNotePublicID) {
+					await OLSKRemoteStorageCollectionExports._KVCNoteStoragePublicDelete(mod.KVCNoteStoragePublicObjectPath(inputData));
+				}
+
 				return privateClient.remove(mod.KVCNoteStorageObjectPath(inputData));
 			},
 
