@@ -154,7 +154,7 @@ describe('KVCNoteStoragePublicWrite', function test_KVCNoteStoragePublicWrite() 
 	});
 
 	it('rejects if not valid', async function() {
-		await rejects(mainModule.KVCNoteStoragePublicWrite(KVCTestingStorageClient, {}, 'alfa'), /KVCErrorInputNotValid/);
+		await rejects(mainModule.KVCNoteStoragePublicWrite(KVCTestingStorageClient, {}, '/alfa'), /KVCErrorInputNotValid/);
 	});
 
 	it('rejects if not object path', async function() {
