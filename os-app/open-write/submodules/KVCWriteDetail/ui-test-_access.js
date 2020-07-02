@@ -8,6 +8,8 @@ Object.entries({
 	KVCWriteDetailToolbarBackButtonImage: '.KVCWriteDetailToolbarBackButtonImage',
 	KVCWriteDetailToolbarJumpButton: '.KVCWriteDetailToolbarJumpButton',
 	KVCWriteDetailToolbarJumpButtonImage: '.KVCWriteDetailToolbarJumpButtonImage',
+	KVCWriteDetailToolbarConnectButton: '.KVCWriteDetailToolbarConnectButton',
+	KVCWriteDetailToolbarConnectButtonImage: '.KVCWriteDetailToolbarConnectButtonImage',
 	KVCWriteDetailToolbarPublishButton: '.KVCWriteDetailToolbarPublishButton',
 	KVCWriteDetailToolbarPublishButtonImage: '.KVCWriteDetailToolbarPublishButtonImage',
 	KVCWriteDetailToolbarPublicLink: '.KVCWriteDetailToolbarPublicLink',
@@ -81,12 +83,20 @@ describe('KVCWriteDetail_Access', function () {
 			browser.assert.elements(KVCWriteDetailToolbarJumpButtonImage, 1);
 		});
 
-		it('shows KVCWriteDetailToolbarPublishButton', function () {
-			browser.assert.elements(KVCWriteDetailToolbarPublishButton, 1);
+		it('shows KVCWriteDetailToolbarConnectButton', function () {
+			browser.assert.elements(KVCWriteDetailToolbarConnectButton, 1);
 		});
 
-		it('shows KVCWriteDetailToolbarPublishButtonImage', function () {
-			browser.assert.elements(KVCWriteDetailToolbarPublishButtonImage, 1);
+		it('shows KVCWriteDetailToolbarConnectButtonImage', function () {
+			browser.assert.elements(KVCWriteDetailToolbarConnectButtonImage, 1);
+		});
+
+		it('hide KVCWriteDetailToolbarPublishButton', function () {
+			browser.assert.elements(KVCWriteDetailToolbarPublishButton, 0);
+		});
+
+		it('hide KVCWriteDetailToolbarPublishButtonImage', function () {
+			browser.assert.elements(KVCWriteDetailToolbarPublishButtonImage, 0);
 		});
 
 		it('hides KVCWriteDetailToolbarPublicLink', function () {
@@ -119,32 +129,54 @@ describe('KVCWriteDetail_Access', function () {
 		
 	});
 
-	context('KVCNotePublishStatusIsPublished', function() {
-
+	context('KVCWriteDetailConnected', function () {
+		
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
 				KVCWriteDetailItem: JSON.stringify({
 					KVCNoteBody: 'alfa',
-					KVCNotePublishStatusIsPublished: true,
-					KVCNotePublicID: 'bravo',
 				}),
+				KVCWriteDetailConnected: true,
 			});
 		});
 
-		it('hides KVCWriteDetailToolbarPublishButton', function () {
-			browser.assert.elements(KVCWriteDetailToolbarPublishButton, 0);
+		it('shows KVCWriteDetailToolbarPublishButton', function () {
+			browser.assert.elements(KVCWriteDetailToolbarPublishButton, 1);
 		});
 
-		it('shows KVCWriteDetailToolbarPublicLink', function () {
-			browser.assert.elements(KVCWriteDetailToolbarPublicLink, 1);
+		it('shows KVCWriteDetailToolbarPublishButtonImage', function () {
+			browser.assert.elements(KVCWriteDetailToolbarPublishButtonImage, 1);
 		});
 
-		it('shows KVCWriteDetailToolbarRetractButton', function () {
-			browser.assert.elements(KVCWriteDetailToolbarRetractButton, 1);
-		});
+		context('KVCNotePublishStatusIsPublished', function() {
 
-		it('shows KVCWriteDetailToolbarRetractButtonImage', function () {
-			browser.assert.elements(KVCWriteDetailToolbarRetractButtonImage, 1);
+			before(function() {
+				return browser.OLSKVisit(kDefaultRoute, {
+					KVCWriteDetailItem: JSON.stringify({
+						KVCNoteBody: 'alfa',
+						KVCNotePublishStatusIsPublished: true,
+						KVCNotePublicID: 'bravo',
+					}),
+					KVCWriteDetailConnected: true,
+				});
+			});
+
+			it('hides KVCWriteDetailToolbarPublishButton', function () {
+				browser.assert.elements(KVCWriteDetailToolbarPublishButton, 0);
+			});
+
+			it('shows KVCWriteDetailToolbarPublicLink', function () {
+				browser.assert.elements(KVCWriteDetailToolbarPublicLink, 1);
+			});
+
+			it('shows KVCWriteDetailToolbarRetractButton', function () {
+				browser.assert.elements(KVCWriteDetailToolbarRetractButton, 1);
+			});
+
+			it('shows KVCWriteDetailToolbarRetractButtonImage', function () {
+				browser.assert.elements(KVCWriteDetailToolbarRetractButtonImage, 1);
+			});
+
 		});
 
 	});

@@ -27,8 +27,8 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 				browser.assert.attribute(KVCWriteDetailToolbarJumpButton, 'title', uLocalized('KVCWriteDetailToolbarJumpButtonText'));
 			});
 
-			it('localizes KVCWriteDetailToolbarPublishButton', function () {
-				browser.assert.attribute(KVCWriteDetailToolbarPublishButton, 'title', uLocalized('KVCWriteDetailToolbarPublishButtonText'));
+			it('localizes KVCWriteDetailToolbarConnectButton', function () {
+				browser.assert.attribute(KVCWriteDetailToolbarConnectButton, 'title', uLocalized('KVCWriteDetailToolbarPublishButtonText'));
 			});
 
 			it('localizes KVCWriteDetailToolbarVersionsButton', function () {
@@ -37,6 +37,16 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 
 			it('localizes KVCWriteDetailToolbarDiscardButton', function () {
 				browser.assert.attribute(KVCWriteDetailToolbarDiscardButton, 'title', uLocalized('KVCWriteDetailToolbarDiscardButtonText'));
+			});
+
+			context('connect', function () {
+			
+				it('localizes KVCWriteDetailConnectPrompt', function() {
+					browser.assert.OLSKConfirmQuestion(function () {
+						return browser.pressButton(KVCWriteDetailToolbarConnectButton);
+					}, uLocalized('KVCWriteDetailConnectPromptText'));
+				});
+		
 			});
 
 			context('discard', function () {
@@ -49,25 +59,44 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 		
 			});
 
-			context('KVCNotePublishStatusIsPublished', function() {
+			context('KVCWriteDetailConnected', function() {
 
 				before(function() {
 					return browser.OLSKVisit(kDefaultRoute, {
 						OLSKRoutingLanguage: languageCode,
 						KVCWriteDetailItem: JSON.stringify({
 							KVCNoteBody: 'alfa',
-							KVCNotePublishStatusIsPublished: true,
-							KVCNotePublicID: 'bravo',
 						}),
+						KVCWriteDetailConnected: true,
 					});
 				});
 
-				it('localizes KVCWriteDetailToolbarPublicLink', function () {
-					browser.assert.text(KVCWriteDetailToolbarPublicLink, uLocalized('KVCWriteDetailToolbarPublicLinkText'));
+				it('localizes KVCWriteDetailToolbarPublishButton', function () {
+					browser.assert.attribute(KVCWriteDetailToolbarPublishButton, 'title', uLocalized('KVCWriteDetailToolbarPublishButtonText'));
 				});
 
-				it('localizes KVCWriteDetailToolbarRetractButton', function () {
-					browser.assert.attribute(KVCWriteDetailToolbarRetractButton, 'title', uLocalized('KVCWriteDetailToolbarRetractButtonText'));
+				context('KVCNotePublishStatusIsPublished', function() {
+
+					before(function() {
+						return browser.OLSKVisit(kDefaultRoute, {
+							OLSKRoutingLanguage: languageCode,
+							KVCWriteDetailItem: JSON.stringify({
+								KVCNoteBody: 'alfa',
+								KVCNotePublishStatusIsPublished: true,
+								KVCNotePublicID: 'bravo',
+							}),
+							KVCWriteDetailConnected: true,
+						});
+					});
+
+					it('localizes KVCWriteDetailToolbarPublicLink', function () {
+						browser.assert.text(KVCWriteDetailToolbarPublicLink, uLocalized('KVCWriteDetailToolbarPublicLinkText'));
+					});
+
+					it('localizes KVCWriteDetailToolbarRetractButton', function () {
+						browser.assert.attribute(KVCWriteDetailToolbarRetractButton, 'title', uLocalized('KVCWriteDetailToolbarRetractButtonText'));
+					});
+
 				});
 
 			});

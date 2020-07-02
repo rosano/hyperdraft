@@ -205,8 +205,77 @@ describe('KVCWriteDetail_Misc', function () {
 	
 	});
 
+	describe('KVCWriteDetailToolbarConnectButton', function test_KVCWriteDetailToolbarConnectButton () {
+		
+		it('classes OLSKLayoutButtonNoStyle', function () {
+			browser.assert.hasClass(KVCWriteDetailToolbarConnectButton, 'OLSKLayoutButtonNoStyle');
+		});
+
+		it('classes OLSKLayoutElementTappable', function () {
+			browser.assert.hasClass(KVCWriteDetailToolbarConnectButton, 'OLSKLayoutElementTappable');
+		});
+
+		it('classes OLSKToolbarButton', function () {
+			browser.assert.hasClass(KVCWriteDetailToolbarConnectButton, 'OLSKToolbarButton');
+		});
+
+		context('click', function () {
+
+			context('cancel', function () {
+				
+				before(function () {
+					browser.assert.text('#TestKVCWriteDetailDispatchConnect', '0');
+				});
+
+				return browser.OLSKConfirm(function () {
+					return browser.pressButton(KVCWriteDetailToolbarConnectButton);
+				}, function (dialog) {
+					dialog.response = false;
+
+					return dialog;
+				});
+
+				it('does nothing', function () {
+					browser.assert.text('#TestKVCWriteDetailDispatchConnect', '0');
+				});
+			
+			});
+			
+			context('confirm', function () {
+				
+				before(function () {
+					return browser.pressButton(KVCWriteDetailToolbarConnectButton);
+				});
+
+				it('sends KVCWriteDetailDispatchConnect', function () {
+					browser.assert.text('#TestKVCWriteDetailDispatchConnect', '1');
+				});
+			
+			});
+
+		});
+	
+	});
+
+	describe('KVCWriteDetailToolbarConnectButtonImage', function test_KVCWriteDetailToolbarConnectButtonImage () {
+
+		it('sets src', function () {
+			browser.assert.elements(`${ KVCWriteDetailToolbarConnectButtonImage } #_KVCWritePublish`, 1);
+		});
+	
+	});
+
 	describe('KVCWriteDetailToolbarPublishButton', function test_KVCWriteDetailToolbarPublishButton () {
 		
+		before(function() {
+			return browser.OLSKVisit(kDefaultRoute, {
+				KVCWriteDetailItem: JSON.stringify({
+					KVCNoteBody: 'alfa',
+				}),
+				KVCWriteDetailConnected: true,
+			});
+		});
+
 		it('classes OLSKLayoutButtonNoStyle', function () {
 			browser.assert.hasClass(KVCWriteDetailToolbarPublishButton, 'OLSKLayoutButtonNoStyle');
 		});
@@ -254,6 +323,7 @@ describe('KVCWriteDetail_Misc', function () {
 					KVCNotePublishStatusIsPublished: true,
 					KVCNotePublicID: 'bravo',
 				}),
+				KVCWriteDetailConnected: true,
 			});
 		});
 
@@ -268,16 +338,6 @@ describe('KVCWriteDetail_Misc', function () {
 	});
 
 	describe('KVCWriteDetailToolbarRetractButton', function test_KVCWriteDetailToolbarRetractButton () {
-
-		before(function() {
-			return browser.OLSKVisit(kDefaultRoute, {
-				KVCWriteDetailItem: JSON.stringify({
-					KVCNoteBody: 'alfa',
-					KVCNotePublishStatusIsPublished: true,
-					KVCNotePublicID: 'bravo',
-				}),
-			});
-		});
 
 		it('classes OLSKLayoutButtonNoStyle', function () {
 			browser.assert.hasClass(KVCWriteDetailToolbarRetractButton, 'OLSKLayoutButtonNoStyle');

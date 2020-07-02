@@ -5,4 +5,5 @@ KVCWriteDetailToolbarPublicLinkText: Public
 KVCWriteDetailToolbarRetractButtonText: Retract
 KVCWriteDetailToolbarVersionsButtonText: Versions
 KVCWriteDetailToolbarDiscardButtonText: Discard
+KVCWriteDetailConnectPromptText: Connect your storage to publish. Would you like to do this now?
 KVCWriteDetailDiscardPromptText: Are you sure?
