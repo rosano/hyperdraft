@@ -77,13 +77,19 @@ const KVCVersionStorage = require('./os-app/_shared/KVCVersion/storage.js').defa
 (function KVCMochaStubs() {
 	Object.entries({
 		uSerial (inputData) {
+			return inputData.reduce(async function (coll, e) {
+				return e.then(Array.prototype.concat.bind(await coll));
+			}, Promise.resolve([]));
+		},
+
+		uSerial2 (inputData) {
 			return inputData.reduce(function (coll, e) {
 				return coll.then(e);
 			}, Promise.resolve());
 		},
 
 		uLaunch (inputData) {
-			return uSerial([
+			return uSerial2([
 				function () {
 					return browser.pressButton('.OLSKAppToolbarLauncherButton');
 				},
