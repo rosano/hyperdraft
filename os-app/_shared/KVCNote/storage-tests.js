@@ -161,7 +161,7 @@ describe('KVCNoteStoragePublicWrite', function test_KVCNoteStoragePublicWrite() 
 		await rejects(mainModule.KVCNoteStoragePublicWrite(KVCTestingStorageClient, kTesting.StubNoteObjectValid(), '/'), /KVCErrorInputNotValid/);
 	});
 
-	it('returns public url', async function() {
+	it('returns undefined', async function() {
 		deepEqual(await mainModule.KVCNoteStoragePublicWrite(KVCTestingStorageClient, kTesting.StubNoteObjectValid(), '/alfa'), undefined);
 	});
 

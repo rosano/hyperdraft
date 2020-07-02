@@ -160,9 +160,7 @@ const mod = {
 					return Promise.reject(new Error('KVCErrorInputNotValid'));
 				}
 
-				await publicClient.storeFile('text/html', param2, param1.KVCNoteBody);
-
-				return publicClient.getItemURL(param2);
+				return await publicClient.storeFile('text/html', param2, param1.KVCNoteBody);
 			},
 
 			async _KVCNoteStoragePublicDelete (inputData) {
