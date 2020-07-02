@@ -380,17 +380,37 @@ describe('KVCWriteDetail_Misc', function () {
 		});
 
 		context('click', function () {
-			
-			before(function () {
-				browser.assert.text('#TestKVCWriteDetailDispatchDiscard', '0');
-			});
-			
-			before(function () {
-				return browser.pressButton(KVCWriteDetailToolbarDiscardButton);
-			});
 
-			it('sends KVCWriteDetailDispatchDiscard', function () {
-				browser.assert.text('#TestKVCWriteDetailDispatchDiscard', '1');
+			context('cancel', function () {
+				
+				before(function () {
+					browser.assert.text('#TestKVCWriteDetailDispatchDiscard', '0');
+				});
+
+				return browser.OLSKConfirm(function () {
+					return browser.pressButton(KVCWriteDetailToolbarDiscardButton);
+				}, function (dialog) {
+					dialog.response = false;
+
+					return dialog;
+				});
+
+				it('does nothing', function () {
+					browser.assert.text('#TestKVCWriteDetailDispatchDiscard', '0');
+				});
+			
+			});
+			
+			context('confirm', function () {
+				
+				before(function () {
+					return browser.pressButton(KVCWriteDetailToolbarDiscardButton);
+				});
+
+				it('sends KVCWriteDetailDispatchDiscard', function () {
+					browser.assert.text('#TestKVCWriteDetailDispatchDiscard', '1');
+				});
+			
 			});
 
 		});
