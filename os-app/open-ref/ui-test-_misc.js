@@ -44,7 +44,7 @@ describe('KVCRef_Misc', function () {
 		
 	});
 
-	describe('KVCRefReadRoute', function () {
+	describe.skip('KVCRefReadRoute', function () {
 
 		context('other host', function () {
 
