@@ -23,14 +23,6 @@ const mod = {
 		return inputData.split('\n').slice(1).join('\n').trim();
 	},
 
-	KVCTemplateHTML (inputData) {
-		if (typeof inputData !== 'string') {
-			throw new Error('KVCErrorInputNotValid');
-		}
-
-		return showdownConverter.makeHtml(inputData);
-	},
-
 	KVCTemplateReplaceLinks (param1, param2) {
 		if (typeof param1 !== 'string') {
 			throw new Error('KVCErrorInputNotValid');
@@ -43,6 +35,14 @@ const mod = {
 		return Object.entries(param2).reduce(function (coll, e) {
 			return coll.split(`[[${ e[0] }]]`).join(`[${ e[0] }](${ e[1] })`);
 		}, param1);
+	},
+
+	KVCTemplateHTML (inputData) {
+		if (typeof inputData !== 'string') {
+			throw new Error('KVCErrorInputNotValid');
+		}
+
+		return showdownConverter.makeHtml(inputData);
 	},
 
 };

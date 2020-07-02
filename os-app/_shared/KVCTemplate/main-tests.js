@@ -58,36 +58,6 @@ describe('KVCTemplatePlaintextBody', function test_KVCTemplatePlaintextBody() {
 
 });
 
-describe('KVCTemplateHTML', function test_KVCTemplateHTML() {
-
-	it('throws if not string', function() {
-		throws(function() {
-			mainModule.KVCTemplateHTML(null);
-		}, /KVCErrorInputNotValid/);
-	});
-
-	it('returns string as p', function() {
-		deepEqual(mainModule.KVCTemplateHTML('alfa'), '<p>alfa</p>');
-	});
-
-	it('converts simple headers without anchors', function() {
-		deepEqual(mainModule.KVCTemplateHTML('# alfa'), '<h1>alfa</h1>');
-	});
-
-	it('converts single newline as br', function() {
-		deepEqual(mainModule.KVCTemplateHTML('alfa\nbravo'), '<p>alfa<br />\nbravo</p>');
-	});
-
-	it('converts double newline as p', function() {
-		deepEqual(mainModule.KVCTemplateHTML('alfa\n\nbravo'), '<p>alfa</p>\n<p>bravo</p>');
-	});
-
-	it('converts www domains to links', function() {
-		deepEqual(mainModule.KVCTemplateHTML('www.alfa.com'), '<p><a href="http://www.alfa.com">www.alfa.com</a></p>');
-	});
-
-});
-
 describe('KVCTemplateReplaceLinks', function test_KVCTemplateReplaceLinks() {
 
 	it('throws if param1 not string', function() {
@@ -135,6 +105,36 @@ describe('KVCTemplateReplaceLinks', function test_KVCTemplateReplaceLinks() {
 		deepEqual(mainModule.KVCTemplateReplaceLinks('[[alfa]] [[alfa]]', {
 			alfa: 'bravo',
 		}), '[alfa](bravo) [alfa](bravo)');
+	});
+
+});
+
+describe('KVCTemplateHTML', function test_KVCTemplateHTML() {
+
+	it('throws if not string', function() {
+		throws(function() {
+			mainModule.KVCTemplateHTML(null);
+		}, /KVCErrorInputNotValid/);
+	});
+
+	it('returns string as p', function() {
+		deepEqual(mainModule.KVCTemplateHTML('alfa'), '<p>alfa</p>');
+	});
+
+	it('converts simple headers without anchors', function() {
+		deepEqual(mainModule.KVCTemplateHTML('# alfa'), '<h1>alfa</h1>');
+	});
+
+	it('converts single newline as br', function() {
+		deepEqual(mainModule.KVCTemplateHTML('alfa\nbravo'), '<p>alfa<br />\nbravo</p>');
+	});
+
+	it('converts double newline as p', function() {
+		deepEqual(mainModule.KVCTemplateHTML('alfa\n\nbravo'), '<p>alfa</p>\n<p>bravo</p>');
+	});
+
+	it('converts www domains to links', function() {
+		deepEqual(mainModule.KVCTemplateHTML('www.alfa.com'), '<p><a href="http://www.alfa.com">www.alfa.com</a></p>');
 	});
 
 });
