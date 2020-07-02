@@ -161,7 +161,7 @@ const mod = {
 				return publicClient.getItemURL(param2);
 			},
 
-			async _KVCNoteStorageDeletePublic (inputData) {
+			async _KVCNoteStoragePublicDelete (inputData) {
 				if (typeof inputData !== 'string') {
 					return Promise.reject(new Error('KVCErrorInputNotValid'));
 				}
@@ -215,8 +215,8 @@ const mod = {
 		return storageClient.wikiavec.kvc_notes._KVCNoteStorageWritePublic(param1, param2);
 	},
 
-	KVCNoteStorageDeletePublic (storageClient, param1, param2) {
-		return storageClient.wikiavec.kvc_notes._KVCNoteStorageDeletePublic(param1, param2);
+	KVCNoteStoragePublicDelete (storageClient, param1, param2) {
+		return storageClient.wikiavec.kvc_notes._KVCNoteStoragePublicDelete(param1, param2);
 	},
 
 };
