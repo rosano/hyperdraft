@@ -158,7 +158,7 @@ const mod = {
 
 				await publicClient.storeFile('text/html', param2, param1.KVCNoteBody);
 
-				return await publicClient.getItemURL(param2);
+				return publicClient.getItemURL(param2);
 			},
 
 			async _KVCNoteStorageDeletePublic (inputData) {
