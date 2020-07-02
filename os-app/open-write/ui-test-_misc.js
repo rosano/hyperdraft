@@ -401,7 +401,7 @@ describe('KVCWrite_Misc', function () {
 		});
 
 		before(function () {
-			return browser.fill('.LCHLauncherFilterInput', 'FakeStorageConnection');
+			return browser.fill('.LCHLauncherFilterInput', 'FakeStorageIsConnected');
 		});
 
 		before(function () {

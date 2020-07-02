@@ -443,8 +443,8 @@ const mod = {
 					},
 				},
 				{
-					LCHRecipeName: 'FakeStorageConnection',
-					LCHRecipeCallback: function FakeStorageConnection () {
+					LCHRecipeName: 'FakeStorageIsConnected',
+					LCHRecipeCallback: function FakeStorageIsConnected () {
 						mod._ValueStorageIsConnected = true;
 					},
 				},

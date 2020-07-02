@@ -185,14 +185,14 @@ describe('KVCWrite_Access', function () {
 
 	});
 
-	context('FakeStorageConnection', function test_FakeStorageConnection() {
+	context('FakeStorageIsConnected', function test_FakeStorageIsConnected() {
 		
 		before(function () {
 			return browser.pressButton('.OLSKAppToolbarLauncherButton');
 		});
 
 		before(function () {
-			return browser.fill('.LCHLauncherFilterInput', 'FakeStorageConnection');
+			return browser.fill('.LCHLauncherFilterInput', 'FakeStorageIsConnected');
 		});
 
 		it('shows LCHLauncherPipeItem', function () {
