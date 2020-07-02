@@ -253,7 +253,13 @@ describe('KVCNoteActionRetract', function test_KVCNoteActionRetract() {
 
 	it('sets KVCNotePublishStatusIsPublished to false', async function() {
 		deepEqual((await mainModule.KVCNoteActionRetract(KVCTestingStorageClient, await mainModule.KVCNoteActionPublish(KVCTestingStorageClient, await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject())))).KVCNotePublishStatusIsPublished, false);
-	});	
+	});
+
+	it('deletes file from public folder', async function() {
+		const item = await mainModule.KVCNoteActionRetract(KVCTestingStorageClient, await mainModule.KVCNoteActionPublish(KVCTestingStorageClient, await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject())));
+
+		deepEqual((await KVCTestingStorageClient.wikiavec.__DEBUG._OLSKRemoteStoragePublicClient().getFile(KVCNoteStorage.KVCNoteStorageObjectPathPublic(item))).data, undefined);
+	});
 
 });
 

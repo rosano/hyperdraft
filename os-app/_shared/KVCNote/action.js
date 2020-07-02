@@ -95,6 +95,8 @@ const mod = {
 			return Promise.reject(new Error('KVCErrorInputNotValid'));
 		}
 
+		await KVCNoteStorage.KVCNoteStorageDeletePublic(storageClient, KVCNoteStorage.KVCNoteStorageObjectPathPublic(inputData));
+
 		return await mod.KVCNoteActionUpdate(storageClient, Object.assign(inputData, {
 			KVCNotePublishStatusIsPublished: false,
 		}));
