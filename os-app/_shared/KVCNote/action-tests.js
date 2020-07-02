@@ -254,21 +254,20 @@ describe('KVCNoteActionRetract', function test_KVCNoteActionRetract() {
 
 });
 
-describe.skip('KVCNoteActionGetPublicLinks', function test_KVCNoteActionGetPublicLinks() {
+describe('KVCNoteActionPublicTitlePathMap', function test_KVCNoteActionPublicTitlePathMap() {
 
-	it('returns hash', async function() {
-		deepEqual(await mainModule.KVCNoteActionGetPublicLinks(KVCTestingStorageClient), {});
+	it('returns object', async function() {
+		deepEqual(await mainModule.KVCNoteActionPublicTitlePathMap(KVCTestingStorageClient), {});
 	});
 
 	it('excludes if KVCNotePublishStatusIsPublished false', async function() {
 		await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject());
-		deepEqual(await mainModule.KVCNoteActionGetPublicLinks(KVCTestingStorageClient), {});
+		deepEqual(await mainModule.KVCNoteActionPublicTitlePathMap(KVCTestingStorageClient), {});
 	});
 
 	it('includes if KVCNotePublishStatusIsPublished true', async function() {
-		let item = await mainModule.KVCNoteActionPublish(KVCTestingStorageClient, (await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject())));
-
-		deepEqual(await mainModule.KVCNoteActionGetPublicLinks(KVCTestingStorageClient), [[item.KVCNoteBody, item.KVCNotePublicID]].reduce(function (coll, e) {
+		const item = await mainModule.KVCNoteActionPublish(KVCTestingStorageClient, (await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject())));
+		deepEqual(await mainModule.KVCNoteActionPublicTitlePathMap(KVCTestingStorageClient), [[item.KVCNoteBody, item.KVCNotePublicID]].reduce(function (coll, e) {
 			coll[e[0]] = e[1];
 
 			return coll;
@@ -277,15 +276,15 @@ describe.skip('KVCNoteActionGetPublicLinks', function test_KVCNoteActionGetPubli
 
 	it('selects last updated note if duplicate title', async function() {
 		await mainModule.KVCNoteActionPublish(KVCTestingStorageClient, (await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, Object.assign(kTesting.StubNoteObject(), {
-			KVCNoteBody: `heading\nalfa`,
+			KVCNoteBody: 'heading\nalfa',
 		}))));
-		uSleep(1);
-		await mainModule.KVCNoteActionPublish(KVCTestingStorageClient, (await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, Object.assign(kTesting.StubNoteObject(), {
+		
+		const item = await mainModule.KVCNoteActionPublish(KVCTestingStorageClient, (await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, Object.assign(kTesting.StubNoteObject(), {
 			KVCNoteBody: `heading\nbravo`,
 		}))));
 
-		deepEqual(await mainModule.KVCNoteActionGetPublicLinks(KVCTestingStorageClient), {
-			heading: '2',
+		deepEqual(await mainModule.KVCNoteActionPublicTitlePathMap(KVCTestingStorageClient), {
+			heading: item.KVCNotePublicID,
 		});
 	});
 
