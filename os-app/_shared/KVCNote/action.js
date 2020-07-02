@@ -83,7 +83,7 @@ const mod = {
 			inputData.KVCNotePublicID = uniqueID().toLowerCase();
 		}
 
-		await KVCNoteStorage.KVCNoteStorageWritePublic(storageClient, inputData, KVCNoteStorage.KVCNoteStorageObjectPathPublic(inputData));
+		await KVCNoteStorage.KVCNoteStoragePublicWrite(storageClient, inputData, KVCNoteStorage.KVCNoteStorageObjectPathPublic(inputData));
 
 		return await mod.KVCNoteActionUpdate(storageClient, Object.assign(inputData, {
 			KVCNotePublishStatusIsPublished: true,

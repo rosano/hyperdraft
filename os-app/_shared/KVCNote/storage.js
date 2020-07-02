@@ -139,7 +139,7 @@ const mod = {
 				}));
 			},
 
-			async _KVCNoteStorageWritePublic (param1, param2) {
+			async _KVCNoteStoragePublicWrite (param1, param2) {
 				if (KVCNoteModel.KVCNoteModelErrorsFor(param1)) {
 					return Promise.reject(new Error('KVCErrorInputNotValid'));
 				}
@@ -211,8 +211,8 @@ const mod = {
 		return '/' + inputData.KVCNotePublicID;
 	},
 
-	KVCNoteStorageWritePublic (storageClient, param1, param2) {
-		return storageClient.wikiavec.kvc_notes._KVCNoteStorageWritePublic(param1, param2);
+	KVCNoteStoragePublicWrite (storageClient, param1, param2) {
+		return storageClient.wikiavec.kvc_notes._KVCNoteStoragePublicWrite(param1, param2);
 	},
 
 	KVCNoteStoragePublicDelete (storageClient, param1, param2) {

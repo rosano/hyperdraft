@@ -147,26 +147,26 @@ describe('KVCNoteStorageObjectPathPublic', function test_KVCNoteStorageObjectPat
 
 });
 
-describe('KVCNoteStorageWritePublic', function test_KVCNoteStorageWritePublic() {
+describe('KVCNoteStoragePublicWrite', function test_KVCNoteStoragePublicWrite() {
 
 	const item = Object.assign(kTesting.StubNoteObjectValid(), {
 		KVCNotePublicID: 'charlie',
 	});
 
 	it('rejects if not valid', async function() {
-		await rejects(mainModule.KVCNoteStorageWritePublic(KVCTestingStorageClient, {}, 'alfa'), /KVCErrorInputNotValid/);
+		await rejects(mainModule.KVCNoteStoragePublicWrite(KVCTestingStorageClient, {}, 'alfa'), /KVCErrorInputNotValid/);
 	});
 
 	it('rejects if not object path', async function() {
-		await rejects(mainModule.KVCNoteStorageWritePublic(KVCTestingStorageClient, kTesting.StubNoteObjectValid(), '/'), /KVCErrorInputNotValid/);
+		await rejects(mainModule.KVCNoteStoragePublicWrite(KVCTestingStorageClient, kTesting.StubNoteObjectValid(), '/'), /KVCErrorInputNotValid/);
 	});
 
 	it('returns public url', async function() {
-		deepEqual(await mainModule.KVCNoteStorageWritePublic(KVCTestingStorageClient, kTesting.StubNoteObjectValid(), '/alfa'), undefined);
+		deepEqual(await mainModule.KVCNoteStoragePublicWrite(KVCTestingStorageClient, kTesting.StubNoteObjectValid(), '/alfa'), undefined);
 	});
 
 	it('writes file to public folder', async function() {
-		await mainModule.KVCNoteStorageWritePublic(KVCTestingStorageClient, item, mainModule.KVCNoteStorageObjectPathPublic(item));
+		await mainModule.KVCNoteStoragePublicWrite(KVCTestingStorageClient, item, mainModule.KVCNoteStorageObjectPathPublic(item));
 
 		deepEqual((await KVCTestingStorageClient.wikiavec.__DEBUG._OLSKRemoteStoragePublicClient().getFile(mainModule.KVCNoteStorageObjectPathPublic(item))).data, 'bravo');
 	});
@@ -189,7 +189,7 @@ describe('KVCNoteStoragePublicDelete', function test_KVCNoteStoragePublicDelete(
 		const item = Object.assign(kTesting.StubNoteObjectValid(), {
 			KVCNotePublicID: 'charlie',
 		});
-		await mainModule.KVCNoteStorageWritePublic(KVCTestingStorageClient, item, mainModule.KVCNoteStorageObjectPathPublic(item));
+		await mainModule.KVCNoteStoragePublicWrite(KVCTestingStorageClient, item, mainModule.KVCNoteStorageObjectPathPublic(item));
 
 		await mainModule.KVCNoteStoragePublicDelete(KVCTestingStorageClient, mainModule.KVCNoteStorageObjectPathPublic(item));
 
