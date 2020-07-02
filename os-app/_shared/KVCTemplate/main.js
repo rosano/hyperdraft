@@ -41,7 +41,7 @@ const mod = {
 		}
 
 		return Object.entries(param2).reduce(function (coll, e) {
-			return coll.replace(new RegExp(`\\[\\[${ e[0] }\\]\\]`, 'g'), e[1]);
+			return coll.split(`[[${ e[0] }]]`).join(`[${ e[0] }](${ e[1] })`);
 		}, param1);
 	},
 

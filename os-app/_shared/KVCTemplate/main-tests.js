@@ -121,20 +121,20 @@ describe('KVCTemplateReplaceLinks', function test_KVCTemplateReplaceLinks() {
 	it('includes if single', function() {
 		deepEqual(mainModule.KVCTemplateReplaceLinks('[[alfa]]', {
 			alfa: 'bravo',
-		}), 'bravo');
+		}), '[alfa](bravo)');
 	});
 
 	it('includes if multiple', function() {
 		deepEqual(mainModule.KVCTemplateReplaceLinks('[[alfa]] [[charlie]]', {
 			alfa: 'bravo',
 			charlie: 'delta',
-		}), 'bravo delta');
+		}), '[alfa](bravo) [charlie](delta)');
 	});
 
 	it('includes if global', function() {
 		deepEqual(mainModule.KVCTemplateReplaceLinks('[[alfa]] [[alfa]]', {
 			alfa: 'bravo',
-		}), 'bravo bravo');
+		}), '[alfa](bravo) [alfa](bravo)');
 	});
 
 });
