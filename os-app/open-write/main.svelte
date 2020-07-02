@@ -480,6 +480,14 @@ const mod = {
 		return KVCParser.KVCParserSnippetForPlaintext(KVCParser.KVCParserBodyForPlaintext(inputData));
 	},
 
+	KVCWriteDetailPublicLinkFor (inputData) {
+		if (OLSK_TESTING_BEHAVIOUR() && mod._ValueStorageIsConnected) {
+			return '/OLSK_TESTING_BEHAVIOUR';
+		}
+
+		return KVCNoteStorage.KVCNoteStoragePublicURL(mod._ValueStorageClient, KVCNoteStorage.KVCNoteStoragePublicObjectPath(inputData));
+	},
+
 	KVCWriteDetailDispatchBack () {
 		// mod.ControlNoteSelect(null);
 
@@ -788,6 +796,7 @@ import OLSKStorageWidget from 'OLSKStorageWidget';
 	
 	<KVCWriteDetail
 		KVCWriteDetailConnected={ mod._ValueStorageIsConnected }
+		KVCWriteDetailPublicLinkFor={ mod.KVCWriteDetailPublicLinkFor }
 		KVCWriteDetailDispatchBack={ mod.KVCWriteDetailDispatchBack }
 		KVCWriteDetailDispatchJump={ mod.KVCWriteDetailDispatchJump }
 		KVCWriteDetailDispatchConnect={ mod.KVCWriteDetailDispatchConnect }

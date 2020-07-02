@@ -393,27 +393,19 @@ describe('KVCWrite_Misc', function () {
 	context('publish', function test_publish () {
 		
 		before(function () {
-			return browser.click('.KVCWriteDetailToolbarConnectButton');
+			return browser.pressButton('.KVCWriteDetailToolbarConnectButton');
 		});
 
 		before(function () {
-			return browser.pressButton('.OLSKAppToolbarLauncherButton');
+			return uLaunch('FakeStorageIsConnected');
 		});
 
 		before(function () {
-			return browser.fill('.LCHLauncherFilterInput', 'FakeStorageIsConnected');
+			return browser.pressButton('.KVCWriteDetailToolbarPublishButton');
 		});
 
-		before(function () {
-			return browser.click('.LCHLauncherPipeItem');
-		});
-
-		before(function () {
-			return browser.click('.KVCWriteDetailToolbarPublishButton');
-		});
-
-		it('sets KVCNotePublishStatusIsPublished', function () {
-			browser.assert.elements('.KVCWriteDetailToolbarPublishButton', 0);
+		it('sets KVCWriteDetailPublicLinkFor', function () {
+			browser.assert.attribute('.KVCWriteDetailToolbarPublicLink', 'href', '/OLSK_TESTING_BEHAVIOUR');
 		});
 
 	});
