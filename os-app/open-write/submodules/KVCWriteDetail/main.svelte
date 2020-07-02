@@ -13,7 +13,6 @@ export let KVCWriteDetailDispatchOpen;
 export let KVCWriteDetailDispatchEscape;
 export let OLSKMobileViewInactive = false;
 export let _KVCWriteDetailVersionsIsDisabled = false;
-export let _KVCWriteDetailPublishIsDisabled = false;
 
 export const KVCWriteDetailSetItem = function (inputData) {
 	mod._ValueItem = inputData;
@@ -161,13 +160,13 @@ import KVCWriteInput from '../KVCWriteInput/main.svelte';
 			<div class="KVCWriteDetailToolbarJumpButtonImage">{@html _KVCWriteJump }</div>
 		</button>
 
-		{#if !_KVCWriteDetailPublishIsDisabled && !KVCWriteDetailConnected }
+		{#if !KVCWriteDetailConnected }
 			<button class="KVCWriteDetailToolbarConnectButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarPublishButtonText') } on:click={ () => window.confirm(OLSKLocalized('KVCWriteDetailConnectPromptText')) && KVCWriteDetailDispatchConnect() }>
 				<div class="KVCWriteDetailToolbarConnectButtonImage">{@html _KVCWritePublish }</div>
 			</button>
 		{/if}
 
-		{#if !_KVCWriteDetailPublishIsDisabled && KVCWriteDetailConnected }
+		{#if KVCWriteDetailConnected }
 			{#if !mod._ValueItem.KVCNotePublishStatusIsPublished }
 				<button class="KVCWriteDetailToolbarPublishButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarPublishButtonText') } on:click={ () => KVCWriteDetailDispatchPublish() }>
 					<div class="KVCWriteDetailToolbarPublishButtonImage">{@html _KVCWritePublish }</div>

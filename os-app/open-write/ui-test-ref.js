@@ -42,44 +42,4 @@ describe('KVCWrite_Ref', function () {
 		
 	});
 
-	describe('KVCWriteDetailToolbarPublishButton', function () {
-
-		context('KVC_SHARED_REF_HOST', function () {
-
-			before(function() {
-				return browser.visit(stubURL(kDefaultRoute, process.env.KVC_SHARED_REF_HOST));
-			});
-
-			before(function () {
-				return browser.pressButton('.KVCWriteMasterCreateButton');
-			});
-
-			before(function () {
-				return browser.pressButton('.KVCWriteMasterCreateButton');
-			});
-
-			it('shows KVCWriteDetailToolbarConnectButton', function () {
-				browser.assert.elements(KVCWriteDetailToolbarConnectButton, 1);
-			});
-		
-		});
-
-		context('other host', function () {
-
-			before(function() {
-				return browser.visit(stubURL(kDefaultRoute, 'loc.tests'));
-			});
-
-			before(function () {
-				return browser.pressButton('.KVCWriteMasterCreateButton');
-			});
-
-			it('hides KVCWriteDetailToolbarConnectButton', function () {
-				browser.assert.elements('.KVCWriteDetailToolbarConnectButton', 0);
-			});
-		
-		});		
-		
-	});
-
 });

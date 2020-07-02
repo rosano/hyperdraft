@@ -77,10 +77,6 @@ const mod = {
 		return window.location.hostname !== window.OLSKPublicConstants('KVC_SHARED_REF_HOST');
 	},
 
-	DataPublishIsDisabled () {
-		return window.location.hostname !== window.OLSKPublicConstants('KVC_SHARED_REF_HOST');
-	},
-
 	DataDebugPersistenceIsEnabled () {
 		return !OLSK_TESTING_BEHAVIOUR();
 	},
@@ -804,7 +800,6 @@ import OLSKStorageWidget from 'OLSKStorageWidget';
 		KVCWriteDetailDispatchEscape={ mod.KVCWriteDetailDispatchEscape }
 		OLSKMobileViewInactive={ !mod.OLSKMobileViewInactive }
 		_KVCWriteDetailVersionsIsDisabled={ mod.DataVersionsIsDisabled() }
-		_KVCWriteDetailPublishIsDisabled={ mod.DataPublishIsDisabled() }
 		bind:this={ mod.KVCWriteDetailInstance }
 		/>
 </OLSKViewportContent>
