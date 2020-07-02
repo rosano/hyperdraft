@@ -204,8 +204,10 @@ describe('KVCNoteStoragePublicURL', function test_KVCNoteStoragePublicURL() {
 		KVCNotePublicID: 'charlie',
 	});
 
-	it('rejects if not object path', async function() {
-		await rejects(mainModule.KVCNoteStoragePublicURL(KVCTestingStorageClient, '/'), /KVCErrorInputNotValid/);
+	it('throws if not object path', async function() {
+		throws(function() {
+			mainModule.KVCNoteStoragePublicURL(KVCTestingStorageClient, '/')
+		}, /KVCErrorInputNotValid/);
 	});
 
 	it('returns undefined', async function() {

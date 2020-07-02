@@ -177,13 +177,13 @@ const mod = {
 				return await publicClient.remove(inputData);
 			},
 
-			async _KVCNoteStoragePublicURL (inputData) {
+			_KVCNoteStoragePublicURL (inputData) {
 				if (inputData[0] !== '/') {
-					return Promise.reject(new Error('KVCErrorInputNotValid'));
+					throw new Error('KVCErrorInputNotValid');
 				}
 
 				if (inputData.slice(1).trim() === '') {
-					return Promise.reject(new Error('KVCErrorInputNotValid'));
+					throw new Error('KVCErrorInputNotValid');
 				}
 
 				return publicClient.getItemURL(inputData);
