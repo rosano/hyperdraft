@@ -61,6 +61,8 @@ const mod = {
 </head>
 <body>
 
+<h1>${ mod.KVCTemplateTokenPostTitle() }</h1>
+
 </body>
 </html>`;
 	},

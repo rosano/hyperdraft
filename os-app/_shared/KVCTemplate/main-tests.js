@@ -177,6 +177,10 @@ describe('KVCTemplateViewDefault', function test_KVCTemplateViewDefault() {
 		deepEqual(!!mainModule.KVCTemplateViewDefault().match(uTagContent('title', mainModule.KVCTemplateTokenPostTitle())), true);
 	});
 
+	it('contains KVCTemplateTokenPostTitle in h1', function() {
+		deepEqual(!!mainModule.KVCTemplateViewDefault().match(uTagContent('h1', mainModule.KVCTemplateTokenPostTitle())), true);
+	});
+
 });
 
 describe('KVCTemplateTokenPostTitle', function test_KVCTemplateTokenPostTitle() {
