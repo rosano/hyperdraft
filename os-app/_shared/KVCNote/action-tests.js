@@ -269,7 +269,7 @@ describe('KVCNoteActionPublicTitlePathMap', function test_KVCNoteActionPublicTit
 		uSleep(1);
 		
 		const item = await mainModule.KVCNoteActionPublish(KVCTestingStorageClient, (await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, Object.assign(kTesting.StubNoteObject(), {
-			KVCNoteBody: `heading\nbravo`,
+			KVCNoteBody: 'heading\nbravo',
 		}))));
 
 		deepEqual(await mainModule.KVCNoteActionPublicTitlePathMap(KVCTestingStorageClient), {

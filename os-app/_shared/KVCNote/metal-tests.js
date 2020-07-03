@@ -112,7 +112,7 @@ describe('KVCNoteMetalMigrateV1', function test_KVCNoteMetalMigrateV1() {
 		beforeEach(async function () {
 			await KVCTestingStorageClient.wikiavec.__DEBUG._OLSKRemoteStoragePrivateClient().storeObject(KVCNoteStorage.KVCNoteStorageCollectionType(), KVCNoteStorage.KVCNoteStorageObjectPathV1(item), OLSKRemoteStorage.OLSKRemoteStoragePreJSONSchemaValidate(item));
 
-			OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(item)
+			OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(item);
 		});
 
 		beforeEach(async function () {

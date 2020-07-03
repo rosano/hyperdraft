@@ -202,7 +202,7 @@ describe('KVCNoteStoragePublicURL', function test_KVCNoteStoragePublicURL() {
 
 	it('throws if not object path', async function() {
 		throws(function() {
-			mainModule.KVCNoteStoragePublicURL(KVCTestingStorageClient, '/')
+			mainModule.KVCNoteStoragePublicURL(KVCTestingStorageClient, '/');
 		}, /KVCErrorInputNotValid/);
 	});
 

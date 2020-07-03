@@ -23,7 +23,7 @@ describe('KVCWrite_Migrate', function () {
 	});
 	
 	before(function () {
-		browser.assert.text('#TestControlMigrateCount', '2')
+		browser.assert.text('#TestControlMigrateCount', '2');
 	});
 
 	it('adds item', function () {
@@ -55,7 +55,7 @@ describe('KVCWrite_Migrate', function () {
 		});
 		
 		before(function () {
-			browser.assert.text('#TestControlMigrateCount', '1')
+			browser.assert.text('#TestControlMigrateCount', '1');
 		});
 
 		it('adds item', function () {
@@ -69,7 +69,7 @@ describe('KVCWrite_Migrate', function () {
 			});
 			
 			it('skips migration', function () {
-				browser.assert.text('#TestControlMigrateCount', '1')
+				browser.assert.text('#TestControlMigrateCount', '1');
 			});
 		
 		});
