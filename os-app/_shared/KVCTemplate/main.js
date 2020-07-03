@@ -65,6 +65,14 @@ const mod = {
 </html>`;
 	},
 
+	KVCTemplateTokenPostTitle () {
+		return '{Title}';
+	},
+
+	KVCTemplateTokenPostBody () {
+		return '{Body}';
+	},
+
 };
 
 export default mod;

@@ -167,3 +167,18 @@ describe('KVCTemplateViewDefault', function test_KVCTemplateViewDefault() {
 
 });
 
+describe('KVCTemplateTokenPostTitle', function test_KVCTemplateTokenPostTitle() {
+
+	it('returns string', function() {
+		deepEqual(mainModule.KVCTemplateTokenPostTitle(), '{Title}');
+	});
+
+});
+
+describe('KVCTemplateTokenPostBody', function test_KVCTemplateTokenPostBody() {
+
+	it('returns string', function() {
+		deepEqual(mainModule.KVCTemplateTokenPostBody(), '{Body}');
+	});
+
+});
