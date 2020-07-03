@@ -87,6 +87,12 @@ describe('KVCNoteModelErrorsFor', function test_KVCNoteModelErrorsFor() {
 			});
 		});
 
+		it('returns null', function() {
+			deepEqual(mainModule.KVCNoteModelErrorsFor(Object.assign(kTesting.StubNoteObjectValid(), {
+				KVCNoteIsPublic: true,
+			})), null);
+		});
+
 	});
 
 });
