@@ -22,6 +22,8 @@ import KVCSettingMetal from '../_shared/KVCSetting/metal.js';
 import KVCWriteLogic from './ui-logic.js';
 import * as RemoteStoragePackage from 'remotestoragejs';
 const RemoteStorage = RemoteStoragePackage.default || RemoteStoragePackage;
+import * as KVCTemplatePackage from '../_shared/KVCTemplate/template.js';
+const KVCTemplate = KVCTemplatePackage.default || KVCTemplatePackage;
 
 const mod = {
 
@@ -222,7 +224,7 @@ const mod = {
 	},
 	
 	async ControlNotePublish (inputData) {
-		mod.ValueNoteSelected(await KVCNoteAction.KVCNoteActionPublish(mod._ValueStorageClient, inputData));
+		mod.ValueNoteSelected(await KVCNoteAction.KVCNoteActionPublish(mod._ValueStorageClient, inputData, KVCTemplate.KVCTemplateViewDefault()));
 	},
 	
 	async ControlNoteRetract (inputData) {
