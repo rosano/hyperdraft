@@ -43,6 +43,14 @@ const mod = {
 			}
 		}
 
+		if (typeof inputData.KVCNotePublishDate !== 'undefined') {
+			if (!(inputData.KVCNotePublishDate instanceof Date) || Number.isNaN(inputData.KVCNotePublishDate.getTime())) {
+				errors.KVCNotePublishDate = [
+					'KVCErrorNotDate',
+				];
+			}
+		}
+
 		if (typeof inputData.KVCNotePublicID !== 'undefined') {
 			if (typeof inputData.KVCNotePublicID !== 'string') {
 				errors.KVCNotePublicID = [

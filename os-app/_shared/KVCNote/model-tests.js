@@ -95,6 +95,26 @@ describe('KVCNoteModelErrorsFor', function test_KVCNoteModelErrorsFor() {
 
 	});
 
+	context('KVCNotePublishDate', function() {
+
+		it('returns object if KVCNotePublishDate not date', function() {
+			deepEqual(mainModule.KVCNoteModelErrorsFor(Object.assign(kTesting.StubNoteObjectValid(), {
+				KVCNotePublishDate: new Date('alfa'),
+			})), {
+				KVCNotePublishDate: [
+					'KVCErrorNotDate',
+				],
+			});
+		});
+
+		it('returns null', function() {
+			deepEqual(mainModule.KVCNoteModelErrorsFor(Object.assign(kTesting.StubNoteObjectValid(), {
+				KVCNotePublishDate: new Date(),
+			})), null);
+		});
+
+	});
+
 	context('KVCNotePublicID', function() {
 
 		it('returns object if KVCNotePublicID not string', function() {
