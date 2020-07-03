@@ -141,6 +141,10 @@ describe('KVCTemplateHTML', function test_KVCTemplateHTML() {
 
 describe('KVCTemplateViewDefault', function test_KVCTemplateViewDefault() {
 
+	const uTag = function (inputData) {
+		return new RegExp(`<${ inputData }>[\\s\\S]*</${ inputData }>`)
+	};
+
 	it('returns string', function() {
 		deepEqual(typeof mainModule.KVCTemplateViewDefault(), 'string');
 	});
@@ -150,19 +154,19 @@ describe('KVCTemplateViewDefault', function test_KVCTemplateViewDefault() {
 	});
 
 	it('contains html', function() {
-		deepEqual(mainModule.KVCTemplateViewDefault().match('<html>').index < mainModule.KVCTemplateViewDefault().match('</html>').index, true);
+		deepEqual(!!mainModule.KVCTemplateViewDefault().match(uTag('html')), true);
 	});
 
 	it('contains head', function() {
-		deepEqual(mainModule.KVCTemplateViewDefault().match('<head>').index < mainModule.KVCTemplateViewDefault().match('</head>').index, true);
+		deepEqual(!!mainModule.KVCTemplateViewDefault().match(uTag('head')), true);
 	});
 
 	it('contains title', function() {
-		deepEqual(mainModule.KVCTemplateViewDefault().match('<title>').index < mainModule.KVCTemplateViewDefault().match('</title>').index, true);
+		deepEqual(!!mainModule.KVCTemplateViewDefault().match(uTag('title')), true);
 	});
 
 	it('contains body', function() {
-		deepEqual(mainModule.KVCTemplateViewDefault().match('<body>').index < mainModule.KVCTemplateViewDefault().match('</body>').index, true);
+		deepEqual(!!mainModule.KVCTemplateViewDefault().match(uTag('body')), true);
 	});
 
 	it('contains KVCTemplateTokenPostTitle in title', function() {
