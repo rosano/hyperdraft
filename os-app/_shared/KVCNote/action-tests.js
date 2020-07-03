@@ -175,6 +175,17 @@ describe('KVCNoteActionPublish', function test_KVCNoteActionPublish() {
 		deepEqual((await mainModule.KVCNoteActionPublish(KVCTestingStorageClient, await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()))).KVCNoteIsPublic, true);
 	});
 
+	it('sets KVCNotePublishDate to now', async function() {
+		deepEqual(new Date() - (await mainModule.KVCNoteActionPublish(KVCTestingStorageClient, await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()))).KVCNotePublishDate < 100, true);
+	});
+
+	it('kees existing KVCNotePublishDate', async function() {
+		const item = await mainModule.KVCNoteActionRetract(KVCTestingStorageClient, await mainModule.KVCNoteActionPublish(KVCTestingStorageClient, await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject())));
+		const date = item.KVCNotePublishDate;
+
+		deepEqual((await mainModule.KVCNoteActionPublish(KVCTestingStorageClient, item)).KVCNotePublishDate, date);
+	});
+
 	it('sets KVCNotePublicID to string', async function() {
 		deepEqual(typeof (await mainModule.KVCNoteActionPublish(KVCTestingStorageClient, await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()))).KVCNotePublicID, 'string');
 	});
