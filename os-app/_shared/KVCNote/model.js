@@ -43,6 +43,18 @@ const mod = {
 			}
 		}
 
+		if (typeof inputData.KVCNotePublicID !== 'undefined') {
+			if (typeof inputData.KVCNotePublicID !== 'string') {
+				errors.KVCNotePublicID = [
+					'KVCErrorNotString',
+				];
+			} else if (inputData.KVCNotePublicID.trim() === '') {
+				errors.KVCNotePublicID = [
+					'KVCErrorNotFilled',
+				];
+			}
+		}
+
 		return Object.entries(errors).length ? errors : null;
 	},
 
