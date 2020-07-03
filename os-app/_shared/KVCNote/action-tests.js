@@ -192,14 +192,7 @@ describe('KVCNoteActionPublish', function test_KVCNoteActionPublish() {
 	});
 
 	it('keeps existing KVCNotePublicID', async function() {
-		const item = await mainModule.KVCNoteActionPublish(KVCTestingStorageClient, await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()));
-		const id = item.KVCNotePublicID;
-
-		deepEqual((await mainModule.KVCNoteActionPublish(KVCTestingStorageClient, item)).KVCNotePublicID, id);
-	});
-
-	it('keeps existing KVCNotePublicID', async function() {
-		const item = await mainModule.KVCNoteActionPublish(KVCTestingStorageClient, await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()));
+		const item = await mainModule.KVCNoteActionRetract(KVCTestingStorageClient, await mainModule.KVCNoteActionPublish(KVCTestingStorageClient, await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject())));
 		const id = item.KVCNotePublicID;
 
 		deepEqual((await mainModule.KVCNoteActionPublish(KVCTestingStorageClient, item)).KVCNotePublicID, id);
