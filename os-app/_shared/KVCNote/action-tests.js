@@ -166,11 +166,15 @@ describe('KVCNoteActionQuery', function test_KVCNoteActionQuery() {
 
 describe('KVCNoteActionPublish', function test_KVCNoteActionPublish() {
 
-	it('rejects if not valid', async function() {
-		await rejects(mainModule.KVCNoteActionPublish(KVCTestingStorageClient, {}), /KVCErrorInputNotValid/);
+	it('rejects if param1 not valid', async function() {
+		await rejects(mainModule.KVCNoteActionPublish(KVCTestingStorageClient, {}, ''), /KVCErrorInputNotValid/);
 	});
 
-	it('returns inputData', async function() {
+	it('rejects if param2 not string', async function() {
+		await rejects(mainModule.KVCNoteActionPublish(KVCTestingStorageClient, kTesting.StubNoteObject(), null), /KVCErrorInputNotValid/);
+	});
+
+	it('returns param1', async function() {
 		const item = await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject());
 		deepEqual(item === await kTesting.uPublish(item), true);
 	});

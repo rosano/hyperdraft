@@ -75,22 +75,26 @@ const mod = {
 		}));
 	},
 
-	async KVCNoteActionPublish (storageClient, inputData) {
-		if (KVCNoteModel.KVCNoteModelErrorsFor(inputData)) {
+	async KVCNoteActionPublish (storageClient, param1, param2) {
+		if (KVCNoteModel.KVCNoteModelErrorsFor(param1)) {
 			return Promise.reject(new Error('KVCErrorInputNotValid'));
 		}
 
-		if (!inputData.KVCNotePublicID) {
-			inputData.KVCNotePublicID = uniqueID().toLowerCase();
+		if (typeof param2 !== 'string') {
+			return Promise.reject(new Error('KVCErrorInputNotValid'));
 		}
 
-		if (!inputData.KVCNotePublishDate) {
-			inputData.KVCNotePublishDate = new Date();
+		if (!param1.KVCNotePublicID) {
+			param1.KVCNotePublicID = uniqueID().toLowerCase();
 		}
 
-		await KVCNoteStorage.KVCNoteStoragePublicWrite(storageClient, KVCNoteStorage.KVCNoteStoragePublicObjectPath(inputData), inputData.KVCNoteBody);
+		if (!param1.KVCNotePublishDate) {
+			param1.KVCNotePublishDate = new Date();
+		}
 
-		return await mod.KVCNoteActionUpdate(storageClient, Object.assign(inputData, {
+		await KVCNoteStorage.KVCNoteStoragePublicWrite(storageClient, KVCNoteStorage.KVCNoteStoragePublicObjectPath(param1), param1.KVCNoteBody);
+
+		return await mod.KVCNoteActionUpdate(storageClient, Object.assign(param1, {
 			KVCNoteIsPublic: true,
 		}));
 	},
