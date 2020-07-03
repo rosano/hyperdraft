@@ -3,6 +3,7 @@ const { rejects, deepEqual } = require('assert');
 const mainModule = require('./action.js').default;
 const KVCNoteStorage = require('./storage.js').default;
 const KVCVersionsAction = require('../KVCVersion/action.js').default;
+const KVCTemplate = require('../KVCTemplate/template.js');
 
 const kTesting = {
 	StubNoteObject() {
@@ -218,9 +219,9 @@ describe('KVCNoteActionPublish', function test_KVCNoteActionPublish() {
 	});
 
 	it('writes templated content to public folder', async function() {
-		const item = await kTesting.uPublish(await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()));
+		const item = await kTesting.uPublish(await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()), `alfa ${ KVCTemplate.KVCTemplateTokenPostTitle() }`);
 
-		deepEqual((await KVCTestingStorageClient.wikiavec.__DEBUG._OLSKRemoteStoragePublicClient().getFile(KVCNoteStorage.KVCNoteStoragePublicObjectPath(item))).data, 'bravo');
+		deepEqual((await KVCTestingStorageClient.wikiavec.__DEBUG._OLSKRemoteStoragePublicClient().getFile(KVCNoteStorage.KVCNoteStoragePublicObjectPath(item))).data, 'alfa bravo');
 	});
 
 });

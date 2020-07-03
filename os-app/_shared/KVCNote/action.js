@@ -10,6 +10,10 @@ import * as KVCParserPackage from '../KVCParser/main.js';
 const KVCParser = KVCParserPackage.default || KVCParserPackage;
 import * as OLSKRemoteStoragePackage from 'OLSKRemoteStorage';
 const OLSKRemoteStorage = OLSKRemoteStoragePackage.default || OLSKRemoteStoragePackage;
+import * as OLSKStringPackage from 'OLSKString';
+const OLSKString = OLSKStringPackage.default || OLSKStringPackage;
+import * as KVCTemplatePackage from '../KVCTemplate/main.js';
+const KVCTemplate = KVCTemplatePackage.default || KVCTemplatePackage;
 
 const mod = {
 
@@ -92,7 +96,7 @@ const mod = {
 			param1.KVCNotePublishDate = new Date();
 		}
 
-		await KVCNoteStorage.KVCNoteStoragePublicWrite(storageClient, KVCNoteStorage.KVCNoteStoragePublicObjectPath(param1), param1.KVCNoteBody);
+		await KVCNoteStorage.KVCNoteStoragePublicWrite(storageClient, KVCNoteStorage.KVCNoteStoragePublicObjectPath(param1), OLSKString.OLSKStringReplaceTokens(param2, KVCTemplate.KVCTemplateReplaceTokens(param1.KVCNoteBody)));
 
 		return await mod.KVCNoteActionUpdate(storageClient, Object.assign(param1, {
 			KVCNoteIsPublic: true,
