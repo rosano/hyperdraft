@@ -145,6 +145,10 @@ describe('KVCTemplateViewDefault', function test_KVCTemplateViewDefault() {
 		return new RegExp(`<${ inputData }>[\\s\\S]*</${ inputData }>`)
 	};
 
+	const uTagContent = function (param1, param2) {
+		return new RegExp(`<${ param1 }>[\\s\\S]*${ param2 }[\\s\\S]*</${ param1 }>`)
+	};
+
 	it('returns string', function() {
 		deepEqual(typeof mainModule.KVCTemplateViewDefault(), 'string');
 	});
@@ -170,7 +174,7 @@ describe('KVCTemplateViewDefault', function test_KVCTemplateViewDefault() {
 	});
 
 	it('contains KVCTemplateTokenPostTitle in title', function() {
-		deepEqual(!!mainModule.KVCTemplateViewDefault().match(`<title>${ mainModule.KVCTemplateTokenPostTitle() }</title>`), true);
+		deepEqual(!!mainModule.KVCTemplateViewDefault().match(uTagContent('title', mainModule.KVCTemplateTokenPostTitle())), true);
 	});
 
 });
