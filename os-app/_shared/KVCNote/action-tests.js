@@ -10,6 +10,10 @@ const kTesting = {
 			KVCNoteBody: 'bravo',
 		};
 	},
+
+	uPublish (param1 = kTesting.StubNoteObject(), param2 = '') {
+		return mainModule.KVCNoteActionPublish(KVCTestingStorageClient, param1, param2)
+	}
 };
 
 describe('KVCNoteActionCreate', function test_KVCNoteActionCreate() {
@@ -168,49 +172,49 @@ describe('KVCNoteActionPublish', function test_KVCNoteActionPublish() {
 
 	it('returns inputData', async function() {
 		const item = await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject());
-		deepEqual(item === await mainModule.KVCNoteActionPublish(KVCTestingStorageClient, item), true);
+		deepEqual(item === await kTesting.uPublish(item), true);
 	});
 
 	it('sets KVCNoteIsPublic to true', async function() {
-		deepEqual((await mainModule.KVCNoteActionPublish(KVCTestingStorageClient, await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()))).KVCNoteIsPublic, true);
+		deepEqual((await kTesting.uPublish(await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()))).KVCNoteIsPublic, true);
 	});
 
 	it('sets KVCNotePublishDate to now', async function() {
-		deepEqual(new Date() - (await mainModule.KVCNoteActionPublish(KVCTestingStorageClient, await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()))).KVCNotePublishDate < 100, true);
+		deepEqual(new Date() - (await kTesting.uPublish(await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()))).KVCNotePublishDate < 100, true);
 	});
 
 	it('kees existing KVCNotePublishDate', async function() {
-		const item = await mainModule.KVCNoteActionRetract(KVCTestingStorageClient, await mainModule.KVCNoteActionPublish(KVCTestingStorageClient, await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject())));
+		const item = await mainModule.KVCNoteActionRetract(KVCTestingStorageClient, await kTesting.uPublish(await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject())));
 		const date = item.KVCNotePublishDate;
 
-		deepEqual((await mainModule.KVCNoteActionPublish(KVCTestingStorageClient, item)).KVCNotePublishDate, date);
+		deepEqual((await kTesting.uPublish(item)).KVCNotePublishDate, date);
 	});
 
 	it('sets KVCNotePublicID to string', async function() {
-		deepEqual(typeof (await mainModule.KVCNoteActionPublish(KVCTestingStorageClient, await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()))).KVCNotePublicID, 'string');
+		deepEqual(typeof (await kTesting.uPublish(await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()))).KVCNotePublicID, 'string');
 	});
 
 	it('sets KVCNotePublicID to lowercase', async function() {
-		const item = (await mainModule.KVCNoteActionPublish(KVCTestingStorageClient, await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()))).KVCNotePublicID;
+		const item = (await kTesting.uPublish(await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()))).KVCNotePublicID;
 		deepEqual(item, item.toLowerCase());
 	});
 
 	it('sets KVCNotePublicID to unique value', async function() {
 		const items = await uSerial(Array.from(Array(10)).map(async function (e) {
-			return (await mainModule.KVCNoteActionPublish(KVCTestingStorageClient, await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()))).KVCNotePublicID;
+			return (await kTesting.uPublish(await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()))).KVCNotePublicID;
 		}));
 		deepEqual([...(new Set(items))], items);
 	});
 
 	it('keeps existing KVCNotePublicID', async function() {
-		const item = await mainModule.KVCNoteActionRetract(KVCTestingStorageClient, await mainModule.KVCNoteActionPublish(KVCTestingStorageClient, await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject())));
+		const item = await mainModule.KVCNoteActionRetract(KVCTestingStorageClient, await kTesting.uPublish(await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject())));
 		const id = item.KVCNotePublicID;
 
-		deepEqual((await mainModule.KVCNoteActionPublish(KVCTestingStorageClient, item)).KVCNotePublicID, id);
+		deepEqual((await kTesting.uPublish(item)).KVCNotePublicID, id);
 	});
 
-	it('writes file to public folder', async function() {
-		const item = await mainModule.KVCNoteActionPublish(KVCTestingStorageClient, await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()));
+	it('writes templated content to public folder', async function() {
+		const item = await kTesting.uPublish(await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()));
 
 		deepEqual((await KVCTestingStorageClient.wikiavec.__DEBUG._OLSKRemoteStoragePublicClient().getFile(KVCNoteStorage.KVCNoteStoragePublicObjectPath(item))).data, 'bravo');
 	});
@@ -224,17 +228,17 @@ describe('KVCNoteActionRetract', function test_KVCNoteActionRetract() {
 	});
 
 	it('returns KVCNote', async function() {
-		const item = await mainModule.KVCNoteActionPublish(KVCTestingStorageClient, await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()));
+		const item = await kTesting.uPublish(await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()));
 
 		deepEqual(item === await mainModule.KVCNoteActionRetract(KVCTestingStorageClient, item), true);
 	});
 
 	it('sets KVCNoteIsPublic to false', async function() {
-		deepEqual((await mainModule.KVCNoteActionRetract(KVCTestingStorageClient, await mainModule.KVCNoteActionPublish(KVCTestingStorageClient, await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject())))).KVCNoteIsPublic, false);
+		deepEqual((await mainModule.KVCNoteActionRetract(KVCTestingStorageClient, await kTesting.uPublish(await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject())))).KVCNoteIsPublic, false);
 	});
 
 	it('deletes file from public folder', async function() {
-		const item = await mainModule.KVCNoteActionRetract(KVCTestingStorageClient, await mainModule.KVCNoteActionPublish(KVCTestingStorageClient, await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject())));
+		const item = await mainModule.KVCNoteActionRetract(KVCTestingStorageClient, await kTesting.uPublish(await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject())));
 
 		deepEqual((await KVCTestingStorageClient.wikiavec.__DEBUG._OLSKRemoteStoragePublicClient().getFile(KVCNoteStorage.KVCNoteStoragePublicObjectPath(item))).data, undefined);
 	});
@@ -253,7 +257,7 @@ describe('KVCNoteActionPublicTitlePathMap', function test_KVCNoteActionPublicTit
 	});
 
 	it('includes if KVCNoteIsPublic true', async function() {
-		const item = await mainModule.KVCNoteActionPublish(KVCTestingStorageClient, (await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject())));
+		const item = await kTesting.uPublish((await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject())));
 		deepEqual(await mainModule.KVCNoteActionPublicTitlePathMap(KVCTestingStorageClient), [[item.KVCNoteBody, item.KVCNotePublicID]].reduce(function (coll, e) {
 			coll[e[0]] = e[1];
 
@@ -262,13 +266,13 @@ describe('KVCNoteActionPublicTitlePathMap', function test_KVCNoteActionPublicTit
 	});
 
 	it('selects last updated note if duplicate title', async function() {
-		await mainModule.KVCNoteActionPublish(KVCTestingStorageClient, (await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, Object.assign(kTesting.StubNoteObject(), {
+		await kTesting.uPublish((await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, Object.assign(kTesting.StubNoteObject(), {
 			KVCNoteBody: 'heading\nalfa',
 		}))));
 
 		uSleep(1);
 		
-		const item = await mainModule.KVCNoteActionPublish(KVCTestingStorageClient, (await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, Object.assign(kTesting.StubNoteObject(), {
+		const item = await kTesting.uPublish((await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, Object.assign(kTesting.StubNoteObject(), {
 			KVCNoteBody: 'heading\nbravo',
 		}))));
 
