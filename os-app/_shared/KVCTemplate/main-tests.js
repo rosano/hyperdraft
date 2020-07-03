@@ -1,6 +1,7 @@
 const { throws, deepEqual } = require('assert');
 
 const mainModule = require('./main.js').default;
+const KVCTemplate = require('./template.js');
 
 describe('KVCTemplatePlaintextTitle', function test_KVCTemplatePlaintextTitle() {
 
@@ -135,6 +136,38 @@ describe('KVCTemplateHTML', function test_KVCTemplateHTML() {
 
 	it('converts www domains to links', function() {
 		deepEqual(mainModule.KVCTemplateHTML('www.alfa.com'), '<p><a href="http://www.alfa.com">www.alfa.com</a></p>');
+	});
+
+});
+
+describe('KVCTemplateReplaceTokens', function test_KVCTemplateReplaceTokens() {
+
+	it('throws if not string', function () {
+		throws(function () {
+			mainModule.KVCTemplateReplaceTokens(null)
+		}, /KVCErrorInputNotValid/);
+	});
+
+	it('returns object', function() {
+		deepEqual(typeof mainModule.KVCTemplateReplaceTokens(''), 'object');
+	});
+
+	context('KVCTemplateTokenPostTitle', function () {
+		
+		it('sets to KVCTemplatePlaintextTitle', function () {
+			const item = 'alfa\nbravo';
+			deepEqual(mainModule.KVCTemplateReplaceTokens(item)[KVCTemplate.KVCTemplateTokenPostTitle()], mainModule.KVCTemplatePlaintextTitle(item));
+		});
+	
+	});
+
+	context('KVCTemplateTokenPostBody', function () {
+		
+		it('sets to KVCTemplateHTML', function () {
+			const item = 'alfa\n# bravo';
+			deepEqual(mainModule.KVCTemplateReplaceTokens(item)[KVCTemplate.KVCTemplateTokenPostBody()], mainModule.KVCTemplateHTML(mainModule.KVCTemplatePlaintextBody(item)));
+		});
+	
 	});
 
 });
