@@ -45,14 +45,6 @@ const mod = {
 		return showdownConverter.makeHtml(inputData);
 	},
 
-	KVCTemplateHTML (inputData) {
-		if (typeof inputData !== 'string') {
-			throw new Error('KVCErrorInputNotValid');
-		}
-
-		return showdownConverter.makeHtml(inputData);
-	},
-
 };
 
 export default mod;
