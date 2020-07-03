@@ -175,6 +175,10 @@ describe('KVCNoteActionPublish', function test_KVCNoteActionPublish() {
 		deepEqual((await mainModule.KVCNoteActionPublish(KVCTestingStorageClient, await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()))).KVCNoteIsPublic, true);
 	});
 
+	it('sets KVCNotePublicID to string', async function() {
+		deepEqual(typeof (await mainModule.KVCNoteActionPublish(KVCTestingStorageClient, await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()))).KVCNotePublicID, 'string');
+	});
+
 	it('sets KVCNotePublicID to lowercase', async function() {
 		const item = (await mainModule.KVCNoteActionPublish(KVCTestingStorageClient, await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()))).KVCNotePublicID;
 		deepEqual(item, item.toLowerCase());
