@@ -320,7 +320,7 @@ describe('KVCWriteDetail_Misc', function () {
 			return browser.OLSKVisit(kDefaultRoute, {
 				KVCWriteDetailItem: JSON.stringify({
 					KVCNoteBody: 'alfa',
-					KVCNotePublishStatusIsPublished: true,
+					KVCNoteIsPublic: true,
 					KVCNotePublicID: 'bravo',
 				}),
 				KVCWriteDetailConnected: true,

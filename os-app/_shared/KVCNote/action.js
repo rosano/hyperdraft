@@ -87,7 +87,7 @@ const mod = {
 		await KVCNoteStorage.KVCNoteStoragePublicWrite(storageClient, KVCNoteStorage.KVCNoteStoragePublicObjectPath(inputData), inputData.KVCNoteBody);
 
 		return await mod.KVCNoteActionUpdate(storageClient, Object.assign(inputData, {
-			KVCNotePublishStatusIsPublished: true,
+			KVCNoteIsPublic: true,
 		}));
 	},
 
@@ -99,13 +99,13 @@ const mod = {
 		await KVCNoteStorage.KVCNoteStoragePublicDelete(storageClient, KVCNoteStorage.KVCNoteStoragePublicObjectPath(inputData));
 
 		return await mod.KVCNoteActionUpdate(storageClient, Object.assign(inputData, {
-			KVCNotePublishStatusIsPublished: false,
+			KVCNoteIsPublic: false,
 		}));
 	},
 
 	async KVCNoteActionPublicTitlePathMap (storageClient) {
 		return Promise.resolve((await mod.KVCNoteActionQuery(storageClient, {
-			KVCNotePublishStatusIsPublished: true,
+			KVCNoteIsPublic: true,
 		})).map(OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse).map(function (e) {
 			return [KVCParser.KVCParserTitleForPlaintext(e.KVCNoteBody), e.KVCNotePublicID];
 		}).reduce(function (coll, [key, val]) {

@@ -167,13 +167,13 @@ import KVCWriteInput from '../KVCWriteInput/main.svelte';
 		{/if}
 
 		{#if KVCWriteDetailConnected }
-			{#if !mod._ValueItem.KVCNotePublishStatusIsPublished }
+			{#if !mod._ValueItem.KVCNoteIsPublic }
 				<button class="KVCWriteDetailToolbarPublishButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarPublishButtonText') } on:click={ () => KVCWriteDetailDispatchPublish() }>
 					<div class="KVCWriteDetailToolbarPublishButtonImage">{@html _KVCWritePublish }</div>
 				</button>
 			{/if}
 
-			{#if mod._ValueItem.KVCNotePublishStatusIsPublished }
+			{#if mod._ValueItem.KVCNoteIsPublic }
 				<a class="KVCWriteDetailToolbarPublicLink" href={ KVCWriteDetailPublicURLFor(mod._ValueItem) } target="_blank">{ OLSKLocalized('KVCWriteDetailToolbarPublicLinkText') }</a>
 					
 				<button class="KVCWriteDetailToolbarRetractButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarRetractButtonText') } on:click={ () => KVCWriteDetailDispatchRetract() }>

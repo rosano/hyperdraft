@@ -149,12 +149,12 @@ describe('KVCNoteActionQuery', function test_KVCNoteActionQuery() {
 	it('filters boolean', async function() {
 		const items = await uSerial(Array.from(Array(3)).map(async function (e, index) {
 			return await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, Object.assign(kTesting.StubNoteObject(), {
-				KVCNotePublishStatusIsPublished: !!index,
+				KVCNoteIsPublic: !!index,
 			}));
 		}));
 
 		deepEqual(await mainModule.KVCNoteActionQuery(KVCTestingStorageClient, {
-			KVCNotePublishStatusIsPublished: false,
+			KVCNoteIsPublic: false,
 		}), items.slice(0, 1));
 	});
 
@@ -171,8 +171,8 @@ describe('KVCNoteActionPublish', function test_KVCNoteActionPublish() {
 		deepEqual(item === await mainModule.KVCNoteActionPublish(KVCTestingStorageClient, item), true);
 	});
 
-	it('sets KVCNotePublishStatusIsPublished to true', async function() {
-		deepEqual((await mainModule.KVCNoteActionPublish(KVCTestingStorageClient, await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()))).KVCNotePublishStatusIsPublished, true);
+	it('sets KVCNoteIsPublic to true', async function() {
+		deepEqual((await mainModule.KVCNoteActionPublish(KVCTestingStorageClient, await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()))).KVCNoteIsPublic, true);
 	});
 
 	it('sets KVCNotePublicID to lowercase', async function() {
@@ -221,8 +221,8 @@ describe('KVCNoteActionRetract', function test_KVCNoteActionRetract() {
 		deepEqual(item === await mainModule.KVCNoteActionRetract(KVCTestingStorageClient, item), true);
 	});
 
-	it('sets KVCNotePublishStatusIsPublished to false', async function() {
-		deepEqual((await mainModule.KVCNoteActionRetract(KVCTestingStorageClient, await mainModule.KVCNoteActionPublish(KVCTestingStorageClient, await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject())))).KVCNotePublishStatusIsPublished, false);
+	it('sets KVCNoteIsPublic to false', async function() {
+		deepEqual((await mainModule.KVCNoteActionRetract(KVCTestingStorageClient, await mainModule.KVCNoteActionPublish(KVCTestingStorageClient, await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject())))).KVCNoteIsPublic, false);
 	});
 
 	it('deletes file from public folder', async function() {
@@ -239,12 +239,12 @@ describe('KVCNoteActionPublicTitlePathMap', function test_KVCNoteActionPublicTit
 		deepEqual(await mainModule.KVCNoteActionPublicTitlePathMap(KVCTestingStorageClient), {});
 	});
 
-	it('excludes if KVCNotePublishStatusIsPublished false', async function() {
+	it('excludes if KVCNoteIsPublic false', async function() {
 		await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject());
 		deepEqual(await mainModule.KVCNoteActionPublicTitlePathMap(KVCTestingStorageClient), {});
 	});
 
-	it('includes if KVCNotePublishStatusIsPublished true', async function() {
+	it('includes if KVCNoteIsPublic true', async function() {
 		const item = await mainModule.KVCNoteActionPublish(KVCTestingStorageClient, (await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject())));
 		deepEqual(await mainModule.KVCNoteActionPublicTitlePathMap(KVCTestingStorageClient), [[item.KVCNoteBody, item.KVCNotePublicID]].reduce(function (coll, e) {
 			coll[e[0]] = e[1];

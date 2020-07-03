@@ -416,7 +416,7 @@ describe('KVCWrite_Misc', function () {
 			return browser.click('.KVCWriteDetailToolbarRetractButton');
 		});
 
-		it('sets KVCNotePublishStatusIsPublished', function () {
+		it('sets KVCNoteIsPublic', function () {
 			browser.assert.elements('.KVCWriteDetailToolbarPublishButton', 1);
 		});
 

@@ -5,7 +5,7 @@ const storageClient = WKCRefStorageClient();
 
 exports.RCSRefFetchPublicNotesArray = async function () {
 	return Object.values(await storageClient.wikiavec.WKCRefStorageList()).filter(function (e) {
-		return e.KVCNotePublishStatusIsPublished;
+		return e.KVCNoteIsPublic;
 	});
 };
 

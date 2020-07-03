@@ -35,9 +35,9 @@ const mod = {
 			];
 		}
 
-		if (typeof inputData.KVCNotePublishStatusIsPublished !== 'undefined') {
-			if (typeof inputData.KVCNotePublishStatusIsPublished !== 'boolean') {
-				errors.KVCNotePublishStatusIsPublished = [
+		if (typeof inputData.KVCNoteIsPublic !== 'undefined') {
+			if (typeof inputData.KVCNoteIsPublic !== 'boolean') {
+				errors.KVCNoteIsPublic = [
 					'KVCErrorNotBoolean',
 				];
 			}

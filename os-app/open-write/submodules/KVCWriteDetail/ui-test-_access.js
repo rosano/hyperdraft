@@ -148,13 +148,13 @@ describe('KVCWriteDetail_Access', function () {
 			browser.assert.elements(KVCWriteDetailToolbarPublishButtonImage, 1);
 		});
 
-		context('KVCNotePublishStatusIsPublished', function() {
+		context('KVCNoteIsPublic', function() {
 
 			before(function() {
 				return browser.OLSKVisit(kDefaultRoute, {
 					KVCWriteDetailItem: JSON.stringify({
 						KVCNoteBody: 'alfa',
-						KVCNotePublishStatusIsPublished: true,
+						KVCNoteIsPublic: true,
 						KVCNotePublicID: 'bravo',
 					}),
 					KVCWriteDetailConnected: true,

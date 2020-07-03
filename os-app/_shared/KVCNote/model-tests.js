@@ -75,13 +75,13 @@ describe('KVCNoteModelErrorsFor', function test_KVCNoteModelErrorsFor() {
 		deepEqual(mainModule.KVCNoteModelErrorsFor(kTesting.StubNoteObjectValid()), null);
 	});
 
-	context('KVCNotePublishStatusIsPublished', function() {
+	context('KVCNoteIsPublic', function() {
 
-		it('returns object if KVCNotePublishStatusIsPublished not boolean', function() {
+		it('returns object if KVCNoteIsPublic not boolean', function() {
 			deepEqual(mainModule.KVCNoteModelErrorsFor(Object.assign(kTesting.StubNoteObjectValid(), {
-				KVCNotePublishStatusIsPublished: 'true',
+				KVCNoteIsPublic: 'true',
 			})), {
-				KVCNotePublishStatusIsPublished: [
+				KVCNoteIsPublic: [
 					'KVCErrorNotBoolean',
 				],
 			});

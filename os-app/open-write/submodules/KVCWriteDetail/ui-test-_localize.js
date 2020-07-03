@@ -75,14 +75,14 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 					browser.assert.attribute(KVCWriteDetailToolbarPublishButton, 'title', uLocalized('KVCWriteDetailToolbarPublishButtonText'));
 				});
 
-				context('KVCNotePublishStatusIsPublished', function() {
+				context('KVCNoteIsPublic', function() {
 
 					before(function() {
 						return browser.OLSKVisit(kDefaultRoute, {
 							OLSKRoutingLanguage: languageCode,
 							KVCWriteDetailItem: JSON.stringify({
 								KVCNoteBody: 'alfa',
-								KVCNotePublishStatusIsPublished: true,
+								KVCNoteIsPublic: true,
 								KVCNotePublicID: 'bravo',
 							}),
 							KVCWriteDetailConnected: true,
