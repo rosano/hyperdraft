@@ -57,7 +57,7 @@ const mod = {
 		return `<!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>${ mod.KVCTemplateTokenPostTitle() }</title>
 </head>
 <body>
 
