@@ -8,7 +8,17 @@ const mod = {
 </head>
 <body>
 
-<h1>${ mod.KVCTemplateTokenPostTitle() }</h1>
+<article class="KVCTemplateArticle">
+
+<h1 class="KVCTemplateArticleHeading">${ mod.KVCTemplateTokenPostTitle() }</h1>
+
+<div class="KVCTemplateArticleContent">
+
+${ mod.KVCTemplateTokenPostBody() }
+
+</div>
+
+</article>
 
 </body>
 </html>`;
