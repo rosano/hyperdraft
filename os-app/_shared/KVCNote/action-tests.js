@@ -220,7 +220,7 @@ describe('KVCNoteActionPublish', function test_KVCNoteActionPublish() {
 describe('KVCNoteActionRetract', function test_KVCNoteActionRetract() {
 
 	it('rejects if not valid', async function() {
-		await rejects(mainModule.KVCNoteActionPublish(KVCTestingStorageClient, {}), /KVCErrorInputNotValid/);
+		await rejects(mainModule.KVCNoteActionRetract(KVCTestingStorageClient, {}), /KVCErrorInputNotValid/);
 	});
 
 	it('returns KVCNote', async function() {
