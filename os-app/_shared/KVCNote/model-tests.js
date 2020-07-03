@@ -77,7 +77,7 @@ describe('KVCNoteModelErrorsFor', function test_KVCNoteModelErrorsFor() {
 
 	context('KVCNoteIsPublic', function() {
 
-		it('returns object if KVCNoteIsPublic not boolean', function() {
+		it('returns object if boolean', function() {
 			deepEqual(mainModule.KVCNoteModelErrorsFor(Object.assign(kTesting.StubNoteObjectValid(), {
 				KVCNoteIsPublic: 'true',
 			})), {
@@ -97,7 +97,7 @@ describe('KVCNoteModelErrorsFor', function test_KVCNoteModelErrorsFor() {
 
 	context('KVCNotePublishDate', function() {
 
-		it('returns object if KVCNotePublishDate not date', function() {
+		it('returns object if date', function() {
 			deepEqual(mainModule.KVCNoteModelErrorsFor(Object.assign(kTesting.StubNoteObjectValid(), {
 				KVCNotePublishDate: new Date('alfa'),
 			})), {
@@ -117,7 +117,7 @@ describe('KVCNoteModelErrorsFor', function test_KVCNoteModelErrorsFor() {
 
 	context('KVCNotePublicID', function() {
 
-		it('returns object if KVCNotePublicID not string', function() {
+		it('returns object if string', function() {
 			deepEqual(mainModule.KVCNoteModelErrorsFor(Object.assign(kTesting.StubNoteObjectValid(), {
 				KVCNotePublicID: null,
 			})), {
@@ -127,7 +127,7 @@ describe('KVCNoteModelErrorsFor', function test_KVCNoteModelErrorsFor() {
 			});
 		});
 
-		it('returns object if KVCNotePublicID not filled', function() {
+		it('returns object if filled', function() {
 			deepEqual(mainModule.KVCNoteModelErrorsFor(Object.assign(kTesting.StubNoteObjectValid(), {
 				KVCNotePublicID: ' ',
 			})), {
