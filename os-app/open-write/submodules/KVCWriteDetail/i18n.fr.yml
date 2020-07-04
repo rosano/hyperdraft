@@ -5,5 +5,5 @@ KVCWriteDetailToolbarPublicLinkText: Public
 KVCWriteDetailToolbarRetractButtonText: Rétracter
 KVCWriteDetailToolbarVersionsButtonText: Versions
 KVCWriteDetailToolbarDiscardButtonText: Supprimer
-KVCWriteDetailConnectPromptText: Veuillez brancher votre stockage afin de publier. Aimeriez-vous faire ça maintenant?
-KVCWriteDetailDiscardPromptText: Êtes-vous sûr.e?
+KVCWriteDetailConnectConfirmText: Veuillez brancher votre stockage afin de publier. Aimeriez-vous faire ça maintenant?
+KVCWriteDetailDiscardConfirmText: Êtes-vous sûr.e?

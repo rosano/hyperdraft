@@ -41,20 +41,20 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 
 			context('connect', function () {
 			
-				it('localizes KVCWriteDetailConnectPrompt', function() {
+				it('localizes KVCWriteDetailConnectConfirm', function() {
 					browser.assert.OLSKConfirmQuestion(function () {
 						return browser.pressButton(KVCWriteDetailToolbarConnectButton);
-					}, uLocalized('KVCWriteDetailConnectPromptText'));
+					}, uLocalized('KVCWriteDetailConnectConfirmText'));
 				});
 		
 			});
 
 			context('discard', function () {
 			
-				it('localizes KVCWriteDetailDiscardPrompt', function() {
+				it('localizes KVCWriteDetailDiscardConfirm', function() {
 					browser.assert.OLSKConfirmQuestion(function () {
 						return browser.pressButton(KVCWriteDetailToolbarDiscardButton);
-					}, uLocalized('KVCWriteDetailDiscardPromptText'));
+					}, uLocalized('KVCWriteDetailDiscardConfirmText'));
 				});
 		
 			});
