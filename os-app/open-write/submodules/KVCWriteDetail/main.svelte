@@ -55,30 +55,6 @@ import { OLSK_TESTING_BEHAVIOUR } from 'OLSKTesting';
 
 const mod = {
 
-	// MESSAGE
-
-	KVCWriteInputDispatchHeaderTokens (inputData) {
-		mod._ValueHeaderTokens = inputData;
-	},
-
-	KVCWriteInputDispatchUpdate () {
-		KVCWriteDetailDispatchUpdate();
-	},
-
-	KVCWriteInputDispatchOpen (inputData) {
-		KVCWriteDetailDispatchOpen(inputData);
-	},
-
-	KVCWriteInputDispatchReady () {
-		mod._ValueEditorPostInitializeQueue.splice(0, mod._ValueEditorPostInitializeQueue.length).forEach(function(e) {
-			return e(mod.KVCWriteInputInstance);
-		});
-	},
-
-	KVCWriteInputDispatchEscape () {
-		KVCWriteDetailDispatchEscape();
-	},
-
 	// VALUE
 
 	_ValueItem: undefined,
@@ -126,6 +102,30 @@ const mod = {
 				},
 			};
 		}));
+	},
+
+	// MESSAGE
+
+	KVCWriteInputDispatchHeaderTokens (inputData) {
+		mod._ValueHeaderTokens = inputData;
+	},
+
+	KVCWriteInputDispatchUpdate () {
+		KVCWriteDetailDispatchUpdate();
+	},
+
+	KVCWriteInputDispatchOpen (inputData) {
+		KVCWriteDetailDispatchOpen(inputData);
+	},
+
+	KVCWriteInputDispatchReady () {
+		mod._ValueEditorPostInitializeQueue.splice(0, mod._ValueEditorPostInitializeQueue.length).forEach(function(e) {
+			return e(mod.KVCWriteInputInstance);
+		});
+	},
+
+	KVCWriteInputDispatchEscape () {
+		KVCWriteDetailDispatchEscape();
 	},
 
 };
