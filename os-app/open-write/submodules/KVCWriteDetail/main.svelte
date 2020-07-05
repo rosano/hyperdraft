@@ -51,6 +51,7 @@ const OLSKLocalized = function(translationConstant) {
 	return OLSKInternational.OLSKInternationalLocalizedString(translationConstant, JSON.parse(`{"OLSK_I18N_SEARCH_REPLACE":"OLSK_I18N_SEARCH_REPLACE"}`)[window.OLSKPublicConstants('OLSKSharedPageCurrentLanguage')]);
 };
 
+import KVCNoteModel from '../../../_shared/KVCNote/model.js';
 import { OLSK_TESTING_BEHAVIOUR } from 'OLSKTesting';
 
 const mod = {
@@ -167,13 +168,13 @@ import KVCWriteInput from '../KVCWriteInput/main.svelte';
 		{/if}
 
 		{#if KVCWriteDetailConnected }
-			{#if !mod._ValueItem.KVCNoteIsPublic }
+			{#if !KVCNoteModel.KVCNoteModelIsPublic(mod._ValueItem) }
 				<button class="KVCWriteDetailToolbarPublishButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarPublishButtonText') } on:click={ () => KVCWriteDetailDispatchPublish() }>
 					<div class="KVCWriteDetailToolbarPublishButtonImage">{@html _KVCWritePublish }</div>
 				</button>
 			{/if}
 
-			{#if mod._ValueItem.KVCNoteIsPublic }
+			{#if KVCNoteModel.KVCNoteModelIsPublic(mod._ValueItem) }
 				<a class="KVCWriteDetailToolbarPublicLink" href={ KVCWriteDetailPublicURLFor(mod._ValueItem) } target="_blank">{ OLSKLocalized('KVCWriteDetailToolbarPublicLinkText') }</a>
 					
 				<button class="KVCWriteDetailToolbarRetractButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarRetractButtonText') } on:click={ () => KVCWriteDetailDispatchRetract() }>

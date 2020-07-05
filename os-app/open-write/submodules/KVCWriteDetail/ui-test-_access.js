@@ -49,9 +49,7 @@ describe('KVCWriteDetail_Access', function () {
 
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
-				KVCWriteDetailItem: JSON.stringify({
-					KVCNoteBody: 'alfa',
-				}),
+				KVCWriteDetailItem: JSON.stringify(StubNoteObjectValid()),
 			});
 		});
 
@@ -133,9 +131,7 @@ describe('KVCWriteDetail_Access', function () {
 		
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
-				KVCWriteDetailItem: JSON.stringify({
-					KVCNoteBody: 'alfa',
-				}),
+				KVCWriteDetailItem: JSON.stringify(StubNoteObjectValid()),
 				KVCWriteDetailConnected: true,
 			});
 		});
@@ -152,11 +148,11 @@ describe('KVCWriteDetail_Access', function () {
 
 			before(function() {
 				return browser.OLSKVisit(kDefaultRoute, {
-					KVCWriteDetailItem: JSON.stringify({
-						KVCNoteBody: 'alfa',
+					KVCWriteDetailItem: JSON.stringify(Object.assign(StubNoteObjectValid(), {
 						KVCNoteIsPublic: true,
+						KVCNotePublishDate: new Date(),
 						KVCNotePublicID: 'bravo',
-					}),
+					})),
 					KVCWriteDetailConnected: true,
 				});
 			});

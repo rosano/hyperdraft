@@ -13,9 +13,7 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 			before(function() {
 				return browser.OLSKVisit(kDefaultRoute, {
 					OLSKRoutingLanguage: languageCode,
-					KVCWriteDetailItem: JSON.stringify({
-						KVCNoteBody: 'alfa',
-					}),
+					KVCWriteDetailItem: JSON.stringify(StubNoteObjectValid()),
 				});
 			});
 
@@ -64,9 +62,7 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 				before(function() {
 					return browser.OLSKVisit(kDefaultRoute, {
 						OLSKRoutingLanguage: languageCode,
-						KVCWriteDetailItem: JSON.stringify({
-							KVCNoteBody: 'alfa',
-						}),
+						KVCWriteDetailItem: JSON.stringify(StubNoteObjectValid()),
 						KVCWriteDetailConnected: true,
 					});
 				});
@@ -75,16 +71,16 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 					browser.assert.attribute(KVCWriteDetailToolbarPublishButton, 'title', uLocalized('KVCWriteDetailToolbarPublishButtonText'));
 				});
 
-				context('KVCNoteIsPublic', function() {
+				context('KVCNoteModelIsPublic', function() {
 
 					before(function() {
 						return browser.OLSKVisit(kDefaultRoute, {
 							OLSKRoutingLanguage: languageCode,
-							KVCWriteDetailItem: JSON.stringify({
-								KVCNoteBody: 'alfa',
+							KVCWriteDetailItem: JSON.stringify(Object.assign(StubNoteObjectValid(), {
 								KVCNoteIsPublic: true,
+								KVCNotePublishDate: new Date(),
 								KVCNotePublicID: 'bravo',
-							}),
+							})),
 							KVCWriteDetailConnected: true,
 						});
 					});

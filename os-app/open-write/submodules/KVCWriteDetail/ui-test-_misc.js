@@ -6,9 +6,7 @@ describe('KVCWriteDetail_Misc', function () {
 
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
-				KVCWriteDetailItem: JSON.stringify({
-					KVCNoteBody: 'alfa',
-				}),
+				KVCWriteDetailItem: JSON.stringify(StubNoteObjectValid()),
 			});
 		});
 
@@ -48,9 +46,7 @@ describe('KVCWriteDetail_Misc', function () {
 
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
-				KVCWriteDetailItem: JSON.stringify({
-					KVCNoteBody: 'alfa',
-				}),
+				KVCWriteDetailItem: JSON.stringify(StubNoteObjectValid()),
 			});
 		});
 
@@ -269,9 +265,7 @@ describe('KVCWriteDetail_Misc', function () {
 		
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
-				KVCWriteDetailItem: JSON.stringify({
-					KVCNoteBody: 'alfa',
-				}),
+				KVCWriteDetailItem: JSON.stringify(StubNoteObjectValid()),
 				KVCWriteDetailConnected: true,
 			});
 		});
@@ -318,11 +312,11 @@ describe('KVCWriteDetail_Misc', function () {
 
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
-				KVCWriteDetailItem: JSON.stringify({
-					KVCNoteBody: 'alfa',
+				KVCWriteDetailItem: JSON.stringify(Object.assign(StubNoteObjectValid(), {
 					KVCNoteIsPublic: true,
+					KVCNotePublishDate: new Date(),
 					KVCNotePublicID: 'bravo',
-				}),
+				})),
 				KVCWriteDetailConnected: true,
 			});
 		});
@@ -381,9 +375,7 @@ describe('KVCWriteDetail_Misc', function () {
 
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
-				KVCWriteDetailItem: JSON.stringify({
-					KVCNoteBody: 'alfa',
-				}),
+				KVCWriteDetailItem: JSON.stringify(StubNoteObjectValid()),
 			});
 		});
 		
@@ -489,18 +481,13 @@ describe('KVCWriteDetail_Misc', function () {
 		
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
-				KVCWriteDetailItem: JSON.stringify({
-					KVCNoteBody: 'alfa',
-				}),
+				KVCWriteDetailItem: JSON.stringify(StubNoteObjectValid()),
 			});
 		});
 
-		it.skip('binds KVCNoteBody', function () {
-			browser.assert.input('.CodeMirror', 'alfa');
-		});
-			
 		it('binds KVCNoteBody', function () {
-			browser.assert.input('.KVCWriteInputFieldDebug', 'alfa');
+			// browser.assert.input('.CodeMirror', 'bravo');
+			browser.assert.input('.KVCWriteInputFieldDebug', 'bravo');
 		});
 
 		context.skip('WKCDetailFocus', function () {
@@ -522,9 +509,7 @@ describe('KVCWriteDetail_Misc', function () {
 		context('input', function () {
 
 			before(function () {
-				browser.assert.text('#TestKVCWriteDetailItem', JSON.stringify({
-					KVCNoteBody: 'alfa',
-				}));
+				browser.assert.text('#TestKVCWriteDetailItem', JSON.stringify(StubNoteObjectValid()));
 			});
 
 			before(function () {
@@ -532,14 +517,14 @@ describe('KVCWriteDetail_Misc', function () {
 			});
 
 			before(function () {
-				// browser.fill('CodeMirror', 'bravo');
-				browser.fill('.KVCWriteInputFieldDebug', 'bravo');
+				// browser.fill('CodeMirror', 'charlie');
+				browser.fill('.KVCWriteInputFieldDebug', 'charlie');
 			});
 
 			it('updates KVCWriteDetailItem', function () {
-				browser.assert.text('#TestKVCWriteDetailItem', JSON.stringify({
-					KVCNoteBody: 'bravo',
-				}));
+				browser.assert.text('#TestKVCWriteDetailItem', JSON.stringify(Object.assign(StubNoteObjectValid(), {
+					KVCNoteBody: 'charlie',
+				})));
 			});
 
 			it('sends KVCWriteDetailDispatchUpdate', function () {
