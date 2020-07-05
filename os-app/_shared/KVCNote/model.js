@@ -66,6 +66,26 @@ const mod = {
 		return Object.entries(errors).length ? errors : null;
 	},
 
+	KVCNoteModelIsPublic (inputData) {
+		if (mod.KVCNoteModelErrorsFor(inputData)) {
+			throw new Error('KVCErrorInputNotValid');
+		}
+
+		if (!inputData.KVCNoteIsPublic) {
+			return false;
+		}
+
+		if (!inputData.KVCNotePublishDate) {
+			return false;
+		}
+
+		if (!inputData.KVCNotePublicID) {
+			return false;
+		}
+
+		return true;
+	},
+
 };
 
 export default mod;

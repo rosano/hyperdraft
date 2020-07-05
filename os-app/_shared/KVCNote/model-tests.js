@@ -146,3 +146,43 @@ describe('KVCNoteModelErrorsFor', function test_KVCNoteModelErrorsFor() {
 	});
 
 });
+
+describe('KVCNoteModelIsPublic', function test_KVCNoteModelIsPublic() {
+
+	it('throws error if not valid', function() {
+		throws(function() {
+			mainModule.KVCNoteModelIsPublic({});
+		}, /KVCErrorInputNotValid/);
+	});
+
+	it('returns false if KVCNoteIsPublic not true', function() {
+		deepEqual(mainModule.KVCNoteModelIsPublic(Object.assign(kTesting.StubNoteObjectValid(), {
+			KVCNoteIsPublic: false,
+			KVCNotePublishDate: new Date(),
+			KVCNotePublicID: 'alfa',
+		})), false);
+	});
+
+	it('returns false if no KVCNotePublishDate', function() {
+		deepEqual(mainModule.KVCNoteModelIsPublic(Object.assign(kTesting.StubNoteObjectValid(), {
+			KVCNoteIsPublic: true,
+			KVCNotePublicID: 'alfa',
+		})), false);
+	});
+
+	it('returns false if no KVCNotePublicID', function() {
+		deepEqual(mainModule.KVCNoteModelIsPublic(Object.assign(kTesting.StubNoteObjectValid(), {
+			KVCNoteIsPublic: true,
+			KVCNotePublishDate: new Date(),
+		})), false);
+	});
+
+	it('returns true', function() {
+		deepEqual(mainModule.KVCNoteModelIsPublic(Object.assign(kTesting.StubNoteObjectValid(), {
+			KVCNoteIsPublic: true,
+			KVCNotePublishDate: new Date(),
+			KVCNotePublicID: 'true',
+		})), true);
+	});
+
+});
