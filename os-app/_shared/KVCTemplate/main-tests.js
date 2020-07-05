@@ -171,3 +171,54 @@ describe('KVCTemplateReplaceTokens', function test_KVCTemplateReplaceTokens() {
 	});
 
 });
+
+describe('KVCTemplateSubstitutePublicLinks', function test_KVCTemplateSubstitutePublicLinks() {
+
+	it('throws if param1 not string', function () {
+		throws(function () {
+			mainModule.KVCTemplateSubstitutePublicLinks(null, {});
+		}, /KVCErrorInputNotValid/);
+	});
+
+	it('throws if param2 not object', function () {
+		throws(function () {
+			mainModule.KVCTemplateSubstitutePublicLinks('', null);
+		}, /KVCErrorInputNotValid/);
+	});
+
+	it('returns string', function() {
+		deepEqual(mainModule.KVCTemplateSubstitutePublicLinks('', {}), '');
+	});
+
+	it('ignores if no replacement', function() {
+		deepEqual(mainModule.KVCTemplateSubstitutePublicLinks('[[alfa]]', {
+			bravo: 'charlie',
+		}), '[[alfa]]');
+	});
+
+	it('ignores if not double-bracket', function() {
+		deepEqual(mainModule.KVCTemplateSubstitutePublicLinks('[alfa]', {
+			alfa: 'bravo',
+		}), '[alfa]');
+	});
+
+	it('replaces single', function() {
+		deepEqual(mainModule.KVCTemplateSubstitutePublicLinks('[[alfa]]', {
+			alfa: 'bravo',
+		}), '[alfa](/bravo)');
+	});
+
+	it('replaces multiple', function() {
+		deepEqual(mainModule.KVCTemplateSubstitutePublicLinks('[[alfa]] [[charlie]]', {
+			alfa: 'bravo',
+			charlie: 'delta',
+		}), '[alfa](/bravo) [charlie](/delta)');
+	});
+
+	it('replaces duplicate', function() {
+		deepEqual(mainModule.KVCTemplateSubstitutePublicLinks('[[alfa]] [[alfa]]', {
+			alfa: 'bravo',
+		}), '[alfa](/bravo) [alfa](/bravo)');
+	});
+
+});

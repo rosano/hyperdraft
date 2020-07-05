@@ -62,6 +62,20 @@ const mod = {
 		}, {});
 	},
 
+	KVCTemplateSubstitutePublicLinks (param1, param2) {
+		if (typeof param1 !== 'string') {
+			throw new Error('KVCErrorInputNotValid');
+		}
+
+		if (typeof param2 !== 'object' || param2 === null) {
+			throw new Error('KVCErrorInputNotValid');
+		}
+
+		return Object.entries(param2).reduce(function (coll, e) {
+			return coll.split(`[[${ e[0] }]]`).join(`[${ e[0] }](/${ e[1] })`);
+		}, param1);
+	},
+
 };
 
 export default mod;
