@@ -224,7 +224,7 @@ const mod = {
 	},
 	
 	async ControlNotePublish (inputData) {
-		mod.ValueNoteSelected(await KVCNoteAction.KVCNoteActionPublish(mod._ValueStorageClient, inputData, KVCTemplate.KVCTemplateViewDefault()));
+		mod.ValueNoteSelected(await KVCNoteAction.KVCNoteActionPublish(mod._ValueStorageClient, inputData, KVCTemplate.KVCTemplateViewDefault(), await KVCNoteAction.KVCNoteActionPublicTitlePathMap(mod._ValueStorageClient, mod._ValueStorageIsConnected)));
 	},
 	
 	async ControlNoteRetract (inputData) {
