@@ -224,6 +224,10 @@ const mod = {
 	},
 	
 	async ControlNotePublish (inputData) {
+		if (OLSK_TESTING_BEHAVIOUR()) {
+			window.TestControlNotePublishCount.innerHTML = parseInt(window.TestControlNotePublishCount.innerHTML) + 1;
+		}
+		
 		mod.ValueNoteSelected(await KVCNoteAction.KVCNoteActionPublish(mod._ValueStorageClient, inputData, KVCTemplate.KVCTemplateViewDefault(), await KVCNoteAction.KVCNoteActionPublicTitlePathMap(mod._ValueStorageClient, mod._ValueStorageIsConnected)));
 	},
 	
@@ -816,6 +820,11 @@ import OLSKStorageWidget from 'OLSKStorageWidget';
 </OLSKViewportContent>
 
 {#if OLSK_TESTING_BEHAVIOUR()}
+	<p>
+		<strong>TestControlNotePublishCount</strong>
+		<span id="TestControlNotePublishCount">0</span>
+	</p>
+	
 	<p>
 		<strong>TestControlMigrateCount</strong>
 		<span id="TestControlMigrateCount">0</span>

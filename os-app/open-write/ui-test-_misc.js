@@ -400,8 +400,17 @@ describe('KVCWrite_Misc', function () {
 			return uLaunch('FakeStorageIsConnected');
 		});
 
+
+		before(function () {
+			browser.assert.text('#TestControlNotePublishCount', '0');
+		});
+
 		before(function () {
 			return browser.pressButton('.KVCWriteDetailToolbarPublishButton');
+		});
+
+		it('calls ControlNotePublish', function () {
+			browser.assert.text('#TestControlNotePublishCount', '1');
 		});
 
 		it('sets KVCWriteDetailPublicURLFor', function () {
