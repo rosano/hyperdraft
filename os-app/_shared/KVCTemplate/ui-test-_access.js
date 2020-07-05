@@ -5,9 +5,8 @@ Object.entries({
 	KVCTemplateHead: 'html head',
 	KVCTemplateHeadTitle: 'html head title',
 	KVCTemplateBody: 'html body',
-	KVCTemplateArticle: '.KVCTemplateArticle',
-	KVCTemplateArticleHeading: '.KVCTemplateArticleHeading',
-	KVCTemplateArticleContent: '.KVCTemplateArticleContent',
+	KVCArticleTitle: '.KVCArticleTitle',
+	KVCArticleBody: '.KVCArticleBody',
 }).map(function (e) {
 	return global[e.shift()]  = e.pop();
 });
@@ -34,16 +33,12 @@ describe('KVCTemplate_Access', function () {
 		browser.assert.elements(KVCTemplateBody, 1);
 	});
 
-	it('shows KVCTemplateArticle', function () {
-		browser.assert.elements(KVCTemplateArticle, 1);
+	it('shows KVCArticleTitle', function () {
+		browser.assert.elements(KVCArticleTitle, 1);
 	});
 
-	it('shows KVCTemplateArticleHeading', function () {
-		browser.assert.elements(KVCTemplateArticleHeading, 1);
-	});
-
-	it('shows KVCTemplateArticleContent', function () {
-		browser.assert.elements(KVCTemplateArticleContent, 1);
+	it('shows KVCArticleBody', function () {
+		browser.assert.elements(KVCArticleBody, 1);
 	});
 
 });

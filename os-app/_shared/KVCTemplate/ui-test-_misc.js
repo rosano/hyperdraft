@@ -16,18 +16,26 @@ describe('KVCTemplate_Misc', function () {
 		
 	});
 
-	describe('KVCTemplateArticleHeading', function test_KVCTemplateArticleHeading() {
+	describe('KVCTemplateBody', function test_KVCTemplateBody() {
 
-		it('sets text', function () {
-			browser.assert.text(KVCTemplateArticleHeading, mainModule.KVCTemplateTokenPostTitle());
+		it('classes body', function () {
+			browser.assert.hasClass(KVCTemplateBody, 'KVCBox');
 		});
 
 	});
 
-	describe('KVCTemplateArticleContent', function test_KVCTemplateArticleContent() {
+	describe('KVCArticleTitle', function test_KVCArticleTitle() {
 
 		it('sets text', function () {
-			browser.assert.text(KVCTemplateArticleContent, mainModule.KVCTemplateTokenPostBody());
+			browser.assert.text(KVCArticleTitle, mainModule.KVCTemplateTokenPostTitle());
+		});
+
+	});
+
+	describe('KVCArticleBody', function test_KVCArticleBody() {
+
+		it('sets text', function () {
+			browser.assert.text(KVCArticleBody, mainModule.KVCTemplateTokenPostBody());
 		});
 
 	});

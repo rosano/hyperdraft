@@ -8,15 +8,11 @@ const mod = {
 </head>
 <body>
 
-<article class="KVCTemplateArticle">
+<h1 class="KVCArticleTitle">${ mod.KVCTemplateTokenPostTitle() }</h1>
 
-<h1 class="KVCTemplateArticleHeading">${ mod.KVCTemplateTokenPostTitle() }</h1>
-
-<div class="KVCTemplateArticleContent">
+<article class="KVCArticleBody">
 
 ${ mod.KVCTemplateTokenPostBody() }
-
-</div>
 
 </article>
 
