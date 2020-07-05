@@ -235,7 +235,7 @@ describe('KVCNoteActionPublish', function test_KVCNoteActionPublish() {
 			charlie: 'delta',
 		});
 
-		deepEqual((await KVCTestingStorageClient.wikiavec.__DEBUG._OLSKRemoteStoragePublicClient().getFile(KVCNoteStorage.KVCNoteStoragePublicObjectPath(item))).data, 'alfa <p><a href="/delta">charlie</a></p>');
+		deepEqual((await KVCTestingStorageClient.wikiavec.__DEBUG._OLSKRemoteStoragePublicClient().getFile(KVCNoteStorage.KVCNoteStoragePublicObjectPath(item))).data, 'alfa <p><a href="delta">charlie</a></p>');
 	});
 
 });
@@ -277,11 +277,9 @@ describe('KVCNoteActionPublicTitlePathMap', function test_KVCNoteActionPublicTit
 
 	it('includes if KVCNoteIsPublic true', async function() {
 		const item = await kTesting.uPublish(await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()));
-		deepEqual(await mainModule.KVCNoteActionPublicTitlePathMap(KVCTestingStorageClient), [[item.KVCNoteBody, item.KVCNotePublicID]].reduce(function (coll, e) {
-			coll[e[0]] = e[1];
-
-			return coll;
-		}, {}));
+		deepEqual(await mainModule.KVCNoteActionPublicTitlePathMap(KVCTestingStorageClient), {
+			bravo: `/${ item.KVCNotePublicID }`,
+		});
 	});
 
 	it('selects last updated note if duplicate title', async function() {
@@ -296,7 +294,7 @@ describe('KVCNoteActionPublicTitlePathMap', function test_KVCNoteActionPublicTit
 		})));
 
 		deepEqual(await mainModule.KVCNoteActionPublicTitlePathMap(KVCTestingStorageClient), {
-			alfa: item.KVCNotePublicID,
+			alfa: `/${ item.KVCNotePublicID }`,
 		});
 	});
 

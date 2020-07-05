@@ -117,11 +117,11 @@ const mod = {
 		}));
 	},
 
-	async KVCNoteActionPublicTitlePathMap (storageClient) {
+	async KVCNoteActionPublicTitlePathMap (storageClient, isConnected = false) {
 		return Promise.resolve((await mod.KVCNoteActionQuery(storageClient, {
 			KVCNoteIsPublic: true,
 		})).map(function (e) {
-			return [KVCParser.KVCParserTitleForPlaintext(e.KVCNoteBody), e.KVCNotePublicID];
+			return [KVCParser.KVCParserTitleForPlaintext(e.KVCNoteBody), isConnected ? KVCNoteStorage.KVCNoteStoragePublicURL(storageClient, KVCNoteStorage.KVCNoteStoragePublicObjectPath(e)) : `/${ e.KVCNotePublicID }`];
 		}).reduce(function (coll, [key, val]) {
 			if (typeof coll[key] === 'undefined') {
 				coll[key] = val;

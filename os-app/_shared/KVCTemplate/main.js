@@ -72,7 +72,7 @@ const mod = {
 		}
 
 		return Object.entries(param2).reduce(function (coll, e) {
-			return coll.split(`[[${ e[0] }]]`).join(`[${ e[0] }](/${ e[1] })`);
+			return coll.split(`[[${ e[0] }]]`).join(`[${ e[0] }](${ e[1] })`);
 		}, param1);
 	},
 

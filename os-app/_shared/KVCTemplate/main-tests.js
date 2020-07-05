@@ -205,20 +205,20 @@ describe('KVCTemplateSubstitutePublicLinks', function test_KVCTemplateSubstitute
 	it('replaces single', function() {
 		deepEqual(mainModule.KVCTemplateSubstitutePublicLinks('[[alfa]]', {
 			alfa: 'bravo',
-		}), '[alfa](/bravo)');
+		}), '[alfa](bravo)');
 	});
 
 	it('replaces multiple', function() {
 		deepEqual(mainModule.KVCTemplateSubstitutePublicLinks('[[alfa]] [[charlie]]', {
 			alfa: 'bravo',
 			charlie: 'delta',
-		}), '[alfa](/bravo) [charlie](/delta)');
+		}), '[alfa](bravo) [charlie](delta)');
 	});
 
 	it('replaces duplicate', function() {
 		deepEqual(mainModule.KVCTemplateSubstitutePublicLinks('[[alfa]] [[alfa]]', {
 			alfa: 'bravo',
-		}), '[alfa](/bravo) [alfa](/bravo)');
+		}), '[alfa](bravo) [alfa](bravo)');
 	});
 
 });
