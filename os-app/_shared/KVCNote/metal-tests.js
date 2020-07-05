@@ -5,18 +5,6 @@ const KVCNoteStorage = require('./storage.js').default;
 const OLSKRemoteStoragePackage = require('OLSKRemoteStorage');
 const OLSKRemoteStorage = OLSKRemoteStoragePackage.default || OLSKRemoteStoragePackage;
 
-
-const kTesting = {
-	StubNoteObjectValid() {
-		return {
-			KVCNoteID: 'alfa',
-			KVCNoteBody: 'charlie',
-			KVCNoteCreationDate: new Date('2019-02-23T13:56:36Z'),
-			KVCNoteModificationDate: new Date('2019-02-23T13:56:36Z'),
-		};
-	},
-};
-
 describe('KVCNoteMetalWrite', function test_KVCNoteMetalWrite() {
 
 	it('rejects if not object', async function() {
@@ -24,7 +12,7 @@ describe('KVCNoteMetalWrite', function test_KVCNoteMetalWrite() {
 	});
 
 	it('returns object with KVCErrors if not valid', async function() {
-		deepEqual((await mainModule.KVCNoteMetalWrite(KVCTestingStorageClient, Object.assign(kTesting.StubNoteObjectValid(), {
+		deepEqual((await mainModule.KVCNoteMetalWrite(KVCTestingStorageClient, Object.assign(StubNoteObjectValid(), {
 			KVCNoteID: null,
 		}))).KVCErrors, {
 			KVCNoteID: [
@@ -34,9 +22,9 @@ describe('KVCNoteMetalWrite', function test_KVCNoteMetalWrite() {
 	});
 
 	it('resolves object', async function() {
-		let item = await mainModule.KVCNoteMetalWrite(KVCTestingStorageClient, kTesting.StubNoteObjectValid());
+		let item = await mainModule.KVCNoteMetalWrite(KVCTestingStorageClient, StubNoteObjectValid());
 
-		deepEqual(item, Object.assign(kTesting.StubNoteObjectValid(), {
+		deepEqual(item, Object.assign(StubNoteObjectValid(), {
 			'@context': item['@context'],
 		}));
 	});
@@ -50,7 +38,7 @@ describe('KVCNoteMetalList', function test_KVCNoteMetalList() {
 	});
 
 	it('resolves array', async function() {
-		let item = await mainModule.KVCNoteMetalWrite(KVCTestingStorageClient, kTesting.StubNoteObjectValid());
+		let item = await mainModule.KVCNoteMetalWrite(KVCTestingStorageClient, StubNoteObjectValid());
 		deepEqual(Object.values(await mainModule.KVCNoteMetalList(KVCTestingStorageClient)), [item]);
 		deepEqual(Object.keys(await mainModule.KVCNoteMetalList(KVCTestingStorageClient)), [item.KVCNoteID]);
 	});
@@ -64,18 +52,18 @@ describe('KVCNoteMetalDelete', function test_KVCNoteMetalDelete() {
 	});
 
 	it('resolves object', async function() {
-		deepEqual(await mainModule.KVCNoteMetalDelete(KVCTestingStorageClient, await mainModule.KVCNoteMetalWrite(KVCTestingStorageClient, kTesting.StubNoteObjectValid())), {
+		deepEqual(await mainModule.KVCNoteMetalDelete(KVCTestingStorageClient, await mainModule.KVCNoteMetalWrite(KVCTestingStorageClient, StubNoteObjectValid())), {
 			statusCode: 200,
 		});
 	});
 
 	it('deletes KVCNote', async function() {
-		await mainModule.KVCNoteMetalDelete(KVCTestingStorageClient, await mainModule.KVCNoteMetalWrite(KVCTestingStorageClient, kTesting.StubNoteObjectValid()));
+		await mainModule.KVCNoteMetalDelete(KVCTestingStorageClient, await mainModule.KVCNoteMetalWrite(KVCTestingStorageClient, StubNoteObjectValid()));
 		deepEqual(await mainModule.KVCNoteMetalList(KVCTestingStorageClient), {});
 	});
 
 	it('deletes file from public folder', async function() {
-		const item = await mainModule.KVCNoteMetalWrite(KVCTestingStorageClient, Object.assign(kTesting.StubNoteObjectValid(), {
+		const item = await mainModule.KVCNoteMetalWrite(KVCTestingStorageClient, Object.assign(StubNoteObjectValid(), {
 			KVCNotePublicID: 'charlie',
 		}));
 

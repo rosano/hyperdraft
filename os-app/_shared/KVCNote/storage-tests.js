@@ -2,17 +2,6 @@ const { throws, rejects, deepEqual } = require('assert');
 
 const mainModule = require('./storage.js').default;
 
-const kTesting = {
-	StubNoteObjectValid() {
-		return {
-			KVCNoteID: 'alfa',
-			KVCNoteBody: 'bravo',
-			KVCNoteCreationDate: new Date('2019-02-23T13:56:36Z'),
-			KVCNoteModificationDate: new Date('2019-02-23T13:56:36Z'),
-		};
-	},
-};
-
 describe('KVCNoteStorageCollectionType', function test_KVCNoteStorageCollectionType() {
 
 	it('returns string', function() {
@@ -38,7 +27,7 @@ describe('KVCNoteStorageFolderPath', function test_KVCNoteStorageFolderPath() {
 	});
 
 	it('returns string', function() {
-		const item = kTesting.StubNoteObjectValid();
+		const item = StubNoteObjectValid();
 		deepEqual(mainModule.KVCNoteStorageFolderPath(item), mainModule.KVCNoteStorageCollectionPath() + item.KVCNoteCreationDate.toJSON().split('T').shift() + '/' + item.KVCNoteID + '/');
 	});
 
@@ -53,7 +42,7 @@ describe('KVCNoteStorageObjectPath', function test_KVCNoteStorageObjectPath() {
 	});
 
 	it('returns string', function() {
-		deepEqual(mainModule.KVCNoteStorageObjectPath(kTesting.StubNoteObjectValid()), mainModule.KVCNoteStorageFolderPath(kTesting.StubNoteObjectValid()) + 'main');
+		deepEqual(mainModule.KVCNoteStorageObjectPath(StubNoteObjectValid()), mainModule.KVCNoteStorageFolderPath(StubNoteObjectValid()) + 'main');
 	});
 
 });
@@ -67,7 +56,7 @@ describe('KVCNoteStorageObjectPathV1', function test_KVCNoteStorageObjectPathV1(
 	});
 
 	it('returns string', function() {
-		const item = kTesting.StubNoteObjectValid();
+		const item = StubNoteObjectValid();
 		deepEqual(mainModule.KVCNoteStorageObjectPathV1(item), mainModule.KVCNoteStorageCollectionPath() + item.KVCNoteID);
 	});
 
@@ -83,15 +72,15 @@ describe('KVCNoteStorageMatchV1', function test_KVCNoteStorageMatchV1() {
 
 	it('returns false if no KVCNoteStorageCollectionPath', function() {
 		const item = mainModule.KVCNoteStorageCollectionPath();
-		deepEqual(mainModule.KVCNoteStorageMatchV1(mainModule.KVCNoteStorageObjectPathV1(kTesting.StubNoteObjectValid()).replace(item, item.slice(0, -2) + '/')), false);
+		deepEqual(mainModule.KVCNoteStorageMatchV1(mainModule.KVCNoteStorageObjectPathV1(StubNoteObjectValid()).replace(item, item.slice(0, -2) + '/')), false);
 	});
 
 	it('returns false if no KVCNoteStorageObjectPathV1', function() {
-		deepEqual(mainModule.KVCNoteStorageMatchV1(mainModule.KVCNoteStorageObjectPathV1(kTesting.StubNoteObjectValid()) + '/'), false);
+		deepEqual(mainModule.KVCNoteStorageMatchV1(mainModule.KVCNoteStorageObjectPathV1(StubNoteObjectValid()) + '/'), false);
 	});
 
 	it('returns true', function() {
-		deepEqual(mainModule.KVCNoteStorageMatchV1(mainModule.KVCNoteStorageObjectPathV1(kTesting.StubNoteObjectValid())), true);
+		deepEqual(mainModule.KVCNoteStorageMatchV1(mainModule.KVCNoteStorageObjectPathV1(StubNoteObjectValid())), true);
 	});
 
 });
@@ -106,15 +95,15 @@ describe('KVCNoteStorageMatch', function test_KVCNoteStorageMatch() {
 
 	it('returns false if no KVCNoteStorageCollectionPath', function() {
 		const item = mainModule.KVCNoteStorageCollectionPath();
-		deepEqual(mainModule.KVCNoteStorageMatch(mainModule.KVCNoteStorageObjectPath(kTesting.StubNoteObjectValid()).replace(item, item.slice(0, -2) + '/')), false);
+		deepEqual(mainModule.KVCNoteStorageMatch(mainModule.KVCNoteStorageObjectPath(StubNoteObjectValid()).replace(item, item.slice(0, -2) + '/')), false);
 	});
 
 	it('returns false if no KVCNoteStorageObjectPath', function() {
-		deepEqual(mainModule.KVCNoteStorageMatch(mainModule.KVCNoteStorageObjectPath(kTesting.StubNoteObjectValid()).slice(0, -1)), false);
+		deepEqual(mainModule.KVCNoteStorageMatch(mainModule.KVCNoteStorageObjectPath(StubNoteObjectValid()).slice(0, -1)), false);
 	});
 
 	it('returns true', function() {
-		deepEqual(mainModule.KVCNoteStorageMatch(mainModule.KVCNoteStorageObjectPath(kTesting.StubNoteObjectValid())), true);
+		deepEqual(mainModule.KVCNoteStorageMatch(mainModule.KVCNoteStorageObjectPath(StubNoteObjectValid())), true);
 	});
 
 	it('returns false if old path', function () {
@@ -133,12 +122,12 @@ describe('KVCNoteStoragePublicObjectPath', function test_KVCNoteStoragePublicObj
 
 	it('throws if no KVCNotePublicID', async function() {
 		throws(function() {
-			mainModule.KVCNoteStoragePublicObjectPath(kTesting.StubNoteObjectValid());
+			mainModule.KVCNoteStoragePublicObjectPath(StubNoteObjectValid());
 		}, /KVCErrorInputNotValid/);
 	});
 
 	it('returns string', async function() {
-		const item = Object.assign(kTesting.StubNoteObjectValid(), {
+		const item = Object.assign(StubNoteObjectValid(), {
 			KVCNotePublicID: 'charlie',
 		});
 
@@ -182,7 +171,7 @@ describe('KVCNoteStoragePublicDelete', function test_KVCNoteStoragePublicDelete(
 	});
 
 	it('deletes file from public folder', async function() {
-		const item = Object.assign(kTesting.StubNoteObjectValid(), {
+		const item = Object.assign(StubNoteObjectValid(), {
 			KVCNotePublicID: 'charlie',
 		});
 		await mainModule.KVCNoteStoragePublicWrite(KVCTestingStorageClient, mainModule.KVCNoteStoragePublicObjectPath(item), item.KVCNoteBody);
@@ -196,7 +185,7 @@ describe('KVCNoteStoragePublicDelete', function test_KVCNoteStoragePublicDelete(
 
 describe('KVCNoteStoragePublicURL', function test_KVCNoteStoragePublicURL() {
 
-	const item = Object.assign(kTesting.StubNoteObjectValid(), {
+	const item = Object.assign(StubNoteObjectValid(), {
 		KVCNotePublicID: 'charlie',
 	});
 

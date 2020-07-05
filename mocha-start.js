@@ -76,6 +76,15 @@ const KVCVersionStorage = require('./os-app/_shared/KVCVersion/storage.js').defa
 
 (function KVCMochaStubs() {
 	Object.entries({
+		StubNoteObjectValid() {
+			return {
+				KVCNoteID: 'alfa',
+				KVCNoteBody: 'bravo',
+				KVCNoteCreationDate: new Date('2019-02-23T13:56:36Z'),
+				KVCNoteModificationDate: new Date('2019-02-23T13:56:36Z'),
+			};
+		},
+		
 		uSerial (inputData) {
 			return inputData.reduce(async function (coll, e) {
 				return e.then(Array.prototype.concat.bind(await coll));
