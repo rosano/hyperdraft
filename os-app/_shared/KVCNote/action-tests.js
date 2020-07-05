@@ -12,8 +12,8 @@ const kTesting = {
 		};
 	},
 
-	uPublish (param1 = kTesting.StubNoteObject(), param2 = '') {
-		return mainModule.KVCNoteActionPublish(KVCTestingStorageClient, param1, param2)
+	uPublish (param1 = kTesting.StubNoteObject(), param2 = '', param3 = {}) {
+		return mainModule.KVCNoteActionPublish(KVCTestingStorageClient, param1, param2, param3)
 	}
 };
 
@@ -168,11 +168,15 @@ describe('KVCNoteActionQuery', function test_KVCNoteActionQuery() {
 describe('KVCNoteActionPublish', function test_KVCNoteActionPublish() {
 
 	it('rejects if param1 not valid', async function() {
-		await rejects(mainModule.KVCNoteActionPublish(KVCTestingStorageClient, {}, ''), /KVCErrorInputNotValid/);
+		await rejects(mainModule.KVCNoteActionPublish(KVCTestingStorageClient, {}, '', {}), /KVCErrorInputNotValid/);
 	});
 
 	it('rejects if param2 not string', async function() {
 		await rejects(mainModule.KVCNoteActionPublish(KVCTestingStorageClient, StubNoteObjectValid(), null, {}), /KVCErrorInputNotValid/);
+	});
+
+	it('rejects if param3 not object', async function() {
+		await rejects(mainModule.KVCNoteActionPublish(KVCTestingStorageClient, StubNoteObjectValid(), '', null), /KVCErrorInputNotValid/);
 	});
 
 	it('returns param1', async function() {
@@ -222,6 +226,16 @@ describe('KVCNoteActionPublish', function test_KVCNoteActionPublish() {
 		const item = await kTesting.uPublish(await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()), `alfa ${ KVCTemplate.KVCTemplateTokenPostTitle() }`);
 
 		deepEqual((await KVCTestingStorageClient.wikiavec.__DEBUG._OLSKRemoteStoragePublicClient().getFile(KVCNoteStorage.KVCNoteStoragePublicObjectPath(item))).data, 'alfa bravo');
+	});
+
+	it('replaces public links', async function() {
+		const item = await kTesting.uPublish(await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, Object.assign(kTesting.StubNoteObject(), {
+			KVCNoteBody: 'bravo\n[[charlie]]'
+		})), `alfa ${ KVCTemplate.KVCTemplateTokenPostBody() }`, {
+			charlie: 'delta',
+		});
+
+		deepEqual((await KVCTestingStorageClient.wikiavec.__DEBUG._OLSKRemoteStoragePublicClient().getFile(KVCNoteStorage.KVCNoteStoragePublicObjectPath(item))).data, 'alfa <p><a href="/delta">charlie</a></p>');
 	});
 
 });

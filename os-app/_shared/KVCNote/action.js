@@ -79,12 +79,16 @@ const mod = {
 		}));
 	},
 
-	async KVCNoteActionPublish (storageClient, param1, param2) {
+	async KVCNoteActionPublish (storageClient, param1, param2, param3) {
 		if (KVCNoteModel.KVCNoteModelErrorsFor(param1)) {
 			return Promise.reject(new Error('KVCErrorInputNotValid'));
 		}
 
 		if (typeof param2 !== 'string') {
+			return Promise.reject(new Error('KVCErrorInputNotValid'));
+		}
+
+		if (typeof param3 !== 'object' || param3 === null) {
 			return Promise.reject(new Error('KVCErrorInputNotValid'));
 		}
 
@@ -96,7 +100,7 @@ const mod = {
 			param1.KVCNotePublishDate = new Date();
 		}
 
-		await KVCNoteStorage.KVCNoteStoragePublicWrite(storageClient, KVCNoteStorage.KVCNoteStoragePublicObjectPath(param1), OLSKString.OLSKStringReplaceTokens(param2, KVCTemplate.KVCTemplateReplaceTokens(param1.KVCNoteBody)));
+		await KVCNoteStorage.KVCNoteStoragePublicWrite(storageClient, KVCNoteStorage.KVCNoteStoragePublicObjectPath(param1), OLSKString.OLSKStringReplaceTokens(param2, KVCTemplate.KVCTemplateReplaceTokens(KVCTemplate.KVCTemplateSubstitutePublicLinks(param1.KVCNoteBody, param3))));
 
 		return await mod.KVCNoteActionUpdate(storageClient, Object.assign(param1, {
 			KVCNoteIsPublic: true,
