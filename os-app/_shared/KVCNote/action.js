@@ -8,8 +8,6 @@ import KVCSettingAction from '../KVCSetting/action.js';
 import KVCVersionAction from '../KVCVersion/action.js';
 import * as KVCParserPackage from '../KVCParser/main.js';
 const KVCParser = KVCParserPackage.default || KVCParserPackage;
-import * as OLSKRemoteStoragePackage from 'OLSKRemoteStorage';
-const OLSKRemoteStorage = OLSKRemoteStoragePackage.default || OLSKRemoteStoragePackage;
 import * as OLSKStringPackage from 'OLSKString';
 const OLSKString = OLSKStringPackage.default || OLSKStringPackage;
 import * as KVCTemplatePackage from '../KVCTemplate/main.js';
@@ -122,7 +120,7 @@ const mod = {
 	async KVCNoteActionPublicTitlePathMap (storageClient) {
 		return Promise.resolve((await mod.KVCNoteActionQuery(storageClient, {
 			KVCNoteIsPublic: true,
-		})).map(OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse).map(function (e) {
+		})).map(function (e) {
 			return [KVCParser.KVCParserTitleForPlaintext(e.KVCNoteBody), e.KVCNotePublicID];
 		}).reduce(function (coll, [key, val]) {
 			if (typeof coll[key] === 'undefined') {
