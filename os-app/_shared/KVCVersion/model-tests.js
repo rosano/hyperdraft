@@ -3,7 +3,7 @@ const { throws, deepEqual } = require('assert');
 const mainModule = require('./model.js');
 
 const kTesting = {
-	StubNoteObjectValid() {
+	StubVersionObjectValid() {
 		return {
 			KVCVersionID: 'alfa',
 			KVCVersionNoteID: 'bravo',
@@ -22,7 +22,7 @@ describe('KVCVersionModelErrorsFor', function test_KVCVersionModelErrorsFor() {
 	});
 
 	it('returns object if KVCVersionID not string', function() {
-		deepEqual(mainModule.KVCVersionModelErrorsFor(Object.assign(kTesting.StubNoteObjectValid(), {
+		deepEqual(mainModule.KVCVersionModelErrorsFor(Object.assign(kTesting.StubVersionObjectValid(), {
 			KVCVersionID: null,
 		})), {
 			KVCVersionID: [
@@ -32,7 +32,7 @@ describe('KVCVersionModelErrorsFor', function test_KVCVersionModelErrorsFor() {
 	});
 
 	it('returns object if KVCVersionID not filled', function() {
-		deepEqual(mainModule.KVCVersionModelErrorsFor(Object.assign(kTesting.StubNoteObjectValid(), {
+		deepEqual(mainModule.KVCVersionModelErrorsFor(Object.assign(kTesting.StubVersionObjectValid(), {
 			KVCVersionID: ' ',
 		})), {
 			KVCVersionID: [
@@ -42,7 +42,7 @@ describe('KVCVersionModelErrorsFor', function test_KVCVersionModelErrorsFor() {
 	});
 
 	it('returns object if KVCVersionNoteID not string', function() {
-		deepEqual(mainModule.KVCVersionModelErrorsFor(Object.assign(kTesting.StubNoteObjectValid(), {
+		deepEqual(mainModule.KVCVersionModelErrorsFor(Object.assign(kTesting.StubVersionObjectValid(), {
 			KVCVersionNoteID: null,
 		})), {
 			KVCVersionNoteID: [
@@ -52,7 +52,7 @@ describe('KVCVersionModelErrorsFor', function test_KVCVersionModelErrorsFor() {
 	});
 
 	it('returns object if KVCVersionNoteID not filled', function() {
-		deepEqual(mainModule.KVCVersionModelErrorsFor(Object.assign(kTesting.StubNoteObjectValid(), {
+		deepEqual(mainModule.KVCVersionModelErrorsFor(Object.assign(kTesting.StubVersionObjectValid(), {
 			KVCVersionNoteID: ' ',
 		})), {
 			KVCVersionNoteID: [
@@ -62,7 +62,7 @@ describe('KVCVersionModelErrorsFor', function test_KVCVersionModelErrorsFor() {
 	});
 
 	it('returns object if KVCVersionBody not string', function() {
-		deepEqual(mainModule.KVCVersionModelErrorsFor(Object.assign(kTesting.StubNoteObjectValid(), {
+		deepEqual(mainModule.KVCVersionModelErrorsFor(Object.assign(kTesting.StubVersionObjectValid(), {
 			KVCVersionBody: null,
 		})), {
 			KVCVersionBody: [
@@ -72,7 +72,7 @@ describe('KVCVersionModelErrorsFor', function test_KVCVersionModelErrorsFor() {
 	});
 
 	it('returns object if KVCVersionDate not date', function() {
-		deepEqual(mainModule.KVCVersionModelErrorsFor(Object.assign(kTesting.StubNoteObjectValid(), {
+		deepEqual(mainModule.KVCVersionModelErrorsFor(Object.assign(kTesting.StubVersionObjectValid(), {
 			KVCVersionDate: new Date('alfa'),
 		})), {
 			KVCVersionDate: [
@@ -82,7 +82,7 @@ describe('KVCVersionModelErrorsFor', function test_KVCVersionModelErrorsFor() {
 	});
 
 	it('returns null', function() {
-		deepEqual(mainModule.KVCVersionModelErrorsFor(kTesting.StubNoteObjectValid()), null);
+		deepEqual(mainModule.KVCVersionModelErrorsFor(kTesting.StubVersionObjectValid()), null);
 	});
 
 });
