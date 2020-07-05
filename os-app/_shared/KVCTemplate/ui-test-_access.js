@@ -4,6 +4,7 @@ Object.entries({
 	KVCTemplate: 'html',
 	KVCTemplateHead: 'html head',
 	KVCTemplateHeadTitle: 'html head title',
+	KVCTemplateHeadStyle: 'html head style',
 	KVCTemplateBody: 'html body',
 	KVCArticleTitle: '.KVCArticleTitle',
 	KVCArticleBody: '.KVCArticleBody',
@@ -27,6 +28,10 @@ describe('KVCTemplate_Access', function () {
 
 	it('shows KVCTemplateHeadTitle', function () {
 		browser.assert.elements(KVCTemplateHeadTitle, 1);
+	});
+
+	it('shows KVCTemplateHeadStyle', function () {
+		browser.assert.elements(KVCTemplateHeadStyle, 1);
 	});
 
 	it('shows KVCTemplateBody', function () {
