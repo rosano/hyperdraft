@@ -133,6 +133,10 @@ const mod = {
 				}
 
 				await KVCNoteAction.KVCNoteActionUpdate(mod._ValueStorageClient, inputData);
+
+				if (KVCNoteModel.KVCNoteModelIsPublic(inputData)) {
+					mod.ControlNotePublish(inputData);
+				}
 			},
 		});
 

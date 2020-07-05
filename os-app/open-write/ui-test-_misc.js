@@ -400,7 +400,6 @@ describe('KVCWrite_Misc', function () {
 			return uLaunch('FakeStorageIsConnected');
 		});
 
-
 		before(function () {
 			browser.assert.text('#TestControlNotePublishCount', '0');
 		});
@@ -517,6 +516,34 @@ describe('KVCWrite_Misc', function () {
 
 			it('sets KVCWriteMasterListItemSnippet', function () {
 				browser.assert.text('.KVCWriteMasterListItemSnippet', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the…');
+			});
+		
+		});
+
+		context('KVCNoteModelIsPublic', function () {
+			
+			before(function () {
+				return browser.pressButton('.KVCWriteDetailToolbarConnectButton');
+			});
+
+			before(function () {
+				return uLaunch('FakeStorageIsConnected');
+			});
+
+			before(function () {
+				return browser.pressButton('.KVCWriteDetailToolbarPublishButton');
+			});
+
+			before(function () {
+				browser.assert.text('#TestControlNotePublishCount', '1');
+			});
+
+			before(function () {
+				browser.fill('.KVCWriteInputFieldDebug', 'alfa');
+			});
+
+			it('calls ControlNotePublish', function () {
+				browser.assert.text('#TestControlNotePublishCount', '2');
 			});
 		
 		});
