@@ -16,6 +16,14 @@ describe('KVCTemplate_Misc', function () {
 		
 	});
 
+	describe('KVCTemplateHeadMetaContentType', function test_KVCTemplateHeadMetaContentType() {
+
+		it('sets value', function () {
+			browser.assert.attribute(KVCTemplateHeadMetaContentType, 'content', 'text/html; charset=utf-8');
+		});
+
+	});
+
 	describe('KVCTemplateBody', function test_KVCTemplateBody() {
 
 		it('classes body', function () {

@@ -51,6 +51,8 @@ const mod = {
 			color: hsl(0, 0%, 20%);
 		}
 	</style>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </head>
 <body class="KVCBox">
 
