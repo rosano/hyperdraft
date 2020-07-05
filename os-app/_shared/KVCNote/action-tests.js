@@ -172,7 +172,7 @@ describe('KVCNoteActionPublish', function test_KVCNoteActionPublish() {
 	});
 
 	it('rejects if param2 not string', async function() {
-		await rejects(mainModule.KVCNoteActionPublish(KVCTestingStorageClient, kTesting.StubNoteObject(), null), /KVCErrorInputNotValid/);
+		await rejects(mainModule.KVCNoteActionPublish(KVCTestingStorageClient, StubNoteObjectValid(), null, {}), /KVCErrorInputNotValid/);
 	});
 
 	it('returns param1', async function() {
