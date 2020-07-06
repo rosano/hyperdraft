@@ -4,7 +4,7 @@ exports.OLSKControllerRoutes = function() {
 		OLSKRouteMethod: 'get',
 		OLSKRouteSignature: 'KVCTemplateStubRoute',
 		OLSKRouteFunction (req, res, next) {
-			return res.send(require('./template.js').KVCTemplateViewDefault());
+			return res.send(require('./main.js').KVCTemplateViewDefault());
 		},
 	}];
 };

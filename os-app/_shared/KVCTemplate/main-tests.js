@@ -1,7 +1,6 @@
 const { throws, deepEqual } = require('assert');
 
-const mainModule = require('./main.js').default;
-const KVCTemplate = require('./template.js');
+const mainModule = require('./main.js');
 
 const showdown = require('showdown');
 
@@ -174,7 +173,7 @@ describe('KVCTemplateReplaceTokens', function test_KVCTemplateReplaceTokens() {
 		
 		it('sets to KVCTemplatePlaintextTitle', function () {
 			const item = 'alfa\nbravo';
-			deepEqual(mainModule.KVCTemplateReplaceTokens(showdown, item)[KVCTemplate.KVCTemplateTokenPostTitle()], mainModule.KVCTemplatePlaintextTitle(item));
+			deepEqual(mainModule.KVCTemplateReplaceTokens(showdown, item)[mainModule.KVCTemplateTokenPostTitle()], mainModule.KVCTemplatePlaintextTitle(item));
 		});
 	
 	});
@@ -183,7 +182,7 @@ describe('KVCTemplateReplaceTokens', function test_KVCTemplateReplaceTokens() {
 		
 		it('sets to KVCTemplateHTML', function () {
 			const item = 'alfa\n# bravo';
-			deepEqual(mainModule.KVCTemplateReplaceTokens(showdown, item)[KVCTemplate.KVCTemplateTokenPostBody()], mainModule.KVCTemplateHTML(showdown, mainModule.KVCTemplatePlaintextBody(item)));
+			deepEqual(mainModule.KVCTemplateReplaceTokens(showdown, item)[mainModule.KVCTemplateTokenPostBody()], mainModule.KVCTemplateHTML(showdown, mainModule.KVCTemplatePlaintextBody(item)));
 		});
 	
 	});
@@ -240,3 +239,56 @@ describe('KVCTemplateSubstitutePublicLinks', function test_KVCTemplateSubstitute
 	});
 
 });
+
+describe('KVCTemplateViewDefault', function test_KVCTemplateViewDefault() {
+
+	const uTag = function (inputData) {
+		return new RegExp(`<${ inputData }>[\\s\\S]*</${ inputData }>`)
+	};
+
+	const uTagContent = function (param1, param2) {
+		return new RegExp(`<${ param1 }>[\\s\\S]*${ param2 }[\\s\\S]*</${ param1 }>`)
+	};
+
+	it('returns string', function() {
+		deepEqual(typeof mainModule.KVCTemplateViewDefault(), 'string');
+	});
+
+	it('begins with doctype', function() {
+		deepEqual(mainModule.KVCTemplateViewDefault().match('<!DOCTYPE html>').index, 0);
+	});
+
+	it('contains html', function() {
+		deepEqual(!!mainModule.KVCTemplateViewDefault().match(uTag('html')), true);
+	});
+
+	it('contains head', function() {
+		deepEqual(!!mainModule.KVCTemplateViewDefault().match(uTag('head')), true);
+	});
+
+	it('contains title', function() {
+		deepEqual(!!mainModule.KVCTemplateViewDefault().match(uTag('title')), true);
+	});
+
+	it('contains KVCTemplateTokenPostTitle in title', function() {
+		deepEqual(!!mainModule.KVCTemplateViewDefault().match(uTagContent('title', mainModule.KVCTemplateTokenPostTitle())), true);
+	});
+
+});
+
+describe('KVCTemplateTokenPostTitle', function test_KVCTemplateTokenPostTitle() {
+
+	it('returns string', function() {
+		deepEqual(mainModule.KVCTemplateTokenPostTitle(), '{Title}');
+	});
+
+});
+
+describe('KVCTemplateTokenPostBody', function test_KVCTemplateTokenPostBody() {
+
+	it('returns string', function() {
+		deepEqual(mainModule.KVCTemplateTokenPostBody(), '{Body}');
+	});
+
+});
+

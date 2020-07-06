@@ -22,7 +22,7 @@ import KVCSettingMetal from '../_shared/KVCSetting/metal.js';
 import KVCWriteLogic from './ui-logic.js';
 import * as RemoteStoragePackage from 'remotestoragejs';
 const RemoteStorage = RemoteStoragePackage.default || RemoteStoragePackage;
-import * as KVCTemplatePackage from '../_shared/KVCTemplate/template.js';
+import * as KVCTemplatePackage from '../_shared/KVCTemplate/main.js';
 const KVCTemplate = KVCTemplatePackage.default || KVCTemplatePackage;
 
 const mod = {
