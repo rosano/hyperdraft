@@ -32,10 +32,6 @@ describe('KVCTemplateViewDefault', function test_KVCTemplateViewDefault() {
 		deepEqual(!!mainModule.KVCTemplateViewDefault().match(uTag('title')), true);
 	});
 
-	it('contains body', function() {
-		deepEqual(!!mainModule.KVCTemplateViewDefault().match(uTag('body')), true);
-	});
-
 	it('contains KVCTemplateTokenPostTitle in title', function() {
 		deepEqual(!!mainModule.KVCTemplateViewDefault().match(uTagContent('title', mainModule.KVCTemplateTokenPostTitle())), true);
 	});
