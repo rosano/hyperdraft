@@ -62,48 +62,48 @@ describe('KVCTemplatePlaintextBody', function test_KVCTemplatePlaintextBody() {
 
 describe('KVCTemplateRemappedLinks', function test_KVCTemplateRemappedLinks() {
 
-	it('throws if param1 not string', function() {
-		throws(function() {
+	it('throws if param1 not string', function () {
+		throws(function () {
 			mainModule.KVCTemplateRemappedLinks(null, {});
 		}, /KVCErrorInputNotValid/);
 	});
 
-	it('throws if param2 not object', function() {
-		throws(function() {
+	it('throws if param2 not object', function () {
+		throws(function () {
 			mainModule.KVCTemplateRemappedLinks('', null);
 		}, /KVCErrorInputNotValid/);
 	});
 
-	it('returns param1', function() {
-		deepEqual(mainModule.KVCTemplateRemappedLinks('alfa', {}), 'alfa');
+	it('returns string', function() {
+		deepEqual(mainModule.KVCTemplateRemappedLinks('', {}), '');
 	});
 
-	it('excludes if no replacement', function() {
+	it('ignores if no replacement', function() {
 		deepEqual(mainModule.KVCTemplateRemappedLinks('[[alfa]]', {
 			bravo: 'charlie',
 		}), '[[alfa]]');
 	});
 
-	it('excludes if not double-bracket', function() {
+	it('ignores if not double-bracket', function() {
 		deepEqual(mainModule.KVCTemplateRemappedLinks('[alfa]', {
 			alfa: 'bravo',
 		}), '[alfa]');
 	});
 
-	it('includes if single', function() {
+	it('replaces single', function() {
 		deepEqual(mainModule.KVCTemplateRemappedLinks('[[alfa]]', {
 			alfa: 'bravo',
 		}), '[alfa](bravo)');
 	});
 
-	it('includes if multiple', function() {
+	it('replaces multiple', function() {
 		deepEqual(mainModule.KVCTemplateRemappedLinks('[[alfa]] [[charlie]]', {
 			alfa: 'bravo',
 			charlie: 'delta',
 		}), '[alfa](bravo) [charlie](delta)');
 	});
 
-	it('includes if global', function() {
+	it('replaces duplicate', function() {
 		deepEqual(mainModule.KVCTemplateRemappedLinks('[[alfa]] [[alfa]]', {
 			alfa: 'bravo',
 		}), '[alfa](bravo) [alfa](bravo)');
@@ -185,57 +185,6 @@ describe('KVCTemplateReplaceTokens', function test_KVCTemplateReplaceTokens() {
 			deepEqual(mainModule.KVCTemplateReplaceTokens(showdown, item)[mainModule.KVCTemplateTokenPostBody()], mainModule.KVCTemplateHTML(showdown, mainModule.KVCTemplatePlaintextBody(item)));
 		});
 	
-	});
-
-});
-
-describe('KVCTemplateSubstitutePublicLinks', function test_KVCTemplateSubstitutePublicLinks() {
-
-	it('throws if param1 not string', function () {
-		throws(function () {
-			mainModule.KVCTemplateSubstitutePublicLinks(null, {});
-		}, /KVCErrorInputNotValid/);
-	});
-
-	it('throws if param2 not object', function () {
-		throws(function () {
-			mainModule.KVCTemplateSubstitutePublicLinks('', null);
-		}, /KVCErrorInputNotValid/);
-	});
-
-	it('returns string', function() {
-		deepEqual(mainModule.KVCTemplateSubstitutePublicLinks('', {}), '');
-	});
-
-	it('ignores if no replacement', function() {
-		deepEqual(mainModule.KVCTemplateSubstitutePublicLinks('[[alfa]]', {
-			bravo: 'charlie',
-		}), '[[alfa]]');
-	});
-
-	it('ignores if not double-bracket', function() {
-		deepEqual(mainModule.KVCTemplateSubstitutePublicLinks('[alfa]', {
-			alfa: 'bravo',
-		}), '[alfa]');
-	});
-
-	it('replaces single', function() {
-		deepEqual(mainModule.KVCTemplateSubstitutePublicLinks('[[alfa]]', {
-			alfa: 'bravo',
-		}), '[alfa](bravo)');
-	});
-
-	it('replaces multiple', function() {
-		deepEqual(mainModule.KVCTemplateSubstitutePublicLinks('[[alfa]] [[charlie]]', {
-			alfa: 'bravo',
-			charlie: 'delta',
-		}), '[alfa](bravo) [charlie](delta)');
-	});
-
-	it('replaces duplicate', function() {
-		deepEqual(mainModule.KVCTemplateSubstitutePublicLinks('[[alfa]] [[alfa]]', {
-			alfa: 'bravo',
-		}), '[alfa](bravo) [alfa](bravo)');
 	});
 
 });
