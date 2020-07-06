@@ -3,6 +3,8 @@ const { throws, deepEqual } = require('assert');
 const mainModule = require('./main.js').default;
 const KVCTemplate = require('./template.js');
 
+const showdown = require('showdown');
+
 describe('KVCTemplatePlaintextTitle', function test_KVCTemplatePlaintextTitle() {
 
 	it('throws if not string', function () {
@@ -112,51 +114,67 @@ describe('KVCTemplateReplaceLinks', function test_KVCTemplateReplaceLinks() {
 
 describe('KVCTemplateHTML', function test_KVCTemplateHTML() {
 
-	it('throws if not string', function() {
+	it('throws if param1 not showdown', function() {
 		throws(function() {
-			mainModule.KVCTemplateHTML(null);
+			mainModule.KVCTemplateHTML({
+				Converter: null,
+			}, '');
+		}, /KVCErrorInputNotValid/);
+	});
+
+	it('throws if param2 not string', function() {
+		throws(function() {
+			mainModule.KVCTemplateHTML(showdown, null);
 		}, /KVCErrorInputNotValid/);
 	});
 
 	it('returns string as p', function() {
-		deepEqual(mainModule.KVCTemplateHTML('alfa'), '<p>alfa</p>');
+		deepEqual(mainModule.KVCTemplateHTML(showdown, 'alfa'), '<p>alfa</p>');
 	});
 
 	it('converts simple headers without anchors', function() {
-		deepEqual(mainModule.KVCTemplateHTML('# alfa'), '<h1>alfa</h1>');
+		deepEqual(mainModule.KVCTemplateHTML(showdown, '# alfa'), '<h1>alfa</h1>');
 	});
 
 	it('converts single newline as br', function() {
-		deepEqual(mainModule.KVCTemplateHTML('alfa\nbravo'), '<p>alfa<br />\nbravo</p>');
+		deepEqual(mainModule.KVCTemplateHTML(showdown, 'alfa\nbravo'), '<p>alfa<br />\nbravo</p>');
 	});
 
 	it('converts double newline as p', function() {
-		deepEqual(mainModule.KVCTemplateHTML('alfa\n\nbravo'), '<p>alfa</p>\n<p>bravo</p>');
+		deepEqual(mainModule.KVCTemplateHTML(showdown, 'alfa\n\nbravo'), '<p>alfa</p>\n<p>bravo</p>');
 	});
 
 	it('converts www domains to links', function() {
-		deepEqual(mainModule.KVCTemplateHTML('www.alfa.com'), '<p><a href="http://www.alfa.com">www.alfa.com</a></p>');
+		deepEqual(mainModule.KVCTemplateHTML(showdown, 'www.alfa.com'), '<p><a href="http://www.alfa.com">www.alfa.com</a></p>');
 	});
 
 });
 
 describe('KVCTemplateReplaceTokens', function test_KVCTemplateReplaceTokens() {
 
+	it('throws if param1 not showdown', function() {
+		throws(function() {
+			mainModule.KVCTemplateReplaceTokens({
+				Converter: null,
+			}, '');
+		}, /KVCErrorInputNotValid/);
+	});
+
 	it('throws if not string', function () {
 		throws(function () {
-			mainModule.KVCTemplateReplaceTokens(null)
+			mainModule.KVCTemplateReplaceTokens(showdown, null)
 		}, /KVCErrorInputNotValid/);
 	});
 
 	it('returns object', function() {
-		deepEqual(typeof mainModule.KVCTemplateReplaceTokens(''), 'object');
+		deepEqual(typeof mainModule.KVCTemplateReplaceTokens(showdown, ''), 'object');
 	});
 
 	context('KVCTemplateTokenPostTitle', function () {
 		
 		it('sets to KVCTemplatePlaintextTitle', function () {
 			const item = 'alfa\nbravo';
-			deepEqual(mainModule.KVCTemplateReplaceTokens(item)[KVCTemplate.KVCTemplateTokenPostTitle()], mainModule.KVCTemplatePlaintextTitle(item));
+			deepEqual(mainModule.KVCTemplateReplaceTokens(showdown, item)[KVCTemplate.KVCTemplateTokenPostTitle()], mainModule.KVCTemplatePlaintextTitle(item));
 		});
 	
 	});
@@ -165,7 +183,7 @@ describe('KVCTemplateReplaceTokens', function test_KVCTemplateReplaceTokens() {
 		
 		it('sets to KVCTemplateHTML', function () {
 			const item = 'alfa\n# bravo';
-			deepEqual(mainModule.KVCTemplateReplaceTokens(item)[KVCTemplate.KVCTemplateTokenPostBody()], mainModule.KVCTemplateHTML(mainModule.KVCTemplatePlaintextBody(item)));
+			deepEqual(mainModule.KVCTemplateReplaceTokens(showdown, item)[KVCTemplate.KVCTemplateTokenPostBody()], mainModule.KVCTemplateHTML(showdown, mainModule.KVCTemplatePlaintextBody(item)));
 		});
 	
 	});

@@ -12,6 +12,8 @@ import * as OLSKStringPackage from 'OLSKString';
 const OLSKString = OLSKStringPackage.default || OLSKStringPackage;
 import * as KVCTemplatePackage from '../KVCTemplate/main.js';
 const KVCTemplate = KVCTemplatePackage.default || KVCTemplatePackage;
+import * as showdownPackage from 'showdown';
+const showdown = showdownPackage.default || showdownPackage;
 
 const mod = {
 
@@ -98,7 +100,7 @@ const mod = {
 			param1.KVCNotePublishDate = new Date();
 		}
 
-		await KVCNoteStorage.KVCNoteStoragePublicWrite(storageClient, KVCNoteStorage.KVCNoteStoragePublicObjectPath(param1), OLSKString.OLSKStringReplaceTokens(param2, KVCTemplate.KVCTemplateReplaceTokens(KVCTemplate.KVCTemplateSubstitutePublicLinks(param1.KVCNoteBody, param3))));
+		await KVCNoteStorage.KVCNoteStoragePublicWrite(storageClient, KVCNoteStorage.KVCNoteStoragePublicObjectPath(param1), OLSKString.OLSKStringReplaceTokens(param2, KVCTemplate.KVCTemplateReplaceTokens(showdown, KVCTemplate.KVCTemplateSubstitutePublicLinks(param1.KVCNoteBody, param3))));
 
 		return await mod.KVCNoteActionUpdate(storageClient, Object.assign(param1, {
 			KVCNoteIsPublic: true,

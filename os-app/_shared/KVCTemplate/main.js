@@ -1,9 +1,3 @@
-import * as showdownPackage from 'showdown';
-const showdown = showdownPackage.default || showdownPackage;
-const showdownConverter = new showdown.Converter();
-showdownConverter.setOption('simpleLineBreaks', true);
-showdownConverter.setOption('simplifiedAutoLink', true);
-showdownConverter.setOption('noHeaderId', true);
 import * as KVCTemplatePackage from './template.js';
 const KVCTemplate = KVCTemplatePackage.default || KVCTemplatePackage;
 
@@ -39,22 +33,35 @@ const mod = {
 		}, param1);
 	},
 
-	KVCTemplateHTML (inputData) {
+	KVCTemplateHTML (showdown, inputData) {
+		if (typeof showdown.Converter !== 'function') {
+			throw new Error('KVCErrorInputNotValid');
+		}
+		
 		if (typeof inputData !== 'string') {
 			throw new Error('KVCErrorInputNotValid');
 		}
 
+		const showdownConverter = new showdown.Converter();
+		showdownConverter.setOption('simpleLineBreaks', true);
+		showdownConverter.setOption('simplifiedAutoLink', true);
+		showdownConverter.setOption('noHeaderId', true);
+
 		return showdownConverter.makeHtml(inputData);
 	},
 
-	KVCTemplateReplaceTokens (inputData) {
+	KVCTemplateReplaceTokens (showdown, inputData) {
+		if (typeof showdown.Converter !== 'function') {
+			throw new Error('KVCErrorInputNotValid');
+		}
+		
 		if (typeof inputData !== 'string') {
 			throw new Error('KVCErrorInputNotValid');
 		}
 
 		return [
 			[KVCTemplate.KVCTemplateTokenPostTitle(), mod.KVCTemplatePlaintextTitle(inputData)],
-			[KVCTemplate.KVCTemplateTokenPostBody(), mod.KVCTemplateHTML(mod.KVCTemplatePlaintextBody(inputData))],
+			[KVCTemplate.KVCTemplateTokenPostBody(), mod.KVCTemplateHTML(showdown, mod.KVCTemplatePlaintextBody(inputData))],
 		].reduce(function (coll, item) {
 			coll[item.shift()] = item.pop();
 
