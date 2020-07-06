@@ -24,6 +24,14 @@ describe('KVCTemplate_Misc', function () {
 
 	});
 
+	describe('KVCTemplateHeadMetaViewport', function test_KVCTemplateHeadMetaViewport() {
+
+		it('sets value', function () {
+			browser.assert.attribute(KVCTemplateHeadMetaViewport, 'content', 'width=device-width');
+		});
+
+	});
+
 	describe('KVCTemplateBody', function test_KVCTemplateBody() {
 
 		it('classes body', function () {
