@@ -60,51 +60,51 @@ describe('KVCTemplatePlaintextBody', function test_KVCTemplatePlaintextBody() {
 
 });
 
-describe('KVCTemplateReplaceLinks', function test_KVCTemplateReplaceLinks() {
+describe('KVCTemplateRemappedLinks', function test_KVCTemplateRemappedLinks() {
 
 	it('throws if param1 not string', function() {
 		throws(function() {
-			mainModule.KVCTemplateReplaceLinks(null, {});
+			mainModule.KVCTemplateRemappedLinks(null, {});
 		}, /KVCErrorInputNotValid/);
 	});
 
 	it('throws if param2 not object', function() {
 		throws(function() {
-			mainModule.KVCTemplateReplaceLinks('', null);
+			mainModule.KVCTemplateRemappedLinks('', null);
 		}, /KVCErrorInputNotValid/);
 	});
 
 	it('returns param1', function() {
-		deepEqual(mainModule.KVCTemplateReplaceLinks('alfa', {}), 'alfa');
+		deepEqual(mainModule.KVCTemplateRemappedLinks('alfa', {}), 'alfa');
 	});
 
 	it('excludes if no replacement', function() {
-		deepEqual(mainModule.KVCTemplateReplaceLinks('[[alfa]]', {
+		deepEqual(mainModule.KVCTemplateRemappedLinks('[[alfa]]', {
 			bravo: 'charlie',
 		}), '[[alfa]]');
 	});
 
 	it('excludes if not double-bracket', function() {
-		deepEqual(mainModule.KVCTemplateReplaceLinks('[alfa]', {
+		deepEqual(mainModule.KVCTemplateRemappedLinks('[alfa]', {
 			alfa: 'bravo',
 		}), '[alfa]');
 	});
 
 	it('includes if single', function() {
-		deepEqual(mainModule.KVCTemplateReplaceLinks('[[alfa]]', {
+		deepEqual(mainModule.KVCTemplateRemappedLinks('[[alfa]]', {
 			alfa: 'bravo',
 		}), '[alfa](bravo)');
 	});
 
 	it('includes if multiple', function() {
-		deepEqual(mainModule.KVCTemplateReplaceLinks('[[alfa]] [[charlie]]', {
+		deepEqual(mainModule.KVCTemplateRemappedLinks('[[alfa]] [[charlie]]', {
 			alfa: 'bravo',
 			charlie: 'delta',
 		}), '[alfa](bravo) [charlie](delta)');
 	});
 
 	it('includes if global', function() {
-		deepEqual(mainModule.KVCTemplateReplaceLinks('[[alfa]] [[alfa]]', {
+		deepEqual(mainModule.KVCTemplateRemappedLinks('[[alfa]] [[alfa]]', {
 			alfa: 'bravo',
 		}), '[alfa](bravo) [alfa](bravo)');
 	});

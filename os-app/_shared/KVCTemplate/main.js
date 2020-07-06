@@ -16,7 +16,7 @@ const mod = {
 		return inputData.split('\n').slice(1).join('\n').trim();
 	},
 
-	KVCTemplateReplaceLinks (param1, param2) {
+	KVCTemplateRemappedLinks (param1, param2) {
 		if (typeof param1 !== 'string') {
 			throw new Error('KVCErrorInputNotValid');
 		}
