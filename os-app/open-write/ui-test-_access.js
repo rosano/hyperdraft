@@ -53,7 +53,7 @@ describe('KVCWrite_Access', function () {
 		browser.assert.elements('.OLSKAppToolbarLauncherButton', 1);
 	});
 
-	context('click OLSKAppToolbarStorageButton', function () {
+	describe('OLSKAppToolbarStorageButton', function test_OLSKAppToolbarStorageButton () {
 		
 		before(function () {
 			return browser.pressButton('.OLSKAppToolbarStorageButton');
@@ -177,22 +177,6 @@ describe('KVCWrite_Access', function () {
 
 		before(function () {
 			return browser.fill('.LCHLauncherFilterInput', 'KVCWriteLauncherItemJournal');
-		});
-
-		it('shows LCHLauncherPipeItem', function () {
-			browser.assert.elements('.LCHLauncherPipeItem', 1);
-		});
-
-	});
-
-	context('FakeStorageIsConnected', function test_FakeStorageIsConnected() {
-		
-		before(function () {
-			return browser.pressButton('.OLSKAppToolbarLauncherButton');
-		});
-
-		before(function () {
-			return browser.fill('.LCHLauncherFilterInput', 'FakeStorageIsConnected');
 		});
 
 		it('shows LCHLauncherPipeItem', function () {
