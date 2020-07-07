@@ -56,7 +56,7 @@ const mod = {
 		}
 	},
 
-	KVCWriteCustomDomainURLFunction (param1, param2, param3, param4) {
+	KVCWriteCustomDomainBaseURLFunction (param1, param2, param3, param4) {
 		if (typeof param1 !== 'string') {
 			throw new Error('KVCErrorInputNotValid');
 		}

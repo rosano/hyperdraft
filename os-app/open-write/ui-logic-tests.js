@@ -148,44 +148,44 @@ describe('KVCWriteCustomDomainBaseURLData', function test_KVCWriteCustomDomainBa
 
 });
 
-describe('KVCWriteCustomDomainURLFunction', function test_KVCWriteCustomDomainURLFunction() {
+describe('KVCWriteCustomDomainBaseURLFunction', function test_KVCWriteCustomDomainBaseURLFunction() {
 
 	it('throws error if param1 not string', function() {
 		throws(function() {
-			mainModule.KVCWriteCustomDomainURLFunction(null, '');
+			mainModule.KVCWriteCustomDomainBaseURLFunction(null, '');
 		}, /KVCErrorInputNotValid/);
 	});
 
 	it('throws error if param2 not string', function() {
 		throws(function() {
-			mainModule.KVCWriteCustomDomainURLFunction('', null);
+			mainModule.KVCWriteCustomDomainBaseURLFunction('', null);
 		}, /KVCErrorInputNotValid/);
 	});
 
 	it('returns function', function() {
-		deepEqual(typeof mainModule.KVCWriteCustomDomainURLFunction('', ''), 'function');
+		deepEqual(typeof mainModule.KVCWriteCustomDomainBaseURLFunction('', ''), 'function');
 	});
 
 	context('function', function () {
 
 		it('throws error if url not string', function() {
 			throws(function() {
-				mainModule.KVCWriteCustomDomainURLFunction('', '')(null, '');
+				mainModule.KVCWriteCustomDomainBaseURLFunction('', '')(null, '');
 			}, /KVCErrorInputNotValid/);
 		});
 
 		it('throws error if domain not string', function() {
 			throws(function() {
-				mainModule.KVCWriteCustomDomainURLFunction('', '')('', null);
+				mainModule.KVCWriteCustomDomainBaseURLFunction('', '')('', null);
 			}, /KVCErrorInputNotValid/);
 		});
 		
 		it('returns string', function() {
-			deepEqual(mainModule.KVCWriteCustomDomainURLFunction('', '')('', ''), '');
+			deepEqual(mainModule.KVCWriteCustomDomainBaseURLFunction('', '')('', ''), '');
 		});
 		
 		it('returns replaces common substring between original params with domain in url', function() {
-			deepEqual(mainModule.KVCWriteCustomDomainURLFunction('alfa-bravo', '-bravo')('alfa-delta', 'echo'), 'echo-delta');
+			deepEqual(mainModule.KVCWriteCustomDomainBaseURLFunction('alfa-bravo', '-bravo')('alfa-delta', 'echo'), 'echo-delta');
 		});
 	
 	});
