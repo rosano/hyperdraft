@@ -71,6 +71,106 @@ const mod = {
 
 	// DATA
 
+	DataRecipes () {
+		const outputData = [{
+			LCHRecipeSignature: 'KVCWriteLauncherItemJournal',
+			LCHRecipeName: OLSKLocalized('KVCWriteLauncherItemJournalText'),
+			LCHRecipeCallback () {
+				mod.ControlNoteCreate(OLSKLocalized('KVCWriteLauncherItemJournalText').toLowerCase() + '-' + KVCWriteLogic.KVCWriteHumanTimestampString(this.api.LCHDateLocalOffsetSubtracted(new Date())) + '\n\n- ');
+			},
+		}];
+
+		if (OLSK_TESTING_BEHAVIOUR()) {
+			outputData.push(...[
+				{
+					LCHRecipeName: 'FakeOLSKChangeDelegateCreateNote',
+					LCHRecipeCallback: async function FakeOLSKChangeDelegateCreateNote () {
+						return mod.OLSKChangeDelegateCreateNote(await KVCNoteAction.KVCNoteActionCreate(mod._ValueStorageClient, mod.FakeNoteObjectValid('FakeOLSKChangeDelegateCreateNote')));
+					},
+				},
+				{
+					LCHRecipeName: 'FakeOLSKChangeDelegateUpdateNote',
+					LCHRecipeCallback: async function FakeOLSKChangeDelegateUpdateNote () {
+						return mod.OLSKChangeDelegateUpdateNote(await KVCNoteAction.KVCNoteActionUpdate(mod._ValueStorageClient, Object.assign(mod._ValueNotesAll.filter(function (e) {
+							return e.KVCNoteBody.match('FakeOLSKChangeDelegate');
+						}).pop(), {
+							KVCNoteBody: 'FakeOLSKChangeDelegateUpdateNote',
+						})));
+					},
+				},
+				{
+					LCHRecipeName: 'FakeOLSKChangeDelegateDeleteNote',
+					LCHRecipeCallback: async function FakeOLSKChangeDelegateDeleteNote () {
+						const item = mod._ValueNotesAll.filter(function (e) {
+							return e.KVCNoteBody.match('FakeOLSKChangeDelegate');
+						}).pop();
+						
+						await KVCNoteAction.KVCNoteActionDelete(mod._ValueStorageClient, item);
+						
+						return mod.OLSKChangeDelegateDeleteNote(item);
+					},
+				},
+				{
+					LCHRecipeName: 'FakeOLSKChangeDelegateConflictNote',
+					LCHRecipeCallback: async function FakeOLSKChangeDelegateConflictNote () {
+						const item = mod._ValueNotesAll.filter(function (e) {
+							return e.KVCNoteBody.match('FakeOLSKChangeDelegateConflictNote');
+						}).pop();
+						
+						return mod.OLSKChangeDelegateConflictNote({
+							origin: 'conflict',
+							oldValue: OLSKRemoteStorage.OLSKRemoteStoragePreJSONSchemaValidate(await KVCNoteAction.KVCNoteActionUpdate(mod._ValueStorageClient, Object.assign({}, item, {
+								KVCNoteBody: item.KVCNoteBody + '-local',
+							}))),
+							newValue: OLSKRemoteStorage.OLSKRemoteStoragePreJSONSchemaValidate(Object.assign({}, item, {
+								KVCNoteBody: item.KVCNoteBody + '-remote',
+							})),
+						});
+					},
+				},
+				{
+					LCHRecipeName: 'FakeEscapeWithoutSort',
+					LCHRecipeCallback: function FakeEscapeWithoutSort () {
+						mod.ControlNoteSelect(null);
+					},
+				},
+				{
+					LCHRecipeName: 'FakeCreateNoteV1',
+					LCHRecipeCallback: async function FakeCreateNoteV1 () {
+						const item = {
+							KVCNoteID: 'alfa',
+							KVCNoteBody: '',
+							KVCNoteCreationDate: new Date('2019-02-23T13:56:36Z'),
+							KVCNoteModificationDate: new Date('2019-02-23T13:56:36Z'),
+						};
+						await mod._ValueStorageClient.wikiavec.__DEBUG._OLSKRemoteStoragePrivateClient().storeObject(KVCNoteStorage.KVCNoteStorageCollectionType(), KVCNoteStorage.KVCNoteStorageObjectPathV1(item), OLSKRemoteStorage.OLSKRemoteStoragePreJSONSchemaValidate(item));
+						await mod.SetupValueNotesAll();
+					},
+				},
+				{
+					LCHRecipeName: 'FakeStorageNotConnected',
+					LCHRecipeCallback: function FakeStorageNotConnected () {
+						mod.StorageNotConnected();
+					},
+				},
+				{
+					LCHRecipeName: 'FakeStorageSyncDone',
+					LCHRecipeCallback: function FakeStorageSyncDone () {
+						mod.StorageSyncDone();
+					},
+				},
+				{
+					LCHRecipeName: 'FakeStorageIsConnected',
+					LCHRecipeCallback: function FakeStorageIsConnected () {
+						mod._ValueStorageIsConnected = true;
+					},
+				},
+			]);
+		}
+
+		return outputData;
+	},
+
 	DataIsMobile () {
 		return window.innerWidth <= 760;
 	},
@@ -361,104 +461,8 @@ const mod = {
 	},
 
 	OLSKAppToolbarDispatchLauncher () {
-		const items = [{
-			LCHRecipeSignature: 'KVCWriteLauncherItemJournal',
-			LCHRecipeName: OLSKLocalized('KVCWriteLauncherItemJournalText'),
-			LCHRecipeCallback () {
-				mod.ControlNoteCreate(OLSKLocalized('KVCWriteLauncherItemJournalText').toLowerCase() + '-' + KVCWriteLogic.KVCWriteHumanTimestampString(this.api.LCHDateLocalOffsetSubtracted(new Date())) + '\n\n- ');
-			},
-		}];
-
-		if (OLSK_TESTING_BEHAVIOUR()) {
-			items.push(...[
-				{
-					LCHRecipeName: 'FakeOLSKChangeDelegateCreateNote',
-					LCHRecipeCallback: async function FakeOLSKChangeDelegateCreateNote () {
-						return mod.OLSKChangeDelegateCreateNote(await KVCNoteAction.KVCNoteActionCreate(mod._ValueStorageClient, mod.FakeNoteObjectValid('FakeOLSKChangeDelegateCreateNote')));
-					},
-				},
-				{
-					LCHRecipeName: 'FakeOLSKChangeDelegateUpdateNote',
-					LCHRecipeCallback: async function FakeOLSKChangeDelegateUpdateNote () {
-						return mod.OLSKChangeDelegateUpdateNote(await KVCNoteAction.KVCNoteActionUpdate(mod._ValueStorageClient, Object.assign(mod._ValueNotesAll.filter(function (e) {
-							return e.KVCNoteBody.match('FakeOLSKChangeDelegate');
-						}).pop(), {
-							KVCNoteBody: 'FakeOLSKChangeDelegateUpdateNote',
-						})));
-					},
-				},
-				{
-					LCHRecipeName: 'FakeOLSKChangeDelegateDeleteNote',
-					LCHRecipeCallback: async function FakeOLSKChangeDelegateDeleteNote () {
-						const item = mod._ValueNotesAll.filter(function (e) {
-							return e.KVCNoteBody.match('FakeOLSKChangeDelegate');
-						}).pop();
-						
-						await KVCNoteAction.KVCNoteActionDelete(mod._ValueStorageClient, item);
-						
-						return mod.OLSKChangeDelegateDeleteNote(item);
-					},
-				},
-				{
-					LCHRecipeName: 'FakeOLSKChangeDelegateConflictNote',
-					LCHRecipeCallback: async function FakeOLSKChangeDelegateConflictNote () {
-						const item = mod._ValueNotesAll.filter(function (e) {
-							return e.KVCNoteBody.match('FakeOLSKChangeDelegateConflictNote');
-						}).pop();
-						
-						return mod.OLSKChangeDelegateConflictNote({
-							origin: 'conflict',
-							oldValue: OLSKRemoteStorage.OLSKRemoteStoragePreJSONSchemaValidate(await KVCNoteAction.KVCNoteActionUpdate(mod._ValueStorageClient, Object.assign({}, item, {
-								KVCNoteBody: item.KVCNoteBody + '-local',
-							}))),
-							newValue: OLSKRemoteStorage.OLSKRemoteStoragePreJSONSchemaValidate(Object.assign({}, item, {
-								KVCNoteBody: item.KVCNoteBody + '-remote',
-							})),
-						});
-					},
-				},
-				{
-					LCHRecipeName: 'FakeEscapeWithoutSort',
-					LCHRecipeCallback: function FakeEscapeWithoutSort () {
-						mod.ControlNoteSelect(null);
-					},
-				},
-				{
-					LCHRecipeName: 'FakeCreateNoteV1',
-					LCHRecipeCallback: async function FakeCreateNoteV1 () {
-						const item = {
-							KVCNoteID: 'alfa',
-							KVCNoteBody: '',
-							KVCNoteCreationDate: new Date('2019-02-23T13:56:36Z'),
-							KVCNoteModificationDate: new Date('2019-02-23T13:56:36Z'),
-						};
-						await mod._ValueStorageClient.wikiavec.__DEBUG._OLSKRemoteStoragePrivateClient().storeObject(KVCNoteStorage.KVCNoteStorageCollectionType(), KVCNoteStorage.KVCNoteStorageObjectPathV1(item), OLSKRemoteStorage.OLSKRemoteStoragePreJSONSchemaValidate(item));
-						await mod.SetupValueNotesAll();
-					},
-				},
-				{
-					LCHRecipeName: 'FakeStorageNotConnected',
-					LCHRecipeCallback: function FakeStorageNotConnected () {
-						mod.StorageNotConnected();
-					},
-				},
-				{
-					LCHRecipeName: 'FakeStorageSyncDone',
-					LCHRecipeCallback: function FakeStorageSyncDone () {
-						mod.StorageSyncDone();
-					},
-				},
-				{
-					LCHRecipeName: 'FakeStorageIsConnected',
-					LCHRecipeCallback: function FakeStorageIsConnected () {
-						mod._ValueStorageIsConnected = true;
-					},
-				},
-			]);
-		}
-		
 		window.Launchlet.LCHSingletonCreate({
-			LCHOptionRecipes: items,
+			LCHOptionRecipes: mod.DataRecipes(),
 		});
 	},
 
