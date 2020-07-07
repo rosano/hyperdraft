@@ -76,7 +76,7 @@ const mod = {
 			LCHRecipeSignature: 'KVCWriteLauncherItemJournal',
 			LCHRecipeName: OLSKLocalized('KVCWriteLauncherItemJournalText'),
 			LCHRecipeCallback () {
-				mod.ControlNoteCreate(OLSKLocalized('KVCWriteLauncherItemJournalText').toLowerCase() + '-' + KVCWriteLogic.KVCWriteHumanTimestampString(this.api.LCHDateLocalOffsetSubtracted(new Date())) + '\n\n- ');
+				mod.ControlNoteCreate(KVCWriteLogic.KVCWriteLauncherItemJournalTemplate(this.api.LCHDateLocalOffsetSubtracted(new Date()), OLSKLocalized));
 			},
 		}];
 

@@ -27,6 +27,18 @@ const mod = {
 		return inputData.toJSON().slice(0, 16);
 	},
 
+	KVCWriteLauncherItemJournalTemplate (param1, param2) {
+		if (!(param1 instanceof Date) || Number.isNaN(param1.getTime())) {
+			throw new Error('KVCErrorInputNotValid');
+		}
+
+		if (typeof param2 !== 'function') {
+			throw new Error('KVCErrorInputNotValid');
+		}
+
+		return param2('KVCWriteLauncherItemJournalText').toLowerCase() + '-' + mod.KVCWriteHumanTimestampString(param1) + '\n\n- ';
+	},
+
 };
 
 Object.assign(exports, mod);

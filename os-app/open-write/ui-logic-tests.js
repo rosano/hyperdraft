@@ -90,3 +90,26 @@ describe('KVCWriteHumanTimestampString', function test_KVCWriteHumanTimestampStr
 	});
 
 });
+
+describe('KVCWriteLauncherItemJournalTemplate', function test_KVCWriteLauncherItemJournalTemplate() {
+
+	it('throws error if param1 not date', function() {
+		throws(function() {
+			mainModule.KVCWriteHumanTimestampString(new Date('alfa'), function () {});
+		}, /KVCErrorInputNotValid/);
+	});
+
+	it('throws error if param2 not function', function() {
+		throws(function() {
+			mainModule.KVCWriteLauncherItemJournalTemplate(new Date(), null);
+		}, /KVCErrorInputNotValid/);
+	});
+
+	it('returns string', function() {
+		const item = new Date();
+		deepEqual(mainModule.KVCWriteLauncherItemJournalTemplate(item, function (inputData) {
+			return 'Alfa-' + inputData;
+		}), ('alfa-' + 'KVCWriteLauncherItemJournalText').toLowerCase() + '-' + mainModule.KVCWriteHumanTimestampString(item) + '\n\n- ');
+	});
+
+});
