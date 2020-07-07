@@ -413,7 +413,7 @@ describe('KVCWrite_Misc', function () {
 		});
 
 		it('sets KVCWriteDetailPublicURLFor', function () {
-			browser.assert.attribute('.KVCWriteDetailToolbarPublicLink', 'href', '/OLSK_TESTING_BEHAVIOUR');
+			browser.assert.attribute('.KVCWriteDetailToolbarPublicLink', 'href', '/FakePublicPath');
 		});
 
 	});

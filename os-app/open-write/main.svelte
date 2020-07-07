@@ -496,7 +496,7 @@ const mod = {
 
 	KVCWriteDetailPublicURLFor (inputData) {
 		if (OLSK_TESTING_BEHAVIOUR() && mod._ValueStorageIsConnected) {
-			return '/OLSK_TESTING_BEHAVIOUR';
+			return '/FakePublicPath';
 		}
 
 		return KVCNoteStorage.KVCNoteStoragePublicURL(mod._ValueStorageClient, KVCNoteStorage.KVCNoteStoragePublicObjectPath(inputData));
