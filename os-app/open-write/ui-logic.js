@@ -55,6 +55,28 @@ const mod = {
 		}
 	},
 
+	KVCWriteCustomDomainURLFunction (param1, param2, param3, param4) {
+		if (typeof param1 !== 'string') {
+			throw new Error('KVCErrorInputNotValid');
+		}
+
+		if (typeof param2 !== 'string') {
+			throw new Error('KVCErrorInputNotValid');
+		}
+
+		return function (url, domain) {
+			if (typeof url !== 'string') {
+				throw new Error('KVCErrorInputNotValid');
+			}
+
+			if (typeof domain !== 'string') {
+				throw new Error('KVCErrorInputNotValid');
+			}
+
+			return url.replace(param1.replace(param2, ''), domain);
+		};
+	},
+
 };
 
 Object.assign(exports, mod);

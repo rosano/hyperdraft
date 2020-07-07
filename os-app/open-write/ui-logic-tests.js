@@ -147,3 +147,47 @@ describe('KVCWriteHostname', function test_KVCWriteHostname() {
 	});
 
 });
+
+describe('KVCWriteCustomDomainURLFunction', function test_KVCWriteCustomDomainURLFunction() {
+
+	it('throws error if param1 not string', function() {
+		throws(function() {
+			mainModule.KVCWriteCustomDomainURLFunction(null, '');
+		}, /KVCErrorInputNotValid/);
+	});
+
+	it('throws error if param2 not string', function() {
+		throws(function() {
+			mainModule.KVCWriteCustomDomainURLFunction('', null);
+		}, /KVCErrorInputNotValid/);
+	});
+
+	it('returns function', function() {
+		deepEqual(typeof mainModule.KVCWriteCustomDomainURLFunction('', ''), 'function');
+	});
+
+	context('function', function () {
+
+		it('throws error if url not string', function() {
+			throws(function() {
+				mainModule.KVCWriteCustomDomainURLFunction('', '')(null, '');
+			}, /KVCErrorInputNotValid/);
+		});
+
+		it('throws error if domain not string', function() {
+			throws(function() {
+				mainModule.KVCWriteCustomDomainURLFunction('', '')('', null);
+			}, /KVCErrorInputNotValid/);
+		});
+		
+		it('returns string', function() {
+			deepEqual(mainModule.KVCWriteCustomDomainURLFunction('', '')('', ''), '');
+		});
+		
+		it('returns replaces common substring between original params with domain in url', function() {
+			deepEqual(mainModule.KVCWriteCustomDomainURLFunction('alfa-bravo', '-bravo')('alfa-delta', 'echo'), 'echo-delta');
+		});
+	
+	});
+
+});
