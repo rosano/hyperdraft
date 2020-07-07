@@ -225,6 +225,10 @@ const mod = {
 		return '/' + inputData.KVCNotePublicID;
 	},
 
+	KVCNoteStoragePublicRootPagePath () {
+		return '/index.html';
+	},
+
 	KVCNoteStoragePublicWrite (storageClient, param1, param2) {
 		return storageClient.wikiavec.kvc_notes._KVCNoteStoragePublicWrite(param1, param2);
 	},

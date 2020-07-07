@@ -136,6 +136,14 @@ describe('KVCNoteStoragePublicObjectPath', function test_KVCNoteStoragePublicObj
 
 });
 
+describe('KVCNoteStoragePublicRootPagePath', function test_KVCNoteStoragePublicRootPagePath() {
+
+	it('returns string', async function() {
+		deepEqual(mainModule.KVCNoteStoragePublicRootPagePath(), '/index.html');
+	});
+
+});
+
 describe('KVCNoteStoragePublicWrite', function test_KVCNoteStoragePublicWrite() {
 
 	it('rejects if not object path', async function() {
