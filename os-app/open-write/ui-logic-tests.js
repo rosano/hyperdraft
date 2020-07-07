@@ -113,3 +113,37 @@ describe('KVCWriteLauncherItemJournalTemplate', function test_KVCWriteLauncherIt
 	});
 
 });
+
+describe('KVCWriteHostname', function test_KVCWriteHostname() {
+
+	it('throws error if not string', function() {
+		throws(function() {
+			mainModule.KVCWriteHostname(null);
+		}, /KVCErrorInputNotValid/);
+	});
+
+	it('returns null if no text', function() {
+		deepEqual(mainModule.KVCWriteHostname(''), null);
+	});
+
+	it('returns null if no host', function() {
+		deepEqual(mainModule.KVCWriteHostname('https:///'), null);
+	});
+
+	it('returns string if URL with host', function() {
+		deepEqual(mainModule.KVCWriteHostname('http://example.com'), 'example.com');
+	});
+
+	it('returns string if URL with path', function() {
+		deepEqual(mainModule.KVCWriteHostname('http://example.com/alfa/bravo'), 'example.com');
+	});
+
+	it('returns string if URL with https', function() {
+		deepEqual(mainModule.KVCWriteHostname('https://example.com/alfa/bravo'), 'example.com');
+	});
+
+	it('returns string if host', function() {
+		deepEqual(mainModule.KVCWriteHostname('example.com'), 'example.com');
+	});
+
+});

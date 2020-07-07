@@ -39,6 +39,22 @@ const mod = {
 		return param2('KVCWriteLauncherItemJournalText').toLowerCase() + '-' + mod.KVCWriteHumanTimestampString(param1) + '\n\n- ';
 	},
 
+	KVCWriteHostname (inputData) {
+		if (typeof inputData !== 'string') {
+			throw new Error('KVCErrorInputNotValid');
+		}
+
+		if (!inputData.match(/https?\:\/\//)) {
+			inputData = 'http://' + inputData;
+		};
+
+		try {
+			return (new URL('', inputData)).hostname
+		} catch (err) {
+			return null;
+		}
+	},
+
 };
 
 Object.assign(exports, mod);
