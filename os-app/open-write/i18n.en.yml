@@ -5,3 +5,4 @@ KVCWriteLauncherItemConfigureCustomDomainText: Configure custom domain name
 KVCWriteLauncherItemConfigureCustomDomainPrompt1QuestionText: Copy the following root URL and paste it in your host configuration.
 KVCWriteLauncherItemConfigureCustomDomainPrompt2QuestionText: What is your custom domain name?
 KVCWriteLauncherItemConfigureCustomDomainConfirmQuestionText: The domain name does not seem to be present. Would you like to try again?
+KVCWriteLauncherItemRemoveCustomDomainText: Remove custom domain name

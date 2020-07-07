@@ -221,4 +221,36 @@ describe('KVCWrite_Access', function () {
 
 	});
 
+	describe('KVCWriteLauncherItemRemoveCustomDomain', function test_KVCWriteLauncherItemRemoveCustomDomain() {
+		
+		before(function () {
+			return browser.fill('.LCHLauncherFilterInput', 'KVCWriteLauncherItemRemoveCustomDomain');
+		});
+
+		it('hides LCHLauncherPipeItem', function () {
+			browser.assert.elements('.LCHLauncherPipeItem', 0);
+		});
+
+		context('set_domain', function () {
+			
+			before(function () {
+				return uLaunch('FakeConfigureCustomDomain');
+			});
+
+			before(function () {
+				return browser.pressButton('.OLSKAppToolbarLauncherButton');
+			});
+
+			before(function () {
+				return browser.fill('.LCHLauncherFilterInput', 'KVCWriteLauncherItemRemoveCustomDomain');
+			});
+
+			it('shows LCHLauncherPipeItem', function () {
+				browser.assert.elements('.LCHLauncherPipeItem', 1);
+			});
+		
+		});
+
+	});
+
 });

@@ -141,6 +141,23 @@ const mod = {
 					}
 				},
 			});
+
+			outputData.push({
+				LCHRecipeSignature: 'KVCWriteLauncherItemRemoveCustomDomain',
+				LCHRecipeName: OLSKLocalized('KVCWriteLauncherItemRemoveCustomDomainText'),
+				LCHRecipeCallback: async function KVCWriteLauncherItemRemoveCustomDomain () {
+					await KVCSettingAction.KVCSettingsActionDelete(mod._ValueStorageClient, 'KVCSettingCustomDomainBaseURL');
+
+					delete mod._ValueSettingsAll[mod._ValueSettingsAll.indexOf(mod.ValueSetting('KVCSettingCustomDomainBaseURL'))];
+
+					if (mod._ValueNoteSelected) {
+						mod._ControlHotfixUpdateInPlace(mod._ValueNoteSelected);
+					}
+				},
+				LCHRecipeIsExcluded () {
+					return !mod.ValueSetting('KVCSettingCustomDomainBaseURL');
+				},
+			});
 		}
 
 		if (OLSK_TESTING_BEHAVIOUR()) {
@@ -226,6 +243,12 @@ const mod = {
 					LCHRecipeName: 'FakeStorageIsConnected',
 					LCHRecipeCallback: function FakeStorageIsConnected () {
 						mod._ValueStorageIsConnected = true;
+					},
+				},
+				{
+					LCHRecipeName: 'FakeConfigureCustomDomain',
+					LCHRecipeCallback: async function FakeConfigureCustomDomain () {
+						mod._ValueSettingsAll.push(await KVCSettingAction.KVCSettingsActionProperty(mod._ValueStorageClient, 'KVCSettingCustomDomainBaseURL', 'FakeCustomDomainBaseURL'));
 					},
 				},
 			]);

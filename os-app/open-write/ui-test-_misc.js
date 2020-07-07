@@ -640,6 +640,18 @@ describe('KVCWrite_Misc', function () {
 	
 	});
 
+	describe('KVCWriteLauncherItemRemoveCustomDomain', function test_KVCWriteLauncherItemRemoveCustomDomain () {
+		
+		before(function () {
+			return uLaunch('KVCWriteLauncherItemRemoveCustomDomain');
+		});
+
+		it.skip('sets KVCWriteDetailPublicURLFor', function () {
+			browser.assert.attribute('.KVCWriteDetailToolbarPublicLink', 'href', '/FakePublicPath');
+		});
+	
+	});
+
 	describe('KVCWriteLegacyRoute', function () {
 		
 		before(function () {
