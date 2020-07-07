@@ -45,11 +45,12 @@ const mod = {
 		}
 
 		if (!inputData.match(/https?\:\/\//)) {
-			inputData = 'http://' + inputData;
+			inputData = 'https://' + inputData;
 		};
 
 		try {
-			return (new URL('', inputData)).hostname
+			const item = new URL('', inputData);
+			return item.protocol + '//' + item.hostname
 		} catch (err) {
 			return null;
 		}
