@@ -131,7 +131,7 @@ describe('KVCNoteStoragePublicObjectPath', function test_KVCNoteStoragePublicObj
 			KVCNotePublicID: 'charlie',
 		});
 
-		deepEqual(await mainModule.KVCNoteStoragePublicObjectPath(item), '/' + item.KVCNotePublicID);
+		deepEqual(mainModule.KVCNoteStoragePublicObjectPath(item), '/' + item.KVCNotePublicID);
 	});
 
 });
