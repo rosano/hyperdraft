@@ -114,36 +114,36 @@ describe('KVCWriteLauncherItemJournalTemplate', function test_KVCWriteLauncherIt
 
 });
 
-describe('KVCWriteHostname', function test_KVCWriteHostname() {
+describe('KVCWriteCustomDomainBaseURLData', function test_KVCWriteCustomDomainBaseURLData() {
 
 	it('throws error if not string', function() {
 		throws(function() {
-			mainModule.KVCWriteHostname(null);
+			mainModule.KVCWriteCustomDomainBaseURLData(null);
 		}, /KVCErrorInputNotValid/);
 	});
 
 	it('returns null if no text', function() {
-		deepEqual(mainModule.KVCWriteHostname(''), null);
+		deepEqual(mainModule.KVCWriteCustomDomainBaseURLData(''), null);
 	});
 
 	it('returns null if no host', function() {
-		deepEqual(mainModule.KVCWriteHostname('https:///'), null);
+		deepEqual(mainModule.KVCWriteCustomDomainBaseURLData('https:///'), null);
 	});
 
 	it('returns string if host', function() {
-		deepEqual(mainModule.KVCWriteHostname('example.com'), 'https://example.com');
+		deepEqual(mainModule.KVCWriteCustomDomainBaseURLData('example.com'), 'https://example.com');
 	});
 
 	it('returns string if URL with host', function() {
-		deepEqual(mainModule.KVCWriteHostname('http://example.com'), 'http://example.com');
+		deepEqual(mainModule.KVCWriteCustomDomainBaseURLData('http://example.com'), 'http://example.com');
 	});
 
 	it('returns string if URL with path', function() {
-		deepEqual(mainModule.KVCWriteHostname('http://example.com/alfa/bravo'), 'http://example.com');
+		deepEqual(mainModule.KVCWriteCustomDomainBaseURLData('http://example.com/alfa/bravo'), 'http://example.com');
 	});
 
 	it('returns string if URL with https', function() {
-		deepEqual(mainModule.KVCWriteHostname('https://example.com/alfa/bravo'), 'https://example.com');
+		deepEqual(mainModule.KVCWriteCustomDomainBaseURLData('https://example.com/alfa/bravo'), 'https://example.com');
 	});
 
 });

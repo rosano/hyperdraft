@@ -39,7 +39,7 @@ const mod = {
 		return param2('KVCWriteLauncherItemJournalText').toLowerCase() + '-' + mod.KVCWriteHumanTimestampString(param1) + '\n\n- ';
 	},
 
-	KVCWriteHostname (inputData) {
+	KVCWriteCustomDomainBaseURLData (inputData) {
 		if (typeof inputData !== 'string') {
 			throw new Error('KVCErrorInputNotValid');
 		}
