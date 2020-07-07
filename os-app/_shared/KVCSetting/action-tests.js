@@ -17,11 +17,11 @@ describe('KVCSettingsActionProperty', function test_KVCSettingsActionProperty() 
 		it('returns value if undefined', async function() {
 			await mainModule.KVCSettingsActionProperty(KVCTestingStorageClient, 'alfa', 'bravo');
 
-			deepEqual(await mainModule.KVCSettingsActionProperty(KVCTestingStorageClient, 'alfa'), 'bravo');
+			deepEqual(await mainModule.KVCSettingsActionProperty(KVCTestingStorageClient, 'alfa'), await mainModule.KVCSettingsActionProperty(KVCTestingStorageClient, 'alfa'));
 		});
 
-		it('returns true and sets value', async function() {
-			deepEqual(await mainModule.KVCSettingsActionProperty(KVCTestingStorageClient, 'alfa', 'bravo'), true);
+		it('returns object and sets value', async function() {
+			deepEqual(await mainModule.KVCSettingsActionProperty(KVCTestingStorageClient, 'alfa', 'bravo'), await mainModule.KVCSettingsActionProperty(KVCTestingStorageClient, 'alfa'));
 		});
 		
 	});

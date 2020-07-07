@@ -11,12 +11,10 @@ const mod = {
 			return Promise.reject(new Error('KVCErrorInputNotValid'));
 		}
 
-		let outputData = (await KVCSettingsMetal.KVCSettingsMetalWrite(storageClient, {
+		return await KVCSettingsMetal.KVCSettingsMetalWrite(storageClient, {
 			KVCSettingKey: param1,
 			KVCSettingValue: param2,
-		}));
-
-		return Promise.resolve(true);
+		});
 	},
 
 	async _KVCSettingsActionGet (storageClient, inputData) {
@@ -24,9 +22,7 @@ const mod = {
 			return Promise.reject(new Error('KVCErrorInputNotValid'));
 		}
 
-		let outputData = await KVCSettingsMetal.KVCSettingsMetalRead(storageClient, inputData);
-
-		return Promise.resolve(outputData ? outputData.KVCSettingValue : undefined);
+		return await KVCSettingsMetal.KVCSettingsMetalRead(storageClient, inputData);
 	},
 
 	async KVCSettingsActionProperty (storageClient, param1, param2) {
