@@ -169,7 +169,7 @@ describe('KVCWrite_Access', function () {
 		
 	});
 
-	context('KVCWriteLauncherItemJournal', function test_KVCWriteLauncherItemJournal() {
+	describe('KVCWriteLauncherItemJournal', function test_KVCWriteLauncherItemJournal() {
 		
 		before(function () {
 			return browser.pressButton('.OLSKAppToolbarLauncherButton');
@@ -185,7 +185,7 @@ describe('KVCWrite_Access', function () {
 
 	});
 
-	context('KVCWriteLauncherItemCustomDomain', function test_KVCWriteLauncherItemCustomDomain() {
+	describe('KVCWriteLauncherItemCustomDomain', function test_KVCWriteLauncherItemCustomDomain() {
 		
 		before(function () {
 			return browser.pressButton('.OLSKAppToolbarLauncherButton');
