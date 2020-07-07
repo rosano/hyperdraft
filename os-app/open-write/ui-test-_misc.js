@@ -600,14 +600,14 @@ describe('KVCWrite_Misc', function () {
 
 	});
 
-	describe('KVCWriteLauncherItemCustomDomain', function test_KVCWriteLauncherItemCustomDomain () {
+	describe('KVCWriteLauncherItemConfigureCustomDomain', function test_KVCWriteLauncherItemConfigureCustomDomain () {
 		
 		before(function () {
 			return browser.pressButton('.OLSKAppToolbarLauncherButton');
 		});
 
 		before(function () {
-			return browser.fill('.LCHLauncherFilterInput', 'KVCWriteLauncherItemCustomDomain');
+			return browser.fill('.LCHLauncherFilterInput', 'KVCWriteLauncherItemConfigureCustomDomain');
 		});
 
 		const prompt1 = {};
@@ -630,7 +630,7 @@ describe('KVCWrite_Misc', function () {
 			});
 		});
 
-		it.skip('sets KVCWriteLauncherItemCustomDomainPrompt1Response', function () {
+		it.skip('sets KVCWriteLauncherItemConfigureCustomDomainPrompt1Response', function () {
 			browser.assert.deepEqual(prompt1.response, KVCNoteStorage.KVCNoteStoragePublicRootPagePath());
 		});
 

@@ -90,28 +90,28 @@ const mod = {
 		if (mod._ValueStorageIsConnected) {
 			let count = 0;
 			outputData.push({
-				LCHRecipeSignature: 'KVCWriteLauncherItemCustomDomain',
-				LCHRecipeName: OLSKLocalized('KVCWriteLauncherItemCustomDomainText'),
-				LCHRecipeCallback: function KVCWriteLauncherItemCustomDomain () {
+				LCHRecipeSignature: 'KVCWriteLauncherItemConfigureCustomDomain',
+				LCHRecipeName: OLSKLocalized('KVCWriteLauncherItemConfigureCustomDomainText'),
+				LCHRecipeCallback: function KVCWriteLauncherItemConfigureCustomDomain () {
 					const prompt1 = !OLSK_TESTING_BEHAVIOUR() || (OLSK_TESTING_BEHAVIOUR() && !count);
 					const prompt2 = !OLSK_TESTING_BEHAVIOUR() || (OLSK_TESTING_BEHAVIOUR() && count);
 					const confirm3 = !OLSK_TESTING_BEHAVIOUR() || (OLSK_TESTING_BEHAVIOUR() && count == 2);
 
 					if (prompt1) {
-						if (window.prompt(OLSKLocalized('KVCWriteLauncherItemCustomDomainPrompt1QuestionText'), KVCNoteStorage.KVCNoteStoragePublicURL(mod._ValueStorageClient, KVCNoteStorage.KVCNoteStoragePublicRootPagePath())) === null) {
+						if (window.prompt(OLSKLocalized('KVCWriteLauncherItemConfigureCustomDomainPrompt1QuestionText'), KVCNoteStorage.KVCNoteStoragePublicURL(mod._ValueStorageClient, KVCNoteStorage.KVCNoteStoragePublicRootPagePath())) === null) {
 							return;
 						};
 					}
 					
 					if (prompt2) {
 						const callback = async function () {
-							const response = OLSK_TESTING_BEHAVIOUR() && confirm3 ? '' : window.prompt(OLSKLocalized('KVCWriteLauncherItemCustomDomainPrompt2QuestionText'));
+							const response = OLSK_TESTING_BEHAVIOUR() && confirm3 ? '' : window.prompt(OLSKLocalized('KVCWriteLauncherItemConfigureCustomDomainPrompt2QuestionText'));
 
 							if (response === null) {
 								return;
 							}
 
-							if (!response && window.confirm(OLSKLocalized('KVCWriteLauncherItemCustomDomainConfirmQuestionText'))) {
+							if (!response && window.confirm(OLSKLocalized('KVCWriteLauncherItemConfigureCustomDomainConfirmQuestionText'))) {
 								callback();
 							}
 

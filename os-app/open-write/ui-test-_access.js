@@ -185,14 +185,14 @@ describe('KVCWrite_Access', function () {
 
 	});
 
-	describe('KVCWriteLauncherItemCustomDomain', function test_KVCWriteLauncherItemCustomDomain() {
+	describe('KVCWriteLauncherItemConfigureCustomDomain', function test_KVCWriteLauncherItemConfigureCustomDomain() {
 		
 		before(function () {
 			return browser.pressButton('.OLSKAppToolbarLauncherButton');
 		});
 
 		before(function () {
-			return browser.fill('.LCHLauncherFilterInput', 'KVCWriteLauncherItemCustomDomain');
+			return browser.fill('.LCHLauncherFilterInput', 'KVCWriteLauncherItemConfigureCustomDomain');
 		});
 
 		it('hides LCHLauncherPipeItem', function () {
@@ -210,7 +210,7 @@ describe('KVCWrite_Access', function () {
 			});
 
 			before(function () {
-				return browser.fill('.LCHLauncherFilterInput', 'KVCWriteLauncherItemCustomDomain');
+				return browser.fill('.LCHLauncherFilterInput', 'KVCWriteLauncherItemConfigureCustomDomain');
 			});
 
 			it('shows LCHLauncherPipeItem', function () {

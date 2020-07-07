@@ -72,7 +72,7 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 		
 		});
 
-		context('KVCWriteLauncherItemCustomDomain', function () {
+		context('KVCWriteLauncherItemConfigureCustomDomain', function () {
 			
 			before(function () {
 				return uLaunch('FakeStorageIsConnected');
@@ -83,11 +83,11 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 			});
 
 			before(function () {
-				return browser.fill('.LCHLauncherFilterInput', 'KVCWriteLauncherItemCustomDomain');
+				return browser.fill('.LCHLauncherFilterInput', 'KVCWriteLauncherItemConfigureCustomDomain');
 			});
 
-			it('localizes KVCWriteLauncherItemCustomDomain', function () {
-				browser.assert.text('.LCHLauncherPipeItem', uLocalized('KVCWriteLauncherItemCustomDomainText'));
+			it('localizes KVCWriteLauncherItemConfigureCustomDomain', function () {
+				browser.assert.text('.LCHLauncherPipeItem', uLocalized('KVCWriteLauncherItemConfigureCustomDomainText'));
 			});
 
 			context('click', function () {
@@ -118,16 +118,16 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 					}).question;
 				});
 
-				it('sets KVCWriteLauncherItemCustomDomainPrompt1Question', function () {
-					browser.assert.deepEqual(prompt1.question, uLocalized('KVCWriteLauncherItemCustomDomainPrompt1QuestionText'));
+				it('sets KVCWriteLauncherItemConfigureCustomDomainPrompt1Question', function () {
+					browser.assert.deepEqual(prompt1.question, uLocalized('KVCWriteLauncherItemConfigureCustomDomainPrompt1QuestionText'));
 				});
 
-				it('sets KVCWriteLauncherItemCustomDomainPrompt2Question', function () {
-					browser.assert.deepEqual(prompt2.question, uLocalized('KVCWriteLauncherItemCustomDomainPrompt2QuestionText'));
+				it('sets KVCWriteLauncherItemConfigureCustomDomainPrompt2Question', function () {
+					browser.assert.deepEqual(prompt2.question, uLocalized('KVCWriteLauncherItemConfigureCustomDomainPrompt2QuestionText'));
 				});
 
-				it('sets KVCWriteLauncherItemCustomDomainConfirmQuestion', function () {
-					browser.assert.deepEqual(confirmQuestion, uLocalized('KVCWriteLauncherItemCustomDomainConfirmQuestionText'));
+				it('sets KVCWriteLauncherItemConfigureCustomDomainConfirmQuestion', function () {
+					browser.assert.deepEqual(confirmQuestion, uLocalized('KVCWriteLauncherItemConfigureCustomDomainConfirmQuestionText'));
 				});
 			
 			});

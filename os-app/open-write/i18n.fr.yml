@@ -1,7 +1,7 @@
 KVCWriteTitle: Écrire
 KVCWriteStorageExportButtonText: Exporter
 KVCWriteLauncherItemJournalText: Journal
-KVCWriteLauncherItemCustomDomainText: Configurer nom de domaine personalisé
-KVCWriteLauncherItemCustomDomainPrompt1QuestionText: Veuillez copier le texte suivant et le coller dedans votre host configuration.
-KVCWriteLauncherItemCustomDomainPrompt2QuestionText: Quel est votre nom de domaine personalisé?
-KVCWriteLauncherItemCustomDomainConfirmQuestionText: Le nom de domaine ne semble pas d'être présent. Voudriez-vous essayer de nouveau?
+KVCWriteLauncherItemConfigureCustomDomainText: Configurer nom de domaine personalisé
+KVCWriteLauncherItemConfigureCustomDomainPrompt1QuestionText: Veuillez copier le texte suivant et le coller dedans votre host configuration.
+KVCWriteLauncherItemConfigureCustomDomainPrompt2QuestionText: Quel est votre nom de domaine personalisé?
+KVCWriteLauncherItemConfigureCustomDomainConfirmQuestionText: Le nom de domaine ne semble pas d'être présent. Voudriez-vous essayer de nouveau?
