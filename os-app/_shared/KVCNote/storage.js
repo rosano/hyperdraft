@@ -237,8 +237,8 @@ const mod = {
 		return storageClient.wikiavec.kvc_notes._KVCNoteStoragePublicDelete(param1, param2);
 	},
 
-	KVCNoteStoragePublicURL (storageClient, param1, param2) {
-		return storageClient.wikiavec.kvc_notes._KVCNoteStoragePublicURL(param1, param2);
+	KVCNoteStoragePublicURL (storageClient, inputData) {
+		return storageClient.wikiavec.kvc_notes._KVCNoteStoragePublicURL(inputData);
 	},
 
 };
