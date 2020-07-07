@@ -1,3 +1,7 @@
 KVCWriteTitle: Escribir
 KVCWriteStorageExportButtonText: Exportar
 KVCWriteLauncherItemJournalText: Diario
+KVCWriteLauncherItemCustomDomainText: Configurar dominio de Internet de encargo
+KVCWriteLauncherItemCustomDomainPrompt1QuestionText: Por favor, copia el texto siguiente y pegalo en tu host configuration.
+KVCWriteLauncherItemCustomDomainPrompt2QuestionText: ¿Qué es tu dominio de Internet de encargo?
+KVCWriteLauncherItemCustomDomainConfirmQuestionText: El dominio de Internet no parece estar presente. ¿Quieres intentar de nuevo?

@@ -185,4 +185,40 @@ describe('KVCWrite_Access', function () {
 
 	});
 
+	context('KVCWriteLauncherItemCustomDomain', function test_KVCWriteLauncherItemCustomDomain() {
+		
+		before(function () {
+			return browser.pressButton('.OLSKAppToolbarLauncherButton');
+		});
+
+		before(function () {
+			return browser.fill('.LCHLauncherFilterInput', 'KVCWriteLauncherItemCustomDomain');
+		});
+
+		it('hides LCHLauncherPipeItem', function () {
+			browser.assert.elements('.LCHLauncherPipeItem', 0);
+		});
+
+		context('connected', function () {
+			
+			before(function () {
+				return uLaunch('FakeStorageIsConnected');
+			});
+
+			before(function () {
+				return browser.pressButton('.OLSKAppToolbarLauncherButton');
+			});
+
+			before(function () {
+				return browser.fill('.LCHLauncherFilterInput', 'KVCWriteLauncherItemCustomDomain');
+			});
+
+			it('shows LCHLauncherPipeItem', function () {
+				browser.assert.elements('.LCHLauncherPipeItem', 1);
+			});
+		
+		});
+
+	});
+
 });

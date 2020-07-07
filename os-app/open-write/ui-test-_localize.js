@@ -72,6 +72,68 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 		
 		});
 
+		context('KVCWriteLauncherItemCustomDomain', function () {
+			
+			before(function () {
+				return uLaunch('FakeStorageIsConnected');
+			});
+
+			before(function () {
+				return browser.pressButton('.OLSKAppToolbarLauncherButton');
+			});
+
+			before(function () {
+				return browser.fill('.LCHLauncherFilterInput', 'KVCWriteLauncherItemCustomDomain');
+			});
+
+			it('localizes KVCWriteLauncherItemCustomDomain', function () {
+				browser.assert.text('.LCHLauncherPipeItem', uLocalized('KVCWriteLauncherItemCustomDomainText'));
+			});
+
+			context('click', function () {
+
+				const prompt1 = {};
+				const prompt2 = {};
+				let confirmQuestion;
+
+				before(function () {
+					return browser.OLSKPrompt(function () {
+						return browser.click('.LCHLauncherPipeItem');
+					}, function (dialog) {
+						return Object.assign(prompt1, dialog);
+					});
+				});
+
+				before(function () {
+					return browser.OLSKPrompt(function () {
+						return browser.click('.LCHLauncherPipeItem');
+					}, function (dialog) {
+						return Object.assign(prompt2, dialog);
+					});
+				});
+
+				before(function () {
+					confirmQuestion = browser.OLSKConfirmSync(function () {
+						return browser.click('.LCHLauncherPipeItem');
+					}).question;
+				});
+
+				it('sets KVCWriteLauncherItemCustomDomainPrompt1Question', function () {
+					browser.assert.deepEqual(prompt1.question, uLocalized('KVCWriteLauncherItemCustomDomainPrompt1QuestionText'));
+				});
+
+				it('sets KVCWriteLauncherItemCustomDomainPrompt2Question', function () {
+					browser.assert.deepEqual(prompt2.question, uLocalized('KVCWriteLauncherItemCustomDomainPrompt2QuestionText'));
+				});
+
+				it('sets KVCWriteLauncherItemCustomDomainConfirmQuestion', function () {
+					browser.assert.deepEqual(confirmQuestion, uLocalized('KVCWriteLauncherItemCustomDomainConfirmQuestionText'));
+				});
+			
+			});
+		
+		});
+
 	});
 
 });

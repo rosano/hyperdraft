@@ -69,6 +69,13 @@ const mod = {
 
 	_ValueStorageIsConnected: false,
 
+	_ValueSettingsAll: [],
+	ValueSetting (inputData) {
+		return mod._ValueSettingsAll.filter(function (e) {
+			return e.KVCSettingKey === inputData;
+		}).shift();
+	},
+	
 	// DATA
 
 	DataRecipes () {
@@ -79,6 +86,62 @@ const mod = {
 				mod.ControlNoteCreate(KVCWriteLogic.KVCWriteLauncherItemJournalTemplate(this.api.LCHDateLocalOffsetSubtracted(new Date()), OLSKLocalized));
 			},
 		}];
+
+		if (mod._ValueStorageIsConnected) {
+			let count = 0;
+			outputData.push({
+				LCHRecipeSignature: 'KVCWriteLauncherItemCustomDomain',
+				LCHRecipeName: OLSKLocalized('KVCWriteLauncherItemCustomDomainText'),
+				LCHRecipeCallback: function KVCWriteLauncherItemCustomDomain () {
+					const prompt1 = !OLSK_TESTING_BEHAVIOUR() || (OLSK_TESTING_BEHAVIOUR() && !count);
+					const prompt2 = !OLSK_TESTING_BEHAVIOUR() || (OLSK_TESTING_BEHAVIOUR() && count);
+					const confirm3 = !OLSK_TESTING_BEHAVIOUR() || (OLSK_TESTING_BEHAVIOUR() && count == 2);
+
+					if (prompt1) {
+						if (window.prompt(OLSKLocalized('KVCWriteLauncherItemCustomDomainPrompt1QuestionText'), KVCNoteStorage.KVCNoteStoragePublicURL(mod._ValueStorageClient, KVCNoteStorage.KVCNoteStoragePublicRootPagePath())) === null) {
+							return;
+						};
+					}
+					
+					if (prompt2) {
+						const callback = async function () {
+							const response = OLSK_TESTING_BEHAVIOUR() && confirm3 ? '' : window.prompt(OLSKLocalized('KVCWriteLauncherItemCustomDomainPrompt2QuestionText'));
+
+							if (response === null) {
+								return;
+							}
+
+							if (!response && window.confirm(OLSKLocalized('KVCWriteLauncherItemCustomDomainConfirmQuestionText'))) {
+								callback();
+							}
+
+							if (!response) {
+								return;
+							}
+
+							const item = KVCWriteLogic.KVCWriteCustomDomainBaseURLData(response);
+							if (item) {
+								await KVCSettingMetal.KVCSettingsMetalWrite(mod._ValueStorageClient, Object.assign(mod.ValueSetting('KVCSettingCustomDomainBaseURL') || mod._ValueSettingsAll.push(await KVCSettingAction.KVCSettingsActionProperty(mod._ValueStorageClient, 'KVCSettingCustomDomainBaseURL', item)), {
+									KVCSettingValue: item,
+								}));
+
+								if (mod._ValueNoteSelected) {
+									await mod._ControlHotfixUpdateInPlace(mod._ValueNoteSelected);
+								}
+
+								return 
+							}
+						};
+
+						callback();
+					}
+
+					if (OLSK_TESTING_BEHAVIOUR()) {
+						count += 1;
+					}
+				},
+			});
+		}
 
 		if (OLSK_TESTING_BEHAVIOUR()) {
 			outputData.push(...[
@@ -495,6 +558,10 @@ const mod = {
 	},
 
 	KVCWriteDetailPublicURLFor (inputData) {
+		if (mod.ValueSetting('KVCSettingCustomDomainBaseURL')) {
+			return KVCWriteLogic.KVCWriteCustomDomainBaseURLFunction(KVCNoteStorage.KVCNoteStoragePublicURL(mod._ValueStorageClient, KVCNoteStorage.KVCNoteStoragePublicRootPagePath()), KVCNoteStorage.KVCNoteStoragePublicRootPagePath())(KVCNoteStorage.KVCNoteStoragePublicURL(mod._ValueStorageClient, KVCNoteStorage.KVCNoteStoragePublicObjectPath(inputData)), mod.ValueSetting('KVCSettingCustomDomainBaseURL').KVCSettingValue);
+		}
+		
 		if (OLSK_TESTING_BEHAVIOUR() && mod._ValueStorageIsConnected) {
 			return '/FakePublicPath';
 		}
@@ -681,6 +748,8 @@ const mod = {
 		await mod.SetupStorageNotifications();
 
 		await mod.SetupValueNotesAll();
+		
+		await mod.SetupValueSettingsAll();
 
 		mod.ReactIsLoading(mod._ValueIsLoading = false);
 	},
@@ -769,6 +838,10 @@ const mod = {
 		mod.ValueNotesAll((await KVCNoteAction.KVCNoteActionQuery(mod._ValueStorageClient, {})).filter(function (e) {
 			return typeof e === 'object'; // #patch-remotestorage-true
 		}));
+	},
+
+	async SetupValueSettingsAll() {
+		mod._ValueSettingsAll = await KVCSettingAction.KVCSettingsActionQuery(mod._ValueStorageClient, {});
 	},
 
 	// LIFECYCLE

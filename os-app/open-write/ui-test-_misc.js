@@ -1,5 +1,7 @@
 const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
+const KVCNoteStorage = require('../_shared/KVCNote/storage.js').default;
+
 describe('KVCWrite_Misc', function () {
 
 	before(function() {
@@ -596,6 +598,46 @@ describe('KVCWrite_Misc', function () {
 			browser.assert.attribute('.OLSKAppToolbarDonateLink', 'href', process.env.KVC_SHARED_DONATE_URL);
 		});
 
+	});
+
+	describe('KVCWriteLauncherItemCustomDomain', function test_KVCWriteLauncherItemCustomDomain () {
+		
+		before(function () {
+			return browser.pressButton('.OLSKAppToolbarLauncherButton');
+		});
+
+		before(function () {
+			return browser.fill('.LCHLauncherFilterInput', 'KVCWriteLauncherItemCustomDomain');
+		});
+
+		const prompt1 = {};
+
+		before(function () {
+			return browser.OLSKPrompt(function () {
+				return browser.click('.LCHLauncherPipeItem');
+			}, function (dialog) {
+				return Object.assign(prompt1, dialog);
+			});
+		});
+
+		before(function () {
+			return browser.OLSKPrompt(function () {
+				return browser.click('.LCHLauncherPipeItem');
+			}, function (dialog) {
+				dialog.response = 'FakeCustomDomainBaseURL';
+				
+				return dialog;
+			});
+		});
+
+		it.skip('sets KVCWriteLauncherItemCustomDomainPrompt1Response', function () {
+			browser.assert.deepEqual(prompt1.response, KVCNoteStorage.KVCNoteStoragePublicRootPagePath());
+		});
+
+		it.skip('sets KVCWriteDetailPublicURLFor', function () {
+			browser.assert.attribute('.KVCWriteDetailToolbarPublicLink', 'href', 'FakeCustomDomainBaseURL/FakePublicPath');
+		});
+	
 	});
 
 	describe('KVCWriteLegacyRoute', function () {
