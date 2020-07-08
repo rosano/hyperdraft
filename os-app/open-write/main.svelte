@@ -661,6 +661,10 @@ const mod = {
 		await mod.ControlSettingStore('KVCSettingPublicRootPageID', inputData);
 
 		await mod._ControlHotfixUpdateInPlace(mod._ValueNoteSelected);
+
+		if (KVCNoteModel.KVCNoteModelIsPublic(mod._ValueNoteSelected)) {
+			mod.ControlNotePublish(mod._ValueNoteSelected);
+		}
 	},
 
 	KVCWriteDetailDispatchOpen (inputData) {

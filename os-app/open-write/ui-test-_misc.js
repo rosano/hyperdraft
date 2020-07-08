@@ -655,11 +655,19 @@ describe('KVCWrite_Misc', function () {
 	describe('KVCWriteDetailLauncherItemSetAsRootPage', function test_KVCWriteDetailLauncherItemSetAsRootPage () {
 		
 		before(function () {
+			browser.assert.text('#TestControlNotePublishCount', '2');
+		});
+
+		before(function () {
 			return uLaunch('KVCWriteDetailLauncherItemSetAsRootPage');
 		});
 
 		it.skip('sets KVCWriteDetailItemIsRootPage', function () {
 			browser.assert.elements('.KVCWriteDetailToolbarIsRootPage', 1);
+		});
+
+		it('calls ControlNotePublish', function () {
+			browser.assert.text('#TestControlNotePublishCount', '3');
 		});
 	
 	});
