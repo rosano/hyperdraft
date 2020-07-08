@@ -121,10 +121,8 @@ const mod = {
 
 							const item = KVCWriteLogic.KVCWriteCustomDomainBaseURLData(response);
 							if (item) {
-								await KVCSettingMetal.KVCSettingsMetalWrite(mod._ValueStorageClient, Object.assign(mod.ValueSetting('KVCSettingCustomDomainBaseURL') || mod._ValueSettingsAll.push(await KVCSettingAction.KVCSettingsActionProperty(mod._ValueStorageClient, 'KVCSettingCustomDomainBaseURL', item)), {
-									KVCSettingValue: item,
-								}));
-
+								await mod.ControlSettingStore('KVCSettingCustomDomainBaseURL', item);
+								
 								if (mod._ValueNoteSelected) {
 									await mod._ControlHotfixUpdateInPlace(mod._ValueNoteSelected);
 								}
@@ -533,6 +531,12 @@ const mod = {
 			saveAs(content, 'notes.zip');
 		});
 	},
+	
+	async ControlSettingStore (param1, param2) {
+		await KVCSettingMetal.KVCSettingsMetalWrite(mod._ValueStorageClient, Object.assign(mod.ValueSetting(param1) || mod._ValueSettingsAll.push(await KVCSettingAction.KVCSettingsActionProperty(mod._ValueStorageClient, param1, param2)), {
+			KVCSettingValue: param2,
+		}));
+	},
 
 	ControlMigrate() {
 		KVCNoteMetal.KVCNoteMetalMigrateV1(mod._ValueStorageClient, mod.OLSKChangeDelegateCreateNote);
@@ -654,9 +658,8 @@ const mod = {
 	},
 
 	async KVCWriteDetailDispatchSetAsRootPage (inputData) {
-		await KVCSettingMetal.KVCSettingsMetalWrite(mod._ValueStorageClient, Object.assign(mod.ValueSetting('KVCSettingPublicRootPageID') || mod._ValueSettingsAll.push(await KVCSettingAction.KVCSettingsActionProperty(mod._ValueStorageClient, 'KVCSettingPublicRootPageID', inputData)), {
-			KVCSettingValue: inputData,
-		}));
+		await mod.ControlSettingStore('KVCSettingPublicRootPageID', inputData);
+
 		await mod._ControlHotfixUpdateInPlace(mod._ValueNoteSelected);
 	},
 
