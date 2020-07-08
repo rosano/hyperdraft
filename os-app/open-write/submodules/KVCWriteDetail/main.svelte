@@ -1,5 +1,6 @@
 <script>
 export let KVCWriteDetailConnected = false;
+export let KVCWriteDetailItemIsRootPage = false;
 export let KVCWriteDetailPublicURLFor;
 export let KVCWriteDetailDispatchBack;
 export let KVCWriteDetailDispatchJump;
@@ -196,6 +197,10 @@ import KVCWriteInput from '../KVCWriteInput/main.svelte';
 			<button class="KVCWriteDetailToolbarConnectButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarPublishButtonText') } on:click={ () => window.confirm(OLSKLocalized('KVCWriteDetailConnectConfirmText')) && KVCWriteDetailDispatchConnect() }>
 				<div class="KVCWriteDetailToolbarConnectButtonImage">{@html _KVCWritePublish }</div>
 			</button>
+		{/if}
+
+		{#if KVCWriteDetailItemIsRootPage }
+			<span class="KVCWriteDetailToolbarIsRootPage">{ OLSKLocalized('KVCWriteDetailToolbarIsRootPageText') }</span>
 		{/if}
 
 		{#if KVCWriteDetailConnected }

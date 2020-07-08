@@ -97,6 +97,22 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 
 			});
 
+			context('KVCWriteDetailItemIsRootPage', function() {
+
+				before(function() {
+					return browser.OLSKVisit(kDefaultRoute, {
+						OLSKRoutingLanguage: languageCode,
+						KVCWriteDetailItem: JSON.stringify(StubNoteObjectValid()),
+						KVCWriteDetailItemIsRootPage: true,
+					});
+				});
+
+				it('localizes KVCWriteDetailToolbarIsRootPage', function () {
+					browser.assert.text(KVCWriteDetailToolbarIsRootPage, uLocalized('KVCWriteDetailToolbarIsRootPageText'));
+				});
+
+			});
+
 			describe('KVCWriteDetailLauncherItemSetAsRootPage', function test_KVCWriteDetailLauncherItemSetAsRootPage() {
 				
 				before(function() {

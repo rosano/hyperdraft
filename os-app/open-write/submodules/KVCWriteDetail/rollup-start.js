@@ -4,7 +4,7 @@ import * as OLSKRemoteStoragePackage from 'OLSKRemoteStorage';
 const OLSKRemoteStorage = OLSKRemoteStoragePackage.default || OLSKRemoteStoragePackage;
 
 const params = Object.fromEntries(Array.from((new window.URLSearchParams(window.location.search)).entries()).map(function (e) {
-	if (['KVCWriteDetailItem', 'KVCWriteDetailConnected'].includes(e[0])) {
+	if (['KVCWriteDetailItem', 'KVCWriteDetailConnected', 'KVCWriteDetailItemIsRootPage'].includes(e[0])) {
 		e[1] = JSON.parse(e[1]);
 	}
 

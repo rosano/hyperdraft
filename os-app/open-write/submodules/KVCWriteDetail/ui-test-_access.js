@@ -10,6 +10,7 @@ Object.entries({
 	KVCWriteDetailToolbarJumpButtonImage: '.KVCWriteDetailToolbarJumpButtonImage',
 	KVCWriteDetailToolbarConnectButton: '.KVCWriteDetailToolbarConnectButton',
 	KVCWriteDetailToolbarConnectButtonImage: '.KVCWriteDetailToolbarConnectButtonImage',
+	KVCWriteDetailToolbarIsRootPage: '.KVCWriteDetailToolbarIsRootPage',
 	KVCWriteDetailToolbarPublishButton: '.KVCWriteDetailToolbarPublishButton',
 	KVCWriteDetailToolbarPublishButtonImage: '.KVCWriteDetailToolbarPublishButtonImage',
 	KVCWriteDetailToolbarPublicLink: '.KVCWriteDetailToolbarPublicLink',
@@ -87,6 +88,10 @@ describe('KVCWriteDetail_Access', function () {
 
 		it('shows KVCWriteDetailToolbarConnectButtonImage', function () {
 			browser.assert.elements(KVCWriteDetailToolbarConnectButtonImage, 1);
+		});
+
+		it('hides KVCWriteDetailToolbarIsRootPage', function () {
+			browser.assert.elements(KVCWriteDetailToolbarIsRootPage, 0);
 		});
 
 		it('hide KVCWriteDetailToolbarPublishButton', function () {
@@ -173,6 +178,21 @@ describe('KVCWriteDetail_Access', function () {
 				browser.assert.elements(KVCWriteDetailToolbarRetractButtonImage, 1);
 			});
 
+		});
+
+	});
+
+	context('KVCWriteDetailItemIsRootPage', function () {
+		
+		before(function() {
+			return browser.OLSKVisit(kDefaultRoute, {
+				KVCWriteDetailItem: JSON.stringify(StubNoteObjectValid()),
+				KVCWriteDetailItemIsRootPage: true,
+			});
+		});
+
+		it('shows KVCWriteDetailToolbarIsRootPage', function () {
+			browser.assert.elements(KVCWriteDetailToolbarIsRootPage, 1);
 		});
 
 	});
