@@ -546,6 +546,7 @@ describe('KVCWriteDetail_Misc', function () {
 
 		before(function () {
 			browser.assert.text('#TestKVCWriteDetailDispatchSetAsRootPage', '0');
+			browser.assert.text('#TestKVCWriteDetailDispatchSetAsRootPageData', 'undefined');
 		});
 		
 		before(function () {
@@ -554,6 +555,7 @@ describe('KVCWriteDetail_Misc', function () {
 
 		it('sends KVCWriteDetailDispatchSetAsRootPage', function () {
 			browser.assert.text('#TestKVCWriteDetailDispatchSetAsRootPage', '1');
+			browser.assert.text('#TestKVCWriteDetailDispatchSetAsRootPageData', StubNoteObjectValid().KVCNoteID);
 		});
 
 	});

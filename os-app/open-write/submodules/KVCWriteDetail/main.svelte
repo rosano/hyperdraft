@@ -83,7 +83,7 @@ const mod = {
 				LCHRecipeSignature: 'KVCWriteDetailLauncherItemSetAsRootPage',
 				LCHRecipeName: OLSKLocalized('KVCWriteDetailLauncherItemSetAsRootPageText'),
 				LCHRecipeCallback: function KVCWriteDetailLauncherItemSetAsRootPage () {
-					KVCWriteDetailDispatchSetAsRootPage(mod._ValueItem);
+					KVCWriteDetailDispatchSetAsRootPage(mod._ValueItem.KVCNoteID);
 				},
 			})
 		}

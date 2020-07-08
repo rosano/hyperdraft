@@ -77,8 +77,9 @@ const KVCWriteDetail = new RollupStart({
 
 			mod.ReactDetailItem(params.KVCWriteDetailItem);
 		}),
-		KVCWriteDetailDispatchSetAsRootPage: (function _KVCWriteDetailDispatchSetAsRootPage () {
+		KVCWriteDetailDispatchSetAsRootPage: (function _KVCWriteDetailDispatchSetAsRootPage (inputData) {
 			window.TestKVCWriteDetailDispatchSetAsRootPage.innerHTML = parseInt(window.TestKVCWriteDetailDispatchSetAsRootPage.innerHTML) + 1;
+			window.TestKVCWriteDetailDispatchSetAsRootPageData.innerHTML = inputData;
 		}),
 		KVCWriteDetailDispatchOpen: (function _KVCWriteDetailDispatchOpen () {}),
 		KVCWriteDetailDispatchEscape: (function _KVCWriteDetailDispatchEscape () {}),

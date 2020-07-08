@@ -653,6 +653,13 @@ const mod = {
 		mod.ControlNoteSave(mod._ValueNoteSelected);
 	},
 
+	async KVCWriteDetailDispatchSetAsRootPage (inputData) {
+		await KVCSettingMetal.KVCSettingsMetalWrite(mod._ValueStorageClient, Object.assign(mod.ValueSetting('KVCSettingPublicRootPageID') || mod._ValueSettingsAll.push(await KVCSettingAction.KVCSettingsActionProperty(mod._ValueStorageClient, 'KVCSettingPublicRootPageID', inputData)), {
+			KVCSettingValue: inputData,
+		}));
+		await mod._ControlHotfixUpdateInPlace(mod._ValueNoteSelected);
+	},
+
 	KVCWriteDetailDispatchOpen (inputData) {
 		mod.ControlFilterWithNoThrottle(inputData);
 	},
@@ -914,6 +921,7 @@ import OLSKStorageWidget from 'OLSKStorageWidget';
 	
 	<KVCWriteDetail
 		KVCWriteDetailConnected={ mod._ValueStorageIsConnected }
+		KVCWriteDetailItemIsRootPage={ mod._ValueNoteSelected && mod.ValueSetting('KVCSettingPublicRootPageID') ? mod._ValueNoteSelected.KVCNoteID === mod.ValueSetting('KVCSettingPublicRootPageID').KVCSettingValue : false }
 		KVCWriteDetailPublicURLFor={ mod.KVCWriteDetailPublicURLFor }
 		KVCWriteDetailDispatchBack={ mod.KVCWriteDetailDispatchBack }
 		KVCWriteDetailDispatchJump={ mod.KVCWriteDetailDispatchJump }
@@ -923,6 +931,7 @@ import OLSKStorageWidget from 'OLSKStorageWidget';
 		KVCWriteDetailDispatchVersions={ mod.KVCWriteDetailDispatchVersions }
 		KVCWriteDetailDispatchDiscard={ mod.KVCWriteDetailDispatchDiscard }
 		KVCWriteDetailDispatchUpdate={ mod.KVCWriteDetailDispatchUpdate }
+		KVCWriteDetailDispatchSetAsRootPage={ mod.KVCWriteDetailDispatchSetAsRootPage }
 		KVCWriteDetailDispatchOpen={ mod.KVCWriteDetailDispatchOpen }
 		KVCWriteDetailDispatchEscape={ mod.KVCWriteDetailDispatchEscape }
 		OLSKMobileViewInactive={ !mod.OLSKMobileViewInactive }
