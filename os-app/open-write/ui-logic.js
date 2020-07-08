@@ -50,7 +50,7 @@ const mod = {
 
 		try {
 			const item = new URL('', inputData);
-			return item.protocol + '//' + item.hostname
+			return item.protocol + '//' + item.hostname + '/';
 		} catch (err) {
 			return null;
 		}

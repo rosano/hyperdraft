@@ -131,19 +131,19 @@ describe('KVCWriteCustomDomainBaseURLData', function test_KVCWriteCustomDomainBa
 	});
 
 	it('returns string if host', function() {
-		deepEqual(mainModule.KVCWriteCustomDomainBaseURLData('example.com'), 'https://example.com');
+		deepEqual(mainModule.KVCWriteCustomDomainBaseURLData('example.com'), 'https://example.com/');
 	});
 
 	it('returns string if URL with host', function() {
-		deepEqual(mainModule.KVCWriteCustomDomainBaseURLData('http://example.com'), 'http://example.com');
+		deepEqual(mainModule.KVCWriteCustomDomainBaseURLData('http://example.com'), 'http://example.com/');
 	});
 
 	it('returns string if URL with path', function() {
-		deepEqual(mainModule.KVCWriteCustomDomainBaseURLData('http://example.com/alfa/bravo'), 'http://example.com');
+		deepEqual(mainModule.KVCWriteCustomDomainBaseURLData('http://example.com/alfa/bravo'), 'http://example.com/');
 	});
 
 	it('returns string if URL with https', function() {
-		deepEqual(mainModule.KVCWriteCustomDomainBaseURLData('https://example.com/alfa/bravo'), 'https://example.com');
+		deepEqual(mainModule.KVCWriteCustomDomainBaseURLData('https://example.com/alfa/bravo'), 'https://example.com/');
 	});
 
 });

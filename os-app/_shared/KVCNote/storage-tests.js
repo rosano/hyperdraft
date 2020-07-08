@@ -131,7 +131,7 @@ describe('KVCNoteStoragePublicObjectPath', function test_KVCNoteStoragePublicObj
 			KVCNotePublicID: 'charlie',
 		});
 
-		deepEqual(mainModule.KVCNoteStoragePublicObjectPath(item), '/' + item.KVCNotePublicID);
+		deepEqual(mainModule.KVCNoteStoragePublicObjectPath(item), item.KVCNotePublicID);
 	});
 
 });
@@ -139,7 +139,7 @@ describe('KVCNoteStoragePublicObjectPath', function test_KVCNoteStoragePublicObj
 describe('KVCNoteStoragePublicRootPagePath', function test_KVCNoteStoragePublicRootPagePath() {
 
 	it('returns string', async function() {
-		deepEqual(mainModule.KVCNoteStoragePublicRootPagePath(), '/index.html');
+		deepEqual(mainModule.KVCNoteStoragePublicRootPagePath(), 'index.html');
 	});
 
 });
@@ -147,21 +147,21 @@ describe('KVCNoteStoragePublicRootPagePath', function test_KVCNoteStoragePublicR
 describe('KVCNoteStoragePublicWrite', function test_KVCNoteStoragePublicWrite() {
 
 	it('rejects if not object path', async function() {
-		await rejects(mainModule.KVCNoteStoragePublicWrite(KVCTestingStorageClient, '/', 'bravo'), /KVCErrorInputNotValid/);
+		await rejects(mainModule.KVCNoteStoragePublicWrite(KVCTestingStorageClient, '', 'bravo'), /KVCErrorInputNotValid/);
 	});
 
 	it('rejects if not string', async function() {
-		await rejects(mainModule.KVCNoteStoragePublicWrite(KVCTestingStorageClient, '/alfa', null), /KVCErrorInputNotValid/);
+		await rejects(mainModule.KVCNoteStoragePublicWrite(KVCTestingStorageClient, 'alfa', null), /KVCErrorInputNotValid/);
 	});
 
 	it('returns undefined', async function() {
-		deepEqual(await mainModule.KVCNoteStoragePublicWrite(KVCTestingStorageClient, '/alfa', 'bravo'), undefined);
+		deepEqual(await mainModule.KVCNoteStoragePublicWrite(KVCTestingStorageClient, 'alfa', 'bravo'), undefined);
 	});
 
 	it('writes file to public folder', async function() {
-		await mainModule.KVCNoteStoragePublicWrite(KVCTestingStorageClient, '/alfa', 'bravo');
+		await mainModule.KVCNoteStoragePublicWrite(KVCTestingStorageClient, 'alfa', 'bravo');
 
-		deepEqual((await KVCTestingStorageClient.wikiavec.__DEBUG._OLSKRemoteStoragePublicClient().getFile('/alfa')).data, 'bravo');
+		deepEqual((await KVCTestingStorageClient.wikiavec.__DEBUG._OLSKRemoteStoragePublicClient().getFile('alfa')).data, 'bravo');
 	});
 
 });
@@ -169,11 +169,11 @@ describe('KVCNoteStoragePublicWrite', function test_KVCNoteStoragePublicWrite() 
 describe('KVCNoteStoragePublicDelete', function test_KVCNoteStoragePublicDelete() {
 
 	it('rejects if not object path', async function() {
-		await rejects(mainModule.KVCNoteStoragePublicDelete(KVCTestingStorageClient, '/'), /KVCErrorInputNotValid/);
+		await rejects(mainModule.KVCNoteStoragePublicDelete(KVCTestingStorageClient, ''), /KVCErrorInputNotValid/);
 	});
 
 	it('returns undefined', async function() {
-		deepEqual(await mainModule.KVCNoteStoragePublicDelete(KVCTestingStorageClient, '/alfa'), {
+		deepEqual(await mainModule.KVCNoteStoragePublicDelete(KVCTestingStorageClient, 'alfa'), {
 			statusCode: 200,
 		});
 	});
@@ -199,7 +199,7 @@ describe('KVCNoteStoragePublicURL', function test_KVCNoteStoragePublicURL() {
 
 	it('throws if not object path', async function() {
 		throws(function() {
-			mainModule.KVCNoteStoragePublicURL(KVCTestingStorageClient, '/');
+			mainModule.KVCNoteStoragePublicURL(KVCTestingStorageClient, '');
 		}, /KVCErrorInputNotValid/);
 	});
 

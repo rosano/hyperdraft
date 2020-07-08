@@ -148,11 +148,7 @@ const mod = {
 					return Promise.reject(new Error('KVCErrorInputNotValid'));
 				}
 
-				if (param1[0] !== '/') {
-					return Promise.reject(new Error('KVCErrorInputNotValid'));
-				}
-
-				if (param1.slice(1).trim() === '') {
+				if (param1.trim() === '') {
 					return Promise.reject(new Error('KVCErrorInputNotValid'));
 				}
 
@@ -168,11 +164,7 @@ const mod = {
 					return Promise.reject(new Error('KVCErrorInputNotValid'));
 				}
 
-				if (inputData[0] !== '/') {
-					return Promise.reject(new Error('KVCErrorInputNotValid'));
-				}
-
-				if (inputData.slice(1).trim() === '') {
+				if (inputData.trim() === '') {
 					return Promise.reject(new Error('KVCErrorInputNotValid'));
 				}
 
@@ -180,11 +172,7 @@ const mod = {
 			},
 
 			_KVCNoteStoragePublicURL (inputData) {
-				if (inputData[0] !== '/') {
-					throw new Error('KVCErrorInputNotValid');
-				}
-
-				if (inputData.slice(1).trim() === '') {
+				if (inputData.trim() === '') {
 					throw new Error('KVCErrorInputNotValid');
 				}
 
@@ -222,11 +210,11 @@ const mod = {
 			throw new Error('KVCErrorInputNotValid');
 		}
 
-		return '/' + inputData.KVCNotePublicID;
+		return inputData.KVCNotePublicID;
 	},
 
 	KVCNoteStoragePublicRootPagePath () {
-		return '/index.html';
+		return 'index.html';
 	},
 
 	KVCNoteStoragePublicWrite (storageClient, param1, param2) {
