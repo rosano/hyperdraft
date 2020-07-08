@@ -4,7 +4,7 @@ import * as OLSKRemoteStoragePackage from 'OLSKRemoteStorage';
 const OLSKRemoteStorage = OLSKRemoteStoragePackage.default || OLSKRemoteStoragePackage;
 
 const params = Object.fromEntries(Array.from((new window.URLSearchParams(window.location.search)).entries()).map(function (e) {
-	if (['KVCWriteDetailItem'].includes(e[0])) {
+	if (['KVCWriteDetailItem', 'KVCWriteDetailConnected'].includes(e[0])) {
 		e[1] = JSON.parse(e[1]);
 	}
 
@@ -77,8 +77,12 @@ const KVCWriteDetail = new RollupStart({
 
 			mod.ReactDetailItem(params.KVCWriteDetailItem);
 		}),
+		KVCWriteDetailDispatchSetAsRootPage: (function _KVCWriteDetailDispatchSetAsRootPage () {
+			window.TestKVCWriteDetailDispatchSetAsRootPage.innerHTML = parseInt(window.TestKVCWriteDetailDispatchSetAsRootPage.innerHTML) + 1;
+		}),
 		KVCWriteDetailDispatchOpen: (function _KVCWriteDetailDispatchOpen () {}),
 		KVCWriteDetailDispatchEscape: (function _KVCWriteDetailDispatchEscape () {}),
+		_DebugLauncher: true,
 	}, Object.fromEntries(Object.entries(params).filter(function (e) {
 		return e[0] !== 'KVCWriteDetailItem';
 	}))),

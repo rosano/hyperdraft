@@ -96,6 +96,30 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 				});
 
 			});
+
+			describe('KVCWriteDetailLauncherItemSetAsRootPage', function test_KVCWriteDetailLauncherItemSetAsRootPage() {
+				
+				before(function() {
+					return browser.OLSKVisit(kDefaultRoute, {
+						OLSKRoutingLanguage: languageCode,
+						KVCWriteDetailItem: JSON.stringify(StubNoteObjectValid()),
+						KVCWriteDetailConnected: true,
+					});
+				});
+
+				before(function () {
+					return browser.pressButton('.OLSKAppToolbarLauncherButton');
+				});
+
+				before(function () {
+					return browser.fill('.LCHLauncherFilterInput', 'KVCWriteDetailLauncherItemSetAsRootPage');
+				});
+
+				it('localizes KVCWriteDetailLauncherItemSetAsRootPage', function () {
+					browser.assert.text('.LCHLauncherPipeItem', uLocalized('KVCWriteDetailLauncherItemSetAsRootPageText'));
+				});
+
+			});
 		
 		});
 

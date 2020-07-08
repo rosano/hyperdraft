@@ -535,4 +535,27 @@ describe('KVCWriteDetail_Misc', function () {
 
 	});
 
+	describe('KVCWriteDetailLauncherItemSetAsRootPage', function test_KVCWriteDetailLauncherItemSetAsRootPage() {
+		
+		before(function() {
+			return browser.OLSKVisit(kDefaultRoute, {
+				KVCWriteDetailItem: JSON.stringify(StubNoteObjectValid()),
+				KVCWriteDetailConnected: true,
+			});
+		});
+
+		before(function () {
+			browser.assert.text('#TestKVCWriteDetailDispatchSetAsRootPage', '0');
+		});
+		
+		before(function () {
+			return uLaunch('KVCWriteDetailLauncherItemSetAsRootPage');
+		});
+
+		it('sends KVCWriteDetailDispatchSetAsRootPage', function () {
+			browser.assert.text('#TestKVCWriteDetailDispatchSetAsRootPage', '1');
+		});
+
+	});
+
 });

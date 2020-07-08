@@ -177,4 +177,50 @@ describe('KVCWriteDetail_Access', function () {
 
 	});
 
+	describe('KVCWriteDetailLauncherItemSetAsRootPage', function test_KVCWriteDetailLauncherItemSetAsRootPage() {
+		
+		before(function() {
+			return browser.OLSKVisit(kDefaultRoute, {
+				KVCWriteDetailItem: JSON.stringify(StubNoteObjectValid()),
+				KVCWriteDetailConnected: false,
+			});
+		});
+
+		before(function () {
+			return browser.pressButton('.OLSKAppToolbarLauncherButton');
+		});
+
+		before(function () {
+			return browser.fill('.LCHLauncherFilterInput', 'KVCWriteDetailLauncherItemSetAsRootPage');
+		});
+
+		it('hides LCHLauncherPipeItem', function () {
+			browser.assert.elements('.LCHLauncherPipeItem', 0);
+		});
+
+		context('KVCWriteDetailConnected', function() {
+
+			before(function() {
+				return browser.OLSKVisit(kDefaultRoute, {
+					KVCWriteDetailItem: JSON.stringify(StubNoteObjectValid()),
+					KVCWriteDetailConnected: true,
+				});
+			});
+
+			before(function () {
+				return browser.pressButton('.OLSKAppToolbarLauncherButton');
+			});
+
+			before(function () {
+				return browser.fill('.LCHLauncherFilterInput', 'KVCWriteDetailLauncherItemSetAsRootPage');
+			});
+
+			it('shows LCHLauncherPipeItem', function () {
+				browser.assert.elements('.LCHLauncherPipeItem', 1);
+			});
+		
+		});
+
+	});
+
 });

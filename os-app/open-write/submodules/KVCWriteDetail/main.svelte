@@ -9,10 +9,12 @@ export let KVCWriteDetailDispatchRetract;
 export let KVCWriteDetailDispatchVersions;
 export let KVCWriteDetailDispatchDiscard;
 export let KVCWriteDetailDispatchUpdate;
+export let KVCWriteDetailDispatchSetAsRootPage;
 export let KVCWriteDetailDispatchOpen;
 export let KVCWriteDetailDispatchEscape;
 export let OLSKMobileViewInactive = false;
 export let _KVCWriteDetailVersionsIsDisabled = false;
+export let _DebugLauncher = false;
 
 export const KVCWriteDetailSetItem = function (inputData) {
 	mod._ValueItem = inputData;
@@ -74,6 +76,16 @@ const mod = {
 
 	DataRecipes () {
 		const outputData = [];
+
+		if (KVCWriteDetailConnected) {
+			outputData.push({
+				LCHRecipeSignature: 'KVCWriteDetailLauncherItemSetAsRootPage',
+				LCHRecipeName: OLSKLocalized('KVCWriteDetailLauncherItemSetAsRootPageText'),
+				LCHRecipeCallback: function KVCWriteDetailLauncherItemSetAsRootPage () {
+					KVCWriteDetailDispatchSetAsRootPage(mod._ValueItem);
+				},
+			})
+		}
 
 		if (OLSK_TESTING_BEHAVIOUR()) {
 			outputData.push({
@@ -224,6 +236,11 @@ import KVCWriteInput from '../KVCWriteInput/main.svelte';
 	KVCWriteInputDispatchEscape={ mod.KVCWriteInputDispatchEscape }
 	bind:this={ mod.KVCWriteInputInstance }
 	/>
+
+{#if _DebugLauncher && OLSK_TESTING_BEHAVIOUR() }
+	<button class="OLSKAppToolbarLauncherButton" on:click={ () => window.Launchlet.LCHSingletonCreate({ LCHOptionRecipes: mod.DataRecipes() }) }></button>	
+{/if}
+
 {/if}
 
 </div>
