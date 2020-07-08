@@ -57,6 +57,10 @@ const mod = {
 			return;
 		}
 
+		if (window.Launchlet.LCHSingletonExists()) {
+			return;
+		}
+
 		if (OLSK_TESTING_BEHAVIOUR()) {
 			return KVCWriteInputDispatchEscape();
 		}
