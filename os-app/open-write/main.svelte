@@ -254,6 +254,10 @@ const mod = {
 			]);
 		}
 
+		if (mod.KVCWriteDetailInstance) {
+			outputData.push(...mod.KVCWriteDetailInstance.KVCWriteDetailRecipes());
+		}
+
 		return outputData;
 	},
 

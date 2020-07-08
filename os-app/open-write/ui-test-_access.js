@@ -253,4 +253,36 @@ describe('KVCWrite_Access', function () {
 
 	});
 
+	describe('KVCWriteDetailLauncherFakeItemProxy', function test_KVCWriteDetailLauncherFakeItemProxy() {
+		
+		before(function () {
+			return browser.fill('.LCHLauncherFilterInput', 'KVCWriteDetailLauncherFakeItemProxy');
+		});
+
+		it('hides LCHLauncherPipeItem', function () {
+			browser.assert.elements('.LCHLauncherPipeItem', 0);
+		});
+
+		context('set_domain', function () {
+			
+			before(function () {
+				return browser.pressButton('.KVCWriteMasterCreateButton');
+			});
+
+			before(function () {
+				return browser.pressButton('.OLSKAppToolbarLauncherButton');
+			});
+
+			before(function () {
+				return browser.fill('.LCHLauncherFilterInput', 'KVCWriteDetailLauncherFakeItemProxy');
+			});
+
+			it('shows LCHLauncherPipeItem', function () {
+				browser.assert.elements('.LCHLauncherPipeItem', 1);
+			});
+		
+		});
+
+	});
+
 });

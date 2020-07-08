@@ -46,6 +46,10 @@ export const KVCWriteDetailSetCursor = function (param1, param2) {
 	});
 };
 
+export const KVCWriteDetailRecipes = function () {
+	return mod._ValueItem ? mod.DataRecipes() : [];
+};
+
 import OLSKInternational from 'OLSKInternational';
 const OLSKLocalized = function(translationConstant) {
 	return OLSKInternational.OLSKInternationalLocalizedString(translationConstant, JSON.parse(`{"OLSK_I18N_SEARCH_REPLACE":"OLSK_I18N_SEARCH_REPLACE"}`)[window.OLSKPublicConstants('OLSKSharedPageCurrentLanguage')]);
@@ -65,6 +69,21 @@ const mod = {
 	_ValueEditorPostInitializeQueue: [],
 
 	KVCWriteInputInstance: undefined,
+
+	// DATA
+
+	DataRecipes () {
+		const outputData = [];
+
+		if (OLSK_TESTING_BEHAVIOUR()) {
+			outputData.push({
+				LCHRecipeName: 'KVCWriteDetailLauncherFakeItemProxy',
+				LCHRecipeCallback: function KVCWriteDetailLauncherFakeItemProxy () {},
+			});
+		}
+
+		return outputData;
+	},
 
 	// INTERFACE
 
