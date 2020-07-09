@@ -241,3 +241,10 @@ describe('KVCTemplateTokenPostBody', function test_KVCTemplateTokenPostBody() {
 
 });
 
+describe('KVCTemplateTokenRootURL', function test_KVCTemplateTokenRootURL() {
+
+	it('returns string', function() {
+		deepEqual(mainModule.KVCTemplateTokenRootURL(), '{RootURL}');
+	});
+
+});

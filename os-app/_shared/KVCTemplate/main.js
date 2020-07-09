@@ -143,6 +143,10 @@ ${ mod.KVCTemplateTokenPostBody() }
 		return '{Body}';
 	},
 
+	KVCTemplateTokenRootURL () {
+		return '{RootURL}';
+	},
+
 };
 
 Object.assign(exports, mod);
