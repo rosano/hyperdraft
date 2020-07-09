@@ -114,19 +114,19 @@ describe('KVCNoteStorageMatch', function test_KVCNoteStorageMatch() {
 
 describe('KVCNoteStoragePublicObjectPath', function test_KVCNoteStoragePublicObjectPath() {
 
-	it('throws if not valid', async function() {
+	it('throws if not valid', function() {
 		throws(function() {
 			mainModule.KVCNoteStoragePublicObjectPath({});
 		}, /KVCErrorInputNotValid/);
 	});
 
-	it('throws if no KVCNotePublicID', async function() {
+	it('throws if no KVCNotePublicID', function() {
 		throws(function() {
 			mainModule.KVCNoteStoragePublicObjectPath(StubNoteObjectValid());
 		}, /KVCErrorInputNotValid/);
 	});
 
-	it('returns string', async function() {
+	it('returns string', function() {
 		const item = Object.assign(StubNoteObjectValid(), {
 			KVCNotePublicID: 'charlie',
 		});
@@ -138,7 +138,7 @@ describe('KVCNoteStoragePublicObjectPath', function test_KVCNoteStoragePublicObj
 
 describe('KVCNoteStoragePublicRootPagePath', function test_KVCNoteStoragePublicRootPagePath() {
 
-	it('returns string', async function() {
+	it('returns string', function() {
 		deepEqual(mainModule.KVCNoteStoragePublicRootPagePath(), 'index.html');
 	});
 
@@ -197,20 +197,20 @@ describe('KVCNoteStoragePublicURL', function test_KVCNoteStoragePublicURL() {
 		KVCNotePublicID: 'charlie',
 	});
 
-	it('throws if not object path', async function() {
+	it('throws if not object path', function() {
 		throws(function() {
 			mainModule.KVCNoteStoragePublicURL(KVCTestingStorageClient, '');
 		}, /KVCErrorInputNotValid/);
 	});
 
-	it('returns undefined', async function() {
-		deepEqual(await mainModule.KVCNoteStoragePublicURL(KVCTestingStorageClient, mainModule.KVCNoteStoragePublicObjectPath(item)), undefined);
+	it('returns undefined', function() {
+		deepEqual(mainModule.KVCNoteStoragePublicURL(KVCTestingStorageClient, mainModule.KVCNoteStoragePublicObjectPath(item)), undefined);
 	});
 
 	it.skip('returns url if connected', async function() {
 		await mainModule.KVCNoteStoragePublicWrite(KVCTestingStorageClient, item, mainModule.KVCNoteStoragePublicObjectPath(item));
 
-		deepEqual(await mainModule.KVCNoteStoragePublicURL(KVCTestingStorageClient, mainModule.KVCNoteStoragePublicObjectPath(item)), mainModule.KVCNoteStoragePublicObjectPath(item));
+		deepEqual(mainModule.KVCNoteStoragePublicURL(KVCTestingStorageClient, mainModule.KVCNoteStoragePublicObjectPath(item)), mainModule.KVCNoteStoragePublicObjectPath(item));
 	});
 
 });
