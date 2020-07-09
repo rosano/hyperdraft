@@ -193,6 +193,34 @@ describe('KVCNoteActionPublishPath', function test_KVCNoteActionPublishPath() {
 
 });
 
+describe('KVCNoteActionPublicPath', function test_KVCNoteActionPublicPath() {
+
+	const item = Object.assign(StubNoteObjectValid(), {
+		KVCNotePublicID: 'charlie',
+	});
+
+	it('throws if param1 not valid', function() {
+		throws(function() {
+			mainModule.KVCNoteActionPublicPath({}, false);
+		}, /KVCErrorInputNotValid/);
+	});
+
+	it('throws if param2 not boolean', function() {
+		throws(function() {
+			mainModule.KVCNoteActionPublicPath(item, 'true');
+		}, /KVCErrorInputNotValid/);
+	});
+
+	it('returns KVCNoteStoragePublicObjectPath', function() {
+		deepEqual(mainModule.KVCNoteActionPublicPath(item, false), KVCNoteStorage.KVCNoteStoragePublicObjectPath(item));
+	});
+
+	it('returns / if param2 true', function() {
+		deepEqual(mainModule.KVCNoteActionPublicPath(item, true), '/');
+	});
+
+});
+
 describe('KVCNoteActionPublicTitlePathMap', function test_KVCNoteActionPublicTitlePathMap() {
 
 	it('returns object', async function() {
