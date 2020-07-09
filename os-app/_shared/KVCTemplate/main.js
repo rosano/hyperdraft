@@ -60,16 +60,12 @@ const mod = {
 			throw new Error('KVCErrorInputNotValid');
 		}
 
-		return [
+		return Object.fromEntries([
 			[mod.KVCTemplateTokenPostTitle(), mod.KVCTemplatePlaintextTitle(body)],
 			[mod.KVCTemplateTokenPostBody(), mod.KVCTemplateHTML(showdown, mod.KVCTemplatePlaintextBody(body))],
 			[mod.KVCTemplateTokenRootURL(), options.KVCOptionRootURL],
 			[mod.KVCTemplateTokenRootURLLegacy(), options.KVCOptionRootURL],
-		].reduce(function (coll, item) {
-			coll[item.shift()] = item.pop();
-
-			return coll;
-		}, {});
+		]);
 	},
 
 	KVCTemplateViewDefault () {
