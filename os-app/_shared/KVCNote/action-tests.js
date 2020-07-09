@@ -326,7 +326,7 @@ describe('KVCNoteActionPublish', function test_KVCNoteActionPublish() {
 	});
 
 	it('writes templated content to public folder', async function() {
-		const item = await kTesting.uPublish(await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()), `alfa ${ KVCTemplate.KVCTemplateTokenPostTitle() }`);
+		const item = await kTesting.uPublish(await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()), `alfa {${ KVCTemplate.KVCTemplateTokenPostTitle() }}`);
 
 		deepEqual((await KVCTestingStorageClient.wikiavec.__DEBUG._OLSKRemoteStoragePublicClient().getFile(KVCNoteStorage.KVCNoteStoragePublicObjectPath(item))).data, 'alfa bravo');
 	});
@@ -334,7 +334,7 @@ describe('KVCNoteActionPublish', function test_KVCNoteActionPublish() {
 	it('replaces public links', async function() {
 		const item = await kTesting.uPublish(await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, Object.assign(kTesting.StubNoteObject(), {
 			KVCNoteBody: 'bravo\n[[charlie]]'
-		})), `alfa ${ KVCTemplate.KVCTemplateTokenPostBody() }`, {
+		})), `alfa {${ KVCTemplate.KVCTemplateTokenPostBody() }}`, {
 			charlie: 'delta',
 		});
 

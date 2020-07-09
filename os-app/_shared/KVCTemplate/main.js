@@ -65,7 +65,11 @@ const mod = {
 			[mod.KVCTemplateTokenPostBody(), mod.KVCTemplateHTML(showdown, mod.KVCTemplatePlaintextBody(body))],
 			[mod.KVCTemplateTokenRootURL(), options.KVCOptionRootURL],
 			[mod.KVCTemplateTokenRootURLLegacy(), options.KVCOptionRootURL],
-		]);
+		].map(function (e) {
+			e[0] = `{${ e[0] }}`;
+
+			return e;
+		}));
 	},
 
 	KVCTemplateBlocks (options) {
@@ -83,19 +87,19 @@ const mod = {
 	},
 
 	KVCTemplateTokenPostTitle () {
-		return '{Title}';
+		return 'Title';
 	},
 
 	KVCTemplateTokenPostBody () {
-		return '{Body}';
+		return 'Body';
 	},
 
 	KVCTemplateTokenRootURL () {
-		return '{RootURL}';
+		return 'RootURL';
 	},
 
 	KVCTemplateTokenRootURLLegacy () {
-		return '{BlogURL}';
+		return 'BlogURL';
 	},
 
 	_KVCTemplateCollapseBlocksReplaceMatches (string, matchOpen, matchClosed, exclude) {
@@ -152,7 +156,7 @@ const mod = {
 		return `<!DOCTYPE html>
 <html>
 <head>
-	<title>${ mod.KVCTemplateTokenPostTitle() }</title>
+	<title>{${ mod.KVCTemplateTokenPostTitle() }}</title>
 	<style type="text/css">
 		:root {
 			--KVCBoxFontFamily: 'Lucida Grande', sans-serif;
@@ -205,11 +209,11 @@ const mod = {
 </head>
 <body class="KVCBox">
 
-<h1 class="KVCArticleTitle">${ mod.KVCTemplateTokenPostTitle() }</h1>
+<h1 class="KVCArticleTitle">{${ mod.KVCTemplateTokenPostTitle() }}</h1>
 
 <article class="KVCArticleBody">
 
-${ mod.KVCTemplateTokenPostBody() }
+{${ mod.KVCTemplateTokenPostBody() }}
 
 </article>
 

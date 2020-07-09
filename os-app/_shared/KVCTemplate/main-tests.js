@@ -179,7 +179,7 @@ describe('KVCTemplateTokensMap', function test_KVCTemplateTokensMap() {
 		
 		it('sets to KVCTemplatePlaintextTitle', function () {
 			const item = 'alfa\nbravo';
-			deepEqual(mainModule.KVCTemplateTokensMap(showdown, item, {})[mainModule.KVCTemplateTokenPostTitle()], mainModule.KVCTemplatePlaintextTitle(item));
+			deepEqual(mainModule.KVCTemplateTokensMap(showdown, item, {})[`{${ mainModule.KVCTemplateTokenPostTitle() }}`], mainModule.KVCTemplatePlaintextTitle(item));
 		});
 	
 	});
@@ -188,7 +188,7 @@ describe('KVCTemplateTokensMap', function test_KVCTemplateTokensMap() {
 		
 		it('sets to KVCTemplateHTML', function () {
 			const item = 'alfa\n# bravo';
-			deepEqual(mainModule.KVCTemplateTokensMap(showdown, item, {})[mainModule.KVCTemplateTokenPostBody()], mainModule.KVCTemplateHTML(showdown, mainModule.KVCTemplatePlaintextBody(item)));
+			deepEqual(mainModule.KVCTemplateTokensMap(showdown, item, {})[`{${ mainModule.KVCTemplateTokenPostBody() }}`], mainModule.KVCTemplateHTML(showdown, mainModule.KVCTemplatePlaintextBody(item)));
 		});
 	
 	});
@@ -198,7 +198,7 @@ describe('KVCTemplateTokensMap', function test_KVCTemplateTokensMap() {
 		it('sets to KVCOptionRootURL', function () {
 			deepEqual(mainModule.KVCTemplateTokensMap(showdown, '', {
 				KVCOptionRootURL: 'alfa',
-			})[mainModule.KVCTemplateTokenRootURL()], 'alfa');
+			})[`{${ mainModule.KVCTemplateTokenRootURL() }}`], 'alfa');
 		});
 	
 	});
@@ -208,7 +208,7 @@ describe('KVCTemplateTokensMap', function test_KVCTemplateTokensMap() {
 		it('sets to KVCOptionRootURL', function () {
 			deepEqual(mainModule.KVCTemplateTokensMap(showdown, '', {
 				KVCOptionRootURL: 'alfa',
-			})[mainModule.KVCTemplateTokenRootURLLegacy()], 'alfa');
+			})[`{${ mainModule.KVCTemplateTokenRootURLLegacy() }}`], 'alfa');
 		});
 	
 	});
@@ -242,7 +242,7 @@ describe('KVCTemplateBlocks', function test_KVCTemplateBlocks() {
 describe('KVCTemplateTokenPostTitle', function test_KVCTemplateTokenPostTitle() {
 
 	it('returns string', function() {
-		deepEqual(mainModule.KVCTemplateTokenPostTitle(), '{Title}');
+		deepEqual(mainModule.KVCTemplateTokenPostTitle(), 'Title');
 	});
 
 });
@@ -250,7 +250,7 @@ describe('KVCTemplateTokenPostTitle', function test_KVCTemplateTokenPostTitle() 
 describe('KVCTemplateTokenPostBody', function test_KVCTemplateTokenPostBody() {
 
 	it('returns string', function() {
-		deepEqual(mainModule.KVCTemplateTokenPostBody(), '{Body}');
+		deepEqual(mainModule.KVCTemplateTokenPostBody(), 'Body');
 	});
 
 });
@@ -258,7 +258,7 @@ describe('KVCTemplateTokenPostBody', function test_KVCTemplateTokenPostBody() {
 describe('KVCTemplateTokenRootURL', function test_KVCTemplateTokenRootURL() {
 
 	it('returns string', function() {
-		deepEqual(mainModule.KVCTemplateTokenRootURL(), '{RootURL}');
+		deepEqual(mainModule.KVCTemplateTokenRootURL(), 'RootURL');
 	});
 
 });
@@ -266,7 +266,7 @@ describe('KVCTemplateTokenRootURL', function test_KVCTemplateTokenRootURL() {
 describe('KVCTemplateTokenRootURLLegacy', function test_KVCTemplateTokenRootURLLegacy() {
 
 	it('returns string', function() {
-		deepEqual(mainModule.KVCTemplateTokenRootURLLegacy(), '{BlogURL}');
+		deepEqual(mainModule.KVCTemplateTokenRootURLLegacy(), 'BlogURL');
 	});
 
 });

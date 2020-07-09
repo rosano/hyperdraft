@@ -11,7 +11,7 @@ describe('KVCTemplate_Misc', function () {
 	describe('KVCTemplateHeadTitle', function test_KVCTemplateHeadTitle() {
 
 		it('sets text', function () {
-			browser.assert.text(KVCTemplateHeadTitle, mainModule.KVCTemplateTokenPostTitle());
+			browser.assert.text(KVCTemplateHeadTitle, `{${ mainModule.KVCTemplateTokenPostTitle() }}`);
 		});
 		
 	});
@@ -43,7 +43,7 @@ describe('KVCTemplate_Misc', function () {
 	describe('KVCArticleTitle', function test_KVCArticleTitle() {
 
 		it('sets text', function () {
-			browser.assert.text(KVCArticleTitle, mainModule.KVCTemplateTokenPostTitle());
+			browser.assert.text(KVCArticleTitle, `{${ mainModule.KVCTemplateTokenPostTitle() }}`);
 		});
 
 	});
@@ -51,7 +51,7 @@ describe('KVCTemplate_Misc', function () {
 	describe('KVCArticleBody', function test_KVCArticleBody() {
 
 		it('sets text', function () {
-			browser.assert.text(KVCArticleBody, mainModule.KVCTemplateTokenPostBody());
+			browser.assert.text(KVCArticleBody, `{${ mainModule.KVCTemplateTokenPostBody() }}`);
 		});
 
 	});
