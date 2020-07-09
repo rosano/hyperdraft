@@ -68,6 +68,22 @@ const mod = {
 		]);
 	},
 
+	KVCTemplateTokenPostTitle () {
+		return '{Title}';
+	},
+
+	KVCTemplateTokenPostBody () {
+		return '{Body}';
+	},
+
+	KVCTemplateTokenRootURL () {
+		return '{RootURL}';
+	},
+
+	KVCTemplateTokenRootURLLegacy () {
+		return '{BlogURL}';
+	},
+
 	KVCTemplateViewDefault () {
 		return `<!DOCTYPE html>
 <html>
@@ -135,22 +151,6 @@ ${ mod.KVCTemplateTokenPostBody() }
 
 </body>
 </html>`;
-	},
-
-	KVCTemplateTokenPostTitle () {
-		return '{Title}';
-	},
-
-	KVCTemplateTokenPostBody () {
-		return '{Body}';
-	},
-
-	KVCTemplateTokenRootURL () {
-		return '{RootURL}';
-	},
-
-	KVCTemplateTokenRootURLLegacy () {
-		return '{BlogURL}';
 	},
 
 };

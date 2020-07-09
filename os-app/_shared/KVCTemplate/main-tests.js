@@ -215,6 +215,38 @@ describe('KVCTemplateTokensMap', function test_KVCTemplateTokensMap() {
 
 });
 
+describe('KVCTemplateTokenPostTitle', function test_KVCTemplateTokenPostTitle() {
+
+	it('returns string', function() {
+		deepEqual(mainModule.KVCTemplateTokenPostTitle(), '{Title}');
+	});
+
+});
+
+describe('KVCTemplateTokenPostBody', function test_KVCTemplateTokenPostBody() {
+
+	it('returns string', function() {
+		deepEqual(mainModule.KVCTemplateTokenPostBody(), '{Body}');
+	});
+
+});
+
+describe('KVCTemplateTokenRootURL', function test_KVCTemplateTokenRootURL() {
+
+	it('returns string', function() {
+		deepEqual(mainModule.KVCTemplateTokenRootURL(), '{RootURL}');
+	});
+
+});
+
+describe('KVCTemplateTokenRootURLLegacy', function test_KVCTemplateTokenRootURLLegacy() {
+
+	it('returns string', function() {
+		deepEqual(mainModule.KVCTemplateTokenRootURLLegacy(), '{BlogURL}');
+	});
+
+});
+
 describe('KVCTemplateViewDefault', function test_KVCTemplateViewDefault() {
 
 	const uTag = function (inputData) {
@@ -247,38 +279,6 @@ describe('KVCTemplateViewDefault', function test_KVCTemplateViewDefault() {
 
 	it('contains KVCTemplateTokenPostTitle in title', function() {
 		deepEqual(!!mainModule.KVCTemplateViewDefault().match(uTagContent('title', mainModule.KVCTemplateTokenPostTitle())), true);
-	});
-
-});
-
-describe('KVCTemplateTokenPostTitle', function test_KVCTemplateTokenPostTitle() {
-
-	it('returns string', function() {
-		deepEqual(mainModule.KVCTemplateTokenPostTitle(), '{Title}');
-	});
-
-});
-
-describe('KVCTemplateTokenPostBody', function test_KVCTemplateTokenPostBody() {
-
-	it('returns string', function() {
-		deepEqual(mainModule.KVCTemplateTokenPostBody(), '{Body}');
-	});
-
-});
-
-describe('KVCTemplateTokenRootURL', function test_KVCTemplateTokenRootURL() {
-
-	it('returns string', function() {
-		deepEqual(mainModule.KVCTemplateTokenRootURL(), '{RootURL}');
-	});
-
-});
-
-describe('KVCTemplateTokenRootURLLegacy', function test_KVCTemplateTokenRootURLLegacy() {
-
-	it('returns string', function() {
-		deepEqual(mainModule.KVCTemplateTokenRootURLLegacy(), '{BlogURL}');
 	});
 
 });
