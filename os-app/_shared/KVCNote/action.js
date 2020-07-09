@@ -125,7 +125,7 @@ const mod = {
 		}, {}));
 	},
 
-	async KVCNoteActionPublish (storageClient, param1, param2, param3, param4) {
+	async KVCNoteActionPublish (storageClient, param1, param2, param3, options) {
 		if (KVCNoteModel.KVCNoteModelErrorsFor(param1)) {
 			return Promise.reject(new Error('KVCErrorInputNotValid'));
 		}
@@ -138,7 +138,7 @@ const mod = {
 			return Promise.reject(new Error('KVCErrorInputNotValid'));
 		}
 
-		if (typeof param4 !== 'boolean') {
+		if (typeof options !== 'object' || options === null) {
 			return Promise.reject(new Error('KVCErrorInputNotValid'));
 		}
 
@@ -153,7 +153,7 @@ const mod = {
 		await (async function(inputData) {
 			await KVCNoteStorage.KVCNoteStoragePublicWrite(storageClient, mod.KVCNoteActionPublishPath(param1, false), inputData);
 
-			if (param4) {
+			if (options.KVCOptionIsRoot) {
 				await KVCNoteStorage.KVCNoteStoragePublicWrite(storageClient, mod.KVCNoteActionPublishPath(param1, true), inputData);
 			}
 		})(OLSKString.OLSKStringReplaceTokens(param2, KVCTemplate.KVCTemplateTokensMap(showdown, KVCTemplate.KVCTemplateRemappedLinks(param1.KVCNoteBody, param3), {})));
