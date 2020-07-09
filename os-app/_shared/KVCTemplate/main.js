@@ -47,12 +47,16 @@ const mod = {
 		return showdownConverter.makeHtml(inputData);
 	},
 
-	KVCTemplateReplaceTokens (showdown, inputData) {
+	KVCTemplateReplaceTokens (showdown, body, options) {
 		if (typeof showdown.Converter !== 'function') {
 			throw new Error('KVCErrorInputNotValid');
 		}
 		
-		if (typeof inputData !== 'string') {
+		if (typeof body !== 'string') {
+			throw new Error('KVCErrorInputNotValid');
+		}
+
+		if (typeof options !== 'object' || options === null) {
 			throw new Error('KVCErrorInputNotValid');
 		}
 
