@@ -150,15 +150,17 @@ const mod = {
 			param1.KVCNotePublishDate = new Date();
 		}
 
+		const tokensMap = KVCTemplate.KVCTemplateTokensMap(showdown, KVCTemplate.KVCTemplateRemappedLinks(param1.KVCNoteBody, param3), options);
+
 		await (async function(inputData) {
 			await KVCNoteStorage.KVCNoteStoragePublicWrite(storageClient, mod.KVCNoteActionPublishPath(param1, false), inputData);
 
 			if (options.KVCOptionIsRoot) {
 				await KVCNoteStorage.KVCNoteStoragePublicWrite(storageClient, mod.KVCNoteActionPublishPath(param1, true), inputData);
 			}
-		})(OLSKString.OLSKStringReplaceTokens(KVCTemplate.KVCTemplateCollapseBlocks(param2, Object.keys(options).reduce(function (coll, item) {
-			return coll;
-		}, [])), KVCTemplate.KVCTemplateTokensMap(showdown, KVCTemplate.KVCTemplateRemappedLinks(param1.KVCNoteBody, param3), options)));
+		})(OLSKString.OLSKStringReplaceTokens(KVCTemplate.KVCTemplateCollapseBlocks(param2, Object.keys(tokensMap).map(function (e) {
+			return e.slice(1, -1);
+		})), tokensMap));
 
 		return await mod.KVCNoteActionUpdate(storageClient, Object.assign(param1, {
 			KVCNoteIsPublic: true,

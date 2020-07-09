@@ -331,18 +331,6 @@ describe('KVCNoteActionPublish', function test_KVCNoteActionPublish() {
 		deepEqual((await KVCTestingStorageClient.wikiavec.__DEBUG._OLSKRemoteStoragePublicClient().getFile(KVCNoteStorage.KVCNoteStoragePublicObjectPath(item))).data, 'alfa');
 	});
 
-	it('replaces tokens', async function() {
-		const item = await kTesting.uPublish(await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()), `alfa {${ KVCTemplate.KVCTemplateTokenPostTitle() }}`);
-
-		deepEqual((await KVCTestingStorageClient.wikiavec.__DEBUG._OLSKRemoteStoragePublicClient().getFile(KVCNoteStorage.KVCNoteStoragePublicObjectPath(item))).data, 'alfa bravo');
-	});
-
-	it('replaces blocks', async function() {
-		const item = await kTesting.uPublish(await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()), `alfa {block:alfa}{/block:alfa}`);
-
-		deepEqual((await KVCTestingStorageClient.wikiavec.__DEBUG._OLSKRemoteStoragePublicClient().getFile(KVCNoteStorage.KVCNoteStoragePublicObjectPath(item))).data, 'alfa ');
-	});
-
 	it('replaces public links', async function() {
 		const item = await kTesting.uPublish(await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, Object.assign(kTesting.StubNoteObject(), {
 			KVCNoteBody: 'bravo\n[[charlie]]'
@@ -360,6 +348,30 @@ describe('KVCNoteActionPublish', function test_KVCNoteActionPublish() {
 
 		deepEqual((await KVCTestingStorageClient.wikiavec.__DEBUG._OLSKRemoteStoragePublicClient().getFile(KVCNoteStorage.KVCNoteStoragePublicObjectPath(item))).data, 'alfa');
 		deepEqual((await KVCTestingStorageClient.wikiavec.__DEBUG._OLSKRemoteStoragePublicClient().getFile(KVCNoteStorage.KVCNoteStoragePublicRootPagePath())).data, 'alfa');
+	});
+
+	it('replaces tokens', async function() {
+		const item = await kTesting.uPublish(await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()), `alfa {${ KVCTemplate.KVCTemplateTokenPostTitle() }}`);
+
+		deepEqual((await KVCTestingStorageClient.wikiavec.__DEBUG._OLSKRemoteStoragePublicClient().getFile(KVCNoteStorage.KVCNoteStoragePublicObjectPath(item))).data, 'alfa bravo');
+	});
+
+	context('blocks', function () {
+		
+		it('replaces if not present', async function() {
+			const item = await kTesting.uPublish(await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()), `alfa {block:alfa}{/block:alfa}`);
+
+			deepEqual((await KVCTestingStorageClient.wikiavec.__DEBUG._OLSKRemoteStoragePublicClient().getFile(KVCNoteStorage.KVCNoteStoragePublicObjectPath(item))).data, 'alfa ');
+		});
+		
+		it('replaces KVCTemplateTokenRootURL', async function() {
+			const item = await kTesting.uPublish(await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()), `alfa {block:${ KVCTemplate.KVCTemplateTokenRootURL() }}{${ KVCTemplate.KVCTemplateTokenRootURL() }}{/block:${ KVCTemplate.KVCTemplateTokenRootURL() }}`, {}, {
+				KVCOptionRootURL: 'bravo',
+			});
+
+			deepEqual((await KVCTestingStorageClient.wikiavec.__DEBUG._OLSKRemoteStoragePublicClient().getFile(KVCNoteStorage.KVCNoteStoragePublicObjectPath(item))).data, 'alfa bravo');
+		});
+	
 	});
 
 });
