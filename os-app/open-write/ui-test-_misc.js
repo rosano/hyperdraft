@@ -670,6 +670,10 @@ describe('KVCWrite_Misc', function () {
 			browser.assert.elements('.KVCWriteDetailToolbarIsRootPage', 1);
 		});
 
+		it.skip('sets KVCWriteDetailPublicURLFor', function () {
+			browser.assert.attribute('.KVCWriteDetailToolbarPublicLink', 'href', 'FakeCustomDomainBaseURL/');
+		});
+
 		it('calls ControlNotePublish', function () {
 			browser.assert.text('#TestControlNotePublishCount', '3');
 		});
