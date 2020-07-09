@@ -104,7 +104,13 @@ const mod = {
 			param1.KVCNotePublishDate = new Date();
 		}
 
-		await KVCNoteStorage.KVCNoteStoragePublicWrite(storageClient, mod.KVCNoteActionPublicPath(param1, param4), OLSKString.OLSKStringReplaceTokens(param2, KVCTemplate.KVCTemplateReplaceTokens(showdown, KVCTemplate.KVCTemplateRemappedLinks(param1.KVCNoteBody, param3))));
+		await (async function(inputData) {
+			await KVCNoteStorage.KVCNoteStoragePublicWrite(storageClient, mod.KVCNoteActionPublicPath(param1, false), inputData);
+
+			if (param4) {
+				await KVCNoteStorage.KVCNoteStoragePublicWrite(storageClient, mod.KVCNoteActionPublicPath(param1, true), inputData);
+			}
+		})(OLSKString.OLSKStringReplaceTokens(param2, KVCTemplate.KVCTemplateReplaceTokens(showdown, KVCTemplate.KVCTemplateRemappedLinks(param1.KVCNoteBody, param3))));
 
 		return await mod.KVCNoteActionUpdate(storageClient, Object.assign(param1, {
 			KVCNoteIsPublic: true,
