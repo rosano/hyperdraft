@@ -103,11 +103,19 @@ const mod = {
 		return param2 ? '/' : KVCNoteStorage.KVCNoteStoragePublicObjectPath(param1);
 	},
 
-	async KVCNoteActionPublicTitlePathMap (storageClient, isConnected = false) {
+	async KVCNoteActionPublicTitlePathMap (storageClient, inputData, FakeConnected = false) {
 		return Promise.resolve((await mod.KVCNoteActionQuery(storageClient, {
 			KVCNoteIsPublic: true,
 		})).map(function (e) {
-			return [KVCParser.KVCParserTitleForPlaintext(e.KVCNoteBody), isConnected ? KVCNoteStorage.KVCNoteStoragePublicURL(storageClient, KVCNoteStorage.KVCNoteStoragePublicObjectPath(e)) : `/${ e.KVCNotePublicID }`];
+			return [KVCParser.KVCParserTitleForPlaintext(e.KVCNoteBody), (function() {
+				const outputData = mod.KVCNoteActionPublicPath(e, e.KVCNoteID === inputData);
+
+				if (FakeConnected) {
+					return outputData;
+				}
+
+				return KVCNoteStorage.KVCNoteStoragePublicURL(storageClient, outputData);
+			})()];
 		}).reduce(function (coll, [key, val]) {
 			if (typeof coll[key] === 'undefined') {
 				coll[key] = val;

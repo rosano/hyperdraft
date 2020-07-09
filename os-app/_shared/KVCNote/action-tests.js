@@ -224,18 +224,18 @@ describe('KVCNoteActionPublicPath', function test_KVCNoteActionPublicPath() {
 describe('KVCNoteActionPublicTitlePathMap', function test_KVCNoteActionPublicTitlePathMap() {
 
 	it('returns object', async function() {
-		deepEqual(await mainModule.KVCNoteActionPublicTitlePathMap(KVCTestingStorageClient), {});
+		deepEqual(await mainModule.KVCNoteActionPublicTitlePathMap(KVCTestingStorageClient, '', true), {});
 	});
 
 	it('excludes if KVCNoteIsPublic false', async function() {
 		await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject());
-		deepEqual(await mainModule.KVCNoteActionPublicTitlePathMap(KVCTestingStorageClient), {});
+		deepEqual(await mainModule.KVCNoteActionPublicTitlePathMap(KVCTestingStorageClient, '', true), {});
 	});
 
 	it('includes if KVCNoteIsPublic true', async function() {
 		const item = await kTesting.uPublish(await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()));
-		deepEqual(await mainModule.KVCNoteActionPublicTitlePathMap(KVCTestingStorageClient), {
-			bravo: `/${ item.KVCNotePublicID }`,
+		deepEqual(await mainModule.KVCNoteActionPublicTitlePathMap(KVCTestingStorageClient, '', true), {
+			bravo: item.KVCNotePublicID,
 		});
 	});
 
@@ -250,8 +250,15 @@ describe('KVCNoteActionPublicTitlePathMap', function test_KVCNoteActionPublicTit
 			KVCNoteBody: 'alfa\ncharlie',
 		})));
 
-		deepEqual(await mainModule.KVCNoteActionPublicTitlePathMap(KVCTestingStorageClient), {
-			alfa: `/${ item.KVCNotePublicID }`,
+		deepEqual(await mainModule.KVCNoteActionPublicTitlePathMap(KVCTestingStorageClient, '', true), {
+			alfa: item.KVCNotePublicID,
+		});
+	});
+
+	it('links to KVCNoteActionPublicPath', async function() {
+		const item = await kTesting.uPublish(await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()));
+		deepEqual(await mainModule.KVCNoteActionPublicTitlePathMap(KVCTestingStorageClient, item.KVCNoteID, true), {
+			bravo: '/',
 		});
 	});
 
