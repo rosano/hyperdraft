@@ -84,6 +84,56 @@ const mod = {
 		return '{BlogURL}';
 	},
 
+	_KVCTemplateCollapseBlocksReplaceMatches (string, matchOpen, matchClosed, exclude) {
+		return string.slice(0, matchOpen.index) + (exclude ? '' : string.slice(matchOpen.index + matchOpen[0].length, matchClosed.index)) + string.slice(matchClosed.index + matchClosed[0].length);
+	},
+
+	KVCTemplateCollapseBlocks (param1, param2) {
+		if (typeof param1 !== 'string') {
+			throw new Error('OLSKErrorInputNotValid');
+		}
+
+		if (typeof param2 !== 'object' || param2 === null) {
+			throw new Error('OLSKErrorInputNotValid');
+		}
+
+		let outputData = param1;
+
+		let startIndex = -1;
+		let lastIndex;
+
+		while (startIndex < outputData.length) {
+			if (startIndex === lastIndex) {
+				startIndex = Infinity;
+				return outputData;
+			}
+
+			lastIndex = startIndex;
+
+			(function () {
+				let matchOpen = outputData.match(/\{block:(\w+)\}/i);
+
+				if (!matchOpen) {
+					startIndex = outputData.length;
+					return;
+				}
+
+				let matchClosed = outputData.match(new RegExp(`\\{\\/block:${ matchOpen[1] }\}`));
+
+				if (!matchClosed) {
+					startIndex = matchOpen.index + matchOpen[0].length;
+					return;
+				}
+
+				outputData = mod._KVCTemplateCollapseBlocksReplaceMatches(outputData, matchOpen, matchClosed, !Object.keys(param2).includes(matchOpen[1]));
+
+				startIndex = matchOpen.index;
+			})();
+		}
+
+		return outputData;
+	},
+
 	KVCTemplateViewDefault () {
 		return `<!DOCTYPE html>
 <html>

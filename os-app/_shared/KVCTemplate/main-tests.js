@@ -247,6 +247,62 @@ describe('KVCTemplateTokenRootURLLegacy', function test_KVCTemplateTokenRootURLL
 
 });
 
+describe('KVCTemplateCollapseBlocks', function test_KVCTemplateCollapseBlocks() {
+
+	it('throws error if param1 not string', function() {
+		throws(function() {
+			mainModule.KVCTemplateCollapseBlocks(null, {});
+		}, /OLSKErrorInputNotValid/);
+	});
+
+	it('throws error if param2 not object', function() {
+		throws(function() {
+			mainModule.KVCTemplateCollapseBlocks('', null);
+		}, /OLSKErrorInputNotValid/);
+	});
+
+	it('returns string', function() {
+		deepEqual(mainModule.KVCTemplateCollapseBlocks('', {}), '');
+	});
+
+	it('replaces if no key', function() {
+		deepEqual(mainModule.KVCTemplateCollapseBlocks('{block:alfa}bravo{/block:alfa}', {
+			charlie: 'delta',
+		}), '');
+	});
+
+	it('replaces single', function() {
+		deepEqual(mainModule.KVCTemplateCollapseBlocks('{block:alfa}bravo{/block:alfa}', {
+			alfa: 'charlie',
+		}), 'bravo');
+	});
+
+	it('replaces multiple', function() {
+		deepEqual(mainModule.KVCTemplateCollapseBlocks('{block:alfa}bravo{/block:alfa} {block:charlie}delta{/block:charlie}', {
+			alfa: 'echo',
+			charlie: 'foxtrot',
+		}), 'bravo delta');
+	});
+
+	it('replaces duplicate', function() {
+		deepEqual(mainModule.KVCTemplateCollapseBlocks('{block:alfa}bravo{/block:alfa} {block:alfa}bravo{/block:alfa}', {
+			alfa: 'charlie',
+		}), 'bravo bravo');
+	});
+
+	it('maintains whitespace', function() {
+		deepEqual(mainModule.KVCTemplateCollapseBlocks('{block:alfa}\n\tbravo\n{/block:alfa}', {
+			alfa: 'charlie',
+		}), '\n\tbravo\n');
+	});
+
+	it('ignores if not corresponding', function() {
+		const item = '{block:alfa}bravo{/block:charlie}';
+		deepEqual(mainModule.KVCTemplateCollapseBlocks(item, {}), item);
+	});
+
+});
+
 describe('KVCTemplateViewDefault', function test_KVCTemplateViewDefault() {
 
 	const uTag = function (inputData) {
