@@ -108,11 +108,11 @@ const mod = {
 
 	KVCTemplateCollapseBlocks (param1, param2) {
 		if (typeof param1 !== 'string') {
-			throw new Error('OLSKErrorInputNotValid');
+			throw new Error('KVCErrorInputNotValid');
 		}
 
 		if (!Array.isArray(param2)) {
-			throw new Error('OLSKErrorInputNotValid');
+			throw new Error('KVCErrorInputNotValid');
 		}
 
 		let outputData = param1;

@@ -276,13 +276,13 @@ describe('KVCTemplateCollapseBlocks', function test_KVCTemplateCollapseBlocks() 
 	it('throws error if param1 not string', function() {
 		throws(function() {
 			mainModule.KVCTemplateCollapseBlocks(null, []);
-		}, /OLSKErrorInputNotValid/);
+		}, /KVCErrorInputNotValid/);
 	});
 
 	it('throws error if param2 not array', function() {
 		throws(function() {
 			mainModule.KVCTemplateCollapseBlocks('', {});
-		}, /OLSKErrorInputNotValid/);
+		}, /KVCErrorInputNotValid/);
 	});
 
 	it('returns string', function() {
