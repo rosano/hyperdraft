@@ -79,7 +79,7 @@ const mod = {
 		}));
 	},
 
-	KVCNoteActionPublicPath (param1, param2) {
+	KVCNoteActionPublishPath (param1, param2) {
 		if (KVCNoteModel.KVCNoteModelErrorsFor(param1)) {
 			throw new Error('KVCErrorInputNotValid');
 		}
@@ -131,10 +131,10 @@ const mod = {
 		}
 
 		await (async function(inputData) {
-			await KVCNoteStorage.KVCNoteStoragePublicWrite(storageClient, mod.KVCNoteActionPublicPath(param1, false), inputData);
+			await KVCNoteStorage.KVCNoteStoragePublicWrite(storageClient, mod.KVCNoteActionPublishPath(param1, false), inputData);
 
 			if (param4) {
-				await KVCNoteStorage.KVCNoteStoragePublicWrite(storageClient, mod.KVCNoteActionPublicPath(param1, true), inputData);
+				await KVCNoteStorage.KVCNoteStoragePublicWrite(storageClient, mod.KVCNoteActionPublishPath(param1, true), inputData);
 			}
 		})(OLSKString.OLSKStringReplaceTokens(param2, KVCTemplate.KVCTemplateReplaceTokens(showdown, KVCTemplate.KVCTemplateRemappedLinks(param1.KVCNoteBody, param3))));
 
@@ -152,10 +152,10 @@ const mod = {
 			throw new Error('KVCErrorInputNotValid');
 		}
 
-		await KVCNoteStorage.KVCNoteStoragePublicDelete(storageClient, mod.KVCNoteActionPublicPath(param1, false));
+		await KVCNoteStorage.KVCNoteStoragePublicDelete(storageClient, mod.KVCNoteActionPublishPath(param1, false));
 
 		if (param2) {
-			await KVCNoteStorage.KVCNoteStoragePublicDelete(storageClient, mod.KVCNoteActionPublicPath(param1, true));
+			await KVCNoteStorage.KVCNoteStoragePublicDelete(storageClient, mod.KVCNoteActionPublishPath(param1, true));
 		}
 
 		return await mod.KVCNoteActionUpdate(storageClient, Object.assign(param1, {

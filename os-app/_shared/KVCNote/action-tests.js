@@ -165,7 +165,7 @@ describe('KVCNoteActionQuery', function test_KVCNoteActionQuery() {
 
 });
 
-describe('KVCNoteActionPublicPath', function test_KVCNoteActionPublicPath() {
+describe('KVCNoteActionPublishPath', function test_KVCNoteActionPublishPath() {
 
 	const item = Object.assign(StubNoteObjectValid(), {
 		KVCNotePublicID: 'charlie',
@@ -173,22 +173,22 @@ describe('KVCNoteActionPublicPath', function test_KVCNoteActionPublicPath() {
 
 	it('throws if param1 not valid', function() {
 		throws(function() {
-			mainModule.KVCNoteActionPublicPath({}, false);
+			mainModule.KVCNoteActionPublishPath({}, false);
 		}, /KVCErrorInputNotValid/);
 	});
 
 	it('throws if param2 not boolean', function() {
 		throws(function() {
-			mainModule.KVCNoteActionPublicPath(item, 'true');
+			mainModule.KVCNoteActionPublishPath(item, 'true');
 		}, /KVCErrorInputNotValid/);
 	});
 
 	it('returns KVCNoteStoragePublicObjectPath', function() {
-		deepEqual(mainModule.KVCNoteActionPublicPath(item, false), KVCNoteStorage.KVCNoteStoragePublicObjectPath(item));
+		deepEqual(mainModule.KVCNoteActionPublishPath(item, false), KVCNoteStorage.KVCNoteStoragePublicObjectPath(item));
 	});
 
 	it('returns KVCNoteStoragePublicRootPagePath if param2 true', function() {
-		deepEqual(mainModule.KVCNoteActionPublicPath(item, true), KVCNoteStorage.KVCNoteStoragePublicRootPagePath());
+		deepEqual(mainModule.KVCNoteActionPublishPath(item, true), KVCNoteStorage.KVCNoteStoragePublicRootPagePath());
 	});
 
 });
