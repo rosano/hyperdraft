@@ -424,6 +424,10 @@ const mod = {
 	},
 	
 	async ControlNoteRetract (inputData) {
+		if (OLSK_TESTING_BEHAVIOUR()) {
+			window.TestControlNoteRetractCount.innerHTML = parseInt(window.TestControlNoteRetractCount.innerHTML) + 1;
+		}
+		
 		mod.ValueNoteSelected(await KVCNoteAction.KVCNoteActionRetract(mod._ValueStorageClient, inputData));
 	},
 	
@@ -951,6 +955,11 @@ import OLSKStorageWidget from 'OLSKStorageWidget';
 	<p>
 		<strong>TestControlNotePublishCount</strong>
 		<span id="TestControlNotePublishCount">0</span>
+	</p>
+	
+	<p>
+		<strong>TestControlNoteRetractCount</strong>
+		<span id="TestControlNoteRetractCount">0</span>
 	</p>
 	
 	<p>

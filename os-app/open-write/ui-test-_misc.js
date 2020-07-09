@@ -421,9 +421,17 @@ describe('KVCWrite_Misc', function () {
 	});
 
 	context('retract', function test_retract () {
-		
+
 		before(function () {
-			return browser.click('.KVCWriteDetailToolbarRetractButton');
+			browser.assert.text('#TestControlNoteRetractCount', '0');
+		});
+
+		before(function () {
+			return browser.pressButton('.KVCWriteDetailToolbarRetractButton');
+		});
+
+		it('calls ControlNoteRetract', function () {
+			browser.assert.text('#TestControlNoteRetractCount', '1');
 		});
 
 		it('sets KVCNoteIsPublic', function () {
