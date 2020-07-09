@@ -604,7 +604,7 @@ describe('KVCWrite_Misc', function () {
 
 	});
 
-	describe('KVCWriteLauncherItemConfigureCustomDomain', function test_KVCWriteLauncherItemConfigureCustomDomain () {
+	describe.skip('KVCWriteLauncherItemConfigureCustomDomain', function test_KVCWriteLauncherItemConfigureCustomDomain () {
 		
 		before(function () {
 			return browser.pressButton('.OLSKAppToolbarLauncherButton');
@@ -634,23 +634,23 @@ describe('KVCWrite_Misc', function () {
 			});
 		});
 
-		it.skip('sets KVCWriteLauncherItemConfigureCustomDomainPrompt1Response', function () {
+		it('sets KVCWriteLauncherItemConfigureCustomDomainPrompt1Response', function () {
 			browser.assert.deepEqual(prompt1.response, KVCNoteStorage.KVCNoteStoragePublicRootPagePath());
 		});
 
-		it.skip('sets KVCWriteDetailPublicURLFor', function () {
+		it('sets KVCWriteDetailPublicURLFor', function () {
 			browser.assert.attribute('.KVCWriteDetailToolbarPublicLink', 'href', 'FakeCustomDomainBaseURL/FakePublicPath');
 		});
 	
 	});
 
-	describe('KVCWriteLauncherItemRemoveCustomDomain', function test_KVCWriteLauncherItemRemoveCustomDomain () {
+	describe.skip('KVCWriteLauncherItemRemoveCustomDomain', function test_KVCWriteLauncherItemRemoveCustomDomain () {
 		
 		before(function () {
 			return uLaunch('KVCWriteLauncherItemRemoveCustomDomain');
 		});
 
-		it.skip('sets KVCWriteDetailPublicURLFor', function () {
+		it('sets KVCWriteDetailPublicURLFor', function () {
 			browser.assert.attribute('.KVCWriteDetailToolbarPublicLink', 'href', '/FakePublicPath');
 		});
 	
