@@ -666,7 +666,7 @@ describe('KVCWrite_Misc', function () {
 			return uLaunch('KVCWriteDetailLauncherItemSetAsRootPage');
 		});
 
-		it.skip('sets KVCWriteDetailItemIsRootPage', function () {
+		it('sets KVCWriteDetailItemIsRootPage', function () {
 			browser.assert.elements('.KVCWriteDetailToolbarIsRootPage', 1);
 		});
 
