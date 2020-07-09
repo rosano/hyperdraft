@@ -79,6 +79,32 @@ const mod = {
 		}));
 	},
 
+	KVCNoteActionPublicPath (param1, param2) {
+		if (KVCNoteModel.KVCNoteModelErrorsFor(param1)) {
+			throw new Error('KVCErrorInputNotValid');
+		}
+
+		if (typeof param2 !== 'boolean') {
+			throw new Error('KVCErrorInputNotValid');
+		}
+
+		return param2 ? KVCNoteStorage.KVCNoteStoragePublicRootPagePath() : KVCNoteStorage.KVCNoteStoragePublicObjectPath(param1);
+	},
+
+	async KVCNoteActionPublicTitlePathMap (storageClient, isConnected = false) {
+		return Promise.resolve((await mod.KVCNoteActionQuery(storageClient, {
+			KVCNoteIsPublic: true,
+		})).map(function (e) {
+			return [KVCParser.KVCParserTitleForPlaintext(e.KVCNoteBody), isConnected ? KVCNoteStorage.KVCNoteStoragePublicURL(storageClient, KVCNoteStorage.KVCNoteStoragePublicObjectPath(e)) : `/${ e.KVCNotePublicID }`];
+		}).reduce(function (coll, [key, val]) {
+			if (typeof coll[key] === 'undefined') {
+				coll[key] = val;
+			}
+
+			return coll;
+		}, {}));
+	},
+
 	async KVCNoteActionPublish (storageClient, param1, param2, param3, param4) {
 		if (KVCNoteModel.KVCNoteModelErrorsFor(param1)) {
 			return Promise.reject(new Error('KVCErrorInputNotValid'));
@@ -117,18 +143,6 @@ const mod = {
 		}));
 	},
 
-	KVCNoteActionPublicPath (param1, param2) {
-		if (KVCNoteModel.KVCNoteModelErrorsFor(param1)) {
-			throw new Error('KVCErrorInputNotValid');
-		}
-
-		if (typeof param2 !== 'boolean') {
-			throw new Error('KVCErrorInputNotValid');
-		}
-
-		return param2 ? KVCNoteStorage.KVCNoteStoragePublicRootPagePath() : KVCNoteStorage.KVCNoteStoragePublicObjectPath(param1);
-	},
-
 	async KVCNoteActionRetract (storageClient, param1, param2) {
 		if (KVCNoteModel.KVCNoteModelErrorsFor(param1)) {
 			return Promise.reject(new Error('KVCErrorInputNotValid'));
@@ -147,20 +161,6 @@ const mod = {
 		return await mod.KVCNoteActionUpdate(storageClient, Object.assign(param1, {
 			KVCNoteIsPublic: false,
 		}));
-	},
-
-	async KVCNoteActionPublicTitlePathMap (storageClient, isConnected = false) {
-		return Promise.resolve((await mod.KVCNoteActionQuery(storageClient, {
-			KVCNoteIsPublic: true,
-		})).map(function (e) {
-			return [KVCParser.KVCParserTitleForPlaintext(e.KVCNoteBody), isConnected ? KVCNoteStorage.KVCNoteStoragePublicURL(storageClient, KVCNoteStorage.KVCNoteStoragePublicObjectPath(e)) : `/${ e.KVCNotePublicID }`];
-		}).reduce(function (coll, [key, val]) {
-			if (typeof coll[key] === 'undefined') {
-				coll[key] = val;
-			}
-
-			return coll;
-		}, {}));
 	},
 	
 };
