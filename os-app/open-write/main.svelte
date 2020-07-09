@@ -666,16 +666,11 @@ const mod = {
 	},
 
 	async KVCWriteDetailDispatchSetAsRootPage (inputData) {
-		const publicNote = mod.DataSettingValue('KVCSettingPublicRootPageID') && mod.DataSettingValue('KVCSettingPublicRootPageID') !== mod._ValueNoteSelected.KVCNoteID && KVCNoteModel.KVCNoteModelIsPublic(mod._ValueNoteSelected)
-		if (publicNote) {
-			await mod.ControlNoteRetract(mod._ValueNoteSelected);
-		}
-
 		await mod.ControlSettingStore('KVCSettingPublicRootPageID', inputData);
 
 		await mod._ControlHotfixUpdateInPlace(mod._ValueNoteSelected);
 
-		if (publicNote) {
+		if (KVCNoteModel.KVCNoteModelIsPublic(mod._ValueNoteSelected)) {
 			mod.ControlNotePublish(mod._ValueNoteSelected);
 		}
 	},
