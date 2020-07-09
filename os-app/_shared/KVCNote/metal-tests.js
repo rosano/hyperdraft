@@ -29,6 +29,33 @@ describe('KVCNoteMetalWrite', function test_KVCNoteMetalWrite() {
 		}));
 	});
 
+	context('relations', function () {
+
+		const memory = Object.assign(StubNoteObjectValid(), {
+			$alfa: 'bravo',
+		});
+		let storage = [];
+
+		before(async function () {
+			await mainModule.KVCNoteMetalWrite(KVCTestingStorageClient, memory);
+		});
+		
+		before(async function () {
+			storage = Object.values(await mainModule.KVCNoteMetalList(KVCTestingStorageClient));
+		});
+		
+		it('ignores property', function () {
+			deepEqual(storage, [Object.assign(StubNoteObjectValid(), {
+				'@context': memory['@context'],
+			})]);
+		});
+
+		it('clones object', function () {
+			deepEqual(memory.$alfa, 'bravo');
+		});
+	
+	});
+
 });
 
 describe('KVCNoteMetalList', function test_KVCNoteMetalList() {

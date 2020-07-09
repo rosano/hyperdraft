@@ -10,14 +10,19 @@ const mod = {
 		}
 
 		let errors = KVCNoteModel.KVCNoteModelErrorsFor(inputData);
-
 		if (errors) {
 			return Promise.resolve({
 				KVCErrors: errors,
 			});
 		}
+		
+		return Object.assign(inputData, await storageClient.wikiavec.kvc_notes.KVCStorageWrite(Object.keys(inputData).reduce(function (coll, item) {
+			if (item[0] !== '$') {
+				coll[item] = inputData[item];
+			}
 
-		return await storageClient.wikiavec.kvc_notes.KVCStorageWrite(inputData);
+			return coll;
+		}, {})));
 	},
 
 	async KVCNoteMetalList (storageClient) {
