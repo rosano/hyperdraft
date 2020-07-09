@@ -12,9 +12,9 @@ const kTesting = {
 		};
 	},
 
-	uPublish (param1 = kTesting.StubNoteObject(), param2 = '', param3 = {}) {
-		return mainModule.KVCNoteActionPublish(KVCTestingStorageClient, param1, param2, param3)
-	}
+	uPublish (param1 = kTesting.StubNoteObject(), param2 = '', param3 = {}, param4 = false) {
+		return mainModule.KVCNoteActionPublish(KVCTestingStorageClient, param1, param2, param3, param4);
+	},
 };
 
 describe('KVCNoteActionCreate', function test_KVCNoteActionCreate() {
@@ -179,6 +179,10 @@ describe('KVCNoteActionPublish', function test_KVCNoteActionPublish() {
 		await rejects(mainModule.KVCNoteActionPublish(KVCTestingStorageClient, StubNoteObjectValid(), '', null), /KVCErrorInputNotValid/);
 	});
 
+	it('rejects if param4 not boolean', async function() {
+		await rejects(mainModule.KVCNoteActionPublish(KVCTestingStorageClient, StubNoteObjectValid(), '', {}, 'true'), /KVCErrorInputNotValid/);
+	});
+
 	it('returns param1', async function() {
 		const item = await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject());
 		deepEqual(item === await kTesting.uPublish(item), true);
@@ -236,6 +240,12 @@ describe('KVCNoteActionPublish', function test_KVCNoteActionPublish() {
 		});
 
 		deepEqual((await KVCTestingStorageClient.wikiavec.__DEBUG._OLSKRemoteStoragePublicClient().getFile(KVCNoteStorage.KVCNoteStoragePublicObjectPath(item))).data, 'alfa <p><a href="delta">charlie</a></p>');
+	});
+
+	it('writes to KVCNoteStoragePublicRootPagePath if param4 true', async function() {
+		const item = await kTesting.uPublish(await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()), 'alfa', {}, true);
+
+		deepEqual((await KVCTestingStorageClient.wikiavec.__DEBUG._OLSKRemoteStoragePublicClient().getFile(KVCNoteStorage.KVCNoteStoragePublicRootPagePath())).data, 'alfa');
 	});
 
 });

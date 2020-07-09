@@ -424,7 +424,7 @@ const mod = {
 			window.TestControlNotePublishCount.innerHTML = parseInt(window.TestControlNotePublishCount.innerHTML) + 1;
 		}
 		
-		mod.ValueNoteSelected(await KVCNoteAction.KVCNoteActionPublish(mod._ValueStorageClient, inputData, KVCTemplate.KVCTemplateViewDefault(), await KVCNoteAction.KVCNoteActionPublicTitlePathMap(mod._ValueStorageClient, mod._ValueStorageIsConnected)));
+		mod.ValueNoteSelected(await KVCNoteAction.KVCNoteActionPublish(mod._ValueStorageClient, inputData, KVCTemplate.KVCTemplateViewDefault(), await KVCNoteAction.KVCNoteActionPublicTitlePathMap(mod._ValueStorageClient, mod._ValueStorageIsConnected), mod.DataSettingValue('KVCSettingPublicRootPageID') === inputData.KVCNoteID));
 	},
 	
 	async ControlNoteRetract (inputData) {
