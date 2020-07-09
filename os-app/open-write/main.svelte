@@ -70,13 +70,17 @@ const mod = {
 	_ValueStorageIsConnected: false,
 
 	_ValueSettingsAll: [],
-	ValueSetting (inputData) {
+	
+	// DATA
+	DataSetting (inputData) {
 		return mod._ValueSettingsAll.filter(function (e) {
 			return e.KVCSettingKey === inputData;
 		}).shift();
 	},
 	
-	// DATA
+	DataSettingValue (inputData) {
+		return (mod.DataSetting(inputData) || {}).KVCSettingValue;
+	},
 
 	DataRecipes () {
 		const outputData = [{
@@ -146,14 +150,14 @@ const mod = {
 				LCHRecipeCallback: async function KVCWriteLauncherItemRemoveCustomDomain () {
 					await KVCSettingAction.KVCSettingsActionDelete(mod._ValueStorageClient, 'KVCSettingCustomDomainBaseURL');
 
-					delete mod._ValueSettingsAll[mod._ValueSettingsAll.indexOf(mod.ValueSetting('KVCSettingCustomDomainBaseURL'))];
+					delete mod._ValueSettingsAll[mod._ValueSettingsAll.indexOf(mod.DataSetting('KVCSettingCustomDomainBaseURL'))];
 
 					if (mod._ValueNoteSelected) {
 						mod._ControlHotfixUpdateInPlace(mod._ValueNoteSelected);
 					}
 				},
 				LCHRecipeIsExcluded () {
-					return !mod.ValueSetting('KVCSettingCustomDomainBaseURL');
+					return !mod.DataSetting('KVCSettingCustomDomainBaseURL');
 				},
 			});
 		}
@@ -537,7 +541,7 @@ const mod = {
 	},
 	
 	async ControlSettingStore (param1, param2) {
-		await KVCSettingMetal.KVCSettingsMetalWrite(mod._ValueStorageClient, Object.assign(mod.ValueSetting(param1) || mod._ValueSettingsAll.push(await KVCSettingAction.KVCSettingsActionProperty(mod._ValueStorageClient, param1, param2)), {
+		await KVCSettingMetal.KVCSettingsMetalWrite(mod._ValueStorageClient, Object.assign(mod.DataSetting(param1) || mod._ValueSettingsAll.push(await KVCSettingAction.KVCSettingsActionProperty(mod._ValueStorageClient, param1, param2)), {
 			KVCSettingValue: param2,
 		}));
 	},
@@ -593,8 +597,8 @@ const mod = {
 	},
 
 	KVCWriteDetailPublicURLFor (inputData) {
-		if (mod.ValueSetting('KVCSettingCustomDomainBaseURL')) {
-			return KVCWriteLogic.KVCWriteCustomDomainBaseURLFunction(KVCNoteStorage.KVCNoteStoragePublicURL(mod._ValueStorageClient, KVCNoteStorage.KVCNoteStoragePublicRootPagePath()), KVCNoteStorage.KVCNoteStoragePublicRootPagePath())(KVCNoteStorage.KVCNoteStoragePublicURL(mod._ValueStorageClient, KVCNoteStorage.KVCNoteStoragePublicObjectPath(inputData)), mod.ValueSetting('KVCSettingCustomDomainBaseURL').KVCSettingValue);
+		if (mod.DataSetting('KVCSettingCustomDomainBaseURL')) {
+			return KVCWriteLogic.KVCWriteCustomDomainBaseURLFunction(KVCNoteStorage.KVCNoteStoragePublicURL(mod._ValueStorageClient, KVCNoteStorage.KVCNoteStoragePublicRootPagePath()), KVCNoteStorage.KVCNoteStoragePublicRootPagePath())(KVCNoteStorage.KVCNoteStoragePublicURL(mod._ValueStorageClient, KVCNoteStorage.KVCNoteStoragePublicObjectPath(inputData)), mod.DataSetting('KVCSettingCustomDomainBaseURL').KVCSettingValue);
 		}
 		
 		if (OLSK_TESTING_BEHAVIOUR() && mod._ValueStorageIsConnected) {
@@ -932,7 +936,7 @@ import OLSKStorageWidget from 'OLSKStorageWidget';
 	
 	<KVCWriteDetail
 		KVCWriteDetailConnected={ mod._ValueStorageIsConnected }
-		KVCWriteDetailItemIsRootPage={ mod._ValueNoteSelected && mod.ValueSetting('KVCSettingPublicRootPageID') ? mod._ValueNoteSelected.KVCNoteID === mod.ValueSetting('KVCSettingPublicRootPageID').KVCSettingValue : false }
+		KVCWriteDetailItemIsRootPage={ mod._ValueNoteSelected && mod.DataSetting('KVCSettingPublicRootPageID') ? mod._ValueNoteSelected.KVCNoteID === mod.DataSettingValue('KVCSettingPublicRootPageID') : false }
 		KVCWriteDetailPublicURLFor={ mod.KVCWriteDetailPublicURLFor }
 		KVCWriteDetailDispatchBack={ mod.KVCWriteDetailDispatchBack }
 		KVCWriteDetailDispatchJump={ mod.KVCWriteDetailDispatchJump }
