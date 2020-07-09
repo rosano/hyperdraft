@@ -673,6 +673,34 @@ describe('KVCWrite_Misc', function () {
 		it('calls ControlNotePublish', function () {
 			browser.assert.text('#TestControlNotePublishCount', '3');
 		});
+
+		context('other_published', function () {
+
+			before(function () {
+				return browser.pressButton('.KVCWriteMasterCreateButton');
+			});
+			
+			before(function () {
+				browser.fill('.KVCWriteInputFieldDebug', 'bravo');
+			});
+
+			before(function () {
+				return browser.pressButton('.KVCWriteDetailToolbarPublishButton');
+			});
+
+			before(function () {
+				browser.assert.text('#TestControlNoteRetractCount', '0');
+			});
+
+			before(function () {
+				return uLaunch('KVCWriteDetailLauncherItemSetAsRootPage');
+			});
+
+			it('calls ControlNoteRetract', function () {
+				browser.assert.text('#TestControlNoteRetractCount', '1');
+			});
+		
+		});
 	
 	});
 
