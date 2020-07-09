@@ -1,4 +1,4 @@
-const { rejects, deepEqual } = require('assert');
+const { throws, rejects, deepEqual } = require('assert');
 
 const mainModule = require('./action.js').default;
 const KVCNoteStorage = require('./storage.js').default;
@@ -246,6 +246,34 @@ describe('KVCNoteActionPublish', function test_KVCNoteActionPublish() {
 		const item = await kTesting.uPublish(await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()), 'alfa', {}, true);
 
 		deepEqual((await KVCTestingStorageClient.wikiavec.__DEBUG._OLSKRemoteStoragePublicClient().getFile(KVCNoteStorage.KVCNoteStoragePublicRootPagePath())).data, 'alfa');
+	});
+
+});
+
+describe('KVCNoteActionPublicPath', function test_KVCNoteActionPublicPath() {
+
+	const item = Object.assign(StubNoteObjectValid(), {
+		KVCNotePublicID: 'charlie',
+	});
+
+	it('throws if param1 not valid', function() {
+		throws(function() {
+			mainModule.KVCNoteActionPublicPath({}, false);
+		}, /KVCErrorInputNotValid/);
+	});
+
+	it('throws if param2 not boolean', function() {
+		throws(function() {
+			mainModule.KVCNoteActionPublicPath(item, 'true');
+		}, /KVCErrorInputNotValid/);
+	});
+
+	it('returns KVCNoteStoragePublicObjectPath', function() {
+		deepEqual(mainModule.KVCNoteActionPublicPath(item, false), KVCNoteStorage.KVCNoteStoragePublicObjectPath(item));
+	});
+
+	it('returns KVCNoteStoragePublicRootPagePath if param2 true', function() {
+		deepEqual(mainModule.KVCNoteActionPublicPath(item, true), KVCNoteStorage.KVCNoteStoragePublicRootPagePath());
 	});
 
 });
