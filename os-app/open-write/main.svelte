@@ -666,7 +666,8 @@ const mod = {
 	},
 
 	async KVCWriteDetailDispatchSetAsRootPage (inputData) {
-		if (mod.DataSettingValue('KVCSettingPublicRootPageID') && mod.DataSettingValue('KVCSettingPublicRootPageID') !== mod._ValueNoteSelected.KVCNoteID && KVCNoteModel.KVCNoteModelIsPublic(mod._ValueNoteSelected)) {
+		const publicNote = mod.DataSettingValue('KVCSettingPublicRootPageID') && mod.DataSettingValue('KVCSettingPublicRootPageID') !== mod._ValueNoteSelected.KVCNoteID && KVCNoteModel.KVCNoteModelIsPublic(mod._ValueNoteSelected)
+		if (publicNote) {
 			await mod.ControlNoteRetract(mod._ValueNoteSelected);
 		}
 
@@ -674,7 +675,7 @@ const mod = {
 
 		await mod._ControlHotfixUpdateInPlace(mod._ValueNoteSelected);
 
-		if (KVCNoteModel.KVCNoteModelIsPublic(mod._ValueNoteSelected)) {
+		if (publicNote) {
 			mod.ControlNotePublish(mod._ValueNoteSelected);
 		}
 	},
