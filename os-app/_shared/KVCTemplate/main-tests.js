@@ -275,54 +275,43 @@ describe('KVCTemplateCollapseBlocks', function test_KVCTemplateCollapseBlocks() 
 
 	it('throws error if param1 not string', function() {
 		throws(function() {
-			mainModule.KVCTemplateCollapseBlocks(null, {});
+			mainModule.KVCTemplateCollapseBlocks(null, []);
 		}, /OLSKErrorInputNotValid/);
 	});
 
-	it('throws error if param2 not object', function() {
+	it('throws error if param2 not array', function() {
 		throws(function() {
-			mainModule.KVCTemplateCollapseBlocks('', null);
+			mainModule.KVCTemplateCollapseBlocks('', {});
 		}, /OLSKErrorInputNotValid/);
 	});
 
 	it('returns string', function() {
-		deepEqual(mainModule.KVCTemplateCollapseBlocks('', {}), '');
+		deepEqual(mainModule.KVCTemplateCollapseBlocks('', []), '');
 	});
 
 	it('replaces if no key', function() {
-		deepEqual(mainModule.KVCTemplateCollapseBlocks('{block:alfa}bravo{/block:alfa}', {
-			charlie: 'delta',
-		}), '');
+		deepEqual(mainModule.KVCTemplateCollapseBlocks('{block:alfa}bravo{/block:alfa}', ['charlie']), '');
 	});
 
 	it('replaces single', function() {
-		deepEqual(mainModule.KVCTemplateCollapseBlocks('{block:alfa}bravo{/block:alfa}', {
-			alfa: 'charlie',
-		}), 'bravo');
+		deepEqual(mainModule.KVCTemplateCollapseBlocks('{block:alfa}bravo{/block:alfa}', ['alfa']), 'bravo');
 	});
 
 	it('replaces multiple', function() {
-		deepEqual(mainModule.KVCTemplateCollapseBlocks('{block:alfa}bravo{/block:alfa} {block:charlie}delta{/block:charlie}', {
-			alfa: 'echo',
-			charlie: 'foxtrot',
-		}), 'bravo delta');
+		deepEqual(mainModule.KVCTemplateCollapseBlocks('{block:alfa}bravo{/block:alfa} {block:charlie}delta{/block:charlie}', ['alfa', 'charlie']), 'bravo delta');
 	});
 
 	it('replaces duplicate', function() {
-		deepEqual(mainModule.KVCTemplateCollapseBlocks('{block:alfa}bravo{/block:alfa} {block:alfa}bravo{/block:alfa}', {
-			alfa: 'charlie',
-		}), 'bravo bravo');
+		deepEqual(mainModule.KVCTemplateCollapseBlocks('{block:alfa}bravo{/block:alfa} {block:alfa}bravo{/block:alfa}', ['alfa']), 'bravo bravo');
 	});
 
 	it('maintains whitespace', function() {
-		deepEqual(mainModule.KVCTemplateCollapseBlocks('{block:alfa}\n\tbravo\n{/block:alfa}', {
-			alfa: 'charlie',
-		}), '\n\tbravo\n');
+		deepEqual(mainModule.KVCTemplateCollapseBlocks('{block:alfa}\n\tbravo\n{/block:alfa}', ['alfa']), '\n\tbravo\n');
 	});
 
 	it('ignores if not corresponding', function() {
 		const item = '{block:alfa}bravo{/block:charlie}';
-		deepEqual(mainModule.KVCTemplateCollapseBlocks(item, {}), item);
+		deepEqual(mainModule.KVCTemplateCollapseBlocks(item, []), item);
 	});
 
 });

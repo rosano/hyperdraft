@@ -107,7 +107,7 @@ const mod = {
 			throw new Error('OLSKErrorInputNotValid');
 		}
 
-		if (typeof param2 !== 'object' || param2 === null) {
+		if (!Array.isArray(param2)) {
 			throw new Error('OLSKErrorInputNotValid');
 		}
 
@@ -139,7 +139,7 @@ const mod = {
 					return;
 				}
 
-				outputData = mod._KVCTemplateCollapseBlocksReplaceMatches(outputData, matchOpen, matchClosed, !Object.keys(param2).includes(matchOpen[1]));
+				outputData = mod._KVCTemplateCollapseBlocksReplaceMatches(outputData, matchOpen, matchClosed, !param2.includes(matchOpen[1]));
 
 				startIndex = matchOpen.index;
 			})();
