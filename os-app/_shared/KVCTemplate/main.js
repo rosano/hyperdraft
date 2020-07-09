@@ -61,8 +61,10 @@ const mod = {
 		}
 
 		return [
-			[mod.KVCTemplateTokenPostTitle(), mod.KVCTemplatePlaintextTitle(inputData)],
-			[mod.KVCTemplateTokenPostBody(), mod.KVCTemplateHTML(showdown, mod.KVCTemplatePlaintextBody(inputData))],
+			[mod.KVCTemplateTokenPostTitle(), mod.KVCTemplatePlaintextTitle(body)],
+			[mod.KVCTemplateTokenPostBody(), mod.KVCTemplateHTML(showdown, mod.KVCTemplatePlaintextBody(body))],
+			[mod.KVCTemplateTokenRootURL(), options.KVCOptionRootURL],
+			[mod.KVCTemplateTokenRootURLLegacy(), options.KVCOptionRootURL],
 		].reduce(function (coll, item) {
 			coll[item.shift()] = item.pop();
 

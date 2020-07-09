@@ -193,6 +193,26 @@ describe('KVCTemplateReplaceTokens', function test_KVCTemplateReplaceTokens() {
 	
 	});
 
+	context('KVCTemplateTokenRootURL', function () {
+		
+		it('sets to KVCOptionRootURL', function () {
+			deepEqual(mainModule.KVCTemplateReplaceTokens(showdown, '', {
+				KVCOptionRootURL: 'alfa',
+			})[mainModule.KVCTemplateTokenRootURL()], 'alfa');
+		});
+	
+	});
+
+	context('KVCTemplateTokenRootURLLegacy', function () {
+		
+		it('sets to KVCOptionRootURL', function () {
+			deepEqual(mainModule.KVCTemplateReplaceTokens(showdown, '', {
+				KVCOptionRootURL: 'alfa',
+			})[mainModule.KVCTemplateTokenRootURLLegacy()], 'alfa');
+		});
+	
+	});
+
 });
 
 describe('KVCTemplateViewDefault', function test_KVCTemplateViewDefault() {
