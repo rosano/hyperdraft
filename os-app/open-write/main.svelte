@@ -424,8 +424,9 @@ const mod = {
 			window.TestControlNotePublishCount.innerHTML = parseInt(window.TestControlNotePublishCount.innerHTML) + 1;
 		}
 		
-		mod.ValueNoteSelected(await KVCNoteAction.KVCNoteActionPublish(mod._ValueStorageClient, inputData, KVCTemplate.KVCTemplateViewDefault(), await KVCNoteAction.KVCNoteActionPublicTitlePathMap(mod._ValueStorageClient, mod.DataSettingValue('KVCSettingPublicRootPageID')), {
+		mod.ValueNoteSelected(await KVCNoteAction.KVCNoteActionPublish(mod._ValueStorageClient, inputData, KVCTemplate.KVCTemplateViewDefault(OLSKLocalized), await KVCNoteAction.KVCNoteActionPublicTitlePathMap(mod._ValueStorageClient, mod.DataSettingValue('KVCSettingPublicRootPageID')), {
 			KVCOptionIsRoot: mod.DataSettingValue('KVCSettingPublicRootPageID') === inputData.KVCNoteID,
+			KVCOptionRootURL: mod.DataSettingValue('KVCSettingCustomDomainBaseURL'),
 		}));
 	},
 	

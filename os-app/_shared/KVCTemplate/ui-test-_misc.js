@@ -40,6 +40,14 @@ describe('KVCTemplate_Misc', function () {
 
 	});
 
+	describe('KVCRootLink', function test_KVCRootLink() {
+
+		it('sets href', function () {
+			browser.assert.attribute(KVCRootLink, 'href', `{${ mainModule.KVCTemplateTokenRootURL() }}`);
+		});
+
+	});
+
 	describe('KVCArticleTitle', function test_KVCArticleTitle() {
 
 		it('sets text', function () {

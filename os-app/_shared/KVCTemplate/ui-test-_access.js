@@ -8,6 +8,7 @@ Object.entries({
 	KVCTemplateHeadMetaContentType: 'html head meta[http-equiv="Content-Type"]',
 	KVCTemplateHeadMetaViewport: 'html head meta[name="viewport"]',
 	KVCTemplateBody: 'html body',
+	KVCRootLink: '.KVCRootLink',
 	KVCArticleTitle: '.KVCArticleTitle',
 	KVCArticleBody: '.KVCArticleBody',
 }).map(function (e) {
@@ -46,6 +47,10 @@ describe('KVCTemplate_Access', function () {
 
 	it('shows KVCTemplateBody', function () {
 		browser.assert.elements(KVCTemplateBody, 1);
+	});
+
+	it('shows KVCRootLink', function () {
+		browser.assert.elements(KVCRootLink, 1);
 	});
 
 	it('shows KVCArticleTitle', function () {

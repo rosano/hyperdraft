@@ -152,7 +152,11 @@ const mod = {
 		return outputData;
 	},
 
-	KVCTemplateViewDefault () {
+	KVCTemplateViewDefault (inputData) {
+		if (typeof inputData !== 'function') {
+			throw new Error('KVCErrorInputNotValid');
+		}
+
 		return `<!DOCTYPE html>
 <html>
 <head>
@@ -208,6 +212,10 @@ const mod = {
 	<meta name="viewport" content="width=device-width" />
 </head>
 <body class="KVCBox">
+
+<a class="KVCRootLink" href="{${ mod.KVCTemplateTokenRootURL() }}">${ inputData('KVCRootLinkText') }</a>
+
+<hr />
 
 <h1 class="KVCArticleTitle">{${ mod.KVCTemplateTokenPostTitle() }}</h1>
 
