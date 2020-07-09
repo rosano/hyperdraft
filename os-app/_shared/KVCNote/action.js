@@ -156,7 +156,9 @@ const mod = {
 			if (options.KVCOptionIsRoot) {
 				await KVCNoteStorage.KVCNoteStoragePublicWrite(storageClient, mod.KVCNoteActionPublishPath(param1, true), inputData);
 			}
-		})(OLSKString.OLSKStringReplaceTokens(param2, KVCTemplate.KVCTemplateTokensMap(showdown, KVCTemplate.KVCTemplateRemappedLinks(param1.KVCNoteBody, param3), {})));
+		})(OLSKString.OLSKStringReplaceTokens(KVCTemplate.KVCTemplateCollapseBlocks(param2, Object.keys(options).reduce(function (coll, item) {
+			return coll;
+		}, [])), KVCTemplate.KVCTemplateTokensMap(showdown, KVCTemplate.KVCTemplateRemappedLinks(param1.KVCNoteBody, param3), options)));
 
 		return await mod.KVCNoteActionUpdate(storageClient, Object.assign(param1, {
 			KVCNoteIsPublic: true,
