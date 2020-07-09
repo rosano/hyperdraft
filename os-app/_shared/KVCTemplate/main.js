@@ -68,6 +68,20 @@ const mod = {
 		]);
 	},
 
+	KVCTemplateBlocks (options) {
+		if (typeof options !== 'object' || options === null) {
+			throw new Error('KVCErrorInputNotValid');
+		}
+
+		return Object.keys(options).reduce(function (coll, item) {
+			if (item === 'KVCOptionRootURL') {
+				coll.push(mod.KVCTemplateTokenRootURL());
+			}
+
+			return coll;
+		}, []);
+	},
+
 	KVCTemplateTokenPostTitle () {
 		return '{Title}';
 	},

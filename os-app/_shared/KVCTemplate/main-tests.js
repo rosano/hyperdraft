@@ -215,6 +215,30 @@ describe('KVCTemplateTokensMap', function test_KVCTemplateTokensMap() {
 
 });
 
+describe('KVCTemplateBlocks', function test_KVCTemplateBlocks() {
+
+	it('throws if not object', function () {
+		throws(function () {
+			mainModule.KVCTemplateBlocks(null)
+		}, /KVCErrorInputNotValid/);
+	});
+
+	it('returns array', function() {
+		deepEqual(mainModule.KVCTemplateBlocks({}), []);
+	});
+
+	context('KVCOptionRootURL', function () {
+		
+		it('includes KVCTemplateTokenRootURL', function () {
+			deepEqual(mainModule.KVCTemplateBlocks({
+				KVCOptionRootURL: 'alfa',
+			}), [mainModule.KVCTemplateTokenRootURL()]);
+		});
+	
+	});
+
+});
+
 describe('KVCTemplateTokenPostTitle', function test_KVCTemplateTokenPostTitle() {
 
 	it('returns string', function() {
