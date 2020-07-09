@@ -570,10 +570,6 @@ describe('KVCWrite_Misc', function () {
 
 	describe('KVCWriteStorageToolbar', function test_KVCWriteStorageToolbar () {
 
-		before(function () {
-			return browser.pressButton('.OLSKAppToolbarStorageButton');
-		});
-
 		it('classes OLSKToolbar', function () {
 			browser.assert.hasClass(KVCWriteStorageToolbar, 'OLSKToolbar');
 		});
