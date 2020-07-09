@@ -147,6 +147,10 @@ ${ mod.KVCTemplateTokenPostBody() }
 		return '{RootURL}';
 	},
 
+	KVCTemplateTokenRootURLLegacy () {
+		return '{BlogURL}';
+	},
+
 };
 
 Object.assign(exports, mod);

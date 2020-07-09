@@ -248,3 +248,11 @@ describe('KVCTemplateTokenRootURL', function test_KVCTemplateTokenRootURL() {
 	});
 
 });
+
+describe('KVCTemplateTokenRootURLLegacy', function test_KVCTemplateTokenRootURLLegacy() {
+
+	it('returns string', function() {
+		deepEqual(mainModule.KVCTemplateTokenRootURLLegacy(), '{BlogURL}');
+	});
+
+});
