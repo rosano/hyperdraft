@@ -47,7 +47,7 @@ const mod = {
 		return showdownConverter.makeHtml(inputData);
 	},
 
-	KVCTemplateReplaceTokens (showdown, body, options) {
+	KVCTemplateTokensMap (showdown, body, options) {
 		if (typeof showdown.Converter !== 'function') {
 			throw new Error('KVCErrorInputNotValid');
 		}

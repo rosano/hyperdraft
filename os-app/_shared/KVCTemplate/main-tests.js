@@ -149,11 +149,11 @@ describe('KVCTemplateHTML', function test_KVCTemplateHTML() {
 
 });
 
-describe('KVCTemplateReplaceTokens', function test_KVCTemplateReplaceTokens() {
+describe('KVCTemplateTokensMap', function test_KVCTemplateTokensMap() {
 
 	it('throws if param1 not showdown', function() {
 		throws(function() {
-			mainModule.KVCTemplateReplaceTokens({
+			mainModule.KVCTemplateTokensMap({
 				Converter: null,
 			}, '', {});
 		}, /KVCErrorInputNotValid/);
@@ -161,25 +161,25 @@ describe('KVCTemplateReplaceTokens', function test_KVCTemplateReplaceTokens() {
 
 	it('throws if param2 not string', function () {
 		throws(function () {
-			mainModule.KVCTemplateReplaceTokens(showdown, null, {})
+			mainModule.KVCTemplateTokensMap(showdown, null, {})
 		}, /KVCErrorInputNotValid/);
 	});
 
 	it('throws if param3 not object', function () {
 		throws(function () {
-			mainModule.KVCTemplateReplaceTokens(showdown, '', null)
+			mainModule.KVCTemplateTokensMap(showdown, '', null)
 		}, /KVCErrorInputNotValid/);
 	});
 
 	it('returns object', function() {
-		deepEqual(typeof mainModule.KVCTemplateReplaceTokens(showdown, '', {}), 'object');
+		deepEqual(typeof mainModule.KVCTemplateTokensMap(showdown, '', {}), 'object');
 	});
 
 	context('KVCTemplateTokenPostTitle', function () {
 		
 		it('sets to KVCTemplatePlaintextTitle', function () {
 			const item = 'alfa\nbravo';
-			deepEqual(mainModule.KVCTemplateReplaceTokens(showdown, item, {})[mainModule.KVCTemplateTokenPostTitle()], mainModule.KVCTemplatePlaintextTitle(item));
+			deepEqual(mainModule.KVCTemplateTokensMap(showdown, item, {})[mainModule.KVCTemplateTokenPostTitle()], mainModule.KVCTemplatePlaintextTitle(item));
 		});
 	
 	});
@@ -188,7 +188,7 @@ describe('KVCTemplateReplaceTokens', function test_KVCTemplateReplaceTokens() {
 		
 		it('sets to KVCTemplateHTML', function () {
 			const item = 'alfa\n# bravo';
-			deepEqual(mainModule.KVCTemplateReplaceTokens(showdown, item, {})[mainModule.KVCTemplateTokenPostBody()], mainModule.KVCTemplateHTML(showdown, mainModule.KVCTemplatePlaintextBody(item)));
+			deepEqual(mainModule.KVCTemplateTokensMap(showdown, item, {})[mainModule.KVCTemplateTokenPostBody()], mainModule.KVCTemplateHTML(showdown, mainModule.KVCTemplatePlaintextBody(item)));
 		});
 	
 	});
@@ -196,7 +196,7 @@ describe('KVCTemplateReplaceTokens', function test_KVCTemplateReplaceTokens() {
 	context('KVCTemplateTokenRootURL', function () {
 		
 		it('sets to KVCOptionRootURL', function () {
-			deepEqual(mainModule.KVCTemplateReplaceTokens(showdown, '', {
+			deepEqual(mainModule.KVCTemplateTokensMap(showdown, '', {
 				KVCOptionRootURL: 'alfa',
 			})[mainModule.KVCTemplateTokenRootURL()], 'alfa');
 		});
@@ -206,7 +206,7 @@ describe('KVCTemplateReplaceTokens', function test_KVCTemplateReplaceTokens() {
 	context('KVCTemplateTokenRootURLLegacy', function () {
 		
 		it('sets to KVCOptionRootURL', function () {
-			deepEqual(mainModule.KVCTemplateReplaceTokens(showdown, '', {
+			deepEqual(mainModule.KVCTemplateTokensMap(showdown, '', {
 				KVCOptionRootURL: 'alfa',
 			})[mainModule.KVCTemplateTokenRootURLLegacy()], 'alfa');
 		});
