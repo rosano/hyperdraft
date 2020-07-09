@@ -432,7 +432,7 @@ const mod = {
 			window.TestControlNoteRetractCount.innerHTML = parseInt(window.TestControlNoteRetractCount.innerHTML) + 1;
 		}
 		
-		mod.ValueNoteSelected(await KVCNoteAction.KVCNoteActionRetract(mod._ValueStorageClient, inputData));
+		mod.ValueNoteSelected(await KVCNoteAction.KVCNoteActionRetract(mod._ValueStorageClient, inputData, mod.DataSettingValue('KVCSettingPublicRootPageID') === inputData.KVCNoteID));
 	},
 	
 	async ControlNoteVersions (inputData) {

@@ -197,7 +197,7 @@ describe('KVCNoteActionPublish', function test_KVCNoteActionPublish() {
 	});
 
 	it('kees existing KVCNotePublishDate', async function() {
-		const item = await mainModule.KVCNoteActionRetract(KVCTestingStorageClient, await kTesting.uPublish(await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject())));
+		const item = await mainModule.KVCNoteActionRetract(KVCTestingStorageClient, await kTesting.uPublish(await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject())), false);
 		const date = item.KVCNotePublishDate;
 
 		deepEqual((await kTesting.uPublish(item)).KVCNotePublishDate, date);
@@ -220,7 +220,7 @@ describe('KVCNoteActionPublish', function test_KVCNoteActionPublish() {
 	});
 
 	it('keeps existing KVCNotePublicID', async function() {
-		const item = await mainModule.KVCNoteActionRetract(KVCTestingStorageClient, await kTesting.uPublish(await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject())));
+		const item = await mainModule.KVCNoteActionRetract(KVCTestingStorageClient, await kTesting.uPublish(await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject())), false);
 		const id = item.KVCNotePublicID;
 
 		deepEqual((await kTesting.uPublish(item)).KVCNotePublicID, id);
@@ -281,24 +281,37 @@ describe('KVCNoteActionPublicPath', function test_KVCNoteActionPublicPath() {
 
 describe('KVCNoteActionRetract', function test_KVCNoteActionRetract() {
 
-	it('rejects if not valid', async function() {
-		await rejects(mainModule.KVCNoteActionRetract(KVCTestingStorageClient, {}), /KVCErrorInputNotValid/);
+	it('rejects if param1 not valid', async function() {
+		await rejects(mainModule.KVCNoteActionRetract(KVCTestingStorageClient, {}, false), /KVCErrorInputNotValid/);
+	});
+
+	it('rejects if param2 not boolean', async function() {
+		const item = await kTesting.uPublish(await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()));
+
+		await rejects(mainModule.KVCNoteActionRetract(KVCTestingStorageClient, item, 'true'), /KVCErrorInputNotValid/);
 	});
 
 	it('returns KVCNote', async function() {
 		const item = await kTesting.uPublish(await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()));
 
-		deepEqual(item === await mainModule.KVCNoteActionRetract(KVCTestingStorageClient, item), true);
+		deepEqual(item === await mainModule.KVCNoteActionRetract(KVCTestingStorageClient, item, false), true);
 	});
 
 	it('sets KVCNoteIsPublic to false', async function() {
-		deepEqual((await mainModule.KVCNoteActionRetract(KVCTestingStorageClient, await kTesting.uPublish(await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject())))).KVCNoteIsPublic, false);
+		deepEqual((await mainModule.KVCNoteActionRetract(KVCTestingStorageClient, await kTesting.uPublish(await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject())), false)).KVCNoteIsPublic, false);
 	});
 
 	it('deletes file from public folder', async function() {
-		const item = await mainModule.KVCNoteActionRetract(KVCTestingStorageClient, await kTesting.uPublish(await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject())));
+		const item = await mainModule.KVCNoteActionRetract(KVCTestingStorageClient, await kTesting.uPublish(await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject())), false);
 
 		deepEqual((await KVCTestingStorageClient.wikiavec.__DEBUG._OLSKRemoteStoragePublicClient().getFile(KVCNoteStorage.KVCNoteStoragePublicObjectPath(item))).data, undefined);
+	});
+
+	it('deletes from two paths if param2 true', async function() {
+		const item = await mainModule.KVCNoteActionRetract(KVCTestingStorageClient, await kTesting.uPublish(await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()), 'alfa', {}, true), true);
+
+		deepEqual((await KVCTestingStorageClient.wikiavec.__DEBUG._OLSKRemoteStoragePublicClient().getFile(KVCNoteStorage.KVCNoteStoragePublicObjectPath(item))).data, undefined);
+		deepEqual((await KVCTestingStorageClient.wikiavec.__DEBUG._OLSKRemoteStoragePublicClient().getFile(KVCNoteStorage.KVCNoteStoragePublicRootPagePath())).data, undefined);
 	});
 
 });

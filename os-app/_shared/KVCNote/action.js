@@ -129,14 +129,22 @@ const mod = {
 		return param2 ? KVCNoteStorage.KVCNoteStoragePublicRootPagePath() : KVCNoteStorage.KVCNoteStoragePublicObjectPath(param1);
 	},
 
-	async KVCNoteActionRetract (storageClient, inputData) {
-		if (KVCNoteModel.KVCNoteModelErrorsFor(inputData)) {
+	async KVCNoteActionRetract (storageClient, param1, param2) {
+		if (KVCNoteModel.KVCNoteModelErrorsFor(param1)) {
 			return Promise.reject(new Error('KVCErrorInputNotValid'));
 		}
 
-		await KVCNoteStorage.KVCNoteStoragePublicDelete(storageClient, KVCNoteStorage.KVCNoteStoragePublicObjectPath(inputData));
+		if (typeof param2 !== 'boolean') {
+			throw new Error('KVCErrorInputNotValid');
+		}
 
-		return await mod.KVCNoteActionUpdate(storageClient, Object.assign(inputData, {
+		await KVCNoteStorage.KVCNoteStoragePublicDelete(storageClient, mod.KVCNoteActionPublicPath(param1, false));
+
+		if (param2) {
+			await KVCNoteStorage.KVCNoteStoragePublicDelete(storageClient, mod.KVCNoteActionPublicPath(param1, true));
+		}
+
+		return await mod.KVCNoteActionUpdate(storageClient, Object.assign(param1, {
 			KVCNoteIsPublic: false,
 		}));
 	},
