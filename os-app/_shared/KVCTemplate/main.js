@@ -229,9 +229,11 @@ const mod = {
 </head>
 <body class="KVCBox">
 
+{block:${ mod.KVCTemplateTokenNotePage() }}
 <a class="KVCRootLink" href="{${ mod.KVCTemplateTokenRootURL() }}">${ inputData('KVCRootLinkText') }</a>
 
 <hr />
+{/block:${ mod.KVCTemplateTokenNotePage() }}
 
 <h1 class="KVCArticleTitle">{${ mod.KVCTemplateTokenPostTitle() }}</h1>
 
