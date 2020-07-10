@@ -99,7 +99,7 @@ const mod = {
 	},
 
 	KVCTemplateTokenRootURL () {
-		return 'RootURL';
+		return 'HomeURL';
 	},
 
 	KVCTemplateTokenRootURLLegacy () {
