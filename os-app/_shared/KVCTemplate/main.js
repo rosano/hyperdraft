@@ -82,6 +82,10 @@ const mod = {
 				coll.push(mod.KVCTemplateTokenRootURL());
 			}
 
+			if (item === 'KVCOptionIsRoot') {
+				coll.push(mod.KVCTemplateTokenRootPage());
+			}
+
 			return coll;
 		}, []);
 	},
@@ -100,6 +104,10 @@ const mod = {
 
 	KVCTemplateTokenRootURLLegacy () {
 		return 'BlogURL';
+	},
+
+	KVCTemplateTokenRootPage () {
+		return 'HomePage';
 	},
 
 	_KVCTemplateCollapseBlocksReplaceMatches (string, matchOpen, matchClosed, exclude) {

@@ -237,6 +237,16 @@ describe('KVCTemplateBlocks', function test_KVCTemplateBlocks() {
 	
 	});
 
+	context('KVCOptionIsRoot', function () {
+		
+		it('includes KVCTemplateTokenRootPage', function () {
+			deepEqual(mainModule.KVCTemplateBlocks({
+				KVCOptionIsRoot: true,
+			}), [mainModule.KVCTemplateTokenRootPage()]);
+		});
+	
+	});
+
 });
 
 describe('KVCTemplateTokenPostTitle', function test_KVCTemplateTokenPostTitle() {
@@ -267,6 +277,14 @@ describe('KVCTemplateTokenRootURLLegacy', function test_KVCTemplateTokenRootURLL
 
 	it('returns string', function() {
 		deepEqual(mainModule.KVCTemplateTokenRootURLLegacy(), 'BlogURL');
+	});
+
+});
+
+describe('KVCTemplateTokenRootPage', function test_KVCTemplateTokenRootPage() {
+
+	it('returns string', function() {
+		deepEqual(mainModule.KVCTemplateTokenRootPage(), 'HomePage');
 	});
 
 });
