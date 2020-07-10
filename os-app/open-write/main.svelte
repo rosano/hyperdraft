@@ -836,6 +836,7 @@ const mod = {
 		mod._ValueStorageClient.access.claim(storageModule.name, 'rw');
 
 		mod._ValueStorageClient.caching.enable(`/${ storageModule.name }/`);
+		mod._ValueStorageClient.caching.enable(`/public/${ storageModule.name }/`);
 	},
 
 	SetupRemoteStorage () {
