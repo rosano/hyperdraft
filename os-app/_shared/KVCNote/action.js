@@ -158,9 +158,7 @@ const mod = {
 			if (options.KVCOptionIsRoot) {
 				await KVCNoteStorage.KVCNoteStoragePublicWrite(storageClient, mod.KVCNoteActionPublishPath(param1, true), inputData);
 			}
-		})(OLSKString.OLSKStringReplaceTokens(KVCTemplate.KVCTemplateCollapseBlocks(param2, Object.keys(tokensMap).map(function (e) {
-			return e.slice(1, -1);
-		})), tokensMap));
+		})(OLSKString.OLSKStringReplaceTokens(KVCTemplate.KVCTemplateCollapseBlocks(param2, KVCTemplate.KVCTemplateBlocks(options)), tokensMap));
 
 		return await mod.KVCNoteActionUpdate(storageClient, Object.assign(param1, {
 			KVCNoteIsPublic: true,
