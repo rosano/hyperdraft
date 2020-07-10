@@ -239,10 +239,16 @@ describe('KVCTemplateBlocks', function test_KVCTemplateBlocks() {
 
 	context('KVCOptionIsRoot', function () {
 		
-		it('includes KVCTemplateTokenRootPage', function () {
+		it('includes KVCTemplateTokenRootPage if true', function () {
 			deepEqual(mainModule.KVCTemplateBlocks({
 				KVCOptionIsRoot: true,
 			}), [mainModule.KVCTemplateTokenRootPage()]);
+		});
+		
+		it('includes KVCTemplateTokenNotePage', function () {
+			deepEqual(mainModule.KVCTemplateBlocks({
+				KVCOptionIsRoot: false,
+			}), [mainModule.KVCTemplateTokenNotePage(), mainModule.KVCTemplateTokenNotePageLegacy()]);
 		});
 	
 	});
@@ -285,6 +291,22 @@ describe('KVCTemplateTokenRootPage', function test_KVCTemplateTokenRootPage() {
 
 	it('returns string', function() {
 		deepEqual(mainModule.KVCTemplateTokenRootPage(), 'HomePage');
+	});
+
+});
+
+describe('KVCTemplateTokenNotePage', function test_KVCTemplateTokenNotePage() {
+
+	it('returns string', function() {
+		deepEqual(mainModule.KVCTemplateTokenNotePage(), 'RefPage');
+	});
+
+});
+
+describe('KVCTemplateTokenNotePageLegacy', function test_KVCTemplateTokenNotePageLegacy() {
+
+	it('returns string', function() {
+		deepEqual(mainModule.KVCTemplateTokenNotePageLegacy(), 'PermalinkPage');
 	});
 
 });

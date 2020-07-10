@@ -83,7 +83,7 @@ const mod = {
 			}
 
 			if (item === 'KVCOptionIsRoot') {
-				coll.push(mod.KVCTemplateTokenRootPage());
+				coll.push(...(options[item] ? [mod.KVCTemplateTokenRootPage()] : [mod.KVCTemplateTokenNotePage(), mod.KVCTemplateTokenNotePageLegacy()]));
 			}
 
 			return coll;
@@ -108,6 +108,14 @@ const mod = {
 
 	KVCTemplateTokenRootPage () {
 		return 'HomePage';
+	},
+
+	KVCTemplateTokenNotePage () {
+		return 'RefPage';
+	},
+
+	KVCTemplateTokenNotePageLegacy () {
+		return 'PermalinkPage';
 	},
 
 	_KVCTemplateCollapseBlocksReplaceMatches (string, matchOpen, matchClosed, exclude) {
