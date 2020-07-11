@@ -1,6 +1,6 @@
 const { throws, deepEqual } = require('assert');
 
-const mainModule = require('./model.js');
+const mainModule = require('./model.js').default;
 
 const kTesting = {
 	StubVersionObjectValid() {

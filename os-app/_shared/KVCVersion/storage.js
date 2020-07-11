@@ -1,4 +1,4 @@
-import * as KVCVersionModel from './model.js';
+import KVCVersionModel from './model.js';
 import * as OLSKRemoteStoragePackage from 'OLSKRemoteStorage';
 const OLSKRemoteStorage = OLSKRemoteStoragePackage.default || OLSKRemoteStoragePackage;
 
