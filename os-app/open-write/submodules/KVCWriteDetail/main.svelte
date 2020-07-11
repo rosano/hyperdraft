@@ -33,19 +33,19 @@ export const KVCWriteDetailSetItem = function (inputData) {
 
 export const _KVCWriteDetailTriggerUpdate = function () {
 	mod.ControlConfigureEditor(function (inputData) {
-		inputData._KVCWriteInputTriggerUpdate();
+		inputData.modPublic._KVCWriteInputTriggerUpdate();
 	});
 };
 
 export const KVCWriteDetailEditorFocus = function () {
 	mod.ControlConfigureEditor(function (inputData) {
-		inputData.KVCWriteInputFocus();
+		inputData.modPublic.KVCWriteInputFocus();
 	});
 };
 
 export const KVCWriteDetailSetCursor = function (param1, param2) {
 	mod.ControlConfigureEditor(function (inputData) {
-		inputData.KVCWriteInputSetCursor(param1, param2);
+		inputData.modPublic.KVCWriteInputSetCursor(param1, param2);
 	});
 };
 
@@ -130,8 +130,8 @@ const mod = {
 			return {
 				LCHRecipeName: e.string,
 				LCHRecipeCallback () {
-					mod.KVCWriteInputInstance.KVCWriteInputScrollIntoView(e.line, e.start);
-					mod.KVCWriteInputInstance.KVCWriteInputSetSelection(e.line, e.start, e.line, e.end);
+					mod.KVCWriteInputInstance.modPublic.KVCWriteInputScrollIntoView(e.line, e.start);
+					mod.KVCWriteInputInstance.modPublic.KVCWriteInputSetSelection(e.line, e.start, e.line, e.end);
 				},
 			};
 		}));

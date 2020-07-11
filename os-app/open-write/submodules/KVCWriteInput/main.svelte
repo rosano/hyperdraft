@@ -7,34 +7,38 @@ export let KVCWriteInputDispatchOpen;
 export let KVCWriteInputDispatchReady;
 export let KVCWriteInputDispatchEscape;
 
-export const _KVCWriteInputTriggerUpdate = function () {
-	mod.ControlConfigureEditor(function (inputData) {
-		inputData.setValue(KVCWriteInputItem[KVCWriteInputKey]);
-	});
-};
+export const modPublic = {
 
-export const KVCWriteInputFocus = function () {
-	mod.ControlConfigureEditor(function (inputData) {
-		inputData.focus();
-	});
-};
+	_KVCWriteInputTriggerUpdate () {
+		mod.ControlConfigureEditor(function (inputData) {
+			inputData.setValue(KVCWriteInputItem[KVCWriteInputKey]);
+		});
+	},
 
-export const KVCWriteInputSetCursor = function (param1, param2) {
-	mod.ControlConfigureEditor(function (inputData) {
-		inputData.setCursor(CodeMirror.Pos(param1, param2));
-	});
-};
+	KVCWriteInputFocus () {
+		mod.ControlConfigureEditor(function (inputData) {
+			inputData.focus();
+		});
+	},
 
-export const KVCWriteInputScrollIntoView = function (param1, param2) {
-	mod.ControlConfigureEditor(function (inputData) {
-		inputData.scrollIntoView(CodeMirror.Pos(param1, param2), 300);
-	});
-};
+	KVCWriteInputSetCursor (param1, param2) {
+		mod.ControlConfigureEditor(function (inputData) {
+			inputData.setCursor(CodeMirror.Pos(param1, param2));
+		});
+	},
 
-export const KVCWriteInputSetSelection = function (param1, param2, param3, param4) {
-	mod.ControlConfigureEditor(function (inputData) {
-		inputData.setSelection(CodeMirror.Pos(param1, param2), CodeMirror.Pos(param3, param4));
-	});
+	KVCWriteInputScrollIntoView (param1, param2) {
+		mod.ControlConfigureEditor(function (inputData) {
+			inputData.scrollIntoView(CodeMirror.Pos(param1, param2), 300);
+		});
+	},
+
+	KVCWriteInputSetSelection (param1, param2, param3, param4) {
+		mod.ControlConfigureEditor(function (inputData) {
+			inputData.setSelection(CodeMirror.Pos(param1, param2), CodeMirror.Pos(param3, param4));
+		});
+	},
+
 };
 
 import { OLSK_TESTING_BEHAVIOUR } from 'OLSKTesting';

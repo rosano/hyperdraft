@@ -13,7 +13,7 @@ const mod = {
 	// INTERFACE
 
 	InterfaceTestKVCWriteInputFocusButtonDidClick() {
-		KVCWriteInput.KVCWriteInputFocus();
+		KVCWriteInput.modPublic.KVCWriteInputFocus();
 	},
 
 	InterfaceTestKVCWriteInputPropDataSendButtonDidClick() {
