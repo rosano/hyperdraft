@@ -44,7 +44,7 @@ const mod = {
 	
 	_ValueNoteSelected: undefined,
 	ValueNoteSelected (inputData) {
-		mod.KVCWriteDetailInstance.KVCWriteDetailSetItem(mod._ValueNoteSelected = inputData);
+		mod.KVCWriteDetailInstance.modPublic.KVCWriteDetailSetItem(mod._ValueNoteSelected = inputData);
 
 		if (!inputData) {
 			mod.OLSKMobileViewInactive = false;	
@@ -257,7 +257,7 @@ const mod = {
 		}
 
 		if (mod.KVCWriteDetailInstance) {
-			outputData.push(...mod.KVCWriteDetailInstance.KVCWriteDetailRecipes());
+			outputData.push(...mod.KVCWriteDetailInstance.modPublic.KVCWriteDetailRecipes());
 		}
 
 		return outputData;
@@ -297,7 +297,7 @@ const mod = {
 				mod.ControlEscape();
 			},
 			Tab () {
-				document.activeElement !== document.querySelector('.OLSKMasterListFilterField') ? document.querySelector('.OLSKMasterListFilterField').focus() : mod.KVCWriteDetailInstance.KVCWriteDetailEditorFocus();
+				document.activeElement !== document.querySelector('.OLSKMasterListFilterField') ? document.querySelector('.OLSKMasterListFilterField').focus() : mod.KVCWriteDetailInstance.modPublic.KVCWriteDetailEditorFocus();
 
 				event.preventDefault();
 			},
@@ -370,7 +370,7 @@ const mod = {
 		mod.ControlNoteSelect(item);
 
 		if (mod.DataIsMobile()) {
-			mod.KVCWriteDetailInstance.KVCWriteDetailEditorFocus();
+			mod.KVCWriteDetailInstance.modPublic.KVCWriteDetailEditorFocus();
 		}
 		
 		if (typeof inputData !== 'string') {
@@ -381,12 +381,12 @@ const mod = {
 			return;
 		}
 
-		mod.KVCWriteDetailInstance.KVCWriteDetailSetCursor(inputData.split('\n').length - 1, inputData.split('\n').pop().length);
+		mod.KVCWriteDetailInstance.modPublic.KVCWriteDetailSetCursor(inputData.split('\n').length - 1, inputData.split('\n').pop().length);
 	},
 	
 	_ControlHotfixUpdateInPlace(inputData) {
 		mod.ControlNoteSelect(inputData);
-		mod.KVCWriteDetailInstance._KVCWriteDetailTriggerUpdate();
+		mod.KVCWriteDetailInstance.modPublic._KVCWriteDetailTriggerUpdate();
 	},
 	
 	ControlNoteSelect(inputData) {
@@ -402,7 +402,7 @@ const mod = {
 			return;
 		}
 		
-		mod.KVCWriteDetailInstance.KVCWriteDetailEditorFocus();
+		mod.KVCWriteDetailInstance.modPublic.KVCWriteDetailEditorFocus();
 	},
 	
 	ControlNoteJump (inputData) {
@@ -414,7 +414,7 @@ const mod = {
 					return;
 				}
 
-				mod.KVCWriteDetailInstance.KVCWriteDetailEditorFocus();
+				mod.KVCWriteDetailInstance.modPublic.KVCWriteDetailEditorFocus();
 			},
 		});
 	},

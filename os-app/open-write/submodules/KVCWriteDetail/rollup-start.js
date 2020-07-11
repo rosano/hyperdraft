@@ -20,7 +20,7 @@ const mod = {
 	// INTERFACE
 
 	InterfaceTestKVCWriteDetailEditorFocusButtonDidClick () {
-		KVCWriteDetail.KVCWriteDetailEditorFocus();
+		KVCWriteDetail.modPublic.KVCWriteDetailEditorFocus();
 	},
 
 	// REACT
@@ -89,7 +89,7 @@ const KVCWriteDetail = new RollupStart({
 	}))),
 });
 
-KVCWriteDetail.KVCWriteDetailSetItem(params.KVCWriteDetailItem);
+KVCWriteDetail.modPublic.KVCWriteDetailSetItem(params.KVCWriteDetailItem);
 
 window.KVCWriteDetailBehaviour = mod;
 

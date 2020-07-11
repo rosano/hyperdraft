@@ -17,40 +17,44 @@ export let OLSKMobileViewInactive = false;
 export let _KVCWriteDetailVersionsIsDisabled = false;
 export let _DebugLauncher = false;
 
-export const KVCWriteDetailSetItem = function (inputData) {
-	mod._ValueItem = inputData;
+export const modPublic = {
 
-	if (!inputData) {
-		return;
-	}
-	
-	mod.ControlConfigureEditor(function (inputData) {
-		if (!OLSK_TESTING_BEHAVIOUR()) {
-			document.body.scrollIntoView(true);
+	KVCWriteDetailSetItem (inputData) {
+		mod._ValueItem = inputData;
+
+		if (!inputData) {
+			return;
 		}
-	});
-};
+		
+		mod.ControlConfigureEditor(function (inputData) {
+			if (!OLSK_TESTING_BEHAVIOUR()) {
+				document.body.scrollIntoView(true);
+			}
+		});
+	},
 
-export const _KVCWriteDetailTriggerUpdate = function () {
-	mod.ControlConfigureEditor(function (inputData) {
-		inputData.modPublic._KVCWriteInputTriggerUpdate();
-	});
-};
+	_KVCWriteDetailTriggerUpdate () {
+		mod.ControlConfigureEditor(function (inputData) {
+			inputData.modPublic._KVCWriteInputTriggerUpdate();
+		});
+	},
 
-export const KVCWriteDetailEditorFocus = function () {
-	mod.ControlConfigureEditor(function (inputData) {
-		inputData.modPublic.KVCWriteInputFocus();
-	});
-};
+	KVCWriteDetailEditorFocus () {
+		mod.ControlConfigureEditor(function (inputData) {
+			inputData.modPublic.KVCWriteInputFocus();
+		});
+	},
 
-export const KVCWriteDetailSetCursor = function (param1, param2) {
-	mod.ControlConfigureEditor(function (inputData) {
-		inputData.modPublic.KVCWriteInputSetCursor(param1, param2);
-	});
-};
+	KVCWriteDetailSetCursor (param1, param2) {
+		mod.ControlConfigureEditor(function (inputData) {
+			inputData.modPublic.KVCWriteInputSetCursor(param1, param2);
+		});
+	},
 
-export const KVCWriteDetailRecipes = function () {
-	return mod._ValueItem ? mod.DataRecipes() : [];
+	KVCWriteDetailRecipes () {
+		return mod._ValueItem ? mod.DataRecipes() : [];
+	},
+
 };
 
 import OLSKInternational from 'OLSKInternational';
