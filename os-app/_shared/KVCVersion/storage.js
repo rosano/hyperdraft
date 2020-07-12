@@ -27,31 +27,39 @@ const mod = {
 	KVCVersionStorageBuild (privateClient, publicClient, changeDelegate) {
 		const OLSKRemoteStorageCollectionExports = {
 
-			async KVCStorageList () {
-				return privateClient.getAll(mod.KVCVersionStorageCollectionPath(), false);
-			},
+			async _KVCVersionStorageWrite (inputData) {
+				if (typeof inputData !== 'object' || inputData === null) {
+					return Promise.reject(new Error('KVCErrorInputNotValid'));
+				}
 
-			async KVCStorageWrite (inputData) {
+				let errors = KVCVersionModel.KVCVersionModelErrorsFor(inputData);
+				if (errors) {
+					return Promise.resolve({
+						KVCErrors: errors,
+					});
+				}
+
 				await privateClient.storeObject(mod.KVCVersionStorageCollectionType(), mod.KVCVersionStorageObjectPath(inputData), OLSKRemoteStorage.OLSKRemoteStoragePreJSONSchemaValidate(inputData));
+
 				return OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(inputData);
 			},
 
-			KVCStorageRead (inputData) {
-				return privateClient.getObject(mod.KVCVersionStorageObjectPath({
-					KVCVersionID: inputData,
-					KVCVersionNoteID: inputData,
-					KVCVersionBody: '',
-					KVCVersionDate: new Date(),
-				}));
+			async _KVCVersionStorageList () {
+				let outputData = await privateClient.getAll(mod.KVCVersionStorageCollectionPath(), false);
+
+				for (let key in outputData) {
+					OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(outputData[key]);
+				}
+				
+				return outputData;
 			},
 			
-			KVCStorageDelete (inputData) {
-				return privateClient.remove(mod.KVCVersionStorageObjectPath({
-					KVCVersionID: inputData,
-					KVCVersionNoteID: inputData,
-					KVCVersionBody: '',
-					KVCVersionDate: new Date(),
-				}));
+			_KVCVersionStorageDelete (inputData) {
+				if (typeof inputData !== 'string') {
+					throw new Error('KVCErrorInputNotValid');
+				}
+				
+				return privateClient.remove(mod.KVCVersionStorageCollectionPath() + inputData);
 			},
 			
 		};
@@ -74,6 +82,18 @@ const mod = {
 			}, {}),
 			OLSKRemoteStorageCollectionExports,
 		};
+	},
+
+	KVCVersionStorageWrite (storageClient, inputData) {
+		return storageClient.wikiavec[mod.KVCVersionStorageCollectionName()]._KVCVersionStorageWrite(inputData);
+	},
+
+	KVCVersionStorageList (storageClient) {
+		return storageClient.wikiavec[mod.KVCVersionStorageCollectionName()]._KVCVersionStorageList();
+	},
+
+	KVCVersionStorageDelete (storageClient, inputData) {
+		return storageClient.wikiavec[mod.KVCVersionStorageCollectionName()]._KVCVersionStorageDelete(inputData);
 	},
 
 };

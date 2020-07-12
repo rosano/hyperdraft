@@ -1,4 +1,4 @@
-const { throws, deepEqual } = require('assert');
+const { rejects, throws, deepEqual } = require('assert');
 
 const mainModule = require('./storage.js').default;
 
@@ -37,6 +37,67 @@ describe('KVCVersionStorageObjectPath', function test_KVCVersionStorageObjectPat
 	it('returns string', function() {
 		const item = StubVersionObjectValid();
 		deepEqual(mainModule.KVCVersionStorageObjectPath(item), mainModule.KVCVersionStorageCollectionPath() + item.KVCVersionID);
+	});
+
+});
+
+describe('KVCVersionStorageWrite', function test_KVCVersionStorageWrite() {
+
+	it('rejects if not object', async function() {
+		await rejects(mainModule.KVCVersionStorageWrite(KVCTestingStorageClient, null), /KVCErrorInputNotValid/);
+	});
+
+	it('returns object with KVCErrors if not valid', async function() {
+		deepEqual((await mainModule.KVCVersionStorageWrite(KVCTestingStorageClient, Object.assign(StubVersionObjectValid(), {
+			KVCVersionID: null,
+		}))).KVCErrors, {
+			KVCVersionID: [
+				'KVCErrorNotString',
+			],
+		});
+	});
+
+	it('resolves object', async function() {
+		let item = await mainModule.KVCVersionStorageWrite(KVCTestingStorageClient, StubVersionObjectValid());
+
+		deepEqual(item, Object.assign(StubVersionObjectValid(), {
+			'@context': item['@context'],
+		}));
+	});
+
+});
+
+describe('KVCVersionStorageList', function test_KVCVersionStorageList() {
+
+	it('resolves empty array if none', async function() {
+		deepEqual(await mainModule.KVCVersionStorageList(KVCTestingStorageClient), {});
+	});
+
+	it('resolves array', async function() {
+		let item = await mainModule.KVCVersionStorageWrite(KVCTestingStorageClient, StubVersionObjectValid());
+		deepEqual(Object.values(await mainModule.KVCVersionStorageList(KVCTestingStorageClient)), [item]);
+		deepEqual(Object.keys(await mainModule.KVCVersionStorageList(KVCTestingStorageClient)), [item.KVCVersionID]);
+	});
+
+});
+
+describe('KVCVersionStorageDelete', function test_KVCVersionStorageDelete() {
+
+	it('throws if not string', function () {
+		throws(function () {
+			mainModule.KVCVersionStorageDelete(KVCTestingStorageClient, 1)
+		}, /KVCErrorInputNotValid/);
+	});
+
+	it('resolves object', async function() {
+		deepEqual(await mainModule.KVCVersionStorageDelete(KVCTestingStorageClient, (await mainModule.KVCVersionStorageWrite(KVCTestingStorageClient, StubVersionObjectValid())).KVCVersionID), {
+			statusCode: 200,
+		});
+	});
+
+	it('deletes KVCVersion', async function() {
+		await mainModule.KVCVersionStorageDelete(KVCTestingStorageClient, (await mainModule.KVCVersionStorageWrite(KVCTestingStorageClient, StubVersionObjectValid())).KVCVersionID);
+		deepEqual(await mainModule.KVCVersionStorageList(KVCTestingStorageClient), {});
 	});
 
 });
