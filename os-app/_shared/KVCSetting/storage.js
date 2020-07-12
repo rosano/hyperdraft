@@ -25,22 +25,43 @@ const mod = {
 	KVCSettingStorageBuild (privateClient, publicClient, changeDelegate) {
 		const OLSKRemoteStorageCollectionExports = {
 
-			async KVCStorageList () {
-				return privateClient.getAll(mod.KVCSettingStorageCollectionPath(), false);
+			async _KVCSettingStorageWrite (inputData) {
+				if (typeof inputData !== 'object' || inputData === null) {
+					return Promise.reject(new Error('KVCErrorInputNotValid'));
+				}
+
+				let errors = KVCSettingModel.KVCSettingModelErrorsFor(inputData);
+				if (errors) {
+					return Promise.resolve({
+						KVCErrors: errors,
+					});
+				}
+
+				await privateClient.storeObject(mod.KVCSettingStorageCollectionType(), mod.KVCSettingStorageObjectPath(inputData), inputData);
+
+				return inputData;
 			},
 
-			async KVCStorageWrite (param1, param2) {
-				await privateClient.storeObject(mod.KVCSettingStorageCollectionType(), mod.KVCSettingStorageObjectPath(param2), param2);
-				return param2;
-			},
+			_KVCSettingStorageRead (inputData) {
+				if (typeof inputData !== 'string') {
+					throw new Error('KVCErrorInputNotValid');
+				}
 
-			KVCStorageRead (inputData) {
 				return privateClient.getObject(mod.KVCSettingStorageObjectPath({
 					KVCSettingKey: inputData,
 					KVCSettingValue: '',
 				}));
 			},
-			KVCStorageDelete (inputData) {
+
+			_KVCSettingStorageList () {
+				return privateClient.getAll(mod.KVCSettingStorageCollectionPath(), false);
+			},
+
+			_KVCSettingStorageDelete (inputData) {
+				if (typeof inputData !== 'string') {
+					throw new Error('KVCErrorInputNotValid');
+				}
+
 				return privateClient.remove(mod.KVCSettingStorageObjectPath({
 					KVCSettingKey: inputData,
 					KVCSettingValue: '',
@@ -67,6 +88,22 @@ const mod = {
 			}, {}),
 			OLSKRemoteStorageCollectionExports,
 		};
+	},
+
+	KVCSettingStorageWrite (storageClient, inputData) {
+		return storageClient.wikiavec.kvc_settings._KVCSettingStorageWrite(inputData);
+	},
+
+	KVCSettingStorageRead (storageClient, inputData) {
+		return storageClient.wikiavec.kvc_settings._KVCSettingStorageRead(inputData);
+	},
+
+	KVCSettingStorageList (storageClient) {
+		return storageClient.wikiavec.kvc_settings._KVCSettingStorageList();
+	},
+
+	KVCSettingStorageDelete (storageClient, inputData) {
+		return storageClient.wikiavec.kvc_settings._KVCSettingStorageDelete(inputData);
 	},
 
 };

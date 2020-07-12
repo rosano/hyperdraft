@@ -1,4 +1,4 @@
-const { throws, deepEqual } = require('assert');
+const { rejects, throws, deepEqual } = require('assert');
 
 const mainModule = require('./storage.js').default;
 
@@ -37,6 +37,87 @@ describe('KVCSettingStorageObjectPath', function test_KVCSettingStorageObjectPat
 	it('returns string', function() {
 		const item = StubSettingObjectValid();
 		deepEqual(mainModule.KVCSettingStorageObjectPath(item), mainModule.KVCSettingStorageCollectionPath() + item.KVCSettingKey);
+	});
+
+});
+
+describe('KVCSettingStorageWrite', function test_KVCSettingStorageWrite() {
+
+	it('rejects if not object', async function() {
+		await rejects(mainModule.KVCSettingStorageWrite(KVCTestingStorageClient, null), /KVCErrorInputNotValid/);
+	});
+
+	it('returns object with KVCErrors if not valid', async function() {
+		deepEqual((await mainModule.KVCSettingStorageWrite(KVCTestingStorageClient, Object.assign(StubSettingObjectValid(), {
+			KVCSettingKey: null,
+		}))).KVCErrors, {
+			KVCSettingKey: [
+				'KVCErrorNotString',
+			],
+		});
+	});
+
+	it('returns KVCSetting', async function() {
+		let item = await mainModule.KVCSettingStorageWrite(KVCTestingStorageClient, StubSettingObjectValid());
+
+		deepEqual(item, Object.assign(StubSettingObjectValid(), {
+			'@context': item['@context'],
+		}));
+	});
+
+});
+
+describe('KVCSettingStorageRead', function test_KVCSettingStorageRead() {
+
+	it('throws if not string', function () {
+		throws(function () {
+			mainModule.KVCSettingStorageRead(KVCTestingStorageClient, 1);
+		}, /KVCErrorInputNotValid/);
+	});
+
+	it('returns null if not found', async function() {
+		deepEqual(await mainModule.KVCSettingStorageRead(KVCTestingStorageClient, 'alfa'), null);
+	});
+
+	it('returns KVCSetting', async function() {
+		let item = await mainModule.KVCSettingStorageWrite(KVCTestingStorageClient, StubSettingObjectValid());
+
+		deepEqual(await mainModule.KVCSettingStorageRead(KVCTestingStorageClient, item.KVCSettingKey), item);
+	});
+
+});
+
+describe('KVCSettingStorageList', function test_KVCSettingStorageList() {
+
+	it('returns empty array if none', async function() {
+		deepEqual(await mainModule.KVCSettingStorageList(KVCTestingStorageClient), {});
+	});
+
+	it('returns existing KVCSettings', async function() {
+		let item = await mainModule.KVCSettingStorageWrite(KVCTestingStorageClient, StubSettingObjectValid());
+		deepEqual(Object.values(await mainModule.KVCSettingStorageList(KVCTestingStorageClient)), [item]);
+		deepEqual(Object.keys(await mainModule.KVCSettingStorageList(KVCTestingStorageClient)), [item.KVCSettingKey]);
+	});
+
+});
+
+describe('KVCSettingStorageDelete', function test_KVCSettingStorageDelete() {
+
+	it('throws if not strong', function () {
+		throws(function () {
+			mainModule.KVCSettingStorageDelete(KVCTestingStorageClient, 1);
+		}, /KVCErrorInputNotValid/);
+	});
+
+	it('returns statusCode', async function() {
+		deepEqual(await mainModule.KVCSettingStorageDelete(KVCTestingStorageClient, (await mainModule.KVCSettingStorageWrite(KVCTestingStorageClient, StubSettingObjectValid())).KVCSettingKey), {
+			statusCode: 200,
+		});
+	});
+
+	it('deletes KVCSetting', async function() {
+		await mainModule.KVCSettingStorageDelete(KVCTestingStorageClient, (await mainModule.KVCSettingStorageWrite(KVCTestingStorageClient, StubSettingObjectValid())).KVCSettingKey);
+		deepEqual(await mainModule.KVCSettingStorageList(KVCTestingStorageClient), {});
 	});
 
 });

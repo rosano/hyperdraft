@@ -1,4 +1,4 @@
-import KVCSettingsMetal from './metal.js';
+import KVCSettingStorage from './storage.js';
 
 const mod = {
 
@@ -11,7 +11,7 @@ const mod = {
 			return Promise.reject(new Error('KVCErrorInputNotValid'));
 		}
 
-		return await KVCSettingsMetal.KVCSettingsMetalWrite(storageClient, {
+		return await KVCSettingStorage.KVCSettingStorageWrite(storageClient, {
 			KVCSettingKey: param1,
 			KVCSettingValue: param2,
 		});
@@ -22,7 +22,7 @@ const mod = {
 			return Promise.reject(new Error('KVCErrorInputNotValid'));
 		}
 
-		return await KVCSettingsMetal.KVCSettingsMetalRead(storageClient, inputData);
+		return await KVCSettingStorage.KVCSettingStorageRead(storageClient, inputData);
 	},
 
 	async KVCSettingsActionProperty (storageClient, param1, param2) {
@@ -34,7 +34,7 @@ const mod = {
 	},
 
 	async KVCSettingsActionDelete (storageClient, inputData) {
-		return await KVCSettingsMetal.KVCSettingsMetalDelete(storageClient, inputData);
+		return await KVCSettingStorage.KVCSettingStorageDelete(storageClient, inputData);
 	},
 
 	async KVCSettingsActionQuery (storageClient, inputData) {
@@ -42,7 +42,7 @@ const mod = {
 			return Promise.reject(new Error('KVCErrorInputNotValid'));
 		}
 
-		return Promise.resolve(Object.values(await KVCSettingsMetal.KVCSettingsMetalList(storageClient)).filter(function(e) {
+		return Promise.resolve(Object.values(await KVCSettingStorage.KVCSettingStorageList(storageClient)).filter(function(e) {
 			if (!Object.keys(inputData).length) {
 				return true;
 			}

@@ -18,7 +18,6 @@ import KVCNoteAction from '../_shared/KVCNote/action.js';
 import KVCNoteMetal from '../_shared/KVCNote/metal.js';
 import KVCVersionAction from '../_shared/KVCVersion/action.js';
 import KVCSettingAction from '../_shared/KVCSetting/action.js';
-import KVCSettingMetal from '../_shared/KVCSetting/metal.js';
 import KVCWriteLogic from './ui-logic.js';
 import * as RemoteStoragePackage from 'remotestoragejs';
 const RemoteStorage = RemoteStoragePackage.default || RemoteStoragePackage;
@@ -521,7 +520,7 @@ const mod = {
 		}
 
 		await Promise.all(outputData.KVCSettingObjects.map(function (e) {
-			return KVCSettingMetal.KVCSettingsMetalWrite(mod._ValueStorageClient, e);
+			return KVCSettingStorage.KVCSettingStorageWrite(mod._ValueStorageClient, e);
 		}));
 
 		await Promise.all(outputData.KVCNoteObjects.map(function (e) {
@@ -546,7 +545,7 @@ const mod = {
 	},
 	
 	async ControlSettingStore (param1, param2) {
-		await KVCSettingMetal.KVCSettingsMetalWrite(mod._ValueStorageClient, Object.assign(mod.DataSetting(param1) || mod._ValueSettingsAll.push(await KVCSettingAction.KVCSettingsActionProperty(mod._ValueStorageClient, param1, param2)), {
+		await KVCSettingStorage.KVCSettingStorageWrite(mod._ValueStorageClient, Object.assign(mod.DataSetting(param1) || mod._ValueSettingsAll.push(await KVCSettingAction.KVCSettingsActionProperty(mod._ValueStorageClient, param1, param2)), {
 			KVCSettingValue: param2,
 		}));
 	},
