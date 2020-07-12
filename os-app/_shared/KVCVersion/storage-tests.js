@@ -2,18 +2,41 @@ const { throws, deepEqual } = require('assert');
 
 const mainModule = require('./storage.js').default;
 
-describe('KVCVersionStoragePath', function test_KVCVersionStoragePath() {
+describe('KVCVersionStorageCollectionName', function test_KVCVersionStorageCollectionName() {
 
 	it('returns string', function() {
-		deepEqual(mainModule.KVCVersionStoragePath('alfa'), 'kvc_versions/alfa');
+		deepEqual(mainModule.KVCVersionStorageCollectionName(), 'kvc_versions');
 	});
 
-	it('returns string if blank', function() {
-		deepEqual(mainModule.KVCVersionStoragePath(''), 'kvc_versions/');
+});
+
+describe('KVCVersionStorageCollectionType', function test_KVCVersionStorageCollectionType() {
+
+	it('returns string', function() {
+		deepEqual(mainModule.KVCVersionStorageCollectionType(), 'kvc_version');
 	});
 
-	it('returns string if undefined', function() {
-		deepEqual(mainModule.KVCVersionStoragePath(), 'kvc_versions/');
+});
+
+describe('KVCVersionStorageCollectionPath', function test_KVCVersionStorageCollectionPath() {
+
+	it('returns string', function() {
+		deepEqual(mainModule.KVCVersionStorageCollectionPath(), mainModule.KVCVersionStorageCollectionName() + '/');
+	});
+
+});
+
+describe('KVCVersionStorageObjectPath', function test_KVCVersionStorageObjectPath() {
+
+	it('throws error if not valid', function() {
+		throws(function() {
+			mainModule.KVCVersionStorageObjectPath({});
+		}, /KVCErrorInputNotValid/);
+	});
+
+	it('returns string', function() {
+		const item = StubVersionObjectValid();
+		deepEqual(mainModule.KVCVersionStorageObjectPath(item), mainModule.KVCVersionStorageCollectionPath() + item.KVCVersionID);
 	});
 
 });

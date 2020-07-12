@@ -85,6 +85,15 @@ const KVCVersionStorage = require('./os-app/_shared/KVCVersion/storage.js').defa
 			};
 		},
 
+		StubVersionObjectValid() {
+			return {
+				KVCVersionID: 'alfa',
+				KVCVersionNoteID: 'bravo',
+				KVCVersionBody: '',
+				KVCVersionDate: new Date(),
+			};
+		},
+
 		StubSettingObjectValid() {
 			return {
 				KVCSettingKey: 'alfa',

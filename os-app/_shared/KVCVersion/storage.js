@@ -2,40 +2,63 @@ import KVCVersionModel from './model.js';
 import * as OLSKRemoteStoragePackage from 'OLSKRemoteStorage';
 const OLSKRemoteStorage = OLSKRemoteStoragePackage.default || OLSKRemoteStoragePackage;
 
-const kType = 'kvc_version';
-const kCollection = 'kvc_versions';
-
 const mod = {
 
-	KVCVersionStoragePath (inputData) {
-		return `${ kCollection }/${ inputData || '' }`;
+	KVCVersionStorageCollectionName () {
+		return 'kvc_versions';
+	},
+
+	KVCVersionStorageCollectionType () {
+		return 'kvc_version';
+	},
+
+	KVCVersionStorageCollectionPath () {
+		return mod.KVCVersionStorageCollectionName() + '/';
+	},
+
+	KVCVersionStorageObjectPath (inputData) {
+		if (KVCVersionModel.KVCVersionModelErrorsFor(inputData)) {
+			throw new Error('KVCErrorInputNotValid');
+		}
+
+		return mod.KVCVersionStorageCollectionPath() + inputData.KVCVersionID;
 	},
 
 	KVCVersionStorageBuild (privateClient, publicClient, changeDelegate) {
 		const OLSKRemoteStorageCollectionExports = {
 
 			async KVCStorageList () {
-				return privateClient.getAll(mod.KVCVersionStoragePath(), false);
+				return privateClient.getAll(mod.KVCVersionStorageCollectionPath(), false);
 			},
 
 			async KVCStorageWrite (inputData) {
-				await privateClient.storeObject(kType, mod.KVCVersionStoragePath(inputData.KVCVersionID), OLSKRemoteStorage.OLSKRemoteStoragePreJSONSchemaValidate(inputData));
+				await privateClient.storeObject(mod.KVCVersionStorageCollectionType(), mod.KVCVersionStorageObjectPath(inputData), OLSKRemoteStorage.OLSKRemoteStoragePreJSONSchemaValidate(inputData));
 				return OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(inputData);
 			},
 
 			KVCStorageRead (inputData) {
-				return privateClient.getObject(mod.KVCVersionStoragePath(inputData));
+				return privateClient.getObject(mod.KVCVersionStorageObjectPath({
+					KVCVersionID: inputData,
+					KVCVersionNoteID: inputData,
+					KVCVersionBody: '',
+					KVCVersionDate: new Date(),
+				}));
 			},
 			
 			KVCStorageDelete (inputData) {
-				return privateClient.remove(mod.KVCVersionStoragePath(inputData));
+				return privateClient.remove(mod.KVCVersionStorageObjectPath({
+					KVCVersionID: inputData,
+					KVCVersionNoteID: inputData,
+					KVCVersionBody: '',
+					KVCVersionDate: new Date(),
+				}));
 			},
 			
 		};
 
 		return {
-			OLSKRemoteStorageCollectionName: kCollection,
-			OLSKRemoteStorageCollectionType: kType,
+			OLSKRemoteStorageCollectionName: mod.KVCVersionStorageCollectionName(),
+			OLSKRemoteStorageCollectionType: mod.KVCVersionStorageCollectionType(),
 			OLSKRemoteStorageCollectionModelErrors: Object.entries(KVCVersionModel.KVCVersionModelErrorsFor({}, {
 				KVCOptionValidateIfNotPresent: true,
 			})).map(function (e) {
