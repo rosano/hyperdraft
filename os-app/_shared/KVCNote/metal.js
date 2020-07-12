@@ -16,13 +16,7 @@ const mod = {
 			});
 		}
 		
-		return Object.assign(inputData, await storageClient.wikiavec.kvc_notes.KVCStorageWrite(Object.keys(inputData).reduce(function (coll, item) {
-			if (item[0] !== '$') {
-				coll[item] = inputData[item];
-			}
-
-			return coll;
-		}, {})));
+		return Object.assign(inputData, await storageClient.wikiavec.kvc_notes.KVCStorageWrite(OLSKRemoteStorage.OLSKRemoteStorageSafeCopy(inputData)));
 	},
 
 	async KVCNoteMetalList (storageClient) {
