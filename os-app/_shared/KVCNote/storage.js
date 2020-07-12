@@ -2,8 +2,6 @@ import KVCNoteModel from './model.js';
 import * as OLSKRemoteStoragePackage from 'OLSKRemoteStorage';
 const OLSKRemoteStorage = OLSKRemoteStoragePackage.default || OLSKRemoteStoragePackage;
 
-const kCollection = 'kvc_notes';
-
 const mod = {
 
 	uFakeNote (inputData) {
@@ -15,12 +13,16 @@ const mod = {
 		};
 	},
 
+	KVCNoteStorageCollectionName () {
+		return 'kvc_notes';
+	},
+
 	KVCNoteStorageCollectionType () {
 		return 'kvc_note';
 	},
 
 	KVCNoteStorageCollectionPath () {
-		return kCollection + '/';
+		return mod.KVCNoteStorageCollectionName() + '/';
 	},
 
 	KVCNoteStorageFolderPath (inputData) {
@@ -204,7 +206,7 @@ const mod = {
 		};
 
 		return {
-			OLSKRemoteStorageCollectionName: kCollection,
+			OLSKRemoteStorageCollectionName: mod.KVCNoteStorageCollectionName(),
 			OLSKRemoteStorageCollectionType: mod.KVCNoteStorageCollectionType(),
 			OLSKRemoteStorageCollectionModelErrors: Object.entries(KVCNoteModel.KVCNoteModelErrorsFor({}, {
 				KVCOptionValidateIfNotPresent: true,
@@ -224,19 +226,19 @@ const mod = {
 	},
 
 	KVCNoteStorageWrite (storageClient, inputData) {
-		return storageClient.wikiavec[kCollection]._KVCNoteStorageWrite(inputData);
+		return storageClient.wikiavec[mod.KVCNoteStorageCollectionName()]._KVCNoteStorageWrite(inputData);
 	},
 
 	KVCNoteStorageList (storageClient) {
-		return storageClient.wikiavec[kCollection]._KVCNoteStorageList();
+		return storageClient.wikiavec[mod.KVCNoteStorageCollectionName()]._KVCNoteStorageList();
 	},
 
 	KVCNoteStorageDelete (storageClient, inputData) {
-		return storageClient.wikiavec[kCollection]._KVCNoteStorageDelete(inputData);
+		return storageClient.wikiavec[mod.KVCNoteStorageCollectionName()]._KVCNoteStorageDelete(inputData);
 	},
 
 	KVCNoteStorageMigrateV1 (storageClient, inputData) {
-		return storageClient.wikiavec[kCollection]._KVCNoteStorageMigrateV1(inputData);
+		return storageClient.wikiavec[mod.KVCNoteStorageCollectionName()]._KVCNoteStorageMigrateV1(inputData);
 	},
 
 	KVCNoteStoragePublicObjectPath (inputData) {
@@ -256,15 +258,15 @@ const mod = {
 	},
 
 	KVCNoteStoragePublicWrite (storageClient, param1, param2) {
-		return storageClient.wikiavec[kCollection]._KVCNoteStoragePublicWrite(param1, param2);
+		return storageClient.wikiavec[mod.KVCNoteStorageCollectionName()]._KVCNoteStoragePublicWrite(param1, param2);
 	},
 
 	KVCNoteStoragePublicDelete (storageClient, param1, param2) {
-		return storageClient.wikiavec[kCollection]._KVCNoteStoragePublicDelete(param1, param2);
+		return storageClient.wikiavec[mod.KVCNoteStorageCollectionName()]._KVCNoteStoragePublicDelete(param1, param2);
 	},
 
 	KVCNoteStoragePublicURL (storageClient, inputData) {
-		return storageClient.wikiavec[kCollection]._KVCNoteStoragePublicURL(inputData);
+		return storageClient.wikiavec[mod.KVCNoteStorageCollectionName()]._KVCNoteStoragePublicURL(inputData);
 	},
 
 };

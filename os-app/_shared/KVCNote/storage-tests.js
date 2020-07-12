@@ -5,6 +5,14 @@ const mainModule = require('./storage.js').default;
 const OLSKRemoteStoragePackage = require('OLSKRemoteStorage');
 const OLSKRemoteStorage = OLSKRemoteStoragePackage.default || OLSKRemoteStoragePackage;
 
+describe('KVCNoteStorageCollectionName', function test_KVCNoteStorageCollectionName() {
+
+	it('returns string', function() {
+		deepEqual(mainModule.KVCNoteStorageCollectionName(), 'kvc_notes');
+	});
+
+});
+
 describe('KVCNoteStorageCollectionType', function test_KVCNoteStorageCollectionType() {
 
 	it('returns string', function() {
@@ -16,7 +24,7 @@ describe('KVCNoteStorageCollectionType', function test_KVCNoteStorageCollectionT
 describe('KVCNoteStorageCollectionPath', function test_KVCNoteStorageCollectionPath() {
 
 	it('returns string', function() {
-		deepEqual(mainModule.KVCNoteStorageCollectionPath(), 'kvc_notes/');
+		deepEqual(mainModule.KVCNoteStorageCollectionPath(), mainModule.KVCNoteStorageCollectionName() + '/');
 	});
 
 });
