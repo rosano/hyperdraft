@@ -69,8 +69,8 @@ const KVCVersionStorage = require('./os-app/_shared/KVCVersion/storage.js').defa
 		global.KVCTestingStorageClient.access.claim(storageModule.name, 'rw');
 	});
 
-	beforeEach(async function() {
-		return await global.KVCTestingStorageClient[storageModule.name].__DEBUG._OLSKRemoteStorageReset();
+	beforeEach(function() {
+		return global.KVCTestingStorageClient[storageModule.name].__DEBUG.__OLSKRemoteStorageReset();
 	});
 })();
 
@@ -119,4 +119,3 @@ const KVCVersionStorage = require('./os-app/_shared/KVCVersion/storage.js').defa
 		return global[e.shift()]  = e.pop();
 	});
 })();
-

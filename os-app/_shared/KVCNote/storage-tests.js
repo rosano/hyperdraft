@@ -161,7 +161,7 @@ describe('KVCNoteStoragePublicWrite', function test_KVCNoteStoragePublicWrite() 
 	it('writes file to public folder', async function() {
 		await mainModule.KVCNoteStoragePublicWrite(KVCTestingStorageClient, 'alfa', 'bravo');
 
-		deepEqual((await KVCTestingStorageClient.wikiavec.__DEBUG._OLSKRemoteStoragePublicClient().getFile('alfa')).data, 'bravo');
+		deepEqual((await KVCTestingStorageClient.wikiavec.__DEBUG.__OLSKRemoteStoragePublicClient().getFile('alfa')).data, 'bravo');
 	});
 
 });
@@ -186,7 +186,7 @@ describe('KVCNoteStoragePublicDelete', function test_KVCNoteStoragePublicDelete(
 
 		await mainModule.KVCNoteStoragePublicDelete(KVCTestingStorageClient, mainModule.KVCNoteStoragePublicObjectPath(item));
 
-		deepEqual((await KVCTestingStorageClient.wikiavec.__DEBUG._OLSKRemoteStoragePublicClient().getFile(mainModule.KVCNoteStoragePublicObjectPath(item))).data, undefined);
+		deepEqual((await KVCTestingStorageClient.wikiavec.__DEBUG.__OLSKRemoteStoragePublicClient().getFile(mainModule.KVCNoteStoragePublicObjectPath(item))).data, undefined);
 	});
 
 });

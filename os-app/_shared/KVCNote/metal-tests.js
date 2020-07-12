@@ -103,7 +103,7 @@ describe('KVCNoteMetalDelete', function test_KVCNoteMetalDelete() {
 		await mainModule.KVCNoteMetalDelete(KVCTestingStorageClient, await mainModule.KVCNoteMetalWrite(KVCTestingStorageClient, item));
 
 
-		deepEqual((await KVCTestingStorageClient.wikiavec.__DEBUG._OLSKRemoteStoragePublicClient().getFile(KVCNoteStorage.KVCNoteStoragePublicObjectPath(item))).data, undefined);
+		deepEqual((await KVCTestingStorageClient.wikiavec.__DEBUG.__OLSKRemoteStoragePublicClient().getFile(KVCNoteStorage.KVCNoteStoragePublicObjectPath(item))).data, undefined);
 	});
 
 });
@@ -129,13 +129,13 @@ describe('KVCNoteMetalMigrateV1', function test_KVCNoteMetalMigrateV1() {
 		const outputData = [];
 
 		beforeEach(async function () {
-			await KVCTestingStorageClient.wikiavec.__DEBUG._OLSKRemoteStoragePrivateClient().storeObject(KVCNoteStorage.KVCNoteStorageCollectionType(), KVCNoteStorage.KVCNoteStorageObjectPathV1(item), OLSKRemoteStorage.OLSKRemoteStoragePreJSONSchemaValidate(item));
+			await KVCTestingStorageClient.wikiavec.__DEBUG.__OLSKRemoteStoragePrivateClient().storeObject(KVCNoteStorage.KVCNoteStorageCollectionType(), KVCNoteStorage.KVCNoteStorageObjectPathV1(item), OLSKRemoteStorage.OLSKRemoteStoragePreJSONSchemaValidate(item));
 
 			OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(item);
 		});
 
 		beforeEach(async function () {
-			deepEqual(OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(await KVCTestingStorageClient.wikiavec.__DEBUG._OLSKRemoteStoragePrivateClient().getObject(KVCNoteStorage.KVCNoteStorageObjectPathV1(item))), item);
+			deepEqual(OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(await KVCTestingStorageClient.wikiavec.__DEBUG.__OLSKRemoteStoragePrivateClient().getObject(KVCNoteStorage.KVCNoteStorageObjectPathV1(item))), item);
 		});
 
 		beforeEach(async function () {
@@ -149,7 +149,7 @@ describe('KVCNoteMetalMigrateV1', function test_KVCNoteMetalMigrateV1() {
 		});
 
 		it('deletes source object', async function () {
-			deepEqual(await KVCTestingStorageClient.wikiavec.__DEBUG._OLSKRemoteStoragePrivateClient().getObject(KVCNoteStorage.KVCNoteStorageObjectPathV1(item)), null);
+			deepEqual(await KVCTestingStorageClient.wikiavec.__DEBUG.__OLSKRemoteStoragePrivateClient().getObject(KVCNoteStorage.KVCNoteStorageObjectPathV1(item)), null);
 		});
 
 		it('passes destination object to callback', function() {
