@@ -31,29 +31,33 @@ describe('KVCNoteMetalWrite', function test_KVCNoteMetalWrite() {
 
 	context('relations', function () {
 
-		const memory = Object.assign(StubNoteObjectValid(), {
+		const item = Object.assign(StubNoteObjectValid(), {
 			$alfa: 'bravo',
 		});
-		let storage = [];
+		let outputData, storage;
 
 		before(async function () {
-			await mainModule.KVCNoteMetalWrite(KVCTestingStorageClient, memory);
+			outputData = await mainModule.KVCNoteMetalWrite(KVCTestingStorageClient, item);
 		});
 		
 		before(async function () {
 			storage = Object.values(await mainModule.KVCNoteMetalList(KVCTestingStorageClient));
 		});
 		
-		it('ignores property', function () {
+		it('excludes from storage', function () {
 			deepEqual(storage, [Object.assign(StubNoteObjectValid(), {
-				'@context': memory['@context'],
+				'@context': item['@context'],
 			})]);
 		});
-
-		it('clones object', function () {
-			deepEqual(memory.$alfa, 'bravo');
+		
+		it('includes in outputData', function () {
+			deepEqual(outputData, item);
 		});
-	
+
+		it('updates inputData', function () {
+			deepEqual(outputData === item, true);
+		});
+		
 	});
 
 });
