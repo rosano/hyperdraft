@@ -2,18 +2,41 @@ const { throws, deepEqual } = require('assert');
 
 const mainModule = require('./storage.js').default;
 
-describe('KVCSettingStoragePath', function test_KVCSettingStoragePath() {
+describe('KVCSettingStorageCollectionName', function test_KVCSettingStorageCollectionName() {
 
 	it('returns string', function() {
-		deepEqual(mainModule.KVCSettingStoragePath('alfa'), 'kvc_settings/alfa');
+		deepEqual(mainModule.KVCSettingStorageCollectionName(), 'kvc_settings');
 	});
 
-	it('returns string if blank', function() {
-		deepEqual(mainModule.KVCSettingStoragePath(''), 'kvc_settings/');
+});
+
+describe('KVCSettingStorageCollectionType', function test_KVCSettingStorageCollectionType() {
+
+	it('returns string', function() {
+		deepEqual(mainModule.KVCSettingStorageCollectionType(), 'kvc_setting');
 	});
 
-	it('returns string if undefined', function() {
-		deepEqual(mainModule.KVCSettingStoragePath(), 'kvc_settings/');
+});
+
+describe('KVCSettingStorageCollectionPath', function test_KVCSettingStorageCollectionPath() {
+
+	it('returns string', function() {
+		deepEqual(mainModule.KVCSettingStorageCollectionPath(), mainModule.KVCSettingStorageCollectionName() + '/');
+	});
+
+});
+
+describe('KVCSettingStorageObjectPath', function test_KVCSettingStorageObjectPath() {
+
+	it('throws error if not valid', function() {
+		throws(function() {
+			mainModule.KVCSettingStorageObjectPath({});
+		}, /KVCErrorInputNotValid/);
+	});
+
+	it('returns string', function() {
+		const item = StubSettingObjectValid();
+		deepEqual(mainModule.KVCSettingStorageObjectPath(item), mainModule.KVCSettingStorageCollectionPath() + item.KVCSettingKey);
 	});
 
 });

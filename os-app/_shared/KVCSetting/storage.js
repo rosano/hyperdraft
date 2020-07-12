@@ -1,38 +1,57 @@
 import KVCSettingModel from './model.js';
 
-const kType = 'kvc_setting';
-const kCollection = 'kvc_settings';
-
 const mod = {
 
-	KVCSettingStoragePath (inputData) {
-		return `${ kCollection }/${ inputData || '' }`;
+	KVCSettingStorageCollectionName () {
+		return 'kvc_settings';
+	},
+
+	KVCSettingStorageCollectionType () {
+		return 'kvc_setting';
+	},
+
+	KVCSettingStorageCollectionPath () {
+		return mod.KVCSettingStorageCollectionName() + '/';
+	},
+
+	KVCSettingStorageObjectPath (inputData) {
+		if (KVCSettingModel.KVCSettingModelErrorsFor(inputData)) {
+			throw new Error('KVCErrorInputNotValid');
+		}
+
+		return mod.KVCSettingStorageCollectionPath() + inputData.KVCSettingKey;
 	},
 
 	KVCSettingStorageBuild (privateClient, publicClient, changeDelegate) {
 		const OLSKRemoteStorageCollectionExports = {
 
 			async KVCStorageList () {
-				return privateClient.getAll(mod.KVCSettingStoragePath(), false);
+				return privateClient.getAll(mod.KVCSettingStorageCollectionPath(), false);
 			},
 
 			async KVCStorageWrite (param1, param2) {
-				await privateClient.storeObject(kType, mod.KVCSettingStoragePath(param1), param2);
+				await privateClient.storeObject(mod.KVCSettingStorageCollectionType(), mod.KVCSettingStorageObjectPath(param2), param2);
 				return param2;
 			},
 
 			KVCStorageRead (inputData) {
-				return privateClient.getObject(mod.KVCSettingStoragePath(inputData));
+				return privateClient.getObject(mod.KVCSettingStorageObjectPath({
+					KVCSettingKey: inputData,
+					KVCSettingValue: '',
+				}));
 			},
 			KVCStorageDelete (inputData) {
-				return privateClient.remove(mod.KVCSettingStoragePath(inputData));
+				return privateClient.remove(mod.KVCSettingStorageObjectPath({
+					KVCSettingKey: inputData,
+					KVCSettingValue: '',
+				}));
 			},
 			
 		};
 
 		return {
-			OLSKRemoteStorageCollectionName: kCollection,
-			OLSKRemoteStorageCollectionType: kType,
+			OLSKRemoteStorageCollectionName: mod.KVCSettingStorageCollectionName(),
+			OLSKRemoteStorageCollectionType: mod.KVCSettingStorageCollectionType(),
 			OLSKRemoteStorageCollectionModelErrors: Object.entries(KVCSettingModel.KVCSettingModelErrorsFor({}, {
 				KVCOptionValidateIfNotPresent: true,
 			})).map(function (e) {

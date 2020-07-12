@@ -84,6 +84,13 @@ const KVCVersionStorage = require('./os-app/_shared/KVCVersion/storage.js').defa
 				KVCNoteModificationDate: new Date('2019-02-23T13:56:36Z'),
 			};
 		},
+
+		StubSettingObjectValid() {
+			return {
+				KVCSettingKey: 'alfa',
+				KVCSettingValue: 'bravo',
+			};
+		},
 		
 		uSerial (inputData) {
 			return inputData.reduce(async function (coll, e) {
