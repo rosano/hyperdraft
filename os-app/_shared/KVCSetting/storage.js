@@ -91,19 +91,19 @@ const mod = {
 	},
 
 	KVCSettingStorageWrite (storageClient, inputData) {
-		return storageClient.wikiavec.kvc_settings._KVCSettingStorageWrite(inputData);
+		return storageClient.wikiavec[mod.KVCSettingStorageCollectionName()]._KVCSettingStorageWrite(inputData);
 	},
 
 	KVCSettingStorageRead (storageClient, inputData) {
-		return storageClient.wikiavec.kvc_settings._KVCSettingStorageRead(inputData);
+		return storageClient.wikiavec[mod.KVCSettingStorageCollectionName()]._KVCSettingStorageRead(inputData);
 	},
 
 	KVCSettingStorageList (storageClient) {
-		return storageClient.wikiavec.kvc_settings._KVCSettingStorageList();
+		return storageClient.wikiavec[mod.KVCSettingStorageCollectionName()]._KVCSettingStorageList();
 	},
 
 	KVCSettingStorageDelete (storageClient, inputData) {
-		return storageClient.wikiavec.kvc_settings._KVCSettingStorageDelete(inputData);
+		return storageClient.wikiavec[mod.KVCSettingStorageCollectionName()]._KVCSettingStorageDelete(inputData);
 	},
 
 };
