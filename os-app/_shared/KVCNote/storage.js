@@ -106,24 +106,42 @@ const mod = {
 
 		const OLSKRemoteStorageCollectionExports = {
 
-			async KVCStorageList () {
+			async _KVCNoteStorageWrite (inputData) {
+				if (typeof inputData !== 'object' || inputData === null) {
+					return Promise.reject(new Error('KVCErrorInputNotValid'));
+				}
+
+				let errors = KVCNoteModel.KVCNoteModelErrorsFor(inputData);
+				if (errors) {
+					return Promise.resolve({
+						KVCErrors: errors,
+					});
+				}
+
+				const inputCopy = OLSKRemoteStorage.OLSKRemoteStorageSafeCopy(inputData);
+
+				await privateClient.storeObject(mod.KVCNoteStorageCollectionType(), mod.KVCNoteStorageObjectPath(inputCopy), OLSKRemoteStorage.OLSKRemoteStoragePreJSONSchemaValidate(inputCopy));
+
+				return Object.assign(inputData, OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(inputCopy));
+			},
+
+			async _KVCNoteStorageList () {
 				return (await Promise.all((await OLSKRemoteStorage.OLSKRemoteStorageListObjectsRecursive(privateClient, mod.KVCNoteStorageCollectionPath())).filter(mod.KVCNoteStorageMatch).map(function (e) {
 					return privateClient.getObject(e, false);
 				}))).reduce(function (coll, item) {
 					if (item) {
-						coll[item.KVCNoteID] = item;
+						coll[item.KVCNoteID] = OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(item);
 					}
 
 					return coll;
 				}, {});
 			},
 
-			async KVCStorageWrite (inputData) {
-				await privateClient.storeObject(mod.KVCNoteStorageCollectionType(), mod.KVCNoteStorageObjectPath(inputData), OLSKRemoteStorage.OLSKRemoteStoragePreJSONSchemaValidate(inputData));
-				return OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(inputData);
-			},
-			
-			async KVCStorageDelete (inputData) {
+			async _KVCNoteStorageDelete (inputData) {
+				if (KVCNoteModel.KVCNoteModelErrorsFor(inputData)) {
+					return Promise.reject(new Error('KVCErrorInputNotValid'));
+				}
+
 				if (inputData.KVCNotePublicID) {
 					await OLSKRemoteStorageCollectionExports._KVCNoteStoragePublicDelete(mod.KVCNoteStoragePublicObjectPath(inputData));
 				}
@@ -131,11 +149,15 @@ const mod = {
 				return privateClient.remove(mod.KVCNoteStorageObjectPath(inputData));
 			},
 
-			async KVCStorageMigrateNotesV1 (inputData) {
+			async _KVCNoteStorageMigrateV1 (inputData) {
+				if (typeof inputData !== 'function') {
+					return Promise.reject(new Error('KVCErrorInputNotValid'));
+				}
+
 				return Promise.all((await OLSKRemoteStorage.OLSKRemoteStorageListObjectsRecursive(privateClient, mod.KVCNoteStorageCollectionPath())).filter(mod.KVCNoteStorageMatchV1).map(async function (e) {
 					const item = OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(await privateClient.getObject(e, false));
 					
-					inputData(await OLSKRemoteStorageCollectionExports.KVCStorageWrite(item));
+					inputData(await OLSKRemoteStorageCollectionExports._KVCNoteStorageWrite(item));
 
 					await privateClient.remove(e);
 
@@ -201,6 +223,22 @@ const mod = {
 		};
 	},
 
+	KVCNoteStorageWrite (storageClient, inputData) {
+		return storageClient.wikiavec[kCollection]._KVCNoteStorageWrite(inputData);
+	},
+
+	KVCNoteStorageList (storageClient) {
+		return storageClient.wikiavec[kCollection]._KVCNoteStorageList();
+	},
+
+	KVCNoteStorageDelete (storageClient, inputData) {
+		return storageClient.wikiavec[kCollection]._KVCNoteStorageDelete(inputData);
+	},
+
+	KVCNoteStorageMigrateV1 (storageClient, inputData) {
+		return storageClient.wikiavec[kCollection]._KVCNoteStorageMigrateV1(inputData);
+	},
+
 	KVCNoteStoragePublicObjectPath (inputData) {
 		if (KVCNoteModel.KVCNoteModelErrorsFor(inputData)) {
 			throw new Error('KVCErrorInputNotValid');
@@ -218,15 +256,15 @@ const mod = {
 	},
 
 	KVCNoteStoragePublicWrite (storageClient, param1, param2) {
-		return storageClient.wikiavec.kvc_notes._KVCNoteStoragePublicWrite(param1, param2);
+		return storageClient.wikiavec[kCollection]._KVCNoteStoragePublicWrite(param1, param2);
 	},
 
 	KVCNoteStoragePublicDelete (storageClient, param1, param2) {
-		return storageClient.wikiavec.kvc_notes._KVCNoteStoragePublicDelete(param1, param2);
+		return storageClient.wikiavec[kCollection]._KVCNoteStoragePublicDelete(param1, param2);
 	},
 
 	KVCNoteStoragePublicURL (storageClient, inputData) {
-		return storageClient.wikiavec.kvc_notes._KVCNoteStoragePublicURL(inputData);
+		return storageClient.wikiavec[kCollection]._KVCNoteStoragePublicURL(inputData);
 	},
 
 };

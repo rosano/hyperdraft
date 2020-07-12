@@ -15,7 +15,6 @@ import { OLSK_TESTING_BEHAVIOUR } from 'OLSKTesting';
 import * as OLSKRemoteStoragePackage from '../_shared/__external/OLSKRemoteStorage/main.js'
 const OLSKRemoteStorage = OLSKRemoteStoragePackage.default || OLSKRemoteStoragePackage;
 import KVCNoteAction from '../_shared/KVCNote/action.js';
-import KVCNoteMetal from '../_shared/KVCNote/metal.js';
 import KVCVersionAction from '../_shared/KVCVersion/action.js';
 import KVCSettingAction from '../_shared/KVCSetting/action.js';
 import KVCWriteLogic from './ui-logic.js';
@@ -524,7 +523,7 @@ const mod = {
 		}));
 
 		await Promise.all(outputData.KVCNoteObjects.map(function (e) {
-			return KVCNoteMetal.KVCNoteMetalWrite(mod._ValueStorageClient, OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(e));
+			return KVCNoteStorage.KVCNoteStorageWrite(mod._ValueStorageClient, OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(e));
 		}));
 
 		mod.ValueNotesAll(await KVCNoteAction.KVCNoteActionQuery(mod._ValueStorageClient, {}));
@@ -551,7 +550,7 @@ const mod = {
 	},
 
 	ControlMigrate() {
-		KVCNoteMetal.KVCNoteMetalMigrateV1(mod._ValueStorageClient, mod.OLSKChangeDelegateCreateNote);
+		KVCNoteStorage.KVCNoteStorageMigrateV1(mod._ValueStorageClient, mod.OLSKChangeDelegateCreateNote);
 
 		if (OLSK_TESTING_BEHAVIOUR()) {
 			window.TestControlMigrateCount.innerHTML = parseInt(window.TestControlMigrateCount.innerHTML) + 1;

@@ -1,7 +1,7 @@
 import { factory, detectPrng } from 'ulid';
 const uniqueID = typeof require === 'undefined' && navigator.appName === 'Zombie' ? factory(detectPrng(true)) : factory();
 
-import KVCNoteMetal from './metal.js';
+import KVCNoteStorage from './storage.js';
 import KVCNoteModel from './model.js';
 import KVCNoteStorage from './storage.js';
 import KVCSettingAction from '../KVCSetting/action.js';
@@ -24,7 +24,7 @@ const mod = {
 
 		let creationDate = new Date();
 
-		return await KVCNoteMetal.KVCNoteMetalWrite(storageClient, Object.assign(inputData, {
+		return await KVCNoteStorage.KVCNoteStorageWrite(storageClient, Object.assign(inputData, {
 			KVCNoteID: uniqueID(),
 			KVCNoteCreationDate: creationDate,
 			KVCNoteModificationDate: creationDate,
@@ -36,7 +36,7 @@ const mod = {
 			return Promise.reject(new Error('KVCErrorInputNotValid'));
 		}
 
-		return await KVCNoteMetal.KVCNoteMetalWrite(storageClient, Object.assign(inputData, {
+		return await KVCNoteStorage.KVCNoteStorageWrite(storageClient, Object.assign(inputData, {
 			KVCNoteModificationDate: new Date(),
 		}));
 	},
@@ -52,7 +52,7 @@ const mod = {
 			return KVCVersionAction.KVCVersionActionDelete(storageClient, e.KVCVersionID);
 		}));
 		
-		return await KVCNoteMetal.KVCNoteMetalDelete(storageClient, inputData);
+		return await KVCNoteStorage.KVCNoteStorageDelete(storageClient, inputData);
 	},
 
 	async KVCNoteActionQuery (storageClient, inputData) {
@@ -60,7 +60,7 @@ const mod = {
 			return Promise.reject(new Error('KVCErrorInputNotValid'));
 		}
 
-		return Promise.resolve(Object.values(await KVCNoteMetal.KVCNoteMetalList(storageClient)).sort(function (a, b) {
+		return Promise.resolve(Object.values(await KVCNoteStorage.KVCNoteStorageList(storageClient)).sort(function (a, b) {
 			return b.KVCNoteModificationDate - a.KVCNoteModificationDate;
 		}).filter(function(e) {
 			if (!Object.keys(inputData).length) {

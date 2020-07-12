@@ -2,6 +2,9 @@ const { throws, rejects, deepEqual } = require('assert');
 
 const mainModule = require('./storage.js').default;
 
+const OLSKRemoteStoragePackage = require('OLSKRemoteStorage');
+const OLSKRemoteStorage = OLSKRemoteStoragePackage.default || OLSKRemoteStoragePackage;
+
 describe('KVCNoteStorageCollectionType', function test_KVCNoteStorageCollectionType() {
 
 	it('returns string', function() {
@@ -108,6 +111,165 @@ describe('KVCNoteStorageMatch', function test_KVCNoteStorageMatch() {
 
 	it('returns false if old path', function () {
 		deepEqual(mainModule.KVCNoteStorageMatch('kvc_notes/01EC08S8BG8WJVM4ZYMGC7EK9W/main'), false);
+	});
+
+});
+
+describe('KVCNoteStorageWrite', function test_KVCNoteStorageWrite() {
+
+	it('rejects if not object', async function() {
+		await rejects(mainModule.KVCNoteStorageWrite(KVCTestingStorageClient, null), /KVCErrorInputNotValid/);
+	});
+
+	it('returns object with KVCErrors if not valid', async function() {
+		deepEqual((await mainModule.KVCNoteStorageWrite(KVCTestingStorageClient, Object.assign(StubNoteObjectValid(), {
+			KVCNoteID: null,
+		}))).KVCErrors, {
+			KVCNoteID: [
+				'KVCErrorNotString',
+			],
+		});
+	});
+
+	it('resolves object', async function() {
+		let item = await mainModule.KVCNoteStorageWrite(KVCTestingStorageClient, StubNoteObjectValid());
+
+		deepEqual(item, Object.assign(StubNoteObjectValid(), {
+			'@context': item['@context'],
+		}));
+	});
+
+	context('relations', function () {
+
+		const item = Object.assign(StubNoteObjectValid(), {
+			$alfa: 'bravo',
+		});
+		let outputData, storage;
+
+		before(async function () {
+			outputData = await mainModule.KVCNoteStorageWrite(KVCTestingStorageClient, item);
+		});
+		
+		before(async function () {
+			storage = Object.values(await mainModule.KVCNoteStorageList(KVCTestingStorageClient));
+		});
+		
+		it('excludes from storage', function () {
+			deepEqual(storage, [Object.assign(StubNoteObjectValid(), {
+				'@context': item['@context'],
+			})]);
+		});
+		
+		it('includes in outputData', function () {
+			deepEqual(outputData, item);
+		});
+
+		it('updates inputData', function () {
+			deepEqual(outputData === item, true);
+		});
+		
+	});
+
+});
+
+describe('KVCNoteStorageList', function test_KVCNoteStorageList() {
+
+	it('resolves empty array if none', async function() {
+		deepEqual(await mainModule.KVCNoteStorageList(KVCTestingStorageClient), {});
+	});
+
+	it('resolves array', async function() {
+		let item = await mainModule.KVCNoteStorageWrite(KVCTestingStorageClient, StubNoteObjectValid());
+		deepEqual(Object.values(await mainModule.KVCNoteStorageList(KVCTestingStorageClient)), [item]);
+		deepEqual(Object.keys(await mainModule.KVCNoteStorageList(KVCTestingStorageClient)), [item.KVCNoteID]);
+	});
+
+});
+
+describe('KVCNoteStorageDelete', function test_KVCNoteStorageDelete() {
+
+	it('rejects if not valid', async function() {
+		await rejects(mainModule.KVCNoteStorageDelete(KVCTestingStorageClient, {}), /KVCErrorInputNotValid/);
+	});
+
+	it('resolves object', async function() {
+		deepEqual(await mainModule.KVCNoteStorageDelete(KVCTestingStorageClient, await mainModule.KVCNoteStorageWrite(KVCTestingStorageClient, StubNoteObjectValid())), {
+			statusCode: 200,
+		});
+	});
+
+	it('deletes KVCNote', async function() {
+		await mainModule.KVCNoteStorageDelete(KVCTestingStorageClient, await mainModule.KVCNoteStorageWrite(KVCTestingStorageClient, StubNoteObjectValid()));
+		deepEqual(await mainModule.KVCNoteStorageList(KVCTestingStorageClient), {});
+	});
+
+	it('deletes file from public folder', async function() {
+		const item = await mainModule.KVCNoteStorageWrite(KVCTestingStorageClient, Object.assign(StubNoteObjectValid(), {
+			KVCNotePublicID: 'charlie',
+		}));
+
+		await mainModule.KVCNoteStoragePublicWrite(KVCTestingStorageClient, mainModule.KVCNoteStoragePublicObjectPath(item), item.KVCNoteBody);
+
+		await mainModule.KVCNoteStorageDelete(KVCTestingStorageClient, await mainModule.KVCNoteStorageWrite(KVCTestingStorageClient, item));
+
+
+		deepEqual((await KVCTestingStorageClient.wikiavec.__DEBUG.__OLSKRemoteStoragePublicClient().getFile(mainModule.KVCNoteStoragePublicObjectPath(item))).data, undefined);
+	});
+
+});
+
+describe('KVCNoteStorageMigrateV1', function test_KVCNoteStorageMigrateV1() {
+
+	it('rejects if not function', async function() {
+		await rejects(mainModule.KVCNoteStorageDelete(KVCTestingStorageClient, null), /KVCErrorInputNotValid/);
+	});
+
+	it('resolves array', async function() {
+		deepEqual(await mainModule.KVCNoteStorageMigrateV1(KVCTestingStorageClient, function () {}), []);
+	});
+
+	context('V1', function () {
+
+		const item = {
+			KVCNoteID: 'alfa',
+			KVCNoteBody: '',
+			KVCNoteCreationDate: new Date('2019-02-23T13:56:36Z'),
+			KVCNoteModificationDate: new Date('2019-02-23T13:56:36Z'),
+		};
+		const outputData = [];
+
+		beforeEach(async function () {
+			await KVCTestingStorageClient.wikiavec.__DEBUG.__OLSKRemoteStoragePrivateClient().storeObject(mainModule.KVCNoteStorageCollectionType(), mainModule.KVCNoteStorageObjectPathV1(item), OLSKRemoteStorage.OLSKRemoteStoragePreJSONSchemaValidate(item));
+
+			OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(item);
+		});
+
+		beforeEach(async function () {
+			deepEqual(OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(await KVCTestingStorageClient.wikiavec.__DEBUG.__OLSKRemoteStoragePrivateClient().getObject(mainModule.KVCNoteStorageObjectPathV1(item))), item);
+		});
+
+		beforeEach(async function () {
+			await mainModule.KVCNoteStorageMigrateV1(KVCTestingStorageClient, function (inputData) {
+				outputData.push(inputData);
+			});
+		});
+
+		it('creates destination object', async function () {
+			deepEqual(Object.values(await mainModule.KVCNoteStorageList(KVCTestingStorageClient)), [item]);
+		});
+
+		it('deletes source object', async function () {
+			deepEqual(await KVCTestingStorageClient.wikiavec.__DEBUG.__OLSKRemoteStoragePrivateClient().getObject(mainModule.KVCNoteStorageObjectPathV1(item)), null);
+		});
+
+		it('passes destination object to callback', function() {
+			deepEqual(outputData, [item]);
+		});
+
+		afterEach(function () {
+			outputData.pop();
+		});
+	
 	});
 
 });
