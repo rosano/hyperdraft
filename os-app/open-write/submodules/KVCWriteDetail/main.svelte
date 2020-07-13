@@ -3,6 +3,7 @@ export let KVCWriteDetailConnected = false;
 export let KVCWriteDetailItemIsRootPage = false;
 export let KVCWriteDetailPublicURLFor;
 export let KVCWriteDetailDispatchBack;
+export let KVCWriteDetailDispatchArchive;
 export let KVCWriteDetailDispatchJump;
 export let KVCWriteDetailDispatchConnect;
 export let KVCWriteDetailDispatchPublish;
@@ -104,6 +105,10 @@ const mod = {
 
 	// INTERFACE
 
+	InterfaceArchiveButtonDidClick () {
+		mod.ControlArchive();
+	},
+
 	InterfaceJumpButtonDidClick () {
 		mod.ControlJump();
 	},
@@ -127,6 +132,10 @@ const mod = {
 		};
 
 		mod._ValueEditorPostInitializeQueue.push(inputData);
+	},
+
+	ControlArchive () {
+		KVCWriteDetailDispatchArchive();
 	},
 
 	ControlJump () {
@@ -169,6 +178,7 @@ const mod = {
 
 import OLSKDetailPlaceholder from 'OLSKDetailPlaceholder';
 import _OLSKSharedBack from '../../../_shared/__external/OLSKUIAssets/_OLSKSharedBack.svg';
+import _KVCWriteArchive from './ui-assets/_KVCWriteArchive.svg';
 import _KVCWriteJump from './ui-assets/_KVCWriteJump.svg';
 import _KVCWritePublish from './ui-assets/_KVCWritePublish.svg';
 import _KVCWriteRetract from './ui-assets/_KVCWriteRetract.svg';
@@ -193,6 +203,10 @@ import KVCWriteInput from '../KVCWriteInput/main.svelte';
 	</div>
 
 	<div class="OLSKToolbarElementGroup">
+		<button class="KVCWriteDetailToolbarArchiveButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarArchiveButtonText') } on:click={ mod.InterfaceArchiveButtonDidClick }>
+			<div class="KVCWriteDetailToolbarArchiveButtonImage">{@html _KVCWriteArchive }</div>
+		</button>
+
 		<button class="KVCWriteDetailToolbarJumpButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarJumpButtonText') } accesskey="r" tabindex="-1" disabled={ !mod._ValueHeaderTokens.length } on:click={ mod.InterfaceJumpButtonDidClick }>
 			<div class="KVCWriteDetailToolbarJumpButtonImage">{@html _KVCWriteJump }</div>
 		</button>

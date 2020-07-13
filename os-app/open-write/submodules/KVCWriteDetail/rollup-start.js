@@ -54,6 +54,9 @@ const KVCWriteDetail = new RollupStart({
 		KVCWriteDetailDispatchBack: (function _KVCWriteDetailDispatchBack () {
 			window.TestKVCWriteDetailDispatchBack.innerHTML = parseInt(window.TestKVCWriteDetailDispatchBack.innerHTML) + 1;
 		}),
+		KVCWriteDetailDispatchArchive: (function _KVCWriteDetailDispatchArchive () {
+			window.TestKVCWriteDetailDispatchArchive.innerHTML = parseInt(window.TestKVCWriteDetailDispatchArchive.innerHTML) + 1;
+		}),
 		KVCWriteDetailDispatchJump: (function _KVCWriteDetailDispatchJump () {
 			window.TestKVCWriteDetailDispatchJump.innerHTML = parseInt(window.TestKVCWriteDetailDispatchJump.innerHTML) + 1;
 		}),

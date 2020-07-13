@@ -6,6 +6,8 @@ Object.entries({
 	KVCWriteDetailToolbar: '.KVCWriteDetailToolbar',
 	KVCWriteDetailToolbarBackButton: '.KVCWriteDetailToolbarBackButton',
 	KVCWriteDetailToolbarBackButtonImage: '.KVCWriteDetailToolbarBackButtonImage',
+	KVCWriteDetailToolbarArchiveButton: '.KVCWriteDetailToolbarArchiveButton',
+	KVCWriteDetailToolbarArchiveButtonImage: '.KVCWriteDetailToolbarArchiveButtonImage',
 	KVCWriteDetailToolbarJumpButton: '.KVCWriteDetailToolbarJumpButton',
 	KVCWriteDetailToolbarJumpButtonImage: '.KVCWriteDetailToolbarJumpButtonImage',
 	KVCWriteDetailToolbarConnectButton: '.KVCWriteDetailToolbarConnectButton',
@@ -72,6 +74,14 @@ describe('KVCWriteDetail_Access', function () {
 
 		it('shows KVCWriteDetailToolbarBackButtonImage', function () {
 			browser.assert.elements(KVCWriteDetailToolbarBackButtonImage, 1);
+		});
+
+		it('shows KVCWriteDetailToolbarArchiveButton', function () {
+			browser.assert.elements(KVCWriteDetailToolbarArchiveButton, 1);
+		});
+
+		it('shows KVCWriteDetailToolbarArchiveButtonImage', function () {
+			browser.assert.elements(KVCWriteDetailToolbarArchiveButtonImage, 1);
 		});
 
 		it('shows KVCWriteDetailToolbarJumpButton', function () {

@@ -108,6 +108,46 @@ describe('KVCWriteDetail_Misc', function () {
 	
 	});
 
+	describe('KVCWriteDetailToolbarArchiveButton', function test_KVCWriteDetailToolbarArchiveButton () {
+		
+		it('classes OLSKLayoutButtonNoStyle', function () {
+			browser.assert.hasClass(KVCWriteDetailToolbarArchiveButton, 'OLSKLayoutButtonNoStyle');
+		});
+
+		it('classes OLSKLayoutElementTappable', function () {
+			browser.assert.hasClass(KVCWriteDetailToolbarArchiveButton, 'OLSKLayoutElementTappable');
+		});
+
+		it('classes OLSKToolbarButton', function () {
+			browser.assert.hasClass(KVCWriteDetailToolbarArchiveButton, 'OLSKToolbarButton');
+		});
+
+		context('click', function () {
+			
+			before(function () {
+				browser.assert.text('#TestKVCWriteDetailDispatchArchive', '0');
+			});
+			
+			before(function () {
+				return browser.pressButton(KVCWriteDetailToolbarArchiveButton);
+			});
+
+			it('sends KVCWriteDetailDispatchArchive', function () {
+				browser.assert.text('#TestKVCWriteDetailDispatchArchive', '1');
+			});
+		
+		});
+	
+	});
+
+	describe('KVCWriteDetailToolbarArchiveButtonImage', function test_KVCWriteDetailToolbarArchiveButtonImage () {
+
+		it('sets src', function () {
+			browser.assert.elements(`${ KVCWriteDetailToolbarArchiveButtonImage } #_KVCWriteArchive`, 1);
+		});
+	
+	});
+
 	describe('KVCWriteDetailToolbarJumpButton', function test_KVCWriteDetailToolbarJumpButton () {
 		
 		it('classes OLSKLayoutButtonNoStyle', function () {
