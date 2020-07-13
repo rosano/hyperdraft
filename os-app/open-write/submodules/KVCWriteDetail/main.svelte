@@ -105,10 +105,6 @@ const mod = {
 
 	// INTERFACE
 
-	InterfaceArchiveButtonDidClick () {
-		mod.ControlArchive();
-	},
-
 	InterfaceJumpButtonDidClick () {
 		mod.ControlJump();
 	},
@@ -132,10 +128,6 @@ const mod = {
 		};
 
 		mod._ValueEditorPostInitializeQueue.push(inputData);
-	},
-
-	ControlArchive () {
-		KVCWriteDetailDispatchArchive();
 	},
 
 	ControlJump () {
@@ -204,7 +196,7 @@ import KVCWriteInput from '../KVCWriteInput/main.svelte';
 
 	<div class="OLSKToolbarElementGroup">
 		{#if !mod._ValueItem.KVCNoteIsArchived }
-			<button class="KVCWriteDetailToolbarArchiveButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarArchiveButtonText') } on:click={ mod.InterfaceArchiveButtonDidClick }>
+			<button class="KVCWriteDetailToolbarArchiveButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarArchiveButtonText') } on:click={ KVCWriteDetailDispatchArchive }>
 				<div class="KVCWriteDetailToolbarArchiveButtonImage">{@html _KVCWriteArchive }</div>
 			</button>
 		{/if}
