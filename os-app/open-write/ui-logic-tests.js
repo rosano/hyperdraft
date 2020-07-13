@@ -5,21 +5,21 @@ const mainModule = require('./ui-logic.js');
 describe('KVCWriteLogicListSort', function test_KVCWriteLogicListSort() {
 
 	it('sorts by KVCNoteModificationDate descending', function() {
-		var item1 = {
+		const item1 = {
 			KVCNoteModificationDate: new Date(0),
 		};
-		var item2 = {
+		const item2 = {
 			KVCNoteModificationDate: new Date(1),
 		};
 
 		deepEqual([item1, item2].sort(mainModule.KVCWriteLogicListSort), [item2, item1]);
 	});
 
-	it('sorts by KVCNoteCreationDate descending if no KVCNoteModificationDate', function() {
-		var item1 = {
+	it('sorts by KVCNoteCreationDate descending', function() {
+		const item1 = {
 			KVCNoteCreationDate: new Date(0),
 		};
-		var item2 = {
+		const item2 = {
 			KVCNoteCreationDate: new Date(1),
 		};
 
