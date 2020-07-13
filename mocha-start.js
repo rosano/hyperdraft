@@ -1,11 +1,3 @@
-(function KVCMochaBrowerHost() {
-	if (process.env.OLSK_TESTING_BEHAVIOUR !== 'true') {
-		return;
-	}
-
-	browser.site = process.env.KVC_SHARED_REF_HOST + ':' + process.env.PORT;
-})();
-
 const RemoteStorage = require('remotestoragejs');
 
 const KVC_Data = require('./os-app/_shared/KVC_Data/main.js').default;
