@@ -16,6 +16,14 @@ const mod = {
 		return inputData.split('\n').slice(1).join('\n').trim();
 	},
 
+	KVCTemplatePlaintextSnippet (inputData) {
+		if (typeof inputData !== 'string') {
+			throw new Error('KVCErrorInputNotValid');
+		}
+
+		return inputData.length <= 100 ? inputData : inputData.slice(0, 100).split(' ').slice(0, -1).join(' ').concat('…');
+	},
+
 	KVCTemplateRemappedLinks (param1, param2) {
 		if (typeof param1 !== 'string') {
 			throw new Error('KVCErrorInputNotValid');

@@ -10,7 +10,6 @@ import KVCNoteStorage from '../_shared/KVCNote/storage.js';
 import KVCNoteModel from '../_shared/KVCNote/model.js';
 import KVCSettingStorage from '../_shared/KVCSetting/storage.js';
 import KVCVersionStorage from '../_shared/KVCVersion/storage.js';
-import KVCParser from '../_shared/KVCParser/main.js';
 import { OLSK_TESTING_BEHAVIOUR } from 'OLSKTesting';
 import * as OLSKRemoteStoragePackage from '../_shared/__external/OLSKRemoteStorage/main.js'
 const OLSKRemoteStorage = OLSKRemoteStoragePackage.default || OLSKRemoteStoragePackage;
@@ -592,11 +591,11 @@ const mod = {
 	},
 
 	KVCWriteMasterDelegateItemTitle (inputData) {
-		return KVCParser.KVCParserTitleForPlaintext(inputData);
+		return KVCTemplate.KVCTemplatePlaintextTitle(inputData);
 	},
 
 	KVCWriteMasterDelegateItemSnippet (inputData) {
-		return KVCParser.KVCParserSnippetForPlaintext(KVCParser.KVCParserBodyForPlaintext(inputData));
+		return KVCTemplate.KVCTemplatePlaintextSnippet(KVCTemplate.KVCTemplatePlaintextBody(inputData));
 	},
 
 	KVCWriteDetailPublicURLFor (inputData) {
@@ -786,9 +785,9 @@ const mod = {
 		}
 
 		mod.ValueNoteSelected(mod._ValueNotesVisible.filter(function (e) {
-			return KVCParser.KVCParserTitleForPlaintext(e.KVCNoteBody).toLowerCase() === inputData.toLowerCase();
+			return KVCTemplate.KVCTemplatePlaintextTitle(e.KVCNoteBody).toLowerCase() === inputData.toLowerCase();
 		}).concat(mod._ValueNotesVisible.filter(function (e) {
-			return KVCParser.KVCParserTitleForPlaintext(e.KVCNoteBody).toLowerCase().includes(inputData.toLowerCase());
+			return KVCTemplate.KVCTemplatePlaintextTitle(e.KVCNoteBody).toLowerCase().includes(inputData.toLowerCase());
 		})).shift());
 	},
 

@@ -5,8 +5,6 @@ import KVCNoteStorage from './storage.js';
 import KVCNoteModel from './model.js';
 import KVCSettingAction from '../KVCSetting/action.js';
 import KVCVersionAction from '../KVCVersion/action.js';
-import * as KVCParserPackage from '../KVCParser/main.js';
-const KVCParser = KVCParserPackage.default || KVCParserPackage;
 import * as OLSKStringPackage from 'OLSKString';
 const OLSKString = OLSKStringPackage.default || OLSKStringPackage;
 import * as KVCTemplatePackage from '../KVCTemplate/main.js';
@@ -106,7 +104,7 @@ const mod = {
 		return Promise.resolve((await mod.KVCNoteActionQuery(storageClient, {
 			KVCNoteIsPublic: true,
 		})).map(function (e) {
-			return [KVCParser.KVCParserTitleForPlaintext(e.KVCNoteBody), (function() {
+			return [KVCTemplate.KVCTemplatePlaintextTitle(e.KVCNoteBody), (function() {
 				const outputData = mod.KVCNoteActionPublicPath(e, e.KVCNoteID === inputData);
 
 				if (FakeConnected) {
