@@ -28,7 +28,7 @@ export let KVCWriteMasterListItemDispatchSnippet;
 }
 
 .KVCWriteMasterListItemArchived {
-	border-left: 10px solid #e6e6e6;
+	border-left: 10px solid #cccccc;
 	opacity: 0.8;
 }
 
