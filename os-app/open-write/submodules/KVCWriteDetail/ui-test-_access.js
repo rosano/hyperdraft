@@ -142,6 +142,23 @@ describe('KVCWriteDetail_Access', function () {
 		
 	});
 
+	context('KVCNoteIsArchived', function() {
+
+		before(function() {
+			return browser.OLSKVisit(kDefaultRoute, {
+				KVCWriteDetailItem: JSON.stringify(Object.assign(StubNoteObjectValid(), {
+					KVCNoteIsArchived: true,
+				})),
+				KVCWriteDetailConnected: true,
+			});
+		});
+
+		it('hides KVCWriteDetailToolbarArchiveButton', function () {
+			browser.assert.elements(KVCWriteDetailToolbarArchiveButton, 0);
+		});
+
+	});
+
 	context('KVCWriteDetailConnected', function () {
 		
 		before(function() {
