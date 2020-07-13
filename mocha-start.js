@@ -53,7 +53,7 @@ const KVCVersionStorage = require('./os-app/_shared/KVCVersion/storage.js').defa
 				KVCVersionID: 'alfa',
 				KVCVersionNoteID: 'bravo',
 				KVCVersionBody: '',
-				KVCVersionDate: new Date(),
+				KVCVersionDate: new Date('2019-02-23T13:56:36Z'),
 			};
 		},
 
