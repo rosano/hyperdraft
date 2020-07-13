@@ -34,6 +34,10 @@ locals.OLSKPageMetaTags = {
 
 <%- OLSKStringReplaceTokens(KVCVitrineContent, {}) %>
 
+<h2 class="KVCVitrineVideoHeading"><%= OLSKLocalized('KVCVitrineVideoHeadingText') %></h2>
+
+<iframe class="KVCVitrineVideoFrame" <%= IsTestingBehaviour ? 'fake-' : '' %>src="<%= process.env.KVC_VITRINE_VIDEO_URL %>" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
 </article>
 
 <hr />

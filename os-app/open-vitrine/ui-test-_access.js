@@ -8,6 +8,9 @@ Object.entries({
 	KVCVitrineIdentityName: '.KVCVitrineIdentityName',
 
 	KVCVitrineContent: '.KVCVitrineContent',
+
+	KVCVitrineVideoHeading: '.KVCVitrineVideoHeading',
+	KVCVitrineVideoFrame: '.KVCVitrineVideoFrame',
 }).map(function (e) {
 	return global[e.shift()]  = e.pop();
 });
@@ -40,6 +43,14 @@ describe('KVCVitrine_Access', function () {
 	
 	it('shows KVCVitrineContent', function() {
 		browser.assert.elements(KVCVitrineContent, 1);
+	});
+
+	it('shows KVCVitrineVideoHeading', function () {
+		browser.assert.elements(KVCVitrineVideoHeading, 1);
+	});
+
+	it('shows KVCVitrineVideoFrame', function () {
+		browser.assert.elements(KVCVitrineVideoFrame, 1);
 	});
 
 	it('shows ROCORootLink', function() {
