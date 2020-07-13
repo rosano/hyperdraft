@@ -4,12 +4,16 @@ export let KVCWriteMasterListItemDispatchTitle;
 export let KVCWriteMasterListItemDispatchSnippet;
 </script>
 
+<div class="KVCWriteMasterListItem">
+
 <strong class="KVCWriteMasterListItemTitle" aria-hidden="true">{ KVCWriteMasterListItemDispatchTitle(KVCWriteMasterListItemObject.KVCNoteBody) }</strong>
 <span class="KVCWriteMasterListItemSnippet" aria-hidden="true">{ KVCWriteMasterListItemDispatchSnippet(KVCWriteMasterListItemObject.KVCNoteBody) }</span>
 
+</div>
+
 <style>	
 
-:global(.KVCWriteMasterListItem) {
+.KVCWriteMasterListItem {
 	min-height: 46px;
 	padding: 10px;
 	border-bottom: var(--WKCBorderStyle);
