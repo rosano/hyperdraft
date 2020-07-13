@@ -70,6 +70,54 @@ describe('KVCWrite_Archive', function () {
 
 	});
 
+	context('filter', function test_filter () {
+
+		context('partial match', function () {
+
+			before(function () {
+				browser.fill('.OLSKMasterListFilterField', 'charlie');
+			});
+
+			it('filters partial KVCWriteMasterListItem', function() {
+				browser.assert.elements('.KVCWriteMasterListItem', 1);
+			});
+
+			it('sets no KVCWriteMasterListItemSelected', function () {
+				browser.assert.elements('.OLSKResultsListItemSelected', 0);
+			});
+
+			it('sets KVCWriteDetailItem', function () {
+				browser.assert.elements('.OLSKDetailPlaceholder', 1);
+			});
+		
+		});
+
+		context('exact match', function () {
+
+			before(function () {
+				browser.fill('.OLSKMasterListFilterField', 'charlie2');
+			});
+
+			it('filters exact KVCWriteMasterListItem', function() {
+				browser.assert.elements('.KVCWriteMasterListItem', 1);
+			});
+
+			it('sets KVCWriteMasterListItemSelected', function () {
+				browser.assert.elements('.OLSKResultsListItemSelected', 1);
+			});
+
+			it('sets KVCWriteDetailItem', function () {
+				browser.assert.elements('.OLSKDetailPlaceholder', 0);
+			});
+		
+		});
+
+		after(function () {
+			return browser.pressButton('.OLSKInputWrapperClearButton');
+		});
+
+	});
+
 	describe('unarchive', function test_unarchive () {
 
 		before(function () {

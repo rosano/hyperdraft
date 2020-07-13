@@ -811,6 +811,10 @@ const mod = {
 		mod.ValueNoteSelected(mod._ValueNotesVisible.filter(function (e) {
 			return KVCTemplate.KVCTemplatePlaintextTitle(e.KVCNoteBody).toLowerCase() === inputData.toLowerCase();
 		}).concat(mod._ValueNotesVisible.filter(function (e) {
+			if (e.KVCNoteIsArchived) {
+				return false;
+			}
+			
 			return KVCTemplate.KVCTemplatePlaintextTitle(e.KVCNoteBody).toLowerCase().includes(inputData.toLowerCase());
 		})).shift());
 	},
