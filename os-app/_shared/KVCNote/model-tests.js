@@ -64,6 +64,26 @@ describe('KVCNoteModelErrorsFor', function test_KVCNoteModelErrorsFor() {
 		deepEqual(mainModule.KVCNoteModelErrorsFor(StubNoteObjectValid()), null);
 	});
 
+	context('KVCNoteIsArchived', function() {
+
+		it('returns object if boolean', function() {
+			deepEqual(mainModule.KVCNoteModelErrorsFor(Object.assign(StubNoteObjectValid(), {
+				KVCNoteIsArchived: 'true',
+			})), {
+				KVCNoteIsArchived: [
+					'KVCErrorNotBoolean',
+				],
+			});
+		});
+
+		it('returns null', function() {
+			deepEqual(mainModule.KVCNoteModelErrorsFor(Object.assign(StubNoteObjectValid(), {
+				KVCNoteIsArchived: true,
+			})), null);
+		});
+
+	});
+
 	context('KVCNoteIsPublic', function() {
 
 		it('returns object if boolean', function() {

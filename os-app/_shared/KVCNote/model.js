@@ -35,6 +35,14 @@ const mod = {
 			];
 		}
 
+		if (typeof inputData.KVCNoteIsArchived !== 'undefined') {
+			if (typeof inputData.KVCNoteIsArchived !== 'boolean') {
+				errors.KVCNoteIsArchived = [
+					'KVCErrorNotBoolean',
+				];
+			}
+		}
+
 		if (typeof inputData.KVCNoteIsPublic !== 'undefined') {
 			if (typeof inputData.KVCNoteIsPublic !== 'boolean') {
 				errors.KVCNoteIsPublic = [
