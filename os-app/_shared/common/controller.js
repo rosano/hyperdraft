@@ -8,57 +8,14 @@ exports.OLSKControllerRoutes = function() {
 	};
 };
 
-//_ OLSKControllerSharedConnections
-
-exports.OLSKControllerSharedConnections = function() {
-	if (!process.env.WKC_DATABASE_URL) {
-		return {};
-	}
-	
-	return {
-		KVCSharedConnectionMongo: {
-			OLSKConnectionInitializer: exports.KVCSharedConnectionInitializerMongo,
-			OLSKConnectionCleanup: exports.KVCSharedConnectionCleanupMongo,
-		},
-	};
-};
-
-//_ KVCSharedConnectionInitializerMongo
-
-exports.KVCSharedConnectionInitializerMongo = function(olskCallback) {
-	var mongodbPackage = require('mongodb');
-
-	mongodbPackage.MongoClient.connect(process.env.WKC_DATABASE_URL, {
-		useNewUrlParser: true,
-		useUnifiedTopology: true,
-	}, function(err, client) {
-		if (err) {
-			return olskCallback(err);
-		}
-
-		return olskCallback(null, client);
-	});
-};
-
-//_ KVCSharedConnectionCleanupMongo
-
-exports.KVCSharedConnectionCleanupMongo = function(client) {
-	return client.close();
-};
-
-//_ OLSKControllerSharedStaticAssetFolders
-
 exports.OLSKControllerSharedStaticAssetFolders = function() {
 	return [
 		'_shared/__external',
 	];
 };
 
-//_ OLSKControllerSharedMiddlewares
-
 exports.OLSKControllerSharedMiddlewares = function() {
 	return {
-		KVCSharedMiddlewareEnsureDatabase: exports.KVCSharedMiddlewareEnsureDatabase,
 		KVCSharedDropboxAppKeyGuardMiddleware (req, res, next) {
 			return next(require('./logic.js').KVCSharedDropboxAppKeyGuard(process.env));
 		},
@@ -72,18 +29,4 @@ exports.OLSKControllerSharedMiddlewares = function() {
 			return next(require('./logic.js').KVCSharedGitHubLinkGuard(process.env));
 		},
 	};
-};
-
-//_ KVCSharedMiddlewareEnsureDatabase
-
-exports.KVCSharedMiddlewareEnsureDatabase = function(req, res, next) {
-	if (!req.OLSKSharedConnectionFor('KVCSharedConnectionMongo').OLSKConnectionAttempted) {
-		return next(new Error('KVCErrorConnectionNotAttempted'));
-	}
-
-	if (req.OLSKSharedConnectionFor('KVCSharedConnectionMongo').OLSKConnectionError) {
-		return next(req.OLSKSharedConnectionFor('KVCSharedConnectionMongo').OLSKConnectionError);
-	}
-
-	return next();
 };

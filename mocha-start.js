@@ -6,43 +6,6 @@
 	browser.site = process.env.KVC_SHARED_REF_HOST + ':' + process.env.PORT;
 })();
 
-
-(function KVCMochaMongo() {
-	if (!process.env.WKC_DATABASE_URL || !process.env.WKC_SHARED_DATABASE_NAME) {
-		global.KVCTestingMongoSkipped = true;
-		return;
-	}
-
-	var mongodbPackage = require('mongodb');
-
-	before(function(done) {
-		mongodbPackage.MongoClient.connect(process.env.WKC_DATABASE_URL, {
-			useNewUrlParser: true,
-			useUnifiedTopology: true
-		}, function(err, client) {
-			if (err) {
-				throw err;
-			}
-
-			global.KVCTestingMongoClient = client;
-
-			done();
-		});
-	});
-
-	after(function() {
-		if (!global.KVCTestingMongoClient) {
-			return;
-		}
-
-		global.KVCTestingMongoClient.close();
-	});
-
-	beforeEach(async function() {
-		global.KVCTestingMongoClient.db(process.env.WKC_SHARED_DATABASE_NAME).dropDatabase();
-	});
-})();
-
 const RemoteStorage = require('remotestoragejs');
 
 const KVC_Data = require('./os-app/_shared/KVC_Data/main.js').default;

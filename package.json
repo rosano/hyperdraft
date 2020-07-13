@@ -15,9 +15,6 @@
     "// OLDSKOOL": null,
     "OLSKExpress": "olsk/OLSKExpress",
 
-    "// DOM MANIPULATION": null,
-    "d3": "latest",
-
     "// REMOTE STORAGE": null,
     "remotestoragejs": "latest",
     "OLSKRemoteStorage": "olsk/OLSKRemoteStorage",
@@ -29,9 +26,6 @@
     "// MARKDOWN": null,
     "turndown": "latest",
     "showdown": "latest",
-
-    "// PERSIST": null,
-    "mongodb": "^3.0.7",
 
     "// TASKS": null,
     "OLSKTasks": "olsk/OLSKTasks",
@@ -75,10 +69,6 @@
     "marked": "latest",
     "OLSKString": "olsk/OLSKString",
 
-    "// FRONTEND GENERAL": null,
-    "identicon.js": "latest",
-    "blueimp-md5": "latest",
-    
     "// FRONTEND ROUTES ACCESS": null,
     "OLSKRouting": "olsk/OLSKRouting",
 
@@ -88,12 +78,6 @@
 
     "// FRONTEND SERVICE WORKER": null,
     "OLSKServiceWorker": "olsk/OLSKServiceWorker",
-
-    "// FRONTEND DATES": null,
-    "moment": "latest",
-
-    "// FRONTEND SPINNER": null,
-    "ispinner.css": "latest",
 
     "// FRONTEND URL PARSE": null,
     "url-parse": "latest",

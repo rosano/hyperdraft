@@ -39,15 +39,10 @@
 	const pathPackage = require('path');
 
 	OLSKAssets.OLSKAssetsCopyAssetsFromTo([
-		'blueimp-md5',
 		'codemirror',
-		'd3',
 		'file-saver',
-		'identicon.js',
-		'ispinner.css',
 		'jszip',
 		'launchlet',
-		'moment',
 		'normalize.css',
 		'OLSKInternational',
 		'OLSKLayout',
