@@ -10,7 +10,7 @@ const KVCWriteMasterListItem = new RollupStart({
 			return `_KVCWriteMasterListItemDispatchSnippet(${ inputData })`;
 		}),
 	}, Object.fromEntries(Array.from((new window.URLSearchParams(window.location.search)).entries()).map(function (e) {
-		if (e[0] === 'KVCWriteMasterListItemObject') {
+		if (['KVCWriteMasterListItemObject', 'KVCNoteIsArchived'].includes(e[0])) {
 			e[1] = JSON.parse(e[1]);
 		}
 

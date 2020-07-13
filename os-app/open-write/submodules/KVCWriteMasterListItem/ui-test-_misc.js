@@ -34,4 +34,21 @@ describe('KVCWriteMasterListItem_Misc', function () {
 	
 	});
 
+	context('KVCNoteIsArchived', function () {
+		
+		before(function() {
+			return browser.OLSKVisit(kDefaultRoute, {
+				KVCWriteMasterListItemObject: JSON.stringify({
+					KVCNoteBody: 'alfa\nbravo',
+					KVCNoteIsArchived: true,
+				}),
+			});
+		});
+
+		it('classes KVCWriteMasterListItemIsArchived', function () {
+			browser.assert.hasClass(KVCWriteMasterListItem, 'KVCWriteMasterListItemIsArchived');
+		});
+	
+	});
+
 });
