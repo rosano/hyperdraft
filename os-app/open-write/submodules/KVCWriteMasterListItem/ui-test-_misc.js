@@ -45,8 +45,8 @@ describe('KVCWriteMasterListItem_Misc', function () {
 			});
 		});
 
-		it('classes KVCWriteMasterListItemIsArchived', function () {
-			browser.assert.hasClass(KVCWriteMasterListItem, 'KVCWriteMasterListItemIsArchived');
+		it('classes KVCWriteMasterListItemArchived', function () {
+			browser.assert.hasClass(KVCWriteMasterListItem, 'KVCWriteMasterListItemArchived');
 		});
 	
 	});
