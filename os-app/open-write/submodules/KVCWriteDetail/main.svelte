@@ -84,6 +84,26 @@ const mod = {
 	DataRecipes () {
 		const outputData = [];
 
+		if (mod._ValueItem && !mod._ValueItem.KVCNoteIsArchived) {
+			outputData.push({
+				LCHRecipeSignature: 'KVCWriteDetailLauncherItemArchive',
+				LCHRecipeName: OLSKLocalized('KVCWriteDetailToolbarArchiveButtonText'),
+				LCHRecipeCallback: function KVCWriteDetailLauncherItemArchive () {
+					KVCWriteDetailDispatchArchive()
+				},
+			})
+		}
+
+		if (mod._ValueItem && mod._ValueItem.KVCNoteIsArchived) {
+			outputData.push({
+				LCHRecipeSignature: 'KVCWriteDetailLauncherItemUnarchive',
+				LCHRecipeName: OLSKLocalized('KVCWriteDetailToolbarUnarchiveButtonText'),
+				LCHRecipeCallback: function KVCWriteDetailLauncherItemUnarchive () {
+					KVCWriteDetailDispatchUnarchive()
+				},
+			})
+		}
+
 		if (KVCWriteDetailConnected) {
 			outputData.push({
 				LCHRecipeSignature: 'KVCWriteDetailLauncherItemSetAsRootPage',

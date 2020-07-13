@@ -61,7 +61,23 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 		
 			});
 
-			context('KVCNoteModelIsPublic', function() {
+			describe('KVCWriteDetailLauncherItemArchive', function test_KVCWriteDetailLauncherItemArchive() {
+				
+				before(function () {
+					return browser.pressButton('.OLSKAppToolbarLauncherButton');
+				});
+
+				before(function () {
+					return browser.fill('.LCHLauncherFilterInput', 'KVCWriteDetailLauncherItemArchive');
+				});
+
+				it('localizes KVCWriteDetailLauncherItemArchive', function () {
+					browser.assert.text('.LCHLauncherPipeItem', uLocalized('KVCWriteDetailToolbarArchiveButtonText'));
+				});
+
+			});
+
+			context('KVCNoteModelIsArchived', function() {
 
 				before(function() {
 					return browser.OLSKVisit(kDefaultRoute, {
@@ -74,6 +90,22 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 
 				it('localizes KVCWriteDetailToolbarUnarchiveButton', function () {
 					browser.assert.attribute(KVCWriteDetailToolbarUnarchiveButton, 'title', uLocalized('KVCWriteDetailToolbarUnarchiveButtonText'));
+				});
+
+				describe('KVCWriteDetailLauncherItemUnarchive', function test_KVCWriteDetailLauncherItemUnarchive() {
+					
+					before(function () {
+						return browser.pressButton('.OLSKAppToolbarLauncherButton');
+					});
+
+					before(function () {
+						return browser.fill('.LCHLauncherFilterInput', 'KVCWriteDetailLauncherItemUnarchive');
+					});
+
+					it('localizes KVCWriteDetailLauncherItemUnarchive', function () {
+						browser.assert.text('.LCHLauncherPipeItem', uLocalized('KVCWriteDetailToolbarUnarchiveButtonText'));
+					});
+
 				});
 
 			});

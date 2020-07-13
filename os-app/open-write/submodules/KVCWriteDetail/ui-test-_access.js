@@ -145,6 +145,38 @@ describe('KVCWriteDetail_Access', function () {
 		it('shows KVCWriteInput', function () {
 			browser.assert.elements('.KVCWriteInput', 1);
 		});
+
+		context('KVCWriteDetailLauncherItemArchive', function () {
+			
+			before(function () {
+				return browser.pressButton('.OLSKAppToolbarLauncherButton');
+			});
+
+			before(function () {
+				return browser.fill('.LCHLauncherFilterInput', 'KVCWriteDetailLauncherItemArchive');
+			});
+
+			it('shows LCHLauncherPipeItem', function () {
+				browser.assert.elements('.LCHLauncherPipeItem', 1);
+			});
+		
+		});
+
+		context('KVCWriteDetailLauncherItemUnarchive', function () {
+			
+			before(function () {
+				return browser.pressButton('.OLSKAppToolbarLauncherButton');
+			});
+
+			before(function () {
+				return browser.fill('.LCHLauncherFilterInput', 'KVCWriteDetailLauncherItemUnarchive');
+			});
+
+			it('hides LCHLauncherPipeItem', function () {
+				browser.assert.elements('.LCHLauncherPipeItem', 0);
+			});
+		
+		});
 		
 	});
 
@@ -169,6 +201,38 @@ describe('KVCWriteDetail_Access', function () {
 
 		it('shows KVCWriteDetailToolbarUnarchiveButtonImage', function () {
 			browser.assert.elements(KVCWriteDetailToolbarUnarchiveButtonImage, 1);
+		});
+
+		context('KVCWriteDetailLauncherItemArchive', function () {
+			
+			before(function () {
+				return browser.pressButton('.OLSKAppToolbarLauncherButton');
+			});
+
+			before(function () {
+				return browser.fill('.LCHLauncherFilterInput', 'KVCWriteDetailLauncherItemArchive');
+			});
+
+			it('hides LCHLauncherPipeItem', function () {
+				browser.assert.elements('.LCHLauncherPipeItem', 0);
+			});
+		
+		});
+
+		context('KVCWriteDetailLauncherItemUnarchive', function () {
+			
+			before(function () {
+				return browser.pressButton('.OLSKAppToolbarLauncherButton');
+			});
+
+			before(function () {
+				return browser.fill('.LCHLauncherFilterInput', 'KVCWriteDetailLauncherItemUnarchive');
+			});
+
+			it('shows LCHLauncherPipeItem', function () {
+				browser.assert.elements('.LCHLauncherPipeItem', 1);
+			});
+		
 		});
 
 	});

@@ -623,6 +623,46 @@ describe('KVCWriteDetail_Misc', function () {
 
 	});
 
+	describe('KVCWriteDetailLauncherItemArchive', function test_KVCWriteDetailLauncherItemArchive() {
+		
+		before(function () {
+			browser.assert.text('#TestKVCWriteDetailDispatchArchive', '0');
+		});
+		
+		before(function () {
+			return uLaunch('KVCWriteDetailLauncherItemArchive');
+		});
+
+		it('sends KVCWriteDetailDispatchArchive', function () {
+			browser.assert.text('#TestKVCWriteDetailDispatchArchive', '1');
+		});
+
+	});
+
+	describe('KVCWriteDetailLauncherItemUnarchive', function test_KVCWriteDetailLauncherItemUnarchive() {
+		
+		before(function() {
+			return browser.OLSKVisit(kDefaultRoute, {
+				KVCWriteDetailItem: JSON.stringify(Object.assign(StubNoteObjectValid(), {
+					KVCNoteIsArchived: true,
+				})),
+			});
+		});
+
+		before(function () {
+			browser.assert.text('#TestKVCWriteDetailDispatchUnarchive', '0');
+		});
+		
+		before(function () {
+			return uLaunch('KVCWriteDetailLauncherItemUnarchive');
+		});
+
+		it('sends KVCWriteDetailDispatchUnarchive', function () {
+			browser.assert.text('#TestKVCWriteDetailDispatchUnarchive', '1');
+		});
+
+	});
+
 	describe('KVCWriteDetailLauncherItemSetAsRootPage', function test_KVCWriteDetailLauncherItemSetAsRootPage() {
 		
 		before(function() {
