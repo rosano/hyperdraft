@@ -12,6 +12,10 @@ const mod = {
 	},
 
 	KVCWriteLogicListSort (a, b) {
+		if (a.KVCNoteIsArchived !== b.KVCNoteIsArchived) {
+			return a.KVCNoteIsArchived ? 1 : -1;
+		}
+
 		if (b.KVCNoteModificationDate && a.KVCNoteModificationDate) {
 			return b.KVCNoteModificationDate - a.KVCNoteModificationDate;
 		}

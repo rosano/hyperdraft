@@ -26,6 +26,18 @@ describe('KVCWriteLogicListSort', function test_KVCWriteLogicListSort() {
 		deepEqual([item1, item2].sort(mainModule.KVCWriteLogicListSort), [item2, item1]);
 	});
 
+	it('sorts KVCNoteIsArchived below others', function() {
+		const item1 = {
+			KVCNoteCreationDate: new Date(0),
+		};
+		const item2 = {
+			KVCNoteCreationDate: new Date(1),
+			KVCNoteIsArchived: true,
+		};
+
+		deepEqual([item1, item2].sort(mainModule.KVCWriteLogicListSort), [item1, item2]);
+	});
+
 });
 
 describe('KVCWriteFilterFunction', function test_KVCWriteFilterFunction() {
