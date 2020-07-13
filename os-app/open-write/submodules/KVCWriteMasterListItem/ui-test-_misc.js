@@ -4,8 +4,9 @@ describe('KVCWriteMasterListItem_Misc', function () {
 
 	before(function() {
 		return browser.OLSKVisit(kDefaultRoute, {
-			KVCWriteMasterListItemTitle: 'bravo',
-			KVCWriteMasterListItemSnippet: 'charlie',
+			KVCWriteMasterListItemObject: JSON.stringify({
+				KVCNoteBody: 'alfa\nbravo',
+			}),
 		});
 	});
 
@@ -15,8 +16,8 @@ describe('KVCWriteMasterListItem_Misc', function () {
 			browser.assert.attribute(KVCWriteMasterListItemTitle, 'aria-hidden', 'true');
 		});
 
-		it('binds KVCWriteMasterListItemTitle', function () {
-			browser.assert.text(KVCWriteMasterListItemTitle, 'bravo');
+		it('calls KVCWriteMasterListItemDispatchTitle', function () {
+			browser.assert.text(KVCWriteMasterListItemTitle, '_KVCWriteMasterListItemDispatchTitle(alfa bravo)');
 		});
 	
 	});
@@ -27,8 +28,8 @@ describe('KVCWriteMasterListItem_Misc', function () {
 			browser.assert.attribute(KVCWriteMasterListItemSnippet, 'aria-hidden', 'true');
 		});
 
-		it('binds KVCWriteMasterListItemSnippet', function () {
-			browser.assert.text(KVCWriteMasterListItemSnippet, 'charlie');
+		it('calls KVCWriteMasterListItemDispatchSnippet', function () {
+			browser.assert.text(KVCWriteMasterListItemSnippet, '_KVCWriteMasterListItemDispatchSnippet(alfa bravo)');
 		});
 	
 	});

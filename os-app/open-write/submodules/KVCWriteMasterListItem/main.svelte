@@ -1,10 +1,11 @@
 <script>
-export let KVCWriteMasterListItemTitle;
-export let KVCWriteMasterListItemSnippet;
+export let KVCWriteMasterListItemObject;
+export let KVCWriteMasterListItemDispatchTitle;
+export let KVCWriteMasterListItemDispatchSnippet;
 </script>
 
-<strong class="KVCWriteMasterListItemTitle" aria-hidden="true">{ KVCWriteMasterListItemTitle }</strong>
-<span class="KVCWriteMasterListItemSnippet" aria-hidden="true">{ KVCWriteMasterListItemSnippet }</span>
+<strong class="KVCWriteMasterListItemTitle" aria-hidden="true">{ KVCWriteMasterListItemDispatchTitle(KVCWriteMasterListItemObject.KVCNoteBody) }</strong>
+<span class="KVCWriteMasterListItemSnippet" aria-hidden="true">{ KVCWriteMasterListItemDispatchSnippet(KVCWriteMasterListItemObject.KVCNoteBody) }</span>
 
 <style>	
 

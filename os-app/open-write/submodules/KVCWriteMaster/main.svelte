@@ -79,8 +79,9 @@ import KVCWriteMasterListItem from '../KVCWriteMasterListItem/main.svelte';
 	</div>
 
 	<KVCWriteMasterListItem
-		KVCWriteMasterListItemTitle={ KVCWriteMasterLogic.KVCWriteMasterTruncatedTitle(KVCWriteMasterDelegateItemTitle(item.KVCNoteBody)) }
-		KVCWriteMasterListItemSnippet={ KVCWriteMasterDelegateItemSnippet(item.KVCNoteBody) }
+		KVCWriteMasterListItemObject={ item }
+		KVCWriteMasterListItemDispatchTitle={ (inputData) => KVCWriteMasterLogic.KVCWriteMasterTruncatedTitle(KVCWriteMasterDelegateItemTitle(inputData)) }
+		KVCWriteMasterListItemDispatchSnippet={ (inputData) => KVCWriteMasterDelegateItemSnippet(inputData) }
 		/>
 </OLSKMasterList>	
 

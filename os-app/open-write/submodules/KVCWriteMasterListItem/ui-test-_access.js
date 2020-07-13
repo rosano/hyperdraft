@@ -11,8 +11,7 @@ describe('KVCWriteMasterListItem_Access', function () {
 
 	before(function() {
 		return browser.OLSKVisit(kDefaultRoute, {
-			KVCWriteMasterListItemTitle: 'bravo',
-			KVCWriteMasterListItemSnippet: 'charlie',
+			KVCWriteMasterListItemObject: JSON.stringify({}),
 		});
 	});
 
