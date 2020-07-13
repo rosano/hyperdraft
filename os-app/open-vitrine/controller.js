@@ -2,6 +2,14 @@ exports.OLSKControllerUseLivereload = function() {
 	return process.env.NODE_ENV === 'development';
 };
 
+exports.OLSKControllerSharedMiddlewares = function() {
+	return {
+		KVCVitrineRouteGuardMiddleware (req, res, next) {
+			return next(require('./logic.js').KVCVitrineRouteGuard(process.env));
+		},
+	};
+};
+
 exports.OLSKControllerRoutes = function() {
 	return [{
 		OLSKRoutePath: '/vitrine',
@@ -25,6 +33,8 @@ exports.OLSKControllerRoutes = function() {
 		},
 		OLSKRouteLanguages: ['en'],
 		OLSKRouteMiddlewares: [
+			'KVCVitrineRouteGuardMiddleware',
+			'KVCSharedDonateLinkGuardMiddleware',
 			'KVCSharedGitHubLinkGuardMiddleware',
 		],
 	}];
