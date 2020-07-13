@@ -401,6 +401,14 @@ const mod = {
 		
 		mod.KVCWriteDetailInstance.modPublic.KVCWriteDetailEditorFocus();
 	},
+
+	ControlNoteArchive (inputData) {
+		inputData.KVCNoteIsArchived = true;
+
+		mod.ControlNoteSave(inputData);
+
+		mod.ControlNoteSelect(inputData); // #purge-svelte-force-update
+	},
 	
 	ControlNoteJump (inputData) {
 		window.Launchlet.LCHSingletonCreate({
@@ -631,6 +639,10 @@ const mod = {
 				inline: 'center',
 			});
 		});
+	},
+
+	KVCWriteDetailDispatchArchive () {
+		mod.ControlNoteArchive(mod._ValueNoteSelected);
 	},
 
 	KVCWriteDetailDispatchJump (inputData) {
@@ -942,6 +954,7 @@ import OLSKStorageWidget from 'OLSKStorageWidget';
 		KVCWriteDetailItemIsRootPage={ mod._ValueNoteSelected && mod.DataSetting('KVCSettingPublicRootPageID') ? mod._ValueNoteSelected.KVCNoteID === mod.DataSettingValue('KVCSettingPublicRootPageID') : false }
 		KVCWriteDetailPublicURLFor={ mod.KVCWriteDetailPublicURLFor }
 		KVCWriteDetailDispatchBack={ mod.KVCWriteDetailDispatchBack }
+		KVCWriteDetailDispatchArchive={ mod.KVCWriteDetailDispatchArchive }
 		KVCWriteDetailDispatchJump={ mod.KVCWriteDetailDispatchJump }
 		KVCWriteDetailDispatchConnect={ mod.KVCWriteDetailDispatchConnect }
 		KVCWriteDetailDispatchPublish={ mod.KVCWriteDetailDispatchPublish }
