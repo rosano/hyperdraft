@@ -70,4 +70,36 @@ describe('KVCWrite_Archive', function () {
 
 	});
 
+	describe('unarchive', function test_unarchive () {
+
+		before(function () {
+			return browser.click('.OLSKResultsListItem:nth-child(3) .KVCWriteMasterListItem');
+		});
+
+		before(function () {
+			return browser.fill('.KVCWriteInputFieldDebug', 'charlie3');
+		});
+
+		before(function () {
+			return browser.pressButton('.KVCWriteDetailToolbarUnarchiveButton');
+		});
+
+		it('skips sort', function () {
+			browser.assert.text('.KVCWriteMasterListItem', 'alfa2 bravo charlie3');
+		});
+
+	});
+
+	describe('deselect', function test_deselect () {
+
+		before(function () {
+			return browser.OLSKFireKeyboardEvent(browser.window, 'Escape');
+		});
+
+		it('sorts below others', function () {
+			browser.assert.text('.KVCWriteMasterListItem', 'charlie3 alfa2 bravo');
+		});
+
+	});
+
 });

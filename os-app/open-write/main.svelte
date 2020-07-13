@@ -410,6 +410,14 @@ const mod = {
 		mod.ControlNoteSelect(inputData); // #purge-svelte-force-update
 	},
 	
+	ControlNoteUnarchive (inputData) {
+		delete inputData.KVCNoteIsArchived;
+
+		mod.ControlNoteSave(inputData);
+
+		mod.ControlNoteSelect(inputData); // #purge-svelte-force-update
+	},
+	
 	ControlNoteJump (inputData) {
 		window.Launchlet.LCHSingletonCreate({
 			LCHOptionRecipes: inputData,
@@ -643,6 +651,10 @@ const mod = {
 
 	KVCWriteDetailDispatchArchive () {
 		mod.ControlNoteArchive(mod._ValueNoteSelected);
+	},
+
+	KVCWriteDetailDispatchUnarchive () {
+		mod.ControlNoteUnarchive(mod._ValueNoteSelected);
 	},
 
 	KVCWriteDetailDispatchJump (inputData) {
@@ -955,6 +967,7 @@ import OLSKStorageWidget from 'OLSKStorageWidget';
 		KVCWriteDetailPublicURLFor={ mod.KVCWriteDetailPublicURLFor }
 		KVCWriteDetailDispatchBack={ mod.KVCWriteDetailDispatchBack }
 		KVCWriteDetailDispatchArchive={ mod.KVCWriteDetailDispatchArchive }
+		KVCWriteDetailDispatchUnarchive={ mod.KVCWriteDetailDispatchUnarchive }
 		KVCWriteDetailDispatchJump={ mod.KVCWriteDetailDispatchJump }
 		KVCWriteDetailDispatchConnect={ mod.KVCWriteDetailDispatchConnect }
 		KVCWriteDetailDispatchPublish={ mod.KVCWriteDetailDispatchPublish }
