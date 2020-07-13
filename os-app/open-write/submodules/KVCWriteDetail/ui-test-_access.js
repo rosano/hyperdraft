@@ -8,6 +8,8 @@ Object.entries({
 	KVCWriteDetailToolbarBackButtonImage: '.KVCWriteDetailToolbarBackButtonImage',
 	KVCWriteDetailToolbarArchiveButton: '.KVCWriteDetailToolbarArchiveButton',
 	KVCWriteDetailToolbarArchiveButtonImage: '.KVCWriteDetailToolbarArchiveButtonImage',
+	KVCWriteDetailToolbarUnarchiveButton: '.KVCWriteDetailToolbarUnarchiveButton',
+	KVCWriteDetailToolbarUnarchiveButtonImage: '.KVCWriteDetailToolbarUnarchiveButtonImage',
 	KVCWriteDetailToolbarJumpButton: '.KVCWriteDetailToolbarJumpButton',
 	KVCWriteDetailToolbarJumpButtonImage: '.KVCWriteDetailToolbarJumpButtonImage',
 	KVCWriteDetailToolbarConnectButton: '.KVCWriteDetailToolbarConnectButton',
@@ -84,6 +86,10 @@ describe('KVCWriteDetail_Access', function () {
 			browser.assert.elements(KVCWriteDetailToolbarArchiveButtonImage, 1);
 		});
 
+		it('hides KVCWriteDetailToolbarUnarchiveButton', function () {
+			browser.assert.elements(KVCWriteDetailToolbarUnarchiveButton, 0);
+		});
+
 		it('shows KVCWriteDetailToolbarJumpButton', function () {
 			browser.assert.elements(KVCWriteDetailToolbarJumpButton, 1);
 		});
@@ -155,6 +161,14 @@ describe('KVCWriteDetail_Access', function () {
 
 		it('hides KVCWriteDetailToolbarArchiveButton', function () {
 			browser.assert.elements(KVCWriteDetailToolbarArchiveButton, 0);
+		});
+
+		it('shows KVCWriteDetailToolbarUnarchiveButton', function () {
+			browser.assert.elements(KVCWriteDetailToolbarUnarchiveButton, 1);
+		});
+
+		it('shows KVCWriteDetailToolbarUnarchiveButtonImage', function () {
+			browser.assert.elements(KVCWriteDetailToolbarUnarchiveButtonImage, 1);
 		});
 
 	});

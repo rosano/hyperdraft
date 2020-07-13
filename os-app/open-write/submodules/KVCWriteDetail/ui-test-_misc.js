@@ -148,6 +148,54 @@ describe('KVCWriteDetail_Misc', function () {
 	
 	});
 
+	describe('KVCWriteDetailToolbarUnarchiveButton', function test_KVCWriteDetailToolbarUnarchiveButton () {
+		
+		before(function() {
+			return browser.OLSKVisit(kDefaultRoute, {
+				KVCWriteDetailItem: JSON.stringify(Object.assign(StubNoteObjectValid(), {
+					KVCNoteIsArchived: true,
+				})),
+			});
+		});
+
+		it('classes OLSKLayoutButtonNoStyle', function () {
+			browser.assert.hasClass(KVCWriteDetailToolbarUnarchiveButton, 'OLSKLayoutButtonNoStyle');
+		});
+
+		it('classes OLSKLayoutElementTappable', function () {
+			browser.assert.hasClass(KVCWriteDetailToolbarUnarchiveButton, 'OLSKLayoutElementTappable');
+		});
+
+		it('classes OLSKToolbarButton', function () {
+			browser.assert.hasClass(KVCWriteDetailToolbarUnarchiveButton, 'OLSKToolbarButton');
+		});
+
+		context('click', function () {
+			
+			before(function () {
+				browser.assert.text('#TestKVCWriteDetailDispatchUnarchive', '0');
+			});
+			
+			before(function () {
+				return browser.pressButton(KVCWriteDetailToolbarUnarchiveButton);
+			});
+
+			it('sends KVCWriteDetailDispatchUnarchive', function () {
+				browser.assert.text('#TestKVCWriteDetailDispatchUnarchive', '1');
+			});
+		
+		});
+	
+	});
+
+	describe('KVCWriteDetailToolbarUnarchiveButtonImage', function test_KVCWriteDetailToolbarUnarchiveButtonImage () {
+
+		it('sets src', function () {
+			browser.assert.elements(`${ KVCWriteDetailToolbarUnarchiveButtonImage } #_KVCWriteUnarchive`, 1);
+		});
+	
+	});
+
 	describe('KVCWriteDetailToolbarJumpButton', function test_KVCWriteDetailToolbarJumpButton () {
 		
 		it('classes OLSKLayoutButtonNoStyle', function () {

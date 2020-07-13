@@ -4,6 +4,7 @@ export let KVCWriteDetailItemIsRootPage = false;
 export let KVCWriteDetailPublicURLFor;
 export let KVCWriteDetailDispatchBack;
 export let KVCWriteDetailDispatchArchive;
+export let KVCWriteDetailDispatchUnarchive;
 export let KVCWriteDetailDispatchJump;
 export let KVCWriteDetailDispatchConnect;
 export let KVCWriteDetailDispatchPublish;
@@ -171,6 +172,7 @@ const mod = {
 import OLSKDetailPlaceholder from 'OLSKDetailPlaceholder';
 import _OLSKSharedBack from '../../../_shared/__external/OLSKUIAssets/_OLSKSharedBack.svg';
 import _KVCWriteArchive from './ui-assets/_KVCWriteArchive.svg';
+import _KVCWriteUnarchive from './ui-assets/_KVCWriteUnarchive.svg';
 import _KVCWriteJump from './ui-assets/_KVCWriteJump.svg';
 import _KVCWritePublish from './ui-assets/_KVCWritePublish.svg';
 import _KVCWriteRetract from './ui-assets/_KVCWriteRetract.svg';
@@ -198,6 +200,12 @@ import KVCWriteInput from '../KVCWriteInput/main.svelte';
 		{#if !mod._ValueItem.KVCNoteIsArchived }
 			<button class="KVCWriteDetailToolbarArchiveButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarArchiveButtonText') } on:click={ KVCWriteDetailDispatchArchive }>
 				<div class="KVCWriteDetailToolbarArchiveButtonImage">{@html _KVCWriteArchive }</div>
+			</button>
+		{/if}
+
+		{#if mod._ValueItem.KVCNoteIsArchived }
+			<button class="KVCWriteDetailToolbarUnarchiveButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarUnarchiveButtonText') } on:click={ KVCWriteDetailDispatchUnarchive }>
+				<div class="KVCWriteDetailToolbarUnarchiveButtonImage">{@html _KVCWriteUnarchive }</div>
 			</button>
 		{/if}
 

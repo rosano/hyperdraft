@@ -61,6 +61,23 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 		
 			});
 
+			context('KVCNoteModelIsPublic', function() {
+
+				before(function() {
+					return browser.OLSKVisit(kDefaultRoute, {
+						OLSKRoutingLanguage: languageCode,
+						KVCWriteDetailItem: JSON.stringify(Object.assign(StubNoteObjectValid(), {
+							KVCNoteIsArchived: true,
+						})),
+					});
+				});
+
+				it('localizes KVCWriteDetailToolbarUnarchiveButton', function () {
+					browser.assert.attribute(KVCWriteDetailToolbarUnarchiveButton, 'title', uLocalized('KVCWriteDetailToolbarUnarchiveButtonText'));
+				});
+
+			});
+
 			context('KVCWriteDetailConnected', function() {
 
 				before(function() {
