@@ -54,14 +54,14 @@ const KVCWriteDetail = new RollupStart({
 		KVCWriteDetailDispatchBack: (function _KVCWriteDetailDispatchBack () {
 			window.TestKVCWriteDetailDispatchBack.innerHTML = parseInt(window.TestKVCWriteDetailDispatchBack.innerHTML) + 1;
 		}),
+		KVCWriteDetailDispatchJump: (function _KVCWriteDetailDispatchJump () {
+			window.TestKVCWriteDetailDispatchJump.innerHTML = parseInt(window.TestKVCWriteDetailDispatchJump.innerHTML) + 1;
+		}),
 		KVCWriteDetailDispatchArchive: (function _KVCWriteDetailDispatchArchive () {
 			window.TestKVCWriteDetailDispatchArchive.innerHTML = parseInt(window.TestKVCWriteDetailDispatchArchive.innerHTML) + 1;
 		}),
 		KVCWriteDetailDispatchUnarchive: (function _KVCWriteDetailDispatchUnarchive () {
 			window.TestKVCWriteDetailDispatchUnarchive.innerHTML = parseInt(window.TestKVCWriteDetailDispatchUnarchive.innerHTML) + 1;
-		}),
-		KVCWriteDetailDispatchJump: (function _KVCWriteDetailDispatchJump () {
-			window.TestKVCWriteDetailDispatchJump.innerHTML = parseInt(window.TestKVCWriteDetailDispatchJump.innerHTML) + 1;
 		}),
 		KVCWriteDetailDispatchConnect: (function _KVCWriteDetailDispatchConnect () {
 			window.TestKVCWriteDetailDispatchConnect.innerHTML = parseInt(window.TestKVCWriteDetailDispatchConnect.innerHTML) + 1;

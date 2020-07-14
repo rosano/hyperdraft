@@ -3,9 +3,9 @@ export let KVCWriteDetailConnected = false;
 export let KVCWriteDetailItemIsRootPage = false;
 export let KVCWriteDetailPublicURLFor;
 export let KVCWriteDetailDispatchBack;
+export let KVCWriteDetailDispatchJump;
 export let KVCWriteDetailDispatchArchive;
 export let KVCWriteDetailDispatchUnarchive;
-export let KVCWriteDetailDispatchJump;
 export let KVCWriteDetailDispatchConnect;
 export let KVCWriteDetailDispatchPublish;
 export let KVCWriteDetailDispatchRetract;
@@ -191,9 +191,9 @@ const mod = {
 
 import OLSKDetailPlaceholder from 'OLSKDetailPlaceholder';
 import _OLSKSharedBack from '../../../_shared/__external/OLSKUIAssets/_OLSKSharedBack.svg';
+import _KVCWriteJump from './ui-assets/_KVCWriteJump.svg';
 import _KVCWriteArchive from './ui-assets/_KVCWriteArchive.svg';
 import _KVCWriteUnarchive from './ui-assets/_KVCWriteUnarchive.svg';
-import _KVCWriteJump from './ui-assets/_KVCWriteJump.svg';
 import _KVCWritePublish from './ui-assets/_KVCWritePublish.svg';
 import _KVCWriteRetract from './ui-assets/_KVCWriteRetract.svg';
 import _KVCWriteVersions from './ui-assets/_KVCWriteVersions.svg';
@@ -217,6 +217,10 @@ import KVCWriteInput from '../KVCWriteInput/main.svelte';
 	</div>
 
 	<div class="OLSKToolbarElementGroup">
+		<button class="KVCWriteDetailToolbarJumpButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarJumpButtonText') } accesskey="r" tabindex="-1" disabled={ !mod._ValueHeaderTokens.length } on:click={ mod.InterfaceJumpButtonDidClick }>
+			<div class="KVCWriteDetailToolbarJumpButtonImage">{@html _KVCWriteJump }</div>
+		</button>
+
 		{#if !mod._ValueItem.KVCNoteIsArchived }
 			<button class="KVCWriteDetailToolbarArchiveButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarArchiveButtonText') } on:click={ KVCWriteDetailDispatchArchive }>
 				<div class="KVCWriteDetailToolbarArchiveButtonImage">{@html _KVCWriteArchive }</div>
@@ -228,10 +232,6 @@ import KVCWriteInput from '../KVCWriteInput/main.svelte';
 				<div class="KVCWriteDetailToolbarUnarchiveButtonImage">{@html _KVCWriteUnarchive }</div>
 			</button>
 		{/if}
-
-		<button class="KVCWriteDetailToolbarJumpButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarJumpButtonText') } accesskey="r" tabindex="-1" disabled={ !mod._ValueHeaderTokens.length } on:click={ mod.InterfaceJumpButtonDidClick }>
-			<div class="KVCWriteDetailToolbarJumpButtonImage">{@html _KVCWriteJump }</div>
-		</button>
 
 		{#if !KVCWriteDetailConnected }
 			<button class="KVCWriteDetailToolbarConnectButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarPublishButtonText') } on:click={ () => window.confirm(OLSKLocalized('KVCWriteDetailConnectConfirmText')) && KVCWriteDetailDispatchConnect() }>

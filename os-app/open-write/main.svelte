@@ -416,6 +416,20 @@ const mod = {
 		
 		mod.KVCWriteDetailInstance.modPublic.KVCWriteDetailEditorFocus();
 	},
+	
+	ControlNoteJump (inputData) {
+		window.Launchlet.LCHSingletonCreate({
+			LCHOptionRecipes: inputData,
+			LCHOptionMode: window.Launchlet.LCHModePreview,
+			LCHOptionCompletionHandler () {
+				if (mod.DataIsMobile()) {
+					return;
+				}
+
+				mod.KVCWriteDetailInstance.modPublic.KVCWriteDetailEditorFocus();
+			},
+		});
+	},
 
 	ControlNoteArchive (inputData) {
 		inputData.KVCNoteIsArchived = true;
@@ -431,20 +445,6 @@ const mod = {
 		mod.ControlNoteSave(inputData);
 
 		mod.ControlNoteSelect(inputData); // #purge-svelte-force-update
-	},
-	
-	ControlNoteJump (inputData) {
-		window.Launchlet.LCHSingletonCreate({
-			LCHOptionRecipes: inputData,
-			LCHOptionMode: window.Launchlet.LCHModePreview,
-			LCHOptionCompletionHandler () {
-				if (mod.DataIsMobile()) {
-					return;
-				}
-
-				mod.KVCWriteDetailInstance.modPublic.KVCWriteDetailEditorFocus();
-			},
-		});
 	},
 	
 	async ControlNotePublish (inputData) {
@@ -681,16 +681,16 @@ const mod = {
 		});
 	},
 
+	KVCWriteDetailDispatchJump (inputData) {
+		mod.ControlNoteJump(inputData);
+	},
+
 	KVCWriteDetailDispatchArchive () {
 		mod.ControlNoteArchive(mod._ValueNoteSelected);
 	},
 
 	KVCWriteDetailDispatchUnarchive () {
 		mod.ControlNoteUnarchive(mod._ValueNoteSelected);
-	},
-
-	KVCWriteDetailDispatchJump (inputData) {
-		mod.ControlNoteJump(inputData);
 	},
 
 	KVCWriteDetailDispatchConnect () {
@@ -1010,9 +1010,9 @@ import OLSKStorageWidget from 'OLSKStorageWidget';
 		KVCWriteDetailItemIsRootPage={ mod._ValueNoteSelected && mod.DataSetting('KVCSettingPublicRootPageID') ? mod._ValueNoteSelected.KVCNoteID === mod.DataSettingValue('KVCSettingPublicRootPageID') : false }
 		KVCWriteDetailPublicURLFor={ mod.KVCWriteDetailPublicURLFor }
 		KVCWriteDetailDispatchBack={ mod.KVCWriteDetailDispatchBack }
+		KVCWriteDetailDispatchJump={ mod.KVCWriteDetailDispatchJump }
 		KVCWriteDetailDispatchArchive={ mod.KVCWriteDetailDispatchArchive }
 		KVCWriteDetailDispatchUnarchive={ mod.KVCWriteDetailDispatchUnarchive }
-		KVCWriteDetailDispatchJump={ mod.KVCWriteDetailDispatchJump }
 		KVCWriteDetailDispatchConnect={ mod.KVCWriteDetailDispatchConnect }
 		KVCWriteDetailDispatchPublish={ mod.KVCWriteDetailDispatchPublish }
 		KVCWriteDetailDispatchRetract={ mod.KVCWriteDetailDispatchRetract }

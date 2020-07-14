@@ -6,12 +6,12 @@ Object.entries({
 	KVCWriteDetailToolbar: '.KVCWriteDetailToolbar',
 	KVCWriteDetailToolbarBackButton: '.KVCWriteDetailToolbarBackButton',
 	KVCWriteDetailToolbarBackButtonImage: '.KVCWriteDetailToolbarBackButtonImage',
+	KVCWriteDetailToolbarJumpButton: '.KVCWriteDetailToolbarJumpButton',
+	KVCWriteDetailToolbarJumpButtonImage: '.KVCWriteDetailToolbarJumpButtonImage',
 	KVCWriteDetailToolbarArchiveButton: '.KVCWriteDetailToolbarArchiveButton',
 	KVCWriteDetailToolbarArchiveButtonImage: '.KVCWriteDetailToolbarArchiveButtonImage',
 	KVCWriteDetailToolbarUnarchiveButton: '.KVCWriteDetailToolbarUnarchiveButton',
 	KVCWriteDetailToolbarUnarchiveButtonImage: '.KVCWriteDetailToolbarUnarchiveButtonImage',
-	KVCWriteDetailToolbarJumpButton: '.KVCWriteDetailToolbarJumpButton',
-	KVCWriteDetailToolbarJumpButtonImage: '.KVCWriteDetailToolbarJumpButtonImage',
 	KVCWriteDetailToolbarConnectButton: '.KVCWriteDetailToolbarConnectButton',
 	KVCWriteDetailToolbarConnectButtonImage: '.KVCWriteDetailToolbarConnectButtonImage',
 	KVCWriteDetailToolbarIsRootPage: '.KVCWriteDetailToolbarIsRootPage',
@@ -78,6 +78,14 @@ describe('KVCWriteDetail_Access', function () {
 			browser.assert.elements(KVCWriteDetailToolbarBackButtonImage, 1);
 		});
 
+		it('shows KVCWriteDetailToolbarJumpButton', function () {
+			browser.assert.elements(KVCWriteDetailToolbarJumpButton, 1);
+		});
+
+		it('shows KVCWriteDetailToolbarJumpButtonImage', function () {
+			browser.assert.elements(KVCWriteDetailToolbarJumpButtonImage, 1);
+		});
+
 		it('shows KVCWriteDetailToolbarArchiveButton', function () {
 			browser.assert.elements(KVCWriteDetailToolbarArchiveButton, 1);
 		});
@@ -88,14 +96,6 @@ describe('KVCWriteDetail_Access', function () {
 
 		it('hides KVCWriteDetailToolbarUnarchiveButton', function () {
 			browser.assert.elements(KVCWriteDetailToolbarUnarchiveButton, 0);
-		});
-
-		it('shows KVCWriteDetailToolbarJumpButton', function () {
-			browser.assert.elements(KVCWriteDetailToolbarJumpButton, 1);
-		});
-
-		it('shows KVCWriteDetailToolbarJumpButtonImage', function () {
-			browser.assert.elements(KVCWriteDetailToolbarJumpButtonImage, 1);
 		});
 
 		it('shows KVCWriteDetailToolbarConnectButton', function () {
