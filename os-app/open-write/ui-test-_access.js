@@ -57,6 +57,22 @@ describe('KVCWrite_Access', function () {
 		browser.assert.elements('.OLSKAppToolbarLauncherButton', 1);
 	});
 
+	it('shows KVCWriteLauncherItemJournal', function () {
+		return browser.assert.OLSKLauncherItems('KVCWriteLauncherItemJournal', 1);
+	});
+
+	it('hides KVCWriteLauncherItemConfigureCustomDomain', function () {
+		return browser.assert.OLSKLauncherItems('KVCWriteLauncherItemConfigureCustomDomain', 0);
+	});
+
+	it('hides KVCWriteLauncherItemRemoveCustomDomain', function () {
+		return browser.assert.OLSKLauncherItems('KVCWriteLauncherItemRemoveCustomDomain', 0);
+	});
+
+	it('hides KVCWriteDetailLauncherFakeItemProxy', function () {
+		return browser.assert.OLSKLauncherItems('KVCWriteDetailLauncherFakeItemProxy', 0);
+	});
+
 	describe('OLSKAppToolbarStorageButton', function test_OLSKAppToolbarStorageButton () {
 		
 		before(function () {
@@ -255,128 +271,40 @@ describe('KVCWrite_Access', function () {
 
 	});
 
-	describe('KVCWriteLauncherItemJournal', function test_KVCWriteLauncherItemJournal() {
+	context('connected', function test_connected () {
 		
 		before(function () {
-			return browser.pressButton('.OLSKAppToolbarLauncherButton');
+			return uLaunch('FakeStorageIsConnected');
 		});
 
-		before(function () {
-			return browser.fill('.LCHLauncherFilterInput', 'KVCWriteLauncherItemJournal');
+		it('shows KVCWriteLauncherItemConfigureCustomDomain', function () {
+			return browser.assert.OLSKLauncherItems('KVCWriteLauncherItemConfigureCustomDomain', 1);
 		});
-
-		it('shows LCHLauncherPipeItem', function () {
-			browser.assert.elements('.LCHLauncherPipeItem', 1);
-		});
-
+	
 	});
 
-	describe('KVCWriteLauncherItemConfigureCustomDomain', function test_KVCWriteLauncherItemConfigureCustomDomain() {
+	context('set_domain', function test_set_domain() {
 		
 		before(function () {
-			return browser.pressButton('.OLSKAppToolbarLauncherButton');
+			return uLaunch('FakeConfigureCustomDomain');
 		});
 
-		before(function () {
-			return browser.fill('.LCHLauncherFilterInput', 'KVCWriteLauncherItemConfigureCustomDomain');
+		it('shows KVCWriteLauncherItemRemoveCustomDomain', function () {
+			return browser.assert.OLSKLauncherItems('KVCWriteLauncherItemRemoveCustomDomain', 1);
 		});
-
-		it('hides LCHLauncherPipeItem', function () {
-			browser.assert.elements('.LCHLauncherPipeItem', 0);
-		});
-
-		context('connected', function () {
-			
-			before(function () {
-				return uLaunch('FakeStorageIsConnected');
-			});
-
-			before(function () {
-				return browser.pressButton('.OLSKAppToolbarLauncherButton');
-			});
-
-			before(function () {
-				return browser.fill('.LCHLauncherFilterInput', 'KVCWriteLauncherItemConfigureCustomDomain');
-			});
-
-			it('shows LCHLauncherPipeItem', function () {
-				browser.assert.elements('.LCHLauncherPipeItem', 1);
-			});
-		
-		});
-
+	
 	});
 
-	describe('KVCWriteLauncherItemRemoveCustomDomain', function test_KVCWriteLauncherItemRemoveCustomDomain() {
+	context('select', function test_select() {
 		
 		before(function () {
-			return browser.pressButton('.OLSKAppToolbarLauncherButton');
+			return browser.pressButton('.KVCWriteMasterCreateButton');
 		});
 
-		before(function () {
-			return browser.fill('.LCHLauncherFilterInput', 'KVCWriteLauncherItemRemoveCustomDomain');
+		it('shows KVCWriteDetailLauncherFakeItemProxy', function () {
+			return browser.assert.OLSKLauncherItems('KVCWriteDetailLauncherFakeItemProxy', 1);
 		});
-
-		it('hides LCHLauncherPipeItem', function () {
-			browser.assert.elements('.LCHLauncherPipeItem', 0);
-		});
-
-		context('set_domain', function () {
-			
-			before(function () {
-				return uLaunch('FakeConfigureCustomDomain');
-			});
-
-			before(function () {
-				return browser.pressButton('.OLSKAppToolbarLauncherButton');
-			});
-
-			before(function () {
-				return browser.fill('.LCHLauncherFilterInput', 'KVCWriteLauncherItemRemoveCustomDomain');
-			});
-
-			it('shows LCHLauncherPipeItem', function () {
-				browser.assert.elements('.LCHLauncherPipeItem', 1);
-			});
-		
-		});
-
-	});
-
-	describe('KVCWriteDetailLauncherFakeItemProxy', function test_KVCWriteDetailLauncherFakeItemProxy() {
-		
-		before(function () {
-			return browser.pressButton('.OLSKAppToolbarLauncherButton');
-		});
-
-		before(function () {
-			return browser.fill('.LCHLauncherFilterInput', 'KVCWriteDetailLauncherFakeItemProxy');
-		});
-
-		it('hides LCHLauncherPipeItem', function () {
-			browser.assert.elements('.LCHLauncherPipeItem', 0);
-		});
-
-		context('select', function () {
-			
-			before(function () {
-				return browser.pressButton('.KVCWriteMasterCreateButton');
-			});
-
-			before(function () {
-				return browser.pressButton('.OLSKAppToolbarLauncherButton');
-			});
-
-			before(function () {
-				return browser.fill('.LCHLauncherFilterInput', 'KVCWriteDetailLauncherFakeItemProxy');
-			});
-
-			it('shows LCHLauncherPipeItem', function () {
-				browser.assert.elements('.LCHLauncherPipeItem', 1);
-			});
-		
-		});
-
+	
 	});
 
 });
