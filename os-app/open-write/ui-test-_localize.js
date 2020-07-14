@@ -60,6 +60,30 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 		
 		});
 
+		context('archive', function test_archive () {
+			
+			before(function () {
+				return browser.pressButton('.KVCWriteMasterCreateButton');
+			});
+
+			before(function () {
+				browser.fill('.KVCWriteInputFieldDebug', 'alfa-archived');
+			});
+
+			before(function () {
+				return browser.pressButton('.KVCWriteDetailToolbarArchiveButton');
+			});
+
+			before(function () {
+				return browser.OLSKFireKeyboardEvent(browser.window, 'Escape');
+			});
+
+			it('localizes KVCWriteLauncherItemRevealArchive', function () {
+				return browser.assert.OLSKLauncherItemText('KVCWriteLauncherItemRevealArchive', uLocalized('KVCWriteMasterRevealArchiveButtonText'));
+			});
+
+		});
+
 		context('connected', function test_connected () {
 			
 			before(function () {

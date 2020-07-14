@@ -73,6 +73,10 @@ describe('KVCWrite_Access', function () {
 		return browser.assert.OLSKLauncherItems('KVCWriteDetailLauncherFakeItemProxy', 0);
 	});
 
+	it('hides KVCWriteLauncherItemRevealArchive', function () {
+		return browser.assert.OLSKLauncherItems('KVCWriteLauncherItemRevealArchive', 0);
+	});
+
 	describe('OLSKAppToolbarStorageButton', function test_OLSKAppToolbarStorageButton () {
 		
 		before(function () {
@@ -207,6 +211,10 @@ describe('KVCWrite_Access', function () {
 			browser.assert.elements(KVCWriteMasterRevealArchiveButton, 0);
 		});
 
+		it('hides KVCWriteLauncherItemRevealArchive', function () {
+			return browser.assert.OLSKLauncherItems('KVCWriteLauncherItemRevealArchive', 0);
+		});
+
 		context('clear_selection', function () {
 			
 			before(function () {
@@ -215,6 +223,10 @@ describe('KVCWrite_Access', function () {
 
 			it('shows KVCWriteMasterRevealArchiveButton', function () {
 				browser.assert.elements('.KVCWriteMasterRevealArchiveButton', 1);
+			});
+
+			it('shows KVCWriteLauncherItemRevealArchive', function () {
+				return browser.assert.OLSKLauncherItems('KVCWriteLauncherItemRevealArchive', 1);
 			});
 		
 		});

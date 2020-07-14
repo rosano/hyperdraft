@@ -272,7 +272,21 @@ const mod = {
 			outputData.push(...mod.KVCWriteDetailInstance.modPublic.KVCWriteDetailRecipes());
 		}
 
+		if (mod.DataRevealArchiveIsVisible()) {
+			outputData.push({
+				LCHRecipeSignature: 'KVCWriteLauncherItemRevealArchive',
+				LCHRecipeName: OLSKLocalized('KVCWriteMasterRevealArchiveButtonText'),
+				LCHRecipeCallback: function KVCWriteLauncherItemRevealArchive () {
+					mod.KVCWriteMasterDispatchRevealArchive();
+				},
+			});
+		}
+
 		return outputData;
+	},
+
+	DataRevealArchiveIsVisible () {
+		return mod._ValueArchivedCount && mod._RevealArchiveIsVisible;
 	},
 
 	DataIsMobile () {
@@ -993,7 +1007,7 @@ import OLSKStorageWidget from 'OLSKStorageWidget';
 		KVCWriteMasterListItems={ mod._ValueNotesVisible }
 		KVCWriteMasterListItemSelected={ mod._ValueNoteSelected }
 		KVCWriteMasterFilterText={ mod._ValueFilterText }
-		KVCWriteMasterRevealArchiveIsVisible={ mod._ValueArchivedCount && mod._RevealArchiveIsVisible }
+		KVCWriteMasterRevealArchiveIsVisible={ mod.DataRevealArchiveIsVisible() }
 		KVCWriteMasterDispatchCreate={ mod.KVCWriteMasterDispatchCreate }
 		KVCWriteMasterDispatchClick={ mod.KVCWriteMasterDispatchClick }
 		KVCWriteMasterDispatchArrow={ mod.KVCWriteMasterDispatchArrow }
