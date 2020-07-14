@@ -21,7 +21,7 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 		});
 
 		it('localizes KVCWriteLauncherItemJournal', function () {
-			browser.assert.OLSKLauncherItemText('KVCWriteLauncherItemJournal', uLocalized('KVCWriteLauncherItemJournalText'));
+			return browser.assert.OLSKLauncherItemText('KVCWriteLauncherItemJournal', uLocalized('KVCWriteLauncherItemJournalText'));
 		});
 
 		context('OLSKAppToolbarStorageButton', function test_OLSKAppToolbarStorageButton () {
@@ -67,7 +67,7 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 			});
 
 			it('localizes KVCWriteLauncherItemConfigureCustomDomain', function () {
-				browser.assert.OLSKLauncherItemText('KVCWriteLauncherItemConfigureCustomDomain', uLocalized('KVCWriteLauncherItemConfigureCustomDomainText'));
+				return browser.assert.OLSKLauncherItemText('KVCWriteLauncherItemConfigureCustomDomain', uLocalized('KVCWriteLauncherItemConfigureCustomDomainText'));
 			});
 
 			context('KVCWriteLauncherItemConfigureCustomDomain', function test_KVCWriteLauncherItemConfigureCustomDomain () {
@@ -75,10 +75,6 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 				const prompt1 = {};
 				const prompt2 = {};
 				let confirmQuestion;
-
-				before(function () {
-					return browser.pressButton('.OLSKAppToolbarStorageButton');
-				});
 
 				before(function () {
 					return browser.pressButton('.OLSKAppToolbarLauncherButton');
