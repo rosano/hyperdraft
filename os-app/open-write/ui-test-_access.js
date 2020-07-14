@@ -349,7 +349,7 @@ describe('KVCWrite_Access', function () {
 			browser.assert.elements('.LCHLauncherPipeItem', 0);
 		});
 
-		context('set_domain', function () {
+		context('select', function () {
 			
 			before(function () {
 				return browser.pressButton('.KVCWriteMasterCreateButton');
