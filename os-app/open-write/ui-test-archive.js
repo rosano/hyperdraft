@@ -64,61 +64,65 @@ describe('KVCWrite_Archive', function () {
 			return browser.OLSKFireKeyboardEvent(browser.window, 'Escape');
 		});
 
+		it('hides archived', function () {
+			browser.assert.text('.KVCWriteMasterListItem', 'alfa2 bravo');
+		});
+
+	});
+
+	describe('reveal', function test_reveal () {
+
+		before(function () {
+			return browser.pressButton('.KVCWriteMasterRevealArchiveButton');
+		});
+
 		it('sorts below others', function () {
 			browser.assert.text('.KVCWriteMasterListItem', 'alfa2 bravo charlie2');
 		});
 
 	});
 
+	describe('escape', function test_escape () {
+
+		before(function () {
+			return browser.OLSKFireKeyboardEvent(browser.window, 'Escape');
+		});
+
+		it('hides archived', function () {
+			browser.assert.text('.KVCWriteMasterListItem', 'alfa2 bravo');
+		});
+
+	});
+
 	context('filter', function test_filter () {
 
-		context('partial match', function () {
-
-			before(function () {
-				browser.fill('.OLSKMasterListFilterField', 'charlie');
-			});
-
-			it('filters partial KVCWriteMasterListItem', function() {
-				browser.assert.elements('.KVCWriteMasterListItem', 1);
-			});
-
-			it('sets no KVCWriteMasterListItemSelected', function () {
-				browser.assert.elements('.OLSKResultsListItemSelected', 0);
-			});
-
-			it('sets KVCWriteDetailItem', function () {
-				browser.assert.elements('.OLSKDetailPlaceholder', 1);
-			});
-		
+		before(function () {
+			browser.fill('.OLSKMasterListFilterField', 'a');
 		});
 
-		context('exact match', function () {
-
-			before(function () {
-				browser.fill('.OLSKMasterListFilterField', 'charlie2');
-			});
-
-			it('filters exact KVCWriteMasterListItem', function() {
-				browser.assert.elements('.KVCWriteMasterListItem', 1);
-			});
-
-			it('sets KVCWriteMasterListItemSelected', function () {
-				browser.assert.elements('.OLSKResultsListItemSelected', 1);
-			});
-
-			it('sets KVCWriteDetailItem', function () {
-				browser.assert.elements('.OLSKDetailPlaceholder', 0);
-			});
-		
+		it('shows archived', function () {
+			browser.assert.text('.KVCWriteMasterListItem', 'alfa2 bravo charlie2');
 		});
 
-		after(function () {
-			return browser.pressButton('.OLSKInputWrapperClearButton');
+		context('clear', function () {
+			
+			before(function () {
+				return browser.pressButton('.OLSKInputWrapperClearButton');
+			});
+
+			it('hides archived', function () {
+				browser.assert.text('.KVCWriteMasterListItem', 'alfa2 bravo');
+			});
+		
 		});
 
 	});
 
 	describe('unarchive', function test_unarchive () {
+
+		before(function () {
+			return browser.pressButton('.KVCWriteMasterRevealArchiveButton');
+		});
 
 		before(function () {
 			return browser.click('.OLSKResultsListItem:nth-child(3) .KVCWriteMasterListItem');

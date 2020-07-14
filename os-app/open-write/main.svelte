@@ -28,18 +28,29 @@ const mod = {
 
 	_ValueIsLoading: true,
 
+	_RevealArchiveIsVisible: false,
 	_ValueArchivedCount: 0,
-	_ValueNotesAll: [],
-	ValueNotesAll (inputData, shouldSort = true) {
-		mod.ValueNotesVisible(mod._ValueNotesAll = inputData, shouldSort);
-		mod._ValueArchivedCount = mod._ValueNotesAll.filter(function (e) {
+	ValueArchivedCount (inputData) {
+		mod._ValueArchivedCount = inputData.filter(function (e) {
 			return e.KVCNoteIsArchived;
 		}).length;
 	},
 
+	_ValueNotesAll: [],
+	ValueNotesAll (inputData, shouldSort = true) {
+		mod.ValueNotesVisible(mod._ValueNotesAll = inputData, shouldSort);
+	},
+
 	_ValueNotesVisible: [],
 	ValueNotesVisible (inputData, shouldSort = true) {
-		const items = !mod._ValueFilterText ? inputData : inputData.filter(KVCWriteLogic.KVCWriteFilterFunction(mod._ValueFilterText));
+		let items = !mod._ValueFilterText ? inputData : inputData.filter(KVCWriteLogic.KVCWriteFilterFunction(mod._ValueFilterText));
+
+		if (mod._RevealArchiveIsVisible) {
+			items = items.filter(function (e) {
+				return !e.KVCNoteIsArchived;
+			});
+		}
+
 		mod._ValueNotesVisible = shouldSort ? items.sort(KVCWriteLogic.KVCWriteLogicListSort) : items;
 	},
 	
@@ -479,7 +490,10 @@ const mod = {
 	ControlEscape() {
 		mod.ControlFilterWithNoThrottle('');
 
-		mod.ValueNotesAll(mod._ValueNotesAll);
+		mod.ValueArchivedCount(mod._ValueNotesAll);
+		mod._RevealArchiveIsVisible = true;
+
+		mod.ValueNotesVisible(mod._ValueNotesAll);
 	},
 	
 	ControlFilterWithThrottle(inputData) {
@@ -605,11 +619,23 @@ const mod = {
 	},
 
 	KVCWriteMasterDispatchFilter (inputData) {
+		if (!inputData) {
+			return mod.ControlEscape();
+		}
+
+		mod._RevealArchiveIsVisible = false;
+
 		mod.ControlFilterWithThrottle(inputData);
 	},
 
 	KVCWriteMasterDispatchEscape () {
 		mod.ControlEscape();
+	},
+
+	KVCWriteMasterDispatchRevealArchive () {
+		mod._RevealArchiveIsVisible = false;
+
+		mod.ValueNotesVisible(mod._ValueNotesAll);
 	},
 
 	KVCWriteMasterDelegateItemTitle (inputData) {
@@ -925,9 +951,15 @@ const mod = {
 	},
 
 	async SetupValueNotesAll() {
-		mod.ValueNotesAll((await KVCNoteAction.KVCNoteActionQuery(mod._ValueStorageClient, {})).filter(function (e) {
+		const items = (await KVCNoteAction.KVCNoteActionQuery(mod._ValueStorageClient, {})).filter(function (e) {
 			return typeof e === 'object'; // #patch-remotestorage-true
-		}));
+		});
+
+		mod.ValueArchivedCount(items);
+		
+		mod._RevealArchiveIsVisible = mod._ValueArchivedCount > 0;
+		
+		mod.ValueNotesAll(items);
 	},
 
 	async SetupValueSettingsAll() {
@@ -961,12 +993,13 @@ import OLSKStorageWidget from 'OLSKStorageWidget';
 		KVCWriteMasterListItems={ mod._ValueNotesVisible }
 		KVCWriteMasterListItemSelected={ mod._ValueNoteSelected }
 		KVCWriteMasterFilterText={ mod._ValueFilterText }
-		KVCWriteMasterRevealArchiveIsVisible={ mod._ValueArchivedCount }
+		KVCWriteMasterRevealArchiveIsVisible={ mod._ValueArchivedCount && mod._RevealArchiveIsVisible }
 		KVCWriteMasterDispatchCreate={ mod.KVCWriteMasterDispatchCreate }
 		KVCWriteMasterDispatchClick={ mod.KVCWriteMasterDispatchClick }
 		KVCWriteMasterDispatchArrow={ mod.KVCWriteMasterDispatchArrow }
 		KVCWriteMasterDispatchFilter={ mod.KVCWriteMasterDispatchFilter }
 		KVCWriteMasterDispatchEscape={ mod.KVCWriteMasterDispatchEscape }
+		KVCWriteMasterDispatchRevealArchive={ mod.KVCWriteMasterDispatchRevealArchive }
 		KVCWriteMasterDelegateItemTitle={ mod.KVCWriteMasterDelegateItemTitle }
 		KVCWriteMasterDelegateItemSnippet={ mod.KVCWriteMasterDelegateItemSnippet }
 		OLSKMobileViewInactive={ mod.OLSKMobileViewInactive }

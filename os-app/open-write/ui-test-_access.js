@@ -180,6 +180,10 @@ describe('KVCWrite_Access', function () {
 		});
 
 		before(function () {
+			browser.fill('.KVCWriteInputFieldDebug', 'alfa-archived');
+		});
+
+		before(function () {
 			return browser.pressButton('.KVCWriteDetailToolbarArchiveButton');
 		});
 
@@ -197,6 +201,34 @@ describe('KVCWrite_Access', function () {
 				browser.assert.elements('.KVCWriteMasterRevealArchiveButton', 1);
 			});
 		
+		});
+
+		context('filter', function () {
+
+			before(function () {
+				return browser.OLSKFireKeyboardEvent(browser.window, 'Escape');
+			});
+
+			before(function () {
+				browser.fill('.OLSKMasterListFilterField', 'a');
+			});
+
+			it('hides KVCWriteMasterRevealArchiveButton', function () {
+				browser.assert.elements(KVCWriteMasterRevealArchiveButton, 0);
+			});
+
+			context('clear', function () {
+				
+				before(function () {
+					return browser.pressButton('.OLSKInputWrapperClearButton');
+				});
+
+				it('shows KVCWriteMasterRevealArchiveButton', function () {
+					browser.assert.elements(KVCWriteMasterRevealArchiveButton, 1);
+				});
+			
+			});
+
 		});
 
 		context('discard_archived', function () {
