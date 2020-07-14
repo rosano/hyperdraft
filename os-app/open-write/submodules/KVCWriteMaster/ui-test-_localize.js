@@ -22,6 +22,23 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 			browser.assert.attribute(KVCWriteMasterCreateButton, 'title', uLocalized('KVCWriteMasterCreateButtonText'));
 		});
 
+
+		context('KVCWriteMasterRevealArchiveIsVisible', function() {
+			
+			before(function() {
+				return browser.OLSKVisit(kDefaultRoute, {
+					OLSKRoutingLanguage: languageCode,
+					KVCWriteMasterListItems: JSON.stringify([]),
+					KVCWriteMasterRevealArchiveIsVisible: true,
+				});
+			});
+
+			it('localizes KVCWriteMasterRevealArchiveButton', function () {
+				browser.assert.text(KVCWriteMasterRevealArchiveButton, uLocalized('KVCWriteMasterRevealArchiveButtonText'));
+			});
+			
+		});
+
 	});
 
 });

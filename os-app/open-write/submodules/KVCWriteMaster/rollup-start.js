@@ -5,6 +5,7 @@ const KVCWriteMaster = new RollupStart({
 	props: Object.assign({
 		KVCWriteMasterListItems: [],
 		KVCWriteMasterFilterText: '',
+		KVCWriteMasterRevealArchiveIsVisible: false,
 		KVCWriteMasterDispatchCreate: (function _KVCWriteMasterDispatchCreate (inputData) {
 			window.TestKVCWriteMasterDispatchCreate.innerHTML = parseInt(window.TestKVCWriteMasterDispatchCreate.innerHTML) + 1;
 			window.TestKVCWriteMasterDispatchCreateData.innerHTML = inputData;
@@ -23,6 +24,9 @@ const KVCWriteMaster = new RollupStart({
 		}),
 		KVCWriteMasterDispatchEscape: (function _KVCWriteMasterDispatchEscape () {
 			window.TestKVCWriteMasterDispatchEscape.innerHTML = parseInt(window.TestKVCWriteMasterDispatchEscape.innerHTML) + 1;
+		}),
+		KVCWriteMasterDispatchRevealArchive: (function _KVCWriteMasterDispatchRevealArchive () {
+			window.TestKVCWriteMasterDispatchRevealArchive.innerHTML = parseInt(window.TestKVCWriteMasterDispatchRevealArchive.innerHTML) + 1;
 		}),
 		KVCWriteMasterDelegateItemTitle: (function _KVCWriteMasterDelegateItemTitle (inputData) {
 			return inputData.split('\n').shift();

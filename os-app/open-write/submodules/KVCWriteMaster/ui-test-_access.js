@@ -5,6 +5,8 @@ Object.entries({
 	
 	KVCWriteMasterCreateButton: '.KVCWriteMasterCreateButton',
 	KVCWriteMasterCreateButtonImage: '.KVCWriteMasterCreateButtonImage',
+	
+	KVCWriteMasterRevealArchiveButton: '.KVCWriteMasterRevealArchiveButton',
 }).map(function (e) {
 	return global[e.shift()]  = e.pop();
 });
@@ -35,6 +37,10 @@ describe('KVCWriteMaster_Access', function () {
 		browser.assert.elements('.KVCWriteMasterListItem', 0);
 	});
 
+	it('hides KVCWriteMasterRevealArchiveButton', function () {
+		browser.assert.elements(KVCWriteMasterRevealArchiveButton, 0);
+	});
+
 	context('KVCWriteMasterListItems', function() {
 		
 		before(function() {
@@ -47,6 +53,21 @@ describe('KVCWriteMaster_Access', function () {
 
 		it('shows KVCWriteMasterListItem', function () {
 			browser.assert.elements('.KVCWriteMasterListItem', 1);
+		});
+		
+	});
+
+	context('KVCWriteMasterRevealArchiveIsVisible', function() {
+		
+		before(function() {
+			return browser.OLSKVisit(kDefaultRoute, {
+				KVCWriteMasterListItems: JSON.stringify([]),
+				KVCWriteMasterRevealArchiveIsVisible: true,
+			});
+		});
+
+		it('shows KVCWriteMasterRevealArchiveButton', function () {
+			browser.assert.elements(KVCWriteMasterRevealArchiveButton, 1);
 		});
 		
 	});

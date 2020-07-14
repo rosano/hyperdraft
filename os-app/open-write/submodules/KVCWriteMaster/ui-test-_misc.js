@@ -279,4 +279,31 @@ describe('KVCWriteMaster_Misc', function () {
 		
 	});
 
+	context('KVCWriteMasterRevealArchiveButton', function() {
+		
+		before(function() {
+			return browser.OLSKVisit(kDefaultRoute, {
+				KVCWriteMasterListItems: JSON.stringify([]),
+				KVCWriteMasterRevealArchiveIsVisible: true,
+			});
+		});
+
+		context('click', function () {
+			
+			before(function () {
+				browser.assert.text('#TestKVCWriteMasterDispatchRevealArchive', '0');
+			});
+			
+			before(function () {
+				return browser.pressButton(KVCWriteMasterRevealArchiveButton);
+			});
+
+			it('sends KVCWriteMasterDispatchRevealArchive', function () {
+				browser.assert.text('#TestKVCWriteMasterDispatchRevealArchive', '1');
+			});
+		
+		});
+		
+	});
+
 });

@@ -2,11 +2,13 @@
 export let KVCWriteMasterFilterText;
 export let KVCWriteMasterListItems;
 export let KVCWriteMasterListItemSelected = null;
+export let KVCWriteMasterRevealArchiveIsVisible;
 export let KVCWriteMasterDispatchCreate;
 export let KVCWriteMasterDispatchClick;
 export let KVCWriteMasterDispatchArrow;
 export let KVCWriteMasterDispatchFilter;
 export let KVCWriteMasterDispatchEscape;
+export let KVCWriteMasterDispatchRevealArchive;
 export let KVCWriteMasterDelegateItemTitle;
 export let KVCWriteMasterDelegateItemSnippet;
 export let OLSKMobileViewInactive = false;
@@ -82,6 +84,10 @@ import KVCWriteMasterListItem from '../KVCWriteMasterListItem/main.svelte';
 		KVCWriteMasterListItemDispatchTitle={ (inputData) => KVCWriteMasterLogic.KVCWriteMasterTruncatedTitle(KVCWriteMasterDelegateItemTitle(inputData)) }
 		KVCWriteMasterListItemDispatchSnippet={ (inputData) => KVCWriteMasterDelegateItemSnippet(inputData) }
 		/>
+
+	<div slot="OLSKMasterListBodyTail">{#if KVCWriteMasterRevealArchiveIsVisible }
+		<button class="KVCWriteMasterRevealArchiveButton" on:click={ KVCWriteMasterDispatchRevealArchive }>{ OLSKLocalized('KVCWriteMasterRevealArchiveButtonText') }</button>
+	{/if}</div>
 </OLSKMasterList>	
 
 <style src="./ui-style.css"></style>
