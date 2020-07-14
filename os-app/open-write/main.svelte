@@ -28,9 +28,13 @@ const mod = {
 
 	_ValueIsLoading: true,
 
+	_ValueArchivedCount: 0,
 	_ValueNotesAll: [],
 	ValueNotesAll (inputData, shouldSort = true) {
 		mod.ValueNotesVisible(mod._ValueNotesAll = inputData, shouldSort);
+		mod._ValueArchivedCount = mod._ValueNotesAll.filter(function (e) {
+			return e.KVCNoteIsArchived;
+		}).length;
 	},
 
 	_ValueNotesVisible: [],
@@ -474,6 +478,8 @@ const mod = {
 
 	ControlEscape() {
 		mod.ControlFilterWithNoThrottle('');
+
+		mod.ValueNotesAll(mod._ValueNotesAll);
 	},
 	
 	ControlFilterWithThrottle(inputData) {
@@ -955,6 +961,7 @@ import OLSKStorageWidget from 'OLSKStorageWidget';
 		KVCWriteMasterListItems={ mod._ValueNotesVisible }
 		KVCWriteMasterListItemSelected={ mod._ValueNoteSelected }
 		KVCWriteMasterFilterText={ mod._ValueFilterText }
+		KVCWriteMasterRevealArchiveIsVisible={ mod._ValueArchivedCount }
 		KVCWriteMasterDispatchCreate={ mod.KVCWriteMasterDispatchCreate }
 		KVCWriteMasterDispatchClick={ mod.KVCWriteMasterDispatchClick }
 		KVCWriteMasterDispatchArrow={ mod.KVCWriteMasterDispatchArrow }

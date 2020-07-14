@@ -29,6 +29,10 @@ describe('KVCWrite_Access', function () {
 		browser.assert.elements('.KVCWriteMasterListItem', 0);
 	});
 
+	it('hides KVCWriteMasterRevealArchiveButton', function () {
+		browser.assert.elements('.KVCWriteMasterRevealArchiveButton', 0);
+	});
+
 	it('shows KVCWriteDetail', function () {
 		browser.assert.elements('.KVCWriteDetail', 1);
 	});
@@ -167,6 +171,56 @@ describe('KVCWrite_Access', function () {
 		
 		});
 		
+	});
+
+	context('archive', function test_archive () {
+		
+		before(function () {
+			return browser.pressButton('.KVCWriteMasterCreateButton');
+		});
+
+		before(function () {
+			return browser.pressButton('.KVCWriteDetailToolbarArchiveButton');
+		});
+
+		it('hides KVCWriteMasterRevealArchiveButton', function () {
+			browser.assert.elements(KVCWriteMasterRevealArchiveButton, 0);
+		});
+
+		context('clear_selection', function () {
+			
+			before(function () {
+				return browser.OLSKFireKeyboardEvent(browser.window, 'Escape');
+			});
+
+			it('shows KVCWriteMasterRevealArchiveButton', function () {
+				browser.assert.elements('.KVCWriteMasterRevealArchiveButton', 1);
+			});
+		
+		});
+
+		context('discard_archived', function () {
+			
+			before(function () {
+				return browser.pressButton('.KVCWriteMasterRevealArchiveButton');
+			});
+
+			before(function () {
+				return browser.click('.KVCWriteMasterListItem');
+			});
+
+			before(async function () {
+				return browser.OLSKConfirm(function () {
+					return browser.pressButton('.KVCWriteDetailToolbarDiscardButton');
+				});
+			});
+
+			it('hides KVCWriteMasterRevealArchiveButton', function () {
+				browser.assert.elements(KVCWriteMasterRevealArchiveButton, 0);
+			});
+		
+		});
+
 	});
 
 	describe('KVCWriteLauncherItemJournal', function test_KVCWriteLauncherItemJournal() {
