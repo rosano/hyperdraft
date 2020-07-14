@@ -310,6 +310,10 @@ describe('KVCWrite_Access', function () {
 	describe('KVCWriteLauncherItemRemoveCustomDomain', function test_KVCWriteLauncherItemRemoveCustomDomain() {
 		
 		before(function () {
+			return browser.pressButton('.OLSKAppToolbarLauncherButton');
+		});
+
+		before(function () {
 			return browser.fill('.LCHLauncherFilterInput', 'KVCWriteLauncherItemRemoveCustomDomain');
 		});
 
@@ -341,6 +345,10 @@ describe('KVCWrite_Access', function () {
 
 	describe('KVCWriteDetailLauncherFakeItemProxy', function test_KVCWriteDetailLauncherFakeItemProxy() {
 		
+		before(function () {
+			return browser.pressButton('.OLSKAppToolbarLauncherButton');
+		});
+
 		before(function () {
 			return browser.fill('.LCHLauncherFilterInput', 'KVCWriteDetailLauncherFakeItemProxy');
 		});
