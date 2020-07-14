@@ -24,7 +24,7 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 			browser.assert.OLSKLauncherItemText('KVCWriteLauncherItemJournal', uLocalized('KVCWriteLauncherItemJournalText'));
 		});
 
-		context('click OLSKAppToolbarStorageButton', function () {
+		context('OLSKAppToolbarStorageButton', function test_OLSKAppToolbarStorageButton () {
 			
 			before(function () {
 				return browser.pressButton('.OLSKAppToolbarStorageButton');
@@ -36,7 +36,7 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 		
 		});
 
-		context('KVCWriteLauncherItemJournal', function () {
+		context('KVCWriteLauncherItemJournal', function test_KVCWriteLauncherItemJournal () {
 
 			const item = (function(inputData) {
 				return (new Date(Date.parse(inputData) - inputData.getTimezoneOffset() * 1000 * 60));
@@ -60,7 +60,7 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 		
 		});
 
-		context('connected', function () {
+		context('connected', function test_connected () {
 			
 			before(function () {
 				return uLaunch('FakeStorageIsConnected');
@@ -70,7 +70,7 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 				browser.assert.OLSKLauncherItemText('KVCWriteLauncherItemConfigureCustomDomain', uLocalized('KVCWriteLauncherItemConfigureCustomDomainText'));
 			});
 
-			context('KVCWriteLauncherItemConfigureCustomDomain', function () {
+			context('KVCWriteLauncherItemConfigureCustomDomain', function test_KVCWriteLauncherItemConfigureCustomDomain () {
 
 				const prompt1 = {};
 				const prompt2 = {};
