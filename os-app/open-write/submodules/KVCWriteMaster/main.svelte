@@ -85,7 +85,7 @@ import KVCWriteMasterListItem from '../KVCWriteMasterListItem/main.svelte';
 		KVCWriteMasterListItemDispatchSnippet={ (inputData) => KVCWriteMasterDelegateItemSnippet(inputData) }
 		/>
 
-	<div slot="OLSKMasterListBodyTail">{#if KVCWriteMasterRevealArchiveIsVisible }
+	<div class="OLSKMasterListBodyTail" slot="OLSKMasterListBodyTail">{#if KVCWriteMasterRevealArchiveIsVisible }
 		<button class="KVCWriteMasterRevealArchiveButton" on:click={ KVCWriteMasterDispatchRevealArchive }>{ OLSKLocalized('KVCWriteMasterRevealArchiveButtonText') }</button>
 	{/if}</div>
 </OLSKMasterList>	
