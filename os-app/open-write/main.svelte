@@ -502,6 +502,8 @@ const mod = {
 		OLSKThrottle.OLSKThrottleMappedTimeout(mod, '_ValueFilterThrottle', {
 			OLSKThrottleDuration: 200,
 			async OLSKThrottleCallback () {
+				mod._RevealArchiveIsVisible = false;
+
 				mod.ControlFilterWithNoThrottle(mod._ValueFilterText);
 			},
 		});
@@ -622,8 +624,6 @@ const mod = {
 		if (!inputData) {
 			return mod.ControlEscape();
 		}
-
-		mod._RevealArchiveIsVisible = false;
 
 		mod.ControlFilterWithThrottle(inputData);
 	},
