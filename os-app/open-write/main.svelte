@@ -748,6 +748,8 @@ const mod = {
 	},
 
 	KVCWriteDetailDispatchOpen (inputData) {
+		mod._RevealArchiveIsVisible = false; // #missing-spec
+
 		mod.ControlFilterWithNoThrottle(inputData);
 	},
 
