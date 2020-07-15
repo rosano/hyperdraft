@@ -45,7 +45,7 @@ const mod = {
 	ValueNotesVisible (inputData, shouldSort = true) {
 		let items = !mod._ValueFilterText ? inputData : inputData.filter(KVCWriteLogic.KVCWriteFilterFunction(mod._ValueFilterText));
 
-		if (mod._RevealArchiveIsVisible) {
+		if (mod.DataRevealArchiveIsVisible()) {
 			items = items.filter(function (e) {
 				return !e.KVCNoteIsArchived;
 			});
