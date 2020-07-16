@@ -272,6 +272,16 @@ describe('KVCTemplateBlocks', function test_KVCTemplateBlocks() {
 	
 	});
 
+	context('KVCOptionBacklinks', function () {
+		
+		it('includes KVCTemplateTokenBacklinks if object', function () {
+			deepEqual(mainModule.KVCTemplateBlocks({
+				KVCOptionBacklinks: {},
+			}), [mainModule.KVCTemplateTokenBacklinks()]);
+		});
+		
+	});
+
 });
 
 describe('KVCTemplateTokenPostTitle', function test_KVCTemplateTokenPostTitle() {

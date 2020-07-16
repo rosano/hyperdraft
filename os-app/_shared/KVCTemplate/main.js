@@ -94,6 +94,10 @@ const mod = {
 				coll.push(...(options[item] ? [mod.KVCTemplateTokenRootPage()] : [mod.KVCTemplateTokenNotePage(), mod.KVCTemplateTokenNotePageLegacy()]));
 			}
 
+			if (item === 'KVCOptionBacklinks') {
+				coll.push(mod.KVCTemplateTokenBacklinks());
+			}
+
 			return coll;
 		}, []);
 	},
