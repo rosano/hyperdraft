@@ -282,12 +282,12 @@ import KVCWriteInput from '../sub-input/main.svelte';
 	bind:this={ mod.KVCWriteInputInstance }
 	/>
 
-{#if _DebugLauncher && OLSK_TESTING_BEHAVIOUR() }
-	<button class="OLSKAppToolbarLauncherButton" on:click={ () => window.Launchlet.LCHSingletonCreate({ LCHOptionRecipes: mod.DataRecipes() }) }></button>	
-{/if}
-
 {/if}
 
 </div>
+
+{#if _DebugLauncher && OLSK_TESTING_BEHAVIOUR() }
+	<button class="OLSKAppToolbarLauncherButton" on:click={ () => window.Launchlet.LCHSingletonCreate({ LCHOptionRecipes: mod.DataRecipes() }) }></button>	
+{/if}
 
 <style src="./ui-style.css"></style>
