@@ -63,5 +63,25 @@ describe('KVCTemplate_Misc', function () {
 		});
 
 	});
+
+	describe('KVCBacklinksLink', function test_KVCBacklinksLink() {
+
+		it('sets href', function () {
+			browser.assert.attribute(KVCBacklinksLink, 'href', `{${ mainModule.KVCTemplateTokenURL() }}`);
+		});
+
+		it('sets text', function () {
+			browser.assert.text(KVCBacklinksLink, `{${ mainModule.KVCTemplateTokenName() }}`);
+		});
+
+	});
+
+	describe('KVCBacklinksSnippet', function test_KVCBacklinksSnippet() {
+
+		it('sets text', function () {
+			browser.assert.text(KVCBacklinksSnippet, `{${ mainModule.KVCTemplateTokenDescription() }}`);
+		});
+
+	});
 	
 });

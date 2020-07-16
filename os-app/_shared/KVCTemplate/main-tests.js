@@ -274,7 +274,7 @@ describe('KVCTemplateBlocks', function test_KVCTemplateBlocks() {
 
 	context('KVCOptionBacklinks', function () {
 		
-		it('includes KVCTemplateTokenBacklinks if object', function () {
+		it('includes KVCTemplateTokenBacklinks', function () {
 			deepEqual(mainModule.KVCTemplateBlocks({
 				KVCOptionBacklinks: {},
 			}), [mainModule.KVCTemplateTokenBacklinks()]);

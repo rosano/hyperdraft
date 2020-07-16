@@ -11,6 +11,10 @@ Object.entries({
 	KVCRootLink: '.KVCRootLink',
 	KVCArticleTitle: '.KVCArticleTitle',
 	KVCArticleBody: '.KVCArticleBody',
+	KVCBacklinks: '.KVCBacklinks',
+	KVCBacklinksHeading: '.KVCBacklinksHeading',
+	KVCBacklinksLink: '.KVCBacklinksLink',
+	KVCBacklinksSnippet: '.KVCBacklinksSnippet',
 }).map(function (e) {
 	return global[e.shift()]  = e.pop();
 });
@@ -59,6 +63,18 @@ describe('KVCTemplate_Access', function () {
 
 	it('shows KVCArticleBody', function () {
 		browser.assert.elements(KVCArticleBody, 1);
+	});
+
+	it('shows KVCBacklinks', function () {
+		browser.assert.elements(KVCBacklinks, 1);
+	});
+
+	it('shows KVCBacklinksHeading', function () {
+		browser.assert.elements(KVCBacklinksHeading, 1);
+	});
+
+	it('shows KVCBacklinksSnippet', function () {
+		browser.assert.elements(KVCBacklinksSnippet, 1);
 	});
 
 });

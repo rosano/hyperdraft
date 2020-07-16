@@ -271,6 +271,17 @@ const mod = {
 
 </article>
 
+{block:${ mod.KVCTemplateTokenBacklinks() }}
+<div class="KVCBacklinks">
+
+<strong class="KVCBacklinksHeading">${ inputData('KVCBacklinksHeadingText') }</strong>
+
+<a class="KVCBacklinksLink" href="{${ mod.KVCTemplateTokenURL() }}">{${ mod.KVCTemplateTokenName() }}</a><br />
+<span class="KVCBacklinksSnippet">{${ mod.KVCTemplateTokenDescription() }}</span>
+
+</div>
+{/block:${ mod.KVCTemplateTokenBacklinks() }}
+
 </body>
 </html>`;
 	},

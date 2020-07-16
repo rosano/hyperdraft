@@ -18,6 +18,10 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 			browser.assert.text(KVCRootLink, uLocalized('KVCRootLinkText'));
 		});
 
+		it('localizes KVCBacklinksHeading', function () {
+			browser.assert.text(KVCBacklinksHeading, uLocalized('KVCBacklinksHeadingText'));
+		});
+
 	});
 
 });
