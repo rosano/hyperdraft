@@ -54,8 +54,8 @@ const mod = {
 };
 
 import OLSKMasterList from 'OLSKMasterList';
-import _OLSKSharedCreate from '../../../_shared/__external/OLSKUIAssets/_OLSKSharedCreate.svg';
-import KVCWriteMasterListItem from '../KVCWriteMasterListItem/main.svelte';
+import _OLSKSharedCreate from '../_shared/__external/OLSKUIAssets/_OLSKSharedCreate.svg';
+import KVCWriteMasterListItem from './submodules/KVCWriteMasterListItem/main.svelte';
 </script>
 <svelte:window on:keydown={ mod.InterfaceWindowDidKeydown }/>
 

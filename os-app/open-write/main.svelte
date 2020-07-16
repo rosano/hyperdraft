@@ -994,8 +994,8 @@ import { onMount } from 'svelte';
 onMount(mod.LifecycleModuleWillMount);
 
 import OLSKViewportContent from 'OLSKViewportContent';
-import KVCWriteMaster from './submodules/KVCWriteMaster/main.svelte';
-import KVCWriteDetail from './submodules/KVCWriteDetail/main.svelte';
+import KVCWriteMaster from '../sub-master/main.svelte';
+import KVCWriteDetail from '../sub-detail/main.svelte';
 import OLSKAppToolbar from 'OLSKAppToolbar';
 import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svelte';
 import OLSKStorageWidget from 'OLSKStorageWidget';

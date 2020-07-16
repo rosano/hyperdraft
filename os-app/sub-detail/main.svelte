@@ -64,7 +64,7 @@ const OLSKLocalized = function(translationConstant) {
 	return OLSKInternational.OLSKInternationalLocalizedString(translationConstant, JSON.parse(`{"OLSK_I18N_SEARCH_REPLACE":"OLSK_I18N_SEARCH_REPLACE"}`)[window.OLSKPublicConstants('OLSKSharedPageCurrentLanguage')]);
 };
 
-import KVCNoteModel from '../../../_shared/KVCNote/model.js';
+import KVCNoteModel from '../_shared/KVCNote/model.js';
 import { OLSK_TESTING_BEHAVIOUR } from 'OLSKTesting';
 
 const mod = {
@@ -190,15 +190,15 @@ const mod = {
 };
 
 import OLSKDetailPlaceholder from 'OLSKDetailPlaceholder';
-import _OLSKSharedBack from '../../../_shared/__external/OLSKUIAssets/_OLSKSharedBack.svg';
+import _OLSKSharedBack from '../_shared/__external/OLSKUIAssets/_OLSKSharedBack.svg';
 import _KVCWriteJump from './ui-assets/_KVCWriteJump.svg';
 import _KVCWriteArchive from './ui-assets/_KVCWriteArchive.svg';
 import _KVCWriteUnarchive from './ui-assets/_KVCWriteUnarchive.svg';
 import _KVCWritePublish from './ui-assets/_KVCWritePublish.svg';
 import _KVCWriteRetract from './ui-assets/_KVCWriteRetract.svg';
 import _KVCWriteVersions from './ui-assets/_KVCWriteVersions.svg';
-import _OLSKSharedDiscard from '../../../_shared/__external/OLSKUIAssets/_OLSKSharedDiscard.svg';
-import KVCWriteInput from '../KVCWriteInput/main.svelte';
+import _OLSKSharedDiscard from '../_shared/__external/OLSKUIAssets/_OLSKSharedDiscard.svg';
+import KVCWriteInput from '../sub-input/main.svelte';
 </script>
 <svelte:window on:keydown={ mod.InterfaceWindowDidKeydown }/>
 

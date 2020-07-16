@@ -19,7 +19,7 @@ describe('KVCWrite_Ref', function () {
 			});
 
 			it('shows KVCWriteDetailToolbarVersionsButton', function () {
-				browser.assert.elements(KVCWriteDetailToolbarVersionsButton, 1);
+				browser.assert.elements('.KVCWriteDetailToolbarVersionsButton', 1);
 			});
 		
 		});

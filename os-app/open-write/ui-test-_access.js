@@ -208,7 +208,7 @@ describe('KVCWrite_Access', function () {
 		});
 
 		it('hides KVCWriteMasterRevealArchiveButton', function () {
-			browser.assert.elements(KVCWriteMasterRevealArchiveButton, 0);
+			browser.assert.elements('.KVCWriteMasterRevealArchiveButton', 0);
 		});
 
 		it('hides KVCWriteLauncherItemRevealArchive', function () {
@@ -242,7 +242,7 @@ describe('KVCWrite_Access', function () {
 			});
 
 			it('hides KVCWriteMasterRevealArchiveButton', function () {
-				browser.assert.elements(KVCWriteMasterRevealArchiveButton, 0);
+				browser.assert.elements('.KVCWriteMasterRevealArchiveButton', 0);
 			});
 
 			context('clear', function () {
@@ -252,7 +252,7 @@ describe('KVCWrite_Access', function () {
 				});
 
 				it('shows KVCWriteMasterRevealArchiveButton', function () {
-					browser.assert.elements(KVCWriteMasterRevealArchiveButton, 1);
+					browser.assert.elements('.KVCWriteMasterRevealArchiveButton', 1);
 				});
 			
 			});
@@ -276,7 +276,7 @@ describe('KVCWrite_Access', function () {
 			});
 
 			it('hides KVCWriteMasterRevealArchiveButton', function () {
-				browser.assert.elements(KVCWriteMasterRevealArchiveButton, 0);
+				browser.assert.elements('.KVCWriteMasterRevealArchiveButton', 0);
 			});
 		
 		});
