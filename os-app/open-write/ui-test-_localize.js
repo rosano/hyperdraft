@@ -40,7 +40,7 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 
 			const item = (function(inputData) {
 				return (new Date(Date.parse(inputData) - inputData.getTimezoneOffset() * 1000 * 60));
-			})(new Date());
+			})(new Date('2001-02-03T04:05:06Z'));
 
 			before(function () {
 				return uLaunch('KVCWriteLauncherItemJournal');
