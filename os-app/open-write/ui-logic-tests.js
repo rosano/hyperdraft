@@ -203,3 +203,44 @@ describe('KVCWriteCustomDomainBaseURLFunction', function test_KVCWriteCustomDoma
 	});
 
 });
+
+describe('KVCWriteLauncherItemBacklinksTemplate', function test_KVCWriteLauncherItemBacklinksTemplate() {
+
+	it('throws error if param1 not date', function() {
+		throws(function() {
+			mainModule.KVCWriteHumanTimestampString(new Date('alfa'), {}, function () {});
+		}, /KVCErrorInputNotValid/);
+	});
+
+	it('throws error if param2 not function', function() {
+		throws(function() {
+			mainModule.KVCWriteLauncherItemBacklinksTemplate(new Date(), null, function () {});
+		}, /KVCErrorInputNotValid/);
+	});
+
+	it('throws error if param3 not function', function() {
+		throws(function() {
+			mainModule.KVCWriteLauncherItemBacklinksTemplate(new Date(), {}, null);
+		}, /KVCErrorInputNotValid/);
+	});
+
+	it('returns string', function() {
+		const item = new Date();
+		deepEqual(mainModule.KVCWriteLauncherItemBacklinksTemplate(item, {}, function (inputData) {
+			return 'Alfa-' + inputData;
+		}), ('Alfa-' + 'KVCWriteLauncherItemBacklinksText').toLowerCase() + '-' + mainModule.KVCWriteHumanTimestampString(item) + '\n\n');
+	});
+
+	it('creates heading for each key', function() {
+		deepEqual(mainModule.KVCWriteLauncherItemBacklinksTemplate(new Date(), {
+			alfa: [],
+		}, function (inputData) { return inputData }).split('\n\n').slice(1).join('\n\n'), '# alfa\n');
+	});
+
+	it('creates item for each value item', function() {
+		deepEqual(mainModule.KVCWriteLauncherItemBacklinksTemplate(new Date(), {
+			alfa: ['bravo'],
+		}, function (inputData) { return inputData }).split('\n\n').slice(1).join('\n\n'), '# alfa\n- [[bravo]]');
+	});
+
+});

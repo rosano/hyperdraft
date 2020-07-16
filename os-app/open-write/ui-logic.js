@@ -82,6 +82,26 @@ const mod = {
 		};
 	},
 
+	KVCWriteLauncherItemBacklinksTemplate (param1, param2, param3) {
+		if (!(param1 instanceof Date) || Number.isNaN(param1.getTime())) {
+			throw new Error('KVCErrorInputNotValid');
+		}
+
+		if (typeof param2 !== 'object' || param2 === null) {
+			throw new Error('KVCErrorInputNotValid');
+		}
+
+		if (typeof param3 !== 'function') {
+			throw new Error('KVCErrorInputNotValid');
+		}
+
+		return param3('KVCWriteLauncherItemBacklinksText').toLowerCase() + '-' + mod.KVCWriteHumanTimestampString(param1) + '\n\n' + Object.keys(param2).map(function (e) {
+			return `# ${e}\n${ param2[e].map(function (e) {
+				return `- [[${ e }]]`;
+			}).join('\n') }`;
+		}).join('\n\n');
+	},
+
 };
 
 Object.assign(exports, mod);
