@@ -1,3 +1,6 @@
+import * as KVCTemplatePackage from '../_shared/KVCTemplate/main.js';
+const KVCTemplate = KVCTemplatePackage.default || KVCTemplatePackage;
+
 const mod = {
 
 	KVCWriteFilterFunction (inputData) {
@@ -82,6 +85,24 @@ const mod = {
 		};
 	},
 
+	KVCWriteBacklinksMap (inputData) {
+		if (!Array.isArray(inputData)) {
+			throw new Error('KVCErrorInputNotValid');
+		}
+
+		return inputData.reduce(function (coll, item, index, source) {
+			const title = KVCTemplate.KVCTemplatePlaintextTitle(item.KVCNoteBody);
+
+			coll[title] = source.filter(function (e) {
+				return e.KVCNoteBody.includes(`[[${ title }]]`);
+			}).map(function (e) {
+				return KVCTemplate.KVCTemplatePlaintextTitle(e.KVCNoteBody);
+			});
+			
+			return coll;
+		}, {});
+	},
+
 	KVCWriteLauncherItemBacklinksTemplate (param1, param2, param3) {
 		if (!(param1 instanceof Date) || Number.isNaN(param1.getTime())) {
 			throw new Error('KVCErrorInputNotValid');
@@ -104,4 +125,4 @@ const mod = {
 
 };
 
-Object.assign(exports, mod);
+export default mod;

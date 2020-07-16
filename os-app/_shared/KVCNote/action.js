@@ -181,20 +181,6 @@ const mod = {
 			KVCNoteIsPublic: false,
 		}));
 	},
-
-	async KVCNoteActionBacklinksMap (storageClient) {
-		return Promise.resolve((await mod.KVCNoteActionQuery(storageClient, {})).reduce(function (coll, item, index, source) {
-			const title = KVCTemplate.KVCTemplatePlaintextTitle(item.KVCNoteBody);
-
-			coll[title] = source.filter(function (e) {
-				return e.KVCNoteBody.includes(`[[${ title }]]`);
-			}).map(function (e) {
-				return KVCTemplate.KVCTemplatePlaintextTitle(e.KVCNoteBody);
-			});
-			
-			return coll;
-		}, {}));
-	},
 	
 };
 	

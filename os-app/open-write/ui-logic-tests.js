@@ -1,6 +1,6 @@
 const { throws, deepEqual } = require('assert');
 
-const mainModule = require('./ui-logic.js');
+const mainModule = require('./ui-logic.js').default;
 
 describe('KVCWriteLogicListSort', function test_KVCWriteLogicListSort() {
 
@@ -200,6 +200,60 @@ describe('KVCWriteCustomDomainBaseURLFunction', function test_KVCWriteCustomDoma
 			deepEqual(mainModule.KVCWriteCustomDomainBaseURLFunction('alfa-bravo', '-bravo')('alfa-delta', 'echo'), 'echo-delta');
 		});
 	
+	});
+
+});
+
+describe('KVCWriteBacklinksMap', function test_KVCWriteBacklinksMap() {
+
+	it('throws if not array', function () {
+		throws(function () {
+			mainModule.KVCWriteBacklinksMap(null);
+		}, /KVCErrorInputNotValid/);
+	});
+
+	it('returns object', function() {
+		deepEqual(mainModule.KVCWriteBacklinksMap([]), {});
+	});
+
+	it('includes if no links', function() {
+		deepEqual(mainModule.KVCWriteBacklinksMap([StubNoteObjectValid()]), {
+			bravo: [],
+		});
+	});
+
+	it('includes if broken links', function() {
+		deepEqual(mainModule.KVCWriteBacklinksMap([Object.assign(StubNoteObjectValid(), {
+			KVCNoteBody: 'alfa\n[[bravo]]'
+		})]), {
+			alfa: [],
+		});
+	});
+
+	it('includes if unresolved links', function() {
+		const item1 = Object.assign(StubNoteObjectValid(), {
+			KVCNoteBody: 'alfa\n[[bravo]]'
+		});
+		const item2 = Object.assign(StubNoteObjectValid(), {
+			KVCNoteBody: 'bravo'
+		});
+		deepEqual(mainModule.KVCWriteBacklinksMap([item1, item2]), {
+			alfa: [],
+			bravo: ['alfa'],
+		});
+	});
+
+	it('includes if resolved links', function() {
+		const item1 = Object.assign(StubNoteObjectValid(), {
+			KVCNoteBody: 'alfa\n[[bravo]]'
+		});
+		const item2 = Object.assign(StubNoteObjectValid(), {
+			KVCNoteBody: 'bravo\n[[alfa]]'
+		});
+		deepEqual(mainModule.KVCWriteBacklinksMap([item1, item2]), {
+			alfa: ['bravo'],
+			bravo: ['alfa'],
+		});
 	});
 
 });
