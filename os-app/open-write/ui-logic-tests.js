@@ -121,7 +121,7 @@ describe('KVCWriteLauncherItemJournalTemplate', function test_KVCWriteLauncherIt
 		const item = new Date();
 		deepEqual(mainModule.KVCWriteLauncherItemJournalTemplate(item, function (inputData) {
 			return 'Alfa-' + inputData;
-		}), ('alfa-' + 'KVCWriteLauncherItemJournalText').toLowerCase() + '-' + mainModule.KVCWriteHumanTimestampString(item) + '\n\n- ');
+		}), ('Alfa-' + 'KVCWriteLauncherItemJournalText').toLowerCase() + '-' + mainModule.KVCWriteHumanTimestampString(item) + '\n\n- ');
 	});
 
 });
