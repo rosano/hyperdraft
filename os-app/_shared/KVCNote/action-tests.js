@@ -453,7 +453,7 @@ describe('KVCNoteActionBacklinksMap', function test_KVCNoteActionBacklinksMap() 
 		}));
 		deepEqual(await mainModule.KVCNoteActionBacklinksMap(KVCTestingStorageClient), {
 			alfa: [],
-			bravo: [item1],
+			bravo: ['alfa'],
 		});
 	});
 
@@ -465,8 +465,8 @@ describe('KVCNoteActionBacklinksMap', function test_KVCNoteActionBacklinksMap() 
 			KVCNoteBody: 'bravo\n[[alfa]]'
 		}));
 		deepEqual(await mainModule.KVCNoteActionBacklinksMap(KVCTestingStorageClient), {
-			alfa: [item2],
-			bravo: [item1],
+			alfa: ['bravo'],
+			bravo: ['alfa'],
 		});
 	});
 
