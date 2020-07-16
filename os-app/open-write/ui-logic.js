@@ -116,8 +116,10 @@ const mod = {
 			throw new Error('KVCErrorInputNotValid');
 		}
 
-		return param3('KVCWriteLauncherItemBacklinksText').toLowerCase() + '-' + mod.KVCWriteHumanTimestampString(param1) + '\n\n' + Object.keys(param2).map(function (e) {
-			return `# ${e}\n${ param2[e].map(function (e) {
+		return param3('KVCWriteLauncherItemBacklinksText').toLowerCase() + '-' + mod.KVCWriteHumanTimestampString(param1) + '\n\n' + Object.keys(param2).sort(function (a, b) {
+			return param2[a].length < param2[b].length ? -1 : 0;
+		}).map(function (e) {
+			return `# [[${e}]]\n${ param2[e].map(function (e) {
 				return `- [[${ e }]]`;
 			}).join('\n') }`;
 		}).join('\n\n');

@@ -288,13 +288,20 @@ describe('KVCWriteLauncherItemBacklinksTemplate', function test_KVCWriteLauncher
 	it('creates heading for each key', function() {
 		deepEqual(mainModule.KVCWriteLauncherItemBacklinksTemplate(new Date(), {
 			alfa: [],
-		}, function (inputData) { return inputData }).split('\n\n').slice(1).join('\n\n'), '# alfa\n');
+		}, function (inputData) { return inputData }).split('\n\n').slice(1).join('\n\n'), '# [[alfa]]\n');
 	});
 
 	it('creates item for each value item', function() {
 		deepEqual(mainModule.KVCWriteLauncherItemBacklinksTemplate(new Date(), {
 			alfa: ['bravo'],
-		}, function (inputData) { return inputData }).split('\n\n').slice(1).join('\n\n'), '# alfa\n- [[bravo]]');
+		}, function (inputData) { return inputData }).split('\n\n').slice(1).join('\n\n'), '# [[alfa]]\n- [[bravo]]');
+	});
+
+	it('sorts by length ascending', function() {
+		deepEqual(mainModule.KVCWriteLauncherItemBacklinksTemplate(new Date(), {
+			alfa: ['bravo', 'charlie'],
+			bravo: ['delta'],
+		}, function (inputData) { return inputData }).split('\n\n').slice(1).join('\n\n'), '# [[bravo]]\n- [[delta]]\n\n# [[alfa]]\n- [[bravo]]\n- [[charlie]]');
 	});
 
 });
