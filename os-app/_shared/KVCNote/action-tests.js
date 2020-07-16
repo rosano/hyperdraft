@@ -255,10 +255,17 @@ describe('KVCNoteActionPublicTitlePathMap', function test_KVCNoteActionPublicTit
 		});
 	});
 
-	it('links to KVCNoteActionPublicPath', async function() {
+	it('links to KVCNoteActionPublicPath if not root', async function() {
+		const item = await kTesting.uPublish(await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()));
+		deepEqual(await mainModule.KVCNoteActionPublicTitlePathMap(KVCTestingStorageClient, '', true), {
+			bravo: mainModule.KVCNoteActionPublicPath(item, false),
+		});
+	});
+
+	it('links to KVCNoteActionPublicPath if root', async function() {
 		const item = await kTesting.uPublish(await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()));
 		deepEqual(await mainModule.KVCNoteActionPublicTitlePathMap(KVCTestingStorageClient, item.KVCNoteID, true), {
-			bravo: '/',
+			bravo: mainModule.KVCNoteActionPublicPath(item, true),
 		});
 	});
 
