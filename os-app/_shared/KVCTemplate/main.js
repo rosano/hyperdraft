@@ -126,6 +126,22 @@ const mod = {
 		return 'PermalinkPage';
 	},
 
+	KVCTemplateTokenBacklinks () {
+		return 'Backlinks';
+	},
+
+	KVCTemplateTokenName () {
+		return 'Name';
+	},
+
+	KVCTemplateTokenURL () {
+		return 'URL';
+	},
+
+	KVCTemplateTokenDescription () {
+		return 'Description';
+	},
+
 	_KVCTemplateCollapseBlocksReplaceMatches (string, matchOpen, matchClosed, exclude) {
 		return string.slice(0, matchOpen.index) + (exclude ? '' : string.slice(matchOpen.index + matchOpen[0].length, matchClosed.index)) + string.slice(matchClosed.index + matchClosed[0].length);
 	},

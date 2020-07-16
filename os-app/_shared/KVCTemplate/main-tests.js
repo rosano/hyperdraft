@@ -330,6 +330,38 @@ describe('KVCTemplateTokenNotePageLegacy', function test_KVCTemplateTokenNotePag
 
 });
 
+describe('KVCTemplateTokenBacklinks', function test_KVCTemplateTokenBacklinks() {
+
+	it('returns string', function() {
+		deepEqual(mainModule.KVCTemplateTokenBacklinks(), 'Backlinks');
+	});
+
+});
+
+describe('KVCTemplateTokenName', function test_KVCTemplateTokenName() {
+
+	it('returns string', function() {
+		deepEqual(mainModule.KVCTemplateTokenName(), 'Name');
+	});
+
+});
+
+describe('KVCTemplateTokenURL', function test_KVCTemplateTokenURL() {
+
+	it('returns string', function() {
+		deepEqual(mainModule.KVCTemplateTokenURL(), 'URL');
+	});
+
+});
+
+describe('KVCTemplateTokenDescription', function test_KVCTemplateTokenDescription() {
+
+	it('returns string', function() {
+		deepEqual(mainModule.KVCTemplateTokenDescription(), 'Description');
+	});
+
+});
+
 describe('KVCTemplateCollapseBlocks', function test_KVCTemplateCollapseBlocks() {
 
 	it('throws error if param1 not string', function() {
