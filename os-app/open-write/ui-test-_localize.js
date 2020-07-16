@@ -1,6 +1,6 @@
 const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
-const KVCWriteLogic = require('./ui-logic.js');
+const KVCWriteLogic = require('./ui-logic.js').default;
 
 kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 
@@ -22,6 +22,10 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 
 		it('localizes KVCWriteLauncherItemJournal', function () {
 			return browser.assert.OLSKLauncherItemText('KVCWriteLauncherItemJournal', uLocalized('KVCWriteLauncherItemJournalText'));
+		});
+
+		it('localizes KVCWriteLauncherItemBacklinks', function () {
+			return browser.assert.OLSKLauncherItemText('KVCWriteLauncherItemBacklinks', uLocalized('KVCWriteLauncherItemBacklinksText'));
 		});
 
 		context('OLSKAppToolbarStorageButton', function test_OLSKAppToolbarStorageButton () {
@@ -54,8 +58,33 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 				browser.assert.text('.KVCWriteMasterListItemSnippet', '-');
 			});
 			
-			before(function () {
+			it('sets KVCNoteBody', function () {
 				browser.assert.input('.KVCWriteInputFieldDebug', uLocalized('KVCWriteLauncherItemJournalText').toLowerCase() + '-' + KVCWriteLogic.KVCWriteHumanTimestampString(item) + '\n\n- ');
+			});
+		
+		});
+
+		context('KVCWriteLauncherItemBacklinks', function test_KVCWriteLauncherItemBacklinks () {
+
+			const date = (function(inputData) {
+				return (new Date(Date.parse(inputData) - inputData.getTimezoneOffset() * 1000 * 60));
+			})(new Date('2001-02-03T04:05:06Z'));
+			const item = uLocalized('KVCWriteLauncherItemBacklinksText').toLowerCase() + '-' + KVCWriteLogic.KVCWriteHumanTimestampString(date) + `\n\n# ${ uLocalized('KVCWriteLauncherItemJournalText').toLowerCase() + '-' + KVCWriteLogic.KVCWriteHumanTimestampString(date) }\n`;
+
+			before(function () {
+				return uLaunch('KVCWriteLauncherItemBacklinks');
+			});
+
+			it('sets KVCWriteMasterListItemTitle', function () {
+				browser.assert.text('.OLSKResultsListItem:nth-child(1) .KVCWriteMasterListItemTitle', item.split('\n').shift());
+			});
+
+			it.skip('sets KVCWriteMasterListItemSnippet', function () {
+				browser.assert.text('.KVCWriteMasterListItemSnippet', item.split('\n').slice(2).join('\n'));
+			});
+			
+			it('sets KVCNoteBody', function () {
+				browser.assert.input('.KVCWriteInputFieldDebug', item);
 			});
 		
 		});

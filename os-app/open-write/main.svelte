@@ -101,6 +101,12 @@ const mod = {
 			LCHRecipeCallback: function KVCWriteLauncherItemJournal () {
 				mod.ControlNoteCreate(KVCWriteLogic.KVCWriteLauncherItemJournalTemplate(this.api.LCHDateLocalOffsetSubtracted(new Date(OLSK_TESTING_BEHAVIOUR() ? '2001-02-03T04:05:06Z' : Date.now())), OLSKLocalized));
 			},
+		}, {
+			LCHRecipeSignature: 'KVCWriteLauncherItemBacklinks',
+			LCHRecipeName: OLSKLocalized('KVCWriteLauncherItemBacklinksText'),
+			LCHRecipeCallback: async function KVCWriteLauncherItemBacklinks () {
+				mod.ControlNoteCreate(KVCWriteLogic.KVCWriteLauncherItemBacklinksTemplate(this.api.LCHDateLocalOffsetSubtracted(new Date(OLSK_TESTING_BEHAVIOUR() ? '2001-02-03T04:05:06Z' : Date.now())), KVCWriteLogic.KVCWriteBacklinksMap(mod._ValueNotesAll), OLSKLocalized));
+			},
 		}];
 
 		if (mod._ValueStorageIsConnected) {
