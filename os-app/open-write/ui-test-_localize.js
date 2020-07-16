@@ -69,7 +69,7 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 			const date = (function(inputData) {
 				return (new Date(Date.parse(inputData) - inputData.getTimezoneOffset() * 1000 * 60));
 			})(new Date('2001-02-03T04:05:06Z'));
-			const item = uLocalized('KVCWriteLauncherItemBacklinksText').toLowerCase() + '-' + KVCWriteLogic.KVCWriteHumanTimestampString(date) + `\n\n# ${ uLocalized('KVCWriteLauncherItemJournalText').toLowerCase() + '-' + KVCWriteLogic.KVCWriteHumanTimestampString(date) }\n`;
+			const item = uLocalized('KVCWriteLauncherItemBacklinksText').toLowerCase() + '-' + KVCWriteLogic.KVCWriteHumanTimestampString(date) + `\n\n# [[${ uLocalized('KVCWriteLauncherItemJournalText').toLowerCase() + '-' + KVCWriteLogic.KVCWriteHumanTimestampString(date) }]]\n`;
 
 			before(function () {
 				return uLaunch('KVCWriteLauncherItemBacklinks');
