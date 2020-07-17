@@ -494,7 +494,7 @@ describe('KVCTemplateCollapseBlocks', function test_KVCTemplateCollapseBlocks() 
 
 	it('throws error if param2 not array', function() {
 		throws(function() {
-			mainModule.KVCTemplateCollapseBlocks('', {});
+			mainModule.KVCTemplateCollapseBlocks('', null);
 		}, /KVCErrorInputNotValid/);
 	});
 
