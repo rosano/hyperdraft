@@ -1,6 +1,10 @@
 import * as OLSKStringPackage from 'OLSKString';
 const OLSKString = OLSKStringPackage.default || OLSKStringPackage;
 
+const uTokenTag = function (inputData) {
+	return `{${ mod[inputData]() }}`;
+};
+
 const mod = {
 
 	KVCTemplatePlaintextTitle (inputData) {
@@ -237,6 +241,38 @@ const mod = {
 
 			return coll;
 		}, []);
+	},
+
+	KVCTemplateBlockTokensMap (inputData) {
+		if (typeof inputData !== 'object' || inputData === null) {
+			throw new Error('KVCErrorInputNotValid');
+		}
+
+		if (typeof inputData.KVCBlockPermalinkMap !== 'object' || inputData.KVCBlockPermalinkMap === null) {
+			throw new Error('KVCErrorInputNotValid');
+		}
+
+		if (typeof inputData.KVCBlockTemplateOptions !== 'object' || inputData.KVCBlockTemplateOptions === null) {
+			throw new Error('KVCErrorInputNotValid');
+		}
+
+		const outputData = {};
+
+		if (inputData.KVCBlockTemplateOptions.KVCOptionBacklinks) {
+			outputData[uTokenTag('KVCTemplateTokenBacklinks')] = inputData.KVCBlockTemplateOptions.KVCOptionBacklinks.map(function(e) {
+				const outputData = {};
+				
+				outputData[uTokenTag('KVCTemplateTokenName')] = mod.KVCTemplatePlaintextTitle(e.KVCNoteBody);
+				
+				outputData[uTokenTag('KVCTemplateTokenURL')] = inputData.KVCBlockPermalinkMap[mod.KVCTemplatePlaintextTitle(e.KVCNoteBody)];
+				
+				outputData[uTokenTag('KVCTemplateTokenDescription')] = mod.KVCTemplatePlaintextBody(e.KVCNoteBody);
+
+				return outputData;
+			});
+		}
+
+		return outputData;
 	},
 
 	KVCTemplateCollapseBlocks (param1, param2) {

@@ -4,6 +4,10 @@ const mainModule = require('./main.js').default;
 
 const showdown = require('showdown');
 
+const uTokenTag = function (inputData) {
+	return `{${ mainModule[inputData]() }}`;
+};
+
 describe('KVCTemplatePlaintextTitle', function test_KVCTemplatePlaintextTitle() {
 
 	it('throws if not string', function () {
@@ -412,6 +416,70 @@ describe('KVCTemplateVisibleBlocks', function test_KVCTemplateVisibleBlocks() {
 			}), [mainModule.KVCTemplateTokenBacklinks()]);
 		});
 		
+	});
+
+});
+
+describe('KVCTemplateBlockTokensMap', function test_KVCTemplateBlockTokensMap() {
+
+	const uOptions = function () {
+		return {
+			KVCBlockPermalinkMap: {},
+			KVCBlockTemplateOptions: {},
+		};
+	};
+
+	it('throws if not object', function () {
+		throws(function () {
+			mainModule.KVCTemplateBlockTokensMap(null)
+		}, /KVCErrorInputNotValid/);
+	});
+
+	it('throws if KVCBlockPermalinkMap not object', function () {
+		throws(function () {
+			mainModule.KVCTemplateBlockTokensMap(Object.assign(uOptions(), {
+				KVCBlockPermalinkMap: null,
+			}))
+		}, /KVCErrorInputNotValid/);
+	});
+
+	it('throws if KVCBlockTemplateOptions not object', function () {
+		throws(function () {
+			mainModule.KVCTemplateBlockTokensMap(Object.assign(uOptions(), {
+				KVCBlockTemplateOptions: null,
+			}))
+		}, /KVCErrorInputNotValid/);
+	});
+
+	it('returns object', function() {
+		deepEqual(typeof mainModule.KVCTemplateBlockTokensMap(uOptions()), 'object');
+	});
+
+	context('KVCTemplateTokenBacklinks', function () {
+
+		const item = mainModule.KVCTemplateBlockTokensMap(Object.assign(uOptions(), {
+			KVCBlockPermalinkMap: {
+				charlie: 'echo'
+			},
+			KVCBlockTemplateOptions: {
+				KVCOptionBacklinks: [Object.assign(StubNoteObjectValid(), {
+					KVCNoteBody: 'charlie\ndelta',
+				})],
+			},
+		}))[uTokenTag('KVCTemplateTokenBacklinks')].shift();
+
+		it('sets KVCTemplateTokenName', function () {
+			deepEqual(item[uTokenTag('KVCTemplateTokenName')], 'charlie');
+		});
+		
+		it('sets KVCTemplateTokenURL', function () {
+			deepEqual(item[uTokenTag('KVCTemplateTokenURL')], 'echo');
+		});
+		
+		it('sets KVCTemplateTokenDescription', function () {
+			deepEqual(item[uTokenTag('KVCTemplateTokenDescription')], 'delta');
+		});
+	
 	});
 
 });
