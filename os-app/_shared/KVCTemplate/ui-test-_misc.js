@@ -2,6 +2,10 @@ const kDefaultRoutePath = require('./controller.js').OLSKControllerRoutes().shif
 
 const mainModule = require('./main.js').default;
 
+const uTokenTag = function (inputData) {
+	return `{${ mainModule[inputData]() }}`;
+};
+
 describe('KVCTemplate_Misc', function () {
 
 	before(function() {
@@ -11,7 +15,7 @@ describe('KVCTemplate_Misc', function () {
 	describe('KVCTemplateHeadTitle', function test_KVCTemplateHeadTitle() {
 
 		it('sets text', function () {
-			browser.assert.text(KVCTemplateHeadTitle, `{${ mainModule.KVCTemplateTokenPostTitle() }}`);
+			browser.assert.text(KVCTemplateHeadTitle, uTokenTag('KVCTemplateTokenPostTitle'));
 		});
 		
 	});
@@ -43,7 +47,7 @@ describe('KVCTemplate_Misc', function () {
 	describe('KVCRootLink', function test_KVCRootLink() {
 
 		it('sets href', function () {
-			browser.assert.attribute(KVCRootLink, 'href', `{${ mainModule.KVCTemplateTokenRootURL() }}`);
+			browser.assert.attribute(KVCRootLink, 'href', uTokenTag('KVCTemplateTokenRootURL'));
 		});
 
 	});
@@ -51,7 +55,7 @@ describe('KVCTemplate_Misc', function () {
 	describe('KVCArticleTitle', function test_KVCArticleTitle() {
 
 		it('sets text', function () {
-			browser.assert.text(KVCArticleTitle, `{${ mainModule.KVCTemplateTokenPostTitle() }}`);
+			browser.assert.text(KVCArticleTitle, uTokenTag('KVCTemplateTokenPostTitle'));
 		});
 
 	});
@@ -59,7 +63,7 @@ describe('KVCTemplate_Misc', function () {
 	describe('KVCArticleBody', function test_KVCArticleBody() {
 
 		it('sets text', function () {
-			browser.assert.text(KVCArticleBody, `{${ mainModule.KVCTemplateTokenPostBody() }}`);
+			browser.assert.text(KVCArticleBody, uTokenTag('KVCTemplateTokenPostBody'));
 		});
 
 	});
@@ -67,11 +71,11 @@ describe('KVCTemplate_Misc', function () {
 	describe('KVCBacklinksLink', function test_KVCBacklinksLink() {
 
 		it('sets href', function () {
-			browser.assert.attribute(KVCBacklinksLink, 'href', `{${ mainModule.KVCTemplateTokenURL() }}`);
+			browser.assert.attribute(KVCBacklinksLink, 'href', uTokenTag('KVCTemplateTokenURL'));
 		});
 
 		it('sets text', function () {
-			browser.assert.text(KVCBacklinksLink, `{${ mainModule.KVCTemplateTokenName() }}`);
+			browser.assert.text(KVCBacklinksLink, uTokenTag('KVCTemplateTokenName'));
 		});
 
 	});
@@ -79,7 +83,7 @@ describe('KVCTemplate_Misc', function () {
 	describe('KVCBacklinksSnippet', function test_KVCBacklinksSnippet() {
 
 		it('sets text', function () {
-			browser.assert.text(KVCBacklinksSnippet, `{${ mainModule.KVCTemplateTokenDescription() }}`);
+			browser.assert.text(KVCBacklinksSnippet, uTokenTag('KVCTemplateTokenDescription'));
 		});
 
 	});

@@ -338,7 +338,7 @@ describe('KVCTemplateTokensMap', function test_KVCTemplateTokensMap() {
 		
 		it('sets to KVCTemplatePlaintextTitle', function () {
 			const item = 'alfa\nbravo';
-			deepEqual(mainModule.KVCTemplateTokensMap(showdown, item, {})[`{${ mainModule.KVCTemplateTokenPostTitle() }}`], mainModule.KVCTemplatePlaintextTitle(item));
+			deepEqual(mainModule.KVCTemplateTokensMap(showdown, item, {})[uTokenTag('KVCTemplateTokenPostTitle')], mainModule.KVCTemplatePlaintextTitle(item));
 		});
 	
 	});
@@ -347,7 +347,7 @@ describe('KVCTemplateTokensMap', function test_KVCTemplateTokensMap() {
 		
 		it('sets to KVCTemplateHTML', function () {
 			const item = 'alfa\n# bravo';
-			deepEqual(mainModule.KVCTemplateTokensMap(showdown, item, {})[`{${ mainModule.KVCTemplateTokenPostBody() }}`], mainModule.KVCTemplateHTML(showdown, mainModule.KVCTemplatePlaintextBody(item)));
+			deepEqual(mainModule.KVCTemplateTokensMap(showdown, item, {})[uTokenTag('KVCTemplateTokenPostBody')], mainModule.KVCTemplateHTML(showdown, mainModule.KVCTemplatePlaintextBody(item)));
 		});
 	
 	});
@@ -357,7 +357,7 @@ describe('KVCTemplateTokensMap', function test_KVCTemplateTokensMap() {
 		it('sets to KVCOptionRootURL', function () {
 			deepEqual(mainModule.KVCTemplateTokensMap(showdown, '', {
 				KVCOptionRootURL: 'alfa',
-			})[`{${ mainModule.KVCTemplateTokenRootURL() }}`], 'alfa');
+			})[uTokenTag('KVCTemplateTokenRootURL')], 'alfa');
 		});
 	
 	});
@@ -367,7 +367,7 @@ describe('KVCTemplateTokensMap', function test_KVCTemplateTokensMap() {
 		it('sets to KVCOptionRootURL', function () {
 			deepEqual(mainModule.KVCTemplateTokensMap(showdown, '', {
 				KVCOptionRootURL: 'alfa',
-			})[`{${ mainModule.KVCTemplateTokenRootURLLegacy() }}`], 'alfa');
+			})[uTokenTag('KVCTemplateTokenRootURLLegacy')], 'alfa');
 		});
 	
 	});
@@ -624,17 +624,17 @@ describe('KVCView', function test_KVCView() {
 		
 		it('replaces if not present', function() {
 			deepEqual(mainModule.KVCView(showdown, Object.assign(uOptions(), {
-				KVCViewTemplate: 'alfa {block:bravo}{/block:bravo}',
-			})), 'alfa ');
+				KVCViewTemplate: uBlockTag('KVCTemplateTokenRootURL', 'bravo'),
+			})), '');
 		});
 		
 		it('replaces KVCTemplateTokenRootURL', function() {
 			deepEqual(mainModule.KVCView(showdown, Object.assign(uOptions(), {
-				KVCViewTemplate: `alfa {block:${ mainModule.KVCTemplateTokenRootURL() }}{${ mainModule.KVCTemplateTokenRootURL() }}{/block:${ mainModule.KVCTemplateTokenRootURL() }}`,
+				KVCViewTemplate: uBlockTag('KVCTemplateTokenRootURL', uTokenTag('KVCTemplateTokenRootURL')),
 				KVCViewTemplateOptions: {
 					KVCOptionRootURL: 'bravo',
 				},
-			})), 'alfa bravo');
+			})), 'bravo');
 		});
 	
 	});
