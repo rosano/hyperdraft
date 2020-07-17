@@ -312,4 +312,15 @@ describe('KVCWriteLauncherItemBacklinksTemplate', function test_KVCWriteLauncher
 		}, function (inputData) { return inputData }).split('\n\n').slice(1).join('\n\n'), '# [[bravo]]\n- [[delta]]\n\n# [[alfa]]\n- [[bravo]]\n- [[charlie]]');
 	});
 
+	it('sorts KVCNoteIsArchived below', function() {
+		deepEqual(mainModule.KVCWriteLauncherItemBacklinksTemplate(new Date(), {
+			alfa: [Object.assign(StubNoteObjectValid(), {
+				KVCNoteBody: 'bravo',
+				KVCNoteIsArchived: true,
+			}), Object.assign(StubNoteObjectValid(), {
+				KVCNoteBody: 'charlie',
+			})],
+		}, function (inputData) { return inputData }).split('\n\n').slice(1).join('\n\n'), '# [[alfa]]\n- [[charlie]]\n- [[bravo]]');
+	});
+
 });
