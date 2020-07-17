@@ -9,8 +9,6 @@ import * as OLSKStringPackage from 'OLSKString';
 const OLSKString = OLSKStringPackage.default || OLSKStringPackage;
 import * as KVCTemplatePackage from '../KVCTemplate/main.js';
 const KVCTemplate = KVCTemplatePackage.default || KVCTemplatePackage;
-import * as showdownPackage from 'showdown';
-const showdown = showdownPackage.default || showdownPackage;
 
 const mod = {
 
@@ -122,16 +120,12 @@ const mod = {
 		}, {}));
 	},
 
-	async KVCNoteActionPublish (storageClient, param1, param2, param3, options) {
+	async KVCNoteActionPublish (storageClient, param1, param2, options) {
 		if (KVCNoteModel.KVCNoteModelErrorsFor(param1)) {
 			return Promise.reject(new Error('KVCErrorInputNotValid'));
 		}
 
 		if (typeof param2 !== 'string') {
-			return Promise.reject(new Error('KVCErrorInputNotValid'));
-		}
-
-		if (typeof param3 !== 'object' || param3 === null) {
 			return Promise.reject(new Error('KVCErrorInputNotValid'));
 		}
 
@@ -147,15 +141,11 @@ const mod = {
 			param1.KVCNotePublishDate = new Date();
 		}
 
-		const tokensMap = KVCTemplate.KVCTemplateTokensMap(showdown, KVCTemplate.KVCTemplateRemappedLinks(param1.KVCNoteBody, param3), options);
+		await KVCNoteStorage.KVCNoteStoragePublicWrite(storageClient, mod.KVCNoteActionPublishPath(param1, false), param2);
 
-		await (async function(inputData) {
-			await KVCNoteStorage.KVCNoteStoragePublicWrite(storageClient, mod.KVCNoteActionPublishPath(param1, false), inputData);
-
-			if (options.KVCOptionIsRoot) {
-				await KVCNoteStorage.KVCNoteStoragePublicWrite(storageClient, mod.KVCNoteActionPublishPath(param1, true), inputData);
-			}
-		})(OLSKString.OLSKStringReplaceTokens(KVCTemplate.KVCTemplateCollapseBlocks(param2, KVCTemplate.KVCTemplateBlocks(options)), tokensMap));
+		if (options.KVCOptionIsRoot) {
+			await KVCNoteStorage.KVCNoteStoragePublicWrite(storageClient, mod.KVCNoteActionPublishPath(param1, true), param2);
+		}
 
 		return await mod.KVCNoteActionUpdate(storageClient, Object.assign(param1, {
 			KVCNoteIsPublic: true,

@@ -1,6 +1,6 @@
 const kDefaultRoutePath = require('./controller.js').OLSKControllerRoutes().shift().OLSKRoutePath;
 
-const mainModule = require('./main.js');
+const mainModule = require('./main.js').default;
 
 describe('KVCTemplate_Misc', function () {
 

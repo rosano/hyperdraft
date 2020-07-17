@@ -19,8 +19,9 @@ import KVCSettingAction from '../_shared/KVCSetting/action.js';
 import KVCWriteLogic from './ui-logic.js';
 import * as RemoteStoragePackage from 'remotestoragejs';
 const RemoteStorage = RemoteStoragePackage.default || RemoteStoragePackage;
-import * as KVCTemplatePackage from '../_shared/KVCTemplate/main.js';
-const KVCTemplate = KVCTemplatePackage.default || KVCTemplatePackage;
+import KVCTemplate from '../_shared/KVCTemplate/main.js';
+import * as showdownPackage from 'showdown';
+const showdown = showdownPackage.default || showdownPackage;
 
 const mod = {
 
@@ -473,11 +474,18 @@ const mod = {
 		}
 
 		const _references = [OLSKLocalized('KVCRootLinkText')]; // #purge-translation-refs
-		
-		mod.ValueNoteSelected(await KVCNoteAction.KVCNoteActionPublish(mod._ValueStorageClient, inputData, KVCTemplate.KVCTemplateViewDefault(OLSKLocalized), await KVCNoteAction.KVCNoteActionPublicTitlePathMap(mod._ValueStorageClient, mod.DataSettingValue('KVCSettingPublicRootPageID')), {
+
+		const options = {
 			KVCOptionIsRoot: mod.DataSettingValue('KVCSettingPublicRootPageID') === inputData.KVCNoteID,
 			KVCOptionRootURL: mod.DataSettingValue('KVCSettingCustomDomainBaseURL'),
-		}));
+		};
+		
+		mod.ValueNoteSelected(await KVCNoteAction.KVCNoteActionPublish(mod._ValueStorageClient, inputData, KVCTemplate.KVCView(showdown, {
+			KVCViewSource: inputData.KVCNoteBody,
+			KVCViewPermalinkMap: await KVCNoteAction.KVCNoteActionPublicTitlePathMap(mod._ValueStorageClient, mod.DataSettingValue('KVCSettingPublicRootPageID')),
+			KVCViewTemplate: KVCTemplate.KVCTemplateViewDefault(OLSKLocalized),
+			KVCViewTemplateOptions: options,
+		}), options));
 	},
 	
 	async ControlNoteRetract (inputData) {

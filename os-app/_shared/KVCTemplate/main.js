@@ -1,3 +1,6 @@
+import * as OLSKStringPackage from 'OLSKString';
+const OLSKString = OLSKStringPackage.default || OLSKStringPackage;
+
 const mod = {
 
 	KVCTemplatePlaintextTitle (inputData) {
@@ -286,6 +289,30 @@ const mod = {
 </html>`;
 	},
 
+	KVCView (showdown, inputData) {
+		if (typeof inputData !== 'object' || inputData === null) {
+			throw new Error('KVCErrorInputNotValid');
+		}
+
+		if (typeof inputData.KVCViewSource !== 'string') {
+			throw new Error('KVCErrorInputNotValid');
+		}
+
+		if (typeof inputData.KVCViewPermalinkMap !== 'object' || inputData.KVCViewPermalinkMap === null) {
+			throw new Error('KVCErrorInputNotValid');
+		}
+
+		if (typeof inputData.KVCViewTemplate !== 'string') {
+			throw new Error('KVCErrorInputNotValid');
+		}
+
+		if (typeof inputData.KVCViewTemplateOptions !== 'object' || inputData.KVCViewTemplateOptions === null) {
+			throw new Error('KVCErrorInputNotValid');
+		}
+
+		return OLSKString.OLSKStringReplaceTokens(mod.KVCTemplateCollapseBlocks(inputData.KVCViewTemplate, mod.KVCTemplateBlocks(inputData.KVCViewTemplateOptions)), mod.KVCTemplateTokensMap(showdown, mod.KVCTemplateRemappedLinks(inputData.KVCViewSource, inputData.KVCViewPermalinkMap), inputData.KVCViewTemplateOptions))
+	},
+
 };
 
-Object.assign(exports, mod);
+export default mod;

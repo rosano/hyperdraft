@@ -12,8 +12,8 @@ const kTesting = {
 		};
 	},
 
-	uPublish (param1 = kTesting.StubNoteObject(), param2 = '', param3 = {}, param4 = {}) {
-		return mainModule.KVCNoteActionPublish(KVCTestingStorageClient, param1, param2, param3, param4);
+	uPublish (param1 = kTesting.StubNoteObject(), param2 = '', param3 = {}) {
+		return mainModule.KVCNoteActionPublish(KVCTestingStorageClient, param1, param2, param3);
 	},
 };
 
@@ -274,19 +274,15 @@ describe('KVCNoteActionPublicTitlePathMap', function test_KVCNoteActionPublicTit
 describe('KVCNoteActionPublish', function test_KVCNoteActionPublish() {
 
 	it('rejects if param1 not valid', async function() {
-		await rejects(mainModule.KVCNoteActionPublish(KVCTestingStorageClient, {}, '', {}, {}), /KVCErrorInputNotValid/);
+		await rejects(mainModule.KVCNoteActionPublish(KVCTestingStorageClient, {}, '', {}), /KVCErrorInputNotValid/);
 	});
 
 	it('rejects if param2 not string', async function() {
-		await rejects(mainModule.KVCNoteActionPublish(KVCTestingStorageClient, StubNoteObjectValid(), null, {}, {}), /KVCErrorInputNotValid/);
-	});
-
-	it('rejects if param3 not object', async function() {
-		await rejects(mainModule.KVCNoteActionPublish(KVCTestingStorageClient, StubNoteObjectValid(), '', null, {}), /KVCErrorInputNotValid/);
+		await rejects(mainModule.KVCNoteActionPublish(KVCTestingStorageClient, StubNoteObjectValid(), null, {}), /KVCErrorInputNotValid/);
 	});
 
 	it('rejects if options not object', async function() {
-		await rejects(mainModule.KVCNoteActionPublish(KVCTestingStorageClient, StubNoteObjectValid(), '', {}, null), /KVCErrorInputNotValid/);
+		await rejects(mainModule.KVCNoteActionPublish(KVCTestingStorageClient, StubNoteObjectValid(), '', null), /KVCErrorInputNotValid/);
 	});
 
 	it('returns param1', async function() {
@@ -338,47 +334,13 @@ describe('KVCNoteActionPublish', function test_KVCNoteActionPublish() {
 		deepEqual((await KVCTestingStorageClient.wikiavec.__DEBUG.__OLSKRemoteStoragePublicClient().getFile(KVCNoteStorage.KVCNoteStoragePublicObjectPath(item))).data, 'alfa');
 	});
 
-	it('replaces public links', async function() {
-		const item = await kTesting.uPublish(await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, Object.assign(kTesting.StubNoteObject(), {
-			KVCNoteBody: 'bravo\n[[charlie]]'
-		})), `alfa {${ KVCTemplate.KVCTemplateTokenPostBody() }}`, {
-			charlie: 'delta',
-		});
-
-		deepEqual((await KVCTestingStorageClient.wikiavec.__DEBUG.__OLSKRemoteStoragePublicClient().getFile(KVCNoteStorage.KVCNoteStoragePublicObjectPath(item))).data, 'alfa <p><a href="delta">charlie</a></p>');
-	});
-
 	it('writes to two paths if KVCOptionIsRoot true', async function() {
-		const item = await kTesting.uPublish(await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()), 'alfa', {}, {
+		const item = await kTesting.uPublish(await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()), 'bravo', {
 			KVCOptionIsRoot: true,
 		});
 
-		deepEqual((await KVCTestingStorageClient.wikiavec.__DEBUG.__OLSKRemoteStoragePublicClient().getFile(KVCNoteStorage.KVCNoteStoragePublicObjectPath(item))).data, 'alfa');
-		deepEqual((await KVCTestingStorageClient.wikiavec.__DEBUG.__OLSKRemoteStoragePublicClient().getFile(KVCNoteStorage.KVCNoteStoragePublicRootPagePath())).data, 'alfa');
-	});
-
-	it('replaces tokens', async function() {
-		const item = await kTesting.uPublish(await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()), `alfa {${ KVCTemplate.KVCTemplateTokenPostTitle() }}`);
-
-		deepEqual((await KVCTestingStorageClient.wikiavec.__DEBUG.__OLSKRemoteStoragePublicClient().getFile(KVCNoteStorage.KVCNoteStoragePublicObjectPath(item))).data, 'alfa bravo');
-	});
-
-	context('blocks', function () {
-		
-		it('replaces if not present', async function() {
-			const item = await kTesting.uPublish(await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()), `alfa {block:alfa}{/block:alfa}`);
-
-			deepEqual((await KVCTestingStorageClient.wikiavec.__DEBUG.__OLSKRemoteStoragePublicClient().getFile(KVCNoteStorage.KVCNoteStoragePublicObjectPath(item))).data, 'alfa ');
-		});
-		
-		it('replaces KVCTemplateTokenRootURL', async function() {
-			const item = await kTesting.uPublish(await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()), `alfa {block:${ KVCTemplate.KVCTemplateTokenRootURL() }}{${ KVCTemplate.KVCTemplateTokenRootURL() }}{/block:${ KVCTemplate.KVCTemplateTokenRootURL() }}`, {}, {
-				KVCOptionRootURL: 'bravo',
-			});
-
-			deepEqual((await KVCTestingStorageClient.wikiavec.__DEBUG.__OLSKRemoteStoragePublicClient().getFile(KVCNoteStorage.KVCNoteStoragePublicObjectPath(item))).data, 'alfa bravo');
-		});
-	
+		deepEqual((await KVCTestingStorageClient.wikiavec.__DEBUG.__OLSKRemoteStoragePublicClient().getFile(KVCNoteStorage.KVCNoteStoragePublicObjectPath(item))).data, 'bravo');
+		deepEqual((await KVCTestingStorageClient.wikiavec.__DEBUG.__OLSKRemoteStoragePublicClient().getFile(KVCNoteStorage.KVCNoteStoragePublicRootPagePath())).data, 'bravo');
 	});
 
 });

@@ -1,6 +1,6 @@
 const { throws, deepEqual } = require('assert');
 
-const mainModule = require('./main.js');
+const mainModule = require('./main.js').default;
 
 const showdown = require('showdown');
 
@@ -457,6 +457,110 @@ describe('KVCTemplateViewDefault', function test_KVCTemplateViewDefault() {
 
 	it('contains KVCTemplateTokenPostTitle in title', function() {
 		deepEqual(!!mainModule.KVCTemplateViewDefault(uLocalize).match(uTagContent('title', mainModule.KVCTemplateTokenPostTitle())), true);
+	});
+
+});
+
+describe('KVCView', function test_KVCView() {
+
+	const uOptions = function () {
+		return {
+			KVCViewSource: '',
+			KVCViewPermalinkMap: {},
+			KVCViewTemplate: '',
+			KVCViewTemplateOptions: {},
+		};
+	};
+
+	it('throws if not object', function () {
+		throws(function () {
+			mainModule.KVCView(showdown, null);
+		}, /KVCErrorInputNotValid/);
+	});
+
+	it('throws if KVCViewSource not string', function () {
+		throws(function () {
+			mainModule.KVCView(showdown, Object.assign(uOptions(), {
+				KVCViewSource: null,
+			}));
+		}, /KVCErrorInputNotValid/);
+	});
+
+	it('throws if KVCViewPermalinkMap not object', function () {
+		throws(function () {
+			mainModule.KVCView(showdown, Object.assign(uOptions(), {
+				KVCViewPermalinkMap: null,
+			}));
+		}, /KVCErrorInputNotValid/);
+	});
+
+	it('throws if KVCViewTemplate not string', function () {
+		throws(function () {
+			mainModule.KVCView(showdown, Object.assign(uOptions(), {
+				KVCViewTemplate: null,
+			}));
+		}, /KVCErrorInputNotValid/);
+	});
+
+	it('throws if KVCViewTemplateOptions not object', function () {
+
+		throws(function () {
+			mainModule.KVCView(showdown, Object.assign(uOptions(), {
+				KVCViewTemplateOptions: null,
+			}));
+		}, /KVCErrorInputNotValid/);
+	});
+
+	it('returns string', function() {
+		deepEqual(typeof mainModule.KVCView(showdown, uOptions()), 'string');
+	});
+
+	it('replaces KVCViewPermalinkMap', function() {
+		deepEqual(mainModule.KVCView(showdown, Object.assign(uOptions(), {
+			KVCViewSource: 'alfa\n[[bravo]]',
+			KVCViewPermalinkMap: {
+				bravo: 'charlie',
+			},
+			KVCViewTemplate: `delta {${ mainModule.KVCTemplateTokenPostBody() }}`,
+		})), 'delta <p><a href="charlie">bravo</a></p>');
+	});
+
+	it('replaces tokens', function() {
+		deepEqual(mainModule.KVCView(showdown, Object.assign(uOptions(), {
+			KVCViewSource: 'alfa',
+			KVCViewTemplate: `bravo {${ mainModule.KVCTemplateTokenPostTitle() }}`,
+		})), 'bravo alfa');
+	});
+
+	context('blocks', function () {
+		
+		it('replaces if not present', function() {
+			deepEqual(mainModule.KVCView(showdown, Object.assign(uOptions(), {
+				KVCViewTemplate: 'alfa {block:bravo}{/block:bravo}',
+			})), 'alfa ');
+		});
+		
+		it('replaces KVCTemplateTokenRootURL', function() {
+			deepEqual(mainModule.KVCView(showdown, Object.assign(uOptions(), {
+				KVCViewTemplate: `alfa {block:${ mainModule.KVCTemplateTokenRootURL() }}{${ mainModule.KVCTemplateTokenRootURL() }}{/block:${ mainModule.KVCTemplateTokenRootURL() }}`,
+				KVCViewTemplateOptions: {
+					KVCOptionRootURL: 'bravo',
+				},
+			})), 'alfa bravo');
+		});
+		
+		it('replaces KVCTemplateTokenBacklinks', function() {
+			deepEqual(mainModule.KVCView(showdown, Object.assign(uOptions(), {
+				KVCViewTemplate: `alfa {block:${ mainModule.KVCTemplateTokenBacklinks() }}bravo-{${ mainModule.KVCTemplateTokenName() }}:{${ mainModule.KVCTemplateTokenURL() }}:{${ mainModule.KVCTemplateTokenDescription() }}{/block:${ mainModule.KVCTemplateTokenBacklinks() }}`,
+				KVCViewTemplateOptions: {
+					KVCOptionBacklinks: [Object.assign(StubNoteObjectValid(), {
+						KVCNoteBody: 'charlie\ndelta',
+						KVCNotePublicID: 'echo',
+					})],
+				},
+			})), 'alfa bravo-charlie:echo:delta');
+		});
+	
 	});
 
 });
