@@ -366,22 +366,22 @@ describe('KVCTemplateTokensMap', function test_KVCTemplateTokensMap() {
 
 });
 
-describe('KVCTemplateBlocks', function test_KVCTemplateBlocks() {
+describe('KVCTemplateVisibleBlocks', function test_KVCTemplateVisibleBlocks() {
 
 	it('throws if not object', function () {
 		throws(function () {
-			mainModule.KVCTemplateBlocks(null)
+			mainModule.KVCTemplateVisibleBlocks(null)
 		}, /KVCErrorInputNotValid/);
 	});
 
 	it('returns array', function() {
-		deepEqual(mainModule.KVCTemplateBlocks({}), []);
+		deepEqual(mainModule.KVCTemplateVisibleBlocks({}), []);
 	});
 
 	context('KVCOptionRootURL', function () {
 		
 		it('includes KVCTemplateTokenRootURL', function () {
-			deepEqual(mainModule.KVCTemplateBlocks({
+			deepEqual(mainModule.KVCTemplateVisibleBlocks({
 				KVCOptionRootURL: 'alfa',
 			}), [mainModule.KVCTemplateTokenRootURL()]);
 		});
@@ -391,13 +391,13 @@ describe('KVCTemplateBlocks', function test_KVCTemplateBlocks() {
 	context('KVCOptionIsRoot', function () {
 		
 		it('includes KVCTemplateTokenRootPage if true', function () {
-			deepEqual(mainModule.KVCTemplateBlocks({
+			deepEqual(mainModule.KVCTemplateVisibleBlocks({
 				KVCOptionIsRoot: true,
 			}), [mainModule.KVCTemplateTokenRootPage()]);
 		});
 		
 		it('includes KVCTemplateTokenNotePage', function () {
-			deepEqual(mainModule.KVCTemplateBlocks({
+			deepEqual(mainModule.KVCTemplateVisibleBlocks({
 				KVCOptionIsRoot: false,
 			}), [mainModule.KVCTemplateTokenNotePage(), mainModule.KVCTemplateTokenNotePageLegacy()]);
 		});
@@ -407,7 +407,7 @@ describe('KVCTemplateBlocks', function test_KVCTemplateBlocks() {
 	context('KVCOptionBacklinks', function () {
 		
 		it('includes KVCTemplateTokenBacklinks', function () {
-			deepEqual(mainModule.KVCTemplateBlocks({
+			deepEqual(mainModule.KVCTemplateVisibleBlocks({
 				KVCOptionBacklinks: {},
 			}), [mainModule.KVCTemplateTokenBacklinks()]);
 		});

@@ -217,7 +217,7 @@ const mod = {
 		}));
 	},
 
-	KVCTemplateBlocks (options) {
+	KVCTemplateVisibleBlocks (options) {
 		if (typeof options !== 'object' || options === null) {
 			throw new Error('KVCErrorInputNotValid');
 		}
@@ -308,7 +308,7 @@ const mod = {
 			throw new Error('KVCErrorInputNotValid');
 		}
 
-		return OLSKString.OLSKStringReplaceTokens(mod.KVCTemplateCollapseBlocks(inputData.KVCViewTemplate, mod.KVCTemplateBlocks(inputData.KVCViewTemplateOptions)), mod.KVCTemplateTokensMap(showdown, mod.KVCTemplateRemappedLinks(inputData.KVCViewSource, inputData.KVCViewPermalinkMap), inputData.KVCViewTemplateOptions))
+		return OLSKString.OLSKStringReplaceTokens(mod.KVCTemplateCollapseBlocks(inputData.KVCViewTemplate, mod.KVCTemplateVisibleBlocks(inputData.KVCViewTemplateOptions)), mod.KVCTemplateTokensMap(showdown, mod.KVCTemplateRemappedLinks(inputData.KVCViewSource, inputData.KVCViewPermalinkMap), inputData.KVCViewTemplateOptions))
 	},
 
 };
