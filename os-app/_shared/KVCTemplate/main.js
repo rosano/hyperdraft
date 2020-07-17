@@ -93,6 +93,11 @@ const mod = {
 			background: hsl(0, 0%, 94%);
 			color: hsl(0, 0%, 20%);
 		}
+
+		.KVCBacklinksSnippet {
+			opacity: 0.7;
+			font-size: 9pt;
+		}
 	</style>
 
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -119,7 +124,7 @@ const mod = {
 
 <div class="KVCBacklinks">
 
-<strong class="KVCBacklinksHeading">${ inputData('KVCBacklinksHeadingText') }</strong><br />
+<h3 class="KVCBacklinksHeading">${ inputData('KVCBacklinksHeadingText') }</h3>
 
 <p>
 	<a class="KVCBacklinksLink" href="${ uTokenTag('KVCTemplateTokenURL') }">${ uTokenTag('KVCTemplateTokenName') }</a><br />
