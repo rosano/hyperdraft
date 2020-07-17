@@ -548,18 +548,6 @@ describe('KVCView', function test_KVCView() {
 				},
 			})), 'alfa bravo');
 		});
-		
-		it('replaces KVCTemplateTokenBacklinks', function() {
-			deepEqual(mainModule.KVCView(showdown, Object.assign(uOptions(), {
-				KVCViewTemplate: `alfa {block:${ mainModule.KVCTemplateTokenBacklinks() }}bravo-{${ mainModule.KVCTemplateTokenName() }}:{${ mainModule.KVCTemplateTokenURL() }}:{${ mainModule.KVCTemplateTokenDescription() }}{/block:${ mainModule.KVCTemplateTokenBacklinks() }}`,
-				KVCViewTemplateOptions: {
-					KVCOptionBacklinks: [Object.assign(StubNoteObjectValid(), {
-						KVCNoteBody: 'charlie\ndelta',
-						KVCNotePublicID: 'echo',
-					})],
-				},
-			})), 'alfa bravo-charlie:echo:delta');
-		});
 	
 	});
 
