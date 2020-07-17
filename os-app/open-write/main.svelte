@@ -473,7 +473,10 @@ const mod = {
 			window.TestControlNotePublishCount.innerHTML = parseInt(window.TestControlNotePublishCount.innerHTML) + 1;
 		}
 
-		const _references = [OLSKLocalized('KVCRootLinkText')]; // #purge-translation-refs
+		const _references = [
+			OLSKLocalized('KVCRootLinkText'),
+			OLSKLocalized('KVCBacklinksHeadingText'),
+			]; // #purge-translation-refs
 
 		const options = {
 			KVCOptionIsRoot: mod.DataSettingValue('KVCSettingPublicRootPageID') === inputData.KVCNoteID,
