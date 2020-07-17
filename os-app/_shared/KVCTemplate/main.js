@@ -239,10 +239,6 @@ const mod = {
 		}, []);
 	},
 
-	_KVCTemplateCollapseBlocksReplaceMatches (string, matchOpen, matchClosed, exclude) {
-		return string.slice(0, matchOpen.index) + (exclude ? '' : string.slice(matchOpen.index + matchOpen[0].length, matchClosed.index)) + string.slice(matchClosed.index + matchClosed[0].length);
-	},
-
 	KVCTemplateCollapseBlocks (param1, param2) {
 		if (typeof param1 !== 'string') {
 			throw new Error('KVCErrorInputNotValid');
@@ -280,7 +276,9 @@ const mod = {
 					return;
 				}
 
-				outputData = mod._KVCTemplateCollapseBlocksReplaceMatches(outputData, matchOpen, matchClosed, !param2.includes(matchOpen[1]));
+				outputData = (function (string, matchOpen, matchClosed, exclude) {
+					return string.slice(0, matchOpen.index) + (exclude ? '' : string.slice(matchOpen.index + matchOpen[0].length, matchClosed.index)) + string.slice(matchClosed.index + matchClosed[0].length);
+				})(outputData, matchOpen, matchClosed, !param2.includes(matchOpen[1]));
 
 				startIndex = matchOpen.index;
 			})();
