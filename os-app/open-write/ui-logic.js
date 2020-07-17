@@ -95,8 +95,6 @@ const mod = {
 
 			coll[title] = source.filter(function (e) {
 				return e.KVCNoteBody.includes(`[[${ title }]]`);
-			}).map(function (e) {
-				return KVCTemplate.KVCTemplatePlaintextTitle(e.KVCNoteBody);
 			});
 			
 			return coll;

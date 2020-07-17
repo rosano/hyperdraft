@@ -239,7 +239,7 @@ describe('KVCWriteBacklinksMap', function test_KVCWriteBacklinksMap() {
 		});
 		deepEqual(mainModule.KVCWriteBacklinksMap([item1, item2]), {
 			alfa: [],
-			bravo: ['alfa'],
+			bravo: [item1],
 		});
 	});
 
@@ -251,8 +251,8 @@ describe('KVCWriteBacklinksMap', function test_KVCWriteBacklinksMap() {
 			KVCNoteBody: 'bravo\n[[alfa]]'
 		});
 		deepEqual(mainModule.KVCWriteBacklinksMap([item1, item2]), {
-			alfa: ['bravo'],
-			bravo: ['alfa'],
+			alfa: [item2],
+			bravo: [item1],
 		});
 	});
 
