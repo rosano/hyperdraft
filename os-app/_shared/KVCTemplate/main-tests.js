@@ -498,7 +498,7 @@ describe('KVCTemplateBlockTokensMap', function test_KVCTemplateBlockTokensMap() 
 			},
 			KVCBlockTemplateOptions: {
 				KVCOptionBacklinks: [Object.assign(StubNoteObjectValid(), {
-					KVCNoteBody: 'charlie\n- delta\n- echo',
+					KVCNoteBody: 'charlie\n- delta\n- [[echo]]',
 				})],
 			},
 		}))[uTokenTag('KVCTemplateTokenBacklinks')].shift();

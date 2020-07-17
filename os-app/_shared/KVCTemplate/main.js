@@ -286,7 +286,10 @@ const mod = {
 				
 				outputData[uTokenTag('KVCTemplateTokenURL')] = inputData.KVCBlockPermalinkMap[mod.KVCTemplatePlaintextTitle(e.KVCNoteBody)];
 				
-				outputData[uTokenTag('KVCTemplateTokenDescription')] = mod.KVCTemplateTextContent(mod.KVCTemplateHTML(inputData.KVCBlockTemplateShowdown, mod.KVCTemplatePlaintextBody(e.KVCNoteBody)));
+				const body = mod.KVCTemplatePlaintextBody(e.KVCNoteBody);
+				outputData[uTokenTag('KVCTemplateTokenDescription')] = mod.KVCTemplateTextContent(mod.KVCTemplateHTML(inputData.KVCBlockTemplateShowdown, (body.match(/\[\[.*\]\]/g) || []).reduce(function (coll, item) {
+					return coll.split(item).join(item.match(/\[\[(.*)\]\]/)[1]);
+				}, body)));
 
 				return outputData;
 			});
