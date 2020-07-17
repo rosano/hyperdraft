@@ -272,7 +272,7 @@ describe('KVCTemplateRemappedLinks', function test_KVCTemplateRemappedLinks() {
 
 describe('KVCTemplateHTML', function test_KVCTemplateHTML() {
 
-	it('throws if param1 not showdown', function() {
+	it('throws if showdown missing', function() {
 		throws(function() {
 			mainModule.KVCTemplateHTML({
 				Converter: null,
@@ -280,7 +280,7 @@ describe('KVCTemplateHTML', function test_KVCTemplateHTML() {
 		}, /KVCErrorInputNotValid/);
 	});
 
-	it('throws if param2 not string', function() {
+	it('throws if param1 not string', function() {
 		throws(function() {
 			mainModule.KVCTemplateHTML(showdown, null);
 		}, /KVCErrorInputNotValid/);
@@ -310,7 +310,7 @@ describe('KVCTemplateHTML', function test_KVCTemplateHTML() {
 
 describe('KVCTemplateTokensMap', function test_KVCTemplateTokensMap() {
 
-	it('throws if param1 not showdown', function() {
+	it('throws if showdown missing', function() {
 		throws(function() {
 			mainModule.KVCTemplateTokensMap({
 				Converter: null,
@@ -318,13 +318,13 @@ describe('KVCTemplateTokensMap', function test_KVCTemplateTokensMap() {
 		}, /KVCErrorInputNotValid/);
 	});
 
-	it('throws if param2 not string', function () {
+	it('throws if param1 not string', function () {
 		throws(function () {
 			mainModule.KVCTemplateTokensMap(showdown, null, {})
 		}, /KVCErrorInputNotValid/);
 	});
 
-	it('throws if param3 not object', function () {
+	it('throws if param2 not object', function () {
 		throws(function () {
 			mainModule.KVCTemplateTokensMap(showdown, '', null)
 		}, /KVCErrorInputNotValid/);
@@ -560,9 +560,11 @@ describe('KVCView', function test_KVCView() {
 		};
 	};
 
-	it('throws if not object', function () {
-		throws(function () {
-			mainModule.KVCView(showdown, null);
+	it('throws if showdown missing', function() {
+		throws(function() {
+			mainModule.KVCTemplateHTML({
+				Converter: null,
+			}, uOptions());
 		}, /KVCErrorInputNotValid/);
 	});
 

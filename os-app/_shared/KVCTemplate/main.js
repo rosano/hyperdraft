@@ -346,6 +346,10 @@ const mod = {
 	},
 
 	KVCView (showdown, inputData) {
+		if (typeof showdown.Converter !== 'function') {
+			throw new Error('KVCErrorInputNotValid');
+		}
+		
 		if (typeof inputData !== 'object' || inputData === null) {
 			throw new Error('KVCErrorInputNotValid');
 		}
