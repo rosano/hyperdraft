@@ -107,12 +107,16 @@ const mod = {
 </article>
 
 {block:${ mod.KVCTemplateTokenBacklinks() }}
+<hr />
+
 <div class="KVCBacklinks">
 
-<strong class="KVCBacklinksHeading">${ inputData('KVCBacklinksHeadingText') }</strong>
+<strong class="KVCBacklinksHeading">${ inputData('KVCBacklinksHeadingText') }</strong><br />
 
-<a class="KVCBacklinksLink" href="{${ mod.KVCTemplateTokenURL() }}">{${ mod.KVCTemplateTokenName() }}</a><br />
-<span class="KVCBacklinksSnippet">{${ mod.KVCTemplateTokenDescription() }}</span>
+<p>
+	<a class="KVCBacklinksLink" href="${ uTokenTag('KVCTemplateTokenURL') }">${ uTokenTag('KVCTemplateTokenName') }</a><br />
+	<span class="KVCBacklinksSnippet">${ uTokenTag('KVCTemplateTokenDescription') }</span>
+</p>
 
 </div>
 {/block:${ mod.KVCTemplateTokenBacklinks() }}
