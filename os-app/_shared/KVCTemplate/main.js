@@ -27,178 +27,6 @@ const mod = {
 		return inputData.length <= 100 ? inputData : inputData.slice(0, 100).split(' ').slice(0, -1).join(' ').concat('…');
 	},
 
-	KVCTemplateRemappedLinks (param1, param2) {
-		if (typeof param1 !== 'string') {
-			throw new Error('KVCErrorInputNotValid');
-		}
-
-		if (typeof param2 !== 'object' || param2 === null) {
-			throw new Error('KVCErrorInputNotValid');
-		}
-
-		return Object.entries(param2).reduce(function (coll, e) {
-			return coll.split(`[[${ e[0] }]]`).join(`[${ e[0] }](${ e[1] })`);
-		}, param1);
-	},
-
-	KVCTemplateHTML (showdown, inputData) {
-		if (typeof showdown.Converter !== 'function') {
-			throw new Error('KVCErrorInputNotValid');
-		}
-		
-		if (typeof inputData !== 'string') {
-			throw new Error('KVCErrorInputNotValid');
-		}
-
-		const showdownConverter = new showdown.Converter();
-		showdownConverter.setOption('simpleLineBreaks', true);
-		showdownConverter.setOption('simplifiedAutoLink', true);
-		showdownConverter.setOption('noHeaderId', true);
-
-		return showdownConverter.makeHtml(inputData);
-	},
-
-	KVCTemplateTokensMap (showdown, body, options) {
-		if (typeof showdown.Converter !== 'function') {
-			throw new Error('KVCErrorInputNotValid');
-		}
-		
-		if (typeof body !== 'string') {
-			throw new Error('KVCErrorInputNotValid');
-		}
-
-		if (typeof options !== 'object' || options === null) {
-			throw new Error('KVCErrorInputNotValid');
-		}
-
-		return Object.fromEntries([
-			[mod.KVCTemplateTokenPostTitle(), mod.KVCTemplatePlaintextTitle(body)],
-			[mod.KVCTemplateTokenPostBody(), mod.KVCTemplateHTML(showdown, mod.KVCTemplatePlaintextBody(body))],
-			[mod.KVCTemplateTokenRootURL(), options.KVCOptionRootURL],
-			[mod.KVCTemplateTokenRootURLLegacy(), options.KVCOptionRootURL],
-		].map(function (e) {
-			e[0] = `{${ e[0] }}`;
-
-			return e;
-		}));
-	},
-
-	KVCTemplateBlocks (options) {
-		if (typeof options !== 'object' || options === null) {
-			throw new Error('KVCErrorInputNotValid');
-		}
-
-		return Object.keys(options).reduce(function (coll, item) {
-			if (item === 'KVCOptionRootURL') {
-				coll.push(mod.KVCTemplateTokenRootURL());
-			}
-
-			if (item === 'KVCOptionIsRoot') {
-				coll.push(...(options[item] ? [mod.KVCTemplateTokenRootPage()] : [mod.KVCTemplateTokenNotePage(), mod.KVCTemplateTokenNotePageLegacy()]));
-			}
-
-			if (item === 'KVCOptionBacklinks') {
-				coll.push(mod.KVCTemplateTokenBacklinks());
-			}
-
-			return coll;
-		}, []);
-	},
-
-	KVCTemplateTokenPostTitle () {
-		return 'Title';
-	},
-
-	KVCTemplateTokenPostBody () {
-		return 'Body';
-	},
-
-	KVCTemplateTokenRootURL () {
-		return 'HomeURL';
-	},
-
-	KVCTemplateTokenRootURLLegacy () {
-		return 'BlogURL';
-	},
-
-	KVCTemplateTokenRootPage () {
-		return 'HomePage';
-	},
-
-	KVCTemplateTokenNotePage () {
-		return 'RefPage';
-	},
-
-	KVCTemplateTokenNotePageLegacy () {
-		return 'PermalinkPage';
-	},
-
-	KVCTemplateTokenBacklinks () {
-		return 'Backlinks';
-	},
-
-	KVCTemplateTokenName () {
-		return 'Name';
-	},
-
-	KVCTemplateTokenURL () {
-		return 'URL';
-	},
-
-	KVCTemplateTokenDescription () {
-		return 'Description';
-	},
-
-	_KVCTemplateCollapseBlocksReplaceMatches (string, matchOpen, matchClosed, exclude) {
-		return string.slice(0, matchOpen.index) + (exclude ? '' : string.slice(matchOpen.index + matchOpen[0].length, matchClosed.index)) + string.slice(matchClosed.index + matchClosed[0].length);
-	},
-
-	KVCTemplateCollapseBlocks (param1, param2) {
-		if (typeof param1 !== 'string') {
-			throw new Error('KVCErrorInputNotValid');
-		}
-
-		if (!Array.isArray(param2)) {
-			throw new Error('KVCErrorInputNotValid');
-		}
-
-		let outputData = param1;
-
-		let startIndex = -1;
-		let lastIndex;
-
-		while (startIndex < outputData.length) {
-			if (startIndex === lastIndex) {
-				startIndex = Infinity;
-				return outputData;
-			}
-
-			lastIndex = startIndex;
-
-			(function () {
-				let matchOpen = outputData.match(/\{block:(\w+)\}/i);
-
-				if (!matchOpen) {
-					startIndex = outputData.length;
-					return;
-				}
-
-				let matchClosed = outputData.match(new RegExp(`\\{\\/block:${ matchOpen[1] }\}`));
-
-				if (!matchClosed) {
-					startIndex = matchOpen.index + matchOpen[0].length;
-					return;
-				}
-
-				outputData = mod._KVCTemplateCollapseBlocksReplaceMatches(outputData, matchOpen, matchClosed, !param2.includes(matchOpen[1]));
-
-				startIndex = matchOpen.index;
-			})();
-		}
-
-		return outputData;
-	},
-
 	KVCTemplateViewDefault (inputData) {
 		if (typeof inputData !== 'function') {
 			throw new Error('KVCErrorInputNotValid');
@@ -287,6 +115,178 @@ const mod = {
 
 </body>
 </html>`;
+	},
+
+	KVCTemplateTokenPostTitle () {
+		return 'Title';
+	},
+
+	KVCTemplateTokenPostBody () {
+		return 'Body';
+	},
+
+	KVCTemplateTokenRootURL () {
+		return 'HomeURL';
+	},
+
+	KVCTemplateTokenRootURLLegacy () {
+		return 'BlogURL';
+	},
+
+	KVCTemplateTokenRootPage () {
+		return 'HomePage';
+	},
+
+	KVCTemplateTokenNotePage () {
+		return 'RefPage';
+	},
+
+	KVCTemplateTokenNotePageLegacy () {
+		return 'PermalinkPage';
+	},
+
+	KVCTemplateTokenBacklinks () {
+		return 'Backlinks';
+	},
+
+	KVCTemplateTokenName () {
+		return 'Name';
+	},
+
+	KVCTemplateTokenURL () {
+		return 'URL';
+	},
+
+	KVCTemplateTokenDescription () {
+		return 'Description';
+	},
+
+	KVCTemplateRemappedLinks (param1, param2) {
+		if (typeof param1 !== 'string') {
+			throw new Error('KVCErrorInputNotValid');
+		}
+
+		if (typeof param2 !== 'object' || param2 === null) {
+			throw new Error('KVCErrorInputNotValid');
+		}
+
+		return Object.entries(param2).reduce(function (coll, e) {
+			return coll.split(`[[${ e[0] }]]`).join(`[${ e[0] }](${ e[1] })`);
+		}, param1);
+	},
+
+	KVCTemplateHTML (showdown, inputData) {
+		if (typeof showdown.Converter !== 'function') {
+			throw new Error('KVCErrorInputNotValid');
+		}
+		
+		if (typeof inputData !== 'string') {
+			throw new Error('KVCErrorInputNotValid');
+		}
+
+		const showdownConverter = new showdown.Converter();
+		showdownConverter.setOption('simpleLineBreaks', true);
+		showdownConverter.setOption('simplifiedAutoLink', true);
+		showdownConverter.setOption('noHeaderId', true);
+
+		return showdownConverter.makeHtml(inputData);
+	},
+
+	KVCTemplateTokensMap (showdown, body, options) {
+		if (typeof showdown.Converter !== 'function') {
+			throw new Error('KVCErrorInputNotValid');
+		}
+		
+		if (typeof body !== 'string') {
+			throw new Error('KVCErrorInputNotValid');
+		}
+
+		if (typeof options !== 'object' || options === null) {
+			throw new Error('KVCErrorInputNotValid');
+		}
+
+		return Object.fromEntries([
+			[mod.KVCTemplateTokenPostTitle(), mod.KVCTemplatePlaintextTitle(body)],
+			[mod.KVCTemplateTokenPostBody(), mod.KVCTemplateHTML(showdown, mod.KVCTemplatePlaintextBody(body))],
+			[mod.KVCTemplateTokenRootURL(), options.KVCOptionRootURL],
+			[mod.KVCTemplateTokenRootURLLegacy(), options.KVCOptionRootURL],
+		].map(function (e) {
+			e[0] = `{${ e[0] }}`;
+
+			return e;
+		}));
+	},
+
+	KVCTemplateBlocks (options) {
+		if (typeof options !== 'object' || options === null) {
+			throw new Error('KVCErrorInputNotValid');
+		}
+
+		return Object.keys(options).reduce(function (coll, item) {
+			if (item === 'KVCOptionRootURL') {
+				coll.push(mod.KVCTemplateTokenRootURL());
+			}
+
+			if (item === 'KVCOptionIsRoot') {
+				coll.push(...(options[item] ? [mod.KVCTemplateTokenRootPage()] : [mod.KVCTemplateTokenNotePage(), mod.KVCTemplateTokenNotePageLegacy()]));
+			}
+
+			if (item === 'KVCOptionBacklinks') {
+				coll.push(mod.KVCTemplateTokenBacklinks());
+			}
+
+			return coll;
+		}, []);
+	},
+
+	_KVCTemplateCollapseBlocksReplaceMatches (string, matchOpen, matchClosed, exclude) {
+		return string.slice(0, matchOpen.index) + (exclude ? '' : string.slice(matchOpen.index + matchOpen[0].length, matchClosed.index)) + string.slice(matchClosed.index + matchClosed[0].length);
+	},
+
+	KVCTemplateCollapseBlocks (param1, param2) {
+		if (typeof param1 !== 'string') {
+			throw new Error('KVCErrorInputNotValid');
+		}
+
+		if (!Array.isArray(param2)) {
+			throw new Error('KVCErrorInputNotValid');
+		}
+
+		let outputData = param1;
+
+		let startIndex = -1;
+		let lastIndex;
+
+		while (startIndex < outputData.length) {
+			if (startIndex === lastIndex) {
+				startIndex = Infinity;
+				return outputData;
+			}
+
+			lastIndex = startIndex;
+
+			(function () {
+				let matchOpen = outputData.match(/\{block:(\w+)\}/i);
+
+				if (!matchOpen) {
+					startIndex = outputData.length;
+					return;
+				}
+
+				let matchClosed = outputData.match(new RegExp(`\\{\\/block:${ matchOpen[1] }\}`));
+
+				if (!matchClosed) {
+					startIndex = matchOpen.index + matchOpen[0].length;
+					return;
+				}
+
+				outputData = mod._KVCTemplateCollapseBlocksReplaceMatches(outputData, matchOpen, matchClosed, !param2.includes(matchOpen[1]));
+
+				startIndex = matchOpen.index;
+			})();
+		}
+
+		return outputData;
 	},
 
 	KVCView (showdown, inputData) {
