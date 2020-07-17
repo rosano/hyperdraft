@@ -98,7 +98,7 @@ const mod = {
 		return param2 ? '/' : KVCNoteStorage.KVCNoteStoragePublicObjectPath(param1);
 	},
 
-	async KVCNoteActionPublicTitlePathMap (storageClient, inputData, FakeConnected = false) {
+	async KVCNoteActionPermalinkMap (storageClient, inputData, FakeConnected = false) {
 		return Promise.resolve((await mod.KVCNoteActionQuery(storageClient, {
 			KVCNoteIsPublic: true,
 		})).map(function (e) {

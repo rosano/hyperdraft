@@ -485,7 +485,7 @@ const mod = {
 		
 		mod.ValueNoteSelected(await KVCNoteAction.KVCNoteActionPublish(mod._ValueStorageClient, inputData, KVCTemplate.KVCView(showdown, {
 			KVCViewSource: inputData.KVCNoteBody,
-			KVCViewPermalinkMap: await KVCNoteAction.KVCNoteActionPublicTitlePathMap(mod._ValueStorageClient, mod.DataSettingValue('KVCSettingPublicRootPageID')),
+			KVCViewPermalinkMap: await KVCNoteAction.KVCNoteActionPermalinkMap(mod._ValueStorageClient, mod.DataSettingValue('KVCSettingPublicRootPageID')),
 			KVCViewTemplate: KVCTemplate.KVCTemplateViewDefault(OLSKLocalized),
 			KVCViewTemplateOptions: options,
 		}), options));

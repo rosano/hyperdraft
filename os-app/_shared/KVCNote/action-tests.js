@@ -221,20 +221,20 @@ describe('KVCNoteActionPublicPath', function test_KVCNoteActionPublicPath() {
 
 });
 
-describe('KVCNoteActionPublicTitlePathMap', function test_KVCNoteActionPublicTitlePathMap() {
+describe('KVCNoteActionPermalinkMap', function test_KVCNoteActionPermalinkMap() {
 
 	it('returns object', async function() {
-		deepEqual(await mainModule.KVCNoteActionPublicTitlePathMap(KVCTestingStorageClient, '', true), {});
+		deepEqual(await mainModule.KVCNoteActionPermalinkMap(KVCTestingStorageClient, '', true), {});
 	});
 
 	it('excludes if KVCNoteIsPublic false', async function() {
 		await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject());
-		deepEqual(await mainModule.KVCNoteActionPublicTitlePathMap(KVCTestingStorageClient, '', true), {});
+		deepEqual(await mainModule.KVCNoteActionPermalinkMap(KVCTestingStorageClient, '', true), {});
 	});
 
 	it('includes if KVCNoteIsPublic true', async function() {
 		const item = await kTesting.uPublish(await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()));
-		deepEqual(await mainModule.KVCNoteActionPublicTitlePathMap(KVCTestingStorageClient, '', true), {
+		deepEqual(await mainModule.KVCNoteActionPermalinkMap(KVCTestingStorageClient, '', true), {
 			bravo: item.KVCNotePublicID,
 		});
 	});
@@ -250,21 +250,21 @@ describe('KVCNoteActionPublicTitlePathMap', function test_KVCNoteActionPublicTit
 			KVCNoteBody: 'alfa\ncharlie',
 		})));
 
-		deepEqual(await mainModule.KVCNoteActionPublicTitlePathMap(KVCTestingStorageClient, '', true), {
+		deepEqual(await mainModule.KVCNoteActionPermalinkMap(KVCTestingStorageClient, '', true), {
 			alfa: item.KVCNotePublicID,
 		});
 	});
 
 	it('links to KVCNoteActionPublicPath if not root', async function() {
 		const item = await kTesting.uPublish(await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()));
-		deepEqual(await mainModule.KVCNoteActionPublicTitlePathMap(KVCTestingStorageClient, '', true), {
+		deepEqual(await mainModule.KVCNoteActionPermalinkMap(KVCTestingStorageClient, '', true), {
 			bravo: mainModule.KVCNoteActionPublicPath(item, false),
 		});
 	});
 
 	it('links to KVCNoteActionPublicPath if root', async function() {
 		const item = await kTesting.uPublish(await mainModule.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()));
-		deepEqual(await mainModule.KVCNoteActionPublicTitlePathMap(KVCTestingStorageClient, item.KVCNoteID, true), {
+		deepEqual(await mainModule.KVCNoteActionPermalinkMap(KVCTestingStorageClient, item.KVCNoteID, true), {
 			bravo: mainModule.KVCNoteActionPublicPath(item, true),
 		});
 	});
