@@ -30,6 +30,30 @@ describe('KVCWrite_Publish', function () {
 
 	});
 
+	describe('backlinks', function test_backlinks () {
+
+		before(function () {
+			browser.assert.elements('#TestPublishContent .KVCBacklinks', 0);
+		});
+
+		before(function () {
+			return browser.pressButton('.KVCWriteMasterCreateButton');
+		});
+
+		before(function () {
+			return browser.fill('.KVCWriteInputFieldDebug', 'bravo');
+		});
+
+		before(function () {
+			return browser.pressButton('.KVCWriteDetailToolbarPublishButton');
+		});
+
+		it('sets KVCOptionBacklinks', function () {
+			browser.assert.elements('#TestPublishContent .KVCBacklinks', 1);
+		});
+
+	});
+
 	describe('root_page', function test_root_page () {
 
 		before(function () {
