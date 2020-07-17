@@ -293,14 +293,22 @@ describe('KVCWriteLauncherItemBacklinksTemplate', function test_KVCWriteLauncher
 
 	it('creates item for each value item', function() {
 		deepEqual(mainModule.KVCWriteLauncherItemBacklinksTemplate(new Date(), {
-			alfa: ['bravo'],
+			alfa: [Object.assign(StubNoteObjectValid(), {
+				KVCNoteBody: 'bravo'
+			})],
 		}, function (inputData) { return inputData }).split('\n\n').slice(1).join('\n\n'), '# [[alfa]]\n- [[bravo]]');
 	});
 
 	it('sorts by length ascending', function() {
 		deepEqual(mainModule.KVCWriteLauncherItemBacklinksTemplate(new Date(), {
-			alfa: ['bravo', 'charlie'],
-			bravo: ['delta'],
+			alfa: [Object.assign(StubNoteObjectValid(), {
+				KVCNoteBody: 'bravo',
+			}), Object.assign(StubNoteObjectValid(), {
+				KVCNoteBody: 'charlie',
+			})],
+			bravo: [Object.assign(StubNoteObjectValid(), {
+				KVCNoteBody: 'delta',
+			})],
 		}, function (inputData) { return inputData }).split('\n\n').slice(1).join('\n\n'), '# [[bravo]]\n- [[delta]]\n\n# [[alfa]]\n- [[bravo]]\n- [[charlie]]');
 	});
 
