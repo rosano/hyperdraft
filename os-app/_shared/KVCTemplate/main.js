@@ -260,6 +260,14 @@ const mod = {
 			throw new Error('KVCErrorInputNotValid');
 		}
 
+		if (typeof inputData.KVCBlockTemplateOptions !== 'object' || inputData.KVCBlockTemplateOptions === null) {
+			throw new Error('KVCErrorInputNotValid');
+		}
+
+		if (typeof inputData.KVCBlockTemplateShowdown.Converter !== 'function') {
+			throw new Error('KVCErrorInputNotValid');
+		}
+
 		const outputData = {};
 
 		if (inputData.KVCBlockTemplateOptions.KVCOptionBacklinks) {
@@ -373,6 +381,7 @@ const mod = {
 		return OLSKString.OLSKStringReplaceTokens(mod.KVCTemplateCollapseBlocks(inputData.KVCViewTemplate, mod.KVCTemplateVisibleBlocks(inputData.KVCViewTemplateOptions), {
 			KVCBlockPermalinkMap: inputData.KVCViewPermalinkMap,
 			KVCBlockTemplateOptions: inputData.KVCViewTemplateOptions,
+			KVCBlockTemplateShowdown: showdown,
 		}), mod.KVCTemplateTokensMap(showdown, mod.KVCTemplateRemappedLinks(inputData.KVCViewSource, inputData.KVCViewPermalinkMap), inputData.KVCViewTemplateOptions))
 	},
 

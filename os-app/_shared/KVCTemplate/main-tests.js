@@ -430,6 +430,7 @@ describe('KVCTemplateBlockTokensMap', function test_KVCTemplateBlockTokensMap() 
 		return {
 			KVCBlockPermalinkMap: {},
 			KVCBlockTemplateOptions: {},
+			KVCBlockTemplateShowdown: showdown,
 		};
 	};
 
@@ -451,6 +452,14 @@ describe('KVCTemplateBlockTokensMap', function test_KVCTemplateBlockTokensMap() 
 		throws(function () {
 			mainModule.KVCTemplateBlockTokensMap(Object.assign(uOptions(), {
 				KVCBlockTemplateOptions: null,
+			}))
+		}, /KVCErrorInputNotValid/);
+	});
+
+	it('throws if KVCBlockTemplateShowdown missing', function () {
+		throws(function () {
+			mainModule.KVCTemplateBlockTokensMap(Object.assign(uOptions(), {
+				KVCBlockTemplateShowdown: {},
 			}))
 		}, /KVCErrorInputNotValid/);
 	});
@@ -544,6 +553,7 @@ describe('KVCTemplateCollapseBlocks', function test_KVCTemplateCollapseBlocks() 
 				charlie: 'echo'
 			},
 			KVCBlockTemplateOptions: options,
+			KVCBlockTemplateShowdown: showdown,
 		}), 'bravo-charlie:echo:delta');
 	});
 
