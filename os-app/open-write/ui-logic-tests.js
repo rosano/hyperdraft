@@ -266,7 +266,7 @@ describe('KVCWriteLauncherItemBacklinksTemplate', function test_KVCWriteLauncher
 		}, /KVCErrorInputNotValid/);
 	});
 
-	it('throws error if param2 not function', function() {
+	it('throws error if param2 not object', function() {
 		throws(function() {
 			mainModule.KVCWriteLauncherItemBacklinksTemplate(new Date(), null, function () {});
 		}, /KVCErrorInputNotValid/);
