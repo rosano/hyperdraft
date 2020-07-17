@@ -269,7 +269,11 @@ const mod = {
 				{
 					LCHRecipeName: 'FakeConfigureCustomDomain',
 					LCHRecipeCallback: async function FakeConfigureCustomDomain () {
-						mod._ValueSettingsAll.push(await KVCSettingAction.KVCSettingsActionProperty(mod._ValueStorageClient, 'KVCSettingCustomDomainBaseURL', 'FakeCustomDomainBaseURL'));
+						await mod.ControlSettingStore('KVCSettingCustomDomainBaseURL', KVCWriteLogic.KVCWriteCustomDomainBaseURLData('FakeCustomDomainBaseURL'));
+
+						if (mod._ValueNoteSelected) {
+							await mod._ControlHotfixUpdateInPlace(mod._ValueNoteSelected);
+						}
 					},
 				},
 			]);
@@ -483,7 +487,7 @@ const mod = {
 			KVCOptionRootURL: mod.DataSettingValue('KVCSettingCustomDomainBaseURL'),
 		};
 		
-		mod.ValueNoteSelected(await KVCNoteAction.KVCNoteActionPublish(mod._ValueStorageClient, inputData, KVCTemplate.KVCView(showdown, {
+		mod.ValueNoteSelected(await KVCNoteAction.KVCNoteActionPublish(mod._ValueStorageClient, inputData, mod.TestPublishContent = KVCTemplate.KVCView(showdown, {
 			KVCViewSource: inputData.KVCNoteBody,
 			KVCViewPermalinkMap: await KVCNoteAction.KVCNoteActionPermalinkMap(mod._ValueStorageClient, mod.DataSettingValue('KVCSettingPublicRootPageID')),
 			KVCViewTemplate: KVCTemplate.KVCTemplateViewDefault(OLSKLocalized),
@@ -1076,6 +1080,11 @@ import OLSKStorageWidget from 'OLSKStorageWidget';
 		<strong>TestControlMigrateCount</strong>
 		<span id="TestControlMigrateCount">0</span>
 	</p>
+	
+	<div>
+		<strong>TestPublishContent</strong>
+		<div id="TestPublishContent">{@html mod.TestPublishContent }</div>
+	</div>
 {/if}
 
 <footer class="KVCWriteViewportFooter OLSKMobileViewFooter">
