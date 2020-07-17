@@ -498,7 +498,7 @@ describe('KVCTemplateBlockTokensMap', function test_KVCTemplateBlockTokensMap() 
 			},
 			KVCBlockTemplateOptions: {
 				KVCOptionBacklinks: [Object.assign(StubNoteObjectValid(), {
-					KVCNoteBody: 'charlie\ndelta',
+					KVCNoteBody: 'charlie\n- delta\n- echo',
 				})],
 			},
 		}))[uTokenTag('KVCTemplateTokenBacklinks')].shift();
@@ -512,7 +512,7 @@ describe('KVCTemplateBlockTokensMap', function test_KVCTemplateBlockTokensMap() 
 		});
 		
 		it('sets KVCTemplateTokenDescription', function () {
-			deepEqual(item[uTokenTag('KVCTemplateTokenDescription')], 'delta');
+			deepEqual(item[uTokenTag('KVCTemplateTokenDescription')], 'delta echo');
 		});
 	
 	});

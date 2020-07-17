@@ -286,7 +286,7 @@ const mod = {
 				
 				outputData[uTokenTag('KVCTemplateTokenURL')] = inputData.KVCBlockPermalinkMap[mod.KVCTemplatePlaintextTitle(e.KVCNoteBody)];
 				
-				outputData[uTokenTag('KVCTemplateTokenDescription')] = mod.KVCTemplatePlaintextBody(e.KVCNoteBody);
+				outputData[uTokenTag('KVCTemplateTokenDescription')] = mod.KVCTemplateTextContent(mod.KVCTemplateHTML(inputData.KVCBlockTemplateShowdown, mod.KVCTemplatePlaintextBody(e.KVCNoteBody)));
 
 				return outputData;
 			});
