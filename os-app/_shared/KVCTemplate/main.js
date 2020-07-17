@@ -31,6 +31,14 @@ const mod = {
 		return inputData.length <= 100 ? inputData : inputData.slice(0, 100).split(' ').slice(0, -1).join(' ').concat('…');
 	},
 
+	KVCTemplateTextContent (inputData) {
+		if (typeof inputData !== 'string') {
+			throw new Error('KVCErrorInputNotValid');
+		}
+
+		return inputData.replace(/<[^>]*>?/gm, '').replace(/\n/g, ' ').trim();
+	},
+
 	KVCTemplateViewDefault (inputData) {
 		if (typeof inputData !== 'function') {
 			throw new Error('KVCErrorInputNotValid');

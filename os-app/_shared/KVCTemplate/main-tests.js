@@ -87,6 +87,28 @@ describe('KVCTemplatePlaintextSnippet', function test_KVCTemplatePlaintextSnippe
 
 });
 
+describe('KVCTemplateTextContent', function test_KVCTemplateTextContent() {
+
+	it('throws error if not string', function() {
+		throws(function() {
+			mainModule.KVCTemplateTextContent(null);
+		}, /KVCErrorInputNotValid/);
+	});
+
+	it('returns string', function() {
+		deepEqual(mainModule.KVCTemplateTextContent('<p>alfa <b>bravo</b></p>'), 'alfa bravo');
+	});
+
+	it('trims edges', function() {
+		deepEqual(mainModule.KVCTemplateTextContent(' alfa '), 'alfa');
+	});
+
+	it('replaces newlines', function() {
+		deepEqual(mainModule.KVCTemplateTextContent('alfa\nbravo'), 'alfa bravo');
+	});
+
+});
+
 describe('KVCTemplateViewDefault', function test_KVCTemplateViewDefault() {
 
 	const uTag = function (inputData) {
