@@ -8,6 +8,10 @@ const uTokenTag = function (inputData) {
 	return `{${ mainModule[inputData]() }}`;
 };
 
+const uBlockTag = function (param1, param2) {
+	return `{block:${ mainModule[param1]() }}${ param2 }{/block:${ mainModule[param1]() }}`;
+};
+
 describe('KVCTemplatePlaintextTitle', function test_KVCTemplatePlaintextTitle() {
 
 	it('throws if not string', function () {
@@ -525,6 +529,22 @@ describe('KVCTemplateCollapseBlocks', function test_KVCTemplateCollapseBlocks() 
 	it('ignores if not corresponding', function() {
 		const item = '{block:alfa}bravo{/block:charlie}';
 		deepEqual(mainModule.KVCTemplateCollapseBlocks(item, []), item);
+	});
+
+	it('replaces KVCTemplateTokenBacklinks', function() {
+		const options = {
+			KVCOptionBacklinks: [Object.assign(StubNoteObjectValid(), {
+				KVCNoteBody: 'charlie\ndelta',
+				KVCNotePublicID: 'echo',
+			})],
+		};
+
+		deepEqual(mainModule.KVCTemplateCollapseBlocks(uBlockTag('KVCTemplateTokenBacklinks', `bravo-{${ mainModule.KVCTemplateTokenName() }}:{${ mainModule.KVCTemplateTokenURL() }}:{${ mainModule.KVCTemplateTokenDescription() }}`), mainModule.KVCTemplateVisibleBlocks(options), {
+			KVCBlockPermalinkMap: {
+				charlie: 'echo'
+			},
+			KVCBlockTemplateOptions: options,
+		}), 'bravo-charlie:echo:delta');
 	});
 
 });

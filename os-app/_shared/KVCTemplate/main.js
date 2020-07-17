@@ -275,7 +275,7 @@ const mod = {
 		return outputData;
 	},
 
-	KVCTemplateCollapseBlocks (param1, param2) {
+	KVCTemplateCollapseBlocks (param1, param2, options) {
 		if (typeof param1 !== 'string') {
 			throw new Error('KVCErrorInputNotValid');
 		}
@@ -283,6 +283,8 @@ const mod = {
 		if (!Array.isArray(param2)) {
 			throw new Error('KVCErrorInputNotValid');
 		}
+
+		const blockTokensMap = options ? mod.KVCTemplateBlockTokensMap(options) : null;
 
 		let outputData = param1;
 
@@ -313,7 +315,23 @@ const mod = {
 				}
 
 				outputData = (function (string, matchOpen, matchClosed, exclude) {
-					return string.slice(0, matchOpen.index) + (exclude ? '' : string.slice(matchOpen.index + matchOpen[0].length, matchClosed.index)) + string.slice(matchClosed.index + matchClosed[0].length);
+					return string.slice(0, matchOpen.index) + (function(inputData) {
+						if (exclude) {
+							return '';
+						}
+						
+						if (!blockTokensMap) {
+							return inputData;
+						}
+
+						if (matchOpen[1] === mod.KVCTemplateTokenBacklinks()) {
+							return blockTokensMap[uTokenTag('KVCTemplateTokenBacklinks')].map(function (e) {
+								return OLSKString.OLSKStringReplaceTokens(inputData, e);
+							})
+						}
+
+						return inputData;
+					})(string.slice(matchOpen.index + matchOpen[0].length, matchClosed.index)) + string.slice(matchClosed.index + matchClosed[0].length);
 				})(outputData, matchOpen, matchClosed, !param2.includes(matchOpen[1]));
 
 				startIndex = matchOpen.index;
