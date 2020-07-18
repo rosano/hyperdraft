@@ -102,25 +102,28 @@
     "// I sacrifice myself for the commas of others": null
   },
   "devDependencies": {
-    "OLSKTesting": "olsk/OLSKTesting",
-    "OLSKDisk": "olsk/OLSKDisk",
+    "// TESTS": null,
+    "mocha": "latest",
+    "supervisor": "latest",
+
+    "// INTERFACE TESTS": null,
     "zombie": "latest",
 
-    "npm-run-all": "latest",
-    "rollup": "latest",
-    "rollup-plugin-commonjs": "latest",
-    "rollup-plugin-livereload": "latest",
-    "rollup-plugin-node-resolve": "latest",
-    "rollup-plugin-svelte": "latest",
-    "rollup-plugin-terser": "latest",
-    "sirv-cli": "latest",
-    "svelte": "3.9.0",
+    "// MOCHA PREPROCESS": null,
+    "OLSKTesting": "olsk/OLSKTesting",
+
+    "// SVELTE": null,
+    "svelte": "latest",
     "OLSKRollupScaffold": "olsk/OLSKRollupScaffold",
+
+    "// LIVERELOAD": null,
+    "livereload": "latest",
+
+    "// PRODUCTION BUILD": null,
+    "OLSKDisk": "olsk/OLSKDisk",
 
     "// SPEC": null,
     "OLSKSpec": "olsk/OLSKSpec",
-
-    "eslint-plugin-svelte3": "latest",
 
     "// I sacrifice myself for the commas of others": null
   }
