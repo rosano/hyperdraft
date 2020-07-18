@@ -1015,7 +1015,6 @@ const mod = {
 import { onMount } from 'svelte';
 onMount(mod.LifecycleModuleWillMount);
 
-import OLSKViewportContent from 'OLSKViewportContent';
 import KVCWriteMaster from '../sub-master/main.svelte';
 import KVCWriteDetail from '../sub-detail/main.svelte';
 import OLSKAppToolbar from 'OLSKAppToolbar';
@@ -1026,7 +1025,7 @@ import OLSKStorageWidget from 'OLSKStorageWidget';
 
 <div class="KVCWrite OLSKViewport" class:OLSKIsLoading={ mod._ValueIsLoading }>
 
-<OLSKViewportContent>
+<div class="OLSKViewportContent">
 	<KVCWriteMaster
 		KVCWriteMasterListItems={ mod._ValueNotesVisible }
 		KVCWriteMasterListItemSelected={ mod._ValueNoteSelected }
@@ -1064,7 +1063,7 @@ import OLSKStorageWidget from 'OLSKStorageWidget';
 		_KVCWriteDetailVersionsIsDisabled={ mod.DataVersionsIsDisabled() }
 		bind:this={ mod.KVCWriteDetailInstance }
 		/>
-</OLSKViewportContent>
+</div>
 
 {#if OLSK_TESTING_BEHAVIOUR()}
 	<p>
