@@ -8,8 +8,8 @@
     
     "test": "olsk-spec",
 
-    "build": "rollup -c rollup-config.js",
-    "build-watch": "rollup -w -c rollup-config.js"
+    "build": "olsk-rollup-build",
+    "watch": "olsk-rollup-watch"
   },
   "dependencies": {
     "// OLDSKOOL": null,
