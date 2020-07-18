@@ -290,7 +290,7 @@ describe('KVCWrite_Access', function () {
 	context('connected', function test_connected () {
 		
 		before(function () {
-			return uLaunch('FakeStorageIsConnected');
+			return browser.OLSKLauncherRun('FakeStorageIsConnected');
 		});
 
 		it('shows KVCWriteLauncherItemConfigureCustomDomain', function () {
@@ -302,7 +302,7 @@ describe('KVCWrite_Access', function () {
 	context('set_domain', function test_set_domain() {
 		
 		before(function () {
-			return uLaunch('FakeConfigureCustomDomain');
+			return browser.OLSKLauncherRun('FakeConfigureCustomDomain');
 		});
 
 		it('shows KVCWriteLauncherItemRemoveCustomDomain', function () {

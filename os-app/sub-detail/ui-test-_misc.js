@@ -630,7 +630,7 @@ describe('KVCWriteDetail_Misc', function () {
 		});
 		
 		before(function () {
-			return uLaunch('KVCWriteDetailLauncherItemArchive');
+			return browser.OLSKLauncherRun('KVCWriteDetailLauncherItemArchive');
 		});
 
 		it('sends KVCWriteDetailDispatchArchive', function () {
@@ -654,7 +654,7 @@ describe('KVCWriteDetail_Misc', function () {
 		});
 		
 		before(function () {
-			return uLaunch('KVCWriteDetailLauncherItemUnarchive');
+			return browser.OLSKLauncherRun('KVCWriteDetailLauncherItemUnarchive');
 		});
 
 		it('sends KVCWriteDetailDispatchUnarchive', function () {
@@ -678,7 +678,7 @@ describe('KVCWriteDetail_Misc', function () {
 		});
 		
 		before(function () {
-			return uLaunch('KVCWriteDetailLauncherItemSetAsRootPage');
+			return browser.OLSKLauncherRun('KVCWriteDetailLauncherItemSetAsRootPage');
 		});
 
 		it('sends KVCWriteDetailDispatchSetAsRootPage', function () {

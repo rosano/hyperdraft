@@ -11,7 +11,7 @@ describe('KVCWrite_Migrate', function () {
 	});
 
 	before(function () {
-		return uLaunch('FakeCreateNoteV1');
+		return browser.OLSKLauncherRun('FakeCreateNoteV1');
 	});
 
 	before(function () {
@@ -19,7 +19,7 @@ describe('KVCWrite_Migrate', function () {
 	});
 	
 	before(function () {
-		return uLaunch('FakeStorageNotConnected');
+		return browser.OLSKLauncherRun('FakeStorageNotConnected');
 	});
 	
 	before(function () {
@@ -43,7 +43,7 @@ describe('KVCWrite_Migrate', function () {
 		});
 
 		before(function () {
-			return uLaunch('FakeCreateNoteV1');
+			return browser.OLSKLauncherRun('FakeCreateNoteV1');
 		});
 
 		before(function () {
@@ -51,7 +51,7 @@ describe('KVCWrite_Migrate', function () {
 		});
 		
 		before(function () {
-			return uLaunch('FakeStorageSyncDone');
+			return browser.OLSKLauncherRun('FakeStorageSyncDone');
 		});
 		
 		before(function () {
@@ -65,7 +65,7 @@ describe('KVCWrite_Migrate', function () {
 		context('second time', function () {
 			
 			before(function () {
-				return uLaunch('FakeStorageSyncDone');
+				return browser.OLSKLauncherRun('FakeStorageSyncDone');
 			});
 			
 			it('skips migration', function () {

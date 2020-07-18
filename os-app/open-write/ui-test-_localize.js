@@ -47,7 +47,7 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 			})(new Date('2001-02-03T04:05:06Z'));
 
 			before(function () {
-				return uLaunch('KVCWriteLauncherItemJournal');
+				return browser.OLSKLauncherRun('KVCWriteLauncherItemJournal');
 			});
 
 			it('sets KVCWriteMasterListItemTitle', function () {
@@ -72,7 +72,7 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 			const item = uLocalized('KVCWriteLauncherItemBacklinksText').toLowerCase() + '-' + KVCWriteLogic.KVCWriteHumanTimestampString(date) + `\n\n# [[${ uLocalized('KVCWriteLauncherItemJournalText').toLowerCase() + '-' + KVCWriteLogic.KVCWriteHumanTimestampString(date) }]]\n`;
 
 			before(function () {
-				return uLaunch('KVCWriteLauncherItemBacklinks');
+				return browser.OLSKLauncherRun('KVCWriteLauncherItemBacklinks');
 			});
 
 			it('sets KVCWriteMasterListItemTitle', function () {
@@ -116,7 +116,7 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 		context('connected', function test_connected () {
 			
 			before(function () {
-				return uLaunch('FakeStorageIsConnected');
+				return browser.OLSKLauncherRun('FakeStorageIsConnected');
 			});
 
 			it('localizes KVCWriteLauncherItemConfigureCustomDomain', function () {

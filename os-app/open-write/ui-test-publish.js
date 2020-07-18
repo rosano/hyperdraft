@@ -7,7 +7,7 @@ describe('KVCWrite_Publish', function () {
 	});
 
 	before(function () {
-		return uLaunch('FakeStorageIsConnected');
+		return browser.OLSKLauncherRun('FakeStorageIsConnected');
 	});
 
 	describe('template', function test_template () {
@@ -57,7 +57,7 @@ describe('KVCWrite_Publish', function () {
 	describe('root_page', function test_root_page () {
 
 		before(function () {
-			return uLaunch('KVCWriteDetailLauncherItemSetAsRootPage');
+			return browser.OLSKLauncherRun('KVCWriteDetailLauncherItemSetAsRootPage');
 		});
 
 		before(function () {
@@ -73,7 +73,7 @@ describe('KVCWrite_Publish', function () {
 		});
 
 		before(function () {
-			// return uLaunch('FakeConfigureCustomDomain');
+			// return browser.OLSKLauncherRun('FakeConfigureCustomDomain');
 		});
 
 		before(function () {

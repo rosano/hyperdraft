@@ -62,26 +62,6 @@ const KVCVersionStorage = require('./os-app/_shared/KVCVersion/storage.js').defa
 			}, Promise.resolve([]));
 		},
 
-		uSerial2 (inputData) {
-			return inputData.reduce(function (coll, e) {
-				return coll.then(e);
-			}, Promise.resolve());
-		},
-
-		uLaunch (inputData) {
-			return uSerial2([
-				function () {
-					return browser.pressButton('.OLSKAppToolbarLauncherButton');
-				},
-				function () {
-					return browser.fill('.LCHLauncherFilterInput', inputData);
-				},
-				function () {
-					return browser.click('.LCHLauncherPipeItem');
-				},
-			]);
-		},
-
 		uSleep (inputData) {
 			let endTime = new Date().getTime();
 			while (new Date().getTime() < endTime + inputData) {}

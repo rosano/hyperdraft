@@ -121,7 +121,7 @@ describe('KVCWrite_Archive', function () {
 	describe('unarchive', function test_unarchive () {
 
 		before(function () {
-			return uLaunch('KVCWriteLauncherItemRevealArchive');
+			return browser.OLSKLauncherRun('KVCWriteLauncherItemRevealArchive');
 		});
 
 		before(function () {

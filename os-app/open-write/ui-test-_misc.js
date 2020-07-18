@@ -399,7 +399,7 @@ describe('KVCWrite_Misc', function () {
 		});
 
 		before(function () {
-			return uLaunch('FakeStorageIsConnected');
+			return browser.OLSKLauncherRun('FakeStorageIsConnected');
 		});
 
 		before(function () {
@@ -537,7 +537,7 @@ describe('KVCWrite_Misc', function () {
 			});
 
 			before(function () {
-				return uLaunch('FakeStorageIsConnected');
+				return browser.OLSKLauncherRun('FakeStorageIsConnected');
 			});
 
 			before(function () {
@@ -647,7 +647,7 @@ describe('KVCWrite_Misc', function () {
 	describe.skip('KVCWriteLauncherItemRemoveCustomDomain', function test_KVCWriteLauncherItemRemoveCustomDomain () {
 		
 		before(function () {
-			return uLaunch('KVCWriteLauncherItemRemoveCustomDomain');
+			return browser.OLSKLauncherRun('KVCWriteLauncherItemRemoveCustomDomain');
 		});
 
 		it('sets KVCWriteDetailPublicURLFor', function () {
@@ -663,7 +663,7 @@ describe('KVCWrite_Misc', function () {
 		});
 
 		before(function () {
-			return uLaunch('KVCWriteDetailLauncherItemSetAsRootPage');
+			return browser.OLSKLauncherRun('KVCWriteDetailLauncherItemSetAsRootPage');
 		});
 
 		it('sets KVCWriteDetailItemIsRootPage', function () {
