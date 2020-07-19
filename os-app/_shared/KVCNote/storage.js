@@ -180,6 +180,8 @@ const mod = {
 					return Promise.reject(new Error('KVCErrorInputNotValid'));
 				}
 
+				await publicClient.getFile(param1); // #purge-hotfix-remotestorage-412 https://github.com/remotestorage/remotestorage.js/issues/1189
+
 				return await publicClient.storeFile('text/html', param1, param2);
 			},
 
