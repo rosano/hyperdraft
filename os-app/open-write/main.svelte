@@ -828,10 +828,6 @@ const mod = {
 	},
 
 	async OLSKChangeDelegateConflictNote (inputData) {
-		if (!OLSK_TESTING_BEHAVIOUR()) {
-			return
-		}
-		
 		return mod.OLSKChangeDelegateUpdateNote(await KVCNoteAction.KVCNoteActionUpdate(mod._ValueStorageClient, OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(OLSKRemoteStorage.OLSKRemoteStorageChangeDelegateConflictSelectRecent(inputData))));
 	},
 
