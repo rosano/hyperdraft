@@ -639,6 +639,10 @@ const mod = {
 	},
 
 	OLSKAppToolbarDispatchLauncher () {
+		if (window.Launchlet.LCHSingletonExists()) {
+			return window.Launchlet.LCHSingletonDestroy();
+		}
+
 		window.Launchlet.LCHSingletonCreate({
 			LCHOptionRecipes: mod.DataRecipes(),
 		});

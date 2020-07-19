@@ -111,6 +111,20 @@ describe('KVCWrite_Access', function () {
 			browser.assert.elements('.LCHLauncher', 1);
 		});
 
+		context('AltSpace', function () {
+			
+			before(function () {
+				return browser.OLSKFireKeyboardEvent(browser.window, 'Space', {
+					altKey: true,
+				});
+			});
+			
+			it('hides LCHLauncher', function () {
+				browser.assert.elements('.LCHLauncher', 0);
+			});
+
+		});
+
 	});
 
 	context('create', function test_create () {
