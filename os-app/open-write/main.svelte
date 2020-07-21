@@ -828,6 +828,7 @@ const mod = {
 	},
 
 	async OLSKChangeDelegateConflictNote (inputData) {
+		return;
 		return setTimeout(async function () {
 			mod.OLSKChangeDelegateUpdateNote(await KVCNoteAction.KVCNoteActionUpdate(mod._ValueStorageClient, OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(OLSKRemoteStorage.OLSKRemoteStorageChangeDelegateConflictSelectRecent(inputData))))
 		});
