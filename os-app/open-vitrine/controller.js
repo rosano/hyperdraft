@@ -23,7 +23,7 @@ exports.OLSKControllerRoutes = function() {
 				})(require('fs').readFileSync(require('path').join(__dirname, `text.${ res.locals.OLSKSharedPageCurrentLanguage }.md`), 'utf-8')), {
 					KVCVitrineDescription: res.locals.OLSKLocalized('KVCVitrineDescription'),
 					KVC_VITRINE_NV_URL: process.env.KVC_VITRINE_NV_URL,
-					KVCVitrineTokenWriteURL: res.locals.OLSKCanonicalLocalizedFor('KVCWriteRoute'),
+					KVCVitrineTokenWriteURL: res.locals.OLSKCanonicalFor('KVCWriteRoute'),
 					KVC_SHARED_GITHUB_URL: process.env.KVC_SHARED_GITHUB_URL,
 					KVC_SHARED_DONATE_URL: process.env.KVC_SHARED_DONATE_URL,
 				}),
