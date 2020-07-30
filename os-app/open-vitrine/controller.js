@@ -12,7 +12,7 @@ exports.OLSKControllerSharedMiddlewares = function() {
 
 exports.OLSKControllerRoutes = function() {
 	return [{
-		OLSKRoutePath: '/vitrine',
+		OLSKRoutePath: '/',
 		OLSKRouteMethod: 'get',
 		OLSKRouteSignature: 'KVCVitrineRoute',
 		OLSKRouteFunction (req, res, next) {
