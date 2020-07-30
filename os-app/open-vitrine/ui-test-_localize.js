@@ -42,7 +42,9 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 		});
 
 		it('localizes KVCWriteRoute', function() {
-			browser.assert.element(`a[href="${ OLSKTestingCanonical(require('../open-write/controller.js').OLSKControllerRoutes().shift()) }"]`);
+			browser.assert.element(`a[href="${ OLSKTestingCanonical(require('../open-write/controller.js').OLSKControllerRoutes().shift(), {
+				OLSKRoutingLanguage: languageCode,
+			}) }"]`);
 		});
 
 		it('localizes KVC_SHARED_GITHUB_URL', function() {
