@@ -22,6 +22,16 @@
 		return `<meta name="${ e }" content="${ locals.OLSKPageMetaTags[e] }">`;
 	}));
 
+	if (locals.OLSKSharedActiveRouteConstant) {
+		outputData.push(`<link rel="canonical" href="${ OLSKCanonicalFor(locals.OLSKSharedActiveRouteConstant) }" />`);
+	}
+
+	outputData.push(...(locals.OLSKSharedPageLanguagesAvailable || []).map(function (e) {
+		return `<link rel="alternate" hreflang="${ e }" href="${ OLSKCanonicalLocalizedFor(OLSKSharedActiveRouteConstant, {
+			OLSKRoutingLanguage: e,
+		}) }" />`;
+	}));
+
 	if (locals.OLSKPagePublicConstants) {
 		outputData.push(`<script type="text/javascript">
 		window.OLSKPublicConstants = function (inputData) {
@@ -29,6 +39,13 @@
 		};
 	</script>`);
 	}
+
+	if (locals.OLSKPageUseLivereload) {
+		outputData.push(`<script>
+  document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] +
+  ':35729/livereload.js?snipver=1"></' + 'script>')
+</script>`)
+	};
 
 	if (process.env.WKC_TEMP_TOUCH_ICON_URL) {
 		outputData.push(`<link rel="apple-touch-icon" href="${ process.env.WKC_TEMP_TOUCH_ICON_URL }">`);
@@ -45,23 +62,6 @@
 			return `<script src="${ path }"></script>`;
 		}
 	};
-
-	if (locals.OLSKPagePublicLocalizedStringKeys) {
-		outputData.push(...[
-			'/_shared/__external/OLSKInternational/main.js',
-			'/_shared/__external/OLSKString/main.js',
-			].map(pathToTag));
-		
-		outputData.push(`<script type="text/javascript">
-		window.OLSKFormatted = OLSKString.OLSKStringWithFormat;
-		window.OLSKLocalized = function(translationConstant) {
-			return OLSKInternational.OLSKInternationalLocalizedString(translationConstant, ${ JSON.stringify(OLSKPagePublicLocalizedStringKeys.reduce(function(map, e) {
-					map[e] = OLSKLocalized(e);
-					return map;
-				}, {})) });
-		};
-	</script>`);
-	}
 
 	if (locals.OLSKPagePublicRouteKeys) {
 		outputData.push(...[
