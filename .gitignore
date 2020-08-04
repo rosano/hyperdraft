@@ -7,7 +7,7 @@ os-workspace-testing
 
 # BUILD
 **/__*/*
-__static
+.static
 
 # LOCAL
 .env
