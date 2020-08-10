@@ -50,7 +50,7 @@ const mod = {
 				return privateClient.getObject(mod.KVCSettingStorageObjectPath({
 					KVCSettingKey: inputData,
 					KVCSettingValue: '',
-				}));
+				}), false);
 			},
 
 			_KVCSettingStorageList () {
