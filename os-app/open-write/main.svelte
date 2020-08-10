@@ -73,6 +73,8 @@ const mod = {
 	_ValueSaveNoteThrottleMap: {},
 
 	_ValueSaveVersionThrottleMap: {},
+	
+	_ValueSavePublishThrottleMap: {},
 
 	KVCWriteDetailInstance: undefined,
 
@@ -362,10 +364,6 @@ const mod = {
 				}
 
 				await KVCNoteAction.KVCNoteActionUpdate(mod._ValueStorageClient, inputData);
-
-				if (KVCNoteModel.KVCNoteModelIsPublic(inputData)) {
-					mod.ControlNotePublish(inputData);
-				}
 			},
 		});
 
@@ -391,6 +389,19 @@ const mod = {
 
 			if (OLSK_TESTING_BEHAVIOUR()) {
 				OLSKThrottle.OLSKThrottleSkip(mod._ValueSaveVersionThrottleMap[inputData.KVCNoteID])	
+			}
+		}
+
+		if (KVCNoteModel.KVCNoteModelIsPublic(inputData)) {
+			OLSKThrottle.OLSKThrottleMappedTimeout(mod._ValueSavePublishThrottleMap, inputData.KVCNoteID, {
+				OLSKThrottleDuration: 1500,
+				async OLSKThrottleCallback () {
+					mod.ControlNotePublish(inputData);
+				},
+			});
+
+			if (OLSK_TESTING_BEHAVIOUR()) {
+				OLSKThrottle.OLSKThrottleSkip(mod._ValueSavePublishThrottleMap[inputData.KVCNoteID])	
 			}
 		}
 	},
