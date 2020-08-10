@@ -494,7 +494,7 @@ const mod = {
 		const options = {
 			KVCOptionIsRoot: mod.DataSettingValue('KVCSettingPublicRootPageID') === inputData.KVCNoteID,
 			KVCOptionRootURL: mod.DataSettingValue('KVCSettingCustomDomainBaseURL'),
-			KVCOptionBacklinks: KVCWriteLogic.KVCWriteBacklinksMap(mod._ValueNotesAll)[KVCTemplate.KVCTemplatePlaintextTitle(inputData.KVCNoteBody)],
+			KVCOptionBacklinks: KVCWriteLogic.KVCWriteBacklinksMap(mod._ValueNotesAll.filter(KVCNoteModel.KVCNoteModelIsPublic).concat(inputData))[KVCTemplate.KVCTemplatePlaintextTitle(inputData.KVCNoteBody)],
 		};
 		
 		mod.ValueNoteSelected(await KVCNoteAction.KVCNoteActionPublish(mod._ValueStorageClient, inputData, mod.TestPublishContent = KVCTemplate.KVCView(showdown, {
