@@ -311,7 +311,15 @@ const mod = {
 	},
 
 	DataDebugPersistenceIsEnabled () {
-		return !OLSK_TESTING_BEHAVIOUR();
+		if (OLSK_TESTING_BEHAVIOUR()) {
+			return false;
+		}
+
+		if (window.location.hostname.includes('loc')) {
+			return true;
+		}
+
+		return window.location.hostname === window.OLSKPublicConstants('KVC_SHARED_REF_HOST');
 	},
 
 	FakeNoteObjectValid(inputData) {
