@@ -373,27 +373,25 @@ const mod = {
 			OLSKThrottle.OLSKThrottleSkip(mod._ValueSaveNoteThrottleMap[inputData.KVCNoteID])	
 		}
 
-		if (mod.DataVersionsIsDisabled()) {
-			return;
-		}
+		if (!mod.DataVersionsIsDisabled()) {
+			OLSKThrottle.OLSKThrottleMappedTimeout(mod._ValueSaveVersionThrottleMap, inputData.KVCNoteID, {
+				OLSKThrottleDuration: 3000,
+				async OLSKThrottleCallback () {
+					if (!inputData.KVCNoteCreationDate) {
+						return;
+					}
 
-		OLSKThrottle.OLSKThrottleMappedTimeout(mod._ValueSaveVersionThrottleMap, inputData.KVCNoteID, {
-			OLSKThrottleDuration: 3000,
-			async OLSKThrottleCallback () {
-				if (!inputData.KVCNoteCreationDate) {
-					return;
-				}
+					await KVCVersionAction.KVCVersionActionCreate(mod._ValueStorageClient, {
+						KVCVersionNoteID: inputData.KVCNoteID,
+						KVCVersionBody: inputData.KVCNoteBody,
+						KVCVersionDate: inputData.KVCNoteModificationDate,
+					});
+				},
+			});
 
-				await KVCVersionAction.KVCVersionActionCreate(mod._ValueStorageClient, {
-					KVCVersionNoteID: inputData.KVCNoteID,
-					KVCVersionBody: inputData.KVCNoteBody,
-					KVCVersionDate: inputData.KVCNoteModificationDate,
-				});
-			},
-		});
-
-		if (OLSK_TESTING_BEHAVIOUR()) {
-			OLSKThrottle.OLSKThrottleSkip(mod._ValueSaveVersionThrottleMap[inputData.KVCNoteID])	
+			if (OLSK_TESTING_BEHAVIOUR()) {
+				OLSKThrottle.OLSKThrottleSkip(mod._ValueSaveVersionThrottleMap[inputData.KVCNoteID])	
+			}
 		}
 	},
 
