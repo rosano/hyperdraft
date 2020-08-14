@@ -1133,7 +1133,7 @@ import OLSKStorageWidget from 'OLSKStorageWidget';
 </div>
 
 {#if !OLSK_TESTING_BEHAVIOUR()}
-	<OLSKServiceWorker OLSKServiceWorkerRegistrationRoute={ window.OLSKCanonicalFor('WKCServiceWorkerRoute') } />
+	<OLSKServiceWorker OLSKServiceWorkerRegistrationRoute={ window.OLSKCanonicalFor('WKCServiceWorkerRoute') } DebugAllowLocalhost={ true } />
 {/if}
 
 <style src="./ui-style.css"></style>

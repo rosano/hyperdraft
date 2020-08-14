@@ -1,4 +1,4 @@
-const kWKCServiceWorkerVersionID = process.env.HEROKU_SLUG_COMMIT || Date.now();
+const kWKCServiceWorkerVersionID = process.env.HEROKU_SLUG_COMMIT || Date.now().toString();
 
 exports.OLSKControllerRoutes = function() {
 	return {
@@ -7,8 +7,8 @@ exports.OLSKControllerRoutes = function() {
 			OLSKRouteMethod: 'get',
 			OLSKRouteFunction (req, res, next) {
 				return res.type('js').send(require('OLSKServiceWorker').OLSKServiceWorkerView({
-					VERSION_ID_TOKEN: kWKCServiceWorkerVersionID.toString(),
-					REFERRER_MATCH_TOKEN: require('../open-write/controller.js').OLSKControllerRoutes().shift().OLSKRoutePath.replace(/\//g, '\\/'),
+					VERSION_ID_TOKEN: kWKCServiceWorkerVersionID,
+					ORIGIN_PAGE_PATH_TOKEN: require('../open-write/controller.js').OLSKControllerRoutes().shift().OLSKRoutePath,
 				}));
 			},
 		},
