@@ -128,7 +128,7 @@ const mod = {
 			},
 
 			async _KVCNoteStorageList () {
-				return (await Promise.all((await OLSKRemoteStorage.OLSKRemoteStorageListObjectsRecursive(privateClient, mod.KVCNoteStorageCollectionPath())).filter(mod.KVCNoteStorageMatch).map(function (e) {
+				return (await Promise.all((await OLSKRemoteStorage.OLSKRemoteStorageListingRecursive(privateClient, mod.KVCNoteStorageCollectionPath())).filter(mod.KVCNoteStorageMatch).map(function (e) {
 					return privateClient.getObject(e, false);
 				}))).reduce(function (coll, item) {
 					if (item) {
@@ -156,7 +156,7 @@ const mod = {
 					return Promise.reject(new Error('KVCErrorInputNotValid'));
 				}
 
-				return Promise.all((await OLSKRemoteStorage.OLSKRemoteStorageListObjectsRecursive(privateClient, mod.KVCNoteStorageCollectionPath())).filter(mod.KVCNoteStorageMatchV1).map(async function (e) {
+				return Promise.all((await OLSKRemoteStorage.OLSKRemoteStorageListingRecursive(privateClient, mod.KVCNoteStorageCollectionPath())).filter(mod.KVCNoteStorageMatchV1).map(async function (e) {
 					const item = OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(await privateClient.getObject(e, false));
 					
 					inputData(await OLSKRemoteStorageCollectionExports._KVCNoteStorageWrite(item));
