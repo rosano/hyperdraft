@@ -246,10 +246,8 @@ describe('KVCNoteStorageMigrateV1', function test_KVCNoteStorageMigrateV1() {
 		};
 		const outputData = [];
 
-		beforeEach(async function () {
-			await KVCTestingStorageClient.wikiavec.__DEBUG.__OLSKRemoteStoragePrivateClient().storeObject(mainModule.KVCNoteStorageCollectionType(), mainModule.KVCNoteStorageObjectPathV1(item), OLSKRemoteStorage.OLSKRemoteStoragePreJSONSchemaValidate(item));
-
-			OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(item);
+		beforeEach(function () {
+			return OLSKRemoteStorage.OLSKRemoteStorageWriteObject(KVCTestingStorageClient.wikiavec.__DEBUG.__OLSKRemoteStoragePrivateClient(), mainModule.KVCNoteStorageObjectPathV1(item), item);
 		});
 
 		beforeEach(async function () {
