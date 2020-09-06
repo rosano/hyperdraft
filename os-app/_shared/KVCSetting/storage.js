@@ -1,5 +1,8 @@
 import KVCSettingModel from './model.js';
 
+import * as OLSKRemoteStoragePackage from 'OLSKRemoteStorage';
+const OLSKRemoteStorage = OLSKRemoteStoragePackage.default || OLSKRemoteStoragePackage;
+
 const mod = {
 
 	KVCSettingStorageCollectionName () {
@@ -37,9 +40,11 @@ const mod = {
 					});
 				}
 
-				await privateClient.storeObject(mod.KVCSettingStorageCollectionType(), mod.KVCSettingStorageObjectPath(inputData), inputData);
-
-				return inputData;
+				try {
+					return OLSKRemoteStorage.OLSKRemoteStorageWriteObject(privateClient, mod.KVCSettingStorageObjectPath(inputData), inputData);
+				} catch (e) {
+					return Promise.reject(e);
+				}
 			},
 
 			_KVCSettingStorageRead (inputData) {

@@ -80,7 +80,6 @@ describe('KVCNoteActionUpdate', function test_KVCNoteActionUpdate() {
 			KVCNoteID: item.KVCNoteID,
 			KVCNoteCreationDate: item.KVCNoteCreationDate,
 			KVCNoteModificationDate: item.KVCNoteModificationDate,
-			'@context': item['@context'],
 		}));
 	});
 

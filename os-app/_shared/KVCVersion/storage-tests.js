@@ -57,12 +57,14 @@ describe('KVCVersionStorageWrite', function test_KVCVersionStorageWrite() {
 		});
 	});
 
-	it('resolves object', async function() {
-		let item = await mainModule.KVCVersionStorageWrite(KVCTestingStorageClient, StubVersionObjectValid());
+	it('returns input', async function () {
+		const item = StubVersionObjectValid();
 
-		deepEqual(item, Object.assign(StubVersionObjectValid(), {
-			'@context': item['@context'],
-		}));
+		deepEqual(await mainModule.KVCVersionStorageWrite(KVCTestingStorageClient, item) === item, true);
+	});
+
+	it('leaves input unmodified', async function () {
+		deepEqual(await mainModule.KVCVersionStorageWrite(KVCTestingStorageClient, StubVersionObjectValid()), StubVersionObjectValid());
 	});
 
 });

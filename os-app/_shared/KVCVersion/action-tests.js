@@ -34,7 +34,6 @@ describe('KVCVersionActionCreate', function test_KVCVersionActionCreate() {
 		deepEqual(item, Object.assign(kTesting.StubVersionObject(), {
 			KVCVersionID: item.KVCVersionID,
 			KVCVersionDate: item.KVCVersionDate,
-			'@context': item['@context'],
 		}));
 	});
 

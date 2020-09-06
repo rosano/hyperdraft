@@ -57,12 +57,14 @@ describe('KVCSettingStorageWrite', function test_KVCSettingStorageWrite() {
 		});
 	});
 
-	it('returns KVCSetting', async function() {
-		let item = await mainModule.KVCSettingStorageWrite(KVCTestingStorageClient, StubSettingObjectValid());
+	it('returns input', async function () {
+		const item = StubSettingObjectValid();
 
-		deepEqual(item, Object.assign(StubSettingObjectValid(), {
-			'@context': item['@context'],
-		}));
+		deepEqual(await mainModule.KVCSettingStorageWrite(KVCTestingStorageClient, item) === item, true);
+	});
+
+	it('leaves input unmodified', async function () {
+		deepEqual(await mainModule.KVCSettingStorageWrite(KVCTestingStorageClient, StubSettingObjectValid()), StubSettingObjectValid());
 	});
 
 });

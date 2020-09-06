@@ -120,11 +120,11 @@ const mod = {
 					});
 				}
 
-				const inputCopy = OLSKRemoteStorage.OLSKRemoteStorageSafeCopy(inputData);
-
-				await privateClient.storeObject(mod.KVCNoteStorageCollectionType(), mod.KVCNoteStorageObjectPath(inputCopy), OLSKRemoteStorage.OLSKRemoteStoragePreJSONSchemaValidate(inputCopy));
-
-				return Object.assign(inputData, OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(inputCopy));
+				try {
+					return OLSKRemoteStorage.OLSKRemoteStorageWriteObject(privateClient, mod.KVCNoteStorageObjectPath(inputData), inputData);
+				} catch (e) {
+					return Promise.reject(e);
+				}
 			},
 
 			async _KVCNoteStorageList () {

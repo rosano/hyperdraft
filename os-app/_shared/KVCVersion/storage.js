@@ -39,9 +39,11 @@ const mod = {
 					});
 				}
 
-				await privateClient.storeObject(mod.KVCVersionStorageCollectionType(), mod.KVCVersionStorageObjectPath(inputData), OLSKRemoteStorage.OLSKRemoteStoragePreJSONSchemaValidate(inputData));
-
-				return OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(inputData);
+				try {
+					return OLSKRemoteStorage.OLSKRemoteStorageWriteObject(privateClient, mod.KVCVersionStorageObjectPath(inputData), inputData);
+				} catch (e) {
+					return Promise.reject(e);
+				}
 			},
 
 			async _KVCVersionStorageList () {

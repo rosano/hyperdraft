@@ -139,12 +139,14 @@ describe('KVCNoteStorageWrite', function test_KVCNoteStorageWrite() {
 		});
 	});
 
-	it('resolves object', async function() {
-		let item = await mainModule.KVCNoteStorageWrite(KVCTestingStorageClient, StubNoteObjectValid());
+	it('returns input', async function () {
+		const item = StubNoteObjectValid();
 
-		deepEqual(item, Object.assign(StubNoteObjectValid(), {
-			'@context': item['@context'],
-		}));
+		deepEqual(await mainModule.KVCNoteStorageWrite(KVCTestingStorageClient, item) === item, true);
+	});
+
+	it('leaves input unmodified', async function () {
+		deepEqual(await mainModule.KVCNoteStorageWrite(KVCTestingStorageClient, StubNoteObjectValid()), StubNoteObjectValid());
 	});
 
 	context('relations', function () {
@@ -163,9 +165,7 @@ describe('KVCNoteStorageWrite', function test_KVCNoteStorageWrite() {
 		});
 		
 		it('excludes from storage', function () {
-			deepEqual(storage, [Object.assign(StubNoteObjectValid(), {
-				'@context': item['@context'],
-			})]);
+			deepEqual(storage, [StubNoteObjectValid()]);
 		});
 		
 		it('includes in outputData', function () {
