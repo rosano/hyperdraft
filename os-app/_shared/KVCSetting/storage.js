@@ -9,10 +9,6 @@ const mod = {
 		return 'kvc_settings';
 	},
 
-	KVCSettingStorageCollectionType () {
-		return 'kvc_setting';
-	},
-
 	KVCSettingStorageCollectionPath () {
 		return mod.KVCSettingStorageCollectionName() + '/';
 	},

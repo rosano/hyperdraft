@@ -10,14 +10,6 @@ describe('KVCSettingStorageCollectionName', function test_KVCSettingStorageColle
 
 });
 
-describe('KVCSettingStorageCollectionType', function test_KVCSettingStorageCollectionType() {
-
-	it('returns string', function() {
-		deepEqual(mainModule.KVCSettingStorageCollectionType(), 'kvc_setting');
-	});
-
-});
-
 describe('KVCSettingStorageCollectionPath', function test_KVCSettingStorageCollectionPath() {
 
 	it('returns string', function() {

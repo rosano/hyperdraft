@@ -10,14 +10,6 @@ describe('KVCVersionStorageCollectionName', function test_KVCVersionStorageColle
 
 });
 
-describe('KVCVersionStorageCollectionType', function test_KVCVersionStorageCollectionType() {
-
-	it('returns string', function() {
-		deepEqual(mainModule.KVCVersionStorageCollectionType(), 'kvc_version');
-	});
-
-});
-
 describe('KVCVersionStorageCollectionPath', function test_KVCVersionStorageCollectionPath() {
 
 	it('returns string', function() {

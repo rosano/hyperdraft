@@ -246,7 +246,7 @@ const mod = {
 							KVCNoteCreationDate: new Date('2019-02-23T13:56:36Z'),
 							KVCNoteModificationDate: new Date('2019-02-23T13:56:36Z'),
 						};
-						await mod._ValueStorageClient.wikiavec.__DEBUG.__OLSKRemoteStoragePrivateClient().storeObject(KVCNoteStorage.KVCNoteStorageCollectionType(), KVCNoteStorage.KVCNoteStorageObjectPathV1(item), OLSKRemoteStorage.OLSKRemoteStoragePreJSONSchemaValidate(item));
+						await OLSKRemoteStorage.OLSKRemoteStorageWriteObject(mod._ValueStorageClient.wikiavec.__DEBUG.__OLSKRemoteStoragePrivateClient(), KVCNoteStorage.KVCNoteStorageObjectPathV1(item), OLSKRemoteStorage.OLSKRemoteStoragePreJSONSchemaValidate(item));
 						await mod.SetupValueNotesAll();
 					},
 				},

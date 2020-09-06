@@ -13,14 +13,6 @@ describe('KVCNoteStorageCollectionName', function test_KVCNoteStorageCollectionN
 
 });
 
-describe('KVCNoteStorageCollectionType', function test_KVCNoteStorageCollectionType() {
-
-	it('returns string', function() {
-		deepEqual(mainModule.KVCNoteStorageCollectionType(), 'kvc_note');
-	});
-
-});
-
 describe('KVCNoteStorageCollectionPath', function test_KVCNoteStorageCollectionPath() {
 
 	it('returns string', function() {

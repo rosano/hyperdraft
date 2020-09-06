@@ -8,10 +8,6 @@ const mod = {
 		return 'kvc_versions';
 	},
 
-	KVCVersionStorageCollectionType () {
-		return 'kvc_version';
-	},
-
 	KVCVersionStorageCollectionPath () {
 		return mod.KVCVersionStorageCollectionName() + '/';
 	},

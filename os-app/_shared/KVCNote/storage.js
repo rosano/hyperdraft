@@ -17,10 +17,6 @@ const mod = {
 		return 'kvc_notes';
 	},
 
-	KVCNoteStorageCollectionType () {
-		return 'kvc_note';
-	},
-
 	KVCNoteStorageCollectionPath () {
 		return mod.KVCNoteStorageCollectionName() + '/';
 	},
