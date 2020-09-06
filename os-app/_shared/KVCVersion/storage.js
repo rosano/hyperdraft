@@ -68,7 +68,6 @@ const mod = {
 
 		return {
 			OLSKRemoteStorageCollectionName: mod.KVCVersionStorageCollectionName(),
-			OLSKRemoteStorageCollectionType: mod.KVCVersionStorageCollectionType(),
 			OLSKRemoteStorageCollectionModelErrors: Object.entries(KVCVersionModel.KVCVersionModelErrorsFor({}, {
 				KVCOptionValidateIfNotPresent: true,
 			})).map(function (e) {

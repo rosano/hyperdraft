@@ -77,7 +77,6 @@ const mod = {
 
 		return {
 			OLSKRemoteStorageCollectionName: mod.KVCSettingStorageCollectionName(),
-			OLSKRemoteStorageCollectionType: mod.KVCSettingStorageCollectionType(),
 			OLSKRemoteStorageCollectionModelErrors: Object.entries(KVCSettingModel.KVCSettingModelErrorsFor({}, {
 				KVCOptionValidateIfNotPresent: true,
 			})).map(function (e) {

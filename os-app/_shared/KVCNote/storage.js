@@ -209,7 +209,6 @@ const mod = {
 
 		return {
 			OLSKRemoteStorageCollectionName: mod.KVCNoteStorageCollectionName(),
-			OLSKRemoteStorageCollectionType: mod.KVCNoteStorageCollectionType(),
 			OLSKRemoteStorageCollectionModelErrors: Object.entries(KVCNoteModel.KVCNoteModelErrorsFor({}, {
 				KVCOptionValidateIfNotPresent: true,
 			})).map(function (e) {
