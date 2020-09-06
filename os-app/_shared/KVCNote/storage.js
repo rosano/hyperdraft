@@ -209,19 +209,6 @@ const mod = {
 
 		return {
 			OLSKRemoteStorageCollectionName: mod.KVCNoteStorageCollectionName(),
-			OLSKRemoteStorageCollectionModelErrors: Object.entries(KVCNoteModel.KVCNoteModelErrorsFor({}, {
-				KVCOptionValidateIfNotPresent: true,
-			})).map(function (e) {
-				if (!Object.keys(KVCNoteModel.KVCNoteModelErrorsFor({})).includes(e[0])) {
-					e[1].push('__RSOptional');
-				}
-
-				return e;
-			}).reduce(function (coll, item) {
-				coll[item[0]] = item[1];
-
-				return coll;
-			}, {}),
 			OLSKRemoteStorageCollectionExports,
 		};
 	},
