@@ -65,6 +65,10 @@ describe('KVCWrite_Access', function () {
 		return browser.assert.OLSKLauncherItems('KVCWriteLauncherItemBacklinks', 1);
 	});
 
+	it('shows OLSKRemoteStorageLauncherFakeItemProxy', function () {
+		return browser.assert.OLSKLauncherItems('OLSKRemoteStorageLauncherFakeItemProxy', 1);
+	});
+
 	it('hides KVCWriteLauncherItemConfigureCustomDomain', function () {
 		return browser.assert.OLSKLauncherItems('KVCWriteLauncherItemConfigureCustomDomain', 0);
 	});

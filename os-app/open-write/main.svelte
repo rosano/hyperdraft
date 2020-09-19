@@ -87,6 +87,7 @@ const mod = {
 	_ValueSettingsAll: [],
 	
 	// DATA
+
 	DataSetting (inputData) {
 		return mod._ValueSettingsAll.filter(function (e) {
 			return e.KVCSettingKey === inputData;
@@ -281,6 +282,7 @@ const mod = {
 			]);
 		}
 
+		outputData.push(...OLSKRemoteStorage.OLSKRemoteStorageRecipes(window, mod._ValueStorageClient, OLSKLocalized, OLSK_TESTING_BEHAVIOUR()));
 		if (mod.KVCWriteDetailInstance) {
 			outputData.push(...mod.KVCWriteDetailInstance.modPublic.KVCWriteDetailRecipes());
 		}
