@@ -13,6 +13,8 @@ import KVCVersionStorage from '../_shared/KVCVersion/storage.js';
 import { OLSK_TESTING_BEHAVIOUR } from 'OLSKTesting';
 import * as OLSKRemoteStoragePackage from '../_shared/__external/OLSKRemoteStorage/main.js'
 const OLSKRemoteStorage = OLSKRemoteStoragePackage.default || OLSKRemoteStoragePackage;
+import * as OLSKServiceWorkerPackage from '../_shared/__external/OLSKServiceWorker/main.js'
+const OLSKServiceWorker = OLSKServiceWorkerPackage.default || OLSKServiceWorkerPackage;
 import KVCNoteAction from '../_shared/KVCNote/action.js';
 import KVCVersionAction from '../_shared/KVCVersion/action.js';
 import KVCSettingAction from '../_shared/KVCSetting/action.js';
@@ -96,6 +98,12 @@ const mod = {
 	
 	DataSettingValue (inputData) {
 		return (mod.DataSetting(inputData) || {}).KVCSettingValue;
+	},
+
+	DataNavigator () {
+		return navigator.serviceWorker ? navigator : {
+			serviceWorker: {},
+		};
 	},
 
 	DataRecipes () {
@@ -283,6 +291,8 @@ const mod = {
 		}
 
 		outputData.push(...OLSKRemoteStorage.OLSKRemoteStorageRecipes(window, mod._ValueStorageClient, OLSKLocalized, OLSK_TESTING_BEHAVIOUR()));
+		outputData.push(...OLSKServiceWorker.OLSKServiceWorkerRecipes(window, mod.DataNavigator(), OLSKLocalized, OLSK_TESTING_BEHAVIOUR()));
+
 		if (mod.KVCWriteDetailInstance) {
 			outputData.push(...mod.KVCWriteDetailInstance.modPublic.KVCWriteDetailRecipes());
 		}
@@ -1039,7 +1049,7 @@ onMount(mod.LifecycleModuleWillMount);
 import KVCWriteMaster from '../sub-master/main.svelte';
 import KVCWriteDetail from '../sub-detail/main.svelte';
 import OLSKAppToolbar from 'OLSKAppToolbar';
-import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svelte';
+import OLSKServiceWorkerView from '../_shared/__external/OLSKServiceWorker/main.svelte';
 import OLSKStorageWidget from 'OLSKStorageWidget';
 </script>
 <svelte:window on:keydown={ mod.InterfaceWindowDidKeydown } />
@@ -1135,7 +1145,7 @@ import OLSKStorageWidget from 'OLSKStorageWidget';
 </div>
 
 {#if !OLSK_TESTING_BEHAVIOUR()}
-	<OLSKServiceWorker OLSKServiceWorkerRegistrationRoute={ window.OLSKCanonicalFor('WKCServiceWorkerRoute') } />
+	<OLSKServiceWorkerView OLSKServiceWorkerRegistrationRoute={ window.OLSKCanonicalFor('WKCServiceWorkerRoute') } />
 {/if}
 
 <style src="./ui-style.css"></style>
