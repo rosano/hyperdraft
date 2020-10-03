@@ -23,14 +23,6 @@ const mod = {
 		return inputData.split('\n').slice(1).join('\n').trim();
 	},
 
-	KVCTemplatePlaintextSnippet (inputData) {
-		if (typeof inputData !== 'string') {
-			throw new Error('KVCErrorInputNotValid');
-		}
-
-		return inputData.length <= 100 ? inputData : inputData.slice(0, 100).split(' ').slice(0, -1).join(' ').concat('…');
-	},
-
 	KVCTemplateTextContent (inputData) {
 		if (typeof inputData !== 'string') {
 			throw new Error('KVCErrorInputNotValid');
@@ -292,7 +284,7 @@ const mod = {
 				outputData[uTokenTag('KVCTemplateTokenURL')] = inputData.KVCBlockPermalinkMap[mod.KVCTemplatePlaintextTitle(e.KVCNoteBody)];
 				
 				const body = mod.KVCTemplatePlaintextBody(e.KVCNoteBody);
-				outputData[uTokenTag('KVCTemplateTokenDescription')] = mod.KVCTemplatePlaintextSnippet(mod.KVCTemplateTextContent(mod.KVCTemplateHTML(inputData.KVCBlockTemplateShowdown, (body.match(/\[\[.*\]\]/g) || []).reduce(function (coll, item) {
+				outputData[uTokenTag('KVCTemplateTokenDescription')] = OLSKString.OLSKStringSnippet(mod.KVCTemplateTextContent(mod.KVCTemplateHTML(inputData.KVCBlockTemplateShowdown, (body.match(/\[\[.*\]\]/g) || []).reduce(function (coll, item) {
 					return coll.split(item).join(item.match(/\[\[(.*)\]\]/)[1]);
 				}, body))));
 

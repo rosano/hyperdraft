@@ -24,6 +24,7 @@ const RemoteStorage = RemoteStoragePackage.default || RemoteStoragePackage;
 import KVCTemplate from '../_shared/KVCTemplate/main.js';
 import * as showdownPackage from 'showdown';
 const showdown = showdownPackage.default || showdownPackage;
+import OLSKString from 'OLSKString';
 
 const mod = {
 
@@ -712,7 +713,7 @@ const mod = {
 	},
 
 	KVCWriteMasterDelegateItemSnippet (inputData) {
-		return KVCTemplate.KVCTemplatePlaintextSnippet(KVCTemplate.KVCTemplatePlaintextBody(inputData));
+		return OLSKString.OLSKStringSnippet(KVCTemplate.KVCTemplatePlaintextBody(inputData));
 	},
 
 	KVCWriteDetailPublicURLFor (inputData) {

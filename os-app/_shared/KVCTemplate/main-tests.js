@@ -68,25 +68,6 @@ describe('KVCTemplatePlaintextBody', function test_KVCTemplatePlaintextBody() {
 
 });
 
-describe('KVCTemplatePlaintextSnippet', function test_KVCTemplatePlaintextSnippet() {
-
-	it('throws error if not string', function() {
-		throws(function() {
-			mainModule.KVCTemplatePlaintextSnippet(null);
-		}, /KVCErrorInputNotValid/);
-	});
-
-	it('returns subset if large', function() {
-		const item = 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.';
-		deepEqual(mainModule.KVCTemplatePlaintextSnippet(item), item.slice(0, 100).split(' ').slice(0, -1).join(' ') + '…');
-	});
-
-	it('returns all if small', function() {
-		deepEqual(mainModule.KVCTemplatePlaintextSnippet('alfa bravo'), 'alfa bravo');
-	});
-
-});
-
 describe('KVCTemplateTextContent', function test_KVCTemplateTextContent() {
 
 	it('throws error if not string', function() {
