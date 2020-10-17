@@ -1099,22 +1099,22 @@ import OLSKStorageWidget from 'OLSKStorageWidget';
 
 {#if OLSK_TESTING_BEHAVIOUR()}
 	<p>
-		<strong>TestControlNotePublishCount</strong>
+		<strong>ControlNotePublishCount</strong>
 		<span id="TestControlNotePublishCount">0</span>
 	</p>
 	
 	<p>
-		<strong>TestControlNoteRetractCount</strong>
+		<strong>ControlNoteRetractCount</strong>
 		<span id="TestControlNoteRetractCount">0</span>
 	</p>
 	
 	<p>
-		<strong>TestControlMigrateCount</strong>
+		<strong>ControlMigrateCount</strong>
 		<span id="TestControlMigrateCount">0</span>
 	</p>
 	
 	<div>
-		<strong>TestPublishContent</strong>
+		<strong>PublishContent</strong>
 		<div id="TestPublishContent">{@html mod.TestPublishContent }</div>
 	</div>
 {/if}
