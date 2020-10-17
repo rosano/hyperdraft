@@ -45,28 +45,17 @@
 		'launchlet',
 		'normalize.css',
 		'OLSKInternational',
+		'OLSKLanguageSwitcher',
 		'OLSKLayout',
-		'OLSKRemoteStorage',
+		'OLSKRootLink',
 		'OLSKRouting',
 		'OLSKServiceWorker',
-		'OLSKString',
 		'OLSKStorageWidget',
-		'OLSKThrottle',
-		'OLSKRootLink',
-		'ROCORootLink',
 		'OLSKUIAssets',
+		'ROCORootLink',
 		'showdown',
 		'turndown',
-		'ulid',
 		'url-parse',
-
-		// pass tests
-		'OLSKMasterList',
-		'OLSKDetailPlaceholder',
-		'OLSKInputWrapper',
-		'OLSKAppToolbar',
-		'OLSKReloadButton',
-		'OLSKLanguageSwitcher',
 	].concat([
 	]), pathPackage.join(__dirname, 'node_modules'), pathPackage.join(__dirname, 'os-app/_shared/__external'));
 })();
