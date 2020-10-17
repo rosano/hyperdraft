@@ -11,10 +11,8 @@ import KVCNoteModel from '../_shared/KVCNote/model.js';
 import KVCSettingStorage from '../_shared/KVCSetting/storage.js';
 import KVCVersionStorage from '../_shared/KVCVersion/storage.js';
 import { OLSK_TESTING_BEHAVIOUR } from 'OLSKTesting';
-import * as OLSKRemoteStoragePackage from '../_shared/__external/OLSKRemoteStorage/main.js'
-const OLSKRemoteStorage = OLSKRemoteStoragePackage.default || OLSKRemoteStoragePackage;
-import * as OLSKServiceWorkerPackage from '../_shared/__external/OLSKServiceWorker/main.js'
-const OLSKServiceWorker = OLSKServiceWorkerPackage.default || OLSKServiceWorkerPackage;
+import OLSKRemoteStorage from 'OLSKRemoteStorage'
+import OLSKServiceWorker from 'OLSKServiceWorker';
 import KVCNoteAction from '../_shared/KVCNote/action.js';
 import KVCVersionAction from '../_shared/KVCVersion/action.js';
 import KVCSettingAction from '../_shared/KVCSetting/action.js';
