@@ -3,10 +3,10 @@ import RollupStart from './main.svelte';
 const KVCWriteMasterListItem = new RollupStart({
 	target: document.body,
 	props: Object.assign({
-		KVCWriteMasterListItemDispatchTitle: (function _KVCWriteMasterListItemDispatchTitle (inputData) {
+		KVCWriteMasterListItemDispatchTitle: (function  (inputData) {
 			return `_KVCWriteMasterListItemDispatchTitle(${ inputData })`;
 		}),
-		KVCWriteMasterListItemDispatchSnippet: (function _KVCWriteMasterListItemDispatchSnippet (inputData) {
+		KVCWriteMasterListItemDispatchSnippet: (function  (inputData) {
 			return `_KVCWriteMasterListItemDispatchSnippet(${ inputData })`;
 		}),
 	}, Object.fromEntries(Array.from((new window.URLSearchParams(window.location.search)).entries()).map(function (e) {

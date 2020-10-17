@@ -48,47 +48,47 @@ mod.LifecycleModuleDidLoad();
 const KVCWriteDetail = new RollupStart({
 	target: document.body,
 	props: Object.assign({
-		KVCWriteDetailPublicURLFor: (function _KVCWriteDetailPublicURLFor (inputData) {
+		KVCWriteDetailPublicURLFor: (function  (inputData) {
 			return '[public]/' + inputData.KVCNotePublicID;
 		}),
-		KVCWriteDetailDispatchBack: (function _KVCWriteDetailDispatchBack () {
+		KVCWriteDetailDispatchBack: (function  () {
 			window.TestKVCWriteDetailDispatchBack.innerHTML = parseInt(window.TestKVCWriteDetailDispatchBack.innerHTML) + 1;
 		}),
-		KVCWriteDetailDispatchJump: (function _KVCWriteDetailDispatchJump () {
+		KVCWriteDetailDispatchJump: (function  () {
 			window.TestKVCWriteDetailDispatchJump.innerHTML = parseInt(window.TestKVCWriteDetailDispatchJump.innerHTML) + 1;
 		}),
-		KVCWriteDetailDispatchArchive: (function _KVCWriteDetailDispatchArchive () {
+		KVCWriteDetailDispatchArchive: (function  () {
 			window.TestKVCWriteDetailDispatchArchive.innerHTML = parseInt(window.TestKVCWriteDetailDispatchArchive.innerHTML) + 1;
 		}),
-		KVCWriteDetailDispatchUnarchive: (function _KVCWriteDetailDispatchUnarchive () {
+		KVCWriteDetailDispatchUnarchive: (function  () {
 			window.TestKVCWriteDetailDispatchUnarchive.innerHTML = parseInt(window.TestKVCWriteDetailDispatchUnarchive.innerHTML) + 1;
 		}),
-		KVCWriteDetailDispatchConnect: (function _KVCWriteDetailDispatchConnect () {
+		KVCWriteDetailDispatchConnect: (function  () {
 			window.TestKVCWriteDetailDispatchConnect.innerHTML = parseInt(window.TestKVCWriteDetailDispatchConnect.innerHTML) + 1;
 		}),
-		KVCWriteDetailDispatchPublish: (function _KVCWriteDetailDispatchPublish () {
+		KVCWriteDetailDispatchPublish: (function  () {
 			window.TestKVCWriteDetailDispatchPublish.innerHTML = parseInt(window.TestKVCWriteDetailDispatchPublish.innerHTML) + 1;
 		}),
-		KVCWriteDetailDispatchRetract: (function _KVCWriteDetailDispatchRetract () {
+		KVCWriteDetailDispatchRetract: (function  () {
 			window.TestKVCWriteDetailDispatchRetract.innerHTML = parseInt(window.TestKVCWriteDetailDispatchRetract.innerHTML) + 1;
 		}),
-		KVCWriteDetailDispatchVersions: (function _KVCWriteDetailDispatchVersions () {
+		KVCWriteDetailDispatchVersions: (function  () {
 			window.TestKVCWriteDetailDispatchVersions.innerHTML = parseInt(window.TestKVCWriteDetailDispatchVersions.innerHTML) + 1;
 		}),
-		KVCWriteDetailDispatchDiscard: (function _KVCWriteDetailDispatchDiscard () {
+		KVCWriteDetailDispatchDiscard: (function  () {
 			window.TestKVCWriteDetailDispatchDiscard.innerHTML = parseInt(window.TestKVCWriteDetailDispatchDiscard.innerHTML) + 1;
 		}),
-		KVCWriteDetailDispatchUpdate: (function _KVCWriteDetailDispatchUpdate () {
+		KVCWriteDetailDispatchUpdate: (function  () {
 			window.TestKVCWriteDetailDispatchUpdate.innerHTML = parseInt(window.TestKVCWriteDetailDispatchUpdate.innerHTML) + 1;
 
 			mod.ReactDetailItem(params.KVCWriteDetailItem);
 		}),
-		KVCWriteDetailDispatchSetAsRootPage: (function _KVCWriteDetailDispatchSetAsRootPage (inputData) {
+		KVCWriteDetailDispatchSetAsRootPage: (function  (inputData) {
 			window.TestKVCWriteDetailDispatchSetAsRootPage.innerHTML = parseInt(window.TestKVCWriteDetailDispatchSetAsRootPage.innerHTML) + 1;
 			window.TestKVCWriteDetailDispatchSetAsRootPageData.innerHTML = inputData;
 		}),
-		KVCWriteDetailDispatchOpen: (function _KVCWriteDetailDispatchOpen () {}),
-		KVCWriteDetailDispatchEscape: (function _KVCWriteDetailDispatchEscape () {}),
+		KVCWriteDetailDispatchOpen: (function  () {}),
+		KVCWriteDetailDispatchEscape: (function  () {}),
 		_DebugLauncher: true,
 	}, Object.fromEntries(Object.entries(params).filter(function (e) {
 		return e[0] !== 'KVCWriteDetailItem';

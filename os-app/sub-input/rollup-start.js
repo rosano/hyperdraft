@@ -25,16 +25,16 @@ const mod = {
 const KVCWriteInput = new RollupStart({
 	target: document.body,
 	props: Object.assign({
-		KVCWriteInputDispatchHeaderTokens: (function _KVCWriteInputDispatchHeaderTokens (inputData) {
+		KVCWriteInputDispatchHeaderTokens: (function  (inputData) {
 			window.TestKVCWriteInputDispatchHeaderTokens.innerHTML = parseInt(window.TestKVCWriteInputDispatchHeaderTokens.innerHTML) + 1;
 			window.TestKVCWriteInputDispatchHeaderTokensData.innerHTML = JSON.stringify(inputData);
 		}),
-		KVCWriteInputDispatchUpdate: (function _KVCWriteInputDispatchUpdate (inputData) {
+		KVCWriteInputDispatchUpdate: (function  (inputData) {
 			window.TestKVCWriteInputDispatchUpdate.innerHTML = parseInt(window.TestKVCWriteInputDispatchUpdate.innerHTML) + 1;
 		}),
-		KVCWriteInputDispatchOpen: (function _KVCWriteInputDispatchOpen () {}),
-		KVCWriteInputDispatchReady: (function _KVCWriteInputDispatchReady () {}),
-		KVCWriteInputDispatchEscape: (function _KVCWriteInputDispatchEscape () {}),
+		KVCWriteInputDispatchOpen: (function  () {}),
+		KVCWriteInputDispatchReady: (function  () {}),
+		KVCWriteInputDispatchEscape: (function  () {}),
 	}, params),
 });
 
