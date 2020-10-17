@@ -54,7 +54,7 @@ export const modPublic = {
 	},
 
 	KVCWriteDetailRecipes () {
-		return mod._ValueItem ? mod.DataRecipes() : [];
+		return mod._ValueItem ? mod.DataWriteDetailRecipes() : [];
 	},
 
 };
@@ -81,7 +81,7 @@ const mod = {
 
 	// DATA
 
-	DataRecipes () {
+	DataWriteDetailRecipes () {
 		const outputData = [];
 
 		if (mod._ValueItem && !mod._ValueItem.KVCNoteIsArchived) {
@@ -287,7 +287,7 @@ import KVCWriteInput from '../sub-input/main.svelte';
 </div>
 
 {#if _DebugLauncher && OLSK_TESTING_BEHAVIOUR() }
-	<button class="OLSKAppToolbarLauncherButton" on:click={ () => window.Launchlet.LCHSingletonCreate({ LCHOptionRecipes: mod.DataRecipes() }) }></button>	
+	<button class="OLSKAppToolbarLauncherButton" on:click={ () => window.Launchlet.LCHSingletonCreate({ LCHOptionRecipes: mod.DataWriteDetailRecipes() }) }></button>	
 {/if}
 
 <style src="./ui-style.css"></style>

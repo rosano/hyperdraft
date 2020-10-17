@@ -107,7 +107,7 @@ const mod = {
 		};
 	},
 
-	DataRecipes () {
+	DataWriteRecipes () {
 		const outputData = [{
 			LCHRecipeSignature: 'KVCWriteLauncherItemJournal',
 			LCHRecipeName: OLSKLocalized('KVCWriteLauncherItemJournalText'),
@@ -674,7 +674,7 @@ const mod = {
 		}
 
 		window.Launchlet.LCHSingletonCreate({
-			LCHOptionRecipes: mod.DataRecipes(),
+			LCHOptionRecipes: mod.DataWriteRecipes(),
 		});
 	},
 
