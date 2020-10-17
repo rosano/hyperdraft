@@ -52,7 +52,6 @@
 		'OLSKString',
 		'OLSKStorageWidget',
 		'OLSKThrottle',
-		'OLSKType',
 		'OLSKRootLink',
 		'ROCORootLink',
 		'OLSKUIAssets',

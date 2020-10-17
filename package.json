@@ -41,7 +41,6 @@
 
     "// PARSE": null,
     "jsdom": "latest",
-    "OLSKType": "olsk/OLSKType",
 
     "// DIFF": null,
     "diff": "latest",
