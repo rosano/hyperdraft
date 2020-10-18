@@ -811,10 +811,6 @@ const mod = {
 		mod.ControlEscape();
 	},
 
-	_OLSKAppToolbarDispatchExport () {
-		mod.ControlNotesExportData();
-	},
-
 	OLSKChangeDelegateCreateNote (inputData) {
 		// console.log('OLSKChangeDelegateCreate', inputData);
 
@@ -1131,7 +1127,6 @@ import OLSKStorageWidget from 'OLSKStorageWidget';
 		OLSKAppToolbarDonateURL={ window.OLSKPublicConstants('KVC_SHARED_DONATE_URL') }
 		OLSKAppToolbarStorageStatus={ mod._ValueFooterStorageStatus }
 		OLSKAppToolbarDispatchStorage={ mod.OLSKAppToolbarDispatchStorage }
-		_OLSKAppToolbarDispatchExport={ mod._OLSKAppToolbarDispatchExport }
 		OLSKAppToolbarDispatchLauncher={ mod.OLSKAppToolbarDispatchLauncher }
 		/>
 </footer>
