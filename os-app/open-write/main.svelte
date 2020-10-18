@@ -815,10 +815,6 @@ const mod = {
 		mod.ControlNotesExportData();
 	},
 
-	_OLSKAppToolbarDispatchImport (inputData) {
-		mod.ControlNotesImportData(inputData);
-	},
-
 	OLSKChangeDelegateCreateNote (inputData) {
 		// console.log('OLSKChangeDelegateCreate', inputData);
 
@@ -1136,7 +1132,6 @@ import OLSKStorageWidget from 'OLSKStorageWidget';
 		OLSKAppToolbarStorageStatus={ mod._ValueFooterStorageStatus }
 		OLSKAppToolbarDispatchStorage={ mod.OLSKAppToolbarDispatchStorage }
 		_OLSKAppToolbarDispatchExport={ mod._OLSKAppToolbarDispatchExport }
-		_OLSKAppToolbarDispatchImport={ mod._OLSKAppToolbarDispatchImport }
 		OLSKAppToolbarDispatchLauncher={ mod.OLSKAppToolbarDispatchLauncher }
 		/>
 </footer>
