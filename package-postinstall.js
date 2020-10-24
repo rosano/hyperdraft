@@ -32,7 +32,18 @@
 	));
 })();
 
-//# OLSKPostinstallExternalAssets
+(function ROCOHotfixLaunchletForSkipWait() {
+	if (process.env.NODE_ENV === 'production') {
+		return;
+	}
+
+	const filePath = './node_modules/launchlet/__compiled/launchlet.js';
+	require('fs').writeFileSync(filePath, require('OLSKString').OLSKStringPatch(
+		require('fs').readFileSync(filePath, 'utf8'),
+		',100',
+		',1',
+	));
+})();
 
 (function OLSKPostinstallExternalAssets() {
 	const OLSKAssets = require('./node_modules/OLSKExpress/modules/OLSKAssets/main.js');
