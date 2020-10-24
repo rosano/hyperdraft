@@ -41,12 +41,6 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 			browser.assert.element(`a[href="${ process.env.KVC_VITRINE_NV_URL }"]`);
 		});
 
-		it('localizes KVCWriteRoute', function() {
-			browser.assert.element(`a[href="${ OLSKTestingCanonical(require('../open-write/controller.js').OLSKControllerRoutes().shift(), {
-				OLSKRoutingLanguage: languageCode,
-			}) }"]`);
-		});
-
 		it('localizes KVC_SHARED_GITHUB_URL', function() {
 			browser.assert.element(`a[href="${ process.env.KVC_SHARED_GITHUB_URL }"]`);
 		});
@@ -57,6 +51,20 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 
 		it('localizes KVCVitrineVideoHeading', function () {
 			browser.assert.text(KVCVitrineVideoHeading, uLocalized('KVCVitrineVideoHeadingText'));
+		});
+
+		context('KVCVitrineContentAppButton', function test_KVCVitrineContentAppButton () {
+
+			it('classes OLSKCommonButton', function () {
+				browser.assert.hasClass(KVCVitrineContentAppButton, 'OLSKCommonButton');
+			});
+			
+			it('sets href', function () {
+				browser.assert.attribute(KVCVitrineContentAppButton, 'href', OLSKTestingCanonical(require('../open-write/controller.js').OLSKControllerRoutes().shift(), {
+					OLSKRoutingLanguage: languageCode,
+				}));
+			});
+		
 		});
 
 	});

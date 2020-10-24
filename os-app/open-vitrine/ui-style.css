@@ -26,3 +26,8 @@ body {
 .KVCVitrineIdentityName {
 	margin: 0;
 }
+
+.KVCVitrineContentAppButton {
+	padding: 8px 16px;
+	font-size: 110%;
+}

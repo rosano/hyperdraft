@@ -2,11 +2,11 @@ _KVCVitrineDescription_
 
 Hyprnote is an app for writing. Inspired by [Notational Velocity](KVC_VITRINE_NV_URL), it is keyboard-focused and allows you to link between notes. Additionally, it can generate a website from your public notes.
 
-Check out the features below or [try it](KVCVitrineTokenWriteURL).
-
 The code is open-source and available on [GitHub](KVC_SHARED_GITHUB_URL).
 
 The project is freely accessible but if you are in a position to give, please [donate](KVC_SHARED_DONATE_URL) to support future development.
+
+<a class="KVCVitrineContentAppButton OLSKCommonButton" href="KVCVitrineTokenWriteURL">KVCVitrineContentAppButtonText</a>
 
 * * *
 

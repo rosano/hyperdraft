@@ -8,6 +8,7 @@ Object.entries({
 	KVCVitrineIdentityName: '.KVCVitrineIdentityName',
 
 	KVCVitrineContent: '.KVCVitrineContent',
+	KVCVitrineContentAppButton: '.KVCVitrineContentAppButton',
 
 	KVCVitrineVideoHeading: '.KVCVitrineVideoHeading',
 	KVCVitrineVideoFrame: '.KVCVitrineVideoFrame',
@@ -43,6 +44,10 @@ describe('KVCVitrine_Access', function () {
 	
 	it('shows KVCVitrineContent', function() {
 		browser.assert.elements(KVCVitrineContent, 1);
+	});
+
+	it('shows KVCVitrineContentAppButton', function() {
+		browser.assert.elements(KVCVitrineContentAppButton, 1);
 	});
 
 	it('shows KVCVitrineVideoHeading', function () {
