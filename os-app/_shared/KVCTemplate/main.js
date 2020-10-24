@@ -1,5 +1,4 @@
-import * as OLSKStringPackage from 'OLSKString';
-const OLSKString = OLSKStringPackage.default || OLSKStringPackage;
+import OLSKString from 'OLSKString';
 
 const uTokenTag = function (inputData) {
 	return `{${ mod[inputData]() }}`;

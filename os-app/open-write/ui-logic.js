@@ -1,5 +1,4 @@
-import * as KVCTemplatePackage from '../_shared/KVCTemplate/main.js';
-const KVCTemplate = KVCTemplatePackage.default || KVCTemplatePackage;
+import KVCTemplate from '../_shared/KVCTemplate/main.js';
 
 const mod = {
 

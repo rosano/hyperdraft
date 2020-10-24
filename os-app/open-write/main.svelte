@@ -17,11 +17,9 @@ import KVCNoteAction from '../_shared/KVCNote/action.js';
 import KVCVersionAction from '../_shared/KVCVersion/action.js';
 import KVCSettingAction from '../_shared/KVCSetting/action.js';
 import KVCWriteLogic from './ui-logic.js';
-import * as RemoteStoragePackage from 'remotestoragejs';
-const RemoteStorage = RemoteStoragePackage.default || RemoteStoragePackage;
+import RemoteStorage from 'remotestoragejs';
 import KVCTemplate from '../_shared/KVCTemplate/main.js';
-import * as showdownPackage from 'showdown';
-const showdown = showdownPackage.default || showdownPackage;
+import showdown from 'showdown';
 import OLSKString from 'OLSKString';
 
 const mod = {

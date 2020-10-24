@@ -5,10 +5,8 @@ import KVCNoteStorage from './storage.js';
 import KVCNoteModel from './model.js';
 import KVCSettingAction from '../KVCSetting/action.js';
 import KVCVersionAction from '../KVCVersion/action.js';
-import * as OLSKStringPackage from 'OLSKString';
-const OLSKString = OLSKStringPackage.default || OLSKStringPackage;
-import * as KVCTemplatePackage from '../KVCTemplate/main.js';
-const KVCTemplate = KVCTemplatePackage.default || KVCTemplatePackage;
+import OLSKString from 'OLSKString';
+import KVCTemplate from '../KVCTemplate/main.js';
 
 const mod = {
 

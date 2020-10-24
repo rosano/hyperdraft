@@ -2,8 +2,7 @@ const { throws, rejects, deepEqual } = require('assert');
 
 const mainModule = require('./storage.js').default;
 
-const OLSKRemoteStoragePackage = require('OLSKRemoteStorage');
-const OLSKRemoteStorage = OLSKRemoteStoragePackage.default || OLSKRemoteStoragePackage;
+const OLSKRemoteStorage = require('OLSKRemoteStorage');
 
 describe('KVCNoteStorageCollectionName', function test_KVCNoteStorageCollectionName() {
 
