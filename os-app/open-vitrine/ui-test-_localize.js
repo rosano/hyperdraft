@@ -59,6 +59,10 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 				browser.assert.hasClass(KVCVitrineContentAppButton, 'OLSKCommonButton');
 			});
 			
+			it('classes OLSKCommonButtonPrimary', function () {
+				browser.assert.hasClass(KVCVitrineContentAppButton, 'OLSKCommonButtonPrimary');
+			});
+			
 			it('sets href', function () {
 				browser.assert.attribute(KVCVitrineContentAppButton, 'href', OLSKTestingCanonical(require('../open-write/controller.js').OLSKControllerRoutes().shift(), {
 					OLSKRoutingLanguage: languageCode,

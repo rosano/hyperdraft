@@ -6,7 +6,7 @@ The code is open-source and available on [GitHub](KVC_SHARED_GITHUB_URL).
 
 The project is freely accessible but if you are in a position to give, please [donate](KVC_SHARED_DONATE_URL) to support future development.
 
-<a class="KVCVitrineContentAppButton OLSKCommonButton" href="KVCVitrineTokenWriteURL">KVCVitrineContentAppButtonText</a>
+<a class="KVCVitrineContentAppButton OLSKCommonButton OLSKCommonButtonPrimary" href="KVCVitrineTokenWriteURL">KVCVitrineContentAppButtonText</a>
 
 * * *
 
