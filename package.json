@@ -16,7 +16,6 @@
     "OLSKExpress": "olsk/OLSKExpress",
 
     "// REMOTE STORAGE": null,
-    "remotestoragejs": "latest",
     "OLSKRemoteStorage": "olsk/OLSKRemoteStorage",
     "OLSKStorageWidget": "olsk/OSWPackage",
 
