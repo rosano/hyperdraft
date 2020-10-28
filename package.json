@@ -99,16 +99,6 @@
     "// I sacrifice myself for the commas of others": null
   },
   "devDependencies": {
-    "// TESTS": null,
-    "mocha": "latest",
-    "supervisor": "latest",
-
-    "// INTERFACE TESTS": null,
-    "zombie": "latest",
-
-    "// MOCHA PREPROCESS": null,
-    "OLSKTesting": "olsk/OLSKTesting",
-
     "// SVELTE": null,
     "OLSKRollupScaffold": "olsk/OLSKRollupScaffold",
 
