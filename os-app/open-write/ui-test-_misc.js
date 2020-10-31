@@ -596,14 +596,6 @@ describe('KVCWrite_Misc', function () {
 
 	});
 
-	describe('OLSKAppToolbar', function test_OLSKAppToolbar () {
-
-		it('sets OLSKAppToolbarDonateURL', function () {
-			browser.assert.attribute('.OLSKAppToolbarDonateLink', 'href', process.env.KVC_SHARED_DONATE_URL);
-		});
-
-	});
-
 	describe.skip('KVCWriteLauncherItemConfigureCustomDomain', function test_KVCWriteLauncherItemConfigureCustomDomain () {
 		
 		before(function () {
