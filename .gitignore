@@ -1,9 +1,6 @@
 # NODE
 node_modules
 
-# OLDSKOOL
-os-cache
-
 # BUILD
 **/__*/*
 .static
