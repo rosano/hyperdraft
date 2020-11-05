@@ -50,7 +50,7 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 				it('localizes KVCWriteDetailConnectConfirm', function() {
 					browser.assert.OLSKConfirmQuestion(function () {
 						return browser.pressButton(KVCWriteDetailToolbarConnectButton);
-					}, uLocalized('KVCWriteDetailConnectConfirmText'));
+					}, uLocalized('OLSKRemoteStorageConnectConfirmText'));
 				});
 		
 			});
