@@ -1,6 +1,6 @@
 _KVCVitrineDescription_
 
-Hyprnote is an app for writing. Inspired by [Notational Velocity](KVC_VITRINE_NV_URL), it is keyboard-focused and allows you to link between notes. Additionally, it can generate a website from your public notes.
+Hyperdraft is an app for writing. Inspired by [Notational Velocity](KVC_VITRINE_NV_URL), it is keyboard-focused and allows you to link between notes. Additionally, it can generate a website from your public notes.
 
 The code is open-source and available on [GitHub](KVC_SHARED_GITHUB_URL).
 
