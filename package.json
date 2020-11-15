@@ -110,6 +110,9 @@
 
     "// SPEC": null,
     "OLSKSpec": "olsk/OLSKSpec",
+    
+    "// HOTFIX": null,
+    "OLSKHotfix": "olsk/OLSKHotfix",
 
     "// I sacrifice myself for the commas of others": null
   }
