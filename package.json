@@ -62,10 +62,6 @@
     "// FRONTEND APP TOOLBAR": null,
     "OLSKAppToolbar": "olsk/OLSKAppToolbar",
 
-    "// FRONTEND TEXT": null,
-    "marked": "latest",
-    "OLSKString": "olsk/OLSKString",
-
     "// FRONTEND ROUTES ACCESS": null,
     "OLSKRouting": "olsk/OLSKRouting",
 
