@@ -1,18 +1,12 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<link rel="stylesheet" type="text/css" href="/_shared/__external/normalize.css/normalize.css">
-	<link rel="stylesheet" type="text/css" href="/<%= OLSKSharedPageControllerSlug %>/__compiled/ui-style.css">
-
-	<script type="text/javascript">
-		window.OLSKPublicConstants = function (inputData) {
-			return <%- JSON.stringify({
-				OLSKSharedPageCurrentLanguage,
-			}) %>[inputData];
-		};
-	</script>
-</head>
-<body>
+<%
+locals.OLSKPageAssets = [
+	'/_shared/__external/normalize.css/normalize.css',
+	'__compiled/ui-style.css',
+];
+locals.OLSKPagePublicConstants = {
+	OLSKSharedPageCurrentLanguage,
+};
+%>
 
 <script src="/<%= OLSKSharedPageControllerSlug %>/__compiled/ui-behaviour.js"></script>
 
@@ -39,6 +33,3 @@
 	<span id="TestKVCWriteMasterListItemDispatchFilter">0</span>
 	<span id="TestKVCWriteMasterListItemDispatchFilterData">undefined</span>
 </p>
-
-</body>
-</html>

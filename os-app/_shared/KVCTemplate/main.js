@@ -123,10 +123,7 @@ const mod = {
 </p>
 
 </div>
-{/block:${ mod.KVCTemplateTokenBacklinks() }}
-
-</body>
-</html>`;
+{/block:${ mod.KVCTemplateTokenBacklinks() }}`;
 	},
 
 	KVCTemplateTokenPostTitle () {
