@@ -3,6 +3,8 @@
   "scripts": {
     "preinstall": "node ./package-preinstall.js",
     "postinstall": "node ./package-postinstall.js",
+    
+    "setup": "olsk-bundle",
 
     "start": "olsk-express",
     
@@ -109,6 +111,9 @@
     
     "// HOTFIX": null,
     "OLSKHotfix": "olsk/OLSKHotfix",
+    
+    "// BUNDLE": null,
+    "OLSKBundle": "olsk/OLSKBundle",
 
     "// I sacrifice myself for the commas of others": null
   }
