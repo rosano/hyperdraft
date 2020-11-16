@@ -1,9 +1,5 @@
 (function OLSKPostinstallHotfix() {
-	if (process.env.NODE_ENV === 'production') {
-		return;
-	}
-
-	Object.entries(require('OLSKHotfix').OLSKHotfixPatches()).forEach(function ([path, patches]) {
+	Object.entries(require('OLSKHotfix').OLSKHotfixPatches(process.env.NODE_ENV)).forEach(function ([path, patches]) {
 		if (!require('fs').existsSync(path)) {
 			return;
 		}
