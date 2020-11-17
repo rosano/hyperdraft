@@ -4,6 +4,6 @@ KVCWriteLauncherItemJournalText: Journal
 KVCWriteLauncherItemBacklinksText: Liens retours
 KVCWriteLauncherItemConfigureCustomDomainText: Configurer nom de domaine personalisé
 KVCWriteLauncherItemConfigureCustomDomainPrompt1QuestionText: Veuillez copier le texte suivant et le coller dedans votre host configuration.
-KVCWriteLauncherItemConfigureCustomDomainPrompt2QuestionText: Quel est votre nom de domaine personalisé?
-KVCWriteLauncherItemConfigureCustomDomainConfirmQuestionText: Le nom de domaine ne semble pas d'être présent. Souhaitez-vous essayer de nouveau?
+KVCWriteLauncherItemConfigureCustomDomainPrompt2QuestionText: Quel est votre nom de domaine personalisé ?
+KVCWriteLauncherItemConfigureCustomDomainConfirmQuestionText: Le nom de domaine ne semble pas d'être présent. Souhaitez-vous essayer de nouveau ?
 KVCWriteLauncherItemRemoveCustomDomainText: Enlever nom de domaine personalisé
