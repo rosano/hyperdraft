@@ -5,5 +5,5 @@ KVCWriteLauncherItemBacklinksText: Backlinks
 KVCWriteLauncherItemConfigureCustomDomainText: Configurar dominio de Internet de encargo
 KVCWriteLauncherItemConfigureCustomDomainPrompt1QuestionText: Por favor, copia el texto siguiente y pegalo en tu host configuration.
 KVCWriteLauncherItemConfigureCustomDomainPrompt2QuestionText: ¿Qué es tu dominio de Internet de encargo?
-KVCWriteLauncherItemConfigureCustomDomainConfirmQuestionText: El dominio de Internet no parece estar presente. ¿Quieres intentar de nuevo?
+KVCWriteLauncherItemConfigureCustomDomainConfirmQuestionText: El dominio de Internet no parece estar presente. ¿Te gustaría intentar de nuevo?
 KVCWriteLauncherItemRemoveCustomDomainText: Quitar dominio de Internet de encargo
