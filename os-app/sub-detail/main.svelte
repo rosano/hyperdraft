@@ -59,12 +59,8 @@ export const modPublic = {
 
 };
 
-import OLSKInternational from 'OLSKInternational';
-const OLSKLocalized = function(translationConstant) {
-	return OLSKInternational.OLSKInternationalLocalizedString(translationConstant, JSON.parse(`{"OLSK_I18N_SEARCH_REPLACE":"OLSK_I18N_SEARCH_REPLACE"}`)[window.OLSKPublicConstants('OLSKSharedPageCurrentLanguage')]);
-};
-
 import KVCNoteModel from '../_shared/KVCNote/model.js';
+import { OLSKLocalized } from 'OLSKInternational';
 import { OLSK_TESTING_BEHAVIOUR } from 'OLSKTesting';
 
 const mod = {
