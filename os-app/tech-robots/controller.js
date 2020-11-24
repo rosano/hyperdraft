@@ -1,15 +1,18 @@
-//_ OLSKControllerRoutes
-
 exports.OLSKControllerRoutes = function() {
-	return {
-		WKCRobotsRoute: {
-			OLSKRoutePath: '/robots.txt',
-			OLSKRouteMethod: 'get',
-			OLSKRouteFunction (req, res, next) {
-				return res.render(require('path').join(__dirname, 'view'), {
-					WKCRobotsAllowedRouteConstants: [],
-				});
-			},
+	return [{
+		OLSKRoutePath: '/robots.txt',
+		OLSKRouteMethod: 'get',
+		OLSKRouteSignature: 'WKCRobotsRoute',
+		OLSKRouteFunction (req, res, next) {
+			return res.send(require('OLSKRobots').OLSKRobotsTXT([
+				'KVCVitrineRoute',
+			].reduce(function (coll, item) {
+				return coll.concat(res.locals.OLSKCanonicalFor(item)).concat((res.locals.OLSKRouteObjectFor(item).OLSKRouteLanguages || []).map(function (e) {
+					return res.locals.OLSKCanonicalLocalizedFor(item, {
+						OLSKRoutingLanguage: e,
+					});
+				}));
+			}, [])));
 		},
-	};
+	}];
 };

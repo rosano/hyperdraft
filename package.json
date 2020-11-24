@@ -94,6 +94,9 @@
     "OLSKRootLink": "olsk/OLSKRootLink",
     "ROCORootLink": "rationalcreative/ROCORootLink",
 
+    "// TECH ROBOTS": null,
+    "OLSKRobots": "olsk/OLSKRobots",
+
     "// I sacrifice myself for the commas of others": null
   },
   "devDependencies": {

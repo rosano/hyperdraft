@@ -1,4 +1,0 @@
-User-agent: *
-<%= (WKCRobotsAllowedRouteConstants.map(function (e) {
-	return `Allow: ${OLSKCanonicalFor(e) === '/' ? '/$' : OLSKCanonicalFor(e)}`;
-})).concat(['Disallow: /']).join('\n') %>
