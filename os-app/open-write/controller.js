@@ -9,7 +9,7 @@ exports.OLSKControllerRoutes = function() {
 				KVCGoogleClientKey: Buffer.from(process.env.KVC_GOOGLE_CLIENT_KEY).toString('base64'),
 			});
 		},
-		OLSKRouteLanguages: ['en', 'fr', 'es'],
+		OLSKRouteLanguageCodes: ['en', 'fr', 'es'],
 		_OLSKRouteSkipLanguageRedirect: true,
 	}, {
 		OLSKRoutePath: '/panel/write',

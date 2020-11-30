@@ -6,7 +6,7 @@ describe('WKCRobots_Misc', function () {
 		browser.assert.deepEqual(await (await browser.fetch('http://loc.tests' + kDefaultRoute.OLSKRoutePath)).text(), require('OLSKRobots').OLSKRobotsTXT([
 				require('../open-vitrine/controller.js').OLSKControllerRoutes().shift(),
 			].reduce(function (coll, item) {
-				return coll.concat(OLSKTestingCanonical(item)).concat((item.OLSKRouteLanguages || []).map(function (e) {
+				return coll.concat(OLSKTestingCanonical(item)).concat((item.OLSKRouteLanguageCodes || []).map(function (e) {
 					return OLSKTestingCanonical(item, {
 						OLSKRoutingLanguage: e,
 					});

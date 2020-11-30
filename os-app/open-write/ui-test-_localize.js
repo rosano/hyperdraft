@@ -2,7 +2,7 @@ const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
 const KVCWriteLogic = require('./ui-logic.js').default;
 
-kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
+kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (languageCode) {
 
 	const uLocalized = function (inputData) {
 		return OLSKTestingLocalized(inputData, languageCode);

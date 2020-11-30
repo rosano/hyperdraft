@@ -21,6 +21,6 @@ exports.OLSKControllerRoutes = function() {
 				IsTestingBehaviour: req.hostname.match('loc.tests'),
 			});
 		},
-		OLSKRouteLanguages: ['en'],
+		OLSKRouteLanguageCodes: ['en'],
 	}];
 };
