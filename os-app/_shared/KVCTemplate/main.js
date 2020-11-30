@@ -99,7 +99,7 @@ const mod = {
 {block:${ mod.KVCTemplateTokenNotePage() }}
 <a class="KVCRootLink" href="{${ mod.KVCTemplateTokenRootURL() }}">${ inputData('KVCRootLinkText') }</a>
 
-<hr />
+<hr role="presentation" />
 {/block:${ mod.KVCTemplateTokenNotePage() }}
 
 <h1 class="KVCArticleTitle">{${ mod.KVCTemplateTokenPostTitle() }}</h1>
@@ -111,7 +111,7 @@ const mod = {
 </article>
 
 {block:${ mod.KVCTemplateTokenBacklinks() }}
-<hr />
+<hr role="presentation" />
 
 <div class="KVCBacklinks">
 
