@@ -18,7 +18,7 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (languageCode) {
 			browser.assert.text('title', uLocalized('KVCVitrineTitle'));
 		});
 
-		it('localizes description', function() {
+		it('localizes meta[description]', function() {
 			browser.assert.attribute('meta[name=description]', 'content', uLocalized('KVCVitrineDescription'));
 		});
 
