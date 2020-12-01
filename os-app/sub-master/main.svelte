@@ -14,7 +14,7 @@ export let KVCWriteMasterDelegateItemSnippet;
 export let OLSKMobileViewInactive = false;
 
 import { OLSKLocalized } from 'OLSKInternational';
-import { OLSK_TESTING_BEHAVIOUR } from 'OLSKTesting'
+import { OLSK_SPEC_UI } from 'OLSKSpec'
 import KVCWriteMasterLogic from './ui-logic.js';
 
 const mod = {

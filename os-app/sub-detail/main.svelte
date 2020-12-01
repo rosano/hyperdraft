@@ -29,7 +29,7 @@ export const modPublic = {
 		}
 		
 		mod.ControlConfigureEditor(function (inputData) {
-			if (!OLSK_TESTING_BEHAVIOUR()) {
+			if (!OLSK_SPEC_UI()) {
 				document.body.scrollIntoView(true);
 			}
 		});
@@ -61,7 +61,7 @@ export const modPublic = {
 
 import KVCNoteModel from '../_shared/KVCNote/model.js';
 import { OLSKLocalized } from 'OLSKInternational';
-import { OLSK_TESTING_BEHAVIOUR } from 'OLSKTesting';
+import { OLSK_SPEC_UI } from 'OLSKSpec';
 
 const mod = {
 
@@ -110,7 +110,7 @@ const mod = {
 			})
 		}
 
-		if (OLSK_TESTING_BEHAVIOUR()) {
+		if (OLSK_SPEC_UI()) {
 			outputData.push({
 				LCHRecipeName: 'KVCWriteDetailLauncherFakeItemProxy',
 				LCHRecipeCallback: function KVCWriteDetailLauncherFakeItemProxy () {},
@@ -282,7 +282,7 @@ import KVCWriteInput from '../sub-input/main.svelte';
 
 </div>
 
-{#if _DebugLauncher && OLSK_TESTING_BEHAVIOUR() }
+{#if _DebugLauncher && OLSK_SPEC_UI() }
 	<button class="OLSKAppToolbarLauncherButton" on:click={ () => window.Launchlet.LCHSingletonCreate({ LCHOptionRecipes: mod.DataWriteDetailRecipes() }) }></button>	
 {/if}
 

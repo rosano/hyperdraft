@@ -41,7 +41,7 @@ export const modPublic = {
 
 };
 
-import { OLSK_TESTING_BEHAVIOUR } from 'OLSKTesting';
+import { OLSK_SPEC_UI } from 'OLSKSpec';
 import KVCWriteInputLogic from './ui-logic.js';
 
 const mod = {
@@ -65,7 +65,7 @@ const mod = {
 			return;
 		}
 
-		if (OLSK_TESTING_BEHAVIOUR()) {
+		if (OLSK_SPEC_UI()) {
 			return KVCWriteInputDispatchEscape();
 		}
 
@@ -103,7 +103,7 @@ const mod = {
 	// CONTROL
 
 	ControlConfigureEditor (inputData) {
-		if (OLSK_TESTING_BEHAVIOUR()) {
+		if (OLSK_SPEC_UI()) {
 			return;
 		}
 		
@@ -151,7 +151,7 @@ const mod = {
 	},
 
 	SetupEditor () {
-		if (OLSK_TESTING_BEHAVIOUR()) {
+		if (OLSK_SPEC_UI()) {
  			return mod.ReactValueSet(KVCWriteInputItem[KVCWriteInputKey]);
 		}
 
@@ -254,7 +254,7 @@ const mod = {
 
 	_ReactValueHeaderTokens (inputData) {
 		KVCWriteInputDispatchHeaderTokens(KVCWriteInputLogic.KVCWriteInputHeaderTokensFrom(inputData.split('\n').map(function (e, i) {
-			return KVCWriteInputLogic.KVCWriteInputLineObjectsFor(OLSK_TESTING_BEHAVIOUR() ? KVCWriteInputLogic.uStubLineTokensFor(e) : mod._ValueEditorInstance.getLineTokens(i));
+			return KVCWriteInputLogic.KVCWriteInputLineObjectsFor(OLSK_SPEC_UI() ? KVCWriteInputLogic.uStubLineTokensFor(e) : mod._ValueEditorInstance.getLineTokens(i));
 		})));
 	},
 
@@ -295,11 +295,11 @@ onMount(mod.LifecycleComponentDidMount);
 <svelte:options accessors />
 
 <div class="KVCWriteInput">
-	{#if OLSK_TESTING_BEHAVIOUR()}
+	{#if OLSK_SPEC_UI()}
 		<textarea class="KVCWriteInputFieldDebug" bind:value={ KVCWriteInputItem[KVCWriteInputKey] } on:input={ mod.InterfaceEditorFieldDebugDidInput }></textarea>
 	{/if}
 	
-	{#if !OLSK_TESTING_BEHAVIOUR()}
+	{#if !OLSK_SPEC_UI()}
 		<textarea bind:this={ mod._ValueEditorElement }></textarea>
 	{/if}
 </div>

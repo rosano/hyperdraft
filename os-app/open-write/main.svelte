@@ -6,7 +6,7 @@ import KVCNoteStorage from '../_shared/KVCNote/storage.js';
 import KVCNoteModel from '../_shared/KVCNote/model.js';
 import KVCSettingStorage from '../_shared/KVCSetting/storage.js';
 import KVCVersionStorage from '../_shared/KVCVersion/storage.js';
-import { OLSK_TESTING_BEHAVIOUR } from 'OLSKTesting';
+import { OLSK_SPEC_UI } from 'OLSKSpec';
 import OLSKRemoteStorage from 'OLSKRemoteStorage'
 import OLSKServiceWorker from 'OLSKServiceWorker';
 import KVCNoteAction from '../_shared/KVCNote/action.js';
@@ -104,13 +104,13 @@ const mod = {
 			LCHRecipeSignature: 'KVCWriteLauncherItemJournal',
 			LCHRecipeName: OLSKLocalized('KVCWriteLauncherItemJournalText'),
 			LCHRecipeCallback: function KVCWriteLauncherItemJournal () {
-				mod.ControlNoteCreate(KVCWriteLogic.KVCWriteLauncherItemJournalTemplate(this.api.LCHDateLocalOffsetSubtracted(new Date(OLSK_TESTING_BEHAVIOUR() ? '2001-02-03T04:05:06Z' : Date.now())), OLSKLocalized));
+				mod.ControlNoteCreate(KVCWriteLogic.KVCWriteLauncherItemJournalTemplate(this.api.LCHDateLocalOffsetSubtracted(new Date(OLSK_SPEC_UI() ? '2001-02-03T04:05:06Z' : Date.now())), OLSKLocalized));
 			},
 		}, {
 			LCHRecipeSignature: 'KVCWriteLauncherItemBacklinks',
 			LCHRecipeName: OLSKLocalized('KVCWriteLauncherItemBacklinksText'),
 			LCHRecipeCallback: async function KVCWriteLauncherItemBacklinks () {
-				mod.ControlNoteCreate(KVCWriteLogic.KVCWriteLauncherItemBacklinksTemplate(this.api.LCHDateLocalOffsetSubtracted(new Date(OLSK_TESTING_BEHAVIOUR() ? '2001-02-03T04:05:06Z' : Date.now())), KVCWriteLogic.KVCWriteBacklinksMap(mod._ValueNotesAll), OLSKLocalized));
+				mod.ControlNoteCreate(KVCWriteLogic.KVCWriteLauncherItemBacklinksTemplate(this.api.LCHDateLocalOffsetSubtracted(new Date(OLSK_SPEC_UI() ? '2001-02-03T04:05:06Z' : Date.now())), KVCWriteLogic.KVCWriteBacklinksMap(mod._ValueNotesAll), OLSKLocalized));
 			},
 		}];
 
@@ -120,9 +120,9 @@ const mod = {
 				LCHRecipeSignature: 'KVCWriteLauncherItemConfigureCustomDomain',
 				LCHRecipeName: OLSKLocalized('KVCWriteLauncherItemConfigureCustomDomainText'),
 				LCHRecipeCallback: function KVCWriteLauncherItemConfigureCustomDomain () {
-					const prompt1 = !OLSK_TESTING_BEHAVIOUR() || (OLSK_TESTING_BEHAVIOUR() && !count);
-					const prompt2 = !OLSK_TESTING_BEHAVIOUR() || (OLSK_TESTING_BEHAVIOUR() && count);
-					const confirm3 = !OLSK_TESTING_BEHAVIOUR() || (OLSK_TESTING_BEHAVIOUR() && count == 2);
+					const prompt1 = !OLSK_SPEC_UI() || (OLSK_SPEC_UI() && !count);
+					const prompt2 = !OLSK_SPEC_UI() || (OLSK_SPEC_UI() && count);
+					const confirm3 = !OLSK_SPEC_UI() || (OLSK_SPEC_UI() && count == 2);
 
 					if (prompt1) {
 						if (window.prompt(OLSKLocalized('KVCWriteLauncherItemConfigureCustomDomainPrompt1QuestionText'), KVCNoteStorage.KVCNoteStoragePublicURL(mod._ValueStorageClient, KVCNoteStorage.KVCNoteStoragePublicRootPagePath())) === null) {
@@ -132,7 +132,7 @@ const mod = {
 					
 					if (prompt2) {
 						const callback = async function () {
-							const response = OLSK_TESTING_BEHAVIOUR() && confirm3 ? '' : window.prompt(OLSKLocalized('KVCWriteLauncherItemConfigureCustomDomainPrompt2QuestionText'));
+							const response = OLSK_SPEC_UI() && confirm3 ? '' : window.prompt(OLSKLocalized('KVCWriteLauncherItemConfigureCustomDomainPrompt2QuestionText'));
 
 							if (response === null) {
 								return;
@@ -161,7 +161,7 @@ const mod = {
 						callback();
 					}
 
-					if (OLSK_TESTING_BEHAVIOUR()) {
+					if (OLSK_SPEC_UI()) {
 						count += 1;
 					}
 				},
@@ -185,7 +185,7 @@ const mod = {
 			});
 		}
 
-		if (OLSK_TESTING_BEHAVIOUR()) {
+		if (OLSK_SPEC_UI()) {
 			outputData.push(...[
 				{
 					LCHRecipeName: 'FakeOLSKChangeDelegateCreateNote',
@@ -283,8 +283,8 @@ const mod = {
 			]);
 		}
 
-		outputData.push(...OLSKRemoteStorage.OLSKRemoteStorageRecipes(window, mod._ValueStorageClient, OLSKLocalized, OLSK_TESTING_BEHAVIOUR()));
-		outputData.push(...OLSKServiceWorker.OLSKServiceWorkerRecipes(window, mod.DataNavigator(), OLSKLocalized, OLSK_TESTING_BEHAVIOUR()));
+		outputData.push(...OLSKRemoteStorage.OLSKRemoteStorageRecipes(window, mod._ValueStorageClient, OLSKLocalized, OLSK_SPEC_UI()));
+		outputData.push(...OLSKServiceWorker.OLSKServiceWorkerRecipes(window, mod.DataNavigator(), OLSKLocalized, OLSK_SPEC_UI()));
 
 		if (mod.KVCWriteDetailInstance) {
 			outputData.push(...mod.KVCWriteDetailInstance.modPublic.KVCWriteDetailRecipes());
@@ -316,7 +316,7 @@ const mod = {
 	},
 
 	DataDebugPersistenceIsEnabled () {
-		if (OLSK_TESTING_BEHAVIOUR()) {
+		if (OLSK_SPEC_UI()) {
 			return false;
 		}
 
@@ -380,7 +380,7 @@ const mod = {
 			},
 		});
 
-		if (OLSK_TESTING_BEHAVIOUR()) {
+		if (OLSK_SPEC_UI()) {
 			OLSKThrottle.OLSKThrottleSkip(mod._ValueSaveNoteThrottleMap[inputData.KVCNoteID])	
 		}
 
@@ -400,7 +400,7 @@ const mod = {
 				},
 			});
 
-			if (OLSK_TESTING_BEHAVIOUR()) {
+			if (OLSK_SPEC_UI()) {
 				OLSKThrottle.OLSKThrottleSkip(mod._ValueSaveVersionThrottleMap[inputData.KVCNoteID])	
 			}
 		}
@@ -413,7 +413,7 @@ const mod = {
 				},
 			});
 
-			if (OLSK_TESTING_BEHAVIOUR()) {
+			if (OLSK_SPEC_UI()) {
 				OLSKThrottle.OLSKThrottleSkip(mod._ValueSavePublishThrottleMap[inputData.KVCNoteID])	
 			}
 		}
@@ -495,7 +495,7 @@ const mod = {
 	},
 	
 	async ControlNotePublish (inputData) {
-		if (OLSK_TESTING_BEHAVIOUR()) {
+		if (OLSK_SPEC_UI()) {
 			window.TestControlNotePublishCount.innerHTML = parseInt(window.TestControlNotePublishCount.innerHTML) + 1;
 		}
 
@@ -519,7 +519,7 @@ const mod = {
 	},
 	
 	async ControlNoteRetract (inputData) {
-		if (OLSK_TESTING_BEHAVIOUR()) {
+		if (OLSK_SPEC_UI()) {
 			window.TestControlNoteRetractCount.innerHTML = parseInt(window.TestControlNoteRetractCount.innerHTML) + 1;
 		}
 		
@@ -566,7 +566,7 @@ const mod = {
 			},
 		});
 
-		if (OLSK_TESTING_BEHAVIOUR()) {
+		if (OLSK_SPEC_UI()) {
 			OLSKThrottle.OLSKThrottleSkip(mod._ValueFilterThrottle);
 		}
 	},
@@ -647,7 +647,7 @@ const mod = {
 	ControlMigrate() {
 		KVCNoteStorage.KVCNoteStorageMigrateV1(mod._ValueStorageClient, mod.OLSKChangeDelegateCreateNote);
 
-		if (OLSK_TESTING_BEHAVIOUR()) {
+		if (OLSK_SPEC_UI()) {
 			window.TestControlMigrateCount.innerHTML = parseInt(window.TestControlMigrateCount.innerHTML) + 1;
 		}
 
@@ -713,7 +713,7 @@ const mod = {
 			return KVCWriteLogic.KVCWriteCustomDomainBaseURLFunction(KVCNoteStorage.KVCNoteStoragePublicURL(mod._ValueStorageClient, KVCNoteStorage.KVCNoteStoragePublicRootPagePath()), KVCNoteStorage.KVCNoteStoragePublicRootPagePath())(KVCNoteStorage.KVCNoteStoragePublicURL(mod._ValueStorageClient, KVCNoteAction.KVCNoteActionPublicPath(inputData, mod.DataSettingValue('KVCSettingPublicRootPageID') === inputData.KVCNoteID)), mod.DataSetting('KVCSettingCustomDomainBaseURL').KVCSettingValue);
 		}
 		
-		if (OLSK_TESTING_BEHAVIOUR() && mod._ValueStorageIsConnected) {
+		if (OLSK_SPEC_UI() && mod._ValueStorageIsConnected) {
 			return '/FakePublicPath';
 		}
 
@@ -853,7 +853,7 @@ const mod = {
 	},
 
 	StorageNotConnected () {
-		if (OLSK_TESTING_BEHAVIOUR() && window.location.search.match('FakeStorageIsConnected')) {
+		if (OLSK_SPEC_UI() && window.location.search.match('FakeStorageIsConnected')) {
 			return;
 		}
 
@@ -937,12 +937,12 @@ const mod = {
 			KVCSettingStorage.KVCSettingStorageBuild,
 			KVCVersionStorage.KVCVersionStorageBuild,
 			], {
-			OLSKOptionIncludeDebug: OLSK_TESTING_BEHAVIOUR(),
+			OLSKOptionIncludeDebug: OLSK_SPEC_UI(),
 		});
 		
 		mod._ValueStorageClient = new RemoteStorage({
 			modules: [ storageModule ],
-			OLSKPatchRemoteStorageAuthRedirectURI: OLSK_TESTING_BEHAVIOUR() ? undefined : window.location.origin + window.OLSKCanonicalFor('KVCWriteRoute'),
+			OLSKPatchRemoteStorageAuthRedirectURI: OLSK_SPEC_UI() ? undefined : window.location.origin + window.OLSKCanonicalFor('KVCWriteRoute'),
 		});
 
 		mod._ValueStorageClient.access.claim(storageModule.name, 'rw');
@@ -974,7 +974,7 @@ const mod = {
 		let isOffline;
 
 		mod._ValueStorageClient.on('network-offline', () => {
-			if (!OLSK_TESTING_BEHAVIOUR()) {
+			if (!OLSK_SPEC_UI()) {
 				console.debug('network-offline', arguments);
 			}
 
@@ -982,7 +982,7 @@ const mod = {
 		});
 
 		mod._ValueStorageClient.on('network-online', () => {
-			if (!OLSK_TESTING_BEHAVIOUR()) {
+			if (!OLSK_SPEC_UI()) {
 				console.debug('network-online', arguments);
 			}
 			
@@ -994,7 +994,7 @@ const mod = {
 				return;
 			};
 
-			if (!OLSK_TESTING_BEHAVIOUR()) {
+			if (!OLSK_SPEC_UI()) {
 				console.debug('error', error);
 			}
 		});
@@ -1081,7 +1081,7 @@ import OLSKStorageWidget from 'OLSKStorageWidget';
 		/>
 </div>
 
-{#if OLSK_TESTING_BEHAVIOUR()}
+{#if OLSK_SPEC_UI()}
 	<p>
 		<strong>ControlNotePublishCount</strong>
 		<span id="TestControlNotePublishCount">0</span>
@@ -1126,7 +1126,7 @@ import OLSKStorageWidget from 'OLSKStorageWidget';
 
 </div>
 
-{#if !OLSK_TESTING_BEHAVIOUR()}
+{#if !OLSK_SPEC_UI()}
 	<OLSKServiceWorkerView OLSKServiceWorkerRegistrationRoute={ window.OLSKCanonicalFor('WKCServiceWorkerRoute') } />
 {/if}
 
