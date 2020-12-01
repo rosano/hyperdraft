@@ -6,7 +6,7 @@ const KVCSettingStorage = require('./os-app/_shared/KVCSetting/storage.js').defa
 const KVCVersionStorage = require('./os-app/_shared/KVCVersion/storage.js').default;
 
 (function KVCMochaStorage() {
-	if (process.env.OLSK_TESTING_BEHAVIOUR === 'true') {
+	if (process.env.OLSK_SPEC_MOCHA_INTERFACE === 'true') {
 		return;
 	}
 
