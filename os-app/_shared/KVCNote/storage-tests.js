@@ -211,7 +211,6 @@ describe('KVCNoteStorageDelete', function test_KVCNoteStorageDelete() {
 
 		await mainModule.KVCNoteStorageDelete(KVCTestingStorageClient, await mainModule.KVCNoteStorageWrite(KVCTestingStorageClient, item));
 
-
 		deepEqual((await KVCTestingStorageClient.wikiavec.__DEBUG.__OLSKRemoteStoragePublicClient().getFile(mainModule.KVCNoteStoragePublicObjectPath(item))).data, undefined);
 	});
 

@@ -22,7 +22,6 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 			browser.assert.attribute(KVCWriteMasterCreateButton, 'title', uLocalized('KVCWriteMasterCreateButtonText'));
 		});
 
-
 		context('KVCWriteMasterRevealArchiveIsVisible', function() {
 			
 			before(function() {
