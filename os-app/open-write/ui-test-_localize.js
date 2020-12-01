@@ -2,17 +2,17 @@ const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
 const KVCWriteLogic = require('./ui-logic.js').default;
 
-kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (languageCode) {
+kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 
 	const uLocalized = function (inputData) {
-		return OLSKTestingLocalized(inputData, languageCode);
+		return OLSKTestingLocalized(inputData, OLSKRoutingLanguage);
 	};
 
-	describe(`KVCWrite_Localize-${ languageCode }`, function () {
+	describe(`KVCWrite_Localize-${ OLSKRoutingLanguage }`, function () {
 
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
-				OLSKRoutingLanguage: languageCode,
+				OLSKRoutingLanguage,
 			});
 		});
 

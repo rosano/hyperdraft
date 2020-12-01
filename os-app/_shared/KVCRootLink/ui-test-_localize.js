@@ -1,22 +1,22 @@
 require('./controller.js').OLSKControllerRoutes().forEach(function (kDefaultRoute) {
 
-	kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (languageCode) {
+	kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 
 		const uLocalized = function (inputData) {
-			return OLSKTestingLocalized(inputData, languageCode);
+			return OLSKTestingLocalized(inputData, OLSKRoutingLanguage);
 		};
 
-		describe(`KVCRootLink_Localize-${ kDefaultRoute.OLSKRouteSignature }-${ languageCode }`, function () {
+		describe(`KVCRootLink_Localize-${ kDefaultRoute.OLSKRouteSignature }-${ OLSKRoutingLanguage }`, function () {
 
 			before(function() {
 				return browser.OLSKVisit(kDefaultRoute, {
-					OLSKRoutingLanguage: languageCode,
+					OLSKRoutingLanguage,
 				});
 			});
 
 			it('localizes OLSKRootLink', function() {
 				browser.assert.attribute('.OLSKRootLink', 'href', OLSKTestingCanonical(require('../../open-vitrine/controller.js').OLSKControllerRoutes().shift(), {
-					OLSKRoutingLanguage: languageCode,
+					OLSKRoutingLanguage,
 				}));
 			});
 

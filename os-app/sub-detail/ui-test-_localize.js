@@ -1,18 +1,18 @@
 const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
-kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (languageCode) {
+kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 
 	const uLocalized = function (inputData) {
-		return OLSKTestingLocalized(inputData, languageCode);
+		return OLSKTestingLocalized(inputData, OLSKRoutingLanguage);
 	};
 
-	describe(`KVCWriteDetail_Localize-${ languageCode }`, function () {
+	describe(`KVCWriteDetail_Localize-${ OLSKRoutingLanguage }`, function () {
 
 		context('KVCWriteDetailItem', function() {
 		
 			before(function() {
 				return browser.OLSKVisit(kDefaultRoute, {
-					OLSKRoutingLanguage: languageCode,
+					OLSKRoutingLanguage,
 					KVCWriteDetailItem: JSON.stringify(StubNoteObjectValid()),
 				});
 			});
@@ -69,7 +69,7 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (languageCode) {
 
 				before(function() {
 					return browser.OLSKVisit(kDefaultRoute, {
-						OLSKRoutingLanguage: languageCode,
+						OLSKRoutingLanguage,
 						KVCWriteDetailItem: JSON.stringify(Object.assign(StubNoteObjectValid(), {
 							KVCNoteIsArchived: true,
 						})),
@@ -90,7 +90,7 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (languageCode) {
 
 				before(function() {
 					return browser.OLSKVisit(kDefaultRoute, {
-						OLSKRoutingLanguage: languageCode,
+						OLSKRoutingLanguage,
 						KVCWriteDetailItem: JSON.stringify(StubNoteObjectValid()),
 						KVCWriteDetailConnected: true,
 					});
@@ -108,7 +108,7 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (languageCode) {
 
 					before(function() {
 						return browser.OLSKVisit(kDefaultRoute, {
-							OLSKRoutingLanguage: languageCode,
+							OLSKRoutingLanguage,
 							KVCWriteDetailItem: JSON.stringify(Object.assign(StubNoteObjectValid(), {
 								KVCNoteIsPublic: true,
 								KVCNotePublishDate: new Date(),
@@ -134,7 +134,7 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (languageCode) {
 
 				before(function() {
 					return browser.OLSKVisit(kDefaultRoute, {
-						OLSKRoutingLanguage: languageCode,
+						OLSKRoutingLanguage,
 						KVCWriteDetailItem: JSON.stringify(StubNoteObjectValid()),
 						KVCWriteDetailItemIsRootPage: true,
 					});
