@@ -26,6 +26,10 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 			browser.assert.text(KVCVitrineIdentityName, uLocalized('KVCVitrineTitle'));
 		});
 
+		it('localizes KVCVitrineIdentityBlurb', function () {
+			browser.assert.text(KVCVitrineIdentityBlurb, uLocalized('KVCVitrineDescription'));
+		});
+
 		it('localizes KVCVitrineContent', function() {
 			const item = require('OLSKString').OLSKStringReplaceTokens(require('fs').readFileSync(require('path').join(__dirname, `text.${ OLSKRoutingLanguage }.md`), 'utf-8'), {
 				'_': '',

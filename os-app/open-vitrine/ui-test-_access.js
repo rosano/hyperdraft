@@ -6,6 +6,7 @@ Object.entries({
 	KVCVitrineIdentity: '.KVCVitrineIdentity',
 	KVCVitrineIdentityLogo: '.KVCVitrineIdentityLogo',
 	KVCVitrineIdentityName: '.KVCVitrineIdentityName',
+	KVCVitrineIdentityBlurb: '.KVCVitrineIdentityBlurb',
 
 	KVCVitrineContent: '.KVCVitrineContent',
 	KVCVitrineContentAppButton: '.KVCVitrineContentAppButton',
@@ -29,17 +30,21 @@ describe('KVCVitrine_Access', function () {
 	it('shows OLSKLanguageSwitcher', function() {
 		browser.assert.elements('.OLSKLanguageSwitcher', 1);
 	});
-	
-	it('shows KVCVitrineIdentity', function() {
+
+	it('shows KVCVitrineIdentity', function () {
 		browser.assert.elements(KVCVitrineIdentity, 1);
 	});
-	
-	it('shows KVCVitrineIdentityLogo', function() {
+
+	it('shows KVCVitrineIdentityLogo', function () {
 		browser.assert.elements(KVCVitrineIdentityLogo, 1);
 	});
-	
-	it('shows KVCVitrineIdentityName', function() {
+
+	it('shows KVCVitrineIdentityName', function () {
 		browser.assert.elements(KVCVitrineIdentityName, 1);
+	});
+
+	it('shows KVCVitrineIdentityBlurb', function () {
+		browser.assert.elements(KVCVitrineIdentityBlurb, 1);
 	});
 	
 	it('shows KVCVitrineContent', function() {
