@@ -6,9 +6,7 @@ The project is freely accessible but if you are in a position to give, please [d
 
 <a class="KVCVitrineContentAppButton OLSKCommonButton OLSKCommonButtonPrimary" href="KVCVitrineTokenWriteURL">KVCVitrineContentAppButtonText</a>
 
-* * *
-
-## Features
+# Features
 - Link between notes via `[[wiki]]`-style syntax
 - Publish notes to the internet via remoteStorage
 - Jump between markdown headings
