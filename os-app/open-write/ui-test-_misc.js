@@ -20,10 +20,6 @@ describe('KVCWrite_Misc', function () {
 		browser.assert.attribute('meta[name=apple-mobile-web-app-capable]', 'content', 'yes');
 	});
 
-	it('assigns link:apple-touch-icon', function () {
-		browser.assert.attribute('link[rel=apple-touch-icon]', 'href', process.env.WKC_TEMP_TOUCH_ICON_URL);
-	});
-
 	context('KVCWrite', function () {
 		
 		it('classes KVCWriteMaster', function () {
