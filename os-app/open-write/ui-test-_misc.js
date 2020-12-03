@@ -8,15 +8,15 @@ describe('KVCWrite_Misc', function () {
 		return browser.OLSKVisit(kDefaultRoute);
 	});
 	
-	it('assigns meta:viewport', function () {
+	it('sets meta:viewport', function () {
 		browser.assert.attribute('meta[name=viewport]', 'content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no');
 	});
 	
-	it('assigns meta:mobile-web-app-capable', function () {
+	it('sets meta:mobile-web-app-capable', function () {
 		browser.assert.attribute('meta[name=mobile-web-app-capable]', 'content', 'yes');
 	});
 	
-	it('assigns meta:apple-mobile-web-app-capable', function () {
+	it('sets meta:apple-mobile-web-app-capable', function () {
 		browser.assert.attribute('meta[name=apple-mobile-web-app-capable]', 'content', 'yes');
 	});
 
