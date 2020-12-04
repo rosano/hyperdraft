@@ -63,6 +63,10 @@
     "// FRONTEND APP TOOLBAR": null,
     "OLSKAppToolbar": "olsk/OLSKAppToolbar",
 
+    "// APROPOS": null,
+    "OLSKModalView": "olsk/OLSKModalView",
+    "OLSKApropos": "olsk/OLSKApropos",
+
     "// FRONTEND ROUTES ACCESS": null,
     "OLSKRouting": "olsk/OLSKRouting",
 

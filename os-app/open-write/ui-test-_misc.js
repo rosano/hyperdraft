@@ -564,6 +564,22 @@ describe('KVCWrite_Misc', function () {
 
 	});
 
+	describe('OLSKApropos', function test_OLSKApropos() {
+
+		before(function () {
+			return browser.pressButton('.OLSKAppToolbarAproposButton');
+		});
+
+		it('sets OLSKAproposFeedbackValue', function () {
+			browser.assert.attribute('.OLSKAproposFeedbackButton', 'href', `javascript:window.location.href = window.atob('${ browser.window.btoa('mailto:' + OLSKTestingFormatted(process.env.OLSK_APROPOS_FEEDBACK_EMAIL, 'RP_003')) }')`);
+		});
+
+		after(function () {
+			browser.pressButton('.OLSKModalViewCloseButton');
+		});
+
+	});
+
 	describe('KVCWriteStorageToolbar', function test_KVCWriteStorageToolbar () {
 
 		it('classes OLSKToolbar', function () {
