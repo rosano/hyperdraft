@@ -89,6 +89,26 @@ describe('KVCWrite_Access', function () {
 		return browser.assert.OLSKLauncherItems('KVCWriteLauncherItemRevealArchive', 0);
 	});
 
+	describe('OLSKLanguageSwitcherLauncher', function test_OLSKLanguageSwitcherLauncher() {
+
+		before(function () {
+			return browser.pressButton('.OLSKAppToolbarLanguageButton');
+		});
+
+		before(function () {
+			return browser.fill('.LCHLauncherFilterInput', 'OLSKLanguageSwitcherLauncherFakeItemProxy');
+		});
+
+		it('shows OLSKLanguageSwitcherLauncherFakeItemProxy', function () {
+			browser.assert.elements('.LCHLauncherPipeItem', 1);
+		});
+
+		after(function () {
+			browser.pressButton('#TestLCHDebugCloseButton');
+		});
+
+	});
+
 	describe('OLSKAppToolbarStorageButton', function test_OLSKAppToolbarStorageButton () {
 		
 		before(function () {

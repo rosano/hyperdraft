@@ -17,6 +17,7 @@ import RemoteStorage from 'remotestoragejs';
 import KVCTemplate from '../_shared/KVCTemplate/main.js';
 import showdown from 'showdown';
 import OLSKString from 'OLSKString';
+import OLSKLanguageSwitcher from 'OLSKLanguageSwitcher';
 
 const mod = {
 
@@ -656,6 +657,40 @@ const mod = {
 
 	// MESSAGE
 
+	OLSKAppToolbarDispatchLanguage () {
+		if (window.Launchlet.LCHSingletonExists()) {
+			return window.Launchlet.LCHSingletonDestroy();
+		}
+
+		// #hotfix launchlet show all items
+		let selected;
+
+		window.Launchlet.LCHSingletonCreate({
+			LCHOptionRecipes: OLSKLanguageSwitcher.OLSKLanguageSwitcherRecipes({
+				ParamLanguageCodes: window.OLSKPublicConstants('OLSKSharedPageLanguagesAvailable'),
+				ParamCurrentLanguage: window.OLSKPublicConstants('OLSKSharedPageCurrentLanguage'),
+				ParamSpecUI: OLSK_SPEC_UI(),
+				ParamWindow: window,
+				OLSKLocalized,
+				ParamRouteConstant: window.OLSKPublicConstants('OLSKSharedActiveRouteConstant'),
+				OLSKFormatted: OLSKString.OLSKStringFormatted,
+				OLSKCanonicalFor: window.OLSKCanonicalFor,
+			}).map(function (e) {
+				const item = e.LCHRecipeCallback;
+
+				return Object.assign(e, {
+					LCHRecipeCallback () {
+						selected = item;
+					},
+				})
+			}),
+			LCHOptionCompletionHandler () {
+			  selected && selected();
+			},
+			LCHOptionMode: Launchlet.LCHModePreview,
+		});
+	},
+
 	OLSKAppToolbarDispatchStorage () {
 		mod._ValueStorageToolbarHidden = !mod._ValueStorageToolbarHidden;
 	},
@@ -1118,6 +1153,7 @@ import OLSKStorageWidget from 'OLSKStorageWidget';
 	{/if}
 
 	<OLSKAppToolbar
+		OLSKAppToolbarDispatchLanguage={ mod.OLSKAppToolbarDispatchLanguage }
 		OLSKAppToolbarStorageStatus={ mod._ValueFooterStorageStatus }
 		OLSKAppToolbarDispatchStorage={ mod.OLSKAppToolbarDispatchStorage }
 		OLSKAppToolbarDispatchLauncher={ mod.OLSKAppToolbarDispatchLauncher }
