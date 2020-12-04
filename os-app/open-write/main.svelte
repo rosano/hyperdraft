@@ -657,7 +657,7 @@ const mod = {
 
 	// MESSAGE
 
-	OLSKAppToolbarDispatchLanguage () {
+	OLSKAppToolbarDispatchTongue () {
 		if (window.Launchlet.LCHSingletonExists()) {
 			return window.Launchlet.LCHSingletonDestroy();
 		}
@@ -1153,7 +1153,7 @@ import OLSKStorageWidget from 'OLSKStorageWidget';
 	{/if}
 
 	<OLSKAppToolbar
-		OLSKAppToolbarDispatchLanguage={ mod.OLSKAppToolbarDispatchLanguage }
+		OLSKAppToolbarDispatchTongue={ mod.OLSKAppToolbarDispatchTongue }
 		OLSKAppToolbarStorageStatus={ mod._ValueFooterStorageStatus }
 		OLSKAppToolbarDispatchStorage={ mod.OLSKAppToolbarDispatchStorage }
 		OLSKAppToolbarDispatchLauncher={ mod.OLSKAppToolbarDispatchLauncher }
