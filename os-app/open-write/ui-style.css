@@ -1,4 +1,4 @@
-.KVCWrite {
+:global(body) {
 	--WKCBorderStyle: 1px solid #ddd;
 	
 	font-family: 'Helvetica Neue', 'Helvetica', sans-serif;
