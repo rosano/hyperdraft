@@ -90,6 +90,10 @@
     "// FRONTEND LANGUAGE SWITCHER": null,
     "OLSKLanguageSwitcher": "olsk/OLSKLanguageSwitcher",
 
+    "// FUND": null,
+    "OLSKFund": "olsk/OLSKFund",
+    "OLSKWebView": "olsk/OLSKWebView",
+
     "// FRONTEND ROOT LINK": null,
     "OLSKRootLink": "olsk/OLSKRootLink",
     "ROCORootLink": "rationalcreative/ROCORootLink",

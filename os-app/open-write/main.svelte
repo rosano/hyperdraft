@@ -18,6 +18,8 @@ import KVCTemplate from '../_shared/KVCTemplate/main.js';
 import showdown from 'showdown';
 import OLSKString from 'OLSKString';
 import OLSKLanguageSwitcher from 'OLSKLanguageSwitcher';
+import OLSKFund from 'OLSKFund';
+import OLSKPact from 'OLSKPact';
 
 const mod = {
 
@@ -36,6 +38,8 @@ const mod = {
 	_ValueNotesAll: [],
 	ValueNotesAll (inputData, shouldSort = true) {
 		mod.ValueNotesVisible(mod._ValueNotesAll = inputData, shouldSort);
+
+		mod.ReactDocumentRemainder();
 	},
 
 	_ValueNotesVisible: [],
@@ -81,6 +85,10 @@ const mod = {
 	_ValueStorageIsConnected: false,
 
 	_ValueSettingsAll: [],
+
+	_ValueOLSKFundProgress: false,
+
+	_ValueDocumentRemainder: '',
 	
 	// DATA
 
@@ -189,6 +197,23 @@ const mod = {
 		if (OLSK_SPEC_UI()) {
 			outputData.push(...[
 				{
+					LCHRecipeName: 'FakeOLSKConnected',
+					LCHRecipeCallback () {
+						mod._ValueStorageClient = Object.assign({}, mod._ValueStorageClient, mod._ValueStorageClient.access.scopes.reduce(function (coll, item) {
+							return {
+								[item.name]: mod._ValueStorageClient[item.name],
+							};
+						}, {}));
+						mod._ValueStorageClient.connected = true;
+						mod._ValueStorageClient.remote = Object.assign(mod._ValueStorageClient.remote, {
+							userAddress: 'alfa',
+							token: 'bravo',
+						});
+
+						window.FakeOLSKConnected = true;
+					},
+				},
+				{
 					LCHRecipeName: 'FakeOLSKChangeDelegateCreateNote',
 					LCHRecipeCallback: async function FakeOLSKChangeDelegateCreateNote () {
 						return mod.OLSKChangeDelegateCreateNote(await KVCNoteAction.KVCNoteActionCreate(mod._ValueStorageClient, mod.FakeNoteObjectValid('FakeOLSKChangeDelegateCreateNote')));
@@ -281,8 +306,31 @@ const mod = {
 						}
 					},
 				},
+				{
+					LCHRecipeName: 'FakeFundDocumentLimit',
+					LCHRecipeCallback: async function FakeFundDocumentLimit () {
+						await Promise.all(Array.from(Array(mod._ValueDocumentRemainder)).map(function (e) {
+							return KVCNoteAction.KVCNoteActionCreate(mod._ValueStorageClient, {
+								KVCNoteBody: Math.random().toString(),
+							});
+						}));
+
+						return mod.SetupValueNotesAll();
+					},
+				},
 			]);
 		}
+
+		outputData.push(...OLSKFund.OLSKFundRecipes({
+			ParamWindow: window,
+			OLSKLocalized: OLSKLocalized,
+			ParamConnected: mod._ValueStorageClient.connected,
+			ParamAuthorized: !!mod._ValueFundClue,
+			OLSKFundDispatchGrant: mod.OLSKFundDispatchGrant,
+			OLSKFundDispatchPersist: mod.OLSKFundDispatchPersist,
+			ParamMod: mod,
+			ParamSpecUI: OLSK_SPEC_UI(),
+		}));
 
 		outputData.push(...OLSKRemoteStorage.OLSKRemoteStorageRecipes(window, mod._ValueStorageClient, OLSKLocalized, OLSK_SPEC_UI()));
 		outputData.push(...OLSKServiceWorker.OLSKServiceWorkerRecipes(window, mod.DataNavigator(), OLSKLocalized, OLSK_SPEC_UI()));
@@ -306,6 +354,16 @@ const mod = {
 
 	DataRevealArchiveIsVisible () {
 		return mod._ValueArchivedCount && mod._RevealArchiveIsVisible;
+	},
+
+	DataIsEligible (inputData = {}) {
+		return OLSKFund.OLSKFundIsEligible(Object.assign({
+			ParamMinimumTier: 1,
+			ParamCurrentProject: 'RP_003',
+			ParamBundleProjects: ['RP_004', 'FakeBundleProject'],
+			ParamGrantTier: OLSKFund.OLSKFundTier('OLSK_FUND_PRICING_STRING_SWAP_TOKEN', mod._ValueOLSKFundGrant),
+			ParamGrantProject: mod._ValueOLSKFundGrant ? mod._ValueOLSKFundGrant.OLSKPactGrantProject : '',
+		}, inputData));
 	},
 
 	DataIsMobile () {
@@ -420,7 +478,19 @@ const mod = {
 		}
 	},
 
+	ControlFundGate () {
+		if (!window.confirm(OLSKLocalized('OLSKFundGateText'))) {
+			return;
+		}
+
+		mod.OLSKAppToolbarDispatchFund();
+	},
+
 	async ControlNoteCreate(inputData) {
+		if (mod._ValueDocumentRemainder < 1 && !mod.DataIsEligible()) {
+			return mod.ControlFundGate();
+		}
+
 		const item = await KVCNoteAction.KVCNoteActionCreate(mod._ValueStorageClient, {
 			KVCNoteBody: typeof inputData === 'string' ? inputData : '',
 		});
@@ -695,6 +765,34 @@ const mod = {
 		});
 	},
 
+	OLSKAppToolbarDispatchFund () {
+		if (!mod._ValueStorageClient.connected) {
+			return mod._OLSKAppToolbarDispatchFundNotConnected();
+		}
+
+		mod._ValueFundURL = OLSKFund.OLSKFundURL({
+			ParamFormURL: 'OLSK_FUND_FORM_URL_SWAP_TOKEN',
+			ParamProject: 'RP_003',
+			ParamIdentity: mod._ValueStorageClient.remote.userAddress,
+			ParamHomeURL: window.location.origin + window.location.pathname,
+		});
+
+		mod._OLSKWebView.modPublic.OLSKModalViewShow();
+
+		OLSKFund.OLSKFundListen({
+			ParamWindow: window,
+			OLSKFundDispatchReceive: mod.OLSKFundDispatchReceive,
+		});
+	},
+
+	_OLSKAppToolbarDispatchFundNotConnected () {
+		if (!window.confirm(OLSKLocalized('OLSKRemoteStorageConnectConfirmText'))) {
+			return;
+		}
+
+		mod._ValueStorageToolbarHidden = false;
+	},
+
 	OLSKAppToolbarDispatchStorage () {
 		mod._ValueStorageToolbarHidden = !mod._ValueStorageToolbarHidden;
 	},
@@ -707,6 +805,40 @@ const mod = {
 		window.Launchlet.LCHSingletonCreate({
 			LCHOptionRecipes: mod.DataWriteRecipes(),
 		});
+	},
+
+	OLSKFundDispatchReceive (inputData) {
+		mod._OLSKWebView.modPublic.OLSKModalViewClose();
+
+		return mod.OLSKFundDispatchPersist(inputData);
+	},
+
+	OLSKFundDispatchPersist (inputData) {
+		mod._ValueFundClue = inputData;
+
+		if (!inputData) {
+			return KVCSettingAction.KVCSettingsActionDelete(mod._ValueStorageClient, 'KVCSettingFundClue');
+		}
+
+		return KVCSettingAction.KVCSettingsActionProperty(mod._ValueStorageClient, 'KVCSettingFundClue', inputData).then(function () {
+			if (OLSK_SPEC_UI()) {
+				return;
+			}
+
+			window.location.reload();
+		});
+	},
+
+	OLSKFundDispatchProgress (inputData) {
+		mod._ValueOLSKFundProgress = inputData;
+	},
+
+	OLSKFundDispatchFail () {
+		mod.OLSKFundDispatchPersist(null);
+	},
+
+	OLSKFundDispatchGrant (inputData) {
+		mod._ValueOLSKFundGrant = OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(inputData);
 	},
 
 	KVCWriteMasterDispatchCreate (inputData) {
@@ -945,6 +1077,10 @@ const mod = {
 		})).shift());
 	},
 
+	async ReactDocumentRemainder () {
+		mod._ValueDocumentRemainder = OLSKFund.OLSKFundRemainder(mod._ValueNotesAll.length, parseInt('KVC_FUND_DOCUMENT_LIMIT_SWAP_TOKEN'));
+	},
+
 	// SETUP
 
 	async SetupEverything () {
@@ -959,6 +1095,8 @@ const mod = {
 		await mod.SetupValueNotesAll();
 		
 		await mod.SetupValueSettingsAll();
+
+		mod.SetupFund();
 
 		mod.ReactIsLoading(mod._ValueIsLoading = false);
 	},
@@ -1059,6 +1197,52 @@ const mod = {
 		mod._ValueSettingsAll = await KVCSettingAction.KVCSettingsActionQuery(mod._ValueStorageClient, {});
 	},
 
+	async SetupFund () {
+		if (OLSK_SPEC_UI() && window.location.search.match('OLSKFundResponseIsPresent=true')) {
+			OLSKFund._OLSKFundFakeGrantResponseRandom();
+		}
+
+		mod._ValueFundClue = (await KVCSettingAction.KVCSettingsActionProperty(mod._ValueStorageClient, 'KVCSettingFundClue') || {}).KVCSettingValue;
+
+		await OLSKFund.OLSKFundSetupPostPay({
+			ParamWindow: window,
+			ParamExistingClue: mod._ValueFundClue || null,
+			OLSKFundDispatchPersist: mod.OLSKFundDispatchPersist,
+		});
+
+		if (!mod._ValueStorageClient.connected) {
+			return;
+		}
+
+		if (!mod._ValueFundClue) {
+			return;
+		}
+		
+		const item = {
+			OLSK_CRYPTO_PAIR_RECEIVER_PRIVATE: `OLSK_CRYPTO_PAIR_RECEIVER_PRIVATE_SWAP_TOKEN${ '' }`, // #purge
+			OLSK_CRYPTO_PAIR_SENDER_PUBLIC: 'OLSK_CRYPTO_PAIR_SENDER_PUBLIC_SWAP_TOKEN',
+			ParamWindow: window,
+			OLSK_FUND_API_URL: 'OLSK_FUND_API_URL_SWAP_TOKEN',
+			ParamBody: {
+				OLSKPactAuthType: OLSKPact.OLSKPactAuthTypeRemoteStorage(),
+				OLSKPactAuthIdentity: mod._ValueStorageClient.remote.userAddress,
+				OLSKPactAuthProof: mod._ValueStorageClient.remote.token,
+				OLSKPactAuthMetadata: {
+					OLSKPactAuthMetadataModuleName: KVC_Data.KVC_DataModuleName(),
+					OLSKPactAuthMetadataFolderPath: KVCNoteStorage.KOMNoteStorageCollectionPath(),
+				},
+				OLSKPactPayIdentity: mod._ValueStorageClient.remote.userAddress,
+				OLSKPactPayClue: mod._ValueFundClue,
+			},
+			OLSKLocalized,
+			OLSKFundDispatchProgress: mod.OLSKFundDispatchProgress,
+			OLSKFundDispatchFail: mod.OLSKFundDispatchFail,
+			OLSKFundDispatchGrant: mod.OLSKFundDispatchGrant,
+		};
+
+		return OLSKFund.OLSKFundSetupGrant(item);
+	},
+
 	// LIFECYCLE
 
 	LifecycleModuleWillMount() {
@@ -1075,6 +1259,7 @@ import KVCWriteDetail from '../sub-detail/main.svelte';
 import OLSKAppToolbar from 'OLSKAppToolbar';
 import OLSKServiceWorkerView from '../_shared/__external/OLSKServiceWorker/main.svelte';
 import OLSKStorageWidget from 'OLSKStorageWidget';
+import OLSKWebView from 'OLSKWebView';
 import OLSKModalView from 'OLSKModalView';
 import OLSKApropos from 'OLSKApropos';
 </script>
@@ -1161,6 +1346,9 @@ import OLSKApropos from 'OLSKApropos';
 	<OLSKAppToolbar
 		OLSKAppToolbarDispatchApropos={ mod.OLSKAppToolbarDispatchApropos }
 		OLSKAppToolbarDispatchTongue={ mod.OLSKAppToolbarDispatchTongue }
+		OLSKAppToolbarFundShowProgress={ mod._ValueOLSKFundProgress }
+		OLSKAppToolbarFundLimitText={ mod._ValueDocumentRemainder }
+		OLSKAppToolbarDispatchFund={ mod._ValueOLSKFundGrant || OLSKFund.OLSKFundResponseIsPresent() ? null : mod.OLSKAppToolbarDispatchFund }
 		OLSKAppToolbarStorageStatus={ mod._ValueFooterStorageStatus }
 		OLSKAppToolbarDispatchStorage={ mod.OLSKAppToolbarDispatchStorage }
 		OLSKAppToolbarDispatchLauncher={ mod.OLSKAppToolbarDispatchLauncher }
@@ -1168,6 +1356,10 @@ import OLSKApropos from 'OLSKApropos';
 </footer>
 
 </div>
+
+{#if mod._ValueStorageClient && mod._ValueStorageClient.connected }
+	<OLSKWebView OLSKModalViewTitleText={ OLSKLocalized('OLSKFundWebViewTitleText') } OLSKWebViewURL={ mod._ValueFundURL } bind:this={ mod._OLSKWebView } DEBUG_OLSKWebViewDataSource={ OLSK_SPEC_UI() } />
+{/if}
 
 <OLSKModalView OLSKModalViewTitleText={ OLSKLocalized('OLSKAproposHeadingText') } bind:this={ mod._OLSKModalView } OLSKModalViewIsCapped={ true }>
 	<OLSKApropos
