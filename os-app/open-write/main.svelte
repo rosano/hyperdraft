@@ -321,7 +321,7 @@ const mod = {
 			OLSKLocalized: OLSKLocalized,
 			ParamMod: mod,
 			ParamSpecUI: OLSK_SPEC_UI(),
-		});
+		}));
 		outputData.push(...OLSKServiceWorker.OLSKServiceWorkerRecipes(window, mod.DataNavigator(), OLSKLocalized, OLSK_SPEC_UI()));
 
 		if (mod.KVCWriteDetailInstance) {
