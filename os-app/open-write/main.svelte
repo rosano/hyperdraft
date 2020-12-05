@@ -1028,6 +1028,10 @@ const mod = {
 		mod.ControlMigrate();
 	},
 
+	OLSKRemoteStorageLauncherItemFakeFlipConnectedDidFinish () {
+		mod._ValueOLSKRemoteStorage = mod._ValueOLSKRemoteStorage; // #purge-svelte-force-update
+	},
+
 	// REACT
 
 	ReactIsLoading (inputData) {
