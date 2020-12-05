@@ -27,9 +27,6 @@
     "turndown": "latest",
     "showdown": "latest",
 
-    "// TASKS": null,
-    "OLSKTasks": "olsk/OLSKTasks",
-
     "// THROTTLE": null,
     "OLSKThrottle": "olsk/OLSKThrottle",
 
