@@ -80,7 +80,7 @@ describe('KVCWrite_Fund', function () {
 				browser.assert.attribute('.OLSKWebViewWindowButton', 'href', OLSKFund.OLSKFundURL({
 					ParamFormURL: process.env.OLSK_FUND_FORM_URL,
 					ParamProject: 'RP_003',
-					ParamIdentity: 'alfa',
+					ParamIdentity: 'OLSK_REMOTE_STORAGE_FAKE_REMOTE_ADDRESS',
 					ParamHomeURL: browser.window.location.origin + browser.window.location.pathname,
 				}));
 			});
