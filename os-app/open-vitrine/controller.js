@@ -15,7 +15,6 @@ exports.OLSKControllerRoutes = function() {
 					KVCVitrineTokenWriteURL: res.locals.OLSKCanonicalLocalizedFor('KVCWriteRoute'),
 
 					KVC_SHARED_GITHUB_URL: process.env.KVC_SHARED_GITHUB_URL,
-					KVC_SHARED_DONATE_URL: process.env.KVC_SHARED_DONATE_URL,
 				}),
 				OLSKStringReplaceTokens: require('OLSKString').OLSKStringReplaceTokens,
 				IsTestingBehaviour: req.hostname.match('loc.tests'),

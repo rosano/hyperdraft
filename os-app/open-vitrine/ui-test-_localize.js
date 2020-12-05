@@ -49,10 +49,6 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 			browser.assert.element(`a[href="${ process.env.KVC_SHARED_GITHUB_URL }"]`);
 		});
 
-		it('localizes KVC_SHARED_DONATE_URL', function() {
-			browser.assert.element(`a[href="${ process.env.KVC_SHARED_DONATE_URL }"]`);
-		});
-
 		it('localizes KVCVitrineVideoHeading', function () {
 			browser.assert.text(KVCVitrineVideoHeading, uLocalized('KVCVitrineVideoHeadingText'));
 		});
