@@ -65,7 +65,7 @@ describe('KVCWrite_Fund', function () {
 		context('connected', function () {
 
 			before(function () {
-				return browser.OLSKLauncherRun('FakeOLSKConnected');
+				return browser.OLSKLauncherRun('OLSKRemoteStorageLauncherItemFakeFlipConnected');
 			});
 
 			before(function () {
@@ -204,7 +204,7 @@ describe('KVCWrite_Fund', function () {
 		});
 		
 		before(function () {
-			return browser.OLSKLauncherRun('FakeOLSKConnected');
+			return browser.OLSKLauncherRun('OLSKRemoteStorageLauncherItemFakeFlipConnected');
 		});
 
 		it('shows OLSKFundLauncherItemClearClue', function () {
@@ -222,7 +222,7 @@ describe('KVCWrite_Fund', function () {
 		});
 
 		before(function () {
-			return browser.OLSKLauncherRun('FakeOLSKConnected');
+			return browser.OLSKLauncherRun('OLSKRemoteStorageLauncherItemFakeFlipConnected');
 		});
 
 		before(function () {
