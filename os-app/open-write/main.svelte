@@ -1222,7 +1222,7 @@ const mod = {
 				OLSKPactAuthProof: mod._ValueOLSKRemoteStorage.remote.token,
 				OLSKPactAuthMetadata: {
 					OLSKPactAuthMetadataModuleName: KVC_Data.KVC_DataModuleName(),
-					OLSKPactAuthMetadataFolderPath: KVCNoteStorage.KOMNoteStorageCollectionPath(),
+					OLSKPactAuthMetadataFolderPath: KVCNoteStorage.KVCNoteStorageCollectionPath(),
 				},
 				OLSKPactPayIdentity: mod._ValueOLSKRemoteStorage.remote.userAddress,
 				OLSKPactPayClue: mod._ValueFundClue,
