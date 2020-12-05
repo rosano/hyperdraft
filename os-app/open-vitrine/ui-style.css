@@ -1,9 +1,19 @@
 :root {
 	--OLSKCommonBackground: var(--KVCCommonBackground);
 	--OLSKCommonForeground: var(--KVCCommonForeground);
+	--OLSKCommonFontSize: 11pt;
 }
 
 body {
 	background: var(--KVCCommonBackground);
 	color: var(--KVCCommonForeground);
+}
+
+.KVCVitrineVideo {
+	margin: 20px auto;
+	text-align: center;
+}
+
+.KVCVitrineVideoFrame {
+	border: 6px #ccc solid;
 }
