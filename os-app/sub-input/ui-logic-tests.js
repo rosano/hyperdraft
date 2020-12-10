@@ -1,21 +1,21 @@
 const { throws, deepEqual } = require('assert');
 
-const mainModule = require('./ui-logic.js');
+const mod = require('./ui-logic.js');
 
 describe('KVCWriteInputLineObjectsFor', function test_KVCWriteInputLineObjectsFor() {
 
 	it('throws error if not array', function() {
 		throws(function() {
-			mainModule.KVCWriteInputLineObjectsFor(null);
+			mod.KVCWriteInputLineObjectsFor(null);
 		}, /KVCErrorInputNotValid/);
 	});
 
 	it('returns array', function() {
-		deepEqual(mainModule.KVCWriteInputLineObjectsFor([]), []);
+		deepEqual(mod.KVCWriteInputLineObjectsFor([]), []);
 	});
 
 	it('converts non-link single', function() {
-		deepEqual(mainModule.KVCWriteInputLineObjectsFor(mainModule.uStubLineTokensFor('alfa')), [{
+		deepEqual(mod.KVCWriteInputLineObjectsFor(mod.uStubLineTokensFor('alfa')), [{
 			start: 0,
 			end: 4,
 			string: 'alfa',
@@ -24,7 +24,7 @@ describe('KVCWriteInputLineObjectsFor', function test_KVCWriteInputLineObjectsFo
 	});
 
 	it('converts non-link multiple', function() {
-		deepEqual(mainModule.KVCWriteInputLineObjectsFor(mainModule.uStubLineTokensFor('alfa bravo')), [{
+		deepEqual(mod.KVCWriteInputLineObjectsFor(mod.uStubLineTokensFor('alfa bravo')), [{
 			start: 0,
 			end: 10,
 			string: 'alfa bravo',
@@ -33,7 +33,7 @@ describe('KVCWriteInputLineObjectsFor', function test_KVCWriteInputLineObjectsFo
 	});
 
 	it('converts link single', function() {
-		deepEqual(mainModule.KVCWriteInputLineObjectsFor(mainModule.uStubLineTokensFor('[[alfa]]')), [{
+		deepEqual(mod.KVCWriteInputLineObjectsFor(mod.uStubLineTokensFor('[[alfa]]')), [{
 			start: 0,
 			end: 8,
 			string: '[[alfa]]',
@@ -42,7 +42,7 @@ describe('KVCWriteInputLineObjectsFor', function test_KVCWriteInputLineObjectsFo
 	});
 
 	it('converts link multiple', function() {
-		deepEqual(mainModule.KVCWriteInputLineObjectsFor(mainModule.uStubLineTokensFor('[[alfa]] [[bravo]]')), [{
+		deepEqual(mod.KVCWriteInputLineObjectsFor(mod.uStubLineTokensFor('[[alfa]] [[bravo]]')), [{
 			start: 0,
 			end: 8,
 			string: '[[alfa]]',
@@ -61,7 +61,7 @@ describe('KVCWriteInputLineObjectsFor', function test_KVCWriteInputLineObjectsFo
 	});
 
 	it('converts header', function() {
-		deepEqual(mainModule.KVCWriteInputLineObjectsFor(mainModule.uStubLineTokensFor('# alfa')), [{
+		deepEqual(mod.KVCWriteInputLineObjectsFor(mod.uStubLineTokensFor('# alfa')), [{
 			start: 0,
 			end: 6,
 			string: '# alfa',
@@ -70,7 +70,7 @@ describe('KVCWriteInputLineObjectsFor', function test_KVCWriteInputLineObjectsFo
 	});
 
 	it('converts multiple header objects', function() {
-		deepEqual(mainModule.KVCWriteInputLineObjectsFor(mainModule.uStubLineTokensFor('# alfa [[bravo]]')), [{
+		deepEqual(mod.KVCWriteInputLineObjectsFor(mod.uStubLineTokensFor('# alfa [[bravo]]')), [{
 			start: 0,
 			end: 7,
 			string: '# alfa ',
@@ -89,25 +89,25 @@ describe('KVCWriteInputHeaderTokensFrom', function test_KVCWriteInputHeaderToken
 
 	it('throws error if not array', function() {
 		throws(function() {
-			mainModule.KVCWriteInputHeaderTokensFrom(null);
+			mod.KVCWriteInputHeaderTokensFrom(null);
 		}, /KVCErrorInputNotValid/);
 	});
 
 	it('returns array', function() {
-		deepEqual(mainModule.KVCWriteInputHeaderTokensFrom([]), []);
+		deepEqual(mod.KVCWriteInputHeaderTokensFrom([]), []);
 	});
 
 	it('excludes if not header', function() {
-		deepEqual(mainModule.KVCWriteInputHeaderTokensFrom([
-			mainModule.KVCWriteInputLineObjectsFor(mainModule.uStubLineTokensFor('alfa')),
-			mainModule.KVCWriteInputLineObjectsFor(mainModule.uStubLineTokensFor('[[bravo]]')),
+		deepEqual(mod.KVCWriteInputHeaderTokensFrom([
+			mod.KVCWriteInputLineObjectsFor(mod.uStubLineTokensFor('alfa')),
+			mod.KVCWriteInputLineObjectsFor(mod.uStubLineTokensFor('[[bravo]]')),
 		]), []);
 	});
 
 	it('includes if header', function() {
-		deepEqual(mainModule.KVCWriteInputHeaderTokensFrom([
-			mainModule.KVCWriteInputLineObjectsFor(mainModule.uStubLineTokensFor('# alfa')),
-		]), mainModule.KVCWriteInputLineObjectsFor(mainModule.uStubLineTokensFor('# alfa')).map(function (e) {
+		deepEqual(mod.KVCWriteInputHeaderTokensFrom([
+			mod.KVCWriteInputLineObjectsFor(mod.uStubLineTokensFor('# alfa')),
+		]), mod.KVCWriteInputLineObjectsFor(mod.uStubLineTokensFor('# alfa')).map(function (e) {
 			return Object.assign(e, {
 				line: 0,
 			});
@@ -115,9 +115,9 @@ describe('KVCWriteInputHeaderTokensFrom', function test_KVCWriteInputHeaderToken
 	});
 
 	it('excludes if not verbal', function() {
-		deepEqual(mainModule.KVCWriteInputHeaderTokensFrom([
-			mainModule.KVCWriteInputLineObjectsFor(mainModule.uStubLineTokensFor('alfa')),
-			mainModule.KVCWriteInputLineObjectsFor(mainModule.uStubLineTokensFor('====')),
+		deepEqual(mod.KVCWriteInputHeaderTokensFrom([
+			mod.KVCWriteInputLineObjectsFor(mod.uStubLineTokensFor('alfa')),
+			mod.KVCWriteInputLineObjectsFor(mod.uStubLineTokensFor('====')),
 		].map(function (e) {
 			return e.map(function (e) {
 				return Object.assign(e, {
@@ -134,8 +134,8 @@ describe('KVCWriteInputHeaderTokensFrom', function test_KVCWriteInputHeaderToken
 	});
 
 	it('merges multiple header objects', function() {
-		deepEqual(mainModule.KVCWriteInputHeaderTokensFrom([
-			mainModule.KVCWriteInputLineObjectsFor(mainModule.uStubLineTokensFor('# PA PARC https://www.supermarchepa.com/pages/weekly-flyer')),
+		deepEqual(mod.KVCWriteInputHeaderTokensFrom([
+			mod.KVCWriteInputLineObjectsFor(mod.uStubLineTokensFor('# PA PARC https://www.supermarchepa.com/pages/weekly-flyer')),
 		]), [{
 			start: 0,
 			end: 58,

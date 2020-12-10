@@ -1,9 +1,9 @@
 const kDefaultRoutePath = require('./controller.js').OLSKControllerRoutes().shift().OLSKRoutePath;
 
-const mainModule = require('./main.js').default;
+const mod = require('./main.js').default;
 
 const uTokenTag = function (inputData) {
-	return `{${ mainModule[inputData]() }}`;
+	return `{${ mod[inputData]() }}`;
 };
 
 describe('KVCTemplate_Misc', function () {

@@ -1,39 +1,39 @@
 const { throws, deepEqual } = require('assert');
 
-const mainModule = require('./main.js').default;
+const mod = require('./main.js').default;
 
 const showdown = require('showdown');
 
 const uTokenTag = function (inputData) {
-	return `{${ mainModule[inputData]() }}`;
+	return `{${ mod[inputData]() }}`;
 };
 
 const uBlockTag = function (param1, param2) {
-	return `{block:${ mainModule[param1]() }}${ param2 }{/block:${ mainModule[param1]() }}`;
+	return `{block:${ mod[param1]() }}${ param2 }{/block:${ mod[param1]() }}`;
 };
 
 describe('KVCTemplatePlaintextTitle', function test_KVCTemplatePlaintextTitle() {
 
 	it('throws if not string', function () {
 		throws(function () {
-			mainModule.KVCTemplatePlaintextTitle(null);
+			mod.KVCTemplatePlaintextTitle(null);
 		}, /KVCErrorInputNotValid/);
 	});
 
 	it('returns string', function() {
-		deepEqual(mainModule.KVCTemplatePlaintextTitle(''), '');
+		deepEqual(mod.KVCTemplatePlaintextTitle(''), '');
 	});
 
 	it('extracts if single', function() {
-		deepEqual(mainModule.KVCTemplatePlaintextTitle('alfa'), 'alfa');
+		deepEqual(mod.KVCTemplatePlaintextTitle('alfa'), 'alfa');
 	});
 
 	it('extracts if multiple', function() {
-		deepEqual(mainModule.KVCTemplatePlaintextTitle('alfa\nbravo'), 'alfa');
+		deepEqual(mod.KVCTemplatePlaintextTitle('alfa\nbravo'), 'alfa');
 	});
 
 	it('extracts if blank', function() {
-		deepEqual(mainModule.KVCTemplatePlaintextTitle('\nbravo'), '');
+		deepEqual(mod.KVCTemplatePlaintextTitle('\nbravo'), '');
 	});
 
 });
@@ -42,28 +42,28 @@ describe('KVCTemplatePlaintextBody', function test_KVCTemplatePlaintextBody() {
 
 	it('throws if not string', function () {
 		throws(function () {
-			mainModule.KVCTemplatePlaintextBody(null);
+			mod.KVCTemplatePlaintextBody(null);
 		}, /KVCErrorInputNotValid/);
 	});
 
 	it('returns string', function() {
-		deepEqual(mainModule.KVCTemplatePlaintextBody(''), '');
+		deepEqual(mod.KVCTemplatePlaintextBody(''), '');
 	});
 
 	it('extracts if single', function() {
-		deepEqual(mainModule.KVCTemplatePlaintextBody('alfa'), '');
+		deepEqual(mod.KVCTemplatePlaintextBody('alfa'), '');
 	});
 
 	it('extracts if multiple', function() {
-		deepEqual(mainModule.KVCTemplatePlaintextBody('alfa\nbravo'), 'bravo');
+		deepEqual(mod.KVCTemplatePlaintextBody('alfa\nbravo'), 'bravo');
 	});
 
 	it('extracts if blank', function() {
-		deepEqual(mainModule.KVCTemplatePlaintextBody('\nbravo'), 'bravo');
+		deepEqual(mod.KVCTemplatePlaintextBody('\nbravo'), 'bravo');
 	});
 
 	it('extracts if double break', function() {
-		deepEqual(mainModule.KVCTemplatePlaintextBody('alfa\n\nbravo'), 'bravo');
+		deepEqual(mod.KVCTemplatePlaintextBody('alfa\n\nbravo'), 'bravo');
 	});
 
 });
@@ -72,20 +72,20 @@ describe('KVCTemplateTextContent', function test_KVCTemplateTextContent() {
 
 	it('throws error if not string', function() {
 		throws(function() {
-			mainModule.KVCTemplateTextContent(null);
+			mod.KVCTemplateTextContent(null);
 		}, /KVCErrorInputNotValid/);
 	});
 
 	it('returns string', function() {
-		deepEqual(mainModule.KVCTemplateTextContent('<p>alfa <b>bravo</b></p>'), 'alfa bravo');
+		deepEqual(mod.KVCTemplateTextContent('<p>alfa <b>bravo</b></p>'), 'alfa bravo');
 	});
 
 	it('trims edges', function() {
-		deepEqual(mainModule.KVCTemplateTextContent(' alfa '), 'alfa');
+		deepEqual(mod.KVCTemplateTextContent(' alfa '), 'alfa');
 	});
 
 	it('replaces newlines', function() {
-		deepEqual(mainModule.KVCTemplateTextContent('alfa\nbravo'), 'alfa bravo');
+		deepEqual(mod.KVCTemplateTextContent('alfa\nbravo'), 'alfa bravo');
 	});
 
 });
@@ -104,32 +104,32 @@ describe('KVCTemplateViewDefault', function test_KVCTemplateViewDefault() {
 
 	it('throws if not function', function () {
 		throws(function () {
-			mainModule.KVCTemplateViewDefault(null);
+			mod.KVCTemplateViewDefault(null);
 		}, /KVCErrorInputNotValid/);
 	});
 
 	it('returns string', function() {
-		deepEqual(typeof mainModule.KVCTemplateViewDefault(uLocalize), 'string');
+		deepEqual(typeof mod.KVCTemplateViewDefault(uLocalize), 'string');
 	});
 
 	it('begins with doctype', function() {
-		deepEqual(mainModule.KVCTemplateViewDefault(uLocalize).match('<!DOCTYPE html>').index, 0);
+		deepEqual(mod.KVCTemplateViewDefault(uLocalize).match('<!DOCTYPE html>').index, 0);
 	});
 
 	it('contains html', function() {
-		deepEqual(!!mainModule.KVCTemplateViewDefault(uLocalize).match(uTag('html')), true);
+		deepEqual(!!mod.KVCTemplateViewDefault(uLocalize).match(uTag('html')), true);
 	});
 
 	it('contains head', function() {
-		deepEqual(!!mainModule.KVCTemplateViewDefault(uLocalize).match(uTag('head')), true);
+		deepEqual(!!mod.KVCTemplateViewDefault(uLocalize).match(uTag('head')), true);
 	});
 
 	it('contains title', function() {
-		deepEqual(!!mainModule.KVCTemplateViewDefault(uLocalize).match(uTag('title')), true);
+		deepEqual(!!mod.KVCTemplateViewDefault(uLocalize).match(uTag('title')), true);
 	});
 
 	it('contains KVCTemplateTokenPostTitle in title', function() {
-		deepEqual(!!mainModule.KVCTemplateViewDefault(uLocalize).match(uTagContent('title', mainModule.KVCTemplateTokenPostTitle())), true);
+		deepEqual(!!mod.KVCTemplateViewDefault(uLocalize).match(uTagContent('title', mod.KVCTemplateTokenPostTitle())), true);
 	});
 
 });
@@ -137,7 +137,7 @@ describe('KVCTemplateViewDefault', function test_KVCTemplateViewDefault() {
 describe('KVCTemplateTokenPostTitle', function test_KVCTemplateTokenPostTitle() {
 
 	it('returns string', function() {
-		deepEqual(mainModule.KVCTemplateTokenPostTitle(), 'Title');
+		deepEqual(mod.KVCTemplateTokenPostTitle(), 'Title');
 	});
 
 });
@@ -145,7 +145,7 @@ describe('KVCTemplateTokenPostTitle', function test_KVCTemplateTokenPostTitle() 
 describe('KVCTemplateTokenPostBody', function test_KVCTemplateTokenPostBody() {
 
 	it('returns string', function() {
-		deepEqual(mainModule.KVCTemplateTokenPostBody(), 'Body');
+		deepEqual(mod.KVCTemplateTokenPostBody(), 'Body');
 	});
 
 });
@@ -153,7 +153,7 @@ describe('KVCTemplateTokenPostBody', function test_KVCTemplateTokenPostBody() {
 describe('KVCTemplateTokenRootURL', function test_KVCTemplateTokenRootURL() {
 
 	it('returns string', function() {
-		deepEqual(mainModule.KVCTemplateTokenRootURL(), 'HomeURL');
+		deepEqual(mod.KVCTemplateTokenRootURL(), 'HomeURL');
 	});
 
 });
@@ -161,7 +161,7 @@ describe('KVCTemplateTokenRootURL', function test_KVCTemplateTokenRootURL() {
 describe('KVCTemplateTokenRootURLLegacy', function test_KVCTemplateTokenRootURLLegacy() {
 
 	it('returns string', function() {
-		deepEqual(mainModule.KVCTemplateTokenRootURLLegacy(), 'BlogURL');
+		deepEqual(mod.KVCTemplateTokenRootURLLegacy(), 'BlogURL');
 	});
 
 });
@@ -169,7 +169,7 @@ describe('KVCTemplateTokenRootURLLegacy', function test_KVCTemplateTokenRootURLL
 describe('KVCTemplateTokenRootPage', function test_KVCTemplateTokenRootPage() {
 
 	it('returns string', function() {
-		deepEqual(mainModule.KVCTemplateTokenRootPage(), 'HomePage');
+		deepEqual(mod.KVCTemplateTokenRootPage(), 'HomePage');
 	});
 
 });
@@ -177,7 +177,7 @@ describe('KVCTemplateTokenRootPage', function test_KVCTemplateTokenRootPage() {
 describe('KVCTemplateTokenNotePage', function test_KVCTemplateTokenNotePage() {
 
 	it('returns string', function() {
-		deepEqual(mainModule.KVCTemplateTokenNotePage(), 'RefPage');
+		deepEqual(mod.KVCTemplateTokenNotePage(), 'RefPage');
 	});
 
 });
@@ -185,7 +185,7 @@ describe('KVCTemplateTokenNotePage', function test_KVCTemplateTokenNotePage() {
 describe('KVCTemplateTokenNotePageLegacy', function test_KVCTemplateTokenNotePageLegacy() {
 
 	it('returns string', function() {
-		deepEqual(mainModule.KVCTemplateTokenNotePageLegacy(), 'PermalinkPage');
+		deepEqual(mod.KVCTemplateTokenNotePageLegacy(), 'PermalinkPage');
 	});
 
 });
@@ -193,7 +193,7 @@ describe('KVCTemplateTokenNotePageLegacy', function test_KVCTemplateTokenNotePag
 describe('KVCTemplateTokenBacklinks', function test_KVCTemplateTokenBacklinks() {
 
 	it('returns string', function() {
-		deepEqual(mainModule.KVCTemplateTokenBacklinks(), 'Backlinks');
+		deepEqual(mod.KVCTemplateTokenBacklinks(), 'Backlinks');
 	});
 
 });
@@ -201,7 +201,7 @@ describe('KVCTemplateTokenBacklinks', function test_KVCTemplateTokenBacklinks() 
 describe('KVCTemplateTokenName', function test_KVCTemplateTokenName() {
 
 	it('returns string', function() {
-		deepEqual(mainModule.KVCTemplateTokenName(), 'Name');
+		deepEqual(mod.KVCTemplateTokenName(), 'Name');
 	});
 
 });
@@ -209,7 +209,7 @@ describe('KVCTemplateTokenName', function test_KVCTemplateTokenName() {
 describe('KVCTemplateTokenURL', function test_KVCTemplateTokenURL() {
 
 	it('returns string', function() {
-		deepEqual(mainModule.KVCTemplateTokenURL(), 'URL');
+		deepEqual(mod.KVCTemplateTokenURL(), 'URL');
 	});
 
 });
@@ -217,7 +217,7 @@ describe('KVCTemplateTokenURL', function test_KVCTemplateTokenURL() {
 describe('KVCTemplateTokenDescription', function test_KVCTemplateTokenDescription() {
 
 	it('returns string', function() {
-		deepEqual(mainModule.KVCTemplateTokenDescription(), 'Description');
+		deepEqual(mod.KVCTemplateTokenDescription(), 'Description');
 	});
 
 });
@@ -226,47 +226,47 @@ describe('KVCTemplateRemappedLinks', function test_KVCTemplateRemappedLinks() {
 
 	it('throws if param1 not string', function () {
 		throws(function () {
-			mainModule.KVCTemplateRemappedLinks(null, {});
+			mod.KVCTemplateRemappedLinks(null, {});
 		}, /KVCErrorInputNotValid/);
 	});
 
 	it('throws if param2 not object', function () {
 		throws(function () {
-			mainModule.KVCTemplateRemappedLinks('', null);
+			mod.KVCTemplateRemappedLinks('', null);
 		}, /KVCErrorInputNotValid/);
 	});
 
 	it('returns string', function() {
-		deepEqual(mainModule.KVCTemplateRemappedLinks('', {}), '');
+		deepEqual(mod.KVCTemplateRemappedLinks('', {}), '');
 	});
 
 	it('ignores if no replacement', function() {
-		deepEqual(mainModule.KVCTemplateRemappedLinks('[[alfa]]', {
+		deepEqual(mod.KVCTemplateRemappedLinks('[[alfa]]', {
 			bravo: 'charlie',
 		}), '[[alfa]]');
 	});
 
 	it('ignores if not double-bracket', function() {
-		deepEqual(mainModule.KVCTemplateRemappedLinks('[alfa]', {
+		deepEqual(mod.KVCTemplateRemappedLinks('[alfa]', {
 			alfa: 'bravo',
 		}), '[alfa]');
 	});
 
 	it('replaces single', function() {
-		deepEqual(mainModule.KVCTemplateRemappedLinks('[[alfa]]', {
+		deepEqual(mod.KVCTemplateRemappedLinks('[[alfa]]', {
 			alfa: 'bravo',
 		}), '[alfa](bravo)');
 	});
 
 	it('replaces multiple', function() {
-		deepEqual(mainModule.KVCTemplateRemappedLinks('[[alfa]] [[charlie]]', {
+		deepEqual(mod.KVCTemplateRemappedLinks('[[alfa]] [[charlie]]', {
 			alfa: 'bravo',
 			charlie: 'delta',
 		}), '[alfa](bravo) [charlie](delta)');
 	});
 
 	it('replaces duplicate', function() {
-		deepEqual(mainModule.KVCTemplateRemappedLinks('[[alfa]] [[alfa]]', {
+		deepEqual(mod.KVCTemplateRemappedLinks('[[alfa]] [[alfa]]', {
 			alfa: 'bravo',
 		}), '[alfa](bravo) [alfa](bravo)');
 	});
@@ -277,7 +277,7 @@ describe('KVCTemplateHTML', function test_KVCTemplateHTML() {
 
 	it('throws if showdown missing', function() {
 		throws(function() {
-			mainModule.KVCTemplateHTML({
+			mod.KVCTemplateHTML({
 				Converter: null,
 			}, '');
 		}, /KVCErrorInputNotValid/);
@@ -285,28 +285,28 @@ describe('KVCTemplateHTML', function test_KVCTemplateHTML() {
 
 	it('throws if param1 not string', function() {
 		throws(function() {
-			mainModule.KVCTemplateHTML(showdown, null);
+			mod.KVCTemplateHTML(showdown, null);
 		}, /KVCErrorInputNotValid/);
 	});
 
 	it('returns string as p', function() {
-		deepEqual(mainModule.KVCTemplateHTML(showdown, 'alfa'), '<p>alfa</p>');
+		deepEqual(mod.KVCTemplateHTML(showdown, 'alfa'), '<p>alfa</p>');
 	});
 
 	it('converts simple headers without anchors', function() {
-		deepEqual(mainModule.KVCTemplateHTML(showdown, '# alfa'), '<h1>alfa</h1>');
+		deepEqual(mod.KVCTemplateHTML(showdown, '# alfa'), '<h1>alfa</h1>');
 	});
 
 	it('converts single newline as br', function() {
-		deepEqual(mainModule.KVCTemplateHTML(showdown, 'alfa\nbravo'), '<p>alfa<br />\nbravo</p>');
+		deepEqual(mod.KVCTemplateHTML(showdown, 'alfa\nbravo'), '<p>alfa<br />\nbravo</p>');
 	});
 
 	it('converts double newline as p', function() {
-		deepEqual(mainModule.KVCTemplateHTML(showdown, 'alfa\n\nbravo'), '<p>alfa</p>\n<p>bravo</p>');
+		deepEqual(mod.KVCTemplateHTML(showdown, 'alfa\n\nbravo'), '<p>alfa</p>\n<p>bravo</p>');
 	});
 
 	it('converts www domains to links', function() {
-		deepEqual(mainModule.KVCTemplateHTML(showdown, 'www.alfa.com'), '<p><a href="http://www.alfa.com">www.alfa.com</a></p>');
+		deepEqual(mod.KVCTemplateHTML(showdown, 'www.alfa.com'), '<p><a href="http://www.alfa.com">www.alfa.com</a></p>');
 	});
 
 });
@@ -315,7 +315,7 @@ describe('KVCTemplateTokensMap', function test_KVCTemplateTokensMap() {
 
 	it('throws if showdown missing', function() {
 		throws(function() {
-			mainModule.KVCTemplateTokensMap({
+			mod.KVCTemplateTokensMap({
 				Converter: null,
 			}, '', {});
 		}, /KVCErrorInputNotValid/);
@@ -323,25 +323,25 @@ describe('KVCTemplateTokensMap', function test_KVCTemplateTokensMap() {
 
 	it('throws if param1 not string', function () {
 		throws(function () {
-			mainModule.KVCTemplateTokensMap(showdown, null, {})
+			mod.KVCTemplateTokensMap(showdown, null, {})
 		}, /KVCErrorInputNotValid/);
 	});
 
 	it('throws if param2 not object', function () {
 		throws(function () {
-			mainModule.KVCTemplateTokensMap(showdown, '', null)
+			mod.KVCTemplateTokensMap(showdown, '', null)
 		}, /KVCErrorInputNotValid/);
 	});
 
 	it('returns object', function() {
-		deepEqual(typeof mainModule.KVCTemplateTokensMap(showdown, '', {}), 'object');
+		deepEqual(typeof mod.KVCTemplateTokensMap(showdown, '', {}), 'object');
 	});
 
 	context('KVCTemplateTokenPostTitle', function () {
 		
 		it('sets to KVCTemplatePlaintextTitle', function () {
 			const item = 'alfa\nbravo';
-			deepEqual(mainModule.KVCTemplateTokensMap(showdown, item, {})[uTokenTag('KVCTemplateTokenPostTitle')], mainModule.KVCTemplatePlaintextTitle(item));
+			deepEqual(mod.KVCTemplateTokensMap(showdown, item, {})[uTokenTag('KVCTemplateTokenPostTitle')], mod.KVCTemplatePlaintextTitle(item));
 		});
 	
 	});
@@ -350,7 +350,7 @@ describe('KVCTemplateTokensMap', function test_KVCTemplateTokensMap() {
 		
 		it('sets to KVCTemplateHTML', function () {
 			const item = 'alfa\n# bravo';
-			deepEqual(mainModule.KVCTemplateTokensMap(showdown, item, {})[uTokenTag('KVCTemplateTokenPostBody')], mainModule.KVCTemplateHTML(showdown, mainModule.KVCTemplatePlaintextBody(item)));
+			deepEqual(mod.KVCTemplateTokensMap(showdown, item, {})[uTokenTag('KVCTemplateTokenPostBody')], mod.KVCTemplateHTML(showdown, mod.KVCTemplatePlaintextBody(item)));
 		});
 	
 	});
@@ -358,7 +358,7 @@ describe('KVCTemplateTokensMap', function test_KVCTemplateTokensMap() {
 	context('KVCTemplateTokenRootURL', function () {
 		
 		it('sets to KVCOptionRootURL', function () {
-			deepEqual(mainModule.KVCTemplateTokensMap(showdown, '', {
+			deepEqual(mod.KVCTemplateTokensMap(showdown, '', {
 				KVCOptionRootURL: 'alfa',
 			})[uTokenTag('KVCTemplateTokenRootURL')], 'alfa');
 		});
@@ -368,7 +368,7 @@ describe('KVCTemplateTokensMap', function test_KVCTemplateTokensMap() {
 	context('KVCTemplateTokenRootURLLegacy', function () {
 		
 		it('sets to KVCOptionRootURL', function () {
-			deepEqual(mainModule.KVCTemplateTokensMap(showdown, '', {
+			deepEqual(mod.KVCTemplateTokensMap(showdown, '', {
 				KVCOptionRootURL: 'alfa',
 			})[uTokenTag('KVCTemplateTokenRootURLLegacy')], 'alfa');
 		});
@@ -381,20 +381,20 @@ describe('KVCTemplateVisibleBlocks', function test_KVCTemplateVisibleBlocks() {
 
 	it('throws if not object', function () {
 		throws(function () {
-			mainModule.KVCTemplateVisibleBlocks(null)
+			mod.KVCTemplateVisibleBlocks(null)
 		}, /KVCErrorInputNotValid/);
 	});
 
 	it('returns array', function() {
-		deepEqual(mainModule.KVCTemplateVisibleBlocks({}), []);
+		deepEqual(mod.KVCTemplateVisibleBlocks({}), []);
 	});
 
 	context('KVCOptionRootURL', function () {
 		
 		it('includes KVCTemplateTokenRootURL', function () {
-			deepEqual(mainModule.KVCTemplateVisibleBlocks({
+			deepEqual(mod.KVCTemplateVisibleBlocks({
 				KVCOptionRootURL: 'alfa',
-			}), [mainModule.KVCTemplateTokenRootURL()]);
+			}), [mod.KVCTemplateTokenRootURL()]);
 		});
 	
 	});
@@ -402,15 +402,15 @@ describe('KVCTemplateVisibleBlocks', function test_KVCTemplateVisibleBlocks() {
 	context('KVCOptionIsRoot', function () {
 		
 		it('includes KVCTemplateTokenRootPage if true', function () {
-			deepEqual(mainModule.KVCTemplateVisibleBlocks({
+			deepEqual(mod.KVCTemplateVisibleBlocks({
 				KVCOptionIsRoot: true,
-			}), [mainModule.KVCTemplateTokenRootPage()]);
+			}), [mod.KVCTemplateTokenRootPage()]);
 		});
 		
 		it('includes KVCTemplateTokenNotePage', function () {
-			deepEqual(mainModule.KVCTemplateVisibleBlocks({
+			deepEqual(mod.KVCTemplateVisibleBlocks({
 				KVCOptionIsRoot: false,
-			}), [mainModule.KVCTemplateTokenNotePage(), mainModule.KVCTemplateTokenNotePageLegacy()]);
+			}), [mod.KVCTemplateTokenNotePage(), mod.KVCTemplateTokenNotePageLegacy()]);
 		});
 	
 	});
@@ -418,9 +418,9 @@ describe('KVCTemplateVisibleBlocks', function test_KVCTemplateVisibleBlocks() {
 	context('KVCOptionBacklinks', function () {
 		
 		it('includes KVCTemplateTokenBacklinks', function () {
-			deepEqual(mainModule.KVCTemplateVisibleBlocks({
+			deepEqual(mod.KVCTemplateVisibleBlocks({
 				KVCOptionBacklinks: {},
-			}), [mainModule.KVCTemplateTokenBacklinks()]);
+			}), [mod.KVCTemplateTokenBacklinks()]);
 		});
 		
 	});
@@ -439,13 +439,13 @@ describe('KVCTemplateBlockTokensMap', function test_KVCTemplateBlockTokensMap() 
 
 	it('throws if not object', function () {
 		throws(function () {
-			mainModule.KVCTemplateBlockTokensMap(null)
+			mod.KVCTemplateBlockTokensMap(null)
 		}, /KVCErrorInputNotValid/);
 	});
 
 	it('throws if KVCBlockPermalinkMap not object', function () {
 		throws(function () {
-			mainModule.KVCTemplateBlockTokensMap(Object.assign(uOptions(), {
+			mod.KVCTemplateBlockTokensMap(Object.assign(uOptions(), {
 				KVCBlockPermalinkMap: null,
 			}))
 		}, /KVCErrorInputNotValid/);
@@ -453,7 +453,7 @@ describe('KVCTemplateBlockTokensMap', function test_KVCTemplateBlockTokensMap() 
 
 	it('throws if KVCBlockTemplateOptions not object', function () {
 		throws(function () {
-			mainModule.KVCTemplateBlockTokensMap(Object.assign(uOptions(), {
+			mod.KVCTemplateBlockTokensMap(Object.assign(uOptions(), {
 				KVCBlockTemplateOptions: null,
 			}))
 		}, /KVCErrorInputNotValid/);
@@ -461,19 +461,19 @@ describe('KVCTemplateBlockTokensMap', function test_KVCTemplateBlockTokensMap() 
 
 	it('throws if KVCBlockTemplateShowdown missing', function () {
 		throws(function () {
-			mainModule.KVCTemplateBlockTokensMap(Object.assign(uOptions(), {
+			mod.KVCTemplateBlockTokensMap(Object.assign(uOptions(), {
 				KVCBlockTemplateShowdown: {},
 			}))
 		}, /KVCErrorInputNotValid/);
 	});
 
 	it('returns object', function() {
-		deepEqual(typeof mainModule.KVCTemplateBlockTokensMap(uOptions()), 'object');
+		deepEqual(typeof mod.KVCTemplateBlockTokensMap(uOptions()), 'object');
 	});
 
 	context('KVCTemplateTokenBacklinks', function () {
 
-		const item = mainModule.KVCTemplateBlockTokensMap(Object.assign(uOptions(), {
+		const item = mod.KVCTemplateBlockTokensMap(Object.assign(uOptions(), {
 			KVCBlockPermalinkMap: {
 				charlie: 'echo'
 			},
@@ -504,43 +504,43 @@ describe('KVCTemplateCollapseBlocks', function test_KVCTemplateCollapseBlocks() 
 
 	it('throws error if param1 not string', function() {
 		throws(function() {
-			mainModule.KVCTemplateCollapseBlocks(null, []);
+			mod.KVCTemplateCollapseBlocks(null, []);
 		}, /KVCErrorInputNotValid/);
 	});
 
 	it('throws error if param2 not array', function() {
 		throws(function() {
-			mainModule.KVCTemplateCollapseBlocks('', null);
+			mod.KVCTemplateCollapseBlocks('', null);
 		}, /KVCErrorInputNotValid/);
 	});
 
 	it('returns string', function() {
-		deepEqual(mainModule.KVCTemplateCollapseBlocks('', []), '');
+		deepEqual(mod.KVCTemplateCollapseBlocks('', []), '');
 	});
 
 	it('replaces if no key', function() {
-		deepEqual(mainModule.KVCTemplateCollapseBlocks('{block:alfa}bravo{/block:alfa}', ['charlie']), '');
+		deepEqual(mod.KVCTemplateCollapseBlocks('{block:alfa}bravo{/block:alfa}', ['charlie']), '');
 	});
 
 	it('replaces single', function() {
-		deepEqual(mainModule.KVCTemplateCollapseBlocks('{block:alfa}bravo{/block:alfa}', ['alfa']), 'bravo');
+		deepEqual(mod.KVCTemplateCollapseBlocks('{block:alfa}bravo{/block:alfa}', ['alfa']), 'bravo');
 	});
 
 	it('replaces multiple', function() {
-		deepEqual(mainModule.KVCTemplateCollapseBlocks('{block:alfa}bravo{/block:alfa} {block:charlie}delta{/block:charlie}', ['alfa', 'charlie']), 'bravo delta');
+		deepEqual(mod.KVCTemplateCollapseBlocks('{block:alfa}bravo{/block:alfa} {block:charlie}delta{/block:charlie}', ['alfa', 'charlie']), 'bravo delta');
 	});
 
 	it('replaces duplicate', function() {
-		deepEqual(mainModule.KVCTemplateCollapseBlocks('{block:alfa}bravo{/block:alfa} {block:alfa}bravo{/block:alfa}', ['alfa']), 'bravo bravo');
+		deepEqual(mod.KVCTemplateCollapseBlocks('{block:alfa}bravo{/block:alfa} {block:alfa}bravo{/block:alfa}', ['alfa']), 'bravo bravo');
 	});
 
 	it('maintains whitespace', function() {
-		deepEqual(mainModule.KVCTemplateCollapseBlocks('{block:alfa}\n\tbravo\n{/block:alfa}', ['alfa']), '\n\tbravo\n');
+		deepEqual(mod.KVCTemplateCollapseBlocks('{block:alfa}\n\tbravo\n{/block:alfa}', ['alfa']), '\n\tbravo\n');
 	});
 
 	it('ignores if not corresponding', function() {
 		const item = '{block:alfa}bravo{/block:charlie}';
-		deepEqual(mainModule.KVCTemplateCollapseBlocks(item, []), item);
+		deepEqual(mod.KVCTemplateCollapseBlocks(item, []), item);
 	});
 
 	it('replaces KVCTemplateTokenBacklinks', function() {
@@ -551,7 +551,7 @@ describe('KVCTemplateCollapseBlocks', function test_KVCTemplateCollapseBlocks() 
 			})],
 		};
 
-		deepEqual(mainModule.KVCTemplateCollapseBlocks(uBlockTag('KVCTemplateTokenBacklinks', `bravo-{${ mainModule.KVCTemplateTokenName() }}:{${ mainModule.KVCTemplateTokenURL() }}:{${ mainModule.KVCTemplateTokenDescription() }}`), mainModule.KVCTemplateVisibleBlocks(options), {
+		deepEqual(mod.KVCTemplateCollapseBlocks(uBlockTag('KVCTemplateTokenBacklinks', `bravo-{${ mod.KVCTemplateTokenName() }}:{${ mod.KVCTemplateTokenURL() }}:{${ mod.KVCTemplateTokenDescription() }}`), mod.KVCTemplateVisibleBlocks(options), {
 			KVCBlockPermalinkMap: {
 				charlie: 'echo'
 			},
@@ -575,7 +575,7 @@ describe('KVCView', function test_KVCView() {
 
 	it('throws if showdown missing', function() {
 		throws(function() {
-			mainModule.KVCTemplateHTML({
+			mod.KVCTemplateHTML({
 				Converter: null,
 			}, uOptions());
 		}, /KVCErrorInputNotValid/);
@@ -583,7 +583,7 @@ describe('KVCView', function test_KVCView() {
 
 	it('throws if KVCViewSource not string', function () {
 		throws(function () {
-			mainModule.KVCView(showdown, Object.assign(uOptions(), {
+			mod.KVCView(showdown, Object.assign(uOptions(), {
 				KVCViewSource: null,
 			}));
 		}, /KVCErrorInputNotValid/);
@@ -591,7 +591,7 @@ describe('KVCView', function test_KVCView() {
 
 	it('throws if KVCViewPermalinkMap not object', function () {
 		throws(function () {
-			mainModule.KVCView(showdown, Object.assign(uOptions(), {
+			mod.KVCView(showdown, Object.assign(uOptions(), {
 				KVCViewPermalinkMap: null,
 			}));
 		}, /KVCErrorInputNotValid/);
@@ -599,7 +599,7 @@ describe('KVCView', function test_KVCView() {
 
 	it('throws if KVCViewTemplate not string', function () {
 		throws(function () {
-			mainModule.KVCView(showdown, Object.assign(uOptions(), {
+			mod.KVCView(showdown, Object.assign(uOptions(), {
 				KVCViewTemplate: null,
 			}));
 		}, /KVCErrorInputNotValid/);
@@ -608,43 +608,43 @@ describe('KVCView', function test_KVCView() {
 	it('throws if KVCViewTemplateOptions not object', function () {
 
 		throws(function () {
-			mainModule.KVCView(showdown, Object.assign(uOptions(), {
+			mod.KVCView(showdown, Object.assign(uOptions(), {
 				KVCViewTemplateOptions: null,
 			}));
 		}, /KVCErrorInputNotValid/);
 	});
 
 	it('returns string', function() {
-		deepEqual(typeof mainModule.KVCView(showdown, uOptions()), 'string');
+		deepEqual(typeof mod.KVCView(showdown, uOptions()), 'string');
 	});
 
 	it('replaces KVCViewPermalinkMap', function() {
-		deepEqual(mainModule.KVCView(showdown, Object.assign(uOptions(), {
+		deepEqual(mod.KVCView(showdown, Object.assign(uOptions(), {
 			KVCViewSource: 'alfa\n[[bravo]]',
 			KVCViewPermalinkMap: {
 				bravo: 'charlie',
 			},
-			KVCViewTemplate: `delta {${ mainModule.KVCTemplateTokenPostBody() }}`,
+			KVCViewTemplate: `delta {${ mod.KVCTemplateTokenPostBody() }}`,
 		})), 'delta <p><a href="charlie">bravo</a></p>');
 	});
 
 	it('replaces tokens', function() {
-		deepEqual(mainModule.KVCView(showdown, Object.assign(uOptions(), {
+		deepEqual(mod.KVCView(showdown, Object.assign(uOptions(), {
 			KVCViewSource: 'alfa',
-			KVCViewTemplate: `bravo {${ mainModule.KVCTemplateTokenPostTitle() }}`,
+			KVCViewTemplate: `bravo {${ mod.KVCTemplateTokenPostTitle() }}`,
 		})), 'bravo alfa');
 	});
 
 	context('blocks', function () {
 		
 		it('replaces if not present', function() {
-			deepEqual(mainModule.KVCView(showdown, Object.assign(uOptions(), {
+			deepEqual(mod.KVCView(showdown, Object.assign(uOptions(), {
 				KVCViewTemplate: uBlockTag('KVCTemplateTokenRootURL', 'bravo'),
 			})), '');
 		});
 		
 		it('replaces KVCTemplateTokenRootURL', function() {
-			deepEqual(mainModule.KVCView(showdown, Object.assign(uOptions(), {
+			deepEqual(mod.KVCView(showdown, Object.assign(uOptions(), {
 				KVCViewTemplate: uBlockTag('KVCTemplateTokenRootURL', uTokenTag('KVCTemplateTokenRootURL')),
 				KVCViewTemplateOptions: {
 					KVCOptionRootURL: 'bravo',
