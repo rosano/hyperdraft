@@ -737,7 +737,7 @@ const mod = {
 				OLSKLocalized,
 				ParamRouteConstant: window.OLSKPublicConstants('OLSKSharedActiveRouteConstant'),
 				OLSKFormatted: OLSKString.OLSKStringFormatted,
-				OLSKCanonicalFor: window.OLSKCanonicalFor,
+				OLSKCanonical: window.OLSKCanonical,
 			}).map(function (e) {
 				const item = e.LCHRecipeCallback;
 
@@ -1112,7 +1112,7 @@ const mod = {
 		
 		mod._ValueOLSKRemoteStorage = new RemoteStorage({
 			modules: [ storageModule ],
-			OLSKPatchRemoteStorageAuthRedirectURI: OLSK_SPEC_UI() ? undefined : window.location.origin + window.OLSKCanonicalFor('KVCWriteRoute'),
+			OLSKPatchRemoteStorageAuthRedirectURI: OLSK_SPEC_UI() ? undefined : window.location.origin + window.OLSKCanonical('KVCWriteRoute'),
 		});
 
 		mod._ValueOLSKRemoteStorage.access.claim(storageModule.name, 'rw');
@@ -1361,7 +1361,7 @@ import OLSKApropos from 'OLSKApropos';
 </OLSKModalView>
 
 {#if !OLSK_SPEC_UI()}
-	<OLSKServiceWorkerView OLSKServiceWorkerRegistrationRoute={ window.OLSKCanonicalFor('WKCServiceWorkerRoute') } />
+	<OLSKServiceWorkerView OLSKServiceWorkerRegistrationRoute={ window.OLSKCanonical('WKCServiceWorkerRoute') } />
 {/if}
 
 <style src="./ui-style.css"></style>

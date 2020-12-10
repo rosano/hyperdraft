@@ -12,7 +12,7 @@ exports.OLSKControllerRoutes = function() {
 				KVCVitrineContent: res.OLSKMarkdownContent(require('path').join(__dirname, `text.${ res.locals.OLSKSharedPageCurrentLanguage }.md`), {
 					KVC_VITRINE_NV_URL: process.env.KVC_VITRINE_NV_URL,
 
-					KVCVitrineTokenWriteURL: res.locals.OLSKCanonicalFor('KVCWriteRoute'),
+					KVCVitrineTokenWriteURL: res.locals.OLSKCanonical('KVCWriteRoute'),
 				}),
 				OLSKStringReplaceTokens: require('OLSKString').OLSKStringReplaceTokens,
 			});
