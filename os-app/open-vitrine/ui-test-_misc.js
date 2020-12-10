@@ -38,4 +38,24 @@ describe('KVCVitrine_Misc', function () {
 
 	});
 
+	describe('KVCVitrineVideoFrame', function () {
+
+		it('sets fake-src', function () {
+			browser.assert.attribute(KVCVitrineVideoFrame, 'fake-src', process.env.KVC_VITRINE_VIDEO_URL);
+		});
+
+		it('sets width', function () {
+			browser.assert.attribute(KVCVitrineVideoFrame, 'width', '320');
+		});
+
+		it('sets height', function () {
+			browser.assert.attribute(KVCVitrineVideoFrame, 'height', '300');
+		});
+
+		it('sets frameborder', function () {
+			browser.assert.attribute(KVCVitrineVideoFrame, 'frameborder', '0');
+		});
+
+	});
+
 });
