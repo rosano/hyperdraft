@@ -10,6 +10,14 @@ describe('KVCWriteMasterListItem_Misc', function () {
 		});
 	});
 
+	describe('KVCWriteMasterListItem', function test_KVCWriteMasterListItem () {
+
+		it('classes OLSKCommonEdgeBottom', function () {
+			browser.assert.hasClass(KVCWriteMasterListItem, 'OLSKCommonEdgeBottom');
+		});
+		
+	});
+
 	describe('KVCWriteMasterListItemTitle', function test_KVCWriteMasterListItemTitle () {
 		
 		it('sets aria-hidden', function () {

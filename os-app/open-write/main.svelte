@@ -1325,7 +1325,7 @@ import OLSKApropos from 'OLSKApropos';
 <footer class="KVCWriteViewportFooter OLSKMobileViewFooter">
 
 	{#if !mod._ValueStorageToolbarHidden }
-		<div class="KVCWriteStorageToolbar OLSKStorageToolbar OLSKToolbar OLSKToolbarJustify">
+		<div class="KVCWriteStorageToolbar OLSKStorageToolbar OLSKToolbar OLSKToolbarJustify OLSKCommonEdgeTop">
 			<div class="OLSKToolbarElementGroup">
 				<button class="KVCWriteStorageExportButton OLSKLayoutElementTappable OLSKLayoutButtonNoStyle" on:click={ mod.InterfaceStorageExportButtonDidClick }>{ OLSKLocalized('KVCWriteStorageExportButtonText') }</button>
 			</div>

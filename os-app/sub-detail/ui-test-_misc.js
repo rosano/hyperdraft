@@ -58,6 +58,10 @@ describe('KVCWriteDetail_Misc', function () {
 			browser.assert.hasClass(KVCWriteDetailToolbar, 'OLSKToolbarJustify');
 		});
 		
+		it('classes OLSKCommonEdgeBottom', function () {
+			browser.assert.hasClass(KVCWriteDetailToolbar, 'OLSKCommonEdgeBottom');
+		});
+		
 		it('classes OLSKMobileViewHeader', function () {
 			browser.assert.hasClass(KVCWriteDetailToolbar, 'OLSKMobileViewHeader');
 		});

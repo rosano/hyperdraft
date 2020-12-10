@@ -1,6 +1,4 @@
 :global(body) {
-	--WKCBorderStyle: 1px solid #ddd;
-	
 	font-family: 'Helvetica Neue', 'Helvetica', sans-serif;
 	font-size: 9pt;
 
@@ -9,10 +7,6 @@
 }
 
 .KVCWriteStorageToolbar {
-	border-top: var(--WKCBorderStyle);
-	
-	background: var(--KVCCommonBackground);
-
 	/* AppContainerFlexbox:Child */
 	flex-shrink: 0;
 }

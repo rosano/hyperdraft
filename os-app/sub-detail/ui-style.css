@@ -22,8 +22,6 @@
 }
 
 .KVCWriteDetailToolbar {
-	border-bottom: var(--WKCBorderStyle);
-
 	/* KVCWriteDetailFlexbox:Child */
 	flex-shrink: 0;
 }
