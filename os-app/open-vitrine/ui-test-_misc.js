@@ -40,8 +40,8 @@ describe('KVCVitrine_Misc', function () {
 
 	describe('KVCVitrineVideoFrame', function () {
 
-		it('sets fake-src', function () {
-			browser.assert.attribute(KVCVitrineVideoFrame, 'fake-src', process.env.KVC_VITRINE_VIDEO_URL);
+		it('sets src', function () {
+			browser.assert.attribute(KVCVitrineVideoFrame, 'src', process.env.KVC_VITRINE_VIDEO_URL);
 		});
 
 		it('sets width', function () {

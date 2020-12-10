@@ -30,7 +30,7 @@ locals.OLSKPageUseLivereload = process.env.NODE_ENV === 'development';
 
 <h1 class="KVCVitrineVideoHeading"><%= OLSKLocalized('KVCVitrineVideoHeadingText') %></h1>
 
-<iframe class="KVCVitrineVideoFrame" <%= IsTestingBehaviour ? 'fake-' : '' %>src="<%= process.env.KVC_VITRINE_VIDEO_URL %>" frameborder="0" width="320" height="300" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+<iframe class="KVCVitrineVideoFrame" src="<%= process.env.KVC_VITRINE_VIDEO_URL %>" frameborder="0" width="320" height="300" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
 </article>
 

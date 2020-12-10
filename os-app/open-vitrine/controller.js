@@ -15,7 +15,6 @@ exports.OLSKControllerRoutes = function() {
 					KVCVitrineTokenWriteURL: res.locals.OLSKCanonicalFor('KVCWriteRoute'),
 				}),
 				OLSKStringReplaceTokens: require('OLSKString').OLSKStringReplaceTokens,
-				IsTestingBehaviour: req.hostname.match('loc.tests'),
 			});
 		},
 		OLSKRouteLanguageCodes: ['en'],
