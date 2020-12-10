@@ -1191,7 +1191,7 @@ const mod = {
 	},
 
 	async SetupFund () {
-		if (OLSK_SPEC_UI() && window.location.search.match('OLSKFundResponseIsPresent=true')) {
+		if (OLSK_SPEC_UI() && window.location.search.match('FakeOLSKFundResponseIsPresent=true')) {
 			OLSKFund._OLSKFundFakeGrantResponseRandom();
 		}
 

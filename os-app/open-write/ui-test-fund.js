@@ -183,7 +183,7 @@ describe('KVCWrite_Fund', function () {
 
 		before(function () {
 			return browser.OLSKVisit(kDefaultRoute, {
-				OLSKFundResponseIsPresent: true,
+				FakeOLSKFundResponseIsPresent: true,
 			});
 		});
 
