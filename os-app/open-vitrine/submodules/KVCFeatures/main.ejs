@@ -1,0 +1,18 @@
+<div class="KVCFeatures">
+
+<% OLSKLocalized('KVCFeaturesArray').forEach(function ([name, blurb], i) { -%>
+	<div class="KVCFeaturesItem OLSKCommonCard OLSKCommonFeatureCard">
+		<img class="KVCFeaturesItemIdentity" src="<%= [
+			'/_shared/__external/OLSKUIAssets/_OLSKSharedFeatureBrackets.svg',
+			'/_shared/__external/OLSKUIAssets/_OLSKSharedFeaturePublish.svg',
+			'/_shared/__external/OLSKUIAssets/_OLSKSharedFeatureJump.svg',
+			'/_shared/__external/OLSKUIAssets/_OLSKSharedFeatureArchive.svg',
+		][i] %>" role="presentation" />
+		<section>
+			<span class="KVCFeaturesItemName"><%= name %></span>
+			<span class="KVCFeaturesItemBlurb"><%- blurb %></span>
+		</section>
+	</div>
+<% }) -%>
+
+</div>
