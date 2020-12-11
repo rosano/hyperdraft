@@ -61,6 +61,10 @@ describe('KVCVitrine_Access', function () {
 		browser.assert.elements(KVCVitrineFeaturesHeading, 1);
 	});
 
+	it('shows KVCFeatures', function () {
+		browser.assert.elements('.KVCFeatures', 1);
+	});
+
 	it('shows OLSKStandardFeatures', function () {
 		browser.assert.elements('.OLSKStandardFeatures', 1);
 	});

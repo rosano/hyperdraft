@@ -1,6 +1,6 @@
 KVCFeaturesArray:
   - - Network your thoughts
-    - Link between notes via <code>[[wiki]]</code>-style syntax
+    - Link between notes via [[wiki]] syntax
   - - Make a website
     - Publish notes to the internet via remoteStorage
   - - Jump around
