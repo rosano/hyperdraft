@@ -46,7 +46,7 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 		});
 
 		it('localizes KVCVitrineVideoHeading', function () {
-			browser.assert.text(KVCVitrineVideoHeading, uLocalized('KVCVitrineVideoHeadingText'));
+			browser.assert.text(KVCVitrineVideoHeading, uLocalized('OLSKWordingVideoText'));
 		});
 
 		context('KVCVitrineContentAppButton', function test_KVCVitrineContentAppButton () {

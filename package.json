@@ -27,6 +27,9 @@
     "turndown": "latest",
     "showdown": "latest",
 
+    "// WORDING": null,
+    "OLSKWording": "olsk/OLSKWording",
+
     "// THROTTLE": null,
     "OLSKThrottle": "olsk/OLSKThrottle",
 
