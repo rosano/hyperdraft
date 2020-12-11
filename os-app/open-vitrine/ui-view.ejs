@@ -28,6 +28,10 @@ locals.OLSKPageUseLivereload = process.env.NODE_ENV === 'development';
 
 <%- OLSKStringReplaceTokens(KVCVitrineContent, {}) %>
 
+<h1 class="KVCVitrineFeaturesHeading"><%= OLSKLocalized('OLSKWordingFeatures') %></h1>
+
+<%- include('../../node_modules/OLSKStandardFeatures/main.ejs').replace(/node_modules/g, '_shared/__external') %>
+
 <h1 class="KVCVitrineVideoHeading"><%= OLSKLocalized('OLSKWordingVideo') %></h1>
 
 <iframe class="KVCVitrineVideoFrame" src="<%= process.env.KVC_VITRINE_VIDEO_URL %>" frameborder="0" width="320" height="300" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
