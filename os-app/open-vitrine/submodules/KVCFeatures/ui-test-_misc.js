@@ -18,8 +18,6 @@ describe('KVCFeatures_Misc', function () {
 				browser.assert.attribute(`.OLSKFeatureListItem:nth-child(${ i + 1 }) .OLSKFeatureListItemImage`, 'src', [
 						'/_shared/__external/OLSKUIAssets/_OLSKSharedFeatureBrackets.svg',
 						'/_shared/__external/OLSKUIAssets/_OLSKSharedFeaturePublish.svg',
-						'/_shared/__external/OLSKUIAssets/_OLSKSharedFeatureJump.svg',
-						'/_shared/__external/OLSKUIAssets/_OLSKSharedFeatureArchive.svg',
 					][i]);
 			});
 			
