@@ -11,6 +11,10 @@ describe('KVCVitrine_Misc', function () {
 		it('classes OLSKCommon', function () {
 			browser.assert.hasClass(KVCVitrine, 'OLSKCommon');
 		});
+
+		it('classes OLSKCommonCapped', function () {
+			browser.assert.hasClass(KVCVitrine, 'OLSKCommonCapped');
+		});
 	
 	});
 
