@@ -30,7 +30,8 @@
     "// WORDING": null,
     "OLSKWording": "olsk/OLSKWording",
 
-    "// STANDARD FEATURES": null,
+    "// FEATURES": null,
+    "OLSKFeatureList": "olsk/OLSKFeatureList",
     "OLSKStandardFeatures": "olsk/OLSKStandardFeatures",
 
     "// THROTTLE": null,

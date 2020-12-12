@@ -12,22 +12,10 @@ describe('KVCFeatures_Misc', function () {
 
 	uLocalized('KVCFeaturesArray').forEach(function (e, i) {
 
-		describe('KVCFeaturesItem', function test_KVCFeaturesItem () {
-			
-			it('classes OLSKCommonCard', function () {
-				browser.assert.hasClass(`${ KVCFeaturesItem }:nth-child(${ i + 1 })`, 'OLSKCommonCard');
-			});
-
-			it('classes OLSKCommonFeatureCard', function () {
-				browser.assert.hasClass(`${ KVCFeaturesItem }:nth-child(${ i + 1 })`, 'OLSKCommonFeatureCard');
-			});
-
-		});
-
 		describe('KVCFeaturesItemIdentity', function test_KVCFeaturesItemIdentity () {
 			
 			it('sets src', function () {
-				browser.assert.attribute(`${ KVCFeaturesItem }:nth-child(${ i + 1 }) ${ KVCFeaturesItemIdentity }`, 'src', [
+				browser.assert.attribute(`.OLSKFeatureListItem:nth-child(${ i + 1 }) .OLSKFeatureListItemImage`, 'src', [
 						'/_shared/__external/OLSKUIAssets/_OLSKSharedFeatureBrackets.svg',
 						'/_shared/__external/OLSKUIAssets/_OLSKSharedFeaturePublish.svg',
 						'/_shared/__external/OLSKUIAssets/_OLSKSharedFeatureJump.svg',
@@ -36,7 +24,7 @@ describe('KVCFeatures_Misc', function () {
 			});
 			
 			it('sets role', function () {
-				browser.assert.attribute(`${ KVCFeaturesItem }:nth-child(${ i + 1 }) ${ KVCFeaturesItemIdentity }`, 'role', 'presentation');
+				browser.assert.attribute(`.OLSKFeatureListItem:nth-child(${ i + 1 }) .OLSKFeatureListItemImage`, 'role', 'presentation');
 			});
 
 		});
