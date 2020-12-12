@@ -30,14 +30,18 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 			browser.assert.text(KVCVitrineIdentityBlurb, uLocalized('KVCVitrineDescription'));
 		});
 
+		it('localizes OLSKCommonWhatIsIt', function () {
+			browser.assert.text('.OLSKCommonWhatIsIt', uLocalized('OLSKCommonWhatIsItText'));
+		});
+
 		it('localizes KVCVitrineContent', function() {
 			const item = require('OLSKString').OLSKStringReplaceTokens(require('fs').readFileSync(require('path').join(__dirname, `text.${ OLSKRoutingLanguage }.md`), 'utf-8'), {
 				'\\*': '',
 				'\n\n': '\n',
 				'KVCVitrineDescription': uLocalized('KVCVitrineDescription'),
 			});
-			browser.assert.OLSKTextContent(KVCVitrineContent, item.slice(0, 20), function (inputData) {
-				return inputData.slice(0, 20);
+			browser.assert.OLSKTextContent(KVCVitrineContent, item.slice(0, 10), function (inputData) {
+				return inputData.slice(0, 10);
 			});
 		});
 

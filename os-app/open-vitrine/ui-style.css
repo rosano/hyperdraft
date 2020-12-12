@@ -1,7 +1,6 @@
 :root {
 	--OLSKCommonBackground: var(--KVCCommonBackground);
 	--OLSKCommonForeground: var(--KVCCommonForeground);
-	--OLSKCommonFontSize: 11pt;
 }
 
 body {

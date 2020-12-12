@@ -49,10 +49,14 @@ describe('KVCVitrine_Access', function () {
 		browser.assert.elements(KVCVitrineIdentityBlurb, 1);
 	});
 	
+	it('shows OLSKCommonWhatIsIt', function() {
+		browser.assert.elements('.OLSKCommonWhatIsIt', 1);
+	});
+
 	it('shows KVCVitrineContent', function() {
 		browser.assert.elements(KVCVitrineContent, 1);
 	});
-
+	
 	it('shows KVCVitrineContentAppButton', function() {
 		browser.assert.elements(KVCVitrineContentAppButton, 1);
 	});
