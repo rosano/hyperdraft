@@ -15,14 +15,14 @@ describe('KVCFeatures_Misc', function () {
 		describe('KVCFeaturesItemIdentity', function test_KVCFeaturesItemIdentity () {
 			
 			it('sets src', function () {
-				browser.assert.attribute(`.OLSKFeatureListItem:nth-child(${ i + 1 }) .OLSKFeatureListItemImage`, 'src', [
+				browser.assert.attribute(`.OLSKFeatureListItem:nth-child(${ i + 1 }) .OLSKFeatureListItemIcon`, 'src', [
 						'/_shared/__external/OLSKUIAssets/_OLSKSharedFeatureBrackets.svg',
 						'/_shared/__external/OLSKUIAssets/_OLSKSharedFeaturePublish.svg',
 					][i]);
 			});
 			
 			it('sets role', function () {
-				browser.assert.attribute(`.OLSKFeatureListItem:nth-child(${ i + 1 }) .OLSKFeatureListItemImage`, 'role', 'presentation');
+				browser.assert.attribute(`.OLSKFeatureListItem:nth-child(${ i + 1 }) .OLSKFeatureListItemIcon`, 'role', 'presentation');
 			});
 
 		});
