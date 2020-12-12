@@ -3,10 +3,10 @@ const kDefaultRoutePath = require('./controller.js').OLSKControllerRoutes().shif
 Object.entries({
 	KVCVitrine: '.KVCVitrine',
 	
-	KVCVitrineIdentity: '.KVCVitrineIdentity',
-	KVCVitrineIdentityLogo: '.KVCVitrineIdentityLogo',
-	KVCVitrineIdentityName: '.KVCVitrineIdentityName',
-	KVCVitrineIdentityBlurb: '.KVCVitrineIdentityBlurb',
+	KVCVitrineCrown: '.KVCVitrineCrown',
+	KVCVitrineCrownIcon: '.KVCVitrineCrownIcon',
+	KVCVitrineCrownName: '.KVCVitrineCrownName',
+	KVCVitrineCrownBlurb: '.KVCVitrineCrownBlurb',
 
 	KVCVitrineContent: '.KVCVitrineContent',
 	KVCVitrineContentAppButton: '.KVCVitrineContentAppButton',
@@ -33,20 +33,20 @@ describe('KVCVitrine_Access', function () {
 		browser.assert.elements('.OLSKLanguageSwitcher', 1);
 	});
 
-	it('shows KVCVitrineIdentity', function () {
-		browser.assert.elements(KVCVitrineIdentity, 1);
+	it('shows KVCVitrineCrown', function () {
+		browser.assert.elements(KVCVitrineCrown, 1);
 	});
 
-	it('shows KVCVitrineIdentityLogo', function () {
-		browser.assert.elements(KVCVitrineIdentityLogo, 1);
+	it('shows KVCVitrineCrownIcon', function () {
+		browser.assert.elements(KVCVitrineCrownIcon, 1);
 	});
 
-	it('shows KVCVitrineIdentityName', function () {
-		browser.assert.elements(KVCVitrineIdentityName, 1);
+	it('shows KVCVitrineCrownName', function () {
+		browser.assert.elements(KVCVitrineCrownName, 1);
 	});
 
-	it('shows KVCVitrineIdentityBlurb', function () {
-		browser.assert.elements(KVCVitrineIdentityBlurb, 1);
+	it('shows KVCVitrineCrownBlurb', function () {
+		browser.assert.elements(KVCVitrineCrownBlurb, 1);
 	});
 	
 	it('shows OLSKCommonWhatIsIt', function() {
