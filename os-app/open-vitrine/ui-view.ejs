@@ -32,7 +32,7 @@ locals.OLSKPageUseLivereload = process.env.NODE_ENV === 'development';
 
 <%- include('./submodules/KVCFeatures/main.ejs') %>
 
-<%- include('../../node_modules/OLSKStandardFeatures/main.ejs').replace(/node_modules/g, '_shared/__external') %>
+<%- include('../../node_modules/OLSKAppFeatureList/main.ejs').replace(/node_modules/g, '_shared/__external') %>
 
 <h1 class="KVCVitrineVideoHeading"><%= OLSKLocalized('OLSKWordingVideo') %></h1>
 

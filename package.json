@@ -32,7 +32,7 @@
 
     "// FEATURES": null,
     "OLSKFeatureList": "olsk/OLSKFeatureList",
-    "OLSKStandardFeatures": "olsk/OLSKStandardFeatures",
+    "OLSKAppFeatureList": "olsk/OLSKAppFeatureList",
 
     "// THROTTLE": null,
     "OLSKThrottle": "olsk/OLSKThrottle",
