@@ -65,8 +65,8 @@ describe('KVCVitrine_Access', function () {
 		browser.assert.elements(KVCVitrineFeaturesHeading, 1);
 	});
 
-	it('shows KVCFeatures', function () {
-		browser.assert.elements('.KVCFeatures', 1);
+	it('shows KVCFeatureList', function () {
+		browser.assert.elements('.KVCFeatureList', 1);
 	});
 
 	it('shows OLSKAppFeatureList', function () {

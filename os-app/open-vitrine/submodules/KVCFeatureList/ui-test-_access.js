@@ -1,19 +1,19 @@
 const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
 Object.entries({
-	KVCFeatures: '.KVCFeatures',
+	KVCFeatureList: '.KVCFeatureList',
 }).map(function (e) {
 	return global[e.shift()]  = e.pop();
 });
 
-describe('KVCFeatures_Access', function () {
+describe('KVCFeatureList_Access', function () {
 	
 	before(function() {
 		return browser.OLSKVisit(kDefaultRoute);
 	});
 	
-	it('shows KVCFeatures', function() {
-		browser.assert.elements(KVCFeatures, 1);
+	it('shows KVCFeatureList', function() {
+		browser.assert.elements(KVCFeatureList, 1);
 	});
 	
 	it('shows OLSKFeatureList', function() {
