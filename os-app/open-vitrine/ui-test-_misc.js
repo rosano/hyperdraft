@@ -42,22 +42,26 @@ describe('KVCVitrine_Misc', function () {
 
 	});
 
-	describe('KVCVitrineVideoFrame', function () {
+	describe('KVCVitrineVideo1', function () {
 
 		it('sets src', function () {
-			browser.assert.attribute(KVCVitrineVideoFrame, 'src', process.env.KVC_VITRINE_VIDEO_URL);
+			browser.assert.attribute(KVCVitrineVideo1, 'src', process.env.KVC_VITRINE_VIDEO_URL_1);
 		});
 
-		it('sets width', function () {
-			browser.assert.attribute(KVCVitrineVideoFrame, 'width', '320');
+		it('sets allowfullscreen', function () {
+			browser.assert.attribute(KVCVitrineVideo1, 'allowfullscreen', '');
 		});
 
-		it('sets height', function () {
-			browser.assert.attribute(KVCVitrineVideoFrame, 'height', '300');
+	});
+
+	describe('KVCVitrineVideo2', function () {
+
+		it('sets src', function () {
+			browser.assert.attribute(KVCVitrineVideo2, 'src', process.env.KVC_VITRINE_VIDEO_URL_2);
 		});
 
-		it('sets frameborder', function () {
-			browser.assert.attribute(KVCVitrineVideoFrame, 'frameborder', '0');
+		it('sets allowfullscreen', function () {
+			browser.assert.attribute(KVCVitrineVideo1, 'allowfullscreen', '');
 		});
 
 	});

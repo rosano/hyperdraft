@@ -14,7 +14,8 @@ Object.entries({
 	KVCVitrineFeaturesHeading: '.KVCVitrineFeaturesHeading',
 
 	KVCVitrineVideoHeading: '.KVCVitrineVideoHeading',
-	KVCVitrineVideoFrame: '.KVCVitrineVideoFrame',
+	KVCVitrineVideo1: '.OLSKCommonVideoList .OLSKCommonVideoListItem.KVCVitrineVideo1 iframe',
+	KVCVitrineVideo2: '.OLSKCommonVideoList .OLSKCommonVideoListItem.KVCVitrineVideo2 iframe',
 }).map(function (e) {
 	return global[e.shift()]  = e.pop();
 });
@@ -77,8 +78,12 @@ describe('KVCVitrine_Access', function () {
 		browser.assert.elements(KVCVitrineVideoHeading, 1);
 	});
 
-	it('shows KVCVitrineVideoFrame', function () {
-		browser.assert.elements(KVCVitrineVideoFrame, 1);
+	it('shows KVCVitrineVideo1', function () {
+		browser.assert.elements(KVCVitrineVideo1, 1);
+	});
+
+	it('shows KVCVitrineVideo2', function () {
+		browser.assert.elements(KVCVitrineVideo2, 1);
 	});
 
 	it('shows ROCORootLink', function() {
