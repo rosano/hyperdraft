@@ -61,6 +61,14 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 			browser.assert.text(KVCVitrineVideoHeading, uLocalized('OLSKWordingVideo'));
 		});
 
+		it('localizes KVCVitrineSupportHeading', function () {
+			browser.assert.text(KVCVitrineSupportHeading, uLocalized('OLSKWordingSupportHeading'));
+		});
+
+		it('localizes KVCVitrineSupportBlurb', function () {
+			browser.assert.text(KVCVitrineSupportBlurb, uLocalized('OLSKWordingSupportBlurb'));
+		});
+
 		context('KVCVitrineContentAppButton', function test_KVCVitrineContentAppButton () {
 
 			it('classes OLSKCommonButton', function () {
