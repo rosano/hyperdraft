@@ -8,11 +8,6 @@ body {
 	color: var(--KVCCommonForeground);
 }
 
-.KVCVitrineVideo1 {
-	--OLSKCommonVideoWide: 850;
-	--OLSKCommonVideoHigh: 696;
-}
-
 .KVCVitrineVideo2 {
 	--OLSKCommonVideoWide: 750;
 	--OLSKCommonVideoHigh: 320;
