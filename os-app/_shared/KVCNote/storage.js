@@ -115,6 +115,10 @@ const mod = {
 					});
 				}
 
+				if (typeof window !== 'undefined' && window.OLSK_DEMO) {
+					return inputData;
+				}
+
 				try {
 					return OLSKRemoteStorage.OLSKRemoteStorageWriteObject(privateClient, mod.KVCNoteStorageObjectPath(inputData), inputData);
 				} catch (e) {

@@ -181,8 +181,12 @@ const mod = {
 			keyMap: 'sublime',
 		});
 
+		if (window.OLSK_DEMO && !window.OLSKDemoEditor) {
+			window.OLSKDemoEditor = mod._ValueEditorInstance;
+		}
+
 		mod._ValueEditorInstance.on('change', function (instance, changeObject) {
-			if (changeObject.origin === 'setValue') {
+			if (changeObject.origin === 'setValue' && !window.OLSK_DEMO) {
 				return mod.ReactValueSet(instance.getValue());
 			}
 

@@ -19,3 +19,7 @@
 }
 
 }
+
+:global(.OLSKIsDemoing .CodeMirror-cursors) {
+	opacity: 0;
+}

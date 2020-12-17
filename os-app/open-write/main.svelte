@@ -20,6 +20,8 @@ import OLSKString from 'OLSKString';
 import OLSKLanguageSwitcher from 'OLSKLanguageSwitcher';
 import OLSKFund from 'OLSKFund';
 import OLSKPact from 'OLSKPact';
+import OLSKChain from 'OLSKChain';
+import OLSKBeacon from 'OLSKBeacon';
 
 const mod = {
 
@@ -85,6 +87,8 @@ const mod = {
 	_ValueStorageIsConnected: false,
 
 	_ValueSettingsAll: [],
+
+	_IsRunningDemo: false,
 
 	_ValueOLSKFundProgress: false,
 
@@ -714,6 +718,93 @@ const mod = {
 		mod._ValueDidMigrate = true;
 	},
 
+	async ControlDemo () {
+		mod._IsRunningDemo = true;
+		window.OLSK_DEMO = true;
+
+		return OLSKChain.OLSKChainGather(Object.assign({
+			Wait: OLSKBeacon.OLSKBeaconWait,
+			Point: (function (param1, param2) {
+				return OLSKBeacon._OLSKBeaconAnimate(OLSKBeacon.OLSKBeaconPointFunction('.OLSKPointer', param1), param2);
+			}),
+			Click: (function (inputData) {
+				return OLSKBeacon._OLSKBeaconAnimate(OLSKBeacon.OLSKBeaconClickFunction(inputData, '.OLSKPointer', 'OLSKPointerActive'));
+			}),
+			ClickLink: (function (inputData) {
+				return OLSKBeacon._OLSKBeaconAnimate(OLSKBeacon.OLSKBeaconClickFunction(inputData, '.OLSKPointer', 'OLSKPointerActive', 'mouseup'));
+			}),
+			Defer: (function (inputData) {
+				return OLSKBeacon.OLSKBeaconDeferFunction(inputData);
+			}),
+			Focus: (function (inputData) {
+				return new Promise(function (resolve) {
+					resolve(document.querySelector(inputData).focus());
+				});
+			}),
+			Fill: (function (param1, param2, param3) {
+				return OLSKBeacon._OLSKBeaconAnimate(OLSKBeacon.OLSKBeaconFillFunction(param1, param2), param3);
+			}),
+			Increment: (function (param1, param2, param3) {
+				const startValue = OLSKDemoEditor.getValue();
+				return OLSKBeacon._OLSKBeaconAnimate(function (pct) {
+					window.OLSKDemoEditor.setValue(startValue + param2.slice(0, param2.length * pct));
+				}, param3);
+			}),
+			Set: (function (param1, param2) {
+				return OLSKBeacon._OLSKBeaconAnimate(OLSKBeacon.OLSKBeaconSetFunction(param1, param2));
+			}),
+			Nudge: (function () {
+				return OLSKBeacon._OLSKBeaconAnimate(OLSKBeacon.OLSKBeaconNudgeFunction('.OLSKPointer', ...arguments));
+			}),
+		}, mod))
+			.Point('.KVCWriteMasterCreateButton')
+			.Nudge(0, 50)
+			.Wait()
+			.Point('.KVCWriteMasterCreateButton')
+			.Click('.KVCWriteMasterCreateButton')
+			.Nudge(0, -200)
+			.Increment('.KVCWriteInput .CodeMirror', 'Hello')
+			.Wait()
+			.Increment('.KVCWriteInput .CodeMirror', "\n\nLet's make some notes.", 1000)
+			.Wait(1500)
+			.Click('.KVCWriteMasterCreateButton')
+			.Increment('.KVCWriteInput .CodeMirror', 'Apples')
+			.Wait()
+			.Click('.KVCWriteMasterCreateButton')
+			.Increment('.KVCWriteInput .CodeMirror', 'Bananas')
+			.Wait()
+			.Click('.KVCWriteMasterCreateButton')
+			.Increment('.KVCWriteInput .CodeMirror', 'Cookies')
+			.Wait()
+			.Click('.KVCWriteMasterCreateButton')
+			.Wait(1000)
+			.Increment('.KVCWriteInput .CodeMirror', "Make links using brackets")
+			.Wait()
+			.Increment('.KVCWriteInput .CodeMirror', "\n\n# For example")
+			.Wait()
+			.Increment('.KVCWriteInput .CodeMirror', "\nAlex likes [[apples]].")
+			.Wait(1500)
+			.Increment('.KVCWriteInput .CodeMirror', "\n\nClick to open the note.")
+			.Wait(1000)
+			.Point('.cm-link', 1500)
+			.Wait(1000)
+			.ClickLink('.cm-link')
+			.Wait(1000)
+			.Increment('.KVCWriteInput .CodeMirror', "\n\nThey also like [[bananas]].")
+			.Wait()
+			.Point('.cm-link')
+			.ClickLink('.cm-link')
+			.Wait()
+			.Increment('.KVCWriteInput .CodeMirror', "\n\nBut [[cookies]] are their favourite thing to eat.")
+			.Wait()
+			.Point('.cm-link')
+			// .ClickLink('.cm-link')
+			// .Wait()
+			.Wait()
+			.Increment('.KVCWriteInput .CodeMirror', "\n\nNow you try!")
+			.OLSKChainExecute();
+	},
+
 	// MESSAGE
 
 	OLSKAppToolbarDispatchApropos () {
@@ -1092,6 +1183,8 @@ const mod = {
 		mod.SetupFund();
 
 		mod.ReactIsLoading(mod._ValueIsLoading = false);
+
+		// mod.ControlDemo();
 	},
 
 	SetupStorageClient() {
@@ -1255,10 +1348,11 @@ import OLSKStorageWidget from 'OLSKStorageWidget';
 import OLSKWebView from 'OLSKWebView';
 import OLSKModalView from 'OLSKModalView';
 import OLSKApropos from 'OLSKApropos';
+import OLSKPointer from 'OLSKPointer';
 </script>
 <svelte:window on:keydown={ mod.InterfaceWindowDidKeydown } />
 
-<div class="KVCWrite OLSKViewport" class:OLSKIsLoading={ mod._ValueIsLoading }>
+<div class="KVCWrite OLSKViewport" class:OLSKIsLoading={ mod._ValueIsLoading } class:OLSKIsDemoing={ mod._IsRunningDemo }>
 
 <div class="OLSKViewportContent">
 	<KVCWriteMaster
@@ -1362,6 +1456,10 @@ import OLSKApropos from 'OLSKApropos';
 
 {#if !OLSK_SPEC_UI()}
 	<OLSKServiceWorkerView OLSKServiceWorkerRegistrationRoute={ window.OLSKCanonical('WKCServiceWorkerRoute') } />
+{/if}
+
+{#if mod._IsRunningDemo }
+	<OLSKPointer />
 {/if}
 
 <style src="./ui-style.css"></style>

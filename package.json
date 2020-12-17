@@ -101,6 +101,11 @@
     "OLSKFund": "olsk/OLSKFund",
     "OLSKWebView": "olsk/OLSKWebView",
 
+    "// DEMO": null,
+    "OLSKChain": "olsk/OLSKChain",
+    "OLSKBeacon": "olsk/OLSKBeacon",
+    "OLSKPointer": "olsk/OLSKPointer",
+
     "// FRONTEND ROOT LINK": null,
     "OLSKRootLink": "olsk/OLSKRootLink",
     "ROCORootLink": "rationalcreative/ROCORootLink",
