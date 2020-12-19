@@ -32,7 +32,7 @@ const mod = {
 			}
 
 			if (Object.keys(inputData).filter(function (key) {
-				return e[key].match(inputData[key]);
+				return e[key] && e[key].match(inputData[key]);
 			}).length) {
 				return true;
 			}
