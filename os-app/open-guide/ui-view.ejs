@@ -1,0 +1,29 @@
+<%
+locals.OLSKPageTitle = OLSKLocalized('KVCGuideTitle');
+locals.OLSKPageDescription = OLSKLocalized('KVCGuideDescription');
+locals.OLSKPageAssets = [
+	'/_shared/__external/normalize.css/normalize.css',
+	'/_shared/__external/OLSKLayout/ui-style.css',
+	'/_shared/common/ui-style.css',
+	'ui-style.css',
+];
+locals.OLSKPageUseLivereload = process.env.NODE_ENV === 'development';
+%>
+
+<div class="KVCGuide OLSKCommon OLSKCommonCapped">
+
+<div class="KVCGuideCrown OLSKCommonCard OLSKCommonCrownCard">
+	<section>
+		<span class="KVCGuideCrownName"><%= OLSKLocalized('KVCGuideTitle') %></span>
+	</section>
+</div>
+
+<div class="KVCGuideContent">
+<%- KVCGuideContent %>
+</div>
+
+<hr role="presentation" />
+
+<%- include('../_shared/KVCRootLink/main.ejs') %>
+
+</div>
