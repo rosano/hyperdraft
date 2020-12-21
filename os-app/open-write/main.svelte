@@ -488,7 +488,7 @@ const mod = {
 			KVCNoteBody: typeof inputData === 'string' ? inputData : '',
 		});
 
-		mod.ValueNotesAll(mod._ValueNotesAll.concat(item));
+		mod.ValueNotesAll([item].concat(mod._ValueNotesAll));
 
 		mod.ControlNoteSelect(item);
 
