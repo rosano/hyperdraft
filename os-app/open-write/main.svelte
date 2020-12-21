@@ -573,13 +573,21 @@ const mod = {
 			KVCOptionRootURL: mod.DataSettingValue('KVCSettingCustomDomainBaseURL'),
 			KVCOptionBacklinks: KVCWriteLogic.KVCWriteBacklinksMap(mod._ValueNotesAll.filter(KVCNoteModel.KVCNoteModelIsPublic).concat(inputData))[KVCTemplate.KVCTemplatePlaintextTitle(inputData.KVCNoteBody)],
 		};
-		
-		mod.ValueNoteSelected(await KVCNoteAction.KVCNoteActionPublish(mod._ValueOLSKRemoteStorage, inputData, mod.TestPublishContent = KVCTemplate.KVCView(showdown, {
+
+		const wasPublic = KVCNoteModel.KVCNoteModelIsPublic(inputData);
+
+		const updated = await KVCNoteAction.KVCNoteActionPublish(mod._ValueOLSKRemoteStorage, inputData, mod.TestPublishContent = KVCTemplate.KVCView(showdown, {
 			KVCViewSource: inputData.KVCNoteBody,
 			KVCViewPermalinkMap: await KVCNoteAction.KVCNoteActionPermalinkMap(mod._ValueOLSKRemoteStorage, mod.DataSettingValue('KVCSettingPublicRootPageID')),
 			KVCViewTemplate: KVCTemplate.KVCTemplateViewDefault(OLSKLocalized),
 			KVCViewTemplateOptions: options,
-		}), options));
+		}), options);
+
+		if (wasPublic === KVCNoteModel.KVCNoteModelIsPublic(updated)) {
+			return;
+		}
+		
+		mod.ValueNoteSelected(updated); // #purge-svelte-force-update
 	},
 	
 	async ControlNoteRetract (inputData) {
