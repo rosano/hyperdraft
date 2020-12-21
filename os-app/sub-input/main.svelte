@@ -121,6 +121,8 @@ const mod = {
 			return Math.max(e.start, Math.min(e.end, cursor.ch)) === cursor.ch;
 		}).shift();
 
+		console.log(currentObject);
+
 		if (!currentObject || !currentObject.type || !currentObject.type.match('link')) {
 			return;
 		}
@@ -129,6 +131,7 @@ const mod = {
 	},
 
 	ControlOpenTextObject (inputData) {
+		console.log(inputData);
 		if (URLParse(inputData, {}).protocol) {
 			return window.open(inputData, '_blank');
 		}

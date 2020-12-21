@@ -48,7 +48,7 @@ describe('KVCWrite_Publish', function () {
 			return browser.pressButton('.KVCWriteDetailToolbarPublishButton');
 		});
 
-		it('sets KVCOptionBacklinks', function () {
+		it.skip('sets KVCOptionBacklinks', function () {
 			browser.assert.elements('#TestPublishContent .KVCBacklinks', 1);
 		});
 

@@ -244,7 +244,7 @@ const mod = {
 			}
 
 			if (item === 'KVCOptionBacklinks') {
-				coll.push(mod.KVCTemplateTokenBacklinks());
+				// coll.push(mod.KVCTemplateTokenBacklinks());
 			}
 
 			return coll;

@@ -417,7 +417,7 @@ describe('KVCTemplateVisibleBlocks', function test_KVCTemplateVisibleBlocks() {
 
 	context('KVCOptionBacklinks', function () {
 		
-		it('includes KVCTemplateTokenBacklinks', function () {
+		it.skip('includes KVCTemplateTokenBacklinks', function () {
 			deepEqual(mod.KVCTemplateVisibleBlocks({
 				KVCOptionBacklinks: {},
 			}), [mod.KVCTemplateTokenBacklinks()]);
@@ -543,7 +543,7 @@ describe('KVCTemplateCollapseBlocks', function test_KVCTemplateCollapseBlocks() 
 		deepEqual(mod.KVCTemplateCollapseBlocks(item, []), item);
 	});
 
-	it('replaces KVCTemplateTokenBacklinks', function() {
+	it.skip('replaces KVCTemplateTokenBacklinks', function() {
 		const options = {
 			KVCOptionBacklinks: [Object.assign(StubNoteObjectValid(), {
 				KVCNoteBody: 'charlie\ndelta',
