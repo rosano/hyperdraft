@@ -131,7 +131,7 @@ const mod = {
 			return;
 		}
 
-		if (event.ctrlKey && event.key === 'r') {
+		if (event.ctrlKey && event.key === 'j') {
 			return mod.ControlJump();
 		}
 	},

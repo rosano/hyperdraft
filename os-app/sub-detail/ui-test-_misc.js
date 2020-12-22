@@ -127,7 +127,7 @@ describe('KVCWriteDetail_Misc', function () {
 		});
 
 		it('sets accesskey', function () {
-			browser.assert.attribute(KVCWriteDetailToolbarJumpButton, 'accesskey', 'r');
+			browser.assert.attribute(KVCWriteDetailToolbarJumpButton, 'accesskey', 'j');
 		});
 
 		it('sets tabIndex', function () {
