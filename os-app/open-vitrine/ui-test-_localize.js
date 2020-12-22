@@ -54,22 +54,6 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 			browser.assert.text(KVCVitrineSupportBlurb, uLocalized('OLSKWordingSupportBlurb'));
 		});
 
-		context('KVCVitrineAppButton', function test_KVCVitrineAppButton () {
-
-			it('classes OLSKCommonButton', function () {
-				browser.assert.hasClass(KVCVitrineAppButton, 'OLSKCommonButton');
-			});
-			
-			it('classes OLSKCommonButtonPrimary', function () {
-				browser.assert.hasClass(KVCVitrineAppButton, 'OLSKCommonButtonPrimary');
-			});
-			
-			it('sets href', function () {
-				browser.assert.attribute(KVCVitrineAppButton, 'href', OLSKTestingCanonical(require('../open-write/controller.js').OLSKControllerRoutes().shift()));
-			});
-		
-		});
-
 	});
 
 });
