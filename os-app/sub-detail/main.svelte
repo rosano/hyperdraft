@@ -213,7 +213,7 @@ import KVCWriteInput from '../sub-input/main.svelte';
 	</div>
 
 	<div class="OLSKToolbarElementGroup">
-		<button class="KVCWriteDetailToolbarJumpButton OLSKDecorButtonNoStyle OLSKDecorTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarJumpButtonText') } accesskey="r" tabindex="-1" disabled={ !mod._ValueHeaderTokens.length } on:click={ mod.InterfaceJumpButtonDidClick }>
+		<button class="KVCWriteDetailToolbarJumpButton OLSKDecorButtonNoStyle OLSKDecorTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarJumpButtonText') } accesskey="j" tabindex="-1" disabled={ !mod._ValueHeaderTokens.length } on:click={ mod.InterfaceJumpButtonDidClick }>
 			<div class="KVCWriteDetailToolbarJumpButtonImage">{@html _KVCWriteJump }</div>
 		</button>
 

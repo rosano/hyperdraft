@@ -138,10 +138,10 @@ describe('KVCWriteDetail_Misc', function () {
 			browser.assert.attribute(KVCWriteDetailToolbarJumpButton, 'disabled', '');
 		});
 
-		context('keydown Ctrl+r', function () {
+		context('keydown Ctrl+j', function () {
 			
 			before(function () {
-				return browser.OLSKFireKeyboardEvent(browser.window, 'r', {
+				return browser.OLSKFireKeyboardEvent(browser.window, 'j', {
 					ctrlKey: true,
 				});
 			});
@@ -179,10 +179,10 @@ describe('KVCWriteDetail_Misc', function () {
 			
 			});
 
-			context('keydown Ctrl+r', function () {
+			context('keydown Ctrl+j', function () {
 				
 				before(function () {
-					return browser.OLSKFireKeyboardEvent(browser.window, 'r', {
+					return browser.OLSKFireKeyboardEvent(browser.window, 'j', {
 						ctrlKey: true,
 					});
 				});
