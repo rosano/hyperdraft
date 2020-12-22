@@ -26,7 +26,7 @@ locals.OLSKPageUseLivereload = process.env.NODE_ENV === 'development';
 
 <p class="OLSKCommonWhatIsIt"><%= OLSKLocalized('OLSKCommonWhatIsItText') %></p>
 
-<a class="KVCVitrineAppButton OLSKCommonButton OLSKCommonButtonPrimary" href="<%= OLSKCanonical('KVCWriteRoute') %>"><%= OLSKLocalized('OLSKWordingOpenApp') %></a>
+<a class="KVCVitrineAppButton OLSKDecorPress OLSKDecorPressCall" href="<%= OLSKCanonical('KVCWriteRoute') %>"><%= OLSKLocalized('OLSKWordingOpenApp') %></a>
 
 <h1 class="KVCVitrineFeaturesHeading"><%= OLSKLocalized('OLSKWordingFeatures') %></h1>
 
@@ -34,7 +34,7 @@ locals.OLSKPageUseLivereload = process.env.NODE_ENV === 'development';
 
 <%- include('../../node_modules/OLSKAppFeatureList/main.ejs').replace(/node_modules/g, '_shared/__external') %>
 
-<a class="KVCVitrineGuideButton OLSKCommonButton OLSKCommonButtonPrimary" href="<%= OLSKCanonical('KVCGuideRoute') %>"><%= OLSKLocalized('OLSKWordingOpenGuide') %></a>
+<a class="KVCVitrineGuideButton OLSKDecorPress OLSKDecorPressCall" href="<%= OLSKCanonical('KVCGuideRoute') %>"><%= OLSKLocalized('OLSKWordingOpenGuide') %></a>
 
 <h1 class="KVCVitrineVideoHeading"><%= OLSKLocalized('OLSKWordingVideo') %></h1>
 

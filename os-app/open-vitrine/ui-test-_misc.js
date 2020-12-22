@@ -44,12 +44,12 @@ describe('KVCVitrine_Misc', function () {
 
 	context('KVCVitrineAppButton', function test_KVCVitrineAppButton () {
 
-		it('classes OLSKCommonButton', function () {
-			browser.assert.hasClass(KVCVitrineAppButton, 'OLSKCommonButton');
+		it('classes OLSKDecorPress', function () {
+			browser.assert.hasClass(KVCVitrineAppButton, 'OLSKDecorPress');
 		});
 		
-		it('classes OLSKCommonButtonPrimary', function () {
-			browser.assert.hasClass(KVCVitrineAppButton, 'OLSKCommonButtonPrimary');
+		it('classes OLSKDecorPressCall', function () {
+			browser.assert.hasClass(KVCVitrineAppButton, 'OLSKDecorPressCall');
 		});
 		
 		it('sets href', function () {
@@ -60,12 +60,12 @@ describe('KVCVitrine_Misc', function () {
 
 	context('KVCVitrineGuideButton', function test_KVCVitrineGuideButton () {
 
-		it('classes OLSKCommonButton', function () {
-			browser.assert.hasClass(KVCVitrineGuideButton, 'OLSKCommonButton');
+		it('classes OLSKDecorPress', function () {
+			browser.assert.hasClass(KVCVitrineGuideButton, 'OLSKDecorPress');
 		});
 		
-		it('classes OLSKCommonButtonPrimary', function () {
-			browser.assert.hasClass(KVCVitrineGuideButton, 'OLSKCommonButtonPrimary');
+		it('classes OLSKDecorPressCall', function () {
+			browser.assert.hasClass(KVCVitrineGuideButton, 'OLSKDecorPressCall');
 		});
 		
 		it('sets href', function () {
