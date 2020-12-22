@@ -2,11 +2,11 @@ KVCWriteDetailToolbarBackButtonText: Back
 KVCWriteDetailToolbarJumpButtonText: Jump
 KVCWriteDetailToolbarArchiveButtonText: Archive
 KVCWriteDetailToolbarUnarchiveButtonText: Unarchive
-KVCWriteDetailToolbarIsRootPageText: (Root page)
+KVCWriteDetailToolbarIsRootPageText: (homepage)
 KVCWriteDetailToolbarPublishButtonText: Publish
 KVCWriteDetailToolbarPublicLinkText: Public
 KVCWriteDetailToolbarRetractButtonText: Retract
 KVCWriteDetailToolbarVersionsButtonText: Versions
 KVCWriteDetailToolbarDiscardButtonText: Discard
 KVCWriteDetailDiscardConfirmText: Are you sure?
-KVCWriteDetailLauncherItemSetAsRootPageText: Set as root page
+KVCWriteDetailLauncherItemSetAsRootPageText: Set as homepage
