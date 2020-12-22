@@ -62,6 +62,10 @@ const mod = {
 			color: var(--KVCBoxForeground);
 		}
 
+		.KVCBox * {
+			max-width: inherit;
+		}
+
 		.KVCBox h1, .KVCBox h2, .KVCBox h3, .KVCBox h4 {
 			font-family: var(--KVCBoxHeadingFontFamily);
 		}
