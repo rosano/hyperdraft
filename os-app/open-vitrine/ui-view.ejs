@@ -34,6 +34,8 @@ locals.OLSKPageUseLivereload = process.env.NODE_ENV === 'development';
 
 <%- include('../../node_modules/OLSKAppFeatureList/main.ejs').replace(/node_modules/g, '_shared/__external') %>
 
+<a class="KVCVitrineGuideButton OLSKCommonButton OLSKCommonButtonPrimary" href="<%= OLSKCanonical('KVCGuideRoute') %>"><%= OLSKLocalized('OLSKWordingOpenGuide') %></a>
+
 <h1 class="KVCVitrineVideoHeading"><%= OLSKLocalized('OLSKWordingVideo') %></h1>
 
 <div class="OLSKCommonVideoList">

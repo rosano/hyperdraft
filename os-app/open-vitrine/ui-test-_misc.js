@@ -58,6 +58,22 @@ describe('KVCVitrine_Misc', function () {
 	
 	});
 
+	context('KVCVitrineGuideButton', function test_KVCVitrineGuideButton () {
+
+		it('classes OLSKCommonButton', function () {
+			browser.assert.hasClass(KVCVitrineGuideButton, 'OLSKCommonButton');
+		});
+		
+		it('classes OLSKCommonButtonPrimary', function () {
+			browser.assert.hasClass(KVCVitrineGuideButton, 'OLSKCommonButtonPrimary');
+		});
+		
+		it('sets href', function () {
+			browser.assert.attribute(KVCVitrineGuideButton, 'href', OLSKTestingCanonical(require('../open-guide/controller.js').OLSKControllerRoutes().shift()));
+		});
+	
+	});
+
 	describe('KVCVitrineVideo1', function () {
 
 		it('sets src', function () {
