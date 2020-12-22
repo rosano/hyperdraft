@@ -1,4 +1,4 @@
-<div class="OLSKCommonNotice">
+<div class="OLSKDecorNotice">
 
 This document is a work-in-progress. Feel free to reach out on [Mastodon](https://merveilles.town/@rosano) or [Twitter](https://twitter.com/rosano).
 
@@ -18,7 +18,7 @@ On the left side of the interface, you can create, search, and select notes. On 
 
 If you're on a mobile device, clicking an item in the list (left), shows you the details (right).
 
-<div class="OLSKCommonNotice">
+<div class="OLSKDecorNotice">
 
 Editing the same note on multiple devices at the same time can result in data loss. Editing different notes does note have this issue.
 
@@ -104,7 +104,7 @@ After setting up a custom domain, designate any note as the home page with the `
 
 # Shortcuts
 
-<div class="OLSKCommonNotice">
+<div class="OLSKDecorNotice">
 
 *AccessKey* refers to a one or more shortcut keys followed by a single character. Usually it's `Alt` on Windows or `Control+Alt` on macOS, but it changes [based on your browser and operating system](https://www.w3schools.com/tags/att_global_accesskey.asp#table2).
 
