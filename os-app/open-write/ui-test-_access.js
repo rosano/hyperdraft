@@ -61,6 +61,10 @@ describe('KVCWrite_Access', function () {
 		browser.assert.elements('.OLSKAppToolbarLanguageButton', 1);
 	});
 
+	it('shows OLSKAppToolbarGuideLink', function () {
+		browser.assert.elements('.OLSKAppToolbarGuideLink', 1);
+	});
+
 	it('shows OLSKAppToolbarFundButton', function () {
 		browser.assert.elements('.OLSKAppToolbarFundButton', 1);
 	});
