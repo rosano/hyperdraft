@@ -8,12 +8,7 @@ exports.OLSKControllerRoutes = function() {
 		OLSKRouteMethod: 'get',
 		OLSKRouteSignature: 'KVCVitrineRoute',
 		OLSKRouteFunction (req, res, next) {
-			return res.OLSKLayoutRender(require('path').join(__dirname, 'ui-view'), {
-				KVCVitrineContent: res.OLSKMarkdownContent(require('path').join(__dirname, `text.${ res.locals.OLSKSharedPageCurrentLanguage }.md`), {
-					KVCVitrineTokenWriteURL: res.locals.OLSKCanonical('KVCWriteRoute'),
-				}),
-				OLSKStringReplaceTokens: require('OLSKString').OLSKStringReplaceTokens,
-			});
+			return res.OLSKLayoutRender(require('path').join(__dirname, 'ui-view'));
 		},
 		OLSKRouteLanguageCodes: ['en'],
 	}];
