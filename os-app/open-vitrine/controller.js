@@ -8,7 +8,7 @@ exports.OLSKControllerRoutes = function() {
 		OLSKRouteMethod: 'get',
 		OLSKRouteSignature: 'KVCVitrineRoute',
 		OLSKRouteFunction (req, res, next) {
-			return res.OLSKLayoutRender(require('path').join(__dirname, 'ui-view'));
+			return res.OLSKExpressLayoutRender(require('path').join(__dirname, 'ui-view'));
 		},
 		OLSKRouteLanguageCodes: ['en'],
 	}];

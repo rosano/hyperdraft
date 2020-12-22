@@ -610,12 +610,12 @@ describe('KVCWrite_Misc', function () {
 
 	describe('KVCWriteStorageExportButton', function test_KVCWriteStorageExportButton () {
 		
-		it('classes OLSKLayoutElementTappable', function () {
-			browser.assert.hasClass(KVCWriteStorageExportButton, 'OLSKLayoutElementTappable');
+		it('classes OLSKDecorTappable', function () {
+			browser.assert.hasClass(KVCWriteStorageExportButton, 'OLSKDecorTappable');
 		});
 		
-		it('classes OLSKLayoutButtonNoStyle', function () {
-			browser.assert.hasClass(KVCWriteStorageExportButton, 'OLSKLayoutButtonNoStyle');
+		it('classes OLSKDecorButtonNoStyle', function () {
+			browser.assert.hasClass(KVCWriteStorageExportButton, 'OLSKDecorButtonNoStyle');
 		});
 
 	});

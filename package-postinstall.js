@@ -20,7 +20,7 @@
 		'normalize.css',
 		'OLSKInternational',
 		'OLSKLanguageSwitcher',
-		'OLSKLayout',
+		'OLSKDecor',
 		'OLSKRootLink',
 		'OLSKRouting',
 		'OLSKServiceWorker',

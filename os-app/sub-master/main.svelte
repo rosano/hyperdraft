@@ -69,7 +69,7 @@ import KVCWriteMasterListItem from './submodules/KVCWriteMasterListItem/main.sve
 	>
 	<div slot="OLSKMasterListToolbarTail">
 		<div class="OLSKToolbarElementGroup">
-			<button class="KVCWriteMasterCreateButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteMasterCreateButtonText') } on:click={ mod.InterfaceCreateButtonDidClick } accesskey="n">
+			<button class="KVCWriteMasterCreateButton OLSKDecorButtonNoStyle OLSKDecorTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteMasterCreateButtonText') } on:click={ mod.InterfaceCreateButtonDidClick } accesskey="n">
 				<div class="KVCWriteMasterCreateButtonImage">{@html _OLSKSharedCreate }</div>
 			</button>
 		</div>

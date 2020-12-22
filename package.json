@@ -55,10 +55,10 @@
 
     "// FRONTEND NORMALIZE CSS": null,
     "normalize.css": "latest",
-    "OLSKLayout": "olsk/OLSKLayout",
+    "OLSKDecor": "olsk/OLSKDecor",
 
     "// FRONTEND APP LAYOUT": null,
-    "OLSKLayout": "olsk/OLSKLayout",
+    "OLSKDecor": "olsk/OLSKDecor",
     "OLSKMasterList": "olsk/OLSKMasterList",
     "OLSKResults": "olsk/OLSKResults",
     "OLSKDetailPlaceholder": "olsk/OLSKDetailPlaceholder",

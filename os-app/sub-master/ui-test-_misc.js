@@ -162,12 +162,12 @@ describe('KVCWriteMaster_Misc', function () {
 			return browser.OLSKVisit(kDefaultRoute);
 		});
 
-		it('classes OLSKLayoutButtonNoStyle', function () {
-			browser.assert.hasClass(KVCWriteMasterCreateButton, 'OLSKLayoutButtonNoStyle');
+		it('classes OLSKDecorButtonNoStyle', function () {
+			browser.assert.hasClass(KVCWriteMasterCreateButton, 'OLSKDecorButtonNoStyle');
 		});
 
-		it('classes OLSKLayoutElementTappable', function () {
-			browser.assert.hasClass(KVCWriteMasterCreateButton, 'OLSKLayoutElementTappable');
+		it('classes OLSKDecorTappable', function () {
+			browser.assert.hasClass(KVCWriteMasterCreateButton, 'OLSKDecorTappable');
 		});
 
 		it('classes OLSKToolbarButton', function () {

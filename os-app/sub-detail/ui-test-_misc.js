@@ -70,12 +70,12 @@ describe('KVCWriteDetail_Misc', function () {
 
 	describe('KVCWriteDetailToolbarBackButton', function test_KVCWriteDetailToolbarBackButton () {
 		
-		it('classes OLSKLayoutButtonNoStyle', function () {
-			browser.assert.hasClass(KVCWriteDetailToolbarBackButton, 'OLSKLayoutButtonNoStyle');
+		it('classes OLSKDecorButtonNoStyle', function () {
+			browser.assert.hasClass(KVCWriteDetailToolbarBackButton, 'OLSKDecorButtonNoStyle');
 		});
 
-		it('classes OLSKLayoutElementTappable', function () {
-			browser.assert.hasClass(KVCWriteDetailToolbarBackButton, 'OLSKLayoutElementTappable');
+		it('classes OLSKDecorTappable', function () {
+			browser.assert.hasClass(KVCWriteDetailToolbarBackButton, 'OLSKDecorTappable');
 		});
 
 		it('classes OLSKToolbarButton', function () {
@@ -114,12 +114,12 @@ describe('KVCWriteDetail_Misc', function () {
 
 	describe('KVCWriteDetailToolbarJumpButton', function test_KVCWriteDetailToolbarJumpButton () {
 		
-		it('classes OLSKLayoutButtonNoStyle', function () {
-			browser.assert.hasClass(KVCWriteDetailToolbarJumpButton, 'OLSKLayoutButtonNoStyle');
+		it('classes OLSKDecorButtonNoStyle', function () {
+			browser.assert.hasClass(KVCWriteDetailToolbarJumpButton, 'OLSKDecorButtonNoStyle');
 		});
 
-		it('classes OLSKLayoutElementTappable', function () {
-			browser.assert.hasClass(KVCWriteDetailToolbarJumpButton, 'OLSKLayoutElementTappable');
+		it('classes OLSKDecorTappable', function () {
+			browser.assert.hasClass(KVCWriteDetailToolbarJumpButton, 'OLSKDecorTappable');
 		});
 
 		it('classes OLSKToolbarButton', function () {
@@ -207,12 +207,12 @@ describe('KVCWriteDetail_Misc', function () {
 
 	describe('KVCWriteDetailToolbarArchiveButton', function test_KVCWriteDetailToolbarArchiveButton () {
 		
-		it('classes OLSKLayoutButtonNoStyle', function () {
-			browser.assert.hasClass(KVCWriteDetailToolbarArchiveButton, 'OLSKLayoutButtonNoStyle');
+		it('classes OLSKDecorButtonNoStyle', function () {
+			browser.assert.hasClass(KVCWriteDetailToolbarArchiveButton, 'OLSKDecorButtonNoStyle');
 		});
 
-		it('classes OLSKLayoutElementTappable', function () {
-			browser.assert.hasClass(KVCWriteDetailToolbarArchiveButton, 'OLSKLayoutElementTappable');
+		it('classes OLSKDecorTappable', function () {
+			browser.assert.hasClass(KVCWriteDetailToolbarArchiveButton, 'OLSKDecorTappable');
 		});
 
 		it('classes OLSKToolbarButton', function () {
@@ -255,12 +255,12 @@ describe('KVCWriteDetail_Misc', function () {
 			});
 		});
 
-		it('classes OLSKLayoutButtonNoStyle', function () {
-			browser.assert.hasClass(KVCWriteDetailToolbarUnarchiveButton, 'OLSKLayoutButtonNoStyle');
+		it('classes OLSKDecorButtonNoStyle', function () {
+			browser.assert.hasClass(KVCWriteDetailToolbarUnarchiveButton, 'OLSKDecorButtonNoStyle');
 		});
 
-		it('classes OLSKLayoutElementTappable', function () {
-			browser.assert.hasClass(KVCWriteDetailToolbarUnarchiveButton, 'OLSKLayoutElementTappable');
+		it('classes OLSKDecorTappable', function () {
+			browser.assert.hasClass(KVCWriteDetailToolbarUnarchiveButton, 'OLSKDecorTappable');
 		});
 
 		it('classes OLSKToolbarButton', function () {
@@ -295,12 +295,12 @@ describe('KVCWriteDetail_Misc', function () {
 
 	describe('KVCWriteDetailToolbarConnectButton', function test_KVCWriteDetailToolbarConnectButton () {
 		
-		it('classes OLSKLayoutButtonNoStyle', function () {
-			browser.assert.hasClass(KVCWriteDetailToolbarConnectButton, 'OLSKLayoutButtonNoStyle');
+		it('classes OLSKDecorButtonNoStyle', function () {
+			browser.assert.hasClass(KVCWriteDetailToolbarConnectButton, 'OLSKDecorButtonNoStyle');
 		});
 
-		it('classes OLSKLayoutElementTappable', function () {
-			browser.assert.hasClass(KVCWriteDetailToolbarConnectButton, 'OLSKLayoutElementTappable');
+		it('classes OLSKDecorTappable', function () {
+			browser.assert.hasClass(KVCWriteDetailToolbarConnectButton, 'OLSKDecorTappable');
 		});
 
 		it('classes OLSKToolbarButton', function () {
@@ -362,12 +362,12 @@ describe('KVCWriteDetail_Misc', function () {
 			});
 		});
 
-		it('classes OLSKLayoutButtonNoStyle', function () {
-			browser.assert.hasClass(KVCWriteDetailToolbarPublishButton, 'OLSKLayoutButtonNoStyle');
+		it('classes OLSKDecorButtonNoStyle', function () {
+			browser.assert.hasClass(KVCWriteDetailToolbarPublishButton, 'OLSKDecorButtonNoStyle');
 		});
 
-		it('classes OLSKLayoutElementTappable', function () {
-			browser.assert.hasClass(KVCWriteDetailToolbarPublishButton, 'OLSKLayoutElementTappable');
+		it('classes OLSKDecorTappable', function () {
+			browser.assert.hasClass(KVCWriteDetailToolbarPublishButton, 'OLSKDecorTappable');
 		});
 
 		it('classes OLSKToolbarButton', function () {
@@ -425,12 +425,12 @@ describe('KVCWriteDetail_Misc', function () {
 
 	describe('KVCWriteDetailToolbarRetractButton', function test_KVCWriteDetailToolbarRetractButton () {
 
-		it('classes OLSKLayoutButtonNoStyle', function () {
-			browser.assert.hasClass(KVCWriteDetailToolbarRetractButton, 'OLSKLayoutButtonNoStyle');
+		it('classes OLSKDecorButtonNoStyle', function () {
+			browser.assert.hasClass(KVCWriteDetailToolbarRetractButton, 'OLSKDecorButtonNoStyle');
 		});
 
-		it('classes OLSKLayoutElementTappable', function () {
-			browser.assert.hasClass(KVCWriteDetailToolbarRetractButton, 'OLSKLayoutElementTappable');
+		it('classes OLSKDecorTappable', function () {
+			browser.assert.hasClass(KVCWriteDetailToolbarRetractButton, 'OLSKDecorTappable');
 		});
 
 		it('classes OLSKToolbarButton', function () {
@@ -471,12 +471,12 @@ describe('KVCWriteDetail_Misc', function () {
 			});
 		});
 		
-		it('classes OLSKLayoutButtonNoStyle', function () {
-			browser.assert.hasClass(KVCWriteDetailToolbarVersionsButton, 'OLSKLayoutButtonNoStyle');
+		it('classes OLSKDecorButtonNoStyle', function () {
+			browser.assert.hasClass(KVCWriteDetailToolbarVersionsButton, 'OLSKDecorButtonNoStyle');
 		});
 
-		it('classes OLSKLayoutElementTappable', function () {
-			browser.assert.hasClass(KVCWriteDetailToolbarVersionsButton, 'OLSKLayoutElementTappable');
+		it('classes OLSKDecorTappable', function () {
+			browser.assert.hasClass(KVCWriteDetailToolbarVersionsButton, 'OLSKDecorTappable');
 		});
 
 		it('classes OLSKToolbarButton', function () {
@@ -511,12 +511,12 @@ describe('KVCWriteDetail_Misc', function () {
 
 	describe('KVCWriteDetailToolbarDiscardButton', function test_KVCWriteDetailToolbarDiscardButton () {
 		
-		it('classes OLSKLayoutButtonNoStyle', function () {
-			browser.assert.hasClass(KVCWriteDetailToolbarDiscardButton, 'OLSKLayoutButtonNoStyle');
+		it('classes OLSKDecorButtonNoStyle', function () {
+			browser.assert.hasClass(KVCWriteDetailToolbarDiscardButton, 'OLSKDecorButtonNoStyle');
 		});
 
-		it('classes OLSKLayoutElementTappable', function () {
-			browser.assert.hasClass(KVCWriteDetailToolbarDiscardButton, 'OLSKLayoutElementTappable');
+		it('classes OLSKDecorTappable', function () {
+			browser.assert.hasClass(KVCWriteDetailToolbarDiscardButton, 'OLSKDecorTappable');
 		});
 
 		it('classes OLSKToolbarButton', function () {

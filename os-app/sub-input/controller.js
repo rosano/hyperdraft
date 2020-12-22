@@ -4,7 +4,7 @@ exports.OLSKControllerRoutes = function() {
 		OLSKRouteMethod: 'get',
 		OLSKRouteSignature: 'KVCWriteInputStubRoute',
 		OLSKRouteFunction (req, res, next) {
-			return res.OLSKLayoutRender(require('path').join(__dirname, 'stub-view'));
+			return res.OLSKExpressLayoutRender(require('path').join(__dirname, 'stub-view'));
 		},
 	}];
 };
