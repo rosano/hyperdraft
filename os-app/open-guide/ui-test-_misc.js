@@ -8,12 +8,12 @@ describe('KVCGuide_Misc', function () {
 
 	context('KVCGuide', function () {
 		
-		it('classes OLSKCommon', function () {
-			browser.assert.hasClass(KVCGuide, 'OLSKCommon');
+		it('classes OLSKDecor', function () {
+			browser.assert.hasClass(KVCGuide, 'OLSKDecor');
 		});
 
-		it('classes OLSKCommonCapped', function () {
-			browser.assert.hasClass(KVCGuide, 'OLSKCommonCapped');
+		it('classes OLSKDecorCapped', function () {
+			browser.assert.hasClass(KVCGuide, 'OLSKDecorCapped');
 		});
 	
 	});

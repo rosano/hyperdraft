@@ -8,12 +8,12 @@ describe('KVCVitrine_Misc', function () {
 
 	describe('KVCVitrine', function () {
 		
-		it('classes OLSKCommon', function () {
-			browser.assert.hasClass(KVCVitrine, 'OLSKCommon');
+		it('classes OLSKDecor', function () {
+			browser.assert.hasClass(KVCVitrine, 'OLSKDecor');
 		});
 
-		it('classes OLSKCommonCapped', function () {
-			browser.assert.hasClass(KVCVitrine, 'OLSKCommonCapped');
+		it('classes OLSKDecorCapped', function () {
+			browser.assert.hasClass(KVCVitrine, 'OLSKDecorCapped');
 		});
 	
 	});
