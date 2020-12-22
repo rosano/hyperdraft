@@ -39,66 +39,14 @@ const mod = {
 <html>
 <head>
 	<title>{${ mod.KVCTemplateTokenPostTitle() }}</title>
-	<style type="text/css">
-		:root {
-			--KVCBoxFontFamily: 'Lucida Grande', sans-serif;
-			--KVCBoxFontSize: 10.5pt;
-
-			--KVCBoxHeadingFontFamily: 'Helvetica Neue';
-
-			--KVCBoxBackground: white;
-			--KVCBoxForeground: black;
-		}
-
-		.KVCBox {
-			padding: 10px;
-			max-width: 400px;
-
-			margin: auto;
-
-			background: var(--KVCBoxBackground);
-			font-family: var(--KVCBoxFontFamily);
-			font-size: var(--KVCBoxFontSize);
-			color: var(--KVCBoxForeground);
-		}
-
-		.KVCBox * {
-			max-width: inherit;
-		}
-
-		.KVCBox h1, .KVCBox h2, .KVCBox h3, .KVCBox h4 {
-			font-family: var(--KVCBoxHeadingFontFamily);
-		}
-
-		.KVCBox ul {
-			padding-left: 30px;
-		}
-
-		.KVCBox hr {
-			height: 1px;
-			border: none;
-
-			background: var(--KVCBoxForeground);
-		}
-
-		.KVCBox code {
-			display: inline-block;
-			padding: 3px;
-
-			background: hsl(0, 0%, 94%);
-			color: hsl(0, 0%, 20%);
-		}
-
-		.KVCBacklinksSnippet {
-			opacity: 0.7;
-			font-size: 9pt;
-		}
-	</style>
 
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="width=device-width" />
+
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.css">
+	<link rel="stylesheet" type="text/css" href="https://ghcdn.rawgit.org/olsk/OLSKDecor/master/ui-style.css">
 </head>
-<body class="KVCBox">
+<body class="OLSKDecor OLSKDecorCapped">
 
 {block:${ mod.KVCTemplateTokenNotePage() }}
 <a class="KVCRootLink" href="{${ mod.KVCTemplateTokenRootURL() }}">${ inputData('KVCRootLinkText') }</a>
@@ -106,7 +54,11 @@ const mod = {
 <hr role="presentation" />
 {/block:${ mod.KVCTemplateTokenNotePage() }}
 
-<h1 class="KVCArticleTitle">{${ mod.KVCTemplateTokenPostTitle() }}</h1>
+<div class="OLSKCommonCard OLSKCommonCrownCard">
+	<section>
+		<span class="KVCArticleTitle">{${ mod.KVCTemplateTokenPostTitle() }}</span>
+	</section>
+</div>
 
 <article class="KVCArticleBody">
 

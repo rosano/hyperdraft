@@ -38,8 +38,12 @@ describe('KVCTemplate_Misc', function () {
 
 	describe('KVCTemplateBody', function test_KVCTemplateBody() {
 
-		it('classes body', function () {
-			browser.assert.hasClass(KVCTemplateBody, 'KVCBox');
+		it('classes OLSKDecor', function () {
+			browser.assert.hasClass(KVCTemplateBody, 'OLSKDecor');
+		});
+
+		it('classes OLSKDecorCapped', function () {
+			browser.assert.hasClass(KVCTemplateBody, 'OLSKDecorCapped');
 		});
 
 	});
