@@ -34,8 +34,8 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 			browser.assert.text('.OLSKCommonWhatIsIt', uLocalized('OLSKCommonWhatIsItText'));
 		});
 
-		it('localizes KVCVitrineContentAppButton', function () {
-			browser.assert.text(KVCVitrineContentAppButton, uLocalized('OLSKWordingOpenApp'));
+		it('localizes KVCVitrineAppButton', function () {
+			browser.assert.text(KVCVitrineAppButton, uLocalized('OLSKWordingOpenApp'));
 		});
 
 		it('localizes KVCVitrineFeaturesHeading', function () {
@@ -54,18 +54,18 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 			browser.assert.text(KVCVitrineSupportBlurb, uLocalized('OLSKWordingSupportBlurb'));
 		});
 
-		context('KVCVitrineContentAppButton', function test_KVCVitrineContentAppButton () {
+		context('KVCVitrineAppButton', function test_KVCVitrineAppButton () {
 
 			it('classes OLSKCommonButton', function () {
-				browser.assert.hasClass(KVCVitrineContentAppButton, 'OLSKCommonButton');
+				browser.assert.hasClass(KVCVitrineAppButton, 'OLSKCommonButton');
 			});
 			
 			it('classes OLSKCommonButtonPrimary', function () {
-				browser.assert.hasClass(KVCVitrineContentAppButton, 'OLSKCommonButtonPrimary');
+				browser.assert.hasClass(KVCVitrineAppButton, 'OLSKCommonButtonPrimary');
 			});
 			
 			it('sets href', function () {
-				browser.assert.attribute(KVCVitrineContentAppButton, 'href', OLSKTestingCanonical(require('../open-write/controller.js').OLSKControllerRoutes().shift()));
+				browser.assert.attribute(KVCVitrineAppButton, 'href', OLSKTestingCanonical(require('../open-write/controller.js').OLSKControllerRoutes().shift()));
 			});
 		
 		});
