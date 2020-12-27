@@ -51,11 +51,11 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 		});
 
 		it('localizes KVCVitrineSupportHeading', function () {
-			browser.assert.text(KVCVitrineSupportHeading, uLocalized('OLSKWordingSupportHeading'));
+			browser.assert.text(KVCVitrineSupportHeading, uLocalized('OLSKWordingFeedbackHeading'));
 		});
 
 		it('localizes KVCVitrineSupportBlurb', function () {
-			browser.assert.text(KVCVitrineSupportBlurb, uLocalized('OLSKWordingSupportBlurb'));
+			browser.assert.text(KVCVitrineSupportBlurb, uLocalized('OLSKWordingFeedbackBlurb'));
 		});
 
 	});
