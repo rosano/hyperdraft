@@ -46,6 +46,10 @@ describe('KVCTemplate_Misc', function () {
 			browser.assert.hasClass(KVCTemplateBody, 'OLSKDecorCapped');
 		});
 
+		it('classes OLSKDecorX', function () {
+			browser.assert.hasClass(KVCTemplateBody, 'OLSKDecorX');
+		});
+
 	});
 
 	describe('KVCRootLink', function test_KVCRootLink() {

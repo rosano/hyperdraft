@@ -49,7 +49,7 @@ const mod = {
 <link rel="stylesheet" type="text/css" href="https://ghcdn.rawgit.org/olsk/OLSKDecor/master/ui-style.css">
 
 </head>
-<body class="OLSKDecor OLSKDecorCapped">
+<body class="OLSKDecor OLSKDecorCapped OLSKDecorX">
 
 {block:${ mod.KVCTemplateTokenNotePage() }}
 <a class="KVCRootLink" href="{${ mod.KVCTemplateTokenRootURL() }}">${ inputData('KVCRootLinkText') }</a>
