@@ -140,8 +140,8 @@ const mod = {
 			throw new Error('KVCErrorInputNotValid');
 		}
 
-		return Object.entries(param2).reduce(function (coll, e) {
-			return coll.split(`[[${ e[0] }]]`).join(`[${ e[0] }](${ e[1] })`);
+		return Object.entries(param2).reduce(function (coll, [key, value]) {
+			return coll.split(`[[${ key }]]`).join(`[${ key }](${ value })`);
 		}, param1);
 	},
 
