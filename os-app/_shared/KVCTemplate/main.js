@@ -38,13 +38,15 @@ const mod = {
 		return `<!DOCTYPE html>
 <html>
 <head>
-	<title>{${ mod.KVCTemplateTokenPostTitle() }}</title>
 
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="viewport" content="width=device-width" />
+<title>{${ mod.KVCTemplateTokenPostTitle() }}</title>
 
-	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.css">
-	<link rel="stylesheet" type="text/css" href="https://ghcdn.rawgit.org/olsk/OLSKDecor/master/ui-style.css">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width" />
+
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.css">
+<link rel="stylesheet" type="text/css" href="https://ghcdn.rawgit.org/olsk/OLSKDecor/master/ui-style.css">
+
 </head>
 <body class="OLSKDecor OLSKDecorCapped">
 
