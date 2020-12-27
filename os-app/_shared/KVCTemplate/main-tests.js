@@ -308,7 +308,15 @@ describe('KVCTemplateHTML', function test_KVCTemplateHTML() {
 	});
 
 	it('converts www domains to links', function() {
-		deepEqual(mod.KVCTemplateHTML('www.alfa.com'), '<p><a href="http://www.alfa.com">www.alfa.com</a></p>');
+		deepEqual(mod.KVCTemplateHTML('www.alfa.com'), '<p><a target="_blank" href="http://www.alfa.com">www.alfa.com</a></p>');
+	});
+
+	it('converts internal link to a', function() {
+		deepEqual(mod.KVCTemplateHTML('[alfa](bravo)'), '<p><a href="bravo">alfa</a></p>');
+	});
+
+	it('adds target blank to external links', function() {
+		deepEqual(mod.KVCTemplateHTML('[alfa](https://example.com)'), '<p><a target="_blank" href="https://example.com">alfa</a></p>');
 	});
 
 });

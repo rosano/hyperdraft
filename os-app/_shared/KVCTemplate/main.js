@@ -153,10 +153,17 @@ const mod = {
 			throw new Error('KVCErrorInputNotValid');
 		}
 
+		const renderer = new marked.Renderer();
+		renderer.link = function(href, title, text) {
+			const _default = marked.Renderer.prototype.link.apply(this, arguments);
+			return href.match(/^http/) ? _default.replace('<a','<a target="_blank"') : _default;
+		};
+
 		return marked.setOptions({
 			gfm: true,
 			headerIds: false,
 			breaks: true,
+			renderer,
 		})(inputData).trim();
 	},
 
