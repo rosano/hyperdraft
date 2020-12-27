@@ -82,7 +82,7 @@ import KVCWriteMasterListItem from './submodules/KVCWriteMasterListItem/main.sve
 		/>
 
 	<div class="OLSKMasterListBodyTail" slot="OLSKMasterListBodyTail">{#if KVCWriteMasterRevealArchiveIsVisible }
-		<button class="KVCWriteMasterRevealArchiveButton" on:click={ KVCWriteMasterDispatchRevealArchive }>{ OLSKLocalized('KVCWriteMasterRevealArchiveButtonText') }</button>
+		<button class="KVCWriteMasterRevealArchiveButton OLSKDecorPress" on:click={ KVCWriteMasterDispatchRevealArchive }>{ OLSKLocalized('KVCWriteMasterRevealArchiveButtonText') }</button>
 	{/if}</div>
 </OLSKMasterList>	
 

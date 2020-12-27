@@ -279,13 +279,17 @@ describe('KVCWriteMaster_Misc', function () {
 		
 	});
 
-	context('KVCWriteMasterRevealArchiveButton', function() {
+	describe('KVCWriteMasterRevealArchiveButton', function test_KVCWriteMasterRevealArchiveButton () {
 		
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
 				KVCWriteMasterListItems: JSON.stringify([]),
 				KVCWriteMasterRevealArchiveIsVisible: true,
 			});
+		});
+
+		it('classes OLSKDecorPress', function () {
+			browser.assert.hasClass(KVCWriteMasterRevealArchiveButton, 'OLSKDecorPress');
 		});
 
 		context('click', function () {
