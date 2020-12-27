@@ -1,4 +1,5 @@
 import OLSKString from 'OLSKString';
+import marked from 'marked';
 
 const uTokenTag = function (inputData) {
 	return `{${ mod[inputData]() }}`;
@@ -147,28 +148,19 @@ const mod = {
 		}, param1);
 	},
 
-	KVCTemplateHTML (showdown, inputData) {
-		if (typeof showdown.Converter !== 'function') {
-			throw new Error('KVCErrorInputNotValid');
-		}
-		
+	KVCTemplateHTML (inputData) {
 		if (typeof inputData !== 'string') {
 			throw new Error('KVCErrorInputNotValid');
 		}
 
-		const showdownConverter = new showdown.Converter();
-		showdownConverter.setOption('simpleLineBreaks', true);
-		showdownConverter.setOption('simplifiedAutoLink', true);
-		showdownConverter.setOption('noHeaderId', true);
-
-		return showdownConverter.makeHtml(inputData);
+		return marked.setOptions({
+			gfm: true,
+			headerIds: false,
+			breaks: true,
+		})(inputData).trim();
 	},
 
-	KVCTemplateTokensMap (showdown, body, options) {
-		if (typeof showdown.Converter !== 'function') {
-			throw new Error('KVCErrorInputNotValid');
-		}
-		
+	KVCTemplateTokensMap (body, options) {
 		if (typeof body !== 'string') {
 			throw new Error('KVCErrorInputNotValid');
 		}
@@ -179,7 +171,7 @@ const mod = {
 
 		return Object.fromEntries([
 			[mod.KVCTemplateTokenPostTitle(), mod.KVCTemplatePlaintextTitle(body)],
-			[mod.KVCTemplateTokenPostBody(), mod.KVCTemplateHTML(showdown, mod.KVCTemplatePlaintextBody(body))],
+			[mod.KVCTemplateTokenPostBody(), mod.KVCTemplateHTML(mod.KVCTemplatePlaintextBody(body))],
 			[mod.KVCTemplateTokenRootURL(), options.KVCOptionRootURL],
 			[mod.KVCTemplateTokenRootURLLegacy(), options.KVCOptionRootURL],
 		].map(function (e) {
@@ -228,10 +220,6 @@ const mod = {
 			throw new Error('KVCErrorInputNotValid');
 		}
 
-		if (typeof inputData.KVCBlockTemplateShowdown.Converter !== 'function') {
-			throw new Error('KVCErrorInputNotValid');
-		}
-
 		const outputData = {};
 
 		if (inputData.KVCBlockTemplateOptions.KVCOptionBacklinks) {
@@ -243,7 +231,7 @@ const mod = {
 				outputData[uTokenTag('KVCTemplateTokenURL')] = inputData.KVCBlockPermalinkMap[mod.KVCTemplatePlaintextTitle(e.KVCNoteBody)];
 				
 				const body = mod.KVCTemplatePlaintextBody(e.KVCNoteBody);
-				outputData[uTokenTag('KVCTemplateTokenDescription')] = OLSKString.OLSKStringSnippet(mod.KVCTemplateTextContent(mod.KVCTemplateHTML(inputData.KVCBlockTemplateShowdown, (body.match(/\[\[.*\]\]/g) || []).reduce(function (coll, item) {
+				outputData[uTokenTag('KVCTemplateTokenDescription')] = OLSKString.OLSKStringSnippet(mod.KVCTemplateTextContent(mod.KVCTemplateHTML((body.match(/\[\[.*\]\]/g) || []).reduce(function (coll, item) {
 					return coll.split(item).join(item.match(/\[\[(.*)\]\]/)[1]);
 				}, body))));
 
@@ -320,11 +308,7 @@ const mod = {
 		return outputData;
 	},
 
-	KVCView (showdown, inputData) {
-		if (typeof showdown.Converter !== 'function') {
-			throw new Error('KVCErrorInputNotValid');
-		}
-		
+	KVCView (inputData) {
 		if (typeof inputData !== 'object' || inputData === null) {
 			throw new Error('KVCErrorInputNotValid');
 		}
@@ -348,8 +332,7 @@ const mod = {
 		return OLSKString.OLSKStringReplaceTokens(mod.KVCTemplateCollapseBlocks(inputData.KVCViewTemplate, mod.KVCTemplateVisibleBlocks(inputData.KVCViewTemplateOptions), {
 			KVCBlockPermalinkMap: inputData.KVCViewPermalinkMap,
 			KVCBlockTemplateOptions: inputData.KVCViewTemplateOptions,
-			KVCBlockTemplateShowdown: showdown,
-		}), mod.KVCTemplateTokensMap(showdown, mod.KVCTemplateRemappedLinks(inputData.KVCViewSource, inputData.KVCViewPermalinkMap), inputData.KVCViewTemplateOptions))
+		}), mod.KVCTemplateTokensMap(mod.KVCTemplateRemappedLinks(inputData.KVCViewSource, inputData.KVCViewPermalinkMap), inputData.KVCViewTemplateOptions))
 	},
 
 };

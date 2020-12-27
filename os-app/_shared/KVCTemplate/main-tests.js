@@ -2,8 +2,6 @@ const { throws, deepEqual } = require('assert');
 
 const mod = require('./main.js').default;
 
-const showdown = require('showdown');
-
 const uTokenTag = function (inputData) {
 	return `{${ mod[inputData]() }}`;
 };
@@ -281,73 +279,57 @@ describe('KVCTemplateRemappedLinks', function test_KVCTemplateRemappedLinks() {
 
 describe('KVCTemplateHTML', function test_KVCTemplateHTML() {
 
-	it('throws if showdown missing', function() {
+	it('throws if not string', function() {
 		throws(function() {
-			mod.KVCTemplateHTML({
-				Converter: null,
-			}, '');
-		}, /KVCErrorInputNotValid/);
-	});
-
-	it('throws if param1 not string', function() {
-		throws(function() {
-			mod.KVCTemplateHTML(showdown, null);
+			mod.KVCTemplateHTML(null);
 		}, /KVCErrorInputNotValid/);
 	});
 
 	it('returns string as p', function() {
-		deepEqual(mod.KVCTemplateHTML(showdown, 'alfa'), '<p>alfa</p>');
+		deepEqual(mod.KVCTemplateHTML('alfa'), '<p>alfa</p>');
 	});
 
 	it('converts simple headers without anchors', function() {
-		deepEqual(mod.KVCTemplateHTML(showdown, '# alfa'), '<h1>alfa</h1>');
+		deepEqual(mod.KVCTemplateHTML('# alfa'), '<h1>alfa</h1>');
 	});
 
 	it('converts single newline as br', function() {
-		deepEqual(mod.KVCTemplateHTML(showdown, 'alfa\nbravo'), '<p>alfa<br />\nbravo</p>');
+		deepEqual(mod.KVCTemplateHTML('alfa\nbravo'), '<p>alfa<br>bravo</p>');
 	});
 
 	it('converts double newline as p', function() {
-		deepEqual(mod.KVCTemplateHTML(showdown, 'alfa\n\nbravo'), '<p>alfa</p>\n<p>bravo</p>');
+		deepEqual(mod.KVCTemplateHTML('alfa\n\nbravo'), '<p>alfa</p>\n<p>bravo</p>');
 	});
 
 	it('converts www domains to links', function() {
-		deepEqual(mod.KVCTemplateHTML(showdown, 'www.alfa.com'), '<p><a href="http://www.alfa.com">www.alfa.com</a></p>');
+		deepEqual(mod.KVCTemplateHTML('www.alfa.com'), '<p><a href="http://www.alfa.com">www.alfa.com</a></p>');
 	});
 
 });
 
 describe('KVCTemplateTokensMap', function test_KVCTemplateTokensMap() {
 
-	it('throws if showdown missing', function() {
-		throws(function() {
-			mod.KVCTemplateTokensMap({
-				Converter: null,
-			}, '', {});
-		}, /KVCErrorInputNotValid/);
-	});
-
 	it('throws if param1 not string', function () {
 		throws(function () {
-			mod.KVCTemplateTokensMap(showdown, null, {})
+			mod.KVCTemplateTokensMap(null, {})
 		}, /KVCErrorInputNotValid/);
 	});
 
 	it('throws if param2 not object', function () {
 		throws(function () {
-			mod.KVCTemplateTokensMap(showdown, '', null)
+			mod.KVCTemplateTokensMap('', null)
 		}, /KVCErrorInputNotValid/);
 	});
 
 	it('returns object', function() {
-		deepEqual(typeof mod.KVCTemplateTokensMap(showdown, '', {}), 'object');
+		deepEqual(typeof mod.KVCTemplateTokensMap('', {}), 'object');
 	});
 
 	context('KVCTemplateTokenPostTitle', function () {
 		
 		it('sets to KVCTemplatePlaintextTitle', function () {
 			const item = 'alfa\nbravo';
-			deepEqual(mod.KVCTemplateTokensMap(showdown, item, {})[uTokenTag('KVCTemplateTokenPostTitle')], mod.KVCTemplatePlaintextTitle(item));
+			deepEqual(mod.KVCTemplateTokensMap(item, {})[uTokenTag('KVCTemplateTokenPostTitle')], mod.KVCTemplatePlaintextTitle(item));
 		});
 	
 	});
@@ -356,7 +338,7 @@ describe('KVCTemplateTokensMap', function test_KVCTemplateTokensMap() {
 		
 		it('sets to KVCTemplateHTML', function () {
 			const item = 'alfa\n# bravo';
-			deepEqual(mod.KVCTemplateTokensMap(showdown, item, {})[uTokenTag('KVCTemplateTokenPostBody')], mod.KVCTemplateHTML(showdown, mod.KVCTemplatePlaintextBody(item)));
+			deepEqual(mod.KVCTemplateTokensMap(item, {})[uTokenTag('KVCTemplateTokenPostBody')], mod.KVCTemplateHTML(mod.KVCTemplatePlaintextBody(item)));
 		});
 	
 	});
@@ -364,7 +346,7 @@ describe('KVCTemplateTokensMap', function test_KVCTemplateTokensMap() {
 	context('KVCTemplateTokenRootURL', function () {
 		
 		it('sets to KVCOptionRootURL', function () {
-			deepEqual(mod.KVCTemplateTokensMap(showdown, '', {
+			deepEqual(mod.KVCTemplateTokensMap('', {
 				KVCOptionRootURL: 'alfa',
 			})[uTokenTag('KVCTemplateTokenRootURL')], 'alfa');
 		});
@@ -374,7 +356,7 @@ describe('KVCTemplateTokensMap', function test_KVCTemplateTokensMap() {
 	context('KVCTemplateTokenRootURLLegacy', function () {
 		
 		it('sets to KVCOptionRootURL', function () {
-			deepEqual(mod.KVCTemplateTokensMap(showdown, '', {
+			deepEqual(mod.KVCTemplateTokensMap('', {
 				KVCOptionRootURL: 'alfa',
 			})[uTokenTag('KVCTemplateTokenRootURLLegacy')], 'alfa');
 		});
@@ -439,7 +421,6 @@ describe('KVCTemplateBlockTokensMap', function test_KVCTemplateBlockTokensMap() 
 		return {
 			KVCBlockPermalinkMap: {},
 			KVCBlockTemplateOptions: {},
-			KVCBlockTemplateShowdown: showdown,
 		};
 	};
 
@@ -461,14 +442,6 @@ describe('KVCTemplateBlockTokensMap', function test_KVCTemplateBlockTokensMap() 
 		throws(function () {
 			mod.KVCTemplateBlockTokensMap(Object.assign(uOptions(), {
 				KVCBlockTemplateOptions: null,
-			}))
-		}, /KVCErrorInputNotValid/);
-	});
-
-	it('throws if KVCBlockTemplateShowdown missing', function () {
-		throws(function () {
-			mod.KVCTemplateBlockTokensMap(Object.assign(uOptions(), {
-				KVCBlockTemplateShowdown: {},
 			}))
 		}, /KVCErrorInputNotValid/);
 	});
@@ -562,7 +535,6 @@ describe('KVCTemplateCollapseBlocks', function test_KVCTemplateCollapseBlocks() 
 				charlie: 'echo'
 			},
 			KVCBlockTemplateOptions: options,
-			KVCBlockTemplateShowdown: showdown,
 		}), 'bravo-charlie:echo:delta');
 	});
 
@@ -579,17 +551,9 @@ describe('KVCView', function test_KVCView() {
 		};
 	};
 
-	it('throws if showdown missing', function() {
-		throws(function() {
-			mod.KVCTemplateHTML({
-				Converter: null,
-			}, uOptions());
-		}, /KVCErrorInputNotValid/);
-	});
-
 	it('throws if KVCViewSource not string', function () {
 		throws(function () {
-			mod.KVCView(showdown, Object.assign(uOptions(), {
+			mod.KVCView(Object.assign(uOptions(), {
 				KVCViewSource: null,
 			}));
 		}, /KVCErrorInputNotValid/);
@@ -597,7 +561,7 @@ describe('KVCView', function test_KVCView() {
 
 	it('throws if KVCViewPermalinkMap not object', function () {
 		throws(function () {
-			mod.KVCView(showdown, Object.assign(uOptions(), {
+			mod.KVCView(Object.assign(uOptions(), {
 				KVCViewPermalinkMap: null,
 			}));
 		}, /KVCErrorInputNotValid/);
@@ -605,7 +569,7 @@ describe('KVCView', function test_KVCView() {
 
 	it('throws if KVCViewTemplate not string', function () {
 		throws(function () {
-			mod.KVCView(showdown, Object.assign(uOptions(), {
+			mod.KVCView(Object.assign(uOptions(), {
 				KVCViewTemplate: null,
 			}));
 		}, /KVCErrorInputNotValid/);
@@ -614,18 +578,18 @@ describe('KVCView', function test_KVCView() {
 	it('throws if KVCViewTemplateOptions not object', function () {
 
 		throws(function () {
-			mod.KVCView(showdown, Object.assign(uOptions(), {
+			mod.KVCView(Object.assign(uOptions(), {
 				KVCViewTemplateOptions: null,
 			}));
 		}, /KVCErrorInputNotValid/);
 	});
 
 	it('returns string', function() {
-		deepEqual(typeof mod.KVCView(showdown, uOptions()), 'string');
+		deepEqual(typeof mod.KVCView(uOptions()), 'string');
 	});
 
 	it('replaces KVCViewPermalinkMap', function() {
-		deepEqual(mod.KVCView(showdown, Object.assign(uOptions(), {
+		deepEqual(mod.KVCView(Object.assign(uOptions(), {
 			KVCViewSource: 'alfa\n[[bravo]]',
 			KVCViewPermalinkMap: {
 				bravo: 'charlie',
@@ -635,7 +599,7 @@ describe('KVCView', function test_KVCView() {
 	});
 
 	it('replaces tokens', function() {
-		deepEqual(mod.KVCView(showdown, Object.assign(uOptions(), {
+		deepEqual(mod.KVCView(Object.assign(uOptions(), {
 			KVCViewSource: 'alfa',
 			KVCViewTemplate: `bravo {${ mod.KVCTemplateTokenPostTitle() }}`,
 		})), 'bravo alfa');
@@ -644,13 +608,13 @@ describe('KVCView', function test_KVCView() {
 	context('blocks', function () {
 		
 		it('replaces if not present', function() {
-			deepEqual(mod.KVCView(showdown, Object.assign(uOptions(), {
+			deepEqual(mod.KVCView(Object.assign(uOptions(), {
 				KVCViewTemplate: uBlockTag('KVCTemplateTokenRootURL', 'bravo'),
 			})), '');
 		});
 		
 		it('replaces KVCTemplateTokenRootURL', function() {
-			deepEqual(mod.KVCView(showdown, Object.assign(uOptions(), {
+			deepEqual(mod.KVCView(Object.assign(uOptions(), {
 				KVCViewTemplate: uBlockTag('KVCTemplateTokenRootURL', uTokenTag('KVCTemplateTokenRootURL')),
 				KVCViewTemplateOptions: {
 					KVCOptionRootURL: 'bravo',

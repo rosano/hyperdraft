@@ -27,7 +27,6 @@
 		'OLSKStorageWidget',
 		'OLSKUIAssets',
 		'ROCORootLink',
-		'showdown',
 		'turndown',
 		'url-parse',
 	], require('path').join(__dirname, 'node_modules'), require('path').join(__dirname, 'os-app/_shared/__external'));

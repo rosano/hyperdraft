@@ -25,7 +25,7 @@
 
     "// MARKDOWN": null,
     "turndown": "latest",
-    "showdown": "latest",
+    "marked": "latest",
 
     "// WORDING": null,
     "OLSKWording": "olsk/OLSKWording",
@@ -51,7 +51,6 @@
     "diff-match-patch": "latest",
     "html-entities": "latest",
     "turndown": "latest",
-    "showdown": "latest",
 
     "// FRONTEND NORMALIZE CSS": null,
     "normalize.css": "latest",

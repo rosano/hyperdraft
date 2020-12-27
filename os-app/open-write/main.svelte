@@ -15,7 +15,6 @@ import KVCSettingAction from '../_shared/KVCSetting/action.js';
 import KVCWriteLogic from './ui-logic.js';
 import RemoteStorage from 'remotestoragejs';
 import KVCTemplate from '../_shared/KVCTemplate/main.js';
-import showdown from 'showdown';
 import OLSKString from 'OLSKString';
 import OLSKLanguageSwitcher from 'OLSKLanguageSwitcher';
 import OLSKFund from 'OLSKFund';
@@ -576,7 +575,7 @@ const mod = {
 
 		const wasPublic = KVCNoteModel.KVCNoteModelIsPublic(inputData);
 
-		const updated = await KVCNoteAction.KVCNoteActionPublish(mod._ValueOLSKRemoteStorage, inputData, mod.TestPublishContent = KVCTemplate.KVCView(showdown, {
+		const updated = await KVCNoteAction.KVCNoteActionPublish(mod._ValueOLSKRemoteStorage, inputData, mod.TestPublishContent = KVCTemplate.KVCView({
 			KVCViewSource: inputData.KVCNoteBody,
 			KVCViewPermalinkMap: await KVCNoteAction.KVCNoteActionPermalinkMap(mod._ValueOLSKRemoteStorage, mod.DataSettingValue('KVCSettingPublicRootPageID')),
 			KVCViewTemplate: KVCTemplate.KVCTemplateViewDefault(OLSKLocalized),
