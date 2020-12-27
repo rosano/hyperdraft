@@ -271,6 +271,12 @@ describe('KVCTemplateRemappedLinks', function test_KVCTemplateRemappedLinks() {
 		}), '[alfa](bravo) [alfa](bravo)');
 	});
 
+	it('replaces lowercase', function() {
+		deepEqual(mod.KVCTemplateRemappedLinks('[[alfa]]', {
+			ALFA: 'bravo',
+		}), '[alfa](bravo)');
+	});
+
 });
 
 describe('KVCTemplateHTML', function test_KVCTemplateHTML() {

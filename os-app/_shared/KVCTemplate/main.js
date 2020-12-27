@@ -141,7 +141,9 @@ const mod = {
 		}
 
 		return Object.entries(param2).reduce(function (coll, [key, value]) {
-			return coll.split(`[[${ key }]]`).join(`[${ key }](${ value })`);
+			return [key, key.toLowerCase()].reduce(function (coll, item) {
+				return coll.split(`[[${ item }]]`).join(`[${ item }](${ value })`)
+			}, coll);
 		}, param1);
 	},
 
