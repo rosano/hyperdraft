@@ -275,6 +275,12 @@ describe('KVCTemplateRemappedLinks', function test_KVCTemplateRemappedLinks() {
 		}), '[alfa](bravo)');
 	});
 
+	it('replaces indirect link', function() {
+		deepEqual(mod.KVCTemplateRemappedLinks('[alfa](bravo)', {
+			bravo: 'charlie',
+		}), '[alfa](charlie)');
+	});
+
 });
 
 describe('KVCTemplateHTML', function test_KVCTemplateHTML() {
