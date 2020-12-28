@@ -36,7 +36,7 @@ Try alternating between the two with the `Tab` key.
 
 ## Notes list
 
-All your notes are listed here. When it has *the focus*, you can press the `Up` or `Down` key to select the previous or next note. Type text in the search box to filter notes that have the exact text, and press `Enter` to create a new note with the search text. Click a note to select it and focus the editor.
+All your notes are listed here. Type text in the search box to filter notes that match the exact text. Click a note to select it and focus the editor.
 
 ## Editor
 
