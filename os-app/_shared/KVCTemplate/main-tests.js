@@ -269,10 +269,10 @@ describe('KVCTemplateRemappedLinks', function test_KVCTemplateRemappedLinks() {
 		}), '[alfa](bravo) [alfa](bravo)');
 	});
 
-	it('replaces lowercase', function() {
-		deepEqual(mod.KVCTemplateRemappedLinks('[[alfa]]', {
+	it('replaces lowercase first character', function() {
+		deepEqual(mod.KVCTemplateRemappedLinks('[[aLFA]]', {
 			ALFA: 'bravo',
-		}), '[alfa](bravo)');
+		}), '[aLFA](bravo)');
 	});
 
 	it('replaces indirect link', function() {
