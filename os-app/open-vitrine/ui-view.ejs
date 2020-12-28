@@ -24,9 +24,12 @@ locals.OLSKPageUseLivereload = process.env.NODE_ENV === 'development';
 	</section>
 </div>
 
-<p class="OLSKCommonWhatIsIt"><%= OLSKLocalized('OLSKCommonWhatIsItText') %></p>
-
-<a class="KVCVitrineAppButton OLSKDecorPress OLSKDecorPressCall" href="<%= OLSKCanonical('KVCWriteRoute') %>"><%= OLSKLocalized('OLSKWordingOpenApp') %></a>
+<%- include('../../node_modules/OLSKLanding/main.ejs', {
+	OLSKLandingHeadingText: OLSKLocalized('KVCVitrineDescription'),
+	OLSKLandingBlurbText: OLSKLocalized('OLSKLandingBlurbText'),
+	OLSKLandingActionText: OLSKLocalized('OLSKWordingOpenApp'),
+	OLSKLandingActionHref: OLSKCanonical('KVCWriteRoute'),
+}) %>
 
 <h1 class="KVCVitrineFeaturesHeading"><%= OLSKLocalized('OLSKWordingFeatures') %></h1>
 

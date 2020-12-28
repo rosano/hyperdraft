@@ -26,14 +26,6 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 			browser.assert.text(KVCVitrineCrownName, uLocalized('KVCVitrineTitle'));
 		});
 
-		it('localizes OLSKCommonWhatIsIt', function () {
-			browser.assert.text('.OLSKCommonWhatIsIt', uLocalized('OLSKCommonWhatIsItText'));
-		});
-
-		it('localizes KVCVitrineAppButton', function () {
-			browser.assert.text(KVCVitrineAppButton, uLocalized('OLSKWordingOpenApp'));
-		});
-
 		it('localizes KVCVitrineFeaturesHeading', function () {
 			browser.assert.text(KVCVitrineFeaturesHeading, uLocalized('OLSKWordingFeatures'));
 		});
@@ -52,6 +44,22 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 
 		it('localizes KVCVitrineSupportBlurb', function () {
 			browser.assert.text(KVCVitrineSupportBlurb, uLocalized('OLSKWordingFeedbackBlurb'));
+		});
+
+		context('OLSKLanding', function test_OLSKLanding () {
+
+			it('localizes OLSKLandingHeadingText', function () {
+				browser.assert.text('.OLSKLandingHeading', uLocalized('KVCVitrineDescription'));
+			});
+
+			it('localizes OLSKLandingBlurbText', function () {
+				browser.assert.text('.OLSKLandingBlurb', uLocalized('OLSKLandingBlurbText'));
+			});
+
+			it('localizes OLSKLandingActionText', function () {
+				browser.assert.text('.OLSKLandingAction', uLocalized('OLSKWordingOpenApp'));
+			});
+		
 		});
 
 	});

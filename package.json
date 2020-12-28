@@ -30,6 +30,9 @@
     "// WORDING": null,
     "OLSKWording": "olsk/OLSKWording",
 
+    "// LANDING": null,
+    "OLSKLanding": "olsk/OLSKLanding",
+
     "// FEATURES": null,
     "OLSKFeatureList": "olsk/OLSKFeatureList",
     "OLSKAppFeatureList": "olsk/OLSKAppFeatureList",

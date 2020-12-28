@@ -50,18 +50,10 @@ describe('KVCVitrine_Misc', function () {
 
 	});
 
-	context('KVCVitrineAppButton', function test_KVCVitrineAppButton () {
+	context('OLSKLanding', function test_OLSKLanding () {
 
-		it('classes OLSKDecorPress', function () {
-			browser.assert.hasClass(KVCVitrineAppButton, 'OLSKDecorPress');
-		});
-		
-		it('classes OLSKDecorPressCall', function () {
-			browser.assert.hasClass(KVCVitrineAppButton, 'OLSKDecorPressCall');
-		});
-		
-		it('sets href', function () {
-			browser.assert.attribute(KVCVitrineAppButton, 'href', OLSKTestingCanonical(require('../open-write/controller.js').OLSKControllerRoutes().shift()));
+		it('sets OLSKLandingActionHref', function () {
+			browser.assert.attribute('.OLSKLandingAction', 'href', OLSKTestingCanonical(require('../open-write/controller.js').OLSKControllerRoutes().shift()));
 		});
 	
 	});
