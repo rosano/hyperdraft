@@ -117,26 +117,34 @@ const mod = {
 	ControlOpenCursorObject (inputData) {
 		const cursor = mod._ValueEditorInstance.getCursor();
 
-		const currentObject = KVCWriteInputLogic.KVCWriteInputLineObjectsFor(mod._ValueEditorInstance.getLineTokens(cursor.line)).filter(function (e) {
-			return Math.max(e.start, Math.min(e.end, cursor.ch)) === cursor.ch;
-		}).shift();
+		const lineObjects = KVCWriteInputLogic.KVCWriteInputLineObjectsFor(mod._ValueEditorInstance.getLineTokens(cursor.line)).filter(function (e) {
+			return Math.max(e.start, Math.min(e.end, cursor.ch)) >= cursor.ch;
+		});
 
-		console.log(currentObject);
+		const currentObject = lineObjects.shift();
 
 		if (!currentObject || !currentObject.type || !currentObject.type.match('link')) {
 			return;
 		}
 
-		mod.ControlOpenTextObject(currentObject.string);
+		mod.ControlOpenTextObject(currentObject.string, (lineObjects.shift() || {}).string);
 	},
 
-	ControlOpenTextObject (inputData) {
-		console.log(inputData);
-		if (URLParse(inputData, {}).protocol) {
-			return window.open(inputData, '_blank');
+	ControlOpenTextObject (inputData, indirect = '') {
+		const url = [inputData, indirect.slice(1, -1)].filter(function (e) {
+			return URLParse(e, {}).protocol;
+		}).shift();
+
+		if (url) {
+			return window.open(url, '_blank');
 		}
 
-		const match = inputData.match(/\[\[(.*)\]\]/).pop();
+		const match = [
+			(indirect.match(/\((.*)\)/) || []).pop(),
+			(inputData.match(/\[\[(.*)\]\]/) || []).pop(),
+			].filter(function (e) {
+			return !!e;
+		}).shift();
 
 		if (!match) {
 			return;
