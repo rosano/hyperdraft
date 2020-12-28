@@ -18,6 +18,14 @@ describe('KVCVitrine_Misc', function () {
 	
 	});
 
+	describe('KVCVitrineManifest', function test_KVCVitrineManifest() {
+
+		it('sets href', function () {
+			browser.assert.attribute(KVCVitrineManifest, 'href', require('../tech-manifest/controller.js').OLSKControllerRoutes().shift().OLSKRoutePath);
+		});
+
+	});
+
 	describe('KVCVitrineCrown', function test_KVCVitrineCrown() {
 
 		it('classes OLSKCommonCard', function () {
