@@ -116,6 +116,7 @@ After setting up a custom domain, designate any note as the home page with the `
 :--- | ---
 | KVCWriteMasterCreateButtonText | `AccessKey+n` |
 | Select previous or next note, if filter field is focused | `Up` or `Down` |
+| Create note from filter text, if filter field is focused | `Enter` |
 | Clear filter text and selected note, focus filter field | `Escape` |
 
 | Editor ||
