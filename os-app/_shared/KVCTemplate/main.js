@@ -148,7 +148,7 @@ const mod = {
 		}, param1);
 	},
 
-	KVCTemplateHTML (inputData) {
+	KVCTemplateHTML (inputData, options = {}) {
 		if (typeof inputData !== 'string') {
 			throw new Error('KVCErrorInputNotValid');
 		}
@@ -156,7 +156,7 @@ const mod = {
 		const renderer = new marked.Renderer();
 		renderer.link = function(href, title, text) {
 			const _default = marked.Renderer.prototype.link.apply(this, arguments);
-			return href.match(/^http/) ? _default.replace('<a','<a target="_blank"') : _default;
+			return (options._KVCOptionPublicBaseURL && !href.match(options._KVCOptionPublicBaseURL)) ? _default.replace('<a','<a target="_blank"') : _default;
 		};
 
 		return marked.setOptions({
@@ -178,7 +178,7 @@ const mod = {
 
 		return Object.fromEntries([
 			[mod.KVCTemplateTokenPostTitle(), mod.KVCTemplatePlaintextTitle(body)],
-			[mod.KVCTemplateTokenPostBody(), mod.KVCTemplateHTML(mod.KVCTemplatePlaintextBody(body))],
+			[mod.KVCTemplateTokenPostBody(), mod.KVCTemplateHTML(mod.KVCTemplatePlaintextBody(body), options)],
 			[mod.KVCTemplateTokenRootURL(), options.KVCOptionRootURL],
 			[mod.KVCTemplateTokenRootURLLegacy(), options.KVCOptionRootURL],
 		].map(function (e) {
