@@ -46,7 +46,7 @@ const mod = {
 <meta name="viewport" content="width=device-width" />
 
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.css">
-<link rel="stylesheet" type="text/css" href="https://ghcdn.rawgit.org/olsk/OLSKDecor/master/ui-style.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/olsk/OLSKDecor/master/ui-style.css">
 
 </head>
 <body class="OLSKDecor OLSKDecorCapped OLSKDecorX">
