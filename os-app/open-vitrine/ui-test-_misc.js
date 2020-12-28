@@ -32,8 +32,8 @@ describe('KVCVitrine_Misc', function () {
 			browser.assert.hasClass(KVCVitrineCrown, 'OLSKCommonCard');
 		});
 
-		it('classes OLSKCommonCrownCard', function () {
-			browser.assert.hasClass(KVCVitrineCrown, 'OLSKCommonCrownCard');
+		it('classes OLSKCommonCrownCardMini', function () {
+			browser.assert.hasClass(KVCVitrineCrown, 'OLSKCommonCrownCardMini');
 		});
 		
 	});

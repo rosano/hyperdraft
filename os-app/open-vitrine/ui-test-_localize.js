@@ -26,10 +26,6 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 			browser.assert.text(KVCVitrineCrownName, uLocalized('KVCVitrineTitle'));
 		});
 
-		it('localizes KVCVitrineCrownBlurb', function () {
-			browser.assert.text(KVCVitrineCrownBlurb, uLocalized('KVCVitrineDescription'));
-		});
-
 		it('localizes OLSKCommonWhatIsIt', function () {
 			browser.assert.text('.OLSKCommonWhatIsIt', uLocalized('OLSKCommonWhatIsItText'));
 		});

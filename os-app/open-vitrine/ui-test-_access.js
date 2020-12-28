@@ -8,7 +8,6 @@ Object.entries({
 	KVCVitrineCrown: '.KVCVitrineCrown',
 	KVCVitrineCrownIcon: '.KVCVitrineCrownIcon',
 	KVCVitrineCrownName: '.KVCVitrineCrownName',
-	KVCVitrineCrownBlurb: '.KVCVitrineCrownBlurb',
 
 	KVCVitrineAppButton: '.KVCVitrineAppButton',
 
@@ -56,10 +55,6 @@ describe('KVCVitrine_Access', function () {
 		browser.assert.elements(KVCVitrineCrownName, 1);
 	});
 
-	it('shows KVCVitrineCrownBlurb', function () {
-		browser.assert.elements(KVCVitrineCrownBlurb, 1);
-	});
-	
 	it('shows OLSKCommonWhatIsIt', function() {
 		browser.assert.elements('.OLSKCommonWhatIsIt', 1);
 	});
