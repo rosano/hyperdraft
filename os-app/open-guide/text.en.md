@@ -73,9 +73,9 @@ When navigating large documents, it's useful to be able to quickly jump between 
 
 There are a few different ways to link:
 
-- `[[alfa]]` internal link
-- `[alfa](bravo)` internal link with alternate text
-- `[charlie](https://example.com)` external link
+- `[[apples are crunchy]]` internal link
+- `[crunchy fruits](apples are crunchy)` internal link with alternate text
+- `[essay about fruits](https://example.com)` external link
 
 # Publishing
 
