@@ -4,7 +4,7 @@ This document is a work-in-progress. Feel free to reach out on [Mastodon](https:
 
 </div>
 
-Hyperdraft helps you organize your thinking with text notes, and makes it simple to turn them into a website
+Hyperdraft helps you organize your thinking with text notes, and makes it simple to turn them into a website.
 
 Inspired by modeless and keyboard-centric [Notational Velocity](http://notational.net) it lets you quickly and easily network your ideas via a simple *double-bracket syntax*.
 

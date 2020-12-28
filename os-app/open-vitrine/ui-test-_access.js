@@ -61,16 +61,16 @@ describe('KVCVitrine_Access', function () {
 		browser.assert.elements(KVCVitrineFeaturesHeading, 1);
 	});
 
-	it('shows KVCVitrineGuideButton', function () {
-		browser.assert.elements(KVCVitrineGuideButton, 1);
-	});
-
 	it('shows KVCFeatureList', function () {
 		browser.assert.elements('.KVCFeatureList', 1);
 	});
 
 	it('shows OLSKAppFeatureList', function () {
 		browser.assert.elements('.OLSKAppFeatureList', 1);
+	});
+
+	it('shows KVCVitrineGuideButton', function () {
+		browser.assert.elements(KVCVitrineGuideButton, 1);
 	});
 
 	it('shows KVCVitrineVideoHeading', function () {
