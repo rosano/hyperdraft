@@ -140,7 +140,7 @@ After setting up a custom domain, designate any note as the home page with the `
 
 This web app can be 'installed' and used as if it were a native mobile app (with an icon, working without internet access, running as a standalone app outside of the browser).
 
-1. [Open the app](KVCReviewRoute) in your browser, then follow the steps based on your operating system:
+1. [Open the app](KVCWriteRoute) in your browser, then follow the steps based on your operating system:
 
 ## iOS + Safari
 2. Tap the Share button <img height="22" valign="middle" alt="Share button icon" src="/_shared/__external/OLSKUIAssets/_OLSKSharediOSShare.svg" />
