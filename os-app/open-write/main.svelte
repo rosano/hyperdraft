@@ -569,7 +569,7 @@ const mod = {
 
 		const options = {
 			KVCOptionIsRoot: mod.DataSettingValue('KVCSettingPublicRootPageID') === inputData.KVCNoteID,
-			KVCOptionRootURL: mod.DataSettingValue('KVCSettingCustomDomainBaseURL'),
+			KVCOptionRootURL: mod.DataSettingValue('KVCSettingCustomDomainBaseURL') || KVCNoteStorage.KVCNoteStoragePublicURL(mod._ValueOLSKRemoteStorage, 'index.html'),
 			KVCOptionBacklinks: KVCWriteLogic.KVCWriteBacklinksMap(mod._ValueNotesAll.filter(KVCNoteModel.KVCNoteModelIsPublic).concat(inputData))[KVCTemplate.KVCTemplatePlaintextTitle(inputData.KVCNoteBody)],
 			_KVCOptionPublicBaseURL: KVCNoteStorage.KVCNoteStoragePublicURL(mod._ValueOLSKRemoteStorage, '/'),
 		};
