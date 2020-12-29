@@ -42,13 +42,21 @@ describe('KVCWriteDetail_Misc', function () {
 
 	});
 
-	describe('KVCWriteDetailToolbar', function test_KVCWriteDetailToolbar () {
+	describe('KVCWriteDetailHeader', function test_KVCWriteDetailHeader () {
 
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
 				KVCWriteDetailItem: JSON.stringify(StubNoteObjectValid()),
 			});
 		});
+
+		it('classes OLSKMobileViewHeader', function () {
+			browser.assert.hasClass(KVCWriteDetailHeader, 'OLSKMobileViewHeader');
+		});
+	
+	});
+
+	describe('KVCWriteDetailToolbar', function test_KVCWriteDetailToolbar () {
 
 		it('classes OLSKToolbar', function () {
 			browser.assert.hasClass(KVCWriteDetailToolbar, 'OLSKToolbar');
@@ -62,10 +70,6 @@ describe('KVCWriteDetail_Misc', function () {
 			browser.assert.hasClass(KVCWriteDetailToolbar, 'OLSKCommonEdgeBottom');
 		});
 		
-		it('classes OLSKMobileViewHeader', function () {
-			browser.assert.hasClass(KVCWriteDetailToolbar, 'OLSKMobileViewHeader');
-		});
-	
 	});
 
 	describe('KVCWriteDetailToolbarBackButton', function test_KVCWriteDetailToolbarBackButton () {

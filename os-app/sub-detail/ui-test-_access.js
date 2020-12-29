@@ -2,6 +2,8 @@ const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
 Object.entries({
 	KVCWriteDetail: '.KVCWriteDetail',
+
+	KVCWriteDetailHeader: '.KVCWriteDetailHeader',
 	
 	KVCWriteDetailToolbar: '.KVCWriteDetailToolbar',
 	KVCWriteDetailToolbarBackButton: '.KVCWriteDetailToolbarBackButton',
@@ -42,8 +44,8 @@ describe('KVCWriteDetail_Access', function () {
 		browser.assert.elements('.OLSKDetailPlaceholder', 1);
 	});
 
-	it('hides KVCWriteDetailToolbar', function () {
-		browser.assert.elements(KVCWriteDetailToolbar, 0);
+	it('hides KVCWriteDetailHeader', function () {
+		browser.assert.elements(KVCWriteDetailHeader, 0);
 	});
 
 	it('hides KVCWriteInput', function () {
@@ -66,8 +68,8 @@ describe('KVCWriteDetail_Access', function () {
 			browser.assert.elements('.OLSKDetailPlaceholder', 0);
 		});
 
-		it('shows OLSKToolbar', function () {
-			browser.assert.elements('.OLSKToolbar', 1);
+		it('shows KVCWriteDetailHeader', function () {
+			browser.assert.elements(KVCWriteDetailHeader, 1);
 		});
 
 		it('shows KVCWriteDetailToolbar', function () {

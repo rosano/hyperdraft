@@ -205,7 +205,10 @@ import KVCWriteInput from '../sub-input/main.svelte';
 {/if}
 
 {#if mod._ValueItem}
-<header class="KVCWriteDetailToolbar OLSKToolbar OLSKToolbarJustify OLSKCommonEdgeBottom OLSKMobileViewHeader">
+
+<header class="KVCWriteDetailHeader OLSKMobileViewHeader">
+
+<div class="KVCWriteDetailToolbar OLSKToolbar OLSKToolbarJustify OLSKCommonEdgeBottom">
 	<div class="OLSKToolbarElementGroup">
 		<button class="KVCWriteDetailToolbarBackButton OLSKDecorButtonNoStyle OLSKDecorTappable OLSKToolbarButton OLSKVisibilityMobile" title={ OLSKLocalized('KVCWriteDetailToolbarBackButtonText') } on:click={ KVCWriteDetailDispatchBack }>
 			<div class="KVCWriteDetailToolbarBackButtonImage">{@html _OLSKSharedBack }</div>
@@ -265,6 +268,8 @@ import KVCWriteInput from '../sub-input/main.svelte';
 			<div class="KVCWriteDetailToolbarDiscardButtonImage">{@html _OLSKSharedDiscard }</div>
 		</button>
 	</div>
+</div>
+
 </header>
 
 <KVCWriteInput
