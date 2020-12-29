@@ -83,9 +83,9 @@ Connect your *storage* to make notes accessible to the public Internet. Simply p
 
 ## Custom domain name
 
-By default, the public link will have a format like
+By default, the public link may have a long format like
 
-> https://[ your provider's domain name ]/wikiavec/public/[ the note's public ID ]
+> https://[ your provider's domain name ]/[ your user name ]/public/wikiavec/[ the note's public ID ]
 
 Using a custom domain name requires *hosting*, which means another site will fetch from the public link above and then show the content. You can use a paid service such as [Garden](https://hmm.garden) (no technical knowledge required) or [host it yourself](https://github.com/wikiavec/flowerpot).
 
