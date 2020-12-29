@@ -269,16 +269,58 @@ describe('KVCTemplateRemappedLinks', function test_KVCTemplateRemappedLinks() {
 		}), '[alfa](bravo) [alfa](bravo)');
 	});
 
-	it('replaces lowercase first character', function() {
-		deepEqual(mod.KVCTemplateRemappedLinks('[[aLFA]]', {
-			ALFA: 'bravo',
-		}), '[aLFA](bravo)');
-	});
-
-	it('replaces indirect link', function() {
+	it('replaces indirect', function() {
 		deepEqual(mod.KVCTemplateRemappedLinks('[alfa](bravo)', {
 			bravo: 'charlie',
 		}), '[alfa](charlie)');
+	});
+
+	context('case insensitive', function () {
+		
+		it('replaces direct', function() {
+			const key = 'Alfa';
+			const value = Math.random().toString();
+
+			const item = uRandomElement(key.toUpperCase(), key.toLowerCase());
+
+			deepEqual(mod.KVCTemplateRemappedLinks(`[[${ item }]]`, {
+				[key]: value,
+			}), `[${ item }](${ value })`);
+		});
+
+		it('replaces indirect', function() {
+			const key = 'Alfa';
+			const item = uRandomElement(key.toUpperCase(), key.toLowerCase());
+
+			deepEqual(mod.KVCTemplateRemappedLinks(`[alfa](${ item })`, {
+				[key]: 'charlie',
+			}), '[alfa](charlie)');
+		});
+	
+	});
+
+	context('regex characters', function () {
+		
+		it('replaces direct', function() {
+			const key = '$Alfa';
+			const value = Math.random().toString();
+
+			const item = uRandomElement(key.toUpperCase(), key.toLowerCase());
+
+			deepEqual(mod.KVCTemplateRemappedLinks(`[[${ item }]]`, {
+				[key]: value,
+			}), `[${ item }](${ value })`);
+		});
+
+		it('replaces indirect', function() {
+			const key = '$Alfa';
+			const item = uRandomElement(key.toUpperCase(), key.toLowerCase());
+
+			deepEqual(mod.KVCTemplateRemappedLinks(`[alfa](${ item })`, {
+				[key]: 'charlie',
+			}), '[alfa](charlie)');
+		});
+	
 	});
 
 });

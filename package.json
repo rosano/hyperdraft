@@ -26,6 +26,7 @@
     "// MARKDOWN": null,
     "turndown": "latest",
     "marked": "latest",
+    "escape-string-regexp": "latest",
 
     "// WORDING": null,
     "OLSKWording": "olsk/OLSKWording",

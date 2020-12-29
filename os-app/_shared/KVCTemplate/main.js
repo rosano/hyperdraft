@@ -1,5 +1,6 @@
 import OLSKString from 'OLSKString';
 import marked from 'marked';
+import escapeRegExp from 'escape-string-regexp';
 
 const uTokenTag = function (inputData) {
 	return `{${ mod[inputData]() }}`;
@@ -142,9 +143,11 @@ const mod = {
 		}
 
 		return Object.entries(param2).reduce(function (coll, [key, value]) {
-			return [key, key[0].toLowerCase().concat(key.slice(1))].reduce(function (coll, item) {
-				return coll.split(`[[${ item }]]`).join(`[${ item }](${ value })`).split(`](${ item })`).join(`](${ value })`);
-			}, coll);
+			return (coll.match(new RegExp(`\\[\\[${ escapeRegExp(key) }\\]\\]`, 'gi')) || []).reduce(function (coll, item) {
+				return coll.split(item).join(`${ item.slice(1, -1) }(${ value })`);
+			}, (coll.match(new RegExp(`\\]\\(${ escapeRegExp(key) }\\)`, 'gi')) || []).reduce(function (coll, item) {
+				return coll.split(item).join(`](${ value })`);
+			}, coll));
 		}, param1);
 	},
 
