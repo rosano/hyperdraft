@@ -85,7 +85,7 @@ const mod = {
 			return;
 		}
 
-		event.preventDefault();
+		// event.preventDefault();
 	},
 
 	InterfaceEditorDidTouchUp (event) {
@@ -93,7 +93,7 @@ const mod = {
 			return;
 		}
 
-		mod.ControlOpenTextObject(event.target.textContent);
+		mod.ControlOpenCursorObject();
 	},
 
 	InterfaceEditorFieldDebugDidInput () {
@@ -114,7 +114,7 @@ const mod = {
 		mod._ValueEditorPostInitializeQueue.push(inputData);
 	},
 
-	ControlOpenCursorObject (inputData) {
+	ControlOpenCursorObject () {
 		const cursor = mod._ValueEditorInstance.getCursor();
 
 		const lineObjects = KVCWriteInputLogic.KVCWriteInputLineObjectsFor(mod._ValueEditorInstance.getLineTokens(cursor.line)).filter(function (e) {
@@ -150,7 +150,7 @@ const mod = {
 			return;
 		}
 
-		event.stopPropagation();
+		// event.stopPropagation();
 
 		KVCWriteInputDispatchOpen(match);
 	},
