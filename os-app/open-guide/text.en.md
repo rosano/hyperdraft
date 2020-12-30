@@ -133,6 +133,7 @@ After setting up a custom domain, designate any note as the home page with the `
 | `OLSKRemoteStorageLauncherItemCopyLoginLinkText` | Launcher |
 | `OLSKFundLauncherItemEnterClueText` | Launcher |
 | `OLSKFundLauncherItemClearClueText` | Launcher |
+| `OLSKServiceWorkerLauncherItemReloadText` | Launcher |
 | `OLSKServiceWorkerLauncherItemDebugForceUpdateText` | Launcher |
 | `OLSKRemoteStorageLauncherItemDebugFlushDataText` | Launcher |
 | Alternate *the focus* between the Notes list and the editor | `Tab` |
