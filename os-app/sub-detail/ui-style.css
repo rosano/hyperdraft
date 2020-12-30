@@ -30,6 +30,10 @@
 	color: inherit;
 }
 
+.KVCWriteDetailToolbarArchiveButton, .KVCWriteDetailToolbarUnarchiveButton {
+	display: none;
+}
+
 @media screen and (max-width: 760px) {
 
 .KVCWriteDetailToolbar {
