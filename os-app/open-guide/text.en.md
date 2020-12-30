@@ -77,6 +77,8 @@ There are a few different ways to link:
 - `[crunchy fruits](apples are crunchy)` internal link with alternate text
 - `[essay about fruits](https://example.com)` external link
 
+Notice how they all start with a square bracket.
+
 # Publishing
 
 Connect your *storage* to make notes accessible to the public Internet. Simply press the `KVCWriteDetailToolbarPublishButtonText` button and a shareable link will appear. In the same location, press the `KVCWriteDetailToolbarRetractButtonText` button to remove public access.
