@@ -116,6 +116,176 @@ describe('KVCWriteDetail_Misc', function () {
 	
 	});
 
+	describe('KVCWriteDetailToolbarConnectButton', function test_KVCWriteDetailToolbarConnectButton () {
+		
+		it('classes OLSKDecorButtonNoStyle', function () {
+			browser.assert.hasClass(KVCWriteDetailToolbarConnectButton, 'OLSKDecorButtonNoStyle');
+		});
+
+		it('classes OLSKDecorTappable', function () {
+			browser.assert.hasClass(KVCWriteDetailToolbarConnectButton, 'OLSKDecorTappable');
+		});
+
+		it('classes OLSKToolbarButton', function () {
+			browser.assert.hasClass(KVCWriteDetailToolbarConnectButton, 'OLSKToolbarButton');
+		});
+
+		context('click', function () {
+
+			context('cancel', function () {
+				
+				before(function () {
+					browser.assert.text('#TestKVCWriteDetailDispatchConnect', '0');
+				});
+
+				return browser.OLSKConfirm(function () {
+					return browser.pressButton(KVCWriteDetailToolbarConnectButton);
+				}, function (dialog) {
+					dialog.response = false;
+
+					return dialog;
+				});
+
+				it('does nothing', function () {
+					browser.assert.text('#TestKVCWriteDetailDispatchConnect', '0');
+				});
+			
+			});
+			
+			context('confirm', function () {
+				
+				before(function () {
+					return browser.pressButton(KVCWriteDetailToolbarConnectButton);
+				});
+
+				it('sends KVCWriteDetailDispatchConnect', function () {
+					browser.assert.text('#TestKVCWriteDetailDispatchConnect', '1');
+				});
+			
+			});
+
+		});
+	
+	});
+
+	describe('KVCWriteDetailToolbarConnectButtonImage', function test_KVCWriteDetailToolbarConnectButtonImage () {
+
+		it('sets src', function () {
+			browser.assert.elements(`${ KVCWriteDetailToolbarConnectButtonImage } #_KVCWritePublish`, 1);
+		});
+	
+	});
+
+	describe('KVCWriteDetailToolbarPublishButton', function test_KVCWriteDetailToolbarPublishButton () {
+		
+		before(function() {
+			return browser.OLSKVisit(kDefaultRoute, {
+				KVCWriteDetailItem: JSON.stringify(StubNoteObjectValid()),
+				KVCWriteDetailConnected: true,
+			});
+		});
+
+		it('classes OLSKDecorButtonNoStyle', function () {
+			browser.assert.hasClass(KVCWriteDetailToolbarPublishButton, 'OLSKDecorButtonNoStyle');
+		});
+
+		it('classes OLSKDecorTappable', function () {
+			browser.assert.hasClass(KVCWriteDetailToolbarPublishButton, 'OLSKDecorTappable');
+		});
+
+		it('classes OLSKToolbarButton', function () {
+			browser.assert.hasClass(KVCWriteDetailToolbarPublishButton, 'OLSKToolbarButton');
+		});
+
+		context('click', function () {
+			
+			before(function () {
+				browser.assert.text('#TestKVCWriteDetailDispatchPublish', '0');
+			});
+			
+			before(function () {
+				return browser.pressButton(KVCWriteDetailToolbarPublishButton);
+			});
+
+			it('sends KVCWriteDetailDispatchPublish', function () {
+				browser.assert.text('#TestKVCWriteDetailDispatchPublish', '1');
+			});
+		
+		});
+	
+	});
+
+	describe('KVCWriteDetailToolbarPublishButtonImage', function test_KVCWriteDetailToolbarPublishButtonImage () {
+
+		it('sets src', function () {
+			browser.assert.elements(`${ KVCWriteDetailToolbarPublishButtonImage } #_KVCWritePublish`, 1);
+		});
+	
+	});
+
+	describe('KVCWriteDetailToolbarPublicLink', function test_KVCWriteDetailToolbarPublicLink () {
+
+		before(function() {
+			return browser.OLSKVisit(kDefaultRoute, {
+				KVCWriteDetailItem: JSON.stringify(Object.assign(StubNoteObjectValid(), {
+					KVCNoteIsPublic: true,
+					KVCNotePublishDate: new Date(),
+					KVCNotePublicID: 'bravo',
+				})),
+				KVCWriteDetailConnected: true,
+			});
+		});
+
+		it('sets target', function () {
+			browser.assert.attribute(KVCWriteDetailToolbarPublicLink, 'target', '_blank');
+		});
+
+		it('sets href to KVCWriteDetailPublicURLFor', function () {
+			browser.assert.attribute(KVCWriteDetailToolbarPublicLink, 'href', '[public]/bravo');
+		});
+
+	});
+
+	describe('KVCWriteDetailToolbarRetractButton', function test_KVCWriteDetailToolbarRetractButton () {
+
+		it('classes OLSKDecorButtonNoStyle', function () {
+			browser.assert.hasClass(KVCWriteDetailToolbarRetractButton, 'OLSKDecorButtonNoStyle');
+		});
+
+		it('classes OLSKDecorTappable', function () {
+			browser.assert.hasClass(KVCWriteDetailToolbarRetractButton, 'OLSKDecorTappable');
+		});
+
+		it('classes OLSKToolbarButton', function () {
+			browser.assert.hasClass(KVCWriteDetailToolbarRetractButton, 'OLSKToolbarButton');
+		});
+
+		context('click', function () {
+			
+			before(function () {
+				browser.assert.text('#TestKVCWriteDetailDispatchRetract', '0');
+			});
+			
+			before(function () {
+				return browser.pressButton(KVCWriteDetailToolbarRetractButton);
+			});
+
+			it('sends KVCWriteDetailDispatchRetract', function () {
+				browser.assert.text('#TestKVCWriteDetailDispatchRetract', '1');
+			});
+		
+		});
+	
+	});
+
+	describe('KVCWriteDetailToolbarRetractButtonImage', function test_KVCWriteDetailToolbarRetractButtonImage () {
+
+		it('sets src', function () {
+			browser.assert.elements(`${ KVCWriteDetailToolbarRetractButtonImage } #_KVCWriteRetract`, 1);
+		});
+	
+	});
+
 	describe('KVCWriteDetailToolbarJumpButton', function test_KVCWriteDetailToolbarJumpButton () {
 		
 		it('classes OLSKDecorButtonNoStyle', function () {
@@ -293,176 +463,6 @@ describe('KVCWriteDetail_Misc', function () {
 
 		it('sets src', function () {
 			browser.assert.elements(`${ KVCWriteDetailToolbarUnarchiveButtonImage } #_KVCWriteUnarchive`, 1);
-		});
-	
-	});
-
-	describe('KVCWriteDetailToolbarConnectButton', function test_KVCWriteDetailToolbarConnectButton () {
-		
-		it('classes OLSKDecorButtonNoStyle', function () {
-			browser.assert.hasClass(KVCWriteDetailToolbarConnectButton, 'OLSKDecorButtonNoStyle');
-		});
-
-		it('classes OLSKDecorTappable', function () {
-			browser.assert.hasClass(KVCWriteDetailToolbarConnectButton, 'OLSKDecorTappable');
-		});
-
-		it('classes OLSKToolbarButton', function () {
-			browser.assert.hasClass(KVCWriteDetailToolbarConnectButton, 'OLSKToolbarButton');
-		});
-
-		context('click', function () {
-
-			context('cancel', function () {
-				
-				before(function () {
-					browser.assert.text('#TestKVCWriteDetailDispatchConnect', '0');
-				});
-
-				return browser.OLSKConfirm(function () {
-					return browser.pressButton(KVCWriteDetailToolbarConnectButton);
-				}, function (dialog) {
-					dialog.response = false;
-
-					return dialog;
-				});
-
-				it('does nothing', function () {
-					browser.assert.text('#TestKVCWriteDetailDispatchConnect', '0');
-				});
-			
-			});
-			
-			context('confirm', function () {
-				
-				before(function () {
-					return browser.pressButton(KVCWriteDetailToolbarConnectButton);
-				});
-
-				it('sends KVCWriteDetailDispatchConnect', function () {
-					browser.assert.text('#TestKVCWriteDetailDispatchConnect', '1');
-				});
-			
-			});
-
-		});
-	
-	});
-
-	describe('KVCWriteDetailToolbarConnectButtonImage', function test_KVCWriteDetailToolbarConnectButtonImage () {
-
-		it('sets src', function () {
-			browser.assert.elements(`${ KVCWriteDetailToolbarConnectButtonImage } #_KVCWritePublish`, 1);
-		});
-	
-	});
-
-	describe('KVCWriteDetailToolbarPublishButton', function test_KVCWriteDetailToolbarPublishButton () {
-		
-		before(function() {
-			return browser.OLSKVisit(kDefaultRoute, {
-				KVCWriteDetailItem: JSON.stringify(StubNoteObjectValid()),
-				KVCWriteDetailConnected: true,
-			});
-		});
-
-		it('classes OLSKDecorButtonNoStyle', function () {
-			browser.assert.hasClass(KVCWriteDetailToolbarPublishButton, 'OLSKDecorButtonNoStyle');
-		});
-
-		it('classes OLSKDecorTappable', function () {
-			browser.assert.hasClass(KVCWriteDetailToolbarPublishButton, 'OLSKDecorTappable');
-		});
-
-		it('classes OLSKToolbarButton', function () {
-			browser.assert.hasClass(KVCWriteDetailToolbarPublishButton, 'OLSKToolbarButton');
-		});
-
-		context('click', function () {
-			
-			before(function () {
-				browser.assert.text('#TestKVCWriteDetailDispatchPublish', '0');
-			});
-			
-			before(function () {
-				return browser.pressButton(KVCWriteDetailToolbarPublishButton);
-			});
-
-			it('sends KVCWriteDetailDispatchPublish', function () {
-				browser.assert.text('#TestKVCWriteDetailDispatchPublish', '1');
-			});
-		
-		});
-	
-	});
-
-	describe('KVCWriteDetailToolbarPublishButtonImage', function test_KVCWriteDetailToolbarPublishButtonImage () {
-
-		it('sets src', function () {
-			browser.assert.elements(`${ KVCWriteDetailToolbarPublishButtonImage } #_KVCWritePublish`, 1);
-		});
-	
-	});
-
-	describe('KVCWriteDetailToolbarPublicLink', function test_KVCWriteDetailToolbarPublicLink () {
-
-		before(function() {
-			return browser.OLSKVisit(kDefaultRoute, {
-				KVCWriteDetailItem: JSON.stringify(Object.assign(StubNoteObjectValid(), {
-					KVCNoteIsPublic: true,
-					KVCNotePublishDate: new Date(),
-					KVCNotePublicID: 'bravo',
-				})),
-				KVCWriteDetailConnected: true,
-			});
-		});
-
-		it('sets target', function () {
-			browser.assert.attribute(KVCWriteDetailToolbarPublicLink, 'target', '_blank');
-		});
-
-		it('sets href to KVCWriteDetailPublicURLFor', function () {
-			browser.assert.attribute(KVCWriteDetailToolbarPublicLink, 'href', '[public]/bravo');
-		});
-
-	});
-
-	describe('KVCWriteDetailToolbarRetractButton', function test_KVCWriteDetailToolbarRetractButton () {
-
-		it('classes OLSKDecorButtonNoStyle', function () {
-			browser.assert.hasClass(KVCWriteDetailToolbarRetractButton, 'OLSKDecorButtonNoStyle');
-		});
-
-		it('classes OLSKDecorTappable', function () {
-			browser.assert.hasClass(KVCWriteDetailToolbarRetractButton, 'OLSKDecorTappable');
-		});
-
-		it('classes OLSKToolbarButton', function () {
-			browser.assert.hasClass(KVCWriteDetailToolbarRetractButton, 'OLSKToolbarButton');
-		});
-
-		context('click', function () {
-			
-			before(function () {
-				browser.assert.text('#TestKVCWriteDetailDispatchRetract', '0');
-			});
-			
-			before(function () {
-				return browser.pressButton(KVCWriteDetailToolbarRetractButton);
-			});
-
-			it('sends KVCWriteDetailDispatchRetract', function () {
-				browser.assert.text('#TestKVCWriteDetailDispatchRetract', '1');
-			});
-		
-		});
-	
-	});
-
-	describe('KVCWriteDetailToolbarRetractButtonImage', function test_KVCWriteDetailToolbarRetractButtonImage () {
-
-		it('sets src', function () {
-			browser.assert.elements(`${ KVCWriteDetailToolbarRetractButtonImage } #_KVCWriteRetract`, 1);
 		});
 	
 	});

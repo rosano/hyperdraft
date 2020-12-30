@@ -21,16 +21,16 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 				browser.assert.attribute(KVCWriteDetailToolbarBackButton, 'title', uLocalized('KVCWriteDetailToolbarBackButtonText'));
 			});
 
+			it('localizes KVCWriteDetailToolbarConnectButton', function () {
+				browser.assert.attribute(KVCWriteDetailToolbarConnectButton, 'title', uLocalized('KVCWriteDetailToolbarPublishButtonText'));
+			});
+
 			it('localizes KVCWriteDetailToolbarJumpButton', function () {
 				browser.assert.attribute(KVCWriteDetailToolbarJumpButton, 'title', uLocalized('KVCWriteDetailToolbarJumpButtonText'));
 			});
 
 			it('localizes KVCWriteDetailToolbarArchiveButton', function () {
 				browser.assert.attribute(KVCWriteDetailToolbarArchiveButton, 'title', uLocalized('KVCWriteDetailToolbarArchiveButtonText'));
-			});
-
-			it('localizes KVCWriteDetailToolbarConnectButton', function () {
-				browser.assert.attribute(KVCWriteDetailToolbarConnectButton, 'title', uLocalized('KVCWriteDetailToolbarPublishButtonText'));
 			});
 
 			it('localizes KVCWriteDetailToolbarVersionsButton', function () {

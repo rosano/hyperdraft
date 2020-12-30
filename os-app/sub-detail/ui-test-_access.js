@@ -6,14 +6,10 @@ Object.entries({
 	KVCWriteDetailHeader: '.KVCWriteDetailHeader',
 	
 	KVCWriteDetailToolbar: '.KVCWriteDetailToolbar',
+	
 	KVCWriteDetailToolbarBackButton: '.KVCWriteDetailToolbarBackButton',
 	KVCWriteDetailToolbarBackButtonImage: '.KVCWriteDetailToolbarBackButtonImage',
-	KVCWriteDetailToolbarJumpButton: '.KVCWriteDetailToolbarJumpButton',
-	KVCWriteDetailToolbarJumpButtonImage: '.KVCWriteDetailToolbarJumpButtonImage',
-	KVCWriteDetailToolbarArchiveButton: '.KVCWriteDetailToolbarArchiveButton',
-	KVCWriteDetailToolbarArchiveButtonImage: '.KVCWriteDetailToolbarArchiveButtonImage',
-	KVCWriteDetailToolbarUnarchiveButton: '.KVCWriteDetailToolbarUnarchiveButton',
-	KVCWriteDetailToolbarUnarchiveButtonImage: '.KVCWriteDetailToolbarUnarchiveButtonImage',
+	
 	KVCWriteDetailToolbarConnectButton: '.KVCWriteDetailToolbarConnectButton',
 	KVCWriteDetailToolbarConnectButtonImage: '.KVCWriteDetailToolbarConnectButtonImage',
 	KVCWriteDetailToolbarIsRootPage: '.KVCWriteDetailToolbarIsRootPage',
@@ -22,6 +18,13 @@ Object.entries({
 	KVCWriteDetailToolbarPublicLink: '.KVCWriteDetailToolbarPublicLink',
 	KVCWriteDetailToolbarRetractButton: '.KVCWriteDetailToolbarRetractButton',
 	KVCWriteDetailToolbarRetractButtonImage: '.KVCWriteDetailToolbarRetractButtonImage',
+	
+	KVCWriteDetailToolbarJumpButton: '.KVCWriteDetailToolbarJumpButton',
+	KVCWriteDetailToolbarJumpButtonImage: '.KVCWriteDetailToolbarJumpButtonImage',
+	KVCWriteDetailToolbarArchiveButton: '.KVCWriteDetailToolbarArchiveButton',
+	KVCWriteDetailToolbarArchiveButtonImage: '.KVCWriteDetailToolbarArchiveButtonImage',
+	KVCWriteDetailToolbarUnarchiveButton: '.KVCWriteDetailToolbarUnarchiveButton',
+	KVCWriteDetailToolbarUnarchiveButtonImage: '.KVCWriteDetailToolbarUnarchiveButtonImage',
 	KVCWriteDetailToolbarVersionsButton: '.KVCWriteDetailToolbarVersionsButton',
 	KVCWriteDetailToolbarVersionsButtonImage: '.KVCWriteDetailToolbarVersionsButtonImage',
 	KVCWriteDetailToolbarDiscardButton: '.KVCWriteDetailToolbarDiscardButton',	
@@ -84,26 +87,6 @@ describe('KVCWriteDetail_Access', function () {
 			browser.assert.elements(KVCWriteDetailToolbarBackButtonImage, 1);
 		});
 
-		it('shows KVCWriteDetailToolbarJumpButton', function () {
-			browser.assert.elements(KVCWriteDetailToolbarJumpButton, 1);
-		});
-
-		it('shows KVCWriteDetailToolbarJumpButtonImage', function () {
-			browser.assert.elements(KVCWriteDetailToolbarJumpButtonImage, 1);
-		});
-
-		it('shows KVCWriteDetailToolbarArchiveButton', function () {
-			browser.assert.elements(KVCWriteDetailToolbarArchiveButton, 1);
-		});
-
-		it('shows KVCWriteDetailToolbarArchiveButtonImage', function () {
-			browser.assert.elements(KVCWriteDetailToolbarArchiveButtonImage, 1);
-		});
-
-		it('hides KVCWriteDetailToolbarUnarchiveButton', function () {
-			browser.assert.elements(KVCWriteDetailToolbarUnarchiveButton, 0);
-		});
-
 		it('shows KVCWriteDetailToolbarConnectButton', function () {
 			browser.assert.elements(KVCWriteDetailToolbarConnectButton, 1);
 		});
@@ -130,6 +113,26 @@ describe('KVCWriteDetail_Access', function () {
 
 		it('hides KVCWriteDetailToolbarRetractButton', function () {
 			browser.assert.elements(KVCWriteDetailToolbarRetractButton, 0);
+		});
+
+		it('shows KVCWriteDetailToolbarJumpButton', function () {
+			browser.assert.elements(KVCWriteDetailToolbarJumpButton, 1);
+		});
+
+		it('shows KVCWriteDetailToolbarJumpButtonImage', function () {
+			browser.assert.elements(KVCWriteDetailToolbarJumpButtonImage, 1);
+		});
+
+		it('shows KVCWriteDetailToolbarArchiveButton', function () {
+			browser.assert.elements(KVCWriteDetailToolbarArchiveButton, 1);
+		});
+
+		it('shows KVCWriteDetailToolbarArchiveButtonImage', function () {
+			browser.assert.elements(KVCWriteDetailToolbarArchiveButtonImage, 1);
+		});
+
+		it('hides KVCWriteDetailToolbarUnarchiveButton', function () {
+			browser.assert.elements(KVCWriteDetailToolbarUnarchiveButton, 0);
 		});
 
 		it('shows KVCWriteDetailToolbarVersionsButton', function () {

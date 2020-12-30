@@ -216,22 +216,6 @@ import KVCWriteInput from '../sub-input/main.svelte';
 	</div>
 
 	<div class="OLSKToolbarElementGroup">
-		<button class="KVCWriteDetailToolbarJumpButton OLSKDecorButtonNoStyle OLSKDecorTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarJumpButtonText') } accesskey="j" tabindex="-1" disabled={ !mod._ValueHeaderTokens.length } on:click={ mod.InterfaceJumpButtonDidClick }>
-			<div class="KVCWriteDetailToolbarJumpButtonImage">{@html _KVCWriteJump }</div>
-		</button>
-
-		{#if !mod._ValueItem.KVCNoteIsArchived }
-			<button class="KVCWriteDetailToolbarArchiveButton OLSKDecorButtonNoStyle OLSKDecorTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarArchiveButtonText') } on:click={ KVCWriteDetailDispatchArchive }>
-				<div class="KVCWriteDetailToolbarArchiveButtonImage">{@html _KVCWriteArchive }</div>
-			</button>
-		{/if}
-
-		{#if mod._ValueItem.KVCNoteIsArchived }
-			<button class="KVCWriteDetailToolbarUnarchiveButton OLSKDecorButtonNoStyle OLSKDecorTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarUnarchiveButtonText') } on:click={ KVCWriteDetailDispatchUnarchive }>
-				<div class="KVCWriteDetailToolbarUnarchiveButtonImage">{@html _KVCWriteUnarchive }</div>
-			</button>
-		{/if}
-
 		{#if !KVCWriteDetailConnected }
 			<button class="KVCWriteDetailToolbarConnectButton OLSKDecorButtonNoStyle OLSKDecorTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarPublishButtonText') } on:click={ () => window.confirm(OLSKLocalized('OLSKRemoteStorageConnectConfirmText')) && KVCWriteDetailDispatchConnect() }>
 				<div class="KVCWriteDetailToolbarConnectButtonImage">{@html _KVCWritePublish }</div>
@@ -256,6 +240,24 @@ import KVCWriteInput from '../sub-input/main.svelte';
 					<div class="KVCWriteDetailToolbarRetractButtonImage">{@html _KVCWriteRetract }</div>
 				</button>
 			{/if}
+		{/if}
+	</div>
+
+	<div class="OLSKToolbarElementGroup">
+		<button class="KVCWriteDetailToolbarJumpButton OLSKDecorButtonNoStyle OLSKDecorTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarJumpButtonText') } accesskey="j" tabindex="-1" disabled={ !mod._ValueHeaderTokens.length } on:click={ mod.InterfaceJumpButtonDidClick }>
+			<div class="KVCWriteDetailToolbarJumpButtonImage">{@html _KVCWriteJump }</div>
+		</button>
+
+		{#if !mod._ValueItem.KVCNoteIsArchived }
+			<button class="KVCWriteDetailToolbarArchiveButton OLSKDecorButtonNoStyle OLSKDecorTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarArchiveButtonText') } on:click={ KVCWriteDetailDispatchArchive }>
+				<div class="KVCWriteDetailToolbarArchiveButtonImage">{@html _KVCWriteArchive }</div>
+			</button>
+		{/if}
+
+		{#if mod._ValueItem.KVCNoteIsArchived }
+			<button class="KVCWriteDetailToolbarUnarchiveButton OLSKDecorButtonNoStyle OLSKDecorTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarUnarchiveButtonText') } on:click={ KVCWriteDetailDispatchUnarchive }>
+				<div class="KVCWriteDetailToolbarUnarchiveButtonImage">{@html _KVCWriteUnarchive }</div>
+			</button>
 		{/if}
 
 		{#if !_KVCWriteDetailVersionsIsDisabled}
