@@ -85,7 +85,10 @@ const mod = {
 			return;
 		}
 
-		// event.preventDefault();
+		event.preventDefault();
+
+		mod._ValueEditorInstance.setCursor(CodeMirror.posFromMouse(mod._ValueEditorInstance, event));
+
 	},
 
 	InterfaceEditorDidTouchUp (event) {
