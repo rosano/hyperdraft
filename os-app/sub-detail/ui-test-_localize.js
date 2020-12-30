@@ -25,10 +25,6 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 				browser.assert.attribute(KVCWriteDetailToolbarConnectButton, 'title', uLocalized('KVCWriteDetailToolbarPublishButtonText'));
 			});
 
-			it('localizes KVCWriteDetailToolbarJumpButton', function () {
-				browser.assert.attribute(KVCWriteDetailToolbarJumpButton, 'title', uLocalized('KVCWriteDetailToolbarJumpButtonText'));
-			});
-
 			it('localizes KVCWriteDetailToolbarArchiveButton', function () {
 				browser.assert.attribute(KVCWriteDetailToolbarArchiveButton, 'title', uLocalized('KVCWriteDetailToolbarArchiveButtonText'));
 			});
@@ -43,6 +39,19 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 
 			it('localizes KVCWriteDetailLauncherItemArchive', function () {
 				return browser.assert.OLSKLauncherItemText('KVCWriteDetailLauncherItemArchive', uLocalized('KVCWriteDetailToolbarArchiveButtonText'));
+			});
+
+			context('KVCWriteInputDispatchHeaderTokens', function() {
+
+				before(function() {
+					// browser.fill('CodeMirror', 'bravo');
+					browser.fill('.KVCWriteInputFieldDebug', '# bravo');
+				});
+
+				it('localizes KVCWriteDetailToolbarJumpButton', function () {
+					browser.assert.attribute(KVCWriteDetailToolbarJumpButton, 'title', uLocalized('KVCWriteDetailToolbarJumpButtonText'));
+				});
+
 			});
 
 			context('connect', function () {

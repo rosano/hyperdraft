@@ -34,6 +34,15 @@
 	display: none;
 }
 
+.KVCWriteDetailToolbarJumpButton	{
+	position: absolute;
+	z-index: 999;
+	right: 0;
+	margin: 16px 13px;
+	opacity: 0.5;
+	top: var(--OLSKToolbarMinHeight);
+}
+
 @media screen and (max-width: 760px) {
 
 .KVCWriteDetailToolbar {

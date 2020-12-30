@@ -115,12 +115,8 @@ describe('KVCWriteDetail_Access', function () {
 			browser.assert.elements(KVCWriteDetailToolbarRetractButton, 0);
 		});
 
-		it('shows KVCWriteDetailToolbarJumpButton', function () {
-			browser.assert.elements(KVCWriteDetailToolbarJumpButton, 1);
-		});
-
-		it('shows KVCWriteDetailToolbarJumpButtonImage', function () {
-			browser.assert.elements(KVCWriteDetailToolbarJumpButtonImage, 1);
+		it('hides KVCWriteDetailToolbarJumpButton', function () {
+			browser.assert.elements(KVCWriteDetailToolbarJumpButton, 0);
 		});
 
 		it('shows KVCWriteDetailToolbarArchiveButton', function () {
@@ -163,6 +159,23 @@ describe('KVCWriteDetail_Access', function () {
 			return browser.assert.OLSKLauncherItems('KVCWriteDetailLauncherItemUnarchive', 0);
 		});
 		
+	});
+
+	context('KVCWriteInputDispatchHeaderTokens', function() {
+
+		before(function() {
+			// browser.fill('CodeMirror', 'bravo');
+			browser.fill('.KVCWriteInputFieldDebug', '# bravo');
+		});
+
+		it('shows KVCWriteDetailToolbarJumpButton', function () {
+			browser.assert.elements(KVCWriteDetailToolbarJumpButton, 1);
+		});
+
+		it('shows KVCWriteDetailToolbarJumpButtonImage', function () {
+			browser.assert.elements(KVCWriteDetailToolbarJumpButtonImage, 1);
+		});
+
 	});
 
 	context('KVCNoteIsArchived', function() {

@@ -288,6 +288,11 @@ describe('KVCWriteDetail_Misc', function () {
 
 	describe('KVCWriteDetailToolbarJumpButton', function test_KVCWriteDetailToolbarJumpButton () {
 		
+		before(function() {
+			// browser.fill('CodeMirror', 'bravo');
+			browser.fill('.KVCWriteInputFieldDebug', '# bravo');
+		});
+
 		it('classes OLSKDecorButtonNoStyle', function () {
 			browser.assert.hasClass(KVCWriteDetailToolbarJumpButton, 'OLSKDecorButtonNoStyle');
 		});
@@ -308,8 +313,20 @@ describe('KVCWriteDetail_Misc', function () {
 			browser.assert.attribute(KVCWriteDetailToolbarJumpButton, 'tabIndex', '-1');
 		});
 
-		it('sets disabled', function () {
-			browser.assert.attribute(KVCWriteDetailToolbarJumpButton, 'disabled', '');
+		context('click', function () {
+			
+			before(function () {
+				browser.assert.text('#TestKVCWriteDetailDispatchJump', '0');
+			});
+			
+			before(function () {
+				return browser.pressButton(KVCWriteDetailToolbarJumpButton);
+			});
+
+			it('sends KVCWriteDetailDispatchJump', function () {
+				browser.assert.text('#TestKVCWriteDetailDispatchJump', '1');
+			});
+		
 		});
 
 		context('keydown Ctrl+j', function () {
@@ -320,53 +337,10 @@ describe('KVCWriteDetail_Misc', function () {
 				});
 			});
 
-			it('sends no KVCWriteDetailDispatchJump', function () {
-				browser.assert.text('#TestKVCWriteDetailDispatchJump', '0');
+			it('sends KVCWriteDetailDispatchJump', function () {
+				browser.assert.text('#TestKVCWriteDetailDispatchJump', '2');
 			});
 		
-		});
-		
-		context('KVCWriteInputDispatchHeaderTokens', function() {
-
-			before(function() {
-				// browser.fill('CodeMirror', 'bravo');
-				browser.fill('.KVCWriteInputFieldDebug', '# bravo');
-			});
-
-			it('sets disabled', function() {
-				browser.assert.attribute(KVCWriteDetailToolbarJumpButton, 'disabled', null);
-			});
-
-			context('click', function () {
-				
-				before(function () {
-					browser.assert.text('#TestKVCWriteDetailDispatchJump', '0');
-				});
-				
-				before(function () {
-					return browser.pressButton(KVCWriteDetailToolbarJumpButton);
-				});
-
-				it('sends KVCWriteDetailDispatchJump', function () {
-					browser.assert.text('#TestKVCWriteDetailDispatchJump', '1');
-				});
-			
-			});
-
-			context('keydown Ctrl+j', function () {
-				
-				before(function () {
-					return browser.OLSKFireKeyboardEvent(browser.window, 'j', {
-						ctrlKey: true,
-					});
-				});
-
-				it('sends KVCWriteDetailDispatchJump', function () {
-					browser.assert.text('#TestKVCWriteDetailDispatchJump', '2');
-				});
-			
-			});
-
 		});
 	
 	});
