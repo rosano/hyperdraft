@@ -169,7 +169,6 @@ describe('KVCWriteDetail_Access', function () {
 				KVCWriteDetailItem: JSON.stringify(Object.assign(StubNoteObjectValid(), {
 					KVCNoteIsArchived: true,
 				})),
-				KVCWriteDetailConnected: true,
 			});
 		});
 
