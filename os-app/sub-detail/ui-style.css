@@ -45,8 +45,8 @@
 
 @media screen and (max-width: 760px) {
 
-.KVCWriteDetailToolbar {
-	/* browser quirks */
+.KVCWriteDetailHeader {
+	/* browser quirks maybe #purge codemirror z-index issue */
 	z-index: 999;
 }
 
