@@ -123,6 +123,9 @@ After setting up a custom domain, designate any note as the home page with the `
 
 | Editor ||
 :--- | ---
+| `KVCWriteDetailToolbarArchiveButtonText` | Launcher |
+| `KVCWriteDetailToolbarUnarchiveButtonText` | Launcher |
+| `KVCWriteDetailLauncherItemSetAsRootPageText` if storage connected | Launcher |
 | KVCWriteDetailToolbarJumpButtonText | `AccessKey+j` |
 | Select previous or next note, if filter field is focused | `Up` or `Down` |
 | Clear filter text and selected note, focus filter field | `Escape` |
@@ -130,14 +133,23 @@ After setting up a custom domain, designate any note as the home page with the `
 
 | Global ||
 :--- | ---
+| Alternate *the focus* between the Notes list and the editor | `Tab` |
+| `KVCWriteLauncherItemJournalText` | Launcher |
+| `KVCWriteLauncherItemBacklinksText` | Launcher |
+| `KVCWriteMasterRevealArchiveButtonText` | Launcher |
+| `OLSKRemoteStorageLauncherItemOpenLoginLinkText` | Launcher |
+| `OLSKServiceWorkerLauncherItemReloadText` | Launcher |
+| `OLSKServiceWorkerLauncherItemDebugForceUpdateText` | Launcher |
+| Launcher | `Alt+Enter` |
+
+| Global (when storage is connected) ||
+:--- | ---
+| `KVCWriteLauncherItemConfigureCustomDomainText` | Launcher |
+| `KVCWriteLauncherItemRemoveCustomDomainText` | Launcher |
 | `OLSKRemoteStorageLauncherItemCopyLoginLinkText` | Launcher |
 | `OLSKFundLauncherItemEnterClueText` | Launcher |
 | `OLSKFundLauncherItemClearClueText` | Launcher |
-| `OLSKServiceWorkerLauncherItemReloadText` | Launcher |
-| `OLSKServiceWorkerLauncherItemDebugForceUpdateText` | Launcher |
 | `OLSKRemoteStorageLauncherItemDebugFlushDataText` | Launcher |
-| Alternate *the focus* between the Notes list and the editor | `Tab` |
-| Launcher | `Alt+Enter` |
 
 # Add to Home screen on mobile and tablet devices
 
