@@ -2,6 +2,10 @@ import KVCTemplate from '../_shared/KVCTemplate/main.js';
 
 const mod = {
 
+	KVCWriteLogicPublicSymbol () {
+		return 'ᗕ';
+	},
+
 	KVCWriteFilterFunction (inputData) {
 		if (typeof inputData !== 'string') {
 			throw new Error('KVCErrorInputNotValid');

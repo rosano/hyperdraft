@@ -2,6 +2,14 @@ const { throws, deepEqual } = require('assert');
 
 const mod = require('./ui-logic.js').default;
 
+describe('KVCWriteLogicPublicSymbol', function test_KVCWriteLogicPublicSymbol() {
+
+	it('sorts KVCNoteIsArchived below others', function() {
+		deepEqual(mod.KVCWriteLogicPublicSymbol(), 'ᗕ');
+	});
+
+});
+
 describe('KVCWriteLogicListSort', function test_KVCWriteLogicListSort() {
 
 	it('sorts by KVCNoteModificationDate descending', function() {
