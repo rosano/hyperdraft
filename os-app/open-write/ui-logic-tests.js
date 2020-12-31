@@ -4,46 +4,8 @@ const mod = require('./ui-logic.js').default;
 
 describe('KVCWriteLogicPublicSymbol', function test_KVCWriteLogicPublicSymbol() {
 
-	it('sorts KVCNoteIsArchived below others', function() {
+	it('returns string', function() {
 		deepEqual(mod.KVCWriteLogicPublicSymbol(), 'ᗕ');
-	});
-
-});
-
-describe('KVCWriteLogicListSort', function test_KVCWriteLogicListSort() {
-
-	it('sorts by KVCNoteModificationDate descending', function() {
-		const item1 = {
-			KVCNoteModificationDate: new Date(0),
-		};
-		const item2 = {
-			KVCNoteModificationDate: new Date(1),
-		};
-
-		deepEqual([item1, item2].sort(mod.KVCWriteLogicListSort), [item2, item1]);
-	});
-
-	it('sorts by KVCNoteCreationDate descending', function() {
-		const item1 = {
-			KVCNoteCreationDate: new Date(0),
-		};
-		const item2 = {
-			KVCNoteCreationDate: new Date(1),
-		};
-
-		deepEqual([item1, item2].sort(mod.KVCWriteLogicListSort), [item2, item1]);
-	});
-
-	it('sorts KVCNoteIsArchived below others', function() {
-		const item1 = {
-			KVCNoteCreationDate: new Date(0),
-		};
-		const item2 = {
-			KVCNoteCreationDate: new Date(1),
-			KVCNoteIsArchived: true,
-		};
-
-		deepEqual([item1, item2].sort(mod.KVCWriteLogicListSort), [item1, item2]);
 	});
 
 });
@@ -92,6 +54,44 @@ describe('KVCWriteFilterFunction', function test_KVCWriteFilterFunction() {
 			}), true);
 		});
 
+	});
+
+});
+
+describe('KVCWriteLogicListSort', function test_KVCWriteLogicListSort() {
+
+	it('sorts by KVCNoteModificationDate descending', function() {
+		const item1 = {
+			KVCNoteModificationDate: new Date(0),
+		};
+		const item2 = {
+			KVCNoteModificationDate: new Date(1),
+		};
+
+		deepEqual([item1, item2].sort(mod.KVCWriteLogicListSort), [item2, item1]);
+	});
+
+	it('sorts by KVCNoteCreationDate descending', function() {
+		const item1 = {
+			KVCNoteCreationDate: new Date(0),
+		};
+		const item2 = {
+			KVCNoteCreationDate: new Date(1),
+		};
+
+		deepEqual([item1, item2].sort(mod.KVCWriteLogicListSort), [item2, item1]);
+	});
+
+	it('sorts KVCNoteIsArchived below others', function() {
+		const item1 = {
+			KVCNoteCreationDate: new Date(0),
+		};
+		const item2 = {
+			KVCNoteCreationDate: new Date(1),
+			KVCNoteIsArchived: true,
+		};
+
+		deepEqual([item1, item2].sort(mod.KVCWriteLogicListSort), [item1, item2]);
 	});
 
 });
