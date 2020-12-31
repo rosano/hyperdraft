@@ -54,6 +54,32 @@ describe('KVCWriteFilterFunction', function test_KVCWriteFilterFunction() {
 			}), true);
 		});
 
+		context('KVCWriteLogicPublicSymbol', function () {
+			
+			it('matches whole string', function() {
+				deepEqual(mod.KVCWriteFilterFunction(mod.KVCWriteLogicPublicSymbol())({
+					KVCNoteBody: Math.random().toString(),
+					KVCNoteIsPublic: true,
+				}), true);
+			});
+
+			it('returns false if no match', function() {
+				deepEqual(mod.KVCWriteFilterFunction(mod.KVCWriteLogicPublicSymbol() + Math.random().toString())({
+					KVCNoteBody: Math.random().toString(),
+					KVCNoteIsPublic: true,
+				}), false);
+			});
+
+			it('matches non symbol', function() {
+				const KVCNoteBody = Math.random().toString();
+				deepEqual(mod.KVCWriteFilterFunction(mod.KVCWriteLogicPublicSymbol() + KVCNoteBody)({
+					KVCNoteBody,
+					KVCNoteIsPublic: true,
+				}), true);
+			});
+		
+		});
+
 	});
 
 });

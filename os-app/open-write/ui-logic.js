@@ -11,7 +11,15 @@ const mod = {
 			throw new Error('KVCErrorInputNotValid');
 		}
 
+		const isPublic = inputData.match(mod.KVCWriteLogicPublicSymbol());
+		
+		inputData = inputData.split(mod.KVCWriteLogicPublicSymbol()).join('');
+
 		return function (e) {
+			if (isPublic && !e.KVCNoteIsPublic) {
+				return false;
+			}
+
 			// Searching and sorting text with diacritical marks in JavaScript | Thread Engineering https://thread.engineering/2018-08-29-searching-and-sorting-text-with-diacritical-marks-in-javascript/
 			return !!e.KVCNoteBody.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').includes(inputData.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''));
 		};
