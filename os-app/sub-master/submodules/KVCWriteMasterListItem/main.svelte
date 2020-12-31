@@ -2,10 +2,16 @@
 export let KVCWriteMasterListItemObject;
 export let KVCWriteMasterListItemDispatchTitle;
 export let KVCWriteMasterListItemDispatchSnippet;
+
+import KVCWriteLogic from '../../../open-write/ui-logic.js';
 </script>
 
 <div class="KVCWriteMasterListItem OLSKCommonEdgeBottom" class:KVCWriteMasterListItemArchived={ KVCWriteMasterListItemObject.KVCNoteIsArchived }>
 
+
+{#if KVCWriteMasterListItemObject.KVCNoteIsPublic }
+	<span class="KVCWriteMasterListItemIsPublic" aria-hidden="true">{ KVCWriteLogic.KVCWriteLogicPublicSymbol() }</span>
+{/if}
 <strong class="KVCWriteMasterListItemTitle" aria-hidden="true">{ KVCWriteMasterListItemDispatchTitle(KVCWriteMasterListItemObject.KVCNoteBody) }</strong>
 <span class="KVCWriteMasterListItemSnippet" aria-hidden="true">{ KVCWriteMasterListItemDispatchSnippet(KVCWriteMasterListItemObject.KVCNoteBody) }</span>
 

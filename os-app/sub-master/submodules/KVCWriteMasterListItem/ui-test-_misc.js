@@ -6,6 +6,7 @@ describe('KVCWriteMasterListItem_Misc', function () {
 		return browser.OLSKVisit(kDefaultRoute, {
 			KVCWriteMasterListItemObject: JSON.stringify({
 				KVCNoteBody: 'alfa\nbravo',
+				KVCNoteIsPublic: true,
 			}),
 		});
 	});
@@ -16,6 +17,18 @@ describe('KVCWriteMasterListItem_Misc', function () {
 			browser.assert.hasClass(KVCWriteMasterListItem, 'OLSKCommonEdgeBottom');
 		});
 		
+	});
+
+	describe('KVCWriteMasterListItemIsPublic', function test_KVCWriteMasterListItemIsPublic () {
+		
+		it('sets aria-hidden', function () {
+			browser.assert.attribute(KVCWriteMasterListItemIsPublic, 'aria-hidden', 'true');
+		});
+
+		it('sets text', function () {
+			browser.assert.text(KVCWriteMasterListItemIsPublic, require('../../../open-write/ui-logic.js').default.KVCWriteLogicPublicSymbol());
+		});
+	
 	});
 
 	describe('KVCWriteMasterListItemTitle', function test_KVCWriteMasterListItemTitle () {
