@@ -136,6 +136,7 @@ After setting up a custom domain, designate any note as the home page with the `
 | Alternate *the focus* between the Notes list and the editor | `Tab` |
 | `KVCWriteLauncherItemJournalText` | Launcher |
 | `KVCWriteLauncherItemBacklinksText` | Launcher |
+| `KVCWriteLauncherItemShowPublicNotesText` | Launcher |
 | `KVCWriteMasterRevealArchiveButtonText` | Launcher |
 | `OLSKRemoteStorageLauncherItemOpenLoginLinkText` | Launcher |
 | `OLSKServiceWorkerLauncherItemReloadText` | Launcher |

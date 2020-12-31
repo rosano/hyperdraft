@@ -2,6 +2,7 @@ KVCWriteTitle: Write
 KVCWriteStorageExportButtonText: Export
 KVCWriteLauncherItemJournalText: Journal
 KVCWriteLauncherItemBacklinksText: Backlinks
+KVCWriteLauncherItemShowPublicNotesText: Show public notes
 KVCWriteLauncherItemConfigureCustomDomainText: Configure custom domain name
 KVCWriteLauncherItemConfigureCustomDomainPrompt1QuestionText: Copy the following root URL and paste it in your host configuration.
 KVCWriteLauncherItemConfigureCustomDomainPrompt2QuestionText: What is your custom domain name?

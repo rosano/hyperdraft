@@ -2,6 +2,7 @@ KVCWriteTitle: Écrire
 KVCWriteStorageExportButtonText: Exporter
 KVCWriteLauncherItemJournalText: Journal
 KVCWriteLauncherItemBacklinksText: Liens retours
+KVCWriteLauncherItemShowPublicNotesText: Montrere les notes publiques
 KVCWriteLauncherItemConfigureCustomDomainText: Configurer nom de domaine personalisé
 KVCWriteLauncherItemConfigureCustomDomainPrompt1QuestionText: Veuillez copier le texte suivant et le coller dedans votre host configuration.
 KVCWriteLauncherItemConfigureCustomDomainPrompt2QuestionText: Quel est votre nom de domaine personalisé ?

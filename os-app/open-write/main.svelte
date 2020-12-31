@@ -124,6 +124,14 @@ const mod = {
 			LCHRecipeCallback: async function KVCWriteLauncherItemBacklinks () {
 				mod.ControlNoteCreate(KVCWriteLogic.KVCWriteLauncherItemBacklinksTemplate(this.api.LCHDateLocalOffsetSubtracted(new Date(OLSK_SPEC_UI() ? '2001-02-03T04:05:06Z' : Date.now())), KVCWriteLogic.KVCWriteBacklinksMap(mod._ValueNotesAll), OLSKLocalized));
 			},
+		}, {
+			LCHRecipeSignature: 'KVCWriteLauncherItemShowPublicNotes',
+			LCHRecipeName: OLSKLocalized('KVCWriteLauncherItemShowPublicNotesText'),
+			LCHRecipeCallback: function KVCWriteLauncherItemShowPublicNotes () {
+				mod.ControlFilterWithNoThrottle(KVCWriteLogic.KVCWriteLogicPublicSymbol());
+
+				document.querySelector('.OLSKMasterListFilterField').focus();
+			},
 		}];
 
 		if (mod._ValueStorageIsConnected) {

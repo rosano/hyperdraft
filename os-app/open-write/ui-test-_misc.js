@@ -696,6 +696,26 @@ describe('KVCWrite_Misc', function () {
 	
 	});
 
+	describe('KVCWriteLauncherItemShowPublicNotes', function test_KVCWriteLauncherItemShowPublicNotes () {
+		
+		before(function () {
+			browser.assert.input('.OLSKMasterListFilterField', '');
+		});
+
+		before(function () {
+			return browser.OLSKLauncherRun('KVCWriteLauncherItemShowPublicNotes');
+		});
+
+		it('sets OLSKMasterListFilterField text', function () {
+			browser.assert.input('.OLSKMasterListFilterField', require('./ui-logic.js').default.KVCWriteLogicPublicSymbol());
+		});
+
+		it('focuses OLSKMasterListFilterField', function() {
+			browser.assert.hasFocus('.OLSKMasterListFilterField');
+		});
+
+	});
+
 	describe('KVCWriteLegacyRoute', function () {
 		
 		before(function () {
