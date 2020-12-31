@@ -77,6 +77,14 @@ describe('KVCWriteFilterFunction', function test_KVCWriteFilterFunction() {
 					KVCNoteIsPublic: true,
 				}), true);
 			});
+
+			it('matches non symbol with space', function() {
+				const KVCNoteBody = Math.random().toString();
+				deepEqual(mod.KVCWriteFilterFunction(mod.KVCWriteLogicPublicSymbol() + ' ' +KVCNoteBody)({
+					KVCNoteBody,
+					KVCNoteIsPublic: true,
+				}), true);
+			});
 		
 		});
 

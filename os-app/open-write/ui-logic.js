@@ -13,7 +13,7 @@ const mod = {
 
 		const isPublic = inputData.match(mod.KVCWriteLogicPublicSymbol());
 		
-		inputData = inputData.split(mod.KVCWriteLogicPublicSymbol()).join('');
+		inputData = inputData.split(mod.KVCWriteLogicPublicSymbol()).join('').trim();
 
 		return function (e) {
 			if (isPublic && !e.KVCNoteIsPublic) {
