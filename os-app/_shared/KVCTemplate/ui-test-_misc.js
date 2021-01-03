@@ -20,6 +20,14 @@ describe('KVCTemplate_Misc', function () {
 		
 	});
 
+	describe('KVCTemplateHeadMetaDescription', function test_KVCTemplateHeadMetaDescription() {
+
+		it('sets value', function () {
+			browser.assert.attribute(KVCTemplateHeadMetaDescription, 'content', uTokenTag('KVCTemplateTokenPostBlurb'));
+		});
+
+	});
+
 	describe('KVCTemplateHeadMetaContentType', function test_KVCTemplateHeadMetaContentType() {
 
 		it('sets value', function () {
