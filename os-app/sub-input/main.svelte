@@ -143,7 +143,7 @@ const mod = {
 		}
 
 		const match = [
-			(indirect.match(/\((.*)\)/) || []).pop(),
+			(indirect.match(/^\((.*)\)/) || []).pop(),
 			(inputData.match(/\[\[(.*)\]\]/) || []).pop(),
 			].filter(function (e) {
 			return !!e;
