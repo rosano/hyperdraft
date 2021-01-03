@@ -201,6 +201,7 @@ const mod = {
 
 		return Object.fromEntries([
 			[mod.KVCTemplateTokenPostTitle(), mod.KVCTemplatePlaintextTitle(body)],
+			[mod.KVCTemplateTokenPostBlurb(), OLSKString.OLSKStringSnippet(mod.KVCTemplatePlaintextBody(body))],
 			[mod.KVCTemplateTokenPostBody(), mod.KVCTemplateHTML(mod.KVCTemplatePlaintextBody(body), options)],
 			[mod.KVCTemplateTokenRootURL(), options.KVCOptionRootURL],
 			[mod.KVCTemplateTokenRootURLLegacy(), options.KVCOptionRootURL],
