@@ -109,6 +109,10 @@ const mod = {
 		return 'Title';
 	},
 
+	KVCTemplateTokenPostBlurb () {
+		return 'PostBlurb';
+	},
+
 	KVCTemplateTokenPostBody () {
 		return 'Body';
 	},

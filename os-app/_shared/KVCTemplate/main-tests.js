@@ -156,6 +156,14 @@ describe('KVCTemplateTokenPostTitle', function test_KVCTemplateTokenPostTitle() 
 
 });
 
+describe('KVCTemplateTokenPostBlurb', function test_KVCTemplateTokenPostBlurb() {
+
+	it('returns string', function() {
+		deepEqual(mod.KVCTemplateTokenPostBlurb(), 'PostBlurb');
+	});
+
+});
+
 describe('KVCTemplateTokenPostBody', function test_KVCTemplateTokenPostBody() {
 
 	it('returns string', function() {
