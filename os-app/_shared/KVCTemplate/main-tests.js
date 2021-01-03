@@ -88,6 +88,22 @@ describe('KVCTemplateTextContent', function test_KVCTemplateTextContent() {
 
 });
 
+describe('KVCTemplateNormalizeURL', function test_KVCTemplateNormalizeURL() {
+
+	it('returns string', function() {
+		deepEqual(mod.KVCTemplateNormalizeURL(), process.env.KVC_TEMPLATE_NORMALIZE_URL);
+	});
+
+});
+
+describe('KVCTemplateDecorURL', function test_KVCTemplateDecorURL() {
+
+	it('returns string', function() {
+		deepEqual(mod.KVCTemplateDecorURL(), process.env.KVC_TEMPLATE_DECOR_URL);
+	});
+
+});
+
 describe('KVCTemplateViewDefault', function test_KVCTemplateViewDefault() {
 
 	const uTag = function (inputData) {

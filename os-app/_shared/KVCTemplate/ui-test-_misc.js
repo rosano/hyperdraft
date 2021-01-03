@@ -36,6 +36,22 @@ describe('KVCTemplate_Misc', function () {
 
 	});
 
+	describe('KVCTemplateHeadLinkNormalize', function test_KVCTemplateHeadLinkNormalize() {
+
+		it('sets href', function () {
+			browser.assert.attribute(KVCTemplateHeadLinkNormalize, 'href', mod.KVCTemplateNormalizeURL());
+		});
+
+	});
+
+	describe('KVCTemplateHeadLinkDecor', function test_KVCTemplateHeadLinkDecor() {
+
+		it('sets href', function () {
+			browser.assert.attribute(KVCTemplateHeadLinkDecor, 'href', mod.KVCTemplateDecorURL());
+		});
+
+	});
+
 	describe('KVCTemplateBody', function test_KVCTemplateBody() {
 
 		it('classes OLSKDecor', function () {

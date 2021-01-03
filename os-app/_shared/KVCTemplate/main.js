@@ -32,6 +32,22 @@ const mod = {
 		return inputData.replace(/<[^>]*>?/gm, '').replace(/\n/g, ' ').trim();
 	},
 
+	KVCTemplateNormalizeURL () {
+		if ('KVC_TEMPLATE_NORMALIZE_URL_SWAP_TOKEN'.match('http')) {
+			return 'KVC_TEMPLATE_NORMALIZE_URL_SWAP_TOKEN';
+		}
+
+		return process.env.KVC_TEMPLATE_NORMALIZE_URL;
+	},
+
+	KVCTemplateDecorURL () {
+		if ('KVC_TEMPLATE_DECOR_URL_SWAP_TOKEN'.match('http')) {
+			return 'KVC_TEMPLATE_DECOR_URL_SWAP_TOKEN';
+		}
+		
+		return process.env.KVC_TEMPLATE_DECOR_URL;
+	},
+
 	KVCTemplateViewDefault (inputData) {
 		if (typeof inputData !== 'function') {
 			throw new Error('KVCErrorInputNotValid');
@@ -46,8 +62,8 @@ const mod = {
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width" />
 
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.css">
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/olsk/OLSKDecor/ui-style.css">
+<link rel="stylesheet" type="text/css" href="${ mod.KVCTemplateNormalizeURL() }">
+<link rel="stylesheet" type="text/css" href="${ mod.KVCTemplateDecorURL() }">
 
 </head>
 <body class="OLSKDecor OLSKDecorCapped OLSKDecorX">
