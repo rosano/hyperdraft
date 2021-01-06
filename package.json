@@ -23,7 +23,6 @@
     "ulid": "latest",
 
     "// MARKDOWN": null,
-    "turndown": "latest",
     "marked": "latest",
     "escape-string-regexp": "latest",
 
@@ -48,12 +47,6 @@
 
     "// PARSE": null,
     "jsdom": "latest",
-
-    "// DIFF": null,
-    "diff": "latest",
-    "diff-match-patch": "latest",
-    "html-entities": "latest",
-    "turndown": "latest",
 
     "// FRONTEND NORMALIZE CSS": null,
     "normalize.css": "latest",
