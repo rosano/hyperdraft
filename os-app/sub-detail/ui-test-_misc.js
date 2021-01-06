@@ -441,52 +441,6 @@ describe('KVCWriteDetail_Misc', function () {
 	
 	});
 
-	describe('KVCWriteDetailToolbarVersionsButton', function test_KVCWriteDetailToolbarVersionsButton () {
-
-		before(function() {
-			return browser.OLSKVisit(kDefaultRoute, {
-				KVCWriteDetailItem: JSON.stringify(StubNoteObjectValid()),
-			});
-		});
-		
-		it('classes OLSKDecorButtonNoStyle', function () {
-			browser.assert.hasClass(KVCWriteDetailToolbarVersionsButton, 'OLSKDecorButtonNoStyle');
-		});
-
-		it('classes OLSKDecorTappable', function () {
-			browser.assert.hasClass(KVCWriteDetailToolbarVersionsButton, 'OLSKDecorTappable');
-		});
-
-		it('classes OLSKToolbarButton', function () {
-			browser.assert.hasClass(KVCWriteDetailToolbarVersionsButton, 'OLSKToolbarButton');
-		});
-
-		context('click', function () {
-			
-			before(function () {
-				browser.assert.text('#TestKVCWriteDetailDispatchVersions', '0');
-			});
-			
-			before(function () {
-				return browser.pressButton(KVCWriteDetailToolbarVersionsButton);
-			});
-
-			it('sends KVCWriteDetailDispatchVersions', function () {
-				browser.assert.text('#TestKVCWriteDetailDispatchVersions', '1');
-			});
-		
-		});
-	
-	});
-
-	describe('KVCWriteDetailToolbarVersionsButtonImage', function test_KVCWriteDetailToolbarVersionsButtonImage () {
-
-		it('sets src', function () {
-			browser.assert.elements(`${ KVCWriteDetailToolbarVersionsButtonImage } #_KVCWriteVersions`, 1);
-		});
-	
-	});
-
 	describe('KVCWriteDetailToolbarDiscardButton', function test_KVCWriteDetailToolbarDiscardButton () {
 		
 		it('classes OLSKDecorButtonNoStyle', function () {

@@ -25,8 +25,6 @@ Object.entries({
 	KVCWriteDetailToolbarArchiveButtonImage: '.KVCWriteDetailToolbarArchiveButtonImage',
 	KVCWriteDetailToolbarUnarchiveButton: '.KVCWriteDetailToolbarUnarchiveButton',
 	KVCWriteDetailToolbarUnarchiveButtonImage: '.KVCWriteDetailToolbarUnarchiveButtonImage',
-	KVCWriteDetailToolbarVersionsButton: '.KVCWriteDetailToolbarVersionsButton',
-	KVCWriteDetailToolbarVersionsButtonImage: '.KVCWriteDetailToolbarVersionsButtonImage',
 	KVCWriteDetailToolbarDiscardButton: '.KVCWriteDetailToolbarDiscardButton',	
 	KVCWriteDetailToolbarDiscardButtonImage: '.KVCWriteDetailToolbarDiscardButtonImage',	
 }).map(function (e) {
@@ -129,14 +127,6 @@ describe('KVCWriteDetail_Access', function () {
 
 		it('hides KVCWriteDetailToolbarUnarchiveButton', function () {
 			browser.assert.elements(KVCWriteDetailToolbarUnarchiveButton, 0);
-		});
-
-		it('shows KVCWriteDetailToolbarVersionsButton', function () {
-			browser.assert.elements(KVCWriteDetailToolbarVersionsButton, 1);
-		});
-
-		it('shows KVCWriteDetailToolbarVersionsButtonImage', function () {
-			browser.assert.elements(KVCWriteDetailToolbarVersionsButtonImage, 1);
 		});
 
 		it('shows KVCWriteDetailToolbarDiscardButton', function () {

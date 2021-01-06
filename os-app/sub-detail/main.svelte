@@ -16,7 +16,6 @@ export let KVCWriteDetailDispatchSetAsRootPage;
 export let KVCWriteDetailDispatchOpen;
 export let KVCWriteDetailDispatchEscape;
 export let OLSKMobileViewInactive = false;
-export let _KVCWriteDetailVersionsIsDisabled = false;
 export let _DebugLauncher = false;
 
 export const modPublic = {
@@ -202,7 +201,6 @@ import _KVCWriteArchive from './ui-assets/_KVCWriteArchive.svg';
 import _KVCWriteUnarchive from './ui-assets/_KVCWriteUnarchive.svg';
 import _KVCWritePublish from './ui-assets/_KVCWritePublish.svg';
 import _KVCWriteRetract from './ui-assets/_KVCWriteRetract.svg';
-import _KVCWriteVersions from './ui-assets/_KVCWriteVersions.svg';
 import _OLSKSharedDiscard from '../_shared/__external/OLSKUIAssets/_OLSKSharedDiscard.svg';
 import KVCWriteInput from '../sub-input/main.svelte';
 </script>
@@ -269,12 +267,6 @@ import KVCWriteInput from '../sub-input/main.svelte';
 		{#if mod._ValueItem.KVCNoteIsArchived }
 			<button class="KVCWriteDetailToolbarUnarchiveButton OLSKDecorButtonNoStyle OLSKDecorTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarUnarchiveButtonText') } on:click={ KVCWriteDetailDispatchUnarchive }>
 				<div class="KVCWriteDetailToolbarUnarchiveButtonImage">{@html _KVCWriteUnarchive }</div>
-			</button>
-		{/if}
-
-		{#if !_KVCWriteDetailVersionsIsDisabled}
-			<button class="KVCWriteDetailToolbarVersionsButton OLSKDecorButtonNoStyle OLSKDecorTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarVersionsButtonText') } on:click={ () => KVCWriteDetailDispatchVersions() }>
-				<div class="KVCWriteDetailToolbarVersionsButtonImage">{@html _KVCWriteVersions }</div>
 			</button>
 		{/if}
 

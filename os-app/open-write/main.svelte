@@ -5,12 +5,10 @@ import KVC_Data from '../_shared/KVC_Data/main.js';
 import KVCNoteStorage from '../_shared/KVCNote/storage.js';
 import KVCNoteModel from '../_shared/KVCNote/model.js';
 import KVCSettingStorage from '../_shared/KVCSetting/storage.js';
-import KVCVersionStorage from '../_shared/KVCVersion/storage.js';
 import { OLSK_SPEC_UI } from 'OLSKSpec';
 import OLSKRemoteStorage from 'OLSKRemoteStorage'
 import OLSKServiceWorker from 'OLSKServiceWorker';
 import KVCNoteAction from '../_shared/KVCNote/action.js';
-import KVCVersionAction from '../_shared/KVCVersion/action.js';
 import KVCSettingAction from '../_shared/KVCSetting/action.js';
 import KVCWriteLogic from './ui-logic.js';
 import RemoteStorage from 'remotestoragejs';
@@ -75,8 +73,6 @@ const mod = {
 
 	_ValueSaveNoteThrottleMap: {},
 
-	_ValueSaveVersionThrottleMap: {},
-	
 	_ValueSavePublishThrottleMap: {},
 
 	KVCWriteDetailInstance: undefined,
@@ -372,22 +368,6 @@ const mod = {
 		return window.innerWidth <= 760;
 	},
 
-	DataVersionsIsDisabled () {
-		return window.location.hostname !== window.OLSKPublicConstants('KVC_SHARED_REF_HOST');
-	},
-
-	DataDebugPersistenceIsEnabled () {
-		if (OLSK_SPEC_UI()) {
-			return false;
-		}
-
-		if (window.location.hostname.includes('loc')) {
-			return true;
-		}
-
-		return window.location.hostname === window.OLSKPublicConstants('KVC_SHARED_REF_HOST');
-	},
-
 	FakeNoteObjectValid(inputData) {
 		return {
 			KVCNoteBody: inputData || '',
@@ -426,47 +406,17 @@ const mod = {
 	// CONTROL
 
 	ControlNoteSave(inputData) {
-		if (mod.DataDebugPersistenceIsEnabled()) {
-			console.info('ControlNoteSave', inputData.KVCNoteID, inputData.KVCNoteBody);
-		}
-
 		OLSKThrottle.OLSKThrottleMappedTimeout(mod._ValueSaveNoteThrottleMap, inputData.KVCNoteID, {
 			OLSKThrottleDuration: 500,
-			async OLSKThrottleCallback () {
-				if (mod.DataDebugPersistenceIsEnabled()) {
-					console.info('OLSKThrottleCallback', inputData.KVCNoteID, inputData.KVCNoteBody);
-				}
+			OLSKThrottleCallback () {
+				KVCNoteAction.KVCNoteActionUpdate(mod._ValueOLSKRemoteStorage, inputData);
 
-				await KVCNoteAction.KVCNoteActionUpdate(mod._ValueOLSKRemoteStorage, inputData);
-
+				OLSKLocalStorage.OLKSLocalStorageSet(window.localStorage, 'KVC_VERSION_MAP', OLSKVersion.OLSKVersionAdd(mod._ValueVersionMap, inputData.KVCNoteID, OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(JSON.parse(JSON.stringify(inputData)))));
 			},
 		});
 
 		if (OLSK_SPEC_UI()) {
 			OLSKThrottle.OLSKThrottleSkip(mod._ValueSaveNoteThrottleMap[inputData.KVCNoteID])	
-		}
-
-		if (mod.DataVersionsIsDisabled()) {
-			OLSKThrottle.OLSKThrottleMappedTimeout(mod._ValueSaveVersionThrottleMap, inputData.KVCNoteID, {
-				OLSKThrottleDuration: 3000,
-				async OLSKThrottleCallback () {
-					if (!inputData.KVCNoteCreationDate) {
-						return;
-					}
-
-					OLSKLocalStorage.OLKSLocalStorageSet(window.localStorage, 'KVC_VERSION_MAP', OLSKVersion.OLSKVersionAdd(mod._ValueVersionMap, inputData.KVCNoteID, OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(JSON.parse(JSON.stringify(inputData)))));
-
-					await KVCVersionAction.KVCVersionActionCreate(mod._ValueOLSKRemoteStorage, {
-						KVCVersionNoteID: inputData.KVCNoteID,
-						KVCVersionBody: inputData.KVCNoteBody,
-						KVCVersionDate: inputData.KVCNoteModificationDate,
-					});
-				},
-			});
-
-			if (OLSK_SPEC_UI()) {
-				OLSKThrottle.OLSKThrottleSkip(mod._ValueSaveVersionThrottleMap[inputData.KVCNoteID])	
-			}
 		}
 
 		if (KVCNoteModel.KVCNoteModelIsPublic(inputData)) {
@@ -621,12 +571,6 @@ const mod = {
 			LCHRecipeURLFilter: '*',
 		  LCHRecipeIsAutomatic: true,
 		}]);
-		// (await KVCVersionAction.KVCVersionActionQuery(mod._ValueOLSKRemoteStorage, {
-		// 	KVCVersionNoteID: inputData.KVCNoteID,
-		// })).slice(0, 5).forEach(function (e) {
-		// 	console.log(e);
-		// 	console.log(e.KVCVersionBody);
-		// });
 	},
 	
 	async ControlNoteDiscard (inputData) {
@@ -1097,10 +1041,6 @@ const mod = {
 	OLSKChangeDelegateUpdateNote (inputData) {
 		// console.log('OLSKChangeDelegateUpdate', inputData);
 
-		if (mod.DataDebugPersistenceIsEnabled()) {
-			console.log('OLSKChangeDelegateUpdate', inputData.KVCNoteID, inputData.KVCNoteBody);
-		}
-
 		if (mod._ValueNoteSelected && mod._ValueNoteSelected.KVCNoteID === inputData.KVCNoteID) {
 			mod._ControlHotfixUpdateInPlace(inputData);
 		}
@@ -1230,7 +1170,6 @@ const mod = {
 				},
 			}),
 			KVCSettingStorage.KVCSettingStorageBuild,
-			KVCVersionStorage.KVCVersionStorageBuild,
 			], {
 			OLSKOptionIncludeDebug: OLSK_SPEC_UI(),
 		});
@@ -1425,7 +1364,6 @@ import OLSKPointer from 'OLSKPointer';
 		KVCWriteDetailDispatchOpen={ mod.KVCWriteDetailDispatchOpen }
 		KVCWriteDetailDispatchEscape={ mod.KVCWriteDetailDispatchEscape }
 		OLSKMobileViewInactive={ !mod.OLSKMobileViewInactive }
-		_KVCWriteDetailVersionsIsDisabled={ mod.DataVersionsIsDisabled() }
 		bind:this={ mod.KVCWriteDetailInstance }
 		/>
 </div>

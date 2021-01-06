@@ -2,7 +2,6 @@ const { throws, rejects, deepEqual } = require('assert');
 
 const mod = require('./action.js').default;
 const KVCNoteStorage = require('./storage.js').default;
-const KVCVersionsAction = require('../KVCVersion/action.js').default;
 const KVCTemplate = require('../KVCTemplate/main.js');
 
 const kTesting = {
@@ -100,19 +99,6 @@ describe('KVCNoteActionDelete', function test_KVCNoteActionDelete() {
 	it('deletes KVCNote', async function() {
 		await mod.KVCNoteActionDelete(KVCTestingStorageClient, await mod.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject()));
 		deepEqual(await mod.KVCNoteActionQuery(KVCTestingStorageClient, {}), []);
-	});
-
-	it('deletes corresponding versionObjects', async function() {
-		const item = await mod.KVCNoteActionCreate(KVCTestingStorageClient, kTesting.StubNoteObject());
-
-		await KVCVersionsAction.KVCVersionActionCreate(KVCTestingStorageClient, {
-			KVCVersionBody: 'charlie',
-			KVCVersionNoteID: item.KVCNoteID,
-			KVCVersionDate: new Date(),
-		});
-
-		await mod.KVCNoteActionDelete(KVCTestingStorageClient, item);
-		deepEqual(await KVCVersionsAction.KVCVersionActionQuery(KVCTestingStorageClient, {}), []);
 	});
 
 });

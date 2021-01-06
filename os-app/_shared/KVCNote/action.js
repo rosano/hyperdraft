@@ -4,7 +4,6 @@ const uniqueID = factory();
 import KVCNoteStorage from './storage.js';
 import KVCNoteModel from './model.js';
 import KVCSettingAction from '../KVCSetting/action.js';
-import KVCVersionAction from '../KVCVersion/action.js';
 import OLSKString from 'OLSKString';
 import KVCTemplate from '../KVCTemplate/main.js';
 
@@ -39,12 +38,6 @@ const mod = {
 			return Promise.reject(new Error('KVCErrorInputNotValid'));
 		}
 
-		await Promise.all((await KVCVersionAction.KVCVersionActionQuery(storageClient, {
-			KVCVersionNoteID: inputData.KVCNoteID,
-		})).map(function (e) {
-			return KVCVersionAction.KVCVersionActionDelete(storageClient, e.KVCVersionID);
-		}));
-		
 		return await KVCNoteStorage.KVCNoteStorageDelete(storageClient, inputData);
 	},
 

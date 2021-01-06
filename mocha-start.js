@@ -3,7 +3,6 @@ const RemoteStorage = require('remotestoragejs');
 const KVC_Data = require('./os-app/_shared/KVC_Data/main.js').default;
 const KVCNoteStorage = require('./os-app/_shared/KVCNote/storage.js').default;
 const KVCSettingStorage = require('./os-app/_shared/KVCSetting/storage.js').default;
-const KVCVersionStorage = require('./os-app/_shared/KVCVersion/storage.js').default;
 
 (function KVCMochaStorage() {
 	if (process.env.OLSK_SPEC_MOCHA_INTERFACE === 'true') {
@@ -13,7 +12,6 @@ const KVCVersionStorage = require('./os-app/_shared/KVCVersion/storage.js').defa
 	const storageModule = KVC_Data.KVC_DataModule([
 		KVCNoteStorage.KVCNoteStorageBuild,
 		KVCSettingStorage.KVCSettingStorageBuild,
-		KVCVersionStorage.KVCVersionStorageBuild,
 	], {
 		OLSKOptionIncludeDebug: true,
 	});
@@ -37,15 +35,6 @@ const KVCVersionStorage = require('./os-app/_shared/KVCVersion/storage.js').defa
 				KVCNoteBody: 'bravo',
 				KVCNoteCreationDate: new Date('2019-02-23T13:56:36Z'),
 				KVCNoteModificationDate: new Date('2019-02-23T13:56:36Z'),
-			};
-		},
-
-		StubVersionObjectValid() {
-			return {
-				KVCVersionID: 'alfa',
-				KVCVersionNoteID: 'bravo',
-				KVCVersionBody: '',
-				KVCVersionDate: new Date('2019-02-23T13:56:36Z'),
 			};
 		},
 
