@@ -92,6 +92,9 @@
     "// FRONTEND LANGUAGE SWITCHER": null,
     "OLSKLanguageSwitcher": "olsk/OLSKLanguageSwitcher",
 
+    "// VERSION": null,
+    "OLSKVersion": "olsk/OLSKVersion",
+
     "// FUND": null,
     "OLSKFund": "olsk/OLSKFund",
     "OLSKWebView": "olsk/OLSKWebView",

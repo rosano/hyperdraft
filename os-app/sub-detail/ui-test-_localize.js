@@ -41,6 +41,10 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 				return browser.assert.OLSKLauncherItemText('KVCWriteDetailLauncherItemArchive', uLocalized('KVCWriteDetailToolbarArchiveButtonText'));
 			});
 
+			it('localizes KVCWriteDetailLauncherItemShowLocalVersions', function () {
+				return browser.assert.OLSKLauncherItemText('KVCWriteDetailLauncherItemShowLocalVersions', uLocalized('KVCWriteDetailLauncherItemShowLocalVersionsText'));
+			});
+
 			context('KVCWriteInputDispatchHeaderTokens', function() {
 
 				before(function() {

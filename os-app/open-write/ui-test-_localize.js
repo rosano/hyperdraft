@@ -93,6 +93,50 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 		
 		});
 
+		context('KVCWriteDetailLauncherItemShowLocalVersions', function test_KVCWriteDetailLauncherItemShowLocalVersions () {
+
+			before(function() {
+				return browser.OLSKVisit(kDefaultRoute, {
+					OLSKRoutingLanguage,
+				});
+			});
+
+			before(function () {
+				return browser.pressButton('.KVCWriteMasterCreateButton');
+			});
+
+			before(function () {
+				return browser.OLSKLauncherRun('KVCWriteDetailLauncherItemShowLocalVersions');
+			});
+
+			const date = (function(inputData) {
+				return (new Date(Date.parse(inputData) - inputData.getTimezoneOffset() * 1000 * 60));
+			})(new Date('2001-02-03T04:05:06Z'));
+
+			it('sets KVCNoteBody', function () {
+				browser.assert.input('.KVCWriteInputFieldDebug', KVCWriteLogic.KVCWriteLauncherItemVersionsTemplate(date, uLocalized, []));
+			});
+
+			context('edit', function () {
+
+				const item = Math.random().toString();
+				
+				before(function () {
+					browser.fill('.KVCWriteInputFieldDebug', item);
+				});
+
+				before(function () {
+					return browser.OLSKLauncherRun('KVCWriteDetailLauncherItemShowLocalVersions');
+				});
+
+				it('sets KVCNoteBody', function () {
+					browser.assert.input('.KVCWriteInputFieldDebug', KVCWriteLogic.KVCWriteLauncherItemVersionsTemplate(date, uLocalized, [item]));
+				});
+			
+			});
+		
+		});
+
 		context('archive', function test_archive () {
 			
 			before(function () {

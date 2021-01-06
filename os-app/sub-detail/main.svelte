@@ -80,6 +80,16 @@ const mod = {
 	DataWriteDetailRecipes () {
 		const outputData = [];
 
+		if (mod._ValueItem) {
+			outputData.push({
+				LCHRecipeSignature: 'KVCWriteDetailLauncherItemShowLocalVersions',
+				LCHRecipeName: OLSKLocalized('KVCWriteDetailLauncherItemShowLocalVersionsText'),
+				LCHRecipeCallback: function KVCWriteDetailLauncherItemShowLocalVersions () {
+					KVCWriteDetailDispatchVersions();
+				},
+			});
+		}
+
 		if (mod._ValueItem && !mod._ValueItem.KVCNoteIsArchived) {
 			outputData.push({
 				LCHRecipeSignature: 'KVCWriteDetailLauncherItemArchive',

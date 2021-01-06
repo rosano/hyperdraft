@@ -18,6 +18,7 @@ import KVCTemplate from '../_shared/KVCTemplate/main.js';
 import OLSKString from 'OLSKString';
 import OLSKLanguageSwitcher from 'OLSKLanguageSwitcher';
 import OLSKFund from 'OLSKFund';
+import OLSKVersion from 'OLSKVersion';
 import OLSKPact from 'OLSKPact';
 import OLSKChain from 'OLSKChain';
 import OLSKBeacon from 'OLSKBeacon';
@@ -92,6 +93,8 @@ const mod = {
 	_ValueOLSKFundProgress: false,
 
 	_ValueDocumentRemainder: '',
+
+	_ValueVersionMap: {},
 	
 	// DATA
 
@@ -436,6 +439,7 @@ const mod = {
 				}
 
 				await KVCNoteAction.KVCNoteActionUpdate(mod._ValueOLSKRemoteStorage, inputData);
+
 			},
 		});
 
@@ -443,13 +447,15 @@ const mod = {
 			OLSKThrottle.OLSKThrottleSkip(mod._ValueSaveNoteThrottleMap[inputData.KVCNoteID])	
 		}
 
-		if (!mod.DataVersionsIsDisabled()) {
+		if (mod.DataVersionsIsDisabled()) {
 			OLSKThrottle.OLSKThrottleMappedTimeout(mod._ValueSaveVersionThrottleMap, inputData.KVCNoteID, {
 				OLSKThrottleDuration: 3000,
 				async OLSKThrottleCallback () {
 					if (!inputData.KVCNoteCreationDate) {
 						return;
 					}
+
+					OLSKVersion.OLSKVersionAdd(mod._ValueVersionMap, inputData.KVCNoteID, OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(JSON.parse(JSON.stringify(inputData))));
 
 					await KVCVersionAction.KVCVersionActionCreate(mod._ValueOLSKRemoteStorage, {
 						KVCVersionNoteID: inputData.KVCNoteID,
@@ -607,12 +613,21 @@ const mod = {
 	},
 	
 	async ControlNoteVersions (inputData) {
-		(await KVCVersionAction.KVCVersionActionQuery(mod._ValueOLSKRemoteStorage, {
-			KVCVersionNoteID: inputData.KVCNoteID,
-		})).slice(0, 5).forEach(function (e) {
-			console.log(e);
-			console.log(e.KVCVersionBody);
-		});
+		Launchlet.LCHTasksRun([{
+			LCHRecipeCallback () {
+				mod.ControlNoteCreate(KVCWriteLogic.KVCWriteLauncherItemVersionsTemplate(this.api.LCHDateLocalOffsetSubtracted(new Date(OLSK_SPEC_UI() ? '2001-02-03T04:05:06Z' : Date.now())), OLSKLocalized, (mod._ValueVersionMap[inputData.KVCNoteID] || []).map(function (e) {
+					return e.KVCNoteBody;
+				})));
+			},
+			LCHRecipeURLFilter: '*',
+		  LCHRecipeIsAutomatic: true,
+		}]);
+		// (await KVCVersionAction.KVCVersionActionQuery(mod._ValueOLSKRemoteStorage, {
+		// 	KVCVersionNoteID: inputData.KVCNoteID,
+		// })).slice(0, 5).forEach(function (e) {
+		// 	console.log(e);
+		// 	console.log(e.KVCVersionBody);
+		// });
 	},
 	
 	async ControlNoteDiscard (inputData) {

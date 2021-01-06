@@ -2,6 +2,7 @@ KVCWriteTitle: Escribir
 KVCWriteStorageExportButtonText: Exportar
 KVCWriteLauncherItemJournalText: Diario
 KVCWriteLauncherItemBacklinksText: Backlinks
+KVCWriteVersionsWord: versiones
 KVCWriteLauncherItemShowPublicNotesText: Mostrar notas públicas
 KVCWriteLauncherItemConfigureCustomDomainText: Configurar dominio de Internet de encargo
 KVCWriteLauncherItemConfigureCustomDomainPrompt1QuestionText: Por favor, copia el texto siguiente y pegalo en tu host configuration.

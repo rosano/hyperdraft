@@ -2,6 +2,10 @@ const { throws, deepEqual } = require('assert');
 
 const mod = require('./ui-logic.js').default;
 
+const uLocalized = function (inputData) {
+	return inputData + '-LOCALIZED';
+};
+
 describe('KVCWriteLogicPublicSymbol', function test_KVCWriteLogicPublicSymbol() {
 
 	it('returns string', function() {
@@ -363,6 +367,43 @@ describe('KVCWriteLauncherItemBacklinksTemplate', function test_KVCWriteLauncher
 				KVCNoteBody: 'charlie',
 			})],
 		}, function (inputData) { return inputData }).split('\n\n').slice(1).join('\n\n'), '# [[alfa]]\n- [[charlie]]\n- [[bravo]]');
+	});
+
+});
+
+describe('KVCWriteLauncherItemVersionsTemplate', function test_KVCWriteLauncherItemVersionsTemplate() {
+
+	it('throws error if param1 not date', function() {
+		throws(function() {
+			mod.KVCWriteLauncherItemVersionsTemplate(new Date('alfa'), uLocalized, []);
+		}, /KVCErrorInputNotValid/);
+	});
+
+	it('throws error if param2 not function', function() {
+		throws(function() {
+			mod.KVCWriteLauncherItemVersionsTemplate(new Date(), null, []);
+		}, /KVCErrorInputNotValid/);
+	});
+
+	it('throws error if param3 not array', function() {
+		throws(function() {
+			mod.KVCWriteLauncherItemVersionsTemplate(new Date(), uLocalized, null);
+		}, /KVCErrorInputNotValid/);
+	});
+
+	it('returns string', function() {
+		const item = new Date();
+		deepEqual(mod.KVCWriteLauncherItemVersionsTemplate(item, uLocalized, []), uLocalized('KVCWriteVersionsWord') + '-' + mod.KVCWriteHumanTimestampString(item));
+	});
+
+	it('shows param3 if present', function() {
+		const item = new Date();
+		const items = Array.from(Array(Math.max(1, Date.now() % 10))).map(function (e) {
+			return item.toString();
+		});
+		deepEqual(mod.KVCWriteLauncherItemVersionsTemplate(item, uLocalized, items), uLocalized('KVCWriteVersionsWord') + '-' + mod.KVCWriteHumanTimestampString(item) + items.map(function (e) {
+				return '\n\n```\n' + e + '\n```';
+			}).join(''));
 	});
 
 });

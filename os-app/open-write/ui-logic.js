@@ -144,6 +144,24 @@ const mod = {
 		}).join('\n\n');
 	},
 
+	KVCWriteLauncherItemVersionsTemplate (param1, param2, param3) {
+		if (!(param1 instanceof Date) || Number.isNaN(param1.getTime())) {
+			throw new Error('KVCErrorInputNotValid');
+		}
+
+		if (typeof param2 !== 'function') {
+			throw new Error('KVCErrorInputNotValid');
+		}
+
+		if (!Array.isArray(param3)) {
+			throw new Error('KVCErrorInputNotValid');
+		}
+
+		return param2('KVCWriteVersionsWord') + '-' + mod.KVCWriteHumanTimestampString(param1) + param3.map(function (e) {
+			return '\n\n```\n' + e + '\n```';
+		}).join('');
+	},
+
 };
 
 export default mod;
