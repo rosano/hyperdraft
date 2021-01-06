@@ -19,6 +19,7 @@ import OLSKString from 'OLSKString';
 import OLSKLanguageSwitcher from 'OLSKLanguageSwitcher';
 import OLSKFund from 'OLSKFund';
 import OLSKVersion from 'OLSKVersion';
+import OLSKLocalStorage from 'OLSKLocalStorage';
 import OLSKPact from 'OLSKPact';
 import OLSKChain from 'OLSKChain';
 import OLSKBeacon from 'OLSKBeacon';
@@ -94,8 +95,6 @@ const mod = {
 
 	_ValueDocumentRemainder: '',
 
-	_ValueVersionMap: {},
-	
 	// DATA
 
 	DataSetting (inputData) {
@@ -455,7 +454,7 @@ const mod = {
 						return;
 					}
 
-					OLSKVersion.OLSKVersionAdd(mod._ValueVersionMap, inputData.KVCNoteID, OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(JSON.parse(JSON.stringify(inputData))));
+					OLSKLocalStorage.OLKSLocalStorageSet(window.localStorage, 'KVC_VERSION_MAP', OLSKVersion.OLSKVersionAdd(mod._ValueVersionMap, inputData.KVCNoteID, OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(JSON.parse(JSON.stringify(inputData)))));
 
 					await KVCVersionAction.KVCVersionActionCreate(mod._ValueOLSKRemoteStorage, {
 						KVCVersionNoteID: inputData.KVCNoteID,
@@ -1211,6 +1210,8 @@ const mod = {
 		
 		await mod.SetupValueSettingsAll();
 
+		mod.SetupValueVersionsMap();
+
 		mod.SetupFund();
 
 		mod.ReactIsLoading(mod._ValueIsLoading = false);
@@ -1312,6 +1313,10 @@ const mod = {
 
 	async SetupValueSettingsAll() {
 		mod._ValueSettingsAll = await KVCSettingAction.KVCSettingsActionQuery(mod._ValueOLSKRemoteStorage, {});
+	},
+
+	SetupValueVersionsMap () {
+		mod._ValueVersionMap = OLSKLocalStorage.OLKSLocalStorageGet(window.localStorage, 'KVC_VERSION_MAP') || {};
 	},
 
 	async SetupFund () {

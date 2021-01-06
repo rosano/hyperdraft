@@ -94,6 +94,7 @@
 
     "// VERSION": null,
     "OLSKVersion": "olsk/OLSKVersion",
+    "OLSKLocalStorage": "olsk/OLSKLocalStorage",
 
     "// FUND": null,
     "OLSKFund": "olsk/OLSKFund",
