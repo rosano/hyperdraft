@@ -117,12 +117,13 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 				browser.assert.input('.KVCWriteInputFieldDebug', KVCWriteLogic.KVCWriteLauncherItemVersionsTemplate(date, uLocalized, []));
 			});
 
-			context('edit', function () {
+			const item1 = Math.random().toString();
+			const item2 = Math.random().toString();
 
-				const item = Math.random().toString();
+			context('edit', function () {
 				
 				before(function () {
-					browser.fill('.KVCWriteInputFieldDebug', item);
+					browser.fill('.KVCWriteInputFieldDebug', item1);
 				});
 
 				before(function () {
@@ -130,7 +131,33 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 				});
 
 				it('sets KVCNoteBody', function () {
-					browser.assert.input('.KVCWriteInputFieldDebug', KVCWriteLogic.KVCWriteLauncherItemVersionsTemplate(date, uLocalized, [item]));
+					browser.assert.input('.KVCWriteInputFieldDebug', KVCWriteLogic.KVCWriteLauncherItemVersionsTemplate(date, uLocalized, [item1]));
+				});
+			
+			});
+
+			context('edit_multiple', function () {
+				
+				before(async function () {
+					return browser.OLSKConfirm(function () {
+						return browser.pressButton('.KVCWriteDetailToolbarDiscardButton');
+					});
+				});
+
+				before(function () {
+					return browser.click('.KVCWriteMasterListItem');
+				});
+
+				before(function () {
+					browser.fill('.KVCWriteInputFieldDebug', item2);
+				});
+
+				before(function () {
+					return browser.OLSKLauncherRun('KVCWriteDetailLauncherItemShowLocalVersions');
+				});
+
+				it('sets KVCNoteBody', function () {
+					browser.assert.input('.KVCWriteInputFieldDebug', KVCWriteLogic.KVCWriteLauncherItemVersionsTemplate(date, uLocalized, [item2, item1]));
 				});
 			
 			});
