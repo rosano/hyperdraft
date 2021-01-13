@@ -52,18 +52,6 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 			return browser.assert.OLSKLauncherItemText('KVCWriteLauncherItemExportZIP', uLocalized('KVCWriteLauncherItemExportZIPText'));
 		});
 
-		context('OLSKAppToolbarStorageButton', function test_OLSKAppToolbarStorageButton () {
-			
-			before(function () {
-				return browser.pressButton('.OLSKAppToolbarStorageButton');
-			});
-
-			it('localizes KVCWriteStorageExportButton', function () {
-				browser.assert.text(KVCWriteStorageExportButton, uLocalized('KVCWriteStorageExportButtonText'));
-			});
-		
-		});
-
 		context('KVCWriteLauncherItemJournal', function test_KVCWriteLauncherItemJournal () {
 
 			const item = (function(inputData) {

@@ -6,7 +6,6 @@ KVCWriteLauncherItemImportTXTText: Importer TXT (beta)
 KVCWriteLauncherItemImportNVText: Importer Notational Velocity (beta)
 KVCWriteLauncherItemExportJSONText: Exporter JSON (beta)
 KVCWriteLauncherItemExportZIPText: Exporter ZIP (beta)
-KVCWriteStorageExportButtonText: Exporter
 KVCWriteLauncherItemJournalText: Journal
 KVCWriteLauncherItemBacklinksText: Liens retours
 KVCWriteVersionsWord: versions

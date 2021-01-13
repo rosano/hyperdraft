@@ -608,18 +608,6 @@ describe('KVCWrite_Misc', function () {
 	
 	});
 
-	describe('KVCWriteStorageExportButton', function test_KVCWriteStorageExportButton () {
-		
-		it('classes OLSKDecorTappable', function () {
-			browser.assert.hasClass(KVCWriteStorageExportButton, 'OLSKDecorTappable');
-		});
-		
-		it('classes OLSKDecorButtonNoStyle', function () {
-			browser.assert.hasClass(KVCWriteStorageExportButton, 'OLSKDecorButtonNoStyle');
-		});
-
-	});
-
 	describe.skip('KVCWriteLauncherItemConfigureCustomDomain', function test_KVCWriteLauncherItemConfigureCustomDomain () {
 		
 		before(function () {

@@ -495,10 +495,6 @@ const mod = {
 		handlerFunctions[event.key] && handlerFunctions[event.key]();
 	},
 
-	InterfaceStorageExportButtonDidClick () {
-		mod.ControlNotesExportTXT();
-	},
-
 	InterfaceStorageInputFieldDidRead (inputData) {
 		mod.ControlNotesImportJSON(inputData);
 	},
@@ -713,24 +709,6 @@ const mod = {
 		mod.ReactFilter(mod._ValueFilterText = inputData);
 	},
 
-	async ControlNotesExportData () {
-		const zip = new JSZip();
-
-		const fileName = [
-			'com.wikiavec.export',
-			(new Date()).toJSON(),
-		].join(' ');
-
-		zip.file(`${ fileName }.json`, JSON.stringify({
-			KVCNoteObjects: mod._ValueNotesAll,
-			KVCSettingObjects: await KVCSettingAction.KVCSettingsActionQuery(mod._ValueOLSKRemoteStorage, {}),
-		}));
-		
-		zip.generateAsync({type: 'blob'}).then(function (content) {
-			saveAs(content, `${ fileName }.zip`);
-		});	
-	},
-
 	async ControlNotesImportJSON (inputData) {
 		if (!inputData.trim()) {
 			return window.alert(OLSKLocalized('KVCWriteLauncherItemImportJSONErrorNotFilledAlertText'))
@@ -751,51 +729,6 @@ const mod = {
 		await mod.SetupValueNotesAll();
 	},
 
-	async ControlNotesImportData (inputData) {
-		let outputData;
-		try {
-			outputData = JSON.parse(inputData);
-		} catch (e)  {
-			console.log(e);
-		}
-
-		if (typeof outputData !== 'object' || outputData === null) {
-			return;
-		}
-
-		if (!Array.isArray(outputData.KVCNoteObjects)) {
-			return;
-		}
-
-		if (!Array.isArray(outputData.KVCSettingObjects)) {
-			return;
-		}
-
-		await Promise.all(outputData.KVCSettingObjects.map(function (e) {
-			return KVCSettingStorage.KVCSettingStorageWrite(mod._ValueOLSKRemoteStorage, e);
-		}));
-
-		await Promise.all(outputData.KVCNoteObjects.map(function (e) {
-			return KVCNoteStorage.KVCNoteStorageWrite(mod._ValueOLSKRemoteStorage, OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(e));
-		}));
-
-		mod.ValueNotesAll(await KVCNoteAction.KVCNoteActionQuery(mod._ValueOLSKRemoteStorage, {}));
-	},
-
-	ControlNotesExportTXT () {
-		const zip = new JSZip();
-
-		mod._ValueNotesAll.forEach(function (e) {
-			zip.file(`${ e.KVCNoteID }.txt`, e.KVCNoteBody, {
-				date: e.KVCNoteModificationDate,
-			});
-		});
-		
-		zip.generateAsync({type: 'blob'}).then(function (content) {
-			saveAs(content, 'notes.zip');
-		});
-	},
-	
 	async ControlSettingStore (param1, param2) {
 		await KVCSettingStorage.KVCSettingStorageWrite(mod._ValueOLSKRemoteStorage, Object.assign(mod.DataSetting(param1) || mod._ValueSettingsAll.push(await KVCSettingAction.KVCSettingsActionProperty(mod._ValueOLSKRemoteStorage, param1, param2)), {
 			KVCSettingValue: param2,
@@ -1515,7 +1448,6 @@ import OLSKPointer from 'OLSKPointer';
 	{#if !mod._ValueStorageToolbarHidden }
 		<div class="KVCWriteStorageToolbar OLSKStorageToolbar OLSKToolbar OLSKToolbarJustify OLSKCommonEdgeTop">
 			<div class="OLSKToolbarElementGroup">
-				<button class="KVCWriteStorageExportButton OLSKDecorTappable OLSKDecorButtonNoStyle" on:click={ mod.InterfaceStorageExportButtonDidClick }>{ OLSKLocalized('KVCWriteStorageExportButtonText') }</button>
 			</div>
 
 			<div class="OLSKToolbarElementGroup">
