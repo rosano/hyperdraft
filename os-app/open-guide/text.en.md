@@ -143,6 +143,14 @@ After setting up a custom domain, designate any note as the home page with the `
 | `OLSKServiceWorkerLauncherItemDebugForceUpdateText` | Launcher |
 | Launcher | `Alt+Enter` |
 
+| Global (import/export) ||
+:--- | ---
+| `KVCWriteLauncherItemImportJSONText` | Launcher |
+| `KVCWriteLauncherItemImportTXTText` | Launcher |
+| `KVCWriteLauncherItemImportNVText` | Launcher |
+| `KVCWriteLauncherItemExportJSONText` | Launcher |
+| `KVCWriteLauncherItemExportZIPText` | Launcher |
+
 | Global (when storage is connected) ||
 :--- | ---
 | `KVCWriteLauncherItemConfigureCustomDomainText` | Launcher |
