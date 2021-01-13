@@ -162,7 +162,7 @@ const mod = {
 		}).join('');
 	},
 
-	KVCWriteFileNoteObject (inputData) {
+	KVCWriteFileNoteObject (inputData, extractFilename = false) {
 		if (!inputData.lastModified) {
 			throw new Error('KVCErrorInputNotValid');
 		}
@@ -171,8 +171,12 @@ const mod = {
 			throw new Error('KVCErrorInputNotValid');
 		}
 
+		if (typeof extractFilename !== 'boolean') {
+			throw new Error('KVCErrorInputNotValid');
+		}
+
 		return {
-			KVCNoteBody: inputData._LCHReadTextFileObjectContent,
+			KVCNoteBody: (extractFilename ? inputData.name.split('.').slice(0, -1).join('.') + '\n\n' : '') + inputData._LCHReadTextFileObjectContent,
 			KVCNoteCreationDate: new Date(inputData.lastModified),
 			KVCNoteModificationDate: new Date(inputData.lastModified),
 		};

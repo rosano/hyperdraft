@@ -435,6 +435,12 @@ describe('KVCWriteFileNoteObject', function test_KVCWriteFileNoteObject() {
 		}, /KVCErrorInputNotValid/);
 	});
 
+	it('throws error if param2 not boolean', function() {
+		throws(function() {
+			mod.KVCWriteFileNoteObject(uFile(), null);
+		}, /KVCErrorInputNotValid/);
+	});
+
 	it('returns object', function() {
 		const item = uFile();
 		deepEqual(mod.KVCWriteFileNoteObject(item), {
@@ -442,6 +448,19 @@ describe('KVCWriteFileNoteObject', function test_KVCWriteFileNoteObject() {
 			KVCNoteCreationDate: new Date(item.lastModified),
 			KVCNoteModificationDate: new Date(item.lastModified),
 		});
+	});
+
+	context('param2', function () {
+
+		it('extracts filename to KVCNoteBody', function() {
+			const filename = Math.random().toString();
+			const _LCHReadTextFileObjectContent = Math.random().toString();
+			deepEqual(mod.KVCWriteFileNoteObject(uFile({
+				_LCHReadTextFileObjectContent,
+				name: filename + '.' + Date.now().toString(),
+			}), true).KVCNoteBody, filename + '\n\n' + _LCHReadTextFileObjectContent);
+		});
+	
 	});
 
 });

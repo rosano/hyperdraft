@@ -98,4 +98,39 @@ describe('KVCWrite_Transport', function () {
 
 	});
 
+	describe('ImportNV', function test_ImportNV() {
+
+		const title = Math.random().toString();
+
+		before(function() {
+			return browser.OLSKVisit(kDefaultRoute);
+		});
+
+		before(function () {
+			return browser.pressButton('.OLSKAppToolbarLauncherButton');
+		});
+
+		before(function () {
+			return browser.fill('.LCHLauncherFilterInput', 'KVCWriteLauncherItemDebug_PromptFakeImportComplex');
+		});
+
+		before(function () {
+			return browser.OLSKPrompt(function () {
+				return browser.click('.LCHLauncherPipeItem');
+			}, function (dialog) {
+				dialog.response = JSON.stringify({
+					name: title + '.' + Date.now().toString(),
+					_LCHReadTextFileObjectContent: Math.random().toString(),
+				});
+
+				return dialog;
+			});
+		});
+
+		it('creates item', function () {
+			browser.assert.text('.KVCWriteMasterListItemTitle', title);
+		});
+
+	});
+
 });

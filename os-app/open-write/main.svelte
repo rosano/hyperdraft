@@ -153,6 +153,15 @@ const mod = {
 					multiple: true,
 				}));
 			},
+		}, {
+			LCHRecipeSignature: 'KVCWriteLauncherItemImportNV',
+			LCHRecipeName: OLSKLocalized('KVCWriteLauncherItemImportNVText'),
+			LCHRecipeCallback: async function KVCWriteLauncherItemImportNV () {
+				return mod.ControlNotesImportTXT(await this.api.LCHReadTextFileObjects({
+					accept: '.txt,.md',
+					multiple: true,
+				}), true);
+			},
 		}];
 
 		if (mod._ValueStorageIsConnected) {
@@ -351,6 +360,13 @@ const mod = {
 						return mod.ControlNotesImportTXT([Object.assign(new File([], Math.random().toString()), {
 							lastModified: Date.now(),
 						}, JSON.parse(window.prompt()))])
+					},
+				}, {
+					LCHRecipeName: 'KVCWriteLauncherItemDebug_PromptFakeImportComplex',
+					LCHRecipeCallback: function KVCWriteLauncherItemDebug_PromptFakeImportComplex () {
+						return mod.ControlNotesImportTXT([Object.assign(new File([], Math.random().toString()), {
+							lastModified: Date.now(),
+						}, JSON.parse(window.prompt()))], true)
 					},
 				}
 			]);
@@ -699,8 +715,10 @@ const mod = {
 		}
 	},
 
-	async ControlNotesImportTXT (inputData) {
-		await KVC_Data.KVC_DataImport(mod._ValueOLSKRemoteStorage, OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(inputData.map(KVCWriteLogic.KVCWriteFileNoteObject)));
+	async ControlNotesImportTXT (inputData, extractFilename) {
+		await KVC_Data.KVC_DataImport(mod._ValueOLSKRemoteStorage, OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(inputData.map(function (e) {
+			return KVCWriteLogic.KVCWriteFileNoteObject(e, extractFilename);
+		})));
 		await mod.SetupValueNotesAll();
 	},
 
