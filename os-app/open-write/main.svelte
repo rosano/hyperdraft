@@ -138,6 +138,12 @@ const mod = {
 					accept: '.json',
 				}));
 			},
+		}, {
+			LCHRecipeSignature: 'KVCWriteLauncherItemExportJSON',
+			LCHRecipeName: OLSKLocalized('KVCWriteLauncherItemExportJSONText'),
+			LCHRecipeCallback: function KVCWriteLauncherItemExportJSON () {
+				return this.api.LCHSaveFile(mod.DataExportJSON(), mod.DataExportFilename());
+			},
 		}];
 
 		if (mod._ValueStorageIsConnected) {
@@ -322,6 +328,14 @@ const mod = {
 					LCHRecipeCallback: function KVCWriteLauncherItemFakeInputFile () {
 						return mod.InterfaceStorageInputFieldDidRead(window.prompt());
 					},
+				}, {
+					LCHRecipeName: 'KVCWriteLauncherItemDebug_FakeExportJSON',
+					LCHRecipeCallback: function KVCWriteLauncherItemDebug_FakeExportJSON () {
+						return window.alert(JSON.stringify({
+							OLSKDownloadName: mod.DataExportFilename(),
+							OLSKDownloadData: mod.DataExportJSON(),
+						}));
+					},
 				},
 			]);
 		}
@@ -365,6 +379,14 @@ const mod = {
 
 	DataRevealArchiveIsVisible () {
 		return mod._ValueArchivedCount && mod._RevealArchiveIsVisible;
+	},
+
+	DataExportJSON () {
+		return JSON.stringify(KVC_Data.KVC_DataExport(mod._ValueOLSKRemoteStorage, mod._ValueNotesAll));
+	},
+
+	DataExportFilename () {
+		return `${ window.location.hostname }-${ Date.now() }.json`;
 	},
 
 	DataIsEligible (inputData = {}) {
