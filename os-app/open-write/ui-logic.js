@@ -162,6 +162,22 @@ const mod = {
 		}).join('');
 	},
 
+	KVCWriteFileNoteObject (inputData) {
+		if (!inputData.lastModified) {
+			throw new Error('KVCErrorInputNotValid');
+		}
+
+		if (typeof inputData._LCHReadTextFileObjectContent !== 'string') {
+			throw new Error('KVCErrorInputNotValid');
+		}
+
+		return {
+			KVCNoteBody: inputData._LCHReadTextFileObjectContent,
+			KVCNoteCreationDate: new Date(inputData.lastModified),
+			KVCNoteModificationDate: new Date(inputData.lastModified),
+		};
+	},
+
 };
 
 export default mod;

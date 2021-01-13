@@ -407,3 +407,41 @@ describe('KVCWriteLauncherItemVersionsTemplate', function test_KVCWriteLauncherI
 	});
 
 });
+
+describe('KVCWriteFileNoteObject', function test_KVCWriteFileNoteObject() {
+
+	const uFile = function (inputData) {
+		return Object.assign({
+			_LCHReadTextFileObjectContent: Math.random().toString(),
+			lastModified: Date.now(),
+			name: Math.random().toString(),
+			size: parseInt(Math.random() * 1000),
+		}, inputData);
+	};
+
+	it('throws error if not File', function() {
+		throws(function() {
+			mod.KVCWriteFileNoteObject(uFile({
+				lastModified: null,
+			}));
+		}, /KVCErrorInputNotValid/);
+	});
+
+	it('throws error if no _LCHReadTextFileObjectContent', function() {
+		throws(function() {
+			mod.KVCWriteFileNoteObject(uFile({
+				_LCHReadTextFileObjectContent: null,
+			}));
+		}, /KVCErrorInputNotValid/);
+	});
+
+	it('returns object', function() {
+		const item = uFile();
+		deepEqual(mod.KVCWriteFileNoteObject(item), {
+			KVCNoteBody: item._LCHReadTextFileObjectContent,
+			KVCNoteCreationDate: new Date(item.lastModified),
+			KVCNoteModificationDate: new Date(item.lastModified),
+		});
+	});
+
+});
