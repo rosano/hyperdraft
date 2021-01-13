@@ -160,7 +160,7 @@ const mod = {
 			LCHRecipeSignature: 'KVCWriteLauncherItemExportJSON',
 			LCHRecipeName: OLSKLocalized('KVCWriteLauncherItemExportJSONText'),
 			LCHRecipeCallback: function KVCWriteLauncherItemExportJSON () {
-				return this.api.LCHSaveFile(mod.DataExportJSON(), mod.DataExportFilename());
+				return this.api.LCHSaveFile(mod.DataExportJSON(), mod.DataExportJSONFilename());
 			},
 		}, {
 			LCHRecipeSignature: 'KVCWriteLauncherItemExportZIP',
@@ -378,7 +378,7 @@ const mod = {
 					LCHRecipeName: 'KVCWriteLauncherItemDebug_AlertFakeExportSerialized',
 					LCHRecipeCallback: function KVCWriteLauncherItemDebug_AlertFakeExportSerialized () {
 						return window.alert(JSON.stringify({
-							OLSKDownloadName: mod.DataExportFilename(),
+							OLSKDownloadName: mod.DataExportJSONFilename(),
 							OLSKDownloadData: mod.DataExportJSON(),
 						}));
 					},
@@ -438,12 +438,16 @@ const mod = {
 		return JSON.stringify(KVC_Data.KVC_DataExport(mod._ValueOLSKRemoteStorage, mod._ValueNotesAll));
 	},
 
-	DataExportFilename () {
-		return `${ window.location.hostname }-${ Date.now() }.json`;
+	DataExportBasename () {
+		return `${ window.location.hostname }-${ Date.now() }`;
+	},
+
+	DataExportJSONFilename () {
+		return `${ mod.DataExportBasename() }.json`;
 	},
 
 	DataExportZIPFilename () {
-		return `${ window.location.hostname }-${ Date.now() }.zip`;
+		return `${ mod.DataExportBasename() }.zip`;
 	},
 
 	DataIsEligible (inputData = {}) {
