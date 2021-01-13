@@ -162,6 +162,20 @@ const mod = {
 			LCHRecipeCallback: function KVCWriteLauncherItemExportJSON () {
 				return this.api.LCHSaveFile(mod.DataExportJSON(), mod.DataExportFilename());
 			},
+		}, {
+			LCHRecipeSignature: 'KVCWriteLauncherItemExportZIP',
+			LCHRecipeName: OLSKLocalized('KVCWriteLauncherItemExportZIPText'),
+			LCHRecipeCallback: async function KVCWriteLauncherItemExportZIP () {
+				const zip = new JSZip();
+
+				mod._ValueNotesAll.forEach(function (e) {
+					zip.file(`${ e.KVCNoteID }.txt`, e.KVCNoteBody, {
+						date: e.KVCNoteModificationDate,
+					});
+				});
+				
+				return saveAs(await zip.generateAsync({type: 'blob'}), mod.DataExportZIPFilename());
+			},
 		}];
 
 		if (mod._ValueStorageIsConnected) {
@@ -347,14 +361,6 @@ const mod = {
 						return mod.InterfaceStorageInputFieldDidRead(window.prompt());
 					},
 				}, {
-					LCHRecipeName: 'KVCWriteLauncherItemDebug_AlertFakeExportSerialized',
-					LCHRecipeCallback: function KVCWriteLauncherItemDebug_AlertFakeExportSerialized () {
-						return window.alert(JSON.stringify({
-							OLSKDownloadName: mod.DataExportFilename(),
-							OLSKDownloadData: mod.DataExportJSON(),
-						}));
-					},
-				}, {
 					LCHRecipeName: 'KVCWriteLauncherItemDebug_PromptFakeImportPlain',
 					LCHRecipeCallback: function KVCWriteLauncherItemDebug_PromptFakeImportPlain () {
 						return mod.ControlNotesImportTXT([Object.assign(new File([], Math.random().toString()), {
@@ -367,6 +373,21 @@ const mod = {
 						return mod.ControlNotesImportTXT([Object.assign(new File([], Math.random().toString()), {
 							lastModified: Date.now(),
 						}, JSON.parse(window.prompt()))], true)
+					},
+				}, {
+					LCHRecipeName: 'KVCWriteLauncherItemDebug_AlertFakeExportSerialized',
+					LCHRecipeCallback: function KVCWriteLauncherItemDebug_AlertFakeExportSerialized () {
+						return window.alert(JSON.stringify({
+							OLSKDownloadName: mod.DataExportFilename(),
+							OLSKDownloadData: mod.DataExportJSON(),
+						}));
+					},
+				}, {
+					LCHRecipeName: 'KVCWriteLauncherItemDebug_AlertFakeExportCompressed',
+					LCHRecipeCallback: function KVCWriteLauncherItemDebug_AlertFakeExportCompressed () {
+						return window.alert(JSON.stringify({
+							OLSKDownloadName: mod.DataExportZIPFilename(),
+						}));
 					},
 				}
 			]);
@@ -419,6 +440,10 @@ const mod = {
 
 	DataExportFilename () {
 		return `${ window.location.hostname }-${ Date.now() }.json`;
+	},
+
+	DataExportZIPFilename () {
+		return `${ window.location.hostname }-${ Date.now() }.zip`;
 	},
 
 	DataIsEligible (inputData = {}) {

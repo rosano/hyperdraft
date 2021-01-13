@@ -48,6 +48,10 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 			return browser.assert.OLSKLauncherItemText('KVCWriteLauncherItemExportJSON', uLocalized('KVCWriteLauncherItemExportJSONText'));
 		});
 
+		it('localizes KVCWriteLauncherItemExportZIP', function () {
+			return browser.assert.OLSKLauncherItemText('KVCWriteLauncherItemExportZIP', uLocalized('KVCWriteLauncherItemExportZIPText'));
+		});
+
 		context('OLSKAppToolbarStorageButton', function test_OLSKAppToolbarStorageButton () {
 			
 			before(function () {

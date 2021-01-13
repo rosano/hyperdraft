@@ -5,6 +5,7 @@ KVCWriteLauncherItemImportJSONErrorNotValidAlertText: Input not valid
 KVCWriteLauncherItemImportTXTText: Import TXT (beta)
 KVCWriteLauncherItemImportNVText: Import Notational Velocity (beta)
 KVCWriteLauncherItemExportJSONText: Export JSON (beta)
+KVCWriteLauncherItemExportZIPText: Export ZIP (beta)
 KVCWriteStorageExportButtonText: Export
 KVCWriteLauncherItemJournalText: Journal
 KVCWriteLauncherItemBacklinksText: Backlinks
