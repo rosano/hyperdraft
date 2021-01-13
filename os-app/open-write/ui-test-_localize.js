@@ -302,7 +302,7 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 
 		});
 
-		describe('KVCWriteLauncherItemDebug_PromptFakeImportSerialized', function test_KVCWriteLauncherItemDebug_PromptFakeImportSerialized() {
+		describe('KVCWriteLauncherItemImportJSON', function test_KVCWriteLauncherItemImportJSON() {
 
 			before(function() {
 				return browser.OLSKVisit(kDefaultRoute, {
