@@ -1,4 +1,7 @@
 KVCWriteTitle: Écrire
+KVCWriteLauncherItemImportJSONText: Importer JSON (beta)
+KVCWriteLauncherItemImportJSONErrorNotFilledAlertText: Entrée non remplie
+KVCWriteLauncherItemImportJSONErrorNotValidAlertText: Entrée non valide
 KVCWriteStorageExportButtonText: Exporter
 KVCWriteLauncherItemJournalText: Journal
 KVCWriteLauncherItemBacklinksText: Liens retours

@@ -130,6 +130,14 @@ const mod = {
 
 				document.querySelector('.OLSKMasterListFilterField').focus();
 			},
+		}, {
+			LCHRecipeSignature: 'KVCWriteLauncherItemImportJSON',
+			LCHRecipeName: OLSKLocalized('KVCWriteLauncherItemImportJSONText'),
+			LCHRecipeCallback: async function KVCWriteLauncherItemImportJSON () {
+				return mod.ControlNotesImportJSON(await this.api.LCHReadTextFile({
+					accept: '.json',
+				}));
+			},
 		}];
 
 		if (mod._ValueStorageIsConnected) {
@@ -309,6 +317,11 @@ const mod = {
 
 						return mod.SetupValueNotesAll();
 					},
+				}, {
+					LCHRecipeName: 'KVCWriteLauncherItemFakeInputFile',
+					LCHRecipeCallback: function KVCWriteLauncherItemFakeInputFile () {
+						return mod.InterfaceStorageInputFieldDidRead(window.prompt());
+					},
 				},
 			]);
 		}
@@ -401,6 +414,10 @@ const mod = {
 
 	InterfaceStorageExportButtonDidClick () {
 		mod.ControlNotesExportTXT();
+	},
+
+	InterfaceStorageInputFieldDidRead (inputData) {
+		mod.ControlNotesImportJSON(inputData);
 	},
 
 	// CONTROL
@@ -629,6 +646,19 @@ const mod = {
 		zip.generateAsync({type: 'blob'}).then(function (content) {
 			saveAs(content, `${ fileName }.zip`);
 		});	
+	},
+
+	async ControlNotesImportJSON (inputData) {
+		if (!inputData.trim()) {
+			return window.alert(OLSKLocalized('KVCWriteLauncherItemImportJSONErrorNotFilledAlertText'))
+		}
+
+		try {
+			await KVC_Data.KVC_DataImport(mod._ValueOLSKRemoteStorage, OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(JSON.parse(inputData)));
+			await mod.SetupValueNotesAll();
+		} catch (e) {
+			window.alert(OLSKLocalized('KVCWriteLauncherItemImportJSONErrorNotValidAlertText'));
+		}
 	},
 
 	async ControlNotesImportData (inputData) {
