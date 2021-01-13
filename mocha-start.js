@@ -29,13 +29,14 @@ const KVCSettingStorage = require('./os-app/_shared/KVCSetting/storage.js').defa
 
 (function KVCMochaStubs() {
 	Object.entries({
-		StubNoteObjectValid() {
-			return {
+
+		StubNoteObjectValid(inputData) {
+			return Object.assign({
 				KVCNoteID: 'alfa',
 				KVCNoteBody: 'bravo',
 				KVCNoteCreationDate: new Date('2019-02-23T13:56:36Z'),
 				KVCNoteModificationDate: new Date('2019-02-23T13:56:36Z'),
-			};
+			}, inputData);
 		},
 
 		StubSettingObjectValid() {
