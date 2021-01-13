@@ -139,12 +139,6 @@ const mod = {
 				}));
 			},
 		}, {
-			LCHRecipeSignature: 'KVCWriteLauncherItemExportJSON',
-			LCHRecipeName: OLSKLocalized('KVCWriteLauncherItemExportJSONText'),
-			LCHRecipeCallback: function KVCWriteLauncherItemExportJSON () {
-				return this.api.LCHSaveFile(mod.DataExportJSON(), mod.DataExportFilename());
-			},
-		}, {
 			LCHRecipeSignature: 'KVCWriteLauncherItemImportTXT',
 			LCHRecipeName: OLSKLocalized('KVCWriteLauncherItemImportTXTText'),
 			LCHRecipeCallback: async function KVCWriteLauncherItemImportTXT () {
@@ -161,6 +155,12 @@ const mod = {
 					accept: '.txt,.md',
 					multiple: true,
 				}), true);
+			},
+		}, {
+			LCHRecipeSignature: 'KVCWriteLauncherItemExportJSON',
+			LCHRecipeName: OLSKLocalized('KVCWriteLauncherItemExportJSONText'),
+			LCHRecipeCallback: function KVCWriteLauncherItemExportJSON () {
+				return this.api.LCHSaveFile(mod.DataExportJSON(), mod.DataExportFilename());
 			},
 		}];
 

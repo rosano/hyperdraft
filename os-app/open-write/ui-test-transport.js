@@ -2,9 +2,9 @@ const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
 describe('KVCWrite_Transport', function () {	
 
-	const KVCNoteBody = Math.random().toString();
-
 	describe('ImportJSON', function test_ImportJSON() {
+
+		const KVCNoteBody = Math.random().toString();
 
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute);
@@ -33,34 +33,6 @@ describe('KVCWrite_Transport', function () {
 		it('creates item', function () {
 			browser.assert.text('.KVCWriteMasterListItemTitle', KVCNoteBody);
 		});
-
-	});
-
-	describe('ExportJSON', function test_ExportJSON() {
-
-		before(function () {
-			return browser.pressButton('.OLSKAppToolbarLauncherButton');
-		});
-
-		before(function () {
-			return browser.fill('.LCHLauncherFilterInput', 'KVCWriteLauncherItemDebug_AlertFakeExportSerialized');
-		});
-
-		it('exports file', function() {
-			const response = JSON.parse(browser.OLSKAlert(function () {
-    		return browser.click('.LCHLauncherPipeItem');
-    	}));
-
-    	const date = response.OLSKDownloadName.split('-').pop().split('.').shift();
-    	const item = JSON.parse(response.OLSKDownloadData)[0];
-
-    	browser.assert.deepEqual(response, {
-    		OLSKDownloadName: `${ browser.window.location.hostname }-${ date }.json`,
-    		OLSKDownloadData: JSON.stringify([Object.assign(Object.assign({}, item), {
-    			KVCNoteBody,
-    		})]),
-    	});
-    });
 
 	});
 
@@ -130,6 +102,48 @@ describe('KVCWrite_Transport', function () {
 		it('creates item', function () {
 			browser.assert.text('.KVCWriteMasterListItemTitle', title);
 		});
+
+	});
+
+	describe('ExportJSON', function test_ExportJSON() {
+
+		const KVCNoteBody = Math.random().toString();
+
+		before(function() {
+			return browser.OLSKVisit(kDefaultRoute);
+		});
+
+		before(function () {
+			return browser.pressButton('.KVCWriteMasterCreateButton');
+		});
+
+		before(function () {
+			browser.fill('.KVCWriteInputFieldDebug', KVCNoteBody);
+		});
+
+		before(function () {
+			return browser.pressButton('.OLSKAppToolbarLauncherButton');
+		});
+
+		before(function () {
+			return browser.fill('.LCHLauncherFilterInput', 'KVCWriteLauncherItemDebug_AlertFakeExportSerialized');
+		});
+
+		it('exports file', function() {
+			const response = JSON.parse(browser.OLSKAlert(function () {
+    		return browser.click('.LCHLauncherPipeItem');
+    	}));
+
+    	const date = response.OLSKDownloadName.split('-').pop().split('.').shift();
+    	const item = JSON.parse(response.OLSKDownloadData)[0];
+
+    	browser.assert.deepEqual(response, {
+    		OLSKDownloadName: `${ browser.window.location.hostname }-${ date }.json`,
+    		OLSKDownloadData: JSON.stringify([Object.assign(Object.assign({}, item), {
+    			KVCNoteBody,
+    		})]),
+    	});
+    });
 
 	});
 
