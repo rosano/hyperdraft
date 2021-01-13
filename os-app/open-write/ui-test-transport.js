@@ -15,7 +15,7 @@ describe('KVCWrite_Transport', function () {
 		});
 
 		before(function () {
-			return browser.fill('.LCHLauncherFilterInput', 'KVCWriteLauncherItemFakeInputFile');
+			return browser.fill('.LCHLauncherFilterInput', 'KVCWriteLauncherItemDebug_PromptFakeImportSerialized');
 		});
 
 		before(function () {
@@ -38,14 +38,12 @@ describe('KVCWrite_Transport', function () {
 
 	describe('ExportJSON', function test_ExportJSON() {
 
-		const items = [];
-
 		before(function () {
 			return browser.pressButton('.OLSKAppToolbarLauncherButton');
 		});
 
 		before(function () {
-			return browser.fill('.LCHLauncherFilterInput', 'KVCWriteLauncherItemDebug_FakeExportJSON');
+			return browser.fill('.LCHLauncherFilterInput', 'KVCWriteLauncherItemDebug_AlertFakeExportSerialized');
 		});
 
 		it('exports file', function() {
@@ -53,10 +51,11 @@ describe('KVCWrite_Transport', function () {
     		return browser.click('.LCHLauncherPipeItem');
     	}));
 
+    	const date = response.OLSKDownloadName.split('-').pop().split('.').shift();
     	const item = JSON.parse(response.OLSKDownloadData)[0];
 
     	browser.assert.deepEqual(response, {
-    		OLSKDownloadName: `${ browser.window.location.hostname }-${ Date.now() }.json`,
+    		OLSKDownloadName: `${ browser.window.location.hostname }-${ date }.json`,
     		OLSKDownloadData: JSON.stringify([Object.assign(Object.assign({}, item), {
     			KVCNoteBody,
     		})]),

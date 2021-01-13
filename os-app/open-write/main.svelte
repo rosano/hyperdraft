@@ -324,13 +324,13 @@ const mod = {
 						return mod.SetupValueNotesAll();
 					},
 				}, {
-					LCHRecipeName: 'KVCWriteLauncherItemFakeInputFile',
-					LCHRecipeCallback: function KVCWriteLauncherItemFakeInputFile () {
+					LCHRecipeName: 'KVCWriteLauncherItemDebug_PromptFakeImportSerialized',
+					LCHRecipeCallback: function KVCWriteLauncherItemDebug_PromptFakeImportSerialized () {
 						return mod.InterfaceStorageInputFieldDidRead(window.prompt());
 					},
 				}, {
-					LCHRecipeName: 'KVCWriteLauncherItemDebug_FakeExportJSON',
-					LCHRecipeCallback: function KVCWriteLauncherItemDebug_FakeExportJSON () {
+					LCHRecipeName: 'KVCWriteLauncherItemDebug_AlertFakeExportSerialized',
+					LCHRecipeCallback: function KVCWriteLauncherItemDebug_AlertFakeExportSerialized () {
 						return window.alert(JSON.stringify({
 							OLSKDownloadName: mod.DataExportFilename(),
 							OLSKDownloadData: mod.DataExportJSON(),

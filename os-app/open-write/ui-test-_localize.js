@@ -302,7 +302,7 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 
 		});
 
-		describe('KVCWriteLauncherItemFakeInputFile', function test_KVCWriteLauncherItemFakeInputFile() {
+		describe('KVCWriteLauncherItemDebug_PromptFakeImportSerialized', function test_KVCWriteLauncherItemDebug_PromptFakeImportSerialized() {
 
 			before(function() {
 				return browser.OLSKVisit(kDefaultRoute, {
@@ -317,7 +317,7 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 				});
 
 				before(async function () {
-					return browser.fill('.LCHLauncherFilterInput', 'KVCWriteLauncherItemFakeInputFile');
+					return browser.fill('.LCHLauncherFilterInput', 'KVCWriteLauncherItemDebug_PromptFakeImportSerialized');
 				});
 
 				it('alerts if not filled', function () {
@@ -341,7 +341,7 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 				});
 
 				before(async function () {
-					return browser.fill('.LCHLauncherFilterInput', 'KVCWriteLauncherItemFakeInputFile');
+					return browser.fill('.LCHLauncherFilterInput', 'KVCWriteLauncherItemDebug_PromptFakeImportSerialized');
 				});
 
 				it('alerts if not json', function () {
@@ -365,7 +365,7 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 				});
 
 				before(async function () {
-					return browser.fill('.LCHLauncherFilterInput', 'KVCWriteLauncherItemFakeInputFile');
+					return browser.fill('.LCHLauncherFilterInput', 'KVCWriteLauncherItemDebug_PromptFakeImportSerialized');
 				});
 
 				it('alerts if not valid', function () {
