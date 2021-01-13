@@ -59,13 +59,13 @@ describe('KVC_DataExport', function test_KVC_DataExport() {
 	it('throws if not array', function () {
 		throws(function () {
 			mod.KVC_DataExport(KVCTestingStorageClient, null);
-		}, /KOMErrorInputNotValid/);
+		}, /KVCErrorInputNotValid/);
 	});
 
 	it('throws if not filled', function () {
 		throws(function () {
 			mod.KVC_DataExport(KVCTestingStorageClient, []);
-		}, /KOMErrorInputNotValid/);
+		}, /KVCErrorInputNotValid/);
 	});
 
 	it('returns array', function () {

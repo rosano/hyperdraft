@@ -34,11 +34,11 @@ const mod = {
 
 	KVC_DataExport (storageClient, inputData) {
 		if (!Array.isArray(inputData)) {
-			throw new Error('KOMErrorInputNotValid');
+			throw new Error('KVCErrorInputNotValid');
 		}
 
 		if (!inputData.length) {
-			throw new Error('KOMErrorInputNotValid');
+			throw new Error('KVCErrorInputNotValid');
 		}
 
 		return inputData.map(OLSKRemoteStorage.OLSKRemoteStorageSafeCopy);
