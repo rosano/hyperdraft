@@ -121,6 +121,10 @@ describe('KVCWrite_Access', function () {
 		return browser.assert.OLSKLauncherItems('KVCWriteLauncherItemExportJSON', 1);
 	});
 
+	it('shows KVCWriteLauncherItemImportTXT', function () {
+		return browser.assert.OLSKLauncherItems('KVCWriteLauncherItemImportTXT', 1);
+	});
+
 	describe('tongue', function test_tongue() {
 
 		before(function () {

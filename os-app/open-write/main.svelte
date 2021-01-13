@@ -144,6 +144,15 @@ const mod = {
 			LCHRecipeCallback: function KVCWriteLauncherItemExportJSON () {
 				return this.api.LCHSaveFile(mod.DataExportJSON(), mod.DataExportFilename());
 			},
+		}, {
+			LCHRecipeSignature: 'KVCWriteLauncherItemImportTXT',
+			LCHRecipeName: OLSKLocalized('KVCWriteLauncherItemImportTXTText'),
+			LCHRecipeCallback: async function KVCWriteLauncherItemImportTXT () {
+				return mod.ControlNotesImportTXT(await this.api.LCHReadTextFileObjects({
+					accept: '.txt,.md',
+					multiple: true,
+				}));
+			},
 		}];
 
 		if (mod._ValueStorageIsConnected) {
@@ -336,7 +345,15 @@ const mod = {
 							OLSKDownloadData: mod.DataExportJSON(),
 						}));
 					},
-				},
+				}, {
+					LCHRecipeName: 'KVCWriteLauncherItemDebug_PromptFakeImportPlain',
+					LCHRecipeCallback: function KVCWriteLauncherItemDebug_PromptFakeImportPlain () {
+						return mod.ControlNotesImportTXT([Object.assign(new File([], Math.random().toString()), {
+							lastModified: Date.now(),
+							_LCHReadTextFileObjectContent: window.prompt(),
+						})])
+					},
+				}
 			]);
 		}
 
@@ -681,6 +698,11 @@ const mod = {
 		} catch (e) {
 			window.alert(OLSKLocalized('KVCWriteLauncherItemImportJSONErrorNotValidAlertText'));
 		}
+	},
+
+	async ControlNotesImportTXT (inputData) {
+		await KVC_Data.KVC_DataImport(mod._ValueOLSKRemoteStorage, OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(inputData.map(KVCWriteLogic.KVCWriteFileNoteObject)));
+		await mod.SetupValueNotesAll();
 	},
 
 	async ControlNotesImportData (inputData) {

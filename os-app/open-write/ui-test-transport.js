@@ -2,13 +2,13 @@ const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
 describe('KVCWrite_Transport', function () {	
 
-	const KVCNoteBody = Date.now().toString();
-
-	before(function() {
-		return browser.OLSKVisit(kDefaultRoute);
-	});
+	const KVCNoteBody = Math.random().toString();
 
 	describe('ImportJSON', function test_ImportJSON() {
+
+		before(function() {
+			return browser.OLSKVisit(kDefaultRoute);
+		});
 
 		before(function () {
 			return browser.pressButton('.OLSKAppToolbarLauncherButton');
@@ -61,6 +61,38 @@ describe('KVCWrite_Transport', function () {
     		})]),
     	});
     });
+
+	});
+
+	describe('ImportTXT', function test_ImportTXT() {
+
+		const item = Math.random().toString();
+
+		before(function() {
+			return browser.OLSKVisit(kDefaultRoute);
+		});
+
+		before(function () {
+			return browser.pressButton('.OLSKAppToolbarLauncherButton');
+		});
+
+		before(function () {
+			return browser.fill('.LCHLauncherFilterInput', 'KVCWriteLauncherItemDebug_PromptFakeImportPlain');
+		});
+
+		before(function () {
+			return browser.OLSKPrompt(function () {
+				return browser.click('.LCHLauncherPipeItem');
+			}, function (dialog) {
+				dialog.response = item;
+
+				return dialog;
+			});
+		});
+
+		it('creates item', function () {
+			browser.assert.text('.KVCWriteMasterListItemTitle', item);
+		});
 
 	});
 

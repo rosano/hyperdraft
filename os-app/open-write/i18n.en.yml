@@ -3,6 +3,7 @@ KVCWriteLauncherItemImportJSONText: Import JSON (beta)
 KVCWriteLauncherItemImportJSONErrorNotFilledAlertText: Input not filled
 KVCWriteLauncherItemImportJSONErrorNotValidAlertText: Input not valid
 KVCWriteLauncherItemExportJSONText: Export JSON (beta)
+KVCWriteLauncherItemImportTXTText: Import TXT (beta)
 KVCWriteStorageExportButtonText: Export
 KVCWriteLauncherItemJournalText: Journal
 KVCWriteLauncherItemBacklinksText: Backlinks
