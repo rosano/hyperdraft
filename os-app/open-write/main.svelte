@@ -350,8 +350,7 @@ const mod = {
 					LCHRecipeCallback: function KVCWriteLauncherItemDebug_PromptFakeImportPlain () {
 						return mod.ControlNotesImportTXT([Object.assign(new File([], Math.random().toString()), {
 							lastModified: Date.now(),
-							_LCHReadTextFileObjectContent: window.prompt(),
-						})])
+						}, JSON.parse(window.prompt()))])
 					},
 				}
 			]);

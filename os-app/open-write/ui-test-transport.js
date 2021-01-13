@@ -66,7 +66,7 @@ describe('KVCWrite_Transport', function () {
 
 	describe('ImportTXT', function test_ImportTXT() {
 
-		const item = Math.random().toString();
+		const _LCHReadTextFileObjectContent = Math.random().toString();
 
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute);
@@ -84,14 +84,16 @@ describe('KVCWrite_Transport', function () {
 			return browser.OLSKPrompt(function () {
 				return browser.click('.LCHLauncherPipeItem');
 			}, function (dialog) {
-				dialog.response = item;
+				dialog.response = JSON.stringify({
+					_LCHReadTextFileObjectContent,
+				});
 
 				return dialog;
 			});
 		});
 
 		it('creates item', function () {
-			browser.assert.text('.KVCWriteMasterListItemTitle', item);
+			browser.assert.text('.KVCWriteMasterListItemTitle', _LCHReadTextFileObjectContent);
 		});
 
 	});
