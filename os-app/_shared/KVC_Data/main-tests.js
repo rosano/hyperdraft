@@ -53,3 +53,36 @@ describe('KVC_DataImport', function test_KVC_DataImport() {
 	});
 
 });
+
+describe('KVC_DataExport', function test_KVC_DataExport() {
+
+	it('throws if not array', function () {
+		throws(function () {
+			mod.KVC_DataExport(KVCTestingStorageClient, null);
+		}, /KOMErrorInputNotValid/);
+	});
+
+	it('throws if not filled', function () {
+		throws(function () {
+			mod.KVC_DataExport(KVCTestingStorageClient, []);
+		}, /KOMErrorInputNotValid/);
+	});
+
+	it('returns array', function () {
+		const item = StubNoteObjectValid();
+		deepEqual(mod.KVC_DataExport(KVCTestingStorageClient, [item]), [item]);
+	});
+
+	it('copies input', function () {
+		const item = StubNoteObjectValid();
+		deepEqual((mod.KVC_DataExport(KVCTestingStorageClient, [item]))[0] !== item, true);
+	});
+
+	it('strips dynamic attributes', function () {
+		deepEqual((mod.KVC_DataExport(KVCTestingStorageClient, [StubNoteObjectValid({
+			$alfa: 'bravo',
+		})]))[0].$alfa, undefined);
+	});
+
+});
+

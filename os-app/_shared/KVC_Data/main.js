@@ -32,6 +32,18 @@ const mod = {
 		}));
 	},
 
+	KVC_DataExport (storageClient, inputData) {
+		if (!Array.isArray(inputData)) {
+			throw new Error('KOMErrorInputNotValid');
+		}
+
+		if (!inputData.length) {
+			throw new Error('KOMErrorInputNotValid');
+		}
+
+		return inputData.map(OLSKRemoteStorage.OLSKRemoteStorageSafeCopy);
+	},
+
 };
 
 export default mod;
