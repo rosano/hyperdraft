@@ -75,11 +75,13 @@ import KVCWriteMasterListItem from './submodules/KVCWriteMasterListItem/main.sve
 		</div>
 	</div>
 
-	<KVCWriteMasterListItem
-		KVCWriteMasterListItemObject={ item }
-		KVCWriteMasterListItemDispatchTitle={ (inputData) => KVCWriteMasterLogic.KVCWriteMasterTruncatedTitle(KVCWriteMasterDelegateItemTitle(inputData)) }
-		KVCWriteMasterListItemDispatchSnippet={ (inputData) => KVCWriteMasterDelegateItemSnippet(inputData) }
-		/>
+	<div slot="OLSKMasterListItem">
+		<KVCWriteMasterListItem
+			KVCWriteMasterListItemObject={ item }
+			KVCWriteMasterListItemDispatchTitle={ (inputData) => KVCWriteMasterLogic.KVCWriteMasterTruncatedTitle(KVCWriteMasterDelegateItemTitle(inputData)) }
+			KVCWriteMasterListItemDispatchSnippet={ (inputData) => KVCWriteMasterDelegateItemSnippet(inputData) }
+			/>
+	</div>
 
 	<div class="OLSKMasterListBodyTail" slot="OLSKMasterListBodyTail">{#if KVCWriteMasterRevealArchiveIsVisible }
 		<button class="KVCWriteMasterRevealArchiveButton OLSKDecorPress" on:click={ KVCWriteMasterDispatchRevealArchive }>{ OLSKLocalized('KVCWriteMasterRevealArchiveButtonText') }</button>
