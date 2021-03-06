@@ -7,7 +7,7 @@ describe('KVCWrite_Publish', function () {
 	});
 
 	before(function () {
-		return browser.OLSKLauncherRun('FakeStorageIsConnected');
+		return browser.OLSKLauncherRun('ZDRLauncherItemFakeDispatchConnected');
 	});
 
 	describe('template', function test_template () {

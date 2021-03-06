@@ -88,6 +88,10 @@ describe('KVCWrite_Access', function () {
 		return browser.assert.OLSKLauncherItems('KVCWriteLauncherItemShowPublicNotes', 1);
 	});
 
+	it('shows ZDRLauncherFakeItemProxy', function () {
+		return browser.assert.OLSKLauncherItems('ZDRLauncherFakeItemProxy', 1);
+	});
+
 	it('shows OLSKRemoteStorageLauncherFakeItemProxy', function () {
 		return browser.assert.OLSKLauncherItems('OLSKRemoteStorageLauncherFakeItemProxy', 1);
 	});
@@ -162,8 +166,8 @@ describe('KVCWrite_Access', function () {
 			browser.assert.elements(KVCWriteStorageToolbar, 1);
 		});
 
-		it('shows OLSKStorageWidget', function () {
-			browser.assert.elements('.OLSKStorageWidget', 1);
+		it('shows OLSKCloud', function () {
+			browser.assert.elements('.OLSKCloud', 1);
 		});
 	
 	});
@@ -371,7 +375,7 @@ describe('KVCWrite_Access', function () {
 	context('connected', function test_connected () {
 		
 		before(function () {
-			return browser.OLSKLauncherRun('FakeStorageIsConnected');
+			return browser.OLSKLauncherRun('ZDRLauncherItemFakeDispatchConnected');
 		});
 
 		it('shows KVCWriteLauncherItemConfigureCustomDomain', function () {

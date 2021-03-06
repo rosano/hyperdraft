@@ -227,7 +227,7 @@ describe('KVCWriteDetail_Misc', function () {
 
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
-				KVCWriteDetailItem: JSON.stringify(Object.assign(StubNoteObjectValid(), {
+				KVCWriteDetailItem: JSON.stringify(StubNoteObjectValid({
 					KVCNoteIsPublic: true,
 					KVCNotePublishDate: new Date(),
 					KVCNotePublicID: 'bravo',
@@ -397,7 +397,7 @@ describe('KVCWriteDetail_Misc', function () {
 		
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
-				KVCWriteDetailItem: JSON.stringify(Object.assign(StubNoteObjectValid(), {
+				KVCWriteDetailItem: JSON.stringify(StubNoteObjectValid({
 					KVCNoteIsArchived: true,
 				})),
 			});
@@ -546,7 +546,7 @@ describe('KVCWriteDetail_Misc', function () {
 			});
 
 			it('updates KVCWriteDetailItem', function () {
-				browser.assert.text('#TestKVCWriteDetailItem', JSON.stringify(Object.assign(StubNoteObjectValid(), {
+				browser.assert.text('#TestKVCWriteDetailItem', JSON.stringify(StubNoteObjectValid({
 					KVCNoteBody: 'charlie',
 				})));
 			});
@@ -595,7 +595,7 @@ describe('KVCWriteDetail_Misc', function () {
 		
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
-				KVCWriteDetailItem: JSON.stringify(Object.assign(StubNoteObjectValid(), {
+				KVCWriteDetailItem: JSON.stringify(StubNoteObjectValid({
 					KVCNoteIsArchived: true,
 				})),
 			});

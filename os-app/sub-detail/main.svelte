@@ -58,7 +58,7 @@ export const modPublic = {
 
 };
 
-import KVCNoteModel from '../_shared/KVCNote/model.js';
+import KVCNote from '../_shared/KVCNote/main.js';
 import { OLSKLocalized } from 'OLSKInternational';
 import { OLSK_SPEC_UI } from 'OLSKSpec';
 
@@ -235,16 +235,20 @@ import KVCWriteInput from '../sub-input/main.svelte';
 		{/if}
 
 		{#if KVCWriteDetailConnected }
-			{#if !KVCNoteModel.KVCNoteModelIsPublic(mod._ValueItem) }
-				<button class="KVCWriteDetailToolbarPublishButton OLSKDecorButtonNoStyle OLSKDecorTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarPublishButtonText') } on:click={ () => KVCWriteDetailDispatchPublish() }>
+			{#if !KVCNote.KVCNoteIsMarkedPublic(mod._ValueItem) }
+				<button class="KVCWriteDetailToolbarPublishButton OLSKDecorButtonNoStyle OLSKDecorTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarPublishButtonText') } on:click={ KVCWriteDetailDispatchPublish }>
 					<div class="KVCWriteDetailToolbarPublishButtonImage">{@html _KVCWritePublish }</div>
 				</button>
 			{/if}
 
-			{#if KVCNoteModel.KVCNoteModelIsPublic(mod._ValueItem) }
-				<a class="KVCWriteDetailToolbarPublicLink" href={ KVCWriteDetailPublicURLFor(mod._ValueItem) } target="_blank">{ OLSKLocalized('KVCWriteDetailToolbarPublicLinkText') }</a>
+			{#if KVCNote.KVCNoteIsMarkedPublic(mod._ValueItem) }
+				{#await KVCWriteDetailPublicURLFor(mod._ValueItem)}
+					<!-- promise is pending -->
+				{:then value}
+					<a class="KVCWriteDetailToolbarPublicLink" href={ value } target="_blank">{ OLSKLocalized('KVCWriteDetailToolbarPublicLinkText') }</a>
+				{/await}
 					
-				<button class="KVCWriteDetailToolbarRetractButton OLSKDecorButtonNoStyle OLSKDecorTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarRetractButtonText') } on:click={ () => KVCWriteDetailDispatchRetract() }>
+				<button class="KVCWriteDetailToolbarRetractButton OLSKDecorButtonNoStyle OLSKDecorTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarRetractButtonText') } on:click={ KVCWriteDetailDispatchRetract }>
 					<div class="KVCWriteDetailToolbarRetractButtonImage">{@html _KVCWriteRetract }</div>
 				</button>
 			{/if}

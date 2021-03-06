@@ -263,13 +263,14 @@ describe('KVCWriteBacklinksMap', function test_KVCWriteBacklinksMap() {
 	});
 
 	it('includes if no links', function() {
-		deepEqual(mod.KVCWriteBacklinksMap([StubNoteObjectValid()]), {
-			bravo: [],
+		const item = StubNoteObjectValid();
+		deepEqual(mod.KVCWriteBacklinksMap([item]), {
+			[item.KVCNoteBody]: [],
 		});
 	});
 
 	it('includes if broken links', function() {
-		deepEqual(mod.KVCWriteBacklinksMap([Object.assign(StubNoteObjectValid(), {
+		deepEqual(mod.KVCWriteBacklinksMap([StubNoteObjectValid({
 			KVCNoteBody: 'alfa\n[[bravo]]'
 		})]), {
 			alfa: [],
@@ -277,10 +278,10 @@ describe('KVCWriteBacklinksMap', function test_KVCWriteBacklinksMap() {
 	});
 
 	it('includes if unresolved links', function() {
-		const item1 = Object.assign(StubNoteObjectValid(), {
+		const item1 = StubNoteObjectValid({
 			KVCNoteBody: 'alfa\n[[bravo]]'
 		});
-		const item2 = Object.assign(StubNoteObjectValid(), {
+		const item2 = StubNoteObjectValid({
 			KVCNoteBody: 'bravo'
 		});
 		deepEqual(mod.KVCWriteBacklinksMap([item1, item2]), {
@@ -290,10 +291,10 @@ describe('KVCWriteBacklinksMap', function test_KVCWriteBacklinksMap() {
 	});
 
 	it('includes if resolved links', function() {
-		const item1 = Object.assign(StubNoteObjectValid(), {
+		const item1 = StubNoteObjectValid({
 			KVCNoteBody: 'alfa\n[[bravo]]'
 		});
-		const item2 = Object.assign(StubNoteObjectValid(), {
+		const item2 = StubNoteObjectValid({
 			KVCNoteBody: 'bravo\n[[alfa]]'
 		});
 		deepEqual(mod.KVCWriteBacklinksMap([item1, item2]), {
@@ -339,7 +340,7 @@ describe('KVCWriteLauncherItemBacklinksTemplate', function test_KVCWriteLauncher
 
 	it('creates item for each value item', function() {
 		deepEqual(mod.KVCWriteLauncherItemBacklinksTemplate(new Date(), {
-			alfa: [Object.assign(StubNoteObjectValid(), {
+			alfa: [StubNoteObjectValid({
 				KVCNoteBody: 'bravo'
 			})],
 		}, function (inputData) { return inputData }).split('\n\n').slice(1).join('\n\n'), '# [[alfa]]\n- [[bravo]]');
@@ -347,12 +348,12 @@ describe('KVCWriteLauncherItemBacklinksTemplate', function test_KVCWriteLauncher
 
 	it('sorts by length ascending', function() {
 		deepEqual(mod.KVCWriteLauncherItemBacklinksTemplate(new Date(), {
-			alfa: [Object.assign(StubNoteObjectValid(), {
+			alfa: [StubNoteObjectValid({
 				KVCNoteBody: 'bravo',
-			}), Object.assign(StubNoteObjectValid(), {
+			}), StubNoteObjectValid({
 				KVCNoteBody: 'charlie',
 			})],
-			bravo: [Object.assign(StubNoteObjectValid(), {
+			bravo: [StubNoteObjectValid({
 				KVCNoteBody: 'delta',
 			})],
 		}, function (inputData) { return inputData }).split('\n\n').slice(1).join('\n\n'), '# [[bravo]]\n- [[delta]]\n\n# [[alfa]]\n- [[bravo]]\n- [[charlie]]');
@@ -360,10 +361,10 @@ describe('KVCWriteLauncherItemBacklinksTemplate', function test_KVCWriteLauncher
 
 	it('sorts KVCNoteIsArchived below', function() {
 		deepEqual(mod.KVCWriteLauncherItemBacklinksTemplate(new Date(), {
-			alfa: [Object.assign(StubNoteObjectValid(), {
+			alfa: [StubNoteObjectValid({
 				KVCNoteBody: 'bravo',
 				KVCNoteIsArchived: true,
-			}), Object.assign(StubNoteObjectValid(), {
+			}), StubNoteObjectValid({
 				KVCNoteBody: 'charlie',
 			})],
 		}, function (inputData) { return inputData }).split('\n\n').slice(1).join('\n\n'), '# [[alfa]]\n- [[charlie]]\n- [[bravo]]');

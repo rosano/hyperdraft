@@ -1,15 +1,12 @@
 <script>
 import { OLSKLocalized } from 'OLSKInternational';
 import OLSKThrottle from 'OLSKThrottle';
-import KVC_Data from '../_shared/KVC_Data/main.js';
-import KVCNoteStorage from '../_shared/KVCNote/storage.js';
-import KVCNoteModel from '../_shared/KVCNote/model.js';
-import KVCSettingStorage from '../_shared/KVCSetting/storage.js';
+import KVCNote from '../_shared/KVCNote/main.js';
+import KVCSetting from '../_shared/KVCSetting/main.js';
+import KVCTransport from '../_shared/KVCTransport/main.js';
 import { OLSK_SPEC_UI } from 'OLSKSpec';
 import OLSKRemoteStorage from 'OLSKRemoteStorage'
 import OLSKServiceWorker from 'OLSKServiceWorker';
-import KVCNoteAction from '../_shared/KVCNote/action.js';
-import KVCSettingAction from '../_shared/KVCSetting/action.js';
 import KVCWriteLogic from './ui-logic.js';
 import RemoteStorage from 'remotestoragejs';
 import KVCTemplate from '../_shared/KVCTemplate/main.js';
@@ -21,6 +18,7 @@ import OLSKLocalStorage from 'OLSKLocalStorage';
 import OLSKPact from 'OLSKPact';
 import OLSKChain from 'OLSKChain';
 import OLSKBeacon from 'OLSKBeacon';
+import zerodatawrap from 'zerodatawrap';
 
 const mod = {
 
@@ -64,6 +62,15 @@ const mod = {
 			mod.OLSKMobileViewInactive = false;	
 		}
 	},
+
+	async ValueSetting (param1, param2) {
+		await mod._ValueZDRWrap.App.KVCSetting.ZDRModelWriteObject({
+			KVCSettingKey: param1,
+			KVCSettingValue: param2,
+		});
+
+		mod._ValueSettingsAll[param1] = param2;
+	},
 	
 	_ValueFilterText: '',
 	
@@ -79,12 +86,6 @@ const mod = {
 
 	OLSKMobileViewInactive: false,
 
-	_ValueDidMigrate: false,
-
-	_ValueStorageIsConnected: false,
-
-	_ValueSettingsAll: [],
-
 	_IsRunningDemo: false,
 
 	_ValueOLSKFundProgress: false,
@@ -94,13 +95,7 @@ const mod = {
 	// DATA
 
 	DataSetting (inputData) {
-		return mod._ValueSettingsAll.filter(function (e) {
-			return e.KVCSettingKey === inputData;
-		}).shift();
-	},
-	
-	DataSettingValue (inputData) {
-		return (mod.DataSetting(inputData) || {}).KVCSettingValue;
+		return mod._ValueSettingsAll[inputData];
 	},
 
 	DataNavigator () {
@@ -159,8 +154,8 @@ const mod = {
 		}, {
 			LCHRecipeSignature: 'KVCWriteLauncherItemExportJSON',
 			LCHRecipeName: OLSKLocalized('KVCWriteLauncherItemExportJSONText'),
-			LCHRecipeCallback: function KVCWriteLauncherItemExportJSON () {
-				return this.api.LCHSaveFile(mod.DataExportJSON(), mod.DataExportJSONFilename());
+			LCHRecipeCallback: async function KVCWriteLauncherItemExportJSON () {
+				return this.api.LCHSaveFile(await mod.DataExportJSON(), mod.DataExportJSONFilename());
 			},
 		}, {
 			LCHRecipeSignature: 'KVCWriteLauncherItemExportZIP',
@@ -178,7 +173,7 @@ const mod = {
 			},
 		}];
 
-		if (mod._ValueStorageIsConnected) {
+		if (mod._ValueCloudIdentity) {
 			let count = 0;
 			outputData.push({
 				LCHRecipeSignature: 'KVCWriteLauncherItemConfigureCustomDomain',
@@ -189,7 +184,7 @@ const mod = {
 					const confirm3 = !OLSK_SPEC_UI() || (OLSK_SPEC_UI() && count == 2);
 
 					if (prompt1) {
-						if (window.prompt(OLSKLocalized('KVCWriteLauncherItemConfigureCustomDomainPrompt1QuestionText'), KVCNoteStorage.KVCNoteStoragePublicURL(mod._ValueOLSKRemoteStorage, KVCNoteStorage.KVCNoteStoragePublicRootPagePath())) === null) {
+						if (window.prompt(OLSKLocalized('KVCWriteLauncherItemConfigureCustomDomainPrompt1QuestionText'), mod._ValueZDRWrap.Public.ZDRStorageURL(KVCNote.KVCNotePublicRootPagePath())) === null) {
 							return;
 						};
 					}
@@ -212,7 +207,7 @@ const mod = {
 
 							const item = KVCWriteLogic.KVCWriteCustomDomainBaseURLData(response);
 							if (item) {
-								await mod.ControlSettingStore('KVCSettingCustomDomainBaseURL', item);
+								await mod.ValueSetting('KVCSettingCustomDomainBaseURL', item);
 								
 								if (mod._ValueNoteSelected) {
 									await mod._ControlHotfixUpdateInPlace(mod._ValueNoteSelected);
@@ -235,7 +230,9 @@ const mod = {
 				LCHRecipeSignature: 'KVCWriteLauncherItemRemoveCustomDomain',
 				LCHRecipeName: OLSKLocalized('KVCWriteLauncherItemRemoveCustomDomainText'),
 				LCHRecipeCallback: async function KVCWriteLauncherItemRemoveCustomDomain () {
-					await KVCSettingAction.KVCSettingsActionDelete(mod._ValueOLSKRemoteStorage, 'KVCSettingCustomDomainBaseURL');
+					await mod._ValueZDRWrap.App.KVCSetting.KVCSettingsDelete({
+						KVCSettingKey: 'KVCSettingCustomDomainBaseURL',
+					});
 
 					delete mod._ValueSettingsAll[mod._ValueSettingsAll.indexOf(mod.DataSetting('KVCSettingCustomDomainBaseURL'))];
 
@@ -252,43 +249,43 @@ const mod = {
 		if (OLSK_SPEC_UI()) {
 			outputData.push(...[
 				{
-					LCHRecipeName: 'FakeOLSKChangeDelegateCreateNote',
-					LCHRecipeCallback: async function FakeOLSKChangeDelegateCreateNote () {
-						return mod.OLSKChangeDelegateCreateNote(await KVCNoteAction.KVCNoteActionCreate(mod._ValueOLSKRemoteStorage, mod.FakeNoteObjectValid('FakeOLSKChangeDelegateCreateNote')));
+					LCHRecipeName: 'FakeZDRSchemaDispatchSyncCreateNote',
+					LCHRecipeCallback: async function FakeZDRSchemaDispatchSyncCreateNote () {
+						return mod.ZDRSchemaDispatchSyncCreateNote(await mod._ValueZDRWrap.App.KVCNote.KVCNoteCreate(mod.FakeNoteObjectValid('FakeZDRSchemaDispatchSyncCreateNote')));
 					},
 				},
 				{
-					LCHRecipeName: 'FakeOLSKChangeDelegateUpdateNote',
-					LCHRecipeCallback: async function FakeOLSKChangeDelegateUpdateNote () {
-						return mod.OLSKChangeDelegateUpdateNote(await KVCNoteAction.KVCNoteActionUpdate(mod._ValueOLSKRemoteStorage, Object.assign(mod._ValueNotesAll.filter(function (e) {
-							return e.KVCNoteBody.match('FakeOLSKChangeDelegate');
+					LCHRecipeName: 'FakeZDRSchemaDispatchSyncUpdateNote',
+					LCHRecipeCallback: async function FakeZDRSchemaDispatchSyncUpdateNote () {
+						return mod.ZDRSchemaDispatchSyncUpdateNote(await mod._ValueZDRWrap.App.KVCNote.KVCNoteUpdate(Object.assign(mod._ValueNotesAll.filter(function (e) {
+							return e.KVCNoteBody.match('FakeZDRSchemaDispatchSync');
 						}).pop(), {
-							KVCNoteBody: 'FakeOLSKChangeDelegateUpdateNote',
+							KVCNoteBody: 'FakeZDRSchemaDispatchSyncUpdateNote',
 						})));
 					},
 				},
 				{
-					LCHRecipeName: 'FakeOLSKChangeDelegateDeleteNote',
-					LCHRecipeCallback: async function FakeOLSKChangeDelegateDeleteNote () {
+					LCHRecipeName: 'FakeZDRSchemaDispatchSyncDeleteNote',
+					LCHRecipeCallback: async function FakeZDRSchemaDispatchSyncDeleteNote () {
 						const item = mod._ValueNotesAll.filter(function (e) {
-							return e.KVCNoteBody.match('FakeOLSKChangeDelegate');
+							return e.KVCNoteBody.match('FakeZDRSchemaDispatchSync');
 						}).pop();
 						
-						await KVCNoteAction.KVCNoteActionDelete(mod._ValueOLSKRemoteStorage, item);
+						await mod._ValueZDRWrap.App.KVCNote.KVCNoteDelete(item);
 						
-						return mod.OLSKChangeDelegateDeleteNote(item);
+						return mod.ZDRSchemaDispatchSyncDeleteNote(item);
 					},
 				},
 				{
-					LCHRecipeName: 'FakeOLSKChangeDelegateConflictNote',
-					LCHRecipeCallback: async function FakeOLSKChangeDelegateConflictNote () {
+					LCHRecipeName: 'FakeZDRSchemaDispatchSyncConflictNote',
+					LCHRecipeCallback: async function FakeZDRSchemaDispatchSyncConflictNote () {
 						const item = mod._ValueNotesAll.filter(function (e) {
-							return e.KVCNoteBody.match('FakeOLSKChangeDelegateConflictNote');
+							return e.KVCNoteBody.match('FakeZDRSchemaDispatchSyncConflictNote');
 						}).pop();
 						
-						return mod.OLSKChangeDelegateConflictNote({
+						return mod.ZDRSchemaDispatchSyncConflictNote({
 							origin: 'conflict',
-							oldValue: OLSKRemoteStorage.OLSKRemoteStoragePreJSONSchemaValidate(await KVCNoteAction.KVCNoteActionUpdate(mod._ValueOLSKRemoteStorage, Object.assign({}, item, {
+							oldValue: OLSKRemoteStorage.OLSKRemoteStoragePreJSONSchemaValidate(await mod._ValueZDRWrap.App.KVCNote.KVCNoteUpdate(Object.assign({}, item, {
 								KVCNoteBody: item.KVCNoteBody + '-local',
 							}))),
 							newValue: OLSKRemoteStorage.OLSKRemoteStoragePreJSONSchemaValidate(Object.assign({}, item, {
@@ -312,7 +309,7 @@ const mod = {
 							KVCNoteCreationDate: new Date('2019-02-23T13:56:36Z'),
 							KVCNoteModificationDate: new Date('2019-02-23T13:56:36Z'),
 						};
-						await OLSKRemoteStorage.OLSKRemoteStorageWriteObject(mod._ValueOLSKRemoteStorage.wikiavec.__DEBUG.__OLSKRemoteStoragePrivateClient(), KVCNoteStorage.KVCNoteStorageObjectPathV1(item), OLSKRemoteStorage.OLSKRemoteStoragePreJSONSchemaValidate(item));
+						mod._ValueZDRWrap.App.ZDRStorageWriteObject(KVCNote.KVCNoteObjectPathV1(item), item);
 						await mod.SetupValueNotesAll();
 					},
 				},
@@ -329,15 +326,9 @@ const mod = {
 					},
 				},
 				{
-					LCHRecipeName: 'FakeStorageIsConnected',
-					LCHRecipeCallback: function FakeStorageIsConnected () {
-						mod._ValueStorageIsConnected = true;
-					},
-				},
-				{
 					LCHRecipeName: 'FakeConfigureCustomDomain',
 					LCHRecipeCallback: async function FakeConfigureCustomDomain () {
-						await mod.ControlSettingStore('KVCSettingCustomDomainBaseURL', KVCWriteLogic.KVCWriteCustomDomainBaseURLData('FakeCustomDomainBaseURL'));
+						await mod.ValueSetting('KVCSettingCustomDomainBaseURL', KVCWriteLogic.KVCWriteCustomDomainBaseURLData('FakeCustomDomainBaseURL'));
 
 						if (mod._ValueNoteSelected) {
 							await mod._ControlHotfixUpdateInPlace(mod._ValueNoteSelected);
@@ -348,7 +339,7 @@ const mod = {
 					LCHRecipeName: 'FakeFundDocumentLimit',
 					LCHRecipeCallback: async function FakeFundDocumentLimit () {
 						await Promise.all(Array.from(Array(mod._ValueDocumentRemainder)).map(function (e) {
-							return KVCNoteAction.KVCNoteActionCreate(mod._ValueOLSKRemoteStorage, {
+							return mod._ValueZDRWrap.App.KVCNote.KVCNoteCreate({
 								KVCNoteBody: Math.random().toString(),
 							});
 						}));
@@ -376,10 +367,10 @@ const mod = {
 					},
 				}, {
 					LCHRecipeName: 'KVCWriteLauncherItemDebug_AlertFakeExportSerialized',
-					LCHRecipeCallback: function KVCWriteLauncherItemDebug_AlertFakeExportSerialized () {
+					LCHRecipeCallback: async function KVCWriteLauncherItemDebug_AlertFakeExportSerialized () {
 						return window.alert(JSON.stringify({
 							OLSKDownloadName: mod.DataExportJSONFilename(),
-							OLSKDownloadData: mod.DataExportJSON(),
+							OLSKDownloadData: await mod.DataExportJSON(),
 						}));
 					},
 				}, {
@@ -393,10 +384,25 @@ const mod = {
 			]);
 		}
 
+		outputData.push(...zerodatawrap.ZDRRecipes({
+			ParamMod: mod,
+			ParamSpecUI: OLSK_SPEC_UI(),
+		}));
+
+		if (mod._ValueZDRWrap.ZDRStorageProtocol === zerodatawrap.ZDRProtocolRemoteStorage()) {
+			outputData.push(...OLSKRemoteStorage.OLSKRemoteStorageRecipes({
+				ParamWindow: window,
+				ParamStorage: mod._ValueZDRWrap.ZDRStorageClient(),
+				OLSKLocalized: OLSKLocalized,
+				ParamMod: mod,
+				ParamSpecUI: OLSK_SPEC_UI(),
+			}));
+		}
+
 		outputData.push(...OLSKFund.OLSKFundRecipes({
 			ParamWindow: window,
 			OLSKLocalized: OLSKLocalized,
-			ParamConnected: mod._ValueOLSKRemoteStorage.connected,
+			ParamConnected: !!mod._ValueCloudIdentity,
 			ParamAuthorized: !!mod._ValueFundClue,
 			OLSKFundDispatchGrant: mod.OLSKFundDispatchGrant,
 			OLSKFundDispatchPersist: mod.OLSKFundDispatchPersist,
@@ -404,13 +410,6 @@ const mod = {
 			ParamSpecUI: OLSK_SPEC_UI(),
 		}));
 
-		outputData.push(...OLSKRemoteStorage.OLSKRemoteStorageRecipes({
-			ParamWindow: window,
-			ParamStorage: mod._ValueOLSKRemoteStorage,
-			OLSKLocalized: OLSKLocalized,
-			ParamMod: mod,
-			ParamSpecUI: OLSK_SPEC_UI(),
-		}));
 		outputData.push(...OLSKServiceWorker.OLSKServiceWorkerRecipes(window, mod.DataNavigator(), OLSKLocalized, OLSK_SPEC_UI()));
 
 		if (mod.KVCWriteDetailInstance) {
@@ -434,8 +433,11 @@ const mod = {
 		return mod._ValueArchivedCount && mod._RevealArchiveIsVisible;
 	},
 
-	DataExportJSON () {
-		return JSON.stringify(KVC_Data.KVC_DataExport(mod._ValueOLSKRemoteStorage, mod._ValueNotesAll));
+	async DataExportJSON () {
+		return JSON.stringify(mod._ValueZDRWrap.App.KVCTransport.KVCTransportExport({
+			KVCNote: mod._ValueNotesAll,
+			KVCSetting: await mod._ValueZDRWrap.App.KVCSetting.KVCSettingList(),
+		}));
 	},
 
 	DataExportBasename () {
@@ -505,7 +507,7 @@ const mod = {
 		OLSKThrottle.OLSKThrottleMappedTimeout(mod._ValueSaveNoteThrottleMap, inputData.KVCNoteID, {
 			OLSKThrottleDuration: 500,
 			OLSKThrottleCallback () {
-				KVCNoteAction.KVCNoteActionUpdate(mod._ValueOLSKRemoteStorage, inputData);
+				mod._ValueZDRWrap.App.KVCNote.KVCNoteUpdate(inputData);
 
 				OLSKLocalStorage.OLKSLocalStorageSet(window.localStorage, 'KVC_VERSION_MAP', OLSKVersion.OLSKVersionAdd(mod._ValueVersionMap, inputData.KVCNoteID, OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(JSON.parse(JSON.stringify(inputData)))));
 			},
@@ -515,7 +517,7 @@ const mod = {
 			OLSKThrottle.OLSKThrottleSkip(mod._ValueSaveNoteThrottleMap[inputData.KVCNoteID])	
 		}
 
-		if (KVCNoteModel.KVCNoteModelIsPublic(inputData)) {
+		if (KVCNote.KVCNoteIsMarkedPublic(inputData)) {
 			OLSKThrottle.OLSKThrottleMappedTimeout(mod._ValueSavePublishThrottleMap, inputData.KVCNoteID, {
 				OLSKThrottleDuration: 1500,
 				async OLSKThrottleCallback () {
@@ -542,7 +544,7 @@ const mod = {
 			return mod.ControlFundGate();
 		}
 
-		const item = await KVCNoteAction.KVCNoteActionCreate(mod._ValueOLSKRemoteStorage, {
+		const item = await mod._ValueZDRWrap.App.KVCNote.KVCNoteCreate({
 			KVCNoteBody: typeof inputData === 'string' ? inputData : '',
 		});
 
@@ -627,22 +629,22 @@ const mod = {
 			]; // #purge-translation-refs
 
 		const options = {
-			KVCOptionIsRoot: mod.DataSettingValue('KVCSettingPublicRootPageID') === inputData.KVCNoteID,
-			KVCOptionRootURL: KVCNoteStorage.KVCNoteStoragePublicURL(mod._ValueOLSKRemoteStorage, 'index.html'),
-			KVCOptionBacklinks: KVCWriteLogic.KVCWriteBacklinksMap(mod._ValueNotesAll.filter(KVCNoteModel.KVCNoteModelIsPublic).concat(inputData))[KVCTemplate.KVCTemplatePlaintextTitle(inputData.KVCNoteBody)],
-			_KVCOptionPublicBaseURL: KVCNoteStorage.KVCNoteStoragePublicURL(mod._ValueOLSKRemoteStorage, '/'),
+			KVCOptionIsRoot: mod.DataSetting('KVCSettingPublicRootPageID') === inputData.KVCNoteID,
+			KVCOptionRootURL: await mod._ValueZDRWrap.Public.ZDRStorageURL('index.html'),
+			KVCOptionBacklinks: KVCWriteLogic.KVCWriteBacklinksMap(mod._ValueNotesAll.filter(KVCNote.KVCNoteIsMarkedPublic).concat(inputData))[KVCTemplate.KVCTemplatePlaintextTitle(inputData.KVCNoteBody)],
+			_KVCOptionPublicBaseURL: await mod._ValueZDRWrap.Public.ZDRStorageURL('/'),
 		};
 
-		const wasPublic = KVCNoteModel.KVCNoteModelIsPublic(inputData);
+		const wasPublic = KVCNote.KVCNoteIsMarkedPublic(inputData);
 
-		const updated = await KVCNoteAction.KVCNoteActionPublish(mod._ValueOLSKRemoteStorage, inputData, mod.TestPublishContent = KVCTemplate.KVCView({
+		const updated = await mod._ValueZDRWrap.App.KVCNote.KVCNotePublicFilesUpload(await mod._ValueZDRWrap.App.KVCNote.KVCNoteMarkPublic(inputData), mod.TestPublishContent = KVCTemplate.KVCView({
 			KVCViewSource: inputData.KVCNoteBody,
-			KVCViewPermalinkMap: await KVCNoteAction.KVCNoteActionPermalinkMap(mod._ValueOLSKRemoteStorage, mod.DataSettingValue('KVCSettingPublicRootPageID')),
+			KVCViewPermalinkMap: await mod._ValueZDRWrap.App.KVCNote.KVCNotePermalinkMap(mod._ValueNotesAll, mod.DataSetting('KVCSettingPublicRootPageID') || ''),
 			KVCViewTemplate: KVCTemplate.KVCTemplateViewDefault(OLSKLocalized),
 			KVCViewTemplateOptions: options,
-		}), options);
+		}), options.KVCOptionIsRoot);
 
-		if (wasPublic === KVCNoteModel.KVCNoteModelIsPublic(updated)) {
+		if (wasPublic === KVCNote.KVCNoteIsMarkedPublic(updated)) {
 			return;
 		}
 		
@@ -653,8 +655,8 @@ const mod = {
 		if (OLSK_SPEC_UI()) {
 			window.TestControlNoteRetractCount.innerHTML = parseInt(window.TestControlNoteRetractCount.innerHTML) + 1;
 		}
-		
-		mod.ValueNoteSelected(await KVCNoteAction.KVCNoteActionRetract(mod._ValueOLSKRemoteStorage, inputData, mod.DataSettingValue('KVCSettingPublicRootPageID') === inputData.KVCNoteID));
+
+		mod.ValueNoteSelected(await mod._ValueZDRWrap.App.KVCNote.KVCNotePublicFilesRetract(await mod._ValueZDRWrap.App.KVCNote.KVCNoteMarkNotPublic(inputData), mod.DataSetting('KVCSettingPublicRootPageID') === inputData.KVCNoteID));
 	},
 	
 	async ControlNoteVersions (inputData) {
@@ -676,7 +678,7 @@ const mod = {
 
 		mod.ControlNoteSelect(null);
 
-		await KVCNoteAction.KVCNoteActionDelete(mod._ValueOLSKRemoteStorage, inputData);
+		await mod._ValueZDRWrap.App.KVCNote.KVCNoteDelete(inputData);
 	},
 
 	ControlEscape() {
@@ -715,7 +717,7 @@ const mod = {
 		}
 
 		try {
-			await KVC_Data.KVC_DataImport(mod._ValueOLSKRemoteStorage, OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(JSON.parse(inputData)));
+			await mod._ValueZDRWrap.App.KVCTransport.KVCTransportImport(OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(JSON.parse(inputData)));
 			await mod.SetupValueNotesAll();
 		} catch (e) {
 			window.alert(OLSKLocalized('KVCWriteLauncherItemImportJSONErrorNotValidAlertText'));
@@ -723,26 +725,12 @@ const mod = {
 	},
 
 	async ControlNotesImportTXT (inputData, extractFilename) {
-		await KVC_Data.KVC_DataImport(mod._ValueOLSKRemoteStorage, OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(inputData.map(function (e) {
-			return KVCWriteLogic.KVCWriteFileNoteObject(e, extractFilename);
-		})));
+		await mod._ValueZDRWrap.App.KVCTransport.KVCTransportImport({
+			KVCNote: OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(inputData.map(function (e) {
+				return KVCWriteLogic.KVCWriteFileNoteObject(e, extractFilename);
+			})),
+		});
 		await mod.SetupValueNotesAll();
-	},
-
-	async ControlSettingStore (param1, param2) {
-		await KVCSettingStorage.KVCSettingStorageWrite(mod._ValueOLSKRemoteStorage, Object.assign(mod.DataSetting(param1) || mod._ValueSettingsAll.push(await KVCSettingAction.KVCSettingsActionProperty(mod._ValueOLSKRemoteStorage, param1, param2)), {
-			KVCSettingValue: param2,
-		}));
-	},
-
-	ControlMigrate() {
-		KVCNoteStorage.KVCNoteStorageMigrateV1(mod._ValueOLSKRemoteStorage, mod.OLSKChangeDelegateCreateNote);
-
-		if (OLSK_SPEC_UI()) {
-			window.TestControlMigrateCount.innerHTML = parseInt(window.TestControlMigrateCount.innerHTML) + 1;
-		}
-
-		mod._ValueDidMigrate = true;
 	},
 
 	async ControlDemo () {
@@ -873,14 +861,14 @@ const mod = {
 	},
 
 	OLSKAppToolbarDispatchFund () {
-		if (!mod._ValueOLSKRemoteStorage.connected) {
+		if (!mod._ValueCloudIdentity) {
 			return mod._OLSKAppToolbarDispatchFundNotConnected();
 		}
 
 		mod._ValueFundURL = OLSKFund.OLSKFundURL({
 			ParamFormURL: 'OLSK_FUND_FORM_URL_SWAP_TOKEN',
 			ParamProject: 'RP_003',
-			ParamIdentity: mod._ValueOLSKRemoteStorage.remote.userAddress,
+			ParamIdentity: mod._ValueCloudIdentity,
 			ParamHomeURL: window.location.origin + window.location.pathname,
 		});
 
@@ -924,10 +912,12 @@ const mod = {
 		mod._ValueFundClue = inputData;
 
 		if (!inputData) {
-			return KVCSettingAction.KVCSettingsActionDelete(mod._ValueOLSKRemoteStorage, 'KVCSettingFundClue');
+			return mod._ValueZDRWrap.App.KVCSetting.KVCSettingsDelete({
+				KVCSettingKey: 'KVCSettingFundClue',
+			});
 		}
 
-		return KVCSettingAction.KVCSettingsActionProperty(mod._ValueOLSKRemoteStorage, 'KVCSettingFundClue', inputData).then(function () {
+		return mod.ValueSetting('KVCSettingFundClue', inputData).then(function () {
 			if (OLSK_SPEC_UI()) {
 				return;
 			}
@@ -988,14 +978,14 @@ const mod = {
 
 	KVCWriteDetailPublicURLFor (inputData) {
 		if (mod.DataSetting('KVCSettingCustomDomainBaseURL')) {
-			return KVCWriteLogic.KVCWriteCustomDomainBaseURLFunction(KVCNoteStorage.KVCNoteStoragePublicURL(mod._ValueOLSKRemoteStorage, KVCNoteStorage.KVCNoteStoragePublicRootPagePath()), KVCNoteStorage.KVCNoteStoragePublicRootPagePath())(KVCNoteStorage.KVCNoteStoragePublicURL(mod._ValueOLSKRemoteStorage, KVCNoteAction.KVCNoteActionPublicPath(inputData, mod.DataSettingValue('KVCSettingPublicRootPageID') === inputData.KVCNoteID)), mod.DataSetting('KVCSettingCustomDomainBaseURL').KVCSettingValue);
+			return KVCWriteLogic.KVCWriteCustomDomainBaseURLFunction(mod._ValueZDRWrap.Public.ZDRStorageURL(KVCNote.KVCNotePublicRootPagePath()), KVCNote.KVCNotePublicRootPagePath())(mod._ValueZDRWrap.Public.ZDRStorageURL(KVCNote.KVCNoteActionPublicPath(inputData, mod.DataSetting('KVCSettingPublicRootPageID') === inputData.KVCNoteID)), mod.DataSetting('KVCSettingCustomDomainBaseURL'));
 		}
 		
-		if (OLSK_SPEC_UI() && mod._ValueStorageIsConnected) {
+		if (OLSK_SPEC_UI() && mod._ValueCloudIdentity) {
 			return '/FakePublicPath';
 		}
 
-		return KVCNoteStorage.KVCNoteStoragePublicURL(mod._ValueOLSKRemoteStorage, KVCNoteStorage.KVCNoteStoragePublicObjectPath(inputData));
+		return mod._ValueZDRWrap.Public.ZDRStorageURL(KVCNote.KVCNotePublicChildPagePath(inputData));
 	},
 
 	KVCWriteDetailDispatchBack () {
@@ -1064,11 +1054,11 @@ const mod = {
 	},
 
 	async KVCWriteDetailDispatchSetAsRootPage (inputData) {
-		await mod.ControlSettingStore('KVCSettingPublicRootPageID', inputData);
+		await mod.ValueSetting('KVCSettingPublicRootPageID', inputData);
 
 		await mod._ControlHotfixUpdateInPlace(mod._ValueNoteSelected);
 
-		if (KVCNoteModel.KVCNoteModelIsPublic(mod._ValueNoteSelected)) {
+		if (KVCNote.KVCNoteIsMarkedPublic(mod._ValueNoteSelected)) {
 			mod.ControlNotePublish(mod._ValueNoteSelected);
 		}
 	},
@@ -1083,17 +1073,13 @@ const mod = {
 		mod.ControlEscape();
 	},
 
-	OLSKChangeDelegateCreateNote (inputData) {
-		// console.log('OLSKChangeDelegateCreate', inputData);
-
+	ZDRSchemaDispatchSyncCreateNote (inputData) {
 		mod.ValueNotesAll([inputData].concat(mod._ValueNotesAll.filter(function (e) {
 			return e.KVCNoteID !== inputData.KVCNoteID; // @Hotfix Dropbox sending DelegateAdd
 		})), !mod._ValueNoteSelected);
 	},
 
-	OLSKChangeDelegateUpdateNote (inputData) {
-		// console.log('OLSKChangeDelegateUpdate', inputData);
-
+	ZDRSchemaDispatchSyncUpdateNote (inputData) {
 		if (mod._ValueNoteSelected && mod._ValueNoteSelected.KVCNoteID === inputData.KVCNoteID) {
 			mod._ControlHotfixUpdateInPlace(inputData);
 		}
@@ -1103,9 +1089,7 @@ const mod = {
 		}), !mod._ValueNoteSelected);
 	},
 
-	OLSKChangeDelegateDeleteNote (inputData) {
-		// console.log('OLSKChangeDelegateDelete', inputData);
-
+	ZDRSchemaDispatchSyncDeleteNote (inputData) {
 		if (mod._ValueNoteSelected && (mod._ValueNoteSelected.KVCNoteID === inputData.KVCNoteID)) {
 			mod.ControlNoteSelect(null);
 		}
@@ -1115,35 +1099,71 @@ const mod = {
 		}), false);
 	},
 
-	async OLSKChangeDelegateConflictNote (inputData) {
+	async ZDRSchemaDispatchSyncConflictNote (inputData) {
 		return;
 		return setTimeout(async function () {
-			mod.OLSKChangeDelegateUpdateNote(await KVCNoteAction.KVCNoteActionUpdate(mod._ValueOLSKRemoteStorage, OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(OLSKRemoteStorage.OLSKRemoteStorageChangeDelegateConflictSelectRecent(inputData))))
+			mod.ZDRSchemaDispatchSyncUpdateNote(await mod._ValueZDRWrap.App.KVCNote.KVCNoteUpdate(OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(OLSKRemoteStorage.OLSKRemoteStorageChangeDelegateConflictSelectRecent(inputData))))
 		});
 	},
 
-	StorageConnected () {
-		mod._ValueStorageIsConnected = true;
+	async OLSKCloudFormDispatchSubmit (inputData) {
+		const protocol = zerodatawrap.ZDRPreferenceProtocolConnect(inputData);
+		(zerodatawrap.ZDRPreferenceProtocolMigrate() ? await mod.DataStorageClient(protocol) : mod._ValueZDRWrap).ZDRCloudConnect(inputData);
 	},
 
-	StorageNotConnected () {
-		if (OLSK_SPEC_UI() && window.location.search.match('FakeStorageIsConnected')) {
+	OLSKCloudDispatchRenew () {
+		mod._ValueZDRWrap.ZDRCloudReconnect(mod._ValueCloudIdentity);
+	},
+
+	OLSKCloudStatusDispatchDisconnect () {
+		mod._ValueZDRWrap.ZDRCloudDisconnect();
+
+		mod._ValueCloudIdentity = null;
+
+		zerodatawrap.ZDRPreferenceProtocolClear();
+	},
+
+	ZDRParamDispatchError (error) {
+		mod._ValueCloudErrorText = error.toString();
+	},
+
+	ZDRParamDispatchConnected (identity, token) {
+		mod._ValueCloudIdentity = identity;
+		mod._ValueCloudToken = token;
+	},
+
+	ZDRParamDispatchOnline () {
+		mod._ValueCloudIsOffline = false;
+	},
+
+	ZDRParamDispatchOffline () {
+		mod._ValueCloudIsOffline = true;
+	},
+
+	ZDRParamDispatchSyncDidStart () {
+		mod._ValueIsSyncing = true;
+	},
+
+	ZDRParamDispatchSyncDidStop () {
+		mod._ValueIsSyncing = false;
+	},
+
+	OLSKCloudStatusDispatchSyncStart () {
+		if (mod._ValueZDRWrap.ZDRStorageProtocol !== zerodatawrap.ZDRProtocolRemoteStorage()) {
 			return;
 		}
 
-		mod.ControlMigrate();
+		mod._ValueZDRWrap.ZDRStorageClient().startSync();
+
+		mod.ZDRParamDispatchSyncDidStart();
 	},
 
-	StorageSyncDone () {
-		if (mod._ValueDidMigrate) {
+	OLSKCloudStatusDispatchSyncStop () {
+		if (mod._ValueZDRWrap.ZDRStorageProtocol !== zerodatawrap.ZDRProtocolRemoteStorage()) {
 			return;
 		}
 
-		mod.ControlMigrate();
-	},
-
-	OLSKRemoteStorageLauncherItemFakeFlipConnectedDidFinish () {
-		mod._ValueOLSKRemoteStorage = mod._ValueOLSKRemoteStorage; // #purge-svelte-force-update
+		mod._ValueZDRWrap.ZDRStorageClient().stopSync();
 	},
 
 	// REACT
@@ -1191,13 +1211,7 @@ const mod = {
 	// SETUP
 
 	async SetupEverything () {
-		mod.SetupStorageClient();
-
-		mod.SetupRemoteStorage();
-
-		mod.SetupStorageStatus();
-
-		await mod.SetupStorageNotifications();
+		await mod.SetupStorageClient();
 
 		await mod.SetupValueNotesAll();
 		
@@ -1212,89 +1226,47 @@ const mod = {
 		// mod.ControlDemo();
 	},
 
-	SetupStorageClient() {
-		const storageModule = KVC_Data.KVC_DataModule([
-			Object.assign(KVCNoteStorage.KVCNoteStorageBuild, {
-				OLSKChangeDelegate: {
-					OLSKChangeDelegateCreate: mod.OLSKChangeDelegateCreateNote,
-					OLSKChangeDelegateUpdate: mod.OLSKChangeDelegateUpdateNote,
-					OLSKChangeDelegateDelete: mod.OLSKChangeDelegateDeleteNote,
-					OLSKChangeDelegateConflict: mod.OLSKChangeDelegateConflictNote,
-				},
-			}),
-			KVCSettingStorage.KVCSettingStorageBuild,
-			], {
-			OLSKOptionIncludeDebug: OLSK_SPEC_UI(),
-		});
-		
-		mod._ValueOLSKRemoteStorage = new RemoteStorage({
-			modules: [ storageModule ],
-			OLSKPatchRemoteStorageAuthRedirectURI: OLSK_SPEC_UI() ? undefined : window.location.origin + window.OLSKCanonical('KVCWriteRoute'),
-		});
+	DataStorageClient (inputData) {
+		return zerodatawrap.ZDRWrap({
+			ZDRParamLibrary: (function() {
+				if (inputData === zerodatawrap.ZDRProtocolFission()) {
+					return webnative;
+				}
 
-		mod._ValueOLSKRemoteStorage.access.claim(storageModule.name, 'rw');
-
-		mod._ValueOLSKRemoteStorage.caching.enable(`/${ storageModule.name }/`);
-	},
-
-	SetupRemoteStorage () {
-		return
-		mod._ValueOLSKRemoteStorage.setApiKeys(window.OLSKPublicConstants('KVCDropboxAppKey') ? {
-			dropbox: window.atob(window.OLSKPublicConstants('KVCDropboxAppKey')),
-			googledrive: window.atob(window.OLSKPublicConstants('KVCGoogleClientKey')),
-		} : {});
-	},
-
-	SetupStorageStatus () {
-		OLSKRemoteStorage.OLSKRemoteStorageStatus(mod._ValueOLSKRemoteStorage, function (inputData) {
-			mod._ValueFooterStorageStatus = inputData;
-		}, OLSKLocalized)
-	},
-
-	async SetupStorageNotifications () {
-		mod._ValueOLSKRemoteStorage.on('connected', mod.StorageConnected);
-
-		mod._ValueOLSKRemoteStorage.on('not-connected', mod.StorageNotConnected);
-
-		mod._ValueOLSKRemoteStorage.on('sync-done', mod.StorageSyncDone);
-
-		let isOffline;
-
-		mod._ValueOLSKRemoteStorage.on('network-offline', () => {
-			if (!OLSK_SPEC_UI()) {
-				console.debug('network-offline', arguments);
-			}
-
-			isOffline = true;
-		});
-
-		mod._ValueOLSKRemoteStorage.on('network-online', () => {
-			if (!OLSK_SPEC_UI()) {
-				console.debug('network-online', arguments);
-			}
-			
-			isOffline = false;
-		});
-
-		mod._ValueOLSKRemoteStorage.on('error', (error) => {
-			if (isOffline && inputData.message === 'Sync failed: Network request failed.') {
-				return;
-			};
-
-			if (!OLSK_SPEC_UI()) {
-				console.debug('error', error);
-			}
-		});
-
-		return new Promise(function (res, rej) {
-			return mod._ValueOLSKRemoteStorage.on('ready', res);
+				return RemoteStorage;
+			})(),
+			ZDRParamScopes: [{
+				ZDRScopeKey: 'App',
+				ZDRScopeDirectory: 'wikiavec',
+				ZDRScopeCreatorDirectory: 'rCreativ',
+				ZDRScopeSchemas: [
+					Object.assign(KVCNote, {
+						ZDRSchemaDispatchSyncCreate: mod.ZDRSchemaDispatchSyncCreateNote,
+						ZDRSchemaDispatchSyncUpdate: mod.ZDRSchemaDispatchSyncUpdateNote,
+						ZDRSchemaDispatchSyncDelete: mod.ZDRSchemaDispatchSyncDeleteNote,
+						ZDRSchemaDispatchSyncConflict: mod.ZDRSchemaDispatchSyncConflictNote,
+					}),
+					KVCSetting,
+					KVCTransport,
+					],
+			}, {
+				ZDRScopeKey: 'Public',
+				ZDRScopeDirectory: 'wikiavec',
+				ZDRScopeIsPublic: true,
+			}],
+			ZDRParamDispatchError: mod.ZDRParamDispatchError,
+			ZDRParamDispatchConnected: mod.ZDRParamDispatchConnected,
+			ZDRParamDispatchOnline: mod.ZDRParamDispatchOnline,
+			ZDRParamDispatchOffline: mod.ZDRParamDispatchOffline,
 		})
 	},
 
+	async SetupStorageClient() {
+		mod._ValueZDRWrap = await mod.DataStorageClient(zerodatawrap.ZDRPreferenceProtocol(zerodatawrap.ZDRProtocolRemoteStorage()));
+	},
+
 	async SetupValueNotesAll() {
-		const items = (await KVCNoteAction.KVCNoteActionQuery(mod._ValueOLSKRemoteStorage, {})).filter(function (e) {
-			return typeof e === 'object'; // #patch-remotestorage-true
-		});
+		const items = await mod._ValueZDRWrap.App.KVCNote.KVCNoteList();
 
 		mod.ValueArchivedCount(items);
 		
@@ -1304,7 +1276,9 @@ const mod = {
 	},
 
 	async SetupValueSettingsAll() {
-		mod._ValueSettingsAll = await KVCSettingAction.KVCSettingsActionQuery(mod._ValueOLSKRemoteStorage, {});
+		mod._ValueSettingsAll = Object.fromEntries((await mod._ValueZDRWrap.App.KVCSetting.KVCSettingList()).map(function (e) {
+			return [e.KVCSettingKey, e.KVCSettingValue];
+		}));
 	},
 
 	SetupValueVersionsMap () {
@@ -1316,7 +1290,7 @@ const mod = {
 			OLSKFund._OLSKFundFakeGrantResponseRandom();
 		}
 
-		mod._ValueFundClue = (await KVCSettingAction.KVCSettingsActionProperty(mod._ValueOLSKRemoteStorage, 'KVCSettingFundClue') || {}).KVCSettingValue;
+		mod._ValueFundClue = mod.DataSetting('KVCSettingFundClue');
 
 		await OLSKFund.OLSKFundSetupPostPay({
 			ParamWindow: window,
@@ -1324,7 +1298,7 @@ const mod = {
 			OLSKFundDispatchPersist: mod.OLSKFundDispatchPersist,
 		});
 
-		if (!mod._ValueOLSKRemoteStorage.connected) {
+		if (!mod._ValueCloudIdentity) {
 			return;
 		}
 
@@ -1339,13 +1313,13 @@ const mod = {
 			OLSK_FUND_API_URL: 'OLSK_FUND_API_URL_SWAP_TOKEN',
 			ParamBody: {
 				OLSKPactAuthType: OLSKPact.OLSKPactAuthTypeRemoteStorage(),
-				OLSKPactAuthIdentity: mod._ValueOLSKRemoteStorage.remote.userAddress,
-				OLSKPactAuthProof: mod._ValueOLSKRemoteStorage.remote.token,
+				OLSKPactAuthIdentity: mod._ValueCloudIdentity,
+				OLSKPactAuthProof: mod._ValueCloudToken,
 				OLSKPactAuthMetadata: {
-					OLSKPactAuthMetadataModuleName: KVC_Data.KVC_DataModuleName(),
-					OLSKPactAuthMetadataFolderPath: KVCNoteStorage.KVCNoteStorageCollectionPath(),
+					OLSKPactAuthMetadataModuleName: 'wikiavec',
+					OLSKPactAuthMetadataFolderPath: KVCNote.KVCNoteDirectory() + '/',
 				},
-				OLSKPactPayIdentity: mod._ValueOLSKRemoteStorage.remote.userAddress,
+				OLSKPactPayIdentity: mod._ValueCloudIdentity,
 				OLSKPactPayClue: mod._ValueFundClue,
 			},
 			OLSKLocalized,
@@ -1372,7 +1346,7 @@ import KVCWriteMaster from '../sub-master/main.svelte';
 import KVCWriteDetail from '../sub-detail/main.svelte';
 import OLSKAppToolbar from 'OLSKAppToolbar';
 import OLSKServiceWorkerView from '../_shared/__external/OLSKServiceWorker/main.svelte';
-import OLSKStorageWidget from 'OLSKStorageWidget';
+import OLSKCloud from 'OLSKCloud';
 import OLSKWebView from 'OLSKWebView';
 import OLSKModalView from 'OLSKModalView';
 import OLSKApropos from 'OLSKApropos';
@@ -1400,8 +1374,8 @@ import OLSKPointer from 'OLSKPointer';
 		/>
 	
 	<KVCWriteDetail
-		KVCWriteDetailConnected={ mod._ValueStorageIsConnected }
-		KVCWriteDetailItemIsRootPage={ mod._ValueNoteSelected && mod.DataSetting('KVCSettingPublicRootPageID') ? mod._ValueNoteSelected.KVCNoteID === mod.DataSettingValue('KVCSettingPublicRootPageID') : false }
+		KVCWriteDetailConnected={ mod._ValueCloudIdentity }
+		KVCWriteDetailItemIsRootPage={ mod._ValueNoteSelected && mod.DataSetting('KVCSettingPublicRootPageID') ? mod._ValueNoteSelected.KVCNoteID === mod.DataSetting('KVCSettingPublicRootPageID') : false }
 		KVCWriteDetailPublicURLFor={ mod.KVCWriteDetailPublicURLFor }
 		KVCWriteDetailDispatchBack={ mod.KVCWriteDetailDispatchBack }
 		KVCWriteDetailDispatchJump={ mod.KVCWriteDetailDispatchJump }
@@ -1432,11 +1406,6 @@ import OLSKPointer from 'OLSKPointer';
 		<span id="TestControlNoteRetractCount">0</span>
 	</p>
 	
-	<p>
-		<strong>ControlMigrateCount</strong>
-		<span id="TestControlMigrateCount">0</span>
-	</p>
-	
 	<div>
 		<strong>PublishContent</strong>
 		<div id="TestPublishContent">{@html mod.TestPublishContent }</div>
@@ -1451,7 +1420,16 @@ import OLSKPointer from 'OLSKPointer';
 			</div>
 
 			<div class="OLSKToolbarElementGroup">
-				<OLSKStorageWidget StorageClient={ mod._ValueOLSKRemoteStorage } />
+				<OLSKCloud
+					OLSKCloudErrorText={ mod._ValueCloudErrorText }
+					OLSKCloudDispatchRenew={ mod.OLSKCloudDispatchRenew }
+					OLSKCloudFormDispatchSubmit={ mod.OLSKCloudFormDispatchSubmit }
+					OLSKCloudStatusIdentityText={ mod._ValueCloudIdentity }
+					OLSKCloudStatusIsSyncing={ mod._ValueIsSyncing }
+					OLSKCloudStatusDispatchSyncStart={ mod.OLSKCloudStatusDispatchSyncStart }
+					OLSKCloudStatusDispatchSyncStop={ mod.OLSKCloudStatusDispatchSyncStop }
+					OLSKCloudStatusDispatchDisconnect={ mod.OLSKCloudStatusDispatchDisconnect }
+					/>
 			</div>
 		</div>
 	{/if}
@@ -1463,7 +1441,9 @@ import OLSKPointer from 'OLSKPointer';
 		OLSKAppToolbarFundShowProgress={ mod._ValueOLSKFundProgress }
 		OLSKAppToolbarFundLimitText={ mod._ValueDocumentRemainder }
 		OLSKAppToolbarDispatchFund={ mod._ValueOLSKFundGrant || OLSKFund.OLSKFundResponseIsPresent() ? null : mod.OLSKAppToolbarDispatchFund }
-		OLSKAppToolbarCloudStatus={ mod._ValueFooterStorageStatus }
+		OLSKAppToolbarCloudConnected={ !!mod._ValueCloudIdentity }
+		OLSKAppToolbarCloudOffline={ mod._ValueCloudIsOffline }
+		OLSKAppToolbarCloudError={ !!mod._ValueCloudErrorText }
 		OLSKAppToolbarDispatchStorage={ mod.OLSKAppToolbarDispatchStorage }
 		OLSKAppToolbarDispatchLauncher={ mod.OLSKAppToolbarDispatchLauncher }
 		/>
@@ -1471,7 +1451,7 @@ import OLSKPointer from 'OLSKPointer';
 
 </div>
 
-{#if mod._ValueOLSKRemoteStorage && mod._ValueOLSKRemoteStorage.connected }
+{#if !!mod._ValueCloudIdentity }
 	<OLSKWebView OLSKModalViewTitleText={ OLSKLocalized('OLSKFundWebViewTitleText') } OLSKWebViewURL={ mod._ValueFundURL } bind:this={ mod._OLSKWebView } DEBUG_OLSKWebViewDataSource={ OLSK_SPEC_UI() } />
 {/if}
 

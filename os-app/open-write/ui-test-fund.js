@@ -65,7 +65,7 @@ describe('KVCWrite_Fund', function () {
 		context('connected', function () {
 
 			before(function () {
-				return browser.OLSKLauncherRun('OLSKRemoteStorageLauncherItemFakeFlipConnected');
+				return browser.OLSKLauncherRun('ZDRLauncherItemFakeDispatchConnected');
 			});
 
 			before(function () {
@@ -80,7 +80,7 @@ describe('KVCWrite_Fund', function () {
 				browser.assert.attribute('.OLSKWebViewWindowButton', 'href', OLSKFund.OLSKFundURL({
 					ParamFormURL: process.env.OLSK_FUND_FORM_URL,
 					ParamProject: 'RP_003',
-					ParamIdentity: 'OLSK_REMOTE_STORAGE_FAKE_REMOTE_ADDRESS',
+					ParamIdentity: 'ZDR_FAKE_CLOUD_IDENTITY',
 					ParamHomeURL: browser.window.location.origin + browser.window.location.pathname,
 				}));
 			});
@@ -152,7 +152,7 @@ describe('KVCWrite_Fund', function () {
 		context.skip('sync', function () {
 
 			before(function () {
-				return browser.OLSKLauncherRun('FakeOLSKChangeDelegateCreateNote');
+				return browser.OLSKLauncherRun('FakeZDRSchemaDispatchSyncCreateNote');
 			});
 
 			it('updates number', function () {
@@ -204,7 +204,7 @@ describe('KVCWrite_Fund', function () {
 		});
 		
 		before(function () {
-			return browser.OLSKLauncherRun('OLSKRemoteStorageLauncherItemFakeFlipConnected');
+			return browser.OLSKLauncherRun('ZDRLauncherItemFakeDispatchConnected');
 		});
 
 		it('shows OLSKFundLauncherItemClearClue', function () {
@@ -222,7 +222,7 @@ describe('KVCWrite_Fund', function () {
 		});
 
 		before(function () {
-			return browser.OLSKLauncherRun('OLSKRemoteStorageLauncherItemFakeFlipConnected');
+			return browser.OLSKLauncherRun('ZDRLauncherItemFakeDispatchConnected');
 		});
 
 		before(function () {

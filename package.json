@@ -16,8 +16,11 @@
     "OLSKExpress": "olsk/OLSKExpress",
 
     "// REMOTE STORAGE": null,
+    "zerodatawrap": "0dataapp/0datawrap",
+    "webnative": "^0.21.3",
     "OLSKRemoteStorage": "olsk/OLSKRemoteStorage",
-    "OLSKStorageWidget": "olsk/OSWPackage",
+    "OLSKCloud": "olsk/OLSKCloud",
+    "OLSKObject": "olsk/OLSKObject",
 
     "// UNIQUE IDS": null,
     "ulid": "latest",

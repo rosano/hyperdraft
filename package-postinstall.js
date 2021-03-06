@@ -24,9 +24,9 @@
 		'OLSKRootLink',
 		'OLSKRouting',
 		'OLSKServiceWorker',
-		'OLSKStorageWidget',
 		'OLSKUIAssets',
 		'ROCORootLink',
 		'url-parse',
+		'webnative',
 	], require('path').join(__dirname, 'node_modules'), require('path').join(__dirname, 'os-app/_shared/__external'));
 })();

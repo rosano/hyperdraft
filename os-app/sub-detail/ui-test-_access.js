@@ -176,7 +176,7 @@ describe('KVCWriteDetail_Access', function () {
 
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
-				KVCWriteDetailItem: JSON.stringify(Object.assign(StubNoteObjectValid(), {
+				KVCWriteDetailItem: JSON.stringify(StubNoteObjectValid({
 					KVCNoteIsArchived: true,
 				})),
 			});
@@ -229,7 +229,7 @@ describe('KVCWriteDetail_Access', function () {
 
 			before(function() {
 				return browser.OLSKVisit(kDefaultRoute, {
-					KVCWriteDetailItem: JSON.stringify(Object.assign(StubNoteObjectValid(), {
+					KVCWriteDetailItem: JSON.stringify(StubNoteObjectValid({
 						KVCNoteIsPublic: true,
 						KVCNotePublishDate: new Date(),
 						KVCNotePublicID: 'bravo',

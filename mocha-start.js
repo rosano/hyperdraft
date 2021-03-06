@@ -1,49 +1,67 @@
-const RemoteStorage = require('remotestoragejs');
-
-const KVC_Data = require('./os-app/_shared/KVC_Data/main.js').default;
-const KVCNoteStorage = require('./os-app/_shared/KVCNote/storage.js').default;
-const KVCSettingStorage = require('./os-app/_shared/KVCSetting/storage.js').default;
-
-(function KVCMochaStorage() {
+(function KVCMochaWrap() {
 	if (process.env.OLSK_SPEC_MOCHA_INTERFACE === 'true') {
 		return;
 	}
 
-	const storageModule = KVC_Data.KVC_DataModule([
-		KVCNoteStorage.KVCNoteStorageBuild,
-		KVCSettingStorage.KVCSettingStorageBuild,
-	], {
-		OLSKOptionIncludeDebug: true,
-	});
-
-	before(function() {
-		global.KVCTestingStorageClient = new RemoteStorage({ modules: [ storageModule ] });
-
-		global.KVCTestingStorageClient.access.claim(storageModule.name, 'rw');
+	before(async function() {
+		global.ZDRTestingWrap = await require('zerodatawrap').ZDRWrap({
+			ZDRParamLibrary: require('remotestoragejs'),
+			ZDRParamScopes: [{
+				ZDRScopeKey: 'App',
+				ZDRScopeDirectory: 'wikiavec',
+				ZDRScopeSchemas: [
+					require('./os-app/_shared/KVCNote/main.js').default,
+					require('./os-app/_shared/KVCSetting/main.js').default,
+					require('./os-app/_shared/KVCTransport/main.js').default,
+				],
+			}, {
+				ZDRScopeKey: 'Public',
+				ZDRScopeDirectory: 'wikiavec',
+				ZDRScopeIsPublic: true,
+			}],
+		});
 	});
 
 	beforeEach(function() {
-		return global.KVCTestingStorageClient[storageModule.name].__DEBUG.__OLSKRemoteStorageReset();
+		return ZDRTestingWrap.App.ZDRStorageDeleteFolderRecursive('');
+	});
+
+	beforeEach(function() {
+		return ZDRTestingWrap.Public.ZDRStorageDeleteFolderRecursive('');
 	});
 })();
 
 (function KVCMochaStubs() {
 	Object.entries({
 
-		StubNoteObjectValid(inputData) {
+		StubNoteObject(inputData) {
 			return Object.assign({
-				KVCNoteID: 'alfa',
-				KVCNoteBody: 'bravo',
-				KVCNoteCreationDate: new Date('2019-02-23T13:56:36Z'),
-				KVCNoteModificationDate: new Date('2019-02-23T13:56:36Z'),
+				KVCNoteBody: Math.random().toString(),
 			}, inputData);
 		},
 
-		StubSettingObjectValid() {
-			return {
-				KVCSettingKey: 'alfa',
-				KVCSettingValue: 'bravo',
-			};
+		StubNoteObjectValid(inputData) {
+			return Object.assign({
+				KVCNoteID: Math.random().toString(),
+				KVCNoteBody: Math.random().toString(),
+				KVCNoteCreationDate: new Date(),
+				KVCNoteModificationDate: new Date(),
+			}, inputData);
+		},
+
+		StubNoteObjectPublic(inputData = {}) {
+			return Object.assign(StubNoteObjectValid({
+				KVCNoteIsPublic: true,
+				KVCNotePublishDate: new Date(),
+				KVCNotePublicID: Math.random().toString(),
+			}), inputData);
+		},
+
+		StubSettingObjectValid (inputData = {}) {
+			return Object.assign({
+				KVCSettingKey: Math.random().toString(),
+				KVCSettingValue: Math.random().toString(),
+			}, inputData);
 		},
 		
 		uSerial (inputData) {

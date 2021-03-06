@@ -74,12 +74,12 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 		
 			});
 
-			context('KVCNoteModelIsArchived', function() {
+			context('KVCNoteIsArchived', function() {
 
 				before(function() {
 					return browser.OLSKVisit(kDefaultRoute, {
 						OLSKRoutingLanguage,
-						KVCWriteDetailItem: JSON.stringify(Object.assign(StubNoteObjectValid(), {
+						KVCWriteDetailItem: JSON.stringify(StubNoteObjectValid({
 							KVCNoteIsArchived: true,
 						})),
 					});
@@ -113,12 +113,12 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 					return browser.assert.OLSKLauncherItemText('KVCWriteDetailLauncherItemSetAsRootPage', uLocalized('KVCWriteDetailLauncherItemSetAsRootPageText'));
 				});
 
-				context('KVCNoteModelIsPublic', function() {
+				context('KVCNoteIsMarkedPublic', function() {
 
 					before(function() {
 						return browser.OLSKVisit(kDefaultRoute, {
 							OLSKRoutingLanguage,
-							KVCWriteDetailItem: JSON.stringify(Object.assign(StubNoteObjectValid(), {
+							KVCWriteDetailItem: JSON.stringify(StubNoteObjectValid({
 								KVCNoteIsPublic: true,
 								KVCNotePublishDate: new Date(),
 								KVCNotePublicID: 'bravo',

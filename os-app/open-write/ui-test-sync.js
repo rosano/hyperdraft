@@ -18,14 +18,14 @@ describe('KVCWrite_Sync', function () {
 		return browser.OLSKFireKeyboardEvent(browser.window, 'Escape');
 	});
 
-	describe('OLSKChangeDelegateCreateNote', function test_OLSKChangeDelegateCreateNote () {
+	describe('ZDRSchemaDispatchSyncCreateNote', function test_ZDRSchemaDispatchSyncCreateNote () {
 
 		before(function () {
 			browser.assert.elements('.KVCWriteMasterListItem', 1);
 		});
 
 		before(function () {
-			return browser.OLSKLauncherRun('FakeOLSKChangeDelegateCreateNote');
+			return browser.OLSKLauncherRun('FakeZDRSchemaDispatchSyncCreateNote');
 		});
 
 		it('adds item', function () {
@@ -33,7 +33,7 @@ describe('KVCWrite_Sync', function () {
 		});
 
 		it('sorts list', function () {
-			browser.assert.text('.KVCWriteMasterListItem', 'FakeOLSKChangeDelegateCreateNote alfa');
+			browser.assert.text('.KVCWriteMasterListItem', 'FakeZDRSchemaDispatchSyncCreateNote alfa');
 		});
 
 		context('selected', function () {
@@ -47,7 +47,7 @@ describe('KVCWrite_Sync', function () {
 			});
 
 			before(function () {
-				return browser.OLSKLauncherRun('FakeOLSKChangeDelegateCreateNote');
+				return browser.OLSKLauncherRun('FakeZDRSchemaDispatchSyncCreateNote');
 			});
 
 			it('adds item', function () {
@@ -55,33 +55,33 @@ describe('KVCWrite_Sync', function () {
 			});
 
 			it('skips sort', function () {
-				browser.assert.text('.KVCWriteMasterListItem', 'FakeOLSKChangeDelegateCreateNote FakeOLSKChangeDelegateCreateNote alfa2');
+				browser.assert.text('.KVCWriteMasterListItem', 'FakeZDRSchemaDispatchSyncCreateNote FakeZDRSchemaDispatchSyncCreateNote alfa2');
 			});
 		
 		});
 
 	});
 
-	describe('OLSKChangeDelegateUpdateNote', function test_OLSKChangeDelegateUpdateNote () {
+	describe('ZDRSchemaDispatchSyncUpdateNote', function test_ZDRSchemaDispatchSyncUpdateNote () {
 
 		before(function () {
 			return browser.OLSKFireKeyboardEvent(browser.window, 'Escape');
 		});
 
 		before(function () {
-			browser.assert.text('.KVCWriteMasterListItem', 'FakeOLSKChangeDelegateCreateNote alfa2 FakeOLSKChangeDelegateCreateNote');
+			browser.assert.text('.KVCWriteMasterListItem', 'FakeZDRSchemaDispatchSyncCreateNote alfa2 FakeZDRSchemaDispatchSyncCreateNote');
 		});
 
 		before(function () {
-			return browser.OLSKLauncherRun('FakeOLSKChangeDelegateUpdateNote');
+			return browser.OLSKLauncherRun('FakeZDRSchemaDispatchSyncUpdateNote');
 		});
 
 		it('updates item', function () {
-			browser.assert.text('.OLSKResultsListItem:nth-child(1) .KVCWriteMasterListItem', 'FakeOLSKChangeDelegateUpdateNote');
+			browser.assert.text('.OLSKResultsListItem:nth-child(1) .KVCWriteMasterListItem', 'FakeZDRSchemaDispatchSyncUpdateNote');
 		});
 
 		it('sorts list', function () {
-			browser.assert.text('.KVCWriteMasterListItem', 'FakeOLSKChangeDelegateUpdateNote FakeOLSKChangeDelegateCreateNote alfa2');
+			browser.assert.text('.KVCWriteMasterListItem', 'FakeZDRSchemaDispatchSyncUpdateNote FakeZDRSchemaDispatchSyncCreateNote alfa2');
 		});
 
 		context('selected different', function () {
@@ -95,19 +95,19 @@ describe('KVCWrite_Sync', function () {
 			});
 
 			before(function () {
-				browser.assert.text('.KVCWriteMasterListItem', 'bravo FakeOLSKChangeDelegateCreateNote alfa2');
+				browser.assert.text('.KVCWriteMasterListItem', 'bravo FakeZDRSchemaDispatchSyncCreateNote alfa2');
 			});
 
 			before(function () {
-				return browser.OLSKLauncherRun('FakeOLSKChangeDelegateUpdateNote');
+				return browser.OLSKLauncherRun('FakeZDRSchemaDispatchSyncUpdateNote');
 			});
 
 			it('updates item', function () {
-				browser.assert.elements('.OLSKResultsListItem:nth-child(3) .KVCWriteMasterListItem', 'FakeOLSKChangeDelegateUpdateNote');
+				browser.assert.elements('.OLSKResultsListItem:nth-child(3) .KVCWriteMasterListItem', 'FakeZDRSchemaDispatchSyncUpdateNote');
 			});
 
 			it('skips sort', function () {
-				browser.assert.text('.KVCWriteMasterListItem', 'bravo FakeOLSKChangeDelegateUpdateNote alfa2');
+				browser.assert.text('.KVCWriteMasterListItem', 'bravo FakeZDRSchemaDispatchSyncUpdateNote alfa2');
 			});
 		
 		});
@@ -119,22 +119,22 @@ describe('KVCWrite_Sync', function () {
 			});
 
 			before(function () {
-				return browser.fill('.KVCWriteInputFieldDebug', 'FakeOLSKChangeDelegateCreateNote');
+				return browser.fill('.KVCWriteInputFieldDebug', 'FakeZDRSchemaDispatchSyncCreateNote');
 			});
 
 			before(function () {
-				return browser.OLSKLauncherRun('FakeOLSKChangeDelegateUpdateNote');
+				return browser.OLSKLauncherRun('FakeZDRSchemaDispatchSyncUpdateNote');
 			});
 
 			it('updates detail', function () {
-				browser.assert.input('.KVCWriteInputFieldDebug', 'FakeOLSKChangeDelegateUpdateNote');
+				browser.assert.input('.KVCWriteInputFieldDebug', 'FakeZDRSchemaDispatchSyncUpdateNote');
 			});
 
 		});
 
 	});
 
-	describe('OLSKChangeDelegateDeleteNote', function test_OLSKChangeDelegateDeleteNote () {
+	describe('ZDRSchemaDispatchSyncDeleteNote', function test_ZDRSchemaDispatchSyncDeleteNote () {
 
 		before(function () {
 			return browser.click('.OLSKResultsListItem:nth-child(3) .KVCWriteMasterListItem');
@@ -149,7 +149,7 @@ describe('KVCWrite_Sync', function () {
 		});
 
 		before(function () {
-			browser.assert.text('.KVCWriteMasterListItem', 'bravo FakeOLSKChangeDelegateUpdateNote alfa3');
+			browser.assert.text('.KVCWriteMasterListItem', 'bravo FakeZDRSchemaDispatchSyncUpdateNote alfa3');
 		});
 
 		before(function () {
@@ -157,7 +157,7 @@ describe('KVCWrite_Sync', function () {
 		});
 
 		before(function () {
-			return browser.OLSKLauncherRun('FakeOLSKChangeDelegateDeleteNote');
+			return browser.OLSKLauncherRun('FakeZDRSchemaDispatchSyncDeleteNote');
 		});
 
 		it('removes item', function () {
@@ -179,7 +179,7 @@ describe('KVCWrite_Sync', function () {
 			});
 
 			before(function () {
-				return browser.OLSKLauncherRun('FakeOLSKChangeDelegateCreateNote');
+				return browser.OLSKLauncherRun('FakeZDRSchemaDispatchSyncCreateNote');
 			});
 
 			before(function () {
@@ -187,7 +187,7 @@ describe('KVCWrite_Sync', function () {
 			});
 
 			before(function () {
-				return browser.OLSKLauncherRun('FakeOLSKChangeDelegateDeleteNote');
+				return browser.OLSKLauncherRun('FakeZDRSchemaDispatchSyncDeleteNote');
 			});
 
 			it('removes item', function () {
@@ -203,7 +203,7 @@ describe('KVCWrite_Sync', function () {
 		context('selected same', function () {
 			
 			before(function () {
-				return browser.OLSKLauncherRun('FakeOLSKChangeDelegateCreateNote');
+				return browser.OLSKLauncherRun('FakeZDRSchemaDispatchSyncCreateNote');
 			});
 
 			before(function () {
@@ -211,7 +211,7 @@ describe('KVCWrite_Sync', function () {
 			});
 
 			before(function () {
-				browser.assert.text('.KVCWriteMasterListItem', 'FakeOLSKChangeDelegateCreateNote bravo alfa4');
+				browser.assert.text('.KVCWriteMasterListItem', 'FakeZDRSchemaDispatchSyncCreateNote bravo alfa4');
 			});
 
 			before(function () {
@@ -219,7 +219,7 @@ describe('KVCWrite_Sync', function () {
 			});
 
 			before(function () {
-				return browser.OLSKLauncherRun('FakeOLSKChangeDelegateDeleteNote');
+				return browser.OLSKLauncherRun('FakeZDRSchemaDispatchSyncDeleteNote');
 			});
 
 			it('removes item', function () {
@@ -238,22 +238,22 @@ describe('KVCWrite_Sync', function () {
 
 	});
 
-	describe('OLSKChangeDelegateConflictNote', function test_OLSKChangeDelegateConflictNote () {
+	describe('ZDRSchemaDispatchSyncConflictNote', function test_ZDRSchemaDispatchSyncConflictNote () {
 
 		before(function () {
 			return browser.pressButton('.KVCWriteMasterCreateButton');
 		});
 
 		before(function () {
-			return browser.fill('.KVCWriteInputFieldDebug', 'FakeOLSKChangeDelegateConflictNote');
+			return browser.fill('.KVCWriteInputFieldDebug', 'FakeZDRSchemaDispatchSyncConflictNote');
 		});
 
 		before(function () {
-			return browser.OLSKLauncherRun('FakeOLSKChangeDelegateConflictNote');
+			return browser.OLSKLauncherRun('FakeZDRSchemaDispatchSyncConflictNote');
 		});
 
 		it('selects local', function () {
-			browser.assert.text('.KVCWriteMasterListItem', 'FakeOLSKChangeDelegateConflictNote-local alfa4 bravo');
+			browser.assert.text('.KVCWriteMasterListItem', 'FakeZDRSchemaDispatchSyncConflictNote-local alfa4 bravo');
 		});
 
 	});

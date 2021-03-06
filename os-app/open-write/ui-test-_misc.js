@@ -1,6 +1,6 @@
 const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
-const KVCNoteStorage = require('../_shared/KVCNote/storage.js').default;
+const KVCNote = require('../_shared/KVCNote/main.js').default;
 
 describe('KVCWrite_Misc', function () {
 
@@ -395,7 +395,7 @@ describe('KVCWrite_Misc', function () {
 		});
 
 		before(function () {
-			return browser.OLSKLauncherRun('FakeStorageIsConnected');
+			return browser.OLSKLauncherRun('ZDRLauncherItemFakeDispatchConnected');
 		});
 
 		before(function () {
@@ -526,14 +526,14 @@ describe('KVCWrite_Misc', function () {
 		
 		});
 
-		context('KVCNoteModelIsPublic', function () {
+		context('KVCNoteIsMarkedPublic', function () {
 			
 			before(function () {
 				return browser.pressButton('.KVCWriteDetailToolbarConnectButton');
 			});
 
 			before(function () {
-				return browser.OLSKLauncherRun('FakeStorageIsConnected');
+				return browser.OLSKLauncherRun('ZDRLauncherItemFakeDispatchConnected');
 			});
 
 			before(function () {

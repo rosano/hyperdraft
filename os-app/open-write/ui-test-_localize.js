@@ -199,7 +199,7 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 		context('connected', function test_connected () {
 			
 			before(function () {
-				return browser.OLSKLauncherRun('FakeStorageIsConnected');
+				return browser.OLSKLauncherRun('ZDRLauncherItemFakeDispatchConnected');
 			});
 
 			it('localizes KVCWriteLauncherItemConfigureCustomDomain', function () {
