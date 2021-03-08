@@ -183,7 +183,7 @@ const mod = {
 					const confirm3 = !OLSK_SPEC_UI() || (OLSK_SPEC_UI() && count == 2);
 
 					if (prompt1) {
-						if (window.prompt(OLSKLocalized('KVCWriteLauncherItemConfigureCustomDomainPrompt1QuestionText'), mod._ValueZDRWrap.Public.ZDRStorageURL(KVCNote.KVCNotePublicRootPagePath())) === null) {
+						if (window.prompt(OLSKLocalized('KVCWriteLauncherItemConfigureCustomDomainPrompt1QuestionText'), mod._ValueZDRWrap.Public.ZDRStoragePermalink(KVCNote.KVCNotePublicRootPagePath())) === null) {
 							return;
 						};
 					}
@@ -629,9 +629,9 @@ const mod = {
 
 		const options = {
 			KVCOptionIsRoot: mod.DataSetting('KVCSettingPublicRootPageID') === inputData.KVCNoteID,
-			KVCOptionRootURL: await mod._ValueZDRWrap.Public.ZDRStorageURL('index.html'),
+			KVCOptionRootURL: await mod._ValueZDRWrap.Public.ZDRStoragePermalink('index.html'),
 			KVCOptionBacklinks: KVCWriteLogic.KVCWriteBacklinksMap(mod._ValueNotesAll.filter(KVCNote.KVCNoteIsMarkedPublic).concat(inputData))[KVCTemplate.KVCTemplatePlaintextTitle(inputData.KVCNoteBody)],
-			_KVCOptionPublicBaseURL: await mod._ValueZDRWrap.Public.ZDRStorageURL('/'),
+			_KVCOptionPublicBaseURL: await mod._ValueZDRWrap.Public.ZDRStoragePermalink('/'),
 		};
 
 		const wasPublic = KVCNote.KVCNoteIsMarkedPublic(inputData);
@@ -977,14 +977,14 @@ const mod = {
 
 	KVCWriteDetailPublicURLFor (inputData) {
 		if (mod.DataSetting('KVCSettingCustomDomainBaseURL')) {
-			return KVCWriteLogic.KVCWriteCustomDomainBaseURLFunction(mod._ValueZDRWrap.Public.ZDRStorageURL(KVCNote.KVCNotePublicRootPagePath()), KVCNote.KVCNotePublicRootPagePath())(mod._ValueZDRWrap.Public.ZDRStorageURL(KVCNote.KVCNotePublicPath(inputData, mod.DataSetting('KVCSettingPublicRootPageID') === inputData.KVCNoteID)), mod.DataSetting('KVCSettingCustomDomainBaseURL'));
+			return KVCWriteLogic.KVCWriteCustomDomainBaseURLFunction(mod._ValueZDRWrap.Public.ZDRStoragePermalink(KVCNote.KVCNotePublicRootPagePath()), KVCNote.KVCNotePublicRootPagePath())(mod._ValueZDRWrap.Public.ZDRStoragePermalink(KVCNote.KVCNotePublicPath(inputData, mod.DataSetting('KVCSettingPublicRootPageID') === inputData.KVCNoteID)), mod.DataSetting('KVCSettingCustomDomainBaseURL'));
 		}
 		
 		if (OLSK_SPEC_UI() && mod._ValueCloudIdentity) {
 			return '/FakePublicPath';
 		}
 
-		return mod._ValueZDRWrap.Public.ZDRStorageURL(KVCNote.KVCNotePublicChildPagePath(inputData));
+		return mod._ValueZDRWrap.Public.ZDRStoragePermalink(KVCNote.KVCNotePublicChildPagePath(inputData));
 	},
 
 	KVCWriteDetailDispatchBack () {

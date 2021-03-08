@@ -574,7 +574,7 @@ describe('KVCNotePermalinkMap', function test_KVCNotePermalinkMap() {
 	it('includes if public', async function() {
 		const item = StubNoteObjectPublic();
 		deepEqual(await ZDRTestingWrap.App.KVCNote.KVCNotePermalinkMap([item], Math.random().toString()), {
-			[item.KVCNoteBody]: await ZDRTestingWrap.Public.ZDRStorageURL(mod.KVCNotePublicChildPagePath(item)),
+			[item.KVCNoteBody]: await ZDRTestingWrap.Public.ZDRStoragePermalink(mod.KVCNotePublicChildPagePath(item)),
 		});
 	});
 
@@ -586,7 +586,7 @@ describe('KVCNotePermalinkMap', function test_KVCNotePermalinkMap() {
 		deepEqual(await ZDRTestingWrap.App.KVCNote.KVCNotePermalinkMap([item, StubNoteObjectPublic({
 			KVCNoteBody,
 		})], Math.random().toString()), {
-			[item.KVCNoteBody]: await ZDRTestingWrap.Public.ZDRStorageURL(mod.KVCNotePublicChildPagePath(item)),
+			[item.KVCNoteBody]: await ZDRTestingWrap.Public.ZDRStoragePermalink(mod.KVCNotePublicChildPagePath(item)),
 		});
 	});
 
@@ -596,7 +596,7 @@ describe('KVCNotePermalinkMap', function test_KVCNotePermalinkMap() {
 			KVCNoteID,
 		});
 		deepEqual(await ZDRTestingWrap.App.KVCNote.KVCNotePermalinkMap([item], KVCNoteID), {
-			[item.KVCNoteBody]: await ZDRTestingWrap.Public.ZDRStorageURL(mod.KVCNotePublicRootPagePath(item)),
+			[item.KVCNoteBody]: await ZDRTestingWrap.Public.ZDRStoragePermalink(mod.KVCNotePublicRootPagePath(item)),
 		});
 	});
 

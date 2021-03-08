@@ -273,7 +273,7 @@ export default Object.assign(mod, {
 
 			const _this = this;
 			return Object.fromEntries(await Promise.all(param1.filter(mod.KVCNoteIsMarkedPublic).map(async function (e) {
-				return [KVCTemplate.KVCTemplatePlaintextTitle(e.KVCNoteBody), await _this.Public.ZDRStorageURL(e.KVCNoteID === param2 ? mod.KVCNotePublicRootPagePath(e) : mod.KVCNotePublicChildPagePath(e))];
+				return [KVCTemplate.KVCTemplatePlaintextTitle(e.KVCNoteBody), await _this.Public.ZDRStoragePermalink(e.KVCNoteID === param2 ? mod.KVCNotePublicRootPagePath(e) : mod.KVCNotePublicChildPagePath(e))];
 			})));
 		},
 
