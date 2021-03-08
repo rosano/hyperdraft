@@ -283,12 +283,12 @@ const mod = {
 						
 						return mod.ZDRSchemaDispatchSyncConflictNote({
 							origin: 'conflict',
-							oldValue: OLSKRemoteStorage.OLSKRemoteStoragePreJSONSchemaValidate(await mod._ValueZDRWrap.App.KVCNote.KVCNoteUpdate(Object.assign({}, item, {
+							oldValue: JSON.parse(JSON.stringify(await mod._ValueZDRWrap.App.KVCNote.KVCNoteUpdate(Object.assign({}, item, {
 								KVCNoteBody: item.KVCNoteBody + '-local',
-							}))),
-							newValue: OLSKRemoteStorage.OLSKRemoteStoragePreJSONSchemaValidate(Object.assign({}, item, {
+							})))),
+							newValue: JSON.parse(JSON.stringify(Object.assign({}, item, {
 								KVCNoteBody: item.KVCNoteBody + '-remote',
-							})),
+							}))),
 						});
 					},
 				},
