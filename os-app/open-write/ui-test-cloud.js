@@ -65,7 +65,7 @@ describe('KVCWrite_Cloud', function () {
 		});
 
 		before(function () {
-			return browser.pressButton('.OLSKAppToolbarStorageButton');
+			return browser.pressButton('.OLSKAppToolbarCloudButton');
 		});
 
 		it('sets OLSKCloudStatusIdentityText', function () {

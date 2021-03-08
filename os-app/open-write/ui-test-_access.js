@@ -156,10 +156,10 @@ describe('KVCWrite_Access', function () {
 
 	});
 
-	describe('OLSKAppToolbarStorageButton', function test_OLSKAppToolbarStorageButton () {
+	describe('OLSKAppToolbarCloudButton', function test_OLSKAppToolbarCloudButton () {
 		
 		before(function () {
-			return browser.pressButton('.OLSKAppToolbarStorageButton');
+			return browser.pressButton('.OLSKAppToolbarCloudButton');
 		});
 
 		it('shows KVCWriteStorageToolbar', function () {
