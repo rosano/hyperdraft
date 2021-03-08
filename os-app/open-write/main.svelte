@@ -5,7 +5,8 @@ import KVCNote from '../_shared/KVCNote/main.js';
 import KVCSetting from '../_shared/KVCSetting/main.js';
 import KVCTransport from '../_shared/KVCTransport/main.js';
 import { OLSK_SPEC_UI } from 'OLSKSpec';
-import OLSKRemoteStorage from 'OLSKRemoteStorage'
+import OLSKRemoteStorage from 'OLSKRemoteStorage';
+import OLSKObject from 'OLSKObject';
 import OLSKServiceWorker from 'OLSKServiceWorker';
 import KVCWriteLogic from './ui-logic.js';
 import RemoteStorage from 'remotestoragejs';
@@ -1256,6 +1257,7 @@ const mod = {
 			ZDRParamDispatchConnected: mod.ZDRParamDispatchConnected,
 			ZDRParamDispatchOnline: mod.ZDRParamDispatchOnline,
 			ZDRParamDispatchOffline: mod.ZDRParamDispatchOffline,
+			_ZDRParamDispatchJSONPreStringify: OLSKObject.OLSKObjectSafeCopy,
 			_ZDRParamDispatchJSONPostParse: OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse,
 		})
 	},
