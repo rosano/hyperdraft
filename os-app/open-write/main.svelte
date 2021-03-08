@@ -76,8 +76,6 @@ const mod = {
 	
 	_ValueStorageToolbarHidden: true,
 
-	_ValueFooterStorageStatus: '',
-
 	_ValueSaveNoteThrottleMap: {},
 
 	_ValueSavePublishThrottleMap: {},

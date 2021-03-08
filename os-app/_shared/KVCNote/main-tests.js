@@ -202,10 +202,7 @@ describe('KVCNoteDirectory', function test_KVCNoteDirectory() {
 describe('KVCNoteFolderPath', function test_KVCNoteFolderPath() {
 
 	it('returns string', function() {
-		const item = {
-			KVCNoteID: Math.random().toString(),
-			KVCNoteCreationDate: new Date(),
-		};
+		const item = StubNoteObjectValid();
 		deepEqual(mod.KVCNoteFolderPath(item), [
 			mod.KVCNoteDirectory(),
 			item.KVCNoteCreationDate.toJSON().split('T').shift(),

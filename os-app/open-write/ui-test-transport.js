@@ -26,13 +26,9 @@ describe('KVCWrite_Transport', function () {
 			}, function (dialog) {
 				dialog.response = JSON.stringify({
 					KVCNote: [StubNoteObjectValid({
-						KVCNoteID: Math.random().toString(),
 						KVCNoteBody,
 					})],
-					KVCSetting: [StubSettingObjectValid({
-						KVCSettingKey: Math.random().toString(),
-						KVCSettingValue: Math.random().toString(),
-					})],
+					KVCSetting: [StubSettingObjectValid()],
 				});
 
 				Object.assign(json, JSON.parse(dialog.response));
