@@ -69,7 +69,7 @@ const mod = {
 				errors.KVCNotePublicID = [
 					'KVCErrorNotString',
 				];
-			} else if (inputData.KVCNotePublicID.trim() === '') {
+			} else if (!inputData.KVCNotePublicID.trim()) {
 				errors.KVCNotePublicID = [
 					'KVCErrorNotFilled',
 				];
