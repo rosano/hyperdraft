@@ -555,48 +555,52 @@ describe('KVCNotePublicFilesRetract', function test_KVCNotePublicFilesRetract() 
 
 describe('KVCNotePermalinkMap', function test_KVCNotePermalinkMap() {
 
-	it('rejects if param1 not array', async function () {
-		await rejects(ZDRTestingWrap.App.KVCNote.KVCNotePermalinkMap(null, Math.random().toString()), /KVCErrorInputNotValid/);
+	it('throws if param1 not array', function () {
+		throws(function () {
+			ZDRTestingWrap.App.KVCNote.KVCNotePermalinkMap(null, Math.random().toString());
+		}, /KVCErrorInputNotValid/);
 	});
 
-	it('rejects if param2 not string', async function () {
-		await rejects(ZDRTestingWrap.App.KVCNote.KVCNotePermalinkMap([], null), /KVCErrorInputNotValid/);
+	it('throws if param2 not string', function () {
+		throws(function () {
+			ZDRTestingWrap.App.KVCNote.KVCNotePermalinkMap([], null);
+		}, /KVCErrorInputNotValid/);
 	});
 
-	it('returns object', async function() {
-		deepEqual(await ZDRTestingWrap.App.KVCNote.KVCNotePermalinkMap([], Math.random().toString()), {});
+	it('returns object', function() {
+		deepEqual(ZDRTestingWrap.App.KVCNote.KVCNotePermalinkMap([], Math.random().toString()), {});
 	});
 
-	it('excludes if not public', async function() {
-		deepEqual(await ZDRTestingWrap.App.KVCNote.KVCNotePermalinkMap([StubNoteObjectValid()], Math.random().toString()), {});
+	it('excludes if not public', function() {
+		deepEqual(ZDRTestingWrap.App.KVCNote.KVCNotePermalinkMap([StubNoteObjectValid()], Math.random().toString()), {});
 	});
 
-	it('includes if public', async function() {
+	it('includes if public', function() {
 		const item = StubNoteObjectPublic();
-		deepEqual(await ZDRTestingWrap.App.KVCNote.KVCNotePermalinkMap([item], Math.random().toString()), {
-			[item.KVCNoteBody]: await ZDRTestingWrap.Public.ZDRStoragePermalink(mod.KVCNotePublicChildPagePath(item)),
+		deepEqual(ZDRTestingWrap.App.KVCNote.KVCNotePermalinkMap([item], Math.random().toString()), {
+			[item.KVCNoteBody]: ZDRTestingWrap.Public.ZDRStoragePermalink(mod.KVCNotePublicChildPagePath(item)),
 		});
 	});
 
-	it('selects last updated note if duplicate title', async function() {
+	it('selects last updated note if duplicate title', function() {
 		const KVCNoteBody = Math.random().toString();
 		const item = StubNoteObjectPublic({
 			KVCNoteBody,
 		});
-		deepEqual(await ZDRTestingWrap.App.KVCNote.KVCNotePermalinkMap([item, StubNoteObjectPublic({
+		deepEqual(ZDRTestingWrap.App.KVCNote.KVCNotePermalinkMap([item, StubNoteObjectPublic({
 			KVCNoteBody,
 		})], Math.random().toString()), {
-			[item.KVCNoteBody]: await ZDRTestingWrap.Public.ZDRStoragePermalink(mod.KVCNotePublicChildPagePath(item)),
+			[item.KVCNoteBody]: ZDRTestingWrap.Public.ZDRStoragePermalink(mod.KVCNotePublicChildPagePath(item)),
 		});
 	});
 
-	it('links to KVCNotePublicRootPagePath if KVCNoteID param1', async function() {
+	it('links to KVCNotePublicRootPagePath if KVCNoteID param1', function() {
 		const KVCNoteID = Math.random().toString();
 		const item = StubNoteObjectPublic({
 			KVCNoteID,
 		});
-		deepEqual(await ZDRTestingWrap.App.KVCNote.KVCNotePermalinkMap([item], KVCNoteID), {
-			[item.KVCNoteBody]: await ZDRTestingWrap.Public.ZDRStoragePermalink(mod.KVCNotePublicRootPagePath(item)),
+		deepEqual(ZDRTestingWrap.App.KVCNote.KVCNotePermalinkMap([item], KVCNoteID), {
+			[item.KVCNoteBody]: ZDRTestingWrap.Public.ZDRStoragePermalink(mod.KVCNotePublicRootPagePath(item)),
 		});
 	});
 

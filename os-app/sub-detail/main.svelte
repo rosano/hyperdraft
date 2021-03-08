@@ -242,11 +242,7 @@ import KVCWriteInput from '../sub-input/main.svelte';
 			{/if}
 
 			{#if KVCNote.KVCNoteIsMarkedPublic(mod._ValueItem) }
-				{#await KVCWriteDetailPublicURLFor(mod._ValueItem)}
-					<!-- promise is pending -->
-				{:then value}
-					<a class="KVCWriteDetailToolbarPublicLink" href={ value } target="_blank">{ OLSKLocalized('KVCWriteDetailToolbarPublicLinkText') }</a>
-				{/await}
+				<a class="KVCWriteDetailToolbarPublicLink" href={ KVCWriteDetailPublicURLFor(mod._ValueItem) } target="_blank">{ OLSKLocalized('KVCWriteDetailToolbarPublicLinkText') }</a>
 					
 				<button class="KVCWriteDetailToolbarRetractButton OLSKDecorButtonNoStyle OLSKDecorTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarRetractButtonText') } on:click={ KVCWriteDetailDispatchRetract }>
 					<div class="KVCWriteDetailToolbarRetractButtonImage">{@html _KVCWriteRetract }</div>

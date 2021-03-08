@@ -629,16 +629,16 @@ const mod = {
 
 		const options = {
 			KVCOptionIsRoot: mod.DataSetting('KVCSettingPublicRootPageID') === inputData.KVCNoteID,
-			KVCOptionRootURL: await mod._ValueZDRWrap.Public.ZDRStoragePermalink('index.html'),
+			KVCOptionRootURL: mod._ValueZDRWrap.Public.ZDRStoragePermalink('index.html'),
 			KVCOptionBacklinks: KVCWriteLogic.KVCWriteBacklinksMap(mod._ValueNotesAll.filter(KVCNote.KVCNoteIsMarkedPublic).concat(inputData))[KVCTemplate.KVCTemplatePlaintextTitle(inputData.KVCNoteBody)],
-			_KVCOptionPublicBaseURL: await mod._ValueZDRWrap.Public.ZDRStoragePermalink('/'),
+			_KVCOptionPublicBaseURL: mod._ValueZDRWrap.Public.ZDRStoragePermalink('/'),
 		};
 
 		const wasPublic = KVCNote.KVCNoteIsMarkedPublic(inputData);
 
 		const updated = await mod._ValueZDRWrap.App.KVCNote.KVCNotePublicFilesUpload(await mod._ValueZDRWrap.App.KVCNote.KVCNoteMarkPublic(inputData), mod.TestPublishContent = KVCTemplate.KVCView({
 			KVCViewSource: inputData.KVCNoteBody,
-			KVCViewPermalinkMap: await mod._ValueZDRWrap.App.KVCNote.KVCNotePermalinkMap(mod._ValueNotesAll, mod.DataSetting('KVCSettingPublicRootPageID') || ''),
+			KVCViewPermalinkMap: mod._ValueZDRWrap.App.KVCNote.KVCNotePermalinkMap(mod._ValueNotesAll, mod.DataSetting('KVCSettingPublicRootPageID') || ''),
 			KVCViewTemplate: KVCTemplate.KVCTemplateViewDefault(OLSKLocalized),
 			KVCViewTemplateOptions: options,
 		}), options.KVCOptionIsRoot);

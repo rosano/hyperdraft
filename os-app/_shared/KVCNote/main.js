@@ -262,7 +262,7 @@ export default Object.assign(mod, {
 			return param1;
 		},
 
-		async KVCNotePermalinkMap (param1, param2) {
+		KVCNotePermalinkMap (param1, param2) {
 			if (!Array.isArray(param1)) {
 				throw new Error('KVCErrorInputNotValid');
 			}
@@ -272,9 +272,9 @@ export default Object.assign(mod, {
 			}
 
 			const _this = this;
-			return Object.fromEntries(await Promise.all(param1.filter(mod.KVCNoteIsMarkedPublic).map(async function (e) {
-				return [KVCTemplate.KVCTemplatePlaintextTitle(e.KVCNoteBody), await _this.Public.ZDRStoragePermalink(e.KVCNoteID === param2 ? mod.KVCNotePublicRootPagePath(e) : mod.KVCNotePublicChildPagePath(e))];
-			})));
+			return Object.fromEntries(param1.filter(mod.KVCNoteIsMarkedPublic).map(function (e) {
+				return [KVCTemplate.KVCTemplatePlaintextTitle(e.KVCNoteBody), _this.Public.ZDRStoragePermalink(e.KVCNoteID === param2 ? mod.KVCNotePublicRootPagePath(e) : mod.KVCNotePublicChildPagePath(e))];
+			}));
 		},
 
 		async KVCNoteDelete (inputData) {
