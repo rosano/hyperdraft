@@ -271,7 +271,7 @@ describe('KVCNotePublicChildPagePath', function test_KVCNotePublicChildPagePath(
 
 });
 
-describe('KVCNoteActionPublicPath', function test_KVCNoteActionPublicPath() {
+describe('KVCNotePublicPath', function test_KVCNotePublicPath() {
 
 	const item = StubNoteObjectValid({
 		KVCNotePublicID: 'charlie',
@@ -279,22 +279,22 @@ describe('KVCNoteActionPublicPath', function test_KVCNoteActionPublicPath() {
 
 	it('throws if param1 not valid', function() {
 		throws(function() {
-			mod.KVCNoteActionPublicPath({}, false);
+			mod.KVCNotePublicPath({}, false);
 		}, /KVCErrorInputNotValid/);
 	});
 
 	it('throws if param2 not boolean', function() {
 		throws(function() {
-			mod.KVCNoteActionPublicPath(item, 'true');
+			mod.KVCNotePublicPath(item, 'true');
 		}, /KVCErrorInputNotValid/);
 	});
 
 	it('returns KVCNoteStoragePublicObjectPath', function() {
-		deepEqual(mod.KVCNoteActionPublicPath(item, false), mod.KVCNotePublicChildPagePath(item));
+		deepEqual(mod.KVCNotePublicPath(item, false), mod.KVCNotePublicChildPagePath(item));
 	});
 
 	it('returns / if param2 true', function() {
-		deepEqual(mod.KVCNoteActionPublicPath(item, true), '/');
+		deepEqual(mod.KVCNotePublicPath(item, true), '/');
 	});
 
 });

@@ -140,7 +140,7 @@ const mod = {
 		return inputData.KVCNotePublicID;
 	},
 
-	KVCNoteActionPublicPath (param1, param2) {
+	KVCNotePublicPath (param1, param2) {
 		if (mod.KVCNoteErrors(param1)) {
 			throw new Error('KVCErrorInputNotValid');
 		}
