@@ -140,18 +140,6 @@ const mod = {
 		return inputData.KVCNotePublicID;
 	},
 
-	KVCNoteActionPublishPath (param1, param2) {
-		if (mod.KVCNoteErrors(param1)) {
-			throw new Error('KVCErrorInputNotValid');
-		}
-
-		if (typeof param2 !== 'boolean') {
-			throw new Error('KVCErrorInputNotValid');
-		}
-
-		return param2 ? mod.KVCNotePublicRootPagePath() : mod.KVCNotePublicChildPagePath(param1);
-	},
-
 	KVCNoteActionPublicPath (param1, param2) {
 		if (mod.KVCNoteErrors(param1)) {
 			throw new Error('KVCErrorInputNotValid');

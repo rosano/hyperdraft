@@ -271,34 +271,6 @@ describe('KVCNotePublicChildPagePath', function test_KVCNotePublicChildPagePath(
 
 });
 
-describe('KVCNoteActionPublishPath', function test_KVCNoteActionPublishPath() {
-
-	const item = StubNoteObjectValid({
-		KVCNotePublicID: 'charlie',
-	});
-
-	it('throws if param1 not valid', function() {
-		throws(function() {
-			mod.KVCNoteActionPublishPath({}, false);
-		}, /KVCErrorInputNotValid/);
-	});
-
-	it('throws if param2 not boolean', function() {
-		throws(function() {
-			mod.KVCNoteActionPublishPath(item, 'true');
-		}, /KVCErrorInputNotValid/);
-	});
-
-	it('returns KVCNoteStoragePublicObjectPath', function() {
-		deepEqual(mod.KVCNoteActionPublishPath(item, false), mod.KVCNotePublicChildPagePath(item));
-	});
-
-	it('returns KVCNoteStoragePublicRootPagePath if param2 true', function() {
-		deepEqual(mod.KVCNoteActionPublishPath(item, true), mod.KVCNotePublicRootPagePath());
-	});
-
-});
-
 describe('KVCNoteActionPublicPath', function test_KVCNoteActionPublicPath() {
 
 	const item = StubNoteObjectValid({
