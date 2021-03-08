@@ -4,10 +4,7 @@ exports.OLSKControllerRoutes = function() {
 		OLSKRouteMethod: 'get',
 		OLSKRouteSignature: 'KVCWriteRoute',
 		OLSKRouteFunction (req, res, next) {
-			return res.OLSKExpressLayoutRender(require('path').join(__dirname, 'ui-view.ejs'), {
-				KVCDropboxAppKey: Buffer.from(process.env.KVC_DROPBOX_APP_KEY).toString('base64'),
-				KVCGoogleClientKey: Buffer.from(process.env.KVC_GOOGLE_CLIENT_KEY).toString('base64'),
-			});
+			return res.OLSKExpressLayoutRender(require('path').join(__dirname, 'ui-view.ejs'));
 		},
 		OLSKRouteLanguageCodes: ['en', 'fr', 'es'],
 		_OLSKRouteSkipLanguageRedirect: true,
