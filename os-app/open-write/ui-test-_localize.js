@@ -373,7 +373,9 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 						return browser.OLSKPrompt(function () {
 							return browser.click('.LCHLauncherPipeItem');
 						}, function (dialog) {
-							dialog.response = JSON.stringify({});
+							dialog.response = JSON.stringify({
+								[Math.random().toString()]: Math.random().toString(),
+							});
 
 							return dialog;
 						});
