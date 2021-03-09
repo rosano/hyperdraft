@@ -1099,10 +1099,9 @@ const mod = {
 	},
 
 	async ZDRSchemaDispatchSyncConflictNote (inputData) {
-		return;
 		return setTimeout(async function () {
 			mod.ZDRSchemaDispatchSyncUpdateNote(await mod._ValueZDRWrap.App.KVCNote.KVCNoteUpdate(OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(OLSKRemoteStorage.OLSKRemoteStorageChangeDelegateConflictSelectRecent(inputData))))
-		});
+		}, OLSK_SPEC_UI() ? 0 : 500);
 	},
 
 	async OLSKCloudFormDispatchSubmit (inputData) {
