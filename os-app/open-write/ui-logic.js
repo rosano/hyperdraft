@@ -1,6 +1,15 @@
+import KVCNote from '../_shared/KVCNote/main.js';
 import KVCTemplate from '../_shared/KVCTemplate/main.js';
 
 const mod = {
+
+	KVCWriteAccessibilitySummary (inputData) {
+		if (KVCNote.KVCNoteErrors(inputData)) {
+			throw new Error('KVCErrorInputNotValid');
+		}
+
+		return KVCTemplate.KVCTemplatePlaintextTitle(inputData.KVCNoteBody);
+	},
 
 	KVCWriteLogicPublicSymbol () {
 		return 'ᗕ';

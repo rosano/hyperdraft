@@ -1,6 +1,7 @@
 <script>
-export let KVCWriteDetailConnected = false;
+export let KVCWriteDetailItem;
 export let KVCWriteDetailItemIsRootPage = false;
+export let KVCWriteDetailConnected = false;
 export let KVCWriteDetailPublicURLFor;
 export let KVCWriteDetailDispatchBack;
 export let KVCWriteDetailDispatchJump;
@@ -21,8 +22,6 @@ export let _DebugLauncher = false;
 export const modPublic = {
 
 	KVCWriteDetailSetItem (inputData) {
-		mod._ValueItem = inputData;
-
 		if (!inputData) {
 			return;
 		}
@@ -53,7 +52,7 @@ export const modPublic = {
 	},
 
 	KVCWriteDetailRecipes () {
-		return mod._ValueItem ? mod.DataWriteDetailRecipes() : [];
+		return mod.DataWriteDetailRecipes();
 	},
 
 };
@@ -66,8 +65,6 @@ const mod = {
 
 	// VALUE
 
-	_ValueItem: undefined,
-
 	_ValueHeaderTokens: [],
 
 	_ValueEditorPostInitializeQueue: [],
@@ -77,19 +74,15 @@ const mod = {
 	// DATA
 
 	DataWriteDetailRecipes () {
-		const outputData = [];
+		const outputData = [{
+			LCHRecipeSignature: 'KVCWriteDetailLauncherItemShowLocalVersions',
+			LCHRecipeName: OLSKLocalized('KVCWriteDetailLauncherItemShowLocalVersionsText'),
+			LCHRecipeCallback: function KVCWriteDetailLauncherItemShowLocalVersions () {
+				KVCWriteDetailDispatchVersions();
+			},
+		}];
 
-		if (mod._ValueItem) {
-			outputData.push({
-				LCHRecipeSignature: 'KVCWriteDetailLauncherItemShowLocalVersions',
-				LCHRecipeName: OLSKLocalized('KVCWriteDetailLauncherItemShowLocalVersionsText'),
-				LCHRecipeCallback: function KVCWriteDetailLauncherItemShowLocalVersions () {
-					KVCWriteDetailDispatchVersions();
-				},
-			});
-		}
-
-		if (mod._ValueItem && !mod._ValueItem.KVCNoteIsArchived) {
+		if (!KVCWriteDetailItem.KVCNoteIsArchived) {
 			outputData.push({
 				LCHRecipeSignature: 'KVCWriteDetailLauncherItemArchive',
 				LCHRecipeName: OLSKLocalized('KVCWriteDetailToolbarArchiveButtonText'),
@@ -99,7 +92,7 @@ const mod = {
 			})
 		}
 
-		if (mod._ValueItem && mod._ValueItem.KVCNoteIsArchived) {
+		if (KVCWriteDetailItem.KVCNoteIsArchived) {
 			outputData.push({
 				LCHRecipeSignature: 'KVCWriteDetailLauncherItemUnarchive',
 				LCHRecipeName: OLSKLocalized('KVCWriteDetailToolbarUnarchiveButtonText'),
@@ -114,7 +107,7 @@ const mod = {
 				LCHRecipeSignature: 'KVCWriteDetailLauncherItemSetAsRootPage',
 				LCHRecipeName: OLSKLocalized('KVCWriteDetailLauncherItemSetAsRootPageText'),
 				LCHRecipeCallback: function KVCWriteDetailLauncherItemSetAsRootPage () {
-					KVCWriteDetailDispatchSetAsRootPage(mod._ValueItem.KVCNoteID);
+					KVCWriteDetailDispatchSetAsRootPage(KVCWriteDetailItem.KVCNoteID);
 				},
 			})
 		}
@@ -194,7 +187,6 @@ const mod = {
 
 };
 
-import OLSKDetailPlaceholder from 'OLSKDetailPlaceholder';
 import _OLSKSharedBack from '../_shared/__external/OLSKUIAssets/_OLSKSharedBack.svg';
 import _KVCWriteJump from './ui-assets/_KVCWriteJump.svg';
 import _KVCWriteArchive from './ui-assets/_KVCWriteArchive.svg';
@@ -207,12 +199,6 @@ import KVCWriteInput from '../sub-input/main.svelte';
 <svelte:window on:keydown={ mod.InterfaceWindowDidKeydown }/>
 
 <div class="KVCWriteDetail OLSKViewportDetail" class:OLSKMobileViewInactive={ OLSKMobileViewInactive } aria-hidden={ OLSKMobileViewInactive ? true : null }>
-
-{#if !mod._ValueItem}
-<OLSKDetailPlaceholder />
-{/if}
-
-{#if mod._ValueItem}
 
 <header class="KVCWriteDetailHeader OLSKMobileViewHeader">
 
@@ -235,14 +221,14 @@ import KVCWriteInput from '../sub-input/main.svelte';
 		{/if}
 
 		{#if KVCWriteDetailConnected }
-			{#if !KVCNote.KVCNoteIsMarkedPublic(mod._ValueItem) }
+			{#if !KVCNote.KVCNoteIsMarkedPublic(KVCWriteDetailItem) }
 				<button class="KVCWriteDetailToolbarPublishButton OLSKDecorButtonNoStyle OLSKDecorTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarPublishButtonText') } on:click={ KVCWriteDetailDispatchPublish }>
 					<div class="KVCWriteDetailToolbarPublishButtonImage">{@html _KVCWritePublish }</div>
 				</button>
 			{/if}
 
-			{#if KVCNote.KVCNoteIsMarkedPublic(mod._ValueItem) }
-				<a class="KVCWriteDetailToolbarPublicLink" href={ KVCWriteDetailPublicURLFor(mod._ValueItem) } target="_blank">{ OLSKLocalized('KVCWriteDetailToolbarPublicLinkText') }</a>
+			{#if KVCNote.KVCNoteIsMarkedPublic(KVCWriteDetailItem) }
+				<a class="KVCWriteDetailToolbarPublicLink" href={ KVCWriteDetailPublicURLFor(KVCWriteDetailItem) } target="_blank">{ OLSKLocalized('KVCWriteDetailToolbarPublicLinkText') }</a>
 					
 				<button class="KVCWriteDetailToolbarRetractButton OLSKDecorButtonNoStyle OLSKDecorTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarRetractButtonText') } on:click={ KVCWriteDetailDispatchRetract }>
 					<div class="KVCWriteDetailToolbarRetractButtonImage">{@html _KVCWriteRetract }</div>
@@ -258,13 +244,13 @@ import KVCWriteInput from '../sub-input/main.svelte';
 			</button>
 		{/if}
 
-		{#if !mod._ValueItem.KVCNoteIsArchived }
+		{#if !KVCWriteDetailItem.KVCNoteIsArchived }
 			<button class="KVCWriteDetailToolbarArchiveButton OLSKDecorButtonNoStyle OLSKDecorTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarArchiveButtonText') } on:click={ KVCWriteDetailDispatchArchive }>
 				<div class="KVCWriteDetailToolbarArchiveButtonImage">{@html _KVCWriteArchive }</div>
 			</button>
 		{/if}
 
-		{#if mod._ValueItem.KVCNoteIsArchived }
+		{#if KVCWriteDetailItem.KVCNoteIsArchived }
 			<button class="KVCWriteDetailToolbarUnarchiveButton OLSKDecorButtonNoStyle OLSKDecorTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarUnarchiveButtonText') } on:click={ KVCWriteDetailDispatchUnarchive }>
 				<div class="KVCWriteDetailToolbarUnarchiveButtonImage">{@html _KVCWriteUnarchive }</div>
 			</button>
@@ -279,7 +265,7 @@ import KVCWriteInput from '../sub-input/main.svelte';
 </header>
 
 <KVCWriteInput
-	KVCWriteInputItem={ mod._ValueItem }
+	KVCWriteInputItem={ KVCWriteDetailItem }
 	KVCWriteInputKey={ 'KVCNoteBody' }
 	KVCWriteInputDispatchHeaderTokens={ mod.KVCWriteInputDispatchHeaderTokens }
 	KVCWriteInputDispatchUpdate={ mod.KVCWriteInputDispatchUpdate }
@@ -288,8 +274,6 @@ import KVCWriteInput from '../sub-input/main.svelte';
 	KVCWriteInputDispatchEscape={ mod.KVCWriteInputDispatchEscape }
 	bind:this={ mod.KVCWriteInputInstance }
 	/>
-
-{/if}
 
 </div>
 

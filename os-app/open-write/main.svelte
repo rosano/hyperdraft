@@ -62,6 +62,8 @@ const mod = {
 		if (!inputData) {
 			mod.OLSKMobileViewInactive = false;	
 		}
+
+		mod._OLSKCatalog.modPublic.OLSKCatalogSelect(inputData);
 	},
 
 	async ValueSetting (param1, param2) {
@@ -309,7 +311,7 @@ const mod = {
 							KVCNoteModificationDate: new Date('2019-02-23T13:56:36Z'),
 						};
 						mod._ValueZDRWrap.App.ZDRStorageWriteObject(KVCNote.KVCNoteObjectPathV1(item), item);
-						await mod.SetupValueNotesAll();
+						await mod.SetupCatalog();
 					},
 				},
 				{
@@ -343,7 +345,7 @@ const mod = {
 							});
 						}));
 
-						return mod.SetupValueNotesAll();
+						return mod.SetupCatalog();
 					},
 				}, {
 					LCHRecipeName: 'KVCWriteLauncherItemDebug_PromptFakeImportSerialized',
@@ -471,7 +473,11 @@ const mod = {
 		};
 	},
 
-	// INTERFACE	
+	// INTERFACE
+
+	InterfaceCreateButtonDidClick () {
+		mod.ControlNoteCreate();
+	},
 
 	InterfaceWindowDidKeydown (event) {
 		if (window.Launchlet.LCHSingletonExists()) {
@@ -487,7 +493,7 @@ const mod = {
 				mod.ControlEscape();
 			},
 			Tab () {
-				document.activeElement !== document.querySelector('.OLSKMasterListFilterField') ? document.querySelector('.OLSKMasterListFilterField').focus() : mod.KVCWriteDetailInstance.modPublic.KVCWriteDetailEditorFocus();
+				document.activeElement !== document.querySelector('.OLSKMasterListFilterField') ? document.querySelector('.OLSKMasterListFilterField').focus() : mod._KVCWriteDetail.modPublic.KVCWriteDetailEditorFocus();
 
 				event.preventDefault();
 			},
@@ -543,13 +549,11 @@ const mod = {
 			return mod.ControlFundGate();
 		}
 
-		const item = await mod._ValueZDRWrap.App.KVCNote.KVCNoteCreate({
+		mod.ControlNoteSelect(mod._OLSKCatalog.modPublic.OLSKCatalogInsert(await mod._ValueZDRWrap.App.KVCNote.KVCNoteCreate({
 			KVCNoteBody: typeof inputData === 'string' ? inputData : '',
-		});
+		})));
 
-		mod.ValueNotesAll([item].concat(mod._ValueNotesAll));
-
-		mod.ControlNoteSelect(item);
+		mod.ReactDocumentRemainder();
 
 		if (mod.DataIsMobile()) {
 			mod.KVCWriteDetailInstance.modPublic.KVCWriteDetailEditorFocus();
@@ -572,19 +576,23 @@ const mod = {
 	},
 	
 	ControlNoteSelect(inputData) {
-		mod.ValueNoteSelected(inputData);
+		mod._OLSKCatalog.modPublic.OLSKCatalogSelect(inputData);
 
 		if (!inputData) {
 			return !mod.DataIsMobile() && document.querySelector('.OLSKMasterListFilterField').focus();
 		}
 
-		mod.OLSKMobileViewInactive = true;
+		mod._OLSKCatalog.modPublic.OLSKCatalogFocusDetail();
 
 		if (mod.DataIsMobile()) {
 			return;
 		}
-		
-		mod.KVCWriteDetailInstance.modPublic.KVCWriteDetailEditorFocus();
+
+		setTimeout(function () {
+			mod._KVCWriteDetail.modPublic.KVCWriteDetailSetItem(inputData);
+
+			mod._KVCWriteDetail.modPublic.KVCWriteDetailEditorFocus();
+		}, 100);
 	},
 	
 	ControlNoteJump (inputData) {
@@ -671,11 +679,9 @@ const mod = {
 	},
 	
 	async ControlNoteDiscard (inputData) {
-		mod.ValueNotesAll(mod._ValueNotesAll.filter(function (e) {
-			return e !== inputData;
-		}), false);
+		mod._OLSKCatalog.modPublic.OLSKCatalogRemove(inputData);
 
-		mod.ControlNoteSelect(null);
+		mod.ReactDocumentRemainder();
 
 		await mod._ValueZDRWrap.App.KVCNote.KVCNoteDelete(inputData);
 	},
@@ -717,7 +723,7 @@ const mod = {
 
 		try {
 			await mod._ValueZDRWrap.App.KVCTransport.KVCTransportImport(OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(JSON.parse(inputData)));
-			await mod.SetupValueNotesAll();
+			await mod.SetupCatalog();
 		} catch (e) {
 			window.alert(OLSKLocalized('KVCWriteLauncherItemImportJSONErrorNotValidAlertText'));
 		}
@@ -729,7 +735,7 @@ const mod = {
 				return KVCWriteLogic.KVCWriteFileNoteObject(e, extractFilename);
 			})),
 		});
-		await mod.SetupValueNotesAll();
+		await mod.SetupCatalog();
 	},
 
 	async ControlDemo () {
@@ -820,6 +826,26 @@ const mod = {
 	},
 
 	// MESSAGE
+
+	OLSKCatalogDispatchClick (inputData) {
+		mod.ControlNoteSelect(inputData);
+	},
+
+	OLSKCatalogDispatchArrow (inputData) {
+		mod._OLSKCatalog.modPublic.OLSKCatalogSelect(inputData);
+	},
+
+	OLSKCatalogDispatchFilter (item, text) {
+		return item.KVCDocumentName.match(text);
+	},
+
+	OLSKCatalogDispatchExact (item, text) {
+		return item.KVCDocumentName.startsWith(text);
+	},
+
+	_OLSKCatalogDispatchKey (inputData) {
+		return inputData.KVCNoteID;
+	},
 
 	OLSKAppToolbarDispatchApropos () {
 		mod._OLSKModalView.modPublic.OLSKModalViewShow();
@@ -1043,13 +1069,11 @@ const mod = {
 			mod.KVCWriteDetailDispatchBack();
 		}
 		
-		mod.ControlNoteDiscard(mod._ValueNoteSelected);
+		mod.ControlNoteDiscard(mod._OLSKCatalog.modPublic.OLSKCatalogDataItemSelected());
 	},
 
 	KVCWriteDetailDispatchUpdate () {
-		mod._ValueNoteSelected = mod._ValueNoteSelected; // #purge-svelte-force-update
-		
-		mod.ControlNoteSave(mod._ValueNoteSelected);
+		mod.ControlNoteSave(mod._OLSKCatalog.modPublic.OLSKCatalogDataItemSelected());
 	},
 
 	async KVCWriteDetailDispatchSetAsRootPage (inputData) {
@@ -1203,7 +1227,7 @@ const mod = {
 	},
 
 	async ReactDocumentRemainder () {
-		mod._ValueDocumentRemainder = OLSKFund.OLSKFundRemainder(mod._ValueNotesAll.length, parseInt('KVC_FUND_DOCUMENT_LIMIT_SWAP_TOKEN'));
+		mod._ValueDocumentRemainder = OLSKFund.OLSKFundRemainder(mod._OLSKCatalog.modPublic._OLSKCatalogDataItemsAll().length, parseInt('KVC_FUND_DOCUMENT_LIMIT_SWAP_TOKEN'));
 	},
 
 	// SETUP
@@ -1211,7 +1235,7 @@ const mod = {
 	async SetupEverything () {
 		await mod.SetupStorageClient();
 
-		await mod.SetupValueNotesAll();
+		await mod.SetupCatalog();
 		
 		await mod.SetupValueSettingsAll();
 
@@ -1265,7 +1289,7 @@ const mod = {
 		mod._ValueZDRWrap = await mod.DataStorageClient(zerodatawrap.ZDRPreferenceProtocol(zerodatawrap.ZDRProtocolRemoteStorage()));
 	},
 
-	async SetupValueNotesAll() {
+	async SetupCatalog() {
 		if (zerodatawrap.ZDRPreferenceProtocolMigrate()) {
 			const client = await mod.DataStorageClient(zerodatawrap.ZDRPreferenceProtocolMigrate());
 
@@ -1284,8 +1308,10 @@ const mod = {
 		mod.ValueArchivedCount(items);
 		
 		mod._RevealArchiveIsVisible = mod._ValueArchivedCount > 0;
-		
-		mod.ValueNotesAll(items);
+
+		items.map(mod._OLSKCatalog.modPublic.OLSKCatalogInsert);
+
+		mod.ReactDocumentRemainder();
 	},
 
 	async SetupValueSettingsAll() {
@@ -1355,6 +1381,7 @@ const mod = {
 import { onMount } from 'svelte';
 onMount(mod.LifecycleModuleWillMount);
 
+import OLSKCatalog from 'OLSKCatalog';
 import KVCWriteMaster from '../sub-master/main.svelte';
 import KVCWriteDetail from '../sub-detail/main.svelte';
 import OLSKAppToolbar from 'OLSKAppToolbar';
@@ -1364,12 +1391,73 @@ import OLSKWebView from 'OLSKWebView';
 import OLSKModalView from 'OLSKModalView';
 import OLSKApropos from 'OLSKApropos';
 import OLSKPointer from 'OLSKPointer';
+import OLSKUIAssets from 'OLSKUIAssets';
 </script>
 <svelte:window on:keydown={ mod.InterfaceWindowDidKeydown } />
 
 <div class="KVCWrite OLSKViewport" class:OLSKIsLoading={ mod._ValueIsLoading } class:OLSKIsDemoing={ mod._IsRunningDemo }>
 
 <div class="OLSKViewportContent">
+
+<OLSKCatalog
+	bind:this={ mod._OLSKCatalog }
+
+	OLSKCatalogDispatchClick={ mod.OLSKCatalogDispatchClick }
+	OLSKCatalogDispatchArrow={ mod.OLSKCatalogDispatchArrow }
+	
+	OLSKCatalogDispatchSort={ KVCWriteLogic.KVCWriteLogicListSort }
+	OLSKCatalogDispatchFilter={ mod.OLSKCatalogDispatchFilter }
+	OLSKCatalogDispatchExact={ mod.OLSKCatalogDispatchExact }
+
+	OLSKMasterListItemAccessibilitySummaryFor={ KVCWriteLogic.KVCWriteAccessibilitySummary }
+
+	_OLSKCatalogDispatchKey={ mod._OLSKCatalogDispatchKey }
+
+	let:OLSKResultsListItem
+	>
+
+	<!-- MASTER -->
+
+	<div class="OLSKToolbarElementGroup" slot="OLSKMasterListToolbarTail">
+		<div>
+			<button class="KVCWriteCreateButton" on:click={ mod.InterfaceCreateButtonDidClick }>
+				<div>{@html OLSKUIAssets._OLSKSharedCreate }</div>
+			</button>
+		</div>
+	</div>
+
+	<!-- LIST ITEM -->
+
+	<div class="KVCWriteListItem" slot="OLSKMasterListItem">{ OLSKResultsListItem.KVCNoteID }</div>
+
+	<!-- DETAIL -->
+	
+	<div class="KVCWriteDetailContainer" slot="OLSKCatalogDetailContent" let:OLSKCatalogItemSelected>
+		<KVCWriteDetail
+			KVCWriteDetailItem={ OLSKCatalogItemSelected }
+			KVCWriteDetailItemIsRootPage={ OLSKCatalogItemSelected && mod.DataSetting('KVCSettingPublicRootPageID') ? OLSKCatalogItemSelected.KVCNoteID === mod.DataSetting('KVCSettingPublicRootPageID') : false }
+			KVCWriteDetailConnected={ mod._ValueCloudIdentity }
+			KVCWriteDetailPublicURLFor={ mod.KVCWriteDetailPublicURLFor }
+			KVCWriteDetailDispatchBack={ mod.KVCWriteDetailDispatchBack }
+			KVCWriteDetailDispatchJump={ mod.KVCWriteDetailDispatchJump }
+			KVCWriteDetailDispatchArchive={ mod.KVCWriteDetailDispatchArchive }
+			KVCWriteDetailDispatchUnarchive={ mod.KVCWriteDetailDispatchUnarchive }
+			KVCWriteDetailDispatchConnect={ mod.KVCWriteDetailDispatchConnect }
+			KVCWriteDetailDispatchPublish={ mod.KVCWriteDetailDispatchPublish }
+			KVCWriteDetailDispatchRetract={ mod.KVCWriteDetailDispatchRetract }
+			KVCWriteDetailDispatchVersions={ mod.KVCWriteDetailDispatchVersions }
+			KVCWriteDetailDispatchDiscard={ mod.KVCWriteDetailDispatchDiscard }
+			KVCWriteDetailDispatchUpdate={ mod.KVCWriteDetailDispatchUpdate }
+			KVCWriteDetailDispatchSetAsRootPage={ mod.KVCWriteDetailDispatchSetAsRootPage }
+			KVCWriteDetailDispatchOpen={ mod.KVCWriteDetailDispatchOpen }
+			KVCWriteDetailDispatchEscape={ mod.KVCWriteDetailDispatchEscape }
+			OLSKMobileViewInactive={ !mod.OLSKMobileViewInactive }
+			bind:this={ mod._KVCWriteDetail }
+			/>
+	</div>
+
+</OLSKCatalog>
+
 	<KVCWriteMaster
 		KVCWriteMasterListItems={ mod._ValueNotesVisible }
 		KVCWriteMasterListItemSelected={ mod._ValueNoteSelected }
@@ -1384,27 +1472,6 @@ import OLSKPointer from 'OLSKPointer';
 		KVCWriteMasterDelegateItemTitle={ mod.KVCWriteMasterDelegateItemTitle }
 		KVCWriteMasterDelegateItemSnippet={ mod.KVCWriteMasterDelegateItemSnippet }
 		OLSKMobileViewInactive={ mod.OLSKMobileViewInactive }
-		/>
-	
-	<KVCWriteDetail
-		KVCWriteDetailConnected={ mod._ValueCloudIdentity }
-		KVCWriteDetailItemIsRootPage={ mod._ValueNoteSelected && mod.DataSetting('KVCSettingPublicRootPageID') ? mod._ValueNoteSelected.KVCNoteID === mod.DataSetting('KVCSettingPublicRootPageID') : false }
-		KVCWriteDetailPublicURLFor={ mod.KVCWriteDetailPublicURLFor }
-		KVCWriteDetailDispatchBack={ mod.KVCWriteDetailDispatchBack }
-		KVCWriteDetailDispatchJump={ mod.KVCWriteDetailDispatchJump }
-		KVCWriteDetailDispatchArchive={ mod.KVCWriteDetailDispatchArchive }
-		KVCWriteDetailDispatchUnarchive={ mod.KVCWriteDetailDispatchUnarchive }
-		KVCWriteDetailDispatchConnect={ mod.KVCWriteDetailDispatchConnect }
-		KVCWriteDetailDispatchPublish={ mod.KVCWriteDetailDispatchPublish }
-		KVCWriteDetailDispatchRetract={ mod.KVCWriteDetailDispatchRetract }
-		KVCWriteDetailDispatchVersions={ mod.KVCWriteDetailDispatchVersions }
-		KVCWriteDetailDispatchDiscard={ mod.KVCWriteDetailDispatchDiscard }
-		KVCWriteDetailDispatchUpdate={ mod.KVCWriteDetailDispatchUpdate }
-		KVCWriteDetailDispatchSetAsRootPage={ mod.KVCWriteDetailDispatchSetAsRootPage }
-		KVCWriteDetailDispatchOpen={ mod.KVCWriteDetailDispatchOpen }
-		KVCWriteDetailDispatchEscape={ mod.KVCWriteDetailDispatchEscape }
-		OLSKMobileViewInactive={ !mod.OLSKMobileViewInactive }
-		bind:this={ mod.KVCWriteDetailInstance }
 		/>
 </div>
 

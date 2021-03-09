@@ -6,6 +6,23 @@ const uLocalized = function (inputData) {
 	return inputData + '-LOCALIZED';
 };
 
+describe('KVCWriteAccessibilitySummary', function test_KVCWriteAccessibilitySummary() {
+
+	it('throws if not valid', function () {
+		throws(function () {
+			mod.KVCWriteAccessibilitySummary({});
+		}, /KVCErrorInputNotValid/);
+	});
+
+	it('returns string', function() {
+		const item = Math.random().toString();
+		deepEqual(mod.KVCWriteAccessibilitySummary(StubNoteObjectValid({
+			KVCNoteBody: item + '\n' + Math.random().toString(),
+		})), item);
+	});
+
+});
+
 describe('KVCWriteLogicPublicSymbol', function test_KVCWriteLogicPublicSymbol() {
 
 	it('returns string', function() {

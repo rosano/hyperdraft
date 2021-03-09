@@ -2,6 +2,8 @@ const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
 Object.entries({
 	KVCWrite: '.KVCWrite',
+	
+	KVCWriteCreateButton: '.KVCWriteCreateButton',
 
 	KVCWriteViewportFooter: '.KVCWriteViewportFooter',
 	
@@ -18,6 +20,10 @@ describe('KVCWrite_Access', function () {
 
 	it('shows KVCWrite', function () {
 		browser.assert.elements(KVCWrite, 1);
+	});
+
+	it('shows OLSKCatalog', function () {
+		browser.assert.elements('.OLSKCatalog', 1);
 	});
 
 	it('shows KVCWriteMaster', function () {

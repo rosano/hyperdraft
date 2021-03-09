@@ -6,6 +6,11 @@
 	color: var(--KVCCommonForeground);
 }
 
+.KVCWriteDetailContainer {
+	display: flex;
+	height: 100%;
+}
+
 .KVCWriteStorageToolbar {
 	/* AppContainerFlexbox:Child */
 	flex-shrink: 0;
