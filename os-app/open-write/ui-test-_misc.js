@@ -342,22 +342,6 @@ describe('KVCWrite_Misc', function () {
 			browser.assert.hasClass('.OLSKResultsListItem:first-of-type', 'OLSKResultsListItemSelected');
 		});
 
-		context('arrow', function () {
-
-			before(function () {
-				return browser.query('.KVCWriteInputFieldDebug').focus();
-			});
-
-			before(function () {
-				return browser.OLSKFireKeyboardEvent(browser.window, 'ArrowDown');
-			});
-
-			it('sets no KVCWriteMasterListItemSelected', function () {
-				browser.assert.hasClass('.OLSKResultsListItem:first-of-type', 'OLSKResultsListItemSelected');
-			});
-		
-		});
-
 	});
 
 	context('jump', function test_jump () {
