@@ -1,0 +1,35 @@
+<%
+locals.OLSKPageAssets = [
+	'/_shared/__external/normalize.css/normalize.css',
+	'__compiled/ui-style.css',
+];
+locals.OLSKPagePublicConstants = {
+	OLSKSharedPageCurrentLanguage,
+};
+%>
+
+<script src="/<%= OLSKSharedPageControllerSlug %>/__compiled/ui-behaviour.js"></script>
+
+<p>
+	<strong>KVCWriteListItemDispatchCreate</strong>
+	<span id="TestKVCWriteListItemDispatchCreate">0</span>
+	<span id="TestKVCWriteListItemDispatchCreateData">undefined</span>
+</p>
+
+<p>
+	<strong>KVCWriteListItemDispatchClick</strong>
+	<span id="TestKVCWriteListItemDispatchClick">0</span>
+	<span id="TestKVCWriteListItemDispatchClickData">undefined</span>
+</p>
+
+<p>
+	<strong>KVCWriteListItemDispatchArrow</strong>
+	<span id="TestKVCWriteListItemDispatchArrow">0</span>
+	<span id="TestKVCWriteListItemDispatchArrowData">undefined</span>
+</p>
+
+<p>
+	<strong>KVCWriteListItemDispatchFilter</strong>
+	<span id="TestKVCWriteListItemDispatchFilter">0</span>
+	<span id="TestKVCWriteListItemDispatchFilterData">undefined</span>
+</p>
