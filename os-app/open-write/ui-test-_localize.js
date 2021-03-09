@@ -321,7 +321,7 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 				});
 
 				it('alerts if not filled', function () {
-					return browser.assert.OLSKAlertText(function () {
+					return browser.assert.OLSKAlertTextAsync(function () {
 						return browser.OLSKPrompt(function () {
 							return browser.click('.LCHLauncherPipeItem');
 						}, function (dialog) {
@@ -345,7 +345,7 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 				});
 
 				it('alerts if not json', function () {
-					return browser.assert.OLSKAlertText(function () {
+					return browser.assert.OLSKAlertTextAsync(function () {
 						return browser.OLSKPrompt(function () {
 							return browser.click('.LCHLauncherPipeItem');
 						}, function (dialog) {
@@ -369,7 +369,7 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 				});
 
 				it('alerts if not valid', function () {
-					return browser.assert.OLSKAlertText(function () {
+					return browser.assert.OLSKAlertTextAsync(function () {
 						return browser.OLSKPrompt(function () {
 							return browser.click('.LCHLauncherPipeItem');
 						}, function (dialog) {

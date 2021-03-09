@@ -502,16 +502,18 @@ describe('KVCWriteDetail_Misc', function () {
 	});
 	
 	describe('KVCWriteInput', function test_KVCWriteInput() {
+
+		const item = StubNoteObjectValid();
 		
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
-				KVCWriteDetailItem: JSON.stringify(StubNoteObjectValid()),
+				KVCWriteDetailItem: JSON.stringify(item),
 			});
 		});
 
 		it('binds KVCNoteBody', function () {
-			// browser.assert.input('.CodeMirror', 'bravo');
-			browser.assert.input('.KVCWriteInputFieldDebug', 'bravo');
+			// browser.assert.input('.CodeMirror', item.KVCNoteBody);
+			browser.assert.input('.KVCWriteInputFieldDebug', item.KVCNoteBody);
 		});
 
 		context.skip('WKCDetailFocus', function () {
@@ -533,7 +535,7 @@ describe('KVCWriteDetail_Misc', function () {
 		context('input', function () {
 
 			before(function () {
-				browser.assert.text('#TestKVCWriteDetailItem', JSON.stringify(StubNoteObjectValid()));
+				browser.assert.text('#TestKVCWriteDetailItem', JSON.stringify(item));
 			});
 
 			before(function () {
@@ -546,7 +548,7 @@ describe('KVCWriteDetail_Misc', function () {
 			});
 
 			it('updates KVCWriteDetailItem', function () {
-				browser.assert.text('#TestKVCWriteDetailItem', JSON.stringify(StubNoteObjectValid({
+				browser.assert.text('#TestKVCWriteDetailItem', JSON.stringify(Object.assign(item, {
 					KVCNoteBody: 'charlie',
 				})));
 			});
@@ -616,10 +618,12 @@ describe('KVCWriteDetail_Misc', function () {
 	});
 
 	describe('KVCWriteDetailLauncherItemSetAsRootPage', function test_KVCWriteDetailLauncherItemSetAsRootPage() {
+
+		const item = StubNoteObjectValid();
 		
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
-				KVCWriteDetailItem: JSON.stringify(StubNoteObjectValid()),
+				KVCWriteDetailItem: JSON.stringify(item),
 				KVCWriteDetailConnected: true,
 			});
 		});
@@ -635,7 +639,7 @@ describe('KVCWriteDetail_Misc', function () {
 
 		it('sends KVCWriteDetailDispatchSetAsRootPage', function () {
 			browser.assert.text('#TestKVCWriteDetailDispatchSetAsRootPage', '1');
-			browser.assert.text('#TestKVCWriteDetailDispatchSetAsRootPageData', StubNoteObjectValid().KVCNoteID);
+			browser.assert.text('#TestKVCWriteDetailDispatchSetAsRootPageData', item.KVCNoteID);
 		});
 
 	});
