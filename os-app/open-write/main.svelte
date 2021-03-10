@@ -1393,7 +1393,7 @@ import OLSKUIAssets from 'OLSKUIAssets';
 <OLSKCatalog
 	bind:this={ mod._OLSKCatalog }
 
-	OLSKMasterListItemAccessibilitySummaryFor={ KVCWriteLogic.KVCWriteAccessibilitySummary }
+	OLSKMasterListItemAccessibilitySummaryFunction={ KVCWriteLogic.KVCWriteAccessibilitySummary }
 
 	OLSKMasterListFilterFieldPlaceholderText={ OLSKLocalized('KVCWriteFilterFieldText') }
 

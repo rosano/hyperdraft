@@ -63,7 +63,7 @@ import KVCWriteMasterListItem from './submodules/KVCWriteMasterListItem/main.sve
 	OLSKMasterListDispatchArrow={ KVCWriteMasterDispatchArrow }
 	OLSKMasterListDispatchFilter={ KVCWriteMasterDispatchFilter }
 	let:OLSKResultsListItem={ item }
-	OLSKMasterListItemAccessibilitySummaryFor={ (inputData) =>  KVCWriteMasterLogic.KVCWriteMasterTruncatedTitle(KVCWriteMasterDelegateItemTitle(inputData.KVCNoteBody), true) }	
+	OLSKMasterListItemAccessibilitySummaryFunction={ (inputData) =>  KVCWriteMasterLogic.KVCWriteMasterTruncatedTitle(KVCWriteMasterDelegateItemTitle(inputData.KVCNoteBody), true) }	
 	OLSKMasterListClass={ 'KVCWriteMaster' }
 	OLSKMobileViewInactive={ OLSKMobileViewInactive }
 	>
