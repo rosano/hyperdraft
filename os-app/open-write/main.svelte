@@ -1394,19 +1394,18 @@ import OLSKUIAssets from 'OLSKUIAssets';
 	bind:this={ mod._OLSKCatalog }
 
 	OLSKMasterListItemAccessibilitySummaryFunction={ KVCWriteLogic.KVCWriteAccessibilitySummary }
-
 	OLSKMasterListFilterFieldPlaceholderText={ OLSKLocalized('KVCWriteFilterFieldText') }
 
 	_OLSKCatalogExcludeField={ 'KVCNoteIsArchived' }
-
-	OLSKCatalogDispatchClick={ mod.OLSKCatalogDispatchClick }
-	OLSKCatalogDispatchArrow={ mod.OLSKCatalogDispatchArrow }
 	
 	OLSKCatalogSortFunction={ KVCWriteLogic.KVCWriteLogicListSortFunction }
 	OLSKCatalogFilterFunction={ KVCWriteLogic.KVCWriteFilterFunction }
 	OLSKCatalogExactFunction={ KVCWriteLogic.KVCWriteExactFunction }
 
 	_OLSKCatalogDispatchKey={ mod._OLSKCatalogDispatchKey }
+
+	OLSKCatalogDispatchClick={ mod.OLSKCatalogDispatchClick }
+	OLSKCatalogDispatchArrow={ mod.OLSKCatalogDispatchArrow }
 
 	let:OLSKResultsListItem
 	>
