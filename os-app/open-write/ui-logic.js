@@ -32,15 +32,13 @@ const mod = {
 		return !!param1.KVCNoteBody.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').includes(param2.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''));
 	},
 
-	KVCWriteExactFunction (inputData) {
-		if (typeof inputData !== 'string') {
+	KVCWriteExactFunction (param1, param2) {
+		if (typeof param2 !== 'string') {
 			throw new Error('KVCErrorInputNotValid');
 		}
 
-		return function (e) {
-			// Searching and sorting text with diacritical marks in JavaScript | Thread Engineering https://thread.engineering/2018-08-29-searching-and-sorting-text-with-diacritical-marks-in-javascript/
-			return !!KVCTemplate.KVCTemplatePlaintextTitle(e.KVCNoteBody).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').startsWith(inputData.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''));
-		};
+		// Searching and sorting text with diacritical marks in JavaScript | Thread Engineering https://thread.engineering/2018-08-29-searching-and-sorting-text-with-diacritical-marks-in-javascript/
+		return !!KVCTemplate.KVCTemplatePlaintextTitle(param1.KVCNoteBody).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').startsWith(param2.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''));
 	},
 
 	KVCWriteLogicListSort (a, b) {
