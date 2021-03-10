@@ -21,6 +21,13 @@ describe('KVCWriteAccessibilitySummary', function test_KVCWriteAccessibilitySumm
 		})), item);
 	});
 
+	it('truncates long string', function() {
+		const item = Array.from(Array(100)).map(Math.random).join('');
+		deepEqual(mod.KVCWriteAccessibilitySummary(StubNoteObjectValid({
+			KVCNoteBody: item,
+		})), require('OLSKString').OLSKStringSnippet(item));
+	});
+
 });
 
 describe('KVCWriteLogicPublicSymbol', function test_KVCWriteLogicPublicSymbol() {

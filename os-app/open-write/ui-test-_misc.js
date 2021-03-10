@@ -20,30 +20,6 @@ describe('KVCWrite_Misc', function () {
 		browser.assert.attribute('meta[name=apple-mobile-web-app-capable]', 'content', 'yes');
 	});
 
-	context('KVCWrite', function () {
-		
-		it('classes KVCWriteMaster', function () {
-			browser.assert.hasNoClass('.KVCWriteMaster', 'OLSKMobileViewInactive');
-		});
-
-		it('sets KVCWriteMasterListItemSelected', function () {
-			browser.assert.elements('.OLSKResultsListItemSelected', 0);
-		});
-
-		it('classes OLSKMobileViewInactive', function () {
-			browser.assert.hasClass('.KVCWriteDetail', 'OLSKMobileViewInactive');
-		});
-
-		it('sets KVCWriteDetailItem', function () {
-			browser.assert.elements('.OLSKDetailPlaceholder', 1);
-		});
-
-		it('focuses OLSKMasterListFilterField', function() {
-			browser.assert.hasFocus('.OLSKMasterListFilterField');
-		});
-	
-	});
-
 	describe('KVCWriteCreateButton', function test_KVCWriteCreateButton () {
 		
 		before(function() {
@@ -64,22 +40,6 @@ describe('KVCWrite_Misc', function () {
 		
 		it('sets accesskey', function () {
 			browser.assert.attribute(KVCWriteCreateButton, 'accesskey', 'n');
-		});
-
-		context('click', function () {
-			
-			before(function () {
-				browser.assert.text('#TestKVCWriteMasterDispatchCreate', '0');
-			});
-			
-			before(function () {
-				return browser.pressButton(KVCWriteCreateButton);
-			});
-
-			it('sends KVCWriteMasterDispatchCreate', function () {
-				browser.assert.text('#TestKVCWriteMasterDispatchCreate', '1');
-			});
-		
 		});
 	
 	});
@@ -102,22 +62,6 @@ describe('KVCWrite_Misc', function () {
 			return browser.pressButton('.KVCWriteCreateButton');
 		});
 
-		it('classes KVCWriteMaster', function() {
-			browser.assert.hasClass('.KVCWriteMaster', 'OLSKMobileViewInactive');
-		});
-
-		it('sets KVCWriteMasterListItemSelected', function () {
-			browser.assert.elements('.OLSKResultsListItemSelected', 1);
-		});
-
-		it('classes OLSKMobileViewInactive', function() {
-			browser.assert.hasNoClass('.KVCWriteDetail', 'OLSKMobileViewInactive');
-		});
-
-		it('sets KVCWriteDetailItem', function () {
-			browser.assert.elements('.OLSKDetailPlaceholder', 0);
-		});
-
 		it.skip('focus KVCWriteInput', function() {
 			browser.assert.hasClass('.CodeMirror', 'CodeMirror-focused');
 		});
@@ -130,53 +74,9 @@ describe('KVCWrite_Misc', function () {
 			return browser.pressButton('.KVCWriteDetailToolbarBackButton');
 		});
 
-		it('classes KVCWriteMaster', function() {
-			browser.assert.hasNoClass('.KVCWriteMaster', 'OLSKMobileViewInactive');
-		});
-
-		// it('sets KVCWriteMasterListItemSelected', function () {
-		// 	browser.assert.elements('.OLSKResultsListItemSelected', 0);
-		// });
-
-		it('classes OLSKMobileViewInactive', function() {
-			browser.assert.hasClass('.KVCWriteDetail', 'OLSKMobileViewInactive');
-		});
-
-		// it('focuses OLSKMasterListFilterField', function() {
-		// 	browser.assert.hasFocus('.OLSKMasterListFilterField');
-		// });
-
 		// it('sets KVCWriteDetailItem', function () {
 		// 	browser.assert.elements('.OLSKDetailPlaceholder', 1);
 		// });
-
-	});
-
-	context('arrow', function test_arrow () {
-		
-		before(function () {
-			return browser.OLSKFireKeyboardEvent(browser.window, 'ArrowDown');
-		});
-
-		// it('classes OLSKMasterListFocused', function() {
-		// 	browser.assert.hasClass('.KVCWriteMaster', 'OLSKMasterListFocused');
-		// });
-
-		it('classes OLSKMobileViewInactive', function() {
-			browser.assert.hasNoClass('.KVCWriteMaster', 'OLSKMobileViewInactive');
-		});
-
-		it('sets KVCWriteMasterListItemSelected', function () {
-			browser.assert.elements('.OLSKResultsListItemSelected', 1);
-		});
-
-		it('classes OLSKMobileViewInactive', function() {
-			browser.assert.hasClass('.KVCWriteDetail', 'OLSKMobileViewInactive');
-		});
-
-		it('sets KVCWriteDetailItem', function () {
-			browser.assert.elements('.OLSKDetailPlaceholder', 0);
-		});
 
 	});
 
@@ -204,7 +104,7 @@ describe('KVCWrite_Misc', function () {
 				return browser.OLSKFireKeyboardEvent(browser.window, 'Tab');
 			});
 
-			it('classes OLSKMasterListFocused', function() {
+			it.skip('classes OLSKMasterListFocused', function() {
 				browser.assert.hasClass('.KVCWriteMaster', 'OLSKMasterListFocused');
 			});
 
@@ -266,16 +166,9 @@ describe('KVCWrite_Misc', function () {
 			browser.assert.hasNoClass('.KVCWriteMaster', 'OLSKMasterListFocused');
 		});
 
-		it('classes OLSKMobileViewInactive', function() {
-			browser.assert.hasClass('.KVCWriteMaster', 'OLSKMobileViewInactive');
-		});
 
 		it('sets KVCWriteMasterListItemSelected', function () {
 			browser.assert.elements('.OLSKResultsListItemSelected', 1);
-		});
-
-		it('classes OLSKMobileViewInactive', function() {
-			browser.assert.hasNoClass('.KVCWriteDetail', 'OLSKMobileViewInactive');
 		});
 
 		it('sets KVCWriteDetailItem', function () {
@@ -284,110 +177,6 @@ describe('KVCWrite_Misc', function () {
 
 		it.skip('focus KVCWriteInput', function() {
 			browser.assert.hasClass('.CodeMirror', 'CodeMirror-focused');
-		});
-
-	});
-
-	context('filter', function test_filter () {
-
-		before(function () {
-			return browser.pressButton('.KVCWriteCreateButton');
-		});
-
-		before(function () {
-			browser.fill('.KVCWriteInputFieldDebug', 'bravo');
-		});
-
-		context('no match', function () {
-			
-			before(function () {
-				browser.fill('.OLSKMasterListFilterField', 'charlie');
-			});
-
-			it('filters all KVCWriteMasterListItem', function() {
-				browser.assert.elements('.KVCWriteMasterListItem', 0);
-			});
-
-			it('sets KVCWriteDetailItem', function () {
-				browser.assert.elements('.OLSKDetailPlaceholder', 1);
-			});
-		
-		});
-
-		context('partial match', function () {
-
-			before(function () {
-				browser.fill('.OLSKMasterListFilterField', 'a');
-			});
-
-			it('filters partial KVCWriteMasterListItem', function() {
-				browser.assert.elements('.KVCWriteMasterListItem', 2);
-			});
-
-			it('sets KVCWriteMasterListItemSelected', function () {
-				browser.assert.elements('.OLSKResultsListItemSelected', 1);
-			});
-
-			it('sets KVCWriteDetailItem', function () {
-				browser.assert.elements('.OLSKDetailPlaceholder', 0);
-			});
-		
-		});
-
-		context('exact match', function () {
-
-			before(function () {
-				browser.fill('.OLSKMasterListFilterField', 'bravo');
-			});
-
-			it('filters exact KVCWriteMasterListItem', function() {
-				browser.assert.elements('.KVCWriteMasterListItem', 1);
-			});
-
-			it('sets KVCWriteMasterListItemSelected', function () {
-				browser.assert.elements('.OLSKResultsListItemSelected', 1);
-			});
-
-			it('sets KVCWriteDetailItem', function () {
-				browser.assert.elements('.OLSKDetailPlaceholder', 0);
-			});
-		
-		});
-
-		context('clear', function () {
-			
-			before(function () {
-				return browser.pressButton('.OLSKInputWrapperClearButton');
-			});
-
-			it('filters no KVCWriteMasterListItem', function() {
-				browser.assert.elements('.KVCWriteMasterListItem', 2);
-			});
-
-			it('sets KVCWriteMasterListItemSelected', function () {
-				browser.assert.elements('.OLSKResultsListItemSelected', 0);
-			});
-
-			it('sets KVCWriteDetailItem', function () {
-				browser.assert.elements('.OLSKDetailPlaceholder', 1);
-			});
-
-			it('sorts KVCWriteMasterListItem', function () {
-				browser.assert.text('.KVCWriteMasterListItemTitle', 'bravoalfa');
-			});
-		
-		});
-
-	});
-
-	context('selection', function test_selection () {
-		
-		before(function () {
-			return browser.click('.KVCWriteMasterListItem');
-		});
-
-		it('sets KVCWriteMasterListItemSelected', function () {
-			browser.assert.hasClass('.OLSKResultsListItem:first-of-type', 'OLSKResultsListItemSelected');
 		});
 
 	});
@@ -446,6 +235,18 @@ describe('KVCWrite_Misc', function () {
 			browser.assert.attribute('.KVCWriteDetailToolbarPublicLink', 'href', '/FakePublicPath');
 		});
 
+		context('edit', function () {
+
+			before(function () {
+				browser.fill('.KVCWriteInputFieldDebug', 'alfa');
+			});
+
+			it('calls ControlNotePublish', function () {
+				browser.assert.text('#TestControlNotePublishCount', '2');
+			});
+		
+		});
+
 	});
 
 	context('retract', function test_retract () {
@@ -464,126 +265,6 @@ describe('KVCWrite_Misc', function () {
 
 		it('sets KVCNoteIsPublic', function () {
 			browser.assert.elements('.KVCWriteDetailToolbarPublishButton', 1);
-		});
-
-	});
-
-	context('edit', function test_edit () {
-
-		before(function() {
-			return browser.OLSKVisit(kDefaultRoute);
-		});
-		
-		before(function () {
-			return browser.pressButton('.KVCWriteCreateButton');
-		});
-
-		context('title', function () {
-			
-			before(function () {
-				browser.fill('.KVCWriteInputFieldDebug', 'alfa');
-			});
-
-			it('sets OLSKMasterListItemAccessibilitySummaryFunction', function () {
-				browser.assert.attribute('.OLSKMasterListItem', 'aria-label', 'alfa');
-			});
-
-			it('sets KVCWriteMasterListItemTitle', function () {
-				browser.assert.text('.KVCWriteMasterListItemTitle', 'alfa');
-			});
-
-			it('sets KVCWriteMasterListItemSnippet', function () {
-				browser.assert.text('.KVCWriteMasterListItemSnippet', '');
-			});
-		
-		});
-
-		context('body', function () {
-			
-			before(function () {
-				browser.fill('.KVCWriteInputFieldDebug', 'alfa\nbravo');
-			});
-
-			it('sets OLSKMasterListItemAccessibilitySummaryFunction', function () {
-				browser.assert.attribute('.OLSKMasterListItem', 'aria-label', 'alfa');
-			});
-
-			it('sets KVCWriteMasterListItemTitle', function () {
-				browser.assert.text('.KVCWriteMasterListItemTitle', 'alfa');
-			});
-
-			it('sets KVCWriteMasterListItemSnippet', function () {
-				browser.assert.text('.KVCWriteMasterListItemSnippet', 'bravo');
-			});
-		
-		});
-
-		context('long title', function () {
-			
-			before(function () {
-				browser.fill('.KVCWriteInputFieldDebug', 'alfa bravo charlie delta echo foxtrot golf hotel juliet kilos');
-			});
-
-			it('sets OLSKMasterListItemAccessibilitySummaryFunction', function () {
-				browser.assert.attribute('.OLSKMasterListItem', 'aria-label', 'alfa bravo charlie delta echo foxtrot golf hotel juliet…');
-			});
-
-			it('sets KVCWriteMasterListItemTitle', function () {
-				browser.assert.text('.KVCWriteMasterListItemTitle', 'alfa bravo charlie delta echo foxtrot golf hotel juliet');
-			});
-
-			it('sets KVCWriteMasterListItemSnippet', function () {
-				browser.assert.text('.KVCWriteMasterListItemSnippet', '');
-			});
-		
-		});
-
-		context('long body', function () {
-			
-			before(function () {
-				browser.fill('.KVCWriteInputFieldDebug', '\nLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.');
-			});
-
-			it('sets OLSKMasterListItemAccessibilitySummaryFunction', function () {
-				browser.assert.attribute('.OLSKMasterListItem', 'aria-label', '');
-			});
-
-			it('sets KVCWriteMasterListItemTitle', function () {
-				browser.assert.text('.KVCWriteMasterListItemTitle', '');
-			});
-
-			it('sets KVCWriteMasterListItemSnippet', function () {
-				browser.assert.text('.KVCWriteMasterListItemSnippet', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the…');
-			});
-		
-		});
-
-		context('KVCNoteIsMarkedPublic', function () {
-			
-			before(function () {
-				return browser.pressButton('.KVCWriteDetailToolbarConnectButton');
-			});
-
-			before(function () {
-				return browser.OLSKLauncherRun('ZDRLauncherItemFakeDispatchConnected');
-			});
-
-			before(function () {
-				return browser.pressButton('.KVCWriteDetailToolbarPublishButton');
-			});
-
-			before(function () {
-				browser.assert.text('#TestControlNotePublishCount', '1');
-			});
-
-			before(function () {
-				browser.fill('.KVCWriteInputFieldDebug', 'alfa');
-			});
-
-			it('calls ControlNotePublish', function () {
-				browser.assert.text('#TestControlNotePublishCount', '2');
-			});
-		
 		});
 
 	});
@@ -710,7 +391,7 @@ describe('KVCWrite_Misc', function () {
 			browser.assert.attribute('.KVCWriteDetailToolbarPublicLink', 'href', 'FakeCustomDomainBaseURL/');
 		});
 
-		it('calls ControlNotePublish', function () {
+		it.skip('calls ControlNotePublish', function () {
 			browser.assert.text('#TestControlNotePublishCount', '3');
 		});
 	

@@ -21,7 +21,7 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 		});
 
 		it('localizes OLSKMasterListFilterField', function () {
-			browser.assert.attribute('.OLSKMasterListFilterField', 'placeholder', uLocalized('OLSKMasterListFilterFieldText'));
+			browser.assert.attribute('.OLSKMasterListFilterField', 'placeholder', uLocalized('KVCWriteFilterFieldText'));
 		});
 
 		it('localizes KVCWriteCreateButton', function () {
@@ -103,7 +103,7 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 				browser.assert.text('.KVCWriteMasterListItemSnippet', item.split('\n').slice(2).join('\n'));
 			});
 			
-			it('sets KVCNoteBody', function () {
+			it.skip('sets KVCNoteBody', function () {
 				browser.assert.input('.KVCWriteInputFieldDebug', item);
 			});
 		

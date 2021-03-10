@@ -59,10 +59,6 @@ const mod = {
 	ValueNoteSelected (inputData) {
 		mod._KVCWriteDetail.modPublic.KVCWriteDetailSetItem(mod._ValueNoteSelected = inputData);
 
-		if (!inputData) {
-			mod.OLSKMobileViewInactive = false;	
-		}
-
 		mod._OLSKCatalog.modPublic.OLSKCatalogSelect(inputData);
 	},
 
@@ -82,8 +78,6 @@ const mod = {
 	_ValueSaveNoteThrottleMap: {},
 
 	_ValueSavePublishThrottleMap: {},
-
-	OLSKMobileViewInactive: false,
 
 	_IsRunningDemo: false,
 
@@ -120,7 +114,7 @@ const mod = {
 			LCHRecipeSignature: 'KVCWriteLauncherItemShowPublicNotes',
 			LCHRecipeName: OLSKLocalized('KVCWriteLauncherItemShowPublicNotesText'),
 			LCHRecipeCallback: function KVCWriteLauncherItemShowPublicNotes () {
-				mod.ControlFilterWithNoThrottle(KVCWriteLogic.KVCWriteLogicPublicSymbol());
+				mod._OLSKCatalog.modPublic.OLSKCatalogFilterWithNoThrottle(KVCWriteLogic.KVCWriteLogicPublicSymbol());
 
 				document.querySelector('.OLSKMasterListFilterField').focus();
 			},
@@ -250,13 +244,13 @@ const mod = {
 				{
 					LCHRecipeName: 'FakeZDRSchemaDispatchSyncCreateNote',
 					LCHRecipeCallback: async function FakeZDRSchemaDispatchSyncCreateNote () {
-						return mod.ZDRSchemaDispatchSyncCreateNote(await mod._ValueZDRWrap.App.KVCNote.KVCNoteCreate(mod.FakeNoteObjectValid('FakeZDRSchemaDispatchSyncCreateNote')));
+						return mod._OLSKCatalog.modPublic.OLSKCatalogInsert(await mod._ValueZDRWrap.App.KVCNote.KVCNoteCreate(mod.FakeNoteObjectValid('FakeZDRSchemaDispatchSyncCreateNote')));
 					},
 				},
 				{
 					LCHRecipeName: 'FakeZDRSchemaDispatchSyncUpdateNote',
 					LCHRecipeCallback: async function FakeZDRSchemaDispatchSyncUpdateNote () {
-						return mod.ZDRSchemaDispatchSyncUpdateNote(await mod._ValueZDRWrap.App.KVCNote.KVCNoteUpdate(Object.assign(mod._ValueNotesAll.filter(function (e) {
+						return mod._OLSKCatalog.modPublic.OLSKCatalogUpdate(await mod._ValueZDRWrap.App.KVCNote.KVCNoteUpdate(Object.assign(mod._OLSKCatalog.modPublic._OLSKCatalogDataItemsAll().filter(function (e) {
 							return e.KVCNoteBody.match('FakeZDRSchemaDispatchSync');
 						}).pop(), {
 							KVCNoteBody: 'FakeZDRSchemaDispatchSyncUpdateNote',
@@ -266,19 +260,15 @@ const mod = {
 				{
 					LCHRecipeName: 'FakeZDRSchemaDispatchSyncDeleteNote',
 					LCHRecipeCallback: async function FakeZDRSchemaDispatchSyncDeleteNote () {
-						const item = mod._ValueNotesAll.filter(function (e) {
+						return mod._OLSKCatalog.modPublic.OLSKCatalogRemove(await mod._ValueZDRWrap.App.KVCNote.KVCNoteDelete(mod._OLSKCatalog.modPublic._OLSKCatalogDataItemsAll().filter(function (e) {
 							return e.KVCNoteBody.match('FakeZDRSchemaDispatchSync');
-						}).pop();
-						
-						await mod._ValueZDRWrap.App.KVCNote.KVCNoteDelete(item);
-						
-						return mod.ZDRSchemaDispatchSyncDeleteNote(item);
+						}).pop()));
 					},
 				},
 				{
 					LCHRecipeName: 'FakeZDRSchemaDispatchSyncConflictNote',
 					LCHRecipeCallback: async function FakeZDRSchemaDispatchSyncConflictNote () {
-						const item = mod._ValueNotesAll.filter(function (e) {
+						const item = mod._OLSKCatalog.modPublic._OLSKCatalogDataItemsAll().filter(function (e) {
 							return e.KVCNoteBody.match('FakeZDRSchemaDispatchSyncConflictNote');
 						}).pop();
 						
@@ -434,7 +424,7 @@ const mod = {
 
 	async DataExportJSON () {
 		return JSON.stringify(mod._ValueZDRWrap.App.KVCTransport.KVCTransportExport({
-			KVCNote: mod._ValueNotesAll,
+			KVCNote: mod._OLSKCatalog.modPublic._OLSKCatalogDataItemsAll(),
 			KVCSetting: await mod._ValueZDRWrap.App.KVCSetting.KVCSettingList(),
 		}));
 	},
@@ -565,7 +555,9 @@ const mod = {
 			return;
 		}
 
-		mod._KVCWriteDetail.modPublic.KVCWriteDetailSetCursor(inputData.split('\n').length - 1, inputData.split('\n').pop().length);
+		setTimeout(function () {
+			mod._KVCWriteDetail.modPublic.KVCWriteDetailSetCursor(inputData.split('\n').length - 1, inputData.split('\n').pop().length)
+		}, 100);
 	},
 	
 	_ControlHotfixUpdateInPlace(inputData) {
@@ -1013,8 +1005,6 @@ const mod = {
 	KVCWriteDetailDispatchBack () {
 		// mod.ControlNoteSelect(null);
 
-		mod.OLSKMobileViewInactive = false;
-
 		if (!mod.DataIsMobile()) {
 			return;
 		}
@@ -1070,7 +1060,7 @@ const mod = {
 	},
 
 	KVCWriteDetailDispatchUpdate () {
-		mod.ControlNoteSave(mod._OLSKCatalog.modPublic.OLSKCatalogDataItemSelected());
+		mod.ControlNoteSave(mod._OLSKCatalog.modPublic.OLSKCatalogUpdate(mod._OLSKCatalog.modPublic.OLSKCatalogDataItemSelected()));
 	},
 
 	async KVCWriteDetailDispatchSetAsRootPage (inputData) {
@@ -1093,35 +1083,9 @@ const mod = {
 		mod.ControlEscape();
 	},
 
-	ZDRSchemaDispatchSyncCreateNote (inputData) {
-		mod.ValueNotesAll([inputData].concat(mod._ValueNotesAll.filter(function (e) {
-			return e.KVCNoteID !== inputData.KVCNoteID; // @Hotfix Dropbox sending DelegateAdd
-		})), !mod._ValueNoteSelected);
-	},
-
-	ZDRSchemaDispatchSyncUpdateNote (inputData) {
-		if (mod._ValueNoteSelected && mod._ValueNoteSelected.KVCNoteID === inputData.KVCNoteID) {
-			mod._ControlHotfixUpdateInPlace(inputData);
-		}
-
-		mod.ValueNotesAll(mod._ValueNotesAll.map(function (e) {
-			return e.KVCNoteID === inputData.KVCNoteID ? inputData : e;
-		}), !mod._ValueNoteSelected);
-	},
-
-	ZDRSchemaDispatchSyncDeleteNote (inputData) {
-		if (mod._ValueNoteSelected && (mod._ValueNoteSelected.KVCNoteID === inputData.KVCNoteID)) {
-			mod.ControlNoteSelect(null);
-		}
-
-		mod.ValueNotesAll(mod._ValueNotesAll.filter(function (e) {
-			return e.KVCNoteID !== inputData.KVCNoteID;
-		}), false);
-	},
-
 	async ZDRSchemaDispatchSyncConflictNote (inputData) {
 		return setTimeout(async function () {
-			mod.ZDRSchemaDispatchSyncUpdateNote(await mod._ValueZDRWrap.App.KVCNote.KVCNoteUpdate(OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(OLSKRemoteStorage.OLSKRemoteStorageChangeDelegateConflictSelectRecent(inputData))))
+			mod._OLSKCatalog.modPublic.OLSKCatalogUpdate(await mod._ValueZDRWrap.App.KVCNote.KVCNoteUpdate(OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(OLSKRemoteStorage.OLSKRemoteStorageChangeDelegateConflictSelectRecent(inputData))))
 		}, OLSK_SPEC_UI() ? 0 : 500);
 	},
 
@@ -1260,9 +1224,9 @@ const mod = {
 				ZDRScopeCreatorDirectory: 'rCreativ',
 				ZDRScopeSchemas: [
 					Object.assign(KVCNote, {
-						ZDRSchemaDispatchSyncCreate: mod.ZDRSchemaDispatchSyncCreateNote,
-						ZDRSchemaDispatchSyncUpdate: mod.ZDRSchemaDispatchSyncUpdateNote,
-						ZDRSchemaDispatchSyncDelete: mod.ZDRSchemaDispatchSyncDeleteNote,
+						ZDRSchemaDispatchSyncCreate: mod._OLSKCatalog.modPublic.OLSKCatalogInsert,
+						ZDRSchemaDispatchSyncUpdate: mod._OLSKCatalog.modPublic.OLSKCatalogUpdate,
+						ZDRSchemaDispatchSyncDelete: mod._OLSKCatalog.modPublic.OLSKCatalogRemove,
 						ZDRSchemaDispatchSyncConflict: mod.ZDRSchemaDispatchSyncConflictNote,
 					}),
 					KVCSetting,
@@ -1457,7 +1421,6 @@ import OLSKUIAssets from 'OLSKUIAssets';
 			KVCWriteDetailDispatchSetAsRootPage={ mod.KVCWriteDetailDispatchSetAsRootPage }
 			KVCWriteDetailDispatchOpen={ mod.KVCWriteDetailDispatchOpen }
 			KVCWriteDetailDispatchEscape={ mod.KVCWriteDetailDispatchEscape }
-			OLSKMobileViewInactive={ !mod.OLSKMobileViewInactive }
 			bind:this={ mod._KVCWriteDetail }
 			/>
 	</div>

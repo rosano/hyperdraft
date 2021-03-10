@@ -2,8 +2,8 @@ const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
 describe('KVCWriteMasterListItem_Misc', function () {
 
-	const title = Math.random().toString();
-	const body = Math.random().toString();
+	const title = Array.from(Array(100)).map(Math.random).join('');
+	const body = Array.from(Array(100)).map(Math.random).join('');
 
 	before(function() {
 		return browser.OLSKVisit(kDefaultRoute, {
@@ -41,7 +41,7 @@ describe('KVCWriteMasterListItem_Misc', function () {
 		});
 
 		it('calls KVCWriteMasterListItemDispatchTitle', function () {
-			browser.assert.text(KVCWriteMasterListItemTitle, title);
+			browser.assert.text(KVCWriteMasterListItemTitle, require('OLSKString').OLSKStringSnippet(title));
 		});
 	
 	});
@@ -53,7 +53,7 @@ describe('KVCWriteMasterListItem_Misc', function () {
 		});
 
 		it('calls KVCWriteMasterListItemDispatchSnippet', function () {
-			browser.assert.text(KVCWriteMasterListItemSnippet, body);
+			browser.assert.text(KVCWriteMasterListItemSnippet, require('OLSKString').OLSKStringSnippet(body));
 		});
 	
 	});

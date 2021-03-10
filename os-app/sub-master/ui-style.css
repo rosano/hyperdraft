@@ -13,12 +13,3 @@
 :global(.KVCWriteMaster .OLSKMasterListBody .OLSKResultsListItemSelected .KVCWriteMasterListItem) {
 	background: #e6e6e6;
 }
-
-@media screen and (min-width: 760px) {
-
-:global(.KVCWriteMaster.OLSKMasterListFocused .OLSKMasterListBody  .OLSKResultsListItemSelected .KVCWriteMasterListItem) {
-	background: #1a81ff;
-	color: white;
-}
-
-}

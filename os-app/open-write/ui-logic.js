@@ -9,7 +9,7 @@ const mod = {
 			throw new Error('KVCErrorInputNotValid');
 		}
 
-		return KVCTemplate.KVCTemplatePlaintextTitle(inputData.KVCNoteBody);
+		return OLSKString.OLSKStringSnippet(KVCTemplate.KVCTemplatePlaintextTitle(inputData.KVCNoteBody));
 	},
 
 	KVCWriteLogicPublicSymbol () {
