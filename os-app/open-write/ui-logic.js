@@ -15,23 +15,21 @@ const mod = {
 		return 'ᗕ';
 	},
 
-	KVCWriteFilterFunction (inputData) {
-		if (typeof inputData !== 'string') {
+	KVCWriteFilterFunction (param1, param2) {
+		if (typeof param2 !== 'string') {
 			throw new Error('KVCErrorInputNotValid');
 		}
 
-		const isPublic = inputData.match(mod.KVCWriteLogicPublicSymbol());
+		const isPublic = param2.match(mod.KVCWriteLogicPublicSymbol());
 		
-		inputData = inputData.split(mod.KVCWriteLogicPublicSymbol()).join('').trim();
+		param2 = param2.split(mod.KVCWriteLogicPublicSymbol()).join('').trim();
 
-		return function (e) {
-			if (isPublic && !e.KVCNoteIsPublic) {
-				return false;
-			}
+		if (isPublic && !param1.KVCNoteIsPublic) {
+			return false;
+		}
 
-			// Searching and sorting text with diacritical marks in JavaScript | Thread Engineering https://thread.engineering/2018-08-29-searching-and-sorting-text-with-diacritical-marks-in-javascript/
-			return !!e.KVCNoteBody.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').includes(inputData.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''));
-		};
+		// Searching and sorting text with diacritical marks in JavaScript | Thread Engineering https://thread.engineering/2018-08-29-searching-and-sorting-text-with-diacritical-marks-in-javascript/
+		return !!param1.KVCNoteBody.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').includes(param2.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''));
 	},
 
 	KVCWriteExactFunction (inputData) {

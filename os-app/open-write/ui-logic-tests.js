@@ -33,82 +33,74 @@ describe('KVCWriteLogicPublicSymbol', function test_KVCWriteLogicPublicSymbol() 
 
 describe('KVCWriteFilterFunction', function test_KVCWriteFilterFunction() {
 
-	it('throws error if not string', function() {
+	it('throws error param2 if not string', function() {
 		throws(function() {
-			mod.KVCWriteFilterFunction(null);
+			mod.KVCWriteFilterFunction({}, null);
 		}, /KVCErrorInputNotValid/);
 	});
 
-	it('returns function', function() {
-		deepEqual(typeof mod.KVCWriteFilterFunction('alfa'), 'function');
+	it('returns false if no match', function() {
+		deepEqual(mod.KVCWriteFilterFunction({
+			KVCNoteBody: 'alfa',
+		}, 'bravo'), false);
 	});
 
-	context('function', function () {
+	it('returns true', function() {
+		deepEqual(mod.KVCWriteFilterFunction({
+			KVCNoteBody: 'alfa',
+		}, 'alfa'), true);
+	});
+
+	it('matches partial', function() {
+		deepEqual(mod.KVCWriteFilterFunction({
+			KVCNoteBody: 'alfa',
+		}, 'alf'), true);
+	});
+
+	it('matches case insensitive', function() {
+		deepEqual(mod.KVCWriteFilterFunction({
+			KVCNoteBody: 'alfa',
+		}, 'ALF'), true);
+	});
+
+	it('matches diacritic insensitive', function() {
+		deepEqual(mod.KVCWriteFilterFunction({
+			KVCNoteBody: 'alfá',
+		}, 'alfa'), true);
+	});
+
+	context('KVCWriteLogicPublicSymbol', function () {
+		
+		it('matches whole string', function() {
+			deepEqual(mod.KVCWriteFilterFunction({
+				KVCNoteBody: Math.random().toString(),
+				KVCNoteIsPublic: true,
+			}, mod.KVCWriteLogicPublicSymbol()), true);
+		});
 
 		it('returns false if no match', function() {
-			deepEqual(mod.KVCWriteFilterFunction('bravo')({
-				KVCNoteBody: 'alfa',
-			}), false);
+			deepEqual(mod.KVCWriteFilterFunction({
+				KVCNoteBody: Math.random().toString(),
+				KVCNoteIsPublic: true,
+			}, mod.KVCWriteLogicPublicSymbol() + Math.random().toString()), false);
 		});
 
-		it('returns true', function() {
-			deepEqual(mod.KVCWriteFilterFunction('alfa')({
-				KVCNoteBody: 'alfa',
-			}), true);
+		it('matches non symbol', function() {
+			const KVCNoteBody = Math.random().toString();
+			deepEqual(mod.KVCWriteFilterFunction({
+				KVCNoteBody,
+				KVCNoteIsPublic: true,
+			}, mod.KVCWriteLogicPublicSymbol() + KVCNoteBody), true);
 		});
 
-		it('matches partial', function() {
-			deepEqual(mod.KVCWriteFilterFunction('alf')({
-				KVCNoteBody: 'alfa',
-			}), true);
+		it('matches non symbol with space', function() {
+			const KVCNoteBody = Math.random().toString();
+			deepEqual(mod.KVCWriteFilterFunction({
+				KVCNoteBody,
+				KVCNoteIsPublic: true,
+			}, mod.KVCWriteLogicPublicSymbol() + ' ' +KVCNoteBody), true);
 		});
-
-		it('matches case insensitive', function() {
-			deepEqual(mod.KVCWriteFilterFunction('ALF')({
-				KVCNoteBody: 'alfa',
-			}), true);
-		});
-
-		it('matches diacritic insensitive', function() {
-			deepEqual(mod.KVCWriteFilterFunction('alfa')({
-				KVCNoteBody: 'alfá',
-			}), true);
-		});
-
-		context('KVCWriteLogicPublicSymbol', function () {
-			
-			it('matches whole string', function() {
-				deepEqual(mod.KVCWriteFilterFunction(mod.KVCWriteLogicPublicSymbol())({
-					KVCNoteBody: Math.random().toString(),
-					KVCNoteIsPublic: true,
-				}), true);
-			});
-
-			it('returns false if no match', function() {
-				deepEqual(mod.KVCWriteFilterFunction(mod.KVCWriteLogicPublicSymbol() + Math.random().toString())({
-					KVCNoteBody: Math.random().toString(),
-					KVCNoteIsPublic: true,
-				}), false);
-			});
-
-			it('matches non symbol', function() {
-				const KVCNoteBody = Math.random().toString();
-				deepEqual(mod.KVCWriteFilterFunction(mod.KVCWriteLogicPublicSymbol() + KVCNoteBody)({
-					KVCNoteBody,
-					KVCNoteIsPublic: true,
-				}), true);
-			});
-
-			it('matches non symbol with space', function() {
-				const KVCNoteBody = Math.random().toString();
-				deepEqual(mod.KVCWriteFilterFunction(mod.KVCWriteLogicPublicSymbol() + ' ' +KVCNoteBody)({
-					KVCNoteBody,
-					KVCNoteIsPublic: true,
-				}), true);
-			});
-		
-		});
-
+	
 	});
 
 });
