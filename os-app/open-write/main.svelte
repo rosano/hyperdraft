@@ -27,7 +27,7 @@ const mod = {
 
 	_ValueIsLoading: true,
 
-	_RevealArchiveIsVisible: false,
+	_RevealArchiveIsVisible: true,
 	_ValueArchivedCount: 0,
 	ValueArchivedCount (inputData) {
 		mod._ValueArchivedCount = inputData.filter(function (e) {
@@ -826,6 +826,10 @@ const mod = {
 
 	// MESSAGE
 
+	_OLSKCatalogDispatchKey (inputData) {
+		return inputData.KVCNoteID;
+	},
+
 	OLSKCatalogDispatchClick (inputData) {
 		mod.ControlNoteSelect(inputData);
 	},
@@ -834,8 +838,12 @@ const mod = {
 		mod._OLSKCatalog.modPublic.OLSKCatalogSelect(inputData);
 	},
 
-	_OLSKCatalogDispatchKey (inputData) {
-		return inputData.KVCNoteID;
+	OLSKCatalogDispatchArchivedHide () {
+		mod._RevealArchiveIsVisible = true;
+	},
+
+	OLSKCatalogDispatchArchivedShow () {
+		mod._RevealArchiveIsVisible = false;
 	},
 
 	OLSKAppToolbarDispatchApropos () {
@@ -980,8 +988,6 @@ const mod = {
 
 	KVCWriteMasterDispatchRevealArchive () {
 		mod._RevealArchiveIsVisible = false;
-
-		mod.ValueNotesVisible(mod._ValueNotesAll);
 	},
 
 	KVCWriteMasterDelegateItemTitle (inputData) {
@@ -1396,7 +1402,7 @@ import OLSKUIAssets from 'OLSKUIAssets';
 	OLSKMasterListItemAccessibilitySummaryFunction={ KVCWriteLogic.KVCWriteAccessibilitySummary }
 	OLSKMasterListFilterFieldPlaceholderText={ OLSKLocalized('KVCWriteFilterFieldText') }
 
-	_OLSKCatalogExcludeField={ 'KVCNoteIsArchived' }
+	_OLSKCatalogArchiveField={ 'KVCNoteIsArchived' }
 	
 	OLSKCatalogSortFunction={ KVCWriteLogic.KVCWriteLogicListSortFunction }
 	OLSKCatalogFilterFunction={ KVCWriteLogic.KVCWriteFilterFunction }
@@ -1406,6 +1412,8 @@ import OLSKUIAssets from 'OLSKUIAssets';
 
 	OLSKCatalogDispatchClick={ mod.OLSKCatalogDispatchClick }
 	OLSKCatalogDispatchArrow={ mod.OLSKCatalogDispatchArrow }
+	OLSKCatalogDispatchArchivedHide={ mod.OLSKCatalogDispatchArchivedHide }
+	OLSKCatalogDispatchArchivedShow={ mod.OLSKCatalogDispatchArchivedShow }
 
 	let:OLSKResultsListItem
 	>
@@ -1419,7 +1427,7 @@ import OLSKUIAssets from 'OLSKUIAssets';
 	</div>
 
 	<div class="OLSKMasterListBodyTail" slot="OLSKMasterListBodyTail">{#if mod._RevealArchiveIsVisible }
-		<button class="KVCWriteMasterRevealArchiveButton OLSKDecorPress" on:click={ mod.KVCWriteMasterDispatchRevealArchive }>{ OLSKLocalized('KVCWriteMasterRevealArchiveButtonText') }</button>
+		<button class="KVCWriteMasterRevealArchiveButton OLSKDecorPress" on:click={ mod._OLSKCatalog.modPublic.OLSKCatalogRevealArchive }>{ OLSKLocalized('KVCWriteMasterRevealArchiveButtonText') }</button>
 	{/if}</div>
 
 	<!-- LIST ITEM -->

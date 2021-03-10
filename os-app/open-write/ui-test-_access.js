@@ -15,7 +15,7 @@ Object.entries({
 	return global[e.shift()]  = e.pop();
 });
 
-describe.only('KVCWrite_Access', function () {
+describe('KVCWrite_Access', function () {
 
 	before(function() {
 		return browser.OLSKVisit(kDefaultRoute);
@@ -237,56 +237,6 @@ describe.only('KVCWrite_Access', function () {
 
 			it('shows KVCWriteLauncherItemRevealArchive', function () {
 				return browser.assert.OLSKLauncherItems('KVCWriteLauncherItemRevealArchive', 1);
-			});
-		
-		});
-
-		context('filter', function () {
-
-			before(function () {
-				return browser.OLSKFireKeyboardEvent(browser.window, 'Escape');
-			});
-
-			before(function () {
-				browser.fill('.OLSKMasterListFilterField', 'a');
-			});
-
-			it('hides KVCWriteMasterRevealArchiveButton', function () {
-				browser.assert.elements('.KVCWriteMasterRevealArchiveButton', 0);
-			});
-
-			context('clear', function () {
-				
-				before(function () {
-					return browser.pressButton('.OLSKInputWrapperClearButton');
-				});
-
-				it('shows KVCWriteMasterRevealArchiveButton', function () {
-					browser.assert.elements('.KVCWriteMasterRevealArchiveButton', 1);
-				});
-			
-			});
-
-		});
-
-		context('discard_archived', function () {
-			
-			before(function () {
-				return browser.pressButton('.KVCWriteMasterRevealArchiveButton');
-			});
-
-			before(function () {
-				return browser.click('.KVCWriteMasterListItem');
-			});
-
-			before(async function () {
-				return browser.OLSKConfirm(function () {
-					return browser.pressButton('.KVCWriteDetailToolbarDiscardButton');
-				});
-			});
-
-			it('hides KVCWriteMasterRevealArchiveButton', function () {
-				browser.assert.elements('.KVCWriteMasterRevealArchiveButton', 0);
 			});
 		
 		});
