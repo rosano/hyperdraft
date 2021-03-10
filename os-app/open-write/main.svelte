@@ -1403,7 +1403,7 @@ import OLSKUIAssets from 'OLSKUIAssets';
 	OLSKCatalogDispatchArrow={ mod.OLSKCatalogDispatchArrow }
 	
 	OLSKCatalogSortFunction={ KVCWriteLogic.KVCWriteLogicListSortFunction }
-	OLSKCatalogDispatchFilterFunction={ KVCWriteLogic.KVCWriteFilterFunction }
+	OLSKCatalogFilterFunction={ KVCWriteLogic.KVCWriteFilterFunction }
 	OLSKCatalogDispatchExactFunction={ KVCWriteLogic.KVCWriteExactFunction }
 
 	_OLSKCatalogDispatchKey={ mod._OLSKCatalogDispatchKey }
