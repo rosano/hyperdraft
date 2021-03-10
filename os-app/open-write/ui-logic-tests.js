@@ -124,7 +124,7 @@ describe('KVCWriteExactFunction', function test_KVCWriteExactFunction() {
 
 });
 
-describe('KVCWriteLogicListSort', function test_KVCWriteLogicListSort() {
+describe('KVCWriteLogicListSortFunction', function test_KVCWriteLogicListSortFunction() {
 
 	it('sorts by KVCNoteModificationDate descending', function() {
 		const item1 = {
@@ -134,7 +134,7 @@ describe('KVCWriteLogicListSort', function test_KVCWriteLogicListSort() {
 			KVCNoteModificationDate: new Date(1),
 		};
 
-		deepEqual([item1, item2].sort(mod.KVCWriteLogicListSort), [item2, item1]);
+		deepEqual([item1, item2].sort(mod.KVCWriteLogicListSortFunction), [item2, item1]);
 	});
 
 	it('sorts by KVCNoteCreationDate descending', function() {
@@ -145,7 +145,7 @@ describe('KVCWriteLogicListSort', function test_KVCWriteLogicListSort() {
 			KVCNoteCreationDate: new Date(1),
 		};
 
-		deepEqual([item1, item2].sort(mod.KVCWriteLogicListSort), [item2, item1]);
+		deepEqual([item1, item2].sort(mod.KVCWriteLogicListSortFunction), [item2, item1]);
 	});
 
 	it('sorts KVCNoteIsArchived below others', function() {
@@ -157,7 +157,7 @@ describe('KVCWriteLogicListSort', function test_KVCWriteLogicListSort() {
 			KVCNoteIsArchived: true,
 		};
 
-		deepEqual([item1, item2].sort(mod.KVCWriteLogicListSort), [item1, item2]);
+		deepEqual([item1, item2].sort(mod.KVCWriteLogicListSortFunction), [item1, item2]);
 	});
 
 });

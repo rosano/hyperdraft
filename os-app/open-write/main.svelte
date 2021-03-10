@@ -52,7 +52,7 @@ const mod = {
 			});
 		}
 
-		mod._ValueNotesVisible = shouldSort ? items.sort(KVCWriteLogic.KVCWriteLogicListSort) : items;
+		mod._ValueNotesVisible = shouldSort ? items.sort(KVCWriteLogic.KVCWriteLogicListSortFunction) : items;
 	},
 	
 	_ValueNoteSelected: undefined,
@@ -1402,7 +1402,7 @@ import OLSKUIAssets from 'OLSKUIAssets';
 	OLSKCatalogDispatchClick={ mod.OLSKCatalogDispatchClick }
 	OLSKCatalogDispatchArrow={ mod.OLSKCatalogDispatchArrow }
 	
-	OLSKCatalogDispatchSortFunction={ KVCWriteLogic.KVCWriteLogicListSort }
+	OLSKCatalogDispatchSortFunction={ KVCWriteLogic.KVCWriteLogicListSortFunction }
 	OLSKCatalogDispatchFilterFunction={ KVCWriteLogic.KVCWriteFilterFunction }
 	OLSKCatalogDispatchExactFunction={ KVCWriteLogic.KVCWriteExactFunction }
 

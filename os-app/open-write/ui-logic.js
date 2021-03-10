@@ -40,7 +40,7 @@ const mod = {
 		return OLSKString.OLSKStringMatch(param2, KVCTemplate.KVCTemplatePlaintextTitle(param1.KVCNoteBody), 'startsWith');
 	},
 
-	KVCWriteLogicListSort (a, b) {
+	KVCWriteLogicListSortFunction (a, b) {
 		if (a.KVCNoteIsArchived !== b.KVCNoteIsArchived) {
 			return a.KVCNoteIsArchived ? 1 : -1;
 		}
