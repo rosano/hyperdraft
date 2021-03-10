@@ -1,3 +1,4 @@
+import OLSKString from 'OLSKString';
 import KVCNote from '../_shared/KVCNote/main.js';
 import KVCTemplate from '../_shared/KVCTemplate/main.js';
 
@@ -28,8 +29,7 @@ const mod = {
 			return false;
 		}
 
-		// Searching and sorting text with diacritical marks in JavaScript | Thread Engineering https://thread.engineering/2018-08-29-searching-and-sorting-text-with-diacritical-marks-in-javascript/
-		return !!param1.KVCNoteBody.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').includes(param2.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''));
+		return OLSKString.OLSKStringMatch(param2, param1.KVCNoteBody);
 	},
 
 	KVCWriteExactFunction (param1, param2) {
@@ -37,8 +37,7 @@ const mod = {
 			throw new Error('KVCErrorInputNotValid');
 		}
 
-		// Searching and sorting text with diacritical marks in JavaScript | Thread Engineering https://thread.engineering/2018-08-29-searching-and-sorting-text-with-diacritical-marks-in-javascript/
-		return !!KVCTemplate.KVCTemplatePlaintextTitle(param1.KVCNoteBody).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').startsWith(param2.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''));
+		return OLSKString.OLSKStringMatch(param2, KVCTemplate.KVCTemplatePlaintextTitle(param1.KVCNoteBody), 'startsWith');
 	},
 
 	KVCWriteLogicListSort (a, b) {
