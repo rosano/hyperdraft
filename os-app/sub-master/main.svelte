@@ -69,9 +69,7 @@ import KVCWriteMasterListItem from './submodules/KVCWriteMasterListItem/main.sve
 	>
 	<div slot="OLSKMasterListToolbarTail">
 		<div class="OLSKToolbarElementGroup">
-			<button class="KVCWriteMasterCreateButton OLSKDecorButtonNoStyle OLSKDecorTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteMasterCreateButtonText') } on:click={ mod.InterfaceCreateButtonDidClick } accesskey="n">
-				<div class="KVCWriteMasterCreateButtonImage">{@html _OLSKSharedCreate }</div>
-			</button>
+			
 		</div>
 	</div>
 
@@ -82,10 +80,6 @@ import KVCWriteMasterListItem from './submodules/KVCWriteMasterListItem/main.sve
 			KVCWriteMasterListItemDispatchSnippet={ (inputData) => KVCWriteMasterDelegateItemSnippet(inputData) }
 			/>
 	</div>
-
-	<div class="OLSKMasterListBodyTail" slot="OLSKMasterListBodyTail">{#if KVCWriteMasterRevealArchiveIsVisible }
-		<button class="KVCWriteMasterRevealArchiveButton OLSKDecorPress" on:click={ KVCWriteMasterDispatchRevealArchive }>{ OLSKLocalized('KVCWriteMasterRevealArchiveButtonText') }</button>
-	{/if}</div>
 </OLSKMasterList>	
 
 <style src="./ui-style.css"></style>

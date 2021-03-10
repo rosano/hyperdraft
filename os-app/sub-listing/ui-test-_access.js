@@ -1,51 +1,51 @@
 const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
 Object.entries({
-	KVCWriteListItem: '.KVCWriteListItem',
+	KVCWriteMasterListItem: '.KVCWriteMasterListItem',
 
-	KVCWriteListItemIsPublic: '.KVCWriteListItemIsPublic',
-	KVCWriteListItemTitle: '.KVCWriteListItemTitle',
-	KVCWriteListItemSnippet: '.KVCWriteListItemSnippet',
+	KVCWriteMasterListItemIsPublic: '.KVCWriteMasterListItemIsPublic',
+	KVCWriteMasterListItemTitle: '.KVCWriteMasterListItemTitle',
+	KVCWriteMasterListItemSnippet: '.KVCWriteMasterListItemSnippet',
 }).map(function (e) {
 	return global[e.shift()]  = e.pop();
 });
 
-describe('KVCWriteListItem_Access', function () {
+describe('KVCWriteMasterListItem_Access', function () {
 
 	before(function() {
 		return browser.OLSKVisit(kDefaultRoute, {
-			KVCWriteListItemObject: JSON.stringify(StubNoteObjectValid()),
+			KVCWriteMasterListItemObject: JSON.stringify(StubNoteObjectValid()),
 		});
 	});
 
-	it('shows KVCWriteListItem', function () {
-		browser.assert.elements(KVCWriteListItem, 1);
+	it('shows KVCWriteMasterListItem', function () {
+		browser.assert.elements(KVCWriteMasterListItem, 1);
 	});
 
-	it('hides KVCWriteListItemIsPublic', function () {
-		browser.assert.elements(KVCWriteListItemIsPublic, 0);
+	it('hides KVCWriteMasterListItemIsPublic', function () {
+		browser.assert.elements(KVCWriteMasterListItemIsPublic, 0);
 	});
 
-	it('shows KVCWriteListItemTitle', function () {
-		browser.assert.elements(KVCWriteListItemTitle, 1);
+	it('shows KVCWriteMasterListItemTitle', function () {
+		browser.assert.elements(KVCWriteMasterListItemTitle, 1);
 	});
 
-	it('shows KVCWriteListItemSnippet', function () {
-		browser.assert.elements(KVCWriteListItemSnippet, 1);
+	it('shows KVCWriteMasterListItemSnippet', function () {
+		browser.assert.elements(KVCWriteMasterListItemSnippet, 1);
 	});
 
 	context('KVCNoteIsPublic', function () {
 		
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
-				KVCWriteListItemObject: JSON.stringify(StubNoteObjectValid({
+				KVCWriteMasterListItemObject: JSON.stringify(StubNoteObjectValid({
 					KVCNoteIsPublic: true,
 				})),
 			});
 		});
 
-		it('shows KVCWriteListItemIsPublic', function () {
-			browser.assert.elements(KVCWriteListItemIsPublic, 1);
+		it('shows KVCWriteMasterListItemIsPublic', function () {
+			browser.assert.elements(KVCWriteMasterListItemIsPublic, 1);
 		});
 	
 	});

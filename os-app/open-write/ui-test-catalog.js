@@ -13,7 +13,7 @@ describe('KVCWrite_Catalog', function () {
 		});
 
 		it('adds item', function () {
-			browser.assert.elements('.KVCWriteListItem', 1);
+			browser.assert.elements('.KVCWriteMasterListItem', 1);
 		});
 	
 	});
@@ -29,7 +29,7 @@ describe('KVCWrite_Catalog', function () {
 		});
 
 		before(function () {
-			return browser.click('.KVCWriteListItem');
+			return browser.click('.KVCWriteMasterListItem');
 		});
 
 		it('selects item', function () {
@@ -67,7 +67,7 @@ describe('KVCWrite_Catalog', function () {
 			});
 
 			it('removes item', function () {
-				browser.assert.elements('.KVCWriteListItem', 0);
+				browser.assert.elements('.KVCWriteMasterListItem', 0);
 			});
 		
 		});

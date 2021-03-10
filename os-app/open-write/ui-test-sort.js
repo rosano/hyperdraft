@@ -7,7 +7,7 @@ describe('KVCWrite_Sort', function () {
 	});
 
 	before(function () {
-		return browser.pressButton('.KVCWriteMasterCreateButton');
+		return browser.pressButton('.KVCWriteCreateButton');
 	});
 
 	before(function () {
@@ -15,7 +15,7 @@ describe('KVCWrite_Sort', function () {
 	});
 
 	before(function () {
-		return browser.pressButton('.KVCWriteMasterCreateButton');
+		return browser.pressButton('.KVCWriteCreateButton');
 	});
 
 	before(function () {
@@ -23,7 +23,7 @@ describe('KVCWrite_Sort', function () {
 	});
 
 	before(function () {
-		return browser.pressButton('.KVCWriteMasterCreateButton');
+		return browser.pressButton('.KVCWriteCreateButton');
 	});
 
 	before(function () {

@@ -156,54 +156,6 @@ describe('KVCWriteMaster_Misc', function () {
 
 	});
 
-	describe('KVCWriteMasterCreateButton', function test_KVCWriteMasterCreateButton () {
-		
-		before(function() {
-			return browser.OLSKVisit(kDefaultRoute);
-		});
-
-		it('classes OLSKDecorButtonNoStyle', function () {
-			browser.assert.hasClass(KVCWriteMasterCreateButton, 'OLSKDecorButtonNoStyle');
-		});
-
-		it('classes OLSKDecorTappable', function () {
-			browser.assert.hasClass(KVCWriteMasterCreateButton, 'OLSKDecorTappable');
-		});
-
-		it('classes OLSKToolbarButton', function () {
-			browser.assert.hasClass(KVCWriteMasterCreateButton, 'OLSKToolbarButton');
-		});
-		
-		it('sets accesskey', function () {
-			browser.assert.attribute(KVCWriteMasterCreateButton, 'accesskey', 'n');
-		});
-
-		context('click', function () {
-			
-			before(function () {
-				browser.assert.text('#TestKVCWriteMasterDispatchCreate', '0');
-			});
-			
-			before(function () {
-				return browser.pressButton(KVCWriteMasterCreateButton);
-			});
-
-			it('sends KVCWriteMasterDispatchCreate', function () {
-				browser.assert.text('#TestKVCWriteMasterDispatchCreate', '1');
-			});
-		
-		});
-	
-	});
-
-	describe('KVCWriteMasterCreateButtonImage', function test_KVCWriteMasterCreateButtonImage () {
-
-		it('sets src', function () {
-			browser.assert.elements(`${ KVCWriteMasterCreateButtonImage } #_OLSKSharedCreate`, 1);
-		});
-	
-	});
-
 	describe('OLSKMasterListItem', function test_OLSKMasterListItem() {
 		
 		before(function() {

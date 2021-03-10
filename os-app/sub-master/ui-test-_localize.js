@@ -15,13 +15,9 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 		});
 	
 		it.skip('localizes KVCWriteMasterFilterField', function () {
-			browser.assert.attribute(KVCWriteMasterFilterField, 'placeholder', uLocalized('KVCWriteMasterFilterFieldText'));
+			browser.assert.attribute(KVCWriteMasterFilterField, 'placeholder', uLocalized('KVCWriteFilterFieldText'));
 		});
 	
-		it('localizes KVCWriteMasterCreateButton', function () {
-			browser.assert.attribute(KVCWriteMasterCreateButton, 'title', uLocalized('KVCWriteMasterCreateButtonText'));
-		});
-
 		context('KVCWriteMasterRevealArchiveIsVisible', function() {
 			
 			before(function() {

@@ -7,7 +7,7 @@ describe('KVCWrite_Sync', function () {
 	});
 
 	before(function () {
-		return browser.pressButton('.KVCWriteMasterCreateButton');
+		return browser.pressButton('.KVCWriteCreateButton');
 	});
 
 	before(function () {
@@ -241,7 +241,7 @@ describe('KVCWrite_Sync', function () {
 	describe('ZDRSchemaDispatchSyncConflictNote', function test_ZDRSchemaDispatchSyncConflictNote () {
 
 		before(function () {
-			return browser.pressButton('.KVCWriteMasterCreateButton');
+			return browser.pressButton('.KVCWriteCreateButton');
 		});
 
 		before(function () {

@@ -1,59 +1,59 @@
 const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
-describe('KVCWriteListItem_Misc', function () {
+describe('KVCWriteMasterListItem_Misc', function () {
 
 	const title = Math.random().toString();
 	const body = Math.random().toString();
 
 	before(function() {
 		return browser.OLSKVisit(kDefaultRoute, {
-			KVCWriteListItemObject: JSON.stringify(StubNoteObjectValid({
+			KVCWriteMasterListItemObject: JSON.stringify(StubNoteObjectValid({
 				KVCNoteBody: title + '\n' + body,
 				KVCNoteIsPublic: true,
 			})),
 		});
 	});
 
-	describe('KVCWriteListItem', function test_KVCWriteListItem () {
+	describe('KVCWriteMasterListItem', function test_KVCWriteMasterListItem () {
 
 		it('classes OLSKCommonEdgeBottom', function () {
-			browser.assert.hasClass(KVCWriteListItem, 'OLSKCommonEdgeBottom');
+			browser.assert.hasClass(KVCWriteMasterListItem, 'OLSKCommonEdgeBottom');
 		});
 		
 	});
 
-	describe('KVCWriteListItemIsPublic', function test_KVCWriteListItemIsPublic () {
+	describe('KVCWriteMasterListItemIsPublic', function test_KVCWriteMasterListItemIsPublic () {
 		
 		it('sets aria-hidden', function () {
-			browser.assert.attribute(KVCWriteListItemIsPublic, 'aria-hidden', 'true');
+			browser.assert.attribute(KVCWriteMasterListItemIsPublic, 'aria-hidden', 'true');
 		});
 
 		it('sets text', function () {
-			browser.assert.text(KVCWriteListItemIsPublic, require('../open-write/ui-logic.js').default.KVCWriteLogicPublicSymbol());
+			browser.assert.text(KVCWriteMasterListItemIsPublic, require('../open-write/ui-logic.js').default.KVCWriteLogicPublicSymbol());
 		});
 	
 	});
 
-	describe('KVCWriteListItemTitle', function test_KVCWriteListItemTitle () {
+	describe('KVCWriteMasterListItemTitle', function test_KVCWriteMasterListItemTitle () {
 		
 		it('sets aria-hidden', function () {
-			browser.assert.attribute(KVCWriteListItemTitle, 'aria-hidden', 'true');
+			browser.assert.attribute(KVCWriteMasterListItemTitle, 'aria-hidden', 'true');
 		});
 
-		it('calls KVCWriteListItemDispatchTitle', function () {
-			browser.assert.text(KVCWriteListItemTitle, title);
+		it('calls KVCWriteMasterListItemDispatchTitle', function () {
+			browser.assert.text(KVCWriteMasterListItemTitle, title);
 		});
 	
 	});
 
-	describe('KVCWriteListItemSnippet', function test_KVCWriteListItemSnippet () {
+	describe('KVCWriteMasterListItemSnippet', function test_KVCWriteMasterListItemSnippet () {
 		
 		it('sets aria-hidden', function () {
-			browser.assert.attribute(KVCWriteListItemSnippet, 'aria-hidden', 'true');
+			browser.assert.attribute(KVCWriteMasterListItemSnippet, 'aria-hidden', 'true');
 		});
 
-		it('calls KVCWriteListItemDispatchSnippet', function () {
-			browser.assert.text(KVCWriteListItemSnippet, body);
+		it('calls KVCWriteMasterListItemDispatchSnippet', function () {
+			browser.assert.text(KVCWriteMasterListItemSnippet, body);
 		});
 	
 	});
@@ -62,14 +62,14 @@ describe('KVCWriteListItem_Misc', function () {
 		
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
-				KVCWriteListItemObject: JSON.stringify(StubNoteObjectValid({
+				KVCWriteMasterListItemObject: JSON.stringify(StubNoteObjectValid({
 					KVCNoteIsArchived: true,
 				})),
 			});
 		});
 
-		it('classes KVCWriteListItemArchived', function () {
-			browser.assert.hasClass(KVCWriteListItem, 'KVCWriteListItemArchived');
+		it('classes KVCWriteMasterListItemArchived', function () {
+			browser.assert.hasClass(KVCWriteMasterListItem, 'KVCWriteMasterListItemArchived');
 		});
 	
 	});

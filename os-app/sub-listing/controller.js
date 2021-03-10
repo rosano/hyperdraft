@@ -1,8 +1,8 @@
 exports.OLSKControllerRoutes = function() {
 	return [{
-		OLSKRoutePath: '/stub/KVCWriteListItem',
+		OLSKRoutePath: '/stub/KVCWriteMasterListItem',
 		OLSKRouteMethod: 'get',
-		OLSKRouteSignature: 'KVCWriteListItemStubRoute',
+		OLSKRouteSignature: 'KVCWriteMasterListItemStubRoute',
 		OLSKRouteFunction (req, res, next) {
 			return res.OLSKExpressLayoutRender(require('path').join(__dirname, 'stub-view'));
 		},

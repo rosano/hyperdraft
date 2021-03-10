@@ -43,6 +43,54 @@ describe('KVCWrite_Misc', function () {
 		});
 	
 	});
+
+	describe('KVCWriteCreateButton', function test_KVCWriteCreateButton () {
+		
+		before(function() {
+			return browser.OLSKVisit(kDefaultRoute);
+		});
+
+		it('classes OLSKDecorButtonNoStyle', function () {
+			browser.assert.hasClass(KVCWriteCreateButton, 'OLSKDecorButtonNoStyle');
+		});
+
+		it('classes OLSKDecorTappable', function () {
+			browser.assert.hasClass(KVCWriteCreateButton, 'OLSKDecorTappable');
+		});
+
+		it('classes OLSKToolbarButton', function () {
+			browser.assert.hasClass(KVCWriteCreateButton, 'OLSKToolbarButton');
+		});
+		
+		it('sets accesskey', function () {
+			browser.assert.attribute(KVCWriteCreateButton, 'accesskey', 'n');
+		});
+
+		context('click', function () {
+			
+			before(function () {
+				browser.assert.text('#TestKVCWriteMasterDispatchCreate', '0');
+			});
+			
+			before(function () {
+				return browser.pressButton(KVCWriteCreateButton);
+			});
+
+			it('sends KVCWriteMasterDispatchCreate', function () {
+				browser.assert.text('#TestKVCWriteMasterDispatchCreate', '1');
+			});
+		
+		});
+	
+	});
+
+	describe('KVCWriteCreateButtonImage', function test_KVCWriteCreateButtonImage () {
+
+		it('sets src', function () {
+			browser.assert.elements(`${ KVCWriteCreateButtonImage } #_OLSKSharedCreate`, 1);
+		});
+	
+	});
 	
 	context('create', function test_create () {
 
@@ -51,7 +99,7 @@ describe('KVCWrite_Misc', function () {
 		});
 
 		before(function () {
-			return browser.pressButton('.KVCWriteMasterCreateButton');
+			return browser.pressButton('.KVCWriteCreateButton');
 		});
 
 		it('classes KVCWriteMaster', function() {
@@ -243,7 +291,7 @@ describe('KVCWrite_Misc', function () {
 	context('filter', function test_filter () {
 
 		before(function () {
-			return browser.pressButton('.KVCWriteMasterCreateButton');
+			return browser.pressButton('.KVCWriteCreateButton');
 		});
 
 		before(function () {
@@ -427,7 +475,7 @@ describe('KVCWrite_Misc', function () {
 		});
 		
 		before(function () {
-			return browser.pressButton('.KVCWriteMasterCreateButton');
+			return browser.pressButton('.KVCWriteCreateButton');
 		});
 
 		context('title', function () {

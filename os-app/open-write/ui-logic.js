@@ -34,6 +34,17 @@ const mod = {
 		};
 	},
 
+	KVCWriteExactFunction (inputData) {
+		if (typeof inputData !== 'string') {
+			throw new Error('KVCErrorInputNotValid');
+		}
+
+		return function (e) {
+			// Searching and sorting text with diacritical marks in JavaScript | Thread Engineering https://thread.engineering/2018-08-29-searching-and-sorting-text-with-diacritical-marks-in-javascript/
+			return !!KVCTemplate.KVCTemplatePlaintextTitle(e.KVCNoteBody).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').startsWith(inputData.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''));
+		};
+	},
+
 	KVCWriteLogicListSort (a, b) {
 		if (a.KVCNoteIsArchived !== b.KVCNoteIsArchived) {
 			return a.KVCNoteIsArchived ? 1 : -1;

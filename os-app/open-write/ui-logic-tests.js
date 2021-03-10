@@ -113,6 +113,64 @@ describe('KVCWriteFilterFunction', function test_KVCWriteFilterFunction() {
 
 });
 
+describe('KVCWriteExactFunction', function test_KVCWriteExactFunction() {
+
+	it('throws error if not string', function() {
+		throws(function() {
+			mod.KVCWriteExactFunction(null);
+		}, /KVCErrorInputNotValid/);
+	});
+
+	it('returns function', function() {
+		deepEqual(typeof mod.KVCWriteExactFunction(Math.random().toString()), 'function');
+	});
+
+	context('function', function () {
+
+		it('returns false if not title', function() {
+			const item = Math.random().toString();
+			deepEqual(mod.KVCWriteExactFunction(item)({
+				KVCNoteBody: Math.random().toString() + '\n' + item,
+			}), false);
+		});
+
+		it('returns false if title not starting with input', function() {
+			const item = Math.random().toString();
+			deepEqual(mod.KVCWriteExactFunction(item)({
+				KVCNoteBody: Math.random().toString() + item,
+			}), false);
+		});
+
+		it('returns true', function() {
+			const item = Math.random().toString();
+			deepEqual(mod.KVCWriteExactFunction(item)({
+				KVCNoteBody: item + Math.random().toString() + '\n' + Math.random().toString(),
+			}), true);
+		});
+
+		it('matches partial', function() {
+			const item = Math.random().toString();
+			deepEqual(mod.KVCWriteExactFunction(item.slice(0, 5))({
+				KVCNoteBody: item,
+			}), true);
+		});
+
+		it('matches case insensitive', function() {
+			deepEqual(mod.KVCWriteExactFunction('ALF')({
+				KVCNoteBody: 'alfa',
+			}), true);
+		});
+
+		it('matches diacritic insensitive', function() {
+			deepEqual(mod.KVCWriteExactFunction('alfa')({
+				KVCNoteBody: 'alfá',
+			}), true);
+		});
+
+	});
+
+});
+
 describe('KVCWriteLogicListSort', function test_KVCWriteLogicListSort() {
 
 	it('sorts by KVCNoteModificationDate descending', function() {

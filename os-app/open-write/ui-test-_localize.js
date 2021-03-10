@@ -20,6 +20,14 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 			browser.assert.text('title', uLocalized('KVCWriteTitle'));
 		});
 
+		it('localizes OLSKMasterListFilterField', function () {
+			browser.assert.attribute('.OLSKMasterListFilterField', 'placeholder', uLocalized('OLSKMasterListFilterFieldText'));
+		});
+
+		it('localizes KVCWriteCreateButton', function () {
+			browser.assert.attribute(KVCWriteCreateButton, 'title', uLocalized('KVCWriteCreateButtonText'));
+		});
+
 		it('localizes KVCWriteLauncherItemJournal', function () {
 			return browser.assert.OLSKLauncherItemText('KVCWriteLauncherItemJournal', uLocalized('KVCWriteLauncherItemJournalText'));
 		});
@@ -110,7 +118,7 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 			});
 
 			before(function () {
-				return browser.pressButton('.KVCWriteMasterCreateButton');
+				return browser.pressButton('.KVCWriteCreateButton');
 			});
 
 			before(function () {
@@ -175,7 +183,7 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 		context('archive', function test_archive () {
 			
 			before(function () {
-				return browser.pressButton('.KVCWriteMasterCreateButton');
+				return browser.pressButton('.KVCWriteCreateButton');
 			});
 
 			before(function () {
@@ -188,6 +196,10 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 
 			before(function () {
 				return browser.OLSKFireKeyboardEvent(browser.window, 'Escape');
+			});
+
+			it('localizes KVCWriteMasterRevealArchiveButton', function () {
+				browser.assert.text(KVCWriteMasterRevealArchiveButton, uLocalized('KVCWriteMasterRevealArchiveButtonText'));
 			});
 
 			it('localizes KVCWriteLauncherItemRevealArchive', function () {

@@ -124,7 +124,7 @@ describe('KVCWrite_Fund', function () {
 		context('create', function () {
 			
 			before(function () {
-				return browser.pressButton('.KVCWriteMasterCreateButton');
+				return browser.pressButton('.KVCWriteCreateButton');
 			});
 
 			it('shows KVCWriteMasterListItem', function () { // #hotfix-invisible-until-assert
@@ -281,7 +281,7 @@ describe('KVCWrite_Fund', function () {
 
 		it('alerts', function() {
 			browser.assert.OLSKConfirmQuestion(function () {
-				return browser.pressButton('.KVCWriteMasterCreateButton');
+				return browser.pressButton('.KVCWriteCreateButton');
 			}, uLocalized('OLSKFundGateText'));
 		});
 
@@ -305,7 +305,7 @@ describe('KVCWrite_Fund', function () {
 			
 			before(function () {
 				return browser.OLSKConfirm(function () {
-					return browser.pressButton('.KVCWriteMasterCreateButton');
+					return browser.pressButton('.KVCWriteCreateButton');
 				}, function (dialog) {
 					return Object.assign(dialog, {
 						response: false,
@@ -336,7 +336,7 @@ describe('KVCWrite_Fund', function () {
 			
 			it('shows OLSKFundGate', function() {
 				browser.assert.OLSKConfirmQuestion(function () {
-					return browser.pressButton('.KVCWriteMasterCreateButton');
+					return browser.pressButton('.KVCWriteCreateButton');
 				}, uLocalized('OLSKFundGateText'));
 			});
 		

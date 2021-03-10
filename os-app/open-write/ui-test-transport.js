@@ -148,7 +148,7 @@ describe('KVCWrite_Transport', function () {
 		});
 
 		before(function () {
-			return browser.pressButton('.KVCWriteMasterCreateButton');
+			return browser.pressButton('.KVCWriteCreateButton');
 		});
 
 		before(function () {

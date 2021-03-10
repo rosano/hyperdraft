@@ -4,6 +4,9 @@ Object.entries({
 	KVCWrite: '.KVCWrite',
 	
 	KVCWriteCreateButton: '.KVCWriteCreateButton',
+	KVCWriteCreateButtonImage: '.KVCWriteCreateButtonImage',
+
+	KVCWriteMasterRevealArchiveButton: '.KVCWriteMasterRevealArchiveButton',
 
 	KVCWriteViewportFooter: '.KVCWriteViewportFooter',
 	
@@ -12,7 +15,7 @@ Object.entries({
 	return global[e.shift()]  = e.pop();
 });
 
-describe('KVCWrite_Access', function () {
+describe.only('KVCWrite_Access', function () {
 
 	before(function() {
 		return browser.OLSKVisit(kDefaultRoute);
@@ -26,8 +29,12 @@ describe('KVCWrite_Access', function () {
 		browser.assert.elements('.OLSKCatalog', 1);
 	});
 
-	it('shows KVCWriteMaster', function () {
-		browser.assert.elements('.KVCWriteMaster', 1);
+	it('shows KVCWriteCreateButton', function () {
+		browser.assert.elements(KVCWriteCreateButton, 1);
+	});
+
+	it('shows KVCWriteCreateButtonImage', function () {
+		browser.assert.elements(KVCWriteCreateButtonImage, 1);
 	});
 
 	it('hides KVCWriteMasterListItem', function () {
@@ -36,14 +43,6 @@ describe('KVCWrite_Access', function () {
 
 	it('hides KVCWriteMasterRevealArchiveButton', function () {
 		browser.assert.elements('.KVCWriteMasterRevealArchiveButton', 0);
-	});
-
-	it('shows KVCWriteDetail', function () {
-		browser.assert.elements('.KVCWriteDetail', 1);
-	});
-
-	it('shows OLSKDetailPlaceholder', function () {
-		browser.assert.elements('.OLSKDetailPlaceholder', 1);
 	});
 
 	it('shows KVCWriteViewportFooter', function () {
@@ -202,96 +201,12 @@ describe('KVCWrite_Access', function () {
 
 		});
 
-	});
-
-	context('create', function test_create () {
-		
-		before(function () {
-			return browser.pressButton('.KVCWriteMasterCreateButton');
-		});
-
-		it('shows KVCWriteMasterListItem', function () {
-			browser.assert.elements('.KVCWriteMasterListItem', 1);
-		});
-
-		it('hides OLSKDetailPlaceholder', function () {
-			browser.assert.elements('.OLSKDetailPlaceholder', 0);
-		});
-	
-	});
-
-	context('back', function test_back () {
-		
-		before(function () {
-			return browser.pressButton('.KVCWriteDetailToolbarBackButton');
-		});
-
-		// it('shows OLSKDetailPlaceholder', function () {
-		// 	browser.assert.elements('.OLSKDetailPlaceholder', 1);
-		// });
-	
-	});
-
-	context('click', function test_click () {
-		
-		before(function () {
-			return browser.click('.KVCWriteMasterListItem');
-		});
-
-		it('shows KVCWriteMasterListItem', function () {
-			browser.assert.elements('.KVCWriteMasterListItem', 1);
-		});
-
-		it('hides OLSKDetailPlaceholder', function () {
-			browser.assert.elements('.OLSKDetailPlaceholder', 0);
-		});
-	
-	});
-
-	context('discard', function test_discard () {
-
-		context('cancel', function () {
-			
-			before(async function () {
-				return browser.OLSKConfirm(function () {
-					browser.pressButton('.KVCWriteDetailToolbarDiscardButton');
-				}, function (dialog) {
-					dialog.response = false;
-
-					return dialog;
-				});
-			});
-
-			it('hides OLSKDetailPlaceholder', function () {
-				browser.assert.elements('.OLSKDetailPlaceholder', 0);
-			});
-		
-		});
-
-		context('confirm', function () {
-			
-			before(async function () {
-				return browser.OLSKConfirm(function () {
-					return browser.pressButton('.KVCWriteDetailToolbarDiscardButton');
-				});
-			});
-
-			it('hides KVCWriteMasterListItem', function () {
-				browser.assert.elements('.KVCWriteMasterListItem', 0);
-			});
-
-			it('shows OLSKDetailPlaceholder', function () {
-				browser.assert.elements('.OLSKDetailPlaceholder', 1);
-			});
-		
-		});
-		
-	});
+	}); 
 
 	context('archive', function test_archive () {
 		
 		before(function () {
-			return browser.pressButton('.KVCWriteMasterCreateButton');
+			return browser.pressButton('.KVCWriteCreateButton');
 		});
 
 		before(function () {
@@ -405,7 +320,7 @@ describe('KVCWrite_Access', function () {
 	context('select', function test_select() {
 		
 		before(function () {
-			return browser.pressButton('.KVCWriteMasterCreateButton');
+			return browser.pressButton('.KVCWriteCreateButton');
 		});
 
 		it('shows KVCWriteDetailLauncherFakeItemProxy', function () {

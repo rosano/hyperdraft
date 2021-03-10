@@ -3,9 +3,6 @@ const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 Object.entries({
 	KVCWriteMaster: '.KVCWriteMaster',
 	
-	KVCWriteMasterCreateButton: '.KVCWriteMasterCreateButton',
-	KVCWriteMasterCreateButtonImage: '.KVCWriteMasterCreateButtonImage',
-	
 	KVCWriteMasterRevealArchiveButton: '.KVCWriteMasterRevealArchiveButton',
 }).map(function (e) {
 	return global[e.shift()]  = e.pop();
@@ -23,14 +20,6 @@ describe('KVCWriteMaster_Access', function () {
 
 	it('shows OLSKMasterList', function () {
 		browser.assert.elements('.OLSKMasterList', 1);
-	});
-
-	it('shows KVCWriteMasterCreateButton', function () {
-		browser.assert.elements(KVCWriteMasterCreateButton, 1);
-	});
-
-	it('shows KVCWriteMasterCreateButtonImage', function () {
-		browser.assert.elements(KVCWriteMasterCreateButtonImage, 1);
 	});
 
 	it('hides KVCWriteMasterListItem', function () {

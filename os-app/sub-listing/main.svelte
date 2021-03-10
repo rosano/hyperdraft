@@ -1,23 +1,23 @@
 <script>
-export let KVCWriteListItemObject;
+export let KVCWriteMasterListItemObject;
 
 import KVCWriteLogic from '../open-write/ui-logic.js';
 import KVCTemplate from '../_shared/KVCTemplate/main.js';
 import OLSKString from 'OLSKString';
 </script>
 
-<div class="KVCWriteListItem OLSKCommonEdgeBottom" class:KVCWriteListItemArchived={ KVCWriteListItemObject.KVCNoteIsArchived }>
+<div class="KVCWriteMasterListItem OLSKCommonEdgeBottom" class:KVCWriteMasterListItemArchived={ KVCWriteMasterListItemObject.KVCNoteIsArchived }>
 
-{#if KVCWriteListItemObject.KVCNoteIsPublic }
-	<span class="KVCWriteListItemIsPublic" aria-hidden="true">{ KVCWriteLogic.KVCWriteLogicPublicSymbol() }</span>
+{#if KVCWriteMasterListItemObject.KVCNoteIsPublic }
+	<span class="KVCWriteMasterListItemIsPublic" aria-hidden="true">{ KVCWriteLogic.KVCWriteLogicPublicSymbol() }</span>
 {/if}
-<strong class="KVCWriteListItemTitle" aria-hidden="true">{ KVCTemplate.KVCTemplateTruncated(KVCTemplate.KVCTemplatePlaintextTitle(KVCWriteListItemObject.KVCNoteBody)) }</strong>
-<span class="KVCWriteListItemSnippet" aria-hidden="true">{ OLSKString.OLSKStringSnippet(KVCTemplate.KVCTemplatePlaintextBody(KVCWriteListItemObject.KVCNoteBody)) }</span>
+<strong class="KVCWriteMasterListItemTitle" aria-hidden="true">{ KVCTemplate.KVCTemplateTruncated(KVCTemplate.KVCTemplatePlaintextTitle(KVCWriteMasterListItemObject.KVCNoteBody)) }</strong>
+<span class="KVCWriteMasterListItemSnippet" aria-hidden="true">{ OLSKString.OLSKStringSnippet(KVCTemplate.KVCTemplatePlaintextBody(KVCWriteMasterListItemObject.KVCNoteBody)) }</span>
 
 </div>
 
 <style>
-.KVCWriteListItem {
+.KVCWriteMasterListItem {
 	min-height: 46px;
 	padding: 10px;
 
@@ -31,16 +31,16 @@ import OLSKString from 'OLSKString';
 	hyphens: auto;
 }
 
-.KVCWriteListItemArchived {
+.KVCWriteMasterListItemArchived {
 	border-left: 10px solid #cccccc;
 	opacity: 0.8;
 }
 
-.KVCWriteListItemTitle {
+.KVCWriteMasterListItemTitle {
 	display: inline-block;
 }
 
-.KVCWriteListItemSnippet {
+.KVCWriteMasterListItemSnippet {
 	display: block;
 	margin-top: 5px;
 }

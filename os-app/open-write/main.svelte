@@ -57,7 +57,7 @@ const mod = {
 	
 	_ValueNoteSelected: undefined,
 	ValueNoteSelected (inputData) {
-		mod.KVCWriteDetailInstance.modPublic.KVCWriteDetailSetItem(mod._ValueNoteSelected = inputData);
+		mod._KVCWriteDetail.modPublic.KVCWriteDetailSetItem(mod._ValueNoteSelected = inputData);
 
 		if (!inputData) {
 			mod.OLSKMobileViewInactive = false;	
@@ -82,8 +82,6 @@ const mod = {
 	_ValueSaveNoteThrottleMap: {},
 
 	_ValueSavePublishThrottleMap: {},
-
-	KVCWriteDetailInstance: undefined,
 
 	OLSKMobileViewInactive: false,
 
@@ -413,8 +411,8 @@ const mod = {
 
 		outputData.push(...OLSKServiceWorker.OLSKServiceWorkerRecipes(window, mod.DataNavigator(), OLSKLocalized, OLSK_SPEC_UI()));
 
-		if (mod.KVCWriteDetailInstance) {
-			outputData.push(...mod.KVCWriteDetailInstance.modPublic.KVCWriteDetailRecipes());
+		if (mod._KVCWriteDetail) {
+			outputData.push(...mod._KVCWriteDetail.modPublic.KVCWriteDetailRecipes());
 		}
 
 		if (mod.DataRevealArchiveIsVisible()) {
@@ -556,7 +554,7 @@ const mod = {
 		mod.ReactDocumentRemainder();
 
 		if (mod.DataIsMobile()) {
-			mod.KVCWriteDetailInstance.modPublic.KVCWriteDetailEditorFocus();
+			mod._KVCWriteDetail.modPublic.KVCWriteDetailEditorFocus();
 		}
 		
 		if (typeof inputData !== 'string') {
@@ -567,12 +565,12 @@ const mod = {
 			return;
 		}
 
-		mod.KVCWriteDetailInstance.modPublic.KVCWriteDetailSetCursor(inputData.split('\n').length - 1, inputData.split('\n').pop().length);
+		mod._KVCWriteDetail.modPublic.KVCWriteDetailSetCursor(inputData.split('\n').length - 1, inputData.split('\n').pop().length);
 	},
 	
 	_ControlHotfixUpdateInPlace(inputData) {
 		mod.ControlNoteSelect(inputData);
-		mod.KVCWriteDetailInstance.modPublic._KVCWriteDetailTriggerUpdate();
+		mod._KVCWriteDetail.modPublic._KVCWriteDetailTriggerUpdate();
 	},
 	
 	ControlNoteSelect(inputData) {
@@ -604,7 +602,7 @@ const mod = {
 					return;
 				}
 
-				mod.KVCWriteDetailInstance.modPublic.KVCWriteDetailEditorFocus();
+				mod._KVCWriteDetail.modPublic.KVCWriteDetailEditorFocus();
 			},
 		});
 	},
@@ -689,8 +687,9 @@ const mod = {
 	ControlEscape() {
 		mod.ControlFilterWithNoThrottle('');
 
-		mod.ValueArchivedCount(mod._ValueNotesAll);
-		mod._RevealArchiveIsVisible = true;
+		mod.ValueArchivedCount(mod._OLSKCatalog.modPublic._OLSKCatalogDataItemsAll());
+		
+		mod._RevealArchiveIsVisible = !!mod._ValueArchivedCount;
 
 		mod.ValueNotesVisible(mod._ValueNotesAll);
 	},
@@ -777,26 +776,26 @@ const mod = {
 				return OLSKBeacon._OLSKBeaconAnimate(OLSKBeacon.OLSKBeaconNudgeFunction('.OLSKPointer', ...arguments));
 			}),
 		}, mod))
-			.Point('.KVCWriteMasterCreateButton')
+			.Point('.KVCWriteCreateButton')
 			.Nudge(0, 50)
 			.Wait()
-			.Point('.KVCWriteMasterCreateButton')
-			.Click('.KVCWriteMasterCreateButton')
+			.Point('.KVCWriteCreateButton')
+			.Click('.KVCWriteCreateButton')
 			.Nudge(0, -200)
 			.Increment('.KVCWriteInput .CodeMirror', 'Hello')
 			.Wait()
 			.Increment('.KVCWriteInput .CodeMirror', "\n\nLet's make some notes.", 1000)
 			.Wait(1500)
-			.Click('.KVCWriteMasterCreateButton')
+			.Click('.KVCWriteCreateButton')
 			.Increment('.KVCWriteInput .CodeMirror', 'Apples')
 			.Wait()
-			.Click('.KVCWriteMasterCreateButton')
+			.Click('.KVCWriteCreateButton')
 			.Increment('.KVCWriteInput .CodeMirror', 'Bananas')
 			.Wait()
-			.Click('.KVCWriteMasterCreateButton')
+			.Click('.KVCWriteCreateButton')
 			.Increment('.KVCWriteInput .CodeMirror', 'Cookies')
 			.Wait()
-			.Click('.KVCWriteMasterCreateButton')
+			.Click('.KVCWriteCreateButton')
 			.Wait(1000)
 			.Increment('.KVCWriteInput .CodeMirror', "Make links using brackets")
 			.Wait()
@@ -833,14 +832,6 @@ const mod = {
 
 	OLSKCatalogDispatchArrow (inputData) {
 		mod._OLSKCatalog.modPublic.OLSKCatalogSelect(inputData);
-	},
-
-	OLSKCatalogDispatchFilter (item, text) {
-		return item.KVCDocumentName.match(text);
-	},
-
-	OLSKCatalogDispatchExact (item, text) {
-		return item.KVCDocumentName.startsWith(text);
 	},
 
 	_OLSKCatalogDispatchKey (inputData) {
@@ -1041,11 +1032,11 @@ const mod = {
 	},
 
 	KVCWriteDetailDispatchArchive () {
-		mod.ControlNoteArchive(mod._ValueNoteSelected);
+		mod.ControlNoteArchive(mod._OLSKCatalog.modPublic.OLSKCatalogDataItemSelected());
 	},
 
 	KVCWriteDetailDispatchUnarchive () {
-		mod.ControlNoteUnarchive(mod._ValueNoteSelected);
+		mod.ControlNoteUnarchive(mod._OLSKCatalog.modPublic.OLSKCatalogDataItemSelected());
 	},
 
 	KVCWriteDetailDispatchConnect () {
@@ -1053,15 +1044,15 @@ const mod = {
 	},
 
 	KVCWriteDetailDispatchPublish () {
-		mod.ControlNotePublish(mod._ValueNoteSelected);
+		mod.ControlNotePublish(mod._OLSKCatalog.modPublic.OLSKCatalogDataItemSelected());
 	},
 
 	KVCWriteDetailDispatchRetract () {
-		mod.ControlNoteRetract(mod._ValueNoteSelected);
+		mod.ControlNoteRetract(mod._OLSKCatalog.modPublic.OLSKCatalogDataItemSelected());
 	},
 
 	KVCWriteDetailDispatchVersions () {
-		mod.ControlNoteVersions(mod._ValueNoteSelected);
+		mod.ControlNoteVersions(mod._OLSKCatalog.modPublic.OLSKCatalogDataItemSelected());
 	},
 
 	KVCWriteDetailDispatchDiscard () {
@@ -1079,10 +1070,10 @@ const mod = {
 	async KVCWriteDetailDispatchSetAsRootPage (inputData) {
 		await mod.ValueSetting('KVCSettingPublicRootPageID', inputData);
 
-		await mod._ControlHotfixUpdateInPlace(mod._ValueNoteSelected);
+		await mod._ControlHotfixUpdateInPlace(mod._OLSKCatalog.modPublic.OLSKCatalogDataItemSelected());
 
-		if (KVCNote.KVCNoteIsMarkedPublic(mod._ValueNoteSelected)) {
-			mod.ControlNotePublish(mod._ValueNoteSelected);
+		if (KVCNote.KVCNoteIsMarkedPublic(mod._OLSKCatalog.modPublic.OLSKCatalogDataItemSelected())) {
+			mod.ControlNotePublish(mod._OLSKCatalog.modPublic.OLSKCatalogDataItemSelected());
 		}
 	},
 
@@ -1382,8 +1373,7 @@ import { onMount } from 'svelte';
 onMount(mod.LifecycleModuleWillMount);
 
 import OLSKCatalog from 'OLSKCatalog';
-import KVCWriteListItem from '../sub-listing/main.svelte';
-import KVCWriteMaster from '../sub-master/main.svelte';
+import KVCWriteMasterListItem from '../sub-listing/main.svelte';
 import KVCWriteDetail from '../sub-detail/main.svelte';
 import OLSKAppToolbar from 'OLSKAppToolbar';
 import OLSKServiceWorkerView from '../_shared/__external/OLSKServiceWorker/main.svelte';
@@ -1403,14 +1393,18 @@ import OLSKUIAssets from 'OLSKUIAssets';
 <OLSKCatalog
 	bind:this={ mod._OLSKCatalog }
 
+	OLSKMasterListItemAccessibilitySummaryFor={ KVCWriteLogic.KVCWriteAccessibilitySummary }
+
+	OLSKMasterListFilterFieldPlaceholderText={ OLSKLocalized('KVCWriteFilterFieldText') }
+
+	_OLSKCatalogExcludeField={ 'KVCNoteIsArchived' }
+
 	OLSKCatalogDispatchClick={ mod.OLSKCatalogDispatchClick }
 	OLSKCatalogDispatchArrow={ mod.OLSKCatalogDispatchArrow }
 	
 	OLSKCatalogDispatchSort={ KVCWriteLogic.KVCWriteLogicListSort }
-	OLSKCatalogDispatchFilter={ mod.OLSKCatalogDispatchFilter }
-	OLSKCatalogDispatchExact={ mod.OLSKCatalogDispatchExact }
-
-	OLSKMasterListItemAccessibilitySummaryFor={ KVCWriteLogic.KVCWriteAccessibilitySummary }
+	OLSKCatalogDispatchFilterGenerate={ KVCWriteLogic.KVCWriteFilterFunction }
+	OLSKCatalogDispatchExactGenerate={ KVCWriteLogic.KVCWriteExactFunction }
 
 	_OLSKCatalogDispatchKey={ mod._OLSKCatalogDispatchKey }
 
@@ -1420,17 +1414,19 @@ import OLSKUIAssets from 'OLSKUIAssets';
 	<!-- MASTER -->
 
 	<div class="OLSKToolbarElementGroup" slot="OLSKMasterListToolbarTail">
-		<div>
-			<button class="KVCWriteCreateButton" on:click={ mod.InterfaceCreateButtonDidClick }>
-				<div>{@html OLSKUIAssets._OLSKSharedCreate }</div>
-			</button>
-		</div>
+		<button class="KVCWriteCreateButton OLSKDecorButtonNoStyle OLSKDecorTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteCreateButtonText') } on:click={ mod.InterfaceCreateButtonDidClick } accesskey="n">
+			<div class="KVCWriteCreateButtonImage">{@html OLSKUIAssets._OLSKSharedCreate }</div>
+		</button>
 	</div>
+
+	<div class="OLSKMasterListBodyTail" slot="OLSKMasterListBodyTail">{#if mod._RevealArchiveIsVisible }
+		<button class="KVCWriteMasterRevealArchiveButton OLSKDecorPress" on:click={ mod.KVCWriteMasterDispatchRevealArchive }>{ OLSKLocalized('KVCWriteMasterRevealArchiveButtonText') }</button>
+	{/if}</div>
 
 	<!-- LIST ITEM -->
 
 	<div slot="OLSKMasterListItem">
-		<KVCWriteListItem KVCWriteListItemObject={ OLSKResultsListItem } />
+		<KVCWriteMasterListItem KVCWriteMasterListItemObject={ OLSKResultsListItem } />
 	</div>
 
 	<!-- DETAIL -->
@@ -1461,21 +1457,6 @@ import OLSKUIAssets from 'OLSKUIAssets';
 
 </OLSKCatalog>
 
-	<KVCWriteMaster
-		KVCWriteMasterListItems={ mod._ValueNotesVisible }
-		KVCWriteMasterListItemSelected={ mod._ValueNoteSelected }
-		KVCWriteMasterFilterText={ mod._ValueFilterText }
-		KVCWriteMasterRevealArchiveIsVisible={ mod.DataRevealArchiveIsVisible() }
-		KVCWriteMasterDispatchCreate={ mod.KVCWriteMasterDispatchCreate }
-		KVCWriteMasterDispatchClick={ mod.KVCWriteMasterDispatchClick }
-		KVCWriteMasterDispatchArrow={ mod.KVCWriteMasterDispatchArrow }
-		KVCWriteMasterDispatchFilter={ mod.KVCWriteMasterDispatchFilter }
-		KVCWriteMasterDispatchEscape={ mod.KVCWriteMasterDispatchEscape }
-		KVCWriteMasterDispatchRevealArchive={ mod.KVCWriteMasterDispatchRevealArchive }
-		KVCWriteMasterDelegateItemTitle={ mod.KVCWriteMasterDelegateItemTitle }
-		KVCWriteMasterDelegateItemSnippet={ mod.KVCWriteMasterDelegateItemSnippet }
-		OLSKMobileViewInactive={ mod.OLSKMobileViewInactive }
-		/>
 </div>
 
 {#if OLSK_SPEC_UI()}
