@@ -5,7 +5,6 @@ export let KVCWriteInputDispatchHeaderTokens;
 export let KVCWriteInputDispatchUpdate;
 export let KVCWriteInputDispatchOpen;
 export let KVCWriteInputDispatchReady;
-export let KVCWriteInputDispatchEscape;
 
 export const modPublic = {
 
@@ -65,16 +64,12 @@ const mod = {
 			return;
 		}
 
-		if (OLSK_SPEC_UI()) {
-			return KVCWriteInputDispatchEscape();
-		}
-
 		if (!mod._ValueEditorInstance) {
 			return;
 		}
 
 		if (mod._ValueEditorInstance.getDoc().listSelections().length <= 1) {
-			return KVCWriteInputDispatchEscape();
+			return;
 		}
 
 		mod._ValueEditorInstance.setSelections(mod._ValueEditorInstance.getDoc().listSelections().slice(0, 1));

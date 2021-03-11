@@ -27,40 +27,7 @@ const mod = {
 
 	_ValueIsLoading: true,
 
-	_RevealArchiveIsVisible: true,
-	_ValueArchivedCount: 0,
-	ValueArchivedCount (inputData) {
-		mod._ValueArchivedCount = inputData.filter(function (e) {
-			return e.KVCNoteIsArchived;
-		}).length;
-	},
-
-	_ValueNotesAll: [],
-	ValueNotesAll (inputData, shouldSort = true) {
-		mod.ValueNotesVisible(mod._ValueNotesAll = inputData, shouldSort);
-
-		mod.ReactDocumentRemainder();
-	},
-
-	_ValueNotesVisible: [],
-	ValueNotesVisible (inputData, shouldSort = true) {
-		let items = !mod._ValueFilterText ? inputData : inputData.filter(KVCWriteLogic.KVCWriteFilterFunction(mod._ValueFilterText));
-
-		if (mod.DataRevealArchiveIsVisible()) {
-			items = items.filter(function (e) {
-				return !e.KVCNoteIsArchived;
-			});
-		}
-
-		mod._ValueNotesVisible = shouldSort ? items.sort(KVCWriteLogic.KVCWriteLogicListSortFunction) : items;
-	},
-	
-	_ValueNoteSelected: undefined,
-	ValueNoteSelected (inputData) {
-		mod._KVCWriteDetail.modPublic.KVCWriteDetailSetItem(mod._ValueNoteSelected = inputData);
-
-		mod._OLSKCatalog.modPublic.OLSKCatalogSelect(inputData);
-	},
+	_ValueRevealArchiveIsVisible: false,
 
 	async ValueSetting (param1, param2) {
 		await mod._ValueZDRWrap.App.KVCSetting.ZDRModelWriteObject({
@@ -70,8 +37,6 @@ const mod = {
 
 		mod._ValueSettingsAll[param1] = param2;
 	},
-	
-	_ValueFilterText: '',
 	
 	_ValueStorageToolbarHidden: true,
 
@@ -108,7 +73,7 @@ const mod = {
 			LCHRecipeSignature: 'KVCWriteLauncherItemBacklinks',
 			LCHRecipeName: OLSKLocalized('KVCWriteLauncherItemBacklinksText'),
 			LCHRecipeCallback: async function KVCWriteLauncherItemBacklinks () {
-				mod.ControlNoteCreate(KVCWriteLogic.KVCWriteLauncherItemBacklinksTemplate(this.api.LCHDateLocalOffsetSubtracted(new Date(OLSK_SPEC_UI() ? '2001-02-03T04:05:06Z' : Date.now())), KVCWriteLogic.KVCWriteBacklinksMap(mod._ValueNotesAll), OLSKLocalized));
+				mod.ControlNoteCreate(KVCWriteLogic.KVCWriteLauncherItemBacklinksTemplate(this.api.LCHDateLocalOffsetSubtracted(new Date(OLSK_SPEC_UI() ? '2001-02-03T04:05:06Z' : Date.now())), KVCWriteLogic.KVCWriteBacklinksMap(mod._OLSKCatalog.modPublic._OLSKCatalogDataItemsAll()), OLSKLocalized));
 			},
 		}, {
 			LCHRecipeSignature: 'KVCWriteLauncherItemShowPublicNotes',
@@ -156,7 +121,7 @@ const mod = {
 			LCHRecipeCallback: async function KVCWriteLauncherItemExportZIP () {
 				const zip = new JSZip();
 
-				mod._ValueNotesAll.forEach(function (e) {
+				mod._OLSKCatalog.modPublic._OLSKCatalogDataItemsAll().forEach(function (e) {
 					zip.file(`${ e.KVCNoteID }.txt`, e.KVCNoteBody, {
 						date: e.KVCNoteModificationDate,
 					});
@@ -202,8 +167,8 @@ const mod = {
 							if (item) {
 								await mod.ValueSetting('KVCSettingCustomDomainBaseURL', item);
 								
-								if (mod._ValueNoteSelected) {
-									await mod._ControlHotfixUpdateInPlace(mod._ValueNoteSelected);
+								if (mod._OLSKCatalog.modPublic.OLSKCatalogDataItemSelected()) {
+									await mod._ControlHotfixUpdateInPlace(mod._OLSKCatalog.modPublic.OLSKCatalogDataItemSelected());
 								}
 
 								return 
@@ -229,8 +194,8 @@ const mod = {
 
 					delete mod._ValueSettingsAll[mod._ValueSettingsAll.indexOf(mod.DataSetting('KVCSettingCustomDomainBaseURL'))];
 
-					if (mod._ValueNoteSelected) {
-						mod._ControlHotfixUpdateInPlace(mod._ValueNoteSelected);
+					if (mod._OLSKCatalog.modPublic.OLSKCatalogDataItemSelected()) {
+						mod._ControlHotfixUpdateInPlace(mod._OLSKCatalog.modPublic.OLSKCatalogDataItemSelected());
 					}
 				},
 				LCHRecipeIsExcluded () {
@@ -319,8 +284,8 @@ const mod = {
 					LCHRecipeCallback: async function FakeConfigureCustomDomain () {
 						await mod.ValueSetting('KVCSettingCustomDomainBaseURL', KVCWriteLogic.KVCWriteCustomDomainBaseURLData('FakeCustomDomainBaseURL'));
 
-						if (mod._ValueNoteSelected) {
-							await mod._ControlHotfixUpdateInPlace(mod._ValueNoteSelected);
+						if (mod._OLSKCatalog.modPublic.OLSKCatalogDataItemSelected()) {
+							await mod._ControlHotfixUpdateInPlace(mod._OLSKCatalog.modPublic.OLSKCatalogDataItemSelected());
 						}
 					},
 				},
@@ -405,7 +370,7 @@ const mod = {
 			outputData.push(...mod._KVCWriteDetail.modPublic.KVCWriteDetailRecipes());
 		}
 
-		if (mod.DataRevealArchiveIsVisible()) {
+		if (mod._ValueRevealArchiveIsVisible) {
 			outputData.push({
 				LCHRecipeSignature: 'KVCWriteLauncherItemRevealArchive',
 				LCHRecipeName: OLSKLocalized('KVCWriteRevealArchiveButtonText'),
@@ -416,10 +381,6 @@ const mod = {
 		}
 
 		return outputData;
-	},
-
-	DataRevealArchiveIsVisible () {
-		return mod._ValueArchivedCount && mod._RevealArchiveIsVisible;
 	},
 
 	async DataExportJSON () {
@@ -473,13 +434,6 @@ const mod = {
 		}
 
 		const handlerFunctions = {
-			Escape () {
-				if (document.activeElement.nodeName === 'TEXTAREA') {
-					return;
-				}
-
-				mod.ControlEscape();
-			},
 			Tab () {
 				document.activeElement !== document.querySelector('.OLSKMasterListFilterField') ? document.querySelector('.OLSKMasterListFilterField').focus() : mod._KVCWriteDetail.modPublic.KVCWriteDetailEditorFocus();
 
@@ -628,7 +582,7 @@ const mod = {
 		const options = {
 			KVCOptionIsRoot: mod.DataSetting('KVCSettingPublicRootPageID') === inputData.KVCNoteID,
 			KVCOptionRootURL: mod._ValueZDRWrap.Public.ZDRStoragePermalink('index.html'),
-			KVCOptionBacklinks: KVCWriteLogic.KVCWriteBacklinksMap(mod._ValueNotesAll.filter(KVCNote.KVCNoteIsMarkedPublic).concat(inputData))[KVCTemplate.KVCTemplatePlaintextTitle(inputData.KVCNoteBody)],
+			KVCOptionBacklinks: KVCWriteLogic.KVCWriteBacklinksMap(mod._OLSKCatalog.modPublic._OLSKCatalogDataItemsAll().filter(KVCNote.KVCNoteIsMarkedPublic).concat(inputData))[KVCTemplate.KVCTemplatePlaintextTitle(inputData.KVCNoteBody)],
 			_KVCOptionPublicBaseURL: mod._ValueZDRWrap.Public.ZDRStoragePermalink('/'),
 		};
 
@@ -636,7 +590,7 @@ const mod = {
 
 		const updated = await mod._ValueZDRWrap.App.KVCNote.KVCNotePublicFilesUpload(await mod._ValueZDRWrap.App.KVCNote.KVCNoteMarkPublic(inputData), mod.TestPublishContent = KVCTemplate.KVCView({
 			KVCViewSource: inputData.KVCNoteBody,
-			KVCViewPermalinkMap: mod._ValueZDRWrap.App.KVCNote.KVCNotePermalinkMap(mod._ValueNotesAll, mod.DataSetting('KVCSettingPublicRootPageID') || ''),
+			KVCViewPermalinkMap: mod._ValueZDRWrap.App.KVCNote.KVCNotePermalinkMap(mod._OLSKCatalog.modPublic._OLSKCatalogDataItemsAll(), mod.DataSetting('KVCSettingPublicRootPageID') || ''),
 			KVCViewTemplate: KVCTemplate.KVCTemplateViewDefault(OLSKLocalized),
 			KVCViewTemplateOptions: options,
 		}), options.KVCOptionIsRoot);
@@ -645,7 +599,7 @@ const mod = {
 			return;
 		}
 		
-		mod.ValueNoteSelected(updated); // #purge-svelte-force-update
+		mod._OLSKCatalog.modPublic.OLSKCatalogUpdate(updated); // #purge-svelte-force-update
 	},
 	
 	async ControlNoteRetract (inputData) {
@@ -653,7 +607,7 @@ const mod = {
 			window.TestControlNoteRetractCount.innerHTML = parseInt(window.TestControlNoteRetractCount.innerHTML) + 1;
 		}
 
-		mod.ValueNoteSelected(await mod._ValueZDRWrap.App.KVCNote.KVCNotePublicFilesRetract(await mod._ValueZDRWrap.App.KVCNote.KVCNoteMarkNotPublic(inputData), mod.DataSetting('KVCSettingPublicRootPageID') === inputData.KVCNoteID));
+		mod._OLSKCatalog.modPublic.OLSKCatalogUpdate(await mod._ValueZDRWrap.App.KVCNote.KVCNotePublicFilesRetract(await mod._ValueZDRWrap.App.KVCNote.KVCNoteMarkNotPublic(inputData), mod.DataSetting('KVCSettingPublicRootPageID') === inputData.KVCNoteID)); // #purge-svelte-force-update?
 	},
 	
 	async ControlNoteVersions (inputData) {
@@ -677,38 +631,7 @@ const mod = {
 	},
 
 	ControlRevealArchive () {
-		mod._RevealArchiveIsVisible = false;
-	},
-
-	ControlEscape() {
-		mod.ControlFilterWithNoThrottle('');
-
-		mod.ValueArchivedCount(mod._OLSKCatalog.modPublic._OLSKCatalogDataItemsAll());
-		
-		mod._RevealArchiveIsVisible = !!mod._ValueArchivedCount;
-
-		mod.ValueNotesVisible(mod._ValueNotesAll);
-	},
-	
-	ControlFilterWithThrottle(inputData) {
-		mod._ValueFilterText = inputData;
-
-		OLSKThrottle.OLSKThrottleMappedTimeout(mod, '_ValueFilterThrottle', {
-			OLSKThrottleDuration: 200,
-			async OLSKThrottleCallback () {
-				mod._RevealArchiveIsVisible = false;
-
-				mod.ControlFilterWithNoThrottle(mod._ValueFilterText);
-			},
-		});
-
-		if (OLSK_SPEC_UI()) {
-			OLSKThrottle.OLSKThrottleSkip(mod._ValueFilterThrottle);
-		}
-	},
-	
-	ControlFilterWithNoThrottle(inputData) {
-		mod.ReactFilter(mod._ValueFilterText = inputData);
+		mod._ValueRevealArchiveIsVisible = false;
 	},
 
 	async ControlNotesImportJSON (inputData) {
@@ -835,11 +758,11 @@ const mod = {
 	},
 
 	OLSKCatalogDispatchArchivedHide () {
-		mod._RevealArchiveIsVisible = true;
+		mod._ValueRevealArchiveIsVisible = true;
 	},
 
 	OLSKCatalogDispatchArchivedShow () {
-		mod._RevealArchiveIsVisible = false;
+		mod._ValueRevealArchiveIsVisible = false;
 	},
 
 	OLSKAppToolbarDispatchApropos () {
@@ -1042,13 +965,7 @@ const mod = {
 	},
 
 	KVCWriteDetailDispatchOpen (inputData) {
-		mod._RevealArchiveIsVisible = false; // #missing-spec
-
-		mod.ControlFilterWithNoThrottle(inputData);
-	},
-
-	KVCWriteDetailDispatchEscape () {
-		mod.ControlEscape();
+		mod._OLSKCatalog.modPublic.OLSKCatalogFilterWithNoThrottle(inputData);
 	},
 
 	async ZDRSchemaDispatchSyncConflictNote (inputData) {
@@ -1132,28 +1049,6 @@ const mod = {
 			document.querySelector('.OLSKMasterListFilterField').focus();
 		})
 	},
-	
-	ReactFilter(inputData) {
-		mod.ValueNotesVisible(mod._ValueNotesAll);
-
-		if (!inputData) {
-			return mod.ControlNoteSelect(null);
-		}
-
-		if (!mod._ValueNotesVisible.length) {
-			return mod.ControlNoteSelect(null);
-		}
-
-		mod.ValueNoteSelected(mod._ValueNotesVisible.filter(function (e) {
-			return KVCTemplate.KVCTemplatePlaintextTitle(e.KVCNoteBody).toLowerCase() === inputData.toLowerCase();
-		}).concat(mod._ValueNotesVisible.filter(function (e) {
-			if (e.KVCNoteIsArchived) {
-				return false;
-			}
-			
-			return KVCTemplate.KVCTemplatePlaintextTitle(e.KVCNoteBody).toLowerCase().includes(inputData.toLowerCase());
-		})).shift());
-	},
 
 	async ReactDocumentRemainder () {
 		mod._ValueDocumentRemainder = OLSKFund.OLSKFundRemainder(mod._OLSKCatalog.modPublic._OLSKCatalogDataItemsAll().length, parseInt('KVC_FUND_DOCUMENT_LIMIT_SWAP_TOKEN'));
@@ -1233,10 +1128,6 @@ const mod = {
 		};
 
 		const items = await mod._ValueZDRWrap.App.KVCNote.KVCNoteList();
-
-		mod.ValueArchivedCount(items);
-		
-		mod._RevealArchiveIsVisible = mod._ValueArchivedCount > 0;
 
 		items.map(mod._OLSKCatalog.modPublic.OLSKCatalogInsert);
 
@@ -1358,7 +1249,7 @@ import OLSKUIAssets from 'OLSKUIAssets';
 		</button>
 	</div>
 
-	<div class="OLSKMasterListBodyTail" slot="OLSKMasterListBodyTail">{#if mod._RevealArchiveIsVisible }
+	<div class="OLSKMasterListBodyTail" slot="OLSKMasterListBodyTail">{#if mod._ValueRevealArchiveIsVisible }
 		<button class="KVCWriteRevealArchiveButton OLSKDecorPress" on:click={ mod._OLSKCatalog.modPublic.OLSKCatalogRevealArchive }>{ OLSKLocalized('KVCWriteRevealArchiveButtonText') }</button>
 	{/if}</div>
 
@@ -1388,7 +1279,6 @@ import OLSKUIAssets from 'OLSKUIAssets';
 			KVCWriteDetailDispatchUpdate={ mod.KVCWriteDetailDispatchUpdate }
 			KVCWriteDetailDispatchSetAsRootPage={ mod.KVCWriteDetailDispatchSetAsRootPage }
 			KVCWriteDetailDispatchOpen={ mod.KVCWriteDetailDispatchOpen }
-			KVCWriteDetailDispatchEscape={ mod.KVCWriteDetailDispatchEscape }
 			bind:this={ mod._KVCWriteDetail }
 			/>
 	</div>

@@ -1,4 +1,6 @@
 .KVCWriteDetail {
+	width: 100%;
+	
 	/* KVCWriteDetailFlexbox:Parent */
 	display: flex;
 	flex-direction: column;

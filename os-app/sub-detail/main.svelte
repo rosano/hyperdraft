@@ -15,7 +15,6 @@ export let KVCWriteDetailDispatchDiscard;
 export let KVCWriteDetailDispatchUpdate;
 export let KVCWriteDetailDispatchSetAsRootPage;
 export let KVCWriteDetailDispatchOpen;
-export let KVCWriteDetailDispatchEscape;
 export let _DebugLauncher = false;
 
 export const modPublic = {
@@ -180,10 +179,6 @@ const mod = {
 		});
 	},
 
-	KVCWriteInputDispatchEscape () {
-		KVCWriteDetailDispatchEscape();
-	},
-
 };
 
 import _OLSKSharedBack from '../_shared/__external/OLSKUIAssets/_OLSKSharedBack.svg';
@@ -270,7 +265,6 @@ import KVCWriteInput from '../sub-input/main.svelte';
 	KVCWriteInputDispatchUpdate={ mod.KVCWriteInputDispatchUpdate }
 	KVCWriteInputDispatchOpen={ mod.KVCWriteInputDispatchOpen }
 	KVCWriteInputDispatchReady={ mod.KVCWriteInputDispatchReady }
-	KVCWriteInputDispatchEscape={ mod.KVCWriteInputDispatchEscape }
 	bind:this={ mod.KVCWriteInputInstance }
 	/>
 

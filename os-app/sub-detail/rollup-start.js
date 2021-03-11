@@ -91,7 +91,6 @@ const KVCWriteDetail = new RollupStart({
 			window.TestKVCWriteDetailDispatchSetAsRootPageData.innerHTML = inputData;
 		}),
 		KVCWriteDetailDispatchOpen: (function  () {}),
-		KVCWriteDetailDispatchEscape: (function  () {}),
 		_DebugLauncher: true,
 	}, params),
 });
