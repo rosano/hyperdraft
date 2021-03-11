@@ -1,24 +1,24 @@
 <script>
-export let KVCWriteMasterListItemObject;
+export let KVCWriteListItemObject;
 
 import KVCWriteLogic from '../open-write/ui-logic.js';
 import KVCTemplate from '../_shared/KVCTemplate/main.js';
 import OLSKString from 'OLSKString';
 </script>
 
-<div class="KVCWriteMasterListItem OLSKCommonEdgeBottom" class:KVCWriteMasterListItemArchived={ KVCWriteMasterListItemObject.KVCNoteIsArchived }>
+<div class="KVCWriteListItem OLSKCommonEdgeBottom" class:KVCWriteListItemArchived={ KVCWriteListItemObject.KVCNoteIsArchived }>
 
-{#if KVCWriteMasterListItemObject.KVCNoteIsPublic }
-	<span class="KVCWriteMasterListItemIsPublic" aria-hidden="true">{ KVCWriteLogic.KVCWriteLogicPublicSymbol() }</span>
+{#if KVCWriteListItemObject.KVCNoteIsPublic }
+	<span class="KVCWriteListItemIsPublic" aria-hidden="true">{ KVCWriteLogic.KVCWriteLogicPublicSymbol() }</span>
 {/if}
 
-<strong class="KVCWriteMasterListItemTitle" aria-hidden="true">{ KVCTemplate.KVCTemplateTruncated(KVCTemplate.KVCTemplatePlaintextTitle(KVCWriteMasterListItemObject.KVCNoteBody)) }</strong>
-<span class="KVCWriteMasterListItemSnippet" aria-hidden="true">{ OLSKString.OLSKStringSnippet(KVCTemplate.KVCTemplatePlaintextBody(KVCWriteMasterListItemObject.KVCNoteBody)) }</span>
+<strong class="KVCWriteListItemTitle" aria-hidden="true">{ KVCTemplate.KVCTemplateTruncated(KVCTemplate.KVCTemplatePlaintextTitle(KVCWriteListItemObject.KVCNoteBody)) }</strong>
+<span class="KVCWriteListItemSnippet" aria-hidden="true">{ OLSKString.OLSKStringSnippet(KVCTemplate.KVCTemplatePlaintextBody(KVCWriteListItemObject.KVCNoteBody)) }</span>
 
 </div>
 
 <style>
-.KVCWriteMasterListItem {
+.KVCWriteListItem {
 	min-height: 46px;
 	padding: 10px;
 
@@ -32,16 +32,16 @@ import OLSKString from 'OLSKString';
 	hyphens: auto;
 }
 
-.KVCWriteMasterListItemArchived {
+.KVCWriteListItemArchived {
 	border-left: 10px solid #cccccc;
 	opacity: 0.8;
 }
 
-.KVCWriteMasterListItemTitle {
+.KVCWriteListItemTitle {
 	display: inline-block;
 }
 
-.KVCWriteMasterListItemSnippet {
+.KVCWriteListItemSnippet {
 	display: block;
 	margin-top: 5px;
 }

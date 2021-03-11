@@ -2,60 +2,60 @@ const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
 const KVCTemplate = require('../_shared/KVCTemplate/main.js').default;
 
-describe('KVCWriteMasterListItem_Misc', function () {
+describe('KVCWriteListItem_Misc', function () {
 
 	const title = Array.from(Array(100)).map(Math.random).join(' ');
 	const body = Array.from(Array(100)).map(Math.random).join(' ');
 
 	before(function() {
 		return browser.OLSKVisit(kDefaultRoute, {
-			KVCWriteMasterListItemObject: JSON.stringify(StubNoteObjectValid({
+			KVCWriteListItemObject: JSON.stringify(StubNoteObjectValid({
 				KVCNoteBody: title + '\n' + body,
 				KVCNoteIsPublic: true,
 			})),
 		});
 	});
 
-	describe('KVCWriteMasterListItem', function test_KVCWriteMasterListItem () {
+	describe('KVCWriteListItem', function test_KVCWriteListItem () {
 
 		it('classes OLSKCommonEdgeBottom', function () {
-			browser.assert.hasClass(KVCWriteMasterListItem, 'OLSKCommonEdgeBottom');
+			browser.assert.hasClass(KVCWriteListItem, 'OLSKCommonEdgeBottom');
 		});
 		
 	});
 
-	describe('KVCWriteMasterListItemIsPublic', function test_KVCWriteMasterListItemIsPublic () {
+	describe('KVCWriteListItemIsPublic', function test_KVCWriteListItemIsPublic () {
 		
 		it('sets aria-hidden', function () {
-			browser.assert.attribute(KVCWriteMasterListItemIsPublic, 'aria-hidden', 'true');
+			browser.assert.attribute(KVCWriteListItemIsPublic, 'aria-hidden', 'true');
 		});
 
 		it('sets text', function () {
-			browser.assert.text(KVCWriteMasterListItemIsPublic, require('../open-write/ui-logic.js').default.KVCWriteLogicPublicSymbol());
+			browser.assert.text(KVCWriteListItemIsPublic, require('../open-write/ui-logic.js').default.KVCWriteLogicPublicSymbol());
 		});
 	
 	});
 
-	describe('KVCWriteMasterListItemTitle', function test_KVCWriteMasterListItemTitle () {
+	describe('KVCWriteListItemTitle', function test_KVCWriteListItemTitle () {
 		
 		it('sets aria-hidden', function () {
-			browser.assert.attribute(KVCWriteMasterListItemTitle, 'aria-hidden', 'true');
+			browser.assert.attribute(KVCWriteListItemTitle, 'aria-hidden', 'true');
 		});
 
 		it('sets text', function () {
-			browser.assert.text(KVCWriteMasterListItemTitle, KVCTemplate.KVCTemplateTruncated(title));
+			browser.assert.text(KVCWriteListItemTitle, KVCTemplate.KVCTemplateTruncated(title));
 		});
 	
 	});
 
-	describe('KVCWriteMasterListItemSnippet', function test_KVCWriteMasterListItemSnippet () {
+	describe('KVCWriteListItemSnippet', function test_KVCWriteListItemSnippet () {
 		
 		it('sets aria-hidden', function () {
-			browser.assert.attribute(KVCWriteMasterListItemSnippet, 'aria-hidden', 'true');
+			browser.assert.attribute(KVCWriteListItemSnippet, 'aria-hidden', 'true');
 		});
 
-		it('calls KVCWriteMasterListItemDispatchSnippet', function () {
-			browser.assert.text(KVCWriteMasterListItemSnippet, require('OLSKString').OLSKStringSnippet(body));
+		it('calls KVCWriteListItemDispatchSnippet', function () {
+			browser.assert.text(KVCWriteListItemSnippet, require('OLSKString').OLSKStringSnippet(body));
 		});
 	
 	});
@@ -64,14 +64,14 @@ describe('KVCWriteMasterListItem_Misc', function () {
 		
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
-				KVCWriteMasterListItemObject: JSON.stringify(StubNoteObjectValid({
+				KVCWriteListItemObject: JSON.stringify(StubNoteObjectValid({
 					KVCNoteIsArchived: true,
 				})),
 			});
 		});
 
-		it('classes KVCWriteMasterListItemArchived', function () {
-			browser.assert.hasClass(KVCWriteMasterListItem, 'KVCWriteMasterListItemArchived');
+		it('classes KVCWriteListItemArchived', function () {
+			browser.assert.hasClass(KVCWriteListItem, 'KVCWriteListItemArchived');
 		});
 	
 	});

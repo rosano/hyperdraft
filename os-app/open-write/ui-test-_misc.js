@@ -123,7 +123,7 @@ describe('KVCWrite_Misc', function () {
 		});
 		
 		before(function () {
-			return browser.click('.KVCWriteMasterListItem');
+			return browser.click('.KVCWriteListItem');
 		});
 
 		it.skip('classes OLSKMasterListFocused', function() {
@@ -131,7 +131,7 @@ describe('KVCWrite_Misc', function () {
 		});
 
 
-		it('sets KVCWriteMasterListItemSelected', function () {
+		it('sets KVCWriteListItemSelected', function () {
 			browser.assert.elements('.OLSKResultsListItemSelected', 1);
 		});
 

@@ -37,8 +37,8 @@ describe('KVCWrite_Access', function () {
 		browser.assert.elements(KVCWriteCreateButtonImage, 1);
 	});
 
-	it('hides KVCWriteMasterListItem', function () {
-		browser.assert.elements('.KVCWriteMasterListItem', 0);
+	it('hides KVCWriteListItem', function () {
+		browser.assert.elements('.KVCWriteListItem', 0);
 	});
 
 	it('hides KVCWriteRevealArchiveButton', function () {

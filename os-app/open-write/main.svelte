@@ -1311,7 +1311,7 @@ import { onMount } from 'svelte';
 onMount(mod.LifecycleModuleWillMount);
 
 import OLSKCatalog from 'OLSKCatalog';
-import KVCWriteMasterListItem from '../sub-listing/main.svelte';
+import KVCWriteListItem from '../sub-listing/main.svelte';
 import KVCWriteDetail from '../sub-detail/main.svelte';
 import OLSKAppToolbar from 'OLSKAppToolbar';
 import OLSKServiceWorkerView from '../_shared/__external/OLSKServiceWorker/main.svelte';
@@ -1365,7 +1365,7 @@ import OLSKUIAssets from 'OLSKUIAssets';
 	<!-- LIST ITEM -->
 
 	<div slot="OLSKMasterListItem">
-		<KVCWriteMasterListItem KVCWriteMasterListItemObject={ OLSKResultsListItem } />
+		<KVCWriteListItem KVCWriteListItemObject={ OLSKResultsListItem } />
 	</div>
 
 	<!-- DETAIL -->
