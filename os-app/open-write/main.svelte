@@ -758,9 +758,7 @@ const mod = {
 				ParamCurrentLanguage: window.OLSKPublicConstants('OLSKSharedPageCurrentLanguage'),
 				ParamSpecUI: OLSK_SPEC_UI(),
 				ParamWindow: window,
-				OLSKLocalized,
 				ParamRouteConstant: window.OLSKPublicConstants('OLSKSharedActiveRouteConstant'),
-				OLSKFormatted: OLSKString.OLSKStringFormatted,
 				OLSKCanonical: window.OLSKCanonical,
 			}).map(function (e) {
 				const item = e.LCHRecipeCallback;
