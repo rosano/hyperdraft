@@ -589,10 +589,10 @@ const mod = {
 		}]);
 	},
 	
-	async ControlNoteDiscard (inputData) {
+	ControlNoteDiscard (inputData) {
 		mod._OLSKCatalog.modPublic.OLSKCatalogRemove(inputData);
 
-		await mod._ValueZDRWrap.App.KVCNote.KVCNoteDelete(inputData);
+		mod._ValueZDRWrap.App.KVCNote.KVCNoteDelete(inputData);
 	},
 
 	ControlRevealArchive () {
