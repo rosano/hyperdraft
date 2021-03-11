@@ -410,7 +410,7 @@ const mod = {
 				LCHRecipeSignature: 'KVCWriteLauncherItemRevealArchive',
 				LCHRecipeName: OLSKLocalized('KVCWriteMasterRevealArchiveButtonText'),
 				LCHRecipeCallback: function KVCWriteLauncherItemRevealArchive () {
-					mod.KVCWriteMasterDispatchRevealArchive();
+					mod.ControlRevealArchive();
 				},
 			});
 		}
@@ -674,6 +674,10 @@ const mod = {
 		mod.ReactDocumentRemainder();
 
 		await mod._ValueZDRWrap.App.KVCNote.KVCNoteDelete(inputData);
+	},
+
+	ControlRevealArchive () {
+		mod._RevealArchiveIsVisible = false;
 	},
 
 	ControlEscape() {
@@ -952,42 +956,6 @@ const mod = {
 
 	OLSKFundDispatchGrant (inputData) {
 		mod._ValueOLSKFundGrant = OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(inputData);
-	},
-
-	KVCWriteMasterDispatchCreate (inputData) {
-		mod.ControlNoteCreate(inputData);
-	},
-
-	KVCWriteMasterDispatchClick (inputData) {
-		mod.ControlNoteSelect(inputData);
-	},
-
-	KVCWriteMasterDispatchArrow (inputData) {
-		mod.ValueNoteSelected(inputData);
-	},
-
-	KVCWriteMasterDispatchFilter (inputData) {
-		if (!inputData) {
-			return mod.ControlEscape();
-		}
-
-		mod.ControlFilterWithThrottle(inputData);
-	},
-
-	KVCWriteMasterDispatchEscape () {
-		mod.ControlEscape();
-	},
-
-	KVCWriteMasterDispatchRevealArchive () {
-		mod._RevealArchiveIsVisible = false;
-	},
-
-	KVCWriteMasterDelegateItemTitle (inputData) {
-		return KVCTemplate.KVCTemplatePlaintextTitle(inputData);
-	},
-
-	KVCWriteMasterDelegateItemSnippet (inputData) {
-		return OLSKString.OLSKStringSnippet(KVCTemplate.KVCTemplatePlaintextBody(inputData));
 	},
 
 	KVCWriteDetailPublicURLFor (inputData) {

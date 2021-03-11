@@ -1,9 +1,11 @@
 const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
+const KVCTemplate = require('../_shared/KVCTemplate/main.js').default;
+
 describe('KVCWriteMasterListItem_Misc', function () {
 
-	const title = Array.from(Array(100)).map(Math.random).join('');
-	const body = Array.from(Array(100)).map(Math.random).join('');
+	const title = Array.from(Array(100)).map(Math.random).join(' ');
+	const body = Array.from(Array(100)).map(Math.random).join(' ');
 
 	before(function() {
 		return browser.OLSKVisit(kDefaultRoute, {
@@ -40,8 +42,8 @@ describe('KVCWriteMasterListItem_Misc', function () {
 			browser.assert.attribute(KVCWriteMasterListItemTitle, 'aria-hidden', 'true');
 		});
 
-		it('calls KVCWriteMasterListItemDispatchTitle', function () {
-			browser.assert.text(KVCWriteMasterListItemTitle, require('OLSKString').OLSKStringSnippet(title));
+		it('sets text', function () {
+			browser.assert.text(KVCWriteMasterListItemTitle, KVCTemplate.KVCTemplateTruncated(title));
 		});
 	
 	});

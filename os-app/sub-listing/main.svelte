@@ -11,6 +11,7 @@ import OLSKString from 'OLSKString';
 {#if KVCWriteMasterListItemObject.KVCNoteIsPublic }
 	<span class="KVCWriteMasterListItemIsPublic" aria-hidden="true">{ KVCWriteLogic.KVCWriteLogicPublicSymbol() }</span>
 {/if}
+
 <strong class="KVCWriteMasterListItemTitle" aria-hidden="true">{ KVCTemplate.KVCTemplateTruncated(KVCTemplate.KVCTemplatePlaintextTitle(KVCWriteMasterListItemObject.KVCNoteBody)) }</strong>
 <span class="KVCWriteMasterListItemSnippet" aria-hidden="true">{ OLSKString.OLSKStringSnippet(KVCTemplate.KVCTemplatePlaintextBody(KVCWriteMasterListItemObject.KVCNoteBody)) }</span>
 

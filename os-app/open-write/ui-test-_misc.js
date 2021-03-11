@@ -116,42 +116,6 @@ describe('KVCWrite_Misc', function () {
 
 	});
 
-	context('escape', function test_escape () {
-
-		before(function () {
-			browser.fill('.KVCWriteInputFieldDebug', 'alfa');
-		});
-
-		before(function () {
-			browser.fill('.OLSKMasterListFilterField', 'alfa');
-		});
-
-		before(function () {
-			browser.assert.input('.OLSKMasterListFilterField', 'alfa');
-		});
-
-		before(function () {
-			browser.query('.KVCWriteInputFieldDebug').focus();
-		});
-
-		before(function () {
-			browser.assert.hasFocus('.KVCWriteInputFieldDebug');
-		});
-
-		before(function () {
-			return browser.OLSKFireKeyboardEvent(browser.window, 'Escape');
-		});
-		
-		it('focuses OLSKMasterListFilterField', function() {
-			browser.assert.hasFocus('.OLSKMasterListFilterField');
-		});
-		
-		it.skip('clears KVCWriteMasterFilterText', function() {
-			browser.assert.input('.OLSKMasterListFilterField', '');
-		});
-
-	});
-
 	context('select', function test_select () {
 		
 		before(function () {
@@ -172,7 +136,7 @@ describe('KVCWrite_Misc', function () {
 		});
 
 		it('sets KVCWriteDetailItem', function () {
-			browser.assert.elements('.OLSKDetailPlaceholder', 0);
+			browser.assert.elements('.KVCWriteDetail', 1);
 		});
 
 		it.skip('focus KVCWriteInput', function() {

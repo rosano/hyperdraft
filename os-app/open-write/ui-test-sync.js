@@ -82,8 +82,8 @@ describe('KVCWrite_Sync', function () {
 				return browser.OLSKLauncherRun('FakeZDRSchemaDispatchSyncDeleteNote');
 			});
 
-			it('clear detail', function () {
-				browser.assert.elements('.OLSKDetailPlaceholder', 1);
+			it('clears detail', function () {
+				browser.assert.elements('.KVCWriteDetail', 0);
 			});
 		
 		});

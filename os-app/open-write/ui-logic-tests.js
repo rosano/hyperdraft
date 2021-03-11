@@ -22,7 +22,7 @@ describe('KVCWriteAccessibilitySummary', function test_KVCWriteAccessibilitySumm
 	});
 
 	it('truncates long string', function() {
-		const item = Array.from(Array(100)).map(Math.random).join('');
+		const item = Array.from(Array(100)).map(Math.random).join(' ');
 		deepEqual(mod.KVCWriteAccessibilitySummary(StubNoteObjectValid({
 			KVCNoteBody: item,
 		})), require('OLSKString').OLSKStringSnippet(item));
