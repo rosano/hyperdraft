@@ -6,6 +6,6 @@ exports.OLSKControllerRoutes = function() {
 			return res.OLSKExpressLayoutRender(require('path').join(__dirname, 'stub-view'));
 		},
 		OLSKRouteSignature: 'KVCFeatureListStubRoute',
-		OLSKRouteLanguageCodes: ['en'],
+		OLSKRouteLanguageCodes: ['en', 'fr', 'es'],
 	}];
 };
