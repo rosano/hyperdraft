@@ -9,11 +9,11 @@ import OLSKString from 'OLSKString';
 <div class="KVCWriteListItem OLSKCommonEdgeBottom" class:KVCWriteListItemArchived={ KVCWriteListItemObject.KVCNoteIsArchived }>
 
 {#if KVCWriteListItemObject.KVCNoteIsPublic }
-	<span class="KVCWriteListItemIsPublic" aria-hidden="true">{ KVCWriteLogic.KVCWriteLogicPublicSymbol() }</span>
+	<span class="KVCWriteListItemIsPublic">{ KVCWriteLogic.KVCWriteLogicPublicSymbol() }</span>
 {/if}
 
-<strong class="KVCWriteListItemTitle" aria-hidden="true">{ KVCTemplate.KVCTemplateTruncated(KVCTemplate.KVCTemplatePlaintextTitle(KVCWriteListItemObject.KVCNoteBody)) }</strong>
-<span class="KVCWriteListItemSnippet" aria-hidden="true">{ OLSKString.OLSKStringSnippet(KVCTemplate.KVCTemplatePlaintextBody(KVCWriteListItemObject.KVCNoteBody)) }</span>
+<strong class="KVCWriteListItemTitle">{ KVCTemplate.KVCTemplateTruncated(KVCTemplate.KVCTemplatePlaintextTitle(KVCWriteListItemObject.KVCNoteBody)) }</strong>
+<span class="KVCWriteListItemSnippet">{ OLSKString.OLSKStringSnippet(KVCTemplate.KVCTemplatePlaintextBody(KVCWriteListItemObject.KVCNoteBody)) }</span>
 
 </div>
 

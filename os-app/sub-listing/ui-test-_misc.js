@@ -26,10 +26,6 @@ describe('KVCWriteListItem_Misc', function () {
 
 	describe('KVCWriteListItemIsPublic', function test_KVCWriteListItemIsPublic () {
 		
-		it('sets aria-hidden', function () {
-			browser.assert.attribute(KVCWriteListItemIsPublic, 'aria-hidden', 'true');
-		});
-
 		it('sets text', function () {
 			browser.assert.text(KVCWriteListItemIsPublic, require('../open-write/ui-logic.js').default.KVCWriteLogicPublicSymbol());
 		});
@@ -38,10 +34,6 @@ describe('KVCWriteListItem_Misc', function () {
 
 	describe('KVCWriteListItemTitle', function test_KVCWriteListItemTitle () {
 		
-		it('sets aria-hidden', function () {
-			browser.assert.attribute(KVCWriteListItemTitle, 'aria-hidden', 'true');
-		});
-
 		it('sets text', function () {
 			browser.assert.text(KVCWriteListItemTitle, KVCTemplate.KVCTemplateTruncated(title));
 		});
@@ -50,10 +42,6 @@ describe('KVCWriteListItem_Misc', function () {
 
 	describe('KVCWriteListItemSnippet', function test_KVCWriteListItemSnippet () {
 		
-		it('sets aria-hidden', function () {
-			browser.assert.attribute(KVCWriteListItemSnippet, 'aria-hidden', 'true');
-		});
-
 		it('calls KVCWriteListItemDispatchSnippet', function () {
 			browser.assert.text(KVCWriteListItemSnippet, require('OLSKString').OLSKStringSnippet(body));
 		});
