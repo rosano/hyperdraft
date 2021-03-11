@@ -16,7 +16,6 @@ export let KVCWriteDetailDispatchUpdate;
 export let KVCWriteDetailDispatchSetAsRootPage;
 export let KVCWriteDetailDispatchOpen;
 export let KVCWriteDetailDispatchEscape;
-export let OLSKMobileViewInactive = false;
 export let _DebugLauncher = false;
 
 export const modPublic = {
@@ -198,7 +197,7 @@ import KVCWriteInput from '../sub-input/main.svelte';
 </script>
 <svelte:window on:keydown={ mod.InterfaceWindowDidKeydown }/>
 
-<div class="KVCWriteDetail OLSKViewportDetail" class:OLSKMobileViewInactive={ OLSKMobileViewInactive } aria-hidden={ OLSKMobileViewInactive ? true : null }>
+<div class="KVCWriteDetail">
 
 <header class="KVCWriteDetailHeader OLSKMobileViewHeader">
 

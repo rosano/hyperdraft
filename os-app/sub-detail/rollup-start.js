@@ -31,6 +31,10 @@ const mod = {
 	// SETUP
 
 	SetupEverything() {
+		if (!params.KVCWriteDetailItem) {
+			return;
+		}
+		
 		mod.ReactDetailItem(params.KVCWriteDetailItem);
 	},
 
@@ -89,9 +93,7 @@ const KVCWriteDetail = new RollupStart({
 		KVCWriteDetailDispatchOpen: (function  () {}),
 		KVCWriteDetailDispatchEscape: (function  () {}),
 		_DebugLauncher: true,
-	}, Object.fromEntries(Object.entries(params).filter(function (e) {
-		return e[0] !== 'KVCWriteDetailItem';
-	}))),
+	}, params),
 });
 
 KVCWriteDetail.modPublic.KVCWriteDetailSetItem(params.KVCWriteDetailItem);

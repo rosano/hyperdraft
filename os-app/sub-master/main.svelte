@@ -11,7 +11,6 @@ export let KVCWriteMasterDispatchEscape;
 export let KVCWriteMasterDispatchRevealArchive;
 export let KVCWriteMasterDelegateItemTitle;
 export let KVCWriteMasterDelegateItemSnippet;
-export let OLSKMobileViewInactive = false;
 
 import { OLSKLocalized } from 'OLSKInternational';
 import { OLSK_SPEC_UI } from 'OLSKSpec'
@@ -65,7 +64,6 @@ import KVCWriteMasterListItem from './submodules/KVCWriteMasterListItem/main.sve
 	let:OLSKResultsListItem={ item }
 	OLSKMasterListItemAccessibilitySummaryFunction={ (inputData) =>  KVCWriteMasterLogic.KVCWriteMasterTruncatedTitle(KVCWriteMasterDelegateItemTitle(inputData.KVCNoteBody), true) }	
 	OLSKMasterListClass={ 'KVCWriteMaster' }
-	OLSKMobileViewInactive={ OLSKMobileViewInactive }
 	>
 	<div slot="OLSKMasterListToolbarTail">
 		<div class="OLSKToolbarElementGroup">
