@@ -38,7 +38,7 @@ const mod = {
 		mod._ValueSettingsAll[param1] = param2;
 	},
 	
-	_ValueStorageToolbarHidden: true,
+	_ValueCloudToolbarHidden: true,
 
 	_ValueSaveNoteThrottleMap: {},
 
@@ -834,11 +834,11 @@ const mod = {
 			return;
 		}
 
-		mod._ValueStorageToolbarHidden = false;
+		mod._ValueCloudToolbarHidden = false;
 	},
 
 	OLSKAppToolbarDispatchStorage () {
-		mod._ValueStorageToolbarHidden = !mod._ValueStorageToolbarHidden;
+		mod._ValueCloudToolbarHidden = !mod._ValueCloudToolbarHidden;
 	},
 
 	OLSKAppToolbarDispatchLauncher () {
@@ -933,7 +933,7 @@ const mod = {
 	},
 
 	KVCWriteDetailDispatchConnect () {
-		mod._ValueStorageToolbarHidden = false;
+		mod._ValueCloudToolbarHidden = false;
 	},
 
 	KVCWriteDetailDispatchPublish () {
@@ -1313,7 +1313,7 @@ import OLSKUIAssets from 'OLSKUIAssets';
 
 <footer class="KVCWriteViewportFooter OLSKMobileViewFooter">
 
-	{#if !mod._ValueStorageToolbarHidden }
+	{#if !mod._ValueCloudToolbarHidden }
 		<div class="KVCWriteStorageToolbar OLSKStorageToolbar OLSKToolbar OLSKToolbarJustify OLSKCommonEdgeTop">
 			<div class="OLSKToolbarElementGroup">
 			</div>
