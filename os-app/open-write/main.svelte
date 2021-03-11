@@ -495,8 +495,6 @@ const mod = {
 			KVCNoteBody: typeof inputData === 'string' ? inputData : '',
 		})));
 
-		mod.ReactDocumentRemainder();
-
 		if (mod.DataIsMobile()) {
 			mod._KVCWriteDetail.modPublic.KVCWriteDetailEditorFocus();
 		}
@@ -624,8 +622,6 @@ const mod = {
 	
 	async ControlNoteDiscard (inputData) {
 		mod._OLSKCatalog.modPublic.OLSKCatalogRemove(inputData);
-
-		mod.ReactDocumentRemainder();
 
 		await mod._ValueZDRWrap.App.KVCNote.KVCNoteDelete(inputData);
 	},
@@ -769,6 +765,10 @@ const mod = {
 		mod._OLSKCatalog.modPublic.OLSKCatalogFilterWithNoThrottle('');
 
 		mod.ControlNoteCreate(inputData + '\n\n');
+	},
+
+	OLSKCatalogDispatchQuantity (inputData) {
+		mod._ValueDocumentRemainder = OLSKFund.OLSKFundRemainder(inputData, parseInt('KVC_FUND_DOCUMENT_LIMIT_SWAP_TOKEN'));
 	},
 
 	OLSKAppToolbarDispatchApropos () {
@@ -1056,10 +1056,6 @@ const mod = {
 		})
 	},
 
-	async ReactDocumentRemainder () {
-		mod._ValueDocumentRemainder = OLSKFund.OLSKFundRemainder(mod._OLSKCatalog.modPublic._OLSKCatalogDataItemsAll().length, parseInt('KVC_FUND_DOCUMENT_LIMIT_SWAP_TOKEN'));
-	},
-
 	// SETUP
 
 	async SetupEverything () {
@@ -1133,11 +1129,9 @@ const mod = {
 			client.ZDRCloudDisconnect();
 		};
 
-		const items = await mod._ValueZDRWrap.App.KVCNote.KVCNoteList();
-
-		items.map(mod._OLSKCatalog.modPublic.OLSKCatalogInsert);
-
-		mod.ReactDocumentRemainder();
+		if (!(await mod._ValueZDRWrap.App.KVCNote.KVCNoteList()).map(mod._OLSKCatalog.modPublic.OLSKCatalogInsert).length) {
+			mod.OLSKCatalogDispatchQuantity(0);
+		}
 	},
 
 	async SetupValueSettingsAll() {
@@ -1244,6 +1238,7 @@ import OLSKUIAssets from 'OLSKUIAssets';
 	OLSKCatalogDispatchArchivedHide={ mod.OLSKCatalogDispatchArchivedHide }
 	OLSKCatalogDispatchArchivedShow={ mod.OLSKCatalogDispatchArchivedShow }
 	OLSKCatalogDispatchFilterSubmit={ mod.OLSKCatalogDispatchFilterSubmit }
+	OLSKCatalogDispatchQuantity={ mod.OLSKCatalogDispatchQuantity }
 
 	let:OLSKResultsListItem
 	>
