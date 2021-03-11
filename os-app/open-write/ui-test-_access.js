@@ -6,7 +6,7 @@ Object.entries({
 	KVCWriteCreateButton: '.KVCWriteCreateButton',
 	KVCWriteCreateButtonImage: '.KVCWriteCreateButtonImage',
 
-	KVCWriteMasterRevealArchiveButton: '.KVCWriteMasterRevealArchiveButton',
+	KVCWriteRevealArchiveButton: '.KVCWriteRevealArchiveButton',
 
 	KVCWriteViewportFooter: '.KVCWriteViewportFooter',
 	
@@ -41,8 +41,8 @@ describe('KVCWrite_Access', function () {
 		browser.assert.elements('.KVCWriteMasterListItem', 0);
 	});
 
-	it('hides KVCWriteMasterRevealArchiveButton', function () {
-		browser.assert.elements('.KVCWriteMasterRevealArchiveButton', 0);
+	it('hides KVCWriteRevealArchiveButton', function () {
+		browser.assert.elements('.KVCWriteRevealArchiveButton', 0);
 	});
 
 	it('shows KVCWriteViewportFooter', function () {
@@ -217,8 +217,8 @@ describe('KVCWrite_Access', function () {
 			return browser.pressButton('.KVCWriteDetailToolbarArchiveButton');
 		});
 
-		it('hides KVCWriteMasterRevealArchiveButton', function () {
-			browser.assert.elements('.KVCWriteMasterRevealArchiveButton', 0);
+		it('hides KVCWriteRevealArchiveButton', function () {
+			browser.assert.elements('.KVCWriteRevealArchiveButton', 0);
 		});
 
 		it('hides KVCWriteLauncherItemRevealArchive', function () {
@@ -231,8 +231,8 @@ describe('KVCWrite_Access', function () {
 				return browser.OLSKFireKeyboardEvent(browser.window, 'Escape');
 			});
 
-			it('shows KVCWriteMasterRevealArchiveButton', function () {
-				browser.assert.elements('.KVCWriteMasterRevealArchiveButton', 1);
+			it('shows KVCWriteRevealArchiveButton', function () {
+				browser.assert.elements('.KVCWriteRevealArchiveButton', 1);
 			});
 
 			it('shows KVCWriteLauncherItemRevealArchive', function () {

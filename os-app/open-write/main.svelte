@@ -408,7 +408,7 @@ const mod = {
 		if (mod.DataRevealArchiveIsVisible()) {
 			outputData.push({
 				LCHRecipeSignature: 'KVCWriteLauncherItemRevealArchive',
-				LCHRecipeName: OLSKLocalized('KVCWriteMasterRevealArchiveButtonText'),
+				LCHRecipeName: OLSKLocalized('KVCWriteRevealArchiveButtonText'),
 				LCHRecipeCallback: function KVCWriteLauncherItemRevealArchive () {
 					mod.ControlRevealArchive();
 				},
@@ -1359,7 +1359,7 @@ import OLSKUIAssets from 'OLSKUIAssets';
 	</div>
 
 	<div class="OLSKMasterListBodyTail" slot="OLSKMasterListBodyTail">{#if mod._RevealArchiveIsVisible }
-		<button class="KVCWriteMasterRevealArchiveButton OLSKDecorPress" on:click={ mod._OLSKCatalog.modPublic.OLSKCatalogRevealArchive }>{ OLSKLocalized('KVCWriteMasterRevealArchiveButtonText') }</button>
+		<button class="KVCWriteRevealArchiveButton OLSKDecorPress" on:click={ mod._OLSKCatalog.modPublic.OLSKCatalogRevealArchive }>{ OLSKLocalized('KVCWriteRevealArchiveButtonText') }</button>
 	{/if}</div>
 
 	<!-- LIST ITEM -->

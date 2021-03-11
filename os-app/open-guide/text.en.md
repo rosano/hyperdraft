@@ -137,7 +137,7 @@ After setting up a custom domain, designate any note as the home page with the `
 | `KVCWriteLauncherItemJournalText` | Launcher |
 | `KVCWriteLauncherItemBacklinksText` | Launcher |
 | `KVCWriteLauncherItemShowPublicNotesText` | Launcher |
-| `KVCWriteMasterRevealArchiveButtonText` | Launcher |
+| `KVCWriteRevealArchiveButtonText` | Launcher |
 | `OLSKRemoteStorageLauncherItemOpenLoginLinkText` | Launcher |
 | `OLSKServiceWorkerLauncherItemReloadText` | Launcher |
 | `OLSKServiceWorkerLauncherItemDebugForceUpdateText` | Launcher |

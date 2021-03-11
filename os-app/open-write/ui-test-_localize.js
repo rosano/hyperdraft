@@ -198,12 +198,12 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 				return browser.OLSKFireKeyboardEvent(browser.window, 'Escape');
 			});
 
-			it('localizes KVCWriteMasterRevealArchiveButton', function () {
-				browser.assert.text(KVCWriteMasterRevealArchiveButton, uLocalized('KVCWriteMasterRevealArchiveButtonText'));
+			it('localizes KVCWriteRevealArchiveButton', function () {
+				browser.assert.text(KVCWriteRevealArchiveButton, uLocalized('KVCWriteRevealArchiveButtonText'));
 			});
 
 			it('localizes KVCWriteLauncherItemRevealArchive', function () {
-				return browser.assert.OLSKLauncherItemText('KVCWriteLauncherItemRevealArchive', uLocalized('KVCWriteMasterRevealArchiveButtonText'));
+				return browser.assert.OLSKLauncherItemText('KVCWriteLauncherItemRevealArchive', uLocalized('KVCWriteRevealArchiveButtonText'));
 			});
 
 		});

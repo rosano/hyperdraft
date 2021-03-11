@@ -1,7 +1,7 @@
 KVCWriteTitle: Écrire
 KVCWriteFilterFieldText: Filtrer or créer
 KVCWriteCreateButtonText: Créer
-KVCWriteMasterRevealArchiveButtonText: Montrer archive
+KVCWriteRevealArchiveButtonText: Montrer archive
 KVCWriteLauncherItemImportJSONText: Importer JSON (beta)
 KVCWriteLauncherItemImportJSONErrorNotFilledAlertText: Entrée non remplie
 KVCWriteLauncherItemImportJSONErrorNotValidAlertText: Entrée non valide
