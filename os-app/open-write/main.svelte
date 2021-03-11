@@ -871,6 +871,8 @@ const mod = {
 	KVCWriteDetailDispatchBack () {
 		// mod.ControlNoteSelect(null);
 
+		mod._OLSKCatalog.modPublic.OLSKCatalogFocusMaster();
+
 		if (!mod.DataIsMobile()) {
 			return;
 		}

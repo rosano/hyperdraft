@@ -74,9 +74,9 @@ describe('KVCWrite_Misc', function () {
 			return browser.pressButton('.KVCWriteDetailToolbarBackButton');
 		});
 
-		// it('sets KVCWriteDetailItem', function () {
-		// 	browser.assert.elements('.OLSKDetailPlaceholder', 1);
-		// });
+		it('sets focus', function () {
+			browser.assert.hasClass('.OLSKCatalogDetail', 'OLSKMobileViewInactive');
+		});
 
 	});
 
