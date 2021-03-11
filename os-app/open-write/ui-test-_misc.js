@@ -80,42 +80,6 @@ describe('KVCWrite_Misc', function () {
 
 	});
 
-	context('tab', function test_tab () {
-		
-		context('master focused', function () {
-			
-			before(function () {
-				return browser.OLSKFireKeyboardEvent(browser.window, 'Tab');
-			});
-
-			it.skip('classes OLSKMasterListFocused', function() {
-				browser.assert.hasNoClass('.KVCWriteMaster', 'OLSKMasterListFocused');
-			});
-
-			it.skip('focus KVCWriteInput', function() {
-				browser.assert.hasClass('.CodeMirror', 'CodeMirror-focused');
-			});
-		
-		});
-		
-		context('editor focused', function () {
-			
-			before(function () {
-				return browser.OLSKFireKeyboardEvent(browser.window, 'Tab');
-			});
-
-			it.skip('classes OLSKMasterListFocused', function() {
-				browser.assert.hasClass('.KVCWriteMaster', 'OLSKMasterListFocused');
-			});
-
-			it.skip('focus KVCWriteInput', function() {
-				browser.assert.hasNoClass('.CodeMirror', 'CodeMirror-focused');
-			});
-		
-		});
-
-	});
-
 	context('select', function test_select () {
 		
 		before(function () {
@@ -125,11 +89,6 @@ describe('KVCWrite_Misc', function () {
 		before(function () {
 			return browser.click('.KVCWriteListItem');
 		});
-
-		it.skip('classes OLSKMasterListFocused', function() {
-			browser.assert.hasNoClass('.KVCWriteMaster', 'OLSKMasterListFocused');
-		});
-
 
 		it('sets KVCWriteListItemSelected', function () {
 			browser.assert.elements('.OLSKResultsListItemSelected', 1);
