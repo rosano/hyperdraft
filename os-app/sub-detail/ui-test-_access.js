@@ -34,125 +34,101 @@ Object.entries({
 describe('KVCWriteDetail_Access', function () {
 	
 	before(function() {
-		return browser.OLSKVisit(kDefaultRoute);
+		return browser.OLSKVisit(kDefaultRoute, {
+			KVCWriteDetailItem: JSON.stringify(StubNoteObjectValid()),
+		});
 	});
 
 	it('shows KVCWriteDetail', function () {
 		browser.assert.elements(KVCWriteDetail, 1);
 	});
 
-	it('shows OLSKDetailPlaceholder', function () {
-		browser.assert.elements('.OLSKDetailPlaceholder', 1);
+	it('shows KVCWriteDetailHeader', function () {
+		browser.assert.elements(KVCWriteDetailHeader, 1);
 	});
 
-	it('hides KVCWriteDetailHeader', function () {
-		browser.assert.elements(KVCWriteDetailHeader, 0);
+	it('shows KVCWriteDetailToolbar', function () {
+		browser.assert.elements(KVCWriteDetailToolbar, 1);
 	});
 
-	it('hides KVCWriteInput', function () {
-		browser.assert.elements('.KVCWriteInput', 0);
+	it('shows KVCWriteDetailToolbarBackButton', function () {
+		browser.assert.elements(KVCWriteDetailToolbarBackButton, 1);
+	});
+
+	it('shows KVCWriteDetailToolbarBackButtonImage', function () {
+		browser.assert.elements(KVCWriteDetailToolbarBackButtonImage, 1);
+	});
+
+	it('shows KVCWriteDetailToolbarConnectButton', function () {
+		browser.assert.elements(KVCWriteDetailToolbarConnectButton, 1);
+	});
+
+	it('shows KVCWriteDetailToolbarConnectButtonImage', function () {
+		browser.assert.elements(KVCWriteDetailToolbarConnectButtonImage, 1);
+	});
+
+	it('hides KVCWriteDetailToolbarIsRootPage', function () {
+		browser.assert.elements(KVCWriteDetailToolbarIsRootPage, 0);
+	});
+
+	it('hide KVCWriteDetailToolbarPublishButton', function () {
+		browser.assert.elements(KVCWriteDetailToolbarPublishButton, 0);
+	});
+
+	it('hide KVCWriteDetailToolbarPublishButtonImage', function () {
+		browser.assert.elements(KVCWriteDetailToolbarPublishButtonImage, 0);
+	});
+
+	it('hides KVCWriteDetailToolbarPublicLink', function () {
+		browser.assert.elements(KVCWriteDetailToolbarPublicLink, 0);
+	});
+
+	it('hides KVCWriteDetailToolbarRetractButton', function () {
+		browser.assert.elements(KVCWriteDetailToolbarRetractButton, 0);
+	});
+
+	it('hides KVCWriteDetailToolbarJumpButton', function () {
+		browser.assert.elements(KVCWriteDetailToolbarJumpButton, 0);
+	});
+
+	it('shows KVCWriteDetailToolbarArchiveButton', function () {
+		browser.assert.elements(KVCWriteDetailToolbarArchiveButton, 1);
+	});
+
+	it('shows KVCWriteDetailToolbarArchiveButtonImage', function () {
+		browser.assert.elements(KVCWriteDetailToolbarArchiveButtonImage, 1);
+	});
+
+	it('hides KVCWriteDetailToolbarUnarchiveButton', function () {
+		browser.assert.elements(KVCWriteDetailToolbarUnarchiveButton, 0);
+	});
+
+	it('shows KVCWriteDetailToolbarDiscardButton', function () {
+		browser.assert.elements(KVCWriteDetailToolbarDiscardButton, 1);
+	});
+
+	it('shows KVCWriteDetailToolbarDiscardButtonImage', function () {
+		browser.assert.elements(KVCWriteDetailToolbarDiscardButtonImage, 1);
+	});
+
+	it('shows KVCWriteInput', function () {
+		browser.assert.elements('.KVCWriteInput', 1);
+	});
+
+	it('shows KVCWriteDetailLauncherItemArchive', function () {
+		return browser.assert.OLSKLauncherItems('KVCWriteDetailLauncherItemArchive', 1);
+	});
+
+	it('hides KVCWriteDetailLauncherItemUnarchive', function () {
+		return browser.assert.OLSKLauncherItems('KVCWriteDetailLauncherItemUnarchive', 0);
+	});
+
+	it('shows KVCWriteDetailLauncherItemShowLocalVersions', function () {
+		return browser.assert.OLSKLauncherItems('KVCWriteDetailLauncherItemShowLocalVersions', 1);
 	});
 
 	it('hides KVCWriteDetailLauncherItemSetAsRootPage', function () {
 		return browser.assert.OLSKLauncherItems('KVCWriteDetailLauncherItemSetAsRootPage', 0);
-	});
-
-	context('KVCWriteDetailItem', function() {
-
-		before(function() {
-			return browser.OLSKVisit(kDefaultRoute, {
-				KVCWriteDetailItem: JSON.stringify(StubNoteObjectValid()),
-			});
-		});
-
-		it('hides OLSKDetailPlaceholder', function () {
-			browser.assert.elements('.OLSKDetailPlaceholder', 0);
-		});
-
-		it('shows KVCWriteDetailHeader', function () {
-			browser.assert.elements(KVCWriteDetailHeader, 1);
-		});
-
-		it('shows KVCWriteDetailToolbar', function () {
-			browser.assert.elements(KVCWriteDetailToolbar, 1);
-		});
-
-		it('shows KVCWriteDetailToolbarBackButton', function () {
-			browser.assert.elements(KVCWriteDetailToolbarBackButton, 1);
-		});
-
-		it('shows KVCWriteDetailToolbarBackButtonImage', function () {
-			browser.assert.elements(KVCWriteDetailToolbarBackButtonImage, 1);
-		});
-
-		it('shows KVCWriteDetailToolbarConnectButton', function () {
-			browser.assert.elements(KVCWriteDetailToolbarConnectButton, 1);
-		});
-
-		it('shows KVCWriteDetailToolbarConnectButtonImage', function () {
-			browser.assert.elements(KVCWriteDetailToolbarConnectButtonImage, 1);
-		});
-
-		it('hides KVCWriteDetailToolbarIsRootPage', function () {
-			browser.assert.elements(KVCWriteDetailToolbarIsRootPage, 0);
-		});
-
-		it('hide KVCWriteDetailToolbarPublishButton', function () {
-			browser.assert.elements(KVCWriteDetailToolbarPublishButton, 0);
-		});
-
-		it('hide KVCWriteDetailToolbarPublishButtonImage', function () {
-			browser.assert.elements(KVCWriteDetailToolbarPublishButtonImage, 0);
-		});
-
-		it('hides KVCWriteDetailToolbarPublicLink', function () {
-			browser.assert.elements(KVCWriteDetailToolbarPublicLink, 0);
-		});
-
-		it('hides KVCWriteDetailToolbarRetractButton', function () {
-			browser.assert.elements(KVCWriteDetailToolbarRetractButton, 0);
-		});
-
-		it('hides KVCWriteDetailToolbarJumpButton', function () {
-			browser.assert.elements(KVCWriteDetailToolbarJumpButton, 0);
-		});
-
-		it('shows KVCWriteDetailToolbarArchiveButton', function () {
-			browser.assert.elements(KVCWriteDetailToolbarArchiveButton, 1);
-		});
-
-		it('shows KVCWriteDetailToolbarArchiveButtonImage', function () {
-			browser.assert.elements(KVCWriteDetailToolbarArchiveButtonImage, 1);
-		});
-
-		it('hides KVCWriteDetailToolbarUnarchiveButton', function () {
-			browser.assert.elements(KVCWriteDetailToolbarUnarchiveButton, 0);
-		});
-
-		it('shows KVCWriteDetailToolbarDiscardButton', function () {
-			browser.assert.elements(KVCWriteDetailToolbarDiscardButton, 1);
-		});
-
-		it('shows KVCWriteDetailToolbarDiscardButtonImage', function () {
-			browser.assert.elements(KVCWriteDetailToolbarDiscardButtonImage, 1);
-		});
-
-		it('shows KVCWriteInput', function () {
-			browser.assert.elements('.KVCWriteInput', 1);
-		});
-
-		it('shows KVCWriteDetailLauncherItemArchive', function () {
-			return browser.assert.OLSKLauncherItems('KVCWriteDetailLauncherItemArchive', 1);
-		});
-
-		it('hides KVCWriteDetailLauncherItemUnarchive', function () {
-			return browser.assert.OLSKLauncherItems('KVCWriteDetailLauncherItemUnarchive', 0);
-		});
-
-		it('shows KVCWriteDetailLauncherItemShowLocalVersions', function () {
-			return browser.assert.OLSKLauncherItems('KVCWriteDetailLauncherItemShowLocalVersions', 1);
-		});
-		
 	});
 
 	context('KVCWriteInputDispatchHeaderTokens', function() {

@@ -34,7 +34,6 @@ const KVCWriteInput = new RollupStart({
 		}),
 		KVCWriteInputDispatchOpen: (function  () {}),
 		KVCWriteInputDispatchReady: (function  () {}),
-		KVCWriteInputDispatchEscape: (function  () {}),
 	}, params),
 });
 

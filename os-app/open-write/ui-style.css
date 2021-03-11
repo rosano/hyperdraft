@@ -6,6 +6,20 @@
 	color: var(--KVCCommonForeground);
 }
 
+.OLSKMasterListBodyTail {
+	padding: 10px;
+	
+	/* @OLSKMasterListBodyTailFlexbox:Parent */
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.KVCWriteDetailContainer {
+	display: flex;
+	height: 100%;
+}
+
 .KVCWriteStorageToolbar {
 	/* AppContainerFlexbox:Child */
 	flex-shrink: 0;

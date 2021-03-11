@@ -1,31 +1,46 @@
+import OLSKString from 'OLSKString';
+import KVCNote from '../_shared/KVCNote/main.js';
 import KVCTemplate from '../_shared/KVCTemplate/main.js';
 
 const mod = {
+
+	KVCWriteAccessibilitySummary (inputData) {
+		if (KVCNote.KVCNoteErrors(inputData)) {
+			throw new Error('KVCErrorInputNotValid');
+		}
+
+		return OLSKString.OLSKStringSnippet(KVCTemplate.KVCTemplatePlaintextTitle(inputData.KVCNoteBody));
+	},
 
 	KVCWriteLogicPublicSymbol () {
 		return 'ᗕ';
 	},
 
-	KVCWriteFilterFunction (inputData) {
-		if (typeof inputData !== 'string') {
+	KVCWriteFilterFunction (param1, param2) {
+		if (typeof param2 !== 'string') {
 			throw new Error('KVCErrorInputNotValid');
 		}
 
-		const isPublic = inputData.match(mod.KVCWriteLogicPublicSymbol());
+		const isPublic = param2.match(mod.KVCWriteLogicPublicSymbol());
 		
-		inputData = inputData.split(mod.KVCWriteLogicPublicSymbol()).join('').trim();
+		param2 = param2.split(mod.KVCWriteLogicPublicSymbol()).join('').trim();
 
-		return function (e) {
-			if (isPublic && !e.KVCNoteIsPublic) {
-				return false;
-			}
+		if (isPublic && !param1.KVCNoteIsPublic) {
+			return false;
+		}
 
-			// Searching and sorting text with diacritical marks in JavaScript | Thread Engineering https://thread.engineering/2018-08-29-searching-and-sorting-text-with-diacritical-marks-in-javascript/
-			return !!e.KVCNoteBody.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').includes(inputData.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''));
-		};
+		return OLSKString.OLSKStringMatch(param2, param1.KVCNoteBody);
 	},
 
-	KVCWriteLogicListSort (a, b) {
+	KVCWriteExactFunction (param1, param2) {
+		if (typeof param2 !== 'string') {
+			throw new Error('KVCErrorInputNotValid');
+		}
+
+		return OLSKString.OLSKStringMatch(param2, KVCTemplate.KVCTemplatePlaintextTitle(param1.KVCNoteBody), 'startsWith');
+	},
+
+	KVCWriteLogicListSortFunction (a, b) {
 		if (a.KVCNoteIsArchived !== b.KVCNoteIsArchived) {
 			return a.KVCNoteIsArchived ? 1 : -1;
 		}

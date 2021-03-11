@@ -124,11 +124,11 @@ describe('KVCWrite_Fund', function () {
 		context('create', function () {
 			
 			before(function () {
-				return browser.pressButton('.KVCWriteMasterCreateButton');
+				return browser.pressButton('.KVCWriteCreateButton');
 			});
 
-			it('shows KVCWriteMasterListItem', function () { // #hotfix-invisible-until-assert
-				browser.assert.elements('.KVCWriteMasterListItem', 1);
+			it('shows KVCWriteListItem', function () { // #hotfix-invisible-until-assert
+				browser.assert.elements('.KVCWriteListItem', 1);
 			});
 
 			it('updates number', function () {
@@ -281,7 +281,7 @@ describe('KVCWrite_Fund', function () {
 
 		it('alerts', function() {
 			browser.assert.OLSKConfirmQuestion(function () {
-				return browser.pressButton('.KVCWriteMasterCreateButton');
+				return browser.pressButton('.KVCWriteCreateButton');
 			}, uLocalized('OLSKFundGateText'));
 		});
 
@@ -290,7 +290,7 @@ describe('KVCWrite_Fund', function () {
 		});
 
 		it('exits', function () {
-			browser.assert.elements('.KVCWriteMasterListItem', process.env.KVC_FUND_DOCUMENT_LIMIT);
+			browser.assert.elements('.KVCWriteListItem', process.env.KVC_FUND_DOCUMENT_LIMIT);
 		});
 
 		context('cancel', function () {
@@ -305,7 +305,7 @@ describe('KVCWrite_Fund', function () {
 			
 			before(function () {
 				return browser.OLSKConfirm(function () {
-					return browser.pressButton('.KVCWriteMasterCreateButton');
+					return browser.pressButton('.KVCWriteCreateButton');
 				}, function (dialog) {
 					return Object.assign(dialog, {
 						response: false,
@@ -315,7 +315,7 @@ describe('KVCWrite_Fund', function () {
 
 			it('does nothing', function () {
 				browser.assert.elements('.KVCWriteStorageToolbar', 0);
-				browser.assert.elements('.KVCWriteMasterListItem', process.env.KVC_FUND_DOCUMENT_LIMIT);
+				browser.assert.elements('.KVCWriteListItem', process.env.KVC_FUND_DOCUMENT_LIMIT);
 			});
 		
 		});
@@ -336,7 +336,7 @@ describe('KVCWrite_Fund', function () {
 			
 			it('shows OLSKFundGate', function() {
 				browser.assert.OLSKConfirmQuestion(function () {
-					return browser.pressButton('.KVCWriteMasterCreateButton');
+					return browser.pressButton('.KVCWriteCreateButton');
 				}, uLocalized('OLSKFundGateText'));
 			});
 		

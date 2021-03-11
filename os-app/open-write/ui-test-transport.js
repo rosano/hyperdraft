@@ -38,7 +38,7 @@ describe('KVCWrite_Transport', function () {
 		});
 
 		it('creates note', function () {
-			browser.assert.text('.KVCWriteMasterListItemTitle', KVCNoteBody);
+			browser.assert.text('.KVCWriteListItemTitle', KVCNoteBody);
 		});
 
 	});
@@ -99,7 +99,7 @@ describe('KVCWrite_Transport', function () {
 		});
 
 		it('creates item', function () {
-			browser.assert.text('.KVCWriteMasterListItemTitle', _LCHReadTextFileObjectContent);
+			browser.assert.text('.KVCWriteListItemTitle', _LCHReadTextFileObjectContent);
 		});
 
 	});
@@ -134,7 +134,7 @@ describe('KVCWrite_Transport', function () {
 		});
 
 		it('creates item', function () {
-			browser.assert.text('.KVCWriteMasterListItemTitle', title);
+			browser.assert.text('.KVCWriteListItemTitle', title);
 		});
 
 	});
@@ -148,7 +148,7 @@ describe('KVCWrite_Transport', function () {
 		});
 
 		before(function () {
-			return browser.pressButton('.KVCWriteMasterCreateButton');
+			return browser.pressButton('.KVCWriteCreateButton');
 		});
 
 		before(function () {

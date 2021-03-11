@@ -2,53 +2,13 @@ const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
 describe('KVCWriteDetail_Misc', function () {
 
-	describe('KVCWriteDetail', function test_KVCWriteDetail () {
-
-		before(function() {
-			return browser.OLSKVisit(kDefaultRoute, {
-				KVCWriteDetailItem: JSON.stringify(StubNoteObjectValid()),
-			});
+	before(function() {
+		return browser.OLSKVisit(kDefaultRoute, {
+			KVCWriteDetailItem: JSON.stringify(StubNoteObjectValid()),
 		});
-
-		it('classes OLSKViewportDetail', function () {
-			browser.assert.hasClass(KVCWriteDetail, 'OLSKViewportDetail');
-		});
-
-		context('OLSKMobileViewInactive', function () {
-
-			before(function () {
-				browser.assert.hasNoClass(KVCWriteDetail, 'OLSKMobileViewInactive');
-			});
-
-			before(function () {
-				browser.assert.attribute(KVCWriteDetail, 'aria-hidden', null);
-			});
-			
-			before(function() {
-				return browser.OLSKVisit(kDefaultRoute, {
-					OLSKMobileViewInactive: true,
-				});
-			});
-
-			it('classes OLSKMobileViewInactive', function () {
-				browser.assert.hasClass(KVCWriteDetail, 'OLSKMobileViewInactive');
-			});
-
-			it('sets aria-hidden', function () {
-				browser.assert.attribute(KVCWriteDetail, 'aria-hidden', 'true');
-			});
-		
-		});
-
 	});
 
 	describe('KVCWriteDetailHeader', function test_KVCWriteDetailHeader () {
-
-		before(function() {
-			return browser.OLSKVisit(kDefaultRoute, {
-				KVCWriteDetailItem: JSON.stringify(StubNoteObjectValid()),
-			});
-		});
 
 		it('classes OLSKMobileViewHeader', function () {
 			browser.assert.hasClass(KVCWriteDetailHeader, 'OLSKMobileViewHeader');
