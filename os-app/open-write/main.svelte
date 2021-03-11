@@ -249,37 +249,6 @@ const mod = {
 					},
 				},
 				{
-					LCHRecipeName: 'FakeEscapeWithoutSort',
-					LCHRecipeCallback: function FakeEscapeWithoutSort () {
-						mod.ControlNoteSelect(null);
-					},
-				},
-				{
-					LCHRecipeName: 'FakeCreateNoteV1',
-					LCHRecipeCallback: async function FakeCreateNoteV1 () {
-						const item = {
-							KVCNoteID: 'alfa',
-							KVCNoteBody: '',
-							KVCNoteCreationDate: new Date('2019-02-23T13:56:36Z'),
-							KVCNoteModificationDate: new Date('2019-02-23T13:56:36Z'),
-						};
-						mod._ValueZDRWrap.App.ZDRStorageWriteObject(KVCNote.KVCNoteObjectPathV1(item), item);
-						await mod.SetupCatalog();
-					},
-				},
-				{
-					LCHRecipeName: 'FakeStorageNotConnected',
-					LCHRecipeCallback: function FakeStorageNotConnected () {
-						mod.StorageNotConnected();
-					},
-				},
-				{
-					LCHRecipeName: 'FakeStorageSyncDone',
-					LCHRecipeCallback: function FakeStorageSyncDone () {
-						mod.StorageSyncDone();
-					},
-				},
-				{
 					LCHRecipeName: 'FakeConfigureCustomDomain',
 					LCHRecipeCallback: async function FakeConfigureCustomDomain () {
 						await mod.ValueSetting('KVCSettingCustomDomainBaseURL', KVCWriteLogic.KVCWriteCustomDomainBaseURLData('FakeCustomDomainBaseURL'));
