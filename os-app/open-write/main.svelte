@@ -765,6 +765,12 @@ const mod = {
 		mod._ValueRevealArchiveIsVisible = false;
 	},
 
+	OLSKCatalogDispatchFilterSubmit (inputData) {
+		mod._OLSKCatalog.modPublic.OLSKCatalogFilterWithNoThrottle('');
+
+		mod.ControlNoteCreate(inputData + '\n\n');
+	},
+
 	OLSKAppToolbarDispatchApropos () {
 		mod._OLSKModalView.modPublic.OLSKModalViewShow();
 	},
@@ -1237,6 +1243,7 @@ import OLSKUIAssets from 'OLSKUIAssets';
 	OLSKCatalogDispatchArrow={ mod.OLSKCatalogDispatchArrow }
 	OLSKCatalogDispatchArchivedHide={ mod.OLSKCatalogDispatchArchivedHide }
 	OLSKCatalogDispatchArchivedShow={ mod.OLSKCatalogDispatchArchivedShow }
+	OLSKCatalogDispatchFilterSubmit={ mod.OLSKCatalogDispatchFilterSubmit }
 
 	let:OLSKResultsListItem
 	>

@@ -98,4 +98,22 @@ describe('KVCWrite_Catalog', function () {
 	
 	});
 
+	context('OLSKCatalogDispatchFilterSubmit', function test_OLSKCatalogDispatchFilterSubmit () {
+
+		const item = Math.random().toString();
+		
+		before(function () {
+			return browser.fill('.OLSKMasterListFilterField', item);
+		});
+
+		before(function () {
+			return browser.fire('.OLSKMasterListForm', 'submit');
+		});
+
+		it('creates item', function () {
+			browser.assert.text('.OLSKResultsListItem:nth-child(1)', item)
+		});
+	
+	});
+
 });
