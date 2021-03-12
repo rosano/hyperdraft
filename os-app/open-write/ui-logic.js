@@ -12,7 +12,19 @@ const mod = {
 		return OLSKString.OLSKStringSnippet(KVCTemplate.KVCTemplatePlaintextTitle(inputData.KVCNoteBody));
 	},
 
-	KVCWriteLogicPublicSymbol () {
+	KVCWriteSortFunction (a, b) {
+		if (a.KVCNoteIsArchived !== b.KVCNoteIsArchived) {
+			return a.KVCNoteIsArchived ? 1 : -1;
+		}
+
+		if (b.KVCNoteModificationDate && a.KVCNoteModificationDate) {
+			return b.KVCNoteModificationDate - a.KVCNoteModificationDate;
+		}
+
+		return b.KVCNoteCreationDate - a.KVCNoteCreationDate;
+	},
+
+	KVCWritePublicSymbol () {
 		return 'ᗕ';
 	},
 
@@ -21,9 +33,9 @@ const mod = {
 			throw new Error('KVCErrorInputNotValid');
 		}
 
-		const isPublic = param2.match(mod.KVCWriteLogicPublicSymbol());
+		const isPublic = param2.match(mod.KVCWritePublicSymbol());
 		
-		param2 = param2.split(mod.KVCWriteLogicPublicSymbol()).join('').trim();
+		param2 = param2.split(mod.KVCWritePublicSymbol()).join('').trim();
 
 		if (isPublic && !param1.KVCNoteIsPublic) {
 			return false;
@@ -38,18 +50,6 @@ const mod = {
 		}
 
 		return OLSKString.OLSKStringMatch(param2, KVCTemplate.KVCTemplatePlaintextTitle(param1.KVCNoteBody), 'startsWith');
-	},
-
-	KVCWriteLogicListSortFunction (a, b) {
-		if (a.KVCNoteIsArchived !== b.KVCNoteIsArchived) {
-			return a.KVCNoteIsArchived ? 1 : -1;
-		}
-
-		if (b.KVCNoteModificationDate && a.KVCNoteModificationDate) {
-			return b.KVCNoteModificationDate - a.KVCNoteModificationDate;
-		}
-
-		return b.KVCNoteCreationDate - a.KVCNoteCreationDate;
 	},
 
 	KVCWriteHumanTimestampString (inputData) {

@@ -22,10 +22,6 @@ describe('KVCWrite_Misc', function () {
 
 	describe('KVCWriteCreateButton', function test_KVCWriteCreateButton () {
 		
-		before(function() {
-			return browser.OLSKVisit(kDefaultRoute);
-		});
-
 		it('classes OLSKDecorButtonNoStyle', function () {
 			browser.assert.hasClass(KVCWriteCreateButton, 'OLSKDecorButtonNoStyle');
 		});
@@ -319,7 +315,7 @@ describe('KVCWrite_Misc', function () {
 		});
 
 		it('sets OLSKMasterListFilterField text', function () {
-			browser.assert.input('.OLSKMasterListFilterField', require('./ui-logic.js').default.KVCWriteLogicPublicSymbol());
+			browser.assert.input('.OLSKMasterListFilterField', require('./ui-logic.js').default.KVCWritePublicSymbol());
 		});
 
 		it('focuses OLSKMasterListFilterField', function() {

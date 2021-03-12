@@ -79,7 +79,7 @@ const mod = {
 			LCHRecipeSignature: 'KVCWriteLauncherItemShowPublicNotes',
 			LCHRecipeName: OLSKLocalized('KVCWriteLauncherItemShowPublicNotesText'),
 			LCHRecipeCallback: function KVCWriteLauncherItemShowPublicNotes () {
-				mod._OLSKCatalog.modPublic.OLSKCatalogFilterWithNoThrottle(KVCWriteLogic.KVCWriteLogicPublicSymbol());
+				mod._OLSKCatalog.modPublic.OLSKCatalogFilterWithNoThrottle(KVCWriteLogic.KVCWritePublicSymbol());
 
 				document.querySelector('.OLSKMasterListFilterField').focus();
 			},
@@ -1175,7 +1175,7 @@ import OLSKUIAssets from 'OLSKUIAssets';
 
 	_OLSKCatalogArchiveField={ 'KVCNoteIsArchived' }
 	
-	OLSKCatalogSortFunction={ KVCWriteLogic.KVCWriteLogicListSortFunction }
+	OLSKCatalogSortFunction={ KVCWriteLogic.KVCWriteSortFunction }
 	OLSKCatalogFilterFunction={ KVCWriteLogic.KVCWriteFilterFunction }
 	OLSKCatalogExactFunction={ KVCWriteLogic.KVCWriteExactFunction }
 

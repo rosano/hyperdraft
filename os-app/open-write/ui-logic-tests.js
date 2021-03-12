@@ -30,10 +30,48 @@ describe('KVCWriteAccessibilitySummary', function test_KVCWriteAccessibilitySumm
 
 });
 
-describe('KVCWriteLogicPublicSymbol', function test_KVCWriteLogicPublicSymbol() {
+describe('KVCWriteSortFunction', function test_KVCWriteSortFunction() {
+
+	it('sorts by KVCNoteModificationDate descending', function() {
+		const item1 = {
+			KVCNoteModificationDate: new Date(0),
+		};
+		const item2 = {
+			KVCNoteModificationDate: new Date(1),
+		};
+
+		deepEqual([item1, item2].sort(mod.KVCWriteSortFunction), [item2, item1]);
+	});
+
+	it('sorts by KVCNoteCreationDate descending', function() {
+		const item1 = {
+			KVCNoteCreationDate: new Date(0),
+		};
+		const item2 = {
+			KVCNoteCreationDate: new Date(1),
+		};
+
+		deepEqual([item1, item2].sort(mod.KVCWriteSortFunction), [item2, item1]);
+	});
+
+	it('sorts KVCNoteIsArchived below others', function() {
+		const item1 = {
+			KVCNoteCreationDate: new Date(0),
+		};
+		const item2 = {
+			KVCNoteCreationDate: new Date(1),
+			KVCNoteIsArchived: true,
+		};
+
+		deepEqual([item1, item2].sort(mod.KVCWriteSortFunction), [item1, item2]);
+	});
+
+});
+
+describe('KVCWritePublicSymbol', function test_KVCWritePublicSymbol() {
 
 	it('returns string', function() {
-		deepEqual(mod.KVCWriteLogicPublicSymbol(), 'ᗕ');
+		deepEqual(mod.KVCWritePublicSymbol(), 'ᗕ');
 	});
 
 });
@@ -58,20 +96,20 @@ describe('KVCWriteFilterFunction', function test_KVCWriteFilterFunction() {
 		}, uRandomElement('alf', 'alfa', 'ALF')), true);
 	});
 
-	context('KVCWriteLogicPublicSymbol', function () {
+	context('KVCWritePublicSymbol', function () {
 		
 		it('matches whole string', function() {
 			deepEqual(mod.KVCWriteFilterFunction({
 				KVCNoteBody: Math.random().toString(),
 				KVCNoteIsPublic: true,
-			}, mod.KVCWriteLogicPublicSymbol()), true);
+			}, mod.KVCWritePublicSymbol()), true);
 		});
 
 		it('returns false if no match', function() {
 			deepEqual(mod.KVCWriteFilterFunction({
 				KVCNoteBody: Math.random().toString(),
 				KVCNoteIsPublic: true,
-			}, mod.KVCWriteLogicPublicSymbol() + Math.random().toString()), false);
+			}, mod.KVCWritePublicSymbol() + Math.random().toString()), false);
 		});
 
 		it('matches non symbol', function() {
@@ -79,7 +117,7 @@ describe('KVCWriteFilterFunction', function test_KVCWriteFilterFunction() {
 			deepEqual(mod.KVCWriteFilterFunction({
 				KVCNoteBody,
 				KVCNoteIsPublic: true,
-			}, mod.KVCWriteLogicPublicSymbol() + KVCNoteBody), true);
+			}, mod.KVCWritePublicSymbol() + KVCNoteBody), true);
 		});
 
 		it('matches non symbol with space', function() {
@@ -87,7 +125,7 @@ describe('KVCWriteFilterFunction', function test_KVCWriteFilterFunction() {
 			deepEqual(mod.KVCWriteFilterFunction({
 				KVCNoteBody,
 				KVCNoteIsPublic: true,
-			}, mod.KVCWriteLogicPublicSymbol() + ' ' +KVCNoteBody), true);
+			}, mod.KVCWritePublicSymbol() + ' ' +KVCNoteBody), true);
 		});
 	
 	});
@@ -127,44 +165,6 @@ describe('KVCWriteExactFunction', function test_KVCWriteExactFunction() {
 		deepEqual(mod.KVCWriteExactFunction({
 			KVCNoteBody: uRandomElement('alfa', 'álfa'),
 		}, uRandomElement('alf', 'alfa', 'ALF')), true);
-	});
-
-});
-
-describe('KVCWriteLogicListSortFunction', function test_KVCWriteLogicListSortFunction() {
-
-	it('sorts by KVCNoteModificationDate descending', function() {
-		const item1 = {
-			KVCNoteModificationDate: new Date(0),
-		};
-		const item2 = {
-			KVCNoteModificationDate: new Date(1),
-		};
-
-		deepEqual([item1, item2].sort(mod.KVCWriteLogicListSortFunction), [item2, item1]);
-	});
-
-	it('sorts by KVCNoteCreationDate descending', function() {
-		const item1 = {
-			KVCNoteCreationDate: new Date(0),
-		};
-		const item2 = {
-			KVCNoteCreationDate: new Date(1),
-		};
-
-		deepEqual([item1, item2].sort(mod.KVCWriteLogicListSortFunction), [item2, item1]);
-	});
-
-	it('sorts KVCNoteIsArchived below others', function() {
-		const item1 = {
-			KVCNoteCreationDate: new Date(0),
-		};
-		const item2 = {
-			KVCNoteCreationDate: new Date(1),
-			KVCNoteIsArchived: true,
-		};
-
-		deepEqual([item1, item2].sort(mod.KVCWriteLogicListSortFunction), [item1, item2]);
 	});
 
 });

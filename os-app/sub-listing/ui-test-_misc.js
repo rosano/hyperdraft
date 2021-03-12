@@ -27,7 +27,7 @@ describe('KVCWriteListItem_Misc', function () {
 	describe('KVCWriteListItemIsPublic', function test_KVCWriteListItemIsPublic () {
 		
 		it('sets text', function () {
-			browser.assert.text(KVCWriteListItemIsPublic, require('../open-write/ui-logic.js').default.KVCWriteLogicPublicSymbol());
+			browser.assert.text(KVCWriteListItemIsPublic, require('../open-write/ui-logic.js').default.KVCWritePublicSymbol());
 		});
 	
 	});
