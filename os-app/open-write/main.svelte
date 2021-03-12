@@ -209,13 +209,13 @@ const mod = {
 				{
 					LCHRecipeName: 'FakeZDRSchemaDispatchSyncCreateNote',
 					LCHRecipeCallback: async function FakeZDRSchemaDispatchSyncCreateNote () {
-						return mod._OLSKCatalog.modPublic.OLSKCatalogInsert(await mod._ValueZDRWrap.App.KVCNote.KVCNoteCreate(mod.FakeNoteObjectValid('FakeZDRSchemaDispatchSyncCreateNote')));
+						return mod.ZDRSchemaDispatchSyncCreateNote(await mod._ValueZDRWrap.App.KVCNote.KVCNoteCreate(mod.FakeNoteObjectValid('FakeZDRSchemaDispatchSyncCreateNote')));
 					},
 				},
 				{
 					LCHRecipeName: 'FakeZDRSchemaDispatchSyncUpdateNote',
 					LCHRecipeCallback: async function FakeZDRSchemaDispatchSyncUpdateNote () {
-						return mod._OLSKCatalog.modPublic.OLSKCatalogUpdate(await mod._ValueZDRWrap.App.KVCNote.KVCNoteUpdate(Object.assign(mod._OLSKCatalog.modPublic._OLSKCatalogDataItemsAll().filter(function (e) {
+						return mod.ZDRSchemaDispatchSyncUpdateNote(await mod._ValueZDRWrap.App.KVCNote.KVCNoteUpdate(Object.assign(mod._OLSKCatalog.modPublic._OLSKCatalogDataItemsAll().filter(function (e) {
 							return e.KVCNoteBody.match('FakeZDRSchemaDispatchSync');
 						}).pop(), {
 							KVCNoteBody: 'FakeZDRSchemaDispatchSyncUpdateNote',
@@ -225,7 +225,7 @@ const mod = {
 				{
 					LCHRecipeName: 'FakeZDRSchemaDispatchSyncDeleteNote',
 					LCHRecipeCallback: async function FakeZDRSchemaDispatchSyncDeleteNote () {
-						return mod._OLSKCatalog.modPublic.OLSKCatalogRemove(await mod._ValueZDRWrap.App.KVCNote.KVCNoteDelete(mod._OLSKCatalog.modPublic._OLSKCatalogDataItemsAll().filter(function (e) {
+						return mod.ZDRSchemaDispatchSyncDeleteNote(await mod._ValueZDRWrap.App.KVCNote.KVCNoteDelete(mod._OLSKCatalog.modPublic._OLSKCatalogDataItemsAll().filter(function (e) {
 							return e.KVCNoteBody.match('FakeZDRSchemaDispatchSync');
 						}).pop()));
 					},
@@ -922,6 +922,18 @@ const mod = {
 		mod._OLSKCatalog.modPublic.OLSKCatalogFilterWithNoThrottle(inputData);
 	},
 
+	ZDRSchemaDispatchSyncCreateNote (inputData) {
+		mod._OLSKCatalog.modPublic.OLSKCatalogInsert(inputData);
+	},
+
+	ZDRSchemaDispatchSyncUpdateNote (inputData) {
+		mod._OLSKCatalog.modPublic.OLSKCatalogUpdate(inputData);
+	},
+
+	ZDRSchemaDispatchSyncDeleteNote (inputData) {
+		mod._OLSKCatalog.modPublic.OLSKCatalogRemove(inputData);
+	},
+
 	async ZDRSchemaDispatchSyncConflictNote (inputData) {
 		return setTimeout(async function () {
 			mod._OLSKCatalog.modPublic.OLSKCatalogUpdate(await mod._ValueZDRWrap.App.KVCNote.KVCNoteUpdate(OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(OLSKRemoteStorage.OLSKRemoteStorageChangeDelegateConflictSelectRecent(inputData))))
@@ -1037,9 +1049,9 @@ const mod = {
 				ZDRScopeCreatorDirectory: 'rCreativ',
 				ZDRScopeSchemas: [
 					Object.assign(KVCNote, {
-						ZDRSchemaDispatchSyncCreate: mod._OLSKCatalog.modPublic.OLSKCatalogInsert,
-						ZDRSchemaDispatchSyncUpdate: mod._OLSKCatalog.modPublic.OLSKCatalogUpdate,
-						ZDRSchemaDispatchSyncDelete: mod._OLSKCatalog.modPublic.OLSKCatalogRemove,
+						ZDRSchemaDispatchSyncCreate: mod.ZDRSchemaDispatchSyncCreateNote,
+						ZDRSchemaDispatchSyncUpdate: mod.ZDRSchemaDispatchSyncUpdateNote,
+						ZDRSchemaDispatchSyncDelete: mod.ZDRSchemaDispatchSyncDeleteNote,
 						ZDRSchemaDispatchSyncConflict: mod.ZDRSchemaDispatchSyncConflictNote,
 					}),
 					KVCSetting,
