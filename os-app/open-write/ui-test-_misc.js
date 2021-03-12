@@ -68,18 +68,6 @@ describe('KVCWrite_Misc', function () {
 
 	});
 
-	context('back', function test_back () {
-
-		before(function () {
-			return browser.pressButton('.KVCWriteDetailToolbarBackButton');
-		});
-
-		it('sets focus', function () {
-			browser.assert.hasClass('.OLSKCatalogDetail', 'OLSKMobileViewInactive');
-		});
-
-	});
-
 	context('select', function test_select () {
 		
 		before(function () {

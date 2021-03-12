@@ -38,6 +38,18 @@ describe('KVCWrite_Catalog', function () {
 	
 	});
 
+	context('back', function test_back () {
+
+		before(function () {
+			return browser.pressButton('.KVCWriteDetailToolbarBackButton');
+		});
+
+		it('sets focus', function () {
+			browser.assert.hasClass('.OLSKCatalogDetail', 'OLSKMobileViewInactive');
+		});
+
+	});
+
 	context('discard', function test_discard () {
 
 		context('cancel', function () {
