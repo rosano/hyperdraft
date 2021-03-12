@@ -490,7 +490,7 @@ const mod = {
 		mod._OLSKCatalog.modPublic.OLSKCatalogSelect(inputData);
 
 		if (!inputData) {
-			return !mod.DataIsMobile() && document.querySelector('.OLSKMasterListFilterField').focus();
+			return;
 		}
 
 		mod._OLSKCatalog.modPublic.OLSKCatalogFocusDetail();
@@ -870,23 +870,6 @@ const mod = {
 		// mod.ControlNoteSelect(null);
 
 		mod._OLSKCatalog.modPublic.OLSKCatalogFocusMaster();
-
-		if (!mod.DataIsMobile()) {
-			return;
-		}
-
-		const element = document.querySelector('.OLSKResultsListItemSelected');
-
-		if (!element) {
-			return;
-		}
-
-		setTimeout(function () {
-			element.scrollIntoView({
-				block: 'center',
-				inline: 'center',
-			});
-		});
 	},
 
 	KVCWriteDetailDispatchJump (inputData) {
@@ -918,10 +901,6 @@ const mod = {
 	},
 
 	KVCWriteDetailDispatchDiscard () {
-		if (mod.DataIsMobile()) {
-			mod.KVCWriteDetailDispatchBack();
-		}
-		
 		mod.ControlNoteDiscard(mod._OLSKCatalog.modPublic.OLSKCatalogDataItemSelected());
 	},
 
