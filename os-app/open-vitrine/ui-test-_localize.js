@@ -46,6 +46,10 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 			browser.assert.text(KVCVitrineSupportBlurb, uLocalized('OLSKWordingFeedbackBlurb'));
 		});
 
+		it('localizes KVCVitrineGazetteHeading', function () {
+			browser.assert.text(KVCVitrineGazetteHeading, uLocalized('OLSKGazetteHeadingText'));
+		});
+
 		context('OLSKLanding', function test_OLSKLanding () {
 
 			it('localizes OLSKLandingHeadingText', function () {

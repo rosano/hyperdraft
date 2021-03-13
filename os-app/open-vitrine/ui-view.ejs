@@ -55,6 +55,10 @@ locals.OLSKPageUseLivereload = process.env.NODE_ENV === 'development';
 <h1 class="KVCVitrineSupportHeading"><%= OLSKLocalized('OLSKWordingFeedbackHeading') %></h1>
 <p class="KVCVitrineSupportBlurb"><%= OLSKLocalized('OLSKWordingFeedbackBlurb') %></p>
 
+<h1 class="KVCVitrineGazetteHeading"><%= OLSKLocalized('OLSKGazetteHeadingText') %></h1>
+
+<%- include('../../node_modules/OLSKGazette/main.ejs') %>
+
 <hr role="presentation" />
 
 <%- include('../_shared/__external/ROCORootLink/main.ejs') %>

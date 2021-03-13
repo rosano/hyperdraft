@@ -19,6 +19,8 @@ Object.entries({
 
 	KVCVitrineSupportHeading: '.KVCVitrineSupportHeading',
 	KVCVitrineSupportBlurb: '.KVCVitrineSupportBlurb',
+
+	KVCVitrineGazetteHeading: '.KVCVitrineGazetteHeading',
 }).map(function (e) {
 	return global[e.shift()]  = e.pop();
 });
@@ -91,6 +93,14 @@ describe('KVCVitrine_Access', function () {
 
 	it('shows KVCVitrineSupportBlurb', function () {
 		browser.assert.elements(KVCVitrineSupportBlurb, 1);
+	});
+
+	it('shows KVCVitrineGazetteHeading', function () {
+		browser.assert.elements(KVCVitrineGazetteHeading, 1);
+	});
+
+	it('shows OLSKGazette', function () {
+		browser.assert.elements('.OLSKGazette', 1);
 	});
 
 	it('shows ROCORootLink', function() {

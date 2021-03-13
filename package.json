@@ -35,6 +35,9 @@
     "// LANDING": null,
     "OLSKLanding": "olsk/OLSKLanding",
 
+    "// GAZETTE": null,
+    "OLSKGazette": "olsk/OLSKGazette",
+
     "// FEATURES": null,
     "OLSKFeatureList": "olsk/OLSKFeatureList",
     "OLSKAppFeatureList": "olsk/OLSKAppFeatureList",
