@@ -460,7 +460,7 @@ const mod = {
 			return mod.ControlFundGate();
 		}
 
-		mod.ControlNoteSelect(mod._OLSKCatalog.modPublic.OLSKCatalogInsert(await mod._ValueZDRWrap.App.KVCNote.KVCNoteCreate({
+		mod.ControlNoteActivate(mod._OLSKCatalog.modPublic.OLSKCatalogInsert(await mod._ValueZDRWrap.App.KVCNote.KVCNoteCreate({
 			KVCNoteBody: typeof inputData === 'string' ? inputData : '',
 		})));
 
@@ -482,11 +482,11 @@ const mod = {
 	},
 	
 	_ControlHotfixUpdateInPlace(inputData) {
-		mod.ControlNoteSelect(inputData);
+		mod.ControlNoteActivate(inputData);
 		mod._KVCWriteDetail.modPublic._KVCWriteDetailTriggerUpdate();
 	},
 	
-	ControlNoteSelect(inputData) {
+	ControlNoteActivate(inputData) {
 		mod._OLSKCatalog.modPublic.OLSKCatalogSelect(inputData);
 
 		if (!inputData) {
@@ -525,7 +525,7 @@ const mod = {
 
 		mod.ControlNoteSave(inputData);
 
-		mod.ControlNoteSelect(inputData); // #purge-svelte-force-update
+		mod.ControlNoteActivate(inputData); // #purge-svelte-force-update
 	},
 	
 	ControlNoteUnarchive (inputData) {
@@ -533,7 +533,7 @@ const mod = {
 
 		mod.ControlNoteSave(inputData);
 
-		mod.ControlNoteSelect(inputData); // #purge-svelte-force-update
+		mod.ControlNoteActivate(inputData); // #purge-svelte-force-update
 	},
 	
 	async ControlNotePublish (inputData) {
@@ -715,7 +715,7 @@ const mod = {
 	},
 
 	OLSKCatalogDispatchClick (inputData) {
-		mod.ControlNoteSelect(inputData);
+		mod.ControlNoteActivate(inputData);
 	},
 
 	OLSKCatalogDispatchArrow (inputData) {
@@ -867,8 +867,6 @@ const mod = {
 	},
 
 	KVCWriteDetailDispatchBack () {
-		// mod.ControlNoteSelect(null);
-
 		mod._OLSKCatalog.modPublic.OLSKCatalogFocusMaster();
 	},
 
