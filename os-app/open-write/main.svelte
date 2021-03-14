@@ -928,6 +928,10 @@ const mod = {
 
 	ZDRSchemaDispatchSyncUpdateNote (inputData) {
 		mod._OLSKCatalog.modPublic.OLSKCatalogUpdate(inputData);
+		
+		if (mod._OLSKCatalog.modPublic.OLSKCatalogDataItemSelected().KVCNoteID === inputData.KVCNoteID) {
+			mod._ControlHotfixUpdateInPlace(inputData);
+		}
 	},
 
 	ZDRSchemaDispatchSyncDeleteNote (inputData) {
