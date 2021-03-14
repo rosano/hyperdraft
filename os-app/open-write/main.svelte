@@ -938,7 +938,7 @@ const mod = {
 		mod._OLSKCatalog.modPublic.OLSKCatalogRemove(inputData);
 	},
 
-	async ZDRSchemaDispatchSyncConflictNote (inputData) {
+	ZDRSchemaDispatchSyncConflictNote (inputData) {
 		return setTimeout(async function () {
 			mod._OLSKCatalog.modPublic.OLSKCatalogUpdate(await mod._ValueZDRWrap.App.KVCNote.KVCNoteUpdate(OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(OLSKRemoteStorage.OLSKRemoteStorageChangeDelegateConflictSelectRecent(inputData))))
 		}, OLSK_SPEC_UI() ? 0 : 500);
