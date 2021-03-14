@@ -397,6 +397,10 @@ const mod = {
 		mod.ControlNoteCreate();
 	},
 
+	InterfaceStorageInputFieldDidRead (inputData) {
+		mod.ControlNotesImportJSON(inputData);
+	},
+
 	InterfaceWindowDidKeydown (event) {
 		if (window.Launchlet.LCHSingletonExists()) {
 			return;
@@ -404,17 +408,13 @@ const mod = {
 
 		const handlerFunctions = {
 			Tab () {
-				document.activeElement !== document.querySelector('.OLSKMasterListFilterField') ? document.querySelector('.OLSKMasterListFilterField').focus() : mod._KVCWriteDetail.modPublic.KVCWriteDetailEditorFocus();
+				document.activeElement !== document.querySelector('.OLSKMasterListFilterField') ? document.querySelector('.OLSKMasterListFilterField').focus() : (mod._KVCWriteDetail && mod._KVCWriteDetail.modPublic.KVCWriteDetailEditorFocus());
 
 				event.preventDefault();
 			},
 		};
 
 		handlerFunctions[event.key] && handlerFunctions[event.key]();
-	},
-
-	InterfaceStorageInputFieldDidRead (inputData) {
-		mod.ControlNotesImportJSON(inputData);
 	},
 
 	// CONTROL
