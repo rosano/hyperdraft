@@ -76,22 +76,22 @@ describe('KVCWritePublicSymbol', function test_KVCWritePublicSymbol() {
 
 });
 
-describe('KVCWriteFilterFunction', function test_KVCWriteFilterFunction() {
+describe('KVCWriteMatchIsResult', function test_KVCWriteMatchIsResult() {
 
 	it('throws error param2 if not string', function() {
 		throws(function() {
-			mod.KVCWriteFilterFunction({}, null);
+			mod.KVCWriteMatchIsResult({}, null);
 		}, /KVCErrorInputNotValid/);
 	});
 
 	it('returns false if no match', function() {
-		deepEqual(mod.KVCWriteFilterFunction({
+		deepEqual(mod.KVCWriteMatchIsResult({
 			KVCNoteBody: 'alfa',
 		}, 'bravo'), false);
 	});
 
 	it('matches OLSKStringMatch', function() {
-		deepEqual(mod.KVCWriteFilterFunction({
+		deepEqual(mod.KVCWriteMatchIsResult({
 			KVCNoteBody: uRandomElement('alfa', 'álfa'),
 		}, uRandomElement('alf', 'alfa', 'ALF')), true);
 	});
@@ -99,14 +99,14 @@ describe('KVCWriteFilterFunction', function test_KVCWriteFilterFunction() {
 	context('KVCWritePublicSymbol', function () {
 		
 		it('matches whole string', function() {
-			deepEqual(mod.KVCWriteFilterFunction({
+			deepEqual(mod.KVCWriteMatchIsResult({
 				KVCNoteBody: Math.random().toString(),
 				KVCNoteIsPublic: true,
 			}, mod.KVCWritePublicSymbol()), true);
 		});
 
 		it('returns false if no match', function() {
-			deepEqual(mod.KVCWriteFilterFunction({
+			deepEqual(mod.KVCWriteMatchIsResult({
 				KVCNoteBody: Math.random().toString(),
 				KVCNoteIsPublic: true,
 			}, mod.KVCWritePublicSymbol() + Math.random().toString()), false);
@@ -114,7 +114,7 @@ describe('KVCWriteFilterFunction', function test_KVCWriteFilterFunction() {
 
 		it('matches non symbol', function() {
 			const KVCNoteBody = Math.random().toString();
-			deepEqual(mod.KVCWriteFilterFunction({
+			deepEqual(mod.KVCWriteMatchIsResult({
 				KVCNoteBody,
 				KVCNoteIsPublic: true,
 			}, mod.KVCWritePublicSymbol() + KVCNoteBody), true);
@@ -122,7 +122,7 @@ describe('KVCWriteFilterFunction', function test_KVCWriteFilterFunction() {
 
 		it('matches non symbol with space', function() {
 			const KVCNoteBody = Math.random().toString();
-			deepEqual(mod.KVCWriteFilterFunction({
+			deepEqual(mod.KVCWriteMatchIsResult({
 				KVCNoteBody,
 				KVCNoteIsPublic: true,
 			}, mod.KVCWritePublicSymbol() + ' ' +KVCNoteBody), true);

@@ -28,7 +28,7 @@ const mod = {
 		return 'ᗕ';
 	},
 
-	KVCWriteFilterFunction (param1, param2) {
+	KVCWriteMatchIsResult (param1, param2) {
 		if (typeof param2 !== 'string') {
 			throw new Error('KVCErrorInputNotValid');
 		}
