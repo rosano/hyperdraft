@@ -44,7 +44,7 @@ const mod = {
 		return OLSKString.OLSKStringMatch(param2, param1.KVCNoteBody);
 	},
 
-	KVCWriteExactFunction (param1, param2) {
+	KVCWriteMatchIsExact (param1, param2) {
 		if (typeof param2 !== 'string') {
 			throw new Error('KVCErrorInputNotValid');
 		}

@@ -132,37 +132,37 @@ describe('KVCWriteFilterFunction', function test_KVCWriteFilterFunction() {
 
 });
 
-describe('KVCWriteExactFunction', function test_KVCWriteExactFunction() {
+describe('KVCWriteMatchIsExact', function test_KVCWriteMatchIsExact() {
 
 	it('throws error if param2 not string', function() {
 		throws(function() {
-			mod.KVCWriteExactFunction({}, null);
+			mod.KVCWriteMatchIsExact({}, null);
 		}, /KVCErrorInputNotValid/);
 	});
 
 	it('returns false if not title', function() {
 		const item = Math.random().toString();
-		deepEqual(mod.KVCWriteExactFunction({
+		deepEqual(mod.KVCWriteMatchIsExact({
 			KVCNoteBody: Math.random().toString() + '\n' + item,
 		}, item), false);
 	});
 
 	it('returns false if title not starting with input', function() {
 		const item = Math.random().toString();
-		deepEqual(mod.KVCWriteExactFunction({
+		deepEqual(mod.KVCWriteMatchIsExact({
 			KVCNoteBody: Math.random().toString() + item,
 		}, item), false);
 	});
 
 	it('returns true', function() {
 		const item = Math.random().toString();
-		deepEqual(mod.KVCWriteExactFunction({
+		deepEqual(mod.KVCWriteMatchIsExact({
 			KVCNoteBody: item + Math.random().toString() + '\n' + Math.random().toString(),
 		}, item), true);
 	});
 
 	it('matches OLSKStringMatch', function() {
-		deepEqual(mod.KVCWriteExactFunction({
+		deepEqual(mod.KVCWriteMatchIsExact({
 			KVCNoteBody: uRandomElement('alfa', 'álfa'),
 		}, uRandomElement('alf', 'alfa', 'ALF')), true);
 	});
