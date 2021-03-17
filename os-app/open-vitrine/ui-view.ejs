@@ -57,7 +57,9 @@ locals.OLSKPageUseLivereload = process.env.NODE_ENV === 'development';
 
 <h1 class="KVCVitrineGazetteHeading"><%= OLSKLocalized('OLSKGazetteHeadingText') %></h1>
 
-<%- include('../../node_modules/OLSKGazette/main.ejs') %>
+<%- include('../../node_modules/OLSKGazette/main.ejs', {
+	OLSKGazetteProject: 'RP_003',
+}) %>
 
 <hr role="presentation" />
 
