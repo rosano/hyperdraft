@@ -21,6 +21,9 @@ Object.entries({
 	KVCVitrineSupportBlurb: '.KVCVitrineSupportBlurb',
 
 	KVCVitrineGazetteHeading: '.KVCVitrineGazetteHeading',
+
+	KVCVitrineAppringLink: '.KVCVitrineAppringLink',
+	KVCVitrineAppringLinkImage: '.KVCVitrineAppringLinkImage',
 }).map(function (e) {
 	return global[e.shift()]  = e.pop();
 });
@@ -101,6 +104,14 @@ describe('KVCVitrine_Access', function () {
 
 	it('shows OLSKGazette', function () {
 		browser.assert.elements('.OLSKGazette', 1);
+	});
+
+	it('shows KVCVitrineAppringLink', function () {
+		browser.assert.elements(KVCVitrineAppringLink, 1);
+	});
+
+	it('shows KVCVitrineAppringLinkImage', function () {
+		browser.assert.elements(KVCVitrineAppringLinkImage, 1);
 	});
 
 	it('shows ROCORootLink', function() {

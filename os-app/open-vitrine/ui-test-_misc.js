@@ -106,4 +106,20 @@ describe('KVCVitrine_Misc', function () {
 
 	});
 
+	describe('KVCVitrineAppringLink', function test_KVCVitrineAppringLink () {
+
+		it('sets href', function () {
+			browser.assert.attribute('.KVCVitrineAppringLink', 'href', process.env.KVC_APPRING_URL);
+		});
+
+	});
+
+	describe('KVCVitrineAppringLinkImage', function test_KVCVitrineAppringLinkImage () {
+
+		it('sets src', function () {
+			browser.assert.attribute('.KVCVitrineAppringLinkImage', 'src', process.env.KVC_APPRING_ICON_URL);
+		});
+
+	});
+
 });

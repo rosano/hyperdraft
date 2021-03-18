@@ -61,6 +61,12 @@ locals.OLSKPageUseLivereload = process.env.NODE_ENV === 'development';
 	OLSKGazetteProject: 'RP_003',
 }) %>
 
+<p class="OLSKCommonAppring">
+	<a class="KVCVitrineAppringLink" href="<%= process.env.KVC_APPRING_URL %>" title="<%= OLSKLocalized('OLSKWordingAppring') %>" target="_blank">
+		<img class="KVCVitrineAppringLinkImage" src="<%= process.env.KVC_APPRING_ICON_URL %>" width="64" />
+	</a>
+</p>
+
 <hr role="presentation" />
 
 <%- include('../_shared/__external/ROCORootLink/main.ejs') %>
