@@ -52,14 +52,14 @@ locals.OLSKPageUseLivereload = process.env.NODE_ENV === 'development';
 	</p>
 </div>
 
-<h1 class="KVCVitrineSupportHeading"><%= OLSKLocalized('OLSKWordingFeedbackHeading') %></h1>
-<p class="KVCVitrineSupportBlurb"><%= OLSKLocalized('OLSKWordingFeedbackBlurb') %></p>
-
 <h1 class="KVCVitrineGazetteHeading"><%= OLSKLocalized('OLSKGazetteHeadingText') %></h1>
 
 <%- include('../../node_modules/OLSKGazette/main.ejs', {
 	OLSKGazetteProject: 'RP_003',
 }) %>
+
+<h1 class="KVCVitrineSupportHeading"><%= OLSKLocalized('OLSKWordingFeedbackHeading') %></h1>
+<p class="KVCVitrineSupportBlurb"><%= OLSKLocalized('OLSKWordingFeedbackBlurb') %></p>
 
 <p class="OLSKCommonAppring">
 	<a class="KVCVitrineAppringLink" href="<%= process.env.KVC_APPRING_URL %>" title="<%= OLSKLocalized('OLSKWordingAppring') %>" target="_blank">

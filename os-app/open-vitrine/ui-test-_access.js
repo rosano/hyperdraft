@@ -17,10 +17,10 @@ Object.entries({
 	KVCVitrineVideo1: '.OLSKCommonVideoList .OLSKCommonVideoListItem.KVCVitrineVideo1 iframe',
 	KVCVitrineVideo2: '.OLSKCommonVideoList .OLSKCommonVideoListItem.KVCVitrineVideo2 iframe',
 
+	KVCVitrineGazetteHeading: '.KVCVitrineGazetteHeading',
+
 	KVCVitrineSupportHeading: '.KVCVitrineSupportHeading',
 	KVCVitrineSupportBlurb: '.KVCVitrineSupportBlurb',
-
-	KVCVitrineGazetteHeading: '.KVCVitrineGazetteHeading',
 
 	KVCVitrineAppringLink: '.KVCVitrineAppringLink',
 	KVCVitrineAppringLinkImage: '.KVCVitrineAppringLinkImage',
@@ -90,20 +90,20 @@ describe('KVCVitrine_Access', function () {
 		browser.assert.elements(KVCVitrineVideo2, 1);
 	});
 
-	it('shows KVCVitrineSupportHeading', function () {
-		browser.assert.elements(KVCVitrineSupportHeading, 1);
-	});
-
-	it('shows KVCVitrineSupportBlurb', function () {
-		browser.assert.elements(KVCVitrineSupportBlurb, 1);
-	});
-
 	it('shows KVCVitrineGazetteHeading', function () {
 		browser.assert.elements(KVCVitrineGazetteHeading, 1);
 	});
 
 	it('shows OLSKGazette', function () {
 		browser.assert.elements('.OLSKGazette', 1);
+	});
+
+	it('shows KVCVitrineSupportHeading', function () {
+		browser.assert.elements(KVCVitrineSupportHeading, 1);
+	});
+
+	it('shows KVCVitrineSupportBlurb', function () {
+		browser.assert.elements(KVCVitrineSupportBlurb, 1);
 	});
 
 	it('shows KVCVitrineAppringLink', function () {

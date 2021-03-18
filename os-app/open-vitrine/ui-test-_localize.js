@@ -38,16 +38,16 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 			browser.assert.text(KVCVitrineVideoHeading, uLocalized('OLSKWordingVideo'));
 		});
 
+		it('localizes KVCVitrineGazetteHeading', function () {
+			browser.assert.text(KVCVitrineGazetteHeading, uLocalized('OLSKGazetteHeadingText'));
+		});
+
 		it('localizes KVCVitrineSupportHeading', function () {
 			browser.assert.text(KVCVitrineSupportHeading, uLocalized('OLSKWordingFeedbackHeading'));
 		});
 
 		it('localizes KVCVitrineSupportBlurb', function () {
 			browser.assert.text(KVCVitrineSupportBlurb, uLocalized('OLSKWordingFeedbackBlurb'));
-		});
-
-		it('localizes KVCVitrineGazetteHeading', function () {
-			browser.assert.text(KVCVitrineGazetteHeading, uLocalized('OLSKGazetteHeadingText'));
 		});
 
 		it('localizes KVCVitrineAppringLink', function () {
