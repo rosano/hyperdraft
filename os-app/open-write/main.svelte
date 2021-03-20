@@ -1177,6 +1177,10 @@ import OLSKUIAssets from 'OLSKUIAssets';
 </script>
 <svelte:window on:keydown={ mod.InterfaceWindowDidKeydown } />
 
+{#if !OLSK_SPEC_UI()}
+	<OLSKServiceWorkerView OLSKServiceWorkerRegistrationRoute={ window.OLSKCanonical('WKCServiceWorkerRoute') } />
+{/if}
+
 <div class="KVCWrite OLSKViewport" class:OLSKIsLoading={ mod._ValueIsLoading } class:OLSKIsDemoing={ mod._IsRunningDemo }>
 
 <div class="OLSKViewportContent">
@@ -1316,10 +1320,6 @@ import OLSKUIAssets from 'OLSKUIAssets';
 		OLSKAproposFeedbackValue={ `javascript:window.location.href = window.atob('${ window.btoa(OLSKString.OLSKStringFormatted(window.atob('OLSK_APROPOS_FEEDBACK_EMAIL_SWAP_TOKEN'), 'RP_003' + (mod._ValueFundClue ? '+' + mod._ValueFundClue : ''))) }')` }
 		/>
 </OLSKModalView>
-
-{#if !OLSK_SPEC_UI()}
-	<OLSKServiceWorkerView OLSKServiceWorkerRegistrationRoute={ window.OLSKCanonical('WKCServiceWorkerRoute') } />
-{/if}
 
 {#if mod._IsRunningDemo }
 	<OLSKPointer />
