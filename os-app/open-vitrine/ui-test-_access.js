@@ -74,6 +74,10 @@ describe('KVCVitrine_Access', function () {
 		browser.assert.elements('.OLSKAppFeatureList', 1);
 	});
 
+	it('shows OLSKAppFeatureOpenSource', function () {
+		browser.assert.elements('.OLSKAppFeatureListItemOpenSource', 1);
+	});
+
 	it('shows KVCVitrineGuideButton', function () {
 		browser.assert.elements(KVCVitrineGuideButton, 1);
 	});

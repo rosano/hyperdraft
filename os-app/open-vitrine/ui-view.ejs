@@ -36,7 +36,9 @@ locals.OLSKPageUseLivereload = process.env.NODE_ENV === 'development';
 
 <%- include('./submodules/KVCFeatureList/main.ejs') %>
 
-<%- include('../../node_modules/OLSKAppFeatureList/main.ejs').replace(/node_modules/g, '_shared/__external') %>
+<%- include('../../node_modules/OLSKAppFeatureList/main.ejs', {
+	OLSKAppFeatureListRepoURL: process.env.OLSK_REPO_URL,
+}).replace(/node_modules/g, '_shared/__external') %>
 
 <a class="KVCVitrineGuideButton OLSKDecorPress OLSKDecorPressCall" href="<%= OLSKCanonical('KVCGuideRoute') %>"><%= OLSKLocalized('OLSKWordingOpenGuide') %></a>
 
