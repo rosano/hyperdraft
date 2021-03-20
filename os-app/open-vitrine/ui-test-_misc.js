@@ -6,6 +6,10 @@ describe('KVCVitrine_Misc', function () {
 		return browser.visit(kDefaultRoute.OLSKRoutePath);
 	});
 
+	it('sets manifest', function () {
+		browser.assert.attribute('link[rel="manifest"]', 'href', require('../tech-manifest/controller.js').OLSKControllerRoutes().shift().OLSKRoutePath);
+	});
+
 	describe('KVCVitrine', function () {
 		
 		it('classes OLSKDecor', function () {
@@ -16,14 +20,6 @@ describe('KVCVitrine_Misc', function () {
 			browser.assert.hasClass(KVCVitrine, 'OLSKDecorCapped');
 		});
 	
-	});
-
-	describe('KVCVitrineManifest', function test_KVCVitrineManifest() {
-
-		it('sets href', function () {
-			browser.assert.attribute(KVCVitrineManifest, 'href', require('../tech-manifest/controller.js').OLSKControllerRoutes().shift().OLSKRoutePath);
-		});
-
 	});
 
 	describe('KVCVitrineCrown', function test_KVCVitrineCrown() {
