@@ -81,7 +81,7 @@ Notice how they all start with a square bracket.
 
 # Publishing
 
-Connect your *storage* to make notes accessible to the public Internet. Simply press the `KVCWriteDetailToolbarPublishButtonText` button and a shareable link will appear. In the same location, press the `KVCWriteDetailToolbarRetractButtonText` button to remove public access.
+Connect your *cloud* to make notes accessible to the public Internet. Simply press the `KVCWriteDetailToolbarPublishButtonText` button and a shareable link will appear. In the same location, press the `KVCWriteDetailToolbarRetractButtonText` button to remove public access.
 
 ## Custom domain name
 
@@ -125,7 +125,7 @@ After setting up a custom domain, designate any note as the home page with the `
 :--- | ---
 | `KVCWriteDetailToolbarArchiveButtonText` | Launcher |
 | `KVCWriteDetailToolbarUnarchiveButtonText` | Launcher |
-| `KVCWriteDetailLauncherItemSetAsRootPageText` if storage connected | Launcher |
+| `KVCWriteDetailLauncherItemSetAsRootPageText` if cloud connected | Launcher |
 | KVCWriteDetailToolbarJumpButtonText | `AccessKey+j` |
 | Select previous or next note, if filter field is focused | `Up` or `Down` |
 | Clear filter text and selected note, focus filter field | `Escape` |
@@ -151,7 +151,7 @@ After setting up a custom domain, designate any note as the home page with the `
 | `KVCWriteLauncherItemExportJSONText` | Launcher |
 | `KVCWriteLauncherItemExportZIPText` | Launcher |
 
-| Global (when storage is connected) ||
+| Global (when cloud is connected) ||
 :--- | ---
 | `KVCWriteLauncherItemConfigureCustomDomainText` | Launcher |
 | `KVCWriteLauncherItemRemoveCustomDomainText` | Launcher |
