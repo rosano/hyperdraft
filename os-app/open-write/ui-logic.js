@@ -49,7 +49,7 @@ const mod = {
 			throw new Error('KVCErrorInputNotValid');
 		}
 
-		return OLSKString.OLSKStringMatch(param2, KVCTemplate.KVCTemplatePlaintextTitle(param1.KVCNoteBody), 'startsWith');
+		return OLSKString.OLSKStringMatch(param2, KVCTemplate.KVCTemplatePlaintextTitle(param1.KVCNoteBody));
 	},
 
 	KVCWriteHumanTimestampString (inputData) {

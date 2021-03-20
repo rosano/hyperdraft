@@ -147,13 +147,6 @@ describe('KVCWriteMatchIsExact', function test_KVCWriteMatchIsExact() {
 		}, item), false);
 	});
 
-	it('returns false if title not starting with input', function() {
-		const item = Math.random().toString();
-		deepEqual(mod.KVCWriteMatchIsExact({
-			KVCNoteBody: Math.random().toString() + item,
-		}, item), false);
-	});
-
 	it('returns true', function() {
 		const item = Math.random().toString();
 		deepEqual(mod.KVCWriteMatchIsExact({
