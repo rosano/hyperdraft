@@ -1168,6 +1168,7 @@ import KVCWriteListItem from '../sub-listing/main.svelte';
 import KVCWriteDetail from '../sub-detail/main.svelte';
 import OLSKAppToolbar from 'OLSKAppToolbar';
 import OLSKServiceWorkerView from '../_shared/__external/OLSKServiceWorker/main.svelte';
+import OLSKInstall from 'OLSKInstall';
 import OLSKCloud from 'OLSKCloud';
 import OLSKWebView from 'OLSKWebView';
 import OLSKModalView from 'OLSKModalView';
@@ -1307,6 +1308,8 @@ import OLSKUIAssets from 'OLSKUIAssets';
 		OLSKAppToolbarDispatchStorage={ mod.OLSKAppToolbarDispatchStorage }
 		OLSKAppToolbarDispatchLauncher={ mod.OLSKAppToolbarDispatchLauncher }
 		/>
+
+	<OLSKInstall />
 </footer>
 
 </div>

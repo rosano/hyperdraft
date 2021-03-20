@@ -81,6 +81,10 @@ describe('KVCWrite_Access', function () {
 		browser.assert.elements('.OLSKAppToolbarLauncherButton', 1);
 	});
 
+	it('shows OLSKInstall', function () {
+		browser.assert.elements('.OLSKInstall', 1);
+	});
+
 	it('shows KVCWriteLauncherItemJournal', function () {
 		return browser.assert.OLSKLauncherItems('KVCWriteLauncherItemJournal', 1);
 	});

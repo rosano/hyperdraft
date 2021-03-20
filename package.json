@@ -80,6 +80,9 @@
     "// FRONTEND SERVICE WORKER": null,
     "OLSKServiceWorker": "olsk/OLSKServiceWorker",
 
+    "// FRONTEND INSTALL": null,
+    "OLSKInstall": "olsk/OLSKInstall",
+
     "// FRONTEND URL PARSE": null,
     "url-parse": "latest",
 
