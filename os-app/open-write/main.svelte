@@ -1167,7 +1167,7 @@ import OLSKCatalog from 'OLSKCatalog';
 import KVCWriteListItem from '../sub-listing/main.svelte';
 import KVCWriteDetail from '../sub-detail/main.svelte';
 import OLSKAppToolbar from 'OLSKAppToolbar';
-import OLSKServiceWorkerView from '../_shared/__external/OLSKServiceWorker/main.svelte';
+import OLSKServiceWorkerView from '../../node_modules/OLSKServiceWorker/main.svelte';
 import OLSKInstall from 'OLSKInstall';
 import OLSKCloud from 'OLSKCloud';
 import OLSKWebView from 'OLSKWebView';
@@ -1177,10 +1177,6 @@ import OLSKPointer from 'OLSKPointer';
 import OLSKUIAssets from 'OLSKUIAssets';
 </script>
 <svelte:window on:keydown={ mod.InterfaceWindowDidKeydown } />
-
-{#if !OLSK_SPEC_UI()}
-	<OLSKServiceWorkerView OLSKServiceWorkerRegistrationRoute={ window.OLSKCanonical('WKCServiceWorkerRoute') } />
-{/if}
 
 <div class="KVCWrite OLSKViewport" class:OLSKIsLoading={ mod._ValueIsLoading } class:OLSKIsDemoing={ mod._IsRunningDemo }>
 
@@ -1310,6 +1306,10 @@ import OLSKUIAssets from 'OLSKUIAssets';
 		/>
 
 	<OLSKInstall />
+
+	{#if !OLSK_SPEC_UI()}
+		<OLSKServiceWorkerView OLSKServiceWorkerRegistrationRoute={ window.OLSKCanonical('WKCServiceWorkerRoute') } />
+	{/if}
 </footer>
 
 </div>
