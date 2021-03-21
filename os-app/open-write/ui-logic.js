@@ -36,7 +36,7 @@ const mod = {
 		return 'ᗕ';
 	},
 
-	KVCWriteMatchIsResult (param1, param2) {
+	KVCWriteIsMatch (param1, param2) {
 		if (typeof param2 !== 'string') {
 			throw new Error('KVCErrorInputNotValid');
 		}
@@ -52,12 +52,16 @@ const mod = {
 		return OLSKString.OLSKStringMatch(param2, param1.KVCNoteBody);
 	},
 
-	KVCWriteMatchIsExact (param1, param2) {
-		if (typeof param2 !== 'string') {
+	KVCWriteExactSortFunction (needle, a, b) {
+		if (typeof needle !== 'string') {
 			throw new Error('KVCErrorInputNotValid');
 		}
 
-		return OLSKString.OLSKStringMatch(param2, KVCTemplate.KVCTemplatePlaintextTitle(param1.KVCNoteBody), 'startsWith');
+		return ['startsWith', undefined].map(function (e) {
+			return uDescending(OLSKString.OLSKStringMatch(needle, KVCTemplate.KVCTemplatePlaintextTitle(a.KVCNoteBody), e), OLSKString.OLSKStringMatch(needle, KVCTemplate.KVCTemplatePlaintextTitle(b.KVCNoteBody), e));
+		}).filter(function (e) {
+			return e !== 0;
+		}).shift();
 	},
 
 	KVCWriteHumanTimestampString (inputData) {

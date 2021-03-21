@@ -76,22 +76,22 @@ describe('KVCWritePublicSymbol', function test_KVCWritePublicSymbol() {
 
 });
 
-describe('KVCWriteMatchIsResult', function test_KVCWriteMatchIsResult() {
+describe('KVCWriteIsMatch', function test_KVCWriteIsMatch() {
 
 	it('throws error param2 if not string', function() {
 		throws(function() {
-			mod.KVCWriteMatchIsResult({}, null);
+			mod.KVCWriteIsMatch({}, null);
 		}, /KVCErrorInputNotValid/);
 	});
 
 	it('returns false if no match', function() {
-		deepEqual(mod.KVCWriteMatchIsResult({
+		deepEqual(mod.KVCWriteIsMatch({
 			KVCNoteBody: 'alfa',
 		}, 'bravo'), false);
 	});
 
 	it('matches OLSKStringMatch', function() {
-		deepEqual(mod.KVCWriteMatchIsResult({
+		deepEqual(mod.KVCWriteIsMatch({
 			KVCNoteBody: uRandomElement('alfa', 'álfa'),
 		}, uRandomElement('alf', 'alfa', 'ALF')), true);
 	});
@@ -99,14 +99,14 @@ describe('KVCWriteMatchIsResult', function test_KVCWriteMatchIsResult() {
 	context('KVCWritePublicSymbol', function () {
 		
 		it('matches whole string', function() {
-			deepEqual(mod.KVCWriteMatchIsResult({
+			deepEqual(mod.KVCWriteIsMatch({
 				KVCNoteBody: Math.random().toString(),
 				KVCNoteIsPublic: true,
 			}, mod.KVCWritePublicSymbol()), true);
 		});
 
 		it('returns false if no match', function() {
-			deepEqual(mod.KVCWriteMatchIsResult({
+			deepEqual(mod.KVCWriteIsMatch({
 				KVCNoteBody: Math.random().toString(),
 				KVCNoteIsPublic: true,
 			}, mod.KVCWritePublicSymbol() + Math.random().toString()), false);
@@ -114,7 +114,7 @@ describe('KVCWriteMatchIsResult', function test_KVCWriteMatchIsResult() {
 
 		it('matches non symbol', function() {
 			const KVCNoteBody = Math.random().toString();
-			deepEqual(mod.KVCWriteMatchIsResult({
+			deepEqual(mod.KVCWriteIsMatch({
 				KVCNoteBody,
 				KVCNoteIsPublic: true,
 			}, mod.KVCWritePublicSymbol() + KVCNoteBody), true);
@@ -122,7 +122,7 @@ describe('KVCWriteMatchIsResult', function test_KVCWriteMatchIsResult() {
 
 		it('matches non symbol with space', function() {
 			const KVCNoteBody = Math.random().toString();
-			deepEqual(mod.KVCWriteMatchIsResult({
+			deepEqual(mod.KVCWriteIsMatch({
 				KVCNoteBody,
 				KVCNoteIsPublic: true,
 			}, mod.KVCWritePublicSymbol() + ' ' +KVCNoteBody), true);
@@ -132,39 +132,38 @@ describe('KVCWriteMatchIsResult', function test_KVCWriteMatchIsResult() {
 
 });
 
-describe('KVCWriteMatchIsExact', function test_KVCWriteMatchIsExact() {
+describe('KVCWriteExactSortFunction', function test_KVCWriteExactSortFunction() {
 
-	it('throws error if param2 not string', function() {
-		throws(function() {
-			mod.KVCWriteMatchIsExact({}, null);
+	it('throws if param1 not string', function () {
+		throws(function () {
+			mod.KVCWriteExactSortFunction(null, Math.random().toString(), Math.random().toString());
 		}, /KVCErrorInputNotValid/);
 	});
 
-	it('returns false if not title', function() {
+	it('bumps startsWith', function() {
 		const item = Math.random().toString();
-		deepEqual(mod.KVCWriteMatchIsExact({
-			KVCNoteBody: Math.random().toString() + '\n' + item,
-		}, item), false);
-	});
-
-	it('returns false if title not starting with input', function() {
-		const item = Math.random().toString();
-		deepEqual(mod.KVCWriteMatchIsExact({
+		deepEqual(mod.KVCWriteExactSortFunction(item, {
 			KVCNoteBody: Math.random().toString() + item,
-		}, item), false);
+		}, {
+			KVCNoteBody: item + Math.random().toString(),
+		}), 1);
 	});
 
-	it('returns true', function() {
+	it('bumps match title', function() {
 		const item = Math.random().toString();
-		deepEqual(mod.KVCWriteMatchIsExact({
-			KVCNoteBody: item + Math.random().toString() + '\n' + Math.random().toString(),
-		}, item), true);
+		deepEqual(mod.KVCWriteExactSortFunction(item, {
+			KVCNoteBody: Math.random().toString() + '\n' + item,
+		}, {
+			KVCNoteBody: Math.random().toString() + item,
+		}), 1);
 	});
 
 	it('matches OLSKStringMatch', function() {
-		deepEqual(mod.KVCWriteMatchIsExact({
+		deepEqual(mod.KVCWriteExactSortFunction(uRandomElement('alf', 'alfa', 'ALF'), {
+			KVCNoteBody: Math.random().toString(),
+		}, {
 			KVCNoteBody: uRandomElement('alfa', 'álfa'),
-		}, uRandomElement('alf', 'alfa', 'ALF')), true);
+		}), 1);
 	});
 
 });

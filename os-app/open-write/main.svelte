@@ -1191,8 +1191,8 @@ import OLSKUIAssets from 'OLSKUIAssets';
 	_OLSKCatalogArchiveField={ 'KVCNoteIsArchived' }
 	
 	OLSKCatalogSortFunction={ KVCWriteLogic.KVCWriteSortFunction }
-	OLSKCatalogMatchIsResult={ KVCWriteLogic.KVCWriteMatchIsResult }
-	OLSKCatalogMatchIsExact={ KVCWriteLogic.KVCWriteMatchIsExact }
+	OLSKCatalogIsMatch={ KVCWriteLogic.KVCWriteIsMatch }
+	OLSKCatalogExactSortFunction={ KVCWriteLogic.KVCWriteExactSortFunction }
 
 	_OLSKCatalogDispatchKey={ mod._OLSKCatalogDispatchKey }
 
