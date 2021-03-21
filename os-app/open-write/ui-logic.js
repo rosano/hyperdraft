@@ -2,6 +2,14 @@ import OLSKString from 'OLSKString';
 import KVCNote from '../_shared/KVCNote/main.js';
 import KVCTemplate from '../_shared/KVCTemplate/main.js';
 
+const uAscending = function (a, b) {
+  return (a < b) ? -1 : ((a > b) ? 1 : 0);
+};
+
+const uDescending = function (a, b) {
+  return (a > b) ? -1 : ((a < b) ? 1 : 0);
+};
+
 const mod = {
 
 	KVCWriteAccessibilitySummary (inputData) {
@@ -14,14 +22,14 @@ const mod = {
 
 	KVCWriteSortFunction (a, b) {
 		if (a.KVCNoteIsArchived !== b.KVCNoteIsArchived) {
-			return a.KVCNoteIsArchived ? 1 : -1;
+			return uAscending(a.KVCNoteIsArchived, b.KVCNoteIsArchived);
 		}
 
-		if (b.KVCNoteModificationDate && a.KVCNoteModificationDate) {
-			return b.KVCNoteModificationDate - a.KVCNoteModificationDate;
-		}
-
-		return b.KVCNoteCreationDate - a.KVCNoteCreationDate;
+		return (function(e) {
+			return uDescending(a[e], b[e]);
+		})(['KVCNoteModificationDate', 'KVCNoteCreationDate'].filter(function (e) {
+			return a[e] && b[e];
+		}).shift());
 	},
 
 	KVCWritePublicSymbol () {
