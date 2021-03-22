@@ -927,7 +927,7 @@ const mod = {
 	ZDRSchemaDispatchSyncUpdateNote (inputData) {
 		mod._OLSKCatalog.modPublic.OLSKCatalogUpdate(inputData);
 		
-		if (!OLSK_SPEC_UI() && mod._OLSKCatalog.modPublic.OLSKCatalogDataItemSelected().KVCNoteID === inputData.KVCNoteID) {
+		if (!OLSK_SPEC_UI() && mod._OLSKCatalog.modPublic.OLSKCatalogDataItemSelected() && mod._OLSKCatalog.modPublic.OLSKCatalogDataItemSelected().KVCNoteID === inputData.KVCNoteID) {
 			mod._ControlHotfixUpdateInPlace(inputData);
 		}
 	},
