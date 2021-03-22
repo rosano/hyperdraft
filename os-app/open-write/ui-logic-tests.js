@@ -57,13 +57,13 @@ describe('KVCWriteSortFunction', function test_KVCWriteSortFunction() {
 	it('sorts KVCNoteIsArchived below others', function() {
 		const item1 = {
 			KVCNoteCreationDate: new Date(0),
+			KVCNoteIsArchived: true,
 		};
 		const item2 = {
 			KVCNoteCreationDate: new Date(1),
-			KVCNoteIsArchived: true,
 		};
 
-		deepEqual([item1, item2].sort(mod.KVCWriteSortFunction), [item1, item2]);
+		deepEqual([item1, item2].sort(mod.KVCWriteSortFunction), [item2, item1]);
 	});
 
 });

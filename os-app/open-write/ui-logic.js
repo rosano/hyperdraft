@@ -20,9 +20,9 @@ const mod = {
 		return OLSKString.OLSKStringSnippet(KVCTemplate.KVCTemplatePlaintextTitle(inputData.KVCNoteBody));
 	},
 
-	KVCWriteSortFunction (a, b) {
+	KVCWriteSortFunction (a, b, log) {
 		if (a.KVCNoteIsArchived !== b.KVCNoteIsArchived) {
-			return uAscending(a.KVCNoteIsArchived, b.KVCNoteIsArchived);
+			return uAscending(!!a.KVCNoteIsArchived, !!b.KVCNoteIsArchived);
 		}
 
 		return (function(e) {
