@@ -15,14 +15,3 @@ body {
 .KVCGuide table:not(:first-of-type) td:first-child {
 	width: 50%;
 }
-
-.KVCGuideStatisticsLegend td {
-	width: unset !important;
-	padding: 10px !important;
-}
-
-.KVCGuideStatisticsLegend span {
-	display: inline-block;
-	width: 20px;
-	height: 10px;
-}
