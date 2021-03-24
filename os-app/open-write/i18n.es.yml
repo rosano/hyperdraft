@@ -3,7 +3,7 @@ KVCWriteFilterFieldText: Filtrar o crear
 KVCWriteCreateButtonText: Crear
 KVCWriteRevealArchiveButtonText: Mostrar archivo
 KVCWriteLauncherItemImportJSONText: Importar JSON (beta)
-KVCWriteLauncherItemImportJSONErrorNotFilledAlertText: Entrada no cargado
+KVCWriteLauncherItemImportJSONErrorNotFilledAlertText: Entrada no cargada
 KVCWriteLauncherItemImportJSONErrorNotValidAlertText: Entrada no valida
 KVCWriteLauncherItemImportTXTText: Importar TXT (beta)
 KVCWriteLauncherItemImportNVText: Importar Notational Velocity (beta)
