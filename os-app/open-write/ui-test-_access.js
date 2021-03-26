@@ -10,7 +10,7 @@ Object.entries({
 
 	KVCWriteViewportFooter: '.KVCWriteViewportFooter',
 	
-	KVCWriteStorageToolbar: '.KVCWriteStorageToolbar',
+	KVCWriteCloudToolbar: '.KVCWriteCloudToolbar',
 }).map(function (e) {
 	return global[e.shift()]  = e.pop();
 });
@@ -49,8 +49,8 @@ describe('KVCWrite_Access', function () {
 		browser.assert.elements(KVCWriteViewportFooter, 1);
 	});
 
-	it('hides KVCWriteStorageToolbar', function () {
-		browser.assert.elements(KVCWriteStorageToolbar, 0);
+	it('hides KVCWriteCloudToolbar', function () {
+		browser.assert.elements(KVCWriteCloudToolbar, 0);
 	});
 
 	it('shows OLSKAppToolbar', function () {
@@ -171,8 +171,8 @@ describe('KVCWrite_Access', function () {
 			return browser.pressButton('.OLSKAppToolbarCloudButton');
 		});
 
-		it('shows KVCWriteStorageToolbar', function () {
-			browser.assert.elements(KVCWriteStorageToolbar, 1);
+		it('shows KVCWriteCloudToolbar', function () {
+			browser.assert.elements(KVCWriteCloudToolbar, 1);
 		});
 
 		it('shows OLSKCloud', function () {

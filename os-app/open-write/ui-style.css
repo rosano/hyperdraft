@@ -20,7 +20,7 @@
 	height: 100%;
 }
 
-.KVCWriteStorageToolbar {
+.KVCWriteCloudToolbar {
 	/* AppContainerFlexbox:Child */
 	flex-shrink: 0;
 }

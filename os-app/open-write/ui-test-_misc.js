@@ -208,18 +208,18 @@ describe('KVCWrite_Misc', function () {
 
 	});
 
-	describe('KVCWriteStorageToolbar', function test_KVCWriteStorageToolbar () {
+	describe('KVCWriteCloudToolbar', function test_KVCWriteCloudToolbar () {
 
 		it('classes OLSKToolbar', function () {
-			browser.assert.hasClass(KVCWriteStorageToolbar, 'OLSKToolbar');
+			browser.assert.hasClass(KVCWriteCloudToolbar, 'OLSKToolbar');
 		});
 
 		it('classes OLSKToolbarJustify', function () {
-			browser.assert.hasClass(KVCWriteStorageToolbar, 'OLSKToolbarJustify');
+			browser.assert.hasClass(KVCWriteCloudToolbar, 'OLSKToolbarJustify');
 		});
 		
 		it('classes OLSKCommonEdgeTop', function () {
-			browser.assert.hasClass(KVCWriteStorageToolbar, 'OLSKCommonEdgeTop');
+			browser.assert.hasClass(KVCWriteCloudToolbar, 'OLSKCommonEdgeTop');
 		});
 	
 	});

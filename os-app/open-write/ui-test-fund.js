@@ -17,7 +17,7 @@ describe('KVCWrite_Fund', function () {
 		context('not connected', function () {
 
 			before(function () {
-				browser.assert.elements('.KVCWriteStorageToolbar', 0);
+				browser.assert.elements('.KVCWriteCloudToolbar', 0);
 			});
 			
 			context('click', function () {
@@ -28,8 +28,8 @@ describe('KVCWrite_Fund', function () {
 					}, uLocalized('OLSKRemoteStorageConnectConfirmText'));
 				});
 
-				it('shows KVCWriteStorageToolbar', function () {
-					browser.assert.elements('.KVCWriteStorageToolbar', 1);
+				it('shows KVCWriteCloudToolbar', function () {
+					browser.assert.elements('.KVCWriteCloudToolbar', 1);
 				});
 
 				context('cancel', function () {
@@ -39,7 +39,7 @@ describe('KVCWrite_Fund', function () {
 					});
 
 					before(function () {
-						browser.assert.elements('.KVCWriteStorageToolbar', 0);
+						browser.assert.elements('.KVCWriteCloudToolbar', 0);
 					});
 					
 					before(function () {
@@ -53,7 +53,7 @@ describe('KVCWrite_Fund', function () {
 					});
 
 					it('does nothing', function () {
-						browser.assert.elements('.KVCWriteStorageToolbar', 0);
+						browser.assert.elements('.KVCWriteCloudToolbar', 0);
 					});
 				
 				});
@@ -285,8 +285,8 @@ describe('KVCWrite_Fund', function () {
 			}, uLocalized('OLSKFundGateText'));
 		});
 
-		it('shows KVCWriteStorageToolbar', function () {
-			browser.assert.elements('.KVCWriteStorageToolbar', 1);
+		it('shows KVCWriteCloudToolbar', function () {
+			browser.assert.elements('.KVCWriteCloudToolbar', 1);
 		});
 
 		it('exits', function () {
@@ -300,7 +300,7 @@ describe('KVCWrite_Fund', function () {
 			});
 
 			before(function () {
-				browser.assert.elements('.KVCWriteStorageToolbar', 0);
+				browser.assert.elements('.KVCWriteCloudToolbar', 0);
 			});
 			
 			before(function () {
@@ -314,7 +314,7 @@ describe('KVCWrite_Fund', function () {
 			});
 
 			it('does nothing', function () {
-				browser.assert.elements('.KVCWriteStorageToolbar', 0);
+				browser.assert.elements('.KVCWriteCloudToolbar', 0);
 				browser.assert.elements('.KVCWriteListItem', process.env.KVC_FUND_DOCUMENT_LIMIT);
 			});
 		

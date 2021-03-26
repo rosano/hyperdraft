@@ -1274,7 +1274,7 @@ import OLSKUIAssets from 'OLSKUIAssets';
 <footer class="KVCWriteViewportFooter OLSKMobileViewFooter">
 
 	{#if !mod._ValueCloudToolbarHidden }
-		<div class="KVCWriteStorageToolbar OLSKToolbar OLSKToolbarJustify OLSKCommonEdgeTop">
+		<div class="KVCWriteCloudToolbar OLSKToolbar OLSKToolbarJustify OLSKCommonEdgeTop">
 			<div class="OLSKToolbarElementGroup">
 			</div>
 
