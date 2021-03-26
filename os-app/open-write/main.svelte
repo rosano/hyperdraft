@@ -836,7 +836,9 @@ const mod = {
 				return;
 			}
 
-			window.location.reload();
+			setTimeout(function () {
+				window.location.reload();
+			}, mod._ValueZDRWrap.ZDRStorageProtocol == zerodatawrap.ZDRProtocolFission() ? 1000 : 0);// #hotfix-fission-delay
 		});
 	},
 
@@ -1131,7 +1133,7 @@ const mod = {
 			ParamWindow: window,
 			OLSK_FUND_API_URL: 'OLSK_FUND_API_URL_SWAP_TOKEN',
 			ParamBody: {
-				OLSKPactAuthType: OLSKPact.OLSKPactAuthTypeRemoteStorage(),
+				OLSKPactAuthType: mod._ValueZDRWrap.ZDRStorageProtocol === zerodatawrap.ZDRProtocolRemoteStorage() ? OLSKPact.OLSKPactAuthTypeRemoteStorage() : OLSKPact.OLSKPactAuthTypeFission(),
 				OLSKPactAuthIdentity: mod._ValueCloudIdentity,
 				OLSKPactAuthProof: mod._ValueCloudToken,
 				OLSKPactAuthMetadata: {
