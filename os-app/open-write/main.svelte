@@ -838,7 +838,7 @@ const mod = {
 
 			setTimeout(function () {
 				window.location.reload();
-			}, mod._ValueZDRWrap.ZDRStorageProtocol == zerodatawrap.ZDRProtocolFission() ? 1000 : 0);// #hotfix-fission-delay
+			}, mod._ValueZDRWrap.ZDRStorageProtocol === zerodatawrap.ZDRProtocolFission() ? 1000 : 0); // #hotfix-fission-delay
 		});
 	},
 
