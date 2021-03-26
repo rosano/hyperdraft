@@ -272,7 +272,7 @@ const mod = {
 				}, {
 					LCHRecipeName: 'KVCWriteLauncherItemDebug_PromptFakeImportSerialized',
 					LCHRecipeCallback: function KVCWriteLauncherItemDebug_PromptFakeImportSerialized () {
-						return mod.InterfaceStorageInputFieldDidRead(window.prompt());
+						return mod.ControlNotesImportJSON(window.prompt());
 					},
 				}, {
 					LCHRecipeName: 'KVCWriteLauncherItemDebug_PromptFakeImportPlain',
@@ -395,10 +395,6 @@ const mod = {
 
 	InterfaceCreateButtonDidClick () {
 		mod.ControlNoteCreate();
-	},
-
-	InterfaceStorageInputFieldDidRead (inputData) {
-		mod.ControlNotesImportJSON(inputData);
 	},
 
 	InterfaceWindowDidKeydown (event) {
