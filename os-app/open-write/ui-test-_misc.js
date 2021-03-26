@@ -218,10 +218,6 @@ describe('KVCWrite_Misc', function () {
 			browser.assert.hasClass(KVCWriteStorageToolbar, 'OLSKToolbarJustify');
 		});
 		
-		it('classes OLSKStorageToolbar', function () {
-			browser.assert.hasClass(KVCWriteStorageToolbar, 'OLSKStorageToolbar');
-		});
-		
 		it('classes OLSKCommonEdgeTop', function () {
 			browser.assert.hasClass(KVCWriteStorageToolbar, 'OLSKCommonEdgeTop');
 		});
