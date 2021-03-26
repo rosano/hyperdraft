@@ -1299,10 +1299,10 @@ import OLSKUIAssets from 'OLSKUIAssets';
 		OLSKAppToolbarGuideURL={ window.OLSKCanonical('KVCGuideRoute') }
 		OLSKAppToolbarFundShowProgress={ mod._ValueOLSKFundProgress }
 		OLSKAppToolbarFundLimitText={ mod._ValueDocumentRemainder }
-		OLSKAppToolbarDispatchFund={ mod._ValueOLSKFundGrant || OLSKFund.OLSKFundResponseIsPresent() ? null : mod.OLSKAppToolbarDispatchFund }
 		OLSKAppToolbarCloudConnected={ !!mod._ValueCloudIdentity }
 		OLSKAppToolbarCloudOffline={ mod._ValueCloudIsOffline }
 		OLSKAppToolbarCloudError={ !!mod._ValueCloudErrorText }
+		OLSKAppToolbarDispatchFund={ mod._ValueOLSKFundGrant || OLSKFund.OLSKFundResponseIsPresent() ? null : mod.OLSKAppToolbarDispatchFund }
 		OLSKAppToolbarDispatchStorage={ mod.OLSKAppToolbarDispatchStorage }
 		OLSKAppToolbarDispatchLauncher={ mod.OLSKAppToolbarDispatchLauncher }
 		/>
