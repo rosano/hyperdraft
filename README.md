@@ -1,4 +1,4 @@
-<a href="https://hyperdraft.rosano.ca"><img src="https://rosano.s3.amazonaws.com/public/wikiavec/identity.svg" width="64"></a>
+<a href="https://hyperdraft.rosano.ca"><img alt="Project logo" src="https://rosano.s3.amazonaws.com/public/wikiavec/identity.svg" width="64" /></a>
 
 # Hyperdraft
 
