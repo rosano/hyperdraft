@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "postinstall": "node ./package-postinstall.js",
+    "postinstall": "olsk-bundle tidy && node ./package-postinstall.js",
     
     "setup": "olsk-bundle",
 
