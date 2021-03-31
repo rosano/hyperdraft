@@ -140,6 +140,15 @@ describe('KVCWriteExactSortFunction', function test_KVCWriteExactSortFunction() 
 		}, /KVCErrorInputNotValid/);
 	});
 
+	it('bumps exact', function() {
+		const item = Math.random().toString();
+		deepEqual(mod.KVCWriteExactSortFunction(item, {
+			KVCNoteBody: item + Math.random().toString(),
+		}, {
+			KVCNoteBody: item,
+		}), 1);
+	});
+
 	it('bumps startsWith', function() {
 		const item = Math.random().toString();
 		deepEqual(mod.KVCWriteExactSortFunction(item, {

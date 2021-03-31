@@ -10,6 +10,10 @@ const uDescending = function (a, b) {
   return (a > b) ? -1 : ((a < b) ? 1 : 0);
 };
 
+String.prototype.KVCEquals = function (inputData) {
+	return this.toString() === inputData;
+};
+
 const mod = {
 
 	KVCWriteAccessibilitySummary (inputData) {
@@ -57,7 +61,7 @@ const mod = {
 			throw new Error('KVCErrorInputNotValid');
 		}
 
-		return ['startsWith', undefined].map(function (e) {
+		return ['KVCEquals', 'startsWith', undefined].map(function (e) {
 			return uDescending(OLSKString.OLSKStringMatch(needle, KVCTemplate.KVCTemplatePlaintextTitle(a.KVCNoteBody), e), OLSKString.OLSKStringMatch(needle, KVCTemplate.KVCTemplatePlaintextTitle(b.KVCNoteBody), e));
 		}).filter(function (e) {
 			return e !== 0;
