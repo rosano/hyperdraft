@@ -418,10 +418,8 @@ const mod = {
 	ControlNoteSave(inputData) {
 		OLSKThrottle.OLSKThrottleMappedTimeout(mod._ValueSaveNoteThrottleMap, inputData.KVCNoteID, {
 			OLSKThrottleDuration: 500,
-			OLSKThrottleCallback () {
-				mod._ValueZDRWrap.App.KVCNote.KVCNoteUpdate(inputData);
-
-				OLSKLocalStorage.OLKSLocalStorageSet(window.localStorage, 'KVC_VERSION_MAP', OLSKVersion.OLSKVersionAdd(mod._ValueVersionMap, inputData.KVCNoteID, OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(JSON.parse(JSON.stringify(inputData)))));
+			async OLSKThrottleCallback () {
+				OLSKLocalStorage.OLKSLocalStorageSet(window.localStorage, 'KVC_VERSION_MAP', OLSKVersion.OLSKVersionAdd(mod._ValueVersionMap, inputData.KVCNoteID, await mod._ValueZDRWrap.App.KVCNote.KVCNoteUpdate(inputData)));
 			},
 		});
 
@@ -432,7 +430,7 @@ const mod = {
 		if (KVCNote.KVCNoteIsMarkedPublic(inputData)) {
 			OLSKThrottle.OLSKThrottleMappedTimeout(mod._ValueSavePublishThrottleMap, inputData.KVCNoteID, {
 				OLSKThrottleDuration: 1500,
-				async OLSKThrottleCallback () {
+				OLSKThrottleCallback () {
 					mod.ControlNotePublish(inputData);
 				},
 			});
