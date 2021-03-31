@@ -419,7 +419,9 @@ const mod = {
 		OLSKThrottle.OLSKThrottleMappedTimeout(mod._ValueSaveNoteThrottleMap, inputData.KVCNoteID, {
 			OLSKThrottleDuration: 500,
 			async OLSKThrottleCallback () {
-				OLSKLocalStorage.OLKSLocalStorageSet(window.localStorage, 'KVC_VERSION_MAP', OLSKVersion.OLSKVersionAdd(mod._ValueVersionMap, inputData.KVCNoteID, await mod._ValueZDRWrap.App.KVCNote.KVCNoteUpdate(inputData)));
+				OLSKVersion.OLSKVersionAdd(mod._ValueVersionMap, inputData.KVCNoteID, await mod._ValueZDRWrap.App.KVCNote.KVCNoteUpdate(inputData));
+
+				mod.ControlLocalVersion();
 			},
 		});
 
@@ -438,6 +440,19 @@ const mod = {
 			if (OLSK_SPEC_UI()) {
 				OLSKThrottle.OLSKThrottleSkip(mod._ValueSavePublishThrottleMap[inputData.KVCNoteID])	
 			}
+		}
+	},
+
+	ControlLocalVersion() {
+		OLSKThrottle.OLSKThrottleMappedTimeout(mod._ValueSaveNoteThrottleMap, 'KVC_VERSION_MAP', {
+			OLSKThrottleDuration: 50,
+			async OLSKThrottleCallback () {
+				OLSKLocalStorage.OLKSLocalStorageSet(window.localStorage, 'KVC_VERSION_MAP', mod._ValueVersionMap);
+			},
+		});
+
+		if (OLSK_SPEC_UI()) {
+			OLSKThrottle.OLSKThrottleSkip(mod._ValueSaveNoteThrottleMap['KVC_VERSION_MAP']);
 		}
 	},
 
@@ -581,10 +596,12 @@ const mod = {
 		}]);
 	},
 	
-	ControlNoteDiscard (inputData) {
+	async ControlNoteDiscard (inputData) {
 		mod._OLSKCatalog.modPublic.OLSKCatalogRemove(inputData);
 
-		mod._ValueZDRWrap.App.KVCNote.KVCNoteDelete(inputData);
+		OLSKVersion.OLSKVersionClear(mod._ValueVersionMap, (await mod._ValueZDRWrap.App.KVCNote.KVCNoteDelete(inputData)).KVCNoteID);
+
+		mod.ControlLocalVersion();
 	},
 
 	ControlRevealArchive () {
@@ -930,6 +947,10 @@ const mod = {
 
 	ZDRSchemaDispatchSyncDeleteNote (inputData) {
 		mod._OLSKCatalog.modPublic.OLSKCatalogRemove(inputData);
+
+		OLSKVersion.OLSKVersionClear(mod._ValueVersionMap, inputData.KVCNoteID);
+
+		mod.ControlLocalVersion();
 	},
 
 	ZDRSchemaDispatchSyncConflictNote (inputData) {
