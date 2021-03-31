@@ -189,7 +189,7 @@ const mod = {
 		}
 
 		return param2('KVCWriteVersionsWord') + '-' + mod.KVCWriteHumanTimestampString(param1) + param3.map(function (e) {
-			return '\n\n```\n' + e.KVCNoteBody + '\n```';
+			return '\n\n# ' + e.KVCNoteModificationDate.toLocaleString() + '\n```\n' + e.KVCNoteBody + '\n```';
 		}).join('');
 	},
 

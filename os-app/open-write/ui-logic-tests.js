@@ -446,7 +446,7 @@ describe('KVCWriteLauncherItemVersionsTemplate', function test_KVCWriteLauncherI
 			return StubNoteObjectValid();
 		});
 		deepEqual(mod.KVCWriteLauncherItemVersionsTemplate(item, uLocalized, items), uLocalized('KVCWriteVersionsWord') + '-' + mod.KVCWriteHumanTimestampString(item) + items.map(function (e) {
-				return '\n\n```\n' + e.KVCNoteBody + '\n```';
+				return '\n\n# ' + e.KVCNoteModificationDate.toLocaleString() + '\n```\n' + e.KVCNoteBody + '\n```';
 			}).join(''));
 	});
 
