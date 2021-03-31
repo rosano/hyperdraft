@@ -179,7 +179,11 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 				});
 
 				it('sets KVCNoteBody', function () {
-					browser.assert.input('.KVCWriteInputFieldDebug', KVCWriteLogic.KVCWriteLauncherItemVersionsTemplate(date, uLocalized, [item1]));
+					browser.assert.input('.KVCWriteInputFieldDebug', KVCWriteLogic.KVCWriteLauncherItemVersionsTemplate(date, uLocalized, [item1].map(function (KVCNoteBody) {
+						return StubNoteObjectValid({
+							KVCNoteBody,
+						});
+					})));
 				});
 			
 			});
@@ -205,7 +209,11 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 				});
 
 				it('sets KVCNoteBody', function () {
-					browser.assert.input('.KVCWriteInputFieldDebug', KVCWriteLogic.KVCWriteLauncherItemVersionsTemplate(date, uLocalized, [item2, item1]));
+					browser.assert.input('.KVCWriteInputFieldDebug', KVCWriteLogic.KVCWriteLauncherItemVersionsTemplate(date, uLocalized, [item2, item1].map(function (KVCNoteBody) {
+						return StubNoteObjectValid({
+							KVCNoteBody,
+						});
+					})));
 				});
 			
 			});

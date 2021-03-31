@@ -442,11 +442,11 @@ describe('KVCWriteLauncherItemVersionsTemplate', function test_KVCWriteLauncherI
 
 	it('shows param3 if present', function() {
 		const item = new Date();
-		const items = Array.from(Array(Math.max(1, Date.now() % 10))).map(function (e) {
-			return item.toString();
+		const items = Array.from(Array(Math.max(1, Date.now() % 10))).map(function () {
+			return StubNoteObjectValid();
 		});
 		deepEqual(mod.KVCWriteLauncherItemVersionsTemplate(item, uLocalized, items), uLocalized('KVCWriteVersionsWord') + '-' + mod.KVCWriteHumanTimestampString(item) + items.map(function (e) {
-				return '\n\n```\n' + e + '\n```';
+				return '\n\n```\n' + e.KVCNoteBody + '\n```';
 			}).join(''));
 	});
 

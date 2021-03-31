@@ -576,9 +576,7 @@ const mod = {
 	async ControlNoteVersions (inputData) {
 		Launchlet.LCHTasksRun([{
 			LCHRecipeCallback () {
-				mod.ControlNoteCreate(KVCWriteLogic.KVCWriteLauncherItemVersionsTemplate(this.api.LCHDateLocalOffsetSubtracted(new Date(OLSK_SPEC_UI() ? '2001-02-03T04:05:06Z' : Date.now())), OLSKLocalized, (mod._ValueVersionMap[inputData.KVCNoteID] || []).map(function (e) {
-					return e.KVCNoteBody;
-				}).reverse()));
+				mod.ControlNoteCreate(KVCWriteLogic.KVCWriteLauncherItemVersionsTemplate(this.api.LCHDateLocalOffsetSubtracted(new Date(OLSK_SPEC_UI() ? '2001-02-03T04:05:06Z' : Date.now())), OLSKLocalized, (mod._ValueVersionMap[inputData.KVCNoteID] || []).map(OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse).reverse()));
 			},
 			LCHRecipeURLFilter: '*',
 		  LCHRecipeIsAutomatic: true,
