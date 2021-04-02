@@ -16,6 +16,6 @@ exports.OLSKControllerRoutes = function() {
 			}, require('OLSKDisk').OLSKDiskReadFile(require('path').join(__dirname, 'main.js'))));
 			return res.send(require(filePath).KVCTemplateViewDefault(res.locals.OLSKLocalized));
 		},
-		OLSKRouteLanguageCodes: ['en', 'fr', 'es'],
+		OLSKRouteLanguageCodes: ['en', 'fr', 'es', 'pt'],
 	}];
 };

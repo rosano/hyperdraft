@@ -6,7 +6,7 @@ exports.OLSKControllerRoutes = function() {
 		OLSKRouteFunction (req, res, next) {
 			return res.OLSKExpressLayoutRender(require('path').join(__dirname, 'ui-view.ejs'));
 		},
-		OLSKRouteLanguageCodes: ['en', 'fr', 'es'],
+		OLSKRouteLanguageCodes: ['en', 'fr', 'es', 'pt'],
 		_OLSKRouteSkipLanguageRedirect: true,
 	}, {
 		OLSKRoutePath: '/panel/write',
