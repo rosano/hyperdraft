@@ -2,4 +2,4 @@ KVCFeatureListArray:
   - - Poner en red tus ideas.
     - 'Hacer enlazos entre tus notas con la sintaxis [[wiki]].'
   - - Hacer un sitio web.
-    - Publicar notas en Internet por remoteStorage.
+    - Publicar notas en Internet con remoteStorage o Fission.

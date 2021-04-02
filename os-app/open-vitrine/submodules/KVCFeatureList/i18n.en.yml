@@ -2,4 +2,4 @@ KVCFeatureListArray:
   - - Network your ideas.
     - 'Link between notes via [[wiki]] syntax.'
   - - Make a website.
-    - Publish notes to the Internet via remoteStorage.
+    - Publish notes to the Internet with remoteStorage or Fission.
