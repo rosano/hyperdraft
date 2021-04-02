@@ -1,8 +1,8 @@
 <div class="KVCRootLink">
 
-<%- include('../__external/OLSKRootLink/main.ejs', {
+<%- include('../../../node_modules/OLSKRootLink/main.ejs', {
 	OLSKRootLinkURL: OLSKCanonicalLocalized('KVCVitrineRoute'),
-	OLSKRootLinkImageURL: '/_shared/KVCRootLink/ui-assets/identity.svg',
+	OLSKRootLinkImageURL: process.env.OLSK_LAYOUT_TOUCH_ICON_URL,
 }) %>
 
 </div>
