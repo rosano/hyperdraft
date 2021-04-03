@@ -68,9 +68,6 @@
     "// tech-sw": null,
     "OLSKServiceWorker": "olsk/OLSKServiceWorker",
 
-    "// ???": null,
-    "url-parse": "latest",
-
     "// I sacrifice myself for the commas of others": null
   },
   "devDependencies": {
