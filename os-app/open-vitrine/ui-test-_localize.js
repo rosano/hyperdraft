@@ -50,10 +50,6 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 			browser.assert.text(KVCVitrineSupportBlurb, uLocalized('OLSKWordingFeedbackBlurb'));
 		});
 
-		it('localizes KVCVitrineAppringLink', function () {
-			browser.assert.attribute(KVCVitrineAppringLink, 'title', uLocalized('OLSKWordingAppring'));
-		});
-
 		context('OLSKLanding', function test_OLSKLanding () {
 
 			it('localizes OLSKLandingHeadingText', function () {
