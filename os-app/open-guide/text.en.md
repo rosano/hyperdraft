@@ -152,10 +152,10 @@ After setting up a custom domain, designate any note as the home page with the `
 
 | Global (import/export) ||
 :--- | ---
-| `KVCWriteLauncherItemImportJSONText` | Launcher |
+| `OLSKTransportLauncherItemImportJSONText` | Launcher |
 | `KVCWriteLauncherItemImportTXTText` | Launcher |
 | `KVCWriteLauncherItemImportNVText` | Launcher |
-| `KVCWriteLauncherItemExportJSONText` | Launcher |
+| `OLSKTransportLauncherItemExportJSONText` | Launcher |
 | `KVCWriteLauncherItemExportZIPText` | Launcher |
 
 | Global (when cloud is connected) ||

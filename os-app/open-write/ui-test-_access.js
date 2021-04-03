@@ -97,8 +97,24 @@ describe('KVCWrite_Access', function () {
 		return browser.assert.OLSKLauncherItems('KVCWriteLauncherItemShowPublicNotes', 1);
 	});
 
+	it('hides KVCWriteLauncherItemRevealArchive', function () {
+		return browser.assert.OLSKLauncherItems('KVCWriteLauncherItemRevealArchive', 0);
+	});
+
+	it('shows KVCWriteLauncherItemImportNV', function () {
+		return browser.assert.OLSKLauncherItems('KVCWriteLauncherItemImportNV', 1);
+	});
+
+	it('shows KVCWriteLauncherItemExportZIP', function () {
+		return browser.assert.OLSKLauncherItems('KVCWriteLauncherItemExportZIP', 1);
+	});
+
 	it('shows ZDRLauncherFakeItemProxy', function () {
 		return browser.assert.OLSKLauncherItems('ZDRLauncherFakeItemProxy', 1);
+	});
+
+	it('shows OLSKTransportLauncherFakeItemProxy', function () {
+		return browser.assert.OLSKLauncherItems('OLSKTransportLauncherFakeItemProxy', 1);
 	});
 
 	it('shows OLSKRemoteStorageLauncherFakeItemProxy', function () {
@@ -119,30 +135,6 @@ describe('KVCWrite_Access', function () {
 
 	it('hides KVCWriteDetailLauncherFakeItemProxy', function () {
 		return browser.assert.OLSKLauncherItems('KVCWriteDetailLauncherFakeItemProxy', 0);
-	});
-
-	it('hides KVCWriteLauncherItemRevealArchive', function () {
-		return browser.assert.OLSKLauncherItems('KVCWriteLauncherItemRevealArchive', 0);
-	});
-
-	it('shows KVCWriteLauncherItemImportJSON', function () {
-		return browser.assert.OLSKLauncherItems('KVCWriteLauncherItemImportJSON', 1);
-	});
-
-	it('shows KVCWriteLauncherItemImportTXT', function () {
-		return browser.assert.OLSKLauncherItems('KVCWriteLauncherItemImportTXT', 1);
-	});
-
-	it('shows KVCWriteLauncherItemImportNV', function () {
-		return browser.assert.OLSKLauncherItems('KVCWriteLauncherItemImportNV', 1);
-	});
-
-	it('shows KVCWriteLauncherItemExportJSON', function () {
-		return browser.assert.OLSKLauncherItems('KVCWriteLauncherItemExportJSON', 1);
-	});
-
-	it('shows KVCWriteLauncherItemExportZIP', function () {
-		return browser.assert.OLSKLauncherItems('KVCWriteLauncherItemExportZIP', 1);
 	});
 
 	describe('tongue', function test_tongue() {

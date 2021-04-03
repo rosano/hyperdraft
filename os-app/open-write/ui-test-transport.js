@@ -4,7 +4,7 @@ describe('KVCWrite_Transport', function () {
 
 	const json = {};
 
-	describe('KVCWriteLauncherItemImportJSON', function test_KVCWriteLauncherItemImportJSON() {
+	describe('OLSKTransportDispatchImportJSON', function test_OLSKTransportDispatchImportJSON() {
 
 		const KVCNoteBody = Math.random().toString();
 
@@ -17,7 +17,7 @@ describe('KVCWrite_Transport', function () {
 		});
 
 		before(function () {
-			return browser.fill('.LCHLauncherFilterInput', 'KVCWriteLauncherItemDebug_PromptFakeImportSerialized');
+			return browser.fill('.LCHLauncherFilterInput', 'OLSKTransportLauncherFakeItemImportSerialized');
 		});
 
 		before(function () {
@@ -43,14 +43,14 @@ describe('KVCWrite_Transport', function () {
 
 	});
 
-	describe('LCHComposeLauncherItemExportJSON', function test_LCHComposeLauncherItemExportJSON() {
+	describe('OLSKTransportDispatchExportInput', function test_OLSKTransportDispatchExportInput() {
 
 		before(function () {
 			return browser.pressButton('.OLSKAppToolbarLauncherButton');
 		});
 
 		before(function () {
-			return browser.fill('.LCHLauncherFilterInput', 'KVCWriteLauncherItemDebug_AlertFakeExportSerialized');
+			return browser.fill('.LCHLauncherFilterInput', 'OLSKTransportLauncherFakeItemExportSerialized');
 		});
 
 		it('exports file', async function() {

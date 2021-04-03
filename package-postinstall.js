@@ -14,7 +14,6 @@
 (function OLSKPostinstallExternalAssets() {
 	require('./node_modules/OLSKExpress/modules/OLSKAssets/main.js').OLSKAssetsCopyAssetsFromTo([
 		'codemirror',
-		'file-saver',
 		'jszip',
 		'launchlet',
 		'normalize.css',

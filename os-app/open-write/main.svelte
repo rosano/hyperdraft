@@ -19,6 +19,7 @@ import OLSKLocalStorage from 'OLSKLocalStorage';
 import OLSKPact from 'OLSKPact';
 import OLSKChain from 'OLSKChain';
 import OLSKBeacon from 'OLSKBeacon';
+import OLSKTransport from 'OLSKTransport';
 import zerodatawrap from 'zerodatawrap';
 
 const mod = {
@@ -84,14 +85,6 @@ const mod = {
 				document.querySelector('.OLSKMasterListFilterField').focus();
 			},
 		}, {
-			LCHRecipeSignature: 'KVCWriteLauncherItemImportJSON',
-			LCHRecipeName: OLSKLocalized('KVCWriteLauncherItemImportJSONText'),
-			LCHRecipeCallback: async function KVCWriteLauncherItemImportJSON () {
-				return mod.ControlNotesImportJSON(await this.api.LCHReadTextFile({
-					accept: '.json',
-				}));
-			},
-		}, {
 			LCHRecipeSignature: 'KVCWriteLauncherItemImportTXT',
 			LCHRecipeName: OLSKLocalized('KVCWriteLauncherItemImportTXTText'),
 			LCHRecipeCallback: async function KVCWriteLauncherItemImportTXT () {
@@ -108,12 +101,6 @@ const mod = {
 					accept: '.txt,.md',
 					multiple: true,
 				}), true);
-			},
-		}, {
-			LCHRecipeSignature: 'KVCWriteLauncherItemExportJSON',
-			LCHRecipeName: OLSKLocalized('KVCWriteLauncherItemExportJSONText'),
-			LCHRecipeCallback: async function KVCWriteLauncherItemExportJSON () {
-				return this.api.LCHSaveFile(await mod.DataExportJSON(), mod.DataExportJSONFilename());
 			},
 		}, {
 			LCHRecipeSignature: 'KVCWriteLauncherItemExportZIP',
@@ -270,11 +257,6 @@ const mod = {
 						return mod.SetupCatalog();
 					},
 				}, {
-					LCHRecipeName: 'KVCWriteLauncherItemDebug_PromptFakeImportSerialized',
-					LCHRecipeCallback: function KVCWriteLauncherItemDebug_PromptFakeImportSerialized () {
-						return mod.ControlNotesImportJSON(window.prompt());
-					},
-				}, {
 					LCHRecipeName: 'KVCWriteLauncherItemDebug_PromptFakeImportPlain',
 					LCHRecipeCallback: function KVCWriteLauncherItemDebug_PromptFakeImportPlain () {
 						return mod.ControlNotesImportTXT([Object.assign(new File([], Math.random().toString()), {
@@ -289,14 +271,6 @@ const mod = {
 						}, JSON.parse(window.prompt()))], true)
 					},
 				}, {
-					LCHRecipeName: 'KVCWriteLauncherItemDebug_AlertFakeExportSerialized',
-					LCHRecipeCallback: async function KVCWriteLauncherItemDebug_AlertFakeExportSerialized () {
-						return window.alert(JSON.stringify({
-							OLSKDownloadName: mod.DataExportJSONFilename(),
-							OLSKDownloadData: await mod.DataExportJSON(),
-						}));
-					},
-				}, {
 					LCHRecipeName: 'KVCWriteLauncherItemDebug_AlertFakeExportCompressed',
 					LCHRecipeCallback: function KVCWriteLauncherItemDebug_AlertFakeExportCompressed () {
 						return window.alert(JSON.stringify({
@@ -309,6 +283,14 @@ const mod = {
 
 		outputData.push(...zerodatawrap.ZDRRecipes({
 			ParamMod: mod,
+			ParamSpecUI: OLSK_SPEC_UI(),
+		}));
+
+		outputData.push(...OLSKTransport.OLSKTransportRecipes({
+			ParamWindow: window,
+			OLSKLocalized: OLSKLocalized,
+			OLSKTransportDispatchImportJSON: mod.OLSKTransportDispatchImportJSON,
+			OLSKTransportDispatchExportInput: mod.OLSKTransportDispatchExportInput,
 			ParamSpecUI: OLSK_SPEC_UI(),
 		}));
 
@@ -352,23 +334,8 @@ const mod = {
 		return outputData;
 	},
 
-	async DataExportJSON () {
-		return JSON.stringify(mod._ValueZDRWrap.App.KVCTransport.KVCTransportExport({
-			KVCNote: mod._OLSKCatalog.modPublic._OLSKCatalogDataItemsAll(),
-			KVCSetting: await mod._ValueZDRWrap.App.KVCSetting.KVCSettingList(),
-		}));
-	},
-
-	DataExportBasename () {
-		return `${ window.location.hostname }-${ Date.now() }`;
-	},
-
-	DataExportJSONFilename () {
-		return `${ mod.DataExportBasename() }.json`;
-	},
-
 	DataExportZIPFilename () {
-		return `${ mod.DataExportBasename() }.zip`;
+		return `${ OLSKTransport.OLSKTransportExportBasename() }.zip`;
 	},
 
 	DataIsEligible (inputData = {}) {
@@ -606,19 +573,6 @@ const mod = {
 
 	ControlRevealArchive () {
 		mod._ValueRevealArchiveIsVisible = false;
-	},
-
-	async ControlNotesImportJSON (inputData) {
-		if (!inputData.trim()) {
-			return window.alert(OLSKLocalized('KVCWriteLauncherItemImportJSONErrorNotFilledAlertText'))
-		}
-
-		try {
-			await mod._ValueZDRWrap.App.KVCTransport.KVCTransportImport(OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(JSON.parse(inputData)));
-			await mod.SetupCatalog();
-		} catch (e) {
-			window.alert(OLSKLocalized('KVCWriteLauncherItemImportJSONErrorNotValidAlertText'));
-		}
 	},
 
 	async ControlNotesImportTXT (inputData, extractFilename) {
@@ -931,6 +885,18 @@ const mod = {
 
 	KVCWriteDetailDispatchOpen (inputData) {
 		mod._OLSKCatalog.modPublic.OLSKCatalogFilterWithNoThrottle(inputData);
+	},
+
+	async OLSKTransportDispatchImportJSON (inputData) {
+		await mod._ValueZDRWrap.App.KVCTransport.KVCTransportImport(OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(inputData));
+		await mod.SetupCatalog();
+	},
+
+	async OLSKTransportDispatchExportInput () {
+		return mod._ValueZDRWrap.App.KVCTransport.KVCTransportExport({
+			KVCNote: mod._OLSKCatalog.modPublic._OLSKCatalogDataItemsAll(),
+			KVCSetting: await mod._ValueZDRWrap.App.KVCSetting.KVCSettingList(),
+		});
 	},
 
 	ZDRSchemaDispatchSyncCreateNote (inputData) {

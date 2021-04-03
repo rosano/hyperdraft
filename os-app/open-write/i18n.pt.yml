@@ -2,12 +2,8 @@ KVCWriteTitle: Escrever
 KVCWriteFilterFieldText: Filtrar ou criar
 KVCWriteCreateButtonText: Criar
 KVCWriteRevealArchiveButtonText: Revelar o arquivo
-KVCWriteLauncherItemImportJSONText: Importar JSON (beta)
-KVCWriteLauncherItemImportJSONErrorNotFilledAlertText: Entrada não preenchida
-KVCWriteLauncherItemImportJSONErrorNotValidAlertText: Entrada não válida
 KVCWriteLauncherItemImportTXTText: Importar TXT (beta)
 KVCWriteLauncherItemImportNVText: Importar Notational Velocity (beta)
-KVCWriteLauncherItemExportJSONText: Exportar JSON (beta)
 KVCWriteLauncherItemExportZIPText: Exportar ZIP (beta)
 KVCWriteLauncherItemJournalText: Diário
 KVCWriteLauncherItemBacklinksText: Backlinks
