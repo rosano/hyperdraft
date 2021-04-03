@@ -10,7 +10,7 @@ Inspired by modeless and keyboard-centric [Notational Velocity](http://notationa
 
 Use it for ideas, todo lists, brainstorming, recipes, reading notes, journaling, or anything involving writing.
 
-<dl class="OLSKDecorCallout OLSKDecorGlossary">
+<dl class="OLSKDecorGlossary">
 	<dt><a href="https://rosano.hmm.garden">My public notes</a></dt>
 	<dd>A space to write, collect, revise, and share.</dd>
 	<dt><a href="https://rosano.hmm.garden/01f04ph0mzahzyyd2grqa7nh9c">Gardens made with Hyperdraft</a></dt>
