@@ -22,28 +22,12 @@ describe('KVCVitrine_Misc', function () {
 	
 	});
 
-	describe('KVCVitrineCrown', function test_KVCVitrineCrown() {
+	describe('OLSKCrown', function test_OLSKCrown () {
 
-		it('classes OLSKCommonCard', function () {
-			browser.assert.hasClass(KVCVitrineCrown, 'OLSKCommonCard');
+		it('sets OLSKCrownCardImageURL', function () {
+			browser.assert.attribute('.OLSKCrownCardImage', 'src', '/_shared/KVCRootLink/ui-assets/identity.svg');
 		});
-
-		it('classes OLSKCommonCrownCardMini', function () {
-			browser.assert.hasClass(KVCVitrineCrown, 'OLSKCommonCrownCardMini');
-		});
-		
-	});
-
-	describe('KVCVitrineCrownIcon', function () {
-
-		it('sets role', function () {
-			browser.assert.attribute(KVCVitrineCrownIcon, 'role', 'presentation');
-		});
-
-		it('sets src', function () {
-			browser.assert.attribute(KVCVitrineCrownIcon, 'src', '/_shared/KVCRootLink/ui-assets/identity.svg');
-		});
-
+	
 	});
 
 	context('OLSKLanding', function test_OLSKLanding () {

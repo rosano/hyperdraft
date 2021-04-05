@@ -13,17 +13,10 @@ locals.OLSKPageUseLivereload = process.env.NODE_ENV === 'development';
 
 <div class="KVCVitrine OLSKDecor OLSKDecorCapped">
 
-<div class="OLSKToolbar OLSKToolbarJustify OLSKMobileViewHeader OLSKCommonEdgeBottom OLSKStickyHeader">
-	<div class="KVCVitrineCrown OLSKCommonCard OLSKCommonCrownCardMini">
-		<img class="KVCVitrineCrownIcon" src="/_shared/KVCRootLink/ui-assets/identity.svg" role="presentation" />
-		<section>
-			<span class="KVCVitrineCrownName"><%= OLSKLocalized('KVCVitrineTitle') %></span>
-		</section>
-	</div>
-
-	<%- include('../_shared/__external/OLSKLanguageSwitcher/main.ejs') %>
-	
-</div>
+<%- include('../../node_modules/OLSKCrown/main.ejs', {
+	OLSKCrownCardImageURL: '/_shared/KVCRootLink/ui-assets/identity.svg',
+	OLSKCrownCardNameText: OLSKLocalized('KVCVitrineTitle'),
+}) %>
 
 <%- include('../../node_modules/OLSKLanding/main.ejs', {
 	OLSKLandingHeadingText: OLSKLocalized('KVCVitrineDescription'),

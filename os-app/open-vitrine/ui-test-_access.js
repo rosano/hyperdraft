@@ -3,10 +3,6 @@ const kDefaultRoutePath = require('./controller.js').OLSKControllerRoutes().shif
 Object.entries({
 	KVCVitrine: '.KVCVitrine',
 	
-	KVCVitrineCrown: '.KVCVitrineCrown',
-	KVCVitrineCrownIcon: '.KVCVitrineCrownIcon',
-	KVCVitrineCrownName: '.KVCVitrineCrownName',
-
 	KVCVitrineFeaturesHeading: '.KVCVitrineFeaturesHeading',
 
 	KVCVitrineGuideButton: '.KVCVitrineGuideButton',
@@ -33,24 +29,12 @@ describe('KVCVitrine_Access', function () {
 		browser.assert.elements(KVCVitrine, 1);
 	});
 
-	it('shows OLSKLanguageSwitcher', function() {
-		browser.assert.elements('.OLSKLanguageSwitcher', 1);
+	it('shows OLSKCrown', function() {
+		browser.assert.elements('.OLSKCrown', 1);
 	});
 	
 	it('shows OLSKLanding', function() {
 		browser.assert.elements('.OLSKLanding', 1);
-	});
-
-	it('shows KVCVitrineCrown', function () {
-		browser.assert.elements(KVCVitrineCrown, 1);
-	});
-
-	it('shows KVCVitrineCrownIcon', function () {
-		browser.assert.elements(KVCVitrineCrownIcon, 1);
-	});
-
-	it('shows KVCVitrineCrownName', function () {
-		browser.assert.elements(KVCVitrineCrownName, 1);
 	});
 
 	it('shows KVCVitrineFeaturesHeading', function () {

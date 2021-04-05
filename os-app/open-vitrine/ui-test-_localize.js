@@ -22,10 +22,6 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 			browser.assert.attribute('meta[name=description]', 'content', uLocalized('KVCVitrineDescription'));
 		});
 
-		it('localizes KVCVitrineCrownName', function () {
-			browser.assert.text(KVCVitrineCrownName, uLocalized('KVCVitrineTitle'));
-		});
-
 		it('localizes KVCVitrineFeaturesHeading', function () {
 			browser.assert.text(KVCVitrineFeaturesHeading, uLocalized('OLSKWordingFeatures'));
 		});
@@ -48,6 +44,14 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 
 		it('localizes KVCVitrineSupportBlurb', function () {
 			browser.assert.text(KVCVitrineSupportBlurb, uLocalized('OLSKWordingFeedbackBlurb'));
+		});
+
+		context('OLSKCrown', function test_OLSKCrown () {
+
+			it('localizes OLSKCrownCardName', function () {
+				browser.assert.text('.OLSKCrownCardName', uLocalized('KVCVitrineTitle'));
+			});
+		
 		});
 
 		context('OLSKLanding', function test_OLSKLanding () {
