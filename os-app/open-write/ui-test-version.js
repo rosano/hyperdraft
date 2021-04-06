@@ -28,7 +28,7 @@ describe('KVCWrite_Version', function () {
 		});
 
 		it('calls OLSKVersionAdd', function () {
-			browser.assert.evaluate(`Object.keys(JSON.parse(localStorage.getItem('KVC_VERSION_MAP'))).length`, createCount)
+			browser.assert.evaluate(`Object.keys(JSON.parse(localStorage.getItem('KVC_VERSION_MAP'))).length`, createCount);
 		});
 	
 	});
@@ -81,6 +81,38 @@ describe('KVCWrite_Version', function () {
 			browser.assert.evaluate(`Object.keys(JSON.parse(localStorage.getItem('KVC_VERSION_MAP'))).length`, createCount - discardCount);
 		});
 
+	});
+
+	context.only('limit', function test_limit () {
+
+		// before(function() {
+		// 	return browser.OLSKVisit(kDefaultRoute);
+		// });
+
+		before(function () {
+			return browser.pressButton('.KVCWriteCreateButton');
+		});
+
+		before(function () {
+			return browser.fill('.KVCWriteInputFieldDebug', Math.random().toString());
+		});
+
+		before(function () {
+			browser.assert.evaluate(`JSON.parse(localStorage.getItem('KVC_VERSION_MAP'))[Object.keys(JSON.parse(localStorage.getItem('KVC_VERSION_MAP'))).shift()].length`, 1);
+		});
+
+		Array.from(Array(parseInt(process.env.OLSK_VERSION_LIMIT))).forEach(function () {
+			
+			before(function () {
+				return browser.fill('.KVCWriteInputFieldDebug', Math.random().toString());
+			});
+
+		});
+
+		it('sets ParamLimit', function () {
+			browser.assert.evaluate(`JSON.parse(localStorage.getItem('KVC_VERSION_MAP'))[Object.keys(JSON.parse(localStorage.getItem('KVC_VERSION_MAP'))).shift()].length`, process.env.OLSK_VERSION_LIMIT);
+		});
+	
 	});
 
 });

@@ -1,5 +1,7 @@
 export default require('OLSKRollupScaffold').OLSKRollupScaffoldScanStart(__dirname, {
 	OLSKRollupPluginSwapTokens: Object.assign(require('OLSKUIAssets').OLSKUIAssetsSwapTokens(), {
+		OLSK_VERSION_LIMIT_SWAP_TOKEN: process.env.OLSK_VERSION_LIMIT,
+
 		OLSK_APROPOS_FEEDBACK_EMAIL_SWAP_TOKEN: Buffer.from(`mailto:${ process.env.OLSK_APROPOS_FEEDBACK_EMAIL }`).toString('base64'),
 		
 		KVC_FUND_DOCUMENT_LIMIT_SWAP_TOKEN: process.env.KVC_FUND_DOCUMENT_LIMIT,

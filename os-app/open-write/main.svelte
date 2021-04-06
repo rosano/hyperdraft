@@ -390,6 +390,7 @@ const mod = {
 					ParamMap: mod._ValueVersionMap,
 					ParamKey: inputData.KVCNoteID,
 					ParamData: await mod._ValueZDRWrap.App.KVCNote.KVCNoteUpdate(inputData),
+					ParamLimit: parseInt('OLSK_VERSION_LIMIT_SWAP_TOKEN'),
 				});
 
 				mod.ControlLocalVersion();
