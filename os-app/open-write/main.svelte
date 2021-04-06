@@ -386,7 +386,11 @@ const mod = {
 		OLSKThrottle.OLSKThrottleMappedTimeout(mod._ValueSaveNoteThrottleMap, inputData.KVCNoteID, {
 			OLSKThrottleDuration: 500,
 			async OLSKThrottleCallback () {
-				OLSKVersion.OLSKVersionAdd(mod._ValueVersionMap, inputData.KVCNoteID, await mod._ValueZDRWrap.App.KVCNote.KVCNoteUpdate(inputData));
+				OLSKVersion.OLSKVersionAdd({
+					ParamMap: mod._ValueVersionMap,
+					ParamKey: inputData.KVCNoteID,
+					ParamData: await mod._ValueZDRWrap.App.KVCNote.KVCNoteUpdate(inputData),
+				});
 
 				mod.ControlLocalVersion();
 			},
