@@ -1208,7 +1208,7 @@ import OLSKUIAssets from 'OLSKUIAssets';
 
 	<!-- LIST ITEM -->
 
-	<div slot="OLSKMasterListItem">
+	<div slot="OLSKCollectionItem">
 		<KVCWriteListItem KVCWriteListItemObject={ OLSKResultsListItem } />
 	</div>
 
