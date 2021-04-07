@@ -75,7 +75,7 @@ describe('KVCWrite_Misc', function () {
 		});
 
 		it('sets KVCWriteListItemSelected', function () {
-			browser.assert.elements('.OLSKResultsListItemSelected', 1);
+			browser.assert.elements('.OLSKCollectionItemLocus', 1);
 		});
 
 		it('sets KVCWriteDetailItem', function () {
