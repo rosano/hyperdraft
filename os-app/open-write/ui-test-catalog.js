@@ -104,7 +104,7 @@ describe('KVCWrite_Catalog', function () {
 			return browser.OLSKFireKeyboardEvent(browser.window, 'ArrowDown');
 		});
 
-		it('binds OLSKMasterListItemSelected', function () {
+		it('binds OLSKCollectionItemsLocus', function () {
 			browser.assert.hasClass('.OLSKResultsListItem:nth-child(2)', 'OLSKResultsListItemSelected');
 		});
 	
