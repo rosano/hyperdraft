@@ -682,7 +682,7 @@ const mod = {
 		return inputData.KVCNoteID;
 	},
 
-	OLSKCatalogDispatchClick (inputData) {
+	OLSKCollectionDispatchClick (inputData) {
 		mod.ControlNoteActivate(inputData);
 	},
 
@@ -1184,7 +1184,7 @@ import OLSKUIAssets from 'OLSKUIAssets';
 
 	_OLSKCatalogDispatchKey={ mod._OLSKCatalogDispatchKey }
 
-	OLSKCatalogDispatchClick={ mod.OLSKCatalogDispatchClick }
+	OLSKCollectionDispatchClick={ mod.OLSKCollectionDispatchClick }
 	OLSKCatalogDispatchArrow={ mod.OLSKCatalogDispatchArrow }
 	OLSKCatalogDispatchArchivedHide={ mod.OLSKCatalogDispatchArchivedHide }
 	OLSKCatalogDispatchArchivedShow={ mod.OLSKCatalogDispatchArchivedShow }
