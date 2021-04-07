@@ -9,7 +9,7 @@ describe('KVCWrite_Sync', function () {
 	describe('ZDRSchemaDispatchSyncCreateNote', function test_ZDRSchemaDispatchSyncCreateNote () {
 
 		before(function () {
-			browser.assert.elements('.OLSKResultsListItem', 0);
+			browser.assert.elements('.OLSKCollectionItem', 0);
 		});
 
 		before(function () {
@@ -17,7 +17,7 @@ describe('KVCWrite_Sync', function () {
 		});
 
 		it('adds item', function () {
-			browser.assert.elements('.OLSKResultsListItem', 1);
+			browser.assert.elements('.OLSKCollectionItem', 1);
 		});
 
 	});
@@ -25,7 +25,7 @@ describe('KVCWrite_Sync', function () {
 	describe('ZDRSchemaDispatchSyncUpdateNote', function test_ZDRSchemaDispatchSyncUpdateNote () {
 
 		before(function () {
-			browser.assert.text('.OLSKResultsListItem', 'FakeZDRSchemaDispatchSyncCreateNote');
+			browser.assert.text('.OLSKCollectionItem', 'FakeZDRSchemaDispatchSyncCreateNote');
 		});
 
 		before(function () {
@@ -33,13 +33,13 @@ describe('KVCWrite_Sync', function () {
 		});
 
 		it('updates item', function () {
-			browser.assert.text('.OLSKResultsListItem', 'FakeZDRSchemaDispatchSyncUpdateNote');
+			browser.assert.text('.OLSKCollectionItem', 'FakeZDRSchemaDispatchSyncUpdateNote');
 		});
 
 		context('selected same', function () {
 			
 			before(function () {
-				return browser.click('.OLSKResultsListItem');
+				return browser.click('.OLSKCollectionItem');
 			});
 
 			before(function () {
@@ -65,7 +65,7 @@ describe('KVCWrite_Sync', function () {
 		});
 
 		it('removes item', function () {
-			browser.assert.elements('.OLSKResultsListItem', 0);
+			browser.assert.elements('.OLSKCollectionItem', 0);
 		});
 
 		context('selected same', function () {
@@ -75,7 +75,7 @@ describe('KVCWrite_Sync', function () {
 			});
 
 			before(function () {
-				return browser.click('.OLSKResultsListItem');
+				return browser.click('.OLSKCollectionItem');
 			});
 
 			before(function () {
@@ -105,7 +105,7 @@ describe('KVCWrite_Sync', function () {
 		});
 
 		it('selects local', function () {
-			browser.assert.text('.OLSKResultsListItem', 'FakeZDRSchemaDispatchSyncConflictNote-local');
+			browser.assert.text('.OLSKCollectionItem', 'FakeZDRSchemaDispatchSyncConflictNote-local');
 		});
 
 	});

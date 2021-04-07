@@ -105,7 +105,7 @@ describe('KVCWrite_Catalog', function () {
 		});
 
 		it('binds OLSKCollectionItemsLocus', function () {
-			browser.assert.hasClass('.OLSKResultsListItem:nth-child(2)', 'OLSKCollectionItemLocus');
+			browser.assert.hasClass('.OLSKCollectionItem:nth-child(2)', 'OLSKCollectionItemLocus');
 		});
 	
 	});
@@ -123,7 +123,7 @@ describe('KVCWrite_Catalog', function () {
 		});
 
 		it('creates item', function () {
-			browser.assert.text('.OLSKResultsListItem:nth-child(1)', item)
+			browser.assert.text('.OLSKCollectionItem:nth-child(1)', item)
 		});
 	
 	});

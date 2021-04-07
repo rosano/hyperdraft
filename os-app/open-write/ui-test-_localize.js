@@ -120,7 +120,7 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 			});
 
 			it('sets KVCWriteListItemTitle', function () {
-				browser.assert.text('.OLSKResultsListItem:nth-child(1) .KVCWriteListItemTitle', item.split('\n').shift());
+				browser.assert.text('.OLSKCollectionItem:nth-child(1) .KVCWriteListItemTitle', item.split('\n').shift());
 			});
 
 			it.skip('sets KVCWriteListItemSnippet', function () {

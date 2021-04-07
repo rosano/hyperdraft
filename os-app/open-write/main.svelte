@@ -1191,7 +1191,7 @@ import OLSKUIAssets from 'OLSKUIAssets';
 	OLSKCatalogDispatchFilterSubmit={ mod.OLSKCatalogDispatchFilterSubmit }
 	OLSKCatalogDispatchQuantity={ mod.OLSKCatalogDispatchQuantity }
 
-	let:OLSKResultsListItem
+	let:OLSKCollectionItem
 	>
 
 	<!-- MASTER -->
@@ -1209,7 +1209,7 @@ import OLSKUIAssets from 'OLSKUIAssets';
 	<!-- LIST ITEM -->
 
 	<div slot="OLSKCollectionItem">
-		<KVCWriteListItem KVCWriteListItemObject={ OLSKResultsListItem } />
+		<KVCWriteListItem KVCWriteListItemObject={ OLSKCollectionItem } />
 	</div>
 
 	<!-- DETAIL -->
