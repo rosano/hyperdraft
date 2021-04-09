@@ -130,7 +130,12 @@ const mod = {
 
 	ControlOpenTextObject (inputData, indirect = '') {
 		const url = [inputData, indirect.slice(1, -1)].filter(function (e) {
-			return URLParse(e, {}).protocol;
+			try {
+				return (new URL('', e)).hostname;
+			} catch (err) {
+				return false;
+			}
+			
 		}).shift();
 
 		if (url) {
