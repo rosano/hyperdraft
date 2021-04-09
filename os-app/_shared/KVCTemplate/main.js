@@ -206,7 +206,7 @@ const mod = {
 		})(inputData).trim();
 	},
 
-	KVCTemplateTokensMap (body, options) {
+	KVCTemplateTokensMap (body, options, debug = {}) {
 		if (typeof body !== 'string') {
 			throw new Error('KVCErrorInputNotValid');
 		}
@@ -215,9 +215,23 @@ const mod = {
 			throw new Error('KVCErrorInputNotValid');
 		}
 
+		const stripHTML = function (inputData) {
+			if (!debug.document && typeof document === 'undefined') {
+				return inputData;
+			}
+
+			const div = (debug.document || document).querySelector('.KVCTemplateTokensMap') || (debug.document || document).createElement('div');
+
+			div.classList.add('KVCTemplateTokensMap');
+
+			div.innerHTML = inputData;
+
+			return div.textContent || div.innerText || inputData;
+		};
+
 		return Object.fromEntries([
 			[mod.KVCTemplateTokenPostTitle(), mod.KVCTemplatePlaintextTitle(body)],
-			[mod.KVCTemplateTokenPostBlurb(), OLSKString.OLSKStringSnippet(mod.KVCTemplatePlaintextBody(body))],
+			[mod.KVCTemplateTokenPostBlurb(), OLSKString.OLSKStringSnippet(stripHTML(mod.KVCTemplatePlaintextBody(body)))],
 			[mod.KVCTemplateTokenPostBody(), mod.KVCTemplateHTML(mod.KVCTemplatePlaintextBody(body), options)],
 			[mod.KVCTemplateTokenRootURL(), options.KVCOptionRootURL],
 			[mod.KVCTemplateTokenRootURLLegacy(), options.KVCOptionRootURL],
