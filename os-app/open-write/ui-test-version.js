@@ -83,7 +83,7 @@ describe('KVCWrite_Version', function () {
 
 	});
 
-	context.only('limit', function test_limit () {
+	context('limit', function test_limit () {
 
 		// before(function() {
 		// 	return browser.OLSKVisit(kDefaultRoute);
