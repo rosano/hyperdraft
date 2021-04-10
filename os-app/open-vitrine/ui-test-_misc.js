@@ -30,14 +30,6 @@ describe('KVCVitrine_Misc', function () {
 	
 	});
 
-	context('OLSKLanding', function test_OLSKLanding () {
-
-		it('sets OLSKLandingActionHref', function () {
-			browser.assert.attribute('.OLSKLandingAction', 'href', OLSKTestingCanonical(require('../open-write/controller.js').OLSKControllerRoutes().shift()));
-		});
-	
-	});
-
 	context('OLSKAppFeaturesList', function test_OLSKAppFeaturesList () {
 
 		it('shows OLSKAppFeatureOpenSource', function () {
