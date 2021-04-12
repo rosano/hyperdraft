@@ -20,8 +20,8 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 			browser.assert.text('title', uLocalized('KVCWriteTitle'));
 		});
 
-		it('localizes OLSKMasterListFilterField', function () {
-			browser.assert.attribute('.OLSKMasterListFilterField', 'placeholder', uLocalized('KVCWriteFilterFieldText'));
+		it('localizes OLSKNarrowFilterField', function () {
+			browser.assert.attribute('.OLSKNarrowFilterField', 'placeholder', uLocalized('KVCWriteFilterFieldText'));
 		});
 
 		it('localizes KVCWriteCreateButton', function () {

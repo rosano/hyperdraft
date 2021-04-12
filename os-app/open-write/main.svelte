@@ -82,7 +82,7 @@ const mod = {
 			LCHRecipeCallback: function KVCWriteLauncherItemShowPublicNotes () {
 				mod._OLSKCatalog.modPublic.OLSKCatalogFilterWithNoThrottle(KVCWriteLogic.KVCWritePublicSymbol());
 
-				document.querySelector('.OLSKMasterListFilterField').focus();
+				document.querySelector('.OLSKNarrowFilterField').focus();
 			},
 		}, {
 			LCHRecipeSignature: 'KVCWriteLauncherItemImportTXT',
@@ -371,7 +371,7 @@ const mod = {
 
 		const handlerFunctions = {
 			Tab () {
-				document.activeElement !== document.querySelector('.OLSKMasterListFilterField') ? document.querySelector('.OLSKMasterListFilterField').focus() : (mod._KVCWriteDetail && mod._KVCWriteDetail.modPublic.KVCWriteDetailEditorFocus());
+				document.activeElement !== document.querySelector('.OLSKNarrowFilterField') ? document.querySelector('.OLSKNarrowFilterField').focus() : (mod._KVCWriteDetail && mod._KVCWriteDetail.modPublic.KVCWriteDetailEditorFocus());
 
 				event.preventDefault();
 			},
@@ -1002,7 +1002,7 @@ const mod = {
 		}
 
 		setTimeout(function () {
-			document.querySelector('.OLSKMasterListFilterField').focus();
+			document.querySelector('.OLSKNarrowFilterField').focus();
 		})
 	},
 
@@ -1174,7 +1174,7 @@ import OLSKUIAssets from 'OLSKUIAssets';
 	bind:this={ mod._OLSKCatalog }
 
 	OLSKCollectionItemAccessibilitySummaryFunction={ KVCWriteLogic.KVCWriteAccessibilitySummary }
-	OLSKMasterListFilterFieldPlaceholderText={ OLSKLocalized('KVCWriteFilterFieldText') }
+	OLSKNarrowFilterFieldPlaceholderText={ OLSKLocalized('KVCWriteFilterFieldText') }
 
 	_OLSKCatalogArchiveField={ 'KVCNoteIsArchived' }
 	
@@ -1196,13 +1196,13 @@ import OLSKUIAssets from 'OLSKUIAssets';
 
 	<!-- MASTER -->
 
-	<div class="OLSKToolbarElementGroup" slot="OLSKMasterListToolbarTail">
+	<div class="OLSKToolbarElementGroup" slot="OLSKNarrowToolbarTail">
 		<button class="KVCWriteCreateButton OLSKDecorButtonNoStyle OLSKDecorTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteCreateButtonText') } on:click={ mod.InterfaceCreateButtonDidClick } accesskey="n">
 			<div class="KVCWriteCreateButtonImage">{@html OLSKUIAssets._OLSKSharedCreate }</div>
 		</button>
 	</div>
 
-	<div class="OLSKMasterListBodyTail" slot="OLSKMasterListBodyTail">{#if mod._ValueRevealArchiveIsVisible }
+	<div class="OLSKNarrowBodyTail" slot="OLSKNarrowBodyTail">{#if mod._ValueRevealArchiveIsVisible }
 		<button class="KVCWriteRevealArchiveButton OLSKDecorPress" on:click={ mod._OLSKCatalog.modPublic.OLSKCatalogRevealArchive }>{ OLSKLocalized('KVCWriteRevealArchiveButtonText') }</button>
 	{/if}</div>
 

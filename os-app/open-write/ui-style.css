@@ -6,10 +6,10 @@
 	color: var(--KVCCommonForeground);
 }
 
-.OLSKMasterListBodyTail {
+.OLSKNarrowBodyTail {
 	padding: 10px;
 	
-	/* @OLSKMasterListBodyTailFlexbox:Parent */
+	/* @OLSKNarrowBodyTailFlexbox:Parent */
 	display: flex;
 	flex-direction: column;
 	align-items: center;

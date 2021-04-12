@@ -303,19 +303,19 @@ describe('KVCWrite_Misc', function () {
 	describe('KVCWriteLauncherItemShowPublicNotes', function test_KVCWriteLauncherItemShowPublicNotes () {
 		
 		before(function () {
-			browser.assert.input('.OLSKMasterListFilterField', '');
+			browser.assert.input('.OLSKNarrowFilterField', '');
 		});
 
 		before(function () {
 			return browser.OLSKLauncherRun('KVCWriteLauncherItemShowPublicNotes');
 		});
 
-		it('sets OLSKMasterListFilterField text', function () {
-			browser.assert.input('.OLSKMasterListFilterField', require('./ui-logic.js').default.KVCWritePublicSymbol());
+		it('sets OLSKNarrowFilterField text', function () {
+			browser.assert.input('.OLSKNarrowFilterField', require('./ui-logic.js').default.KVCWritePublicSymbol());
 		});
 
-		it('focuses OLSKMasterListFilterField', function() {
-			browser.assert.hasFocus('.OLSKMasterListFilterField');
+		it('focuses OLSKNarrowFilterField', function() {
+			browser.assert.hasFocus('.OLSKNarrowFilterField');
 		});
 
 	});
