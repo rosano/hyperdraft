@@ -40,26 +40,8 @@
     "// I sacrifice myself for the commas of others": null
   },
   "devDependencies": {
-    "// OLDSKOOL": null,
-    "OLSKExpress": "olsk/OLSKExpress",
-
-    "// SVELTE": null,
+    "OLSKPithToolchain": "olsk/OLSKPithToolchain",
     "OLSKRollupScaffold": "olsk/OLSKRollupScaffold",
-
-    "// LIVERELOAD": null,
-    "livereload": "latest",
-
-    "// PRODUCTION BUILD": null,
-    "OLSKDisk": "olsk/OLSKDisk",
-
-    "// SPEC": null,
-    "OLSKSpec": "olsk/OLSKSpec",
-    
-    "// HOTFIX": null,
-    "OLSKHotfix": "olsk/OLSKHotfix",
-    
-    "// BUNDLE": null,
-    "OLSKBundle": "olsk/OLSKBundle",
 
     "// I sacrifice myself for the commas of others": null
   }
