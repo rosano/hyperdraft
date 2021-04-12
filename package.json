@@ -21,7 +21,6 @@
     "// open-write": null,
     "OLSKPithApp": "olsk/OLSKPithApp",
     "OLSKCatalog": "olsk/OLSKCatalog",
-    "OLSKThrottle": "olsk/OLSKThrottle",
     "marked": "latest",
     "escape-string-regexp": "latest",
     "OLSKVersion": "olsk/OLSKVersion",
