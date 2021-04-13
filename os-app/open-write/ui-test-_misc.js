@@ -64,6 +64,14 @@ describe('KVCWrite_Misc', function () {
 
 	});
 
+	describe('OLSKCollectionItem', function test_OLSKCollectionItem () {
+
+		it('classes OLSKCommonEdgeBottom', function () {
+			browser.assert.hasClass('.OLSKCollectionItem', 'OLSKCommonEdgeBottom');
+		});
+	
+	});
+
 	context('select', function test_select () {
 		
 		before(function () {

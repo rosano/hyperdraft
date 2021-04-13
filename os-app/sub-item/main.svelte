@@ -6,7 +6,7 @@ import KVCTemplate from '../_shared/KVCTemplate/main.js';
 import OLSKString from 'OLSKString';
 </script>
 
-<div class="KVCWriteListItem OLSKCommonEdgeBottom" class:KVCWriteListItemArchived={ KVCWriteListItemObject.KVCNoteIsArchived }>
+<div class="KVCWriteListItem" class:KVCWriteListItemArchived={ KVCWriteListItemObject.KVCNoteIsArchived }>
 
 {#if KVCWriteListItemObject.KVCNoteIsPublic }
 	<span class="KVCWriteListItemIsPublic">{ KVCWriteLogic.KVCWritePublicSymbol() }</span>

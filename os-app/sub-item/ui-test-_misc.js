@@ -16,14 +16,6 @@ describe('KVCWriteListItem_Misc', function () {
 		});
 	});
 
-	describe('KVCWriteListItem', function test_KVCWriteListItem () {
-
-		it('classes OLSKCommonEdgeBottom', function () {
-			browser.assert.hasClass(KVCWriteListItem, 'OLSKCommonEdgeBottom');
-		});
-		
-	});
-
 	describe('KVCWriteListItemIsPublic', function test_KVCWriteListItemIsPublic () {
 		
 		it('sets text', function () {

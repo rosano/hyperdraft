@@ -1174,6 +1174,7 @@ import OLSKUIAssets from 'OLSKUIAssets';
 	bind:this={ mod._OLSKCatalog }
 
 	OLSKCollectionItemAccessibilitySummaryFunction={ KVCWriteLogic.KVCWriteAccessibilitySummary }
+	OLSKCollectionItemClass={ 'OLSKCommonEdgeBottom' }
 	OLSKNarrowFilterFieldPlaceholderText={ OLSKLocalized('KVCWriteFilterFieldText') }
 
 	_OLSKCatalogArchiveField={ 'KVCNoteIsArchived' }
