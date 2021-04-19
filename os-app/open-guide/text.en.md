@@ -17,7 +17,7 @@ Use it for ideas, todo lists, brainstorming, recipes, reading notes, journaling,
 	<dd>From friends and strangers.</dd>
 </dl>
 
-# Note browser
+# Item catalog
 
 This is the first and only screen of the app.
 
@@ -121,12 +121,12 @@ After setting up a custom domain, designate any note as the home page with the `
 
 </div>
 
-| Notes list ||
+| Item catalog ||
 :--- | ---
 | KVCWriteCreateButtonText | `AccessKey+n` |
-| Select previous or next note, if filter field is focused | `Up` or `Down` |
-| Create note from filter text, if filter field is focused | `Enter` |
-| Clear filter text and selected note, focus filter field | `Escape` |
+| Select previous or next item, if filter field is focused | `Up` or `Down` |
+| Create item from filter text, if filter field is focused | `Enter` |
+| Clear filter text and selected item, focus filter field | `Escape` |
 
 | Editor ||
 :--- | ---
