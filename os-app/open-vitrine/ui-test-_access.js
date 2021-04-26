@@ -73,6 +73,10 @@ describe('KVCVitrine_Access', function () {
 		browser.assert.elements(KVCVitrineGazetteHeading, 1);
 	});
 
+	it('shows OLSKFollow', function () {
+		browser.assert.elements('.OLSKFollow', 1);
+	});
+
 	it('shows OLSKGazette', function () {
 		browser.assert.elements('.OLSKGazette', 1);
 	});
