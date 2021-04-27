@@ -1,7 +1,3 @@
-exports.OLSKControllerUseLivereload = function() {
-	return process.env.NODE_ENV === 'development';
-};
-
 exports.OLSKControllerRoutes = function() {
 	return [{
 		OLSKRoutePath: '/',
