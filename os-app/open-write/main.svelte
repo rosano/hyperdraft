@@ -283,7 +283,7 @@ const mod = {
 		}));
 
 		outputData.push(...OLSKTransport.OLSKTransportRecipes({
-			OLSKLocalized: OLSKLocalized,
+			OLSKLocalized,
 			OLSKTransportDispatchImportJSON: mod.OLSKTransportDispatchImportJSON,
 			OLSKTransportDispatchExportInput: mod.OLSKTransportDispatchExportInput,
 			ParamSpecUI: OLSK_SPEC_UI(),
@@ -292,14 +292,14 @@ const mod = {
 		if (mod._ValueZDRWrap.ZDRStorageProtocol === zerodatawrap.ZDRProtocolRemoteStorage()) {
 			outputData.push(...OLSKRemoteStorage.OLSKRemoteStorageRecipes({
 				ParamStorage: mod._ValueZDRWrap.ZDRStorageClient(),
-				OLSKLocalized: OLSKLocalized,
+				OLSKLocalized,
 				ParamMod: mod,
 				ParamSpecUI: OLSK_SPEC_UI(),
 			}));
 		}
 
 		outputData.push(...OLSKFund.OLSKFundRecipes({
-			OLSKLocalized: OLSKLocalized,
+			OLSKLocalized,
 			ParamConnected: !!mod._ValueCloudIdentity,
 			ParamAuthorized: !!mod._ValueFundClue,
 			OLSKFundDispatchGrant: mod.OLSKFundDispatchGrant,
