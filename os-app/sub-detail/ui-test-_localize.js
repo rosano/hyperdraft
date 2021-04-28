@@ -6,7 +6,7 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 		return OLSKTestingLocalized(inputData, OLSKRoutingLanguage);
 	};
 
-	describe(`KVCWriteDetail_Localize-${ OLSKRoutingLanguage }`, function () {
+	describe('KVCWriteDetail_Localize-' + OLSKRoutingLanguage, function () {
 
 		context('KVCWriteDetailItem', function() {
 		
