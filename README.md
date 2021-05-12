@@ -1,4 +1,4 @@
-<a href="https://hyperdraft.rosano.ca"><img alt="Project logo" src="https://rosano.s3.amazonaws.com/public/wikiavec/identity.svg" width="64" /></a>
+<a href="https://hyperdraft.rosano.ca"><img alt="Project logo" src="https://static.rosano.ca/wikiavec/identity.svg" width="64" /></a>
 
 # Hyperdraft
 
@@ -6,7 +6,7 @@ _Turn your text notes into a website_
 
 <a href="https://hyperdraft.rosano.ca">Hyperdraft</a> helps you organize your thinking with text notes, and makes it simple to turn them into a website. Inspired by modeless and keyboard-centric [Notational Velocity](http://notational.net/) it lets you quickly and easily network your ideas via a simple double-bracket syntax. Use it for ideas, todo lists, brainstorming, recipes, reading notes, journaling, or anything involving writing. Read the <a href="https://hyperdraft.rosano.ca">guide</a> for more details.
 
-<a href="https://hyperdraft.rosano.ca/write"><img alt="Open app" src="http://rosano.s3.amazonaws.com/public/_shared/_RCSAppButton.svg" /></a>
+<a href="https://hyperdraft.rosano.ca/write"><img alt="Open app" src="http://static.rosano.ca/_shared/_RCSAppButton.svg" /></a>
 
 ## Architecture
 
