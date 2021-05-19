@@ -16,6 +16,8 @@ Routing, rendering markdown content, and serving pages is done via a Node.js ser
 
 ## Development Setup
 
+(For a deeper dive, watch [the tutorial](https://rosano.hmm.garden/01f62t5yseb053m024v1mczbzy)).
+
 Install [Node.js and npm](https://nodejs.org/en/download/), then:
 
 ```
