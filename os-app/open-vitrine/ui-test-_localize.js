@@ -38,6 +38,10 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 			browser.assert.text(KVCVitrineGazetteHeading, uLocalized('OLSKGazetteHeadingText'));
 		});
 
+		it('localizes KVCVitrineJarHeading', function () {
+			browser.assert.text(KVCVitrineJarHeading, uLocalized('OLSKJarHeadingText'));
+		});
+
 		it('localizes KVCVitrineSupportHeading', function () {
 			browser.assert.text(KVCVitrineSupportHeading, uLocalized('OLSKWordingFeedbackHeading'));
 		});
