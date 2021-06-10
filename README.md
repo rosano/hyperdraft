@@ -44,6 +44,8 @@ It should be accessible at <a href="http://localhost:3000" target="_blank">http:
 
 ## Testing
 
+See [Testing logic and interfaces](https://rosano.hmm.garden/01f7v3hk3txz5d0v9ms467x8bz) for a tutorial.
+
 ### Run logic tests
 
 ```
