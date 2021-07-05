@@ -2,7 +2,7 @@ const { rejects, throws, deepEqual, strictEqual, notStrictEqual } = require('ass
 
 const mod = require('./main.js').default;
 
-const OLSKObject = require('OLSKObject').default;
+const OLSKObject = require('OLSKObject');
 
 describe('KVCNoteErrors', function test_KVCNoteErrors() {
 
