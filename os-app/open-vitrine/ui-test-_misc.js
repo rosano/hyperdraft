@@ -78,9 +78,9 @@ describe('KVCVitrine_Misc', function () {
 
 	});
 
-	describe('ROCOBulletin', function test_ROCOBulletin () {
+	describe('ROCOGazette', function test_ROCOGazette () {
 
-		it('sets src', function () {
+		it('sets ROCOBulletinProject', function () {
 			browser.assert.attribute('.ROCOBulletinProjectField', 'value', 'RP_003');
 		});
 
