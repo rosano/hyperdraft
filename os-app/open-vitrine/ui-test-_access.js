@@ -11,8 +11,6 @@ Object.entries({
 	KVCVitrineVideo1: '.OLSKCommonVideoList .OLSKCommonVideoListItem.KVCVitrineVideo1 iframe',
 	KVCVitrineVideo2: '.OLSKCommonVideoList .OLSKCommonVideoListItem.KVCVitrineVideo2 iframe',
 
-	KVCVitrineJarHeading: '.KVCVitrineJarHeading',
-
 	KVCVitrineSupportHeading: '.KVCVitrineSupportHeading',
 	KVCVitrineSupportBlurb: '.KVCVitrineSupportBlurb',
 }).map(function (e) {
@@ -71,10 +69,6 @@ describe('KVCVitrine_Access', function () {
 
 	it('shows ROCOGazette', function () {
 		browser.assert.elements('.ROCOGazette', 1);
-	});
-
-	it('shows KVCVitrineJarHeading', function () {
-		browser.assert.elements(KVCVitrineJarHeading, 1);
 	});
 
 	it('shows OLSKJar', function () {
