@@ -37,3 +37,7 @@
 :global(.OLSKIsDemoing .CodeMirror-cursors) {
 	opacity: 0;
 }
+
+.OLSKBanner {
+	display: none;
+}
