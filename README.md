@@ -1,6 +1,6 @@
 <a href="https://hyperdraft.rosano.ca"><img alt="Project logo" src="https://static.rosano.ca/wikiavec/identity.svg" width="64" /></a>
 
-# Hyperdraft
+# [Hyperdraft](https://hyperdraft.rosano.ca)
 
 _Turn your text notes into a website_
 
