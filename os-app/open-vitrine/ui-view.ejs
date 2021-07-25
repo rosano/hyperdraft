@@ -46,6 +46,10 @@ locals.OLSKPageAssets = [
 	</p>
 </div>
 
+<%- include('../../node_modules/OLSKEdit/main.ejs', {
+	OLSKEditURL: process.env.OLSK_REPO_URL,
+}) %>
+
 <%- include('../../node_modules/ROCOGazette/main.ejs', {
 	_OLSKModulesDirPrefix: '../.',
 	ROCOBulletinProject: 'RP_003',

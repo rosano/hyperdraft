@@ -67,6 +67,10 @@ describe('KVCVitrine_Access', function () {
 		browser.assert.elements(KVCVitrineVideo2, 1);
 	});
 
+	it('shows OLSKEdit', function () {
+		browser.assert.elements('.OLSKEdit', 1);
+	});
+
 	it('shows ROCOGazette', function () {
 		browser.assert.elements('.ROCOGazette', 1);
 	});
