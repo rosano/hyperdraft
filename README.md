@@ -72,7 +72,7 @@ npm test ui match='/(detail|vitrine)/'
 
 ## ❤️
 
-If you’re enjoying this, consider [contributing to my Open Collective](https://opencollective.com/rosano/contribute). Virtually everything I create is public, accessible for free, and open-source. Your support helps me keep adding to the commons and making it available for everyone.
+If you’re enjoying this, consider [contributing to my Open Collective](https://opencollective.com/rosano). Virtually everything I create is public, accessible for free, and open-source. Your support helps me keep adding to the commons and making it available for everyone.
 
 ## License
 
