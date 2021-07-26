@@ -46,16 +46,16 @@ locals.OLSKPageAssets = [
 	</p>
 </div>
 
-<%- include('../../node_modules/OLSKEdit/main.ejs', {
-	OLSKEditURL: process.env.OLSK_REPO_URL,
-}) %>
-
 <%- include('../../node_modules/ROCOGazette/main.ejs', {
 	_OLSKModulesDirPrefix: '../.',
 	ROCOBulletinProject: 'RP_003',
 }) %>
 
 <%- include('../../node_modules/OLSKJar/main.ejs') %>
+
+<%- include('../../node_modules/OLSKEdit/main.ejs', {
+	OLSKEditURL: process.env.OLSK_REPO_URL,
+}) %>
 
 <h1 class="KVCVitrineSupportHeading"><%= OLSKLocalized('OLSKWordingFeedbackHeading') %></h1>
 <p class="KVCVitrineSupportBlurb"><%= OLSKLocalized('OLSKWordingFeedbackBlurb') %></p>
