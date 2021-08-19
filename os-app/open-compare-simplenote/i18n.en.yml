@@ -1,0 +1,40 @@
+KVCCompareSimplenoteTitle: Hyperdraft vs. Simplenote
+KVCCompareSimplenoteDescription: A scrappy alternative more focused on making websites.
+KVCCompareSimplenoteIntroText: Simplenote has been around for a long time. The app's accessible and inviting aesthetic enables many people to take notes. Over time it has shifted focus from plaintext editing to checklists and richer text, and favours a proprietary link format over the comon double-bracket syntax.
+KVCCompareSimplenoteContrastText: Hyperdraft is for people who want to use their note-taking tool to make websites while keep their hands on the keyboard. It speeds up the workflow with shortcuts and adds more advanced web publishing features. Plus you can own 100% of your data by storing notes in a place you control.
+KVCCompareSimplenoteTableHeadingFeatureText: Feature
+KVCCompareSimplenoteFeatureList:
+  KVCCompareSimplenoteFeaturePlaintext: plaintext editor
+  KVCCompareSimplenoteFeatureFirstLink: first line is the title
+  KVCCompareSimplenoteFeatureMarkdown: markdown preview
+  KVCCompareSimplenoteFeatureSync: sync across multiple devices
+  KVCCompareSimplenoteFeatureOpenSource: open-source
+  KVCCompareSimplenoteFeatureOffline: works offline
+  KVCCompareSimplenoteFeatureMobile: works on mobile
+  KVCCompareSimplenoteFeatureShortcuts: keyboard shortcuts
+  KVCCompareSimplenoteFeatureClick: click links between notes
+  KVCCompareSimplenoteFeaturePublish: publish notes to the Internet
+  KVCCompareSimplenoteFeatureCollaborate: collaborate with other people
+  KVCCompareSimplenoteFeatureHomepage: set homepage
+  KVCCompareSimplenoteFeatureDomain: connect a custom domain
+  KVCCompareSimplenoteFeatureDoorless: use without account
+  KVCCompareSimplenoteFeatureNotational: import from Notational Velocity
+  KVCCompareSimplenoteFeatureSyntax: double-bracket syntax
+  KVCCompareSimplenoteFeatureArchive: archive notes
+  KVCCompareSimplenoteFeatureZeroData: own your data
+KVCCompareSimplenoteFeatureListCaption:
+  KVCCompareSimplenoteFeatureShortcuts:
+    - sublime text keyboard shortcuts, launcher commands, tab between list and current notes
+    - basic shortcuts
+  KVCCompareSimplenoteFeatureHomepage:
+    - add your own flair when publisihng
+  KVCCompareSimplenoteFeatureDoorless:
+    - just open and start using it
+  KVCCompareSimplenoteFeatureSyntax:
+    - compatible with Notational Velocity and other apps
+    - proprietary format
+  KVCCompareSimplenoteFeatureArchive:
+    - hide notes you don't use often to tidy search results
+  KVCCompareSimplenoteFeatureZeroData:
+    - your data is 100% yours
+KVCCompareSimplenoteActionHeadingText: Try writing with Hyperdraft

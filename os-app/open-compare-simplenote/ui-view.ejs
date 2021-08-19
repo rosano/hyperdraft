@@ -1,0 +1,59 @@
+<%
+locals.OLSKPageTitle = OLSKLocalized('KVCCompareSimplenoteTitle');
+locals.OLSKPageDescription = OLSKLocalized('KVCCompareSimplenoteDescription');
+locals.OLSKPageManifest = OLSKCanonical('WKCManifestRoute');
+locals.OLSKPageAssets = [
+	'/_shared/__external/normalize.css/normalize.css',
+	'/_shared/__external/OLSKDecor/ui-style.css',
+	'/_shared/common/ui-style.css',
+];
+%>
+
+<div class="KVCCompareSimplenote OLSKDecor OLSKDecorCapped">
+
+<p class="KVCCompareSimplenoteHeading OLSKDecorTitle"><%= OLSKLocalized('KVCCompareSimplenoteTitle') %></p>
+
+<p class="KVCCompareSimplenoteIntro"><%= OLSKLocalized('KVCCompareSimplenoteIntroText') %></p>
+
+<p class="KVCCompareSimplenoteContrast"><%= OLSKLocalized('KVCCompareSimplenoteContrastText') %></p>
+
+<table class="KVCCompareSimplenoteTable OLSKDecorCompareTable">
+	<tr>
+		<th class="KVCCompareSimplenoteTableHeadingFeature"><%= OLSKLocalized('KVCCompareSimplenoteTableHeadingFeatureText') %></th>
+		<th class="KVCCompareSimplenoteTableHeadingHyperdraft">Hyperdraft</th>
+		<th class="KVCCompareSimplenoteTableHeadingSimplenote">Simplenote</th>
+	</tr>
+	<% Object.entries(OLSKLocalized('KVCCompareSimplenoteFeatureList')).forEach(function ([key, value]) { -%>
+		<tr class="KVCCompareSimplenoteTableRow <%= key %>">
+			<td><%= value %></td>
+			<td>
+				<span>
+					<%= KVCCompareSimplenoteLogic.KVCCompareSimplenoteFeatures()[key][0] ? '☑️' : '' %>
+				</span>
+				<% if ((OLSKLocalized('KVCCompareSimplenoteFeatureListCaption')[key] || [])[0]) { -%>
+					<small><%= OLSKLocalized('KVCCompareSimplenoteFeatureListCaption')[key][0] %></small>
+				<% } -%>
+			</td>
+			<td>
+				<span>
+					<%= KVCCompareSimplenoteLogic.KVCCompareSimplenoteFeatures()[key][1] ? '☑️' : '' %>
+				</span>
+				<% if ((OLSKLocalized('KVCCompareSimplenoteFeatureListCaption')[key] || [])[1]) { -%>
+					<small><%= OLSKLocalized('KVCCompareSimplenoteFeatureListCaption')[key][1] %></small>
+				<% } -%>
+			</td>
+		</tr>
+	<% }) -%>
+</table>
+
+<div class="KVCCompareSimplenoteAction OLSKDecorModule OLSKDecorAction">
+	<span class="KVCCompareSimplenoteActionHeading OLSKDecorTitle"><%= OLSKLocalized('KVCCompareSimplenoteActionHeadingText') %></span>
+
+	<a class="KVCCompareSimplenoteActionButton OLSKDecorPress OLSKDecorPressCall" href="<%= OLSKCanonical('KVCWriteRoute') %>"><%= OLSKLocalized('OLSKWordingOpenApp') %></a>
+</div>
+
+<hr role="presentation" />
+
+<%- include('../_shared/KVCRootLink/main.ejs') %>
+
+</div>
