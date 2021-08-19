@@ -1,6 +1,6 @@
 exports.OLSKControllerRoutes = function() {
 	return [{
-		OLSKRoutePath: '/compare/simplenote',
+		OLSKRoutePath: '/compare-simplenote',
 		OLSKRouteMethod: 'get',
 		OLSKRouteSignature: 'KVCCompareSimplenoteRoute',
 		OLSKRouteFunction (req, res, next) {
