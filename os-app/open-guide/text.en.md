@@ -15,6 +15,8 @@ Use it for ideas, todo lists, brainstorming, recipes, reading notes, journaling,
 	<dd>A space to write, collect, revise, and share.</dd>
 	<dt><a href="https://rosano.hmm.garden/01f04ph0mzahzyyd2grqa7nh9c">Gardens made with Hyperdraft</a></dt>
 	<dd>From friends and strangers.</dd>
+	<hr />
+	<dt><a href="KVCCompareSimplenoteRoute">Hyperdraft vs. Simplenote</a></dt>
 </dl>
 
 # Item catalog
