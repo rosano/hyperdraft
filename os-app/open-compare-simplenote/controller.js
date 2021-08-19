@@ -8,6 +8,6 @@ exports.OLSKControllerRoutes = function() {
 				KVCCompareSimplenoteLogic: require('./ui-logic.js'),
 			});
 		},
-		OLSKRouteLanguageCodes: ['en'],
+		OLSKRouteLanguageCodes: ['en', 'fr'],
 	}];
 };

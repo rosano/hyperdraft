@@ -1,0 +1,42 @@
+KVCCompareSimplenoteTitle: Hyperdraft et Simplenote
+KVCCompareSimplenoteDescription: Une alternative pour la création de sites web.
+KVCCompareSimplenoteIntroText: 'Simplenote existe depuis longtemps. L''esthétique accessible et conviviale de l''application permet à de nombreuses personnes de prendre des notes. Au fil du temps, elle a délaissé l''édition en texte brut au profit de listes de contrôle et de textes plus riches, et elle privilégie un format de lien propriétaire à la syntaxe à double crochet habituelle.'
+KVCCompareSimplenoteContrastText: 'Hyperdraft est destiné aux personnes qui souhaitent utiliser leur outil de prise de notes pour créer des sites Web tout en gardant les mains sur le clavier. Il accélère le flux de travail grâce à des raccourcis et ajoute des fonctions de publication Web plus avancées. De plus, vous pouvez être propriétaire de 100 % de vos données en stockant vos notes dans un endroit que vous contrôlez.'
+KVCCompareSimplenoteTableHeadingFeatureText: Fonctionnalité
+KVCCompareSimplenoteFeatureList:
+  KVCCompareSimplenoteFeaturePlaintext: éditeur de texte en clair
+  KVCCompareSimplenoteFeatureFirstLink: la première ligne est le titre
+  KVCCompareSimplenoteFeatureMarkdown: prise en charge de Markdown
+  KVCCompareSimplenoteFeatureSync: synchronisation sur plusieurs appareils
+  KVCCompareSimplenoteFeatureOpenSource: open-source
+  KVCCompareSimplenoteFeatureOffline: fonctionne hors ligne
+  KVCCompareSimplenoteFeatureMobile: fonctionne sur mobile
+  KVCCompareSimplenoteFeatureShortcuts: raccourcis clavier
+  KVCCompareSimplenoteFeatureClick: cliquer sur les liens entre les notes
+  KVCCompareSimplenoteFeaturePublish: publiquer de notes sur l'Internet
+  KVCCompareSimplenoteFeatureCollaborate: collaborer avec d'autres personnes
+  KVCCompareSimplenoteFeatureHomepage: définir la page d'accueil
+  KVCCompareSimplenoteFeatureDomain: ajouter d'un nom de domaine personnalisé
+  KVCCompareSimplenoteFeatureDoorless: utiliser sans compte
+  KVCCompareSimplenoteFeatureNotational: importer de Notational Velocity
+  KVCCompareSimplenoteFeatureSyntax: syntaxe à double crochet
+  KVCCompareSimplenoteFeatureArchive: archiver des notes
+  KVCCompareSimplenoteFeatureZeroData: être propriétaire de vos données
+KVCCompareSimplenoteFeatureListCaption:
+  KVCCompareSimplenoteFeatureShortcuts:
+    - 'raccourcis clavier de sublime text, commandes du lanceur, changer rapidement entre la liste et la note actuelle'
+    - raccourcis de base
+  KVCCompareSimplenoteFeatureHomepage:
+    - faire un siteweb à partir de vos notes
+  KVCCompareSimplenoteFeatureDomain:
+    - ajoutez votre propre style lors de la publication
+  KVCCompareSimplenoteFeatureDoorless:
+    - ouvrez-le et commencez à l'utiliser
+  KVCCompareSimplenoteFeatureSyntax:
+    - compatible avec Notational Velocity et d'autres applications
+    - format propriétaire
+  KVCCompareSimplenoteFeatureArchive:
+    - cacher les notes que vous n'utilisez pas souvent pour ordonner les résultats de recherche
+  KVCCompareSimplenoteFeatureZeroData:
+    - vos données vous appartiennent à 100%
+KVCCompareSimplenoteActionHeadingText: Essayez d'écrire avec Hyperdraft

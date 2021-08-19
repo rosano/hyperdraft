@@ -35,6 +35,10 @@ describe('KVCCompareSimplenote_Access', function () {
 		browser.assert.elements(KVCCompareSimplenote, 1);
 	});
 
+	it('shows OLSKLanguageSwitcher', function() {
+		browser.assert.elements('.OLSKLanguageSwitcher', 1);
+	});
+
 	it('shows KVCCompareSimplenoteHeading', function () {
 		browser.assert.elements(KVCCompareSimplenoteHeading, 1);
 	});
