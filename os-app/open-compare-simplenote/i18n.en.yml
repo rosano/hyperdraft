@@ -1,6 +1,6 @@
 KVCCompareSimplenoteTitle: Hyperdraft vs. Simplenote
 KVCCompareSimplenoteDescription: A scrappy alternative more focused on making websites.
-KVCCompareSimplenoteIntroText: Simplenote has been around for a long time. The app's accessible and inviting aesthetic enables many people to take notes. Over time it has shifted focus from plaintext editing to checklists and richer text, and favours a proprietary link format over the comon double-bracket syntax.
+KVCCompareSimplenoteIntroText: 'Simplenote has been around for a long time. The app''s accessible and inviting aesthetic enables many people to take notes. Over time it has shifted focus from plaintext editing to checklists and richer text, and favours a proprietary link format over the comon double-bracket syntax.'
 KVCCompareSimplenoteContrastText: Hyperdraft is for people who want to use their note-taking tool to make websites while keep their hands on the keyboard. It speeds up the workflow with shortcuts and adds more advanced web publishing features. Plus you can own 100% of your data by storing notes in a place you control.
 KVCCompareSimplenoteTableHeadingFeatureText: Feature
 KVCCompareSimplenoteFeatureList:
@@ -24,7 +24,7 @@ KVCCompareSimplenoteFeatureList:
   KVCCompareSimplenoteFeatureZeroData: own your data
 KVCCompareSimplenoteFeatureListCaption:
   KVCCompareSimplenoteFeatureShortcuts:
-    - sublime text keyboard shortcuts, launcher commands, tab between list and current notes
+    - 'sublime text keyboard shortcuts, launcher commands, tab between list and current notes'
     - basic shortcuts
   KVCCompareSimplenoteFeatureHomepage:
     - build a website from your notes
