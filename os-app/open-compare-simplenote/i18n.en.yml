@@ -26,6 +26,8 @@ KVCCompareSimplenoteFeatureListCaption:
   KVCCompareSimplenoteFeatureShortcuts:
     - sublime text keyboard shortcuts, launcher commands, tab between list and current notes
     - basic shortcuts
+  KVCCompareSimplenoteFeatureHomepage:
+    - build a website from your notes
   KVCCompareSimplenoteFeatureDomain:
     - add your own flair when publishing
   KVCCompareSimplenoteFeatureDoorless:
