@@ -26,8 +26,8 @@ KVCCompareSimplenoteFeatureListCaption:
   KVCCompareSimplenoteFeatureShortcuts:
     - sublime text keyboard shortcuts, launcher commands, tab between list and current notes
     - basic shortcuts
-  KVCCompareSimplenoteFeatureHomepage:
-    - add your own flair when publisihng
+  KVCCompareSimplenoteFeatureDomain:
+    - add your own flair when publishing
   KVCCompareSimplenoteFeatureDoorless:
     - just open and start using it
   KVCCompareSimplenoteFeatureSyntax:
