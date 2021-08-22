@@ -111,6 +111,15 @@ const mod = {
 					return KVCNote.KVCNoteIsMarkedPublic(KVCWriteDetailItem)
 				},
 			}, {
+				LCHRecipeSignature: 'KVCWriteDetailLauncherItemOpenPublicLink',
+				LCHRecipeName: OLSKLocalized('KVCWriteDetailLauncherItemOpenPublicLinkText'),
+				LCHRecipeCallback: function KVCWriteDetailLauncherItemOpenPublicLink () {
+					window.open(KVCWriteDetailPublicURLFor(KVCWriteDetailItem));
+				},
+				LCHRecipeIsExcluded () {
+					return !KVCNote.KVCNoteIsMarkedPublic(KVCWriteDetailItem);
+				},
+			}, {
 				LCHRecipeSignature: 'KVCWriteDetailLauncherItemSetAsRootPage',
 				LCHRecipeName: OLSKLocalized('KVCWriteDetailLauncherItemSetAsRootPageText'),
 				LCHRecipeCallback: function KVCWriteDetailLauncherItemSetAsRootPage () {

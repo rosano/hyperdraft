@@ -600,6 +600,27 @@ describe('KVCWriteDetail_Misc', function () {
 
 	});
 
+	describe('KVCWriteDetailLauncherItemOpenLink', function test_KVCWriteDetailLauncherItemOpenLink() {
+
+		before(function() {
+			return browser.OLSKVisit(kDefaultRoute, {
+				KVCWriteDetailItem: JSON.stringify(StubNoteObjectValid({
+					KVCNoteIsPublic: true,
+					KVCNotePublishDate: new Date(),
+					KVCNotePublicID: Math.random().toString(),
+				})),
+				KVCWriteDetailConnected: true,
+			});
+		});
+
+		before(function () {
+			return browser.OLSKLauncherRun('KVCWriteDetailLauncherItemOpenLink');
+		});
+
+		it.skip('opens link', function () {});
+
+	});
+
 	describe('KVCWriteDetailLauncherItemSetAsRootPage', function test_KVCWriteDetailLauncherItemSetAsRootPage() {
 
 		const item = StubNoteObjectValid();
