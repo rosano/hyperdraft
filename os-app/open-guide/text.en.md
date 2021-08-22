@@ -143,6 +143,7 @@ After setting up a custom domain, designate any note as the home page with the `
 :--- | ---
 | `KVCWriteDetailLauncherItemSetAsRootPageText` | Launcher |
 | `KVCWriteDetailToolbarPublishButtonText` (if not public) | Launcher |
+| `KVCWriteDetailToolbarRetractButtonText` (if public) | Launcher |
 
 | Global ||
 :--- | ---
