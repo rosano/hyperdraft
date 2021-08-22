@@ -238,6 +238,10 @@ describe('KVCWriteDetail_Access', function () {
 				browser.assert.elements(KVCWriteDetailToolbarRetractButtonImage, 1);
 			});
 
+			it('hides KVCWriteDetailLauncherItemPublish', function () {
+				return browser.assert.OLSKLauncherItems('KVCWriteDetailLauncherItemPublish', 0);
+			});
+
 		});
 
 	});
