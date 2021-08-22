@@ -577,6 +577,33 @@ describe('KVCWriteDetail_Misc', function () {
 
 	});
 
+	describe('KVCWriteDetailLauncherItemPublish', function test_KVCWriteDetailLauncherItemPublish() {
+
+		const item = StubNoteObjectValid();
+		
+		before(function() {
+			return browser.OLSKVisit(kDefaultRoute, {
+				KVCWriteDetailItem: JSON.stringify(item),
+				KVCWriteDetailConnected: true,
+			});
+		});
+
+		before(function () {
+			browser.assert.text('#TestKVCWriteDetailDispatchPublish', '0');
+			browser.assert.text('#TestKVCWriteDetailDispatchPublishData', 'undefined');
+		});
+		
+		before(function () {
+			return browser.OLSKLauncherRun('KVCWriteDetailLauncherItemPublish');
+		});
+
+		it('sends KVCWriteDetailDispatchPublish', function () {
+			browser.assert.text('#TestKVCWriteDetailDispatchPublish', '1');
+			browser.assert.text('#TestKVCWriteDetailDispatchPublishData', item.KVCNoteID);
+		});
+
+	});
+
 	describe('KVCWriteDetailLauncherItemSetAsRootPage', function test_KVCWriteDetailLauncherItemSetAsRootPage() {
 
 		const item = StubNoteObjectValid();

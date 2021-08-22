@@ -101,13 +101,19 @@ const mod = {
 		}
 
 		if (KVCWriteDetailConnected) {
-			outputData.push({
+			outputData.push(...[{
+				LCHRecipeSignature: 'KVCWriteDetailLauncherItemPublish',
+				LCHRecipeName: OLSKLocalized('KVCWriteDetailToolbarPublishButtonText'),
+				LCHRecipeCallback: function KVCWriteDetailLauncherItemPublish () {
+					KVCWriteDetailDispatchPublish();
+				},
+			}, {
 				LCHRecipeSignature: 'KVCWriteDetailLauncherItemSetAsRootPage',
 				LCHRecipeName: OLSKLocalized('KVCWriteDetailLauncherItemSetAsRootPageText'),
 				LCHRecipeCallback: function KVCWriteDetailLauncherItemSetAsRootPage () {
 					KVCWriteDetailDispatchSetAsRootPage(KVCWriteDetailItem.KVCNoteID);
 				},
-			})
+			}]);
 		}
 
 		if (OLSK_SPEC_UI()) {

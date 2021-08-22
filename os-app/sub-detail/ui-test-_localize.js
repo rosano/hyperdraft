@@ -109,6 +109,10 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 					browser.assert.attribute(KVCWriteDetailToolbarPublishButton, 'title', uLocalized('KVCWriteDetailToolbarPublishButtonText'));
 				});
 
+				it('localizes KVCWriteDetailLauncherItemPublish', function () {
+					return browser.assert.OLSKLauncherItemText('KVCWriteDetailLauncherItemPublish', uLocalized('KVCWriteDetailToolbarPublishButtonText'));
+				});
+
 				it('localizes KVCWriteDetailLauncherItemSetAsRootPage', function () {
 					return browser.assert.OLSKLauncherItemText('KVCWriteDetailLauncherItemSetAsRootPage', uLocalized('KVCWriteDetailLauncherItemSetAsRootPageText'));
 				});

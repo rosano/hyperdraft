@@ -127,6 +127,10 @@ describe('KVCWriteDetail_Access', function () {
 		return browser.assert.OLSKLauncherItems('KVCWriteDetailLauncherItemShowLocalVersions', 1);
 	});
 
+	it('hides KVCWriteDetailLauncherItemPublish', function () {
+		return browser.assert.OLSKLauncherItems('KVCWriteDetailLauncherItemPublish', 0);
+	});
+
 	it('hides KVCWriteDetailLauncherItemSetAsRootPage', function () {
 		return browser.assert.OLSKLauncherItems('KVCWriteDetailLauncherItemSetAsRootPage', 0);
 	});
@@ -199,6 +203,10 @@ describe('KVCWriteDetail_Access', function () {
 
 		it('shows KVCWriteDetailLauncherItemSetAsRootPage', function () {
 			return browser.assert.OLSKLauncherItems('KVCWriteDetailLauncherItemSetAsRootPage', 1);
+		});
+
+		it('shows KVCWriteDetailLauncherItemPublish', function () {
+			return browser.assert.OLSKLauncherItems('KVCWriteDetailLauncherItemPublish', 1);
 		});
 
 		context('KVCNoteIsPublic', function() {
