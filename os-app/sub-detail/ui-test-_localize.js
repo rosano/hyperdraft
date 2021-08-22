@@ -143,6 +143,10 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 						return browser.assert.OLSKLauncherItemText('KVCWriteDetailLauncherItemOpenPublicLink', uLocalized('KVCWriteDetailLauncherItemOpenPublicLinkText'));
 					});
 
+					it('localizes KVCWriteDetailLauncherItemRetract', function () {
+						return browser.assert.OLSKLauncherItemText('KVCWriteDetailLauncherItemRetract', uLocalized('KVCWriteDetailToolbarRetractButtonText'));
+					});
+
 				});
 
 			});

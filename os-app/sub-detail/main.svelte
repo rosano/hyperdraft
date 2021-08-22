@@ -125,6 +125,15 @@ const mod = {
 				LCHRecipeCallback: function KVCWriteDetailLauncherItemSetAsRootPage () {
 					KVCWriteDetailDispatchSetAsRootPage(KVCWriteDetailItem.KVCNoteID);
 				},
+			}, {
+				LCHRecipeSignature: 'KVCWriteDetailLauncherItemRetract',
+				LCHRecipeName: OLSKLocalized('KVCWriteDetailToolbarRetractButtonText'),
+				LCHRecipeCallback: function KVCWriteDetailLauncherItemRetract () {
+					KVCWriteDetailDispatchRetract();
+				},
+				LCHRecipeIsExcluded () {
+					return !KVCNote.KVCNoteIsMarkedPublic(KVCWriteDetailItem);
+				},
 			}]);
 		}
 
