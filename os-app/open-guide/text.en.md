@@ -134,11 +134,14 @@ After setting up a custom domain, designate any note as the home page with the `
 :--- | ---
 | `KVCWriteDetailToolbarArchiveButtonText` | Launcher |
 | `KVCWriteDetailToolbarUnarchiveButtonText` | Launcher |
-| `KVCWriteDetailLauncherItemSetAsRootPageText` if cloud connected | Launcher |
 | KVCWriteDetailToolbarJumpButtonText | `AccessKey+j` |
 | Select previous or next note, if filter field is focused | `Up` or `Down` |
 | Clear filter text and selected note, focus filter field | `Escape` |
 | Open link under cursor | `Cmd+Enter` or `Ctrl+Enter` |
+
+| Editor (while cloud connected) ||
+:--- | ---
+| `KVCWriteDetailLauncherItemSetAsRootPageText` | Launcher |
 
 | Global ||
 :--- | ---
