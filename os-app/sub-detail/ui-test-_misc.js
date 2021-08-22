@@ -579,18 +579,15 @@ describe('KVCWriteDetail_Misc', function () {
 
 	describe('KVCWriteDetailLauncherItemPublish', function test_KVCWriteDetailLauncherItemPublish() {
 
-		const item = StubNoteObjectValid();
-		
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
-				KVCWriteDetailItem: JSON.stringify(item),
+				KVCWriteDetailItem: JSON.stringify(StubNoteObjectValid()),
 				KVCWriteDetailConnected: true,
 			});
 		});
 
 		before(function () {
 			browser.assert.text('#TestKVCWriteDetailDispatchPublish', '0');
-			browser.assert.text('#TestKVCWriteDetailDispatchPublishData', 'undefined');
 		});
 		
 		before(function () {
@@ -599,7 +596,6 @@ describe('KVCWriteDetail_Misc', function () {
 
 		it('sends KVCWriteDetailDispatchPublish', function () {
 			browser.assert.text('#TestKVCWriteDetailDispatchPublish', '1');
-			browser.assert.text('#TestKVCWriteDetailDispatchPublishData', item.KVCNoteID);
 		});
 
 	});
