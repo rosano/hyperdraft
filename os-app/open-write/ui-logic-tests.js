@@ -515,6 +515,11 @@ describe('KVCWriteLauncherItemPublishAll', function test_KVCWriteLauncherItemPub
 		return mod.KVCWriteLauncherItemPublishAll(Object.assign({
 			OLSKLocalized: uLocalized,
 			ParamConnected: true,
+			ParamWindow: Object.assign({
+				confirm: (function () {
+					return false;
+				}),
+			}, inputData),
 			ParamMod: Object.assign({
 				ControlNotePublish: (function () {}),
 				_OLSKCatalog: {
@@ -550,6 +555,14 @@ describe('KVCWriteLauncherItemPublishAll', function test_KVCWriteLauncherItemPub
 		}, /OLSKErrorInputNotValid/);
 	});
 
+	it('throws if ParamWindow not object', function () {
+		throws(function () {
+			_KVCWriteLauncherItemPublishAll({
+				ParamWindow: null,
+			});
+		}, /OLSKErrorInputNotValid/);
+	});
+
 	it('returns object', function () {
 		const item = _KVCWriteLauncherItemPublishAll();
 
@@ -567,12 +580,24 @@ describe('KVCWriteLauncherItemPublishAll', function test_KVCWriteLauncherItemPub
 			deepEqual(_KVCWriteLauncherItemPublishAll().LCHRecipeCallback(), undefined);
 		});
 
+		it('calls ParamWindow.confirm', function () {
+			deepEqual(uCapture(function (confirm) {
+				_KVCWriteLauncherItemPublishAll({
+					confirm,
+				}).LCHRecipeCallback();
+			}), [uLocalized('OLSKWordingConfirmText')]);
+		});
+
 		it('calls ParamMod.ControlNotePublish on each item in ParamMod._OLSKCatalog.modPublic._OLSKCatalogDataItemsAll', function () {
+			const confirm = uRandomElement(true, false);
 			const items = [{
 				KVCNotePublicID: Math.random().toString(),
 			}];
 			deepEqual(uCapture(function (capture) {
 				_KVCWriteLauncherItemPublishAll({
+					confirm: (function () {
+						return confirm;
+					}),
 					ControlNotePublish: (function () {
 						capture([...arguments][0]);
 					}),
@@ -580,7 +605,7 @@ describe('KVCWriteLauncherItemPublishAll', function test_KVCWriteLauncherItemPub
 						return items;
 					}),
 				}).LCHRecipeCallback();
-			}), items);
+			}), confirm ? items : []);
 		});
 
 		it('excludes if no KVCNotePublicID', function () {
@@ -596,7 +621,7 @@ describe('KVCWriteLauncherItemPublishAll', function test_KVCWriteLauncherItemPub
 			}), []);
 		});
 
-		it('excludes if no KVCNoteIsPublic', function () {
+		it('excludes if KVCNoteIsPublic', function () {
 			deepEqual(uCapture(function (capture) {
 				_KVCWriteLauncherItemPublishAll({
 					ControlNotePublish: (function () {
@@ -638,6 +663,7 @@ describe('KVCWriteRecipes', function test_KVCWriteRecipes() {
 		return mod.KVCWriteRecipes(Object.assign({
 			OLSKLocalized: uLocalized,
 			ParamConnected: uRandomElement(true, false),
+			ParamWindow: {},
 			ParamMod: {},
 			ParamSpecUI: false,
 		}, inputData))

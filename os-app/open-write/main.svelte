@@ -112,7 +112,13 @@ const mod = {
 				
 				return saveAs(await zip.generateAsync({type: 'blob'}), mod.DataExportZIPFilename());
 			},
-		}];
+		}].concat(KVCWriteLogic.KVCWriteRecipes({
+			OLSKLocalized,
+			ParamConnected: !!mod._ValueCloudIdentity,
+			ParamWindow: window,
+			ParamMod: mod,
+			ParamSpecUI: OLSK_SPEC_UI(),
+		}));
 
 		if (mod._ValueCloudIdentity) {
 			let count = 0;

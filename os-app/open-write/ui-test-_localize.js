@@ -249,6 +249,10 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 				return browser.OLSKLauncherRun('ZDRLauncherItemFakeDispatchConnected');
 			});
 
+			it('localizes KVCWriteLauncherItemPublishAll', function () {
+				return browser.assert.OLSKLauncherItemText('KVCWriteLauncherItemPublishAll', uLocalized('KVCWriteLauncherItemPublishAllText'));
+			});
+
 			it('localizes KVCWriteLauncherItemConfigureCustomDomain', function () {
 				return browser.assert.OLSKLauncherItemText('KVCWriteLauncherItemConfigureCustomDomain', uLocalized('KVCWriteLauncherItemConfigureCustomDomainText'));
 			});

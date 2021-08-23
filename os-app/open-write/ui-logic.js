@@ -226,10 +226,18 @@ const mod = {
 			throw new Error('OLSKErrorInputNotValid');
 		}
 
+		if (typeof params.ParamWindow !== 'object' || params.ParamWindow === null) {
+			throw new Error('OLSKErrorInputNotValid');
+		}
+
 		return {
 			LCHRecipeSignature: 'KVCWriteLauncherItemPublishAll',
 			LCHRecipeName: params.OLSKLocalized('KVCWriteLauncherItemPublishAllText'),
 			LCHRecipeCallback () {
+				if (!params.ParamWindow.confirm(params.OLSKLocalized('OLSKWordingConfirmText'))) {
+					return;
+				}
+				
 				params.ParamMod._OLSKCatalog.modPublic._OLSKCatalogDataItemsAll().filter(function (e) {
 					return e.KVCNotePublicID && !e.KVCNoteIsPublic;
 				}).map(params.ParamMod.ControlNotePublish);

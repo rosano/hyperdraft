@@ -9,6 +9,7 @@ KVCWriteLauncherItemJournalText: Diário
 KVCWriteLauncherItemBacklinksText: Backlinks
 KVCWriteVersionsWord: versions
 KVCWriteLauncherItemShowPublicNotesText: Mostrar notas públicas
+KVCWriteLauncherItemPublishAllText: Publicar todas as notas anteriormente publicadas
 KVCWriteLauncherItemConfigureCustomDomainText: Configurar o nome de domínio personalizado
 KVCWriteLauncherItemConfigureCustomDomainPrompt1QuestionText: Copie a seguinte URL do raiz e cole-a na configuração do seu host.
 KVCWriteLauncherItemConfigureCustomDomainPrompt2QuestionText: Qual é seu nome de domínio?

@@ -9,6 +9,7 @@ KVCWriteLauncherItemJournalText: Journal
 KVCWriteLauncherItemBacklinksText: Liens retours
 KVCWriteVersionsWord: versions
 KVCWriteLauncherItemShowPublicNotesText: Montrere les notes publiques
+KVCWriteLauncherItemPublishAllText: Publiquer toutes les notes antérieurement publiquées
 KVCWriteLauncherItemConfigureCustomDomainText: Configurer nom de domaine personalisé
 KVCWriteLauncherItemConfigureCustomDomainPrompt1QuestionText: Veuillez copier le texte suivant et le coller dedans votre host configuration.
 KVCWriteLauncherItemConfigureCustomDomainPrompt2QuestionText: Quel est votre nom de domaine personalisé ?

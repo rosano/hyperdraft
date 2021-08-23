@@ -9,6 +9,7 @@ KVCWriteLauncherItemJournalText: Diario
 KVCWriteLauncherItemBacklinksText: Backlinks
 KVCWriteVersionsWord: versiones
 KVCWriteLauncherItemShowPublicNotesText: Mostrar notas públicas
+KVCWriteLauncherItemPublishAllText: Publicar todas las notas anteriormente publicadas
 KVCWriteLauncherItemConfigureCustomDomainText: Configurar dominio de Internet de encargo
 KVCWriteLauncherItemConfigureCustomDomainPrompt1QuestionText: 'Por favor, copia el texto siguiente y pegalo en tu host configuration.'
 KVCWriteLauncherItemConfigureCustomDomainPrompt2QuestionText: ¿Qué es tu dominio de Internet de encargo?
