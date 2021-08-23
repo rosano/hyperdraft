@@ -177,11 +177,11 @@ const mod = {
 				LCHRecipeSignature: 'KVCWriteLauncherItemRemoveCustomDomain',
 				LCHRecipeName: OLSKLocalized('KVCWriteLauncherItemRemoveCustomDomainText'),
 				LCHRecipeCallback: async function KVCWriteLauncherItemRemoveCustomDomain () {
-					await mod._ValueZDRWrap.App.KVCSetting.KVCSettingsDelete({
+					await mod._ValueZDRWrap.App.KVCSetting.ZDRModelDeleteObject({
 						KVCSettingKey: 'KVCSettingCustomDomainBaseURL',
 					});
 
-					delete mod._ValueSettingsAll[mod._ValueSettingsAll.indexOf(mod.DataSetting('KVCSettingCustomDomainBaseURL'))];
+					delete mod._ValueSettingsAll['KVCSettingCustomDomainBaseURL'];
 
 					if (mod._OLSKCatalog.modPublic.OLSKCatalogDataItemSelected()) {
 						mod._ControlHotfixUpdateInPlace(mod._OLSKCatalog.modPublic.OLSKCatalogDataItemSelected());
@@ -926,7 +926,7 @@ const mod = {
 		mod._ValueFundClue = inputData; // #hotfix-missing-persist
 
 		if (!inputData) {
-			return mod._ValueZDRWrap.App.KVCSetting.KVCSettingsDelete({
+			return mod._ValueZDRWrap.App.KVCSetting.ZDRModelDeleteObject({
 				KVCSettingKey: 'KVCSettingFundClue',
 			});
 		}
