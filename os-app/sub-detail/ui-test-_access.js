@@ -209,16 +209,16 @@ describe('KVCWriteDetail_Access', function () {
 			browser.assert.elements(KVCWriteDetailToolbarPublishButtonImage, 1);
 		});
 
-		it('shows KVCWriteDetailLauncherItemSetAsRootPage', function () {
-			return browser.assert.OLSKLauncherItems('KVCWriteDetailLauncherItemSetAsRootPage', 1);
-		});
-
 		it('shows KVCWriteDetailLauncherItemPublish', function () {
 			return browser.assert.OLSKLauncherItems('KVCWriteDetailLauncherItemPublish', 1);
 		});
 
 		it('hides KVCWriteDetailLauncherItemOpenPublicLink', function () {
 			return browser.assert.OLSKLauncherItems('KVCWriteDetailLauncherItemOpenPublicLink', 0);
+		});
+
+		it('hides KVCWriteDetailLauncherItemSetAsRootPage', function () {
+			return browser.assert.OLSKLauncherItems('KVCWriteDetailLauncherItemSetAsRootPage', 0);
 		});
 
 		it('hides KVCWriteDetailLauncherItemRetract', function () {
@@ -262,25 +262,38 @@ describe('KVCWriteDetail_Access', function () {
 				return browser.assert.OLSKLauncherItems('KVCWriteDetailLauncherItemOpenPublicLink', 1);
 			});
 
+			it('shows KVCWriteDetailLauncherItemSetAsRootPage', function () {
+				return browser.assert.OLSKLauncherItems('KVCWriteDetailLauncherItemSetAsRootPage', 1);
+			});
+
 			it('shows KVCWriteDetailLauncherItemRetract', function () {
 				return browser.assert.OLSKLauncherItems('KVCWriteDetailLauncherItemRetract', 1);
 			});
 
-		});
+			context('KVCWriteDetailItemIsRootPage', function () {
+				
+				before(function() {
+					return browser.OLSKVisit(kDefaultRoute, {
+						KVCWriteDetailItem: JSON.stringify(StubNoteObjectValid({
+							KVCNoteIsPublic: true,
+							KVCNotePublishDate: new Date(),
+							KVCNotePublicID: Math.random().toString(),
+						})),
+						KVCWriteDetailConnected: true,
+						KVCWriteDetailItemIsRootPage: true,
+					});
+				});
 
-	});
+				it('shows KVCWriteDetailToolbarIsRootPage', function () {
+					browser.assert.elements(KVCWriteDetailToolbarIsRootPage, 1);
+				});
 
-	context('KVCWriteDetailItemIsRootPage', function () {
-		
-		before(function() {
-			return browser.OLSKVisit(kDefaultRoute, {
-				KVCWriteDetailItem: JSON.stringify(StubNoteObjectValid()),
-				KVCWriteDetailItemIsRootPage: true,
+				it('hides KVCWriteDetailLauncherItemSetAsRootPage', function () {
+					return browser.assert.OLSKLauncherItems('KVCWriteDetailLauncherItemSetAsRootPage', 0);
+				});
+
 			});
-		});
 
-		it('shows KVCWriteDetailToolbarIsRootPage', function () {
-			browser.assert.elements(KVCWriteDetailToolbarIsRootPage, 1);
 		});
 
 	});

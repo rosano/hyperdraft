@@ -125,6 +125,9 @@ const mod = {
 				LCHRecipeCallback: function KVCWriteDetailLauncherItemSetAsRootPage () {
 					KVCWriteDetailDispatchSetAsRootPage(KVCWriteDetailItem.KVCNoteID);
 				},
+				LCHRecipeIsExcluded () {
+					return !KVCNote.KVCNoteIsMarkedPublic(KVCWriteDetailItem) || KVCWriteDetailItemIsRootPage;
+				},
 			}, {
 				LCHRecipeSignature: 'KVCWriteDetailLauncherItemRetract',
 				LCHRecipeName: OLSKLocalized('KVCWriteDetailToolbarRetractButtonText'),

@@ -113,10 +113,6 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 					return browser.assert.OLSKLauncherItemText('KVCWriteDetailLauncherItemPublish', uLocalized('KVCWriteDetailToolbarPublishButtonText'));
 				});
 
-				it('localizes KVCWriteDetailLauncherItemSetAsRootPage', function () {
-					return browser.assert.OLSKLauncherItemText('KVCWriteDetailLauncherItemSetAsRootPage', uLocalized('KVCWriteDetailLauncherItemSetAsRootPageText'));
-				});
-
 				context('KVCNoteIsMarkedPublic', function() {
 
 					before(function() {
@@ -145,6 +141,10 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 
 					it('localizes KVCWriteDetailLauncherItemRetract', function () {
 						return browser.assert.OLSKLauncherItemText('KVCWriteDetailLauncherItemRetract', uLocalized('KVCWriteDetailToolbarRetractButtonText'));
+					});
+
+					it('localizes KVCWriteDetailLauncherItemSetAsRootPage', function () {
+						return browser.assert.OLSKLauncherItemText('KVCWriteDetailLauncherItemSetAsRootPage', uLocalized('KVCWriteDetailLauncherItemSetAsRootPageText'));
 					});
 
 				});
