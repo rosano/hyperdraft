@@ -172,6 +172,8 @@ After setting up a custom domain, designate any note as the home page with the `
 | `KVCWriteLauncherItemRetractAllText` | Launcher |
 | `KVCWriteLauncherItemConfigureCustomDomainText` | Launcher |
 | `KVCWriteLauncherItemRemoveCustomDomainText` | Launcher |
+| `KVCWriteLauncherItemConfigureCustomTemplateText` | Launcher |
+| `KVCWriteLauncherItemRemoveCustomTemplateText` | Launcher |
 | `OLSKRemoteStorageLauncherItemCopyLoginLinkText` | Launcher |
 | `OLSKFundLauncherItemEnterClueText` | Launcher |
 | `OLSKFundLauncherItemClearClueText` | Launcher |
