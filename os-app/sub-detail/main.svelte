@@ -280,7 +280,7 @@ import KVCWriteInput from '../sub-input/main.svelte';
 			</button>
 		{/if}
 
-		<button class="KVCWriteDetailToolbarDiscardButton OLSKDecorButtonNoStyle OLSKDecorTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarDiscardButtonText') } on:click={ () => window.confirm(OLSKLocalized('KVCWriteDetailDiscardConfirmText')) && KVCWriteDetailDispatchDiscard() }>
+		<button class="KVCWriteDetailToolbarDiscardButton OLSKDecorButtonNoStyle OLSKDecorTappable OLSKToolbarButton" title={ OLSKLocalized('KVCWriteDetailToolbarDiscardButtonText') } on:click={ () => window.confirm(OLSKLocalized('OLSKWordingConfirmText')) && KVCWriteDetailDispatchDiscard() }>
 			<div class="KVCWriteDetailToolbarDiscardButtonImage">{@html _OLSKSharedDiscard }</div>
 		</button>
 	</div>
