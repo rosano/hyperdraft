@@ -142,7 +142,7 @@ After setting up a custom domain, designate any note as the home page with the `
 | Editor (while cloud connected) ||
 :--- | ---
 | `KVCWriteDetailToolbarPublishButtonText` (if not public) | Launcher |
-| `KVCWriteDetailLauncherItemOpenPublicLink` (if public) | Launcher |
+| `KVCWriteDetailLauncherItemOpenPublicLinkText` (if public) | Launcher |
 | `KVCWriteDetailLauncherItemSetAsRootPageText` (if public) | Launcher |
 | `KVCWriteDetailToolbarRetractButtonText` (if public) | Launcher |
 
