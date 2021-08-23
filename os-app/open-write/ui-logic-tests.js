@@ -508,3 +508,112 @@ describe('KVCWriteFileNoteObject', function test_KVCWriteFileNoteObject() {
 	});
 
 });
+
+describe('KVCWriteLauncherItemPublishAll', function test_KVCWriteLauncherItemPublishAll() {
+
+	const _KVCWriteLauncherItemPublishAll = function (inputData = {}) {
+		return mod.KVCWriteLauncherItemPublishAll(Object.assign({
+			OLSKLocalized: uLocalized,
+			ParamConnected: true,
+			ParamMod: Object.assign({
+				ControlNotePublish: (function () {}),
+				_OLSKCatalog: {
+					modPublic: Object.assign({
+						_OLSKCatalogDataItemsAll: (function () {
+							return [];
+						}),
+					}, inputData),
+				},
+			}, inputData),
+		}, inputData));
+	}
+
+	it('throws if not object', function () {
+		throws(function () {
+			mod.KVCWriteLauncherItemPublishAll(null);
+		}, /OLSKErrorInputNotValid/);
+	});
+
+	it('throws if OLSKLocalized not function', function () {
+		throws(function () {
+			_KVCWriteLauncherItemPublishAll({
+				OLSKLocalized: null,
+			});
+		}, /OLSKErrorInputNotValid/);
+	});
+
+	it('throws if ParamConnected not boolean', function () {
+		throws(function () {
+			_KVCWriteLauncherItemPublishAll({
+				ParamConnected: null,
+			});
+		}, /OLSKErrorInputNotValid/);
+	});
+
+	it('returns object', function () {
+		const item = _KVCWriteLauncherItemPublishAll();
+
+		deepEqual(item, {
+			LCHRecipeSignature: 'KVCWriteLauncherItemPublishAll',
+			LCHRecipeName: uLocalized('KVCWriteLauncherItemPublishAllText'),
+			LCHRecipeCallback: item.LCHRecipeCallback,
+			LCHRecipeIsExcluded: item.LCHRecipeIsExcluded,
+		});
+	});
+
+	context('LCHRecipeCallback', function () {
+
+		it('returns undefined', function () {
+			deepEqual(_KVCWriteLauncherItemPublishAll().LCHRecipeCallback(), undefined);
+		});
+
+		it('calls ParamMod.ControlNotePublish on each item in ParamMod._OLSKCatalog.modPublic._OLSKCatalogDataItemsAll', function () {
+			const items = [{}];
+			deepEqual(uCapture(function (capture) {
+				_KVCWriteLauncherItemPublishAll({
+					ControlNotePublish: (function () {
+						capture([...arguments][0]);
+					}),
+					_OLSKCatalogDataItemsAll: (function () {
+						return items;
+					}),
+				}).LCHRecipeCallback();
+			}), items);
+		});
+
+		it('excludes if KVCNoteIsPublic', function () {
+			deepEqual(uCapture(function (capture) {
+				_KVCWriteLauncherItemPublishAll({
+					ControlNotePublish: (function () {
+						capture([...arguments][0]);
+					}),
+					_OLSKCatalogDataItemsAll: (function () {
+						return [{
+							KVCNoteIsPublic: true,
+						}];
+					}),
+				}).LCHRecipeCallback();
+			}), []);
+		});
+
+	});
+
+	context('LCHRecipeIsExcluded', function () {
+
+		it('returns true if ParamConnected false', function () {
+			deepEqual(_KVCWriteLauncherItemPublishAll({
+				ParamConnected: false,
+			}).LCHRecipeIsExcluded(), true);
+		});
+
+		it('returns false', function () {
+			deepEqual(_KVCWriteLauncherItemPublishAll({
+				ParamConnected: true,
+			}).LCHRecipeIsExcluded(), false);
+		});
+
+	});
+
+});
+
+});

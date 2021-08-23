@@ -213,6 +213,33 @@ const mod = {
 		};
 	},
 
+	KVCWriteLauncherItemPublishAll (params, debug = {}) {
+		if (typeof params !== 'object' || params === null) {
+			throw new Error('OLSKErrorInputNotValid');
+		}
+
+		if (typeof params.OLSKLocalized !== 'function') {
+			throw new Error('OLSKErrorInputNotValid');
+		}
+
+		if (typeof params.ParamConnected !== 'boolean') {
+			throw new Error('OLSKErrorInputNotValid');
+		}
+
+		return {
+			LCHRecipeSignature: 'KVCWriteLauncherItemPublishAll',
+			LCHRecipeName: params.OLSKLocalized('KVCWriteLauncherItemPublishAllText'),
+			LCHRecipeCallback () {
+				params.ParamMod._OLSKCatalog.modPublic._OLSKCatalogDataItemsAll().filter(function (e) {
+					return !e.KVCNoteIsPublic;
+				}).map(params.ParamMod.ControlNotePublish);
+			},
+			LCHRecipeIsExcluded () {
+				return !params.ParamConnected;
+			},
+		};
+	},
+
 };
 
 export default mod;
