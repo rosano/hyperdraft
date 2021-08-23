@@ -190,6 +190,29 @@ const mod = {
 				LCHRecipeIsExcluded () {
 					return !mod.DataSetting('KVCSettingCustomDomainBaseURL');
 				},
+			}, {
+				LCHRecipeSignature: 'KVCWriteLauncherItemConfigureCustomTemplate',
+				LCHRecipeName: OLSKLocalized('KVCWriteLauncherItemConfigureCustomTemplateText'),
+				LCHRecipeCallback: function KVCWriteLauncherItemConfigureCustomTemplate () {
+					mod._KVCWriteTemplateModal.modPublic.OLSKModalViewShow();
+				},
+			}, {
+				LCHRecipeSignature: 'KVCWriteLauncherItemRemoveCustomTemplate',
+				LCHRecipeName: OLSKLocalized('KVCWriteLauncherItemRemoveCustomTemplateText'),
+				LCHRecipeCallback: async function KVCWriteLauncherItemRemoveCustomTemplate () {
+					if (!window.confirm(OLSKLocalized('OLSKWordingConfirmText'))) {
+						return;
+					}
+
+					await mod._ValueZDRWrap.App.KVCSetting.ZDRModelDeleteObject({
+						KVCSettingKey: 'KVCSettingCustomTemplate',
+					});
+
+					delete mod._ValueSettingsAll['KVCSettingCustomTemplate'];
+				},
+				LCHRecipeIsExcluded () {
+					return !mod.DataSetting('KVCSettingCustomTemplate');
+				},
 			});
 		}
 
@@ -530,7 +553,7 @@ const mod = {
 		const updated = await mod._ValueZDRWrap.App.KVCNote.KVCNotePublicFilesUpload(await mod._ValueZDRWrap.App.KVCNote.KVCNoteMarkPublic(inputData), mod.TestPublishContent = KVCTemplate.KVCView({
 			KVCViewSource: inputData.KVCNoteBody,
 			KVCViewPermalinkMap: mod._ValueZDRWrap.App.KVCNote.KVCNotePermalinkMap(mod._OLSKCatalog.modPublic._OLSKCatalogDataItemsAll(), mod.DataSetting('KVCSettingPublicRootPageID') || ''),
-			KVCViewTemplate: KVCTemplate.KVCTemplateViewDefault(OLSKLocalized),
+			KVCViewTemplate: mod.DataSetting('KVCSettingCustomTemplate') || KVCTemplate.KVCTemplateViewDefault(OLSKLocalized),
 			KVCViewTemplateOptions: options,
 		}), options.KVCOptionIsRoot);
 
@@ -814,6 +837,10 @@ const mod = {
 
 	KVCWriteDetailDispatchOpen (inputData) {
 		mod._OLSKCatalog.modPublic.OLSKCatalogFilterWithNoThrottle(inputData);
+	},
+
+	async KVCWriteTemplateDispatchUpdate (inputData) {
+		await mod.ValueSetting('KVCSettingCustomTemplate', inputData);
 	},
 
 	async OLSKTransportDispatchImportJSON (inputData) {
@@ -1106,6 +1133,7 @@ onMount(mod.LifecycleModuleWillMount);
 import OLSKCatalog from 'OLSKCatalog';
 import KVCWriteListItem from '../sub-item/main.svelte';
 import KVCWriteDetail from '../sub-detail/main.svelte';
+import KVCWriteTemplate from '../sub-template/main.svelte';
 import OLSKAppToolbar from 'OLSKAppToolbar';
 import OLSKServiceWorkerView from '../../node_modules/OLSKServiceWorker/main.svelte';
 import OLSKInstall from 'OLSKInstall';
@@ -1263,6 +1291,12 @@ import OLSKUIAssets from 'OLSKUIAssets';
 	<OLSKApropos
 		OLSKAproposFeedbackValue={ `javascript:window.location.href = window.atob('${ window.btoa(OLSKString.OLSKStringFormatted(window.atob('OLSK_APROPOS_FEEDBACK_EMAIL_SWAP_TOKEN'), 'RP_003' + (mod._ValueFundClue ? '+' + mod._ValueFundClue : ''))) }')` }
 		/>
+</OLSKModalView>
+
+<OLSKModalView OLSKModalViewTitleText={ OLSKLocalized('KVCWriteTemplateModalTitleText') } bind:this={ mod._KVCWriteTemplateModal }>
+	<div>
+		<KVCWriteTemplate KVCWriteTemplateData={ mod.DataSetting('KVCSettingCustomTemplate') || '' } KVCWriteTemplateDispatchUpdate={ mod.KVCWriteTemplateDispatchUpdate } />
+	</div>
 </OLSKModalView>
 
 {#if mod._IsRunningDemo }

@@ -261,6 +261,10 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 				return browser.assert.OLSKLauncherItemText('KVCWriteLauncherItemConfigureCustomDomain', uLocalized('KVCWriteLauncherItemConfigureCustomDomainText'));
 			});
 
+			it('localizes KVCWriteLauncherItemConfigureCustomTemplate', function () {
+				return browser.assert.OLSKLauncherItemText('KVCWriteLauncherItemConfigureCustomTemplate', uLocalized('KVCWriteLauncherItemConfigureCustomTemplateText'));
+			});
+
 			context.skip('KVCWriteLauncherItemConfigureCustomDomain', function test_KVCWriteLauncherItemConfigureCustomDomain () {
 
 				const prompt1 = {};
@@ -310,10 +314,60 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 				});
 			
 			});
+
+			context('set_domain', function test_set_domain() {
+				
+				before(function () {
+					return browser.OLSKLauncherRun('FakeConfigureCustomDomain');
+				});
+
+				it('localizes KVCWriteLauncherItemRemoveCustomDomain', function () {
+					return browser.assert.OLSKLauncherItemText('KVCWriteLauncherItemRemoveCustomDomain', uLocalized('KVCWriteLauncherItemRemoveCustomDomainText'));
+				});
+
+			});
+
+			context('set_template', function test_set_template() {
+				
+				before(function () {
+					return browser.OLSKLauncherRun('KVCWriteLauncherItemConfigureCustomTemplate');
+				});
+
+				it('sets OLSKModalViewTitleText', function () {
+					browser.assert.text('.OLSKModalViewTitle', uLocalized('KVCWriteTemplateModalTitleText'));
+				});
+
+				context('set', function () {
+					
+					before(function () {
+						browser.fill('.KVCWriteTemplateDataField', Math.random().toString());
+					});
+
+					before(function () {
+						browser.pressButton('.KVCWriteTemplateUpdateButton');
+					});
+
+					before(function () {
+						return browser.click('.OLSKModalViewCloseButton');
+					});
+
+					it('localizes KVCWriteLauncherItemRemoveCustomTemplate', function () {
+						return browser.assert.OLSKLauncherItemText('KVCWriteLauncherItemRemoveCustomTemplate', uLocalized('KVCWriteLauncherItemRemoveCustomTemplateText'));
+					});
+				
+				});
+			
+			});
 		
 		});
 
 		describe('OLSKApropos', function test_OLSKApropos() {
+
+			before(function() {
+				return browser.OLSKVisit(kDefaultRoute, {
+					OLSKRoutingLanguage,
+				});
+			});
 
 			before(function () {
 				return browser.pressButton('.OLSKAppToolbarAproposButton');

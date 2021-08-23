@@ -16,3 +16,6 @@ KVCWriteLauncherItemConfigureCustomDomainPrompt1QuestionText: Copie a seguinte U
 KVCWriteLauncherItemConfigureCustomDomainPrompt2QuestionText: Qual é seu nome de domínio?
 KVCWriteLauncherItemConfigureCustomDomainConfirmQuestionText: O nome de domínio não parece estar presente. Você gostaria de tentar novamente?
 KVCWriteLauncherItemRemoveCustomDomainText: Eliminar o nome de domínio personalizado
+KVCWriteLauncherItemConfigureCustomTemplateText: Configurar template personalizado
+KVCWriteTemplateModalTitleText: Template personalizado
+KVCWriteLauncherItemRemoveCustomTemplateText: Eliminar template personalizado

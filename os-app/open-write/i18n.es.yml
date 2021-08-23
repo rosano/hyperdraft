@@ -16,3 +16,6 @@ KVCWriteLauncherItemConfigureCustomDomainPrompt1QuestionText: 'Por favor, copia 
 KVCWriteLauncherItemConfigureCustomDomainPrompt2QuestionText: ¿Qué es tu dominio de Internet de encargo?
 KVCWriteLauncherItemConfigureCustomDomainConfirmQuestionText: El dominio de Internet no parece estar presente. ¿Te gustaría intentar de nuevo?
 KVCWriteLauncherItemRemoveCustomDomainText: Quitar dominio de Internet de encargo
+KVCWriteLauncherItemConfigureCustomTemplateText: Configurar plantilla personalizada
+KVCWriteTemplateModalTitleText: Plantilla personalizada
+KVCWriteLauncherItemRemoveCustomTemplateText: Eliminar plantilla personalizada

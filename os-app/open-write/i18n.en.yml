@@ -16,3 +16,6 @@ KVCWriteLauncherItemConfigureCustomDomainPrompt1QuestionText: Copy the following
 KVCWriteLauncherItemConfigureCustomDomainPrompt2QuestionText: What is your custom domain name?
 KVCWriteLauncherItemConfigureCustomDomainConfirmQuestionText: The domain name does not seem to be present. Would you like to try again?
 KVCWriteLauncherItemRemoveCustomDomainText: Remove custom domain name
+KVCWriteLauncherItemConfigureCustomTemplateText: Configure custom template
+KVCWriteTemplateModalTitleText: Custom template
+KVCWriteLauncherItemRemoveCustomTemplateText: Remove custom template

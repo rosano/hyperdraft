@@ -11,6 +11,8 @@ Object.entries({
 	KVCWriteViewportFooter: '.KVCWriteViewportFooter',
 	
 	KVCWriteCloudToolbar: '.KVCWriteCloudToolbar',
+	
+	KVCWriteTemplateModal: '.OLSKModalView .KVCWriteTemplate',
 }).map(function (e) {
 	return global[e.shift()]  = e.pop();
 });
@@ -77,6 +79,10 @@ describe('KVCWrite_Access', function () {
 		browser.assert.elements('.OLSKInstall', 1);
 	});
 
+	it('hides KVCWriteTemplateModal', function () {
+		browser.assert.elements(KVCWriteTemplateModal, 0);
+	});
+
 	it('shows KVCWriteLauncherItemJournal', function () {
 		return browser.assert.OLSKLauncherItems('KVCWriteLauncherItemJournal', 1);
 	});
@@ -131,6 +137,14 @@ describe('KVCWrite_Access', function () {
 
 	it('hides KVCWriteLauncherItemRemoveCustomDomain', function () {
 		return browser.assert.OLSKLauncherItems('KVCWriteLauncherItemRemoveCustomDomain', 0);
+	});
+
+	it('hides KVCWriteLauncherItemConfigureCustomTemplate', function () {
+		return browser.assert.OLSKLauncherItems('KVCWriteLauncherItemConfigureCustomTemplate', 0);
+	});
+
+	it('hides KVCWriteLauncherItemRemoveCustomTemplate', function () {
+		return browser.assert.OLSKLauncherItems('KVCWriteLauncherItemRemoveCustomTemplate', 0);
 	});
 
 	it('hides KVCWriteDetailLauncherFakeItemProxy', function () {
@@ -249,6 +263,18 @@ describe('KVCWrite_Access', function () {
 			return browser.assert.OLSKLauncherItems('KVCWriteLauncherItemConfigureCustomDomain', 1);
 		});
 
+		it('hides KVCWriteLauncherItemRemoveCustomDomain', function () {
+			return browser.assert.OLSKLauncherItems('KVCWriteLauncherItemRemoveCustomDomain', 0);
+		});
+
+		it('shows KVCWriteLauncherItemConfigureCustomTemplate', function () {
+			return browser.assert.OLSKLauncherItems('KVCWriteLauncherItemConfigureCustomTemplate', 1);
+		});
+
+		it('hides KVCWriteLauncherItemRemoveCustomTemplate', function () {
+			return browser.assert.OLSKLauncherItems('KVCWriteLauncherItemRemoveCustomTemplate', 0);
+		});
+
 		it('shows KVCWriteLauncherItemPublishAll', function () {
 			return browser.assert.OLSKLauncherItems('KVCWriteLauncherItemPublishAll', 1);
 		});
@@ -267,6 +293,30 @@ describe('KVCWrite_Access', function () {
 
 		it('shows KVCWriteLauncherItemRemoveCustomDomain', function () {
 			return browser.assert.OLSKLauncherItems('KVCWriteLauncherItemRemoveCustomDomain', 1);
+		});
+	
+	});
+
+	context('set_template', function test_set_template() {
+		
+		before(function () {
+			return browser.OLSKLauncherRun('KVCWriteLauncherItemConfigureCustomTemplate');
+		});
+
+		before(function () {
+			browser.fill('.KVCWriteTemplateDataField', Math.random().toString());
+		});
+
+		before(function () {
+			browser.pressButton('.KVCWriteTemplateUpdateButton');
+		});
+
+		before(function () {
+			return browser.click('.OLSKModalViewCloseButton');
+		});
+
+		it('shows KVCWriteLauncherItemRemoveCustomTemplate', function () {
+			return browser.assert.OLSKLauncherItems('KVCWriteLauncherItemRemoveCustomTemplate', 1);
 		});
 	
 	});
