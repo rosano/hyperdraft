@@ -568,7 +568,9 @@ describe('KVCWriteLauncherItemPublishAll', function test_KVCWriteLauncherItemPub
 		});
 
 		it('calls ParamMod.ControlNotePublish on each item in ParamMod._OLSKCatalog.modPublic._OLSKCatalogDataItemsAll', function () {
-			const items = [{}];
+			const items = [{
+				KVCNotePublicID: Math.random().toString(),
+			}];
 			deepEqual(uCapture(function (capture) {
 				_KVCWriteLauncherItemPublishAll({
 					ControlNotePublish: (function () {
@@ -581,7 +583,20 @@ describe('KVCWriteLauncherItemPublishAll', function test_KVCWriteLauncherItemPub
 			}), items);
 		});
 
-		it('excludes if KVCNoteIsPublic', function () {
+		it('excludes if no KVCNotePublicID', function () {
+			deepEqual(uCapture(function (capture) {
+				_KVCWriteLauncherItemPublishAll({
+					ControlNotePublish: (function () {
+						capture([...arguments][0]);
+					}),
+					_OLSKCatalogDataItemsAll: (function () {
+						return [{}];
+					}),
+				}).LCHRecipeCallback();
+			}), []);
+		});
+
+		it('excludes if no KVCNoteIsPublic', function () {
 			deepEqual(uCapture(function (capture) {
 				_KVCWriteLauncherItemPublishAll({
 					ControlNotePublish: (function () {
@@ -589,6 +604,7 @@ describe('KVCWriteLauncherItemPublishAll', function test_KVCWriteLauncherItemPub
 					}),
 					_OLSKCatalogDataItemsAll: (function () {
 						return [{
+							KVCNotePublicID: Math.random().toString(),
 							KVCNoteIsPublic: true,
 						}];
 					}),

@@ -231,7 +231,7 @@ const mod = {
 			LCHRecipeName: params.OLSKLocalized('KVCWriteLauncherItemPublishAllText'),
 			LCHRecipeCallback () {
 				params.ParamMod._OLSKCatalog.modPublic._OLSKCatalogDataItemsAll().filter(function (e) {
-					return !e.KVCNoteIsPublic;
+					return e.KVCNotePublicID && !e.KVCNoteIsPublic;
 				}).map(params.ParamMod.ControlNotePublish);
 			},
 			LCHRecipeIsExcluded () {
