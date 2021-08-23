@@ -616,4 +616,59 @@ describe('KVCWriteLauncherItemPublishAll', function test_KVCWriteLauncherItemPub
 
 });
 
+describe('KVCWriteRecipes', function test_KVCWriteRecipes() {
+
+	const _KVCWriteRecipes = function (inputData = {}) {
+		return mod.KVCWriteRecipes(Object.assign({
+			OLSKLocalized: uLocalized,
+			ParamConnected: uRandomElement(true, false),
+			ParamMod: {},
+			ParamSpecUI: false,
+		}, inputData))
+	};
+
+	it('throws if not object', function () {
+		throws(function () {
+			mod.KVCWriteRecipes(null);
+		}, /OLSKErrorInputNotValid/);
+	});
+
+	it('throws if ParamMod not object', function () {
+		throws(function () {
+			_KVCWriteRecipes({
+				ParamMod: null,
+			});
+		}, /OLSKErrorInputNotValid/);
+	});
+
+	it('throws if ParamSpecUI not boolean', function () {
+		throws(function () {
+			_KVCWriteRecipes({
+				ParamSpecUI: null,
+			});
+		}, /OLSKErrorInputNotValid/);
+	});
+
+	it('returns producton recipes', function () {
+		deepEqual(_KVCWriteRecipes().map(function (e) {
+			return e.LCHRecipeSignature || e.LCHRecipeName;
+		}), Object.keys(mod).filter(function (e) {
+			return e.match(/Launcher/) && !e.match(/Fake/) && !e.match(/Template/);
+		}));
+	});
+
+	context('ParamSpecUI', function () {
+
+		it('returns all recipes if true', function () {
+			deepEqual(_KVCWriteRecipes({
+				ParamSpecUI: true,
+			}).map(function (e) {
+				return e.LCHRecipeSignature || e.LCHRecipeName;
+			}), Object.keys(mod).filter(function (e) {
+				return e.match(/Launcher/) && !e.match(/Template/);
+			}));
+		});
+	
+	});
+
 });
