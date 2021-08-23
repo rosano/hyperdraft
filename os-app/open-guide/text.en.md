@@ -166,7 +166,7 @@ After setting up a custom domain, designate any note as the home page with the `
 | `OLSKTransportLauncherItemExportJSONText` | Launcher |
 | `KVCWriteLauncherItemExportZIPText` | Launcher |
 
-| Global (when cloud is connected) ||
+| Global (while cloud connected) ||
 :--- | ---
 | `KVCWriteLauncherItemConfigureCustomDomainText` | Launcher |
 | `KVCWriteLauncherItemRemoveCustomDomainText` | Launcher |
