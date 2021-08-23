@@ -168,6 +168,8 @@ After setting up a custom domain, designate any note as the home page with the `
 
 | Global (while cloud connected) ||
 :--- | ---
+| `KVCWriteLauncherItemPublishAllText` | Launcher |
+| `KVCWriteLauncherItemRetractAllText` | Launcher |
 | `KVCWriteLauncherItemConfigureCustomDomainText` | Launcher |
 | `KVCWriteLauncherItemRemoveCustomDomainText` | Launcher |
 | `OLSKRemoteStorageLauncherItemCopyLoginLinkText` | Launcher |
