@@ -657,6 +657,140 @@ describe('KVCWriteLauncherItemPublishAll', function test_KVCWriteLauncherItemPub
 
 });
 
+describe('KVCWriteLauncherItemRetractAll', function test_KVCWriteLauncherItemRetractAll() {
+
+	const _KVCWriteLauncherItemRetractAll = function (inputData = {}) {
+		return mod.KVCWriteLauncherItemRetractAll(Object.assign({
+			OLSKLocalized: uLocalized,
+			ParamConnected: true,
+			ParamWindow: Object.assign({
+				confirm: (function () {
+					return false;
+				}),
+			}, inputData),
+			ParamMod: Object.assign({
+				ControlNoteRetract: (function () {}),
+				_OLSKCatalog: {
+					modPublic: Object.assign({
+						_OLSKCatalogDataItemsAll: (function () {
+							return [];
+						}),
+					}, inputData),
+				},
+			}, inputData),
+		}, inputData));
+	}
+
+	it('throws if not object', function () {
+		throws(function () {
+			mod.KVCWriteLauncherItemRetractAll(null);
+		}, /OLSKErrorInputNotValid/);
+	});
+
+	it('throws if OLSKLocalized not function', function () {
+		throws(function () {
+			_KVCWriteLauncherItemRetractAll({
+				OLSKLocalized: null,
+			});
+		}, /OLSKErrorInputNotValid/);
+	});
+
+	it('throws if ParamConnected not boolean', function () {
+		throws(function () {
+			_KVCWriteLauncherItemRetractAll({
+				ParamConnected: null,
+			});
+		}, /OLSKErrorInputNotValid/);
+	});
+
+	it('throws if ParamWindow not object', function () {
+		throws(function () {
+			_KVCWriteLauncherItemRetractAll({
+				ParamWindow: null,
+			});
+		}, /OLSKErrorInputNotValid/);
+	});
+
+	it('returns object', function () {
+		const item = _KVCWriteLauncherItemRetractAll();
+
+		deepEqual(item, {
+			LCHRecipeSignature: 'KVCWriteLauncherItemRetractAll',
+			LCHRecipeName: uLocalized('KVCWriteLauncherItemRetractAllText'),
+			LCHRecipeCallback: item.LCHRecipeCallback,
+			LCHRecipeIsExcluded: item.LCHRecipeIsExcluded,
+		});
+	});
+
+	context('LCHRecipeCallback', function () {
+
+		it('returns undefined', function () {
+			deepEqual(_KVCWriteLauncherItemRetractAll().LCHRecipeCallback(), undefined);
+		});
+
+		it('calls ParamWindow.confirm', function () {
+			deepEqual(uCapture(function (confirm) {
+				_KVCWriteLauncherItemRetractAll({
+					confirm,
+				}).LCHRecipeCallback();
+			}), [uLocalized('OLSKWordingConfirmText')]);
+		});
+
+		it('calls ParamMod.ControlNoteRetract on each item in ParamMod._OLSKCatalog.modPublic._OLSKCatalogDataItemsAll', function () {
+			const confirm = uRandomElement(true, false);
+			const items = [{
+				KVCNoteIsPublic: true,
+			}];
+			deepEqual(uCapture(function (capture) {
+				_KVCWriteLauncherItemRetractAll({
+					confirm: (function () {
+						return confirm;
+					}),
+					ControlNoteRetract: (function () {
+						capture([...arguments][0]);
+					}),
+					_OLSKCatalogDataItemsAll: (function () {
+						return items;
+					}),
+				}).LCHRecipeCallback();
+			}), confirm ? items : []);
+		});
+
+		it('includes if KVCNoteIsPublic', function () {
+			deepEqual(uCapture(function (capture) {
+				_KVCWriteLauncherItemRetractAll({
+					ControlNotePublish: (function () {
+						capture([...arguments][0]);
+					}),
+					_OLSKCatalogDataItemsAll: (function () {
+						return [{
+							KVCNoteIsPublic: false,
+						}];
+					}),
+				}).LCHRecipeCallback();
+			}), []);
+		});
+
+	});
+
+	context('LCHRecipeIsExcluded', function () {
+
+		it('returns true if ParamConnected false', function () {
+			deepEqual(_KVCWriteLauncherItemRetractAll({
+				ParamConnected: false,
+			}).LCHRecipeIsExcluded(), true);
+		});
+
+		it('returns false', function () {
+			deepEqual(_KVCWriteLauncherItemRetractAll({
+				ParamConnected: true,
+			}).LCHRecipeIsExcluded(), false);
+		});
+
+	});
+
+});
+
 describe('KVCWriteRecipes', function test_KVCWriteRecipes() {
 
 	const _KVCWriteRecipes = function (inputData = {}) {

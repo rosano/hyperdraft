@@ -253,6 +253,10 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 				return browser.assert.OLSKLauncherItemText('KVCWriteLauncherItemPublishAll', uLocalized('KVCWriteLauncherItemPublishAllText'));
 			});
 
+			it('localizes KVCWriteLauncherItemRetractAll', function () {
+				return browser.assert.OLSKLauncherItemText('KVCWriteLauncherItemRetractAll', uLocalized('KVCWriteLauncherItemRetractAllText'));
+			});
+
 			it('localizes KVCWriteLauncherItemConfigureCustomDomain', function () {
 				return browser.assert.OLSKLauncherItemText('KVCWriteLauncherItemConfigureCustomDomain', uLocalized('KVCWriteLauncherItemConfigureCustomDomainText'));
 			});

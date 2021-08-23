@@ -10,6 +10,7 @@ KVCWriteLauncherItemBacklinksText: Backlinks
 KVCWriteVersionsWord: versions
 KVCWriteLauncherItemShowPublicNotesText: Show public notes
 KVCWriteLauncherItemPublishAllText: Publish all previously published notes
+KVCWriteLauncherItemRetractAllText: Retract all public notes
 KVCWriteLauncherItemConfigureCustomDomainText: Configure custom domain name
 KVCWriteLauncherItemConfigureCustomDomainPrompt1QuestionText: Copy the following root URL and paste it in your host configuration.
 KVCWriteLauncherItemConfigureCustomDomainPrompt2QuestionText: What is your custom domain name?

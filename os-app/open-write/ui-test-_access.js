@@ -121,6 +121,10 @@ describe('KVCWrite_Access', function () {
 		return browser.assert.OLSKLauncherItems('KVCWriteLauncherItemPublishAll', 0);
 	});
 
+	it('hides KVCWriteLauncherItemRetractAll', function () {
+		return browser.assert.OLSKLauncherItems('KVCWriteLauncherItemRetractAll', 0);
+	});
+
 	it('hides KVCWriteLauncherItemConfigureCustomDomain', function () {
 		return browser.assert.OLSKLauncherItems('KVCWriteLauncherItemConfigureCustomDomain', 0);
 	});
@@ -247,6 +251,10 @@ describe('KVCWrite_Access', function () {
 
 		it('shows KVCWriteLauncherItemPublishAll', function () {
 			return browser.assert.OLSKLauncherItems('KVCWriteLauncherItemPublishAll', 1);
+		});
+
+		it('shows KVCWriteLauncherItemRetractAll', function () {
+			return browser.assert.OLSKLauncherItems('KVCWriteLauncherItemRetractAll', 1);
 		});
 	
 	});

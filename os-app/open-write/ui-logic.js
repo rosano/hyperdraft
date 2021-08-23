@@ -248,6 +248,41 @@ const mod = {
 		};
 	},
 
+	KVCWriteLauncherItemRetractAll (params, debug = {}) {
+		if (typeof params !== 'object' || params === null) {
+			throw new Error('OLSKErrorInputNotValid');
+		}
+
+		if (typeof params.OLSKLocalized !== 'function') {
+			throw new Error('OLSKErrorInputNotValid');
+		}
+
+		if (typeof params.ParamConnected !== 'boolean') {
+			throw new Error('OLSKErrorInputNotValid');
+		}
+
+		if (typeof params.ParamWindow !== 'object' || params.ParamWindow === null) {
+			throw new Error('OLSKErrorInputNotValid');
+		}
+
+		return {
+			LCHRecipeSignature: 'KVCWriteLauncherItemRetractAll',
+			LCHRecipeName: params.OLSKLocalized('KVCWriteLauncherItemRetractAllText'),
+			LCHRecipeCallback () {
+				if (!params.ParamWindow.confirm(params.OLSKLocalized('OLSKWordingConfirmText'))) {
+					return;
+				}
+				
+				params.ParamMod._OLSKCatalog.modPublic._OLSKCatalogDataItemsAll().filter(function (e) {
+					return e.KVCNoteIsPublic;
+				}).map(params.ParamMod.ControlNoteRetract);
+			},
+			LCHRecipeIsExcluded () {
+				return !params.ParamConnected;
+			},
+		};
+	},
+
 	KVCWriteRecipes (params) {
 		if (typeof params !== 'object' || params === null) {
 			throw new Error('OLSKErrorInputNotValid');
@@ -263,6 +298,7 @@ const mod = {
 
 		return [
 			mod.KVCWriteLauncherItemPublishAll(params),
+			mod.KVCWriteLauncherItemRetractAll(params),
 		].filter(function (e) {
 			if (params.ParamSpecUI) {
 				return true;
