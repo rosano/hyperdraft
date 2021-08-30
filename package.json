@@ -33,7 +33,7 @@
     "// tech-robots": null,
     "OLSKRobots": "olsk/OLSKRobots",
 
-    "// tech-sw": null,
+    "// tech-serviceworker": null,
     "OLSKServiceWorker": "olsk/OLSKServiceWorker",
 
     "// I sacrifice myself for the commas of others": null
