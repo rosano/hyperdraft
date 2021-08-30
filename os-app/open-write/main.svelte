@@ -363,7 +363,7 @@ const mod = {
 	DataIsEligible (inputData = {}) {
 		return OLSKFund.OLSKFundIsEligible(Object.assign({
 			ParamMinimumTier: 1,
-			ParamCurrentProject: 'RP_003',
+			ParamCurrentProject: 'ROCO_SHARED_PROJECT_ID_SWAP_TOKEN',
 			ParamBundleProjects: ['FakeBundleProject'],
 			ParamGrantTier: OLSKFund.OLSKFundTier('OLSK_FUND_PRICING_STRING_SWAP_TOKEN', mod._ValueOLSKFundGrant),
 			ParamGrantProject: mod._ValueOLSKFundGrant ? mod._ValueOLSKFundGrant.OLSKPactGrantProject : '',
@@ -1078,7 +1078,7 @@ const mod = {
 			ParamMod: mod,
 			OLSKLocalized,
 			ParamFormURL: 'OLSK_FUND_FORM_URL_SWAP_TOKEN',
-			ParamProject: 'RP_003',
+			ParamProject: 'ROCO_SHARED_PROJECT_ID_SWAP_TOKEN',
 			ParamSpecUI: OLSK_SPEC_UI(),
 			ParamDocumentLimit: parseInt('OLSK_FUND_DOCUMENT_LIMIT_SWAP_TOKEN'),
 		});
@@ -1289,7 +1289,7 @@ import OLSKUIAssets from 'OLSKUIAssets';
 
 <OLSKModalView OLSKModalViewTitleText={ OLSKLocalized('OLSKAproposHeadingText') } bind:this={ mod._OLSKModalView } OLSKModalViewIsCapped={ true }>
 	<OLSKApropos
-		OLSKAproposFeedbackValue={ `javascript:window.location.href = window.atob('${ window.btoa(OLSKString.OLSKStringFormatted(window.atob('OLSK_APROPOS_FEEDBACK_EMAIL_SWAP_TOKEN'), 'RP_003' + (mod._ValueFundClue ? '+' + mod._ValueFundClue : ''))) }')` }
+		OLSKAproposFeedbackValue={ `javascript:window.location.href = window.atob('${ window.btoa(OLSKString.OLSKStringFormatted(window.atob('OLSK_APROPOS_FEEDBACK_EMAIL_SWAP_TOKEN'), 'ROCO_SHARED_PROJECT_ID_SWAP_TOKEN' + (mod._ValueFundClue ? '+' + mod._ValueFundClue : ''))) }')` }
 		/>
 </OLSKModalView>
 
