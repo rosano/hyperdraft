@@ -135,9 +135,8 @@ const mod = {
 			try {
 				return (new URL('', e)).hostname;
 			} catch (err) {
-				return false;
+				return !!e && !e.match(/[\[\(]/) && e.match(/^\w+:/); // treat mailto as url
 			}
-			
 		}).shift();
 
 		if (url) {
