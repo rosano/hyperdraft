@@ -1,17 +1,10 @@
 .KVCWriteDetail {
 	width: 100%;
+	min-height: 100%;
 	
 	/* KVCWriteDetailFlexbox:Parent */
 	display: flex;
 	flex-direction: column;
-}
-
-@media screen and (max-width: 760px) {
-
-.KVCWriteDetail {
-	min-height: 100%;
-}
-
 }
 
 .KVCWriteDetailToolbar {
