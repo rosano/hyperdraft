@@ -396,6 +396,12 @@ describe('KVCNoteList', function test_KVCNoteList() {
 		deepEqual(await ZDRTestingWrap.App.KVCNote.KVCNoteList(), [item]);
 	});
 
+	it('filters null item', async function() {
+		await ZDRTestingWrap.App.ZDRStorageWriteFile(mod.KVCNoteObjectPath(StubNoteObjectValid()), 'null', 'application/json');
+
+		deepEqual(await ZDRTestingWrap.App.KVCNote.KVCNoteList(), []);
+	});
+
 });
 
 describe('KVCNoteMarkPublic', function test_KVCNoteMarkPublic() {

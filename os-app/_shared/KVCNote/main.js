@@ -187,11 +187,13 @@ export default Object.assign(mod, {
 
 		async KVCNoteList () {
 			const _this = this;
-			return Promise.all((await _this.App.ZDRStoragePathsRecursive(mod.KVCNoteDirectory())).filter(function (e) {
+			return (await Promise.all((await _this.App.ZDRStoragePathsRecursive(mod.KVCNoteDirectory())).filter(function (e) {
 				return e === mod.KVCNoteObjectPath(mod.KVCNoteStub(e));
 			}).map(async function (e) {
 				return OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(await _this.App.ZDRStorageReadObject(e));
-			}));
+			}))).filter(function (e) {
+				return e;
+			});
 		},
 
 		KVCNoteMarkPublic (inputData) {
