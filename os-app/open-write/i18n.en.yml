@@ -2,6 +2,7 @@ KVCWriteTitle: Write
 KVCWriteFilterFieldText: Filter or create
 KVCWriteCreateButtonText: Create
 KVCWriteEmptyNoteText: Blank note
+KVCWriteUntitledNoteText: Untitled note
 KVCWriteRevealArchiveButtonText: Reveal archive
 KVCWriteLauncherItemImportTXTText: Import TXT (beta)
 KVCWriteLauncherItemImportNVText: Import Notational Velocity (beta)

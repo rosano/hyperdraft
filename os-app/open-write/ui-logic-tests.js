@@ -34,6 +34,12 @@ describe('KVCWriteAccessibilitySummary', function test_KVCWriteAccessibilitySumm
 		}), uLocalized), uLocalized('KVCWriteEmptyNoteText'));
 	});
 
+	it('sets text if untitled', function() {
+		deepEqual(mod.KVCWriteAccessibilitySummary(StubNoteObjectValid({
+			KVCNoteBody: '\n' + Math.random().toString(),
+		}), uLocalized), uLocalized('KVCWriteUntitledNoteText'));
+	});
+
 });
 
 describe('KVCWriteSortFunction', function test_KVCWriteSortFunction() {
