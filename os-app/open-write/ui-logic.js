@@ -16,12 +16,12 @@ String.prototype.KVCEquals = function (inputData) {
 
 const mod = {
 
-	KVCWriteAccessibilitySummary (inputData) {
+	KVCWriteAccessibilitySummary (inputData, OLSKLocalized) {
 		if (KVCNote.KVCNoteErrors(inputData)) {
 			throw new Error('KVCErrorInputNotValid');
 		}
 
-		return OLSKString.OLSKStringSnippet(KVCTemplate.KVCTemplatePlaintextTitle(inputData.KVCNoteBody));
+		return OLSKString.OLSKStringSnippet(KVCTemplate.KVCTemplatePlaintextTitle(inputData.KVCNoteBody)) || OLSKLocalized('KVCWriteEmptyNoteText');
 	},
 
 	KVCWriteSortFunction (a, b, log) {

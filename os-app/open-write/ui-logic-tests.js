@@ -28,6 +28,12 @@ describe('KVCWriteAccessibilitySummary', function test_KVCWriteAccessibilitySumm
 		})), require('OLSKString').OLSKStringSnippet(item));
 	});
 
+	it('sets text if blank', function() {
+		deepEqual(mod.KVCWriteAccessibilitySummary(StubNoteObjectValid({
+			KVCNoteBody: '',
+		}), uLocalized), uLocalized('KVCWriteEmptyNoteText'));
+	});
+
 });
 
 describe('KVCWriteSortFunction', function test_KVCWriteSortFunction() {
