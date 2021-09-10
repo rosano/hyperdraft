@@ -8,5 +8,6 @@ KVCWriteDetailToolbarPublicLinkText: Public
 KVCWriteDetailToolbarRetractButtonText: Retract
 KVCWriteDetailToolbarDiscardButtonText: Discard
 KVCWriteDetailLauncherItemShowLocalVersionsText: Show local versions
+KVCWriteDetailLauncherItemCloneText: Clone
 KVCWriteDetailLauncherItemOpenPublicLinkText: Open public link
 KVCWriteDetailLauncherItemSetAsRootPageText: Set as homepage

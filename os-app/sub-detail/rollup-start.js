@@ -78,6 +78,9 @@ const KVCWriteDetail = new RollupStart({
 		KVCWriteDetailDispatchVersions: (function  () {
 			window.TestKVCWriteDetailDispatchVersions.innerHTML = parseInt(window.TestKVCWriteDetailDispatchVersions.innerHTML) + 1;
 		}),
+		KVCWriteDetailDispatchClone: (function  () {
+			window.TestKVCWriteDetailDispatchClone.innerHTML = parseInt(window.TestKVCWriteDetailDispatchClone.innerHTML) + 1;
+		}),
 		KVCWriteDetailDispatchDiscard: (function  () {
 			window.TestKVCWriteDetailDispatchDiscard.innerHTML = parseInt(window.TestKVCWriteDetailDispatchDiscard.innerHTML) + 1;
 		}),

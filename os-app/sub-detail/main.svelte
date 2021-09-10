@@ -11,6 +11,7 @@ export let KVCWriteDetailDispatchConnect;
 export let KVCWriteDetailDispatchPublish;
 export let KVCWriteDetailDispatchRetract;
 export let KVCWriteDetailDispatchVersions;
+export let KVCWriteDetailDispatchClone;
 export let KVCWriteDetailDispatchDiscard;
 export let KVCWriteDetailDispatchUpdate;
 export let KVCWriteDetailDispatchSetAsRootPage;
@@ -77,6 +78,12 @@ const mod = {
 			LCHRecipeName: OLSKLocalized('KVCWriteDetailLauncherItemShowLocalVersionsText'),
 			LCHRecipeCallback: function KVCWriteDetailLauncherItemShowLocalVersions () {
 				KVCWriteDetailDispatchVersions();
+			},
+		}, {
+			LCHRecipeSignature: 'KVCWriteDetailLauncherItemClone',
+			LCHRecipeName: OLSKLocalized('KVCWriteDetailLauncherItemCloneText'),
+			LCHRecipeCallback: function KVCWriteDetailLauncherItemClone () {
+				KVCWriteDetailDispatchClone();
 			},
 		}];
 
