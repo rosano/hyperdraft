@@ -348,6 +348,43 @@ describe('KVCWriteBacklinksMap', function test_KVCWriteBacklinksMap() {
 
 });
 
+describe('KVCWriteCloned', function test_KVCWriteCloned() {
+
+	it('throws if not object', function () {
+		throws(function () {
+			mod.KVCWriteCloned(null);
+		}, /KVCErrorInputNotValid/);
+	});
+
+	it('returns input', function() {
+		deepEqual(mod.KVCWriteCloned({}), {});
+	});
+
+	it('returns copy', function() {
+		const item = StubNoteObjectValid({});
+		require('assert').notStrictEqual(mod.KVCWriteCloned(item), item);
+	});
+
+	it('removes KVCNoteID', function() {
+		deepEqual(mod.KVCWriteCloned(StubNoteObjectValid({
+			KVCNoteID: Math.random().toString(),
+		})).KVCNoteID, undefined);
+	});
+
+	it('removes KVCNoteIsPublic', function() {
+		deepEqual(mod.KVCWriteCloned(StubNoteObjectValid({
+			KVCNoteIsPublic: true,
+		})).KVCNoteIsPublic, undefined);
+	});
+
+	it('removes KVCNotePublicID', function() {
+		deepEqual(mod.KVCWriteCloned(StubNoteObjectValid({
+			KVCNotePublicID: Math.random().toString(),
+		})).KVCNotePublicID, undefined);
+	});
+
+});
+
 describe('KVCWriteLauncherItemBacklinksTemplate', function test_KVCWriteLauncherItemBacklinksTemplate() {
 
 	it('throws error if param1 not date', function() {

@@ -143,6 +143,21 @@ const mod = {
 		}, {});
 	},
 
+	KVCWriteCloned (inputData) {
+		if (typeof inputData !== 'object' || inputData === null) {
+			throw new Error('KVCErrorInputNotValid');
+		}
+
+		const outputData = Object.assign({}, inputData);
+
+		delete outputData.KVCNoteID;
+		
+		delete outputData.KVCNoteIsPublic;
+		delete outputData.KVCNotePublicID;
+
+		return outputData;
+	},
+
 	KVCWriteLauncherItemBacklinksTemplate (param1, param2, param3) {
 		if (!(param1 instanceof Date) || Number.isNaN(param1.getTime())) {
 			throw new Error('KVCErrorInputNotValid');
