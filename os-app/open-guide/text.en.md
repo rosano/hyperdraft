@@ -134,6 +134,7 @@ After setting up a custom domain, designate any note as the home page with the `
 :--- | ---
 | `KVCWriteDetailToolbarArchiveButtonText` | Launcher |
 | `KVCWriteDetailToolbarUnarchiveButtonText` | Launcher |
+| `KVCWriteDetailLauncherItemCloneText` | Launcher |
 | KVCWriteDetailToolbarJumpButtonText | `AccessKey+j` |
 | Select previous or next note, if filter field is focused | `Up` or `Down` |
 | Clear filter text and selected note, focus filter field | `Escape` |
