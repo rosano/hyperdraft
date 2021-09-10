@@ -73,6 +73,8 @@ const mod = {
 		}
 
 		mod._ValueEditorInstance.setSelections(mod._ValueEditorInstance.getDoc().listSelections().slice(0, 1));
+
+		event.stopPropagation();
 	},
 
 	InterfaceEditorDidTouchDown (instance, event) {
@@ -186,7 +188,6 @@ const mod = {
 			  'Cmd-H' (event) {
 			  	return event.preventDefault();
 			  },
-			  Esc () {}, // overwrite to control via other binding
 			  Tab: false,
 			},
 
@@ -214,6 +215,8 @@ const mod = {
 		mod._ValueEditorInstance.setValue(KVCWriteInputItem[KVCWriteInputKey]);
 
 		mod._ValueEditorInstance.on('keydown', function (instance, event) {
+			mod.InterfaceWindowDidKeydown(event);
+
 			if (!navigator.platform.match(/mac/i)) {
 				return;
 			}
@@ -309,7 +312,6 @@ $: {
 import { onMount } from 'svelte';
 onMount(mod.LifecycleComponentDidMount);
 </script>
-<svelte:window on:keydown={ mod.InterfaceWindowDidKeydown } />
 <svelte:options accessors />
 
 <div class="KVCWriteInput">
