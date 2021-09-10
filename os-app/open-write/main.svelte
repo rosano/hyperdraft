@@ -455,7 +455,7 @@ const mod = {
 			return mod.OLSKFundDocumentGate();
 		}
 
-		mod.ControlNoteActivate(mod._OLSKCatalog.modPublic.OLSKCatalogInsert(await mod._ValueZDRWrap.App.KVCNote.KVCNoteCreate({
+		mod.ControlNoteActivate(mod._OLSKCatalog.modPublic.OLSKCatalogInsert(await mod._ValueZDRWrap.App.KVCNote.KVCNoteCreate(typeof inputData === 'object' ? inputData : {
 			KVCNoteBody: typeof inputData === 'string' ? inputData : '',
 		})));
 
@@ -580,6 +580,10 @@ const mod = {
 			LCHRecipeURLFilter: '*',
 		  LCHRecipeIsAutomatic: true,
 		}]);
+	},
+	
+	ControlNoteClone (inputData) {
+		mod.ControlNoteCreate(KVCWriteLogic.KVCWriteCloned(inputData));
 	},
 	
 	async ControlNoteDiscard (inputData) {
@@ -815,6 +819,10 @@ const mod = {
 
 	KVCWriteDetailDispatchVersions () {
 		mod.ControlNoteVersions(mod._OLSKCatalog.modPublic.OLSKCatalogDataItemSelected());
+	},
+
+	KVCWriteDetailDispatchClone () {
+		mod.ControlNoteClone(mod._OLSKCatalog.modPublic.OLSKCatalogDataItemSelected());
 	},
 
 	KVCWriteDetailDispatchDiscard () {
@@ -1209,6 +1217,7 @@ import OLSKUIAssets from 'OLSKUIAssets';
 			KVCWriteDetailDispatchPublish={ mod.KVCWriteDetailDispatchPublish }
 			KVCWriteDetailDispatchRetract={ mod.KVCWriteDetailDispatchRetract }
 			KVCWriteDetailDispatchVersions={ mod.KVCWriteDetailDispatchVersions }
+			KVCWriteDetailDispatchClone={ mod.KVCWriteDetailDispatchClone }
 			KVCWriteDetailDispatchDiscard={ mod.KVCWriteDetailDispatchDiscard }
 			KVCWriteDetailDispatchUpdate={ mod.KVCWriteDetailDispatchUpdate }
 			KVCWriteDetailDispatchSetAsRootPage={ mod.KVCWriteDetailDispatchSetAsRootPage }
