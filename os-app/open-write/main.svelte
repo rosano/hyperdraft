@@ -912,6 +912,20 @@ const mod = {
 		mod._ValueCloudErrorText = error.toString();
 	},
 
+	_ZDRParamDispatchInitialisationError () {
+		if (!window.confirm('InitialisationError: Would you like to delete your data and start from scratch?')) {
+			return;
+		}
+
+		mod._ValueZDRWrap = {
+			ZDRCloudDisconnect: (function () {}),
+		};
+
+		mod.OLSKCloudStatusDispatchDisconnect();
+
+		window.location.reload();
+	},
+
 	ZDRParamDispatchConnected (identity, token) {
 		mod._ValueCloudIdentity = identity;
 		mod._ValueCloudToken = token;
@@ -1042,6 +1056,7 @@ const mod = {
 				ZDRScopeIsPublic: true,
 			}],
 			ZDRParamDispatchError: mod.ZDRParamDispatchError,
+			_ZDRParamDispatchInitialisationError: mod._ZDRParamDispatchInitialisationError,
 			ZDRParamDispatchConnected: mod.ZDRParamDispatchConnected,
 			ZDRParamDispatchOnline: mod.ZDRParamDispatchOnline,
 			ZDRParamDispatchOffline: mod.ZDRParamDispatchOffline,
