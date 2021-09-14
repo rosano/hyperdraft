@@ -7,7 +7,7 @@ Object.entries({
 
 	KVCVitrineGuideButton: '.KVCVitrineGuideButton',
 
-	KVCVitrineGlossaryHeading: '.KVCVitrineGlossaryHeading',
+	KVCVitrineDeeperHeading: '.KVCVitrineDeeperHeading',
 	KVCVitrineGlossary: '.KVCVitrineGlossary',
 
 	KVCVitrineVideoHeading: '.KVCVitrineVideoHeading',
@@ -58,8 +58,8 @@ describe('KVCVitrine_Access', function () {
 		browser.assert.elements(KVCVitrineGuideButton, 1);
 	});
 
-	it('shows KVCVitrineGlossaryHeading', function () {
-		browser.assert.elements(KVCVitrineGlossaryHeading, 1);
+	it('shows KVCVitrineDeeperHeading', function () {
+		browser.assert.elements(KVCVitrineDeeperHeading, 1);
 	});
 
 	it('shows KVCVitrineGlossary', function () {
