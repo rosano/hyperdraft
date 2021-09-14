@@ -69,7 +69,7 @@ describe('KVCVitrine_Misc', function () {
 	describe('KVCVitrineGlossaryWritingAnswerLink', function test_KVCVitrineGlossaryWritingAnswerLink () {
 
 		it('sets href', function () {
-			browser.assert.attribute(KVCVitrineGlossaryWritingAnswerLink, 'href', process.env.KVC_VITRINE_WRITING_ANSWER_URL);
+			browser.assert.attribute(KVCVitrineGlossaryWritingAnswerLink, 'href', process.env.KVC_VITRINE_GLOSSARY_WRITING_ANSWER_URL);
 		});
 
 	});
@@ -77,7 +77,7 @@ describe('KVCVitrine_Misc', function () {
 	describe('KVCVitrineGlossaryWritingListsLink', function test_KVCVitrineGlossaryWritingListsLink () {
 
 		it('sets href', function () {
-			browser.assert.attribute(KVCVitrineGlossaryWritingListsLink, 'href', process.env.KVC_VITRINE_WRITING_LISTS_URL);
+			browser.assert.attribute(KVCVitrineGlossaryWritingListsLink, 'href', process.env.KVC_VITRINE_GLOSSARY_WRITING_LISTS_URL);
 		});
 
 	});
@@ -85,7 +85,7 @@ describe('KVCVitrine_Misc', function () {
 	describe('KVCVitrineGlossaryWritingDiscussionLink', function test_KVCVitrineGlossaryWritingDiscussionLink () {
 
 		it('sets href', function () {
-			browser.assert.attribute(KVCVitrineGlossaryWritingDiscussionLink, 'href', process.env.KVC_VITRINE_WRITING_DISCUSSION_URL);
+			browser.assert.attribute(KVCVitrineGlossaryWritingDiscussionLink, 'href', process.env.KVC_VITRINE_GLOSSARY_WRITING_DISCUSSION_URL);
 		});
 
 	});
@@ -93,7 +93,7 @@ describe('KVCVitrine_Misc', function () {
 	describe('KVCVitrineGlossaryPublicRefLink', function test_KVCVitrineGlossaryPublicRefLink () {
 
 		it('sets href', function () {
-			browser.assert.attribute(KVCVitrineGlossaryPublicRefLink, 'href', process.env.KVC_VITRINE_PUBLIC_REF_URL);
+			browser.assert.attribute(KVCVitrineGlossaryPublicRefLink, 'href', process.env.KVC_VITRINE_GLOSSARY_PUBLIC_REF_URL);
 		});
 
 	});
@@ -101,7 +101,7 @@ describe('KVCVitrine_Misc', function () {
 	describe('KVCVitrineGlossaryPublicGardensLink', function test_KVCVitrineGlossaryPublicGardensLink () {
 
 		it('sets href', function () {
-			browser.assert.attribute(KVCVitrineGlossaryPublicGardensLink, 'href', process.env.KVC_VITRINE_PUBLIC_GARDENS_URL);
+			browser.assert.attribute(KVCVitrineGlossaryPublicGardensLink, 'href', process.env.KVC_VITRINE_GLOSSARY_PUBLIC_GARDENS_URL);
 		});
 
 	});
