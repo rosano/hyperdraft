@@ -16,3 +16,10 @@ body {
 .OLSKDecorGlossary {
 	margin: unset;
 }
+
+.OLSKDecorGlossary ul {
+	padding: 0;
+
+	list-style: none;
+	font-weight: bold;
+}
