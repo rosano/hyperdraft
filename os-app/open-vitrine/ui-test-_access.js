@@ -7,6 +7,9 @@ Object.entries({
 
 	KVCVitrineGuideButton: '.KVCVitrineGuideButton',
 
+	KVCVitrineGlossaryHeading: '.KVCVitrineGlossaryHeading',
+	KVCVitrineGlossary: '.KVCVitrineGlossary',
+
 	KVCVitrineVideoHeading: '.KVCVitrineVideoHeading',
 	KVCVitrineVideo1: '.OLSKCommonVideoList .OLSKCommonVideoListItem.KVCVitrineVideo1 iframe',
 	KVCVitrineVideo2: '.OLSKCommonVideoList .OLSKCommonVideoListItem.KVCVitrineVideo2 iframe',
@@ -53,6 +56,18 @@ describe('KVCVitrine_Access', function () {
 
 	it('shows KVCVitrineGuideButton', function () {
 		browser.assert.elements(KVCVitrineGuideButton, 1);
+	});
+
+	it('shows KVCVitrineGlossaryHeading', function () {
+		browser.assert.elements(KVCVitrineGlossaryHeading, 1);
+	});
+
+	it('shows KVCVitrineGlossary', function () {
+		browser.assert.elements(KVCVitrineGlossary, 1);
+	});
+
+	it('shows ROCOGlossary', function () {
+		browser.assert.elements('.ROCOGlossary', 1);
 	});
 
 	it('shows KVCVitrineVideoHeading', function () {

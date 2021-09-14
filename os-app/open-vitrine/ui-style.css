@@ -12,3 +12,7 @@ body {
 	--OLSKCommonVideoWide: 750;
 	--OLSKCommonVideoHigh: 320;
 }
+
+.OLSKDecorGlossary {
+	margin: unset;
+}

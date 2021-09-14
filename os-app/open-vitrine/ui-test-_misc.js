@@ -58,6 +58,14 @@ describe('KVCVitrine_Misc', function () {
 	
 	});
 
+	describe('KVCVitrineGlossary', function test_KVCVitrineGlossary () {
+
+		it('classes OLSKDecorGlossary', function () {
+			browser.assert.hasClass(KVCVitrineGlossary, 'OLSKDecorGlossary');
+		});
+		
+	});
+
 	describe('KVCVitrineVideo1', function () {
 
 		it('classes OLSKCommonVideoListItemMobile', function () {
