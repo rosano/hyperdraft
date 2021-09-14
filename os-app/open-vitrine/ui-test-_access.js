@@ -14,8 +14,8 @@ Object.entries({
 	KVCVitrineGlossaryWritingListsLink: '.KVCVitrineGlossaryWritingListsLink',
 	KVCVitrineGlossaryWritingDiscussionLink: '.KVCVitrineGlossaryWritingDiscussionLink',
 	KVCVitrineGlossaryPublicHeading: '.KVCVitrineGlossaryPublicHeading',
-	KVCVitrineGlossaryRefLink: '.KVCVitrineGlossaryRefLink',
-	KVCVitrineGlossaryRefBlurb: '.KVCVitrineGlossaryRefBlurb',
+	KVCVitrineGlossaryPublicRefLink: '.KVCVitrineGlossaryPublicRefLink',
+	KVCVitrineGlossaryPublicRefBlurb: '.KVCVitrineGlossaryPublicRefBlurb',
 	KVCVitrineGlossaryGardensLink: '.KVCVitrineGlossaryGardensLink',
 	KVCVitrineGlossaryGardensBlurb: '.KVCVitrineGlossaryGardensBlurb',
 	KVCVitrineGlossaryCompareHeading: '.KVCVitrineGlossaryCompareHeading',
@@ -97,12 +97,12 @@ describe('KVCVitrine_Access', function () {
 		browser.assert.elements(KVCVitrineGlossaryPublicHeading, 1);
 	});
 
-	it('shows KVCVitrineGlossaryRefLink', function () {
-		browser.assert.elements(KVCVitrineGlossaryRefLink, 1);
+	it('shows KVCVitrineGlossaryPublicRefLink', function () {
+		browser.assert.elements(KVCVitrineGlossaryPublicRefLink, 1);
 	});
 
-	it('shows KVCVitrineGlossaryRefBlurb', function () {
-		browser.assert.elements(KVCVitrineGlossaryRefBlurb, 1);
+	it('shows KVCVitrineGlossaryPublicRefBlurb', function () {
+		browser.assert.elements(KVCVitrineGlossaryPublicRefBlurb, 1);
 	});
 
 	it('shows KVCVitrineGlossaryGardensLink', function () {

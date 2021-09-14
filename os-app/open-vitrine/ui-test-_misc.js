@@ -90,10 +90,10 @@ describe('KVCVitrine_Misc', function () {
 
 	});
 
-	describe('KVCVitrineGlossaryRefLink', function test_KVCVitrineGlossaryRefLink () {
+	describe('KVCVitrineGlossaryPublicRefLink', function test_KVCVitrineGlossaryPublicRefLink () {
 
 		it('sets href', function () {
-			browser.assert.attribute(KVCVitrineGlossaryRefLink, 'href', process.env.KVC_VITRINE_REF_URL);
+			browser.assert.attribute(KVCVitrineGlossaryPublicRefLink, 'href', process.env.KVC_VITRINE_REF_URL);
 		});
 
 	});

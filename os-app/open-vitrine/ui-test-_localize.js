@@ -54,12 +54,12 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 			browser.assert.text(KVCVitrineGlossaryPublicHeading, uLocalized('KVCVitrineGlossaryPublicHeadingText'));
 		});
 
-		it('localizes KVCVitrineGlossaryRefLink', function () {
-			browser.assert.text(KVCVitrineGlossaryRefLink, uLocalized('KVCVitrineGlossaryRefLinkText'));
+		it('localizes KVCVitrineGlossaryPublicRefLink', function () {
+			browser.assert.text(KVCVitrineGlossaryPublicRefLink, uLocalized('KVCVitrineGlossaryPublicRefLinkText'));
 		});
 
-		it('localizes KVCVitrineGlossaryRefBlurb', function () {
-			browser.assert.text(KVCVitrineGlossaryRefBlurb, uLocalized('KVCVitrineGlossaryRefBlurbText'));
+		it('localizes KVCVitrineGlossaryPublicRefBlurb', function () {
+			browser.assert.text(KVCVitrineGlossaryPublicRefBlurb, uLocalized('KVCVitrineGlossaryPublicRefBlurbText'));
 		});
 
 		it('localizes KVCVitrineGlossaryGardensLink', function () {
