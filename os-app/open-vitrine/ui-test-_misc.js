@@ -98,10 +98,10 @@ describe('KVCVitrine_Misc', function () {
 
 	});
 
-	describe('KVCVitrineGlossaryGardensLink', function test_KVCVitrineGlossaryGardensLink () {
+	describe('KVCVitrineGlossaryPublicGardensLink', function test_KVCVitrineGlossaryPublicGardensLink () {
 
 		it('sets href', function () {
-			browser.assert.attribute(KVCVitrineGlossaryGardensLink, 'href', process.env.KVC_VITRINE_GARDENS_URL);
+			browser.assert.attribute(KVCVitrineGlossaryPublicGardensLink, 'href', process.env.KVC_VITRINE_GARDENS_URL);
 		});
 
 	});

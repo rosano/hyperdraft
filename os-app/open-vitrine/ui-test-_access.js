@@ -16,8 +16,8 @@ Object.entries({
 	KVCVitrineGlossaryPublicHeading: '.KVCVitrineGlossaryPublicHeading',
 	KVCVitrineGlossaryPublicRefLink: '.KVCVitrineGlossaryPublicRefLink',
 	KVCVitrineGlossaryPublicRefBlurb: '.KVCVitrineGlossaryPublicRefBlurb',
-	KVCVitrineGlossaryGardensLink: '.KVCVitrineGlossaryGardensLink',
-	KVCVitrineGlossaryGardensBlurb: '.KVCVitrineGlossaryGardensBlurb',
+	KVCVitrineGlossaryPublicGardensLink: '.KVCVitrineGlossaryPublicGardensLink',
+	KVCVitrineGlossaryPublicGardensBlurb: '.KVCVitrineGlossaryPublicGardensBlurb',
 	KVCVitrineGlossaryCompareHeading: '.KVCVitrineGlossaryCompareHeading',
 	KVCVitrineGlossaryCompareSimplenoteLink: '.KVCVitrineGlossaryCompareSimplenoteLink',
 
@@ -105,12 +105,12 @@ describe('KVCVitrine_Access', function () {
 		browser.assert.elements(KVCVitrineGlossaryPublicRefBlurb, 1);
 	});
 
-	it('shows KVCVitrineGlossaryGardensLink', function () {
-		browser.assert.elements(KVCVitrineGlossaryGardensLink, 1);
+	it('shows KVCVitrineGlossaryPublicGardensLink', function () {
+		browser.assert.elements(KVCVitrineGlossaryPublicGardensLink, 1);
 	});
 
-	it('shows KVCVitrineGlossaryGardensBlurb', function () {
-		browser.assert.elements(KVCVitrineGlossaryGardensBlurb, 1);
+	it('shows KVCVitrineGlossaryPublicGardensBlurb', function () {
+		browser.assert.elements(KVCVitrineGlossaryPublicGardensBlurb, 1);
 	});
 
 	it('shows KVCVitrineGlossaryCompareSimplenoteLink', function () {
