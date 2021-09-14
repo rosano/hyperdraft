@@ -61,7 +61,7 @@ describe('KVCVitrine_Misc', function () {
 	describe('KVCVitrineVideo1', function () {
 
 		it('classes OLSKCommonVideoListItemMobile', function () {
-			browser.assert.hasClass(KVCVitrineVideo1, 'OLSKCommonVideoListItemMobile');
+			browser.assert.hasClass('.KVCVitrineVideo1', 'OLSKCommonVideoListItemMobile');
 		});
 
 		it('sets src', function () {
