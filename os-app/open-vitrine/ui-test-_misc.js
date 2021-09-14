@@ -93,7 +93,7 @@ describe('KVCVitrine_Misc', function () {
 	describe('KVCVitrineGlossaryPublicRefLink', function test_KVCVitrineGlossaryPublicRefLink () {
 
 		it('sets href', function () {
-			browser.assert.attribute(KVCVitrineGlossaryPublicRefLink, 'href', process.env.KVC_VITRINE_REF_URL);
+			browser.assert.attribute(KVCVitrineGlossaryPublicRefLink, 'href', process.env.KVC_VITRINE_PUBLIC_REF_URL);
 		});
 
 	});
