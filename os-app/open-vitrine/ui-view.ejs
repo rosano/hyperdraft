@@ -37,7 +37,25 @@ locals.OLSKPageAssets = [
 <h1 class="KVCVitrineDeeperHeading"><%= OLSKLocalized('OLSKWordingDeeperHeading') %></h1>
 
 <dl class="KVCVitrineGlossary OLSKDecorGlossary">
-	<%- include('../../node_modules/ROCOGlossary/main.ejs') %>
+	<h2 class="KVCVitrineGlossaryWildHeading"><%= OLSKLocalized('KVCVitrineGlossaryWildHeadingText') %></h2>
+
+	<dt><a class="KVCVitrineGlossaryRefLink" href="<%= process.env.KVC_VITRINE_REF_URL %>"><%= OLSKLocalized('KVCVitrineGlossaryRefLinkText') %></a></dt>
+	<dd class="KVCVitrineGlossaryRefBlurb"><%= OLSKLocalized('KVCVitrineGlossaryRefBlurbText') %></dd>
+	
+	<dt><a class="KVCVitrineGlossaryGardensLink" href="<%= process.env.KVC_VITRINE_GARDENS_URL %>"><%= OLSKLocalized('KVCVitrineGlossaryGardensLinkText') %></a></dt>
+	<dd class="KVCVitrineGlossaryGardensBlurb"><%= OLSKLocalized('KVCVitrineGlossaryGardensBlurbText') %></dd>
+
+	<h2 class="KVCVitrineGlossaryCompareHeading"><%= OLSKLocalized('KVCVitrineGlossaryCompareHeadingText') %></h2>
+	
+	<ul>
+		<li>
+			<a class="KVCVitrineGlossaryCompareSimplenoteLink" href="<%= OLSKCanonical('KVCCompareSimplenoteRoute') %>"><%= OLSKLocalized('KVCVitrineGlossaryCompareSimplenoteLinkText') %></a>
+		</li>
+	</ul>
+	
+	<%- include('../../node_modules/ROCOGlossary/main.ejs', {
+		ROCOGlossaryHeadingEnabled: true
+	}) %>
 </dl>
 
 <h1 class="KVCVitrineVideoHeading"><%= OLSKLocalized('OLSKWordingVideo') %></h1>

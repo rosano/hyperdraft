@@ -10,15 +10,6 @@ Inspired by modeless and keyboard-centric [Notational Velocity](http://notationa
 
 Use it for ideas, todo lists, brainstorming, recipes, reading notes, journaling, or anything involving writing.
 
-<dl class="OLSKDecorGlossary">
-	<dt><a href="https://rosano.hmm.garden">My public notes</a></dt>
-	<dd>A space to write, collect, revise, and share.</dd>
-	<dt><a href="https://rosano.hmm.garden/01f04ph0mzahzyyd2grqa7nh9c">Gardens made with Hyperdraft</a></dt>
-	<dd>From friends and strangers.</dd>
-	<hr />
-	<dt><a href="KVCCompareSimplenoteRoute">Hyperdraft vs. Simplenote</a></dt>
-</dl>
-
 # Item catalog
 
 This is the first and only screen of the app.

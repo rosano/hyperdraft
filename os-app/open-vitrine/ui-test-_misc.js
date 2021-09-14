@@ -66,6 +66,22 @@ describe('KVCVitrine_Misc', function () {
 		
 	});
 
+	describe('KVCVitrineGlossaryRefLink', function test_KVCVitrineGlossaryRefLink () {
+
+		it('sets href', function () {
+			browser.assert.attribute(KVCVitrineGlossaryRefLink, 'href', process.env.KVC_VITRINE_REF_URL);
+		});
+
+	});
+
+	describe('KVCVitrineGlossaryGardensLink', function test_KVCVitrineGlossaryGardensLink () {
+
+		it('sets href', function () {
+			browser.assert.attribute(KVCVitrineGlossaryGardensLink, 'href', process.env.KVC_VITRINE_GARDENS_URL);
+		});
+
+	});
+
 	describe('KVCVitrineVideo1', function () {
 
 		it('classes OLSKCommonVideoListItemMobile', function () {

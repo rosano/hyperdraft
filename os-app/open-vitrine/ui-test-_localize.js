@@ -34,6 +34,34 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 			browser.assert.text(KVCVitrineDeeperHeading, uLocalized('OLSKWordingDeeperHeading'));
 		});
 
+		it('localizes KVCVitrineGlossaryWildHeading', function () {
+			browser.assert.text(KVCVitrineGlossaryWildHeading, uLocalized('KVCVitrineGlossaryWildHeadingText'));
+		});
+
+		it('localizes KVCVitrineGlossaryRefLink', function () {
+			browser.assert.text(KVCVitrineGlossaryRefLink, uLocalized('KVCVitrineGlossaryRefLinkText'));
+		});
+
+		it('localizes KVCVitrineGlossaryRefBlurb', function () {
+			browser.assert.text(KVCVitrineGlossaryRefBlurb, uLocalized('KVCVitrineGlossaryRefBlurbText'));
+		});
+
+		it('localizes KVCVitrineGlossaryGardensLink', function () {
+			browser.assert.text(KVCVitrineGlossaryGardensLink, uLocalized('KVCVitrineGlossaryGardensLinkText'));
+		});
+
+		it('localizes KVCVitrineGlossaryGardensBlurb', function () {
+			browser.assert.text(KVCVitrineGlossaryGardensBlurb, uLocalized('KVCVitrineGlossaryGardensBlurbText'));
+		});
+
+		it('localizes KVCVitrineGlossaryCompareHeading', function () {
+			browser.assert.text(KVCVitrineGlossaryCompareHeading, uLocalized('KVCVitrineGlossaryCompareHeadingText'));
+		});
+
+		it('localizes KVCVitrineGlossaryCompareSimplenoteLink', function () {
+			browser.assert.text(KVCVitrineGlossaryCompareSimplenoteLink, uLocalized('KVCVitrineGlossaryCompareSimplenoteLinkText'));
+		});
+
 		it('localizes KVCVitrineVideoHeading', function () {
 			browser.assert.text(KVCVitrineVideoHeading, uLocalized('OLSKWordingVideo'));
 		});
@@ -71,6 +99,15 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 			it('localizes OLSKLandingActionHref', function () {
 				browser.assert.attribute('.OLSKLandingAction', 'href', OLSKTestingCanonical(require('../open-write/controller.js').OLSKControllerRoutes().shift(), {
 					OLSKRoutingLanguage,
+				}));
+			});
+		
+		});
+
+		context('KVCVitrineGlossaryCompareSimplenoteLink', function test_KVCVitrineGlossaryCompareSimplenoteLink () {
+
+			it('localizes href', function () {
+				browser.assert.attribute(KVCVitrineGlossaryCompareSimplenoteLink, 'href', OLSKTestingCanonical(require('../open-compare-simplenote/controller.js').OLSKControllerRoutes().shift(), {
 				}));
 			});
 		

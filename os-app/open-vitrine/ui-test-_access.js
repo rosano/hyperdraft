@@ -9,6 +9,13 @@ Object.entries({
 
 	KVCVitrineDeeperHeading: '.KVCVitrineDeeperHeading',
 	KVCVitrineGlossary: '.KVCVitrineGlossary',
+	KVCVitrineGlossaryWildHeading: '.KVCVitrineGlossaryWildHeading',
+	KVCVitrineGlossaryRefLink: '.KVCVitrineGlossaryRefLink',
+	KVCVitrineGlossaryRefBlurb: '.KVCVitrineGlossaryRefBlurb',
+	KVCVitrineGlossaryGardensLink: '.KVCVitrineGlossaryGardensLink',
+	KVCVitrineGlossaryGardensBlurb: '.KVCVitrineGlossaryGardensBlurb',
+	KVCVitrineGlossaryCompareHeading: '.KVCVitrineGlossaryCompareHeading',
+	KVCVitrineGlossaryCompareSimplenoteLink: '.KVCVitrineGlossaryCompareSimplenoteLink',
 
 	KVCVitrineVideoHeading: '.KVCVitrineVideoHeading',
 	KVCVitrineVideo1: '.OLSKCommonVideoList .OLSKCommonVideoListItem.KVCVitrineVideo1 iframe',
@@ -66,8 +73,36 @@ describe('KVCVitrine_Access', function () {
 		browser.assert.elements(KVCVitrineGlossary, 1);
 	});
 
+	it('shows KVCVitrineGlossaryWildHeading', function () {
+		browser.assert.elements(KVCVitrineGlossaryWildHeading, 1);
+	});
+
+	it('shows KVCVitrineGlossaryRefLink', function () {
+		browser.assert.elements(KVCVitrineGlossaryRefLink, 1);
+	});
+
+	it('shows KVCVitrineGlossaryRefBlurb', function () {
+		browser.assert.elements(KVCVitrineGlossaryRefBlurb, 1);
+	});
+
+	it('shows KVCVitrineGlossaryGardensLink', function () {
+		browser.assert.elements(KVCVitrineGlossaryGardensLink, 1);
+	});
+
+	it('shows KVCVitrineGlossaryGardensBlurb', function () {
+		browser.assert.elements(KVCVitrineGlossaryGardensBlurb, 1);
+	});
+
+	it('shows KVCVitrineGlossaryCompareSimplenoteLink', function () {
+		browser.assert.elements(KVCVitrineGlossaryCompareSimplenoteLink, 1);
+	});
+
 	it('shows ROCOGlossary', function () {
 		browser.assert.elements('.ROCOGlossary', 1);
+	});
+
+	it('shows ROCOGlossaryHeading', function () {
+		browser.assert.elements('.ROCOGlossaryHeading', 1);
 	});
 
 	it('shows KVCVitrineVideoHeading', function () {
