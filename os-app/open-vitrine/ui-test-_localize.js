@@ -34,6 +34,22 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 			browser.assert.text(KVCVitrineDeeperHeading, uLocalized('OLSKWordingDeeperHeading'));
 		});
 
+		it('localizes KVCVitrineGlossaryWritingHeading', function () {
+			browser.assert.text(KVCVitrineGlossaryWritingHeading, uLocalized('KVCVitrineGlossaryWritingHeadingText'));
+		});
+
+		it('localizes KVCVitrineGlossaryWritingAnswerLink', function () {
+			browser.assert.text(KVCVitrineGlossaryWritingAnswerLink, uLocalized('KVCVitrineGlossaryWritingAnswerLinkText'));
+		});
+
+		it('localizes KVCVitrineGlossaryWritingListsLink', function () {
+			browser.assert.text(KVCVitrineGlossaryWritingListsLink, uLocalized('KVCVitrineGlossaryWritingListsLinkText'));
+		});
+
+		it('localizes KVCVitrineGlossaryWritingDiscussionLink', function () {
+			browser.assert.text(KVCVitrineGlossaryWritingDiscussionLink, uLocalized('KVCVitrineGlossaryWritingDiscussionLinkText'));
+		});
+
 		it('localizes KVCVitrineGlossaryWildHeading', function () {
 			browser.assert.text(KVCVitrineGlossaryWildHeading, uLocalized('KVCVitrineGlossaryWildHeadingText'));
 		});

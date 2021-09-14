@@ -37,6 +37,20 @@ locals.OLSKPageAssets = [
 <h1 class="KVCVitrineDeeperHeading"><%= OLSKLocalized('OLSKWordingDeeperHeading') %></h1>
 
 <dl class="KVCVitrineGlossary OLSKDecorGlossary">
+	<h2 class="KVCVitrineGlossaryWritingHeading"><%= OLSKLocalized('KVCVitrineGlossaryWritingHeadingText') %></h2>
+	
+	<ul>
+		<li>
+			<a class="KVCVitrineGlossaryWritingAnswerLink" href="<%= process.env.KVC_VITRINE_WRITING_ANSWER_URL %>"><%= OLSKLocalized('KVCVitrineGlossaryWritingAnswerLinkText') %></a>
+		</li>
+		<li>
+			<a class="KVCVitrineGlossaryWritingListsLink" href="<%= process.env.KVC_VITRINE_WRITING_LISTS_URL %>"><%= OLSKLocalized('KVCVitrineGlossaryWritingListsLinkText') %></a>
+		</li>
+		<li>
+			<a class="KVCVitrineGlossaryWritingDiscussionLink" href="<%= process.env.KVC_VITRINE_WRITING_DISCUSSION_URL %>"><%= OLSKLocalized('KVCVitrineGlossaryWritingDiscussionLinkText') %></a>
+		</li>
+	</ul>
+
 	<h2 class="KVCVitrineGlossaryWildHeading"><%= OLSKLocalized('KVCVitrineGlossaryWildHeadingText') %></h2>
 
 	<dt><a class="KVCVitrineGlossaryRefLink" href="<%= process.env.KVC_VITRINE_REF_URL %>"><%= OLSKLocalized('KVCVitrineGlossaryRefLinkText') %></a></dt>

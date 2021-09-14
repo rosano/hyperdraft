@@ -66,6 +66,30 @@ describe('KVCVitrine_Misc', function () {
 		
 	});
 
+	describe('KVCVitrineGlossaryWritingAnswerLink', function test_KVCVitrineGlossaryWritingAnswerLink () {
+
+		it('sets href', function () {
+			browser.assert.attribute(KVCVitrineGlossaryWritingAnswerLink, 'href', process.env.KVC_VITRINE_WRITING_ANSWER_URL);
+		});
+
+	});
+
+	describe('KVCVitrineGlossaryWritingListsLink', function test_KVCVitrineGlossaryWritingListsLink () {
+
+		it('sets href', function () {
+			browser.assert.attribute(KVCVitrineGlossaryWritingListsLink, 'href', process.env.KVC_VITRINE_WRITING_LISTS_URL);
+		});
+
+	});
+
+	describe('KVCVitrineGlossaryWritingDiscussionLink', function test_KVCVitrineGlossaryWritingDiscussionLink () {
+
+		it('sets href', function () {
+			browser.assert.attribute(KVCVitrineGlossaryWritingDiscussionLink, 'href', process.env.KVC_VITRINE_WRITING_DISCUSSION_URL);
+		});
+
+	});
+
 	describe('KVCVitrineGlossaryRefLink', function test_KVCVitrineGlossaryRefLink () {
 
 		it('sets href', function () {

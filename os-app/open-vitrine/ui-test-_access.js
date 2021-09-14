@@ -9,6 +9,10 @@ Object.entries({
 
 	KVCVitrineDeeperHeading: '.KVCVitrineDeeperHeading',
 	KVCVitrineGlossary: '.KVCVitrineGlossary',
+	KVCVitrineGlossaryWritingHeading: '.KVCVitrineGlossaryWritingHeading',
+	KVCVitrineGlossaryWritingAnswerLink: '.KVCVitrineGlossaryWritingAnswerLink',
+	KVCVitrineGlossaryWritingListsLink: '.KVCVitrineGlossaryWritingListsLink',
+	KVCVitrineGlossaryWritingDiscussionLink: '.KVCVitrineGlossaryWritingDiscussionLink',
 	KVCVitrineGlossaryWildHeading: '.KVCVitrineGlossaryWildHeading',
 	KVCVitrineGlossaryRefLink: '.KVCVitrineGlossaryRefLink',
 	KVCVitrineGlossaryRefBlurb: '.KVCVitrineGlossaryRefBlurb',
@@ -71,6 +75,22 @@ describe('KVCVitrine_Access', function () {
 
 	it('shows KVCVitrineGlossary', function () {
 		browser.assert.elements(KVCVitrineGlossary, 1);
+	});
+
+	it('shows KVCVitrineGlossaryWritingHeading', function () {
+		browser.assert.elements(KVCVitrineGlossaryWritingHeading, 1);
+	});
+
+	it('shows KVCVitrineGlossaryWritingAnswerLink', function () {
+		browser.assert.elements(KVCVitrineGlossaryWritingAnswerLink, 1);
+	});
+
+	it('shows KVCVitrineGlossaryWritingListsLink', function () {
+		browser.assert.elements(KVCVitrineGlossaryWritingListsLink, 1);
+	});
+
+	it('shows KVCVitrineGlossaryWritingDiscussionLink', function () {
+		browser.assert.elements(KVCVitrineGlossaryWritingDiscussionLink, 1);
 	});
 
 	it('shows KVCVitrineGlossaryWildHeading', function () {

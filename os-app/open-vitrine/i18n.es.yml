@@ -1,6 +1,10 @@
 KVCVitrineTitle: Hyperdraft
 KVCVitrineDescription: Transformar tus notas de texto en un sitio web.
 OLSKLandingBlurbText: Una sencilla aplicación para escribir y publicar que está siempre contigo.
+KVCVitrineGlossaryWritingHeadingText: La escritura
+KVCVitrineGlossaryWritingAnswerLinkText: "La escritura crea un espacio para 'la respuesta llegar'"
+KVCVitrineGlossaryWritingListsLinkText: Las listas no son síntesis
+KVCVitrineGlossaryWritingDiscussionLinkText: La discusión es efímera
 KVCVitrineGlossaryWildHeadingText: Abierto al público
 KVCVitrineGlossaryRefLinkText: Mis notas públicas
 KVCVitrineGlossaryRefBlurbText: Un espacio para escribir, coleccionar, revisar y compartir.

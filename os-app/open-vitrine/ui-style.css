@@ -23,3 +23,7 @@ body {
 	list-style: none;
 	font-weight: bold;
 }
+
+.OLSKDecorGlossary ul li {
+	margin: 10px 0;
+}
