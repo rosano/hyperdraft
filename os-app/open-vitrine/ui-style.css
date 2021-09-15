@@ -17,6 +17,10 @@ body {
 	margin: unset;
 }
 
+.OLSKDecorGlossary h2 {
+	margin-bottom: 6px;
+}
+
 .OLSKDecorGlossary ul {
 	padding: 0;
 
@@ -26,4 +30,12 @@ body {
 
 .OLSKDecorGlossary ul li {
 	margin: 10px 0;
+}
+
+.OLSKDecorGlossary a {
+	font-weight: normal;
+}
+
+.OLSKDecorGlossary dd {
+	margin: 1px 0 15px 0;
 }
