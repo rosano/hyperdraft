@@ -6,7 +6,7 @@ KVCCompareSimplenoteTableHeadingFeatureText: Feature
 KVCCompareSimplenoteFeatureList:
   KVCCompareSimplenoteFeaturePlaintext: plaintext editor
   KVCCompareSimplenoteFeatureFirstLink: first line is the title
-  KVCCompareSimplenoteFeatureMarkdown: markdown preview
+  KVCCompareSimplenoteFeatureMarkdown: markdown support
   KVCCompareSimplenoteFeatureSync: sync across multiple devices
   KVCCompareSimplenoteFeatureOpenSource: open-source
   KVCCompareSimplenoteFeatureOffline: works offline
