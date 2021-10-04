@@ -22,7 +22,7 @@
     "OLSKPithApp": "olsk/OLSKPithApp",
     "OLSKCatalog": "olsk/OLSKCatalog",
     "marked": "latest",
-    "escape-string-regexp": "latest",
+    "escape-string-regexp": "4.x",
     "OLSKVersion": "olsk/OLSKVersion",
     "OLSKLocalStorage": "olsk/OLSKLocalStorage",
     "jszip": "latest",
