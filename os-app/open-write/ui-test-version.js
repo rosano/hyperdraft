@@ -1,6 +1,6 @@
 const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
-describe('KVCWrite_Version', function () {
+describe.skip('KVCWrite_Version', function () {
 
 	before(function() {
 		return browser.OLSKVisit(kDefaultRoute);
