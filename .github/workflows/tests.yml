@@ -14,4 +14,4 @@ jobs:
     - name: Setup
       run: npm run setup
     - name: Tests
-      run: npm run test:ci
+      run: npm run test --ci && npm run test ui --ci
