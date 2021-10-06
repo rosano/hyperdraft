@@ -1,4 +1,4 @@
-const kDefaultRoutePath = require('./controller.js').OLSKControllerRoutes().shift().OLSKRoutePath;
+const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
 Object.entries({
 	KVCCompareSimplenote: '.KVCCompareSimplenote',
@@ -28,7 +28,7 @@ Object.entries({
 describe('KVCCompareSimplenote_Access', function () {
 
 	before(function() {
-		return browser.visit(kDefaultRoutePath);
+		return browser.OLSKVisit(kDefaultRoute);
 	});
 	
 	it('shows KVCCompareSimplenote', function() {

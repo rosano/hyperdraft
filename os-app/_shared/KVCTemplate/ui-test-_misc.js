@@ -1,4 +1,4 @@
-const kDefaultRoutePath = require('./controller.js').OLSKControllerRoutes().shift().OLSKRoutePath;
+const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
 const mod = require('./main.js').default;
 
@@ -9,7 +9,7 @@ const uTokenTag = function (inputData) {
 describe('KVCTemplate_Misc', function () {
 
 	before(function() {
-		return browser.visit(kDefaultRoutePath);
+		return browser.OLSKVisit(kDefaultRoute);
 	});
 
 	describe('KVCTemplateHeadTitle', function test_KVCTemplateHeadTitle() {

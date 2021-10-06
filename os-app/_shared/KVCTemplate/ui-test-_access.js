@@ -1,4 +1,4 @@
-const kDefaultRoutePath = require('./controller.js').OLSKControllerRoutes().shift().OLSKRoutePath;
+const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
 Object.entries({
 	KVCTemplate: 'html',
@@ -24,7 +24,7 @@ Object.entries({
 describe('KVCTemplate_Access', function () {
 
 	before(function() {
-		return browser.visit(kDefaultRoutePath);
+		return browser.OLSKVisit(kDefaultRoute);
 	});
 	
 	it('shows KVCTemplate', function() {
