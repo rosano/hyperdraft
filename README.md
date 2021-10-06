@@ -49,7 +49,7 @@ See [Testing logic and interfaces](https://rosano.hmm.garden/01f7v3hk3txz5d0v9ms
 ### Run logic tests
 
 ```
-npm test 
+npm test
 ```
 
 ### Run interface tests
