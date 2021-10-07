@@ -13,5 +13,7 @@ jobs:
         node-version: '14.x'
     - name: Setup
       run: npm run setup
-    - name: Tests
+    - name: Run Logic Tests
       run: npm run test:ci
+    - name: Run Interface Tests
+      run: npx start-server-and-test start 3000 'olsk-spec-ui --ci'
