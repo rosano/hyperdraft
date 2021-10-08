@@ -16,4 +16,4 @@ jobs:
     - name: Run Logic Tests
       run: npm run test:ci
     - name: Run Interface Tests
-      run: npm run build && npx start-server-and-test start 3000 'olsk-spec-ui --ci'
+      run: npm run build --ci && npx start-server-and-test start 3000 'olsk-spec-ui --ci'
