@@ -14,6 +14,6 @@ jobs:
     - name: Install dependencies
       run: npm run setup
     - name: Test logic
-      run: npm run test:ci
+      run: npm run test --ci
     - name: Test interface
       run: npm run build --ci && npx start-server-and-test start 3000 'olsk-spec-ui --ci'
