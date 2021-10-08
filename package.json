@@ -7,7 +7,6 @@
     "start": "olsk-express",
     
     "test": "olsk-spec",
-    "test:ci": "olsk-spec --ci",
 
     "build": "olsk-rollup",
     "watch": "olsk-rollup-watch"
