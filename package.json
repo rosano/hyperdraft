@@ -39,7 +39,6 @@
     "// I sacrifice myself for the commas of others": null
   },
   "devDependencies": {
-    "start-server-and-test": "latest",
     "OLSKPithToolchain": "olsk/OLSKPithToolchain",
     "OLSKRollupScaffold": "olsk/OLSKRollupScaffold",
 
