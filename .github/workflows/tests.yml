@@ -7,13 +7,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Use Node.js
+    - name: Configure Node.js
       uses: actions/setup-node@v1
       with:
         node-version: '14.x'
-    - name: Setup
+    - name: Install dependencies
       run: npm run setup
-    - name: Run Logic Tests
+    - name: Test logic
       run: npm run test:ci
-    - name: Run Interface Tests
+    - name: Test interface
       run: npm run build --ci && npx start-server-and-test start 3000 'olsk-spec-ui --ci'
