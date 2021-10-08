@@ -110,7 +110,7 @@ After setting up a custom domain, designate any note as the home page with the `
 
 *AccessKey* refers to a one or more shortcut keys followed by a single character. Usually it's `Alt` on Windows or `Control+Alt` on macOS, but it changes [based on your browser and operating system](https://www.w3schools.com/tags/att_global_accesskey.asp#table2).
 
-*Launcher* refers to the app's command runner: press `Alt+Enter`, type the command, then press `Enter` to run.
+*Launcher* refers to the app's command runner: press `Alt+Space`, type the command, then press `Enter` to run.
 
 </div>
 
@@ -149,7 +149,7 @@ After setting up a custom domain, designate any note as the home page with the `
 | `OLSKRemoteStorageLauncherItemOpenLoginLinkText` | Launcher |
 | `OLSKServiceWorkerLauncherItemReloadText` | Launcher |
 | `OLSKServiceWorkerLauncherItemDebugForceUpdateText` | Launcher |
-| Launcher | `Alt+Enter` |
+| Launcher | `Alt+Space` |
 
 | Global (import/export) ||
 :--- | ---
