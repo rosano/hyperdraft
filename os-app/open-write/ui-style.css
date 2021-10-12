@@ -38,6 +38,6 @@
 	opacity: 0;
 }
 
-.OLSKBanner {
+:global(.OLSKBanner) {
 	display: none;
 }
