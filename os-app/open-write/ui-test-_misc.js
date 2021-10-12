@@ -291,6 +291,10 @@ describe('KVCWrite_Misc', function () {
 		});
 
 		before(function () {
+			return browser.pressButton('.KVCWriteDetailToolbarPublishButton');
+		});
+
+		before(function () {
 			return browser.OLSKLauncherRun('KVCWriteDetailLauncherItemSetAsRootPage');
 		});
 

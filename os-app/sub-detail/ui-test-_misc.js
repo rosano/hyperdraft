@@ -616,7 +616,7 @@ describe('KVCWriteDetail_Misc', function () {
 
 	});
 
-	describe('KVCWriteDetailLauncherItemOpenLink', function test_KVCWriteDetailLauncherItemOpenLink() {
+	describe.skip('KVCWriteDetailLauncherItemOpenLink', function test_KVCWriteDetailLauncherItemOpenLink() {
 
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
@@ -633,13 +633,17 @@ describe('KVCWriteDetail_Misc', function () {
 			return browser.OLSKLauncherRun('KVCWriteDetailLauncherItemOpenLink');
 		});
 
-		it.skip('opens link', function () {});
+		it('opens link', function () {});
 
 	});
 
 	describe('KVCWriteDetailLauncherItemSetAsRootPage', function test_KVCWriteDetailLauncherItemSetAsRootPage() {
 
-		const item = StubNoteObjectValid();
+		const item = StubNoteObjectValid({
+			KVCNoteIsPublic: true,
+			KVCNotePublishDate: new Date(),
+			KVCNotePublicID: Math.random().toString(),
+		});
 		
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
