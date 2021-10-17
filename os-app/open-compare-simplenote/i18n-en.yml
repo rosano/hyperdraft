@@ -12,7 +12,7 @@ KVCCompareSimplenoteFeatureList:
   KVCCompareSimplenoteFeatureOffline: works offline
   KVCCompareSimplenoteFeatureMobile: works on mobile
   KVCCompareSimplenoteFeatureShortcuts: keyboard shortcuts
-  KVCCompareSimplenoteFeatureClick: click links between notes
+  KVCCompareSimplenoteFeatureClick: click links to go between notes
   KVCCompareSimplenoteFeaturePublish: publish notes to the Internet
   KVCCompareSimplenoteFeatureCollaborate: collaborate with other people
   KVCCompareSimplenoteFeatureHomepage: set homepage
