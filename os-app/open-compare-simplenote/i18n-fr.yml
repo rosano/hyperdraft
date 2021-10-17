@@ -24,7 +24,7 @@ KVCCompareSimplenoteFeatureList:
   KVCCompareSimplenoteFeatureZeroData: être propriétaire de vos données
 KVCCompareSimplenoteFeatureListCaption:
   KVCCompareSimplenoteFeatureShortcuts:
-    - 'raccourcis clavier de sublime text, commandes du lanceur, changer rapidement entre la liste et la note actuelle'
+    - 'raccourcis clavier de Sublime Text, commandes du lanceur, changer rapidement entre la liste et la note actuelle'
     - raccourcis de base
   KVCCompareSimplenoteFeatureHomepage:
     - faire un siteweb à partir de vos notes
