@@ -72,9 +72,9 @@ npm test ui match='/(detail|vitrine)/'
 
 ## ❤️
 
-If you’re enjoying this, consider contributing to my Open Collective. Virtually everything I create is public, accessible for free, and open-source. Your support helps me keep adding to the commons and making it available for everyone.
+Help me keep creating projects that are public, accessible for free, and open-source.
 
-<a href="https://opencollective.com/rosano"><img alt="Contribute" src="http://static.rosano.ca/_shared/_RCSContributeButton.svg" /></a>
+<a href="https://rosano.ca/back"><img alt="Become a backer" src="https://static.rosano.ca/_shared/_RCSBackButton.svg" /></a>
 
 ## License
 
