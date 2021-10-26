@@ -3,7 +3,7 @@ name: Test logic and interface
 on: [push, pull_request]
 
 jobs:
-  test:
+  test-logic-and-interface:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
