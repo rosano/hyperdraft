@@ -190,6 +190,6 @@ This web app can be 'installed' and used as if it were a native mobile app (with
 
 [remoteStorage](https://remotestorage.io) and [Fission](https://fission.codes) are open protocols for synchronizing data between multiple devices. Both take the level of control and flexibility of something like email and bring it to your personal data. You could think of it as a USB key for your documents that you can plug into websites to work on your stuff.
 
-You can get a remoteStorage account for free from [5apps](https://5apps.com/storage/) or [host your own](https://wiki.remotestorage.io/Servers).
+You can get a remoteStorage account for free from [5apps](https://5apps.com/storage/) or [host your own](https://remotestorage.io/servers).
 
 You can get a Fission account for free from [Fission Auth](https://auth.fission.codes) or [setup your own server](https://github.com/fission/fission).
