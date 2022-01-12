@@ -157,10 +157,6 @@ describe('KVCVitrine_Access', function () {
 		browser.assert.elements(KVCVitrineSupportBlurb, 1);
 	});
 
-	it('shows ROCOEphemerataLink', function () {
-		browser.assert.elements('.ROCOEphemerataLink', 1);
-	});
-
 	it('shows SWARLink', function() {
 		browser.assert.elements('.SWARLink', 1);
 	});
