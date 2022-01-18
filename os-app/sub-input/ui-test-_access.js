@@ -5,7 +5,7 @@ Object.entries({
 	
 	KVCWriteInputFieldDebug: '.KVCWriteInputFieldDebug',
 }).map(function (e) {
-	return global[e.shift()]  = e.pop();
+	return global[e.shift()] = e.pop();
 });
 
 describe('KVCWriteInput_Access', function () {

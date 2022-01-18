@@ -14,7 +14,7 @@ Object.entries({
 	
 	KVCWriteTemplateModal: '.OLSKModalView .KVCWriteTemplate',
 }).map(function (e) {
-	return global[e.shift()]  = e.pop();
+	return global[e.shift()] = e.pop();
 });
 
 describe('KVCWrite_Access', function () {

@@ -7,7 +7,7 @@ Object.entries({
 	KVCWriteListItemTitle: '.KVCWriteListItemTitle',
 	KVCWriteListItemSnippet: '.KVCWriteListItemSnippet',
 }).map(function (e) {
-	return global[e.shift()]  = e.pop();
+	return global[e.shift()] = e.pop();
 });
 
 describe('KVCWriteListItem_Access', function () {

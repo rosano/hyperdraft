@@ -8,7 +8,7 @@ Object.entries({
 
 	KVCGuideContent: '.KVCGuideContent',
 }).map(function (e) {
-	return global[e.shift()]  = e.pop();
+	return global[e.shift()] = e.pop();
 });
 
 describe('KVCGuide_Access', function () {

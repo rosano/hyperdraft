@@ -22,7 +22,7 @@ Object.entries({
 	KVCCompareSimplenoteActionHeading: '.KVCCompareSimplenoteActionHeading',
 	KVCCompareSimplenoteActionButton: '.KVCCompareSimplenoteActionButton',
 }).map(function (e) {
-	return global[e.shift()]  = e.pop();
+	return global[e.shift()] = e.pop();
 });
 
 describe('KVCCompareSimplenote_Access', function () {

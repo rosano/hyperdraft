@@ -18,7 +18,7 @@ Object.entries({
 	KVCBacklinksLink: '.KVCBacklinksLink',
 	KVCBacklinksSnippet: '.KVCBacklinksSnippet',
 }).map(function (e) {
-	return global[e.shift()]  = e.pop();
+	return global[e.shift()] = e.pop();
 });
 
 describe('KVCTemplate_Access', function () {

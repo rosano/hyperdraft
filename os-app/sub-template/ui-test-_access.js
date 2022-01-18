@@ -6,7 +6,7 @@ Object.entries({
 	KVCWriteTemplateDataField: '.KVCWriteTemplateDataField',
 	KVCWriteTemplateUpdateButton: '.KVCWriteTemplateUpdateButton',
 }).map(function (e) {
-	return global[e.shift()]  = e.pop();
+	return global[e.shift()] = e.pop();
 });
 
 describe('KVCWriteTemplate_Access', function () {
