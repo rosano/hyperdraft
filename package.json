@@ -36,12 +36,12 @@
     "// tech-serviceworker": null,
     "OLSKServiceWorker": "olsk/OLSKServiceWorker",
 
-    "// I sacrifice myself for the commas of others": null
+    "//": "I sacrifice myself for the commas of others"
   },
   "devDependencies": {
     "OLSKPithToolchain": "olsk/OLSKPithToolchain",
     "OLSKRollupScaffold": "olsk/OLSKRollupScaffold",
 
-    "// I sacrifice myself for the commas of others": null
+    "//": "I sacrifice myself for the commas of others"
   }
 }
