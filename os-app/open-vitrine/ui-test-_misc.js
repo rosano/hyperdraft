@@ -98,6 +98,14 @@ describe('KVCVitrine_Misc', function () {
 
 	});
 
+	describe('KVCVitrineGlossaryWritingMagicLink', function test_KVCVitrineGlossaryWritingMagicLink () {
+
+		it('sets href', function () {
+			browser.assert.attribute(KVCVitrineGlossaryWritingMagicLink, 'href', process.env.KVC_VITRINE_GLOSSARY_WRITING_MAGIC_URL);
+		});
+
+	});
+
 	describe('KVCVitrineGlossaryPublicRefLink', function test_KVCVitrineGlossaryPublicRefLink () {
 
 		it('sets href', function () {

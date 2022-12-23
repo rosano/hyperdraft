@@ -54,6 +54,10 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 			browser.assert.text(KVCVitrineGlossaryWritingDiscussionLink, uLocalized('KVCVitrineGlossaryWritingDiscussionLinkText'));
 		});
 
+		it('localizes KVCVitrineGlossaryWritingMagicLink', function () {
+			browser.assert.text(KVCVitrineGlossaryWritingMagicLink, uLocalized('KVCVitrineGlossaryWritingMagicLinkText'));
+		});
+
 		it('localizes KVCVitrineGlossaryPublicHeading', function () {
 			browser.assert.text(KVCVitrineGlossaryPublicHeading, uLocalized('KVCVitrineGlossaryPublicHeadingText'));
 		});
