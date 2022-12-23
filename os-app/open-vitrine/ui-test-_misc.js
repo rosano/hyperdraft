@@ -66,6 +66,14 @@ describe('KVCVitrine_Misc', function () {
 		
 	});
 
+	describe('KVCVitrineGlossaryWritingUsingLink', function test_KVCVitrineGlossaryWritingUsingLink () {
+
+		it('sets href', function () {
+			browser.assert.attribute(KVCVitrineGlossaryWritingUsingLink, 'href', process.env.KVC_VITRINE_GLOSSARY_WRITING_USING_URL);
+		});
+
+	});
+
 	describe('KVCVitrineGlossaryWritingAnswerLink', function test_KVCVitrineGlossaryWritingAnswerLink () {
 
 		it('sets href', function () {

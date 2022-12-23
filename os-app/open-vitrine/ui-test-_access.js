@@ -10,6 +10,7 @@ Object.entries({
 	KVCVitrineDeeperHeading: '.KVCVitrineDeeperHeading',
 	KVCVitrineGlossary: '.KVCVitrineGlossary',
 	KVCVitrineGlossaryWritingHeading: '.KVCVitrineGlossaryWritingHeading',
+	KVCVitrineGlossaryWritingUsingLink: '.KVCVitrineGlossaryWritingUsingLink',
 	KVCVitrineGlossaryWritingAnswerLink: '.KVCVitrineGlossaryWritingAnswerLink',
 	KVCVitrineGlossaryWritingListsLink: '.KVCVitrineGlossaryWritingListsLink',
 	KVCVitrineGlossaryWritingDiscussionLink: '.KVCVitrineGlossaryWritingDiscussionLink',
@@ -79,6 +80,10 @@ describe('KVCVitrine_Access', function () {
 
 	it('shows KVCVitrineGlossaryWritingHeading', function () {
 		browser.assert.elements(KVCVitrineGlossaryWritingHeading, 1);
+	});
+
+	it('shows KVCVitrineGlossaryWritingUsingLink', function () {
+		browser.assert.elements(KVCVitrineGlossaryWritingUsingLink, 1);
 	});
 
 	it('shows KVCVitrineGlossaryWritingAnswerLink', function () {
