@@ -122,6 +122,14 @@ describe('KVCVitrine_Misc', function () {
 
 	});
 
+	describe('KVCVitrineGlossaryPublicDigitalLink', function test_KVCVitrineGlossaryPublicDigitalLink () {
+
+		it('sets href', function () {
+			browser.assert.attribute(KVCVitrineGlossaryPublicDigitalLink, 'href', process.env.KVC_VITRINE_GLOSSARY_PUBLIC_DIGITAL_URL);
+		});
+
+	});
+
 	describe('KVCVitrineVideo1', function () {
 
 		it('classes OLSKCommonVideoListItemMobile', function () {

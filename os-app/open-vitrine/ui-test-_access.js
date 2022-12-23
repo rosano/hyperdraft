@@ -20,6 +20,8 @@ Object.entries({
 	KVCVitrineGlossaryPublicRefBlurb: '.KVCVitrineGlossaryPublicRefBlurb',
 	KVCVitrineGlossaryPublicGardensLink: '.KVCVitrineGlossaryPublicGardensLink',
 	KVCVitrineGlossaryPublicGardensBlurb: '.KVCVitrineGlossaryPublicGardensBlurb',
+	KVCVitrineGlossaryPublicDigitalLink: '.KVCVitrineGlossaryPublicDigitalLink',
+	KVCVitrineGlossaryPublicDigitalBlurb: '.KVCVitrineGlossaryPublicDigitalBlurb',
 	KVCVitrineGlossaryCompareHeading: '.KVCVitrineGlossaryCompareHeading',
 	KVCVitrineGlossaryCompareSimplenoteLink: '.KVCVitrineGlossaryCompareSimplenoteLink',
 
@@ -121,6 +123,14 @@ describe('KVCVitrine_Access', function () {
 
 	it('shows KVCVitrineGlossaryPublicGardensBlurb', function () {
 		browser.assert.elements(KVCVitrineGlossaryPublicGardensBlurb, 1);
+	});
+
+	it('shows KVCVitrineGlossaryPublicDigitalLink', function () {
+		browser.assert.elements(KVCVitrineGlossaryPublicDigitalLink, 1);
+	});
+
+	it('shows KVCVitrineGlossaryPublicDigitalBlurb', function () {
+		browser.assert.elements(KVCVitrineGlossaryPublicDigitalBlurb, 1);
 	});
 
 	it('shows KVCVitrineGlossaryCompareSimplenoteLink', function () {

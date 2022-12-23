@@ -78,6 +78,14 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 			browser.assert.text(KVCVitrineGlossaryPublicGardensBlurb, uLocalized('KVCVitrineGlossaryPublicGardensBlurbText'));
 		});
 
+		it('localizes KVCVitrineGlossaryPublicDigitalLink', function () {
+			browser.assert.text(KVCVitrineGlossaryPublicDigitalLink, uLocalized('KVCVitrineGlossaryPublicDigitalLinkText'));
+		});
+
+		it('localizes KVCVitrineGlossaryPublicDigitalBlurb', function () {
+			browser.assert.text(KVCVitrineGlossaryPublicDigitalBlurb, uLocalized('KVCVitrineGlossaryPublicDigitalBlurbText'));
+		});
+
 		it('localizes KVCVitrineGlossaryCompareHeading', function () {
 			browser.assert.text(KVCVitrineGlossaryCompareHeading, uLocalized('KVCVitrineGlossaryCompareHeadingText'));
 		});
