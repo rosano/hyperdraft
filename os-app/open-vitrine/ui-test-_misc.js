@@ -130,7 +130,7 @@ describe('KVCVitrine_Misc', function () {
 
 	});
 
-	describe('KVCVitrineVideo1', function () {
+	describe('KVCVitrineVideo1', function test_KVCVitrineVideo () {
 
 		it('classes OLSKCommonVideoListItemMobile', function () {
 			browser.assert.hasClass('.KVCVitrineVideo1', 'OLSKCommonVideoListItemMobile');
@@ -140,16 +140,24 @@ describe('KVCVitrine_Misc', function () {
 			browser.assert.attribute(KVCVitrineVideo1, 'src', process.env.KVC_VITRINE_VIDEO_URL_1);
 		});
 
+		it('sets allow', function () {
+			browser.assert.attribute(KVCVitrineVideo1, 'allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+		});
+
 		it('sets allowfullscreen', function () {
 			browser.assert.attribute(KVCVitrineVideo1, 'allowfullscreen', '');
 		});
 
 	});
 
-	describe('KVCVitrineVideo2', function () {
+	describe('KVCVitrineVideo2', function test_KVCVitrineVideo () {
 
 		it('sets src', function () {
 			browser.assert.attribute(KVCVitrineVideo2, 'src', process.env.KVC_VITRINE_VIDEO_URL_2);
+		});
+
+		it('sets allow', function () {
+			browser.assert.attribute(KVCVitrineVideo1, 'allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
 		});
 
 		it('sets allowfullscreen', function () {
