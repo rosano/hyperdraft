@@ -12,7 +12,7 @@ const uBlockTag = function (param1, param2) {
 
 const uTemplateOptions = function (inputData = {}) {
 	return Object.assign({
-		_KVCOptionObject: StubNoteObjectValid(),
+		_KVCOptionObject: StubNoteObjectPublic(),
 	}, inputData);
 };
 
@@ -277,6 +277,22 @@ describe('KVCTemplateTokenDescription', function test_KVCTemplateTokenDescriptio
 
 });
 
+describe('KVCTemplateTokenPublishedTime', function test_KVCTemplateTokenPublishedTime() {
+
+	it('returns string', function() {
+		deepEqual(mod.KVCTemplateTokenPublishedTime(), 'PublishedTime');
+	});
+
+});
+
+describe('KVCTemplateTokenModifiedTime', function test_KVCTemplateTokenModifiedTime() {
+
+	it('returns string', function() {
+		deepEqual(mod.KVCTemplateTokenModifiedTime(), 'ModifiedTime');
+	});
+
+});
+
 describe('KVCTemplateRemappedLinks', function test_KVCTemplateRemappedLinks() {
 
 	it('throws if param1 not string', function () {
@@ -508,7 +524,7 @@ describe('KVCTemplateTokensMap', function test_KVCTemplateTokensMap() {
 		it('sets to KVCOptionRootURL', function () {
 			const KVCNotePublicID = Math.random().toString();
 			deepEqual(mod.KVCTemplateTokensMap('', uTemplateOptions({
-				_KVCOptionObject: StubNoteObjectValid({
+				_KVCOptionObject: StubNoteObjectPublic({
 					KVCNotePublicID,
 				}),
 			}))[uTokenTag('KVCTemplateTokenURL')], '/' + KVCNotePublicID);

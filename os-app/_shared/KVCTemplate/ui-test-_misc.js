@@ -68,6 +68,22 @@ describe('KVCTemplate_Misc', function () {
 
 	});
 
+	describe('KVCTemplateHeadMetaPublished', function test_KVCTemplateHeadMetaPublished() {
+
+		it('sets href', function () {
+			browser.assert.attribute(KVCTemplateHeadMetaPublished, 'content', uTokenTag('KVCTemplateTokenPublishedTime'));
+		});
+
+	});
+
+	describe('KVCTemplateHeadMetaModified', function test_KVCTemplateHeadMetaModified() {
+
+		it('sets href', function () {
+			browser.assert.attribute(KVCTemplateHeadMetaModified, 'content', uTokenTag('KVCTemplateTokenModifiedTime'));
+		});
+
+	});
+
 	describe('KVCTemplateBody', function test_KVCTemplateBody() {
 
 		it('classes OLSKDecor', function () {

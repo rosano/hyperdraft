@@ -83,6 +83,8 @@ const mod = {
 <link rel="stylesheet" type="text/css" href="${ mod.KVCTemplateNormalizeURL() }">
 <link rel="stylesheet" type="text/css" href="${ mod.KVCTemplateDecorURL() }">
 
+<meta property="article:published_time" content="{${ mod.KVCTemplateTokenPublishedTime() }}" />
+<meta property="article:modified_time" content="{${ mod.KVCTemplateTokenModifiedTime() }}" />
 </head>
 <body class="OLSKDecor OLSKDecorCapped OLSKDecorX">
 
@@ -171,6 +173,14 @@ const mod = {
 		return 'Description';
 	},
 
+	KVCTemplateTokenPublishedTime () {
+		return 'PublishedTime';
+	},
+
+	KVCTemplateTokenModifiedTime () {
+		return 'ModifiedTime';
+	},
+
 	KVCTemplateRemappedLinks (param1, param2) {
 		if (typeof param1 !== 'string') {
 			throw new Error('KVCErrorInputNotValid');
@@ -238,6 +248,8 @@ const mod = {
 			[mod.KVCTemplateTokenRootURL(), options.KVCOptionRootURL],
 			[mod.KVCTemplateTokenRootURLLegacy(), options.KVCOptionRootURL],
 			[mod.KVCTemplateTokenURL(), '/' + options._KVCOptionObject.KVCNotePublicID],
+			[mod.KVCTemplateTokenPublishedTime(), options._KVCOptionObject.KVCNotePublishDate.toJSON()],
+			[mod.KVCTemplateTokenModifiedTime(), options._KVCOptionObject.KVCNoteModificationDate.toJSON()],
 		].map(function (e) {
 			e[0] = `{${ e[0] }}`;
 
