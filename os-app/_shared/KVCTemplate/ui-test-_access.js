@@ -7,8 +7,9 @@ Object.entries({
 	KVCTemplateHeadMetaDescription: 'html head meta[name="description"]',
 	KVCTemplateHeadMetaContentType: 'html head meta[http-equiv="Content-Type"]',
 	KVCTemplateHeadMetaViewport: 'html head meta[name="viewport"]',
-	KVCTemplateHeadLinkNormalize: 'html head link:first-of-type',
-	KVCTemplateHeadLinkDecor: 'html head link:last-of-type',
+	KVCTemplateHeadLinkCanonical: 'html head link[rel="canonical"]',
+	KVCTemplateHeadLinkNormalize: 'html head link[rel="stylesheet"]:nth-of-type(2)',
+	KVCTemplateHeadLinkDecor: 'html head link[rel="stylesheet"]:nth-of-type(3)',
 	KVCTemplateBody: 'html body',
 	KVCRootLink: '.KVCRootLink',
 	KVCArticleTitle: '.KVCArticleTitle',
@@ -49,6 +50,10 @@ describe('KVCTemplate_Access', function () {
 
 	it('shows KVCTemplateHeadMetaViewport', function () {
 		browser.assert.elements(KVCTemplateHeadMetaViewport, 1);
+	});
+
+	it('shows KVCTemplateHeadLinkCanonical', function () {
+		browser.assert.elements(KVCTemplateHeadLinkCanonical, 1);
 	});
 
 	it('shows KVCTemplateHeadLinkNormalize', function () {

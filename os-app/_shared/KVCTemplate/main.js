@@ -78,6 +78,8 @@ const mod = {
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width" />
 
+<link rel="canonical" href="{${ mod.KVCTemplateTokenRootURL() }}/{${ mod.KVCTemplateTokenURL() }}">
+
 <link rel="stylesheet" type="text/css" href="${ mod.KVCTemplateNormalizeURL() }">
 <link rel="stylesheet" type="text/css" href="${ mod.KVCTemplateDecorURL() }">
 
