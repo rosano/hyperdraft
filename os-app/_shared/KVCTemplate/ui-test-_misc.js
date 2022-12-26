@@ -47,7 +47,7 @@ describe('KVCTemplate_Misc', function () {
 	describe('KVCTemplateHeadLinkCanonical', function test_KVCTemplateHeadLinkCanonical() {
 
 		it('sets value', function () {
-			browser.assert.attribute(KVCTemplateHeadLinkCanonical, 'href', uTokenTag('KVCTemplateTokenRootURL') + '/' + uTokenTag('KVCTemplateTokenURL'));
+			browser.assert.attribute(KVCTemplateHeadLinkCanonical, 'href', uTokenTag('KVCTemplateTokenRootURL') + uTokenTag('KVCTemplateTokenURL'));
 		});
 
 	});
