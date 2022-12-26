@@ -10,6 +10,12 @@ const uBlockTag = function (param1, param2) {
 	return `{block:${ mod[param1]() }}${ param2 }{/block:${ mod[param1]() }}`;
 };
 
+const uTemplateOptions = function (inputData = {}) {
+	return Object.assign({
+		_KVCOptionObject: StubNoteObjectValid(),
+	}, inputData);
+};
+
 describe('KVCTemplatePlaintextTitle', function test_KVCTemplatePlaintextTitle() {
 
 	it('throws if not string', function () {
@@ -432,14 +438,14 @@ describe('KVCTemplateTokensMap', function test_KVCTemplateTokensMap() {
 	});
 
 	it('returns object', function() {
-		deepEqual(typeof mod.KVCTemplateTokensMap('', {}), 'object');
+		deepEqual(typeof mod.KVCTemplateTokensMap('', uTemplateOptions()), 'object');
 	});
 
 	context('KVCTemplateTokenPostTitle', function () {
 		
 		it('sets to KVCTemplatePlaintextTitle', function () {
 			const item = 'alfa\nbravo';
-			deepEqual(mod.KVCTemplateTokensMap(item, {})[uTokenTag('KVCTemplateTokenPostTitle')], mod.KVCTemplatePlaintextTitle(item));
+			deepEqual(mod.KVCTemplateTokensMap(item, uTemplateOptions())[uTokenTag('KVCTemplateTokenPostTitle')], mod.KVCTemplatePlaintextTitle(item));
 		});
 	
 	});
@@ -448,7 +454,7 @@ describe('KVCTemplateTokensMap', function test_KVCTemplateTokensMap() {
 		
 		it('sets value', function () {
 			const item = 'alfa\nLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.';
-			deepEqual(mod.KVCTemplateTokensMap(item.split('\n').join('\n<div></div>'), {}, {
+			deepEqual(mod.KVCTemplateTokensMap(item.split('\n').join('\n<div></div>'), uTemplateOptions(), {
 				document: {
 					example: {
 						classList: {
@@ -472,7 +478,7 @@ describe('KVCTemplateTokensMap', function test_KVCTemplateTokensMap() {
 		
 		it('sets to KVCTemplateHTML', function () {
 			const item = 'alfa\n# bravo';
-			deepEqual(mod.KVCTemplateTokensMap(item, {})[uTokenTag('KVCTemplateTokenPostBody')], mod.KVCTemplateHTML(mod.KVCTemplatePlaintextBody(item)));
+			deepEqual(mod.KVCTemplateTokensMap(item, uTemplateOptions())[uTokenTag('KVCTemplateTokenPostBody')], mod.KVCTemplateHTML(mod.KVCTemplatePlaintextBody(item)));
 		});
 	
 	});
@@ -480,9 +486,9 @@ describe('KVCTemplateTokensMap', function test_KVCTemplateTokensMap() {
 	context('KVCTemplateTokenRootURL', function () {
 		
 		it('sets to KVCOptionRootURL', function () {
-			deepEqual(mod.KVCTemplateTokensMap('', {
+			deepEqual(mod.KVCTemplateTokensMap('', uTemplateOptions({
 				KVCOptionRootURL: 'alfa',
-			})[uTokenTag('KVCTemplateTokenRootURL')], 'alfa');
+			}))[uTokenTag('KVCTemplateTokenRootURL')], 'alfa');
 		});
 	
 	});
@@ -490,9 +496,9 @@ describe('KVCTemplateTokensMap', function test_KVCTemplateTokensMap() {
 	context('KVCTemplateTokenRootURLLegacy', function () {
 		
 		it('sets to KVCOptionRootURL', function () {
-			deepEqual(mod.KVCTemplateTokensMap('', {
+			deepEqual(mod.KVCTemplateTokensMap('', uTemplateOptions({
 				KVCOptionRootURL: 'alfa',
-			})[uTokenTag('KVCTemplateTokenRootURLLegacy')], 'alfa');
+			}))[uTokenTag('KVCTemplateTokenRootURLLegacy')], 'alfa');
 		});
 	
 	});
@@ -676,13 +682,13 @@ describe('KVCTemplateCollapseBlocks', function test_KVCTemplateCollapseBlocks() 
 
 describe('KVCView', function test_KVCView() {
 
-	const uOptions = function () {
-		return {
+	const uOptions = function (inputData = {}) {
+		return Object.assign({
 			KVCViewSource: '',
 			KVCViewPermalinkMap: {},
 			KVCViewTemplate: '',
-			KVCViewTemplateOptions: {},
-		};
+			KVCViewTemplateOptions: uTemplateOptions(inputData),
+		}, inputData);
 	};
 
 	it('throws if KVCViewSource not string', function () {
@@ -723,7 +729,7 @@ describe('KVCView', function test_KVCView() {
 	});
 
 	it('replaces KVCViewPermalinkMap', function() {
-		deepEqual(mod.KVCView(Object.assign(uOptions(), {
+		deepEqual(mod.KVCView(uOptions({
 			KVCViewSource: 'alfa\n[[bravo]]',
 			KVCViewPermalinkMap: {
 				bravo: 'charlie',
@@ -748,11 +754,11 @@ describe('KVCView', function test_KVCView() {
 		});
 		
 		it('replaces KVCTemplateTokenRootURL', function() {
-			deepEqual(mod.KVCView(Object.assign(uOptions(), {
+			deepEqual(mod.KVCView(uOptions({
 				KVCViewTemplate: uBlockTag('KVCTemplateTokenRootURL', uTokenTag('KVCTemplateTokenRootURL')),
-				KVCViewTemplateOptions: {
+				KVCViewTemplateOptions: uTemplateOptions({
 					KVCOptionRootURL: 'bravo',
-				},
+				}),
 			})), 'bravo');
 		});
 	
