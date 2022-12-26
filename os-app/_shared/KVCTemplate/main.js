@@ -235,6 +235,7 @@ const mod = {
 			[mod.KVCTemplateTokenPostBody(), mod.KVCTemplateHTML(mod.KVCTemplatePlaintextBody(body), options)],
 			[mod.KVCTemplateTokenRootURL(), options.KVCOptionRootURL],
 			[mod.KVCTemplateTokenRootURLLegacy(), options.KVCOptionRootURL],
+			[mod.KVCTemplateTokenURL(), '/' + options._KVCOptionObject.KVCNotePublicID],
 		].map(function (e) {
 			e[0] = `{${ e[0] }}`;
 

@@ -503,6 +503,19 @@ describe('KVCTemplateTokensMap', function test_KVCTemplateTokensMap() {
 	
 	});
 
+	context('KVCTemplateTokenURL', function () {
+		
+		it('sets to KVCOptionRootURL', function () {
+			const KVCNotePublicID = Math.random().toString();
+			deepEqual(mod.KVCTemplateTokensMap('', uTemplateOptions({
+				_KVCOptionObject: StubNoteObjectValid({
+					KVCNotePublicID,
+				}),
+			}))[uTokenTag('KVCTemplateTokenURL')], '/' + KVCNotePublicID);
+		});
+	
+	});
+
 });
 
 describe('KVCTemplateVisibleBlocks', function test_KVCTemplateVisibleBlocks() {
