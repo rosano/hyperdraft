@@ -110,19 +110,19 @@ describe('KVCWrite_Cloud', function () {
 			});
 
 			it('sets OLSKCloudErrorText', function () {
-				browser.assert.text('.OLSKCloudError', 'Error: ZDR_FAKE_CLOUD_ERROR');
+				browser.assert.text('.OLSKCloudError', 'ZDR_FAKE_CLOUD_ERROR');
 			});
 		
 		});
 
-		context('error', function () {
+		context('write error', function () {
 
 			before(function () {
-				return browser.OLSKLauncherRun('ZDRLauncherItemFakeDispatchError');
+				return browser.OLSKLauncherRun('ZDRLauncherItemFakeDispatchWriteError');
 			});
 
 			it('sets OLSKCloudErrorText', function () {
-				browser.assert.text('.OLSKCloudError', 'Error: ZDR_FAKE_CLOUD_ERROR');
+				browser.assert.text('.OLSKCloudError', 'ZDR_FAKE_WRITE_ERROR');
 			});
 		
 		});

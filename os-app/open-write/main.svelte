@@ -910,7 +910,13 @@ const mod = {
 	},
 
 	ZDRParamDispatchError (error) {
-		mod._ValueCloudErrorText = error.toString();
+		mod._ValueCloudErrorText = error.message;
+	},
+
+	ZDRParamDispatchWriteError (error) {
+		mod.ZDRParamDispatchError(error);
+
+		window.alert(error.message);
 	},
 
 	_ZDRParamDispatchInitialisationError () {
@@ -1057,6 +1063,7 @@ const mod = {
 				ZDRScopeIsPublic: true,
 			}],
 			ZDRParamDispatchError: mod.ZDRParamDispatchError,
+			ZDRParamDispatchWriteError: mod.ZDRParamDispatchWriteError,
 			_ZDRParamDispatchInitialisationError: mod._ZDRParamDispatchInitialisationError,
 			ZDRParamDispatchConnected: mod.ZDRParamDispatchConnected,
 			ZDRParamDispatchOnline: mod.ZDRParamDispatchOnline,
