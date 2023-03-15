@@ -914,9 +914,7 @@ const mod = {
 	},
 
 	ZDRParamDispatchWriteError (error) {
-		mod.ZDRParamDispatchError(error);
-
-		window.alert(error.message);
+		window.alert(mod._OLSKAppToolbarErrorText = error.message);
 	},
 
 	_ZDRParamDispatchInitialisationError () {
@@ -1300,6 +1298,7 @@ import OLSKUIAssets from 'OLSKUIAssets';
 		OLSKAppToolbarGuideURL={ window.OLSKCanonical('KVCGuideRoute') }
 		OLSKAppToolbarFundShowProgress={ mod._ValueOLSKFundProgress }
 		OLSKAppToolbarFundLimitText={ mod._ValueDocumentRemainder }
+		OLSKAppToolbarErrorText={ mod._OLSKAppToolbarErrorText }
 		OLSKAppToolbarCloudConnected={ !!mod._ValueCloudIdentity }
 		OLSKAppToolbarCloudOffline={ mod._ValueCloudIsOffline }
 		OLSKAppToolbarCloudError={ !!mod._ValueCloudErrorText }
