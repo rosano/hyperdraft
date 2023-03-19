@@ -89,7 +89,7 @@ By default, the public link may have a long format like
 
 > https://[ your provider's domain name ]/[ your user name ]/public/wikiavec/[ the note's public ID ]
 
-Using a custom domain name requires *hosting*, which means another site will fetch from the public link above and then show the content. You can use a paid service such as [Garden](https://hmm.garden) (no technical knowledge required) or [host it yourself](https://github.com/wikiavec/flowerpot).
+Using a custom domain name requires *hosting*, which means another site will fetch from the public link above and then show the content. You can use a paid service such as [Garden](https://hmm.garden) (no technical knowledge required) or [host it yourself](https://github.com/rosano/flowerpot).
 
 There are three steps to the configuring a custom domain:
 1. Run the `KVCWriteLauncherItemConfigureCustomDomainText` command. (See the [Shortcuts](#shortcuts) for more info)
