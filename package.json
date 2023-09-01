@@ -18,7 +18,7 @@
 
     "OLSKPithApp": "olsk/OLSKPithApp",
     "OLSKCatalog": "olsk/OLSKCatalog",
-    "marked": "latest",
+    "marked": "5.x",
     "escape-string-regexp": "4.x",
     "OLSKVersion": "olsk/OLSKVersion",
     "OLSKLocalStorage": "olsk/OLSKLocalStorage",

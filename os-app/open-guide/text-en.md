@@ -168,8 +168,6 @@ After setting up a custom domain, designate any note as the home page with the `
 | `KVCWriteLauncherItemConfigureCustomTemplateText` | Launcher |
 | `KVCWriteLauncherItemRemoveCustomTemplateText` | Launcher |
 | `OLSKRemoteStorageLauncherItemCopyLoginLinkText` | Launcher |
-| `OLSKFundLauncherItemEnterClueText` | Launcher |
-| `OLSKFundLauncherItemClearClueText` | Launcher |
 | `OLSKRemoteStorageLauncherItemDebugFlushDataText` | Launcher |
 
 # Add to Home screen on mobile and tablet devices
