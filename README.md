@@ -82,4 +82,4 @@ The code is released under a [Hippocratic License](https://firstdonoharm.dev), m
 
 ## Questions
 
-Feel free to reach out on [Mastodon](https://mastodon.online/@rosano) or [Twitter](https://twitter.com/rosano).
+Feel free to reach out on [Mastodon](https://rosano.ca/mastodon) or [Twitter](https://rosano.ca/twitter).
