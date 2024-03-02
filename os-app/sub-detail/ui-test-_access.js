@@ -131,6 +131,10 @@ describe('KVCWriteDetail_Access', function () {
 		return browser.assert.OLSKLauncherItems('KVCWriteDetailLauncherItemClone', 1);
 	});
 
+	it('shows KVCWriteDetailLauncherItemExport', function () {
+		return browser.assert.OLSKLauncherItems('KVCWriteDetailLauncherItemExport', 1);
+	});
+
 	it('hides KVCWriteDetailLauncherItemPublish', function () {
 		return browser.assert.OLSKLauncherItems('KVCWriteDetailLauncherItemPublish', 0);
 	});

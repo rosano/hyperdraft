@@ -569,6 +569,22 @@ describe('KVCWriteDetail_Misc', function () {
 
 	});
 
+	describe('KVCWriteDetailLauncherItemExport', function test_KVCWriteDetailLauncherItemExport() {
+		
+		before(function () {
+			browser.assert.text('#TestKVCWriteDetailDispatchExport', '0');
+		});
+		
+		before(function () {
+			return browser.OLSKLauncherRun('KVCWriteDetailLauncherItemExport');
+		});
+
+		it('sends KVCWriteDetailDispatchExport', function () {
+			browser.assert.text('#TestKVCWriteDetailDispatchExport', '1');
+		});
+
+	});
+
 	describe('KVCWriteDetailLauncherItemArchive', function test_KVCWriteDetailLauncherItemArchive() {
 		
 		before(function () {

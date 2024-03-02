@@ -9,6 +9,7 @@ KVCWriteDetailToolbarRetractButtonText: Retirar
 KVCWriteDetailToolbarDiscardButtonText: Descartar
 KVCWriteDetailLauncherItemShowLocalVersionsText: Mostrar versões locais
 KVCWriteDetailLauncherItemCloneText: Clonar
+KVCWriteDetailLauncherItemExportText: Exportar nota
 KVCWriteDetailLauncherItemDebugText: Debug nota
 KVCWriteDetailLauncherItemOpenPublicLinkText: Abrir link público
 KVCWriteDetailLauncherItemSetAsRootPageText: Definir como página inicial
