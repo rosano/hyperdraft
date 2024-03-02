@@ -147,6 +147,10 @@ describe('KVCWriteDetail_Access', function () {
 		return browser.assert.OLSKLauncherItems('KVCWriteDetailLauncherItemRetract', 0);
 	});
 
+	it('hides KVCWriteDetailLauncherItemDebug', function () {
+		return browser.assert.OLSKLauncherItems('KVCWriteDetailLauncherItemDebug', 0);
+	});
+
 	context('KVCWriteInputDispatchHeaderTokens', function() {
 
 		before(function() {
@@ -215,6 +219,10 @@ describe('KVCWriteDetail_Access', function () {
 
 		it('shows KVCWriteDetailLauncherItemPublish', function () {
 			return browser.assert.OLSKLauncherItems('KVCWriteDetailLauncherItemPublish', 1);
+		});
+
+		it('shows KVCWriteDetailLauncherItemDebug', function () {
+			return browser.assert.OLSKLauncherItems('KVCWriteDetailLauncherItemDebug', 1);
 		});
 
 		it('hides KVCWriteDetailLauncherItemOpenPublicLink', function () {

@@ -206,6 +206,22 @@ describe('KVCWriteDetail_Misc', function () {
 
 	});
 
+	describe('KVCWriteDetailLauncherItemDebug', function test_KVCWriteDetailLauncherItemDebug() {
+		
+		before(function () {
+			browser.assert.text('#TestKVCWriteDetailDispatchDebug', '0');
+		});
+		
+		before(function () {
+			return browser.OLSKLauncherRun('KVCWriteDetailLauncherItemDebug');
+		});
+
+		it('sends KVCWriteDetailDispatchDebug', function () {
+			browser.assert.text('#TestKVCWriteDetailDispatchDebug', '1');
+		});
+
+	});
+
 	describe('KVCWriteDetailToolbarRetractButton', function test_KVCWriteDetailToolbarRetractButton () {
 
 		it('classes OLSKDecorButtonNoStyle', function () {

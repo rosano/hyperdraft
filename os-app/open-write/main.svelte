@@ -786,6 +786,17 @@ const mod = {
 		mod.ControlNoteClone(mod._OLSKCatalog.modPublic.OLSKCatalogDataItemSelected());
 	},
 
+	KVCWriteDetailDispatchDebug () {
+		const url = `https://inspektor.5apps.com/inspect?path=wikiavec%2F${ encodeURIComponent(KVCNote.KVCNoteObjectPath(mod._OLSKCatalog.modPublic.OLSKCatalogDataItemSelected())) }`;
+
+		if (OLSK_SPEC_UI()) {
+			window.FakeWindowOpen = url;
+			return;
+		}
+
+		window.open(url)
+	},
+
 	KVCWriteDetailDispatchDiscard () {
 		mod.ControlNoteDiscard(mod._OLSKCatalog.modPublic.OLSKCatalogDataItemSelected());
 	},
@@ -1134,6 +1145,7 @@ import OLSKUIAssets from 'OLSKUIAssets';
 			KVCWriteDetailDispatchRetract={ mod.KVCWriteDetailDispatchRetract }
 			KVCWriteDetailDispatchVersions={ mod.KVCWriteDetailDispatchVersions }
 			KVCWriteDetailDispatchClone={ mod.KVCWriteDetailDispatchClone }
+			KVCWriteDetailDispatchDebug={ mod.KVCWriteDetailDispatchDebug }
 			KVCWriteDetailDispatchDiscard={ mod.KVCWriteDetailDispatchDiscard }
 			KVCWriteDetailDispatchUpdate={ mod.KVCWriteDetailDispatchUpdate }
 			KVCWriteDetailDispatchSetAsRootPage={ mod.KVCWriteDetailDispatchSetAsRootPage }

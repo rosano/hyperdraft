@@ -12,6 +12,7 @@ export let KVCWriteDetailDispatchPublish;
 export let KVCWriteDetailDispatchRetract;
 export let KVCWriteDetailDispatchVersions;
 export let KVCWriteDetailDispatchClone;
+export let KVCWriteDetailDispatchDebug;
 export let KVCWriteDetailDispatchDiscard;
 export let KVCWriteDetailDispatchUpdate;
 export let KVCWriteDetailDispatchSetAsRootPage;
@@ -143,6 +144,12 @@ const mod = {
 				},
 				LCHRecipeIsExcluded () {
 					return !KVCNote.KVCNoteIsMarkedPublic(KVCWriteDetailItem);
+				},
+			}, {
+				LCHRecipeSignature: 'KVCWriteDetailLauncherItemDebug',
+				LCHRecipeName: OLSKLocalized('KVCWriteDetailLauncherItemDebugText'),
+				LCHRecipeCallback: function KVCWriteDetailLauncherItemDebug () {
+					KVCWriteDetailDispatchDebug();
 				},
 			}]);
 		}
