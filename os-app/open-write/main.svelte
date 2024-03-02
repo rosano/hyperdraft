@@ -791,7 +791,7 @@ const mod = {
 		
 		[mod._OLSKCatalog.modPublic.OLSKCatalogDataItemSelected()].forEach(function (e) {
 			zip.file(`${ e.KVCNoteID }.txt`, e.KVCNoteBody, {
-				date: e.KVCNoteModificationDate,
+				date: e.KVCNoteCreationDate,
 			});
 		});
 		
