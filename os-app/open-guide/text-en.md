@@ -92,7 +92,7 @@ By default, the public link may have a long format like
 Using a custom domain name requires *hosting*, which means another site will fetch from the public link above and then show the content. You can use a paid service such as [Garden](https://hmm.garden) (no technical knowledge required) or [host it yourself](https://github.com/rosano/flowerpot).
 
 There are three steps to the configuring a custom domain:
-1. Run the `KVCWriteLauncherItemConfigureCustomDomainText` command. (See the [Shortcuts](#shortcuts) for more info)
+1. Run the `KVCWriteLauncherItemConfigureCustomDomainText` command. (See the [Shortcuts](/guide/#shortcuts) for more info)
 2. You should see a *root URL* that looks like the one above. Copy it and put it into your *hosting*.
 3. Enter your domain name.
 
