@@ -1,5 +1,5 @@
-import { factory } from 'ulid';
-const uniqueID = factory();
+import { ulid } from 'ulid';
+const uniqueID = ulid();
 import OLSKRemoteStorage from 'OLSKRemoteStorage';
 import KVCTemplate from '../KVCTemplate/main.js';
 
