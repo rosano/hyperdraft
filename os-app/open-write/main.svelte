@@ -15,7 +15,7 @@ import OLSKString from 'OLSKString';
 import OLSKLanguageSwitcher from 'OLSKLanguageSwitcher';
 import OLSKVersion from 'OLSKVersion';
 import OLSKLocalStorage from 'OLSKLocalStorage';
-import OLSKPact from 'OLSKPact';
+
 import OLSKChain from 'OLSKChain';
 import OLSKBeacon from 'OLSKBeacon';
 import OLSKTransport from 'OLSKTransport';
