@@ -1,5 +1,12 @@
 (function OLSKPostinstallHotfix() {
-	Object.entries(require('OLSKHotfix').OLSKHotfixPatches(process.env.NODE_ENV)).forEach(function ([path, patches]) {
+	Object.entries(Object.assign(require('OLSKHotfix').OLSKHotfixPatches(process.env.NODE_ENV), {
+		'./node_modules/OLSKAppToolbar/node_modules/OLSKReloadButton/main.svelte': {
+			"from '../OLSKUIAssets/_OLSKSharedReload.svg'": "from '../../../OLSKUIAssets/_OLSKSharedReload.svg'",
+		},
+		'./node_modules/OLSKNarrow/node_modules/OLSKInputWrapper/main.svelte': {
+			"from '../OLSKUIAssets/_OLSKInputClear.svg'": "from '../../../OLSKUIAssets/_OLSKInputClear.svg'",
+		},
+	})).forEach(function ([path, patches]) {
 		if (!require('fs').existsSync(path)) {
 			return;
 		}
