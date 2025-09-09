@@ -990,10 +990,6 @@ const mod = {
 	DataStorageClient (inputData) {
 		return zerodatawrap.ZDRWrap({
 			ZDRParamLibrary: (function() {
-				if (inputData === zerodatawrap.ZDRProtocolFission()) {
-					return webnative;
-				}
-
 				return RemoteStorage;
 			})(),
 			ZDRParamScopes: [{
