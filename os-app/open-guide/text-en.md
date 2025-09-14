@@ -1,6 +1,6 @@
 <div class="OLSKDecorNotice">
 
-This document is a work-in-progress. Feel free to reach out on [Mastodon](https://rosano.ca/mastodon) or [Twitter](https://rosano.ca/twitter).
+This document is a work-in-progress. Feel free to reach out on [Mastodon](https://rosano.ca/mastodon) or [Bluesky](https://rosano.ca/bluesky).
 
 </div>
 

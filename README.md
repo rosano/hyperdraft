@@ -74,7 +74,7 @@ npm test ui match='/(detail|vitrine)/'
 
 Help me keep creating projects that are public, accessible for free, and open-source.
 
-<a href="https://rosano.ca/back"><img alt="Send a gift" src="https://static.rosano.ca/_shared/_RCSBackButton.svg" /></a>
+<a href="https://rosano.ca/back"><img alt="Send a gift" src="https://static.rosano.ca/_shared/_RCSGiftButton.svg" /></a>
 
 ## License
 
@@ -82,4 +82,4 @@ The code is released under a [Hippocratic License](https://firstdonoharm.dev), m
 
 ## Questions
 
-Feel free to reach out on [Mastodon](https://rosano.ca/mastodon) or [Twitter](https://rosano.ca/twitter).
+Feel free to reach out on [Mastodon](https://rosano.ca/mastodon) or [Bluesky](https://rosano.ca/bluesky).
