@@ -5,6 +5,9 @@ node_modules
 **/__*/*
 .static
 
+# OS
+**/*.DS_Store
+
 # LOCAL
 .env*
 !.env-sample
