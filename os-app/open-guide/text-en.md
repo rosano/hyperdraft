@@ -20,7 +20,7 @@ If you're on a mobile device, clicking an item in the list (left), shows you the
 
 <div class="OLSKDecorNotice">
 
-Editing the same note on multiple devices at the same time can result in data loss. Editing different notes does note have this issue.
+Editing the same note on multiple devices at the same time can result in data loss. Editing different notes does not have this issue.
 
 </div>
 
